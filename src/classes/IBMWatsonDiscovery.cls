@@ -48,25 +48,9 @@ public class IBMWatsonDiscovery extends IBMWatsonService {
 	  setUsernameAndPassword(username, password);
 	}
     
-    public override String createRequest(){
-    	// process additional common information to all service calls
-    	if( ServiceCall ==  RequestType.CREATE_ENVIRONMENT ){
-    		this.setEndPoint( getEndPoint() + '/v1/environments' + IBMWatsonRequestBuilder.query( new Map<String,String>{ 'version' => versionDate } ) );
-    		HTTPMethod = 'POST';
-    	}
-    	return null;
-    }
-    
     public override void processResponse(){
         
-    	IBMWatsonFacade.RestClient client = new IBMWatsonFacade.RestClient(this);
-    	client.sendMessage(this);
-    	
-    	// handle response...
-        if (!(  StatusCode == 200 || StatusCode == 201 || StatusCode == 202 )) {
-            System.debug('[IBMWatsonFacade]::[sendMessage] Error Response Status:'+ Status + ' Code:' + StatusCode + ' ServiceMessage: '+ServiceMessageResponse);
-            //throw new IBMWatsonDiscoveryException(' CUSTOM --> StatusCode='+StatusCode+' Status='+Status+ ' ServiceMessage: '+ServiceMessageResponse);        
-        }
+    	// handle service specific responses...
     	
     }
     
@@ -77,7 +61,11 @@ public class IBMWatsonDiscovery extends IBMWatsonService {
     	ServiceCall = RequestType.CREATE_ENVIRONMENT;
     	IBMWatsonFacade.CreateEnvironmentRequest envReq = new IBMWatsonFacade.CreateEnvironmentRequest(environmentName, environmentDesc);
     	ServiceMessage = JSON.serialize(envReq);
-    	createRequest();
+    	builder = IBMWatsonRequestBuilder.http_post( getEndPoint() + '/v1/environments' );
+    	builder.queryParams( new Map<String,String>{
+    		'version' => versionDate } );
+    	builder.bodyJson( ServiceMessage );
+    	createServiceCall( builder.build() );
     }
     
 }
