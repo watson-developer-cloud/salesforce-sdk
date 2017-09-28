@@ -27,7 +27,7 @@ public class IBMWatsonClient {
       HttpRequest req = new HttpRequest();
       for(String name: wreq.getAllHeaders().keySet() ){
         if(name == 'User-Agent') {
-        	continue;
+          continue;
         }
         req.setHeader(name, wreq.getAllHeaders().get(name));
       }
