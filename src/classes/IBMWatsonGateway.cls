@@ -39,8 +39,9 @@ public class IBMWatsonGateway {
         discovery.setUsernameAndPassword(username, password);
         discovery.CreateEnvironmentRequest(environmentName, environmentDesc);
         
+        
         try {
-			//base class call to processResponse();
+			//base class to execute call and delegate results to processResponse() for API specific handling;
         	discovery.process();
         }
         catch(Exception err) {
@@ -48,10 +49,12 @@ public class IBMWatsonGateway {
         	// handle exceptions while executing service
         }
         
-        if( !String.isBlank(discovery.ServiceMessageResponse) ){
-            deserializedCreateEnvironmentResponse = (IBMWatsonFacade.CreateEnvironmentResponse)JSON.deserialize(discovery.ServiceMessageResponse,
+        String ServiceMessageResponseText = discovery.getServiceMessageResponseText();
+        if( !String.isBlank(ServiceMessageResponseText) ){
+            deserializedCreateEnvironmentResponse = (IBMWatsonFacade.CreateEnvironmentResponse) JSON.deserialize(ServiceMessageResponseText,
              IBMWatsonFacade.CreateEnvironmentResponse.class);
-            // handle status and additional response logic ...
+	             
+            // handle status and additional response logic on the client...
             return deserializedCreateEnvironmentResponse.environment_id;
         }
         
