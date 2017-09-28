@@ -48,32 +48,4 @@ public class IBMWatsonFacade {
 		}
 	}
 	
-    public class RestClient {
-    	private HttpRequest req;
-    	public RestClient ( IBMWatsonService srv ){
-    		req = new HttpRequest();
-    		req.setEndpoint( srv.getEndPoint() );
-    		req.setMethod( srv.HTTPMethod );
-    		req.setHeader('Authorization', srv.getApiKey());
-    		req.setHeader('Content-Type', 'application/json');
-    		req.setTimeout(120000);//max timeout
-    		if( !String.isBlank(srv.ServiceMessage) ){
-	    		req.setHeader('Content-length',string.valueOf(srv.ServiceMessage.length()));
-	    		req.setBody( srv.ServiceMessage );
-    		}
-    		
-    		// set additional service configuration (timeout, compressed...)
-    		//req.setHeader('Accept', 'application/json');
-    		// req.setCompressed(false);
-    	}
-    	public HttpResponse sendMessage( IBMWatsonService srv ){
-    		Http http = new Http();
-    		HTTPResponse res = http.send(req);
-    		srv.ServiceMessageResponse =  res.getBody();
-    		srv.Status = res.getStatus();
-    		srv.StatusCode = res.getStatusCode();
-    		return res;
-    	}
-    }
-    
 }
