@@ -42,27 +42,27 @@
     String charset = null;
     Matcher parameter_matcher = PARAMETER.matcher(str);
     if( parameter_matcher.matches() ){
-	    for (integer s = typeSubtype.end(); s < str.length(); s = parameter_matcher.end()) {
-	      parameter_matcher.region(s, str.length());
-	      if (!parameter_matcher.lookingAt()) return null; // This is not a well-formed media type.
-	      String name = parameter_matcher.group(1);
-	      if (name == null || !name.equalsIgnoreCase('charset')) continue;
-	      String charsetParameter;
-	      String token = parameter_matcher.group(2);
-	      if (token != null) {
-	        // If the token is 'single-quoted' it's invalid! But we're lenient and strip the quotes.
-	        charsetParameter = (token.startsWith('\'') && token.endsWith('\'') && token.length() > 2)
-	            ? token.substring(1, token.length() - 1)
-	            : token;
-	      } else {
-	        // Value is "double-quoted". That's valid and our regex group already strips the quotes.
-	        charsetParameter = parameter_matcher.group(3);
-	      }
-	      if (charset != null && !charsetParameter.equalsIgnoreCase(charset)) {
-	        return null; // Multiple different charsets!
-	      }
-	      charset = charsetParameter;
-	    } 
+	  for (integer s = typeSubtype.end(); s < str.length(); s = parameter_matcher.end()) {
+        parameter_matcher.region(s, str.length());
+        if (!parameter_matcher.lookingAt()) return null; // This is not a well-formed media type.
+        String name = parameter_matcher.group(1);
+        if (name == null || !name.equalsIgnoreCase('charset')) continue;
+        String charsetParameter;
+        String token = parameter_matcher.group(2);
+        if (token != null) {
+          // If the token is 'single-quoted' it's invalid! But we're lenient and strip the quotes.
+          charsetParameter = (token.startsWith('\'') && token.endsWith('\'') && token.length() > 2)
+            ? token.substring(1, token.length() - 1)
+            : token;
+        } else {
+          // Value is "double-quoted". That's valid and our regex group already strips the quotes.
+          charsetParameter = parameter_matcher.group(3);
+        }
+        if (charset != null && !charsetParameter.equalsIgnoreCase(charset)) {
+          return null; // Multiple different charsets!
+        }
+        charset = charsetParameter;
+	  } 
     }
     return new IBMWatsonMediaType(str, t, subtype, charset);
   }

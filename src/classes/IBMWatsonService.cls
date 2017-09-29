@@ -100,6 +100,7 @@ public abstract class IBMWatsonService {
    * @param builder the new default headers
    */
   protected void setDefaultHeaders(IBMWatsonRequest.Builder builder) {
+    /*
     String userAgent = IBMWatsonRequestUtils.getUserAgent();
     if (defaultHeaders != null) {
       for (String key : defaultHeaders.keySet()) {
@@ -110,6 +111,7 @@ public abstract class IBMWatsonService {
       }
     }
     builder.addHeader(IBMWatsonHttpHeaders.USER_AGENT, userAgent);
+    */
   }
 
   /**
