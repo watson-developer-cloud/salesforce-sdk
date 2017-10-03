@@ -50,6 +50,24 @@ public abstract class IBMWatsonService {
    *
    */
   public IBMWatsonService() {}
+  
+  private String getErrorMessage(IBMWatsonResponse response) {
+  	String error = response.getResponseText();
+    try {
+			Map<String, Object> responseMap = (Map<String, Object>)JSON.deserializeUntyped(error);
+      if (responseMap.containsKey(MESSAGE_ERROR)) {
+        error = (String)responseMap.get(MESSAGE_ERROR);
+      } else if (responseMap.containsKey(MESSAGE_ERROR_2)) {
+        error = (String)responseMap.get(MESSAGE_ERROR_2);
+      } else if (responseMap.containsKey(MESSAGE_ERROR_3)) {
+        error = (String)responseMap.get(MESSAGE_ERROR_3);
+      }
+    } catch (Exception e) {
+      // Ignore any kind of exception parsing the json and use fallback String version of response
+    }
+
+    return error;
+  }
 	
   /**
    * Calls to the processResponse() method overriden by the child services using this base class
@@ -59,15 +77,39 @@ public abstract class IBMWatsonService {
     IBMWatsonClient.RestClient client = IBMWatsonClient.getRestClient( request );
     response = client.sendMessage();
     
-    // TO-DO:
-    // =====
-    // 
-    // - Sumet to treat error codes in response with custom exception classes
+     
+    // - treat error codes in response with custom exception classes
     // - Are exceptions treated at the response level for each service? If so relocate processResponse() accordingly
     //
-    if (!(response.StatusCode == 200 || response.StatusCode == 201 || response.StatusCode == 202)) {
+    //change to case statement once this is there https://success.salesforce.com/ideaView?id=08730000000BrSIAA0
+    String error = getErrorMessage(response);  
+		if (!(response.StatusCode == 200 || response.StatusCode == 201 || response.StatusCode == 202)) {
       System.debug('[IBMWatsonFacade]::[sendMessage] Error Response Status:'+ response.Status + ' Code:' + response.StatusCode + ' ServiceMessage: '+response.getResponseText());
-      //throw new IBMWatsonDiscoveryException(' CUSTOM --> StatusCode='+StatusCode+' Status='+Status+ ' ServiceMessage: '+ServiceMessageResponse);        
+      if(response.StatusCode == IBMWatsonHttpStatus.BAD_REQUEST) // HTTP 400
+        throw new IBMWatsonBadRequestException(error != null ? error : 'Bad Request', response);
+      if(response.StatusCode == IBMWatsonHttpStatus.UNAUTHORIZED) // HTTP 401
+        throw new IBMWatsonUnauthorizedException('Unauthorized: Access is denied due to invalid credentials. '
+                                        + 'Tip: Did you set the Endpoint?', response);
+      if(response.StatusCode == IBMWatsonHttpStatus.FORBIDDEN) // HTTP 403
+        throw new IBMWatsonForbiddenException(error != null ? error : 'Forbidden: Service refuse the request', response);
+      if(response.StatusCode == IBMWatsonHttpStatus.NOT_FOUND) // HTTP 404
+        throw new IBMWatsonNotFoundException(error != null ? error : 'Not found', response);
+      if(response.StatusCode == IBMWatsonHttpStatus.NOT_ACCEPTABLE) // HTTP 406
+        throw new IBMWatsonForbiddenException(error != null ? error : 'Forbidden: Service refuse the request', response);
+      if(response.StatusCode == IBMWatsonHttpStatus.CONFLICT) // HTTP 409
+        throw new IBMWatsonConflictException(error != null ? error : '', response);
+      if(response.StatusCode == IBMWatsonHttpStatus.REQUEST_TOO_LONG) // HTTP 413
+        throw new IBMWatsonRequestTooLargeException(error != null ? error
+            : 'Request too large: ' + 'The request entity is larger than the server is able to process', response);
+      if(response.StatusCode == IBMWatsonHttpStatus.UNSUPPORTED_MEDIA_TYPE) // HTTP 415
+        throw new IBMWatsonUnsupportedException(error != null ? error : 'Unsupported Media Type', response);
+      if(response.StatusCode == IBMWatsonHttpStatus.TOO_MANY_REQUESTS) // HTTP 429
+        throw new IBMWatsonTooManyRequestsException(error != null ? error : 'Too many requests', response);
+      if(response.StatusCode == IBMWatsonHttpStatus.INTERNAL_SERVER_ERROR) // HTTP 500
+        throw new IBMWatsonInternalServerErrorException(error != null ? error : 'Internal Server Error', response);
+      if(response.StatusCode == IBMWatsonHttpStatus.SERVICE_UNAVAILABLE) // HTTP 503
+        throw new IBMWatsonServiceUnavailableException(error != null ? error : 'Service Unavailable', response);
+        throw new IBMWatsonResponseException(response.StatusCode, error, response);
     } else {
       //
       // the call to processResponse() is intentionally overriden by every service so additional processing can take place
