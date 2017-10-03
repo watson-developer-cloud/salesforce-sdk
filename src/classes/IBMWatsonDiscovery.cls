@@ -59,7 +59,7 @@ public class IBMWatsonDiscovery extends IBMWatsonService {
       throw new IBMWatsonDiscoveryException( 'Environment name and description cannot be empty.' );
     }
     ServiceCall = RequestType.CREATE_ENVIRONMENT;
-    IBMWatsonFacade.CreateEnvironmentRequest envReq = new IBMWatsonFacade.CreateEnvironmentRequest(environmentName, environmentDesc);
+    IBMWatsonDiscoveryV1Models.CreateEnvironmentRequest envReq = new IBMWatsonDiscoveryV1Models.CreateEnvironmentRequest(environmentName, environmentDesc);
     ServiceMessage = JSON.serialize(envReq);
     builder = IBMWatsonRequestBuilder.http_post( getEndPoint() + '/v1/environments' );
     builder.queryParams( new Map<String,String>{'version' => versionDate } );
