@@ -113,26 +113,22 @@ public class IBMWatsonPersonalityInsightsV1Models {
     /**
      * MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is analyzed; plain text is processed as submitted.
      */
-    public interface Contenttype {
-      /** text/plain. */
-      String TEXT_PLAIN = "text/plain";
-      /** text/html. */
-      String TEXT_HTML = "text/html";
-    }
+    /** text/plain. */
+    public static final String CONTENTTYPE_TEXT_PLAIN = 'text/plain';
+    /** text/html. */
+    public static final String CONTENTTYPE_TEXT_HTML = 'text/html';
 
     /**
      * Language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is `en` (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. A language specified with the `Content-Type` header overrides the value of this parameter; any content items that specify a different language are ignored. Omit the `Content-Type` header to base the language on the most prevalent specification among the content items; again, content items that specify a different language are ignored. You can specify any combination of languages for the input and response content.
      */
-    public interface Language {
-      /** ar. */
-      String AR = "ar";
-      /** en. */
-      String EN = "en";
-      /** es. */
-      String ES = "es";
-      /** ja. */
-      String JA = "ja";
-    }
+    /** ar. */
+    public static final String LANGUAGE_AR = 'ar';
+    /** en. */
+    public static final String LANGUAGE_EN = 'en';
+    /** es. */
+    public static final String LANGUAGE_ES = 'es';
+    /** ja. */
+    public static final String LANGUAGE_JA = 'ja';
 
     private String content;
     private String id;
@@ -337,56 +333,50 @@ public class IBMWatsonPersonalityInsightsV1Models {
     /**
      * The type of the input: application/json, text/html, or text/plain. A character encoding can be specified by including a `charset` parameter. For example, 'text/html;charset=utf-8'.
      */
-    public interface ContentType {
-      /** application/json. */
-      String APPLICATION_JSON = "application/json";
-      /** text/html. */
-      String TEXT_HTML = "text/html";
-      /** text/plain. */
-      String TEXT_PLAIN = "text/plain";
-    }
+    /** application/json. */
+    public static final String CONTENT_TYPE_APPLICATION_JSON = 'application/json';
+    /** text/html. */
+    public static final String CONTENT_TYPE_TEXT_HTML = 'text/html';
+    /** text/plain. */
+    public static final String CONTENT_TYPE_TEXT_PLAIN = 'text/plain';
 
     /**
      * The language of the input text for the request: Arabic, English, Spanish, or Japanese. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. The effect of the `Content-Language` header depends on the `Content-Type` header. When `Content-Type` is `text/plain` or `text/html`, `Content-Language` is the only way to specify the language. When `Content-Type` is `application/json`, `Content-Language` overrides a language specified with the `language` parameter of a `ContentItem` object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for `Content-Language` and `Accept-Language`.
      */
-    public interface ContentLanguage {
-      /** ar. */
-      String AR = "ar";
-      /** en. */
-      String EN = "en";
-      /** es. */
-      String ES = "es";
-      /** ja. */
-      String JA = "ja";
-    }
+    /** ar. */
+    public static final String CONTENT_LANGUAGE_AR = 'ar';
+    /** en. */
+    public static final String CONTENT_LANGUAGE_EN = 'en';
+    /** es. */
+    public static final String CONTENT_LANGUAGE_ES = 'es';
+    /** ja. */
+    public static final String CONTENT_LANGUAGE_JA = 'ja';
 
     /**
      * The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. You can specify any combination of languages for the input and response content.
      */
-    public interface AcceptLanguage {
-      /** ar. */
-      String AR = "ar";
-      /** de. */
-      String DE = "de";
-      /** en. */
-      String EN = "en";
-      /** es. */
-      String ES = "es";
-      /** fr. */
-      String FR = "fr";
-      /** it. */
-      String IT = "it";
-      /** ja. */
-      String JA = "ja";
-      /** ko. */
-      String KO = "ko";
-      /** pt-br. */
-      String PT_BR = "pt-br";
-      /** zh-cn. */
-      String ZH_CN = "zh-cn";
-      /** zh-tw. */
-      String ZH_TW = "zh-tw";
-    }
+    /** ar. */
+    public static final String ACCEPT_LANGUAGE_AR = 'ar';
+    /** de. */
+    public static final String ACCEPT_LANGUAGE_DE = 'de';
+    /** en. */
+    public static final String ACCEPT_LANGUAGE_EN = 'en';
+    /** es. */
+    public static final String ACCEPT_LANGUAGE_ES = 'es';
+    /** fr. */
+    public static final String ACCEPT_LANGUAGE_FR = 'fr';
+    /** it. */
+    public static final String ACCEPT_LANGUAGE_IT = 'it';
+    /** ja. */
+    public static final String ACCEPT_LANGUAGE_JA = 'ja';
+    /** ko. */
+    public static final String ACCEPT_LANGUAGE_KO = 'ko';
+    /** pt-br. */
+    public static final String ACCEPT_LANGUAGE_PT_BR = 'pt-br';
+    /** zh-cn. */
+    public static final String ACCEPT_LANGUAGE_ZH_CN = 'zh-cn';
+    /** zh-tw. */
+    public static final String ACCEPT_LANGUAGE_ZH_TW = 'zh-tw';
 
     private Content content;
     private String body;
