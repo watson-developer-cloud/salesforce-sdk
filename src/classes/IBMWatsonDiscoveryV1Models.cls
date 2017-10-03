@@ -34,5 +34,20 @@ public class IBMWatsonDiscoveryV1Models {
       description = environmentDesc;
     }
   }
-    
+  
+  public class EnvironmentResponse {
+    public String environment_id;
+    public String name;
+    public String description;
+    public String created;
+    public String updated;
+    public String status;
+    public String read_only;
+    public EnvironmentResponseIndexCapacity index_capacity;
+  }
+  
+  public class ListEnvironmentResponse {
+  	public List<EnvironmentResponse> environments;
+  }
+  
 }

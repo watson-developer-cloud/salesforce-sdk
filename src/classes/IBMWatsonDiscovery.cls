@@ -66,5 +66,12 @@ public class IBMWatsonDiscovery extends IBMWatsonService {
     builder.bodyJson( ServiceMessage );
     createServiceCall( builder.build() );
   }
-    
+  
+  public void ListEnvironmentRequest(String environmentName){
+    ServiceCall = RequestType.LIST_ENVIRONMENT;
+    ServiceMessage = '';
+    builder = IBMWatsonRequestBuilder.http_get( getEndPoint() + '/v1/environments' );
+    builder.queryParams( new Map<String,String>{'name' => environmentName,'version' => versionDate } );
+    createServiceCall( builder.build() );
+  }  
 }

@@ -31,7 +31,9 @@ public class IBMWatsonClient {
         }
         req.setHeader(name, wreq.getAllHeaders().get(name));
       }
-      req.setBody(wreq.getBody().content);
+      if( !String.isBlank(wreq.getMethod()) && wreq.getMethod().equalsIgnoreCase('POST')) {
+      	req.setBody(wreq.getBody().content);
+      }
       req.setMethod(wreq.getMethod());
       req.setEndpoint(wreq.getUrl().toExternalForm());
       req.setTimeout(120000);
