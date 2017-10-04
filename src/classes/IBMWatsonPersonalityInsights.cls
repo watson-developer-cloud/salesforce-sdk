@@ -34,8 +34,8 @@
  */
 public class IBMWatsonPersonalityInsights extends IBMWatsonService {
 
-  private static final String SERVICE_NAME = "personality_insights";
-  private static final String URL = "https://gateway.watsonplatform.net/personality-insights/api";
+  private static final String SERVICE_NAME = 'personality_insights';
+  private static final String URL = 'https://gateway.watsonplatform.net/personality-insights/api';
 
   private String versionDate;
 
@@ -52,7 +52,7 @@ public class IBMWatsonPersonalityInsights extends IBMWatsonService {
     }
 
     Validator.isTrue((versionDate != null) && !versionDate.isEmpty(),
-      "'version cannot be null.");
+      'version cannot be null.');
 
     this.versionDate = versionDate;
   }
@@ -76,34 +76,30 @@ public class IBMWatsonPersonalityInsights extends IBMWatsonService {
    * Derives personality insights for up to 20 MB of input content written by an author, though the service requires much less text to produce an accurate profile; for more information, see [Guidelines for providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/user-overview.html#overviewGuidelines). Accepts input in Arabic, English, Japanese, or Spanish and produces output in one of eleven languages. Provide plain text, HTML, or JSON content, and receive results in JSON or CSV format.
    *
    * @param profileOptions the {@link ProfileOptions} containing the options for the call
-   * @return the {@link Profile} with the response
+   * @return the {@link IBMWatsonProfile with the response
    */
-  public ServiceCall<Profile> profile(ProfileOptions profileOptions) {
-    Validator.notNull(profileOptions, "profileOptions cannot be null");
-    RequestBuilder builder = RequestBuilder.post("/v3/profile");
+  public ServiceCall<IBMWatsonProfile> profile(ProfileOptions profileOptions) {
+    Validator.notNull(profileOptions, 'profileOptions cannot be null');
+    RequestBuilder builder = RequestBuilder.post('/v3/profile');
     builder.query(VERSION, versionDate);
-      builder.header("content-type", profileOptions.contentType());
-      if (profileOptions.contentLanguage() != null) {
-        builder.header("Content-Language", profileOptions.contentLanguage());
+      builder.header('content-type', contentType);
+      if (contentLanguage != null) {
+        builder.header('Content-Language', contentLanguage);
       }
-      if (profileOptions.acceptLanguage() != null) {
-        builder.header("Accept-Language", profileOptions.acceptLanguage());
+      if (acceptLanguage != null) {
+        builder.header('Accept-Language', acceptLanguage);
       }
-      if (profileOptions.rawScores() != null) {
-        builder.query("raw_scores", String.valueOf(profileOptions.rawScores()));
+      if (rawScores != null) {
+        builder.query('raw_scores', String.valueOf(rawScores));
       }
-      if (profileOptions.csvHeaders() != null) {
-        builder.query("csv_headers", String.valueOf(profileOptions.csvHeaders()));
+      if (csvHeaders != null) {
+        builder.query('csv_headers', String.valueOf(csvHeaders));
       }
-      if (profileOptions.consumptionPreferences() != null) {
-        builder.query("consumption_preferences", String.valueOf(profileOptions.consumptionPreferences()));
+      if (consumptionPreferences != null) {
+        builder.query('consumption_preferences', String.valueOf(consumptionPreferences));
       }
-        if (profileOptions.contentType().equalsIgnoreCase(ProfileOptions.ContentType.APPLICATION_JSON)) {
-          builder.bodyJson(GsonSingleton.getGson().toJsonTree(profileOptions.content()).getAsJsonObject());
-        } else {
-          builder.bodyContent(profileOptions.body(), profileOptions.contentType());
-        }
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(Profile.class));
+        builder.bodyContent(content,'');
+    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(IBMWatsonProfile.class));
   }
 
 }
