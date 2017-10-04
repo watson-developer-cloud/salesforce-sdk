@@ -22,7 +22,6 @@ public abstract class IBMWatsonService {
 
   private String apiKey;
   private String endPoint;
-  protected Object responseData;
 
   private static final String URL = 'url';
   private static final String PATH_AUTHORIZATION_V1_TOKEN = '/v1/token';
@@ -55,7 +54,7 @@ public abstract class IBMWatsonService {
   private String getErrorMessage(IBMWatsonResponse response) {
   	String error = response.getResponseText();
     try {
-			Map<String, Object> responseMap = (Map<String, Object>)JSON.deserializeUntyped(error);
+	  Map<String, Object> responseMap = (Map<String, Object>)JSON.deserializeUntyped(error);
       if (responseMap.containsKey(MESSAGE_ERROR)) {
         error = (String)responseMap.get(MESSAGE_ERROR);
       } else if (responseMap.containsKey(MESSAGE_ERROR_2)) {
@@ -74,7 +73,7 @@ public abstract class IBMWatsonService {
    * Calls to the processResponse() method overriden by the child services using this base class
    *	
    */
-  public void process() {
+  public Object process(Type targetType) {
     IBMWatsonClient.RestClient client = IBMWatsonClient.getRestClient( request );
     response = client.sendMessage();
     
@@ -116,29 +115,25 @@ public abstract class IBMWatsonService {
       // the call to processResponse() is intentionally overriden by every service so additional processing can take place
       // without affecting the other classes
       //
-      processResponse();
+      //processResponse();
+      String ServiceMessageResponseText = getServiceMessageResponseText();
+      if( !String.isBlank(ServiceMessageResponseText) ){
+        return JSON.deserialize(ServiceMessageResponseText, targetType);
+      }
     }
+    return null;
   }
 
-  /**
-   * This method is overriden by child services and executes messages to API endpoints
-   *
-   */
-  public abstract void processResponse();
-  
-  protected Object getResponseData(){
-    return responseData;
-  }
-  	
   /**
    * TO-DO: document this method
    *
    */
-  protected void createServiceCall(IBMWatsonRequest request){
+  protected Object createServiceCall(IBMWatsonRequest request, Type targetType){
     IBMWatsonRequest.Builder builder = request.newBuilder();
     setDefaultHeaders(builder);
     setAuthentication(builder);
     this.request = builder.build();
+    return process(targetType);
   }
 
   /**

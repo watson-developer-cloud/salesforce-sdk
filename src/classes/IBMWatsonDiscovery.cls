@@ -48,48 +48,11 @@ public class IBMWatsonDiscovery extends IBMWatsonService {
     setUsernameAndPassword(username, password);
   }
     
-  public override void processResponse(){
-    String ServiceMessageResponseText = getServiceMessageResponseText();
-    // handle service specific responses...
-    if( !String.isBlank(ServiceMessageResponseText) ){
-      if( ServiceCall == RequestType.CREATE_ENVIRONMENT ){
-      	
-        responseData = (IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse) JSON.deserialize(ServiceMessageResponseText, IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse.class);
-        
-      }else if(ServiceCall == RequestType.LIST_ENVIRONMENT) {
-      	
-        responseData = (IBMWatsonDiscoveryV1Models.ListEnvironmentResponse) JSON.deserialize(ServiceMessageResponseText, IBMWatsonDiscoveryV1Models.ListEnvironmentResponse.class);
-          
-      }else if(ServiceCall == RequestType.DELETE_ENVIRONMENT) {
-      	
-        responseData = (IBMWatsonDiscoveryV1Models.DeleteEnvironmentResponse) JSON.deserialize(ServiceMessageResponseText, IBMWatsonDiscoveryV1Models.DeleteEnvironmentResponse.class);
-          
-      }
-    }
-  }
-  
-  public IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse getEnvironmentResponse(){
-  	if( responseData instanceOf IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse ){
-  	  return (IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse) getResponseData();
-  	}
-  	return null;  
-  }
-  
-  public IBMWatsonDiscoveryV1Models.ListEnvironmentResponse getListEnvironmentResponse(){
-  	if( responseData instanceOf IBMWatsonDiscoveryV1Models.ListEnvironmentResponse ){
-  	  return (IBMWatsonDiscoveryV1Models.ListEnvironmentResponse) getResponseData();
-  	}
-  	return null;  
-  }
-  
-  public IBMWatsonDiscoveryV1Models.DeleteEnvironmentResponse getDeleteEnvironmentResponse(){
-  	if( responseData instanceOf IBMWatsonDiscoveryV1Models.DeleteEnvironmentResponse ){
-  	  return (IBMWatsonDiscoveryV1Models.DeleteEnvironmentResponse) getResponseData();
-  	}
-  	return null;
-  }
-  
-  public void CreateEnvironmentRequest(String environmentName, String environmentDesc){
+  /**
+   * Create environment.
+   *
+   */
+  public IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse CreateEnvironmentRequest(String environmentName, String environmentDesc){
     if( String.isBlank(environmentName) || String.isBlank(environmentDesc) ){
       throw new IBMWatsonDiscoveryException( 'Environment name and description cannot be empty.' );
     }
@@ -99,24 +62,26 @@ public class IBMWatsonDiscovery extends IBMWatsonService {
     builder = IBMWatsonRequestBuilder.http_post( getEndPoint() + '/v1/environments' );
     builder.queryParams( new Map<String,String>{'version' => versionDate } );
     builder.bodyJson( ServiceMessage );
-    createServiceCall( builder.build() );
+    return (IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse) createServiceCall( builder.build(), IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse.class );
   }
   
-  public void ListEnvironmentRequest(String environmentName){
+  /**
+   * List environment.
+   *
+   */
+  public IBMWatsonDiscoveryV1Models.ListEnvironmentResponse ListEnvironmentRequest(String environmentName){
     ServiceCall = RequestType.LIST_ENVIRONMENT;
     ServiceMessage = '';
     builder = IBMWatsonRequestBuilder.http_get( String.format('{0}/v1/environments', new List<String>{getEndPoint()}) );
     builder.queryParams( new Map<String,String>{'name' => environmentName,'version' => versionDate } );
-    createServiceCall( builder.build() );
+    return (IBMWatsonDiscoveryV1Models.ListEnvironmentResponse) createServiceCall( builder.build(), IBMWatsonDiscoveryV1Models.ListEnvironmentResponse.class );
   }
   
   /**
    * Delete environment.
    *
-   * @param deleteEnvironmentOptions the {@link DeleteEnvironmentOptions} containing the options for the call
-   * @return the service call
    */
-  public void deleteEnvironment(String environmentId) {
+  public IBMWatsonDiscoveryV1Models.DeleteEnvironmentResponse deleteEnvironment(String environmentId) {
     if( String.isBlank(environmentId) || String.isBlank(environmentId) ){
       throw new IBMWatsonDiscoveryException( 'Environment Id cannot be empty.' );
     }
@@ -124,7 +89,7 @@ public class IBMWatsonDiscovery extends IBMWatsonService {
     ServiceMessage = '';
     builder = IBMWatsonRequestBuilder.http_delete(  String.format('{0}/v1/environments/{1}', new List<String>{getEndPoint(), environmentId}) );
     builder.queryParams( new Map<String,String>{'version' => versionDate} );
-    createServiceCall( builder.build() );
+    return (IBMWatsonDiscoveryV1Models.DeleteEnvironmentResponse) createServiceCall( builder.build(), IBMWatsonDiscoveryV1Models.DeleteEnvironmentResponse.class );
   }
   
 }
