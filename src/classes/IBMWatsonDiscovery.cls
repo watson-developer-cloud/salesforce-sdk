@@ -30,7 +30,7 @@ public class IBMWatsonDiscovery extends IBMWatsonService {
   /** The Constant VERSION_DATE_2016_12_01. */
   public static final String VERSION_DATE_2016_12_01 = '2016-12-01';
 
-  public enum RequestType { CREATE_ENVIRONMENT, LIST_ENVIRONMENT }
+  public enum RequestType { CREATE_ENVIRONMENT, LIST_ENVIRONMENT, DELETE_ENVIRONMENT }
   
   public IBMWatsonDiscovery(String versionDate){
     this.ServiceName = 'Discovery';
@@ -60,6 +60,10 @@ public class IBMWatsonDiscovery extends IBMWatsonService {
       	
         responseData = (IBMWatsonDiscoveryV1Models.ListEnvironmentResponse) JSON.deserialize(ServiceMessageResponseText, IBMWatsonDiscoveryV1Models.ListEnvironmentResponse.class);
           
+      }else if(ServiceCall == RequestType.DELETE_ENVIRONMENT) {
+      	
+        responseData = (IBMWatsonDiscoveryV1Models.DeleteEnvironmentResponse) JSON.deserialize(ServiceMessageResponseText, IBMWatsonDiscoveryV1Models.DeleteEnvironmentResponse.class);
+          
       }
     }
   }
@@ -78,6 +82,13 @@ public class IBMWatsonDiscovery extends IBMWatsonService {
   	return null;  
   }
   
+  public IBMWatsonDiscoveryV1Models.DeleteEnvironmentResponse getDeleteEnvironmentResponse(){
+  	if( responseData instanceOf IBMWatsonDiscoveryV1Models.DeleteEnvironmentResponse ){
+  	  return (IBMWatsonDiscoveryV1Models.DeleteEnvironmentResponse) getResponseData();
+  	}
+  	return null;
+  }
+  
   public void CreateEnvironmentRequest(String environmentName, String environmentDesc){
     if( String.isBlank(environmentName) || String.isBlank(environmentDesc) ){
       throw new IBMWatsonDiscoveryException( 'Environment name and description cannot be empty.' );
@@ -94,8 +105,26 @@ public class IBMWatsonDiscovery extends IBMWatsonService {
   public void ListEnvironmentRequest(String environmentName){
     ServiceCall = RequestType.LIST_ENVIRONMENT;
     ServiceMessage = '';
-    builder = IBMWatsonRequestBuilder.http_get( getEndPoint() + '/v1/environments' );
+    builder = IBMWatsonRequestBuilder.http_get( String.format('{0}/v1/environments', new List<String>{getEndPoint()}) );
     builder.queryParams( new Map<String,String>{'name' => environmentName,'version' => versionDate } );
     createServiceCall( builder.build() );
-  }  
+  }
+  
+  /**
+   * Delete environment.
+   *
+   * @param deleteEnvironmentOptions the {@link DeleteEnvironmentOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteEnvironment(String environmentId) {
+    if( String.isBlank(environmentId) || String.isBlank(environmentId) ){
+      throw new IBMWatsonDiscoveryException( 'Environment Id cannot be empty.' );
+    }
+    ServiceCall = RequestType.DELETE_ENVIRONMENT;
+    ServiceMessage = '';
+    builder = IBMWatsonRequestBuilder.http_delete(  String.format('{0}/v1/environments/{1}', new List<String>{getEndPoint(), environmentId}) );
+    builder.queryParams( new Map<String,String>{'version' => versionDate} );
+    createServiceCall( builder.build() );
+  }
+  
 }

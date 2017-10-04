@@ -49,5 +49,9 @@ public class IBMWatsonDiscoveryV1Models {
   public class ListEnvironmentResponse {
   	public List<EnvironmentResponse> environments;
   }
-  
+
+  public class DeleteEnvironmentResponse {
+    public String environment_id;
+    public String status;
+  }  
 }
