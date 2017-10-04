@@ -22,6 +22,7 @@ public abstract class IBMWatsonService {
 
   private String apiKey;
   private String endPoint;
+  protected Object responseData;
 
   private static final String URL = 'url';
   private static final String PATH_AUTHORIZATION_V1_TOKEN = '/v1/token';
@@ -124,7 +125,11 @@ public abstract class IBMWatsonService {
    *
    */
   public abstract void processResponse();
-	
+  
+  protected Object getResponseData(){
+    return responseData;
+  }
+  	
   /**
    * TO-DO: document this method
    *

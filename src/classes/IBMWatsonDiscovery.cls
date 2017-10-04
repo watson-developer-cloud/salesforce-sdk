@@ -49,11 +49,35 @@ public class IBMWatsonDiscovery extends IBMWatsonService {
   }
     
   public override void processResponse(){
-        
+    String ServiceMessageResponseText = getServiceMessageResponseText();
     // handle service specific responses...
-    
+    if( !String.isBlank(ServiceMessageResponseText) ){
+      if( ServiceCall == RequestType.CREATE_ENVIRONMENT ){
+      	
+        responseData = (IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse) JSON.deserialize(ServiceMessageResponseText, IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse.class);
+        
+      }else if(ServiceCall == RequestType.LIST_ENVIRONMENT) {
+      	
+        responseData = (IBMWatsonDiscoveryV1Models.ListEnvironmentResponse) JSON.deserialize(ServiceMessageResponseText, IBMWatsonDiscoveryV1Models.ListEnvironmentResponse.class);
+          
+      }
+    }
   }
-    
+  
+  public IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse getEnvironmentResponse(){
+  	if( responseData instanceOf IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse ){
+  	  return (IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse) getResponseData();
+  	}
+  	return null;  
+  }
+  
+  public IBMWatsonDiscoveryV1Models.ListEnvironmentResponse getListEnvironmentResponse(){
+  	if( responseData instanceOf IBMWatsonDiscoveryV1Models.ListEnvironmentResponse ){
+  	  return (IBMWatsonDiscoveryV1Models.ListEnvironmentResponse) getResponseData();
+  	}
+  	return null;  
+  }
+  
   public void CreateEnvironmentRequest(String environmentName, String environmentDesc){
     if( String.isBlank(environmentName) || String.isBlank(environmentDesc) ){
       throw new IBMWatsonDiscoveryException( 'Environment name and description cannot be empty.' );
