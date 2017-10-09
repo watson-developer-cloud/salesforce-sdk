@@ -10,8 +10,8 @@
  * ### API Usage
  * The following information provides details about using the service to obtain a personality profile:
  * * **The profile method:** The service offers a single `/v3/profile` method that accepts up to 20 MB of input data and
- * produces results in JSON or CSV format. The service accepts input in Arabic, English, Japanese, or Spanish and can
- * produce output in a variety of languages.
+ * produces results in JSON or CSV format. The service accepts input in Arabic, English, Japanese, Korean, or Spanish
+ * and can produce output in a variety of languages.
  * * **Authentication:** You authenticate to the service by using your service credentials. You can use your credentials
  * to authenticate via a proxy server that resides in Bluemix, or you can use your credentials to obtain a token and
  * contact the service directly. See [Service credentials for Watson
@@ -32,40 +32,42 @@
  * @version v3
  * @see <a href="http://www.ibm.com/watson/developercloud/personality-insights.html">Personality Insights</a>
  */
-public class IBMWatsonPersonalityInsights extends IBMWatsonService {
+public class IBMWatsonPersonalityInsightsV1 extends IBMWatsonService {
 
-  private static final String SERVICE_NAME = 'personality_insights';
+  public class IBMWatsonPersonalityInsightsV1Exception extends Exception {}
+
   private static final String URL = 'https://gateway.watsonplatform.net/personality-insights/api';
-
   private String versionDate;
+  private RequestType ServiceCall;
+
+  public enum RequestType { }
 
   /**
-   * Instantiates a new `PersonalityInsights`.
+   * Instantiates a new `IBMWatsonPersonalityInsightsV1`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
    */
-  public PersonalityInsights(String versionDate) {
-    super(SERVICE_NAME);
-    if ((getEndPoint() == null) || getEndPoint().isEmpty()) {
+  public IBMWatsonPersonalityInsightsV1(String versionDate) {
+    this.ServiceName = 'PersonalityInsights';
+    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
       setEndPoint(URL);
     }
-
-    Validator.isTrue((versionDate != null) && !versionDate.isEmpty(),
-      'version cannot be null.');
-
+    if(String.isBlank(versionDate)) {
+      throw new IBMWatsonPersonalityInsightsException('Version cannot be null.');
+    }
     this.versionDate = versionDate;
   }
 
   /**
-   * Instantiates a new `PersonalityInsights` with username and password.
+   * Instantiates a new `IBMWatsonPersonalityInsightsV1` with username and password.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
    * @param username the username
    * @param password the password
    */
-  public PersonalityInsights(String versionDate, String username, String password) {
+  public IBMWatsonPersonalityInsightsV1(String versionDate, String username, String password) {
     this(versionDate);
     setUsernameAndPassword(username, password);
   }
@@ -73,33 +75,35 @@ public class IBMWatsonPersonalityInsights extends IBMWatsonService {
   /**
    * Generates a personality profile based on input text.
    *
-   * Derives personality insights for up to 20 MB of input content written by an author, though the service requires much less text to produce an accurate profile; for more information, see [Guidelines for providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/user-overview.html#overviewGuidelines). Accepts input in Arabic, English, Japanese, or Spanish and produces output in one of eleven languages. Provide plain text, HTML, or JSON content, and receive results in JSON or CSV format.
+   * Derives personality insights for up to 20 MB of input content written by an author, though the service requires much less text to produce an accurate profile; for more information, see [Guidelines for providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/user-overview.html#overviewGuidelines). Accepts input in Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text, HTML, or JSON content, and receive results in JSON or CSV format.
    *
    * @param profileOptions the {@link ProfileOptions} containing the options for the call
-   * @return the {@link IBMWatsonProfile with the response
+   * @return the {@link Profile with the response
    */
-  public ServiceCall<IBMWatsonProfile> profile(ProfileOptions profileOptions) {
-    Validator.notNull(profileOptions, 'profileOptions cannot be null');
-    RequestBuilder builder = RequestBuilder.post('/v3/profile');
-    builder.query(VERSION, versionDate);
-      builder.header('content-type', contentType);
-      if (contentLanguage != null) {
-        builder.header('Content-Language', contentLanguage);
-      }
-      if (acceptLanguage != null) {
-        builder.header('Accept-Language', acceptLanguage);
-      }
-      if (rawScores != null) {
-        builder.query('raw_scores', String.valueOf(rawScores));
-      }
-      if (csvHeaders != null) {
-        builder.query('csv_headers', String.valueOf(csvHeaders));
-      }
-      if (consumptionPreferences != null) {
-        builder.query('consumption_preferences', String.valueOf(consumptionPreferences));
-      }
-        builder.bodyContent(content,'');
-    return createServiceCall(builder.build(), ResponseConverterUtils.getObject(IBMWatsonProfile.class));
+  public Profile profile(ProfileOptions profileOptions) {
+    //Validator.notNull(profileOptions, 'profileOptions cannot be null');
+    builder = IBMWatsonRequestBuilder.http_post(URL + '/v3/profile');
+    builder.addHeader('content-type', profileOptions.contentType());
+    if (profileOptions.contentLanguage() != null) {
+      builder.addHeader('Content-Language', profileOptions.contentLanguage());
+    }
+    if (profileOptions.acceptLanguage() != null) {
+      builder.addHeader('Accept-Language', profileOptions.acceptLanguage());
+    }
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate,
+      'raw_scores' => String.valueOf(profileOptions.rawScores()),
+      'csv_headers' => String.valueOf(profileOptions.csvHeaders()),
+      'consumption_preferences' => String.valueOf(profileOptions.consumptionPreferences())
+    });
+    if (profileOptions.contentType().equalsIgnoreCase(ProfileOptions.CONTENT_TYPE_APPLICATION_JSON)) {
+      builder.bodyJson(JSON.serialize(profileOptions.content()));
+      ServiceMessage = JSON.serialize(profileOptions.content());
+    } else {
+      builder.bodyContent(profileOptions.body(), profileOptions.contentType());
+      ServiceMessage = profileOptions.body();
+    }
+    return (Profile) createServiceCall(builder.build(), Profile.class);
   }
 
 }

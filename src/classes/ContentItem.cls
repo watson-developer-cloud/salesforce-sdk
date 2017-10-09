@@ -1,7 +1,7 @@
 /**
- * IBMWatsonContentItem.
+ * ContentItem.
  */
-public class IBMWatsonContentItem {
+public class ContentItem extends IBMWatsonGenericModel {
   /**
    * MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is analyzed; plain text is processed as submitted.
    */
@@ -21,6 +21,8 @@ public class IBMWatsonContentItem {
   public static final String LANGUAGE_ES = 'es';
   /** ja. */
   public static final String LANGUAGE_JA = 'ja';
+  /** ko. */
+  public static final String LANGUAGE_KO = 'ko';
 
   private String content;
   private String id;
@@ -46,7 +48,7 @@ public class IBMWatsonContentItem {
     private Boolean reply;
     private Boolean forward;
 
-    private Builder(IBMWatsonContentItem contentItem) {
+    private Builder(ContentItem contentItem) {
       content = contentItem.content;
       id = contentItem.id;
       created = contentItem.created;
@@ -74,19 +76,19 @@ public class IBMWatsonContentItem {
     }
 
     /**
-     * Builds a IBMWatsonContentItem.
+     * Builds a ContentItem.
      *
      * @return the contentItem
      */
-    public IBMWatsonContentItem build() {
-      return new IBMWatsonContentItem(this);
+    public ContentItem build() {
+      return new ContentItem(this);
     }
 
     /**
      * Set the content.
      *
      * @param content the content
-     * @return the IBMWatsonContentItem builder
+     * @return the ContentItem builder
      */
     public Builder content(String content) {
       this.content = content;
@@ -97,7 +99,7 @@ public class IBMWatsonContentItem {
      * Set the id.
      *
      * @param id the id
-     * @return the IBMWatsonContentItem builder
+     * @return the ContentItem builder
      */
     public Builder id(String id) {
       this.id = id;
@@ -108,7 +110,7 @@ public class IBMWatsonContentItem {
      * Set the created.
      *
      * @param created the created
-     * @return the IBMWatsonContentItem builder
+     * @return the ContentItem builder
      */
     public Builder created(long created) {
       this.created = created;
@@ -119,7 +121,7 @@ public class IBMWatsonContentItem {
      * Set the updated.
      *
      * @param updated the updated
-     * @return the IBMWatsonContentItem builder
+     * @return the ContentItem builder
      */
     public Builder updated(long updated) {
       this.updated = updated;
@@ -130,7 +132,7 @@ public class IBMWatsonContentItem {
      * Set the contenttype.
      *
      * @param contenttype the contenttype
-     * @return the IBMWatsonContentItem builder
+     * @return the ContentItem builder
      */
     public Builder contenttype(String contenttype) {
       this.contenttype = contenttype;
@@ -141,7 +143,7 @@ public class IBMWatsonContentItem {
      * Set the language.
      *
      * @param language the language
-     * @return the IBMWatsonContentItem builder
+     * @return the ContentItem builder
      */
     public Builder language(String language) {
       this.language = language;
@@ -152,7 +154,7 @@ public class IBMWatsonContentItem {
      * Set the parentid.
      *
      * @param parentid the parentid
-     * @return the IBMWatsonContentItem builder
+     * @return the ContentItem builder
      */
     public Builder parentid(String parentid) {
       this.parentid = parentid;
@@ -163,7 +165,7 @@ public class IBMWatsonContentItem {
      * Set the reply.
      *
      * @param reply the reply
-     * @return the IBMWatsonContentItem builder
+     * @return the ContentItem builder
      */
     public Builder reply(Boolean reply) {
       this.reply = reply;
@@ -174,7 +176,7 @@ public class IBMWatsonContentItem {
      * Set the forward.
      *
      * @param forward the forward
-     * @return the IBMWatsonContentItem builder
+     * @return the ContentItem builder
      */
     public Builder forward(Boolean forward) {
       this.forward = forward;
@@ -182,8 +184,8 @@ public class IBMWatsonContentItem {
     }
   }
 
-  private IBMWatsonContentItem(Builder builder) {
-    Validator.notNull(builder.content, 'content cannot be null');
+  private ContentItem(Builder builder) {
+    //Validator.notNull(builder.content, 'content cannot be null');
     content = builder.content;
     id = builder.id;
     created = builder.created;
@@ -198,9 +200,99 @@ public class IBMWatsonContentItem {
   /**
    * New builder.
    *
-   * @return a IBMWatsonContentItem builder
+   * @return a ContentItem builder
    */
   public Builder newBuilder() {
     return new Builder(this);
+  }
+  /**
+   * Gets the content.
+   *
+   * Content that is to be analyzed. The service supports up to 20 MB of content for all items combined.
+   *
+   * @return the content
+   */
+  public String content() {
+    return content;
+  }
+  /**
+   * Gets the id.
+   *
+   * Unique identifier for this content item.
+   *
+   * @return the id
+   */
+  public String id() {
+    return id;
+  }
+  /**
+   * Gets the created.
+   *
+   * Timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
+   *
+   * @return the created
+   */
+  public Long created() {
+    return created;
+  }
+  /**
+   * Gets the updated.
+   *
+   * Timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
+   *
+   * @return the updated
+   */
+  public Long updated() {
+    return updated;
+  }
+  /**
+   * Gets the contenttype.
+   *
+   * MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is analyzed; plain text is processed as submitted.
+   *
+   * @return the contenttype
+   */
+  public String contenttype() {
+    return contenttype;
+  }
+  /**
+   * Gets the language.
+   *
+   * Language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is `en` (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. A language specified with the `Content-Type` header overrides the value of this parameter; any content items that specify a different language are ignored. Omit the `Content-Type` header to base the language on the most prevalent specification among the content items; again, content items that specify a different language are ignored. You can specify any combination of languages for the input and response content.
+   *
+   * @return the language
+   */
+  public String language() {
+    return language;
+  }
+  /**
+   * Gets the parentid.
+   *
+   * Unique ID of the parent content item for this item. Used to identify hierarchical relationships between posts/replies, messages/replies, and so on.
+   *
+   * @return the parentid
+   */
+  public String parentid() {
+    return parentid;
+  }
+  /**
+   * Gets the reply.
+   *
+   * Indicates whether this content item is a reply to another content item.
+   *
+   * @return the reply
+   */
+  public Boolean reply() {
+    return reply;
+  }
+  /**
+   * Gets the forward.
+   *
+   * Indicates whether this content item is a forwarded/copied version of another content item.
+   *
+   * @return the forward
+   */
+  public Boolean forward() {
+    return forward;
   }
 }
