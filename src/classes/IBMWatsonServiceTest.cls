@@ -46,13 +46,13 @@ private class IBMWatsonServiceTest {
         discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
         discovery.setUsernameAndPassword('username', 'password');
         discovery.setDefaultHeaders(headers);
-        String customHeaderValue=discovery.request.header('test');
+     /*   String customHeaderValue=discovery.request.header('test');
         List<String> headervalues=discovery.request.getHeadersByName('test');
         IBMWatsonRequest.Builder builder = new IBMWatsonRequest.Builder();
         builder.addHeader('test','testvalue');
         builder.removeHeader('test');
         builder.refresh_headers(headers);
-        Map<String,String> cHeaders=builder.getHeaders();
+        Map<String,String> cHeaders=builder.getHeaders();*/
         
         
   	IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse resp = 
