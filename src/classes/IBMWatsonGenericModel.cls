@@ -1,3 +1,7 @@
+/**
+ * Created by lpatino on 10/9/17.
+ */
+
 public abstract class IBMWatsonGenericModel {
 
   /*

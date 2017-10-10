@@ -29,12 +29,12 @@
  * profile](https://console.bluemix.net/docs/services/personality-insights/input.html) and [Understanding a
  * profile](https://console.bluemix.net/docs/services/personality-insights/output.html).
  *
- * @version v3
+ * @version V3
  * @see <a href="http://www.ibm.com/watson/developercloud/personality-insights.html">Personality Insights</a>
  */
-public class IBMWatsonPersonalityInsightsV1 extends IBMWatsonService {
+public class IBMWatsonPersonalityInsightsV3 extends IBMWatsonService {
 
-  public class IBMWatsonPersonalityInsightsV1Exception extends Exception {}
+  public class IBMWatsonPersonalityInsightsException extends Exception {}
 
   private static final String URL = 'https://gateway.watsonplatform.net/personality-insights/api';
   private String versionDate;
@@ -43,12 +43,12 @@ public class IBMWatsonPersonalityInsightsV1 extends IBMWatsonService {
   public enum RequestType { }
 
   /**
-   * Instantiates a new `IBMWatsonPersonalityInsightsV1`.
+   * Instantiates a new `IBMWatsonPersonalityInsightsV3`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
    */
-  public IBMWatsonPersonalityInsightsV1(String versionDate) {
+  public IBMWatsonPersonalityInsightsV3(String versionDate) {
     this.ServiceName = 'PersonalityInsights';
     if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
       setEndPoint(URL);
@@ -60,14 +60,14 @@ public class IBMWatsonPersonalityInsightsV1 extends IBMWatsonService {
   }
 
   /**
-   * Instantiates a new `IBMWatsonPersonalityInsightsV1` with username and password.
+   * Instantiates a new `IBMWatsonPersonalityInsightsV3` with username and password.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
    * @param username the username
    * @param password the password
    */
-  public IBMWatsonPersonalityInsightsV1(String versionDate, String username, String password) {
+  public IBMWatsonPersonalityInsightsV3(String versionDate, String username, String password) {
     this(versionDate);
     setUsernameAndPassword(username, password);
   }
@@ -80,7 +80,7 @@ public class IBMWatsonPersonalityInsightsV1 extends IBMWatsonService {
    * @param profileOptions the {@link ProfileOptions} containing the options for the call
    * @return the {@link Profile with the response
    */
-  public Profile profile(ProfileOptions profileOptions) {
+  public IBMWatsonPersonalityInsightsV3Models.Profile profile(IBMWatsonPersonalityInsightsV3Models.ProfileOptions profileOptions) {
     //Validator.notNull(profileOptions, 'profileOptions cannot be null');
     builder = IBMWatsonRequestBuilder.http_post(URL + '/v3/profile');
     builder.addHeader('content-type', profileOptions.contentType());
@@ -96,14 +96,14 @@ public class IBMWatsonPersonalityInsightsV1 extends IBMWatsonService {
       'csv_headers' => String.valueOf(profileOptions.csvHeaders()),
       'consumption_preferences' => String.valueOf(profileOptions.consumptionPreferences())
     });
-    if (profileOptions.contentType().equalsIgnoreCase(ProfileOptions.CONTENT_TYPE_APPLICATION_JSON)) {
+    if (profileOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
       builder.bodyJson(JSON.serialize(profileOptions.content()));
       ServiceMessage = JSON.serialize(profileOptions.content());
     } else {
       builder.bodyContent(profileOptions.body(), profileOptions.contentType());
       ServiceMessage = profileOptions.body();
     }
-    return (Profile) createServiceCall(builder.build(), Profile.class);
+    return (IBMWatsonPersonalityInsightsV3Models.Profile) createServiceCall(builder.build(), IBMWatsonPersonalityInsightsV3Models.Profile.class);
   }
 
 }
