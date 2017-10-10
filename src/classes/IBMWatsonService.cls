@@ -1,16 +1,3 @@
-/*
- * Copyright 2017 IBM Corp. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
- * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
- */
-
 public abstract class IBMWatsonService {
 
   public String ServiceMessage {get;set;}
@@ -142,18 +129,16 @@ public abstract class IBMWatsonService {
    * @param builder the new default headers
    */
   protected void setDefaultHeaders(IBMWatsonRequest.Builder builder) {
-    /*
-    String userAgent = IBMWatsonRequestUtils.getUserAgent();
-    if (defaultHeaders != null) {
+    //String userAgent = IBMWatsonRequestUtils.getUserAgent();
+    if (defaultHeaders != null && !defaultHeaders.isEmpty()) {
       for (String key : defaultHeaders.keySet()) {
         builder.addHeader(key, defaultHeaders.get(key));
       }
-      if (defaultHeaders.containsKey(IBMWatsonHttpHeaders.USER_AGENT) && defaultHeaders.get(IBMWatsonHttpHeaders.USER_AGENT) != null) {
-        userAgent += ' ' + defaultHeaders.get(IBMWatsonHttpHeaders.USER_AGENT);
-      }
+      //if (defaultHeaders.containsKey(IBMWatsonHttpHeaders.USER_AGENT) && defaultHeaders.get(IBMWatsonHttpHeaders.USER_AGENT) != null) {
+      //  userAgent += ' ' + defaultHeaders.get(IBMWatsonHttpHeaders.USER_AGENT);
+      //}
     }
-    builder.addHeader(IBMWatsonHttpHeaders.USER_AGENT, userAgent);
-    */
+    //builder.addHeader(IBMWatsonHttpHeaders.USER_AGENT, userAgent);
   }
 
   /**

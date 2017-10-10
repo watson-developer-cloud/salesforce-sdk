@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * Copyright 2017 IBM Corp. All Rights Reserved.
  *
@@ -11,6 +12,8 @@
  * specific language governing permissions and limitations under the License.
  */
  
+=======
+>>>>>>> master
 public class IBMWatsonHttpMediaType {
 
   private IBMWatsonHttpMediaType() {

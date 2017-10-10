@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * Copyright 2017 IBM Corp. All Rights Reserved.
  *
@@ -10,6 +11,8 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
+=======
+>>>>>>> master
 public with sharing class IBMWatsonHttpStatus {
 	
 	/** 202 Accepted (HTTP/1.0 - RFC 1945). */
