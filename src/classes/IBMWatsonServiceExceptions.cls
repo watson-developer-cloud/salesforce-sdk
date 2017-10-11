@@ -1,11 +1,5 @@
 public class IBMWatsonServiceExceptions {
 
-  /** The Constant serialVersionUID. */
-  private static final long serialVersionUID = 1L;
-
-  /** The Constant TOO_MANY_REQUESTS. */
-  private static final Integer TOO_MANY_REQUESTS = 429;
-
   /**
    * 400 Bad Request (HTTP/1.1).
    */
@@ -25,7 +19,7 @@ public class IBMWatsonServiceExceptions {
   /**
    * 409 Conflict (HTTP/1.1).
    */
-  public with sharing class ConflictException  extends IBMWatsonServiceResponseException {
+  public class ConflictException  extends IBMWatsonServiceResponseException {
 
     /**
      * Instantiates a new Conflict Exception.
@@ -146,7 +140,7 @@ public class IBMWatsonServiceExceptions {
      * @param response the HTTP response
      */
     public TooManyRequestsException(String message, IBMWatsonResponse response) {
-      super(TOO_MANY_REQUESTS, message, response);
+      super(IBMWatsonHttpStatus.TOO_MANY_REQUESTS, message, response);
     }
   }
 

@@ -22,7 +22,7 @@ public class PersonalityInsightsV3 extends IBMWatsonService {
    *        calls from failing when the service introduces breaking changes.
    */
   public PersonalityInsightsV3(String versionDate) {
-    this.ServiceName = 'PersonalityInsights';
+    this.ServiceName = 'personality-insights';
     if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
       setEndPoint(URL);
     }
