@@ -1,4 +1,4 @@
-public class IBMWatsonPersonalityInsightsV3Models {
+public class PersonalityInsightsV3Models {
   /**
    * Behavior.
    */
@@ -233,7 +233,7 @@ public class IBMWatsonPersonalityInsightsV3Models {
       return contentItems;
     }
     private Content(ContentBuilder builder) {
-      //Validator.notNull(builder.contentItems, 'contentItems cannot be null');
+      IBMWatsonValidator.notNull(builder.contentItems, 'contentItems cannot be null');
       contentItems = builder.contentItems;
     }
 
@@ -246,7 +246,7 @@ public class IBMWatsonPersonalityInsightsV3Models {
       return new ContentBuilder(this);
     }
   }
-      
+
   /**
    * Content Builder.
    */
@@ -288,7 +288,7 @@ public class IBMWatsonPersonalityInsightsV3Models {
      * @return the Content builder
      */
     public ContentBuilder addContentItem(ContentItem contentItem) {
-      //Validator.notNull(contentItem, 'contentItem cannot be null');
+      IBMWatsonValidator.notNull(contentItem, 'contentItem cannot be null');
       if (this.contentItems == null) {
         this.contentItems = new List<ContentItem>();
       }
@@ -413,7 +413,7 @@ public class IBMWatsonPersonalityInsightsV3Models {
       return forward;
     }
     private ContentItem(ContentItemBuilder builder) {
-      //Validator.notNull(builder.content, 'content cannot be null');
+      IBMWatsonValidator.notNull(builder.content, 'content cannot be null');
       content = builder.content;
       id = builder.id;
       created = builder.created;
@@ -434,7 +434,7 @@ public class IBMWatsonPersonalityInsightsV3Models {
       return new ContentItemBuilder(this);
     }
   }
-      
+
   /**
    * ContentItem Builder.
    */
@@ -864,7 +864,7 @@ public class IBMWatsonPersonalityInsightsV3Models {
       return consumptionPreferences;
     }
     private ProfileOptions(ProfileOptionsBuilder builder) {
-      //Validator.isTrue(builder.contentType != null, 'contentType cannot be null');
+      IBMWatsonValidator.isTrue(builder.contentType != null, 'contentType cannot be null');
       content = builder.content;
       body = builder.body;
       contentType = builder.contentType;
@@ -884,7 +884,7 @@ public class IBMWatsonPersonalityInsightsV3Models {
       return new ProfileOptionsBuilder(this);
     }
   }
-      
+
   /**
    * ProfileOptions Builder.
    */
