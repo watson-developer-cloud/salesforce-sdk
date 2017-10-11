@@ -73,30 +73,30 @@ public abstract class IBMWatsonService {
 		if (!(response.StatusCode == 200 || response.StatusCode == 201 || response.StatusCode == 202)) {
       System.debug('[IBMWatsonFacade]::[sendMessage] Error Response Status:'+ response.Status + ' Code:' + response.StatusCode + ' ServiceMessage: '+response.getResponseText());
       if(response.StatusCode == IBMWatsonHttpStatus.BAD_REQUEST) // HTTP 400
-        throw new IBMWatsonBadRequestException(error != null ? error : 'Bad Request', response);
+        throw new IBMWatsonServiceExceptions.BadRequestException(error != null ? error : 'Bad Request', response);
       if(response.StatusCode == IBMWatsonHttpStatus.UNAUTHORIZED) // HTTP 401
-        throw new IBMWatsonUnauthorizedException('Unauthorized: Access is denied due to invalid credentials. '
+        throw new IBMWatsonServiceExceptions.UnauthorizedException('Unauthorized: Access is denied due to invalid credentials. '
                                         + 'Tip: Did you set the Endpoint?', response);
       if(response.StatusCode == IBMWatsonHttpStatus.FORBIDDEN) // HTTP 403
-        throw new IBMWatsonForbiddenException(error != null ? error : 'Forbidden: Service refuse the request', response);
+        throw new IBMWatsonServiceExceptions.ForbiddenException(error != null ? error : 'Forbidden: Service refuse the request', response);
       if(response.StatusCode == IBMWatsonHttpStatus.NOT_FOUND) // HTTP 404
-        throw new IBMWatsonNotFoundException(error != null ? error : 'Not found', response);
+        throw new IBMWatsonServiceExceptions.NotFoundException(error != null ? error : 'Not found', response);
       if(response.StatusCode == IBMWatsonHttpStatus.NOT_ACCEPTABLE) // HTTP 406
-        throw new IBMWatsonForbiddenException(error != null ? error : 'Forbidden: Service refuse the request', response);
+        throw new IBMWatsonServiceExceptions.ForbiddenException(error != null ? error : 'Forbidden: Service refuse the request', response);
       if(response.StatusCode == IBMWatsonHttpStatus.CONFLICT) // HTTP 409
-        throw new IBMWatsonConflictException(error != null ? error : '', response);
+        throw new IBMWatsonServiceExceptions.ConflictException(error != null ? error : '', response);
       if(response.StatusCode == IBMWatsonHttpStatus.REQUEST_TOO_LONG) // HTTP 413
-        throw new IBMWatsonRequestTooLargeException(error != null ? error
+        throw new IBMWatsonServiceExceptions.RequestTooLargeException(error != null ? error
             : 'Request too large: ' + 'The request entity is larger than the server is able to process', response);
       if(response.StatusCode == IBMWatsonHttpStatus.UNSUPPORTED_MEDIA_TYPE) // HTTP 415
-        throw new IBMWatsonUnsupportedException(error != null ? error : 'Unsupported Media Type', response);
+        throw new IBMWatsonServiceExceptions.UnsupportedException(error != null ? error : 'Unsupported Media Type', response);
       if(response.StatusCode == IBMWatsonHttpStatus.TOO_MANY_REQUESTS) // HTTP 429
-        throw new IBMWatsonTooManyRequestsException(error != null ? error : 'Too many requests', response);
+        throw new IBMWatsonServiceExceptions.TooManyRequestsException(error != null ? error : 'Too many requests', response);
       if(response.StatusCode == IBMWatsonHttpStatus.INTERNAL_SERVER_ERROR) // HTTP 500
-        throw new IBMWatsonInternalServerErrorException(error != null ? error : 'Internal Server Error', response);
+        throw new IBMWatsonServiceExceptions.InternalServerErrorException(error != null ? error : 'Internal Server Error', response);
       if(response.StatusCode == IBMWatsonHttpStatus.SERVICE_UNAVAILABLE) // HTTP 503
-        throw new IBMWatsonServiceUnavailableException(error != null ? error : 'Service Unavailable', response);
-        throw new IBMWatsonResponseException(response.StatusCode, error, response);
+        throw new IBMWatsonServiceExceptions.ServiceUnavailableException(error != null ? error : 'Service Unavailable', response);
+        throw new IBMWatsonServiceExceptions.ResponseException(response.StatusCode, error, response);
     } else {
       //
       // the call to processResponse() is intentionally overriden by every service so additional processing can take place
@@ -160,7 +160,7 @@ public abstract class IBMWatsonService {
       if (skipAuthentication) {
         return; // chosen to skip authentication with the service
       }
-      throw new IllegalArgumentException('apiKey or username and password were not specified');
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('apiKey or username and password were not specified');
     }
     builder.addHeader(IBMWatsonHttpHeaders.AUTHORIZATION, apiKey.startsWith(BASIC) ? apiKey : BASIC + apiKey);
   }

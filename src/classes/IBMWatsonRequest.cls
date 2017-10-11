@@ -104,7 +104,7 @@ public class IBMWatsonRequest {
     }
 
     public Builder url(URL url) {
-      if (url == null) throw new IllegalArgumentException('url == null');
+      if (url == null) throw new IBMWatsonServiceExceptions.IllegalArgumentException('url == null');
       this.url = url;
       return this;
     }
@@ -116,9 +116,9 @@ public class IBMWatsonRequest {
      * exception by calling {@link HttpUrl#parse}; it returns null for invalid URLs.
      */
     public Builder url(String url) {
-      if (url == null) throw new IllegalArgumentException('url == null');
+      if (url == null) throw new IBMWatsonServiceExceptions.IllegalArgumentException('url == null');
       URL parsed = new URL(url);
-      if (parsed == null) throw new IllegalArgumentException('unexpected url: ' + url);
+      if (parsed == null) throw new IBMWatsonServiceExceptions.IllegalArgumentException('unexpected url: ' + url);
       return url(parsed);
     }
 
@@ -203,7 +203,7 @@ public class IBMWatsonRequest {
     }
 
     public Builder method(String method, IBMWatsonRequestBody body) {
-      if (String.isBlank(method)) throw new IllegalArgumentException('method == empty');
+      if (String.isBlank(method)) throw new IBMWatsonServiceExceptions.IllegalArgumentException('method == empty');
       this.method = method;
       this.body = body;
       return this;
@@ -219,7 +219,7 @@ public class IBMWatsonRequest {
     }
 
     public IBMWatsonRequest build() {
-      if (url == null) throw new IllegalArgumentException('url == null');
+      if (url == null) throw new IBMWatsonServiceExceptions.IllegalArgumentException('url == null');
       system.debug('@@ ==> [IBMWatsonRequest]:: -- build() -- building request....'+this);
       return new IBMWatsonRequest(this);
     }
