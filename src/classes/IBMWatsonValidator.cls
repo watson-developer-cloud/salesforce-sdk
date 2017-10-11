@@ -20,7 +20,7 @@ public class IBMWatsonValidator {
    */
   public static void isTrue(boolean expression, String message) {
     if (!expression) {
-      throw new IllegalArgumentException(message);
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException(message);
     }
   }
 
@@ -34,7 +34,7 @@ public class IBMWatsonValidator {
    */
   public static void notEmpty(List<Object> a, String message) {
     if (a == null || a.isEmpty() ) {
-      throw new IllegalArgumentException(message);
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException(message);
     }
   }
 
@@ -48,7 +48,7 @@ public class IBMWatsonValidator {
    */
   public static void notEmpty(String str, String message) {
     if ((str == null) || (str.length() == 0)) {
-      throw new IllegalArgumentException(message);
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException(message);
     }
   }
 
@@ -61,7 +61,7 @@ public class IBMWatsonValidator {
    */
   public static void notNull(Object obj, String message) {
     if (obj == null) {
-      throw new IllegalArgumentException(message);
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException(message);
     }
   }
 
@@ -74,7 +74,7 @@ public class IBMWatsonValidator {
    */
   public static void isNull(Object obj, String message) {
     if (obj != null) {
-      throw new IllegalArgumentException(message);
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException(message);
     }
   }
 
