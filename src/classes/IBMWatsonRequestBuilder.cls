@@ -82,7 +82,7 @@ public class IBMWatsonRequestBuilder {
   public IBMWatsonRequestBuilder(HTTPMethod m, String url){
     this.method = m;
     if ( String.isBlank(url) ) {
-      throw new IllegalArgumentException('url cannot be null');
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('url cannot be null');
     }
     System.PageReference pageReference = new System.PageReference( url ); 
     httpUrl = pageReference.getUrl();
@@ -155,7 +155,7 @@ public class IBMWatsonRequestBuilder {
     builder.url( getURLWithParams(httpUrl) );
 
     if ( method == HTTPMethod.HTTP_GET && body != null) {
-      throw new  IllegalArgumentException('cannot send a RequestBody in a GET request');
+      throw new  IBMWatsonServiceExceptions.IllegalArgumentException('cannot send a RequestBody in a GET request');
     } else if (formParams != null && !formParams.isEmpty()) {
 
     } else if (body == null) {

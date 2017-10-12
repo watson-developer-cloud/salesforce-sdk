@@ -81,7 +81,7 @@ private class IBMWatsonServiceTest {
 			IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse resp = 
 				discovery.CreateEnvironmentRequest('test', 'test');
 		}
-		catch(IBMWatsonBadRequestException exptn) {
+		catch(IBMWatsonServiceExceptions.BadRequestException exptn) {
 			system.assertEquals(exptn.getStatusCode(),IBMWatsonHttpStatus.BAD_REQUEST);
 			
 		}
@@ -106,7 +106,7 @@ private class IBMWatsonServiceTest {
 			IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse resp = 
 				discovery.CreateEnvironmentRequest('test', 'test');
 		}
-		catch(IBMWatsonConflictException exptn) {
+		catch(IBMWatsonServiceExceptions.ConflictException exptn) {
 			system.assertEquals(exptn.getStatusCode(),IBMWatsonHttpStatus.CONFLICT);
 			
 		}
@@ -131,7 +131,7 @@ private class IBMWatsonServiceTest {
 			IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse resp = 
 				discovery.CreateEnvironmentRequest('test', 'test');
 		}
-		catch(IBMWatsonForbiddenException exptn) {
+		catch(IBMWatsonServiceExceptions.ForbiddenException exptn) {
 			system.assertEquals(exptn.getStatusCode(),IBMWatsonHttpStatus.FORBIDDEN);
 			
 		}
@@ -156,7 +156,7 @@ private class IBMWatsonServiceTest {
 			IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse resp = 
 				discovery.CreateEnvironmentRequest('test', 'test');
 		}
-		catch(IBMWatsonForbiddenException exptn) {
+		catch(IBMWatsonServiceExceptions.ForbiddenException exptn) {
 			system.assertEquals(exptn.getStatusCode(),IBMWatsonHttpStatus.FORBIDDEN);
 			
 		}
@@ -181,7 +181,7 @@ private class IBMWatsonServiceTest {
 			IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse resp = 
 				discovery.CreateEnvironmentRequest('test', 'test');
 		}
-		catch(IBMWatsonInternalServerErrorException exptn) {
+		catch(IBMWatsonServiceExceptions.InternalServerErrorException exptn) {
 			system.assertEquals(exptn.getStatusCode(),IBMWatsonHttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}
@@ -206,7 +206,7 @@ private class IBMWatsonServiceTest {
 			IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse resp = 
 				discovery.CreateEnvironmentRequest('test', 'test');
 		}
-		catch(IBMWatsonNotFoundException exptn) {
+		catch(IBMWatsonServiceExceptions.NotFoundException exptn) {
 			system.assertEquals(exptn.getStatusCode(),IBMWatsonHttpStatus.NOT_FOUND);
 			
 		}
@@ -231,7 +231,7 @@ private class IBMWatsonServiceTest {
 			IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse resp = 
 				discovery.CreateEnvironmentRequest('test', 'test');
 		}
-		catch(IBMWatsonRequestTooLargeException exptn) {
+		catch(IBMWatsonServiceExceptions.RequestTooLargeException exptn) {
 			system.assertEquals(exptn.getStatusCode(),IBMWatsonHttpStatus.REQUEST_TOO_LONG);
 			
 		}
@@ -256,7 +256,7 @@ private class IBMWatsonServiceTest {
 			IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse resp = 
 				discovery.CreateEnvironmentRequest('test', 'test');
 		}
-		catch(IBMWatsonResponseException exptn) {
+		catch(IBMWatsonServiceExceptions.ResponseException exptn) {
 			system.assertEquals(exptn.getStatusCode(),519);
 			
 		}
@@ -281,7 +281,7 @@ private class IBMWatsonServiceTest {
 			IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse resp = 
 				discovery.CreateEnvironmentRequest('test', 'test');
 		}
-		catch(IBMWatsonServiceUnavailableException exptn) {
+		catch(IBMWatsonServiceExceptions.ServiceUnavailableException exptn) {
 			system.assertEquals(exptn.getStatusCode(),IBMWatsonHttpStatus.SERVICE_UNAVAILABLE);
 			
 		}
@@ -306,7 +306,7 @@ private class IBMWatsonServiceTest {
 			IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse resp = 
 				discovery.CreateEnvironmentRequest('test', 'test');
 		}
-		catch(IBMWatsonTooManyRequestsException exptn) {
+		catch(IBMWatsonServiceExceptions.TooManyRequestsException exptn) {
 			system.assertEquals(exptn.getStatusCode(),429);
 			
 		}
@@ -331,7 +331,7 @@ private class IBMWatsonServiceTest {
 			IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse resp = 
 				discovery.CreateEnvironmentRequest('test', 'test');
 		}
-		catch(IBMWatsonUnauthorizedException exptn) {
+		catch(IBMWatsonServiceExceptions.UnauthorizedException exptn) {
 			system.assertEquals(exptn.getStatusCode(),IBMWatsonHttpStatus.UNAUTHORIZED);
 			
 		}
@@ -355,7 +355,7 @@ private class IBMWatsonServiceTest {
 			IBMWatsonDiscoveryV1Models.CreateEnvironmentResponse resp = 
 				discovery.CreateEnvironmentRequest('test', 'test');
 		}
-		catch(IBMWatsonUnsupportedException exptn) {
+		catch(IBMWatsonServiceExceptions.UnsupportedException exptn) {
 			system.assertEquals(exptn.getStatusCode(),IBMWatsonHttpStatus.UNSUPPORTED_MEDIA_TYPE);
 			
 		}
