@@ -109,7 +109,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -271,7 +271,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -376,7 +376,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -485,7 +485,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -608,7 +608,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -719,7 +719,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -855,7 +855,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -1010,7 +1010,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
