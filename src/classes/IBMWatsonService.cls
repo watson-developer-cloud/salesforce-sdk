@@ -104,7 +104,7 @@ public abstract class IBMWatsonService {
       //
       //processResponse();
       String ServiceMessageResponseText = getServiceMessageResponseText();
-      if( !String.isBlank(ServiceMessageResponseText) ){
+      if( !String.isBlank(ServiceMessageResponseText) && (targetType != Void.class)){
         return JSON.deserialize(ServiceMessageResponseText, targetType);
       }
     }
