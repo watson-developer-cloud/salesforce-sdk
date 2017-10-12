@@ -90,7 +90,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -216,7 +216,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -358,7 +358,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -479,7 +479,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -711,7 +711,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -726,7 +726,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -741,7 +741,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    createServiceCall(builder.build(), Void.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
