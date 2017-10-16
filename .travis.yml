@@ -13,6 +13,7 @@ before_install:
 - wget -qO- $URL | tar xJf -
 - "./sfdx/install"
 - export PATH=./sfdx/$(pwd):$PATH
+- mv src/package.xml install
 - sfdx update
 - sfdx force:auth:jwt:grant --clientid $CONSUMER_KEY --jwtkeyfile assets/server.key
   --username $USERNAME --setdefaultdevhubusername -a HubOrg
