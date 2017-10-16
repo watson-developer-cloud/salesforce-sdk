@@ -22,4 +22,5 @@ script:
 - sfdx force:source:push -u ciorg
 - sfdx force:apex:test:run -u ciorg -c -r human
 - sfdx force:org:delete -u ciorg -p
+- mv install/package.xml src
 - ./install/deploy.sh

@@ -4,5 +4,4 @@
   #ant -buildfile $TRAVIS_BUILD_DIR/install/build.xml deployWatson
 #fi
 
-mv package.xml ../src
 ant -buildfile $TRAVIS_BUILD_DIR/install/build.xml deployWatsonCheckOnly
