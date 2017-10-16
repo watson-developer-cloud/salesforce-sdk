@@ -1,6 +1,6 @@
-#!/bin/bash
-set -ev
+#!/usr/bin/env bash
+
 #if [ "{$TRAVIS_BRANCH}" = "master" ]; then
   #ant deployWatson
 #fi
-ant deployWatson
+ant -buildfile $TRAVIS_BUILD_DIR/install/build.xml deployWatsonCheckOnly
