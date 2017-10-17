@@ -8,7 +8,7 @@ public class IBMWatsonCredentialUtils {
    *
    */
   public class ServiceCredentials {
-  	
+    
     public String pwd {get;set;}
     public String usrname {get;set;}
     
@@ -25,44 +25,44 @@ public class IBMWatsonCredentialUtils {
   }
   
   public class ServicePlan {
-  	
-  	public String PlanName {get;set;}
-  	public ServiceCredentials Credentials {get;set;}
-  	
-  	public ServicePlan(){
-  		this.Credentials = null;
-  	}
-  	
+    
+    public String PlanName {get;set;}
+    public ServiceCredentials Credentials {get;set;}
+    
+    public ServicePlan(){
+      this.Credentials = null;
+    }
+    
   }
   
   public class ServiceConfiguration {
-  	public String ServiceName {get;set;}
-  	public Map<String, ServicePlan> instancePlans {get;set;}
-  	public ServiceConfiguration(){
-  		Map<String, ServicePlan> instancePlans = new Map<String, ServicePlan>();
-  	}
-  	public void addPlan(String instancePlan, ServicePlan plan){
-  		instancePlans.put(instancePlan, plan);
-  	}
-  	public ServicePlan getPlan(String plan){
-  		if( instancePlans != null && instancePlans.containsKey(plan) ){
-  			return instancePlans.get(plan);
-  		}
-  		return null;
-  	}
+    public String ServiceName {get;set;}
+    public Map<String, ServicePlan> instancePlans {get;set;}
+    public ServiceConfiguration(){
+      Map<String, ServicePlan> instancePlans = new Map<String, ServicePlan>();
+    }
+    public void addPlan(String instancePlan, ServicePlan plan){
+      instancePlans.put(instancePlan, plan);
+    }
+    public ServicePlan getPlan(String plan){
+      if( instancePlans != null && instancePlans.containsKey(plan) ){
+        return instancePlans.get(plan);
+      }
+      return null;
+    }
   }
   
   /**
-   *	This block gets executed the first time any static method is called and only once per execution context
-   *	- Initialize service configuration by name and plan, each plan with its own set of credentials 
+   *  This block gets executed the first time any static method is called and only once per execution context
+   *  - Initialize service configuration by name and plan, each plan with its own set of credentials 
    */
   static {
-  	Services = new Map<String, ServiceConfiguration>();
-  	
-  	// TO-DO: load service configuration here...
-  	//		  each service would contain multiple instances which are 1-1 with the type of plan
-  	//		  and each plan would have its own set of credentials
-  	
+    Services = new Map<String, ServiceConfiguration>();
+    
+    // TO-DO: load service configuration here...
+    //      each service would contain multiple instances which are 1-1 with the type of plan
+    //      and each plan would have its own set of credentials
+    
   }
   
   /**
@@ -90,7 +90,7 @@ public class IBMWatsonCredentialUtils {
 
     ServiceCredentials credentials = getUserNameAndPassword(serviceName, plan);
     if (credentials != null) {
-    	return credentials.basic();
+      return credentials.basic();
     }
     
     return null;
@@ -121,14 +121,14 @@ public class IBMWatsonCredentialUtils {
   }
 
   private static ServiceCredentials getServiceCredentials(String serviceName, String plan) {
-  	//	Check if we have configuration available for this service
-  	if( Services != null && !Services.isEmpty() && Services.containsKey(serviceName) ){
-  		ServiceConfiguration srv = Services.get(serviceName);
-  		ServicePlan srvPlan = srv.getPlan(plan);
-  		if( srvPlan != null && srvPlan.Credentials != null ){
-  			return srvPlan.Credentials;
-  		}
-  	}
+    //  Check if we have configuration available for this service
+    if( Services != null && !Services.isEmpty() && Services.containsKey(serviceName) ){
+      ServiceConfiguration srv = Services.get(serviceName);
+      ServicePlan srvPlan = srv.getPlan(plan);
+      if( srvPlan != null && srvPlan.Credentials != null ){
+        return srvPlan.Credentials;
+      }
+    }
     return null;
   }
   

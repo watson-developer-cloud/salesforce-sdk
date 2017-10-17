@@ -181,6 +181,6 @@ public class IBMWatsonHttpMediaType {
    */
   public static final String WILDCARD = '*/*';
 
-	
+  
     
 }
