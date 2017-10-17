@@ -15,14 +15,12 @@ If you already have a previous version installed, you can update it using the fo
     git clone git@github.com:germanattanasio/salesforce-sdk.git
     ```
 
-2. Install the [Force.com Migration Tool](http://www.salesforce.com/us/developer/docs/daas/Content/forcemigrationtool_install.htm) plugin for Ant, if you don't already have it.
+2. Edit `install/build.properties` to insert your Salesforce username and password.  Since you will be using the API to access Salesforce, remember to [append your Security Token](http://www.salesforce.com/us/developer/docs/api/Content/sforce_api_concepts_security.htm#topic-title_login_token) to your password.
 
-3. Edit `install/build.properties` to insert your Salesforce username and password.  Since you will be using the API to access Salesforce, remember to [append your Security Token](http://www.salesforce.com/us/developer/docs/api/Content/sforce_api_concepts_security.htm#topic-title_login_token) to your password.
-
-4. Open your command line to the `install` folder, then deploy using Ant:
+3. Open your command line to the `install` folder, then deploy using Ant:
 
     ```bash
-    $ ant deployZip
+    $ ant deployWatson
     ```
 
 ## Getting Started
@@ -45,15 +43,44 @@ To get your service-specific credentials, follow these steps:
 
 ### Using the Services
 
-Getting started using a service is very simple! Here is an example of using the Discovery service to get a list of your current environments:
+Getting started using a service is very simple! All services follow the same pattern of service instantiation, option building, and requesting. To get an idea, below is an example of using the Discovery service to get a list of your current environments:
 
 ```java
-IBMWatsonDiscovery discovery = new IBMWatsonDiscovery('2017-09-01');
-discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+// instantiating service with Bluemix credentials
+DiscoveryV1 discovery = new DiscoveryV1(DiscoveryV1.VERSION_DATE_2017_09_01);
+discovery.setEndPoint(<url>);
 discovery.setUsernameAndPassword(<username>, <password>);
-IBMWatsonDiscoveryV1Models.ListEnvironmentResponse environmentList 
-  = discovery.ListEnvironmentRequest(<environmentName>);
+
+// configuring options for listing environments
+DiscoveryV1Models.ListEnvironmentsOptions options = new DiscoveryV1Models
+  .ListEnvironmentsOptionsBuilder()
+  .build();
+
+// making request
+DiscoveryV1Models.ListEnvironmentsResponse environmentList 
+  = service.listEnvironments(options);
 ```
+
+Similarly, here is an example of creating an intent in the Conversation service:
+
+```java
+// instantiating service with Bluemix credentials
+ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+conversation.setEndPoint(<url>);
+conversation.setUsernameAndPassword(<username>, <password>);
+
+// configuring options for creating intent
+ConversationV1Models.CreateIntentOptions options = new ConversationV1Models.CreateIntentOptionsBuilder()
+    .workspaceId(<workspace_id>)
+    .intent('MyIntent')
+    .description('This is an example of creating an intent!')
+    .build();
+
+// making request
+ConversationV1Models.Intent intent = conversation.createIntent(options);
+```
+
+The manner of instantiating and using services should be consistent no matter which you decide to use, which should make it easy to explore the many capabilities Watson services have to offer.
 
 ## Contributing
 
