@@ -7,7 +7,7 @@ public class IBMWatsonRequestUtils {
   }
   
   public static String getUserAgent(){
-  	return userAgent;
+    return userAgent;
   }
     
 }

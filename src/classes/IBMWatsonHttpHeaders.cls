@@ -71,7 +71,7 @@ public class IBMWatsonHttpHeaders {
    * See <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.18">HTTP/1.1 documentation</a>.
    */
   public static String DATE() {
-  	return 'DATE';
+    return 'DATE';
   }
 
   /**

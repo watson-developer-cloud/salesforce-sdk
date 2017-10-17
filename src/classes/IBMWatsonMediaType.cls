@@ -29,7 +29,7 @@ public class IBMWatsonMediaType {
     String charset = null;
     Matcher parameter_matcher = PARAMETER.matcher(str);
     if( parameter_matcher.matches() ){
-	  for (integer s = typeSubtype.end(); s < str.length(); s = parameter_matcher.end()) {
+    for (integer s = typeSubtype.end(); s < str.length(); s = parameter_matcher.end()) {
         parameter_matcher.region(s, str.length());
         if (!parameter_matcher.lookingAt()) return null; // This is not a well-formed media type.
         String name = parameter_matcher.group(1);
@@ -49,7 +49,7 @@ public class IBMWatsonMediaType {
           return null; // Multiple different charsets!
         }
         charset = charsetParameter;
-	  } 
+    } 
     }
     return new IBMWatsonMediaType(str, t, subtype, charset);
   }

@@ -34,12 +34,12 @@ public class IBMWatsonRequest {
   public List<String> getHeadersByName(String name) {
     List<String> headerValues = new List<String>();
     if( headers != null && !headers.isEmpty() ){
-  	  for( String headerName: headers.keySet() ){
-  	    if( !String.isBlank(headerName) && headerName.equalsIgnoreCase(name) ){
-  	      headerValues.add( headers.get(headerName) );
-  	    }
-  	  }
-  	}
+      for( String headerName: headers.keySet() ){
+        if( !String.isBlank(headerName) && headerName.equalsIgnoreCase(name) ){
+          headerValues.add( headers.get(headerName) );
+        }
+      }
+    }
     return headerValues;
   }
   
@@ -52,7 +52,7 @@ public class IBMWatsonRequest {
   }
 
   public Builder newBuilder() {
-  	system.debug('==> [IBMWatsonRequest]:: -- newBuilder() --'+this);
+    system.debug('==> [IBMWatsonRequest]:: -- newBuilder() --'+this);
     return new Builder(this);
   }
   
@@ -67,7 +67,7 @@ public class IBMWatsonRequest {
 
   public boolean isHttps() {
     if( url != null && url.toExternalForm().startsWith('https://') ) {
-  	  return true;
+      return true;
     }
     return false;
   }
@@ -158,11 +158,11 @@ public class IBMWatsonRequest {
       this.headers.putAll( headers );
       return this;
     }
-	
-	public Map<String, String> getHeaders(){
-		return this.headers;
-	}
-	
+  
+  public Map<String, String> getHeaders(){
+    return this.headers;
+  }
+  
     /**
      * Sets this request's {@code Cache-Control} header, replacing any cache control headers already
      * present. If {@code cacheControl} doesn't define any directives, this clears this request's
