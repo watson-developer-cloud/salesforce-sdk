@@ -3,31 +3,31 @@ public class DiscoveryV1Models {
    * The addDocument options.
    */
   public class AddDocumentOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
-    private String file; // Was File, changed to compile correctly
+    private String environment_id;
+    private String collection_id;
+    private String file;
     private String filename;
     private String metadata;
-    private String fileContentType;
+    private String file_content_type;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
      * Gets the file.
@@ -36,7 +36,7 @@ public class DiscoveryV1Models {
      *
      * @return the file
      */
-    public String file() { // Was File, changed to compile correctly
+    public String file() {
       return file;
     }
     /**
@@ -60,24 +60,24 @@ public class DiscoveryV1Models {
       return metadata;
     }
     /**
-     * Gets the fileContentType.
+     * Gets the file_content_type.
      *
      * The content type of file.
      *
-     * @return the fileContentType
+     * @return the file_content_type
      */
     public String fileContentType() {
-      return fileContentType;
+      return file_content_type;
     }
     private AddDocumentOptions(AddDocumentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
       file = builder.file;
       filename = builder.filename;
       metadata = builder.metadata;
-      fileContentType = builder.fileContentType;
+      file_content_type = builder.file_content_type;
     }
 
     /**
@@ -94,20 +94,20 @@ public class DiscoveryV1Models {
    * AddDocumentOptions Builder.
    */
   public class AddDocumentOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
-    private String file; // Was File, changed to compile correctly
+    private String environment_id;
+    private String collection_id;
+    private String file;
     private String filename;
     private String metadata;
-    private String fileContentType;
+    private String file_content_type;
 
-    private AddDocumentOptionsBuilder(AddDocumentOptions addDocumentOptions) {
-      environmentId = addDocumentOptions.environmentId;
-      collectionId = addDocumentOptions.collectionId;
-      file = addDocumentOptions.file;
-      filename = addDocumentOptions.filename;
-      metadata = addDocumentOptions.metadata;
-      fileContentType = addDocumentOptions.fileContentType;
+    private AddDocumentOptionsBuilder(AddDocumentOptions add_document_options) {
+      environment_id = add_document_options.environment_id;
+      collection_id = add_document_options.collection_id;
+      file = add_document_options.file;
+      filename = add_document_options.filename;
+      metadata = add_document_options.metadata;
+      file_content_type = add_document_options.file_content_type;
     }
 
     /**
@@ -119,42 +119,42 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
      */
-    public AddDocumentOptionsBuilder(String environmentId, String collectionId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
+    public AddDocumentOptionsBuilder(String environment_id, String collection_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
     }
 
     /**
      * Builds a AddDocumentOptions.
      *
-     * @return the addDocumentOptions
+     * @return the add_document_options
      */
     public AddDocumentOptions build() {
       return new AddDocumentOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the AddDocumentOptions builder
      */
-    public AddDocumentOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public AddDocumentOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the AddDocumentOptions builder
      */
-    public AddDocumentOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public AddDocumentOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
 
@@ -164,7 +164,7 @@ public class DiscoveryV1Models {
      * @param file the file
      * @return the AddDocumentOptions builder
      */
-    public AddDocumentOptionsBuilder file(String file) { // Was File, changed to compile correctly
+    public AddDocumentOptionsBuilder file(String file) {
       this.file = file;
       return this;
     }
@@ -192,13 +192,13 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the fileContentType.
+     * Set the file_content_type.
      *
-     * @param fileContentType the fileContentType
+     * @param file_content_type the file_content_type
      * @return the AddDocumentOptions builder
      */
-    public AddDocumentOptionsBuilder fileContentType(String fileContentType) {
-      this.fileContentType = fileContentType;
+    public AddDocumentOptionsBuilder fileContentType(String file_content_type) {
+      this.file_content_type = file_content_type;
       return this;
     }
   }
@@ -207,38 +207,38 @@ public class DiscoveryV1Models {
    * The addTrainingData options.
    */
   public class AddTrainingDataOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
-    private String naturalLanguageQuery;
+    private String environment_id;
+    private String collection_id;
+    private String natural_language_query;
     private String filter;
     private List<TrainingExample> examples;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
-     * Gets the naturalLanguageQuery.
+     * Gets the natural_language_query.
      *
-     * @return the naturalLanguageQuery
+     * @return the natural_language_query
      */
     public String naturalLanguageQuery() {
-      return naturalLanguageQuery;
+      return natural_language_query;
     }
     /**
      * Gets the filter.
@@ -257,11 +257,11 @@ public class DiscoveryV1Models {
       return examples;
     }
     private AddTrainingDataOptions(AddTrainingDataOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
-      naturalLanguageQuery = builder.naturalLanguageQuery;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
+      natural_language_query = builder.natural_language_query;
       filter = builder.filter;
       examples = builder.examples;
     }
@@ -280,18 +280,18 @@ public class DiscoveryV1Models {
    * AddTrainingDataOptions Builder.
    */
   public class AddTrainingDataOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
-    private String naturalLanguageQuery;
+    private String environment_id;
+    private String collection_id;
+    private String natural_language_query;
     private String filter;
     private List<TrainingExample> examples;
 
-    private AddTrainingDataOptionsBuilder(AddTrainingDataOptions addTrainingDataOptions) {
-      environmentId = addTrainingDataOptions.environmentId;
-      collectionId = addTrainingDataOptions.collectionId;
-      naturalLanguageQuery = addTrainingDataOptions.naturalLanguageQuery;
-      filter = addTrainingDataOptions.filter;
-      examples = addTrainingDataOptions.examples;
+    private AddTrainingDataOptionsBuilder(AddTrainingDataOptions add_training_data_options) {
+      environment_id = add_training_data_options.environment_id;
+      collection_id = add_training_data_options.collection_id;
+      natural_language_query = add_training_data_options.natural_language_query;
+      filter = add_training_data_options.filter;
+      examples = add_training_data_options.examples;
     }
 
     /**
@@ -303,18 +303,18 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
      */
-    public AddTrainingDataOptionsBuilder(String environmentId, String collectionId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
+    public AddTrainingDataOptionsBuilder(String environment_id, String collection_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
     }
 
     /**
      * Builds a AddTrainingDataOptions.
      *
-     * @return the addTrainingDataOptions
+     * @return the add_training_data_options
      */
     public AddTrainingDataOptions build() {
       return new AddTrainingDataOptions(this);
@@ -336,35 +336,35 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the AddTrainingDataOptions builder
      */
-    public AddTrainingDataOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public AddTrainingDataOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the AddTrainingDataOptions builder
      */
-    public AddTrainingDataOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public AddTrainingDataOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
 
     /**
-     * Set the naturalLanguageQuery.
+     * Set the natural_language_query.
      *
-     * @param naturalLanguageQuery the naturalLanguageQuery
+     * @param natural_language_query the natural_language_query
      * @return the AddTrainingDataOptions builder
      */
-    public AddTrainingDataOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
-      this.naturalLanguageQuery = naturalLanguageQuery;
+    public AddTrainingDataOptionsBuilder naturalLanguageQuery(String natural_language_query) {
+      this.natural_language_query = natural_language_query;
       return this;
     }
 
@@ -397,7 +397,7 @@ public class DiscoveryV1Models {
    */
   public class AggregationResult extends IBMWatsonGenericModel {
     private String key;
-    private Long matchingResults;
+    private Long matching_results;
     private List<QueryAggregation> aggregations;
     /**
      * Gets the key.
@@ -410,14 +410,14 @@ public class DiscoveryV1Models {
       return key;
     }
     /**
-     * Gets the matchingResults.
+     * Gets the matching_results.
      *
      * Number of matching results.
      *
-     * @return the matchingResults
+     * @return the matching_results
      */
     public Long getMatchingResults() {
-      return matchingResults;
+      return matching_results;
     }
     /**
      * Gets the aggregations.
@@ -440,12 +440,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the matchingResults.
+     * Sets the matching_results.
      *
-     * @param matchingResults the new matchingResults
+     * @param matching_results the new matching_results
      */
-    public void setMatchingResults(final long matchingResults) {
-      this.matchingResults = matchingResults;
+    public void setMatchingResults(final long matching_results) {
+      this.matching_results = matching_results;
     }
 
     /**
@@ -479,26 +479,26 @@ public class DiscoveryV1Models {
    * A collection for storing documents.
    */
   public class Collection extends IBMWatsonGenericModel {
-    private String collectionId;
+    private String collection_id;
     private String name;
     private String description;
     private Datetime created;
     private Datetime updated;
     private String status;
-    private String configurationId;
+    private String configuration_id;
     private String language;
-    private DocumentCounts documentCounts;
-    private CollectionDiskUsage diskUsage;
-    private TrainingStatus trainingStatus;
+    private DocumentCounts document_counts;
+    private CollectionDiskUsage disk_usage;
+    private TrainingStatus training_status;
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The unique identifier of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String getCollectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
      * Gets the name.
@@ -551,14 +551,14 @@ public class DiscoveryV1Models {
       return status;
     }
     /**
-     * Gets the configurationId.
+     * Gets the configuration_id.
      *
      * The unique identifier of the collection's configuration.
      *
-     * @return the configurationId
+     * @return the configuration_id
      */
     public String getConfigurationId() {
-      return configurationId;
+      return configuration_id;
     }
     /**
      * Gets the language.
@@ -571,34 +571,34 @@ public class DiscoveryV1Models {
       return language;
     }
     /**
-     * Gets the documentCounts.
+     * Gets the document_counts.
      *
      * The object providing information about the documents in the collection. Present only when retrieving details of a collection.
      *
-     * @return the documentCounts
+     * @return the document_counts
      */
     public DocumentCounts getDocumentCounts() {
-      return documentCounts;
+      return document_counts;
     }
     /**
-     * Gets the diskUsage.
+     * Gets the disk_usage.
      *
      * The object providing information about the disk usage of the collection. Present only when retrieving details of a collection.
      *
-     * @return the diskUsage
+     * @return the disk_usage
      */
     public CollectionDiskUsage getDiskUsage() {
-      return diskUsage;
+      return disk_usage;
     }
     /**
-     * Gets the trainingStatus.
+     * Gets the training_status.
      *
      * Provides information about the status of relevance training for collection.
      *
-     * @return the trainingStatus
+     * @return the training_status
      */
     public TrainingStatus getTrainingStatus() {
-      return trainingStatus;
+      return training_status;
     }
 
     /**
@@ -620,12 +620,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the configurationId.
+     * Sets the configuration_id.
      *
-     * @param configurationId the new configurationId
+     * @param configuration_id the new configuration_id
      */
-    public void setConfigurationId(final String configurationId) {
-      this.configurationId = configurationId;
+    public void setConfigurationId(final String configuration_id) {
+      this.configuration_id = configuration_id;
     }
 
     /**
@@ -638,30 +638,30 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the documentCounts.
+     * Sets the document_counts.
      *
-     * @param documentCounts the new documentCounts
+     * @param document_counts the new document_counts
      */
-    public void setDocumentCounts(final DocumentCounts documentCounts) {
-      this.documentCounts = documentCounts;
+    public void setDocumentCounts(final DocumentCounts document_counts) {
+      this.document_counts = document_counts;
     }
 
     /**
-     * Sets the diskUsage.
+     * Sets the disk_usage.
      *
-     * @param diskUsage the new diskUsage
+     * @param disk_usage the new disk_usage
      */
-    public void setDiskUsage(final CollectionDiskUsage diskUsage) {
-      this.diskUsage = diskUsage;
+    public void setDiskUsage(final CollectionDiskUsage disk_usage) {
+      this.disk_usage = disk_usage;
     }
 
     /**
-     * Sets the trainingStatus.
+     * Sets the training_status.
      *
-     * @param trainingStatus the new trainingStatus
+     * @param training_status the new training_status
      */
-    public void setTrainingStatus(final TrainingStatus trainingStatus) {
-      this.trainingStatus = trainingStatus;
+    public void setTrainingStatus(final TrainingStatus training_status) {
+      this.training_status = training_status;
     }
   }
 
@@ -669,16 +669,16 @@ public class DiscoveryV1Models {
    * Summary of the disk usage statistics for this collection.
    */
   public class CollectionDiskUsage extends IBMWatsonGenericModel {
-    private Long usedBytes;
+    private Long used_bytes;
     /**
-     * Gets the usedBytes.
+     * Gets the used_bytes.
      *
      * Number of bytes used by the collection.
      *
-     * @return the usedBytes
+     * @return the used_bytes
      */
     public Long getUsedBytes() {
-      return usedBytes;
+      return used_bytes;
     }
   }
 
@@ -686,7 +686,7 @@ public class DiscoveryV1Models {
    * A custom configuration for the environment.
    */
   public class Configuration extends IBMWatsonGenericModel {
-    private String configurationId;
+    private String configuration_id;
     private String name;
     private Datetime created;
     private Datetime updated;
@@ -695,14 +695,14 @@ public class DiscoveryV1Models {
     private List<Enrichment> enrichments;
     private List<NormalizationOperation> normalizations;
     /**
-     * Gets the configurationId.
+     * Gets the configuration_id.
      *
      * The unique identifier of the configuration.
      *
-     * @return the configurationId
+     * @return the configuration_id
      */
     public String getConfigurationId() {
-      return configurationId;
+      return configuration_id;
     }
     /**
      * Gets the name.
@@ -828,7 +828,7 @@ public class DiscoveryV1Models {
     private PdfSettings pdf;
     private WordSettings word;
     private HtmlSettings html;
-    private List<NormalizationOperation> jsonNormalizations;
+    private List<NormalizationOperation> json_normalizations;
     /**
      * Gets the pdf.
      *
@@ -860,14 +860,14 @@ public class DiscoveryV1Models {
       return html;
     }
     /**
-     * Gets the jsonNormalizations.
+     * Gets the json_normalizations.
      *
      * Defines operations that can be used to transform the final output JSON into a normalized form. Operations are executed in the order that they appear in the array.
      *
-     * @return the jsonNormalizations
+     * @return the json_normalizations
      */
     public List<NormalizationOperation> getJsonNormalizations() {
-      return jsonNormalizations;
+      return json_normalizations;
     }
 
     /**
@@ -898,12 +898,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the jsonNormalizations.
+     * Sets the json_normalizations.
      *
-     * @param jsonNormalizations the new jsonNormalizations
+     * @param json_normalizations the new json_normalizations
      */
-    public void setJsonNormalizations(final List<NormalizationOperation> jsonNormalizations) {
-      this.jsonNormalizations = jsonNormalizations;
+    public void setJsonNormalizations(final List<NormalizationOperation> json_normalizations) {
+      this.json_normalizations = json_normalizations;
     }
   }
 
@@ -911,20 +911,20 @@ public class DiscoveryV1Models {
    * The createCollection options.
    */
   public class CreateCollectionOptions extends IBMWatsonGenericModel {
-    private String environmentId;
+    private String environment_id;
     private String name;
     private String description;
-    private String configurationId;
+    private String configuration_id;
     private String language;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
      * Gets the name.
@@ -947,14 +947,14 @@ public class DiscoveryV1Models {
       return description;
     }
     /**
-     * Gets the configurationId.
+     * Gets the configuration_id.
      *
      * The ID of the configuration in which the collection is to be created.
      *
-     * @return the configurationId
+     * @return the configuration_id
      */
     public String configurationId() {
-      return configurationId;
+      return configuration_id;
     }
     /**
      * Gets the language.
@@ -967,12 +967,12 @@ public class DiscoveryV1Models {
       return language;
     }
     private CreateCollectionOptions(CreateCollectionOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
       IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
-      environmentId = builder.environmentId;
+      environment_id = builder.environment_id;
       name = builder.name;
       description = builder.description;
-      configurationId = builder.configurationId;
+      configuration_id = builder.configuration_id;
       language = builder.language;
     }
 
@@ -990,18 +990,18 @@ public class DiscoveryV1Models {
    * CreateCollectionOptions Builder.
    */
   public class CreateCollectionOptionsBuilder {
-    private String environmentId;
+    private String environment_id;
     private String name;
     private String description;
-    private String configurationId;
+    private String configuration_id;
     private String language;
 
-    private CreateCollectionOptionsBuilder(CreateCollectionOptions createCollectionOptions) {
-      environmentId = createCollectionOptions.environmentId;
-      name = createCollectionOptions.name;
-      description = createCollectionOptions.description;
-      configurationId = createCollectionOptions.configurationId;
-      language = createCollectionOptions.language;
+    private CreateCollectionOptionsBuilder(CreateCollectionOptions create_collection_options) {
+      environment_id = create_collection_options.environment_id;
+      name = create_collection_options.name;
+      description = create_collection_options.description;
+      configuration_id = create_collection_options.configuration_id;
+      language = create_collection_options.language;
     }
 
     /**
@@ -1013,31 +1013,31 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @param name the name
      */
-    public CreateCollectionOptionsBuilder(String environmentId, String name) {
-      this.environmentId = environmentId;
+    public CreateCollectionOptionsBuilder(String environment_id, String name) {
+      this.environment_id = environment_id;
       this.name = name;
     }
 
     /**
      * Builds a CreateCollectionOptions.
      *
-     * @return the createCollectionOptions
+     * @return the create_collection_options
      */
     public CreateCollectionOptions build() {
       return new CreateCollectionOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the CreateCollectionOptions builder
      */
-    public CreateCollectionOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public CreateCollectionOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
@@ -1064,13 +1064,13 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the configurationId.
+     * Set the configuration_id.
      *
-     * @param configurationId the configurationId
+     * @param configuration_id the configuration_id
      * @return the CreateCollectionOptions builder
      */
-    public CreateCollectionOptionsBuilder configurationId(String configurationId) {
-      this.configurationId = configurationId;
+    public CreateCollectionOptionsBuilder configurationId(String configuration_id) {
+      this.configuration_id = configuration_id;
       return this;
     }
 
@@ -1090,21 +1090,21 @@ public class DiscoveryV1Models {
    * The createConfiguration options.
    */
   public class CreateConfigurationOptions extends IBMWatsonGenericModel {
-    private String environmentId;
+    private String environment_id;
     private String name;
     private String description;
     private Conversions conversions;
     private List<Enrichment> enrichments;
     private List<NormalizationOperation> normalizations;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
      * Gets the name.
@@ -1157,8 +1157,8 @@ public class DiscoveryV1Models {
       return normalizations;
     }
     private CreateConfigurationOptions(CreateConfigurationOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      environmentId = builder.environmentId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      environment_id = builder.environment_id;
       name = builder.name;
       description = builder.description;
       conversions = builder.conversions;
@@ -1180,20 +1180,20 @@ public class DiscoveryV1Models {
    * CreateConfigurationOptions Builder.
    */
   public class CreateConfigurationOptionsBuilder {
-    private String environmentId;
+    private String environment_id;
     private String name;
     private String description;
     private Conversions conversions;
     private List<Enrichment> enrichments;
     private List<NormalizationOperation> normalizations;
 
-    private CreateConfigurationOptionsBuilder(CreateConfigurationOptions createConfigurationOptions) {
-      environmentId = createConfigurationOptions.environmentId;
-      name = createConfigurationOptions.name;
-      description = createConfigurationOptions.description;
-      conversions = createConfigurationOptions.conversions;
-      enrichments = createConfigurationOptions.enrichments;
-      normalizations = createConfigurationOptions.normalizations;
+    private CreateConfigurationOptionsBuilder(CreateConfigurationOptions create_configuration_options) {
+      environment_id = create_configuration_options.environment_id;
+      name = create_configuration_options.name;
+      description = create_configuration_options.description;
+      conversions = create_configuration_options.conversions;
+      enrichments = create_configuration_options.enrichments;
+      normalizations = create_configuration_options.normalizations;
     }
 
     /**
@@ -1205,16 +1205,16 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      */
-    public CreateConfigurationOptionsBuilder(String environmentId) {
-      this.environmentId = environmentId;
+    public CreateConfigurationOptionsBuilder(String environment_id) {
+      this.environment_id = environment_id;
     }
 
     /**
      * Builds a CreateConfigurationOptions.
      *
-     * @return the createConfigurationOptions
+     * @return the create_configuration_options
      */
     public CreateConfigurationOptions build() {
       return new CreateConfigurationOptions(this);
@@ -1251,13 +1251,13 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the CreateConfigurationOptions builder
      */
-    public CreateConfigurationOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public CreateConfigurationOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
@@ -1396,10 +1396,10 @@ public class DiscoveryV1Models {
     private String description;
     private Long size;
 
-    private CreateEnvironmentOptionsBuilder(CreateEnvironmentOptions createEnvironmentOptions) {
-      name = createEnvironmentOptions.name;
-      description = createEnvironmentOptions.description;
-      size = createEnvironmentOptions.size;
+    private CreateEnvironmentOptionsBuilder(CreateEnvironmentOptions create_environment_options) {
+      name = create_environment_options.name;
+      description = create_environment_options.description;
+      size = create_environment_options.size;
     }
 
     /**
@@ -1420,7 +1420,7 @@ public class DiscoveryV1Models {
     /**
      * Builds a CreateEnvironmentOptions.
      *
-     * @return the createEnvironmentOptions
+     * @return the create_environment_options
      */
     public CreateEnvironmentOptions build() {
       return new CreateEnvironmentOptions(this);
@@ -1454,7 +1454,7 @@ public class DiscoveryV1Models {
      * @param size the size
      * @return the CreateEnvironmentOptions builder
      */
-    public CreateEnvironmentOptionsBuilder size(long size) {
+    public CreateEnvironmentOptionsBuilder size(Long size) {
       this.size = size;
       return this;
     }
@@ -1464,57 +1464,57 @@ public class DiscoveryV1Models {
    * The createTrainingExample options.
    */
   public class CreateTrainingExampleOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
-    private String queryId;
-    private String documentId;
-    private String crossReference;
+    private String environment_id;
+    private String collection_id;
+    private String query_id;
+    private String document_id;
+    private String cross_reference;
     private Long relevance;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
-     * Gets the queryId.
+     * Gets the query_id.
      *
      * The ID of the query used for training.
      *
-     * @return the queryId
+     * @return the query_id
      */
     public String queryId() {
-      return queryId;
+      return query_id;
     }
     /**
-     * Gets the documentId.
+     * Gets the document_id.
      *
-     * @return the documentId
+     * @return the document_id
      */
     public String documentId() {
-      return documentId;
+      return document_id;
     }
     /**
-     * Gets the crossReference.
+     * Gets the cross_reference.
      *
-     * @return the crossReference
+     * @return the cross_reference
      */
     public String crossReference() {
-      return crossReference;
+      return cross_reference;
     }
     /**
      * Gets the relevance.
@@ -1525,14 +1525,14 @@ public class DiscoveryV1Models {
       return relevance;
     }
     private CreateTrainingExampleOptions(CreateTrainingExampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.queryId, 'queryId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
-      queryId = builder.queryId;
-      documentId = builder.documentId;
-      crossReference = builder.crossReference;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.query_id, 'query_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
+      query_id = builder.query_id;
+      document_id = builder.document_id;
+      cross_reference = builder.cross_reference;
       relevance = builder.relevance;
     }
 
@@ -1550,20 +1550,20 @@ public class DiscoveryV1Models {
    * CreateTrainingExampleOptions Builder.
    */
   public class CreateTrainingExampleOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
-    private String queryId;
-    private String documentId;
-    private String crossReference;
+    private String environment_id;
+    private String collection_id;
+    private String query_id;
+    private String document_id;
+    private String cross_reference;
     private Long relevance;
 
-    private CreateTrainingExampleOptionsBuilder(CreateTrainingExampleOptions createTrainingExampleOptions) {
-      environmentId = createTrainingExampleOptions.environmentId;
-      collectionId = createTrainingExampleOptions.collectionId;
-      queryId = createTrainingExampleOptions.queryId;
-      documentId = createTrainingExampleOptions.documentId;
-      crossReference = createTrainingExampleOptions.crossReference;
-      relevance = createTrainingExampleOptions.relevance;
+    private CreateTrainingExampleOptionsBuilder(CreateTrainingExampleOptions create_training_example_options) {
+      environment_id = create_training_example_options.environment_id;
+      collection_id = create_training_example_options.collection_id;
+      query_id = create_training_example_options.query_id;
+      document_id = create_training_example_options.document_id;
+      cross_reference = create_training_example_options.cross_reference;
+      relevance = create_training_example_options.relevance;
     }
 
     /**
@@ -1575,77 +1575,77 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
-     * @param queryId the queryId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
+     * @param query_id the query_id
      */
-    public CreateTrainingExampleOptionsBuilder(String environmentId, String collectionId, String queryId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
-      this.queryId = queryId;
+    public CreateTrainingExampleOptionsBuilder(String environment_id, String collection_id, String query_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
+      this.query_id = query_id;
     }
 
     /**
      * Builds a CreateTrainingExampleOptions.
      *
-     * @return the createTrainingExampleOptions
+     * @return the create_training_example_options
      */
     public CreateTrainingExampleOptions build() {
       return new CreateTrainingExampleOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public CreateTrainingExampleOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public CreateTrainingExampleOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
 
     /**
-     * Set the queryId.
+     * Set the query_id.
      *
-     * @param queryId the queryId
+     * @param query_id the query_id
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder queryId(String queryId) {
-      this.queryId = queryId;
+    public CreateTrainingExampleOptionsBuilder queryId(String query_id) {
+      this.query_id = query_id;
       return this;
     }
 
     /**
-     * Set the documentId.
+     * Set the document_id.
      *
-     * @param documentId the documentId
+     * @param document_id the document_id
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder documentId(String documentId) {
-      this.documentId = documentId;
+    public CreateTrainingExampleOptionsBuilder documentId(String document_id) {
+      this.document_id = document_id;
       return this;
     }
 
     /**
-     * Set the crossReference.
+     * Set the cross_reference.
      *
-     * @param crossReference the crossReference
+     * @param cross_reference the cross_reference
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder crossReference(String crossReference) {
-      this.crossReference = crossReference;
+    public CreateTrainingExampleOptionsBuilder crossReference(String cross_reference) {
+      this.cross_reference = cross_reference;
       return this;
     }
 
@@ -1655,21 +1655,21 @@ public class DiscoveryV1Models {
      * @param relevance the relevance
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder relevance(long relevance) {
+    public CreateTrainingExampleOptionsBuilder relevance(Long relevance) {
       this.relevance = relevance;
       return this;
     }
 
     /**
-     * Set the trainingExample.
+     * Set the training_example.
      *
-     * @param trainingExample the trainingExample
+     * @param training_example the training_example
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder trainingExample(TrainingExample trainingExample) {
-      this.documentId = trainingExample.getDocumentId();
-      this.crossReference = trainingExample.getCrossReference();
-      this.relevance = trainingExample.getRelevance();
+    public CreateTrainingExampleOptionsBuilder training_example(TrainingExample training_example) {
+      this.document_id = training_example.getDocumentId();
+      this.cross_reference = training_example.getCrossReference();
+      this.relevance = training_example.getRelevance();
       return this;
     }
   }
@@ -1678,33 +1678,33 @@ public class DiscoveryV1Models {
    * The deleteAllTrainingData options.
    */
   public class DeleteAllTrainingDataOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     private DeleteAllTrainingDataOptions(DeleteAllTrainingDataOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
     }
 
     /**
@@ -1721,12 +1721,12 @@ public class DiscoveryV1Models {
    * DeleteAllTrainingDataOptions Builder.
    */
   public class DeleteAllTrainingDataOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
 
-    private DeleteAllTrainingDataOptionsBuilder(DeleteAllTrainingDataOptions deleteAllTrainingDataOptions) {
-      environmentId = deleteAllTrainingDataOptions.environmentId;
-      collectionId = deleteAllTrainingDataOptions.collectionId;
+    private DeleteAllTrainingDataOptionsBuilder(DeleteAllTrainingDataOptions delete_all_training_data_options) {
+      environment_id = delete_all_training_data_options.environment_id;
+      collection_id = delete_all_training_data_options.collection_id;
     }
 
     /**
@@ -1738,42 +1738,42 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
      */
-    public DeleteAllTrainingDataOptionsBuilder(String environmentId, String collectionId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
+    public DeleteAllTrainingDataOptionsBuilder(String environment_id, String collection_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
     }
 
     /**
      * Builds a DeleteAllTrainingDataOptions.
      *
-     * @return the deleteAllTrainingDataOptions
+     * @return the delete_all_training_data_options
      */
     public DeleteAllTrainingDataOptions build() {
       return new DeleteAllTrainingDataOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the DeleteAllTrainingDataOptions builder
      */
-    public DeleteAllTrainingDataOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public DeleteAllTrainingDataOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the DeleteAllTrainingDataOptions builder
      */
-    public DeleteAllTrainingDataOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public DeleteAllTrainingDataOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
   }
@@ -1782,33 +1782,33 @@ public class DiscoveryV1Models {
    * The deleteCollection options.
    */
   public class DeleteCollectionOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     private DeleteCollectionOptions(DeleteCollectionOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
     }
 
     /**
@@ -1825,12 +1825,12 @@ public class DiscoveryV1Models {
    * DeleteCollectionOptions Builder.
    */
   public class DeleteCollectionOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
 
-    private DeleteCollectionOptionsBuilder(DeleteCollectionOptions deleteCollectionOptions) {
-      environmentId = deleteCollectionOptions.environmentId;
-      collectionId = deleteCollectionOptions.collectionId;
+    private DeleteCollectionOptionsBuilder(DeleteCollectionOptions delete_collection_options) {
+      environment_id = delete_collection_options.environment_id;
+      collection_id = delete_collection_options.collection_id;
     }
 
     /**
@@ -1842,42 +1842,42 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
      */
-    public DeleteCollectionOptionsBuilder(String environmentId, String collectionId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
+    public DeleteCollectionOptionsBuilder(String environment_id, String collection_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
     }
 
     /**
      * Builds a DeleteCollectionOptions.
      *
-     * @return the deleteCollectionOptions
+     * @return the delete_collection_options
      */
     public DeleteCollectionOptions build() {
       return new DeleteCollectionOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the DeleteCollectionOptions builder
      */
-    public DeleteCollectionOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public DeleteCollectionOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the DeleteCollectionOptions builder
      */
-    public DeleteCollectionOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public DeleteCollectionOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
   }
@@ -1886,33 +1886,33 @@ public class DiscoveryV1Models {
    * The deleteConfiguration options.
    */
   public class DeleteConfigurationOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String configurationId;
+    private String environment_id;
+    private String configuration_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the configurationId.
+     * Gets the configuration_id.
      *
      * The ID of the configuration.
      *
-     * @return the configurationId
+     * @return the configuration_id
      */
     public String configurationId() {
-      return configurationId;
+      return configuration_id;
     }
     private DeleteConfigurationOptions(DeleteConfigurationOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.configurationId, 'configurationId cannot be empty');
-      environmentId = builder.environmentId;
-      configurationId = builder.configurationId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.configuration_id, 'configuration_id cannot be empty');
+      environment_id = builder.environment_id;
+      configuration_id = builder.configuration_id;
     }
 
     /**
@@ -1929,12 +1929,12 @@ public class DiscoveryV1Models {
    * DeleteConfigurationOptions Builder.
    */
   public class DeleteConfigurationOptionsBuilder {
-    private String environmentId;
-    private String configurationId;
+    private String environment_id;
+    private String configuration_id;
 
-    private DeleteConfigurationOptionsBuilder(DeleteConfigurationOptions deleteConfigurationOptions) {
-      environmentId = deleteConfigurationOptions.environmentId;
-      configurationId = deleteConfigurationOptions.configurationId;
+    private DeleteConfigurationOptionsBuilder(DeleteConfigurationOptions delete_configuration_options) {
+      environment_id = delete_configuration_options.environment_id;
+      configuration_id = delete_configuration_options.configuration_id;
     }
 
     /**
@@ -1946,42 +1946,42 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param configurationId the configurationId
+     * @param environment_id the environment_id
+     * @param configuration_id the configuration_id
      */
-    public DeleteConfigurationOptionsBuilder(String environmentId, String configurationId) {
-      this.environmentId = environmentId;
-      this.configurationId = configurationId;
+    public DeleteConfigurationOptionsBuilder(String environment_id, String configuration_id) {
+      this.environment_id = environment_id;
+      this.configuration_id = configuration_id;
     }
 
     /**
      * Builds a DeleteConfigurationOptions.
      *
-     * @return the deleteConfigurationOptions
+     * @return the delete_configuration_options
      */
     public DeleteConfigurationOptions build() {
       return new DeleteConfigurationOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the DeleteConfigurationOptions builder
      */
-    public DeleteConfigurationOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public DeleteConfigurationOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the configurationId.
+     * Set the configuration_id.
      *
-     * @param configurationId the configurationId
+     * @param configuration_id the configuration_id
      * @return the DeleteConfigurationOptions builder
      */
-    public DeleteConfigurationOptionsBuilder configurationId(String configurationId) {
-      this.configurationId = configurationId;
+    public DeleteConfigurationOptionsBuilder configurationId(String configuration_id) {
+      this.configuration_id = configuration_id;
       return this;
     }
   }
@@ -1990,46 +1990,46 @@ public class DiscoveryV1Models {
    * The deleteDocument options.
    */
   public class DeleteDocumentOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
-    private String documentId;
+    private String environment_id;
+    private String collection_id;
+    private String document_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
-     * Gets the documentId.
+     * Gets the document_id.
      *
      * The ID of the document.
      *
-     * @return the documentId
+     * @return the document_id
      */
     public String documentId() {
-      return documentId;
+      return document_id;
     }
     private DeleteDocumentOptions(DeleteDocumentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.documentId, 'documentId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
-      documentId = builder.documentId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.document_id, 'document_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
+      document_id = builder.document_id;
     }
 
     /**
@@ -2046,14 +2046,14 @@ public class DiscoveryV1Models {
    * DeleteDocumentOptions Builder.
    */
   public class DeleteDocumentOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
-    private String documentId;
+    private String environment_id;
+    private String collection_id;
+    private String document_id;
 
-    private DeleteDocumentOptionsBuilder(DeleteDocumentOptions deleteDocumentOptions) {
-      environmentId = deleteDocumentOptions.environmentId;
-      collectionId = deleteDocumentOptions.collectionId;
-      documentId = deleteDocumentOptions.documentId;
+    private DeleteDocumentOptionsBuilder(DeleteDocumentOptions delete_document_options) {
+      environment_id = delete_document_options.environment_id;
+      collection_id = delete_document_options.collection_id;
+      document_id = delete_document_options.document_id;
     }
 
     /**
@@ -2065,55 +2065,55 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
-     * @param documentId the documentId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
+     * @param document_id the document_id
      */
-    public DeleteDocumentOptionsBuilder(String environmentId, String collectionId, String documentId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
-      this.documentId = documentId;
+    public DeleteDocumentOptionsBuilder(String environment_id, String collection_id, String document_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
+      this.document_id = document_id;
     }
 
     /**
      * Builds a DeleteDocumentOptions.
      *
-     * @return the deleteDocumentOptions
+     * @return the delete_document_options
      */
     public DeleteDocumentOptions build() {
       return new DeleteDocumentOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the DeleteDocumentOptions builder
      */
-    public DeleteDocumentOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public DeleteDocumentOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the DeleteDocumentOptions builder
      */
-    public DeleteDocumentOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public DeleteDocumentOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
 
     /**
-     * Set the documentId.
+     * Set the document_id.
      *
-     * @param documentId the documentId
+     * @param document_id the document_id
      * @return the DeleteDocumentOptions builder
      */
-    public DeleteDocumentOptionsBuilder documentId(String documentId) {
-      this.documentId = documentId;
+    public DeleteDocumentOptionsBuilder documentId(String document_id) {
+      this.document_id = document_id;
       return this;
     }
   }
@@ -2122,20 +2122,20 @@ public class DiscoveryV1Models {
    * The deleteEnvironment options.
    */
   public class DeleteEnvironmentOptions extends IBMWatsonGenericModel {
-    private String environmentId;
+    private String environment_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     private DeleteEnvironmentOptions(DeleteEnvironmentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      environmentId = builder.environmentId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      environment_id = builder.environment_id;
     }
 
     /**
@@ -2152,10 +2152,10 @@ public class DiscoveryV1Models {
    * DeleteEnvironmentOptions Builder.
    */
   public class DeleteEnvironmentOptionsBuilder {
-    private String environmentId;
+    private String environment_id;
 
-    private DeleteEnvironmentOptionsBuilder(DeleteEnvironmentOptions deleteEnvironmentOptions) {
-      environmentId = deleteEnvironmentOptions.environmentId;
+    private DeleteEnvironmentOptionsBuilder(DeleteEnvironmentOptions delete_environment_options) {
+      environment_id = delete_environment_options.environment_id;
     }
 
     /**
@@ -2167,29 +2167,29 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      */
-    public DeleteEnvironmentOptionsBuilder(String environmentId) {
-      this.environmentId = environmentId;
+    public DeleteEnvironmentOptionsBuilder(String environment_id) {
+      this.environment_id = environment_id;
     }
 
     /**
      * Builds a DeleteEnvironmentOptions.
      *
-     * @return the deleteEnvironmentOptions
+     * @return the delete_environment_options
      */
     public DeleteEnvironmentOptions build() {
       return new DeleteEnvironmentOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the DeleteEnvironmentOptions builder
      */
-    public DeleteEnvironmentOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public DeleteEnvironmentOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
   }
@@ -2198,46 +2198,46 @@ public class DiscoveryV1Models {
    * The deleteTrainingData options.
    */
   public class DeleteTrainingDataOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
-    private String queryId;
+    private String environment_id;
+    private String collection_id;
+    private String query_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
-     * Gets the queryId.
+     * Gets the query_id.
      *
      * The ID of the query used for training.
      *
-     * @return the queryId
+     * @return the query_id
      */
     public String queryId() {
-      return queryId;
+      return query_id;
     }
     private DeleteTrainingDataOptions(DeleteTrainingDataOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.queryId, 'queryId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
-      queryId = builder.queryId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.query_id, 'query_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
+      query_id = builder.query_id;
     }
 
     /**
@@ -2254,14 +2254,14 @@ public class DiscoveryV1Models {
    * DeleteTrainingDataOptions Builder.
    */
   public class DeleteTrainingDataOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
-    private String queryId;
+    private String environment_id;
+    private String collection_id;
+    private String query_id;
 
-    private DeleteTrainingDataOptionsBuilder(DeleteTrainingDataOptions deleteTrainingDataOptions) {
-      environmentId = deleteTrainingDataOptions.environmentId;
-      collectionId = deleteTrainingDataOptions.collectionId;
-      queryId = deleteTrainingDataOptions.queryId;
+    private DeleteTrainingDataOptionsBuilder(DeleteTrainingDataOptions delete_training_data_options) {
+      environment_id = delete_training_data_options.environment_id;
+      collection_id = delete_training_data_options.collection_id;
+      query_id = delete_training_data_options.query_id;
     }
 
     /**
@@ -2273,55 +2273,55 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
-     * @param queryId the queryId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
+     * @param query_id the query_id
      */
-    public DeleteTrainingDataOptionsBuilder(String environmentId, String collectionId, String queryId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
-      this.queryId = queryId;
+    public DeleteTrainingDataOptionsBuilder(String environment_id, String collection_id, String query_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
+      this.query_id = query_id;
     }
 
     /**
      * Builds a DeleteTrainingDataOptions.
      *
-     * @return the deleteTrainingDataOptions
+     * @return the delete_training_data_options
      */
     public DeleteTrainingDataOptions build() {
       return new DeleteTrainingDataOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the DeleteTrainingDataOptions builder
      */
-    public DeleteTrainingDataOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public DeleteTrainingDataOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the DeleteTrainingDataOptions builder
      */
-    public DeleteTrainingDataOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public DeleteTrainingDataOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
 
     /**
-     * Set the queryId.
+     * Set the query_id.
      *
-     * @param queryId the queryId
+     * @param query_id the query_id
      * @return the DeleteTrainingDataOptions builder
      */
-    public DeleteTrainingDataOptionsBuilder queryId(String queryId) {
-      this.queryId = queryId;
+    public DeleteTrainingDataOptionsBuilder queryId(String query_id) {
+      this.query_id = query_id;
       return this;
     }
   }
@@ -2330,59 +2330,59 @@ public class DiscoveryV1Models {
    * The deleteTrainingExample options.
    */
   public class DeleteTrainingExampleOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
-    private String queryId;
-    private String exampleId;
+    private String environment_id;
+    private String collection_id;
+    private String query_id;
+    private String example_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
-     * Gets the queryId.
+     * Gets the query_id.
      *
      * The ID of the query used for training.
      *
-     * @return the queryId
+     * @return the query_id
      */
     public String queryId() {
-      return queryId;
+      return query_id;
     }
     /**
-     * Gets the exampleId.
+     * Gets the example_id.
      *
      * The ID of the document as it is indexed.
      *
-     * @return the exampleId
+     * @return the example_id
      */
     public String exampleId() {
-      return exampleId;
+      return example_id;
     }
     private DeleteTrainingExampleOptions(DeleteTrainingExampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.queryId, 'queryId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.exampleId, 'exampleId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
-      queryId = builder.queryId;
-      exampleId = builder.exampleId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.query_id, 'query_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.example_id, 'example_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
+      query_id = builder.query_id;
+      example_id = builder.example_id;
     }
 
     /**
@@ -2399,16 +2399,16 @@ public class DiscoveryV1Models {
    * DeleteTrainingExampleOptions Builder.
    */
   public class DeleteTrainingExampleOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
-    private String queryId;
-    private String exampleId;
+    private String environment_id;
+    private String collection_id;
+    private String query_id;
+    private String example_id;
 
-    private DeleteTrainingExampleOptionsBuilder(DeleteTrainingExampleOptions deleteTrainingExampleOptions) {
-      environmentId = deleteTrainingExampleOptions.environmentId;
-      collectionId = deleteTrainingExampleOptions.collectionId;
-      queryId = deleteTrainingExampleOptions.queryId;
-      exampleId = deleteTrainingExampleOptions.exampleId;
+    private DeleteTrainingExampleOptionsBuilder(DeleteTrainingExampleOptions delete_training_example_options) {
+      environment_id = delete_training_example_options.environment_id;
+      collection_id = delete_training_example_options.collection_id;
+      query_id = delete_training_example_options.query_id;
+      example_id = delete_training_example_options.example_id;
     }
 
     /**
@@ -2420,68 +2420,68 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
-     * @param queryId the queryId
-     * @param exampleId the exampleId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
+     * @param query_id the query_id
+     * @param example_id the example_id
      */
-    public DeleteTrainingExampleOptionsBuilder(String environmentId, String collectionId, String queryId, String exampleId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
-      this.queryId = queryId;
-      this.exampleId = exampleId;
+    public DeleteTrainingExampleOptionsBuilder(String environment_id, String collection_id, String query_id, String example_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
+      this.query_id = query_id;
+      this.example_id = example_id;
     }
 
     /**
      * Builds a DeleteTrainingExampleOptions.
      *
-     * @return the deleteTrainingExampleOptions
+     * @return the delete_training_example_options
      */
     public DeleteTrainingExampleOptions build() {
       return new DeleteTrainingExampleOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the DeleteTrainingExampleOptions builder
      */
-    public DeleteTrainingExampleOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public DeleteTrainingExampleOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the DeleteTrainingExampleOptions builder
      */
-    public DeleteTrainingExampleOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public DeleteTrainingExampleOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
 
     /**
-     * Set the queryId.
+     * Set the query_id.
      *
-     * @param queryId the queryId
+     * @param query_id the query_id
      * @return the DeleteTrainingExampleOptions builder
      */
-    public DeleteTrainingExampleOptionsBuilder queryId(String queryId) {
-      this.queryId = queryId;
+    public DeleteTrainingExampleOptionsBuilder queryId(String query_id) {
+      this.query_id = query_id;
       return this;
     }
 
     /**
-     * Set the exampleId.
+     * Set the example_id.
      *
-     * @param exampleId the exampleId
+     * @param example_id the example_id
      * @return the DeleteTrainingExampleOptions builder
      */
-    public DeleteTrainingExampleOptionsBuilder exampleId(String exampleId) {
-      this.exampleId = exampleId;
+    public DeleteTrainingExampleOptionsBuilder exampleId(String example_id) {
+      this.example_id = example_id;
       return this;
     }
   }
@@ -2490,41 +2490,41 @@ public class DiscoveryV1Models {
    * Summary of the disk usage statistics for the environment.
    */
   public class DiskUsage extends IBMWatsonGenericModel {
-    private Long usedBytes;
-    private Long maximumAllowedBytes;
-    private Long totalBytes;
+    private Long used_bytes;
+    private Long maximum_allowed_bytes;
+    private Long total_bytes;
     private String used;
     private String total;
-    private Double percentUsed;
+    private Double percent_used;
     /**
-     * Gets the usedBytes.
+     * Gets the used_bytes.
      *
      * Number of bytes used on the environment's disk capacity.
      *
-     * @return the usedBytes
+     * @return the used_bytes
      */
     public Long getUsedBytes() {
-      return usedBytes;
+      return used_bytes;
     }
     /**
-     * Gets the maximumAllowedBytes.
+     * Gets the maximum_allowed_bytes.
      *
      * Total number of bytes available in the environment's disk capacity.
      *
-     * @return the maximumAllowedBytes
+     * @return the maximum_allowed_bytes
      */
     public Long getMaximumAllowedBytes() {
-      return maximumAllowedBytes;
+      return maximum_allowed_bytes;
     }
     /**
-     * Gets the totalBytes.
+     * Gets the total_bytes.
      *
      * **Deprecated**: Total number of bytes available in the environment's disk capacity.
      *
-     * @return the totalBytes
+     * @return the total_bytes
      */
     public Long getTotalBytes() {
-      return totalBytes;
+      return total_bytes;
     }
     /**
      * Gets the used.
@@ -2547,14 +2547,14 @@ public class DiscoveryV1Models {
       return total;
     }
     /**
-     * Gets the percentUsed.
+     * Gets the percent_used.
      *
      * **Deprecated**: Percentage of the environment's disk capacity that is being used.
      *
-     * @return the percentUsed
+     * @return the percent_used
      */
     public Double getPercentUsed() {
-      return percentUsed;
+      return percent_used;
     }
   }
 
@@ -2562,18 +2562,18 @@ public class DiscoveryV1Models {
    * DocumentAccepted.
    */
   public class DocumentAccepted extends IBMWatsonGenericModel {
-    private String documentId;
+    private String document_id;
     private String status;
     private List<Notice> notices;
     /**
-     * Gets the documentId.
+     * Gets the document_id.
      *
      * The unique identifier of the ingested document.
      *
-     * @return the documentId
+     * @return the document_id
      */
     public String getDocumentId() {
-      return documentId;
+      return document_id;
     }
     /**
      * Gets the status.
@@ -2597,12 +2597,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the documentId.
+     * Sets the document_id.
      *
-     * @param documentId the new documentId
+     * @param document_id the new document_id
      */
-    public void setDocumentId(final String documentId) {
-      this.documentId = documentId;
+    public void setDocumentId(final String document_id) {
+      this.document_id = document_id;
     }
 
     /**
@@ -2709,35 +2709,35 @@ public class DiscoveryV1Models {
    * Status information about a submitted document.
    */
   public class DocumentStatus extends IBMWatsonGenericModel {
-    private String documentId;
-    private String configurationId;
+    private String document_id;
+    private String configuration_id;
     private Datetime created;
     private Datetime updated;
     private String status;
-    private String statusDescription;
+    private String status_description;
     private String filename;
-    private String fileType;
+    private String file_type;
     private String sha1;
     private List<Notice> notices;
     /**
-     * Gets the documentId.
+     * Gets the document_id.
      *
      * The unique identifier of the document.
      *
-     * @return the documentId
+     * @return the document_id
      */
     public String getDocumentId() {
-      return documentId;
+      return document_id;
     }
     /**
-     * Gets the configurationId.
+     * Gets the configuration_id.
      *
      * The unique identifier for the configuration.
      *
-     * @return the configurationId
+     * @return the configuration_id
      */
     public String getConfigurationId() {
-      return configurationId;
+      return configuration_id;
     }
     /**
      * Gets the created.
@@ -2770,14 +2770,14 @@ public class DiscoveryV1Models {
       return status;
     }
     /**
-     * Gets the statusDescription.
+     * Gets the status_description.
      *
      * Description of the document status.
      *
-     * @return the statusDescription
+     * @return the status_description
      */
     public String getStatusDescription() {
-      return statusDescription;
+      return status_description;
     }
     /**
      * Gets the filename.
@@ -2790,14 +2790,14 @@ public class DiscoveryV1Models {
       return filename;
     }
     /**
-     * Gets the fileType.
+     * Gets the file_type.
      *
      * The type of the original source file.
      *
-     * @return the fileType
+     * @return the file_type
      */
     public String getFileType() {
-      return fileType;
+      return file_type;
     }
     /**
      * Gets the sha1.
@@ -2830,12 +2830,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the fileType.
+     * Sets the file_type.
      *
-     * @param fileType the new fileType
+     * @param file_type the new file_type
      */
-    public void setFileType(final String fileType) {
-      this.fileType = fileType;
+    public void setFileType(final String file_type) {
+      this.file_type = file_type;
     }
 
     /**
@@ -2862,11 +2862,11 @@ public class DiscoveryV1Models {
    */
   public class Enrichment extends IBMWatsonGenericModel {
     private String description;
-    private String destinationField;
-    private String sourceField;
+    private String destination_field;
+    private String source_field;
     private Boolean overwrite;
-    private String enrichmentName;
-    private Boolean ignoreDownstreamErrors;
+    private String enrichment_name;
+    private Boolean ignore_downstream_errors;
     private EnrichmentOptions options;
     /**
      * Gets the description.
@@ -2879,24 +2879,24 @@ public class DiscoveryV1Models {
       return description;
     }
     /**
-     * Gets the destinationField.
+     * Gets the destination_field.
      *
      * Field where enrichments will be stored. This field must already exist or be at most 1 level deeper than an existing field. For example, if `text` is a top-level field with no sub-fields, `text.foo` is a valid destination but `text.foo.bar` is not.
      *
-     * @return the destinationField
+     * @return the destination_field
      */
     public String getDestinationField() {
-      return destinationField;
+      return destination_field;
     }
     /**
-     * Gets the sourceField.
+     * Gets the source_field.
      *
      * Field to be enriched.
      *
-     * @return the sourceField
+     * @return the source_field
      */
     public String getSourceField() {
-      return sourceField;
+      return source_field;
     }
     /**
      * Gets the overwrite.
@@ -2909,24 +2909,24 @@ public class DiscoveryV1Models {
       return overwrite;
     }
     /**
-     * Gets the enrichmentName.
+     * Gets the enrichment_name.
      *
      * Name of the enrichment service to call. Currently the only valid value is `alchemy_language`.
      *
-     * @return the enrichmentName
+     * @return the enrichment_name
      */
     public String getEnrichmentName() {
-      return enrichmentName;
+      return enrichment_name;
     }
     /**
-     * Gets the ignoreDownstreamErrors.
+     * Gets the ignore_downstream_errors.
      *
      * If true, then most errors generated during the enrichment process will be treated as warnings and will not cause the document to fail processing.
      *
-     * @return the ignoreDownstreamErrors
+     * @return the ignore_downstream_errors
      */
     public Boolean isIgnoreDownstreamErrors() {
-      return ignoreDownstreamErrors;
+      return ignore_downstream_errors;
     }
     /**
      * Gets the options.
@@ -2949,21 +2949,21 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the destinationField.
+     * Sets the destination_field.
      *
-     * @param destinationField the new destinationField
+     * @param destination_field the new destination_field
      */
-    public void setDestinationField(final String destinationField) {
-      this.destinationField = destinationField;
+    public void setDestinationField(final String destination_field) {
+      this.destination_field = destination_field;
     }
 
     /**
-     * Sets the sourceField.
+     * Sets the source_field.
      *
-     * @param sourceField the new sourceField
+     * @param source_field the new source_field
      */
-    public void setSourceField(final String sourceField) {
-      this.sourceField = sourceField;
+    public void setSourceField(final String source_field) {
+      this.source_field = source_field;
     }
 
     /**
@@ -2976,21 +2976,21 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the enrichmentName.
+     * Sets the enrichment_name.
      *
-     * @param enrichmentName the new enrichmentName
+     * @param enrichment_name the new enrichment_name
      */
-    public void setEnrichmentName(final String enrichmentName) {
-      this.enrichmentName = enrichmentName;
+    public void setEnrichmentName(final String enrichment_name) {
+      this.enrichment_name = enrichment_name;
     }
 
     /**
-     * Sets the ignoreDownstreamErrors.
+     * Sets the ignore_downstream_errors.
      *
-     * @param ignoreDownstreamErrors the new ignoreDownstreamErrors
+     * @param ignore_downstream_errors the new ignore_downstream_errors
      */
-    public void setIgnoreDownstreamErrors(final Boolean ignoreDownstreamErrors) {
-      this.ignoreDownstreamErrors = ignoreDownstreamErrors;
+    public void setIgnoreDownstreamErrors(final Boolean ignore_downstream_errors) {
+      this.ignore_downstream_errors = ignore_downstream_errors;
     }
 
     /**
@@ -3010,8 +3010,8 @@ public class DiscoveryV1Models {
     private List<String> extract;
     private Boolean sentiment;
     private Boolean quotations;
-    private Boolean showSourceText;
-    private Boolean hierarchicalTypedRelations;
+    private Boolean show_source_text;
+    private Boolean hierarchical_typed_relations;
     private String model;
     private String language;
     /**
@@ -3041,20 +3041,20 @@ public class DiscoveryV1Models {
       return quotations;
     }
     /**
-     * Gets the showSourceText.
+     * Gets the show_source_text.
      *
-     * @return the showSourceText
+     * @return the show_source_text
      */
     public Boolean isShowSourceText() {
-      return showSourceText;
+      return show_source_text;
     }
     /**
-     * Gets the hierarchicalTypedRelations.
+     * Gets the hierarchical_typed_relations.
      *
-     * @return the hierarchicalTypedRelations
+     * @return the hierarchical_typed_relations
      */
     public Boolean isHierarchicalTypedRelations() {
-      return hierarchicalTypedRelations;
+      return hierarchical_typed_relations;
     }
     /**
      * Gets the model.
@@ -3105,21 +3105,21 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the showSourceText.
+     * Sets the show_source_text.
      *
-     * @param showSourceText the new showSourceText
+     * @param show_source_text the new show_source_text
      */
-    public void setShowSourceText(final Boolean showSourceText) {
-      this.showSourceText = showSourceText;
+    public void setShowSourceText(final Boolean show_source_text) {
+      this.show_source_text = show_source_text;
     }
 
     /**
-     * Sets the hierarchicalTypedRelations.
+     * Sets the hierarchical_typed_relations.
      *
-     * @param hierarchicalTypedRelations the new hierarchicalTypedRelations
+     * @param hierarchical_typed_relations the new hierarchical_typed_relations
      */
-    public void setHierarchicalTypedRelations(final Boolean hierarchicalTypedRelations) {
-      this.hierarchicalTypedRelations = hierarchicalTypedRelations;
+    public void setHierarchicalTypedRelations(final Boolean hierarchical_typed_relations) {
+      this.hierarchical_typed_relations = hierarchical_typed_relations;
     }
 
     /**
@@ -3145,24 +3145,24 @@ public class DiscoveryV1Models {
    * Details about an environment.
    */
   public class Environment extends IBMWatsonGenericModel {
-    private String environmentId;
+    private String environment_id;
     private String name;
     private String description;
     private Datetime created;
     private Datetime updated;
     private String status;
-    private Boolean readOnly;
+    private Boolean read_only;
     private Long size;
-    private IndexCapacity indexCapacity;
+    private IndexCapacity index_capacity;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * Unique identifier for the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String getEnvironmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
      * Gets the name.
@@ -3215,14 +3215,14 @@ public class DiscoveryV1Models {
       return status;
     }
     /**
-     * Gets the readOnly.
+     * Gets the read_only.
      *
      * If true, then the environment contains read-only collections which are maintained by IBM.
      *
-     * @return the readOnly
+     * @return the read_only
      */
     public Boolean isReadOnly() {
-      return readOnly;
+      return read_only;
     }
     /**
      * Gets the size.
@@ -3235,14 +3235,14 @@ public class DiscoveryV1Models {
       return size;
     }
     /**
-     * Gets the indexCapacity.
+     * Gets the index_capacity.
      *
      * Details about the resource usage and capacity of the environment.
      *
-     * @return the indexCapacity
+     * @return the index_capacity
      */
     public IndexCapacity getIndexCapacity() {
-      return indexCapacity;
+      return index_capacity;
     }
 
     /**
@@ -3273,12 +3273,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the indexCapacity.
+     * Sets the index_capacity.
      *
-     * @param indexCapacity the new indexCapacity
+     * @param index_capacity the new index_capacity
      */
-    public void setIndexCapacity(final IndexCapacity indexCapacity) {
-      this.indexCapacity = indexCapacity;
+    public void setIndexCapacity(final IndexCapacity index_capacity) {
+      this.index_capacity = index_capacity;
     }
   }
 
@@ -3287,7 +3287,7 @@ public class DiscoveryV1Models {
    */
   public class EnvironmentDocuments extends IBMWatsonGenericModel {
     private Long indexed;
-    private Long maximumAllowed;
+    private Long maximum_allowed;
     /**
      * Gets the indexed.
      *
@@ -3299,14 +3299,14 @@ public class DiscoveryV1Models {
       return indexed;
     }
     /**
-     * Gets the maximumAllowed.
+     * Gets the maximum_allowed.
      *
      * Total number of documents allowed in the environment's capacity.
      *
-     * @return the maximumAllowed
+     * @return the maximum_allowed
      */
     public Long getMaximumAllowed() {
-      return maximumAllowed;
+      return maximum_allowed;
     }
   }
 
@@ -3314,37 +3314,37 @@ public class DiscoveryV1Models {
    * The federatedQueryNotices options.
    */
   public class FederatedQueryNoticesOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private List<String> collectionIds;
+    private String environment_id;
+    private List<String> collection_ids;
     private String filter;
     private String query;
-    private String naturalLanguageQuery;
+    private String natural_language_query;
     private String aggregation;
     private Long count;
-    private List<String> returnFields;
+    private List<String> return_fields;
     private Long offset;
     private List<String> xsort;
     private Boolean highlight;
-    private String deduplicateField;
+    private String deduplicate_field;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionIds.
+     * Gets the collection_ids.
      *
      * A comma-separated list of collection IDs to be queried against.
      *
-     * @return the collectionIds
+     * @return the collection_ids
      */
     public List<String> collectionIds() {
-      return collectionIds;
+      return collection_ids;
     }
     /**
      * Gets the filter.
@@ -3367,14 +3367,14 @@ public class DiscoveryV1Models {
       return query;
     }
     /**
-     * Gets the naturalLanguageQuery.
+     * Gets the natural_language_query.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
      *
-     * @return the naturalLanguageQuery
+     * @return the natural_language_query
      */
     public String naturalLanguageQuery() {
-      return naturalLanguageQuery;
+      return natural_language_query;
     }
     /**
      * Gets the aggregation.
@@ -3397,14 +3397,14 @@ public class DiscoveryV1Models {
       return count;
     }
     /**
-     * Gets the returnFields.
+     * Gets the return_fields.
      *
      * A comma separated list of the portion of the document hierarchy to return.
      *
-     * @return the returnFields
+     * @return the return_fields
      */
     public List<String> returnFields() {
-      return returnFields;
+      return return_fields;
     }
     /**
      * Gets the offset.
@@ -3437,30 +3437,30 @@ public class DiscoveryV1Models {
       return highlight;
     }
     /**
-     * Gets the deduplicateField.
+     * Gets the deduplicate_field.
      *
      * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
      *
-     * @return the deduplicateField
+     * @return the deduplicate_field
      */
     public String deduplicateField() {
-      return deduplicateField;
+      return deduplicate_field;
     }
     private FederatedQueryNoticesOptions(FederatedQueryNoticesOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notNull(builder.collectionIds, 'collectionIds cannot be null');
-      environmentId = builder.environmentId;
-      collectionIds = builder.collectionIds;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notNull(builder.collection_ids, 'collection_ids cannot be null');
+      environment_id = builder.environment_id;
+      collection_ids = builder.collection_ids;
       filter = builder.filter;
       query = builder.query;
-      naturalLanguageQuery = builder.naturalLanguageQuery;
+      natural_language_query = builder.natural_language_query;
       aggregation = builder.aggregation;
       count = builder.count;
-      returnFields = builder.returnFields;
+      return_fields = builder.return_fields;
       offset = builder.offset;
       xsort = builder.xsort;
       highlight = builder.highlight;
-      deduplicateField = builder.deduplicateField;
+      deduplicate_field = builder.deduplicate_field;
     }
 
     /**
@@ -3477,32 +3477,32 @@ public class DiscoveryV1Models {
    * FederatedQueryNoticesOptions Builder.
    */
   public class FederatedQueryNoticesOptionsBuilder {
-    private String environmentId;
-    private List<String> collectionIds;
+    private String environment_id;
+    private List<String> collection_ids;
     private String filter;
     private String query;
-    private String naturalLanguageQuery;
+    private String natural_language_query;
     private String aggregation;
     private Long count;
-    private List<String> returnFields;
+    private List<String> return_fields;
     private Long offset;
     private List<String> xsort;
     private Boolean highlight;
-    private String deduplicateField;
+    private String deduplicate_field;
 
-    private FederatedQueryNoticesOptionsBuilder(FederatedQueryNoticesOptions federatedQueryNoticesOptions) {
-      environmentId = federatedQueryNoticesOptions.environmentId;
-      collectionIds = federatedQueryNoticesOptions.collectionIds;
-      filter = federatedQueryNoticesOptions.filter;
-      query = federatedQueryNoticesOptions.query;
-      naturalLanguageQuery = federatedQueryNoticesOptions.naturalLanguageQuery;
-      aggregation = federatedQueryNoticesOptions.aggregation;
-      count = federatedQueryNoticesOptions.count;
-      returnFields = federatedQueryNoticesOptions.returnFields;
-      offset = federatedQueryNoticesOptions.offset;
-      xsort = federatedQueryNoticesOptions.xsort;
-      highlight = federatedQueryNoticesOptions.highlight;
-      deduplicateField = federatedQueryNoticesOptions.deduplicateField;
+    private FederatedQueryNoticesOptionsBuilder(FederatedQueryNoticesOptions federated_query_notices_options) {
+      environment_id = federated_query_notices_options.environment_id;
+      collection_ids = federated_query_notices_options.collection_ids;
+      filter = federated_query_notices_options.filter;
+      query = federated_query_notices_options.query;
+      natural_language_query = federated_query_notices_options.natural_language_query;
+      aggregation = federated_query_notices_options.aggregation;
+      count = federated_query_notices_options.count;
+      return_fields = federated_query_notices_options.return_fields;
+      offset = federated_query_notices_options.offset;
+      xsort = federated_query_notices_options.xsort;
+      highlight = federated_query_notices_options.highlight;
+      deduplicate_field = federated_query_notices_options.deduplicate_field;
     }
 
     /**
@@ -3514,50 +3514,50 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionIds the collectionIds
+     * @param environment_id the environment_id
+     * @param collection_ids the collection_ids
      */
-    public FederatedQueryNoticesOptionsBuilder(String environmentId, List<String> collectionIds) {
-      this.environmentId = environmentId;
-      this.collectionIds = collectionIds;
+    public FederatedQueryNoticesOptionsBuilder(String environment_id, List<String> collection_ids) {
+      this.environment_id = environment_id;
+      this.collection_ids = collection_ids;
     }
 
     /**
      * Builds a FederatedQueryNoticesOptions.
      *
-     * @return the federatedQueryNoticesOptions
+     * @return the federated_query_notices_options
      */
     public FederatedQueryNoticesOptions build() {
       return new FederatedQueryNoticesOptions(this);
     }
 
     /**
-     * Adds an collectionIds to collectionIds.
+     * Adds an collection_ids to collection_ids.
      *
-     * @param collectionIds the new collectionIds
+     * @param collection_ids the new collection_ids
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder addCollectionIds(String collectionIds) {
-      IBMWatsonValidator.notNull(collectionIds, 'collectionIds cannot be null');
-      if (this.collectionIds == null) {
-        this.collectionIds = new List<String>();
+    public FederatedQueryNoticesOptionsBuilder addCollectionIds(String collection_ids) {
+      IBMWatsonValidator.notNull(collection_ids, 'collection_ids cannot be null');
+      if (this.collection_ids == null) {
+        this.collection_ids = new List<String>();
       }
-      this.collectionIds.add(collectionIds);
+      this.collection_ids.add(collection_ids);
       return this;
     }
 
     /**
-     * Adds an returnField to returnFields.
+     * Adds an return_field to return_fields.
      *
-     * @param returnField the new returnField
+     * @param return_field the new return_field
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder addReturnField(String returnField) {
-      IBMWatsonValidator.notNull(returnField, 'returnField cannot be null');
-      if (this.returnFields == null) {
-        this.returnFields = new List<String>();
+    public FederatedQueryNoticesOptionsBuilder addReturnField(String return_field) {
+      IBMWatsonValidator.notNull(return_field, 'return_field cannot be null');
+      if (this.return_fields == null) {
+        this.return_fields = new List<String>();
       }
-      this.returnFields.add(returnField);
+      this.return_fields.add(return_field);
       return this;
     }
 
@@ -3577,25 +3577,25 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public FederatedQueryNoticesOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionIds.
-     * Existing collectionIds will be replaced.
+     * Set the collection_ids.
+     * Existing collection_ids will be replaced.
      *
-     * @param collectionIds the collectionIds
+     * @param collection_ids the collection_ids
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder collectionIds(List<String> collectionIds) {
-      this.collectionIds = collectionIds;
+    public FederatedQueryNoticesOptionsBuilder collectionIds(List<String> collection_ids) {
+      this.collection_ids = collection_ids;
       return this;
     }
 
@@ -3622,13 +3622,13 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the naturalLanguageQuery.
+     * Set the natural_language_query.
      *
-     * @param naturalLanguageQuery the naturalLanguageQuery
+     * @param natural_language_query the natural_language_query
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
-      this.naturalLanguageQuery = naturalLanguageQuery;
+    public FederatedQueryNoticesOptionsBuilder naturalLanguageQuery(String natural_language_query) {
+      this.natural_language_query = natural_language_query;
       return this;
     }
 
@@ -3649,20 +3649,20 @@ public class DiscoveryV1Models {
      * @param count the count
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder count(long count) {
+    public FederatedQueryNoticesOptionsBuilder count(Long count) {
       this.count = count;
       return this;
     }
 
     /**
-     * Set the returnFields.
-     * Existing returnFields will be replaced.
+     * Set the return_fields.
+     * Existing return_fields will be replaced.
      *
-     * @param returnFields the returnFields
+     * @param return_fields the return_fields
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder returnFields(List<String> returnFields) {
-      this.returnFields = returnFields;
+    public FederatedQueryNoticesOptionsBuilder returnFields(List<String> return_fields) {
+      this.return_fields = return_fields;
       return this;
     }
 
@@ -3672,7 +3672,7 @@ public class DiscoveryV1Models {
      * @param offset the offset
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder offset(long offset) {
+    public FederatedQueryNoticesOptionsBuilder offset(Long offset) {
       this.offset = offset;
       return this;
     }
@@ -3701,13 +3701,13 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the deduplicateField.
+     * Set the deduplicate_field.
      *
-     * @param deduplicateField the deduplicateField
+     * @param deduplicate_field the deduplicate_field
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder deduplicateField(String deduplicateField) {
-      this.deduplicateField = deduplicateField;
+    public FederatedQueryNoticesOptionsBuilder deduplicateField(String deduplicate_field) {
+      this.deduplicate_field = deduplicate_field;
       return this;
     }
   }
@@ -3716,38 +3716,38 @@ public class DiscoveryV1Models {
    * The federatedQuery options.
    */
   public class FederatedQueryOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private List<String> collectionIds;
+    private String environment_id;
+    private List<String> collection_ids;
     private String filter;
     private String query;
-    private String naturalLanguageQuery;
+    private String natural_language_query;
     private String aggregation;
     private Long count;
-    private List<String> returnFields;
+    private List<String> return_fields;
     private Long offset;
     private List<String> xsort;
     private Boolean highlight;
     private Boolean deduplicate;
-    private String deduplicateField;
+    private String deduplicate_field;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionIds.
+     * Gets the collection_ids.
      *
      * A comma-separated list of collection IDs to be queried against.
      *
-     * @return the collectionIds
+     * @return the collection_ids
      */
     public List<String> collectionIds() {
-      return collectionIds;
+      return collection_ids;
     }
     /**
      * Gets the filter.
@@ -3770,14 +3770,14 @@ public class DiscoveryV1Models {
       return query;
     }
     /**
-     * Gets the naturalLanguageQuery.
+     * Gets the natural_language_query.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
      *
-     * @return the naturalLanguageQuery
+     * @return the natural_language_query
      */
     public String naturalLanguageQuery() {
-      return naturalLanguageQuery;
+      return natural_language_query;
     }
     /**
      * Gets the aggregation.
@@ -3800,14 +3800,14 @@ public class DiscoveryV1Models {
       return count;
     }
     /**
-     * Gets the returnFields.
+     * Gets the return_fields.
      *
      * A comma separated list of the portion of the document hierarchy to return.
      *
-     * @return the returnFields
+     * @return the return_fields
      */
     public List<String> returnFields() {
-      return returnFields;
+      return return_fields;
     }
     /**
      * Gets the offset.
@@ -3850,31 +3850,31 @@ public class DiscoveryV1Models {
       return deduplicate;
     }
     /**
-     * Gets the deduplicateField.
+     * Gets the deduplicate_field.
      *
      * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
      *
-     * @return the deduplicateField
+     * @return the deduplicate_field
      */
     public String deduplicateField() {
-      return deduplicateField;
+      return deduplicate_field;
     }
     private FederatedQueryOptions(FederatedQueryOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notNull(builder.collectionIds, 'collectionIds cannot be null');
-      environmentId = builder.environmentId;
-      collectionIds = builder.collectionIds;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notNull(builder.collection_ids, 'collection_ids cannot be null');
+      environment_id = builder.environment_id;
+      collection_ids = builder.collection_ids;
       filter = builder.filter;
       query = builder.query;
-      naturalLanguageQuery = builder.naturalLanguageQuery;
+      natural_language_query = builder.natural_language_query;
       aggregation = builder.aggregation;
       count = builder.count;
-      returnFields = builder.returnFields;
+      return_fields = builder.return_fields;
       offset = builder.offset;
       xsort = builder.xsort;
       highlight = builder.highlight;
       deduplicate = builder.deduplicate;
-      deduplicateField = builder.deduplicateField;
+      deduplicate_field = builder.deduplicate_field;
     }
 
     /**
@@ -3891,34 +3891,34 @@ public class DiscoveryV1Models {
    * FederatedQueryOptions Builder.
    */
   public class FederatedQueryOptionsBuilder {
-    private String environmentId;
-    private List<String> collectionIds;
+    private String environment_id;
+    private List<String> collection_ids;
     private String filter;
     private String query;
-    private String naturalLanguageQuery;
+    private String natural_language_query;
     private String aggregation;
     private Long count;
-    private List<String> returnFields;
+    private List<String> return_fields;
     private Long offset;
     private List<String> xsort;
     private Boolean highlight;
     private Boolean deduplicate;
-    private String deduplicateField;
+    private String deduplicate_field;
 
-    private FederatedQueryOptionsBuilder(FederatedQueryOptions federatedQueryOptions) {
-      environmentId = federatedQueryOptions.environmentId;
-      collectionIds = federatedQueryOptions.collectionIds;
-      filter = federatedQueryOptions.filter;
-      query = federatedQueryOptions.query;
-      naturalLanguageQuery = federatedQueryOptions.naturalLanguageQuery;
-      aggregation = federatedQueryOptions.aggregation;
-      count = federatedQueryOptions.count;
-      returnFields = federatedQueryOptions.returnFields;
-      offset = federatedQueryOptions.offset;
-      xsort = federatedQueryOptions.xsort;
-      highlight = federatedQueryOptions.highlight;
-      deduplicate = federatedQueryOptions.deduplicate;
-      deduplicateField = federatedQueryOptions.deduplicateField;
+    private FederatedQueryOptionsBuilder(FederatedQueryOptions federated_query_options) {
+      environment_id = federated_query_options.environment_id;
+      collection_ids = federated_query_options.collection_ids;
+      filter = federated_query_options.filter;
+      query = federated_query_options.query;
+      natural_language_query = federated_query_options.natural_language_query;
+      aggregation = federated_query_options.aggregation;
+      count = federated_query_options.count;
+      return_fields = federated_query_options.return_fields;
+      offset = federated_query_options.offset;
+      xsort = federated_query_options.xsort;
+      highlight = federated_query_options.highlight;
+      deduplicate = federated_query_options.deduplicate;
+      deduplicate_field = federated_query_options.deduplicate_field;
     }
 
     /**
@@ -3930,50 +3930,50 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionIds the collectionIds
+     * @param environment_id the environment_id
+     * @param collection_ids the collection_ids
      */
-    public FederatedQueryOptionsBuilder(String environmentId, List<String> collectionIds) {
-      this.environmentId = environmentId;
-      this.collectionIds = collectionIds;
+    public FederatedQueryOptionsBuilder(String environment_id, List<String> collection_ids) {
+      this.environment_id = environment_id;
+      this.collection_ids = collection_ids;
     }
 
     /**
      * Builds a FederatedQueryOptions.
      *
-     * @return the federatedQueryOptions
+     * @return the federated_query_options
      */
     public FederatedQueryOptions build() {
       return new FederatedQueryOptions(this);
     }
 
     /**
-     * Adds an collectionIds to collectionIds.
+     * Adds an collection_ids to collection_ids.
      *
-     * @param collectionIds the new collectionIds
+     * @param collection_ids the new collection_ids
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder addCollectionIds(String collectionIds) {
-      IBMWatsonValidator.notNull(collectionIds, 'collectionIds cannot be null');
-      if (this.collectionIds == null) {
-        this.collectionIds = new List<String>();
+    public FederatedQueryOptionsBuilder addCollectionIds(String collection_ids) {
+      IBMWatsonValidator.notNull(collection_ids, 'collection_ids cannot be null');
+      if (this.collection_ids == null) {
+        this.collection_ids = new List<String>();
       }
-      this.collectionIds.add(collectionIds);
+      this.collection_ids.add(collection_ids);
       return this;
     }
 
     /**
-     * Adds an returnField to returnFields.
+     * Adds an return_field to return_fields.
      *
-     * @param returnField the new returnField
+     * @param return_field the new return_field
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder addReturnField(String returnField) {
-      IBMWatsonValidator.notNull(returnField, 'returnField cannot be null');
-      if (this.returnFields == null) {
-        this.returnFields = new List<String>();
+    public FederatedQueryOptionsBuilder addReturnField(String return_field) {
+      IBMWatsonValidator.notNull(return_field, 'return_field cannot be null');
+      if (this.return_fields == null) {
+        this.return_fields = new List<String>();
       }
-      this.returnFields.add(returnField);
+      this.return_fields.add(return_field);
       return this;
     }
 
@@ -3993,25 +3993,25 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public FederatedQueryOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionIds.
-     * Existing collectionIds will be replaced.
+     * Set the collection_ids.
+     * Existing collection_ids will be replaced.
      *
-     * @param collectionIds the collectionIds
+     * @param collection_ids the collection_ids
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder collectionIds(List<String> collectionIds) {
-      this.collectionIds = collectionIds;
+    public FederatedQueryOptionsBuilder collectionIds(List<String> collection_ids) {
+      this.collection_ids = collection_ids;
       return this;
     }
 
@@ -4038,13 +4038,13 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the naturalLanguageQuery.
+     * Set the natural_language_query.
      *
-     * @param naturalLanguageQuery the naturalLanguageQuery
+     * @param natural_language_query the natural_language_query
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
-      this.naturalLanguageQuery = naturalLanguageQuery;
+    public FederatedQueryOptionsBuilder naturalLanguageQuery(String natural_language_query) {
+      this.natural_language_query = natural_language_query;
       return this;
     }
 
@@ -4065,20 +4065,20 @@ public class DiscoveryV1Models {
      * @param count the count
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder count(long count) {
+    public FederatedQueryOptionsBuilder count(Long count) {
       this.count = count;
       return this;
     }
 
     /**
-     * Set the returnFields.
-     * Existing returnFields will be replaced.
+     * Set the return_fields.
+     * Existing return_fields will be replaced.
      *
-     * @param returnFields the returnFields
+     * @param return_fields the return_fields
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder returnFields(List<String> returnFields) {
-      this.returnFields = returnFields;
+    public FederatedQueryOptionsBuilder returnFields(List<String> return_fields) {
+      this.return_fields = return_fields;
       return this;
     }
 
@@ -4088,7 +4088,7 @@ public class DiscoveryV1Models {
      * @param offset the offset
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder offset(long offset) {
+    public FederatedQueryOptionsBuilder offset(Long offset) {
       this.offset = offset;
       return this;
     }
@@ -4128,13 +4128,13 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the deduplicateField.
+     * Set the deduplicate_field.
      *
-     * @param deduplicateField the deduplicateField
+     * @param deduplicate_field the deduplicate_field
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder deduplicateField(String deduplicateField) {
-      this.deduplicateField = deduplicateField;
+    public FederatedQueryOptionsBuilder deduplicateField(String deduplicate_field) {
+      this.deduplicate_field = deduplicate_field;
       return this;
     }
   }
@@ -4143,27 +4143,27 @@ public class DiscoveryV1Models {
    * Field.
    */
   public class Field extends IBMWatsonGenericModel {
-    private String fieldName;
-    private String fieldType;
+    private String field_name;
+    private String field_type;
     /**
-     * Gets the fieldName.
+     * Gets the field_name.
      *
      * The name of the field.
      *
-     * @return the fieldName
+     * @return the field_name
      */
     public String getFieldName() {
-      return fieldName;
+      return field_name;
     }
     /**
-     * Gets the fieldType.
+     * Gets the field_type.
      *
      * The type of the field.
      *
-     * @return the fieldType
+     * @return the field_type
      */
     public String getFieldType() {
-      return fieldType;
+      return field_type;
     }
   }
 
@@ -4172,8 +4172,8 @@ public class DiscoveryV1Models {
    */
   public class FontSetting extends IBMWatsonGenericModel {
     private Long level;
-    private Long minSize;
-    private Long maxSize;
+    private Long min_size;
+    private Long max_size;
     private Boolean bold;
     private Boolean italic;
     private String name;
@@ -4186,20 +4186,20 @@ public class DiscoveryV1Models {
       return level;
     }
     /**
-     * Gets the minSize.
+     * Gets the min_size.
      *
-     * @return the minSize
+     * @return the min_size
      */
     public Long getMinSize() {
-      return minSize;
+      return min_size;
     }
     /**
-     * Gets the maxSize.
+     * Gets the max_size.
      *
-     * @return the maxSize
+     * @return the max_size
      */
     public Long getMaxSize() {
-      return maxSize;
+      return max_size;
     }
     /**
      * Gets the bold.
@@ -4236,21 +4236,21 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the minSize.
+     * Sets the min_size.
      *
-     * @param minSize the new minSize
+     * @param min_size the new min_size
      */
-    public void setMinSize(final long minSize) {
-      this.minSize = minSize;
+    public void setMinSize(final long min_size) {
+      this.min_size = min_size;
     }
 
     /**
-     * Sets the maxSize.
+     * Sets the max_size.
      *
-     * @param maxSize the new maxSize
+     * @param max_size the new max_size
      */
-    public void setMaxSize(final long maxSize) {
-      this.maxSize = maxSize;
+    public void setMaxSize(final long max_size) {
+      this.max_size = max_size;
     }
 
     /**
@@ -4285,33 +4285,33 @@ public class DiscoveryV1Models {
    * The getCollection options.
    */
   public class GetCollectionOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     private GetCollectionOptions(GetCollectionOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
     }
 
     /**
@@ -4328,12 +4328,12 @@ public class DiscoveryV1Models {
    * GetCollectionOptions Builder.
    */
   public class GetCollectionOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
 
-    private GetCollectionOptionsBuilder(GetCollectionOptions getCollectionOptions) {
-      environmentId = getCollectionOptions.environmentId;
-      collectionId = getCollectionOptions.collectionId;
+    private GetCollectionOptionsBuilder(GetCollectionOptions get_collection_options) {
+      environment_id = get_collection_options.environment_id;
+      collection_id = get_collection_options.collection_id;
     }
 
     /**
@@ -4345,42 +4345,42 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
      */
-    public GetCollectionOptionsBuilder(String environmentId, String collectionId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
+    public GetCollectionOptionsBuilder(String environment_id, String collection_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
     }
 
     /**
      * Builds a GetCollectionOptions.
      *
-     * @return the getCollectionOptions
+     * @return the get_collection_options
      */
     public GetCollectionOptions build() {
       return new GetCollectionOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the GetCollectionOptions builder
      */
-    public GetCollectionOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public GetCollectionOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the GetCollectionOptions builder
      */
-    public GetCollectionOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public GetCollectionOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
   }
@@ -4389,33 +4389,33 @@ public class DiscoveryV1Models {
    * The getConfiguration options.
    */
   public class GetConfigurationOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String configurationId;
+    private String environment_id;
+    private String configuration_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the configurationId.
+     * Gets the configuration_id.
      *
      * The ID of the configuration.
      *
-     * @return the configurationId
+     * @return the configuration_id
      */
     public String configurationId() {
-      return configurationId;
+      return configuration_id;
     }
     private GetConfigurationOptions(GetConfigurationOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.configurationId, 'configurationId cannot be empty');
-      environmentId = builder.environmentId;
-      configurationId = builder.configurationId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.configuration_id, 'configuration_id cannot be empty');
+      environment_id = builder.environment_id;
+      configuration_id = builder.configuration_id;
     }
 
     /**
@@ -4432,12 +4432,12 @@ public class DiscoveryV1Models {
    * GetConfigurationOptions Builder.
    */
   public class GetConfigurationOptionsBuilder {
-    private String environmentId;
-    private String configurationId;
+    private String environment_id;
+    private String configuration_id;
 
-    private GetConfigurationOptionsBuilder(GetConfigurationOptions getConfigurationOptions) {
-      environmentId = getConfigurationOptions.environmentId;
-      configurationId = getConfigurationOptions.configurationId;
+    private GetConfigurationOptionsBuilder(GetConfigurationOptions get_configuration_options) {
+      environment_id = get_configuration_options.environment_id;
+      configuration_id = get_configuration_options.configuration_id;
     }
 
     /**
@@ -4449,42 +4449,42 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param configurationId the configurationId
+     * @param environment_id the environment_id
+     * @param configuration_id the configuration_id
      */
-    public GetConfigurationOptionsBuilder(String environmentId, String configurationId) {
-      this.environmentId = environmentId;
-      this.configurationId = configurationId;
+    public GetConfigurationOptionsBuilder(String environment_id, String configuration_id) {
+      this.environment_id = environment_id;
+      this.configuration_id = configuration_id;
     }
 
     /**
      * Builds a GetConfigurationOptions.
      *
-     * @return the getConfigurationOptions
+     * @return the get_configuration_options
      */
     public GetConfigurationOptions build() {
       return new GetConfigurationOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the GetConfigurationOptions builder
      */
-    public GetConfigurationOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public GetConfigurationOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the configurationId.
+     * Set the configuration_id.
      *
-     * @param configurationId the configurationId
+     * @param configuration_id the configuration_id
      * @return the GetConfigurationOptions builder
      */
-    public GetConfigurationOptionsBuilder configurationId(String configurationId) {
-      this.configurationId = configurationId;
+    public GetConfigurationOptionsBuilder configurationId(String configuration_id) {
+      this.configuration_id = configuration_id;
       return this;
     }
   }
@@ -4493,46 +4493,46 @@ public class DiscoveryV1Models {
    * The getDocumentStatus options.
    */
   public class GetDocumentStatusOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
-    private String documentId;
+    private String environment_id;
+    private String collection_id;
+    private String document_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
-     * Gets the documentId.
+     * Gets the document_id.
      *
      * The ID of the document.
      *
-     * @return the documentId
+     * @return the document_id
      */
     public String documentId() {
-      return documentId;
+      return document_id;
     }
     private GetDocumentStatusOptions(GetDocumentStatusOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.documentId, 'documentId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
-      documentId = builder.documentId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.document_id, 'document_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
+      document_id = builder.document_id;
     }
 
     /**
@@ -4549,14 +4549,14 @@ public class DiscoveryV1Models {
    * GetDocumentStatusOptions Builder.
    */
   public class GetDocumentStatusOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
-    private String documentId;
+    private String environment_id;
+    private String collection_id;
+    private String document_id;
 
-    private GetDocumentStatusOptionsBuilder(GetDocumentStatusOptions getDocumentStatusOptions) {
-      environmentId = getDocumentStatusOptions.environmentId;
-      collectionId = getDocumentStatusOptions.collectionId;
-      documentId = getDocumentStatusOptions.documentId;
+    private GetDocumentStatusOptionsBuilder(GetDocumentStatusOptions get_document_status_options) {
+      environment_id = get_document_status_options.environment_id;
+      collection_id = get_document_status_options.collection_id;
+      document_id = get_document_status_options.document_id;
     }
 
     /**
@@ -4568,55 +4568,55 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
-     * @param documentId the documentId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
+     * @param document_id the document_id
      */
-    public GetDocumentStatusOptionsBuilder(String environmentId, String collectionId, String documentId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
-      this.documentId = documentId;
+    public GetDocumentStatusOptionsBuilder(String environment_id, String collection_id, String document_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
+      this.document_id = document_id;
     }
 
     /**
      * Builds a GetDocumentStatusOptions.
      *
-     * @return the getDocumentStatusOptions
+     * @return the get_document_status_options
      */
     public GetDocumentStatusOptions build() {
       return new GetDocumentStatusOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the GetDocumentStatusOptions builder
      */
-    public GetDocumentStatusOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public GetDocumentStatusOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the GetDocumentStatusOptions builder
      */
-    public GetDocumentStatusOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public GetDocumentStatusOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
 
     /**
-     * Set the documentId.
+     * Set the document_id.
      *
-     * @param documentId the documentId
+     * @param document_id the document_id
      * @return the GetDocumentStatusOptions builder
      */
-    public GetDocumentStatusOptionsBuilder documentId(String documentId) {
-      this.documentId = documentId;
+    public GetDocumentStatusOptionsBuilder documentId(String document_id) {
+      this.document_id = document_id;
       return this;
     }
   }
@@ -4625,20 +4625,20 @@ public class DiscoveryV1Models {
    * The getEnvironment options.
    */
   public class GetEnvironmentOptions extends IBMWatsonGenericModel {
-    private String environmentId;
+    private String environment_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     private GetEnvironmentOptions(GetEnvironmentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      environmentId = builder.environmentId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      environment_id = builder.environment_id;
     }
 
     /**
@@ -4655,10 +4655,10 @@ public class DiscoveryV1Models {
    * GetEnvironmentOptions Builder.
    */
   public class GetEnvironmentOptionsBuilder {
-    private String environmentId;
+    private String environment_id;
 
-    private GetEnvironmentOptionsBuilder(GetEnvironmentOptions getEnvironmentOptions) {
-      environmentId = getEnvironmentOptions.environmentId;
+    private GetEnvironmentOptionsBuilder(GetEnvironmentOptions get_environment_options) {
+      environment_id = get_environment_options.environment_id;
     }
 
     /**
@@ -4670,29 +4670,29 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      */
-    public GetEnvironmentOptionsBuilder(String environmentId) {
-      this.environmentId = environmentId;
+    public GetEnvironmentOptionsBuilder(String environment_id) {
+      this.environment_id = environment_id;
     }
 
     /**
      * Builds a GetEnvironmentOptions.
      *
-     * @return the getEnvironmentOptions
+     * @return the get_environment_options
      */
     public GetEnvironmentOptions build() {
       return new GetEnvironmentOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the GetEnvironmentOptions builder
      */
-    public GetEnvironmentOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public GetEnvironmentOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
   }
@@ -4701,46 +4701,46 @@ public class DiscoveryV1Models {
    * The getTrainingData options.
    */
   public class GetTrainingDataOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
-    private String queryId;
+    private String environment_id;
+    private String collection_id;
+    private String query_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
-     * Gets the queryId.
+     * Gets the query_id.
      *
      * The ID of the query used for training.
      *
-     * @return the queryId
+     * @return the query_id
      */
     public String queryId() {
-      return queryId;
+      return query_id;
     }
     private GetTrainingDataOptions(GetTrainingDataOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.queryId, 'queryId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
-      queryId = builder.queryId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.query_id, 'query_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
+      query_id = builder.query_id;
     }
 
     /**
@@ -4757,14 +4757,14 @@ public class DiscoveryV1Models {
    * GetTrainingDataOptions Builder.
    */
   public class GetTrainingDataOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
-    private String queryId;
+    private String environment_id;
+    private String collection_id;
+    private String query_id;
 
-    private GetTrainingDataOptionsBuilder(GetTrainingDataOptions getTrainingDataOptions) {
-      environmentId = getTrainingDataOptions.environmentId;
-      collectionId = getTrainingDataOptions.collectionId;
-      queryId = getTrainingDataOptions.queryId;
+    private GetTrainingDataOptionsBuilder(GetTrainingDataOptions get_training_data_options) {
+      environment_id = get_training_data_options.environment_id;
+      collection_id = get_training_data_options.collection_id;
+      query_id = get_training_data_options.query_id;
     }
 
     /**
@@ -4776,55 +4776,55 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
-     * @param queryId the queryId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
+     * @param query_id the query_id
      */
-    public GetTrainingDataOptionsBuilder(String environmentId, String collectionId, String queryId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
-      this.queryId = queryId;
+    public GetTrainingDataOptionsBuilder(String environment_id, String collection_id, String query_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
+      this.query_id = query_id;
     }
 
     /**
      * Builds a GetTrainingDataOptions.
      *
-     * @return the getTrainingDataOptions
+     * @return the get_training_data_options
      */
     public GetTrainingDataOptions build() {
       return new GetTrainingDataOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the GetTrainingDataOptions builder
      */
-    public GetTrainingDataOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public GetTrainingDataOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the GetTrainingDataOptions builder
      */
-    public GetTrainingDataOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public GetTrainingDataOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
 
     /**
-     * Set the queryId.
+     * Set the query_id.
      *
-     * @param queryId the queryId
+     * @param query_id the query_id
      * @return the GetTrainingDataOptions builder
      */
-    public GetTrainingDataOptionsBuilder queryId(String queryId) {
-      this.queryId = queryId;
+    public GetTrainingDataOptionsBuilder queryId(String query_id) {
+      this.query_id = query_id;
       return this;
     }
   }
@@ -4833,59 +4833,59 @@ public class DiscoveryV1Models {
    * The getTrainingExample options.
    */
   public class GetTrainingExampleOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
-    private String queryId;
-    private String exampleId;
+    private String environment_id;
+    private String collection_id;
+    private String query_id;
+    private String example_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
-     * Gets the queryId.
+     * Gets the query_id.
      *
      * The ID of the query used for training.
      *
-     * @return the queryId
+     * @return the query_id
      */
     public String queryId() {
-      return queryId;
+      return query_id;
     }
     /**
-     * Gets the exampleId.
+     * Gets the example_id.
      *
      * The ID of the document as it is indexed.
      *
-     * @return the exampleId
+     * @return the example_id
      */
     public String exampleId() {
-      return exampleId;
+      return example_id;
     }
     private GetTrainingExampleOptions(GetTrainingExampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.queryId, 'queryId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.exampleId, 'exampleId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
-      queryId = builder.queryId;
-      exampleId = builder.exampleId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.query_id, 'query_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.example_id, 'example_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
+      query_id = builder.query_id;
+      example_id = builder.example_id;
     }
 
     /**
@@ -4902,16 +4902,16 @@ public class DiscoveryV1Models {
    * GetTrainingExampleOptions Builder.
    */
   public class GetTrainingExampleOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
-    private String queryId;
-    private String exampleId;
+    private String environment_id;
+    private String collection_id;
+    private String query_id;
+    private String example_id;
 
-    private GetTrainingExampleOptionsBuilder(GetTrainingExampleOptions getTrainingExampleOptions) {
-      environmentId = getTrainingExampleOptions.environmentId;
-      collectionId = getTrainingExampleOptions.collectionId;
-      queryId = getTrainingExampleOptions.queryId;
-      exampleId = getTrainingExampleOptions.exampleId;
+    private GetTrainingExampleOptionsBuilder(GetTrainingExampleOptions get_training_example_options) {
+      environment_id = get_training_example_options.environment_id;
+      collection_id = get_training_example_options.collection_id;
+      query_id = get_training_example_options.query_id;
+      example_id = get_training_example_options.example_id;
     }
 
     /**
@@ -4923,68 +4923,68 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
-     * @param queryId the queryId
-     * @param exampleId the exampleId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
+     * @param query_id the query_id
+     * @param example_id the example_id
      */
-    public GetTrainingExampleOptionsBuilder(String environmentId, String collectionId, String queryId, String exampleId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
-      this.queryId = queryId;
-      this.exampleId = exampleId;
+    public GetTrainingExampleOptionsBuilder(String environment_id, String collection_id, String query_id, String example_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
+      this.query_id = query_id;
+      this.example_id = example_id;
     }
 
     /**
      * Builds a GetTrainingExampleOptions.
      *
-     * @return the getTrainingExampleOptions
+     * @return the get_training_example_options
      */
     public GetTrainingExampleOptions build() {
       return new GetTrainingExampleOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the GetTrainingExampleOptions builder
      */
-    public GetTrainingExampleOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public GetTrainingExampleOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the GetTrainingExampleOptions builder
      */
-    public GetTrainingExampleOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public GetTrainingExampleOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
 
     /**
-     * Set the queryId.
+     * Set the query_id.
      *
-     * @param queryId the queryId
+     * @param query_id the query_id
      * @return the GetTrainingExampleOptions builder
      */
-    public GetTrainingExampleOptionsBuilder queryId(String queryId) {
-      this.queryId = queryId;
+    public GetTrainingExampleOptionsBuilder queryId(String query_id) {
+      this.query_id = query_id;
       return this;
     }
 
     /**
-     * Set the exampleId.
+     * Set the example_id.
      *
-     * @param exampleId the exampleId
+     * @param example_id the example_id
      * @return the GetTrainingExampleOptions builder
      */
-    public GetTrainingExampleOptionsBuilder exampleId(String exampleId) {
-      this.exampleId = exampleId;
+    public GetTrainingExampleOptionsBuilder exampleId(String example_id) {
+      this.example_id = example_id;
       return this;
     }
   }
@@ -5010,113 +5010,113 @@ public class DiscoveryV1Models {
    * A list of HTML conversion settings.
    */
   public class HtmlSettings extends IBMWatsonGenericModel {
-    private List<String> excludeTagsCompletely;
-    private List<String> excludeTagsKeepContent;
-    private XPathPatterns keepContent;
-    private XPathPatterns excludeContent;
-    private List<String> keepTagAttributes;
-    private List<String> excludeTagAttributes;
+    private List<String> exclude_tags_completely;
+    private List<String> exclude_tags_keep_content;
+    private XPathPatterns keep_content;
+    private XPathPatterns exclude_content;
+    private List<String> keep_tag_attributes;
+    private List<String> exclude_tag_attributes;
     /**
-     * Gets the excludeTagsCompletely.
+     * Gets the exclude_tags_completely.
      *
-     * @return the excludeTagsCompletely
+     * @return the exclude_tags_completely
      */
     public List<String> getExcludeTagsCompletely() {
-      return excludeTagsCompletely;
+      return exclude_tags_completely;
     }
     /**
-     * Gets the excludeTagsKeepContent.
+     * Gets the exclude_tags_keep_content.
      *
-     * @return the excludeTagsKeepContent
+     * @return the exclude_tags_keep_content
      */
     public List<String> getExcludeTagsKeepContent() {
-      return excludeTagsKeepContent;
+      return exclude_tags_keep_content;
     }
     /**
-     * Gets the keepContent.
+     * Gets the keep_content.
      *
-     * @return the keepContent
+     * @return the keep_content
      */
     public XPathPatterns getKeepContent() {
-      return keepContent;
+      return keep_content;
     }
     /**
-     * Gets the excludeContent.
+     * Gets the exclude_content.
      *
-     * @return the excludeContent
+     * @return the exclude_content
      */
     public XPathPatterns getExcludeContent() {
-      return excludeContent;
+      return exclude_content;
     }
     /**
-     * Gets the keepTagAttributes.
+     * Gets the keep_tag_attributes.
      *
-     * @return the keepTagAttributes
+     * @return the keep_tag_attributes
      */
     public List<String> getKeepTagAttributes() {
-      return keepTagAttributes;
+      return keep_tag_attributes;
     }
     /**
-     * Gets the excludeTagAttributes.
+     * Gets the exclude_tag_attributes.
      *
-     * @return the excludeTagAttributes
+     * @return the exclude_tag_attributes
      */
     public List<String> getExcludeTagAttributes() {
-      return excludeTagAttributes;
+      return exclude_tag_attributes;
     }
 
     /**
-     * Sets the excludeTagsCompletely.
+     * Sets the exclude_tags_completely.
      *
-     * @param excludeTagsCompletely the new excludeTagsCompletely
+     * @param exclude_tags_completely the new exclude_tags_completely
      */
-    public void setExcludeTagsCompletely(final List<String> excludeTagsCompletely) {
-      this.excludeTagsCompletely = excludeTagsCompletely;
+    public void setExcludeTagsCompletely(final List<String> exclude_tags_completely) {
+      this.exclude_tags_completely = exclude_tags_completely;
     }
 
     /**
-     * Sets the excludeTagsKeepContent.
+     * Sets the exclude_tags_keep_content.
      *
-     * @param excludeTagsKeepContent the new excludeTagsKeepContent
+     * @param exclude_tags_keep_content the new exclude_tags_keep_content
      */
-    public void setExcludeTagsKeepContent(final List<String> excludeTagsKeepContent) {
-      this.excludeTagsKeepContent = excludeTagsKeepContent;
+    public void setExcludeTagsKeepContent(final List<String> exclude_tags_keep_content) {
+      this.exclude_tags_keep_content = exclude_tags_keep_content;
     }
 
     /**
-     * Sets the keepContent.
+     * Sets the keep_content.
      *
-     * @param keepContent the new keepContent
+     * @param keep_content the new keep_content
      */
-    public void setKeepContent(final XPathPatterns keepContent) {
-      this.keepContent = keepContent;
+    public void setKeepContent(final XPathPatterns keep_content) {
+      this.keep_content = keep_content;
     }
 
     /**
-     * Sets the excludeContent.
+     * Sets the exclude_content.
      *
-     * @param excludeContent the new excludeContent
+     * @param exclude_content the new exclude_content
      */
-    public void setExcludeContent(final XPathPatterns excludeContent) {
-      this.excludeContent = excludeContent;
+    public void setExcludeContent(final XPathPatterns exclude_content) {
+      this.exclude_content = exclude_content;
     }
 
     /**
-     * Sets the keepTagAttributes.
+     * Sets the keep_tag_attributes.
      *
-     * @param keepTagAttributes the new keepTagAttributes
+     * @param keep_tag_attributes the new keep_tag_attributes
      */
-    public void setKeepTagAttributes(final List<String> keepTagAttributes) {
-      this.keepTagAttributes = keepTagAttributes;
+    public void setKeepTagAttributes(final List<String> keep_tag_attributes) {
+      this.keep_tag_attributes = keep_tag_attributes;
     }
 
     /**
-     * Sets the excludeTagAttributes.
+     * Sets the exclude_tag_attributes.
      *
-     * @param excludeTagAttributes the new excludeTagAttributes
+     * @param exclude_tag_attributes the new exclude_tag_attributes
      */
-    public void setExcludeTagAttributes(final List<String> excludeTagAttributes) {
-      this.excludeTagAttributes = excludeTagAttributes;
+    public void setExcludeTagAttributes(final List<String> exclude_tag_attributes) {
+      this.exclude_tag_attributes = exclude_tag_attributes;
     }
   }
 
@@ -5125,8 +5125,8 @@ public class DiscoveryV1Models {
    */
   public class IndexCapacity extends IBMWatsonGenericModel {
     private EnvironmentDocuments documents;
-    private DiskUsage diskUsage;
-    private MemoryUsage memoryUsage;
+    private DiskUsage disk_usage;
+    private MemoryUsage memory_usage;
     /**
      * Gets the documents.
      *
@@ -5138,24 +5138,24 @@ public class DiscoveryV1Models {
       return documents;
     }
     /**
-     * Gets the diskUsage.
+     * Gets the disk_usage.
      *
      * Summary of the disk usage of the environment.
      *
-     * @return the diskUsage
+     * @return the disk_usage
      */
     public DiskUsage getDiskUsage() {
-      return diskUsage;
+      return disk_usage;
     }
     /**
-     * Gets the memoryUsage.
+     * Gets the memory_usage.
      *
      * **Deprecated**: Summary of the memory usage of the environment.
      *
-     * @return the memoryUsage
+     * @return the memory_usage
      */
     public MemoryUsage getMemoryUsage() {
-      return memoryUsage;
+      return memory_usage;
     }
 
     /**
@@ -5168,21 +5168,21 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the diskUsage.
+     * Sets the disk_usage.
      *
-     * @param diskUsage the new diskUsage
+     * @param disk_usage the new disk_usage
      */
-    public void setDiskUsage(final DiskUsage diskUsage) {
-      this.diskUsage = diskUsage;
+    public void setDiskUsage(final DiskUsage disk_usage) {
+      this.disk_usage = disk_usage;
     }
 
     /**
-     * Sets the memoryUsage.
+     * Sets the memory_usage.
      *
-     * @param memoryUsage the new memoryUsage
+     * @param memory_usage the new memory_usage
      */
-    public void setMemoryUsage(final MemoryUsage memoryUsage) {
-      this.memoryUsage = memoryUsage;
+    public void setMemoryUsage(final MemoryUsage memory_usage) {
+      this.memory_usage = memory_usage;
     }
   }
 
@@ -5190,33 +5190,33 @@ public class DiscoveryV1Models {
    * The listCollectionFields options.
    */
   public class ListCollectionFieldsOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     private ListCollectionFieldsOptions(ListCollectionFieldsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
     }
 
     /**
@@ -5233,12 +5233,12 @@ public class DiscoveryV1Models {
    * ListCollectionFieldsOptions Builder.
    */
   public class ListCollectionFieldsOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
 
-    private ListCollectionFieldsOptionsBuilder(ListCollectionFieldsOptions listCollectionFieldsOptions) {
-      environmentId = listCollectionFieldsOptions.environmentId;
-      collectionId = listCollectionFieldsOptions.collectionId;
+    private ListCollectionFieldsOptionsBuilder(ListCollectionFieldsOptions list_collection_fields_options) {
+      environment_id = list_collection_fields_options.environment_id;
+      collection_id = list_collection_fields_options.collection_id;
     }
 
     /**
@@ -5250,42 +5250,42 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
      */
-    public ListCollectionFieldsOptionsBuilder(String environmentId, String collectionId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
+    public ListCollectionFieldsOptionsBuilder(String environment_id, String collection_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
     }
 
     /**
      * Builds a ListCollectionFieldsOptions.
      *
-     * @return the listCollectionFieldsOptions
+     * @return the list_collection_fields_options
      */
     public ListCollectionFieldsOptions build() {
       return new ListCollectionFieldsOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the ListCollectionFieldsOptions builder
      */
-    public ListCollectionFieldsOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public ListCollectionFieldsOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the ListCollectionFieldsOptions builder
      */
-    public ListCollectionFieldsOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public ListCollectionFieldsOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
   }
@@ -5320,17 +5320,17 @@ public class DiscoveryV1Models {
    * The listCollections options.
    */
   public class ListCollectionsOptions extends IBMWatsonGenericModel {
-    private String environmentId;
+    private String environment_id;
     private String name;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
      * Gets the name.
@@ -5343,8 +5343,8 @@ public class DiscoveryV1Models {
       return name;
     }
     private ListCollectionsOptions(ListCollectionsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      environmentId = builder.environmentId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      environment_id = builder.environment_id;
       name = builder.name;
     }
 
@@ -5362,12 +5362,12 @@ public class DiscoveryV1Models {
    * ListCollectionsOptions Builder.
    */
   public class ListCollectionsOptionsBuilder {
-    private String environmentId;
+    private String environment_id;
     private String name;
 
-    private ListCollectionsOptionsBuilder(ListCollectionsOptions listCollectionsOptions) {
-      environmentId = listCollectionsOptions.environmentId;
-      name = listCollectionsOptions.name;
+    private ListCollectionsOptionsBuilder(ListCollectionsOptions list_collections_options) {
+      environment_id = list_collections_options.environment_id;
+      name = list_collections_options.name;
     }
 
     /**
@@ -5379,29 +5379,29 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      */
-    public ListCollectionsOptionsBuilder(String environmentId) {
-      this.environmentId = environmentId;
+    public ListCollectionsOptionsBuilder(String environment_id) {
+      this.environment_id = environment_id;
     }
 
     /**
      * Builds a ListCollectionsOptions.
      *
-     * @return the listCollectionsOptions
+     * @return the list_collections_options
      */
     public ListCollectionsOptions build() {
       return new ListCollectionsOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the ListCollectionsOptions builder
      */
-    public ListCollectionsOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public ListCollectionsOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
@@ -5447,17 +5447,17 @@ public class DiscoveryV1Models {
    * The listConfigurations options.
    */
   public class ListConfigurationsOptions extends IBMWatsonGenericModel {
-    private String environmentId;
+    private String environment_id;
     private String name;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
      * Gets the name.
@@ -5470,8 +5470,8 @@ public class DiscoveryV1Models {
       return name;
     }
     private ListConfigurationsOptions(ListConfigurationsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      environmentId = builder.environmentId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      environment_id = builder.environment_id;
       name = builder.name;
     }
 
@@ -5489,12 +5489,12 @@ public class DiscoveryV1Models {
    * ListConfigurationsOptions Builder.
    */
   public class ListConfigurationsOptionsBuilder {
-    private String environmentId;
+    private String environment_id;
     private String name;
 
-    private ListConfigurationsOptionsBuilder(ListConfigurationsOptions listConfigurationsOptions) {
-      environmentId = listConfigurationsOptions.environmentId;
-      name = listConfigurationsOptions.name;
+    private ListConfigurationsOptionsBuilder(ListConfigurationsOptions list_configurations_options) {
+      environment_id = list_configurations_options.environment_id;
+      name = list_configurations_options.name;
     }
 
     /**
@@ -5506,29 +5506,29 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      */
-    public ListConfigurationsOptionsBuilder(String environmentId) {
-      this.environmentId = environmentId;
+    public ListConfigurationsOptionsBuilder(String environment_id) {
+      this.environment_id = environment_id;
     }
 
     /**
      * Builds a ListConfigurationsOptions.
      *
-     * @return the listConfigurationsOptions
+     * @return the list_configurations_options
      */
     public ListConfigurationsOptions build() {
       return new ListConfigurationsOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the ListConfigurationsOptions builder
      */
-    public ListConfigurationsOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public ListConfigurationsOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
@@ -5605,8 +5605,8 @@ public class DiscoveryV1Models {
   public class ListEnvironmentsOptionsBuilder {
     private String name;
 
-    private ListEnvironmentsOptionsBuilder(ListEnvironmentsOptions listEnvironmentsOptions) {
-      name = listEnvironmentsOptions.name;
+    private ListEnvironmentsOptionsBuilder(ListEnvironmentsOptions list_environments_options) {
+      name = list_environments_options.name;
     }
 
     /**
@@ -5618,7 +5618,7 @@ public class DiscoveryV1Models {
     /**
      * Builds a ListEnvironmentsOptions.
      *
-     * @return the listEnvironmentsOptions
+     * @return the list_environments_options
      */
     public ListEnvironmentsOptions build() {
       return new ListEnvironmentsOptions(this);
@@ -5666,33 +5666,33 @@ public class DiscoveryV1Models {
    * The listFields options.
    */
   public class ListFieldsOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private List<String> collectionIds;
+    private String environment_id;
+    private List<String> collection_ids;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionIds.
+     * Gets the collection_ids.
      *
      * A comma-separated list of collection IDs to be queried against.
      *
-     * @return the collectionIds
+     * @return the collection_ids
      */
     public List<String> collectionIds() {
-      return collectionIds;
+      return collection_ids;
     }
     private ListFieldsOptions(ListFieldsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notNull(builder.collectionIds, 'collectionIds cannot be null');
-      environmentId = builder.environmentId;
-      collectionIds = builder.collectionIds;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notNull(builder.collection_ids, 'collection_ids cannot be null');
+      environment_id = builder.environment_id;
+      collection_ids = builder.collection_ids;
     }
 
     /**
@@ -5709,12 +5709,12 @@ public class DiscoveryV1Models {
    * ListFieldsOptions Builder.
    */
   public class ListFieldsOptionsBuilder {
-    private String environmentId;
-    private List<String> collectionIds;
+    private String environment_id;
+    private List<String> collection_ids;
 
-    private ListFieldsOptionsBuilder(ListFieldsOptions listFieldsOptions) {
-      environmentId = listFieldsOptions.environmentId;
-      collectionIds = listFieldsOptions.collectionIds;
+    private ListFieldsOptionsBuilder(ListFieldsOptions list_fields_options) {
+      environment_id = list_fields_options.environment_id;
+      collection_ids = list_fields_options.collection_ids;
     }
 
     /**
@@ -5726,58 +5726,58 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionIds the collectionIds
+     * @param environment_id the environment_id
+     * @param collection_ids the collection_ids
      */
-    public ListFieldsOptionsBuilder(String environmentId, List<String> collectionIds) {
-      this.environmentId = environmentId;
-      this.collectionIds = collectionIds;
+    public ListFieldsOptionsBuilder(String environment_id, List<String> collection_ids) {
+      this.environment_id = environment_id;
+      this.collection_ids = collection_ids;
     }
 
     /**
      * Builds a ListFieldsOptions.
      *
-     * @return the listFieldsOptions
+     * @return the list_fields_options
      */
     public ListFieldsOptions build() {
       return new ListFieldsOptions(this);
     }
 
     /**
-     * Adds an collectionIds to collectionIds.
+     * Adds an collection_ids to collection_ids.
      *
-     * @param collectionIds the new collectionIds
+     * @param collection_ids the new collection_ids
      * @return the ListFieldsOptions builder
      */
-    public ListFieldsOptionsBuilder addCollectionIds(String collectionIds) {
-      IBMWatsonValidator.notNull(collectionIds, 'collectionIds cannot be null');
-      if (this.collectionIds == null) {
-        this.collectionIds = new List<String>();
+    public ListFieldsOptionsBuilder addCollectionIds(String collection_ids) {
+      IBMWatsonValidator.notNull(collection_ids, 'collection_ids cannot be null');
+      if (this.collection_ids == null) {
+        this.collection_ids = new List<String>();
       }
-      this.collectionIds.add(collectionIds);
+      this.collection_ids.add(collection_ids);
       return this;
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the ListFieldsOptions builder
      */
-    public ListFieldsOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public ListFieldsOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionIds.
-     * Existing collectionIds will be replaced.
+     * Set the collection_ids.
+     * Existing collection_ids will be replaced.
      *
-     * @param collectionIds the collectionIds
+     * @param collection_ids the collection_ids
      * @return the ListFieldsOptions builder
      */
-    public ListFieldsOptionsBuilder collectionIds(List<String> collectionIds) {
-      this.collectionIds = collectionIds;
+    public ListFieldsOptionsBuilder collectionIds(List<String> collection_ids) {
+      this.collection_ids = collection_ids;
       return this;
     }
   }
@@ -5786,33 +5786,33 @@ public class DiscoveryV1Models {
    * The listTrainingData options.
    */
   public class ListTrainingDataOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     private ListTrainingDataOptions(ListTrainingDataOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
     }
 
     /**
@@ -5829,12 +5829,12 @@ public class DiscoveryV1Models {
    * ListTrainingDataOptions Builder.
    */
   public class ListTrainingDataOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
 
-    private ListTrainingDataOptionsBuilder(ListTrainingDataOptions listTrainingDataOptions) {
-      environmentId = listTrainingDataOptions.environmentId;
-      collectionId = listTrainingDataOptions.collectionId;
+    private ListTrainingDataOptionsBuilder(ListTrainingDataOptions list_training_data_options) {
+      environment_id = list_training_data_options.environment_id;
+      collection_id = list_training_data_options.collection_id;
     }
 
     /**
@@ -5846,42 +5846,42 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
      */
-    public ListTrainingDataOptionsBuilder(String environmentId, String collectionId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
+    public ListTrainingDataOptionsBuilder(String environment_id, String collection_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
     }
 
     /**
      * Builds a ListTrainingDataOptions.
      *
-     * @return the listTrainingDataOptions
+     * @return the list_training_data_options
      */
     public ListTrainingDataOptions build() {
       return new ListTrainingDataOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the ListTrainingDataOptions builder
      */
-    public ListTrainingDataOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public ListTrainingDataOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the ListTrainingDataOptions builder
      */
-    public ListTrainingDataOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public ListTrainingDataOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
   }
@@ -5890,30 +5890,30 @@ public class DiscoveryV1Models {
    * **Deprecated**: Summary of the memory usage statistics for this environment.
    */
   public class MemoryUsage extends IBMWatsonGenericModel {
-    private Long usedBytes;
-    private Long totalBytes;
+    private Long used_bytes;
+    private Long total_bytes;
     private String used;
     private String total;
-    private Double percentUsed;
+    private Double percent_used;
     /**
-     * Gets the usedBytes.
+     * Gets the used_bytes.
      *
      * **Deprecated**: Number of bytes used in the environment's memory capacity.
      *
-     * @return the usedBytes
+     * @return the used_bytes
      */
     public Long getUsedBytes() {
-      return usedBytes;
+      return used_bytes;
     }
     /**
-     * Gets the totalBytes.
+     * Gets the total_bytes.
      *
      * **Deprecated**: Total number of bytes available in the environment's memory capacity.
      *
-     * @return the totalBytes
+     * @return the total_bytes
      */
     public Long getTotalBytes() {
-      return totalBytes;
+      return total_bytes;
     }
     /**
      * Gets the used.
@@ -5936,14 +5936,14 @@ public class DiscoveryV1Models {
       return total;
     }
     /**
-     * Gets the percentUsed.
+     * Gets the percent_used.
      *
      * **Deprecated**: Percentage of the environment's memory capacity that is being used.
      *
-     * @return the percentUsed
+     * @return the percent_used
      */
     public Double getPercentUsed() {
-      return percentUsed;
+      return percent_used;
     }
   }
 
@@ -5952,8 +5952,8 @@ public class DiscoveryV1Models {
    */
   public class NormalizationOperation extends IBMWatsonGenericModel {
     private String operation;
-    private String sourceField;
-    private String destinationField;
+    private String source_field;
+    private String destination_field;
     /**
      * Gets the operation.
      *
@@ -5965,24 +5965,24 @@ public class DiscoveryV1Models {
       return operation;
     }
     /**
-     * Gets the sourceField.
+     * Gets the source_field.
      *
      * The source field for the operation.
      *
-     * @return the sourceField
+     * @return the source_field
      */
     public String getSourceField() {
-      return sourceField;
+      return source_field;
     }
     /**
-     * Gets the destinationField.
+     * Gets the destination_field.
      *
      * The destination field for the operation.
      *
-     * @return the destinationField
+     * @return the destination_field
      */
     public String getDestinationField() {
-      return destinationField;
+      return destination_field;
     }
 
     /**
@@ -5995,21 +5995,21 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the sourceField.
+     * Sets the source_field.
      *
-     * @param sourceField the new sourceField
+     * @param source_field the new source_field
      */
-    public void setSourceField(final String sourceField) {
-      this.sourceField = sourceField;
+    public void setSourceField(final String source_field) {
+      this.source_field = source_field;
     }
 
     /**
-     * Sets the destinationField.
+     * Sets the destination_field.
      *
-     * @param destinationField the new destinationField
+     * @param destination_field the new destination_field
      */
-    public void setDestinationField(final String destinationField) {
-      this.destinationField = destinationField;
+    public void setDestinationField(final String destination_field) {
+      this.destination_field = destination_field;
     }
   }
 
@@ -6017,22 +6017,22 @@ public class DiscoveryV1Models {
    * A notice produced for the collection.
    */
   public class Notice extends IBMWatsonGenericModel {
-    private String noticeId;
+    private String notice_id;
     private Datetime created;
-    private String documentId;
-    private String queryId;
+    private String document_id;
+    private String query_id;
     private String severity;
     private String step;
     private String description;
     /**
-     * Gets the noticeId.
+     * Gets the notice_id.
      *
      * Identifies the notice. Many notices might have the same ID. This field exists so that user applications can programmatically identify a notice and take automatic corrective action.
      *
-     * @return the noticeId
+     * @return the notice_id
      */
     public String getNoticeId() {
-      return noticeId;
+      return notice_id;
     }
     /**
      * Gets the created.
@@ -6045,24 +6045,24 @@ public class DiscoveryV1Models {
       return created;
     }
     /**
-     * Gets the documentId.
+     * Gets the document_id.
      *
      * Unique identifier of the document.
      *
-     * @return the documentId
+     * @return the document_id
      */
     public String getDocumentId() {
-      return documentId;
+      return document_id;
     }
     /**
-     * Gets the queryId.
+     * Gets the query_id.
      *
      * Unique identifier of the query used for relevance training.
      *
-     * @return the queryId
+     * @return the query_id
      */
     public String getQueryId() {
-      return queryId;
+      return query_id;
     }
     /**
      * Gets the severity.
@@ -6152,7 +6152,7 @@ public class DiscoveryV1Models {
     private String field;
     private List<AggregationResult> results;
     private String match;
-    private Long matchingResults;
+    private Long matching_results;
     private List<QueryAggregation> aggregations;
     /**
      * Gets the xtype.
@@ -6193,14 +6193,14 @@ public class DiscoveryV1Models {
       return match;
     }
     /**
-     * Gets the matchingResults.
+     * Gets the matching_results.
      *
      * Number of matching results.
      *
-     * @return the matchingResults
+     * @return the matching_results
      */
     public Long getMatchingResults() {
-      return matchingResults;
+      return matching_results;
     }
     /**
      * Gets the aggregations.
@@ -6250,12 +6250,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the matchingResults.
+     * Sets the matching_results.
      *
-     * @param matchingResults the new matchingResults
+     * @param matching_results the new matching_results
      */
-    public void setMatchingResults(final long matchingResults) {
-      this.matchingResults = matchingResults;
+    public void setMatchingResults(final long matching_results) {
+      this.matching_results = matching_results;
     }
 
     /**
@@ -6272,41 +6272,41 @@ public class DiscoveryV1Models {
    * The queryNotices options.
    */
   public class QueryNoticesOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
     private String filter;
     private String query;
-    private String naturalLanguageQuery;
+    private String natural_language_query;
     private Boolean passages;
     private String aggregation;
     private Long count;
-    private List<String> returnFields;
+    private List<String> return_fields;
     private Long offset;
     private List<String> xsort;
     private Boolean highlight;
-    private List<String> passagesFields;
-    private Long passagesCount;
-    private Long passagesCharacters;
-    private String deduplicateField;
+    private List<String> passages_fields;
+    private Long passages_count;
+    private Long passages_characters;
+    private String deduplicate_field;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
      * Gets the filter.
@@ -6329,14 +6329,14 @@ public class DiscoveryV1Models {
       return query;
     }
     /**
-     * Gets the naturalLanguageQuery.
+     * Gets the natural_language_query.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
      *
-     * @return the naturalLanguageQuery
+     * @return the natural_language_query
      */
     public String naturalLanguageQuery() {
-      return naturalLanguageQuery;
+      return natural_language_query;
     }
     /**
      * Gets the passages.
@@ -6369,14 +6369,14 @@ public class DiscoveryV1Models {
       return count;
     }
     /**
-     * Gets the returnFields.
+     * Gets the return_fields.
      *
      * A comma separated list of the portion of the document hierarchy to return.
      *
-     * @return the returnFields
+     * @return the return_fields
      */
     public List<String> returnFields() {
-      return returnFields;
+      return return_fields;
     }
     /**
      * Gets the offset.
@@ -6409,64 +6409,64 @@ public class DiscoveryV1Models {
       return highlight;
     }
     /**
-     * Gets the passagesFields.
+     * Gets the passages_fields.
      *
      * A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all top-level fields are included.
      *
-     * @return the passagesFields
+     * @return the passages_fields
      */
     public List<String> passagesFields() {
-      return passagesFields;
+      return passages_fields;
     }
     /**
-     * Gets the passagesCount.
+     * Gets the passages_count.
      *
      * The maximum number of passages to return. The search returns fewer passages if the requested total is not found. The default is `10`. The maximum is `100`.
      *
-     * @return the passagesCount
+     * @return the passages_count
      */
     public Long passagesCount() {
-      return passagesCount;
+      return passages_count;
     }
     /**
-     * Gets the passagesCharacters.
+     * Gets the passages_characters.
      *
      * The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`. The maximum is `2000`.
      *
-     * @return the passagesCharacters
+     * @return the passages_characters
      */
     public Long passagesCharacters() {
-      return passagesCharacters;
+      return passages_characters;
     }
     /**
-     * Gets the deduplicateField.
+     * Gets the deduplicate_field.
      *
      * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
      *
-     * @return the deduplicateField
+     * @return the deduplicate_field
      */
     public String deduplicateField() {
-      return deduplicateField;
+      return deduplicate_field;
     }
     private QueryNoticesOptions(QueryNoticesOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
       filter = builder.filter;
       query = builder.query;
-      naturalLanguageQuery = builder.naturalLanguageQuery;
+      natural_language_query = builder.natural_language_query;
       passages = builder.passages;
       aggregation = builder.aggregation;
       count = builder.count;
-      returnFields = builder.returnFields;
+      return_fields = builder.return_fields;
       offset = builder.offset;
       xsort = builder.xsort;
       highlight = builder.highlight;
-      passagesFields = builder.passagesFields;
-      passagesCount = builder.passagesCount;
-      passagesCharacters = builder.passagesCharacters;
-      deduplicateField = builder.deduplicateField;
+      passages_fields = builder.passages_fields;
+      passages_count = builder.passages_count;
+      passages_characters = builder.passages_characters;
+      deduplicate_field = builder.deduplicate_field;
     }
 
     /**
@@ -6483,40 +6483,40 @@ public class DiscoveryV1Models {
    * QueryNoticesOptions Builder.
    */
   public class QueryNoticesOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
     private String filter;
     private String query;
-    private String naturalLanguageQuery;
+    private String natural_language_query;
     private Boolean passages;
     private String aggregation;
     private Long count;
-    private List<String> returnFields;
+    private List<String> return_fields;
     private Long offset;
     private List<String> xsort;
     private Boolean highlight;
-    private List<String> passagesFields;
-    private Long passagesCount;
-    private Long passagesCharacters;
-    private String deduplicateField;
+    private List<String> passages_fields;
+    private Long passages_count;
+    private Long passages_characters;
+    private String deduplicate_field;
 
-    private QueryNoticesOptionsBuilder(QueryNoticesOptions queryNoticesOptions) {
-      environmentId = queryNoticesOptions.environmentId;
-      collectionId = queryNoticesOptions.collectionId;
-      filter = queryNoticesOptions.filter;
-      query = queryNoticesOptions.query;
-      naturalLanguageQuery = queryNoticesOptions.naturalLanguageQuery;
-      passages = queryNoticesOptions.passages;
-      aggregation = queryNoticesOptions.aggregation;
-      count = queryNoticesOptions.count;
-      returnFields = queryNoticesOptions.returnFields;
-      offset = queryNoticesOptions.offset;
-      xsort = queryNoticesOptions.xsort;
-      highlight = queryNoticesOptions.highlight;
-      passagesFields = queryNoticesOptions.passagesFields;
-      passagesCount = queryNoticesOptions.passagesCount;
-      passagesCharacters = queryNoticesOptions.passagesCharacters;
-      deduplicateField = queryNoticesOptions.deduplicateField;
+    private QueryNoticesOptionsBuilder(QueryNoticesOptions query_notices_options) {
+      environment_id = query_notices_options.environment_id;
+      collection_id = query_notices_options.collection_id;
+      filter = query_notices_options.filter;
+      query = query_notices_options.query;
+      natural_language_query = query_notices_options.natural_language_query;
+      passages = query_notices_options.passages;
+      aggregation = query_notices_options.aggregation;
+      count = query_notices_options.count;
+      return_fields = query_notices_options.return_fields;
+      offset = query_notices_options.offset;
+      xsort = query_notices_options.xsort;
+      highlight = query_notices_options.highlight;
+      passages_fields = query_notices_options.passages_fields;
+      passages_count = query_notices_options.passages_count;
+      passages_characters = query_notices_options.passages_characters;
+      deduplicate_field = query_notices_options.deduplicate_field;
     }
 
     /**
@@ -6528,35 +6528,35 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
      */
-    public QueryNoticesOptionsBuilder(String environmentId, String collectionId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
+    public QueryNoticesOptionsBuilder(String environment_id, String collection_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
     }
 
     /**
      * Builds a QueryNoticesOptions.
      *
-     * @return the queryNoticesOptions
+     * @return the query_notices_options
      */
     public QueryNoticesOptions build() {
       return new QueryNoticesOptions(this);
     }
 
     /**
-     * Adds an returnField to returnFields.
+     * Adds an return_field to return_fields.
      *
-     * @param returnField the new returnField
+     * @param return_field the new return_field
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder addReturnField(String returnField) {
-      IBMWatsonValidator.notNull(returnField, 'returnField cannot be null');
-      if (this.returnFields == null) {
-        this.returnFields = new List<String>();
+    public QueryNoticesOptionsBuilder addReturnField(String return_field) {
+      IBMWatsonValidator.notNull(return_field, 'return_field cannot be null');
+      if (this.return_fields == null) {
+        this.return_fields = new List<String>();
       }
-      this.returnFields.add(returnField);
+      this.return_fields.add(return_field);
       return this;
     }
 
@@ -6576,39 +6576,39 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Adds an passagesFields to passagesFields.
+     * Adds an passages_fields to passages_fields.
      *
-     * @param passagesFields the new passagesFields
+     * @param passages_fields the new passages_fields
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder addPassagesFields(String passagesFields) {
-      IBMWatsonValidator.notNull(passagesFields, 'passagesFields cannot be null');
-      if (this.passagesFields == null) {
-        this.passagesFields = new List<String>();
+    public QueryNoticesOptionsBuilder addPassagesFields(String passages_fields) {
+      IBMWatsonValidator.notNull(passages_fields, 'passages_fields cannot be null');
+      if (this.passages_fields == null) {
+        this.passages_fields = new List<String>();
       }
-      this.passagesFields.add(passagesFields);
+      this.passages_fields.add(passages_fields);
       return this;
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public QueryNoticesOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public QueryNoticesOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
 
@@ -6635,13 +6635,13 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the naturalLanguageQuery.
+     * Set the natural_language_query.
      *
-     * @param naturalLanguageQuery the naturalLanguageQuery
+     * @param natural_language_query the natural_language_query
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
-      this.naturalLanguageQuery = naturalLanguageQuery;
+    public QueryNoticesOptionsBuilder naturalLanguageQuery(String natural_language_query) {
+      this.natural_language_query = natural_language_query;
       return this;
     }
 
@@ -6673,20 +6673,20 @@ public class DiscoveryV1Models {
      * @param count the count
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder count(long count) {
+    public QueryNoticesOptionsBuilder count(Long count) {
       this.count = count;
       return this;
     }
 
     /**
-     * Set the returnFields.
-     * Existing returnFields will be replaced.
+     * Set the return_fields.
+     * Existing return_fields will be replaced.
      *
-     * @param returnFields the returnFields
+     * @param return_fields the return_fields
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder returnFields(List<String> returnFields) {
-      this.returnFields = returnFields;
+    public QueryNoticesOptionsBuilder returnFields(List<String> return_fields) {
+      this.return_fields = return_fields;
       return this;
     }
 
@@ -6696,7 +6696,7 @@ public class DiscoveryV1Models {
      * @param offset the offset
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder offset(long offset) {
+    public QueryNoticesOptionsBuilder offset(Long offset) {
       this.offset = offset;
       return this;
     }
@@ -6725,47 +6725,47 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the passagesFields.
-     * Existing passagesFields will be replaced.
+     * Set the passages_fields.
+     * Existing passages_fields will be replaced.
      *
-     * @param passagesFields the passagesFields
+     * @param passages_fields the passages_fields
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder passagesFields(List<String> passagesFields) {
-      this.passagesFields = passagesFields;
+    public QueryNoticesOptionsBuilder passagesFields(List<String> passages_fields) {
+      this.passages_fields = passages_fields;
       return this;
     }
 
     /**
-     * Set the passagesCount.
+     * Set the passages_count.
      *
-     * @param passagesCount the passagesCount
+     * @param passages_count the passages_count
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder passagesCount(long passagesCount) {
-      this.passagesCount = passagesCount;
+    public QueryNoticesOptionsBuilder passagesCount(Long passages_count) {
+      this.passages_count = passages_count;
       return this;
     }
 
     /**
-     * Set the passagesCharacters.
+     * Set the passages_characters.
      *
-     * @param passagesCharacters the passagesCharacters
+     * @param passages_characters the passages_characters
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder passagesCharacters(long passagesCharacters) {
-      this.passagesCharacters = passagesCharacters;
+    public QueryNoticesOptionsBuilder passagesCharacters(Long passages_characters) {
+      this.passages_characters = passages_characters;
       return this;
     }
 
     /**
-     * Set the deduplicateField.
+     * Set the deduplicate_field.
      *
-     * @param deduplicateField the deduplicateField
+     * @param deduplicate_field the deduplicate_field
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder deduplicateField(String deduplicateField) {
-      this.deduplicateField = deduplicateField;
+    public QueryNoticesOptionsBuilder deduplicateField(String deduplicate_field) {
+      this.deduplicate_field = deduplicate_field;
       return this;
     }
   }
@@ -6774,18 +6774,18 @@ public class DiscoveryV1Models {
    * QueryNoticesResponse.
    */
   public class QueryNoticesResponse extends IBMWatsonGenericModel {
-    private Long matchingResults;
+    private Long matching_results;
     private List<QueryNoticesResult> results;
     private List<QueryAggregation> aggregations;
     private List<QueryPassages> passages;
-    private Long duplicatesRemoved;
+    private Long duplicates_removed;
     /**
-     * Gets the matchingResults.
+     * Gets the matching_results.
      *
-     * @return the matchingResults
+     * @return the matching_results
      */
     public Long getMatchingResults() {
-      return matchingResults;
+      return matching_results;
     }
     /**
      * Gets the results.
@@ -6812,21 +6812,21 @@ public class DiscoveryV1Models {
       return passages;
     }
     /**
-     * Gets the duplicatesRemoved.
+     * Gets the duplicates_removed.
      *
-     * @return the duplicatesRemoved
+     * @return the duplicates_removed
      */
     public Long getDuplicatesRemoved() {
-      return duplicatesRemoved;
+      return duplicates_removed;
     }
 
     /**
-     * Sets the matchingResults.
+     * Sets the matching_results.
      *
-     * @param matchingResults the new matchingResults
+     * @param matching_results the new matching_results
      */
-    public void setMatchingResults(final long matchingResults) {
-      this.matchingResults = matchingResults;
+    public void setMatchingResults(final long matching_results) {
+      this.matching_results = matching_results;
     }
 
     /**
@@ -6857,12 +6857,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the duplicatesRemoved.
+     * Sets the duplicates_removed.
      *
-     * @param duplicatesRemoved the new duplicatesRemoved
+     * @param duplicates_removed the new duplicates_removed
      */
-    public void setDuplicatesRemoved(final long duplicatesRemoved) {
-      this.duplicatesRemoved = duplicatesRemoved;
+    public void setDuplicatesRemoved(final long duplicates_removed) {
+      this.duplicates_removed = duplicates_removed;
     }
   }
 
@@ -6899,12 +6899,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String getCollectionId() {
-      return (String)JSON.deserialize(JSON.serialize(this.get('collectionId')), String.class);
+      return (String)JSON.deserialize(JSON.serialize(this.get('collection_id')), String.class);
     }
 
     /**
@@ -6935,12 +6935,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the collectionId.
+     * Sets the collection_id.
      *
-     * @param collectionId the new collectionId
+     * @param collection_id the new collection_id
      */
-    public void setCollectionId(final String collectionId) {
-      this.put('collectionId', collectionId);
+    public void setCollectionId(final String collection_id) {
+      this.put('collection_id', collection_id);
     }
   }
 
@@ -6948,42 +6948,42 @@ public class DiscoveryV1Models {
    * The query options.
    */
   public class QueryOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
     private String filter;
     private String query;
-    private String naturalLanguageQuery;
+    private String natural_language_query;
     private Boolean passages;
     private String aggregation;
     private Long count;
-    private List<String> returnFields;
+    private List<String> return_fields;
     private Long offset;
     private List<String> xsort;
     private Boolean highlight;
-    private List<String> passagesFields;
-    private Long passagesCount;
-    private Long passagesCharacters;
+    private List<String> passages_fields;
+    private Long passages_count;
+    private Long passages_characters;
     private Boolean deduplicate;
-    private String deduplicateField;
+    private String deduplicate_field;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
      * Gets the filter.
@@ -7006,14 +7006,14 @@ public class DiscoveryV1Models {
       return query;
     }
     /**
-     * Gets the naturalLanguageQuery.
+     * Gets the natural_language_query.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
      *
-     * @return the naturalLanguageQuery
+     * @return the natural_language_query
      */
     public String naturalLanguageQuery() {
-      return naturalLanguageQuery;
+      return natural_language_query;
     }
     /**
      * Gets the passages.
@@ -7046,14 +7046,14 @@ public class DiscoveryV1Models {
       return count;
     }
     /**
-     * Gets the returnFields.
+     * Gets the return_fields.
      *
      * A comma separated list of the portion of the document hierarchy to return.
      *
-     * @return the returnFields
+     * @return the return_fields
      */
     public List<String> returnFields() {
-      return returnFields;
+      return return_fields;
     }
     /**
      * Gets the offset.
@@ -7086,34 +7086,34 @@ public class DiscoveryV1Models {
       return highlight;
     }
     /**
-     * Gets the passagesFields.
+     * Gets the passages_fields.
      *
      * A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all top-level fields are included.
      *
-     * @return the passagesFields
+     * @return the passages_fields
      */
     public List<String> passagesFields() {
-      return passagesFields;
+      return passages_fields;
     }
     /**
-     * Gets the passagesCount.
+     * Gets the passages_count.
      *
      * The maximum number of passages to return. The search returns fewer passages if the requested total is not found. The default is `10`. The maximum is `100`.
      *
-     * @return the passagesCount
+     * @return the passages_count
      */
     public Long passagesCount() {
-      return passagesCount;
+      return passages_count;
     }
     /**
-     * Gets the passagesCharacters.
+     * Gets the passages_characters.
      *
      * The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`. The maximum is `2000`.
      *
-     * @return the passagesCharacters
+     * @return the passages_characters
      */
     public Long passagesCharacters() {
-      return passagesCharacters;
+      return passages_characters;
     }
     /**
      * Gets the deduplicate.
@@ -7126,35 +7126,35 @@ public class DiscoveryV1Models {
       return deduplicate;
     }
     /**
-     * Gets the deduplicateField.
+     * Gets the deduplicate_field.
      *
      * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
      *
-     * @return the deduplicateField
+     * @return the deduplicate_field
      */
     public String deduplicateField() {
-      return deduplicateField;
+      return deduplicate_field;
     }
     private QueryOptions(QueryOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
       filter = builder.filter;
       query = builder.query;
-      naturalLanguageQuery = builder.naturalLanguageQuery;
+      natural_language_query = builder.natural_language_query;
       passages = builder.passages;
       aggregation = builder.aggregation;
       count = builder.count;
-      returnFields = builder.returnFields;
+      return_fields = builder.return_fields;
       offset = builder.offset;
       xsort = builder.xsort;
       highlight = builder.highlight;
-      passagesFields = builder.passagesFields;
-      passagesCount = builder.passagesCount;
-      passagesCharacters = builder.passagesCharacters;
+      passages_fields = builder.passages_fields;
+      passages_count = builder.passages_count;
+      passages_characters = builder.passages_characters;
       deduplicate = builder.deduplicate;
-      deduplicateField = builder.deduplicateField;
+      deduplicate_field = builder.deduplicate_field;
     }
 
     /**
@@ -7171,42 +7171,42 @@ public class DiscoveryV1Models {
    * QueryOptions Builder.
    */
   public class QueryOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
     private String filter;
     private String query;
-    private String naturalLanguageQuery;
+    private String natural_language_query;
     private Boolean passages;
     private String aggregation;
     private Long count;
-    private List<String> returnFields;
+    private List<String> return_fields;
     private Long offset;
     private List<String> xsort;
     private Boolean highlight;
-    private List<String> passagesFields;
-    private Long passagesCount;
-    private Long passagesCharacters;
+    private List<String> passages_fields;
+    private Long passages_count;
+    private Long passages_characters;
     private Boolean deduplicate;
-    private String deduplicateField;
+    private String deduplicate_field;
 
-    private QueryOptionsBuilder(QueryOptions queryOptions) {
-      environmentId = queryOptions.environmentId;
-      collectionId = queryOptions.collectionId;
-      filter = queryOptions.filter;
-      query = queryOptions.query;
-      naturalLanguageQuery = queryOptions.naturalLanguageQuery;
-      passages = queryOptions.passages;
-      aggregation = queryOptions.aggregation;
-      count = queryOptions.count;
-      returnFields = queryOptions.returnFields;
-      offset = queryOptions.offset;
-      xsort = queryOptions.xsort;
-      highlight = queryOptions.highlight;
-      passagesFields = queryOptions.passagesFields;
-      passagesCount = queryOptions.passagesCount;
-      passagesCharacters = queryOptions.passagesCharacters;
-      deduplicate = queryOptions.deduplicate;
-      deduplicateField = queryOptions.deduplicateField;
+    private QueryOptionsBuilder(QueryOptions query_options) {
+      environment_id = query_options.environment_id;
+      collection_id = query_options.collection_id;
+      filter = query_options.filter;
+      query = query_options.query;
+      natural_language_query = query_options.natural_language_query;
+      passages = query_options.passages;
+      aggregation = query_options.aggregation;
+      count = query_options.count;
+      return_fields = query_options.return_fields;
+      offset = query_options.offset;
+      xsort = query_options.xsort;
+      highlight = query_options.highlight;
+      passages_fields = query_options.passages_fields;
+      passages_count = query_options.passages_count;
+      passages_characters = query_options.passages_characters;
+      deduplicate = query_options.deduplicate;
+      deduplicate_field = query_options.deduplicate_field;
     }
 
     /**
@@ -7218,35 +7218,35 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
      */
-    public QueryOptionsBuilder(String environmentId, String collectionId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
+    public QueryOptionsBuilder(String environment_id, String collection_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
     }
 
     /**
      * Builds a QueryOptions.
      *
-     * @return the queryOptions
+     * @return the query_options
      */
     public QueryOptions build() {
       return new QueryOptions(this);
     }
 
     /**
-     * Adds an returnField to returnFields.
+     * Adds an return_field to return_fields.
      *
-     * @param returnField the new returnField
+     * @param return_field the new return_field
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder addReturnField(String returnField) {
-      IBMWatsonValidator.notNull(returnField, 'returnField cannot be null');
-      if (this.returnFields == null) {
-        this.returnFields = new List<String>();
+    public QueryOptionsBuilder addReturnField(String return_field) {
+      IBMWatsonValidator.notNull(return_field, 'return_field cannot be null');
+      if (this.return_fields == null) {
+        this.return_fields = new List<String>();
       }
-      this.returnFields.add(returnField);
+      this.return_fields.add(return_field);
       return this;
     }
 
@@ -7266,39 +7266,39 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Adds an passagesFields to passagesFields.
+     * Adds an passages_fields to passages_fields.
      *
-     * @param passagesFields the new passagesFields
+     * @param passages_fields the new passages_fields
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder addPassagesFields(String passagesFields) {
-      IBMWatsonValidator.notNull(passagesFields, 'passagesFields cannot be null');
-      if (this.passagesFields == null) {
-        this.passagesFields = new List<String>();
+    public QueryOptionsBuilder addPassagesFields(String passages_fields) {
+      IBMWatsonValidator.notNull(passages_fields, 'passages_fields cannot be null');
+      if (this.passages_fields == null) {
+        this.passages_fields = new List<String>();
       }
-      this.passagesFields.add(passagesFields);
+      this.passages_fields.add(passages_fields);
       return this;
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public QueryOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public QueryOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
 
@@ -7325,13 +7325,13 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the naturalLanguageQuery.
+     * Set the natural_language_query.
      *
-     * @param naturalLanguageQuery the naturalLanguageQuery
+     * @param natural_language_query the natural_language_query
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
-      this.naturalLanguageQuery = naturalLanguageQuery;
+    public QueryOptionsBuilder naturalLanguageQuery(String natural_language_query) {
+      this.natural_language_query = natural_language_query;
       return this;
     }
 
@@ -7363,20 +7363,20 @@ public class DiscoveryV1Models {
      * @param count the count
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder count(long count) {
+    public QueryOptionsBuilder count(Long count) {
       this.count = count;
       return this;
     }
 
     /**
-     * Set the returnFields.
-     * Existing returnFields will be replaced.
+     * Set the return_fields.
+     * Existing return_fields will be replaced.
      *
-     * @param returnFields the returnFields
+     * @param return_fields the return_fields
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder returnFields(List<String> returnFields) {
-      this.returnFields = returnFields;
+    public QueryOptionsBuilder returnFields(List<String> return_fields) {
+      this.return_fields = return_fields;
       return this;
     }
 
@@ -7386,7 +7386,7 @@ public class DiscoveryV1Models {
      * @param offset the offset
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder offset(long offset) {
+    public QueryOptionsBuilder offset(Long offset) {
       this.offset = offset;
       return this;
     }
@@ -7415,36 +7415,36 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the passagesFields.
-     * Existing passagesFields will be replaced.
+     * Set the passages_fields.
+     * Existing passages_fields will be replaced.
      *
-     * @param passagesFields the passagesFields
+     * @param passages_fields the passages_fields
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder passagesFields(List<String> passagesFields) {
-      this.passagesFields = passagesFields;
+    public QueryOptionsBuilder passagesFields(List<String> passages_fields) {
+      this.passages_fields = passages_fields;
       return this;
     }
 
     /**
-     * Set the passagesCount.
+     * Set the passages_count.
      *
-     * @param passagesCount the passagesCount
+     * @param passages_count the passages_count
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder passagesCount(long passagesCount) {
-      this.passagesCount = passagesCount;
+    public QueryOptionsBuilder passagesCount(Long passages_count) {
+      this.passages_count = passages_count;
       return this;
     }
 
     /**
-     * Set the passagesCharacters.
+     * Set the passages_characters.
      *
-     * @param passagesCharacters the passagesCharacters
+     * @param passages_characters the passages_characters
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder passagesCharacters(long passagesCharacters) {
-      this.passagesCharacters = passagesCharacters;
+    public QueryOptionsBuilder passagesCharacters(Long passages_characters) {
+      this.passages_characters = passages_characters;
       return this;
     }
 
@@ -7460,13 +7460,13 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the deduplicateField.
+     * Set the deduplicate_field.
      *
-     * @param deduplicateField the deduplicateField
+     * @param deduplicate_field the deduplicate_field
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder deduplicateField(String deduplicateField) {
-      this.deduplicateField = deduplicateField;
+    public QueryOptionsBuilder deduplicateField(String deduplicate_field) {
+      this.deduplicate_field = deduplicate_field;
       return this;
     }
   }
@@ -7475,61 +7475,61 @@ public class DiscoveryV1Models {
    * QueryPassages.
    */
   public class QueryPassages extends IBMWatsonGenericModel {
-    private String documentId;
-    private Double passageScore;
-    private String passageText;
-    private Double startOffset;
-    private Double endOffset;
+    private String document_id;
+    private Double passage_score;
+    private String passage_text;
+    private Double start_offset;
+    private Double end_offset;
     private String field;
     /**
-     * Gets the documentId.
+     * Gets the document_id.
      *
      * The unique identifier of the document from which the passage has been extracted.
      *
-     * @return the documentId
+     * @return the document_id
      */
     public String getDocumentId() {
-      return documentId;
+      return document_id;
     }
     /**
-     * Gets the passageScore.
+     * Gets the passage_score.
      *
      * The confidence score of the passages's analysis. A higher score indicates greater confidence.
      *
-     * @return the passageScore
+     * @return the passage_score
      */
     public Double getPassageScore() {
-      return passageScore;
+      return passage_score;
     }
     /**
-     * Gets the passageText.
+     * Gets the passage_text.
      *
      * The content of the extracted passage.
      *
-     * @return the passageText
+     * @return the passage_text
      */
     public String getPassageText() {
-      return passageText;
+      return passage_text;
     }
     /**
-     * Gets the startOffset.
+     * Gets the start_offset.
      *
      * The position of the first character of the extracted passage in the originating field.
      *
-     * @return the startOffset
+     * @return the start_offset
      */
     public Double getStartOffset() {
-      return startOffset;
+      return start_offset;
     }
     /**
-     * Gets the endOffset.
+     * Gets the end_offset.
      *
      * The position of the last character of the extracted passage in the originating field.
      *
-     * @return the endOffset
+     * @return the end_offset
      */
     public Double getEndOffset() {
-      return endOffset;
+      return end_offset;
     }
     /**
      * Gets the field.
@@ -7543,48 +7543,48 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the documentId.
+     * Sets the document_id.
      *
-     * @param documentId the new documentId
+     * @param document_id the new document_id
      */
-    public void setDocumentId(final String documentId) {
-      this.documentId = documentId;
+    public void setDocumentId(final String document_id) {
+      this.document_id = document_id;
     }
 
     /**
-     * Sets the passageScore.
+     * Sets the passage_score.
      *
-     * @param passageScore the new passageScore
+     * @param passage_score the new passage_score
      */
-    public void setPassageScore(final Double passageScore) {
-      this.passageScore = passageScore;
+    public void setPassageScore(final Double passage_score) {
+      this.passage_score = passage_score;
     }
 
     /**
-     * Sets the passageText.
+     * Sets the passage_text.
      *
-     * @param passageText the new passageText
+     * @param passage_text the new passage_text
      */
-    public void setPassageText(final String passageText) {
-      this.passageText = passageText;
+    public void setPassageText(final String passage_text) {
+      this.passage_text = passage_text;
     }
 
     /**
-     * Sets the startOffset.
+     * Sets the start_offset.
      *
-     * @param startOffset the new startOffset
+     * @param start_offset the new start_offset
      */
-    public void setStartOffset(final Double startOffset) {
-      this.startOffset = startOffset;
+    public void setStartOffset(final Double start_offset) {
+      this.start_offset = start_offset;
     }
 
     /**
-     * Sets the endOffset.
+     * Sets the end_offset.
      *
-     * @param endOffset the new endOffset
+     * @param end_offset the new end_offset
      */
-    public void setEndOffset(final Double endOffset) {
-      this.endOffset = endOffset;
+    public void setEndOffset(final Double end_offset) {
+      this.end_offset = end_offset;
     }
 
     /**
@@ -7601,18 +7601,18 @@ public class DiscoveryV1Models {
    * A response containing the documents and aggregations for the query.
    */
   public class QueryResponse extends IBMWatsonGenericModel {
-    private Long matchingResults;
+    private Long matching_results;
     private List<QueryResult> results;
     private List<QueryAggregation> aggregations;
     private List<QueryPassages> passages;
-    private Long duplicatesRemoved;
+    private Long duplicates_removed;
     /**
-     * Gets the matchingResults.
+     * Gets the matching_results.
      *
-     * @return the matchingResults
+     * @return the matching_results
      */
     public Long getMatchingResults() {
-      return matchingResults;
+      return matching_results;
     }
     /**
      * Gets the results.
@@ -7639,21 +7639,21 @@ public class DiscoveryV1Models {
       return passages;
     }
     /**
-     * Gets the duplicatesRemoved.
+     * Gets the duplicates_removed.
      *
-     * @return the duplicatesRemoved
+     * @return the duplicates_removed
      */
     public Long getDuplicatesRemoved() {
-      return duplicatesRemoved;
+      return duplicates_removed;
     }
 
     /**
-     * Sets the matchingResults.
+     * Sets the matching_results.
      *
-     * @param matchingResults the new matchingResults
+     * @param matching_results the new matching_results
      */
-    public void setMatchingResults(final long matchingResults) {
-      this.matchingResults = matchingResults;
+    public void setMatchingResults(final long matching_results) {
+      this.matching_results = matching_results;
     }
 
     /**
@@ -7684,12 +7684,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the duplicatesRemoved.
+     * Sets the duplicates_removed.
      *
-     * @param duplicatesRemoved the new duplicatesRemoved
+     * @param duplicates_removed the new duplicates_removed
      */
-    public void setDuplicatesRemoved(final long duplicatesRemoved) {
-      this.duplicatesRemoved = duplicatesRemoved;
+    public void setDuplicatesRemoved(final long duplicates_removed) {
+      this.duplicates_removed = duplicates_removed;
     }
   }
 
@@ -7726,12 +7726,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String getCollectionId() {
-      return (String)JSON.deserialize(JSON.serialize(this.get('collectionId')), String.class);
+      return (String)JSON.deserialize(JSON.serialize(this.get('collection_id')), String.class);
     }
 
     /**
@@ -7762,12 +7762,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the collectionId.
+     * Sets the collection_id.
      *
-     * @param collectionId the new collectionId
+     * @param collection_id the new collection_id
      */
-    public void setCollectionId(final String collectionId) {
-      this.put('collectionId', collectionId);
+    public void setCollectionId(final String collection_id) {
+      this.put('collection_id', collection_id);
     }
   }
 
@@ -7790,23 +7790,23 @@ public class DiscoveryV1Models {
    * The testConfigurationInEnvironment options.
    */
   public class TestConfigurationInEnvironmentOptions extends IBMWatsonGenericModel {
-    private String environmentId;
+    private String environment_id;
     private String configuration;
     private String step;
-    private String configurationId;
-    private String file; // Was File, changed to compile correctly
+    private String configuration_id;
+    private String file;
     private String filename;
     private String metadata;
-    private String fileContentType;
+    private String file_content_type;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
      * Gets the configuration.
@@ -7829,14 +7829,14 @@ public class DiscoveryV1Models {
       return step;
     }
     /**
-     * Gets the configurationId.
+     * Gets the configuration_id.
      *
      * The ID of the configuration to use to process the document. If the `configuration` form part is also provided (both are present at the same time), then request will be rejected.
      *
-     * @return the configurationId
+     * @return the configuration_id
      */
     public String configurationId() {
-      return configurationId;
+      return configuration_id;
     }
     /**
      * Gets the file.
@@ -7845,7 +7845,7 @@ public class DiscoveryV1Models {
      *
      * @return the file
      */
-    public String file() { // Was File, changed to compile correctly
+    public String file() {
       return file;
     }
     /**
@@ -7869,25 +7869,25 @@ public class DiscoveryV1Models {
       return metadata;
     }
     /**
-     * Gets the fileContentType.
+     * Gets the file_content_type.
      *
      * The content type of file.
      *
-     * @return the fileContentType
+     * @return the file_content_type
      */
     public String fileContentType() {
-      return fileContentType;
+      return file_content_type;
     }
     private TestConfigurationInEnvironmentOptions(TestConfigurationInEnvironmentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      environmentId = builder.environmentId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      environment_id = builder.environment_id;
       configuration = builder.configuration;
       step = builder.step;
-      configurationId = builder.configurationId;
+      configuration_id = builder.configuration_id;
       file = builder.file;
       filename = builder.filename;
       metadata = builder.metadata;
-      fileContentType = builder.fileContentType;
+      file_content_type = builder.file_content_type;
     }
 
     /**
@@ -7904,24 +7904,24 @@ public class DiscoveryV1Models {
    * TestConfigurationInEnvironmentOptions Builder.
    */
   public class TestConfigurationInEnvironmentOptionsBuilder {
-    private String environmentId;
+    private String environment_id;
     private String configuration;
     private String step;
-    private String configurationId;
-    private String file; // Was File, changed to compile correctly
+    private String configuration_id;
+    private String file;
     private String filename;
     private String metadata;
-    private String fileContentType;
+    private String file_content_type;
 
-    private TestConfigurationInEnvironmentOptionsBuilder(TestConfigurationInEnvironmentOptions testConfigurationInEnvironmentOptions) {
-      environmentId = testConfigurationInEnvironmentOptions.environmentId;
-      configuration = testConfigurationInEnvironmentOptions.configuration;
-      step = testConfigurationInEnvironmentOptions.step;
-      configurationId = testConfigurationInEnvironmentOptions.configurationId;
-      file = testConfigurationInEnvironmentOptions.file;
-      filename = testConfigurationInEnvironmentOptions.filename;
-      metadata = testConfigurationInEnvironmentOptions.metadata;
-      fileContentType = testConfigurationInEnvironmentOptions.fileContentType;
+    private TestConfigurationInEnvironmentOptionsBuilder(TestConfigurationInEnvironmentOptions test_configuration_in_environment_options) {
+      environment_id = test_configuration_in_environment_options.environment_id;
+      configuration = test_configuration_in_environment_options.configuration;
+      step = test_configuration_in_environment_options.step;
+      configuration_id = test_configuration_in_environment_options.configuration_id;
+      file = test_configuration_in_environment_options.file;
+      filename = test_configuration_in_environment_options.filename;
+      metadata = test_configuration_in_environment_options.metadata;
+      file_content_type = test_configuration_in_environment_options.file_content_type;
     }
 
     /**
@@ -7933,29 +7933,29 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      */
-    public TestConfigurationInEnvironmentOptionsBuilder(String environmentId) {
-      this.environmentId = environmentId;
+    public TestConfigurationInEnvironmentOptionsBuilder(String environment_id) {
+      this.environment_id = environment_id;
     }
 
     /**
      * Builds a TestConfigurationInEnvironmentOptions.
      *
-     * @return the testConfigurationInEnvironmentOptions
+     * @return the test_configuration_in_environment_options
      */
     public TestConfigurationInEnvironmentOptions build() {
       return new TestConfigurationInEnvironmentOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the TestConfigurationInEnvironmentOptions builder
      */
-    public TestConfigurationInEnvironmentOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public TestConfigurationInEnvironmentOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
@@ -7982,13 +7982,13 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the configurationId.
+     * Set the configuration_id.
      *
-     * @param configurationId the configurationId
+     * @param configuration_id the configuration_id
      * @return the TestConfigurationInEnvironmentOptions builder
      */
-    public TestConfigurationInEnvironmentOptionsBuilder configurationId(String configurationId) {
-      this.configurationId = configurationId;
+    public TestConfigurationInEnvironmentOptionsBuilder configurationId(String configuration_id) {
+      this.configuration_id = configuration_id;
       return this;
     }
 
@@ -8009,7 +8009,7 @@ public class DiscoveryV1Models {
      * @param filename the filename
      * @return the TestConfigurationInEnvironmentOptions builder
      */
-    public TestConfigurationInEnvironmentOptionsBuilder filename(String filename) { // Was File, changed to compile correctly
+    public TestConfigurationInEnvironmentOptionsBuilder filename(String filename) {
       this.filename = filename;
       return this;
     }
@@ -8026,13 +8026,13 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the fileContentType.
+     * Set the file_content_type.
      *
-     * @param fileContentType the fileContentType
+     * @param file_content_type the file_content_type
      * @return the TestConfigurationInEnvironmentOptions builder
      */
-    public TestConfigurationInEnvironmentOptionsBuilder fileContentType(String fileContentType) {
-      this.fileContentType = fileContentType;
+    public TestConfigurationInEnvironmentOptionsBuilder fileContentType(String file_content_type) {
+      this.file_content_type = file_content_type;
       return this;
     }
   }
@@ -8041,21 +8041,21 @@ public class DiscoveryV1Models {
    * TestDocument.
    */
   public class TestDocument extends IBMWatsonGenericModel {
-    private String configurationId;
+    private String configuration_id;
     private String status;
-    private Long enrichedFieldUnits;
-    private String originalMediaType;
+    private Long enriched_field_units;
+    private String original_media_type;
     private List<DocumentSnapshot> snapshots;
     private List<Notice> notices;
     /**
-     * Gets the configurationId.
+     * Gets the configuration_id.
      *
      * The unique identifier for the configuration.
      *
-     * @return the configurationId
+     * @return the configuration_id
      */
     public String getConfigurationId() {
-      return configurationId;
+      return configuration_id;
     }
     /**
      * Gets the status.
@@ -8068,24 +8068,24 @@ public class DiscoveryV1Models {
       return status;
     }
     /**
-     * Gets the enrichedFieldUnits.
+     * Gets the enriched_field_units.
      *
      * The number of 10-kB chunks of field data that were enriched. This can be used to estimate the cost of running a real ingestion.
      *
-     * @return the enrichedFieldUnits
+     * @return the enriched_field_units
      */
     public Long getEnrichedFieldUnits() {
-      return enrichedFieldUnits;
+      return enriched_field_units;
     }
     /**
-     * Gets the originalMediaType.
+     * Gets the original_media_type.
      *
      * Format of the test document.
      *
-     * @return the originalMediaType
+     * @return the original_media_type
      */
     public String getOriginalMediaType() {
-      return originalMediaType;
+      return original_media_type;
     }
     /**
      * Gets the snapshots.
@@ -8131,24 +8131,24 @@ public class DiscoveryV1Models {
    * TrainingDataSet.
    */
   public class TrainingDataSet extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
     private List<TrainingQuery> queries;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String getEnvironmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String getCollectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
      * Gets the queries.
@@ -8160,21 +8160,21 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the environmentId.
+     * Sets the environment_id.
      *
-     * @param environmentId the new environmentId
+     * @param environment_id the new environment_id
      */
-    public void setEnvironmentId(final String environmentId) {
-      this.environmentId = environmentId;
+    public void setEnvironmentId(final String environment_id) {
+      this.environment_id = environment_id;
     }
 
     /**
-     * Sets the collectionId.
+     * Sets the collection_id.
      *
-     * @param collectionId the new collectionId
+     * @param collection_id the new collection_id
      */
-    public void setCollectionId(final String collectionId) {
-      this.collectionId = collectionId;
+    public void setCollectionId(final String collection_id) {
+      this.collection_id = collection_id;
     }
 
     /**
@@ -8191,24 +8191,24 @@ public class DiscoveryV1Models {
    * TrainingExample.
    */
   public class TrainingExample extends IBMWatsonGenericModel {
-    private String documentId;
-    private String crossReference;
+    private String document_id;
+    private String cross_reference;
     private Long relevance;
     /**
-     * Gets the documentId.
+     * Gets the document_id.
      *
-     * @return the documentId
+     * @return the document_id
      */
     public String getDocumentId() {
-      return documentId;
+      return document_id;
     }
     /**
-     * Gets the crossReference.
+     * Gets the cross_reference.
      *
-     * @return the crossReference
+     * @return the cross_reference
      */
     public String getCrossReference() {
-      return crossReference;
+      return cross_reference;
     }
     /**
      * Gets the relevance.
@@ -8220,21 +8220,21 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the documentId.
+     * Sets the document_id.
      *
-     * @param documentId the new documentId
+     * @param document_id the new document_id
      */
-    public void setDocumentId(final String documentId) {
-      this.documentId = documentId;
+    public void setDocumentId(final String document_id) {
+      this.document_id = document_id;
     }
 
     /**
-     * Sets the crossReference.
+     * Sets the cross_reference.
      *
-     * @param crossReference the new crossReference
+     * @param cross_reference the new cross_reference
      */
-    public void setCrossReference(final String crossReference) {
-      this.crossReference = crossReference;
+    public void setCrossReference(final String cross_reference) {
+      this.cross_reference = cross_reference;
     }
 
     /**
@@ -8251,25 +8251,25 @@ public class DiscoveryV1Models {
    * TrainingQuery.
    */
   public class TrainingQuery extends IBMWatsonGenericModel {
-    private String queryId;
-    private String naturalLanguageQuery;
+    private String query_id;
+    private String natural_language_query;
     private String filter;
     private List<TrainingExample> examples;
     /**
-     * Gets the queryId.
+     * Gets the query_id.
      *
-     * @return the queryId
+     * @return the query_id
      */
     public String getQueryId() {
-      return queryId;
+      return query_id;
     }
     /**
-     * Gets the naturalLanguageQuery.
+     * Gets the natural_language_query.
      *
-     * @return the naturalLanguageQuery
+     * @return the natural_language_query
      */
     public String getNaturalLanguageQuery() {
-      return naturalLanguageQuery;
+      return natural_language_query;
     }
     /**
      * Gets the filter.
@@ -8289,21 +8289,21 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the queryId.
+     * Sets the query_id.
      *
-     * @param queryId the new queryId
+     * @param query_id the new query_id
      */
-    public void setQueryId(final String queryId) {
-      this.queryId = queryId;
+    public void setQueryId(final String query_id) {
+      this.query_id = query_id;
     }
 
     /**
-     * Sets the naturalLanguageQuery.
+     * Sets the natural_language_query.
      *
-     * @param naturalLanguageQuery the new naturalLanguageQuery
+     * @param natural_language_query the new natural_language_query
      */
-    public void setNaturalLanguageQuery(final String naturalLanguageQuery) {
-      this.naturalLanguageQuery = naturalLanguageQuery;
+    public void setNaturalLanguageQuery(final String natural_language_query) {
+      this.natural_language_query = natural_language_query;
     }
 
     /**
@@ -8329,22 +8329,22 @@ public class DiscoveryV1Models {
    * TrainingStatus.
    */
   public class TrainingStatus extends IBMWatsonGenericModel {
-    private Long totalExamples;
+    private Long total_examples;
     private Boolean available;
     private Boolean processing;
-    private Boolean minimumQueriesAdded;
-    private Boolean minimumExamplesAdded;
-    private Boolean sufficientLabelDiversity;
+    private Boolean minimum_queries_added;
+    private Boolean minimum_examples_added;
+    private Boolean sufficient_label_diversity;
     private Long notices;
-    private Datetime successfullyTrained;
-    private Datetime dataUpdated;
+    private Datetime successfully_trained;
+    private Datetime data_updated;
     /**
-     * Gets the totalExamples.
+     * Gets the total_examples.
      *
-     * @return the totalExamples
+     * @return the total_examples
      */
     public Long getTotalExamples() {
-      return totalExamples;
+      return total_examples;
     }
     /**
      * Gets the available.
@@ -8363,28 +8363,28 @@ public class DiscoveryV1Models {
       return processing;
     }
     /**
-     * Gets the minimumQueriesAdded.
+     * Gets the minimum_queries_added.
      *
-     * @return the minimumQueriesAdded
+     * @return the minimum_queries_added
      */
     public Boolean isMinimumQueriesAdded() {
-      return minimumQueriesAdded;
+      return minimum_queries_added;
     }
     /**
-     * Gets the minimumExamplesAdded.
+     * Gets the minimum_examples_added.
      *
-     * @return the minimumExamplesAdded
+     * @return the minimum_examples_added
      */
     public Boolean isMinimumExamplesAdded() {
-      return minimumExamplesAdded;
+      return minimum_examples_added;
     }
     /**
-     * Gets the sufficientLabelDiversity.
+     * Gets the sufficient_label_diversity.
      *
-     * @return the sufficientLabelDiversity
+     * @return the sufficient_label_diversity
      */
     public Boolean isSufficientLabelDiversity() {
-      return sufficientLabelDiversity;
+      return sufficient_label_diversity;
     }
     /**
      * Gets the notices.
@@ -8395,29 +8395,29 @@ public class DiscoveryV1Models {
       return notices;
     }
     /**
-     * Gets the successfullyTrained.
+     * Gets the successfully_trained.
      *
-     * @return the successfullyTrained
+     * @return the successfully_trained
      */
     public Datetime getSuccessfullyTrained() {
-      return successfullyTrained;
+      return successfully_trained;
     }
     /**
-     * Gets the dataUpdated.
+     * Gets the data_updated.
      *
-     * @return the dataUpdated
+     * @return the data_updated
      */
     public Datetime getDataUpdated() {
-      return dataUpdated;
+      return data_updated;
     }
 
     /**
-     * Sets the totalExamples.
+     * Sets the total_examples.
      *
-     * @param totalExamples the new totalExamples
+     * @param total_examples the new total_examples
      */
-    public void setTotalExamples(final long totalExamples) {
-      this.totalExamples = totalExamples;
+    public void setTotalExamples(final long total_examples) {
+      this.total_examples = total_examples;
     }
 
     /**
@@ -8439,30 +8439,30 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the minimumQueriesAdded.
+     * Sets the minimum_queries_added.
      *
-     * @param minimumQueriesAdded the new minimumQueriesAdded
+     * @param minimum_queries_added the new minimum_queries_added
      */
-    public void setMinimumQueriesAdded(final Boolean minimumQueriesAdded) {
-      this.minimumQueriesAdded = minimumQueriesAdded;
+    public void setMinimumQueriesAdded(final Boolean minimum_queries_added) {
+      this.minimum_queries_added = minimum_queries_added;
     }
 
     /**
-     * Sets the minimumExamplesAdded.
+     * Sets the minimum_examples_added.
      *
-     * @param minimumExamplesAdded the new minimumExamplesAdded
+     * @param minimum_examples_added the new minimum_examples_added
      */
-    public void setMinimumExamplesAdded(final Boolean minimumExamplesAdded) {
-      this.minimumExamplesAdded = minimumExamplesAdded;
+    public void setMinimumExamplesAdded(final Boolean minimum_examples_added) {
+      this.minimum_examples_added = minimum_examples_added;
     }
 
     /**
-     * Sets the sufficientLabelDiversity.
+     * Sets the sufficient_label_diversity.
      *
-     * @param sufficientLabelDiversity the new sufficientLabelDiversity
+     * @param sufficient_label_diversity the new sufficient_label_diversity
      */
-    public void setSufficientLabelDiversity(final Boolean sufficientLabelDiversity) {
-      this.sufficientLabelDiversity = sufficientLabelDiversity;
+    public void setSufficientLabelDiversity(final Boolean sufficient_label_diversity) {
+      this.sufficient_label_diversity = sufficient_label_diversity;
     }
 
     /**
@@ -8475,21 +8475,21 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the successfullyTrained.
+     * Sets the successfully_trained.
      *
-     * @param successfullyTrained the new successfullyTrained
+     * @param successfully_trained the new successfully_trained
      */
-    public void setSuccessfullyTrained(final Datetime successfullyTrained) {
-      this.successfullyTrained = successfullyTrained;
+    public void setSuccessfullyTrained(final Datetime successfully_trained) {
+      this.successfully_trained = successfully_trained;
     }
 
     /**
-     * Sets the dataUpdated.
+     * Sets the data_updated.
      *
-     * @param dataUpdated the new dataUpdated
+     * @param data_updated the new data_updated
      */
-    public void setDataUpdated(final Datetime dataUpdated) {
-      this.dataUpdated = dataUpdated;
+    public void setDataUpdated(final Datetime data_updated) {
+      this.data_updated = data_updated;
     }
   }
 
@@ -8497,30 +8497,30 @@ public class DiscoveryV1Models {
    * The updateCollection options.
    */
   public class UpdateCollectionOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
     private String name;
     private String description;
-    private String configurationId;
+    private String configuration_id;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
      * Gets the name.
@@ -8543,23 +8543,23 @@ public class DiscoveryV1Models {
       return description;
     }
     /**
-     * Gets the configurationId.
+     * Gets the configuration_id.
      *
      * The ID of the configuration in which the collection is to be updated.
      *
-     * @return the configurationId
+     * @return the configuration_id
      */
     public String configurationId() {
-      return configurationId;
+      return configuration_id;
     }
     private UpdateCollectionOptions(UpdateCollectionOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
       name = builder.name;
       description = builder.description;
-      configurationId = builder.configurationId;
+      configuration_id = builder.configuration_id;
     }
 
     /**
@@ -8576,18 +8576,18 @@ public class DiscoveryV1Models {
    * UpdateCollectionOptions Builder.
    */
   public class UpdateCollectionOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
+    private String environment_id;
+    private String collection_id;
     private String name;
     private String description;
-    private String configurationId;
+    private String configuration_id;
 
-    private UpdateCollectionOptionsBuilder(UpdateCollectionOptions updateCollectionOptions) {
-      environmentId = updateCollectionOptions.environmentId;
-      collectionId = updateCollectionOptions.collectionId;
-      name = updateCollectionOptions.name;
-      description = updateCollectionOptions.description;
-      configurationId = updateCollectionOptions.configurationId;
+    private UpdateCollectionOptionsBuilder(UpdateCollectionOptions update_collection_options) {
+      environment_id = update_collection_options.environment_id;
+      collection_id = update_collection_options.collection_id;
+      name = update_collection_options.name;
+      description = update_collection_options.description;
+      configuration_id = update_collection_options.configuration_id;
     }
 
     /**
@@ -8599,42 +8599,42 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
      */
-    public UpdateCollectionOptionsBuilder(String environmentId, String collectionId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
+    public UpdateCollectionOptionsBuilder(String environment_id, String collection_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
     }
 
     /**
      * Builds a UpdateCollectionOptions.
      *
-     * @return the updateCollectionOptions
+     * @return the update_collection_options
      */
     public UpdateCollectionOptions build() {
       return new UpdateCollectionOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the UpdateCollectionOptions builder
      */
-    public UpdateCollectionOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public UpdateCollectionOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the UpdateCollectionOptions builder
      */
-    public UpdateCollectionOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public UpdateCollectionOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
 
@@ -8661,13 +8661,13 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the configurationId.
+     * Set the configuration_id.
      *
-     * @param configurationId the configurationId
+     * @param configuration_id the configuration_id
      * @return the UpdateCollectionOptions builder
      */
-    public UpdateCollectionOptionsBuilder configurationId(String configurationId) {
-      this.configurationId = configurationId;
+    public UpdateCollectionOptionsBuilder configurationId(String configuration_id) {
+      this.configuration_id = configuration_id;
       return this;
     }
   }
@@ -8676,32 +8676,32 @@ public class DiscoveryV1Models {
    * The updateConfiguration options.
    */
   public class UpdateConfigurationOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String configurationId;
+    private String environment_id;
+    private String configuration_id;
     private String name;
     private String description;
     private Conversions conversions;
     private List<Enrichment> enrichments;
     private List<NormalizationOperation> normalizations;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the configurationId.
+     * Gets the configuration_id.
      *
      * The ID of the configuration.
      *
-     * @return the configurationId
+     * @return the configuration_id
      */
     public String configurationId() {
-      return configurationId;
+      return configuration_id;
     }
     /**
      * Gets the name.
@@ -8754,10 +8754,10 @@ public class DiscoveryV1Models {
       return normalizations;
     }
     private UpdateConfigurationOptions(UpdateConfigurationOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.configurationId, 'configurationId cannot be empty');
-      environmentId = builder.environmentId;
-      configurationId = builder.configurationId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.configuration_id, 'configuration_id cannot be empty');
+      environment_id = builder.environment_id;
+      configuration_id = builder.configuration_id;
       name = builder.name;
       description = builder.description;
       conversions = builder.conversions;
@@ -8779,22 +8779,22 @@ public class DiscoveryV1Models {
    * UpdateConfigurationOptions Builder.
    */
   public class UpdateConfigurationOptionsBuilder {
-    private String environmentId;
-    private String configurationId;
+    private String environment_id;
+    private String configuration_id;
     private String name;
     private String description;
     private Conversions conversions;
     private List<Enrichment> enrichments;
     private List<NormalizationOperation> normalizations;
 
-    private UpdateConfigurationOptionsBuilder(UpdateConfigurationOptions updateConfigurationOptions) {
-      environmentId = updateConfigurationOptions.environmentId;
-      configurationId = updateConfigurationOptions.configurationId;
-      name = updateConfigurationOptions.name;
-      description = updateConfigurationOptions.description;
-      conversions = updateConfigurationOptions.conversions;
-      enrichments = updateConfigurationOptions.enrichments;
-      normalizations = updateConfigurationOptions.normalizations;
+    private UpdateConfigurationOptionsBuilder(UpdateConfigurationOptions update_configuration_options) {
+      environment_id = update_configuration_options.environment_id;
+      configuration_id = update_configuration_options.configuration_id;
+      name = update_configuration_options.name;
+      description = update_configuration_options.description;
+      conversions = update_configuration_options.conversions;
+      enrichments = update_configuration_options.enrichments;
+      normalizations = update_configuration_options.normalizations;
     }
 
     /**
@@ -8806,18 +8806,18 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param configurationId the configurationId
+     * @param environment_id the environment_id
+     * @param configuration_id the configuration_id
      */
-    public UpdateConfigurationOptionsBuilder(String environmentId, String configurationId) {
-      this.environmentId = environmentId;
-      this.configurationId = configurationId;
+    public UpdateConfigurationOptionsBuilder(String environment_id, String configuration_id) {
+      this.environment_id = environment_id;
+      this.configuration_id = configuration_id;
     }
 
     /**
      * Builds a UpdateConfigurationOptions.
      *
-     * @return the updateConfigurationOptions
+     * @return the update_configuration_options
      */
     public UpdateConfigurationOptions build() {
       return new UpdateConfigurationOptions(this);
@@ -8854,24 +8854,24 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public UpdateConfigurationOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the configurationId.
+     * Set the configuration_id.
      *
-     * @param configurationId the configurationId
+     * @param configuration_id the configuration_id
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder configurationId(String configurationId) {
-      this.configurationId = configurationId;
+    public UpdateConfigurationOptionsBuilder configurationId(String configuration_id) {
+      this.configuration_id = configuration_id;
       return this;
     }
 
@@ -8952,42 +8952,42 @@ public class DiscoveryV1Models {
    * The updateDocument options.
    */
   public class UpdateDocumentOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
-    private String documentId;
-    private String file; // Was File, changed to compile correctly
+    private String environment_id;
+    private String collection_id;
+    private String document_id;
+    private String file;
     private String filename;
     private String metadata;
-    private String fileContentType;
+    private String file_content_type;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
-     * Gets the documentId.
+     * Gets the document_id.
      *
      * The ID of the document.
      *
-     * @return the documentId
+     * @return the document_id
      */
     public String documentId() {
-      return documentId;
+      return document_id;
     }
     /**
      * Gets the file.
@@ -8996,7 +8996,7 @@ public class DiscoveryV1Models {
      *
      * @return the file
      */
-    public String file() { // Was File, changed to compile correctly
+    public String file() {
       return file;
     }
     /**
@@ -9020,26 +9020,26 @@ public class DiscoveryV1Models {
       return metadata;
     }
     /**
-     * Gets the fileContentType.
+     * Gets the file_content_type.
      *
      * The content type of file.
      *
-     * @return the fileContentType
+     * @return the file_content_type
      */
     public String fileContentType() {
-      return fileContentType;
+      return file_content_type;
     }
     private UpdateDocumentOptions(UpdateDocumentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.documentId, 'documentId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
-      documentId = builder.documentId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.document_id, 'document_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
+      document_id = builder.document_id;
       file = builder.file;
       filename = builder.filename;
       metadata = builder.metadata;
-      fileContentType = builder.fileContentType;
+      file_content_type = builder.file_content_type;
     }
 
     /**
@@ -9056,22 +9056,22 @@ public class DiscoveryV1Models {
    * UpdateDocumentOptions Builder.
    */
   public class UpdateDocumentOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
-    private String documentId;
-    private String file; // Was File, changed to compile correctly
+    private String environment_id;
+    private String collection_id;
+    private String document_id;
+    private String file;
     private String filename;
     private String metadata;
-    private String fileContentType;
+    private String file_content_type;
 
-    private UpdateDocumentOptionsBuilder(UpdateDocumentOptions updateDocumentOptions) {
-      environmentId = updateDocumentOptions.environmentId;
-      collectionId = updateDocumentOptions.collectionId;
-      documentId = updateDocumentOptions.documentId;
-      file = updateDocumentOptions.file;
-      filename = updateDocumentOptions.filename;
-      metadata = updateDocumentOptions.metadata;
-      fileContentType = updateDocumentOptions.fileContentType;
+    private UpdateDocumentOptionsBuilder(UpdateDocumentOptions update_document_options) {
+      environment_id = update_document_options.environment_id;
+      collection_id = update_document_options.collection_id;
+      document_id = update_document_options.document_id;
+      file = update_document_options.file;
+      filename = update_document_options.filename;
+      metadata = update_document_options.metadata;
+      file_content_type = update_document_options.file_content_type;
     }
 
     /**
@@ -9083,55 +9083,55 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
-     * @param documentId the documentId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
+     * @param document_id the document_id
      */
-    public UpdateDocumentOptionsBuilder(String environmentId, String collectionId, String documentId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
-      this.documentId = documentId;
+    public UpdateDocumentOptionsBuilder(String environment_id, String collection_id, String document_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
+      this.document_id = document_id;
     }
 
     /**
      * Builds a UpdateDocumentOptions.
      *
-     * @return the updateDocumentOptions
+     * @return the update_document_options
      */
     public UpdateDocumentOptions build() {
       return new UpdateDocumentOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the UpdateDocumentOptions builder
      */
-    public UpdateDocumentOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public UpdateDocumentOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the UpdateDocumentOptions builder
      */
-    public UpdateDocumentOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public UpdateDocumentOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
 
     /**
-     * Set the documentId.
+     * Set the document_id.
      *
-     * @param documentId the documentId
+     * @param document_id the document_id
      * @return the UpdateDocumentOptions builder
      */
-    public UpdateDocumentOptionsBuilder documentId(String documentId) {
-      this.documentId = documentId;
+    public UpdateDocumentOptionsBuilder documentId(String document_id) {
+      this.document_id = document_id;
       return this;
     }
 
@@ -9141,7 +9141,7 @@ public class DiscoveryV1Models {
      * @param file the file
      * @return the UpdateDocumentOptions builder
      */
-    public UpdateDocumentOptionsBuilder file(String file) { // Was File, changed to compile correctly
+    public UpdateDocumentOptionsBuilder file(String file) {
       this.file = file;
       return this;
     }
@@ -9169,13 +9169,13 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the fileContentType.
+     * Set the file_content_type.
      *
-     * @param fileContentType the fileContentType
+     * @param file_content_type the file_content_type
      * @return the UpdateDocumentOptions builder
      */
-    public UpdateDocumentOptionsBuilder fileContentType(String fileContentType) {
-      this.fileContentType = fileContentType;
+    public UpdateDocumentOptionsBuilder fileContentType(String file_content_type) {
+      this.file_content_type = file_content_type;
       return this;
     }
   }
@@ -9184,18 +9184,18 @@ public class DiscoveryV1Models {
    * The updateEnvironment options.
    */
   public class UpdateEnvironmentOptions extends IBMWatsonGenericModel {
-    private String environmentId;
+    private String environment_id;
     private String name;
     private String description;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
      * Gets the name.
@@ -9218,8 +9218,8 @@ public class DiscoveryV1Models {
       return description;
     }
     private UpdateEnvironmentOptions(UpdateEnvironmentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      environmentId = builder.environmentId;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      environment_id = builder.environment_id;
       name = builder.name;
       description = builder.description;
     }
@@ -9238,14 +9238,14 @@ public class DiscoveryV1Models {
    * UpdateEnvironmentOptions Builder.
    */
   public class UpdateEnvironmentOptionsBuilder {
-    private String environmentId;
+    private String environment_id;
     private String name;
     private String description;
 
-    private UpdateEnvironmentOptionsBuilder(UpdateEnvironmentOptions updateEnvironmentOptions) {
-      environmentId = updateEnvironmentOptions.environmentId;
-      name = updateEnvironmentOptions.name;
-      description = updateEnvironmentOptions.description;
+    private UpdateEnvironmentOptionsBuilder(UpdateEnvironmentOptions update_environment_options) {
+      environment_id = update_environment_options.environment_id;
+      name = update_environment_options.name;
+      description = update_environment_options.description;
     }
 
     /**
@@ -9257,29 +9257,29 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      */
-    public UpdateEnvironmentOptionsBuilder(String environmentId) {
-      this.environmentId = environmentId;
+    public UpdateEnvironmentOptionsBuilder(String environment_id) {
+      this.environment_id = environment_id;
     }
 
     /**
      * Builds a UpdateEnvironmentOptions.
      *
-     * @return the updateEnvironmentOptions
+     * @return the update_environment_options
      */
     public UpdateEnvironmentOptions build() {
       return new UpdateEnvironmentOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the UpdateEnvironmentOptions builder
      */
-    public UpdateEnvironmentOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public UpdateEnvironmentOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
@@ -9310,59 +9310,59 @@ public class DiscoveryV1Models {
    * The updateTrainingExample options.
    */
   public class UpdateTrainingExampleOptions extends IBMWatsonGenericModel {
-    private String environmentId;
-    private String collectionId;
-    private String queryId;
-    private String exampleId;
-    private String crossReference;
+    private String environment_id;
+    private String collection_id;
+    private String query_id;
+    private String example_id;
+    private String cross_reference;
     private Long relevance;
     /**
-     * Gets the environmentId.
+     * Gets the environment_id.
      *
      * The ID of the environment.
      *
-     * @return the environmentId
+     * @return the environment_id
      */
     public String environmentId() {
-      return environmentId;
+      return environment_id;
     }
     /**
-     * Gets the collectionId.
+     * Gets the collection_id.
      *
      * The ID of the collection.
      *
-     * @return the collectionId
+     * @return the collection_id
      */
     public String collectionId() {
-      return collectionId;
+      return collection_id;
     }
     /**
-     * Gets the queryId.
+     * Gets the query_id.
      *
      * The ID of the query used for training.
      *
-     * @return the queryId
+     * @return the query_id
      */
     public String queryId() {
-      return queryId;
+      return query_id;
     }
     /**
-     * Gets the exampleId.
+     * Gets the example_id.
      *
      * The ID of the document as it is indexed.
      *
-     * @return the exampleId
+     * @return the example_id
      */
     public String exampleId() {
-      return exampleId;
+      return example_id;
     }
     /**
-     * Gets the crossReference.
+     * Gets the cross_reference.
      *
-     * @return the crossReference
+     * @return the cross_reference
      */
     public String crossReference() {
-      return crossReference;
+      return cross_reference;
     }
     /**
      * Gets the relevance.
@@ -9373,15 +9373,15 @@ public class DiscoveryV1Models {
       return relevance;
     }
     private UpdateTrainingExampleOptions(UpdateTrainingExampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.queryId, 'queryId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.exampleId, 'exampleId cannot be empty');
-      environmentId = builder.environmentId;
-      collectionId = builder.collectionId;
-      queryId = builder.queryId;
-      exampleId = builder.exampleId;
-      crossReference = builder.crossReference;
+      IBMWatsonValidator.notEmpty(builder.environment_id, 'environment_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id, 'collection_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.query_id, 'query_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.example_id, 'example_id cannot be empty');
+      environment_id = builder.environment_id;
+      collection_id = builder.collection_id;
+      query_id = builder.query_id;
+      example_id = builder.example_id;
+      cross_reference = builder.cross_reference;
       relevance = builder.relevance;
     }
 
@@ -9399,20 +9399,20 @@ public class DiscoveryV1Models {
    * UpdateTrainingExampleOptions Builder.
    */
   public class UpdateTrainingExampleOptionsBuilder {
-    private String environmentId;
-    private String collectionId;
-    private String queryId;
-    private String exampleId;
-    private String crossReference;
+    private String environment_id;
+    private String collection_id;
+    private String query_id;
+    private String example_id;
+    private String cross_reference;
     private Long relevance;
 
-    private UpdateTrainingExampleOptionsBuilder(UpdateTrainingExampleOptions updateTrainingExampleOptions) {
-      environmentId = updateTrainingExampleOptions.environmentId;
-      collectionId = updateTrainingExampleOptions.collectionId;
-      queryId = updateTrainingExampleOptions.queryId;
-      exampleId = updateTrainingExampleOptions.exampleId;
-      crossReference = updateTrainingExampleOptions.crossReference;
-      relevance = updateTrainingExampleOptions.relevance;
+    private UpdateTrainingExampleOptionsBuilder(UpdateTrainingExampleOptions update_training_example_options) {
+      environment_id = update_training_example_options.environment_id;
+      collection_id = update_training_example_options.collection_id;
+      query_id = update_training_example_options.query_id;
+      example_id = update_training_example_options.example_id;
+      cross_reference = update_training_example_options.cross_reference;
+      relevance = update_training_example_options.relevance;
     }
 
     /**
@@ -9424,79 +9424,79 @@ public class DiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environmentId the environmentId
-     * @param collectionId the collectionId
-     * @param queryId the queryId
-     * @param exampleId the exampleId
+     * @param environment_id the environment_id
+     * @param collection_id the collection_id
+     * @param query_id the query_id
+     * @param example_id the example_id
      */
-    public UpdateTrainingExampleOptionsBuilder(String environmentId, String collectionId, String queryId, String exampleId) {
-      this.environmentId = environmentId;
-      this.collectionId = collectionId;
-      this.queryId = queryId;
-      this.exampleId = exampleId;
+    public UpdateTrainingExampleOptionsBuilder(String environment_id, String collection_id, String query_id, String example_id) {
+      this.environment_id = environment_id;
+      this.collection_id = collection_id;
+      this.query_id = query_id;
+      this.example_id = example_id;
     }
 
     /**
      * Builds a UpdateTrainingExampleOptions.
      *
-     * @return the updateTrainingExampleOptions
+     * @return the update_training_example_options
      */
     public UpdateTrainingExampleOptions build() {
       return new UpdateTrainingExampleOptions(this);
     }
 
     /**
-     * Set the environmentId.
+     * Set the environment_id.
      *
-     * @param environmentId the environmentId
+     * @param environment_id the environment_id
      * @return the UpdateTrainingExampleOptions builder
      */
-    public UpdateTrainingExampleOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
+    public UpdateTrainingExampleOptionsBuilder environmentId(String environment_id) {
+      this.environment_id = environment_id;
       return this;
     }
 
     /**
-     * Set the collectionId.
+     * Set the collection_id.
      *
-     * @param collectionId the collectionId
+     * @param collection_id the collection_id
      * @return the UpdateTrainingExampleOptions builder
      */
-    public UpdateTrainingExampleOptionsBuilder collectionId(String collectionId) {
-      this.collectionId = collectionId;
+    public UpdateTrainingExampleOptionsBuilder collectionId(String collection_id) {
+      this.collection_id = collection_id;
       return this;
     }
 
     /**
-     * Set the queryId.
+     * Set the query_id.
      *
-     * @param queryId the queryId
+     * @param query_id the query_id
      * @return the UpdateTrainingExampleOptions builder
      */
-    public UpdateTrainingExampleOptionsBuilder queryId(String queryId) {
-      this.queryId = queryId;
+    public UpdateTrainingExampleOptionsBuilder queryId(String query_id) {
+      this.query_id = query_id;
       return this;
     }
 
     /**
-     * Set the exampleId.
+     * Set the example_id.
      *
-     * @param exampleId the exampleId
+     * @param example_id the example_id
      * @return the UpdateTrainingExampleOptions builder
      */
-    public UpdateTrainingExampleOptionsBuilder exampleId(String exampleId) {
-      this.exampleId = exampleId;
+    public UpdateTrainingExampleOptionsBuilder exampleId(String example_id) {
+      this.example_id = example_id;
       return this;
     }
 
     /**
-     * Set the crossReference.
+     * Set the cross_reference.
      *
-     * @param crossReference the crossReference
+     * @param cross_reference the cross_reference
      * @return the UpdateTrainingExampleOptions builder
      */
-    public UpdateTrainingExampleOptionsBuilder crossReference(String crossReference) {
-      this.crossReference = crossReference;
+    public UpdateTrainingExampleOptionsBuilder crossReference(String cross_reference) {
+      this.cross_reference = cross_reference;
       return this;
     }
 
@@ -9506,7 +9506,7 @@ public class DiscoveryV1Models {
      * @param relevance the relevance
      * @return the UpdateTrainingExampleOptions builder
      */
-    public UpdateTrainingExampleOptionsBuilder relevance(long relevance) {
+    public UpdateTrainingExampleOptionsBuilder relevance(Long relevance) {
       this.relevance = relevance;
       return this;
     }
