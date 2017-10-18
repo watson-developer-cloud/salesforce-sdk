@@ -72,31 +72,31 @@ public class PersonalityInsightsV3 extends IBMWatsonService {
    *
    * Derives personality insights for up to 20 MB of input content written by an author, though the service requires much less text to produce an accurate profile; for more information, see [Guidelines for providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/user-overview.html#overviewGuidelines). Accepts input in Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text, HTML, or JSON content, and receive results in JSON or CSV format.
    *
-   * @param profile_options the {@link PersonalityInsightsV3Models.ProfileOptions} containing the options for the call
+   * @param profileOptions the {@link PersonalityInsightsV3Models.ProfileOptions} containing the options for the call
    * @return the {@link PersonalityInsightsV3Models.Profile} with the response
    */
-  public PersonalityInsightsV3Models.Profile profile(PersonalityInsightsV3Models.ProfileOptions profile_options) {
-    IBMWatsonValidator.notNull(profile_options, 'profile_options cannot be null');
+  public PersonalityInsightsV3Models.Profile profile(PersonalityInsightsV3Models.ProfileOptions profileOptions) {
+    IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
     builder = IBMWatsonRequestBuilder.http_post(URL + '/v3/profile');
-      builder.addHeader('content-type', profile_options.contentType());
-      if (profile_options.contentLanguage() != null) {
-        builder.addHeader('Content-Language', profile_options.contentLanguage());
+      builder.addHeader('content-type', profileOptions.contentType());
+      if (profileOptions.contentLanguage() != null) {
+        builder.addHeader('Content-Language', profileOptions.contentLanguage());
       }
-      if (profile_options.acceptLanguage() != null) {
-        builder.addHeader('Accept-Language', profile_options.acceptLanguage());
+      if (profileOptions.acceptLanguage() != null) {
+        builder.addHeader('Accept-Language', profileOptions.acceptLanguage());
       }
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
-      'raw_scores' => String.valueOf(profile_options.rawScores()),
-      'csv_headers' => String.valueOf(profile_options.csvHeaders()),
-      'consumption_preferences' => String.valueOf(profile_options.consumptionPreferences())
+      'raw_scores' => String.valueOf(profileOptions.rawScores()),
+      'csv_headers' => String.valueOf(profileOptions.csvHeaders()),
+      'consumption_preferences' => String.valueOf(profileOptions.consumptionPreferences())
     });
-    if (profile_options.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-      builder.bodyJson(JSON.serialize(profile_options.content()));
-      ServiceMessage = JSON.serialize(profile_options.content());
+    if (profileOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
+      builder.bodyJson(JSON.serialize(profileOptions.content()));
+      ServiceMessage = JSON.serialize(profileOptions.content());
     } else {
-      builder.bodyContent(profile_options.body(), profile_options.contentType());
-      ServiceMessage = profile_options.body();
+      builder.bodyContent(profileOptions.body(), profileOptions.contentType());
+      ServiceMessage = profileOptions.body();
     }
     return (PersonalityInsightsV3Models.Profile) createServiceCall(builder.build(), PersonalityInsightsV3Models.Profile.class);
   }
