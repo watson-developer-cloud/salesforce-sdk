@@ -4,15 +4,13 @@ public class IBMWatsonRequest {
   final String method;
   final Map<String, String> headers;
   final IBMWatsonRequestBody body;
-  final Object tag;
 
   IBMWatsonRequest(Builder builder) {
     this.url = builder.url;
     this.method = builder.method;
     this.headers = new Map<String, String>();
     this.headers.putAll(builder.headers);
-    this.body = builder.body;
-    this.tag = builder.tag != null ? builder.tag : this;
+    this.body = builder.body.clone();
   }
 
   public URL getUrl() {
@@ -47,12 +45,7 @@ public class IBMWatsonRequest {
     return this.body;
   }
 
-  public Object tag() {
-    return tag;
-  }
-
   public Builder newBuilder() {
-  	system.debug('==> [IBMWatsonRequest]:: -- newBuilder() --'+this);
     return new Builder(this);
   }
   
@@ -77,8 +70,6 @@ public class IBMWatsonRequest {
         + method
         + ', url='
         + url
-        + ', tag='
-        + (tag != this ? tag : null)
         + '}';
   }
 
@@ -87,7 +78,6 @@ public class IBMWatsonRequest {
     String method;
     map<String, String> headers;
     IBMWatsonRequestBody body;
-    Object tag;
 
     public Builder() {
       this.method = 'GET';
@@ -98,7 +88,6 @@ public class IBMWatsonRequest {
       this.url = request.url;
       this.method = request.method;
       this.body = request.body;
-      this.tag = request.tag;
       this.headers = new Map<String, String>();
       this.headers.putAll(request.headers);
     }
@@ -191,7 +180,7 @@ public class IBMWatsonRequest {
     }
 
     public Builder http_delete() {
-      return http_delete( IBMWatsonRequestBody.create(null, null) );
+      return http_delete( IBMWatsonRequestBody.create() );
     }
 
     public Builder http_put(IBMWatsonRequestBody body) {
@@ -209,18 +198,8 @@ public class IBMWatsonRequest {
       return this;
     }
 
-    /**
-     * Attaches {@code tag} to the request. It can be used later to cancel the request. If the tag
-     * is unspecified or null, the request is canceled by using the request itself as the tag.
-     */
-    public Builder tag(Object tag) {
-      this.tag = tag;
-      return this;
-    }
-
     public IBMWatsonRequest build() {
       if (url == null) throw new IBMWatsonServiceExceptions.IllegalArgumentException('url == null');
-      system.debug('@@ ==> [IBMWatsonRequest]:: -- build() -- building request....'+this);
       return new IBMWatsonRequest(this);
     }
   }    
