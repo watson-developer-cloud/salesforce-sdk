@@ -1,6 +1,6 @@
 public with sharing class IBMWatsonHttpStatus {
-	
-	/** 202 Accepted (HTTP/1.0 - RFC 1945). */
+  
+  /** 202 Accepted (HTTP/1.0 - RFC 1945). */
   public static final Integer ACCEPTED = 202;
 
   // --- 2xx Success ---
