@@ -614,6 +614,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     });
     return (DiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), DiscoveryV1Models.QueryResponse.class);
   }
+
   /**
    * Query system notices.
    *

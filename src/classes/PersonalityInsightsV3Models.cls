@@ -823,7 +823,6 @@ public class PersonalityInsightsV3Models {
     public String contentLanguage() {
       return content_language;
     }
-
     /**
      * Gets the accept_language.
      *

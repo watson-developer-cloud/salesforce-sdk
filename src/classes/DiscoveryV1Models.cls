@@ -2668,7 +2668,7 @@ public class DiscoveryV1Models {
    */
   public class DocumentSnapshot extends IBMWatsonGenericModel {
     private String step;
-    private Map<String, Object> snapshot;
+    private Map<String, String> snapshot;
     /**
      * Gets the step.
      *
@@ -2682,7 +2682,7 @@ public class DiscoveryV1Models {
      *
      * @return the snapshot
      */
-    public Map<String, Object> getSnapshot() {
+    public Map<String, String> getSnapshot() {
       return snapshot;
     }
 
@@ -2700,7 +2700,7 @@ public class DiscoveryV1Models {
      *
      * @param snapshot the new snapshot
      */
-    public void setSnapshot(final Map<String, Object> snapshot) {
+    public void setSnapshot(final Map<String, String> snapshot) {
       this.snapshot = snapshot;
     }
   }
@@ -6894,8 +6894,8 @@ public class DiscoveryV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
-      return (Map<String, Object>)JSON.deserialize(JSON.serialize(this.get('metadata')), Map<String, Object>.class);
+    public Map<String, String> getMetadata() {
+      return (Map<String, String>)JSON.deserialize(JSON.serialize(this.get('metadata')), Map<String, String>.class);
     }
 
     /**
@@ -6930,7 +6930,7 @@ public class DiscoveryV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.put('metadata', metadata);
     }
 
@@ -7721,8 +7721,8 @@ public class DiscoveryV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
-      return (Map<String, Object>)JSON.deserialize(JSON.serialize(this.get('metadata')), Map<String, Object>.class);
+    public Map<String, String> getMetadata() {
+      return (Map<String, String>)JSON.deserialize(JSON.serialize(this.get('metadata')), Map<String, String>.class);
     }
 
     /**
@@ -7757,7 +7757,7 @@ public class DiscoveryV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.put('metadata', metadata);
     }
 
@@ -9145,6 +9145,7 @@ public class DiscoveryV1Models {
       this.file = file;
       return this;
     }
+
     /**
      * Set the filename.
      *

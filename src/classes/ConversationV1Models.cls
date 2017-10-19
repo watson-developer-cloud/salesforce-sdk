@@ -324,9 +324,9 @@ public class ConversationV1Models {
     private String conditions;
     private String parent;
     private String previous_sibling;
-    private Map<String, Object> output;
-    private Map<String, Object> context;
-    private Map<String, Object> metadata;
+    private Map<String, String> output;
+    private Map<String, String> context;
+    private Map<String, String> metadata;
     private DialogNodeNextStep next_step;
     private List<DialogNodeAction> actions;
     private String title;
@@ -390,7 +390,7 @@ public class ConversationV1Models {
      *
      * @return the output
      */
-    public Map<String, Object> output() {
+    public Map<String, String> output() {
       return output;
     }
     /**
@@ -400,7 +400,7 @@ public class ConversationV1Models {
      *
      * @return the context
      */
-    public Map<String, Object> context() {
+    public Map<String, String> context() {
       return context;
     }
     /**
@@ -410,7 +410,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
@@ -510,9 +510,9 @@ public class ConversationV1Models {
     private String conditions;
     private String parent;
     private String previous_sibling;
-    private Map<String, Object> output;
-    private Map<String, Object> context;
-    private Map<String, Object> metadata;
+    private Map<String, String> output;
+    private Map<String, String> context;
+    private Map<String, String> metadata;
     private DialogNodeNextStep next_step;
     private List<DialogNodeAction> actions;
     private String title;
@@ -637,7 +637,7 @@ public class ConversationV1Models {
      * @param output the output
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder output(Map<String, Object> output) {
+    public CreateDialogNodeBuilder output(Map<String, String> output) {
       this.output = output;
       return this;
     }
@@ -648,7 +648,7 @@ public class ConversationV1Models {
      * @param context the context
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder context(Map<String, Object> context) {
+    public CreateDialogNodeBuilder context(Map<String, String> context) {
       this.context = context;
       return this;
     }
@@ -659,7 +659,7 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder metadata(Map<String, Object> metadata) {
+    public CreateDialogNodeBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -742,9 +742,9 @@ public class ConversationV1Models {
     private String conditions;
     private String parent;
     private String previous_sibling;
-    private Map<String, Object> output;
-    private Map<String, Object> context;
-    private Map<String, Object> metadata;
+    private Map<String, String> output;
+    private Map<String, String> context;
+    private Map<String, String> metadata;
     private DialogNodeNextStep next_step;
     private List<DialogNodeAction> actions;
     private String title;
@@ -818,7 +818,7 @@ public class ConversationV1Models {
      *
      * @return the output
      */
-    public Map<String, Object> output() {
+    public Map<String, String> output() {
       return output;
     }
     /**
@@ -828,7 +828,7 @@ public class ConversationV1Models {
      *
      * @return the context
      */
-    public Map<String, Object> context() {
+    public Map<String, String> context() {
       return context;
     }
     /**
@@ -838,7 +838,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
@@ -941,9 +941,9 @@ public class ConversationV1Models {
     private String conditions;
     private String parent;
     private String previous_sibling;
-    private Map<String, Object> output;
-    private Map<String, Object> context;
-    private Map<String, Object> metadata;
+    private Map<String, String> output;
+    private Map<String, String> context;
+    private Map<String, String> metadata;
     private DialogNodeNextStep next_step;
     private List<DialogNodeAction> actions;
     private String title;
@@ -1082,7 +1082,7 @@ public class ConversationV1Models {
      * @param output the output
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder output(Map<String, Object> output) {
+    public CreateDialogNodeOptionsBuilder output(Map<String, String> output) {
       this.output = output;
       return this;
     }
@@ -1093,7 +1093,7 @@ public class ConversationV1Models {
      * @param context the context
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder context(Map<String, Object> context) {
+    public CreateDialogNodeOptionsBuilder context(Map<String, String> context) {
       this.context = context;
       return this;
     }
@@ -1104,7 +1104,7 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder metadata(Map<String, Object> metadata) {
+    public CreateDialogNodeOptionsBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -1183,7 +1183,7 @@ public class ConversationV1Models {
   public class CreateEntity extends IBMWatsonGenericModel {
     private String entity;
     private String description;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<CreateValue> values;
     private Boolean fuzzy_match;
     /**
@@ -1213,7 +1213,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
@@ -1261,7 +1261,7 @@ public class ConversationV1Models {
   public class CreateEntityBuilder {
     private String entity;
     private String description;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<CreateValue> values;
     private Boolean fuzzy_match;
 
@@ -1340,7 +1340,7 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the CreateEntity builder
      */
-    public CreateEntityBuilder metadata(Map<String, Object> metadata) {
+    public CreateEntityBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -1376,7 +1376,7 @@ public class ConversationV1Models {
     private String workspace_id;
     private String entity;
     private String description;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<CreateValue> values;
     private Boolean fuzzy_match;
     /**
@@ -1416,7 +1416,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
@@ -1467,7 +1467,7 @@ public class ConversationV1Models {
     private String workspace_id;
     private String entity;
     private String description;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<CreateValue> values;
     private Boolean fuzzy_match;
 
@@ -1560,7 +1560,7 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the CreateEntityOptions builder
      */
-    public CreateEntityOptionsBuilder metadata(Map<String, Object> metadata) {
+    public CreateEntityOptionsBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -2274,7 +2274,7 @@ public class ConversationV1Models {
    */
   public class CreateValue extends IBMWatsonGenericModel {
     private String value;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<String> synonyms;
     private List<String> patterns;
     private String type_serialized_name;
@@ -2295,7 +2295,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
@@ -2352,7 +2352,7 @@ public class ConversationV1Models {
    */
   public class CreateValueBuilder {
     private String value;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<String> synonyms;
     private List<String> patterns;
     private String type_serialized_name;
@@ -2436,7 +2436,7 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the CreateValue builder
      */
-    public CreateValueBuilder metadata(Map<String, Object> metadata) {
+    public CreateValueBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -2484,7 +2484,7 @@ public class ConversationV1Models {
     private String workspace_id;
     private String entity;
     private String value;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<String> synonyms;
     private List<String> patterns;
     private String type_serialized_name;
@@ -2525,7 +2525,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
@@ -2588,7 +2588,7 @@ public class ConversationV1Models {
     private String workspace_id;
     private String entity;
     private String value;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<String> synonyms;
     private List<String> patterns;
     private String type_serialized_name;
@@ -2700,7 +2700,7 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder metadata(Map<String, Object> metadata) {
+    public CreateValueOptionsBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -2752,7 +2752,7 @@ public class ConversationV1Models {
     private List<CreateEntity> entities;
     private List<CreateDialogNode> dialog_nodes;
     private List<CreateCounterexample> counterexamples;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private Boolean learning_opt_out;
     /**
      * Gets the name.
@@ -2831,7 +2831,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
@@ -2877,7 +2877,7 @@ public class ConversationV1Models {
     private List<CreateEntity> entities;
     private List<CreateDialogNode> dialog_nodes;
     private List<CreateCounterexample> counterexamples;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private Boolean learning_opt_out;
 
     private CreateWorkspaceOptionsBuilder(CreateWorkspaceOptions create_workspace_options) {
@@ -3054,7 +3054,7 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder metadata(Map<String, Object> metadata) {
+    public CreateWorkspaceOptionsBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -3996,9 +3996,9 @@ public class ConversationV1Models {
     private String conditions;
     private String parent;
     private String previous_sibling;
-    private Map<String, Object> output;
-    private Map<String, Object> context;
-    private Map<String, Object> metadata;
+    private Map<String, String> output;
+    private Map<String, String> context;
+    private Map<String, String> metadata;
     private DialogNodeNextStep next_step;
     private Datetime created;
     private Datetime updated;
@@ -4064,7 +4064,7 @@ public class ConversationV1Models {
      *
      * @return the output
      */
-    public Map<String, Object> getOutput() {
+    public Map<String, String> getOutput() {
       return output;
     }
     /**
@@ -4074,7 +4074,7 @@ public class ConversationV1Models {
      *
      * @return the context
      */
-    public Map<String, Object> getContext() {
+    public Map<String, String> getContext() {
       return context;
     }
     /**
@@ -4084,7 +4084,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
       return metadata;
     }
     /**
@@ -4218,7 +4218,7 @@ public class ConversationV1Models {
      *
      * @param output the new output
      */
-    public void setOutput(final Map<String, Object> output) {
+    public void setOutput(final Map<String, String> output) {
       this.output = output;
     }
 
@@ -4227,7 +4227,7 @@ public class ConversationV1Models {
      *
      * @param context the new context
      */
-    public void setContext(final Map<String, Object> context) {
+    public void setContext(final Map<String, String> context) {
       this.context = context;
     }
 
@@ -4236,7 +4236,7 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.metadata = metadata;
     }
 
@@ -4301,7 +4301,7 @@ public class ConversationV1Models {
   public class DialogNodeAction extends IBMWatsonGenericModel {
     private String name;
     private String type_serialized_name;
-    private Map<String, Object> parameters;
+    private Map<String, String> parameters;
     private String result_variable;
     private String credentials;
     /**
@@ -4331,7 +4331,7 @@ public class ConversationV1Models {
      *
      * @return the parameters
      */
-    public Map<String, Object> getParameters() {
+    public Map<String, String> getParameters() {
       return parameters;
     }
     /**
@@ -4378,7 +4378,7 @@ public class ConversationV1Models {
      *
      * @param parameters the new parameters
      */
-    public void setParameters(final Map<String, Object> parameters) {
+    public void setParameters(final Map<String, String> parameters) {
       this.parameters = parameters;
     }
 
@@ -4519,7 +4519,7 @@ public class ConversationV1Models {
     private Datetime created;
     private Datetime updated;
     private String description;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private Boolean fuzzy_match;
     /**
      * Gets the entity.
@@ -4568,7 +4568,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
       return metadata;
     }
     /**
@@ -4605,7 +4605,7 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.metadata = metadata;
     }
 
@@ -4673,7 +4673,7 @@ public class ConversationV1Models {
     private Datetime created;
     private Datetime updated;
     private String description;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private Boolean fuzzy_match;
     private List<ValueExport> values;
     /**
@@ -4723,7 +4723,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
       return metadata;
     }
     /**
@@ -4770,7 +4770,7 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.metadata = metadata;
     }
 
@@ -7804,7 +7804,6 @@ public class ConversationV1Models {
     public Boolean includeCount() {
       return include_count;
     }
-
     /**
      * Gets the sort_serialized_name.
      *
@@ -8914,8 +8913,8 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
-      return (Map<String, Object>)JSON.deserialize(JSON.serialize(this.get('metadata')), Map<String, Object>.class);
+    public Map<String, String> getMetadata() {
+      return (Map<String, String>)JSON.deserialize(JSON.serialize(this.get('metadata')), Map<String, String>.class);
     }
 
     /**
@@ -8959,7 +8958,7 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.put('metadata', metadata);
     }
   }
@@ -9244,15 +9243,15 @@ public class ConversationV1Models {
     private String new_type;
     private List<DialogNodeAction> new_actions;
     private String new_conditions;
-    private Map<String, Object> new_context;
+    private Map<String, String> new_context;
     private String new_previous_sibling;
     private String new_variable;
-    private Map<String, Object> new_metadata;
+    private Map<String, String> new_metadata;
     private String new_title;
     private String new_description;
     private String new_event_name;
     private DialogNodeNextStep new_next_step;
-    private Map<String, Object> new_output;
+    private Map<String, String> new_output;
     private String new_parent;
     private String new_dialog_node;
     /**
@@ -9312,7 +9311,7 @@ public class ConversationV1Models {
      *
      * @return the new_context
      */
-    public Map<String, Object> newContext() {
+    public Map<String, String> newContext() {
       return new_context;
     }
     /**
@@ -9342,7 +9341,7 @@ public class ConversationV1Models {
      *
      * @return the new_metadata
      */
-    public Map<String, Object> newMetadata() {
+    public Map<String, String> newMetadata() {
       return new_metadata;
     }
     /**
@@ -9392,7 +9391,7 @@ public class ConversationV1Models {
      *
      * @return the new_output
      */
-    public Map<String, Object> newOutput() {
+    public Map<String, String> newOutput() {
       return new_output;
     }
     /**
@@ -9456,15 +9455,15 @@ public class ConversationV1Models {
     private String new_type;
     private List<DialogNodeAction> new_actions;
     private String new_conditions;
-    private Map<String, Object> new_context;
+    private Map<String, String> new_context;
     private String new_previous_sibling;
     private String new_variable;
-    private Map<String, Object> new_metadata;
+    private Map<String, String> new_metadata;
     private String new_title;
     private String new_description;
     private String new_event_name;
     private DialogNodeNextStep new_next_step;
-    private Map<String, Object> new_output;
+    private Map<String, String> new_output;
     private String new_parent;
     private String new_dialog_node;
 
@@ -9592,7 +9591,7 @@ public class ConversationV1Models {
      * @param new_context the new_context
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newContext(Map<String, Object> new_context) {
+    public UpdateDialogNodeOptionsBuilder newContext(Map<String, String> new_context) {
       this.new_context = new_context;
       return this;
     }
@@ -9625,7 +9624,7 @@ public class ConversationV1Models {
      * @param new_metadata the new_metadata
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newMetadata(Map<String, Object> new_metadata) {
+    public UpdateDialogNodeOptionsBuilder newMetadata(Map<String, String> new_metadata) {
       this.new_metadata = new_metadata;
       return this;
     }
@@ -9680,7 +9679,7 @@ public class ConversationV1Models {
      * @param new_output the new_output
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newOutput(Map<String, Object> new_output) {
+    public UpdateDialogNodeOptionsBuilder newOutput(Map<String, String> new_output) {
       this.new_output = new_output;
       return this;
     }
@@ -9716,7 +9715,7 @@ public class ConversationV1Models {
     private String entity;
     private Boolean new_fuzzy_match;
     private String new_entity;
-    private Map<String, Object> new_metadata;
+    private Map<String, String> new_metadata;
     private List<CreateValue> new_values;
     private String new_description;
     /**
@@ -9766,7 +9765,7 @@ public class ConversationV1Models {
      *
      * @return the new_metadata
      */
-    public Map<String, Object> newMetadata() {
+    public Map<String, String> newMetadata() {
       return new_metadata;
     }
     /**
@@ -9819,7 +9818,7 @@ public class ConversationV1Models {
     private String entity;
     private Boolean new_fuzzy_match;
     private String new_entity;
-    private Map<String, Object> new_metadata;
+    private Map<String, String> new_metadata;
     private List<CreateValue> new_values;
     private String new_description;
 
@@ -9924,7 +9923,7 @@ public class ConversationV1Models {
      * @param new_metadata the new_metadata
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder newMetadata(Map<String, Object> new_metadata) {
+    public UpdateEntityOptionsBuilder newMetadata(Map<String, String> new_metadata) {
       this.new_metadata = new_metadata;
       return this;
     }
@@ -10499,7 +10498,7 @@ public class ConversationV1Models {
     private String value;
     private List<String> new_synonyms;
     private String new_type;
-    private Map<String, Object> new_metadata;
+    private Map<String, String> new_metadata;
     private List<String> new_patterns;
     private String new_value;
     /**
@@ -10559,7 +10558,7 @@ public class ConversationV1Models {
      *
      * @return the new_metadata
      */
-    public Map<String, Object> newMetadata() {
+    public Map<String, String> newMetadata() {
       return new_metadata;
     }
     /**
@@ -10615,7 +10614,7 @@ public class ConversationV1Models {
     private String value;
     private List<String> new_synonyms;
     private String new_type;
-    private Map<String, Object> new_metadata;
+    private Map<String, String> new_metadata;
     private List<String> new_patterns;
     private String new_value;
 
@@ -10750,7 +10749,7 @@ public class ConversationV1Models {
      * @param new_metadata the new_metadata
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder newMetadata(Map<String, Object> new_metadata) {
+    public UpdateValueOptionsBuilder newMetadata(Map<String, String> new_metadata) {
       this.new_metadata = new_metadata;
       return this;
     }
@@ -10791,7 +10790,7 @@ public class ConversationV1Models {
     private List<CreateEntity> entities;
     private List<CreateDialogNode> dialog_nodes;
     private List<CreateCounterexample> counterexamples;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private Boolean learning_opt_out;
     /**
      * Gets the workspace_id.
@@ -10880,7 +10879,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
@@ -10929,7 +10928,7 @@ public class ConversationV1Models {
     private List<CreateEntity> entities;
     private List<CreateDialogNode> dialog_nodes;
     private List<CreateCounterexample> counterexamples;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private Boolean learning_opt_out;
 
     private UpdateWorkspaceOptionsBuilder(UpdateWorkspaceOptions update_workspace_options) {
@@ -11127,7 +11126,7 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder metadata(Map<String, Object> metadata) {
+    public UpdateWorkspaceOptionsBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -11149,7 +11148,7 @@ public class ConversationV1Models {
    */
   public class Value extends IBMWatsonGenericModel {
     private String value;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private Datetime created;
     private Datetime updated;
     private List<String> synonyms;
@@ -11172,7 +11171,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
       return metadata;
     }
     /**
@@ -11240,7 +11239,7 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.metadata = metadata;
     }
 
@@ -11323,7 +11322,7 @@ public class ConversationV1Models {
    */
   public class ValueExport extends IBMWatsonGenericModel {
     private String value;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private Datetime created;
     private Datetime updated;
     private List<String> synonyms;
@@ -11346,7 +11345,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
       return metadata;
     }
     /**
@@ -11414,7 +11413,7 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.metadata = metadata;
     }
 
@@ -11456,7 +11455,7 @@ public class ConversationV1Models {
     private Datetime updated;
     private String workspace_id;
     private String description;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private Boolean learning_opt_out;
     /**
      * Gets the name.
@@ -11525,7 +11524,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
       return metadata;
     }
     /**
@@ -11571,7 +11570,7 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.metadata = metadata;
     }
 
@@ -11638,7 +11637,7 @@ public class ConversationV1Models {
     private String name;
     private String description;
     private String language;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private Datetime created;
     private Datetime updated;
     private String workspace_id;
@@ -11685,7 +11684,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
       return metadata;
     }
     /**
@@ -11811,7 +11810,7 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.metadata = metadata;
     }
 

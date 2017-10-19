@@ -627,6 +627,7 @@ public class ConversationV1 extends IBMWatsonService {
     });
     return (ConversationV1Models.ValueExport) createServiceCall(builder.build(), ConversationV1Models.ValueExport.class);
   }
+
   /**
    * List entity values.
    *

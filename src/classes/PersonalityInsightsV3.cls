@@ -52,6 +52,7 @@ public class PersonalityInsightsV3 extends IBMWatsonService {
     }
     this.versionDate = versionDate;
   }
+
   /**
    * Instantiates a new `PersonalityInsightsV3` with username and password.
    *
