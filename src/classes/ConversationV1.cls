@@ -27,7 +27,6 @@ public class ConversationV1 extends IBMWatsonService {
    *        calls from failing when the service introduces breaking changes.
    */
   public ConversationV1(String versionDate) {
-    this.ServiceName = 'Conversation';
     if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
       setEndPoint(URL);
     }
@@ -125,7 +124,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/workspaces/{0}', new String[]{ getWorkspaceOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
-      'export' => String.valueOf(getWorkspaceOptions.xexport())
+      'export' => String.valueOf(getWorkspaceOptions.exportField())
     });
     return (ConversationV1Models.WorkspaceExport) createServiceCall(builder.build(), ConversationV1Models.WorkspaceExport.class);
   }
@@ -144,7 +143,7 @@ public class ConversationV1 extends IBMWatsonService {
       'version' => versionDate,
       'page_limit' => String.valueOf(listWorkspacesOptions.pageLimit()),
       'include_count' => String.valueOf(listWorkspacesOptions.includeCount()),
-      'sort' => listWorkspacesOptions.xsort(),
+      'sort' => listWorkspacesOptions.sortField(),
       'cursor' => listWorkspacesOptions.cursor()
     });
     return (ConversationV1Models.WorkspaceCollection) createServiceCall(builder.build(), ConversationV1Models.WorkspaceCollection.class);
@@ -287,7 +286,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/workspaces/{0}/intents/{1}', new String[]{ getIntentOptions.workspaceId(), getIntentOptions.intent() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
-      'export' => String.valueOf(getIntentOptions.xexport())
+      'export' => String.valueOf(getIntentOptions.exportField())
     });
     return (ConversationV1Models.IntentExport) createServiceCall(builder.build(), ConversationV1Models.IntentExport.class);
   }
@@ -305,10 +304,10 @@ public class ConversationV1 extends IBMWatsonService {
     builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/workspaces/{0}/intents', new String[]{ listIntentsOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
-      'export' => String.valueOf(listIntentsOptions.xexport()),
+      'export' => String.valueOf(listIntentsOptions.exportField()),
       'page_limit' => String.valueOf(listIntentsOptions.pageLimit()),
       'include_count' => String.valueOf(listIntentsOptions.includeCount()),
-      'sort' => listIntentsOptions.xsort(),
+      'sort' => listIntentsOptions.sortField(),
       'cursor' => listIntentsOptions.cursor()
     });
     return (ConversationV1Models.IntentCollection) createServiceCall(builder.build(), ConversationV1Models.IntentCollection.class);
@@ -411,7 +410,7 @@ public class ConversationV1 extends IBMWatsonService {
       'version' => versionDate,
       'page_limit' => String.valueOf(listExamplesOptions.pageLimit()),
       'include_count' => String.valueOf(listExamplesOptions.includeCount()),
-      'sort' => listExamplesOptions.xsort(),
+      'sort' => listExamplesOptions.sortField(),
       'cursor' => listExamplesOptions.cursor()
     });
     return (ConversationV1Models.ExampleCollection) createServiceCall(builder.build(), ConversationV1Models.ExampleCollection.class);
@@ -501,7 +500,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/workspaces/{0}/entities/{1}', new String[]{ getEntityOptions.workspaceId(), getEntityOptions.entity() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
-      'export' => String.valueOf(getEntityOptions.xexport())
+      'export' => String.valueOf(getEntityOptions.exportField())
     });
     return (ConversationV1Models.EntityExport) createServiceCall(builder.build(), ConversationV1Models.EntityExport.class);
   }
@@ -519,10 +518,10 @@ public class ConversationV1 extends IBMWatsonService {
     builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/workspaces/{0}/entities', new String[]{ listEntitiesOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
-      'export' => String.valueOf(listEntitiesOptions.xexport()),
+      'export' => String.valueOf(listEntitiesOptions.exportField()),
       'page_limit' => String.valueOf(listEntitiesOptions.pageLimit()),
       'include_count' => String.valueOf(listEntitiesOptions.includeCount()),
-      'sort' => listEntitiesOptions.xsort(),
+      'sort' => listEntitiesOptions.sortField(),
       'cursor' => listEntitiesOptions.cursor()
     });
     return (ConversationV1Models.EntityCollection) createServiceCall(builder.build(), ConversationV1Models.EntityCollection.class);
@@ -587,8 +586,8 @@ public class ConversationV1 extends IBMWatsonService {
     if (createValueOptions.patterns() != null) {
       contentJson.put('patterns', createValueOptions.patterns());
     }
-    if (createValueOptions.valueType() != null) {
-      contentJson.put('type', createValueOptions.valueType());
+    if (createValueOptions.typeField() != null) {
+      contentJson.put('type', createValueOptions.typeField());
     }
     builder.bodyJson(JSON.serialize(contentJson));
     return (ConversationV1Models.Value) createServiceCall(builder.build(), ConversationV1Models.Value.class);
@@ -624,11 +623,10 @@ public class ConversationV1 extends IBMWatsonService {
     builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}', new String[]{ getValueOptions.workspaceId(), getValueOptions.entity(), getValueOptions.value() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
-      'export' => String.valueOf(getValueOptions.xexport())
+      'export' => String.valueOf(getValueOptions.exportField())
     });
     return (ConversationV1Models.ValueExport) createServiceCall(builder.build(), ConversationV1Models.ValueExport.class);
   }
-
   /**
    * List entity values.
    *
@@ -642,10 +640,10 @@ public class ConversationV1 extends IBMWatsonService {
     builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/workspaces/{0}/entities/{1}/values', new String[]{ listValuesOptions.workspaceId(), listValuesOptions.entity() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
-      'export' => String.valueOf(listValuesOptions.xexport()),
+      'export' => String.valueOf(listValuesOptions.exportField()),
       'page_limit' => String.valueOf(listValuesOptions.pageLimit()),
       'include_count' => String.valueOf(listValuesOptions.includeCount()),
-      'sort' => listValuesOptions.xsort(),
+      'sort' => listValuesOptions.sortField(),
       'cursor' => listValuesOptions.cursor()
     });
     return (ConversationV1Models.ValueCollection) createServiceCall(builder.build(), ConversationV1Models.ValueCollection.class);
@@ -669,8 +667,8 @@ public class ConversationV1 extends IBMWatsonService {
     if (updateValueOptions.newSynonyms() != null) {
       contentJson.put('synonyms', updateValueOptions.newSynonyms());
     }
-    if (updateValueOptions.valueType() != null) {
-      contentJson.put('type', updateValueOptions.valueType());
+    if (updateValueOptions.newType() != null) {
+      contentJson.put('type', updateValueOptions.newType());
     }
     if (updateValueOptions.newMetadata() != null) {
       contentJson.put('metadata', updateValueOptions.newMetadata());
@@ -754,7 +752,7 @@ public class ConversationV1 extends IBMWatsonService {
       'version' => versionDate,
       'page_limit' => String.valueOf(listSynonymsOptions.pageLimit()),
       'include_count' => String.valueOf(listSynonymsOptions.includeCount()),
-      'sort' => listSynonymsOptions.xsort(),
+      'sort' => listSynonymsOptions.sortField(),
       'cursor' => listSynonymsOptions.cursor()
     });
     return (ConversationV1Models.SynonymCollection) createServiceCall(builder.build(), ConversationV1Models.SynonymCollection.class);
@@ -828,8 +826,8 @@ public class ConversationV1 extends IBMWatsonService {
     if (createDialogNodeOptions.title() != null) {
       contentJson.put('title', createDialogNodeOptions.title());
     }
-    if (createDialogNodeOptions.nodeType() != null) {
-      contentJson.put('type', createDialogNodeOptions.nodeType());
+    if (createDialogNodeOptions.typeField() != null) {
+      contentJson.put('type', createDialogNodeOptions.typeField());
     }
     if (createDialogNodeOptions.eventName() != null) {
       contentJson.put('event_name', createDialogNodeOptions.eventName());
@@ -890,7 +888,7 @@ public class ConversationV1 extends IBMWatsonService {
       'version' => versionDate,
       'page_limit' => String.valueOf(listDialogNodesOptions.pageLimit()),
       'include_count' => String.valueOf(listDialogNodesOptions.includeCount()),
-      'sort' => listDialogNodesOptions.xsort(),
+      'sort' => listDialogNodesOptions.sortField(),
       'cursor' => listDialogNodesOptions.cursor()
     });
     return (ConversationV1Models.DialogNodeCollection) createServiceCall(builder.build(), ConversationV1Models.DialogNodeCollection.class);
@@ -911,8 +909,8 @@ public class ConversationV1 extends IBMWatsonService {
       'version' => versionDate
     });
     final Map<String, Object> contentJson = new Map<String, Object>();
-    if (updateDialogNodeOptions.nodeType() != null) {
-      contentJson.put('type', updateDialogNodeOptions.nodeType());
+    if (updateDialogNodeOptions.newType() != null) {
+      contentJson.put('type', updateDialogNodeOptions.newType());
     }
     if (updateDialogNodeOptions.newActions() != null) {
       contentJson.put('actions', updateDialogNodeOptions.newActions());
@@ -968,7 +966,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/workspaces/{0}/logs', new String[]{ listLogsOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
-      'sort' => listLogsOptions.xsort(),
+      'sort' => listLogsOptions.sortField(),
       'filter' => listLogsOptions.filter(),
       'page_limit' => String.valueOf(listLogsOptions.pageLimit()),
       'cursor' => listLogsOptions.cursor()
@@ -1045,7 +1043,7 @@ public class ConversationV1 extends IBMWatsonService {
       'version' => versionDate,
       'page_limit' => String.valueOf(listCounterexamplesOptions.pageLimit()),
       'include_count' => String.valueOf(listCounterexamplesOptions.includeCount()),
-      'sort' => listCounterexamplesOptions.xsort(),
+      'sort' => listCounterexamplesOptions.sortField(),
       'cursor' => listCounterexamplesOptions.cursor()
     });
     return (ConversationV1Models.CounterexampleCollection) createServiceCall(builder.build(), ConversationV1Models.CounterexampleCollection.class);

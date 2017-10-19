@@ -44,7 +44,6 @@ public class PersonalityInsightsV3 extends IBMWatsonService {
    *        calls from failing when the service introduces breaking changes.
    */
   public PersonalityInsightsV3(String versionDate) {
-    this.ServiceName = 'PersonalityInsights';
     if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
       setEndPoint(URL);
     }
@@ -53,7 +52,6 @@ public class PersonalityInsightsV3 extends IBMWatsonService {
     }
     this.versionDate = versionDate;
   }
-
   /**
    * Instantiates a new `PersonalityInsightsV3` with username and password.
    *

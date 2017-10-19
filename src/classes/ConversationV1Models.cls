@@ -14,12 +14,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Gets the xsystem.
+     * Gets the system_serialized_name.
      *
-     * @return the xsystem
+     * @return the system_serialized_name
      */
-    public SystemResponse getXsystem() {
-      return (SystemResponse)JSON.deserialize(JSON.serialize(this.get('xsystem')), SystemResponse.class);
+    public SystemResponse getSystem() {
+      return (SystemResponse)JSON.deserialize(JSON.serialize(this.get('system_serialized_name')), SystemResponse.class);
     }
 
     /**
@@ -32,12 +32,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the xsystem.
+     * Sets the system_serialized_name.
      *
-     * @param xsystem the new xsystem
+     * @param system_serialized_name the new system_serialized_name
      */
-    public void setXsystem(final SystemResponse xsystem) {
-      this.put('xsystem', xsystem);
+    public void setSystem(final SystemResponse system_serialized_name) {
+      this.put('system_serialized_name', system_serialized_name);
     }
   }
 
@@ -330,7 +330,7 @@ public class ConversationV1Models {
     private DialogNodeNextStep next_step;
     private List<DialogNodeAction> actions;
     private String title;
-    private String node_type;
+    private String type_serialized_name;
     private String event_name;
     private String variable;
     /**
@@ -444,14 +444,14 @@ public class ConversationV1Models {
       return title;
     }
     /**
-     * Gets the node_type.
+     * Gets the type_serialized_name.
      *
      * How the dialog node is processed.
      *
-     * @return the node_type
+     * @return the type_serialized_name
      */
-    public String nodeType() {
-      return node_type;
+    public String typeField() {
+      return type_serialized_name;
     }
     /**
      * Gets the event_name.
@@ -486,7 +486,7 @@ public class ConversationV1Models {
       next_step = builder.next_step;
       actions = builder.actions;
       title = builder.title;
-      node_type = builder.node_type;
+      type_serialized_name = builder.type_serialized_name;
       event_name = builder.event_name;
       variable = builder.variable;
     }
@@ -516,7 +516,7 @@ public class ConversationV1Models {
     private DialogNodeNextStep next_step;
     private List<DialogNodeAction> actions;
     private String title;
-    private String node_type;
+    private String type_serialized_name;
     private String event_name;
     private String variable;
 
@@ -532,7 +532,7 @@ public class ConversationV1Models {
       next_step = create_dialog_node.next_step;
       actions = create_dialog_node.actions;
       title = create_dialog_node.title;
-      node_type = create_dialog_node.node_type;
+      type_serialized_name = create_dialog_node.type_serialized_name;
       event_name = create_dialog_node.event_name;
       variable = create_dialog_node.variable;
     }
@@ -699,13 +699,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the node_type.
+     * Set the type_serialized_name.
      *
-     * @param node_type the node_type
+     * @param type_serialized_name the type_serialized_name
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder nodeType(String node_type) {
-      this.node_type = node_type;
+    public CreateDialogNodeBuilder typeField(String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
       return this;
     }
 
@@ -748,7 +748,7 @@ public class ConversationV1Models {
     private DialogNodeNextStep next_step;
     private List<DialogNodeAction> actions;
     private String title;
-    private String node_type;
+    private String type_serialized_name;
     private String event_name;
     private String variable;
     /**
@@ -872,14 +872,14 @@ public class ConversationV1Models {
       return title;
     }
     /**
-     * Gets the node_type.
+     * Gets the type_serialized_name.
      *
      * How the dialog node is processed.
      *
-     * @return the node_type
+     * @return the type_serialized_name
      */
-    public String nodeType() {
-      return node_type;
+    public String typeField() {
+      return type_serialized_name;
     }
     /**
      * Gets the event_name.
@@ -916,7 +916,7 @@ public class ConversationV1Models {
       next_step = builder.next_step;
       actions = builder.actions;
       title = builder.title;
-      node_type = builder.node_type;
+      type_serialized_name = builder.type_serialized_name;
       event_name = builder.event_name;
       variable = builder.variable;
     }
@@ -947,7 +947,7 @@ public class ConversationV1Models {
     private DialogNodeNextStep next_step;
     private List<DialogNodeAction> actions;
     private String title;
-    private String node_type;
+    private String type_serialized_name;
     private String event_name;
     private String variable;
 
@@ -964,7 +964,7 @@ public class ConversationV1Models {
       next_step = create_dialog_node_options.next_step;
       actions = create_dialog_node_options.actions;
       title = create_dialog_node_options.title;
-      node_type = create_dialog_node_options.node_type;
+      type_serialized_name = create_dialog_node_options.type_serialized_name;
       event_name = create_dialog_node_options.event_name;
       variable = create_dialog_node_options.variable;
     }
@@ -1144,13 +1144,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the node_type.
+     * Set the type_serialized_name.
      *
-     * @param node_type the node_type
+     * @param type_serialized_name the type_serialized_name
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder nodeType(String node_type) {
-      this.node_type = node_type;
+    public CreateDialogNodeOptionsBuilder typeField(String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
       return this;
     }
 
@@ -1298,17 +1298,17 @@ public class ConversationV1Models {
     }
 
     /**
-     * Adds an value to values.
+     * Adds an values to values.
      *
-     * @param value the new value
+     * @param values the new values
      * @return the CreateEntity builder
      */
-    public CreateEntityBuilder addValue(CreateValue value) {
-      IBMWatsonValidator.notNull(value, 'value cannot be null');
+    public CreateEntityBuilder addValues(CreateValue values) {
+      IBMWatsonValidator.notNull(values, 'values cannot be null');
       if (this.values == null) {
         this.values = new List<CreateValue>();
       }
-      this.values.add(value);
+      this.values.add(values);
       return this;
     }
 
@@ -1507,17 +1507,17 @@ public class ConversationV1Models {
     }
 
     /**
-     * Adds an value to values.
+     * Adds an values to values.
      *
-     * @param value the new value
+     * @param values the new values
      * @return the CreateEntityOptions builder
      */
-    public CreateEntityOptionsBuilder addValue(CreateValue value) {
-      IBMWatsonValidator.notNull(value, 'value cannot be null');
+    public CreateEntityOptionsBuilder addValues(CreateValue values) {
+      IBMWatsonValidator.notNull(values, 'values cannot be null');
       if (this.values == null) {
         this.values = new List<CreateValue>();
       }
-      this.values.add(value);
+      this.values.add(values);
       return this;
     }
 
@@ -1890,17 +1890,17 @@ public class ConversationV1Models {
     }
 
     /**
-     * Adds an example to examples.
+     * Adds an examples to examples.
      *
-     * @param example the new example
+     * @param examples the new examples
      * @return the CreateIntent builder
      */
-    public CreateIntentBuilder addExample(CreateExample example) {
-      IBMWatsonValidator.notNull(example, 'example cannot be null');
+    public CreateIntentBuilder addExamples(CreateExample examples) {
+      IBMWatsonValidator.notNull(examples, 'examples cannot be null');
       if (this.examples == null) {
         this.examples = new List<CreateExample>();
       }
-      this.examples.add(example);
+      this.examples.add(examples);
       return this;
     }
 
@@ -2049,17 +2049,17 @@ public class ConversationV1Models {
     }
 
     /**
-     * Adds an example to examples.
+     * Adds an examples to examples.
      *
-     * @param example the new example
+     * @param examples the new examples
      * @return the CreateIntentOptions builder
      */
-    public CreateIntentOptionsBuilder addExample(CreateExample example) {
-      IBMWatsonValidator.notNull(example, 'example cannot be null');
+    public CreateIntentOptionsBuilder addExamples(CreateExample examples) {
+      IBMWatsonValidator.notNull(examples, 'examples cannot be null');
       if (this.examples == null) {
         this.examples = new List<CreateExample>();
       }
-      this.examples.add(example);
+      this.examples.add(examples);
       return this;
     }
 
@@ -2277,7 +2277,7 @@ public class ConversationV1Models {
     private Map<String, Object> metadata;
     private List<String> synonyms;
     private List<String> patterns;
-    private String value_type;
+    private String type_serialized_name;
     /**
      * Gets the value.
      *
@@ -2319,14 +2319,14 @@ public class ConversationV1Models {
       return patterns;
     }
     /**
-     * Gets the value_type.
+     * Gets the type_serialized_name.
      *
      * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
      *
-     * @return the value_type
+     * @return the type_serialized_name
      */
-    public String valueType() {
-      return value_type;
+    public String typeField() {
+      return type_serialized_name;
     }
     private CreateValue(CreateValueBuilder builder) {
       IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
@@ -2334,7 +2334,7 @@ public class ConversationV1Models {
       metadata = builder.metadata;
       synonyms = builder.synonyms;
       patterns = builder.patterns;
-      value_type = builder.value_type;
+      type_serialized_name = builder.type_serialized_name;
     }
 
     /**
@@ -2355,14 +2355,14 @@ public class ConversationV1Models {
     private Map<String, Object> metadata;
     private List<String> synonyms;
     private List<String> patterns;
-    private String value_type;
+    private String type_serialized_name;
 
     private CreateValueBuilder(CreateValue create_value) {
       value = create_value.value;
       metadata = create_value.metadata;
       synonyms = create_value.synonyms;
       patterns = create_value.patterns;
-      value_type = create_value.value_type;
+      type_serialized_name = create_value.type_serialized_name;
     }
 
     /**
@@ -2390,17 +2390,17 @@ public class ConversationV1Models {
     }
 
     /**
-     * Adds an synonym to synonyms.
+     * Adds an synonyms to synonyms.
      *
-     * @param synonym the new synonym
+     * @param synonyms the new synonyms
      * @return the CreateValue builder
      */
-    public CreateValueBuilder addSynonym(String synonym) {
-      IBMWatsonValidator.notNull(synonym, 'synonym cannot be null');
+    public CreateValueBuilder addSynonyms(String synonyms) {
+      IBMWatsonValidator.notNull(synonyms, 'synonyms cannot be null');
       if (this.synonyms == null) {
         this.synonyms = new List<String>();
       }
-      this.synonyms.add(synonym);
+      this.synonyms.add(synonyms);
       return this;
     }
 
@@ -2466,13 +2466,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the value_type.
+     * Set the type_serialized_name.
      *
-     * @param value_type the value_type
+     * @param type_serialized_name the type_serialized_name
      * @return the CreateValue builder
      */
-    public CreateValueBuilder valueType(String value_type) {
-      this.value_type = value_type;
+    public CreateValueBuilder typeField(String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
       return this;
     }
   }
@@ -2487,7 +2487,7 @@ public class ConversationV1Models {
     private Map<String, Object> metadata;
     private List<String> synonyms;
     private List<String> patterns;
-    private String value_type;
+    private String type_serialized_name;
     /**
      * Gets the workspace_id.
      *
@@ -2549,14 +2549,14 @@ public class ConversationV1Models {
       return patterns;
     }
     /**
-     * Gets the value_type.
+     * Gets the type_serialized_name.
      *
      * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
      *
-     * @return the value_type
+     * @return the type_serialized_name
      */
-    public String valueType() {
-      return value_type;
+    public String typeField() {
+      return type_serialized_name;
     }
     private CreateValueOptions(CreateValueOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
@@ -2568,7 +2568,7 @@ public class ConversationV1Models {
       metadata = builder.metadata;
       synonyms = builder.synonyms;
       patterns = builder.patterns;
-      value_type = builder.value_type;
+      type_serialized_name = builder.type_serialized_name;
     }
 
     /**
@@ -2591,7 +2591,7 @@ public class ConversationV1Models {
     private Map<String, Object> metadata;
     private List<String> synonyms;
     private List<String> patterns;
-    private String value_type;
+    private String type_serialized_name;
 
     private CreateValueOptionsBuilder(CreateValueOptions create_value_options) {
       workspace_id = create_value_options.workspace_id;
@@ -2600,7 +2600,7 @@ public class ConversationV1Models {
       metadata = create_value_options.metadata;
       synonyms = create_value_options.synonyms;
       patterns = create_value_options.patterns;
-      value_type = create_value_options.value_type;
+      type_serialized_name = create_value_options.type_serialized_name;
     }
 
     /**
@@ -2632,17 +2632,17 @@ public class ConversationV1Models {
     }
 
     /**
-     * Adds an synonym to synonyms.
+     * Adds an synonyms to synonyms.
      *
-     * @param synonym the new synonym
+     * @param synonyms the new synonyms
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder addSynonym(String synonym) {
-      IBMWatsonValidator.notNull(synonym, 'synonym cannot be null');
+    public CreateValueOptionsBuilder addSynonyms(String synonyms) {
+      IBMWatsonValidator.notNull(synonyms, 'synonyms cannot be null');
       if (this.synonyms == null) {
         this.synonyms = new List<String>();
       }
-      this.synonyms.add(synonym);
+      this.synonyms.add(synonyms);
       return this;
     }
 
@@ -2730,13 +2730,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the value_type.
+     * Set the type_serialized_name.
      *
-     * @param value_type the value_type
+     * @param type_serialized_name the type_serialized_name
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder valueType(String value_type) {
-      this.value_type = value_type;
+    public CreateValueOptionsBuilder typeField(String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
       return this;
     }
   }
@@ -2908,62 +2908,62 @@ public class ConversationV1Models {
     }
 
     /**
-     * Adds an intent to intents.
+     * Adds an intents to intents.
      *
-     * @param intent the new intent
+     * @param intents the new intents
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder addIntent(CreateIntent intent) {
-      IBMWatsonValidator.notNull(intent, 'intent cannot be null');
+    public CreateWorkspaceOptionsBuilder addIntents(CreateIntent intents) {
+      IBMWatsonValidator.notNull(intents, 'intents cannot be null');
       if (this.intents == null) {
         this.intents = new List<CreateIntent>();
       }
-      this.intents.add(intent);
+      this.intents.add(intents);
       return this;
     }
 
     /**
-     * Adds an entity to entities.
+     * Adds an entities to entities.
      *
-     * @param entity the new entity
+     * @param entities the new entities
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder addEntity(CreateEntity entity) {
-      IBMWatsonValidator.notNull(entity, 'entity cannot be null');
+    public CreateWorkspaceOptionsBuilder addEntities(CreateEntity entities) {
+      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
       if (this.entities == null) {
         this.entities = new List<CreateEntity>();
       }
-      this.entities.add(entity);
+      this.entities.add(entities);
       return this;
     }
 
     /**
-     * Adds an dialog_node to dialog_nodes.
+     * Adds an dialog_nodes to dialog_nodes.
      *
-     * @param dialog_node the new dialog_node
+     * @param dialog_nodes the new dialog_nodes
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder addDialogNode(CreateDialogNode dialog_node) {
-      IBMWatsonValidator.notNull(dialog_node, 'dialog_node cannot be null');
+    public CreateWorkspaceOptionsBuilder addDialogNodes(CreateDialogNode dialog_nodes) {
+      IBMWatsonValidator.notNull(dialog_nodes, 'dialog_nodes cannot be null');
       if (this.dialog_nodes == null) {
         this.dialog_nodes = new List<CreateDialogNode>();
       }
-      this.dialog_nodes.add(dialog_node);
+      this.dialog_nodes.add(dialog_nodes);
       return this;
     }
 
     /**
-     * Adds an counterexample to counterexamples.
+     * Adds an counterexamples to counterexamples.
      *
-     * @param counterexample the new counterexample
+     * @param counterexamples the new counterexamples
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder addCounterexample(CreateCounterexample counterexample) {
-      IBMWatsonValidator.notNull(counterexample, 'counterexample cannot be null');
+    public CreateWorkspaceOptionsBuilder addCounterexamples(CreateCounterexample counterexamples) {
+      IBMWatsonValidator.notNull(counterexamples, 'counterexamples cannot be null');
       if (this.counterexamples == null) {
         this.counterexamples = new List<CreateCounterexample>();
       }
-      this.counterexamples.add(counterexample);
+      this.counterexamples.add(counterexamples);
       return this;
     }
 
@@ -3991,7 +3991,7 @@ public class ConversationV1Models {
    * DialogNode.
    */
   public class DialogNode extends IBMWatsonGenericModel {
-    private String dialog_node_id;
+    private String dialog_node;
     private String description;
     private String conditions;
     private String parent;
@@ -4004,18 +4004,18 @@ public class ConversationV1Models {
     private Datetime updated;
     private List<DialogNodeAction> actions;
     private String title;
-    private String node_type;
+    private String type_serialized_name;
     private String event_name;
     private String variable;
     /**
-     * Gets the dialog_node_id.
+     * Gets the dialog_node.
      *
      * The dialog node ID.
      *
-     * @return the dialog_node_id
+     * @return the dialog_node
      */
-    public String getDialogNodeId() {
-      return dialog_node_id;
+    public String getDialogNode() {
+      return dialog_node;
     }
     /**
      * Gets the description.
@@ -4138,14 +4138,14 @@ public class ConversationV1Models {
       return title;
     }
     /**
-     * Gets the node_type.
+     * Gets the type_serialized_name.
      *
      * How the dialog node is processed.
      *
-     * @return the node_type
+     * @return the type_serialized_name
      */
-    public String getNodeType() {
-      return node_type;
+    public String getType() {
+      return type_serialized_name;
     }
     /**
      * Gets the event_name.
@@ -4169,12 +4169,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the dialog_node_id.
+     * Sets the dialog_node.
      *
-     * @param dialog_node_id the new dialog_node_id
+     * @param dialog_node the new dialog_node
      */
-    public void setDialogNodeId(final String dialog_node_id) {
-      this.dialog_node_id = dialog_node_id;
+    public void setDialogNode(final String dialog_node) {
+      this.dialog_node = dialog_node;
     }
 
     /**
@@ -4268,12 +4268,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the node_type.
+     * Sets the type_serialized_name.
      *
-     * @param node_type the new node_type
+     * @param type_serialized_name the new type_serialized_name
      */
-    public void setNodeType(final String node_type) {
-      this.node_type = node_type;
+    public void setType(final String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
     }
 
     /**
@@ -4300,7 +4300,7 @@ public class ConversationV1Models {
    */
   public class DialogNodeAction extends IBMWatsonGenericModel {
     private String name;
-    private String action_type;
+    private String type_serialized_name;
     private Map<String, Object> parameters;
     private String result_variable;
     private String credentials;
@@ -4315,14 +4315,14 @@ public class ConversationV1Models {
       return name;
     }
     /**
-     * Gets the action_type.
+     * Gets the type_serialized_name.
      *
      * The type of action to invoke.
      *
-     * @return the action_type
+     * @return the type_serialized_name
      */
-    public String getActionType() {
-      return action_type;
+    public String getType() {
+      return type_serialized_name;
     }
     /**
      * Gets the parameters.
@@ -4365,12 +4365,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the action_type.
+     * Sets the type_serialized_name.
      *
-     * @param action_type the new action_type
+     * @param type_serialized_name the new type_serialized_name
      */
-    public void setActionType(final String action_type) {
-      this.action_type = action_type;
+    public void setType(final String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
     }
 
     /**
@@ -4515,21 +4515,21 @@ public class ConversationV1Models {
    * Entity.
    */
   public class Entity extends IBMWatsonGenericModel {
-    private String entity_name;
+    private String entity;
     private Datetime created;
     private Datetime updated;
     private String description;
     private Map<String, Object> metadata;
     private Boolean fuzzy_match;
     /**
-     * Gets the entity_name.
+     * Gets the entity.
      *
      * The name of the entity.
      *
-     * @return the entity_name
+     * @return the entity
      */
-    public String getEntityName() {
-      return entity_name;
+    public String getEntity() {
+      return entity;
     }
     /**
      * Gets the created.
@@ -4583,12 +4583,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the entity_name.
+     * Sets the entity.
      *
-     * @param entity_name the new entity_name
+     * @param entity the new entity
      */
-    public void setEntityName(final String entity_name) {
-      this.entity_name = entity_name;
+    public void setEntity(final String entity) {
+      this.entity = entity;
     }
 
     /**
@@ -4669,7 +4669,7 @@ public class ConversationV1Models {
    * EntityExport.
    */
   public class EntityExport extends IBMWatsonGenericModel {
-    private String entity_name;
+    private String entity;
     private Datetime created;
     private Datetime updated;
     private String description;
@@ -4677,14 +4677,14 @@ public class ConversationV1Models {
     private Boolean fuzzy_match;
     private List<ValueExport> values;
     /**
-     * Gets the entity_name.
+     * Gets the entity.
      *
      * The name of the entity.
      *
-     * @return the entity_name
+     * @return the entity
      */
-    public String getEntityName() {
-      return entity_name;
+    public String getEntity() {
+      return entity;
     }
     /**
      * Gets the created.
@@ -4748,12 +4748,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the entity_name.
+     * Sets the entity.
      *
-     * @param entity_name the new entity_name
+     * @param entity the new entity
      */
-    public void setEntityName(final String entity_name) {
-      this.entity_name = entity_name;
+    public void setEntity(final String entity) {
+      this.entity = entity;
     }
 
     /**
@@ -4797,18 +4797,18 @@ public class ConversationV1Models {
    * Example.
    */
   public class Example extends IBMWatsonGenericModel {
-    private String example_text;
+    private String text;
     private Datetime created;
     private Datetime updated;
     /**
-     * Gets the example_text.
+     * Gets the text.
      *
      * The text of the example.
      *
-     * @return the example_text
+     * @return the text
      */
-    public String getExampleText() {
-      return example_text;
+    public String getText() {
+      return text;
     }
     /**
      * Gets the created.
@@ -4832,12 +4832,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the example_text.
+     * Sets the text.
      *
-     * @param example_text the new example_text
+     * @param text the new text
      */
-    public void setExampleText(final String example_text) {
-      this.example_text = example_text;
+    public void setText(final String text) {
+      this.text = text;
     }
   }
 
@@ -5101,7 +5101,7 @@ public class ConversationV1Models {
   public class GetEntityOptions extends IBMWatsonGenericModel {
     private String workspace_id;
     private String entity;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
     /**
      * Gets the workspace_id.
      *
@@ -5123,21 +5123,21 @@ public class ConversationV1Models {
       return entity;
     }
     /**
-     * Gets the xexport.
+     * Gets the export_serialized_name.
      *
      * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      *
-     * @return the xexport
+     * @return the export_serialized_name
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean exportField() {
+      return export_serialized_name;
     }
     private GetEntityOptions(GetEntityOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       workspace_id = builder.workspace_id;
       entity = builder.entity;
-      xexport = builder.xexport;
+      export_serialized_name = builder.export_serialized_name;
     }
 
     /**
@@ -5156,12 +5156,12 @@ public class ConversationV1Models {
   public class GetEntityOptionsBuilder {
     private String workspace_id;
     private String entity;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
 
     private GetEntityOptionsBuilder(GetEntityOptions get_entity_options) {
       workspace_id = get_entity_options.workspace_id;
       entity = get_entity_options.entity;
-      xexport = get_entity_options.xexport;
+      export_serialized_name = get_entity_options.export_serialized_name;
     }
 
     /**
@@ -5213,13 +5213,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the export_serialized_name.
      *
-     * @param xexport the xexport
+     * @param export_serialized_name the export_serialized_name
      * @return the GetEntityOptions builder
      */
-    public GetEntityOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public GetEntityOptionsBuilder exportField(Boolean export_serialized_name) {
+      this.export_serialized_name = export_serialized_name;
       return this;
     }
   }
@@ -5362,7 +5362,7 @@ public class ConversationV1Models {
   public class GetIntentOptions extends IBMWatsonGenericModel {
     private String workspace_id;
     private String intent;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
     /**
      * Gets the workspace_id.
      *
@@ -5384,21 +5384,21 @@ public class ConversationV1Models {
       return intent;
     }
     /**
-     * Gets the xexport.
+     * Gets the export_serialized_name.
      *
      * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      *
-     * @return the xexport
+     * @return the export_serialized_name
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean exportField() {
+      return export_serialized_name;
     }
     private GetIntentOptions(GetIntentOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent, 'intent cannot be empty');
       workspace_id = builder.workspace_id;
       intent = builder.intent;
-      xexport = builder.xexport;
+      export_serialized_name = builder.export_serialized_name;
     }
 
     /**
@@ -5417,12 +5417,12 @@ public class ConversationV1Models {
   public class GetIntentOptionsBuilder {
     private String workspace_id;
     private String intent;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
 
     private GetIntentOptionsBuilder(GetIntentOptions get_intent_options) {
       workspace_id = get_intent_options.workspace_id;
       intent = get_intent_options.intent;
-      xexport = get_intent_options.xexport;
+      export_serialized_name = get_intent_options.export_serialized_name;
     }
 
     /**
@@ -5474,13 +5474,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the export_serialized_name.
      *
-     * @param xexport the xexport
+     * @param export_serialized_name the export_serialized_name
      * @return the GetIntentOptions builder
      */
-    public GetIntentOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public GetIntentOptionsBuilder exportField(Boolean export_serialized_name) {
+      this.export_serialized_name = export_serialized_name;
       return this;
     }
   }
@@ -5652,7 +5652,7 @@ public class ConversationV1Models {
     private String workspace_id;
     private String entity;
     private String value;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
     /**
      * Gets the workspace_id.
      *
@@ -5684,14 +5684,14 @@ public class ConversationV1Models {
       return value;
     }
     /**
-     * Gets the xexport.
+     * Gets the export_serialized_name.
      *
      * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      *
-     * @return the xexport
+     * @return the export_serialized_name
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean exportField() {
+      return export_serialized_name;
     }
     private GetValueOptions(GetValueOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
@@ -5700,7 +5700,7 @@ public class ConversationV1Models {
       workspace_id = builder.workspace_id;
       entity = builder.entity;
       value = builder.value;
-      xexport = builder.xexport;
+      export_serialized_name = builder.export_serialized_name;
     }
 
     /**
@@ -5720,13 +5720,13 @@ public class ConversationV1Models {
     private String workspace_id;
     private String entity;
     private String value;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
 
     private GetValueOptionsBuilder(GetValueOptions get_value_options) {
       workspace_id = get_value_options.workspace_id;
       entity = get_value_options.entity;
       value = get_value_options.value;
-      xexport = get_value_options.xexport;
+      export_serialized_name = get_value_options.export_serialized_name;
     }
 
     /**
@@ -5791,13 +5791,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the export_serialized_name.
      *
-     * @param xexport the xexport
+     * @param export_serialized_name the export_serialized_name
      * @return the GetValueOptions builder
      */
-    public GetValueOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public GetValueOptionsBuilder exportField(Boolean export_serialized_name) {
+      this.export_serialized_name = export_serialized_name;
       return this;
     }
   }
@@ -5807,7 +5807,7 @@ public class ConversationV1Models {
    */
   public class GetWorkspaceOptions extends IBMWatsonGenericModel {
     private String workspace_id;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
     /**
      * Gets the workspace_id.
      *
@@ -5819,19 +5819,19 @@ public class ConversationV1Models {
       return workspace_id;
     }
     /**
-     * Gets the xexport.
+     * Gets the export_serialized_name.
      *
      * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      *
-     * @return the xexport
+     * @return the export_serialized_name
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean exportField() {
+      return export_serialized_name;
     }
     private GetWorkspaceOptions(GetWorkspaceOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       workspace_id = builder.workspace_id;
-      xexport = builder.xexport;
+      export_serialized_name = builder.export_serialized_name;
     }
 
     /**
@@ -5849,11 +5849,11 @@ public class ConversationV1Models {
    */
   public class GetWorkspaceOptionsBuilder {
     private String workspace_id;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
 
     private GetWorkspaceOptionsBuilder(GetWorkspaceOptions get_workspace_options) {
       workspace_id = get_workspace_options.workspace_id;
-      xexport = get_workspace_options.xexport;
+      export_serialized_name = get_workspace_options.export_serialized_name;
     }
 
     /**
@@ -5892,13 +5892,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the export_serialized_name.
      *
-     * @param xexport the xexport
+     * @param export_serialized_name the export_serialized_name
      * @return the GetWorkspaceOptions builder
      */
-    public GetWorkspaceOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public GetWorkspaceOptionsBuilder exportField(Boolean export_serialized_name) {
+      this.export_serialized_name = export_serialized_name;
       return this;
     }
   }
@@ -5983,19 +5983,19 @@ public class ConversationV1Models {
    * Intent.
    */
   public class Intent extends IBMWatsonGenericModel {
-    private String intent_name;
+    private String intent;
     private Datetime created;
     private Datetime updated;
     private String description;
     /**
-     * Gets the intent_name.
+     * Gets the intent.
      *
      * The name of the intent.
      *
-     * @return the intent_name
+     * @return the intent
      */
-    public String getIntentName() {
-      return intent_name;
+    public String getIntent() {
+      return intent;
     }
     /**
      * Gets the created.
@@ -6029,12 +6029,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the intent_name.
+     * Sets the intent.
      *
-     * @param intent_name the new intent_name
+     * @param intent the new intent
      */
-    public void setIntentName(final String intent_name) {
-      this.intent_name = intent_name;
+    public void setIntent(final String intent) {
+      this.intent = intent;
     }
 
     /**
@@ -6097,20 +6097,20 @@ public class ConversationV1Models {
    * IntentExport.
    */
   public class IntentExport extends IBMWatsonGenericModel {
-    private String intent_name;
+    private String intent;
     private Datetime created;
     private Datetime updated;
     private String description;
     private List<Example> examples;
     /**
-     * Gets the intent_name.
+     * Gets the intent.
      *
      * The name of the intent.
      *
-     * @return the intent_name
+     * @return the intent
      */
-    public String getIntentName() {
-      return intent_name;
+    public String getIntent() {
+      return intent;
     }
     /**
      * Gets the created.
@@ -6154,12 +6154,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the intent_name.
+     * Sets the intent.
      *
-     * @param intent_name the new intent_name
+     * @param intent the new intent
      */
-    public void setIntentName(final String intent_name) {
-      this.intent_name = intent_name;
+    public void setIntent(final String intent) {
+      this.intent = intent;
     }
 
     /**
@@ -6188,7 +6188,7 @@ public class ConversationV1Models {
     private String workspace_id;
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
     /**
      * Gets the workspace_id.
@@ -6221,14 +6221,14 @@ public class ConversationV1Models {
       return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -6245,7 +6245,7 @@ public class ConversationV1Models {
       workspace_id = builder.workspace_id;
       page_limit = builder.page_limit;
       include_count = builder.include_count;
-      xsort = builder.xsort;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -6266,14 +6266,14 @@ public class ConversationV1Models {
     private String workspace_id;
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
 
     private ListCounterexamplesOptionsBuilder(ListCounterexamplesOptions list_counterexamples_options) {
       workspace_id = list_counterexamples_options.workspace_id;
       page_limit = list_counterexamples_options.page_limit;
       include_count = list_counterexamples_options.include_count;
-      xsort = list_counterexamples_options.xsort;
+      sort_serialized_name = list_counterexamples_options.sort_serialized_name;
       cursor = list_counterexamples_options.cursor;
     }
 
@@ -6335,13 +6335,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListCounterexamplesOptions builder
      */
-    public ListCounterexamplesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListCounterexamplesOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -6364,7 +6364,7 @@ public class ConversationV1Models {
     private String workspace_id;
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
     /**
      * Gets the workspace_id.
@@ -6397,14 +6397,14 @@ public class ConversationV1Models {
       return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -6421,7 +6421,7 @@ public class ConversationV1Models {
       workspace_id = builder.workspace_id;
       page_limit = builder.page_limit;
       include_count = builder.include_count;
-      xsort = builder.xsort;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -6442,14 +6442,14 @@ public class ConversationV1Models {
     private String workspace_id;
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
 
     private ListDialogNodesOptionsBuilder(ListDialogNodesOptions list_dialog_nodes_options) {
       workspace_id = list_dialog_nodes_options.workspace_id;
       page_limit = list_dialog_nodes_options.page_limit;
       include_count = list_dialog_nodes_options.include_count;
-      xsort = list_dialog_nodes_options.xsort;
+      sort_serialized_name = list_dialog_nodes_options.sort_serialized_name;
       cursor = list_dialog_nodes_options.cursor;
     }
 
@@ -6511,13 +6511,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListDialogNodesOptions builder
      */
-    public ListDialogNodesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListDialogNodesOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -6538,10 +6538,10 @@ public class ConversationV1Models {
    */
   public class ListEntitiesOptions extends IBMWatsonGenericModel {
     private String workspace_id;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
     /**
      * Gets the workspace_id.
@@ -6554,14 +6554,14 @@ public class ConversationV1Models {
       return workspace_id;
     }
     /**
-     * Gets the xexport.
+     * Gets the export_serialized_name.
      *
      * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      *
-     * @return the xexport
+     * @return the export_serialized_name
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean exportField() {
+      return export_serialized_name;
     }
     /**
      * Gets the page_limit.
@@ -6584,14 +6584,14 @@ public class ConversationV1Models {
       return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -6606,10 +6606,10 @@ public class ConversationV1Models {
     private ListEntitiesOptions(ListEntitiesOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       workspace_id = builder.workspace_id;
-      xexport = builder.xexport;
+      export_serialized_name = builder.export_serialized_name;
       page_limit = builder.page_limit;
       include_count = builder.include_count;
-      xsort = builder.xsort;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -6628,18 +6628,18 @@ public class ConversationV1Models {
    */
   public class ListEntitiesOptionsBuilder {
     private String workspace_id;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
 
     private ListEntitiesOptionsBuilder(ListEntitiesOptions list_entities_options) {
       workspace_id = list_entities_options.workspace_id;
-      xexport = list_entities_options.xexport;
+      export_serialized_name = list_entities_options.export_serialized_name;
       page_limit = list_entities_options.page_limit;
       include_count = list_entities_options.include_count;
-      xsort = list_entities_options.xsort;
+      sort_serialized_name = list_entities_options.sort_serialized_name;
       cursor = list_entities_options.cursor;
     }
 
@@ -6679,13 +6679,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the export_serialized_name.
      *
-     * @param xexport the xexport
+     * @param export_serialized_name the export_serialized_name
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public ListEntitiesOptionsBuilder exportField(Boolean export_serialized_name) {
+      this.export_serialized_name = export_serialized_name;
       return this;
     }
 
@@ -6712,13 +6712,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListEntitiesOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -6742,7 +6742,7 @@ public class ConversationV1Models {
     private String intent;
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
     /**
      * Gets the workspace_id.
@@ -6785,14 +6785,14 @@ public class ConversationV1Models {
       return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -6811,7 +6811,7 @@ public class ConversationV1Models {
       intent = builder.intent;
       page_limit = builder.page_limit;
       include_count = builder.include_count;
-      xsort = builder.xsort;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -6833,7 +6833,7 @@ public class ConversationV1Models {
     private String intent;
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
 
     private ListExamplesOptionsBuilder(ListExamplesOptions list_examples_options) {
@@ -6841,7 +6841,7 @@ public class ConversationV1Models {
       intent = list_examples_options.intent;
       page_limit = list_examples_options.page_limit;
       include_count = list_examples_options.include_count;
-      xsort = list_examples_options.xsort;
+      sort_serialized_name = list_examples_options.sort_serialized_name;
       cursor = list_examples_options.cursor;
     }
 
@@ -6916,13 +6916,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListExamplesOptions builder
      */
-    public ListExamplesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListExamplesOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -6943,10 +6943,10 @@ public class ConversationV1Models {
    */
   public class ListIntentsOptions extends IBMWatsonGenericModel {
     private String workspace_id;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
     /**
      * Gets the workspace_id.
@@ -6959,14 +6959,14 @@ public class ConversationV1Models {
       return workspace_id;
     }
     /**
-     * Gets the xexport.
+     * Gets the export_serialized_name.
      *
      * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      *
-     * @return the xexport
+     * @return the export_serialized_name
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean exportField() {
+      return export_serialized_name;
     }
     /**
      * Gets the page_limit.
@@ -6989,14 +6989,14 @@ public class ConversationV1Models {
       return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -7011,10 +7011,10 @@ public class ConversationV1Models {
     private ListIntentsOptions(ListIntentsOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       workspace_id = builder.workspace_id;
-      xexport = builder.xexport;
+      export_serialized_name = builder.export_serialized_name;
       page_limit = builder.page_limit;
       include_count = builder.include_count;
-      xsort = builder.xsort;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -7033,18 +7033,18 @@ public class ConversationV1Models {
    */
   public class ListIntentsOptionsBuilder {
     private String workspace_id;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
 
     private ListIntentsOptionsBuilder(ListIntentsOptions list_intents_options) {
       workspace_id = list_intents_options.workspace_id;
-      xexport = list_intents_options.xexport;
+      export_serialized_name = list_intents_options.export_serialized_name;
       page_limit = list_intents_options.page_limit;
       include_count = list_intents_options.include_count;
-      xsort = list_intents_options.xsort;
+      sort_serialized_name = list_intents_options.sort_serialized_name;
       cursor = list_intents_options.cursor;
     }
 
@@ -7084,13 +7084,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the export_serialized_name.
      *
-     * @param xexport the xexport
+     * @param export_serialized_name the export_serialized_name
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public ListIntentsOptionsBuilder exportField(Boolean export_serialized_name) {
+      this.export_serialized_name = export_serialized_name;
       return this;
     }
 
@@ -7117,13 +7117,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListIntentsOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -7144,7 +7144,7 @@ public class ConversationV1Models {
    */
   public class ListLogsOptions extends IBMWatsonGenericModel {
     private String workspace_id;
-    private String xsort;
+    private String sort_serialized_name;
     private String filter;
     private Long page_limit;
     private String cursor;
@@ -7159,14 +7159,14 @@ public class ConversationV1Models {
       return workspace_id;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the filter.
@@ -7201,7 +7201,7 @@ public class ConversationV1Models {
     private ListLogsOptions(ListLogsOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       workspace_id = builder.workspace_id;
-      xsort = builder.xsort;
+      sort_serialized_name = builder.sort_serialized_name;
       filter = builder.filter;
       page_limit = builder.page_limit;
       cursor = builder.cursor;
@@ -7222,14 +7222,14 @@ public class ConversationV1Models {
    */
   public class ListLogsOptionsBuilder {
     private String workspace_id;
-    private String xsort;
+    private String sort_serialized_name;
     private String filter;
     private Long page_limit;
     private String cursor;
 
     private ListLogsOptionsBuilder(ListLogsOptions list_logs_options) {
       workspace_id = list_logs_options.workspace_id;
-      xsort = list_logs_options.xsort;
+      sort_serialized_name = list_logs_options.sort_serialized_name;
       filter = list_logs_options.filter;
       page_limit = list_logs_options.page_limit;
       cursor = list_logs_options.cursor;
@@ -7271,13 +7271,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListLogsOptions builder
      */
-    public ListLogsOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListLogsOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -7324,7 +7324,7 @@ public class ConversationV1Models {
     private String value;
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
     /**
      * Gets the workspace_id.
@@ -7377,14 +7377,14 @@ public class ConversationV1Models {
       return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -7405,7 +7405,7 @@ public class ConversationV1Models {
       value = builder.value;
       page_limit = builder.page_limit;
       include_count = builder.include_count;
-      xsort = builder.xsort;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -7428,7 +7428,7 @@ public class ConversationV1Models {
     private String value;
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
 
     private ListSynonymsOptionsBuilder(ListSynonymsOptions list_synonyms_options) {
@@ -7437,7 +7437,7 @@ public class ConversationV1Models {
       value = list_synonyms_options.value;
       page_limit = list_synonyms_options.page_limit;
       include_count = list_synonyms_options.include_count;
-      xsort = list_synonyms_options.xsort;
+      sort_serialized_name = list_synonyms_options.sort_serialized_name;
       cursor = list_synonyms_options.cursor;
     }
 
@@ -7525,13 +7525,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListSynonymsOptions builder
      */
-    public ListSynonymsOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListSynonymsOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -7553,10 +7553,10 @@ public class ConversationV1Models {
   public class ListValuesOptions extends IBMWatsonGenericModel {
     private String workspace_id;
     private String entity;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
     /**
      * Gets the workspace_id.
@@ -7579,14 +7579,14 @@ public class ConversationV1Models {
       return entity;
     }
     /**
-     * Gets the xexport.
+     * Gets the export_serialized_name.
      *
      * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      *
-     * @return the xexport
+     * @return the export_serialized_name
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean exportField() {
+      return export_serialized_name;
     }
     /**
      * Gets the page_limit.
@@ -7609,14 +7609,14 @@ public class ConversationV1Models {
       return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -7633,10 +7633,10 @@ public class ConversationV1Models {
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       workspace_id = builder.workspace_id;
       entity = builder.entity;
-      xexport = builder.xexport;
+      export_serialized_name = builder.export_serialized_name;
       page_limit = builder.page_limit;
       include_count = builder.include_count;
-      xsort = builder.xsort;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -7656,19 +7656,19 @@ public class ConversationV1Models {
   public class ListValuesOptionsBuilder {
     private String workspace_id;
     private String entity;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
 
     private ListValuesOptionsBuilder(ListValuesOptions list_values_options) {
       workspace_id = list_values_options.workspace_id;
       entity = list_values_options.entity;
-      xexport = list_values_options.xexport;
+      export_serialized_name = list_values_options.export_serialized_name;
       page_limit = list_values_options.page_limit;
       include_count = list_values_options.include_count;
-      xsort = list_values_options.xsort;
+      sort_serialized_name = list_values_options.sort_serialized_name;
       cursor = list_values_options.cursor;
     }
 
@@ -7721,13 +7721,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the export_serialized_name.
      *
-     * @param xexport the xexport
+     * @param export_serialized_name the export_serialized_name
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public ListValuesOptionsBuilder exportField(Boolean export_serialized_name) {
+      this.export_serialized_name = export_serialized_name;
       return this;
     }
 
@@ -7754,13 +7754,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListValuesOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -7782,7 +7782,7 @@ public class ConversationV1Models {
   public class ListWorkspacesOptions extends IBMWatsonGenericModel {
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
     /**
      * Gets the page_limit.
@@ -7804,15 +7804,16 @@ public class ConversationV1Models {
     public Boolean includeCount() {
       return include_count;
     }
+
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -7827,7 +7828,7 @@ public class ConversationV1Models {
     private ListWorkspacesOptions(ListWorkspacesOptionsBuilder builder) {
       page_limit = builder.page_limit;
       include_count = builder.include_count;
-      xsort = builder.xsort;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -7847,13 +7848,13 @@ public class ConversationV1Models {
   public class ListWorkspacesOptionsBuilder {
     private Long page_limit;
     private Boolean include_count;
-    private String xsort;
+    private String sort_serialized_name;
     private String cursor;
 
     private ListWorkspacesOptionsBuilder(ListWorkspacesOptions list_workspaces_options) {
       page_limit = list_workspaces_options.page_limit;
       include_count = list_workspaces_options.include_count;
-      xsort = list_workspaces_options.xsort;
+      sort_serialized_name = list_workspaces_options.sort_serialized_name;
       cursor = list_workspaces_options.cursor;
     }
 
@@ -7895,13 +7896,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListWorkspacesOptions builder
      */
-    public ListWorkspacesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListWorkspacesOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -8372,32 +8373,32 @@ public class ConversationV1Models {
     }
 
     /**
-     * Adds an entity to entities.
+     * Adds an entities to entities.
      *
-     * @param entity the new entity
+     * @param entities the new entities
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder addEntity(RuntimeEntity entity) {
-      IBMWatsonValidator.notNull(entity, 'entity cannot be null');
+    public MessageOptionsBuilder addEntities(RuntimeEntity entities) {
+      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
       if (this.entities == null) {
         this.entities = new List<RuntimeEntity>();
       }
-      this.entities.add(entity);
+      this.entities.add(entities);
       return this;
     }
 
     /**
-     * Adds an intent to intents.
+     * Adds an intents to intents.
      *
-     * @param intent the new intent
+     * @param intents the new intents
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder addIntent(RuntimeIntent intent) {
-      IBMWatsonValidator.notNull(intent, 'intent cannot be null');
+    public MessageOptionsBuilder addIntents(RuntimeIntent intents) {
+      IBMWatsonValidator.notNull(intents, 'intents cannot be null');
       if (this.intents == null) {
         this.intents = new List<RuntimeIntent>();
       }
-      this.intents.add(intent);
+      this.intents.add(intents);
       return this;
     }
 
@@ -9009,18 +9010,18 @@ public class ConversationV1Models {
    * Synonym.
    */
   public class Synonym extends IBMWatsonGenericModel {
-    private String synonym_text;
+    private String synonym;
     private Datetime created;
     private Datetime updated;
     /**
-     * Gets the synonym_text.
+     * Gets the synonym.
      *
      * The text of the synonym.
      *
-     * @return the synonym_text
+     * @return the synonym
      */
-    public String getSynonymText() {
-      return synonym_text;
+    public String getSynonym() {
+      return synonym;
     }
     /**
      * Gets the created.
@@ -9044,12 +9045,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the synonym_text.
+     * Sets the synonym.
      *
-     * @param synonym_text the new synonym_text
+     * @param synonym the new synonym
      */
-    public void setSynonymText(final String synonym_text) {
-      this.synonym_text = synonym_text;
+    public void setSynonym(final String synonym) {
+      this.synonym = synonym;
     }
   }
 
@@ -9240,7 +9241,7 @@ public class ConversationV1Models {
   public class UpdateDialogNodeOptions extends IBMWatsonGenericModel {
     private String workspace_id;
     private String dialog_node;
-    private String node_type;
+    private String new_type;
     private List<DialogNodeAction> new_actions;
     private String new_conditions;
     private Map<String, Object> new_context;
@@ -9275,14 +9276,14 @@ public class ConversationV1Models {
       return dialog_node;
     }
     /**
-     * Gets the node_type.
+     * Gets the new_type.
      *
      * How the node is processed.
      *
-     * @return the node_type
+     * @return the new_type
      */
-    public String nodeType() {
-      return node_type;
+    public String newType() {
+      return new_type;
     }
     /**
      * Gets the new_actions.
@@ -9420,7 +9421,7 @@ public class ConversationV1Models {
       IBMWatsonValidator.notNull(builder.new_dialog_node, 'new_dialog_node cannot be null');
       workspace_id = builder.workspace_id;
       dialog_node = builder.dialog_node;
-      node_type = builder.node_type;
+      new_type = builder.new_type;
       new_actions = builder.new_actions;
       new_conditions = builder.new_conditions;
       new_context = builder.new_context;
@@ -9452,7 +9453,7 @@ public class ConversationV1Models {
   public class UpdateDialogNodeOptionsBuilder {
     private String workspace_id;
     private String dialog_node;
-    private String node_type;
+    private String new_type;
     private List<DialogNodeAction> new_actions;
     private String new_conditions;
     private Map<String, Object> new_context;
@@ -9470,7 +9471,7 @@ public class ConversationV1Models {
     private UpdateDialogNodeOptionsBuilder(UpdateDialogNodeOptions update_dialog_node_options) {
       workspace_id = update_dialog_node_options.workspace_id;
       dialog_node = update_dialog_node_options.dialog_node;
-      node_type = update_dialog_node_options.node_type;
+      new_type = update_dialog_node_options.new_type;
       new_actions = update_dialog_node_options.new_actions;
       new_conditions = update_dialog_node_options.new_conditions;
       new_context = update_dialog_node_options.new_context;
@@ -9552,13 +9553,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the node_type.
+     * Set the new_type.
      *
-     * @param node_type the node_type
+     * @param new_type the new_type
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder nodeType(String node_type) {
-      this.node_type = node_type;
+    public UpdateDialogNodeOptionsBuilder newType(String new_type) {
+      this.new_type = new_type;
       return this;
     }
 
@@ -9859,17 +9860,17 @@ public class ConversationV1Models {
     }
 
     /**
-     * Adds an value to new_values.
+     * Adds an new_values to new_values.
      *
-     * @param value the new value
+     * @param new_values the new new_values
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder addValue(CreateValue value) {
-      IBMWatsonValidator.notNull(value, 'value cannot be null');
+    public UpdateEntityOptionsBuilder addNewValues(CreateValue new_values) {
+      IBMWatsonValidator.notNull(new_values, 'new_values cannot be null');
       if (this.new_values == null) {
         this.new_values = new List<CreateValue>();
       }
-      this.new_values.add(value);
+      this.new_values.add(new_values);
       return this;
     }
 
@@ -10233,17 +10234,17 @@ public class ConversationV1Models {
     }
 
     /**
-     * Adds an example to new_examples.
+     * Adds an new_examples to new_examples.
      *
-     * @param example the new example
+     * @param new_examples the new new_examples
      * @return the UpdateIntentOptions builder
      */
-    public UpdateIntentOptionsBuilder addExample(CreateExample example) {
-      IBMWatsonValidator.notNull(example, 'example cannot be null');
+    public UpdateIntentOptionsBuilder addNewExamples(CreateExample new_examples) {
+      IBMWatsonValidator.notNull(new_examples, 'new_examples cannot be null');
       if (this.new_examples == null) {
         this.new_examples = new List<CreateExample>();
       }
-      this.new_examples.add(example);
+      this.new_examples.add(new_examples);
       return this;
     }
 
@@ -10497,7 +10498,7 @@ public class ConversationV1Models {
     private String entity;
     private String value;
     private List<String> new_synonyms;
-    private String value_type;
+    private String new_type;
     private Map<String, Object> new_metadata;
     private List<String> new_patterns;
     private String new_value;
@@ -10542,14 +10543,14 @@ public class ConversationV1Models {
       return new_synonyms;
     }
     /**
-     * Gets the value_type.
+     * Gets the new_type.
      *
      * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
      *
-     * @return the value_type
+     * @return the new_type
      */
-    public String valueType() {
-      return value_type;
+    public String newType() {
+      return new_type;
     }
     /**
      * Gets the new_metadata.
@@ -10589,7 +10590,7 @@ public class ConversationV1Models {
       entity = builder.entity;
       value = builder.value;
       new_synonyms = builder.new_synonyms;
-      value_type = builder.value_type;
+      new_type = builder.new_type;
       new_metadata = builder.new_metadata;
       new_patterns = builder.new_patterns;
       new_value = builder.new_value;
@@ -10613,7 +10614,7 @@ public class ConversationV1Models {
     private String entity;
     private String value;
     private List<String> new_synonyms;
-    private String value_type;
+    private String new_type;
     private Map<String, Object> new_metadata;
     private List<String> new_patterns;
     private String new_value;
@@ -10623,7 +10624,7 @@ public class ConversationV1Models {
       entity = update_value_options.entity;
       value = update_value_options.value;
       new_synonyms = update_value_options.new_synonyms;
-      value_type = update_value_options.value_type;
+      new_type = update_value_options.new_type;
       new_metadata = update_value_options.new_metadata;
       new_patterns = update_value_options.new_patterns;
       new_value = update_value_options.new_value;
@@ -10658,17 +10659,17 @@ public class ConversationV1Models {
     }
 
     /**
-     * Adds an synonym to new_synonyms.
+     * Adds an new_synonyms to new_synonyms.
      *
-     * @param synonym the new synonym
+     * @param new_synonyms the new new_synonyms
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder addSynonym(String synonym) {
-      IBMWatsonValidator.notNull(synonym, 'synonym cannot be null');
+    public UpdateValueOptionsBuilder addNewSynonyms(String new_synonyms) {
+      IBMWatsonValidator.notNull(new_synonyms, 'new_synonyms cannot be null');
       if (this.new_synonyms == null) {
         this.new_synonyms = new List<String>();
       }
-      this.new_synonyms.add(synonym);
+      this.new_synonyms.add(new_synonyms);
       return this;
     }
 
@@ -10733,13 +10734,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the value_type.
+     * Set the new_type.
      *
-     * @param value_type the value_type
+     * @param new_type the new_type
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder valueType(String value_type) {
-      this.value_type = value_type;
+    public UpdateValueOptionsBuilder newType(String new_type) {
+      this.new_type = new_type;
       return this;
     }
 
@@ -10969,62 +10970,62 @@ public class ConversationV1Models {
     }
 
     /**
-     * Adds an intent to intents.
+     * Adds an intents to intents.
      *
-     * @param intent the new intent
+     * @param intents the new intents
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder addIntent(CreateIntent intent) {
-      IBMWatsonValidator.notNull(intent, 'intent cannot be null');
+    public UpdateWorkspaceOptionsBuilder addIntents(CreateIntent intents) {
+      IBMWatsonValidator.notNull(intents, 'intents cannot be null');
       if (this.intents == null) {
         this.intents = new List<CreateIntent>();
       }
-      this.intents.add(intent);
+      this.intents.add(intents);
       return this;
     }
 
     /**
-     * Adds an entity to entities.
+     * Adds an entities to entities.
      *
-     * @param entity the new entity
+     * @param entities the new entities
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder addEntity(CreateEntity entity) {
-      IBMWatsonValidator.notNull(entity, 'entity cannot be null');
+    public UpdateWorkspaceOptionsBuilder addEntities(CreateEntity entities) {
+      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
       if (this.entities == null) {
         this.entities = new List<CreateEntity>();
       }
-      this.entities.add(entity);
+      this.entities.add(entities);
       return this;
     }
 
     /**
-     * Adds an dialog_node to dialog_nodes.
+     * Adds an dialog_nodes to dialog_nodes.
      *
-     * @param dialog_node the new dialog_node
+     * @param dialog_nodes the new dialog_nodes
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder addDialogNode(CreateDialogNode dialog_node) {
-      IBMWatsonValidator.notNull(dialog_node, 'dialog_node cannot be null');
+    public UpdateWorkspaceOptionsBuilder addDialogNodes(CreateDialogNode dialog_nodes) {
+      IBMWatsonValidator.notNull(dialog_nodes, 'dialog_nodes cannot be null');
       if (this.dialog_nodes == null) {
         this.dialog_nodes = new List<CreateDialogNode>();
       }
-      this.dialog_nodes.add(dialog_node);
+      this.dialog_nodes.add(dialog_nodes);
       return this;
     }
 
     /**
-     * Adds an counterexample to counterexamples.
+     * Adds an counterexamples to counterexamples.
      *
-     * @param counterexample the new counterexample
+     * @param counterexamples the new counterexamples
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder addCounterexample(CreateCounterexample counterexample) {
-      IBMWatsonValidator.notNull(counterexample, 'counterexample cannot be null');
+    public UpdateWorkspaceOptionsBuilder addCounterexamples(CreateCounterexample counterexamples) {
+      IBMWatsonValidator.notNull(counterexamples, 'counterexamples cannot be null');
       if (this.counterexamples == null) {
         this.counterexamples = new List<CreateCounterexample>();
       }
-      this.counterexamples.add(counterexample);
+      this.counterexamples.add(counterexamples);
       return this;
     }
 
@@ -11147,22 +11148,22 @@ public class ConversationV1Models {
    * Value.
    */
   public class Value extends IBMWatsonGenericModel {
-    private String value_text;
+    private String value;
     private Map<String, Object> metadata;
     private Datetime created;
     private Datetime updated;
     private List<String> synonyms;
     private List<String> patterns;
-    private String value_type;
+    private String type_serialized_name;
     /**
-     * Gets the value_text.
+     * Gets the value.
      *
      * The text of the entity value.
      *
-     * @return the value_text
+     * @return the value
      */
-    public String getValueText() {
-      return value_text;
+    public String getValue() {
+      return value;
     }
     /**
      * Gets the metadata.
@@ -11215,23 +11216,23 @@ public class ConversationV1Models {
       return patterns;
     }
     /**
-     * Gets the value_type.
+     * Gets the type_serialized_name.
      *
      * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
      *
-     * @return the value_type
+     * @return the type_serialized_name
      */
-    public String getValueType() {
-      return value_type;
+    public String getType() {
+      return type_serialized_name;
     }
 
     /**
-     * Sets the value_text.
+     * Sets the value.
      *
-     * @param value_text the new value_text
+     * @param value the new value
      */
-    public void setValueText(final String value_text) {
-      this.value_text = value_text;
+    public void setValue(final String value) {
+      this.value = value;
     }
 
     /**
@@ -11262,12 +11263,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the value_type.
+     * Sets the type_serialized_name.
      *
-     * @param value_type the new value_type
+     * @param type_serialized_name the new type_serialized_name
      */
-    public void setValueType(final String value_type) {
-      this.value_type = value_type;
+    public void setType(final String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
     }
   }
 
@@ -11321,22 +11322,22 @@ public class ConversationV1Models {
    * ValueExport.
    */
   public class ValueExport extends IBMWatsonGenericModel {
-    private String value_text;
+    private String value;
     private Map<String, Object> metadata;
     private Datetime created;
     private Datetime updated;
     private List<String> synonyms;
     private List<String> patterns;
-    private String value_type;
+    private String type_serialized_name;
     /**
-     * Gets the value_text.
+     * Gets the value.
      *
      * The text of the entity value.
      *
-     * @return the value_text
+     * @return the value
      */
-    public String getValueText() {
-      return value_text;
+    public String getValue() {
+      return value;
     }
     /**
      * Gets the metadata.
@@ -11389,23 +11390,23 @@ public class ConversationV1Models {
       return patterns;
     }
     /**
-     * Gets the value_type.
+     * Gets the type_serialized_name.
      *
      * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
      *
-     * @return the value_type
+     * @return the type_serialized_name
      */
-    public String getValueType() {
-      return value_type;
+    public String getType() {
+      return type_serialized_name;
     }
 
     /**
-     * Sets the value_text.
+     * Sets the value.
      *
-     * @param value_text the new value_text
+     * @param value the new value
      */
-    public void setValueText(final String value_text) {
-      this.value_text = value_text;
+    public void setValue(final String value) {
+      this.value = value;
     }
 
     /**
@@ -11436,12 +11437,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the value_type.
+     * Sets the type_serialized_name.
      *
-     * @param value_type the new value_type
+     * @param type_serialized_name the new type_serialized_name
      */
-    public void setValueType(final String value_type) {
-      this.value_type = value_type;
+    public void setType(final String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
     }
   }
 

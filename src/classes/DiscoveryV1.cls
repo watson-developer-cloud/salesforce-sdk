@@ -29,7 +29,6 @@ public class DiscoveryV1 extends IBMWatsonService {
    *        calls from failing when the service introduces breaking changes.
    */
   public DiscoveryV1(String versionDate) {
-    this.ServiceName = 'Discovery';
     if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
       setEndPoint(URL);
     }
@@ -309,8 +308,8 @@ public class DiscoveryV1 extends IBMWatsonService {
       multipartBuilder.addFormDataPart('configuration', testConfigurationInEnvironmentOptions.configuration());
     }
     if (testConfigurationInEnvironmentOptions.file() != null) {
-      RequestBody file_body = RequestUtils.inputStreamBody(testConfigurationInEnvironmentOptions.file(), testConfigurationInEnvironmentOptions.fileContentType());
-      multipartBuilder.addFormDataPart('file', testConfigurationInEnvironmentOptions.filename(), file_body);
+      RequestBody fileBody = RequestUtils.inputStreamBody(testConfigurationInEnvironmentOptions.file(), testConfigurationInEnvironmentOptions.fileContentType());
+      multipartBuilder.addFormDataPart('file', testConfigurationInEnvironmentOptions.filename(), fileBody);
     }
     if (testConfigurationInEnvironmentOptions.metadata() != null) {
       multipartBuilder.addFormDataPart('metadata', testConfigurationInEnvironmentOptions.metadata());
@@ -455,8 +454,8 @@ public class DiscoveryV1 extends IBMWatsonService {
     MultipartBody.Builder multipartBuilder = new MultipartBody.Builder();
     multipartBuilder.setType(MultipartBody.FORM);
     if (addDocumentOptions.file() != null) {
-      RequestBody file_body = RequestUtils.inputStreamBody(addDocumentOptions.file(), addDocumentOptions.fileContentType());
-      multipartBuilder.addFormDataPart('file', addDocumentOptions.filename(), file_body);
+      RequestBody fileBody = RequestUtils.inputStreamBody(addDocumentOptions.file(), addDocumentOptions.fileContentType());
+      multipartBuilder.addFormDataPart('file', addDocumentOptions.filename(), fileBody);
     }
     if (addDocumentOptions.metadata() != null) {
       multipartBuilder.addFormDataPart('metadata', addDocumentOptions.metadata());
@@ -517,8 +516,8 @@ public class DiscoveryV1 extends IBMWatsonService {
     MultipartBody.Builder multipartBuilder = new MultipartBody.Builder();
     multipartBuilder.setType(MultipartBody.FORM);
     if (updateDocumentOptions.file() != null) {
-      RequestBody file_body = RequestUtils.inputStreamBody(updateDocumentOptions.file(), updateDocumentOptions.fileContentType());
-      multipartBuilder.addFormDataPart('file', updateDocumentOptions.filename(), file_body);
+      RequestBody fileBody = RequestUtils.inputStreamBody(updateDocumentOptions.file(), updateDocumentOptions.fileContentType());
+      multipartBuilder.addFormDataPart('file', updateDocumentOptions.filename(), fileBody);
     }
     if (updateDocumentOptions.metadata() != null) {
       multipartBuilder.addFormDataPart('metadata', updateDocumentOptions.metadata());
@@ -546,9 +545,9 @@ public class DiscoveryV1 extends IBMWatsonService {
       'natural_language_query' => federatedQueryOptions.naturalLanguageQuery(),
       'aggregation' => federatedQueryOptions.aggregation(),
       'count' => String.valueOf(federatedQueryOptions.count()),
-      'return_fields' => String.valueOf(federatedQueryOptions.returnFields()),
+      'return_fields' => String.valueOf(federatedQueryOptions.returnField()),
       'offset' => String.valueOf(federatedQueryOptions.offset()),
-      'sort' => String.valueOf(federatedQueryOptions.xsort()),
+      'sort' => String.valueOf(federatedQueryOptions.sortField()),
       'highlight' => String.valueOf(federatedQueryOptions.highlight()),
       'deduplicate' => String.valueOf(federatedQueryOptions.deduplicate()),
       'deduplicate.field' => federatedQueryOptions.deduplicateField()
@@ -575,9 +574,9 @@ public class DiscoveryV1 extends IBMWatsonService {
       'natural_language_query' => federatedQueryNoticesOptions.naturalLanguageQuery(),
       'aggregation' => federatedQueryNoticesOptions.aggregation(),
       'count' => String.valueOf(federatedQueryNoticesOptions.count()),
-      'return_fields' => String.valueOf(federatedQueryNoticesOptions.returnFields()),
+      'return_fields' => String.valueOf(federatedQueryNoticesOptions.returnField()),
       'offset' => String.valueOf(federatedQueryNoticesOptions.offset()),
-      'sort' => String.valueOf(federatedQueryNoticesOptions.xsort()),
+      'sort' => String.valueOf(federatedQueryNoticesOptions.sortField()),
       'highlight' => String.valueOf(federatedQueryNoticesOptions.highlight()),
       'deduplicate.field' => federatedQueryNoticesOptions.deduplicateField()
     });
@@ -603,9 +602,9 @@ public class DiscoveryV1 extends IBMWatsonService {
       'passages' => String.valueOf(queryOptions.passages()),
       'aggregation' => queryOptions.aggregation(),
       'count' => String.valueOf(queryOptions.count()),
-      'return' => String.valueOf(queryOptions.returnFields()),
+      'return' => String.valueOf(queryOptions.returnField()),
       'offset' => String.valueOf(queryOptions.offset()),
-      'sort' => String.valueOf(queryOptions.xsort()),
+      'sort' => String.valueOf(queryOptions.sortField()),
       'highlight' => String.valueOf(queryOptions.highlight()),
       'passages.fields' => String.valueOf(queryOptions.passagesFields()),
       'passages.count' => String.valueOf(queryOptions.passagesCount()),
@@ -615,7 +614,6 @@ public class DiscoveryV1 extends IBMWatsonService {
     });
     return (DiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), DiscoveryV1Models.QueryResponse.class);
   }
-
   /**
    * Query system notices.
    *
@@ -635,9 +633,9 @@ public class DiscoveryV1 extends IBMWatsonService {
       'passages' => String.valueOf(queryNoticesOptions.passages()),
       'aggregation' => queryNoticesOptions.aggregation(),
       'count' => String.valueOf(queryNoticesOptions.count()),
-      'return_fields' => String.valueOf(queryNoticesOptions.returnFields()),
+      'return_fields' => String.valueOf(queryNoticesOptions.returnField()),
       'offset' => String.valueOf(queryNoticesOptions.offset()),
-      'sort' => String.valueOf(queryNoticesOptions.xsort()),
+      'sort' => String.valueOf(queryNoticesOptions.sortField()),
       'highlight' => String.valueOf(queryNoticesOptions.highlight()),
       'passages.fields' => String.valueOf(queryNoticesOptions.passagesFields()),
       'passages.count' => String.valueOf(queryNoticesOptions.passagesCount()),

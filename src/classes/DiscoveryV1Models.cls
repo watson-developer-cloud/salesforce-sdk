@@ -1221,32 +1221,32 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Adds an enrichment to enrichments.
+     * Adds an enrichments to enrichments.
      *
-     * @param enrichment the new enrichment
+     * @param enrichments the new enrichments
      * @return the CreateConfigurationOptions builder
      */
-    public CreateConfigurationOptionsBuilder addEnrichment(Enrichment enrichment) {
-      IBMWatsonValidator.notNull(enrichment, 'enrichment cannot be null');
+    public CreateConfigurationOptionsBuilder addEnrichments(Enrichment enrichments) {
+      IBMWatsonValidator.notNull(enrichments, 'enrichments cannot be null');
       if (this.enrichments == null) {
         this.enrichments = new List<Enrichment>();
       }
-      this.enrichments.add(enrichment);
+      this.enrichments.add(enrichments);
       return this;
     }
 
     /**
-     * Adds an normalization to normalizations.
+     * Adds an normalizations to normalizations.
      *
-     * @param normalization the new normalization
+     * @param normalizations the new normalizations
      * @return the CreateConfigurationOptions builder
      */
-    public CreateConfigurationOptionsBuilder addNormalization(NormalizationOperation normalization) {
-      IBMWatsonValidator.notNull(normalization, 'normalization cannot be null');
+    public CreateConfigurationOptionsBuilder addNormalizations(NormalizationOperation normalizations) {
+      IBMWatsonValidator.notNull(normalizations, 'normalizations cannot be null');
       if (this.normalizations == null) {
         this.normalizations = new List<NormalizationOperation>();
       }
-      this.normalizations.add(normalization);
+      this.normalizations.add(normalizations);
       return this;
     }
 
@@ -2865,7 +2865,7 @@ public class DiscoveryV1Models {
     private String destination_field;
     private String source_field;
     private Boolean overwrite;
-    private String enrichment_name;
+    private String enrichment;
     private Boolean ignore_downstream_errors;
     private EnrichmentOptions options;
     /**
@@ -2909,14 +2909,14 @@ public class DiscoveryV1Models {
       return overwrite;
     }
     /**
-     * Gets the enrichment_name.
+     * Gets the enrichment.
      *
      * Name of the enrichment service to call. Currently the only valid value is `alchemy_language`.
      *
-     * @return the enrichment_name
+     * @return the enrichment
      */
-    public String getEnrichmentName() {
-      return enrichment_name;
+    public String getEnrichment() {
+      return enrichment;
     }
     /**
      * Gets the ignore_downstream_errors.
@@ -2976,12 +2976,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the enrichment_name.
+     * Sets the enrichment.
      *
-     * @param enrichment_name the new enrichment_name
+     * @param enrichment the new enrichment
      */
-    public void setEnrichmentName(final String enrichment_name) {
-      this.enrichment_name = enrichment_name;
+    public void setEnrichment(final String enrichment) {
+      this.enrichment = enrichment;
     }
 
     /**
@@ -3321,9 +3321,9 @@ public class DiscoveryV1Models {
     private String natural_language_query;
     private String aggregation;
     private Long count;
-    private List<String> return_fields;
+    private List<String> return_serialized_name;
     private Long offset;
-    private List<String> xsort;
+    private List<String> sort_serialized_name;
     private Boolean highlight;
     private String deduplicate_field;
     /**
@@ -3397,14 +3397,14 @@ public class DiscoveryV1Models {
       return count;
     }
     /**
-     * Gets the return_fields.
+     * Gets the return_serialized_name.
      *
      * A comma separated list of the portion of the document hierarchy to return.
      *
-     * @return the return_fields
+     * @return the return_serialized_name
      */
-    public List<String> returnFields() {
-      return return_fields;
+    public List<String> returnField() {
+      return return_serialized_name;
     }
     /**
      * Gets the offset.
@@ -3417,14 +3417,14 @@ public class DiscoveryV1Models {
       return offset;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public List<String> xsort() {
-      return xsort;
+    public List<String> sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the highlight.
@@ -3456,9 +3456,9 @@ public class DiscoveryV1Models {
       natural_language_query = builder.natural_language_query;
       aggregation = builder.aggregation;
       count = builder.count;
-      return_fields = builder.return_fields;
+      return_serialized_name = builder.return_serialized_name;
       offset = builder.offset;
-      xsort = builder.xsort;
+      sort_serialized_name = builder.sort_serialized_name;
       highlight = builder.highlight;
       deduplicate_field = builder.deduplicate_field;
     }
@@ -3484,9 +3484,9 @@ public class DiscoveryV1Models {
     private String natural_language_query;
     private String aggregation;
     private Long count;
-    private List<String> return_fields;
+    private List<String> return_serialized_name;
     private Long offset;
-    private List<String> xsort;
+    private List<String> sort_serialized_name;
     private Boolean highlight;
     private String deduplicate_field;
 
@@ -3498,9 +3498,9 @@ public class DiscoveryV1Models {
       natural_language_query = federated_query_notices_options.natural_language_query;
       aggregation = federated_query_notices_options.aggregation;
       count = federated_query_notices_options.count;
-      return_fields = federated_query_notices_options.return_fields;
+      return_serialized_name = federated_query_notices_options.return_serialized_name;
       offset = federated_query_notices_options.offset;
-      xsort = federated_query_notices_options.xsort;
+      sort_serialized_name = federated_query_notices_options.sort_serialized_name;
       highlight = federated_query_notices_options.highlight;
       deduplicate_field = federated_query_notices_options.deduplicate_field;
     }
@@ -3547,32 +3547,32 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Adds an return_field to return_fields.
+     * Adds an return_serialized_name to return_serialized_name.
      *
-     * @param return_field the new return_field
+     * @param return_serialized_name the new return_serialized_name
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder addReturnField(String return_field) {
-      IBMWatsonValidator.notNull(return_field, 'return_field cannot be null');
-      if (this.return_fields == null) {
-        this.return_fields = new List<String>();
+    public FederatedQueryNoticesOptionsBuilder addReturn(String return_serialized_name) {
+      IBMWatsonValidator.notNull(return_serialized_name, 'return_serialized_name cannot be null');
+      if (this.return_serialized_name == null) {
+        this.return_serialized_name = new List<String>();
       }
-      this.return_fields.add(return_field);
+      this.return_serialized_name.add(return_serialized_name);
       return this;
     }
 
     /**
-     * Adds an xsort to xsort.
+     * Adds an sort_serialized_name to sort_serialized_name.
      *
-     * @param xsort the new xsort
+     * @param sort_serialized_name the new sort_serialized_name
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder addXsort(String xsort) {
-      IBMWatsonValidator.notNull(xsort, 'xsort cannot be null');
-      if (this.xsort == null) {
-        this.xsort = new List<String>();
+    public FederatedQueryNoticesOptionsBuilder addSort(String sort_serialized_name) {
+      IBMWatsonValidator.notNull(sort_serialized_name, 'sort_serialized_name cannot be null');
+      if (this.sort_serialized_name == null) {
+        this.sort_serialized_name = new List<String>();
       }
-      this.xsort.add(xsort);
+      this.sort_serialized_name.add(sort_serialized_name);
       return this;
     }
 
@@ -3655,14 +3655,14 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the return_fields.
-     * Existing return_fields will be replaced.
+     * Set the return_serialized_name.
+     * Existing return_serialized_name will be replaced.
      *
-     * @param return_fields the return_fields
+     * @param return_serialized_name the return_serialized_name
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder returnFields(List<String> return_fields) {
-      this.return_fields = return_fields;
+    public FederatedQueryNoticesOptionsBuilder returnField(List<String> return_serialized_name) {
+      this.return_serialized_name = return_serialized_name;
       return this;
     }
 
@@ -3678,14 +3678,14 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the xsort.
-     * Existing xsort will be replaced.
+     * Set the sort_serialized_name.
+     * Existing sort_serialized_name will be replaced.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder xsort(List<String> xsort) {
-      this.xsort = xsort;
+    public FederatedQueryNoticesOptionsBuilder sortField(List<String> sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -3723,9 +3723,9 @@ public class DiscoveryV1Models {
     private String natural_language_query;
     private String aggregation;
     private Long count;
-    private List<String> return_fields;
+    private List<String> return_serialized_name;
     private Long offset;
-    private List<String> xsort;
+    private List<String> sort_serialized_name;
     private Boolean highlight;
     private Boolean deduplicate;
     private String deduplicate_field;
@@ -3800,14 +3800,14 @@ public class DiscoveryV1Models {
       return count;
     }
     /**
-     * Gets the return_fields.
+     * Gets the return_serialized_name.
      *
      * A comma separated list of the portion of the document hierarchy to return.
      *
-     * @return the return_fields
+     * @return the return_serialized_name
      */
-    public List<String> returnFields() {
-      return return_fields;
+    public List<String> returnField() {
+      return return_serialized_name;
     }
     /**
      * Gets the offset.
@@ -3820,14 +3820,14 @@ public class DiscoveryV1Models {
       return offset;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public List<String> xsort() {
-      return xsort;
+    public List<String> sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the highlight.
@@ -3869,9 +3869,9 @@ public class DiscoveryV1Models {
       natural_language_query = builder.natural_language_query;
       aggregation = builder.aggregation;
       count = builder.count;
-      return_fields = builder.return_fields;
+      return_serialized_name = builder.return_serialized_name;
       offset = builder.offset;
-      xsort = builder.xsort;
+      sort_serialized_name = builder.sort_serialized_name;
       highlight = builder.highlight;
       deduplicate = builder.deduplicate;
       deduplicate_field = builder.deduplicate_field;
@@ -3898,9 +3898,9 @@ public class DiscoveryV1Models {
     private String natural_language_query;
     private String aggregation;
     private Long count;
-    private List<String> return_fields;
+    private List<String> return_serialized_name;
     private Long offset;
-    private List<String> xsort;
+    private List<String> sort_serialized_name;
     private Boolean highlight;
     private Boolean deduplicate;
     private String deduplicate_field;
@@ -3913,9 +3913,9 @@ public class DiscoveryV1Models {
       natural_language_query = federated_query_options.natural_language_query;
       aggregation = federated_query_options.aggregation;
       count = federated_query_options.count;
-      return_fields = federated_query_options.return_fields;
+      return_serialized_name = federated_query_options.return_serialized_name;
       offset = federated_query_options.offset;
-      xsort = federated_query_options.xsort;
+      sort_serialized_name = federated_query_options.sort_serialized_name;
       highlight = federated_query_options.highlight;
       deduplicate = federated_query_options.deduplicate;
       deduplicate_field = federated_query_options.deduplicate_field;
@@ -3963,32 +3963,32 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Adds an return_field to return_fields.
+     * Adds an return_serialized_name to return_serialized_name.
      *
-     * @param return_field the new return_field
+     * @param return_serialized_name the new return_serialized_name
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder addReturnField(String return_field) {
-      IBMWatsonValidator.notNull(return_field, 'return_field cannot be null');
-      if (this.return_fields == null) {
-        this.return_fields = new List<String>();
+    public FederatedQueryOptionsBuilder addReturn(String return_serialized_name) {
+      IBMWatsonValidator.notNull(return_serialized_name, 'return_serialized_name cannot be null');
+      if (this.return_serialized_name == null) {
+        this.return_serialized_name = new List<String>();
       }
-      this.return_fields.add(return_field);
+      this.return_serialized_name.add(return_serialized_name);
       return this;
     }
 
     /**
-     * Adds an xsort to xsort.
+     * Adds an sort_serialized_name to sort_serialized_name.
      *
-     * @param xsort the new xsort
+     * @param sort_serialized_name the new sort_serialized_name
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder addXsort(String xsort) {
-      IBMWatsonValidator.notNull(xsort, 'xsort cannot be null');
-      if (this.xsort == null) {
-        this.xsort = new List<String>();
+    public FederatedQueryOptionsBuilder addSort(String sort_serialized_name) {
+      IBMWatsonValidator.notNull(sort_serialized_name, 'sort_serialized_name cannot be null');
+      if (this.sort_serialized_name == null) {
+        this.sort_serialized_name = new List<String>();
       }
-      this.xsort.add(xsort);
+      this.sort_serialized_name.add(sort_serialized_name);
       return this;
     }
 
@@ -4071,14 +4071,14 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the return_fields.
-     * Existing return_fields will be replaced.
+     * Set the return_serialized_name.
+     * Existing return_serialized_name will be replaced.
      *
-     * @param return_fields the return_fields
+     * @param return_serialized_name the return_serialized_name
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder returnFields(List<String> return_fields) {
-      this.return_fields = return_fields;
+    public FederatedQueryOptionsBuilder returnField(List<String> return_serialized_name) {
+      this.return_serialized_name = return_serialized_name;
       return this;
     }
 
@@ -4094,14 +4094,14 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the xsort.
-     * Existing xsort will be replaced.
+     * Set the sort_serialized_name.
+     * Existing sort_serialized_name will be replaced.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder xsort(List<String> xsort) {
-      this.xsort = xsort;
+    public FederatedQueryOptionsBuilder sortField(List<String> sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -4143,27 +4143,27 @@ public class DiscoveryV1Models {
    * Field.
    */
   public class Field extends IBMWatsonGenericModel {
-    private String field_name;
-    private String field_type;
+    private String field;
+    private String type_serialized_name;
     /**
-     * Gets the field_name.
+     * Gets the field.
      *
      * The name of the field.
      *
-     * @return the field_name
+     * @return the field
      */
-    public String getFieldName() {
-      return field_name;
+    public String getField() {
+      return field;
     }
     /**
-     * Gets the field_type.
+     * Gets the type_serialized_name.
      *
      * The type of the field.
      *
-     * @return the field_type
+     * @return the type_serialized_name
      */
-    public String getFieldType() {
-      return field_type;
+    public String getType() {
+      return type_serialized_name;
     }
   }
 
@@ -6148,21 +6148,21 @@ public class DiscoveryV1Models {
    * An aggregation produced by the Discovery service to analyze the input provided.
    */
   public class QueryAggregation extends IBMWatsonGenericModel {
-    private String xtype;
+    private String type_serialized_name;
     private String field;
     private List<AggregationResult> results;
     private String match;
     private Long matching_results;
     private List<QueryAggregation> aggregations;
     /**
-     * Gets the xtype.
+     * Gets the type_serialized_name.
      *
      * The type of aggregation command used. For example: term, filter, max, min, etc.
      *
-     * @return the xtype
+     * @return the type_serialized_name
      */
-    public String getXtype() {
-      return xtype;
+    public String getType() {
+      return type_serialized_name;
     }
     /**
      * Gets the field.
@@ -6214,12 +6214,12 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Sets the xtype.
+     * Sets the type_serialized_name.
      *
-     * @param xtype the new xtype
+     * @param type_serialized_name the new type_serialized_name
      */
-    public void setXtype(final String xtype) {
-      this.xtype = xtype;
+    public void setType(final String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
     }
 
     /**
@@ -6280,9 +6280,9 @@ public class DiscoveryV1Models {
     private Boolean passages;
     private String aggregation;
     private Long count;
-    private List<String> return_fields;
+    private List<String> return_serialized_name;
     private Long offset;
-    private List<String> xsort;
+    private List<String> sort_serialized_name;
     private Boolean highlight;
     private List<String> passages_fields;
     private Long passages_count;
@@ -6369,14 +6369,14 @@ public class DiscoveryV1Models {
       return count;
     }
     /**
-     * Gets the return_fields.
+     * Gets the return_serialized_name.
      *
      * A comma separated list of the portion of the document hierarchy to return.
      *
-     * @return the return_fields
+     * @return the return_serialized_name
      */
-    public List<String> returnFields() {
-      return return_fields;
+    public List<String> returnField() {
+      return return_serialized_name;
     }
     /**
      * Gets the offset.
@@ -6389,14 +6389,14 @@ public class DiscoveryV1Models {
       return offset;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public List<String> xsort() {
-      return xsort;
+    public List<String> sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the highlight.
@@ -6459,9 +6459,9 @@ public class DiscoveryV1Models {
       passages = builder.passages;
       aggregation = builder.aggregation;
       count = builder.count;
-      return_fields = builder.return_fields;
+      return_serialized_name = builder.return_serialized_name;
       offset = builder.offset;
-      xsort = builder.xsort;
+      sort_serialized_name = builder.sort_serialized_name;
       highlight = builder.highlight;
       passages_fields = builder.passages_fields;
       passages_count = builder.passages_count;
@@ -6491,9 +6491,9 @@ public class DiscoveryV1Models {
     private Boolean passages;
     private String aggregation;
     private Long count;
-    private List<String> return_fields;
+    private List<String> return_serialized_name;
     private Long offset;
-    private List<String> xsort;
+    private List<String> sort_serialized_name;
     private Boolean highlight;
     private List<String> passages_fields;
     private Long passages_count;
@@ -6509,9 +6509,9 @@ public class DiscoveryV1Models {
       passages = query_notices_options.passages;
       aggregation = query_notices_options.aggregation;
       count = query_notices_options.count;
-      return_fields = query_notices_options.return_fields;
+      return_serialized_name = query_notices_options.return_serialized_name;
       offset = query_notices_options.offset;
-      xsort = query_notices_options.xsort;
+      sort_serialized_name = query_notices_options.sort_serialized_name;
       highlight = query_notices_options.highlight;
       passages_fields = query_notices_options.passages_fields;
       passages_count = query_notices_options.passages_count;
@@ -6546,32 +6546,32 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Adds an return_field to return_fields.
+     * Adds an return_serialized_name to return_serialized_name.
      *
-     * @param return_field the new return_field
+     * @param return_serialized_name the new return_serialized_name
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder addReturnField(String return_field) {
-      IBMWatsonValidator.notNull(return_field, 'return_field cannot be null');
-      if (this.return_fields == null) {
-        this.return_fields = new List<String>();
+    public QueryNoticesOptionsBuilder addReturn(String return_serialized_name) {
+      IBMWatsonValidator.notNull(return_serialized_name, 'return_serialized_name cannot be null');
+      if (this.return_serialized_name == null) {
+        this.return_serialized_name = new List<String>();
       }
-      this.return_fields.add(return_field);
+      this.return_serialized_name.add(return_serialized_name);
       return this;
     }
 
     /**
-     * Adds an xsort to xsort.
+     * Adds an sort_serialized_name to sort_serialized_name.
      *
-     * @param xsort the new xsort
+     * @param sort_serialized_name the new sort_serialized_name
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder addXsort(String xsort) {
-      IBMWatsonValidator.notNull(xsort, 'xsort cannot be null');
-      if (this.xsort == null) {
-        this.xsort = new List<String>();
+    public QueryNoticesOptionsBuilder addSort(String sort_serialized_name) {
+      IBMWatsonValidator.notNull(sort_serialized_name, 'sort_serialized_name cannot be null');
+      if (this.sort_serialized_name == null) {
+        this.sort_serialized_name = new List<String>();
       }
-      this.xsort.add(xsort);
+      this.sort_serialized_name.add(sort_serialized_name);
       return this;
     }
 
@@ -6679,14 +6679,14 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the return_fields.
-     * Existing return_fields will be replaced.
+     * Set the return_serialized_name.
+     * Existing return_serialized_name will be replaced.
      *
-     * @param return_fields the return_fields
+     * @param return_serialized_name the return_serialized_name
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder returnFields(List<String> return_fields) {
-      this.return_fields = return_fields;
+    public QueryNoticesOptionsBuilder returnField(List<String> return_serialized_name) {
+      this.return_serialized_name = return_serialized_name;
       return this;
     }
 
@@ -6702,14 +6702,14 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the xsort.
-     * Existing xsort will be replaced.
+     * Set the sort_serialized_name.
+     * Existing sort_serialized_name will be replaced.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder xsort(List<String> xsort) {
-      this.xsort = xsort;
+    public QueryNoticesOptionsBuilder sortField(List<String> sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -6956,9 +6956,9 @@ public class DiscoveryV1Models {
     private Boolean passages;
     private String aggregation;
     private Long count;
-    private List<String> return_fields;
+    private List<String> return_serialized_name;
     private Long offset;
-    private List<String> xsort;
+    private List<String> sort_serialized_name;
     private Boolean highlight;
     private List<String> passages_fields;
     private Long passages_count;
@@ -7046,14 +7046,14 @@ public class DiscoveryV1Models {
       return count;
     }
     /**
-     * Gets the return_fields.
+     * Gets the return_serialized_name.
      *
      * A comma separated list of the portion of the document hierarchy to return.
      *
-     * @return the return_fields
+     * @return the return_serialized_name
      */
-    public List<String> returnFields() {
-      return return_fields;
+    public List<String> returnField() {
+      return return_serialized_name;
     }
     /**
      * Gets the offset.
@@ -7066,14 +7066,14 @@ public class DiscoveryV1Models {
       return offset;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public List<String> xsort() {
-      return xsort;
+    public List<String> sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the highlight.
@@ -7146,9 +7146,9 @@ public class DiscoveryV1Models {
       passages = builder.passages;
       aggregation = builder.aggregation;
       count = builder.count;
-      return_fields = builder.return_fields;
+      return_serialized_name = builder.return_serialized_name;
       offset = builder.offset;
-      xsort = builder.xsort;
+      sort_serialized_name = builder.sort_serialized_name;
       highlight = builder.highlight;
       passages_fields = builder.passages_fields;
       passages_count = builder.passages_count;
@@ -7179,9 +7179,9 @@ public class DiscoveryV1Models {
     private Boolean passages;
     private String aggregation;
     private Long count;
-    private List<String> return_fields;
+    private List<String> return_serialized_name;
     private Long offset;
-    private List<String> xsort;
+    private List<String> sort_serialized_name;
     private Boolean highlight;
     private List<String> passages_fields;
     private Long passages_count;
@@ -7198,9 +7198,9 @@ public class DiscoveryV1Models {
       passages = query_options.passages;
       aggregation = query_options.aggregation;
       count = query_options.count;
-      return_fields = query_options.return_fields;
+      return_serialized_name = query_options.return_serialized_name;
       offset = query_options.offset;
-      xsort = query_options.xsort;
+      sort_serialized_name = query_options.sort_serialized_name;
       highlight = query_options.highlight;
       passages_fields = query_options.passages_fields;
       passages_count = query_options.passages_count;
@@ -7236,32 +7236,32 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Adds an return_field to return_fields.
+     * Adds an return_serialized_name to return_serialized_name.
      *
-     * @param return_field the new return_field
+     * @param return_serialized_name the new return_serialized_name
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder addReturnField(String return_field) {
-      IBMWatsonValidator.notNull(return_field, 'return_field cannot be null');
-      if (this.return_fields == null) {
-        this.return_fields = new List<String>();
+    public QueryOptionsBuilder addReturn(String return_serialized_name) {
+      IBMWatsonValidator.notNull(return_serialized_name, 'return_serialized_name cannot be null');
+      if (this.return_serialized_name == null) {
+        this.return_serialized_name = new List<String>();
       }
-      this.return_fields.add(return_field);
+      this.return_serialized_name.add(return_serialized_name);
       return this;
     }
 
     /**
-     * Adds an xsort to xsort.
+     * Adds an sort_serialized_name to sort_serialized_name.
      *
-     * @param xsort the new xsort
+     * @param sort_serialized_name the new sort_serialized_name
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder addXsort(String xsort) {
-      IBMWatsonValidator.notNull(xsort, 'xsort cannot be null');
-      if (this.xsort == null) {
-        this.xsort = new List<String>();
+    public QueryOptionsBuilder addSort(String sort_serialized_name) {
+      IBMWatsonValidator.notNull(sort_serialized_name, 'sort_serialized_name cannot be null');
+      if (this.sort_serialized_name == null) {
+        this.sort_serialized_name = new List<String>();
       }
-      this.xsort.add(xsort);
+      this.sort_serialized_name.add(sort_serialized_name);
       return this;
     }
 
@@ -7369,14 +7369,14 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the return_fields.
-     * Existing return_fields will be replaced.
+     * Set the return_serialized_name.
+     * Existing return_serialized_name will be replaced.
      *
-     * @param return_fields the return_fields
+     * @param return_serialized_name the return_serialized_name
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder returnFields(List<String> return_fields) {
-      this.return_fields = return_fields;
+    public QueryOptionsBuilder returnField(List<String> return_serialized_name) {
+      this.return_serialized_name = return_serialized_name;
       return this;
     }
 
@@ -7392,14 +7392,14 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Set the xsort.
-     * Existing xsort will be replaced.
+     * Set the sort_serialized_name.
+     * Existing sort_serialized_name will be replaced.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder xsort(List<String> xsort) {
-      this.xsort = xsort;
+    public QueryOptionsBuilder sortField(List<String> sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -8824,32 +8824,32 @@ public class DiscoveryV1Models {
     }
 
     /**
-     * Adds an enrichment to enrichments.
+     * Adds an enrichments to enrichments.
      *
-     * @param enrichment the new enrichment
+     * @param enrichments the new enrichments
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder addEnrichment(Enrichment enrichment) {
-      IBMWatsonValidator.notNull(enrichment, 'enrichment cannot be null');
+    public UpdateConfigurationOptionsBuilder addEnrichments(Enrichment enrichments) {
+      IBMWatsonValidator.notNull(enrichments, 'enrichments cannot be null');
       if (this.enrichments == null) {
         this.enrichments = new List<Enrichment>();
       }
-      this.enrichments.add(enrichment);
+      this.enrichments.add(enrichments);
       return this;
     }
 
     /**
-     * Adds an normalization to normalizations.
+     * Adds an normalizations to normalizations.
      *
-     * @param normalization the new normalization
+     * @param normalizations the new normalizations
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder addNormalization(NormalizationOperation normalization) {
-      IBMWatsonValidator.notNull(normalization, 'normalization cannot be null');
+    public UpdateConfigurationOptionsBuilder addNormalizations(NormalizationOperation normalizations) {
+      IBMWatsonValidator.notNull(normalizations, 'normalizations cannot be null');
       if (this.normalizations == null) {
         this.normalizations = new List<NormalizationOperation>();
       }
-      this.normalizations.add(normalization);
+      this.normalizations.add(normalizations);
       return this;
     }
 
@@ -9145,7 +9145,6 @@ public class DiscoveryV1Models {
       this.file = file;
       return this;
     }
-
     /**
      * Set the filename.
      *

@@ -282,17 +282,17 @@ public class PersonalityInsightsV3Models {
     }
 
     /**
-     * Adds an content_item to content_items.
+     * Adds an content_items to content_items.
      *
-     * @param content_item the new content_item
+     * @param content_items the new content_items
      * @return the Content builder
      */
-    public ContentBuilder addContentItem(ContentItem content_item) {
-      IBMWatsonValidator.notNull(content_item, 'content_item cannot be null');
+    public ContentBuilder addContentItems(ContentItem content_items) {
+      IBMWatsonValidator.notNull(content_items, 'content_items cannot be null');
       if (this.content_items == null) {
         this.content_items = new List<ContentItem>();
       }
-      this.content_items.add(content_item);
+      this.content_items.add(content_items);
       return this;
     }
 
@@ -823,6 +823,7 @@ public class PersonalityInsightsV3Models {
     public String contentLanguage() {
       return content_language;
     }
+
     /**
      * Gets the accept_language.
      *
