@@ -3,19 +3,19 @@ public class PersonalityInsightsV3Models {
    * Behavior.
    */
   public class Behavior extends IBMWatsonGenericModel {
-    private String traitId;
+    private String trait_id;
     private String name;
     private String category;
     private Double percentage;
     /**
-     * Gets the traitId.
+     * Gets the trait_id.
      *
      * The unique identifier of the characteristic to which the results pertain. IDs have the form `behavior_{value}`.
      *
-     * @return the traitId
+     * @return the trait_id
      */
     public String getTraitId() {
-      return traitId;
+      return trait_id;
     }
     /**
      * Gets the name.
@@ -49,12 +49,12 @@ public class PersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the traitId.
+     * Sets the trait_id.
      *
-     * @param traitId the new traitId
+     * @param trait_id the new trait_id
      */
-    public void setTraitId(final String traitId) {
-      this.traitId = traitId;
+    public void setTraitId(final String trait_id) {
+      this.trait_id = trait_id;
     }
 
     /**
@@ -89,18 +89,18 @@ public class PersonalityInsightsV3Models {
    * ConsumptionPreferences.
    */
   public class ConsumptionPreferences extends IBMWatsonGenericModel {
-    private String consumptionPreferenceId;
+    private String consumption_preference_id;
     private String name;
     private Double score;
     /**
-     * Gets the consumptionPreferenceId.
+     * Gets the consumption_preference_id.
      *
      * The unique identifier of the consumption preference to which the results pertain. IDs have the form `consumption_preferences_{preference}`.
      *
-     * @return the consumptionPreferenceId
+     * @return the consumption_preference_id
      */
     public String getConsumptionPreferenceId() {
-      return consumptionPreferenceId;
+      return consumption_preference_id;
     }
     /**
      * Gets the name.
@@ -124,12 +124,12 @@ public class PersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the consumptionPreferenceId.
+     * Sets the consumption_preference_id.
      *
-     * @param consumptionPreferenceId the new consumptionPreferenceId
+     * @param consumption_preference_id the new consumption_preference_id
      */
-    public void setConsumptionPreferenceId(final String consumptionPreferenceId) {
-      this.consumptionPreferenceId = consumptionPreferenceId;
+    public void setConsumptionPreferenceId(final String consumption_preference_id) {
+      this.consumption_preference_id = consumption_preference_id;
     }
 
     /**
@@ -155,18 +155,18 @@ public class PersonalityInsightsV3Models {
    * ConsumptionPreferencesCategory.
    */
   public class ConsumptionPreferencesCategory extends IBMWatsonGenericModel {
-    private String consumptionPreferenceCategoryId;
+    private String consumption_preference_category_id;
     private String name;
-    private List<ConsumptionPreferences> consumptionPreferences;
+    private List<ConsumptionPreferences> consumption_preferences;
     /**
-     * Gets the consumptionPreferenceCategoryId.
+     * Gets the consumption_preference_category_id.
      *
      * The unique identifier of the consumption preferences category to which the results pertain. IDs have the form `consumption_preferences_{category}`.
      *
-     * @return the consumptionPreferenceCategoryId
+     * @return the consumption_preference_category_id
      */
     public String getConsumptionPreferenceCategoryId() {
-      return consumptionPreferenceCategoryId;
+      return consumption_preference_category_id;
     }
     /**
      * Gets the name.
@@ -179,23 +179,23 @@ public class PersonalityInsightsV3Models {
       return name;
     }
     /**
-     * Gets the consumptionPreferences.
+     * Gets the consumption_preferences.
      *
      * Detailed results inferred from the input text for the individual preferences of the category.
      *
-     * @return the consumptionPreferences
+     * @return the consumption_preferences
      */
     public List<ConsumptionPreferences> getConsumptionPreferences() {
-      return consumptionPreferences;
+      return consumption_preferences;
     }
 
     /**
-     * Sets the consumptionPreferenceCategoryId.
+     * Sets the consumption_preference_category_id.
      *
-     * @param consumptionPreferenceCategoryId the new consumptionPreferenceCategoryId
+     * @param consumption_preference_category_id the new consumption_preference_category_id
      */
-    public void setConsumptionPreferenceCategoryId(final String consumptionPreferenceCategoryId) {
-      this.consumptionPreferenceCategoryId = consumptionPreferenceCategoryId;
+    public void setConsumptionPreferenceCategoryId(final String consumption_preference_category_id) {
+      this.consumption_preference_category_id = consumption_preference_category_id;
     }
 
     /**
@@ -208,12 +208,12 @@ public class PersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the consumptionPreferences.
+     * Sets the consumption_preferences.
      *
-     * @param consumptionPreferences the new consumptionPreferences
+     * @param consumption_preferences the new consumption_preferences
      */
-    public void setConsumptionPreferences(final List<ConsumptionPreferences> consumptionPreferences) {
-      this.consumptionPreferences = consumptionPreferences;
+    public void setConsumptionPreferences(final List<ConsumptionPreferences> consumption_preferences) {
+      this.consumption_preferences = consumption_preferences;
     }
   }
 
@@ -221,20 +221,20 @@ public class PersonalityInsightsV3Models {
    * Content.
    */
   public class Content extends IBMWatsonGenericModel {
-    private List<ContentItem> contentItems;
+    private List<ContentItem> content_items;
     /**
-     * Gets the contentItems.
+     * Gets the content_items.
      *
      * An array of `ContentItem` objects that provides the text that is to be analyzed.
      *
-     * @return the contentItems
+     * @return the content_items
      */
     public List<ContentItem> contentItems() {
-      return contentItems;
+      return content_items;
     }
     private Content(ContentBuilder builder) {
-      IBMWatsonValidator.notNull(builder.contentItems, 'contentItems cannot be null');
-      contentItems = builder.contentItems;
+      IBMWatsonValidator.notNull(builder.content_items, 'content_items cannot be null');
+      content_items = builder.content_items;
     }
 
     /**
@@ -251,10 +251,10 @@ public class PersonalityInsightsV3Models {
    * Content Builder.
    */
   public class ContentBuilder {
-    private List<ContentItem> contentItems;
+    private List<ContentItem> content_items;
 
     private ContentBuilder(Content content) {
-      contentItems = content.contentItems;
+      content_items = content.content_items;
     }
 
     /**
@@ -266,10 +266,10 @@ public class PersonalityInsightsV3Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param contentItems the contentItems
+     * @param content_items the content_items
      */
-    public ContentBuilder(List<ContentItem> contentItems) {
-      this.contentItems = contentItems;
+    public ContentBuilder(List<ContentItem> content_items) {
+      this.content_items = content_items;
     }
 
     /**
@@ -282,29 +282,29 @@ public class PersonalityInsightsV3Models {
     }
 
     /**
-     * Adds an contentItem to contentItems.
+     * Adds an content_items to content_items.
      *
-     * @param contentItem the new contentItem
+     * @param content_items the new content_items
      * @return the Content builder
      */
-    public ContentBuilder addContentItem(ContentItem contentItem) {
-      IBMWatsonValidator.notNull(contentItem, 'contentItem cannot be null');
-      if (this.contentItems == null) {
-        this.contentItems = new List<ContentItem>();
+    public ContentBuilder addContentItems(ContentItem content_items) {
+      IBMWatsonValidator.notNull(content_items, 'content_items cannot be null');
+      if (this.content_items == null) {
+        this.content_items = new List<ContentItem>();
       }
-      this.contentItems.add(contentItem);
+      this.content_items.add(content_items);
       return this;
     }
 
     /**
-     * Set the contentItems.
-     * Existing contentItems will be replaced.
+     * Set the content_items.
+     * Existing content_items will be replaced.
      *
-     * @param contentItems the contentItems
+     * @param content_items the content_items
      * @return the Content builder
      */
-    public ContentBuilder contentItems(List<ContentItem> contentItems) {
-      this.contentItems = contentItems;
+    public ContentBuilder contentItems(List<ContentItem> content_items) {
+      this.content_items = content_items;
       return this;
     }
   }
@@ -449,16 +449,16 @@ public class PersonalityInsightsV3Models {
     private Boolean reply;
     private Boolean forward;
 
-    private ContentItemBuilder(ContentItem contentItem) {
-      content = contentItem.content;
-      id = contentItem.id;
-      created = contentItem.created;
-      updated = contentItem.updated;
-      contenttype = contentItem.contenttype;
-      language = contentItem.language;
-      parentid = contentItem.parentid;
-      reply = contentItem.reply;
-      forward = contentItem.forward;
+    private ContentItemBuilder(ContentItem content_item) {
+      content = content_item.content;
+      id = content_item.id;
+      created = content_item.created;
+      updated = content_item.updated;
+      contenttype = content_item.contenttype;
+      language = content_item.language;
+      parentid = content_item.parentid;
+      reply = content_item.reply;
+      forward = content_item.forward;
     }
 
     /**
@@ -479,7 +479,7 @@ public class PersonalityInsightsV3Models {
     /**
      * Builds a ContentItem.
      *
-     * @return the contentItem
+     * @return the content_item
      */
     public ContentItem build() {
       return new ContentItem(this);
@@ -513,7 +513,7 @@ public class PersonalityInsightsV3Models {
      * @param created the created
      * @return the ContentItem builder
      */
-    public ContentItemBuilder created(long created) {
+    public ContentItemBuilder created(Long created) {
       this.created = created;
       return this;
     }
@@ -524,7 +524,7 @@ public class PersonalityInsightsV3Models {
      * @param updated the updated
      * @return the ContentItem builder
      */
-    public ContentItemBuilder updated(long updated) {
+    public ContentItemBuilder updated(Long updated) {
       this.updated = updated;
       return this;
     }
@@ -589,44 +589,44 @@ public class PersonalityInsightsV3Models {
    * Profile.
    */
   public class Profile extends IBMWatsonGenericModel {
-    private String processedLanguage;
-    private Long wordCount;
-    private String wordCountMessage;
+    private String processed_language;
+    private Long word_count;
+    private String word_count_message;
     private List<Trait> personality;
     private List<Trait> values;
     private List<Trait> needs;
     private List<Behavior> behavior;
-    private List<ConsumptionPreferencesCategory> consumptionPreferences;
+    private List<ConsumptionPreferencesCategory> consumption_preferences;
     private List<Warning> warnings;
     /**
-     * Gets the processedLanguage.
+     * Gets the processed_language.
      *
      * The language model that was used to process the input; for example, `en`.
      *
-     * @return the processedLanguage
+     * @return the processed_language
      */
     public String getProcessedLanguage() {
-      return processedLanguage;
+      return processed_language;
     }
     /**
-     * Gets the wordCount.
+     * Gets the word_count.
      *
      * The number of words that were found in the input.
      *
-     * @return the wordCount
+     * @return the word_count
      */
     public Long getWordCount() {
-      return wordCount;
+      return word_count;
     }
     /**
-     * Gets the wordCountMessage.
+     * Gets the word_count_message.
      *
      * When guidance is appropriate, a string that provides a message that indicates the number of words found and where that value falls in the range of required or suggested number of words.
      *
-     * @return the wordCountMessage
+     * @return the word_count_message
      */
     public String getWordCountMessage() {
-      return wordCountMessage;
+      return word_count_message;
     }
     /**
      * Gets the personality.
@@ -669,14 +669,14 @@ public class PersonalityInsightsV3Models {
       return behavior;
     }
     /**
-     * Gets the consumptionPreferences.
+     * Gets the consumption_preferences.
      *
      * If the `consumption_preferences` query parameter is `true`, detailed results for each category of consumption preferences. Each element of the array provides information inferred from the input text for the individual preferences of that category.
      *
-     * @return the consumptionPreferences
+     * @return the consumption_preferences
      */
     public List<ConsumptionPreferencesCategory> getConsumptionPreferences() {
-      return consumptionPreferences;
+      return consumption_preferences;
     }
     /**
      * Gets the warnings.
@@ -690,30 +690,30 @@ public class PersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the processedLanguage.
+     * Sets the processed_language.
      *
-     * @param processedLanguage the new processedLanguage
+     * @param processed_language the new processed_language
      */
-    public void setProcessedLanguage(final String processedLanguage) {
-      this.processedLanguage = processedLanguage;
+    public void setProcessedLanguage(final String processed_language) {
+      this.processed_language = processed_language;
     }
 
     /**
-     * Sets the wordCount.
+     * Sets the word_count.
      *
-     * @param wordCount the new wordCount
+     * @param word_count the new word_count
      */
-    public void setWordCount(final long wordCount) {
-      this.wordCount = wordCount;
+    public void setWordCount(final long word_count) {
+      this.word_count = word_count;
     }
 
     /**
-     * Sets the wordCountMessage.
+     * Sets the word_count_message.
      *
-     * @param wordCountMessage the new wordCountMessage
+     * @param word_count_message the new word_count_message
      */
-    public void setWordCountMessage(final String wordCountMessage) {
-      this.wordCountMessage = wordCountMessage;
+    public void setWordCountMessage(final String word_count_message) {
+      this.word_count_message = word_count_message;
     }
 
     /**
@@ -753,12 +753,12 @@ public class PersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the consumptionPreferences.
+     * Sets the consumption_preferences.
      *
-     * @param consumptionPreferences the new consumptionPreferences
+     * @param consumption_preferences the new consumption_preferences
      */
-    public void setConsumptionPreferences(final List<ConsumptionPreferencesCategory> consumptionPreferences) {
-      this.consumptionPreferences = consumptionPreferences;
+    public void setConsumptionPreferences(final List<ConsumptionPreferencesCategory> consumption_preferences) {
+      this.consumption_preferences = consumption_preferences;
     }
 
     /**
@@ -777,12 +777,12 @@ public class PersonalityInsightsV3Models {
   public class ProfileOptions extends IBMWatsonGenericModel {
     private Content content;
     private String body;
-    private String contentType;
-    private String contentLanguage;
-    private String acceptLanguage;
-    private Boolean rawScores;
-    private Boolean csvHeaders;
-    private Boolean consumptionPreferences;
+    private String content_type;
+    private String content_language;
+    private String accept_language;
+    private Boolean raw_scores;
+    private Boolean csv_headers;
+    private Boolean consumption_preferences;
     /**
      * Gets the content.
      *
@@ -804,75 +804,75 @@ public class PersonalityInsightsV3Models {
       return body;
     }
     /**
-     * Gets the contentType.
+     * Gets the content_type.
      *
      * The type of the input: application/json, text/html, or text/plain. A character encoding can be specified by including a `charset` parameter. For example, 'text/html;charset=utf-8'.
      *
-     * @return the contentType
+     * @return the content_type
      */
     public String contentType() {
-      return contentType;
+      return content_type;
     }
     /**
-     * Gets the contentLanguage.
+     * Gets the content_language.
      *
      * The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. The effect of the `Content-Language` header depends on the `Content-Type` header. When `Content-Type` is `text/plain` or `text/html`, `Content-Language` is the only way to specify the language. When `Content-Type` is `application/json`, `Content-Language` overrides a language specified with the `language` parameter of a `ContentItem` object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for `Content-Language` and `Accept-Language`.
      *
-     * @return the contentLanguage
+     * @return the content_language
      */
     public String contentLanguage() {
-      return contentLanguage;
+      return content_language;
     }
     /**
-     * Gets the acceptLanguage.
+     * Gets the accept_language.
      *
      * The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. You can specify any combination of languages for the input and response content.
      *
-     * @return the acceptLanguage
+     * @return the accept_language
      */
     public String acceptLanguage() {
-      return acceptLanguage;
+      return accept_language;
     }
     /**
-     * Gets the rawScores.
+     * Gets the raw_scores.
      *
      * If `true`, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If `false` (the default), only normalized percentiles are returned.
      *
-     * @return the rawScores
+     * @return the raw_scores
      */
     public Boolean rawScores() {
-      return rawScores;
+      return raw_scores;
     }
     /**
-     * Gets the csvHeaders.
+     * Gets the csv_headers.
      *
      * If `true`, column labels are returned with a CSV response; if `false` (the default), they are not. Applies only when the `Accept` header is set to `text/csv`.
      *
-     * @return the csvHeaders
+     * @return the csv_headers
      */
     public Boolean csvHeaders() {
-      return csvHeaders;
+      return csv_headers;
     }
     /**
-     * Gets the consumptionPreferences.
+     * Gets the consumption_preferences.
      *
      * If `true`, information about consumption preferences is returned with the results; if `false` (the default), the response does not include the information.
      *
-     * @return the consumptionPreferences
+     * @return the consumption_preferences
      */
     public Boolean consumptionPreferences() {
-      return consumptionPreferences;
+      return consumption_preferences;
     }
     private ProfileOptions(ProfileOptionsBuilder builder) {
-      IBMWatsonValidator.isTrue(builder.contentType != null, 'contentType cannot be null');
+      IBMWatsonValidator.isTrue(builder.content_type != null, 'content_type cannot be null');
       content = builder.content;
       body = builder.body;
-      contentType = builder.contentType;
-      contentLanguage = builder.contentLanguage;
-      acceptLanguage = builder.acceptLanguage;
-      rawScores = builder.rawScores;
-      csvHeaders = builder.csvHeaders;
-      consumptionPreferences = builder.consumptionPreferences;
+      content_type = builder.content_type;
+      content_language = builder.content_language;
+      accept_language = builder.accept_language;
+      raw_scores = builder.raw_scores;
+      csv_headers = builder.csv_headers;
+      consumption_preferences = builder.consumption_preferences;
     }
 
     /**
@@ -891,22 +891,22 @@ public class PersonalityInsightsV3Models {
   public class ProfileOptionsBuilder {
     private Content content;
     private String body;
-    private String contentType;
-    private String contentLanguage;
-    private String acceptLanguage;
-    private Boolean rawScores;
-    private Boolean csvHeaders;
-    private Boolean consumptionPreferences;
+    private String content_type;
+    private String content_language;
+    private String accept_language;
+    private Boolean raw_scores;
+    private Boolean csv_headers;
+    private Boolean consumption_preferences;
 
-    private ProfileOptionsBuilder(ProfileOptions profileOptions) {
-      content = profileOptions.content;
-      body = profileOptions.body;
-      contentType = profileOptions.contentType;
-      contentLanguage = profileOptions.contentLanguage;
-      acceptLanguage = profileOptions.acceptLanguage;
-      rawScores = profileOptions.rawScores;
-      csvHeaders = profileOptions.csvHeaders;
-      consumptionPreferences = profileOptions.consumptionPreferences;
+    private ProfileOptionsBuilder(ProfileOptions profile_options) {
+      content = profile_options.content;
+      body = profile_options.body;
+      content_type = profile_options.content_type;
+      content_language = profile_options.content_language;
+      accept_language = profile_options.accept_language;
+      raw_scores = profile_options.raw_scores;
+      csv_headers = profile_options.csv_headers;
+      consumption_preferences = profile_options.consumption_preferences;
     }
 
     /**
@@ -918,64 +918,64 @@ public class PersonalityInsightsV3Models {
     /**
      * Builds a ProfileOptions.
      *
-     * @return the profileOptions
+     * @return the profile_options
      */
     public ProfileOptions build() {
       return new ProfileOptions(this);
     }
 
     /**
-     * Set the contentLanguage.
+     * Set the content_language.
      *
-     * @param contentLanguage the contentLanguage
+     * @param content_language the content_language
      * @return the ProfileOptions builder
      */
-    public ProfileOptionsBuilder contentLanguage(String contentLanguage) {
-      this.contentLanguage = contentLanguage;
+    public ProfileOptionsBuilder contentLanguage(String content_language) {
+      this.content_language = content_language;
       return this;
     }
 
     /**
-     * Set the acceptLanguage.
+     * Set the accept_language.
      *
-     * @param acceptLanguage the acceptLanguage
+     * @param accept_language the accept_language
      * @return the ProfileOptions builder
      */
-    public ProfileOptionsBuilder acceptLanguage(String acceptLanguage) {
-      this.acceptLanguage = acceptLanguage;
+    public ProfileOptionsBuilder acceptLanguage(String accept_language) {
+      this.accept_language = accept_language;
       return this;
     }
 
     /**
-     * Set the rawScores.
+     * Set the raw_scores.
      *
-     * @param rawScores the rawScores
+     * @param raw_scores the raw_scores
      * @return the ProfileOptions builder
      */
-    public ProfileOptionsBuilder rawScores(Boolean rawScores) {
-      this.rawScores = rawScores;
+    public ProfileOptionsBuilder rawScores(Boolean raw_scores) {
+      this.raw_scores = raw_scores;
       return this;
     }
 
     /**
-     * Set the csvHeaders.
+     * Set the csv_headers.
      *
-     * @param csvHeaders the csvHeaders
+     * @param csv_headers the csv_headers
      * @return the ProfileOptions builder
      */
-    public ProfileOptionsBuilder csvHeaders(Boolean csvHeaders) {
-      this.csvHeaders = csvHeaders;
+    public ProfileOptionsBuilder csvHeaders(Boolean csv_headers) {
+      this.csv_headers = csv_headers;
       return this;
     }
 
     /**
-     * Set the consumptionPreferences.
+     * Set the consumption_preferences.
      *
-     * @param consumptionPreferences the consumptionPreferences
+     * @param consumption_preferences the consumption_preferences
      * @return the ProfileOptions builder
      */
-    public ProfileOptionsBuilder consumptionPreferences(Boolean consumptionPreferences) {
-      this.consumptionPreferences = consumptionPreferences;
+    public ProfileOptionsBuilder consumptionPreferences(Boolean consumption_preferences) {
+      this.consumption_preferences = consumption_preferences;
       return this;
     }
 
@@ -987,7 +987,7 @@ public class PersonalityInsightsV3Models {
      */
     public ProfileOptionsBuilder content(Content content) {
       this.content = content;
-      this.contentType = IBMWatsonHttpMediaType.APPLICATION_JSON;
+      this.content_type = IBMWatsonHttpMediaType.APPLICATION_JSON;
       return this;
     }
 
@@ -999,7 +999,7 @@ public class PersonalityInsightsV3Models {
      */
     public ProfileOptionsBuilder html(String html) {
       this.body = html;
-      this.contentType = IBMWatsonHttpMediaType.TEXT_HTML;
+      this.content_type = IBMWatsonHttpMediaType.TEXT_HTML;
       return this;
     }
 
@@ -1011,7 +1011,7 @@ public class PersonalityInsightsV3Models {
      */
     public ProfileOptionsBuilder text(String text) {
       this.body = text;
-      this.contentType = IBMWatsonHttpMediaType.TEXT_PLAIN;
+      this.content_type = IBMWatsonHttpMediaType.TEXT_PLAIN;
       return this;
     }
   }
@@ -1020,21 +1020,21 @@ public class PersonalityInsightsV3Models {
    * Trait.
    */
   public class Trait extends IBMWatsonGenericModel {
-    private String traitId;
+    private String trait_id;
     private String name;
     private String category;
     private Double percentile;
-    private Double rawScore;
+    private Double raw_score;
     private List<Trait> children;
     /**
-     * Gets the traitId.
+     * Gets the trait_id.
      *
      * The unique identifier of the characteristic to which the results pertain. IDs have the form `big5_{characteristic}` for Big Five personality characteristics, `need_{characteristic}` for Needs, or `value_{characteristic}` for Values.
      *
-     * @return the traitId
+     * @return the trait_id
      */
     public String getTraitId() {
-      return traitId;
+      return trait_id;
     }
     /**
      * Gets the name.
@@ -1067,14 +1067,14 @@ public class PersonalityInsightsV3Models {
       return percentile;
     }
     /**
-     * Gets the rawScore.
+     * Gets the raw_score.
      *
      * The raw score for the characteristic. The range is 0 to 1. A higher score generally indicates a greater likelihood that the author has that characteristic, but raw scores must be considered in aggregate: The range of values in practice might be much smaller than 0 to 1, so an individual score must be considered in the context of the overall scores and their range. The raw score is computed based on the input and the service model; it is not normalized or compared with a sample population. The raw score enables comparison of the results against a different sampling population and with a custom normalization approach.
      *
-     * @return the rawScore
+     * @return the raw_score
      */
     public Double getRawScore() {
-      return rawScore;
+      return raw_score;
     }
     /**
      * Gets the children.
@@ -1088,12 +1088,12 @@ public class PersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the traitId.
+     * Sets the trait_id.
      *
-     * @param traitId the new traitId
+     * @param trait_id the new trait_id
      */
-    public void setTraitId(final String traitId) {
-      this.traitId = traitId;
+    public void setTraitId(final String trait_id) {
+      this.trait_id = trait_id;
     }
 
     /**
@@ -1124,12 +1124,12 @@ public class PersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the rawScore.
+     * Sets the raw_score.
      *
-     * @param rawScore the new rawScore
+     * @param raw_score the new raw_score
      */
-    public void setRawScore(final Double rawScore) {
-      this.rawScore = rawScore;
+    public void setRawScore(final Double raw_score) {
+      this.raw_score = raw_score;
     }
 
     /**
@@ -1146,17 +1146,17 @@ public class PersonalityInsightsV3Models {
    * Warning.
    */
   public class Warning extends IBMWatsonGenericModel {
-    private String warningId;
+    private String warning_id;
     private String message;
     /**
-     * Gets the warningId.
+     * Gets the warning_id.
      *
      * The identifier of the warning message, one of `WORD_COUNT_MESSAGE`, `JSON_AS_TEXT`, `CONTENT_TRUNCATED`, or `PARTIAL_TEXT_USED`.
      *
-     * @return the warningId
+     * @return the warning_id
      */
     public String getWarningId() {
-      return warningId;
+      return warning_id;
     }
     /**
      * Gets the message.
@@ -1170,12 +1170,12 @@ public class PersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the warningId.
+     * Sets the warning_id.
      *
-     * @param warningId the new warningId
+     * @param warning_id the new warning_id
      */
-    public void setWarningId(final String warningId) {
-      this.warningId = warningId;
+    public void setWarningId(final String warning_id) {
+      this.warning_id = warning_id;
     }
 
     /**

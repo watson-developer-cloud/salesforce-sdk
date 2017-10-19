@@ -5,39 +5,39 @@ public class ConversationV1Models {
   public class Context extends IBMWatsonDynamicModel {
 
     /**
-     * Gets the conversationId.
+     * Gets the conversation_id.
      *
-     * @return the conversationId
+     * @return the conversation_id
      */
     public String getConversationId() {
-      return (String)JSON.deserialize(JSON.serialize(this.get('conversationId')), String.class);
+      return (String)JSON.deserialize(JSON.serialize(this.get('conversation_id')), String.class);
     }
 
     /**
-     * Gets the xsystem.
+     * Gets the system_serialized_name.
      *
-     * @return the xsystem
+     * @return the system_serialized_name
      */
-    public SystemResponse getXsystem() {
-      return (SystemResponse)JSON.deserialize(JSON.serialize(this.get('xsystem')), SystemResponse.class);
+    public SystemResponse getSystem() {
+      return (SystemResponse)JSON.deserialize(JSON.serialize(this.get('system_serialized_name')), SystemResponse.class);
     }
 
     /**
-     * Sets the conversationId.
+     * Sets the conversation_id.
      *
-     * @param conversationId the new conversationId
+     * @param conversation_id the new conversation_id
      */
-    public void setConversationId(final String conversationId) {
-      this.put('conversationId', conversationId);
+    public void setConversationId(final String conversation_id) {
+      this.put('conversation_id', conversation_id);
     }
 
     /**
-     * Sets the xsystem.
+     * Sets the system_serialized_name.
      *
-     * @param xsystem the new xsystem
+     * @param system_serialized_name the new system_serialized_name
      */
-    public void setXsystem(final SystemResponse xsystem) {
-      this.put('xsystem', xsystem);
+    public void setSystem(final SystemResponse system_serialized_name) {
+      this.put('system_serialized_name', system_serialized_name);
     }
   }
 
@@ -171,8 +171,8 @@ public class ConversationV1Models {
   public class CreateCounterexampleBuilder {
     private String text;
 
-    private CreateCounterexampleBuilder(CreateCounterexample createCounterexample) {
-      text = createCounterexample.text;
+    private CreateCounterexampleBuilder(CreateCounterexample create_counterexample) {
+      text = create_counterexample.text;
     }
 
     /**
@@ -193,7 +193,7 @@ public class ConversationV1Models {
     /**
      * Builds a CreateCounterexample.
      *
-     * @return the createCounterexample
+     * @return the create_counterexample
      */
     public CreateCounterexample build() {
       return new CreateCounterexample(this);
@@ -215,17 +215,17 @@ public class ConversationV1Models {
    * The createCounterexample options.
    */
   public class CreateCounterexampleOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String text;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the text.
@@ -238,9 +238,9 @@ public class ConversationV1Models {
       return text;
     }
     private CreateCounterexampleOptions(CreateCounterexampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       text = builder.text;
     }
 
@@ -258,12 +258,12 @@ public class ConversationV1Models {
    * CreateCounterexampleOptions Builder.
    */
   public class CreateCounterexampleOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String text;
 
-    private CreateCounterexampleOptionsBuilder(CreateCounterexampleOptions createCounterexampleOptions) {
-      workspaceId = createCounterexampleOptions.workspaceId;
-      text = createCounterexampleOptions.text;
+    private CreateCounterexampleOptionsBuilder(CreateCounterexampleOptions create_counterexample_options) {
+      workspace_id = create_counterexample_options.workspace_id;
+      text = create_counterexample_options.text;
     }
 
     /**
@@ -275,31 +275,31 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param text the text
      */
-    public CreateCounterexampleOptionsBuilder(String workspaceId, String text) {
-      this.workspaceId = workspaceId;
+    public CreateCounterexampleOptionsBuilder(String workspace_id, String text) {
+      this.workspace_id = workspace_id;
       this.text = text;
     }
 
     /**
      * Builds a CreateCounterexampleOptions.
      *
-     * @return the createCounterexampleOptions
+     * @return the create_counterexample_options
      */
     public CreateCounterexampleOptions build() {
       return new CreateCounterexampleOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the CreateCounterexampleOptions builder
      */
-    public CreateCounterexampleOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public CreateCounterexampleOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -319,29 +319,29 @@ public class ConversationV1Models {
    * CreateDialogNode.
    */
   public class CreateDialogNode extends IBMWatsonGenericModel {
-    private String dialogNode;
+    private String dialog_node;
     private String description;
     private String conditions;
     private String parent;
-    private String previousSibling;
-    private Map<String, Object> output;
-    private Map<String, Object> context;
-    private Map<String, Object> metadata;
-    private DialogNodeNextStep nextStep;
+    private String previous_sibling;
+    private Map<String, String> output;
+    private Map<String, String> context;
+    private Map<String, String> metadata;
+    private DialogNodeNextStep next_step;
     private List<DialogNodeAction> actions;
     private String title;
-    private String nodeType;
-    private String eventName;
+    private String type_serialized_name;
+    private String event_name;
     private String variable;
     /**
-     * Gets the dialogNode.
+     * Gets the dialog_node.
      *
      * The dialog node ID.
      *
-     * @return the dialogNode
+     * @return the dialog_node
      */
     public String dialogNode() {
-      return dialogNode;
+      return dialog_node;
     }
     /**
      * Gets the description.
@@ -374,14 +374,14 @@ public class ConversationV1Models {
       return parent;
     }
     /**
-     * Gets the previousSibling.
+     * Gets the previous_sibling.
      *
      * The previous dialog node.
      *
-     * @return the previousSibling
+     * @return the previous_sibling
      */
     public String previousSibling() {
-      return previousSibling;
+      return previous_sibling;
     }
     /**
      * Gets the output.
@@ -390,7 +390,7 @@ public class ConversationV1Models {
      *
      * @return the output
      */
-    public Map<String, Object> output() {
+    public Map<String, String> output() {
       return output;
     }
     /**
@@ -400,7 +400,7 @@ public class ConversationV1Models {
      *
      * @return the context
      */
-    public Map<String, Object> context() {
+    public Map<String, String> context() {
       return context;
     }
     /**
@@ -410,18 +410,18 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
-     * Gets the nextStep.
+     * Gets the next_step.
      *
      * The next step to execute following this dialog node.
      *
-     * @return the nextStep
+     * @return the next_step
      */
     public DialogNodeNextStep nextStep() {
-      return nextStep;
+      return next_step;
     }
     /**
      * Gets the actions.
@@ -444,24 +444,24 @@ public class ConversationV1Models {
       return title;
     }
     /**
-     * Gets the nodeType.
+     * Gets the type_serialized_name.
      *
      * How the dialog node is processed.
      *
-     * @return the nodeType
+     * @return the type_serialized_name
      */
-    public String nodeType() {
-      return nodeType;
+    public String typeField() {
+      return type_serialized_name;
     }
     /**
-     * Gets the eventName.
+     * Gets the event_name.
      *
      * How an `event_handler` node is processed.
      *
-     * @return the eventName
+     * @return the event_name
      */
     public String eventName() {
-      return eventName;
+      return event_name;
     }
     /**
      * Gets the variable.
@@ -474,20 +474,20 @@ public class ConversationV1Models {
       return variable;
     }
     private CreateDialogNode(CreateDialogNodeBuilder builder) {
-      IBMWatsonValidator.notNull(builder.dialogNode, 'dialogNode cannot be null');
-      dialogNode = builder.dialogNode;
+      IBMWatsonValidator.notNull(builder.dialog_node, 'dialog_node cannot be null');
+      dialog_node = builder.dialog_node;
       description = builder.description;
       conditions = builder.conditions;
       parent = builder.parent;
-      previousSibling = builder.previousSibling;
+      previous_sibling = builder.previous_sibling;
       output = builder.output;
       context = builder.context;
       metadata = builder.metadata;
-      nextStep = builder.nextStep;
+      next_step = builder.next_step;
       actions = builder.actions;
       title = builder.title;
-      nodeType = builder.nodeType;
-      eventName = builder.eventName;
+      type_serialized_name = builder.type_serialized_name;
+      event_name = builder.event_name;
       variable = builder.variable;
     }
 
@@ -505,36 +505,36 @@ public class ConversationV1Models {
    * CreateDialogNode Builder.
    */
   public class CreateDialogNodeBuilder {
-    private String dialogNode;
+    private String dialog_node;
     private String description;
     private String conditions;
     private String parent;
-    private String previousSibling;
-    private Map<String, Object> output;
-    private Map<String, Object> context;
-    private Map<String, Object> metadata;
-    private DialogNodeNextStep nextStep;
+    private String previous_sibling;
+    private Map<String, String> output;
+    private Map<String, String> context;
+    private Map<String, String> metadata;
+    private DialogNodeNextStep next_step;
     private List<DialogNodeAction> actions;
     private String title;
-    private String nodeType;
-    private String eventName;
+    private String type_serialized_name;
+    private String event_name;
     private String variable;
 
-    private CreateDialogNodeBuilder(CreateDialogNode createDialogNode) {
-      dialogNode = createDialogNode.dialogNode;
-      description = createDialogNode.description;
-      conditions = createDialogNode.conditions;
-      parent = createDialogNode.parent;
-      previousSibling = createDialogNode.previousSibling;
-      output = createDialogNode.output;
-      context = createDialogNode.context;
-      metadata = createDialogNode.metadata;
-      nextStep = createDialogNode.nextStep;
-      actions = createDialogNode.actions;
-      title = createDialogNode.title;
-      nodeType = createDialogNode.nodeType;
-      eventName = createDialogNode.eventName;
-      variable = createDialogNode.variable;
+    private CreateDialogNodeBuilder(CreateDialogNode create_dialog_node) {
+      dialog_node = create_dialog_node.dialog_node;
+      description = create_dialog_node.description;
+      conditions = create_dialog_node.conditions;
+      parent = create_dialog_node.parent;
+      previous_sibling = create_dialog_node.previous_sibling;
+      output = create_dialog_node.output;
+      context = create_dialog_node.context;
+      metadata = create_dialog_node.metadata;
+      next_step = create_dialog_node.next_step;
+      actions = create_dialog_node.actions;
+      title = create_dialog_node.title;
+      type_serialized_name = create_dialog_node.type_serialized_name;
+      event_name = create_dialog_node.event_name;
+      variable = create_dialog_node.variable;
     }
 
     /**
@@ -546,16 +546,16 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param dialogNode the dialogNode
+     * @param dialog_node the dialog_node
      */
-    public CreateDialogNodeBuilder(String dialogNode) {
-      this.dialogNode = dialogNode;
+    public CreateDialogNodeBuilder(String dialog_node) {
+      this.dialog_node = dialog_node;
     }
 
     /**
      * Builds a CreateDialogNode.
      *
-     * @return the createDialogNode
+     * @return the create_dialog_node
      */
     public CreateDialogNode build() {
       return new CreateDialogNode(this);
@@ -577,13 +577,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the dialogNode.
+     * Set the dialog_node.
      *
-     * @param dialogNode the dialogNode
+     * @param dialog_node the dialog_node
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder dialogNode(String dialogNode) {
-      this.dialogNode = dialogNode;
+    public CreateDialogNodeBuilder dialogNode(String dialog_node) {
+      this.dialog_node = dialog_node;
       return this;
     }
 
@@ -621,13 +621,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the previousSibling.
+     * Set the previous_sibling.
      *
-     * @param previousSibling the previousSibling
+     * @param previous_sibling the previous_sibling
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder previousSibling(String previousSibling) {
-      this.previousSibling = previousSibling;
+    public CreateDialogNodeBuilder previousSibling(String previous_sibling) {
+      this.previous_sibling = previous_sibling;
       return this;
     }
 
@@ -637,7 +637,7 @@ public class ConversationV1Models {
      * @param output the output
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder output(Map<String, Object> output) {
+    public CreateDialogNodeBuilder output(Map<String, String> output) {
       this.output = output;
       return this;
     }
@@ -648,7 +648,7 @@ public class ConversationV1Models {
      * @param context the context
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder context(Map<String, Object> context) {
+    public CreateDialogNodeBuilder context(Map<String, String> context) {
       this.context = context;
       return this;
     }
@@ -659,19 +659,19 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder metadata(Map<String, Object> metadata) {
+    public CreateDialogNodeBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
 
     /**
-     * Set the nextStep.
+     * Set the next_step.
      *
-     * @param nextStep the nextStep
+     * @param next_step the next_step
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder nextStep(DialogNodeNextStep nextStep) {
-      this.nextStep = nextStep;
+    public CreateDialogNodeBuilder nextStep(DialogNodeNextStep next_step) {
+      this.next_step = next_step;
       return this;
     }
 
@@ -699,24 +699,24 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the nodeType.
+     * Set the type_serialized_name.
      *
-     * @param nodeType the nodeType
+     * @param type_serialized_name the type_serialized_name
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder nodeType(String nodeType) {
-      this.nodeType = nodeType;
+    public CreateDialogNodeBuilder typeField(String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
       return this;
     }
 
     /**
-     * Set the eventName.
+     * Set the event_name.
      *
-     * @param eventName the eventName
+     * @param event_name the event_name
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder eventName(String eventName) {
-      this.eventName = eventName;
+    public CreateDialogNodeBuilder eventName(String event_name) {
+      this.event_name = event_name;
       return this;
     }
 
@@ -736,40 +736,40 @@ public class ConversationV1Models {
    * The createDialogNode options.
    */
   public class CreateDialogNodeOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
-    private String dialogNode;
+    private String workspace_id;
+    private String dialog_node;
     private String description;
     private String conditions;
     private String parent;
-    private String previousSibling;
-    private Map<String, Object> output;
-    private Map<String, Object> context;
-    private Map<String, Object> metadata;
-    private DialogNodeNextStep nextStep;
+    private String previous_sibling;
+    private Map<String, String> output;
+    private Map<String, String> context;
+    private Map<String, String> metadata;
+    private DialogNodeNextStep next_step;
     private List<DialogNodeAction> actions;
     private String title;
-    private String nodeType;
-    private String eventName;
+    private String type_serialized_name;
+    private String event_name;
     private String variable;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
-     * Gets the dialogNode.
+     * Gets the dialog_node.
      *
      * The dialog node ID.
      *
-     * @return the dialogNode
+     * @return the dialog_node
      */
     public String dialogNode() {
-      return dialogNode;
+      return dialog_node;
     }
     /**
      * Gets the description.
@@ -802,14 +802,14 @@ public class ConversationV1Models {
       return parent;
     }
     /**
-     * Gets the previousSibling.
+     * Gets the previous_sibling.
      *
      * The previous dialog node.
      *
-     * @return the previousSibling
+     * @return the previous_sibling
      */
     public String previousSibling() {
-      return previousSibling;
+      return previous_sibling;
     }
     /**
      * Gets the output.
@@ -818,7 +818,7 @@ public class ConversationV1Models {
      *
      * @return the output
      */
-    public Map<String, Object> output() {
+    public Map<String, String> output() {
       return output;
     }
     /**
@@ -828,7 +828,7 @@ public class ConversationV1Models {
      *
      * @return the context
      */
-    public Map<String, Object> context() {
+    public Map<String, String> context() {
       return context;
     }
     /**
@@ -838,18 +838,18 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
-     * Gets the nextStep.
+     * Gets the next_step.
      *
      * The next step to execute following this dialog node.
      *
-     * @return the nextStep
+     * @return the next_step
      */
     public DialogNodeNextStep nextStep() {
-      return nextStep;
+      return next_step;
     }
     /**
      * Gets the actions.
@@ -872,24 +872,24 @@ public class ConversationV1Models {
       return title;
     }
     /**
-     * Gets the nodeType.
+     * Gets the type_serialized_name.
      *
      * How the dialog node is processed.
      *
-     * @return the nodeType
+     * @return the type_serialized_name
      */
-    public String nodeType() {
-      return nodeType;
+    public String typeField() {
+      return type_serialized_name;
     }
     /**
-     * Gets the eventName.
+     * Gets the event_name.
      *
      * How an `event_handler` node is processed.
      *
-     * @return the eventName
+     * @return the event_name
      */
     public String eventName() {
-      return eventName;
+      return event_name;
     }
     /**
      * Gets the variable.
@@ -902,22 +902,22 @@ public class ConversationV1Models {
       return variable;
     }
     private CreateDialogNodeOptions(CreateDialogNodeOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
-      IBMWatsonValidator.notNull(builder.dialogNode, 'dialogNode cannot be null');
-      workspaceId = builder.workspaceId;
-      dialogNode = builder.dialogNode;
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
+      IBMWatsonValidator.notNull(builder.dialog_node, 'dialog_node cannot be null');
+      workspace_id = builder.workspace_id;
+      dialog_node = builder.dialog_node;
       description = builder.description;
       conditions = builder.conditions;
       parent = builder.parent;
-      previousSibling = builder.previousSibling;
+      previous_sibling = builder.previous_sibling;
       output = builder.output;
       context = builder.context;
       metadata = builder.metadata;
-      nextStep = builder.nextStep;
+      next_step = builder.next_step;
       actions = builder.actions;
       title = builder.title;
-      nodeType = builder.nodeType;
-      eventName = builder.eventName;
+      type_serialized_name = builder.type_serialized_name;
+      event_name = builder.event_name;
       variable = builder.variable;
     }
 
@@ -935,38 +935,38 @@ public class ConversationV1Models {
    * CreateDialogNodeOptions Builder.
    */
   public class CreateDialogNodeOptionsBuilder {
-    private String workspaceId;
-    private String dialogNode;
+    private String workspace_id;
+    private String dialog_node;
     private String description;
     private String conditions;
     private String parent;
-    private String previousSibling;
-    private Map<String, Object> output;
-    private Map<String, Object> context;
-    private Map<String, Object> metadata;
-    private DialogNodeNextStep nextStep;
+    private String previous_sibling;
+    private Map<String, String> output;
+    private Map<String, String> context;
+    private Map<String, String> metadata;
+    private DialogNodeNextStep next_step;
     private List<DialogNodeAction> actions;
     private String title;
-    private String nodeType;
-    private String eventName;
+    private String type_serialized_name;
+    private String event_name;
     private String variable;
 
-    private CreateDialogNodeOptionsBuilder(CreateDialogNodeOptions createDialogNodeOptions) {
-      workspaceId = createDialogNodeOptions.workspaceId;
-      dialogNode = createDialogNodeOptions.dialogNode;
-      description = createDialogNodeOptions.description;
-      conditions = createDialogNodeOptions.conditions;
-      parent = createDialogNodeOptions.parent;
-      previousSibling = createDialogNodeOptions.previousSibling;
-      output = createDialogNodeOptions.output;
-      context = createDialogNodeOptions.context;
-      metadata = createDialogNodeOptions.metadata;
-      nextStep = createDialogNodeOptions.nextStep;
-      actions = createDialogNodeOptions.actions;
-      title = createDialogNodeOptions.title;
-      nodeType = createDialogNodeOptions.nodeType;
-      eventName = createDialogNodeOptions.eventName;
-      variable = createDialogNodeOptions.variable;
+    private CreateDialogNodeOptionsBuilder(CreateDialogNodeOptions create_dialog_node_options) {
+      workspace_id = create_dialog_node_options.workspace_id;
+      dialog_node = create_dialog_node_options.dialog_node;
+      description = create_dialog_node_options.description;
+      conditions = create_dialog_node_options.conditions;
+      parent = create_dialog_node_options.parent;
+      previous_sibling = create_dialog_node_options.previous_sibling;
+      output = create_dialog_node_options.output;
+      context = create_dialog_node_options.context;
+      metadata = create_dialog_node_options.metadata;
+      next_step = create_dialog_node_options.next_step;
+      actions = create_dialog_node_options.actions;
+      title = create_dialog_node_options.title;
+      type_serialized_name = create_dialog_node_options.type_serialized_name;
+      event_name = create_dialog_node_options.event_name;
+      variable = create_dialog_node_options.variable;
     }
 
     /**
@@ -978,18 +978,18 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
-     * @param dialogNode the dialogNode
+     * @param workspace_id the workspace_id
+     * @param dialog_node the dialog_node
      */
-    public CreateDialogNodeOptionsBuilder(String workspaceId, String dialogNode) {
-      this.workspaceId = workspaceId;
-      this.dialogNode = dialogNode;
+    public CreateDialogNodeOptionsBuilder(String workspace_id, String dialog_node) {
+      this.workspace_id = workspace_id;
+      this.dialog_node = dialog_node;
     }
 
     /**
      * Builds a CreateDialogNodeOptions.
      *
-     * @return the createDialogNodeOptions
+     * @return the create_dialog_node_options
      */
     public CreateDialogNodeOptions build() {
       return new CreateDialogNodeOptions(this);
@@ -1011,24 +1011,24 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public CreateDialogNodeOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
     /**
-     * Set the dialogNode.
+     * Set the dialog_node.
      *
-     * @param dialogNode the dialogNode
+     * @param dialog_node the dialog_node
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder dialogNode(String dialogNode) {
-      this.dialogNode = dialogNode;
+    public CreateDialogNodeOptionsBuilder dialogNode(String dialog_node) {
+      this.dialog_node = dialog_node;
       return this;
     }
 
@@ -1066,13 +1066,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the previousSibling.
+     * Set the previous_sibling.
      *
-     * @param previousSibling the previousSibling
+     * @param previous_sibling the previous_sibling
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder previousSibling(String previousSibling) {
-      this.previousSibling = previousSibling;
+    public CreateDialogNodeOptionsBuilder previousSibling(String previous_sibling) {
+      this.previous_sibling = previous_sibling;
       return this;
     }
 
@@ -1082,7 +1082,7 @@ public class ConversationV1Models {
      * @param output the output
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder output(Map<String, Object> output) {
+    public CreateDialogNodeOptionsBuilder output(Map<String, String> output) {
       this.output = output;
       return this;
     }
@@ -1093,7 +1093,7 @@ public class ConversationV1Models {
      * @param context the context
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder context(Map<String, Object> context) {
+    public CreateDialogNodeOptionsBuilder context(Map<String, String> context) {
       this.context = context;
       return this;
     }
@@ -1104,19 +1104,19 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder metadata(Map<String, Object> metadata) {
+    public CreateDialogNodeOptionsBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
 
     /**
-     * Set the nextStep.
+     * Set the next_step.
      *
-     * @param nextStep the nextStep
+     * @param next_step the next_step
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder nextStep(DialogNodeNextStep nextStep) {
-      this.nextStep = nextStep;
+    public CreateDialogNodeOptionsBuilder nextStep(DialogNodeNextStep next_step) {
+      this.next_step = next_step;
       return this;
     }
 
@@ -1144,24 +1144,24 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the nodeType.
+     * Set the type_serialized_name.
      *
-     * @param nodeType the nodeType
+     * @param type_serialized_name the type_serialized_name
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder nodeType(String nodeType) {
-      this.nodeType = nodeType;
+    public CreateDialogNodeOptionsBuilder typeField(String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
       return this;
     }
 
     /**
-     * Set the eventName.
+     * Set the event_name.
      *
-     * @param eventName the eventName
+     * @param event_name the event_name
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder eventName(String eventName) {
-      this.eventName = eventName;
+    public CreateDialogNodeOptionsBuilder eventName(String event_name) {
+      this.event_name = event_name;
       return this;
     }
 
@@ -1183,9 +1183,9 @@ public class ConversationV1Models {
   public class CreateEntity extends IBMWatsonGenericModel {
     private String entity;
     private String description;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<CreateValue> values;
-    private Boolean fuzzyMatch;
+    private Boolean fuzzy_match;
     /**
      * Gets the entity.
      *
@@ -1213,7 +1213,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
@@ -1227,14 +1227,14 @@ public class ConversationV1Models {
       return values;
     }
     /**
-     * Gets the fuzzyMatch.
+     * Gets the fuzzy_match.
      *
      * Whether to use fuzzy matching for the entity.
      *
-     * @return the fuzzyMatch
+     * @return the fuzzy_match
      */
     public Boolean fuzzyMatch() {
-      return fuzzyMatch;
+      return fuzzy_match;
     }
     private CreateEntity(CreateEntityBuilder builder) {
       IBMWatsonValidator.notNull(builder.entity, 'entity cannot be null');
@@ -1242,7 +1242,7 @@ public class ConversationV1Models {
       description = builder.description;
       metadata = builder.metadata;
       values = builder.values;
-      fuzzyMatch = builder.fuzzyMatch;
+      fuzzy_match = builder.fuzzy_match;
     }
 
     /**
@@ -1261,16 +1261,16 @@ public class ConversationV1Models {
   public class CreateEntityBuilder {
     private String entity;
     private String description;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<CreateValue> values;
-    private Boolean fuzzyMatch;
+    private Boolean fuzzy_match;
 
-    private CreateEntityBuilder(CreateEntity createEntity) {
-      entity = createEntity.entity;
-      description = createEntity.description;
-      metadata = createEntity.metadata;
-      values = createEntity.values;
-      fuzzyMatch = createEntity.fuzzyMatch;
+    private CreateEntityBuilder(CreateEntity create_entity) {
+      entity = create_entity.entity;
+      description = create_entity.description;
+      metadata = create_entity.metadata;
+      values = create_entity.values;
+      fuzzy_match = create_entity.fuzzy_match;
     }
 
     /**
@@ -1291,24 +1291,24 @@ public class ConversationV1Models {
     /**
      * Builds a CreateEntity.
      *
-     * @return the createEntity
+     * @return the create_entity
      */
     public CreateEntity build() {
       return new CreateEntity(this);
     }
 
     /**
-     * Adds an value to values.
+     * Adds an values to values.
      *
-     * @param value the new value
+     * @param values the new values
      * @return the CreateEntity builder
      */
-    public CreateEntityBuilder addValue(CreateValue value) {
-      IBMWatsonValidator.notNull(value, 'value cannot be null');
+    public CreateEntityBuilder addValues(CreateValue values) {
+      IBMWatsonValidator.notNull(values, 'values cannot be null');
       if (this.values == null) {
         this.values = new List<CreateValue>();
       }
-      this.values.add(value);
+      this.values.add(values);
       return this;
     }
 
@@ -1340,7 +1340,7 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the CreateEntity builder
      */
-    public CreateEntityBuilder metadata(Map<String, Object> metadata) {
+    public CreateEntityBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -1358,13 +1358,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the fuzzyMatch.
+     * Set the fuzzy_match.
      *
-     * @param fuzzyMatch the fuzzyMatch
+     * @param fuzzy_match the fuzzy_match
      * @return the CreateEntity builder
      */
-    public CreateEntityBuilder fuzzyMatch(Boolean fuzzyMatch) {
-      this.fuzzyMatch = fuzzyMatch;
+    public CreateEntityBuilder fuzzyMatch(Boolean fuzzy_match) {
+      this.fuzzy_match = fuzzy_match;
       return this;
     }
   }
@@ -1373,21 +1373,21 @@ public class ConversationV1Models {
    * The createEntity options.
    */
   public class CreateEntityOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String description;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<CreateValue> values;
-    private Boolean fuzzyMatch;
+    private Boolean fuzzy_match;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the entity.
@@ -1416,7 +1416,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
@@ -1430,24 +1430,24 @@ public class ConversationV1Models {
       return values;
     }
     /**
-     * Gets the fuzzyMatch.
+     * Gets the fuzzy_match.
      *
      * Whether to use fuzzy matching for the entity.
      *
-     * @return the fuzzyMatch
+     * @return the fuzzy_match
      */
     public Boolean fuzzyMatch() {
-      return fuzzyMatch;
+      return fuzzy_match;
     }
     private CreateEntityOptions(CreateEntityOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notNull(builder.entity, 'entity cannot be null');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       entity = builder.entity;
       description = builder.description;
       metadata = builder.metadata;
       values = builder.values;
-      fuzzyMatch = builder.fuzzyMatch;
+      fuzzy_match = builder.fuzzy_match;
     }
 
     /**
@@ -1464,20 +1464,20 @@ public class ConversationV1Models {
    * CreateEntityOptions Builder.
    */
   public class CreateEntityOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String description;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<CreateValue> values;
-    private Boolean fuzzyMatch;
+    private Boolean fuzzy_match;
 
-    private CreateEntityOptionsBuilder(CreateEntityOptions createEntityOptions) {
-      workspaceId = createEntityOptions.workspaceId;
-      entity = createEntityOptions.entity;
-      description = createEntityOptions.description;
-      metadata = createEntityOptions.metadata;
-      values = createEntityOptions.values;
-      fuzzyMatch = createEntityOptions.fuzzyMatch;
+    private CreateEntityOptionsBuilder(CreateEntityOptions create_entity_options) {
+      workspace_id = create_entity_options.workspace_id;
+      entity = create_entity_options.entity;
+      description = create_entity_options.description;
+      metadata = create_entity_options.metadata;
+      values = create_entity_options.values;
+      fuzzy_match = create_entity_options.fuzzy_match;
     }
 
     /**
@@ -1489,46 +1489,46 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param entity the entity
      */
-    public CreateEntityOptionsBuilder(String workspaceId, String entity) {
-      this.workspaceId = workspaceId;
+    public CreateEntityOptionsBuilder(String workspace_id, String entity) {
+      this.workspace_id = workspace_id;
       this.entity = entity;
     }
 
     /**
      * Builds a CreateEntityOptions.
      *
-     * @return the createEntityOptions
+     * @return the create_entity_options
      */
     public CreateEntityOptions build() {
       return new CreateEntityOptions(this);
     }
 
     /**
-     * Adds an value to values.
+     * Adds an values to values.
      *
-     * @param value the new value
+     * @param values the new values
      * @return the CreateEntityOptions builder
      */
-    public CreateEntityOptionsBuilder addValue(CreateValue value) {
-      IBMWatsonValidator.notNull(value, 'value cannot be null');
+    public CreateEntityOptionsBuilder addValues(CreateValue values) {
+      IBMWatsonValidator.notNull(values, 'values cannot be null');
       if (this.values == null) {
         this.values = new List<CreateValue>();
       }
-      this.values.add(value);
+      this.values.add(values);
       return this;
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the CreateEntityOptions builder
      */
-    public CreateEntityOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public CreateEntityOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -1560,7 +1560,7 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the CreateEntityOptions builder
      */
-    public CreateEntityOptionsBuilder metadata(Map<String, Object> metadata) {
+    public CreateEntityOptionsBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -1578,13 +1578,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the fuzzyMatch.
+     * Set the fuzzy_match.
      *
-     * @param fuzzyMatch the fuzzyMatch
+     * @param fuzzy_match the fuzzy_match
      * @return the CreateEntityOptions builder
      */
-    public CreateEntityOptionsBuilder fuzzyMatch(Boolean fuzzyMatch) {
-      this.fuzzyMatch = fuzzyMatch;
+    public CreateEntityOptionsBuilder fuzzyMatch(Boolean fuzzy_match) {
+      this.fuzzy_match = fuzzy_match;
       return this;
     }
   }
@@ -1625,8 +1625,8 @@ public class ConversationV1Models {
   public class CreateExampleBuilder {
     private String text;
 
-    private CreateExampleBuilder(CreateExample createExample) {
-      text = createExample.text;
+    private CreateExampleBuilder(CreateExample create_example) {
+      text = create_example.text;
     }
 
     /**
@@ -1647,7 +1647,7 @@ public class ConversationV1Models {
     /**
      * Builds a CreateExample.
      *
-     * @return the createExample
+     * @return the create_example
      */
     public CreateExample build() {
       return new CreateExample(this);
@@ -1669,18 +1669,18 @@ public class ConversationV1Models {
    * The createExample options.
    */
   public class CreateExampleOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
     private String text;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the intent.
@@ -1703,10 +1703,10 @@ public class ConversationV1Models {
       return text;
     }
     private CreateExampleOptions(CreateExampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent, 'intent cannot be empty');
       IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       intent = builder.intent;
       text = builder.text;
     }
@@ -1725,14 +1725,14 @@ public class ConversationV1Models {
    * CreateExampleOptions Builder.
    */
   public class CreateExampleOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
     private String text;
 
-    private CreateExampleOptionsBuilder(CreateExampleOptions createExampleOptions) {
-      workspaceId = createExampleOptions.workspaceId;
-      intent = createExampleOptions.intent;
-      text = createExampleOptions.text;
+    private CreateExampleOptionsBuilder(CreateExampleOptions create_example_options) {
+      workspace_id = create_example_options.workspace_id;
+      intent = create_example_options.intent;
+      text = create_example_options.text;
     }
 
     /**
@@ -1744,12 +1744,12 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param intent the intent
      * @param text the text
      */
-    public CreateExampleOptionsBuilder(String workspaceId, String intent, String text) {
-      this.workspaceId = workspaceId;
+    public CreateExampleOptionsBuilder(String workspace_id, String intent, String text) {
+      this.workspace_id = workspace_id;
       this.intent = intent;
       this.text = text;
     }
@@ -1757,20 +1757,20 @@ public class ConversationV1Models {
     /**
      * Builds a CreateExampleOptions.
      *
-     * @return the createExampleOptions
+     * @return the create_example_options
      */
     public CreateExampleOptions build() {
       return new CreateExampleOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the CreateExampleOptions builder
      */
-    public CreateExampleOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public CreateExampleOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -1859,10 +1859,10 @@ public class ConversationV1Models {
     private String description;
     private List<CreateExample> examples;
 
-    private CreateIntentBuilder(CreateIntent createIntent) {
-      intent = createIntent.intent;
-      description = createIntent.description;
-      examples = createIntent.examples;
+    private CreateIntentBuilder(CreateIntent create_intent) {
+      intent = create_intent.intent;
+      description = create_intent.description;
+      examples = create_intent.examples;
     }
 
     /**
@@ -1883,24 +1883,24 @@ public class ConversationV1Models {
     /**
      * Builds a CreateIntent.
      *
-     * @return the createIntent
+     * @return the create_intent
      */
     public CreateIntent build() {
       return new CreateIntent(this);
     }
 
     /**
-     * Adds an example to examples.
+     * Adds an examples to examples.
      *
-     * @param example the new example
+     * @param examples the new examples
      * @return the CreateIntent builder
      */
-    public CreateIntentBuilder addExample(CreateExample example) {
-      IBMWatsonValidator.notNull(example, 'example cannot be null');
+    public CreateIntentBuilder addExamples(CreateExample examples) {
+      IBMWatsonValidator.notNull(examples, 'examples cannot be null');
       if (this.examples == null) {
         this.examples = new List<CreateExample>();
       }
-      this.examples.add(example);
+      this.examples.add(examples);
       return this;
     }
 
@@ -1943,19 +1943,19 @@ public class ConversationV1Models {
    * The createIntent options.
    */
   public class CreateIntentOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
     private String description;
     private List<CreateExample> examples;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the intent.
@@ -1988,9 +1988,9 @@ public class ConversationV1Models {
       return examples;
     }
     private CreateIntentOptions(CreateIntentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notNull(builder.intent, 'intent cannot be null');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       intent = builder.intent;
       description = builder.description;
       examples = builder.examples;
@@ -2010,16 +2010,16 @@ public class ConversationV1Models {
    * CreateIntentOptions Builder.
    */
   public class CreateIntentOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
     private String description;
     private List<CreateExample> examples;
 
-    private CreateIntentOptionsBuilder(CreateIntentOptions createIntentOptions) {
-      workspaceId = createIntentOptions.workspaceId;
-      intent = createIntentOptions.intent;
-      description = createIntentOptions.description;
-      examples = createIntentOptions.examples;
+    private CreateIntentOptionsBuilder(CreateIntentOptions create_intent_options) {
+      workspace_id = create_intent_options.workspace_id;
+      intent = create_intent_options.intent;
+      description = create_intent_options.description;
+      examples = create_intent_options.examples;
     }
 
     /**
@@ -2031,46 +2031,46 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param intent the intent
      */
-    public CreateIntentOptionsBuilder(String workspaceId, String intent) {
-      this.workspaceId = workspaceId;
+    public CreateIntentOptionsBuilder(String workspace_id, String intent) {
+      this.workspace_id = workspace_id;
       this.intent = intent;
     }
 
     /**
      * Builds a CreateIntentOptions.
      *
-     * @return the createIntentOptions
+     * @return the create_intent_options
      */
     public CreateIntentOptions build() {
       return new CreateIntentOptions(this);
     }
 
     /**
-     * Adds an example to examples.
+     * Adds an examples to examples.
      *
-     * @param example the new example
+     * @param examples the new examples
      * @return the CreateIntentOptions builder
      */
-    public CreateIntentOptionsBuilder addExample(CreateExample example) {
-      IBMWatsonValidator.notNull(example, 'example cannot be null');
+    public CreateIntentOptionsBuilder addExamples(CreateExample examples) {
+      IBMWatsonValidator.notNull(examples, 'examples cannot be null');
       if (this.examples == null) {
         this.examples = new List<CreateExample>();
       }
-      this.examples.add(example);
+      this.examples.add(examples);
       return this;
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the CreateIntentOptions builder
      */
-    public CreateIntentOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public CreateIntentOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -2113,19 +2113,19 @@ public class ConversationV1Models {
    * The createSynonym options.
    */
   public class CreateSynonymOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
     private String synonym;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the entity.
@@ -2158,11 +2158,11 @@ public class ConversationV1Models {
       return synonym;
     }
     private CreateSynonymOptions(CreateSynonymOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       IBMWatsonValidator.notEmpty(builder.value, 'value cannot be empty');
       IBMWatsonValidator.notNull(builder.synonym, 'synonym cannot be null');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       entity = builder.entity;
       value = builder.value;
       synonym = builder.synonym;
@@ -2182,16 +2182,16 @@ public class ConversationV1Models {
    * CreateSynonymOptions Builder.
    */
   public class CreateSynonymOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
     private String synonym;
 
-    private CreateSynonymOptionsBuilder(CreateSynonymOptions createSynonymOptions) {
-      workspaceId = createSynonymOptions.workspaceId;
-      entity = createSynonymOptions.entity;
-      value = createSynonymOptions.value;
-      synonym = createSynonymOptions.synonym;
+    private CreateSynonymOptionsBuilder(CreateSynonymOptions create_synonym_options) {
+      workspace_id = create_synonym_options.workspace_id;
+      entity = create_synonym_options.entity;
+      value = create_synonym_options.value;
+      synonym = create_synonym_options.synonym;
     }
 
     /**
@@ -2203,13 +2203,13 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param entity the entity
      * @param value the value
      * @param synonym the synonym
      */
-    public CreateSynonymOptionsBuilder(String workspaceId, String entity, String value, String synonym) {
-      this.workspaceId = workspaceId;
+    public CreateSynonymOptionsBuilder(String workspace_id, String entity, String value, String synonym) {
+      this.workspace_id = workspace_id;
       this.entity = entity;
       this.value = value;
       this.synonym = synonym;
@@ -2218,20 +2218,20 @@ public class ConversationV1Models {
     /**
      * Builds a CreateSynonymOptions.
      *
-     * @return the createSynonymOptions
+     * @return the create_synonym_options
      */
     public CreateSynonymOptions build() {
       return new CreateSynonymOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the CreateSynonymOptions builder
      */
-    public CreateSynonymOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public CreateSynonymOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -2274,10 +2274,10 @@ public class ConversationV1Models {
    */
   public class CreateValue extends IBMWatsonGenericModel {
     private String value;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<String> synonyms;
     private List<String> patterns;
-    private String valueType;
+    private String type_serialized_name;
     /**
      * Gets the value.
      *
@@ -2295,7 +2295,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
@@ -2319,14 +2319,14 @@ public class ConversationV1Models {
       return patterns;
     }
     /**
-     * Gets the valueType.
+     * Gets the type_serialized_name.
      *
      * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
      *
-     * @return the valueType
+     * @return the type_serialized_name
      */
-    public String valueType() {
-      return valueType;
+    public String typeField() {
+      return type_serialized_name;
     }
     private CreateValue(CreateValueBuilder builder) {
       IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
@@ -2334,7 +2334,7 @@ public class ConversationV1Models {
       metadata = builder.metadata;
       synonyms = builder.synonyms;
       patterns = builder.patterns;
-      valueType = builder.valueType;
+      type_serialized_name = builder.type_serialized_name;
     }
 
     /**
@@ -2352,17 +2352,17 @@ public class ConversationV1Models {
    */
   public class CreateValueBuilder {
     private String value;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<String> synonyms;
     private List<String> patterns;
-    private String valueType;
+    private String type_serialized_name;
 
-    private CreateValueBuilder(CreateValue createValue) {
-      value = createValue.value;
-      metadata = createValue.metadata;
-      synonyms = createValue.synonyms;
-      patterns = createValue.patterns;
-      valueType = createValue.valueType;
+    private CreateValueBuilder(CreateValue create_value) {
+      value = create_value.value;
+      metadata = create_value.metadata;
+      synonyms = create_value.synonyms;
+      patterns = create_value.patterns;
+      type_serialized_name = create_value.type_serialized_name;
     }
 
     /**
@@ -2383,24 +2383,24 @@ public class ConversationV1Models {
     /**
      * Builds a CreateValue.
      *
-     * @return the createValue
+     * @return the create_value
      */
     public CreateValue build() {
       return new CreateValue(this);
     }
 
     /**
-     * Adds an synonym to synonyms.
+     * Adds an synonyms to synonyms.
      *
-     * @param synonym the new synonym
+     * @param synonyms the new synonyms
      * @return the CreateValue builder
      */
-    public CreateValueBuilder addSynonym(String synonym) {
-      IBMWatsonValidator.notNull(synonym, 'synonym cannot be null');
+    public CreateValueBuilder addSynonyms(String synonyms) {
+      IBMWatsonValidator.notNull(synonyms, 'synonyms cannot be null');
       if (this.synonyms == null) {
         this.synonyms = new List<String>();
       }
-      this.synonyms.add(synonym);
+      this.synonyms.add(synonyms);
       return this;
     }
 
@@ -2436,7 +2436,7 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the CreateValue builder
      */
-    public CreateValueBuilder metadata(Map<String, Object> metadata) {
+    public CreateValueBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -2466,13 +2466,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the valueType.
+     * Set the type_serialized_name.
      *
-     * @param valueType the valueType
+     * @param type_serialized_name the type_serialized_name
      * @return the CreateValue builder
      */
-    public CreateValueBuilder valueType(String valueType) {
-      this.valueType = valueType;
+    public CreateValueBuilder typeField(String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
       return this;
     }
   }
@@ -2481,22 +2481,22 @@ public class ConversationV1Models {
    * The createValue options.
    */
   public class CreateValueOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<String> synonyms;
     private List<String> patterns;
-    private String valueType;
+    private String type_serialized_name;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the entity.
@@ -2525,7 +2525,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
@@ -2549,26 +2549,26 @@ public class ConversationV1Models {
       return patterns;
     }
     /**
-     * Gets the valueType.
+     * Gets the type_serialized_name.
      *
      * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
      *
-     * @return the valueType
+     * @return the type_serialized_name
      */
-    public String valueType() {
-      return valueType;
+    public String typeField() {
+      return type_serialized_name;
     }
     private CreateValueOptions(CreateValueOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       entity = builder.entity;
       value = builder.value;
       metadata = builder.metadata;
       synonyms = builder.synonyms;
       patterns = builder.patterns;
-      valueType = builder.valueType;
+      type_serialized_name = builder.type_serialized_name;
     }
 
     /**
@@ -2585,22 +2585,22 @@ public class ConversationV1Models {
    * CreateValueOptions Builder.
    */
   public class CreateValueOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private List<String> synonyms;
     private List<String> patterns;
-    private String valueType;
+    private String type_serialized_name;
 
-    private CreateValueOptionsBuilder(CreateValueOptions createValueOptions) {
-      workspaceId = createValueOptions.workspaceId;
-      entity = createValueOptions.entity;
-      value = createValueOptions.value;
-      metadata = createValueOptions.metadata;
-      synonyms = createValueOptions.synonyms;
-      patterns = createValueOptions.patterns;
-      valueType = createValueOptions.valueType;
+    private CreateValueOptionsBuilder(CreateValueOptions create_value_options) {
+      workspace_id = create_value_options.workspace_id;
+      entity = create_value_options.entity;
+      value = create_value_options.value;
+      metadata = create_value_options.metadata;
+      synonyms = create_value_options.synonyms;
+      patterns = create_value_options.patterns;
+      type_serialized_name = create_value_options.type_serialized_name;
     }
 
     /**
@@ -2612,12 +2612,12 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param entity the entity
      * @param value the value
      */
-    public CreateValueOptionsBuilder(String workspaceId, String entity, String value) {
-      this.workspaceId = workspaceId;
+    public CreateValueOptionsBuilder(String workspace_id, String entity, String value) {
+      this.workspace_id = workspace_id;
       this.entity = entity;
       this.value = value;
     }
@@ -2625,24 +2625,24 @@ public class ConversationV1Models {
     /**
      * Builds a CreateValueOptions.
      *
-     * @return the createValueOptions
+     * @return the create_value_options
      */
     public CreateValueOptions build() {
       return new CreateValueOptions(this);
     }
 
     /**
-     * Adds an synonym to synonyms.
+     * Adds an synonyms to synonyms.
      *
-     * @param synonym the new synonym
+     * @param synonyms the new synonyms
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder addSynonym(String synonym) {
-      IBMWatsonValidator.notNull(synonym, 'synonym cannot be null');
+    public CreateValueOptionsBuilder addSynonyms(String synonyms) {
+      IBMWatsonValidator.notNull(synonyms, 'synonyms cannot be null');
       if (this.synonyms == null) {
         this.synonyms = new List<String>();
       }
-      this.synonyms.add(synonym);
+      this.synonyms.add(synonyms);
       return this;
     }
 
@@ -2662,13 +2662,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public CreateValueOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -2700,7 +2700,7 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder metadata(Map<String, Object> metadata) {
+    public CreateValueOptionsBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
@@ -2730,13 +2730,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the valueType.
+     * Set the type_serialized_name.
      *
-     * @param valueType the valueType
+     * @param type_serialized_name the type_serialized_name
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder valueType(String valueType) {
-      this.valueType = valueType;
+    public CreateValueOptionsBuilder typeField(String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
       return this;
     }
   }
@@ -2750,10 +2750,10 @@ public class ConversationV1Models {
     private String language;
     private List<CreateIntent> intents;
     private List<CreateEntity> entities;
-    private List<CreateDialogNode> dialogNodes;
+    private List<CreateDialogNode> dialog_nodes;
     private List<CreateCounterexample> counterexamples;
-    private Map<String, Object> metadata;
-    private Boolean learningOptOut;
+    private Map<String, String> metadata;
+    private Boolean learning_opt_out;
     /**
      * Gets the name.
      *
@@ -2805,14 +2805,14 @@ public class ConversationV1Models {
       return entities;
     }
     /**
-     * Gets the dialogNodes.
+     * Gets the dialog_nodes.
      *
      * An array of objects defining the nodes in the workspace dialog.
      *
-     * @return the dialogNodes
+     * @return the dialog_nodes
      */
     public List<CreateDialogNode> dialogNodes() {
-      return dialogNodes;
+      return dialog_nodes;
     }
     /**
      * Gets the counterexamples.
@@ -2831,18 +2831,18 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
-     * Gets the learningOptOut.
+     * Gets the learning_opt_out.
      *
      * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
      *
-     * @return the learningOptOut
+     * @return the learning_opt_out
      */
     public Boolean learningOptOut() {
-      return learningOptOut;
+      return learning_opt_out;
     }
     private CreateWorkspaceOptions(CreateWorkspaceOptionsBuilder builder) {
       name = builder.name;
@@ -2850,10 +2850,10 @@ public class ConversationV1Models {
       language = builder.language;
       intents = builder.intents;
       entities = builder.entities;
-      dialogNodes = builder.dialogNodes;
+      dialog_nodes = builder.dialog_nodes;
       counterexamples = builder.counterexamples;
       metadata = builder.metadata;
-      learningOptOut = builder.learningOptOut;
+      learning_opt_out = builder.learning_opt_out;
     }
 
     /**
@@ -2875,21 +2875,21 @@ public class ConversationV1Models {
     private String language;
     private List<CreateIntent> intents;
     private List<CreateEntity> entities;
-    private List<CreateDialogNode> dialogNodes;
+    private List<CreateDialogNode> dialog_nodes;
     private List<CreateCounterexample> counterexamples;
-    private Map<String, Object> metadata;
-    private Boolean learningOptOut;
+    private Map<String, String> metadata;
+    private Boolean learning_opt_out;
 
-    private CreateWorkspaceOptionsBuilder(CreateWorkspaceOptions createWorkspaceOptions) {
-      name = createWorkspaceOptions.name;
-      description = createWorkspaceOptions.description;
-      language = createWorkspaceOptions.language;
-      intents = createWorkspaceOptions.intents;
-      entities = createWorkspaceOptions.entities;
-      dialogNodes = createWorkspaceOptions.dialogNodes;
-      counterexamples = createWorkspaceOptions.counterexamples;
-      metadata = createWorkspaceOptions.metadata;
-      learningOptOut = createWorkspaceOptions.learningOptOut;
+    private CreateWorkspaceOptionsBuilder(CreateWorkspaceOptions create_workspace_options) {
+      name = create_workspace_options.name;
+      description = create_workspace_options.description;
+      language = create_workspace_options.language;
+      intents = create_workspace_options.intents;
+      entities = create_workspace_options.entities;
+      dialog_nodes = create_workspace_options.dialog_nodes;
+      counterexamples = create_workspace_options.counterexamples;
+      metadata = create_workspace_options.metadata;
+      learning_opt_out = create_workspace_options.learning_opt_out;
     }
 
     /**
@@ -2901,69 +2901,69 @@ public class ConversationV1Models {
     /**
      * Builds a CreateWorkspaceOptions.
      *
-     * @return the createWorkspaceOptions
+     * @return the create_workspace_options
      */
     public CreateWorkspaceOptions build() {
       return new CreateWorkspaceOptions(this);
     }
 
     /**
-     * Adds an intent to intents.
+     * Adds an intents to intents.
      *
-     * @param intent the new intent
+     * @param intents the new intents
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder addIntent(CreateIntent intent) {
-      IBMWatsonValidator.notNull(intent, 'intent cannot be null');
+    public CreateWorkspaceOptionsBuilder addIntents(CreateIntent intents) {
+      IBMWatsonValidator.notNull(intents, 'intents cannot be null');
       if (this.intents == null) {
         this.intents = new List<CreateIntent>();
       }
-      this.intents.add(intent);
+      this.intents.add(intents);
       return this;
     }
 
     /**
-     * Adds an entity to entities.
+     * Adds an entities to entities.
      *
-     * @param entity the new entity
+     * @param entities the new entities
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder addEntity(CreateEntity entity) {
-      IBMWatsonValidator.notNull(entity, 'entity cannot be null');
+    public CreateWorkspaceOptionsBuilder addEntities(CreateEntity entities) {
+      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
       if (this.entities == null) {
         this.entities = new List<CreateEntity>();
       }
-      this.entities.add(entity);
+      this.entities.add(entities);
       return this;
     }
 
     /**
-     * Adds an dialogNode to dialogNodes.
+     * Adds an dialog_nodes to dialog_nodes.
      *
-     * @param dialogNode the new dialogNode
+     * @param dialog_nodes the new dialog_nodes
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder addDialogNode(CreateDialogNode dialogNode) {
-      IBMWatsonValidator.notNull(dialogNode, 'dialogNode cannot be null');
-      if (this.dialogNodes == null) {
-        this.dialogNodes = new List<CreateDialogNode>();
+    public CreateWorkspaceOptionsBuilder addDialogNodes(CreateDialogNode dialog_nodes) {
+      IBMWatsonValidator.notNull(dialog_nodes, 'dialog_nodes cannot be null');
+      if (this.dialog_nodes == null) {
+        this.dialog_nodes = new List<CreateDialogNode>();
       }
-      this.dialogNodes.add(dialogNode);
+      this.dialog_nodes.add(dialog_nodes);
       return this;
     }
 
     /**
-     * Adds an counterexample to counterexamples.
+     * Adds an counterexamples to counterexamples.
      *
-     * @param counterexample the new counterexample
+     * @param counterexamples the new counterexamples
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder addCounterexample(CreateCounterexample counterexample) {
-      IBMWatsonValidator.notNull(counterexample, 'counterexample cannot be null');
+    public CreateWorkspaceOptionsBuilder addCounterexamples(CreateCounterexample counterexamples) {
+      IBMWatsonValidator.notNull(counterexamples, 'counterexamples cannot be null');
       if (this.counterexamples == null) {
         this.counterexamples = new List<CreateCounterexample>();
       }
-      this.counterexamples.add(counterexample);
+      this.counterexamples.add(counterexamples);
       return this;
     }
 
@@ -3025,14 +3025,14 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the dialogNodes.
-     * Existing dialogNodes will be replaced.
+     * Set the dialog_nodes.
+     * Existing dialog_nodes will be replaced.
      *
-     * @param dialogNodes the dialogNodes
+     * @param dialog_nodes the dialog_nodes
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder dialogNodes(List<CreateDialogNode> dialogNodes) {
-      this.dialogNodes = dialogNodes;
+    public CreateWorkspaceOptionsBuilder dialogNodes(List<CreateDialogNode> dialog_nodes) {
+      this.dialog_nodes = dialog_nodes;
       return this;
     }
 
@@ -3054,19 +3054,19 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder metadata(Map<String, Object> metadata) {
+    public CreateWorkspaceOptionsBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
 
     /**
-     * Set the learningOptOut.
+     * Set the learning_opt_out.
      *
-     * @param learningOptOut the learningOptOut
+     * @param learning_opt_out the learning_opt_out
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder learningOptOut(Boolean learningOptOut) {
-      this.learningOptOut = learningOptOut;
+    public CreateWorkspaceOptionsBuilder learningOptOut(Boolean learning_opt_out) {
+      this.learning_opt_out = learning_opt_out;
       return this;
     }
   }
@@ -3075,17 +3075,17 @@ public class ConversationV1Models {
    * The deleteCounterexample options.
    */
   public class DeleteCounterexampleOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String text;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the text.
@@ -3098,9 +3098,9 @@ public class ConversationV1Models {
       return text;
     }
     private DeleteCounterexampleOptions(DeleteCounterexampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.text, 'text cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       text = builder.text;
     }
 
@@ -3118,12 +3118,12 @@ public class ConversationV1Models {
    * DeleteCounterexampleOptions Builder.
    */
   public class DeleteCounterexampleOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String text;
 
-    private DeleteCounterexampleOptionsBuilder(DeleteCounterexampleOptions deleteCounterexampleOptions) {
-      workspaceId = deleteCounterexampleOptions.workspaceId;
-      text = deleteCounterexampleOptions.text;
+    private DeleteCounterexampleOptionsBuilder(DeleteCounterexampleOptions delete_counterexample_options) {
+      workspace_id = delete_counterexample_options.workspace_id;
+      text = delete_counterexample_options.text;
     }
 
     /**
@@ -3135,31 +3135,31 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param text the text
      */
-    public DeleteCounterexampleOptionsBuilder(String workspaceId, String text) {
-      this.workspaceId = workspaceId;
+    public DeleteCounterexampleOptionsBuilder(String workspace_id, String text) {
+      this.workspace_id = workspace_id;
       this.text = text;
     }
 
     /**
      * Builds a DeleteCounterexampleOptions.
      *
-     * @return the deleteCounterexampleOptions
+     * @return the delete_counterexample_options
      */
     public DeleteCounterexampleOptions build() {
       return new DeleteCounterexampleOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the DeleteCounterexampleOptions builder
      */
-    public DeleteCounterexampleOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public DeleteCounterexampleOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -3179,33 +3179,33 @@ public class ConversationV1Models {
    * The deleteDialogNode options.
    */
   public class DeleteDialogNodeOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
-    private String dialogNode;
+    private String workspace_id;
+    private String dialog_node;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
-     * Gets the dialogNode.
+     * Gets the dialog_node.
      *
      * The dialog node ID (for example, `get_order`).
      *
-     * @return the dialogNode
+     * @return the dialog_node
      */
     public String dialogNode() {
-      return dialogNode;
+      return dialog_node;
     }
     private DeleteDialogNodeOptions(DeleteDialogNodeOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.dialogNode, 'dialogNode cannot be empty');
-      workspaceId = builder.workspaceId;
-      dialogNode = builder.dialogNode;
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.dialog_node, 'dialog_node cannot be empty');
+      workspace_id = builder.workspace_id;
+      dialog_node = builder.dialog_node;
     }
 
     /**
@@ -3222,12 +3222,12 @@ public class ConversationV1Models {
    * DeleteDialogNodeOptions Builder.
    */
   public class DeleteDialogNodeOptionsBuilder {
-    private String workspaceId;
-    private String dialogNode;
+    private String workspace_id;
+    private String dialog_node;
 
-    private DeleteDialogNodeOptionsBuilder(DeleteDialogNodeOptions deleteDialogNodeOptions) {
-      workspaceId = deleteDialogNodeOptions.workspaceId;
-      dialogNode = deleteDialogNodeOptions.dialogNode;
+    private DeleteDialogNodeOptionsBuilder(DeleteDialogNodeOptions delete_dialog_node_options) {
+      workspace_id = delete_dialog_node_options.workspace_id;
+      dialog_node = delete_dialog_node_options.dialog_node;
     }
 
     /**
@@ -3239,42 +3239,42 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
-     * @param dialogNode the dialogNode
+     * @param workspace_id the workspace_id
+     * @param dialog_node the dialog_node
      */
-    public DeleteDialogNodeOptionsBuilder(String workspaceId, String dialogNode) {
-      this.workspaceId = workspaceId;
-      this.dialogNode = dialogNode;
+    public DeleteDialogNodeOptionsBuilder(String workspace_id, String dialog_node) {
+      this.workspace_id = workspace_id;
+      this.dialog_node = dialog_node;
     }
 
     /**
      * Builds a DeleteDialogNodeOptions.
      *
-     * @return the deleteDialogNodeOptions
+     * @return the delete_dialog_node_options
      */
     public DeleteDialogNodeOptions build() {
       return new DeleteDialogNodeOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the DeleteDialogNodeOptions builder
      */
-    public DeleteDialogNodeOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public DeleteDialogNodeOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
     /**
-     * Set the dialogNode.
+     * Set the dialog_node.
      *
-     * @param dialogNode the dialogNode
+     * @param dialog_node the dialog_node
      * @return the DeleteDialogNodeOptions builder
      */
-    public DeleteDialogNodeOptionsBuilder dialogNode(String dialogNode) {
-      this.dialogNode = dialogNode;
+    public DeleteDialogNodeOptionsBuilder dialogNode(String dialog_node) {
+      this.dialog_node = dialog_node;
       return this;
     }
   }
@@ -3283,17 +3283,17 @@ public class ConversationV1Models {
    * The deleteEntity options.
    */
   public class DeleteEntityOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the entity.
@@ -3306,9 +3306,9 @@ public class ConversationV1Models {
       return entity;
     }
     private DeleteEntityOptions(DeleteEntityOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       entity = builder.entity;
     }
 
@@ -3326,12 +3326,12 @@ public class ConversationV1Models {
    * DeleteEntityOptions Builder.
    */
   public class DeleteEntityOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
 
-    private DeleteEntityOptionsBuilder(DeleteEntityOptions deleteEntityOptions) {
-      workspaceId = deleteEntityOptions.workspaceId;
-      entity = deleteEntityOptions.entity;
+    private DeleteEntityOptionsBuilder(DeleteEntityOptions delete_entity_options) {
+      workspace_id = delete_entity_options.workspace_id;
+      entity = delete_entity_options.entity;
     }
 
     /**
@@ -3343,31 +3343,31 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param entity the entity
      */
-    public DeleteEntityOptionsBuilder(String workspaceId, String entity) {
-      this.workspaceId = workspaceId;
+    public DeleteEntityOptionsBuilder(String workspace_id, String entity) {
+      this.workspace_id = workspace_id;
       this.entity = entity;
     }
 
     /**
      * Builds a DeleteEntityOptions.
      *
-     * @return the deleteEntityOptions
+     * @return the delete_entity_options
      */
     public DeleteEntityOptions build() {
       return new DeleteEntityOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the DeleteEntityOptions builder
      */
-    public DeleteEntityOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public DeleteEntityOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -3387,18 +3387,18 @@ public class ConversationV1Models {
    * The deleteExample options.
    */
   public class DeleteExampleOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
     private String text;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the intent.
@@ -3421,10 +3421,10 @@ public class ConversationV1Models {
       return text;
     }
     private DeleteExampleOptions(DeleteExampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent, 'intent cannot be empty');
       IBMWatsonValidator.notEmpty(builder.text, 'text cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       intent = builder.intent;
       text = builder.text;
     }
@@ -3443,14 +3443,14 @@ public class ConversationV1Models {
    * DeleteExampleOptions Builder.
    */
   public class DeleteExampleOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
     private String text;
 
-    private DeleteExampleOptionsBuilder(DeleteExampleOptions deleteExampleOptions) {
-      workspaceId = deleteExampleOptions.workspaceId;
-      intent = deleteExampleOptions.intent;
-      text = deleteExampleOptions.text;
+    private DeleteExampleOptionsBuilder(DeleteExampleOptions delete_example_options) {
+      workspace_id = delete_example_options.workspace_id;
+      intent = delete_example_options.intent;
+      text = delete_example_options.text;
     }
 
     /**
@@ -3462,12 +3462,12 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param intent the intent
      * @param text the text
      */
-    public DeleteExampleOptionsBuilder(String workspaceId, String intent, String text) {
-      this.workspaceId = workspaceId;
+    public DeleteExampleOptionsBuilder(String workspace_id, String intent, String text) {
+      this.workspace_id = workspace_id;
       this.intent = intent;
       this.text = text;
     }
@@ -3475,20 +3475,20 @@ public class ConversationV1Models {
     /**
      * Builds a DeleteExampleOptions.
      *
-     * @return the deleteExampleOptions
+     * @return the delete_example_options
      */
     public DeleteExampleOptions build() {
       return new DeleteExampleOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the DeleteExampleOptions builder
      */
-    public DeleteExampleOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public DeleteExampleOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -3519,17 +3519,17 @@ public class ConversationV1Models {
    * The deleteIntent options.
    */
   public class DeleteIntentOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the intent.
@@ -3542,9 +3542,9 @@ public class ConversationV1Models {
       return intent;
     }
     private DeleteIntentOptions(DeleteIntentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent, 'intent cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       intent = builder.intent;
     }
 
@@ -3562,12 +3562,12 @@ public class ConversationV1Models {
    * DeleteIntentOptions Builder.
    */
   public class DeleteIntentOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
 
-    private DeleteIntentOptionsBuilder(DeleteIntentOptions deleteIntentOptions) {
-      workspaceId = deleteIntentOptions.workspaceId;
-      intent = deleteIntentOptions.intent;
+    private DeleteIntentOptionsBuilder(DeleteIntentOptions delete_intent_options) {
+      workspace_id = delete_intent_options.workspace_id;
+      intent = delete_intent_options.intent;
     }
 
     /**
@@ -3579,31 +3579,31 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param intent the intent
      */
-    public DeleteIntentOptionsBuilder(String workspaceId, String intent) {
-      this.workspaceId = workspaceId;
+    public DeleteIntentOptionsBuilder(String workspace_id, String intent) {
+      this.workspace_id = workspace_id;
       this.intent = intent;
     }
 
     /**
      * Builds a DeleteIntentOptions.
      *
-     * @return the deleteIntentOptions
+     * @return the delete_intent_options
      */
     public DeleteIntentOptions build() {
       return new DeleteIntentOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the DeleteIntentOptions builder
      */
-    public DeleteIntentOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public DeleteIntentOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -3623,19 +3623,19 @@ public class ConversationV1Models {
    * The deleteSynonym options.
    */
   public class DeleteSynonymOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
     private String synonym;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the entity.
@@ -3668,11 +3668,11 @@ public class ConversationV1Models {
       return synonym;
     }
     private DeleteSynonymOptions(DeleteSynonymOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       IBMWatsonValidator.notEmpty(builder.value, 'value cannot be empty');
       IBMWatsonValidator.notEmpty(builder.synonym, 'synonym cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       entity = builder.entity;
       value = builder.value;
       synonym = builder.synonym;
@@ -3692,16 +3692,16 @@ public class ConversationV1Models {
    * DeleteSynonymOptions Builder.
    */
   public class DeleteSynonymOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
     private String synonym;
 
-    private DeleteSynonymOptionsBuilder(DeleteSynonymOptions deleteSynonymOptions) {
-      workspaceId = deleteSynonymOptions.workspaceId;
-      entity = deleteSynonymOptions.entity;
-      value = deleteSynonymOptions.value;
-      synonym = deleteSynonymOptions.synonym;
+    private DeleteSynonymOptionsBuilder(DeleteSynonymOptions delete_synonym_options) {
+      workspace_id = delete_synonym_options.workspace_id;
+      entity = delete_synonym_options.entity;
+      value = delete_synonym_options.value;
+      synonym = delete_synonym_options.synonym;
     }
 
     /**
@@ -3713,13 +3713,13 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param entity the entity
      * @param value the value
      * @param synonym the synonym
      */
-    public DeleteSynonymOptionsBuilder(String workspaceId, String entity, String value, String synonym) {
-      this.workspaceId = workspaceId;
+    public DeleteSynonymOptionsBuilder(String workspace_id, String entity, String value, String synonym) {
+      this.workspace_id = workspace_id;
       this.entity = entity;
       this.value = value;
       this.synonym = synonym;
@@ -3728,20 +3728,20 @@ public class ConversationV1Models {
     /**
      * Builds a DeleteSynonymOptions.
      *
-     * @return the deleteSynonymOptions
+     * @return the delete_synonym_options
      */
     public DeleteSynonymOptions build() {
       return new DeleteSynonymOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the DeleteSynonymOptions builder
      */
-    public DeleteSynonymOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public DeleteSynonymOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -3783,18 +3783,18 @@ public class ConversationV1Models {
    * The deleteValue options.
    */
   public class DeleteValueOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the entity.
@@ -3817,10 +3817,10 @@ public class ConversationV1Models {
       return value;
     }
     private DeleteValueOptions(DeleteValueOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       IBMWatsonValidator.notEmpty(builder.value, 'value cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       entity = builder.entity;
       value = builder.value;
     }
@@ -3839,14 +3839,14 @@ public class ConversationV1Models {
    * DeleteValueOptions Builder.
    */
   public class DeleteValueOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
 
-    private DeleteValueOptionsBuilder(DeleteValueOptions deleteValueOptions) {
-      workspaceId = deleteValueOptions.workspaceId;
-      entity = deleteValueOptions.entity;
-      value = deleteValueOptions.value;
+    private DeleteValueOptionsBuilder(DeleteValueOptions delete_value_options) {
+      workspace_id = delete_value_options.workspace_id;
+      entity = delete_value_options.entity;
+      value = delete_value_options.value;
     }
 
     /**
@@ -3858,12 +3858,12 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param entity the entity
      * @param value the value
      */
-    public DeleteValueOptionsBuilder(String workspaceId, String entity, String value) {
-      this.workspaceId = workspaceId;
+    public DeleteValueOptionsBuilder(String workspace_id, String entity, String value) {
+      this.workspace_id = workspace_id;
       this.entity = entity;
       this.value = value;
     }
@@ -3871,20 +3871,20 @@ public class ConversationV1Models {
     /**
      * Builds a DeleteValueOptions.
      *
-     * @return the deleteValueOptions
+     * @return the delete_value_options
      */
     public DeleteValueOptions build() {
       return new DeleteValueOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the DeleteValueOptions builder
      */
-    public DeleteValueOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public DeleteValueOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -3915,20 +3915,20 @@ public class ConversationV1Models {
    * The deleteWorkspace options.
    */
   public class DeleteWorkspaceOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     private DeleteWorkspaceOptions(DeleteWorkspaceOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
-      workspaceId = builder.workspaceId;
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
+      workspace_id = builder.workspace_id;
     }
 
     /**
@@ -3945,10 +3945,10 @@ public class ConversationV1Models {
    * DeleteWorkspaceOptions Builder.
    */
   public class DeleteWorkspaceOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
 
-    private DeleteWorkspaceOptionsBuilder(DeleteWorkspaceOptions deleteWorkspaceOptions) {
-      workspaceId = deleteWorkspaceOptions.workspaceId;
+    private DeleteWorkspaceOptionsBuilder(DeleteWorkspaceOptions delete_workspace_options) {
+      workspace_id = delete_workspace_options.workspace_id;
     }
 
     /**
@@ -3960,29 +3960,29 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      */
-    public DeleteWorkspaceOptionsBuilder(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public DeleteWorkspaceOptionsBuilder(String workspace_id) {
+      this.workspace_id = workspace_id;
     }
 
     /**
      * Builds a DeleteWorkspaceOptions.
      *
-     * @return the deleteWorkspaceOptions
+     * @return the delete_workspace_options
      */
     public DeleteWorkspaceOptions build() {
       return new DeleteWorkspaceOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the DeleteWorkspaceOptions builder
      */
-    public DeleteWorkspaceOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public DeleteWorkspaceOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
   }
@@ -3991,31 +3991,31 @@ public class ConversationV1Models {
    * DialogNode.
    */
   public class DialogNode extends IBMWatsonGenericModel {
-    private String dialogNodeId;
+    private String dialog_node;
     private String description;
     private String conditions;
     private String parent;
-    private String previousSibling;
-    private Map<String, Object> output;
-    private Map<String, Object> context;
-    private Map<String, Object> metadata;
-    private DialogNodeNextStep nextStep;
+    private String previous_sibling;
+    private Map<String, String> output;
+    private Map<String, String> context;
+    private Map<String, String> metadata;
+    private DialogNodeNextStep next_step;
     private Datetime created;
     private Datetime updated;
     private List<DialogNodeAction> actions;
     private String title;
-    private String nodeType;
-    private String eventName;
+    private String type_serialized_name;
+    private String event_name;
     private String variable;
     /**
-     * Gets the dialogNodeId.
+     * Gets the dialog_node.
      *
      * The dialog node ID.
      *
-     * @return the dialogNodeId
+     * @return the dialog_node
      */
-    public String getDialogNodeId() {
-      return dialogNodeId;
+    public String getDialogNode() {
+      return dialog_node;
     }
     /**
      * Gets the description.
@@ -4048,14 +4048,14 @@ public class ConversationV1Models {
       return parent;
     }
     /**
-     * Gets the previousSibling.
+     * Gets the previous_sibling.
      *
      * The ID of the previous sibling dialog node.
      *
-     * @return the previousSibling
+     * @return the previous_sibling
      */
     public String getPreviousSibling() {
-      return previousSibling;
+      return previous_sibling;
     }
     /**
      * Gets the output.
@@ -4064,7 +4064,7 @@ public class ConversationV1Models {
      *
      * @return the output
      */
-    public Map<String, Object> getOutput() {
+    public Map<String, String> getOutput() {
       return output;
     }
     /**
@@ -4074,7 +4074,7 @@ public class ConversationV1Models {
      *
      * @return the context
      */
-    public Map<String, Object> getContext() {
+    public Map<String, String> getContext() {
       return context;
     }
     /**
@@ -4084,18 +4084,18 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
       return metadata;
     }
     /**
-     * Gets the nextStep.
+     * Gets the next_step.
      *
      * The next step to execute following this dialog node.
      *
-     * @return the nextStep
+     * @return the next_step
      */
     public DialogNodeNextStep getNextStep() {
-      return nextStep;
+      return next_step;
     }
     /**
      * Gets the created.
@@ -4138,24 +4138,24 @@ public class ConversationV1Models {
       return title;
     }
     /**
-     * Gets the nodeType.
+     * Gets the type_serialized_name.
      *
      * How the dialog node is processed.
      *
-     * @return the nodeType
+     * @return the type_serialized_name
      */
-    public String getNodeType() {
-      return nodeType;
+    public String getType() {
+      return type_serialized_name;
     }
     /**
-     * Gets the eventName.
+     * Gets the event_name.
      *
      * How an `event_handler` node is processed.
      *
-     * @return the eventName
+     * @return the event_name
      */
     public String getEventName() {
-      return eventName;
+      return event_name;
     }
     /**
      * Gets the variable.
@@ -4169,12 +4169,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the dialogNodeId.
+     * Sets the dialog_node.
      *
-     * @param dialogNodeId the new dialogNodeId
+     * @param dialog_node the new dialog_node
      */
-    public void setDialogNodeId(final String dialogNodeId) {
-      this.dialogNodeId = dialogNodeId;
+    public void setDialogNode(final String dialog_node) {
+      this.dialog_node = dialog_node;
     }
 
     /**
@@ -4205,12 +4205,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the previousSibling.
+     * Sets the previous_sibling.
      *
-     * @param previousSibling the new previousSibling
+     * @param previous_sibling the new previous_sibling
      */
-    public void setPreviousSibling(final String previousSibling) {
-      this.previousSibling = previousSibling;
+    public void setPreviousSibling(final String previous_sibling) {
+      this.previous_sibling = previous_sibling;
     }
 
     /**
@@ -4218,7 +4218,7 @@ public class ConversationV1Models {
      *
      * @param output the new output
      */
-    public void setOutput(final Map<String, Object> output) {
+    public void setOutput(final Map<String, String> output) {
       this.output = output;
     }
 
@@ -4227,7 +4227,7 @@ public class ConversationV1Models {
      *
      * @param context the new context
      */
-    public void setContext(final Map<String, Object> context) {
+    public void setContext(final Map<String, String> context) {
       this.context = context;
     }
 
@@ -4236,17 +4236,17 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.metadata = metadata;
     }
 
     /**
-     * Sets the nextStep.
+     * Sets the next_step.
      *
-     * @param nextStep the new nextStep
+     * @param next_step the new next_step
      */
-    public void setNextStep(final DialogNodeNextStep nextStep) {
-      this.nextStep = nextStep;
+    public void setNextStep(final DialogNodeNextStep next_step) {
+      this.next_step = next_step;
     }
 
     /**
@@ -4268,21 +4268,21 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the nodeType.
+     * Sets the type_serialized_name.
      *
-     * @param nodeType the new nodeType
+     * @param type_serialized_name the new type_serialized_name
      */
-    public void setNodeType(final String nodeType) {
-      this.nodeType = nodeType;
+    public void setType(final String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
     }
 
     /**
-     * Sets the eventName.
+     * Sets the event_name.
      *
-     * @param eventName the new eventName
+     * @param event_name the new event_name
      */
-    public void setEventName(final String eventName) {
-      this.eventName = eventName;
+    public void setEventName(final String event_name) {
+      this.event_name = event_name;
     }
 
     /**
@@ -4300,9 +4300,9 @@ public class ConversationV1Models {
    */
   public class DialogNodeAction extends IBMWatsonGenericModel {
     private String name;
-    private String actionType;
-    private Map<String, Object> parameters;
-    private String resultVariable;
+    private String type_serialized_name;
+    private Map<String, String> parameters;
+    private String result_variable;
     private String credentials;
     /**
      * Gets the name.
@@ -4315,14 +4315,14 @@ public class ConversationV1Models {
       return name;
     }
     /**
-     * Gets the actionType.
+     * Gets the type_serialized_name.
      *
      * The type of action to invoke.
      *
-     * @return the actionType
+     * @return the type_serialized_name
      */
-    public String getActionType() {
-      return actionType;
+    public String getType() {
+      return type_serialized_name;
     }
     /**
      * Gets the parameters.
@@ -4331,18 +4331,18 @@ public class ConversationV1Models {
      *
      * @return the parameters
      */
-    public Map<String, Object> getParameters() {
+    public Map<String, String> getParameters() {
       return parameters;
     }
     /**
-     * Gets the resultVariable.
+     * Gets the result_variable.
      *
      * The location in the dialog context where the result of the action is stored.
      *
-     * @return the resultVariable
+     * @return the result_variable
      */
     public String getResultVariable() {
-      return resultVariable;
+      return result_variable;
     }
     /**
      * Gets the credentials.
@@ -4365,12 +4365,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the actionType.
+     * Sets the type_serialized_name.
      *
-     * @param actionType the new actionType
+     * @param type_serialized_name the new type_serialized_name
      */
-    public void setActionType(final String actionType) {
-      this.actionType = actionType;
+    public void setType(final String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
     }
 
     /**
@@ -4378,17 +4378,17 @@ public class ConversationV1Models {
      *
      * @param parameters the new parameters
      */
-    public void setParameters(final Map<String, Object> parameters) {
+    public void setParameters(final Map<String, String> parameters) {
       this.parameters = parameters;
     }
 
     /**
-     * Sets the resultVariable.
+     * Sets the result_variable.
      *
-     * @param resultVariable the new resultVariable
+     * @param result_variable the new result_variable
      */
-    public void setResultVariable(final String resultVariable) {
-      this.resultVariable = resultVariable;
+    public void setResultVariable(final String result_variable) {
+      this.result_variable = result_variable;
     }
 
     /**
@@ -4405,15 +4405,15 @@ public class ConversationV1Models {
    * DialogNodeCollection.
    */
   public class DialogNodeCollection extends IBMWatsonGenericModel {
-    private List<DialogNode> dialogNodes;
+    private List<DialogNode> dialog_nodes;
     private Pagination pagination;
     /**
-     * Gets the dialogNodes.
+     * Gets the dialog_nodes.
      *
-     * @return the dialogNodes
+     * @return the dialog_nodes
      */
     public List<DialogNode> getDialogNodes() {
-      return dialogNodes;
+      return dialog_nodes;
     }
     /**
      * Gets the pagination.
@@ -4427,12 +4427,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the dialogNodes.
+     * Sets the dialog_nodes.
      *
-     * @param dialogNodes the new dialogNodes
+     * @param dialog_nodes the new dialog_nodes
      */
-    public void setDialogNodes(final List<DialogNode> dialogNodes) {
-      this.dialogNodes = dialogNodes;
+    public void setDialogNodes(final List<DialogNode> dialog_nodes) {
+      this.dialog_nodes = dialog_nodes;
     }
 
     /**
@@ -4450,7 +4450,7 @@ public class ConversationV1Models {
    */
   public class DialogNodeNextStep extends IBMWatsonGenericModel {
     private String behavior;
-    private String dialogNode;
+    private String dialog_node;
     private String selector;
     /**
      * Gets the behavior.
@@ -4463,14 +4463,14 @@ public class ConversationV1Models {
       return behavior;
     }
     /**
-     * Gets the dialogNode.
+     * Gets the dialog_node.
      *
      * The ID of the dialog node to process next.
      *
-     * @return the dialogNode
+     * @return the dialog_node
      */
     public String getDialogNode() {
-      return dialogNode;
+      return dialog_node;
     }
     /**
      * Gets the selector.
@@ -4493,12 +4493,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the dialogNode.
+     * Sets the dialog_node.
      *
-     * @param dialogNode the new dialogNode
+     * @param dialog_node the new dialog_node
      */
-    public void setDialogNode(final String dialogNode) {
-      this.dialogNode = dialogNode;
+    public void setDialogNode(final String dialog_node) {
+      this.dialog_node = dialog_node;
     }
 
     /**
@@ -4515,21 +4515,21 @@ public class ConversationV1Models {
    * Entity.
    */
   public class Entity extends IBMWatsonGenericModel {
-    private String entityName;
+    private String entity;
     private Datetime created;
     private Datetime updated;
     private String description;
-    private Map<String, Object> metadata;
-    private Boolean fuzzyMatch;
+    private Map<String, String> metadata;
+    private Boolean fuzzy_match;
     /**
-     * Gets the entityName.
+     * Gets the entity.
      *
      * The name of the entity.
      *
-     * @return the entityName
+     * @return the entity
      */
-    public String getEntityName() {
-      return entityName;
+    public String getEntity() {
+      return entity;
     }
     /**
      * Gets the created.
@@ -4568,27 +4568,27 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
       return metadata;
     }
     /**
-     * Gets the fuzzyMatch.
+     * Gets the fuzzy_match.
      *
      * Whether fuzzy matching is used for the entity.
      *
-     * @return the fuzzyMatch
+     * @return the fuzzy_match
      */
     public Boolean isFuzzyMatch() {
-      return fuzzyMatch;
+      return fuzzy_match;
     }
 
     /**
-     * Sets the entityName.
+     * Sets the entity.
      *
-     * @param entityName the new entityName
+     * @param entity the new entity
      */
-    public void setEntityName(final String entityName) {
-      this.entityName = entityName;
+    public void setEntity(final String entity) {
+      this.entity = entity;
     }
 
     /**
@@ -4605,17 +4605,17 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.metadata = metadata;
     }
 
     /**
-     * Sets the fuzzyMatch.
+     * Sets the fuzzy_match.
      *
-     * @param fuzzyMatch the new fuzzyMatch
+     * @param fuzzy_match the new fuzzy_match
      */
-    public void setFuzzyMatch(final Boolean fuzzyMatch) {
-      this.fuzzyMatch = fuzzyMatch;
+    public void setFuzzyMatch(final Boolean fuzzy_match) {
+      this.fuzzy_match = fuzzy_match;
     }
   }
 
@@ -4669,22 +4669,22 @@ public class ConversationV1Models {
    * EntityExport.
    */
   public class EntityExport extends IBMWatsonGenericModel {
-    private String entityName;
+    private String entity;
     private Datetime created;
     private Datetime updated;
     private String description;
-    private Map<String, Object> metadata;
-    private Boolean fuzzyMatch;
+    private Map<String, String> metadata;
+    private Boolean fuzzy_match;
     private List<ValueExport> values;
     /**
-     * Gets the entityName.
+     * Gets the entity.
      *
      * The name of the entity.
      *
-     * @return the entityName
+     * @return the entity
      */
-    public String getEntityName() {
-      return entityName;
+    public String getEntity() {
+      return entity;
     }
     /**
      * Gets the created.
@@ -4723,18 +4723,18 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
       return metadata;
     }
     /**
-     * Gets the fuzzyMatch.
+     * Gets the fuzzy_match.
      *
      * Whether fuzzy matching is used for the entity.
      *
-     * @return the fuzzyMatch
+     * @return the fuzzy_match
      */
     public Boolean isFuzzyMatch() {
-      return fuzzyMatch;
+      return fuzzy_match;
     }
     /**
      * Gets the values.
@@ -4748,12 +4748,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the entityName.
+     * Sets the entity.
      *
-     * @param entityName the new entityName
+     * @param entity the new entity
      */
-    public void setEntityName(final String entityName) {
-      this.entityName = entityName;
+    public void setEntity(final String entity) {
+      this.entity = entity;
     }
 
     /**
@@ -4770,17 +4770,17 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.metadata = metadata;
     }
 
     /**
-     * Sets the fuzzyMatch.
+     * Sets the fuzzy_match.
      *
-     * @param fuzzyMatch the new fuzzyMatch
+     * @param fuzzy_match the new fuzzy_match
      */
-    public void setFuzzyMatch(final Boolean fuzzyMatch) {
-      this.fuzzyMatch = fuzzyMatch;
+    public void setFuzzyMatch(final Boolean fuzzy_match) {
+      this.fuzzy_match = fuzzy_match;
     }
 
     /**
@@ -4797,18 +4797,18 @@ public class ConversationV1Models {
    * Example.
    */
   public class Example extends IBMWatsonGenericModel {
-    private String exampleText;
+    private String text;
     private Datetime created;
     private Datetime updated;
     /**
-     * Gets the exampleText.
+     * Gets the text.
      *
      * The text of the example.
      *
-     * @return the exampleText
+     * @return the text
      */
-    public String getExampleText() {
-      return exampleText;
+    public String getText() {
+      return text;
     }
     /**
      * Gets the created.
@@ -4832,12 +4832,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the exampleText.
+     * Sets the text.
      *
-     * @param exampleText the new exampleText
+     * @param text the new text
      */
-    public void setExampleText(final String exampleText) {
-      this.exampleText = exampleText;
+    public void setText(final String text) {
+      this.text = text;
     }
   }
 
@@ -4891,17 +4891,17 @@ public class ConversationV1Models {
    * The getCounterexample options.
    */
   public class GetCounterexampleOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String text;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the text.
@@ -4914,9 +4914,9 @@ public class ConversationV1Models {
       return text;
     }
     private GetCounterexampleOptions(GetCounterexampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.text, 'text cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       text = builder.text;
     }
 
@@ -4934,12 +4934,12 @@ public class ConversationV1Models {
    * GetCounterexampleOptions Builder.
    */
   public class GetCounterexampleOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String text;
 
-    private GetCounterexampleOptionsBuilder(GetCounterexampleOptions getCounterexampleOptions) {
-      workspaceId = getCounterexampleOptions.workspaceId;
-      text = getCounterexampleOptions.text;
+    private GetCounterexampleOptionsBuilder(GetCounterexampleOptions get_counterexample_options) {
+      workspace_id = get_counterexample_options.workspace_id;
+      text = get_counterexample_options.text;
     }
 
     /**
@@ -4951,31 +4951,31 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param text the text
      */
-    public GetCounterexampleOptionsBuilder(String workspaceId, String text) {
-      this.workspaceId = workspaceId;
+    public GetCounterexampleOptionsBuilder(String workspace_id, String text) {
+      this.workspace_id = workspace_id;
       this.text = text;
     }
 
     /**
      * Builds a GetCounterexampleOptions.
      *
-     * @return the getCounterexampleOptions
+     * @return the get_counterexample_options
      */
     public GetCounterexampleOptions build() {
       return new GetCounterexampleOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the GetCounterexampleOptions builder
      */
-    public GetCounterexampleOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public GetCounterexampleOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -4995,33 +4995,33 @@ public class ConversationV1Models {
    * The getDialogNode options.
    */
   public class GetDialogNodeOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
-    private String dialogNode;
+    private String workspace_id;
+    private String dialog_node;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
-     * Gets the dialogNode.
+     * Gets the dialog_node.
      *
      * The dialog node ID (for example, `get_order`).
      *
-     * @return the dialogNode
+     * @return the dialog_node
      */
     public String dialogNode() {
-      return dialogNode;
+      return dialog_node;
     }
     private GetDialogNodeOptions(GetDialogNodeOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.dialogNode, 'dialogNode cannot be empty');
-      workspaceId = builder.workspaceId;
-      dialogNode = builder.dialogNode;
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.dialog_node, 'dialog_node cannot be empty');
+      workspace_id = builder.workspace_id;
+      dialog_node = builder.dialog_node;
     }
 
     /**
@@ -5038,12 +5038,12 @@ public class ConversationV1Models {
    * GetDialogNodeOptions Builder.
    */
   public class GetDialogNodeOptionsBuilder {
-    private String workspaceId;
-    private String dialogNode;
+    private String workspace_id;
+    private String dialog_node;
 
-    private GetDialogNodeOptionsBuilder(GetDialogNodeOptions getDialogNodeOptions) {
-      workspaceId = getDialogNodeOptions.workspaceId;
-      dialogNode = getDialogNodeOptions.dialogNode;
+    private GetDialogNodeOptionsBuilder(GetDialogNodeOptions get_dialog_node_options) {
+      workspace_id = get_dialog_node_options.workspace_id;
+      dialog_node = get_dialog_node_options.dialog_node;
     }
 
     /**
@@ -5055,42 +5055,42 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
-     * @param dialogNode the dialogNode
+     * @param workspace_id the workspace_id
+     * @param dialog_node the dialog_node
      */
-    public GetDialogNodeOptionsBuilder(String workspaceId, String dialogNode) {
-      this.workspaceId = workspaceId;
-      this.dialogNode = dialogNode;
+    public GetDialogNodeOptionsBuilder(String workspace_id, String dialog_node) {
+      this.workspace_id = workspace_id;
+      this.dialog_node = dialog_node;
     }
 
     /**
      * Builds a GetDialogNodeOptions.
      *
-     * @return the getDialogNodeOptions
+     * @return the get_dialog_node_options
      */
     public GetDialogNodeOptions build() {
       return new GetDialogNodeOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the GetDialogNodeOptions builder
      */
-    public GetDialogNodeOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public GetDialogNodeOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
     /**
-     * Set the dialogNode.
+     * Set the dialog_node.
      *
-     * @param dialogNode the dialogNode
+     * @param dialog_node the dialog_node
      * @return the GetDialogNodeOptions builder
      */
-    public GetDialogNodeOptionsBuilder dialogNode(String dialogNode) {
-      this.dialogNode = dialogNode;
+    public GetDialogNodeOptionsBuilder dialogNode(String dialog_node) {
+      this.dialog_node = dialog_node;
       return this;
     }
   }
@@ -5099,18 +5099,18 @@ public class ConversationV1Models {
    * The getEntity options.
    */
   public class GetEntityOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the entity.
@@ -5123,21 +5123,21 @@ public class ConversationV1Models {
       return entity;
     }
     /**
-     * Gets the xexport.
+     * Gets the export_serialized_name.
      *
      * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      *
-     * @return the xexport
+     * @return the export_serialized_name
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean exportField() {
+      return export_serialized_name;
     }
     private GetEntityOptions(GetEntityOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       entity = builder.entity;
-      xexport = builder.xexport;
+      export_serialized_name = builder.export_serialized_name;
     }
 
     /**
@@ -5154,14 +5154,14 @@ public class ConversationV1Models {
    * GetEntityOptions Builder.
    */
   public class GetEntityOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
 
-    private GetEntityOptionsBuilder(GetEntityOptions getEntityOptions) {
-      workspaceId = getEntityOptions.workspaceId;
-      entity = getEntityOptions.entity;
-      xexport = getEntityOptions.xexport;
+    private GetEntityOptionsBuilder(GetEntityOptions get_entity_options) {
+      workspace_id = get_entity_options.workspace_id;
+      entity = get_entity_options.entity;
+      export_serialized_name = get_entity_options.export_serialized_name;
     }
 
     /**
@@ -5173,31 +5173,31 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param entity the entity
      */
-    public GetEntityOptionsBuilder(String workspaceId, String entity) {
-      this.workspaceId = workspaceId;
+    public GetEntityOptionsBuilder(String workspace_id, String entity) {
+      this.workspace_id = workspace_id;
       this.entity = entity;
     }
 
     /**
      * Builds a GetEntityOptions.
      *
-     * @return the getEntityOptions
+     * @return the get_entity_options
      */
     public GetEntityOptions build() {
       return new GetEntityOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the GetEntityOptions builder
      */
-    public GetEntityOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public GetEntityOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -5213,13 +5213,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the export_serialized_name.
      *
-     * @param xexport the xexport
+     * @param export_serialized_name the export_serialized_name
      * @return the GetEntityOptions builder
      */
-    public GetEntityOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public GetEntityOptionsBuilder exportField(Boolean export_serialized_name) {
+      this.export_serialized_name = export_serialized_name;
       return this;
     }
   }
@@ -5228,18 +5228,18 @@ public class ConversationV1Models {
    * The getExample options.
    */
   public class GetExampleOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
     private String text;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the intent.
@@ -5262,10 +5262,10 @@ public class ConversationV1Models {
       return text;
     }
     private GetExampleOptions(GetExampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent, 'intent cannot be empty');
       IBMWatsonValidator.notEmpty(builder.text, 'text cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       intent = builder.intent;
       text = builder.text;
     }
@@ -5284,14 +5284,14 @@ public class ConversationV1Models {
    * GetExampleOptions Builder.
    */
   public class GetExampleOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
     private String text;
 
-    private GetExampleOptionsBuilder(GetExampleOptions getExampleOptions) {
-      workspaceId = getExampleOptions.workspaceId;
-      intent = getExampleOptions.intent;
-      text = getExampleOptions.text;
+    private GetExampleOptionsBuilder(GetExampleOptions get_example_options) {
+      workspace_id = get_example_options.workspace_id;
+      intent = get_example_options.intent;
+      text = get_example_options.text;
     }
 
     /**
@@ -5303,12 +5303,12 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param intent the intent
      * @param text the text
      */
-    public GetExampleOptionsBuilder(String workspaceId, String intent, String text) {
-      this.workspaceId = workspaceId;
+    public GetExampleOptionsBuilder(String workspace_id, String intent, String text) {
+      this.workspace_id = workspace_id;
       this.intent = intent;
       this.text = text;
     }
@@ -5316,20 +5316,20 @@ public class ConversationV1Models {
     /**
      * Builds a GetExampleOptions.
      *
-     * @return the getExampleOptions
+     * @return the get_example_options
      */
     public GetExampleOptions build() {
       return new GetExampleOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the GetExampleOptions builder
      */
-    public GetExampleOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public GetExampleOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -5360,18 +5360,18 @@ public class ConversationV1Models {
    * The getIntent options.
    */
   public class GetIntentOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the intent.
@@ -5384,21 +5384,21 @@ public class ConversationV1Models {
       return intent;
     }
     /**
-     * Gets the xexport.
+     * Gets the export_serialized_name.
      *
      * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      *
-     * @return the xexport
+     * @return the export_serialized_name
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean exportField() {
+      return export_serialized_name;
     }
     private GetIntentOptions(GetIntentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent, 'intent cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       intent = builder.intent;
-      xexport = builder.xexport;
+      export_serialized_name = builder.export_serialized_name;
     }
 
     /**
@@ -5415,14 +5415,14 @@ public class ConversationV1Models {
    * GetIntentOptions Builder.
    */
   public class GetIntentOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
 
-    private GetIntentOptionsBuilder(GetIntentOptions getIntentOptions) {
-      workspaceId = getIntentOptions.workspaceId;
-      intent = getIntentOptions.intent;
-      xexport = getIntentOptions.xexport;
+    private GetIntentOptionsBuilder(GetIntentOptions get_intent_options) {
+      workspace_id = get_intent_options.workspace_id;
+      intent = get_intent_options.intent;
+      export_serialized_name = get_intent_options.export_serialized_name;
     }
 
     /**
@@ -5434,31 +5434,31 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param intent the intent
      */
-    public GetIntentOptionsBuilder(String workspaceId, String intent) {
-      this.workspaceId = workspaceId;
+    public GetIntentOptionsBuilder(String workspace_id, String intent) {
+      this.workspace_id = workspace_id;
       this.intent = intent;
     }
 
     /**
      * Builds a GetIntentOptions.
      *
-     * @return the getIntentOptions
+     * @return the get_intent_options
      */
     public GetIntentOptions build() {
       return new GetIntentOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the GetIntentOptions builder
      */
-    public GetIntentOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public GetIntentOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -5474,13 +5474,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the export_serialized_name.
      *
-     * @param xexport the xexport
+     * @param export_serialized_name the export_serialized_name
      * @return the GetIntentOptions builder
      */
-    public GetIntentOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public GetIntentOptionsBuilder exportField(Boolean export_serialized_name) {
+      this.export_serialized_name = export_serialized_name;
       return this;
     }
   }
@@ -5489,19 +5489,19 @@ public class ConversationV1Models {
    * The getSynonym options.
    */
   public class GetSynonymOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
     private String synonym;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the entity.
@@ -5534,11 +5534,11 @@ public class ConversationV1Models {
       return synonym;
     }
     private GetSynonymOptions(GetSynonymOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       IBMWatsonValidator.notEmpty(builder.value, 'value cannot be empty');
       IBMWatsonValidator.notEmpty(builder.synonym, 'synonym cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       entity = builder.entity;
       value = builder.value;
       synonym = builder.synonym;
@@ -5558,16 +5558,16 @@ public class ConversationV1Models {
    * GetSynonymOptions Builder.
    */
   public class GetSynonymOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
     private String synonym;
 
-    private GetSynonymOptionsBuilder(GetSynonymOptions getSynonymOptions) {
-      workspaceId = getSynonymOptions.workspaceId;
-      entity = getSynonymOptions.entity;
-      value = getSynonymOptions.value;
-      synonym = getSynonymOptions.synonym;
+    private GetSynonymOptionsBuilder(GetSynonymOptions get_synonym_options) {
+      workspace_id = get_synonym_options.workspace_id;
+      entity = get_synonym_options.entity;
+      value = get_synonym_options.value;
+      synonym = get_synonym_options.synonym;
     }
 
     /**
@@ -5579,13 +5579,13 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param entity the entity
      * @param value the value
      * @param synonym the synonym
      */
-    public GetSynonymOptionsBuilder(String workspaceId, String entity, String value, String synonym) {
-      this.workspaceId = workspaceId;
+    public GetSynonymOptionsBuilder(String workspace_id, String entity, String value, String synonym) {
+      this.workspace_id = workspace_id;
       this.entity = entity;
       this.value = value;
       this.synonym = synonym;
@@ -5594,20 +5594,20 @@ public class ConversationV1Models {
     /**
      * Builds a GetSynonymOptions.
      *
-     * @return the getSynonymOptions
+     * @return the get_synonym_options
      */
     public GetSynonymOptions build() {
       return new GetSynonymOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the GetSynonymOptions builder
      */
-    public GetSynonymOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public GetSynonymOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -5649,19 +5649,19 @@ public class ConversationV1Models {
    * The getValue options.
    */
   public class GetValueOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the entity.
@@ -5684,23 +5684,23 @@ public class ConversationV1Models {
       return value;
     }
     /**
-     * Gets the xexport.
+     * Gets the export_serialized_name.
      *
      * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      *
-     * @return the xexport
+     * @return the export_serialized_name
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean exportField() {
+      return export_serialized_name;
     }
     private GetValueOptions(GetValueOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       IBMWatsonValidator.notEmpty(builder.value, 'value cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       entity = builder.entity;
       value = builder.value;
-      xexport = builder.xexport;
+      export_serialized_name = builder.export_serialized_name;
     }
 
     /**
@@ -5717,16 +5717,16 @@ public class ConversationV1Models {
    * GetValueOptions Builder.
    */
   public class GetValueOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
-    private Boolean xexport;
+    private Boolean export_serialized_name;
 
-    private GetValueOptionsBuilder(GetValueOptions getValueOptions) {
-      workspaceId = getValueOptions.workspaceId;
-      entity = getValueOptions.entity;
-      value = getValueOptions.value;
-      xexport = getValueOptions.xexport;
+    private GetValueOptionsBuilder(GetValueOptions get_value_options) {
+      workspace_id = get_value_options.workspace_id;
+      entity = get_value_options.entity;
+      value = get_value_options.value;
+      export_serialized_name = get_value_options.export_serialized_name;
     }
 
     /**
@@ -5738,12 +5738,12 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param entity the entity
      * @param value the value
      */
-    public GetValueOptionsBuilder(String workspaceId, String entity, String value) {
-      this.workspaceId = workspaceId;
+    public GetValueOptionsBuilder(String workspace_id, String entity, String value) {
+      this.workspace_id = workspace_id;
       this.entity = entity;
       this.value = value;
     }
@@ -5751,20 +5751,20 @@ public class ConversationV1Models {
     /**
      * Builds a GetValueOptions.
      *
-     * @return the getValueOptions
+     * @return the get_value_options
      */
     public GetValueOptions build() {
       return new GetValueOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the GetValueOptions builder
      */
-    public GetValueOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public GetValueOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -5791,13 +5791,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the export_serialized_name.
      *
-     * @param xexport the xexport
+     * @param export_serialized_name the export_serialized_name
      * @return the GetValueOptions builder
      */
-    public GetValueOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public GetValueOptionsBuilder exportField(Boolean export_serialized_name) {
+      this.export_serialized_name = export_serialized_name;
       return this;
     }
   }
@@ -5806,32 +5806,32 @@ public class ConversationV1Models {
    * The getWorkspace options.
    */
   public class GetWorkspaceOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
-    private Boolean xexport;
+    private String workspace_id;
+    private Boolean export_serialized_name;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
-     * Gets the xexport.
+     * Gets the export_serialized_name.
      *
      * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      *
-     * @return the xexport
+     * @return the export_serialized_name
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean exportField() {
+      return export_serialized_name;
     }
     private GetWorkspaceOptions(GetWorkspaceOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
-      workspaceId = builder.workspaceId;
-      xexport = builder.xexport;
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
+      workspace_id = builder.workspace_id;
+      export_serialized_name = builder.export_serialized_name;
     }
 
     /**
@@ -5848,12 +5848,12 @@ public class ConversationV1Models {
    * GetWorkspaceOptions Builder.
    */
   public class GetWorkspaceOptionsBuilder {
-    private String workspaceId;
-    private Boolean xexport;
+    private String workspace_id;
+    private Boolean export_serialized_name;
 
-    private GetWorkspaceOptionsBuilder(GetWorkspaceOptions getWorkspaceOptions) {
-      workspaceId = getWorkspaceOptions.workspaceId;
-      xexport = getWorkspaceOptions.xexport;
+    private GetWorkspaceOptionsBuilder(GetWorkspaceOptions get_workspace_options) {
+      workspace_id = get_workspace_options.workspace_id;
+      export_serialized_name = get_workspace_options.export_serialized_name;
     }
 
     /**
@@ -5865,40 +5865,40 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      */
-    public GetWorkspaceOptionsBuilder(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public GetWorkspaceOptionsBuilder(String workspace_id) {
+      this.workspace_id = workspace_id;
     }
 
     /**
      * Builds a GetWorkspaceOptions.
      *
-     * @return the getWorkspaceOptions
+     * @return the get_workspace_options
      */
     public GetWorkspaceOptions build() {
       return new GetWorkspaceOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the GetWorkspaceOptions builder
      */
-    public GetWorkspaceOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public GetWorkspaceOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
     /**
-     * Set the xexport.
+     * Set the export_serialized_name.
      *
-     * @param xexport the xexport
+     * @param export_serialized_name the export_serialized_name
      * @return the GetWorkspaceOptions builder
      */
-    public GetWorkspaceOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public GetWorkspaceOptionsBuilder exportField(Boolean export_serialized_name) {
+      this.export_serialized_name = export_serialized_name;
       return this;
     }
   }
@@ -5939,8 +5939,8 @@ public class ConversationV1Models {
   public class InputDataBuilder {
     private String text;
 
-    private InputDataBuilder(InputData inputData) {
-      text = inputData.text;
+    private InputDataBuilder(InputData input_data) {
+      text = input_data.text;
     }
 
     /**
@@ -5961,7 +5961,7 @@ public class ConversationV1Models {
     /**
      * Builds a InputData.
      *
-     * @return the inputData
+     * @return the input_data
      */
     public InputData build() {
       return new InputData(this);
@@ -5983,19 +5983,19 @@ public class ConversationV1Models {
    * Intent.
    */
   public class Intent extends IBMWatsonGenericModel {
-    private String intentName;
+    private String intent;
     private Datetime created;
     private Datetime updated;
     private String description;
     /**
-     * Gets the intentName.
+     * Gets the intent.
      *
      * The name of the intent.
      *
-     * @return the intentName
+     * @return the intent
      */
-    public String getIntentName() {
-      return intentName;
+    public String getIntent() {
+      return intent;
     }
     /**
      * Gets the created.
@@ -6029,12 +6029,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the intentName.
+     * Sets the intent.
      *
-     * @param intentName the new intentName
+     * @param intent the new intent
      */
-    public void setIntentName(final String intentName) {
-      this.intentName = intentName;
+    public void setIntent(final String intent) {
+      this.intent = intent;
     }
 
     /**
@@ -6097,20 +6097,20 @@ public class ConversationV1Models {
    * IntentExport.
    */
   public class IntentExport extends IBMWatsonGenericModel {
-    private String intentName;
+    private String intent;
     private Datetime created;
     private Datetime updated;
     private String description;
     private List<Example> examples;
     /**
-     * Gets the intentName.
+     * Gets the intent.
      *
      * The name of the intent.
      *
-     * @return the intentName
+     * @return the intent
      */
-    public String getIntentName() {
-      return intentName;
+    public String getIntent() {
+      return intent;
     }
     /**
      * Gets the created.
@@ -6154,12 +6154,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the intentName.
+     * Sets the intent.
      *
-     * @param intentName the new intentName
+     * @param intent the new intent
      */
-    public void setIntentName(final String intentName) {
-      this.intentName = intentName;
+    public void setIntent(final String intent) {
+      this.intent = intent;
     }
 
     /**
@@ -6185,50 +6185,50 @@ public class ConversationV1Models {
    * The listCounterexamples options.
    */
   public class ListCounterexamplesOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String workspace_id;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
-     * Gets the pageLimit.
+     * Gets the page_limit.
      *
      * The number of records to return in each page of results. The default page limit is 100.
      *
-     * @return the pageLimit
+     * @return the page_limit
      */
     public Long pageLimit() {
-      return pageLimit;
+      return page_limit;
     }
     /**
-     * Gets the includeCount.
+     * Gets the include_count.
      *
      * Whether to include information about the number of records returned.
      *
-     * @return the includeCount
+     * @return the include_count
      */
     public Boolean includeCount() {
-      return includeCount;
+      return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -6241,11 +6241,11 @@ public class ConversationV1Models {
       return cursor;
     }
     private ListCounterexamplesOptions(ListCounterexamplesOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
-      workspaceId = builder.workspaceId;
-      pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
+      workspace_id = builder.workspace_id;
+      page_limit = builder.page_limit;
+      include_count = builder.include_count;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -6263,18 +6263,18 @@ public class ConversationV1Models {
    * ListCounterexamplesOptions Builder.
    */
   public class ListCounterexamplesOptionsBuilder {
-    private String workspaceId;
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String workspace_id;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
 
-    private ListCounterexamplesOptionsBuilder(ListCounterexamplesOptions listCounterexamplesOptions) {
-      workspaceId = listCounterexamplesOptions.workspaceId;
-      pageLimit = listCounterexamplesOptions.pageLimit;
-      includeCount = listCounterexamplesOptions.includeCount;
-      xsort = listCounterexamplesOptions.xsort;
-      cursor = listCounterexamplesOptions.cursor;
+    private ListCounterexamplesOptionsBuilder(ListCounterexamplesOptions list_counterexamples_options) {
+      workspace_id = list_counterexamples_options.workspace_id;
+      page_limit = list_counterexamples_options.page_limit;
+      include_count = list_counterexamples_options.include_count;
+      sort_serialized_name = list_counterexamples_options.sort_serialized_name;
+      cursor = list_counterexamples_options.cursor;
     }
 
     /**
@@ -6286,62 +6286,62 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      */
-    public ListCounterexamplesOptionsBuilder(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public ListCounterexamplesOptionsBuilder(String workspace_id) {
+      this.workspace_id = workspace_id;
     }
 
     /**
      * Builds a ListCounterexamplesOptions.
      *
-     * @return the listCounterexamplesOptions
+     * @return the list_counterexamples_options
      */
     public ListCounterexamplesOptions build() {
       return new ListCounterexamplesOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the ListCounterexamplesOptions builder
      */
-    public ListCounterexamplesOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public ListCounterexamplesOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
     /**
-     * Set the pageLimit.
+     * Set the page_limit.
      *
-     * @param pageLimit the pageLimit
+     * @param page_limit the page_limit
      * @return the ListCounterexamplesOptions builder
      */
-    public ListCounterexamplesOptionsBuilder pageLimit(long pageLimit) {
-      this.pageLimit = pageLimit;
+    public ListCounterexamplesOptionsBuilder pageLimit(Long page_limit) {
+      this.page_limit = page_limit;
       return this;
     }
 
     /**
-     * Set the includeCount.
+     * Set the include_count.
      *
-     * @param includeCount the includeCount
+     * @param include_count the include_count
      * @return the ListCounterexamplesOptions builder
      */
-    public ListCounterexamplesOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
+    public ListCounterexamplesOptionsBuilder includeCount(Boolean include_count) {
+      this.include_count = include_count;
       return this;
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListCounterexamplesOptions builder
      */
-    public ListCounterexamplesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListCounterexamplesOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -6361,50 +6361,50 @@ public class ConversationV1Models {
    * The listDialogNodes options.
    */
   public class ListDialogNodesOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String workspace_id;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
-     * Gets the pageLimit.
+     * Gets the page_limit.
      *
      * The number of records to return in each page of results. The default page limit is 100.
      *
-     * @return the pageLimit
+     * @return the page_limit
      */
     public Long pageLimit() {
-      return pageLimit;
+      return page_limit;
     }
     /**
-     * Gets the includeCount.
+     * Gets the include_count.
      *
      * Whether to include information about the number of records returned.
      *
-     * @return the includeCount
+     * @return the include_count
      */
     public Boolean includeCount() {
-      return includeCount;
+      return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -6417,11 +6417,11 @@ public class ConversationV1Models {
       return cursor;
     }
     private ListDialogNodesOptions(ListDialogNodesOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
-      workspaceId = builder.workspaceId;
-      pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
+      workspace_id = builder.workspace_id;
+      page_limit = builder.page_limit;
+      include_count = builder.include_count;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -6439,18 +6439,18 @@ public class ConversationV1Models {
    * ListDialogNodesOptions Builder.
    */
   public class ListDialogNodesOptionsBuilder {
-    private String workspaceId;
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String workspace_id;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
 
-    private ListDialogNodesOptionsBuilder(ListDialogNodesOptions listDialogNodesOptions) {
-      workspaceId = listDialogNodesOptions.workspaceId;
-      pageLimit = listDialogNodesOptions.pageLimit;
-      includeCount = listDialogNodesOptions.includeCount;
-      xsort = listDialogNodesOptions.xsort;
-      cursor = listDialogNodesOptions.cursor;
+    private ListDialogNodesOptionsBuilder(ListDialogNodesOptions list_dialog_nodes_options) {
+      workspace_id = list_dialog_nodes_options.workspace_id;
+      page_limit = list_dialog_nodes_options.page_limit;
+      include_count = list_dialog_nodes_options.include_count;
+      sort_serialized_name = list_dialog_nodes_options.sort_serialized_name;
+      cursor = list_dialog_nodes_options.cursor;
     }
 
     /**
@@ -6462,62 +6462,62 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      */
-    public ListDialogNodesOptionsBuilder(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public ListDialogNodesOptionsBuilder(String workspace_id) {
+      this.workspace_id = workspace_id;
     }
 
     /**
      * Builds a ListDialogNodesOptions.
      *
-     * @return the listDialogNodesOptions
+     * @return the list_dialog_nodes_options
      */
     public ListDialogNodesOptions build() {
       return new ListDialogNodesOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the ListDialogNodesOptions builder
      */
-    public ListDialogNodesOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public ListDialogNodesOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
     /**
-     * Set the pageLimit.
+     * Set the page_limit.
      *
-     * @param pageLimit the pageLimit
+     * @param page_limit the page_limit
      * @return the ListDialogNodesOptions builder
      */
-    public ListDialogNodesOptionsBuilder pageLimit(long pageLimit) {
-      this.pageLimit = pageLimit;
+    public ListDialogNodesOptionsBuilder pageLimit(Long page_limit) {
+      this.page_limit = page_limit;
       return this;
     }
 
     /**
-     * Set the includeCount.
+     * Set the include_count.
      *
-     * @param includeCount the includeCount
+     * @param include_count the include_count
      * @return the ListDialogNodesOptions builder
      */
-    public ListDialogNodesOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
+    public ListDialogNodesOptionsBuilder includeCount(Boolean include_count) {
+      this.include_count = include_count;
       return this;
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListDialogNodesOptions builder
      */
-    public ListDialogNodesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListDialogNodesOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -6537,61 +6537,61 @@ public class ConversationV1Models {
    * The listEntities options.
    */
   public class ListEntitiesOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
-    private Boolean xexport;
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String workspace_id;
+    private Boolean export_serialized_name;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
-     * Gets the xexport.
+     * Gets the export_serialized_name.
      *
      * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      *
-     * @return the xexport
+     * @return the export_serialized_name
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean exportField() {
+      return export_serialized_name;
     }
     /**
-     * Gets the pageLimit.
+     * Gets the page_limit.
      *
      * The number of records to return in each page of results. The default page limit is 100.
      *
-     * @return the pageLimit
+     * @return the page_limit
      */
     public Long pageLimit() {
-      return pageLimit;
+      return page_limit;
     }
     /**
-     * Gets the includeCount.
+     * Gets the include_count.
      *
      * Whether to include information about the number of records returned.
      *
-     * @return the includeCount
+     * @return the include_count
      */
     public Boolean includeCount() {
-      return includeCount;
+      return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -6604,12 +6604,12 @@ public class ConversationV1Models {
       return cursor;
     }
     private ListEntitiesOptions(ListEntitiesOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
-      workspaceId = builder.workspaceId;
-      xexport = builder.xexport;
-      pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
+      workspace_id = builder.workspace_id;
+      export_serialized_name = builder.export_serialized_name;
+      page_limit = builder.page_limit;
+      include_count = builder.include_count;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -6627,20 +6627,20 @@ public class ConversationV1Models {
    * ListEntitiesOptions Builder.
    */
   public class ListEntitiesOptionsBuilder {
-    private String workspaceId;
-    private Boolean xexport;
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String workspace_id;
+    private Boolean export_serialized_name;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
 
-    private ListEntitiesOptionsBuilder(ListEntitiesOptions listEntitiesOptions) {
-      workspaceId = listEntitiesOptions.workspaceId;
-      xexport = listEntitiesOptions.xexport;
-      pageLimit = listEntitiesOptions.pageLimit;
-      includeCount = listEntitiesOptions.includeCount;
-      xsort = listEntitiesOptions.xsort;
-      cursor = listEntitiesOptions.cursor;
+    private ListEntitiesOptionsBuilder(ListEntitiesOptions list_entities_options) {
+      workspace_id = list_entities_options.workspace_id;
+      export_serialized_name = list_entities_options.export_serialized_name;
+      page_limit = list_entities_options.page_limit;
+      include_count = list_entities_options.include_count;
+      sort_serialized_name = list_entities_options.sort_serialized_name;
+      cursor = list_entities_options.cursor;
     }
 
     /**
@@ -6652,73 +6652,73 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      */
-    public ListEntitiesOptionsBuilder(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public ListEntitiesOptionsBuilder(String workspace_id) {
+      this.workspace_id = workspace_id;
     }
 
     /**
      * Builds a ListEntitiesOptions.
      *
-     * @return the listEntitiesOptions
+     * @return the list_entities_options
      */
     public ListEntitiesOptions build() {
       return new ListEntitiesOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public ListEntitiesOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
     /**
-     * Set the xexport.
+     * Set the export_serialized_name.
      *
-     * @param xexport the xexport
+     * @param export_serialized_name the export_serialized_name
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public ListEntitiesOptionsBuilder exportField(Boolean export_serialized_name) {
+      this.export_serialized_name = export_serialized_name;
       return this;
     }
 
     /**
-     * Set the pageLimit.
+     * Set the page_limit.
      *
-     * @param pageLimit the pageLimit
+     * @param page_limit the page_limit
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder pageLimit(long pageLimit) {
-      this.pageLimit = pageLimit;
+    public ListEntitiesOptionsBuilder pageLimit(Long page_limit) {
+      this.page_limit = page_limit;
       return this;
     }
 
     /**
-     * Set the includeCount.
+     * Set the include_count.
      *
-     * @param includeCount the includeCount
+     * @param include_count the include_count
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
+    public ListEntitiesOptionsBuilder includeCount(Boolean include_count) {
+      this.include_count = include_count;
       return this;
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListEntitiesOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -6738,21 +6738,21 @@ public class ConversationV1Models {
    * The listExamples options.
    */
   public class ListExamplesOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the intent.
@@ -6765,34 +6765,34 @@ public class ConversationV1Models {
       return intent;
     }
     /**
-     * Gets the pageLimit.
+     * Gets the page_limit.
      *
      * The number of records to return in each page of results. The default page limit is 100.
      *
-     * @return the pageLimit
+     * @return the page_limit
      */
     public Long pageLimit() {
-      return pageLimit;
+      return page_limit;
     }
     /**
-     * Gets the includeCount.
+     * Gets the include_count.
      *
      * Whether to include information about the number of records returned.
      *
-     * @return the includeCount
+     * @return the include_count
      */
     public Boolean includeCount() {
-      return includeCount;
+      return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -6805,13 +6805,13 @@ public class ConversationV1Models {
       return cursor;
     }
     private ListExamplesOptions(ListExamplesOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent, 'intent cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       intent = builder.intent;
-      pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      page_limit = builder.page_limit;
+      include_count = builder.include_count;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -6829,20 +6829,20 @@ public class ConversationV1Models {
    * ListExamplesOptions Builder.
    */
   public class ListExamplesOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
 
-    private ListExamplesOptionsBuilder(ListExamplesOptions listExamplesOptions) {
-      workspaceId = listExamplesOptions.workspaceId;
-      intent = listExamplesOptions.intent;
-      pageLimit = listExamplesOptions.pageLimit;
-      includeCount = listExamplesOptions.includeCount;
-      xsort = listExamplesOptions.xsort;
-      cursor = listExamplesOptions.cursor;
+    private ListExamplesOptionsBuilder(ListExamplesOptions list_examples_options) {
+      workspace_id = list_examples_options.workspace_id;
+      intent = list_examples_options.intent;
+      page_limit = list_examples_options.page_limit;
+      include_count = list_examples_options.include_count;
+      sort_serialized_name = list_examples_options.sort_serialized_name;
+      cursor = list_examples_options.cursor;
     }
 
     /**
@@ -6854,31 +6854,31 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param intent the intent
      */
-    public ListExamplesOptionsBuilder(String workspaceId, String intent) {
-      this.workspaceId = workspaceId;
+    public ListExamplesOptionsBuilder(String workspace_id, String intent) {
+      this.workspace_id = workspace_id;
       this.intent = intent;
     }
 
     /**
      * Builds a ListExamplesOptions.
      *
-     * @return the listExamplesOptions
+     * @return the list_examples_options
      */
     public ListExamplesOptions build() {
       return new ListExamplesOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the ListExamplesOptions builder
      */
-    public ListExamplesOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public ListExamplesOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -6894,35 +6894,35 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the pageLimit.
+     * Set the page_limit.
      *
-     * @param pageLimit the pageLimit
+     * @param page_limit the page_limit
      * @return the ListExamplesOptions builder
      */
-    public ListExamplesOptionsBuilder pageLimit(long pageLimit) {
-      this.pageLimit = pageLimit;
+    public ListExamplesOptionsBuilder pageLimit(Long page_limit) {
+      this.page_limit = page_limit;
       return this;
     }
 
     /**
-     * Set the includeCount.
+     * Set the include_count.
      *
-     * @param includeCount the includeCount
+     * @param include_count the include_count
      * @return the ListExamplesOptions builder
      */
-    public ListExamplesOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
+    public ListExamplesOptionsBuilder includeCount(Boolean include_count) {
+      this.include_count = include_count;
       return this;
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListExamplesOptions builder
      */
-    public ListExamplesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListExamplesOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -6942,61 +6942,61 @@ public class ConversationV1Models {
    * The listIntents options.
    */
   public class ListIntentsOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
-    private Boolean xexport;
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String workspace_id;
+    private Boolean export_serialized_name;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
-     * Gets the xexport.
+     * Gets the export_serialized_name.
      *
      * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      *
-     * @return the xexport
+     * @return the export_serialized_name
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean exportField() {
+      return export_serialized_name;
     }
     /**
-     * Gets the pageLimit.
+     * Gets the page_limit.
      *
      * The number of records to return in each page of results. The default page limit is 100.
      *
-     * @return the pageLimit
+     * @return the page_limit
      */
     public Long pageLimit() {
-      return pageLimit;
+      return page_limit;
     }
     /**
-     * Gets the includeCount.
+     * Gets the include_count.
      *
      * Whether to include information about the number of records returned.
      *
-     * @return the includeCount
+     * @return the include_count
      */
     public Boolean includeCount() {
-      return includeCount;
+      return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -7009,12 +7009,12 @@ public class ConversationV1Models {
       return cursor;
     }
     private ListIntentsOptions(ListIntentsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
-      workspaceId = builder.workspaceId;
-      xexport = builder.xexport;
-      pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
+      workspace_id = builder.workspace_id;
+      export_serialized_name = builder.export_serialized_name;
+      page_limit = builder.page_limit;
+      include_count = builder.include_count;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -7032,20 +7032,20 @@ public class ConversationV1Models {
    * ListIntentsOptions Builder.
    */
   public class ListIntentsOptionsBuilder {
-    private String workspaceId;
-    private Boolean xexport;
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private String workspace_id;
+    private Boolean export_serialized_name;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
 
-    private ListIntentsOptionsBuilder(ListIntentsOptions listIntentsOptions) {
-      workspaceId = listIntentsOptions.workspaceId;
-      xexport = listIntentsOptions.xexport;
-      pageLimit = listIntentsOptions.pageLimit;
-      includeCount = listIntentsOptions.includeCount;
-      xsort = listIntentsOptions.xsort;
-      cursor = listIntentsOptions.cursor;
+    private ListIntentsOptionsBuilder(ListIntentsOptions list_intents_options) {
+      workspace_id = list_intents_options.workspace_id;
+      export_serialized_name = list_intents_options.export_serialized_name;
+      page_limit = list_intents_options.page_limit;
+      include_count = list_intents_options.include_count;
+      sort_serialized_name = list_intents_options.sort_serialized_name;
+      cursor = list_intents_options.cursor;
     }
 
     /**
@@ -7057,73 +7057,73 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      */
-    public ListIntentsOptionsBuilder(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public ListIntentsOptionsBuilder(String workspace_id) {
+      this.workspace_id = workspace_id;
     }
 
     /**
      * Builds a ListIntentsOptions.
      *
-     * @return the listIntentsOptions
+     * @return the list_intents_options
      */
     public ListIntentsOptions build() {
       return new ListIntentsOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public ListIntentsOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
     /**
-     * Set the xexport.
+     * Set the export_serialized_name.
      *
-     * @param xexport the xexport
+     * @param export_serialized_name the export_serialized_name
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public ListIntentsOptionsBuilder exportField(Boolean export_serialized_name) {
+      this.export_serialized_name = export_serialized_name;
       return this;
     }
 
     /**
-     * Set the pageLimit.
+     * Set the page_limit.
      *
-     * @param pageLimit the pageLimit
+     * @param page_limit the page_limit
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder pageLimit(long pageLimit) {
-      this.pageLimit = pageLimit;
+    public ListIntentsOptionsBuilder pageLimit(Long page_limit) {
+      this.page_limit = page_limit;
       return this;
     }
 
     /**
-     * Set the includeCount.
+     * Set the include_count.
      *
-     * @param includeCount the includeCount
+     * @param include_count the include_count
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
+    public ListIntentsOptionsBuilder includeCount(Boolean include_count) {
+      this.include_count = include_count;
       return this;
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListIntentsOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -7143,30 +7143,30 @@ public class ConversationV1Models {
    * The listLogs options.
    */
   public class ListLogsOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
-    private String xsort;
+    private String workspace_id;
+    private String sort_serialized_name;
     private String filter;
-    private Long pageLimit;
+    private Long page_limit;
     private String cursor;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the filter.
@@ -7179,14 +7179,14 @@ public class ConversationV1Models {
       return filter;
     }
     /**
-     * Gets the pageLimit.
+     * Gets the page_limit.
      *
      * The number of records to return in each page of results. The default page limit is 100.
      *
-     * @return the pageLimit
+     * @return the page_limit
      */
     public Long pageLimit() {
-      return pageLimit;
+      return page_limit;
     }
     /**
      * Gets the cursor.
@@ -7199,11 +7199,11 @@ public class ConversationV1Models {
       return cursor;
     }
     private ListLogsOptions(ListLogsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
-      workspaceId = builder.workspaceId;
-      xsort = builder.xsort;
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
+      workspace_id = builder.workspace_id;
+      sort_serialized_name = builder.sort_serialized_name;
       filter = builder.filter;
-      pageLimit = builder.pageLimit;
+      page_limit = builder.page_limit;
       cursor = builder.cursor;
     }
 
@@ -7221,18 +7221,18 @@ public class ConversationV1Models {
    * ListLogsOptions Builder.
    */
   public class ListLogsOptionsBuilder {
-    private String workspaceId;
-    private String xsort;
+    private String workspace_id;
+    private String sort_serialized_name;
     private String filter;
-    private Long pageLimit;
+    private Long page_limit;
     private String cursor;
 
-    private ListLogsOptionsBuilder(ListLogsOptions listLogsOptions) {
-      workspaceId = listLogsOptions.workspaceId;
-      xsort = listLogsOptions.xsort;
-      filter = listLogsOptions.filter;
-      pageLimit = listLogsOptions.pageLimit;
-      cursor = listLogsOptions.cursor;
+    private ListLogsOptionsBuilder(ListLogsOptions list_logs_options) {
+      workspace_id = list_logs_options.workspace_id;
+      sort_serialized_name = list_logs_options.sort_serialized_name;
+      filter = list_logs_options.filter;
+      page_limit = list_logs_options.page_limit;
+      cursor = list_logs_options.cursor;
     }
 
     /**
@@ -7244,40 +7244,40 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      */
-    public ListLogsOptionsBuilder(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public ListLogsOptionsBuilder(String workspace_id) {
+      this.workspace_id = workspace_id;
     }
 
     /**
      * Builds a ListLogsOptions.
      *
-     * @return the listLogsOptions
+     * @return the list_logs_options
      */
     public ListLogsOptions build() {
       return new ListLogsOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the ListLogsOptions builder
      */
-    public ListLogsOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public ListLogsOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListLogsOptions builder
      */
-    public ListLogsOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListLogsOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -7293,13 +7293,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the pageLimit.
+     * Set the page_limit.
      *
-     * @param pageLimit the pageLimit
+     * @param page_limit the page_limit
      * @return the ListLogsOptions builder
      */
-    public ListLogsOptionsBuilder pageLimit(long pageLimit) {
-      this.pageLimit = pageLimit;
+    public ListLogsOptionsBuilder pageLimit(Long page_limit) {
+      this.page_limit = page_limit;
       return this;
     }
 
@@ -7319,22 +7319,22 @@ public class ConversationV1Models {
    * The listSynonyms options.
    */
   public class ListSynonymsOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the entity.
@@ -7357,34 +7357,34 @@ public class ConversationV1Models {
       return value;
     }
     /**
-     * Gets the pageLimit.
+     * Gets the page_limit.
      *
      * The number of records to return in each page of results. The default page limit is 100.
      *
-     * @return the pageLimit
+     * @return the page_limit
      */
     public Long pageLimit() {
-      return pageLimit;
+      return page_limit;
     }
     /**
-     * Gets the includeCount.
+     * Gets the include_count.
      *
      * Whether to include information about the number of records returned.
      *
-     * @return the includeCount
+     * @return the include_count
      */
     public Boolean includeCount() {
-      return includeCount;
+      return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -7397,15 +7397,15 @@ public class ConversationV1Models {
       return cursor;
     }
     private ListSynonymsOptions(ListSynonymsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       IBMWatsonValidator.notEmpty(builder.value, 'value cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       entity = builder.entity;
       value = builder.value;
-      pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      page_limit = builder.page_limit;
+      include_count = builder.include_count;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -7423,22 +7423,22 @@ public class ConversationV1Models {
    * ListSynonymsOptions Builder.
    */
   public class ListSynonymsOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
 
-    private ListSynonymsOptionsBuilder(ListSynonymsOptions listSynonymsOptions) {
-      workspaceId = listSynonymsOptions.workspaceId;
-      entity = listSynonymsOptions.entity;
-      value = listSynonymsOptions.value;
-      pageLimit = listSynonymsOptions.pageLimit;
-      includeCount = listSynonymsOptions.includeCount;
-      xsort = listSynonymsOptions.xsort;
-      cursor = listSynonymsOptions.cursor;
+    private ListSynonymsOptionsBuilder(ListSynonymsOptions list_synonyms_options) {
+      workspace_id = list_synonyms_options.workspace_id;
+      entity = list_synonyms_options.entity;
+      value = list_synonyms_options.value;
+      page_limit = list_synonyms_options.page_limit;
+      include_count = list_synonyms_options.include_count;
+      sort_serialized_name = list_synonyms_options.sort_serialized_name;
+      cursor = list_synonyms_options.cursor;
     }
 
     /**
@@ -7450,12 +7450,12 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param entity the entity
      * @param value the value
      */
-    public ListSynonymsOptionsBuilder(String workspaceId, String entity, String value) {
-      this.workspaceId = workspaceId;
+    public ListSynonymsOptionsBuilder(String workspace_id, String entity, String value) {
+      this.workspace_id = workspace_id;
       this.entity = entity;
       this.value = value;
     }
@@ -7463,20 +7463,20 @@ public class ConversationV1Models {
     /**
      * Builds a ListSynonymsOptions.
      *
-     * @return the listSynonymsOptions
+     * @return the list_synonyms_options
      */
     public ListSynonymsOptions build() {
       return new ListSynonymsOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the ListSynonymsOptions builder
      */
-    public ListSynonymsOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public ListSynonymsOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -7503,35 +7503,35 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the pageLimit.
+     * Set the page_limit.
      *
-     * @param pageLimit the pageLimit
+     * @param page_limit the page_limit
      * @return the ListSynonymsOptions builder
      */
-    public ListSynonymsOptionsBuilder pageLimit(long pageLimit) {
-      this.pageLimit = pageLimit;
+    public ListSynonymsOptionsBuilder pageLimit(Long page_limit) {
+      this.page_limit = page_limit;
       return this;
     }
 
     /**
-     * Set the includeCount.
+     * Set the include_count.
      *
-     * @param includeCount the includeCount
+     * @param include_count the include_count
      * @return the ListSynonymsOptions builder
      */
-    public ListSynonymsOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
+    public ListSynonymsOptionsBuilder includeCount(Boolean include_count) {
+      this.include_count = include_count;
       return this;
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListSynonymsOptions builder
      */
-    public ListSynonymsOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListSynonymsOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -7551,22 +7551,22 @@ public class ConversationV1Models {
    * The listValues options.
    */
   public class ListValuesOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
-    private Boolean xexport;
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private Boolean export_serialized_name;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the entity.
@@ -7579,44 +7579,44 @@ public class ConversationV1Models {
       return entity;
     }
     /**
-     * Gets the xexport.
+     * Gets the export_serialized_name.
      *
      * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
      *
-     * @return the xexport
+     * @return the export_serialized_name
      */
-    public Boolean xexport() {
-      return xexport;
+    public Boolean exportField() {
+      return export_serialized_name;
     }
     /**
-     * Gets the pageLimit.
+     * Gets the page_limit.
      *
      * The number of records to return in each page of results. The default page limit is 100.
      *
-     * @return the pageLimit
+     * @return the page_limit
      */
     public Long pageLimit() {
-      return pageLimit;
+      return page_limit;
     }
     /**
-     * Gets the includeCount.
+     * Gets the include_count.
      *
      * Whether to include information about the number of records returned.
      *
-     * @return the includeCount
+     * @return the include_count
      */
     public Boolean includeCount() {
-      return includeCount;
+      return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -7629,14 +7629,14 @@ public class ConversationV1Models {
       return cursor;
     }
     private ListValuesOptions(ListValuesOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       entity = builder.entity;
-      xexport = builder.xexport;
-      pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      export_serialized_name = builder.export_serialized_name;
+      page_limit = builder.page_limit;
+      include_count = builder.include_count;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -7654,22 +7654,22 @@ public class ConversationV1Models {
    * ListValuesOptions Builder.
    */
   public class ListValuesOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
-    private Boolean xexport;
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private Boolean export_serialized_name;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
 
-    private ListValuesOptionsBuilder(ListValuesOptions listValuesOptions) {
-      workspaceId = listValuesOptions.workspaceId;
-      entity = listValuesOptions.entity;
-      xexport = listValuesOptions.xexport;
-      pageLimit = listValuesOptions.pageLimit;
-      includeCount = listValuesOptions.includeCount;
-      xsort = listValuesOptions.xsort;
-      cursor = listValuesOptions.cursor;
+    private ListValuesOptionsBuilder(ListValuesOptions list_values_options) {
+      workspace_id = list_values_options.workspace_id;
+      entity = list_values_options.entity;
+      export_serialized_name = list_values_options.export_serialized_name;
+      page_limit = list_values_options.page_limit;
+      include_count = list_values_options.include_count;
+      sort_serialized_name = list_values_options.sort_serialized_name;
+      cursor = list_values_options.cursor;
     }
 
     /**
@@ -7681,31 +7681,31 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param entity the entity
      */
-    public ListValuesOptionsBuilder(String workspaceId, String entity) {
-      this.workspaceId = workspaceId;
+    public ListValuesOptionsBuilder(String workspace_id, String entity) {
+      this.workspace_id = workspace_id;
       this.entity = entity;
     }
 
     /**
      * Builds a ListValuesOptions.
      *
-     * @return the listValuesOptions
+     * @return the list_values_options
      */
     public ListValuesOptions build() {
       return new ListValuesOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public ListValuesOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -7721,46 +7721,46 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the xexport.
+     * Set the export_serialized_name.
      *
-     * @param xexport the xexport
+     * @param export_serialized_name the export_serialized_name
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder xexport(Boolean xexport) {
-      this.xexport = xexport;
+    public ListValuesOptionsBuilder exportField(Boolean export_serialized_name) {
+      this.export_serialized_name = export_serialized_name;
       return this;
     }
 
     /**
-     * Set the pageLimit.
+     * Set the page_limit.
      *
-     * @param pageLimit the pageLimit
+     * @param page_limit the page_limit
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder pageLimit(long pageLimit) {
-      this.pageLimit = pageLimit;
+    public ListValuesOptionsBuilder pageLimit(Long page_limit) {
+      this.page_limit = page_limit;
       return this;
     }
 
     /**
-     * Set the includeCount.
+     * Set the include_count.
      *
-     * @param includeCount the includeCount
+     * @param include_count the include_count
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
+    public ListValuesOptionsBuilder includeCount(Boolean include_count) {
+      this.include_count = include_count;
       return this;
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListValuesOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -7780,39 +7780,39 @@ public class ConversationV1Models {
    * The listWorkspaces options.
    */
   public class ListWorkspacesOptions extends IBMWatsonGenericModel {
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
     /**
-     * Gets the pageLimit.
+     * Gets the page_limit.
      *
      * The number of records to return in each page of results. The default page limit is 100.
      *
-     * @return the pageLimit
+     * @return the page_limit
      */
     public Long pageLimit() {
-      return pageLimit;
+      return page_limit;
     }
     /**
-     * Gets the includeCount.
+     * Gets the include_count.
      *
      * Whether to include information about the number of records returned.
      *
-     * @return the includeCount
+     * @return the include_count
      */
     public Boolean includeCount() {
-      return includeCount;
+      return include_count;
     }
     /**
-     * Gets the xsort.
+     * Gets the sort_serialized_name.
      *
      * Sorts the response according to the value of the specified property, in ascending or descending order.
      *
-     * @return the xsort
+     * @return the sort_serialized_name
      */
-    public String xsort() {
-      return xsort;
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the cursor.
@@ -7825,9 +7825,9 @@ public class ConversationV1Models {
       return cursor;
     }
     private ListWorkspacesOptions(ListWorkspacesOptionsBuilder builder) {
-      pageLimit = builder.pageLimit;
-      includeCount = builder.includeCount;
-      xsort = builder.xsort;
+      page_limit = builder.page_limit;
+      include_count = builder.include_count;
+      sort_serialized_name = builder.sort_serialized_name;
       cursor = builder.cursor;
     }
 
@@ -7845,16 +7845,16 @@ public class ConversationV1Models {
    * ListWorkspacesOptions Builder.
    */
   public class ListWorkspacesOptionsBuilder {
-    private Long pageLimit;
-    private Boolean includeCount;
-    private String xsort;
+    private Long page_limit;
+    private Boolean include_count;
+    private String sort_serialized_name;
     private String cursor;
 
-    private ListWorkspacesOptionsBuilder(ListWorkspacesOptions listWorkspacesOptions) {
-      pageLimit = listWorkspacesOptions.pageLimit;
-      includeCount = listWorkspacesOptions.includeCount;
-      xsort = listWorkspacesOptions.xsort;
-      cursor = listWorkspacesOptions.cursor;
+    private ListWorkspacesOptionsBuilder(ListWorkspacesOptions list_workspaces_options) {
+      page_limit = list_workspaces_options.page_limit;
+      include_count = list_workspaces_options.include_count;
+      sort_serialized_name = list_workspaces_options.sort_serialized_name;
+      cursor = list_workspaces_options.cursor;
     }
 
     /**
@@ -7866,42 +7866,42 @@ public class ConversationV1Models {
     /**
      * Builds a ListWorkspacesOptions.
      *
-     * @return the listWorkspacesOptions
+     * @return the list_workspaces_options
      */
     public ListWorkspacesOptions build() {
       return new ListWorkspacesOptions(this);
     }
 
     /**
-     * Set the pageLimit.
+     * Set the page_limit.
      *
-     * @param pageLimit the pageLimit
+     * @param page_limit the page_limit
      * @return the ListWorkspacesOptions builder
      */
-    public ListWorkspacesOptionsBuilder pageLimit(long pageLimit) {
-      this.pageLimit = pageLimit;
+    public ListWorkspacesOptionsBuilder pageLimit(Long page_limit) {
+      this.page_limit = page_limit;
       return this;
     }
 
     /**
-     * Set the includeCount.
+     * Set the include_count.
      *
-     * @param includeCount the includeCount
+     * @param include_count the include_count
      * @return the ListWorkspacesOptions builder
      */
-    public ListWorkspacesOptionsBuilder includeCount(Boolean includeCount) {
-      this.includeCount = includeCount;
+    public ListWorkspacesOptionsBuilder includeCount(Boolean include_count) {
+      this.include_count = include_count;
       return this;
     }
 
     /**
-     * Set the xsort.
+     * Set the sort_serialized_name.
      *
-     * @param xsort the xsort
+     * @param sort_serialized_name the sort_serialized_name
      * @return the ListWorkspacesOptions builder
      */
-    public ListWorkspacesOptionsBuilder xsort(String xsort) {
-      this.xsort = xsort;
+    public ListWorkspacesOptionsBuilder sortField(String sort_serialized_name) {
+      this.sort_serialized_name = sort_serialized_name;
       return this;
     }
 
@@ -7969,10 +7969,10 @@ public class ConversationV1Models {
   public class LogExport extends IBMWatsonGenericModel {
     private MessageRequest request;
     private MessageResponse response;
-    private String logId;
-    private String requestTimestamp;
-    private String responseTimestamp;
-    private String workspaceId;
+    private String log_id;
+    private String request_timestamp;
+    private String response_timestamp;
+    private String workspace_id;
     private String language;
     /**
      * Gets the request.
@@ -7995,44 +7995,44 @@ public class ConversationV1Models {
       return response;
     }
     /**
-     * Gets the logId.
+     * Gets the log_id.
      *
      * A unique identifier for the logged message.
      *
-     * @return the logId
+     * @return the log_id
      */
     public String getLogId() {
-      return logId;
+      return log_id;
     }
     /**
-     * Gets the requestTimestamp.
+     * Gets the request_timestamp.
      *
      * The timestamp for receipt of the message.
      *
-     * @return the requestTimestamp
+     * @return the request_timestamp
      */
     public String getRequestTimestamp() {
-      return requestTimestamp;
+      return request_timestamp;
     }
     /**
-     * Gets the responseTimestamp.
+     * Gets the response_timestamp.
      *
      * The timestamp for the system response to the message.
      *
-     * @return the responseTimestamp
+     * @return the response_timestamp
      */
     public String getResponseTimestamp() {
-      return responseTimestamp;
+      return response_timestamp;
     }
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String getWorkspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the language.
@@ -8064,39 +8064,39 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the logId.
+     * Sets the log_id.
      *
-     * @param logId the new logId
+     * @param log_id the new log_id
      */
-    public void setLogId(final String logId) {
-      this.logId = logId;
+    public void setLogId(final String log_id) {
+      this.log_id = log_id;
     }
 
     /**
-     * Sets the requestTimestamp.
+     * Sets the request_timestamp.
      *
-     * @param requestTimestamp the new requestTimestamp
+     * @param request_timestamp the new request_timestamp
      */
-    public void setRequestTimestamp(final String requestTimestamp) {
-      this.requestTimestamp = requestTimestamp;
+    public void setRequestTimestamp(final String request_timestamp) {
+      this.request_timestamp = request_timestamp;
     }
 
     /**
-     * Sets the responseTimestamp.
+     * Sets the response_timestamp.
      *
-     * @param responseTimestamp the new responseTimestamp
+     * @param response_timestamp the new response_timestamp
      */
-    public void setResponseTimestamp(final String responseTimestamp) {
-      this.responseTimestamp = responseTimestamp;
+    public void setResponseTimestamp(final String response_timestamp) {
+      this.response_timestamp = response_timestamp;
     }
 
     /**
-     * Sets the workspaceId.
+     * Sets the workspace_id.
      *
-     * @param workspaceId the new workspaceId
+     * @param workspace_id the new workspace_id
      */
-    public void setWorkspaceId(final String workspaceId) {
-      this.workspaceId = workspaceId;
+    public void setWorkspaceId(final String workspace_id) {
+      this.workspace_id = workspace_id;
     }
 
     /**
@@ -8155,17 +8155,17 @@ public class ConversationV1Models {
    * The pagination data for the returned objects.
    */
   public class LogPagination extends IBMWatsonGenericModel {
-    private String nextUrl;
+    private String next_url;
     private Long matched;
     /**
-     * Gets the nextUrl.
+     * Gets the next_url.
      *
      * The URL that will return the next page of results.
      *
-     * @return the nextUrl
+     * @return the next_url
      */
     public String getNextUrl() {
-      return nextUrl;
+      return next_url;
     }
     /**
      * Gets the matched.
@@ -8179,12 +8179,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the nextUrl.
+     * Sets the next_url.
      *
-     * @param nextUrl the new nextUrl
+     * @param next_url the new next_url
      */
-    public void setNextUrl(final String nextUrl) {
-      this.nextUrl = nextUrl;
+    public void setNextUrl(final String next_url) {
+      this.next_url = next_url;
     }
 
     /**
@@ -8227,22 +8227,22 @@ public class ConversationV1Models {
    * The message options.
    */
   public class MessageOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private InputData input;
-    private Boolean alternateIntents;
+    private Boolean alternate_intents;
     private Context context;
     private List<RuntimeEntity> entities;
     private List<RuntimeIntent> intents;
     private OutputData output;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * Unique identifier of the workspace.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the input.
@@ -8255,14 +8255,14 @@ public class ConversationV1Models {
       return input;
     }
     /**
-     * Gets the alternateIntents.
+     * Gets the alternate_intents.
      *
      * Whether to return more than one intent. Set to `true` to return all matching intents.
      *
-     * @return the alternateIntents
+     * @return the alternate_intents
      */
     public Boolean alternateIntents() {
-      return alternateIntents;
+      return alternate_intents;
     }
     /**
      * Gets the context.
@@ -8305,10 +8305,10 @@ public class ConversationV1Models {
       return output;
     }
     private MessageOptions(MessageOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
-      workspaceId = builder.workspaceId;
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
+      workspace_id = builder.workspace_id;
       input = builder.input;
-      alternateIntents = builder.alternateIntents;
+      alternate_intents = builder.alternate_intents;
       context = builder.context;
       entities = builder.entities;
       intents = builder.intents;
@@ -8329,22 +8329,22 @@ public class ConversationV1Models {
    * MessageOptions Builder.
    */
   public class MessageOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private InputData input;
-    private Boolean alternateIntents;
+    private Boolean alternate_intents;
     private Context context;
     private List<RuntimeEntity> entities;
     private List<RuntimeIntent> intents;
     private OutputData output;
 
-    private MessageOptionsBuilder(MessageOptions messageOptions) {
-      workspaceId = messageOptions.workspaceId;
-      input = messageOptions.input;
-      alternateIntents = messageOptions.alternateIntents;
-      context = messageOptions.context;
-      entities = messageOptions.entities;
-      intents = messageOptions.intents;
-      output = messageOptions.output;
+    private MessageOptionsBuilder(MessageOptions message_options) {
+      workspace_id = message_options.workspace_id;
+      input = message_options.input;
+      alternate_intents = message_options.alternate_intents;
+      context = message_options.context;
+      entities = message_options.entities;
+      intents = message_options.intents;
+      output = message_options.output;
     }
 
     /**
@@ -8356,59 +8356,59 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      */
-    public MessageOptionsBuilder(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public MessageOptionsBuilder(String workspace_id) {
+      this.workspace_id = workspace_id;
     }
 
     /**
      * Builds a MessageOptions.
      *
-     * @return the messageOptions
+     * @return the message_options
      */
     public MessageOptions build() {
       return new MessageOptions(this);
     }
 
     /**
-     * Adds an entity to entities.
+     * Adds an entities to entities.
      *
-     * @param entity the new entity
+     * @param entities the new entities
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder addEntity(RuntimeEntity entity) {
-      IBMWatsonValidator.notNull(entity, 'entity cannot be null');
+    public MessageOptionsBuilder addEntities(RuntimeEntity entities) {
+      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
       if (this.entities == null) {
         this.entities = new List<RuntimeEntity>();
       }
-      this.entities.add(entity);
+      this.entities.add(entities);
       return this;
     }
 
     /**
-     * Adds an intent to intents.
+     * Adds an intents to intents.
      *
-     * @param intent the new intent
+     * @param intents the new intents
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder addIntent(RuntimeIntent intent) {
-      IBMWatsonValidator.notNull(intent, 'intent cannot be null');
+    public MessageOptionsBuilder addIntents(RuntimeIntent intents) {
+      IBMWatsonValidator.notNull(intents, 'intents cannot be null');
       if (this.intents == null) {
         this.intents = new List<RuntimeIntent>();
       }
-      this.intents.add(intent);
+      this.intents.add(intents);
       return this;
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public MessageOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -8424,13 +8424,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the alternateIntents.
+     * Set the alternate_intents.
      *
-     * @param alternateIntents the alternateIntents
+     * @param alternate_intents the alternate_intents
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder alternateIntents(Boolean alternateIntents) {
-      this.alternateIntents = alternateIntents;
+    public MessageOptionsBuilder alternateIntents(Boolean alternate_intents) {
+      this.alternate_intents = alternate_intents;
       return this;
     }
 
@@ -8486,7 +8486,7 @@ public class ConversationV1Models {
    */
   public class MessageRequest extends IBMWatsonGenericModel {
     private InputData input;
-    private Boolean alternateIntents;
+    private Boolean alternate_intents;
     private Context context;
     private List<RuntimeEntity> entities;
     private List<RuntimeIntent> intents;
@@ -8502,14 +8502,14 @@ public class ConversationV1Models {
       return input;
     }
     /**
-     * Gets the alternateIntents.
+     * Gets the alternate_intents.
      *
      * Whether to return more than one intent. Set to `true` to return all matching intents.
      *
-     * @return the alternateIntents
+     * @return the alternate_intents
      */
     public Boolean isAlternateIntents() {
-      return alternateIntents;
+      return alternate_intents;
     }
     /**
      * Gets the context.
@@ -8562,12 +8562,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the alternateIntents.
+     * Sets the alternate_intents.
      *
-     * @param alternateIntents the new alternateIntents
+     * @param alternate_intents the new alternate_intents
      */
-    public void setAlternateIntents(final Boolean alternateIntents) {
-      this.alternateIntents = alternateIntents;
+    public void setAlternateIntents(final Boolean alternate_intents) {
+      this.alternate_intents = alternate_intents;
     }
 
     /**
@@ -8640,12 +8640,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Gets the alternateIntents.
+     * Gets the alternate_intents.
      *
-     * @return the alternateIntents
+     * @return the alternate_intents
      */
     public Boolean isAlternateIntents() {
-      return (Boolean)JSON.deserialize(JSON.serialize(this.get('alternateIntents')), Boolean.class);
+      return (Boolean)JSON.deserialize(JSON.serialize(this.get('alternate_intents')), Boolean.class);
     }
 
     /**
@@ -8694,12 +8694,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the alternateIntents.
+     * Sets the alternate_intents.
      *
-     * @param alternateIntents the new alternateIntents
+     * @param alternate_intents the new alternate_intents
      */
-    public void setAlternateIntents(final Boolean alternateIntents) {
-      this.put('alternateIntents', alternateIntents);
+    public void setAlternateIntents(final Boolean alternate_intents) {
+      this.put('alternate_intents', alternate_intents);
     }
 
     /**
@@ -8727,12 +8727,12 @@ public class ConversationV1Models {
   public class OutputData extends IBMWatsonDynamicModel {
 
     /**
-     * Gets the logMessages.
+     * Gets the log_messages.
      *
-     * @return the logMessages
+     * @return the log_messages
      */
     public List<LogMessage> getLogMessages() {
-      return (List<LogMessage>)JSON.deserialize(JSON.serialize(this.get('logMessages')), List<LogMessage>.class);
+      return (List<LogMessage>)JSON.deserialize(JSON.serialize(this.get('log_messages')), List<LogMessage>.class);
     }
 
     /**
@@ -8745,21 +8745,21 @@ public class ConversationV1Models {
     }
 
     /**
-     * Gets the nodesVisited.
+     * Gets the nodes_visited.
      *
-     * @return the nodesVisited
+     * @return the nodes_visited
      */
     public List<String> getNodesVisited() {
-      return (List<String>)JSON.deserialize(JSON.serialize(this.get('nodesVisited')), List<String>.class);
+      return (List<String>)JSON.deserialize(JSON.serialize(this.get('nodes_visited')), List<String>.class);
     }
 
     /**
-     * Sets the logMessages.
+     * Sets the log_messages.
      *
-     * @param logMessages the new logMessages
+     * @param log_messages the new log_messages
      */
-    public void setLogMessages(final List<LogMessage> logMessages) {
-      this.put('logMessages', logMessages);
+    public void setLogMessages(final List<LogMessage> log_messages) {
+      this.put('log_messages', log_messages);
     }
 
     /**
@@ -8772,12 +8772,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the nodesVisited.
+     * Sets the nodes_visited.
      *
-     * @param nodesVisited the new nodesVisited
+     * @param nodes_visited the new nodes_visited
      */
-    public void setNodesVisited(final List<String> nodesVisited) {
-      this.put('nodesVisited', nodesVisited);
+    public void setNodesVisited(final List<String> nodes_visited) {
+      this.put('nodes_visited', nodes_visited);
     }
   }
 
@@ -8785,29 +8785,29 @@ public class ConversationV1Models {
    * The pagination data for the returned objects.
    */
   public class Pagination extends IBMWatsonGenericModel {
-    private String refreshUrl;
-    private String nextUrl;
+    private String refresh_url;
+    private String next_url;
     private Long total;
     private Long matched;
     /**
-     * Gets the refreshUrl.
+     * Gets the refresh_url.
      *
      * The URL that will return the same page of results.
      *
-     * @return the refreshUrl
+     * @return the refresh_url
      */
     public String getRefreshUrl() {
-      return refreshUrl;
+      return refresh_url;
     }
     /**
-     * Gets the nextUrl.
+     * Gets the next_url.
      *
      * The URL that will return the next page of results.
      *
-     * @return the nextUrl
+     * @return the next_url
      */
     public String getNextUrl() {
-      return nextUrl;
+      return next_url;
     }
     /**
      * Gets the total.
@@ -8831,21 +8831,21 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the refreshUrl.
+     * Sets the refresh_url.
      *
-     * @param refreshUrl the new refreshUrl
+     * @param refresh_url the new refresh_url
      */
-    public void setRefreshUrl(final String refreshUrl) {
-      this.refreshUrl = refreshUrl;
+    public void setRefreshUrl(final String refresh_url) {
+      this.refresh_url = refresh_url;
     }
 
     /**
-     * Sets the nextUrl.
+     * Sets the next_url.
      *
-     * @param nextUrl the new nextUrl
+     * @param next_url the new next_url
      */
-    public void setNextUrl(final String nextUrl) {
-      this.nextUrl = nextUrl;
+    public void setNextUrl(final String next_url) {
+      this.next_url = next_url;
     }
 
     /**
@@ -8913,8 +8913,8 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
-      return (Map<String, Object>)JSON.deserialize(JSON.serialize(this.get('metadata')), Map<String, Object>.class);
+    public Map<String, String> getMetadata() {
+      return (Map<String, String>)JSON.deserialize(JSON.serialize(this.get('metadata')), Map<String, String>.class);
     }
 
     /**
@@ -8958,7 +8958,7 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.put('metadata', metadata);
     }
   }
@@ -9009,18 +9009,18 @@ public class ConversationV1Models {
    * Synonym.
    */
   public class Synonym extends IBMWatsonGenericModel {
-    private String synonymText;
+    private String synonym;
     private Datetime created;
     private Datetime updated;
     /**
-     * Gets the synonymText.
+     * Gets the synonym.
      *
      * The text of the synonym.
      *
-     * @return the synonymText
+     * @return the synonym
      */
-    public String getSynonymText() {
-      return synonymText;
+    public String getSynonym() {
+      return synonym;
     }
     /**
      * Gets the created.
@@ -9044,12 +9044,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the synonymText.
+     * Sets the synonym.
      *
-     * @param synonymText the new synonymText
+     * @param synonym the new synonym
      */
-    public void setSynonymText(final String synonymText) {
-      this.synonymText = synonymText;
+    public void setSynonym(final String synonym) {
+      this.synonym = synonym;
     }
   }
 
@@ -9109,18 +9109,18 @@ public class ConversationV1Models {
    * The updateCounterexample options.
    */
   public class UpdateCounterexampleOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String text;
-    private String newText;
+    private String new_text;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the text.
@@ -9133,21 +9133,21 @@ public class ConversationV1Models {
       return text;
     }
     /**
-     * Gets the newText.
+     * Gets the new_text.
      *
      * The text of the example to be marked as irrelevant input.
      *
-     * @return the newText
+     * @return the new_text
      */
     public String newText() {
-      return newText;
+      return new_text;
     }
     private UpdateCounterexampleOptions(UpdateCounterexampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.text, 'text cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       text = builder.text;
-      newText = builder.newText;
+      new_text = builder.new_text;
     }
 
     /**
@@ -9164,14 +9164,14 @@ public class ConversationV1Models {
    * UpdateCounterexampleOptions Builder.
    */
   public class UpdateCounterexampleOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String text;
-    private String newText;
+    private String new_text;
 
-    private UpdateCounterexampleOptionsBuilder(UpdateCounterexampleOptions updateCounterexampleOptions) {
-      workspaceId = updateCounterexampleOptions.workspaceId;
-      text = updateCounterexampleOptions.text;
-      newText = updateCounterexampleOptions.newText;
+    private UpdateCounterexampleOptionsBuilder(UpdateCounterexampleOptions update_counterexample_options) {
+      workspace_id = update_counterexample_options.workspace_id;
+      text = update_counterexample_options.text;
+      new_text = update_counterexample_options.new_text;
     }
 
     /**
@@ -9183,31 +9183,31 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param text the text
      */
-    public UpdateCounterexampleOptionsBuilder(String workspaceId, String text) {
-      this.workspaceId = workspaceId;
+    public UpdateCounterexampleOptionsBuilder(String workspace_id, String text) {
+      this.workspace_id = workspace_id;
       this.text = text;
     }
 
     /**
      * Builds a UpdateCounterexampleOptions.
      *
-     * @return the updateCounterexampleOptions
+     * @return the update_counterexample_options
      */
     public UpdateCounterexampleOptions build() {
       return new UpdateCounterexampleOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the UpdateCounterexampleOptions builder
      */
-    public UpdateCounterexampleOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public UpdateCounterexampleOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -9223,13 +9223,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the newText.
+     * Set the new_text.
      *
-     * @param newText the newText
+     * @param new_text the new_text
      * @return the UpdateCounterexampleOptions builder
      */
-    public UpdateCounterexampleOptionsBuilder newText(String newText) {
-      this.newText = newText;
+    public UpdateCounterexampleOptionsBuilder newText(String new_text) {
+      this.new_text = new_text;
       return this;
     }
   }
@@ -9238,202 +9238,202 @@ public class ConversationV1Models {
    * The UpdateDialogNode options.
    */
   public class UpdateDialogNodeOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
-    private String dialogNode;
-    private String nodeType;
-    private List<DialogNodeAction> newActions;
-    private String newConditions;
-    private Map<String, Object> newContext;
-    private String newPreviousSibling;
-    private String newVariable;
-    private Map<String, Object> newMetadata;
-    private String newTitle;
-    private String newDescription;
-    private String newEventName;
-    private DialogNodeNextStep newNextStep;
-    private Map<String, Object> newOutput;
-    private String newParent;
-    private String newDialogNode;
+    private String workspace_id;
+    private String dialog_node;
+    private String new_type;
+    private List<DialogNodeAction> new_actions;
+    private String new_conditions;
+    private Map<String, String> new_context;
+    private String new_previous_sibling;
+    private String new_variable;
+    private Map<String, String> new_metadata;
+    private String new_title;
+    private String new_description;
+    private String new_event_name;
+    private DialogNodeNextStep new_next_step;
+    private Map<String, String> new_output;
+    private String new_parent;
+    private String new_dialog_node;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
-     * Gets the dialogNode.
+     * Gets the dialog_node.
      *
      * The dialog node ID (for example, `get_order`).
      *
-     * @return the dialogNode
+     * @return the dialog_node
      */
     public String dialogNode() {
-      return dialogNode;
+      return dialog_node;
     }
     /**
-     * Gets the nodeType.
+     * Gets the new_type.
      *
      * How the node is processed.
      *
-     * @return the nodeType
+     * @return the new_type
      */
-    public String nodeType() {
-      return nodeType;
+    public String newType() {
+      return new_type;
     }
     /**
-     * Gets the newActions.
+     * Gets the new_actions.
      *
      * The actions for the dialog node.
      *
-     * @return the newActions
+     * @return the new_actions
      */
     public List<DialogNodeAction> newActions() {
-      return newActions;
+      return new_actions;
     }
     /**
-     * Gets the newConditions.
+     * Gets the new_conditions.
      *
      * The condition that will trigger the dialog node.
      *
-     * @return the newConditions
+     * @return the new_conditions
      */
     public String newConditions() {
-      return newConditions;
+      return new_conditions;
     }
     /**
-     * Gets the newContext.
+     * Gets the new_context.
      *
      * The context for the dialog node.
      *
-     * @return the newContext
+     * @return the new_context
      */
-    public Map<String, Object> newContext() {
-      return newContext;
+    public Map<String, String> newContext() {
+      return new_context;
     }
     /**
-     * Gets the newPreviousSibling.
+     * Gets the new_previous_sibling.
      *
      * The previous dialog node.
      *
-     * @return the newPreviousSibling
+     * @return the new_previous_sibling
      */
     public String newPreviousSibling() {
-      return newPreviousSibling;
+      return new_previous_sibling;
     }
     /**
-     * Gets the newVariable.
+     * Gets the new_variable.
      *
      * The location in the dialog context where output is stored.
      *
-     * @return the newVariable
+     * @return the new_variable
      */
     public String newVariable() {
-      return newVariable;
+      return new_variable;
     }
     /**
-     * Gets the newMetadata.
+     * Gets the new_metadata.
      *
      * The metadata for the dialog node.
      *
-     * @return the newMetadata
+     * @return the new_metadata
      */
-    public Map<String, Object> newMetadata() {
-      return newMetadata;
+    public Map<String, String> newMetadata() {
+      return new_metadata;
     }
     /**
-     * Gets the newTitle.
+     * Gets the new_title.
      *
      * The alias used to identify the dialog node.
      *
-     * @return the newTitle
+     * @return the new_title
      */
     public String newTitle() {
-      return newTitle;
+      return new_title;
     }
     /**
-     * Gets the newDescription.
+     * Gets the new_description.
      *
      * The description of the dialog node.
      *
-     * @return the newDescription
+     * @return the new_description
      */
     public String newDescription() {
-      return newDescription;
+      return new_description;
     }
     /**
-     * Gets the newEventName.
+     * Gets the new_event_name.
      *
      * How an `event_handler` node is processed.
      *
-     * @return the newEventName
+     * @return the new_event_name
      */
     public String newEventName() {
-      return newEventName;
+      return new_event_name;
     }
     /**
-     * Gets the newNextStep.
+     * Gets the new_next_step.
      *
      * The next step to execute following this dialog node.
      *
-     * @return the newNextStep
+     * @return the new_next_step
      */
     public DialogNodeNextStep newNextStep() {
-      return newNextStep;
+      return new_next_step;
     }
     /**
-     * Gets the newOutput.
+     * Gets the new_output.
      *
      * The output of the dialog node.
      *
-     * @return the newOutput
+     * @return the new_output
      */
-    public Map<String, Object> newOutput() {
-      return newOutput;
+    public Map<String, String> newOutput() {
+      return new_output;
     }
     /**
-     * Gets the newParent.
+     * Gets the new_parent.
      *
      * The ID of the parent dialog node (if any).
      *
-     * @return the newParent
+     * @return the new_parent
      */
     public String newParent() {
-      return newParent;
+      return new_parent;
     }
     /**
-     * Gets the newDialogNode.
+     * Gets the new_dialog_node.
      *
      * The dialog node ID.
      *
-     * @return the newDialogNode
+     * @return the new_dialog_node
      */
     public String newDialogNode() {
-      return newDialogNode;
+      return new_dialog_node;
     }
     private UpdateDialogNodeOptions(UpdateDialogNodeOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.dialogNode, 'dialogNode cannot be empty');
-      IBMWatsonValidator.notNull(builder.newDialogNode, 'newDialogNode cannot be null');
-      workspaceId = builder.workspaceId;
-      dialogNode = builder.dialogNode;
-      nodeType = builder.nodeType;
-      newActions = builder.newActions;
-      newConditions = builder.newConditions;
-      newContext = builder.newContext;
-      newPreviousSibling = builder.newPreviousSibling;
-      newVariable = builder.newVariable;
-      newMetadata = builder.newMetadata;
-      newTitle = builder.newTitle;
-      newDescription = builder.newDescription;
-      newEventName = builder.newEventName;
-      newNextStep = builder.newNextStep;
-      newOutput = builder.newOutput;
-      newParent = builder.newParent;
-      newDialogNode = builder.newDialogNode;
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.dialog_node, 'dialog_node cannot be empty');
+      IBMWatsonValidator.notNull(builder.new_dialog_node, 'new_dialog_node cannot be null');
+      workspace_id = builder.workspace_id;
+      dialog_node = builder.dialog_node;
+      new_type = builder.new_type;
+      new_actions = builder.new_actions;
+      new_conditions = builder.new_conditions;
+      new_context = builder.new_context;
+      new_previous_sibling = builder.new_previous_sibling;
+      new_variable = builder.new_variable;
+      new_metadata = builder.new_metadata;
+      new_title = builder.new_title;
+      new_description = builder.new_description;
+      new_event_name = builder.new_event_name;
+      new_next_step = builder.new_next_step;
+      new_output = builder.new_output;
+      new_parent = builder.new_parent;
+      new_dialog_node = builder.new_dialog_node;
     }
 
     /**
@@ -9450,40 +9450,40 @@ public class ConversationV1Models {
    * UpdateDialogNodeOptions Builder.
    */
   public class UpdateDialogNodeOptionsBuilder {
-    private String workspaceId;
-    private String dialogNode;
-    private String nodeType;
-    private List<DialogNodeAction> newActions;
-    private String newConditions;
-    private Map<String, Object> newContext;
-    private String newPreviousSibling;
-    private String newVariable;
-    private Map<String, Object> newMetadata;
-    private String newTitle;
-    private String newDescription;
-    private String newEventName;
-    private DialogNodeNextStep newNextStep;
-    private Map<String, Object> newOutput;
-    private String newParent;
-    private String newDialogNode;
+    private String workspace_id;
+    private String dialog_node;
+    private String new_type;
+    private List<DialogNodeAction> new_actions;
+    private String new_conditions;
+    private Map<String, String> new_context;
+    private String new_previous_sibling;
+    private String new_variable;
+    private Map<String, String> new_metadata;
+    private String new_title;
+    private String new_description;
+    private String new_event_name;
+    private DialogNodeNextStep new_next_step;
+    private Map<String, String> new_output;
+    private String new_parent;
+    private String new_dialog_node;
 
-    private UpdateDialogNodeOptionsBuilder(UpdateDialogNodeOptions updateDialogNodeOptions) {
-      workspaceId = updateDialogNodeOptions.workspaceId;
-      dialogNode = updateDialogNodeOptions.dialogNode;
-      nodeType = updateDialogNodeOptions.nodeType;
-      newActions = updateDialogNodeOptions.newActions;
-      newConditions = updateDialogNodeOptions.newConditions;
-      newContext = updateDialogNodeOptions.newContext;
-      newPreviousSibling = updateDialogNodeOptions.newPreviousSibling;
-      newVariable = updateDialogNodeOptions.newVariable;
-      newMetadata = updateDialogNodeOptions.newMetadata;
-      newTitle = updateDialogNodeOptions.newTitle;
-      newDescription = updateDialogNodeOptions.newDescription;
-      newEventName = updateDialogNodeOptions.newEventName;
-      newNextStep = updateDialogNodeOptions.newNextStep;
-      newOutput = updateDialogNodeOptions.newOutput;
-      newParent = updateDialogNodeOptions.newParent;
-      newDialogNode = updateDialogNodeOptions.newDialogNode;
+    private UpdateDialogNodeOptionsBuilder(UpdateDialogNodeOptions update_dialog_node_options) {
+      workspace_id = update_dialog_node_options.workspace_id;
+      dialog_node = update_dialog_node_options.dialog_node;
+      new_type = update_dialog_node_options.new_type;
+      new_actions = update_dialog_node_options.new_actions;
+      new_conditions = update_dialog_node_options.new_conditions;
+      new_context = update_dialog_node_options.new_context;
+      new_previous_sibling = update_dialog_node_options.new_previous_sibling;
+      new_variable = update_dialog_node_options.new_variable;
+      new_metadata = update_dialog_node_options.new_metadata;
+      new_title = update_dialog_node_options.new_title;
+      new_description = update_dialog_node_options.new_description;
+      new_event_name = update_dialog_node_options.new_event_name;
+      new_next_step = update_dialog_node_options.new_next_step;
+      new_output = update_dialog_node_options.new_output;
+      new_parent = update_dialog_node_options.new_parent;
+      new_dialog_node = update_dialog_node_options.new_dialog_node;
     }
 
     /**
@@ -9495,214 +9495,214 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
-     * @param dialogNode the dialogNode
-     * @param newDialogNode the newDialogNode
+     * @param workspace_id the workspace_id
+     * @param dialog_node the dialog_node
+     * @param new_dialog_node the new_dialog_node
      */
-    public UpdateDialogNodeOptionsBuilder(String workspaceId, String dialogNode, String newDialogNode) {
-      this.workspaceId = workspaceId;
-      this.dialogNode = dialogNode;
-      this.newDialogNode = newDialogNode;
+    public UpdateDialogNodeOptionsBuilder(String workspace_id, String dialog_node, String new_dialog_node) {
+      this.workspace_id = workspace_id;
+      this.dialog_node = dialog_node;
+      this.new_dialog_node = new_dialog_node;
     }
 
     /**
      * Builds a UpdateDialogNodeOptions.
      *
-     * @return the updateDialogNodeOptions
+     * @return the update_dialog_node_options
      */
     public UpdateDialogNodeOptions build() {
       return new UpdateDialogNodeOptions(this);
     }
 
     /**
-     * Adds an newActions to newActions.
+     * Adds an new_actions to new_actions.
      *
-     * @param newActions the new newActions
+     * @param new_actions the new new_actions
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder addNewActions(DialogNodeAction newActions) {
-      IBMWatsonValidator.notNull(newActions, 'newActions cannot be null');
-      if (this.newActions == null) {
-        this.newActions = new List<DialogNodeAction>();
+    public UpdateDialogNodeOptionsBuilder addNewActions(DialogNodeAction new_actions) {
+      IBMWatsonValidator.notNull(new_actions, 'new_actions cannot be null');
+      if (this.new_actions == null) {
+        this.new_actions = new List<DialogNodeAction>();
       }
-      this.newActions.add(newActions);
+      this.new_actions.add(new_actions);
       return this;
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public UpdateDialogNodeOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
     /**
-     * Set the dialogNode.
+     * Set the dialog_node.
      *
-     * @param dialogNode the dialogNode
+     * @param dialog_node the dialog_node
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder dialogNode(String dialogNode) {
-      this.dialogNode = dialogNode;
+    public UpdateDialogNodeOptionsBuilder dialogNode(String dialog_node) {
+      this.dialog_node = dialog_node;
       return this;
     }
 
     /**
-     * Set the nodeType.
+     * Set the new_type.
      *
-     * @param nodeType the nodeType
+     * @param new_type the new_type
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder nodeType(String nodeType) {
-      this.nodeType = nodeType;
+    public UpdateDialogNodeOptionsBuilder newType(String new_type) {
+      this.new_type = new_type;
       return this;
     }
 
     /**
-     * Set the newActions.
-     * Existing newActions will be replaced.
+     * Set the new_actions.
+     * Existing new_actions will be replaced.
      *
-     * @param newActions the newActions
+     * @param new_actions the new_actions
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newActions(List<DialogNodeAction> newActions) {
-      this.newActions = newActions;
+    public UpdateDialogNodeOptionsBuilder newActions(List<DialogNodeAction> new_actions) {
+      this.new_actions = new_actions;
       return this;
     }
 
     /**
-     * Set the newConditions.
+     * Set the new_conditions.
      *
-     * @param newConditions the newConditions
+     * @param new_conditions the new_conditions
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newConditions(String newConditions) {
-      this.newConditions = newConditions;
+    public UpdateDialogNodeOptionsBuilder newConditions(String new_conditions) {
+      this.new_conditions = new_conditions;
       return this;
     }
 
     /**
-     * Set the newContext.
+     * Set the new_context.
      *
-     * @param newContext the newContext
+     * @param new_context the new_context
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newContext(Map<String, Object> newContext) {
-      this.newContext = newContext;
+    public UpdateDialogNodeOptionsBuilder newContext(Map<String, String> new_context) {
+      this.new_context = new_context;
       return this;
     }
 
     /**
-     * Set the newPreviousSibling.
+     * Set the new_previous_sibling.
      *
-     * @param newPreviousSibling the newPreviousSibling
+     * @param new_previous_sibling the new_previous_sibling
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newPreviousSibling(String newPreviousSibling) {
-      this.newPreviousSibling = newPreviousSibling;
+    public UpdateDialogNodeOptionsBuilder newPreviousSibling(String new_previous_sibling) {
+      this.new_previous_sibling = new_previous_sibling;
       return this;
     }
 
     /**
-     * Set the newVariable.
+     * Set the new_variable.
      *
-     * @param newVariable the newVariable
+     * @param new_variable the new_variable
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newVariable(String newVariable) {
-      this.newVariable = newVariable;
+    public UpdateDialogNodeOptionsBuilder newVariable(String new_variable) {
+      this.new_variable = new_variable;
       return this;
     }
 
     /**
-     * Set the newMetadata.
+     * Set the new_metadata.
      *
-     * @param newMetadata the newMetadata
+     * @param new_metadata the new_metadata
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newMetadata(Map<String, Object> newMetadata) {
-      this.newMetadata = newMetadata;
+    public UpdateDialogNodeOptionsBuilder newMetadata(Map<String, String> new_metadata) {
+      this.new_metadata = new_metadata;
       return this;
     }
 
     /**
-     * Set the newTitle.
+     * Set the new_title.
      *
-     * @param newTitle the newTitle
+     * @param new_title the new_title
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newTitle(String newTitle) {
-      this.newTitle = newTitle;
+    public UpdateDialogNodeOptionsBuilder newTitle(String new_title) {
+      this.new_title = new_title;
       return this;
     }
 
     /**
-     * Set the newDescription.
+     * Set the new_description.
      *
-     * @param newDescription the newDescription
+     * @param new_description the new_description
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newDescription(String newDescription) {
-      this.newDescription = newDescription;
+    public UpdateDialogNodeOptionsBuilder newDescription(String new_description) {
+      this.new_description = new_description;
       return this;
     }
 
     /**
-     * Set the newEventName.
+     * Set the new_event_name.
      *
-     * @param newEventName the newEventName
+     * @param new_event_name the new_event_name
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newEventName(String newEventName) {
-      this.newEventName = newEventName;
+    public UpdateDialogNodeOptionsBuilder newEventName(String new_event_name) {
+      this.new_event_name = new_event_name;
       return this;
     }
 
     /**
-     * Set the newNextStep.
+     * Set the new_next_step.
      *
-     * @param newNextStep the newNextStep
+     * @param new_next_step the new_next_step
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newNextStep(DialogNodeNextStep newNextStep) {
-      this.newNextStep = newNextStep;
+    public UpdateDialogNodeOptionsBuilder newNextStep(DialogNodeNextStep new_next_step) {
+      this.new_next_step = new_next_step;
       return this;
     }
 
     /**
-     * Set the newOutput.
+     * Set the new_output.
      *
-     * @param newOutput the newOutput
+     * @param new_output the new_output
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newOutput(Map<String, Object> newOutput) {
-      this.newOutput = newOutput;
+    public UpdateDialogNodeOptionsBuilder newOutput(Map<String, String> new_output) {
+      this.new_output = new_output;
       return this;
     }
 
     /**
-     * Set the newParent.
+     * Set the new_parent.
      *
-     * @param newParent the newParent
+     * @param new_parent the new_parent
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newParent(String newParent) {
-      this.newParent = newParent;
+    public UpdateDialogNodeOptionsBuilder newParent(String new_parent) {
+      this.new_parent = new_parent;
       return this;
     }
 
     /**
-     * Set the newDialogNode.
+     * Set the new_dialog_node.
      *
-     * @param newDialogNode the newDialogNode
+     * @param new_dialog_node the new_dialog_node
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newDialogNode(String newDialogNode) {
-      this.newDialogNode = newDialogNode;
+    public UpdateDialogNodeOptionsBuilder newDialogNode(String new_dialog_node) {
+      this.new_dialog_node = new_dialog_node;
       return this;
     }
   }
@@ -9711,22 +9711,22 @@ public class ConversationV1Models {
    * The updateEntity options.
    */
   public class UpdateEntityOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
-    private Boolean newFuzzyMatch;
-    private String newEntity;
-    private Map<String, Object> newMetadata;
-    private List<CreateValue> newValues;
-    private String newDescription;
+    private Boolean new_fuzzy_match;
+    private String new_entity;
+    private Map<String, String> new_metadata;
+    private List<CreateValue> new_values;
+    private String new_description;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the entity.
@@ -9739,65 +9739,65 @@ public class ConversationV1Models {
       return entity;
     }
     /**
-     * Gets the newFuzzyMatch.
+     * Gets the new_fuzzy_match.
      *
      * Whether to use fuzzy matching for the entity.
      *
-     * @return the newFuzzyMatch
+     * @return the new_fuzzy_match
      */
     public Boolean newFuzzyMatch() {
-      return newFuzzyMatch;
+      return new_fuzzy_match;
     }
     /**
-     * Gets the newEntity.
+     * Gets the new_entity.
      *
      * The name of the entity.
      *
-     * @return the newEntity
+     * @return the new_entity
      */
     public String newEntity() {
-      return newEntity;
+      return new_entity;
     }
     /**
-     * Gets the newMetadata.
+     * Gets the new_metadata.
      *
      * Any metadata related to the entity.
      *
-     * @return the newMetadata
+     * @return the new_metadata
      */
-    public Map<String, Object> newMetadata() {
-      return newMetadata;
+    public Map<String, String> newMetadata() {
+      return new_metadata;
     }
     /**
-     * Gets the newValues.
+     * Gets the new_values.
      *
      * An array of entity values.
      *
-     * @return the newValues
+     * @return the new_values
      */
     public List<CreateValue> newValues() {
-      return newValues;
+      return new_values;
     }
     /**
-     * Gets the newDescription.
+     * Gets the new_description.
      *
      * The description of the entity.
      *
-     * @return the newDescription
+     * @return the new_description
      */
     public String newDescription() {
-      return newDescription;
+      return new_description;
     }
     private UpdateEntityOptions(UpdateEntityOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       entity = builder.entity;
-      newFuzzyMatch = builder.newFuzzyMatch;
-      newEntity = builder.newEntity;
-      newMetadata = builder.newMetadata;
-      newValues = builder.newValues;
-      newDescription = builder.newDescription;
+      new_fuzzy_match = builder.new_fuzzy_match;
+      new_entity = builder.new_entity;
+      new_metadata = builder.new_metadata;
+      new_values = builder.new_values;
+      new_description = builder.new_description;
     }
 
     /**
@@ -9814,22 +9814,22 @@ public class ConversationV1Models {
    * UpdateEntityOptions Builder.
    */
   public class UpdateEntityOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
-    private Boolean newFuzzyMatch;
-    private String newEntity;
-    private Map<String, Object> newMetadata;
-    private List<CreateValue> newValues;
-    private String newDescription;
+    private Boolean new_fuzzy_match;
+    private String new_entity;
+    private Map<String, String> new_metadata;
+    private List<CreateValue> new_values;
+    private String new_description;
 
-    private UpdateEntityOptionsBuilder(UpdateEntityOptions updateEntityOptions) {
-      workspaceId = updateEntityOptions.workspaceId;
-      entity = updateEntityOptions.entity;
-      newFuzzyMatch = updateEntityOptions.newFuzzyMatch;
-      newEntity = updateEntityOptions.newEntity;
-      newMetadata = updateEntityOptions.newMetadata;
-      newValues = updateEntityOptions.newValues;
-      newDescription = updateEntityOptions.newDescription;
+    private UpdateEntityOptionsBuilder(UpdateEntityOptions update_entity_options) {
+      workspace_id = update_entity_options.workspace_id;
+      entity = update_entity_options.entity;
+      new_fuzzy_match = update_entity_options.new_fuzzy_match;
+      new_entity = update_entity_options.new_entity;
+      new_metadata = update_entity_options.new_metadata;
+      new_values = update_entity_options.new_values;
+      new_description = update_entity_options.new_description;
     }
 
     /**
@@ -9841,46 +9841,46 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param entity the entity
      */
-    public UpdateEntityOptionsBuilder(String workspaceId, String entity) {
-      this.workspaceId = workspaceId;
+    public UpdateEntityOptionsBuilder(String workspace_id, String entity) {
+      this.workspace_id = workspace_id;
       this.entity = entity;
     }
 
     /**
      * Builds a UpdateEntityOptions.
      *
-     * @return the updateEntityOptions
+     * @return the update_entity_options
      */
     public UpdateEntityOptions build() {
       return new UpdateEntityOptions(this);
     }
 
     /**
-     * Adds an value to newValues.
+     * Adds an new_values to new_values.
      *
-     * @param value the new value
+     * @param new_values the new new_values
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder addValue(CreateValue value) {
-      IBMWatsonValidator.notNull(value, 'value cannot be null');
-      if (this.newValues == null) {
-        this.newValues = new List<CreateValue>();
+    public UpdateEntityOptionsBuilder addNewValues(CreateValue new_values) {
+      IBMWatsonValidator.notNull(new_values, 'new_values cannot be null');
+      if (this.new_values == null) {
+        this.new_values = new List<CreateValue>();
       }
-      this.newValues.add(value);
+      this.new_values.add(new_values);
       return this;
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public UpdateEntityOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -9896,58 +9896,58 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the newFuzzyMatch.
+     * Set the new_fuzzy_match.
      *
-     * @param newFuzzyMatch the newFuzzyMatch
+     * @param new_fuzzy_match the new_fuzzy_match
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder newFuzzyMatch(Boolean newFuzzyMatch) {
-      this.newFuzzyMatch = newFuzzyMatch;
+    public UpdateEntityOptionsBuilder newFuzzyMatch(Boolean new_fuzzy_match) {
+      this.new_fuzzy_match = new_fuzzy_match;
       return this;
     }
 
     /**
-     * Set the newEntity.
+     * Set the new_entity.
      *
-     * @param newEntity the newEntity
+     * @param new_entity the new_entity
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder newEntity(String newEntity) {
-      this.newEntity = newEntity;
+    public UpdateEntityOptionsBuilder newEntity(String new_entity) {
+      this.new_entity = new_entity;
       return this;
     }
 
     /**
-     * Set the newMetadata.
+     * Set the new_metadata.
      *
-     * @param newMetadata the newMetadata
+     * @param new_metadata the new_metadata
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder newMetadata(Map<String, Object> newMetadata) {
-      this.newMetadata = newMetadata;
+    public UpdateEntityOptionsBuilder newMetadata(Map<String, String> new_metadata) {
+      this.new_metadata = new_metadata;
       return this;
     }
 
     /**
-     * Set the newValues.
-     * Existing newValues will be replaced.
+     * Set the new_values.
+     * Existing new_values will be replaced.
      *
-     * @param newValues the newValues
+     * @param new_values the new_values
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder newValues(List<CreateValue> newValues) {
-      this.newValues = newValues;
+    public UpdateEntityOptionsBuilder newValues(List<CreateValue> new_values) {
+      this.new_values = new_values;
       return this;
     }
 
     /**
-     * Set the newDescription.
+     * Set the new_description.
      *
-     * @param newDescription the newDescription
+     * @param new_description the new_description
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder newDescription(String newDescription) {
-      this.newDescription = newDescription;
+    public UpdateEntityOptionsBuilder newDescription(String new_description) {
+      this.new_description = new_description;
       return this;
     }
   }
@@ -9956,19 +9956,19 @@ public class ConversationV1Models {
    * The updateExample options.
    */
   public class UpdateExampleOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
     private String text;
-    private String newText;
+    private String new_text;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the intent.
@@ -9991,23 +9991,23 @@ public class ConversationV1Models {
       return text;
     }
     /**
-     * Gets the newText.
+     * Gets the new_text.
      *
      * The text of the user input example.
      *
-     * @return the newText
+     * @return the new_text
      */
     public String newText() {
-      return newText;
+      return new_text;
     }
     private UpdateExampleOptions(UpdateExampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent, 'intent cannot be empty');
       IBMWatsonValidator.notEmpty(builder.text, 'text cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       intent = builder.intent;
       text = builder.text;
-      newText = builder.newText;
+      new_text = builder.new_text;
     }
 
     /**
@@ -10024,16 +10024,16 @@ public class ConversationV1Models {
    * UpdateExampleOptions Builder.
    */
   public class UpdateExampleOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
     private String text;
-    private String newText;
+    private String new_text;
 
-    private UpdateExampleOptionsBuilder(UpdateExampleOptions updateExampleOptions) {
-      workspaceId = updateExampleOptions.workspaceId;
-      intent = updateExampleOptions.intent;
-      text = updateExampleOptions.text;
-      newText = updateExampleOptions.newText;
+    private UpdateExampleOptionsBuilder(UpdateExampleOptions update_example_options) {
+      workspace_id = update_example_options.workspace_id;
+      intent = update_example_options.intent;
+      text = update_example_options.text;
+      new_text = update_example_options.new_text;
     }
 
     /**
@@ -10045,12 +10045,12 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param intent the intent
      * @param text the text
      */
-    public UpdateExampleOptionsBuilder(String workspaceId, String intent, String text) {
-      this.workspaceId = workspaceId;
+    public UpdateExampleOptionsBuilder(String workspace_id, String intent, String text) {
+      this.workspace_id = workspace_id;
       this.intent = intent;
       this.text = text;
     }
@@ -10058,20 +10058,20 @@ public class ConversationV1Models {
     /**
      * Builds a UpdateExampleOptions.
      *
-     * @return the updateExampleOptions
+     * @return the update_example_options
      */
     public UpdateExampleOptions build() {
       return new UpdateExampleOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the UpdateExampleOptions builder
      */
-    public UpdateExampleOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public UpdateExampleOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -10098,13 +10098,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the newText.
+     * Set the new_text.
      *
-     * @param newText the newText
+     * @param new_text the new_text
      * @return the UpdateExampleOptions builder
      */
-    public UpdateExampleOptionsBuilder newText(String newText) {
-      this.newText = newText;
+    public UpdateExampleOptionsBuilder newText(String new_text) {
+      this.new_text = new_text;
       return this;
     }
   }
@@ -10113,20 +10113,20 @@ public class ConversationV1Models {
    * The updateIntent options.
    */
   public class UpdateIntentOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
-    private String newIntent;
-    private List<CreateExample> newExamples;
-    private String newDescription;
+    private String new_intent;
+    private List<CreateExample> new_examples;
+    private String new_description;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the intent.
@@ -10139,43 +10139,43 @@ public class ConversationV1Models {
       return intent;
     }
     /**
-     * Gets the newIntent.
+     * Gets the new_intent.
      *
      * The name of the intent.
      *
-     * @return the newIntent
+     * @return the new_intent
      */
     public String newIntent() {
-      return newIntent;
+      return new_intent;
     }
     /**
-     * Gets the newExamples.
+     * Gets the new_examples.
      *
      * An array of user input examples for the intent.
      *
-     * @return the newExamples
+     * @return the new_examples
      */
     public List<CreateExample> newExamples() {
-      return newExamples;
+      return new_examples;
     }
     /**
-     * Gets the newDescription.
+     * Gets the new_description.
      *
      * The description of the intent.
      *
-     * @return the newDescription
+     * @return the new_description
      */
     public String newDescription() {
-      return newDescription;
+      return new_description;
     }
     private UpdateIntentOptions(UpdateIntentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent, 'intent cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       intent = builder.intent;
-      newIntent = builder.newIntent;
-      newExamples = builder.newExamples;
-      newDescription = builder.newDescription;
+      new_intent = builder.new_intent;
+      new_examples = builder.new_examples;
+      new_description = builder.new_description;
     }
 
     /**
@@ -10192,18 +10192,18 @@ public class ConversationV1Models {
    * UpdateIntentOptions Builder.
    */
   public class UpdateIntentOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String intent;
-    private String newIntent;
-    private List<CreateExample> newExamples;
-    private String newDescription;
+    private String new_intent;
+    private List<CreateExample> new_examples;
+    private String new_description;
 
-    private UpdateIntentOptionsBuilder(UpdateIntentOptions updateIntentOptions) {
-      workspaceId = updateIntentOptions.workspaceId;
-      intent = updateIntentOptions.intent;
-      newIntent = updateIntentOptions.newIntent;
-      newExamples = updateIntentOptions.newExamples;
-      newDescription = updateIntentOptions.newDescription;
+    private UpdateIntentOptionsBuilder(UpdateIntentOptions update_intent_options) {
+      workspace_id = update_intent_options.workspace_id;
+      intent = update_intent_options.intent;
+      new_intent = update_intent_options.new_intent;
+      new_examples = update_intent_options.new_examples;
+      new_description = update_intent_options.new_description;
     }
 
     /**
@@ -10215,46 +10215,46 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param intent the intent
      */
-    public UpdateIntentOptionsBuilder(String workspaceId, String intent) {
-      this.workspaceId = workspaceId;
+    public UpdateIntentOptionsBuilder(String workspace_id, String intent) {
+      this.workspace_id = workspace_id;
       this.intent = intent;
     }
 
     /**
      * Builds a UpdateIntentOptions.
      *
-     * @return the updateIntentOptions
+     * @return the update_intent_options
      */
     public UpdateIntentOptions build() {
       return new UpdateIntentOptions(this);
     }
 
     /**
-     * Adds an example to newExamples.
+     * Adds an new_examples to new_examples.
      *
-     * @param example the new example
+     * @param new_examples the new new_examples
      * @return the UpdateIntentOptions builder
      */
-    public UpdateIntentOptionsBuilder addExample(CreateExample example) {
-      IBMWatsonValidator.notNull(example, 'example cannot be null');
-      if (this.newExamples == null) {
-        this.newExamples = new List<CreateExample>();
+    public UpdateIntentOptionsBuilder addNewExamples(CreateExample new_examples) {
+      IBMWatsonValidator.notNull(new_examples, 'new_examples cannot be null');
+      if (this.new_examples == null) {
+        this.new_examples = new List<CreateExample>();
       }
-      this.newExamples.add(example);
+      this.new_examples.add(new_examples);
       return this;
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the UpdateIntentOptions builder
      */
-    public UpdateIntentOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public UpdateIntentOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -10270,36 +10270,36 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the newIntent.
+     * Set the new_intent.
      *
-     * @param newIntent the newIntent
+     * @param new_intent the new_intent
      * @return the UpdateIntentOptions builder
      */
-    public UpdateIntentOptionsBuilder newIntent(String newIntent) {
-      this.newIntent = newIntent;
+    public UpdateIntentOptionsBuilder newIntent(String new_intent) {
+      this.new_intent = new_intent;
       return this;
     }
 
     /**
-     * Set the newExamples.
-     * Existing newExamples will be replaced.
+     * Set the new_examples.
+     * Existing new_examples will be replaced.
      *
-     * @param newExamples the newExamples
+     * @param new_examples the new_examples
      * @return the UpdateIntentOptions builder
      */
-    public UpdateIntentOptionsBuilder newExamples(List<CreateExample> newExamples) {
-      this.newExamples = newExamples;
+    public UpdateIntentOptionsBuilder newExamples(List<CreateExample> new_examples) {
+      this.new_examples = new_examples;
       return this;
     }
 
     /**
-     * Set the newDescription.
+     * Set the new_description.
      *
-     * @param newDescription the newDescription
+     * @param new_description the new_description
      * @return the UpdateIntentOptions builder
      */
-    public UpdateIntentOptionsBuilder newDescription(String newDescription) {
-      this.newDescription = newDescription;
+    public UpdateIntentOptionsBuilder newDescription(String new_description) {
+      this.new_description = new_description;
       return this;
     }
   }
@@ -10308,20 +10308,20 @@ public class ConversationV1Models {
    * The updateSynonym options.
    */
   public class UpdateSynonymOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
     private String synonym;
-    private String newSynonym;
+    private String new_synonym;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the entity.
@@ -10354,25 +10354,25 @@ public class ConversationV1Models {
       return synonym;
     }
     /**
-     * Gets the newSynonym.
+     * Gets the new_synonym.
      *
      * The text of the synonym.
      *
-     * @return the newSynonym
+     * @return the new_synonym
      */
     public String newSynonym() {
-      return newSynonym;
+      return new_synonym;
     }
     private UpdateSynonymOptions(UpdateSynonymOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       IBMWatsonValidator.notEmpty(builder.value, 'value cannot be empty');
       IBMWatsonValidator.notEmpty(builder.synonym, 'synonym cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       entity = builder.entity;
       value = builder.value;
       synonym = builder.synonym;
-      newSynonym = builder.newSynonym;
+      new_synonym = builder.new_synonym;
     }
 
     /**
@@ -10389,18 +10389,18 @@ public class ConversationV1Models {
    * UpdateSynonymOptions Builder.
    */
   public class UpdateSynonymOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
     private String synonym;
-    private String newSynonym;
+    private String new_synonym;
 
-    private UpdateSynonymOptionsBuilder(UpdateSynonymOptions updateSynonymOptions) {
-      workspaceId = updateSynonymOptions.workspaceId;
-      entity = updateSynonymOptions.entity;
-      value = updateSynonymOptions.value;
-      synonym = updateSynonymOptions.synonym;
-      newSynonym = updateSynonymOptions.newSynonym;
+    private UpdateSynonymOptionsBuilder(UpdateSynonymOptions update_synonym_options) {
+      workspace_id = update_synonym_options.workspace_id;
+      entity = update_synonym_options.entity;
+      value = update_synonym_options.value;
+      synonym = update_synonym_options.synonym;
+      new_synonym = update_synonym_options.new_synonym;
     }
 
     /**
@@ -10412,13 +10412,13 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param entity the entity
      * @param value the value
      * @param synonym the synonym
      */
-    public UpdateSynonymOptionsBuilder(String workspaceId, String entity, String value, String synonym) {
-      this.workspaceId = workspaceId;
+    public UpdateSynonymOptionsBuilder(String workspace_id, String entity, String value, String synonym) {
+      this.workspace_id = workspace_id;
       this.entity = entity;
       this.value = value;
       this.synonym = synonym;
@@ -10427,20 +10427,20 @@ public class ConversationV1Models {
     /**
      * Builds a UpdateSynonymOptions.
      *
-     * @return the updateSynonymOptions
+     * @return the update_synonym_options
      */
     public UpdateSynonymOptions build() {
       return new UpdateSynonymOptions(this);
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the UpdateSynonymOptions builder
      */
-    public UpdateSynonymOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public UpdateSynonymOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -10478,13 +10478,13 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the newSynonym.
+     * Set the new_synonym.
      *
-     * @param newSynonym the newSynonym
+     * @param new_synonym the new_synonym
      * @return the UpdateSynonymOptions builder
      */
-    public UpdateSynonymOptionsBuilder newSynonym(String newSynonym) {
-      this.newSynonym = newSynonym;
+    public UpdateSynonymOptionsBuilder newSynonym(String new_synonym) {
+      this.new_synonym = new_synonym;
       return this;
     }
   }
@@ -10493,23 +10493,23 @@ public class ConversationV1Models {
    * The updateValue options.
    */
   public class UpdateValueOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
-    private List<String> newSynonyms;
-    private String valueType;
-    private Map<String, Object> newMetadata;
-    private List<String> newPatterns;
-    private String newValue;
+    private List<String> new_synonyms;
+    private String new_type;
+    private Map<String, String> new_metadata;
+    private List<String> new_patterns;
+    private String new_value;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the entity.
@@ -10532,67 +10532,67 @@ public class ConversationV1Models {
       return value;
     }
     /**
-     * Gets the newSynonyms.
+     * Gets the new_synonyms.
      *
      * An array of synonyms for the entity value.
      *
-     * @return the newSynonyms
+     * @return the new_synonyms
      */
     public List<String> newSynonyms() {
-      return newSynonyms;
+      return new_synonyms;
     }
     /**
-     * Gets the valueType.
+     * Gets the new_type.
      *
      * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
      *
-     * @return the valueType
+     * @return the new_type
      */
-    public String valueType() {
-      return valueType;
+    public String newType() {
+      return new_type;
     }
     /**
-     * Gets the newMetadata.
+     * Gets the new_metadata.
      *
      * Any metadata related to the entity value.
      *
-     * @return the newMetadata
+     * @return the new_metadata
      */
-    public Map<String, Object> newMetadata() {
-      return newMetadata;
+    public Map<String, String> newMetadata() {
+      return new_metadata;
     }
     /**
-     * Gets the newPatterns.
+     * Gets the new_patterns.
      *
      * An array of patterns for the entity value. A pattern is specified as a regular expression.
      *
-     * @return the newPatterns
+     * @return the new_patterns
      */
     public List<String> newPatterns() {
-      return newPatterns;
+      return new_patterns;
     }
     /**
-     * Gets the newValue.
+     * Gets the new_value.
      *
      * The text of the entity value.
      *
-     * @return the newValue
+     * @return the new_value
      */
     public String newValue() {
-      return newValue;
+      return new_value;
     }
     private UpdateValueOptions(UpdateValueOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       IBMWatsonValidator.notEmpty(builder.value, 'value cannot be empty');
-      workspaceId = builder.workspaceId;
+      workspace_id = builder.workspace_id;
       entity = builder.entity;
       value = builder.value;
-      newSynonyms = builder.newSynonyms;
-      valueType = builder.valueType;
-      newMetadata = builder.newMetadata;
-      newPatterns = builder.newPatterns;
-      newValue = builder.newValue;
+      new_synonyms = builder.new_synonyms;
+      new_type = builder.new_type;
+      new_metadata = builder.new_metadata;
+      new_patterns = builder.new_patterns;
+      new_value = builder.new_value;
     }
 
     /**
@@ -10609,24 +10609,24 @@ public class ConversationV1Models {
    * UpdateValueOptions Builder.
    */
   public class UpdateValueOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String entity;
     private String value;
-    private List<String> newSynonyms;
-    private String valueType;
-    private Map<String, Object> newMetadata;
-    private List<String> newPatterns;
-    private String newValue;
+    private List<String> new_synonyms;
+    private String new_type;
+    private Map<String, String> new_metadata;
+    private List<String> new_patterns;
+    private String new_value;
 
-    private UpdateValueOptionsBuilder(UpdateValueOptions updateValueOptions) {
-      workspaceId = updateValueOptions.workspaceId;
-      entity = updateValueOptions.entity;
-      value = updateValueOptions.value;
-      newSynonyms = updateValueOptions.newSynonyms;
-      valueType = updateValueOptions.valueType;
-      newMetadata = updateValueOptions.newMetadata;
-      newPatterns = updateValueOptions.newPatterns;
-      newValue = updateValueOptions.newValue;
+    private UpdateValueOptionsBuilder(UpdateValueOptions update_value_options) {
+      workspace_id = update_value_options.workspace_id;
+      entity = update_value_options.entity;
+      value = update_value_options.value;
+      new_synonyms = update_value_options.new_synonyms;
+      new_type = update_value_options.new_type;
+      new_metadata = update_value_options.new_metadata;
+      new_patterns = update_value_options.new_patterns;
+      new_value = update_value_options.new_value;
     }
 
     /**
@@ -10638,12 +10638,12 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @param entity the entity
      * @param value the value
      */
-    public UpdateValueOptionsBuilder(String workspaceId, String entity, String value) {
-      this.workspaceId = workspaceId;
+    public UpdateValueOptionsBuilder(String workspace_id, String entity, String value) {
+      this.workspace_id = workspace_id;
       this.entity = entity;
       this.value = value;
     }
@@ -10651,50 +10651,50 @@ public class ConversationV1Models {
     /**
      * Builds a UpdateValueOptions.
      *
-     * @return the updateValueOptions
+     * @return the update_value_options
      */
     public UpdateValueOptions build() {
       return new UpdateValueOptions(this);
     }
 
     /**
-     * Adds an synonym to newSynonyms.
+     * Adds an new_synonyms to new_synonyms.
      *
-     * @param synonym the new synonym
+     * @param new_synonyms the new new_synonyms
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder addSynonym(String synonym) {
-      IBMWatsonValidator.notNull(synonym, 'synonym cannot be null');
-      if (this.newSynonyms == null) {
-        this.newSynonyms = new List<String>();
+    public UpdateValueOptionsBuilder addNewSynonyms(String new_synonyms) {
+      IBMWatsonValidator.notNull(new_synonyms, 'new_synonyms cannot be null');
+      if (this.new_synonyms == null) {
+        this.new_synonyms = new List<String>();
       }
-      this.newSynonyms.add(synonym);
+      this.new_synonyms.add(new_synonyms);
       return this;
     }
 
     /**
-     * Adds an newPatterns to newPatterns.
+     * Adds an new_patterns to new_patterns.
      *
-     * @param newPatterns the new newPatterns
+     * @param new_patterns the new new_patterns
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder addNewPatterns(String newPatterns) {
-      IBMWatsonValidator.notNull(newPatterns, 'newPatterns cannot be null');
-      if (this.newPatterns == null) {
-        this.newPatterns = new List<String>();
+    public UpdateValueOptionsBuilder addNewPatterns(String new_patterns) {
+      IBMWatsonValidator.notNull(new_patterns, 'new_patterns cannot be null');
+      if (this.new_patterns == null) {
+        this.new_patterns = new List<String>();
       }
-      this.newPatterns.add(newPatterns);
+      this.new_patterns.add(new_patterns);
       return this;
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public UpdateValueOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -10721,59 +10721,59 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the newSynonyms.
-     * Existing newSynonyms will be replaced.
+     * Set the new_synonyms.
+     * Existing new_synonyms will be replaced.
      *
-     * @param newSynonyms the newSynonyms
+     * @param new_synonyms the new_synonyms
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder newSynonyms(List<String> newSynonyms) {
-      this.newSynonyms = newSynonyms;
+    public UpdateValueOptionsBuilder newSynonyms(List<String> new_synonyms) {
+      this.new_synonyms = new_synonyms;
       return this;
     }
 
     /**
-     * Set the valueType.
+     * Set the new_type.
      *
-     * @param valueType the valueType
+     * @param new_type the new_type
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder valueType(String valueType) {
-      this.valueType = valueType;
+    public UpdateValueOptionsBuilder newType(String new_type) {
+      this.new_type = new_type;
       return this;
     }
 
     /**
-     * Set the newMetadata.
+     * Set the new_metadata.
      *
-     * @param newMetadata the newMetadata
+     * @param new_metadata the new_metadata
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder newMetadata(Map<String, Object> newMetadata) {
-      this.newMetadata = newMetadata;
+    public UpdateValueOptionsBuilder newMetadata(Map<String, String> new_metadata) {
+      this.new_metadata = new_metadata;
       return this;
     }
 
     /**
-     * Set the newPatterns.
-     * Existing newPatterns will be replaced.
+     * Set the new_patterns.
+     * Existing new_patterns will be replaced.
      *
-     * @param newPatterns the newPatterns
+     * @param new_patterns the new_patterns
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder newPatterns(List<String> newPatterns) {
-      this.newPatterns = newPatterns;
+    public UpdateValueOptionsBuilder newPatterns(List<String> new_patterns) {
+      this.new_patterns = new_patterns;
       return this;
     }
 
     /**
-     * Set the newValue.
+     * Set the new_value.
      *
-     * @param newValue the newValue
+     * @param new_value the new_value
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder newValue(String newValue) {
-      this.newValue = newValue;
+    public UpdateValueOptionsBuilder newValue(String new_value) {
+      this.new_value = new_value;
       return this;
     }
   }
@@ -10782,25 +10782,25 @@ public class ConversationV1Models {
    * The updateWorkspace options.
    */
   public class UpdateWorkspaceOptions extends IBMWatsonGenericModel {
-    private String workspaceId;
+    private String workspace_id;
     private String name;
     private String description;
     private String language;
     private List<CreateIntent> intents;
     private List<CreateEntity> entities;
-    private List<CreateDialogNode> dialogNodes;
+    private List<CreateDialogNode> dialog_nodes;
     private List<CreateCounterexample> counterexamples;
-    private Map<String, Object> metadata;
-    private Boolean learningOptOut;
+    private Map<String, String> metadata;
+    private Boolean learning_opt_out;
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String workspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the name.
@@ -10853,14 +10853,14 @@ public class ConversationV1Models {
       return entities;
     }
     /**
-     * Gets the dialogNodes.
+     * Gets the dialog_nodes.
      *
      * An array of objects defining the nodes in the workspace dialog.
      *
-     * @return the dialogNodes
+     * @return the dialog_nodes
      */
     public List<CreateDialogNode> dialogNodes() {
-      return dialogNodes;
+      return dialog_nodes;
     }
     /**
      * Gets the counterexamples.
@@ -10879,31 +10879,31 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> metadata() {
+    public Map<String, String> metadata() {
       return metadata;
     }
     /**
-     * Gets the learningOptOut.
+     * Gets the learning_opt_out.
      *
      * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
      *
-     * @return the learningOptOut
+     * @return the learning_opt_out
      */
     public Boolean learningOptOut() {
-      return learningOptOut;
+      return learning_opt_out;
     }
     private UpdateWorkspaceOptions(UpdateWorkspaceOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
-      workspaceId = builder.workspaceId;
+      IBMWatsonValidator.notEmpty(builder.workspace_id, 'workspace_id cannot be empty');
+      workspace_id = builder.workspace_id;
       name = builder.name;
       description = builder.description;
       language = builder.language;
       intents = builder.intents;
       entities = builder.entities;
-      dialogNodes = builder.dialogNodes;
+      dialog_nodes = builder.dialog_nodes;
       counterexamples = builder.counterexamples;
       metadata = builder.metadata;
-      learningOptOut = builder.learningOptOut;
+      learning_opt_out = builder.learning_opt_out;
     }
 
     /**
@@ -10920,28 +10920,28 @@ public class ConversationV1Models {
    * UpdateWorkspaceOptions Builder.
    */
   public class UpdateWorkspaceOptionsBuilder {
-    private String workspaceId;
+    private String workspace_id;
     private String name;
     private String description;
     private String language;
     private List<CreateIntent> intents;
     private List<CreateEntity> entities;
-    private List<CreateDialogNode> dialogNodes;
+    private List<CreateDialogNode> dialog_nodes;
     private List<CreateCounterexample> counterexamples;
-    private Map<String, Object> metadata;
-    private Boolean learningOptOut;
+    private Map<String, String> metadata;
+    private Boolean learning_opt_out;
 
-    private UpdateWorkspaceOptionsBuilder(UpdateWorkspaceOptions updateWorkspaceOptions) {
-      workspaceId = updateWorkspaceOptions.workspaceId;
-      name = updateWorkspaceOptions.name;
-      description = updateWorkspaceOptions.description;
-      language = updateWorkspaceOptions.language;
-      intents = updateWorkspaceOptions.intents;
-      entities = updateWorkspaceOptions.entities;
-      dialogNodes = updateWorkspaceOptions.dialogNodes;
-      counterexamples = updateWorkspaceOptions.counterexamples;
-      metadata = updateWorkspaceOptions.metadata;
-      learningOptOut = updateWorkspaceOptions.learningOptOut;
+    private UpdateWorkspaceOptionsBuilder(UpdateWorkspaceOptions update_workspace_options) {
+      workspace_id = update_workspace_options.workspace_id;
+      name = update_workspace_options.name;
+      description = update_workspace_options.description;
+      language = update_workspace_options.language;
+      intents = update_workspace_options.intents;
+      entities = update_workspace_options.entities;
+      dialog_nodes = update_workspace_options.dialog_nodes;
+      counterexamples = update_workspace_options.counterexamples;
+      metadata = update_workspace_options.metadata;
+      learning_opt_out = update_workspace_options.learning_opt_out;
     }
 
     /**
@@ -10953,89 +10953,89 @@ public class ConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      */
-    public UpdateWorkspaceOptionsBuilder(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public UpdateWorkspaceOptionsBuilder(String workspace_id) {
+      this.workspace_id = workspace_id;
     }
 
     /**
      * Builds a UpdateWorkspaceOptions.
      *
-     * @return the updateWorkspaceOptions
+     * @return the update_workspace_options
      */
     public UpdateWorkspaceOptions build() {
       return new UpdateWorkspaceOptions(this);
     }
 
     /**
-     * Adds an intent to intents.
+     * Adds an intents to intents.
      *
-     * @param intent the new intent
+     * @param intents the new intents
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder addIntent(CreateIntent intent) {
-      IBMWatsonValidator.notNull(intent, 'intent cannot be null');
+    public UpdateWorkspaceOptionsBuilder addIntents(CreateIntent intents) {
+      IBMWatsonValidator.notNull(intents, 'intents cannot be null');
       if (this.intents == null) {
         this.intents = new List<CreateIntent>();
       }
-      this.intents.add(intent);
+      this.intents.add(intents);
       return this;
     }
 
     /**
-     * Adds an entity to entities.
+     * Adds an entities to entities.
      *
-     * @param entity the new entity
+     * @param entities the new entities
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder addEntity(CreateEntity entity) {
-      IBMWatsonValidator.notNull(entity, 'entity cannot be null');
+    public UpdateWorkspaceOptionsBuilder addEntities(CreateEntity entities) {
+      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
       if (this.entities == null) {
         this.entities = new List<CreateEntity>();
       }
-      this.entities.add(entity);
+      this.entities.add(entities);
       return this;
     }
 
     /**
-     * Adds an dialogNode to dialogNodes.
+     * Adds an dialog_nodes to dialog_nodes.
      *
-     * @param dialogNode the new dialogNode
+     * @param dialog_nodes the new dialog_nodes
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder addDialogNode(CreateDialogNode dialogNode) {
-      IBMWatsonValidator.notNull(dialogNode, 'dialogNode cannot be null');
-      if (this.dialogNodes == null) {
-        this.dialogNodes = new List<CreateDialogNode>();
+    public UpdateWorkspaceOptionsBuilder addDialogNodes(CreateDialogNode dialog_nodes) {
+      IBMWatsonValidator.notNull(dialog_nodes, 'dialog_nodes cannot be null');
+      if (this.dialog_nodes == null) {
+        this.dialog_nodes = new List<CreateDialogNode>();
       }
-      this.dialogNodes.add(dialogNode);
+      this.dialog_nodes.add(dialog_nodes);
       return this;
     }
 
     /**
-     * Adds an counterexample to counterexamples.
+     * Adds an counterexamples to counterexamples.
      *
-     * @param counterexample the new counterexample
+     * @param counterexamples the new counterexamples
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder addCounterexample(CreateCounterexample counterexample) {
-      IBMWatsonValidator.notNull(counterexample, 'counterexample cannot be null');
+    public UpdateWorkspaceOptionsBuilder addCounterexamples(CreateCounterexample counterexamples) {
+      IBMWatsonValidator.notNull(counterexamples, 'counterexamples cannot be null');
       if (this.counterexamples == null) {
         this.counterexamples = new List<CreateCounterexample>();
       }
-      this.counterexamples.add(counterexample);
+      this.counterexamples.add(counterexamples);
       return this;
     }
 
     /**
-     * Set the workspaceId.
+     * Set the workspace_id.
      *
-     * @param workspaceId the workspaceId
+     * @param workspace_id the workspace_id
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder workspaceId(String workspaceId) {
-      this.workspaceId = workspaceId;
+    public UpdateWorkspaceOptionsBuilder workspaceId(String workspace_id) {
+      this.workspace_id = workspace_id;
       return this;
     }
 
@@ -11097,14 +11097,14 @@ public class ConversationV1Models {
     }
 
     /**
-     * Set the dialogNodes.
-     * Existing dialogNodes will be replaced.
+     * Set the dialog_nodes.
+     * Existing dialog_nodes will be replaced.
      *
-     * @param dialogNodes the dialogNodes
+     * @param dialog_nodes the dialog_nodes
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder dialogNodes(List<CreateDialogNode> dialogNodes) {
-      this.dialogNodes = dialogNodes;
+    public UpdateWorkspaceOptionsBuilder dialogNodes(List<CreateDialogNode> dialog_nodes) {
+      this.dialog_nodes = dialog_nodes;
       return this;
     }
 
@@ -11126,19 +11126,19 @@ public class ConversationV1Models {
      * @param metadata the metadata
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder metadata(Map<String, Object> metadata) {
+    public UpdateWorkspaceOptionsBuilder metadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;
     }
 
     /**
-     * Set the learningOptOut.
+     * Set the learning_opt_out.
      *
-     * @param learningOptOut the learningOptOut
+     * @param learning_opt_out the learning_opt_out
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder learningOptOut(Boolean learningOptOut) {
-      this.learningOptOut = learningOptOut;
+    public UpdateWorkspaceOptionsBuilder learningOptOut(Boolean learning_opt_out) {
+      this.learning_opt_out = learning_opt_out;
       return this;
     }
   }
@@ -11147,22 +11147,22 @@ public class ConversationV1Models {
    * Value.
    */
   public class Value extends IBMWatsonGenericModel {
-    private String valueText;
-    private Map<String, Object> metadata;
+    private String value;
+    private Map<String, String> metadata;
     private Datetime created;
     private Datetime updated;
     private List<String> synonyms;
     private List<String> patterns;
-    private String valueType;
+    private String type_serialized_name;
     /**
-     * Gets the valueText.
+     * Gets the value.
      *
      * The text of the entity value.
      *
-     * @return the valueText
+     * @return the value
      */
-    public String getValueText() {
-      return valueText;
+    public String getValue() {
+      return value;
     }
     /**
      * Gets the metadata.
@@ -11171,7 +11171,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
       return metadata;
     }
     /**
@@ -11215,23 +11215,23 @@ public class ConversationV1Models {
       return patterns;
     }
     /**
-     * Gets the valueType.
+     * Gets the type_serialized_name.
      *
      * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
      *
-     * @return the valueType
+     * @return the type_serialized_name
      */
-    public String getValueType() {
-      return valueType;
+    public String getType() {
+      return type_serialized_name;
     }
 
     /**
-     * Sets the valueText.
+     * Sets the value.
      *
-     * @param valueText the new valueText
+     * @param value the new value
      */
-    public void setValueText(final String valueText) {
-      this.valueText = valueText;
+    public void setValue(final String value) {
+      this.value = value;
     }
 
     /**
@@ -11239,7 +11239,7 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.metadata = metadata;
     }
 
@@ -11262,12 +11262,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the valueType.
+     * Sets the type_serialized_name.
      *
-     * @param valueType the new valueType
+     * @param type_serialized_name the new type_serialized_name
      */
-    public void setValueType(final String valueType) {
-      this.valueType = valueType;
+    public void setType(final String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
     }
   }
 
@@ -11321,22 +11321,22 @@ public class ConversationV1Models {
    * ValueExport.
    */
   public class ValueExport extends IBMWatsonGenericModel {
-    private String valueText;
-    private Map<String, Object> metadata;
+    private String value;
+    private Map<String, String> metadata;
     private Datetime created;
     private Datetime updated;
     private List<String> synonyms;
     private List<String> patterns;
-    private String valueType;
+    private String type_serialized_name;
     /**
-     * Gets the valueText.
+     * Gets the value.
      *
      * The text of the entity value.
      *
-     * @return the valueText
+     * @return the value
      */
-    public String getValueText() {
-      return valueText;
+    public String getValue() {
+      return value;
     }
     /**
      * Gets the metadata.
@@ -11345,7 +11345,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
       return metadata;
     }
     /**
@@ -11389,23 +11389,23 @@ public class ConversationV1Models {
       return patterns;
     }
     /**
-     * Gets the valueType.
+     * Gets the type_serialized_name.
      *
      * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
      *
-     * @return the valueType
+     * @return the type_serialized_name
      */
-    public String getValueType() {
-      return valueType;
+    public String getType() {
+      return type_serialized_name;
     }
 
     /**
-     * Sets the valueText.
+     * Sets the value.
      *
-     * @param valueText the new valueText
+     * @param value the new value
      */
-    public void setValueText(final String valueText) {
-      this.valueText = valueText;
+    public void setValue(final String value) {
+      this.value = value;
     }
 
     /**
@@ -11413,7 +11413,7 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.metadata = metadata;
     }
 
@@ -11436,12 +11436,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the valueType.
+     * Sets the type_serialized_name.
      *
-     * @param valueType the new valueType
+     * @param type_serialized_name the new type_serialized_name
      */
-    public void setValueType(final String valueType) {
-      this.valueType = valueType;
+    public void setType(final String type_serialized_name) {
+      this.type_serialized_name = type_serialized_name;
     }
   }
 
@@ -11453,10 +11453,10 @@ public class ConversationV1Models {
     private String language;
     private Datetime created;
     private Datetime updated;
-    private String workspaceId;
+    private String workspace_id;
     private String description;
-    private Map<String, Object> metadata;
-    private Boolean learningOptOut;
+    private Map<String, String> metadata;
+    private Boolean learning_opt_out;
     /**
      * Gets the name.
      *
@@ -11498,14 +11498,14 @@ public class ConversationV1Models {
       return updated;
     }
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String getWorkspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the description.
@@ -11524,18 +11524,18 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
       return metadata;
     }
     /**
-     * Gets the learningOptOut.
+     * Gets the learning_opt_out.
      *
      * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
      *
-     * @return the learningOptOut
+     * @return the learning_opt_out
      */
     public Boolean isLearningOptOut() {
-      return learningOptOut;
+      return learning_opt_out;
     }
 
     /**
@@ -11570,17 +11570,17 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.metadata = metadata;
     }
 
     /**
-     * Sets the learningOptOut.
+     * Sets the learning_opt_out.
      *
-     * @param learningOptOut the new learningOptOut
+     * @param learning_opt_out the new learning_opt_out
      */
-    public void setLearningOptOut(final Boolean learningOptOut) {
-      this.learningOptOut = learningOptOut;
+    public void setLearningOptOut(final Boolean learning_opt_out) {
+      this.learning_opt_out = learning_opt_out;
     }
   }
 
@@ -11637,16 +11637,16 @@ public class ConversationV1Models {
     private String name;
     private String description;
     private String language;
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
     private Datetime created;
     private Datetime updated;
-    private String workspaceId;
+    private String workspace_id;
     private String status;
-    private Boolean learningOptOut;
+    private Boolean learning_opt_out;
     private List<IntentExport> intents;
     private List<EntityExport> entities;
     private List<Counterexample> counterexamples;
-    private List<DialogNode> dialogNodes;
+    private List<DialogNode> dialog_nodes;
     /**
      * Gets the name.
      *
@@ -11684,7 +11684,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
-    public Map<String, Object> getMetadata() {
+    public Map<String, String> getMetadata() {
       return metadata;
     }
     /**
@@ -11708,14 +11708,14 @@ public class ConversationV1Models {
       return updated;
     }
     /**
-     * Gets the workspaceId.
+     * Gets the workspace_id.
      *
      * The workspace ID.
      *
-     * @return the workspaceId
+     * @return the workspace_id
      */
     public String getWorkspaceId() {
-      return workspaceId;
+      return workspace_id;
     }
     /**
      * Gets the status.
@@ -11728,14 +11728,14 @@ public class ConversationV1Models {
       return status;
     }
     /**
-     * Gets the learningOptOut.
+     * Gets the learning_opt_out.
      *
      * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
      *
-     * @return the learningOptOut
+     * @return the learning_opt_out
      */
     public Boolean isLearningOptOut() {
-      return learningOptOut;
+      return learning_opt_out;
     }
     /**
      * Gets the intents.
@@ -11768,14 +11768,14 @@ public class ConversationV1Models {
       return counterexamples;
     }
     /**
-     * Gets the dialogNodes.
+     * Gets the dialog_nodes.
      *
      * An array of objects describing the dialog nodes in the workspace.
      *
-     * @return the dialogNodes
+     * @return the dialog_nodes
      */
     public List<DialogNode> getDialogNodes() {
-      return dialogNodes;
+      return dialog_nodes;
     }
 
     /**
@@ -11810,7 +11810,7 @@ public class ConversationV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final Map<String, Object> metadata) {
+    public void setMetadata(final Map<String, String> metadata) {
       this.metadata = metadata;
     }
 
@@ -11824,12 +11824,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the learningOptOut.
+     * Sets the learning_opt_out.
      *
-     * @param learningOptOut the new learningOptOut
+     * @param learning_opt_out the new learning_opt_out
      */
-    public void setLearningOptOut(final Boolean learningOptOut) {
-      this.learningOptOut = learningOptOut;
+    public void setLearningOptOut(final Boolean learning_opt_out) {
+      this.learning_opt_out = learning_opt_out;
     }
 
     /**
@@ -11860,12 +11860,12 @@ public class ConversationV1Models {
     }
 
     /**
-     * Sets the dialogNodes.
+     * Sets the dialog_nodes.
      *
-     * @param dialogNodes the new dialogNodes
+     * @param dialog_nodes the new dialog_nodes
      */
-    public void setDialogNodes(final List<DialogNode> dialogNodes) {
-      this.dialogNodes = dialogNodes;
+    public void setDialogNodes(final List<DialogNode> dialog_nodes) {
+      this.dialog_nodes = dialog_nodes;
     }
   }
 
