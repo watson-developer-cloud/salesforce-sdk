@@ -14,6 +14,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the trait_id
      */
+    @AuraEnabled
     public String getTraitId() {
       return trait_id;
     }
@@ -24,6 +25,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the name
      */
+    @AuraEnabled
     public String getName() {
       return name;
     }
@@ -34,6 +36,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the category
      */
+    @AuraEnabled
     public String getCategory() {
       return category;
     }
@@ -44,6 +47,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the percentage
      */
+    @AuraEnabled
     public Double getPercentage() {
       return percentage;
     }
@@ -99,6 +103,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the consumption_preference_id
      */
+    @AuraEnabled
     public String getConsumptionPreferenceId() {
       return consumption_preference_id;
     }
@@ -109,6 +114,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the name
      */
+    @AuraEnabled
     public String getName() {
       return name;
     }
@@ -119,6 +125,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the score
      */
+    @AuraEnabled
     public Double getScore() {
       return score;
     }
@@ -165,6 +172,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the consumption_preference_category_id
      */
+    @AuraEnabled
     public String getConsumptionPreferenceCategoryId() {
       return consumption_preference_category_id;
     }
@@ -175,6 +183,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the name
      */
+    @AuraEnabled
     public String getName() {
       return name;
     }
@@ -185,6 +194,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the consumption_preferences
      */
+    @AuraEnabled
     public List<ConsumptionPreferences> getConsumptionPreferences() {
       return consumption_preferences;
     }
@@ -605,6 +615,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the processed_language
      */
+    @AuraEnabled
     public String getProcessedLanguage() {
       return processed_language;
     }
@@ -615,6 +626,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the word_count
      */
+    @AuraEnabled
     public Long getWordCount() {
       return word_count;
     }
@@ -625,6 +637,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the word_count_message
      */
+    @AuraEnabled
     public String getWordCountMessage() {
       return word_count_message;
     }
@@ -635,6 +648,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the personality
      */
+    @AuraEnabled
     public List<Trait> getPersonality() {
       return personality;
     }
@@ -645,6 +659,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the values
      */
+    @AuraEnabled
     public List<Trait> getValues() {
       return values;
     }
@@ -655,6 +670,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the needs
      */
+    @AuraEnabled
     public List<Trait> getNeeds() {
       return needs;
     }
@@ -665,6 +681,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the behavior
      */
+    @AuraEnabled
     public List<Behavior> getBehavior() {
       return behavior;
     }
@@ -675,6 +692,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the consumption_preferences
      */
+    @AuraEnabled
     public List<ConsumptionPreferencesCategory> getConsumptionPreferences() {
       return consumption_preferences;
     }
@@ -685,6 +703,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the warnings
      */
+    @AuraEnabled
     public List<Warning> getWarnings() {
       return warnings;
     }
@@ -1033,6 +1052,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the trait_id
      */
+    @AuraEnabled
     public String getTraitId() {
       return trait_id;
     }
@@ -1043,6 +1063,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the name
      */
+    @AuraEnabled
     public String getName() {
       return name;
     }
@@ -1053,6 +1074,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the category
      */
+    @AuraEnabled
     public String getCategory() {
       return category;
     }
@@ -1063,6 +1085,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the percentile
      */
+    @AuraEnabled
     public Double getPercentile() {
       return percentile;
     }
@@ -1073,6 +1096,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the raw_score
      */
+    @AuraEnabled
     public Double getRawScore() {
       return raw_score;
     }
@@ -1083,6 +1107,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the children
      */
+    @AuraEnabled
     public List<Trait> getChildren() {
       return children;
     }
@@ -1155,6 +1180,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the warning_id
      */
+    @AuraEnabled
     public String getWarningId() {
       return warning_id;
     }
@@ -1165,6 +1191,7 @@ public class PersonalityInsightsV3Models {
      *
      * @return the message
      */
+    @AuraEnabled
     public String getMessage() {
       return message;
     }

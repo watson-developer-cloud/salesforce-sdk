@@ -406,6 +406,7 @@ public class DiscoveryV1Models {
      *
      * @return the key
      */
+    @AuraEnabled
     public String getKey() {
       return key;
     }
@@ -416,6 +417,7 @@ public class DiscoveryV1Models {
      *
      * @return the matching_results
      */
+    @AuraEnabled
     public Long getMatchingResults() {
       return matching_results;
     }
@@ -426,6 +428,7 @@ public class DiscoveryV1Models {
      *
      * @return the aggregations
      */
+    @AuraEnabled
     public List<QueryAggregation> getAggregations() {
       return aggregations;
     }
@@ -470,6 +473,7 @@ public class DiscoveryV1Models {
      *
      * @return the value
      */
+    @AuraEnabled
     public Double getValue() {
       return value;
     }
@@ -497,6 +501,7 @@ public class DiscoveryV1Models {
      *
      * @return the collection_id
      */
+    @AuraEnabled
     public String getCollectionId() {
       return collection_id;
     }
@@ -507,6 +512,7 @@ public class DiscoveryV1Models {
      *
      * @return the name
      */
+    @AuraEnabled
     public String getName() {
       return name;
     }
@@ -517,6 +523,7 @@ public class DiscoveryV1Models {
      *
      * @return the description
      */
+    @AuraEnabled
     public String getDescription() {
       return description;
     }
@@ -527,6 +534,7 @@ public class DiscoveryV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -537,6 +545,7 @@ public class DiscoveryV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -547,6 +556,7 @@ public class DiscoveryV1Models {
      *
      * @return the status
      */
+    @AuraEnabled
     public String getStatus() {
       return status;
     }
@@ -557,6 +567,7 @@ public class DiscoveryV1Models {
      *
      * @return the configuration_id
      */
+    @AuraEnabled
     public String getConfigurationId() {
       return configuration_id;
     }
@@ -567,6 +578,7 @@ public class DiscoveryV1Models {
      *
      * @return the language
      */
+    @AuraEnabled
     public String getLanguage() {
       return language;
     }
@@ -577,6 +589,7 @@ public class DiscoveryV1Models {
      *
      * @return the document_counts
      */
+    @AuraEnabled
     public DocumentCounts getDocumentCounts() {
       return document_counts;
     }
@@ -587,6 +600,7 @@ public class DiscoveryV1Models {
      *
      * @return the disk_usage
      */
+    @AuraEnabled
     public CollectionDiskUsage getDiskUsage() {
       return disk_usage;
     }
@@ -597,6 +611,7 @@ public class DiscoveryV1Models {
      *
      * @return the training_status
      */
+    @AuraEnabled
     public TrainingStatus getTrainingStatus() {
       return training_status;
     }
@@ -677,6 +692,7 @@ public class DiscoveryV1Models {
      *
      * @return the used_bytes
      */
+    @AuraEnabled
     public Long getUsedBytes() {
       return used_bytes;
     }
@@ -701,6 +717,7 @@ public class DiscoveryV1Models {
      *
      * @return the configuration_id
      */
+    @AuraEnabled
     public String getConfigurationId() {
       return configuration_id;
     }
@@ -711,6 +728,7 @@ public class DiscoveryV1Models {
      *
      * @return the name
      */
+    @AuraEnabled
     public String getName() {
       return name;
     }
@@ -721,6 +739,7 @@ public class DiscoveryV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -731,6 +750,7 @@ public class DiscoveryV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -741,6 +761,7 @@ public class DiscoveryV1Models {
      *
      * @return the description
      */
+    @AuraEnabled
     public String getDescription() {
       return description;
     }
@@ -751,6 +772,7 @@ public class DiscoveryV1Models {
      *
      * @return the conversions
      */
+    @AuraEnabled
     public Conversions getConversions() {
       return conversions;
     }
@@ -761,6 +783,7 @@ public class DiscoveryV1Models {
      *
      * @return the enrichments
      */
+    @AuraEnabled
     public List<Enrichment> getEnrichments() {
       return enrichments;
     }
@@ -771,6 +794,7 @@ public class DiscoveryV1Models {
      *
      * @return the normalizations
      */
+    @AuraEnabled
     public List<NormalizationOperation> getNormalizations() {
       return normalizations;
     }
@@ -836,6 +860,7 @@ public class DiscoveryV1Models {
      *
      * @return the pdf
      */
+    @AuraEnabled
     public PdfSettings getPdf() {
       return pdf;
     }
@@ -846,6 +871,7 @@ public class DiscoveryV1Models {
      *
      * @return the word
      */
+    @AuraEnabled
     public WordSettings getWord() {
       return word;
     }
@@ -856,6 +882,7 @@ public class DiscoveryV1Models {
      *
      * @return the html
      */
+    @AuraEnabled
     public HtmlSettings getHtml() {
       return html;
     }
@@ -866,6 +893,7 @@ public class DiscoveryV1Models {
      *
      * @return the json_normalizations
      */
+    @AuraEnabled
     public List<NormalizationOperation> getJsonNormalizations() {
       return json_normalizations;
     }
@@ -2503,6 +2531,7 @@ public class DiscoveryV1Models {
      *
      * @return the used_bytes
      */
+    @AuraEnabled
     public Long getUsedBytes() {
       return used_bytes;
     }
@@ -2513,6 +2542,7 @@ public class DiscoveryV1Models {
      *
      * @return the maximum_allowed_bytes
      */
+    @AuraEnabled
     public Long getMaximumAllowedBytes() {
       return maximum_allowed_bytes;
     }
@@ -2523,6 +2553,7 @@ public class DiscoveryV1Models {
      *
      * @return the total_bytes
      */
+    @AuraEnabled
     public Long getTotalBytes() {
       return total_bytes;
     }
@@ -2533,6 +2564,7 @@ public class DiscoveryV1Models {
      *
      * @return the used
      */
+    @AuraEnabled
     public String getUsed() {
       return used;
     }
@@ -2543,6 +2575,7 @@ public class DiscoveryV1Models {
      *
      * @return the total
      */
+    @AuraEnabled
     public String getTotal() {
       return total;
     }
@@ -2553,6 +2586,7 @@ public class DiscoveryV1Models {
      *
      * @return the percent_used
      */
+    @AuraEnabled
     public Double getPercentUsed() {
       return percent_used;
     }
@@ -2572,6 +2606,7 @@ public class DiscoveryV1Models {
      *
      * @return the document_id
      */
+    @AuraEnabled
     public String getDocumentId() {
       return document_id;
     }
@@ -2582,6 +2617,7 @@ public class DiscoveryV1Models {
      *
      * @return the status
      */
+    @AuraEnabled
     public String getStatus() {
       return status;
     }
@@ -2592,6 +2628,7 @@ public class DiscoveryV1Models {
      *
      * @return the notices
      */
+    @AuraEnabled
     public List<Notice> getNotices() {
       return notices;
     }
@@ -2638,6 +2675,7 @@ public class DiscoveryV1Models {
      *
      * @return the available
      */
+    @AuraEnabled
     public Long getAvailable() {
       return available;
     }
@@ -2648,6 +2686,7 @@ public class DiscoveryV1Models {
      *
      * @return the processing
      */
+    @AuraEnabled
     public Long getProcessing() {
       return processing;
     }
@@ -2658,6 +2697,7 @@ public class DiscoveryV1Models {
      *
      * @return the failed
      */
+    @AuraEnabled
     public Long getFailed() {
       return failed;
     }
@@ -2674,6 +2714,7 @@ public class DiscoveryV1Models {
      *
      * @return the step
      */
+    @AuraEnabled
     public String getStep() {
       return step;
     }
@@ -2682,6 +2723,7 @@ public class DiscoveryV1Models {
      *
      * @return the snapshot
      */
+    @AuraEnabled
     public Map<String, String> getSnapshot() {
       return snapshot;
     }
@@ -2726,6 +2768,7 @@ public class DiscoveryV1Models {
      *
      * @return the document_id
      */
+    @AuraEnabled
     public String getDocumentId() {
       return document_id;
     }
@@ -2736,6 +2779,7 @@ public class DiscoveryV1Models {
      *
      * @return the configuration_id
      */
+    @AuraEnabled
     public String getConfigurationId() {
       return configuration_id;
     }
@@ -2746,6 +2790,7 @@ public class DiscoveryV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -2756,6 +2801,7 @@ public class DiscoveryV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -2766,6 +2812,7 @@ public class DiscoveryV1Models {
      *
      * @return the status
      */
+    @AuraEnabled
     public String getStatus() {
       return status;
     }
@@ -2776,6 +2823,7 @@ public class DiscoveryV1Models {
      *
      * @return the status_description
      */
+    @AuraEnabled
     public String getStatusDescription() {
       return status_description;
     }
@@ -2786,6 +2834,7 @@ public class DiscoveryV1Models {
      *
      * @return the filename
      */
+    @AuraEnabled
     public String getFilename() {
       return filename;
     }
@@ -2796,6 +2845,7 @@ public class DiscoveryV1Models {
      *
      * @return the file_type
      */
+    @AuraEnabled
     public String getFileType() {
       return file_type;
     }
@@ -2806,6 +2856,7 @@ public class DiscoveryV1Models {
      *
      * @return the sha1
      */
+    @AuraEnabled
     public String getSha1() {
       return sha1;
     }
@@ -2816,6 +2867,7 @@ public class DiscoveryV1Models {
      *
      * @return the notices
      */
+    @AuraEnabled
     public List<Notice> getNotices() {
       return notices;
     }
@@ -2875,6 +2927,7 @@ public class DiscoveryV1Models {
      *
      * @return the description
      */
+    @AuraEnabled
     public String getDescription() {
       return description;
     }
@@ -2885,6 +2938,7 @@ public class DiscoveryV1Models {
      *
      * @return the destination_field
      */
+    @AuraEnabled
     public String getDestinationField() {
       return destination_field;
     }
@@ -2895,6 +2949,7 @@ public class DiscoveryV1Models {
      *
      * @return the source_field
      */
+    @AuraEnabled
     public String getSourceField() {
       return source_field;
     }
@@ -2905,7 +2960,8 @@ public class DiscoveryV1Models {
      *
      * @return the overwrite
      */
-    public Boolean isOverwrite() {
+    @AuraEnabled
+    public Boolean getOverwrite() {
       return overwrite;
     }
     /**
@@ -2915,6 +2971,7 @@ public class DiscoveryV1Models {
      *
      * @return the enrichment
      */
+    @AuraEnabled
     public String getEnrichment() {
       return enrichment;
     }
@@ -2925,7 +2982,8 @@ public class DiscoveryV1Models {
      *
      * @return the ignore_downstream_errors
      */
-    public Boolean isIgnoreDownstreamErrors() {
+    @AuraEnabled
+    public Boolean getIgnoreDownstreamErrors() {
       return ignore_downstream_errors;
     }
     /**
@@ -2935,6 +2993,7 @@ public class DiscoveryV1Models {
      *
      * @return the options
      */
+    @AuraEnabled
     public EnrichmentOptions getOptions() {
       return options;
     }
@@ -3021,6 +3080,7 @@ public class DiscoveryV1Models {
      *
      * @return the extract
      */
+    @AuraEnabled
     public List<String> getExtract() {
       return extract;
     }
@@ -3029,7 +3089,8 @@ public class DiscoveryV1Models {
      *
      * @return the sentiment
      */
-    public Boolean isSentiment() {
+    @AuraEnabled
+    public Boolean getSentiment() {
       return sentiment;
     }
     /**
@@ -3037,7 +3098,8 @@ public class DiscoveryV1Models {
      *
      * @return the quotations
      */
-    public Boolean isQuotations() {
+    @AuraEnabled
+    public Boolean getQuotations() {
       return quotations;
     }
     /**
@@ -3045,7 +3107,8 @@ public class DiscoveryV1Models {
      *
      * @return the show_source_text
      */
-    public Boolean isShowSourceText() {
+    @AuraEnabled
+    public Boolean getShowSourceText() {
       return show_source_text;
     }
     /**
@@ -3053,7 +3116,8 @@ public class DiscoveryV1Models {
      *
      * @return the hierarchical_typed_relations
      */
-    public Boolean isHierarchicalTypedRelations() {
+    @AuraEnabled
+    public Boolean getHierarchicalTypedRelations() {
       return hierarchical_typed_relations;
     }
     /**
@@ -3063,6 +3127,7 @@ public class DiscoveryV1Models {
      *
      * @return the model
      */
+    @AuraEnabled
     public String getModel() {
       return model;
     }
@@ -3073,6 +3138,7 @@ public class DiscoveryV1Models {
      *
      * @return the language
      */
+    @AuraEnabled
     public String getLanguage() {
       return language;
     }
@@ -3161,6 +3227,7 @@ public class DiscoveryV1Models {
      *
      * @return the environment_id
      */
+    @AuraEnabled
     public String getEnvironmentId() {
       return environment_id;
     }
@@ -3171,6 +3238,7 @@ public class DiscoveryV1Models {
      *
      * @return the name
      */
+    @AuraEnabled
     public String getName() {
       return name;
     }
@@ -3181,6 +3249,7 @@ public class DiscoveryV1Models {
      *
      * @return the description
      */
+    @AuraEnabled
     public String getDescription() {
       return description;
     }
@@ -3191,6 +3260,7 @@ public class DiscoveryV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -3201,6 +3271,7 @@ public class DiscoveryV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -3211,6 +3282,7 @@ public class DiscoveryV1Models {
      *
      * @return the status
      */
+    @AuraEnabled
     public String getStatus() {
       return status;
     }
@@ -3221,7 +3293,8 @@ public class DiscoveryV1Models {
      *
      * @return the read_only
      */
-    public Boolean isReadOnly() {
+    @AuraEnabled
+    public Boolean getReadOnly() {
       return read_only;
     }
     /**
@@ -3231,6 +3304,7 @@ public class DiscoveryV1Models {
      *
      * @return the size
      */
+    @AuraEnabled
     public Long getSize() {
       return size;
     }
@@ -3241,6 +3315,7 @@ public class DiscoveryV1Models {
      *
      * @return the index_capacity
      */
+    @AuraEnabled
     public IndexCapacity getIndexCapacity() {
       return index_capacity;
     }
@@ -3295,6 +3370,7 @@ public class DiscoveryV1Models {
      *
      * @return the indexed
      */
+    @AuraEnabled
     public Long getIndexed() {
       return indexed;
     }
@@ -3305,6 +3381,7 @@ public class DiscoveryV1Models {
      *
      * @return the maximum_allowed
      */
+    @AuraEnabled
     public Long getMaximumAllowed() {
       return maximum_allowed;
     }
@@ -4152,6 +4229,7 @@ public class DiscoveryV1Models {
      *
      * @return the field
      */
+    @AuraEnabled
     public String getField() {
       return field;
     }
@@ -4162,6 +4240,7 @@ public class DiscoveryV1Models {
      *
      * @return the type_serialized_name
      */
+    @AuraEnabled
     public String getType() {
       return type_serialized_name;
     }
@@ -4182,6 +4261,7 @@ public class DiscoveryV1Models {
      *
      * @return the level
      */
+    @AuraEnabled
     public Long getLevel() {
       return level;
     }
@@ -4190,6 +4270,7 @@ public class DiscoveryV1Models {
      *
      * @return the min_size
      */
+    @AuraEnabled
     public Long getMinSize() {
       return min_size;
     }
@@ -4198,6 +4279,7 @@ public class DiscoveryV1Models {
      *
      * @return the max_size
      */
+    @AuraEnabled
     public Long getMaxSize() {
       return max_size;
     }
@@ -4206,7 +4288,8 @@ public class DiscoveryV1Models {
      *
      * @return the bold
      */
-    public Boolean isBold() {
+    @AuraEnabled
+    public Boolean getBold() {
       return bold;
     }
     /**
@@ -4214,7 +4297,8 @@ public class DiscoveryV1Models {
      *
      * @return the italic
      */
-    public Boolean isItalic() {
+    @AuraEnabled
+    public Boolean getItalic() {
       return italic;
     }
     /**
@@ -4222,6 +4306,7 @@ public class DiscoveryV1Models {
      *
      * @return the name
      */
+    @AuraEnabled
     public String getName() {
       return name;
     }
@@ -5001,6 +5086,7 @@ public class DiscoveryV1Models {
      *
      * @return the interval
      */
+    @AuraEnabled
     public Long getInterval() {
       return interval;
     }
@@ -5021,6 +5107,7 @@ public class DiscoveryV1Models {
      *
      * @return the exclude_tags_completely
      */
+    @AuraEnabled
     public List<String> getExcludeTagsCompletely() {
       return exclude_tags_completely;
     }
@@ -5029,6 +5116,7 @@ public class DiscoveryV1Models {
      *
      * @return the exclude_tags_keep_content
      */
+    @AuraEnabled
     public List<String> getExcludeTagsKeepContent() {
       return exclude_tags_keep_content;
     }
@@ -5037,6 +5125,7 @@ public class DiscoveryV1Models {
      *
      * @return the keep_content
      */
+    @AuraEnabled
     public XPathPatterns getKeepContent() {
       return keep_content;
     }
@@ -5045,6 +5134,7 @@ public class DiscoveryV1Models {
      *
      * @return the exclude_content
      */
+    @AuraEnabled
     public XPathPatterns getExcludeContent() {
       return exclude_content;
     }
@@ -5053,6 +5143,7 @@ public class DiscoveryV1Models {
      *
      * @return the keep_tag_attributes
      */
+    @AuraEnabled
     public List<String> getKeepTagAttributes() {
       return keep_tag_attributes;
     }
@@ -5061,6 +5152,7 @@ public class DiscoveryV1Models {
      *
      * @return the exclude_tag_attributes
      */
+    @AuraEnabled
     public List<String> getExcludeTagAttributes() {
       return exclude_tag_attributes;
     }
@@ -5134,6 +5226,7 @@ public class DiscoveryV1Models {
      *
      * @return the documents
      */
+    @AuraEnabled
     public EnvironmentDocuments getDocuments() {
       return documents;
     }
@@ -5144,6 +5237,7 @@ public class DiscoveryV1Models {
      *
      * @return the disk_usage
      */
+    @AuraEnabled
     public DiskUsage getDiskUsage() {
       return disk_usage;
     }
@@ -5154,6 +5248,7 @@ public class DiscoveryV1Models {
      *
      * @return the memory_usage
      */
+    @AuraEnabled
     public MemoryUsage getMemoryUsage() {
       return memory_usage;
     }
@@ -5302,6 +5397,7 @@ public class DiscoveryV1Models {
      *
      * @return the fields
      */
+    @AuraEnabled
     public List<Field> getFields() {
       return fields;
     }
@@ -5429,6 +5525,7 @@ public class DiscoveryV1Models {
      *
      * @return the collections
      */
+    @AuraEnabled
     public List<Collection> getCollections() {
       return collections;
     }
@@ -5556,6 +5653,7 @@ public class DiscoveryV1Models {
      *
      * @return the configurations
      */
+    @AuraEnabled
     public List<Configuration> getConfigurations() {
       return configurations;
     }
@@ -5648,6 +5746,7 @@ public class DiscoveryV1Models {
      *
      * @return the environments
      */
+    @AuraEnabled
     public List<Environment> getEnvironments() {
       return environments;
     }
@@ -5902,6 +6001,7 @@ public class DiscoveryV1Models {
      *
      * @return the used_bytes
      */
+    @AuraEnabled
     public Long getUsedBytes() {
       return used_bytes;
     }
@@ -5912,6 +6012,7 @@ public class DiscoveryV1Models {
      *
      * @return the total_bytes
      */
+    @AuraEnabled
     public Long getTotalBytes() {
       return total_bytes;
     }
@@ -5922,6 +6023,7 @@ public class DiscoveryV1Models {
      *
      * @return the used
      */
+    @AuraEnabled
     public String getUsed() {
       return used;
     }
@@ -5932,6 +6034,7 @@ public class DiscoveryV1Models {
      *
      * @return the total
      */
+    @AuraEnabled
     public String getTotal() {
       return total;
     }
@@ -5942,6 +6045,7 @@ public class DiscoveryV1Models {
      *
      * @return the percent_used
      */
+    @AuraEnabled
     public Double getPercentUsed() {
       return percent_used;
     }
@@ -5961,6 +6065,7 @@ public class DiscoveryV1Models {
      *
      * @return the operation
      */
+    @AuraEnabled
     public String getOperation() {
       return operation;
     }
@@ -5971,6 +6076,7 @@ public class DiscoveryV1Models {
      *
      * @return the source_field
      */
+    @AuraEnabled
     public String getSourceField() {
       return source_field;
     }
@@ -5981,6 +6087,7 @@ public class DiscoveryV1Models {
      *
      * @return the destination_field
      */
+    @AuraEnabled
     public String getDestinationField() {
       return destination_field;
     }
@@ -6031,6 +6138,7 @@ public class DiscoveryV1Models {
      *
      * @return the notice_id
      */
+    @AuraEnabled
     public String getNoticeId() {
       return notice_id;
     }
@@ -6041,6 +6149,7 @@ public class DiscoveryV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -6051,6 +6160,7 @@ public class DiscoveryV1Models {
      *
      * @return the document_id
      */
+    @AuraEnabled
     public String getDocumentId() {
       return document_id;
     }
@@ -6061,6 +6171,7 @@ public class DiscoveryV1Models {
      *
      * @return the query_id
      */
+    @AuraEnabled
     public String getQueryId() {
       return query_id;
     }
@@ -6071,6 +6182,7 @@ public class DiscoveryV1Models {
      *
      * @return the severity
      */
+    @AuraEnabled
     public String getSeverity() {
       return severity;
     }
@@ -6081,6 +6193,7 @@ public class DiscoveryV1Models {
      *
      * @return the step
      */
+    @AuraEnabled
     public String getStep() {
       return step;
     }
@@ -6091,6 +6204,7 @@ public class DiscoveryV1Models {
      *
      * @return the description
      */
+    @AuraEnabled
     public String getDescription() {
       return description;
     }
@@ -6106,6 +6220,7 @@ public class DiscoveryV1Models {
      *
      * @return the fonts
      */
+    @AuraEnabled
     public List<FontSetting> getFonts() {
       return fonts;
     }
@@ -6130,6 +6245,7 @@ public class DiscoveryV1Models {
      *
      * @return the heading
      */
+    @AuraEnabled
     public PdfHeadingDetection getHeading() {
       return heading;
     }
@@ -6161,6 +6277,7 @@ public class DiscoveryV1Models {
      *
      * @return the type_serialized_name
      */
+    @AuraEnabled
     public String getType() {
       return type_serialized_name;
     }
@@ -6171,6 +6288,7 @@ public class DiscoveryV1Models {
      *
      * @return the field
      */
+    @AuraEnabled
     public String getField() {
       return field;
     }
@@ -6179,6 +6297,7 @@ public class DiscoveryV1Models {
      *
      * @return the results
      */
+    @AuraEnabled
     public List<AggregationResult> getResults() {
       return results;
     }
@@ -6189,6 +6308,7 @@ public class DiscoveryV1Models {
      *
      * @return the match
      */
+    @AuraEnabled
     public String getMatch() {
       return match;
     }
@@ -6199,6 +6319,7 @@ public class DiscoveryV1Models {
      *
      * @return the matching_results
      */
+    @AuraEnabled
     public Long getMatchingResults() {
       return matching_results;
     }
@@ -6209,6 +6330,7 @@ public class DiscoveryV1Models {
      *
      * @return the aggregations
      */
+    @AuraEnabled
     public List<QueryAggregation> getAggregations() {
       return aggregations;
     }
@@ -6784,6 +6906,7 @@ public class DiscoveryV1Models {
      *
      * @return the matching_results
      */
+    @AuraEnabled
     public Long getMatchingResults() {
       return matching_results;
     }
@@ -6792,6 +6915,7 @@ public class DiscoveryV1Models {
      *
      * @return the results
      */
+    @AuraEnabled
     public List<QueryNoticesResult> getResults() {
       return results;
     }
@@ -6800,6 +6924,7 @@ public class DiscoveryV1Models {
      *
      * @return the aggregations
      */
+    @AuraEnabled
     public List<QueryAggregation> getAggregations() {
       return aggregations;
     }
@@ -6808,6 +6933,7 @@ public class DiscoveryV1Models {
      *
      * @return the passages
      */
+    @AuraEnabled
     public List<QueryPassages> getPassages() {
       return passages;
     }
@@ -6816,6 +6942,7 @@ public class DiscoveryV1Models {
      *
      * @return the duplicates_removed
      */
+    @AuraEnabled
     public Long getDuplicatesRemoved() {
       return duplicates_removed;
     }
@@ -6876,6 +7003,7 @@ public class DiscoveryV1Models {
      *
      * @return the id
      */
+    @AuraEnabled
     public String getId() {
       return (String)JSON.deserialize(JSON.serialize(this.get('id')), String.class);
     }
@@ -6885,6 +7013,7 @@ public class DiscoveryV1Models {
      *
      * @return the score
      */
+    @AuraEnabled
     public Double getScore() {
       return (Double)JSON.deserialize(JSON.serialize(this.get('score')), Double.class);
     }
@@ -6894,6 +7023,7 @@ public class DiscoveryV1Models {
      *
      * @return the metadata
      */
+    @AuraEnabled
     public Map<String, String> getMetadata() {
       return (Map<String, String>)JSON.deserialize(JSON.serialize(this.get('metadata')), Map<String, String>.class);
     }
@@ -6903,6 +7033,7 @@ public class DiscoveryV1Models {
      *
      * @return the collection_id
      */
+    @AuraEnabled
     public String getCollectionId() {
       return (String)JSON.deserialize(JSON.serialize(this.get('collection_id')), String.class);
     }
@@ -7488,6 +7619,7 @@ public class DiscoveryV1Models {
      *
      * @return the document_id
      */
+    @AuraEnabled
     public String getDocumentId() {
       return document_id;
     }
@@ -7498,6 +7630,7 @@ public class DiscoveryV1Models {
      *
      * @return the passage_score
      */
+    @AuraEnabled
     public Double getPassageScore() {
       return passage_score;
     }
@@ -7508,6 +7641,7 @@ public class DiscoveryV1Models {
      *
      * @return the passage_text
      */
+    @AuraEnabled
     public String getPassageText() {
       return passage_text;
     }
@@ -7518,6 +7652,7 @@ public class DiscoveryV1Models {
      *
      * @return the start_offset
      */
+    @AuraEnabled
     public Double getStartOffset() {
       return start_offset;
     }
@@ -7528,6 +7663,7 @@ public class DiscoveryV1Models {
      *
      * @return the end_offset
      */
+    @AuraEnabled
     public Double getEndOffset() {
       return end_offset;
     }
@@ -7538,6 +7674,7 @@ public class DiscoveryV1Models {
      *
      * @return the field
      */
+    @AuraEnabled
     public String getField() {
       return field;
     }
@@ -7611,6 +7748,7 @@ public class DiscoveryV1Models {
      *
      * @return the matching_results
      */
+    @AuraEnabled
     public Long getMatchingResults() {
       return matching_results;
     }
@@ -7619,6 +7757,7 @@ public class DiscoveryV1Models {
      *
      * @return the results
      */
+    @AuraEnabled
     public List<QueryResult> getResults() {
       return results;
     }
@@ -7627,6 +7766,7 @@ public class DiscoveryV1Models {
      *
      * @return the aggregations
      */
+    @AuraEnabled
     public List<QueryAggregation> getAggregations() {
       return aggregations;
     }
@@ -7635,6 +7775,7 @@ public class DiscoveryV1Models {
      *
      * @return the passages
      */
+    @AuraEnabled
     public List<QueryPassages> getPassages() {
       return passages;
     }
@@ -7643,6 +7784,7 @@ public class DiscoveryV1Models {
      *
      * @return the duplicates_removed
      */
+    @AuraEnabled
     public Long getDuplicatesRemoved() {
       return duplicates_removed;
     }
@@ -7703,6 +7845,7 @@ public class DiscoveryV1Models {
      *
      * @return the id
      */
+    @AuraEnabled
     public String getId() {
       return (String)JSON.deserialize(JSON.serialize(this.get('id')), String.class);
     }
@@ -7712,6 +7855,7 @@ public class DiscoveryV1Models {
      *
      * @return the score
      */
+    @AuraEnabled
     public Double getScore() {
       return (Double)JSON.deserialize(JSON.serialize(this.get('score')), Double.class);
     }
@@ -7721,6 +7865,7 @@ public class DiscoveryV1Models {
      *
      * @return the metadata
      */
+    @AuraEnabled
     public Map<String, String> getMetadata() {
       return (Map<String, String>)JSON.deserialize(JSON.serialize(this.get('metadata')), Map<String, String>.class);
     }
@@ -7730,6 +7875,7 @@ public class DiscoveryV1Models {
      *
      * @return the collection_id
      */
+    @AuraEnabled
     public String getCollectionId() {
       return (String)JSON.deserialize(JSON.serialize(this.get('collection_id')), String.class);
     }
@@ -7781,6 +7927,7 @@ public class DiscoveryV1Models {
      *
      * @return the count
      */
+    @AuraEnabled
     public Long getCount() {
       return count;
     }
@@ -8054,6 +8201,7 @@ public class DiscoveryV1Models {
      *
      * @return the configuration_id
      */
+    @AuraEnabled
     public String getConfigurationId() {
       return configuration_id;
     }
@@ -8064,6 +8212,7 @@ public class DiscoveryV1Models {
      *
      * @return the status
      */
+    @AuraEnabled
     public String getStatus() {
       return status;
     }
@@ -8074,6 +8223,7 @@ public class DiscoveryV1Models {
      *
      * @return the enriched_field_units
      */
+    @AuraEnabled
     public Long getEnrichedFieldUnits() {
       return enriched_field_units;
     }
@@ -8084,6 +8234,7 @@ public class DiscoveryV1Models {
      *
      * @return the original_media_type
      */
+    @AuraEnabled
     public String getOriginalMediaType() {
       return original_media_type;
     }
@@ -8094,6 +8245,7 @@ public class DiscoveryV1Models {
      *
      * @return the snapshots
      */
+    @AuraEnabled
     public List<DocumentSnapshot> getSnapshots() {
       return snapshots;
     }
@@ -8104,6 +8256,7 @@ public class DiscoveryV1Models {
      *
      * @return the notices
      */
+    @AuraEnabled
     public List<Notice> getNotices() {
       return notices;
     }
@@ -8139,6 +8292,7 @@ public class DiscoveryV1Models {
      *
      * @return the environment_id
      */
+    @AuraEnabled
     public String getEnvironmentId() {
       return environment_id;
     }
@@ -8147,6 +8301,7 @@ public class DiscoveryV1Models {
      *
      * @return the collection_id
      */
+    @AuraEnabled
     public String getCollectionId() {
       return collection_id;
     }
@@ -8155,6 +8310,7 @@ public class DiscoveryV1Models {
      *
      * @return the queries
      */
+    @AuraEnabled
     public List<TrainingQuery> getQueries() {
       return queries;
     }
@@ -8199,6 +8355,7 @@ public class DiscoveryV1Models {
      *
      * @return the document_id
      */
+    @AuraEnabled
     public String getDocumentId() {
       return document_id;
     }
@@ -8207,6 +8364,7 @@ public class DiscoveryV1Models {
      *
      * @return the cross_reference
      */
+    @AuraEnabled
     public String getCrossReference() {
       return cross_reference;
     }
@@ -8215,6 +8373,7 @@ public class DiscoveryV1Models {
      *
      * @return the relevance
      */
+    @AuraEnabled
     public Long getRelevance() {
       return relevance;
     }
@@ -8260,6 +8419,7 @@ public class DiscoveryV1Models {
      *
      * @return the query_id
      */
+    @AuraEnabled
     public String getQueryId() {
       return query_id;
     }
@@ -8268,6 +8428,7 @@ public class DiscoveryV1Models {
      *
      * @return the natural_language_query
      */
+    @AuraEnabled
     public String getNaturalLanguageQuery() {
       return natural_language_query;
     }
@@ -8276,6 +8437,7 @@ public class DiscoveryV1Models {
      *
      * @return the filter
      */
+    @AuraEnabled
     public String getFilter() {
       return filter;
     }
@@ -8284,6 +8446,7 @@ public class DiscoveryV1Models {
      *
      * @return the examples
      */
+    @AuraEnabled
     public List<TrainingExample> getExamples() {
       return examples;
     }
@@ -8343,6 +8506,7 @@ public class DiscoveryV1Models {
      *
      * @return the total_examples
      */
+    @AuraEnabled
     public Long getTotalExamples() {
       return total_examples;
     }
@@ -8351,7 +8515,8 @@ public class DiscoveryV1Models {
      *
      * @return the available
      */
-    public Boolean isAvailable() {
+    @AuraEnabled
+    public Boolean getAvailable() {
       return available;
     }
     /**
@@ -8359,7 +8524,8 @@ public class DiscoveryV1Models {
      *
      * @return the processing
      */
-    public Boolean isProcessing() {
+    @AuraEnabled
+    public Boolean getProcessing() {
       return processing;
     }
     /**
@@ -8367,7 +8533,8 @@ public class DiscoveryV1Models {
      *
      * @return the minimum_queries_added
      */
-    public Boolean isMinimumQueriesAdded() {
+    @AuraEnabled
+    public Boolean getMinimumQueriesAdded() {
       return minimum_queries_added;
     }
     /**
@@ -8375,7 +8542,8 @@ public class DiscoveryV1Models {
      *
      * @return the minimum_examples_added
      */
-    public Boolean isMinimumExamplesAdded() {
+    @AuraEnabled
+    public Boolean getMinimumExamplesAdded() {
       return minimum_examples_added;
     }
     /**
@@ -8383,7 +8551,8 @@ public class DiscoveryV1Models {
      *
      * @return the sufficient_label_diversity
      */
-    public Boolean isSufficientLabelDiversity() {
+    @AuraEnabled
+    public Boolean getSufficientLabelDiversity() {
       return sufficient_label_diversity;
     }
     /**
@@ -8391,6 +8560,7 @@ public class DiscoveryV1Models {
      *
      * @return the notices
      */
+    @AuraEnabled
     public Long getNotices() {
       return notices;
     }
@@ -8399,6 +8569,7 @@ public class DiscoveryV1Models {
      *
      * @return the successfully_trained
      */
+    @AuraEnabled
     public Datetime getSuccessfullyTrained() {
       return successfully_trained;
     }
@@ -8407,6 +8578,7 @@ public class DiscoveryV1Models {
      *
      * @return the data_updated
      */
+    @AuraEnabled
     public Datetime getDataUpdated() {
       return data_updated;
     }
@@ -9523,6 +9695,7 @@ public class DiscoveryV1Models {
      *
      * @return the fonts
      */
+    @AuraEnabled
     public List<FontSetting> getFonts() {
       return fonts;
     }
@@ -9531,6 +9704,7 @@ public class DiscoveryV1Models {
      *
      * @return the styles
      */
+    @AuraEnabled
     public List<WordStyle> getStyles() {
       return styles;
     }
@@ -9564,6 +9738,7 @@ public class DiscoveryV1Models {
      *
      * @return the heading
      */
+    @AuraEnabled
     public WordHeadingDetection getHeading() {
       return heading;
     }
@@ -9589,6 +9764,7 @@ public class DiscoveryV1Models {
      *
      * @return the level
      */
+    @AuraEnabled
     public Long getLevel() {
       return level;
     }
@@ -9597,6 +9773,7 @@ public class DiscoveryV1Models {
      *
      * @return the names
      */
+    @AuraEnabled
     public List<String> getNames() {
       return names;
     }
@@ -9630,6 +9807,7 @@ public class DiscoveryV1Models {
      *
      * @return the xpaths
      */
+    @AuraEnabled
     public List<String> getXpaths() {
       return xpaths;
     }
