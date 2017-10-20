@@ -9,6 +9,7 @@ public class ConversationV1Models {
      *
      * @return the conversation_id
      */
+    @AuraEnabled
     public String getConversationId() {
       return (String)JSON.deserialize(JSON.serialize(this.get('conversation_id')), String.class);
     }
@@ -18,6 +19,7 @@ public class ConversationV1Models {
      *
      * @return the system_serialized_name
      */
+    @AuraEnabled
     public SystemResponse getSystem() {
       return (SystemResponse)JSON.deserialize(JSON.serialize(this.get('system_serialized_name')), SystemResponse.class);
     }
@@ -55,6 +57,7 @@ public class ConversationV1Models {
      *
      * @return the text
      */
+    @AuraEnabled
     public String getText() {
       return text;
     }
@@ -65,6 +68,7 @@ public class ConversationV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -75,6 +79,7 @@ public class ConversationV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -102,6 +107,7 @@ public class ConversationV1Models {
      *
      * @return the counterexamples
      */
+    @AuraEnabled
     public List<Counterexample> getCounterexamples() {
       return counterexamples;
     }
@@ -112,6 +118,7 @@ public class ConversationV1Models {
      *
      * @return the pagination
      */
+    @AuraEnabled
     public Pagination getPagination() {
       return pagination;
     }
@@ -4014,6 +4021,7 @@ public class ConversationV1Models {
      *
      * @return the dialog_node
      */
+    @AuraEnabled
     public String getDialogNode() {
       return dialog_node;
     }
@@ -4024,6 +4032,7 @@ public class ConversationV1Models {
      *
      * @return the description
      */
+    @AuraEnabled
     public String getDescription() {
       return description;
     }
@@ -4034,6 +4043,7 @@ public class ConversationV1Models {
      *
      * @return the conditions
      */
+    @AuraEnabled
     public String getConditions() {
       return conditions;
     }
@@ -4044,6 +4054,7 @@ public class ConversationV1Models {
      *
      * @return the parent
      */
+    @AuraEnabled
     public String getParent() {
       return parent;
     }
@@ -4054,6 +4065,7 @@ public class ConversationV1Models {
      *
      * @return the previous_sibling
      */
+    @AuraEnabled
     public String getPreviousSibling() {
       return previous_sibling;
     }
@@ -4064,6 +4076,7 @@ public class ConversationV1Models {
      *
      * @return the output
      */
+    @AuraEnabled
     public Map<String, String> getOutput() {
       return output;
     }
@@ -4074,6 +4087,7 @@ public class ConversationV1Models {
      *
      * @return the context
      */
+    @AuraEnabled
     public Map<String, String> getContext() {
       return context;
     }
@@ -4084,6 +4098,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
+    @AuraEnabled
     public Map<String, String> getMetadata() {
       return metadata;
     }
@@ -4094,6 +4109,7 @@ public class ConversationV1Models {
      *
      * @return the next_step
      */
+    @AuraEnabled
     public DialogNodeNextStep getNextStep() {
       return next_step;
     }
@@ -4104,6 +4120,7 @@ public class ConversationV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -4114,6 +4131,7 @@ public class ConversationV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -4124,6 +4142,7 @@ public class ConversationV1Models {
      *
      * @return the actions
      */
+    @AuraEnabled
     public List<DialogNodeAction> getActions() {
       return actions;
     }
@@ -4134,6 +4153,7 @@ public class ConversationV1Models {
      *
      * @return the title
      */
+    @AuraEnabled
     public String getTitle() {
       return title;
     }
@@ -4144,6 +4164,7 @@ public class ConversationV1Models {
      *
      * @return the type_serialized_name
      */
+    @AuraEnabled
     public String getType() {
       return type_serialized_name;
     }
@@ -4154,6 +4175,7 @@ public class ConversationV1Models {
      *
      * @return the event_name
      */
+    @AuraEnabled
     public String getEventName() {
       return event_name;
     }
@@ -4164,6 +4186,7 @@ public class ConversationV1Models {
      *
      * @return the variable
      */
+    @AuraEnabled
     public String getVariable() {
       return variable;
     }
@@ -4311,6 +4334,7 @@ public class ConversationV1Models {
      *
      * @return the name
      */
+    @AuraEnabled
     public String getName() {
       return name;
     }
@@ -4321,6 +4345,7 @@ public class ConversationV1Models {
      *
      * @return the type_serialized_name
      */
+    @AuraEnabled
     public String getType() {
       return type_serialized_name;
     }
@@ -4331,6 +4356,7 @@ public class ConversationV1Models {
      *
      * @return the parameters
      */
+    @AuraEnabled
     public Map<String, String> getParameters() {
       return parameters;
     }
@@ -4341,6 +4367,7 @@ public class ConversationV1Models {
      *
      * @return the result_variable
      */
+    @AuraEnabled
     public String getResultVariable() {
       return result_variable;
     }
@@ -4351,6 +4378,7 @@ public class ConversationV1Models {
      *
      * @return the credentials
      */
+    @AuraEnabled
     public String getCredentials() {
       return credentials;
     }
@@ -4412,6 +4440,7 @@ public class ConversationV1Models {
      *
      * @return the dialog_nodes
      */
+    @AuraEnabled
     public List<DialogNode> getDialogNodes() {
       return dialog_nodes;
     }
@@ -4422,6 +4451,7 @@ public class ConversationV1Models {
      *
      * @return the pagination
      */
+    @AuraEnabled
     public Pagination getPagination() {
       return pagination;
     }
@@ -4459,6 +4489,7 @@ public class ConversationV1Models {
      *
      * @return the behavior
      */
+    @AuraEnabled
     public String getBehavior() {
       return behavior;
     }
@@ -4469,6 +4500,7 @@ public class ConversationV1Models {
      *
      * @return the dialog_node
      */
+    @AuraEnabled
     public String getDialogNode() {
       return dialog_node;
     }
@@ -4479,6 +4511,7 @@ public class ConversationV1Models {
      *
      * @return the selector
      */
+    @AuraEnabled
     public String getSelector() {
       return selector;
     }
@@ -4528,6 +4561,7 @@ public class ConversationV1Models {
      *
      * @return the entity
      */
+    @AuraEnabled
     public String getEntity() {
       return entity;
     }
@@ -4538,6 +4572,7 @@ public class ConversationV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -4548,6 +4583,7 @@ public class ConversationV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -4558,6 +4594,7 @@ public class ConversationV1Models {
      *
      * @return the description
      */
+    @AuraEnabled
     public String getDescription() {
       return description;
     }
@@ -4568,6 +4605,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
+    @AuraEnabled
     public Map<String, String> getMetadata() {
       return metadata;
     }
@@ -4578,7 +4616,8 @@ public class ConversationV1Models {
      *
      * @return the fuzzy_match
      */
-    public Boolean isFuzzyMatch() {
+    @AuraEnabled
+    public Boolean getFuzzyMatch() {
       return fuzzy_match;
     }
 
@@ -4632,6 +4671,7 @@ public class ConversationV1Models {
      *
      * @return the entities
      */
+    @AuraEnabled
     public List<EntityExport> getEntities() {
       return entities;
     }
@@ -4642,6 +4682,7 @@ public class ConversationV1Models {
      *
      * @return the pagination
      */
+    @AuraEnabled
     public Pagination getPagination() {
       return pagination;
     }
@@ -4683,6 +4724,7 @@ public class ConversationV1Models {
      *
      * @return the entity
      */
+    @AuraEnabled
     public String getEntity() {
       return entity;
     }
@@ -4693,6 +4735,7 @@ public class ConversationV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -4703,6 +4746,7 @@ public class ConversationV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -4713,6 +4757,7 @@ public class ConversationV1Models {
      *
      * @return the description
      */
+    @AuraEnabled
     public String getDescription() {
       return description;
     }
@@ -4723,6 +4768,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
+    @AuraEnabled
     public Map<String, String> getMetadata() {
       return metadata;
     }
@@ -4733,7 +4779,8 @@ public class ConversationV1Models {
      *
      * @return the fuzzy_match
      */
-    public Boolean isFuzzyMatch() {
+    @AuraEnabled
+    public Boolean getFuzzyMatch() {
       return fuzzy_match;
     }
     /**
@@ -4743,6 +4790,7 @@ public class ConversationV1Models {
      *
      * @return the values
      */
+    @AuraEnabled
     public List<ValueExport> getValues() {
       return values;
     }
@@ -4807,6 +4855,7 @@ public class ConversationV1Models {
      *
      * @return the text
      */
+    @AuraEnabled
     public String getText() {
       return text;
     }
@@ -4817,6 +4866,7 @@ public class ConversationV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -4827,6 +4877,7 @@ public class ConversationV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -4854,6 +4905,7 @@ public class ConversationV1Models {
      *
      * @return the examples
      */
+    @AuraEnabled
     public List<Example> getExamples() {
       return examples;
     }
@@ -4864,6 +4916,7 @@ public class ConversationV1Models {
      *
      * @return the pagination
      */
+    @AuraEnabled
     public Pagination getPagination() {
       return pagination;
     }
@@ -5994,6 +6047,7 @@ public class ConversationV1Models {
      *
      * @return the intent
      */
+    @AuraEnabled
     public String getIntent() {
       return intent;
     }
@@ -6004,6 +6058,7 @@ public class ConversationV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -6014,6 +6069,7 @@ public class ConversationV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -6024,6 +6080,7 @@ public class ConversationV1Models {
      *
      * @return the description
      */
+    @AuraEnabled
     public String getDescription() {
       return description;
     }
@@ -6060,6 +6117,7 @@ public class ConversationV1Models {
      *
      * @return the intents
      */
+    @AuraEnabled
     public List<IntentExport> getIntents() {
       return intents;
     }
@@ -6070,6 +6128,7 @@ public class ConversationV1Models {
      *
      * @return the pagination
      */
+    @AuraEnabled
     public Pagination getPagination() {
       return pagination;
     }
@@ -6109,6 +6168,7 @@ public class ConversationV1Models {
      *
      * @return the intent
      */
+    @AuraEnabled
     public String getIntent() {
       return intent;
     }
@@ -6119,6 +6179,7 @@ public class ConversationV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -6129,6 +6190,7 @@ public class ConversationV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -6139,6 +6201,7 @@ public class ConversationV1Models {
      *
      * @return the description
      */
+    @AuraEnabled
     public String getDescription() {
       return description;
     }
@@ -6149,6 +6212,7 @@ public class ConversationV1Models {
      *
      * @return the examples
      */
+    @AuraEnabled
     public List<Example> getExamples() {
       return examples;
     }
@@ -7930,6 +7994,7 @@ public class ConversationV1Models {
      *
      * @return the logs
      */
+    @AuraEnabled
     public List<LogExport> getLogs() {
       return logs;
     }
@@ -7940,6 +8005,7 @@ public class ConversationV1Models {
      *
      * @return the pagination
      */
+    @AuraEnabled
     public LogPagination getPagination() {
       return pagination;
     }
@@ -7981,6 +8047,7 @@ public class ConversationV1Models {
      *
      * @return the request
      */
+    @AuraEnabled
     public MessageRequest getRequest() {
       return request;
     }
@@ -7991,6 +8058,7 @@ public class ConversationV1Models {
      *
      * @return the response
      */
+    @AuraEnabled
     public MessageResponse getResponse() {
       return response;
     }
@@ -8001,6 +8069,7 @@ public class ConversationV1Models {
      *
      * @return the log_id
      */
+    @AuraEnabled
     public String getLogId() {
       return log_id;
     }
@@ -8011,6 +8080,7 @@ public class ConversationV1Models {
      *
      * @return the request_timestamp
      */
+    @AuraEnabled
     public String getRequestTimestamp() {
       return request_timestamp;
     }
@@ -8021,6 +8091,7 @@ public class ConversationV1Models {
      *
      * @return the response_timestamp
      */
+    @AuraEnabled
     public String getResponseTimestamp() {
       return response_timestamp;
     }
@@ -8031,6 +8102,7 @@ public class ConversationV1Models {
      *
      * @return the workspace_id
      */
+    @AuraEnabled
     public String getWorkspaceId() {
       return workspace_id;
     }
@@ -8041,6 +8113,7 @@ public class ConversationV1Models {
      *
      * @return the language
      */
+    @AuraEnabled
     public String getLanguage() {
       return language;
     }
@@ -8119,6 +8192,7 @@ public class ConversationV1Models {
      *
      * @return the level
      */
+    @AuraEnabled
     public String getLevel() {
       return (String)JSON.deserialize(JSON.serialize(this.get('level')), String.class);
     }
@@ -8128,6 +8202,7 @@ public class ConversationV1Models {
      *
      * @return the msg
      */
+    @AuraEnabled
     public String getMsg() {
       return (String)JSON.deserialize(JSON.serialize(this.get('msg')), String.class);
     }
@@ -8164,6 +8239,7 @@ public class ConversationV1Models {
      *
      * @return the next_url
      */
+    @AuraEnabled
     public String getNextUrl() {
       return next_url;
     }
@@ -8174,6 +8250,7 @@ public class ConversationV1Models {
      *
      * @return the matched
      */
+    @AuraEnabled
     public Long getMatched() {
       return matched;
     }
@@ -8209,6 +8286,7 @@ public class ConversationV1Models {
      *
      * @return the text
      */
+    @AuraEnabled
     public String getText() {
       return text;
     }
@@ -8498,6 +8576,7 @@ public class ConversationV1Models {
      *
      * @return the input
      */
+    @AuraEnabled
     public InputData getInput() {
       return input;
     }
@@ -8508,7 +8587,8 @@ public class ConversationV1Models {
      *
      * @return the alternate_intents
      */
-    public Boolean isAlternateIntents() {
+    @AuraEnabled
+    public Boolean getAlternateIntents() {
       return alternate_intents;
     }
     /**
@@ -8518,6 +8598,7 @@ public class ConversationV1Models {
      *
      * @return the context
      */
+    @AuraEnabled
     public Context getContext() {
       return context;
     }
@@ -8528,6 +8609,7 @@ public class ConversationV1Models {
      *
      * @return the entities
      */
+    @AuraEnabled
     public List<RuntimeEntity> getEntities() {
       return entities;
     }
@@ -8538,6 +8620,7 @@ public class ConversationV1Models {
      *
      * @return the intents
      */
+    @AuraEnabled
     public List<RuntimeIntent> getIntents() {
       return intents;
     }
@@ -8548,6 +8631,7 @@ public class ConversationV1Models {
      *
      * @return the output
      */
+    @AuraEnabled
     public OutputData getOutput() {
       return output;
     }
@@ -8617,6 +8701,7 @@ public class ConversationV1Models {
      *
      * @return the input
      */
+    @AuraEnabled
     public MessageInput getInput() {
       return (MessageInput)JSON.deserialize(JSON.serialize(this.get('input')), MessageInput.class);
     }
@@ -8626,6 +8711,7 @@ public class ConversationV1Models {
      *
      * @return the intents
      */
+    @AuraEnabled
     public List<RuntimeIntent> getIntents() {
       return (List<RuntimeIntent>)JSON.deserialize(JSON.serialize(this.get('intents')), List<RuntimeIntent>.class);
     }
@@ -8635,6 +8721,7 @@ public class ConversationV1Models {
      *
      * @return the entities
      */
+    @AuraEnabled
     public List<RuntimeEntity> getEntities() {
       return (List<RuntimeEntity>)JSON.deserialize(JSON.serialize(this.get('entities')), List<RuntimeEntity>.class);
     }
@@ -8644,7 +8731,8 @@ public class ConversationV1Models {
      *
      * @return the alternate_intents
      */
-    public Boolean isAlternateIntents() {
+    @AuraEnabled
+    public Boolean getAlternateIntents() {
       return (Boolean)JSON.deserialize(JSON.serialize(this.get('alternate_intents')), Boolean.class);
     }
 
@@ -8653,6 +8741,7 @@ public class ConversationV1Models {
      *
      * @return the context
      */
+    @AuraEnabled
     public Context getContext() {
       return (Context)JSON.deserialize(JSON.serialize(this.get('context')), Context.class);
     }
@@ -8662,6 +8751,7 @@ public class ConversationV1Models {
      *
      * @return the output
      */
+    @AuraEnabled
     public OutputData getOutput() {
       return (OutputData)JSON.deserialize(JSON.serialize(this.get('output')), OutputData.class);
     }
@@ -8731,6 +8821,7 @@ public class ConversationV1Models {
      *
      * @return the log_messages
      */
+    @AuraEnabled
     public List<LogMessage> getLogMessages() {
       return (List<LogMessage>)JSON.deserialize(JSON.serialize(this.get('log_messages')), List<LogMessage>.class);
     }
@@ -8740,6 +8831,7 @@ public class ConversationV1Models {
      *
      * @return the text
      */
+    @AuraEnabled
     public List<String> getText() {
       return (List<String>)JSON.deserialize(JSON.serialize(this.get('text')), List<String>.class);
     }
@@ -8749,6 +8841,7 @@ public class ConversationV1Models {
      *
      * @return the nodes_visited
      */
+    @AuraEnabled
     public List<String> getNodesVisited() {
       return (List<String>)JSON.deserialize(JSON.serialize(this.get('nodes_visited')), List<String>.class);
     }
@@ -8796,6 +8889,7 @@ public class ConversationV1Models {
      *
      * @return the refresh_url
      */
+    @AuraEnabled
     public String getRefreshUrl() {
       return refresh_url;
     }
@@ -8806,6 +8900,7 @@ public class ConversationV1Models {
      *
      * @return the next_url
      */
+    @AuraEnabled
     public String getNextUrl() {
       return next_url;
     }
@@ -8816,6 +8911,7 @@ public class ConversationV1Models {
      *
      * @return the total
      */
+    @AuraEnabled
     public Long getTotal() {
       return total;
     }
@@ -8826,6 +8922,7 @@ public class ConversationV1Models {
      *
      * @return the matched
      */
+    @AuraEnabled
     public Long getMatched() {
       return matched;
     }
@@ -8877,6 +8974,7 @@ public class ConversationV1Models {
      *
      * @return the entity
      */
+    @AuraEnabled
     public String getEntity() {
       return (String)JSON.deserialize(JSON.serialize(this.get('entity')), String.class);
     }
@@ -8886,6 +8984,7 @@ public class ConversationV1Models {
      *
      * @return the location
      */
+    @AuraEnabled
     public List<Long> getLocation() {
       return (List<Long>)JSON.deserialize(JSON.serialize(this.get('location')), List<Long>.class);
     }
@@ -8895,6 +8994,7 @@ public class ConversationV1Models {
      *
      * @return the value
      */
+    @AuraEnabled
     public String getValue() {
       return (String)JSON.deserialize(JSON.serialize(this.get('value')), String.class);
     }
@@ -8904,6 +9004,7 @@ public class ConversationV1Models {
      *
      * @return the confidence
      */
+    @AuraEnabled
     public Double getConfidence() {
       return (Double)JSON.deserialize(JSON.serialize(this.get('confidence')), Double.class);
     }
@@ -8913,6 +9014,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
+    @AuraEnabled
     public Map<String, String> getMetadata() {
       return (Map<String, String>)JSON.deserialize(JSON.serialize(this.get('metadata')), Map<String, String>.class);
     }
@@ -8973,6 +9075,7 @@ public class ConversationV1Models {
      *
      * @return the intent
      */
+    @AuraEnabled
     public String getIntent() {
       return (String)JSON.deserialize(JSON.serialize(this.get('intent')), String.class);
     }
@@ -8982,6 +9085,7 @@ public class ConversationV1Models {
      *
      * @return the confidence
      */
+    @AuraEnabled
     public Double getConfidence() {
       return (Double)JSON.deserialize(JSON.serialize(this.get('confidence')), Double.class);
     }
@@ -9019,6 +9123,7 @@ public class ConversationV1Models {
      *
      * @return the synonym
      */
+    @AuraEnabled
     public String getSynonym() {
       return synonym;
     }
@@ -9029,6 +9134,7 @@ public class ConversationV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -9039,6 +9145,7 @@ public class ConversationV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -9066,6 +9173,7 @@ public class ConversationV1Models {
      *
      * @return the synonyms
      */
+    @AuraEnabled
     public List<Synonym> getSynonyms() {
       return synonyms;
     }
@@ -9076,6 +9184,7 @@ public class ConversationV1Models {
      *
      * @return the pagination
      */
+    @AuraEnabled
     public Pagination getPagination() {
       return pagination;
     }
@@ -11161,6 +11270,7 @@ public class ConversationV1Models {
      *
      * @return the value
      */
+    @AuraEnabled
     public String getValue() {
       return value;
     }
@@ -11171,6 +11281,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
+    @AuraEnabled
     public Map<String, String> getMetadata() {
       return metadata;
     }
@@ -11181,6 +11292,7 @@ public class ConversationV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -11191,6 +11303,7 @@ public class ConversationV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -11201,6 +11314,7 @@ public class ConversationV1Models {
      *
      * @return the synonyms
      */
+    @AuraEnabled
     public List<String> getSynonyms() {
       return synonyms;
     }
@@ -11211,6 +11325,7 @@ public class ConversationV1Models {
      *
      * @return the patterns
      */
+    @AuraEnabled
     public List<String> getPatterns() {
       return patterns;
     }
@@ -11221,6 +11336,7 @@ public class ConversationV1Models {
      *
      * @return the type_serialized_name
      */
+    @AuraEnabled
     public String getType() {
       return type_serialized_name;
     }
@@ -11284,6 +11400,7 @@ public class ConversationV1Models {
      *
      * @return the values
      */
+    @AuraEnabled
     public List<ValueExport> getValues() {
       return values;
     }
@@ -11294,6 +11411,7 @@ public class ConversationV1Models {
      *
      * @return the pagination
      */
+    @AuraEnabled
     public Pagination getPagination() {
       return pagination;
     }
@@ -11335,6 +11453,7 @@ public class ConversationV1Models {
      *
      * @return the value
      */
+    @AuraEnabled
     public String getValue() {
       return value;
     }
@@ -11345,6 +11464,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
+    @AuraEnabled
     public Map<String, String> getMetadata() {
       return metadata;
     }
@@ -11355,6 +11475,7 @@ public class ConversationV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -11365,6 +11486,7 @@ public class ConversationV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -11375,6 +11497,7 @@ public class ConversationV1Models {
      *
      * @return the synonyms
      */
+    @AuraEnabled
     public List<String> getSynonyms() {
       return synonyms;
     }
@@ -11385,6 +11508,7 @@ public class ConversationV1Models {
      *
      * @return the patterns
      */
+    @AuraEnabled
     public List<String> getPatterns() {
       return patterns;
     }
@@ -11395,6 +11519,7 @@ public class ConversationV1Models {
      *
      * @return the type_serialized_name
      */
+    @AuraEnabled
     public String getType() {
       return type_serialized_name;
     }
@@ -11464,6 +11589,7 @@ public class ConversationV1Models {
      *
      * @return the name
      */
+    @AuraEnabled
     public String getName() {
       return name;
     }
@@ -11474,6 +11600,7 @@ public class ConversationV1Models {
      *
      * @return the language
      */
+    @AuraEnabled
     public String getLanguage() {
       return language;
     }
@@ -11484,6 +11611,7 @@ public class ConversationV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -11494,6 +11622,7 @@ public class ConversationV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -11504,6 +11633,7 @@ public class ConversationV1Models {
      *
      * @return the workspace_id
      */
+    @AuraEnabled
     public String getWorkspaceId() {
       return workspace_id;
     }
@@ -11514,6 +11644,7 @@ public class ConversationV1Models {
      *
      * @return the description
      */
+    @AuraEnabled
     public String getDescription() {
       return description;
     }
@@ -11524,6 +11655,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
+    @AuraEnabled
     public Map<String, String> getMetadata() {
       return metadata;
     }
@@ -11534,7 +11666,8 @@ public class ConversationV1Models {
      *
      * @return the learning_opt_out
      */
-    public Boolean isLearningOptOut() {
+    @AuraEnabled
+    public Boolean getLearningOptOut() {
       return learning_opt_out;
     }
 
@@ -11597,6 +11730,7 @@ public class ConversationV1Models {
      *
      * @return the workspaces
      */
+    @AuraEnabled
     public List<Workspace> getWorkspaces() {
       return workspaces;
     }
@@ -11607,6 +11741,7 @@ public class ConversationV1Models {
      *
      * @return the pagination
      */
+    @AuraEnabled
     public Pagination getPagination() {
       return pagination;
     }
@@ -11654,6 +11789,7 @@ public class ConversationV1Models {
      *
      * @return the name
      */
+    @AuraEnabled
     public String getName() {
       return name;
     }
@@ -11664,6 +11800,7 @@ public class ConversationV1Models {
      *
      * @return the description
      */
+    @AuraEnabled
     public String getDescription() {
       return description;
     }
@@ -11674,6 +11811,7 @@ public class ConversationV1Models {
      *
      * @return the language
      */
+    @AuraEnabled
     public String getLanguage() {
       return language;
     }
@@ -11684,6 +11822,7 @@ public class ConversationV1Models {
      *
      * @return the metadata
      */
+    @AuraEnabled
     public Map<String, String> getMetadata() {
       return metadata;
     }
@@ -11694,6 +11833,7 @@ public class ConversationV1Models {
      *
      * @return the created
      */
+    @AuraEnabled
     public Datetime getCreated() {
       return created;
     }
@@ -11704,6 +11844,7 @@ public class ConversationV1Models {
      *
      * @return the updated
      */
+    @AuraEnabled
     public Datetime getUpdated() {
       return updated;
     }
@@ -11714,6 +11855,7 @@ public class ConversationV1Models {
      *
      * @return the workspace_id
      */
+    @AuraEnabled
     public String getWorkspaceId() {
       return workspace_id;
     }
@@ -11724,6 +11866,7 @@ public class ConversationV1Models {
      *
      * @return the status
      */
+    @AuraEnabled
     public String getStatus() {
       return status;
     }
@@ -11734,7 +11877,8 @@ public class ConversationV1Models {
      *
      * @return the learning_opt_out
      */
-    public Boolean isLearningOptOut() {
+    @AuraEnabled
+    public Boolean getLearningOptOut() {
       return learning_opt_out;
     }
     /**
@@ -11744,6 +11888,7 @@ public class ConversationV1Models {
      *
      * @return the intents
      */
+    @AuraEnabled
     public List<IntentExport> getIntents() {
       return intents;
     }
@@ -11754,6 +11899,7 @@ public class ConversationV1Models {
      *
      * @return the entities
      */
+    @AuraEnabled
     public List<EntityExport> getEntities() {
       return entities;
     }
@@ -11764,6 +11910,7 @@ public class ConversationV1Models {
      *
      * @return the counterexamples
      */
+    @AuraEnabled
     public List<Counterexample> getCounterexamples() {
       return counterexamples;
     }
@@ -11774,6 +11921,7 @@ public class ConversationV1Models {
      *
      * @return the dialog_nodes
      */
+    @AuraEnabled
     public List<DialogNode> getDialogNodes() {
       return dialog_nodes;
     }
