@@ -3,15 +3,14 @@
  * mock responses are copied from IBM Watson Api Explorer.
  */
 public class IBMWatsonMockResponses {
-  
-  public static String singleEnvironment() {
+  public static String environment() {
     return '{"environment_id": "f822208e-e4c2-45f8-a0d6-c2be950fbcc8","name": "test_environment",'+
                           '"description": "Test environment", "created": "2016-06-16T10:56:54.957Z",'+
                               '"updated": "2017-05-16T13:56:54.957Z", "status": "active", "read_only": false,'+
                               '"index_capacity": {"documents": {"indexed": 0, "maximum_allowed": 1000000},'+
                               '"disk_usage": {"used_bytes": 0, "maximum_allowed_bytes": 85899345920}}}';
   }
-  public static String IBMWatsonCreateConfigurationResponse() {
+  public static String configuration() {
     return  '{'+
             '  "configuration_id": "448e3545-51ca-4530-a03b-6ff282ceac2e",'+
             '  "name": "IBM News",'+
@@ -113,7 +112,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
   
-  public static String configurationsList() {
+  public static String listConfigurationsResponse() {
     return '{'+
            ' "configurations": ['+
            '{'+
@@ -219,7 +218,7 @@ public class IBMWatsonMockResponses {
            '}';
   }
   
-   public static String collectionFieldsList() {
+   public static String listCollectionFieldsResponse() {
     return '{'+
                 '  "fields": ['+
                 '    {'+
@@ -242,7 +241,7 @@ public class IBMWatsonMockResponses {
                 '}';
   }
   
-  public static String environmentsList() {
+  public static String listEnvironmentsResponse() {
     return '{'+
                 '  "environments": ['+
                 '    {'+
@@ -284,12 +283,12 @@ public class IBMWatsonMockResponses {
             '    "used_bytes": 260'+
             '  },'+
             '  "training_status": {'+
-            '    "data_updated": "",'+
+            '    "data_updated": null,'+
             '    "total_examples": 0,'+
             '    "sufficient_label_diversity": false,'+
             '    "processing": false,'+
             '    "minimum_examples_added": false,'+
-            '    "successfully_trained": "",'+
+            '    "successfully_trained": null,'+
             '    "available": false,'+
             '    "notices": 0,'+
             '    "minimum_queries_added": false'+
@@ -297,7 +296,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
   
-  public static String collectionsList() {
+  public static String listCollectionsResponse() {
     return '{ "collections": ['+
            '   {'+
            '     "collection_id": "f1360220-ea2d-4271-9d62-89a910b13c37",'+
@@ -311,5 +310,125 @@ public class IBMWatsonMockResponses {
            '   }'+
            ' ]'+
            '}';
+  }
+  
+  public static String documentStatus() {
+    return '{'+
+            '  "document_id": "f1360220-ea2d-4271-9d62-89a910b13c37",'+
+            '  "configuration_id": "e8b9d793-b163-452a-9373-bce07efb510b",'+
+            '  "created": "2015-08-24T18:42:25.324Z",'+
+            '  "updated": "2015-08-24T18:42:25.324Z",'+
+            '  "status": "available with notices",'+
+            '  "status_description": "Document is successfully ingested but was indexed with warnings",'+
+            '  "filename": "instructions.html",'+
+            '  "file_type": "html",'+
+            '  "sha1": "de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3",'+
+            '  "notices": ['+
+            '    {'+
+            '      "notice_id": "index_342",'+
+            '      "severity": "warning",'+
+            '      "step": "indexing",'+
+            '      "description": "something bad happened",'+
+            '      "document_id": "f1360220-ea2d-4271-9d62-89a910b13c37"'+
+            '    }'+
+            '  ]'+
+            '}';
+  }
+  
+  public static String queryResponse() {
+    return '{'+
+            '  "matching_results": 24,'+
+            '  "results": ['+
+            '    {'+
+            '      "id": "watson-generated ID",'+
+            '      "score": 1'+
+            '    }'+
+            '  ],'+
+            '  "aggregations":[ {'+
+            '    "term": {'+
+            '      "results": ['+
+            '        {'+
+            '          "key": "active",'+
+            '          "matching_results": 34'+
+            '        }'+
+            '      ]'+
+            '    }'+
+            '  }]'+
+            '}';
+  }
+  
+  public static String queryNoticesResponse() {
+    return '{'+
+            '  "matching_results": 24,'+
+            '  "results": ['+
+            '    {'+
+            '      "id": "030ba125-29db-43f2-8552-f941ae30a7a8",'+
+            '      "collection_id": "f1360220-ea2d-4271-9d62-89a910b13c37",'+
+            '      "code": 200,'+
+            '      "score": 1,'+
+            '      "filename": "instructions.html",'+
+            '      "file_type": "html",'+
+            '      "sha1": "de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3",'+
+            '      "notices": ['+
+            '        {'+
+            '          "notice_id": "xpath_not_found",'+
+            '          "created": "2016-09-20T17:26:17.000Z",'+
+            '          "document_id": "030ba125-29db-43f2-8552-f941ae30a7a8",'+
+            '          "severity": "warning",'+
+            '          "step": "html-to-html",'+
+            '          "description": "The xpath expression boom was not found."'+
+            '        }'+
+            '      ]'+
+            '    }'+
+            '  ],'+
+            '  "aggregations": [{'+
+            '    "term": {'+
+            '      "results": ['+
+            '        {'+
+            '          "key": "warning",'+
+            '          "matching_results": 34'+
+            '        }'+
+            '      ]'+
+            '    }'+
+            '  }]'+
+            '}';
+  }
+  
+   public static String trainingQuery() {
+    return  '{'+
+            '  "query_id": "string",'+
+            '  "natural_language_query": "string",'+
+            '  "filter": "string",'+
+            '  "examples": ['+
+            '    {'+
+            '      "document_id": "string",'+
+            '      "cross_reference": "string",'+
+            '      "relevance": 0'+
+            '    }'+
+            '  ]'+
+            '}';
+  }
+  
+  public static String trainingDataSet() {
+    return  '{ "queries": [{'+
+            '  "query_id": "string",'+
+            '  "natural_language_query": "string",'+
+            '  "filter": "string",'+
+            '  "examples": ['+
+            '    {'+
+            '      "document_id": "string",'+
+            '      "cross_reference": "string",'+
+            '      "relevance": 0'+
+            '    }'+
+            '  ]'+
+            '}]}';
+  }
+  
+  public static String trainingExample() {
+    return  '{'+
+            '  "document_id": "string",'+
+            '  "cross_reference": "string",'+
+            '  "relevance": 2'+
+            '}';
   }
 }
