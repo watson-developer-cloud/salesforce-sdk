@@ -180,7 +180,7 @@ public class IBMWatsonRequest {
     }
 
     public Builder http_delete() {
-      return http_delete( IBMWatsonRequestBody.create() );
+      return http_delete( IBMWatsonRequestBody.create(null, null) );
     }
 
     public Builder http_put(IBMWatsonRequestBody body) {
