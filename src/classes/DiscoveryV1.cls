@@ -444,25 +444,27 @@ public class DiscoveryV1 extends IBMWatsonService {
    * @param addDocumentOptions the {@link DiscoveryV1Models.AddDocumentOptions} containing the options for the call
    * @return the {@link DiscoveryV1Models.DocumentAccepted} with the response
    */
-  /*public DiscoveryV1Models.DocumentAccepted addDocument(DiscoveryV1Models.AddDocumentOptions addDocumentOptions) {
+  public DiscoveryV1Models.DocumentAccepted addDocument(DiscoveryV1Models.AddDocumentOptions addDocumentOptions) {
     IBMWatsonValidator.notNull(addDocumentOptions, 'addDocumentOptions cannot be null');
     IBMWatsonValidator.isTrue((addDocumentOptions.file() != null) || (addDocumentOptions.metadata() != null), 'At least one of file or metadata must be supplied.');
-    builder = IBMWatsonRequestBuilder.http_post(URL + String.format('/v1/environments/{0}/collections/{1}/documents', new String[]{ addDocumentOptions.environmentId(), addDocumentOptions.collectionId() }));
+    builder = IBMWatsonRequestBuilder.http_post(URL + String.format('/v1/environments/{0}/collections/{1}/documents', new String[]{addDocumentOptions.environmentId(), addDocumentOptions.collectionId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    MultipartBody.Builder multipartBuilder = new MultipartBody.Builder();
-    multipartBuilder.setType(MultipartBody.FORM);
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (addDocumentOptions.file() != null) {
-      RequestBody fileBody = RequestUtils.inputStreamBody(addDocumentOptions.file(), addDocumentOptions.fileContentType());
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestUtils.inputFileBody(addDocumentOptions.file(), addDocumentOptions.fileContentType());
       multipartBuilder.addFormDataPart('file', addDocumentOptions.filename(), fileBody);
     }
     if (addDocumentOptions.metadata() != null) {
       multipartBuilder.addFormDataPart('metadata', addDocumentOptions.metadata());
     }
-    builder.body(multipartBuilder.build());
+    IBMWatsonMultipartBody MultipartBody = multipartBuilder.build();
+    builder.body(MultipartBody)
+      .addHeaders(MultipartBody.getAllHeaders());
     return (DiscoveryV1Models.DocumentAccepted) createServiceCall(builder.build(), DiscoveryV1Models.DocumentAccepted.class);
-  }*/
+  }
 
   /**
    * Delete a document.

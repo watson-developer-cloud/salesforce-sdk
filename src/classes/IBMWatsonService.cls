@@ -39,9 +39,10 @@ public abstract class IBMWatsonService {
   public IBMWatsonService() {}
   
   private String getErrorMessage(IBMWatsonResponse response) {
-    String error = response.getResponseText();
+  	if( response == null ) return '';
+  	String error = response.getResponseText();
     try {
-    Map<String, Object> responseMap = (Map<String, Object>)JSON.deserializeUntyped(error);
+      Map<String, Object> responseMap = (Map<String, Object>)JSON.deserializeUntyped(error);
       if (responseMap.containsKey(MESSAGE_ERROR)) {
         error = (String)responseMap.get(MESSAGE_ERROR);
       } else if (responseMap.containsKey(MESSAGE_ERROR_2)) {

@@ -32,7 +32,14 @@ public class IBMWatsonClient {
         req.setHeader(name, wreq.getAllHeaders().get(name));
       }
       if( !String.isBlank(wreq.getMethod()) && wreq.getMethod().equalsIgnoreCase('POST')) {
-        req.setBody(wreq.getBody().content);
+      	if( wreq.getBody() instanceOf IBMWatsonMultipartBody ){
+      	  //form-multipart post
+      	  //system.debug( ((IBMWatsonMultipartBody)wreq.getBody()).form64() );
+      	  req.setBodyAsBlob( ((IBMWatsonMultipartBody)wreq.getBody()).formBlob());
+      	}else{
+          // regular post
+      	  req.setBody( wreq.getBody().content);
+      	}
       }
       req.setMethod(wreq.getMethod());
       req.setEndpoint(wreq.getUrl().toExternalForm());

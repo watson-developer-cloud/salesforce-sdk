@@ -5,7 +5,7 @@ public class DiscoveryV1Models {
   public class AddDocumentOptions extends IBMWatsonGenericModel {
     private String environment_id;
     private String collection_id;
-    private String file;
+    private IBMWatsonFile file;
     private String filename;
     private String metadata;
     private String file_content_type;
@@ -36,7 +36,7 @@ public class DiscoveryV1Models {
      *
      * @return the file
      */
-    public String file() {
+    public IBMWatsonFile file() {
       return file;
     }
     /**
@@ -96,7 +96,7 @@ public class DiscoveryV1Models {
   public class AddDocumentOptionsBuilder {
     private String environment_id;
     private String collection_id;
-    private String file;
+    private IBMWatsonFile file;
     private String filename;
     private String metadata;
     private String file_content_type;
@@ -164,7 +164,7 @@ public class DiscoveryV1Models {
      * @param file the file
      * @return the AddDocumentOptions builder
      */
-    public AddDocumentOptionsBuilder file(String file) {
+    public AddDocumentOptionsBuilder file(IBMWatsonFile file) {
       this.file = file;
       return this;
     }
