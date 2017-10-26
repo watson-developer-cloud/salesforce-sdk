@@ -26,8 +26,9 @@
  * For more information about the service, see [About Personality
  * Insights](https://console.bluemix.net/docs/services/personality-insights/index.html). For information about calling
  * the service and the responses it can generate, see [Requesting a
- * profile](https://console.bluemix.net/docs/services/personality-insights/input.html) and [Understanding a
- * profile](https://console.bluemix.net/docs/services/personality-insights/output.html).
+ * profile](https://console.bluemix.net/docs/services/personality-insights/input.html), [Understanding a JSON
+ * profile](https://console.bluemix.net/docs/services/personality-insights/output.html), and [Understanding a CSV
+ * profile](https://console.bluemix.net/docs/services/personality-insights/output-csv.html).
  *
  * @version V3
  * @see <a href="http://www.ibm.com/watson/developercloud/personality-insights.html">Personality Insights</a>
@@ -69,7 +70,7 @@ public class PersonalityInsightsV3 extends IBMWatsonService {
   /**
    * Generates a personality profile based on input text.
    *
-   * Derives personality insights for up to 20 MB of input content written by an author, though the service requires much less text to produce an accurate profile; for more information, see [Guidelines for providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/user-overview.html#overviewGuidelines). Accepts input in Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text, HTML, or JSON content, and receive results in JSON or CSV format.
+   * Derives personality insights for up to 20 MB of input content written by an author, though the service requires much less text to produce an accurate profile; for more information, see [Providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). Accepts input in Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text, HTML, or JSON content, and receive results in JSON or CSV format.
    *
    * @param profileOptions the {@link PersonalityInsightsV3Models.ProfileOptions} containing the options for the call
    * @return the {@link PersonalityInsightsV3Models.Profile} with the response
@@ -97,7 +98,7 @@ public class PersonalityInsightsV3 extends IBMWatsonService {
       builder.bodyContent(profileOptions.body(), profileOptions.contentType());
       ServiceMessage = profileOptions.body();
     }
-  
+
     return (PersonalityInsightsV3Models.Profile) createServiceCall(builder.build(), PersonalityInsightsV3Models.Profile.class);
   }
 

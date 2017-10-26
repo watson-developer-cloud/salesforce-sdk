@@ -137,7 +137,7 @@ public class PersonalityInsightsV3Models {
     /**
      * Gets the score.
      *
-     * The score for the consumption preference: `0.0` indicates unlikely, `0.5` indicates neutrality, and `1.0` indicates likely. The scores for some preferences are binary and do not allow a neutral value. The score is an indication of preference based on the results inferred from the input text, not a normalized percentile.
+     * The score for the consumption preference: * `0.0`: Unlikely * `0.5`: Neutral * `1.0`: Likely   The scores for some preferences are binary and do not allow a neutral value. The score is an indication of preference based on the results inferred from the input text, not a normalized percentile.
      *
      * @return the score
      */
@@ -674,7 +674,7 @@ public class PersonalityInsightsV3Models {
     /**
      * Gets the processed_language.
      *
-     * The language model that was used to process the input; for example, `en`.
+     * The language model that was used to process the input.
      *
      * @return the processed_language
      */
@@ -962,7 +962,7 @@ public class PersonalityInsightsV3Models {
     /**
      * Gets the content.
      *
-     * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see [Guidelines for providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/user-overview.html#overviewGuidelines). A JSON request must conform to the `Content` model.
+     * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see [Providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). A JSON request must conform to the `Content` model.
      *
      * @return the content
      */
@@ -972,7 +972,7 @@ public class PersonalityInsightsV3Models {
     /**
      * Gets the body.
      *
-     * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see [Guidelines for providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/user-overview.html#overviewGuidelines). A JSON request must conform to the `Content` model.
+     * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see [Providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). A JSON request must conform to the `Content` model.
      *
      * @return the body
      */
@@ -1202,6 +1202,7 @@ public class PersonalityInsightsV3Models {
     private String category;
     private Double percentile;
     private Double raw_score;
+    private Boolean significant;
     private List<Trait> children;
     /**
      * Gets the trait_id.
@@ -1228,7 +1229,7 @@ public class PersonalityInsightsV3Models {
     /**
      * Gets the category.
      *
-     * The category of the characteristic: `personality` for Big Five personality characteristics, `needs` for Needs, or `values` for Values.
+     * The category of the characteristic: * `personality` for Big Five personality characteristics * `needs` for Needs * `values` for Values.
      *
      * @return the category
      */
@@ -1257,6 +1258,17 @@ public class PersonalityInsightsV3Models {
     @AuraEnabled
     public Double getRawScore() {
       return raw_score;
+    }
+    /**
+     * Gets the significant.
+     *
+     * **`2017-10-13`**: Indicates whether the characteristic is meaningful for the input language. The field is always `true` for all characteristics of English, Spanish, and Japanese input. The field is `false` for the subset of characteristics of Arabic and Korean input for which the service's models are unable to generate meaningful results. **`2016-10-20`**: Not returned.
+     *
+     * @return the significant
+     */
+    @AuraEnabled
+    public Boolean getSignificant() {
+      return significant;
     }
     /**
      * Gets the children.
@@ -1316,6 +1328,15 @@ public class PersonalityInsightsV3Models {
     }
 
     /**
+     * Sets the significant.
+     *
+     * @param significant the new significant
+     */
+    public void setSignificant(final Boolean significant) {
+      this.significant = significant;
+    }
+
+    /**
      * Sets the children.
      *
      * @param children the new children
@@ -1363,7 +1384,7 @@ public class PersonalityInsightsV3Models {
     /**
      * Gets the warning_id.
      *
-     * The identifier of the warning message, one of `WORD_COUNT_MESSAGE`, `JSON_AS_TEXT`, `CONTENT_TRUNCATED`, or `PARTIAL_TEXT_USED`.
+     * The identifier of the warning message.
      *
      * @return the warning_id
      */
@@ -1374,7 +1395,7 @@ public class PersonalityInsightsV3Models {
     /**
      * Gets the message.
      *
-     * The message associated with the `warning_id`. For `WORD_COUNT_MESSAGE`, "There were {number} words in the input. We need a minimum of 600, preferably 1,200 or more, to compute statistically significant estimates."; for `JSON_AS_TEXT`, "Request input was processed as text/plain as indicated, however detected a JSON input. Did you mean application/json?"; for `CONTENT_TRUNCATED`, "For maximum accuracy while also optimizing processing time, only the first 250KB of input text (excluding markup) was analyzed. Accuracy levels off at approximately 3,000 words so this did not affect the accuracy of the profile."; and for `PARTIAL_TEXT_USED`, "The text provided to compute the profile was trimmed for performance reasons. This action does not affect the accuracy of the output, as not all of the input text was required." The `PARTIAL_TEXT_USED` warning applies only when Arabic input text exceeds a threshold at which additional words do not contribute to the accuracy of the profile.
+     * The message associated with the `warning_id`: * `WORD_COUNT_MESSAGE`: "There were {number} words in the input. We need a minimum of 600, preferably 1,200 or more, to compute statistically significant estimates." * `JSON_AS_TEXT`: "Request input was processed as text/plain as indicated, however detected a JSON input. Did you mean application/json?" * `CONTENT_TRUNCATED`: "For maximum accuracy while also optimizing processing time, only the first 250KB of input text (excluding markup) was analyzed. Accuracy levels off at approximately 3,000 words so this did not affect the accuracy of the profile." * `PARTIAL_TEXT_USED`, "The text provided to compute the profile was trimmed for performance reasons. This action does not affect the accuracy of the output, as not all of the input text was required." Applies only when Arabic input text exceeds a threshold at which additional words do not contribute to the accuracy of the profile.
      *
      * @return the message
      */

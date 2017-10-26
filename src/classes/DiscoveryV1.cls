@@ -74,7 +74,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       contentJson.put('size', createEnvironmentOptions.size());
     }
     builder.bodyJson(JSON.serialize(contentJson));
-  
+
     return (DiscoveryV1Models.Environment) createServiceCall(builder.build(), DiscoveryV1Models.Environment.class);
   }
 
@@ -90,7 +90,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     createServiceCall(builder.build(), null);
   }
 
@@ -106,7 +106,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     return (DiscoveryV1Models.Environment) createServiceCall(builder.build(), DiscoveryV1Models.Environment.class);
   }
 
@@ -124,7 +124,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       'version' => versionDate,
       'name' => listEnvironmentsOptions.name()
     });
-  
+
     return (DiscoveryV1Models.ListEnvironmentsResponse) createServiceCall(builder.build(), DiscoveryV1Models.ListEnvironmentsResponse.class);
   }
 
@@ -141,9 +141,9 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/fields', new String[]{ listFieldsOptions.environmentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
-      'collection_ids' => String.valueOf(listFieldsOptions.collectionIds())
+      'collection_ids' => String.join(listFieldsOptions.collectionIds(), ',')
     });
-  
+
     return (DiscoveryV1Models.ListCollectionFieldsResponse) createServiceCall(builder.build(), DiscoveryV1Models.ListCollectionFieldsResponse.class);
   }
 
@@ -169,7 +169,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       contentJson.put('description', updateEnvironmentOptions.description());
     }
     builder.bodyJson(JSON.serialize(contentJson));
-  
+
     return (DiscoveryV1Models.Environment) createServiceCall(builder.build(), DiscoveryV1Models.Environment.class);
   }
 
@@ -204,7 +204,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       contentJson.put('normalizations', createConfigurationOptions.normalizations());
     }
     builder.bodyJson(JSON.serialize(contentJson));
-  
+
     return (DiscoveryV1Models.Configuration) createServiceCall(builder.build(), DiscoveryV1Models.Configuration.class);
   }
 
@@ -222,7 +222,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     createServiceCall(builder.build(), null);
   }
 
@@ -238,7 +238,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     return (DiscoveryV1Models.Configuration) createServiceCall(builder.build(), DiscoveryV1Models.Configuration.class);
   }
 
@@ -257,7 +257,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       'version' => versionDate,
       'name' => listConfigurationsOptions.name()
     });
-  
+
     return (DiscoveryV1Models.ListConfigurationsResponse) createServiceCall(builder.build(), DiscoveryV1Models.ListConfigurationsResponse.class);
   }
 
@@ -292,7 +292,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       contentJson.put('normalizations', updateConfigurationOptions.normalizations());
     }
     builder.bodyJson(JSON.serialize(contentJson));
-  
+
     return (DiscoveryV1Models.Configuration) createServiceCall(builder.build(), DiscoveryV1Models.Configuration.class);
   }
 
@@ -326,7 +326,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       multipartBuilder.addFormDataPart('metadata', testConfigurationInEnvironmentOptions.metadata());
     }
     builder.body(multipartBuilder.build());
-  
+
     return (DiscoveryV1Models.TestDocument) createServiceCall(builder.build(), DiscoveryV1Models.TestDocument.class);
   }*/
 
@@ -354,7 +354,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       contentJson.put('language', createCollectionOptions.language());
     }
     builder.bodyJson(JSON.serialize(contentJson));
-  
+
     return (DiscoveryV1Models.Collection) createServiceCall(builder.build(), DiscoveryV1Models.Collection.class);
   }
 
@@ -370,7 +370,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     createServiceCall(builder.build(), null);
   }
 
@@ -386,7 +386,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     return (DiscoveryV1Models.Collection) createServiceCall(builder.build(), DiscoveryV1Models.Collection.class);
   }
 
@@ -404,7 +404,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     return (DiscoveryV1Models.ListCollectionFieldsResponse) createServiceCall(builder.build(), DiscoveryV1Models.ListCollectionFieldsResponse.class);
   }
 
@@ -423,7 +423,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       'version' => versionDate,
       'name' => listCollectionsOptions.name()
     });
-  
+
     return (DiscoveryV1Models.ListCollectionsResponse) createServiceCall(builder.build(), DiscoveryV1Models.ListCollectionsResponse.class);
   }
 
@@ -450,7 +450,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       contentJson.put('configuration_id', updateCollectionOptions.configurationId());
     }
     builder.bodyJson(JSON.serialize(contentJson));
-  
+
     return (DiscoveryV1Models.Collection) createServiceCall(builder.build(), DiscoveryV1Models.Collection.class);
   }
 
@@ -479,7 +479,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       multipartBuilder.addFormDataPart('metadata', addDocumentOptions.metadata());
     }
     builder.body(multipartBuilder.build());
-  
+
     return (DiscoveryV1Models.DocumentAccepted) createServiceCall(builder.build(), DiscoveryV1Models.DocumentAccepted.class);
   }*/
 
@@ -497,7 +497,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     createServiceCall(builder.build(), null);
   }
 
@@ -515,7 +515,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     return (DiscoveryV1Models.DocumentStatus) createServiceCall(builder.build(), DiscoveryV1Models.DocumentStatus.class);
   }
 
@@ -544,7 +544,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       multipartBuilder.addFormDataPart('metadata', updateDocumentOptions.metadata());
     }
     builder.body(multipartBuilder.build());
-  
+
     return (DiscoveryV1Models.DocumentAccepted) createServiceCall(builder.build(), DiscoveryV1Models.DocumentAccepted.class);
   }*/
 
@@ -561,20 +561,20 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/query', new String[]{ federatedQueryOptions.environmentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
-      'collection_ids' => String.valueOf(federatedQueryOptions.collectionIds()),
+      'collection_ids' => String.join(federatedQueryOptions.collectionIds(), ','),
       'filter' => federatedQueryOptions.filter(),
       'query' => federatedQueryOptions.query(),
       'natural_language_query' => federatedQueryOptions.naturalLanguageQuery(),
       'aggregation' => federatedQueryOptions.aggregation(),
       'count' => String.valueOf(federatedQueryOptions.count()),
-      'return_fields' => String.valueOf(federatedQueryOptions.returnField()),
+      'return_fields' => String.join(federatedQueryOptions.returnField(), ','),
       'offset' => String.valueOf(federatedQueryOptions.offset()),
-      'sort' => String.valueOf(federatedQueryOptions.sortField()),
+      'sort' => String.join(federatedQueryOptions.sortField(), ','),
       'highlight' => String.valueOf(federatedQueryOptions.highlight()),
       'deduplicate' => String.valueOf(federatedQueryOptions.deduplicate()),
       'deduplicate.field' => federatedQueryOptions.deduplicateField()
     });
-  
+
     return (DiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), DiscoveryV1Models.QueryResponse.class);
   }
 
@@ -591,19 +591,19 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/notices', new String[]{ federatedQueryNoticesOptions.environmentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
-      'collection_ids' => String.valueOf(federatedQueryNoticesOptions.collectionIds()),
+      'collection_ids' => String.join(federatedQueryNoticesOptions.collectionIds(), ','),
       'filter' => federatedQueryNoticesOptions.filter(),
       'query' => federatedQueryNoticesOptions.query(),
       'natural_language_query' => federatedQueryNoticesOptions.naturalLanguageQuery(),
       'aggregation' => federatedQueryNoticesOptions.aggregation(),
       'count' => String.valueOf(federatedQueryNoticesOptions.count()),
-      'return_fields' => String.valueOf(federatedQueryNoticesOptions.returnField()),
+      'return_fields' => String.join(federatedQueryNoticesOptions.returnField(), ','),
       'offset' => String.valueOf(federatedQueryNoticesOptions.offset()),
-      'sort' => String.valueOf(federatedQueryNoticesOptions.sortField()),
+      'sort' => String.join(federatedQueryNoticesOptions.sortField(), ','),
       'highlight' => String.valueOf(federatedQueryNoticesOptions.highlight()),
       'deduplicate.field' => federatedQueryNoticesOptions.deduplicateField()
     });
-  
+
     return (DiscoveryV1Models.QueryNoticesResponse) createServiceCall(builder.build(), DiscoveryV1Models.QueryNoticesResponse.class);
   }
 
@@ -626,17 +626,17 @@ public class DiscoveryV1 extends IBMWatsonService {
       'passages' => String.valueOf(queryOptions.passages()),
       'aggregation' => queryOptions.aggregation(),
       'count' => String.valueOf(queryOptions.count()),
-      'return' => String.valueOf(queryOptions.returnField()),
+      'return' => String.join(queryOptions.returnField(), ','),
       'offset' => String.valueOf(queryOptions.offset()),
-      'sort' => String.valueOf(queryOptions.sortField()),
+      'sort' => String.join(queryOptions.sortField(), ','),
       'highlight' => String.valueOf(queryOptions.highlight()),
-      'passages.fields' => String.valueOf(queryOptions.passagesFields()),
+      'passages.fields' => String.join(queryOptions.passagesFields(), ','),
       'passages.count' => String.valueOf(queryOptions.passagesCount()),
       'passages.characters' => String.valueOf(queryOptions.passagesCharacters()),
       'deduplicate' => String.valueOf(queryOptions.deduplicate()),
       'deduplicate.field' => queryOptions.deduplicateField()
     });
-  
+
     return (DiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), DiscoveryV1Models.QueryResponse.class);
   }
 
@@ -659,16 +659,16 @@ public class DiscoveryV1 extends IBMWatsonService {
       'passages' => String.valueOf(queryNoticesOptions.passages()),
       'aggregation' => queryNoticesOptions.aggregation(),
       'count' => String.valueOf(queryNoticesOptions.count()),
-      'return_fields' => String.valueOf(queryNoticesOptions.returnField()),
+      'return_fields' => String.join(queryNoticesOptions.returnField(), ','),
       'offset' => String.valueOf(queryNoticesOptions.offset()),
-      'sort' => String.valueOf(queryNoticesOptions.sortField()),
+      'sort' => String.join(queryNoticesOptions.sortField(), ','),
       'highlight' => String.valueOf(queryNoticesOptions.highlight()),
-      'passages.fields' => String.valueOf(queryNoticesOptions.passagesFields()),
+      'passages.fields' => String.join(queryNoticesOptions.passagesFields(), ','),
       'passages.count' => String.valueOf(queryNoticesOptions.passagesCount()),
       'passages.characters' => String.valueOf(queryNoticesOptions.passagesCharacters()),
       'deduplicate.field' => queryNoticesOptions.deduplicateField()
     });
-  
+
     return (DiscoveryV1Models.QueryNoticesResponse) createServiceCall(builder.build(), DiscoveryV1Models.QueryNoticesResponse.class);
   }
 
@@ -695,7 +695,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       contentJson.put('examples', addTrainingDataOptions.examples());
     }
     builder.bodyJson(JSON.serialize(contentJson));
-  
+
     return (DiscoveryV1Models.TrainingQuery) createServiceCall(builder.build(), DiscoveryV1Models.TrainingQuery.class);
   }
 
@@ -722,7 +722,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       contentJson.put('relevance', createTrainingExampleOptions.relevance());
     }
     builder.bodyJson(JSON.serialize(contentJson));
-  
+
     return (DiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), DiscoveryV1Models.TrainingExample.class);
   }
 
@@ -738,7 +738,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     createServiceCall(builder.build(), null);
   }
 
@@ -754,7 +754,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     createServiceCall(builder.build(), null);
   }
 
@@ -770,7 +770,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     createServiceCall(builder.build(), null);
   }
 
@@ -786,7 +786,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     return (DiscoveryV1Models.TrainingQuery) createServiceCall(builder.build(), DiscoveryV1Models.TrainingQuery.class);
   }
 
@@ -802,7 +802,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     return (DiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), DiscoveryV1Models.TrainingExample.class);
   }
 
@@ -818,7 +818,7 @@ public class DiscoveryV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-  
+
     return (DiscoveryV1Models.TrainingDataSet) createServiceCall(builder.build(), DiscoveryV1Models.TrainingDataSet.class);
   }
 
@@ -842,7 +842,7 @@ public class DiscoveryV1 extends IBMWatsonService {
       contentJson.put('relevance', updateTrainingExampleOptions.relevance());
     }
     builder.bodyJson(JSON.serialize(contentJson));
-  
+
     return (DiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), DiscoveryV1Models.TrainingExample.class);
   }
 
