@@ -85,43 +85,73 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   	return contentLength;
   }
   
-  /**
-   *  Pad the value with spaces until the base64 encoding is no longer padded.
-   */
-  public static string SafelyPad(string value, string valueCrLf64, string lineBreaks) {
-    string valueCrLf = '';
-    blob valueCrLfBlob = null;
-
-    while (valueCrLf64.endsWith('=')) {
-      value += ' ';
-      valueCrLf = value + lineBreaks;
-      valueCrLfBlob = blob.valueOf(valueCrLf);
-      valueCrLf64 = EncodingUtil.base64Encode(valueCrLfBlob);
-    }
-
-    return valueCrLf64;
-  }
-      
   private long writeForm64(List<Part> parts){
   	
     headers.put('Content-Type', 'multipart/form-data; boundary="' + Boundary + '"');
     
-  	form64 = '';
-    form64 += WriteBoundary();
-    
-    for(Integer i=0; i< parts.size(); i++){
-      Part p = parts[i];
+    String footer = '--'+boundary+'--';
+    form64 = '';             
+    for(Part p: parts){
       if(p.body().hasBase64Data()){
-        form64 += WriteBlobBodyParameter('file', EncodingUtil.base64Encode(p.body().blobContent), p.body().name, p.body.bodyContentType().toString());
-      }
-      else{
-        form64 += WriteBodyParameter(p.body().name, p.body().content);
-      }
-      if( i<parts.size()-1  ){
-       form64 += WriteBoundary();
+      	
+	    String file_name = p.body().name;
+	    String content_type = p.body.bodyContentType().toString();
+	    Blob file_body = p.body().blobContent;
+	    
+        String header = '--'+boundary+'\nContent-Disposition: form-data; name="file"; filename="'+file_name+'";\nContent-Type: '+content_type;
+        
+        String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header+'\r\n\r\n'));
+        
+        while(headerEncoded.endsWith('=')){
+         header+=' ';
+         headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header+'\r\n\r\n'));
+        }
+        
+        String bodyEncoded = EncodingUtil.base64Encode(file_body);
+        String last4Bytes = bodyEncoded.substring(bodyEncoded.length()-4,bodyEncoded.length());
+        String footerEncodedfinal = '';
+	    if(last4Bytes.endsWith('==')) {
+	        // The '==' sequence indicates that the last group contained only one 8 bit byte
+	        // 8 digit binary representation of CR is 00001101
+	        // 8 digit binary representation of LF is 00001010
+	        // Stitch them together and then from the right split them into 6 bit chunks
+	        // 0000110100001010 becomes 0000 110100 001010
+	        // Note the first 4 bits 0000 are identical to the padding used to encode the
+	        // second original 6 bit chunk, this is handy it means we can hard code the response in
+	        // The decimal values of 110100 001010 are 52 10
+	        // The base64 mapping values of 52 10 are 0 K
+	        // See http://en.wikipedia.org/wiki/Base64 for base64 mapping table
+	        // Therefore, we replace == with 0K
+	        // Note: if using \n\n instead of \r\n replace == with 'oK'
+	        last4Bytes = last4Bytes.substring(0,2) + '0K';
+	        bodyEncoded = bodyEncoded.substring(0,bodyEncoded.length()-4) + last4Bytes;
+	        // We have appended the \r\n to the Blob, so leave footer as it is.
+	        footerEncodedfinal = EncodingUtil.base64Encode(Blob.valueOf('\r\n'+footer));
+	    } else if(last4Bytes.endsWith('=')) {
+	        // '=' indicates that encoded data already contained two out of 3x 8 bit bytes
+	        // We replace final 8 bit byte with a CR e.g. \r
+	        // 8 digit binary representation of CR is 00001101
+	        // Ignore the first 2 bits of 00 001101 they have already been used up as padding
+	        // for the existing data.
+	        // The Decimal value of 001101 is 13
+	        // The base64 value of 13 is N
+	        // Therefore, we replace = with N
+	        // Note: if using \n instead of \r replace = with 'K'
+	        last4Bytes = last4Bytes.substring(0,3) + 'N';
+	        bodyEncoded = bodyEncoded.substring(0,bodyEncoded.length()-4) + last4Bytes;
+	        // We have appended the CR e.g. \r, still need to prepend the line feed to the footer
+	        footer = '\n' + footer;
+	        footerEncodedfinal = EncodingUtil.base64Encode(Blob.valueOf(footer));
+	    } else {
+	        // Prepend the CR LF to the footer
+	        footer = '\r\n' + footer;
+	        footerEncodedfinal = EncodingUtil.base64Encode(Blob.valueOf(footer));
+	    }
+        form64 += headerEncoded+bodyEncoded+footerEncodedfinal;
+        
       }
     }
-
+     
     formBlob = EncodingUtil.base64Decode(form64);
     
     return formBlob.size();
@@ -129,125 +159,6 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   
   public Map<String, String> getAllHeaders(){
   	return headers;
-  }
-  
-  /**
-   *  Write a boundary between parameters to the form's body.
-   */
-  private string WriteBoundary() {
-    string value = '--' + Boundary + '\r\n';
-    blob valueBlob = blob.valueOf(value);
-    return EncodingUtil.base64Encode(valueBlob);
-  } 	
-
-  /**
-   *  Write a boundary at the end of the form's body.
-   */
-  private string WriteBoundary(EndingType ending) {
-    string value = '';
-
-    if (ending == EndingType.Cr) {
-        //  The file's base64 was padded with a single '=',
-        //  so it was replaced with '\r'. Now we have to
-        //  prepend the boundary with '\n' to complete
-        //  the line break.
-        value += '\n';
-    } else if (ending == EndingType.None) {
-        //  The file's base64 was not padded at all,
-        //  so we have to prepend the boundary with
-        //  '\r\n' to create the line break.
-        value += '\r\n';
-    }
-    //  Else:
-    //  The file's base64 was padded with a double '=',
-    //  so they were replaced with '\r\n'. We don't have to
-    //  do anything to the boundary because there's a complete
-    //  line break before it.
-
-    value += '--' + this.boundary + '--';
-
-    blob valueBlob = blob.valueOf(value);
-
-    return EncodingUtil.base64Encode(valueBlob);
-    //return value;
-  }
-  
-  /**
-   *  Write a key-value pair to the form's body.
-   */
-  public static string WriteBodyParameter(string key, string value) {
-    string contentDisposition = 'Content-Disposition: form-data; name="' + key + '"';
-    string contentDispositionCrLf = contentDisposition + '\r\n\r\n';
-    blob contentDispositionCrLfBlob = blob.valueOf(contentDispositionCrLf);
-    string contentDispositionCrLf64 = EncodingUtil.base64Encode(contentDispositionCrLfBlob);
-    string content = SafelyPad(contentDisposition, contentDispositionCrLf64, '\r\n\r\n');
-    string valueCrLf = value + '\r\n';
-    blob valueCrLfBlob = blob.valueOf(valueCrLf);
-    string valueCrLf64 = EncodingUtil.base64Encode(valueCrLfBlob);
-
-    content += SafelyPad(value, valueCrLf64, '\r\n');
-
-    return content;
-  }
-    
-  /**
-   *  Write a key-value pair to the form's body for a blob.
-   */
-  private string WriteBlobBodyParameter(string key, string file64, string fileName, String mimeType) {
-    string contentDisposition = 'Content-Disposition: form-data; name="' + key + '"; filename="'+fileName+'"';
-    string contentDispositionCrLf = contentDisposition + '\r\n';
-    blob contentDispositionCrLfBlob = blob.valueOf(contentDispositionCrLf);
-    string contentDispositionCrLf64 = EncodingUtil.base64Encode(contentDispositionCrLfBlob);
-    string content = SafelyPad(contentDisposition, contentDispositionCrLf64, '\r\n');
-    
-    string contentTypeHeader = 'Content-Type: ' + mimeType;
-    string contentTypeCrLf = contentTypeHeader + '\r\n\r\n';
-    blob contentTypeCrLfBlob = blob.valueOf(contentTypeCrLf);
-    string contentTypeCrLf64 = EncodingUtil.base64Encode(contentTypeCrLfBlob);
-    content += SafelyPad(contentTypeHeader, contentTypeCrLf64, '\r\n\r\n');
-    
-    integer file64Length = file64.length();
-    String last4Bytes = file64.substring(file64.length()-4,file64.length());
-    
-    // Avoid padding the file data with spaces, which SafelyPad does
-    // http://salesforce.stackexchange.com/a/33326/102
-    EndingType ending = EndingType.None;
-    if (last4Bytes.endsWith('==')) {
-        // The '==' sequence indicates that the last group contained only one 8 bit byte
-        // 8 digit binary representation of CR is 00001101
-        // 8 digit binary representation of LF is 00001010
-        // Stitch them together and then from the right split them into 6 bit chunks
-        // 0000110100001010 becomes 0000 110100 001010
-        // Note the first 4 bits 0000 are identical to the padding used to encode the
-        // second original 6 bit chunk, this is handy it means we can hard code the response in
-        // The decimal values of 110100 001010 are 52 10
-        // The base64 mapping values of 52 10 are 0 K
-        // See http://en.wikipedia.org/wiki/Base64 for base64 mapping table
-        // Therefore, we replace == with 0K
-        // Note: if using \n\n instead of \r\n replace == with 'oK'
-        last4Bytes = last4Bytes.substring(0,2) + '0K';
-        file64 = file64.substring(0,file64.length()-4) + last4Bytes;
-        // We have appended the \r\n to the Blob, so leave footer as it is.
-        ending = EndingType.CrLf;
-    } else if (last4Bytes.endsWith('=')) {
-        // '=' indicates that encoded data already contained two out of 3x 8 bit bytes
-        // We replace final 8 bit byte with a CR e.g. \r
-        // 8 digit binary representation of CR is 00001101
-        // Ignore the first 2 bits of 00 001101 they have already been used up as padding
-        // for the existing data.
-        // The Decimal value of 001101 is 13
-        // The base64 value of 13 is N
-        // Therefore, we replace = with N
-        last4Bytes = last4Bytes.substring(0,3) + 'N';
-    	file64 = file64.substring(0,file64.length()-4) + last4Bytes;
-        // We have appended the CR e.g. \r, still need to prepend the line feed to the footer
-        ending = EndingType.Cr;
-    }
-    
-    content += file64;
-    
-    content += WriteBoundary(ending);
-    return content;
   }
   
   public Part part(integer index) {
