@@ -97,6 +97,7 @@ public class PersonalityInsightsV3 extends IBMWatsonService {
       builder.bodyContent(profileOptions.body(), profileOptions.contentType());
       ServiceMessage = profileOptions.body();
     }
+  
     return (PersonalityInsightsV3Models.Profile) createServiceCall(builder.build(), PersonalityInsightsV3Models.Profile.class);
   }
 

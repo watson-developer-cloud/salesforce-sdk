@@ -2,7 +2,7 @@ public class DiscoveryV1Models {
   /**
    * The addDocument options.
    */
-  public class AddDocumentOptions extends IBMWatsonGenericModel {
+  public class AddDocumentOptions {
     private String environment_id;
     private String collection_id;
     private String file;
@@ -88,6 +88,7 @@ public class DiscoveryV1Models {
     public AddDocumentOptionsBuilder newBuilder() {
       return new AddDocumentOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -206,7 +207,7 @@ public class DiscoveryV1Models {
   /**
    * The addTrainingData options.
    */
-  public class AddTrainingDataOptions extends IBMWatsonGenericModel {
+  public class AddTrainingDataOptions {
     private String environment_id;
     private String collection_id;
     private String natural_language_query;
@@ -274,6 +275,7 @@ public class DiscoveryV1Models {
     public AddTrainingDataOptionsBuilder newBuilder() {
       return new AddTrainingDataOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -459,6 +461,35 @@ public class DiscoveryV1Models {
     public void setAggregations(final List<QueryAggregation> aggregations) {
       this.aggregations = aggregations;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      AggregationResult ret;
+      if (jsonString.equals('null')) {
+        ret = new AggregationResult();
+      }
+      else {
+        ret = (AggregationResult) JSON.deserialize(jsonString, AggregationResult.class);
+      }
+
+      // calling custom deserializer for aggregations
+      List<QueryAggregation> newAggregations = new List<QueryAggregation>();
+      List<QueryAggregation> deserializedAggregations = ret.getAggregations();
+      if (deserializedAggregations != null) {
+        for (Integer i = 0; i < deserializedAggregations.size(); i++) {
+          QueryAggregation currentItem = ret.getAggregations().get(i);
+          List<Object> aggregationsInMap = (List<Object>) jsonMap.get('aggregations');
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(aggregationsInMap.get(i))));
+          newAggregations.add(newItem);
+        }
+        ret.setAggregations(newAggregations);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -476,6 +507,22 @@ public class DiscoveryV1Models {
     @AuraEnabled
     public Double getValue() {
       return value;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Calculation ret;
+      if (jsonString.equals('null')) {
+        ret = new Calculation();
+      }
+      else {
+        ret = (Calculation) JSON.deserialize(jsonString, Calculation.class);
+      }
+
+      return ret;
     }
   }
 
@@ -678,6 +725,34 @@ public class DiscoveryV1Models {
     public void setTrainingStatus(final TrainingStatus training_status) {
       this.training_status = training_status;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Collection ret;
+      if (jsonString.equals('null')) {
+        ret = new Collection();
+      }
+      else {
+        ret = (Collection) JSON.deserialize(jsonString, Collection.class);
+      }
+
+      // calling custom deserializer for document_counts
+      DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('document_counts'));
+      ret.setDocumentCounts(newDocumentCounts);
+
+      // calling custom deserializer for disk_usage
+      CollectionDiskUsage newDiskUsage = (CollectionDiskUsage) new CollectionDiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('disk_usage'));
+      ret.setDiskUsage(newDiskUsage);
+
+      // calling custom deserializer for training_status
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(ret.getTrainingStatus()), (Map<String, Object>) jsonMap.get('training_status'));
+      ret.setTrainingStatus(newTrainingStatus);
+
+      return ret;
+    }
   }
 
   /**
@@ -695,6 +770,22 @@ public class DiscoveryV1Models {
     @AuraEnabled
     public Long getUsedBytes() {
       return used_bytes;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      CollectionDiskUsage ret;
+      if (jsonString.equals('null')) {
+        ret = new CollectionDiskUsage();
+      }
+      else {
+        ret = (CollectionDiskUsage) JSON.deserialize(jsonString, CollectionDiskUsage.class);
+      }
+
+      return ret;
     }
   }
 
@@ -843,6 +934,52 @@ public class DiscoveryV1Models {
     public void setNormalizations(final List<NormalizationOperation> normalizations) {
       this.normalizations = normalizations;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Configuration ret;
+      if (jsonString.equals('null')) {
+        ret = new Configuration();
+      }
+      else {
+        ret = (Configuration) JSON.deserialize(jsonString, Configuration.class);
+      }
+
+      // calling custom deserializer for conversions
+      Conversions newConversions = (Conversions) new Conversions().deserialize(JSON.serialize(ret.getConversions()), (Map<String, Object>) jsonMap.get('conversions'));
+      ret.setConversions(newConversions);
+
+      // calling custom deserializer for enrichments
+      List<Enrichment> newEnrichments = new List<Enrichment>();
+      List<Enrichment> deserializedEnrichments = ret.getEnrichments();
+      if (deserializedEnrichments != null) {
+        for (Integer i = 0; i < deserializedEnrichments.size(); i++) {
+          Enrichment currentItem = ret.getEnrichments().get(i);
+          List<Object> enrichmentsInMap = (List<Object>) jsonMap.get('enrichments');
+          Enrichment newItem = (Enrichment) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(enrichmentsInMap.get(i))));
+          newEnrichments.add(newItem);
+        }
+        ret.setEnrichments(newEnrichments);
+      }
+
+      // calling custom deserializer for normalizations
+      List<NormalizationOperation> newNormalizations = new List<NormalizationOperation>();
+      List<NormalizationOperation> deserializedNormalizations = ret.getNormalizations();
+      if (deserializedNormalizations != null) {
+        for (Integer i = 0; i < deserializedNormalizations.size(); i++) {
+          NormalizationOperation currentItem = ret.getNormalizations().get(i);
+          List<Object> normalizationsInMap = (List<Object>) jsonMap.get('normalizations');
+          NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(normalizationsInMap.get(i))));
+          newNormalizations.add(newItem);
+        }
+        ret.setNormalizations(newNormalizations);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -933,12 +1070,53 @@ public class DiscoveryV1Models {
     public void setJsonNormalizations(final List<NormalizationOperation> json_normalizations) {
       this.json_normalizations = json_normalizations;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Conversions ret;
+      if (jsonString.equals('null')) {
+        ret = new Conversions();
+      }
+      else {
+        ret = (Conversions) JSON.deserialize(jsonString, Conversions.class);
+      }
+
+      // calling custom deserializer for pdf
+      PdfSettings newPdf = (PdfSettings) new PdfSettings().deserialize(JSON.serialize(ret.getPdf()), (Map<String, Object>) jsonMap.get('pdf'));
+      ret.setPdf(newPdf);
+
+      // calling custom deserializer for word
+      WordSettings newWord = (WordSettings) new WordSettings().deserialize(JSON.serialize(ret.getWord()), (Map<String, Object>) jsonMap.get('word'));
+      ret.setWord(newWord);
+
+      // calling custom deserializer for html
+      HtmlSettings newHtml = (HtmlSettings) new HtmlSettings().deserialize(JSON.serialize(ret.getHtml()), (Map<String, Object>) jsonMap.get('html'));
+      ret.setHtml(newHtml);
+
+      // calling custom deserializer for json_normalizations
+      List<NormalizationOperation> newJsonNormalizations = new List<NormalizationOperation>();
+      List<NormalizationOperation> deserializedJsonNormalizations = ret.getJsonNormalizations();
+      if (deserializedJsonNormalizations != null) {
+        for (Integer i = 0; i < deserializedJsonNormalizations.size(); i++) {
+          NormalizationOperation currentItem = ret.getJsonNormalizations().get(i);
+          List<Object> json_normalizationsInMap = (List<Object>) jsonMap.get('json_normalizations');
+          NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(json_normalizationsInMap.get(i))));
+          newJsonNormalizations.add(newItem);
+        }
+        ret.setJsonNormalizations(newJsonNormalizations);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The createCollection options.
    */
-  public class CreateCollectionOptions extends IBMWatsonGenericModel {
+  public class CreateCollectionOptions {
     private String environment_id;
     private String name;
     private String description;
@@ -1012,6 +1190,7 @@ public class DiscoveryV1Models {
     public CreateCollectionOptionsBuilder newBuilder() {
       return new CreateCollectionOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -1117,7 +1296,7 @@ public class DiscoveryV1Models {
   /**
    * The createConfiguration options.
    */
-  public class CreateConfigurationOptions extends IBMWatsonGenericModel {
+  public class CreateConfigurationOptions {
     private String environment_id;
     private String name;
     private String description;
@@ -1202,6 +1381,7 @@ public class DiscoveryV1Models {
     public CreateConfigurationOptionsBuilder newBuilder() {
       return new CreateConfigurationOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -1365,7 +1545,7 @@ public class DiscoveryV1Models {
   /**
    * The createEnvironment options.
    */
-  public class CreateEnvironmentOptions extends IBMWatsonGenericModel {
+  public class CreateEnvironmentOptions {
     private String name;
     private String description;
     private Long size;
@@ -1414,6 +1594,7 @@ public class DiscoveryV1Models {
     public CreateEnvironmentOptionsBuilder newBuilder() {
       return new CreateEnvironmentOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -1491,7 +1672,7 @@ public class DiscoveryV1Models {
   /**
    * The createTrainingExample options.
    */
-  public class CreateTrainingExampleOptions extends IBMWatsonGenericModel {
+  public class CreateTrainingExampleOptions {
     private String environment_id;
     private String collection_id;
     private String query_id;
@@ -1572,6 +1753,7 @@ public class DiscoveryV1Models {
     public CreateTrainingExampleOptionsBuilder newBuilder() {
       return new CreateTrainingExampleOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -1705,7 +1887,7 @@ public class DiscoveryV1Models {
   /**
    * The deleteAllTrainingData options.
    */
-  public class DeleteAllTrainingDataOptions extends IBMWatsonGenericModel {
+  public class DeleteAllTrainingDataOptions {
     private String environment_id;
     private String collection_id;
     /**
@@ -1743,6 +1925,7 @@ public class DiscoveryV1Models {
     public DeleteAllTrainingDataOptionsBuilder newBuilder() {
       return new DeleteAllTrainingDataOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -1809,7 +1992,7 @@ public class DiscoveryV1Models {
   /**
    * The deleteCollection options.
    */
-  public class DeleteCollectionOptions extends IBMWatsonGenericModel {
+  public class DeleteCollectionOptions {
     private String environment_id;
     private String collection_id;
     /**
@@ -1847,6 +2030,7 @@ public class DiscoveryV1Models {
     public DeleteCollectionOptionsBuilder newBuilder() {
       return new DeleteCollectionOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -1913,7 +2097,7 @@ public class DiscoveryV1Models {
   /**
    * The deleteConfiguration options.
    */
-  public class DeleteConfigurationOptions extends IBMWatsonGenericModel {
+  public class DeleteConfigurationOptions {
     private String environment_id;
     private String configuration_id;
     /**
@@ -1951,6 +2135,7 @@ public class DiscoveryV1Models {
     public DeleteConfigurationOptionsBuilder newBuilder() {
       return new DeleteConfigurationOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -2017,7 +2202,7 @@ public class DiscoveryV1Models {
   /**
    * The deleteDocument options.
    */
-  public class DeleteDocumentOptions extends IBMWatsonGenericModel {
+  public class DeleteDocumentOptions {
     private String environment_id;
     private String collection_id;
     private String document_id;
@@ -2068,6 +2253,7 @@ public class DiscoveryV1Models {
     public DeleteDocumentOptionsBuilder newBuilder() {
       return new DeleteDocumentOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -2149,7 +2335,7 @@ public class DiscoveryV1Models {
   /**
    * The deleteEnvironment options.
    */
-  public class DeleteEnvironmentOptions extends IBMWatsonGenericModel {
+  public class DeleteEnvironmentOptions {
     private String environment_id;
     /**
      * Gets the environment_id.
@@ -2174,6 +2360,7 @@ public class DiscoveryV1Models {
     public DeleteEnvironmentOptionsBuilder newBuilder() {
       return new DeleteEnvironmentOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -2225,7 +2412,7 @@ public class DiscoveryV1Models {
   /**
    * The deleteTrainingData options.
    */
-  public class DeleteTrainingDataOptions extends IBMWatsonGenericModel {
+  public class DeleteTrainingDataOptions {
     private String environment_id;
     private String collection_id;
     private String query_id;
@@ -2276,6 +2463,7 @@ public class DiscoveryV1Models {
     public DeleteTrainingDataOptionsBuilder newBuilder() {
       return new DeleteTrainingDataOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -2357,7 +2545,7 @@ public class DiscoveryV1Models {
   /**
    * The deleteTrainingExample options.
    */
-  public class DeleteTrainingExampleOptions extends IBMWatsonGenericModel {
+  public class DeleteTrainingExampleOptions {
     private String environment_id;
     private String collection_id;
     private String query_id;
@@ -2421,6 +2609,7 @@ public class DiscoveryV1Models {
     public DeleteTrainingExampleOptionsBuilder newBuilder() {
       return new DeleteTrainingExampleOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -2590,6 +2779,22 @@ public class DiscoveryV1Models {
     public Double getPercentUsed() {
       return percent_used;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DiskUsage ret;
+      if (jsonString.equals('null')) {
+        ret = new DiskUsage();
+      }
+      else {
+        ret = (DiskUsage) JSON.deserialize(jsonString, DiskUsage.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -2659,6 +2864,35 @@ public class DiscoveryV1Models {
     public void setNotices(final List<Notice> notices) {
       this.notices = notices;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DocumentAccepted ret;
+      if (jsonString.equals('null')) {
+        ret = new DocumentAccepted();
+      }
+      else {
+        ret = (DocumentAccepted) JSON.deserialize(jsonString, DocumentAccepted.class);
+      }
+
+      // calling custom deserializer for notices
+      List<Notice> newNotices = new List<Notice>();
+      List<Notice> deserializedNotices = ret.getNotices();
+      if (deserializedNotices != null) {
+        for (Integer i = 0; i < deserializedNotices.size(); i++) {
+          Notice currentItem = ret.getNotices().get(i);
+          List<Object> noticesInMap = (List<Object>) jsonMap.get('notices');
+          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(noticesInMap.get(i))));
+          newNotices.add(newItem);
+        }
+        ret.setNotices(newNotices);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -2700,6 +2934,22 @@ public class DiscoveryV1Models {
     @AuraEnabled
     public Long getFailed() {
       return failed;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DocumentCounts ret;
+      if (jsonString.equals('null')) {
+        ret = new DocumentCounts();
+      }
+      else {
+        ret = (DocumentCounts) JSON.deserialize(jsonString, DocumentCounts.class);
+      }
+
+      return ret;
     }
   }
 
@@ -2744,6 +2994,22 @@ public class DiscoveryV1Models {
      */
     public void setSnapshot(final Map<String, String> snapshot) {
       this.snapshot = snapshot;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DocumentSnapshot ret;
+      if (jsonString.equals('null')) {
+        ret = new DocumentSnapshot();
+      }
+      else {
+        ret = (DocumentSnapshot) JSON.deserialize(jsonString, DocumentSnapshot.class);
+      }
+
+      return ret;
     }
   }
 
@@ -2907,6 +3173,35 @@ public class DiscoveryV1Models {
     public void setNotices(final List<Notice> notices) {
       this.notices = notices;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DocumentStatus ret;
+      if (jsonString.equals('null')) {
+        ret = new DocumentStatus();
+      }
+      else {
+        ret = (DocumentStatus) JSON.deserialize(jsonString, DocumentStatus.class);
+      }
+
+      // calling custom deserializer for notices
+      List<Notice> newNotices = new List<Notice>();
+      List<Notice> deserializedNotices = ret.getNotices();
+      if (deserializedNotices != null) {
+        for (Integer i = 0; i < deserializedNotices.size(); i++) {
+          Notice currentItem = ret.getNotices().get(i);
+          List<Object> noticesInMap = (List<Object>) jsonMap.get('notices');
+          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(noticesInMap.get(i))));
+          newNotices.add(newItem);
+        }
+        ret.setNotices(newNotices);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -3060,6 +3355,26 @@ public class DiscoveryV1Models {
     public void setOptions(final EnrichmentOptions options) {
       this.options = options;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Enrichment ret;
+      if (jsonString.equals('null')) {
+        ret = new Enrichment();
+      }
+      else {
+        ret = (Enrichment) JSON.deserialize(jsonString, Enrichment.class);
+      }
+
+      // calling custom deserializer for options
+      EnrichmentOptions newOptions = (EnrichmentOptions) new EnrichmentOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options'));
+      ret.setOptions(newOptions);
+
+      return ret;
+    }
   }
 
   /**
@@ -3204,6 +3519,22 @@ public class DiscoveryV1Models {
      */
     public void setLanguage(final String language) {
       this.language = language;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      EnrichmentOptions ret;
+      if (jsonString.equals('null')) {
+        ret = new EnrichmentOptions();
+      }
+      else {
+        ret = (EnrichmentOptions) JSON.deserialize(jsonString, EnrichmentOptions.class);
+      }
+
+      return ret;
     }
   }
 
@@ -3355,6 +3686,26 @@ public class DiscoveryV1Models {
     public void setIndexCapacity(final IndexCapacity index_capacity) {
       this.index_capacity = index_capacity;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Environment ret;
+      if (jsonString.equals('null')) {
+        ret = new Environment();
+      }
+      else {
+        ret = (Environment) JSON.deserialize(jsonString, Environment.class);
+      }
+
+      // calling custom deserializer for index_capacity
+      IndexCapacity newIndexCapacity = (IndexCapacity) new IndexCapacity().deserialize(JSON.serialize(ret.getIndexCapacity()), (Map<String, Object>) jsonMap.get('index_capacity'));
+      ret.setIndexCapacity(newIndexCapacity);
+
+      return ret;
+    }
   }
 
   /**
@@ -3385,12 +3736,28 @@ public class DiscoveryV1Models {
     public Long getMaximumAllowed() {
       return maximum_allowed;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      EnvironmentDocuments ret;
+      if (jsonString.equals('null')) {
+        ret = new EnvironmentDocuments();
+      }
+      else {
+        ret = (EnvironmentDocuments) JSON.deserialize(jsonString, EnvironmentDocuments.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The federatedQueryNotices options.
    */
-  public class FederatedQueryNoticesOptions extends IBMWatsonGenericModel {
+  public class FederatedQueryNoticesOptions {
     private String environment_id;
     private List<String> collection_ids;
     private String filter;
@@ -3548,6 +3915,7 @@ public class DiscoveryV1Models {
     public FederatedQueryNoticesOptionsBuilder newBuilder() {
       return new FederatedQueryNoticesOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -3792,7 +4160,7 @@ public class DiscoveryV1Models {
   /**
    * The federatedQuery options.
    */
-  public class FederatedQueryOptions extends IBMWatsonGenericModel {
+  public class FederatedQueryOptions {
     private String environment_id;
     private List<String> collection_ids;
     private String filter;
@@ -3962,6 +4330,7 @@ public class DiscoveryV1Models {
     public FederatedQueryOptionsBuilder newBuilder() {
       return new FederatedQueryOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -4244,6 +4613,22 @@ public class DiscoveryV1Models {
     public String getType() {
       return type_serialized_name;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Field ret;
+      if (jsonString.equals('null')) {
+        ret = new Field();
+      }
+      else {
+        ret = (Field) JSON.deserialize(jsonString, Field.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -4364,12 +4749,28 @@ public class DiscoveryV1Models {
     public void setName(final String name) {
       this.name = name;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      FontSetting ret;
+      if (jsonString.equals('null')) {
+        ret = new FontSetting();
+      }
+      else {
+        ret = (FontSetting) JSON.deserialize(jsonString, FontSetting.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The getCollection options.
    */
-  public class GetCollectionOptions extends IBMWatsonGenericModel {
+  public class GetCollectionOptions {
     private String environment_id;
     private String collection_id;
     /**
@@ -4407,6 +4808,7 @@ public class DiscoveryV1Models {
     public GetCollectionOptionsBuilder newBuilder() {
       return new GetCollectionOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -4473,7 +4875,7 @@ public class DiscoveryV1Models {
   /**
    * The getConfiguration options.
    */
-  public class GetConfigurationOptions extends IBMWatsonGenericModel {
+  public class GetConfigurationOptions {
     private String environment_id;
     private String configuration_id;
     /**
@@ -4511,6 +4913,7 @@ public class DiscoveryV1Models {
     public GetConfigurationOptionsBuilder newBuilder() {
       return new GetConfigurationOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -4577,7 +4980,7 @@ public class DiscoveryV1Models {
   /**
    * The getDocumentStatus options.
    */
-  public class GetDocumentStatusOptions extends IBMWatsonGenericModel {
+  public class GetDocumentStatusOptions {
     private String environment_id;
     private String collection_id;
     private String document_id;
@@ -4628,6 +5031,7 @@ public class DiscoveryV1Models {
     public GetDocumentStatusOptionsBuilder newBuilder() {
       return new GetDocumentStatusOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -4709,7 +5113,7 @@ public class DiscoveryV1Models {
   /**
    * The getEnvironment options.
    */
-  public class GetEnvironmentOptions extends IBMWatsonGenericModel {
+  public class GetEnvironmentOptions {
     private String environment_id;
     /**
      * Gets the environment_id.
@@ -4734,6 +5138,7 @@ public class DiscoveryV1Models {
     public GetEnvironmentOptionsBuilder newBuilder() {
       return new GetEnvironmentOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -4785,7 +5190,7 @@ public class DiscoveryV1Models {
   /**
    * The getTrainingData options.
    */
-  public class GetTrainingDataOptions extends IBMWatsonGenericModel {
+  public class GetTrainingDataOptions {
     private String environment_id;
     private String collection_id;
     private String query_id;
@@ -4836,6 +5241,7 @@ public class DiscoveryV1Models {
     public GetTrainingDataOptionsBuilder newBuilder() {
       return new GetTrainingDataOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -4917,7 +5323,7 @@ public class DiscoveryV1Models {
   /**
    * The getTrainingExample options.
    */
-  public class GetTrainingExampleOptions extends IBMWatsonGenericModel {
+  public class GetTrainingExampleOptions {
     private String environment_id;
     private String collection_id;
     private String query_id;
@@ -4981,6 +5387,7 @@ public class DiscoveryV1Models {
     public GetTrainingExampleOptionsBuilder newBuilder() {
       return new GetTrainingExampleOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -5089,6 +5496,22 @@ public class DiscoveryV1Models {
     @AuraEnabled
     public Long getInterval() {
       return interval;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Histogram ret;
+      if (jsonString.equals('null')) {
+        ret = new Histogram();
+      }
+      else {
+        ret = (Histogram) JSON.deserialize(jsonString, Histogram.class);
+      }
+
+      return ret;
     }
   }
 
@@ -5210,6 +5633,30 @@ public class DiscoveryV1Models {
     public void setExcludeTagAttributes(final List<String> exclude_tag_attributes) {
       this.exclude_tag_attributes = exclude_tag_attributes;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      HtmlSettings ret;
+      if (jsonString.equals('null')) {
+        ret = new HtmlSettings();
+      }
+      else {
+        ret = (HtmlSettings) JSON.deserialize(jsonString, HtmlSettings.class);
+      }
+
+      // calling custom deserializer for keep_content
+      XPathPatterns newKeepContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getKeepContent()), (Map<String, Object>) jsonMap.get('keep_content'));
+      ret.setKeepContent(newKeepContent);
+
+      // calling custom deserializer for exclude_content
+      XPathPatterns newExcludeContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getExcludeContent()), (Map<String, Object>) jsonMap.get('exclude_content'));
+      ret.setExcludeContent(newExcludeContent);
+
+      return ret;
+    }
   }
 
   /**
@@ -5279,12 +5726,40 @@ public class DiscoveryV1Models {
     public void setMemoryUsage(final MemoryUsage memory_usage) {
       this.memory_usage = memory_usage;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      IndexCapacity ret;
+      if (jsonString.equals('null')) {
+        ret = new IndexCapacity();
+      }
+      else {
+        ret = (IndexCapacity) JSON.deserialize(jsonString, IndexCapacity.class);
+      }
+
+      // calling custom deserializer for documents
+      EnvironmentDocuments newDocuments = (EnvironmentDocuments) new EnvironmentDocuments().deserialize(JSON.serialize(ret.getDocuments()), (Map<String, Object>) jsonMap.get('documents'));
+      ret.setDocuments(newDocuments);
+
+      // calling custom deserializer for disk_usage
+      DiskUsage newDiskUsage = (DiskUsage) new DiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('disk_usage'));
+      ret.setDiskUsage(newDiskUsage);
+
+      // calling custom deserializer for memory_usage
+      MemoryUsage newMemoryUsage = (MemoryUsage) new MemoryUsage().deserialize(JSON.serialize(ret.getMemoryUsage()), (Map<String, Object>) jsonMap.get('memory_usage'));
+      ret.setMemoryUsage(newMemoryUsage);
+
+      return ret;
+    }
   }
 
   /**
    * The listCollectionFields options.
    */
-  public class ListCollectionFieldsOptions extends IBMWatsonGenericModel {
+  public class ListCollectionFieldsOptions {
     private String environment_id;
     private String collection_id;
     /**
@@ -5322,6 +5797,7 @@ public class DiscoveryV1Models {
     public ListCollectionFieldsOptionsBuilder newBuilder() {
       return new ListCollectionFieldsOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -5410,12 +5886,41 @@ public class DiscoveryV1Models {
     public void setFields(final List<Field> fields) {
       this.fields = fields;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ListCollectionFieldsResponse ret;
+      if (jsonString.equals('null')) {
+        ret = new ListCollectionFieldsResponse();
+      }
+      else {
+        ret = (ListCollectionFieldsResponse) JSON.deserialize(jsonString, ListCollectionFieldsResponse.class);
+      }
+
+      // calling custom deserializer for fields
+      List<Field> newFields = new List<Field>();
+      List<Field> deserializedFields = ret.getFields();
+      if (deserializedFields != null) {
+        for (Integer i = 0; i < deserializedFields.size(); i++) {
+          Field currentItem = ret.getFields().get(i);
+          List<Object> fieldsInMap = (List<Object>) jsonMap.get('fields');
+          Field newItem = (Field) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(fieldsInMap.get(i))));
+          newFields.add(newItem);
+        }
+        ret.setFields(newFields);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The listCollections options.
    */
-  public class ListCollectionsOptions extends IBMWatsonGenericModel {
+  public class ListCollectionsOptions {
     private String environment_id;
     private String name;
     /**
@@ -5452,6 +5957,7 @@ public class DiscoveryV1Models {
     public ListCollectionsOptionsBuilder newBuilder() {
       return new ListCollectionsOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -5538,12 +6044,41 @@ public class DiscoveryV1Models {
     public void setCollections(final List<Collection> collections) {
       this.collections = collections;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ListCollectionsResponse ret;
+      if (jsonString.equals('null')) {
+        ret = new ListCollectionsResponse();
+      }
+      else {
+        ret = (ListCollectionsResponse) JSON.deserialize(jsonString, ListCollectionsResponse.class);
+      }
+
+      // calling custom deserializer for collections
+      List<Collection> newCollections = new List<Collection>();
+      List<Collection> deserializedCollections = ret.getCollections();
+      if (deserializedCollections != null) {
+        for (Integer i = 0; i < deserializedCollections.size(); i++) {
+          Collection currentItem = ret.getCollections().get(i);
+          List<Object> collectionsInMap = (List<Object>) jsonMap.get('collections');
+          Collection newItem = (Collection) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(collectionsInMap.get(i))));
+          newCollections.add(newItem);
+        }
+        ret.setCollections(newCollections);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The listConfigurations options.
    */
-  public class ListConfigurationsOptions extends IBMWatsonGenericModel {
+  public class ListConfigurationsOptions {
     private String environment_id;
     private String name;
     /**
@@ -5580,6 +6115,7 @@ public class DiscoveryV1Models {
     public ListConfigurationsOptionsBuilder newBuilder() {
       return new ListConfigurationsOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -5666,12 +6202,41 @@ public class DiscoveryV1Models {
     public void setConfigurations(final List<Configuration> configurations) {
       this.configurations = configurations;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ListConfigurationsResponse ret;
+      if (jsonString.equals('null')) {
+        ret = new ListConfigurationsResponse();
+      }
+      else {
+        ret = (ListConfigurationsResponse) JSON.deserialize(jsonString, ListConfigurationsResponse.class);
+      }
+
+      // calling custom deserializer for configurations
+      List<Configuration> newConfigurations = new List<Configuration>();
+      List<Configuration> deserializedConfigurations = ret.getConfigurations();
+      if (deserializedConfigurations != null) {
+        for (Integer i = 0; i < deserializedConfigurations.size(); i++) {
+          Configuration currentItem = ret.getConfigurations().get(i);
+          List<Object> configurationsInMap = (List<Object>) jsonMap.get('configurations');
+          Configuration newItem = (Configuration) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(configurationsInMap.get(i))));
+          newConfigurations.add(newItem);
+        }
+        ret.setConfigurations(newConfigurations);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The listEnvironments options.
    */
-  public class ListEnvironmentsOptions extends IBMWatsonGenericModel {
+  public class ListEnvironmentsOptions {
     private String name;
     /**
      * Gets the name.
@@ -5695,6 +6260,7 @@ public class DiscoveryV1Models {
     public ListEnvironmentsOptionsBuilder newBuilder() {
       return new ListEnvironmentsOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -5759,12 +6325,41 @@ public class DiscoveryV1Models {
     public void setEnvironments(final List<Environment> environments) {
       this.environments = environments;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ListEnvironmentsResponse ret;
+      if (jsonString.equals('null')) {
+        ret = new ListEnvironmentsResponse();
+      }
+      else {
+        ret = (ListEnvironmentsResponse) JSON.deserialize(jsonString, ListEnvironmentsResponse.class);
+      }
+
+      // calling custom deserializer for environments
+      List<Environment> newEnvironments = new List<Environment>();
+      List<Environment> deserializedEnvironments = ret.getEnvironments();
+      if (deserializedEnvironments != null) {
+        for (Integer i = 0; i < deserializedEnvironments.size(); i++) {
+          Environment currentItem = ret.getEnvironments().get(i);
+          List<Object> environmentsInMap = (List<Object>) jsonMap.get('environments');
+          Environment newItem = (Environment) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(environmentsInMap.get(i))));
+          newEnvironments.add(newItem);
+        }
+        ret.setEnvironments(newEnvironments);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The listFields options.
    */
-  public class ListFieldsOptions extends IBMWatsonGenericModel {
+  public class ListFieldsOptions {
     private String environment_id;
     private List<String> collection_ids;
     /**
@@ -5802,6 +6397,7 @@ public class DiscoveryV1Models {
     public ListFieldsOptionsBuilder newBuilder() {
       return new ListFieldsOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -5884,7 +6480,7 @@ public class DiscoveryV1Models {
   /**
    * The listTrainingData options.
    */
-  public class ListTrainingDataOptions extends IBMWatsonGenericModel {
+  public class ListTrainingDataOptions {
     private String environment_id;
     private String collection_id;
     /**
@@ -5922,6 +6518,7 @@ public class DiscoveryV1Models {
     public ListTrainingDataOptionsBuilder newBuilder() {
       return new ListTrainingDataOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -6049,6 +6646,22 @@ public class DiscoveryV1Models {
     public Double getPercentUsed() {
       return percent_used;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      MemoryUsage ret;
+      if (jsonString.equals('null')) {
+        ret = new MemoryUsage();
+      }
+      else {
+        ret = (MemoryUsage) JSON.deserialize(jsonString, MemoryUsage.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -6117,6 +6730,22 @@ public class DiscoveryV1Models {
      */
     public void setDestinationField(final String destination_field) {
       this.destination_field = destination_field;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      NormalizationOperation ret;
+      if (jsonString.equals('null')) {
+        ret = new NormalizationOperation();
+      }
+      else {
+        ret = (NormalizationOperation) JSON.deserialize(jsonString, NormalizationOperation.class);
+      }
+
+      return ret;
     }
   }
 
@@ -6208,6 +6837,22 @@ public class DiscoveryV1Models {
     public String getDescription() {
       return description;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Notice ret;
+      if (jsonString.equals('null')) {
+        ret = new Notice();
+      }
+      else {
+        ret = (Notice) JSON.deserialize(jsonString, Notice.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -6233,6 +6878,35 @@ public class DiscoveryV1Models {
     public void setFonts(final List<FontSetting> fonts) {
       this.fonts = fonts;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      PdfHeadingDetection ret;
+      if (jsonString.equals('null')) {
+        ret = new PdfHeadingDetection();
+      }
+      else {
+        ret = (PdfHeadingDetection) JSON.deserialize(jsonString, PdfHeadingDetection.class);
+      }
+
+      // calling custom deserializer for fonts
+      List<FontSetting> newFonts = new List<FontSetting>();
+      List<FontSetting> deserializedFonts = ret.getFonts();
+      if (deserializedFonts != null) {
+        for (Integer i = 0; i < deserializedFonts.size(); i++) {
+          FontSetting currentItem = ret.getFonts().get(i);
+          List<Object> fontsInMap = (List<Object>) jsonMap.get('fonts');
+          FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(fontsInMap.get(i))));
+          newFonts.add(newItem);
+        }
+        ret.setFonts(newFonts);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -6257,6 +6931,26 @@ public class DiscoveryV1Models {
      */
     public void setHeading(final PdfHeadingDetection heading) {
       this.heading = heading;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      PdfSettings ret;
+      if (jsonString.equals('null')) {
+        ret = new PdfSettings();
+      }
+      else {
+        ret = (PdfSettings) JSON.deserialize(jsonString, PdfSettings.class);
+      }
+
+      // calling custom deserializer for heading
+      PdfHeadingDetection newHeading = (PdfHeadingDetection) new PdfHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading'));
+      ret.setHeading(newHeading);
+
+      return ret;
     }
   }
 
@@ -6388,12 +7082,54 @@ public class DiscoveryV1Models {
     public void setAggregations(final List<QueryAggregation> aggregations) {
       this.aggregations = aggregations;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryAggregation ret;
+      if (jsonString.equals('null')) {
+        ret = new QueryAggregation();
+      }
+      else {
+        ret = (QueryAggregation) JSON.deserialize(jsonString, QueryAggregation.class);
+      }
+
+      // calling custom deserializer for results
+      List<AggregationResult> newResults = new List<AggregationResult>();
+      List<AggregationResult> deserializedResults = ret.getResults();
+      if (deserializedResults != null) {
+        for (Integer i = 0; i < deserializedResults.size(); i++) {
+          AggregationResult currentItem = ret.getResults().get(i);
+          List<Object> resultsInMap = (List<Object>) jsonMap.get('results');
+          AggregationResult newItem = (AggregationResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(resultsInMap.get(i))));
+          newResults.add(newItem);
+        }
+        ret.setResults(newResults);
+      }
+
+      // calling custom deserializer for aggregations
+      List<QueryAggregation> newAggregations = new List<QueryAggregation>();
+      List<QueryAggregation> deserializedAggregations = ret.getAggregations();
+      if (deserializedAggregations != null) {
+        for (Integer i = 0; i < deserializedAggregations.size(); i++) {
+          QueryAggregation currentItem = ret.getAggregations().get(i);
+          List<Object> aggregationsInMap = (List<Object>) jsonMap.get('aggregations');
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(aggregationsInMap.get(i))));
+          newAggregations.add(newItem);
+        }
+        ret.setAggregations(newAggregations);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The queryNotices options.
    */
-  public class QueryNoticesOptions extends IBMWatsonGenericModel {
+  public class QueryNoticesOptions {
     private String environment_id;
     private String collection_id;
     private String filter;
@@ -6599,6 +7335,7 @@ public class DiscoveryV1Models {
     public QueryNoticesOptionsBuilder newBuilder() {
       return new QueryNoticesOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -6991,12 +7728,71 @@ public class DiscoveryV1Models {
     public void setDuplicatesRemoved(final long duplicates_removed) {
       this.duplicates_removed = duplicates_removed;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryNoticesResponse ret;
+      if (jsonString.equals('null')) {
+        ret = new QueryNoticesResponse();
+      }
+      else {
+        ret = (QueryNoticesResponse) JSON.deserialize(jsonString, QueryNoticesResponse.class);
+      }
+
+      // calling custom deserializer for results
+      List<QueryNoticesResult> newResults = new List<QueryNoticesResult>();
+      List<QueryNoticesResult> deserializedResults = ret.getResults();
+      if (deserializedResults != null) {
+        for (Integer i = 0; i < deserializedResults.size(); i++) {
+          QueryNoticesResult currentItem = ret.getResults().get(i);
+          List<Object> resultsInMap = (List<Object>) jsonMap.get('results');
+          QueryNoticesResult newItem = (QueryNoticesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(resultsInMap.get(i))));
+          newResults.add(newItem);
+        }
+        ret.setResults(newResults);
+      }
+
+      // calling custom deserializer for aggregations
+      List<QueryAggregation> newAggregations = new List<QueryAggregation>();
+      List<QueryAggregation> deserializedAggregations = ret.getAggregations();
+      if (deserializedAggregations != null) {
+        for (Integer i = 0; i < deserializedAggregations.size(); i++) {
+          QueryAggregation currentItem = ret.getAggregations().get(i);
+          List<Object> aggregationsInMap = (List<Object>) jsonMap.get('aggregations');
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(aggregationsInMap.get(i))));
+          newAggregations.add(newItem);
+        }
+        ret.setAggregations(newAggregations);
+      }
+
+      // calling custom deserializer for passages
+      List<QueryPassages> newPassages = new List<QueryPassages>();
+      List<QueryPassages> deserializedPassages = ret.getPassages();
+      if (deserializedPassages != null) {
+        for (Integer i = 0; i < deserializedPassages.size(); i++) {
+          QueryPassages currentItem = ret.getPassages().get(i);
+          List<Object> passagesInMap = (List<Object>) jsonMap.get('passages');
+          QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(passagesInMap.get(i))));
+          newPassages.add(newItem);
+        }
+        ret.setPassages(newPassages);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * QueryNoticesResult.
    */
   public class QueryNoticesResult extends IBMWatsonDynamicModel {
+    private String id;
+    private Double score;
+    private Map<String, String> metadata;
+    private String collection_id;
 
     /**
      * Gets the id.
@@ -7005,7 +7801,7 @@ public class DiscoveryV1Models {
      */
     @AuraEnabled
     public String getId() {
-      return (String)JSON.deserialize(JSON.serialize(this.get('id')), String.class);
+      return id;
     }
 
     /**
@@ -7015,7 +7811,7 @@ public class DiscoveryV1Models {
      */
     @AuraEnabled
     public Double getScore() {
-      return (Double)JSON.deserialize(JSON.serialize(this.get('score')), Double.class);
+      return score;
     }
 
     /**
@@ -7025,7 +7821,7 @@ public class DiscoveryV1Models {
      */
     @AuraEnabled
     public Map<String, String> getMetadata() {
-      return (Map<String, String>)JSON.deserialize(JSON.serialize(this.get('metadata')), Map<String, String>.class);
+      return metadata;
     }
 
     /**
@@ -7035,7 +7831,7 @@ public class DiscoveryV1Models {
      */
     @AuraEnabled
     public String getCollectionId() {
-      return (String)JSON.deserialize(JSON.serialize(this.get('collection_id')), String.class);
+      return collection_id;
     }
 
     /**
@@ -7044,7 +7840,7 @@ public class DiscoveryV1Models {
      * @param id the new id
      */
     public void setId(final String id) {
-      this.put('id', id);
+      this.id = id;
     }
 
     /**
@@ -7053,7 +7849,7 @@ public class DiscoveryV1Models {
      * @param score the new score
      */
     public void setScore(final Double score) {
-      this.put('score', score);
+      this.score = score;
     }
 
     /**
@@ -7062,7 +7858,7 @@ public class DiscoveryV1Models {
      * @param metadata the new metadata
      */
     public void setMetadata(final Map<String, String> metadata) {
-      this.put('metadata', metadata);
+      this.metadata = metadata;
     }
 
     /**
@@ -7071,14 +7867,38 @@ public class DiscoveryV1Models {
      * @param collection_id the new collection_id
      */
     public void setCollectionId(final String collection_id) {
-      this.put('collection_id', collection_id);
+      this.collection_id = collection_id;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryNoticesResult ret;
+      if (jsonString.equals('null')) {
+        ret = new QueryNoticesResult();
+      }
+      else {
+        ret = (QueryNoticesResult) JSON.deserialize(jsonString, QueryNoticesResult.class);
+      }
+
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+          ret.put(key, jsonMap.get(key));
+        }
+      }
+
+      return ret;
     }
   }
 
   /**
    * The query options.
    */
-  public class QueryOptions extends IBMWatsonGenericModel {
+  public class QueryOptions {
     private String environment_id;
     private String collection_id;
     private String filter;
@@ -7296,6 +8116,7 @@ public class DiscoveryV1Models {
     public QueryOptionsBuilder newBuilder() {
       return new QueryOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -7732,6 +8553,22 @@ public class DiscoveryV1Models {
     public void setField(final String field) {
       this.field = field;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryPassages ret;
+      if (jsonString.equals('null')) {
+        ret = new QueryPassages();
+      }
+      else {
+        ret = (QueryPassages) JSON.deserialize(jsonString, QueryPassages.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -7833,12 +8670,71 @@ public class DiscoveryV1Models {
     public void setDuplicatesRemoved(final long duplicates_removed) {
       this.duplicates_removed = duplicates_removed;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryResponse ret;
+      if (jsonString.equals('null')) {
+        ret = new QueryResponse();
+      }
+      else {
+        ret = (QueryResponse) JSON.deserialize(jsonString, QueryResponse.class);
+      }
+
+      // calling custom deserializer for results
+      List<QueryResult> newResults = new List<QueryResult>();
+      List<QueryResult> deserializedResults = ret.getResults();
+      if (deserializedResults != null) {
+        for (Integer i = 0; i < deserializedResults.size(); i++) {
+          QueryResult currentItem = ret.getResults().get(i);
+          List<Object> resultsInMap = (List<Object>) jsonMap.get('results');
+          QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(resultsInMap.get(i))));
+          newResults.add(newItem);
+        }
+        ret.setResults(newResults);
+      }
+
+      // calling custom deserializer for aggregations
+      List<QueryAggregation> newAggregations = new List<QueryAggregation>();
+      List<QueryAggregation> deserializedAggregations = ret.getAggregations();
+      if (deserializedAggregations != null) {
+        for (Integer i = 0; i < deserializedAggregations.size(); i++) {
+          QueryAggregation currentItem = ret.getAggregations().get(i);
+          List<Object> aggregationsInMap = (List<Object>) jsonMap.get('aggregations');
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(aggregationsInMap.get(i))));
+          newAggregations.add(newItem);
+        }
+        ret.setAggregations(newAggregations);
+      }
+
+      // calling custom deserializer for passages
+      List<QueryPassages> newPassages = new List<QueryPassages>();
+      List<QueryPassages> deserializedPassages = ret.getPassages();
+      if (deserializedPassages != null) {
+        for (Integer i = 0; i < deserializedPassages.size(); i++) {
+          QueryPassages currentItem = ret.getPassages().get(i);
+          List<Object> passagesInMap = (List<Object>) jsonMap.get('passages');
+          QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(passagesInMap.get(i))));
+          newPassages.add(newItem);
+        }
+        ret.setPassages(newPassages);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * QueryResult.
    */
   public class QueryResult extends IBMWatsonDynamicModel {
+    private String id;
+    private Double score;
+    private Map<String, String> metadata;
+    private String collection_id;
 
     /**
      * Gets the id.
@@ -7847,7 +8743,7 @@ public class DiscoveryV1Models {
      */
     @AuraEnabled
     public String getId() {
-      return (String)JSON.deserialize(JSON.serialize(this.get('id')), String.class);
+      return id;
     }
 
     /**
@@ -7857,7 +8753,7 @@ public class DiscoveryV1Models {
      */
     @AuraEnabled
     public Double getScore() {
-      return (Double)JSON.deserialize(JSON.serialize(this.get('score')), Double.class);
+      return score;
     }
 
     /**
@@ -7867,7 +8763,7 @@ public class DiscoveryV1Models {
      */
     @AuraEnabled
     public Map<String, String> getMetadata() {
-      return (Map<String, String>)JSON.deserialize(JSON.serialize(this.get('metadata')), Map<String, String>.class);
+      return metadata;
     }
 
     /**
@@ -7877,7 +8773,7 @@ public class DiscoveryV1Models {
      */
     @AuraEnabled
     public String getCollectionId() {
-      return (String)JSON.deserialize(JSON.serialize(this.get('collection_id')), String.class);
+      return collection_id;
     }
 
     /**
@@ -7886,7 +8782,7 @@ public class DiscoveryV1Models {
      * @param id the new id
      */
     public void setId(final String id) {
-      this.put('id', id);
+      this.id = id;
     }
 
     /**
@@ -7895,7 +8791,7 @@ public class DiscoveryV1Models {
      * @param score the new score
      */
     public void setScore(final Double score) {
-      this.put('score', score);
+      this.score = score;
     }
 
     /**
@@ -7904,7 +8800,7 @@ public class DiscoveryV1Models {
      * @param metadata the new metadata
      */
     public void setMetadata(final Map<String, String> metadata) {
-      this.put('metadata', metadata);
+      this.metadata = metadata;
     }
 
     /**
@@ -7913,7 +8809,31 @@ public class DiscoveryV1Models {
      * @param collection_id the new collection_id
      */
     public void setCollectionId(final String collection_id) {
-      this.put('collection_id', collection_id);
+      this.collection_id = collection_id;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryResult ret;
+      if (jsonString.equals('null')) {
+        ret = new QueryResult();
+      }
+      else {
+        ret = (QueryResult) JSON.deserialize(jsonString, QueryResult.class);
+      }
+
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+          ret.put(key, jsonMap.get(key));
+        }
+      }
+
+      return ret;
     }
   }
 
@@ -7931,12 +8851,28 @@ public class DiscoveryV1Models {
     public Long getCount() {
       return count;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Term ret;
+      if (jsonString.equals('null')) {
+        ret = new Term();
+      }
+      else {
+        ret = (Term) JSON.deserialize(jsonString, Term.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The testConfigurationInEnvironment options.
    */
-  public class TestConfigurationInEnvironmentOptions extends IBMWatsonGenericModel {
+  public class TestConfigurationInEnvironmentOptions {
     private String environment_id;
     private String configuration;
     private String step;
@@ -8045,6 +8981,7 @@ public class DiscoveryV1Models {
     public TestConfigurationInEnvironmentOptionsBuilder newBuilder() {
       return new TestConfigurationInEnvironmentOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -8278,6 +9215,48 @@ public class DiscoveryV1Models {
     public void setNotices(final List<Notice> notices) {
       this.notices = notices;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      TestDocument ret;
+      if (jsonString.equals('null')) {
+        ret = new TestDocument();
+      }
+      else {
+        ret = (TestDocument) JSON.deserialize(jsonString, TestDocument.class);
+      }
+
+      // calling custom deserializer for snapshots
+      List<DocumentSnapshot> newSnapshots = new List<DocumentSnapshot>();
+      List<DocumentSnapshot> deserializedSnapshots = ret.getSnapshots();
+      if (deserializedSnapshots != null) {
+        for (Integer i = 0; i < deserializedSnapshots.size(); i++) {
+          DocumentSnapshot currentItem = ret.getSnapshots().get(i);
+          List<Object> snapshotsInMap = (List<Object>) jsonMap.get('snapshots');
+          DocumentSnapshot newItem = (DocumentSnapshot) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(snapshotsInMap.get(i))));
+          newSnapshots.add(newItem);
+        }
+        ret.setSnapshots(newSnapshots);
+      }
+
+      // calling custom deserializer for notices
+      List<Notice> newNotices = new List<Notice>();
+      List<Notice> deserializedNotices = ret.getNotices();
+      if (deserializedNotices != null) {
+        for (Integer i = 0; i < deserializedNotices.size(); i++) {
+          Notice currentItem = ret.getNotices().get(i);
+          List<Object> noticesInMap = (List<Object>) jsonMap.get('notices');
+          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(noticesInMap.get(i))));
+          newNotices.add(newItem);
+        }
+        ret.setNotices(newNotices);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -8341,6 +9320,35 @@ public class DiscoveryV1Models {
     public void setQueries(final List<TrainingQuery> queries) {
       this.queries = queries;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      TrainingDataSet ret;
+      if (jsonString.equals('null')) {
+        ret = new TrainingDataSet();
+      }
+      else {
+        ret = (TrainingDataSet) JSON.deserialize(jsonString, TrainingDataSet.class);
+      }
+
+      // calling custom deserializer for queries
+      List<TrainingQuery> newQueries = new List<TrainingQuery>();
+      List<TrainingQuery> deserializedQueries = ret.getQueries();
+      if (deserializedQueries != null) {
+        for (Integer i = 0; i < deserializedQueries.size(); i++) {
+          TrainingQuery currentItem = ret.getQueries().get(i);
+          List<Object> queriesInMap = (List<Object>) jsonMap.get('queries');
+          TrainingQuery newItem = (TrainingQuery) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(queriesInMap.get(i))));
+          newQueries.add(newItem);
+        }
+        ret.setQueries(newQueries);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -8403,6 +9411,22 @@ public class DiscoveryV1Models {
      */
     public void setRelevance(final long relevance) {
       this.relevance = relevance;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      TrainingExample ret;
+      if (jsonString.equals('null')) {
+        ret = new TrainingExample();
+      }
+      else {
+        ret = (TrainingExample) JSON.deserialize(jsonString, TrainingExample.class);
+      }
+
+      return ret;
     }
   }
 
@@ -8485,6 +9509,35 @@ public class DiscoveryV1Models {
      */
     public void setExamples(final List<TrainingExample> examples) {
       this.examples = examples;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      TrainingQuery ret;
+      if (jsonString.equals('null')) {
+        ret = new TrainingQuery();
+      }
+      else {
+        ret = (TrainingQuery) JSON.deserialize(jsonString, TrainingQuery.class);
+      }
+
+      // calling custom deserializer for examples
+      List<TrainingExample> newExamples = new List<TrainingExample>();
+      List<TrainingExample> deserializedExamples = ret.getExamples();
+      if (deserializedExamples != null) {
+        for (Integer i = 0; i < deserializedExamples.size(); i++) {
+          TrainingExample currentItem = ret.getExamples().get(i);
+          List<Object> examplesInMap = (List<Object>) jsonMap.get('examples');
+          TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(examplesInMap.get(i))));
+          newExamples.add(newItem);
+        }
+        ret.setExamples(newExamples);
+      }
+
+      return ret;
     }
   }
 
@@ -8663,12 +9716,28 @@ public class DiscoveryV1Models {
     public void setDataUpdated(final Datetime data_updated) {
       this.data_updated = data_updated;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      TrainingStatus ret;
+      if (jsonString.equals('null')) {
+        ret = new TrainingStatus();
+      }
+      else {
+        ret = (TrainingStatus) JSON.deserialize(jsonString, TrainingStatus.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The updateCollection options.
    */
-  public class UpdateCollectionOptions extends IBMWatsonGenericModel {
+  public class UpdateCollectionOptions {
     private String environment_id;
     private String collection_id;
     private String name;
@@ -8742,6 +9811,7 @@ public class DiscoveryV1Models {
     public UpdateCollectionOptionsBuilder newBuilder() {
       return new UpdateCollectionOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -8847,7 +9917,7 @@ public class DiscoveryV1Models {
   /**
    * The updateConfiguration options.
    */
-  public class UpdateConfigurationOptions extends IBMWatsonGenericModel {
+  public class UpdateConfigurationOptions {
     private String environment_id;
     private String configuration_id;
     private String name;
@@ -8945,6 +10015,7 @@ public class DiscoveryV1Models {
     public UpdateConfigurationOptionsBuilder newBuilder() {
       return new UpdateConfigurationOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -9123,7 +10194,7 @@ public class DiscoveryV1Models {
   /**
    * The updateDocument options.
    */
-  public class UpdateDocumentOptions extends IBMWatsonGenericModel {
+  public class UpdateDocumentOptions {
     private String environment_id;
     private String collection_id;
     private String document_id;
@@ -9222,6 +10293,7 @@ public class DiscoveryV1Models {
     public UpdateDocumentOptionsBuilder newBuilder() {
       return new UpdateDocumentOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -9355,7 +10427,7 @@ public class DiscoveryV1Models {
   /**
    * The updateEnvironment options.
    */
-  public class UpdateEnvironmentOptions extends IBMWatsonGenericModel {
+  public class UpdateEnvironmentOptions {
     private String environment_id;
     private String name;
     private String description;
@@ -9404,6 +10476,7 @@ public class DiscoveryV1Models {
     public UpdateEnvironmentOptionsBuilder newBuilder() {
       return new UpdateEnvironmentOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -9481,7 +10554,7 @@ public class DiscoveryV1Models {
   /**
    * The updateTrainingExample options.
    */
-  public class UpdateTrainingExampleOptions extends IBMWatsonGenericModel {
+  public class UpdateTrainingExampleOptions {
     private String environment_id;
     private String collection_id;
     private String query_id;
@@ -9565,6 +10638,7 @@ public class DiscoveryV1Models {
     public UpdateTrainingExampleOptionsBuilder newBuilder() {
       return new UpdateTrainingExampleOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -9726,6 +10800,48 @@ public class DiscoveryV1Models {
     public void setStyles(final List<WordStyle> styles) {
       this.styles = styles;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WordHeadingDetection ret;
+      if (jsonString.equals('null')) {
+        ret = new WordHeadingDetection();
+      }
+      else {
+        ret = (WordHeadingDetection) JSON.deserialize(jsonString, WordHeadingDetection.class);
+      }
+
+      // calling custom deserializer for fonts
+      List<FontSetting> newFonts = new List<FontSetting>();
+      List<FontSetting> deserializedFonts = ret.getFonts();
+      if (deserializedFonts != null) {
+        for (Integer i = 0; i < deserializedFonts.size(); i++) {
+          FontSetting currentItem = ret.getFonts().get(i);
+          List<Object> fontsInMap = (List<Object>) jsonMap.get('fonts');
+          FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(fontsInMap.get(i))));
+          newFonts.add(newItem);
+        }
+        ret.setFonts(newFonts);
+      }
+
+      // calling custom deserializer for styles
+      List<WordStyle> newStyles = new List<WordStyle>();
+      List<WordStyle> deserializedStyles = ret.getStyles();
+      if (deserializedStyles != null) {
+        for (Integer i = 0; i < deserializedStyles.size(); i++) {
+          WordStyle currentItem = ret.getStyles().get(i);
+          List<Object> stylesInMap = (List<Object>) jsonMap.get('styles');
+          WordStyle newItem = (WordStyle) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(stylesInMap.get(i))));
+          newStyles.add(newItem);
+        }
+        ret.setStyles(newStyles);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -9750,6 +10866,26 @@ public class DiscoveryV1Models {
      */
     public void setHeading(final WordHeadingDetection heading) {
       this.heading = heading;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WordSettings ret;
+      if (jsonString.equals('null')) {
+        ret = new WordSettings();
+      }
+      else {
+        ret = (WordSettings) JSON.deserialize(jsonString, WordSettings.class);
+      }
+
+      // calling custom deserializer for heading
+      WordHeadingDetection newHeading = (WordHeadingDetection) new WordHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading'));
+      ret.setHeading(newHeading);
+
+      return ret;
     }
   }
 
@@ -9795,6 +10931,22 @@ public class DiscoveryV1Models {
     public void setNames(final List<String> names) {
       this.names = names;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WordStyle ret;
+      if (jsonString.equals('null')) {
+        ret = new WordStyle();
+      }
+      else {
+        ret = (WordStyle) JSON.deserialize(jsonString, WordStyle.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -9819,6 +10971,22 @@ public class DiscoveryV1Models {
      */
     public void setXpaths(final List<String> xpaths) {
       this.xpaths = xpaths;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      XPathPatterns ret;
+      if (jsonString.equals('null')) {
+        ret = new XPathPatterns();
+      }
+      else {
+        ret = (XPathPatterns) JSON.deserialize(jsonString, XPathPatterns.class);
+      }
+
+      return ret;
     }
   }
 

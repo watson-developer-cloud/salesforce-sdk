@@ -87,6 +87,22 @@ public class PersonalityInsightsV3Models {
     public void setPercentage(final Double percentage) {
       this.percentage = percentage;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Behavior ret;
+      if (jsonString.equals('null')) {
+        ret = new Behavior();
+      }
+      else {
+        ret = (Behavior) JSON.deserialize(jsonString, Behavior.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -155,6 +171,22 @@ public class PersonalityInsightsV3Models {
      */
     public void setScore(final Double score) {
       this.score = score;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ConsumptionPreferences ret;
+      if (jsonString.equals('null')) {
+        ret = new ConsumptionPreferences();
+      }
+      else {
+        ret = (ConsumptionPreferences) JSON.deserialize(jsonString, ConsumptionPreferences.class);
+      }
+
+      return ret;
     }
   }
 
@@ -225,12 +257,41 @@ public class PersonalityInsightsV3Models {
     public void setConsumptionPreferences(final List<ConsumptionPreferences> consumption_preferences) {
       this.consumption_preferences = consumption_preferences;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ConsumptionPreferencesCategory ret;
+      if (jsonString.equals('null')) {
+        ret = new ConsumptionPreferencesCategory();
+      }
+      else {
+        ret = (ConsumptionPreferencesCategory) JSON.deserialize(jsonString, ConsumptionPreferencesCategory.class);
+      }
+
+      // calling custom deserializer for consumption_preferences
+      List<ConsumptionPreferences> newConsumptionPreferences = new List<ConsumptionPreferences>();
+      List<ConsumptionPreferences> deserializedConsumptionPreferences = ret.getConsumptionPreferences();
+      if (deserializedConsumptionPreferences != null) {
+        for (Integer i = 0; i < deserializedConsumptionPreferences.size(); i++) {
+          ConsumptionPreferences currentItem = ret.getConsumptionPreferences().get(i);
+          List<Object> consumption_preferencesInMap = (List<Object>) jsonMap.get('consumption_preferences');
+          ConsumptionPreferences newItem = (ConsumptionPreferences) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(consumption_preferencesInMap.get(i))));
+          newConsumptionPreferences.add(newItem);
+        }
+        ret.setConsumptionPreferences(newConsumptionPreferences);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * Content.
    */
-  public class Content extends IBMWatsonGenericModel {
+  public class Content {
     private List<ContentItem> content_items;
     /**
      * Gets the content_items.
@@ -255,6 +316,7 @@ public class PersonalityInsightsV3Models {
     public ContentBuilder newBuilder() {
       return new ContentBuilder(this);
     }
+
   }
 
   /**
@@ -322,7 +384,7 @@ public class PersonalityInsightsV3Models {
   /**
    * ContentItem.
    */
-  public class ContentItem extends IBMWatsonGenericModel {
+  public class ContentItem {
     private String content;
     private String id;
     private Long created;
@@ -443,6 +505,7 @@ public class PersonalityInsightsV3Models {
     public ContentItemBuilder newBuilder() {
       return new ContentItemBuilder(this);
     }
+
   }
 
   /**
@@ -788,12 +851,106 @@ public class PersonalityInsightsV3Models {
     public void setWarnings(final List<Warning> warnings) {
       this.warnings = warnings;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Profile ret;
+      if (jsonString.equals('null')) {
+        ret = new Profile();
+      }
+      else {
+        ret = (Profile) JSON.deserialize(jsonString, Profile.class);
+      }
+
+      // calling custom deserializer for personality
+      List<Trait> newPersonality = new List<Trait>();
+      List<Trait> deserializedPersonality = ret.getPersonality();
+      if (deserializedPersonality != null) {
+        for (Integer i = 0; i < deserializedPersonality.size(); i++) {
+          Trait currentItem = ret.getPersonality().get(i);
+          List<Object> personalityInMap = (List<Object>) jsonMap.get('personality');
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(personalityInMap.get(i))));
+          newPersonality.add(newItem);
+        }
+        ret.setPersonality(newPersonality);
+      }
+
+      // calling custom deserializer for values
+      List<Trait> newValues = new List<Trait>();
+      List<Trait> deserializedValues = ret.getValues();
+      if (deserializedValues != null) {
+        for (Integer i = 0; i < deserializedValues.size(); i++) {
+          Trait currentItem = ret.getValues().get(i);
+          List<Object> valuesInMap = (List<Object>) jsonMap.get('values');
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(valuesInMap.get(i))));
+          newValues.add(newItem);
+        }
+        ret.setValues(newValues);
+      }
+
+      // calling custom deserializer for needs
+      List<Trait> newNeeds = new List<Trait>();
+      List<Trait> deserializedNeeds = ret.getNeeds();
+      if (deserializedNeeds != null) {
+        for (Integer i = 0; i < deserializedNeeds.size(); i++) {
+          Trait currentItem = ret.getNeeds().get(i);
+          List<Object> needsInMap = (List<Object>) jsonMap.get('needs');
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(needsInMap.get(i))));
+          newNeeds.add(newItem);
+        }
+        ret.setNeeds(newNeeds);
+      }
+
+      // calling custom deserializer for behavior
+      List<Behavior> newBehavior = new List<Behavior>();
+      List<Behavior> deserializedBehavior = ret.getBehavior();
+      if (deserializedBehavior != null) {
+        for (Integer i = 0; i < deserializedBehavior.size(); i++) {
+          Behavior currentItem = ret.getBehavior().get(i);
+          List<Object> behaviorInMap = (List<Object>) jsonMap.get('behavior');
+          Behavior newItem = (Behavior) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(behaviorInMap.get(i))));
+          newBehavior.add(newItem);
+        }
+        ret.setBehavior(newBehavior);
+      }
+
+      // calling custom deserializer for consumption_preferences
+      List<ConsumptionPreferencesCategory> newConsumptionPreferences = new List<ConsumptionPreferencesCategory>();
+      List<ConsumptionPreferencesCategory> deserializedConsumptionPreferences = ret.getConsumptionPreferences();
+      if (deserializedConsumptionPreferences != null) {
+        for (Integer i = 0; i < deserializedConsumptionPreferences.size(); i++) {
+          ConsumptionPreferencesCategory currentItem = ret.getConsumptionPreferences().get(i);
+          List<Object> consumption_preferencesInMap = (List<Object>) jsonMap.get('consumption_preferences');
+          ConsumptionPreferencesCategory newItem = (ConsumptionPreferencesCategory) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(consumption_preferencesInMap.get(i))));
+          newConsumptionPreferences.add(newItem);
+        }
+        ret.setConsumptionPreferences(newConsumptionPreferences);
+      }
+
+      // calling custom deserializer for warnings
+      List<Warning> newWarnings = new List<Warning>();
+      List<Warning> deserializedWarnings = ret.getWarnings();
+      if (deserializedWarnings != null) {
+        for (Integer i = 0; i < deserializedWarnings.size(); i++) {
+          Warning currentItem = ret.getWarnings().get(i);
+          List<Object> warningsInMap = (List<Object>) jsonMap.get('warnings');
+          Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(warningsInMap.get(i))));
+          newWarnings.add(newItem);
+        }
+        ret.setWarnings(newWarnings);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The profile options.
    */
-  public class ProfileOptions extends IBMWatsonGenericModel {
+  public class ProfileOptions {
     private Content content;
     private String body;
     private String content_type;
@@ -902,6 +1059,7 @@ public class PersonalityInsightsV3Models {
     public ProfileOptionsBuilder newBuilder() {
       return new ProfileOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -1165,6 +1323,35 @@ public class PersonalityInsightsV3Models {
     public void setChildren(final List<Trait> children) {
       this.children = children;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Trait ret;
+      if (jsonString.equals('null')) {
+        ret = new Trait();
+      }
+      else {
+        ret = (Trait) JSON.deserialize(jsonString, Trait.class);
+      }
+
+      // calling custom deserializer for children
+      List<Trait> newChildren = new List<Trait>();
+      List<Trait> deserializedChildren = ret.getChildren();
+      if (deserializedChildren != null) {
+        for (Integer i = 0; i < deserializedChildren.size(); i++) {
+          Trait currentItem = ret.getChildren().get(i);
+          List<Object> childrenInMap = (List<Object>) jsonMap.get('children');
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(childrenInMap.get(i))));
+          newChildren.add(newItem);
+        }
+        ret.setChildren(newChildren);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -1212,6 +1399,22 @@ public class PersonalityInsightsV3Models {
      */
     public void setMessage(final String message) {
       this.message = message;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Warning ret;
+      if (jsonString.equals('null')) {
+        ret = new Warning();
+      }
+      else {
+        ret = (Warning) JSON.deserialize(jsonString, Warning.class);
+      }
+
+      return ret;
     }
   }
 

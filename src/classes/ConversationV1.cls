@@ -91,6 +91,7 @@ public class ConversationV1 extends IBMWatsonService {
       contentJson.put('learning_opt_out', createWorkspaceOptions.learningOptOut());
     }
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.Workspace) createServiceCall(builder.build(), ConversationV1Models.Workspace.class);
   }
 
@@ -108,6 +109,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
+  
     createServiceCall(builder.build(), null);
   }
 
@@ -126,6 +128,7 @@ public class ConversationV1 extends IBMWatsonService {
       'version' => versionDate,
       'export' => String.valueOf(getWorkspaceOptions.exportField())
     });
+  
     return (ConversationV1Models.WorkspaceExport) createServiceCall(builder.build(), ConversationV1Models.WorkspaceExport.class);
   }
 
@@ -146,6 +149,7 @@ public class ConversationV1 extends IBMWatsonService {
       'sort' => listWorkspacesOptions.sortField(),
       'cursor' => listWorkspacesOptions.cursor()
     });
+  
     return (ConversationV1Models.WorkspaceCollection) createServiceCall(builder.build(), ConversationV1Models.WorkspaceCollection.class);
   }
 
@@ -192,6 +196,7 @@ public class ConversationV1 extends IBMWatsonService {
       contentJson.put('learning_opt_out', updateWorkspaceOptions.learningOptOut());
     }
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.Workspace) createServiceCall(builder.build(), ConversationV1Models.Workspace.class);
   }
 
@@ -227,6 +232,7 @@ public class ConversationV1 extends IBMWatsonService {
       contentJson.put('output', messageOptions.output());
     }
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.MessageResponse) createServiceCall(builder.build(), ConversationV1Models.MessageResponse.class);
   }
 
@@ -253,6 +259,7 @@ public class ConversationV1 extends IBMWatsonService {
       contentJson.put('examples', createIntentOptions.examples());
     }
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.Intent) createServiceCall(builder.build(), ConversationV1Models.Intent.class);
   }
 
@@ -270,6 +277,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
+  
     createServiceCall(builder.build(), null);
   }
 
@@ -288,6 +296,7 @@ public class ConversationV1 extends IBMWatsonService {
       'version' => versionDate,
       'export' => String.valueOf(getIntentOptions.exportField())
     });
+  
     return (ConversationV1Models.IntentExport) createServiceCall(builder.build(), ConversationV1Models.IntentExport.class);
   }
 
@@ -310,6 +319,7 @@ public class ConversationV1 extends IBMWatsonService {
       'sort' => listIntentsOptions.sortField(),
       'cursor' => listIntentsOptions.cursor()
     });
+  
     return (ConversationV1Models.IntentCollection) createServiceCall(builder.build(), ConversationV1Models.IntentCollection.class);
   }
 
@@ -338,6 +348,7 @@ public class ConversationV1 extends IBMWatsonService {
       contentJson.put('description', updateIntentOptions.newDescription());
     }
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.Intent) createServiceCall(builder.build(), ConversationV1Models.Intent.class);
   }
 
@@ -358,6 +369,7 @@ public class ConversationV1 extends IBMWatsonService {
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', createExampleOptions.text());
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.Example) createServiceCall(builder.build(), ConversationV1Models.Example.class);
   }
 
@@ -375,6 +387,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
+  
     createServiceCall(builder.build(), null);
   }
 
@@ -392,6 +405,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
+  
     return (ConversationV1Models.Example) createServiceCall(builder.build(), ConversationV1Models.Example.class);
   }
 
@@ -413,6 +427,7 @@ public class ConversationV1 extends IBMWatsonService {
       'sort' => listExamplesOptions.sortField(),
       'cursor' => listExamplesOptions.cursor()
     });
+  
     return (ConversationV1Models.ExampleCollection) createServiceCall(builder.build(), ConversationV1Models.ExampleCollection.class);
   }
 
@@ -435,6 +450,7 @@ public class ConversationV1 extends IBMWatsonService {
       contentJson.put('text', updateExampleOptions.newText());
     }
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.Example) createServiceCall(builder.build(), ConversationV1Models.Example.class);
   }
 
@@ -467,6 +483,7 @@ public class ConversationV1 extends IBMWatsonService {
       contentJson.put('fuzzy_match', createEntityOptions.fuzzyMatch());
     }
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.Entity) createServiceCall(builder.build(), ConversationV1Models.Entity.class);
   }
 
@@ -484,6 +501,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
+  
     createServiceCall(builder.build(), null);
   }
 
@@ -502,6 +520,7 @@ public class ConversationV1 extends IBMWatsonService {
       'version' => versionDate,
       'export' => String.valueOf(getEntityOptions.exportField())
     });
+  
     return (ConversationV1Models.EntityExport) createServiceCall(builder.build(), ConversationV1Models.EntityExport.class);
   }
 
@@ -524,6 +543,7 @@ public class ConversationV1 extends IBMWatsonService {
       'sort' => listEntitiesOptions.sortField(),
       'cursor' => listEntitiesOptions.cursor()
     });
+  
     return (ConversationV1Models.EntityCollection) createServiceCall(builder.build(), ConversationV1Models.EntityCollection.class);
   }
 
@@ -558,6 +578,7 @@ public class ConversationV1 extends IBMWatsonService {
       contentJson.put('description', updateEntityOptions.newDescription());
     }
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.Entity) createServiceCall(builder.build(), ConversationV1Models.Entity.class);
   }
 
@@ -590,6 +611,7 @@ public class ConversationV1 extends IBMWatsonService {
       contentJson.put('type', createValueOptions.typeField());
     }
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.Value) createServiceCall(builder.build(), ConversationV1Models.Value.class);
   }
 
@@ -607,6 +629,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
+  
     createServiceCall(builder.build(), null);
   }
 
@@ -625,6 +648,7 @@ public class ConversationV1 extends IBMWatsonService {
       'version' => versionDate,
       'export' => String.valueOf(getValueOptions.exportField())
     });
+  
     return (ConversationV1Models.ValueExport) createServiceCall(builder.build(), ConversationV1Models.ValueExport.class);
   }
 
@@ -647,6 +671,7 @@ public class ConversationV1 extends IBMWatsonService {
       'sort' => listValuesOptions.sortField(),
       'cursor' => listValuesOptions.cursor()
     });
+  
     return (ConversationV1Models.ValueCollection) createServiceCall(builder.build(), ConversationV1Models.ValueCollection.class);
   }
 
@@ -681,6 +706,7 @@ public class ConversationV1 extends IBMWatsonService {
       contentJson.put('value', updateValueOptions.newValue());
     }
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.Value) createServiceCall(builder.build(), ConversationV1Models.Value.class);
   }
 
@@ -701,6 +727,7 @@ public class ConversationV1 extends IBMWatsonService {
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('synonym', createSynonymOptions.synonym());
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.Synonym) createServiceCall(builder.build(), ConversationV1Models.Synonym.class);
   }
 
@@ -718,6 +745,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
+  
     createServiceCall(builder.build(), null);
   }
 
@@ -735,6 +763,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
+  
     return (ConversationV1Models.Synonym) createServiceCall(builder.build(), ConversationV1Models.Synonym.class);
   }
 
@@ -756,6 +785,7 @@ public class ConversationV1 extends IBMWatsonService {
       'sort' => listSynonymsOptions.sortField(),
       'cursor' => listSynonymsOptions.cursor()
     });
+  
     return (ConversationV1Models.SynonymCollection) createServiceCall(builder.build(), ConversationV1Models.SynonymCollection.class);
   }
 
@@ -778,6 +808,7 @@ public class ConversationV1 extends IBMWatsonService {
       contentJson.put('synonym', updateSynonymOptions.newSynonym());
     }
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.Synonym) createServiceCall(builder.build(), ConversationV1Models.Synonym.class);
   }
 
@@ -837,6 +868,7 @@ public class ConversationV1 extends IBMWatsonService {
       contentJson.put('variable', createDialogNodeOptions.variable());
     }
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.DialogNode) createServiceCall(builder.build(), ConversationV1Models.DialogNode.class);
   }
 
@@ -854,6 +886,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
+  
     createServiceCall(builder.build(), null);
   }
 
@@ -871,6 +904,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
+  
     return (ConversationV1Models.DialogNode) createServiceCall(builder.build(), ConversationV1Models.DialogNode.class);
   }
 
@@ -892,6 +926,7 @@ public class ConversationV1 extends IBMWatsonService {
       'sort' => listDialogNodesOptions.sortField(),
       'cursor' => listDialogNodesOptions.cursor()
     });
+  
     return (ConversationV1Models.DialogNodeCollection) createServiceCall(builder.build(), ConversationV1Models.DialogNodeCollection.class);
   }
 
@@ -951,6 +986,7 @@ public class ConversationV1 extends IBMWatsonService {
     }
     contentJson.put('dialog_node', updateDialogNodeOptions.newDialogNode());
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.DialogNode) createServiceCall(builder.build(), ConversationV1Models.DialogNode.class);
   }
 
@@ -972,6 +1008,7 @@ public class ConversationV1 extends IBMWatsonService {
       'page_limit' => String.valueOf(listLogsOptions.pageLimit()),
       'cursor' => listLogsOptions.cursor()
     });
+  
     return (ConversationV1Models.LogCollection) createServiceCall(builder.build(), ConversationV1Models.LogCollection.class);
   }
 
@@ -992,6 +1029,7 @@ public class ConversationV1 extends IBMWatsonService {
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', createCounterexampleOptions.text());
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.Counterexample) createServiceCall(builder.build(), ConversationV1Models.Counterexample.class);
   }
 
@@ -1009,6 +1047,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
+  
     createServiceCall(builder.build(), null);
   }
 
@@ -1026,6 +1065,7 @@ public class ConversationV1 extends IBMWatsonService {
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
+  
     return (ConversationV1Models.Counterexample) createServiceCall(builder.build(), ConversationV1Models.Counterexample.class);
   }
 
@@ -1047,6 +1087,7 @@ public class ConversationV1 extends IBMWatsonService {
       'sort' => listCounterexamplesOptions.sortField(),
       'cursor' => listCounterexamplesOptions.cursor()
     });
+  
     return (ConversationV1Models.CounterexampleCollection) createServiceCall(builder.build(), ConversationV1Models.CounterexampleCollection.class);
   }
 
@@ -1069,6 +1110,7 @@ public class ConversationV1 extends IBMWatsonService {
       contentJson.put('text', updateCounterexampleOptions.newText());
     }
     builder.bodyJson(JSON.serialize(contentJson));
+  
     return (ConversationV1Models.Counterexample) createServiceCall(builder.build(), ConversationV1Models.Counterexample.class);
   }
 

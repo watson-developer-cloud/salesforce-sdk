@@ -39,9 +39,9 @@ public abstract class IBMWatsonService {
   public IBMWatsonService() {}
   
   private String getErrorMessage(IBMWatsonResponse response) {
-    String error = response.getResponseText();
+  	String error = response.getResponseText();
     try {
-    Map<String, Object> responseMap = (Map<String, Object>)JSON.deserializeUntyped(error);
+	  Map<String, Object> responseMap = (Map<String, Object>)JSON.deserializeUntyped(error);
       if (responseMap.containsKey(MESSAGE_ERROR)) {
         error = (String)responseMap.get(MESSAGE_ERROR);
       } else if (responseMap.containsKey(MESSAGE_ERROR_2)) {
@@ -55,10 +55,10 @@ public abstract class IBMWatsonService {
 
     return error;
   }
-  
+	
   /**
    * Calls to the processResponse() method overriden by the child services using this base class
-   *  
+   *	
    */
   public Object process(Type targetType) {
     IBMWatsonClient.RestClient client = IBMWatsonClient.getRestClient( request );
@@ -70,7 +70,7 @@ public abstract class IBMWatsonService {
     //
     //change to case statement once this is there https://success.salesforce.com/ideaView?id=08730000000BrSIAA0
     String error = getErrorMessage(response);  
-    if (!(response.StatusCode == 200 || response.StatusCode == 201 || response.StatusCode == 202)) {
+		if (!(response.StatusCode == 200 || response.StatusCode == 201 || response.StatusCode == 202)) {
       System.debug('[IBMWatsonFacade]::[sendMessage] Error Response Status:'+ response.Status + ' Code:' + response.StatusCode + ' ServiceMessage: '+response.getResponseText());
       if(response.StatusCode == IBMWatsonHttpStatus.BAD_REQUEST) // HTTP 400
         throw new IBMWatsonServiceExceptions.BadRequestException(error != null ? error : 'Bad Request', response);
@@ -105,7 +105,16 @@ public abstract class IBMWatsonService {
       //processResponse();
       String ServiceMessageResponseText = getServiceMessageResponseText();
       if( !String.isBlank(ServiceMessageResponseText) && (targetType != null)){
-        return JSON.deserialize(ServiceMessageResponseText, targetType);
+        String jsonString = IBMWatsonJSONUtil.addReservedWordSuffix(ServiceMessageResponseText);
+        Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
+        Object targetObject = targetType.newInstance();
+
+        if (targetObject instanceof IBMWatsonDynamicModel) {
+          return ((IBMWatsonDynamicModel) targetObject).deserialize(jsonString, jsonMap);
+        }
+        else {
+          return ((IBMWatsonGenericModel) targetObject).deserialize(jsonString, jsonMap);
+        }
       }
     }
     return null;
@@ -164,7 +173,7 @@ public abstract class IBMWatsonService {
     }
     builder.addHeader(IBMWatsonHttpHeaders.AUTHORIZATION, apiKey.startsWith(BASIC) ? apiKey : BASIC + apiKey);
   }
-  
+	
   /**
    * Sets the username and password.
    *
@@ -186,7 +195,7 @@ public abstract class IBMWatsonService {
       this.endPoint = endPointParam.endsWith('/') ? endPointParam.removeEnd('/') : endPointParam;
     }
   }
-  
+	
   /**
    * Gets the API end point.
    *
