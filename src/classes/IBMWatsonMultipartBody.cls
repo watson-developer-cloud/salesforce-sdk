@@ -43,10 +43,10 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   private Map<String, String> headers;
   private long contentLength = -1L;
 
-  IBMWatsonMultipartBody(String boundary, IBMWatsonMediaType media_type, List<Part> parts) {
+  IBMWatsonMultipartBody(String boundary, IBMWatsonMediaType mediaType, List<Part> parts) {
     this.boundary = boundary;
-    this.originalType = media_type;
-    this.contentType = IBMWatsonMediaType.parse(media_type + '; boundary=' + EncodingUtil.urlEncode(boundary, 'UTF-8'));
+    this.originalType = mediaType;
+    this.contentType = IBMWatsonMediaType.parse(mediaType + '; boundary=' + EncodingUtil.urlEncode(boundary, 'UTF-8'));
     this.parts = parts;
     this.headers = new Map<String, String>();
     this.contentLength = 0;
@@ -71,7 +71,6 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   }
   
   private long writeForm64(List<Part> parts){
-    
     headers.put('Content-Type', 'multipart/form-data; boundary="' + Boundary + '"');
     
     form64 = '';
@@ -79,12 +78,12 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     for(Part p: parts){
       if(p.body().hasBase64Data()){
       	
-        String file_name = p.body().name;
-        String content_type = p.body.bodyContentType().toString();
-        String file64_body = EncodingUtil.base64Encode(p.body().blobContent);
+        String fileName = p.body().name;
+        String contentType = p.body.bodyContentType().toString();
+        String file64Body = EncodingUtil.base64Encode(p.body().blobContent);
         
     	form64 += WriteBoundary();
-        form64 += WriteBase64BodyParameter('file', file64_body, file_name, content_type);
+        form64 += WriteBase64BodyParameter('file', file64Body, fileName, contentType);
       }
       else{
         form64 += WriteBoundary();
@@ -100,7 +99,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     /**
      *  Write a key-value pair to the form's body.
      */
-    public static string WriteBodyParameter(string key, string value) {
+    public static string writeBodyParameter(string key, string value) {
         string contentDisposition = 'Content-Disposition: form-data; name="' + key + '"\r\n\r\n';
         string valueCrLf = value + '\r\n';
         return contentDisposition+valueCrLf;
@@ -109,7 +108,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     /**
      *  Write a key-value pair to the form's body for a blob.
      */
-    public string WriteBase64BodyParameter(string key, string file64, string filename, string mimeType) {
+    public string writeBase64BodyParameter(string key, string file64, string filename, string mimeType) {
     	String content = '';
     	
         string contentDisposition = 'Content-Disposition: form-data; name="' + key + '"; filename="'+filename+'"';
@@ -225,15 +224,17 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   private static String UUID(){
       Blob b = Crypto.GenerateAESKey(128);
       String h = EncodingUtil.ConvertTohex(b);
-      String UUID = h.SubString(0,8)+ '-' + h.SubString(8,12) + '-' + h.SubString(12,16) + '-' + h.SubString(16,20) + '-' + h.substring(20);
+      String UUID = h.SubString(0,8) + '-' 
+          + h.SubString(8,12) + '-' 
+          + h.SubString(12,16) + '-' 
+          + h.SubString(16,20) + '-' 
+          + h.substring(20);
       return UUID.toUpperCase();
-      //return 'FDF5C27C-1A9D-9A86-1137-FCEF906B9589';
-      //return '-WaTsOn';
   }
    
   public class Builder {
     private String boundary;
-    private IBMWatsonMediaType media_type = MIXED;
+    private IBMWatsonMediaType mediaType = MIXED;
     private List<Part> parts = new List<Part>();
      
     public Builder() {
@@ -248,14 +249,14 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
      * Set the MIME type. Expected values for {@code type} are {@link #MIXED} (the default), {@link
      * #ALTERNATIVE}, {@link #DIGEST}, {@link #PARALLEL} and {@link #FORM}.
      */
-    public Builder setType(IBMWatsonMediaType media_type) {
-      if (media_type == null) {
-        throw new IllegalArgumentException('media_type == null');
+    public Builder setType(IBMWatsonMediaType mediaType) {
+      if (mediaType == null) {
+        throw new IllegalArgumentException('mediaType == null');
       }
-      if (!media_type.toString().contains('multipart')) {
-        throw new IllegalArgumentException('multipart != ' + media_type);
+      if (!mediaType.toString().contains('multipart')) {
+        throw new IllegalArgumentException('multipart != ' + mediaType);
       }
-      this.media_type = media_type;
+      this.mediaType = mediaType;
       return this;
     }
     
@@ -289,14 +290,15 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     
     /** Add a part to the body. */
     public Builder addPart(Part part) {
-      if (part == null) throw new IllegalArgumentException('part == null');
+      if (part == null) 
+        throw new IllegalArgumentException('part == null');
       parts.add(part);
       return this;
     }
     
     /** Assemble the specified parts into a request body. */
     public IBMWatsonMultipartBody build() {
-      return new IBMWatsonMultipartBody(boundary, media_type, parts); //(boundary, type, parts);
+      return new IBMWatsonMultipartBody(boundary, mediaType, parts); //(boundary, type, parts);
     }    
   }
   
