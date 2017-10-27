@@ -84,8 +84,21 @@ public class IBMWatsonRequestBuilder {
     if ( String.isBlank(url) ) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('url cannot be null');
     }
+    url = cleanUrl(url);
     System.PageReference pageReference = new System.PageReference( url ); 
     httpUrl = pageReference.getUrl();
+  }
+
+  /**
+   * Replaces special characters for proper URL encoding.
+   *
+   * @param url URL string
+   *
+   * @return properly encoded URL
+   */
+  private String cleanUrl(String url) {
+    url = url.replace(' ', '%20');
+    return url;
   }
 
   /**

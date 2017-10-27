@@ -433,4 +433,533 @@ public class IBMWatsonMockResponses {
             '  "relevance": 2'+
             '}';
   }
+
+  public static String workspace() {
+    return '{' +
+        '"name": "test_workspace",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"language": "en",' +
+        '"metadata": {' +
+        '"code": "test_code"' +
+        '},' +
+        '"updated": "2017-10-18T15:44:56.800",' +
+        '"description": "Description of test_workspace",' +
+        '"status": "Available",' +
+        '"workspace_id": "123456789",' +
+        '"learning_opt_out": false' +
+        '}';
+  }
+
+  public static String workspaceExport() {
+    return '{' +
+        '"name": "test_workspace",' +
+        '"description": "Description of test_workspace",' +
+        '"language": "en",' +
+        '"metadata": {' +
+        '"code": "test_code"' +
+        '},' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800",' +
+        '"workspace_id": "123456789",' +
+        '"status": "Available",' +
+        '"learning_opt_out": false,' +
+        '"intents": [' +
+        '{' +
+        '"intent": "test_intent",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800",' +
+        '"description": "Description of test_intent",' +
+        '"examples": [' +
+        '{' +
+        '"text": "Example of test_intent",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800"' +
+        '}' +
+        ']' +
+        '}' +
+        '],' +
+        '"entities": [' +
+        '{' +
+        '"entity": "test_entity",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800",' +
+        '"description": "Description of test_entity",' +
+        '"values": [' +
+        '{' +
+        '"value": "Value of test_entity",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800",' +
+        '"synonyms": [' +
+        '"Synonym for value of test_entity"' +
+        ']' +
+        '}' +
+        ']' +
+        '}' +
+        '],' +
+        '"counterexamples": [' +
+        '{' +
+        '"text": "Counterexample for test_workspace",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800"' +
+        '}' +
+        '],' +
+        '"dialog_nodes": []' +
+        '}';
+  }
+
+  public static String workspaceCollection() {
+    return '{' +
+        '"workspaces": [' +
+        '{' +
+        '"name": "test_workspace",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"language": "en",' +
+        '"metadata": {' +
+        '"code": "test_code"' +
+        '},' +
+        '"updated": "2017-10-18T15:44:56.800",' +
+        '"description": "Description of test_workspace",' +
+        '"workspace_id": "123456789",' +
+        '"learning_opt_out": false' +
+        '}' +
+        '],' +
+        '"pagination": {' +
+        '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1",' +
+        '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1",' +
+        '"total": 1,' +
+        '"matched": 1' +
+        '}' +
+        '}';
+  }
+
+  public static String value() {
+    return '{' +
+        '"value": "Value of test_entity",' +
+        '"metadata": {' +
+        '"code": "test_code"' +
+        '},' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800",' +
+        '"patterns": [' +
+        '"test_pattern"' +
+        '],' +
+        '"synonyms": [' +
+        '"Synonym for value of test_entity"' +
+        ']' +
+        '}';
+  }
+
+  public static String valueCollection() {
+    return '{' +
+        '"values": [' +
+        '{' +
+        '"value": "Value of test_entity",' +
+        '"metadata": {' +
+        '"code": "test_code"' +
+        '},' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800",' +
+        '"patterns": [' +
+        '"test_pattern"' +
+        '],' +
+        '"synonyms": [' +
+        '"Synonym for value of test_entity"' +
+        ']' +
+        '}' +
+        '],' +
+        '"pagination": {' +
+        '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1",' +
+        '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1",' +
+        '"total": 1,' +
+        '"matched": 1' +
+        '}' +
+        '}';
+  }
+
+  public static String messageResponse() {
+    return '{' +
+        '"intents": [' +
+        '{' +
+          '"intent": "test_intent",' +
+          '"confidence": 0.314159' +
+        '}' +
+        '],' +
+        '"entities": [' +
+        '{' +
+          '"entity": "test_entity",' +
+          '"location": [' +
+            '10' +
+          '],' +
+          '"value": "Value of test_entity",' +
+          '"confidence": 0.314159' +
+        '}' +
+        '],' +
+        '"input": {' +
+          '"text": "This is a message"' +
+        '},' +
+        '"alternate_intents": false,' +
+        '"context": {' +
+          '"conversation_id": "0000000",' +
+          '"system": {' +
+            '"dialog_turn_counter": "5"' +
+          '}' +
+        '},' +
+        '"output": {' +
+          '"text": [' +
+            '"This is a response"' +
+          '],' +
+          '"nodes_visited": [' +
+            '"node_1"' +
+          '],' +
+          '"log_messages": [' +
+          '{' +
+            '"level": "warn",' +
+            '"msg": "test_warning"' +
+          '}' +
+          ']' +
+        '}' +
+        '}';
+  }
+
+  public static String intent() {
+    return '{' +
+        '"intent": "test_intent",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800",' +
+        '"description": "Description of test_intent"' +
+        '}';
+  }
+
+  public static String intentExport() {
+    return '{' +
+        '"intent": "test_intent",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800",' +
+        '"description": "Description of test_intent",' +
+        '"examples": [' +
+        '{' +
+          '"text": "Example of test_intent",' +
+          '"created": "2015-12-06T23:53:59.153Z",' +
+          '"updated": "2017-10-18T15:44:56.800"' +
+        '}' +
+        ']' +
+        '}';
+  }
+
+  public static String intentCollection() {
+    return '{' +
+        '"intents": [' +
+        '{' +
+          '"intent": "test_intent",' +
+          '"created": "2015-12-06T23:53:59.153Z",' +
+          '"updated": "2017-10-18T15:44:56.800",' +
+          '"description": "Description of test_intent",' +
+          '"examples": [' +
+          '{' +
+            '"text": "Example of test_intent",' +
+            '"created": "2015-12-06T23:53:59.153Z",' +
+            '"updated": "2017-10-18T15:44:56.800"' +
+          '}' +
+          ']' +
+        '}' +
+        '],' +
+        '"pagination": {' +
+          '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1",' +
+          '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1",' +
+          '"total": 1,' +
+          '"matched": 1' +
+        '}' +
+        '}';
+  }
+
+  public static String example() {
+    return '{' +
+        '"text": "Example of test_intent",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800"' +
+        '}';
+  }
+
+  public static String exampleCollection() {
+    return '{' +
+        '"examples": [' +
+        '{' +
+          '"text": "Example of test_intent",' +
+          '"created": "2015-12-06T23:53:59.153Z",' +
+          '"updated": "2017-10-18T15:44:56.800"' +
+        '}' +
+        '],' +
+        '"pagination": {' +
+          '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1",' +
+          '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1",' +
+          '"total": 1,' +
+          '"matched": 1' +
+        '}' +
+        '}';
+  }
+
+  public static String entity() {
+    return '{' +
+        '"entity": "test_entity",' +
+        '"description": "Description of test_entity",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800",' +
+        '"metadata": {' +
+          '"code": "test_code"' +
+        '},' +
+        '"fuzzy_match": false' +
+        '}';
+  }
+
+  public static String entityExport() {
+    return '{' +
+        '"entity": "test_entity",' +
+        '"description": "Description of test_entity",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800",' +
+        '"metadata": {' +
+        '"code": "test_code"' +
+        '},' +
+        '"fuzzy_match": false,' +
+        '"values": [' +
+        '{' +
+          '"value": "Value of test_entity",' +
+          '"metadata": {' +
+            '"code": "test_code"' +
+          '},' +
+          '"created": "2015-12-06T23:53:59.153Z",' +
+          '"updated": "2017-10-18T15:44:56.800",' +
+          '"patterns": [' +
+            '"test_pattern"' +
+          '],' +
+          '"synonyms": [' +
+            '"Synonym for value of test_entity"' +
+          ']' +
+        '}' +
+        ']' +
+        '}';
+  }
+
+  public static String entityCollection() {
+    return '{' +
+        '"entities": [' +
+        '{' +
+          '"entity": "test_entity",' +
+          '"description": "Description of test_entity",' +
+          '"created": "2015-12-06T23:53:59.153Z",' +
+          '"updated": "2017-10-18T15:44:56.800",' +
+          '"metadata": {' +
+            '"code": "test_code"' +
+          '},' +
+          '"fuzzy_match": false,' +
+          '"values": [' +
+          '{' +
+            '"value": "Value of test_entity",' +
+            '"metadata": {' +
+              '"code": "test_code"' +
+            '},' +
+            '"created": "2015-12-06T23:53:59.153Z",' +
+            '"updated": "2017-10-18T15:44:56.800",' +
+            '"patterns": [' +
+              '"test_pattern"' +
+            '],' +
+            '"synonyms": [' +
+              '"Synonym for value of test_entity"' +
+            ']' +
+          '}' +
+          ']' +
+        '}' +
+        '],' +
+        '"pagination": {' +
+          '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1",' +
+          '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1",' +
+          '"total": 1,' +
+          '"matched": 1' +
+        '}' +
+        '}';
+  }
+
+  public static String synonym() {
+    return '{' +
+        '"synonym": "Synonym for value of test_entity",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800"' +
+        '}';
+  }
+
+  public static String synonymCollection() {
+    return '{' +
+        '"synonyms": [' +
+        '{' +
+          '"synonym": "Synonym for value of test_entity",' +
+          '"created": "2015-12-06T23:53:59.153Z",' +
+          '"updated": "2017-10-18T15:44:56.800"' +
+        '}' +
+        '],' +
+        '"pagination": {' +
+          '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1",' +
+          '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1",' +
+          '"total": 1,' +
+          '"matched": 1' +
+        '}' +
+        '}';
+  }
+
+  public static String dialogNode() {
+    return '{' +
+        '"dialog_node": "dialog_node",' +
+        '"description": "Description of dialog_node",' +
+        '"title": "dialog_node_title",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800",' +
+        '"conditions": "#test",' +
+        '"parent": "parent",' +
+        '"previous_sibling": "sibling",' +
+        '"next_step": {' +
+          '"dialog_node": "next_dialog_node",' +
+          '"behavior": "behavior",' +
+          '"selector": "body"' +
+        '},' +
+        '"output": {' +
+          '"text": "output text"' +
+        '},' +
+        '"metadata": {' +
+          '"code": "test_code"' +
+        '},' +
+        '"context": {' +
+          '"context": "context_val"' +
+        '},' +
+        '"actions": [' +
+        '{' +
+          '"name": "action",' +
+          '"type": "server",' +
+          '"parameters": {' +
+            '"param_1": "param_1_val"' +
+          '},' +
+          '"result_variable": "action_var",' +
+          '"credentials": "creds"' +
+        '}' +
+        '],' +
+        '"type": "standard",' +
+        '"event_name": "dialog_node_event",' +
+        '"variable": "dialog_node_var"' +
+        '}';
+  }
+
+  public static String dialogNodeCollection() {
+    return '{' +
+        '"dialog_nodes": [' +
+        '{' +
+        '"dialog_node": "dialog_node",' +
+        '"description": "Description of dialog_node",' +
+        '"title": "dialog_node_title",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800",' +
+        '"conditions": "#test",' +
+        '"parent": "parent",' +
+        '"previous_sibling": "sibling",' +
+        '"next_step": {' +
+        '"dialog_node": "next_dialog_node",' +
+        '"behavior": "behavior",' +
+        '"selector": "body"' +
+        '},' +
+        '"output": {' +
+        '"text": "output text"' +
+        '},' +
+        '"metadata": {' +
+        '"code": "test_code"' +
+        '},' +
+        '"context": {' +
+        '"context": "context_val"' +
+        '},' +
+        '"actions": [' +
+        '{' +
+        '"name": "action",' +
+        '"type": "server",' +
+        '"parameters": {' +
+        '"param_1": "param_1_val"' +
+        '},' +
+        '"result_variable": "action_var",' +
+        '"credentials": "creds"' +
+        '}' +
+        '],' +
+        '"type": "standard",' +
+        '"event_name": "dialog_node_event",' +
+        '"variable": "dialog_node_var"' +
+        '}' +
+        '],' +
+        '"pagination": {' +
+        '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1",' +
+        '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1",' +
+        '"total": 1,' +
+        '"matched": 1' +
+        '}' +
+        '}';
+  }
+
+  public static String logCollection() {
+    return '{' +
+        '"logs": [' +
+        '{' +
+          '"request": {' +
+            '"input": {' +
+              '"text": "This is a message"' +
+            '},' +
+            '"context": {}' +
+          '},' +
+          '"response": {' +
+            '"intents": [' +
+            '{' +
+              '"intent": "test_intent",' +
+              '"confidence": 0.314159' +
+            '}' +
+            '],' +
+            '"entities": [' +
+            '{' +
+              '"entity": "test_entity",' +
+              '"location": [' +
+                '10' +
+              '],' +
+              '"value": "Value of test_entity",' +
+              '"confidence": 0.314159' +
+            '}' +
+            '],' +
+            '"input": {' +
+              '"text": "This is a message"' +
+            '},' +
+            '"alternate_intents": false,' +
+            '"context": {' +
+              '"conversation_id": "0000000",' +
+              '"system": {' +
+                '"dialog_turn_counter": "5"' +
+              '}' +
+            '},' +
+            '"output": {' +
+              '"text": [' +
+                '"This is a response"' +
+              '],' +
+              '"nodes_visited": [' +
+                '"node_1"' +
+              '],' +
+              '"log_messages": [' +
+              '{' +
+                '"level": "warn",' +
+                '"msg": "test_warning"' +
+              '}' +
+              ']' +
+            '}' +
+          '},' +
+          '"language": "en",' +
+          '"workspace_id": "123456789",' +
+          '"request_timestamp": "2017-12-06T23:53:59.153Z",' +
+          '"response_timestamp": "2017-12-06T23:54:59.153Z",' +
+          '"log_id": "987654321"' +
+        '}' +
+        '],' +
+        '"pagination": {' +
+          '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1",' +
+          '"matched": 1' +
+        '}' +
+      '}';
+  }
 }
