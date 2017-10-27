@@ -29,7 +29,8 @@ public class IBMWatsonClient {
         req.setHeader(name, wreq.getAllHeaders().get(name));
       }
 
-      if( !String.isBlank(wreq.getMethod()) && (wreq.getMethod().equalsIgnoreCase('POST') || wreq.getMethod().equalsIgnoreCase('PUT')) )) {
+      if(!String.isBlank(wreq.getMethod()) &&
+        (wreq.getMethod().equalsIgnoreCase('POST') || wreq.getMethod().equalsIgnoreCase('PUT'))) {
       	if( wreq.getBody() instanceOf IBMWatsonMultipartBody ){
       	  //form-multipart post as base64 request
       	  String form64 = ((IBMWatsonMultipartBody)wreq.getBody()).form64();
