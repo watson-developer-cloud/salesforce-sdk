@@ -169,7 +169,7 @@ private class DiscoveryV1Test {
       discovery.deleteEnvironment(options);
     }
     catch(Exception exptn) {
-      system.assertEquals(exptn.getMessage(),'environment_id cannot be empty');
+      system.assertEquals(exptn.getMessage(),'environment_id_serialized_name cannot be empty');
       
     }
     Test.stopTest();
@@ -367,7 +367,7 @@ private class DiscoveryV1Test {
         discovery.createConfiguration(options);
     }
     catch(Exception exptn) {
-      system.assertEquals(exptn.getMessage(),'environment_id cannot be empty');
+      system.assertEquals(exptn.getMessage(),'environment_id_serialized_name cannot be empty');
     }
     Test.stopTest();
   }
@@ -480,7 +480,7 @@ private class DiscoveryV1Test {
         discovery.updateConfiguration(options);
     }
     catch(Exception exptn) {
-      system.assertEquals(exptn.getMessage(),'configuration_id cannot be empty');
+      system.assertEquals(exptn.getMessage(),'configuration_id_serialized_name cannot be empty');
     }
     Test.stopTest();
   }
@@ -638,7 +638,7 @@ private class DiscoveryV1Test {
         discovery.updateCollection(options);
     }
     catch(Exception exptn) {
-      system.assertEquals(exptn.getMessage(),'collection_id cannot be empty');
+      system.assertEquals(exptn.getMessage(),'collection_id_serialized_name cannot be empty');
     }
     Test.stopTest();
   }
