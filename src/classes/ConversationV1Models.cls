@@ -3,6 +3,8 @@ public class ConversationV1Models {
    * Context information for the message. Include the context from the previous response to maintain state for the conversation.
    */
   public class Context extends IBMWatsonDynamicModel {
+    private String conversation_id;
+    private SystemResponse system_serialized_name;
 
     /**
      * Gets the conversation_id.
@@ -11,7 +13,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public String getConversationId() {
-      return (String)JSON.deserialize(JSON.serialize(this.get('conversation_id')), String.class);
+      return conversation_id;
     }
 
     /**
@@ -21,7 +23,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public SystemResponse getSystem() {
-      return (SystemResponse)JSON.deserialize(JSON.serialize(this.get('system_serialized_name')), SystemResponse.class);
+      return system_serialized_name;
     }
 
     /**
@@ -30,7 +32,7 @@ public class ConversationV1Models {
      * @param conversation_id the new conversation_id
      */
     public void setConversationId(final String conversation_id) {
-      this.put('conversation_id', conversation_id);
+      this.conversation_id = conversation_id;
     }
 
     /**
@@ -39,7 +41,35 @@ public class ConversationV1Models {
      * @param system_serialized_name the new system_serialized_name
      */
     public void setSystem(final SystemResponse system_serialized_name) {
-      this.put('system_serialized_name', system_serialized_name);
+      this.system_serialized_name = system_serialized_name;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Context ret;
+      if (jsonString.equals('null')) {
+        ret = new Context();
+      }
+      else {
+        ret = (Context) JSON.deserialize(jsonString, Context.class);
+      }
+
+      // calling custom deserializer for system_serialized_name
+      SystemResponse newSystem = (SystemResponse) new SystemResponse().deserialize(JSON.serialize(ret.getSystem()), (Map<String, Object>) jsonMap.get('system'));
+      ret.setSystem(newSystem);
+
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+          ret.put(key, jsonMap.get(key));
+        }
+      }
+
+      return ret;
     }
   }
 
@@ -92,6 +122,22 @@ public class ConversationV1Models {
     public void setText(final String text) {
       this.text = text;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Counterexample ret;
+      if (jsonString.equals('null')) {
+        ret = new Counterexample();
+      }
+      else {
+        ret = (Counterexample) JSON.deserialize(jsonString, Counterexample.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -140,12 +186,45 @@ public class ConversationV1Models {
     public void setPagination(final Pagination pagination) {
       this.pagination = pagination;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      CounterexampleCollection ret;
+      if (jsonString.equals('null')) {
+        ret = new CounterexampleCollection();
+      }
+      else {
+        ret = (CounterexampleCollection) JSON.deserialize(jsonString, CounterexampleCollection.class);
+      }
+
+      // calling custom deserializer for counterexamples
+      List<Counterexample> newCounterexamples = new List<Counterexample>();
+      List<Counterexample> deserializedCounterexamples = ret.getCounterexamples();
+      if (deserializedCounterexamples != null) {
+        for (Integer i = 0; i < deserializedCounterexamples.size(); i++) {
+          Counterexample currentItem = ret.getCounterexamples().get(i);
+          List<Object> counterexamplesInMap = (List<Object>) jsonMap.get('counterexamples');
+          Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(counterexamplesInMap.get(i))));
+          newCounterexamples.add(newItem);
+        }
+        ret.setCounterexamples(newCounterexamples);
+      }
+
+      // calling custom deserializer for pagination
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'));
+      ret.setPagination(newPagination);
+
+      return ret;
+    }
   }
 
   /**
    * CreateCounterexample.
    */
-  public class CreateCounterexample extends IBMWatsonGenericModel {
+  public class CreateCounterexample {
     private String text;
     /**
      * Gets the text.
@@ -170,6 +249,7 @@ public class ConversationV1Models {
     public CreateCounterexampleBuilder newBuilder() {
       return new CreateCounterexampleBuilder(this);
     }
+
   }
 
   /**
@@ -221,7 +301,7 @@ public class ConversationV1Models {
   /**
    * The createCounterexample options.
    */
-  public class CreateCounterexampleOptions extends IBMWatsonGenericModel {
+  public class CreateCounterexampleOptions {
     private String workspace_id;
     private String text;
     /**
@@ -259,6 +339,7 @@ public class ConversationV1Models {
     public CreateCounterexampleOptionsBuilder newBuilder() {
       return new CreateCounterexampleOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -325,7 +406,7 @@ public class ConversationV1Models {
   /**
    * CreateDialogNode.
    */
-  public class CreateDialogNode extends IBMWatsonGenericModel {
+  public class CreateDialogNode {
     private String dialog_node;
     private String description;
     private String conditions;
@@ -506,6 +587,7 @@ public class ConversationV1Models {
     public CreateDialogNodeBuilder newBuilder() {
       return new CreateDialogNodeBuilder(this);
     }
+
   }
 
   /**
@@ -742,7 +824,7 @@ public class ConversationV1Models {
   /**
    * The createDialogNode options.
    */
-  public class CreateDialogNodeOptions extends IBMWatsonGenericModel {
+  public class CreateDialogNodeOptions {
     private String workspace_id;
     private String dialog_node;
     private String description;
@@ -936,6 +1018,7 @@ public class ConversationV1Models {
     public CreateDialogNodeOptionsBuilder newBuilder() {
       return new CreateDialogNodeOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -1187,7 +1270,7 @@ public class ConversationV1Models {
   /**
    * CreateEntity.
    */
-  public class CreateEntity extends IBMWatsonGenericModel {
+  public class CreateEntity {
     private String entity;
     private String description;
     private Map<String, String> metadata;
@@ -1260,6 +1343,7 @@ public class ConversationV1Models {
     public CreateEntityBuilder newBuilder() {
       return new CreateEntityBuilder(this);
     }
+
   }
 
   /**
@@ -1379,7 +1463,7 @@ public class ConversationV1Models {
   /**
    * The createEntity options.
    */
-  public class CreateEntityOptions extends IBMWatsonGenericModel {
+  public class CreateEntityOptions {
     private String workspace_id;
     private String entity;
     private String description;
@@ -1465,6 +1549,7 @@ public class ConversationV1Models {
     public CreateEntityOptionsBuilder newBuilder() {
       return new CreateEntityOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -1599,7 +1684,7 @@ public class ConversationV1Models {
   /**
    * CreateExample.
    */
-  public class CreateExample extends IBMWatsonGenericModel {
+  public class CreateExample {
     private String text;
     /**
      * Gets the text.
@@ -1624,6 +1709,7 @@ public class ConversationV1Models {
     public CreateExampleBuilder newBuilder() {
       return new CreateExampleBuilder(this);
     }
+
   }
 
   /**
@@ -1675,7 +1761,7 @@ public class ConversationV1Models {
   /**
    * The createExample options.
    */
-  public class CreateExampleOptions extends IBMWatsonGenericModel {
+  public class CreateExampleOptions {
     private String workspace_id;
     private String intent;
     private String text;
@@ -1726,6 +1812,7 @@ public class ConversationV1Models {
     public CreateExampleOptionsBuilder newBuilder() {
       return new CreateExampleOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -1807,7 +1894,7 @@ public class ConversationV1Models {
   /**
    * CreateIntent.
    */
-  public class CreateIntent extends IBMWatsonGenericModel {
+  public class CreateIntent {
     private String intent;
     private String description;
     private List<CreateExample> examples;
@@ -1856,6 +1943,7 @@ public class ConversationV1Models {
     public CreateIntentBuilder newBuilder() {
       return new CreateIntentBuilder(this);
     }
+
   }
 
   /**
@@ -1949,7 +2037,7 @@ public class ConversationV1Models {
   /**
    * The createIntent options.
    */
-  public class CreateIntentOptions extends IBMWatsonGenericModel {
+  public class CreateIntentOptions {
     private String workspace_id;
     private String intent;
     private String description;
@@ -2011,6 +2099,7 @@ public class ConversationV1Models {
     public CreateIntentOptionsBuilder newBuilder() {
       return new CreateIntentOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -2119,7 +2208,7 @@ public class ConversationV1Models {
   /**
    * The createSynonym options.
    */
-  public class CreateSynonymOptions extends IBMWatsonGenericModel {
+  public class CreateSynonymOptions {
     private String workspace_id;
     private String entity;
     private String value;
@@ -2183,6 +2272,7 @@ public class ConversationV1Models {
     public CreateSynonymOptionsBuilder newBuilder() {
       return new CreateSynonymOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -2279,7 +2369,7 @@ public class ConversationV1Models {
   /**
    * CreateValue.
    */
-  public class CreateValue extends IBMWatsonGenericModel {
+  public class CreateValue {
     private String value;
     private Map<String, String> metadata;
     private List<String> synonyms;
@@ -2352,6 +2442,7 @@ public class ConversationV1Models {
     public CreateValueBuilder newBuilder() {
       return new CreateValueBuilder(this);
     }
+
   }
 
   /**
@@ -2487,7 +2578,7 @@ public class ConversationV1Models {
   /**
    * The createValue options.
    */
-  public class CreateValueOptions extends IBMWatsonGenericModel {
+  public class CreateValueOptions {
     private String workspace_id;
     private String entity;
     private String value;
@@ -2586,6 +2677,7 @@ public class ConversationV1Models {
     public CreateValueOptionsBuilder newBuilder() {
       return new CreateValueOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -2751,7 +2843,7 @@ public class ConversationV1Models {
   /**
    * The createWorkspace options.
    */
-  public class CreateWorkspaceOptions extends IBMWatsonGenericModel {
+  public class CreateWorkspaceOptions {
     private String name;
     private String description;
     private String language;
@@ -2871,6 +2963,7 @@ public class ConversationV1Models {
     public CreateWorkspaceOptionsBuilder newBuilder() {
       return new CreateWorkspaceOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -3081,7 +3174,7 @@ public class ConversationV1Models {
   /**
    * The deleteCounterexample options.
    */
-  public class DeleteCounterexampleOptions extends IBMWatsonGenericModel {
+  public class DeleteCounterexampleOptions {
     private String workspace_id;
     private String text;
     /**
@@ -3119,6 +3212,7 @@ public class ConversationV1Models {
     public DeleteCounterexampleOptionsBuilder newBuilder() {
       return new DeleteCounterexampleOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -3185,7 +3279,7 @@ public class ConversationV1Models {
   /**
    * The deleteDialogNode options.
    */
-  public class DeleteDialogNodeOptions extends IBMWatsonGenericModel {
+  public class DeleteDialogNodeOptions {
     private String workspace_id;
     private String dialog_node;
     /**
@@ -3223,6 +3317,7 @@ public class ConversationV1Models {
     public DeleteDialogNodeOptionsBuilder newBuilder() {
       return new DeleteDialogNodeOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -3289,7 +3384,7 @@ public class ConversationV1Models {
   /**
    * The deleteEntity options.
    */
-  public class DeleteEntityOptions extends IBMWatsonGenericModel {
+  public class DeleteEntityOptions {
     private String workspace_id;
     private String entity;
     /**
@@ -3327,6 +3422,7 @@ public class ConversationV1Models {
     public DeleteEntityOptionsBuilder newBuilder() {
       return new DeleteEntityOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -3393,7 +3489,7 @@ public class ConversationV1Models {
   /**
    * The deleteExample options.
    */
-  public class DeleteExampleOptions extends IBMWatsonGenericModel {
+  public class DeleteExampleOptions {
     private String workspace_id;
     private String intent;
     private String text;
@@ -3444,6 +3540,7 @@ public class ConversationV1Models {
     public DeleteExampleOptionsBuilder newBuilder() {
       return new DeleteExampleOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -3525,7 +3622,7 @@ public class ConversationV1Models {
   /**
    * The deleteIntent options.
    */
-  public class DeleteIntentOptions extends IBMWatsonGenericModel {
+  public class DeleteIntentOptions {
     private String workspace_id;
     private String intent;
     /**
@@ -3563,6 +3660,7 @@ public class ConversationV1Models {
     public DeleteIntentOptionsBuilder newBuilder() {
       return new DeleteIntentOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -3629,7 +3727,7 @@ public class ConversationV1Models {
   /**
    * The deleteSynonym options.
    */
-  public class DeleteSynonymOptions extends IBMWatsonGenericModel {
+  public class DeleteSynonymOptions {
     private String workspace_id;
     private String entity;
     private String value;
@@ -3693,6 +3791,7 @@ public class ConversationV1Models {
     public DeleteSynonymOptionsBuilder newBuilder() {
       return new DeleteSynonymOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -3789,7 +3888,7 @@ public class ConversationV1Models {
   /**
    * The deleteValue options.
    */
-  public class DeleteValueOptions extends IBMWatsonGenericModel {
+  public class DeleteValueOptions {
     private String workspace_id;
     private String entity;
     private String value;
@@ -3840,6 +3939,7 @@ public class ConversationV1Models {
     public DeleteValueOptionsBuilder newBuilder() {
       return new DeleteValueOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -3921,7 +4021,7 @@ public class ConversationV1Models {
   /**
    * The deleteWorkspace options.
    */
-  public class DeleteWorkspaceOptions extends IBMWatsonGenericModel {
+  public class DeleteWorkspaceOptions {
     private String workspace_id;
     /**
      * Gets the workspace_id.
@@ -3946,6 +4046,7 @@ public class ConversationV1Models {
     public DeleteWorkspaceOptionsBuilder newBuilder() {
       return new DeleteWorkspaceOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -4316,6 +4417,39 @@ public class ConversationV1Models {
     public void setVariable(final String variable) {
       this.variable = variable;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNode ret;
+      if (jsonString.equals('null')) {
+        ret = new DialogNode();
+      }
+      else {
+        ret = (DialogNode) JSON.deserialize(jsonString, DialogNode.class);
+      }
+
+      // calling custom deserializer for next_step
+      DialogNodeNextStep newNextStep = (DialogNodeNextStep) new DialogNodeNextStep().deserialize(JSON.serialize(ret.getNextStep()), (Map<String, Object>) jsonMap.get('next_step'));
+      ret.setNextStep(newNextStep);
+
+      // calling custom deserializer for actions
+      List<DialogNodeAction> newActions = new List<DialogNodeAction>();
+      List<DialogNodeAction> deserializedActions = ret.getActions();
+      if (deserializedActions != null) {
+        for (Integer i = 0; i < deserializedActions.size(); i++) {
+          DialogNodeAction currentItem = ret.getActions().get(i);
+          List<Object> actionsInMap = (List<Object>) jsonMap.get('actions');
+          DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(actionsInMap.get(i))));
+          newActions.add(newItem);
+        }
+        ret.setActions(newActions);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -4427,6 +4561,22 @@ public class ConversationV1Models {
     public void setCredentials(final String credentials) {
       this.credentials = credentials;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeAction ret;
+      if (jsonString.equals('null')) {
+        ret = new DialogNodeAction();
+      }
+      else {
+        ret = (DialogNodeAction) JSON.deserialize(jsonString, DialogNodeAction.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -4472,6 +4622,39 @@ public class ConversationV1Models {
      */
     public void setPagination(final Pagination pagination) {
       this.pagination = pagination;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeCollection ret;
+      if (jsonString.equals('null')) {
+        ret = new DialogNodeCollection();
+      }
+      else {
+        ret = (DialogNodeCollection) JSON.deserialize(jsonString, DialogNodeCollection.class);
+      }
+
+      // calling custom deserializer for dialog_nodes
+      List<DialogNode> newDialogNodes = new List<DialogNode>();
+      List<DialogNode> deserializedDialogNodes = ret.getDialogNodes();
+      if (deserializedDialogNodes != null) {
+        for (Integer i = 0; i < deserializedDialogNodes.size(); i++) {
+          DialogNode currentItem = ret.getDialogNodes().get(i);
+          List<Object> dialog_nodesInMap = (List<Object>) jsonMap.get('dialog_nodes');
+          DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(dialog_nodesInMap.get(i))));
+          newDialogNodes.add(newItem);
+        }
+        ret.setDialogNodes(newDialogNodes);
+      }
+
+      // calling custom deserializer for pagination
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'));
+      ret.setPagination(newPagination);
+
+      return ret;
     }
   }
 
@@ -4541,6 +4724,22 @@ public class ConversationV1Models {
      */
     public void setSelector(final String selector) {
       this.selector = selector;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeNextStep ret;
+      if (jsonString.equals('null')) {
+        ret = new DialogNodeNextStep();
+      }
+      else {
+        ret = (DialogNodeNextStep) JSON.deserialize(jsonString, DialogNodeNextStep.class);
+      }
+
+      return ret;
     }
   }
 
@@ -4656,6 +4855,22 @@ public class ConversationV1Models {
     public void setFuzzyMatch(final Boolean fuzzy_match) {
       this.fuzzy_match = fuzzy_match;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Entity ret;
+      if (jsonString.equals('null')) {
+        ret = new Entity();
+      }
+      else {
+        ret = (Entity) JSON.deserialize(jsonString, Entity.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -4703,6 +4918,39 @@ public class ConversationV1Models {
      */
     public void setPagination(final Pagination pagination) {
       this.pagination = pagination;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      EntityCollection ret;
+      if (jsonString.equals('null')) {
+        ret = new EntityCollection();
+      }
+      else {
+        ret = (EntityCollection) JSON.deserialize(jsonString, EntityCollection.class);
+      }
+
+      // calling custom deserializer for entities
+      List<EntityExport> newEntities = new List<EntityExport>();
+      List<EntityExport> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          EntityExport currentItem = ret.getEntities().get(i);
+          List<Object> entitiesInMap = (List<Object>) jsonMap.get('entities');
+          EntityExport newItem = (EntityExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(entitiesInMap.get(i))));
+          newEntities.add(newItem);
+        }
+        ret.setEntities(newEntities);
+      }
+
+      // calling custom deserializer for pagination
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'));
+      ret.setPagination(newPagination);
+
+      return ret;
     }
   }
 
@@ -4839,6 +5087,35 @@ public class ConversationV1Models {
     public void setValues(final List<ValueExport> values) {
       this.values = values;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      EntityExport ret;
+      if (jsonString.equals('null')) {
+        ret = new EntityExport();
+      }
+      else {
+        ret = (EntityExport) JSON.deserialize(jsonString, EntityExport.class);
+      }
+
+      // calling custom deserializer for values
+      List<ValueExport> newValues = new List<ValueExport>();
+      List<ValueExport> deserializedValues = ret.getValues();
+      if (deserializedValues != null) {
+        for (Integer i = 0; i < deserializedValues.size(); i++) {
+          ValueExport currentItem = ret.getValues().get(i);
+          List<Object> valuesInMap = (List<Object>) jsonMap.get('values');
+          ValueExport newItem = (ValueExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(valuesInMap.get(i))));
+          newValues.add(newItem);
+        }
+        ret.setValues(newValues);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -4890,6 +5167,22 @@ public class ConversationV1Models {
     public void setText(final String text) {
       this.text = text;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Example ret;
+      if (jsonString.equals('null')) {
+        ret = new Example();
+      }
+      else {
+        ret = (Example) JSON.deserialize(jsonString, Example.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -4938,12 +5231,45 @@ public class ConversationV1Models {
     public void setPagination(final Pagination pagination) {
       this.pagination = pagination;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ExampleCollection ret;
+      if (jsonString.equals('null')) {
+        ret = new ExampleCollection();
+      }
+      else {
+        ret = (ExampleCollection) JSON.deserialize(jsonString, ExampleCollection.class);
+      }
+
+      // calling custom deserializer for examples
+      List<Example> newExamples = new List<Example>();
+      List<Example> deserializedExamples = ret.getExamples();
+      if (deserializedExamples != null) {
+        for (Integer i = 0; i < deserializedExamples.size(); i++) {
+          Example currentItem = ret.getExamples().get(i);
+          List<Object> examplesInMap = (List<Object>) jsonMap.get('examples');
+          Example newItem = (Example) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(examplesInMap.get(i))));
+          newExamples.add(newItem);
+        }
+        ret.setExamples(newExamples);
+      }
+
+      // calling custom deserializer for pagination
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'));
+      ret.setPagination(newPagination);
+
+      return ret;
+    }
   }
 
   /**
    * The getCounterexample options.
    */
-  public class GetCounterexampleOptions extends IBMWatsonGenericModel {
+  public class GetCounterexampleOptions {
     private String workspace_id;
     private String text;
     /**
@@ -4981,6 +5307,7 @@ public class ConversationV1Models {
     public GetCounterexampleOptionsBuilder newBuilder() {
       return new GetCounterexampleOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -5047,7 +5374,7 @@ public class ConversationV1Models {
   /**
    * The getDialogNode options.
    */
-  public class GetDialogNodeOptions extends IBMWatsonGenericModel {
+  public class GetDialogNodeOptions {
     private String workspace_id;
     private String dialog_node;
     /**
@@ -5085,6 +5412,7 @@ public class ConversationV1Models {
     public GetDialogNodeOptionsBuilder newBuilder() {
       return new GetDialogNodeOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -5151,7 +5479,7 @@ public class ConversationV1Models {
   /**
    * The getEntity options.
    */
-  public class GetEntityOptions extends IBMWatsonGenericModel {
+  public class GetEntityOptions {
     private String workspace_id;
     private String entity;
     private Boolean export_serialized_name;
@@ -5201,6 +5529,7 @@ public class ConversationV1Models {
     public GetEntityOptionsBuilder newBuilder() {
       return new GetEntityOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -5280,7 +5609,7 @@ public class ConversationV1Models {
   /**
    * The getExample options.
    */
-  public class GetExampleOptions extends IBMWatsonGenericModel {
+  public class GetExampleOptions {
     private String workspace_id;
     private String intent;
     private String text;
@@ -5331,6 +5660,7 @@ public class ConversationV1Models {
     public GetExampleOptionsBuilder newBuilder() {
       return new GetExampleOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -5412,7 +5742,7 @@ public class ConversationV1Models {
   /**
    * The getIntent options.
    */
-  public class GetIntentOptions extends IBMWatsonGenericModel {
+  public class GetIntentOptions {
     private String workspace_id;
     private String intent;
     private Boolean export_serialized_name;
@@ -5462,6 +5792,7 @@ public class ConversationV1Models {
     public GetIntentOptionsBuilder newBuilder() {
       return new GetIntentOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -5541,7 +5872,7 @@ public class ConversationV1Models {
   /**
    * The getSynonym options.
    */
-  public class GetSynonymOptions extends IBMWatsonGenericModel {
+  public class GetSynonymOptions {
     private String workspace_id;
     private String entity;
     private String value;
@@ -5605,6 +5936,7 @@ public class ConversationV1Models {
     public GetSynonymOptionsBuilder newBuilder() {
       return new GetSynonymOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -5701,7 +6033,7 @@ public class ConversationV1Models {
   /**
    * The getValue options.
    */
-  public class GetValueOptions extends IBMWatsonGenericModel {
+  public class GetValueOptions {
     private String workspace_id;
     private String entity;
     private String value;
@@ -5764,6 +6096,7 @@ public class ConversationV1Models {
     public GetValueOptionsBuilder newBuilder() {
       return new GetValueOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -5858,7 +6191,7 @@ public class ConversationV1Models {
   /**
    * The getWorkspace options.
    */
-  public class GetWorkspaceOptions extends IBMWatsonGenericModel {
+  public class GetWorkspaceOptions {
     private String workspace_id;
     private Boolean export_serialized_name;
     /**
@@ -5895,6 +6228,7 @@ public class ConversationV1Models {
     public GetWorkspaceOptionsBuilder newBuilder() {
       return new GetWorkspaceOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -5959,7 +6293,7 @@ public class ConversationV1Models {
   /**
    * An object defining the user input.
    */
-  public class InputData extends IBMWatsonGenericModel {
+  public class InputData {
     private String text;
     /**
      * Gets the text.
@@ -5984,6 +6318,7 @@ public class ConversationV1Models {
     public InputDataBuilder newBuilder() {
       return new InputDataBuilder(this);
     }
+
   }
 
   /**
@@ -6102,6 +6437,22 @@ public class ConversationV1Models {
     public void setDescription(final String description) {
       this.description = description;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Intent ret;
+      if (jsonString.equals('null')) {
+        ret = new Intent();
+      }
+      else {
+        ret = (Intent) JSON.deserialize(jsonString, Intent.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -6149,6 +6500,39 @@ public class ConversationV1Models {
      */
     public void setPagination(final Pagination pagination) {
       this.pagination = pagination;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      IntentCollection ret;
+      if (jsonString.equals('null')) {
+        ret = new IntentCollection();
+      }
+      else {
+        ret = (IntentCollection) JSON.deserialize(jsonString, IntentCollection.class);
+      }
+
+      // calling custom deserializer for intents
+      List<IntentExport> newIntents = new List<IntentExport>();
+      List<IntentExport> deserializedIntents = ret.getIntents();
+      if (deserializedIntents != null) {
+        for (Integer i = 0; i < deserializedIntents.size(); i++) {
+          IntentExport currentItem = ret.getIntents().get(i);
+          List<Object> intentsInMap = (List<Object>) jsonMap.get('intents');
+          IntentExport newItem = (IntentExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(intentsInMap.get(i))));
+          newIntents.add(newItem);
+        }
+        ret.setIntents(newIntents);
+      }
+
+      // calling custom deserializer for pagination
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'));
+      ret.setPagination(newPagination);
+
+      return ret;
     }
   }
 
@@ -6243,12 +6627,41 @@ public class ConversationV1Models {
     public void setExamples(final List<Example> examples) {
       this.examples = examples;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      IntentExport ret;
+      if (jsonString.equals('null')) {
+        ret = new IntentExport();
+      }
+      else {
+        ret = (IntentExport) JSON.deserialize(jsonString, IntentExport.class);
+      }
+
+      // calling custom deserializer for examples
+      List<Example> newExamples = new List<Example>();
+      List<Example> deserializedExamples = ret.getExamples();
+      if (deserializedExamples != null) {
+        for (Integer i = 0; i < deserializedExamples.size(); i++) {
+          Example currentItem = ret.getExamples().get(i);
+          List<Object> examplesInMap = (List<Object>) jsonMap.get('examples');
+          Example newItem = (Example) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(examplesInMap.get(i))));
+          newExamples.add(newItem);
+        }
+        ret.setExamples(newExamples);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The listCounterexamples options.
    */
-  public class ListCounterexamplesOptions extends IBMWatsonGenericModel {
+  public class ListCounterexamplesOptions {
     private String workspace_id;
     private Long page_limit;
     private Boolean include_count;
@@ -6321,6 +6734,7 @@ public class ConversationV1Models {
     public ListCounterexamplesOptionsBuilder newBuilder() {
       return new ListCounterexamplesOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -6424,7 +6838,7 @@ public class ConversationV1Models {
   /**
    * The listDialogNodes options.
    */
-  public class ListDialogNodesOptions extends IBMWatsonGenericModel {
+  public class ListDialogNodesOptions {
     private String workspace_id;
     private Long page_limit;
     private Boolean include_count;
@@ -6497,6 +6911,7 @@ public class ConversationV1Models {
     public ListDialogNodesOptionsBuilder newBuilder() {
       return new ListDialogNodesOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -6600,7 +7015,7 @@ public class ConversationV1Models {
   /**
    * The listEntities options.
    */
-  public class ListEntitiesOptions extends IBMWatsonGenericModel {
+  public class ListEntitiesOptions {
     private String workspace_id;
     private Boolean export_serialized_name;
     private Long page_limit;
@@ -6685,6 +7100,7 @@ public class ConversationV1Models {
     public ListEntitiesOptionsBuilder newBuilder() {
       return new ListEntitiesOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -6801,7 +7217,7 @@ public class ConversationV1Models {
   /**
    * The listExamples options.
    */
-  public class ListExamplesOptions extends IBMWatsonGenericModel {
+  public class ListExamplesOptions {
     private String workspace_id;
     private String intent;
     private Long page_limit;
@@ -6887,6 +7303,7 @@ public class ConversationV1Models {
     public ListExamplesOptionsBuilder newBuilder() {
       return new ListExamplesOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -7005,7 +7422,7 @@ public class ConversationV1Models {
   /**
    * The listIntents options.
    */
-  public class ListIntentsOptions extends IBMWatsonGenericModel {
+  public class ListIntentsOptions {
     private String workspace_id;
     private Boolean export_serialized_name;
     private Long page_limit;
@@ -7090,6 +7507,7 @@ public class ConversationV1Models {
     public ListIntentsOptionsBuilder newBuilder() {
       return new ListIntentsOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -7206,7 +7624,7 @@ public class ConversationV1Models {
   /**
    * The listLogs options.
    */
-  public class ListLogsOptions extends IBMWatsonGenericModel {
+  public class ListLogsOptions {
     private String workspace_id;
     private String sort_serialized_name;
     private String filter;
@@ -7279,6 +7697,7 @@ public class ConversationV1Models {
     public ListLogsOptionsBuilder newBuilder() {
       return new ListLogsOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -7382,7 +7801,7 @@ public class ConversationV1Models {
   /**
    * The listSynonyms options.
    */
-  public class ListSynonymsOptions extends IBMWatsonGenericModel {
+  public class ListSynonymsOptions {
     private String workspace_id;
     private String entity;
     private String value;
@@ -7481,6 +7900,7 @@ public class ConversationV1Models {
     public ListSynonymsOptionsBuilder newBuilder() {
       return new ListSynonymsOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -7614,7 +8034,7 @@ public class ConversationV1Models {
   /**
    * The listValues options.
    */
-  public class ListValuesOptions extends IBMWatsonGenericModel {
+  public class ListValuesOptions {
     private String workspace_id;
     private String entity;
     private Boolean export_serialized_name;
@@ -7712,6 +8132,7 @@ public class ConversationV1Models {
     public ListValuesOptionsBuilder newBuilder() {
       return new ListValuesOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -7843,7 +8264,7 @@ public class ConversationV1Models {
   /**
    * The listWorkspaces options.
    */
-  public class ListWorkspacesOptions extends IBMWatsonGenericModel {
+  public class ListWorkspacesOptions {
     private Long page_limit;
     private Boolean include_count;
     private String sort_serialized_name;
@@ -7903,6 +8324,7 @@ public class ConversationV1Models {
     public ListWorkspacesOptionsBuilder newBuilder() {
       return new ListWorkspacesOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -8026,6 +8448,39 @@ public class ConversationV1Models {
      */
     public void setPagination(final LogPagination pagination) {
       this.pagination = pagination;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      LogCollection ret;
+      if (jsonString.equals('null')) {
+        ret = new LogCollection();
+      }
+      else {
+        ret = (LogCollection) JSON.deserialize(jsonString, LogCollection.class);
+      }
+
+      // calling custom deserializer for logs
+      List<LogExport> newLogs = new List<LogExport>();
+      List<LogExport> deserializedLogs = ret.getLogs();
+      if (deserializedLogs != null) {
+        for (Integer i = 0; i < deserializedLogs.size(); i++) {
+          LogExport currentItem = ret.getLogs().get(i);
+          List<Object> logsInMap = (List<Object>) jsonMap.get('logs');
+          LogExport newItem = (LogExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(logsInMap.get(i))));
+          newLogs.add(newItem);
+        }
+        ret.setLogs(newLogs);
+      }
+
+      // calling custom deserializer for pagination
+      LogPagination newPagination = (LogPagination) new LogPagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'));
+      ret.setPagination(newPagination);
+
+      return ret;
     }
   }
 
@@ -8180,12 +8635,38 @@ public class ConversationV1Models {
     public void setLanguage(final String language) {
       this.language = language;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      LogExport ret;
+      if (jsonString.equals('null')) {
+        ret = new LogExport();
+      }
+      else {
+        ret = (LogExport) JSON.deserialize(jsonString, LogExport.class);
+      }
+
+      // calling custom deserializer for request
+      MessageRequest newRequest = (MessageRequest) new MessageRequest().deserialize(JSON.serialize(ret.getRequest()), (Map<String, Object>) jsonMap.get('request'));
+      ret.setRequest(newRequest);
+
+      // calling custom deserializer for response
+      MessageResponse newResponse = (MessageResponse) new MessageResponse().deserialize(JSON.serialize(ret.getResponse()), (Map<String, Object>) jsonMap.get('response'));
+      ret.setResponse(newResponse);
+
+      return ret;
+    }
   }
 
   /**
    * Log message details.
    */
   public class LogMessage extends IBMWatsonDynamicModel {
+    private String level;
+    private String msg;
 
     /**
      * Gets the level.
@@ -8194,7 +8675,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public String getLevel() {
-      return (String)JSON.deserialize(JSON.serialize(this.get('level')), String.class);
+      return level;
     }
 
     /**
@@ -8204,7 +8685,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public String getMsg() {
-      return (String)JSON.deserialize(JSON.serialize(this.get('msg')), String.class);
+      return msg;
     }
 
     /**
@@ -8213,7 +8694,7 @@ public class ConversationV1Models {
      * @param level the new level
      */
     public void setLevel(final String level) {
-      this.put('level', level);
+      this.level = level;
     }
 
     /**
@@ -8222,7 +8703,31 @@ public class ConversationV1Models {
      * @param msg the new msg
      */
     public void setMsg(final String msg) {
-      this.put('msg', msg);
+      this.msg = msg;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      LogMessage ret;
+      if (jsonString.equals('null')) {
+        ret = new LogMessage();
+      }
+      else {
+        ret = (LogMessage) JSON.deserialize(jsonString, LogMessage.class);
+      }
+
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+          ret.put(key, jsonMap.get(key));
+        }
+      }
+
+      return ret;
     }
   }
 
@@ -8272,6 +8777,22 @@ public class ConversationV1Models {
     public void setMatched(final long matched) {
       this.matched = matched;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      LogPagination ret;
+      if (jsonString.equals('null')) {
+        ret = new LogPagination();
+      }
+      else {
+        ret = (LogPagination) JSON.deserialize(jsonString, LogPagination.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -8299,12 +8820,28 @@ public class ConversationV1Models {
     public void setText(final String text) {
       this.text = text;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      MessageInput ret;
+      if (jsonString.equals('null')) {
+        ret = new MessageInput();
+      }
+      else {
+        ret = (MessageInput) JSON.deserialize(jsonString, MessageInput.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The message options.
    */
-  public class MessageOptions extends IBMWatsonGenericModel {
+  public class MessageOptions {
     private String workspace_id;
     private InputData input;
     private Boolean alternate_intents;
@@ -8401,6 +8938,7 @@ public class ConversationV1Models {
     public MessageOptionsBuilder newBuilder() {
       return new MessageOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -8689,12 +9227,68 @@ public class ConversationV1Models {
     public void setOutput(final OutputData output) {
       this.output = output;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      MessageRequest ret;
+      if (jsonString.equals('null')) {
+        ret = new MessageRequest();
+      }
+      else {
+        ret = (MessageRequest) JSON.deserialize(jsonString, MessageRequest.class);
+      }
+
+      // calling custom deserializer for context
+      Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context'));
+      ret.setContext(newContext);
+
+      // calling custom deserializer for entities
+      List<RuntimeEntity> newEntities = new List<RuntimeEntity>();
+      List<RuntimeEntity> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          RuntimeEntity currentItem = ret.getEntities().get(i);
+          List<Object> entitiesInMap = (List<Object>) jsonMap.get('entities');
+          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(entitiesInMap.get(i))));
+          newEntities.add(newItem);
+        }
+        ret.setEntities(newEntities);
+      }
+
+      // calling custom deserializer for intents
+      List<RuntimeIntent> newIntents = new List<RuntimeIntent>();
+      List<RuntimeIntent> deserializedIntents = ret.getIntents();
+      if (deserializedIntents != null) {
+        for (Integer i = 0; i < deserializedIntents.size(); i++) {
+          RuntimeIntent currentItem = ret.getIntents().get(i);
+          List<Object> intentsInMap = (List<Object>) jsonMap.get('intents');
+          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(intentsInMap.get(i))));
+          newIntents.add(newItem);
+        }
+        ret.setIntents(newIntents);
+      }
+
+      // calling custom deserializer for output
+      OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output'));
+      ret.setOutput(newOutput);
+
+      return ret;
+    }
   }
 
   /**
    * A response from the Conversation service.
    */
   public class MessageResponse extends IBMWatsonDynamicModel {
+    private MessageInput input;
+    private List<RuntimeIntent> intents;
+    private List<RuntimeEntity> entities;
+    private Boolean alternate_intents;
+    private Context context;
+    private OutputData output;
 
     /**
      * Gets the input.
@@ -8703,7 +9297,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public MessageInput getInput() {
-      return (MessageInput)JSON.deserialize(JSON.serialize(this.get('input')), MessageInput.class);
+      return input;
     }
 
     /**
@@ -8713,7 +9307,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public List<RuntimeIntent> getIntents() {
-      return (List<RuntimeIntent>)JSON.deserialize(JSON.serialize(this.get('intents')), List<RuntimeIntent>.class);
+      return intents;
     }
 
     /**
@@ -8723,7 +9317,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public List<RuntimeEntity> getEntities() {
-      return (List<RuntimeEntity>)JSON.deserialize(JSON.serialize(this.get('entities')), List<RuntimeEntity>.class);
+      return entities;
     }
 
     /**
@@ -8733,7 +9327,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public Boolean getAlternateIntents() {
-      return (Boolean)JSON.deserialize(JSON.serialize(this.get('alternate_intents')), Boolean.class);
+      return alternate_intents;
     }
 
     /**
@@ -8743,7 +9337,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public Context getContext() {
-      return (Context)JSON.deserialize(JSON.serialize(this.get('context')), Context.class);
+      return context;
     }
 
     /**
@@ -8753,7 +9347,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public OutputData getOutput() {
-      return (OutputData)JSON.deserialize(JSON.serialize(this.get('output')), OutputData.class);
+      return output;
     }
 
     /**
@@ -8762,7 +9356,7 @@ public class ConversationV1Models {
      * @param input the new input
      */
     public void setInput(final MessageInput input) {
-      this.put('input', input);
+      this.input = input;
     }
 
     /**
@@ -8771,7 +9365,7 @@ public class ConversationV1Models {
      * @param intents the new intents
      */
     public void setIntents(final List<RuntimeIntent> intents) {
-      this.put('intents', intents);
+      this.intents = intents;
     }
 
     /**
@@ -8780,7 +9374,7 @@ public class ConversationV1Models {
      * @param entities the new entities
      */
     public void setEntities(final List<RuntimeEntity> entities) {
-      this.put('entities', entities);
+      this.entities = entities;
     }
 
     /**
@@ -8789,7 +9383,7 @@ public class ConversationV1Models {
      * @param alternate_intents the new alternate_intents
      */
     public void setAlternateIntents(final Boolean alternate_intents) {
-      this.put('alternate_intents', alternate_intents);
+      this.alternate_intents = alternate_intents;
     }
 
     /**
@@ -8798,7 +9392,7 @@ public class ConversationV1Models {
      * @param context the new context
      */
     public void setContext(final Context context) {
-      this.put('context', context);
+      this.context = context;
     }
 
     /**
@@ -8807,7 +9401,69 @@ public class ConversationV1Models {
      * @param output the new output
      */
     public void setOutput(final OutputData output) {
-      this.put('output', output);
+      this.output = output;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      MessageResponse ret;
+      if (jsonString.equals('null')) {
+        ret = new MessageResponse();
+      }
+      else {
+        ret = (MessageResponse) JSON.deserialize(jsonString, MessageResponse.class);
+      }
+
+      // calling custom deserializer for input
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input'));
+      ret.setInput(newInput);
+
+      // calling custom deserializer for intents
+      List<RuntimeIntent> newIntents = new List<RuntimeIntent>();
+      List<RuntimeIntent> deserializedIntents = ret.getIntents();
+      if (deserializedIntents != null) {
+        for (Integer i = 0; i < deserializedIntents.size(); i++) {
+          RuntimeIntent currentItem = ret.getIntents().get(i);
+          List<Object> intentsInMap = (List<Object>) jsonMap.get('intents');
+          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(intentsInMap.get(i))));
+          newIntents.add(newItem);
+        }
+        ret.setIntents(newIntents);
+      }
+
+      // calling custom deserializer for entities
+      List<RuntimeEntity> newEntities = new List<RuntimeEntity>();
+      List<RuntimeEntity> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          RuntimeEntity currentItem = ret.getEntities().get(i);
+          List<Object> entitiesInMap = (List<Object>) jsonMap.get('entities');
+          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(entitiesInMap.get(i))));
+          newEntities.add(newItem);
+        }
+        ret.setEntities(newEntities);
+      }
+
+      // calling custom deserializer for context
+      Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context'));
+      ret.setContext(newContext);
+
+      // calling custom deserializer for output
+      OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output'));
+      ret.setOutput(newOutput);
+
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+          ret.put(key, jsonMap.get(key));
+        }
+      }
+
+      return ret;
     }
   }
 
@@ -8815,6 +9471,9 @@ public class ConversationV1Models {
    * An output object that includes the response to the user, the nodes that were hit, and messages from the log.
    */
   public class OutputData extends IBMWatsonDynamicModel {
+    private List<LogMessage> log_messages;
+    private List<String> text;
+    private List<String> nodes_visited;
 
     /**
      * Gets the log_messages.
@@ -8823,7 +9482,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public List<LogMessage> getLogMessages() {
-      return (List<LogMessage>)JSON.deserialize(JSON.serialize(this.get('log_messages')), List<LogMessage>.class);
+      return log_messages;
     }
 
     /**
@@ -8833,7 +9492,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public List<String> getText() {
-      return (List<String>)JSON.deserialize(JSON.serialize(this.get('text')), List<String>.class);
+      return text;
     }
 
     /**
@@ -8843,7 +9502,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public List<String> getNodesVisited() {
-      return (List<String>)JSON.deserialize(JSON.serialize(this.get('nodes_visited')), List<String>.class);
+      return nodes_visited;
     }
 
     /**
@@ -8852,7 +9511,7 @@ public class ConversationV1Models {
      * @param log_messages the new log_messages
      */
     public void setLogMessages(final List<LogMessage> log_messages) {
-      this.put('log_messages', log_messages);
+      this.log_messages = log_messages;
     }
 
     /**
@@ -8861,7 +9520,7 @@ public class ConversationV1Models {
      * @param text the new text
      */
     public void setText(final List<String> text) {
-      this.put('text', text);
+      this.text = text;
     }
 
     /**
@@ -8870,7 +9529,44 @@ public class ConversationV1Models {
      * @param nodes_visited the new nodes_visited
      */
     public void setNodesVisited(final List<String> nodes_visited) {
-      this.put('nodes_visited', nodes_visited);
+      this.nodes_visited = nodes_visited;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      OutputData ret;
+      if (jsonString.equals('null')) {
+        ret = new OutputData();
+      }
+      else {
+        ret = (OutputData) JSON.deserialize(jsonString, OutputData.class);
+      }
+
+      // calling custom deserializer for log_messages
+      List<LogMessage> newLogMessages = new List<LogMessage>();
+      List<LogMessage> deserializedLogMessages = ret.getLogMessages();
+      if (deserializedLogMessages != null) {
+        for (Integer i = 0; i < deserializedLogMessages.size(); i++) {
+          LogMessage currentItem = ret.getLogMessages().get(i);
+          List<Object> log_messagesInMap = (List<Object>) jsonMap.get('log_messages');
+          LogMessage newItem = (LogMessage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(log_messagesInMap.get(i))));
+          newLogMessages.add(newItem);
+        }
+        ret.setLogMessages(newLogMessages);
+      }
+
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+          ret.put(key, jsonMap.get(key));
+        }
+      }
+
+      return ret;
     }
   }
 
@@ -8962,12 +9658,33 @@ public class ConversationV1Models {
     public void setMatched(final long matched) {
       this.matched = matched;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Pagination ret;
+      if (jsonString.equals('null')) {
+        ret = new Pagination();
+      }
+      else {
+        ret = (Pagination) JSON.deserialize(jsonString, Pagination.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
    * A term from the request that was identified as an entity.
    */
   public class RuntimeEntity extends IBMWatsonDynamicModel {
+    private String entity;
+    private List<Long> location;
+    private String value;
+    private Double confidence;
+    private Map<String, String> metadata;
 
     /**
      * Gets the entity.
@@ -8976,7 +9693,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public String getEntity() {
-      return (String)JSON.deserialize(JSON.serialize(this.get('entity')), String.class);
+      return entity;
     }
 
     /**
@@ -8986,7 +9703,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public List<Long> getLocation() {
-      return (List<Long>)JSON.deserialize(JSON.serialize(this.get('location')), List<Long>.class);
+      return location;
     }
 
     /**
@@ -8996,7 +9713,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public String getValue() {
-      return (String)JSON.deserialize(JSON.serialize(this.get('value')), String.class);
+      return value;
     }
 
     /**
@@ -9006,7 +9723,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public Double getConfidence() {
-      return (Double)JSON.deserialize(JSON.serialize(this.get('confidence')), Double.class);
+      return confidence;
     }
 
     /**
@@ -9016,7 +9733,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public Map<String, String> getMetadata() {
-      return (Map<String, String>)JSON.deserialize(JSON.serialize(this.get('metadata')), Map<String, String>.class);
+      return metadata;
     }
 
     /**
@@ -9025,7 +9742,7 @@ public class ConversationV1Models {
      * @param entity the new entity
      */
     public void setEntity(final String entity) {
-      this.put('entity', entity);
+      this.entity = entity;
     }
 
     /**
@@ -9034,7 +9751,7 @@ public class ConversationV1Models {
      * @param location the new location
      */
     public void setLocation(final List<Long> location) {
-      this.put('location', location);
+      this.location = location;
     }
 
     /**
@@ -9043,7 +9760,7 @@ public class ConversationV1Models {
      * @param value the new value
      */
     public void setValue(final String value) {
-      this.put('value', value);
+      this.value = value;
     }
 
     /**
@@ -9052,7 +9769,7 @@ public class ConversationV1Models {
      * @param confidence the new confidence
      */
     public void setConfidence(final Double confidence) {
-      this.put('confidence', confidence);
+      this.confidence = confidence;
     }
 
     /**
@@ -9061,7 +9778,31 @@ public class ConversationV1Models {
      * @param metadata the new metadata
      */
     public void setMetadata(final Map<String, String> metadata) {
-      this.put('metadata', metadata);
+      this.metadata = metadata;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      RuntimeEntity ret;
+      if (jsonString.equals('null')) {
+        ret = new RuntimeEntity();
+      }
+      else {
+        ret = (RuntimeEntity) JSON.deserialize(jsonString, RuntimeEntity.class);
+      }
+
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+          ret.put(key, jsonMap.get(key));
+        }
+      }
+
+      return ret;
     }
   }
 
@@ -9069,6 +9810,8 @@ public class ConversationV1Models {
    * An intent identified in the user input.
    */
   public class RuntimeIntent extends IBMWatsonDynamicModel {
+    private String intent;
+    private Double confidence;
 
     /**
      * Gets the intent.
@@ -9077,7 +9820,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public String getIntent() {
-      return (String)JSON.deserialize(JSON.serialize(this.get('intent')), String.class);
+      return intent;
     }
 
     /**
@@ -9087,7 +9830,7 @@ public class ConversationV1Models {
      */
     @AuraEnabled
     public Double getConfidence() {
-      return (Double)JSON.deserialize(JSON.serialize(this.get('confidence')), Double.class);
+      return confidence;
     }
 
     /**
@@ -9096,7 +9839,7 @@ public class ConversationV1Models {
      * @param intent the new intent
      */
     public void setIntent(final String intent) {
-      this.put('intent', intent);
+      this.intent = intent;
     }
 
     /**
@@ -9105,7 +9848,31 @@ public class ConversationV1Models {
      * @param confidence the new confidence
      */
     public void setConfidence(final Double confidence) {
-      this.put('confidence', confidence);
+      this.confidence = confidence;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      RuntimeIntent ret;
+      if (jsonString.equals('null')) {
+        ret = new RuntimeIntent();
+      }
+      else {
+        ret = (RuntimeIntent) JSON.deserialize(jsonString, RuntimeIntent.class);
+      }
+
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+          ret.put(key, jsonMap.get(key));
+        }
+      }
+
+      return ret;
     }
   }
 
@@ -9158,6 +9925,22 @@ public class ConversationV1Models {
     public void setSynonym(final String synonym) {
       this.synonym = synonym;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Synonym ret;
+      if (jsonString.equals('null')) {
+        ret = new Synonym();
+      }
+      else {
+        ret = (Synonym) JSON.deserialize(jsonString, Synonym.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -9206,18 +9989,75 @@ public class ConversationV1Models {
     public void setPagination(final Pagination pagination) {
       this.pagination = pagination;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SynonymCollection ret;
+      if (jsonString.equals('null')) {
+        ret = new SynonymCollection();
+      }
+      else {
+        ret = (SynonymCollection) JSON.deserialize(jsonString, SynonymCollection.class);
+      }
+
+      // calling custom deserializer for synonyms
+      List<Synonym> newSynonyms = new List<Synonym>();
+      List<Synonym> deserializedSynonyms = ret.getSynonyms();
+      if (deserializedSynonyms != null) {
+        for (Integer i = 0; i < deserializedSynonyms.size(); i++) {
+          Synonym currentItem = ret.getSynonyms().get(i);
+          List<Object> synonymsInMap = (List<Object>) jsonMap.get('synonyms');
+          Synonym newItem = (Synonym) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(synonymsInMap.get(i))));
+          newSynonyms.add(newItem);
+        }
+        ret.setSynonyms(newSynonyms);
+      }
+
+      // calling custom deserializer for pagination
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'));
+      ret.setPagination(newPagination);
+
+      return ret;
+    }
   }
 
   /**
    * For internal use only.
    */
   public class SystemResponse extends IBMWatsonDynamicModel {
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SystemResponse ret;
+      if (jsonString.equals('null')) {
+        ret = new SystemResponse();
+      }
+      else {
+        ret = (SystemResponse) JSON.deserialize(jsonString, SystemResponse.class);
+      }
+
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+          ret.put(key, jsonMap.get(key));
+        }
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The updateCounterexample options.
    */
-  public class UpdateCounterexampleOptions extends IBMWatsonGenericModel {
+  public class UpdateCounterexampleOptions {
     private String workspace_id;
     private String text;
     private String new_text;
@@ -9267,6 +10107,7 @@ public class ConversationV1Models {
     public UpdateCounterexampleOptionsBuilder newBuilder() {
       return new UpdateCounterexampleOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -9346,7 +10187,7 @@ public class ConversationV1Models {
   /**
    * The UpdateDialogNode options.
    */
-  public class UpdateDialogNodeOptions extends IBMWatsonGenericModel {
+  public class UpdateDialogNodeOptions {
     private String workspace_id;
     private String dialog_node;
     private String new_type;
@@ -9553,6 +10394,7 @@ public class ConversationV1Models {
     public UpdateDialogNodeOptionsBuilder newBuilder() {
       return new UpdateDialogNodeOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -9819,7 +10661,7 @@ public class ConversationV1Models {
   /**
    * The updateEntity options.
    */
-  public class UpdateEntityOptions extends IBMWatsonGenericModel {
+  public class UpdateEntityOptions {
     private String workspace_id;
     private String entity;
     private Boolean new_fuzzy_match;
@@ -9917,6 +10759,7 @@ public class ConversationV1Models {
     public UpdateEntityOptionsBuilder newBuilder() {
       return new UpdateEntityOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -10064,7 +10907,7 @@ public class ConversationV1Models {
   /**
    * The updateExample options.
    */
-  public class UpdateExampleOptions extends IBMWatsonGenericModel {
+  public class UpdateExampleOptions {
     private String workspace_id;
     private String intent;
     private String text;
@@ -10127,6 +10970,7 @@ public class ConversationV1Models {
     public UpdateExampleOptionsBuilder newBuilder() {
       return new UpdateExampleOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -10221,7 +11065,7 @@ public class ConversationV1Models {
   /**
    * The updateIntent options.
    */
-  public class UpdateIntentOptions extends IBMWatsonGenericModel {
+  public class UpdateIntentOptions {
     private String workspace_id;
     private String intent;
     private String new_intent;
@@ -10295,6 +11139,7 @@ public class ConversationV1Models {
     public UpdateIntentOptionsBuilder newBuilder() {
       return new UpdateIntentOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -10416,7 +11261,7 @@ public class ConversationV1Models {
   /**
    * The updateSynonym options.
    */
-  public class UpdateSynonymOptions extends IBMWatsonGenericModel {
+  public class UpdateSynonymOptions {
     private String workspace_id;
     private String entity;
     private String value;
@@ -10492,6 +11337,7 @@ public class ConversationV1Models {
     public UpdateSynonymOptionsBuilder newBuilder() {
       return new UpdateSynonymOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -10601,7 +11447,7 @@ public class ConversationV1Models {
   /**
    * The updateValue options.
    */
-  public class UpdateValueOptions extends IBMWatsonGenericModel {
+  public class UpdateValueOptions {
     private String workspace_id;
     private String entity;
     private String value;
@@ -10712,6 +11558,7 @@ public class ConversationV1Models {
     public UpdateValueOptionsBuilder newBuilder() {
       return new UpdateValueOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -10890,7 +11737,7 @@ public class ConversationV1Models {
   /**
    * The updateWorkspace options.
    */
-  public class UpdateWorkspaceOptions extends IBMWatsonGenericModel {
+  public class UpdateWorkspaceOptions {
     private String workspace_id;
     private String name;
     private String description;
@@ -11023,6 +11870,7 @@ public class ConversationV1Models {
     public UpdateWorkspaceOptionsBuilder newBuilder() {
       return new UpdateWorkspaceOptionsBuilder(this);
     }
+
   }
 
   /**
@@ -11385,6 +12233,22 @@ public class ConversationV1Models {
     public void setType(final String type_serialized_name) {
       this.type_serialized_name = type_serialized_name;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Value ret;
+      if (jsonString.equals('null')) {
+        ret = new Value();
+      }
+      else {
+        ret = (Value) JSON.deserialize(jsonString, Value.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -11432,6 +12296,39 @@ public class ConversationV1Models {
      */
     public void setPagination(final Pagination pagination) {
       this.pagination = pagination;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ValueCollection ret;
+      if (jsonString.equals('null')) {
+        ret = new ValueCollection();
+      }
+      else {
+        ret = (ValueCollection) JSON.deserialize(jsonString, ValueCollection.class);
+      }
+
+      // calling custom deserializer for values
+      List<ValueExport> newValues = new List<ValueExport>();
+      List<ValueExport> deserializedValues = ret.getValues();
+      if (deserializedValues != null) {
+        for (Integer i = 0; i < deserializedValues.size(); i++) {
+          ValueExport currentItem = ret.getValues().get(i);
+          List<Object> valuesInMap = (List<Object>) jsonMap.get('values');
+          ValueExport newItem = (ValueExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(valuesInMap.get(i))));
+          newValues.add(newItem);
+        }
+        ret.setValues(newValues);
+      }
+
+      // calling custom deserializer for pagination
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'));
+      ret.setPagination(newPagination);
+
+      return ret;
     }
   }
 
@@ -11567,6 +12464,22 @@ public class ConversationV1Models {
      */
     public void setType(final String type_serialized_name) {
       this.type_serialized_name = type_serialized_name;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ValueExport ret;
+      if (jsonString.equals('null')) {
+        ret = new ValueExport();
+      }
+      else {
+        ret = (ValueExport) JSON.deserialize(jsonString, ValueExport.class);
+      }
+
+      return ret;
     }
   }
 
@@ -11715,6 +12628,22 @@ public class ConversationV1Models {
     public void setLearningOptOut(final Boolean learning_opt_out) {
       this.learning_opt_out = learning_opt_out;
     }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Workspace ret;
+      if (jsonString.equals('null')) {
+        ret = new Workspace();
+      }
+      else {
+        ret = (Workspace) JSON.deserialize(jsonString, Workspace.class);
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -11762,6 +12691,39 @@ public class ConversationV1Models {
      */
     public void setPagination(final Pagination pagination) {
       this.pagination = pagination;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WorkspaceCollection ret;
+      if (jsonString.equals('null')) {
+        ret = new WorkspaceCollection();
+      }
+      else {
+        ret = (WorkspaceCollection) JSON.deserialize(jsonString, WorkspaceCollection.class);
+      }
+
+      // calling custom deserializer for workspaces
+      List<Workspace> newWorkspaces = new List<Workspace>();
+      List<Workspace> deserializedWorkspaces = ret.getWorkspaces();
+      if (deserializedWorkspaces != null) {
+        for (Integer i = 0; i < deserializedWorkspaces.size(); i++) {
+          Workspace currentItem = ret.getWorkspaces().get(i);
+          List<Object> workspacesInMap = (List<Object>) jsonMap.get('workspaces');
+          Workspace newItem = (Workspace) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(workspacesInMap.get(i))));
+          newWorkspaces.add(newItem);
+        }
+        ret.setWorkspaces(newWorkspaces);
+      }
+
+      // calling custom deserializer for pagination
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination'));
+      ret.setPagination(newPagination);
+
+      return ret;
     }
   }
 
@@ -12014,6 +12976,74 @@ public class ConversationV1Models {
      */
     public void setDialogNodes(final List<DialogNode> dialog_nodes) {
       this.dialog_nodes = dialog_nodes;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WorkspaceExport ret;
+      if (jsonString.equals('null')) {
+        ret = new WorkspaceExport();
+      }
+      else {
+        ret = (WorkspaceExport) JSON.deserialize(jsonString, WorkspaceExport.class);
+      }
+
+      // calling custom deserializer for intents
+      List<IntentExport> newIntents = new List<IntentExport>();
+      List<IntentExport> deserializedIntents = ret.getIntents();
+      if (deserializedIntents != null) {
+        for (Integer i = 0; i < deserializedIntents.size(); i++) {
+          IntentExport currentItem = ret.getIntents().get(i);
+          List<Object> intentsInMap = (List<Object>) jsonMap.get('intents');
+          IntentExport newItem = (IntentExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(intentsInMap.get(i))));
+          newIntents.add(newItem);
+        }
+        ret.setIntents(newIntents);
+      }
+
+      // calling custom deserializer for entities
+      List<EntityExport> newEntities = new List<EntityExport>();
+      List<EntityExport> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          EntityExport currentItem = ret.getEntities().get(i);
+          List<Object> entitiesInMap = (List<Object>) jsonMap.get('entities');
+          EntityExport newItem = (EntityExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(entitiesInMap.get(i))));
+          newEntities.add(newItem);
+        }
+        ret.setEntities(newEntities);
+      }
+
+      // calling custom deserializer for counterexamples
+      List<Counterexample> newCounterexamples = new List<Counterexample>();
+      List<Counterexample> deserializedCounterexamples = ret.getCounterexamples();
+      if (deserializedCounterexamples != null) {
+        for (Integer i = 0; i < deserializedCounterexamples.size(); i++) {
+          Counterexample currentItem = ret.getCounterexamples().get(i);
+          List<Object> counterexamplesInMap = (List<Object>) jsonMap.get('counterexamples');
+          Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(counterexamplesInMap.get(i))));
+          newCounterexamples.add(newItem);
+        }
+        ret.setCounterexamples(newCounterexamples);
+      }
+
+      // calling custom deserializer for dialog_nodes
+      List<DialogNode> newDialogNodes = new List<DialogNode>();
+      List<DialogNode> deserializedDialogNodes = ret.getDialogNodes();
+      if (deserializedDialogNodes != null) {
+        for (Integer i = 0; i < deserializedDialogNodes.size(); i++) {
+          DialogNode currentItem = ret.getDialogNodes().get(i);
+          List<Object> dialog_nodesInMap = (List<Object>) jsonMap.get('dialog_nodes');
+          DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(dialog_nodesInMap.get(i))));
+          newDialogNodes.add(newItem);
+        }
+        ret.setDialogNodes(newDialogNodes);
+      }
+
+      return ret;
     }
   }
 

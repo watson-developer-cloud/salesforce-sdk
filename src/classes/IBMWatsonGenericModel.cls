@@ -6,4 +6,6 @@ public abstract class IBMWatsonGenericModel {
   public override String toString() {
     return JSON.serializePretty(this);
   }
+
+  public abstract Object deserialize(String jsonString, Map<String, Object> jsonMap);
 }

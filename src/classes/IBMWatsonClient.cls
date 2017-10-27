@@ -5,16 +5,16 @@ public class IBMWatsonClient {
   }
   
   public class RestClient {
-    
+  	
     HttpRequest request;
   
     public RestClient (IBMWatsonRequest wreq) {
       request = buildHttpRequest(wreq);
     }
-  
+	
     public IBMWatsonResponse sendMessage(){
       if( request == null){
-      // throw empty request exception
+	    // throw empty request exception
       }
       Http http = new Http();
       HTTPResponse http_res = http.send(request);
@@ -22,12 +22,13 @@ public class IBMWatsonClient {
       watson_developercloud_response.setcontentType (http_res.getHeader('Content-Type'));
       return watson_developercloud_response;
     }
-  
+	
     public HttpRequest buildHttpRequest(  IBMWatsonRequest wreq  ){
       HttpRequest req = new HttpRequest();
       for(String name: wreq.getAllHeaders().keySet() ){
         req.setHeader(name, wreq.getAllHeaders().get(name));
       }
+
       if( !String.isBlank(wreq.getMethod()) && wreq.getMethod().equalsIgnoreCase('POST')) {
       	if( wreq.getBody() instanceOf IBMWatsonMultipartBody ){
       	  //form-multipart post as base64 request

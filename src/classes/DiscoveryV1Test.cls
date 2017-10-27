@@ -505,11 +505,11 @@ private class DiscoveryV1Test {
     system.assertEquals(resp.getDocumentCounts().getFailed(),0);
     system.assertEquals(resp.getDiskUsage().getUsedBytes(),260);
     system.assertEquals(resp.getTrainingStatus().getTotalExamples(),0);
-    system.assertEquals(resp.getTrainingStatus().isAvailable(),false);
-    system.assertEquals(resp.getTrainingStatus().isProcessing(),false);
-    system.assertEquals(resp.getTrainingStatus().isMinimumQueriesAdded(),false);
-    system.assertEquals(resp.getTrainingStatus().isMinimumExamplesAdded(),false);
-    system.assertEquals(resp.getTrainingStatus().isSufficientLabelDiversity(),false);
+    system.assertEquals(resp.getTrainingStatus().getAvailable(),false);
+    system.assertEquals(resp.getTrainingStatus().getProcessing(),false);
+    system.assertEquals(resp.getTrainingStatus().getMinimumQueriesAdded(),false);
+    system.assertEquals(resp.getTrainingStatus().getMinimumExamplesAdded(),false);
+    system.assertEquals(resp.getTrainingStatus().getSufficientLabelDiversity(),false);
     system.assertEquals(resp.getTrainingStatus().getNotices(),0);
     system.assertEquals(resp.getTrainingStatus().getSuccessfullyTrained(),null);
     system.assertEquals(resp.getTrainingStatus().getDataUpdated(),null);
