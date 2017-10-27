@@ -13,7 +13,7 @@ public abstract class IBMWatsonDynamicModel {
     if (additional_properties == null) {
       additional_properties = new Map<String, Object>();
     }
-    return additional_properties.get(key);
+    return additional_properties.get(key + '_serialized_name');
   }
 
   public void put(String key, Object val) {

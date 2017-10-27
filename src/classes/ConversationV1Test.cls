@@ -84,7 +84,7 @@ private class ConversationV1Test {
     workspaceDescription = 'Description of ' + workspaceName;
     workspaceLanguage = 'en';
     workspaceId = '123456789';
-    metadata = new Map<String, String> { 'code' => 'test_code' };
+    metadata = new Map<String, String> { 'code_serialized_name' => 'test_code' };
     timeCreated = '"2015-12-06T23:53:59.153Z"';
     timeUpdated = '"2017-10-18T15:44:56.800"';
     learningOptOut = false;
@@ -122,14 +122,14 @@ private class ConversationV1Test {
     dialogNodeConditions = '#test';
     dialogNodeParent = 'parent';
     dialogNodePreviousSibling = 'sibling';
-    dialogNodeOutput = new Map<String, String> { 'text' => 'output text' };
-    dialogNodeContext = new Map<String, String> { 'context' => 'context_val' };
+    dialogNodeOutput = new Map<String, String> { 'text_serialized_name' => 'output text' };
+    dialogNodeContext = new Map<String, String> { 'context_serialized_name' => 'context_val' };
     nextStepBehavior = 'behavior';
     nextStepDialogNode = 'next_dialog_node';
     nextStepSelector = 'body';
     actionName = 'action';
     actionType = 'server';
-    actionParameters = new Map<String, String> { 'param_1' => 'param_1_val' };
+    actionParameters = new Map<String, String> { 'param_1_serialized_name' => 'param_1_val' };
     actionResultVariable = 'action_var';
     actionCredentials = 'creds';
     dialogNodeType = 'standard';

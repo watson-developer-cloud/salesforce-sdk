@@ -46,17 +46,7 @@ public class IBMWatsonJSONUtil {
    * @return String representing the JSON response with modified keys
    */
   public static String addReservedWordSuffix(String jsonString) {
-    Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
-
-    for (String key : jsonMap.keySet()) {
-      if (reservedWords.contains(key)) {
-        String stringToReplace = '"' + key + '":';
-        String replacementString = '"' + key + '_serialized_name":';
-        jsonString = jsonString.replace(stringToReplace, replacementString);
-      }
-    }
-
-    return jsonString;
+    return jsonString.replaceAll('":', '_serialized_name":');
   }
 
   /**
