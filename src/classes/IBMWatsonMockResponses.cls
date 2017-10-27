@@ -8,7 +8,7 @@ public class IBMWatsonMockResponses {
                           '"description": "Test environment", "created": "2016-06-16T10:56:54.957Z",'+
                               '"updated": "2017-05-16T13:56:54.957Z", "status": "active", "read_only": false,'+
                               '"index_capacity": {"documents": {"indexed": 0, "maximum_allowed": 1000000},'+
-                              '"disk_usage": {"used_bytes": 0, "maximum_allowed_bytes": 85899345920}}}';
+                              '"disk_usage": {"used_bytes": 0, "maximum_allowed_bytes": 99345920}}}';
   }
   public static String configuration() {
     return  '{'+
@@ -326,9 +326,11 @@ public class IBMWatsonMockResponses {
             '  "notices": ['+
             '    {'+
             '      "notice_id": "index_342",'+
+            '      "created": "2015-08-24T18:42:25.324Z",'+
             '      "severity": "warning",'+
             '      "step": "indexing",'+
             '      "description": "something bad happened",'+
+            '      "query_id": "f1360220-ea2d-4271-9d62-89a910b13c37",'+
             '      "document_id": "f1360220-ea2d-4271-9d62-89a910b13c37"'+
             '    }'+
             '  ]'+

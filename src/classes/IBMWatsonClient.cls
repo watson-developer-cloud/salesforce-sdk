@@ -32,7 +32,7 @@ public class IBMWatsonClient {
         req.setHeader(name, wreq.getAllHeaders().get(name));
       }
 
-      if( !String.isBlank(wreq.getMethod()) && wreq.getMethod().equalsIgnoreCase('POST')) {
+      if( !String.isBlank(wreq.getMethod()) && (wreq.getMethod().equalsIgnoreCase('POST') || wreq.getMethod().equalsIgnoreCase('PUT'))) {
         String body = IBMWatsonJSONUtil.serialize(wreq.getBody().content);
         req.setBody(body);
       }
