@@ -6,7 +6,9 @@ public abstract class IBMWatsonService {
   public IBMWatsonRequestBuilder builder {get;set;}
   public IBMWatsonResponse response {get;set;}
   public IBMWatsonRequest request {get;set;}
-
+ 
+  public static final String SDK_VERSION = '1.0.0';
+  
   private String apiKey;
   private String endPoint;
 
@@ -130,16 +132,16 @@ public abstract class IBMWatsonService {
    * @param builder the new default headers
    */
   protected void setDefaultHeaders(IBMWatsonRequest.Builder builder) {
-    //String userAgent = IBMWatsonRequestUtils.getUserAgent();
+    String userAgent = IBMWatsonRequestUtils.getUserAgent();
     if (defaultHeaders != null && !defaultHeaders.isEmpty()) {
       for (String key : defaultHeaders.keySet()) {
         builder.addHeader(key, defaultHeaders.get(key));
       }
-      //if (defaultHeaders.containsKey(IBMWatsonHttpHeaders.USER_AGENT) && defaultHeaders.get(IBMWatsonHttpHeaders.USER_AGENT) != null) {
-      //  userAgent += ' ' + defaultHeaders.get(IBMWatsonHttpHeaders.USER_AGENT);
-      //}
+      if (defaultHeaders.containsKey(IBMWatsonHttpHeaders.USER_AGENT) && defaultHeaders.get(IBMWatsonHttpHeaders.USER_AGENT) != null) {
+        userAgent += ' ' + defaultHeaders.get(IBMWatsonHttpHeaders.USER_AGENT);
+      }
     }
-    //builder.addHeader(IBMWatsonHttpHeaders.USER_AGENT, userAgent);
+    builder.addHeader(IBMWatsonHttpHeaders.USER_AGENT, userAgent);
   }
 
   /**
