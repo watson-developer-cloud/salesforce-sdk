@@ -6,9 +6,7 @@ public abstract class IBMWatsonService {
   public IBMWatsonRequestBuilder builder {get;set;}
   public IBMWatsonResponse response {get;set;}
   public IBMWatsonRequest request {get;set;}
- 
-  public static final String SDK_VERSION = '1.0.0';
-  
+   
   private String apiKey;
   private String endPoint;
 

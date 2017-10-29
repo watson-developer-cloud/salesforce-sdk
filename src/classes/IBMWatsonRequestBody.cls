@@ -46,7 +46,7 @@ public virtual class IBMWatsonRequestBody {
   
   public static IBMWatsonRequestBody create(IBMWatsonMediaType contentType, IBMWatsonFile fileContent){
   	IBMWatsonRequestBody reqBody = new IBMWatsonRequestBody();
-    reqBody.ContentSize = (fileContent != null)?fileContent.BodyLength():0;
+    reqBody.ContentSize = (fileContent != null) ? fileContent.BodyLength() : 0;
     reqBody.contentType = IBMWatsonMediaType.parse(fileContent.contentType());
     reqBody.blobContent = fileContent.body();
     reqBody.name = fileContent.Name();
