@@ -180,7 +180,4 @@ public class IBMWatsonHttpMediaType {
    * Field WILDCARD. (value is '*\/*')
    */
   public static final String WILDCARD = '*/*';
-
-  
-    
 }

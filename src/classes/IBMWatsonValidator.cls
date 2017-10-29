@@ -77,5 +77,4 @@ public class IBMWatsonValidator {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException(message);
     }
   }
-
 }

@@ -6,13 +6,13 @@ public class IBMWatsonMediaType {
   private static final System.Pattern PARAMETER = System.Pattern.compile(';\\s*(?:" + TOKEN + "=(?:" + TOKEN + "|" + QUOTED + "))?');
 
   private final String mediaType;
-  public final String type_m {public get; private set;}
+  public final String typeM {public get; private set;}
   public final String subtype {public get; private set;}
   public final String charset {public get; private set;}
 
-  private IBMWatsonMediaType(String mediaType, String t, String subtype, String charset) {
+  private IBMWatsonMediaType(String mediaType, String typeM, String subtype, String charset) {
     this.mediaType = mediaType;
-    this.type_m = t;
+    this.typeM = typeM;
     this.subtype = subtype;
     this.charset = charset;
   }
@@ -28,7 +28,7 @@ public class IBMWatsonMediaType {
     String subtype = typeSubtype.group(2).toLowerCase('en');
     String charset = null;
     Matcher parameter_matcher = PARAMETER.matcher(str);
-    if( parameter_matcher.matches() ){
+    if (parameter_matcher.matches()) {
     for (integer s = typeSubtype.end(); s < str.length(); s = parameter_matcher.end()) {
         parameter_matcher.region(s, str.length());
         if (!parameter_matcher.lookingAt()) return null; // This is not a well-formed media type.
@@ -49,7 +49,7 @@ public class IBMWatsonMediaType {
           return null; // Multiple different charsets!
         }
         charset = charsetParameter;
-    } 
+    }
     }
     return new IBMWatsonMediaType(str, t, subtype, charset);
   }
@@ -62,12 +62,12 @@ public class IBMWatsonMediaType {
     return mediaType;
   }
 
-  public boolean equals( Object other) {
+  public boolean equals(Object other) {
     return other instanceof IBMWatsonMediaType && ((IBMWatsonMediaType) other).mediaType.equals(mediaType);
   }
-    
+
+
   public integer hashCode() {
     return mediaType.hashCode();
   }
-    
 }

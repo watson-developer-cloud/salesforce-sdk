@@ -1,5 +1,8 @@
 public class IBMWatsonHttpHeaders {
 
+  private IBMWatsonHttpHeaders() {
+    // This is a utility class - no instantiation allowed.
+  }
 
   /**
    * See <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1">HTTP/1.1 documentation</a>.
@@ -147,5 +150,7 @@ public class IBMWatsonHttpHeaders {
 
   /** Mark Bluemix interactions from tests. */
   public static String X_WATSON_TEST = 'X-Watson-Test';
-    
+
+  /** Global Transaction Id. */
+  public static String X_GLOBAL_TRANSACTION_ID = 'X-Global-Transaction-Id';
 }

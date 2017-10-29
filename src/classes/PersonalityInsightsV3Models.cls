@@ -1438,5 +1438,4 @@ public class PersonalityInsightsV3Models {
       return ret;
     }
   }
-
 }

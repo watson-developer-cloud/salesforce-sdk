@@ -1,10 +1,6 @@
 public with sharing class IBMWatsonHttpStatus {
-  
   /** 202 Accepted (HTTP/1.0 - RFC 1945). */
   public static final Integer ACCEPTED = 202;
-
-  // --- 2xx Success ---
-
   /** 502 Bad Gateway (HTTP/1.0 - RFC 1945). */
   public static final Integer BAD_GATEWAY = 502;
   /** 400 Bad Request (HTTP/1.1 - RFC 2616). */
@@ -19,12 +15,8 @@ public with sharing class IBMWatsonHttpStatus {
   public static final Integer EXPECTATION_FAILED = 417;
   /** 424 Failed Dependency (WebDAV - RFC 2518). */
   public static final Integer FAILED_DEPENDENCY = 424;
-
   /** 403 Forbidden (HTTP/1.0 - RFC 1945). */
   public static final Integer FORBIDDEN = 403;
-
-  // --- 3xx Redirection ---
-
   /** 504 Gateway Timeout (HTTP/1.1 - RFC 2616). */
   public static final Integer GATEWAY_TIMEOUT = 504;
   /** 410 Gone (HTTP/1.1 - RFC 2616). */
@@ -39,9 +31,6 @@ public with sharing class IBMWatsonHttpStatus {
   public static final Integer LENGTH_REQUIRED = 411;
   /** 423 Locked (WebDAV - RFC 2518). */
   public static final Integer LOCKED = 423;
-
-  // --- 4xx Client Error ---
-
   /** 405 Method Not Allowed (HTTP/1.1 - RFC 2616). */
   public static final Integer METHOD_NOT_ALLOWED = 405;
   /** 301 Moved Permanently (HTTP/1.0 - RFC 1945). */
@@ -80,21 +69,14 @@ public with sharing class IBMWatsonHttpStatus {
   public static final Integer REQUEST_TIMEOUT = 408;
   /** 413 Request Entity Too Large (HTTP/1.1 - RFC 2616). */
   public static final Integer REQUEST_TOO_LONG = 413;
-
   /** 414 Request-URI Too Long (HTTP/1.1 - RFC 2616). */
   public static final Integer REQUEST_URI_TOO_LONG = 414;
-
   /** 416 Requested Range Not Satisfiable (HTTP/1.1 - RFC 2616). */
   public static final Integer REQUESTED_RANGE_NOT_SATISFIABLE = 416;
-
   /** 205 Reset Content (HTTP/1.1 - RFC 2616). */
   public static final Integer RESET_CONTENT = 205;
-
   /** 303 See Other (HTTP/1.1 - RFC 2616). */
   public static final Integer SEE_OTHER = 303;
-
-  // --- 5xx Server Error ---
-
   /** 503 Service Unavailable (HTTP/1.0 - RFC 1945). */
   public static final Integer SERVICE_UNAVAILABLE = 503;
   /** 307 Temporary Redirect (HTTP/1.1 - RFC 2616). */
@@ -107,8 +89,6 @@ public with sharing class IBMWatsonHttpStatus {
   public static final Integer UNPROCESSABLE_ENTITY = 422;
   /** 415 Unsupported Media Type (HTTP/1.1 - RFC 2616). */
   public static final Integer UNSUPPORTED_MEDIA_TYPE = 415;
-
   /** 305 Use Proxy (HTTP/1.1 - RFC 2616). */
   public static final Integer USE_PROXY = 305;
-    
 }

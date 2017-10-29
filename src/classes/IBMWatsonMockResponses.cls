@@ -111,7 +111,7 @@ public class IBMWatsonMockResponses {
             '  ]'+
             '}';
   }
-  
+
   public static String listConfigurationsResponse() {
     return '{'+
            ' "configurations": ['+
@@ -217,7 +217,7 @@ public class IBMWatsonMockResponses {
            ' ]'+
            '}';
   }
-  
+
    public static String listCollectionFieldsResponse() {
     return '{'+
                 '  "fields": ['+
@@ -240,7 +240,7 @@ public class IBMWatsonMockResponses {
                 '  ]'+
                 '}';
   }
-  
+
   public static String listEnvironmentsResponse() {
     return '{'+
                 '  "environments": ['+
@@ -263,7 +263,7 @@ public class IBMWatsonMockResponses {
                 '  ]'+
                 '}';
   }
-  
+
    public static String collection() {
     return  '{'+
             '   "collection_id": "800e58e4-198d-45eb-be87-74e1d6df4e96",'+
@@ -295,7 +295,7 @@ public class IBMWatsonMockResponses {
             '  }'+
             '}';
   }
-  
+
   public static String listCollectionsResponse() {
     return '{ "collections": ['+
            '   {'+
@@ -311,7 +311,7 @@ public class IBMWatsonMockResponses {
            ' ]'+
            '}';
   }
-  
+
   public static String documentStatus() {
     return '{'+
             '  "document_id": "f1360220-ea2d-4271-9d62-89a910b13c37",'+
@@ -336,7 +336,7 @@ public class IBMWatsonMockResponses {
             '  ]'+
             '}';
   }
-  
+
   public static String queryResponse() {
     return '{'+
             '  "matching_results": 24,'+
@@ -358,7 +358,7 @@ public class IBMWatsonMockResponses {
             '  }]'+
             '}';
   }
-  
+
   public static String queryNoticesResponse() {
     return '{'+
             '  "matching_results": 24,'+
@@ -395,7 +395,7 @@ public class IBMWatsonMockResponses {
             '  }]'+
             '}';
   }
-  
+
    public static String trainingQuery() {
     return  '{'+
             '  "query_id": "string",'+
@@ -410,7 +410,7 @@ public class IBMWatsonMockResponses {
             '  ]'+
             '}';
   }
-  
+
   public static String trainingDataSet() {
     return  '{ "queries": [{'+
             '  "query_id": "string",'+
@@ -425,7 +425,7 @@ public class IBMWatsonMockResponses {
             '  ]'+
             '}]}';
   }
-  
+
   public static String trainingExample() {
     return  '{'+
             '  "document_id": "string",'+

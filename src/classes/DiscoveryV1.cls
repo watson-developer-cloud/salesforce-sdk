@@ -29,11 +29,13 @@ public class DiscoveryV1 extends IBMWatsonService {
    *        calls from failing when the service introduces breaking changes.
    */
   public DiscoveryV1(String versionDate) {
-    if ((getEndPoint() == null) || String.isBlank(getEndPoint())) {
+    super('discovery');
+
+    if (String.isBlank(getEndPoint())) {
       setEndPoint(URL);
     }
     if(String.isBlank(versionDate)) {
-      throw new IBMWatsonServiceExceptions.RuntimeException('Version cannot be null.');
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('Version cannot be null.');
     }
     this.versionDate = versionDate;
   }
@@ -61,7 +63,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.Environment createEnvironment(DiscoveryV1Models.CreateEnvironmentOptions createEnvironmentOptions) {
     IBMWatsonValidator.notNull(createEnvironmentOptions, 'createEnvironmentOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_post(URL + '/v1/environments');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + '/v1/environments');
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -86,7 +88,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public void deleteEnvironment(DiscoveryV1Models.DeleteEnvironmentOptions deleteEnvironmentOptions) {
     IBMWatsonValidator.notNull(deleteEnvironmentOptions, 'deleteEnvironmentOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_delete(URL + String.format('/v1/environments/{0}', new String[]{ deleteEnvironmentOptions.environmentId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/environments/{0}', new String[]{ deleteEnvironmentOptions.environmentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -102,7 +104,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.Environment getEnvironment(DiscoveryV1Models.GetEnvironmentOptions getEnvironmentOptions) {
     IBMWatsonValidator.notNull(getEnvironmentOptions, 'getEnvironmentOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}', new String[]{ getEnvironmentOptions.environmentId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}', new String[]{ getEnvironmentOptions.environmentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -119,7 +121,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    * @return the {@link DiscoveryV1Models.ListEnvironmentsResponse} with the response
    */
   public DiscoveryV1Models.ListEnvironmentsResponse listEnvironments(DiscoveryV1Models.ListEnvironmentsOptions listEnvironmentsOptions) {
-    builder = IBMWatsonRequestBuilder.http_get(URL + '/v1/environments');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + '/v1/environments');
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
       'name' => listEnvironmentsOptions.name()
@@ -138,7 +140,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.ListCollectionFieldsResponse listFields(DiscoveryV1Models.ListFieldsOptions listFieldsOptions) {
     IBMWatsonValidator.notNull(listFieldsOptions, 'listFieldsOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/fields', new String[]{ listFieldsOptions.environmentId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/fields', new String[]{ listFieldsOptions.environmentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
       'collection_ids' => String.join(listFieldsOptions.collectionIds(), ',')
@@ -157,7 +159,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.Environment updateEnvironment(DiscoveryV1Models.UpdateEnvironmentOptions updateEnvironmentOptions) {
     IBMWatsonValidator.notNull(updateEnvironmentOptions, 'updateEnvironmentOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_put(URL + String.format('/v1/environments/{0}', new String[]{ updateEnvironmentOptions.environmentId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(URL + String.format('/v1/environments/{0}', new String[]{ updateEnvironmentOptions.environmentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -183,7 +185,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.Configuration createConfiguration(DiscoveryV1Models.CreateConfigurationOptions createConfigurationOptions) {
     IBMWatsonValidator.notNull(createConfigurationOptions, 'createConfigurationOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_post(URL + String.format('/v1/environments/{0}/configurations', new String[]{ createConfigurationOptions.environmentId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/environments/{0}/configurations', new String[]{ createConfigurationOptions.environmentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -218,7 +220,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public void deleteConfiguration(DiscoveryV1Models.DeleteConfigurationOptions deleteConfigurationOptions) {
     IBMWatsonValidator.notNull(deleteConfigurationOptions, 'deleteConfigurationOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_delete(URL + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ deleteConfigurationOptions.environmentId(), deleteConfigurationOptions.configurationId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ deleteConfigurationOptions.environmentId(), deleteConfigurationOptions.configurationId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -234,7 +236,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.Configuration getConfiguration(DiscoveryV1Models.GetConfigurationOptions getConfigurationOptions) {
     IBMWatsonValidator.notNull(getConfigurationOptions, 'getConfigurationOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ getConfigurationOptions.environmentId(), getConfigurationOptions.configurationId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ getConfigurationOptions.environmentId(), getConfigurationOptions.configurationId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -252,7 +254,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.ListConfigurationsResponse listConfigurations(DiscoveryV1Models.ListConfigurationsOptions listConfigurationsOptions) {
     IBMWatsonValidator.notNull(listConfigurationsOptions, 'listConfigurationsOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/configurations', new String[]{ listConfigurationsOptions.environmentId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/configurations', new String[]{ listConfigurationsOptions.environmentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
       'name' => listConfigurationsOptions.name()
@@ -271,7 +273,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.Configuration updateConfiguration(DiscoveryV1Models.UpdateConfigurationOptions updateConfigurationOptions) {
     IBMWatsonValidator.notNull(updateConfigurationOptions, 'updateConfigurationOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_put(URL + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ updateConfigurationOptions.environmentId(), updateConfigurationOptions.configurationId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(URL + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ updateConfigurationOptions.environmentId(), updateConfigurationOptions.configurationId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -297,40 +299,6 @@ public class DiscoveryV1 extends IBMWatsonService {
   }
 
   /**
-   * Test configuration.
-   *
-   * Runs a sample document through the default or your configuration and returns diagnostic information designed to help you understand how the document was processed. The document is not added to the index.
-   *
-   * @param testConfigurationInEnvironmentOptions the {@link DiscoveryV1Models.TestConfigurationInEnvironmentOptions} containing the options for the call
-   * @return the {@link DiscoveryV1Models.TestDocument} with the response
-   */
-  /*public DiscoveryV1Models.TestDocument testConfigurationInEnvironment(DiscoveryV1Models.TestConfigurationInEnvironmentOptions testConfigurationInEnvironmentOptions) {
-    IBMWatsonValidator.notNull(testConfigurationInEnvironmentOptions, 'testConfigurationInEnvironmentOptions cannot be null');
-    IBMWatsonValidator.isTrue((testConfigurationInEnvironmentOptions.configuration() != null) || (testConfigurationInEnvironmentOptions.file() != null) || (testConfigurationInEnvironmentOptions.metadata() != null), 'At least one of configuration, file, or metadata must be supplied.');
-    builder = IBMWatsonRequestBuilder.http_post(URL + String.format('/v1/environments/{0}/preview', new String[]{ testConfigurationInEnvironmentOptions.environmentId() }));
-    builder.queryParams(new Map<String, String> {
-      'version' => versionDate,
-      'step' => testConfigurationInEnvironmentOptions.step(),
-      'configuration_id' => testConfigurationInEnvironmentOptions.configurationId()
-    });
-    MultipartBody.Builder multipartBuilder = new MultipartBody.Builder();
-    multipartBuilder.setType(MultipartBody.FORM);
-    if (testConfigurationInEnvironmentOptions.configuration() != null) {
-      multipartBuilder.addFormDataPart('configuration', testConfigurationInEnvironmentOptions.configuration());
-    }
-    if (testConfigurationInEnvironmentOptions.file() != null) {
-      RequestBody fileBody = RequestUtils.inputStreamBody(testConfigurationInEnvironmentOptions.file(), testConfigurationInEnvironmentOptions.fileContentType());
-      multipartBuilder.addFormDataPart('file', testConfigurationInEnvironmentOptions.filename(), fileBody);
-    }
-    if (testConfigurationInEnvironmentOptions.metadata() != null) {
-      multipartBuilder.addFormDataPart('metadata', testConfigurationInEnvironmentOptions.metadata());
-    }
-    builder.body(multipartBuilder.build());
-  
-    return (DiscoveryV1Models.TestDocument) createServiceCall(builder.build(), DiscoveryV1Models.TestDocument.class);
-  }*/
-
-  /**
    * Create a collection.
    *
    * @param createCollectionOptions the {@link DiscoveryV1Models.CreateCollectionOptions} containing the options for the call
@@ -338,7 +306,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.Collection createCollection(DiscoveryV1Models.CreateCollectionOptions createCollectionOptions) {
     IBMWatsonValidator.notNull(createCollectionOptions, 'createCollectionOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_post(URL + String.format('/v1/environments/{0}/collections', new String[]{ createCollectionOptions.environmentId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/environments/{0}/collections', new String[]{ createCollectionOptions.environmentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -366,7 +334,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public void deleteCollection(DiscoveryV1Models.DeleteCollectionOptions deleteCollectionOptions) {
     IBMWatsonValidator.notNull(deleteCollectionOptions, 'deleteCollectionOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_delete(URL + String.format('/v1/environments/{0}/collections/{1}', new String[]{ deleteCollectionOptions.environmentId(), deleteCollectionOptions.collectionId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/environments/{0}/collections/{1}', new String[]{ deleteCollectionOptions.environmentId(), deleteCollectionOptions.collectionId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -382,7 +350,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.Collection getCollection(DiscoveryV1Models.GetCollectionOptions getCollectionOptions) {
     IBMWatsonValidator.notNull(getCollectionOptions, 'getCollectionOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/collections/{1}', new String[]{ getCollectionOptions.environmentId(), getCollectionOptions.collectionId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}', new String[]{ getCollectionOptions.environmentId(), getCollectionOptions.collectionId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -400,7 +368,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.ListCollectionFieldsResponse listCollectionFields(DiscoveryV1Models.ListCollectionFieldsOptions listCollectionFieldsOptions) {
     IBMWatsonValidator.notNull(listCollectionFieldsOptions, 'listCollectionFieldsOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/collections/{1}/fields', new String[]{ listCollectionFieldsOptions.environmentId(), listCollectionFieldsOptions.collectionId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}/fields', new String[]{ listCollectionFieldsOptions.environmentId(), listCollectionFieldsOptions.collectionId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -418,7 +386,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.ListCollectionsResponse listCollections(DiscoveryV1Models.ListCollectionsOptions listCollectionsOptions) {
     IBMWatsonValidator.notNull(listCollectionsOptions, 'listCollectionsOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/collections', new String[]{ listCollectionsOptions.environmentId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections', new String[]{ listCollectionsOptions.environmentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
       'name' => listCollectionsOptions.name()
@@ -435,7 +403,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.Collection updateCollection(DiscoveryV1Models.UpdateCollectionOptions updateCollectionOptions) {
     IBMWatsonValidator.notNull(updateCollectionOptions, 'updateCollectionOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_put(URL + String.format('/v1/environments/{0}/collections/{1}', new String[]{ updateCollectionOptions.environmentId(), updateCollectionOptions.collectionId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(URL + String.format('/v1/environments/{0}/collections/{1}', new String[]{ updateCollectionOptions.environmentId(), updateCollectionOptions.collectionId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -465,14 +433,14 @@ public class DiscoveryV1 extends IBMWatsonService {
   public DiscoveryV1Models.DocumentAccepted addDocument(DiscoveryV1Models.AddDocumentOptions addDocumentOptions) {
     IBMWatsonValidator.notNull(addDocumentOptions, 'addDocumentOptions cannot be null');
     IBMWatsonValidator.isTrue((addDocumentOptions.file() != null) || (addDocumentOptions.metadata() != null), 'At least one of file or metadata must be supplied.');
-    builder = IBMWatsonRequestBuilder.http_post(URL + String.format('/v1/environments/{0}/collections/{1}/documents', new String[]{addDocumentOptions.environmentId(), addDocumentOptions.collectionId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/environments/{0}/collections/{1}/documents', new String[]{addDocumentOptions.environmentId(), addDocumentOptions.collectionId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (addDocumentOptions.file() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestUtils.inputFileBody(addDocumentOptions.file(), addDocumentOptions.fileContentType());
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(addDocumentOptions.file(), addDocumentOptions.fileContentType());
       multipartBuilder.addFormDataPart('file', addDocumentOptions.filename(), fileBody);
     }
     if (addDocumentOptions.metadata() != null) {
@@ -494,7 +462,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public void deleteDocument(DiscoveryV1Models.DeleteDocumentOptions deleteDocumentOptions) {
     IBMWatsonValidator.notNull(deleteDocumentOptions, 'deleteDocumentOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_delete(URL + String.format('/v1/environments/{0}/collections/{1}/documents/{2}', new String[]{ deleteDocumentOptions.environmentId(), deleteDocumentOptions.collectionId(), deleteDocumentOptions.documentId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/environments/{0}/collections/{1}/documents/{2}', new String[]{ deleteDocumentOptions.environmentId(), deleteDocumentOptions.collectionId(), deleteDocumentOptions.documentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -512,42 +480,13 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.DocumentStatus getDocumentStatus(DiscoveryV1Models.GetDocumentStatusOptions getDocumentStatusOptions) {
     IBMWatsonValidator.notNull(getDocumentStatusOptions, 'getDocumentStatusOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/collections/{1}/documents/{2}', new String[]{ getDocumentStatusOptions.environmentId(), getDocumentStatusOptions.collectionId(), getDocumentStatusOptions.documentId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}/documents/{2}', new String[]{ getDocumentStatusOptions.environmentId(), getDocumentStatusOptions.collectionId(), getDocumentStatusOptions.documentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
   
     return (DiscoveryV1Models.DocumentStatus) createServiceCall(builder.build(), DiscoveryV1Models.DocumentStatus.class);
   }
-
-  /**
-   * Update a document.
-   *
-   * Replace an existing document. Starts ingesting a document with optional metadata.
-   *
-   * @param updateDocumentOptions the {@link DiscoveryV1Models.UpdateDocumentOptions} containing the options for the call
-   * @return the {@link DiscoveryV1Models.DocumentAccepted} with the response
-   */
-  /*public DiscoveryV1Models.DocumentAccepted updateDocument(DiscoveryV1Models.UpdateDocumentOptions updateDocumentOptions) {
-    IBMWatsonValidator.notNull(updateDocumentOptions, 'updateDocumentOptions cannot be null');
-    IBMWatsonValidator.isTrue((updateDocumentOptions.file() != null) || (updateDocumentOptions.metadata() != null), 'At least one of file or metadata must be supplied.');
-    builder = IBMWatsonRequestBuilder.http_post(URL + String.format('/v1/environments/{0}/collections/{1}/documents/{2}', new String[]{ updateDocumentOptions.environmentId(), updateDocumentOptions.collectionId(), updateDocumentOptions.documentId() }));
-    builder.queryParams(new Map<String, String> {
-      'version' => versionDate
-    });
-    MultipartBody.Builder multipartBuilder = new MultipartBody.Builder();
-    multipartBuilder.setType(MultipartBody.FORM);
-    if (updateDocumentOptions.file() != null) {
-      RequestBody fileBody = RequestUtils.inputStreamBody(updateDocumentOptions.file(), updateDocumentOptions.fileContentType());
-      multipartBuilder.addFormDataPart('file', updateDocumentOptions.filename(), fileBody);
-    }
-    if (updateDocumentOptions.metadata() != null) {
-      multipartBuilder.addFormDataPart('metadata', updateDocumentOptions.metadata());
-    }
-    builder.body(multipartBuilder.build());
-  
-    return (DiscoveryV1Models.DocumentAccepted) createServiceCall(builder.build(), DiscoveryV1Models.DocumentAccepted.class);
-  }*/
 
   /**
    * Query documents in multiple collections.
@@ -559,7 +498,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.QueryResponse federatedQuery(DiscoveryV1Models.FederatedQueryOptions federatedQueryOptions) {
     IBMWatsonValidator.notNull(federatedQueryOptions, 'federatedQueryOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/query', new String[]{ federatedQueryOptions.environmentId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/query', new String[]{ federatedQueryOptions.environmentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
       'collection_ids' => String.join(federatedQueryOptions.collectionIds(), ','),
@@ -589,7 +528,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.QueryNoticesResponse federatedQueryNotices(DiscoveryV1Models.FederatedQueryNoticesOptions federatedQueryNoticesOptions) {
     IBMWatsonValidator.notNull(federatedQueryNoticesOptions, 'federatedQueryNoticesOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/notices', new String[]{ federatedQueryNoticesOptions.environmentId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/notices', new String[]{ federatedQueryNoticesOptions.environmentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
       'collection_ids' => String.join(federatedQueryNoticesOptions.collectionIds(), ','),
@@ -618,7 +557,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.QueryResponse query(DiscoveryV1Models.QueryOptions queryOptions) {
     IBMWatsonValidator.notNull(queryOptions, 'queryOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/collections/{1}/query', new String[]{ queryOptions.environmentId(), queryOptions.collectionId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}/query', new String[]{ queryOptions.environmentId(), queryOptions.collectionId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
       'filter' => queryOptions.filter(),
@@ -651,7 +590,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.QueryNoticesResponse queryNotices(DiscoveryV1Models.QueryNoticesOptions queryNoticesOptions) {
     IBMWatsonValidator.notNull(queryNoticesOptions, 'queryNoticesOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/collections/{1}/notices', new String[]{ queryNoticesOptions.environmentId(), queryNoticesOptions.collectionId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}/notices', new String[]{ queryNoticesOptions.environmentId(), queryNoticesOptions.collectionId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
       'filter' => queryNoticesOptions.filter(),
@@ -681,7 +620,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.TrainingQuery addTrainingData(DiscoveryV1Models.AddTrainingDataOptions addTrainingDataOptions) {
     IBMWatsonValidator.notNull(addTrainingDataOptions, 'addTrainingDataOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_post(URL + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ addTrainingDataOptions.environmentId(), addTrainingDataOptions.collectionId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ addTrainingDataOptions.environmentId(), addTrainingDataOptions.collectionId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -708,7 +647,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.TrainingExample createTrainingExample(DiscoveryV1Models.CreateTrainingExampleOptions createTrainingExampleOptions) {
     IBMWatsonValidator.notNull(createTrainingExampleOptions, 'createTrainingExampleOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_post(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples', new String[]{ createTrainingExampleOptions.environmentId(), createTrainingExampleOptions.collectionId(), createTrainingExampleOptions.queryId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples', new String[]{ createTrainingExampleOptions.environmentId(), createTrainingExampleOptions.collectionId(), createTrainingExampleOptions.queryId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -735,7 +674,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public void deleteAllTrainingData(DiscoveryV1Models.DeleteAllTrainingDataOptions deleteAllTrainingDataOptions) {
     IBMWatsonValidator.notNull(deleteAllTrainingDataOptions, 'deleteAllTrainingDataOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_delete(URL + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ deleteAllTrainingDataOptions.environmentId(), deleteAllTrainingDataOptions.collectionId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ deleteAllTrainingDataOptions.environmentId(), deleteAllTrainingDataOptions.collectionId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -751,7 +690,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public void deleteTrainingData(DiscoveryV1Models.DeleteTrainingDataOptions deleteTrainingDataOptions) {
     IBMWatsonValidator.notNull(deleteTrainingDataOptions, 'deleteTrainingDataOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_delete(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}', new String[]{ deleteTrainingDataOptions.environmentId(), deleteTrainingDataOptions.collectionId(), deleteTrainingDataOptions.queryId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}', new String[]{ deleteTrainingDataOptions.environmentId(), deleteTrainingDataOptions.collectionId(), deleteTrainingDataOptions.queryId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -767,7 +706,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public void deleteTrainingExample(DiscoveryV1Models.DeleteTrainingExampleOptions deleteTrainingExampleOptions) {
     IBMWatsonValidator.notNull(deleteTrainingExampleOptions, 'deleteTrainingExampleOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_delete(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ deleteTrainingExampleOptions.environmentId(), deleteTrainingExampleOptions.collectionId(), deleteTrainingExampleOptions.queryId(), deleteTrainingExampleOptions.exampleId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ deleteTrainingExampleOptions.environmentId(), deleteTrainingExampleOptions.collectionId(), deleteTrainingExampleOptions.queryId(), deleteTrainingExampleOptions.exampleId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -783,7 +722,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.TrainingQuery getTrainingData(DiscoveryV1Models.GetTrainingDataOptions getTrainingDataOptions) {
     IBMWatsonValidator.notNull(getTrainingDataOptions, 'getTrainingDataOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}', new String[]{ getTrainingDataOptions.environmentId(), getTrainingDataOptions.collectionId(), getTrainingDataOptions.queryId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}', new String[]{ getTrainingDataOptions.environmentId(), getTrainingDataOptions.collectionId(), getTrainingDataOptions.queryId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -799,7 +738,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.TrainingExample getTrainingExample(DiscoveryV1Models.GetTrainingExampleOptions getTrainingExampleOptions) {
     IBMWatsonValidator.notNull(getTrainingExampleOptions, 'getTrainingExampleOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ getTrainingExampleOptions.environmentId(), getTrainingExampleOptions.collectionId(), getTrainingExampleOptions.queryId(), getTrainingExampleOptions.exampleId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ getTrainingExampleOptions.environmentId(), getTrainingExampleOptions.collectionId(), getTrainingExampleOptions.queryId(), getTrainingExampleOptions.exampleId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -815,7 +754,7 @@ public class DiscoveryV1 extends IBMWatsonService {
    */
   public DiscoveryV1Models.TrainingDataSet listTrainingData(DiscoveryV1Models.ListTrainingDataOptions listTrainingDataOptions) {
     IBMWatsonValidator.notNull(listTrainingDataOptions, 'listTrainingDataOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_get(URL + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ listTrainingDataOptions.environmentId(), listTrainingDataOptions.collectionId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ listTrainingDataOptions.environmentId(), listTrainingDataOptions.collectionId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -828,10 +767,10 @@ public class DiscoveryV1 extends IBMWatsonService {
    *
    * @param updateTrainingExampleOptions the {@link DiscoveryV1Models.UpdateTrainingExampleOptions} containing the options for the call
    * @return the {@link DiscoveryV1Models.TrainingExample} with the response
-   */
+  */
   public DiscoveryV1Models.TrainingExample updateTrainingExample(DiscoveryV1Models.UpdateTrainingExampleOptions updateTrainingExampleOptions) {
     IBMWatsonValidator.notNull(updateTrainingExampleOptions, 'updateTrainingExampleOptions cannot be null');
-    builder = IBMWatsonRequestBuilder.http_put(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ updateTrainingExampleOptions.environmentId(), updateTrainingExampleOptions.collectionId(), updateTrainingExampleOptions.queryId(), updateTrainingExampleOptions.exampleId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ updateTrainingExampleOptions.environmentId(), updateTrainingExampleOptions.collectionId(), updateTrainingExampleOptions.queryId(), updateTrainingExampleOptions.exampleId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
@@ -846,5 +785,4 @@ public class DiscoveryV1 extends IBMWatsonService {
   
     return (DiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), DiscoveryV1Models.TrainingExample.class);
   }
-
 }

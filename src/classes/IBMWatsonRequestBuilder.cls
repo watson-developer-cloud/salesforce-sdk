@@ -3,7 +3,7 @@ public class IBMWatsonRequestBuilder {
   private enum HTTPMethod {
     HTTP_DELETE, HTTP_GET, HTTP_POST, HTTP_PUT
   }
-  
+
   private static final Map<HTTPMethod, String> HTTPMethodValue = new  Map<HTTPMethod, String> {
     HTTPMethod.HTTP_DELETE => 'DELETE',
     HTTPMethod.HTTP_GET => 'GET',
@@ -14,13 +14,16 @@ public class IBMWatsonRequestBuilder {
   public class NameValue {
     private String name;
     private String value;
-    public NameValue(String n, String v) {
-      this.name = n;
-      this.value = v;
+
+    public NameValue(String name, String value) {
+      this.name = name;
+      this.value = value;
     }
+
     public String getName() {
       return this.name;
     }
+
     public String getValue() {
       return this.value;
     }
@@ -33,7 +36,7 @@ public class IBMWatsonRequestBuilder {
    *
    * @return this
    */
-  public static IBMWatsonRequestBuilder http_delete(String url) {
+  public static IBMWatsonRequestBuilder httpDelete(String url) {
     return new IBMWatsonRequestBuilder(HTTPMethod.HTTP_DELETE, url);
   }
 
@@ -44,7 +47,7 @@ public class IBMWatsonRequestBuilder {
    *
    * @return this
    */
-  public static IBMWatsonRequestBuilder http_get(String url) {
+  public static IBMWatsonRequestBuilder httpGet(String url) {
     return new IBMWatsonRequestBuilder(HTTPMethod.HTTP_GET, url);
   }
 
@@ -56,10 +59,10 @@ public class IBMWatsonRequestBuilder {
    *
    * @return this
    */
-  public static IBMWatsonRequestBuilder http_post(String url) {
+  public static IBMWatsonRequestBuilder httpPost(String url) {
     return new IBMWatsonRequestBuilder(HTTPMethod.HTTP_POST, url);
   }
-    
+
   /**
    * The PUT method requests that the enclosed entity be stored under the supplied Request-URI.
    *
@@ -67,7 +70,7 @@ public class IBMWatsonRequestBuilder {
    *
    * @return this
    */
-  public static IBMWatsonRequestBuilder http_put(String url) {
+  public static IBMWatsonRequestBuilder httpPut(String url) {
     return new IBMWatsonRequestBuilder(HTTPMethod.HTTP_PUT, url);
   }
 
@@ -78,14 +81,14 @@ public class IBMWatsonRequestBuilder {
   private final List<NameValue> queryParams = new List<NameValue>();
   private final HTTPMethod method;
   private HTTPRequest request;
-      
-  public IBMWatsonRequestBuilder(HTTPMethod m, String url){
-    this.method = m;
-    if ( String.isBlank(url) ) {
+
+  public IBMWatsonRequestBuilder(HTTPMethod method, String url) {
+    this.method = method;
+    if (String.isBlank(url)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('url cannot be null');
     }
     url = cleanUrl(url);
-    System.PageReference pageReference = new System.PageReference( url ); 
+    System.PageReference pageReference = new System.PageReference(url);
     httpUrl = pageReference.getUrl();
   }
 
@@ -122,7 +125,7 @@ public class IBMWatsonRequestBuilder {
   private IBMWatsonRequestBuilder add(List<NameValue> params, String name, Object value) {
     // supports only List<Object>
     if (value instanceof Iterable<Object> || value instanceof Object[]) {
-      for(Object o: (List<Object>) value){
+      for (Object o: (List<Object>) value) {
         addParam(params, name, o);
       }
     } else {
@@ -141,55 +144,57 @@ public class IBMWatsonRequestBuilder {
   private void addParam(List<NameValue> params, String name, Object value) {
     params.add(new NameValue(name, ((value == null) ? null : String.valueOf(value)) ));
   }
-  
-  private String getURLWithParams(String uri){
-    if( String.isBlank(uri) ) return null;
-    if( uri.contains('?') ) uri = uri.split('?')[0];
-    if( queryParams != null && !queryParams.isEmpty() ){
-    Map<String, String> p = new Map<String, String>();
-    for( NameValue n: queryParams ){
-      p.put( n.name, n.value );
+
+  private String getURLWithParams(String uri) {
+    if (String.isBlank(uri)) {
+      return null;
     }
-    System.PageReference pageReference = new System.PageReference( uri ); 
-    pageReference.getParameters().putAll(p);
+
+    if (uri.contains('?')) {
+      uri = uri.split('?')[0];
+    }
+
+    if (queryParams != null && !queryParams.isEmpty()) {
+      Map<String, String> p = new Map<String, String>();
+      for (NameValue nameValue: queryParams) {
+        p.put(nameValue.name, nameValue.value);
+      }
+
+      System.PageReference pageReference = new System.PageReference(uri);
+      pageReference.getParameters().putAll(p);
       uri = pageReference.getUrl();
     }
     return uri;
   }
-  
+
   /**
    * Builds the request for this instance.
    *
    */
   public IBMWatsonRequest build() {
     IBMWatsonRequest.Builder builder = new IBMWatsonRequest.Builder();
-    // URL
-    builder.url( getURLWithParams(httpUrl) );
+    builder.url(getURLWithParams(httpUrl));
 
-    if ( method == HTTPMethod.HTTP_GET && body != null) {
-      throw new  IBMWatsonServiceExceptions.IllegalArgumentException('cannot send a RequestBody in a GET request');
-    } else if (formParams != null && !formParams.isEmpty()) {
-
+    if (method == HTTPMethod.HTTP_GET && body != null) {
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('GET requests cannot have a RequestBody');
     } else if (body == null) {
       body = IBMWatsonRequestBody.create();
     }
-    
+
     builder.method(HTTPMethodValue.get(method), body);
-    
+
     // accept application/json by default
     builder.addHeader(IBMWatsonHttpHeaders.ACCEPT, IBMWatsonHttpMediaType.APPLICATION_JSON);
-    
-    system.debug(' ==> *** headers.....'+headers);
-    
-    if( headers != null && !headers.isEmpty() ){
+
+    if (headers != null && !headers.isEmpty()) {
       for (NameValue header : headers) {
         builder.addHeader(header.getName(), header.getValue());
       }
     }
-    
+
     return builder.build();
   }
-  
+
   /**
    * Sets the string content to the request (used with POST/PUT). This will encapsulate the string into a
    * { equestBody} encoded with UTF-8
@@ -200,7 +205,7 @@ public class IBMWatsonRequestBuilder {
    * @return this
    */
   public IBMWatsonRequestBuilder bodyContent(String content, String contentType) {
-    body = IBMWatsonRequestBody.create(IBMWatsonMediaType.parse(contentType), content);
+    body = IBMWatsonRequestBody.create(content, IBMWatsonMediaType.parse(contentType));
     headers.add(new NameValue(IBMWatsonHttpHeaders.CONTENT_TYPE, contentType));
     headers.add(new NameValue(IBMWatsonHttpHeaders.CONTENT_LENGTH, String.valueOf(body.ContentSize)));
     return this;
@@ -216,7 +221,7 @@ public class IBMWatsonRequestBuilder {
     this.body = body;
     return this;
   }
-  
+
   /**
    * Adds a JSON content to the request (used with POST/PUT). This will encapsulate the json into a {RequestBody}
    * encoded with UTF-8 and use {"application/json"} as Content-Type
@@ -229,16 +234,16 @@ public class IBMWatsonRequestBuilder {
     return bodyContent(json, IBMWatsonHttpMediaType.APPLICATION_JSON);
   }
 
-  public IBMWatsonRequestBuilder setParams(List<NameValue> params, Map<String, String> args){
-    if( args != null && !args.isEmpty() ){
-      for(String name: args.keySet()){
+  public IBMWatsonRequestBuilder setParams(List<NameValue> params, Map<String, String> args) {
+    if (args != null && !args.isEmpty()) {
+      for (String name: args.keySet()) {
         String value = args.get(name);
         addParam(params, name, value);
       }
     }
     return this;
   }
-  
+
   /**
    * Adds query parameters.
    *
@@ -246,7 +251,7 @@ public class IBMWatsonRequestBuilder {
    *
    * @return this
    */
-  public IBMWatsonRequestBuilder queryParams(Map<String, String> args){
+  public IBMWatsonRequestBuilder queryParams(Map<String, String> args) {
     return setParams(queryParams, args);
   }
 
@@ -258,26 +263,26 @@ public class IBMWatsonRequestBuilder {
    * @return this
    */
   public IBMWatsonRequestBuilder addHeader(String headerName, String headerValue) {
-    headers.add( new NameValue(headerName, headerValue) );
+    headers.add( new NameValue(headerName, headerValue));
     return this;
   }
-  
-  public IBMWatsonRequestBuilder addHeaders(Map<String, String> headerMap){
-  	for(String k: headerMap.keySet()){
+
+  public IBMWatsonRequestBuilder addHeaders(Map<String, String> headerMap) {
+  	for (String k: headerMap.keySet()) {
   	  addHeader(k, headerMap.get(k));
   	}
   	return this;
   }
-    
-  public String queryString(){
-    if( formParams != null && !formParams.isEmpty() ){
-      System.PageReference pageReference = new System.PageReference(''); 
-      for(NameValue param: formParams){
+
+  public String queryString() {
+    if (formParams != null && !formParams.isEmpty()) {
+      System.PageReference pageReference = new System.PageReference('');
+      for (NameValue param: formParams) {
         pageReference.getParameters().put(param.name, param.value);
       }
       return pageReference.getUrl();
     }
     return null;
   }
-    
+
 }

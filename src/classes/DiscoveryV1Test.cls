@@ -12,17 +12,17 @@
  * coverage, and prevent regressions. All Apex classes are
  * required to have at least 75% code coverage in order to be deployed
  * to a production organization. In addition, all triggers must have some code coverage.
- * 
+ *
  * The @isTest class annotation indicates this class only contains test
  * methods. Classes defined with the @isTest annotation do not count against
  * the organization size limit for all Apex scripts.
  *
  * See the Apex Language Reference for more information about Testing and Code Coverage.
  */
-  
+
 @isTest
 private class DiscoveryV1Test {
-  
+
   /**
    *  Test Successfully creating a new environment.
    *
@@ -40,7 +40,7 @@ private class DiscoveryV1Test {
       .name(text)
       .description('test_environment description')
       .build();
-    DiscoveryV1Models.Environment resp = 
+    DiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
     system.assertEquals(resp.getName(),'test_environment');
     system.assertEquals(resp.getIndexCapacity().getDocuments().getIndexed(),0);
@@ -69,20 +69,20 @@ private class DiscoveryV1Test {
     system.assertEquals(resp.getIndexCapacity().getMemoryUsage().getUsed(),null);
     system.assertEquals(resp.getIndexCapacity().getMemoryUsage().getTotal(),null);
     system.assertEquals(resp.getIndexCapacity().getMemoryUsage().getPercentUsed(),null);
-    
+
     Test.stopTest();
   }
-  
-  
+
+
   /**
     *  Test error while creating a new environment with empty name.
     *
     */
   static testMethod void testCreateEnvironmentEmpty() {
-    
+
     String body=IBMWatsonMockResponses.environment();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);                                             
+    Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
@@ -93,17 +93,17 @@ private class DiscoveryV1Test {
         .name(text)
         .description('test_environment description')
         .build();
-      DiscoveryV1Models.Environment resp = 
+      DiscoveryV1Models.Environment resp =
         discovery.createEnvironment(options);
     }
     catch(Exception exptn) {
       system.assertEquals(exptn.getMessage(),'createEnvironmentOptions cannot be null');
-      
+
     }
     Test.stopTest();
   }
-  
-  
+
+
   /**
    *  Test listing the environments.
    *
@@ -120,14 +120,14 @@ private class DiscoveryV1Test {
     DiscoveryV1Models.ListEnvironmentsOptions options = new DiscoveryV1Models.ListEnvironmentsOptionsBuilder()
       .name(text)
       .build();
-    DiscoveryV1Models.ListEnvironmentsResponse resp = 
+    DiscoveryV1Models.ListEnvironmentsResponse resp =
       discovery.listEnvironments(options);
-    
+
     system.assertEquals(resp.getEnvironments().size(),2);
     Test.stopTest();
   }
-  
-  
+
+
   /**
    *  Test deleting an environment.
    *
@@ -149,7 +149,7 @@ private class DiscoveryV1Test {
   //  system.assertEquals(resp.status,'deleted');
     Test.stopTest();
   }
-  
+
   /**
    *  Test deleting an environment error with empty environment id.
    */
@@ -170,11 +170,11 @@ private class DiscoveryV1Test {
     }
     catch(Exception exptn) {
       system.assertEquals(exptn.getMessage(),'environment_id_serialized_name cannot be empty');
-      
+
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test get the environment.
    *
@@ -191,13 +191,13 @@ private class DiscoveryV1Test {
     DiscoveryV1Models.GetEnvironmentOptions options = new DiscoveryV1Models.GetEnvironmentOptionsBuilder()
       .environmentId(text)
       .build();
-    DiscoveryV1Models.Environment resp = 
+    DiscoveryV1Models.Environment resp =
       discovery.getEnvironment(options);
-    
+
     system.assertEquals(resp.getName(),'test_environment');
     Test.stopTest();
   }
-  
+
   /**
    *  Test get the environment error.
    *
@@ -215,7 +215,7 @@ private class DiscoveryV1Test {
       DiscoveryV1Models.GetEnvironmentOptions options = new DiscoveryV1Models.GetEnvironmentOptionsBuilder()
         .environmentId(text)
         .build();
-      DiscoveryV1Models.Environment resp = 
+      DiscoveryV1Models.Environment resp =
         discovery.getEnvironment(options);
     }
     catch(Exception exptn) {
@@ -223,7 +223,7 @@ private class DiscoveryV1Test {
     }
     Test.stopTest();
   }
-  
+
    /**
    *  Test update the environment.
    *
@@ -242,7 +242,7 @@ private class DiscoveryV1Test {
       .name('test_environment')
       .description('test_environment description')
       .build();
-    DiscoveryV1Models.Environment resp = 
+    DiscoveryV1Models.Environment resp =
       discovery.updateEnvironment(options);
     system.assertEquals(resp.getName(),'test_environment');
     Test.stopTest();
@@ -265,7 +265,7 @@ private class DiscoveryV1Test {
         .name('')
         .description('test_environment description')
         .build();
-      DiscoveryV1Models.Environment resp = 
+      DiscoveryV1Models.Environment resp =
         discovery.updateEnvironment(options);
     }
     catch(Exception exptn) {
@@ -273,7 +273,7 @@ private class DiscoveryV1Test {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test list fields in a collection.
    *
@@ -291,12 +291,12 @@ private class DiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .collectionIds(collectionIds)
       .build();
-    DiscoveryV1Models.ListCollectionFieldsResponse resp = 
+    DiscoveryV1Models.ListCollectionFieldsResponse resp =
       discovery.listFields(options);
     system.assertEquals(resp.getFields().size(),4);
     Test.stopTest();
   }
-  
+
   /**
    *  Test create configuration
    *
@@ -337,7 +337,7 @@ private class DiscoveryV1Test {
       .normalizations(new List<DiscoveryV1Models.NormalizationOperation>{normalizationOperation})
       .conversions(conversions)
       .build();
-    DiscoveryV1Models.Configuration resp = 
+    DiscoveryV1Models.Configuration resp =
       discovery.createConfiguration(options);
     system.assertEquals(resp.getName(),'IBM News');
     system.assertEquals(resp.getConfigurationId(),'448e3545-51ca-4530-a03b-6ff282ceac2e');
@@ -345,7 +345,7 @@ private class DiscoveryV1Test {
     system.assertEquals(resp.getUpdated(),(DateTime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',DateTime.class));
     Test.stopTest();
   }
-  
+
   /**
    *  Test create configuration validator error
    *
@@ -363,7 +363,7 @@ private class DiscoveryV1Test {
         .name('test_environment')
         .description('test_environment description')
         .build();
-      DiscoveryV1Models.Configuration resp = 
+      DiscoveryV1Models.Configuration resp =
         discovery.createConfiguration(options);
     }
     catch(Exception exptn) {
@@ -371,7 +371,7 @@ private class DiscoveryV1Test {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test delete configuration
    *
@@ -391,7 +391,7 @@ private class DiscoveryV1Test {
     discovery.deleteConfiguration(options);
     Test.stopTest();
   }
-  
+
   /**
    *  Test get configuration
    *
@@ -408,12 +408,12 @@ private class DiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .configurationId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    DiscoveryV1Models.Configuration resp = 
+    DiscoveryV1Models.Configuration resp =
       discovery.getConfiguration(options);
     system.assertEquals(resp.getName(),'IBM News');
     Test.stopTest();
   }
-  
+
   /**
    *  Test list configurations
    *
@@ -429,12 +429,12 @@ private class DiscoveryV1Test {
     DiscoveryV1Models.ListConfigurationsOptions options = new DiscoveryV1Models.ListConfigurationsOptionsBuilder()
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    DiscoveryV1Models.ListConfigurationsResponse resp = 
+    DiscoveryV1Models.ListConfigurationsResponse resp =
       discovery.listConfigurations(options);
     system.assertEquals(resp.getConfigurations().size(),1);
     Test.stopTest();
   }
-  
+
   /**
    *  Test update configuration
    *
@@ -452,12 +452,12 @@ private class DiscoveryV1Test {
       .description('test_environment description')
       .configurationId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    DiscoveryV1Models.Configuration resp = 
+    DiscoveryV1Models.Configuration resp =
       discovery.updateConfiguration(options);
     system.assertEquals(resp.getName(),'IBM News');
     Test.stopTest();
   }
-  
+
   /**
    *  Test update configuration validator error
    *
@@ -476,7 +476,7 @@ private class DiscoveryV1Test {
         .name('test_environment')
         .description('test_environment description')
         .build();
-      DiscoveryV1Models.Configuration resp = 
+      DiscoveryV1Models.Configuration resp =
         discovery.updateConfiguration(options);
     }
     catch(Exception exptn) {
@@ -484,7 +484,7 @@ private class DiscoveryV1Test {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test create collection
    *
@@ -504,12 +504,12 @@ private class DiscoveryV1Test {
       .description('test_environment description')
       .language('de')
       .build();
-    DiscoveryV1Models.Collection resp = 
+    DiscoveryV1Models.Collection resp =
       discovery.createCollection(options);
     system.assertEquals(resp.getName(),'test-collection');
     Test.stopTest();
   }
-  
+
   /**
    *  Test delete collection
    *
@@ -529,7 +529,7 @@ private class DiscoveryV1Test {
     discovery.deleteCollection(options);
     Test.stopTest();
   }
-  
+
   /**
    *  Test get collection
    *
@@ -546,7 +546,7 @@ private class DiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    DiscoveryV1Models.Collection resp = 
+    DiscoveryV1Models.Collection resp =
       discovery.getCollection(options);
     system.assertEquals(resp.getName(),'test-collection');
     system.assertEquals(resp.getCollectionId(),'800e58e4-198d-45eb-be87-74e1d6df4e96');
@@ -571,7 +571,7 @@ private class DiscoveryV1Test {
     system.assertEquals(resp.getTrainingStatus().getDataUpdated(),null);
     Test.stopTest();
   }
-  
+
   /**
    *  Test list collections
    *
@@ -587,7 +587,7 @@ private class DiscoveryV1Test {
     DiscoveryV1Models.ListCollectionsOptions options = new DiscoveryV1Models.ListCollectionsOptionsBuilder()
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    DiscoveryV1Models.ListCollectionsResponse resp = 
+    DiscoveryV1Models.ListCollectionsResponse resp =
       discovery.listCollections(options);
     system.assertEquals(resp.getCollections().size(),1);
     Test.stopTest();
@@ -610,12 +610,12 @@ private class DiscoveryV1Test {
       .name('test_environment')
       .description('test_environment description')
       .build();
-    DiscoveryV1Models.Collection resp = 
+    DiscoveryV1Models.Collection resp =
       discovery.updateCollection(options);
     system.assertEquals(resp.getName(),'test-collection');
     Test.stopTest();
   }
-  
+
   /**
    *  Test update collection validator error
    *
@@ -634,7 +634,7 @@ private class DiscoveryV1Test {
         .name('test_environment')
         .description('test_environment description')
         .build();
-      DiscoveryV1Models.Collection resp = 
+      DiscoveryV1Models.Collection resp =
         discovery.updateCollection(options);
     }
     catch(Exception exptn) {
@@ -642,7 +642,7 @@ private class DiscoveryV1Test {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test list fields in a single collection. (DiscoveryV1.listCollectionFields)
    *
@@ -660,12 +660,12 @@ private class DiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    DiscoveryV1Models.ListCollectionFieldsResponse resp = 
+    DiscoveryV1Models.ListCollectionFieldsResponse resp =
       discovery.listCollectionFields(options);
     system.assertEquals(resp.getFields().size(),4);
     Test.stopTest();
   }
-  
+
   /**
    *  Test delete document
    *
@@ -686,7 +686,7 @@ private class DiscoveryV1Test {
     discovery.deleteDocument(options);
     Test.stopTest();
   }
-  
+
   /**
    *  Test get document
    *
@@ -704,7 +704,7 @@ private class DiscoveryV1Test {
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .documentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    DiscoveryV1Models.DocumentStatus resp = 
+    DiscoveryV1Models.DocumentStatus resp =
       discovery.getDocumentStatus(options);
     system.assertEquals(resp.getStatus(),'available with notices');
     system.assertEquals(resp.getDocumentId(),'f1360220-ea2d-4271-9d62-89a910b13c37');
@@ -729,7 +729,7 @@ private class DiscoveryV1Test {
     system.assertEquals(resp.getFilename(),'instructions1.html');
     Test.stopTest();
   }
-  
+
   /**
    *  Test Query documents in multiple collections.
    *
@@ -749,12 +749,12 @@ private class DiscoveryV1Test {
       .returnField(collectionIds)
       .sortField(collectionIds)
       .build();
-    DiscoveryV1Models.QueryResponse resp = 
+    DiscoveryV1Models.QueryResponse resp =
       discovery.federatedQuery(options);
     system.assertEquals(resp.getResults().size(),1);
     Test.stopTest();
   }
-  
+
   /**
    *  Test query multiple collection system notices
    *
@@ -785,7 +785,7 @@ private class DiscoveryV1Test {
       .highlight(true)
       .deduplicateField('test')
       .build();
-    DiscoveryV1Models.QueryNoticesResponse resp = 
+    DiscoveryV1Models.QueryNoticesResponse resp =
       discovery.federatedQueryNotices(options);
     system.assertEquals(resp.getResults().size(),1);
   //  system.assertEquals(resp.getResults()[0].getId(),'030ba125-29db-43f2-8552-f941ae30a7a8');
@@ -840,7 +840,7 @@ private class DiscoveryV1Test {
     system.assertEquals(queryPassages.getEndOffset(),2);
     Test.stopTest();
   }
-  
+
   /**
    *  Test Query documents in single collection.
    *
@@ -861,12 +861,12 @@ private class DiscoveryV1Test {
       .sortField(collectionIds)
       .passagesFields(collectionIds)
       .build();
-    DiscoveryV1Models.QueryResponse resp = 
+    DiscoveryV1Models.QueryResponse resp =
       discovery.query(options);
     system.assertEquals(resp.getResults().size(),1);
     Test.stopTest();
   }
-  
+
   /**
    *  Test query collection system notices
    *
@@ -887,13 +887,13 @@ private class DiscoveryV1Test {
       .sortField(collectionIds)
       .passagesFields(collectionIds)
       .build();
-    DiscoveryV1Models.QueryNoticesResponse resp = 
+    DiscoveryV1Models.QueryNoticesResponse resp =
       discovery.queryNotices(options);
     system.assertEquals(resp.getResults().size(),1);
     Test.stopTest();
   }
-  
-  
+
+
   /**
    *  Test adding a query to the training data in single collection.
    *
@@ -919,16 +919,16 @@ private class DiscoveryV1Test {
       .addExamples(te)
       .examples(new List<DiscoveryV1Models.TrainingExample>{te})
       .build();
-    DiscoveryV1Models.TrainingQuery resp = 
+    DiscoveryV1Models.TrainingQuery resp =
       discovery.addTrainingData(options);
     system.assertEquals(resp.getExamples().size(),1);
     system.assertEquals(resp.getExamples()[0].getDocumentId(),'string');
     system.assertEquals(resp.getExamples()[0].getCrossReference(),'string');
     system.assertEquals(resp.getExamples()[0].getRelevance(),0);
-    
+
     Test.stopTest();
   }
-  
+
   /**
    *  Test adding a query to the training data in single collection.
    *
@@ -955,12 +955,12 @@ private class DiscoveryV1Test {
       .relevance(2)
       .crossReference('test')
       .build();
-    DiscoveryV1Models.TrainingExample resp = 
+    DiscoveryV1Models.TrainingExample resp =
       discovery.createTrainingExample(options);
     system.assertEquals(resp.getRelevance(),2);
     Test.stopTest();
   }
-  
+
    /**
    *  Test delete training data for a collection
    *
@@ -980,7 +980,7 @@ private class DiscoveryV1Test {
     discovery.deleteAllTrainingData(options);
     Test.stopTest();
   }
-  
+
   /**
    *  Test delete training data and all associated examples from the training data set
    *
@@ -1001,14 +1001,14 @@ private class DiscoveryV1Test {
     discovery.deleteTrainingData(options);
     Test.stopTest();
   }
-  
+
    /**
    *  Test get training data
    *
    */
   static testMethod void testGetTrainingData() {
     String body=IBMWatsonMockResponses.trainingQuery();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null); 
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
@@ -1019,14 +1019,14 @@ private class DiscoveryV1Test {
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    DiscoveryV1Models.TrainingQuery resp = 
+    DiscoveryV1Models.TrainingQuery resp =
       discovery.getTrainingData(options);
-    
+
     system.assertEquals(resp.getExamples().size(),1);
     system.assertEquals(resp.getFilter(),'string');
     Test.stopTest();
   }
-  
+
   /**
    *  Test get training example
    *
@@ -1045,20 +1045,20 @@ private class DiscoveryV1Test {
       .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .exampleId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    DiscoveryV1Models.TrainingExample resp = 
+    DiscoveryV1Models.TrainingExample resp =
       discovery.getTrainingExample(options);
-    
+
     system.assertEquals(resp.getRelevance(),2);
     Test.stopTest();
   }
-  
+
   /**
    *  Test list training data
    *
    */
   static testMethod void testListTrainingData() {
     String body=IBMWatsonMockResponses.trainingDataSet();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null); 
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
@@ -1068,14 +1068,14 @@ private class DiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    DiscoveryV1Models.TrainingDataSet resp = 
+    DiscoveryV1Models.TrainingDataSet resp =
       discovery.listTrainingData(options);
-    
+
     system.assertEquals(resp.getQueries()[0].getExamples().size(),1);
     system.assertEquals(resp.getQueries()[0].getFilter(),'string');
     Test.stopTest();
   }
-  
+
   /**
    *  Test adding a query to the training data in single collection.
    *
@@ -1097,12 +1097,12 @@ private class DiscoveryV1Test {
       .relevance(2)
       .crossReference('test')
       .build();
-    DiscoveryV1Models.TrainingExample resp = 
+    DiscoveryV1Models.TrainingExample resp =
       discovery.updateTrainingExample(options);
     system.assertEquals(resp.getRelevance(),2);
     Test.stopTest();
   }
-  
+
   /**
    *  Test  collection model
    *
@@ -1146,7 +1146,7 @@ private class DiscoveryV1Test {
     system.assertEquals(resp.getTrainingStatus().getDataUpdated(),null);
     Test.stopTest();
   }
-  
+
    /**
    *  Test  configuration model
    *
@@ -1225,7 +1225,7 @@ private class DiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .configuration(configuration)
       .build();
-    DiscoveryV1Models.Configuration resp = 
+    DiscoveryV1Models.Configuration resp =
       discovery.createConfiguration(options);
     system.assertEquals(resp.getName(),'IBM News');
     system.assertEquals(configuration.getName(),'test-collection');
@@ -1264,7 +1264,7 @@ private class DiscoveryV1Test {
     system.assertEquals(enrichment.getOptions().getExtract()[0],'Extract1');
     Test.stopTest();
   }
-  
+
   /**
    *  Test deleting the example with the given ID for the training data query.
    */
@@ -1287,5 +1287,5 @@ private class DiscoveryV1Test {
   //  system.assertEquals(resp.status,'deleted');
     Test.stopTest();
   }
-  
+
 }

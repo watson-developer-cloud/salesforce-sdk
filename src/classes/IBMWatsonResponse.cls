@@ -1,60 +1,69 @@
 public with sharing class IBMWatsonResponse {
- 
-  /** The response text. */
-  private String responseText;
+  private static final String MESSAGE_ERROR = 'error';
+  private static final String MESSAGE_ERROR_3 = 'message';
+  private static final String MESSAGE_ERROR_2 = 'error_message';
 
-  /** The http status. */
-  public String Status { public get; private set;}
+  private final String errorMessage;
+  private final String contentType;
+  private final String globalTransactionId;
+  private final String url;
+  private final HttpResponse httpResponse;
 
-  /** The http status. */
-  public Integer StatusCode { public get; private set;}
+  public IBMWatsonResponse(String url, HttpResponse httpResponse) {
+    this.httpResponse = httpResponse;
 
-  /** The url. */
-  private String url;
-
-  /** The error. */
-  public Boolean error { public get; private set; }
-
-  /** The content type. */
-  private String contentType;
- 
-  public IBMWatsonResponse (String url, String text, String httpStatus, Integer statusCode) {
     this.url = url;
-    this.responseText = text;
-    this.Status = httpStatus;
-    this.StatusCode = statusCode;
-    this.error = (statusCode >= 400);
+    this.contentType = this.getHeader(IBMWatsonHttpHeaders.CONTENT_TYPE);
+    this.globalTransactionId = this.getHeader(IBMWatsonHttpHeaders.X_GLOBAL_TRANSACTION_ID);
+
+    if (!isSuccessful()) {
+      this.errorMessage = getErrorMessage(httpResponse.getBody());
+    }
   }
 
-  public String getResponseText() {
-    return responseText;
+  public String getBody() {
+    return this.httpResponse.getBody();
   }
 
-  public void setResponseText(String responseText) {
-    this.responseText = responseText;
-  }
-     
-  public String getHttpStatus() {
-    return Status;
+  public Blob getBodyAsBlob() {
+    return this.httpResponse.getBodyAsBlob();
   }
 
-  public void setHttpStatus(Integer httpStatus) {
-    this.Status = Status;
+  public String getHeader(String key) {
+    return this.httpResponse.getHeader(key);
   }
 
-  public String getUrl() {
-    return url;
+  public String[] getHeaderKeys() {
+    return this.httpResponse.getHeaderKeys();
   }
 
-  public void setUrl(String url) {
-    this.url = url;
+  public Integer getStatusCode() {
+    return this.httpResponse.getStatusCode();
   }
 
-  public String getcontentType() {
-    return this.contentType;
+  public String getStatus() {
+    return this.httpResponse.getStatus();
   }
 
-  public void setcontentType(String contentType) {
-    this.contentType = contentType;
+  public Boolean isSuccessful() {
+    return (this.getStatusCode() >= 200 && this.getStatusCode() < 300);
+  }
+
+  private String getErrorMessage(String errorResponse) {
+    String error = errorResponse;
+    try {
+      Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(errorResponse);
+      if (responseMap.containsKey(MESSAGE_ERROR)) {
+        error = (String) responseMap.get(MESSAGE_ERROR);
+      } else if (responseMap.containsKey(MESSAGE_ERROR_2)) {
+        error = (String) responseMap.get(MESSAGE_ERROR_2);
+      } else if (responseMap.containsKey(MESSAGE_ERROR_3)) {
+        error = (String) responseMap.get(MESSAGE_ERROR_3);
+      }
+    } catch (Exception e) {
+      // Ignore any kind of exception parsing the json and use fallback String version of response
+    }
+
+    return error;
   }
 }

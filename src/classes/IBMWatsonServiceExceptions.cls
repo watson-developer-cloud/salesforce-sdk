@@ -1,9 +1,46 @@
 public class IBMWatsonServiceExceptions {
+  
+  public abstract class ServiceException extends Exception {
+
+    private final Integer statusCode;
+    private final IBMWatsonResponse response;
+
+    /**
+    * Instantiates a new Service Response Exception.
+    *
+    * @param statusCode the status code
+    * @param message the error message
+    * @param response the HTTP response
+    */
+    public ServiceException(Integer statusCode, String message, IBMWatsonResponse response) {
+      this(message);
+      this.statusCode = statusCode;
+      this.response = response;
+    }
+
+    /**
+    * Gets the HTTP status code.
+    *
+    * @return the http status code
+    */
+    public Integer getStatusCode() {
+      return statusCode;
+    }
+    /**
+    * Gets the HTTP response.
+    *
+    * @return the HTTP response
+    */
+    public IBMWatsonResponse getResponse() {
+      return response;
+    }
+  }
+
 
   /**
    * 400 Bad Request (HTTP/1.1).
    */
-  public class BadRequestException extends IBMWatsonServiceResponseException {
+  public class BadRequestException extends ServiceException {
 
     /**
      * Instantiates a new BadRequest Exception. HTTP 400
@@ -19,7 +56,7 @@ public class IBMWatsonServiceExceptions {
   /**
    * 409 Conflict (HTTP/1.1).
    */
-  public class ConflictException  extends IBMWatsonServiceResponseException {
+  public class ConflictException  extends ServiceException {
 
     /**
      * Instantiates a new Conflict Exception.
@@ -35,7 +72,7 @@ public class IBMWatsonServiceExceptions {
   /**
    * 403 Forbidden (HTTP/1.0).
    */
-  public class ForbiddenException extends IBMWatsonServiceResponseException {
+  public class ForbiddenException extends ServiceException {
 
     /**
      * Instantiates a new Forbidden Exception.
@@ -51,7 +88,7 @@ public class IBMWatsonServiceExceptions {
   /**
    * 500 Server Error (HTTP/1.0).
    */
-  public class InternalServerErrorException extends IBMWatsonServiceResponseException {
+  public class InternalServerErrorException extends ServiceException {
 
     /**
      * Instantiates a new Forbidden Exception.
@@ -67,7 +104,7 @@ public class IBMWatsonServiceExceptions {
   /**
    * 404 Not Found (HTTP/1.0).
    */
-  public class NotFoundException extends IBMWatsonServiceResponseException {
+  public class NotFoundException extends ServiceException {
 
     /**
      * Instantiates a new Not Found Exception.
@@ -83,7 +120,7 @@ public class IBMWatsonServiceExceptions {
   /**
    * 413 Request Entity Too Large (HTTP/1.1).
    */
-  public with sharing class RequestTooLargeException extends IBMWatsonServiceResponseException {
+  public class RequestTooLargeException extends ServiceException {
 
     /**
      * Instantiates a new Request Too Large Exception.
@@ -99,7 +136,7 @@ public class IBMWatsonServiceExceptions {
   /**
    * Default Response Exception  (HTTP/1.1).
    */
-  public class ResponseException extends IBMWatsonServiceResponseException {
+  public class ResponseException extends ServiceException {
 
     /**
      * Instantiates a new Response Exception.
@@ -107,7 +144,7 @@ public class IBMWatsonServiceExceptions {
      * @param message the error message
      * @param response the HTTP response
      */
-    public ResponseException(Integer statusCode,String message, IBMWatsonResponse response) {
+    public ResponseException(Integer statusCode, String message, IBMWatsonResponse response) {
       super(statusCode, message, response);
     }
   }
@@ -115,7 +152,7 @@ public class IBMWatsonServiceExceptions {
   /**
    * 503 Service Unavailable  (HTTP/1.1).
    */
-  public class ServiceUnavailableException extends IBMWatsonServiceResponseException {
+  public class ServiceUnavailableException extends ServiceException {
 
     /**
      * Instantiates a new Service Unavailable Exception.
@@ -131,7 +168,7 @@ public class IBMWatsonServiceExceptions {
   /**
    * 429 Too Many Requests  (HTTP/1.1).
    */
-  public class TooManyRequestsException extends IBMWatsonServiceResponseException {
+  public class TooManyRequestsException extends ServiceException {
 
     /**
      * Instantiates a new Too Many Requests Exception.
@@ -147,7 +184,7 @@ public class IBMWatsonServiceExceptions {
   /**
    * 401 Unauthorized  (HTTP/1.0).
    */
-  public class UnauthorizedException extends IBMWatsonServiceResponseException {
+  public class UnauthorizedException extends ServiceException {
 
     /**
      * Instantiates a new Unauthorized Exception.
@@ -163,7 +200,7 @@ public class IBMWatsonServiceExceptions {
   /**
    * 415 Unsupported Media Type  (HTTP/1.1).
    */
-  public class UnsupportedException extends IBMWatsonServiceResponseException {
+  public class UnsupportedException extends ServiceException {
 
     /**
      * Instantiates a new unsupported Exception.
@@ -176,12 +213,5 @@ public class IBMWatsonServiceExceptions {
     }
   }
 
-  public class IllegalArgumentException extends Exception {
-
-  }
-
-  public class RuntimeException extends Exception {
-
-  }
-
+  public class IllegalArgumentException extends Exception { }
 }
