@@ -1,26 +1,9 @@
-# Questions
+## Questions
 
 If you are having difficulties using the APIs or have a question about the IBM Watson Services,
 please ask a question on [dW Answers][dw] or [Stack Overflow][stackoverflow].
 
-# Coding Guidelines
-
-Salesforce has very comprehensive developer guide. Please refer to [developer guide](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_dev_guide.htm) for any development related questions information. Our code is following [Salesforce best practices](https://developer.salesforce.com/page/Apex_Code_Best_Practices); please follow the apex coding best practices to update code. 
-
-For code styling we recommend:https://github.com/PolarisProject/salesforceStyleGuide
-
-Please follow the salesforce.com guidelines for unit testing. The links to unit test guide lines are provided below. SDK contains unit test code that provides examples for writing unit test and how to use SDK to connect with Watson API.
-
-Unit Testing Links:
-
-For writing unit tests: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_testing.htm
-
-For running unit tests: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_testing_unit_tests_running.htm
-
-For rest callout specific unit tests : https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_restful_http_testing.htm
-
-
-# Issues
+## Issues
 
 If you encounter an issue with the salesforce.com API, you are welcome to submit a  [bug report](https://github.com/watson-developer-cloud/salesforce-sdk/issues).
 Before that, please search for similar issues. It's possible somebody has encountered this issue already.
@@ -95,9 +78,22 @@ When creating creating commits or updating the `CHANGELOG`, please **start** the
 * :boom: `:boom:` when changing in a non-backwards-compatible way current functionality
 * :shipit: `:shipit:` when creating a new release
 
+## Coding Guidelines
+
+Salesforce has very comprehensive developer guide. Please refer to [developer guide](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_dev_guide.htm) for any development related questions information. Our code is following [Salesforce best practices](https://developer.salesforce.com/page/Apex_Code_Best_Practices); please follow the apex coding best practices before you update the code.
+
+For code styling we recommend: https://github.com/PolarisProject/salesforceStyleGuide
+
+Please follow the salesforce.com guidelines for unit testing. The links to unit test guide lines are provided below. SDK contains unit test code that provides examples for writing unit test and how to use SDK to connect with Watson API.
+
+* [Writing unit tests](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_testing.htm)
+* [running unit tests](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_testing_unit_tests_running.htm)
+* [REST callout specific unit tests](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_restful_http_testing.htm)
+
 ## Additional Resources
-+ [General GitHub documentation](https://help.github.com/)
-+ [GitHub pull request documentation](https://help.github.com/send-pull-requests/)
+
+* [General GitHub documentation](https://help.github.com/)
+* [GitHub pull request documentation](https://help.github.com/send-pull-requests/)
 
 [dw]: https://developer.ibm.com/answers/questions/ask/?topics=watson
 [stackoverflow]: http://stackoverflow.com/questions/ask?tags=ibm-watson
