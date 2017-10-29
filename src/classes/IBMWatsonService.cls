@@ -6,7 +6,7 @@ public abstract class IBMWatsonService {
   public IBMWatsonRequestBuilder builder {get;set;}
   public IBMWatsonResponse response {get;set;}
   public IBMWatsonRequest request {get;set;}
-
+   
   private String apiKey;
   private String endPoint;
 
@@ -39,9 +39,10 @@ public abstract class IBMWatsonService {
   public IBMWatsonService() {}
   
   private String getErrorMessage(IBMWatsonResponse response) {
+  	if( response == null ) return '';
   	String error = response.getResponseText();
     try {
-	  Map<String, Object> responseMap = (Map<String, Object>)JSON.deserializeUntyped(error);
+      Map<String, Object> responseMap = (Map<String, Object>)JSON.deserializeUntyped(error);
       if (responseMap.containsKey(MESSAGE_ERROR)) {
         error = (String)responseMap.get(MESSAGE_ERROR);
       } else if (responseMap.containsKey(MESSAGE_ERROR_2)) {
@@ -138,16 +139,16 @@ public abstract class IBMWatsonService {
    * @param builder the new default headers
    */
   protected void setDefaultHeaders(IBMWatsonRequest.Builder builder) {
-    //String userAgent = IBMWatsonRequestUtils.getUserAgent();
+    String userAgent = IBMWatsonRequestUtils.getUserAgent();
     if (defaultHeaders != null && !defaultHeaders.isEmpty()) {
       for (String key : defaultHeaders.keySet()) {
         builder.addHeader(key, defaultHeaders.get(key));
       }
-      //if (defaultHeaders.containsKey(IBMWatsonHttpHeaders.USER_AGENT) && defaultHeaders.get(IBMWatsonHttpHeaders.USER_AGENT) != null) {
-      //  userAgent += ' ' + defaultHeaders.get(IBMWatsonHttpHeaders.USER_AGENT);
-      //}
+      if (defaultHeaders.containsKey(IBMWatsonHttpHeaders.USER_AGENT) && defaultHeaders.get(IBMWatsonHttpHeaders.USER_AGENT) != null) {
+        userAgent += ' ' + defaultHeaders.get(IBMWatsonHttpHeaders.USER_AGENT);
+      }
     }
-    //builder.addHeader(IBMWatsonHttpHeaders.USER_AGENT, userAgent);
+    builder.addHeader(IBMWatsonHttpHeaders.USER_AGENT, userAgent);
   }
 
   /**

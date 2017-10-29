@@ -164,7 +164,6 @@ public class IBMWatsonRequestBuilder {
   public IBMWatsonRequest build() {
     IBMWatsonRequest.Builder builder = new IBMWatsonRequest.Builder();
     // URL
-    system.debug(' ==> [IBMWatsonRequestBuilder]:: -- build() -- queryParams='+queryParams);
     builder.url( getURLWithParams(httpUrl) );
 
     if ( method == HTTPMethod.HTTP_GET && body != null) {
@@ -172,7 +171,7 @@ public class IBMWatsonRequestBuilder {
     } else if (formParams != null && !formParams.isEmpty()) {
 
     } else if (body == null) {
-      body = IBMWatsonRequestBody.create(null, null);
+      body = IBMWatsonRequestBody.create();
     }
     
     builder.method(HTTPMethodValue.get(method), body);
@@ -180,7 +179,7 @@ public class IBMWatsonRequestBuilder {
     // accept application/json by default
     builder.addHeader(IBMWatsonHttpHeaders.ACCEPT, IBMWatsonHttpMediaType.APPLICATION_JSON);
     
-    system.debug('### *** headers.....'+headers);
+    system.debug(' ==> *** headers.....'+headers);
     
     if( headers != null && !headers.isEmpty() ){
       for (NameValue header : headers) {
@@ -207,6 +206,17 @@ public class IBMWatsonRequestBuilder {
     return this;
   }
 
+  /**
+   * Sets the body.
+   *
+   * @param body the body
+   * @return the request builder
+   */
+  public IBMWatsonRequestBuilder body(IBMWatsonRequestBody body) {
+    this.body = body;
+    return this;
+  }
+  
   /**
    * Adds a JSON content to the request (used with POST/PUT). This will encapsulate the json into a {RequestBody}
    * encoded with UTF-8 and use {"application/json"} as Content-Type
@@ -250,6 +260,13 @@ public class IBMWatsonRequestBuilder {
   public IBMWatsonRequestBuilder addHeader(String headerName, String headerValue) {
     headers.add( new NameValue(headerName, headerValue) );
     return this;
+  }
+  
+  public IBMWatsonRequestBuilder addHeaders(Map<String, String> headerMap){
+  	for(String k: headerMap.keySet()){
+  	  addHeader(k, headerMap.get(k));
+  	}
+  	return this;
   }
     
   public String queryString(){
