@@ -4,11 +4,65 @@
 
 The IBM Watson Salesforce SDK uses the [Watson Developer Cloud](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment. Currently, this SDK supports two Watson services: Conversation and Discovery. More are planned to be added in the future.
 
-## Installation
+## Installation using Salesforce DX
 
-If you do not have the Watson Salesforce SDK installed yet, you can do so using this unmanaged package: [link].
+### Automatic deployment
 
-If you already have a previous version installed, you can update it using the following steps:
+You can automatically deploy the SDK to a new scratch environment using the _Deploy to SFDX_ button.
+
+[![Deploy](https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.com/)
+
+
+### Manual deployment
+
+
+1. Clone this repository from GitHub using the following command:
+    ```bash
+    git clone git@github.com:germanattanasio/salesforce-sdk.git
+    ```
+
+2. Create a new scratch environment (optional if you don't want to re-use an existing one):
+
+    ```bash
+    sfdx force:org:create -a watsonSdk -s -f config/project-scratch-def.json
+    ```
+
+3. Push the source to the scratch environment:
+
+    ```bash
+    sfdx force:source:push
+    ```
+
+If you want to use the Watson SDK within a non-scratch environment you can deploy it using the Salesforce DX CLI.
+
+
+1. Authenticate the Salesforce DX CLI to the target environment:
+
+    ```bash
+    sfdx force:auth:web:login -a TargetOrg
+    ```
+
+2. Create an output directory:
+
+    ```bash
+    mkdir mdapioutput
+    ```
+
+3. Convert the source code:
+
+    ```bash
+    sfdx force:source:convert -d mdapioutput/
+    ```
+
+4. Deploy the source code:
+
+    ```bash
+    sfdx force:mdapi:deploy -d mdapipackage/ -u TargetOrg -w 100
+    ```
+
+## Installation using the Ant Build Tool
+
+You can install or update the SDK using the Ant Build Tool by following these steps:
 
 1. Clone this repository from GitHub using the following command:
     ```bash
