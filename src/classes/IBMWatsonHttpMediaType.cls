@@ -132,7 +132,7 @@ public class IBMWatsonHttpMediaType {
   /**
    * Field BINARY_FILE. (value is 'application/octet-stream')
    */
-  //public static final MediaType BINARY_FILE = MediaType.parse(APPLICATION_OCTET_STREAM);
+  public static final IBMWatsonMediaType BINARY_FILE = IBMWatsonMediaType.parse(APPLICATION_OCTET_STREAM);
 
   /**
    * Field BINARY_OCTET_STREAM. (value is 'binary/octet-stream')

@@ -26,15 +26,20 @@ public class IBMWatsonClient {
     public HttpRequest buildHttpRequest(  IBMWatsonRequest wreq  ){
       HttpRequest req = new HttpRequest();
       for(String name: wreq.getAllHeaders().keySet() ){
-        if(name == 'User-Agent') {
-          continue;
-        }
         req.setHeader(name, wreq.getAllHeaders().get(name));
       }
 
-      if( !String.isBlank(wreq.getMethod()) && (wreq.getMethod().equalsIgnoreCase('POST') || wreq.getMethod().equalsIgnoreCase('PUT'))) {
-        String body = IBMWatsonJSONUtil.serialize(wreq.getBody().content);
-        req.setBody(body);
+      if(!String.isBlank(wreq.getMethod()) &&
+        (wreq.getMethod().equalsIgnoreCase('POST') || wreq.getMethod().equalsIgnoreCase('PUT'))) {
+      	if( wreq.getBody() instanceOf IBMWatsonMultipartBody ){
+      	  //form-multipart post as base64 request
+      	  String form64 = ((IBMWatsonMultipartBody)wreq.getBody()).form64();
+      	  req.setBody(form64);
+      	  req.setHeader('Content-Length', String.valueof(form64.length()));
+      	}else{
+          // regular post
+      	  req.setBody(IBMWatsonJSONUtil.serialize(wreq.getBody().content));
+      	}
       }
       req.setMethod(wreq.getMethod());
       req.setEndpoint(wreq.getUrl().toExternalForm());

@@ -5,7 +5,7 @@ public class DiscoveryV1Models {
   public class AddDocumentOptions {
     private String environment_id_serialized_name;
     private String collection_id_serialized_name;
-    private String file_serialized_name;
+    private IBMWatsonFile file_serialized_name;
     private String filename_serialized_name;
     private String metadata_serialized_name;
     private String file_content_type_serialized_name;
@@ -36,7 +36,7 @@ public class DiscoveryV1Models {
      *
      * @return the file_serialized_name
      */
-    public String file() {
+    public IBMWatsonFile file() {
       return file_serialized_name;
     }
     /**
@@ -97,7 +97,7 @@ public class DiscoveryV1Models {
   public class AddDocumentOptionsBuilder {
     private String environment_id_serialized_name;
     private String collection_id_serialized_name;
-    private String file_serialized_name;
+    private IBMWatsonFile file_serialized_name;
     private String filename_serialized_name;
     private String metadata_serialized_name;
     private String file_content_type_serialized_name;
@@ -165,7 +165,7 @@ public class DiscoveryV1Models {
      * @param file_serialized_name the file_serialized_name
      * @return the AddDocumentOptions builder
      */
-    public AddDocumentOptionsBuilder file(String file_serialized_name) {
+    public AddDocumentOptionsBuilder file(IBMWatsonFile file_serialized_name) {
       this.file_serialized_name = file_serialized_name;
       return this;
     }
@@ -8877,7 +8877,7 @@ public class DiscoveryV1Models {
     private String configuration_serialized_name;
     private String step_serialized_name;
     private String configuration_id_serialized_name;
-    private String file_serialized_name;
+    private IBMWatsonFile file_serialized_name;
     private String filename_serialized_name;
     private String metadata_serialized_name;
     private String file_content_type_serialized_name;
@@ -8928,7 +8928,7 @@ public class DiscoveryV1Models {
      *
      * @return the file_serialized_name
      */
-    public String file() {
+    public IBMWatsonFile file() {
       return file_serialized_name;
     }
     /**
@@ -8992,7 +8992,7 @@ public class DiscoveryV1Models {
     private String configuration_serialized_name;
     private String step_serialized_name;
     private String configuration_id_serialized_name;
-    private String file_serialized_name;
+    private IBMWatsonFile file_serialized_name;
     private String filename_serialized_name;
     private String metadata_serialized_name;
     private String file_content_type_serialized_name;
@@ -9082,7 +9082,7 @@ public class DiscoveryV1Models {
      * @param file_serialized_name the file_serialized_name
      * @return the TestConfigurationInEnvironmentOptions builder
      */
-    public TestConfigurationInEnvironmentOptionsBuilder file(String file_serialized_name) {
+    public TestConfigurationInEnvironmentOptionsBuilder file(IBMWatsonFile file_serialized_name) {
       this.file_serialized_name = file_serialized_name;
       return this;
     }
@@ -10198,7 +10198,7 @@ public class DiscoveryV1Models {
     private String environment_id_serialized_name;
     private String collection_id_serialized_name;
     private String document_id_serialized_name;
-    private String file_serialized_name;
+    private IBMWatsonFile file_serialized_name;
     private String filename_serialized_name;
     private String metadata_serialized_name;
     private String file_content_type_serialized_name;
@@ -10239,7 +10239,7 @@ public class DiscoveryV1Models {
      *
      * @return the file_serialized_name
      */
-    public String file() {
+    public IBMWatsonFile file() {
       return file_serialized_name;
     }
     /**
@@ -10303,7 +10303,7 @@ public class DiscoveryV1Models {
     private String environment_id_serialized_name;
     private String collection_id_serialized_name;
     private String document_id_serialized_name;
-    private String file_serialized_name;
+    private IBMWatsonFile file_serialized_name;
     private String filename_serialized_name;
     private String metadata_serialized_name;
     private String file_content_type_serialized_name;
@@ -10385,7 +10385,7 @@ public class DiscoveryV1Models {
      * @param file_serialized_name the file_serialized_name
      * @return the UpdateDocumentOptions builder
      */
-    public UpdateDocumentOptionsBuilder file(String file_serialized_name) {
+    public UpdateDocumentOptionsBuilder file(IBMWatsonFile file_serialized_name) {
       this.file_serialized_name = file_serialized_name;
       return this;
     }
