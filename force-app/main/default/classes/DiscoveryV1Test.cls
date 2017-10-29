@@ -1287,5 +1287,4 @@ private class DiscoveryV1Test {
   //  system.assertEquals(resp.status,'deleted');
     Test.stopTest();
   }
-
 }

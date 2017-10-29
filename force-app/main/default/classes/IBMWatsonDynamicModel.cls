@@ -24,5 +24,4 @@ public abstract class IBMWatsonDynamicModel {
   }
 
   public abstract Object deserialize(String jsonString, Map<String, Object> jsonMap);
-
 }
