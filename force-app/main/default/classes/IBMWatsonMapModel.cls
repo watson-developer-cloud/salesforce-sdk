@@ -4,17 +4,12 @@
  */
 public class IBMWatsonMapModel extends IBMWatsonDynamicModel {
 
-  public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+  public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
     if (jsonMap == null) {
       return null;
     }
 
-    IBMWatsonMapModel ret;
-    if (jsonString.equals('null')) {
-      ret = new IBMWatsonMapModel();
-    } else {
-      ret = (IBMWatsonMapModel) JSON.deserialize(jsonString, IBMWatsonMapModel.class);
-    }
+    IBMWatsonMapModel ret = (IBMWatsonMapModel) super.deserialize(jsonString, jsonMap, classType);
 
     Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 

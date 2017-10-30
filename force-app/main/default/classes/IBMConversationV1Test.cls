@@ -20,7 +20,7 @@
  * See the Apex Language Reference for more information about Testing and Code Coverage.
  */
 @isTest
-private class ConversationV1Test {
+private class IBMConversationV1Test {
 
   private static String workspaceName;
   private static String workspaceDescription;
@@ -151,15 +151,15 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.CreateWorkspaceOptions createWorkspaceOptions = new ConversationV1Models.CreateWorkspaceOptionsBuilder()
+    IBMConversationV1Models.CreateWorkspaceOptions createWorkspaceOptions = new IBMConversationV1Models.CreateWorkspaceOptionsBuilder()
       .name(workspaceName)
       .description(workspaceDescription)
       .language(workspaceLanguage)
       .build();
-    ConversationV1Models.Workspace response = conversation.createWorkspace(createWorkspaceOptions);
+    IBMConversationV1Models.Workspace response = conversation.createWorkspace(createWorkspaceOptions);
 
     System.assertEquals(response.getName(), workspaceName);
     System.assertEquals(response.getDescription(), workspaceDescription);
@@ -182,10 +182,10 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.DeleteWorkspaceOptions deleteOptions = new ConversationV1Models.DeleteWorkspaceOptionsBuilder()
+    IBMConversationV1Models.DeleteWorkspaceOptions deleteOptions = new IBMConversationV1Models.DeleteWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
     conversation.deleteWorkspace(deleteOptions);
@@ -203,13 +203,13 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.GetWorkspaceOptions getOptions = new ConversationV1Models.GetWorkspaceOptionsBuilder()
+    IBMConversationV1Models.GetWorkspaceOptions getOptions = new IBMConversationV1Models.GetWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
-    ConversationV1Models.WorkspaceExport response = conversation.getWorkspace(getOptions);
+    IBMConversationV1Models.WorkspaceExport response = conversation.getWorkspace(getOptions);
 
     System.assertEquals(response.getName(), workspaceName);
     System.assertEquals(response.getDescription(), workspaceDescription);
@@ -225,7 +225,7 @@ private class ConversationV1Test {
     System.assertEquals(response.getEntities().get(0).getValues().get(0).getValue(), valueName);
     System.assertEquals(response.getEntities().get(0).getValues().get(0).getSynonyms().get(0), valueSynonym);
     System.assertEquals(response.getCounterexamples().get(0).getText(), counterexampleText);
-    System.assertEquals(response.getDialogNodes(), new List<ConversationV1Models.DialogNode>());
+    System.assertEquals(response.getDialogNodes(), new List<IBMConversationV1Models.DialogNode>());
     Test.stopTest();
   }
 
@@ -239,13 +239,13 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.UpdateWorkspaceOptions updateOptions = new ConversationV1Models.UpdateWorkspaceOptionsBuilder()
+    IBMConversationV1Models.UpdateWorkspaceOptions updateOptions = new IBMConversationV1Models.UpdateWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
-    ConversationV1Models.Workspace response = conversation.updateWorkspace(updateOptions);
+    IBMConversationV1Models.Workspace response = conversation.updateWorkspace(updateOptions);
 
     System.assertEquals(response.getName(), workspaceName);
     System.assertEquals(response.getDescription(), workspaceDescription);
@@ -268,12 +268,12 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.ListWorkspacesOptions listOptions = new ConversationV1Models.ListWorkspacesOptionsBuilder()
+    IBMConversationV1Models.ListWorkspacesOptions listOptions = new IBMConversationV1Models.ListWorkspacesOptionsBuilder()
       .build();
-    ConversationV1Models.WorkspaceCollection response = conversation.listWorkspaces(listOptions);
+    IBMConversationV1Models.WorkspaceCollection response = conversation.listWorkspaces(listOptions);
 
     System.assertEquals(response.getWorkspaces().get(0).getName(), workspaceName);
     System.assertEquals(response.getWorkspaces().get(0).getDescription(), workspaceDescription);
@@ -299,10 +299,10 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.CreateValueOptions createOptions = new ConversationV1Models.CreateValueOptionsBuilder()
+    IBMConversationV1Models.CreateValueOptions createOptions = new IBMConversationV1Models.CreateValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
@@ -310,7 +310,7 @@ private class ConversationV1Test {
       .addPatterns(valuePattern)
       .addSynonyms(valueSynonym)
       .build();
-    ConversationV1Models.Value response = conversation.createValue(createOptions);
+    IBMConversationV1Models.Value response = conversation.createValue(createOptions);
 
     System.assertEquals(response.getValue(), valueName);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -331,10 +331,10 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.DeleteValueOptions deleteOptions = new ConversationV1Models.DeleteValueOptionsBuilder()
+    IBMConversationV1Models.DeleteValueOptions deleteOptions = new IBMConversationV1Models.DeleteValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
@@ -354,16 +354,16 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.GetValueOptions getOptions = new ConversationV1Models.GetValueOptionsBuilder()
+    IBMConversationV1Models.GetValueOptions getOptions = new IBMConversationV1Models.GetValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
       .exportField(true)
       .build();
-    ConversationV1Models.ValueExport response = conversation.getValue(getOptions);
+    IBMConversationV1Models.ValueExport response = conversation.getValue(getOptions);
 
     System.assertEquals(response.getValue(), valueName);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -384,10 +384,10 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.UpdateValueOptions updateOptions = new ConversationV1Models.UpdateValueOptionsBuilder()
+    IBMConversationV1Models.UpdateValueOptions updateOptions = new IBMConversationV1Models.UpdateValueOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
@@ -395,7 +395,7 @@ private class ConversationV1Test {
       .addNewPatterns(valuePattern)
       .addNewSynonyms(valueSynonym)
       .build();
-    ConversationV1Models.Value response = conversation.updateValue(updateOptions);
+    IBMConversationV1Models.Value response = conversation.updateValue(updateOptions);
 
     System.assertEquals(response.getValue(), valueName);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -416,14 +416,14 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.ListValuesOptions listOptions = new ConversationV1Models.ListValuesOptionsBuilder()
+    IBMConversationV1Models.ListValuesOptions listOptions = new IBMConversationV1Models.ListValuesOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
       .build();
-    ConversationV1Models.ValueCollection response = conversation.listValues(listOptions);
+    IBMConversationV1Models.ValueCollection response = conversation.listValues(listOptions);
 
     System.assertEquals(response.getValues().get(0).getValue(), valueName);
     System.assertEquals(response.getValues().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -448,20 +448,18 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.InputData input = new ConversationV1Models.InputDataBuilder()
+    IBMConversationV1Models.InputData input = new IBMConversationV1Models.InputDataBuilder()
       .text(messageInput)
       .build();
-    ConversationV1Models.MessageOptions messageOptions = new ConversationV1Models.MessageOptionsBuilder()
+    IBMConversationV1Models.MessageOptions messageOptions = new IBMConversationV1Models.MessageOptionsBuilder()
       .workspaceId(workspaceId)
       .input(input)
       .alternateIntents(alternateIntents)
       .build();
-    ConversationV1Models.MessageResponse response = conversation.message(messageOptions);
-
-    System.debug(response);
+    IBMConversationV1Models.MessageResponse response = conversation.message(messageOptions);
 
     System.assertEquals(response.getIntents().get(0).getIntent(), intentName);
     System.assertEquals(response.getIntents().get(0).getConfidence(), confidence);
@@ -490,15 +488,15 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.CreateIntentOptions createOptions = new ConversationV1Models.CreateIntentOptionsBuilder()
+    IBMConversationV1Models.CreateIntentOptions createOptions = new IBMConversationV1Models.CreateIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .description(intentDescription)
       .build();
-    ConversationV1Models.Intent response = conversation.createIntent(createOptions);
+    IBMConversationV1Models.Intent response = conversation.createIntent(createOptions);
 
     System.assertEquals(response.getIntent(), intentName);
     System.assertEquals(response.getDescription(), intentDescription);
@@ -517,10 +515,10 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.DeleteIntentOptions deleteOptions = new ConversationV1Models.DeleteIntentOptionsBuilder()
+    IBMConversationV1Models.DeleteIntentOptions deleteOptions = new IBMConversationV1Models.DeleteIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .build();
@@ -539,15 +537,15 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.GetIntentOptions getOptions = new ConversationV1Models.GetIntentOptionsBuilder()
+    IBMConversationV1Models.GetIntentOptions getOptions = new IBMConversationV1Models.GetIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .exportField(true)
       .build();
-    ConversationV1Models.IntentExport response = conversation.getIntent(getOptions);
+    IBMConversationV1Models.IntentExport response = conversation.getIntent(getOptions);
 
     System.assertEquals(response.getIntent(), intentName);
     System.assertEquals(response.getDescription(), intentDescription);
@@ -569,14 +567,14 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.ListIntentsOptions listOptions = new ConversationV1Models.ListIntentsOptionsBuilder()
+    IBMConversationV1Models.ListIntentsOptions listOptions = new IBMConversationV1Models.ListIntentsOptionsBuilder()
       .workspaceId(workspaceId)
       .exportField(true)
       .build();
-    ConversationV1Models.IntentCollection response = conversation.listIntents(listOptions);
+    IBMConversationV1Models.IntentCollection response = conversation.listIntents(listOptions);
 
     System.assertEquals(response.getIntents().get(0).getIntent(), intentName);
     System.assertEquals(response.getIntents().get(0).getDescription(), intentDescription);
@@ -602,15 +600,15 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.UpdateIntentOptions updateOptions = new ConversationV1Models.UpdateIntentOptionsBuilder()
+    IBMConversationV1Models.UpdateIntentOptions updateOptions = new IBMConversationV1Models.UpdateIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .newDescription(intentDescription)
       .build();
-    ConversationV1Models.Intent response = conversation.updateIntent(updateOptions);
+    IBMConversationV1Models.Intent response = conversation.updateIntent(updateOptions);
 
     System.assertEquals(response.getIntent(), intentName);
     System.assertEquals(response.getDescription(), intentDescription);
@@ -629,15 +627,15 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.CreateExampleOptions createOptions = new ConversationV1Models.CreateExampleOptionsBuilder()
+    IBMConversationV1Models.CreateExampleOptions createOptions = new IBMConversationV1Models.CreateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .text(exampleText)
       .build();
-    ConversationV1Models.Example response = conversation.createExample(createOptions);
+    IBMConversationV1Models.Example response = conversation.createExample(createOptions);
 
     System.assertEquals(response.getText(), exampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -655,10 +653,10 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.DeleteExampleOptions deleteOptions = new ConversationV1Models.DeleteExampleOptionsBuilder()
+    IBMConversationV1Models.DeleteExampleOptions deleteOptions = new IBMConversationV1Models.DeleteExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .text('example A')
@@ -678,15 +676,15 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.GetExampleOptions getOptions = new ConversationV1Models.GetExampleOptionsBuilder()
+    IBMConversationV1Models.GetExampleOptions getOptions = new IBMConversationV1Models.GetExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .text(exampleText)
       .build();
-    ConversationV1Models.Example response = conversation.getExample(getOptions);
+    IBMConversationV1Models.Example response = conversation.getExample(getOptions);
 
     System.assertEquals(response.getText(), exampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -704,14 +702,14 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.ListExamplesOptions listOptions = new ConversationV1Models.ListExamplesOptionsBuilder()
+    IBMConversationV1Models.ListExamplesOptions listOptions = new IBMConversationV1Models.ListExamplesOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .build();
-    ConversationV1Models.ExampleCollection response = conversation.listExamples(listOptions);
+    IBMConversationV1Models.ExampleCollection response = conversation.listExamples(listOptions);
 
     System.assertEquals(response.getExamples().get(0).getText(), exampleText);
     System.assertEquals(response.getExamples().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -733,16 +731,16 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.UpdateExampleOptions updateOptions = new ConversationV1Models.UpdateExampleOptionsBuilder()
+    IBMConversationV1Models.UpdateExampleOptions updateOptions = new IBMConversationV1Models.UpdateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .text(exampleText)
       .newText(exampleText)
       .build();
-    ConversationV1Models.Example response = conversation.updateExample(updateOptions);
+    IBMConversationV1Models.Example response = conversation.updateExample(updateOptions);
 
     System.assertEquals(response.getText(), exampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -760,15 +758,15 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.CreateEntityOptions createOptions = new ConversationV1Models.CreateEntityOptionsBuilder()
+    IBMConversationV1Models.CreateEntityOptions createOptions = new IBMConversationV1Models.CreateEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
       .description(entityDescription)
       .build();
-    ConversationV1Models.Entity response = conversation.createEntity(createOptions);
+    IBMConversationV1Models.Entity response = conversation.createEntity(createOptions);
 
     System.assertEquals(response.getEntity(), entityName);
     System.assertEquals(response.getDescription(), entityDescription);
@@ -789,10 +787,10 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.DeleteEntityOptions deleteOptions = new ConversationV1Models.DeleteEntityOptionsBuilder()
+    IBMConversationV1Models.DeleteEntityOptions deleteOptions = new IBMConversationV1Models.DeleteEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
       .build();
@@ -811,15 +809,15 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.GetEntityOptions getOptions = new ConversationV1Models.GetEntityOptionsBuilder()
+    IBMConversationV1Models.GetEntityOptions getOptions = new IBMConversationV1Models.GetEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
       .exportField(true)
       .build();
-    ConversationV1Models.EntityExport response = conversation.getEntity(getOptions);
+    IBMConversationV1Models.EntityExport response = conversation.getEntity(getOptions);
 
     System.assertEquals(response.getEntity(), entityName);
     System.assertEquals(response.getDescription(), entityDescription);
@@ -846,14 +844,14 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.ListEntitiesOptions listOptions = new ConversationV1Models.ListEntitiesOptionsBuilder()
+    IBMConversationV1Models.ListEntitiesOptions listOptions = new IBMConversationV1Models.ListEntitiesOptionsBuilder()
       .workspaceId(workspaceId)
       .exportField(true)
       .build();
-    ConversationV1Models.EntityCollection response = conversation.listEntities(listOptions);
+    IBMConversationV1Models.EntityCollection response = conversation.listEntities(listOptions);
 
     System.assertEquals(response.getEntities().get(0).getEntity(), entityName);
     System.assertEquals(response.getEntities().get(0).getDescription(), entityDescription);
@@ -884,15 +882,15 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.UpdateEntityOptions updateOptions = new ConversationV1Models.UpdateEntityOptionsBuilder()
+    IBMConversationV1Models.UpdateEntityOptions updateOptions = new IBMConversationV1Models.UpdateEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
       .newDescription(entityDescription)
       .build();
-    ConversationV1Models.Entity response = conversation.updateEntity(updateOptions);
+    IBMConversationV1Models.Entity response = conversation.updateEntity(updateOptions);
 
     System.assertEquals(response.getEntity(), entityName);
     System.assertEquals(response.getDescription(), entityDescription);
@@ -913,16 +911,16 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.CreateSynonymOptions createOptions = new ConversationV1Models.CreateSynonymOptionsBuilder()
+    IBMConversationV1Models.CreateSynonymOptions createOptions = new IBMConversationV1Models.CreateSynonymOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
       .synonym(valueSynonym)
       .build();
-    ConversationV1Models.Synonym response = conversation.createSynonym(createOptions);
+    IBMConversationV1Models.Synonym response = conversation.createSynonym(createOptions);
 
     System.assertEquals(response.getSynonym(), valueSynonym);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -940,10 +938,10 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.DeleteSynonymOptions deleteOptions = new ConversationV1Models.DeleteSynonymOptionsBuilder()
+    IBMConversationV1Models.DeleteSynonymOptions deleteOptions = new IBMConversationV1Models.DeleteSynonymOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
@@ -964,16 +962,16 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.GetSynonymOptions getOptions = new ConversationV1Models.GetSynonymOptionsBuilder()
+    IBMConversationV1Models.GetSynonymOptions getOptions = new IBMConversationV1Models.GetSynonymOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
       .synonym(valueSynonym)
       .build();
-    ConversationV1Models.Synonym response = conversation.getSynonym(getOptions);
+    IBMConversationV1Models.Synonym response = conversation.getSynonym(getOptions);
 
     System.assertEquals(response.getSynonym(), valueSynonym);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -991,15 +989,15 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.ListSynonymsOptions listOptions = new ConversationV1Models.ListSynonymsOptionsBuilder()
+    IBMConversationV1Models.ListSynonymsOptions listOptions = new IBMConversationV1Models.ListSynonymsOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
       .build();
-    ConversationV1Models.SynonymCollection response = conversation.listSynonyms(listOptions);
+    IBMConversationV1Models.SynonymCollection response = conversation.listSynonyms(listOptions);
 
     System.assertEquals(response.getSynonyms().get(0).getSynonym(), valueSynonym);
     System.assertEquals(response.getSynonyms().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1021,17 +1019,17 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.UpdateSynonymOptions updateOptions = new ConversationV1Models.UpdateSynonymOptionsBuilder()
+    IBMConversationV1Models.UpdateSynonymOptions updateOptions = new IBMConversationV1Models.UpdateSynonymOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
       .synonym(valueSynonym)
       .newSynonym(valueSynonym)
       .build();
-    ConversationV1Models.Synonym response = conversation.updateSynonym(updateOptions);
+    IBMConversationV1Models.Synonym response = conversation.updateSynonym(updateOptions);
 
     System.assertEquals(response.getSynonym(), valueSynonym);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1049,14 +1047,14 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.CreateDialogNodeOptions createOptions = new ConversationV1Models.CreateDialogNodeOptionsBuilder()
+    IBMConversationV1Models.CreateDialogNodeOptions createOptions = new IBMConversationV1Models.CreateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
       .build();
-    ConversationV1Models.DialogNode response = conversation.createDialogNode(createOptions);
+    IBMConversationV1Models.DialogNode response = conversation.createDialogNode(createOptions);
 
     System.assertEquals(response.getDialogNode(), dialogNodeName);
     System.assertEquals(response.getDescription(), dialogNodeDescription);
@@ -1093,10 +1091,10 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.DeleteDialogNodeOptions deleteOptions = new ConversationV1Models.DeleteDialogNodeOptionsBuilder()
+    IBMConversationV1Models.DeleteDialogNodeOptions deleteOptions = new IBMConversationV1Models.DeleteDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
       .build();
@@ -1115,14 +1113,14 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.GetDialogNodeOptions getOptions = new ConversationV1Models.GetDialogNodeOptionsBuilder()
+    IBMConversationV1Models.GetDialogNodeOptions getOptions = new IBMConversationV1Models.GetDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
       .build();
-    ConversationV1Models.DialogNode response = conversation.getDialogNode(getOptions);
+    IBMConversationV1Models.DialogNode response = conversation.getDialogNode(getOptions);
 
     System.assertEquals(response.getDialogNode(), dialogNodeName);
     System.assertEquals(response.getDescription(), dialogNodeDescription);
@@ -1159,13 +1157,13 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.ListDialogNodesOptions listOptions = new ConversationV1Models.ListDialogNodesOptionsBuilder()
+    IBMConversationV1Models.ListDialogNodesOptions listOptions = new IBMConversationV1Models.ListDialogNodesOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
-    ConversationV1Models.DialogNodeCollection response = conversation.listDialogNodes(listOptions);
+    IBMConversationV1Models.DialogNodeCollection response = conversation.listDialogNodes(listOptions);
 
     System.assertEquals(response.getDialogNodes().get(0).getDialogNode(), dialogNodeName);
     System.assertEquals(response.getDialogNodes().get(0).getDescription(), dialogNodeDescription);
@@ -1204,16 +1202,16 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.UpdateDialogNodeOptions updateOptions = new ConversationV1Models.UpdateDialogNodeOptionsBuilder()
+    IBMConversationV1Models.UpdateDialogNodeOptions updateOptions = new IBMConversationV1Models.UpdateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
       .newDialogNode(dialogNodeName)
       .newDescription(dialogNodeDescription)
       .build();
-    ConversationV1Models.DialogNode response = conversation.updateDialogNode(updateOptions);
+    IBMConversationV1Models.DialogNode response = conversation.updateDialogNode(updateOptions);
 
     System.assertEquals(response.getDialogNode(), dialogNodeName);
     System.assertEquals(response.getDescription(), dialogNodeDescription);
@@ -1248,13 +1246,13 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.ListLogsOptions listOptions = new ConversationV1Models.ListLogsOptionsBuilder()
+    IBMConversationV1Models.ListLogsOptions listOptions = new IBMConversationV1Models.ListLogsOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
-    ConversationV1Models.LogCollection response = conversation.listLogs(listOptions);
+    IBMConversationV1Models.LogCollection response = conversation.listLogs(listOptions);
 
     System.assertEquals(response.getLogs().get(0).getRequest().getInput().text(), messageInput);
     System.assertEquals(response.getLogs().get(0).getResponse().getIntents().get(0).getIntent(), intentName);
@@ -1291,14 +1289,14 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.CreateCounterexampleOptions createOptions = new ConversationV1Models.CreateCounterexampleOptionsBuilder()
+    IBMConversationV1Models.CreateCounterexampleOptions createOptions = new IBMConversationV1Models.CreateCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(counterexampleText)
       .build();
-    ConversationV1Models.Counterexample response = conversation.createCounterexample(createOptions);
+    IBMConversationV1Models.Counterexample response = conversation.createCounterexample(createOptions);
 
     System.assertEquals(response.getText(), counterexampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1316,10 +1314,10 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.DeleteCounterexampleOptions deleteOptions = new ConversationV1Models.DeleteCounterexampleOptionsBuilder()
+    IBMConversationV1Models.DeleteCounterexampleOptions deleteOptions = new IBMConversationV1Models.DeleteCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(counterexampleText)
       .build();
@@ -1338,14 +1336,14 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.GetCounterexampleOptions getOptions = new ConversationV1Models.GetCounterexampleOptionsBuilder()
+    IBMConversationV1Models.GetCounterexampleOptions getOptions = new IBMConversationV1Models.GetCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(counterexampleText)
       .build();
-    ConversationV1Models.Counterexample response = conversation.getCounterexample(getOptions);
+    IBMConversationV1Models.Counterexample response = conversation.getCounterexample(getOptions);
 
     System.assertEquals(response.getText(), counterexampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1363,13 +1361,13 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.ListCounterexamplesOptions listOptions = new ConversationV1Models.ListCounterexamplesOptionsBuilder()
+    IBMConversationV1Models.ListCounterexamplesOptions listOptions = new IBMConversationV1Models.ListCounterexamplesOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
-    ConversationV1Models.CounterexampleCollection response = conversation.listCounterexamples(listOptions);
+    IBMConversationV1Models.CounterexampleCollection response = conversation.listCounterexamples(listOptions);
 
     System.assertEquals(response.getCounterexamples().get(0).getText(), counterexampleText);
     System.assertEquals(response.getCounterexamples().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1391,15 +1389,15 @@ private class ConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
 
-    ConversationV1Models.UpdateCounterexampleOptions updateOptions = new ConversationV1Models.UpdateCounterexampleOptionsBuilder()
+    IBMConversationV1Models.UpdateCounterexampleOptions updateOptions = new IBMConversationV1Models.UpdateCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(counterexampleText)
       .newText(counterexampleText)
       .build();
-    ConversationV1Models.Counterexample response = conversation.updateCounterexample(updateOptions);
+    IBMConversationV1Models.Counterexample response = conversation.updateCounterexample(updateOptions);
 
     System.assertEquals(response.getText(), counterexampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));

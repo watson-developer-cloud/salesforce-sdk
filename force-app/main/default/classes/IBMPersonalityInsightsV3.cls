@@ -33,38 +33,38 @@
  * @version V3
  * @see <a href="http://www.ibm.com/watson/developercloud/personality-insights.html">Personality Insights</a>
  */
-public class PersonalityInsightsV3 extends IBMWatsonService {
+public class IBMPersonalityInsightsV3 extends IBMWatsonService {
 
   private static final String URL = 'https://gateway.watsonplatform.net/personality-insights/api';
   private String versionDate;
 
   /**
-   * Instantiates a new `PersonalityInsightsV3`.
+   * Instantiates a new `IBMPersonalityInsightsV3`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
    */
-  public PersonalityInsightsV3(String versionDate) {
-    super('personality_insights');
+  public IBMPersonalityInsightsV3(String versionDate) {
+    super('watson_personality_insights_v3');
 
     if (String.isBlank(getEndPoint())) {
       setEndPoint(URL);
     }
     if(String.isBlank(versionDate)) {
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('Version cannot be null.');
     }
     this.versionDate = versionDate;
   }
 
   /**
-   * Instantiates a new `PersonalityInsightsV3` with username and password.
+   * Instantiates a new `IBMPersonalityInsightsV3` with username and password.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
    * @param username the username
    * @param password the password
    */
-  public PersonalityInsightsV3(String versionDate, String username, String password) {
+  public IBMPersonalityInsightsV3(String versionDate, String username, String password) {
     this(versionDate);
     setUsernameAndPassword(username, password);
   }
@@ -74,10 +74,10 @@ public class PersonalityInsightsV3 extends IBMWatsonService {
    *
    * Derives personality insights for up to 20 MB of input content written by an author, though the service requires much less text to produce an accurate profile; for more information, see [Providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). Accepts input in Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text, HTML, or JSON content, and receive results in JSON or CSV format.
    *
-   * @param profileOptions the {@link PersonalityInsightsV3Models.ProfileOptions} containing the options for the call
-   * @return the {@link PersonalityInsightsV3Models.Profile} with the response
+   * @param profileOptions the {@link IBMPersonalityInsightsV3Models.ProfileOptions} containing the options for the call
+   * @return the {@link IBMPersonalityInsightsV3Models.Profile} with the response
    */
-  public PersonalityInsightsV3Models.Profile profile(PersonalityInsightsV3Models.ProfileOptions profileOptions) {
+  public IBMPersonalityInsightsV3Models.Profile profile(PersonalityInsightsV3Models.ProfileOptions profileOptions) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + '/v3/profile');
       builder.addHeader('content-type', profileOptions.contentType());
@@ -99,6 +99,7 @@ public class PersonalityInsightsV3 extends IBMWatsonService {
       builder.bodyContent(profileOptions.body(), profileOptions.contentType());
     }
 
-    return (PersonalityInsightsV3Models.Profile) createServiceCall(builder.build(), PersonalityInsightsV3Models.Profile.class);
+    return (IBMPersonalityInsightsV3Models.Profile) createServiceCall(builder.build(), IBMPersonalityInsightsV3Models.Profile.class);
   }
+
 }

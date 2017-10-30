@@ -1,4 +1,4 @@
-public abstract class IBMWatsonDynamicModel {
+public virtual class IBMWatsonDynamicModel {
 
   private Map<String, Object> additional_properties;
 
@@ -8,7 +8,7 @@ public abstract class IBMWatsonDynamicModel {
    * @return serialized String form of this
    */
   public override String toString() {
-    return JSON.serializePretty(this);
+    return JSON.serializePretty(this).remove('_serialized_name');
   }
 
   /**
@@ -48,6 +48,16 @@ public abstract class IBMWatsonDynamicModel {
     additional_properties.put(key, val);
   }
 
-  public abstract Object deserialize(String jsonString, Map<String, Object> jsonMap);
+  public virtual Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+    Object ret;
+    if (jsonString.equals('null')) {
+      ret = classType.newInstance();
+    }
+    else {
+      ret = JSON.deserialize(jsonString, classType);
+    }
+
+    return ret;
+  }
 
 }

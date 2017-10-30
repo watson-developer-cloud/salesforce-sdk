@@ -5,7 +5,7 @@
  * @version V1
  * @see <a href="http://www.ibm.com/watson/developercloud/conversation.html">Conversation</a>
  */
-public class ConversationV1 extends IBMWatsonService {
+public class IBMConversationV1 extends IBMWatsonService {
 
   private static final String URL = 'https://gateway.watsonplatform.net/conversation/api';
   private String versionDate;
@@ -21,13 +21,13 @@ public class ConversationV1 extends IBMWatsonService {
   /** The Constant VERSION_DATE_2016_07_11. */
     public static final String VERSION_DATE_2016_07_11 = '2016-07-11';
   /**
-   * Instantiates a new `ConversationV1`.
+   * Instantiates a new `IBMConversationV1`.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
    */
-  public ConversationV1(String versionDate) {
-    super('conversation');
+  public IBMConversationV1(String versionDate) {
+    super('watson_conversation_v1');
 
     if (String.isBlank(getEndPoint())) {
       setEndPoint(URL);
@@ -39,14 +39,14 @@ public class ConversationV1 extends IBMWatsonService {
   }
 
   /**
-   * Instantiates a new `ConversationV1` with username and password.
+   * Instantiates a new `IBMConversationV1` with username and password.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
    * @param username the username
    * @param password the password
    */
-  public ConversationV1(String versionDate, String username, String password) {
+  public IBMConversationV1(String versionDate, String username, String password) {
     this(versionDate);
     setUsernameAndPassword(username, password);
   }
@@ -56,10 +56,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Create a workspace based on component objects. You must provide workspace components defining the content of the new workspace.
    *
-   * @param createWorkspaceOptions the {@link ConversationV1Models.CreateWorkspaceOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Workspace} with the response
+   * @param createWorkspaceOptions the {@link IBMConversationV1Models.CreateWorkspaceOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Workspace} with the response
    */
-  public ConversationV1Models.Workspace createWorkspace(ConversationV1Models.CreateWorkspaceOptions createWorkspaceOptions) {
+  public IBMConversationV1Models.Workspace createWorkspace(IBMConversationV1Models.CreateWorkspaceOptions createWorkspaceOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + '/v1/workspaces');
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
@@ -94,7 +94,7 @@ public class ConversationV1 extends IBMWatsonService {
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.Workspace) createServiceCall(builder.build(), ConversationV1Models.Workspace.class);
+    return (IBMConversationV1Models.Workspace) createServiceCall(builder.build(), IBMConversationV1Models.Workspace.class);
   }
 
   /**
@@ -102,10 +102,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Delete a workspace from the service instance.
    *
-   * @param deleteWorkspaceOptions the {@link ConversationV1Models.DeleteWorkspaceOptions} containing the options for the call
+   * @param deleteWorkspaceOptions the {@link IBMConversationV1Models.DeleteWorkspaceOptions} containing the options for the call
    * @return the service call
    */
-  public void deleteWorkspace(ConversationV1Models.DeleteWorkspaceOptions deleteWorkspaceOptions) {
+  public void deleteWorkspace(IBMConversationV1Models.DeleteWorkspaceOptions deleteWorkspaceOptions) {
     IBMWatsonValidator.notNull(deleteWorkspaceOptions, 'deleteWorkspaceOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/workspaces/{0}', new String[]{ deleteWorkspaceOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
@@ -120,10 +120,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Get information about a workspace, optionally including all workspace content.
    *
-   * @param getWorkspaceOptions the {@link ConversationV1Models.GetWorkspaceOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.WorkspaceExport} with the response
+   * @param getWorkspaceOptions the {@link IBMConversationV1Models.GetWorkspaceOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.WorkspaceExport} with the response
    */
-  public ConversationV1Models.WorkspaceExport getWorkspace(ConversationV1Models.GetWorkspaceOptions getWorkspaceOptions) {
+  public IBMConversationV1Models.WorkspaceExport getWorkspace(IBMConversationV1Models.GetWorkspaceOptions getWorkspaceOptions) {
     IBMWatsonValidator.notNull(getWorkspaceOptions, 'getWorkspaceOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}', new String[]{ getWorkspaceOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
@@ -131,7 +131,7 @@ public class ConversationV1 extends IBMWatsonService {
       'export' => String.valueOf(getWorkspaceOptions.exportField())
     });
 
-  return (ConversationV1Models.WorkspaceExport) createServiceCall(builder.build(), ConversationV1Models.WorkspaceExport.class);
+    return (IBMConversationV1Models.WorkspaceExport) createServiceCall(builder.build(), IBMConversationV1Models.WorkspaceExport.class);
   }
 
   /**
@@ -139,10 +139,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * List the workspaces associated with a Conversation service instance.
    *
-   * @param listWorkspacesOptions the {@link ConversationV1Models.ListWorkspacesOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.WorkspaceCollection} with the response
+   * @param listWorkspacesOptions the {@link IBMConversationV1Models.ListWorkspacesOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.WorkspaceCollection} with the response
    */
-  public ConversationV1Models.WorkspaceCollection listWorkspaces(ConversationV1Models.ListWorkspacesOptions listWorkspacesOptions) {
+  public IBMConversationV1Models.WorkspaceCollection listWorkspaces(IBMConversationV1Models.ListWorkspacesOptions listWorkspacesOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + '/v1/workspaces');
     builder.queryParams(new Map<String, String> {
       'version' => versionDate,
@@ -152,7 +152,7 @@ public class ConversationV1 extends IBMWatsonService {
       'cursor' => listWorkspacesOptions.cursor()
     });
 
-    return (ConversationV1Models.WorkspaceCollection) createServiceCall(builder.build(), ConversationV1Models.WorkspaceCollection.class);
+    return (IBMConversationV1Models.WorkspaceCollection) createServiceCall(builder.build(), IBMConversationV1Models.WorkspaceCollection.class);
   }
 
   /**
@@ -160,10 +160,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Update an existing workspace with new or modified data. You must provide component objects defining the content of the updated workspace.
    *
-   * @param updateWorkspaceOptions the {@link ConversationV1Models.UpdateWorkspaceOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Workspace} with the response
+   * @param updateWorkspaceOptions the {@link IBMConversationV1Models.UpdateWorkspaceOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Workspace} with the response
    */
-  public ConversationV1Models.Workspace updateWorkspace(ConversationV1Models.UpdateWorkspaceOptions updateWorkspaceOptions) {
+  public IBMConversationV1Models.Workspace updateWorkspace(IBMConversationV1Models.UpdateWorkspaceOptions updateWorkspaceOptions) {
     IBMWatsonValidator.notNull(updateWorkspaceOptions, 'updateWorkspaceOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}', new String[]{ updateWorkspaceOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
@@ -199,16 +199,16 @@ public class ConversationV1 extends IBMWatsonService {
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.Workspace) createServiceCall(builder.build(), ConversationV1Models.Workspace.class);
+    return (IBMConversationV1Models.Workspace) createServiceCall(builder.build(), IBMConversationV1Models.Workspace.class);
   }
 
   /**
    * Get a response to a user's input.
    *
-   * @param messageOptions the {@link ConversationV1Models.MessageOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.MessageResponse} with the response
+   * @param messageOptions the {@link IBMConversationV1Models.MessageOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.MessageResponse} with the response
    */
-  public ConversationV1Models.MessageResponse message(ConversationV1Models.MessageOptions messageOptions) {
+  public IBMConversationV1Models.MessageResponse message(IBMConversationV1Models.MessageOptions messageOptions) {
     IBMWatsonValidator.notNull(messageOptions, 'messageOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/message', new String[]{ messageOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
@@ -235,7 +235,7 @@ public class ConversationV1 extends IBMWatsonService {
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.MessageResponse) createServiceCall(builder.build(), ConversationV1Models.MessageResponse.class);
+    return (IBMConversationV1Models.MessageResponse) createServiceCall(builder.build(), IBMConversationV1Models.MessageResponse.class);
   }
 
   /**
@@ -243,10 +243,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Create a new intent.
    *
-   * @param createIntentOptions the {@link ConversationV1Models.CreateIntentOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Intent} with the response
+   * @param createIntentOptions the {@link IBMConversationV1Models.CreateIntentOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Intent} with the response
    */
-  public ConversationV1Models.Intent createIntent(ConversationV1Models.CreateIntentOptions createIntentOptions) {
+  public IBMConversationV1Models.Intent createIntent(IBMConversationV1Models.CreateIntentOptions createIntentOptions) {
     IBMWatsonValidator.notNull(createIntentOptions, 'createIntentOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/intents', new String[]{ createIntentOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
@@ -262,7 +262,7 @@ public class ConversationV1 extends IBMWatsonService {
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.Intent) createServiceCall(builder.build(), ConversationV1Models.Intent.class);
+    return (IBMConversationV1Models.Intent) createServiceCall(builder.build(), IBMConversationV1Models.Intent.class);
   }
 
   /**
@@ -270,10 +270,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Delete an intent from a workspace.
    *
-   * @param deleteIntentOptions the {@link ConversationV1Models.DeleteIntentOptions} containing the options for the call
+   * @param deleteIntentOptions the {@link IBMConversationV1Models.DeleteIntentOptions} containing the options for the call
    * @return the service call
    */
-  public void deleteIntent(ConversationV1Models.DeleteIntentOptions deleteIntentOptions) {
+  public void deleteIntent(IBMConversationV1Models.DeleteIntentOptions deleteIntentOptions) {
     IBMWatsonValidator.notNull(deleteIntentOptions, 'deleteIntentOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/workspaces/{0}/intents/{1}', new String[]{ deleteIntentOptions.workspaceId(), deleteIntentOptions.intent() }));
     builder.queryParams(new Map<String, String> {
@@ -288,10 +288,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Get information about an intent, optionally including all intent content.
    *
-   * @param getIntentOptions the {@link ConversationV1Models.GetIntentOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.IntentExport} with the response
+   * @param getIntentOptions the {@link IBMConversationV1Models.GetIntentOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.IntentExport} with the response
    */
-  public ConversationV1Models.IntentExport getIntent(ConversationV1Models.GetIntentOptions getIntentOptions) {
+  public IBMConversationV1Models.IntentExport getIntent(IBMConversationV1Models.GetIntentOptions getIntentOptions) {
     IBMWatsonValidator.notNull(getIntentOptions, 'getIntentOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/intents/{1}', new String[]{ getIntentOptions.workspaceId(), getIntentOptions.intent() }));
     builder.queryParams(new Map<String, String> {
@@ -299,7 +299,7 @@ public class ConversationV1 extends IBMWatsonService {
       'export' => String.valueOf(getIntentOptions.exportField())
     });
 
-    return (ConversationV1Models.IntentExport) createServiceCall(builder.build(), ConversationV1Models.IntentExport.class);
+    return (IBMConversationV1Models.IntentExport) createServiceCall(builder.build(), IBMConversationV1Models.IntentExport.class);
   }
 
   /**
@@ -307,10 +307,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * List the intents for a workspace.
    *
-   * @param listIntentsOptions the {@link ConversationV1Models.ListIntentsOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.IntentCollection} with the response
+   * @param listIntentsOptions the {@link IBMConversationV1Models.ListIntentsOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.IntentCollection} with the response
    */
-  public ConversationV1Models.IntentCollection listIntents(ConversationV1Models.ListIntentsOptions listIntentsOptions) {
+  public IBMConversationV1Models.IntentCollection listIntents(IBMConversationV1Models.ListIntentsOptions listIntentsOptions) {
     IBMWatsonValidator.notNull(listIntentsOptions, 'listIntentsOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/intents', new String[]{ listIntentsOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
@@ -322,7 +322,7 @@ public class ConversationV1 extends IBMWatsonService {
       'cursor' => listIntentsOptions.cursor()
     });
 
-    return (ConversationV1Models.IntentCollection) createServiceCall(builder.build(), ConversationV1Models.IntentCollection.class);
+    return (IBMConversationV1Models.IntentCollection) createServiceCall(builder.build(), IBMConversationV1Models.IntentCollection.class);
   }
 
   /**
@@ -330,10 +330,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Update an existing intent with new or modified data. You must provide data defining the content of the updated intent.
    *
-   * @param updateIntentOptions the {@link ConversationV1Models.UpdateIntentOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Intent} with the response
+   * @param updateIntentOptions the {@link IBMConversationV1Models.UpdateIntentOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Intent} with the response
    */
-  public ConversationV1Models.Intent updateIntent(ConversationV1Models.UpdateIntentOptions updateIntentOptions) {
+  public IBMConversationV1Models.Intent updateIntent(IBMConversationV1Models.UpdateIntentOptions updateIntentOptions) {
     IBMWatsonValidator.notNull(updateIntentOptions, 'updateIntentOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/intents/{1}', new String[]{ updateIntentOptions.workspaceId(), updateIntentOptions.intent() }));
     builder.queryParams(new Map<String, String> {
@@ -351,7 +351,7 @@ public class ConversationV1 extends IBMWatsonService {
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.Intent) createServiceCall(builder.build(), ConversationV1Models.Intent.class);
+    return (IBMConversationV1Models.Intent) createServiceCall(builder.build(), IBMConversationV1Models.Intent.class);
   }
 
   /**
@@ -359,10 +359,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Add a new user input example to an intent.
    *
-   * @param createExampleOptions the {@link ConversationV1Models.CreateExampleOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Example} with the response
+   * @param createExampleOptions the {@link IBMConversationV1Models.CreateExampleOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Example} with the response
    */
-  public ConversationV1Models.Example createExample(ConversationV1Models.CreateExampleOptions createExampleOptions) {
+  public IBMConversationV1Models.Example createExample(IBMConversationV1Models.CreateExampleOptions createExampleOptions) {
     IBMWatsonValidator.notNull(createExampleOptions, 'createExampleOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/intents/{1}/examples', new String[]{ createExampleOptions.workspaceId(), createExampleOptions.intent() }));
     builder.queryParams(new Map<String, String> {
@@ -372,7 +372,7 @@ public class ConversationV1 extends IBMWatsonService {
     contentJson.put('text', createExampleOptions.text());
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.Example) createServiceCall(builder.build(), ConversationV1Models.Example.class);
+    return (IBMConversationV1Models.Example) createServiceCall(builder.build(), IBMConversationV1Models.Example.class);
   }
 
   /**
@@ -380,10 +380,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Delete a user input example from an intent.
    *
-   * @param deleteExampleOptions the {@link ConversationV1Models.DeleteExampleOptions} containing the options for the call
+   * @param deleteExampleOptions the {@link IBMConversationV1Models.DeleteExampleOptions} containing the options for the call
    * @return the service call
    */
-  public void deleteExample(ConversationV1Models.DeleteExampleOptions deleteExampleOptions) {
+  public void deleteExample(IBMConversationV1Models.DeleteExampleOptions deleteExampleOptions) {
     IBMWatsonValidator.notNull(deleteExampleOptions, 'deleteExampleOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/workspaces/{0}/intents/{1}/examples/{2}', new String[]{ deleteExampleOptions.workspaceId(), deleteExampleOptions.intent(), deleteExampleOptions.text() }));
     builder.queryParams(new Map<String, String> {
@@ -398,17 +398,17 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Get information about a user input example.
    *
-   * @param getExampleOptions the {@link ConversationV1Models.GetExampleOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Example} with the response
+   * @param getExampleOptions the {@link IBMConversationV1Models.GetExampleOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Example} with the response
    */
-  public ConversationV1Models.Example getExample(ConversationV1Models.GetExampleOptions getExampleOptions) {
+  public IBMConversationV1Models.Example getExample(IBMConversationV1Models.GetExampleOptions getExampleOptions) {
     IBMWatsonValidator.notNull(getExampleOptions, 'getExampleOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/intents/{1}/examples/{2}', new String[]{ getExampleOptions.workspaceId(), getExampleOptions.intent(), getExampleOptions.text() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
 
-    return (ConversationV1Models.Example) createServiceCall(builder.build(), ConversationV1Models.Example.class);
+    return (IBMConversationV1Models.Example) createServiceCall(builder.build(), IBMConversationV1Models.Example.class);
   }
 
   /**
@@ -416,10 +416,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * List the user input examples for an intent.
    *
-   * @param listExamplesOptions the {@link ConversationV1Models.ListExamplesOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.ExampleCollection} with the response
+   * @param listExamplesOptions the {@link IBMConversationV1Models.ListExamplesOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.ExampleCollection} with the response
    */
-  public ConversationV1Models.ExampleCollection listExamples(ConversationV1Models.ListExamplesOptions listExamplesOptions) {
+  public IBMConversationV1Models.ExampleCollection listExamples(IBMConversationV1Models.ListExamplesOptions listExamplesOptions) {
     IBMWatsonValidator.notNull(listExamplesOptions, 'listExamplesOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/intents/{1}/examples', new String[]{ listExamplesOptions.workspaceId(), listExamplesOptions.intent() }));
     builder.queryParams(new Map<String, String> {
@@ -430,7 +430,7 @@ public class ConversationV1 extends IBMWatsonService {
       'cursor' => listExamplesOptions.cursor()
     });
 
-    return (ConversationV1Models.ExampleCollection) createServiceCall(builder.build(), ConversationV1Models.ExampleCollection.class);
+    return (IBMConversationV1Models.ExampleCollection) createServiceCall(builder.build(), IBMConversationV1Models.ExampleCollection.class);
   }
 
   /**
@@ -438,10 +438,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Update the text of a user input example.
    *
-   * @param updateExampleOptions the {@link ConversationV1Models.UpdateExampleOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Example} with the response
+   * @param updateExampleOptions the {@link IBMConversationV1Models.UpdateExampleOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Example} with the response
    */
-  public ConversationV1Models.Example updateExample(ConversationV1Models.UpdateExampleOptions updateExampleOptions) {
+  public IBMConversationV1Models.Example updateExample(IBMConversationV1Models.UpdateExampleOptions updateExampleOptions) {
     IBMWatsonValidator.notNull(updateExampleOptions, 'updateExampleOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/intents/{1}/examples/{2}', new String[]{ updateExampleOptions.workspaceId(), updateExampleOptions.intent(), updateExampleOptions.text() }));
     builder.queryParams(new Map<String, String> {
@@ -453,7 +453,7 @@ public class ConversationV1 extends IBMWatsonService {
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.Example) createServiceCall(builder.build(), ConversationV1Models.Example.class);
+    return (IBMConversationV1Models.Example) createServiceCall(builder.build(), IBMConversationV1Models.Example.class);
   }
 
   /**
@@ -461,10 +461,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Create a new entity.
    *
-   * @param createEntityOptions the {@link ConversationV1Models.CreateEntityOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Entity} with the response
+   * @param createEntityOptions the {@link IBMConversationV1Models.CreateEntityOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Entity} with the response
    */
-  public ConversationV1Models.Entity createEntity(ConversationV1Models.CreateEntityOptions createEntityOptions) {
+  public IBMConversationV1Models.Entity createEntity(IBMConversationV1Models.CreateEntityOptions createEntityOptions) {
     IBMWatsonValidator.notNull(createEntityOptions, 'createEntityOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/entities', new String[]{ createEntityOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
@@ -486,7 +486,7 @@ public class ConversationV1 extends IBMWatsonService {
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.Entity) createServiceCall(builder.build(), ConversationV1Models.Entity.class);
+    return (IBMConversationV1Models.Entity) createServiceCall(builder.build(), IBMConversationV1Models.Entity.class);
   }
 
   /**
@@ -494,10 +494,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Delete an entity from a workspace.
    *
-   * @param deleteEntityOptions the {@link ConversationV1Models.DeleteEntityOptions} containing the options for the call
+   * @param deleteEntityOptions the {@link IBMConversationV1Models.DeleteEntityOptions} containing the options for the call
    * @return the service call
    */
-  public void deleteEntity(ConversationV1Models.DeleteEntityOptions deleteEntityOptions) {
+  public void deleteEntity(IBMConversationV1Models.DeleteEntityOptions deleteEntityOptions) {
     IBMWatsonValidator.notNull(deleteEntityOptions, 'deleteEntityOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/workspaces/{0}/entities/{1}', new String[]{ deleteEntityOptions.workspaceId(), deleteEntityOptions.entity() }));
     builder.queryParams(new Map<String, String> {
@@ -512,10 +512,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Get information about an entity, optionally including all entity content.
    *
-   * @param getEntityOptions the {@link ConversationV1Models.GetEntityOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.EntityExport} with the response
+   * @param getEntityOptions the {@link IBMConversationV1Models.GetEntityOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.EntityExport} with the response
    */
-  public ConversationV1Models.EntityExport getEntity(ConversationV1Models.GetEntityOptions getEntityOptions) {
+  public IBMConversationV1Models.EntityExport getEntity(IBMConversationV1Models.GetEntityOptions getEntityOptions) {
     IBMWatsonValidator.notNull(getEntityOptions, 'getEntityOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/entities/{1}', new String[]{ getEntityOptions.workspaceId(), getEntityOptions.entity() }));
     builder.queryParams(new Map<String, String> {
@@ -523,7 +523,7 @@ public class ConversationV1 extends IBMWatsonService {
       'export' => String.valueOf(getEntityOptions.exportField())
     });
 
-    return (ConversationV1Models.EntityExport) createServiceCall(builder.build(), ConversationV1Models.EntityExport.class);
+    return (IBMConversationV1Models.EntityExport) createServiceCall(builder.build(), IBMConversationV1Models.EntityExport.class);
   }
 
   /**
@@ -531,10 +531,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * List the entities for a workspace.
    *
-   * @param listEntitiesOptions the {@link ConversationV1Models.ListEntitiesOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.EntityCollection} with the response
+   * @param listEntitiesOptions the {@link IBMConversationV1Models.ListEntitiesOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.EntityCollection} with the response
    */
-  public ConversationV1Models.EntityCollection listEntities(ConversationV1Models.ListEntitiesOptions listEntitiesOptions) {
+  public IBMConversationV1Models.EntityCollection listEntities(IBMConversationV1Models.ListEntitiesOptions listEntitiesOptions) {
     IBMWatsonValidator.notNull(listEntitiesOptions, 'listEntitiesOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/entities', new String[]{ listEntitiesOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
@@ -546,7 +546,7 @@ public class ConversationV1 extends IBMWatsonService {
       'cursor' => listEntitiesOptions.cursor()
     });
 
-    return (ConversationV1Models.EntityCollection) createServiceCall(builder.build(), ConversationV1Models.EntityCollection.class);
+    return (IBMConversationV1Models.EntityCollection) createServiceCall(builder.build(), IBMConversationV1Models.EntityCollection.class);
   }
 
   /**
@@ -554,10 +554,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Update an existing entity with new or modified data.
    *
-   * @param updateEntityOptions the {@link ConversationV1Models.UpdateEntityOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Entity} with the response
+   * @param updateEntityOptions the {@link IBMConversationV1Models.UpdateEntityOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Entity} with the response
    */
-  public ConversationV1Models.Entity updateEntity(ConversationV1Models.UpdateEntityOptions updateEntityOptions) {
+  public IBMConversationV1Models.Entity updateEntity(IBMConversationV1Models.UpdateEntityOptions updateEntityOptions) {
     IBMWatsonValidator.notNull(updateEntityOptions, 'updateEntityOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/entities/{1}', new String[]{ updateEntityOptions.workspaceId(), updateEntityOptions.entity() }));
     builder.queryParams(new Map<String, String> {
@@ -581,7 +581,7 @@ public class ConversationV1 extends IBMWatsonService {
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.Entity) createServiceCall(builder.build(), ConversationV1Models.Entity.class);
+    return (IBMConversationV1Models.Entity) createServiceCall(builder.build(), IBMConversationV1Models.Entity.class);
   }
 
   /**
@@ -589,10 +589,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Create a new value for an entity.
    *
-   * @param createValueOptions the {@link ConversationV1Models.CreateValueOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Value} with the response
+   * @param createValueOptions the {@link IBMConversationV1Models.CreateValueOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Value} with the response
    */
-  public ConversationV1Models.Value createValue(ConversationV1Models.CreateValueOptions createValueOptions) {
+  public IBMConversationV1Models.Value createValue(IBMConversationV1Models.CreateValueOptions createValueOptions) {
     IBMWatsonValidator.notNull(createValueOptions, 'createValueOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/entities/{1}/values', new String[]{ createValueOptions.workspaceId(), createValueOptions.entity() }));
     builder.queryParams(new Map<String, String> {
@@ -614,7 +614,7 @@ public class ConversationV1 extends IBMWatsonService {
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.Value) createServiceCall(builder.build(), ConversationV1Models.Value.class);
+    return (IBMConversationV1Models.Value) createServiceCall(builder.build(), IBMConversationV1Models.Value.class);
   }
 
   /**
@@ -622,10 +622,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Delete a value for an entity.
    *
-   * @param deleteValueOptions the {@link ConversationV1Models.DeleteValueOptions} containing the options for the call
+   * @param deleteValueOptions the {@link IBMConversationV1Models.DeleteValueOptions} containing the options for the call
    * @return the service call
    */
-  public void deleteValue(ConversationV1Models.DeleteValueOptions deleteValueOptions) {
+  public void deleteValue(IBMConversationV1Models.DeleteValueOptions deleteValueOptions) {
     IBMWatsonValidator.notNull(deleteValueOptions, 'deleteValueOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}', new String[]{ deleteValueOptions.workspaceId(), deleteValueOptions.entity(), deleteValueOptions.value() }));
     builder.queryParams(new Map<String, String> {
@@ -640,10 +640,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Get information about an entity value.
    *
-   * @param getValueOptions the {@link ConversationV1Models.GetValueOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.ValueExport} with the response
+   * @param getValueOptions the {@link IBMConversationV1Models.GetValueOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.ValueExport} with the response
    */
-  public ConversationV1Models.ValueExport getValue(ConversationV1Models.GetValueOptions getValueOptions) {
+  public IBMConversationV1Models.ValueExport getValue(IBMConversationV1Models.GetValueOptions getValueOptions) {
     IBMWatsonValidator.notNull(getValueOptions, 'getValueOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}', new String[]{ getValueOptions.workspaceId(), getValueOptions.entity(), getValueOptions.value() }));
     builder.queryParams(new Map<String, String> {
@@ -651,7 +651,7 @@ public class ConversationV1 extends IBMWatsonService {
       'export' => String.valueOf(getValueOptions.exportField())
     });
 
-    return (ConversationV1Models.ValueExport) createServiceCall(builder.build(), ConversationV1Models.ValueExport.class);
+    return (IBMConversationV1Models.ValueExport) createServiceCall(builder.build(), IBMConversationV1Models.ValueExport.class);
   }
 
   /**
@@ -659,10 +659,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * List the values for an entity.
    *
-   * @param listValuesOptions the {@link ConversationV1Models.ListValuesOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.ValueCollection} with the response
+   * @param listValuesOptions the {@link IBMConversationV1Models.ListValuesOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.ValueCollection} with the response
    */
-  public ConversationV1Models.ValueCollection listValues(ConversationV1Models.ListValuesOptions listValuesOptions) {
+  public IBMConversationV1Models.ValueCollection listValues(IBMConversationV1Models.ListValuesOptions listValuesOptions) {
     IBMWatsonValidator.notNull(listValuesOptions, 'listValuesOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/entities/{1}/values', new String[]{ listValuesOptions.workspaceId(), listValuesOptions.entity() }));
     builder.queryParams(new Map<String, String> {
@@ -674,7 +674,7 @@ public class ConversationV1 extends IBMWatsonService {
       'cursor' => listValuesOptions.cursor()
     });
 
-    return (ConversationV1Models.ValueCollection) createServiceCall(builder.build(), ConversationV1Models.ValueCollection.class);
+    return (IBMConversationV1Models.ValueCollection) createServiceCall(builder.build(), IBMConversationV1Models.ValueCollection.class);
   }
 
   /**
@@ -682,10 +682,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Update the content of a value for an entity.
    *
-   * @param updateValueOptions the {@link ConversationV1Models.UpdateValueOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Value} with the response
+   * @param updateValueOptions the {@link IBMConversationV1Models.UpdateValueOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Value} with the response
    */
-  public ConversationV1Models.Value updateValue(ConversationV1Models.UpdateValueOptions updateValueOptions) {
+  public IBMConversationV1Models.Value updateValue(IBMConversationV1Models.UpdateValueOptions updateValueOptions) {
     IBMWatsonValidator.notNull(updateValueOptions, 'updateValueOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}', new String[]{ updateValueOptions.workspaceId(), updateValueOptions.entity(), updateValueOptions.value() }));
     builder.queryParams(new Map<String, String> {
@@ -709,7 +709,7 @@ public class ConversationV1 extends IBMWatsonService {
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.Value) createServiceCall(builder.build(), ConversationV1Models.Value.class);
+    return (IBMConversationV1Models.Value) createServiceCall(builder.build(), IBMConversationV1Models.Value.class);
   }
 
   /**
@@ -717,10 +717,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Add a new synonym to an entity value.
    *
-   * @param createSynonymOptions the {@link ConversationV1Models.CreateSynonymOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Synonym} with the response
+   * @param createSynonymOptions the {@link IBMConversationV1Models.CreateSynonymOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Synonym} with the response
    */
-  public ConversationV1Models.Synonym createSynonym(ConversationV1Models.CreateSynonymOptions createSynonymOptions) {
+  public IBMConversationV1Models.Synonym createSynonym(IBMConversationV1Models.CreateSynonymOptions createSynonymOptions) {
     IBMWatsonValidator.notNull(createSynonymOptions, 'createSynonymOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms', new String[]{ createSynonymOptions.workspaceId(), createSynonymOptions.entity(), createSynonymOptions.value() }));
     builder.queryParams(new Map<String, String> {
@@ -730,7 +730,7 @@ public class ConversationV1 extends IBMWatsonService {
     contentJson.put('synonym', createSynonymOptions.synonym());
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.Synonym) createServiceCall(builder.build(), ConversationV1Models.Synonym.class);
+    return (IBMConversationV1Models.Synonym) createServiceCall(builder.build(), IBMConversationV1Models.Synonym.class);
   }
 
   /**
@@ -738,10 +738,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Delete a synonym for an entity value.
    *
-   * @param deleteSynonymOptions the {@link ConversationV1Models.DeleteSynonymOptions} containing the options for the call
+   * @param deleteSynonymOptions the {@link IBMConversationV1Models.DeleteSynonymOptions} containing the options for the call
    * @return the service call
    */
-  public void deleteSynonym(ConversationV1Models.DeleteSynonymOptions deleteSynonymOptions) {
+  public void deleteSynonym(IBMConversationV1Models.DeleteSynonymOptions deleteSynonymOptions) {
     IBMWatsonValidator.notNull(deleteSynonymOptions, 'deleteSynonymOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms/{3}', new String[]{ deleteSynonymOptions.workspaceId(), deleteSynonymOptions.entity(), deleteSynonymOptions.value(), deleteSynonymOptions.synonym() }));
     builder.queryParams(new Map<String, String> {
@@ -756,17 +756,17 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Get information about a synonym for an entity value.
    *
-   * @param getSynonymOptions the {@link ConversationV1Models.GetSynonymOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Synonym} with the response
+   * @param getSynonymOptions the {@link IBMConversationV1Models.GetSynonymOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Synonym} with the response
    */
-  public ConversationV1Models.Synonym getSynonym(ConversationV1Models.GetSynonymOptions getSynonymOptions) {
+  public IBMConversationV1Models.Synonym getSynonym(IBMConversationV1Models.GetSynonymOptions getSynonymOptions) {
     IBMWatsonValidator.notNull(getSynonymOptions, 'getSynonymOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms/{3}', new String[]{ getSynonymOptions.workspaceId(), getSynonymOptions.entity(), getSynonymOptions.value(), getSynonymOptions.synonym() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
 
-    return (ConversationV1Models.Synonym) createServiceCall(builder.build(), ConversationV1Models.Synonym.class);
+    return (IBMConversationV1Models.Synonym) createServiceCall(builder.build(), IBMConversationV1Models.Synonym.class);
   }
 
   /**
@@ -774,10 +774,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * List the synonyms for an entity value.
    *
-   * @param listSynonymsOptions the {@link ConversationV1Models.ListSynonymsOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.SynonymCollection} with the response
+   * @param listSynonymsOptions the {@link IBMConversationV1Models.ListSynonymsOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.SynonymCollection} with the response
    */
-  public ConversationV1Models.SynonymCollection listSynonyms(ConversationV1Models.ListSynonymsOptions listSynonymsOptions) {
+  public IBMConversationV1Models.SynonymCollection listSynonyms(IBMConversationV1Models.ListSynonymsOptions listSynonymsOptions) {
     IBMWatsonValidator.notNull(listSynonymsOptions, 'listSynonymsOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms', new String[]{ listSynonymsOptions.workspaceId(), listSynonymsOptions.entity(), listSynonymsOptions.value() }));
     builder.queryParams(new Map<String, String> {
@@ -788,7 +788,7 @@ public class ConversationV1 extends IBMWatsonService {
       'cursor' => listSynonymsOptions.cursor()
     });
 
-    return (ConversationV1Models.SynonymCollection) createServiceCall(builder.build(), ConversationV1Models.SynonymCollection.class);
+    return (IBMConversationV1Models.SynonymCollection) createServiceCall(builder.build(), IBMConversationV1Models.SynonymCollection.class);
   }
 
   /**
@@ -796,10 +796,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Update the information about a synonym for an entity value.
    *
-   * @param updateSynonymOptions the {@link ConversationV1Models.UpdateSynonymOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Synonym} with the response
+   * @param updateSynonymOptions the {@link IBMConversationV1Models.UpdateSynonymOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Synonym} with the response
    */
-  public ConversationV1Models.Synonym updateSynonym(ConversationV1Models.UpdateSynonymOptions updateSynonymOptions) {
+  public IBMConversationV1Models.Synonym updateSynonym(IBMConversationV1Models.UpdateSynonymOptions updateSynonymOptions) {
     IBMWatsonValidator.notNull(updateSynonymOptions, 'updateSynonymOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms/{3}', new String[]{ updateSynonymOptions.workspaceId(), updateSynonymOptions.entity(), updateSynonymOptions.value(), updateSynonymOptions.synonym() }));
     builder.queryParams(new Map<String, String> {
@@ -811,7 +811,7 @@ public class ConversationV1 extends IBMWatsonService {
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.Synonym) createServiceCall(builder.build(), ConversationV1Models.Synonym.class);
+    return (IBMConversationV1Models.Synonym) createServiceCall(builder.build(), IBMConversationV1Models.Synonym.class);
   }
 
   /**
@@ -819,10 +819,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Create a dialog node.
    *
-   * @param createDialogNodeOptions the {@link ConversationV1Models.CreateDialogNodeOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.DialogNode} with the response
+   * @param createDialogNodeOptions the {@link IBMConversationV1Models.CreateDialogNodeOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.DialogNode} with the response
    */
-  public ConversationV1Models.DialogNode createDialogNode(ConversationV1Models.CreateDialogNodeOptions createDialogNodeOptions) {
+  public IBMConversationV1Models.DialogNode createDialogNode(IBMConversationV1Models.CreateDialogNodeOptions createDialogNodeOptions) {
     IBMWatsonValidator.notNull(createDialogNodeOptions, 'createDialogNodeOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/dialog_nodes', new String[]{ createDialogNodeOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
@@ -871,7 +871,7 @@ public class ConversationV1 extends IBMWatsonService {
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.DialogNode) createServiceCall(builder.build(), ConversationV1Models.DialogNode.class);
+    return (IBMConversationV1Models.DialogNode) createServiceCall(builder.build(), IBMConversationV1Models.DialogNode.class);
   }
 
   /**
@@ -879,10 +879,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Delete a dialog node from the workspace.
    *
-   * @param deleteDialogNodeOptions the {@link ConversationV1Models.DeleteDialogNodeOptions} containing the options for the call
+   * @param deleteDialogNodeOptions the {@link IBMConversationV1Models.DeleteDialogNodeOptions} containing the options for the call
    * @return the service call
    */
-  public void deleteDialogNode(ConversationV1Models.DeleteDialogNodeOptions deleteDialogNodeOptions) {
+  public void deleteDialogNode(IBMConversationV1Models.DeleteDialogNodeOptions deleteDialogNodeOptions) {
     IBMWatsonValidator.notNull(deleteDialogNodeOptions, 'deleteDialogNodeOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/workspaces/{0}/dialog_nodes/{1}', new String[]{ deleteDialogNodeOptions.workspaceId(), deleteDialogNodeOptions.dialogNode() }));
     builder.queryParams(new Map<String, String> {
@@ -897,17 +897,17 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Get information about a dialog node.
    *
-   * @param getDialogNodeOptions the {@link ConversationV1Models.GetDialogNodeOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.DialogNode} with the response
+   * @param getDialogNodeOptions the {@link IBMConversationV1Models.GetDialogNodeOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.DialogNode} with the response
    */
-  public ConversationV1Models.DialogNode getDialogNode(ConversationV1Models.GetDialogNodeOptions getDialogNodeOptions) {
+  public IBMConversationV1Models.DialogNode getDialogNode(IBMConversationV1Models.GetDialogNodeOptions getDialogNodeOptions) {
     IBMWatsonValidator.notNull(getDialogNodeOptions, 'getDialogNodeOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/dialog_nodes/{1}', new String[]{ getDialogNodeOptions.workspaceId(), getDialogNodeOptions.dialogNode() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
 
-    return (ConversationV1Models.DialogNode) createServiceCall(builder.build(), ConversationV1Models.DialogNode.class);
+    return (IBMConversationV1Models.DialogNode) createServiceCall(builder.build(), IBMConversationV1Models.DialogNode.class);
   }
 
   /**
@@ -915,10 +915,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * List the dialog nodes in the workspace.
    *
-   * @param listDialogNodesOptions the {@link ConversationV1Models.ListDialogNodesOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.DialogNodeCollection} with the response
+   * @param listDialogNodesOptions the {@link IBMConversationV1Models.ListDialogNodesOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.DialogNodeCollection} with the response
    */
-  public ConversationV1Models.DialogNodeCollection listDialogNodes(ConversationV1Models.ListDialogNodesOptions listDialogNodesOptions) {
+  public IBMConversationV1Models.DialogNodeCollection listDialogNodes(IBMConversationV1Models.ListDialogNodesOptions listDialogNodesOptions) {
     IBMWatsonValidator.notNull(listDialogNodesOptions, 'listDialogNodesOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/dialog_nodes', new String[]{ listDialogNodesOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
@@ -929,7 +929,7 @@ public class ConversationV1 extends IBMWatsonService {
       'cursor' => listDialogNodesOptions.cursor()
     });
 
-    return (ConversationV1Models.DialogNodeCollection) createServiceCall(builder.build(), ConversationV1Models.DialogNodeCollection.class);
+    return (IBMConversationV1Models.DialogNodeCollection) createServiceCall(builder.build(), IBMConversationV1Models.DialogNodeCollection.class);
   }
 
   /**
@@ -937,10 +937,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Update information for a dialog node.
    *
-   * @param updateDialogNodeOptions the {@link ConversationV1Models.UpdateDialogNodeOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.DialogNode} with the response
+   * @param updateDialogNodeOptions the {@link IBMConversationV1Models.UpdateDialogNodeOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.DialogNode} with the response
    */
-  public ConversationV1Models.DialogNode updateDialogNode(ConversationV1Models.UpdateDialogNodeOptions updateDialogNodeOptions) {
+  public IBMConversationV1Models.DialogNode updateDialogNode(IBMConversationV1Models.UpdateDialogNodeOptions updateDialogNodeOptions) {
     IBMWatsonValidator.notNull(updateDialogNodeOptions, 'updateDialogNodeOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/dialog_nodes/{1}', new String[]{ updateDialogNodeOptions.workspaceId(), updateDialogNodeOptions.dialogNode() }));
     builder.queryParams(new Map<String, String> {
@@ -989,7 +989,7 @@ public class ConversationV1 extends IBMWatsonService {
     contentJson.put('dialog_node', updateDialogNodeOptions.newDialogNode());
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.DialogNode) createServiceCall(builder.build(), ConversationV1Models.DialogNode.class);
+    return (IBMConversationV1Models.DialogNode) createServiceCall(builder.build(), IBMConversationV1Models.DialogNode.class);
   }
 
   /**
@@ -997,10 +997,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * List log events in a specific workspace.
    *
-   * @param listLogsOptions the {@link ConversationV1Models.ListLogsOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.LogCollection} with the response
+   * @param listLogsOptions the {@link IBMConversationV1Models.ListLogsOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.LogCollection} with the response
    */
-  public ConversationV1Models.LogCollection listLogs(ConversationV1Models.ListLogsOptions listLogsOptions) {
+  public IBMConversationV1Models.LogCollection listLogs(IBMConversationV1Models.ListLogsOptions listLogsOptions) {
     IBMWatsonValidator.notNull(listLogsOptions, 'listLogsOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/logs', new String[]{ listLogsOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
@@ -1011,7 +1011,7 @@ public class ConversationV1 extends IBMWatsonService {
       'cursor' => listLogsOptions.cursor()
     });
 
-    return (ConversationV1Models.LogCollection) createServiceCall(builder.build(), ConversationV1Models.LogCollection.class);
+    return (IBMConversationV1Models.LogCollection) createServiceCall(builder.build(), IBMConversationV1Models.LogCollection.class);
   }
 
   /**
@@ -1019,10 +1019,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.
    *
-   * @param createCounterexampleOptions the {@link ConversationV1Models.CreateCounterexampleOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Counterexample} with the response
+   * @param createCounterexampleOptions the {@link IBMConversationV1Models.CreateCounterexampleOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Counterexample} with the response
    */
-  public ConversationV1Models.Counterexample createCounterexample(ConversationV1Models.CreateCounterexampleOptions createCounterexampleOptions) {
+  public IBMConversationV1Models.Counterexample createCounterexample(IBMConversationV1Models.CreateCounterexampleOptions createCounterexampleOptions) {
     IBMWatsonValidator.notNull(createCounterexampleOptions, 'createCounterexampleOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/counterexamples', new String[]{ createCounterexampleOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
@@ -1032,7 +1032,7 @@ public class ConversationV1 extends IBMWatsonService {
     contentJson.put('text', createCounterexampleOptions.text());
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.Counterexample) createServiceCall(builder.build(), ConversationV1Models.Counterexample.class);
+    return (IBMConversationV1Models.Counterexample) createServiceCall(builder.build(), IBMConversationV1Models.Counterexample.class);
   }
 
   /**
@@ -1040,10 +1040,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.
    *
-   * @param deleteCounterexampleOptions the {@link ConversationV1Models.DeleteCounterexampleOptions} containing the options for the call
+   * @param deleteCounterexampleOptions the {@link IBMConversationV1Models.DeleteCounterexampleOptions} containing the options for the call
    * @return the service call
    */
-  public void deleteCounterexample(ConversationV1Models.DeleteCounterexampleOptions deleteCounterexampleOptions) {
+  public void deleteCounterexample(IBMConversationV1Models.DeleteCounterexampleOptions deleteCounterexampleOptions) {
     IBMWatsonValidator.notNull(deleteCounterexampleOptions, 'deleteCounterexampleOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/workspaces/{0}/counterexamples/{1}', new String[]{ deleteCounterexampleOptions.workspaceId(), deleteCounterexampleOptions.text() }));
     builder.queryParams(new Map<String, String> {
@@ -1058,17 +1058,17 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.
    *
-   * @param getCounterexampleOptions the {@link ConversationV1Models.GetCounterexampleOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Counterexample} with the response
+   * @param getCounterexampleOptions the {@link IBMConversationV1Models.GetCounterexampleOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Counterexample} with the response
    */
-  public ConversationV1Models.Counterexample getCounterexample(ConversationV1Models.GetCounterexampleOptions getCounterexampleOptions) {
+  public IBMConversationV1Models.Counterexample getCounterexample(IBMConversationV1Models.GetCounterexampleOptions getCounterexampleOptions) {
     IBMWatsonValidator.notNull(getCounterexampleOptions, 'getCounterexampleOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/counterexamples/{1}', new String[]{ getCounterexampleOptions.workspaceId(), getCounterexampleOptions.text() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
 
-    return (ConversationV1Models.Counterexample) createServiceCall(builder.build(), ConversationV1Models.Counterexample.class);
+    return (IBMConversationV1Models.Counterexample) createServiceCall(builder.build(), IBMConversationV1Models.Counterexample.class);
   }
 
   /**
@@ -1076,10 +1076,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.
    *
-   * @param listCounterexamplesOptions the {@link ConversationV1Models.ListCounterexamplesOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.CounterexampleCollection} with the response
+   * @param listCounterexamplesOptions the {@link IBMConversationV1Models.ListCounterexamplesOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.CounterexampleCollection} with the response
    */
-  public ConversationV1Models.CounterexampleCollection listCounterexamples(ConversationV1Models.ListCounterexamplesOptions listCounterexamplesOptions) {
+  public IBMConversationV1Models.CounterexampleCollection listCounterexamples(IBMConversationV1Models.ListCounterexamplesOptions listCounterexamplesOptions) {
     IBMWatsonValidator.notNull(listCounterexamplesOptions, 'listCounterexamplesOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/workspaces/{0}/counterexamples', new String[]{ listCounterexamplesOptions.workspaceId() }));
     builder.queryParams(new Map<String, String> {
@@ -1090,7 +1090,7 @@ public class ConversationV1 extends IBMWatsonService {
       'cursor' => listCounterexamplesOptions.cursor()
     });
 
-    return (ConversationV1Models.CounterexampleCollection) createServiceCall(builder.build(), ConversationV1Models.CounterexampleCollection.class);
+    return (IBMConversationV1Models.CounterexampleCollection) createServiceCall(builder.build(), IBMConversationV1Models.CounterexampleCollection.class);
   }
 
   /**
@@ -1098,10 +1098,10 @@ public class ConversationV1 extends IBMWatsonService {
    *
    * Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.
    *
-   * @param updateCounterexampleOptions the {@link ConversationV1Models.UpdateCounterexampleOptions} containing the options for the call
-   * @return the {@link ConversationV1Models.Counterexample} with the response
+   * @param updateCounterexampleOptions the {@link IBMConversationV1Models.UpdateCounterexampleOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.Counterexample} with the response
    */
-  public ConversationV1Models.Counterexample updateCounterexample(ConversationV1Models.UpdateCounterexampleOptions updateCounterexampleOptions) {
+  public IBMConversationV1Models.Counterexample updateCounterexample(IBMConversationV1Models.UpdateCounterexampleOptions updateCounterexampleOptions) {
     IBMWatsonValidator.notNull(updateCounterexampleOptions, 'updateCounterexampleOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/workspaces/{0}/counterexamples/{1}', new String[]{ updateCounterexampleOptions.workspaceId(), updateCounterexampleOptions.text() }));
     builder.queryParams(new Map<String, String> {
@@ -1113,6 +1113,7 @@ public class ConversationV1 extends IBMWatsonService {
     }
     builder.bodyJson(JSON.serialize(contentJson));
 
-    return (ConversationV1Models.Counterexample) createServiceCall(builder.build(), ConversationV1Models.Counterexample.class);
+    return (IBMConversationV1Models.Counterexample) createServiceCall(builder.build(), IBMConversationV1Models.Counterexample.class);
   }
+
 }

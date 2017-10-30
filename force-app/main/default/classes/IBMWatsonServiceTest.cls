@@ -58,11 +58,11 @@ private class IBMWatsonServiceTest {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
       discovery.setUsernameAndPassword('username', 'password'); 
-      DiscoveryV1Models.CreateEnvironmentOptions options = new DiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      DiscoveryV1Models.Environment resp = 
+      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
+      IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
     }
     catch(IBMWatsonServiceExceptions.BadRequestException exptn) {
@@ -81,11 +81,11 @@ private class IBMWatsonServiceTest {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
       discovery.setUsernameAndPassword('username', 'password'); 
-      DiscoveryV1Models.CreateEnvironmentOptions options = new DiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      DiscoveryV1Models.Environment resp = 
+      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
+      IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
     }
     catch(IBMWatsonServiceExceptions.ConflictException exptn) {
@@ -104,11 +104,11 @@ private class IBMWatsonServiceTest {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
       discovery.setUsernameAndPassword('username', 'password'); 
-      DiscoveryV1Models.CreateEnvironmentOptions options = new DiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      DiscoveryV1Models.Environment resp = 
+      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
+      IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
     }
     catch(IBMWatsonServiceExceptions.ForbiddenException exptn) {
@@ -127,11 +127,11 @@ private class IBMWatsonServiceTest {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
       discovery.setUsernameAndPassword('username', 'password'); 
-      DiscoveryV1Models.CreateEnvironmentOptions options = new DiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      DiscoveryV1Models.Environment resp = 
+      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
+      IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
     }
     catch(IBMWatsonServiceExceptions.ForbiddenException exptn) {
@@ -150,11 +150,11 @@ private class IBMWatsonServiceTest {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
       discovery.setUsernameAndPassword('username', 'password'); 
-      DiscoveryV1Models.CreateEnvironmentOptions options = new DiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      DiscoveryV1Models.Environment resp = 
+      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
+      IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
     }
     catch(IBMWatsonServiceExceptions.InternalServerErrorException exptn) {
@@ -173,11 +173,11 @@ private class IBMWatsonServiceTest {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
       discovery.setUsernameAndPassword('username', 'password'); 
-      DiscoveryV1Models.CreateEnvironmentOptions options = new DiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      DiscoveryV1Models.Environment resp = 
+      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
+      IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
     }
     catch(IBMWatsonServiceExceptions.NotFoundException exptn) {
@@ -196,11 +196,11 @@ private class IBMWatsonServiceTest {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
       discovery.setUsernameAndPassword('username', 'password'); 
-      DiscoveryV1Models.CreateEnvironmentOptions options = new DiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      DiscoveryV1Models.Environment resp = 
+      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
+      IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
     }
     catch(IBMWatsonServiceExceptions.RequestTooLargeException exptn) {
@@ -219,11 +219,11 @@ private class IBMWatsonServiceTest {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
       discovery.setUsernameAndPassword('username', 'password'); 
-      DiscoveryV1Models.CreateEnvironmentOptions options = new DiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      DiscoveryV1Models.Environment resp = 
+      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
+      IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
     }
     catch(IBMWatsonServiceExceptions.ResponseException exptn) {
@@ -242,11 +242,11 @@ private class IBMWatsonServiceTest {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
       discovery.setUsernameAndPassword('username', 'password'); 
-      DiscoveryV1Models.CreateEnvironmentOptions options = new DiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      DiscoveryV1Models.Environment resp = 
+      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
+      IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
     }
     catch(IBMWatsonServiceExceptions.ServiceUnavailableException exptn) {
@@ -265,11 +265,11 @@ private class IBMWatsonServiceTest {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
       discovery.setUsernameAndPassword('username', 'password'); 
-      DiscoveryV1Models.CreateEnvironmentOptions options = new DiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      DiscoveryV1Models.Environment resp = 
+      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
+      IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
     }
     catch(IBMWatsonServiceExceptions.TooManyRequestsException exptn) {
@@ -288,11 +288,11 @@ private class IBMWatsonServiceTest {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
       discovery.setUsernameAndPassword('username', 'password'); 
-      DiscoveryV1Models.CreateEnvironmentOptions options = new DiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      DiscoveryV1Models.Environment resp = 
+      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
+      IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
     }
     catch(IBMWatsonServiceExceptions.UnauthorizedException exptn) {
@@ -310,11 +310,11 @@ private class IBMWatsonServiceTest {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
       discovery.setUsernameAndPassword('username', 'password'); 
-      DiscoveryV1Models.CreateEnvironmentOptions options = new DiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      DiscoveryV1Models.Environment resp = 
+      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
+      IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
     }
     catch(IBMWatsonServiceExceptions.UnsupportedException exptn) {

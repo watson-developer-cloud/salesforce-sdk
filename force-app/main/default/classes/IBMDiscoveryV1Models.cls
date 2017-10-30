@@ -1,4 +1,4 @@
-public class DiscoveryV1Models {
+public class IBMDiscoveryV1Models {
   /**
    * The addDocument options.
    */
@@ -462,18 +462,12 @@ public class DiscoveryV1Models {
       this.aggregations_serialized_name = aggregations_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      AggregationResult ret;
-      if (jsonString.equals('null')) {
-        ret = new AggregationResult();
-      }
-      else {
-        ret = (AggregationResult) JSON.deserialize(jsonString, AggregationResult.class);
-      }
+      AggregationResult ret = (AggregationResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for aggregations_serialized_name
       List<QueryAggregation> newAggregations = new List<QueryAggregation>();
@@ -482,7 +476,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations_serialized_name');
-          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
         ret.setAggregations(newAggregations);
@@ -509,18 +503,12 @@ public class DiscoveryV1Models {
       return value_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Calculation ret;
-      if (jsonString.equals('null')) {
-        ret = new Calculation();
-      }
-      else {
-        ret = (Calculation) JSON.deserialize(jsonString, Calculation.class);
-      }
+      Calculation ret = (Calculation) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -726,29 +714,23 @@ public class DiscoveryV1Models {
       this.training_status_serialized_name = training_status_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Collection ret;
-      if (jsonString.equals('null')) {
-        ret = new Collection();
-      }
-      else {
-        ret = (Collection) JSON.deserialize(jsonString, Collection.class);
-      }
+      Collection ret = (Collection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for document_counts_serialized_name
-      DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('document_counts_serialized_name'));
+      DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('document_counts_serialized_name'), DocumentCounts.class);
       ret.setDocumentCounts(newDocumentCounts);
 
       // calling custom deserializer for disk_usage_serialized_name
-      CollectionDiskUsage newDiskUsage = (CollectionDiskUsage) new CollectionDiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('disk_usage_serialized_name'));
+      CollectionDiskUsage newDiskUsage = (CollectionDiskUsage) new CollectionDiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('disk_usage_serialized_name'), CollectionDiskUsage.class);
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for training_status_serialized_name
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(ret.getTrainingStatus()), (Map<String, Object>) jsonMap.get('training_status_serialized_name'));
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(ret.getTrainingStatus()), (Map<String, Object>) jsonMap.get('training_status_serialized_name'), TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
       return ret;
@@ -772,18 +754,12 @@ public class DiscoveryV1Models {
       return used_bytes_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      CollectionDiskUsage ret;
-      if (jsonString.equals('null')) {
-        ret = new CollectionDiskUsage();
-      }
-      else {
-        ret = (CollectionDiskUsage) JSON.deserialize(jsonString, CollectionDiskUsage.class);
-      }
+      CollectionDiskUsage ret = (CollectionDiskUsage) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -935,21 +911,15 @@ public class DiscoveryV1Models {
       this.normalizations_serialized_name = normalizations_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Configuration ret;
-      if (jsonString.equals('null')) {
-        ret = new Configuration();
-      }
-      else {
-        ret = (Configuration) JSON.deserialize(jsonString, Configuration.class);
-      }
+      Configuration ret = (Configuration) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for conversions_serialized_name
-      Conversions newConversions = (Conversions) new Conversions().deserialize(JSON.serialize(ret.getConversions()), (Map<String, Object>) jsonMap.get('conversions_serialized_name'));
+      Conversions newConversions = (Conversions) new Conversions().deserialize(JSON.serialize(ret.getConversions()), (Map<String, Object>) jsonMap.get('conversions_serialized_name'), Conversions.class);
       ret.setConversions(newConversions);
 
       // calling custom deserializer for enrichments_serialized_name
@@ -959,7 +929,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedEnrichments.size(); i++) {
           Enrichment currentItem = ret.getEnrichments().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('enrichments_serialized_name');
-          Enrichment newItem = (Enrichment) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          Enrichment newItem = (Enrichment) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Enrichment.class);
           newEnrichments.add(newItem);
         }
         ret.setEnrichments(newEnrichments);
@@ -972,7 +942,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedNormalizations.size(); i++) {
           NormalizationOperation currentItem = ret.getNormalizations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('normalizations_serialized_name');
-          NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), NormalizationOperation.class);
           newNormalizations.add(newItem);
         }
         ret.setNormalizations(newNormalizations);
@@ -1071,29 +1041,23 @@ public class DiscoveryV1Models {
       this.json_normalizations_serialized_name = json_normalizations_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Conversions ret;
-      if (jsonString.equals('null')) {
-        ret = new Conversions();
-      }
-      else {
-        ret = (Conversions) JSON.deserialize(jsonString, Conversions.class);
-      }
+      Conversions ret = (Conversions) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for pdf_serialized_name
-      PdfSettings newPdf = (PdfSettings) new PdfSettings().deserialize(JSON.serialize(ret.getPdf()), (Map<String, Object>) jsonMap.get('pdf_serialized_name'));
+      PdfSettings newPdf = (PdfSettings) new PdfSettings().deserialize(JSON.serialize(ret.getPdf()), (Map<String, Object>) jsonMap.get('pdf_serialized_name'), PdfSettings.class);
       ret.setPdf(newPdf);
 
       // calling custom deserializer for word_serialized_name
-      WordSettings newWord = (WordSettings) new WordSettings().deserialize(JSON.serialize(ret.getWord()), (Map<String, Object>) jsonMap.get('word_serialized_name'));
+      WordSettings newWord = (WordSettings) new WordSettings().deserialize(JSON.serialize(ret.getWord()), (Map<String, Object>) jsonMap.get('word_serialized_name'), WordSettings.class);
       ret.setWord(newWord);
 
       // calling custom deserializer for html_serialized_name
-      HtmlSettings newHtml = (HtmlSettings) new HtmlSettings().deserialize(JSON.serialize(ret.getHtml()), (Map<String, Object>) jsonMap.get('html_serialized_name'));
+      HtmlSettings newHtml = (HtmlSettings) new HtmlSettings().deserialize(JSON.serialize(ret.getHtml()), (Map<String, Object>) jsonMap.get('html_serialized_name'), HtmlSettings.class);
       ret.setHtml(newHtml);
 
       // calling custom deserializer for json_normalizations_serialized_name
@@ -1103,7 +1067,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedJsonNormalizations.size(); i++) {
           NormalizationOperation currentItem = ret.getJsonNormalizations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('json_normalizations_serialized_name');
-          NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), NormalizationOperation.class);
           newJsonNormalizations.add(newItem);
         }
         ret.setJsonNormalizations(newJsonNormalizations);
@@ -2780,18 +2744,12 @@ public class DiscoveryV1Models {
       return percent_used_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      DiskUsage ret;
-      if (jsonString.equals('null')) {
-        ret = new DiskUsage();
-      }
-      else {
-        ret = (DiskUsage) JSON.deserialize(jsonString, DiskUsage.class);
-      }
+      DiskUsage ret = (DiskUsage) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -2865,18 +2823,12 @@ public class DiscoveryV1Models {
       this.notices_serialized_name = notices_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      DocumentAccepted ret;
-      if (jsonString.equals('null')) {
-        ret = new DocumentAccepted();
-      }
-      else {
-        ret = (DocumentAccepted) JSON.deserialize(jsonString, DocumentAccepted.class);
-      }
+      DocumentAccepted ret = (DocumentAccepted) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for notices_serialized_name
       List<Notice> newNotices = new List<Notice>();
@@ -2885,7 +2837,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedNotices.size(); i++) {
           Notice currentItem = ret.getNotices().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('notices_serialized_name');
-          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
           newNotices.add(newItem);
         }
         ret.setNotices(newNotices);
@@ -2936,18 +2888,12 @@ public class DiscoveryV1Models {
       return failed_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      DocumentCounts ret;
-      if (jsonString.equals('null')) {
-        ret = new DocumentCounts();
-      }
-      else {
-        ret = (DocumentCounts) JSON.deserialize(jsonString, DocumentCounts.class);
-      }
+      DocumentCounts ret = (DocumentCounts) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -2996,18 +2942,16 @@ public class DiscoveryV1Models {
       this.snapshot_serialized_name = snapshot_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      DocumentSnapshot ret;
-      if (jsonString.equals('null')) {
-        ret = new DocumentSnapshot();
-      }
-      else {
-        ret = (DocumentSnapshot) JSON.deserialize(jsonString, DocumentSnapshot.class);
-      }
+      DocumentSnapshot ret = (DocumentSnapshot) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for snapshot_serialized_name
+      IBMWatsonMapModel newSnapshot = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getSnapshot()), (Map<String, Object>) jsonMap.get('snapshot_serialized_name'), IBMWatsonMapModel.class);
+      ret.setSnapshot(newSnapshot);
 
       return ret;
     }
@@ -3174,18 +3118,12 @@ public class DiscoveryV1Models {
       this.notices_serialized_name = notices_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      DocumentStatus ret;
-      if (jsonString.equals('null')) {
-        ret = new DocumentStatus();
-      }
-      else {
-        ret = (DocumentStatus) JSON.deserialize(jsonString, DocumentStatus.class);
-      }
+      DocumentStatus ret = (DocumentStatus) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for notices_serialized_name
       List<Notice> newNotices = new List<Notice>();
@@ -3194,7 +3132,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedNotices.size(); i++) {
           Notice currentItem = ret.getNotices().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('notices_serialized_name');
-          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
           newNotices.add(newItem);
         }
         ret.setNotices(newNotices);
@@ -3356,21 +3294,15 @@ public class DiscoveryV1Models {
       this.options_serialized_name = options_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Enrichment ret;
-      if (jsonString.equals('null')) {
-        ret = new Enrichment();
-      }
-      else {
-        ret = (Enrichment) JSON.deserialize(jsonString, Enrichment.class);
-      }
+      Enrichment ret = (Enrichment) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for options_serialized_name
-      EnrichmentOptions newOptions = (EnrichmentOptions) new EnrichmentOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options_serialized_name'));
+      EnrichmentOptions newOptions = (EnrichmentOptions) new EnrichmentOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options_serialized_name'), EnrichmentOptions.class);
       ret.setOptions(newOptions);
 
       return ret;
@@ -3521,18 +3453,12 @@ public class DiscoveryV1Models {
       this.language_serialized_name = language_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      EnrichmentOptions ret;
-      if (jsonString.equals('null')) {
-        ret = new EnrichmentOptions();
-      }
-      else {
-        ret = (EnrichmentOptions) JSON.deserialize(jsonString, EnrichmentOptions.class);
-      }
+      EnrichmentOptions ret = (EnrichmentOptions) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -3687,21 +3613,15 @@ public class DiscoveryV1Models {
       this.index_capacity_serialized_name = index_capacity_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Environment ret;
-      if (jsonString.equals('null')) {
-        ret = new Environment();
-      }
-      else {
-        ret = (Environment) JSON.deserialize(jsonString, Environment.class);
-      }
+      Environment ret = (Environment) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for index_capacity_serialized_name
-      IndexCapacity newIndexCapacity = (IndexCapacity) new IndexCapacity().deserialize(JSON.serialize(ret.getIndexCapacity()), (Map<String, Object>) jsonMap.get('index_capacity_serialized_name'));
+      IndexCapacity newIndexCapacity = (IndexCapacity) new IndexCapacity().deserialize(JSON.serialize(ret.getIndexCapacity()), (Map<String, Object>) jsonMap.get('index_capacity_serialized_name'), IndexCapacity.class);
       ret.setIndexCapacity(newIndexCapacity);
 
       return ret;
@@ -3737,18 +3657,12 @@ public class DiscoveryV1Models {
       return maximum_allowed_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      EnvironmentDocuments ret;
-      if (jsonString.equals('null')) {
-        ret = new EnvironmentDocuments();
-      }
-      else {
-        ret = (EnvironmentDocuments) JSON.deserialize(jsonString, EnvironmentDocuments.class);
-      }
+      EnvironmentDocuments ret = (EnvironmentDocuments) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -4614,18 +4528,12 @@ public class DiscoveryV1Models {
       return type_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Field ret;
-      if (jsonString.equals('null')) {
-        ret = new Field();
-      }
-      else {
-        ret = (Field) JSON.deserialize(jsonString, Field.class);
-      }
+      Field ret = (Field) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -4750,18 +4658,12 @@ public class DiscoveryV1Models {
       this.name_serialized_name = name_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      FontSetting ret;
-      if (jsonString.equals('null')) {
-        ret = new FontSetting();
-      }
-      else {
-        ret = (FontSetting) JSON.deserialize(jsonString, FontSetting.class);
-      }
+      FontSetting ret = (FontSetting) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -5498,18 +5400,12 @@ public class DiscoveryV1Models {
       return interval_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Histogram ret;
-      if (jsonString.equals('null')) {
-        ret = new Histogram();
-      }
-      else {
-        ret = (Histogram) JSON.deserialize(jsonString, Histogram.class);
-      }
+      Histogram ret = (Histogram) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -5634,25 +5530,19 @@ public class DiscoveryV1Models {
       this.exclude_tag_attributes_serialized_name = exclude_tag_attributes_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      HtmlSettings ret;
-      if (jsonString.equals('null')) {
-        ret = new HtmlSettings();
-      }
-      else {
-        ret = (HtmlSettings) JSON.deserialize(jsonString, HtmlSettings.class);
-      }
+      HtmlSettings ret = (HtmlSettings) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for keep_content_serialized_name
-      XPathPatterns newKeepContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getKeepContent()), (Map<String, Object>) jsonMap.get('keep_content_serialized_name'));
+      XPathPatterns newKeepContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getKeepContent()), (Map<String, Object>) jsonMap.get('keep_content_serialized_name'), XPathPatterns.class);
       ret.setKeepContent(newKeepContent);
 
       // calling custom deserializer for exclude_content_serialized_name
-      XPathPatterns newExcludeContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getExcludeContent()), (Map<String, Object>) jsonMap.get('exclude_content_serialized_name'));
+      XPathPatterns newExcludeContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getExcludeContent()), (Map<String, Object>) jsonMap.get('exclude_content_serialized_name'), XPathPatterns.class);
       ret.setExcludeContent(newExcludeContent);
 
       return ret;
@@ -5727,29 +5617,23 @@ public class DiscoveryV1Models {
       this.memory_usage_serialized_name = memory_usage_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      IndexCapacity ret;
-      if (jsonString.equals('null')) {
-        ret = new IndexCapacity();
-      }
-      else {
-        ret = (IndexCapacity) JSON.deserialize(jsonString, IndexCapacity.class);
-      }
+      IndexCapacity ret = (IndexCapacity) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documents_serialized_name
-      EnvironmentDocuments newDocuments = (EnvironmentDocuments) new EnvironmentDocuments().deserialize(JSON.serialize(ret.getDocuments()), (Map<String, Object>) jsonMap.get('documents_serialized_name'));
+      EnvironmentDocuments newDocuments = (EnvironmentDocuments) new EnvironmentDocuments().deserialize(JSON.serialize(ret.getDocuments()), (Map<String, Object>) jsonMap.get('documents_serialized_name'), EnvironmentDocuments.class);
       ret.setDocuments(newDocuments);
 
       // calling custom deserializer for disk_usage_serialized_name
-      DiskUsage newDiskUsage = (DiskUsage) new DiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('disk_usage_serialized_name'));
+      DiskUsage newDiskUsage = (DiskUsage) new DiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('disk_usage_serialized_name'), DiskUsage.class);
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for memory_usage_serialized_name
-      MemoryUsage newMemoryUsage = (MemoryUsage) new MemoryUsage().deserialize(JSON.serialize(ret.getMemoryUsage()), (Map<String, Object>) jsonMap.get('memory_usage_serialized_name'));
+      MemoryUsage newMemoryUsage = (MemoryUsage) new MemoryUsage().deserialize(JSON.serialize(ret.getMemoryUsage()), (Map<String, Object>) jsonMap.get('memory_usage_serialized_name'), MemoryUsage.class);
       ret.setMemoryUsage(newMemoryUsage);
 
       return ret;
@@ -5887,18 +5771,12 @@ public class DiscoveryV1Models {
       this.fields_serialized_name = fields_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      ListCollectionFieldsResponse ret;
-      if (jsonString.equals('null')) {
-        ret = new ListCollectionFieldsResponse();
-      }
-      else {
-        ret = (ListCollectionFieldsResponse) JSON.deserialize(jsonString, ListCollectionFieldsResponse.class);
-      }
+      ListCollectionFieldsResponse ret = (ListCollectionFieldsResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for fields_serialized_name
       List<Field> newFields = new List<Field>();
@@ -5907,7 +5785,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedFields.size(); i++) {
           Field currentItem = ret.getFields().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('fields_serialized_name');
-          Field newItem = (Field) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          Field newItem = (Field) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Field.class);
           newFields.add(newItem);
         }
         ret.setFields(newFields);
@@ -6045,18 +5923,12 @@ public class DiscoveryV1Models {
       this.collections_serialized_name = collections_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      ListCollectionsResponse ret;
-      if (jsonString.equals('null')) {
-        ret = new ListCollectionsResponse();
-      }
-      else {
-        ret = (ListCollectionsResponse) JSON.deserialize(jsonString, ListCollectionsResponse.class);
-      }
+      ListCollectionsResponse ret = (ListCollectionsResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for collections_serialized_name
       List<Collection> newCollections = new List<Collection>();
@@ -6065,7 +5937,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedCollections.size(); i++) {
           Collection currentItem = ret.getCollections().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('collections_serialized_name');
-          Collection newItem = (Collection) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          Collection newItem = (Collection) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Collection.class);
           newCollections.add(newItem);
         }
         ret.setCollections(newCollections);
@@ -6203,18 +6075,12 @@ public class DiscoveryV1Models {
       this.configurations_serialized_name = configurations_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      ListConfigurationsResponse ret;
-      if (jsonString.equals('null')) {
-        ret = new ListConfigurationsResponse();
-      }
-      else {
-        ret = (ListConfigurationsResponse) JSON.deserialize(jsonString, ListConfigurationsResponse.class);
-      }
+      ListConfigurationsResponse ret = (ListConfigurationsResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for configurations_serialized_name
       List<Configuration> newConfigurations = new List<Configuration>();
@@ -6223,7 +6089,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedConfigurations.size(); i++) {
           Configuration currentItem = ret.getConfigurations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('configurations_serialized_name');
-          Configuration newItem = (Configuration) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          Configuration newItem = (Configuration) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Configuration.class);
           newConfigurations.add(newItem);
         }
         ret.setConfigurations(newConfigurations);
@@ -6326,18 +6192,12 @@ public class DiscoveryV1Models {
       this.environments_serialized_name = environments_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      ListEnvironmentsResponse ret;
-      if (jsonString.equals('null')) {
-        ret = new ListEnvironmentsResponse();
-      }
-      else {
-        ret = (ListEnvironmentsResponse) JSON.deserialize(jsonString, ListEnvironmentsResponse.class);
-      }
+      ListEnvironmentsResponse ret = (ListEnvironmentsResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for environments_serialized_name
       List<Environment> newEnvironments = new List<Environment>();
@@ -6346,7 +6206,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedEnvironments.size(); i++) {
           Environment currentItem = ret.getEnvironments().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('environments_serialized_name');
-          Environment newItem = (Environment) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          Environment newItem = (Environment) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Environment.class);
           newEnvironments.add(newItem);
         }
         ret.setEnvironments(newEnvironments);
@@ -6647,18 +6507,12 @@ public class DiscoveryV1Models {
       return percent_used_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      MemoryUsage ret;
-      if (jsonString.equals('null')) {
-        ret = new MemoryUsage();
-      }
-      else {
-        ret = (MemoryUsage) JSON.deserialize(jsonString, MemoryUsage.class);
-      }
+      MemoryUsage ret = (MemoryUsage) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -6732,18 +6586,12 @@ public class DiscoveryV1Models {
       this.destination_field_serialized_name = destination_field_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      NormalizationOperation ret;
-      if (jsonString.equals('null')) {
-        ret = new NormalizationOperation();
-      }
-      else {
-        ret = (NormalizationOperation) JSON.deserialize(jsonString, NormalizationOperation.class);
-      }
+      NormalizationOperation ret = (NormalizationOperation) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -6838,18 +6686,12 @@ public class DiscoveryV1Models {
       return description_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Notice ret;
-      if (jsonString.equals('null')) {
-        ret = new Notice();
-      }
-      else {
-        ret = (Notice) JSON.deserialize(jsonString, Notice.class);
-      }
+      Notice ret = (Notice) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -6879,18 +6721,12 @@ public class DiscoveryV1Models {
       this.fonts_serialized_name = fonts_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      PdfHeadingDetection ret;
-      if (jsonString.equals('null')) {
-        ret = new PdfHeadingDetection();
-      }
-      else {
-        ret = (PdfHeadingDetection) JSON.deserialize(jsonString, PdfHeadingDetection.class);
-      }
+      PdfHeadingDetection ret = (PdfHeadingDetection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for fonts_serialized_name
       List<FontSetting> newFonts = new List<FontSetting>();
@@ -6899,7 +6735,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedFonts.size(); i++) {
           FontSetting currentItem = ret.getFonts().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('fonts_serialized_name');
-          FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), FontSetting.class);
           newFonts.add(newItem);
         }
         ret.setFonts(newFonts);
@@ -6933,21 +6769,15 @@ public class DiscoveryV1Models {
       this.heading_serialized_name = heading_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      PdfSettings ret;
-      if (jsonString.equals('null')) {
-        ret = new PdfSettings();
-      }
-      else {
-        ret = (PdfSettings) JSON.deserialize(jsonString, PdfSettings.class);
-      }
+      PdfSettings ret = (PdfSettings) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for heading_serialized_name
-      PdfHeadingDetection newHeading = (PdfHeadingDetection) new PdfHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading_serialized_name'));
+      PdfHeadingDetection newHeading = (PdfHeadingDetection) new PdfHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading_serialized_name'), PdfHeadingDetection.class);
       ret.setHeading(newHeading);
 
       return ret;
@@ -7083,18 +6913,12 @@ public class DiscoveryV1Models {
       this.aggregations_serialized_name = aggregations_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      QueryAggregation ret;
-      if (jsonString.equals('null')) {
-        ret = new QueryAggregation();
-      }
-      else {
-        ret = (QueryAggregation) JSON.deserialize(jsonString, QueryAggregation.class);
-      }
+      QueryAggregation ret = (QueryAggregation) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for results_serialized_name
       List<AggregationResult> newResults = new List<AggregationResult>();
@@ -7103,7 +6927,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           AggregationResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
-          AggregationResult newItem = (AggregationResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          AggregationResult newItem = (AggregationResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AggregationResult.class);
           newResults.add(newItem);
         }
         ret.setResults(newResults);
@@ -7116,7 +6940,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations_serialized_name');
-          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
         ret.setAggregations(newAggregations);
@@ -7729,18 +7553,12 @@ public class DiscoveryV1Models {
       this.duplicates_removed_serialized_name = duplicates_removed_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      QueryNoticesResponse ret;
-      if (jsonString.equals('null')) {
-        ret = new QueryNoticesResponse();
-      }
-      else {
-        ret = (QueryNoticesResponse) JSON.deserialize(jsonString, QueryNoticesResponse.class);
-      }
+      QueryNoticesResponse ret = (QueryNoticesResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for results_serialized_name
       List<QueryNoticesResult> newResults = new List<QueryNoticesResult>();
@@ -7749,7 +7567,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           QueryNoticesResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
-          QueryNoticesResult newItem = (QueryNoticesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          QueryNoticesResult newItem = (QueryNoticesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryNoticesResult.class);
           newResults.add(newItem);
         }
         ret.setResults(newResults);
@@ -7762,7 +7580,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations_serialized_name');
-          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
         ret.setAggregations(newAggregations);
@@ -7775,7 +7593,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedPassages.size(); i++) {
           QueryPassages currentItem = ret.getPassages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('passages_serialized_name');
-          QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryPassages.class);
           newPassages.add(newItem);
         }
         ret.setPassages(newPassages);
@@ -7870,18 +7688,16 @@ public class DiscoveryV1Models {
       this.collection_id_serialized_name = collection_id_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      QueryNoticesResult ret;
-      if (jsonString.equals('null')) {
-        ret = new QueryNoticesResult();
-      }
-      else {
-        ret = (QueryNoticesResult) JSON.deserialize(jsonString, QueryNoticesResult.class);
-      }
+      QueryNoticesResult ret = (QueryNoticesResult) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for metadata_serialized_name
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
+      ret.setMetadata(newMetadata);
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
@@ -8554,18 +8370,12 @@ public class DiscoveryV1Models {
       this.field_serialized_name = field_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      QueryPassages ret;
-      if (jsonString.equals('null')) {
-        ret = new QueryPassages();
-      }
-      else {
-        ret = (QueryPassages) JSON.deserialize(jsonString, QueryPassages.class);
-      }
+      QueryPassages ret = (QueryPassages) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -8671,18 +8481,12 @@ public class DiscoveryV1Models {
       this.duplicates_removed_serialized_name = duplicates_removed_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      QueryResponse ret;
-      if (jsonString.equals('null')) {
-        ret = new QueryResponse();
-      }
-      else {
-        ret = (QueryResponse) JSON.deserialize(jsonString, QueryResponse.class);
-      }
+      QueryResponse ret = (QueryResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for results_serialized_name
       List<QueryResult> newResults = new List<QueryResult>();
@@ -8691,7 +8495,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           QueryResult currentItem = ret.getResults().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
-          QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryResult.class);
           newResults.add(newItem);
         }
         ret.setResults(newResults);
@@ -8704,7 +8508,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedAggregations.size(); i++) {
           QueryAggregation currentItem = ret.getAggregations().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations_serialized_name');
-          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
         ret.setAggregations(newAggregations);
@@ -8717,7 +8521,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedPassages.size(); i++) {
           QueryPassages currentItem = ret.getPassages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('passages_serialized_name');
-          QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryPassages.class);
           newPassages.add(newItem);
         }
         ret.setPassages(newPassages);
@@ -8812,18 +8616,16 @@ public class DiscoveryV1Models {
       this.collection_id_serialized_name = collection_id_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      QueryResult ret;
-      if (jsonString.equals('null')) {
-        ret = new QueryResult();
-      }
-      else {
-        ret = (QueryResult) JSON.deserialize(jsonString, QueryResult.class);
-      }
+      QueryResult ret = (QueryResult) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for metadata_serialized_name
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
+      ret.setMetadata(newMetadata);
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
@@ -8852,18 +8654,12 @@ public class DiscoveryV1Models {
       return count_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Term ret;
-      if (jsonString.equals('null')) {
-        ret = new Term();
-      }
-      else {
-        ret = (Term) JSON.deserialize(jsonString, Term.class);
-      }
+      Term ret = (Term) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -9216,18 +9012,12 @@ public class DiscoveryV1Models {
       this.notices_serialized_name = notices_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      TestDocument ret;
-      if (jsonString.equals('null')) {
-        ret = new TestDocument();
-      }
-      else {
-        ret = (TestDocument) JSON.deserialize(jsonString, TestDocument.class);
-      }
+      TestDocument ret = (TestDocument) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for snapshots_serialized_name
       List<DocumentSnapshot> newSnapshots = new List<DocumentSnapshot>();
@@ -9236,7 +9026,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedSnapshots.size(); i++) {
           DocumentSnapshot currentItem = ret.getSnapshots().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('snapshots_serialized_name');
-          DocumentSnapshot newItem = (DocumentSnapshot) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          DocumentSnapshot newItem = (DocumentSnapshot) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DocumentSnapshot.class);
           newSnapshots.add(newItem);
         }
         ret.setSnapshots(newSnapshots);
@@ -9249,7 +9039,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedNotices.size(); i++) {
           Notice currentItem = ret.getNotices().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('notices_serialized_name');
-          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
           newNotices.add(newItem);
         }
         ret.setNotices(newNotices);
@@ -9321,18 +9111,12 @@ public class DiscoveryV1Models {
       this.queries_serialized_name = queries_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      TrainingDataSet ret;
-      if (jsonString.equals('null')) {
-        ret = new TrainingDataSet();
-      }
-      else {
-        ret = (TrainingDataSet) JSON.deserialize(jsonString, TrainingDataSet.class);
-      }
+      TrainingDataSet ret = (TrainingDataSet) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for queries_serialized_name
       List<TrainingQuery> newQueries = new List<TrainingQuery>();
@@ -9341,7 +9125,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedQueries.size(); i++) {
           TrainingQuery currentItem = ret.getQueries().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('queries_serialized_name');
-          TrainingQuery newItem = (TrainingQuery) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          TrainingQuery newItem = (TrainingQuery) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingQuery.class);
           newQueries.add(newItem);
         }
         ret.setQueries(newQueries);
@@ -9413,18 +9197,12 @@ public class DiscoveryV1Models {
       this.relevance_serialized_name = relevance_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      TrainingExample ret;
-      if (jsonString.equals('null')) {
-        ret = new TrainingExample();
-      }
-      else {
-        ret = (TrainingExample) JSON.deserialize(jsonString, TrainingExample.class);
-      }
+      TrainingExample ret = (TrainingExample) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -9511,18 +9289,12 @@ public class DiscoveryV1Models {
       this.examples_serialized_name = examples_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      TrainingQuery ret;
-      if (jsonString.equals('null')) {
-        ret = new TrainingQuery();
-      }
-      else {
-        ret = (TrainingQuery) JSON.deserialize(jsonString, TrainingQuery.class);
-      }
+      TrainingQuery ret = (TrainingQuery) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for examples_serialized_name
       List<TrainingExample> newExamples = new List<TrainingExample>();
@@ -9531,7 +9303,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           TrainingExample currentItem = ret.getExamples().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('examples_serialized_name');
-          TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingExample.class);
           newExamples.add(newItem);
         }
         ret.setExamples(newExamples);
@@ -9717,18 +9489,12 @@ public class DiscoveryV1Models {
       this.data_updated_serialized_name = data_updated_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      TrainingStatus ret;
-      if (jsonString.equals('null')) {
-        ret = new TrainingStatus();
-      }
-      else {
-        ret = (TrainingStatus) JSON.deserialize(jsonString, TrainingStatus.class);
-      }
+      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -10801,18 +10567,12 @@ public class DiscoveryV1Models {
       this.styles_serialized_name = styles_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      WordHeadingDetection ret;
-      if (jsonString.equals('null')) {
-        ret = new WordHeadingDetection();
-      }
-      else {
-        ret = (WordHeadingDetection) JSON.deserialize(jsonString, WordHeadingDetection.class);
-      }
+      WordHeadingDetection ret = (WordHeadingDetection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for fonts_serialized_name
       List<FontSetting> newFonts = new List<FontSetting>();
@@ -10821,7 +10581,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedFonts.size(); i++) {
           FontSetting currentItem = ret.getFonts().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('fonts_serialized_name');
-          FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), FontSetting.class);
           newFonts.add(newItem);
         }
         ret.setFonts(newFonts);
@@ -10834,7 +10594,7 @@ public class DiscoveryV1Models {
         for (Integer i = 0; i < deserializedStyles.size(); i++) {
           WordStyle currentItem = ret.getStyles().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('styles_serialized_name');
-          WordStyle newItem = (WordStyle) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          WordStyle newItem = (WordStyle) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WordStyle.class);
           newStyles.add(newItem);
         }
         ret.setStyles(newStyles);
@@ -10868,21 +10628,15 @@ public class DiscoveryV1Models {
       this.heading_serialized_name = heading_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      WordSettings ret;
-      if (jsonString.equals('null')) {
-        ret = new WordSettings();
-      }
-      else {
-        ret = (WordSettings) JSON.deserialize(jsonString, WordSettings.class);
-      }
+      WordSettings ret = (WordSettings) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for heading_serialized_name
-      WordHeadingDetection newHeading = (WordHeadingDetection) new WordHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading_serialized_name'));
+      WordHeadingDetection newHeading = (WordHeadingDetection) new WordHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading_serialized_name'), WordHeadingDetection.class);
       ret.setHeading(newHeading);
 
       return ret;
@@ -10932,18 +10686,12 @@ public class DiscoveryV1Models {
       this.names_serialized_name = names_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      WordStyle ret;
-      if (jsonString.equals('null')) {
-        ret = new WordStyle();
-      }
-      else {
-        ret = (WordStyle) JSON.deserialize(jsonString, WordStyle.class);
-      }
+      WordStyle ret = (WordStyle) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -10973,20 +10721,15 @@ public class DiscoveryV1Models {
       this.xpaths_serialized_name = xpaths_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      XPathPatterns ret;
-      if (jsonString.equals('null')) {
-        ret = new XPathPatterns();
-      }
-      else {
-        ret = (XPathPatterns) JSON.deserialize(jsonString, XPathPatterns.class);
-      }
+      XPathPatterns ret = (XPathPatterns) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
   }
+
 }
