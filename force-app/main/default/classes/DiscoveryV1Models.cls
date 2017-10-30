@@ -2958,7 +2958,7 @@ public class DiscoveryV1Models {
    */
   public class DocumentSnapshot extends IBMWatsonGenericModel {
     private String step_serialized_name;
-    private Map<String, String> snapshot_serialized_name;
+    private IBMWatsonMapModel snapshot_serialized_name;
     /**
      * Gets the step_serialized_name.
      *
@@ -2974,7 +2974,7 @@ public class DiscoveryV1Models {
      * @return the snapshot_serialized_name
      */
     @AuraEnabled
-    public Map<String, String> getSnapshot() {
+    public IBMWatsonMapModel getSnapshot() {
       return snapshot_serialized_name;
     }
 
@@ -2992,7 +2992,7 @@ public class DiscoveryV1Models {
      *
      * @param snapshot_serialized_name the new snapshot_serialized_name
      */
-    public void setSnapshot(final Map<String, String> snapshot_serialized_name) {
+    public void setSnapshot(final IBMWatsonMapModel snapshot_serialized_name) {
       this.snapshot_serialized_name = snapshot_serialized_name;
     }
 
@@ -7791,7 +7791,7 @@ public class DiscoveryV1Models {
   public class QueryNoticesResult extends IBMWatsonDynamicModel {
     private String id_serialized_name;
     private Double score_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private String collection_id_serialized_name;
 
     /**
@@ -7820,7 +7820,7 @@ public class DiscoveryV1Models {
      * @return the metadata_serialized_name
      */
     @AuraEnabled
-    public Map<String, String> getMetadata() {
+    public IBMWatsonMapModel getMetadata() {
       return metadata_serialized_name;
     }
 
@@ -7857,7 +7857,7 @@ public class DiscoveryV1Models {
      *
      * @param metadata_serialized_name the new metadata_serialized_name
      */
-    public void setMetadata(final Map<String, String> metadata_serialized_name) {
+    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
     }
 
@@ -7886,7 +7886,7 @@ public class DiscoveryV1Models {
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+        if (!baseProps.contains(key)) {
           ret.put(key, jsonMap.get(key));
         }
       }
@@ -8733,7 +8733,7 @@ public class DiscoveryV1Models {
   public class QueryResult extends IBMWatsonDynamicModel {
     private String id_serialized_name;
     private Double score_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private String collection_id_serialized_name;
 
     /**
@@ -8762,7 +8762,7 @@ public class DiscoveryV1Models {
      * @return the metadata_serialized_name
      */
     @AuraEnabled
-    public Map<String, String> getMetadata() {
+    public IBMWatsonMapModel getMetadata() {
       return metadata_serialized_name;
     }
 
@@ -8799,7 +8799,7 @@ public class DiscoveryV1Models {
      *
      * @param metadata_serialized_name the new metadata_serialized_name
      */
-    public void setMetadata(final Map<String, String> metadata_serialized_name) {
+    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
     }
 
@@ -8828,7 +8828,7 @@ public class DiscoveryV1Models {
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+        if (!baseProps.contains(key)) {
           ret.put(key, jsonMap.get(key));
         }
       }

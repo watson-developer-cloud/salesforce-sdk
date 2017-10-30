@@ -26,7 +26,7 @@ private class ConversationV1Test {
   private static String workspaceDescription;
   private static String workspaceLanguage;
   private static String workspaceId;
-  private static Map<String, String> metadata;
+  private static IBMWatsonMapModel metadata;
   private static String timeCreated;
   private static String timeUpdated;
   private static Boolean learningOptOut;
@@ -64,14 +64,14 @@ private class ConversationV1Test {
   private static String dialogNodeConditions;
   private static String dialogNodeParent;
   private static String dialogNodePreviousSibling;
-  private static Map<String, String> dialogNodeOutput;
-  private static Map<String, String> dialogNodeContext;
+  private static IBMWatsonMapModel dialogNodeOutput;
+  private static IBMWatsonMapModel dialogNodeContext;
   private static String nextStepBehavior;
   private static String nextStepDialogNode;
   private static String nextStepSelector;
   private static String actionName;
   private static String actionType;
-  private static Map<String, String> actionParameters;
+  private static IBMWatsonMapModel actionParameters;
   private static String actionResultVariable;
   private static String actionCredentials;
   private static String dialogNodeType;
@@ -84,7 +84,8 @@ private class ConversationV1Test {
     workspaceDescription = 'Description of ' + workspaceName;
     workspaceLanguage = 'en';
     workspaceId = '123456789';
-    metadata = new Map<String, String> { 'code_serialized_name' => 'test_code' };
+    metadata = new IBMWatsonMapModel();
+    metadata.put('code', 'test_code');
     timeCreated = '"2015-12-06T23:53:59.153Z"';
     timeUpdated = '"2017-10-18T15:44:56.800"';
     learningOptOut = false;
@@ -122,14 +123,17 @@ private class ConversationV1Test {
     dialogNodeConditions = '#test';
     dialogNodeParent = 'parent';
     dialogNodePreviousSibling = 'sibling';
-    dialogNodeOutput = new Map<String, String> { 'text_serialized_name' => 'output text' };
-    dialogNodeContext = new Map<String, String> { 'context_serialized_name' => 'context_val' };
+    dialogNodeOutput = new IBMWatsonMapModel();
+    dialogNodeOutput.put('text', 'output text');
+    dialogNodeContext = new IBMWatsonMapModel();
+    dialogNodeContext.put('context', 'context_val');
     nextStepBehavior = 'behavior';
     nextStepDialogNode = 'next_dialog_node';
     nextStepSelector = 'body';
     actionName = 'action';
     actionType = 'server';
-    actionParameters = new Map<String, String> { 'param_1_serialized_name' => 'param_1_val' };
+    actionParameters = new IBMWatsonMapModel();
+    actionParameters.put('param_1', 'param_1_val');
     actionResultVariable = 'action_var';
     actionCredentials = 'creds';
     dialogNodeType = 'standard';
@@ -140,10 +144,10 @@ private class ConversationV1Test {
   static testMethod void testCreateWorkspace() {
     String body = IBMWatsonMockResponses.workspace();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -151,10 +155,10 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.CreateWorkspaceOptions createWorkspaceOptions = new ConversationV1Models.CreateWorkspaceOptionsBuilder()
-        .name(workspaceName)
-        .description(workspaceDescription)
-        .language(workspaceLanguage)
-        .build();
+      .name(workspaceName)
+      .description(workspaceDescription)
+      .language(workspaceLanguage)
+      .build();
     ConversationV1Models.Workspace response = conversation.createWorkspace(createWorkspaceOptions);
 
     System.assertEquals(response.getName(), workspaceName);
@@ -171,10 +175,10 @@ private class ConversationV1Test {
   static testMethod void testDeleteWorkspace() {
     String body = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -182,8 +186,8 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.DeleteWorkspaceOptions deleteOptions = new ConversationV1Models.DeleteWorkspaceOptionsBuilder()
-        .workspaceId(workspaceId)
-        .build();
+      .workspaceId(workspaceId)
+      .build();
     conversation.deleteWorkspace(deleteOptions);
 
     Test.stopTest();
@@ -192,10 +196,10 @@ private class ConversationV1Test {
   static testMethod void testGetWorkspace() {
     String body = IBMWatsonMockResponses.workspaceExport();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -203,8 +207,8 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.GetWorkspaceOptions getOptions = new ConversationV1Models.GetWorkspaceOptionsBuilder()
-        .workspaceId(workspaceId)
-        .build();
+      .workspaceId(workspaceId)
+      .build();
     ConversationV1Models.WorkspaceExport response = conversation.getWorkspace(getOptions);
 
     System.assertEquals(response.getName(), workspaceName);
@@ -228,10 +232,10 @@ private class ConversationV1Test {
   static testMethod void updateWorkspace() {
     String body = IBMWatsonMockResponses.workspace();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -239,8 +243,8 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.UpdateWorkspaceOptions updateOptions = new ConversationV1Models.UpdateWorkspaceOptionsBuilder()
-        .workspaceId(workspaceId)
-        .build();
+      .workspaceId(workspaceId)
+      .build();
     ConversationV1Models.Workspace response = conversation.updateWorkspace(updateOptions);
 
     System.assertEquals(response.getName(), workspaceName);
@@ -257,10 +261,10 @@ private class ConversationV1Test {
   static testMethod void testListWorkspaces() {
     String body = IBMWatsonMockResponses.workspaceCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -268,7 +272,7 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.ListWorkspacesOptions listOptions = new ConversationV1Models.ListWorkspacesOptionsBuilder()
-        .build();
+      .build();
     ConversationV1Models.WorkspaceCollection response = conversation.listWorkspaces(listOptions);
 
     System.assertEquals(response.getWorkspaces().get(0).getName(), workspaceName);
@@ -288,10 +292,10 @@ private class ConversationV1Test {
   static testMethod void createValue() {
     String body = IBMWatsonMockResponses.value();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -299,13 +303,13 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.CreateValueOptions createOptions = new ConversationV1Models.CreateValueOptionsBuilder()
-        .workspaceId(workspaceId)
-        .entity(entityName)
-        .value(valueName)
-        .metadata(metadata)
-        .addPatterns(valuePattern)
-        .addSynonyms(valueSynonym)
-        .build();
+      .workspaceId(workspaceId)
+      .entity(entityName)
+      .value(valueName)
+      .metadata(metadata)
+      .addPatterns(valuePattern)
+      .addSynonyms(valueSynonym)
+      .build();
     ConversationV1Models.Value response = conversation.createValue(createOptions);
 
     System.assertEquals(response.getValue(), valueName);
@@ -320,10 +324,10 @@ private class ConversationV1Test {
   static testMethod void deleteValue() {
     String body = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -331,10 +335,10 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.DeleteValueOptions deleteOptions = new ConversationV1Models.DeleteValueOptionsBuilder()
-        .workspaceId(workspaceId)
-        .entity(entityName)
-        .value(valueName)
-        .build();
+      .workspaceId(workspaceId)
+      .entity(entityName)
+      .value(valueName)
+      .build();
     conversation.deleteValue(deleteOptions);
 
     Test.stopTest();
@@ -343,10 +347,10 @@ private class ConversationV1Test {
   static testMethod void getValue() {
     String body = IBMWatsonMockResponses.value();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -354,11 +358,11 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.GetValueOptions getOptions = new ConversationV1Models.GetValueOptionsBuilder()
-        .workspaceId(workspaceId)
-        .entity(entityName)
-        .value(valueName)
-        .exportField(true)
-        .build();
+      .workspaceId(workspaceId)
+      .entity(entityName)
+      .value(valueName)
+      .exportField(true)
+      .build();
     ConversationV1Models.ValueExport response = conversation.getValue(getOptions);
 
     System.assertEquals(response.getValue(), valueName);
@@ -373,10 +377,10 @@ private class ConversationV1Test {
   static testMethod void updateValue() {
     String body = IBMWatsonMockResponses.value();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -384,13 +388,13 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.UpdateValueOptions updateOptions = new ConversationV1Models.UpdateValueOptionsBuilder()
-        .workspaceId(workspaceId)
-        .entity(entityName)
-        .value(valueName)
-        .newMetadata(metadata)
-        .addNewPatterns(valuePattern)
-        .addNewSynonyms(valueSynonym)
-        .build();
+      .workspaceId(workspaceId)
+      .entity(entityName)
+      .value(valueName)
+      .newMetadata(metadata)
+      .addNewPatterns(valuePattern)
+      .addNewSynonyms(valueSynonym)
+      .build();
     ConversationV1Models.Value response = conversation.updateValue(updateOptions);
 
     System.assertEquals(response.getValue(), valueName);
@@ -405,10 +409,10 @@ private class ConversationV1Test {
   static testMethod void listValues() {
     String body = IBMWatsonMockResponses.valueCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -416,9 +420,9 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.ListValuesOptions listOptions = new ConversationV1Models.ListValuesOptionsBuilder()
-        .workspaceId(workspaceId)
-        .entity(entityName)
-        .build();
+      .workspaceId(workspaceId)
+      .entity(entityName)
+      .build();
     ConversationV1Models.ValueCollection response = conversation.listValues(listOptions);
 
     System.assertEquals(response.getValues().get(0).getValue(), valueName);
@@ -437,10 +441,10 @@ private class ConversationV1Test {
   static testMethod void message() {
     String body = IBMWatsonMockResponses.messageResponse();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -448,14 +452,16 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.InputData input = new ConversationV1Models.InputDataBuilder()
-        .text(messageInput)
-        .build();
+      .text(messageInput)
+      .build();
     ConversationV1Models.MessageOptions messageOptions = new ConversationV1Models.MessageOptionsBuilder()
-        .workspaceId(workspaceId)
-        .input(input)
-        .alternateIntents(alternateIntents)
-        .build();
+      .workspaceId(workspaceId)
+      .input(input)
+      .alternateIntents(alternateIntents)
+      .build();
     ConversationV1Models.MessageResponse response = conversation.message(messageOptions);
+
+    System.debug(response);
 
     System.assertEquals(response.getIntents().get(0).getIntent(), intentName);
     System.assertEquals(response.getIntents().get(0).getConfidence(), confidence);
@@ -477,10 +483,10 @@ private class ConversationV1Test {
   static testMethod void createIntent() {
     String body = IBMWatsonMockResponses.intent();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -488,10 +494,10 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.CreateIntentOptions createOptions = new ConversationV1Models.CreateIntentOptionsBuilder()
-        .workspaceId(workspaceId)
-        .intent(intentName)
-        .description(intentDescription)
-        .build();
+      .workspaceId(workspaceId)
+      .intent(intentName)
+      .description(intentDescription)
+      .build();
     ConversationV1Models.Intent response = conversation.createIntent(createOptions);
 
     System.assertEquals(response.getIntent(), intentName);
@@ -504,10 +510,10 @@ private class ConversationV1Test {
   static testMethod void deleteIntent() {
     String body = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -515,9 +521,9 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.DeleteIntentOptions deleteOptions = new ConversationV1Models.DeleteIntentOptionsBuilder()
-        .workspaceId(workspaceId)
-        .intent(intentName)
-        .build();
+      .workspaceId(workspaceId)
+      .intent(intentName)
+      .build();
     conversation.deleteIntent(deleteOptions);
 
     Test.stopTest();
@@ -526,10 +532,10 @@ private class ConversationV1Test {
   static testMethod void getIntent() {
     String body = IBMWatsonMockResponses.intentExport();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -537,10 +543,10 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.GetIntentOptions getOptions = new ConversationV1Models.GetIntentOptionsBuilder()
-        .workspaceId(workspaceId)
-        .intent(intentName)
-        .exportField(true)
-        .build();
+      .workspaceId(workspaceId)
+      .intent(intentName)
+      .exportField(true)
+      .build();
     ConversationV1Models.IntentExport response = conversation.getIntent(getOptions);
 
     System.assertEquals(response.getIntent(), intentName);
@@ -556,10 +562,10 @@ private class ConversationV1Test {
   static testMethod void listIntents() {
     String body = IBMWatsonMockResponses.intentCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -567,9 +573,9 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.ListIntentsOptions listOptions = new ConversationV1Models.ListIntentsOptionsBuilder()
-        .workspaceId(workspaceId)
-        .exportField(true)
-        .build();
+      .workspaceId(workspaceId)
+      .exportField(true)
+      .build();
     ConversationV1Models.IntentCollection response = conversation.listIntents(listOptions);
 
     System.assertEquals(response.getIntents().get(0).getIntent(), intentName);
@@ -589,10 +595,10 @@ private class ConversationV1Test {
   static testMethod void updateIntent() {
     String body = IBMWatsonMockResponses.intent();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -600,10 +606,10 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.UpdateIntentOptions updateOptions = new ConversationV1Models.UpdateIntentOptionsBuilder()
-        .workspaceId(workspaceId)
-        .intent(intentName)
-        .newDescription(intentDescription)
-        .build();
+      .workspaceId(workspaceId)
+      .intent(intentName)
+      .newDescription(intentDescription)
+      .build();
     ConversationV1Models.Intent response = conversation.updateIntent(updateOptions);
 
     System.assertEquals(response.getIntent(), intentName);
@@ -616,10 +622,10 @@ private class ConversationV1Test {
   static testMethod void createExample() {
     String body = IBMWatsonMockResponses.example();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -627,10 +633,10 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.CreateExampleOptions createOptions = new ConversationV1Models.CreateExampleOptionsBuilder()
-        .workspaceId(workspaceId)
-        .intent(intentName)
-        .text(exampleText)
-        .build();
+      .workspaceId(workspaceId)
+      .intent(intentName)
+      .text(exampleText)
+      .build();
     ConversationV1Models.Example response = conversation.createExample(createOptions);
 
     System.assertEquals(response.getText(), exampleText);
@@ -642,10 +648,10 @@ private class ConversationV1Test {
   static testMethod void deleteExample() {
     String body = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -653,10 +659,10 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.DeleteExampleOptions deleteOptions = new ConversationV1Models.DeleteExampleOptionsBuilder()
-        .workspaceId(workspaceId)
-        .intent(intentName)
-        .text('example A')
-        .build();
+      .workspaceId(workspaceId)
+      .intent(intentName)
+      .text('example A')
+      .build();
     conversation.deleteExample(deleteOptions);
 
     Test.stopTest();
@@ -665,10 +671,10 @@ private class ConversationV1Test {
   static testMethod void getExample() {
     String body = IBMWatsonMockResponses.example();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -676,10 +682,10 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.GetExampleOptions getOptions = new ConversationV1Models.GetExampleOptionsBuilder()
-        .workspaceId(workspaceId)
-        .intent(intentName)
-        .text(exampleText)
-        .build();
+      .workspaceId(workspaceId)
+      .intent(intentName)
+      .text(exampleText)
+      .build();
     ConversationV1Models.Example response = conversation.getExample(getOptions);
 
     System.assertEquals(response.getText(), exampleText);
@@ -691,10 +697,10 @@ private class ConversationV1Test {
   static testMethod void listExamples() {
     String body = IBMWatsonMockResponses.exampleCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -702,9 +708,9 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.ListExamplesOptions listOptions = new ConversationV1Models.ListExamplesOptionsBuilder()
-        .workspaceId(workspaceId)
-        .intent(intentName)
-        .build();
+      .workspaceId(workspaceId)
+      .intent(intentName)
+      .build();
     ConversationV1Models.ExampleCollection response = conversation.listExamples(listOptions);
 
     System.assertEquals(response.getExamples().get(0).getText(), exampleText);
@@ -720,10 +726,10 @@ private class ConversationV1Test {
   static testMethod void updateExample() {
     String body = IBMWatsonMockResponses.example();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -731,11 +737,11 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.UpdateExampleOptions updateOptions = new ConversationV1Models.UpdateExampleOptionsBuilder()
-        .workspaceId(workspaceId)
-        .intent(intentName)
-        .text(exampleText)
-        .newText(exampleText)
-        .build();
+      .workspaceId(workspaceId)
+      .intent(intentName)
+      .text(exampleText)
+      .newText(exampleText)
+      .build();
     ConversationV1Models.Example response = conversation.updateExample(updateOptions);
 
     System.assertEquals(response.getText(), exampleText);
@@ -747,10 +753,10 @@ private class ConversationV1Test {
   static testMethod void createEntity() {
     String body = IBMWatsonMockResponses.entity();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -758,10 +764,10 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.CreateEntityOptions createOptions = new ConversationV1Models.CreateEntityOptionsBuilder()
-        .workspaceId(workspaceId)
-        .entity(entityName)
-        .description(entityDescription)
-        .build();
+      .workspaceId(workspaceId)
+      .entity(entityName)
+      .description(entityDescription)
+      .build();
     ConversationV1Models.Entity response = conversation.createEntity(createOptions);
 
     System.assertEquals(response.getEntity(), entityName);
@@ -776,10 +782,10 @@ private class ConversationV1Test {
   static testMethod void deleteEntity() {
     String body = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -787,9 +793,9 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.DeleteEntityOptions deleteOptions = new ConversationV1Models.DeleteEntityOptionsBuilder()
-        .workspaceId(workspaceId)
-        .entity(entityName)
-        .build();
+      .workspaceId(workspaceId)
+      .entity(entityName)
+      .build();
     conversation.deleteEntity(deleteOptions);
 
     Test.stopTest();
@@ -798,10 +804,10 @@ private class ConversationV1Test {
   static testMethod void getEntity() {
     String body = IBMWatsonMockResponses.entityExport();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -809,10 +815,10 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.GetEntityOptions getOptions = new ConversationV1Models.GetEntityOptionsBuilder()
-        .workspaceId(workspaceId)
-        .entity(entityName)
-        .exportField(true)
-        .build();
+      .workspaceId(workspaceId)
+      .entity(entityName)
+      .exportField(true)
+      .build();
     ConversationV1Models.EntityExport response = conversation.getEntity(getOptions);
 
     System.assertEquals(response.getEntity(), entityName);
@@ -833,10 +839,10 @@ private class ConversationV1Test {
   static testMethod void listEntities() {
     String body = IBMWatsonMockResponses.entityCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -844,9 +850,9 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.ListEntitiesOptions listOptions = new ConversationV1Models.ListEntitiesOptionsBuilder()
-        .workspaceId(workspaceId)
-        .exportField(true)
-        .build();
+      .workspaceId(workspaceId)
+      .exportField(true)
+      .build();
     ConversationV1Models.EntityCollection response = conversation.listEntities(listOptions);
 
     System.assertEquals(response.getEntities().get(0).getEntity(), entityName);
@@ -871,10 +877,10 @@ private class ConversationV1Test {
   static testMethod void updateEntity() {
     String body = IBMWatsonMockResponses.entity();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -882,10 +888,10 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.UpdateEntityOptions updateOptions = new ConversationV1Models.UpdateEntityOptionsBuilder()
-        .workspaceId(workspaceId)
-        .entity(entityName)
-        .newDescription(entityDescription)
-        .build();
+      .workspaceId(workspaceId)
+      .entity(entityName)
+      .newDescription(entityDescription)
+      .build();
     ConversationV1Models.Entity response = conversation.updateEntity(updateOptions);
 
     System.assertEquals(response.getEntity(), entityName);
@@ -900,10 +906,10 @@ private class ConversationV1Test {
   static testMethod void createSynonym() {
     String body = IBMWatsonMockResponses.synonym();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -911,11 +917,11 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.CreateSynonymOptions createOptions = new ConversationV1Models.CreateSynonymOptionsBuilder()
-        .workspaceId(workspaceId)
-        .entity(entityName)
-        .value(valueName)
-        .synonym(valueSynonym)
-        .build();
+      .workspaceId(workspaceId)
+      .entity(entityName)
+      .value(valueName)
+      .synonym(valueSynonym)
+      .build();
     ConversationV1Models.Synonym response = conversation.createSynonym(createOptions);
 
     System.assertEquals(response.getSynonym(), valueSynonym);
@@ -927,10 +933,10 @@ private class ConversationV1Test {
   static testMethod void deleteSynonym() {
     String body = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -938,11 +944,11 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.DeleteSynonymOptions deleteOptions = new ConversationV1Models.DeleteSynonymOptionsBuilder()
-        .workspaceId(workspaceId)
-        .entity(entityName)
-        .value(valueName)
-        .synonym(valueSynonym)
-        .build();
+      .workspaceId(workspaceId)
+      .entity(entityName)
+      .value(valueName)
+      .synonym(valueSynonym)
+      .build();
     conversation.deleteSynonym(deleteOptions);
 
     Test.stopTest();
@@ -951,10 +957,10 @@ private class ConversationV1Test {
   static testMethod void getSynonym() {
     String body = IBMWatsonMockResponses.synonym();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -962,11 +968,11 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.GetSynonymOptions getOptions = new ConversationV1Models.GetSynonymOptionsBuilder()
-        .workspaceId(workspaceId)
-        .entity(entityName)
-        .value(valueName)
-        .synonym(valueSynonym)
-        .build();
+      .workspaceId(workspaceId)
+      .entity(entityName)
+      .value(valueName)
+      .synonym(valueSynonym)
+      .build();
     ConversationV1Models.Synonym response = conversation.getSynonym(getOptions);
 
     System.assertEquals(response.getSynonym(), valueSynonym);
@@ -978,10 +984,10 @@ private class ConversationV1Test {
   static testMethod void listSynonyms() {
     String body = IBMWatsonMockResponses.synonymCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -989,10 +995,10 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.ListSynonymsOptions listOptions = new ConversationV1Models.ListSynonymsOptionsBuilder()
-        .workspaceId(workspaceId)
-        .entity(entityName)
-        .value(valueName)
-        .build();
+      .workspaceId(workspaceId)
+      .entity(entityName)
+      .value(valueName)
+      .build();
     ConversationV1Models.SynonymCollection response = conversation.listSynonyms(listOptions);
 
     System.assertEquals(response.getSynonyms().get(0).getSynonym(), valueSynonym);
@@ -1008,10 +1014,10 @@ private class ConversationV1Test {
   static testMethod void updateSynonym() {
     String body = IBMWatsonMockResponses.synonym();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -1019,12 +1025,12 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.UpdateSynonymOptions updateOptions = new ConversationV1Models.UpdateSynonymOptionsBuilder()
-        .workspaceId(workspaceId)
-        .entity(entityName)
-        .value(valueName)
-        .synonym(valueSynonym)
-        .newSynonym(valueSynonym)
-        .build();
+      .workspaceId(workspaceId)
+      .entity(entityName)
+      .value(valueName)
+      .synonym(valueSynonym)
+      .newSynonym(valueSynonym)
+      .build();
     ConversationV1Models.Synonym response = conversation.updateSynonym(updateOptions);
 
     System.assertEquals(response.getSynonym(), valueSynonym);
@@ -1047,9 +1053,9 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.CreateDialogNodeOptions createOptions = new ConversationV1Models.CreateDialogNodeOptionsBuilder()
-        .workspaceId(workspaceId)
-        .dialogNode(dialogNodeName)
-        .build();
+      .workspaceId(workspaceId)
+      .dialogNode(dialogNodeName)
+      .build();
     ConversationV1Models.DialogNode response = conversation.createDialogNode(createOptions);
 
     System.assertEquals(response.getDialogNode(), dialogNodeName);
@@ -1080,10 +1086,10 @@ private class ConversationV1Test {
   static testMethod void deleteDialogNode() {
     String body = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -1091,9 +1097,9 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.DeleteDialogNodeOptions deleteOptions = new ConversationV1Models.DeleteDialogNodeOptionsBuilder()
-        .workspaceId(workspaceId)
-        .dialogNode(dialogNodeName)
-        .build();
+      .workspaceId(workspaceId)
+      .dialogNode(dialogNodeName)
+      .build();
     conversation.deleteDialogNode(deleteOptions);
 
     Test.stopTest();
@@ -1102,10 +1108,10 @@ private class ConversationV1Test {
   static testMethod void getDialogNode() {
     String body = IBMWatsonMockResponses.dialogNode();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -1113,9 +1119,9 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.GetDialogNodeOptions getOptions = new ConversationV1Models.GetDialogNodeOptionsBuilder()
-        .workspaceId(workspaceId)
-        .dialogNode(dialogNodeName)
-        .build();
+      .workspaceId(workspaceId)
+      .dialogNode(dialogNodeName)
+      .build();
     ConversationV1Models.DialogNode response = conversation.getDialogNode(getOptions);
 
     System.assertEquals(response.getDialogNode(), dialogNodeName);
@@ -1146,10 +1152,10 @@ private class ConversationV1Test {
   static testMethod void listDialogNodes() {
     String body = IBMWatsonMockResponses.dialogNodeCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -1157,8 +1163,8 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.ListDialogNodesOptions listOptions = new ConversationV1Models.ListDialogNodesOptionsBuilder()
-        .workspaceId(workspaceId)
-        .build();
+      .workspaceId(workspaceId)
+      .build();
     ConversationV1Models.DialogNodeCollection response = conversation.listDialogNodes(listOptions);
 
     System.assertEquals(response.getDialogNodes().get(0).getDialogNode(), dialogNodeName);
@@ -1191,10 +1197,10 @@ private class ConversationV1Test {
   static testMethod void updateDialogNode() {
     String body = IBMWatsonMockResponses.dialogNode();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -1202,11 +1208,11 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.UpdateDialogNodeOptions updateOptions = new ConversationV1Models.UpdateDialogNodeOptionsBuilder()
-        .workspaceId(workspaceId)
-        .dialogNode(dialogNodeName)
-        .newDialogNode(dialogNodeName)
-        .newDescription(dialogNodeDescription)
-        .build();
+      .workspaceId(workspaceId)
+      .dialogNode(dialogNodeName)
+      .newDialogNode(dialogNodeName)
+      .newDescription(dialogNodeDescription)
+      .build();
     ConversationV1Models.DialogNode response = conversation.updateDialogNode(updateOptions);
 
     System.assertEquals(response.getDialogNode(), dialogNodeName);
@@ -1235,10 +1241,10 @@ private class ConversationV1Test {
   static testMethod void listLogs() {
     String body = IBMWatsonMockResponses.logCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
-        200,
-        'Success',
-        body,
-        null);
+      200,
+      'Success',
+      body,
+      null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
@@ -1246,8 +1252,8 @@ private class ConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     ConversationV1Models.ListLogsOptions listOptions = new ConversationV1Models.ListLogsOptionsBuilder()
-        .workspaceId(workspaceId)
-        .build();
+      .workspaceId(workspaceId)
+      .build();
     ConversationV1Models.LogCollection response = conversation.listLogs(listOptions);
 
     System.assertEquals(response.getLogs().get(0).getRequest().getInput().text(), messageInput);
@@ -1272,6 +1278,132 @@ private class ConversationV1Test {
     System.assertEquals(response.getLogs().get(0).getLogId(), logId);
     System.assertEquals(response.getPagination().getNextUrl(), nextUrl);
     System.assertEquals(response.getPagination().getMatched(), paginationMatched);
+    Test.stopTest();
+  }
+
+  static testMethod void testCreateCounterexample() {
+    String body = IBMWatsonMockResponses.counterexample();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    conversation.setUsernameAndPassword('username', 'password');
+
+    ConversationV1Models.CreateCounterexampleOptions createOptions = new ConversationV1Models.CreateCounterexampleOptionsBuilder()
+      .workspaceId(workspaceId)
+      .text(counterexampleText)
+      .build();
+    ConversationV1Models.Counterexample response = conversation.createCounterexample(createOptions);
+
+    System.assertEquals(response.getText(), counterexampleText);
+    System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
+    System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
+    Test.stopTest();
+  }
+
+  static testMethod void testDeleteCounterexample() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    conversation.setUsernameAndPassword('username', 'password');
+
+    ConversationV1Models.DeleteCounterexampleOptions deleteOptions = new ConversationV1Models.DeleteCounterexampleOptionsBuilder()
+      .workspaceId(workspaceId)
+      .text(counterexampleText)
+      .build();
+    conversation.deleteCounterexample(deleteOptions);
+
+    Test.stopTest();
+  }
+
+  static testMethod void testGetCounterexample() {
+    String body = IBMWatsonMockResponses.counterexample();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    conversation.setUsernameAndPassword('username', 'password');
+
+    ConversationV1Models.GetCounterexampleOptions getOptions = new ConversationV1Models.GetCounterexampleOptionsBuilder()
+      .workspaceId(workspaceId)
+      .text(counterexampleText)
+      .build();
+    ConversationV1Models.Counterexample response = conversation.getCounterexample(getOptions);
+
+    System.assertEquals(response.getText(), counterexampleText);
+    System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
+    System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
+    Test.stopTest();
+  }
+
+  static testMethod void testListCounterexamples() {
+    String body = IBMWatsonMockResponses.counterexampleCollection();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    conversation.setUsernameAndPassword('username', 'password');
+
+    ConversationV1Models.ListCounterexamplesOptions listOptions = new ConversationV1Models.ListCounterexamplesOptionsBuilder()
+      .workspaceId(workspaceId)
+      .build();
+    ConversationV1Models.CounterexampleCollection response = conversation.listCounterexamples(listOptions);
+
+    System.assertEquals(response.getCounterexamples().get(0).getText(), counterexampleText);
+    System.assertEquals(response.getCounterexamples().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
+    System.assertEquals(response.getCounterexamples().get(0).getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
+    System.assertEquals(response.getPagination().getRefreshUrl(), refreshUrl);
+    System.assertEquals(response.getPagination().getNextUrl(), nextUrl);
+    System.assertEquals(response.getPagination().getTotal(), paginationTotal);
+    System.assertEquals(response.getPagination().getMatched(), paginationMatched);
+    Test.stopTest();
+  }
+
+  static testMethod void testUpdateCounterexample() {
+    String body = IBMWatsonMockResponses.counterexample();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+    conversation.setUsernameAndPassword('username', 'password');
+
+    ConversationV1Models.UpdateCounterexampleOptions updateOptions = new ConversationV1Models.UpdateCounterexampleOptionsBuilder()
+      .workspaceId(workspaceId)
+      .text(counterexampleText)
+      .newText(counterexampleText)
+      .build();
+    ConversationV1Models.Counterexample response = conversation.updateCounterexample(updateOptions);
+
+    System.assertEquals(response.getText(), counterexampleText);
+    System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
+    System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     Test.stopTest();
   }
 }
