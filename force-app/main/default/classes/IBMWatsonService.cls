@@ -12,6 +12,7 @@ public abstract class IBMWatsonService {
   private static final String URL = 'url';
   private static final String PATH_AUTHORIZATION_V1_TOKEN = '/v1/token';
   private static final String AUTHORIZATION = 'authorization';
+  private static final String CALLOUT = 'callout:';
   private static final String BASIC = 'Basic ';
   private static final String VERSION = 'version';
   private static final String USER_AGENT_FORMAT = 'watson-salesforce-sdk/{0}/({1})';
@@ -26,12 +27,7 @@ public abstract class IBMWatsonService {
     this.name = name;
     this.userAgent = buildUserAgent(); // initialize the `User-Agent` value
 
-    // Retrieve credentials and endpoint from configuration
-    this.apiKey = IBMWatsonCredentialUtils.getAPIKey(name);
-    String url = IBMWatsonCredentialUtils.getAPIUrl(name);
-    if (!String.isBlank(url)) {
-      this.setEndPoint(url);
-    }
+    setEndPoint(CALLOUT + name);
   }
 
   private static String buildUserAgent() {
@@ -69,8 +65,11 @@ public abstract class IBMWatsonService {
 
     IBMWatsonRequest.Builder builder = request.newBuilder();
     setDefaultHeaders(builder);
-    setAuthentication(builder);
-
+    
+    if (String.isNotBlank(endpoint) && !endPoint.startsWith(CALLOUT)) {
+      setAuthentication(builder);
+    }
+    
     // Execute the request
     IBMWatsonResponse response = IBMWatsonClient.executeRequest(builder.build());
 
