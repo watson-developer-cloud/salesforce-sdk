@@ -1,4 +1,4 @@
-public class ConversationV1Models {
+public class IBMConversationV1Models {
   /**
    * Context information for the message. Include the context from the previous response to maintain state for the conversation.
    */
@@ -44,21 +44,15 @@ public class ConversationV1Models {
       this.system_serialized_name = system_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Context ret;
-      if (jsonString.equals('null')) {
-        ret = new Context();
-      }
-      else {
-        ret = (Context) JSON.deserialize(jsonString, Context.class);
-      }
+      Context ret = (Context) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for system_serialized_name
-      SystemResponse newSystem = (SystemResponse) new SystemResponse().deserialize(JSON.serialize(ret.getSystem()), (Map<String, Object>) jsonMap.get('system_serialized_name'));
+      SystemResponse newSystem = (SystemResponse) new SystemResponse().deserialize(JSON.serialize(ret.getSystem()), (Map<String, Object>) jsonMap.get('system_serialized_name'), SystemResponse.class);
       ret.setSystem(newSystem);
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
@@ -123,18 +117,12 @@ public class ConversationV1Models {
       this.text_serialized_name = text_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Counterexample ret;
-      if (jsonString.equals('null')) {
-        ret = new Counterexample();
-      }
-      else {
-        ret = (Counterexample) JSON.deserialize(jsonString, Counterexample.class);
-      }
+      Counterexample ret = (Counterexample) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -187,18 +175,12 @@ public class ConversationV1Models {
       this.pagination_serialized_name = pagination_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      CounterexampleCollection ret;
-      if (jsonString.equals('null')) {
-        ret = new CounterexampleCollection();
-      }
-      else {
-        ret = (CounterexampleCollection) JSON.deserialize(jsonString, CounterexampleCollection.class);
-      }
+      CounterexampleCollection ret = (CounterexampleCollection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for counterexamples_serialized_name
       List<Counterexample> newCounterexamples = new List<Counterexample>();
@@ -207,14 +189,14 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedCounterexamples.size(); i++) {
           Counterexample currentItem = ret.getCounterexamples().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('counterexamples_serialized_name');
-          Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Counterexample.class);
           newCounterexamples.add(newItem);
         }
         ret.setCounterexamples(newCounterexamples);
       }
 
       // calling custom deserializer for pagination_serialized_name
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'));
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -4418,33 +4400,27 @@ public class ConversationV1Models {
       this.variable_serialized_name = variable_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      DialogNode ret;
-      if (jsonString.equals('null')) {
-        ret = new DialogNode();
-      }
-      else {
-        ret = (DialogNode) JSON.deserialize(jsonString, DialogNode.class);
-      }
+      DialogNode ret = (DialogNode) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for output_serialized_name
-      IBMWatsonMapModel newOutput = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'));
+      IBMWatsonMapModel newOutput = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), IBMWatsonMapModel.class);
       ret.setOutput(newOutput);
 
       // calling custom deserializer for context_serialized_name
-      IBMWatsonMapModel newContext = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'));
+      IBMWatsonMapModel newContext = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'), IBMWatsonMapModel.class);
       ret.setContext(newContext);
 
       // calling custom deserializer for metadata_serialized_name
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for next_step_serialized_name
-      DialogNodeNextStep newNextStep = (DialogNodeNextStep) new DialogNodeNextStep().deserialize(JSON.serialize(ret.getNextStep()), (Map<String, Object>) jsonMap.get('next_step_serialized_name'));
+      DialogNodeNextStep newNextStep = (DialogNodeNextStep) new DialogNodeNextStep().deserialize(JSON.serialize(ret.getNextStep()), (Map<String, Object>) jsonMap.get('next_step_serialized_name'), DialogNodeNextStep.class);
       ret.setNextStep(newNextStep);
 
       // calling custom deserializer for actions_serialized_name
@@ -4454,7 +4430,7 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedActions.size(); i++) {
           DialogNodeAction currentItem = ret.getActions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('actions_serialized_name');
-          DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
           newActions.add(newItem);
         }
         ret.setActions(newActions);
@@ -4574,21 +4550,15 @@ public class ConversationV1Models {
       this.credentials_serialized_name = credentials_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      DialogNodeAction ret;
-      if (jsonString.equals('null')) {
-        ret = new DialogNodeAction();
-      }
-      else {
-        ret = (DialogNodeAction) JSON.deserialize(jsonString, DialogNodeAction.class);
-      }
+      DialogNodeAction ret = (DialogNodeAction) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for parameters_serialized_name
-      IBMWatsonMapModel newParameters = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getParameters()), (Map<String, Object>) jsonMap.get('parameters_serialized_name'));
+      IBMWatsonMapModel newParameters = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getParameters()), (Map<String, Object>) jsonMap.get('parameters_serialized_name'), IBMWatsonMapModel.class);
       ret.setParameters(newParameters);
 
       return ret;
@@ -4640,18 +4610,12 @@ public class ConversationV1Models {
       this.pagination_serialized_name = pagination_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      DialogNodeCollection ret;
-      if (jsonString.equals('null')) {
-        ret = new DialogNodeCollection();
-      }
-      else {
-        ret = (DialogNodeCollection) JSON.deserialize(jsonString, DialogNodeCollection.class);
-      }
+      DialogNodeCollection ret = (DialogNodeCollection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for dialog_nodes_serialized_name
       List<DialogNode> newDialogNodes = new List<DialogNode>();
@@ -4660,14 +4624,14 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedDialogNodes.size(); i++) {
           DialogNode currentItem = ret.getDialogNodes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('dialog_nodes_serialized_name');
-          DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNode.class);
           newDialogNodes.add(newItem);
         }
         ret.setDialogNodes(newDialogNodes);
       }
 
       // calling custom deserializer for pagination_serialized_name
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'));
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -4742,18 +4706,12 @@ public class ConversationV1Models {
       this.selector_serialized_name = selector_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      DialogNodeNextStep ret;
-      if (jsonString.equals('null')) {
-        ret = new DialogNodeNextStep();
-      }
-      else {
-        ret = (DialogNodeNextStep) JSON.deserialize(jsonString, DialogNodeNextStep.class);
-      }
+      DialogNodeNextStep ret = (DialogNodeNextStep) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -4872,21 +4830,15 @@ public class ConversationV1Models {
       this.fuzzy_match_serialized_name = fuzzy_match_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Entity ret;
-      if (jsonString.equals('null')) {
-        ret = new Entity();
-      }
-      else {
-        ret = (Entity) JSON.deserialize(jsonString, Entity.class);
-      }
+      Entity ret = (Entity) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for metadata_serialized_name
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       return ret;
@@ -4940,18 +4892,12 @@ public class ConversationV1Models {
       this.pagination_serialized_name = pagination_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      EntityCollection ret;
-      if (jsonString.equals('null')) {
-        ret = new EntityCollection();
-      }
-      else {
-        ret = (EntityCollection) JSON.deserialize(jsonString, EntityCollection.class);
-      }
+      EntityCollection ret = (EntityCollection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for entities_serialized_name
       List<EntityExport> newEntities = new List<EntityExport>();
@@ -4960,14 +4906,14 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           EntityExport currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
-          EntityExport newItem = (EntityExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          EntityExport newItem = (EntityExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntityExport.class);
           newEntities.add(newItem);
         }
         ret.setEntities(newEntities);
       }
 
       // calling custom deserializer for pagination_serialized_name
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'));
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -5108,21 +5054,15 @@ public class ConversationV1Models {
       this.values_serialized_name = values_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      EntityExport ret;
-      if (jsonString.equals('null')) {
-        ret = new EntityExport();
-      }
-      else {
-        ret = (EntityExport) JSON.deserialize(jsonString, EntityExport.class);
-      }
+      EntityExport ret = (EntityExport) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for metadata_serialized_name
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for values_serialized_name
@@ -5132,7 +5072,7 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedValues.size(); i++) {
           ValueExport currentItem = ret.getValues().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('values_serialized_name');
-          ValueExport newItem = (ValueExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          ValueExport newItem = (ValueExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ValueExport.class);
           newValues.add(newItem);
         }
         ret.setValues(newValues);
@@ -5192,18 +5132,12 @@ public class ConversationV1Models {
       this.text_serialized_name = text_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Example ret;
-      if (jsonString.equals('null')) {
-        ret = new Example();
-      }
-      else {
-        ret = (Example) JSON.deserialize(jsonString, Example.class);
-      }
+      Example ret = (Example) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -5256,18 +5190,12 @@ public class ConversationV1Models {
       this.pagination_serialized_name = pagination_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      ExampleCollection ret;
-      if (jsonString.equals('null')) {
-        ret = new ExampleCollection();
-      }
-      else {
-        ret = (ExampleCollection) JSON.deserialize(jsonString, ExampleCollection.class);
-      }
+      ExampleCollection ret = (ExampleCollection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for examples_serialized_name
       List<Example> newExamples = new List<Example>();
@@ -5276,14 +5204,14 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           Example currentItem = ret.getExamples().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('examples_serialized_name');
-          Example newItem = (Example) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          Example newItem = (Example) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Example.class);
           newExamples.add(newItem);
         }
         ret.setExamples(newExamples);
       }
 
       // calling custom deserializer for pagination_serialized_name
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'));
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -6462,18 +6390,12 @@ public class ConversationV1Models {
       this.description_serialized_name = description_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Intent ret;
-      if (jsonString.equals('null')) {
-        ret = new Intent();
-      }
-      else {
-        ret = (Intent) JSON.deserialize(jsonString, Intent.class);
-      }
+      Intent ret = (Intent) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -6526,18 +6448,12 @@ public class ConversationV1Models {
       this.pagination_serialized_name = pagination_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      IntentCollection ret;
-      if (jsonString.equals('null')) {
-        ret = new IntentCollection();
-      }
-      else {
-        ret = (IntentCollection) JSON.deserialize(jsonString, IntentCollection.class);
-      }
+      IntentCollection ret = (IntentCollection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for intents_serialized_name
       List<IntentExport> newIntents = new List<IntentExport>();
@@ -6546,14 +6462,14 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           IntentExport currentItem = ret.getIntents().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
-          IntentExport newItem = (IntentExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          IntentExport newItem = (IntentExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), IntentExport.class);
           newIntents.add(newItem);
         }
         ret.setIntents(newIntents);
       }
 
       // calling custom deserializer for pagination_serialized_name
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'));
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -6652,18 +6568,12 @@ public class ConversationV1Models {
       this.examples_serialized_name = examples_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      IntentExport ret;
-      if (jsonString.equals('null')) {
-        ret = new IntentExport();
-      }
-      else {
-        ret = (IntentExport) JSON.deserialize(jsonString, IntentExport.class);
-      }
+      IntentExport ret = (IntentExport) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for examples_serialized_name
       List<Example> newExamples = new List<Example>();
@@ -6672,7 +6582,7 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedExamples.size(); i++) {
           Example currentItem = ret.getExamples().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('examples_serialized_name');
-          Example newItem = (Example) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          Example newItem = (Example) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Example.class);
           newExamples.add(newItem);
         }
         ret.setExamples(newExamples);
@@ -8474,18 +8384,12 @@ public class ConversationV1Models {
       this.pagination_serialized_name = pagination_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      LogCollection ret;
-      if (jsonString.equals('null')) {
-        ret = new LogCollection();
-      }
-      else {
-        ret = (LogCollection) JSON.deserialize(jsonString, LogCollection.class);
-      }
+      LogCollection ret = (LogCollection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for logs_serialized_name
       List<LogExport> newLogs = new List<LogExport>();
@@ -8494,14 +8398,14 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedLogs.size(); i++) {
           LogExport currentItem = ret.getLogs().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('logs_serialized_name');
-          LogExport newItem = (LogExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          LogExport newItem = (LogExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogExport.class);
           newLogs.add(newItem);
         }
         ret.setLogs(newLogs);
       }
 
       // calling custom deserializer for pagination_serialized_name
-      LogPagination newPagination = (LogPagination) new LogPagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'));
+      LogPagination newPagination = (LogPagination) new LogPagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), LogPagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -8660,25 +8564,19 @@ public class ConversationV1Models {
       this.language_serialized_name = language_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      LogExport ret;
-      if (jsonString.equals('null')) {
-        ret = new LogExport();
-      }
-      else {
-        ret = (LogExport) JSON.deserialize(jsonString, LogExport.class);
-      }
+      LogExport ret = (LogExport) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for request_serialized_name
-      MessageRequest newRequest = (MessageRequest) new MessageRequest().deserialize(JSON.serialize(ret.getRequest()), (Map<String, Object>) jsonMap.get('request_serialized_name'));
+      MessageRequest newRequest = (MessageRequest) new MessageRequest().deserialize(JSON.serialize(ret.getRequest()), (Map<String, Object>) jsonMap.get('request_serialized_name'), MessageRequest.class);
       ret.setRequest(newRequest);
 
       // calling custom deserializer for response_serialized_name
-      MessageResponse newResponse = (MessageResponse) new MessageResponse().deserialize(JSON.serialize(ret.getResponse()), (Map<String, Object>) jsonMap.get('response_serialized_name'));
+      MessageResponse newResponse = (MessageResponse) new MessageResponse().deserialize(JSON.serialize(ret.getResponse()), (Map<String, Object>) jsonMap.get('response_serialized_name'), MessageResponse.class);
       ret.setResponse(newResponse);
 
       return ret;
@@ -8730,18 +8628,12 @@ public class ConversationV1Models {
       this.msg_serialized_name = msg_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      LogMessage ret;
-      if (jsonString.equals('null')) {
-        ret = new LogMessage();
-      }
-      else {
-        ret = (LogMessage) JSON.deserialize(jsonString, LogMessage.class);
-      }
+      LogMessage ret = (LogMessage) super.deserialize(jsonString, jsonMap, classType);
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
@@ -8802,18 +8694,12 @@ public class ConversationV1Models {
       this.matched_serialized_name = matched_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      LogPagination ret;
-      if (jsonString.equals('null')) {
-        ret = new LogPagination();
-      }
-      else {
-        ret = (LogPagination) JSON.deserialize(jsonString, LogPagination.class);
-      }
+      LogPagination ret = (LogPagination) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -8845,18 +8731,12 @@ public class ConversationV1Models {
       this.text_serialized_name = text_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      MessageInput ret;
-      if (jsonString.equals('null')) {
-        ret = new MessageInput();
-      }
-      else {
-        ret = (MessageInput) JSON.deserialize(jsonString, MessageInput.class);
-      }
+      MessageInput ret = (MessageInput) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -9252,21 +9132,15 @@ public class ConversationV1Models {
       this.output_serialized_name = output_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      MessageRequest ret;
-      if (jsonString.equals('null')) {
-        ret = new MessageRequest();
-      }
-      else {
-        ret = (MessageRequest) JSON.deserialize(jsonString, MessageRequest.class);
-      }
+      MessageRequest ret = (MessageRequest) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for context_serialized_name
-      Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'));
+      Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'), Context.class);
       ret.setContext(newContext);
 
       // calling custom deserializer for entities_serialized_name
@@ -9276,7 +9150,7 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           RuntimeEntity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
-          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
           newEntities.add(newItem);
         }
         ret.setEntities(newEntities);
@@ -9289,14 +9163,14 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           RuntimeIntent currentItem = ret.getIntents().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
-          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
         ret.setIntents(newIntents);
       }
 
       // calling custom deserializer for output_serialized_name
-      OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'));
+      OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), OutputData.class);
       ret.setOutput(newOutput);
 
       return ret;
@@ -9428,21 +9302,15 @@ public class ConversationV1Models {
       this.output_serialized_name = output_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      MessageResponse ret;
-      if (jsonString.equals('null')) {
-        ret = new MessageResponse();
-      }
-      else {
-        ret = (MessageResponse) JSON.deserialize(jsonString, MessageResponse.class);
-      }
+      MessageResponse ret = (MessageResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for input_serialized_name
-      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'));
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), MessageInput.class);
       ret.setInput(newInput);
 
       // calling custom deserializer for intents_serialized_name
@@ -9452,7 +9320,7 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           RuntimeIntent currentItem = ret.getIntents().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
-          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
         ret.setIntents(newIntents);
@@ -9465,18 +9333,18 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           RuntimeEntity currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
-          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
           newEntities.add(newItem);
         }
         ret.setEntities(newEntities);
       }
 
       // calling custom deserializer for context_serialized_name
-      Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'));
+      Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'), Context.class);
       ret.setContext(newContext);
 
       // calling custom deserializer for output_serialized_name
-      OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'));
+      OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), OutputData.class);
       ret.setOutput(newOutput);
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
@@ -9556,18 +9424,12 @@ public class ConversationV1Models {
       this.nodes_visited_serialized_name = nodes_visited_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      OutputData ret;
-      if (jsonString.equals('null')) {
-        ret = new OutputData();
-      }
-      else {
-        ret = (OutputData) JSON.deserialize(jsonString, OutputData.class);
-      }
+      OutputData ret = (OutputData) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for log_messages_serialized_name
       List<LogMessage> newLogMessages = new List<LogMessage>();
@@ -9576,7 +9438,7 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedLogMessages.size(); i++) {
           LogMessage currentItem = ret.getLogMessages().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('log_messages_serialized_name');
-          LogMessage newItem = (LogMessage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          LogMessage newItem = (LogMessage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogMessage.class);
           newLogMessages.add(newItem);
         }
         ret.setLogMessages(newLogMessages);
@@ -9683,18 +9545,12 @@ public class ConversationV1Models {
       this.matched_serialized_name = matched_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Pagination ret;
-      if (jsonString.equals('null')) {
-        ret = new Pagination();
-      }
-      else {
-        ret = (Pagination) JSON.deserialize(jsonString, Pagination.class);
-      }
+      Pagination ret = (Pagination) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -9805,21 +9661,15 @@ public class ConversationV1Models {
       this.metadata_serialized_name = metadata_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      RuntimeEntity ret;
-      if (jsonString.equals('null')) {
-        ret = new RuntimeEntity();
-      }
-      else {
-        ret = (RuntimeEntity) JSON.deserialize(jsonString, RuntimeEntity.class);
-      }
+      RuntimeEntity ret = (RuntimeEntity) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for metadata_serialized_name
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
@@ -9879,18 +9729,12 @@ public class ConversationV1Models {
       this.confidence_serialized_name = confidence_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      RuntimeIntent ret;
-      if (jsonString.equals('null')) {
-        ret = new RuntimeIntent();
-      }
-      else {
-        ret = (RuntimeIntent) JSON.deserialize(jsonString, RuntimeIntent.class);
-      }
+      RuntimeIntent ret = (RuntimeIntent) super.deserialize(jsonString, jsonMap, classType);
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
@@ -9954,18 +9798,12 @@ public class ConversationV1Models {
       this.synonym_serialized_name = synonym_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Synonym ret;
-      if (jsonString.equals('null')) {
-        ret = new Synonym();
-      }
-      else {
-        ret = (Synonym) JSON.deserialize(jsonString, Synonym.class);
-      }
+      Synonym ret = (Synonym) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -10018,18 +9856,12 @@ public class ConversationV1Models {
       this.pagination_serialized_name = pagination_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      SynonymCollection ret;
-      if (jsonString.equals('null')) {
-        ret = new SynonymCollection();
-      }
-      else {
-        ret = (SynonymCollection) JSON.deserialize(jsonString, SynonymCollection.class);
-      }
+      SynonymCollection ret = (SynonymCollection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for synonyms_serialized_name
       List<Synonym> newSynonyms = new List<Synonym>();
@@ -10038,14 +9870,14 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedSynonyms.size(); i++) {
           Synonym currentItem = ret.getSynonyms().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('synonyms_serialized_name');
-          Synonym newItem = (Synonym) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          Synonym newItem = (Synonym) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Synonym.class);
           newSynonyms.add(newItem);
         }
         ret.setSynonyms(newSynonyms);
       }
 
       // calling custom deserializer for pagination_serialized_name
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'));
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -10057,18 +9889,12 @@ public class ConversationV1Models {
    */
   public class SystemResponse extends IBMWatsonDynamicModel {
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      SystemResponse ret;
-      if (jsonString.equals('null')) {
-        ret = new SystemResponse();
-      }
-      else {
-        ret = (SystemResponse) JSON.deserialize(jsonString, SystemResponse.class);
-      }
+      SystemResponse ret = (SystemResponse) super.deserialize(jsonString, jsonMap, classType);
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
@@ -12262,21 +12088,15 @@ public class ConversationV1Models {
       this.type_serialized_name = type_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Value ret;
-      if (jsonString.equals('null')) {
-        ret = new Value();
-      }
-      else {
-        ret = (Value) JSON.deserialize(jsonString, Value.class);
-      }
+      Value ret = (Value) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for metadata_serialized_name
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       return ret;
@@ -12330,18 +12150,12 @@ public class ConversationV1Models {
       this.pagination_serialized_name = pagination_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      ValueCollection ret;
-      if (jsonString.equals('null')) {
-        ret = new ValueCollection();
-      }
-      else {
-        ret = (ValueCollection) JSON.deserialize(jsonString, ValueCollection.class);
-      }
+      ValueCollection ret = (ValueCollection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for values_serialized_name
       List<ValueExport> newValues = new List<ValueExport>();
@@ -12350,14 +12164,14 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedValues.size(); i++) {
           ValueExport currentItem = ret.getValues().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('values_serialized_name');
-          ValueExport newItem = (ValueExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          ValueExport newItem = (ValueExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ValueExport.class);
           newValues.add(newItem);
         }
         ret.setValues(newValues);
       }
 
       // calling custom deserializer for pagination_serialized_name
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'));
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -12498,21 +12312,15 @@ public class ConversationV1Models {
       this.type_serialized_name = type_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      ValueExport ret;
-      if (jsonString.equals('null')) {
-        ret = new ValueExport();
-      }
-      else {
-        ret = (ValueExport) JSON.deserialize(jsonString, ValueExport.class);
-      }
+      ValueExport ret = (ValueExport) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for metadata_serialized_name
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       return ret;
@@ -12665,21 +12473,15 @@ public class ConversationV1Models {
       this.learning_opt_out_serialized_name = learning_opt_out_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      Workspace ret;
-      if (jsonString.equals('null')) {
-        ret = new Workspace();
-      }
-      else {
-        ret = (Workspace) JSON.deserialize(jsonString, Workspace.class);
-      }
+      Workspace ret = (Workspace) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for metadata_serialized_name
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       return ret;
@@ -12733,18 +12535,12 @@ public class ConversationV1Models {
       this.pagination_serialized_name = pagination_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      WorkspaceCollection ret;
-      if (jsonString.equals('null')) {
-        ret = new WorkspaceCollection();
-      }
-      else {
-        ret = (WorkspaceCollection) JSON.deserialize(jsonString, WorkspaceCollection.class);
-      }
+      WorkspaceCollection ret = (WorkspaceCollection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for workspaces_serialized_name
       List<Workspace> newWorkspaces = new List<Workspace>();
@@ -12753,14 +12549,14 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedWorkspaces.size(); i++) {
           Workspace currentItem = ret.getWorkspaces().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('workspaces_serialized_name');
-          Workspace newItem = (Workspace) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          Workspace newItem = (Workspace) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Workspace.class);
           newWorkspaces.add(newItem);
         }
         ret.setWorkspaces(newWorkspaces);
       }
 
       // calling custom deserializer for pagination_serialized_name
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'));
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
       ret.setPagination(newPagination);
 
       return ret;
@@ -13018,21 +12814,15 @@ public class ConversationV1Models {
       this.dialog_nodes_serialized_name = dialog_nodes_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap) {
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      WorkspaceExport ret;
-      if (jsonString.equals('null')) {
-        ret = new WorkspaceExport();
-      }
-      else {
-        ret = (WorkspaceExport) JSON.deserialize(jsonString, WorkspaceExport.class);
-      }
+      WorkspaceExport ret = (WorkspaceExport) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for metadata_serialized_name
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for intents_serialized_name
@@ -13042,7 +12832,7 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedIntents.size(); i++) {
           IntentExport currentItem = ret.getIntents().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
-          IntentExport newItem = (IntentExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          IntentExport newItem = (IntentExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), IntentExport.class);
           newIntents.add(newItem);
         }
         ret.setIntents(newIntents);
@@ -13055,7 +12845,7 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
           EntityExport currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
-          EntityExport newItem = (EntityExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          EntityExport newItem = (EntityExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntityExport.class);
           newEntities.add(newItem);
         }
         ret.setEntities(newEntities);
@@ -13068,7 +12858,7 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedCounterexamples.size(); i++) {
           Counterexample currentItem = ret.getCounterexamples().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('counterexamples_serialized_name');
-          Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Counterexample.class);
           newCounterexamples.add(newItem);
         }
         ret.setCounterexamples(newCounterexamples);
@@ -13081,7 +12871,7 @@ public class ConversationV1Models {
         for (Integer i = 0; i < deserializedDialogNodes.size(); i++) {
           DialogNode currentItem = ret.getDialogNodes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('dialog_nodes_serialized_name');
-          DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))));
+          DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNode.class);
           newDialogNodes.add(newItem);
         }
         ret.setDialogNodes(newDialogNodes);
@@ -13090,4 +12880,5 @@ public class ConversationV1Models {
       return ret;
     }
   }
+
 }

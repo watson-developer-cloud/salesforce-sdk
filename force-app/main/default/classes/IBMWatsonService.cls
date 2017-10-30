@@ -47,9 +47,9 @@ public abstract class IBMWatsonService {
       Object targetObject = targetType.newInstance();
 
       if (targetObject instanceof IBMWatsonDynamicModel) {
-        return ((IBMWatsonDynamicModel) targetObject).deserialize(jsonString, jsonMap);
+        return ((IBMWatsonDynamicModel) targetObject).deserialize(jsonString, jsonMap, targetType);
       } else {
-        return ((IBMWatsonGenericModel) targetObject).deserialize(jsonString, jsonMap);
+        return ((IBMWatsonGenericModel) targetObject).deserialize(jsonString, jsonMap, targetType);
       }
     }
     return null;

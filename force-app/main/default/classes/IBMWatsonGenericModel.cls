@@ -1,4 +1,4 @@
-public abstract class IBMWatsonGenericModel {
+public virtual class IBMWatsonGenericModel {
 
   /**
    * Allows user to see the JSON string by default for easier debugging.
@@ -6,7 +6,7 @@ public abstract class IBMWatsonGenericModel {
    * @return serialized String form of this
    */
   public override String toString() {
-    return JSON.serializePretty(this);
+    return JSON.serializePretty(this).remove('_serialized_name');
   }
 
   /**
@@ -26,5 +26,15 @@ public abstract class IBMWatsonGenericModel {
     return this.toString().equals(other.toString());
   }
 
-  public abstract Object deserialize(String jsonString, Map<String, Object> jsonMap);
+  public virtual Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+    Object ret;
+    if (jsonString.equals('null')) {
+      ret = classType.newInstance();
+    }
+    else {
+      ret = JSON.deserialize(jsonString, classType);
+    }
+
+    return ret;
+  }
 }
