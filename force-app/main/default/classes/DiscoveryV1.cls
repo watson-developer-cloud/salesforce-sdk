@@ -1,0 +1,788 @@
+/**
+ * The IBM Watson Discovery Service is a cognitive search and content analytics engine that you can add to applications
+ * to identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and
+ * unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual
+ * filtering of results.
+ *
+ * @version V1
+ * @see <a href="http://www.ibm.com/watson/developercloud/discovery.html">Discovery</a>
+ */
+public class DiscoveryV1 extends IBMWatsonService {
+
+  private static final String URL = 'https://gateway.watsonplatform.net/discovery/api';
+  private String versionDate;
+
+  /** The Constant VERSION_DATE_2017_09_01. */
+    public static final String VERSION_DATE_2017_09_01 = '2017-09-01';
+  /** The Constant VERSION_DATE_2017_08_01. */
+    public static final String VERSION_DATE_2017_08_01 = '2017-08-01';
+  /** The Constant VERSION_DATE_2017_07_19. */
+    public static final String VERSION_DATE_2017_07_19 = '2017-07-19';
+  /** The Constant VERSION_DATE_2017_06_25. */
+    public static final String VERSION_DATE_2017_06_25 = '2017-06-25';
+  /** The Constant VERSION_DATE_2016_12_01. */
+    public static final String VERSION_DATE_2016_12_01 = '2016-12-01';
+  /**
+   * Instantiates a new `DiscoveryV1`.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   */
+  public DiscoveryV1(String versionDate) {
+    super('discovery');
+
+    if (String.isBlank(getEndPoint())) {
+      setEndPoint(URL);
+    }
+    if(String.isBlank(versionDate)) {
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('Version cannot be null.');
+    }
+    this.versionDate = versionDate;
+  }
+
+  /**
+   * Instantiates a new `DiscoveryV1` with username and password.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   * @param username the username
+   * @param password the password
+   */
+  public DiscoveryV1(String versionDate, String username, String password) {
+    this(versionDate);
+    setUsernameAndPassword(username, password);
+  }
+
+  /**
+   * Add an environment.
+   *
+   * Creates a new environment.  You can create only one environment per service instance. An attempt to create another environment results in an error.
+   *
+   * @param createEnvironmentOptions the {@link DiscoveryV1Models.CreateEnvironmentOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.Environment} with the response
+   */
+  public DiscoveryV1Models.Environment createEnvironment(DiscoveryV1Models.CreateEnvironmentOptions createEnvironmentOptions) {
+    IBMWatsonValidator.notNull(createEnvironmentOptions, 'createEnvironmentOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + '/v1/environments');
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('name', createEnvironmentOptions.name());
+    if (createEnvironmentOptions.description() != null) {
+      contentJson.put('description', createEnvironmentOptions.description());
+    }
+    if (createEnvironmentOptions.size() != null) {
+      contentJson.put('size', createEnvironmentOptions.size());
+    }
+    builder.bodyJson(JSON.serialize(contentJson));
+  
+    return (DiscoveryV1Models.Environment) createServiceCall(builder.build(), DiscoveryV1Models.Environment.class);
+  }
+
+  /**
+   * Delete environment.
+   *
+   * @param deleteEnvironmentOptions the {@link DiscoveryV1Models.DeleteEnvironmentOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteEnvironment(DiscoveryV1Models.DeleteEnvironmentOptions deleteEnvironmentOptions) {
+    IBMWatsonValidator.notNull(deleteEnvironmentOptions, 'deleteEnvironmentOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/environments/{0}', new String[]{ deleteEnvironmentOptions.environmentId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * Get environment info.
+   *
+   * @param getEnvironmentOptions the {@link DiscoveryV1Models.GetEnvironmentOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.Environment} with the response
+   */
+  public DiscoveryV1Models.Environment getEnvironment(DiscoveryV1Models.GetEnvironmentOptions getEnvironmentOptions) {
+    IBMWatsonValidator.notNull(getEnvironmentOptions, 'getEnvironmentOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}', new String[]{ getEnvironmentOptions.environmentId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    return (DiscoveryV1Models.Environment) createServiceCall(builder.build(), DiscoveryV1Models.Environment.class);
+  }
+
+  /**
+   * List environments.
+   *
+   * List existing environments for the service instance.
+   *
+   * @param listEnvironmentsOptions the {@link DiscoveryV1Models.ListEnvironmentsOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.ListEnvironmentsResponse} with the response
+   */
+  public DiscoveryV1Models.ListEnvironmentsResponse listEnvironments(DiscoveryV1Models.ListEnvironmentsOptions listEnvironmentsOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + '/v1/environments');
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate,
+      'name' => listEnvironmentsOptions.name()
+    });
+  
+    return (DiscoveryV1Models.ListEnvironmentsResponse) createServiceCall(builder.build(), DiscoveryV1Models.ListEnvironmentsResponse.class);
+  }
+
+  /**
+   * List fields in specified collecitons.
+   *
+   * Gets a list of the unique fields (and their types) stored in the indexes of the specified collecitons.
+   *
+   * @param listFieldsOptions the {@link DiscoveryV1Models.ListFieldsOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.ListCollectionFieldsResponse} with the response
+   */
+  public DiscoveryV1Models.ListCollectionFieldsResponse listFields(DiscoveryV1Models.ListFieldsOptions listFieldsOptions) {
+    IBMWatsonValidator.notNull(listFieldsOptions, 'listFieldsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/fields', new String[]{ listFieldsOptions.environmentId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate,
+      'collection_ids' => String.join(listFieldsOptions.collectionIds(), ',')
+    });
+  
+    return (DiscoveryV1Models.ListCollectionFieldsResponse) createServiceCall(builder.build(), DiscoveryV1Models.ListCollectionFieldsResponse.class);
+  }
+
+  /**
+   * Update an environment.
+   *
+   * Updates an environment. The environment's `name` and  `description` parameters can be changed. You must specify a `name` for the environment.
+   *
+   * @param updateEnvironmentOptions the {@link DiscoveryV1Models.UpdateEnvironmentOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.Environment} with the response
+   */
+  public DiscoveryV1Models.Environment updateEnvironment(DiscoveryV1Models.UpdateEnvironmentOptions updateEnvironmentOptions) {
+    IBMWatsonValidator.notNull(updateEnvironmentOptions, 'updateEnvironmentOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(URL + String.format('/v1/environments/{0}', new String[]{ updateEnvironmentOptions.environmentId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    if (updateEnvironmentOptions.name() != null) {
+      contentJson.put('name', updateEnvironmentOptions.name());
+    }
+    if (updateEnvironmentOptions.description() != null) {
+      contentJson.put('description', updateEnvironmentOptions.description());
+    }
+    builder.bodyJson(JSON.serialize(contentJson));
+  
+    return (DiscoveryV1Models.Environment) createServiceCall(builder.build(), DiscoveryV1Models.Environment.class);
+  }
+
+  /**
+   * Add configuration.
+   *
+   * Creates a new configuration.  If the input configuration contains the `configuration_id`, `created`, or `updated` properties, then they are ignored and overridden by the system, and an error is not returned so that the overridden fields do not need to be removed when copying a configuration.  The configuration can contain unrecognized JSON fields. Any such fields are ignored and do not generate an error. This makes it easier to use newer configuration files with older versions of the API and the service. It also makes it possible for the tooling to add additional metadata and information to the configuration.
+   *
+   * @param createConfigurationOptions the {@link DiscoveryV1Models.CreateConfigurationOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.Configuration} with the response
+   */
+  public DiscoveryV1Models.Configuration createConfiguration(DiscoveryV1Models.CreateConfigurationOptions createConfigurationOptions) {
+    IBMWatsonValidator.notNull(createConfigurationOptions, 'createConfigurationOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/environments/{0}/configurations', new String[]{ createConfigurationOptions.environmentId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    if (createConfigurationOptions.name() != null) {
+      contentJson.put('name', createConfigurationOptions.name());
+    }
+    if (createConfigurationOptions.description() != null) {
+      contentJson.put('description', createConfigurationOptions.description());
+    }
+    if (createConfigurationOptions.conversions() != null) {
+      contentJson.put('conversions', createConfigurationOptions.conversions());
+    }
+    if (createConfigurationOptions.enrichments() != null) {
+      contentJson.put('enrichments', createConfigurationOptions.enrichments());
+    }
+    if (createConfigurationOptions.normalizations() != null) {
+      contentJson.put('normalizations', createConfigurationOptions.normalizations());
+    }
+    builder.bodyJson(JSON.serialize(contentJson));
+  
+    return (DiscoveryV1Models.Configuration) createServiceCall(builder.build(), DiscoveryV1Models.Configuration.class);
+  }
+
+  /**
+   * Delete a configuration.
+   *
+   * The deletion is performed unconditionally. A configuration deletion request succeeds even if the configuration is referenced by a collection or document ingestion. However, documents that have already been submitted for processing continue to use the deleted configuration. Documents are always processed with a snapshot of the configuration as it existed at the time the document was submitted.
+   *
+   * @param deleteConfigurationOptions the {@link DiscoveryV1Models.DeleteConfigurationOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteConfiguration(DiscoveryV1Models.DeleteConfigurationOptions deleteConfigurationOptions) {
+    IBMWatsonValidator.notNull(deleteConfigurationOptions, 'deleteConfigurationOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ deleteConfigurationOptions.environmentId(), deleteConfigurationOptions.configurationId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * Get configuration details.
+   *
+   * @param getConfigurationOptions the {@link DiscoveryV1Models.GetConfigurationOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.Configuration} with the response
+   */
+  public DiscoveryV1Models.Configuration getConfiguration(DiscoveryV1Models.GetConfigurationOptions getConfigurationOptions) {
+    IBMWatsonValidator.notNull(getConfigurationOptions, 'getConfigurationOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ getConfigurationOptions.environmentId(), getConfigurationOptions.configurationId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    return (DiscoveryV1Models.Configuration) createServiceCall(builder.build(), DiscoveryV1Models.Configuration.class);
+  }
+
+  /**
+   * List configurations.
+   *
+   * Lists existing configurations for the service instance.
+   *
+   * @param listConfigurationsOptions the {@link DiscoveryV1Models.ListConfigurationsOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.ListConfigurationsResponse} with the response
+   */
+  public DiscoveryV1Models.ListConfigurationsResponse listConfigurations(DiscoveryV1Models.ListConfigurationsOptions listConfigurationsOptions) {
+    IBMWatsonValidator.notNull(listConfigurationsOptions, 'listConfigurationsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/configurations', new String[]{ listConfigurationsOptions.environmentId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate,
+      'name' => listConfigurationsOptions.name()
+    });
+  
+    return (DiscoveryV1Models.ListConfigurationsResponse) createServiceCall(builder.build(), DiscoveryV1Models.ListConfigurationsResponse.class);
+  }
+
+  /**
+   * Update a configuration.
+   *
+   * Replaces an existing configuration.   * Completely replaces the original configuration.   * The `configuration_id`, `updated`, and `created` fields are accepted in the request, but they are ignored, and an error is not generated. It is also acceptable for users to submit an updated configuration with none of the three properties.   * Documents are processed with a snapshot of the configuration as it was at the time the document was submitted to be ingested. This means that already submitted documents will not see any updates made to the configuration.
+   *
+   * @param updateConfigurationOptions the {@link DiscoveryV1Models.UpdateConfigurationOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.Configuration} with the response
+   */
+  public DiscoveryV1Models.Configuration updateConfiguration(DiscoveryV1Models.UpdateConfigurationOptions updateConfigurationOptions) {
+    IBMWatsonValidator.notNull(updateConfigurationOptions, 'updateConfigurationOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(URL + String.format('/v1/environments/{0}/configurations/{1}', new String[]{ updateConfigurationOptions.environmentId(), updateConfigurationOptions.configurationId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    if (updateConfigurationOptions.name() != null) {
+      contentJson.put('name', updateConfigurationOptions.name());
+    }
+    if (updateConfigurationOptions.description() != null) {
+      contentJson.put('description', updateConfigurationOptions.description());
+    }
+    if (updateConfigurationOptions.conversions() != null) {
+      contentJson.put('conversions', updateConfigurationOptions.conversions());
+    }
+    if (updateConfigurationOptions.enrichments() != null) {
+      contentJson.put('enrichments', updateConfigurationOptions.enrichments());
+    }
+    if (updateConfigurationOptions.normalizations() != null) {
+      contentJson.put('normalizations', updateConfigurationOptions.normalizations());
+    }
+    builder.bodyJson(JSON.serialize(contentJson));
+  
+    return (DiscoveryV1Models.Configuration) createServiceCall(builder.build(), DiscoveryV1Models.Configuration.class);
+  }
+
+  /**
+   * Create a collection.
+   *
+   * @param createCollectionOptions the {@link DiscoveryV1Models.CreateCollectionOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.Collection} with the response
+   */
+  public DiscoveryV1Models.Collection createCollection(DiscoveryV1Models.CreateCollectionOptions createCollectionOptions) {
+    IBMWatsonValidator.notNull(createCollectionOptions, 'createCollectionOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/environments/{0}/collections', new String[]{ createCollectionOptions.environmentId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('name', createCollectionOptions.name());
+    if (createCollectionOptions.description() != null) {
+      contentJson.put('description', createCollectionOptions.description());
+    }
+    if (createCollectionOptions.configurationId() != null) {
+      contentJson.put('configuration_id', createCollectionOptions.configurationId());
+    }
+    if (createCollectionOptions.language() != null) {
+      contentJson.put('language', createCollectionOptions.language());
+    }
+    builder.bodyJson(JSON.serialize(contentJson));
+  
+    return (DiscoveryV1Models.Collection) createServiceCall(builder.build(), DiscoveryV1Models.Collection.class);
+  }
+
+  /**
+   * Delete a collection.
+   *
+   * @param deleteCollectionOptions the {@link DiscoveryV1Models.DeleteCollectionOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteCollection(DiscoveryV1Models.DeleteCollectionOptions deleteCollectionOptions) {
+    IBMWatsonValidator.notNull(deleteCollectionOptions, 'deleteCollectionOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/environments/{0}/collections/{1}', new String[]{ deleteCollectionOptions.environmentId(), deleteCollectionOptions.collectionId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * Get collection details.
+   *
+   * @param getCollectionOptions the {@link DiscoveryV1Models.GetCollectionOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.Collection} with the response
+   */
+  public DiscoveryV1Models.Collection getCollection(DiscoveryV1Models.GetCollectionOptions getCollectionOptions) {
+    IBMWatsonValidator.notNull(getCollectionOptions, 'getCollectionOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}', new String[]{ getCollectionOptions.environmentId(), getCollectionOptions.collectionId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    return (DiscoveryV1Models.Collection) createServiceCall(builder.build(), DiscoveryV1Models.Collection.class);
+  }
+
+  /**
+   * List unique fields.
+   *
+   * Gets a list of the unique fields (and their types) stored in the index.
+   *
+   * @param listCollectionFieldsOptions the {@link DiscoveryV1Models.ListCollectionFieldsOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.ListCollectionFieldsResponse} with the response
+   */
+  public DiscoveryV1Models.ListCollectionFieldsResponse listCollectionFields(DiscoveryV1Models.ListCollectionFieldsOptions listCollectionFieldsOptions) {
+    IBMWatsonValidator.notNull(listCollectionFieldsOptions, 'listCollectionFieldsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}/fields', new String[]{ listCollectionFieldsOptions.environmentId(), listCollectionFieldsOptions.collectionId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    return (DiscoveryV1Models.ListCollectionFieldsResponse) createServiceCall(builder.build(), DiscoveryV1Models.ListCollectionFieldsResponse.class);
+  }
+
+  /**
+   * List collections.
+   *
+   * Lists existing collections for the service instance.
+   *
+   * @param listCollectionsOptions the {@link DiscoveryV1Models.ListCollectionsOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.ListCollectionsResponse} with the response
+   */
+  public DiscoveryV1Models.ListCollectionsResponse listCollections(DiscoveryV1Models.ListCollectionsOptions listCollectionsOptions) {
+    IBMWatsonValidator.notNull(listCollectionsOptions, 'listCollectionsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections', new String[]{ listCollectionsOptions.environmentId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate,
+      'name' => listCollectionsOptions.name()
+    });
+  
+    return (DiscoveryV1Models.ListCollectionsResponse) createServiceCall(builder.build(), DiscoveryV1Models.ListCollectionsResponse.class);
+  }
+
+  /**
+   * Update a collection.
+   *
+   * @param updateCollectionOptions the {@link DiscoveryV1Models.UpdateCollectionOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.Collection} with the response
+   */
+  public DiscoveryV1Models.Collection updateCollection(DiscoveryV1Models.UpdateCollectionOptions updateCollectionOptions) {
+    IBMWatsonValidator.notNull(updateCollectionOptions, 'updateCollectionOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(URL + String.format('/v1/environments/{0}/collections/{1}', new String[]{ updateCollectionOptions.environmentId(), updateCollectionOptions.collectionId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    if (updateCollectionOptions.name() != null) {
+      contentJson.put('name', updateCollectionOptions.name());
+    }
+    if (updateCollectionOptions.description() != null) {
+      contentJson.put('description', updateCollectionOptions.description());
+    }
+    if (updateCollectionOptions.configurationId() != null) {
+      contentJson.put('configuration_id', updateCollectionOptions.configurationId());
+    }
+    builder.bodyJson(JSON.serialize(contentJson));
+  
+    return (DiscoveryV1Models.Collection) createServiceCall(builder.build(), DiscoveryV1Models.Collection.class);
+  }
+
+  /**
+   * Add a document.
+   *
+   * Add a document to a collection with optional metadata.    * The `version` query parameter is still required.    * Returns immediately after the system has accepted the document for processing.    * The user must provide document content, metadata, or both. If the request is missing both document content and metadata, it is rejected.    * The user can set the `Content-Type` parameter on the `file` part to indicate the media type of the document. If the `Content-Type` parameter is missing or is one of the generic media types (for example, `application/octet-stream`), then the service attempts to automatically detect the document's media type.    * The following field names are reserved and will be filtered out if present after normalization: `id`, `score`, `highlight`, and any field with the prefix of: `_`, `+`, or `-`    * Fields with empty name values after normalization are filtered out before indexing.    * Fields containing the following characters after normalization are filtered out before indexing: `#` and `,`.
+   *
+   * @param addDocumentOptions the {@link DiscoveryV1Models.AddDocumentOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.DocumentAccepted} with the response
+   */
+  public DiscoveryV1Models.DocumentAccepted addDocument(DiscoveryV1Models.AddDocumentOptions addDocumentOptions) {
+    IBMWatsonValidator.notNull(addDocumentOptions, 'addDocumentOptions cannot be null');
+    IBMWatsonValidator.isTrue((addDocumentOptions.file() != null) || (addDocumentOptions.metadata() != null), 'At least one of file or metadata must be supplied.');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/environments/{0}/collections/{1}/documents', new String[]{addDocumentOptions.environmentId(), addDocumentOptions.collectionId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (addDocumentOptions.file() != null) {
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(addDocumentOptions.file(), addDocumentOptions.fileContentType());
+      multipartBuilder.addFormDataPart('file', addDocumentOptions.filename(), fileBody);
+    }
+    if (addDocumentOptions.metadata() != null) {
+      multipartBuilder.addFormDataPart('metadata', addDocumentOptions.metadata());
+    }
+    IBMWatsonMultipartBody MultipartBody = multipartBuilder.build();
+    builder.body(MultipartBody)
+      .addHeaders(MultipartBody.getAllHeaders());
+    return (DiscoveryV1Models.DocumentAccepted) createServiceCall(builder.build(), DiscoveryV1Models.DocumentAccepted.class);
+  }
+
+  /**
+   * Delete a document.
+   *
+   * If the given document ID is invalid, or if the document is not found, then the a success response is returned (HTTP status code `200`) with the status set to 'deleted'.
+   *
+   * @param deleteDocumentOptions the {@link DiscoveryV1Models.DeleteDocumentOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteDocument(DiscoveryV1Models.DeleteDocumentOptions deleteDocumentOptions) {
+    IBMWatsonValidator.notNull(deleteDocumentOptions, 'deleteDocumentOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/environments/{0}/collections/{1}/documents/{2}', new String[]{ deleteDocumentOptions.environmentId(), deleteDocumentOptions.collectionId(), deleteDocumentOptions.documentId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * Get document details.
+   *
+   * Fetch status details about a submitted document. **Note:** this operation does not return the document itself. Instead, it returns only the document's processing status and any notices (warnings or errors) that were generated when the document was ingested. Use the query API to retrieve the actual document content.
+   *
+   * @param getDocumentStatusOptions the {@link DiscoveryV1Models.GetDocumentStatusOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.DocumentStatus} with the response
+   */
+  public DiscoveryV1Models.DocumentStatus getDocumentStatus(DiscoveryV1Models.GetDocumentStatusOptions getDocumentStatusOptions) {
+    IBMWatsonValidator.notNull(getDocumentStatusOptions, 'getDocumentStatusOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}/documents/{2}', new String[]{ getDocumentStatusOptions.environmentId(), getDocumentStatusOptions.collectionId(), getDocumentStatusOptions.documentId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    return (DiscoveryV1Models.DocumentStatus) createServiceCall(builder.build(), DiscoveryV1Models.DocumentStatus.class);
+  }
+
+  /**
+   * Query documents in multiple collections.
+   *
+   * See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details.
+   *
+   * @param federatedQueryOptions the {@link DiscoveryV1Models.FederatedQueryOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.QueryResponse} with the response
+   */
+  public DiscoveryV1Models.QueryResponse federatedQuery(DiscoveryV1Models.FederatedQueryOptions federatedQueryOptions) {
+    IBMWatsonValidator.notNull(federatedQueryOptions, 'federatedQueryOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/query', new String[]{ federatedQueryOptions.environmentId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate,
+      'collection_ids' => String.join(federatedQueryOptions.collectionIds(), ','),
+      'filter' => federatedQueryOptions.filter(),
+      'query' => federatedQueryOptions.query(),
+      'natural_language_query' => federatedQueryOptions.naturalLanguageQuery(),
+      'aggregation' => federatedQueryOptions.aggregation(),
+      'count' => String.valueOf(federatedQueryOptions.count()),
+      'return_fields' => String.join(federatedQueryOptions.returnField(), ','),
+      'offset' => String.valueOf(federatedQueryOptions.offset()),
+      'sort' => String.join(federatedQueryOptions.sortField(), ','),
+      'highlight' => String.valueOf(federatedQueryOptions.highlight()),
+      'deduplicate' => String.valueOf(federatedQueryOptions.deduplicate()),
+      'deduplicate.field' => federatedQueryOptions.deduplicateField()
+    });
+  
+    return (DiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), DiscoveryV1Models.QueryResponse.class);
+  }
+
+  /**
+   * Query multiple collection system notices.
+   *
+   * Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when ingesting documents and performing relevance training. See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details on the query language.
+   *
+   * @param federatedQueryNoticesOptions the {@link DiscoveryV1Models.FederatedQueryNoticesOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.QueryNoticesResponse} with the response
+   */
+  public DiscoveryV1Models.QueryNoticesResponse federatedQueryNotices(DiscoveryV1Models.FederatedQueryNoticesOptions federatedQueryNoticesOptions) {
+    IBMWatsonValidator.notNull(federatedQueryNoticesOptions, 'federatedQueryNoticesOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/notices', new String[]{ federatedQueryNoticesOptions.environmentId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate,
+      'collection_ids' => String.join(federatedQueryNoticesOptions.collectionIds(), ','),
+      'filter' => federatedQueryNoticesOptions.filter(),
+      'query' => federatedQueryNoticesOptions.query(),
+      'natural_language_query' => federatedQueryNoticesOptions.naturalLanguageQuery(),
+      'aggregation' => federatedQueryNoticesOptions.aggregation(),
+      'count' => String.valueOf(federatedQueryNoticesOptions.count()),
+      'return_fields' => String.join(federatedQueryNoticesOptions.returnField(), ','),
+      'offset' => String.valueOf(federatedQueryNoticesOptions.offset()),
+      'sort' => String.join(federatedQueryNoticesOptions.sortField(), ','),
+      'highlight' => String.valueOf(federatedQueryNoticesOptions.highlight()),
+      'deduplicate.field' => federatedQueryNoticesOptions.deduplicateField()
+    });
+  
+    return (DiscoveryV1Models.QueryNoticesResponse) createServiceCall(builder.build(), DiscoveryV1Models.QueryNoticesResponse.class);
+  }
+
+  /**
+   * Query documents.
+   *
+   * See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details.
+   *
+   * @param queryOptions the {@link DiscoveryV1Models.QueryOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.QueryResponse} with the response
+   */
+  public DiscoveryV1Models.QueryResponse query(DiscoveryV1Models.QueryOptions queryOptions) {
+    IBMWatsonValidator.notNull(queryOptions, 'queryOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}/query', new String[]{ queryOptions.environmentId(), queryOptions.collectionId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate,
+      'filter' => queryOptions.filter(),
+      'query' => queryOptions.query(),
+      'natural_language_query' => queryOptions.naturalLanguageQuery(),
+      'passages' => String.valueOf(queryOptions.passages()),
+      'aggregation' => queryOptions.aggregation(),
+      'count' => String.valueOf(queryOptions.count()),
+      'return' => String.join(queryOptions.returnField(), ','),
+      'offset' => String.valueOf(queryOptions.offset()),
+      'sort' => String.join(queryOptions.sortField(), ','),
+      'highlight' => String.valueOf(queryOptions.highlight()),
+      'passages.fields' => String.join(queryOptions.passagesFields(), ','),
+      'passages.count' => String.valueOf(queryOptions.passagesCount()),
+      'passages.characters' => String.valueOf(queryOptions.passagesCharacters()),
+      'deduplicate' => String.valueOf(queryOptions.deduplicate()),
+      'deduplicate.field' => queryOptions.deduplicateField()
+    });
+  
+    return (DiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), DiscoveryV1Models.QueryResponse.class);
+  }
+
+  /**
+   * Query system notices.
+   *
+   * Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when ingesting documents and performing relevance training. See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details on the query language.
+   *
+   * @param queryNoticesOptions the {@link DiscoveryV1Models.QueryNoticesOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.QueryNoticesResponse} with the response
+   */
+  public DiscoveryV1Models.QueryNoticesResponse queryNotices(DiscoveryV1Models.QueryNoticesOptions queryNoticesOptions) {
+    IBMWatsonValidator.notNull(queryNoticesOptions, 'queryNoticesOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}/notices', new String[]{ queryNoticesOptions.environmentId(), queryNoticesOptions.collectionId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate,
+      'filter' => queryNoticesOptions.filter(),
+      'query' => queryNoticesOptions.query(),
+      'natural_language_query' => queryNoticesOptions.naturalLanguageQuery(),
+      'passages' => String.valueOf(queryNoticesOptions.passages()),
+      'aggregation' => queryNoticesOptions.aggregation(),
+      'count' => String.valueOf(queryNoticesOptions.count()),
+      'return_fields' => String.join(queryNoticesOptions.returnField(), ','),
+      'offset' => String.valueOf(queryNoticesOptions.offset()),
+      'sort' => String.join(queryNoticesOptions.sortField(), ','),
+      'highlight' => String.valueOf(queryNoticesOptions.highlight()),
+      'passages.fields' => String.join(queryNoticesOptions.passagesFields(), ','),
+      'passages.count' => String.valueOf(queryNoticesOptions.passagesCount()),
+      'passages.characters' => String.valueOf(queryNoticesOptions.passagesCharacters()),
+      'deduplicate.field' => queryNoticesOptions.deduplicateField()
+    });
+  
+    return (DiscoveryV1Models.QueryNoticesResponse) createServiceCall(builder.build(), DiscoveryV1Models.QueryNoticesResponse.class);
+  }
+
+  /**
+   * Adds a query to the training data for this collection. The query can contain a filter and natural language query.
+   *
+   * @param addTrainingDataOptions the {@link DiscoveryV1Models.AddTrainingDataOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.TrainingQuery} with the response
+   */
+  public DiscoveryV1Models.TrainingQuery addTrainingData(DiscoveryV1Models.AddTrainingDataOptions addTrainingDataOptions) {
+    IBMWatsonValidator.notNull(addTrainingDataOptions, 'addTrainingDataOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ addTrainingDataOptions.environmentId(), addTrainingDataOptions.collectionId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    if (addTrainingDataOptions.naturalLanguageQuery() != null) {
+      contentJson.put('natural_language_query', addTrainingDataOptions.naturalLanguageQuery());
+    }
+    if (addTrainingDataOptions.filter() != null) {
+      contentJson.put('filter', addTrainingDataOptions.filter());
+    }
+    if (addTrainingDataOptions.examples() != null) {
+      contentJson.put('examples', addTrainingDataOptions.examples());
+    }
+    builder.bodyJson(JSON.serialize(contentJson));
+  
+    return (DiscoveryV1Models.TrainingQuery) createServiceCall(builder.build(), DiscoveryV1Models.TrainingQuery.class);
+  }
+
+  /**
+   * Adds a new example to this training data query.
+   *
+   * @param createTrainingExampleOptions the {@link DiscoveryV1Models.CreateTrainingExampleOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.TrainingExample} with the response
+   */
+  public DiscoveryV1Models.TrainingExample createTrainingExample(DiscoveryV1Models.CreateTrainingExampleOptions createTrainingExampleOptions) {
+    IBMWatsonValidator.notNull(createTrainingExampleOptions, 'createTrainingExampleOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples', new String[]{ createTrainingExampleOptions.environmentId(), createTrainingExampleOptions.collectionId(), createTrainingExampleOptions.queryId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    if (createTrainingExampleOptions.documentId() != null) {
+      contentJson.put('document_id', createTrainingExampleOptions.documentId());
+    }
+    if (createTrainingExampleOptions.crossReference() != null) {
+      contentJson.put('cross_reference', createTrainingExampleOptions.crossReference());
+    }
+    if (createTrainingExampleOptions.relevance() != null) {
+      contentJson.put('relevance', createTrainingExampleOptions.relevance());
+    }
+    builder.bodyJson(JSON.serialize(contentJson));
+  
+    return (DiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), DiscoveryV1Models.TrainingExample.class);
+  }
+
+  /**
+   * Clears all training data for this collection.
+   *
+   * @param deleteAllTrainingDataOptions the {@link DiscoveryV1Models.DeleteAllTrainingDataOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteAllTrainingData(DiscoveryV1Models.DeleteAllTrainingDataOptions deleteAllTrainingDataOptions) {
+    IBMWatsonValidator.notNull(deleteAllTrainingDataOptions, 'deleteAllTrainingDataOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ deleteAllTrainingDataOptions.environmentId(), deleteAllTrainingDataOptions.collectionId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * Removes the training data and all associated examples from the training data set.
+   *
+   * @param deleteTrainingDataOptions the {@link DiscoveryV1Models.DeleteTrainingDataOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteTrainingData(DiscoveryV1Models.DeleteTrainingDataOptions deleteTrainingDataOptions) {
+    IBMWatsonValidator.notNull(deleteTrainingDataOptions, 'deleteTrainingDataOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}', new String[]{ deleteTrainingDataOptions.environmentId(), deleteTrainingDataOptions.collectionId(), deleteTrainingDataOptions.queryId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * Removes the example with the given ID for the training data query.
+   *
+   * @param deleteTrainingExampleOptions the {@link DiscoveryV1Models.DeleteTrainingExampleOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteTrainingExample(DiscoveryV1Models.DeleteTrainingExampleOptions deleteTrainingExampleOptions) {
+    IBMWatsonValidator.notNull(deleteTrainingExampleOptions, 'deleteTrainingExampleOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ deleteTrainingExampleOptions.environmentId(), deleteTrainingExampleOptions.collectionId(), deleteTrainingExampleOptions.queryId(), deleteTrainingExampleOptions.exampleId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * Shows details for a specific training data query, including the query string and all examples.
+   *
+   * @param getTrainingDataOptions the {@link DiscoveryV1Models.GetTrainingDataOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.TrainingQuery} with the response
+   */
+  public DiscoveryV1Models.TrainingQuery getTrainingData(DiscoveryV1Models.GetTrainingDataOptions getTrainingDataOptions) {
+    IBMWatsonValidator.notNull(getTrainingDataOptions, 'getTrainingDataOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}', new String[]{ getTrainingDataOptions.environmentId(), getTrainingDataOptions.collectionId(), getTrainingDataOptions.queryId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    return (DiscoveryV1Models.TrainingQuery) createServiceCall(builder.build(), DiscoveryV1Models.TrainingQuery.class);
+  }
+
+  /**
+   * Gets the details for this training example.
+   *
+   * @param getTrainingExampleOptions the {@link DiscoveryV1Models.GetTrainingExampleOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.TrainingExample} with the response
+   */
+  public DiscoveryV1Models.TrainingExample getTrainingExample(DiscoveryV1Models.GetTrainingExampleOptions getTrainingExampleOptions) {
+    IBMWatsonValidator.notNull(getTrainingExampleOptions, 'getTrainingExampleOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ getTrainingExampleOptions.environmentId(), getTrainingExampleOptions.collectionId(), getTrainingExampleOptions.queryId(), getTrainingExampleOptions.exampleId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    return (DiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), DiscoveryV1Models.TrainingExample.class);
+  }
+
+  /**
+   * Lists the training data for this collection.
+   *
+   * @param listTrainingDataOptions the {@link DiscoveryV1Models.ListTrainingDataOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.TrainingDataSet} with the response
+   */
+  public DiscoveryV1Models.TrainingDataSet listTrainingData(DiscoveryV1Models.ListTrainingDataOptions listTrainingDataOptions) {
+    IBMWatsonValidator.notNull(listTrainingDataOptions, 'listTrainingDataOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(URL + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ listTrainingDataOptions.environmentId(), listTrainingDataOptions.collectionId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+  
+    return (DiscoveryV1Models.TrainingDataSet) createServiceCall(builder.build(), DiscoveryV1Models.TrainingDataSet.class);
+  }
+
+  /**
+   * Changes the label or cross reference query for this training example.
+   *
+   * @param updateTrainingExampleOptions the {@link DiscoveryV1Models.UpdateTrainingExampleOptions} containing the options for the call
+   * @return the {@link DiscoveryV1Models.TrainingExample} with the response
+  */
+  public DiscoveryV1Models.TrainingExample updateTrainingExample(DiscoveryV1Models.UpdateTrainingExampleOptions updateTrainingExampleOptions) {
+    IBMWatsonValidator.notNull(updateTrainingExampleOptions, 'updateTrainingExampleOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(URL + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ updateTrainingExampleOptions.environmentId(), updateTrainingExampleOptions.collectionId(), updateTrainingExampleOptions.queryId(), updateTrainingExampleOptions.exampleId() }));
+    builder.queryParams(new Map<String, String> {
+      'version' => versionDate
+    });
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    if (updateTrainingExampleOptions.crossReference() != null) {
+      contentJson.put('cross_reference', updateTrainingExampleOptions.crossReference());
+    }
+    if (updateTrainingExampleOptions.relevance() != null) {
+      contentJson.put('relevance', updateTrainingExampleOptions.relevance());
+    }
+    builder.bodyJson(JSON.serialize(contentJson));
+  
+    return (DiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), DiscoveryV1Models.TrainingExample.class);
+  }
+}
