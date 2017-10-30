@@ -136,6 +136,10 @@ ConversationV1Models.Intent intent = conversation.createIntent(options);
 
 The manner of instantiating and using services should be consistent no matter which you decide to use, which should make it easy to explore the many capabilities Watson services have to offer.
 
+### Functional Tests
+
+The "force-app\main\test" folder contains the example calls for each service. These examples are used for functional testing of services. Developers can use them for reference and testing the installed SDK.
+
 ## Contributing
 
 If you're interested in helping to make this project better, see [Contributing.md](.github/Contributing.md).

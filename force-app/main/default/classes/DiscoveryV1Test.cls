@@ -793,9 +793,9 @@ private class DiscoveryV1Test {
     DiscoveryV1Models.QueryNoticesResult queryNoticesResult=new DiscoveryV1Models.QueryNoticesResult();
     queryNoticesResult.setId('5ae96bb9-80e5-43ea-916e-1f3412fbc283');
     queryNoticesResult.setScore(2);
-    IBMWatsonMapModel metadata = new IBMWatsonMapModel();
-    metadata.put('key', 'value');
-    queryNoticesResult.setMetadata(metadata);
+    IBMWatsonMapModel mapModel=new IBMWatsonMapModel();
+    mapModel.put('key','value');
+    queryNoticesResult.setMetadata(mapModel);
     queryNoticesResult.setCollectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283');
     resp.setResults(new List<DiscoveryV1Models.QueryNoticesResult>{queryNoticesResult});
     DiscoveryV1Models.QueryAggregation queryAggregation=new DiscoveryV1Models.QueryAggregation();
@@ -1287,6 +1287,40 @@ private class DiscoveryV1Test {
       .build();
     discovery.deleteTrainingExample(options);
   //  system.assertEquals(resp.status,'deleted');
+    Test.stopTest();
+  }
+  
+  /**
+   *  Add a document.
+   *
+   * then test using testGetDocumentStatus if document is loaded successfully 
+   */
+  static testMethod void testAddDocument() {
+    String body=IBMWatsonMockResponses.documentAccepted();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+    DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+    //EncodingUtil.base64Encode(B)
+    IBMWatsonFile testfile=new IBMWatsonFile.FileBuilder()
+      .body(Blob.valueOf('test string'))
+      .name('test.txt')
+      .description('test description')
+      .contentType('text/plain')
+      .build();
+    DiscoveryV1Models.AddDocumentOptions options = new DiscoveryV1Models.AddDocumentOptionsBuilder()
+      .environmentId('environment_id')
+      .collectionId('collection_id')
+      .file(testfile)
+      .filename('test.txt')
+      .fileContentType('text/plain')
+      .build();
+    DiscoveryV1Models.DocumentAccepted resp = 
+      discovery.addDocument(options);
+    system.assertEquals(resp.getDocumentId(),'f1360220-ea2d-4271-9d62-89a910b13c37');
+    system.assertEquals(resp.getStatus(),'processing');
     Test.stopTest();
   }
 }

@@ -988,4 +988,10 @@ public class IBMWatsonMockResponses {
         '}' +
         '}';
   }
+  public static String documentAccepted() {
+    return '{' +
+              '"document_id": "f1360220-ea2d-4271-9d62-89a910b13c37",' +
+              '"status": "processing"' +
+           '}';
+  }
 }
