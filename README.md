@@ -12,22 +12,21 @@ You can automatically deploy the SDK to a new scratch environment using the _Dep
 
 [![Deploy](https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.com/)
 
-
 ### Manual deployment
 
-
 1. Clone this repository from GitHub using the following command:
+
     ```bash
     git clone git@github.com:germanattanasio/salesforce-sdk.git
     ```
 
-2. Create a new scratch environment (optional if you don't want to re-use an existing one):
+1. Create a new scratch environment (optional if you don't want to re-use an existing one):
 
     ```bash
     sfdx force:org:create -a watsonSdk -s -f config/project-scratch-def.json
     ```
 
-3. Push the source to the scratch environment:
+1. Push the source to the scratch environment:
 
     ```bash
     sfdx force:source:push
@@ -35,26 +34,25 @@ You can automatically deploy the SDK to a new scratch environment using the _Dep
 
 If you want to use the Watson SDK within a non-scratch environment you can deploy it using the Salesforce DX CLI.
 
-
 1. Authenticate the Salesforce DX CLI to the target environment:
 
     ```bash
     sfdx force:auth:web:login -a TargetOrg
     ```
 
-2. Create an output directory:
+1. Create an output directory:
 
     ```bash
     mkdir mdapioutput
     ```
 
-3. Convert the source code:
+1. Convert the source code:
 
     ```bash
     sfdx force:source:convert -d mdapioutput/
     ```
 
-4. Deploy the source code:
+1. Deploy the source code:
 
     ```bash
     sfdx force:mdapi:deploy -d mdapipackage/ -u TargetOrg -w 100
@@ -65,21 +63,20 @@ If you want to use the Watson SDK within a non-scratch environment you can deplo
 You can install or update the SDK using the Ant Build Tool by following these steps:
 
 1. Clone this repository from GitHub using the following command:
+
     ```bash
     git clone git@github.com:germanattanasio/salesforce-sdk.git
     ```
 
-2. Edit `install/build.properties` to insert your Salesforce username and password.  Since you will be using the API to access Salesforce, remember to [append your Security Token](http://www.salesforce.com/us/developer/docs/api/Content/sforce_api_concepts_security.htm#topic-title_login_token) to your password.
+1. Edit `install/build.properties` to insert your Salesforce username and password.  Since you will be using the API to access Salesforce, remember to [append your Security Token](http://www.salesforce.com/us/developer/docs/api/Content/sforce_api_concepts_security.htm#topic-title_login_token) to your password.
 
-3. Open your command line to the `install` folder, then deploy using Ant:
+1. Open your command line to the `install` folder, then deploy using Ant:
 
     ```bash
-    $ ant deployWatson
+    ant deployWatson
     ```
 
 ## Getting Started
-
-### Getting Service Credentials
 
 Using the Watson services require service credentials in [Bluemix](https://console.bluemix.net), meaning you will need to create a Bluemix account if you do not have one already.
 
@@ -87,58 +84,103 @@ To get your service-specific credentials, follow these steps:
 
 1. Log in to [Bluemix](https://console.bluemix.net)
 
-2. Create an instance of the desired service:
+1. Create an instance of the desired service:
     1. In the Bluemix **Catalog**, select the service you want to use.
-    2. Click **Create**.
+    1. Click **Create**.
 
-3. Copy your credentials:
+1. Copy your credentials:
     1. On the left side of the page, click **Service Credentials**, and then **View credentials** to view your service credentials.
-    2. Copy `url`, `username` and `password`.
+    1. Copy `url`, `username` and `password`.
 
-### Using the Services
+There are two ways of specifying credentials, [Using Named Credentials](#using-named-credentials) or [Specifiying credentials in the Apex code](#specifiying-credentials-in-the-apex-code)
+
+### Using `Named Credentials`
+
+When creating a service instance like with `new Discovery()`. Each service loads the credentials from `Named Credentials`. The SDK will use the service name and API version to build the `Named Credentials` name.
+
+For example
+
+```java
+DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+```
+
+Will look for the `watson_discovery_v1` named credentials while:
+
+```java
+Conversation discovery = new Conversation('2017-05-26');
+```
+
+Will look for `watson_conversation_v1`.
+
+In order to create **Named credentials**:
+
+1. Go to _Setup_
+1. Enter _Named Credentials_ in the quick find box and select the highlighted entry
+1. Click on _New Named Credential_
+1. Enter the following values:
+    * Label: _A unique label that identifies your named credentials_
+    * Name: `watson_<service_name_snake_case>_<api_version>`, e.g: `watson_conversation_v1`
+    * URL: `<SERVICE_URL>`, e.g: `https://gateway.watsonplatform.net/conversation/api`
+    * Identity Type: **Named Principial**
+    * Authentication Protocol: **Password Authentication**
+    * Username: `<USERNAME>`
+    * Password: `<PASSWORD>`
+1. Click on Save.
+
+### Specifiying credentials in the Apex code
+
+Storing credentials in the Apex code is not recommended. If possible, use **Named Credentials**.
+
+For example:
+
+```java
+DiscoveryV1 discovery = new DiscoveryV1(DiscoveryV1.VERSION_DATE_2017_09_01);
+discovery.setEndPoint('URL');
+discovery.setUsernameAndPassword('USERNAME', 'PASSWORD');
+```
+
+## Examples
 
 Getting started using a service is very simple! All services follow the same pattern of service instantiation, option building, and requesting. To get an idea, below is an example of using the Discovery service to get a list of your current environments:
 
 ```java
-// instantiating service with Bluemix credentials
+// Will load credentials from the `watson_discovery_v1` named credential
 DiscoveryV1 discovery = new DiscoveryV1(DiscoveryV1.VERSION_DATE_2017_09_01);
-discovery.setEndPoint(<url>);
-discovery.setUsernameAndPassword(<username>, <password>);
 
 // configuring options for listing environments
-DiscoveryV1Models.ListEnvironmentsOptions options = new DiscoveryV1Models
-  .ListEnvironmentsOptionsBuilder()
+DiscoveryV1Models.ListEnvironmentsOptions options = new
+  DiscoveryV1Models.ListEnvironmentsOptionsBuilder()
   .build();
 
 // making request
-DiscoveryV1Models.ListEnvironmentsResponse environmentList 
-  = service.listEnvironments(options);
+DiscoveryV1Models.ListEnvironmentsResponse environmentList = service.listEnvironments(options);
+System.debug(environmentList);
 ```
 
 Similarly, here is an example of creating an intent in the Conversation service:
 
 ```java
-// instantiating service with Bluemix credentials
+// Will load credentials from the `watson_conversation_v1` named credential
 ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
-conversation.setEndPoint(<url>);
-conversation.setUsernameAndPassword(<username>, <password>);
 
 // configuring options for creating intent
-ConversationV1Models.CreateIntentOptions options = new ConversationV1Models.CreateIntentOptionsBuilder()
-    .workspaceId(<workspace_id>)
-    .intent('MyIntent')
-    .description('This is an example of creating an intent!')
-    .build();
+ConversationV1Models.CreateIntentOptions options = new
+  ConversationV1Models.CreateIntentOptionsBuilder()
+  .workspaceId('<workspace_id>')
+  .intent('MyIntent')
+  .description('This is an example of creating an intent!')
+  .build();
 
 // making request
 ConversationV1Models.Intent intent = conversation.createIntent(options);
+System.debug(intent);
 ```
 
 The manner of instantiating and using services should be consistent no matter which you decide to use, which should make it easy to explore the many capabilities Watson services have to offer.
 
-### Functional Tests
+## Functional Tests
 
-The "force-app\main\test" folder contains the example calls for each service. These examples are used for functional testing of services. Developers can use them for reference and testing the installed SDK.
+The `force-app/main/test` folder contains the example calls for each service. These examples are used for functional testing of services. Developers can use them for reference and testing the installed SDK.
 
 ## Contributing
 
