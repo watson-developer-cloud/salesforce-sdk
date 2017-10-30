@@ -50,7 +50,7 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     if (String.isBlank(getEndPoint())) {
       setEndPoint(URL);
     }
-    if(String.isBlank(versionDate)) {
+    if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('Version cannot be null.');
     }
     this.versionDate = versionDate;
@@ -77,9 +77,9 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    * @param profileOptions the {@link IBMPersonalityInsightsV3Models.ProfileOptions} containing the options for the call
    * @return the {@link IBMPersonalityInsightsV3Models.Profile} with the response
    */
-  public IBMPersonalityInsightsV3Models.Profile profile(PersonalityInsightsV3Models.ProfileOptions profileOptions) {
+  public IBMPersonalityInsightsV3Models.Profile profile(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(URL + '/v3/profile');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
       builder.addHeader('content-type', profileOptions.contentType());
       if (profileOptions.contentLanguage() != null) {
         builder.addHeader('Content-Language', profileOptions.contentLanguage());
@@ -95,7 +95,8 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     });
     if (profileOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
       builder.bodyJson(JSON.serialize(profileOptions.content()));
-    } else {
+    }
+    else {
       builder.bodyContent(profileOptions.body(), profileOptions.contentType());
     }
 
