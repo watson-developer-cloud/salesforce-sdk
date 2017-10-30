@@ -962,4 +962,30 @@ public class IBMWatsonMockResponses {
         '}' +
       '}';
   }
+
+  public static String counterexample() {
+    return '{' +
+        '"text": "Counterexample for test_workspace",' +
+        '"created": "2015-12-06T23:53:59.153Z",' +
+        '"updated": "2017-10-18T15:44:56.800"' +
+        '}';
+  }
+
+  public static String counterexampleCollection() {
+    return '{' +
+        '"counterexamples": [' +
+        '{' +
+          '"text": "Counterexample for test_workspace",' +
+          '"created": "2015-12-06T23:53:59.153Z",' +
+          '"updated": "2017-10-18T15:44:56.800"' +
+        '}' +
+        '],' +
+        '"pagination": {' +
+          '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1",' +
+          '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1",' +
+          '"total": 1,' +
+          '"matched": 1' +
+        '}' +
+        '}';
+  }
 }

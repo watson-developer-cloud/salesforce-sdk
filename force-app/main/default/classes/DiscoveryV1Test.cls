@@ -793,7 +793,9 @@ private class DiscoveryV1Test {
     DiscoveryV1Models.QueryNoticesResult queryNoticesResult=new DiscoveryV1Models.QueryNoticesResult();
     queryNoticesResult.setId('5ae96bb9-80e5-43ea-916e-1f3412fbc283');
     queryNoticesResult.setScore(2);
-    queryNoticesResult.setMetadata(new Map<String, String>{'key'=>'value'});
+    IBMWatsonMapModel metadata = new IBMWatsonMapModel();
+    metadata.put('key', 'value');
+    queryNoticesResult.setMetadata(metadata);
     queryNoticesResult.setCollectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283');
     resp.setResults(new List<DiscoveryV1Models.QueryNoticesResult>{queryNoticesResult});
     DiscoveryV1Models.QueryAggregation queryAggregation=new DiscoveryV1Models.QueryAggregation();

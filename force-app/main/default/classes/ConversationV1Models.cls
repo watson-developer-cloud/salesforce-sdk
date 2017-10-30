@@ -64,7 +64,7 @@ public class ConversationV1Models {
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+        if (!baseProps.contains(key)) {
           ret.put(key, jsonMap.get(key));
         }
       }
@@ -412,9 +412,9 @@ public class ConversationV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private Map<String, String> output_serialized_name;
-    private Map<String, String> context_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel output_serialized_name;
+    private IBMWatsonMapModel context_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
     private List<DialogNodeAction> actions_serialized_name;
     private String title_serialized_name;
@@ -478,7 +478,7 @@ public class ConversationV1Models {
      *
      * @return the output_serialized_name
      */
-    public Map<String, String> output() {
+    public IBMWatsonMapModel output() {
       return output_serialized_name;
     }
     /**
@@ -488,7 +488,7 @@ public class ConversationV1Models {
      *
      * @return the context_serialized_name
      */
-    public Map<String, String> context() {
+    public IBMWatsonMapModel context() {
       return context_serialized_name;
     }
     /**
@@ -498,7 +498,7 @@ public class ConversationV1Models {
      *
      * @return the metadata_serialized_name
      */
-    public Map<String, String> metadata() {
+    public IBMWatsonMapModel metadata() {
       return metadata_serialized_name;
     }
     /**
@@ -599,9 +599,9 @@ public class ConversationV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private Map<String, String> output_serialized_name;
-    private Map<String, String> context_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel output_serialized_name;
+    private IBMWatsonMapModel context_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
     private List<DialogNodeAction> actions_serialized_name;
     private String title_serialized_name;
@@ -726,7 +726,7 @@ public class ConversationV1Models {
      * @param output_serialized_name the output_serialized_name
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder output(Map<String, String> output_serialized_name) {
+    public CreateDialogNodeBuilder output(IBMWatsonMapModel output_serialized_name) {
       this.output_serialized_name = output_serialized_name;
       return this;
     }
@@ -737,7 +737,7 @@ public class ConversationV1Models {
      * @param context_serialized_name the context_serialized_name
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder context(Map<String, String> context_serialized_name) {
+    public CreateDialogNodeBuilder context(IBMWatsonMapModel context_serialized_name) {
       this.context_serialized_name = context_serialized_name;
       return this;
     }
@@ -748,7 +748,7 @@ public class ConversationV1Models {
      * @param metadata_serialized_name the metadata_serialized_name
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder metadata(Map<String, String> metadata_serialized_name) {
+    public CreateDialogNodeBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
       return this;
     }
@@ -831,9 +831,9 @@ public class ConversationV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private Map<String, String> output_serialized_name;
-    private Map<String, String> context_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel output_serialized_name;
+    private IBMWatsonMapModel context_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
     private List<DialogNodeAction> actions_serialized_name;
     private String title_serialized_name;
@@ -907,7 +907,7 @@ public class ConversationV1Models {
      *
      * @return the output_serialized_name
      */
-    public Map<String, String> output() {
+    public IBMWatsonMapModel output() {
       return output_serialized_name;
     }
     /**
@@ -917,7 +917,7 @@ public class ConversationV1Models {
      *
      * @return the context_serialized_name
      */
-    public Map<String, String> context() {
+    public IBMWatsonMapModel context() {
       return context_serialized_name;
     }
     /**
@@ -927,7 +927,7 @@ public class ConversationV1Models {
      *
      * @return the metadata_serialized_name
      */
-    public Map<String, String> metadata() {
+    public IBMWatsonMapModel metadata() {
       return metadata_serialized_name;
     }
     /**
@@ -1031,9 +1031,9 @@ public class ConversationV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private Map<String, String> output_serialized_name;
-    private Map<String, String> context_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel output_serialized_name;
+    private IBMWatsonMapModel context_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
     private List<DialogNodeAction> actions_serialized_name;
     private String title_serialized_name;
@@ -1172,7 +1172,7 @@ public class ConversationV1Models {
      * @param output_serialized_name the output_serialized_name
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder output(Map<String, String> output_serialized_name) {
+    public CreateDialogNodeOptionsBuilder output(IBMWatsonMapModel output_serialized_name) {
       this.output_serialized_name = output_serialized_name;
       return this;
     }
@@ -1183,7 +1183,7 @@ public class ConversationV1Models {
      * @param context_serialized_name the context_serialized_name
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder context(Map<String, String> context_serialized_name) {
+    public CreateDialogNodeOptionsBuilder context(IBMWatsonMapModel context_serialized_name) {
       this.context_serialized_name = context_serialized_name;
       return this;
     }
@@ -1194,7 +1194,7 @@ public class ConversationV1Models {
      * @param metadata_serialized_name the metadata_serialized_name
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder metadata(Map<String, String> metadata_serialized_name) {
+    public CreateDialogNodeOptionsBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
       return this;
     }
@@ -1273,7 +1273,7 @@ public class ConversationV1Models {
   public class CreateEntity {
     private String entity_serialized_name;
     private String description_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private List<CreateValue> values_serialized_name;
     private Boolean fuzzy_match_serialized_name;
     /**
@@ -1303,7 +1303,7 @@ public class ConversationV1Models {
      *
      * @return the metadata_serialized_name
      */
-    public Map<String, String> metadata() {
+    public IBMWatsonMapModel metadata() {
       return metadata_serialized_name;
     }
     /**
@@ -1352,7 +1352,7 @@ public class ConversationV1Models {
   public class CreateEntityBuilder {
     private String entity_serialized_name;
     private String description_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private List<CreateValue> values_serialized_name;
     private Boolean fuzzy_match_serialized_name;
 
@@ -1431,7 +1431,7 @@ public class ConversationV1Models {
      * @param metadata_serialized_name the metadata_serialized_name
      * @return the CreateEntity builder
      */
-    public CreateEntityBuilder metadata(Map<String, String> metadata_serialized_name) {
+    public CreateEntityBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
       return this;
     }
@@ -1467,7 +1467,7 @@ public class ConversationV1Models {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String description_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private List<CreateValue> values_serialized_name;
     private Boolean fuzzy_match_serialized_name;
     /**
@@ -1507,7 +1507,7 @@ public class ConversationV1Models {
      *
      * @return the metadata_serialized_name
      */
-    public Map<String, String> metadata() {
+    public IBMWatsonMapModel metadata() {
       return metadata_serialized_name;
     }
     /**
@@ -1559,7 +1559,7 @@ public class ConversationV1Models {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String description_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private List<CreateValue> values_serialized_name;
     private Boolean fuzzy_match_serialized_name;
 
@@ -1652,7 +1652,7 @@ public class ConversationV1Models {
      * @param metadata_serialized_name the metadata_serialized_name
      * @return the CreateEntityOptions builder
      */
-    public CreateEntityOptionsBuilder metadata(Map<String, String> metadata_serialized_name) {
+    public CreateEntityOptionsBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
       return this;
     }
@@ -2371,7 +2371,7 @@ public class ConversationV1Models {
    */
   public class CreateValue {
     private String value_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private List<String> synonyms_serialized_name;
     private List<String> patterns_serialized_name;
     private String type_serialized_name;
@@ -2392,7 +2392,7 @@ public class ConversationV1Models {
      *
      * @return the metadata_serialized_name
      */
-    public Map<String, String> metadata() {
+    public IBMWatsonMapModel metadata() {
       return metadata_serialized_name;
     }
     /**
@@ -2450,7 +2450,7 @@ public class ConversationV1Models {
    */
   public class CreateValueBuilder {
     private String value_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private List<String> synonyms_serialized_name;
     private List<String> patterns_serialized_name;
     private String type_serialized_name;
@@ -2534,7 +2534,7 @@ public class ConversationV1Models {
      * @param metadata_serialized_name the metadata_serialized_name
      * @return the CreateValue builder
      */
-    public CreateValueBuilder metadata(Map<String, String> metadata_serialized_name) {
+    public CreateValueBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
       return this;
     }
@@ -2582,7 +2582,7 @@ public class ConversationV1Models {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private List<String> synonyms_serialized_name;
     private List<String> patterns_serialized_name;
     private String type_serialized_name;
@@ -2623,7 +2623,7 @@ public class ConversationV1Models {
      *
      * @return the metadata_serialized_name
      */
-    public Map<String, String> metadata() {
+    public IBMWatsonMapModel metadata() {
       return metadata_serialized_name;
     }
     /**
@@ -2687,7 +2687,7 @@ public class ConversationV1Models {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private List<String> synonyms_serialized_name;
     private List<String> patterns_serialized_name;
     private String type_serialized_name;
@@ -2799,7 +2799,7 @@ public class ConversationV1Models {
      * @param metadata_serialized_name the metadata_serialized_name
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder metadata(Map<String, String> metadata_serialized_name) {
+    public CreateValueOptionsBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
       return this;
     }
@@ -2851,7 +2851,7 @@ public class ConversationV1Models {
     private List<CreateEntity> entities_serialized_name;
     private List<CreateDialogNode> dialog_nodes_serialized_name;
     private List<CreateCounterexample> counterexamples_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
     /**
      * Gets the name_serialized_name.
@@ -2930,7 +2930,7 @@ public class ConversationV1Models {
      *
      * @return the metadata_serialized_name
      */
-    public Map<String, String> metadata() {
+    public IBMWatsonMapModel metadata() {
       return metadata_serialized_name;
     }
     /**
@@ -2977,7 +2977,7 @@ public class ConversationV1Models {
     private List<CreateEntity> entities_serialized_name;
     private List<CreateDialogNode> dialog_nodes_serialized_name;
     private List<CreateCounterexample> counterexamples_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
 
     private CreateWorkspaceOptionsBuilder(CreateWorkspaceOptions create_workspace_options) {
@@ -3154,7 +3154,7 @@ public class ConversationV1Models {
      * @param metadata_serialized_name the metadata_serialized_name
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder metadata(Map<String, String> metadata_serialized_name) {
+    public CreateWorkspaceOptionsBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
       return this;
     }
@@ -4104,9 +4104,9 @@ public class ConversationV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private Map<String, String> output_serialized_name;
-    private Map<String, String> context_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel output_serialized_name;
+    private IBMWatsonMapModel context_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
@@ -4178,7 +4178,7 @@ public class ConversationV1Models {
      * @return the output_serialized_name
      */
     @AuraEnabled
-    public Map<String, String> getOutput() {
+    public IBMWatsonMapModel getOutput() {
       return output_serialized_name;
     }
     /**
@@ -4189,7 +4189,7 @@ public class ConversationV1Models {
      * @return the context_serialized_name
      */
     @AuraEnabled
-    public Map<String, String> getContext() {
+    public IBMWatsonMapModel getContext() {
       return context_serialized_name;
     }
     /**
@@ -4200,7 +4200,7 @@ public class ConversationV1Models {
      * @return the metadata_serialized_name
      */
     @AuraEnabled
-    public Map<String, String> getMetadata() {
+    public IBMWatsonMapModel getMetadata() {
       return metadata_serialized_name;
     }
     /**
@@ -4342,7 +4342,7 @@ public class ConversationV1Models {
      *
      * @param output_serialized_name the new output_serialized_name
      */
-    public void setOutput(final Map<String, String> output_serialized_name) {
+    public void setOutput(final IBMWatsonMapModel output_serialized_name) {
       this.output_serialized_name = output_serialized_name;
     }
 
@@ -4351,7 +4351,7 @@ public class ConversationV1Models {
      *
      * @param context_serialized_name the new context_serialized_name
      */
-    public void setContext(final Map<String, String> context_serialized_name) {
+    public void setContext(final IBMWatsonMapModel context_serialized_name) {
       this.context_serialized_name = context_serialized_name;
     }
 
@@ -4360,7 +4360,7 @@ public class ConversationV1Models {
      *
      * @param metadata_serialized_name the new metadata_serialized_name
      */
-    public void setMetadata(final Map<String, String> metadata_serialized_name) {
+    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
     }
 
@@ -4431,6 +4431,18 @@ public class ConversationV1Models {
         ret = (DialogNode) JSON.deserialize(jsonString, DialogNode.class);
       }
 
+      // calling custom deserializer for output_serialized_name
+      IBMWatsonMapModel newOutput = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'));
+      ret.setOutput(newOutput);
+
+      // calling custom deserializer for context_serialized_name
+      IBMWatsonMapModel newContext = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'));
+      ret.setContext(newContext);
+
+      // calling custom deserializer for metadata_serialized_name
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      ret.setMetadata(newMetadata);
+
       // calling custom deserializer for next_step_serialized_name
       DialogNodeNextStep newNextStep = (DialogNodeNextStep) new DialogNodeNextStep().deserialize(JSON.serialize(ret.getNextStep()), (Map<String, Object>) jsonMap.get('next_step_serialized_name'));
       ret.setNextStep(newNextStep);
@@ -4458,7 +4470,7 @@ public class ConversationV1Models {
   public class DialogNodeAction extends IBMWatsonGenericModel {
     private String name_serialized_name;
     private String type_serialized_name;
-    private Map<String, String> parameters_serialized_name;
+    private IBMWatsonMapModel parameters_serialized_name;
     private String result_variable_serialized_name;
     private String credentials_serialized_name;
     /**
@@ -4491,7 +4503,7 @@ public class ConversationV1Models {
      * @return the parameters_serialized_name
      */
     @AuraEnabled
-    public Map<String, String> getParameters() {
+    public IBMWatsonMapModel getParameters() {
       return parameters_serialized_name;
     }
     /**
@@ -4540,7 +4552,7 @@ public class ConversationV1Models {
      *
      * @param parameters_serialized_name the new parameters_serialized_name
      */
-    public void setParameters(final Map<String, String> parameters_serialized_name) {
+    public void setParameters(final IBMWatsonMapModel parameters_serialized_name) {
       this.parameters_serialized_name = parameters_serialized_name;
     }
 
@@ -4574,6 +4586,10 @@ public class ConversationV1Models {
       else {
         ret = (DialogNodeAction) JSON.deserialize(jsonString, DialogNodeAction.class);
       }
+
+      // calling custom deserializer for parameters_serialized_name
+      IBMWatsonMapModel newParameters = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getParameters()), (Map<String, Object>) jsonMap.get('parameters_serialized_name'));
+      ret.setParameters(newParameters);
 
       return ret;
     }
@@ -4751,7 +4767,7 @@ public class ConversationV1Models {
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
     private String description_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private Boolean fuzzy_match_serialized_name;
     /**
      * Gets the entity_serialized_name.
@@ -4805,7 +4821,7 @@ public class ConversationV1Models {
      * @return the metadata_serialized_name
      */
     @AuraEnabled
-    public Map<String, String> getMetadata() {
+    public IBMWatsonMapModel getMetadata() {
       return metadata_serialized_name;
     }
     /**
@@ -4843,7 +4859,7 @@ public class ConversationV1Models {
      *
      * @param metadata_serialized_name the new metadata_serialized_name
      */
-    public void setMetadata(final Map<String, String> metadata_serialized_name) {
+    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
     }
 
@@ -4868,6 +4884,10 @@ public class ConversationV1Models {
       else {
         ret = (Entity) JSON.deserialize(jsonString, Entity.class);
       }
+
+      // calling custom deserializer for metadata_serialized_name
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      ret.setMetadata(newMetadata);
 
       return ret;
     }
@@ -4962,7 +4982,7 @@ public class ConversationV1Models {
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
     private String description_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private Boolean fuzzy_match_serialized_name;
     private List<ValueExport> values_serialized_name;
     /**
@@ -5017,7 +5037,7 @@ public class ConversationV1Models {
      * @return the metadata_serialized_name
      */
     @AuraEnabled
-    public Map<String, String> getMetadata() {
+    public IBMWatsonMapModel getMetadata() {
       return metadata_serialized_name;
     }
     /**
@@ -5066,7 +5086,7 @@ public class ConversationV1Models {
      *
      * @param metadata_serialized_name the new metadata_serialized_name
      */
-    public void setMetadata(final Map<String, String> metadata_serialized_name) {
+    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
     }
 
@@ -5100,6 +5120,10 @@ public class ConversationV1Models {
       else {
         ret = (EntityExport) JSON.deserialize(jsonString, EntityExport.class);
       }
+
+      // calling custom deserializer for metadata_serialized_name
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      ret.setMetadata(newMetadata);
 
       // calling custom deserializer for values_serialized_name
       List<ValueExport> newValues = new List<ValueExport>();
@@ -8722,7 +8746,7 @@ public class ConversationV1Models {
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+        if (!baseProps.contains(key)) {
           ret.put(key, jsonMap.get(key));
         }
       }
@@ -9458,7 +9482,7 @@ public class ConversationV1Models {
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+        if (!baseProps.contains(key)) {
           ret.put(key, jsonMap.get(key));
         }
       }
@@ -9561,7 +9585,7 @@ public class ConversationV1Models {
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+        if (!baseProps.contains(key)) {
           ret.put(key, jsonMap.get(key));
         }
       }
@@ -9684,7 +9708,7 @@ public class ConversationV1Models {
     private List<Long> location_serialized_name;
     private String value_serialized_name;
     private Double confidence_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
 
     /**
      * Gets the entity_serialized_name.
@@ -9732,7 +9756,7 @@ public class ConversationV1Models {
      * @return the metadata_serialized_name
      */
     @AuraEnabled
-    public Map<String, String> getMetadata() {
+    public IBMWatsonMapModel getMetadata() {
       return metadata_serialized_name;
     }
 
@@ -9777,7 +9801,7 @@ public class ConversationV1Models {
      *
      * @param metadata_serialized_name the new metadata_serialized_name
      */
-    public void setMetadata(final Map<String, String> metadata_serialized_name) {
+    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
     }
 
@@ -9794,10 +9818,14 @@ public class ConversationV1Models {
         ret = (RuntimeEntity) JSON.deserialize(jsonString, RuntimeEntity.class);
       }
 
+      // calling custom deserializer for metadata_serialized_name
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      ret.setMetadata(newMetadata);
+
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+        if (!baseProps.contains(key)) {
           ret.put(key, jsonMap.get(key));
         }
       }
@@ -9867,7 +9895,7 @@ public class ConversationV1Models {
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+        if (!baseProps.contains(key)) {
           ret.put(key, jsonMap.get(key));
         }
       }
@@ -10045,7 +10073,7 @@ public class ConversationV1Models {
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key) && !baseProps.contains(key + '_serialized_name')) {
+        if (!baseProps.contains(key)) {
           ret.put(key, jsonMap.get(key));
         }
       }
@@ -10193,15 +10221,15 @@ public class ConversationV1Models {
     private String new_type_serialized_name;
     private List<DialogNodeAction> new_actions_serialized_name;
     private String new_conditions_serialized_name;
-    private Map<String, String> new_context_serialized_name;
+    private IBMWatsonMapModel new_context_serialized_name;
     private String new_previous_sibling_serialized_name;
     private String new_variable_serialized_name;
-    private Map<String, String> new_metadata_serialized_name;
+    private IBMWatsonMapModel new_metadata_serialized_name;
     private String new_title_serialized_name;
     private String new_description_serialized_name;
     private String new_event_name_serialized_name;
     private DialogNodeNextStep new_next_step_serialized_name;
-    private Map<String, String> new_output_serialized_name;
+    private IBMWatsonMapModel new_output_serialized_name;
     private String new_parent_serialized_name;
     private String new_dialog_node_serialized_name;
     /**
@@ -10261,7 +10289,7 @@ public class ConversationV1Models {
      *
      * @return the new_context_serialized_name
      */
-    public Map<String, String> newContext() {
+    public IBMWatsonMapModel newContext() {
       return new_context_serialized_name;
     }
     /**
@@ -10291,7 +10319,7 @@ public class ConversationV1Models {
      *
      * @return the new_metadata_serialized_name
      */
-    public Map<String, String> newMetadata() {
+    public IBMWatsonMapModel newMetadata() {
       return new_metadata_serialized_name;
     }
     /**
@@ -10341,7 +10369,7 @@ public class ConversationV1Models {
      *
      * @return the new_output_serialized_name
      */
-    public Map<String, String> newOutput() {
+    public IBMWatsonMapModel newOutput() {
       return new_output_serialized_name;
     }
     /**
@@ -10406,15 +10434,15 @@ public class ConversationV1Models {
     private String new_type_serialized_name;
     private List<DialogNodeAction> new_actions_serialized_name;
     private String new_conditions_serialized_name;
-    private Map<String, String> new_context_serialized_name;
+    private IBMWatsonMapModel new_context_serialized_name;
     private String new_previous_sibling_serialized_name;
     private String new_variable_serialized_name;
-    private Map<String, String> new_metadata_serialized_name;
+    private IBMWatsonMapModel new_metadata_serialized_name;
     private String new_title_serialized_name;
     private String new_description_serialized_name;
     private String new_event_name_serialized_name;
     private DialogNodeNextStep new_next_step_serialized_name;
-    private Map<String, String> new_output_serialized_name;
+    private IBMWatsonMapModel new_output_serialized_name;
     private String new_parent_serialized_name;
     private String new_dialog_node_serialized_name;
 
@@ -10542,7 +10570,7 @@ public class ConversationV1Models {
      * @param new_context_serialized_name the new_context_serialized_name
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newContext(Map<String, String> new_context_serialized_name) {
+    public UpdateDialogNodeOptionsBuilder newContext(IBMWatsonMapModel new_context_serialized_name) {
       this.new_context_serialized_name = new_context_serialized_name;
       return this;
     }
@@ -10575,7 +10603,7 @@ public class ConversationV1Models {
      * @param new_metadata_serialized_name the new_metadata_serialized_name
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newMetadata(Map<String, String> new_metadata_serialized_name) {
+    public UpdateDialogNodeOptionsBuilder newMetadata(IBMWatsonMapModel new_metadata_serialized_name) {
       this.new_metadata_serialized_name = new_metadata_serialized_name;
       return this;
     }
@@ -10630,7 +10658,7 @@ public class ConversationV1Models {
      * @param new_output_serialized_name the new_output_serialized_name
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newOutput(Map<String, String> new_output_serialized_name) {
+    public UpdateDialogNodeOptionsBuilder newOutput(IBMWatsonMapModel new_output_serialized_name) {
       this.new_output_serialized_name = new_output_serialized_name;
       return this;
     }
@@ -10666,7 +10694,7 @@ public class ConversationV1Models {
     private String entity_serialized_name;
     private Boolean new_fuzzy_match_serialized_name;
     private String new_entity_serialized_name;
-    private Map<String, String> new_metadata_serialized_name;
+    private IBMWatsonMapModel new_metadata_serialized_name;
     private List<CreateValue> new_values_serialized_name;
     private String new_description_serialized_name;
     /**
@@ -10716,7 +10744,7 @@ public class ConversationV1Models {
      *
      * @return the new_metadata_serialized_name
      */
-    public Map<String, String> newMetadata() {
+    public IBMWatsonMapModel newMetadata() {
       return new_metadata_serialized_name;
     }
     /**
@@ -10770,7 +10798,7 @@ public class ConversationV1Models {
     private String entity_serialized_name;
     private Boolean new_fuzzy_match_serialized_name;
     private String new_entity_serialized_name;
-    private Map<String, String> new_metadata_serialized_name;
+    private IBMWatsonMapModel new_metadata_serialized_name;
     private List<CreateValue> new_values_serialized_name;
     private String new_description_serialized_name;
 
@@ -10875,7 +10903,7 @@ public class ConversationV1Models {
      * @param new_metadata_serialized_name the new_metadata_serialized_name
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder newMetadata(Map<String, String> new_metadata_serialized_name) {
+    public UpdateEntityOptionsBuilder newMetadata(IBMWatsonMapModel new_metadata_serialized_name) {
       this.new_metadata_serialized_name = new_metadata_serialized_name;
       return this;
     }
@@ -11453,7 +11481,7 @@ public class ConversationV1Models {
     private String value_serialized_name;
     private List<String> new_synonyms_serialized_name;
     private String new_type_serialized_name;
-    private Map<String, String> new_metadata_serialized_name;
+    private IBMWatsonMapModel new_metadata_serialized_name;
     private List<String> new_patterns_serialized_name;
     private String new_value_serialized_name;
     /**
@@ -11513,7 +11541,7 @@ public class ConversationV1Models {
      *
      * @return the new_metadata_serialized_name
      */
-    public Map<String, String> newMetadata() {
+    public IBMWatsonMapModel newMetadata() {
       return new_metadata_serialized_name;
     }
     /**
@@ -11570,7 +11598,7 @@ public class ConversationV1Models {
     private String value_serialized_name;
     private List<String> new_synonyms_serialized_name;
     private String new_type_serialized_name;
-    private Map<String, String> new_metadata_serialized_name;
+    private IBMWatsonMapModel new_metadata_serialized_name;
     private List<String> new_patterns_serialized_name;
     private String new_value_serialized_name;
 
@@ -11705,7 +11733,7 @@ public class ConversationV1Models {
      * @param new_metadata_serialized_name the new_metadata_serialized_name
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder newMetadata(Map<String, String> new_metadata_serialized_name) {
+    public UpdateValueOptionsBuilder newMetadata(IBMWatsonMapModel new_metadata_serialized_name) {
       this.new_metadata_serialized_name = new_metadata_serialized_name;
       return this;
     }
@@ -11746,7 +11774,7 @@ public class ConversationV1Models {
     private List<CreateEntity> entities_serialized_name;
     private List<CreateDialogNode> dialog_nodes_serialized_name;
     private List<CreateCounterexample> counterexamples_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
@@ -11835,7 +11863,7 @@ public class ConversationV1Models {
      *
      * @return the metadata_serialized_name
      */
-    public Map<String, String> metadata() {
+    public IBMWatsonMapModel metadata() {
       return metadata_serialized_name;
     }
     /**
@@ -11885,7 +11913,7 @@ public class ConversationV1Models {
     private List<CreateEntity> entities_serialized_name;
     private List<CreateDialogNode> dialog_nodes_serialized_name;
     private List<CreateCounterexample> counterexamples_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
 
     private UpdateWorkspaceOptionsBuilder(UpdateWorkspaceOptions update_workspace_options) {
@@ -12083,7 +12111,7 @@ public class ConversationV1Models {
      * @param metadata_serialized_name the metadata_serialized_name
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder metadata(Map<String, String> metadata_serialized_name) {
+    public UpdateWorkspaceOptionsBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
       return this;
     }
@@ -12105,7 +12133,7 @@ public class ConversationV1Models {
    */
   public class Value extends IBMWatsonGenericModel {
     private String value_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
     private List<String> synonyms_serialized_name;
@@ -12130,7 +12158,7 @@ public class ConversationV1Models {
      * @return the metadata_serialized_name
      */
     @AuraEnabled
-    public Map<String, String> getMetadata() {
+    public IBMWatsonMapModel getMetadata() {
       return metadata_serialized_name;
     }
     /**
@@ -12203,7 +12231,7 @@ public class ConversationV1Models {
      *
      * @param metadata_serialized_name the new metadata_serialized_name
      */
-    public void setMetadata(final Map<String, String> metadata_serialized_name) {
+    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
     }
 
@@ -12246,6 +12274,10 @@ public class ConversationV1Models {
       else {
         ret = (Value) JSON.deserialize(jsonString, Value.class);
       }
+
+      // calling custom deserializer for metadata_serialized_name
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      ret.setMetadata(newMetadata);
 
       return ret;
     }
@@ -12337,7 +12369,7 @@ public class ConversationV1Models {
    */
   public class ValueExport extends IBMWatsonGenericModel {
     private String value_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
     private List<String> synonyms_serialized_name;
@@ -12362,7 +12394,7 @@ public class ConversationV1Models {
      * @return the metadata_serialized_name
      */
     @AuraEnabled
-    public Map<String, String> getMetadata() {
+    public IBMWatsonMapModel getMetadata() {
       return metadata_serialized_name;
     }
     /**
@@ -12435,7 +12467,7 @@ public class ConversationV1Models {
      *
      * @param metadata_serialized_name the new metadata_serialized_name
      */
-    public void setMetadata(final Map<String, String> metadata_serialized_name) {
+    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
     }
 
@@ -12479,6 +12511,10 @@ public class ConversationV1Models {
         ret = (ValueExport) JSON.deserialize(jsonString, ValueExport.class);
       }
 
+      // calling custom deserializer for metadata_serialized_name
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      ret.setMetadata(newMetadata);
+
       return ret;
     }
   }
@@ -12493,7 +12529,7 @@ public class ConversationV1Models {
     private Datetime updated_serialized_name;
     private String workspace_id_serialized_name;
     private String description_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
     /**
      * Gets the name_serialized_name.
@@ -12569,7 +12605,7 @@ public class ConversationV1Models {
      * @return the metadata_serialized_name
      */
     @AuraEnabled
-    public Map<String, String> getMetadata() {
+    public IBMWatsonMapModel getMetadata() {
       return metadata_serialized_name;
     }
     /**
@@ -12616,7 +12652,7 @@ public class ConversationV1Models {
      *
      * @param metadata_serialized_name the new metadata_serialized_name
      */
-    public void setMetadata(final Map<String, String> metadata_serialized_name) {
+    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
     }
 
@@ -12641,6 +12677,10 @@ public class ConversationV1Models {
       else {
         ret = (Workspace) JSON.deserialize(jsonString, Workspace.class);
       }
+
+      // calling custom deserializer for metadata_serialized_name
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      ret.setMetadata(newMetadata);
 
       return ret;
     }
@@ -12734,7 +12774,7 @@ public class ConversationV1Models {
     private String name_serialized_name;
     private String description_serialized_name;
     private String language_serialized_name;
-    private Map<String, String> metadata_serialized_name;
+    private IBMWatsonMapModel metadata_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
     private String workspace_id_serialized_name;
@@ -12785,7 +12825,7 @@ public class ConversationV1Models {
      * @return the metadata_serialized_name
      */
     @AuraEnabled
-    public Map<String, String> getMetadata() {
+    public IBMWatsonMapModel getMetadata() {
       return metadata_serialized_name;
     }
     /**
@@ -12920,7 +12960,7 @@ public class ConversationV1Models {
      *
      * @param metadata_serialized_name the new metadata_serialized_name
      */
-    public void setMetadata(final Map<String, String> metadata_serialized_name) {
+    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
       this.metadata_serialized_name = metadata_serialized_name;
     }
 
@@ -12990,6 +13030,10 @@ public class ConversationV1Models {
       else {
         ret = (WorkspaceExport) JSON.deserialize(jsonString, WorkspaceExport.class);
       }
+
+      // calling custom deserializer for metadata_serialized_name
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'));
+      ret.setMetadata(newMetadata);
 
       // calling custom deserializer for intents_serialized_name
       List<IntentExport> newIntents = new List<IntentExport>();
