@@ -308,7 +308,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * @param testConfigurationInEnvironmentOptions the {@link IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.TestDocument} with the response
    */
-  /*public IBMDiscoveryV1Models.TestDocument testConfigurationInEnvironment(IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptions testConfigurationInEnvironmentOptions) {
+  public IBMDiscoveryV1Models.TestDocument testConfigurationInEnvironment(IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptions testConfigurationInEnvironmentOptions) {
     IBMWatsonValidator.notNull(testConfigurationInEnvironmentOptions, 'testConfigurationInEnvironmentOptions cannot be null');
     IBMWatsonValidator.isTrue((testConfigurationInEnvironmentOptions.configuration() != null) || (testConfigurationInEnvironmentOptions.file() != null) || (testConfigurationInEnvironmentOptions.metadata() != null), 'At least one of configuration, file, or metadata must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/preview', new String[]{ testConfigurationInEnvironmentOptions.environmentId() }));
@@ -317,22 +317,23 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       'step' => testConfigurationInEnvironmentOptions.step(),
       'configuration_id' => testConfigurationInEnvironmentOptions.configurationId()
     });
-    MultipartBody.Builder multipartBuilder = new MultipartBody.Builder();
-    multipartBuilder.setType(MultipartBody.FORM);
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (testConfigurationInEnvironmentOptions.configuration() != null) {
       multipartBuilder.addFormDataPart('configuration', testConfigurationInEnvironmentOptions.configuration());
     }
     if (testConfigurationInEnvironmentOptions.file() != null) {
-      RequestBody fileBody = RequestUtils.inputStreamBody(testConfigurationInEnvironmentOptions.file(), testConfigurationInEnvironmentOptions.fileContentType());
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(testConfigurationInEnvironmentOptions.file(), testConfigurationInEnvironmentOptions.fileContentType());
       multipartBuilder.addFormDataPart('file', testConfigurationInEnvironmentOptions.filename(), fileBody);
     }
     if (testConfigurationInEnvironmentOptions.metadata() != null) {
       multipartBuilder.addFormDataPart('metadata', testConfigurationInEnvironmentOptions.metadata());
     }
-    builder.body(multipartBuilder.build());
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
     return (IBMDiscoveryV1Models.TestDocument) createServiceCall(builder.build(), IBMDiscoveryV1Models.TestDocument.class);
-  }*/
+  }
 
   /**
    * Create a collection.
@@ -466,26 +467,27 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * @param addDocumentOptions the {@link IBMDiscoveryV1Models.AddDocumentOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.DocumentAccepted} with the response
    */
-  /*public IBMDiscoveryV1Models.DocumentAccepted addDocument(IBMDiscoveryV1Models.AddDocumentOptions addDocumentOptions) {
+  public IBMDiscoveryV1Models.DocumentAccepted addDocument(IBMDiscoveryV1Models.AddDocumentOptions addDocumentOptions) {
     IBMWatsonValidator.notNull(addDocumentOptions, 'addDocumentOptions cannot be null');
     IBMWatsonValidator.isTrue((addDocumentOptions.file() != null) || (addDocumentOptions.metadata() != null), 'At least one of file or metadata must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/documents', new String[]{ addDocumentOptions.environmentId(), addDocumentOptions.collectionId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    MultipartBody.Builder multipartBuilder = new MultipartBody.Builder();
-    multipartBuilder.setType(MultipartBody.FORM);
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (addDocumentOptions.file() != null) {
-      RequestBody fileBody = RequestUtils.inputStreamBody(addDocumentOptions.file(), addDocumentOptions.fileContentType());
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(addDocumentOptions.file(), addDocumentOptions.fileContentType());
       multipartBuilder.addFormDataPart('file', addDocumentOptions.filename(), fileBody);
     }
     if (addDocumentOptions.metadata() != null) {
       multipartBuilder.addFormDataPart('metadata', addDocumentOptions.metadata());
     }
-    builder.body(multipartBuilder.build());
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
     return (IBMDiscoveryV1Models.DocumentAccepted) createServiceCall(builder.build(), IBMDiscoveryV1Models.DocumentAccepted.class);
-  }*/
+  }
 
   /**
    * Delete a document.
@@ -531,26 +533,27 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    * @param updateDocumentOptions the {@link IBMDiscoveryV1Models.UpdateDocumentOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.DocumentAccepted} with the response
    */
-  /*public IBMDiscoveryV1Models.DocumentAccepted updateDocument(IBMDiscoveryV1Models.UpdateDocumentOptions updateDocumentOptions) {
+  public IBMDiscoveryV1Models.DocumentAccepted updateDocument(IBMDiscoveryV1Models.UpdateDocumentOptions updateDocumentOptions) {
     IBMWatsonValidator.notNull(updateDocumentOptions, 'updateDocumentOptions cannot be null');
     IBMWatsonValidator.isTrue((updateDocumentOptions.file() != null) || (updateDocumentOptions.metadata() != null), 'At least one of file or metadata must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/documents/{2}', new String[]{ updateDocumentOptions.environmentId(), updateDocumentOptions.collectionId(), updateDocumentOptions.documentId() }));
     builder.queryParams(new Map<String, String> {
       'version' => versionDate
     });
-    MultipartBody.Builder multipartBuilder = new MultipartBody.Builder();
-    multipartBuilder.setType(MultipartBody.FORM);
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (updateDocumentOptions.file() != null) {
-      RequestBody fileBody = RequestUtils.inputStreamBody(updateDocumentOptions.file(), updateDocumentOptions.fileContentType());
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateDocumentOptions.file(), updateDocumentOptions.fileContentType());
       multipartBuilder.addFormDataPart('file', updateDocumentOptions.filename(), fileBody);
     }
     if (updateDocumentOptions.metadata() != null) {
       multipartBuilder.addFormDataPart('metadata', updateDocumentOptions.metadata());
     }
-    builder.body(multipartBuilder.build());
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
     return (IBMDiscoveryV1Models.DocumentAccepted) createServiceCall(builder.build(), IBMDiscoveryV1Models.DocumentAccepted.class);
-  }*/
+  }
 
   /**
    * Query documents in multiple collections.
