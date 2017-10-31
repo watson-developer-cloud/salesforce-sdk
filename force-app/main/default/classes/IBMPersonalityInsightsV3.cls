@@ -47,11 +47,8 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
   public IBMPersonalityInsightsV3(String versionDate) {
     super('watson_personality_insights_v3');
 
-    if (String.isBlank(getEndPoint())) {
-      setEndPoint(URL);
-    }
     if (String.isBlank(versionDate)) {
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('Version cannot be null.');
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
     }
     this.versionDate = versionDate;
   }
@@ -80,19 +77,23 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
   public IBMPersonalityInsightsV3Models.Profile profile(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
-      builder.addHeader('content-type', profileOptions.contentType());
-      if (profileOptions.contentLanguage() != null) {
-        builder.addHeader('Content-Language', profileOptions.contentLanguage());
-      }
-      if (profileOptions.acceptLanguage() != null) {
-        builder.addHeader('Accept-Language', profileOptions.acceptLanguage());
-      }
-    builder.queryParams(new Map<String, String> {
-      'version' => versionDate,
-      'raw_scores' => String.valueOf(profileOptions.rawScores()),
-      'csv_headers' => String.valueOf(profileOptions.csvHeaders()),
-      'consumption_preferences' => String.valueOf(profileOptions.consumptionPreferences())
-    });
+    builder.addHeader('content-type', profileOptions.contentType());
+    if (profileOptions.contentLanguage() != null) {
+      builder.addHeader('Content-Language', profileOptions.contentLanguage());
+    }
+    if (profileOptions.acceptLanguage() != null) {
+      builder.addHeader('Accept-Language', profileOptions.acceptLanguage());
+    }
+    builder.query('version', versionDate);
+    if (profileOptions.rawScores() != null) {
+      builder.query('raw_scores', String.valueOf(profileOptions.rawScores()));
+    }
+    if (profileOptions.csvHeaders() != null) {
+      builder.query('csv_headers', String.valueOf(profileOptions.csvHeaders()));
+    }
+    if (profileOptions.consumptionPreferences() != null) {
+      builder.query('consumption_preferences', String.valueOf(profileOptions.consumptionPreferences()));
+    }
     if (profileOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
       builder.bodyJson(JSON.serialize(profileOptions.content()));
     }
