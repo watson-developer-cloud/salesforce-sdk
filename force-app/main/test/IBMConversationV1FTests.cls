@@ -1,17 +1,12 @@
-public class ConversationV1FunctionalTests {
-  private static String username;
-  private static String password;
-  private static String workspaceId;
-
-  static {
-    username = '<username>';
-    password = '<password>';
-    workspaceId = '<workspaceId>';
-  }
+public with sharing class ConversationV1FunctionalTests {
+  // Make sure the named credentials below is defined
+  private static String NAMED_CREDENTIALS = 'callout:watson_conversation_v1_test';
+  private static String VERSION_2017_05_26 = '2017-05-26';
+  private static String workspaceId = '<workspaceId>';
 
   public static IBMConversationV1Models.Workspace testCreateWorkspace() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.CreateWorkspaceOptions createWorkspaceOptions = new IBMConversationV1Models.CreateWorkspaceOptionsBuilder()
       .name('functional-test-workspace')
@@ -25,7 +20,7 @@ public class ConversationV1FunctionalTests {
 
   public static void testDeleteWorkspace() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.DeleteWorkspaceOptions deleteOptions = new IBMConversationV1Models.DeleteWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
@@ -35,7 +30,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.WorkspaceExport testGetWorkspace() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.GetWorkspaceOptions getOptions = new IBMConversationV1Models.GetWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
@@ -47,7 +42,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Workspace updateWorkspace() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.UpdateWorkspaceOptions updateOptions = new IBMConversationV1Models.UpdateWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
@@ -61,7 +56,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.WorkspaceCollection testListWorkspaces() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.ListWorkspacesOptions listOptions = new IBMConversationV1Models.ListWorkspacesOptionsBuilder()
       .build();
@@ -72,7 +67,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Value createValue() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.CreateValueOptions createOptions = new IBMConversationV1Models.CreateValueOptionsBuilder()
       .workspaceId(workspaceId)
@@ -86,7 +81,7 @@ public class ConversationV1FunctionalTests {
 
   public static void deleteValue() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.DeleteValueOptions deleteOptions = new IBMConversationV1Models.DeleteValueOptionsBuilder()
       .workspaceId(workspaceId)
@@ -98,7 +93,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.ValueExport getValue() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.GetValueOptions getOptions = new IBMConversationV1Models.GetValueOptionsBuilder()
       .workspaceId(workspaceId)
@@ -113,7 +108,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Value updateValue() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.UpdateValueOptions updateOptions = new IBMConversationV1Models.UpdateValueOptionsBuilder()
       .workspaceId(workspaceId)
@@ -128,7 +123,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.ValueCollection listValues() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.ListValuesOptions listOptions = new IBMConversationV1Models.ListValuesOptionsBuilder()
       .workspaceId(workspaceId)
@@ -141,7 +136,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.MessageResponse message() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.InputData input = new IBMConversationV1Models.InputDataBuilder()
       .text('This is a message')
@@ -157,7 +152,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Intent createIntent() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.CreateIntentOptions createOptions = new IBMConversationV1Models.CreateIntentOptionsBuilder()
       .workspaceId(workspaceId)
@@ -171,7 +166,7 @@ public class ConversationV1FunctionalTests {
 
   public static void deleteIntent() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.DeleteIntentOptions deleteOptions = new IBMConversationV1Models.DeleteIntentOptionsBuilder()
       .workspaceId(workspaceId)
@@ -182,7 +177,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.IntentExport getIntent() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.GetIntentOptions getOptions = new IBMConversationV1Models.GetIntentOptionsBuilder()
       .workspaceId(workspaceId)
@@ -196,7 +191,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.IntentCollection listIntents() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.ListIntentsOptions listOptions = new IBMConversationV1Models.ListIntentsOptionsBuilder()
       .workspaceId(workspaceId)
@@ -209,7 +204,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Intent updateIntent() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.UpdateIntentOptions updateOptions = new IBMConversationV1Models.UpdateIntentOptionsBuilder()
       .workspaceId(workspaceId)
@@ -223,7 +218,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Example createExample() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.CreateExampleOptions createOptions = new IBMConversationV1Models.CreateExampleOptionsBuilder()
       .workspaceId(workspaceId)
@@ -237,7 +232,7 @@ public class ConversationV1FunctionalTests {
 
   public static void deleteExample() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.DeleteExampleOptions deleteOptions = new IBMConversationV1Models.DeleteExampleOptionsBuilder()
       .workspaceId(workspaceId)
@@ -249,7 +244,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Example getExample() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.GetExampleOptions getOptions = new IBMConversationV1Models.GetExampleOptionsBuilder()
       .workspaceId(workspaceId)
@@ -263,7 +258,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.ExampleCollection listExamples() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.ListExamplesOptions listOptions = new IBMConversationV1Models.ListExamplesOptionsBuilder()
       .workspaceId(workspaceId)
@@ -276,7 +271,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Example updateExample() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.UpdateExampleOptions updateOptions = new IBMConversationV1Models.UpdateExampleOptionsBuilder()
       .workspaceId(workspaceId)
@@ -291,7 +286,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Entity createEntity() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMWatsonMapModel metadata = new IBMWatsonMapModel();
     metadata.put('Boston', 'nice');
@@ -309,7 +304,7 @@ public class ConversationV1FunctionalTests {
 
   public static void deleteEntity() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.DeleteEntityOptions deleteOptions = new IBMConversationV1Models.DeleteEntityOptionsBuilder()
       .workspaceId(workspaceId)
@@ -320,7 +315,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.EntityExport getEntity() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.GetEntityOptions getOptions = new IBMConversationV1Models.GetEntityOptionsBuilder()
       .workspaceId(workspaceId)
@@ -334,7 +329,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.EntityCollection listEntities() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.ListEntitiesOptions listOptions = new IBMConversationV1Models.ListEntitiesOptionsBuilder()
       .workspaceId(workspaceId)
@@ -347,7 +342,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Entity updateEntity() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.UpdateEntityOptions updateOptions = new IBMConversationV1Models.UpdateEntityOptionsBuilder()
       .workspaceId(workspaceId)
@@ -361,7 +356,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Synonym createSynonym() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.CreateSynonymOptions createOptions = new IBMConversationV1Models.CreateSynonymOptionsBuilder()
       .workspaceId(workspaceId)
@@ -376,7 +371,7 @@ public class ConversationV1FunctionalTests {
 
   public static void deleteSynonym() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.DeleteSynonymOptions deleteOptions = new IBMConversationV1Models.DeleteSynonymOptionsBuilder()
       .workspaceId(workspaceId)
@@ -389,7 +384,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Synonym getSynonym() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.GetSynonymOptions getOptions = new IBMConversationV1Models.GetSynonymOptionsBuilder()
       .workspaceId(workspaceId)
@@ -404,7 +399,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.SynonymCollection listSynonyms() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.ListSynonymsOptions listOptions = new IBMConversationV1Models.ListSynonymsOptionsBuilder()
       .workspaceId(workspaceId)
@@ -418,7 +413,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Synonym updateSynonym() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.UpdateSynonymOptions updateOptions = new IBMConversationV1Models.UpdateSynonymOptionsBuilder()
       .workspaceId(workspaceId)
@@ -434,7 +429,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.DialogNode createDialogNode() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.CreateDialogNodeOptions createOptions = new IBMConversationV1Models.CreateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
@@ -447,7 +442,7 @@ public class ConversationV1FunctionalTests {
 
   public static void deleteDialogNode() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.DeleteDialogNodeOptions deleteOptions = new IBMConversationV1Models.DeleteDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
@@ -458,7 +453,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.DialogNode getDialogNode() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.GetDialogNodeOptions getOptions = new IBMConversationV1Models.GetDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
@@ -471,7 +466,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.DialogNodeCollection listDialogNodes() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.ListDialogNodesOptions listOptions = new IBMConversationV1Models.ListDialogNodesOptionsBuilder()
       .workspaceId(workspaceId)
@@ -483,7 +478,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.DialogNode updateDialogNode() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.UpdateDialogNodeOptions updateOptions = new IBMConversationV1Models.UpdateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
@@ -498,7 +493,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.LogCollection listLogs() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.ListLogsOptions listOptions = new IBMConversationV1Models.ListLogsOptionsBuilder()
       .workspaceId(workspaceId)
@@ -510,7 +505,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Counterexample testCreateCounterexample() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.CreateCounterexampleOptions createOptions = new IBMConversationV1Models.CreateCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
@@ -523,7 +518,7 @@ public class ConversationV1FunctionalTests {
 
   public static void testDeleteCounterexample() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.DeleteCounterexampleOptions deleteOptions = new IBMConversationV1Models.DeleteCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
@@ -534,7 +529,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Counterexample testGetCounterexample() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.GetCounterexampleOptions getOptions = new IBMConversationV1Models.GetCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
@@ -547,7 +542,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.CounterexampleCollection testListCounterexamples() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.ListCounterexamplesOptions listOptions = new IBMConversationV1Models.ListCounterexamplesOptionsBuilder()
       .workspaceId(workspaceId)
@@ -559,7 +554,7 @@ public class ConversationV1FunctionalTests {
 
   public static IBMConversationV1Models.Counterexample testUpdateCounterexample() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setUsernameAndPassword(username, password);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.UpdateCounterexampleOptions updateOptions = new IBMConversationV1Models.UpdateCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
