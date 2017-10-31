@@ -1,4 +1,4 @@
-public with sharing class IBMWatsonConversationV1FTests {
+public with sharing class IBMConversationV1FTests {
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_conversation_v1_test';
   private static String VERSION_2017_05_26 = '2017-05-26';

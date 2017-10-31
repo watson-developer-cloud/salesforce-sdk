@@ -102,13 +102,13 @@ When creating a service instance like with `new Discovery()`. Each service loads
 For example
 
 ```java
-DiscoveryV1 discovery = new DiscoveryV1('2017-09-01');
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
 ```
 
 Will look for the `watson_discovery_v1` named credentials while:
 
 ```java
-Conversation discovery = new Conversation('2017-05-26');
+IBMConversationV1 discovery = new IBMConversationV1('2017-05-26');
 ```
 
 Will look for `watson_conversation_v1`.
@@ -135,7 +135,7 @@ Storing credentials in the Apex code is not recommended. If possible, use **Name
 For example:
 
 ```java
-DiscoveryV1 discovery = new DiscoveryV1(DiscoveryV1.VERSION_DATE_2017_09_01);
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1(DiscoveryV1.VERSION_DATE_2017_09_01);
 discovery.setEndPoint('URL');
 discovery.setUsernameAndPassword('USERNAME', 'PASSWORD');
 ```
@@ -146,15 +146,15 @@ Getting started using a service is very simple! All services follow the same pat
 
 ```java
 // Will load credentials from the `watson_discovery_v1` named credential
-DiscoveryV1 discovery = new DiscoveryV1(DiscoveryV1.VERSION_DATE_2017_09_01);
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1(IBMDiscoveryV1.VERSION_DATE_2017_09_01);
 
 // configuring options for listing environments
-DiscoveryV1Models.ListEnvironmentsOptions options = new
-  DiscoveryV1Models.ListEnvironmentsOptionsBuilder()
+IBMDiscoveryV1Models.ListEnvironmentsOptions options = new
+  IBMDiscoveryV1Models.ListEnvironmentsOptionsBuilder()
   .build();
 
 // making request
-DiscoveryV1Models.ListEnvironmentsResponse environmentList = service.listEnvironments(options);
+IBMDiscoveryV1Models.ListEnvironmentsResponse environmentList = discovery.listEnvironments(options);
 System.debug(environmentList);
 ```
 
@@ -162,18 +162,18 @@ Similarly, here is an example of creating an intent in the Conversation service:
 
 ```java
 // Will load credentials from the `watson_conversation_v1` named credential
-ConversationV1 conversation = new ConversationV1(ConversationV1.VERSION_DATE_2017_05_26);
+IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
 
 // configuring options for creating intent
-ConversationV1Models.CreateIntentOptions options = new
-  ConversationV1Models.CreateIntentOptionsBuilder()
+IBMConversationV1Models.CreateIntentOptions options = new
+  IBMConversationV1Models.CreateIntentOptionsBuilder()
   .workspaceId('<workspace_id>')
   .intent('MyIntent')
   .description('This is an example of creating an intent!')
   .build();
 
 // making request
-ConversationV1Models.Intent intent = conversation.createIntent(options);
+IBMConversationV1Models.Intent intent = conversation.createIntent(options);
 System.debug(intent);
 ```
 

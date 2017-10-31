@@ -1,8 +1,8 @@
-public with sharing class IBMWatsonDiscoveryV1FTests {
+public with sharing class IBMDiscoveryV1FTests {
   private static String VERSION_2017_09_01 = '2017-09-01';
   // Make sure the named credentials below is defined
-  private static String NAMED_CREDENTIALS = 'callout:watson_discovery_v1_test';
-
+  private static String NAMED_CREDENTIALS = 'callout:watson_discovery_v1';
+  
   /**
    *  Test Successfully creating a new environment.
    */

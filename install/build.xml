@@ -15,15 +15,22 @@
   
     <!-- Deploy files to the organization -->
     <target name="deployWatson">
+      <mkdir dir="../antapioutput"/>
+      <copydir src="../force-app/main/default/classes" dest="../antapioutput/classes" forceoverwrite="true"/>
+      <copy file="package.xml" todir="../antapioutput/" overwrite="true" failonerror="true"/>
       <echo message="Deploying IBM Watson Salesforce SDK..."/>
-      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}" deployRoot="../force-app/main/default" pollWaitMillis="1000" rollbackOnError="true"/>
+      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}" deployRoot="../antapioutput" pollWaitMillis="1000" rollbackOnError="true"/>
     </target>
 
     <!-- Test to see if deployment will be successdul -->
     <target name="deployWatsonCheckOnly">
+      <mkdir dir="../antapioutput"/>
+      <copydir src="../force-app/main/default/classes" dest="../antapioutput/classes" forceoverwrite="true"/>
+      <copy file="package.xml" todir="../antapioutput/" overwrite="true" failonerror="true"/>
+      <echo message="Deploying IBM Watson Salesforce SDK..."/>
       <echo message="Testing deployment of IBM Watson Salesforce SDK..."/>
       <echo message="Run 'ant deployWatson' to deploy this library to your organization."/>
-      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}" deployRoot="../force-app/main/default" pollWaitMillis="1000" rollbackOnError="true" checkOnly="true"/>
+      <sf:deploy username="${sf.username}" password="${sf.password}" serverurl="${sf.serverurl}" maxPoll="${sf.maxPoll}" deployRoot="../antapioutput" pollWaitMillis="1000" rollbackOnError="true" checkOnly="true"/>
     </target>
 
 </project>
