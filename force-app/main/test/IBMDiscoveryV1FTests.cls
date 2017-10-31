@@ -1,4 +1,4 @@
-public with sharing class DiscoveryV1FunctionalTests {
+public with sharing class IBMWatsonDiscoveryV1FTests {
   private static String VERSION_2017_09_01 = '2017-09-01';
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_discovery_v1_test';
@@ -39,7 +39,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       IBMDiscoveryV1Models.ListEnvironmentsOptionsBuilder()
       .build();
     IBMDiscoveryV1Models.ListEnvironmentsResponse resp = discovery.listEnvironments(options);
-    System.debug('DiscoveryV1FunctionalTests.testListEnvironment():' + resp);
+    System.debug('IBMDiscoveryV1FTests.testListEnvironment():' + resp);
     return resp;
   }
 
@@ -73,7 +73,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .environmentId(environmentId)
       .build();
     IBMDiscoveryV1Models.Environment resp = discovery.getEnvironment(options);
-    System.debug('DiscoveryV1FunctionalTests.testGetEnvironment: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testGetEnvironment: ' + resp);
     return resp;
   }
 
@@ -93,7 +93,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .description('PRFT New Environment updated')
       .build();
     IBMDiscoveryV1Models.Environment resp = discovery.updateEnvironment(options);
-    System.debug('DiscoveryV1FunctionalTests.testUpdateEnvironment: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testUpdateEnvironment: ' + resp);
     return resp;
   }
 
@@ -110,7 +110,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .environmentId(environmentId)
       .build();
     IBMDiscoveryV1Models.ListConfigurationsResponse resp = discovery.listConfigurations(options);
-    System.debug('DiscoveryV1FunctionalTests.testListConfigurations : ==>' + resp);
+    System.debug('IBMDiscoveryV1FTests.testListConfigurations : ==>' + resp);
     return resp;
   }
 
@@ -150,7 +150,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .conversions(conversions)
       .build();
     IBMDiscoveryV1Models.Configuration resp = discovery.createConfiguration(options);
-    System.debug('DiscoveryV1FunctionalTests.testCreateConfiguration: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testCreateConfiguration: ' + resp);
     return resp;
   }
 
@@ -184,7 +184,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .configurationId(configurationId)
       .build();
     IBMDiscoveryV1Models.Configuration resp = discovery.getConfiguration(options);
-    System.debug('DiscoveryV1FunctionalTests.testGetConfiguration: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testGetConfiguration: ' + resp);
     return resp;
   }
 
@@ -204,7 +204,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .configurationId(configurationId)
       .build();
     IBMDiscoveryV1Models.Configuration resp = discovery.updateConfiguration(options);
-    System.debug('DiscoveryV1FunctionalTests.testUpdateConfiguration: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testUpdateConfiguration: ' + resp);
     return resp;
   }
 
@@ -221,7 +221,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .environmentId(environmentId)
       .build();
     IBMDiscoveryV1Models.ListCollectionsResponse resp = discovery.listCollections(options);
-    System.debug('DiscoveryV1FunctionalTests.testListCollections: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testListCollections: ' + resp);
     return resp;
   }
 
@@ -242,7 +242,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .language('en')
       .build();
     IBMDiscoveryV1Models.Collection resp = discovery.createCollection(options);
-    System.debug('DiscoveryV1FunctionalTests.testCreateCollection: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testCreateCollection: ' + resp);
     return resp;
   }
 
@@ -261,7 +261,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .collectionId(collectionId)
       .build();
     IBMDiscoveryV1Models.Collection resp = discovery.getCollection(options);
-    System.debug('DiscoveryV1FunctionalTests.testGetCollection: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testGetCollection: ' + resp);
     return resp;
   }
 
@@ -297,7 +297,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .description('test_coll description')
       .build();
     IBMDiscoveryV1Models.Collection resp = discovery.updateCollection(options);
-    System.debug('DiscoveryV1FunctionalTests.testUpdateCollection: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testUpdateCollection: ' + resp);
     return resp;
   }
 
@@ -315,7 +315,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .collectionId(collectionId)
       .build();
     IBMDiscoveryV1Models.ListCollectionFieldsResponse resp = discovery.listCollectionFields(options);
-    System.debug('DiscoveryV1FunctionalTests.testListCollectionFields: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testListCollectionFields: ' + resp);
     return resp;
   }
 
@@ -334,7 +334,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .collectionIds(collectionIds)
       .build();
     IBMDiscoveryV1Models.ListCollectionFieldsResponse resp = discovery.listFields(options);
-    System.debug('DiscoveryV1FunctionalTests.testListCollectionsFields: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testListCollectionsFields: ' + resp);
     return resp;
   }
 
@@ -353,7 +353,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .collectionIds(collectionIds)
       .build();
     IBMDiscoveryV1Models.QueryResponse resp = discovery.federatedQuery(options);
-    System.debug('DiscoveryV1FunctionalTests.testFederatedQuery: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testFederatedQuery: ' + resp);
     return resp;
   }
 
@@ -372,7 +372,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .documentId(documentId)
       .build();
     IBMDiscoveryV1Models.DocumentStatus resp = discovery.getDocumentStatus(options);
-    System.debug('DiscoveryV1FunctionalTests.testGetDocumentStatus: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testGetDocumentStatus: ' + resp);
     return resp;
   }
    /**
@@ -389,7 +389,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .collectionId(collectionId)
       .build();
     IBMDiscoveryV1Models.QueryResponse resp = discovery.query(options);
-    System.debug('DiscoveryV1FunctionalTests.testQuery: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testQuery: ' + resp);
     return resp;
   }
 
@@ -407,7 +407,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .collectionId(collectionId)
       .build();
     IBMDiscoveryV1Models.QueryNoticesResponse resp = discovery.queryNotices(options);
-    System.debug('DiscoveryV1FunctionalTests.testQueryNotices: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testQueryNotices: ' + resp);
     return resp;
   }
 
@@ -431,7 +431,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .addExamples(te)
       .build();
     IBMDiscoveryV1Models.TrainingQuery resp = discovery.addTrainingData(options);
-    System.debug('DiscoveryV1FunctionalTests.testAddTrainingData: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testAddTrainingData: ' + resp);
     return resp;
   }
 
@@ -456,7 +456,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .relevance(0)
       .build();
     IBMDiscoveryV1Models.TrainingExample resp = discovery.createTrainingExample(options);
-    System.debug('DiscoveryV1FunctionalTests.testCreateTrainingExample: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testCreateTrainingExample: ' + resp);
     return resp;
   }
 
@@ -477,7 +477,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .build();
     IBMDiscoveryV1Models.TrainingExample resp = discovery.getTrainingExample(options);
 
-    System.debug('DiscoveryV1FunctionalTests.TrainingExample: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.TrainingExample: ' + resp);
     return resp;
   }
   /**
@@ -496,7 +496,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .build();
     IBMDiscoveryV1Models.TrainingQuery resp = discovery.getTrainingData(options);
 
-    System.debug('DiscoveryV1FunctionalTests.testGetTrainingData: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testGetTrainingData: ' + resp);
     return resp;
   }
 
@@ -515,7 +515,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .build();
     IBMDiscoveryV1Models.TrainingDataSet resp = discovery.listTrainingData(options);
 
-    System.debug('DiscoveryV1FunctionalTests.testListTrainingData: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testListTrainingData: ' + resp);
     return resp;
   }
 
@@ -536,7 +536,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .relevance(2)
       .build();
     IBMDiscoveryV1Models.TrainingExample resp = discovery.updateTrainingExample(options);
-    System.debug('DiscoveryV1FunctionalTests.testUpdateTrainingExample: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testUpdateTrainingExample: ' + resp);
     return resp;
   }
 
@@ -626,7 +626,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .sortField(new List<String>{'extracted_metadata.title','enriched_text.sentiment.document.label'})
       .build();
     IBMDiscoveryV1Models.QueryNoticesResponse resp = discovery.federatedQueryNotices(options);
-    System.debug('DiscoveryV1FunctionalTests.testFederatedQueryNotices: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testFederatedQueryNotices: ' + resp);
     return resp;
   }
 
@@ -655,7 +655,7 @@ public with sharing class DiscoveryV1FunctionalTests {
       .fileContentType(att.ContentType)
       .build();
     IBMDiscoveryV1Models.DocumentAccepted resp = discovery.addDocument(options);
-    System.debug('DiscoveryV1FunctionalTests.testAddDocument: ' + resp);
+    System.debug('IBMDiscoveryV1FTests.testAddDocument: ' + resp);
     return resp;
   }
 }
