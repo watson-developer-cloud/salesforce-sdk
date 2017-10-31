@@ -245,14 +245,15 @@ public class IBMWatsonRequestBuilder {
   }
 
   /**
-   * Adds query parameters.
+   * Adds a query parameter.
    *
-   * @param args a collection of key-value pairs of query parameters
+   * @param key the query parameter key
+   * @param val the query parameter value
    *
    * @return this
    */
-  public IBMWatsonRequestBuilder queryParams(Map<String, String> args) {
-    return setParams(queryParams, args);
+  public IBMWatsonRequestBuilder query(String key, String val) {
+    return setParams(queryParams, new Map<String, String> { key => val });
   }
 
   /**
