@@ -17,13 +17,13 @@ You can automatically deploy the SDK to a new scratch environment using the _Dep
 1. Clone this repository from GitHub using the following command:
 
     ```bash
-    git clone git@github.com:germanattanasio/salesforce-sdk.git
+    git clone https://github.com/watson-developer-cloud/salesforce-sdk
     ```
 
 1. Create a new scratch environment (optional if you don't want to re-use an existing one):
 
     ```bash
-    sfdx force:org:create -a watsonSdk -s -f config/project-scratch-def.json
+    sfdx force:org:create -a watson-sdk -s -f config/project-scratch-def.json
     ```
 
 1. Push the source to the scratch environment:
@@ -37,8 +37,9 @@ If you want to use the Watson SDK within a non-scratch environment you can deplo
 1. Authenticate the Salesforce DX CLI to the target environment:
 
     ```bash
-    sfdx force:auth:web:login -a TargetOrg
+    sfdx force:auth:web:login
     ```
+    In the browser window that opens, sign in to your org with your credentials. More information [here](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_web_flow.htm)
 
 1. Create an output directory:
 
@@ -55,7 +56,7 @@ If you want to use the Watson SDK within a non-scratch environment you can deplo
 1. Deploy the source code:
 
     ```bash
-    sfdx force:mdapi:deploy -d mdapipackage/ -u TargetOrg -w 100
+    sfdx force:mdapi:deploy -d mdapioutput/ -u TargetOrg -w 100
     ```
 
 ## Installation using the Ant Build Tool
@@ -65,7 +66,7 @@ You can install or update the SDK using the Ant Build Tool by following these st
 1. Clone this repository from GitHub using the following command:
 
     ```bash
-    git clone git@github.com:germanattanasio/salesforce-sdk.git
+    git clone https://github.com/watson-developer-cloud/salesforce-sdk
     ```
 
 1. Edit `install/build.properties` to insert your Salesforce username and password.  Since you will be using the API to access Salesforce, remember to [append your Security Token](http://www.salesforce.com/us/developer/docs/api/Content/sforce_api_concepts_security.htm#topic-title_login_token) to your password.
