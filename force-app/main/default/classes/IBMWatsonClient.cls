@@ -32,8 +32,8 @@ public class IBMWatsonClient {
     if (request.getMethod().equals('POST') || request.getMethod().equals('PUT')) {
       if (request.getBody() instanceOf IBMWatsonMultipartBody) {
         // form-multipart request will be send as Base64 request
-        String form64 = ((IBMWatsonMultipartBody) request.getBody()).form64();
-        httpRequest.setBody(form64);
+      	String form64 = ((IBMWatsonMultipartBody)request.getBody()).form64();
+      	httpRequest.setBodyAsBlob( EncodingUtil.base64Decode(form64) );
         httpRequest.setHeader('Content-Length', String.valueof(form64.length()));
       } else {
         httpRequest.setBody(IBMWatsonJSONUtil.serialize(request.getBody().content));
@@ -42,6 +42,8 @@ public class IBMWatsonClient {
 
     httpRequest.setMethod(request.getMethod());
     httpRequest.setEndpoint(request.getUrl().toExternalForm());
+    //httpRequest.setEndpoint('https://requestb.in/1cgia0n1');
+    
     httpRequest.setTimeout(REQUEST_TIMEOUT);
     return httpRequest;
   }
