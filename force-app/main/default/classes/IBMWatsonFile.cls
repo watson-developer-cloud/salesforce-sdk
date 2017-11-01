@@ -34,6 +34,21 @@ public class IBMWatsonFile {
     	return this;
     }
 
+
+    /**
+     * Set the file information based on the Attachment.
+     *
+     * @param attach the attachment
+     * @return the FileBuilder builder
+     */
+    public FileBuilder attachment(Attachment attach) {
+    	this.name = attach.name;
+      this.body = attach.Body;
+      this.description = attach.Description;
+      this.contentType = attach.ContentType;
+    	return this;
+    }
+
     /**
      * Set the file description if any.
      *
