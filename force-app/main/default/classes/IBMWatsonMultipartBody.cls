@@ -59,56 +59,93 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
         String fileName = p.body().name;
         String contentType = p.body.bodyContentType().toString();
         String file64Body = EncodingUtil.base64Encode(p.body().blobContent);
-
-    	  form64 += writeBoundary();
-        form64 += writeBase64BodyParameter('file', file64Body, fileName, contentType);
+        form64 += writeBlobBody('file', file64Body, fileName);
       } else {
         form64 += writeBoundary();
         form64 += writeBodyParameter(p.body().name, p.body().content);
       }
     }
 
-    form64 += writeFooter();
     return form64.length();
   }
 
-    /**
-     *  Write a key-value pair to the form's body.
-     */
-    public static string writeBodyParameter(string key, string value) {
-      string contentDisposition = 'Content-Disposition: form-data; name="' + key + '"' + CRLF + CRLF;
-      string valueCrLf = value + CRLF;
-      return contentDisposition + valueCrLf;
+  /**
+   *  Pad the value with spaces until the base64 encoding is no longer padded.
+   */
+  public static string SafelyPad(string value, string valueCrLf64, string lineBreaks) {
+    string valueCrLf = '';
+    blob valueCrLfBlob = null;
+
+    while (valueCrLf64.endsWith('=')) {
+      value += ' ';
+      valueCrLf = value + lineBreaks;
+      valueCrLfBlob = blob.valueOf(valueCrLf);
+      valueCrLf64 = EncodingUtil.base64Encode(valueCrLfBlob);
     }
 
+    return valueCrLf64;
+  }
+
+  /**
+   *  Write a key-value pair to the form's body.
+   */
+  public static string writeBodyParameter(string key, string value) {
+    string contentDisposition = 'Content-Disposition: form-data; name="' + key + '"';
+    string contentDispositionCrLf = contentDisposition + CRLF + CRLF;
+    blob contentDispositionCrLfBlob = blob.valueOf(contentDispositionCrLf);
+    string contentDispositionCrLf64 = EncodingUtil.base64Encode(contentDispositionCrLfBlob);
+    string content = SafelyPad(contentDisposition, contentDispositionCrLf64, CRLF + CRLF);
+    string valueCrLf = value + CRLF;
+    blob valueCrLfBlob = blob.valueOf(valueCrLf);
+    string valueCrLf64 = EncodingUtil.base64Encode(valueCrLfBlob);
+
+    content += SafelyPad(value, valueCrLf64, CRLF);
+
+    return content;
+  }
     /**
-     *  Write a key-value pair to the form's body for a blob.
+     *  Write a blob type to the form's body.
      */
-    public string writeBase64BodyParameter(string key, string file64, string filename, string mimeType) {
-    	String content = '';
-      string contentDisposition = 'Content-Disposition: form-data; name="' + key + '"; filename="'+filename+'"';
-      string contentDispositionCrLf = contentDisposition + CRLF;
-      content += contentDispositionCrLf;
-
-      string contentTypeHeader = 'Content-Type: ' + mimeType;
-      string contentTypeCrLf = contentTypeHeader + CRLF;
-      content += contentTypeCrLf;
-
-      string contentTransfer = 'Content-Transfer-Encoding: base64';
-      string contentTransferCrLf = contentTransfer + CRLF + CRLF;
-      content += contentTransferCrLf;
-
-      content += file64 + CRLF;
-
-      return content;
+    public String writeBlobBody(string key, string bodyEncoded, string filename){
+      String boundaryCrlf = '--'+this.boundary + CRLF;
+      
+      String contentDisposition = 'Content-Disposition: form-data; name="'+ key +'"; filename="'+ fileName +'"';
+      String contentDispositionCrlf = contentDisposition + CRLF;
+      
+      String contentType = 'Content-Type: application/octet-stream';
+      String contentTypeCrlf = contentType + CRLF;
+      
+      String header = boundaryCrlf + contentDispositionCrlf + contentTypeCrlf;
+      String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
+      while(headerEncoded.endsWith('=')) {
+        header+=' ';
+        headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
+      }
+      
+      String footer = CRLF + '--'+this.boundary+'--';
+      String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
+      
+      Blob bodyBlob = null;
+      String last4Bytes = bodyEncoded.substring(bodyEncoded.length()-4,bodyEncoded.length());
+      
+      if(last4Bytes.endsWith('=')) {
+        Blob decoded4Bytes = EncodingUtil.base64Decode(last4Bytes);
+        HttpRequest tmp = new HttpRequest();
+        tmp.setBodyAsBlob(decoded4Bytes);
+        String last4BytesFooter = tmp.getBody()+footer;   
+        bodyBlob = EncodingUtil.base64Decode(headerEncoded+bodyEncoded.substring(0,bodyEncoded.length()-4) 
+          + EncodingUtil.base64Encode(Blob.valueOf(last4BytesFooter)));
+      } else {
+        bodyBlob = EncodingUtil.base64Decode(headerEncoded + bodyEncoded + footerEncoded);
+      }
+      return EncodingUtil.base64Encode(bodyBlob);
     }
 
   public string writeBoundary() {
-    return '--' + this.boundary + CRLF;
-  }
-
-  public string writeFooter() {
-    return '--' + this.boundary + '--';
+    string value = '--' + Boundary + CRLF;
+    string valueCrlf = '--' + Boundary + CRLF;
+    blob valueBlob = blob.valueOf(valueCrlf);
+    return EncodingUtil.base64Encode(valueBlob);
   }
 
   public Map<String, String> getAllHeaders() {
