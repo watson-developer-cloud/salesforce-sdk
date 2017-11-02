@@ -2,13 +2,14 @@
  * This class provide the mockresponses for unit tests.<br>
  * mock responses are copied from IBM Watson Api Explorer.
  */
+  
 public class IBMWatsonMockResponses {
   public static String environment() {
     return '{"environment_id": "f822208e-e4c2-45f8-a0d6-c2be950fbcc8","name": "test_environment",'+
-                          '"description": "Test environment", "created": "2016-06-16T10:56:54.957Z",'+
-                              '"updated": "2017-05-16T13:56:54.957Z", "status": "active", "read_only": false,'+
-                              '"index_capacity": {"documents": {"indexed": 0, "maximum_allowed": 1000000},'+
-                              '"disk_usage": {"used_bytes": 0, "maximum_allowed_bytes": 99345920}}}';
+                        '"description": "Test environment", "created": "2016-06-16T10:56:54.957Z",'+
+                          '"updated": "2017-05-16T13:56:54.957Z", "status": "active", "read_only": false,'+
+                          '"index_capacity": {"documents": {"indexed": 0, "maximum_allowed": 1000000},'+
+                          '"disk_usage": {"used_bytes": 0, "maximum_allowed_bytes": 99345920}}}';
   }
   public static String configuration() {
     return  '{'+
@@ -220,48 +221,48 @@ public class IBMWatsonMockResponses {
 
    public static String listCollectionFieldsResponse() {
     return '{'+
-                '  "fields": ['+
-                '    {'+
-                '      "field": "warnings",'+
-                '      "type": "nested"'+
-                '    },'+
-                '    {'+
-                '      "field": "warnings.properties.description",'+
-                '      "type": "string"'+
-                '    },'+
-                '    {'+
-                '      "field": "warnings.properties.phase",'+
-                '      "type": "string"'+
-                '    },'+
-                '    {'+
-                '      "field": "warnings.properties.warning_id",'+
-                '      "type": "string"'+
-                '    }'+
-                '  ]'+
-                '}';
+              '  "fields": ['+
+              '    {'+
+              '      "field": "warnings",'+
+              '      "type": "nested"'+
+              '    },'+
+              '    {'+
+              '      "field": "warnings.properties.description",'+
+              '      "type": "string"'+
+              '    },'+
+              '    {'+
+              '      "field": "warnings.properties.phase",'+
+              '      "type": "string"'+
+              '    },'+
+              '    {'+
+              '      "field": "warnings.properties.warning_id",'+
+              '      "type": "string"'+
+              '    }'+
+              '  ]'+
+              '}';
   }
 
   public static String listEnvironmentsResponse() {
     return '{'+
-                '  "environments": ['+
-                '    {'+
-                '      "environment_id": "ecbda78e-fb06-40b1-a43f-a039fac0adc6",'+
-                '      "name": "byod_environment",'+
-                '      "description": "Private Data Environment",'+
-                '      "created": "2017-07-14T12:54:40.985Z",'+
-                '      "updated": "2017-07-14T12:54:40.985Z",'+
-                '      "read_only": false'+
-                '    },'+
-                '    {'+
-                '      "environment_id": "system",'+
-                '      "name": "Watson System Environment",'+
-                '      "description": "Watson System environment",'+
-                '      "created": "2017-07-13T01:14:20.761Z",'+
-                '      "updated": "2017-07-13T01:14:20.761Z",'+
-                '      "read_only": true'+
-                '    }'+
-                '  ]'+
-                '}';
+              '  "environments": ['+
+              '    {'+
+              '      "environment_id": "ecbda78e-fb06-40b1-a43f-a039fac0adc6",'+
+              '      "name": "byod_environment",'+
+              '      "description": "Private Data Environment",'+
+              '      "created": "2017-07-14T12:54:40.985Z",'+
+              '      "updated": "2017-07-14T12:54:40.985Z",'+
+              '      "read_only": false'+
+              '    },'+
+              '    {'+
+              '      "environment_id": "system",'+
+              '      "name": "Watson System Environment",'+
+              '      "description": "Watson System environment",'+
+              '      "created": "2017-07-13T01:14:20.761Z",'+
+              '      "updated": "2017-07-13T01:14:20.761Z",'+
+              '      "read_only": true'+
+              '    }'+
+              '  ]'+
+              '}';
   }
 
    public static String collection() {
@@ -756,15 +757,15 @@ public class IBMWatsonMockResponses {
           '{' +
             '"value": "Value of test_entity",' +
             '"metadata": {' +
-              '"code": "test_code"' +
+            '"code": "test_code"' +
             '},' +
             '"created": "2015-12-06T23:53:59.153Z",' +
             '"updated": "2017-10-18T15:44:56.800",' +
             '"patterns": [' +
-              '"test_pattern"' +
+            '"test_pattern"' +
             '],' +
             '"synonyms": [' +
-              '"Synonym for value of test_entity"' +
+            '"Synonym for value of test_entity"' +
             ']' +
           '}' +
           ']' +
@@ -903,50 +904,50 @@ public class IBMWatsonMockResponses {
         '{' +
           '"request": {' +
             '"input": {' +
-              '"text": "This is a message"' +
+            '"text": "This is a message"' +
             '},' +
             '"context": {}' +
           '},' +
           '"response": {' +
             '"intents": [' +
             '{' +
-              '"intent": "test_intent",' +
-              '"confidence": 0.314159' +
+            '"intent": "test_intent",' +
+            '"confidence": 0.314159' +
             '}' +
             '],' +
             '"entities": [' +
             '{' +
-              '"entity": "test_entity",' +
-              '"location": [' +
-                '10' +
-              '],' +
-              '"value": "Value of test_entity",' +
-              '"confidence": 0.314159' +
+            '"entity": "test_entity",' +
+            '"location": [' +
+              '10' +
+            '],' +
+            '"value": "Value of test_entity",' +
+            '"confidence": 0.314159' +
             '}' +
             '],' +
             '"input": {' +
-              '"text": "This is a message"' +
+            '"text": "This is a message"' +
             '},' +
             '"alternate_intents": false,' +
             '"context": {' +
-              '"conversation_id": "0000000",' +
-              '"system": {' +
-                '"dialog_turn_counter": "5"' +
-              '}' +
+            '"conversation_id": "0000000",' +
+            '"system": {' +
+              '"dialog_turn_counter": "5"' +
+            '}' +
             '},' +
             '"output": {' +
-              '"text": [' +
-                '"This is a response"' +
-              '],' +
-              '"nodes_visited": [' +
-                '"node_1"' +
-              '],' +
-              '"log_messages": [' +
-              '{' +
-                '"level": "warn",' +
-                '"msg": "test_warning"' +
-              '}' +
-              ']' +
+            '"text": [' +
+              '"This is a response"' +
+            '],' +
+            '"nodes_visited": [' +
+              '"node_1"' +
+            '],' +
+            '"log_messages": [' +
+            '{' +
+              '"level": "warn",' +
+              '"msg": "test_warning"' +
+            '}' +
+            ']' +
             '}' +
           '},' +
           '"language": "en",' +
@@ -990,8 +991,161 @@ public class IBMWatsonMockResponses {
   }
   public static String documentAccepted() {
     return '{' +
-              '"document_id": "f1360220-ea2d-4271-9d62-89a910b13c37",' +
-              '"status": "processing"' +
+            '"document_id": "f1360220-ea2d-4271-9d62-89a910b13c37",' +
+            '"status": "processing"' +
            '}';
+  }
+  
+  public static String testDocument() {
+    return  '{' +
+            '  "configuration_id": "e8b9d793-b163-452a-9373-bce07efb510b",' +
+            '  "status": "completed",' +
+            ' "enriched_field_units": 5,' +
+            '  "original_media_type": "text/html",' +
+            '  "snapshots": [' +
+            '    {' +
+            '      "step": "html_input",' +
+            '      "snapshot": {' +
+            '        "html": "<html><body>test</body></html>"' +
+            '      }' +
+            '    },' +
+            '    {' +
+            '      "step": "html_output",' +
+            '      "snapshot": {' +
+            '        "html": "<html><body>test</body></html>"' +
+            '      }' +
+            '    },' +
+            '    {' +
+            '      "step": "json_output",' +
+            '      "snapshot": {' +
+            '        "text": "test",' +
+            '        "html": "<html><body>test</body></html>",' +
+            '        "metadata": {' +
+            '          "title": "Press Release 2014-01-09",' +
+            '          "category": "news"' +
+            '        },' +
+            '        "extracted_metadata": {' +
+            '          "title": "IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations",' +
+            '          "author": "Jake Bake"' +
+            '        }' +
+            '      }' +
+            '    },' +
+            '    {' +
+            '      "step": "json_normalizations_output",' +
+            '      "snapshot": {' +
+            '        "text": "test",' +
+            '        "html": "<html><body>test</body></html>",' +
+            '        "metadata": {' +
+            '          "title": "test",' +
+            '          "author": "Jake Bake",' +
+            '          "category": "news"' +
+            '        }' +
+            '      }' +
+            '    },' +
+            '    {' +
+            '      "step": "enrichments_output",' +
+            '      "snapshot": {' +
+            '        "html": "<html><body>test</body></html>",' +
+            '        "text": "test",' +
+            '        "metadata": {' +
+            '          "title": "IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations",' +
+            '          "author": "Jake Bake",' +
+            '          "category": "news"' +
+            '        },' +
+            '        "alchemy_enriched_text": {' +
+            '          "status": "OK",' +
+            '          "language": "english",' +
+            '          "text": "test",' +
+            '          "keywords": [' +
+            '            {' +
+            '            "relevance": 0.978167,' +
+            '            "text": "IBM Watson Group"' +
+            '            },' +
+            '            {' +
+            '            "relevance": 0.432563,' +
+            '            "text": "products"' +
+            '            }' +
+            '          ]' +
+            '        },' +
+            '        "sire_enriched_text": {' +
+            '          "status": "OK",' +
+            '          "language": "english",' +
+            '          "model": "ie-en-news",' +
+            '          "typedRelations": [' +
+            '            {' +
+            '            "arguments": [' +
+            '              {' +
+            '                "entities": [' +
+            '                  {' +
+            '                    "id": "-E3",' +
+            '                    "text": "Silicon Alley",' +
+            '                    "type": "GeopoliticalEntity"' +
+            '                  }' +
+            '                ],' +
+            '                "part": "first",' +
+            '                "text": "Silicon Alley"' +
+            '              }' +
+            '            ],' +
+            '            "score": "0.898437",' +
+            '            "sentence": "test",' +
+            '            "type": "locatedAt"' +
+            '            }' +
+            '          ]' +
+            '        }' +
+            '      }' +
+            '    },' +
+            '    {' +
+            '     "step": "normalizations_output",' +
+            '      "snapshot": {' +
+            '        "title": "IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations",' +
+            '        "author": "Jake Bake",' +
+            '        "language": "english",' +
+            '        "text": "test",' +
+            '        "alchemy_enriched_text": {' +
+            '          "keywords": [' +
+            '            {' +
+            '            "relevance": 0.978167,' +
+            '            "text": "IBM Watson Group"' +
+            '            },' +
+            '            {' +
+            '            "relevance": 0.432563,' +
+            '            "text": "products"' +
+            '            }' +
+            '          ]' +
+            '        },' +
+            '        "sire_enriched_text": {' +
+            '          "typedRelations": [' +
+            '            {' +
+            '            "arguments": [' +
+            '              {' +
+            '                "entities": [' +
+            '                  {' +
+            '                    "id": "-E3",' +
+            '                    "text": "Silicon Alley",' +
+            '                    "type": "GeopoliticalEntity"' +
+            '                  }' +
+            '                ],' +
+            '                "part": "first",' +
+            '                "text": "Silicon Alley"' +
+            '              }' +
+            '            ],' +
+            '            "score": "0.898437",' +
+            '            "sentence": "test",' +
+            '            "type": "locatedAt"' +
+            '            }' +
+            '          ]' +
+            '        }' +
+            '      }' +
+            '    }' +
+            '  ],' +
+            '  "notices": [' +
+            '    {' +
+            '      "notice_id": "xpath_not_found",' +
+            '      "severity": "warning",' +
+            '      "step": "html-to-html",' +
+            '      "description": "xpath not found"' +
+            '    }' +
+            '  ]' +
+            '}';
   }
 }

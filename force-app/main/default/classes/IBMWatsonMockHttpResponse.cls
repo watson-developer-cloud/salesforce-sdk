@@ -13,14 +13,6 @@ public class IBMWatsonMockHttpResponse implements HttpCalloutMock  {
     this.responseHeaders = responseHeaders;
   }
 
-  public IBMWatsonMockHttpResponse(Integer code, String status, Blob body, Map<String, String> responseHeaders) {
-    this.code = code;
-    this.status = status;
-    this.bodyAsBlob = body;
-    this.bodyAsString = null;
-    this.responseHeaders = responseHeaders;
-  }
-
   public HTTPResponse respond(HTTPRequest req) {
     HttpResponse resp = new HttpResponse();
     resp.setStatusCode(code);
