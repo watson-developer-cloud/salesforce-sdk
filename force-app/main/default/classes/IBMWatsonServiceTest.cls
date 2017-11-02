@@ -30,7 +30,18 @@
   
 @isTest
 private class IBMWatsonServiceTest {
-
+	/**
+    *  Test available Request methods that are not used in example but available for developers.
+    *
+    */
+  static testMethod void testIBMWatsonRequest() {
+    Test.startTest();
+    Map<String,String> headers=new Map<String,String>{'test'=>'testvalue'};
+    IBMWatsonRequest.Builder builder = new IBMWatsonRequest.Builder();
+    builder.addHeader('test','testvalue');
+    Test.stopTest();
+  }
+  
   /**
    *  Test bad request exception scenario.
    *
@@ -304,5 +315,89 @@ private class IBMWatsonServiceTest {
       system.assertEquals(exptn.getStatusCode(),IBMWatsonHttpStatus.UNSUPPORTED_MEDIA_TYPE);
     }
     Test.stopTest();
+  }
+  /**
+   *  Test IBMWatsonValidator.
+   *
+   */
+  static testMethod void testIBMWatsonValidator() {
+    Test.startTest();
+   // IBMWatsonValidator validator=new IBMWatsonValidator();
+    try {
+      Object obj=null;
+      IBMWatsonValidator.notNull(obj,'test message');
+    }
+    catch(Exception exptn) {
+      system.assertEquals(exptn.getMessage(),'test message');
+    }
+    try {
+      IBMWatsonValidator.isNull('test','test message');
+    }
+    catch(Exception exptn) {
+      system.assertEquals(exptn.getMessage(),'test message');
+    }
+    try {
+      List<String> strlist=new List<String>();
+      IBMWatsonValidator.notEmpty(strlist,'test message');
+    }
+    catch(Exception exptn) {
+      system.assertEquals(exptn.getMessage(),'test message');
+    }
+    Test.stopTest();
+  }
+  
+  /**
+   *  Test IBMWatsonResponse.
+   *
+   */
+  static testMethod void testIBMWatsonResponse() {
+    Test.startTest();
+   // IBMWatsonValidator validator=new IBMWatsonValidator();
+    HttpResponse resp = new HttpResponse();
+    resp.setStatusCode(200);
+    resp.setStatus('Success');
+    resp.setBodyAsBlob(Blob.valueOf('test string'));
+    resp.setHeader('key','value');
+    resp.setHeader('Content-Type','text/plain');
+    IBMWatsonResponse response=new IBMWatsonResponse('url',resp);
+    System.assertEquals(response.getStatus(),'Success');
+    System.assertEquals(response.getHeaderKeys()[1],'Content-Type');
+    System.assertEquals(response.getBodyAsBlob(),Blob.valueOf('test string'));
+    Test.stopTest();   
+  }
+  
+  /**
+   *  Test IBMWatsonRequest.
+   *
+   */
+  static testMethod void testIBMWatsonRequestBuild() {
+    Test.startTest();
+    IBMWatsonRequest request=new IBMWatsonRequest.builder()
+      .url('https://watson-api-explorer.mybluemix.net')
+      .method('POST',IBMWatsonRequestBody.create())
+      .addHeader('key','value')
+      .build();
+    System.assertEquals(request.header('key'),'value');
+    System.assertEquals(request.getMethod(),'POST');
+    System.assertEquals(request.getHeadersByName('key').size(),1);
+    System.assert(request.toString().contains('POST'));
+    
+    Test.stopTest();  
+  }
+  
+  /**
+   *  Test IBMWatsonMediaType.
+   *
+   */
+  static testMethod void testIBMWatsonMediaType() {
+    Test.startTest();
+    IBMWatsonMediaType mediaType=IBMWatsonMediaType.Parse('text/plain; charset=utf-8');
+    //System.assertEquals(mediaType.toString(),'text/plain');
+    Object obj=null;
+    System.assertEquals(IBMWatsonHttpMediaType.createAudioRaw(5),IBMWatsonHttpMediaType.AUDIO_RAW + '; rate=5');
+  //  System.assertEquals(mediaType.equals(obj),false);
+  //  System.assertEquals(mediaType.hashCode(),817335912);
+    
+    Test.stopTest();  
   }
 }

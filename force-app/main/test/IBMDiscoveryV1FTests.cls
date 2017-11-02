@@ -84,8 +84,6 @@ public with sharing class IBMDiscoveryV1FTests {
   public static IBMDiscoveryV1Models.Environment testUpdateEnvironment(String environmentId) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
     discovery.setEndPoint(NAMED_CREDENTIALS);
-
-    //String text = '5ae96bb9-80e5-43ea-916e-1f3412fbc283';
     IBMDiscoveryV1Models.UpdateEnvironmentOptions options = new
       IBMDiscoveryV1Models.UpdateEnvironmentOptionsBuilder()
       .environmentId(environmentId)
@@ -420,7 +418,7 @@ public with sharing class IBMDiscoveryV1FTests {
     discovery.setEndPoint(NAMED_CREDENTIALS);
 
     IBMDiscoveryV1Models.TrainingExample te=new IBMDiscoveryV1Models.TrainingExample();
-    te.setDocumentId('0c0ee07b-952a-450e-b20f-95c36916f9b0');
+    te.setDocumentId('008948a1-d9b5-432e-88ba-f744b60b49e0');
     te.setRelevance(0);
     IBMDiscoveryV1Models.AddTrainingDataOptions options = new
       IBMDiscoveryV1Models.AddTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283','5ae96bb9-80e5-43ea-916e-1f3412fbc283')
@@ -439,19 +437,19 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test adding a query to the training data in single collection.
    *
    */
-  public static IBMDiscoveryV1Models.TrainingExample testCreateTrainingExample(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.TrainingExample testCreateTrainingExample(String environmentId, String collectionId, String queryId) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
     discovery.setEndPoint(NAMED_CREDENTIALS);
 
     List<String> collectionIds=new List<String>{'Collection1','Collection2'};
     IBMDiscoveryV1Models.TrainingExample te=new IBMDiscoveryV1Models.TrainingExample();
-    te.setDocumentId('20ab41e1-1f5f-4b3f-8745-4173319ad611');
+    te.setDocumentId('008948a1-d9b5-432e-88ba-f744b60b49e0');
     te.setRelevance(0);
     IBMDiscoveryV1Models.CreateTrainingExampleOptions options = new
       IBMDiscoveryV1Models.CreateTrainingExampleOptionsBuilder()
       .environmentId(environmentId)
       .collectionId(collectionId)
-      .queryId('8eec1310ae41ecddac8fa7acba159a2ea0a54b7d')
+      .queryId(queryId)
       .training_example(te)
       .relevance(0)
       .build();
@@ -464,7 +462,7 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test get training example
    *
    */
-  public static IBMDiscoveryV1Models.TrainingExample testGetTrainingExample(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.TrainingExample testGetTrainingExample(String environmentId, String collectionId, String queryId) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
     discovery.setEndPoint(NAMED_CREDENTIALS);
 
@@ -472,7 +470,7 @@ public with sharing class IBMDiscoveryV1FTests {
       IBMDiscoveryV1Models.GetTrainingExampleOptionsBuilder()
       .environmentId(environmentId)
       .collectionId(collectionId)
-      .queryId('8eec1310ae41ecddac8fa7acba159a2ea0a54b7d')
+      .queryId(queryId)
       .exampleId('20ab41e1-1f5f-4b3f-8745-4173319ad611')
       .build();
     IBMDiscoveryV1Models.TrainingExample resp = discovery.getTrainingExample(options);
@@ -484,7 +482,7 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test get training data
    *
    */
-  public static IBMDiscoveryV1Models.TrainingQuery testGetTrainingData(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.TrainingQuery testGetTrainingData(String environmentId, String collectionId, String queryId) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
     discovery.setEndPoint(NAMED_CREDENTIALS);
 
@@ -492,7 +490,7 @@ public with sharing class IBMDiscoveryV1FTests {
       IBMDiscoveryV1Models.GetTrainingDataOptionsBuilder()
       .environmentId(environmentId)
       .collectionId(collectionId)
-      .queryId('8eec1310ae41ecddac8fa7acba159a2ea0a54b7d')
+      .queryId(queryId)
       .build();
     IBMDiscoveryV1Models.TrainingQuery resp = discovery.getTrainingData(options);
 
@@ -523,7 +521,7 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test adding a query to the training data in single collection.
    *
    */
-  public static IBMDiscoveryV1Models.TrainingExample testUpdateTrainingExample(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.TrainingExample testUpdateTrainingExample(String environmentId, String collectionId, String queryId) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
     discovery.setEndPoint(NAMED_CREDENTIALS);
 
@@ -531,7 +529,7 @@ public with sharing class IBMDiscoveryV1FTests {
       IBMDiscoveryV1Models.UpdateTrainingExampleOptionsBuilder()
       .environmentId(environmentId)
       .collectionId(collectionId)
-      .queryId('8eec1310ae41ecddac8fa7acba159a2ea0a54b7d')
+      .queryId(queryId)
       .exampleId('20ab41e1-1f5f-4b3f-8745-4173319ad611')
       .relevance(2)
       .build();
@@ -641,10 +639,7 @@ public with sharing class IBMDiscoveryV1FTests {
 
     Attachment att=[Select Id,Body,BodyLength,ContentType,Name,Description From Attachment where Id='00P1I000000ZEcP'];
     IBMWatsonFile testfile=new IBMWatsonFile.FileBuilder()
-      .body(att.Body)
-      .name(att.Name)
-      .description(att.Description)
-      .contentType(att.ContentType)
+      .attachment(att)
       .build();
     IBMDiscoveryV1Models.AddDocumentOptions options = new
       IBMDiscoveryV1Models.AddDocumentOptionsBuilder()
@@ -656,6 +651,57 @@ public with sharing class IBMDiscoveryV1FTests {
       .build();
     IBMDiscoveryV1Models.DocumentAccepted resp = discovery.addDocument(options);
     System.debug('IBMDiscoveryV1FTests.testAddDocument: ' + resp);
+    return resp;
+  }
+  
+   public static IBMDiscoveryV1Models.TestDocument testConfigurationInEnvironment(String environmentId, String configurationId) {
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
+    discovery.setEndPoint(NAMED_CREDENTIALS);
+    Attachment att=[Select Id,Body,BodyLength,ContentType,Name,Description From Attachment where Id='00P1I000000ZEcP'];
+    IBMWatsonFile testfile=new IBMWatsonFile.FileBuilder()
+      .body(att.Body)
+      .name(att.Name)
+      .description(att.Description)
+      .contentType(att.ContentType)
+      .build();
+    IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptions options = new IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptionsBuilder()
+      .environmentId(environmentId)
+      .configurationId(configurationId)
+      .file(testfile)
+      .filename(att.Name)
+      .fileContentType(att.ContentType)
+      .build();
+    IBMDiscoveryV1Models.TestDocument resp =
+      discovery.testConfigurationInEnvironment(options);
+    System.debug('IBMDiscoveryV1FTests.testConfigurationInEnvironment: ' + resp);
+    return resp;
+  }
+  
+  /**
+   *  Update a document.
+   *
+   */
+  public static IBMDiscoveryV1Models.DocumentAccepted testUpdateDocument(String environmentId, String collectionId, String documentId) {
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
+    discovery.setEndPoint(NAMED_CREDENTIALS);
+    Attachment att=[Select Id,Body,BodyLength,ContentType,Name,Description From Attachment where Id='00P1I000000ZEcP'];
+    IBMWatsonFile testfile=new IBMWatsonFile.FileBuilder()
+      .body(att.Body)
+      .name(att.Name)
+      .description(att.Description)
+      .contentType(att.ContentType)
+      .build();
+    IBMDiscoveryV1Models.UpdateDocumentOptions options = new IBMDiscoveryV1Models.UpdateDocumentOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .documentId(documentId)
+      .file(testfile)
+      .filename(att.Name)
+      .fileContentType(att.ContentType)
+      .build();
+    IBMDiscoveryV1Models.DocumentAccepted resp =
+      discovery.updateDocument(options);
+    System.debug('IBMDiscoveryV1FTests.testUpdateDocument: ' + resp);
     return resp;
   }
 }
