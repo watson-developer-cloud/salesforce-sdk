@@ -31,23 +31,6 @@
 @isTest
 private class IBMWatsonServiceTest {
 
-	/**
-    *  Test available Request methods that are not used in example but available for developers.
-    *
-    */
-  static testMethod void testIBMWatsonRequest() {
-    Test.startTest();
-    Map<String,String> headers=new Map<String,String>{'test'=>'testvalue'};
-    IBMWatsonRequest.Builder builder = new IBMWatsonRequest.Builder();
-    builder.addHeader('test','testvalue');
-    Map<String,String> cHeaders=builder.getHeaders();
-    system.assert(cHeaders.containsKey('test'));
-    builder.removeHeader('test');
-    cHeaders=builder.getHeaders();
-    system.assertEquals(cHeaders.containsKey('test'),false);
-    Test.stopTest();
-  }
-  
   /**
    *  Test bad request exception scenario.
    *

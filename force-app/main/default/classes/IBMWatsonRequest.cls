@@ -25,7 +25,7 @@ public class IBMWatsonRequest {
     return this.method;
   }
 
-  public Map<string, string> getAllHeaders() {
+  public Map<String, String> getAllHeaders() {
     return this.headers;
   }
 
@@ -51,13 +51,6 @@ public class IBMWatsonRequest {
 
   public Builder newBuilder() {
     return new Builder(this);
-  }
-
-  public boolean isHttps() {
-    if (url != null && url.toExternalForm().startsWith('https://')) {
-      return true;
-    }
-    return false;
   }
 
   public override String toString() {
@@ -120,31 +113,6 @@ public class IBMWatsonRequest {
     public Builder addHeader(String name, String value) {
       headers.put(name, value);
       return this;
-    }
-
-    public Builder removeHeader(String name) {
-      headers.remove(name);
-      return this;
-    }
-
-    public Map<String, String> getHeaders() {
-      return this.headers;
-    }
-
-    public Builder httpGet() {
-      return method('GET', null);
-    }
-
-    public Builder httpPost(IBMWatsonRequestBody body) {
-      return method('POST', body);
-    }
-
-    public Builder httpDelete() {
-      return method('DELETE', null);
-    }
-
-    public Builder httpPut(IBMWatsonRequestBody body) {
-      return method('PUT', body);
     }
 
     public Builder method(String method, IBMWatsonRequestBody body) {
