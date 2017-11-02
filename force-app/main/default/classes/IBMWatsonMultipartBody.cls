@@ -72,9 +72,9 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   /**
    *  Pad the value with spaces until the base64 encoding is no longer padded.
    */
-  public static string SafelyPad(string value, string valueCrLf64, string lineBreaks) {
-    string valueCrLf = '';
-    blob valueCrLfBlob = null;
+  public static String safelyPad(String value, String valueCrLf64, String lineBreaks) {
+    String valueCrLf = '';
+    Blob valueCrLfBlob = null;
 
     while (valueCrLf64.endsWith('=')) {
       value += ' ';
@@ -89,24 +89,24 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   /**
    *  Write a key-value pair to the form's body.
    */
-  public static string writeBodyParameter(string key, string value) {
-    string contentDisposition = 'Content-Disposition: form-data; name="' + key + '"';
-    string contentDispositionCrLf = contentDisposition + CRLF + CRLF;
-    blob contentDispositionCrLfBlob = blob.valueOf(contentDispositionCrLf);
-    string contentDispositionCrLf64 = EncodingUtil.base64Encode(contentDispositionCrLfBlob);
-    string content = SafelyPad(contentDisposition, contentDispositionCrLf64, CRLF + CRLF);
-    string valueCrLf = value + CRLF;
-    blob valueCrLfBlob = blob.valueOf(valueCrLf);
-    string valueCrLf64 = EncodingUtil.base64Encode(valueCrLfBlob);
+  public static String writeBodyParameter(String key, String value) {
+    String contentDisposition = 'Content-Disposition: form-data; name="' + key + '"';
+    String contentDispositionCrLf = contentDisposition + CRLF + CRLF;
+    Blob contentDispositionCrLfBlob = blob.valueOf(contentDispositionCrLf);
+    String contentDispositionCrLf64 = EncodingUtil.base64Encode(contentDispositionCrLfBlob);
+    String content = safelyPad(contentDisposition, contentDispositionCrLf64, CRLF + CRLF);
+    String valueCrLf = value + CRLF;
+    Blob valueCrLfBlob = blob.valueOf(valueCrLf);
+    String valueCrLf64 = EncodingUtil.base64Encode(valueCrLfBlob);
 
-    content += SafelyPad(value, valueCrLf64, CRLF);
+    content += safelyPad(value, valueCrLf64, CRLF);
 
     return content;
   }
     /**
-     *  Write a blob type to the form's body.
+     *  Write a Blob type to the form's body.
      */
-    public String writeBlobBody(string key, string bodyEncoded, string filename){
+    public String writeBlobBody(String key, String bodyEncoded, String filename){
       String boundaryCrlf = '--'+this.boundary + CRLF;
       
       String contentDisposition = 'Content-Disposition: form-data; name="'+ key +'"; filename="'+ fileName +'"';
@@ -141,10 +141,10 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
       return EncodingUtil.base64Encode(bodyBlob);
     }
 
-  public string writeBoundary() {
-    string value = '--' + Boundary + CRLF;
-    string valueCrlf = '--' + Boundary + CRLF;
-    blob valueBlob = blob.valueOf(valueCrlf);
+  public String writeBoundary() {
+    String value = '--' + Boundary + CRLF;
+    String valueCrlf = '--' + Boundary + CRLF;
+    Blob valueBlob = blob.valueOf(valueCrlf);
     return EncodingUtil.base64Encode(valueBlob);
   }
 
@@ -229,10 +229,10 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   private static String UUID() {
     Blob b = Crypto.GenerateAESKey(128);
     String h = EncodingUtil.ConvertTohex(b);
-    String UUID = h.SubString(0,8) + '-'
-      + h.SubString(8,12) + '-'
-      + h.SubString(12,16) + '-'
-      + h.SubString(16,20) + '-'
+    String UUID = h.substring(0,8) + '-'
+      + h.substring(8,12) + '-'
+      + h.substring(12,16) + '-'
+      + h.substring(16,20) + '-'
       + h.substring(20);
     return UUID.toUpperCase();
   }
@@ -256,10 +256,10 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
      */
     public Builder setType(IBMWatsonMediaType mediaType) {
       if (mediaType == null) {
-        throw new IBMWatsonServiceExceptions.IllegalArgumentException('mediaType == null');
+        throw new IBMWatsonServiceExceptions.IllegalArgumentException('mediaType cannot be null');
       }
       if (!mediaType.toString().contains('multipart')) {
-        throw new IBMWatsonServiceExceptions.IllegalArgumentException('multipart != ' + mediaType);
+        throw new IBMWatsonServiceExceptions.IllegalArgumentException('mediaType should contain multipart: ' + mediaType);
       }
       this.mediaType = mediaType;
       return this;
