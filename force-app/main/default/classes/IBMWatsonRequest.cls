@@ -37,7 +37,7 @@ public class IBMWatsonRequest {
     List<String> headerValues = new List<String>();
     if (headers != null && !headers.isEmpty()) {
       for (String headerName: headers.keySet()) {
-        if (!String.isBlank(headerName) && headerName.equalsIgnoreCase(name)) {
+        if (String.isNotBlank(headerName) && headerName.equalsIgnoreCase(name)) {
           headerValues.add(headers.get(headerName));
         }
       }
