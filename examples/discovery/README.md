@@ -76,11 +76,62 @@ Be sure to check the "Debug Only" option to see only the desired output. After p
 
 ![listEnvironments response](readme_images/list_environments_response.png "listEnvironments response")
 
-Congratulations! You've made your first successful Watson Discovery call using Apex in just 4 lines of code.
+Congratulations! You've made your first successful Watson Discovery call using Apex in just 4 lines of code. Let's continue exploring more of the Discovery API.
 
+When you created your Discovery service, you may have noticed that you already had a collection present: the Discovery News collection. This is a default collection that consists of millions English news documents and is updated continuously. We'll use this pre-built collection to test out Discovery's querying functionality and get a better idea of its capabilities.
 
+There are two ways to make queries in Discovery: with the Discovery Query Language or using natural language. You can learn more about using the Discovery Query Language [here](https://console.bluemix.net/docs/services/discovery/using.html#building-a-basic-query). For this first demonstration, we'll use natural language, along with some other parameters, to search for relevant documents about Dreamforce 2017.
 
-- Query discovery news to get idea of service
+Remove all of the previous code, other than the first line instantiating the Discovery object, and replace it with the following:
+
+```apex
+IBMDiscoveryV1Models.QueryOptions options 
+  = new IBMDiscoveryV1Models.QueryOptionsBuilder()
+    .environmentId('system')
+    .collectionId('news')
+    .naturalLanguageQuery('Dreamforce 2017')
+    .count(5)
+    .build();
+IBMDiscoveryV1Models.QueryResponse response = discovery.query(options);
+System.debug(response);
+```
+
+Note how, like in the first code example, we follow the pattern of creating an `Options` object with a builder and then pass that into our Discovery method. In this case, we actually use the builder to set the environment ID and collection ID (which are defaults for the Discovery News collection), natural language query, and count of the number of documents we want back.
+
+If you take a look at the logged output, you'll see that there's _a lot_ of information, some of it we may not be interested in. Luckily, the `QueryOptions` allow us to pass a list of fields we want back. Let's add that parameter to the builder and look at the new output.
+
+```apex
+  .returnField(new List<String> { 'text', 'author', 'url' })
+```
+
+Now we just get a list of returned documents with the text, author, and URL for each, if applicable, which is much easier to deal with.
+
+Easily parsing your service response is one of the biggest advantages of using the SDK, since everything is wrapped up in objects. We can demonstrate this with the first Discovery News query by manipulating our response object instead of just printing it.
+
+If we take a look at the `query` method in the [API explorer](https://watson-api-explorer.mybluemix.net/apis/discovery-v1#!/Queries/query), we can see that our response contains an array of `QueryResult` objects, each of which has 4 properties: `id`, `score`, `metadata`, and `collection_id`. We can verify the specifics by looking at the `QueryResponse` and `QueryResult` objects in the `IBMDiscoveryV1Models` class of the SDK, which contains all of the models used for the Discovery service.
+
+Knowing this, let's print out the document ID of the 5 documents we get back from our query, using the following code:
+
+```apex
+IBMDiscoveryV1Models.QueryOptions options 
+  = new IBMDiscoveryV1Models.QueryOptionsBuilder()
+    .environmentId('system')
+    .collectionId('news')
+    .naturalLanguageQuery('Dreamforce 2017')
+    .count(5)
+    .build();
+IBMDiscoveryV1Models.QueryResponse response = discovery.query(options);
+
+List<IBMDiscoveryV1Models.QueryResult> results = response.getResults();
+for (IBMDiscoveryV1Models.QueryResult result : results) {
+  System.debug(result.getId());
+}
+```
+
+Now, you should just see the IDs of the returned documents.
+
+Now that you're a bit more familiar with the Discovery service and the SDK, let's create our own collection to upload documents into and query.
+
 - Create new collection
 - Upload some documents
 - Query those documents
