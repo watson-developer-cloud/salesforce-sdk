@@ -46,7 +46,17 @@ public class IBMWatsonJSONUtil {
    * @return String representing the JSON response with modified keys
    */
   public static String addReservedWordSuffix(String jsonString) {
-    return jsonString.replaceAll('" :','":').replaceAll('":', '_serialized_name":');
+    List<String> jsonStringPieces = new List<String>();
+    String restOfString = jsonString;
+    Integer indexOffset = 5000;
+    while (restOfString.length() > indexOffset) {
+      Integer braceIndex = restOfString.indexOf('{', indexOffset);
+      String newPiece = restOfString.substring(0, braceIndex);
+      restOfString = restOfString.substring(braceIndex);
+      jsonStringPieces.add(newPiece.replaceAll('" :','":').replaceAll('":', '_serialized_name":'));
+    }
+    jsonStringPieces.add(restOfString.replaceAll('" :','":').replaceAll('":', '_serialized_name":'));
+    return String.join(jsonStringPieces, '');
   }
 
   /**
