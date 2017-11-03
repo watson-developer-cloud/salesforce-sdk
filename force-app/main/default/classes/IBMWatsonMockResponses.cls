@@ -2,7 +2,6 @@
  * This class provide the mockresponses for unit tests.<br>
  * mock responses are copied from IBM Watson Api Explorer.
  */
-  
 public class IBMWatsonMockResponses {
   public static String environment() {
     return '{"environment_id": "f822208e-e4c2-45f8-a0d6-c2be950fbcc8","name": "test_environment",'+
