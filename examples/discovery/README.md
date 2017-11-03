@@ -152,9 +152,24 @@ With our new collection, we're now going to upload some documents to it to be ab
 
 The easiest way to upload a small set of local documents is to use the tooling, which allows you to drag-and-drop a set of documents into your collection. However, for the purpose of this lab, we'll do the same through the SDK, which allows developers the ablity to upload documents programmatically or to create their own upload interfaces.
 
-- Upload some documents
-- Query those documents
+**UPLOAD INSTRUCTIONS HERE**
 
+- Upload some documents
+
+With the 10 documents in our collection, we can perform one more query to get some information from our data. This time, we'll use the Discovery Query Language. Our goal will be to pick out documents which contain the `entity` Harvard, which should return to us the speakers who have some connection to the university. To make things easier to digest, we'll filter for just the extracted title of each document, using dot notation to navigate the full JSON response. Paste the following into your developer console, again making sure to substitute your personal environment and collection IDs:
+
+```apex
+IBMDiscoveryV1Models.QueryOptions options 
+  = new IBMDiscoveryV1Models.QueryOptionsBuilder()
+    .environmentId('ENVIRONMENT_ID')
+    .collectionId('COLLECTION_ID')
+    .query('enriched_text.entities.text:Harvard')
+    .returnField(new List<String> { 'extracted_metadata.title' })
+    .build();
+IBMDiscoveryV1Models.QueryResponse response = discovery.query(options);
+```
+
+Taking a look at the printed result, you should see 6 names returned. Sure enough, 5 of the returned speakers hold degrees from Harvard University, with Marc Benioff having the connection due to a mention in Harvard Business Review.
 
 ## Conclusion
 Final words, maybe helpful links to check out for later.
