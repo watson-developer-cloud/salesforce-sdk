@@ -49,11 +49,12 @@ public class IBMWatsonJSONUtil {
     List<String> jsonStringPieces = new List<String>();
     String restOfString = jsonString;
     Integer indexOffset = 5000;
-    while (restOfString.length() > indexOffset) {
-      Integer braceIndex = restOfString.indexOf('{', indexOffset);
+    Integer braceIndex = restOfString.indexOf('{', indexOffset);
+    while (braceIndex >= 0) {
       String newPiece = restOfString.substring(0, braceIndex);
       restOfString = restOfString.substring(braceIndex);
       jsonStringPieces.add(newPiece.replaceAll('" :','":').replaceAll('":', '_serialized_name":'));
+      braceIndex = restOfString.indexOf('{', indexOffset);
     }
     jsonStringPieces.add(restOfString.replaceAll('" :','":').replaceAll('":', '_serialized_name":'));
     return String.join(jsonStringPieces, '');
