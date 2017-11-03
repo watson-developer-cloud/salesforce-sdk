@@ -1,5 +1,5 @@
 /**
- * This class assists in validating arguments.<br>
+ * This class assists in validating arguments.
  * If an argument value is deemed invalid, an IllegalArgumentException is thrown.
  */
 public class IBMWatsonValidator {
