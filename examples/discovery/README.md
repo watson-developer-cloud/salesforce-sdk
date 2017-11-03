@@ -130,7 +130,23 @@ for (IBMDiscoveryV1Models.QueryResult result : results) {
 
 Now, you should just see the IDs of the returned documents.
 
-Now that you're a bit more familiar with the Discovery service and the SDK, let's create our own collection to upload documents into and query.
+Since you're a bit more familiar with the Discovery service and the SDK, let's create our own collection to upload documents into and query. To do so, we'll use the `createCollection` method. By now you should get the idea of the pattern to build this request, so if you're feeling confident, go ahead and try it yourself, using the API explorer and the `IBMDiscoveryV1` and `IBMDiscoveryV1Models` classes as reference. Otherwise, here's the code we need to do it:
+
+```apex
+IBMDiscoveryV1Models.CreateCollectionOptions options 
+  = new IBMDiscoveryV1Models.CreateCollectionOptionsBuilder()
+    .environmentId('ENVIRONMENT_ID') // enter your environment ID here!
+    .name('dreamforce-collection')
+    .description('Collection created at Dreamforce 2017')
+    .build();
+IBMDiscoveryV1Models.Collection response = discovery.createCollection(options);
+```
+
+**Note:** Be sure to use the environment ID you got in your `listEnvironments` call earlier in the lab!
+
+If you print out your response object, you should see the details of your newly created collection. Like the environment ID, be sure to keep a note of the returned collection ID, as it will be used when uploading documents and querying. If you'd like extra verification that this worked, head back over to the Discovery tooling, where you first created your environment. Alongside the default Discovery News collection, you should see a collection named "dreamforce-collection".
+
+![New collection](readme_images/new_collection.png "New collection")
 
 - Create new collection
 - Upload some documents
