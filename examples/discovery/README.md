@@ -148,7 +148,10 @@ If you print out your response object, you should see the details of your newly 
 
 ![New collection](readme_images/new_collection.png "New collection")
 
-- Create new collection
+With our new collection, we're now going to upload some documents to it to be able to analyze them. If you look in the `examples/discovery/sample_documents` folder, you'll see that we've provided 10 sample documents, each containing the bio of a Dreamforce 2017 speaker pulled from the Dreamforce website. These are what we'll be using to populate our collection.
+
+The easiest way to upload a small set of local documents is to use the tooling, which allows you to drag-and-drop a set of documents into your collection. However, for the purpose of this lab, we'll do the same through the SDK, which allows developers the ablity to upload documents programmatically or to create their own upload interfaces.
+
 - Upload some documents
 - Query those documents
 
