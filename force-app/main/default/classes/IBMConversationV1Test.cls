@@ -153,12 +153,80 @@ private class IBMConversationV1Test {
 
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setUsernameAndPassword('username', 'password');
-
+    IBMConversationV1Models.CreateCounterexample counterexample = new IBMConversationV1Models.CreateCounterexampleBuilder('text')
+      .text(counterexampleText)
+      .build();
+    counterexample = counterexample.newBuilder().build();    
+    IBMConversationV1Models.CreateExample createExample=new IBMConversationV1Models.CreateExampleBuilder('example').text('example').build();
+    createExample = createExample.newBuilder().build();   
+    IBMConversationV1Models.CreateIntent createIntent = new IBMConversationV1Models.CreateIntentBuilder(intentName)
+      .intent(intentName)
+      .description('test')
+      .examples(new List<IBMConversationV1Models.CreateExample>{createExample})
+      .addExamples(createExample)
+      .build();
+    createIntent = createIntent.newBuilder().build();  
+    IBMConversationV1Models.DialogNodeAction  dialogNodeAction = new IBMConversationV1Models.DialogNodeAction();
+    dialogNodeAction.setName('test');
+    dialogNodeAction.setType('test');
+    dialogNodeAction.setParameters(metadata);
+    dialogNodeAction.setResultVariable('test');
+    dialogNodeAction.setCredentials('test');
+    IBMConversationV1Models.DialogNodeNextStep dialogNodeNextStep=new IBMConversationV1Models.DialogNodeNextStep();
+    dialogNodeNextStep.setBehavior('test');
+    dialogNodeNextStep.setDialogNode('test');
+    dialogNodeNextStep.setSelector('test');
+    IBMConversationV1Models.CreateDialogNode createDialogNode = new IBMConversationV1Models.CreateDialogNodeBuilder()
+    .addActions(dialogNodeAction)
+    .dialogNode('test')
+    .description('test')
+    .conditions('test')
+    .parent('test')
+    .previousSibling('test')
+    .output(metadata)
+    .context(metadata)
+    .metadata(metadata)
+    .nextStep(dialogNodeNextStep)
+    .actions(new List<IBMConversationV1Models.DialogNodeAction>{dialogNodeAction})
+    .title('test')
+    .typeField('test')
+    .eventName('test')
+    .variable('test')
+    .build();
+    createDialogNode = createDialogNode.newBuilder().build();
+    IBMConversationV1Models.CreateValue createValue = new IBMConversationV1Models.CreateValueBuilder('test')
+      .addSynonyms('test')
+      .addPatterns('test')
+      .value('test')
+      .metadata(metadata)
+      .synonyms(new List<String>{'test1','test2'})
+      .patterns(new List<String>{'test1','test2'})
+      .typeField('test')
+      .build();
+    createValue = createValue.newBuilder().build();  
+    IBMConversationV1Models.CreateEntity createEntity = new IBMConversationV1Models.CreateEntityBuilder('test')
+      .addValues(createValue)
+      .entity('test')
+      .description('test')
+      .metadata(metadata)
+      .values(new List<IBMConversationV1Models.CreateValue>{createValue})
+      .build(); 
+    createEntity = createEntity.newBuilder().build();   
     IBMConversationV1Models.CreateWorkspaceOptions createWorkspaceOptions = new IBMConversationV1Models.CreateWorkspaceOptionsBuilder()
       .name(workspaceName)
       .description(workspaceDescription)
+      .addCounterexamples(counterexample)
+      .counterexamples(new List<IBMConversationV1Models.CreateCounterexample>{counterexample})
+      .addIntents(createIntent)
+      .intents(new List<IBMConversationV1Models.CreateIntent>{createIntent})
+      .addDialogNodes(createDialogNode)
+      .dialogNodes(new List<IBMConversationV1Models.CreateDialogNode>{createDialogNode})
+      .addentities(createEntity)
+      .entities(new List<IBMConversationV1Models.CreateEntity>{createEntity})
       .language(workspaceLanguage)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+     createWorkspaceOptions = createWorkspaceOptions.newBuilder().build();   
     IBMConversationV1Models.Workspace response = conversation.createWorkspace(createWorkspaceOptions);
 
     System.assertEquals(response.getName(), workspaceName);
@@ -188,6 +256,8 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.DeleteWorkspaceOptions deleteOptions = new IBMConversationV1Models.DeleteWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    deleteOptions = deleteOptions.newBuilder().build();     
     conversation.deleteWorkspace(deleteOptions);
 
     Test.stopTest();
@@ -209,6 +279,8 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.GetWorkspaceOptions getOptions = new IBMConversationV1Models.GetWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    getOptions = getOptions.newBuilder().build();     
     IBMConversationV1Models.WorkspaceExport response = conversation.getWorkspace(getOptions);
 
     System.assertEquals(response.getName(), workspaceName);
@@ -245,6 +317,8 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.UpdateWorkspaceOptions updateOptions = new IBMConversationV1Models.UpdateWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    updateOptions = updateOptions.newBuilder().build();   
     IBMConversationV1Models.Workspace response = conversation.updateWorkspace(updateOptions);
 
     System.assertEquals(response.getName(), workspaceName);
@@ -273,6 +347,8 @@ private class IBMConversationV1Test {
 
     IBMConversationV1Models.ListWorkspacesOptions listOptions = new IBMConversationV1Models.ListWorkspacesOptionsBuilder()
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    listOptions = listOptions.newBuilder().build();  
     IBMConversationV1Models.WorkspaceCollection response = conversation.listWorkspaces(listOptions);
 
     System.assertEquals(response.getWorkspaces().get(0).getName(), workspaceName);
@@ -310,6 +386,8 @@ private class IBMConversationV1Test {
       .addPatterns(valuePattern)
       .addSynonyms(valueSynonym)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    createOptions = createOptions.newBuilder().build();  
     IBMConversationV1Models.Value response = conversation.createValue(createOptions);
 
     System.assertEquals(response.getValue(), valueName);
@@ -339,6 +417,8 @@ private class IBMConversationV1Test {
       .entity(entityName)
       .value(valueName)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    deleteOptions = deleteOptions.newBuilder().build();  
     conversation.deleteValue(deleteOptions);
 
     Test.stopTest();
@@ -363,6 +443,8 @@ private class IBMConversationV1Test {
       .value(valueName)
       .exportField(true)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    getOptions = getOptions.newBuilder().build();  
     IBMConversationV1Models.ValueExport response = conversation.getValue(getOptions);
 
     System.assertEquals(response.getValue(), valueName);
@@ -395,6 +477,8 @@ private class IBMConversationV1Test {
       .addNewPatterns(valuePattern)
       .addNewSynonyms(valueSynonym)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    updateOptions = updateOptions.newBuilder().build();
     IBMConversationV1Models.Value response = conversation.updateValue(updateOptions);
 
     System.assertEquals(response.getValue(), valueName);
@@ -423,6 +507,8 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    listOptions = listOptions.newBuilder().build();
     IBMConversationV1Models.ValueCollection response = conversation.listValues(listOptions);
 
     System.assertEquals(response.getValues().get(0).getValue(), valueName);
@@ -454,11 +540,15 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.InputData input = new IBMConversationV1Models.InputDataBuilder()
       .text(messageInput)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    input = input.newBuilder().build();  
     IBMConversationV1Models.MessageOptions messageOptions = new IBMConversationV1Models.MessageOptionsBuilder()
       .workspaceId(workspaceId)
       .input(input)
       .alternateIntents(alternateIntents)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    messageOptions = messageOptions.newBuilder().build();   
     IBMConversationV1Models.MessageResponse response = conversation.message(messageOptions);
 
     System.assertEquals(response.getIntents().get(0).getIntent(), intentName);
@@ -496,6 +586,8 @@ private class IBMConversationV1Test {
       .intent(intentName)
       .description(intentDescription)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    createOptions = createOptions.newBuilder().build();  
     IBMConversationV1Models.Intent response = conversation.createIntent(createOptions);
 
     System.assertEquals(response.getIntent(), intentName);
@@ -522,6 +614,8 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    deleteOptions = deleteOptions.newBuilder().build();  
     conversation.deleteIntent(deleteOptions);
 
     Test.stopTest();
@@ -545,6 +639,8 @@ private class IBMConversationV1Test {
       .intent(intentName)
       .exportField(true)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    getOptions = getOptions.newBuilder().build();  
     IBMConversationV1Models.IntentExport response = conversation.getIntent(getOptions);
 
     System.assertEquals(response.getIntent(), intentName);
@@ -574,6 +670,8 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .exportField(true)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    listOptions = listOptions.newBuilder().build();    
     IBMConversationV1Models.IntentCollection response = conversation.listIntents(listOptions);
 
     System.assertEquals(response.getIntents().get(0).getIntent(), intentName);
@@ -608,6 +706,8 @@ private class IBMConversationV1Test {
       .intent(intentName)
       .newDescription(intentDescription)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    updateOptions = updateOptions.newBuilder().build();  
     IBMConversationV1Models.Intent response = conversation.updateIntent(updateOptions);
 
     System.assertEquals(response.getIntent(), intentName);
@@ -635,6 +735,8 @@ private class IBMConversationV1Test {
       .intent(intentName)
       .text(exampleText)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    createOptions = createOptions.newBuilder().build();  
     IBMConversationV1Models.Example response = conversation.createExample(createOptions);
 
     System.assertEquals(response.getText(), exampleText);
@@ -661,6 +763,8 @@ private class IBMConversationV1Test {
       .intent(intentName)
       .text('example A')
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    deleteOptions = deleteOptions.newBuilder().build();  
     conversation.deleteExample(deleteOptions);
 
     Test.stopTest();
@@ -684,6 +788,8 @@ private class IBMConversationV1Test {
       .intent(intentName)
       .text(exampleText)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    getOptions = getOptions.newBuilder().build();  
     IBMConversationV1Models.Example response = conversation.getExample(getOptions);
 
     System.assertEquals(response.getText(), exampleText);
@@ -709,6 +815,8 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    listOptions = listOptions.newBuilder().build();    
     IBMConversationV1Models.ExampleCollection response = conversation.listExamples(listOptions);
 
     System.assertEquals(response.getExamples().get(0).getText(), exampleText);
@@ -740,6 +848,8 @@ private class IBMConversationV1Test {
       .text(exampleText)
       .newText(exampleText)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    updateOptions = updateOptions.newBuilder().build();   
     IBMConversationV1Models.Example response = conversation.updateExample(updateOptions);
 
     System.assertEquals(response.getText(), exampleText);
@@ -766,6 +876,8 @@ private class IBMConversationV1Test {
       .entity(entityName)
       .description(entityDescription)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    createOptions = createOptions.newBuilder().build();  
     IBMConversationV1Models.Entity response = conversation.createEntity(createOptions);
 
     System.assertEquals(response.getEntity(), entityName);
@@ -794,6 +906,8 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    deleteOptions = deleteOptions.newBuilder().build();  
     conversation.deleteEntity(deleteOptions);
 
     Test.stopTest();
@@ -817,6 +931,8 @@ private class IBMConversationV1Test {
       .entity(entityName)
       .exportField(true)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    getOptions = getOptions.newBuilder().build();   
     IBMConversationV1Models.EntityExport response = conversation.getEntity(getOptions);
 
     System.assertEquals(response.getEntity(), entityName);
@@ -851,6 +967,8 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .exportField(true)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    listOptions = listOptions.newBuilder().build();   
     IBMConversationV1Models.EntityCollection response = conversation.listEntities(listOptions);
 
     System.assertEquals(response.getEntities().get(0).getEntity(), entityName);
@@ -890,6 +1008,8 @@ private class IBMConversationV1Test {
       .entity(entityName)
       .newDescription(entityDescription)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    updateOptions = updateOptions.newBuilder().build();  
     IBMConversationV1Models.Entity response = conversation.updateEntity(updateOptions);
 
     System.assertEquals(response.getEntity(), entityName);
@@ -920,6 +1040,8 @@ private class IBMConversationV1Test {
       .value(valueName)
       .synonym(valueSynonym)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    createOptions = createOptions.newBuilder().build();    
     IBMConversationV1Models.Synonym response = conversation.createSynonym(createOptions);
 
     System.assertEquals(response.getSynonym(), valueSynonym);
@@ -947,6 +1069,8 @@ private class IBMConversationV1Test {
       .value(valueName)
       .synonym(valueSynonym)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    deleteOptions = deleteOptions.newBuilder().build();      
     conversation.deleteSynonym(deleteOptions);
 
     Test.stopTest();
@@ -971,6 +1095,8 @@ private class IBMConversationV1Test {
       .value(valueName)
       .synonym(valueSynonym)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    getOptions = getOptions.newBuilder().build();     
     IBMConversationV1Models.Synonym response = conversation.getSynonym(getOptions);
 
     System.assertEquals(response.getSynonym(), valueSynonym);
@@ -997,6 +1123,8 @@ private class IBMConversationV1Test {
       .entity(entityName)
       .value(valueName)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    listOptions = listOptions.newBuilder().build();  
     IBMConversationV1Models.SynonymCollection response = conversation.listSynonyms(listOptions);
 
     System.assertEquals(response.getSynonyms().get(0).getSynonym(), valueSynonym);
@@ -1029,6 +1157,8 @@ private class IBMConversationV1Test {
       .synonym(valueSynonym)
       .newSynonym(valueSynonym)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    updateOptions = updateOptions.newBuilder().build();  
     IBMConversationV1Models.Synonym response = conversation.updateSynonym(updateOptions);
 
     System.assertEquals(response.getSynonym(), valueSynonym);
@@ -1054,6 +1184,8 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    createOptions = createOptions.newBuilder().build();   
     IBMConversationV1Models.DialogNode response = conversation.createDialogNode(createOptions);
 
     System.assertEquals(response.getDialogNode(), dialogNodeName);
@@ -1098,6 +1230,8 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    deleteOptions = deleteOptions.newBuilder().build();  
     conversation.deleteDialogNode(deleteOptions);
 
     Test.stopTest();
@@ -1120,6 +1254,8 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    getOptions = getOptions.newBuilder().build();   
     IBMConversationV1Models.DialogNode response = conversation.getDialogNode(getOptions);
 
     System.assertEquals(response.getDialogNode(), dialogNodeName);
@@ -1163,6 +1299,8 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.ListDialogNodesOptions listOptions = new IBMConversationV1Models.ListDialogNodesOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    listOptions = listOptions.newBuilder().build();     
     IBMConversationV1Models.DialogNodeCollection response = conversation.listDialogNodes(listOptions);
 
     System.assertEquals(response.getDialogNodes().get(0).getDialogNode(), dialogNodeName);
@@ -1211,6 +1349,8 @@ private class IBMConversationV1Test {
       .newDialogNode(dialogNodeName)
       .newDescription(dialogNodeDescription)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    updateOptions = updateOptions.newBuilder().build();  
     IBMConversationV1Models.DialogNode response = conversation.updateDialogNode(updateOptions);
 
     System.assertEquals(response.getDialogNode(), dialogNodeName);
@@ -1252,6 +1392,8 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.ListLogsOptions listOptions = new IBMConversationV1Models.ListLogsOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    listOptions = listOptions.newBuilder().build();   
     IBMConversationV1Models.LogCollection response = conversation.listLogs(listOptions);
 
     System.assertEquals(response.getLogs().get(0).getRequest().getInput().text(), messageInput);
@@ -1296,6 +1438,33 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .text(counterexampleText)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    createOptions = createOptions.newBuilder().build();   
+    IBMConversationV1Models.Counterexample response = conversation.createCounterexample(createOptions);
+
+    System.assertEquals(response.getText(), counterexampleText);
+    System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
+    System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
+    Test.stopTest();
+  }
+  
+  static testMethod void testCreateCounterexample2() {
+    String body = IBMWatsonMockResponses.counterexample();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    conversation.setUsernameAndPassword('username', 'password');
+
+    IBMConversationV1Models.CreateCounterexampleOptions createOptions = 
+      new IBMConversationV1Models.CreateCounterexampleOptionsBuilder(workspaceId,counterexampleText)
+      .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    createOptions = createOptions.newBuilder().build();   
     IBMConversationV1Models.Counterexample response = conversation.createCounterexample(createOptions);
 
     System.assertEquals(response.getText(), counterexampleText);
@@ -1321,6 +1490,8 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .text(counterexampleText)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    deleteOptions = deleteOptions.newBuilder().build();    
     conversation.deleteCounterexample(deleteOptions);
 
     Test.stopTest();
@@ -1343,6 +1514,8 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .text(counterexampleText)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    getOptions = getOptions.newBuilder().build();  
     IBMConversationV1Models.Counterexample response = conversation.getCounterexample(getOptions);
 
     System.assertEquals(response.getText(), counterexampleText);
@@ -1367,6 +1540,8 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.ListCounterexamplesOptions listOptions = new IBMConversationV1Models.ListCounterexamplesOptionsBuilder()
       .workspaceId(workspaceId)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    listOptions = listOptions.newBuilder().build();   
     IBMConversationV1Models.CounterexampleCollection response = conversation.listCounterexamples(listOptions);
 
     System.assertEquals(response.getCounterexamples().get(0).getText(), counterexampleText);
@@ -1397,6 +1572,8 @@ private class IBMConversationV1Test {
       .text(counterexampleText)
       .newText(counterexampleText)
       .build();
+    //you can add more attributes using following builder method. This step is not necessary 
+    updateOptions = updateOptions.newBuilder().build();   
     IBMConversationV1Models.Counterexample response = conversation.updateCounterexample(updateOptions);
 
     System.assertEquals(response.getText(), counterexampleText);

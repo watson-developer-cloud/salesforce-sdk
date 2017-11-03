@@ -391,13 +391,33 @@ private class IBMWatsonServiceTest {
    */
   static testMethod void testIBMWatsonMediaType() {
     Test.startTest();
-    IBMWatsonMediaType mediaType=IBMWatsonMediaType.Parse('text/plain; charset=utf-8');
-    //System.assertEquals(mediaType.toString(),'text/plain');
+    IBMWatsonMediaType mediaType=IBMWatsonMediaType.Parse('text/plain');
+    System.assertEquals(mediaType.toString(),'text/plain');
     Object obj=null;
     System.assertEquals(IBMWatsonHttpMediaType.createAudioRaw(5),IBMWatsonHttpMediaType.AUDIO_RAW + '; rate=5');
-  //  System.assertEquals(mediaType.equals(obj),false);
-  //  System.assertEquals(mediaType.hashCode(),817335912);
+    System.assertEquals(mediaType.equals(obj),false);
+    System.assertEquals(mediaType.hashCode(),817335912);
     
+    Test.stopTest();  
+  }
+  
+   /**
+   *  Test IBMWatsonMultipartBody.
+   *
+   */
+  static testMethod void testIBMWatsonMultipartBody() {
+    Test.startTest(); 
+    IBMWatsonMultipartBody multipartBody = new IBMWatsonMultipartBody.Builder()
+      .setType(IBMWatsonMultipartBody.FORM)
+      .addPart(IBMWatsonRequestBody.create())
+      .addPart(new Map<String, String>{'test'=>'test'},IBMWatsonRequestBody.create())
+      .addFormDataPart('key','value')
+      .build();
+    System.assertEquals(IBMWatsonMultipartBody.safelyPad('test','test=test=','test'),EncodingUtil.base64Encode(blob.valueOf('test test')));
+    System.assertEquals(IBMWatsonMultipartBody.writeBodyParameter('test','test'),'Q29udGVudC1EaXNwb3NpdGlvbjogZm9ybS1kYXRhOyBuYW1lPSJ0ZXN0IiANCg0KdGVzdA0K');
+    System.assertEquals(multipartBody.parts().size(),3);
+    System.assert(multipartBody.getAllHeaders().get('Content-Type').contains('multipart/form-data; boundary'));
+    System.assert(multipartBody.form64().contains(multipartBody.writeBoundary()));
     Test.stopTest();  
   }
 }
