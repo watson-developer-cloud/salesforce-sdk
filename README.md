@@ -1,7 +1,5 @@
 # IBM Watson Salesforce SDK
 
-[![Build Status](https://travis-ci.com/germanattanasio/salesforce-sdk.svg?token=KTpTGKpqxmhtwWo4UVVC&branch=master)](https://travis-ci.com/germanattanasio/salesforce-sdk)
-
 The IBM Watson Salesforce SDK uses the [Watson Developer Cloud](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment. Currently, this SDK supports two Watson services: Conversation and Discovery. More are planned to be added in the future.
 
 ## Installation using Salesforce DX
