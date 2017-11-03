@@ -1,4 +1,4 @@
-# Discovery Lab
+# IBM Watson Salesforce SDK - Discovery Lab
 
 ## Introduction
 In this lab, you'll get the chance to try out the new Watson Salesforce SDK by interacting with the Watson Discovery API in Apex. After completing the lab, you should be familiar with:
@@ -150,13 +150,15 @@ If you print out your response object, you should see the details of your newly 
 
 With our new collection, we're now going to upload some documents to it to be able to analyze them. If you look in the `examples/discovery/sample_documents` folder, you'll see that we've provided 10 sample documents, each containing the bio of a Dreamforce 2017 speaker pulled from the Dreamforce website. These are what we'll be using to populate our collection.
 
-The easiest way to upload a small set of local documents is to use the tooling, which allows you to drag-and-drop a set of documents into your collection. However, for the purpose of this lab, we'll do the same through the SDK, which allows developers the ablity to upload documents programmatically or to create their own upload interfaces.
+The easiest way to upload a small set of local documents is to use the tooling, which allows you to drag-and-drop a set of documents into your collection. This functionality is available through the SDK, allowing developers the ablity to upload documents programmatically or to create their own upload interfaces, but for the purpose of this lab, we're going to go with the simpler route.
 
-**UPLOAD INSTRUCTIONS HERE**
+In the tooling page where you see the Discovery News collection and your custom "dreamforce-collection", click on your custom collection. From here simply grab the 10 sample documents and drag them into your browser window:
 
-- Upload some documents
+<p align="center">
+  <img src="http://g.recordit.co/cpbD6TSvhU.gif" alt="add documents" />
+</p>
 
-With the 10 documents in our collection, we can perform one more query to get some information from our data. This time, we'll use the Discovery Query Language. Our goal will be to pick out documents which contain the `entity` Harvard, which should return to us the speakers who have some connection to the university. To make things easier to digest, we'll filter for just the extracted title of each document, using dot notation to navigate the full JSON response. Paste the following into your developer console, again making sure to substitute your personal environment and collection IDs:
+After a little bit of processing, our documents will be ingested into our Discovery collection and be ready for querying. This time, we'll use the Discovery Query Language. Our goal will be to pick out documents which contain the `entity` Harvard, which should return to us the speakers who have some connection to the university. To make things easier to digest, we'll filter for just the extracted title of each document, using dot notation to navigate the full JSON response. Paste the following into your developer console, again making sure to substitute your personal environment and collection IDs:
 
 ```apex
 IBMDiscoveryV1Models.QueryOptions options 
@@ -172,4 +174,11 @@ IBMDiscoveryV1Models.QueryResponse response = discovery.query(options);
 Taking a look at the printed result, you should see 6 names returned. Sure enough, 5 of the returned speakers hold degrees from Harvard University, with Marc Benioff having the connection due to a mention in Harvard Business Review.
 
 ## Conclusion
-Final words, maybe helpful links to check out for later.
+Congratulations! You've completed the lab and hopefully feel more familiar with the Watson Salesforce SDK and navigating IBM Cloud to create and manage your Watson services. We hope that the new SDK will make it easy to integrate Watson into your Salesforce apps by offering a simple, consistent interface.
+
+If you're interested in exploring further or would like some resources to reference in the future, below are some helpful links:
+
+- [**IBM Cloud console**](https://console.bluemix.net/) - Where to create and manage Watson services
+- [**Watson documentation**](https://www.ibm.com/watson/developercloud/doc/index.html) - Where to find all documentation on the various Watson services
+- [**Watson API explorer**](https://watson-api-explorer.mybluemix.net/) - Where to see detailed API information and make sample calls
+- [**Watson Developer Cloud GitHub Organization**](https://github.com/watson-developer-cloud) - Public GitHub organization containing other SDKs, starter kits, etc.
