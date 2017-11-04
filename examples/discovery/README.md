@@ -31,7 +31,7 @@ To create your environment, click on the gear icon at the top-right of the page.
 
 ![Create environment](readme_images/create_environment.png "Create environment")
 
-When prompted to create a collection, go ahead and exit out of the prompt. We'll do that through the SDK later on. First though, we'll need to get things set up in our Salesforce environment.
+When prompted to create a collection, you can just exit out of the prompt. We'll do that through the SDK later on. First though, we'll need to get things set up in our Salesforce environment.
 
 ### Salesforce
 [Log in](https://login.salesforce.com/) to your Salesforce developer environment, and then follow the instructions on the [Watson Salesforce SDK GitHub page](https://github.com/watson-developer-cloud/salesforce-sdk) README to deploy the SDK to your developer org. Automatic and manual deployment using Salesforce DX are both supported, as well as manual deployment using Ant.
@@ -41,7 +41,7 @@ Now, you should have all of the SDK classes loaded into your developer environme
 Now it's time to start using the SDK!
 
 ## Using the SDK
-Head over to the Developer Console in your Salesforce, where we'll be putting our Apex code to call the Discovery service. For most of the Discovery methods, we need to supply an environment ID. This corresponds to the environment we created in the Discovery tooling in the setup portion of this lab. Lucky for us, the SDK provides a `listEnvironments` method to get that ID.
+Head over to the Developer Console in your Salesforce environment, where we'll be putting our Apex code to call the Discovery service. For most of the Discovery methods, we need to supply an environment ID. This corresponds to the environment we created in the Discovery tooling in the setup portion of this lab. Lucky for us, the SDK provides a `listEnvironments` method to get that ID.
 
 **Note:** If at any point in the coding section you would like to take a closer look at the many API endpoints and models in the Discovery service, you can go to the [Discovery API explorer](https://watson-api-explorer.mybluemix.net/apis/discovery-v1). This is a handy resource for future use, allowing you to see all of the operations, sample requests and responses, and to make sample API calls by inputting your credentials at the top of the page.
 
@@ -51,7 +51,7 @@ Before performing any actions, we need to create an instance of a Discovery obje
 IBMDiscoveryV1 discovery = new IBMDiscoveryV1(IBMDiscoveryV1.VERSION_DATE_2017_09_01);
 ```
 
-The argument passed into the constructor is the version date, and the possible values are exposed as static `String`s in the service classes. Using the latest version ensures the most up-to-date functionality, but the option is there to use older versions if any app-specific functionality would be broken otherwise.
+The argument passed into the constructor is the version date, and the possible values are exposed as static strings in the service classes. Using the latest version ensures the most up-to-date functionality, but the option is there to use older versions if any app-specific functionality would be broken otherwise.
 
 Note as well that no code has to be written for authentication, as we set up the named credentials earlier in this lab. However, if we didn't set that up, we could use the `setUsernameAndPassword` method to get the same result.
 
@@ -158,7 +158,11 @@ In the tooling page where you see the Discovery News collection and your custom 
   <img src="http://g.recordit.co/cpbD6TSvhU.gif" alt="add documents" />
 </p>
 
-After a little bit of processing, our documents will be ingested into our Discovery collection and be ready for querying. This time, we'll use the Discovery Query Language. Our goal will be to pick out documents which contain the `entity` Harvard, which should return to us the speakers who have some connection to the university. To make things easier to digest, we'll filter for just the extracted title of each document, using dot notation to navigate the full JSON response. Paste the following into your developer console, again making sure to substitute your personal environment and collection IDs:
+After a little bit of processing, you should be taken to the following page, which confirms that the documents have been successfully processed. From here, you can also look at some extracted insights from your data and view the data schema or build queries using the tabs on the left sidebar.
+
+![Add documents result](readme_images/add_documents_result.png "Add documents result")
+
+In our case, we're going to make a query using the SDK again, this time using the Discovery Query Language. Our goal will be to pick out documents which contain the `entity` Harvard, which should return to us the speakers who have some connection to the university. To make things easier to digest, we'll filter for just the extracted title of each document, using dot notation to navigate the full JSON response. Paste the following into your developer console, again making sure to substitute your personal environment and collection IDs:
 
 ```apex
 IBMDiscoveryV1Models.QueryOptions options 
