@@ -177,6 +177,17 @@ System.debug(intent);
 
 The manner of instantiating and using services should be consistent no matter which you decide to use, which should make it easy to explore the many capabilities Watson services have to offer.
 
+## Supported Services
+
+The SDK currently supports:
+  * Conversation v1
+  * Discovery v1
+
+The remaining services will be added in the soon. You can find the ones that are close to be release in the `generated` branch:
+ * Natural Language Understanding v1
+ * Natural Language Classifier v1
+ * Personality Insights v3
+
 ## Functional Tests
 
 The `force-app/main/test` folder contains the example calls for each service. These examples are used for functional testing of services. Developers can use them for reference and testing the installed SDK.
