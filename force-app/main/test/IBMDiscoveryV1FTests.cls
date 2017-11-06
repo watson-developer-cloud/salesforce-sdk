@@ -1,3 +1,4 @@
+@isTest
 public with sharing class IBMDiscoveryV1FTests {
   private static String VERSION_2017_09_01 = '2017-09-01';
   // Make sure the named credentials below is defined
