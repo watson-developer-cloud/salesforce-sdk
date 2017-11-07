@@ -3,6 +3,10 @@
  * mock responses are copied from IBM Watson Api Explorer.
  */
 public class IBMWatsonMockResponses {
+  public static String IBMNaturalLanguageClassifierClassifyBaseURL = 
+    'https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1';
+  public static String IBMNaturalLanguageClassifierClassifyURL = 
+    IBMNaturalLanguageClassifierClassifyBaseURL+'/classify?text=How%20hot%20wil/10D41B-nlc-1';
   public static String environment() {
     return '{"environment_id": "f822208e-e4c2-45f8-a0d6-c2be950fbcc8","name": "test_environment",'+
                         '"description": "Test environment", "created": "2016-06-16T10:56:54.957Z",'+
@@ -1146,5 +1150,66 @@ public class IBMWatsonMockResponses {
             '    }' +
             '  ]' +
             '}';
+  }
+  
+  public static String Classify() {
+    return '{' +
+    '  "classifier_id": "10D41B-nlc-1",' +
+    '  "url": "'+IBMNaturalLanguageClassifierClassifyURL+'",' +
+    '  "text": "How hot will it be today?",' +
+    '  "top_class": "temperature",' +
+    '  "classes": [' +
+    '    {' +
+    '      "class_name": "temperature",' +
+    '      "confidence": 0.9998201258549781' +
+    '    },' +
+    '    {' +
+    '      "class_name": "conditions",' +
+    '      "confidence": 0.00017987414502176904' +
+    '    }' +
+    '  ]' +
+    '}';
+  }
+  
+  public static String CreateClassifier(){
+  	return '{' +
+    '  "classifier_id": "10D41B-nlc-1",' +
+    '  "name": "My Classifier",' +
+    '  "language": "en",' +
+    '  "created": "2015-05-28T18:01:57.393Z",' +
+    '  "url": "'+IBMNaturalLanguageClassifierClassifyBaseURL+'",' +
+    '  "status": "Training",' +
+    '  "status_description": "The classifier instance is in its training phase, not yet ready to accept classify requests"' +
+    '}';
+  }
+  
+  public static String DeleteClassifier(){
+  	return '{}';
+  }
+
+  public static String getClassifier(){
+  	return '{' +
+    '"classifier_id": "10D41B-nlc-1",' +
+    '"name": "My Classifier",' +
+    '"language": "en",' +
+    '"created": "2015-05-28T18:01:57.393Z",' +
+    '"url": "'+IBMNaturalLanguageClassifierClassifyBaseURL+'",' +
+    '"status": "Available",' +
+    '"status_description": "The classifier instance is now available and is ready to take classifier requests."' +
+    '}';
+  }
+  
+  public static String listClassifiers(){
+  	return '{' +
+    '"classifiers": [' +
+    '  {' +
+    '    "classifier_id": "10D41B-nlc-1",' +
+    '    "url": "'+IBMNaturalLanguageClassifierClassifyBaseURL+'",' +
+    '    "name": "My Classifier",' +
+    '    "language": "en",' +
+    '    "created": "2015-05-28T18:01:57.393Z"' +
+    '  }' +
+    ' ]' +
+    '}';
   }
 }
