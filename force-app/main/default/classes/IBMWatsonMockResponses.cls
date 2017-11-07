@@ -1184,7 +1184,7 @@ public class IBMWatsonMockResponses {
   }
   
   public static String DeleteClassifier(){
-  	return '';
+  	return '{}';
   }
 
   public static String getClassifier(){

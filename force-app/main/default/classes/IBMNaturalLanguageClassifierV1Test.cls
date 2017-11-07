@@ -11,7 +11,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-    service.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    service.setEndPoint('https://gateway.watsonplatform.net/natural-language-classifier/api');
     service.setUsernameAndPassword('username', 'password');
     String classifier_id_serialized_name = '10D41B-nlc-1'; 
     String text_serialized_name = 'How hot will it be today?';
@@ -35,7 +35,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     System.assert(class_name_set.contains(class_name_serialized_name), 'Invalid class name for classifier.');
     Double confidence_serialized_name = ClassifiedClass.getConfidence();
     System.assertNotEquals(confidence_serialized_name, null);
-    System.assert(confidence_serialized_name>0, 'Invalid confidence for classifier.');
+    System.assert(confidence_serialized_name > 0, 'Invalid confidence for classifier.');
     IBMNaturalLanguageClassifierV1Models.ClassifyOptionsBuilder ClassifyOptionsBuilder = classifyOptions.newBuilder();
     ClassifyOptionsBuilder = new IBMNaturalLanguageClassifierV1Models.ClassifyOptionsBuilder(classifier_id_serialized_name, text_serialized_name);
     Test.stopTest();
@@ -51,16 +51,16 @@ private class IBMNaturalLanguageClassifierV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-    service.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    service.setEndPoint('https://gateway.watsonplatform.net/natural-language-classifier/api');
     service.setUsernameAndPassword('username', 'password');
-    Attachment TrainingMetadata = new Attachment(Body=Blob.valueOf('test string'),
+    Attachment TrainingMetadata = new Attachment(Body = Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
       ContentType='text/plain');
     IBMWatsonFile training_metadata_serialized_name = new IBMWatsonFile.FileBuilder()
       .attachment(TrainingMetadata)
       .build();
-    Attachment TrainingData = new Attachment(Body=Blob.valueOf('test string'),
+    Attachment TrainingData = new Attachment(Body = Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
       ContentType='text/plain');
@@ -77,13 +77,13 @@ private class IBMNaturalLanguageClassifierV1Test {
       .trainingDataFilename(training_data_filename_serialized_name)
       .build();
     IBMNaturalLanguageClassifierV1Models.Classifier Classifier = service.createClassifier(createClassifierOptions);
-    System.assertEquals(Classifier.getName(),'My Classifier');
-    System.assertEquals(Classifier.getUrl(),IBMWatsonMockResponses.IBMNaturalLanguageClassifierClassifyBaseURL);
-    System.assertEquals(Classifier.getStatus(),'Training');
-    System.assertEquals(Classifier.getClassifierId(),'10D41B-nlc-1');
-    System.assertEquals(Classifier.getCreated(),(DateTime)JSON.deserialize('"2015-05-28T18:01:57.393Z"',DateTime.class));
-    System.assertEquals(Classifier.getStatusDescription(),'The classifier instance is in its training phase, not yet ready to accept classify requests');
-    System.assertEquals(Classifier.getLanguage(),'en');
+    System.assertEquals(Classifier.getName(), 'My Classifier');
+    System.assertEquals(Classifier.getUrl(), IBMWatsonMockResponses.IBMNaturalLanguageClassifierClassifyBaseURL);
+    System.assertEquals(Classifier.getStatus(), 'Training');
+    System.assertEquals(Classifier.getClassifierId(), '10D41B-nlc-1');
+    System.assertEquals(Classifier.getCreated(), (DateTime)JSON.deserialize('"2015-05-28T18:01:57.393Z"', DateTime.class));
+    System.assertEquals(Classifier.getStatusDescription(), 'The classifier instance is in its training phase, not yet ready to accept classify requests');
+    System.assertEquals(Classifier.getLanguage(), 'en');
     IBMNaturalLanguageClassifierV1Models.CreateClassifierOptionsBuilder
       CreateClassifierOptionsBuilder = createClassifierOptions.newBuilder();
     CreateClassifierOptionsBuilder = new IBMNaturalLanguageClassifierV1Models.CreateClassifierOptionsBuilder(training_metadata_serialized_name, 
@@ -101,7 +101,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-    service.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    service.setEndPoint('https://gateway.watsonplatform.net/natural-language-classifier/api');
     service.setUsernameAndPassword('username', 'password');
     String classifier_id_serialized_name = '10D41B-nlc-1';
     IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptions deleteClassifierOptions = 
@@ -123,19 +123,19 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
     service = new IBMNaturalLanguageClassifierV1('username', 'password');
     String classifier_id_serialized_name = '10D41B-nlc-1'; 
-    service.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    service.setEndPoint('https://gateway.watsonplatform.net/natural-language-classifier/api');
     IBMNaturalLanguageClassifierV1Models.GetClassifierOptions getClassifierOption =
       new IBMNaturalLanguageClassifierV1Models.GetClassifierOptionsBuilder()
       .classifierId(classifier_id_serialized_name)
       .build();
     IBMNaturalLanguageClassifierV1Models.Classifier Classifier = service.getClassifier(getClassifierOption);
-    System.assertEquals(Classifier.getName(),'My Classifier');
-    System.assertEquals(Classifier.getUrl(),IBMWatsonMockResponses.IBMNaturalLanguageClassifierClassifyBaseURL);
-    System.assertEquals(Classifier.getStatus(),'Available');
-    System.assertEquals(Classifier.getClassifierId(),'10D41B-nlc-1');
-    System.assertEquals(Classifier.getCreated(),(DateTime)JSON.deserialize('"2015-05-28T18:01:57.393Z"',DateTime.class));
-    System.assertEquals(Classifier.getStatusDescription(),'The classifier instance is now available and is ready to take classifier requests.');
-    System.assertEquals(Classifier.getLanguage(),'en');
+    System.assertEquals(Classifier.getName(), 'My Classifier');
+    System.assertEquals(Classifier.getUrl(), IBMWatsonMockResponses.IBMNaturalLanguageClassifierClassifyBaseURL);
+    System.assertEquals(Classifier.getStatus(), 'Available');
+    System.assertEquals(Classifier.getClassifierId(), '10D41B-nlc-1');
+    System.assertEquals(Classifier.getCreated(), (DateTime)JSON.deserialize('"2015-05-28T18:01:57.393Z"',DateTime.class));
+    System.assertEquals(Classifier.getStatusDescription(), 'The classifier instance is now available and is ready to take classifier requests.');
+    System.assertEquals(Classifier.getLanguage(), 'en');
     IBMNaturalLanguageClassifierV1Models.GetClassifierOptionsBuilder GetClassifierOptionsBuilder = 
       getClassifierOption.newBuilder();
     GetClassifierOptionsBuilder = new IBMNaturalLanguageClassifierV1Models.GetClassifierOptionsBuilder(classifier_id_serialized_name);
@@ -156,13 +156,13 @@ private class IBMNaturalLanguageClassifierV1Test {
     System.assertNotEquals(Classifiers, null);
     System.assertEquals(Classifiers.size(), 1);
     IBMNaturalLanguageClassifierV1Models.Classifier Classifier = Classifiers[0];
-    System.assertEquals(Classifier.getName(),'My Classifier');
-    System.assertEquals(Classifier.getUrl(),IBMWatsonMockResponses.IBMNaturalLanguageClassifierClassifyBaseURL);
-    System.assertEquals(Classifier.getStatus(),null);
-    System.assertEquals(Classifier.getClassifierId(),'10D41B-nlc-1');
-    System.assertEquals(Classifier.getCreated(),(DateTime)JSON.deserialize('"2015-05-28T18:01:57.393Z"',DateTime.class));
-    System.assertEquals(Classifier.getStatusDescription(),null);
-    System.assertEquals(Classifier.getLanguage(),'en');
+    System.assertEquals(Classifier.getName(), 'My Classifier');
+    System.assertEquals(Classifier.getUrl(), IBMWatsonMockResponses.IBMNaturalLanguageClassifierClassifyBaseURL);
+    System.assertEquals(Classifier.getStatus(), null);
+    System.assertEquals(Classifier.getClassifierId(), '10D41B-nlc-1');
+    System.assertEquals(Classifier.getCreated(), (DateTime)JSON.deserialize('"2015-05-28T18:01:57.393Z"',DateTime.class));
+    System.assertEquals(Classifier.getStatusDescription(), null);
+    System.assertEquals(Classifier.getLanguage(), 'en');
     IBMNaturalLanguageClassifierV1Models.ListClassifiersOptionsBuilder ListClassifiersOptionsBuilder = 
       listClassifiersOptions.newBuilder();
     Test.stopTest();
