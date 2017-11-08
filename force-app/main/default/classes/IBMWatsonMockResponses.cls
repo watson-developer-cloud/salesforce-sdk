@@ -6,7 +6,7 @@ public class IBMWatsonMockResponses {
   public static String IBMNaturalLanguageClassifierClassifyBaseURL = 
     'https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1';
   public static String IBMNaturalLanguageClassifierClassifyURL = 
-    IBMNaturalLanguageClassifierClassifyBaseURL+'/classify?text=How%20hot%20wil/10D41B-nlc-1';
+    IBMNaturalLanguageClassifierClassifyBaseURL + '/classify?text=How%20hot%20wil/10D41B-nlc-1';
   public static String environment() {
     return '{"environment_id": "f822208e-e4c2-45f8-a0d6-c2be950fbcc8","name": "test_environment",'+
                         '"description": "Test environment", "created": "2016-06-16T10:56:54.957Z",'+
@@ -1003,7 +1003,7 @@ public class IBMWatsonMockResponses {
     return  '{' +
             '  "configuration_id": "e8b9d793-b163-452a-9373-bce07efb510b",' +
             '  "status": "completed",' +
-            ' "enriched_field_units": 5,' +
+            '  "enriched_field_units": 5,' +
             '  "original_media_type": "text/html",' +
             '  "snapshots": [' +
             '    {' +
@@ -1172,19 +1172,19 @@ public class IBMWatsonMockResponses {
   }
   
   public static String CreateClassifier(){
-  	return '{' +
+    return '{' +
     '  "classifier_id": "10D41B-nlc-1",' +
     '  "name": "My Classifier",' +
     '  "language": "en",' +
     '  "created": "2015-05-28T18:01:57.393Z",' +
-    '  "url": "'+IBMNaturalLanguageClassifierClassifyBaseURL+'",' +
+    '  "url": "' + IBMNaturalLanguageClassifierClassifyBaseURL + '",' +
     '  "status": "Training",' +
     '  "status_description": "The classifier instance is in its training phase, not yet ready to accept classify requests"' +
     '}';
   }
   
   public static String DeleteClassifier(){
-  	return '{}';
+    return '{}';
   }
 
   public static String getClassifier(){
@@ -1211,5 +1211,80 @@ public class IBMWatsonMockResponses {
     '  }' +
     ' ]' +
     '}';
+  }
+  
+  public static String analysisResults() {
+    return  '{' +
+            '  "entities": [' +
+            '    {' +
+            '      "type": "Company",' +
+            '      "relevance": 0.89792,' +
+            '      "count": 12,' +
+            '      "name": "IBM",' +
+            '      "disambiguation": {' +
+            '        "name": "IBM",' +
+            '        "dbpedia_resource": "http://dbpedia.org/resource/IBM",' +
+            '        "subtype": [' +
+            '          "SoftwareLicense",' +
+            '          "OperatingSystemDeveloper",' +
+            '          "ProcessorManufacturer",' +
+            '          "SoftwareDeveloper",' +
+            '          "CompanyFounder",' +
+            '          "ProgrammingLanguageDesigner",' +
+            '          "ProgrammingLanguageDeveloper"' +
+            '        ]' +
+            '      },' +
+            '      "sentiment": {' +
+            '        "score": 0.099437' +
+            '      },' +
+            '      "emotion": {' +
+            '        "sadness": 0.271362,' +
+            '        "joy": 0.618694,' +
+            '        "fear": 0.033186,' +
+            '        "disgust": 0.056113,' +
+            '        "anger": 0.099437' +
+            '      }' +
+            '    }' +
+            '  ],' +
+            '  "usage": { "features": 4, "text_characters": 40, "text_units": 5},' +
+            '  "concepts":[{"text": "test", "relevance": 0.66382, "dbpedia_resource": "test"}],' +
+            '  "keywords": [' +
+            '    {' +
+            '      "emotion": {' +
+            '        "sadness": 0.174379,' +
+            '        "joy": 0.66067,' +
+            '        "fear": 0.051475,' +
+            '        "disgust": 0.114401,' +
+            '        "anger": 0.044105' +
+            '      },' +
+            '      "relevance": "0.900808",' +
+            '      "sentiment": {' +
+            '        "score": 0.419889' +
+            '      },' +
+            '      "text": "free trial"' +
+            '    }' +
+            '  ],' +
+            '  "categories": [{ "label": "Company", "score": 0.89792}],' +
+            '  "metadata": { "authors": [{"name": "test"}], "publication_date": "2017-05-16T13:56:54.957Z","title": "test"},' +
+            '  "emotion": { "targets": [{"text": "test", "score": 0.89792,"emotion": {"anger": 0.099437}}], "document": {"label": "test", "score": 0.89792, "emotion": {"anger": 0.099437}}},' +
+            '  "relations": [{ "type": "Company", "sentence": "Company", "score": 0.89792,"arguments": [{"entities": [{"text": "test","type": "Company"}],"text": "test"}]}],' +
+            '  "semantic_roles": [{ "sentence": "Company","subject": {"text": "test","entities":[{"type": "Company","text": "test"}],"keywords":[{"text": "test"}]}, "action": {"text": "test","normalized": "test","verb": {"text": "test","tense": "test"}}, "object": {"text": "test","keywords":[{"text": "test"}]}}],' +
+            '  "sentiment": { "targets": [{"text": "test", "score": 0.89792}], "document": {"label": "test", "score": 0.89792}},' +
+            '  "language": "en",' +
+            '  "retrieved_url": "https://www.ibm.com/us-en/"' +
+            '}';
+  }
+  
+   public static String listModelsResults() {
+    return  '{' +
+            '  "models": [' +
+            '    {' +
+            '      "status": "string",' +
+            '      "model_id": "string",' +
+            '      "language": "string",' +
+            '      "description": "string"' +
+            '    }' +
+            '  ]' +
+            '}';
   }
 }

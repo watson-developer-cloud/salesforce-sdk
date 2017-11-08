@@ -91,7 +91,7 @@ To get your service-specific credentials, follow these steps:
     1. On the left side of the page, click **Service Credentials**, and then **View credentials** to view your service credentials.
     1. Copy `url`, `username` and `password`.
 
-There are two ways of specifying credentials, [Using Named Credentials](#using-named-credentials) or [Specifiying credentials in the Apex code](#specifiying-credentials-in-the-apex-code)
+There are two ways of specifying credentials, [Using Named Credentials](#using-named-credentials) or [Specifying credentials in the Apex code](#specifying-credentials-in-the-apex-code)
 
 ### Using `Named Credentials`
 
@@ -126,7 +126,7 @@ In order to create **Named credentials**:
     * Password: `<PASSWORD>`
 1. Click on Save.
 
-### Specifiying credentials in the Apex code
+### Specifying credentials in the Apex code
 
 Storing credentials in the Apex code is not recommended. If possible, use **Named Credentials**.
 

@@ -1,47 +1,31 @@
 # IBM Watson Salesforce SDK - Discovery Lab
 
 ## Introduction
-In this lab, you'll get the chance to try out the new Watson Salesforce SDK by interacting with the Watson Discovery API in Apex. After completing the lab, you should be familiar with:
-
- - Instantiating a Watson service instance in IBM Cloud
- - Deploying the Watson Salesforce SDK to your Salesforce org
- - Using the Watson Discovery API with Apex
+In this lab, you'll get the chance to try out the new Watson Salesforce SDK by interacting with the Watson Discovery API in Apex. After completing the lab, you should have a better idea of the capabilities of the Watson Discovery service and be familiar with the general structure of the SDK.
 
  If throughout the lab you have any other questions, you can find more details about the Discovery service [here](https://www.ibm.com/watson/services/discovery/). Otherwise, let's get started!
 
 ## Setup
-### IBM Cloud
-To get started using any Watson service, you need to first create it and get the credentials in IBM Cloud, which up until recently was named Bluemix. If you already have an IBM Cloud account, log in [here](https://console.bluemix.net/registration/?target=/catalog/services/discovery&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&) to be taken straight to the Discovery service creation page. If you do not yet have an account, create one and follow the above link again after receiving the confirmation email.
 
-Once you're at the service creation page, you can click "Create" on the bottom right to instantiate your Discovery service. 
+In real-world use, using the SDK requires the following setup steps:
 
-![Discovery service creation page](readme_images/create_service_page.png "Discovery service creation page")
+- Sign up/login to IBM Cloud
+- Create desired Watson service instance
+- Deploy SDK to your Salesforce org
+- Set named credentials and remote site settings in Salesforce
 
-Now that we have an instance, we're first going to grab some of the credentials that we'll need to use to use later when authenticating with the SDK. To find those credentials, click on the "Service credentials" menu item:
+These steps are detailed in the README of the [Watson Salesforce SDK GitHub page](https://github.com/watson-developer-cloud/salesforce-sdk).
 
-![Go to service credentials](readme_images/go_to_credentials.png "Go to service credentials")
+However, for the purpose of this lab, we have set up preconfigured Salesforce and IBM Cloud accounts on the lab laptops. All of the usernames and passwords necessary can be found [here](https://ibm-cloudintegration.github.io/techguides/df17labs_creds.html).
 
-From this page, click on the "New credential" button. Don't worry about filling in any extra information. You should now be able to view your new credential to get your username and password. Make note of them or keep this tab open for later.
-
-Next, we're going to create a Discovery environment to hold our data collections. Go back to the previous page and click the "Launch tool" button in the center of the screen to get to the Discovery tooling. Here is where you can upload documents in different collections to query.
-
-![Discovery launch tool](readme_images/launch_tool.png "Discovery launch tool")
-
-To create your environment, click on the gear icon at the top-right of the page.
-
-![Create environment](readme_images/create_environment.png "Create environment")
-
-When prompted to create a collection, you can just exit out of the prompt. We'll do that through the SDK later on. First though, we'll need to get things set up in our Salesforce environment.
-
-### Salesforce
-[Log in](https://login.salesforce.com/) to your Salesforce developer environment, and then follow the instructions on the [Watson Salesforce SDK GitHub page](https://github.com/watson-developer-cloud/salesforce-sdk) README to deploy the SDK to your developer org. Automatic and manual deployment using Salesforce DX are both supported, as well as manual deployment using Ant.
-
-Now, you should have all of the SDK classes loaded into your developer environment. The last piece of setup is adding your Discovery credentials to authenticate with the service. The preferred way to add these is using named credentials, and you can also find the instructions for this in the SDK README.
-
-Now it's time to start using the SDK!
+If you have any questions about login information, please ask an IBMer staffing the booth.
 
 ## Using the SDK
-Head over to the Developer Console in your Salesforce environment, where we'll be putting our Apex code to call the Discovery service. For most of the Discovery methods, we need to supply an environment ID. This corresponds to the environment we created in the Discovery tooling in the setup portion of this lab. Lucky for us, the SDK provides a `listEnvironments` method to get that ID.
+Head over to the Developer Console in your Salesforce environment, where we'll be putting our Apex code to call the Discovery service. For most of the Discovery methods, we need to supply an environment ID. 
+
+Before going further, it's helpful to understand the structure of the Watson Discovery service. As a user, you upload documents to your Discovery service, which you can later query and analyze. Those documents are stored in **collections**. These can be thought of as boxes of related data. We then can package multiple boxes, or collections, into something like a warehouse, which in Discovery is an **environment**. 
+
+Each collection and environment has a unique ID, and it's an environment ID that we're interested in retrieving now. Lucky for us, the SDK provides a `listEnvironments` method to get that ID.
 
 **Note:** If at any point in the coding section you would like to take a closer look at the many API endpoints and models in the Discovery service, you can go to the [Discovery API explorer](https://watson-api-explorer.mybluemix.net/apis/discovery-v1). This is a handy resource for future use, allowing you to see all of the operations, sample requests and responses, and to make sample API calls by inputting your credentials at the top of the page.
 
@@ -144,7 +128,9 @@ IBMDiscoveryV1Models.Collection response = discovery.createCollection(options);
 
 **Note:** Be sure to use the environment ID you got in your `listEnvironments` call earlier in the lab!
 
-If you print out your response object, you should see the details of your newly created collection. Like the environment ID, be sure to keep a note of the returned collection ID, as it will be used when uploading documents and querying. If you'd like extra verification that this worked, head back over to the Discovery tooling, where you first created your environment. Alongside the default Discovery News collection, you should see a collection named "dreamforce-collection".
+If you print out your response object, you should see the details of your newly created collection. Like the environment ID, be sure to keep a note of the returned collection ID, as it will be used when uploading documents and querying. If you'd like extra verification that this worked, head back over to the Discovery tooling. This is a visual way to add and query your Discovery documents on the IBM Cloud platform. You can click [here](https://console.bluemix.net/dashboard/apps/) and then click on your Discovery service and the "Launch tool" button to open up the tooling. If you need to log in, remember to use the credentials in the "Setup" section of this lab.
+
+Once you get there, you should see the default Discovery News collection and your new collection named "dreamforce-collection".
 
 ![New collection](readme_images/new_collection.png "New collection")
 
