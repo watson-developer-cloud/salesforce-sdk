@@ -1177,7 +1177,7 @@ public class IBMWatsonMockResponses {
     '  "name": "My Classifier",' +
     '  "language": "en",' +
     '  "created": "2015-05-28T18:01:57.393Z",' +
-    '  "url": "'+IBMNaturalLanguageClassifierClassifyBaseURL+'",' +
+    '  "url": "' + IBMNaturalLanguageClassifierClassifyBaseURL + '",' +
     '  "status": "Training",' +
     '  "status_description": "The classifier instance is in its training phase, not yet ready to accept classify requests"' +
     '}';
@@ -1188,7 +1188,7 @@ public class IBMWatsonMockResponses {
   }
 
   public static String getClassifier(){
-    return '{' +
+  	return '{' +
     '"classifier_id": "10D41B-nlc-1",' +
     '"name": "My Classifier",' +
     '"language": "en",' +
@@ -1200,7 +1200,7 @@ public class IBMWatsonMockResponses {
   }
   
   public static String listClassifiers(){
-    return '{' +
+  	return '{' +
     '"classifiers": [' +
     '  {' +
     '    "classifier_id": "10D41B-nlc-1",' +
@@ -1287,5 +1287,4 @@ public class IBMWatsonMockResponses {
             '  ]' +
             '}';
   }
-  
 }
