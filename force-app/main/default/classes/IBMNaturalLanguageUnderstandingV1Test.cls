@@ -51,9 +51,9 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .targets(new List<String>{'test'})
       .build();
     sentiment = sentiment.newBuilder().build();
-    IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions categories=new IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions();
+    IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions categories = new IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions();
     categories.put('emotion', emotion);
-    IBMNaturalLanguageUnderstandingV1Models.MetadataOptions metadata=new IBMNaturalLanguageUnderstandingV1Models.MetadataOptions();
+    IBMNaturalLanguageUnderstandingV1Models.MetadataOptions metadata = new IBMNaturalLanguageUnderstandingV1Models.MetadataOptions();
     metadata.put('', '');
     IBMNaturalLanguageUnderstandingV1Models.Features features = new IBMNaturalLanguageUnderstandingV1Models.FeaturesBuilder()
       .concepts(concepts)
