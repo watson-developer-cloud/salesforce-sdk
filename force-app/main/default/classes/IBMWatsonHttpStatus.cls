@@ -41,7 +41,7 @@ public with sharing class IBMWatsonHttpStatus {
    * 207 Multi-Status (WebDAV - RFC 2518) or 207 Partial Update OK (HTTP/1.1 - draft-ietf-http-v11-spec-rev-01?).
    */
   public static final Integer MULTI_STATUS = 207;
-  /** 300 Mutliple Choices (HTTP/1.1 - RFC 2616). */
+  /** 300 Multiple Choices (HTTP/1.1 - RFC 2616). */
   public static final Integer MULTIPLE_CHOICES = 300;
   /** 204 No Content (HTTP/1.0 - RFC 1945). */
   public static final Integer NO_CONTENT = 204;
