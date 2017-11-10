@@ -1,0 +1,1406 @@
+public class IBMPersonalityInsightsV3Models {
+  /**
+   * Behavior.
+   */
+  public class Behavior extends IBMWatsonGenericModel {
+    private String trait_id_serialized_name;
+    private String name_serialized_name;
+    private String category_serialized_name;
+    private Double percentage_serialized_name;
+    /**
+     * Gets the trait_id_serialized_name.
+     *
+     * The unique identifier of the characteristic to which the results pertain. IDs have the form `behavior_{value}`.
+     *
+     * @return the trait_id_serialized_name
+     */
+    @AuraEnabled
+    public String getTraitId() {
+      return trait_id_serialized_name;
+    }
+    /**
+     * Gets the name_serialized_name.
+     *
+     * The user-visible name of the characteristic.
+     *
+     * @return the name_serialized_name
+     */
+    @AuraEnabled
+    public String getName() {
+      return name_serialized_name;
+    }
+    /**
+     * Gets the category_serialized_name.
+     *
+     * The category of the characteristic: `behavior` for temporal data.
+     *
+     * @return the category_serialized_name
+     */
+    @AuraEnabled
+    public String getCategory() {
+      return category_serialized_name;
+    }
+    /**
+     * Gets the percentage_serialized_name.
+     *
+     * For JSON content that is timestamped, the percentage of timestamped input data that occurred during that day of the week or hour of the day. The range is 0 to 1.
+     *
+     * @return the percentage_serialized_name
+     */
+    @AuraEnabled
+    public Double getPercentage() {
+      return percentage_serialized_name;
+    }
+
+    /**
+     * Sets the trait_id_serialized_name.
+     *
+     * @param trait_id_serialized_name the new trait_id_serialized_name
+     */
+    public void setTraitId(final String trait_id_serialized_name) {
+      this.trait_id_serialized_name = trait_id_serialized_name;
+    }
+
+    /**
+     * Sets the name_serialized_name.
+     *
+     * @param name_serialized_name the new name_serialized_name
+     */
+    public void setName(final String name_serialized_name) {
+      this.name_serialized_name = name_serialized_name;
+    }
+
+    /**
+     * Sets the category_serialized_name.
+     *
+     * @param category_serialized_name the new category_serialized_name
+     */
+    public void setCategory(final String category_serialized_name) {
+      this.category_serialized_name = category_serialized_name;
+    }
+
+    /**
+     * Sets the percentage_serialized_name.
+     *
+     * @param percentage_serialized_name the new percentage_serialized_name
+     */
+    public void setPercentage(final Double percentage_serialized_name) {
+      this.percentage_serialized_name = percentage_serialized_name;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Behavior ret = (Behavior) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * ConsumptionPreferences.
+   */
+  public class ConsumptionPreferences extends IBMWatsonGenericModel {
+    private String consumption_preference_id_serialized_name;
+    private String name_serialized_name;
+    private Double score_serialized_name;
+    /**
+     * Gets the consumption_preference_id_serialized_name.
+     *
+     * The unique identifier of the consumption preference to which the results pertain. IDs have the form `consumption_preferences_{preference}`.
+     *
+     * @return the consumption_preference_id_serialized_name
+     */
+    @AuraEnabled
+    public String getConsumptionPreferenceId() {
+      return consumption_preference_id_serialized_name;
+    }
+    /**
+     * Gets the name_serialized_name.
+     *
+     * The user-visible name of the consumption preference.
+     *
+     * @return the name_serialized_name
+     */
+    @AuraEnabled
+    public String getName() {
+      return name_serialized_name;
+    }
+    /**
+     * Gets the score_serialized_name.
+     *
+     * The score for the consumption preference: * `0.0`: Unlikely * `0.5`: Neutral * `1.0`: Likely   The scores for some preferences are binary and do not allow a neutral value. The score is an indication of preference based on the results inferred from the input text, not a normalized percentile.
+     *
+     * @return the score_serialized_name
+     */
+    @AuraEnabled
+    public Double getScore() {
+      return score_serialized_name;
+    }
+
+    /**
+     * Sets the consumption_preference_id_serialized_name.
+     *
+     * @param consumption_preference_id_serialized_name the new consumption_preference_id_serialized_name
+     */
+    public void setConsumptionPreferenceId(final String consumption_preference_id_serialized_name) {
+      this.consumption_preference_id_serialized_name = consumption_preference_id_serialized_name;
+    }
+
+    /**
+     * Sets the name_serialized_name.
+     *
+     * @param name_serialized_name the new name_serialized_name
+     */
+    public void setName(final String name_serialized_name) {
+      this.name_serialized_name = name_serialized_name;
+    }
+
+    /**
+     * Sets the score_serialized_name.
+     *
+     * @param score_serialized_name the new score_serialized_name
+     */
+    public void setScore(final Double score_serialized_name) {
+      this.score_serialized_name = score_serialized_name;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ConsumptionPreferences ret = (ConsumptionPreferences) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * ConsumptionPreferencesCategory.
+   */
+  public class ConsumptionPreferencesCategory extends IBMWatsonGenericModel {
+    private String consumption_preference_category_id_serialized_name;
+    private String name_serialized_name;
+    private List<ConsumptionPreferences> consumption_preferences_serialized_name;
+    /**
+     * Gets the consumption_preference_category_id_serialized_name.
+     *
+     * The unique identifier of the consumption preferences category to which the results pertain. IDs have the form `consumption_preferences_{category}`.
+     *
+     * @return the consumption_preference_category_id_serialized_name
+     */
+    @AuraEnabled
+    public String getConsumptionPreferenceCategoryId() {
+      return consumption_preference_category_id_serialized_name;
+    }
+    /**
+     * Gets the name_serialized_name.
+     *
+     * The user-visible name of the consumption preferences category.
+     *
+     * @return the name_serialized_name
+     */
+    @AuraEnabled
+    public String getName() {
+      return name_serialized_name;
+    }
+    /**
+     * Gets the consumption_preferences_serialized_name.
+     *
+     * Detailed results inferred from the input text for the individual preferences of the category.
+     *
+     * @return the consumption_preferences_serialized_name
+     */
+    @AuraEnabled
+    public List<ConsumptionPreferences> getConsumptionPreferences() {
+      return consumption_preferences_serialized_name;
+    }
+
+    /**
+     * Sets the consumption_preference_category_id_serialized_name.
+     *
+     * @param consumption_preference_category_id_serialized_name the new consumption_preference_category_id_serialized_name
+     */
+    public void setConsumptionPreferenceCategoryId(final String consumption_preference_category_id_serialized_name) {
+      this.consumption_preference_category_id_serialized_name = consumption_preference_category_id_serialized_name;
+    }
+
+    /**
+     * Sets the name_serialized_name.
+     *
+     * @param name_serialized_name the new name_serialized_name
+     */
+    public void setName(final String name_serialized_name) {
+      this.name_serialized_name = name_serialized_name;
+    }
+
+    /**
+     * Sets the consumption_preferences_serialized_name.
+     *
+     * @param consumption_preferences_serialized_name the new consumption_preferences_serialized_name
+     */
+    public void setConsumptionPreferences(final List<ConsumptionPreferences> consumption_preferences_serialized_name) {
+      this.consumption_preferences_serialized_name = consumption_preferences_serialized_name;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ConsumptionPreferencesCategory ret = (ConsumptionPreferencesCategory) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for consumption_preferences_serialized_name
+      List<ConsumptionPreferences> newConsumptionPreferences = new List<ConsumptionPreferences>();
+      List<ConsumptionPreferences> deserializedConsumptionPreferences = ret.getConsumptionPreferences();
+      if (deserializedConsumptionPreferences != null) {
+        for (Integer i = 0; i < deserializedConsumptionPreferences.size(); i++) {
+          ConsumptionPreferences currentItem = ret.getConsumptionPreferences().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('consumption_preferences_serialized_name');
+          ConsumptionPreferences newItem = (ConsumptionPreferences) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConsumptionPreferences.class);
+          newConsumptionPreferences.add(newItem);
+        }
+        ret.setConsumptionPreferences(newConsumptionPreferences);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Content.
+   */
+  public class Content {
+    private List<ContentItem> content_items_serialized_name;
+    /**
+     * Gets the content_items_serialized_name.
+     *
+     * An array of `ContentItem` objects that provides the text that is to be analyzed.
+     *
+     * @return the content_items_serialized_name
+     */
+    public List<ContentItem> contentItems() {
+      return content_items_serialized_name;
+    }
+    private Content(ContentBuilder builder) {
+      IBMWatsonValidator.notNull(builder.content_items_serialized_name, 'content_items_serialized_name cannot be null');
+      content_items_serialized_name = builder.content_items_serialized_name;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a Content builder
+     */
+    public ContentBuilder newBuilder() {
+      return new ContentBuilder(this);
+    }
+
+  }
+
+  /**
+   * Content Builder.
+   */
+  public class ContentBuilder {
+    private List<ContentItem> content_items_serialized_name;
+
+    private ContentBuilder(Content content) {
+      content_items_serialized_name = content.content_items_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ContentBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param content_items_serialized_name the content_items_serialized_name
+     */
+    public ContentBuilder(List<ContentItem> content_items_serialized_name) {
+      this.content_items_serialized_name = content_items_serialized_name;
+    }
+
+    /**
+     * Builds a Content.
+     *
+     * @return the content
+     */
+    public Content build() {
+      return new Content(this);
+    }
+
+    /**
+     * Adds an content_items_serialized_name to content_items_serialized_name.
+     *
+     * @param content_items_serialized_name the new content_items_serialized_name
+     * @return the Content builder
+     */
+    public ContentBuilder addContentItems(ContentItem content_items_serialized_name) {
+      IBMWatsonValidator.notNull(content_items_serialized_name, 'content_items_serialized_name cannot be null');
+      if (this.content_items_serialized_name == null) {
+        this.content_items_serialized_name = new List<ContentItem>();
+      }
+      this.content_items_serialized_name.add(content_items_serialized_name);
+      return this;
+    }
+
+    /**
+     * Set the content_items_serialized_name.
+     * Existing content_items_serialized_name will be replaced.
+     *
+     * @param content_items_serialized_name the content_items_serialized_name
+     * @return the Content builder
+     */
+    public ContentBuilder contentItems(List<ContentItem> content_items_serialized_name) {
+      this.content_items_serialized_name = content_items_serialized_name;
+      return this;
+    }
+  }
+
+  /**
+   * ContentItem.
+   */
+  public class ContentItem {
+    private String content_serialized_name;
+    private String id_serialized_name;
+    private Long created_serialized_name;
+    private Long updated_serialized_name;
+    private String contenttype_serialized_name;
+    private String language_serialized_name;
+    private String parentid_serialized_name;
+    private Boolean reply_serialized_name;
+    private Boolean forward_serialized_name;
+    /**
+     * Gets the content_serialized_name.
+     *
+     * Content that is to be analyzed. The service supports up to 20 MB of content for all items combined.
+     *
+     * @return the content_serialized_name
+     */
+    public String content() {
+      return content_serialized_name;
+    }
+    /**
+     * Gets the id_serialized_name.
+     *
+     * Unique identifier for this content item.
+     *
+     * @return the id_serialized_name
+     */
+    public String id() {
+      return id_serialized_name;
+    }
+    /**
+     * Gets the created_serialized_name.
+     *
+     * Timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
+     *
+     * @return the created_serialized_name
+     */
+    public Long created() {
+      return created_serialized_name;
+    }
+    /**
+     * Gets the updated_serialized_name.
+     *
+     * Timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
+     *
+     * @return the updated_serialized_name
+     */
+    public Long updated() {
+      return updated_serialized_name;
+    }
+    /**
+     * Gets the contenttype_serialized_name.
+     *
+     * MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is analyzed; plain text is processed as submitted.
+     *
+     * @return the contenttype_serialized_name
+     */
+    public String contenttype() {
+      return contenttype_serialized_name;
+    }
+    /**
+     * Gets the language_serialized_name.
+     *
+     * Language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is `en` (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. A language specified with the `Content-Type` header overrides the value of this parameter; any content items that specify a different language are ignored. Omit the `Content-Type` header to base the language on the most prevalent specification among the content items; again, content items that specify a different language are ignored. You can specify any combination of languages for the input and response content.
+     *
+     * @return the language_serialized_name
+     */
+    public String language() {
+      return language_serialized_name;
+    }
+    /**
+     * Gets the parentid_serialized_name.
+     *
+     * Unique ID of the parent content item for this item. Used to identify hierarchical relationships between posts/replies, messages/replies, and so on.
+     *
+     * @return the parentid_serialized_name
+     */
+    public String parentid() {
+      return parentid_serialized_name;
+    }
+    /**
+     * Gets the reply_serialized_name.
+     *
+     * Indicates whether this content item is a reply to another content item.
+     *
+     * @return the reply_serialized_name
+     */
+    public Boolean reply() {
+      return reply_serialized_name;
+    }
+    /**
+     * Gets the forward_serialized_name.
+     *
+     * Indicates whether this content item is a forwarded/copied version of another content item.
+     *
+     * @return the forward_serialized_name
+     */
+    public Boolean forward() {
+      return forward_serialized_name;
+    }
+    private ContentItem(ContentItemBuilder builder) {
+      IBMWatsonValidator.notNull(builder.content_serialized_name, 'content_serialized_name cannot be null');
+      content_serialized_name = builder.content_serialized_name;
+      id_serialized_name = builder.id_serialized_name;
+      created_serialized_name = builder.created_serialized_name;
+      updated_serialized_name = builder.updated_serialized_name;
+      contenttype_serialized_name = builder.contenttype_serialized_name;
+      language_serialized_name = builder.language_serialized_name;
+      parentid_serialized_name = builder.parentid_serialized_name;
+      reply_serialized_name = builder.reply_serialized_name;
+      forward_serialized_name = builder.forward_serialized_name;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ContentItem builder
+     */
+    public ContentItemBuilder newBuilder() {
+      return new ContentItemBuilder(this);
+    }
+
+  }
+
+  /**
+   * ContentItem Builder.
+   */
+  public class ContentItemBuilder {
+    private String content_serialized_name;
+    private String id_serialized_name;
+    private Long created_serialized_name;
+    private Long updated_serialized_name;
+    private String contenttype_serialized_name;
+    private String language_serialized_name;
+    private String parentid_serialized_name;
+    private Boolean reply_serialized_name;
+    private Boolean forward_serialized_name;
+
+    private ContentItemBuilder(ContentItem content_item) {
+      content_serialized_name = content_item.content_serialized_name;
+      id_serialized_name = content_item.id_serialized_name;
+      created_serialized_name = content_item.created_serialized_name;
+      updated_serialized_name = content_item.updated_serialized_name;
+      contenttype_serialized_name = content_item.contenttype_serialized_name;
+      language_serialized_name = content_item.language_serialized_name;
+      parentid_serialized_name = content_item.parentid_serialized_name;
+      reply_serialized_name = content_item.reply_serialized_name;
+      forward_serialized_name = content_item.forward_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ContentItemBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param content_serialized_name the content_serialized_name
+     */
+    public ContentItemBuilder(String content_serialized_name) {
+      this.content_serialized_name = content_serialized_name;
+    }
+
+    /**
+     * Builds a ContentItem.
+     *
+     * @return the content_item
+     */
+    public ContentItem build() {
+      return new ContentItem(this);
+    }
+
+    /**
+     * Set the content_serialized_name.
+     *
+     * @param content_serialized_name the content_serialized_name
+     * @return the ContentItem builder
+     */
+    public ContentItemBuilder content(String content_serialized_name) {
+      this.content_serialized_name = content_serialized_name;
+      return this;
+    }
+
+    /**
+     * Set the id_serialized_name.
+     *
+     * @param id_serialized_name the id_serialized_name
+     * @return the ContentItem builder
+     */
+    public ContentItemBuilder id(String id_serialized_name) {
+      this.id_serialized_name = id_serialized_name;
+      return this;
+    }
+
+    /**
+     * Set the created_serialized_name.
+     *
+     * @param created_serialized_name the created_serialized_name
+     * @return the ContentItem builder
+     */
+    public ContentItemBuilder created(Long created_serialized_name) {
+      this.created_serialized_name = created_serialized_name;
+      return this;
+    }
+
+    /**
+     * Set the updated_serialized_name.
+     *
+     * @param updated_serialized_name the updated_serialized_name
+     * @return the ContentItem builder
+     */
+    public ContentItemBuilder updated(Long updated_serialized_name) {
+      this.updated_serialized_name = updated_serialized_name;
+      return this;
+    }
+
+    /**
+     * Set the contenttype_serialized_name.
+     *
+     * @param contenttype_serialized_name the contenttype_serialized_name
+     * @return the ContentItem builder
+     */
+    public ContentItemBuilder contenttype(String contenttype_serialized_name) {
+      this.contenttype_serialized_name = contenttype_serialized_name;
+      return this;
+    }
+
+    /**
+     * Set the language_serialized_name.
+     *
+     * @param language_serialized_name the language_serialized_name
+     * @return the ContentItem builder
+     */
+    public ContentItemBuilder language(String language_serialized_name) {
+      this.language_serialized_name = language_serialized_name;
+      return this;
+    }
+
+    /**
+     * Set the parentid_serialized_name.
+     *
+     * @param parentid_serialized_name the parentid_serialized_name
+     * @return the ContentItem builder
+     */
+    public ContentItemBuilder parentid(String parentid_serialized_name) {
+      this.parentid_serialized_name = parentid_serialized_name;
+      return this;
+    }
+
+    /**
+     * Set the reply_serialized_name.
+     *
+     * @param reply_serialized_name the reply_serialized_name
+     * @return the ContentItem builder
+     */
+    public ContentItemBuilder reply(Boolean reply_serialized_name) {
+      this.reply_serialized_name = reply_serialized_name;
+      return this;
+    }
+
+    /**
+     * Set the forward_serialized_name.
+     *
+     * @param forward_serialized_name the forward_serialized_name
+     * @return the ContentItem builder
+     */
+    public ContentItemBuilder forward(Boolean forward_serialized_name) {
+      this.forward_serialized_name = forward_serialized_name;
+      return this;
+    }
+  }
+
+  /**
+   * Profile.
+   */
+  public class Profile extends IBMWatsonGenericModel {
+    private String processed_language_serialized_name;
+    private Long word_count_serialized_name;
+    private String word_count_message_serialized_name;
+    private List<Trait> personality_serialized_name;
+    private List<Trait> values_serialized_name;
+    private List<Trait> needs_serialized_name;
+    private List<Behavior> behavior_serialized_name;
+    private List<ConsumptionPreferencesCategory> consumption_preferences_serialized_name;
+    private List<Warning> warnings_serialized_name;
+    /**
+     * Gets the processed_language_serialized_name.
+     *
+     * The language model that was used to process the input.
+     *
+     * @return the processed_language_serialized_name
+     */
+    @AuraEnabled
+    public String getProcessedLanguage() {
+      return processed_language_serialized_name;
+    }
+    /**
+     * Gets the word_count_serialized_name.
+     *
+     * The number of words that were found in the input.
+     *
+     * @return the word_count_serialized_name
+     */
+    @AuraEnabled
+    public Long getWordCount() {
+      return word_count_serialized_name;
+    }
+    /**
+     * Gets the word_count_message_serialized_name.
+     *
+     * When guidance is appropriate, a string that provides a message that indicates the number of words found and where that value falls in the range of required or suggested number of words.
+     *
+     * @return the word_count_message_serialized_name
+     */
+    @AuraEnabled
+    public String getWordCountMessage() {
+      return word_count_message_serialized_name;
+    }
+    /**
+     * Gets the personality_serialized_name.
+     *
+     * Detailed results for the Big Five personality characteristics (dimensions and facets) inferred from the input text.
+     *
+     * @return the personality_serialized_name
+     */
+    @AuraEnabled
+    public List<Trait> getPersonality() {
+      return personality_serialized_name;
+    }
+    /**
+     * Gets the values_serialized_name.
+     *
+     * Detailed results for the Needs characteristics inferred from the input text.
+     *
+     * @return the values_serialized_name
+     */
+    @AuraEnabled
+    public List<Trait> getValues() {
+      return values_serialized_name;
+    }
+    /**
+     * Gets the needs_serialized_name.
+     *
+     * Detailed results for the Values characteristics inferred from the input text.
+     *
+     * @return the needs_serialized_name
+     */
+    @AuraEnabled
+    public List<Trait> getNeeds() {
+      return needs_serialized_name;
+    }
+    /**
+     * Gets the behavior_serialized_name.
+     *
+     * For JSON content that is timestamped, detailed results about the social behavior disclosed by the input in terms of temporal characteristics. The results include information about the distribution of the content over the days of the week and the hours of the day.
+     *
+     * @return the behavior_serialized_name
+     */
+    @AuraEnabled
+    public List<Behavior> getBehavior() {
+      return behavior_serialized_name;
+    }
+    /**
+     * Gets the consumption_preferences_serialized_name.
+     *
+     * If the `consumption_preferences` query parameter is `true`, detailed results for each category of consumption preferences. Each element of the array provides information inferred from the input text for the individual preferences of that category.
+     *
+     * @return the consumption_preferences_serialized_name
+     */
+    @AuraEnabled
+    public List<ConsumptionPreferencesCategory> getConsumptionPreferences() {
+      return consumption_preferences_serialized_name;
+    }
+    /**
+     * Gets the warnings_serialized_name.
+     *
+     * Warning messages associated with the input text submitted with the request. The array is empty if the input generated no warnings.
+     *
+     * @return the warnings_serialized_name
+     */
+    @AuraEnabled
+    public List<Warning> getWarnings() {
+      return warnings_serialized_name;
+    }
+
+    /**
+     * Sets the processed_language_serialized_name.
+     *
+     * @param processed_language_serialized_name the new processed_language_serialized_name
+     */
+    public void setProcessedLanguage(final String processed_language_serialized_name) {
+      this.processed_language_serialized_name = processed_language_serialized_name;
+    }
+
+    /**
+     * Sets the word_count_serialized_name.
+     *
+     * @param word_count_serialized_name the new word_count_serialized_name
+     */
+    public void setWordCount(final long word_count_serialized_name) {
+      this.word_count_serialized_name = word_count_serialized_name;
+    }
+
+    /**
+     * Sets the word_count_message_serialized_name.
+     *
+     * @param word_count_message_serialized_name the new word_count_message_serialized_name
+     */
+    public void setWordCountMessage(final String word_count_message_serialized_name) {
+      this.word_count_message_serialized_name = word_count_message_serialized_name;
+    }
+
+    /**
+     * Sets the personality_serialized_name.
+     *
+     * @param personality_serialized_name the new personality_serialized_name
+     */
+    public void setPersonality(final List<Trait> personality_serialized_name) {
+      this.personality_serialized_name = personality_serialized_name;
+    }
+
+    /**
+     * Sets the values_serialized_name.
+     *
+     * @param values_serialized_name the new values_serialized_name
+     */
+    public void setValues(final List<Trait> values_serialized_name) {
+      this.values_serialized_name = values_serialized_name;
+    }
+
+    /**
+     * Sets the needs_serialized_name.
+     *
+     * @param needs_serialized_name the new needs_serialized_name
+     */
+    public void setNeeds(final List<Trait> needs_serialized_name) {
+      this.needs_serialized_name = needs_serialized_name;
+    }
+
+    /**
+     * Sets the behavior_serialized_name.
+     *
+     * @param behavior_serialized_name the new behavior_serialized_name
+     */
+    public void setBehavior(final List<Behavior> behavior_serialized_name) {
+      this.behavior_serialized_name = behavior_serialized_name;
+    }
+
+    /**
+     * Sets the consumption_preferences_serialized_name.
+     *
+     * @param consumption_preferences_serialized_name the new consumption_preferences_serialized_name
+     */
+    public void setConsumptionPreferences(final List<ConsumptionPreferencesCategory> consumption_preferences_serialized_name) {
+      this.consumption_preferences_serialized_name = consumption_preferences_serialized_name;
+    }
+
+    /**
+     * Sets the warnings_serialized_name.
+     *
+     * @param warnings_serialized_name the new warnings_serialized_name
+     */
+    public void setWarnings(final List<Warning> warnings_serialized_name) {
+      this.warnings_serialized_name = warnings_serialized_name;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Profile ret = (Profile) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for personality_serialized_name
+      List<Trait> newPersonality = new List<Trait>();
+      List<Trait> deserializedPersonality = ret.getPersonality();
+      if (deserializedPersonality != null) {
+        for (Integer i = 0; i < deserializedPersonality.size(); i++) {
+          Trait currentItem = ret.getPersonality().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('personality_serialized_name');
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          newPersonality.add(newItem);
+        }
+        ret.setPersonality(newPersonality);
+      }
+
+      // calling custom deserializer for values_serialized_name
+      List<Trait> newValues = new List<Trait>();
+      List<Trait> deserializedValues = ret.getValues();
+      if (deserializedValues != null) {
+        for (Integer i = 0; i < deserializedValues.size(); i++) {
+          Trait currentItem = ret.getValues().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('values_serialized_name');
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          newValues.add(newItem);
+        }
+        ret.setValues(newValues);
+      }
+
+      // calling custom deserializer for needs_serialized_name
+      List<Trait> newNeeds = new List<Trait>();
+      List<Trait> deserializedNeeds = ret.getNeeds();
+      if (deserializedNeeds != null) {
+        for (Integer i = 0; i < deserializedNeeds.size(); i++) {
+          Trait currentItem = ret.getNeeds().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('needs_serialized_name');
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          newNeeds.add(newItem);
+        }
+        ret.setNeeds(newNeeds);
+      }
+
+      // calling custom deserializer for behavior_serialized_name
+      List<Behavior> newBehavior = new List<Behavior>();
+      List<Behavior> deserializedBehavior = ret.getBehavior();
+      if (deserializedBehavior != null) {
+        for (Integer i = 0; i < deserializedBehavior.size(); i++) {
+          Behavior currentItem = ret.getBehavior().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('behavior_serialized_name');
+          Behavior newItem = (Behavior) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Behavior.class);
+          newBehavior.add(newItem);
+        }
+        ret.setBehavior(newBehavior);
+      }
+
+      // calling custom deserializer for consumption_preferences_serialized_name
+      List<ConsumptionPreferencesCategory> newConsumptionPreferences = new List<ConsumptionPreferencesCategory>();
+      List<ConsumptionPreferencesCategory> deserializedConsumptionPreferences = ret.getConsumptionPreferences();
+      if (deserializedConsumptionPreferences != null) {
+        for (Integer i = 0; i < deserializedConsumptionPreferences.size(); i++) {
+          ConsumptionPreferencesCategory currentItem = ret.getConsumptionPreferences().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('consumption_preferences_serialized_name');
+          ConsumptionPreferencesCategory newItem = (ConsumptionPreferencesCategory) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConsumptionPreferencesCategory.class);
+          newConsumptionPreferences.add(newItem);
+        }
+        ret.setConsumptionPreferences(newConsumptionPreferences);
+      }
+
+      // calling custom deserializer for warnings_serialized_name
+      List<Warning> newWarnings = new List<Warning>();
+      List<Warning> deserializedWarnings = ret.getWarnings();
+      if (deserializedWarnings != null) {
+        for (Integer i = 0; i < deserializedWarnings.size(); i++) {
+          Warning currentItem = ret.getWarnings().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('warnings_serialized_name');
+          Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Warning.class);
+          newWarnings.add(newItem);
+        }
+        ret.setWarnings(newWarnings);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * The profile options.
+   */
+  public class ProfileOptions {
+    private Content content_serialized_name;
+    private String body_serialized_name;
+    private String content_type_serialized_name;
+    private String content_language_serialized_name;
+    private String accept_language_serialized_name;
+    private Boolean raw_scores_serialized_name;
+    private Boolean csv_headers_serialized_name;
+    private Boolean consumption_preferences_serialized_name;
+    /**
+     * Gets the content_serialized_name.
+     *
+     * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see [Providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). A JSON request must conform to the `Content` model.
+     *
+     * @return the content_serialized_name
+     */
+    public Content content() {
+      return content_serialized_name;
+    }
+    /**
+     * Gets the body_serialized_name.
+     *
+     * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see [Providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). A JSON request must conform to the `Content` model.
+     *
+     * @return the body_serialized_name
+     */
+    public String body() {
+      return body_serialized_name;
+    }
+    /**
+     * Gets the content_type_serialized_name.
+     *
+     * The type of the input: application/json, text/html, or text/plain. A character encoding can be specified by including a `charset` parameter. For example, 'text/html;charset=utf-8'.
+     *
+     * @return the content_type_serialized_name
+     */
+    public String contentType() {
+      return content_type_serialized_name;
+    }
+    /**
+     * Gets the content_language_serialized_name.
+     *
+     * The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. The effect of the `Content-Language` header depends on the `Content-Type` header. When `Content-Type` is `text/plain` or `text/html`, `Content-Language` is the only way to specify the language. When `Content-Type` is `application/json`, `Content-Language` overrides a language specified with the `language` parameter of a `ContentItem` object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for `Content-Language` and `Accept-Language`.
+     *
+     * @return the content_language_serialized_name
+     */
+    public String contentLanguage() {
+      return content_language_serialized_name;
+    }
+    /**
+     * Gets the accept_language_serialized_name.
+     *
+     * The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. You can specify any combination of languages for the input and response content.
+     *
+     * @return the accept_language_serialized_name
+     */
+    public String acceptLanguage() {
+      return accept_language_serialized_name;
+    }
+    /**
+     * Gets the raw_scores_serialized_name.
+     *
+     * If `true`, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If `false` (the default), only normalized percentiles are returned.
+     *
+     * @return the raw_scores_serialized_name
+     */
+    public Boolean rawScores() {
+      return raw_scores_serialized_name;
+    }
+    /**
+     * Gets the csv_headers_serialized_name.
+     *
+     * If `true`, column labels are returned with a CSV response; if `false` (the default), they are not. Applies only when the `Accept` header is set to `text/csv`.
+     *
+     * @return the csv_headers_serialized_name
+     */
+    public Boolean csvHeaders() {
+      return csv_headers_serialized_name;
+    }
+    /**
+     * Gets the consumption_preferences_serialized_name.
+     *
+     * If `true`, information about consumption preferences is returned with the results; if `false` (the default), the response does not include the information.
+     *
+     * @return the consumption_preferences_serialized_name
+     */
+    public Boolean consumptionPreferences() {
+      return consumption_preferences_serialized_name;
+    }
+    private ProfileOptions(ProfileOptionsBuilder builder) {
+      IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
+      content_serialized_name = builder.content_serialized_name;
+      body_serialized_name = builder.body_serialized_name;
+      content_type_serialized_name = builder.content_type_serialized_name;
+      content_language_serialized_name = builder.content_language_serialized_name;
+      accept_language_serialized_name = builder.accept_language_serialized_name;
+      raw_scores_serialized_name = builder.raw_scores_serialized_name;
+      csv_headers_serialized_name = builder.csv_headers_serialized_name;
+      consumption_preferences_serialized_name = builder.consumption_preferences_serialized_name;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ProfileOptions builder
+     */
+    public ProfileOptionsBuilder newBuilder() {
+      return new ProfileOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * ProfileOptions Builder.
+   */
+  public class ProfileOptionsBuilder {
+    private Content content_serialized_name;
+    private String body_serialized_name;
+    private String content_type_serialized_name;
+    private String content_language_serialized_name;
+    private String accept_language_serialized_name;
+    private Boolean raw_scores_serialized_name;
+    private Boolean csv_headers_serialized_name;
+    private Boolean consumption_preferences_serialized_name;
+
+    private ProfileOptionsBuilder(ProfileOptions profile_options) {
+      content_serialized_name = profile_options.content_serialized_name;
+      body_serialized_name = profile_options.body_serialized_name;
+      content_type_serialized_name = profile_options.content_type_serialized_name;
+      content_language_serialized_name = profile_options.content_language_serialized_name;
+      accept_language_serialized_name = profile_options.accept_language_serialized_name;
+      raw_scores_serialized_name = profile_options.raw_scores_serialized_name;
+      csv_headers_serialized_name = profile_options.csv_headers_serialized_name;
+      consumption_preferences_serialized_name = profile_options.consumption_preferences_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ProfileOptionsBuilder() {
+    }
+
+    /**
+     * Builds a ProfileOptions.
+     *
+     * @return the profile_options
+     */
+    public ProfileOptions build() {
+      return new ProfileOptions(this);
+    }
+
+    /**
+     * Set the content_language_serialized_name.
+     *
+     * @param content_language_serialized_name the content_language_serialized_name
+     * @return the ProfileOptions builder
+     */
+    public ProfileOptionsBuilder contentLanguage(String content_language_serialized_name) {
+      this.content_language_serialized_name = content_language_serialized_name;
+      return this;
+    }
+
+    /**
+     * Set the accept_language_serialized_name.
+     *
+     * @param accept_language_serialized_name the accept_language_serialized_name
+     * @return the ProfileOptions builder
+     */
+    public ProfileOptionsBuilder acceptLanguage(String accept_language_serialized_name) {
+      this.accept_language_serialized_name = accept_language_serialized_name;
+      return this;
+    }
+
+    /**
+     * Set the raw_scores_serialized_name.
+     *
+     * @param raw_scores_serialized_name the raw_scores_serialized_name
+     * @return the ProfileOptions builder
+     */
+    public ProfileOptionsBuilder rawScores(Boolean raw_scores_serialized_name) {
+      this.raw_scores_serialized_name = raw_scores_serialized_name;
+      return this;
+    }
+
+    /**
+     * Set the csv_headers_serialized_name.
+     *
+     * @param csv_headers_serialized_name the csv_headers_serialized_name
+     * @return the ProfileOptions builder
+     */
+    public ProfileOptionsBuilder csvHeaders(Boolean csv_headers_serialized_name) {
+      this.csv_headers_serialized_name = csv_headers_serialized_name;
+      return this;
+    }
+
+    /**
+     * Set the consumption_preferences_serialized_name.
+     *
+     * @param consumption_preferences_serialized_name the consumption_preferences_serialized_name
+     * @return the ProfileOptions builder
+     */
+    public ProfileOptionsBuilder consumptionPreferences(Boolean consumption_preferences_serialized_name) {
+      this.consumption_preferences_serialized_name = consumption_preferences_serialized_name;
+      return this;
+    }
+
+    /**
+     * Set the content_serialized_name.
+     *
+     * @param content_serialized_name the content_serialized_name
+     * @return the ProfileOptions builder
+     */
+    public ProfileOptionsBuilder content_serialized_name(Content content_serialized_name) {
+      this.content_serialized_name = content_serialized_name;
+      this.content_type_serialized_name = IBMWatsonHttpMediaType.APPLICATION_JSON;
+      return this;
+    }
+
+    /**
+     * Set the html.
+     *
+     * @param html the html
+     * @return the ProfileOptions builder
+     */
+    public ProfileOptionsBuilder html(String html) {
+      this.body_serialized_name = html;
+      this.content_type_serialized_name = IBMWatsonHttpMediaType.TEXT_HTML;
+      return this;
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the ProfileOptions builder
+     */
+    public ProfileOptionsBuilder text(String text) {
+      this.body_serialized_name = text;
+      this.content_type_serialized_name = IBMWatsonHttpMediaType.TEXT_PLAIN;
+      return this;
+    }
+  }
+
+  /**
+   * Trait.
+   */
+  public class Trait extends IBMWatsonGenericModel {
+    private String trait_id_serialized_name;
+    private String name_serialized_name;
+    private String category_serialized_name;
+    private Double percentile_serialized_name;
+    private Double raw_score_serialized_name;
+    private Boolean significant_serialized_name;
+    private List<Trait> children_serialized_name;
+    /**
+     * Gets the trait_id_serialized_name.
+     *
+     * The unique identifier of the characteristic to which the results pertain. IDs have the form `big5_{characteristic}` for Big Five personality characteristics, `need_{characteristic}` for Needs, or `value_{characteristic}` for Values.
+     *
+     * @return the trait_id_serialized_name
+     */
+    @AuraEnabled
+    public String getTraitId() {
+      return trait_id_serialized_name;
+    }
+    /**
+     * Gets the name_serialized_name.
+     *
+     * The user-visible name of the characteristic.
+     *
+     * @return the name_serialized_name
+     */
+    @AuraEnabled
+    public String getName() {
+      return name_serialized_name;
+    }
+    /**
+     * Gets the category_serialized_name.
+     *
+     * The category of the characteristic: * `personality` for Big Five personality characteristics * `needs` for Needs * `values` for Values.
+     *
+     * @return the category_serialized_name
+     */
+    @AuraEnabled
+    public String getCategory() {
+      return category_serialized_name;
+    }
+    /**
+     * Gets the percentile_serialized_name.
+     *
+     * The normalized percentile score for the characteristic. The range is 0 to 1. For example, if the percentage for Openness is 0.60, the author scored in the 60th percentile; the author is more open than 59 percent of the population and less open than 39 percent of the population.
+     *
+     * @return the percentile_serialized_name
+     */
+    @AuraEnabled
+    public Double getPercentile() {
+      return percentile_serialized_name;
+    }
+    /**
+     * Gets the raw_score_serialized_name.
+     *
+     * The raw score for the characteristic. The range is 0 to 1. A higher score generally indicates a greater likelihood that the author has that characteristic, but raw scores must be considered in aggregate: The range of values in practice might be much smaller than 0 to 1, so an individual score must be considered in the context of the overall scores and their range. The raw score is computed based on the input and the service model; it is not normalized or compared with a sample population. The raw score enables comparison of the results against a different sampling population and with a custom normalization approach.
+     *
+     * @return the raw_score_serialized_name
+     */
+    @AuraEnabled
+    public Double getRawScore() {
+      return raw_score_serialized_name;
+    }
+    /**
+     * Gets the significant_serialized_name.
+     *
+     * **`2017-10-13`**: Indicates whether the characteristic is meaningful for the input language. The field is always `true` for all characteristics of English, Spanish, and Japanese input. The field is `false` for the subset of characteristics of Arabic and Korean input for which the service's models are unable to generate meaningful results. **`2016-10-20`**: Not returned.
+     *
+     * @return the significant_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getSignificant() {
+      return significant_serialized_name;
+    }
+    /**
+     * Gets the children_serialized_name.
+     *
+     * For `personality` (Big Five) dimensions, more detailed results for the facets of each dimension as inferred from the input text.
+     *
+     * @return the children_serialized_name
+     */
+    @AuraEnabled
+    public List<Trait> getChildren() {
+      return children_serialized_name;
+    }
+
+    /**
+     * Sets the trait_id_serialized_name.
+     *
+     * @param trait_id_serialized_name the new trait_id_serialized_name
+     */
+    public void setTraitId(final String trait_id_serialized_name) {
+      this.trait_id_serialized_name = trait_id_serialized_name;
+    }
+
+    /**
+     * Sets the name_serialized_name.
+     *
+     * @param name_serialized_name the new name_serialized_name
+     */
+    public void setName(final String name_serialized_name) {
+      this.name_serialized_name = name_serialized_name;
+    }
+
+    /**
+     * Sets the category_serialized_name.
+     *
+     * @param category_serialized_name the new category_serialized_name
+     */
+    public void setCategory(final String category_serialized_name) {
+      this.category_serialized_name = category_serialized_name;
+    }
+
+    /**
+     * Sets the percentile_serialized_name.
+     *
+     * @param percentile_serialized_name the new percentile_serialized_name
+     */
+    public void setPercentile(final Double percentile_serialized_name) {
+      this.percentile_serialized_name = percentile_serialized_name;
+    }
+
+    /**
+     * Sets the raw_score_serialized_name.
+     *
+     * @param raw_score_serialized_name the new raw_score_serialized_name
+     */
+    public void setRawScore(final Double raw_score_serialized_name) {
+      this.raw_score_serialized_name = raw_score_serialized_name;
+    }
+
+    /**
+     * Sets the significant_serialized_name.
+     *
+     * @param significant_serialized_name the new significant_serialized_name
+     */
+    public void setSignificant(final Boolean significant_serialized_name) {
+      this.significant_serialized_name = significant_serialized_name;
+    }
+
+    /**
+     * Sets the children_serialized_name.
+     *
+     * @param children_serialized_name the new children_serialized_name
+     */
+    public void setChildren(final List<Trait> children_serialized_name) {
+      this.children_serialized_name = children_serialized_name;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Trait ret = (Trait) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for children_serialized_name
+      List<Trait> newChildren = new List<Trait>();
+      List<Trait> deserializedChildren = ret.getChildren();
+      if (deserializedChildren != null) {
+        for (Integer i = 0; i < deserializedChildren.size(); i++) {
+          Trait currentItem = ret.getChildren().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('children_serialized_name');
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          newChildren.add(newItem);
+        }
+        ret.setChildren(newChildren);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Warning.
+   */
+  public class Warning extends IBMWatsonGenericModel {
+    private String warning_id_serialized_name;
+    private String message_serialized_name;
+    /**
+     * Gets the warning_id_serialized_name.
+     *
+     * The identifier of the warning message.
+     *
+     * @return the warning_id_serialized_name
+     */
+    @AuraEnabled
+    public String getWarningId() {
+      return warning_id_serialized_name;
+    }
+    /**
+     * Gets the message_serialized_name.
+     *
+     * The message associated with the `warning_id`: * `WORD_COUNT_MESSAGE`: "There were {number} words in the input. We need a minimum of 600, preferably 1,200 or more, to compute statistically significant estimates." * `JSON_AS_TEXT`: "Request input was processed as text/plain as indicated, however detected a JSON input. Did you mean application/json?" * `CONTENT_TRUNCATED`: "For maximum accuracy while also optimizing processing time, only the first 250KB of input text (excluding markup) was analyzed. Accuracy levels off at approximately 3,000 words so this did not affect the accuracy of the profile." * `PARTIAL_TEXT_USED`, "The text provided to compute the profile was trimmed for performance reasons. This action does not affect the accuracy of the output, as not all of the input text was required." Applies only when Arabic input text exceeds a threshold at which additional words do not contribute to the accuracy of the profile.
+     *
+     * @return the message_serialized_name
+     */
+    @AuraEnabled
+    public String getMessage() {
+      return message_serialized_name;
+    }
+
+    /**
+     * Sets the warning_id_serialized_name.
+     *
+     * @param warning_id_serialized_name the new warning_id_serialized_name
+     */
+    public void setWarningId(final String warning_id_serialized_name) {
+      this.warning_id_serialized_name = warning_id_serialized_name;
+    }
+
+    /**
+     * Sets the message_serialized_name.
+     *
+     * @param message_serialized_name the new message_serialized_name
+     */
+    public void setMessage(final String message_serialized_name) {
+      this.message_serialized_name = message_serialized_name;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Warning ret = (Warning) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+}

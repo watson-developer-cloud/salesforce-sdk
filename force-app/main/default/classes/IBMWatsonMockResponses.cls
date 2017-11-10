@@ -1287,4 +1287,79 @@ public class IBMWatsonMockResponses {
             '  ]' +
             '}';
   }
+  
+  public static String profile() {
+    return  '{' +
+            '  "processed_language": "ar",' +
+            '  "word_count": 0,' +
+            '  "word_count_message": "string",' +
+            '  "personality": [' +
+            '    {' +
+            '      "trait_id": "string",' +
+            '      "name": "string",' +
+            '      "category": "personality",' +
+            '      "percentile": 0,' +
+            '      "raw_score": 0,' +
+            '      "significant": true,' +
+            '      "children": [' +
+            '        {}' +
+            '      ]' +
+            '    }' +
+            '  ],' +
+            '  "values": [' +
+            '    {' +
+            '      "trait_id": "string",' +
+            '      "name": "string",' +
+            '      "category": "personality",' +
+            '      "percentile": 0,' +
+            '      "raw_score": 0,' +
+            '      "significant": true,' +
+            '      "children": [' +
+            '        {}' +
+            '      ]' +
+            '    }' +
+            '  ],' +
+            '  "needs": [' +
+            '    {' +
+            '      "trait_id": "string",' +
+            '      "name": "string",' +
+            '      "category": "personality",' +
+            '      "percentile": 0,' +
+            '      "raw_score": 0,' +
+            '      "significant": true,' +
+            '      "children": [' +
+            '        {}' +
+            '      ]' +
+            '    }' +
+            '  ],' +
+            '  "behavior": [' +
+            '    {' +
+            '      "trait_id": "string",' +
+            '      "name": "string",' +
+            '      "category": "string",' +
+            '      "percentage": 0' +
+            '    }' +
+            '  ],' +
+            '  "consumption_preferences": [' +
+            '    {' +
+            '      "consumption_preference_category_id": "string",' +
+            '      "name": "string",' +
+            '      "consumption_preferences": [' +
+            '        {' +
+            '          "consumption_preference_id": "string",' +
+            '          "name": "string",' +
+            '          "score": "0.0"' +
+            '        }' +
+            '      ]' +
+            '    }' +
+            '  ],' +
+            '  "warnings": [' +
+            '    {' +
+            '      "warning_id": "WORD_COUNT_MESSAGE",' +
+            '      "message": "string"' +
+            '    }' +
+            '  ]' +
+            '}';
+  }
+  
 }
