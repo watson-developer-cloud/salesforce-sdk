@@ -2,19 +2,6 @@
 
 The IBM Watson Salesforce SDK uses the [Watson Developer Cloud](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment.
 
-## Current Watson Service Support
-
-- Conversation ✅
-- Discovery ✅
-- Language Translator
-- Natural Language Classifier
-- Natural Language Understanding
-- Personality Insights
-- Speech to Text
-- Text to Speech
-- Tone Analyzer
-- Visual Recognition
-
 ## Installation
 
 There are three supported installation methods: automatically using Salesforce DX, manually using Salesforce DX, and manually using the Ant build tool. By default, all classes in the SDK will be deployed to your Salesforce org, but using Ant allows you to specify which services you want to deploy to save space. Note though that this is **only** supported with the Ant build tool method.
