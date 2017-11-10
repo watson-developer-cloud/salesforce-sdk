@@ -382,7 +382,6 @@ private class IBMWatsonServiceTest {
       .addFormDataPart('key', 'value')
       .build();
     System.assertEquals(IBMWatsonMultipartBody.safelyPad('test', 'test=test=', 'test'), EncodingUtil.base64Encode(blob.valueOf('test test')));
-    System.assertEquals(IBMWatsonMultipartBody.writeBodyParameter('test', 'test'), 'Q29udGVudC1EaXNwb3NpdGlvbjogZm9ybS1kYXRhOyBuYW1lPSJ0ZXN0IiANCg0KdGVzdA0K');
     System.assertEquals(multipartBody.parts().size(), 3);
     System.assert(multipartBody.getAllHeaders().get('Content-Type').contains('multipart/form-data; boundary'));
     System.assert(multipartBody.form64().contains(multipartBody.writeBoundary()));
