@@ -2,15 +2,17 @@
 
 The IBM Watson Salesforce SDK uses the [Watson Developer Cloud](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment. Currently, this SDK supports two Watson services: Conversation and Discovery. More are planned to be added in the future.
 
-## Installation using Salesforce DX
+## Installation
 
-### Automatic deployment
+There are three supported installation methods: automatically using Salesforce DX, manually using Salesforce DX, and manually using the Ant build tool. By default, all classes in the SDK will be deployed to your Salesforce org, but using Ant allows you to specify which services you want to deploy to save space. Note though that this is **only** supported with the Ant build tool method.
+
+### Salesforce DX Automatic deployment
 
 You can automatically deploy the SDK to a new scratch environment using the _Deploy to SFDX_ button.
 
 [![Deploy](https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.com/)
 
-### Manual deployment
+### Salesforce DX Manual deployment
 
 1. Clone this repository from GitHub using the following command:
 
@@ -74,6 +76,14 @@ You can install or update the SDK using the Ant Build Tool by following these st
     ```bash
     ant deployWatson
     ```
+
+    By default, this will deploy all of the classes. To specify a service, use the `-Dservice` flag. Here is an example of just deploying the Conversation service:
+
+    ```bash
+    ant deployWatson -Dservice=conversation
+    ```
+
+    To deploy multiple services, just run the command again with the new service flag.
 
 ## Getting Started
 
