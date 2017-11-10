@@ -7,6 +7,7 @@ public class IBMWatsonMockResponses {
     'https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1';
   public static String IBMNaturalLanguageClassifierClassifyURL = 
     IBMNaturalLanguageClassifierClassifyBaseURL + '/classify?text=How%20hot%20wil/10D41B-nlc-1';
+    
   public static String environment() {
     return '{"environment_id": "f822208e-e4c2-45f8-a0d6-c2be950fbcc8","name": "test_environment",'+
                         '"description": "Test environment", "created": "2016-06-16T10:56:54.957Z",'+

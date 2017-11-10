@@ -53,16 +53,16 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   private long writeForm64(List<Part> parts) {
     headers.put('Content-Type', 'multipart/form-data; boundary="' + Boundary + '"');
     form64 = '';
-
-    for (Part p: parts) {
+    for (Integer i = 0; i < parts.size(); i++){
+      Part p = parts[i];
       if (p.body().hasBase64Data()) {
         String fileName = p.body().name;
         String contentType = p.body.bodyContentType().toString();
         String file64Body = EncodingUtil.base64Encode(p.body().blobContent);
-        form64 += writeBlobBody('file', file64Body, fileName);
+        form64 += writeBlobBody(p.headers().get('Content-Disposition'), file64Body, (i == parts.size() - 1));
       } else {
         form64 += writeBoundary();
-        form64 += writeBodyParameter(p.body().name, p.body().content);
+        form64 += writeBodyParameter(p.headers().get('Content-Disposition'), p.body().content);
       }
     }
 
@@ -89,8 +89,8 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   /**
    *  Write a key-value pair to the form's body.
    */
-  public static String writeBodyParameter(String key, String value) {
-    String contentDisposition = 'Content-Disposition: form-data; name="' + key + '"';
+  public String writeBodyParameter(String key, String value) {
+    String contentDisposition = 'Content-Disposition: ' + key;
     String contentDispositionCrLf = contentDisposition + CRLF + CRLF;
     Blob contentDispositionCrLfBlob = blob.valueOf(contentDispositionCrLf);
     String contentDispositionCrLf64 = EncodingUtil.base64Encode(contentDispositionCrLfBlob);
@@ -103,49 +103,60 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
 
     return content;
   }
-    /**
-     *  Write a Blob type to the form's body.
-     */
-    public String writeBlobBody(String key, String bodyEncoded, String filename){
-      String boundaryCrlf = '--'+this.boundary + CRLF;
+  
+  /**
+   *  Write a Blob type to the form's body.
+   */
+  public String writeBlobBody(String contentDispositionValue, String bodyEncoded, Boolean isEndingPart){
+    String boundaryCrlf = '--'+this.boundary + CRLF;
       
-      String contentDisposition = 'Content-Disposition: form-data; name="'+ key +'"; filename="'+ fileName +'"';
-      String contentDispositionCrlf = contentDisposition + CRLF;
+    String contentDisposition = 'Content-Disposition: ' + contentDispositionValue;
+    String contentDispositionCrlf = contentDisposition + CRLF;
       
-      String contentType = 'Content-Type: application/octet-stream';
-      String contentTypeCrlf = contentType + CRLF;
+    String contentType = 'Content-Type: application/octet-stream';
+    String contentTypeCrlf = contentType + CRLF;
       
-      String header = boundaryCrlf + contentDispositionCrlf + contentTypeCrlf;
-      String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
-      while(headerEncoded.endsWith('=')) {
-        header+=' ';
-        headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
-      }
-      
-      String footer = CRLF + '--'+this.boundary+'--';
-      String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
-      
-      Blob bodyBlob = null;
-      String last4Bytes = bodyEncoded.substring(bodyEncoded.length()-4,bodyEncoded.length());
-      
-      if(last4Bytes.endsWith('=')) {
-        Blob decoded4Bytes = EncodingUtil.base64Decode(last4Bytes);
-        HttpRequest tmp = new HttpRequest();
-        tmp.setBodyAsBlob(decoded4Bytes);
-        String last4BytesFooter = tmp.getBody()+footer;   
-        bodyBlob = EncodingUtil.base64Decode(headerEncoded+bodyEncoded.substring(0,bodyEncoded.length()-4) 
-          + EncodingUtil.base64Encode(Blob.valueOf(last4BytesFooter)));
-      } else {
-        bodyBlob = EncodingUtil.base64Decode(headerEncoded + bodyEncoded + footerEncoded);
-      }
-      return EncodingUtil.base64Encode(bodyBlob);
+    String header = boundaryCrlf + contentDispositionCrlf + contentTypeCrlf;
+    String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
+    while (headerEncoded.endsWith('=')) {
+      header+=' ';
+      headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
     }
+      	
+    String footer;
+    if (isEndingPart) {
+     footer = CRLF + '--' + this.boundary + '--';
+    }else{
+     footer = CRLF;
+    } 
+    String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
+      
+    Blob bodyBlob = null;
+    String last4Bytes = bodyEncoded.substring(bodyEncoded.length()-4,bodyEncoded.length());
+      
+    if(last4Bytes.endsWith('=')) {
+      Blob decoded4Bytes = EncodingUtil.base64Decode(last4Bytes);
+      HttpRequest tmp = new HttpRequest();
+      tmp.setBodyAsBlob(decoded4Bytes);
+      String last4BytesFooter = tmp.getBody()+footer;   
+      bodyBlob = EncodingUtil.base64Decode(headerEncoded+bodyEncoded.substring(0,bodyEncoded.length()-4) 
+        + EncodingUtil.base64Encode(Blob.valueOf(last4BytesFooter)));
+    } else {
+      bodyBlob = EncodingUtil.base64Decode(headerEncoded + bodyEncoded + footerEncoded);
+    }
+    return EncodingUtil.base64Encode(bodyBlob);
+  }
 
   public String writeBoundary() {
-    String value = '--' + Boundary + CRLF;
-    String valueCrlf = '--' + Boundary + CRLF;
+    String value = '--' + Boundary;
+    String valueCrlf = value + CRLF;
     Blob valueBlob = blob.valueOf(valueCrlf);
-    return EncodingUtil.base64Encode(valueBlob);
+    String boundaryEncoded = EncodingUtil.base64Encode(valueBlob);
+    while (boundaryEncoded.endsWith('=')) {
+      valueCrlf += ' ';
+      boundaryEncoded = EncodingUtil.base64Encode(blob.valueOf(valueCrlf));
+    }
+    return boundaryEncoded;
   }
 
   public Map<String, String> getAllHeaders() {
