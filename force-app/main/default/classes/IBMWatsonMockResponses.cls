@@ -1177,7 +1177,7 @@ public class IBMWatsonMockResponses {
     '  "name": "My Classifier",' +
     '  "language": "en",' +
     '  "created": "2015-05-28T18:01:57.393Z",' +
-    '  "url": "'+IBMNaturalLanguageClassifierClassifyBaseURL+'",' +
+    '  "url": "' + IBMNaturalLanguageClassifierClassifyBaseURL + '",' +
     '  "status": "Training",' +
     '  "status_description": "The classifier instance is in its training phase, not yet ready to accept classify requests"' +
     '}';
@@ -1193,7 +1193,7 @@ public class IBMWatsonMockResponses {
     '"name": "My Classifier",' +
     '"language": "en",' +
     '"created": "2015-05-28T18:01:57.393Z",' +
-    '"url": "'+IBMNaturalLanguageClassifierClassifyBaseURL+'",' +
+    '"url": "' + IBMNaturalLanguageClassifierClassifyBaseURL + '",' +
     '"status": "Available",' +
     '"status_description": "The classifier instance is now available and is ready to take classifier requests."' +
     '}';

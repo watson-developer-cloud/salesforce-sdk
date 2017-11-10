@@ -10,8 +10,6 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
   public static IBMNaturalLanguageUnderstandingV1Models.AnalysisResults testAnalyze() {
     IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1(VERSION_2017_09_01);
     naturalLanguageUnderstanding.setEndPoint(NAMED_CREDENTIALS);
-//    naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
-//    naturalLanguageUnderstanding.setUsernameAndPassword(username, password);
     IBMNaturalLanguageUnderstandingV1Models.ConceptsOptions concepts=new IBMNaturalLanguageUnderstandingV1Models.ConceptsOptionsBuilder()
       .limitField(8)
       .build();
@@ -47,7 +45,6 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
       .document(true)
       .targets(new List<String>{''})
       .build();
-      
     IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions categories=new IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions();
     categories.put('emotion', emotion);
     IBMNaturalLanguageUnderstandingV1Models.MetadataOptions metadata=new IBMNaturalLanguageUnderstandingV1Models.MetadataOptions();
@@ -63,10 +60,7 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
       .categories(categories)
       .sentiment(sentiment)
       .build();
-    
     IBMNaturalLanguageUnderstandingV1Models.AnalyzeOptions options = new IBMNaturalLanguageUnderstandingV1Models.AnalyzeOptionsBuilder()
-    //  .text('Saskatoon Real Estate')//
-    //  .url('http://normfisher.com/')
       .html( '<html><head><title>Fruits</title></head><body><h1>Apples and Oranges</h1><p>I love apples! I don\'t like oranges.</p></body></html>')
       .features(features)
       .clean(true)
