@@ -53,13 +53,13 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   private long writeForm64(List<Part> parts) {
     headers.put('Content-Type', 'multipart/form-data; boundary="' + Boundary + '"');
     form64 = '';
-    for (Integer i=0; i<parts.size(); i++) {
+    for (Integer i = 0; i < parts.size(); i++){
       Part p = parts[i];
       if (p.body().hasBase64Data()) {
         String fileName = p.body().name;
         String contentType = p.body.bodyContentType().toString();
         String file64Body = EncodingUtil.base64Encode(p.body().blobContent);
-        form64 += writeBlobBody(p.headers().get('Content-Disposition'), file64Body, (i==parts.size()-1));
+        form64 += writeBlobBody(p.headers().get('Content-Disposition'), file64Body, (i == parts.size() - 1));
       } else {
         form64 += writeBoundary();
         form64 += writeBodyParameter(p.headers().get('Content-Disposition'), p.body().content);
@@ -90,7 +90,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
    *  Write a key-value pair to the form's body.
    */
   public String writeBodyParameter(String key, String value) {
-    String contentDisposition = 'Content-Disposition: '+key;//form-data; name="' + key + '"';
+    String contentDisposition = 'Content-Disposition: ' + key;
     String contentDispositionCrLf = contentDisposition + CRLF + CRLF;
     Blob contentDispositionCrLfBlob = blob.valueOf(contentDispositionCrLf);
     String contentDispositionCrLf64 = EncodingUtil.base64Encode(contentDispositionCrLfBlob);
@@ -110,7 +110,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   public String writeBlobBody(String contentDispositionValue, String bodyEncoded, Boolean isEndingPart){
     String boundaryCrlf = '--'+this.boundary + CRLF;
       
-    String contentDisposition = 'Content-Disposition: '+contentDispositionValue;
+    String contentDisposition = 'Content-Disposition: ' + contentDispositionValue;
     String contentDispositionCrlf = contentDisposition + CRLF;
       
     String contentType = 'Content-Type: application/octet-stream';
@@ -118,13 +118,13 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
       
     String header = boundaryCrlf + contentDispositionCrlf + contentTypeCrlf;
     String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
-    while(headerEncoded.endsWith('=')) {
+    while (headerEncoded.endsWith('=')) {
       header+=' ';
       headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
     }
       	
     String footer;
-    if(isEndingPart){
+    if (isEndingPart) {
      footer = CRLF + '--' + this.boundary + '--';
     }else{
      footer = CRLF;
@@ -152,7 +152,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     String valueCrlf = value + CRLF;
     Blob valueBlob = blob.valueOf(valueCrlf);
     String boundaryEncoded = EncodingUtil.base64Encode(valueBlob);
-    while(boundaryEncoded.endsWith('=')) {
+    while (boundaryEncoded.endsWith('=')) {
       valueCrlf += ' ';
       boundaryEncoded = EncodingUtil.base64Encode(blob.valueOf(valueCrlf));
     }
