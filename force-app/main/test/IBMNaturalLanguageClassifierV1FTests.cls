@@ -7,18 +7,18 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
   
   /*
   // (1) Create a classifier
-  system.debug( IBMNaturalLanguageClassifierV1FTests.testCreateClassifier() );
-  system.debug( IBMNaturalLanguageClassifierV1FTests.testListClassifiers() );
+  system.debug(IBMNaturalLanguageClassifierV1FTests.testCreateClassifier());
+  system.debug(IBMNaturalLanguageClassifierV1FTests.testListClassifiers());
   
   // (2) Classify your text
-  system.debug( IBMNaturalLanguageClassifierV1FTests.classify() );
+  system.debug(IBMNaturalLanguageClassifierV1FTests.classify());
   
   // (3) Get your classifier information and current status
-  system.debug( IBMNaturalLanguageClassifierV1FTests.testGetClassifier() );
+  system.debug(IBMNaturalLanguageClassifierV1FTests.testGetClassifier());
   
   // (4) Delete the classifier
   IBMNaturalLanguageClassifierV1FTests.testDeleteClassifier();
-  system.debug( IBMNaturalLanguageClassifierV1FTests.testListClassifiers() );  
+  system.debug(IBMNaturalLanguageClassifierV1FTests.testListClassifiers());  
   */
   
   private static String CSVFormat(List<String> strRows){
