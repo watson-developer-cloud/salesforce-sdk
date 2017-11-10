@@ -1,6 +1,19 @@
 # IBM Watson Salesforce SDK
 
-The IBM Watson Salesforce SDK uses the [Watson Developer Cloud](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment. Currently, this SDK supports two Watson services: Conversation and Discovery. More are planned to be added in the future.
+The IBM Watson Salesforce SDK uses the [Watson Developer Cloud](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment.
+
+## Current Watson Service Support
+
+- Conversation ✅
+- Discovery ✅
+- Language Translator
+- Natural Language Classifier
+- Natural Language Understanding
+- Personality Insights
+- Speech to Text
+- Text to Speech
+- Tone Analyzer
+- Visual Recognition
 
 ## Installation
 
@@ -83,7 +96,7 @@ You can install or update the SDK using the Ant Build Tool by following these st
     ant deployWatson -Dservice=conversation
     ```
 
-    To deploy multiple services, just run the command again with the new service flag.
+    Valid service names are all services listed [here](https://console.bluemix.net/catalog/?category=watson) written as one word (e.g. Visual Recognition becomes visualrecognition). The parameter is case-insensitive. To deploy multiple services, just run the command again with the next desired service flag.
 
 ## Getting Started
 
