@@ -1,3 +1,4 @@
+@isTest
 public with sharing class IBMConversationV1FTests {
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_conversation_v1_test';
