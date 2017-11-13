@@ -1,0 +1,117 @@
+/**
+ * The The IBM Watson Natural Language Classifier service uses machine learning algorithms to return the top matching
+ * predefined classes for short text input. You create and train a classifier to connect predefined classes to example
+ * texts so that the service can apply those classes to new inputs.
+ *
+ * @version V1
+ * @see <a href="http://www.ibm.com/watson/developercloud/natural-language-classifier.html">Natural Language Classifier</a>
+ */
+public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
+
+  private static final String URL = 'https://gateway.watsonplatform.net/natural-language-classifier/api';
+  private String versionDate;
+
+  /**
+   * Instantiates a new `IBMNaturalLanguageClassifierV1`.
+   *
+   */
+  public IBMNaturalLanguageClassifierV1() {
+    super('watson_natural_language_classifier_v1');
+  }
+
+  /**
+   * Instantiates a new `IBMNaturalLanguageClassifierV1` with username and password.
+   *
+   * @param username the username
+   * @param password the password
+   */
+  public IBMNaturalLanguageClassifierV1(String username, String password) {
+    this();
+    setUsernameAndPassword(username, password);
+  }
+
+  /**
+   * Returns label information for the input.
+   *
+   * The status must be `Available` before you can use the classifier to classify text. Use `Get information about a classifier` to retrieve the status.
+   *
+   * @param classifyOptions the {@link IBMNaturalLanguageClassifierV1Models.ClassifyOptions} containing the options for the call
+   * @return the {@link IBMNaturalLanguageClassifierV1Models.Classification} with the response
+   */
+  public IBMNaturalLanguageClassifierV1Models.Classification classify(IBMNaturalLanguageClassifierV1Models.ClassifyOptions classifyOptions) {
+    IBMWatsonValidator.notNull(classifyOptions, 'classifyOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/classifiers/{0}/classify', new String[]{ classifyOptions.classifierId() }));
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('text', classifyOptions.text());
+    builder.bodyJson(JSON.serialize(contentJson));
+
+    return (IBMNaturalLanguageClassifierV1Models.Classification) createServiceCall(builder.build(), IBMNaturalLanguageClassifierV1Models.Classification.class);
+  }
+
+  /**
+   * Create classifier.
+   *
+   * Sends data to create and train a classifier and returns information about the new classifier.
+   *
+   * @param createClassifierOptions the {@link IBMNaturalLanguageClassifierV1Models.CreateClassifierOptions} containing the options for the call
+   * @return the {@link IBMNaturalLanguageClassifierV1Models.Classifier} with the response
+   */
+  public IBMNaturalLanguageClassifierV1Models.Classifier createClassifier(IBMNaturalLanguageClassifierV1Models.CreateClassifierOptions createClassifierOptions) {
+    IBMWatsonValidator.notNull(createClassifierOptions, 'createClassifierOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/classifiers');
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    IBMWatsonRequestBody fileBody;
+    fileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingMetadata(), 'application/json');
+    multipartBuilder.addFormDataPart('training_metadata', createClassifierOptions.trainingMetadataFilename(), fileBody);
+    fileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingData(), 'text/csv');
+    multipartBuilder.addFormDataPart('training_data', createClassifierOptions.trainingDataFilename(), fileBody);
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
+
+    return (IBMNaturalLanguageClassifierV1Models.Classifier) createServiceCall(builder.build(), IBMNaturalLanguageClassifierV1Models.Classifier.class);
+  }
+
+  /**
+   * Delete classifier.
+   *
+   * @param deleteClassifierOptions the {@link IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteClassifier(IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptions deleteClassifierOptions) {
+    IBMWatsonValidator.notNull(deleteClassifierOptions, 'deleteClassifierOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/classifiers/{0}', new String[]{ deleteClassifierOptions.classifierId() }));
+
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * Get information about a classifier.
+   *
+   * Returns status and other information about a classifier.
+   *
+   * @param getClassifierOptions the {@link IBMNaturalLanguageClassifierV1Models.GetClassifierOptions} containing the options for the call
+   * @return the {@link IBMNaturalLanguageClassifierV1Models.Classifier} with the response
+   */
+  public IBMNaturalLanguageClassifierV1Models.Classifier getClassifier(IBMNaturalLanguageClassifierV1Models.GetClassifierOptions getClassifierOptions) {
+    IBMWatsonValidator.notNull(getClassifierOptions, 'getClassifierOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/classifiers/{0}', new String[]{ getClassifierOptions.classifierId() }));
+
+    return (IBMNaturalLanguageClassifierV1Models.Classifier) createServiceCall(builder.build(), IBMNaturalLanguageClassifierV1Models.Classifier.class);
+  }
+
+  /**
+   * List classifiers.
+   *
+   * Returns an empty array if no classifiers are available.
+   *
+   * @param listClassifiersOptions the {@link IBMNaturalLanguageClassifierV1Models.ListClassifiersOptions} containing the options for the call
+   * @return the {@link IBMNaturalLanguageClassifierV1Models.ClassifierList} with the response
+   */
+  public IBMNaturalLanguageClassifierV1Models.ClassifierList listClassifiers(IBMNaturalLanguageClassifierV1Models.ListClassifiersOptions listClassifiersOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/classifiers');
+
+    return (IBMNaturalLanguageClassifierV1Models.ClassifierList) createServiceCall(builder.build(), IBMNaturalLanguageClassifierV1Models.ClassifierList.class);
+  }
+
+}
