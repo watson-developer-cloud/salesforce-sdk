@@ -54,6 +54,21 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     setApiKey(apiKey);
   }
 
+  /*
+   * Override authentication mechanism for this endpoint
+   *
+   */
+  protected override void setAuthentication(IBMWatsonRequest.Builder builder) {
+    if (getApiKey() == null) {
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('api_key needs to be specified. Use setApiKey()');
+    }
+    Url url = builder.build().getUrl();
+    if (String.isBlank(url.getQuery())) {
+      builder.url(builder.build().getUrl().toExternalForm() + '?api_key=' + getApiKey());
+    } else {
+      builder.url(builder.build().getUrl().toExternalForm() + '&api_key=' + getApiKey());
+    }
+  }
 
   /**
    * Classify images.
