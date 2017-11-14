@@ -40,7 +40,7 @@
             <contains string="${filename}" substring="${service}" casesensitive="false"/>
           </or>
           <then>
-            <copy file="@{file}" todir="../antapioutput/" overwrite="true" failonerror="true"/>
+            <copy file="@{file}" todir="../antapioutput/classes" overwrite="true" failonerror="true"/>
           </then>
         </if>
       </sequential>
@@ -67,7 +67,7 @@
             <contains string="${filename}" substring="${service}" casesensitive="false"/>
           </or>
           <then>
-            <copy file="@{file}" todir="../antapioutput/" overwrite="true" failonerror="true"/>
+            <copy file="@{file}" todir="../antapioutput/classes" overwrite="true" failonerror="true"/>
           </then>
         </if>
       </sequential>
