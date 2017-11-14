@@ -39,7 +39,7 @@ public class IBMWatsonJSONUtil {
   }
 
   /**
-   * Adds 'serialized_name' suffix to any properties which are reserved words in Apex.
+   * Adds 'serialized_name' suffix to all property keys.
    *
    * @param jsonString String representation of the JSON response
    *
