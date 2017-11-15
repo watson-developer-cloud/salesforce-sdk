@@ -187,6 +187,56 @@ System.debug(intent);
 
 The manner of instantiating and using services should be consistent no matter which you decide to use, which should make it easy to explore the many capabilities Watson services have to offer.
 
+## Using the SDK with Lightning
+
+The Watson Salesforce SDK models are Lightning-ready, meaning that you can access model properties through Javascript for your Lightning apps. Everything should work as expected, but it's important to note that there are two ways to go about dealing with dynamic models through Javascript. These models are ones which may have properties unknown until runtime and which extend `IBMWatsonDynamicModel`.
+
+### Using the `additionalProperties` Object
+
+Dynamic models have an extra "AuraEnabled" property called `additionalProperties`, which is a map that holds all of the dynamic properties returned with the model. If you're dealing with a dynamic model in your Javascript code and want to access any dynamic properties, you can do the following:
+
+```javascript
+action.setCallback(this, function(response) {
+  var resp = response.getReturnValue(); // resp is a dynamic model
+  console.log(resp.additionalProperties["enriched_text"]["concepts"][0]["text"]);
+});
+$A.enqueueAction(action);
+```
+
+Any properties within the `additionalProperties` object can be accessed exactly like a generic Javascript object.
+
+### Using the Model String Representation
+
+If going through the `additionalProperties` object is undesired for any reason, you can still access the dynamic properties as top-level properties with a small workaround. All models in the SDK override the `toString()` method to output the models as pretty-printed JSON with the additional properties brought up to the top level. Therefore, if you tweak your server-side controller to return the string representation instead of the model object, as follows:
+
+```apex
+public class ServerSideController {
+  @AuraEnabled
+  public static String query(String environmentId, String collectionId) {        
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(IBMDiscoveryV1.VERSION_DATE_2017_09_01);
+    IBMDiscoveryV1Models.QueryOptions options = new IBMDiscoveryV1Models.QueryOptionsBuilder(environmentId, collectionId)
+      .naturalLanguageQuery('example query')
+      .build();
+    IBMDiscoveryV1Models.QueryResponse response = discovery.query(options);
+    
+    // IMPORTANT: return the string instead of the model
+    return response.toString();
+  }
+}
+```
+
+you can use `JSON.parse()` to access the whole object as a generic JSON object. Here is an example of accessing the same property in Javascript using this aternate method:
+
+```javascript
+action.setCallback(this, function(response) {
+  var resp = response.getReturnValue(); // resp is now the string representation of our dynamic model
+  console.log(JSON.parse(resp)["enriched_text"]["concepts"][0]["text"]);
+});
+$A.enqueueAction(action);
+```
+
+Both methods shown above will print out the same information.
+
 ## Supported Services
 
 The SDK currently supports:
