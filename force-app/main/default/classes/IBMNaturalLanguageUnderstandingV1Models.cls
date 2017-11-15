@@ -725,6 +725,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * The hierarchical 5-level taxonomy the content is categorized into.
    */
   public class CategoriesOptions extends IBMWatsonDynamicModel {
+    private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * Gets the dynamic properties attached to CategoriesOptions.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
+    }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
@@ -2448,6 +2459,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * The Authors, Publication Date, and Title of the document. Supports URL and HTML input types.
    */
   public class MetadataOptions extends IBMWatsonDynamicModel {
+    private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * Gets the dynamic properties attached to MetadataOptions.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
+    }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
