@@ -7611,6 +7611,7 @@ public class IBMDiscoveryV1Models {
     private Double score_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private String collection_id_serialized_name;
+    private Map<String, Object> additional_properties_serialized_name;
 
     /**
      * Gets the id_serialized_name.
@@ -7650,6 +7651,16 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public String getCollectionId() {
       return collection_id_serialized_name;
+    }
+
+    /**
+     * Gets the dynamic properties attached to QueryNoticesResult.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
     }
 
     /**
@@ -8539,6 +8550,7 @@ public class IBMDiscoveryV1Models {
     private Double score_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private String collection_id_serialized_name;
+    private Map<String, Object> additional_properties_serialized_name;
 
     /**
      * Gets the id_serialized_name.
@@ -8578,6 +8590,16 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public String getCollectionId() {
       return collection_id_serialized_name;
+    }
+
+    /**
+     * Gets the dynamic properties attached to QueryResult.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
     }
 
     /**

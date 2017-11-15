@@ -5,6 +5,7 @@ public class IBMConversationV1Models {
   public class Context extends IBMWatsonDynamicModel {
     private String conversation_id_serialized_name;
     private SystemResponse system_serialized_name;
+    private Map<String, Object> additional_properties_serialized_name;
 
     /**
      * Gets the conversation_id_serialized_name.
@@ -24,6 +25,16 @@ public class IBMConversationV1Models {
     @AuraEnabled
     public SystemResponse getSystem() {
       return system_serialized_name;
+    }
+
+    /**
+     * Gets the dynamic properties attached to Context.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
     }
 
     /**
@@ -8589,6 +8600,7 @@ public class IBMConversationV1Models {
   public class LogMessage extends IBMWatsonDynamicModel {
     private String level_serialized_name;
     private String msg_serialized_name;
+    private Map<String, Object> additional_properties_serialized_name;
 
     /**
      * Gets the level_serialized_name.
@@ -8608,6 +8620,16 @@ public class IBMConversationV1Models {
     @AuraEnabled
     public String getMsg() {
       return msg_serialized_name;
+    }
+
+    /**
+     * Gets the dynamic properties attached to LogMessage.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
     }
 
     /**
@@ -9187,6 +9209,7 @@ public class IBMConversationV1Models {
     private Boolean alternate_intents_serialized_name;
     private Context context_serialized_name;
     private OutputData output_serialized_name;
+    private Map<String, Object> additional_properties_serialized_name;
 
     /**
      * Gets the input_serialized_name.
@@ -9246,6 +9269,16 @@ public class IBMConversationV1Models {
     @AuraEnabled
     public OutputData getOutput() {
       return output_serialized_name;
+    }
+
+    /**
+     * Gets the dynamic properties attached to MessageResponse.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
     }
 
     /**
@@ -9366,6 +9399,7 @@ public class IBMConversationV1Models {
     private List<LogMessage> log_messages_serialized_name;
     private List<String> text_serialized_name;
     private List<String> nodes_visited_serialized_name;
+    private Map<String, Object> additional_properties_serialized_name;
 
     /**
      * Gets the log_messages_serialized_name.
@@ -9395,6 +9429,16 @@ public class IBMConversationV1Models {
     @AuraEnabled
     public List<String> getNodesVisited() {
       return nodes_visited_serialized_name;
+    }
+
+    /**
+     * Gets the dynamic properties attached to OutputData.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
     }
 
     /**
@@ -9565,6 +9609,7 @@ public class IBMConversationV1Models {
     private String value_serialized_name;
     private Double confidence_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
+    private Map<String, Object> additional_properties_serialized_name;
 
     /**
      * Gets the entity_serialized_name.
@@ -9614,6 +9659,16 @@ public class IBMConversationV1Models {
     @AuraEnabled
     public IBMWatsonMapModel getMetadata() {
       return metadata_serialized_name;
+    }
+
+    /**
+     * Gets the dynamic properties attached to RuntimeEntity.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
     }
 
     /**
@@ -9690,6 +9745,7 @@ public class IBMConversationV1Models {
   public class RuntimeIntent extends IBMWatsonDynamicModel {
     private String intent_serialized_name;
     private Double confidence_serialized_name;
+    private Map<String, Object> additional_properties_serialized_name;
 
     /**
      * Gets the intent_serialized_name.
@@ -9709,6 +9765,16 @@ public class IBMConversationV1Models {
     @AuraEnabled
     public Double getConfidence() {
       return confidence_serialized_name;
+    }
+
+    /**
+     * Gets the dynamic properties attached to RuntimeIntent.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
     }
 
     /**
@@ -9888,6 +9954,17 @@ public class IBMConversationV1Models {
    * For internal use only.
    */
   public class SystemResponse extends IBMWatsonDynamicModel {
+    private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * Gets the dynamic properties attached to SystemResponse.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
+    }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
