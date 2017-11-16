@@ -31,16 +31,16 @@ private class IBMToneAnalyzerV3Test {
     //you can add more attributes using following builder method. This step is not necessary 
     options = options.newBuilder().build();
     IBMToneAnalyzerV3Models.ToneAnalysis resp = toneAnalyzer.tone(options);
-    System.assertEquals(resp.getDocumentTone().getWarning(),'string');
+    System.assertEquals(resp.getDocumentTone().getWarning(), 'string');
     System.assertEquals(resp.getDocumentTone().getTones()[0].getScore(),0);
-    System.assertEquals(resp.getDocumentTone().getTones()[0].getToneId(),'string');
-    System.assertEquals(resp.getDocumentTone().getTones()[0].getToneName(),'string');
+    System.assertEquals(resp.getDocumentTone().getTones()[0].getToneId(), 'string');
+    System.assertEquals(resp.getDocumentTone().getTones()[0].getToneName(), 'string');
     System.assertEquals(resp.getSentencesTone()[0].getSentenceId(),0);
-    System.assertEquals(resp.getSentencesTone()[0].getText(),'string');
+    System.assertEquals(resp.getSentencesTone()[0].getText(), 'string');
     System.assertEquals(resp.getSentencesTone()[0].getInputFrom(),0);
     System.assertEquals(resp.getSentencesTone()[0].getInputTo(),0);
-    System.assertEquals(resp.getSentencesTone()[0].getToneCategories()[0].getCategoryId(),'string');
-    System.assertEquals(resp.getSentencesTone()[0].getToneCategories()[0].getCategoryName(),'string');
+    System.assertEquals(resp.getSentencesTone()[0].getToneCategories()[0].getCategoryId(), 'string');
+    System.assertEquals(resp.getSentencesTone()[0].getToneCategories()[0].getCategoryName(), 'string');
     Test.stopTest();  
   }
   
@@ -53,7 +53,7 @@ private class IBMToneAnalyzerV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2016-05-19','username', 'password');
+    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2016-05-19', 'username', 'password');
     toneAnalyzer.setEndPoint('https://gateway.watsonplatform.net/tone-analyzer/api');
     IBMToneAnalyzerV3Models.Utterance utterance = new IBMToneAnalyzerV3Models.UtteranceBuilder()
       .text('We have a better product. We can do better selling by having more campaigns')
@@ -68,13 +68,13 @@ private class IBMToneAnalyzerV3Test {
     //you can add more attributes using following builder method. This step is not necessary 
     options = options.newBuilder().build();  
     IBMToneAnalyzerV3Models.UtteranceAnalyses resp = toneAnalyzer.toneChat(options);
-    System.assertEquals(resp.getWarning(),'string');
-    System.assertEquals(resp.getUtterancesTone()[0].getUtteranceId(),'string');
-    System.assertEquals(resp.getUtterancesTone()[0].getUtteranceText(),'string');
-    System.assertEquals(resp.getUtterancesTone()[0].getError(),'string');
+    System.assertEquals(resp.getWarning(), 'string');
+    System.assertEquals(resp.getUtterancesTone()[0].getUtteranceId(), 'string');
+    System.assertEquals(resp.getUtterancesTone()[0].getUtteranceText(), 'string');
+    System.assertEquals(resp.getUtterancesTone()[0].getError(), 'string');
     System.assertEquals(resp.getUtterancesTone()[0].getTones()[0].getScore(),0);
-    System.assertEquals(resp.getUtterancesTone()[0].getTones()[0].getToneId(),'string');
-    System.assertEquals(resp.getUtterancesTone()[0].getTones()[0].getToneName(),'string');
+    System.assertEquals(resp.getUtterancesTone()[0].getTones()[0].getToneId(), 'string');
+    System.assertEquals(resp.getUtterancesTone()[0].getTones()[0].getToneName(), 'string');
     Test.stopTest(); 
   }
   
@@ -87,7 +87,7 @@ private class IBMToneAnalyzerV3Test {
     try {
     IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('');
     } catch(Exception ex) {
-      System.assertEquals(ex.getMessage(),'versionDate cannot be null.');
+      System.assertEquals(ex.getMessage(), 'versionDate cannot be null.');
     }
     Test.stopTest(); 
   }
