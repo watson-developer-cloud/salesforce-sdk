@@ -15,7 +15,7 @@
  */
 public class IBMVisualRecognitionV3 extends IBMWatsonService {
 
-  private static final String URL = 'https://gateway.watsonplatform.net/visual-recognition/api';
+  private static final String URL = 'https://gateway-a.watsonplatform.net/visual-recognition/api';
   private String versionDate;
 
   /** The Constant VERSION_DATE_2016_05_20. */
@@ -139,12 +139,16 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    IBMWatsonRequestBody fileBody;
     multipartBuilder.addFormDataPart('name', createClassifierOptions.name());
-    fileBody = IBMWatsonRequestBody.create(createClassifierOptions.classnamePositiveExamples(), 'application/octet-stream');
-    multipartBuilder.addFormDataPart('classname_positive_examples', createClassifierOptions.classnamePositiveExamplesFilename(), fileBody);
+    // Classes
+    for (String className : createClassifierOptions.classNames()) {
+      String dataName = className + '_positive_examples';
+      IBMWatsonFile positiveExamples = createClassifierOptions.positiveExamplesByClassName(className);
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(positiveExamples, 'application/octet-stream');
+      multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
+    }
     if (createClassifierOptions.negativeExamples() != null) {
-      fileBody = IBMWatsonRequestBody.create(createClassifierOptions.negativeExamples(), 'application/octet-stream');
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createClassifierOptions.negativeExamples(), 'application/octet-stream');
       multipartBuilder.addFormDataPart('negative_examples', createClassifierOptions.negativeExamplesFilename(), fileBody);
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
@@ -210,13 +214,15 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    IBMWatsonRequestBody fileBody;
-    if (updateClassifierOptions.classnamePositiveExamples() != null) {
-      fileBody = IBMWatsonRequestBody.create(updateClassifierOptions.classnamePositiveExamples(), 'application/octet-stream');
-      multipartBuilder.addFormDataPart('classname_positive_examples', updateClassifierOptions.classnamePositiveExamplesFilename(), fileBody);
+    // Classes
+    for (String className : updateClassifierOptions.classNames()) {
+      String dataName = className + '_positive_examples';
+      IBMWatsonFile positiveExamples = updateClassifierOptions.positiveExamplesByClassName(className);
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(positiveExamples, 'application/octet-stream');
+      multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
     }
     if (updateClassifierOptions.negativeExamples() != null) {
-      fileBody = IBMWatsonRequestBody.create(updateClassifierOptions.negativeExamples(), 'application/octet-stream');
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateClassifierOptions.negativeExamples(), 'application/octet-stream');
       multipartBuilder.addFormDataPart('negative_examples', updateClassifierOptions.negativeExamplesFilename(), fileBody);
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
