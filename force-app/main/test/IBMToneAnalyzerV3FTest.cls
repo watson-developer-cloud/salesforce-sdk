@@ -33,7 +33,7 @@ public with sharing class IBMToneAnalyzerV3FTest {
       .text('We have a better product. We can do better selling by having more campaigns')
       .build();
     IBMToneAnalyzerV3Models.ToneOptions options = new IBMToneAnalyzerV3Models.ToneOptionsBuilder()
-    .tone_input_serialized_name(toneInput)
+    .toneInput(toneInput)
     .build();
     IBMToneAnalyzerV3Models.ToneAnalysis resp =
       toneAnalyzer.tone(options);

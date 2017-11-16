@@ -26,7 +26,7 @@ private class IBMToneAnalyzerV3Test {
     .sentences(false)
     .contentLanguage('en')
     .acceptLanguage('en')
-    .tone_input_serialized_name(toneInput)
+    .toneInput(toneInput)
     .build();
     //you can add more attributes using following builder method. This step is not necessary 
     options = options.newBuilder().build();
