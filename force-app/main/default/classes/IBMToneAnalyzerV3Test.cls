@@ -84,11 +84,9 @@ private class IBMToneAnalyzerV3Test {
    */
   static testMethod void testException() {
     Test.startTest();
-    try{
+    try {
     IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('');
-    }
-    catch(Exception ex)
-    {
+    } catch(Exception ex) {
       System.assertEquals(ex.getMessage(),'versionDate cannot be null.');
     }
     Test.stopTest(); 
