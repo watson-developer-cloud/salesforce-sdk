@@ -153,7 +153,7 @@ public abstract class IBMWatsonService {
    *
    * @param builder the new authentication
    */
-  protected void setAuthentication(IBMWatsonRequest.Builder builder) {
+  protected virtual void setAuthentication(IBMWatsonRequest.Builder builder) {
     if (getApiKey() == null) {
       if (skipAuthentication) {
         return; // chosen to skip authentication with the service
@@ -213,7 +213,7 @@ public abstract class IBMWatsonService {
    *
    * @return the apiKey
    */
-  private String getApiKey() {
+  protected String getApiKey() {
     return apiKey;
   }
 }

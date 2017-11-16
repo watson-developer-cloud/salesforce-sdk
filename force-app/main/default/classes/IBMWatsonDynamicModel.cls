@@ -8,7 +8,15 @@ public virtual class IBMWatsonDynamicModel {
    * @return serialized String form of this
    */
   public override String toString() {
-    return JSON.serializePretty(this, true).remove('_serialized_name');
+    // get JSON string representation
+    String jsonString = JSON.serialize(this, true).remove('\\n');
+    
+    // call custom serializer to raise additional properties
+    jsonString = IBMWatsonJSONUtil.serialize(jsonString);
+    
+    // pretty print formatting
+    jsonString = JSON.serializePretty(JSON.deserializeUntyped(jsonString));
+    return jsonString;
   }
 
   /**
@@ -32,7 +40,7 @@ public virtual class IBMWatsonDynamicModel {
     if (additional_properties == null) {
       additional_properties = new Map<String, Object>();
     }
-    return additional_properties.get(key + '_serialized_name');
+    return additional_properties.get(key);
   }
 
   public void put(String key, Object val) {
@@ -40,12 +48,8 @@ public virtual class IBMWatsonDynamicModel {
       additional_properties = new Map<String, Object>();
     }
 
-    // dynamic properties coming from the service will already have this, but users won't add this extension
-    if (!key.endsWith('_serialized_name')) {
-      key += '_serialized_name';
-    }
-
-    additional_properties.put(key, val);
+    String valJson = JSON.serialize(val).remove('_serialized_name');
+    additional_properties.put(key.removeEnd('_serialized_name'), JSON.deserializeUntyped(valJson));
   }
 
   public virtual Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -58,6 +62,10 @@ public virtual class IBMWatsonDynamicModel {
     }
 
     return ret;
+  }
+
+  public Map<String, Object> getDynamicProperties() {
+    return this.additional_properties;
   }
 
 }

@@ -6,7 +6,15 @@ public virtual class IBMWatsonGenericModel {
    * @return serialized String form of this
    */
   public override String toString() {
-    return JSON.serializePretty(this, true).remove('_serialized_name');
+    // get JSON string representation
+    String jsonString = JSON.serialize(this, true).remove('\\n');
+    
+    // call custom serializer to raise additional properties
+    jsonString = IBMWatsonJSONUtil.serialize(jsonString);
+    
+    // pretty print formatting
+    jsonString = JSON.serializePretty(JSON.deserializeUntyped(jsonString));
+    return jsonString;
   }
 
   /**
