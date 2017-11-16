@@ -674,7 +674,7 @@ public class IBMVisualRecognitionV3Models {
    * The classify options.
    */
   public class ClassifyOptions {
-    private File images_file_serialized_name;
+    private IBMWatsonFile images_file_serialized_name;
     private String images_filename_serialized_name;
     private String parameters_serialized_name;
     private String accept_language_serialized_name;
@@ -686,7 +686,7 @@ public class IBMVisualRecognitionV3Models {
      *
      * @return the images_file_serialized_name
      */
-    public File imagesFile() {
+    public IBMWatsonFile imagesFile() {
       return images_file_serialized_name;
     }
     /**
@@ -752,7 +752,7 @@ public class IBMVisualRecognitionV3Models {
    * ClassifyOptions Builder.
    */
   public class ClassifyOptionsBuilder {
-    private File images_file_serialized_name;
+    private IBMWatsonFile images_file_serialized_name;
     private String images_filename_serialized_name;
     private String parameters_serialized_name;
     private String accept_language_serialized_name;
@@ -787,7 +787,7 @@ public class IBMVisualRecognitionV3Models {
      * @param images_file_serialized_name the images_file_serialized_name
      * @return the ClassifyOptions builder
      */
-    public ClassifyOptionsBuilder imagesFile(File images_file_serialized_name) {
+    public ClassifyOptionsBuilder imagesFile(IBMWatsonFile images_file_serialized_name) {
       this.images_file_serialized_name = images_file_serialized_name;
       return this;
     }
@@ -842,9 +842,9 @@ public class IBMVisualRecognitionV3Models {
    */
   public class CreateClassifierOptions {
     private String name_serialized_name;
-    private File classname_positive_examples_serialized_name;
+    private IBMWatsonFile classname_positive_examples_serialized_name;
     private String classname_positive_examples_filename_serialized_name;
-    private File negative_examples_serialized_name;
+    private IBMWatsonFile negative_examples_serialized_name;
     private String negative_examples_filename_serialized_name;
     /**
      * Gets the name_serialized_name.
@@ -863,7 +863,7 @@ public class IBMVisualRecognitionV3Models {
      *
      * @return the classname_positive_examples_serialized_name
      */
-    public File classnamePositiveExamples() {
+    public IBMWatsonFile classnamePositiveExamples() {
       return classname_positive_examples_serialized_name;
     }
     /**
@@ -883,7 +883,7 @@ public class IBMVisualRecognitionV3Models {
      *
      * @return the negative_examples_serialized_name
      */
-    public File negativeExamples() {
+    public IBMWatsonFile negativeExamples() {
       return negative_examples_serialized_name;
     }
     /**
@@ -922,9 +922,9 @@ public class IBMVisualRecognitionV3Models {
    */
   public class CreateClassifierOptionsBuilder {
     private String name_serialized_name;
-    private File classname_positive_examples_serialized_name;
+    private IBMWatsonFile classname_positive_examples_serialized_name;
     private String classname_positive_examples_filename_serialized_name;
-    private File negative_examples_serialized_name;
+    private IBMWatsonFile negative_examples_serialized_name;
     private String negative_examples_filename_serialized_name;
 
     private CreateClassifierOptionsBuilder(CreateClassifierOptions create_classifier_options) {
@@ -947,7 +947,7 @@ public class IBMVisualRecognitionV3Models {
      * @param name_serialized_name the name_serialized_name
      * @param classname_positive_examples_serialized_name the classname_positive_examples_serialized_name
      */
-    public CreateClassifierOptionsBuilder(String name_serialized_name, File classname_positive_examples_serialized_name) {
+    public CreateClassifierOptionsBuilder(String name_serialized_name, IBMWatsonFile classname_positive_examples_serialized_name) {
       this.name_serialized_name = name_serialized_name;
       this.classname_positive_examples_serialized_name = classname_positive_examples_serialized_name;
     }
@@ -978,7 +978,7 @@ public class IBMVisualRecognitionV3Models {
      * @param classname_positive_examples_serialized_name the classname_positive_examples_serialized_name
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder classnamePositiveExamples(File classname_positive_examples_serialized_name) {
+    public CreateClassifierOptionsBuilder classnamePositiveExamples(IBMWatsonFile classname_positive_examples_serialized_name) {
       this.classname_positive_examples_serialized_name = classname_positive_examples_serialized_name;
       return this;
     }
@@ -1000,7 +1000,7 @@ public class IBMVisualRecognitionV3Models {
      * @param negative_examples_serialized_name the negative_examples_serialized_name
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder negativeExamples(File negative_examples_serialized_name) {
+    public CreateClassifierOptionsBuilder negativeExamples(IBMWatsonFile negative_examples_serialized_name) {
       this.negative_examples_serialized_name = negative_examples_serialized_name;
       return this;
     }
@@ -1098,7 +1098,7 @@ public class IBMVisualRecognitionV3Models {
    * The detectFaces options.
    */
   public class DetectFacesOptions {
-    private File images_file_serialized_name;
+    private IBMWatsonFile images_file_serialized_name;
     private String images_filename_serialized_name;
     private String parameters_serialized_name;
     private String images_file_content_type_serialized_name;
@@ -1109,7 +1109,7 @@ public class IBMVisualRecognitionV3Models {
      *
      * @return the images_file_serialized_name
      */
-    public File imagesFile() {
+    public IBMWatsonFile imagesFile() {
       return images_file_serialized_name;
     }
     /**
@@ -1164,7 +1164,7 @@ public class IBMVisualRecognitionV3Models {
    * DetectFacesOptions Builder.
    */
   public class DetectFacesOptionsBuilder {
-    private File images_file_serialized_name;
+    private IBMWatsonFile images_file_serialized_name;
     private String images_filename_serialized_name;
     private String parameters_serialized_name;
     private String images_file_content_type_serialized_name;
@@ -1197,7 +1197,7 @@ public class IBMVisualRecognitionV3Models {
      * @param images_file_serialized_name the images_file_serialized_name
      * @return the DetectFacesOptions builder
      */
-    public DetectFacesOptionsBuilder imagesFile(File images_file_serialized_name) {
+    public DetectFacesOptionsBuilder imagesFile(IBMWatsonFile images_file_serialized_name) {
       this.images_file_serialized_name = images_file_serialized_name;
       return this;
     }
@@ -2108,9 +2108,9 @@ public class IBMVisualRecognitionV3Models {
    */
   public class UpdateClassifierOptions {
     private String classifier_id_serialized_name;
-    private File classname_positive_examples_serialized_name;
+    private IBMWatsonFile classname_positive_examples_serialized_name;
     private String classname_positive_examples_filename_serialized_name;
-    private File negative_examples_serialized_name;
+    private IBMWatsonFile negative_examples_serialized_name;
     private String negative_examples_filename_serialized_name;
     /**
      * Gets the classifier_id_serialized_name.
@@ -2129,7 +2129,7 @@ public class IBMVisualRecognitionV3Models {
      *
      * @return the classname_positive_examples_serialized_name
      */
-    public File classnamePositiveExamples() {
+    public IBMWatsonFile classnamePositiveExamples() {
       return classname_positive_examples_serialized_name;
     }
     /**
@@ -2149,7 +2149,7 @@ public class IBMVisualRecognitionV3Models {
      *
      * @return the negative_examples_serialized_name
      */
-    public File negativeExamples() {
+    public IBMWatsonFile negativeExamples() {
       return negative_examples_serialized_name;
     }
     /**
@@ -2187,9 +2187,9 @@ public class IBMVisualRecognitionV3Models {
    */
   public class UpdateClassifierOptionsBuilder {
     private String classifier_id_serialized_name;
-    private File classname_positive_examples_serialized_name;
+    private IBMWatsonFile classname_positive_examples_serialized_name;
     private String classname_positive_examples_filename_serialized_name;
-    private File negative_examples_serialized_name;
+    private IBMWatsonFile negative_examples_serialized_name;
     private String negative_examples_filename_serialized_name;
 
     private UpdateClassifierOptionsBuilder(UpdateClassifierOptions update_classifier_options) {
@@ -2241,7 +2241,7 @@ public class IBMVisualRecognitionV3Models {
      * @param classname_positive_examples_serialized_name the classname_positive_examples_serialized_name
      * @return the UpdateClassifierOptions builder
      */
-    public UpdateClassifierOptionsBuilder classnamePositiveExamples(File classname_positive_examples_serialized_name) {
+    public UpdateClassifierOptionsBuilder classnamePositiveExamples(IBMWatsonFile classname_positive_examples_serialized_name) {
       this.classname_positive_examples_serialized_name = classname_positive_examples_serialized_name;
       return this;
     }
@@ -2263,7 +2263,7 @@ public class IBMVisualRecognitionV3Models {
      * @param negative_examples_serialized_name the negative_examples_serialized_name
      * @return the UpdateClassifierOptions builder
      */
-    public UpdateClassifierOptionsBuilder negativeExamples(File negative_examples_serialized_name) {
+    public UpdateClassifierOptionsBuilder negativeExamples(IBMWatsonFile negative_examples_serialized_name) {
       this.negative_examples_serialized_name = negative_examples_serialized_name;
       return this;
     }
