@@ -19,10 +19,10 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the class_serialized_name.
      *
-     * @param class_serialized_name the new class_serialized_name
+     * @param classVar the new classVar
      */
-    public void setClass(final String class_serialized_name) {
-      this.class_serialized_name = class_serialized_name;
+    public void setClass(final String classVar) {
+      this.class_serialized_name = classVar;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -80,28 +80,28 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the class_serialized_name.
      *
-     * @param class_serialized_name the new class_serialized_name
+     * @param classVar the new classVar
      */
-    public void setClass(final String class_serialized_name) {
-      this.class_serialized_name = class_serialized_name;
+    public void setClass(final String classVar) {
+      this.class_serialized_name = classVar;
     }
 
     /**
      * Sets the score_serialized_name.
      *
-     * @param score_serialized_name the new score_serialized_name
+     * @param score the new score
      */
-    public void setScore(final Double score_serialized_name) {
-      this.score_serialized_name = score_serialized_name;
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
     }
 
     /**
      * Sets the type_hierarchy_serialized_name.
      *
-     * @param type_hierarchy_serialized_name the new type_hierarchy_serialized_name
+     * @param typeHierarchy the new typeHierarchy
      */
-    public void setTypeHierarchy(final String type_hierarchy_serialized_name) {
-      this.type_hierarchy_serialized_name = type_hierarchy_serialized_name;
+    public void setTypeHierarchy(final String typeHierarchy) {
+      this.type_hierarchy_serialized_name = typeHierarchy;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -179,46 +179,46 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the source_url_serialized_name.
      *
-     * @param source_url_serialized_name the new source_url_serialized_name
+     * @param sourceUrl the new sourceUrl
      */
-    public void setSourceUrl(final String source_url_serialized_name) {
-      this.source_url_serialized_name = source_url_serialized_name;
+    public void setSourceUrl(final String sourceUrl) {
+      this.source_url_serialized_name = sourceUrl;
     }
 
     /**
      * Sets the resolved_url_serialized_name.
      *
-     * @param resolved_url_serialized_name the new resolved_url_serialized_name
+     * @param resolvedUrl the new resolvedUrl
      */
-    public void setResolvedUrl(final String resolved_url_serialized_name) {
-      this.resolved_url_serialized_name = resolved_url_serialized_name;
+    public void setResolvedUrl(final String resolvedUrl) {
+      this.resolved_url_serialized_name = resolvedUrl;
     }
 
     /**
      * Sets the image_serialized_name.
      *
-     * @param image_serialized_name the new image_serialized_name
+     * @param image the new image
      */
-    public void setImage(final String image_serialized_name) {
-      this.image_serialized_name = image_serialized_name;
+    public void setImage(final String image) {
+      this.image_serialized_name = image;
     }
 
     /**
      * Sets the error_serialized_name.
      *
-     * @param error_serialized_name the new error_serialized_name
+     * @param error the new error
      */
-    public void setError(final ErrorInfo error_serialized_name) {
-      this.error_serialized_name = error_serialized_name;
+    public void setError(final ErrorInfo error) {
+      this.error_serialized_name = error;
     }
 
     /**
      * Sets the classifiers_serialized_name.
      *
-     * @param classifiers_serialized_name the new classifiers_serialized_name
+     * @param classifiers the new classifiers
      */
-    public void setClassifiers(final List<ClassifierResult> classifiers_serialized_name) {
-      this.classifiers_serialized_name = classifiers_serialized_name;
+    public void setClassifiers(final List<ClassifierResult> classifiers) {
+      this.classifiers_serialized_name = classifiers;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -293,28 +293,28 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the images_processed_serialized_name.
      *
-     * @param images_processed_serialized_name the new images_processed_serialized_name
+     * @param imagesProcessed the new imagesProcessed
      */
-    public void setImagesProcessed(final long images_processed_serialized_name) {
-      this.images_processed_serialized_name = images_processed_serialized_name;
+    public void setImagesProcessed(final long imagesProcessed) {
+      this.images_processed_serialized_name = imagesProcessed;
     }
 
     /**
      * Sets the images_serialized_name.
      *
-     * @param images_serialized_name the new images_serialized_name
+     * @param images the new images
      */
-    public void setImages(final List<ClassifiedImage> images_serialized_name) {
-      this.images_serialized_name = images_serialized_name;
+    public void setImages(final List<ClassifiedImage> images) {
+      this.images_serialized_name = images;
     }
 
     /**
      * Sets the warnings_serialized_name.
      *
-     * @param warnings_serialized_name the new warnings_serialized_name
+     * @param warnings the new warnings
      */
-    public void setWarnings(final List<WarningInfo> warnings_serialized_name) {
-      this.warnings_serialized_name = warnings_serialized_name;
+    public void setWarnings(final List<WarningInfo> warnings) {
+      this.warnings_serialized_name = warnings;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -446,64 +446,64 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the classifier_id_serialized_name.
      *
-     * @param classifier_id_serialized_name the new classifier_id_serialized_name
+     * @param classifierId the new classifierId
      */
-    public void setClassifierId(final String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public void setClassifierId(final String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
     }
 
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     /**
      * Sets the owner_serialized_name.
      *
-     * @param owner_serialized_name the new owner_serialized_name
+     * @param owner the new owner
      */
-    public void setOwner(final String owner_serialized_name) {
-      this.owner_serialized_name = owner_serialized_name;
+    public void setOwner(final String owner) {
+      this.owner_serialized_name = owner;
     }
 
     /**
      * Sets the status_serialized_name.
      *
-     * @param status_serialized_name the new status_serialized_name
+     * @param status the new status
      */
-    public void setStatus(final String status_serialized_name) {
-      this.status_serialized_name = status_serialized_name;
+    public void setStatus(final String status) {
+      this.status_serialized_name = status;
     }
 
     /**
      * Sets the explanation_serialized_name.
      *
-     * @param explanation_serialized_name the new explanation_serialized_name
+     * @param explanation the new explanation
      */
-    public void setExplanation(final String explanation_serialized_name) {
-      this.explanation_serialized_name = explanation_serialized_name;
+    public void setExplanation(final String explanation) {
+      this.explanation_serialized_name = explanation;
     }
 
     /**
      * Sets the created_serialized_name.
      *
-     * @param created_serialized_name the new created_serialized_name
+     * @param created the new created
      */
-    public void setCreated(final Datetime created_serialized_name) {
-      this.created_serialized_name = created_serialized_name;
+    public void setCreated(final Datetime created) {
+      this.created_serialized_name = created;
     }
 
     /**
      * Sets the classes_serialized_name.
      *
-     * @param classes_serialized_name the new classes_serialized_name
+     * @param classes the new classes
      */
-    public void setClasses(final List<ModelClass> classes_serialized_name) {
-      this.classes_serialized_name = classes_serialized_name;
+    public void setClasses(final List<ModelClass> classes) {
+      this.classes_serialized_name = classes;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -574,28 +574,28 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     /**
      * Sets the classifier_id_serialized_name.
      *
-     * @param classifier_id_serialized_name the new classifier_id_serialized_name
+     * @param classifierId the new classifierId
      */
-    public void setClassifierId(final String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public void setClassifierId(final String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
     }
 
     /**
      * Sets the classes_serialized_name.
      *
-     * @param classes_serialized_name the new classes_serialized_name
+     * @param classes the new classes
      */
-    public void setClasses(final List<ClassResult> classes_serialized_name) {
-      this.classes_serialized_name = classes_serialized_name;
+    public void setClasses(final List<ClassResult> classes) {
+      this.classes_serialized_name = classes;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -640,10 +640,10 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the classifiers_serialized_name.
      *
-     * @param classifiers_serialized_name the new classifiers_serialized_name
+     * @param classifiers the new classifiers
      */
-    public void setClassifiers(final List<Classifier> classifiers_serialized_name) {
-      this.classifiers_serialized_name = classifiers_serialized_name;
+    public void setClassifiers(final List<Classifier> classifiers) {
+      this.classifiers_serialized_name = classifiers;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -758,12 +758,12 @@ public class IBMVisualRecognitionV3Models {
     private String accept_language_serialized_name;
     private String images_file_content_type_serialized_name;
 
-    private ClassifyOptionsBuilder(ClassifyOptions classify_options) {
-      images_file_serialized_name = classify_options.images_file_serialized_name;
-      images_filename_serialized_name = classify_options.images_filename_serialized_name;
-      parameters_serialized_name = classify_options.parameters_serialized_name;
-      accept_language_serialized_name = classify_options.accept_language_serialized_name;
-      images_file_content_type_serialized_name = classify_options.images_file_content_type_serialized_name;
+    private ClassifyOptionsBuilder(ClassifyOptions classifyOptions) {
+      images_file_serialized_name = classifyOptions.images_file_serialized_name;
+      images_filename_serialized_name = classifyOptions.images_filename_serialized_name;
+      parameters_serialized_name = classifyOptions.parameters_serialized_name;
+      accept_language_serialized_name = classifyOptions.accept_language_serialized_name;
+      images_file_content_type_serialized_name = classifyOptions.images_file_content_type_serialized_name;
     }
 
     /**
@@ -775,7 +775,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Builds a ClassifyOptions.
      *
-     * @return the classify_options
+     * @return the classifyOptions
      */
     public ClassifyOptions build() {
       return new ClassifyOptions(this);
@@ -784,55 +784,55 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Set the images_file_serialized_name.
      *
-     * @param images_file_serialized_name the images_file_serialized_name
+     * @param imagesFile the imagesFile
      * @return the ClassifyOptions builder
      */
-    public ClassifyOptionsBuilder imagesFile(IBMWatsonFile images_file_serialized_name) {
-      this.images_file_serialized_name = images_file_serialized_name;
+    public ClassifyOptionsBuilder imagesFile(IBMWatsonFile imagesFile) {
+      this.images_file_serialized_name = imagesFile;
       return this;
     }
 
     /**
      * Set the images_filename_serialized_name.
      *
-     * @param images_filename_serialized_name the images_filename_serialized_name
+     * @param imagesFilename the imagesFilename
      * @return the ClassifyOptions builder
      */
-    public ClassifyOptionsBuilder imagesFilename(String images_filename_serialized_name) {
-      this.images_filename_serialized_name = images_filename_serialized_name;
+    public ClassifyOptionsBuilder imagesFilename(String imagesFilename) {
+      this.images_filename_serialized_name = imagesFilename;
       return this;
     }
 
     /**
      * Set the parameters_serialized_name.
      *
-     * @param parameters_serialized_name the parameters_serialized_name
+     * @param parameters the parameters
      * @return the ClassifyOptions builder
      */
-    public ClassifyOptionsBuilder parameters(String parameters_serialized_name) {
-      this.parameters_serialized_name = parameters_serialized_name;
+    public ClassifyOptionsBuilder parameters(String parameters) {
+      this.parameters_serialized_name = parameters;
       return this;
     }
 
     /**
      * Set the accept_language_serialized_name.
      *
-     * @param accept_language_serialized_name the accept_language_serialized_name
+     * @param acceptLanguage the acceptLanguage
      * @return the ClassifyOptions builder
      */
-    public ClassifyOptionsBuilder acceptLanguage(String accept_language_serialized_name) {
-      this.accept_language_serialized_name = accept_language_serialized_name;
+    public ClassifyOptionsBuilder acceptLanguage(String acceptLanguage) {
+      this.accept_language_serialized_name = acceptLanguage;
       return this;
     }
 
     /**
      * Set the images_file_content_type_serialized_name.
      *
-     * @param images_file_content_type_serialized_name the images_file_content_type_serialized_name
+     * @param imagesFileContentType the imagesFileContentType
      * @return the ClassifyOptions builder
      */
-    public ClassifyOptionsBuilder imagesFileContentType(String images_file_content_type_serialized_name) {
-      this.images_file_content_type_serialized_name = images_file_content_type_serialized_name;
+    public ClassifyOptionsBuilder imagesFileContentType(String imagesFileContentType) {
+      this.images_file_content_type_serialized_name = imagesFileContentType;
       return this;
     }
   }
@@ -842,7 +842,8 @@ public class IBMVisualRecognitionV3Models {
    */
   public class CreateClassifierOptions {
     private String name_serialized_name;
-    private Map<String, IBMWatsonFile> classname_positive_examples_serialized_name;
+    private IBMWatsonFile classname_positive_examples_serialized_name;
+    private String classname_positive_examples_filename_serialized_name;
     private IBMWatsonFile negative_examples_serialized_name;
     private String negative_examples_filename_serialized_name;
     /**
@@ -856,23 +857,24 @@ public class IBMVisualRecognitionV3Models {
       return name_serialized_name;
     }
     /**
-     * Gets the class names.
+     * Gets the classname_positive_examples_serialized_name.
      *
      * A compressed (.zip) file of images that depict the visual subject for a class within the new classifier. Must contain a minimum of 10 images. The swagger limits you to training only one class. To train more classes, use the API functionality.
      *
-     * @return the classNames
+     * @return the classname_positive_examples_serialized_name
      */
-    public Set<String> classNames() {
-      return classname_positive_examples_serialized_name.keySet();
+    public IBMWatsonFile classnamePositiveExamples() {
+      return classname_positive_examples_serialized_name;
     }
     /**
-     * Gets the positive examples by class name.
+     * Gets the classname_positive_examples_filename_serialized_name.
      *
-     * @param className the class name
-     * @return the positiveExamples
+     * The filename for classname_positive_examples.
+     *
+     * @return the classname_positive_examples_filename_serialized_name
      */
-    public IBMWatsonFile positiveExamplesByClassName(String className) {
-      return classname_positive_examples_serialized_name.get(className);
+    public String classnamePositiveExamplesFilename() {
+      return classname_positive_examples_filename_serialized_name;
     }
     /**
      * Gets the negative_examples_serialized_name.
@@ -896,9 +898,10 @@ public class IBMVisualRecognitionV3Models {
     }
     private CreateClassifierOptions(CreateClassifierOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.name_serialized_name, 'name_serialized_name cannot be null');
-      IBMWatsonValidator.isTrue(!builder.classname_positive_examples_serialized_name.isEmpty(), 'To create a classifier, you must supply at least one positive examples file.');
+      IBMWatsonValidator.notNull(builder.classname_positive_examples_serialized_name, 'classname_positive_examples_serialized_name cannot be null');
       name_serialized_name = builder.name_serialized_name;
       classname_positive_examples_serialized_name = builder.classname_positive_examples_serialized_name;
+      classname_positive_examples_filename_serialized_name = builder.classname_positive_examples_filename_serialized_name;
       negative_examples_serialized_name = builder.negative_examples_serialized_name;
       negative_examples_filename_serialized_name = builder.negative_examples_filename_serialized_name;
     }
@@ -919,39 +922,40 @@ public class IBMVisualRecognitionV3Models {
    */
   public class CreateClassifierOptionsBuilder {
     private String name_serialized_name;
-    private Map<String, IBMWatsonFile> classname_positive_examples_serialized_name;
+    private IBMWatsonFile classname_positive_examples_serialized_name;
+    private String classname_positive_examples_filename_serialized_name;
     private IBMWatsonFile negative_examples_serialized_name;
     private String negative_examples_filename_serialized_name;
 
-    private CreateClassifierOptionsBuilder(CreateClassifierOptions create_classifier_options) {
-      name_serialized_name = create_classifier_options.name_serialized_name;
-      classname_positive_examples_serialized_name.putAll(create_classifier_options.classname_positive_examples_serialized_name);
-      negative_examples_serialized_name = create_classifier_options.negative_examples_serialized_name;
-      negative_examples_filename_serialized_name = create_classifier_options.negative_examples_filename_serialized_name;
+    private CreateClassifierOptionsBuilder(CreateClassifierOptions createClassifierOptions) {
+      name_serialized_name = createClassifierOptions.name_serialized_name;
+      classname_positive_examples_serialized_name = createClassifierOptions.classname_positive_examples_serialized_name;
+      classname_positive_examples_filename_serialized_name = createClassifierOptions.classname_positive_examples_filename_serialized_name;
+      negative_examples_serialized_name = createClassifierOptions.negative_examples_serialized_name;
+      negative_examples_filename_serialized_name = createClassifierOptions.negative_examples_filename_serialized_name;
     }
 
     /**
      * Instantiates a new builder.
      */
     public CreateClassifierOptionsBuilder() {
-      classname_positive_examples_serialized_name = new Map<String, IBMWatsonFile>();
     }
 
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param name_serialized_name the name_serialized_name
-     * @param classname_positive_examples_serialized_name the classname_positive_examples_serialized_name
+     * @param name the name
+     * @param classnamePositiveExamples the classnamePositiveExamples
      */
-    public CreateClassifierOptionsBuilder(String name_serialized_name) {
-      this();
-      this.name_serialized_name = name_serialized_name;
+    public CreateClassifierOptionsBuilder(String name, IBMWatsonFile classnamePositiveExamples) {
+      this.name_serialized_name = name;
+      this.classname_positive_examples_serialized_name = classnamePositiveExamples;
     }
 
     /**
      * Builds a CreateClassifierOptions.
      *
-     * @return the create_classifier_options
+     * @return the createClassifierOptions
      */
     public CreateClassifierOptions build() {
       return new CreateClassifierOptions(this);
@@ -960,48 +964,55 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Set the name_serialized_name.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder name(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public CreateClassifierOptionsBuilder name(String name) {
+      this.name_serialized_name = name;
       return this;
     }
 
     /**
-     * Adds a classifier with a name and positive examples. If the classifier name is already contained, the old
-     * positive examples are replaced by the specified value.
+     * Set the classname_positive_examples_serialized_name.
      *
-     * @param className the class name
-     * @param positiveExamples the positive examples
-     * @return the builder
+     * @param classnamePositiveExamples the classnamePositiveExamples
+     * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder addClass(String className, IBMWatsonFile positiveExamples) {
-      IBMWatsonValidator.notNull(className, 'className cannot be null');
-      IBMWatsonValidator.notNull(positiveExamples, 'positiveExamples cannot be null');
-      classname_positive_examples_serialized_name.put(className, positiveExamples);
+    public CreateClassifierOptionsBuilder classnamePositiveExamples(IBMWatsonFile classnamePositiveExamples) {
+      this.classname_positive_examples_serialized_name = classnamePositiveExamples;
       return this;
-    } 
+    }
+
+    /**
+     * Set the classname_positive_examples_filename_serialized_name.
+     *
+     * @param classnamePositiveExamplesFilename the classnamePositiveExamplesFilename
+     * @return the CreateClassifierOptions builder
+     */
+    public CreateClassifierOptionsBuilder classnamePositiveExamplesFilename(String classnamePositiveExamplesFilename) {
+      this.classname_positive_examples_filename_serialized_name = classnamePositiveExamplesFilename;
+      return this;
+    }
 
     /**
      * Set the negative_examples_serialized_name.
      *
-     * @param negative_examples_serialized_name the negative_examples_serialized_name
+     * @param negativeExamples the negativeExamples
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder negativeExamples(IBMWatsonFile negative_examples_serialized_name) {
-      this.negative_examples_serialized_name = negative_examples_serialized_name;
+    public CreateClassifierOptionsBuilder negativeExamples(IBMWatsonFile negativeExamples) {
+      this.negative_examples_serialized_name = negativeExamples;
       return this;
     }
 
     /**
      * Set the negative_examples_filename_serialized_name.
      *
-     * @param negative_examples_filename_serialized_name the negative_examples_filename_serialized_name
+     * @param negativeExamplesFilename the negativeExamplesFilename
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder negativeExamplesFilename(String negative_examples_filename_serialized_name) {
-      this.negative_examples_filename_serialized_name = negative_examples_filename_serialized_name;
+    public CreateClassifierOptionsBuilder negativeExamplesFilename(String negativeExamplesFilename) {
+      this.negative_examples_filename_serialized_name = negativeExamplesFilename;
       return this;
     }
   }
@@ -1043,8 +1054,8 @@ public class IBMVisualRecognitionV3Models {
   public class DeleteClassifierOptionsBuilder {
     private String classifier_id_serialized_name;
 
-    private DeleteClassifierOptionsBuilder(DeleteClassifierOptions delete_classifier_options) {
-      classifier_id_serialized_name = delete_classifier_options.classifier_id_serialized_name;
+    private DeleteClassifierOptionsBuilder(DeleteClassifierOptions deleteClassifierOptions) {
+      classifier_id_serialized_name = deleteClassifierOptions.classifier_id_serialized_name;
     }
 
     /**
@@ -1056,16 +1067,16 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param classifier_id_serialized_name the classifier_id_serialized_name
+     * @param classifierId the classifierId
      */
-    public DeleteClassifierOptionsBuilder(String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public DeleteClassifierOptionsBuilder(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
     }
 
     /**
      * Builds a DeleteClassifierOptions.
      *
-     * @return the delete_classifier_options
+     * @return the deleteClassifierOptions
      */
     public DeleteClassifierOptions build() {
       return new DeleteClassifierOptions(this);
@@ -1074,11 +1085,11 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Set the classifier_id_serialized_name.
      *
-     * @param classifier_id_serialized_name the classifier_id_serialized_name
+     * @param classifierId the classifierId
      * @return the DeleteClassifierOptions builder
      */
-    public DeleteClassifierOptionsBuilder classifierId(String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public DeleteClassifierOptionsBuilder classifierId(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
       return this;
     }
   }
@@ -1158,11 +1169,11 @@ public class IBMVisualRecognitionV3Models {
     private String parameters_serialized_name;
     private String images_file_content_type_serialized_name;
 
-    private DetectFacesOptionsBuilder(DetectFacesOptions detect_faces_options) {
-      images_file_serialized_name = detect_faces_options.images_file_serialized_name;
-      images_filename_serialized_name = detect_faces_options.images_filename_serialized_name;
-      parameters_serialized_name = detect_faces_options.parameters_serialized_name;
-      images_file_content_type_serialized_name = detect_faces_options.images_file_content_type_serialized_name;
+    private DetectFacesOptionsBuilder(DetectFacesOptions detectFacesOptions) {
+      images_file_serialized_name = detectFacesOptions.images_file_serialized_name;
+      images_filename_serialized_name = detectFacesOptions.images_filename_serialized_name;
+      parameters_serialized_name = detectFacesOptions.parameters_serialized_name;
+      images_file_content_type_serialized_name = detectFacesOptions.images_file_content_type_serialized_name;
     }
 
     /**
@@ -1174,7 +1185,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Builds a DetectFacesOptions.
      *
-     * @return the detect_faces_options
+     * @return the detectFacesOptions
      */
     public DetectFacesOptions build() {
       return new DetectFacesOptions(this);
@@ -1183,44 +1194,44 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Set the images_file_serialized_name.
      *
-     * @param images_file_serialized_name the images_file_serialized_name
+     * @param imagesFile the imagesFile
      * @return the DetectFacesOptions builder
      */
-    public DetectFacesOptionsBuilder imagesFile(IBMWatsonFile images_file_serialized_name) {
-      this.images_file_serialized_name = images_file_serialized_name;
+    public DetectFacesOptionsBuilder imagesFile(IBMWatsonFile imagesFile) {
+      this.images_file_serialized_name = imagesFile;
       return this;
     }
 
     /**
      * Set the images_filename_serialized_name.
      *
-     * @param images_filename_serialized_name the images_filename_serialized_name
+     * @param imagesFilename the imagesFilename
      * @return the DetectFacesOptions builder
      */
-    public DetectFacesOptionsBuilder imagesFilename(String images_filename_serialized_name) {
-      this.images_filename_serialized_name = images_filename_serialized_name;
+    public DetectFacesOptionsBuilder imagesFilename(String imagesFilename) {
+      this.images_filename_serialized_name = imagesFilename;
       return this;
     }
 
     /**
      * Set the parameters_serialized_name.
      *
-     * @param parameters_serialized_name the parameters_serialized_name
+     * @param parameters the parameters
      * @return the DetectFacesOptions builder
      */
-    public DetectFacesOptionsBuilder parameters(String parameters_serialized_name) {
-      this.parameters_serialized_name = parameters_serialized_name;
+    public DetectFacesOptionsBuilder parameters(String parameters) {
+      this.parameters_serialized_name = parameters;
       return this;
     }
 
     /**
      * Set the images_file_content_type_serialized_name.
      *
-     * @param images_file_content_type_serialized_name the images_file_content_type_serialized_name
+     * @param imagesFileContentType the imagesFileContentType
      * @return the DetectFacesOptions builder
      */
-    public DetectFacesOptionsBuilder imagesFileContentType(String images_file_content_type_serialized_name) {
-      this.images_file_content_type_serialized_name = images_file_content_type_serialized_name;
+    public DetectFacesOptionsBuilder imagesFileContentType(String imagesFileContentType) {
+      this.images_file_content_type_serialized_name = imagesFileContentType;
       return this;
     }
   }
@@ -1269,28 +1280,28 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the images_processed_serialized_name.
      *
-     * @param images_processed_serialized_name the new images_processed_serialized_name
+     * @param imagesProcessed the new imagesProcessed
      */
-    public void setImagesProcessed(final long images_processed_serialized_name) {
-      this.images_processed_serialized_name = images_processed_serialized_name;
+    public void setImagesProcessed(final long imagesProcessed) {
+      this.images_processed_serialized_name = imagesProcessed;
     }
 
     /**
      * Sets the images_serialized_name.
      *
-     * @param images_serialized_name the new images_serialized_name
+     * @param images the new images
      */
-    public void setImages(final List<ImageWithFaces> images_serialized_name) {
-      this.images_serialized_name = images_serialized_name;
+    public void setImages(final List<ImageWithFaces> images) {
+      this.images_serialized_name = images;
     }
 
     /**
      * Sets the warnings_serialized_name.
      *
-     * @param warnings_serialized_name the new warnings_serialized_name
+     * @param warnings the new warnings
      */
-    public void setWarnings(final List<WarningInfo> warnings_serialized_name) {
-      this.warnings_serialized_name = warnings_serialized_name;
+    public void setWarnings(final List<WarningInfo> warnings) {
+      this.warnings_serialized_name = warnings;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1362,19 +1373,19 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the error_id_serialized_name.
      *
-     * @param error_id_serialized_name the new error_id_serialized_name
+     * @param errorId the new errorId
      */
-    public void setErrorId(final String error_id_serialized_name) {
-      this.error_id_serialized_name = error_id_serialized_name;
+    public void setErrorId(final String errorId) {
+      this.error_id_serialized_name = errorId;
     }
 
     /**
      * Sets the description_serialized_name.
      *
-     * @param description_serialized_name the new description_serialized_name
+     * @param description the new description
      */
-    public void setDescription(final String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1436,37 +1447,37 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the age_serialized_name.
      *
-     * @param age_serialized_name the new age_serialized_name
+     * @param age the new age
      */
-    public void setAge(final FaceAge age_serialized_name) {
-      this.age_serialized_name = age_serialized_name;
+    public void setAge(final FaceAge age) {
+      this.age_serialized_name = age;
     }
 
     /**
      * Sets the gender_serialized_name.
      *
-     * @param gender_serialized_name the new gender_serialized_name
+     * @param gender the new gender
      */
-    public void setGender(final FaceGender gender_serialized_name) {
-      this.gender_serialized_name = gender_serialized_name;
+    public void setGender(final FaceGender gender) {
+      this.gender_serialized_name = gender;
     }
 
     /**
      * Sets the face_location_serialized_name.
      *
-     * @param face_location_serialized_name the new face_location_serialized_name
+     * @param faceLocation the new faceLocation
      */
-    public void setFaceLocation(final FaceLocation face_location_serialized_name) {
-      this.face_location_serialized_name = face_location_serialized_name;
+    public void setFaceLocation(final FaceLocation faceLocation) {
+      this.face_location_serialized_name = faceLocation;
     }
 
     /**
      * Sets the identity_serialized_name.
      *
-     * @param identity_serialized_name the new identity_serialized_name
+     * @param identity the new identity
      */
-    public void setIdentity(final FaceIdentity identity_serialized_name) {
-      this.identity_serialized_name = identity_serialized_name;
+    public void setIdentity(final FaceIdentity identity) {
+      this.identity_serialized_name = identity;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1540,28 +1551,28 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the min_serialized_name.
      *
-     * @param min_serialized_name the new min_serialized_name
+     * @param min the new min
      */
-    public void setMin(final long min_serialized_name) {
-      this.min_serialized_name = min_serialized_name;
+    public void setMin(final long min) {
+      this.min_serialized_name = min;
     }
 
     /**
      * Sets the max_serialized_name.
      *
-     * @param max_serialized_name the new max_serialized_name
+     * @param max the new max
      */
-    public void setMax(final long max_serialized_name) {
-      this.max_serialized_name = max_serialized_name;
+    public void setMax(final long max) {
+      this.max_serialized_name = max;
     }
 
     /**
      * Sets the score_serialized_name.
      *
-     * @param score_serialized_name the new score_serialized_name
+     * @param score the new score
      */
-    public void setScore(final Double score_serialized_name) {
-      this.score_serialized_name = score_serialized_name;
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1607,19 +1618,19 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the gender_serialized_name.
      *
-     * @param gender_serialized_name the new gender_serialized_name
+     * @param gender the new gender
      */
-    public void setGender(final String gender_serialized_name) {
-      this.gender_serialized_name = gender_serialized_name;
+    public void setGender(final String gender) {
+      this.gender_serialized_name = gender;
     }
 
     /**
      * Sets the score_serialized_name.
      *
-     * @param score_serialized_name the new score_serialized_name
+     * @param score the new score
      */
-    public void setScore(final Double score_serialized_name) {
-      this.score_serialized_name = score_serialized_name;
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1677,28 +1688,28 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     /**
      * Sets the score_serialized_name.
      *
-     * @param score_serialized_name the new score_serialized_name
+     * @param score the new score
      */
-    public void setScore(final Double score_serialized_name) {
-      this.score_serialized_name = score_serialized_name;
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
     }
 
     /**
      * Sets the type_hierarchy_serialized_name.
      *
-     * @param type_hierarchy_serialized_name the new type_hierarchy_serialized_name
+     * @param typeHierarchy the new typeHierarchy
      */
-    public void setTypeHierarchy(final String type_hierarchy_serialized_name) {
-      this.type_hierarchy_serialized_name = type_hierarchy_serialized_name;
+    public void setTypeHierarchy(final String typeHierarchy) {
+      this.type_hierarchy_serialized_name = typeHierarchy;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1768,37 +1779,37 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the width_serialized_name.
      *
-     * @param width_serialized_name the new width_serialized_name
+     * @param width the new width
      */
-    public void setWidth(final Double width_serialized_name) {
-      this.width_serialized_name = width_serialized_name;
+    public void setWidth(final Double width) {
+      this.width_serialized_name = width;
     }
 
     /**
      * Sets the height_serialized_name.
      *
-     * @param height_serialized_name the new height_serialized_name
+     * @param height the new height
      */
-    public void setHeight(final Double height_serialized_name) {
-      this.height_serialized_name = height_serialized_name;
+    public void setHeight(final Double height) {
+      this.height_serialized_name = height;
     }
 
     /**
      * Sets the left_serialized_name.
      *
-     * @param left_serialized_name the new left_serialized_name
+     * @param left the new left
      */
-    public void setLeft(final Double left_serialized_name) {
-      this.left_serialized_name = left_serialized_name;
+    public void setLeft(final Double left) {
+      this.left_serialized_name = left;
     }
 
     /**
      * Sets the top_serialized_name.
      *
-     * @param top_serialized_name the new top_serialized_name
+     * @param top the new top
      */
-    public void setTop(final Double top_serialized_name) {
-      this.top_serialized_name = top_serialized_name;
+    public void setTop(final Double top) {
+      this.top_serialized_name = top;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1849,8 +1860,8 @@ public class IBMVisualRecognitionV3Models {
   public class GetClassifierOptionsBuilder {
     private String classifier_id_serialized_name;
 
-    private GetClassifierOptionsBuilder(GetClassifierOptions get_classifier_options) {
-      classifier_id_serialized_name = get_classifier_options.classifier_id_serialized_name;
+    private GetClassifierOptionsBuilder(GetClassifierOptions getClassifierOptions) {
+      classifier_id_serialized_name = getClassifierOptions.classifier_id_serialized_name;
     }
 
     /**
@@ -1862,16 +1873,16 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param classifier_id_serialized_name the classifier_id_serialized_name
+     * @param classifierId the classifierId
      */
-    public GetClassifierOptionsBuilder(String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public GetClassifierOptionsBuilder(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
     }
 
     /**
      * Builds a GetClassifierOptions.
      *
-     * @return the get_classifier_options
+     * @return the getClassifierOptions
      */
     public GetClassifierOptions build() {
       return new GetClassifierOptions(this);
@@ -1880,11 +1891,11 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Set the classifier_id_serialized_name.
      *
-     * @param classifier_id_serialized_name the classifier_id_serialized_name
+     * @param classifierId the classifierId
      * @return the GetClassifierOptions builder
      */
-    public GetClassifierOptionsBuilder classifierId(String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public GetClassifierOptionsBuilder classifierId(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
       return this;
     }
   }
@@ -1955,46 +1966,46 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the faces_serialized_name.
      *
-     * @param faces_serialized_name the new faces_serialized_name
+     * @param faces the new faces
      */
-    public void setFaces(final List<Face> faces_serialized_name) {
-      this.faces_serialized_name = faces_serialized_name;
+    public void setFaces(final List<Face> faces) {
+      this.faces_serialized_name = faces;
     }
 
     /**
      * Sets the image_serialized_name.
      *
-     * @param image_serialized_name the new image_serialized_name
+     * @param image the new image
      */
-    public void setImage(final String image_serialized_name) {
-      this.image_serialized_name = image_serialized_name;
+    public void setImage(final String image) {
+      this.image_serialized_name = image;
     }
 
     /**
      * Sets the source_url_serialized_name.
      *
-     * @param source_url_serialized_name the new source_url_serialized_name
+     * @param sourceUrl the new sourceUrl
      */
-    public void setSourceUrl(final String source_url_serialized_name) {
-      this.source_url_serialized_name = source_url_serialized_name;
+    public void setSourceUrl(final String sourceUrl) {
+      this.source_url_serialized_name = sourceUrl;
     }
 
     /**
      * Sets the resolved_url_serialized_name.
      *
-     * @param resolved_url_serialized_name the new resolved_url_serialized_name
+     * @param resolvedUrl the new resolvedUrl
      */
-    public void setResolvedUrl(final String resolved_url_serialized_name) {
-      this.resolved_url_serialized_name = resolved_url_serialized_name;
+    public void setResolvedUrl(final String resolvedUrl) {
+      this.resolved_url_serialized_name = resolvedUrl;
     }
 
     /**
      * Sets the error_serialized_name.
      *
-     * @param error_serialized_name the new error_serialized_name
+     * @param error the new error
      */
-    public void setError(final ErrorInfo error_serialized_name) {
-      this.error_serialized_name = error_serialized_name;
+    public void setError(final ErrorInfo error) {
+      this.error_serialized_name = error;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2061,8 +2072,8 @@ public class IBMVisualRecognitionV3Models {
   public class ListClassifiersOptionsBuilder {
     private Boolean verbose_serialized_name;
 
-    private ListClassifiersOptionsBuilder(ListClassifiersOptions list_classifiers_options) {
-      verbose_serialized_name = list_classifiers_options.verbose_serialized_name;
+    private ListClassifiersOptionsBuilder(ListClassifiersOptions listClassifiersOptions) {
+      verbose_serialized_name = listClassifiersOptions.verbose_serialized_name;
     }
 
     /**
@@ -2074,7 +2085,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Builds a ListClassifiersOptions.
      *
-     * @return the list_classifiers_options
+     * @return the listClassifiersOptions
      */
     public ListClassifiersOptions build() {
       return new ListClassifiersOptions(this);
@@ -2083,11 +2094,11 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Set the verbose_serialized_name.
      *
-     * @param verbose_serialized_name the verbose_serialized_name
+     * @param verbose the verbose
      * @return the ListClassifiersOptions builder
      */
-    public ListClassifiersOptionsBuilder verbose(Boolean verbose_serialized_name) {
-      this.verbose_serialized_name = verbose_serialized_name;
+    public ListClassifiersOptionsBuilder verbose(Boolean verbose) {
+      this.verbose_serialized_name = verbose;
       return this;
     }
   }
@@ -2097,7 +2108,8 @@ public class IBMVisualRecognitionV3Models {
    */
   public class UpdateClassifierOptions {
     private String classifier_id_serialized_name;
-    private Map<String, IBMWatsonFile> classname_positive_examples_serialized_name;
+    private IBMWatsonFile classname_positive_examples_serialized_name;
+    private String classname_positive_examples_filename_serialized_name;
     private IBMWatsonFile negative_examples_serialized_name;
     private String negative_examples_filename_serialized_name;
     /**
@@ -2111,21 +2123,24 @@ public class IBMVisualRecognitionV3Models {
       return classifier_id_serialized_name;
     }
     /**
-     * Gets the class names.
+     * Gets the classname_positive_examples_serialized_name.
      *
-     * @return the contentItems
+     * A compressed (.zip) file of images that depict the visual subject for a class within the classifier. Must contain a minimum of 10 images.
+     *
+     * @return the classname_positive_examples_serialized_name
      */
-    public Set<String> classNames() {
-      return classname_positive_examples_serialized_name.keySet();
+    public IBMWatsonFile classnamePositiveExamples() {
+      return classname_positive_examples_serialized_name;
     }
     /**
-     * Gets the positive examples by class name.
+     * Gets the classname_positive_examples_filename_serialized_name.
      *
-     * @param className the class name
-     * @return the classes
+     * The filename for classname_positive_examples.
+     *
+     * @return the classname_positive_examples_filename_serialized_name
      */
-    public IBMWatsonFile positiveExamplesByClassName(String className) {
-      return classname_positive_examples_serialized_name.get(className);
+    public String classnamePositiveExamplesFilename() {
+      return classname_positive_examples_filename_serialized_name;
     }
     /**
      * Gets the negative_examples_serialized_name.
@@ -2149,10 +2164,9 @@ public class IBMVisualRecognitionV3Models {
     }
     private UpdateClassifierOptions(UpdateClassifierOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.classifier_id_serialized_name, 'classifier_id_serialized_name cannot be empty');
-      IBMWatsonValidator.isTrue(!builder.classname_positive_examples_serialized_name.isEmpty() || (builder.negative_examples_serialized_name != null), 
-        'To update a classifier, you must supply at least one positive examples file or a negative examples file.');
       classifier_id_serialized_name = builder.classifier_id_serialized_name;
       classname_positive_examples_serialized_name = builder.classname_positive_examples_serialized_name;
+      classname_positive_examples_filename_serialized_name = builder.classname_positive_examples_filename_serialized_name;
       negative_examples_serialized_name = builder.negative_examples_serialized_name;
       negative_examples_filename_serialized_name = builder.negative_examples_filename_serialized_name;
     }
@@ -2173,38 +2187,38 @@ public class IBMVisualRecognitionV3Models {
    */
   public class UpdateClassifierOptionsBuilder {
     private String classifier_id_serialized_name;
-    private Map<String, IBMWatsonFile> classname_positive_examples_serialized_name;
+    private IBMWatsonFile classname_positive_examples_serialized_name;
+    private String classname_positive_examples_filename_serialized_name;
     private IBMWatsonFile negative_examples_serialized_name;
     private String negative_examples_filename_serialized_name;
 
-    private UpdateClassifierOptionsBuilder(UpdateClassifierOptions update_classifier_options) {
-      classifier_id_serialized_name = update_classifier_options.classifier_id_serialized_name;
-      classname_positive_examples_serialized_name.putAll(update_classifier_options.classname_positive_examples_serialized_name);
-      negative_examples_serialized_name = update_classifier_options.negative_examples_serialized_name;
-      negative_examples_filename_serialized_name = update_classifier_options.negative_examples_filename_serialized_name;
+    private UpdateClassifierOptionsBuilder(UpdateClassifierOptions updateClassifierOptions) {
+      classifier_id_serialized_name = updateClassifierOptions.classifier_id_serialized_name;
+      classname_positive_examples_serialized_name = updateClassifierOptions.classname_positive_examples_serialized_name;
+      classname_positive_examples_filename_serialized_name = updateClassifierOptions.classname_positive_examples_filename_serialized_name;
+      negative_examples_serialized_name = updateClassifierOptions.negative_examples_serialized_name;
+      negative_examples_filename_serialized_name = updateClassifierOptions.negative_examples_filename_serialized_name;
     }
 
     /**
      * Instantiates a new builder.
      */
     public UpdateClassifierOptionsBuilder() {
-      classname_positive_examples_serialized_name = new Map<String, IBMWatsonFile>();
     }
 
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param classifier_id_serialized_name the classifier_id_serialized_name
+     * @param classifierId the classifierId
      */
-    public UpdateClassifierOptionsBuilder(String classifier_id_serialized_name) {
-      this();
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public UpdateClassifierOptionsBuilder(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
     }
 
     /**
      * Builds a UpdateClassifierOptions.
      *
-     * @return the update_classifier_options
+     * @return the updateClassifierOptions
      */
     public UpdateClassifierOptions build() {
       return new UpdateClassifierOptions(this);
@@ -2213,48 +2227,55 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Set the classifier_id_serialized_name.
      *
-     * @param classifier_id_serialized_name the classifier_id_serialized_name
+     * @param classifierId the classifierId
      * @return the UpdateClassifierOptions builder
      */
-    public UpdateClassifierOptionsBuilder classifierId(String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public UpdateClassifierOptionsBuilder classifierId(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
       return this;
     }
 
     /**
-     * Adds a classifier with a name and positive examples. If the classifier name is already contained, the old
-     * positive examples are replaced by the specified value.
+     * Set the classname_positive_examples_serialized_name.
      *
-     * @param className the class name
-     * @param positiveExamples the positive examples
+     * @param classnamePositiveExamples the classnamePositiveExamples
      * @return the UpdateClassifierOptions builder
      */
-    public UpdateClassifierOptionsBuilder addClass(String className, IBMWatsonFile positiveExamples) {
-      IBMWatsonValidator.notNull(className, 'className cannot be null');
-      IBMWatsonValidator.notNull(positiveExamples, 'positiveExamples cannot be null');
-      classname_positive_examples_serialized_name.put(className, positiveExamples);
+    public UpdateClassifierOptionsBuilder classnamePositiveExamples(IBMWatsonFile classnamePositiveExamples) {
+      this.classname_positive_examples_serialized_name = classnamePositiveExamples;
+      return this;
+    }
+
+    /**
+     * Set the classname_positive_examples_filename_serialized_name.
+     *
+     * @param classnamePositiveExamplesFilename the classnamePositiveExamplesFilename
+     * @return the UpdateClassifierOptions builder
+     */
+    public UpdateClassifierOptionsBuilder classnamePositiveExamplesFilename(String classnamePositiveExamplesFilename) {
+      this.classname_positive_examples_filename_serialized_name = classnamePositiveExamplesFilename;
       return this;
     }
 
     /**
      * Set the negative_examples_serialized_name.
      *
-     * @param negative_examples_serialized_name the negative_examples_serialized_name
+     * @param negativeExamples the negativeExamples
      * @return the UpdateClassifierOptions builder
      */
-    public UpdateClassifierOptionsBuilder negativeExamples(IBMWatsonFile negative_examples_serialized_name) {
-      this.negative_examples_serialized_name = negative_examples_serialized_name;
+    public UpdateClassifierOptionsBuilder negativeExamples(IBMWatsonFile negativeExamples) {
+      this.negative_examples_serialized_name = negativeExamples;
       return this;
     }
 
     /**
      * Set the negative_examples_filename_serialized_name.
      *
-     * @param negative_examples_filename_serialized_name the negative_examples_filename_serialized_name
+     * @param negativeExamplesFilename the negativeExamplesFilename
      * @return the UpdateClassifierOptions builder
      */
-    public UpdateClassifierOptionsBuilder negativeExamplesFilename(String negative_examples_filename_serialized_name) {
-      this.negative_examples_filename_serialized_name = negative_examples_filename_serialized_name;
+    public UpdateClassifierOptionsBuilder negativeExamplesFilename(String negativeExamplesFilename) {
+      this.negative_examples_filename_serialized_name = negativeExamplesFilename;
       return this;
     }
   }
@@ -2291,19 +2312,19 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Sets the warning_id_serialized_name.
      *
-     * @param warning_id_serialized_name the new warning_id_serialized_name
+     * @param warningId the new warningId
      */
-    public void setWarningId(final String warning_id_serialized_name) {
-      this.warning_id_serialized_name = warning_id_serialized_name;
+    public void setWarningId(final String warningId) {
+      this.warning_id_serialized_name = warningId;
     }
 
     /**
      * Sets the description_serialized_name.
      *
-     * @param description_serialized_name the new description_serialized_name
+     * @param description the new description
      */
-    public void setDescription(final String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {

@@ -102,13 +102,13 @@ public class IBMDiscoveryV1Models {
     private String metadata_serialized_name;
     private String file_content_type_serialized_name;
 
-    private AddDocumentOptionsBuilder(AddDocumentOptions add_document_options) {
-      environment_id_serialized_name = add_document_options.environment_id_serialized_name;
-      collection_id_serialized_name = add_document_options.collection_id_serialized_name;
-      file_serialized_name = add_document_options.file_serialized_name;
-      filename_serialized_name = add_document_options.filename_serialized_name;
-      metadata_serialized_name = add_document_options.metadata_serialized_name;
-      file_content_type_serialized_name = add_document_options.file_content_type_serialized_name;
+    private AddDocumentOptionsBuilder(AddDocumentOptions addDocumentOptions) {
+      environment_id_serialized_name = addDocumentOptions.environment_id_serialized_name;
+      collection_id_serialized_name = addDocumentOptions.collection_id_serialized_name;
+      file_serialized_name = addDocumentOptions.file_serialized_name;
+      filename_serialized_name = addDocumentOptions.filename_serialized_name;
+      metadata_serialized_name = addDocumentOptions.metadata_serialized_name;
+      file_content_type_serialized_name = addDocumentOptions.file_content_type_serialized_name;
     }
 
     /**
@@ -120,18 +120,18 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
      */
-    public AddDocumentOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public AddDocumentOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
     }
 
     /**
      * Builds a AddDocumentOptions.
      *
-     * @return the add_document_options
+     * @return the addDocumentOptions
      */
     public AddDocumentOptions build() {
       return new AddDocumentOptions(this);
@@ -140,66 +140,66 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the AddDocumentOptions builder
      */
-    public AddDocumentOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public AddDocumentOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the AddDocumentOptions builder
      */
-    public AddDocumentOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public AddDocumentOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
 
     /**
      * Set the file_serialized_name.
      *
-     * @param file_serialized_name the file_serialized_name
+     * @param file the file
      * @return the AddDocumentOptions builder
      */
-    public AddDocumentOptionsBuilder file(IBMWatsonFile file_serialized_name) {
-      this.file_serialized_name = file_serialized_name;
+    public AddDocumentOptionsBuilder file(IBMWatsonFile file) {
+      this.file_serialized_name = file;
       return this;
     }
 
     /**
      * Set the filename_serialized_name.
      *
-     * @param filename_serialized_name the filename_serialized_name
+     * @param filename the filename
      * @return the AddDocumentOptions builder
      */
-    public AddDocumentOptionsBuilder filename(String filename_serialized_name) {
-      this.filename_serialized_name = filename_serialized_name;
+    public AddDocumentOptionsBuilder filename(String filename) {
+      this.filename_serialized_name = filename;
       return this;
     }
 
     /**
      * Set the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the metadata_serialized_name
+     * @param metadata the metadata
      * @return the AddDocumentOptions builder
      */
-    public AddDocumentOptionsBuilder metadata(String metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public AddDocumentOptionsBuilder metadata(String metadata) {
+      this.metadata_serialized_name = metadata;
       return this;
     }
 
     /**
      * Set the file_content_type_serialized_name.
      *
-     * @param file_content_type_serialized_name the file_content_type_serialized_name
+     * @param fileContentType the fileContentType
      * @return the AddDocumentOptions builder
      */
-    public AddDocumentOptionsBuilder fileContentType(String file_content_type_serialized_name) {
-      this.file_content_type_serialized_name = file_content_type_serialized_name;
+    public AddDocumentOptionsBuilder fileContentType(String fileContentType) {
+      this.file_content_type_serialized_name = fileContentType;
       return this;
     }
   }
@@ -288,12 +288,12 @@ public class IBMDiscoveryV1Models {
     private String filter_serialized_name;
     private List<TrainingExample> examples_serialized_name;
 
-    private AddTrainingDataOptionsBuilder(AddTrainingDataOptions add_training_data_options) {
-      environment_id_serialized_name = add_training_data_options.environment_id_serialized_name;
-      collection_id_serialized_name = add_training_data_options.collection_id_serialized_name;
-      natural_language_query_serialized_name = add_training_data_options.natural_language_query_serialized_name;
-      filter_serialized_name = add_training_data_options.filter_serialized_name;
-      examples_serialized_name = add_training_data_options.examples_serialized_name;
+    private AddTrainingDataOptionsBuilder(AddTrainingDataOptions addTrainingDataOptions) {
+      environment_id_serialized_name = addTrainingDataOptions.environment_id_serialized_name;
+      collection_id_serialized_name = addTrainingDataOptions.collection_id_serialized_name;
+      natural_language_query_serialized_name = addTrainingDataOptions.natural_language_query_serialized_name;
+      filter_serialized_name = addTrainingDataOptions.filter_serialized_name;
+      examples_serialized_name = addTrainingDataOptions.examples_serialized_name;
     }
 
     /**
@@ -305,79 +305,79 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
      */
-    public AddTrainingDataOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public AddTrainingDataOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
     }
 
     /**
      * Builds a AddTrainingDataOptions.
      *
-     * @return the add_training_data_options
+     * @return the addTrainingDataOptions
      */
     public AddTrainingDataOptions build() {
       return new AddTrainingDataOptions(this);
     }
 
     /**
-     * Adds an examples_serialized_name to examples_serialized_name.
+     * Adds an examples to examples_serialized_name.
      *
-     * @param examples_serialized_name the new examples_serialized_name
+     * @param examples the new examples
      * @return the AddTrainingDataOptions builder
      */
-    public AddTrainingDataOptionsBuilder addExamples(TrainingExample examples_serialized_name) {
-      IBMWatsonValidator.notNull(examples_serialized_name, 'examples_serialized_name cannot be null');
+    public AddTrainingDataOptionsBuilder addExamples(TrainingExample examples) {
+      IBMWatsonValidator.notNull(examples, 'examples cannot be null');
       if (this.examples_serialized_name == null) {
         this.examples_serialized_name = new List<TrainingExample>();
       }
-      this.examples_serialized_name.add(examples_serialized_name);
+      this.examples_serialized_name.add(examples);
       return this;
     }
 
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the AddTrainingDataOptions builder
      */
-    public AddTrainingDataOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public AddTrainingDataOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the AddTrainingDataOptions builder
      */
-    public AddTrainingDataOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public AddTrainingDataOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
 
     /**
      * Set the natural_language_query_serialized_name.
      *
-     * @param natural_language_query_serialized_name the natural_language_query_serialized_name
+     * @param naturalLanguageQuery the naturalLanguageQuery
      * @return the AddTrainingDataOptions builder
      */
-    public AddTrainingDataOptionsBuilder naturalLanguageQuery(String natural_language_query_serialized_name) {
-      this.natural_language_query_serialized_name = natural_language_query_serialized_name;
+    public AddTrainingDataOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
+      this.natural_language_query_serialized_name = naturalLanguageQuery;
       return this;
     }
 
     /**
      * Set the filter_serialized_name.
      *
-     * @param filter_serialized_name the filter_serialized_name
+     * @param filter the filter
      * @return the AddTrainingDataOptions builder
      */
-    public AddTrainingDataOptionsBuilder filter(String filter_serialized_name) {
-      this.filter_serialized_name = filter_serialized_name;
+    public AddTrainingDataOptionsBuilder filter(String filter) {
+      this.filter_serialized_name = filter;
       return this;
     }
 
@@ -385,11 +385,11 @@ public class IBMDiscoveryV1Models {
      * Set the examples_serialized_name.
      * Existing examples_serialized_name will be replaced.
      *
-     * @param examples_serialized_name the examples_serialized_name
+     * @param examples the examples
      * @return the AddTrainingDataOptions builder
      */
-    public AddTrainingDataOptionsBuilder examples(List<TrainingExample> examples_serialized_name) {
-      this.examples_serialized_name = examples_serialized_name;
+    public AddTrainingDataOptionsBuilder examples(List<TrainingExample> examples) {
+      this.examples_serialized_name = examples;
       return this;
     }
   }
@@ -438,28 +438,28 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the key_serialized_name.
      *
-     * @param key_serialized_name the new key_serialized_name
+     * @param key the new key
      */
-    public void setKey(final String key_serialized_name) {
-      this.key_serialized_name = key_serialized_name;
+    public void setKey(final String key) {
+      this.key_serialized_name = key;
     }
 
     /**
      * Sets the matching_results_serialized_name.
      *
-     * @param matching_results_serialized_name the new matching_results_serialized_name
+     * @param matchingResults the new matchingResults
      */
-    public void setMatchingResults(final long matching_results_serialized_name) {
-      this.matching_results_serialized_name = matching_results_serialized_name;
+    public void setMatchingResults(final long matchingResults) {
+      this.matching_results_serialized_name = matchingResults;
     }
 
     /**
      * Sets the aggregations_serialized_name.
      *
-     * @param aggregations_serialized_name the new aggregations_serialized_name
+     * @param aggregations the new aggregations
      */
-    public void setAggregations(final List<QueryAggregation> aggregations_serialized_name) {
-      this.aggregations_serialized_name = aggregations_serialized_name;
+    public void setAggregations(final List<QueryAggregation> aggregations) {
+      this.aggregations_serialized_name = aggregations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -654,64 +654,64 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     /**
      * Sets the description_serialized_name.
      *
-     * @param description_serialized_name the new description_serialized_name
+     * @param description the new description
      */
-    public void setDescription(final String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
     }
 
     /**
      * Sets the configuration_id_serialized_name.
      *
-     * @param configuration_id_serialized_name the new configuration_id_serialized_name
+     * @param configurationId the new configurationId
      */
-    public void setConfigurationId(final String configuration_id_serialized_name) {
-      this.configuration_id_serialized_name = configuration_id_serialized_name;
+    public void setConfigurationId(final String configurationId) {
+      this.configuration_id_serialized_name = configurationId;
     }
 
     /**
      * Sets the language_serialized_name.
      *
-     * @param language_serialized_name the new language_serialized_name
+     * @param language the new language
      */
-    public void setLanguage(final String language_serialized_name) {
-      this.language_serialized_name = language_serialized_name;
+    public void setLanguage(final String language) {
+      this.language_serialized_name = language;
     }
 
     /**
      * Sets the document_counts_serialized_name.
      *
-     * @param document_counts_serialized_name the new document_counts_serialized_name
+     * @param documentCounts the new documentCounts
      */
-    public void setDocumentCounts(final DocumentCounts document_counts_serialized_name) {
-      this.document_counts_serialized_name = document_counts_serialized_name;
+    public void setDocumentCounts(final DocumentCounts documentCounts) {
+      this.document_counts_serialized_name = documentCounts;
     }
 
     /**
      * Sets the disk_usage_serialized_name.
      *
-     * @param disk_usage_serialized_name the new disk_usage_serialized_name
+     * @param diskUsage the new diskUsage
      */
-    public void setDiskUsage(final CollectionDiskUsage disk_usage_serialized_name) {
-      this.disk_usage_serialized_name = disk_usage_serialized_name;
+    public void setDiskUsage(final CollectionDiskUsage diskUsage) {
+      this.disk_usage_serialized_name = diskUsage;
     }
 
     /**
      * Sets the training_status_serialized_name.
      *
-     * @param training_status_serialized_name the new training_status_serialized_name
+     * @param trainingStatus the new trainingStatus
      */
-    public void setTrainingStatus(final TrainingStatus training_status_serialized_name) {
-      this.training_status_serialized_name = training_status_serialized_name;
+    public void setTrainingStatus(final TrainingStatus trainingStatus) {
+      this.training_status_serialized_name = trainingStatus;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -869,46 +869,46 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     /**
      * Sets the description_serialized_name.
      *
-     * @param description_serialized_name the new description_serialized_name
+     * @param description the new description
      */
-    public void setDescription(final String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
     }
 
     /**
      * Sets the conversions_serialized_name.
      *
-     * @param conversions_serialized_name the new conversions_serialized_name
+     * @param conversions the new conversions
      */
-    public void setConversions(final Conversions conversions_serialized_name) {
-      this.conversions_serialized_name = conversions_serialized_name;
+    public void setConversions(final Conversions conversions) {
+      this.conversions_serialized_name = conversions;
     }
 
     /**
      * Sets the enrichments_serialized_name.
      *
-     * @param enrichments_serialized_name the new enrichments_serialized_name
+     * @param enrichments the new enrichments
      */
-    public void setEnrichments(final List<Enrichment> enrichments_serialized_name) {
-      this.enrichments_serialized_name = enrichments_serialized_name;
+    public void setEnrichments(final List<Enrichment> enrichments) {
+      this.enrichments_serialized_name = enrichments;
     }
 
     /**
      * Sets the normalizations_serialized_name.
      *
-     * @param normalizations_serialized_name the new normalizations_serialized_name
+     * @param normalizations the new normalizations
      */
-    public void setNormalizations(final List<NormalizationOperation> normalizations_serialized_name) {
-      this.normalizations_serialized_name = normalizations_serialized_name;
+    public void setNormalizations(final List<NormalizationOperation> normalizations) {
+      this.normalizations_serialized_name = normalizations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1008,37 +1008,37 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the pdf_serialized_name.
      *
-     * @param pdf_serialized_name the new pdf_serialized_name
+     * @param pdf the new pdf
      */
-    public void setPdf(final PdfSettings pdf_serialized_name) {
-      this.pdf_serialized_name = pdf_serialized_name;
+    public void setPdf(final PdfSettings pdf) {
+      this.pdf_serialized_name = pdf;
     }
 
     /**
      * Sets the word_serialized_name.
      *
-     * @param word_serialized_name the new word_serialized_name
+     * @param word the new word
      */
-    public void setWord(final WordSettings word_serialized_name) {
-      this.word_serialized_name = word_serialized_name;
+    public void setWord(final WordSettings word) {
+      this.word_serialized_name = word;
     }
 
     /**
      * Sets the html_serialized_name.
      *
-     * @param html_serialized_name the new html_serialized_name
+     * @param html the new html
      */
-    public void setHtml(final HtmlSettings html_serialized_name) {
-      this.html_serialized_name = html_serialized_name;
+    public void setHtml(final HtmlSettings html) {
+      this.html_serialized_name = html;
     }
 
     /**
      * Sets the json_normalizations_serialized_name.
      *
-     * @param json_normalizations_serialized_name the new json_normalizations_serialized_name
+     * @param jsonNormalizations the new jsonNormalizations
      */
-    public void setJsonNormalizations(final List<NormalizationOperation> json_normalizations_serialized_name) {
-      this.json_normalizations_serialized_name = json_normalizations_serialized_name;
+    public void setJsonNormalizations(final List<NormalizationOperation> jsonNormalizations) {
+      this.json_normalizations_serialized_name = jsonNormalizations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1167,12 +1167,12 @@ public class IBMDiscoveryV1Models {
     private String configuration_id_serialized_name;
     private String language_serialized_name;
 
-    private CreateCollectionOptionsBuilder(CreateCollectionOptions create_collection_options) {
-      environment_id_serialized_name = create_collection_options.environment_id_serialized_name;
-      name_serialized_name = create_collection_options.name_serialized_name;
-      description_serialized_name = create_collection_options.description_serialized_name;
-      configuration_id_serialized_name = create_collection_options.configuration_id_serialized_name;
-      language_serialized_name = create_collection_options.language_serialized_name;
+    private CreateCollectionOptionsBuilder(CreateCollectionOptions createCollectionOptions) {
+      environment_id_serialized_name = createCollectionOptions.environment_id_serialized_name;
+      name_serialized_name = createCollectionOptions.name_serialized_name;
+      description_serialized_name = createCollectionOptions.description_serialized_name;
+      configuration_id_serialized_name = createCollectionOptions.configuration_id_serialized_name;
+      language_serialized_name = createCollectionOptions.language_serialized_name;
     }
 
     /**
@@ -1184,18 +1184,18 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param name_serialized_name the name_serialized_name
+     * @param environmentId the environmentId
+     * @param name the name
      */
-    public CreateCollectionOptionsBuilder(String environment_id_serialized_name, String name_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.name_serialized_name = name_serialized_name;
+    public CreateCollectionOptionsBuilder(String environmentId, String name) {
+      this.environment_id_serialized_name = environmentId;
+      this.name_serialized_name = name;
     }
 
     /**
      * Builds a CreateCollectionOptions.
      *
-     * @return the create_collection_options
+     * @return the createCollectionOptions
      */
     public CreateCollectionOptions build() {
       return new CreateCollectionOptions(this);
@@ -1204,55 +1204,55 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the CreateCollectionOptions builder
      */
-    public CreateCollectionOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public CreateCollectionOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the name_serialized_name.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      * @return the CreateCollectionOptions builder
      */
-    public CreateCollectionOptionsBuilder name(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public CreateCollectionOptionsBuilder name(String name) {
+      this.name_serialized_name = name;
       return this;
     }
 
     /**
      * Set the description_serialized_name.
      *
-     * @param description_serialized_name the description_serialized_name
+     * @param description the description
      * @return the CreateCollectionOptions builder
      */
-    public CreateCollectionOptionsBuilder description(String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public CreateCollectionOptionsBuilder description(String description) {
+      this.description_serialized_name = description;
       return this;
     }
 
     /**
      * Set the configuration_id_serialized_name.
      *
-     * @param configuration_id_serialized_name the configuration_id_serialized_name
+     * @param configurationId the configurationId
      * @return the CreateCollectionOptions builder
      */
-    public CreateCollectionOptionsBuilder configurationId(String configuration_id_serialized_name) {
-      this.configuration_id_serialized_name = configuration_id_serialized_name;
+    public CreateCollectionOptionsBuilder configurationId(String configurationId) {
+      this.configuration_id_serialized_name = configurationId;
       return this;
     }
 
     /**
      * Set the language_serialized_name.
      *
-     * @param language_serialized_name the language_serialized_name
+     * @param language the language
      * @return the CreateCollectionOptions builder
      */
-    public CreateCollectionOptionsBuilder language(String language_serialized_name) {
-      this.language_serialized_name = language_serialized_name;
+    public CreateCollectionOptionsBuilder language(String language) {
+      this.language_serialized_name = language;
       return this;
     }
   }
@@ -1359,13 +1359,13 @@ public class IBMDiscoveryV1Models {
     private List<Enrichment> enrichments_serialized_name;
     private List<NormalizationOperation> normalizations_serialized_name;
 
-    private CreateConfigurationOptionsBuilder(CreateConfigurationOptions create_configuration_options) {
-      environment_id_serialized_name = create_configuration_options.environment_id_serialized_name;
-      name_serialized_name = create_configuration_options.name_serialized_name;
-      description_serialized_name = create_configuration_options.description_serialized_name;
-      conversions_serialized_name = create_configuration_options.conversions_serialized_name;
-      enrichments_serialized_name = create_configuration_options.enrichments_serialized_name;
-      normalizations_serialized_name = create_configuration_options.normalizations_serialized_name;
+    private CreateConfigurationOptionsBuilder(CreateConfigurationOptions createConfigurationOptions) {
+      environment_id_serialized_name = createConfigurationOptions.environment_id_serialized_name;
+      name_serialized_name = createConfigurationOptions.name_serialized_name;
+      description_serialized_name = createConfigurationOptions.description_serialized_name;
+      conversions_serialized_name = createConfigurationOptions.conversions_serialized_name;
+      enrichments_serialized_name = createConfigurationOptions.enrichments_serialized_name;
+      normalizations_serialized_name = createConfigurationOptions.normalizations_serialized_name;
     }
 
     /**
@@ -1377,92 +1377,92 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      */
-    public CreateConfigurationOptionsBuilder(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public CreateConfigurationOptionsBuilder(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
     }
 
     /**
      * Builds a CreateConfigurationOptions.
      *
-     * @return the create_configuration_options
+     * @return the createConfigurationOptions
      */
     public CreateConfigurationOptions build() {
       return new CreateConfigurationOptions(this);
     }
 
     /**
-     * Adds an enrichments_serialized_name to enrichments_serialized_name.
+     * Adds an enrichments to enrichments_serialized_name.
      *
-     * @param enrichments_serialized_name the new enrichments_serialized_name
+     * @param enrichments the new enrichments
      * @return the CreateConfigurationOptions builder
      */
-    public CreateConfigurationOptionsBuilder addEnrichments(Enrichment enrichments_serialized_name) {
-      IBMWatsonValidator.notNull(enrichments_serialized_name, 'enrichments_serialized_name cannot be null');
+    public CreateConfigurationOptionsBuilder addEnrichments(Enrichment enrichments) {
+      IBMWatsonValidator.notNull(enrichments, 'enrichments cannot be null');
       if (this.enrichments_serialized_name == null) {
         this.enrichments_serialized_name = new List<Enrichment>();
       }
-      this.enrichments_serialized_name.add(enrichments_serialized_name);
+      this.enrichments_serialized_name.add(enrichments);
       return this;
     }
 
     /**
-     * Adds an normalizations_serialized_name to normalizations_serialized_name.
+     * Adds an normalizations to normalizations_serialized_name.
      *
-     * @param normalizations_serialized_name the new normalizations_serialized_name
+     * @param normalizations the new normalizations
      * @return the CreateConfigurationOptions builder
      */
-    public CreateConfigurationOptionsBuilder addNormalizations(NormalizationOperation normalizations_serialized_name) {
-      IBMWatsonValidator.notNull(normalizations_serialized_name, 'normalizations_serialized_name cannot be null');
+    public CreateConfigurationOptionsBuilder addNormalizations(NormalizationOperation normalizations) {
+      IBMWatsonValidator.notNull(normalizations, 'normalizations cannot be null');
       if (this.normalizations_serialized_name == null) {
         this.normalizations_serialized_name = new List<NormalizationOperation>();
       }
-      this.normalizations_serialized_name.add(normalizations_serialized_name);
+      this.normalizations_serialized_name.add(normalizations);
       return this;
     }
 
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the CreateConfigurationOptions builder
      */
-    public CreateConfigurationOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public CreateConfigurationOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the name_serialized_name.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      * @return the CreateConfigurationOptions builder
      */
-    public CreateConfigurationOptionsBuilder name(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public CreateConfigurationOptionsBuilder name(String name) {
+      this.name_serialized_name = name;
       return this;
     }
 
     /**
      * Set the description_serialized_name.
      *
-     * @param description_serialized_name the description_serialized_name
+     * @param description the description
      * @return the CreateConfigurationOptions builder
      */
-    public CreateConfigurationOptionsBuilder description(String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public CreateConfigurationOptionsBuilder description(String description) {
+      this.description_serialized_name = description;
       return this;
     }
 
     /**
      * Set the conversions_serialized_name.
      *
-     * @param conversions_serialized_name the conversions_serialized_name
+     * @param conversions the conversions
      * @return the CreateConfigurationOptions builder
      */
-    public CreateConfigurationOptionsBuilder conversions(Conversions conversions_serialized_name) {
-      this.conversions_serialized_name = conversions_serialized_name;
+    public CreateConfigurationOptionsBuilder conversions(Conversions conversions) {
+      this.conversions_serialized_name = conversions;
       return this;
     }
 
@@ -1470,11 +1470,11 @@ public class IBMDiscoveryV1Models {
      * Set the enrichments_serialized_name.
      * Existing enrichments_serialized_name will be replaced.
      *
-     * @param enrichments_serialized_name the enrichments_serialized_name
+     * @param enrichments the enrichments
      * @return the CreateConfigurationOptions builder
      */
-    public CreateConfigurationOptionsBuilder enrichments(List<Enrichment> enrichments_serialized_name) {
-      this.enrichments_serialized_name = enrichments_serialized_name;
+    public CreateConfigurationOptionsBuilder enrichments(List<Enrichment> enrichments) {
+      this.enrichments_serialized_name = enrichments;
       return this;
     }
 
@@ -1482,21 +1482,21 @@ public class IBMDiscoveryV1Models {
      * Set the normalizations_serialized_name.
      * Existing normalizations_serialized_name will be replaced.
      *
-     * @param normalizations_serialized_name the normalizations_serialized_name
+     * @param normalizations the normalizations
      * @return the CreateConfigurationOptions builder
      */
-    public CreateConfigurationOptionsBuilder normalizations(List<NormalizationOperation> normalizations_serialized_name) {
-      this.normalizations_serialized_name = normalizations_serialized_name;
+    public CreateConfigurationOptionsBuilder normalizations(List<NormalizationOperation> normalizations) {
+      this.normalizations_serialized_name = normalizations;
       return this;
     }
 
     /**
      * Set the configuration.
      *
-     * @param configuration the configuration
+     * @param  the 
      * @return the CreateConfigurationOptions builder
      */
-    public CreateConfigurationOptionsBuilder configuration(Configuration configuration) {
+    public CreateConfigurationOptionsBuilder (Configuration ) {
       this.name_serialized_name = configuration.getName();
       this.description_serialized_name = configuration.getDescription();
       this.conversions_serialized_name = configuration.getConversions();
@@ -1569,10 +1569,10 @@ public class IBMDiscoveryV1Models {
     private String description_serialized_name;
     private Long size_serialized_name;
 
-    private CreateEnvironmentOptionsBuilder(CreateEnvironmentOptions create_environment_options) {
-      name_serialized_name = create_environment_options.name_serialized_name;
-      description_serialized_name = create_environment_options.description_serialized_name;
-      size_serialized_name = create_environment_options.size_serialized_name;
+    private CreateEnvironmentOptionsBuilder(CreateEnvironmentOptions createEnvironmentOptions) {
+      name_serialized_name = createEnvironmentOptions.name_serialized_name;
+      description_serialized_name = createEnvironmentOptions.description_serialized_name;
+      size_serialized_name = createEnvironmentOptions.size_serialized_name;
     }
 
     /**
@@ -1584,16 +1584,16 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      */
-    public CreateEnvironmentOptionsBuilder(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public CreateEnvironmentOptionsBuilder(String name) {
+      this.name_serialized_name = name;
     }
 
     /**
      * Builds a CreateEnvironmentOptions.
      *
-     * @return the create_environment_options
+     * @return the createEnvironmentOptions
      */
     public CreateEnvironmentOptions build() {
       return new CreateEnvironmentOptions(this);
@@ -1602,33 +1602,33 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the name_serialized_name.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      * @return the CreateEnvironmentOptions builder
      */
-    public CreateEnvironmentOptionsBuilder name(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public CreateEnvironmentOptionsBuilder name(String name) {
+      this.name_serialized_name = name;
       return this;
     }
 
     /**
      * Set the description_serialized_name.
      *
-     * @param description_serialized_name the description_serialized_name
+     * @param description the description
      * @return the CreateEnvironmentOptions builder
      */
-    public CreateEnvironmentOptionsBuilder description(String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public CreateEnvironmentOptionsBuilder description(String description) {
+      this.description_serialized_name = description;
       return this;
     }
 
     /**
      * Set the size_serialized_name.
      *
-     * @param size_serialized_name the size_serialized_name
+     * @param size the size
      * @return the CreateEnvironmentOptions builder
      */
-    public CreateEnvironmentOptionsBuilder size(Long size_serialized_name) {
-      this.size_serialized_name = size_serialized_name;
+    public CreateEnvironmentOptionsBuilder size(Long size) {
+      this.size_serialized_name = size;
       return this;
     }
   }
@@ -1731,13 +1731,13 @@ public class IBMDiscoveryV1Models {
     private String cross_reference_serialized_name;
     private Long relevance_serialized_name;
 
-    private CreateTrainingExampleOptionsBuilder(CreateTrainingExampleOptions create_training_example_options) {
-      environment_id_serialized_name = create_training_example_options.environment_id_serialized_name;
-      collection_id_serialized_name = create_training_example_options.collection_id_serialized_name;
-      query_id_serialized_name = create_training_example_options.query_id_serialized_name;
-      document_id_serialized_name = create_training_example_options.document_id_serialized_name;
-      cross_reference_serialized_name = create_training_example_options.cross_reference_serialized_name;
-      relevance_serialized_name = create_training_example_options.relevance_serialized_name;
+    private CreateTrainingExampleOptionsBuilder(CreateTrainingExampleOptions createTrainingExampleOptions) {
+      environment_id_serialized_name = createTrainingExampleOptions.environment_id_serialized_name;
+      collection_id_serialized_name = createTrainingExampleOptions.collection_id_serialized_name;
+      query_id_serialized_name = createTrainingExampleOptions.query_id_serialized_name;
+      document_id_serialized_name = createTrainingExampleOptions.document_id_serialized_name;
+      cross_reference_serialized_name = createTrainingExampleOptions.cross_reference_serialized_name;
+      relevance_serialized_name = createTrainingExampleOptions.relevance_serialized_name;
     }
 
     /**
@@ -1749,20 +1749,20 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
-     * @param query_id_serialized_name the query_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     * @param queryId the queryId
      */
-    public CreateTrainingExampleOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name, String query_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
-      this.query_id_serialized_name = query_id_serialized_name;
+    public CreateTrainingExampleOptionsBuilder(String environmentId, String collectionId, String queryId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+      this.query_id_serialized_name = queryId;
     }
 
     /**
      * Builds a CreateTrainingExampleOptions.
      *
-     * @return the create_training_example_options
+     * @return the createTrainingExampleOptions
      */
     public CreateTrainingExampleOptions build() {
       return new CreateTrainingExampleOptions(this);
@@ -1771,79 +1771,79 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public CreateTrainingExampleOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public CreateTrainingExampleOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
 
     /**
      * Set the query_id_serialized_name.
      *
-     * @param query_id_serialized_name the query_id_serialized_name
+     * @param queryId the queryId
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder queryId(String query_id_serialized_name) {
-      this.query_id_serialized_name = query_id_serialized_name;
+    public CreateTrainingExampleOptionsBuilder queryId(String queryId) {
+      this.query_id_serialized_name = queryId;
       return this;
     }
 
     /**
      * Set the document_id_serialized_name.
      *
-     * @param document_id_serialized_name the document_id_serialized_name
+     * @param documentId the documentId
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder documentId(String document_id_serialized_name) {
-      this.document_id_serialized_name = document_id_serialized_name;
+    public CreateTrainingExampleOptionsBuilder documentId(String documentId) {
+      this.document_id_serialized_name = documentId;
       return this;
     }
 
     /**
      * Set the cross_reference_serialized_name.
      *
-     * @param cross_reference_serialized_name the cross_reference_serialized_name
+     * @param crossReference the crossReference
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder crossReference(String cross_reference_serialized_name) {
-      this.cross_reference_serialized_name = cross_reference_serialized_name;
+    public CreateTrainingExampleOptionsBuilder crossReference(String crossReference) {
+      this.cross_reference_serialized_name = crossReference;
       return this;
     }
 
     /**
      * Set the relevance_serialized_name.
      *
-     * @param relevance_serialized_name the relevance_serialized_name
+     * @param relevance the relevance
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder relevance(Long relevance_serialized_name) {
-      this.relevance_serialized_name = relevance_serialized_name;
+    public CreateTrainingExampleOptionsBuilder relevance(Long relevance) {
+      this.relevance_serialized_name = relevance;
       return this;
     }
 
     /**
-     * Set the training_example.
+     * Set the trainingExample.
      *
-     * @param training_example the training_example
+     * @param  the 
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder training_example(TrainingExample training_example) {
-      this.document_id_serialized_name = training_example.getDocumentId();
-      this.cross_reference_serialized_name = training_example.getCrossReference();
-      this.relevance_serialized_name = training_example.getRelevance();
+    public CreateTrainingExampleOptionsBuilder (TrainingExample ) {
+      this.document_id_serialized_name = trainingExample.getDocumentId();
+      this.cross_reference_serialized_name = trainingExample.getCrossReference();
+      this.relevance_serialized_name = trainingExample.getRelevance();
       return this;
     }
   }
@@ -1899,9 +1899,9 @@ public class IBMDiscoveryV1Models {
     private String environment_id_serialized_name;
     private String collection_id_serialized_name;
 
-    private DeleteAllTrainingDataOptionsBuilder(DeleteAllTrainingDataOptions delete_all_training_data_options) {
-      environment_id_serialized_name = delete_all_training_data_options.environment_id_serialized_name;
-      collection_id_serialized_name = delete_all_training_data_options.collection_id_serialized_name;
+    private DeleteAllTrainingDataOptionsBuilder(DeleteAllTrainingDataOptions deleteAllTrainingDataOptions) {
+      environment_id_serialized_name = deleteAllTrainingDataOptions.environment_id_serialized_name;
+      collection_id_serialized_name = deleteAllTrainingDataOptions.collection_id_serialized_name;
     }
 
     /**
@@ -1913,18 +1913,18 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
      */
-    public DeleteAllTrainingDataOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public DeleteAllTrainingDataOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
     }
 
     /**
      * Builds a DeleteAllTrainingDataOptions.
      *
-     * @return the delete_all_training_data_options
+     * @return the deleteAllTrainingDataOptions
      */
     public DeleteAllTrainingDataOptions build() {
       return new DeleteAllTrainingDataOptions(this);
@@ -1933,22 +1933,22 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the DeleteAllTrainingDataOptions builder
      */
-    public DeleteAllTrainingDataOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public DeleteAllTrainingDataOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the DeleteAllTrainingDataOptions builder
      */
-    public DeleteAllTrainingDataOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public DeleteAllTrainingDataOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
   }
@@ -2004,9 +2004,9 @@ public class IBMDiscoveryV1Models {
     private String environment_id_serialized_name;
     private String collection_id_serialized_name;
 
-    private DeleteCollectionOptionsBuilder(DeleteCollectionOptions delete_collection_options) {
-      environment_id_serialized_name = delete_collection_options.environment_id_serialized_name;
-      collection_id_serialized_name = delete_collection_options.collection_id_serialized_name;
+    private DeleteCollectionOptionsBuilder(DeleteCollectionOptions deleteCollectionOptions) {
+      environment_id_serialized_name = deleteCollectionOptions.environment_id_serialized_name;
+      collection_id_serialized_name = deleteCollectionOptions.collection_id_serialized_name;
     }
 
     /**
@@ -2018,18 +2018,18 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
      */
-    public DeleteCollectionOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public DeleteCollectionOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
     }
 
     /**
      * Builds a DeleteCollectionOptions.
      *
-     * @return the delete_collection_options
+     * @return the deleteCollectionOptions
      */
     public DeleteCollectionOptions build() {
       return new DeleteCollectionOptions(this);
@@ -2038,22 +2038,22 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the DeleteCollectionOptions builder
      */
-    public DeleteCollectionOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public DeleteCollectionOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the DeleteCollectionOptions builder
      */
-    public DeleteCollectionOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public DeleteCollectionOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
   }
@@ -2109,9 +2109,9 @@ public class IBMDiscoveryV1Models {
     private String environment_id_serialized_name;
     private String configuration_id_serialized_name;
 
-    private DeleteConfigurationOptionsBuilder(DeleteConfigurationOptions delete_configuration_options) {
-      environment_id_serialized_name = delete_configuration_options.environment_id_serialized_name;
-      configuration_id_serialized_name = delete_configuration_options.configuration_id_serialized_name;
+    private DeleteConfigurationOptionsBuilder(DeleteConfigurationOptions deleteConfigurationOptions) {
+      environment_id_serialized_name = deleteConfigurationOptions.environment_id_serialized_name;
+      configuration_id_serialized_name = deleteConfigurationOptions.configuration_id_serialized_name;
     }
 
     /**
@@ -2123,18 +2123,18 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param configuration_id_serialized_name the configuration_id_serialized_name
+     * @param environmentId the environmentId
+     * @param configurationId the configurationId
      */
-    public DeleteConfigurationOptionsBuilder(String environment_id_serialized_name, String configuration_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.configuration_id_serialized_name = configuration_id_serialized_name;
+    public DeleteConfigurationOptionsBuilder(String environmentId, String configurationId) {
+      this.environment_id_serialized_name = environmentId;
+      this.configuration_id_serialized_name = configurationId;
     }
 
     /**
      * Builds a DeleteConfigurationOptions.
      *
-     * @return the delete_configuration_options
+     * @return the deleteConfigurationOptions
      */
     public DeleteConfigurationOptions build() {
       return new DeleteConfigurationOptions(this);
@@ -2143,22 +2143,22 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the DeleteConfigurationOptions builder
      */
-    public DeleteConfigurationOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public DeleteConfigurationOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the configuration_id_serialized_name.
      *
-     * @param configuration_id_serialized_name the configuration_id_serialized_name
+     * @param configurationId the configurationId
      * @return the DeleteConfigurationOptions builder
      */
-    public DeleteConfigurationOptionsBuilder configurationId(String configuration_id_serialized_name) {
-      this.configuration_id_serialized_name = configuration_id_serialized_name;
+    public DeleteConfigurationOptionsBuilder configurationId(String configurationId) {
+      this.configuration_id_serialized_name = configurationId;
       return this;
     }
   }
@@ -2228,10 +2228,10 @@ public class IBMDiscoveryV1Models {
     private String collection_id_serialized_name;
     private String document_id_serialized_name;
 
-    private DeleteDocumentOptionsBuilder(DeleteDocumentOptions delete_document_options) {
-      environment_id_serialized_name = delete_document_options.environment_id_serialized_name;
-      collection_id_serialized_name = delete_document_options.collection_id_serialized_name;
-      document_id_serialized_name = delete_document_options.document_id_serialized_name;
+    private DeleteDocumentOptionsBuilder(DeleteDocumentOptions deleteDocumentOptions) {
+      environment_id_serialized_name = deleteDocumentOptions.environment_id_serialized_name;
+      collection_id_serialized_name = deleteDocumentOptions.collection_id_serialized_name;
+      document_id_serialized_name = deleteDocumentOptions.document_id_serialized_name;
     }
 
     /**
@@ -2243,20 +2243,20 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
-     * @param document_id_serialized_name the document_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     * @param documentId the documentId
      */
-    public DeleteDocumentOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name, String document_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
-      this.document_id_serialized_name = document_id_serialized_name;
+    public DeleteDocumentOptionsBuilder(String environmentId, String collectionId, String documentId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+      this.document_id_serialized_name = documentId;
     }
 
     /**
      * Builds a DeleteDocumentOptions.
      *
-     * @return the delete_document_options
+     * @return the deleteDocumentOptions
      */
     public DeleteDocumentOptions build() {
       return new DeleteDocumentOptions(this);
@@ -2265,33 +2265,33 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the DeleteDocumentOptions builder
      */
-    public DeleteDocumentOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public DeleteDocumentOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the DeleteDocumentOptions builder
      */
-    public DeleteDocumentOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public DeleteDocumentOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
 
     /**
      * Set the document_id_serialized_name.
      *
-     * @param document_id_serialized_name the document_id_serialized_name
+     * @param documentId the documentId
      * @return the DeleteDocumentOptions builder
      */
-    public DeleteDocumentOptionsBuilder documentId(String document_id_serialized_name) {
-      this.document_id_serialized_name = document_id_serialized_name;
+    public DeleteDocumentOptionsBuilder documentId(String documentId) {
+      this.document_id_serialized_name = documentId;
       return this;
     }
   }
@@ -2333,8 +2333,8 @@ public class IBMDiscoveryV1Models {
   public class DeleteEnvironmentOptionsBuilder {
     private String environment_id_serialized_name;
 
-    private DeleteEnvironmentOptionsBuilder(DeleteEnvironmentOptions delete_environment_options) {
-      environment_id_serialized_name = delete_environment_options.environment_id_serialized_name;
+    private DeleteEnvironmentOptionsBuilder(DeleteEnvironmentOptions deleteEnvironmentOptions) {
+      environment_id_serialized_name = deleteEnvironmentOptions.environment_id_serialized_name;
     }
 
     /**
@@ -2346,16 +2346,16 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      */
-    public DeleteEnvironmentOptionsBuilder(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public DeleteEnvironmentOptionsBuilder(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
     }
 
     /**
      * Builds a DeleteEnvironmentOptions.
      *
-     * @return the delete_environment_options
+     * @return the deleteEnvironmentOptions
      */
     public DeleteEnvironmentOptions build() {
       return new DeleteEnvironmentOptions(this);
@@ -2364,11 +2364,11 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the DeleteEnvironmentOptions builder
      */
-    public DeleteEnvironmentOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public DeleteEnvironmentOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
   }
@@ -2438,10 +2438,10 @@ public class IBMDiscoveryV1Models {
     private String collection_id_serialized_name;
     private String query_id_serialized_name;
 
-    private DeleteTrainingDataOptionsBuilder(DeleteTrainingDataOptions delete_training_data_options) {
-      environment_id_serialized_name = delete_training_data_options.environment_id_serialized_name;
-      collection_id_serialized_name = delete_training_data_options.collection_id_serialized_name;
-      query_id_serialized_name = delete_training_data_options.query_id_serialized_name;
+    private DeleteTrainingDataOptionsBuilder(DeleteTrainingDataOptions deleteTrainingDataOptions) {
+      environment_id_serialized_name = deleteTrainingDataOptions.environment_id_serialized_name;
+      collection_id_serialized_name = deleteTrainingDataOptions.collection_id_serialized_name;
+      query_id_serialized_name = deleteTrainingDataOptions.query_id_serialized_name;
     }
 
     /**
@@ -2453,20 +2453,20 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
-     * @param query_id_serialized_name the query_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     * @param queryId the queryId
      */
-    public DeleteTrainingDataOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name, String query_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
-      this.query_id_serialized_name = query_id_serialized_name;
+    public DeleteTrainingDataOptionsBuilder(String environmentId, String collectionId, String queryId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+      this.query_id_serialized_name = queryId;
     }
 
     /**
      * Builds a DeleteTrainingDataOptions.
      *
-     * @return the delete_training_data_options
+     * @return the deleteTrainingDataOptions
      */
     public DeleteTrainingDataOptions build() {
       return new DeleteTrainingDataOptions(this);
@@ -2475,33 +2475,33 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the DeleteTrainingDataOptions builder
      */
-    public DeleteTrainingDataOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public DeleteTrainingDataOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the DeleteTrainingDataOptions builder
      */
-    public DeleteTrainingDataOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public DeleteTrainingDataOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
 
     /**
      * Set the query_id_serialized_name.
      *
-     * @param query_id_serialized_name the query_id_serialized_name
+     * @param queryId the queryId
      * @return the DeleteTrainingDataOptions builder
      */
-    public DeleteTrainingDataOptionsBuilder queryId(String query_id_serialized_name) {
-      this.query_id_serialized_name = query_id_serialized_name;
+    public DeleteTrainingDataOptionsBuilder queryId(String queryId) {
+      this.query_id_serialized_name = queryId;
       return this;
     }
   }
@@ -2585,11 +2585,11 @@ public class IBMDiscoveryV1Models {
     private String query_id_serialized_name;
     private String example_id_serialized_name;
 
-    private DeleteTrainingExampleOptionsBuilder(DeleteTrainingExampleOptions delete_training_example_options) {
-      environment_id_serialized_name = delete_training_example_options.environment_id_serialized_name;
-      collection_id_serialized_name = delete_training_example_options.collection_id_serialized_name;
-      query_id_serialized_name = delete_training_example_options.query_id_serialized_name;
-      example_id_serialized_name = delete_training_example_options.example_id_serialized_name;
+    private DeleteTrainingExampleOptionsBuilder(DeleteTrainingExampleOptions deleteTrainingExampleOptions) {
+      environment_id_serialized_name = deleteTrainingExampleOptions.environment_id_serialized_name;
+      collection_id_serialized_name = deleteTrainingExampleOptions.collection_id_serialized_name;
+      query_id_serialized_name = deleteTrainingExampleOptions.query_id_serialized_name;
+      example_id_serialized_name = deleteTrainingExampleOptions.example_id_serialized_name;
     }
 
     /**
@@ -2601,22 +2601,22 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
-     * @param query_id_serialized_name the query_id_serialized_name
-     * @param example_id_serialized_name the example_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     * @param queryId the queryId
+     * @param exampleId the exampleId
      */
-    public DeleteTrainingExampleOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name, String query_id_serialized_name, String example_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
-      this.query_id_serialized_name = query_id_serialized_name;
-      this.example_id_serialized_name = example_id_serialized_name;
+    public DeleteTrainingExampleOptionsBuilder(String environmentId, String collectionId, String queryId, String exampleId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+      this.query_id_serialized_name = queryId;
+      this.example_id_serialized_name = exampleId;
     }
 
     /**
      * Builds a DeleteTrainingExampleOptions.
      *
-     * @return the delete_training_example_options
+     * @return the deleteTrainingExampleOptions
      */
     public DeleteTrainingExampleOptions build() {
       return new DeleteTrainingExampleOptions(this);
@@ -2625,44 +2625,44 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the DeleteTrainingExampleOptions builder
      */
-    public DeleteTrainingExampleOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public DeleteTrainingExampleOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the DeleteTrainingExampleOptions builder
      */
-    public DeleteTrainingExampleOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public DeleteTrainingExampleOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
 
     /**
      * Set the query_id_serialized_name.
      *
-     * @param query_id_serialized_name the query_id_serialized_name
+     * @param queryId the queryId
      * @return the DeleteTrainingExampleOptions builder
      */
-    public DeleteTrainingExampleOptionsBuilder queryId(String query_id_serialized_name) {
-      this.query_id_serialized_name = query_id_serialized_name;
+    public DeleteTrainingExampleOptionsBuilder queryId(String queryId) {
+      this.query_id_serialized_name = queryId;
       return this;
     }
 
     /**
      * Set the example_id_serialized_name.
      *
-     * @param example_id_serialized_name the example_id_serialized_name
+     * @param exampleId the exampleId
      * @return the DeleteTrainingExampleOptions builder
      */
-    public DeleteTrainingExampleOptionsBuilder exampleId(String example_id_serialized_name) {
-      this.example_id_serialized_name = example_id_serialized_name;
+    public DeleteTrainingExampleOptionsBuilder exampleId(String exampleId) {
+      this.example_id_serialized_name = exampleId;
       return this;
     }
   }
@@ -2799,28 +2799,28 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the document_id_serialized_name.
      *
-     * @param document_id_serialized_name the new document_id_serialized_name
+     * @param documentId the new documentId
      */
-    public void setDocumentId(final String document_id_serialized_name) {
-      this.document_id_serialized_name = document_id_serialized_name;
+    public void setDocumentId(final String documentId) {
+      this.document_id_serialized_name = documentId;
     }
 
     /**
      * Sets the status_serialized_name.
      *
-     * @param status_serialized_name the new status_serialized_name
+     * @param status the new status
      */
-    public void setStatus(final String status_serialized_name) {
-      this.status_serialized_name = status_serialized_name;
+    public void setStatus(final String status) {
+      this.status_serialized_name = status;
     }
 
     /**
      * Sets the notices_serialized_name.
      *
-     * @param notices_serialized_name the new notices_serialized_name
+     * @param notices the new notices
      */
-    public void setNotices(final List<Notice> notices_serialized_name) {
-      this.notices_serialized_name = notices_serialized_name;
+    public void setNotices(final List<Notice> notices) {
+      this.notices_serialized_name = notices;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2927,19 +2927,19 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the step_serialized_name.
      *
-     * @param step_serialized_name the new step_serialized_name
+     * @param step the new step
      */
-    public void setStep(final String step_serialized_name) {
-      this.step_serialized_name = step_serialized_name;
+    public void setStep(final String step) {
+      this.step_serialized_name = step;
     }
 
     /**
      * Sets the snapshot_serialized_name.
      *
-     * @param snapshot_serialized_name the new snapshot_serialized_name
+     * @param snapshot the new snapshot
      */
-    public void setSnapshot(final IBMWatsonMapModel snapshot_serialized_name) {
-      this.snapshot_serialized_name = snapshot_serialized_name;
+    public void setSnapshot(final IBMWatsonMapModel snapshot) {
+      this.snapshot_serialized_name = snapshot;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3085,37 +3085,37 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the filename_serialized_name.
      *
-     * @param filename_serialized_name the new filename_serialized_name
+     * @param filename the new filename
      */
-    public void setFilename(final String filename_serialized_name) {
-      this.filename_serialized_name = filename_serialized_name;
+    public void setFilename(final String filename) {
+      this.filename_serialized_name = filename;
     }
 
     /**
      * Sets the file_type_serialized_name.
      *
-     * @param file_type_serialized_name the new file_type_serialized_name
+     * @param fileType the new fileType
      */
-    public void setFileType(final String file_type_serialized_name) {
-      this.file_type_serialized_name = file_type_serialized_name;
+    public void setFileType(final String fileType) {
+      this.file_type_serialized_name = fileType;
     }
 
     /**
      * Sets the sha1_serialized_name.
      *
-     * @param sha1_serialized_name the new sha1_serialized_name
+     * @param sha1 the new sha1
      */
-    public void setSha1(final String sha1_serialized_name) {
-      this.sha1_serialized_name = sha1_serialized_name;
+    public void setSha1(final String sha1) {
+      this.sha1_serialized_name = sha1;
     }
 
     /**
      * Sets the notices_serialized_name.
      *
-     * @param notices_serialized_name the new notices_serialized_name
+     * @param notices the new notices
      */
-    public void setNotices(final List<Notice> notices_serialized_name) {
-      this.notices_serialized_name = notices_serialized_name;
+    public void setNotices(final List<Notice> notices) {
+      this.notices_serialized_name = notices;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3234,64 +3234,64 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the description_serialized_name.
      *
-     * @param description_serialized_name the new description_serialized_name
+     * @param description the new description
      */
-    public void setDescription(final String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
     }
 
     /**
      * Sets the destination_field_serialized_name.
      *
-     * @param destination_field_serialized_name the new destination_field_serialized_name
+     * @param destinationField the new destinationField
      */
-    public void setDestinationField(final String destination_field_serialized_name) {
-      this.destination_field_serialized_name = destination_field_serialized_name;
+    public void setDestinationField(final String destinationField) {
+      this.destination_field_serialized_name = destinationField;
     }
 
     /**
      * Sets the source_field_serialized_name.
      *
-     * @param source_field_serialized_name the new source_field_serialized_name
+     * @param sourceField the new sourceField
      */
-    public void setSourceField(final String source_field_serialized_name) {
-      this.source_field_serialized_name = source_field_serialized_name;
+    public void setSourceField(final String sourceField) {
+      this.source_field_serialized_name = sourceField;
     }
 
     /**
      * Sets the overwrite_serialized_name.
      *
-     * @param overwrite_serialized_name the new overwrite_serialized_name
+     * @param overwrite the new overwrite
      */
-    public void setOverwrite(final Boolean overwrite_serialized_name) {
-      this.overwrite_serialized_name = overwrite_serialized_name;
+    public void setOverwrite(final Boolean overwrite) {
+      this.overwrite_serialized_name = overwrite;
     }
 
     /**
      * Sets the enrichment_serialized_name.
      *
-     * @param enrichment_serialized_name the new enrichment_serialized_name
+     * @param enrichment the new enrichment
      */
-    public void setEnrichment(final String enrichment_serialized_name) {
-      this.enrichment_serialized_name = enrichment_serialized_name;
+    public void setEnrichment(final String enrichment) {
+      this.enrichment_serialized_name = enrichment;
     }
 
     /**
      * Sets the ignore_downstream_errors_serialized_name.
      *
-     * @param ignore_downstream_errors_serialized_name the new ignore_downstream_errors_serialized_name
+     * @param ignoreDownstreamErrors the new ignoreDownstreamErrors
      */
-    public void setIgnoreDownstreamErrors(final Boolean ignore_downstream_errors_serialized_name) {
-      this.ignore_downstream_errors_serialized_name = ignore_downstream_errors_serialized_name;
+    public void setIgnoreDownstreamErrors(final Boolean ignoreDownstreamErrors) {
+      this.ignore_downstream_errors_serialized_name = ignoreDownstreamErrors;
     }
 
     /**
      * Sets the options_serialized_name.
      *
-     * @param options_serialized_name the new options_serialized_name
+     * @param options the new options
      */
-    public void setOptions(final EnrichmentOptions options_serialized_name) {
-      this.options_serialized_name = options_serialized_name;
+    public void setOptions(final EnrichmentOptions options) {
+      this.options_serialized_name = options;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3393,64 +3393,64 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the extract_serialized_name.
      *
-     * @param extract_serialized_name the new extract_serialized_name
+     * @param extract the new extract
      */
-    public void setExtract(final List<String> extract_serialized_name) {
-      this.extract_serialized_name = extract_serialized_name;
+    public void setExtract(final List<String> extract) {
+      this.extract_serialized_name = extract;
     }
 
     /**
      * Sets the sentiment_serialized_name.
      *
-     * @param sentiment_serialized_name the new sentiment_serialized_name
+     * @param sentiment the new sentiment
      */
-    public void setSentiment(final Boolean sentiment_serialized_name) {
-      this.sentiment_serialized_name = sentiment_serialized_name;
+    public void setSentiment(final Boolean sentiment) {
+      this.sentiment_serialized_name = sentiment;
     }
 
     /**
      * Sets the quotations_serialized_name.
      *
-     * @param quotations_serialized_name the new quotations_serialized_name
+     * @param quotations the new quotations
      */
-    public void setQuotations(final Boolean quotations_serialized_name) {
-      this.quotations_serialized_name = quotations_serialized_name;
+    public void setQuotations(final Boolean quotations) {
+      this.quotations_serialized_name = quotations;
     }
 
     /**
      * Sets the show_source_text_serialized_name.
      *
-     * @param show_source_text_serialized_name the new show_source_text_serialized_name
+     * @param showSourceText the new showSourceText
      */
-    public void setShowSourceText(final Boolean show_source_text_serialized_name) {
-      this.show_source_text_serialized_name = show_source_text_serialized_name;
+    public void setShowSourceText(final Boolean showSourceText) {
+      this.show_source_text_serialized_name = showSourceText;
     }
 
     /**
      * Sets the hierarchical_typed_relations_serialized_name.
      *
-     * @param hierarchical_typed_relations_serialized_name the new hierarchical_typed_relations_serialized_name
+     * @param hierarchicalTypedRelations the new hierarchicalTypedRelations
      */
-    public void setHierarchicalTypedRelations(final Boolean hierarchical_typed_relations_serialized_name) {
-      this.hierarchical_typed_relations_serialized_name = hierarchical_typed_relations_serialized_name;
+    public void setHierarchicalTypedRelations(final Boolean hierarchicalTypedRelations) {
+      this.hierarchical_typed_relations_serialized_name = hierarchicalTypedRelations;
     }
 
     /**
      * Sets the model_serialized_name.
      *
-     * @param model_serialized_name the new model_serialized_name
+     * @param model the new model
      */
-    public void setModel(final String model_serialized_name) {
-      this.model_serialized_name = model_serialized_name;
+    public void setModel(final String model) {
+      this.model_serialized_name = model;
     }
 
     /**
      * Sets the language_serialized_name.
      *
-     * @param language_serialized_name the new language_serialized_name
+     * @param language the new language
      */
-    public void setLanguage(final String language_serialized_name) {
-      this.language_serialized_name = language_serialized_name;
+    public void setLanguage(final String language) {
+      this.language_serialized_name = language;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3580,37 +3580,37 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     /**
      * Sets the description_serialized_name.
      *
-     * @param description_serialized_name the new description_serialized_name
+     * @param description the new description
      */
-    public void setDescription(final String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
     }
 
     /**
      * Sets the size_serialized_name.
      *
-     * @param size_serialized_name the new size_serialized_name
+     * @param size the new size
      */
-    public void setSize(final long size_serialized_name) {
-      this.size_serialized_name = size_serialized_name;
+    public void setSize(final long size) {
+      this.size_serialized_name = size;
     }
 
     /**
      * Sets the index_capacity_serialized_name.
      *
-     * @param index_capacity_serialized_name the new index_capacity_serialized_name
+     * @param indexCapacity the new indexCapacity
      */
-    public void setIndexCapacity(final IndexCapacity index_capacity_serialized_name) {
-      this.index_capacity_serialized_name = index_capacity_serialized_name;
+    public void setIndexCapacity(final IndexCapacity indexCapacity) {
+      this.index_capacity_serialized_name = indexCapacity;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3849,19 +3849,19 @@ public class IBMDiscoveryV1Models {
     private Boolean highlight_serialized_name;
     private String deduplicate_field_serialized_name;
 
-    private FederatedQueryNoticesOptionsBuilder(FederatedQueryNoticesOptions federated_query_notices_options) {
-      environment_id_serialized_name = federated_query_notices_options.environment_id_serialized_name;
-      collection_ids_serialized_name = federated_query_notices_options.collection_ids_serialized_name;
-      filter_serialized_name = federated_query_notices_options.filter_serialized_name;
-      query_serialized_name = federated_query_notices_options.query_serialized_name;
-      natural_language_query_serialized_name = federated_query_notices_options.natural_language_query_serialized_name;
-      aggregation_serialized_name = federated_query_notices_options.aggregation_serialized_name;
-      count_serialized_name = federated_query_notices_options.count_serialized_name;
-      return_serialized_name = federated_query_notices_options.return_serialized_name;
-      offset_serialized_name = federated_query_notices_options.offset_serialized_name;
-      sort_serialized_name = federated_query_notices_options.sort_serialized_name;
-      highlight_serialized_name = federated_query_notices_options.highlight_serialized_name;
-      deduplicate_field_serialized_name = federated_query_notices_options.deduplicate_field_serialized_name;
+    private FederatedQueryNoticesOptionsBuilder(FederatedQueryNoticesOptions federatedQueryNoticesOptions) {
+      environment_id_serialized_name = federatedQueryNoticesOptions.environment_id_serialized_name;
+      collection_ids_serialized_name = federatedQueryNoticesOptions.collection_ids_serialized_name;
+      filter_serialized_name = federatedQueryNoticesOptions.filter_serialized_name;
+      query_serialized_name = federatedQueryNoticesOptions.query_serialized_name;
+      natural_language_query_serialized_name = federatedQueryNoticesOptions.natural_language_query_serialized_name;
+      aggregation_serialized_name = federatedQueryNoticesOptions.aggregation_serialized_name;
+      count_serialized_name = federatedQueryNoticesOptions.count_serialized_name;
+      return_serialized_name = federatedQueryNoticesOptions.return_serialized_name;
+      offset_serialized_name = federatedQueryNoticesOptions.offset_serialized_name;
+      sort_serialized_name = federatedQueryNoticesOptions.sort_serialized_name;
+      highlight_serialized_name = federatedQueryNoticesOptions.highlight_serialized_name;
+      deduplicate_field_serialized_name = federatedQueryNoticesOptions.deduplicate_field_serialized_name;
     }
 
     /**
@@ -3873,76 +3873,76 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_ids_serialized_name the collection_ids_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionIds the collectionIds
      */
-    public FederatedQueryNoticesOptionsBuilder(String environment_id_serialized_name, List<String> collection_ids_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_ids_serialized_name = collection_ids_serialized_name;
+    public FederatedQueryNoticesOptionsBuilder(String environmentId, List<String> collectionIds) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_ids_serialized_name = collectionIds;
     }
 
     /**
      * Builds a FederatedQueryNoticesOptions.
      *
-     * @return the federated_query_notices_options
+     * @return the federatedQueryNoticesOptions
      */
     public FederatedQueryNoticesOptions build() {
       return new FederatedQueryNoticesOptions(this);
     }
 
     /**
-     * Adds an collection_ids_serialized_name to collection_ids_serialized_name.
+     * Adds an collectionIds to collection_ids_serialized_name.
      *
-     * @param collection_ids_serialized_name the new collection_ids_serialized_name
+     * @param collectionIds the new collectionIds
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder addCollectionIds(String collection_ids_serialized_name) {
-      IBMWatsonValidator.notNull(collection_ids_serialized_name, 'collection_ids_serialized_name cannot be null');
+    public FederatedQueryNoticesOptionsBuilder addCollectionIds(String collectionIds) {
+      IBMWatsonValidator.notNull(collectionIds, 'collectionIds cannot be null');
       if (this.collection_ids_serialized_name == null) {
         this.collection_ids_serialized_name = new List<String>();
       }
-      this.collection_ids_serialized_name.add(collection_ids_serialized_name);
+      this.collection_ids_serialized_name.add(collectionIds);
       return this;
     }
 
     /**
-     * Adds an return_serialized_name to return_serialized_name.
+     * Adds an returnVar to return_serialized_name.
      *
-     * @param return_serialized_name the new return_serialized_name
+     * @param returnVar the new returnVar
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder addReturn(String return_serialized_name) {
-      IBMWatsonValidator.notNull(return_serialized_name, 'return_serialized_name cannot be null');
+    public FederatedQueryNoticesOptionsBuilder addReturn(String returnVar) {
+      IBMWatsonValidator.notNull(returnVar, 'returnVar cannot be null');
       if (this.return_serialized_name == null) {
         this.return_serialized_name = new List<String>();
       }
-      this.return_serialized_name.add(return_serialized_name);
+      this.return_serialized_name.add(returnVar);
       return this;
     }
 
     /**
-     * Adds an sort_serialized_name to sort_serialized_name.
+     * Adds an sortVar to sort_serialized_name.
      *
-     * @param sort_serialized_name the new sort_serialized_name
+     * @param sortVar the new sortVar
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder addSort(String sort_serialized_name) {
-      IBMWatsonValidator.notNull(sort_serialized_name, 'sort_serialized_name cannot be null');
+    public FederatedQueryNoticesOptionsBuilder addSort(String sortVar) {
+      IBMWatsonValidator.notNull(sortVar, 'sortVar cannot be null');
       if (this.sort_serialized_name == null) {
         this.sort_serialized_name = new List<String>();
       }
-      this.sort_serialized_name.add(sort_serialized_name);
+      this.sort_serialized_name.add(sortVar);
       return this;
     }
 
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public FederatedQueryNoticesOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
@@ -3950,66 +3950,66 @@ public class IBMDiscoveryV1Models {
      * Set the collection_ids_serialized_name.
      * Existing collection_ids_serialized_name will be replaced.
      *
-     * @param collection_ids_serialized_name the collection_ids_serialized_name
+     * @param collectionIds the collectionIds
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder collectionIds(List<String> collection_ids_serialized_name) {
-      this.collection_ids_serialized_name = collection_ids_serialized_name;
+    public FederatedQueryNoticesOptionsBuilder collectionIds(List<String> collectionIds) {
+      this.collection_ids_serialized_name = collectionIds;
       return this;
     }
 
     /**
      * Set the filter_serialized_name.
      *
-     * @param filter_serialized_name the filter_serialized_name
+     * @param filter the filter
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder filter(String filter_serialized_name) {
-      this.filter_serialized_name = filter_serialized_name;
+    public FederatedQueryNoticesOptionsBuilder filter(String filter) {
+      this.filter_serialized_name = filter;
       return this;
     }
 
     /**
      * Set the query_serialized_name.
      *
-     * @param query_serialized_name the query_serialized_name
+     * @param query the query
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder query(String query_serialized_name) {
-      this.query_serialized_name = query_serialized_name;
+    public FederatedQueryNoticesOptionsBuilder query(String query) {
+      this.query_serialized_name = query;
       return this;
     }
 
     /**
      * Set the natural_language_query_serialized_name.
      *
-     * @param natural_language_query_serialized_name the natural_language_query_serialized_name
+     * @param naturalLanguageQuery the naturalLanguageQuery
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder naturalLanguageQuery(String natural_language_query_serialized_name) {
-      this.natural_language_query_serialized_name = natural_language_query_serialized_name;
+    public FederatedQueryNoticesOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
+      this.natural_language_query_serialized_name = naturalLanguageQuery;
       return this;
     }
 
     /**
      * Set the aggregation_serialized_name.
      *
-     * @param aggregation_serialized_name the aggregation_serialized_name
+     * @param aggregation the aggregation
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder aggregation(String aggregation_serialized_name) {
-      this.aggregation_serialized_name = aggregation_serialized_name;
+    public FederatedQueryNoticesOptionsBuilder aggregation(String aggregation) {
+      this.aggregation_serialized_name = aggregation;
       return this;
     }
 
     /**
      * Set the count_serialized_name.
      *
-     * @param count_serialized_name the count_serialized_name
+     * @param count the count
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder count(Long count_serialized_name) {
-      this.count_serialized_name = count_serialized_name;
+    public FederatedQueryNoticesOptionsBuilder count(Long count) {
+      this.count_serialized_name = count;
       return this;
     }
 
@@ -4017,22 +4017,22 @@ public class IBMDiscoveryV1Models {
      * Set the return_serialized_name.
      * Existing return_serialized_name will be replaced.
      *
-     * @param return_serialized_name the return_serialized_name
+     * @param returnVar the returnVar
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder returnField(List<String> return_serialized_name) {
-      this.return_serialized_name = return_serialized_name;
+    public FederatedQueryNoticesOptionsBuilder returnField(List<String> returnVar) {
+      this.return_serialized_name = returnVar;
       return this;
     }
 
     /**
      * Set the offset_serialized_name.
      *
-     * @param offset_serialized_name the offset_serialized_name
+     * @param offset the offset
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder offset(Long offset_serialized_name) {
-      this.offset_serialized_name = offset_serialized_name;
+    public FederatedQueryNoticesOptionsBuilder offset(Long offset) {
+      this.offset_serialized_name = offset;
       return this;
     }
 
@@ -4040,33 +4040,33 @@ public class IBMDiscoveryV1Models {
      * Set the sort_serialized_name.
      * Existing sort_serialized_name will be replaced.
      *
-     * @param sort_serialized_name the sort_serialized_name
+     * @param sortVar the sortVar
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder sortField(List<String> sort_serialized_name) {
-      this.sort_serialized_name = sort_serialized_name;
+    public FederatedQueryNoticesOptionsBuilder sortField(List<String> sortVar) {
+      this.sort_serialized_name = sortVar;
       return this;
     }
 
     /**
      * Set the highlight_serialized_name.
      *
-     * @param highlight_serialized_name the highlight_serialized_name
+     * @param highlight the highlight
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder highlight(Boolean highlight_serialized_name) {
-      this.highlight_serialized_name = highlight_serialized_name;
+    public FederatedQueryNoticesOptionsBuilder highlight(Boolean highlight) {
+      this.highlight_serialized_name = highlight;
       return this;
     }
 
     /**
      * Set the deduplicate_field_serialized_name.
      *
-     * @param deduplicate_field_serialized_name the deduplicate_field_serialized_name
+     * @param deduplicateField the deduplicateField
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder deduplicateField(String deduplicate_field_serialized_name) {
-      this.deduplicate_field_serialized_name = deduplicate_field_serialized_name;
+    public FederatedQueryNoticesOptionsBuilder deduplicateField(String deduplicateField) {
+      this.deduplicate_field_serialized_name = deduplicateField;
       return this;
     }
   }
@@ -4265,20 +4265,20 @@ public class IBMDiscoveryV1Models {
     private Boolean deduplicate_serialized_name;
     private String deduplicate_field_serialized_name;
 
-    private FederatedQueryOptionsBuilder(FederatedQueryOptions federated_query_options) {
-      environment_id_serialized_name = federated_query_options.environment_id_serialized_name;
-      collection_ids_serialized_name = federated_query_options.collection_ids_serialized_name;
-      filter_serialized_name = federated_query_options.filter_serialized_name;
-      query_serialized_name = federated_query_options.query_serialized_name;
-      natural_language_query_serialized_name = federated_query_options.natural_language_query_serialized_name;
-      aggregation_serialized_name = federated_query_options.aggregation_serialized_name;
-      count_serialized_name = federated_query_options.count_serialized_name;
-      return_serialized_name = federated_query_options.return_serialized_name;
-      offset_serialized_name = federated_query_options.offset_serialized_name;
-      sort_serialized_name = federated_query_options.sort_serialized_name;
-      highlight_serialized_name = federated_query_options.highlight_serialized_name;
-      deduplicate_serialized_name = federated_query_options.deduplicate_serialized_name;
-      deduplicate_field_serialized_name = federated_query_options.deduplicate_field_serialized_name;
+    private FederatedQueryOptionsBuilder(FederatedQueryOptions federatedQueryOptions) {
+      environment_id_serialized_name = federatedQueryOptions.environment_id_serialized_name;
+      collection_ids_serialized_name = federatedQueryOptions.collection_ids_serialized_name;
+      filter_serialized_name = federatedQueryOptions.filter_serialized_name;
+      query_serialized_name = federatedQueryOptions.query_serialized_name;
+      natural_language_query_serialized_name = federatedQueryOptions.natural_language_query_serialized_name;
+      aggregation_serialized_name = federatedQueryOptions.aggregation_serialized_name;
+      count_serialized_name = federatedQueryOptions.count_serialized_name;
+      return_serialized_name = federatedQueryOptions.return_serialized_name;
+      offset_serialized_name = federatedQueryOptions.offset_serialized_name;
+      sort_serialized_name = federatedQueryOptions.sort_serialized_name;
+      highlight_serialized_name = federatedQueryOptions.highlight_serialized_name;
+      deduplicate_serialized_name = federatedQueryOptions.deduplicate_serialized_name;
+      deduplicate_field_serialized_name = federatedQueryOptions.deduplicate_field_serialized_name;
     }
 
     /**
@@ -4290,76 +4290,76 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_ids_serialized_name the collection_ids_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionIds the collectionIds
      */
-    public FederatedQueryOptionsBuilder(String environment_id_serialized_name, List<String> collection_ids_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_ids_serialized_name = collection_ids_serialized_name;
+    public FederatedQueryOptionsBuilder(String environmentId, List<String> collectionIds) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_ids_serialized_name = collectionIds;
     }
 
     /**
      * Builds a FederatedQueryOptions.
      *
-     * @return the federated_query_options
+     * @return the federatedQueryOptions
      */
     public FederatedQueryOptions build() {
       return new FederatedQueryOptions(this);
     }
 
     /**
-     * Adds an collection_ids_serialized_name to collection_ids_serialized_name.
+     * Adds an collectionIds to collection_ids_serialized_name.
      *
-     * @param collection_ids_serialized_name the new collection_ids_serialized_name
+     * @param collectionIds the new collectionIds
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder addCollectionIds(String collection_ids_serialized_name) {
-      IBMWatsonValidator.notNull(collection_ids_serialized_name, 'collection_ids_serialized_name cannot be null');
+    public FederatedQueryOptionsBuilder addCollectionIds(String collectionIds) {
+      IBMWatsonValidator.notNull(collectionIds, 'collectionIds cannot be null');
       if (this.collection_ids_serialized_name == null) {
         this.collection_ids_serialized_name = new List<String>();
       }
-      this.collection_ids_serialized_name.add(collection_ids_serialized_name);
+      this.collection_ids_serialized_name.add(collectionIds);
       return this;
     }
 
     /**
-     * Adds an return_serialized_name to return_serialized_name.
+     * Adds an returnVar to return_serialized_name.
      *
-     * @param return_serialized_name the new return_serialized_name
+     * @param returnVar the new returnVar
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder addReturn(String return_serialized_name) {
-      IBMWatsonValidator.notNull(return_serialized_name, 'return_serialized_name cannot be null');
+    public FederatedQueryOptionsBuilder addReturn(String returnVar) {
+      IBMWatsonValidator.notNull(returnVar, 'returnVar cannot be null');
       if (this.return_serialized_name == null) {
         this.return_serialized_name = new List<String>();
       }
-      this.return_serialized_name.add(return_serialized_name);
+      this.return_serialized_name.add(returnVar);
       return this;
     }
 
     /**
-     * Adds an sort_serialized_name to sort_serialized_name.
+     * Adds an sortVar to sort_serialized_name.
      *
-     * @param sort_serialized_name the new sort_serialized_name
+     * @param sortVar the new sortVar
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder addSort(String sort_serialized_name) {
-      IBMWatsonValidator.notNull(sort_serialized_name, 'sort_serialized_name cannot be null');
+    public FederatedQueryOptionsBuilder addSort(String sortVar) {
+      IBMWatsonValidator.notNull(sortVar, 'sortVar cannot be null');
       if (this.sort_serialized_name == null) {
         this.sort_serialized_name = new List<String>();
       }
-      this.sort_serialized_name.add(sort_serialized_name);
+      this.sort_serialized_name.add(sortVar);
       return this;
     }
 
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public FederatedQueryOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
@@ -4367,66 +4367,66 @@ public class IBMDiscoveryV1Models {
      * Set the collection_ids_serialized_name.
      * Existing collection_ids_serialized_name will be replaced.
      *
-     * @param collection_ids_serialized_name the collection_ids_serialized_name
+     * @param collectionIds the collectionIds
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder collectionIds(List<String> collection_ids_serialized_name) {
-      this.collection_ids_serialized_name = collection_ids_serialized_name;
+    public FederatedQueryOptionsBuilder collectionIds(List<String> collectionIds) {
+      this.collection_ids_serialized_name = collectionIds;
       return this;
     }
 
     /**
      * Set the filter_serialized_name.
      *
-     * @param filter_serialized_name the filter_serialized_name
+     * @param filter the filter
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder filter(String filter_serialized_name) {
-      this.filter_serialized_name = filter_serialized_name;
+    public FederatedQueryOptionsBuilder filter(String filter) {
+      this.filter_serialized_name = filter;
       return this;
     }
 
     /**
      * Set the query_serialized_name.
      *
-     * @param query_serialized_name the query_serialized_name
+     * @param query the query
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder query(String query_serialized_name) {
-      this.query_serialized_name = query_serialized_name;
+    public FederatedQueryOptionsBuilder query(String query) {
+      this.query_serialized_name = query;
       return this;
     }
 
     /**
      * Set the natural_language_query_serialized_name.
      *
-     * @param natural_language_query_serialized_name the natural_language_query_serialized_name
+     * @param naturalLanguageQuery the naturalLanguageQuery
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder naturalLanguageQuery(String natural_language_query_serialized_name) {
-      this.natural_language_query_serialized_name = natural_language_query_serialized_name;
+    public FederatedQueryOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
+      this.natural_language_query_serialized_name = naturalLanguageQuery;
       return this;
     }
 
     /**
      * Set the aggregation_serialized_name.
      *
-     * @param aggregation_serialized_name the aggregation_serialized_name
+     * @param aggregation the aggregation
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder aggregation(String aggregation_serialized_name) {
-      this.aggregation_serialized_name = aggregation_serialized_name;
+    public FederatedQueryOptionsBuilder aggregation(String aggregation) {
+      this.aggregation_serialized_name = aggregation;
       return this;
     }
 
     /**
      * Set the count_serialized_name.
      *
-     * @param count_serialized_name the count_serialized_name
+     * @param count the count
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder count(Long count_serialized_name) {
-      this.count_serialized_name = count_serialized_name;
+    public FederatedQueryOptionsBuilder count(Long count) {
+      this.count_serialized_name = count;
       return this;
     }
 
@@ -4434,22 +4434,22 @@ public class IBMDiscoveryV1Models {
      * Set the return_serialized_name.
      * Existing return_serialized_name will be replaced.
      *
-     * @param return_serialized_name the return_serialized_name
+     * @param returnVar the returnVar
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder returnField(List<String> return_serialized_name) {
-      this.return_serialized_name = return_serialized_name;
+    public FederatedQueryOptionsBuilder returnField(List<String> returnVar) {
+      this.return_serialized_name = returnVar;
       return this;
     }
 
     /**
      * Set the offset_serialized_name.
      *
-     * @param offset_serialized_name the offset_serialized_name
+     * @param offset the offset
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder offset(Long offset_serialized_name) {
-      this.offset_serialized_name = offset_serialized_name;
+    public FederatedQueryOptionsBuilder offset(Long offset) {
+      this.offset_serialized_name = offset;
       return this;
     }
 
@@ -4457,44 +4457,44 @@ public class IBMDiscoveryV1Models {
      * Set the sort_serialized_name.
      * Existing sort_serialized_name will be replaced.
      *
-     * @param sort_serialized_name the sort_serialized_name
+     * @param sortVar the sortVar
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder sortField(List<String> sort_serialized_name) {
-      this.sort_serialized_name = sort_serialized_name;
+    public FederatedQueryOptionsBuilder sortField(List<String> sortVar) {
+      this.sort_serialized_name = sortVar;
       return this;
     }
 
     /**
      * Set the highlight_serialized_name.
      *
-     * @param highlight_serialized_name the highlight_serialized_name
+     * @param highlight the highlight
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder highlight(Boolean highlight_serialized_name) {
-      this.highlight_serialized_name = highlight_serialized_name;
+    public FederatedQueryOptionsBuilder highlight(Boolean highlight) {
+      this.highlight_serialized_name = highlight;
       return this;
     }
 
     /**
      * Set the deduplicate_serialized_name.
      *
-     * @param deduplicate_serialized_name the deduplicate_serialized_name
+     * @param deduplicate the deduplicate
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder deduplicate(Boolean deduplicate_serialized_name) {
-      this.deduplicate_serialized_name = deduplicate_serialized_name;
+    public FederatedQueryOptionsBuilder deduplicate(Boolean deduplicate) {
+      this.deduplicate_serialized_name = deduplicate;
       return this;
     }
 
     /**
      * Set the deduplicate_field_serialized_name.
      *
-     * @param deduplicate_field_serialized_name the deduplicate_field_serialized_name
+     * @param deduplicateField the deduplicateField
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder deduplicateField(String deduplicate_field_serialized_name) {
-      this.deduplicate_field_serialized_name = deduplicate_field_serialized_name;
+    public FederatedQueryOptionsBuilder deduplicateField(String deduplicateField) {
+      this.deduplicate_field_serialized_name = deduplicateField;
       return this;
     }
   }
@@ -4607,55 +4607,55 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the level_serialized_name.
      *
-     * @param level_serialized_name the new level_serialized_name
+     * @param level the new level
      */
-    public void setLevel(final long level_serialized_name) {
-      this.level_serialized_name = level_serialized_name;
+    public void setLevel(final long level) {
+      this.level_serialized_name = level;
     }
 
     /**
      * Sets the min_size_serialized_name.
      *
-     * @param min_size_serialized_name the new min_size_serialized_name
+     * @param minSize the new minSize
      */
-    public void setMinSize(final long min_size_serialized_name) {
-      this.min_size_serialized_name = min_size_serialized_name;
+    public void setMinSize(final long minSize) {
+      this.min_size_serialized_name = minSize;
     }
 
     /**
      * Sets the max_size_serialized_name.
      *
-     * @param max_size_serialized_name the new max_size_serialized_name
+     * @param maxSize the new maxSize
      */
-    public void setMaxSize(final long max_size_serialized_name) {
-      this.max_size_serialized_name = max_size_serialized_name;
+    public void setMaxSize(final long maxSize) {
+      this.max_size_serialized_name = maxSize;
     }
 
     /**
      * Sets the bold_serialized_name.
      *
-     * @param bold_serialized_name the new bold_serialized_name
+     * @param bold the new bold
      */
-    public void setBold(final Boolean bold_serialized_name) {
-      this.bold_serialized_name = bold_serialized_name;
+    public void setBold(final Boolean bold) {
+      this.bold_serialized_name = bold;
     }
 
     /**
      * Sets the italic_serialized_name.
      *
-     * @param italic_serialized_name the new italic_serialized_name
+     * @param italic the new italic
      */
-    public void setItalic(final Boolean italic_serialized_name) {
-      this.italic_serialized_name = italic_serialized_name;
+    public void setItalic(final Boolean italic) {
+      this.italic_serialized_name = italic;
     }
 
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4720,9 +4720,9 @@ public class IBMDiscoveryV1Models {
     private String environment_id_serialized_name;
     private String collection_id_serialized_name;
 
-    private GetCollectionOptionsBuilder(GetCollectionOptions get_collection_options) {
-      environment_id_serialized_name = get_collection_options.environment_id_serialized_name;
-      collection_id_serialized_name = get_collection_options.collection_id_serialized_name;
+    private GetCollectionOptionsBuilder(GetCollectionOptions getCollectionOptions) {
+      environment_id_serialized_name = getCollectionOptions.environment_id_serialized_name;
+      collection_id_serialized_name = getCollectionOptions.collection_id_serialized_name;
     }
 
     /**
@@ -4734,18 +4734,18 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
      */
-    public GetCollectionOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public GetCollectionOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
     }
 
     /**
      * Builds a GetCollectionOptions.
      *
-     * @return the get_collection_options
+     * @return the getCollectionOptions
      */
     public GetCollectionOptions build() {
       return new GetCollectionOptions(this);
@@ -4754,22 +4754,22 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the GetCollectionOptions builder
      */
-    public GetCollectionOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public GetCollectionOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the GetCollectionOptions builder
      */
-    public GetCollectionOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public GetCollectionOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
   }
@@ -4825,9 +4825,9 @@ public class IBMDiscoveryV1Models {
     private String environment_id_serialized_name;
     private String configuration_id_serialized_name;
 
-    private GetConfigurationOptionsBuilder(GetConfigurationOptions get_configuration_options) {
-      environment_id_serialized_name = get_configuration_options.environment_id_serialized_name;
-      configuration_id_serialized_name = get_configuration_options.configuration_id_serialized_name;
+    private GetConfigurationOptionsBuilder(GetConfigurationOptions getConfigurationOptions) {
+      environment_id_serialized_name = getConfigurationOptions.environment_id_serialized_name;
+      configuration_id_serialized_name = getConfigurationOptions.configuration_id_serialized_name;
     }
 
     /**
@@ -4839,18 +4839,18 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param configuration_id_serialized_name the configuration_id_serialized_name
+     * @param environmentId the environmentId
+     * @param configurationId the configurationId
      */
-    public GetConfigurationOptionsBuilder(String environment_id_serialized_name, String configuration_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.configuration_id_serialized_name = configuration_id_serialized_name;
+    public GetConfigurationOptionsBuilder(String environmentId, String configurationId) {
+      this.environment_id_serialized_name = environmentId;
+      this.configuration_id_serialized_name = configurationId;
     }
 
     /**
      * Builds a GetConfigurationOptions.
      *
-     * @return the get_configuration_options
+     * @return the getConfigurationOptions
      */
     public GetConfigurationOptions build() {
       return new GetConfigurationOptions(this);
@@ -4859,22 +4859,22 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the GetConfigurationOptions builder
      */
-    public GetConfigurationOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public GetConfigurationOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the configuration_id_serialized_name.
      *
-     * @param configuration_id_serialized_name the configuration_id_serialized_name
+     * @param configurationId the configurationId
      * @return the GetConfigurationOptions builder
      */
-    public GetConfigurationOptionsBuilder configurationId(String configuration_id_serialized_name) {
-      this.configuration_id_serialized_name = configuration_id_serialized_name;
+    public GetConfigurationOptionsBuilder configurationId(String configurationId) {
+      this.configuration_id_serialized_name = configurationId;
       return this;
     }
   }
@@ -4944,10 +4944,10 @@ public class IBMDiscoveryV1Models {
     private String collection_id_serialized_name;
     private String document_id_serialized_name;
 
-    private GetDocumentStatusOptionsBuilder(GetDocumentStatusOptions get_document_status_options) {
-      environment_id_serialized_name = get_document_status_options.environment_id_serialized_name;
-      collection_id_serialized_name = get_document_status_options.collection_id_serialized_name;
-      document_id_serialized_name = get_document_status_options.document_id_serialized_name;
+    private GetDocumentStatusOptionsBuilder(GetDocumentStatusOptions getDocumentStatusOptions) {
+      environment_id_serialized_name = getDocumentStatusOptions.environment_id_serialized_name;
+      collection_id_serialized_name = getDocumentStatusOptions.collection_id_serialized_name;
+      document_id_serialized_name = getDocumentStatusOptions.document_id_serialized_name;
     }
 
     /**
@@ -4959,20 +4959,20 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
-     * @param document_id_serialized_name the document_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     * @param documentId the documentId
      */
-    public GetDocumentStatusOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name, String document_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
-      this.document_id_serialized_name = document_id_serialized_name;
+    public GetDocumentStatusOptionsBuilder(String environmentId, String collectionId, String documentId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+      this.document_id_serialized_name = documentId;
     }
 
     /**
      * Builds a GetDocumentStatusOptions.
      *
-     * @return the get_document_status_options
+     * @return the getDocumentStatusOptions
      */
     public GetDocumentStatusOptions build() {
       return new GetDocumentStatusOptions(this);
@@ -4981,33 +4981,33 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the GetDocumentStatusOptions builder
      */
-    public GetDocumentStatusOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public GetDocumentStatusOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the GetDocumentStatusOptions builder
      */
-    public GetDocumentStatusOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public GetDocumentStatusOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
 
     /**
      * Set the document_id_serialized_name.
      *
-     * @param document_id_serialized_name the document_id_serialized_name
+     * @param documentId the documentId
      * @return the GetDocumentStatusOptions builder
      */
-    public GetDocumentStatusOptionsBuilder documentId(String document_id_serialized_name) {
-      this.document_id_serialized_name = document_id_serialized_name;
+    public GetDocumentStatusOptionsBuilder documentId(String documentId) {
+      this.document_id_serialized_name = documentId;
       return this;
     }
   }
@@ -5049,8 +5049,8 @@ public class IBMDiscoveryV1Models {
   public class GetEnvironmentOptionsBuilder {
     private String environment_id_serialized_name;
 
-    private GetEnvironmentOptionsBuilder(GetEnvironmentOptions get_environment_options) {
-      environment_id_serialized_name = get_environment_options.environment_id_serialized_name;
+    private GetEnvironmentOptionsBuilder(GetEnvironmentOptions getEnvironmentOptions) {
+      environment_id_serialized_name = getEnvironmentOptions.environment_id_serialized_name;
     }
 
     /**
@@ -5062,16 +5062,16 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      */
-    public GetEnvironmentOptionsBuilder(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public GetEnvironmentOptionsBuilder(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
     }
 
     /**
      * Builds a GetEnvironmentOptions.
      *
-     * @return the get_environment_options
+     * @return the getEnvironmentOptions
      */
     public GetEnvironmentOptions build() {
       return new GetEnvironmentOptions(this);
@@ -5080,11 +5080,11 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the GetEnvironmentOptions builder
      */
-    public GetEnvironmentOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public GetEnvironmentOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
   }
@@ -5154,10 +5154,10 @@ public class IBMDiscoveryV1Models {
     private String collection_id_serialized_name;
     private String query_id_serialized_name;
 
-    private GetTrainingDataOptionsBuilder(GetTrainingDataOptions get_training_data_options) {
-      environment_id_serialized_name = get_training_data_options.environment_id_serialized_name;
-      collection_id_serialized_name = get_training_data_options.collection_id_serialized_name;
-      query_id_serialized_name = get_training_data_options.query_id_serialized_name;
+    private GetTrainingDataOptionsBuilder(GetTrainingDataOptions getTrainingDataOptions) {
+      environment_id_serialized_name = getTrainingDataOptions.environment_id_serialized_name;
+      collection_id_serialized_name = getTrainingDataOptions.collection_id_serialized_name;
+      query_id_serialized_name = getTrainingDataOptions.query_id_serialized_name;
     }
 
     /**
@@ -5169,20 +5169,20 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
-     * @param query_id_serialized_name the query_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     * @param queryId the queryId
      */
-    public GetTrainingDataOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name, String query_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
-      this.query_id_serialized_name = query_id_serialized_name;
+    public GetTrainingDataOptionsBuilder(String environmentId, String collectionId, String queryId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+      this.query_id_serialized_name = queryId;
     }
 
     /**
      * Builds a GetTrainingDataOptions.
      *
-     * @return the get_training_data_options
+     * @return the getTrainingDataOptions
      */
     public GetTrainingDataOptions build() {
       return new GetTrainingDataOptions(this);
@@ -5191,33 +5191,33 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the GetTrainingDataOptions builder
      */
-    public GetTrainingDataOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public GetTrainingDataOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the GetTrainingDataOptions builder
      */
-    public GetTrainingDataOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public GetTrainingDataOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
 
     /**
      * Set the query_id_serialized_name.
      *
-     * @param query_id_serialized_name the query_id_serialized_name
+     * @param queryId the queryId
      * @return the GetTrainingDataOptions builder
      */
-    public GetTrainingDataOptionsBuilder queryId(String query_id_serialized_name) {
-      this.query_id_serialized_name = query_id_serialized_name;
+    public GetTrainingDataOptionsBuilder queryId(String queryId) {
+      this.query_id_serialized_name = queryId;
       return this;
     }
   }
@@ -5301,11 +5301,11 @@ public class IBMDiscoveryV1Models {
     private String query_id_serialized_name;
     private String example_id_serialized_name;
 
-    private GetTrainingExampleOptionsBuilder(GetTrainingExampleOptions get_training_example_options) {
-      environment_id_serialized_name = get_training_example_options.environment_id_serialized_name;
-      collection_id_serialized_name = get_training_example_options.collection_id_serialized_name;
-      query_id_serialized_name = get_training_example_options.query_id_serialized_name;
-      example_id_serialized_name = get_training_example_options.example_id_serialized_name;
+    private GetTrainingExampleOptionsBuilder(GetTrainingExampleOptions getTrainingExampleOptions) {
+      environment_id_serialized_name = getTrainingExampleOptions.environment_id_serialized_name;
+      collection_id_serialized_name = getTrainingExampleOptions.collection_id_serialized_name;
+      query_id_serialized_name = getTrainingExampleOptions.query_id_serialized_name;
+      example_id_serialized_name = getTrainingExampleOptions.example_id_serialized_name;
     }
 
     /**
@@ -5317,22 +5317,22 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
-     * @param query_id_serialized_name the query_id_serialized_name
-     * @param example_id_serialized_name the example_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     * @param queryId the queryId
+     * @param exampleId the exampleId
      */
-    public GetTrainingExampleOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name, String query_id_serialized_name, String example_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
-      this.query_id_serialized_name = query_id_serialized_name;
-      this.example_id_serialized_name = example_id_serialized_name;
+    public GetTrainingExampleOptionsBuilder(String environmentId, String collectionId, String queryId, String exampleId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+      this.query_id_serialized_name = queryId;
+      this.example_id_serialized_name = exampleId;
     }
 
     /**
      * Builds a GetTrainingExampleOptions.
      *
-     * @return the get_training_example_options
+     * @return the getTrainingExampleOptions
      */
     public GetTrainingExampleOptions build() {
       return new GetTrainingExampleOptions(this);
@@ -5341,44 +5341,44 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the GetTrainingExampleOptions builder
      */
-    public GetTrainingExampleOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public GetTrainingExampleOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the GetTrainingExampleOptions builder
      */
-    public GetTrainingExampleOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public GetTrainingExampleOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
 
     /**
      * Set the query_id_serialized_name.
      *
-     * @param query_id_serialized_name the query_id_serialized_name
+     * @param queryId the queryId
      * @return the GetTrainingExampleOptions builder
      */
-    public GetTrainingExampleOptionsBuilder queryId(String query_id_serialized_name) {
-      this.query_id_serialized_name = query_id_serialized_name;
+    public GetTrainingExampleOptionsBuilder queryId(String queryId) {
+      this.query_id_serialized_name = queryId;
       return this;
     }
 
     /**
      * Set the example_id_serialized_name.
      *
-     * @param example_id_serialized_name the example_id_serialized_name
+     * @param exampleId the exampleId
      * @return the GetTrainingExampleOptions builder
      */
-    public GetTrainingExampleOptionsBuilder exampleId(String example_id_serialized_name) {
-      this.example_id_serialized_name = example_id_serialized_name;
+    public GetTrainingExampleOptionsBuilder exampleId(String exampleId) {
+      this.example_id_serialized_name = exampleId;
       return this;
     }
   }
@@ -5479,55 +5479,55 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the exclude_tags_completely_serialized_name.
      *
-     * @param exclude_tags_completely_serialized_name the new exclude_tags_completely_serialized_name
+     * @param excludeTagsCompletely the new excludeTagsCompletely
      */
-    public void setExcludeTagsCompletely(final List<String> exclude_tags_completely_serialized_name) {
-      this.exclude_tags_completely_serialized_name = exclude_tags_completely_serialized_name;
+    public void setExcludeTagsCompletely(final List<String> excludeTagsCompletely) {
+      this.exclude_tags_completely_serialized_name = excludeTagsCompletely;
     }
 
     /**
      * Sets the exclude_tags_keep_content_serialized_name.
      *
-     * @param exclude_tags_keep_content_serialized_name the new exclude_tags_keep_content_serialized_name
+     * @param excludeTagsKeepContent the new excludeTagsKeepContent
      */
-    public void setExcludeTagsKeepContent(final List<String> exclude_tags_keep_content_serialized_name) {
-      this.exclude_tags_keep_content_serialized_name = exclude_tags_keep_content_serialized_name;
+    public void setExcludeTagsKeepContent(final List<String> excludeTagsKeepContent) {
+      this.exclude_tags_keep_content_serialized_name = excludeTagsKeepContent;
     }
 
     /**
      * Sets the keep_content_serialized_name.
      *
-     * @param keep_content_serialized_name the new keep_content_serialized_name
+     * @param keepContent the new keepContent
      */
-    public void setKeepContent(final XPathPatterns keep_content_serialized_name) {
-      this.keep_content_serialized_name = keep_content_serialized_name;
+    public void setKeepContent(final XPathPatterns keepContent) {
+      this.keep_content_serialized_name = keepContent;
     }
 
     /**
      * Sets the exclude_content_serialized_name.
      *
-     * @param exclude_content_serialized_name the new exclude_content_serialized_name
+     * @param excludeContent the new excludeContent
      */
-    public void setExcludeContent(final XPathPatterns exclude_content_serialized_name) {
-      this.exclude_content_serialized_name = exclude_content_serialized_name;
+    public void setExcludeContent(final XPathPatterns excludeContent) {
+      this.exclude_content_serialized_name = excludeContent;
     }
 
     /**
      * Sets the keep_tag_attributes_serialized_name.
      *
-     * @param keep_tag_attributes_serialized_name the new keep_tag_attributes_serialized_name
+     * @param keepTagAttributes the new keepTagAttributes
      */
-    public void setKeepTagAttributes(final List<String> keep_tag_attributes_serialized_name) {
-      this.keep_tag_attributes_serialized_name = keep_tag_attributes_serialized_name;
+    public void setKeepTagAttributes(final List<String> keepTagAttributes) {
+      this.keep_tag_attributes_serialized_name = keepTagAttributes;
     }
 
     /**
      * Sets the exclude_tag_attributes_serialized_name.
      *
-     * @param exclude_tag_attributes_serialized_name the new exclude_tag_attributes_serialized_name
+     * @param excludeTagAttributes the new excludeTagAttributes
      */
-    public void setExcludeTagAttributes(final List<String> exclude_tag_attributes_serialized_name) {
-      this.exclude_tag_attributes_serialized_name = exclude_tag_attributes_serialized_name;
+    public void setExcludeTagAttributes(final List<String> excludeTagAttributes) {
+      this.exclude_tag_attributes_serialized_name = excludeTagAttributes;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5593,28 +5593,28 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the documents_serialized_name.
      *
-     * @param documents_serialized_name the new documents_serialized_name
+     * @param documents the new documents
      */
-    public void setDocuments(final EnvironmentDocuments documents_serialized_name) {
-      this.documents_serialized_name = documents_serialized_name;
+    public void setDocuments(final EnvironmentDocuments documents) {
+      this.documents_serialized_name = documents;
     }
 
     /**
      * Sets the disk_usage_serialized_name.
      *
-     * @param disk_usage_serialized_name the new disk_usage_serialized_name
+     * @param diskUsage the new diskUsage
      */
-    public void setDiskUsage(final DiskUsage disk_usage_serialized_name) {
-      this.disk_usage_serialized_name = disk_usage_serialized_name;
+    public void setDiskUsage(final DiskUsage diskUsage) {
+      this.disk_usage_serialized_name = diskUsage;
     }
 
     /**
      * Sets the memory_usage_serialized_name.
      *
-     * @param memory_usage_serialized_name the new memory_usage_serialized_name
+     * @param memoryUsage the new memoryUsage
      */
-    public void setMemoryUsage(final MemoryUsage memory_usage_serialized_name) {
-      this.memory_usage_serialized_name = memory_usage_serialized_name;
+    public void setMemoryUsage(final MemoryUsage memoryUsage) {
+      this.memory_usage_serialized_name = memoryUsage;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5691,9 +5691,9 @@ public class IBMDiscoveryV1Models {
     private String environment_id_serialized_name;
     private String collection_id_serialized_name;
 
-    private ListCollectionFieldsOptionsBuilder(ListCollectionFieldsOptions list_collection_fields_options) {
-      environment_id_serialized_name = list_collection_fields_options.environment_id_serialized_name;
-      collection_id_serialized_name = list_collection_fields_options.collection_id_serialized_name;
+    private ListCollectionFieldsOptionsBuilder(ListCollectionFieldsOptions listCollectionFieldsOptions) {
+      environment_id_serialized_name = listCollectionFieldsOptions.environment_id_serialized_name;
+      collection_id_serialized_name = listCollectionFieldsOptions.collection_id_serialized_name;
     }
 
     /**
@@ -5705,18 +5705,18 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
      */
-    public ListCollectionFieldsOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public ListCollectionFieldsOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
     }
 
     /**
      * Builds a ListCollectionFieldsOptions.
      *
-     * @return the list_collection_fields_options
+     * @return the listCollectionFieldsOptions
      */
     public ListCollectionFieldsOptions build() {
       return new ListCollectionFieldsOptions(this);
@@ -5725,22 +5725,22 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the ListCollectionFieldsOptions builder
      */
-    public ListCollectionFieldsOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public ListCollectionFieldsOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the ListCollectionFieldsOptions builder
      */
-    public ListCollectionFieldsOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public ListCollectionFieldsOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
   }
@@ -5765,10 +5765,10 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the fields_serialized_name.
      *
-     * @param fields_serialized_name the new fields_serialized_name
+     * @param fields the new fields
      */
-    public void setFields(final List<Field> fields_serialized_name) {
-      this.fields_serialized_name = fields_serialized_name;
+    public void setFields(final List<Field> fields) {
+      this.fields_serialized_name = fields;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5845,9 +5845,9 @@ public class IBMDiscoveryV1Models {
     private String environment_id_serialized_name;
     private String name_serialized_name;
 
-    private ListCollectionsOptionsBuilder(ListCollectionsOptions list_collections_options) {
-      environment_id_serialized_name = list_collections_options.environment_id_serialized_name;
-      name_serialized_name = list_collections_options.name_serialized_name;
+    private ListCollectionsOptionsBuilder(ListCollectionsOptions listCollectionsOptions) {
+      environment_id_serialized_name = listCollectionsOptions.environment_id_serialized_name;
+      name_serialized_name = listCollectionsOptions.name_serialized_name;
     }
 
     /**
@@ -5859,16 +5859,16 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      */
-    public ListCollectionsOptionsBuilder(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public ListCollectionsOptionsBuilder(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
     }
 
     /**
      * Builds a ListCollectionsOptions.
      *
-     * @return the list_collections_options
+     * @return the listCollectionsOptions
      */
     public ListCollectionsOptions build() {
       return new ListCollectionsOptions(this);
@@ -5877,22 +5877,22 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the ListCollectionsOptions builder
      */
-    public ListCollectionsOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public ListCollectionsOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the name_serialized_name.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      * @return the ListCollectionsOptions builder
      */
-    public ListCollectionsOptionsBuilder name(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public ListCollectionsOptionsBuilder name(String name) {
+      this.name_serialized_name = name;
       return this;
     }
   }
@@ -5917,10 +5917,10 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the collections_serialized_name.
      *
-     * @param collections_serialized_name the new collections_serialized_name
+     * @param collections the new collections
      */
-    public void setCollections(final List<Collection> collections_serialized_name) {
-      this.collections_serialized_name = collections_serialized_name;
+    public void setCollections(final List<Collection> collections) {
+      this.collections_serialized_name = collections;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5997,9 +5997,9 @@ public class IBMDiscoveryV1Models {
     private String environment_id_serialized_name;
     private String name_serialized_name;
 
-    private ListConfigurationsOptionsBuilder(ListConfigurationsOptions list_configurations_options) {
-      environment_id_serialized_name = list_configurations_options.environment_id_serialized_name;
-      name_serialized_name = list_configurations_options.name_serialized_name;
+    private ListConfigurationsOptionsBuilder(ListConfigurationsOptions listConfigurationsOptions) {
+      environment_id_serialized_name = listConfigurationsOptions.environment_id_serialized_name;
+      name_serialized_name = listConfigurationsOptions.name_serialized_name;
     }
 
     /**
@@ -6011,16 +6011,16 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      */
-    public ListConfigurationsOptionsBuilder(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public ListConfigurationsOptionsBuilder(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
     }
 
     /**
      * Builds a ListConfigurationsOptions.
      *
-     * @return the list_configurations_options
+     * @return the listConfigurationsOptions
      */
     public ListConfigurationsOptions build() {
       return new ListConfigurationsOptions(this);
@@ -6029,22 +6029,22 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the ListConfigurationsOptions builder
      */
-    public ListConfigurationsOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public ListConfigurationsOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the name_serialized_name.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      * @return the ListConfigurationsOptions builder
      */
-    public ListConfigurationsOptionsBuilder name(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public ListConfigurationsOptionsBuilder name(String name) {
+      this.name_serialized_name = name;
       return this;
     }
   }
@@ -6069,10 +6069,10 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the configurations_serialized_name.
      *
-     * @param configurations_serialized_name the new configurations_serialized_name
+     * @param configurations the new configurations
      */
-    public void setConfigurations(final List<Configuration> configurations_serialized_name) {
-      this.configurations_serialized_name = configurations_serialized_name;
+    public void setConfigurations(final List<Configuration> configurations) {
+      this.configurations_serialized_name = configurations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6135,8 +6135,8 @@ public class IBMDiscoveryV1Models {
   public class ListEnvironmentsOptionsBuilder {
     private String name_serialized_name;
 
-    private ListEnvironmentsOptionsBuilder(ListEnvironmentsOptions list_environments_options) {
-      name_serialized_name = list_environments_options.name_serialized_name;
+    private ListEnvironmentsOptionsBuilder(ListEnvironmentsOptions listEnvironmentsOptions) {
+      name_serialized_name = listEnvironmentsOptions.name_serialized_name;
     }
 
     /**
@@ -6148,7 +6148,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Builds a ListEnvironmentsOptions.
      *
-     * @return the list_environments_options
+     * @return the listEnvironmentsOptions
      */
     public ListEnvironmentsOptions build() {
       return new ListEnvironmentsOptions(this);
@@ -6157,11 +6157,11 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the name_serialized_name.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      * @return the ListEnvironmentsOptions builder
      */
-    public ListEnvironmentsOptionsBuilder name(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public ListEnvironmentsOptionsBuilder name(String name) {
+      this.name_serialized_name = name;
       return this;
     }
   }
@@ -6186,10 +6186,10 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the environments_serialized_name.
      *
-     * @param environments_serialized_name the new environments_serialized_name
+     * @param environments the new environments
      */
-    public void setEnvironments(final List<Environment> environments_serialized_name) {
-      this.environments_serialized_name = environments_serialized_name;
+    public void setEnvironments(final List<Environment> environments) {
+      this.environments_serialized_name = environments;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6267,9 +6267,9 @@ public class IBMDiscoveryV1Models {
     private String environment_id_serialized_name;
     private List<String> collection_ids_serialized_name;
 
-    private ListFieldsOptionsBuilder(ListFieldsOptions list_fields_options) {
-      environment_id_serialized_name = list_fields_options.environment_id_serialized_name;
-      collection_ids_serialized_name = list_fields_options.collection_ids_serialized_name;
+    private ListFieldsOptionsBuilder(ListFieldsOptions listFieldsOptions) {
+      environment_id_serialized_name = listFieldsOptions.environment_id_serialized_name;
+      collection_ids_serialized_name = listFieldsOptions.collection_ids_serialized_name;
     }
 
     /**
@@ -6281,46 +6281,46 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_ids_serialized_name the collection_ids_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionIds the collectionIds
      */
-    public ListFieldsOptionsBuilder(String environment_id_serialized_name, List<String> collection_ids_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_ids_serialized_name = collection_ids_serialized_name;
+    public ListFieldsOptionsBuilder(String environmentId, List<String> collectionIds) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_ids_serialized_name = collectionIds;
     }
 
     /**
      * Builds a ListFieldsOptions.
      *
-     * @return the list_fields_options
+     * @return the listFieldsOptions
      */
     public ListFieldsOptions build() {
       return new ListFieldsOptions(this);
     }
 
     /**
-     * Adds an collection_ids_serialized_name to collection_ids_serialized_name.
+     * Adds an collectionIds to collection_ids_serialized_name.
      *
-     * @param collection_ids_serialized_name the new collection_ids_serialized_name
+     * @param collectionIds the new collectionIds
      * @return the ListFieldsOptions builder
      */
-    public ListFieldsOptionsBuilder addCollectionIds(String collection_ids_serialized_name) {
-      IBMWatsonValidator.notNull(collection_ids_serialized_name, 'collection_ids_serialized_name cannot be null');
+    public ListFieldsOptionsBuilder addCollectionIds(String collectionIds) {
+      IBMWatsonValidator.notNull(collectionIds, 'collectionIds cannot be null');
       if (this.collection_ids_serialized_name == null) {
         this.collection_ids_serialized_name = new List<String>();
       }
-      this.collection_ids_serialized_name.add(collection_ids_serialized_name);
+      this.collection_ids_serialized_name.add(collectionIds);
       return this;
     }
 
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the ListFieldsOptions builder
      */
-    public ListFieldsOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public ListFieldsOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
@@ -6328,11 +6328,11 @@ public class IBMDiscoveryV1Models {
      * Set the collection_ids_serialized_name.
      * Existing collection_ids_serialized_name will be replaced.
      *
-     * @param collection_ids_serialized_name the collection_ids_serialized_name
+     * @param collectionIds the collectionIds
      * @return the ListFieldsOptions builder
      */
-    public ListFieldsOptionsBuilder collectionIds(List<String> collection_ids_serialized_name) {
-      this.collection_ids_serialized_name = collection_ids_serialized_name;
+    public ListFieldsOptionsBuilder collectionIds(List<String> collectionIds) {
+      this.collection_ids_serialized_name = collectionIds;
       return this;
     }
   }
@@ -6388,9 +6388,9 @@ public class IBMDiscoveryV1Models {
     private String environment_id_serialized_name;
     private String collection_id_serialized_name;
 
-    private ListTrainingDataOptionsBuilder(ListTrainingDataOptions list_training_data_options) {
-      environment_id_serialized_name = list_training_data_options.environment_id_serialized_name;
-      collection_id_serialized_name = list_training_data_options.collection_id_serialized_name;
+    private ListTrainingDataOptionsBuilder(ListTrainingDataOptions listTrainingDataOptions) {
+      environment_id_serialized_name = listTrainingDataOptions.environment_id_serialized_name;
+      collection_id_serialized_name = listTrainingDataOptions.collection_id_serialized_name;
     }
 
     /**
@@ -6402,18 +6402,18 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
      */
-    public ListTrainingDataOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public ListTrainingDataOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
     }
 
     /**
      * Builds a ListTrainingDataOptions.
      *
-     * @return the list_training_data_options
+     * @return the listTrainingDataOptions
      */
     public ListTrainingDataOptions build() {
       return new ListTrainingDataOptions(this);
@@ -6422,22 +6422,22 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the ListTrainingDataOptions builder
      */
-    public ListTrainingDataOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public ListTrainingDataOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the ListTrainingDataOptions builder
      */
-    public ListTrainingDataOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public ListTrainingDataOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
   }
@@ -6562,28 +6562,28 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the operation_serialized_name.
      *
-     * @param operation_serialized_name the new operation_serialized_name
+     * @param operation the new operation
      */
-    public void setOperation(final String operation_serialized_name) {
-      this.operation_serialized_name = operation_serialized_name;
+    public void setOperation(final String operation) {
+      this.operation_serialized_name = operation;
     }
 
     /**
      * Sets the source_field_serialized_name.
      *
-     * @param source_field_serialized_name the new source_field_serialized_name
+     * @param sourceField the new sourceField
      */
-    public void setSourceField(final String source_field_serialized_name) {
-      this.source_field_serialized_name = source_field_serialized_name;
+    public void setSourceField(final String sourceField) {
+      this.source_field_serialized_name = sourceField;
     }
 
     /**
      * Sets the destination_field_serialized_name.
      *
-     * @param destination_field_serialized_name the new destination_field_serialized_name
+     * @param destinationField the new destinationField
      */
-    public void setDestinationField(final String destination_field_serialized_name) {
-      this.destination_field_serialized_name = destination_field_serialized_name;
+    public void setDestinationField(final String destinationField) {
+      this.destination_field_serialized_name = destinationField;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6715,10 +6715,10 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the fonts_serialized_name.
      *
-     * @param fonts_serialized_name the new fonts_serialized_name
+     * @param fonts the new fonts
      */
-    public void setFonts(final List<FontSetting> fonts_serialized_name) {
-      this.fonts_serialized_name = fonts_serialized_name;
+    public void setFonts(final List<FontSetting> fonts) {
+      this.fonts_serialized_name = fonts;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6763,10 +6763,10 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the heading_serialized_name.
      *
-     * @param heading_serialized_name the new heading_serialized_name
+     * @param heading the new heading
      */
-    public void setHeading(final PdfHeadingDetection heading_serialized_name) {
-      this.heading_serialized_name = heading_serialized_name;
+    public void setHeading(final PdfHeadingDetection heading) {
+      this.heading_serialized_name = heading;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6862,55 +6862,55 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the type_serialized_name.
      *
-     * @param type_serialized_name the new type_serialized_name
+     * @param typeVar the new typeVar
      */
-    public void setType(final String type_serialized_name) {
-      this.type_serialized_name = type_serialized_name;
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
     }
 
     /**
      * Sets the field_serialized_name.
      *
-     * @param field_serialized_name the new field_serialized_name
+     * @param field the new field
      */
-    public void setField(final String field_serialized_name) {
-      this.field_serialized_name = field_serialized_name;
+    public void setField(final String field) {
+      this.field_serialized_name = field;
     }
 
     /**
      * Sets the results_serialized_name.
      *
-     * @param results_serialized_name the new results_serialized_name
+     * @param results the new results
      */
-    public void setResults(final List<AggregationResult> results_serialized_name) {
-      this.results_serialized_name = results_serialized_name;
+    public void setResults(final List<AggregationResult> results) {
+      this.results_serialized_name = results;
     }
 
     /**
      * Sets the match_serialized_name.
      *
-     * @param match_serialized_name the new match_serialized_name
+     * @param match the new match
      */
-    public void setMatch(final String match_serialized_name) {
-      this.match_serialized_name = match_serialized_name;
+    public void setMatch(final String match) {
+      this.match_serialized_name = match;
     }
 
     /**
      * Sets the matching_results_serialized_name.
      *
-     * @param matching_results_serialized_name the new matching_results_serialized_name
+     * @param matchingResults the new matchingResults
      */
-    public void setMatchingResults(final long matching_results_serialized_name) {
-      this.matching_results_serialized_name = matching_results_serialized_name;
+    public void setMatchingResults(final long matchingResults) {
+      this.matching_results_serialized_name = matchingResults;
     }
 
     /**
      * Sets the aggregations_serialized_name.
      *
-     * @param aggregations_serialized_name the new aggregations_serialized_name
+     * @param aggregations the new aggregations
      */
-    public void setAggregations(final List<QueryAggregation> aggregations_serialized_name) {
-      this.aggregations_serialized_name = aggregations_serialized_name;
+    public void setAggregations(final List<QueryAggregation> aggregations) {
+      this.aggregations_serialized_name = aggregations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7183,23 +7183,23 @@ public class IBMDiscoveryV1Models {
     private Long passages_characters_serialized_name;
     private String deduplicate_field_serialized_name;
 
-    private QueryNoticesOptionsBuilder(QueryNoticesOptions query_notices_options) {
-      environment_id_serialized_name = query_notices_options.environment_id_serialized_name;
-      collection_id_serialized_name = query_notices_options.collection_id_serialized_name;
-      filter_serialized_name = query_notices_options.filter_serialized_name;
-      query_serialized_name = query_notices_options.query_serialized_name;
-      natural_language_query_serialized_name = query_notices_options.natural_language_query_serialized_name;
-      passages_serialized_name = query_notices_options.passages_serialized_name;
-      aggregation_serialized_name = query_notices_options.aggregation_serialized_name;
-      count_serialized_name = query_notices_options.count_serialized_name;
-      return_serialized_name = query_notices_options.return_serialized_name;
-      offset_serialized_name = query_notices_options.offset_serialized_name;
-      sort_serialized_name = query_notices_options.sort_serialized_name;
-      highlight_serialized_name = query_notices_options.highlight_serialized_name;
-      passages_fields_serialized_name = query_notices_options.passages_fields_serialized_name;
-      passages_count_serialized_name = query_notices_options.passages_count_serialized_name;
-      passages_characters_serialized_name = query_notices_options.passages_characters_serialized_name;
-      deduplicate_field_serialized_name = query_notices_options.deduplicate_field_serialized_name;
+    private QueryNoticesOptionsBuilder(QueryNoticesOptions queryNoticesOptions) {
+      environment_id_serialized_name = queryNoticesOptions.environment_id_serialized_name;
+      collection_id_serialized_name = queryNoticesOptions.collection_id_serialized_name;
+      filter_serialized_name = queryNoticesOptions.filter_serialized_name;
+      query_serialized_name = queryNoticesOptions.query_serialized_name;
+      natural_language_query_serialized_name = queryNoticesOptions.natural_language_query_serialized_name;
+      passages_serialized_name = queryNoticesOptions.passages_serialized_name;
+      aggregation_serialized_name = queryNoticesOptions.aggregation_serialized_name;
+      count_serialized_name = queryNoticesOptions.count_serialized_name;
+      return_serialized_name = queryNoticesOptions.return_serialized_name;
+      offset_serialized_name = queryNoticesOptions.offset_serialized_name;
+      sort_serialized_name = queryNoticesOptions.sort_serialized_name;
+      highlight_serialized_name = queryNoticesOptions.highlight_serialized_name;
+      passages_fields_serialized_name = queryNoticesOptions.passages_fields_serialized_name;
+      passages_count_serialized_name = queryNoticesOptions.passages_count_serialized_name;
+      passages_characters_serialized_name = queryNoticesOptions.passages_characters_serialized_name;
+      deduplicate_field_serialized_name = queryNoticesOptions.deduplicate_field_serialized_name;
     }
 
     /**
@@ -7211,153 +7211,153 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
      */
-    public QueryNoticesOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public QueryNoticesOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
     }
 
     /**
      * Builds a QueryNoticesOptions.
      *
-     * @return the query_notices_options
+     * @return the queryNoticesOptions
      */
     public QueryNoticesOptions build() {
       return new QueryNoticesOptions(this);
     }
 
     /**
-     * Adds an return_serialized_name to return_serialized_name.
+     * Adds an returnVar to return_serialized_name.
      *
-     * @param return_serialized_name the new return_serialized_name
+     * @param returnVar the new returnVar
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder addReturn(String return_serialized_name) {
-      IBMWatsonValidator.notNull(return_serialized_name, 'return_serialized_name cannot be null');
+    public QueryNoticesOptionsBuilder addReturn(String returnVar) {
+      IBMWatsonValidator.notNull(returnVar, 'returnVar cannot be null');
       if (this.return_serialized_name == null) {
         this.return_serialized_name = new List<String>();
       }
-      this.return_serialized_name.add(return_serialized_name);
+      this.return_serialized_name.add(returnVar);
       return this;
     }
 
     /**
-     * Adds an sort_serialized_name to sort_serialized_name.
+     * Adds an sortVar to sort_serialized_name.
      *
-     * @param sort_serialized_name the new sort_serialized_name
+     * @param sortVar the new sortVar
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder addSort(String sort_serialized_name) {
-      IBMWatsonValidator.notNull(sort_serialized_name, 'sort_serialized_name cannot be null');
+    public QueryNoticesOptionsBuilder addSort(String sortVar) {
+      IBMWatsonValidator.notNull(sortVar, 'sortVar cannot be null');
       if (this.sort_serialized_name == null) {
         this.sort_serialized_name = new List<String>();
       }
-      this.sort_serialized_name.add(sort_serialized_name);
+      this.sort_serialized_name.add(sortVar);
       return this;
     }
 
     /**
-     * Adds an passages_fields_serialized_name to passages_fields_serialized_name.
+     * Adds an passagesFields to passages_fields_serialized_name.
      *
-     * @param passages_fields_serialized_name the new passages_fields_serialized_name
+     * @param passagesFields the new passagesFields
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder addPassagesFields(String passages_fields_serialized_name) {
-      IBMWatsonValidator.notNull(passages_fields_serialized_name, 'passages_fields_serialized_name cannot be null');
+    public QueryNoticesOptionsBuilder addPassagesFields(String passagesFields) {
+      IBMWatsonValidator.notNull(passagesFields, 'passagesFields cannot be null');
       if (this.passages_fields_serialized_name == null) {
         this.passages_fields_serialized_name = new List<String>();
       }
-      this.passages_fields_serialized_name.add(passages_fields_serialized_name);
+      this.passages_fields_serialized_name.add(passagesFields);
       return this;
     }
 
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public QueryNoticesOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public QueryNoticesOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
 
     /**
      * Set the filter_serialized_name.
      *
-     * @param filter_serialized_name the filter_serialized_name
+     * @param filter the filter
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder filter(String filter_serialized_name) {
-      this.filter_serialized_name = filter_serialized_name;
+    public QueryNoticesOptionsBuilder filter(String filter) {
+      this.filter_serialized_name = filter;
       return this;
     }
 
     /**
      * Set the query_serialized_name.
      *
-     * @param query_serialized_name the query_serialized_name
+     * @param query the query
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder query(String query_serialized_name) {
-      this.query_serialized_name = query_serialized_name;
+    public QueryNoticesOptionsBuilder query(String query) {
+      this.query_serialized_name = query;
       return this;
     }
 
     /**
      * Set the natural_language_query_serialized_name.
      *
-     * @param natural_language_query_serialized_name the natural_language_query_serialized_name
+     * @param naturalLanguageQuery the naturalLanguageQuery
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder naturalLanguageQuery(String natural_language_query_serialized_name) {
-      this.natural_language_query_serialized_name = natural_language_query_serialized_name;
+    public QueryNoticesOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
+      this.natural_language_query_serialized_name = naturalLanguageQuery;
       return this;
     }
 
     /**
      * Set the passages_serialized_name.
      *
-     * @param passages_serialized_name the passages_serialized_name
+     * @param passages the passages
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder passages(Boolean passages_serialized_name) {
-      this.passages_serialized_name = passages_serialized_name;
+    public QueryNoticesOptionsBuilder passages(Boolean passages) {
+      this.passages_serialized_name = passages;
       return this;
     }
 
     /**
      * Set the aggregation_serialized_name.
      *
-     * @param aggregation_serialized_name the aggregation_serialized_name
+     * @param aggregation the aggregation
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder aggregation(String aggregation_serialized_name) {
-      this.aggregation_serialized_name = aggregation_serialized_name;
+    public QueryNoticesOptionsBuilder aggregation(String aggregation) {
+      this.aggregation_serialized_name = aggregation;
       return this;
     }
 
     /**
      * Set the count_serialized_name.
      *
-     * @param count_serialized_name the count_serialized_name
+     * @param count the count
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder count(Long count_serialized_name) {
-      this.count_serialized_name = count_serialized_name;
+    public QueryNoticesOptionsBuilder count(Long count) {
+      this.count_serialized_name = count;
       return this;
     }
 
@@ -7365,22 +7365,22 @@ public class IBMDiscoveryV1Models {
      * Set the return_serialized_name.
      * Existing return_serialized_name will be replaced.
      *
-     * @param return_serialized_name the return_serialized_name
+     * @param returnVar the returnVar
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder returnField(List<String> return_serialized_name) {
-      this.return_serialized_name = return_serialized_name;
+    public QueryNoticesOptionsBuilder returnField(List<String> returnVar) {
+      this.return_serialized_name = returnVar;
       return this;
     }
 
     /**
      * Set the offset_serialized_name.
      *
-     * @param offset_serialized_name the offset_serialized_name
+     * @param offset the offset
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder offset(Long offset_serialized_name) {
-      this.offset_serialized_name = offset_serialized_name;
+    public QueryNoticesOptionsBuilder offset(Long offset) {
+      this.offset_serialized_name = offset;
       return this;
     }
 
@@ -7388,22 +7388,22 @@ public class IBMDiscoveryV1Models {
      * Set the sort_serialized_name.
      * Existing sort_serialized_name will be replaced.
      *
-     * @param sort_serialized_name the sort_serialized_name
+     * @param sortVar the sortVar
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder sortField(List<String> sort_serialized_name) {
-      this.sort_serialized_name = sort_serialized_name;
+    public QueryNoticesOptionsBuilder sortField(List<String> sortVar) {
+      this.sort_serialized_name = sortVar;
       return this;
     }
 
     /**
      * Set the highlight_serialized_name.
      *
-     * @param highlight_serialized_name the highlight_serialized_name
+     * @param highlight the highlight
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder highlight(Boolean highlight_serialized_name) {
-      this.highlight_serialized_name = highlight_serialized_name;
+    public QueryNoticesOptionsBuilder highlight(Boolean highlight) {
+      this.highlight_serialized_name = highlight;
       return this;
     }
 
@@ -7411,44 +7411,44 @@ public class IBMDiscoveryV1Models {
      * Set the passages_fields_serialized_name.
      * Existing passages_fields_serialized_name will be replaced.
      *
-     * @param passages_fields_serialized_name the passages_fields_serialized_name
+     * @param passagesFields the passagesFields
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder passagesFields(List<String> passages_fields_serialized_name) {
-      this.passages_fields_serialized_name = passages_fields_serialized_name;
+    public QueryNoticesOptionsBuilder passagesFields(List<String> passagesFields) {
+      this.passages_fields_serialized_name = passagesFields;
       return this;
     }
 
     /**
      * Set the passages_count_serialized_name.
      *
-     * @param passages_count_serialized_name the passages_count_serialized_name
+     * @param passagesCount the passagesCount
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder passagesCount(Long passages_count_serialized_name) {
-      this.passages_count_serialized_name = passages_count_serialized_name;
+    public QueryNoticesOptionsBuilder passagesCount(Long passagesCount) {
+      this.passages_count_serialized_name = passagesCount;
       return this;
     }
 
     /**
      * Set the passages_characters_serialized_name.
      *
-     * @param passages_characters_serialized_name the passages_characters_serialized_name
+     * @param passagesCharacters the passagesCharacters
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder passagesCharacters(Long passages_characters_serialized_name) {
-      this.passages_characters_serialized_name = passages_characters_serialized_name;
+    public QueryNoticesOptionsBuilder passagesCharacters(Long passagesCharacters) {
+      this.passages_characters_serialized_name = passagesCharacters;
       return this;
     }
 
     /**
      * Set the deduplicate_field_serialized_name.
      *
-     * @param deduplicate_field_serialized_name the deduplicate_field_serialized_name
+     * @param deduplicateField the deduplicateField
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder deduplicateField(String deduplicate_field_serialized_name) {
-      this.deduplicate_field_serialized_name = deduplicate_field_serialized_name;
+    public QueryNoticesOptionsBuilder deduplicateField(String deduplicateField) {
+      this.deduplicate_field_serialized_name = deduplicateField;
       return this;
     }
   }
@@ -7511,46 +7511,46 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the matching_results_serialized_name.
      *
-     * @param matching_results_serialized_name the new matching_results_serialized_name
+     * @param matchingResults the new matchingResults
      */
-    public void setMatchingResults(final long matching_results_serialized_name) {
-      this.matching_results_serialized_name = matching_results_serialized_name;
+    public void setMatchingResults(final long matchingResults) {
+      this.matching_results_serialized_name = matchingResults;
     }
 
     /**
      * Sets the results_serialized_name.
      *
-     * @param results_serialized_name the new results_serialized_name
+     * @param results the new results
      */
-    public void setResults(final List<QueryNoticesResult> results_serialized_name) {
-      this.results_serialized_name = results_serialized_name;
+    public void setResults(final List<QueryNoticesResult> results) {
+      this.results_serialized_name = results;
     }
 
     /**
      * Sets the aggregations_serialized_name.
      *
-     * @param aggregations_serialized_name the new aggregations_serialized_name
+     * @param aggregations the new aggregations
      */
-    public void setAggregations(final List<QueryAggregation> aggregations_serialized_name) {
-      this.aggregations_serialized_name = aggregations_serialized_name;
+    public void setAggregations(final List<QueryAggregation> aggregations) {
+      this.aggregations_serialized_name = aggregations;
     }
 
     /**
      * Sets the passages_serialized_name.
      *
-     * @param passages_serialized_name the new passages_serialized_name
+     * @param passages the new passages
      */
-    public void setPassages(final List<QueryPassages> passages_serialized_name) {
-      this.passages_serialized_name = passages_serialized_name;
+    public void setPassages(final List<QueryPassages> passages) {
+      this.passages_serialized_name = passages;
     }
 
     /**
      * Sets the duplicates_removed_serialized_name.
      *
-     * @param duplicates_removed_serialized_name the new duplicates_removed_serialized_name
+     * @param duplicatesRemoved the new duplicatesRemoved
      */
-    public void setDuplicatesRemoved(final long duplicates_removed_serialized_name) {
-      this.duplicates_removed_serialized_name = duplicates_removed_serialized_name;
+    public void setDuplicatesRemoved(final long duplicatesRemoved) {
+      this.duplicates_removed_serialized_name = duplicatesRemoved;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7968,24 +7968,24 @@ public class IBMDiscoveryV1Models {
     private Boolean deduplicate_serialized_name;
     private String deduplicate_field_serialized_name;
 
-    private QueryOptionsBuilder(QueryOptions query_options) {
-      environment_id_serialized_name = query_options.environment_id_serialized_name;
-      collection_id_serialized_name = query_options.collection_id_serialized_name;
-      filter_serialized_name = query_options.filter_serialized_name;
-      query_serialized_name = query_options.query_serialized_name;
-      natural_language_query_serialized_name = query_options.natural_language_query_serialized_name;
-      passages_serialized_name = query_options.passages_serialized_name;
-      aggregation_serialized_name = query_options.aggregation_serialized_name;
-      count_serialized_name = query_options.count_serialized_name;
-      return_serialized_name = query_options.return_serialized_name;
-      offset_serialized_name = query_options.offset_serialized_name;
-      sort_serialized_name = query_options.sort_serialized_name;
-      highlight_serialized_name = query_options.highlight_serialized_name;
-      passages_fields_serialized_name = query_options.passages_fields_serialized_name;
-      passages_count_serialized_name = query_options.passages_count_serialized_name;
-      passages_characters_serialized_name = query_options.passages_characters_serialized_name;
-      deduplicate_serialized_name = query_options.deduplicate_serialized_name;
-      deduplicate_field_serialized_name = query_options.deduplicate_field_serialized_name;
+    private QueryOptionsBuilder(QueryOptions queryOptions) {
+      environment_id_serialized_name = queryOptions.environment_id_serialized_name;
+      collection_id_serialized_name = queryOptions.collection_id_serialized_name;
+      filter_serialized_name = queryOptions.filter_serialized_name;
+      query_serialized_name = queryOptions.query_serialized_name;
+      natural_language_query_serialized_name = queryOptions.natural_language_query_serialized_name;
+      passages_serialized_name = queryOptions.passages_serialized_name;
+      aggregation_serialized_name = queryOptions.aggregation_serialized_name;
+      count_serialized_name = queryOptions.count_serialized_name;
+      return_serialized_name = queryOptions.return_serialized_name;
+      offset_serialized_name = queryOptions.offset_serialized_name;
+      sort_serialized_name = queryOptions.sort_serialized_name;
+      highlight_serialized_name = queryOptions.highlight_serialized_name;
+      passages_fields_serialized_name = queryOptions.passages_fields_serialized_name;
+      passages_count_serialized_name = queryOptions.passages_count_serialized_name;
+      passages_characters_serialized_name = queryOptions.passages_characters_serialized_name;
+      deduplicate_serialized_name = queryOptions.deduplicate_serialized_name;
+      deduplicate_field_serialized_name = queryOptions.deduplicate_field_serialized_name;
     }
 
     /**
@@ -7997,153 +7997,153 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
      */
-    public QueryOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public QueryOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
     }
 
     /**
      * Builds a QueryOptions.
      *
-     * @return the query_options
+     * @return the queryOptions
      */
     public QueryOptions build() {
       return new QueryOptions(this);
     }
 
     /**
-     * Adds an return_serialized_name to return_serialized_name.
+     * Adds an returnVar to return_serialized_name.
      *
-     * @param return_serialized_name the new return_serialized_name
+     * @param returnVar the new returnVar
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder addReturn(String return_serialized_name) {
-      IBMWatsonValidator.notNull(return_serialized_name, 'return_serialized_name cannot be null');
+    public QueryOptionsBuilder addReturn(String returnVar) {
+      IBMWatsonValidator.notNull(returnVar, 'returnVar cannot be null');
       if (this.return_serialized_name == null) {
         this.return_serialized_name = new List<String>();
       }
-      this.return_serialized_name.add(return_serialized_name);
+      this.return_serialized_name.add(returnVar);
       return this;
     }
 
     /**
-     * Adds an sort_serialized_name to sort_serialized_name.
+     * Adds an sortVar to sort_serialized_name.
      *
-     * @param sort_serialized_name the new sort_serialized_name
+     * @param sortVar the new sortVar
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder addSort(String sort_serialized_name) {
-      IBMWatsonValidator.notNull(sort_serialized_name, 'sort_serialized_name cannot be null');
+    public QueryOptionsBuilder addSort(String sortVar) {
+      IBMWatsonValidator.notNull(sortVar, 'sortVar cannot be null');
       if (this.sort_serialized_name == null) {
         this.sort_serialized_name = new List<String>();
       }
-      this.sort_serialized_name.add(sort_serialized_name);
+      this.sort_serialized_name.add(sortVar);
       return this;
     }
 
     /**
-     * Adds an passages_fields_serialized_name to passages_fields_serialized_name.
+     * Adds an passagesFields to passages_fields_serialized_name.
      *
-     * @param passages_fields_serialized_name the new passages_fields_serialized_name
+     * @param passagesFields the new passagesFields
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder addPassagesFields(String passages_fields_serialized_name) {
-      IBMWatsonValidator.notNull(passages_fields_serialized_name, 'passages_fields_serialized_name cannot be null');
+    public QueryOptionsBuilder addPassagesFields(String passagesFields) {
+      IBMWatsonValidator.notNull(passagesFields, 'passagesFields cannot be null');
       if (this.passages_fields_serialized_name == null) {
         this.passages_fields_serialized_name = new List<String>();
       }
-      this.passages_fields_serialized_name.add(passages_fields_serialized_name);
+      this.passages_fields_serialized_name.add(passagesFields);
       return this;
     }
 
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public QueryOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public QueryOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
 
     /**
      * Set the filter_serialized_name.
      *
-     * @param filter_serialized_name the filter_serialized_name
+     * @param filter the filter
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder filter(String filter_serialized_name) {
-      this.filter_serialized_name = filter_serialized_name;
+    public QueryOptionsBuilder filter(String filter) {
+      this.filter_serialized_name = filter;
       return this;
     }
 
     /**
      * Set the query_serialized_name.
      *
-     * @param query_serialized_name the query_serialized_name
+     * @param query the query
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder query(String query_serialized_name) {
-      this.query_serialized_name = query_serialized_name;
+    public QueryOptionsBuilder query(String query) {
+      this.query_serialized_name = query;
       return this;
     }
 
     /**
      * Set the natural_language_query_serialized_name.
      *
-     * @param natural_language_query_serialized_name the natural_language_query_serialized_name
+     * @param naturalLanguageQuery the naturalLanguageQuery
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder naturalLanguageQuery(String natural_language_query_serialized_name) {
-      this.natural_language_query_serialized_name = natural_language_query_serialized_name;
+    public QueryOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
+      this.natural_language_query_serialized_name = naturalLanguageQuery;
       return this;
     }
 
     /**
      * Set the passages_serialized_name.
      *
-     * @param passages_serialized_name the passages_serialized_name
+     * @param passages the passages
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder passages(Boolean passages_serialized_name) {
-      this.passages_serialized_name = passages_serialized_name;
+    public QueryOptionsBuilder passages(Boolean passages) {
+      this.passages_serialized_name = passages;
       return this;
     }
 
     /**
      * Set the aggregation_serialized_name.
      *
-     * @param aggregation_serialized_name the aggregation_serialized_name
+     * @param aggregation the aggregation
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder aggregation(String aggregation_serialized_name) {
-      this.aggregation_serialized_name = aggregation_serialized_name;
+    public QueryOptionsBuilder aggregation(String aggregation) {
+      this.aggregation_serialized_name = aggregation;
       return this;
     }
 
     /**
      * Set the count_serialized_name.
      *
-     * @param count_serialized_name the count_serialized_name
+     * @param count the count
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder count(Long count_serialized_name) {
-      this.count_serialized_name = count_serialized_name;
+    public QueryOptionsBuilder count(Long count) {
+      this.count_serialized_name = count;
       return this;
     }
 
@@ -8151,22 +8151,22 @@ public class IBMDiscoveryV1Models {
      * Set the return_serialized_name.
      * Existing return_serialized_name will be replaced.
      *
-     * @param return_serialized_name the return_serialized_name
+     * @param returnVar the returnVar
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder returnField(List<String> return_serialized_name) {
-      this.return_serialized_name = return_serialized_name;
+    public QueryOptionsBuilder returnField(List<String> returnVar) {
+      this.return_serialized_name = returnVar;
       return this;
     }
 
     /**
      * Set the offset_serialized_name.
      *
-     * @param offset_serialized_name the offset_serialized_name
+     * @param offset the offset
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder offset(Long offset_serialized_name) {
-      this.offset_serialized_name = offset_serialized_name;
+    public QueryOptionsBuilder offset(Long offset) {
+      this.offset_serialized_name = offset;
       return this;
     }
 
@@ -8174,22 +8174,22 @@ public class IBMDiscoveryV1Models {
      * Set the sort_serialized_name.
      * Existing sort_serialized_name will be replaced.
      *
-     * @param sort_serialized_name the sort_serialized_name
+     * @param sortVar the sortVar
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder sortField(List<String> sort_serialized_name) {
-      this.sort_serialized_name = sort_serialized_name;
+    public QueryOptionsBuilder sortField(List<String> sortVar) {
+      this.sort_serialized_name = sortVar;
       return this;
     }
 
     /**
      * Set the highlight_serialized_name.
      *
-     * @param highlight_serialized_name the highlight_serialized_name
+     * @param highlight the highlight
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder highlight(Boolean highlight_serialized_name) {
-      this.highlight_serialized_name = highlight_serialized_name;
+    public QueryOptionsBuilder highlight(Boolean highlight) {
+      this.highlight_serialized_name = highlight;
       return this;
     }
 
@@ -8197,55 +8197,55 @@ public class IBMDiscoveryV1Models {
      * Set the passages_fields_serialized_name.
      * Existing passages_fields_serialized_name will be replaced.
      *
-     * @param passages_fields_serialized_name the passages_fields_serialized_name
+     * @param passagesFields the passagesFields
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder passagesFields(List<String> passages_fields_serialized_name) {
-      this.passages_fields_serialized_name = passages_fields_serialized_name;
+    public QueryOptionsBuilder passagesFields(List<String> passagesFields) {
+      this.passages_fields_serialized_name = passagesFields;
       return this;
     }
 
     /**
      * Set the passages_count_serialized_name.
      *
-     * @param passages_count_serialized_name the passages_count_serialized_name
+     * @param passagesCount the passagesCount
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder passagesCount(Long passages_count_serialized_name) {
-      this.passages_count_serialized_name = passages_count_serialized_name;
+    public QueryOptionsBuilder passagesCount(Long passagesCount) {
+      this.passages_count_serialized_name = passagesCount;
       return this;
     }
 
     /**
      * Set the passages_characters_serialized_name.
      *
-     * @param passages_characters_serialized_name the passages_characters_serialized_name
+     * @param passagesCharacters the passagesCharacters
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder passagesCharacters(Long passages_characters_serialized_name) {
-      this.passages_characters_serialized_name = passages_characters_serialized_name;
+    public QueryOptionsBuilder passagesCharacters(Long passagesCharacters) {
+      this.passages_characters_serialized_name = passagesCharacters;
       return this;
     }
 
     /**
      * Set the deduplicate_serialized_name.
      *
-     * @param deduplicate_serialized_name the deduplicate_serialized_name
+     * @param deduplicate the deduplicate
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder deduplicate(Boolean deduplicate_serialized_name) {
-      this.deduplicate_serialized_name = deduplicate_serialized_name;
+    public QueryOptionsBuilder deduplicate(Boolean deduplicate) {
+      this.deduplicate_serialized_name = deduplicate;
       return this;
     }
 
     /**
      * Set the deduplicate_field_serialized_name.
      *
-     * @param deduplicate_field_serialized_name the deduplicate_field_serialized_name
+     * @param deduplicateField the deduplicateField
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder deduplicateField(String deduplicate_field_serialized_name) {
-      this.deduplicate_field_serialized_name = deduplicate_field_serialized_name;
+    public QueryOptionsBuilder deduplicateField(String deduplicateField) {
+      this.deduplicate_field_serialized_name = deduplicateField;
       return this;
     }
   }
@@ -8330,55 +8330,55 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the document_id_serialized_name.
      *
-     * @param document_id_serialized_name the new document_id_serialized_name
+     * @param documentId the new documentId
      */
-    public void setDocumentId(final String document_id_serialized_name) {
-      this.document_id_serialized_name = document_id_serialized_name;
+    public void setDocumentId(final String documentId) {
+      this.document_id_serialized_name = documentId;
     }
 
     /**
      * Sets the passage_score_serialized_name.
      *
-     * @param passage_score_serialized_name the new passage_score_serialized_name
+     * @param passageScore the new passageScore
      */
-    public void setPassageScore(final Double passage_score_serialized_name) {
-      this.passage_score_serialized_name = passage_score_serialized_name;
+    public void setPassageScore(final Double passageScore) {
+      this.passage_score_serialized_name = passageScore;
     }
 
     /**
      * Sets the passage_text_serialized_name.
      *
-     * @param passage_text_serialized_name the new passage_text_serialized_name
+     * @param passageText the new passageText
      */
-    public void setPassageText(final String passage_text_serialized_name) {
-      this.passage_text_serialized_name = passage_text_serialized_name;
+    public void setPassageText(final String passageText) {
+      this.passage_text_serialized_name = passageText;
     }
 
     /**
      * Sets the start_offset_serialized_name.
      *
-     * @param start_offset_serialized_name the new start_offset_serialized_name
+     * @param startOffset the new startOffset
      */
-    public void setStartOffset(final Double start_offset_serialized_name) {
-      this.start_offset_serialized_name = start_offset_serialized_name;
+    public void setStartOffset(final Double startOffset) {
+      this.start_offset_serialized_name = startOffset;
     }
 
     /**
      * Sets the end_offset_serialized_name.
      *
-     * @param end_offset_serialized_name the new end_offset_serialized_name
+     * @param endOffset the new endOffset
      */
-    public void setEndOffset(final Double end_offset_serialized_name) {
-      this.end_offset_serialized_name = end_offset_serialized_name;
+    public void setEndOffset(final Double endOffset) {
+      this.end_offset_serialized_name = endOffset;
     }
 
     /**
      * Sets the field_serialized_name.
      *
-     * @param field_serialized_name the new field_serialized_name
+     * @param field the new field
      */
-    public void setField(final String field_serialized_name) {
-      this.field_serialized_name = field_serialized_name;
+    public void setField(final String field) {
+      this.field_serialized_name = field;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8450,46 +8450,46 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the matching_results_serialized_name.
      *
-     * @param matching_results_serialized_name the new matching_results_serialized_name
+     * @param matchingResults the new matchingResults
      */
-    public void setMatchingResults(final long matching_results_serialized_name) {
-      this.matching_results_serialized_name = matching_results_serialized_name;
+    public void setMatchingResults(final long matchingResults) {
+      this.matching_results_serialized_name = matchingResults;
     }
 
     /**
      * Sets the results_serialized_name.
      *
-     * @param results_serialized_name the new results_serialized_name
+     * @param results the new results
      */
-    public void setResults(final List<QueryResult> results_serialized_name) {
-      this.results_serialized_name = results_serialized_name;
+    public void setResults(final List<QueryResult> results) {
+      this.results_serialized_name = results;
     }
 
     /**
      * Sets the aggregations_serialized_name.
      *
-     * @param aggregations_serialized_name the new aggregations_serialized_name
+     * @param aggregations the new aggregations
      */
-    public void setAggregations(final List<QueryAggregation> aggregations_serialized_name) {
-      this.aggregations_serialized_name = aggregations_serialized_name;
+    public void setAggregations(final List<QueryAggregation> aggregations) {
+      this.aggregations_serialized_name = aggregations;
     }
 
     /**
      * Sets the passages_serialized_name.
      *
-     * @param passages_serialized_name the new passages_serialized_name
+     * @param passages the new passages
      */
-    public void setPassages(final List<QueryPassages> passages_serialized_name) {
-      this.passages_serialized_name = passages_serialized_name;
+    public void setPassages(final List<QueryPassages> passages) {
+      this.passages_serialized_name = passages;
     }
 
     /**
      * Sets the duplicates_removed_serialized_name.
      *
-     * @param duplicates_removed_serialized_name the new duplicates_removed_serialized_name
+     * @param duplicatesRemoved the new duplicatesRemoved
      */
-    public void setDuplicatesRemoved(final long duplicates_removed_serialized_name) {
-      this.duplicates_removed_serialized_name = duplicates_removed_serialized_name;
+    public void setDuplicatesRemoved(final long duplicatesRemoved) {
+      this.duplicates_removed_serialized_name = duplicatesRemoved;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8815,15 +8815,15 @@ public class IBMDiscoveryV1Models {
     private String metadata_serialized_name;
     private String file_content_type_serialized_name;
 
-    private TestConfigurationInEnvironmentOptionsBuilder(TestConfigurationInEnvironmentOptions test_configuration_in_environment_options) {
-      environment_id_serialized_name = test_configuration_in_environment_options.environment_id_serialized_name;
-      configuration_serialized_name = test_configuration_in_environment_options.configuration_serialized_name;
-      step_serialized_name = test_configuration_in_environment_options.step_serialized_name;
-      configuration_id_serialized_name = test_configuration_in_environment_options.configuration_id_serialized_name;
-      file_serialized_name = test_configuration_in_environment_options.file_serialized_name;
-      filename_serialized_name = test_configuration_in_environment_options.filename_serialized_name;
-      metadata_serialized_name = test_configuration_in_environment_options.metadata_serialized_name;
-      file_content_type_serialized_name = test_configuration_in_environment_options.file_content_type_serialized_name;
+    private TestConfigurationInEnvironmentOptionsBuilder(TestConfigurationInEnvironmentOptions testConfigurationInEnvironmentOptions) {
+      environment_id_serialized_name = testConfigurationInEnvironmentOptions.environment_id_serialized_name;
+      configuration_serialized_name = testConfigurationInEnvironmentOptions.configuration_serialized_name;
+      step_serialized_name = testConfigurationInEnvironmentOptions.step_serialized_name;
+      configuration_id_serialized_name = testConfigurationInEnvironmentOptions.configuration_id_serialized_name;
+      file_serialized_name = testConfigurationInEnvironmentOptions.file_serialized_name;
+      filename_serialized_name = testConfigurationInEnvironmentOptions.filename_serialized_name;
+      metadata_serialized_name = testConfigurationInEnvironmentOptions.metadata_serialized_name;
+      file_content_type_serialized_name = testConfigurationInEnvironmentOptions.file_content_type_serialized_name;
     }
 
     /**
@@ -8835,16 +8835,16 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      */
-    public TestConfigurationInEnvironmentOptionsBuilder(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public TestConfigurationInEnvironmentOptionsBuilder(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
     }
 
     /**
      * Builds a TestConfigurationInEnvironmentOptions.
      *
-     * @return the test_configuration_in_environment_options
+     * @return the testConfigurationInEnvironmentOptions
      */
     public TestConfigurationInEnvironmentOptions build() {
       return new TestConfigurationInEnvironmentOptions(this);
@@ -8853,88 +8853,88 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the TestConfigurationInEnvironmentOptions builder
      */
-    public TestConfigurationInEnvironmentOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public TestConfigurationInEnvironmentOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the configuration_serialized_name.
      *
-     * @param configuration_serialized_name the configuration_serialized_name
+     * @param configuration the configuration
      * @return the TestConfigurationInEnvironmentOptions builder
      */
-    public TestConfigurationInEnvironmentOptionsBuilder configuration(String configuration_serialized_name) {
-      this.configuration_serialized_name = configuration_serialized_name;
+    public TestConfigurationInEnvironmentOptionsBuilder configuration(String configuration) {
+      this.configuration_serialized_name = configuration;
       return this;
     }
 
     /**
      * Set the step_serialized_name.
      *
-     * @param step_serialized_name the step_serialized_name
+     * @param step the step
      * @return the TestConfigurationInEnvironmentOptions builder
      */
-    public TestConfigurationInEnvironmentOptionsBuilder step(String step_serialized_name) {
-      this.step_serialized_name = step_serialized_name;
+    public TestConfigurationInEnvironmentOptionsBuilder step(String step) {
+      this.step_serialized_name = step;
       return this;
     }
 
     /**
      * Set the configuration_id_serialized_name.
      *
-     * @param configuration_id_serialized_name the configuration_id_serialized_name
+     * @param configurationId the configurationId
      * @return the TestConfigurationInEnvironmentOptions builder
      */
-    public TestConfigurationInEnvironmentOptionsBuilder configurationId(String configuration_id_serialized_name) {
-      this.configuration_id_serialized_name = configuration_id_serialized_name;
+    public TestConfigurationInEnvironmentOptionsBuilder configurationId(String configurationId) {
+      this.configuration_id_serialized_name = configurationId;
       return this;
     }
 
     /**
      * Set the file_serialized_name.
      *
-     * @param file_serialized_name the file_serialized_name
+     * @param file the file
      * @return the TestConfigurationInEnvironmentOptions builder
      */
-    public TestConfigurationInEnvironmentOptionsBuilder file(IBMWatsonFile file_serialized_name) {
-      this.file_serialized_name = file_serialized_name;
+    public TestConfigurationInEnvironmentOptionsBuilder file(IBMWatsonFile file) {
+      this.file_serialized_name = file;
       return this;
     }
 
     /**
      * Set the filename_serialized_name.
      *
-     * @param filename_serialized_name the filename_serialized_name
+     * @param filename the filename
      * @return the TestConfigurationInEnvironmentOptions builder
      */
-    public TestConfigurationInEnvironmentOptionsBuilder filename(String filename_serialized_name) {
-      this.filename_serialized_name = filename_serialized_name;
+    public TestConfigurationInEnvironmentOptionsBuilder filename(String filename) {
+      this.filename_serialized_name = filename;
       return this;
     }
 
     /**
      * Set the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the metadata_serialized_name
+     * @param metadata the metadata
      * @return the TestConfigurationInEnvironmentOptions builder
      */
-    public TestConfigurationInEnvironmentOptionsBuilder metadata(String metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public TestConfigurationInEnvironmentOptionsBuilder metadata(String metadata) {
+      this.metadata_serialized_name = metadata;
       return this;
     }
 
     /**
      * Set the file_content_type_serialized_name.
      *
-     * @param file_content_type_serialized_name the file_content_type_serialized_name
+     * @param fileContentType the fileContentType
      * @return the TestConfigurationInEnvironmentOptions builder
      */
-    public TestConfigurationInEnvironmentOptionsBuilder fileContentType(String file_content_type_serialized_name) {
-      this.file_content_type_serialized_name = file_content_type_serialized_name;
+    public TestConfigurationInEnvironmentOptionsBuilder fileContentType(String fileContentType) {
+      this.file_content_type_serialized_name = fileContentType;
       return this;
     }
   }
@@ -9019,19 +9019,19 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the snapshots_serialized_name.
      *
-     * @param snapshots_serialized_name the new snapshots_serialized_name
+     * @param snapshots the new snapshots
      */
-    public void setSnapshots(final List<DocumentSnapshot> snapshots_serialized_name) {
-      this.snapshots_serialized_name = snapshots_serialized_name;
+    public void setSnapshots(final List<DocumentSnapshot> snapshots) {
+      this.snapshots_serialized_name = snapshots;
     }
 
     /**
      * Sets the notices_serialized_name.
      *
-     * @param notices_serialized_name the new notices_serialized_name
+     * @param notices the new notices
      */
-    public void setNotices(final List<Notice> notices_serialized_name) {
-      this.notices_serialized_name = notices_serialized_name;
+    public void setNotices(final List<Notice> notices) {
+      this.notices_serialized_name = notices;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9109,28 +9109,28 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the new environment_id_serialized_name
+     * @param environmentId the new environmentId
      */
-    public void setEnvironmentId(final String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public void setEnvironmentId(final String environmentId) {
+      this.environment_id_serialized_name = environmentId;
     }
 
     /**
      * Sets the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the new collection_id_serialized_name
+     * @param collectionId the new collectionId
      */
-    public void setCollectionId(final String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public void setCollectionId(final String collectionId) {
+      this.collection_id_serialized_name = collectionId;
     }
 
     /**
      * Sets the queries_serialized_name.
      *
-     * @param queries_serialized_name the new queries_serialized_name
+     * @param queries the new queries
      */
-    public void setQueries(final List<TrainingQuery> queries_serialized_name) {
-      this.queries_serialized_name = queries_serialized_name;
+    public void setQueries(final List<TrainingQuery> queries) {
+      this.queries_serialized_name = queries;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9195,28 +9195,28 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the document_id_serialized_name.
      *
-     * @param document_id_serialized_name the new document_id_serialized_name
+     * @param documentId the new documentId
      */
-    public void setDocumentId(final String document_id_serialized_name) {
-      this.document_id_serialized_name = document_id_serialized_name;
+    public void setDocumentId(final String documentId) {
+      this.document_id_serialized_name = documentId;
     }
 
     /**
      * Sets the cross_reference_serialized_name.
      *
-     * @param cross_reference_serialized_name the new cross_reference_serialized_name
+     * @param crossReference the new crossReference
      */
-    public void setCrossReference(final String cross_reference_serialized_name) {
-      this.cross_reference_serialized_name = cross_reference_serialized_name;
+    public void setCrossReference(final String crossReference) {
+      this.cross_reference_serialized_name = crossReference;
     }
 
     /**
      * Sets the relevance_serialized_name.
      *
-     * @param relevance_serialized_name the new relevance_serialized_name
+     * @param relevance the new relevance
      */
-    public void setRelevance(final long relevance_serialized_name) {
-      this.relevance_serialized_name = relevance_serialized_name;
+    public void setRelevance(final long relevance) {
+      this.relevance_serialized_name = relevance;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9278,37 +9278,37 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the query_id_serialized_name.
      *
-     * @param query_id_serialized_name the new query_id_serialized_name
+     * @param queryId the new queryId
      */
-    public void setQueryId(final String query_id_serialized_name) {
-      this.query_id_serialized_name = query_id_serialized_name;
+    public void setQueryId(final String queryId) {
+      this.query_id_serialized_name = queryId;
     }
 
     /**
      * Sets the natural_language_query_serialized_name.
      *
-     * @param natural_language_query_serialized_name the new natural_language_query_serialized_name
+     * @param naturalLanguageQuery the new naturalLanguageQuery
      */
-    public void setNaturalLanguageQuery(final String natural_language_query_serialized_name) {
-      this.natural_language_query_serialized_name = natural_language_query_serialized_name;
+    public void setNaturalLanguageQuery(final String naturalLanguageQuery) {
+      this.natural_language_query_serialized_name = naturalLanguageQuery;
     }
 
     /**
      * Sets the filter_serialized_name.
      *
-     * @param filter_serialized_name the new filter_serialized_name
+     * @param filter the new filter
      */
-    public void setFilter(final String filter_serialized_name) {
-      this.filter_serialized_name = filter_serialized_name;
+    public void setFilter(final String filter) {
+      this.filter_serialized_name = filter;
     }
 
     /**
      * Sets the examples_serialized_name.
      *
-     * @param examples_serialized_name the new examples_serialized_name
+     * @param examples the new examples
      */
-    public void setExamples(final List<TrainingExample> examples_serialized_name) {
-      this.examples_serialized_name = examples_serialized_name;
+    public void setExamples(final List<TrainingExample> examples) {
+      this.examples_serialized_name = examples;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9433,82 +9433,82 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the total_examples_serialized_name.
      *
-     * @param total_examples_serialized_name the new total_examples_serialized_name
+     * @param totalExamples the new totalExamples
      */
-    public void setTotalExamples(final long total_examples_serialized_name) {
-      this.total_examples_serialized_name = total_examples_serialized_name;
+    public void setTotalExamples(final long totalExamples) {
+      this.total_examples_serialized_name = totalExamples;
     }
 
     /**
      * Sets the available_serialized_name.
      *
-     * @param available_serialized_name the new available_serialized_name
+     * @param available the new available
      */
-    public void setAvailable(final Boolean available_serialized_name) {
-      this.available_serialized_name = available_serialized_name;
+    public void setAvailable(final Boolean available) {
+      this.available_serialized_name = available;
     }
 
     /**
      * Sets the processing_serialized_name.
      *
-     * @param processing_serialized_name the new processing_serialized_name
+     * @param processing the new processing
      */
-    public void setProcessing(final Boolean processing_serialized_name) {
-      this.processing_serialized_name = processing_serialized_name;
+    public void setProcessing(final Boolean processing) {
+      this.processing_serialized_name = processing;
     }
 
     /**
      * Sets the minimum_queries_added_serialized_name.
      *
-     * @param minimum_queries_added_serialized_name the new minimum_queries_added_serialized_name
+     * @param minimumQueriesAdded the new minimumQueriesAdded
      */
-    public void setMinimumQueriesAdded(final Boolean minimum_queries_added_serialized_name) {
-      this.minimum_queries_added_serialized_name = minimum_queries_added_serialized_name;
+    public void setMinimumQueriesAdded(final Boolean minimumQueriesAdded) {
+      this.minimum_queries_added_serialized_name = minimumQueriesAdded;
     }
 
     /**
      * Sets the minimum_examples_added_serialized_name.
      *
-     * @param minimum_examples_added_serialized_name the new minimum_examples_added_serialized_name
+     * @param minimumExamplesAdded the new minimumExamplesAdded
      */
-    public void setMinimumExamplesAdded(final Boolean minimum_examples_added_serialized_name) {
-      this.minimum_examples_added_serialized_name = minimum_examples_added_serialized_name;
+    public void setMinimumExamplesAdded(final Boolean minimumExamplesAdded) {
+      this.minimum_examples_added_serialized_name = minimumExamplesAdded;
     }
 
     /**
      * Sets the sufficient_label_diversity_serialized_name.
      *
-     * @param sufficient_label_diversity_serialized_name the new sufficient_label_diversity_serialized_name
+     * @param sufficientLabelDiversity the new sufficientLabelDiversity
      */
-    public void setSufficientLabelDiversity(final Boolean sufficient_label_diversity_serialized_name) {
-      this.sufficient_label_diversity_serialized_name = sufficient_label_diversity_serialized_name;
+    public void setSufficientLabelDiversity(final Boolean sufficientLabelDiversity) {
+      this.sufficient_label_diversity_serialized_name = sufficientLabelDiversity;
     }
 
     /**
      * Sets the notices_serialized_name.
      *
-     * @param notices_serialized_name the new notices_serialized_name
+     * @param notices the new notices
      */
-    public void setNotices(final long notices_serialized_name) {
-      this.notices_serialized_name = notices_serialized_name;
+    public void setNotices(final long notices) {
+      this.notices_serialized_name = notices;
     }
 
     /**
      * Sets the successfully_trained_serialized_name.
      *
-     * @param successfully_trained_serialized_name the new successfully_trained_serialized_name
+     * @param successfullyTrained the new successfullyTrained
      */
-    public void setSuccessfullyTrained(final Datetime successfully_trained_serialized_name) {
-      this.successfully_trained_serialized_name = successfully_trained_serialized_name;
+    public void setSuccessfullyTrained(final Datetime successfullyTrained) {
+      this.successfully_trained_serialized_name = successfullyTrained;
     }
 
     /**
      * Sets the data_updated_serialized_name.
      *
-     * @param data_updated_serialized_name the new data_updated_serialized_name
+     * @param dataUpdated the new dataUpdated
      */
-    public void setDataUpdated(final Datetime data_updated_serialized_name) {
-      this.data_updated_serialized_name = data_updated_serialized_name;
+    public void setDataUpdated(final Datetime dataUpdated) {
+      this.data_updated_serialized_name = dataUpdated;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9612,12 +9612,12 @@ public class IBMDiscoveryV1Models {
     private String description_serialized_name;
     private String configuration_id_serialized_name;
 
-    private UpdateCollectionOptionsBuilder(UpdateCollectionOptions update_collection_options) {
-      environment_id_serialized_name = update_collection_options.environment_id_serialized_name;
-      collection_id_serialized_name = update_collection_options.collection_id_serialized_name;
-      name_serialized_name = update_collection_options.name_serialized_name;
-      description_serialized_name = update_collection_options.description_serialized_name;
-      configuration_id_serialized_name = update_collection_options.configuration_id_serialized_name;
+    private UpdateCollectionOptionsBuilder(UpdateCollectionOptions updateCollectionOptions) {
+      environment_id_serialized_name = updateCollectionOptions.environment_id_serialized_name;
+      collection_id_serialized_name = updateCollectionOptions.collection_id_serialized_name;
+      name_serialized_name = updateCollectionOptions.name_serialized_name;
+      description_serialized_name = updateCollectionOptions.description_serialized_name;
+      configuration_id_serialized_name = updateCollectionOptions.configuration_id_serialized_name;
     }
 
     /**
@@ -9629,18 +9629,18 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
      */
-    public UpdateCollectionOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public UpdateCollectionOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
     }
 
     /**
      * Builds a UpdateCollectionOptions.
      *
-     * @return the update_collection_options
+     * @return the updateCollectionOptions
      */
     public UpdateCollectionOptions build() {
       return new UpdateCollectionOptions(this);
@@ -9649,55 +9649,55 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the UpdateCollectionOptions builder
      */
-    public UpdateCollectionOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public UpdateCollectionOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the UpdateCollectionOptions builder
      */
-    public UpdateCollectionOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public UpdateCollectionOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
 
     /**
      * Set the name_serialized_name.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      * @return the UpdateCollectionOptions builder
      */
-    public UpdateCollectionOptionsBuilder name(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public UpdateCollectionOptionsBuilder name(String name) {
+      this.name_serialized_name = name;
       return this;
     }
 
     /**
      * Set the description_serialized_name.
      *
-     * @param description_serialized_name the description_serialized_name
+     * @param description the description
      * @return the UpdateCollectionOptions builder
      */
-    public UpdateCollectionOptionsBuilder description(String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public UpdateCollectionOptionsBuilder description(String description) {
+      this.description_serialized_name = description;
       return this;
     }
 
     /**
      * Set the configuration_id_serialized_name.
      *
-     * @param configuration_id_serialized_name the configuration_id_serialized_name
+     * @param configurationId the configurationId
      * @return the UpdateCollectionOptions builder
      */
-    public UpdateCollectionOptionsBuilder configurationId(String configuration_id_serialized_name) {
-      this.configuration_id_serialized_name = configuration_id_serialized_name;
+    public UpdateCollectionOptionsBuilder configurationId(String configurationId) {
+      this.configuration_id_serialized_name = configurationId;
       return this;
     }
   }
@@ -9818,14 +9818,14 @@ public class IBMDiscoveryV1Models {
     private List<Enrichment> enrichments_serialized_name;
     private List<NormalizationOperation> normalizations_serialized_name;
 
-    private UpdateConfigurationOptionsBuilder(UpdateConfigurationOptions update_configuration_options) {
-      environment_id_serialized_name = update_configuration_options.environment_id_serialized_name;
-      configuration_id_serialized_name = update_configuration_options.configuration_id_serialized_name;
-      name_serialized_name = update_configuration_options.name_serialized_name;
-      description_serialized_name = update_configuration_options.description_serialized_name;
-      conversions_serialized_name = update_configuration_options.conversions_serialized_name;
-      enrichments_serialized_name = update_configuration_options.enrichments_serialized_name;
-      normalizations_serialized_name = update_configuration_options.normalizations_serialized_name;
+    private UpdateConfigurationOptionsBuilder(UpdateConfigurationOptions updateConfigurationOptions) {
+      environment_id_serialized_name = updateConfigurationOptions.environment_id_serialized_name;
+      configuration_id_serialized_name = updateConfigurationOptions.configuration_id_serialized_name;
+      name_serialized_name = updateConfigurationOptions.name_serialized_name;
+      description_serialized_name = updateConfigurationOptions.description_serialized_name;
+      conversions_serialized_name = updateConfigurationOptions.conversions_serialized_name;
+      enrichments_serialized_name = updateConfigurationOptions.enrichments_serialized_name;
+      normalizations_serialized_name = updateConfigurationOptions.normalizations_serialized_name;
     }
 
     /**
@@ -9837,105 +9837,105 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param configuration_id_serialized_name the configuration_id_serialized_name
+     * @param environmentId the environmentId
+     * @param configurationId the configurationId
      */
-    public UpdateConfigurationOptionsBuilder(String environment_id_serialized_name, String configuration_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.configuration_id_serialized_name = configuration_id_serialized_name;
+    public UpdateConfigurationOptionsBuilder(String environmentId, String configurationId) {
+      this.environment_id_serialized_name = environmentId;
+      this.configuration_id_serialized_name = configurationId;
     }
 
     /**
      * Builds a UpdateConfigurationOptions.
      *
-     * @return the update_configuration_options
+     * @return the updateConfigurationOptions
      */
     public UpdateConfigurationOptions build() {
       return new UpdateConfigurationOptions(this);
     }
 
     /**
-     * Adds an enrichments_serialized_name to enrichments_serialized_name.
+     * Adds an enrichments to enrichments_serialized_name.
      *
-     * @param enrichments_serialized_name the new enrichments_serialized_name
+     * @param enrichments the new enrichments
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder addEnrichments(Enrichment enrichments_serialized_name) {
-      IBMWatsonValidator.notNull(enrichments_serialized_name, 'enrichments_serialized_name cannot be null');
+    public UpdateConfigurationOptionsBuilder addEnrichments(Enrichment enrichments) {
+      IBMWatsonValidator.notNull(enrichments, 'enrichments cannot be null');
       if (this.enrichments_serialized_name == null) {
         this.enrichments_serialized_name = new List<Enrichment>();
       }
-      this.enrichments_serialized_name.add(enrichments_serialized_name);
+      this.enrichments_serialized_name.add(enrichments);
       return this;
     }
 
     /**
-     * Adds an normalizations_serialized_name to normalizations_serialized_name.
+     * Adds an normalizations to normalizations_serialized_name.
      *
-     * @param normalizations_serialized_name the new normalizations_serialized_name
+     * @param normalizations the new normalizations
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder addNormalizations(NormalizationOperation normalizations_serialized_name) {
-      IBMWatsonValidator.notNull(normalizations_serialized_name, 'normalizations_serialized_name cannot be null');
+    public UpdateConfigurationOptionsBuilder addNormalizations(NormalizationOperation normalizations) {
+      IBMWatsonValidator.notNull(normalizations, 'normalizations cannot be null');
       if (this.normalizations_serialized_name == null) {
         this.normalizations_serialized_name = new List<NormalizationOperation>();
       }
-      this.normalizations_serialized_name.add(normalizations_serialized_name);
+      this.normalizations_serialized_name.add(normalizations);
       return this;
     }
 
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public UpdateConfigurationOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the configuration_id_serialized_name.
      *
-     * @param configuration_id_serialized_name the configuration_id_serialized_name
+     * @param configurationId the configurationId
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder configurationId(String configuration_id_serialized_name) {
-      this.configuration_id_serialized_name = configuration_id_serialized_name;
+    public UpdateConfigurationOptionsBuilder configurationId(String configurationId) {
+      this.configuration_id_serialized_name = configurationId;
       return this;
     }
 
     /**
      * Set the name_serialized_name.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder name(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public UpdateConfigurationOptionsBuilder name(String name) {
+      this.name_serialized_name = name;
       return this;
     }
 
     /**
      * Set the description_serialized_name.
      *
-     * @param description_serialized_name the description_serialized_name
+     * @param description the description
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder description(String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public UpdateConfigurationOptionsBuilder description(String description) {
+      this.description_serialized_name = description;
       return this;
     }
 
     /**
      * Set the conversions_serialized_name.
      *
-     * @param conversions_serialized_name the conversions_serialized_name
+     * @param conversions the conversions
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder conversions(Conversions conversions_serialized_name) {
-      this.conversions_serialized_name = conversions_serialized_name;
+    public UpdateConfigurationOptionsBuilder conversions(Conversions conversions) {
+      this.conversions_serialized_name = conversions;
       return this;
     }
 
@@ -9943,11 +9943,11 @@ public class IBMDiscoveryV1Models {
      * Set the enrichments_serialized_name.
      * Existing enrichments_serialized_name will be replaced.
      *
-     * @param enrichments_serialized_name the enrichments_serialized_name
+     * @param enrichments the enrichments
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder enrichments(List<Enrichment> enrichments_serialized_name) {
-      this.enrichments_serialized_name = enrichments_serialized_name;
+    public UpdateConfigurationOptionsBuilder enrichments(List<Enrichment> enrichments) {
+      this.enrichments_serialized_name = enrichments;
       return this;
     }
 
@@ -9955,21 +9955,21 @@ public class IBMDiscoveryV1Models {
      * Set the normalizations_serialized_name.
      * Existing normalizations_serialized_name will be replaced.
      *
-     * @param normalizations_serialized_name the normalizations_serialized_name
+     * @param normalizations the normalizations
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder normalizations(List<NormalizationOperation> normalizations_serialized_name) {
-      this.normalizations_serialized_name = normalizations_serialized_name;
+    public UpdateConfigurationOptionsBuilder normalizations(List<NormalizationOperation> normalizations) {
+      this.normalizations_serialized_name = normalizations;
       return this;
     }
 
     /**
      * Set the configuration.
      *
-     * @param configuration the configuration
+     * @param  the 
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder configuration(Configuration configuration) {
+    public UpdateConfigurationOptionsBuilder (Configuration ) {
       this.name_serialized_name = configuration.getName();
       this.description_serialized_name = configuration.getDescription();
       this.conversions_serialized_name = configuration.getConversions();
@@ -10096,14 +10096,14 @@ public class IBMDiscoveryV1Models {
     private String metadata_serialized_name;
     private String file_content_type_serialized_name;
 
-    private UpdateDocumentOptionsBuilder(UpdateDocumentOptions update_document_options) {
-      environment_id_serialized_name = update_document_options.environment_id_serialized_name;
-      collection_id_serialized_name = update_document_options.collection_id_serialized_name;
-      document_id_serialized_name = update_document_options.document_id_serialized_name;
-      file_serialized_name = update_document_options.file_serialized_name;
-      filename_serialized_name = update_document_options.filename_serialized_name;
-      metadata_serialized_name = update_document_options.metadata_serialized_name;
-      file_content_type_serialized_name = update_document_options.file_content_type_serialized_name;
+    private UpdateDocumentOptionsBuilder(UpdateDocumentOptions updateDocumentOptions) {
+      environment_id_serialized_name = updateDocumentOptions.environment_id_serialized_name;
+      collection_id_serialized_name = updateDocumentOptions.collection_id_serialized_name;
+      document_id_serialized_name = updateDocumentOptions.document_id_serialized_name;
+      file_serialized_name = updateDocumentOptions.file_serialized_name;
+      filename_serialized_name = updateDocumentOptions.filename_serialized_name;
+      metadata_serialized_name = updateDocumentOptions.metadata_serialized_name;
+      file_content_type_serialized_name = updateDocumentOptions.file_content_type_serialized_name;
     }
 
     /**
@@ -10115,20 +10115,20 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
-     * @param document_id_serialized_name the document_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     * @param documentId the documentId
      */
-    public UpdateDocumentOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name, String document_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
-      this.document_id_serialized_name = document_id_serialized_name;
+    public UpdateDocumentOptionsBuilder(String environmentId, String collectionId, String documentId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+      this.document_id_serialized_name = documentId;
     }
 
     /**
      * Builds a UpdateDocumentOptions.
      *
-     * @return the update_document_options
+     * @return the updateDocumentOptions
      */
     public UpdateDocumentOptions build() {
       return new UpdateDocumentOptions(this);
@@ -10137,77 +10137,77 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the UpdateDocumentOptions builder
      */
-    public UpdateDocumentOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public UpdateDocumentOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the UpdateDocumentOptions builder
      */
-    public UpdateDocumentOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public UpdateDocumentOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
 
     /**
      * Set the document_id_serialized_name.
      *
-     * @param document_id_serialized_name the document_id_serialized_name
+     * @param documentId the documentId
      * @return the UpdateDocumentOptions builder
      */
-    public UpdateDocumentOptionsBuilder documentId(String document_id_serialized_name) {
-      this.document_id_serialized_name = document_id_serialized_name;
+    public UpdateDocumentOptionsBuilder documentId(String documentId) {
+      this.document_id_serialized_name = documentId;
       return this;
     }
 
     /**
      * Set the file_serialized_name.
      *
-     * @param file_serialized_name the file_serialized_name
+     * @param file the file
      * @return the UpdateDocumentOptions builder
      */
-    public UpdateDocumentOptionsBuilder file(IBMWatsonFile file_serialized_name) {
-      this.file_serialized_name = file_serialized_name;
+    public UpdateDocumentOptionsBuilder file(IBMWatsonFile file) {
+      this.file_serialized_name = file;
       return this;
     }
 
     /**
      * Set the filename_serialized_name.
      *
-     * @param filename_serialized_name the filename_serialized_name
+     * @param filename the filename
      * @return the UpdateDocumentOptions builder
      */
-    public UpdateDocumentOptionsBuilder filename(String filename_serialized_name) {
-      this.filename_serialized_name = filename_serialized_name;
+    public UpdateDocumentOptionsBuilder filename(String filename) {
+      this.filename_serialized_name = filename;
       return this;
     }
 
     /**
      * Set the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the metadata_serialized_name
+     * @param metadata the metadata
      * @return the UpdateDocumentOptions builder
      */
-    public UpdateDocumentOptionsBuilder metadata(String metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public UpdateDocumentOptionsBuilder metadata(String metadata) {
+      this.metadata_serialized_name = metadata;
       return this;
     }
 
     /**
      * Set the file_content_type_serialized_name.
      *
-     * @param file_content_type_serialized_name the file_content_type_serialized_name
+     * @param fileContentType the fileContentType
      * @return the UpdateDocumentOptions builder
      */
-    public UpdateDocumentOptionsBuilder fileContentType(String file_content_type_serialized_name) {
-      this.file_content_type_serialized_name = file_content_type_serialized_name;
+    public UpdateDocumentOptionsBuilder fileContentType(String fileContentType) {
+      this.file_content_type_serialized_name = fileContentType;
       return this;
     }
   }
@@ -10275,10 +10275,10 @@ public class IBMDiscoveryV1Models {
     private String name_serialized_name;
     private String description_serialized_name;
 
-    private UpdateEnvironmentOptionsBuilder(UpdateEnvironmentOptions update_environment_options) {
-      environment_id_serialized_name = update_environment_options.environment_id_serialized_name;
-      name_serialized_name = update_environment_options.name_serialized_name;
-      description_serialized_name = update_environment_options.description_serialized_name;
+    private UpdateEnvironmentOptionsBuilder(UpdateEnvironmentOptions updateEnvironmentOptions) {
+      environment_id_serialized_name = updateEnvironmentOptions.environment_id_serialized_name;
+      name_serialized_name = updateEnvironmentOptions.name_serialized_name;
+      description_serialized_name = updateEnvironmentOptions.description_serialized_name;
     }
 
     /**
@@ -10290,16 +10290,16 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      */
-    public UpdateEnvironmentOptionsBuilder(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public UpdateEnvironmentOptionsBuilder(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
     }
 
     /**
      * Builds a UpdateEnvironmentOptions.
      *
-     * @return the update_environment_options
+     * @return the updateEnvironmentOptions
      */
     public UpdateEnvironmentOptions build() {
       return new UpdateEnvironmentOptions(this);
@@ -10308,33 +10308,33 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the UpdateEnvironmentOptions builder
      */
-    public UpdateEnvironmentOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public UpdateEnvironmentOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the name_serialized_name.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      * @return the UpdateEnvironmentOptions builder
      */
-    public UpdateEnvironmentOptionsBuilder name(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public UpdateEnvironmentOptionsBuilder name(String name) {
+      this.name_serialized_name = name;
       return this;
     }
 
     /**
      * Set the description_serialized_name.
      *
-     * @param description_serialized_name the description_serialized_name
+     * @param description the description
      * @return the UpdateEnvironmentOptions builder
      */
-    public UpdateEnvironmentOptionsBuilder description(String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public UpdateEnvironmentOptionsBuilder description(String description) {
+      this.description_serialized_name = description;
       return this;
     }
   }
@@ -10440,13 +10440,13 @@ public class IBMDiscoveryV1Models {
     private String cross_reference_serialized_name;
     private Long relevance_serialized_name;
 
-    private UpdateTrainingExampleOptionsBuilder(UpdateTrainingExampleOptions update_training_example_options) {
-      environment_id_serialized_name = update_training_example_options.environment_id_serialized_name;
-      collection_id_serialized_name = update_training_example_options.collection_id_serialized_name;
-      query_id_serialized_name = update_training_example_options.query_id_serialized_name;
-      example_id_serialized_name = update_training_example_options.example_id_serialized_name;
-      cross_reference_serialized_name = update_training_example_options.cross_reference_serialized_name;
-      relevance_serialized_name = update_training_example_options.relevance_serialized_name;
+    private UpdateTrainingExampleOptionsBuilder(UpdateTrainingExampleOptions updateTrainingExampleOptions) {
+      environment_id_serialized_name = updateTrainingExampleOptions.environment_id_serialized_name;
+      collection_id_serialized_name = updateTrainingExampleOptions.collection_id_serialized_name;
+      query_id_serialized_name = updateTrainingExampleOptions.query_id_serialized_name;
+      example_id_serialized_name = updateTrainingExampleOptions.example_id_serialized_name;
+      cross_reference_serialized_name = updateTrainingExampleOptions.cross_reference_serialized_name;
+      relevance_serialized_name = updateTrainingExampleOptions.relevance_serialized_name;
     }
 
     /**
@@ -10458,22 +10458,22 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
-     * @param collection_id_serialized_name the collection_id_serialized_name
-     * @param query_id_serialized_name the query_id_serialized_name
-     * @param example_id_serialized_name the example_id_serialized_name
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     * @param queryId the queryId
+     * @param exampleId the exampleId
      */
-    public UpdateTrainingExampleOptionsBuilder(String environment_id_serialized_name, String collection_id_serialized_name, String query_id_serialized_name, String example_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
-      this.collection_id_serialized_name = collection_id_serialized_name;
-      this.query_id_serialized_name = query_id_serialized_name;
-      this.example_id_serialized_name = example_id_serialized_name;
+    public UpdateTrainingExampleOptionsBuilder(String environmentId, String collectionId, String queryId, String exampleId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+      this.query_id_serialized_name = queryId;
+      this.example_id_serialized_name = exampleId;
     }
 
     /**
      * Builds a UpdateTrainingExampleOptions.
      *
-     * @return the update_training_example_options
+     * @return the updateTrainingExampleOptions
      */
     public UpdateTrainingExampleOptions build() {
       return new UpdateTrainingExampleOptions(this);
@@ -10482,66 +10482,66 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the environment_id_serialized_name.
      *
-     * @param environment_id_serialized_name the environment_id_serialized_name
+     * @param environmentId the environmentId
      * @return the UpdateTrainingExampleOptions builder
      */
-    public UpdateTrainingExampleOptionsBuilder environmentId(String environment_id_serialized_name) {
-      this.environment_id_serialized_name = environment_id_serialized_name;
+    public UpdateTrainingExampleOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
       return this;
     }
 
     /**
      * Set the collection_id_serialized_name.
      *
-     * @param collection_id_serialized_name the collection_id_serialized_name
+     * @param collectionId the collectionId
      * @return the UpdateTrainingExampleOptions builder
      */
-    public UpdateTrainingExampleOptionsBuilder collectionId(String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public UpdateTrainingExampleOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
 
     /**
      * Set the query_id_serialized_name.
      *
-     * @param query_id_serialized_name the query_id_serialized_name
+     * @param queryId the queryId
      * @return the UpdateTrainingExampleOptions builder
      */
-    public UpdateTrainingExampleOptionsBuilder queryId(String query_id_serialized_name) {
-      this.query_id_serialized_name = query_id_serialized_name;
+    public UpdateTrainingExampleOptionsBuilder queryId(String queryId) {
+      this.query_id_serialized_name = queryId;
       return this;
     }
 
     /**
      * Set the example_id_serialized_name.
      *
-     * @param example_id_serialized_name the example_id_serialized_name
+     * @param exampleId the exampleId
      * @return the UpdateTrainingExampleOptions builder
      */
-    public UpdateTrainingExampleOptionsBuilder exampleId(String example_id_serialized_name) {
-      this.example_id_serialized_name = example_id_serialized_name;
+    public UpdateTrainingExampleOptionsBuilder exampleId(String exampleId) {
+      this.example_id_serialized_name = exampleId;
       return this;
     }
 
     /**
      * Set the cross_reference_serialized_name.
      *
-     * @param cross_reference_serialized_name the cross_reference_serialized_name
+     * @param crossReference the crossReference
      * @return the UpdateTrainingExampleOptions builder
      */
-    public UpdateTrainingExampleOptionsBuilder crossReference(String cross_reference_serialized_name) {
-      this.cross_reference_serialized_name = cross_reference_serialized_name;
+    public UpdateTrainingExampleOptionsBuilder crossReference(String crossReference) {
+      this.cross_reference_serialized_name = crossReference;
       return this;
     }
 
     /**
      * Set the relevance_serialized_name.
      *
-     * @param relevance_serialized_name the relevance_serialized_name
+     * @param relevance the relevance
      * @return the UpdateTrainingExampleOptions builder
      */
-    public UpdateTrainingExampleOptionsBuilder relevance(Long relevance_serialized_name) {
-      this.relevance_serialized_name = relevance_serialized_name;
+    public UpdateTrainingExampleOptionsBuilder relevance(Long relevance) {
+      this.relevance_serialized_name = relevance;
       return this;
     }
   }
@@ -10574,19 +10574,19 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the fonts_serialized_name.
      *
-     * @param fonts_serialized_name the new fonts_serialized_name
+     * @param fonts the new fonts
      */
-    public void setFonts(final List<FontSetting> fonts_serialized_name) {
-      this.fonts_serialized_name = fonts_serialized_name;
+    public void setFonts(final List<FontSetting> fonts) {
+      this.fonts_serialized_name = fonts;
     }
 
     /**
      * Sets the styles_serialized_name.
      *
-     * @param styles_serialized_name the new styles_serialized_name
+     * @param styles the new styles
      */
-    public void setStyles(final List<WordStyle> styles_serialized_name) {
-      this.styles_serialized_name = styles_serialized_name;
+    public void setStyles(final List<WordStyle> styles) {
+      this.styles_serialized_name = styles;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -10644,10 +10644,10 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the heading_serialized_name.
      *
-     * @param heading_serialized_name the new heading_serialized_name
+     * @param heading the new heading
      */
-    public void setHeading(final WordHeadingDetection heading_serialized_name) {
-      this.heading_serialized_name = heading_serialized_name;
+    public void setHeading(final WordHeadingDetection heading) {
+      this.heading_serialized_name = heading;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -10693,19 +10693,19 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the level_serialized_name.
      *
-     * @param level_serialized_name the new level_serialized_name
+     * @param level the new level
      */
-    public void setLevel(final long level_serialized_name) {
-      this.level_serialized_name = level_serialized_name;
+    public void setLevel(final long level) {
+      this.level_serialized_name = level;
     }
 
     /**
      * Sets the names_serialized_name.
      *
-     * @param names_serialized_name the new names_serialized_name
+     * @param names the new names
      */
-    public void setNames(final List<String> names_serialized_name) {
-      this.names_serialized_name = names_serialized_name;
+    public void setNames(final List<String> names) {
+      this.names_serialized_name = names;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -10737,10 +10737,10 @@ public class IBMDiscoveryV1Models {
     /**
      * Sets the xpaths_serialized_name.
      *
-     * @param xpaths_serialized_name the new xpaths_serialized_name
+     * @param xpaths the new xpaths
      */
-    public void setXpaths(final List<String> xpaths_serialized_name) {
-      this.xpaths_serialized_name = xpaths_serialized_name;
+    public void setXpaths(final List<String> xpaths) {
+      this.xpaths_serialized_name = xpaths;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {

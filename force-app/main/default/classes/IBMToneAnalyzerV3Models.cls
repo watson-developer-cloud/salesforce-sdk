@@ -43,28 +43,28 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Sets the tones_serialized_name.
      *
-     * @param tones_serialized_name the new tones_serialized_name
+     * @param tones the new tones
      */
-    public void setTones(final List<ToneScore> tones_serialized_name) {
-      this.tones_serialized_name = tones_serialized_name;
+    public void setTones(final List<ToneScore> tones) {
+      this.tones_serialized_name = tones;
     }
 
     /**
      * Sets the tone_categories_serialized_name.
      *
-     * @param tone_categories_serialized_name the new tone_categories_serialized_name
+     * @param toneCategories the new toneCategories
      */
-    public void setToneCategories(final List<ToneCategory> tone_categories_serialized_name) {
-      this.tone_categories_serialized_name = tone_categories_serialized_name;
+    public void setToneCategories(final List<ToneCategory> toneCategories) {
+      this.tone_categories_serialized_name = toneCategories;
     }
 
     /**
      * Sets the warning_serialized_name.
      *
-     * @param warning_serialized_name the new warning_serialized_name
+     * @param warning the new warning
      */
-    public void setWarning(final String warning_serialized_name) {
-      this.warning_serialized_name = warning_serialized_name;
+    public void setWarning(final String warning) {
+      this.warning_serialized_name = warning;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -184,55 +184,55 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Sets the sentence_id_serialized_name.
      *
-     * @param sentence_id_serialized_name the new sentence_id_serialized_name
+     * @param sentenceId the new sentenceId
      */
-    public void setSentenceId(final long sentence_id_serialized_name) {
-      this.sentence_id_serialized_name = sentence_id_serialized_name;
+    public void setSentenceId(final long sentenceId) {
+      this.sentence_id_serialized_name = sentenceId;
     }
 
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Sets the tones_serialized_name.
      *
-     * @param tones_serialized_name the new tones_serialized_name
+     * @param tones the new tones
      */
-    public void setTones(final List<ToneScore> tones_serialized_name) {
-      this.tones_serialized_name = tones_serialized_name;
+    public void setTones(final List<ToneScore> tones) {
+      this.tones_serialized_name = tones;
     }
 
     /**
      * Sets the tone_categories_serialized_name.
      *
-     * @param tone_categories_serialized_name the new tone_categories_serialized_name
+     * @param toneCategories the new toneCategories
      */
-    public void setToneCategories(final List<ToneCategory> tone_categories_serialized_name) {
-      this.tone_categories_serialized_name = tone_categories_serialized_name;
+    public void setToneCategories(final List<ToneCategory> toneCategories) {
+      this.tone_categories_serialized_name = toneCategories;
     }
 
     /**
      * Sets the input_from_serialized_name.
      *
-     * @param input_from_serialized_name the new input_from_serialized_name
+     * @param inputFrom the new inputFrom
      */
-    public void setInputFrom(final long input_from_serialized_name) {
-      this.input_from_serialized_name = input_from_serialized_name;
+    public void setInputFrom(final long inputFrom) {
+      this.input_from_serialized_name = inputFrom;
     }
 
     /**
      * Sets the input_to_serialized_name.
      *
-     * @param input_to_serialized_name the new input_to_serialized_name
+     * @param inputTo the new inputTo
      */
-    public void setInputTo(final long input_to_serialized_name) {
-      this.input_to_serialized_name = input_to_serialized_name;
+    public void setInputTo(final long inputTo) {
+      this.input_to_serialized_name = inputTo;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -304,19 +304,19 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Sets the document_tone_serialized_name.
      *
-     * @param document_tone_serialized_name the new document_tone_serialized_name
+     * @param documentTone the new documentTone
      */
-    public void setDocumentTone(final DocumentAnalysis document_tone_serialized_name) {
-      this.document_tone_serialized_name = document_tone_serialized_name;
+    public void setDocumentTone(final DocumentAnalysis documentTone) {
+      this.document_tone_serialized_name = documentTone;
     }
 
     /**
      * Sets the sentences_tone_serialized_name.
      *
-     * @param sentences_tone_serialized_name the new sentences_tone_serialized_name
+     * @param sentencesTone the new sentencesTone
      */
-    public void setSentencesTone(final List<SentenceAnalysis> sentences_tone_serialized_name) {
-      this.sentences_tone_serialized_name = sentences_tone_serialized_name;
+    public void setSentencesTone(final List<SentenceAnalysis> sentencesTone) {
+      this.sentences_tone_serialized_name = sentencesTone;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -391,28 +391,28 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Sets the tones_serialized_name.
      *
-     * @param tones_serialized_name the new tones_serialized_name
+     * @param tones the new tones
      */
-    public void setTones(final List<ToneScore> tones_serialized_name) {
-      this.tones_serialized_name = tones_serialized_name;
+    public void setTones(final List<ToneScore> tones) {
+      this.tones_serialized_name = tones;
     }
 
     /**
      * Sets the category_id_serialized_name.
      *
-     * @param category_id_serialized_name the new category_id_serialized_name
+     * @param categoryId the new categoryId
      */
-    public void setCategoryId(final String category_id_serialized_name) {
-      this.category_id_serialized_name = category_id_serialized_name;
+    public void setCategoryId(final String categoryId) {
+      this.category_id_serialized_name = categoryId;
     }
 
     /**
      * Sets the category_name_serialized_name.
      *
-     * @param category_name_serialized_name the new category_name_serialized_name
+     * @param categoryName the new categoryName
      */
-    public void setCategoryName(final String category_name_serialized_name) {
-      this.category_name_serialized_name = category_name_serialized_name;
+    public void setCategoryName(final String categoryName) {
+      this.category_name_serialized_name = categoryName;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -489,9 +489,9 @@ public class IBMToneAnalyzerV3Models {
     private List<Utterance> utterances_serialized_name;
     private String accept_language_serialized_name;
 
-    private ToneChatOptionsBuilder(ToneChatOptions tone_chat_options) {
-      utterances_serialized_name = tone_chat_options.utterances_serialized_name;
-      accept_language_serialized_name = tone_chat_options.accept_language_serialized_name;
+    private ToneChatOptionsBuilder(ToneChatOptions toneChatOptions) {
+      utterances_serialized_name = toneChatOptions.utterances_serialized_name;
+      accept_language_serialized_name = toneChatOptions.accept_language_serialized_name;
     }
 
     /**
@@ -503,33 +503,33 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param utterances_serialized_name the utterances_serialized_name
+     * @param utterances the utterances
      */
-    public ToneChatOptionsBuilder(List<Utterance> utterances_serialized_name) {
-      this.utterances_serialized_name = utterances_serialized_name;
+    public ToneChatOptionsBuilder(List<Utterance> utterances) {
+      this.utterances_serialized_name = utterances;
     }
 
     /**
      * Builds a ToneChatOptions.
      *
-     * @return the tone_chat_options
+     * @return the toneChatOptions
      */
     public ToneChatOptions build() {
       return new ToneChatOptions(this);
     }
 
     /**
-     * Adds an utterances_serialized_name to utterances_serialized_name.
+     * Adds an utterances to utterances_serialized_name.
      *
-     * @param utterances_serialized_name the new utterances_serialized_name
+     * @param utterances the new utterances
      * @return the ToneChatOptions builder
      */
-    public ToneChatOptionsBuilder addUtterances(Utterance utterances_serialized_name) {
-      IBMWatsonValidator.notNull(utterances_serialized_name, 'utterances_serialized_name cannot be null');
+    public ToneChatOptionsBuilder addUtterances(Utterance utterances) {
+      IBMWatsonValidator.notNull(utterances, 'utterances cannot be null');
       if (this.utterances_serialized_name == null) {
         this.utterances_serialized_name = new List<Utterance>();
       }
-      this.utterances_serialized_name.add(utterances_serialized_name);
+      this.utterances_serialized_name.add(utterances);
       return this;
     }
 
@@ -537,22 +537,22 @@ public class IBMToneAnalyzerV3Models {
      * Set the utterances_serialized_name.
      * Existing utterances_serialized_name will be replaced.
      *
-     * @param utterances_serialized_name the utterances_serialized_name
+     * @param utterances the utterances
      * @return the ToneChatOptions builder
      */
-    public ToneChatOptionsBuilder utterances(List<Utterance> utterances_serialized_name) {
-      this.utterances_serialized_name = utterances_serialized_name;
+    public ToneChatOptionsBuilder utterances(List<Utterance> utterances) {
+      this.utterances_serialized_name = utterances;
       return this;
     }
 
     /**
      * Set the accept_language_serialized_name.
      *
-     * @param accept_language_serialized_name the accept_language_serialized_name
+     * @param acceptLanguage the acceptLanguage
      * @return the ToneChatOptions builder
      */
-    public ToneChatOptionsBuilder acceptLanguage(String accept_language_serialized_name) {
-      this.accept_language_serialized_name = accept_language_serialized_name;
+    public ToneChatOptionsBuilder acceptLanguage(String acceptLanguage) {
+      this.accept_language_serialized_name = acceptLanguage;
       return this;
     }
   }
@@ -601,28 +601,28 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Sets the score_serialized_name.
      *
-     * @param score_serialized_name the new score_serialized_name
+     * @param score the new score
      */
-    public void setScore(final Double score_serialized_name) {
-      this.score_serialized_name = score_serialized_name;
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
     }
 
     /**
      * Sets the tone_id_serialized_name.
      *
-     * @param tone_id_serialized_name the new tone_id_serialized_name
+     * @param toneId the new toneId
      */
-    public void setToneId(final String tone_id_serialized_name) {
-      this.tone_id_serialized_name = tone_id_serialized_name;
+    public void setToneId(final String toneId) {
+      this.tone_id_serialized_name = toneId;
     }
 
     /**
      * Sets the tone_name_serialized_name.
      *
-     * @param tone_name_serialized_name the new tone_name_serialized_name
+     * @param toneName the new toneName
      */
-    public void setToneName(final String tone_name_serialized_name) {
-      this.tone_name_serialized_name = tone_name_serialized_name;
+    public void setToneName(final String toneName) {
+      this.tone_name_serialized_name = toneName;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -673,8 +673,8 @@ public class IBMToneAnalyzerV3Models {
   public class ToneInputBuilder {
     private String text_serialized_name;
 
-    private ToneInputBuilder(ToneInput tone_input) {
-      text_serialized_name = tone_input.text_serialized_name;
+    private ToneInputBuilder(ToneInput toneInput) {
+      text_serialized_name = toneInput.text_serialized_name;
     }
 
     /**
@@ -686,16 +686,16 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      */
-    public ToneInputBuilder(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public ToneInputBuilder(String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a ToneInput.
      *
-     * @return the tone_input
+     * @return the toneInput
      */
     public ToneInput build() {
       return new ToneInput(this);
@@ -704,11 +704,11 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the ToneInput builder
      */
-    public ToneInputBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public ToneInputBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
   }
@@ -828,14 +828,14 @@ public class IBMToneAnalyzerV3Models {
     private String content_language_serialized_name;
     private String accept_language_serialized_name;
 
-    private ToneOptionsBuilder(ToneOptions tone_options) {
-      tone_input_serialized_name = tone_options.tone_input_serialized_name;
-      body_serialized_name = tone_options.body_serialized_name;
-      content_type_serialized_name = tone_options.content_type_serialized_name;
-      sentences_serialized_name = tone_options.sentences_serialized_name;
-      tones_serialized_name = tone_options.tones_serialized_name;
-      content_language_serialized_name = tone_options.content_language_serialized_name;
-      accept_language_serialized_name = tone_options.accept_language_serialized_name;
+    private ToneOptionsBuilder(ToneOptions toneOptions) {
+      tone_input_serialized_name = toneOptions.tone_input_serialized_name;
+      body_serialized_name = toneOptions.body_serialized_name;
+      content_type_serialized_name = toneOptions.content_type_serialized_name;
+      sentences_serialized_name = toneOptions.sentences_serialized_name;
+      tones_serialized_name = toneOptions.tones_serialized_name;
+      content_language_serialized_name = toneOptions.content_language_serialized_name;
+      accept_language_serialized_name = toneOptions.accept_language_serialized_name;
     }
 
     /**
@@ -847,35 +847,35 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Builds a ToneOptions.
      *
-     * @return the tone_options
+     * @return the toneOptions
      */
     public ToneOptions build() {
       return new ToneOptions(this);
     }
 
     /**
-     * Adds an tones_serialized_name to tones_serialized_name.
+     * Adds an tones to tones_serialized_name.
      *
-     * @param tones_serialized_name the new tones_serialized_name
+     * @param tones the new tones
      * @return the ToneOptions builder
      */
-    public ToneOptionsBuilder addTones(String tones_serialized_name) {
-      IBMWatsonValidator.notNull(tones_serialized_name, 'tones_serialized_name cannot be null');
+    public ToneOptionsBuilder addTones(String tones) {
+      IBMWatsonValidator.notNull(tones, 'tones cannot be null');
       if (this.tones_serialized_name == null) {
         this.tones_serialized_name = new List<String>();
       }
-      this.tones_serialized_name.add(tones_serialized_name);
+      this.tones_serialized_name.add(tones);
       return this;
     }
 
     /**
      * Set the sentences_serialized_name.
      *
-     * @param sentences_serialized_name the sentences_serialized_name
+     * @param sentences the sentences
      * @return the ToneOptions builder
      */
-    public ToneOptionsBuilder sentences(Boolean sentences_serialized_name) {
-      this.sentences_serialized_name = sentences_serialized_name;
+    public ToneOptionsBuilder sentences(Boolean sentences) {
+      this.sentences_serialized_name = sentences;
       return this;
     }
 
@@ -883,44 +883,44 @@ public class IBMToneAnalyzerV3Models {
      * Set the tones_serialized_name.
      * Existing tones_serialized_name will be replaced.
      *
-     * @param tones_serialized_name the tones_serialized_name
+     * @param tones the tones
      * @return the ToneOptions builder
      */
-    public ToneOptionsBuilder tones(List<String> tones_serialized_name) {
-      this.tones_serialized_name = tones_serialized_name;
+    public ToneOptionsBuilder tones(List<String> tones) {
+      this.tones_serialized_name = tones;
       return this;
     }
 
     /**
      * Set the content_language_serialized_name.
      *
-     * @param content_language_serialized_name the content_language_serialized_name
+     * @param contentLanguage the contentLanguage
      * @return the ToneOptions builder
      */
-    public ToneOptionsBuilder contentLanguage(String content_language_serialized_name) {
-      this.content_language_serialized_name = content_language_serialized_name;
+    public ToneOptionsBuilder contentLanguage(String contentLanguage) {
+      this.content_language_serialized_name = contentLanguage;
       return this;
     }
 
     /**
      * Set the accept_language_serialized_name.
      *
-     * @param accept_language_serialized_name the accept_language_serialized_name
+     * @param acceptLanguage the acceptLanguage
      * @return the ToneOptions builder
      */
-    public ToneOptionsBuilder acceptLanguage(String accept_language_serialized_name) {
-      this.accept_language_serialized_name = accept_language_serialized_name;
+    public ToneOptionsBuilder acceptLanguage(String acceptLanguage) {
+      this.accept_language_serialized_name = acceptLanguage;
       return this;
     }
 
     /**
      * Set the tone_input_serialized_name.
      *
-     * @param tone_input_serialized_name the tone_input_serialized_name
+     * @param toneInput the toneInput
      * @return the ToneOptions builder
      */
-    public ToneOptionsBuilder toneInput(ToneInput tone_input_serialized_name) {
-      this.tone_input_serialized_name = tone_input_serialized_name;
+    public ToneOptionsBuilder toneInput(ToneInput toneInput) {
+      this.tone_input_serialized_name = toneInput;
       this.content_type_serialized_name = IBMWatsonHttpMediaType.APPLICATION_JSON;
       return this;
     }
@@ -994,28 +994,28 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Sets the score_serialized_name.
      *
-     * @param score_serialized_name the new score_serialized_name
+     * @param score the new score
      */
-    public void setScore(final Double score_serialized_name) {
-      this.score_serialized_name = score_serialized_name;
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
     }
 
     /**
      * Sets the tone_id_serialized_name.
      *
-     * @param tone_id_serialized_name the new tone_id_serialized_name
+     * @param toneId the new toneId
      */
-    public void setToneId(final String tone_id_serialized_name) {
-      this.tone_id_serialized_name = tone_id_serialized_name;
+    public void setToneId(final String toneId) {
+      this.tone_id_serialized_name = toneId;
     }
 
     /**
      * Sets the tone_name_serialized_name.
      *
-     * @param tone_name_serialized_name the new tone_name_serialized_name
+     * @param toneName the new toneName
      */
-    public void setToneName(final String tone_name_serialized_name) {
-      this.tone_name_serialized_name = tone_name_serialized_name;
+    public void setToneName(final String toneName) {
+      this.tone_name_serialized_name = toneName;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1093,10 +1093,10 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      */
-    public UtteranceBuilder(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public UtteranceBuilder(String text) {
+      this.text_serialized_name = text;
     }
 
     /**
@@ -1111,22 +1111,22 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the Utterance builder
      */
-    public UtteranceBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public UtteranceBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
 
     /**
      * Set the user_serialized_name.
      *
-     * @param user_serialized_name the user_serialized_name
+     * @param user the user
      * @return the Utterance builder
      */
-    public UtteranceBuilder user(String user_serialized_name) {
-      this.user_serialized_name = user_serialized_name;
+    public UtteranceBuilder user(String user) {
+      this.user_serialized_name = user;
       return this;
     }
   }
@@ -1163,19 +1163,19 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Sets the utterances_tone_serialized_name.
      *
-     * @param utterances_tone_serialized_name the new utterances_tone_serialized_name
+     * @param utterancesTone the new utterancesTone
      */
-    public void setUtterancesTone(final List<UtteranceAnalysis> utterances_tone_serialized_name) {
-      this.utterances_tone_serialized_name = utterances_tone_serialized_name;
+    public void setUtterancesTone(final List<UtteranceAnalysis> utterancesTone) {
+      this.utterances_tone_serialized_name = utterancesTone;
     }
 
     /**
      * Sets the warning_serialized_name.
      *
-     * @param warning_serialized_name the new warning_serialized_name
+     * @param warning the new warning
      */
-    public void setWarning(final String warning_serialized_name) {
-      this.warning_serialized_name = warning_serialized_name;
+    public void setWarning(final String warning) {
+      this.warning_serialized_name = warning;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1258,37 +1258,37 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Sets the utterance_id_serialized_name.
      *
-     * @param utterance_id_serialized_name the new utterance_id_serialized_name
+     * @param utteranceId the new utteranceId
      */
-    public void setUtteranceId(final String utterance_id_serialized_name) {
-      this.utterance_id_serialized_name = utterance_id_serialized_name;
+    public void setUtteranceId(final String utteranceId) {
+      this.utterance_id_serialized_name = utteranceId;
     }
 
     /**
      * Sets the utterance_text_serialized_name.
      *
-     * @param utterance_text_serialized_name the new utterance_text_serialized_name
+     * @param utteranceText the new utteranceText
      */
-    public void setUtteranceText(final String utterance_text_serialized_name) {
-      this.utterance_text_serialized_name = utterance_text_serialized_name;
+    public void setUtteranceText(final String utteranceText) {
+      this.utterance_text_serialized_name = utteranceText;
     }
 
     /**
      * Sets the tones_serialized_name.
      *
-     * @param tones_serialized_name the new tones_serialized_name
+     * @param tones the new tones
      */
-    public void setTones(final List<ToneChatScore> tones_serialized_name) {
-      this.tones_serialized_name = tones_serialized_name;
+    public void setTones(final List<ToneChatScore> tones) {
+      this.tones_serialized_name = tones;
     }
 
     /**
      * Sets the error_serialized_name.
      *
-     * @param error_serialized_name the new error_serialized_name
+     * @param error the new error
      */
-    public void setError(final String error_serialized_name) {
-      this.error_serialized_name = error_serialized_name;
+    public void setError(final String error) {
+      this.error_serialized_name = error;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
