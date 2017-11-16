@@ -919,7 +919,7 @@ public class IBMToneAnalyzerV3Models {
      * @param tone_input_serialized_name the tone_input_serialized_name
      * @return the ToneOptions builder
      */
-    public ToneOptionsBuilder tone_input_serialized_name(ToneInput tone_input_serialized_name) {
+    public ToneOptionsBuilder toneInput(ToneInput tone_input_serialized_name) {
       this.tone_input_serialized_name = tone_input_serialized_name;
       this.content_type_serialized_name = IBMWatsonHttpMediaType.APPLICATION_JSON;
       return this;

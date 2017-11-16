@@ -91,7 +91,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
       builder.query('tones', String.join(toneOptions.tones(), ','));
     }
     if (toneOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-      builder.bodyJson(JSON.serialize(toneOptions.toneInput()));
+      builder.bodyJson(JSON.serialize(toneOptions.toneInput(), true));
     }
     else {
       builder.bodyContent(toneOptions.body(), toneOptions.contentType());
@@ -117,7 +117,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('utterances', toneChatOptions.utterances());
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMToneAnalyzerV3Models.UtteranceAnalyses) createServiceCall(builder.build(), IBMToneAnalyzerV3Models.UtteranceAnalyses.class);
   }
