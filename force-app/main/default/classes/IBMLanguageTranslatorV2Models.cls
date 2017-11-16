@@ -923,11 +923,11 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Set the default_serialized_name.
      *
-     * @param default the default
+     * @param defaultVar the defaultVar
      * @return the ListModelsOptions builder
      */
-    public ListModelsOptionsBuilder defaultField(Boolean default) {
-      this.default_serialized_name = default;
+    public ListModelsOptionsBuilder defaultField(Boolean defaultVar) {
+      this.default_serialized_name = defaultVar;
       return this;
     }
   }
