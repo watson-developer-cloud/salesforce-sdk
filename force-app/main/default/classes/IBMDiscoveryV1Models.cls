@@ -1493,10 +1493,10 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the configuration.
      *
-     * @param  the 
+     * @param configuration the configuration
      * @return the CreateConfigurationOptions builder
      */
-    public CreateConfigurationOptionsBuilder (Configuration ) {
+    public CreateConfigurationOptionsBuilder configuration(Configuration configuration) {
       this.name_serialized_name = configuration.getName();
       this.description_serialized_name = configuration.getDescription();
       this.conversions_serialized_name = configuration.getConversions();
@@ -1837,10 +1837,10 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the trainingExample.
      *
-     * @param  the 
+     * @param trainingExample the trainingExample
      * @return the CreateTrainingExampleOptions builder
      */
-    public CreateTrainingExampleOptionsBuilder (TrainingExample ) {
+    public CreateTrainingExampleOptionsBuilder trainingExample(TrainingExample trainingExample) {
       this.document_id_serialized_name = trainingExample.getDocumentId();
       this.cross_reference_serialized_name = trainingExample.getCrossReference();
       this.relevance_serialized_name = trainingExample.getRelevance();
@@ -9966,10 +9966,10 @@ public class IBMDiscoveryV1Models {
     /**
      * Set the configuration.
      *
-     * @param  the 
+     * @param configuration the configuration
      * @return the UpdateConfigurationOptions builder
      */
-    public UpdateConfigurationOptionsBuilder (Configuration ) {
+    public UpdateConfigurationOptionsBuilder configuration(Configuration configuration) {
       this.name_serialized_name = configuration.getName();
       this.description_serialized_name = configuration.getDescription();
       this.conversions_serialized_name = configuration.getConversions();
