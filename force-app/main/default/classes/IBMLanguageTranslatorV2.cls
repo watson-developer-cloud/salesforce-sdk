@@ -50,7 +50,7 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
     if (translateOptions.target() != null) {
       contentJson.put('target', translateOptions.target());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMLanguageTranslatorV2Models.TranslationResult) createServiceCall(builder.build(), IBMLanguageTranslatorV2Models.TranslationResult.class);
   }
@@ -101,17 +101,16 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
     }
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    IBMWatsonRequestBody fileBody;
     if (createModelOptions.forcedGlossary() != null) {
-      fileBody = IBMWatsonRequestBody.create(createModelOptions.forcedGlossary(), createModelOptions.forcedGlossaryContentType());
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createModelOptions.forcedGlossary(), createModelOptions.forcedGlossaryContentType());
       multipartBuilder.addFormDataPart('forced_glossary', createModelOptions.forcedGlossaryFilename(), fileBody);
     }
     if (createModelOptions.parallelCorpus() != null) {
-      fileBody = IBMWatsonRequestBody.create(createModelOptions.parallelCorpus(), createModelOptions.parallelCorpusContentType());
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createModelOptions.parallelCorpus(), createModelOptions.parallelCorpusContentType());
       multipartBuilder.addFormDataPart('parallel_corpus', createModelOptions.parallelCorpusFilename(), fileBody);
     }
     if (createModelOptions.monolingualCorpus() != null) {
-      fileBody = IBMWatsonRequestBody.create(createModelOptions.monolingualCorpus(), createModelOptions.monolingualCorpusContentType());
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createModelOptions.monolingualCorpus(), createModelOptions.monolingualCorpusContentType());
       multipartBuilder.addFormDataPart('monolingual_corpus', createModelOptions.monolingualCorpusFilename(), fileBody);
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();

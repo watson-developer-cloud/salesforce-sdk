@@ -166,18 +166,18 @@ public class IBMLanguageTranslatorV2Models {
     private String parallel_corpus_content_type_serialized_name;
     private String monolingual_corpus_content_type_serialized_name;
 
-    private CreateModelOptionsBuilder(CreateModelOptions create_model_options) {
-      base_model_id_serialized_name = create_model_options.base_model_id_serialized_name;
-      name_serialized_name = create_model_options.name_serialized_name;
-      forced_glossary_serialized_name = create_model_options.forced_glossary_serialized_name;
-      forced_glossary_filename_serialized_name = create_model_options.forced_glossary_filename_serialized_name;
-      parallel_corpus_serialized_name = create_model_options.parallel_corpus_serialized_name;
-      parallel_corpus_filename_serialized_name = create_model_options.parallel_corpus_filename_serialized_name;
-      monolingual_corpus_serialized_name = create_model_options.monolingual_corpus_serialized_name;
-      monolingual_corpus_filename_serialized_name = create_model_options.monolingual_corpus_filename_serialized_name;
-      forced_glossary_content_type_serialized_name = create_model_options.forced_glossary_content_type_serialized_name;
-      parallel_corpus_content_type_serialized_name = create_model_options.parallel_corpus_content_type_serialized_name;
-      monolingual_corpus_content_type_serialized_name = create_model_options.monolingual_corpus_content_type_serialized_name;
+    private CreateModelOptionsBuilder(CreateModelOptions createModelOptions) {
+      base_model_id_serialized_name = createModelOptions.base_model_id_serialized_name;
+      name_serialized_name = createModelOptions.name_serialized_name;
+      forced_glossary_serialized_name = createModelOptions.forced_glossary_serialized_name;
+      forced_glossary_filename_serialized_name = createModelOptions.forced_glossary_filename_serialized_name;
+      parallel_corpus_serialized_name = createModelOptions.parallel_corpus_serialized_name;
+      parallel_corpus_filename_serialized_name = createModelOptions.parallel_corpus_filename_serialized_name;
+      monolingual_corpus_serialized_name = createModelOptions.monolingual_corpus_serialized_name;
+      monolingual_corpus_filename_serialized_name = createModelOptions.monolingual_corpus_filename_serialized_name;
+      forced_glossary_content_type_serialized_name = createModelOptions.forced_glossary_content_type_serialized_name;
+      parallel_corpus_content_type_serialized_name = createModelOptions.parallel_corpus_content_type_serialized_name;
+      monolingual_corpus_content_type_serialized_name = createModelOptions.monolingual_corpus_content_type_serialized_name;
     }
 
     /**
@@ -189,16 +189,16 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param base_model_id_serialized_name the base_model_id_serialized_name
+     * @param baseModelId the baseModelId
      */
-    public CreateModelOptionsBuilder(String base_model_id_serialized_name) {
-      this.base_model_id_serialized_name = base_model_id_serialized_name;
+    public CreateModelOptionsBuilder(String baseModelId) {
+      this.base_model_id_serialized_name = baseModelId;
     }
 
     /**
      * Builds a CreateModelOptions.
      *
-     * @return the create_model_options
+     * @return the createModelOptions
      */
     public CreateModelOptions build() {
       return new CreateModelOptions(this);
@@ -207,121 +207,121 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Set the base_model_id_serialized_name.
      *
-     * @param base_model_id_serialized_name the base_model_id_serialized_name
+     * @param baseModelId the baseModelId
      * @return the CreateModelOptions builder
      */
-    public CreateModelOptionsBuilder baseModelId(String base_model_id_serialized_name) {
-      this.base_model_id_serialized_name = base_model_id_serialized_name;
+    public CreateModelOptionsBuilder baseModelId(String baseModelId) {
+      this.base_model_id_serialized_name = baseModelId;
       return this;
     }
 
     /**
      * Set the name_serialized_name.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      * @return the CreateModelOptions builder
      */
-    public CreateModelOptionsBuilder name(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public CreateModelOptionsBuilder name(String name) {
+      this.name_serialized_name = name;
       return this;
     }
 
     /**
      * Set the forced_glossary_serialized_name.
      *
-     * @param forced_glossary_serialized_name the forced_glossary_serialized_name
+     * @param forcedGlossary the forcedGlossary
      * @return the CreateModelOptions builder
      */
-    public CreateModelOptionsBuilder forcedGlossary(IBMWatsonFile forced_glossary_serialized_name) {
-      this.forced_glossary_serialized_name = forced_glossary_serialized_name;
+    public CreateModelOptionsBuilder forcedGlossary(IBMWatsonFile forcedGlossary) {
+      this.forced_glossary_serialized_name = forcedGlossary;
       return this;
     }
 
     /**
      * Set the forced_glossary_filename_serialized_name.
      *
-     * @param forced_glossary_filename_serialized_name the forced_glossary_filename_serialized_name
+     * @param forcedGlossaryFilename the forcedGlossaryFilename
      * @return the CreateModelOptions builder
      */
-    public CreateModelOptionsBuilder forcedGlossaryFilename(String forced_glossary_filename_serialized_name) {
-      this.forced_glossary_filename_serialized_name = forced_glossary_filename_serialized_name;
+    public CreateModelOptionsBuilder forcedGlossaryFilename(String forcedGlossaryFilename) {
+      this.forced_glossary_filename_serialized_name = forcedGlossaryFilename;
       return this;
     }
 
     /**
      * Set the parallel_corpus_serialized_name.
      *
-     * @param parallel_corpus_serialized_name the parallel_corpus_serialized_name
+     * @param parallelCorpus the parallelCorpus
      * @return the CreateModelOptions builder
      */
-    public CreateModelOptionsBuilder parallelCorpus(IBMWatsonFile parallel_corpus_serialized_name) {
-      this.parallel_corpus_serialized_name = parallel_corpus_serialized_name;
+    public CreateModelOptionsBuilder parallelCorpus(IBMWatsonFile parallelCorpus) {
+      this.parallel_corpus_serialized_name = parallelCorpus;
       return this;
     }
 
     /**
      * Set the parallel_corpus_filename_serialized_name.
      *
-     * @param parallel_corpus_filename_serialized_name the parallel_corpus_filename_serialized_name
+     * @param parallelCorpusFilename the parallelCorpusFilename
      * @return the CreateModelOptions builder
      */
-    public CreateModelOptionsBuilder parallelCorpusFilename(String parallel_corpus_filename_serialized_name) {
-      this.parallel_corpus_filename_serialized_name = parallel_corpus_filename_serialized_name;
+    public CreateModelOptionsBuilder parallelCorpusFilename(String parallelCorpusFilename) {
+      this.parallel_corpus_filename_serialized_name = parallelCorpusFilename;
       return this;
     }
 
     /**
      * Set the monolingual_corpus_serialized_name.
      *
-     * @param monolingual_corpus_serialized_name the monolingual_corpus_serialized_name
+     * @param monolingualCorpus the monolingualCorpus
      * @return the CreateModelOptions builder
      */
-    public CreateModelOptionsBuilder monolingualCorpus(IBMWatsonFile monolingual_corpus_serialized_name) {
-      this.monolingual_corpus_serialized_name = monolingual_corpus_serialized_name;
+    public CreateModelOptionsBuilder monolingualCorpus(IBMWatsonFile monolingualCorpus) {
+      this.monolingual_corpus_serialized_name = monolingualCorpus;
       return this;
     }
 
     /**
      * Set the monolingual_corpus_filename_serialized_name.
      *
-     * @param monolingual_corpus_filename_serialized_name the monolingual_corpus_filename_serialized_name
+     * @param monolingualCorpusFilename the monolingualCorpusFilename
      * @return the CreateModelOptions builder
      */
-    public CreateModelOptionsBuilder monolingualCorpusFilename(String monolingual_corpus_filename_serialized_name) {
-      this.monolingual_corpus_filename_serialized_name = monolingual_corpus_filename_serialized_name;
+    public CreateModelOptionsBuilder monolingualCorpusFilename(String monolingualCorpusFilename) {
+      this.monolingual_corpus_filename_serialized_name = monolingualCorpusFilename;
       return this;
     }
 
     /**
      * Set the forced_glossary_content_type_serialized_name.
      *
-     * @param forced_glossary_content_type_serialized_name the forced_glossary_content_type_serialized_name
+     * @param forcedGlossaryContentType the forcedGlossaryContentType
      * @return the CreateModelOptions builder
      */
-    public CreateModelOptionsBuilder forcedGlossaryContentType(String forced_glossary_content_type_serialized_name) {
-      this.forced_glossary_content_type_serialized_name = forced_glossary_content_type_serialized_name;
+    public CreateModelOptionsBuilder forcedGlossaryContentType(String forcedGlossaryContentType) {
+      this.forced_glossary_content_type_serialized_name = forcedGlossaryContentType;
       return this;
     }
 
     /**
      * Set the parallel_corpus_content_type_serialized_name.
      *
-     * @param parallel_corpus_content_type_serialized_name the parallel_corpus_content_type_serialized_name
+     * @param parallelCorpusContentType the parallelCorpusContentType
      * @return the CreateModelOptions builder
      */
-    public CreateModelOptionsBuilder parallelCorpusContentType(String parallel_corpus_content_type_serialized_name) {
-      this.parallel_corpus_content_type_serialized_name = parallel_corpus_content_type_serialized_name;
+    public CreateModelOptionsBuilder parallelCorpusContentType(String parallelCorpusContentType) {
+      this.parallel_corpus_content_type_serialized_name = parallelCorpusContentType;
       return this;
     }
 
     /**
      * Set the monolingual_corpus_content_type_serialized_name.
      *
-     * @param monolingual_corpus_content_type_serialized_name the monolingual_corpus_content_type_serialized_name
+     * @param monolingualCorpusContentType the monolingualCorpusContentType
      * @return the CreateModelOptions builder
      */
-    public CreateModelOptionsBuilder monolingualCorpusContentType(String monolingual_corpus_content_type_serialized_name) {
-      this.monolingual_corpus_content_type_serialized_name = monolingual_corpus_content_type_serialized_name;
+    public CreateModelOptionsBuilder monolingualCorpusContentType(String monolingualCorpusContentType) {
+      this.monolingual_corpus_content_type_serialized_name = monolingualCorpusContentType;
       return this;
     }
   }
@@ -363,8 +363,8 @@ public class IBMLanguageTranslatorV2Models {
   public class DeleteModelOptionsBuilder {
     private String model_id_serialized_name;
 
-    private DeleteModelOptionsBuilder(DeleteModelOptions delete_model_options) {
-      model_id_serialized_name = delete_model_options.model_id_serialized_name;
+    private DeleteModelOptionsBuilder(DeleteModelOptions deleteModelOptions) {
+      model_id_serialized_name = deleteModelOptions.model_id_serialized_name;
     }
 
     /**
@@ -376,16 +376,16 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param model_id_serialized_name the model_id_serialized_name
+     * @param modelId the modelId
      */
-    public DeleteModelOptionsBuilder(String model_id_serialized_name) {
-      this.model_id_serialized_name = model_id_serialized_name;
+    public DeleteModelOptionsBuilder(String modelId) {
+      this.model_id_serialized_name = modelId;
     }
 
     /**
      * Builds a DeleteModelOptions.
      *
-     * @return the delete_model_options
+     * @return the deleteModelOptions
      */
     public DeleteModelOptions build() {
       return new DeleteModelOptions(this);
@@ -394,11 +394,11 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Set the model_id_serialized_name.
      *
-     * @param model_id_serialized_name the model_id_serialized_name
+     * @param modelId the modelId
      * @return the DeleteModelOptions builder
      */
-    public DeleteModelOptionsBuilder modelId(String model_id_serialized_name) {
-      this.model_id_serialized_name = model_id_serialized_name;
+    public DeleteModelOptionsBuilder modelId(String modelId) {
+      this.model_id_serialized_name = modelId;
       return this;
     }
   }
@@ -440,8 +440,8 @@ public class IBMLanguageTranslatorV2Models {
   public class GetModelOptionsBuilder {
     private String model_id_serialized_name;
 
-    private GetModelOptionsBuilder(GetModelOptions get_model_options) {
-      model_id_serialized_name = get_model_options.model_id_serialized_name;
+    private GetModelOptionsBuilder(GetModelOptions getModelOptions) {
+      model_id_serialized_name = getModelOptions.model_id_serialized_name;
     }
 
     /**
@@ -453,16 +453,16 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param model_id_serialized_name the model_id_serialized_name
+     * @param modelId the modelId
      */
-    public GetModelOptionsBuilder(String model_id_serialized_name) {
-      this.model_id_serialized_name = model_id_serialized_name;
+    public GetModelOptionsBuilder(String modelId) {
+      this.model_id_serialized_name = modelId;
     }
 
     /**
      * Builds a GetModelOptions.
      *
-     * @return the get_model_options
+     * @return the getModelOptions
      */
     public GetModelOptions build() {
       return new GetModelOptions(this);
@@ -471,11 +471,11 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Set the model_id_serialized_name.
      *
-     * @param model_id_serialized_name the model_id_serialized_name
+     * @param modelId the modelId
      * @return the GetModelOptions builder
      */
-    public GetModelOptionsBuilder modelId(String model_id_serialized_name) {
-      this.model_id_serialized_name = model_id_serialized_name;
+    public GetModelOptionsBuilder modelId(String modelId) {
+      this.model_id_serialized_name = modelId;
       return this;
     }
   }
@@ -512,19 +512,19 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Sets the language_serialized_name.
      *
-     * @param language_serialized_name the new language_serialized_name
+     * @param language the new language
      */
-    public void setLanguage(final String language_serialized_name) {
-      this.language_serialized_name = language_serialized_name;
+    public void setLanguage(final String language) {
+      this.language_serialized_name = language;
     }
 
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -558,10 +558,10 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Sets the languages_serialized_name.
      *
-     * @param languages_serialized_name the new languages_serialized_name
+     * @param languages the new languages
      */
-    public void setLanguages(final List<IdentifiableLanguage> languages_serialized_name) {
-      this.languages_serialized_name = languages_serialized_name;
+    public void setLanguages(final List<IdentifiableLanguage> languages) {
+      this.languages_serialized_name = languages;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -620,19 +620,19 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Sets the language_serialized_name.
      *
-     * @param language_serialized_name the new language_serialized_name
+     * @param language the new language
      */
-    public void setLanguage(final String language_serialized_name) {
-      this.language_serialized_name = language_serialized_name;
+    public void setLanguage(final String language) {
+      this.language_serialized_name = language;
     }
 
     /**
      * Sets the confidence_serialized_name.
      *
-     * @param confidence_serialized_name the new confidence_serialized_name
+     * @param confidence the new confidence
      */
-    public void setConfidence(final Double confidence_serialized_name) {
-      this.confidence_serialized_name = confidence_serialized_name;
+    public void setConfidence(final Double confidence) {
+      this.confidence_serialized_name = confidence;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -666,10 +666,10 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Sets the languages_serialized_name.
      *
-     * @param languages_serialized_name the new languages_serialized_name
+     * @param languages the new languages
      */
-    public void setLanguages(final List<IdentifiedLanguage> languages_serialized_name) {
-      this.languages_serialized_name = languages_serialized_name;
+    public void setLanguages(final List<IdentifiedLanguage> languages) {
+      this.languages_serialized_name = languages;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -733,8 +733,8 @@ public class IBMLanguageTranslatorV2Models {
   public class IdentifyOptionsBuilder {
     private String text_serialized_name;
 
-    private IdentifyOptionsBuilder(IdentifyOptions identify_options) {
-      text_serialized_name = identify_options.text_serialized_name;
+    private IdentifyOptionsBuilder(IdentifyOptions identifyOptions) {
+      text_serialized_name = identifyOptions.text_serialized_name;
     }
 
     /**
@@ -746,16 +746,16 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      */
-    public IdentifyOptionsBuilder(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public IdentifyOptionsBuilder(String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a IdentifyOptions.
      *
-     * @return the identify_options
+     * @return the identifyOptions
      */
     public IdentifyOptions build() {
       return new IdentifyOptions(this);
@@ -764,11 +764,11 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the IdentifyOptions builder
      */
-    public IdentifyOptionsBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public IdentifyOptionsBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
   }
@@ -796,7 +796,7 @@ public class IBMLanguageTranslatorV2Models {
    */
   public class ListIdentifiableLanguagesOptionsBuilder {
 
-    private ListIdentifiableLanguagesOptionsBuilder(ListIdentifiableLanguagesOptions list_identifiable_languages_options) {
+    private ListIdentifiableLanguagesOptionsBuilder(ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptions) {
     }
 
     /**
@@ -808,7 +808,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Builds a ListIdentifiableLanguagesOptions.
      *
-     * @return the list_identifiable_languages_options
+     * @return the listIdentifiableLanguagesOptions
      */
     public ListIdentifiableLanguagesOptions build() {
       return new ListIdentifiableLanguagesOptions(this);
@@ -877,10 +877,10 @@ public class IBMLanguageTranslatorV2Models {
     private String target_serialized_name;
     private Boolean default_serialized_name;
 
-    private ListModelsOptionsBuilder(ListModelsOptions list_models_options) {
-      source_serialized_name = list_models_options.source_serialized_name;
-      target_serialized_name = list_models_options.target_serialized_name;
-      default_serialized_name = list_models_options.default_serialized_name;
+    private ListModelsOptionsBuilder(ListModelsOptions listModelsOptions) {
+      source_serialized_name = listModelsOptions.source_serialized_name;
+      target_serialized_name = listModelsOptions.target_serialized_name;
+      default_serialized_name = listModelsOptions.default_serialized_name;
     }
 
     /**
@@ -892,7 +892,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Builds a ListModelsOptions.
      *
-     * @return the list_models_options
+     * @return the listModelsOptions
      */
     public ListModelsOptions build() {
       return new ListModelsOptions(this);
@@ -901,33 +901,33 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Set the source_serialized_name.
      *
-     * @param source_serialized_name the source_serialized_name
+     * @param source the source
      * @return the ListModelsOptions builder
      */
-    public ListModelsOptionsBuilder source(String source_serialized_name) {
-      this.source_serialized_name = source_serialized_name;
+    public ListModelsOptionsBuilder source(String source) {
+      this.source_serialized_name = source;
       return this;
     }
 
     /**
      * Set the target_serialized_name.
      *
-     * @param target_serialized_name the target_serialized_name
+     * @param target the target
      * @return the ListModelsOptions builder
      */
-    public ListModelsOptionsBuilder target(String target_serialized_name) {
-      this.target_serialized_name = target_serialized_name;
+    public ListModelsOptionsBuilder target(String target) {
+      this.target_serialized_name = target;
       return this;
     }
 
     /**
      * Set the default_serialized_name.
      *
-     * @param default_serialized_name the default_serialized_name
+     * @param default the default
      * @return the ListModelsOptions builder
      */
-    public ListModelsOptionsBuilder defaultField(Boolean default_serialized_name) {
-      this.default_serialized_name = default_serialized_name;
+    public ListModelsOptionsBuilder defaultField(Boolean default) {
+      this.default_serialized_name = default;
       return this;
     }
   }
@@ -1008,11 +1008,11 @@ public class IBMLanguageTranslatorV2Models {
     private String source_serialized_name;
     private String target_serialized_name;
 
-    private TranslateOptionsBuilder(TranslateOptions translate_options) {
-      text_serialized_name = translate_options.text_serialized_name;
-      model_id_serialized_name = translate_options.model_id_serialized_name;
-      source_serialized_name = translate_options.source_serialized_name;
-      target_serialized_name = translate_options.target_serialized_name;
+    private TranslateOptionsBuilder(TranslateOptions translateOptions) {
+      text_serialized_name = translateOptions.text_serialized_name;
+      model_id_serialized_name = translateOptions.model_id_serialized_name;
+      source_serialized_name = translateOptions.source_serialized_name;
+      target_serialized_name = translateOptions.target_serialized_name;
     }
 
     /**
@@ -1024,33 +1024,33 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      */
-    public TranslateOptionsBuilder(List<String> text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public TranslateOptionsBuilder(List<String> text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a TranslateOptions.
      *
-     * @return the translate_options
+     * @return the translateOptions
      */
     public TranslateOptions build() {
       return new TranslateOptions(this);
     }
 
     /**
-     * Adds an text_serialized_name to text_serialized_name.
+     * Adds an text to text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      * @return the TranslateOptions builder
      */
-    public TranslateOptionsBuilder addText(String text_serialized_name) {
-      IBMWatsonValidator.notNull(text_serialized_name, 'text_serialized_name cannot be null');
+    public TranslateOptionsBuilder addText(String text) {
+      IBMWatsonValidator.notNull(text, 'text cannot be null');
       if (this.text_serialized_name == null) {
         this.text_serialized_name = new List<String>();
       }
-      this.text_serialized_name.add(text_serialized_name);
+      this.text_serialized_name.add(text);
       return this;
     }
 
@@ -1058,44 +1058,44 @@ public class IBMLanguageTranslatorV2Models {
      * Set the text_serialized_name.
      * Existing text_serialized_name will be replaced.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the TranslateOptions builder
      */
-    public TranslateOptionsBuilder text(List<String> text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public TranslateOptionsBuilder text(List<String> text) {
+      this.text_serialized_name = text;
       return this;
     }
 
     /**
      * Set the model_id_serialized_name.
      *
-     * @param model_id_serialized_name the model_id_serialized_name
+     * @param modelId the modelId
      * @return the TranslateOptions builder
      */
-    public TranslateOptionsBuilder modelId(String model_id_serialized_name) {
-      this.model_id_serialized_name = model_id_serialized_name;
+    public TranslateOptionsBuilder modelId(String modelId) {
+      this.model_id_serialized_name = modelId;
       return this;
     }
 
     /**
      * Set the source_serialized_name.
      *
-     * @param source_serialized_name the source_serialized_name
+     * @param source the source
      * @return the TranslateOptions builder
      */
-    public TranslateOptionsBuilder source(String source_serialized_name) {
-      this.source_serialized_name = source_serialized_name;
+    public TranslateOptionsBuilder source(String source) {
+      this.source_serialized_name = source;
       return this;
     }
 
     /**
      * Set the target_serialized_name.
      *
-     * @param target_serialized_name the target_serialized_name
+     * @param target the target
      * @return the TranslateOptions builder
      */
-    public TranslateOptionsBuilder target(String target_serialized_name) {
-      this.target_serialized_name = target_serialized_name;
+    public TranslateOptionsBuilder target(String target) {
+      this.target_serialized_name = target;
       return this;
     }
   }
@@ -1120,10 +1120,10 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Sets the translation_serialized_name.
      *
-     * @param translation_serialized_name the new translation_serialized_name
+     * @param translation the new translation
      */
-    public void setTranslation(final String translation_serialized_name) {
-      this.translation_serialized_name = translation_serialized_name;
+    public void setTranslation(final String translation) {
+      this.translation_serialized_name = translation;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1265,91 +1265,91 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Sets the model_id_serialized_name.
      *
-     * @param model_id_serialized_name the new model_id_serialized_name
+     * @param modelId the new modelId
      */
-    public void setModelId(final String model_id_serialized_name) {
-      this.model_id_serialized_name = model_id_serialized_name;
+    public void setModelId(final String modelId) {
+      this.model_id_serialized_name = modelId;
     }
 
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     /**
      * Sets the source_serialized_name.
      *
-     * @param source_serialized_name the new source_serialized_name
+     * @param source the new source
      */
-    public void setSource(final String source_serialized_name) {
-      this.source_serialized_name = source_serialized_name;
+    public void setSource(final String source) {
+      this.source_serialized_name = source;
     }
 
     /**
      * Sets the target_serialized_name.
      *
-     * @param target_serialized_name the new target_serialized_name
+     * @param target the new target
      */
-    public void setTarget(final String target_serialized_name) {
-      this.target_serialized_name = target_serialized_name;
+    public void setTarget(final String target) {
+      this.target_serialized_name = target;
     }
 
     /**
      * Sets the base_model_id_serialized_name.
      *
-     * @param base_model_id_serialized_name the new base_model_id_serialized_name
+     * @param baseModelId the new baseModelId
      */
-    public void setBaseModelId(final String base_model_id_serialized_name) {
-      this.base_model_id_serialized_name = base_model_id_serialized_name;
+    public void setBaseModelId(final String baseModelId) {
+      this.base_model_id_serialized_name = baseModelId;
     }
 
     /**
      * Sets the domain_serialized_name.
      *
-     * @param domain_serialized_name the new domain_serialized_name
+     * @param domain the new domain
      */
-    public void setDomain(final String domain_serialized_name) {
-      this.domain_serialized_name = domain_serialized_name;
+    public void setDomain(final String domain) {
+      this.domain_serialized_name = domain;
     }
 
     /**
      * Sets the customizable_serialized_name.
      *
-     * @param customizable_serialized_name the new customizable_serialized_name
+     * @param customizable the new customizable
      */
-    public void setCustomizable(final Boolean customizable_serialized_name) {
-      this.customizable_serialized_name = customizable_serialized_name;
+    public void setCustomizable(final Boolean customizable) {
+      this.customizable_serialized_name = customizable;
     }
 
     /**
      * Sets the default_model_serialized_name.
      *
-     * @param default_model_serialized_name the new default_model_serialized_name
+     * @param defaultModel the new defaultModel
      */
-    public void setDefaultModel(final Boolean default_model_serialized_name) {
-      this.default_model_serialized_name = default_model_serialized_name;
+    public void setDefaultModel(final Boolean defaultModel) {
+      this.default_model_serialized_name = defaultModel;
     }
 
     /**
      * Sets the owner_serialized_name.
      *
-     * @param owner_serialized_name the new owner_serialized_name
+     * @param owner the new owner
      */
-    public void setOwner(final String owner_serialized_name) {
-      this.owner_serialized_name = owner_serialized_name;
+    public void setOwner(final String owner) {
+      this.owner_serialized_name = owner;
     }
 
     /**
      * Sets the status_serialized_name.
      *
-     * @param status_serialized_name the new status_serialized_name
+     * @param status the new status
      */
-    public void setStatus(final String status_serialized_name) {
-      this.status_serialized_name = status_serialized_name;
+    public void setStatus(final String status) {
+      this.status_serialized_name = status;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1383,10 +1383,10 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Sets the models_serialized_name.
      *
-     * @param models_serialized_name the new models_serialized_name
+     * @param models the new models
      */
-    public void setModels(final List<TranslationModel> models_serialized_name) {
-      this.models_serialized_name = models_serialized_name;
+    public void setModels(final List<TranslationModel> models) {
+      this.models_serialized_name = models;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1457,28 +1457,28 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Sets the word_count_serialized_name.
      *
-     * @param word_count_serialized_name the new word_count_serialized_name
+     * @param wordCount the new wordCount
      */
-    public void setWordCount(final long word_count_serialized_name) {
-      this.word_count_serialized_name = word_count_serialized_name;
+    public void setWordCount(final long wordCount) {
+      this.word_count_serialized_name = wordCount;
     }
 
     /**
      * Sets the character_count_serialized_name.
      *
-     * @param character_count_serialized_name the new character_count_serialized_name
+     * @param characterCount the new characterCount
      */
-    public void setCharacterCount(final long character_count_serialized_name) {
-      this.character_count_serialized_name = character_count_serialized_name;
+    public void setCharacterCount(final long characterCount) {
+      this.character_count_serialized_name = characterCount;
     }
 
     /**
      * Sets the translations_serialized_name.
      *
-     * @param translations_serialized_name the new translations_serialized_name
+     * @param translations the new translations
      */
-    public void setTranslations(final List<Translation> translations_serialized_name) {
-      this.translations_serialized_name = translations_serialized_name;
+    public void setTranslations(final List<Translation> translations) {
+      this.translations_serialized_name = translations;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
