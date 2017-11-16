@@ -43,7 +43,7 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/classifiers/{0}/classify', new String[]{ classifyOptions.classifierId() }));
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', classifyOptions.text());
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMNaturalLanguageClassifierV1Models.Classification) createServiceCall(builder.build(), IBMNaturalLanguageClassifierV1Models.Classification.class);
   }
