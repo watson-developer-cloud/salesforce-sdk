@@ -1138,7 +1138,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param content_serialized_name the content_serialized_name
      * @return the ProfileOptions builder
      */
-    public ProfileOptionsBuilder content_serialized_name(Content content_serialized_name) {
+    public ProfileOptionsBuilder content(Content content_serialized_name) {
       this.content_serialized_name = content_serialized_name;
       this.content_type_serialized_name = IBMWatsonHttpMediaType.APPLICATION_JSON;
       return this;
