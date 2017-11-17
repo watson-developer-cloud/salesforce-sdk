@@ -122,10 +122,10 @@ public class IBMConversationV1Models {
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -171,19 +171,19 @@ public class IBMConversationV1Models {
     /**
      * Sets the counterexamples_serialized_name.
      *
-     * @param counterexamples_serialized_name the new counterexamples_serialized_name
+     * @param counterexamples the new counterexamples
      */
-    public void setCounterexamples(final List<Counterexample> counterexamples_serialized_name) {
-      this.counterexamples_serialized_name = counterexamples_serialized_name;
+    public void setCounterexamples(final List<Counterexample> counterexamples) {
+      this.counterexamples_serialized_name = counterexamples;
     }
 
     /**
      * Sets the pagination_serialized_name.
      *
-     * @param pagination_serialized_name the new pagination_serialized_name
+     * @param pagination the new pagination
      */
-    public void setPagination(final Pagination pagination_serialized_name) {
-      this.pagination_serialized_name = pagination_serialized_name;
+    public void setPagination(final Pagination pagination) {
+      this.pagination_serialized_name = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -251,8 +251,8 @@ public class IBMConversationV1Models {
   public class CreateCounterexampleBuilder {
     private String text_serialized_name;
 
-    private CreateCounterexampleBuilder(CreateCounterexample create_counterexample) {
-      text_serialized_name = create_counterexample.text_serialized_name;
+    private CreateCounterexampleBuilder(CreateCounterexample createCounterexample) {
+      text_serialized_name = createCounterexample.text_serialized_name;
     }
 
     /**
@@ -264,16 +264,16 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      */
-    public CreateCounterexampleBuilder(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public CreateCounterexampleBuilder(String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a CreateCounterexample.
      *
-     * @return the create_counterexample
+     * @return the createCounterexample
      */
     public CreateCounterexample build() {
       return new CreateCounterexample(this);
@@ -282,11 +282,11 @@ public class IBMConversationV1Models {
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the CreateCounterexample builder
      */
-    public CreateCounterexampleBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public CreateCounterexampleBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
   }
@@ -342,9 +342,9 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String text_serialized_name;
 
-    private CreateCounterexampleOptionsBuilder(CreateCounterexampleOptions create_counterexample_options) {
-      workspace_id_serialized_name = create_counterexample_options.workspace_id_serialized_name;
-      text_serialized_name = create_counterexample_options.text_serialized_name;
+    private CreateCounterexampleOptionsBuilder(CreateCounterexampleOptions createCounterexampleOptions) {
+      workspace_id_serialized_name = createCounterexampleOptions.workspace_id_serialized_name;
+      text_serialized_name = createCounterexampleOptions.text_serialized_name;
     }
 
     /**
@@ -356,18 +356,18 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param text_serialized_name the text_serialized_name
+     * @param workspaceId the workspaceId
+     * @param text the text
      */
-    public CreateCounterexampleOptionsBuilder(String workspace_id_serialized_name, String text_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.text_serialized_name = text_serialized_name;
+    public CreateCounterexampleOptionsBuilder(String workspaceId, String text) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a CreateCounterexampleOptions.
      *
-     * @return the create_counterexample_options
+     * @return the createCounterexampleOptions
      */
     public CreateCounterexampleOptions build() {
       return new CreateCounterexampleOptions(this);
@@ -376,22 +376,22 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the CreateCounterexampleOptions builder
      */
-    public CreateCounterexampleOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public CreateCounterexampleOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the CreateCounterexampleOptions builder
      */
-    public CreateCounterexampleOptionsBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public CreateCounterexampleOptionsBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
   }
@@ -602,21 +602,21 @@ public class IBMConversationV1Models {
     private String event_name_serialized_name;
     private String variable_serialized_name;
 
-    private CreateDialogNodeBuilder(CreateDialogNode create_dialog_node) {
-      dialog_node_serialized_name = create_dialog_node.dialog_node_serialized_name;
-      description_serialized_name = create_dialog_node.description_serialized_name;
-      conditions_serialized_name = create_dialog_node.conditions_serialized_name;
-      parent_serialized_name = create_dialog_node.parent_serialized_name;
-      previous_sibling_serialized_name = create_dialog_node.previous_sibling_serialized_name;
-      output_serialized_name = create_dialog_node.output_serialized_name;
-      context_serialized_name = create_dialog_node.context_serialized_name;
-      metadata_serialized_name = create_dialog_node.metadata_serialized_name;
-      next_step_serialized_name = create_dialog_node.next_step_serialized_name;
-      actions_serialized_name = create_dialog_node.actions_serialized_name;
-      title_serialized_name = create_dialog_node.title_serialized_name;
-      type_serialized_name = create_dialog_node.type_serialized_name;
-      event_name_serialized_name = create_dialog_node.event_name_serialized_name;
-      variable_serialized_name = create_dialog_node.variable_serialized_name;
+    private CreateDialogNodeBuilder(CreateDialogNode createDialogNode) {
+      dialog_node_serialized_name = createDialogNode.dialog_node_serialized_name;
+      description_serialized_name = createDialogNode.description_serialized_name;
+      conditions_serialized_name = createDialogNode.conditions_serialized_name;
+      parent_serialized_name = createDialogNode.parent_serialized_name;
+      previous_sibling_serialized_name = createDialogNode.previous_sibling_serialized_name;
+      output_serialized_name = createDialogNode.output_serialized_name;
+      context_serialized_name = createDialogNode.context_serialized_name;
+      metadata_serialized_name = createDialogNode.metadata_serialized_name;
+      next_step_serialized_name = createDialogNode.next_step_serialized_name;
+      actions_serialized_name = createDialogNode.actions_serialized_name;
+      title_serialized_name = createDialogNode.title_serialized_name;
+      type_serialized_name = createDialogNode.type_serialized_name;
+      event_name_serialized_name = createDialogNode.event_name_serialized_name;
+      variable_serialized_name = createDialogNode.variable_serialized_name;
     }
 
     /**
@@ -628,132 +628,132 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param dialog_node_serialized_name the dialog_node_serialized_name
+     * @param dialogNode the dialogNode
      */
-    public CreateDialogNodeBuilder(String dialog_node_serialized_name) {
-      this.dialog_node_serialized_name = dialog_node_serialized_name;
+    public CreateDialogNodeBuilder(String dialogNode) {
+      this.dialog_node_serialized_name = dialogNode;
     }
 
     /**
      * Builds a CreateDialogNode.
      *
-     * @return the create_dialog_node
+     * @return the createDialogNode
      */
     public CreateDialogNode build() {
       return new CreateDialogNode(this);
     }
 
     /**
-     * Adds an actions_serialized_name to actions_serialized_name.
+     * Adds an actions to actions_serialized_name.
      *
-     * @param actions_serialized_name the new actions_serialized_name
+     * @param actions the new actions
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder addActions(DialogNodeAction actions_serialized_name) {
-      IBMWatsonValidator.notNull(actions_serialized_name, 'actions_serialized_name cannot be null');
+    public CreateDialogNodeBuilder addActions(DialogNodeAction actions) {
+      IBMWatsonValidator.notNull(actions, 'actions cannot be null');
       if (this.actions_serialized_name == null) {
         this.actions_serialized_name = new List<DialogNodeAction>();
       }
-      this.actions_serialized_name.add(actions_serialized_name);
+      this.actions_serialized_name.add(actions);
       return this;
     }
 
     /**
      * Set the dialog_node_serialized_name.
      *
-     * @param dialog_node_serialized_name the dialog_node_serialized_name
+     * @param dialogNode the dialogNode
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder dialogNode(String dialog_node_serialized_name) {
-      this.dialog_node_serialized_name = dialog_node_serialized_name;
+    public CreateDialogNodeBuilder dialogNode(String dialogNode) {
+      this.dialog_node_serialized_name = dialogNode;
       return this;
     }
 
     /**
      * Set the description_serialized_name.
      *
-     * @param description_serialized_name the description_serialized_name
+     * @param description the description
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder description(String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public CreateDialogNodeBuilder description(String description) {
+      this.description_serialized_name = description;
       return this;
     }
 
     /**
      * Set the conditions_serialized_name.
      *
-     * @param conditions_serialized_name the conditions_serialized_name
+     * @param conditions the conditions
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder conditions(String conditions_serialized_name) {
-      this.conditions_serialized_name = conditions_serialized_name;
+    public CreateDialogNodeBuilder conditions(String conditions) {
+      this.conditions_serialized_name = conditions;
       return this;
     }
 
     /**
      * Set the parent_serialized_name.
      *
-     * @param parent_serialized_name the parent_serialized_name
+     * @param parent the parent
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder parent(String parent_serialized_name) {
-      this.parent_serialized_name = parent_serialized_name;
+    public CreateDialogNodeBuilder parent(String parent) {
+      this.parent_serialized_name = parent;
       return this;
     }
 
     /**
      * Set the previous_sibling_serialized_name.
      *
-     * @param previous_sibling_serialized_name the previous_sibling_serialized_name
+     * @param previousSibling the previousSibling
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder previousSibling(String previous_sibling_serialized_name) {
-      this.previous_sibling_serialized_name = previous_sibling_serialized_name;
+    public CreateDialogNodeBuilder previousSibling(String previousSibling) {
+      this.previous_sibling_serialized_name = previousSibling;
       return this;
     }
 
     /**
      * Set the output_serialized_name.
      *
-     * @param output_serialized_name the output_serialized_name
+     * @param output the output
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder output(IBMWatsonMapModel output_serialized_name) {
-      this.output_serialized_name = output_serialized_name;
+    public CreateDialogNodeBuilder output(IBMWatsonMapModel output) {
+      this.output_serialized_name = output;
       return this;
     }
 
     /**
      * Set the context_serialized_name.
      *
-     * @param context_serialized_name the context_serialized_name
+     * @param context the context
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder context(IBMWatsonMapModel context_serialized_name) {
-      this.context_serialized_name = context_serialized_name;
+    public CreateDialogNodeBuilder context(IBMWatsonMapModel context) {
+      this.context_serialized_name = context;
       return this;
     }
 
     /**
      * Set the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the metadata_serialized_name
+     * @param metadata the metadata
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public CreateDialogNodeBuilder metadata(IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
       return this;
     }
 
     /**
      * Set the next_step_serialized_name.
      *
-     * @param next_step_serialized_name the next_step_serialized_name
+     * @param nextStep the nextStep
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder nextStep(DialogNodeNextStep next_step_serialized_name) {
-      this.next_step_serialized_name = next_step_serialized_name;
+    public CreateDialogNodeBuilder nextStep(DialogNodeNextStep nextStep) {
+      this.next_step_serialized_name = nextStep;
       return this;
     }
 
@@ -761,55 +761,55 @@ public class IBMConversationV1Models {
      * Set the actions_serialized_name.
      * Existing actions_serialized_name will be replaced.
      *
-     * @param actions_serialized_name the actions_serialized_name
+     * @param actions the actions
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder actions(List<DialogNodeAction> actions_serialized_name) {
-      this.actions_serialized_name = actions_serialized_name;
+    public CreateDialogNodeBuilder actions(List<DialogNodeAction> actions) {
+      this.actions_serialized_name = actions;
       return this;
     }
 
     /**
      * Set the title_serialized_name.
      *
-     * @param title_serialized_name the title_serialized_name
+     * @param title the title
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder title(String title_serialized_name) {
-      this.title_serialized_name = title_serialized_name;
+    public CreateDialogNodeBuilder title(String title) {
+      this.title_serialized_name = title;
       return this;
     }
 
     /**
      * Set the type_serialized_name.
      *
-     * @param type_serialized_name the type_serialized_name
+     * @param typeVar the typeVar
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder typeField(String type_serialized_name) {
-      this.type_serialized_name = type_serialized_name;
+    public CreateDialogNodeBuilder typeField(String typeVar) {
+      this.type_serialized_name = typeVar;
       return this;
     }
 
     /**
      * Set the event_name_serialized_name.
      *
-     * @param event_name_serialized_name the event_name_serialized_name
+     * @param eventName the eventName
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder eventName(String event_name_serialized_name) {
-      this.event_name_serialized_name = event_name_serialized_name;
+    public CreateDialogNodeBuilder eventName(String eventName) {
+      this.event_name_serialized_name = eventName;
       return this;
     }
 
     /**
      * Set the variable_serialized_name.
      *
-     * @param variable_serialized_name the variable_serialized_name
+     * @param variable the variable
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder variable(String variable_serialized_name) {
-      this.variable_serialized_name = variable_serialized_name;
+    public CreateDialogNodeBuilder variable(String variable) {
+      this.variable_serialized_name = variable;
       return this;
     }
   }
@@ -1034,22 +1034,22 @@ public class IBMConversationV1Models {
     private String event_name_serialized_name;
     private String variable_serialized_name;
 
-    private CreateDialogNodeOptionsBuilder(CreateDialogNodeOptions create_dialog_node_options) {
-      workspace_id_serialized_name = create_dialog_node_options.workspace_id_serialized_name;
-      dialog_node_serialized_name = create_dialog_node_options.dialog_node_serialized_name;
-      description_serialized_name = create_dialog_node_options.description_serialized_name;
-      conditions_serialized_name = create_dialog_node_options.conditions_serialized_name;
-      parent_serialized_name = create_dialog_node_options.parent_serialized_name;
-      previous_sibling_serialized_name = create_dialog_node_options.previous_sibling_serialized_name;
-      output_serialized_name = create_dialog_node_options.output_serialized_name;
-      context_serialized_name = create_dialog_node_options.context_serialized_name;
-      metadata_serialized_name = create_dialog_node_options.metadata_serialized_name;
-      next_step_serialized_name = create_dialog_node_options.next_step_serialized_name;
-      actions_serialized_name = create_dialog_node_options.actions_serialized_name;
-      title_serialized_name = create_dialog_node_options.title_serialized_name;
-      type_serialized_name = create_dialog_node_options.type_serialized_name;
-      event_name_serialized_name = create_dialog_node_options.event_name_serialized_name;
-      variable_serialized_name = create_dialog_node_options.variable_serialized_name;
+    private CreateDialogNodeOptionsBuilder(CreateDialogNodeOptions createDialogNodeOptions) {
+      workspace_id_serialized_name = createDialogNodeOptions.workspace_id_serialized_name;
+      dialog_node_serialized_name = createDialogNodeOptions.dialog_node_serialized_name;
+      description_serialized_name = createDialogNodeOptions.description_serialized_name;
+      conditions_serialized_name = createDialogNodeOptions.conditions_serialized_name;
+      parent_serialized_name = createDialogNodeOptions.parent_serialized_name;
+      previous_sibling_serialized_name = createDialogNodeOptions.previous_sibling_serialized_name;
+      output_serialized_name = createDialogNodeOptions.output_serialized_name;
+      context_serialized_name = createDialogNodeOptions.context_serialized_name;
+      metadata_serialized_name = createDialogNodeOptions.metadata_serialized_name;
+      next_step_serialized_name = createDialogNodeOptions.next_step_serialized_name;
+      actions_serialized_name = createDialogNodeOptions.actions_serialized_name;
+      title_serialized_name = createDialogNodeOptions.title_serialized_name;
+      type_serialized_name = createDialogNodeOptions.type_serialized_name;
+      event_name_serialized_name = createDialogNodeOptions.event_name_serialized_name;
+      variable_serialized_name = createDialogNodeOptions.variable_serialized_name;
     }
 
     /**
@@ -1061,145 +1061,145 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param dialog_node_serialized_name the dialog_node_serialized_name
+     * @param workspaceId the workspaceId
+     * @param dialogNode the dialogNode
      */
-    public CreateDialogNodeOptionsBuilder(String workspace_id_serialized_name, String dialog_node_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.dialog_node_serialized_name = dialog_node_serialized_name;
+    public CreateDialogNodeOptionsBuilder(String workspaceId, String dialogNode) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.dialog_node_serialized_name = dialogNode;
     }
 
     /**
      * Builds a CreateDialogNodeOptions.
      *
-     * @return the create_dialog_node_options
+     * @return the createDialogNodeOptions
      */
     public CreateDialogNodeOptions build() {
       return new CreateDialogNodeOptions(this);
     }
 
     /**
-     * Adds an actions_serialized_name to actions_serialized_name.
+     * Adds an actions to actions_serialized_name.
      *
-     * @param actions_serialized_name the new actions_serialized_name
+     * @param actions the new actions
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder addActions(DialogNodeAction actions_serialized_name) {
-      IBMWatsonValidator.notNull(actions_serialized_name, 'actions_serialized_name cannot be null');
+    public CreateDialogNodeOptionsBuilder addActions(DialogNodeAction actions) {
+      IBMWatsonValidator.notNull(actions, 'actions cannot be null');
       if (this.actions_serialized_name == null) {
         this.actions_serialized_name = new List<DialogNodeAction>();
       }
-      this.actions_serialized_name.add(actions_serialized_name);
+      this.actions_serialized_name.add(actions);
       return this;
     }
 
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public CreateDialogNodeOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the dialog_node_serialized_name.
      *
-     * @param dialog_node_serialized_name the dialog_node_serialized_name
+     * @param dialogNode the dialogNode
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder dialogNode(String dialog_node_serialized_name) {
-      this.dialog_node_serialized_name = dialog_node_serialized_name;
+    public CreateDialogNodeOptionsBuilder dialogNode(String dialogNode) {
+      this.dialog_node_serialized_name = dialogNode;
       return this;
     }
 
     /**
      * Set the description_serialized_name.
      *
-     * @param description_serialized_name the description_serialized_name
+     * @param description the description
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder description(String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public CreateDialogNodeOptionsBuilder description(String description) {
+      this.description_serialized_name = description;
       return this;
     }
 
     /**
      * Set the conditions_serialized_name.
      *
-     * @param conditions_serialized_name the conditions_serialized_name
+     * @param conditions the conditions
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder conditions(String conditions_serialized_name) {
-      this.conditions_serialized_name = conditions_serialized_name;
+    public CreateDialogNodeOptionsBuilder conditions(String conditions) {
+      this.conditions_serialized_name = conditions;
       return this;
     }
 
     /**
      * Set the parent_serialized_name.
      *
-     * @param parent_serialized_name the parent_serialized_name
+     * @param parent the parent
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder parent(String parent_serialized_name) {
-      this.parent_serialized_name = parent_serialized_name;
+    public CreateDialogNodeOptionsBuilder parent(String parent) {
+      this.parent_serialized_name = parent;
       return this;
     }
 
     /**
      * Set the previous_sibling_serialized_name.
      *
-     * @param previous_sibling_serialized_name the previous_sibling_serialized_name
+     * @param previousSibling the previousSibling
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder previousSibling(String previous_sibling_serialized_name) {
-      this.previous_sibling_serialized_name = previous_sibling_serialized_name;
+    public CreateDialogNodeOptionsBuilder previousSibling(String previousSibling) {
+      this.previous_sibling_serialized_name = previousSibling;
       return this;
     }
 
     /**
      * Set the output_serialized_name.
      *
-     * @param output_serialized_name the output_serialized_name
+     * @param output the output
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder output(IBMWatsonMapModel output_serialized_name) {
-      this.output_serialized_name = output_serialized_name;
+    public CreateDialogNodeOptionsBuilder output(IBMWatsonMapModel output) {
+      this.output_serialized_name = output;
       return this;
     }
 
     /**
      * Set the context_serialized_name.
      *
-     * @param context_serialized_name the context_serialized_name
+     * @param context the context
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder context(IBMWatsonMapModel context_serialized_name) {
-      this.context_serialized_name = context_serialized_name;
+    public CreateDialogNodeOptionsBuilder context(IBMWatsonMapModel context) {
+      this.context_serialized_name = context;
       return this;
     }
 
     /**
      * Set the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the metadata_serialized_name
+     * @param metadata the metadata
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public CreateDialogNodeOptionsBuilder metadata(IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
       return this;
     }
 
     /**
      * Set the next_step_serialized_name.
      *
-     * @param next_step_serialized_name the next_step_serialized_name
+     * @param nextStep the nextStep
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder nextStep(DialogNodeNextStep next_step_serialized_name) {
-      this.next_step_serialized_name = next_step_serialized_name;
+    public CreateDialogNodeOptionsBuilder nextStep(DialogNodeNextStep nextStep) {
+      this.next_step_serialized_name = nextStep;
       return this;
     }
 
@@ -1207,55 +1207,55 @@ public class IBMConversationV1Models {
      * Set the actions_serialized_name.
      * Existing actions_serialized_name will be replaced.
      *
-     * @param actions_serialized_name the actions_serialized_name
+     * @param actions the actions
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder actions(List<DialogNodeAction> actions_serialized_name) {
-      this.actions_serialized_name = actions_serialized_name;
+    public CreateDialogNodeOptionsBuilder actions(List<DialogNodeAction> actions) {
+      this.actions_serialized_name = actions;
       return this;
     }
 
     /**
      * Set the title_serialized_name.
      *
-     * @param title_serialized_name the title_serialized_name
+     * @param title the title
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder title(String title_serialized_name) {
-      this.title_serialized_name = title_serialized_name;
+    public CreateDialogNodeOptionsBuilder title(String title) {
+      this.title_serialized_name = title;
       return this;
     }
 
     /**
      * Set the type_serialized_name.
      *
-     * @param type_serialized_name the type_serialized_name
+     * @param typeVar the typeVar
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder typeField(String type_serialized_name) {
-      this.type_serialized_name = type_serialized_name;
+    public CreateDialogNodeOptionsBuilder typeField(String typeVar) {
+      this.type_serialized_name = typeVar;
       return this;
     }
 
     /**
      * Set the event_name_serialized_name.
      *
-     * @param event_name_serialized_name the event_name_serialized_name
+     * @param eventName the eventName
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder eventName(String event_name_serialized_name) {
-      this.event_name_serialized_name = event_name_serialized_name;
+    public CreateDialogNodeOptionsBuilder eventName(String eventName) {
+      this.event_name_serialized_name = eventName;
       return this;
     }
 
     /**
      * Set the variable_serialized_name.
      *
-     * @param variable_serialized_name the variable_serialized_name
+     * @param variable the variable
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder variable(String variable_serialized_name) {
-      this.variable_serialized_name = variable_serialized_name;
+    public CreateDialogNodeOptionsBuilder variable(String variable) {
+      this.variable_serialized_name = variable;
       return this;
     }
   }
@@ -1349,12 +1349,12 @@ public class IBMConversationV1Models {
     private List<CreateValue> values_serialized_name;
     private Boolean fuzzy_match_serialized_name;
 
-    private CreateEntityBuilder(CreateEntity create_entity) {
-      entity_serialized_name = create_entity.entity_serialized_name;
-      description_serialized_name = create_entity.description_serialized_name;
-      metadata_serialized_name = create_entity.metadata_serialized_name;
-      values_serialized_name = create_entity.values_serialized_name;
-      fuzzy_match_serialized_name = create_entity.fuzzy_match_serialized_name;
+    private CreateEntityBuilder(CreateEntity createEntity) {
+      entity_serialized_name = createEntity.entity_serialized_name;
+      description_serialized_name = createEntity.description_serialized_name;
+      metadata_serialized_name = createEntity.metadata_serialized_name;
+      values_serialized_name = createEntity.values_serialized_name;
+      fuzzy_match_serialized_name = createEntity.fuzzy_match_serialized_name;
     }
 
     /**
@@ -1366,66 +1366,66 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      */
-    public CreateEntityBuilder(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public CreateEntityBuilder(String entity) {
+      this.entity_serialized_name = entity;
     }
 
     /**
      * Builds a CreateEntity.
      *
-     * @return the create_entity
+     * @return the createEntity
      */
     public CreateEntity build() {
       return new CreateEntity(this);
     }
 
     /**
-     * Adds an values_serialized_name to values_serialized_name.
+     * Adds an values to values_serialized_name.
      *
-     * @param values_serialized_name the new values_serialized_name
+     * @param values the new values
      * @return the CreateEntity builder
      */
-    public CreateEntityBuilder addValues(CreateValue values_serialized_name) {
-      IBMWatsonValidator.notNull(values_serialized_name, 'values_serialized_name cannot be null');
+    public CreateEntityBuilder addValues(CreateValue values) {
+      IBMWatsonValidator.notNull(values, 'values cannot be null');
       if (this.values_serialized_name == null) {
         this.values_serialized_name = new List<CreateValue>();
       }
-      this.values_serialized_name.add(values_serialized_name);
+      this.values_serialized_name.add(values);
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the CreateEntity builder
      */
-    public CreateEntityBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public CreateEntityBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
 
     /**
      * Set the description_serialized_name.
      *
-     * @param description_serialized_name the description_serialized_name
+     * @param description the description
      * @return the CreateEntity builder
      */
-    public CreateEntityBuilder description(String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public CreateEntityBuilder description(String description) {
+      this.description_serialized_name = description;
       return this;
     }
 
     /**
      * Set the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the metadata_serialized_name
+     * @param metadata the metadata
      * @return the CreateEntity builder
      */
-    public CreateEntityBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public CreateEntityBuilder metadata(IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
       return this;
     }
 
@@ -1433,22 +1433,22 @@ public class IBMConversationV1Models {
      * Set the values_serialized_name.
      * Existing values_serialized_name will be replaced.
      *
-     * @param values_serialized_name the values_serialized_name
+     * @param values the values
      * @return the CreateEntity builder
      */
-    public CreateEntityBuilder values(List<CreateValue> values_serialized_name) {
-      this.values_serialized_name = values_serialized_name;
+    public CreateEntityBuilder values(List<CreateValue> values) {
+      this.values_serialized_name = values;
       return this;
     }
 
     /**
      * Set the fuzzy_match_serialized_name.
      *
-     * @param fuzzy_match_serialized_name the fuzzy_match_serialized_name
+     * @param fuzzyMatch the fuzzyMatch
      * @return the CreateEntity builder
      */
-    public CreateEntityBuilder fuzzyMatch(Boolean fuzzy_match_serialized_name) {
-      this.fuzzy_match_serialized_name = fuzzy_match_serialized_name;
+    public CreateEntityBuilder fuzzyMatch(Boolean fuzzyMatch) {
+      this.fuzzy_match_serialized_name = fuzzyMatch;
       return this;
     }
   }
@@ -1556,13 +1556,13 @@ public class IBMConversationV1Models {
     private List<CreateValue> values_serialized_name;
     private Boolean fuzzy_match_serialized_name;
 
-    private CreateEntityOptionsBuilder(CreateEntityOptions create_entity_options) {
-      workspace_id_serialized_name = create_entity_options.workspace_id_serialized_name;
-      entity_serialized_name = create_entity_options.entity_serialized_name;
-      description_serialized_name = create_entity_options.description_serialized_name;
-      metadata_serialized_name = create_entity_options.metadata_serialized_name;
-      values_serialized_name = create_entity_options.values_serialized_name;
-      fuzzy_match_serialized_name = create_entity_options.fuzzy_match_serialized_name;
+    private CreateEntityOptionsBuilder(CreateEntityOptions createEntityOptions) {
+      workspace_id_serialized_name = createEntityOptions.workspace_id_serialized_name;
+      entity_serialized_name = createEntityOptions.entity_serialized_name;
+      description_serialized_name = createEntityOptions.description_serialized_name;
+      metadata_serialized_name = createEntityOptions.metadata_serialized_name;
+      values_serialized_name = createEntityOptions.values_serialized_name;
+      fuzzy_match_serialized_name = createEntityOptions.fuzzy_match_serialized_name;
     }
 
     /**
@@ -1574,79 +1574,79 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param entity_serialized_name the entity_serialized_name
+     * @param workspaceId the workspaceId
+     * @param entity the entity
      */
-    public CreateEntityOptionsBuilder(String workspace_id_serialized_name, String entity_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.entity_serialized_name = entity_serialized_name;
+    public CreateEntityOptionsBuilder(String workspaceId, String entity) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
     }
 
     /**
      * Builds a CreateEntityOptions.
      *
-     * @return the create_entity_options
+     * @return the createEntityOptions
      */
     public CreateEntityOptions build() {
       return new CreateEntityOptions(this);
     }
 
     /**
-     * Adds an values_serialized_name to values_serialized_name.
+     * Adds an values to values_serialized_name.
      *
-     * @param values_serialized_name the new values_serialized_name
+     * @param values the new values
      * @return the CreateEntityOptions builder
      */
-    public CreateEntityOptionsBuilder addValues(CreateValue values_serialized_name) {
-      IBMWatsonValidator.notNull(values_serialized_name, 'values_serialized_name cannot be null');
+    public CreateEntityOptionsBuilder addValues(CreateValue values) {
+      IBMWatsonValidator.notNull(values, 'values cannot be null');
       if (this.values_serialized_name == null) {
         this.values_serialized_name = new List<CreateValue>();
       }
-      this.values_serialized_name.add(values_serialized_name);
+      this.values_serialized_name.add(values);
       return this;
     }
 
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the CreateEntityOptions builder
      */
-    public CreateEntityOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public CreateEntityOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the CreateEntityOptions builder
      */
-    public CreateEntityOptionsBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public CreateEntityOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
 
     /**
      * Set the description_serialized_name.
      *
-     * @param description_serialized_name the description_serialized_name
+     * @param description the description
      * @return the CreateEntityOptions builder
      */
-    public CreateEntityOptionsBuilder description(String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public CreateEntityOptionsBuilder description(String description) {
+      this.description_serialized_name = description;
       return this;
     }
 
     /**
      * Set the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the metadata_serialized_name
+     * @param metadata the metadata
      * @return the CreateEntityOptions builder
      */
-    public CreateEntityOptionsBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public CreateEntityOptionsBuilder metadata(IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
       return this;
     }
 
@@ -1654,22 +1654,22 @@ public class IBMConversationV1Models {
      * Set the values_serialized_name.
      * Existing values_serialized_name will be replaced.
      *
-     * @param values_serialized_name the values_serialized_name
+     * @param values the values
      * @return the CreateEntityOptions builder
      */
-    public CreateEntityOptionsBuilder values(List<CreateValue> values_serialized_name) {
-      this.values_serialized_name = values_serialized_name;
+    public CreateEntityOptionsBuilder values(List<CreateValue> values) {
+      this.values_serialized_name = values;
       return this;
     }
 
     /**
      * Set the fuzzy_match_serialized_name.
      *
-     * @param fuzzy_match_serialized_name the fuzzy_match_serialized_name
+     * @param fuzzyMatch the fuzzyMatch
      * @return the CreateEntityOptions builder
      */
-    public CreateEntityOptionsBuilder fuzzyMatch(Boolean fuzzy_match_serialized_name) {
-      this.fuzzy_match_serialized_name = fuzzy_match_serialized_name;
+    public CreateEntityOptionsBuilder fuzzyMatch(Boolean fuzzyMatch) {
+      this.fuzzy_match_serialized_name = fuzzyMatch;
       return this;
     }
   }
@@ -1711,8 +1711,8 @@ public class IBMConversationV1Models {
   public class CreateExampleBuilder {
     private String text_serialized_name;
 
-    private CreateExampleBuilder(CreateExample create_example) {
-      text_serialized_name = create_example.text_serialized_name;
+    private CreateExampleBuilder(CreateExample createExample) {
+      text_serialized_name = createExample.text_serialized_name;
     }
 
     /**
@@ -1724,16 +1724,16 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      */
-    public CreateExampleBuilder(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public CreateExampleBuilder(String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a CreateExample.
      *
-     * @return the create_example
+     * @return the createExample
      */
     public CreateExample build() {
       return new CreateExample(this);
@@ -1742,11 +1742,11 @@ public class IBMConversationV1Models {
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the CreateExample builder
      */
-    public CreateExampleBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public CreateExampleBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
   }
@@ -1816,10 +1816,10 @@ public class IBMConversationV1Models {
     private String intent_serialized_name;
     private String text_serialized_name;
 
-    private CreateExampleOptionsBuilder(CreateExampleOptions create_example_options) {
-      workspace_id_serialized_name = create_example_options.workspace_id_serialized_name;
-      intent_serialized_name = create_example_options.intent_serialized_name;
-      text_serialized_name = create_example_options.text_serialized_name;
+    private CreateExampleOptionsBuilder(CreateExampleOptions createExampleOptions) {
+      workspace_id_serialized_name = createExampleOptions.workspace_id_serialized_name;
+      intent_serialized_name = createExampleOptions.intent_serialized_name;
+      text_serialized_name = createExampleOptions.text_serialized_name;
     }
 
     /**
@@ -1831,20 +1831,20 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param intent_serialized_name the intent_serialized_name
-     * @param text_serialized_name the text_serialized_name
+     * @param workspaceId the workspaceId
+     * @param intent the intent
+     * @param text the text
      */
-    public CreateExampleOptionsBuilder(String workspace_id_serialized_name, String intent_serialized_name, String text_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.intent_serialized_name = intent_serialized_name;
-      this.text_serialized_name = text_serialized_name;
+    public CreateExampleOptionsBuilder(String workspaceId, String intent, String text) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.intent_serialized_name = intent;
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a CreateExampleOptions.
      *
-     * @return the create_example_options
+     * @return the createExampleOptions
      */
     public CreateExampleOptions build() {
       return new CreateExampleOptions(this);
@@ -1853,33 +1853,33 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the CreateExampleOptions builder
      */
-    public CreateExampleOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public CreateExampleOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the intent_serialized_name.
      *
-     * @param intent_serialized_name the intent_serialized_name
+     * @param intent the intent
      * @return the CreateExampleOptions builder
      */
-    public CreateExampleOptionsBuilder intent(String intent_serialized_name) {
-      this.intent_serialized_name = intent_serialized_name;
+    public CreateExampleOptionsBuilder intent(String intent) {
+      this.intent_serialized_name = intent;
       return this;
     }
 
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the CreateExampleOptions builder
      */
-    public CreateExampleOptionsBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public CreateExampleOptionsBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
   }
@@ -1947,10 +1947,10 @@ public class IBMConversationV1Models {
     private String description_serialized_name;
     private List<CreateExample> examples_serialized_name;
 
-    private CreateIntentBuilder(CreateIntent create_intent) {
-      intent_serialized_name = create_intent.intent_serialized_name;
-      description_serialized_name = create_intent.description_serialized_name;
-      examples_serialized_name = create_intent.examples_serialized_name;
+    private CreateIntentBuilder(CreateIntent createIntent) {
+      intent_serialized_name = createIntent.intent_serialized_name;
+      description_serialized_name = createIntent.description_serialized_name;
+      examples_serialized_name = createIntent.examples_serialized_name;
     }
 
     /**
@@ -1962,55 +1962,55 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param intent_serialized_name the intent_serialized_name
+     * @param intent the intent
      */
-    public CreateIntentBuilder(String intent_serialized_name) {
-      this.intent_serialized_name = intent_serialized_name;
+    public CreateIntentBuilder(String intent) {
+      this.intent_serialized_name = intent;
     }
 
     /**
      * Builds a CreateIntent.
      *
-     * @return the create_intent
+     * @return the createIntent
      */
     public CreateIntent build() {
       return new CreateIntent(this);
     }
 
     /**
-     * Adds an examples_serialized_name to examples_serialized_name.
+     * Adds an examples to examples_serialized_name.
      *
-     * @param examples_serialized_name the new examples_serialized_name
+     * @param examples the new examples
      * @return the CreateIntent builder
      */
-    public CreateIntentBuilder addExamples(CreateExample examples_serialized_name) {
-      IBMWatsonValidator.notNull(examples_serialized_name, 'examples_serialized_name cannot be null');
+    public CreateIntentBuilder addExamples(CreateExample examples) {
+      IBMWatsonValidator.notNull(examples, 'examples cannot be null');
       if (this.examples_serialized_name == null) {
         this.examples_serialized_name = new List<CreateExample>();
       }
-      this.examples_serialized_name.add(examples_serialized_name);
+      this.examples_serialized_name.add(examples);
       return this;
     }
 
     /**
      * Set the intent_serialized_name.
      *
-     * @param intent_serialized_name the intent_serialized_name
+     * @param intent the intent
      * @return the CreateIntent builder
      */
-    public CreateIntentBuilder intent(String intent_serialized_name) {
-      this.intent_serialized_name = intent_serialized_name;
+    public CreateIntentBuilder intent(String intent) {
+      this.intent_serialized_name = intent;
       return this;
     }
 
     /**
      * Set the description_serialized_name.
      *
-     * @param description_serialized_name the description_serialized_name
+     * @param description the description
      * @return the CreateIntent builder
      */
-    public CreateIntentBuilder description(String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public CreateIntentBuilder description(String description) {
+      this.description_serialized_name = description;
       return this;
     }
 
@@ -2018,11 +2018,11 @@ public class IBMConversationV1Models {
      * Set the examples_serialized_name.
      * Existing examples_serialized_name will be replaced.
      *
-     * @param examples_serialized_name the examples_serialized_name
+     * @param examples the examples
      * @return the CreateIntent builder
      */
-    public CreateIntentBuilder examples(List<CreateExample> examples_serialized_name) {
-      this.examples_serialized_name = examples_serialized_name;
+    public CreateIntentBuilder examples(List<CreateExample> examples) {
+      this.examples_serialized_name = examples;
       return this;
     }
   }
@@ -2104,11 +2104,11 @@ public class IBMConversationV1Models {
     private String description_serialized_name;
     private List<CreateExample> examples_serialized_name;
 
-    private CreateIntentOptionsBuilder(CreateIntentOptions create_intent_options) {
-      workspace_id_serialized_name = create_intent_options.workspace_id_serialized_name;
-      intent_serialized_name = create_intent_options.intent_serialized_name;
-      description_serialized_name = create_intent_options.description_serialized_name;
-      examples_serialized_name = create_intent_options.examples_serialized_name;
+    private CreateIntentOptionsBuilder(CreateIntentOptions createIntentOptions) {
+      workspace_id_serialized_name = createIntentOptions.workspace_id_serialized_name;
+      intent_serialized_name = createIntentOptions.intent_serialized_name;
+      description_serialized_name = createIntentOptions.description_serialized_name;
+      examples_serialized_name = createIntentOptions.examples_serialized_name;
     }
 
     /**
@@ -2120,68 +2120,68 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param intent_serialized_name the intent_serialized_name
+     * @param workspaceId the workspaceId
+     * @param intent the intent
      */
-    public CreateIntentOptionsBuilder(String workspace_id_serialized_name, String intent_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.intent_serialized_name = intent_serialized_name;
+    public CreateIntentOptionsBuilder(String workspaceId, String intent) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.intent_serialized_name = intent;
     }
 
     /**
      * Builds a CreateIntentOptions.
      *
-     * @return the create_intent_options
+     * @return the createIntentOptions
      */
     public CreateIntentOptions build() {
       return new CreateIntentOptions(this);
     }
 
     /**
-     * Adds an examples_serialized_name to examples_serialized_name.
+     * Adds an examples to examples_serialized_name.
      *
-     * @param examples_serialized_name the new examples_serialized_name
+     * @param examples the new examples
      * @return the CreateIntentOptions builder
      */
-    public CreateIntentOptionsBuilder addExamples(CreateExample examples_serialized_name) {
-      IBMWatsonValidator.notNull(examples_serialized_name, 'examples_serialized_name cannot be null');
+    public CreateIntentOptionsBuilder addExamples(CreateExample examples) {
+      IBMWatsonValidator.notNull(examples, 'examples cannot be null');
       if (this.examples_serialized_name == null) {
         this.examples_serialized_name = new List<CreateExample>();
       }
-      this.examples_serialized_name.add(examples_serialized_name);
+      this.examples_serialized_name.add(examples);
       return this;
     }
 
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the CreateIntentOptions builder
      */
-    public CreateIntentOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public CreateIntentOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the intent_serialized_name.
      *
-     * @param intent_serialized_name the intent_serialized_name
+     * @param intent the intent
      * @return the CreateIntentOptions builder
      */
-    public CreateIntentOptionsBuilder intent(String intent_serialized_name) {
-      this.intent_serialized_name = intent_serialized_name;
+    public CreateIntentOptionsBuilder intent(String intent) {
+      this.intent_serialized_name = intent;
       return this;
     }
 
     /**
      * Set the description_serialized_name.
      *
-     * @param description_serialized_name the description_serialized_name
+     * @param description the description
      * @return the CreateIntentOptions builder
      */
-    public CreateIntentOptionsBuilder description(String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public CreateIntentOptionsBuilder description(String description) {
+      this.description_serialized_name = description;
       return this;
     }
 
@@ -2189,11 +2189,11 @@ public class IBMConversationV1Models {
      * Set the examples_serialized_name.
      * Existing examples_serialized_name will be replaced.
      *
-     * @param examples_serialized_name the examples_serialized_name
+     * @param examples the examples
      * @return the CreateIntentOptions builder
      */
-    public CreateIntentOptionsBuilder examples(List<CreateExample> examples_serialized_name) {
-      this.examples_serialized_name = examples_serialized_name;
+    public CreateIntentOptionsBuilder examples(List<CreateExample> examples) {
+      this.examples_serialized_name = examples;
       return this;
     }
   }
@@ -2277,11 +2277,11 @@ public class IBMConversationV1Models {
     private String value_serialized_name;
     private String synonym_serialized_name;
 
-    private CreateSynonymOptionsBuilder(CreateSynonymOptions create_synonym_options) {
-      workspace_id_serialized_name = create_synonym_options.workspace_id_serialized_name;
-      entity_serialized_name = create_synonym_options.entity_serialized_name;
-      value_serialized_name = create_synonym_options.value_serialized_name;
-      synonym_serialized_name = create_synonym_options.synonym_serialized_name;
+    private CreateSynonymOptionsBuilder(CreateSynonymOptions createSynonymOptions) {
+      workspace_id_serialized_name = createSynonymOptions.workspace_id_serialized_name;
+      entity_serialized_name = createSynonymOptions.entity_serialized_name;
+      value_serialized_name = createSynonymOptions.value_serialized_name;
+      synonym_serialized_name = createSynonymOptions.synonym_serialized_name;
     }
 
     /**
@@ -2293,22 +2293,22 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param entity_serialized_name the entity_serialized_name
-     * @param value_serialized_name the value_serialized_name
-     * @param synonym_serialized_name the synonym_serialized_name
+     * @param workspaceId the workspaceId
+     * @param entity the entity
+     * @param value the value
+     * @param synonym the synonym
      */
-    public CreateSynonymOptionsBuilder(String workspace_id_serialized_name, String entity_serialized_name, String value_serialized_name, String synonym_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.entity_serialized_name = entity_serialized_name;
-      this.value_serialized_name = value_serialized_name;
-      this.synonym_serialized_name = synonym_serialized_name;
+    public CreateSynonymOptionsBuilder(String workspaceId, String entity, String value, String synonym) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
+      this.value_serialized_name = value;
+      this.synonym_serialized_name = synonym;
     }
 
     /**
      * Builds a CreateSynonymOptions.
      *
-     * @return the create_synonym_options
+     * @return the createSynonymOptions
      */
     public CreateSynonymOptions build() {
       return new CreateSynonymOptions(this);
@@ -2317,44 +2317,44 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the CreateSynonymOptions builder
      */
-    public CreateSynonymOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public CreateSynonymOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the CreateSynonymOptions builder
      */
-    public CreateSynonymOptionsBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public CreateSynonymOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
 
     /**
      * Set the value_serialized_name.
      *
-     * @param value_serialized_name the value_serialized_name
+     * @param value the value
      * @return the CreateSynonymOptions builder
      */
-    public CreateSynonymOptionsBuilder value(String value_serialized_name) {
-      this.value_serialized_name = value_serialized_name;
+    public CreateSynonymOptionsBuilder value(String value) {
+      this.value_serialized_name = value;
       return this;
     }
 
     /**
      * Set the synonym_serialized_name.
      *
-     * @param synonym_serialized_name the synonym_serialized_name
+     * @param synonym the synonym
      * @return the CreateSynonymOptions builder
      */
-    public CreateSynonymOptionsBuilder synonym(String synonym_serialized_name) {
-      this.synonym_serialized_name = synonym_serialized_name;
+    public CreateSynonymOptionsBuilder synonym(String synonym) {
+      this.synonym_serialized_name = synonym;
       return this;
     }
   }
@@ -2448,12 +2448,12 @@ public class IBMConversationV1Models {
     private List<String> patterns_serialized_name;
     private String type_serialized_name;
 
-    private CreateValueBuilder(CreateValue create_value) {
-      value_serialized_name = create_value.value_serialized_name;
-      metadata_serialized_name = create_value.metadata_serialized_name;
-      synonyms_serialized_name = create_value.synonyms_serialized_name;
-      patterns_serialized_name = create_value.patterns_serialized_name;
-      type_serialized_name = create_value.type_serialized_name;
+    private CreateValueBuilder(CreateValue createValue) {
+      value_serialized_name = createValue.value_serialized_name;
+      metadata_serialized_name = createValue.metadata_serialized_name;
+      synonyms_serialized_name = createValue.synonyms_serialized_name;
+      patterns_serialized_name = createValue.patterns_serialized_name;
+      type_serialized_name = createValue.type_serialized_name;
     }
 
     /**
@@ -2465,70 +2465,70 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param value_serialized_name the value_serialized_name
+     * @param value the value
      */
-    public CreateValueBuilder(String value_serialized_name) {
-      this.value_serialized_name = value_serialized_name;
+    public CreateValueBuilder(String value) {
+      this.value_serialized_name = value;
     }
 
     /**
      * Builds a CreateValue.
      *
-     * @return the create_value
+     * @return the createValue
      */
     public CreateValue build() {
       return new CreateValue(this);
     }
 
     /**
-     * Adds an synonyms_serialized_name to synonyms_serialized_name.
+     * Adds an synonyms to synonyms_serialized_name.
      *
-     * @param synonyms_serialized_name the new synonyms_serialized_name
+     * @param synonyms the new synonyms
      * @return the CreateValue builder
      */
-    public CreateValueBuilder addSynonyms(String synonyms_serialized_name) {
-      IBMWatsonValidator.notNull(synonyms_serialized_name, 'synonyms_serialized_name cannot be null');
+    public CreateValueBuilder addSynonyms(String synonyms) {
+      IBMWatsonValidator.notNull(synonyms, 'synonyms cannot be null');
       if (this.synonyms_serialized_name == null) {
         this.synonyms_serialized_name = new List<String>();
       }
-      this.synonyms_serialized_name.add(synonyms_serialized_name);
+      this.synonyms_serialized_name.add(synonyms);
       return this;
     }
 
     /**
-     * Adds an patterns_serialized_name to patterns_serialized_name.
+     * Adds an patterns to patterns_serialized_name.
      *
-     * @param patterns_serialized_name the new patterns_serialized_name
+     * @param patterns the new patterns
      * @return the CreateValue builder
      */
-    public CreateValueBuilder addPatterns(String patterns_serialized_name) {
-      IBMWatsonValidator.notNull(patterns_serialized_name, 'patterns_serialized_name cannot be null');
+    public CreateValueBuilder addPatterns(String patterns) {
+      IBMWatsonValidator.notNull(patterns, 'patterns cannot be null');
       if (this.patterns_serialized_name == null) {
         this.patterns_serialized_name = new List<String>();
       }
-      this.patterns_serialized_name.add(patterns_serialized_name);
+      this.patterns_serialized_name.add(patterns);
       return this;
     }
 
     /**
      * Set the value_serialized_name.
      *
-     * @param value_serialized_name the value_serialized_name
+     * @param value the value
      * @return the CreateValue builder
      */
-    public CreateValueBuilder value(String value_serialized_name) {
-      this.value_serialized_name = value_serialized_name;
+    public CreateValueBuilder value(String value) {
+      this.value_serialized_name = value;
       return this;
     }
 
     /**
      * Set the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the metadata_serialized_name
+     * @param metadata the metadata
      * @return the CreateValue builder
      */
-    public CreateValueBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public CreateValueBuilder metadata(IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
       return this;
     }
 
@@ -2536,11 +2536,11 @@ public class IBMConversationV1Models {
      * Set the synonyms_serialized_name.
      * Existing synonyms_serialized_name will be replaced.
      *
-     * @param synonyms_serialized_name the synonyms_serialized_name
+     * @param synonyms the synonyms
      * @return the CreateValue builder
      */
-    public CreateValueBuilder synonyms(List<String> synonyms_serialized_name) {
-      this.synonyms_serialized_name = synonyms_serialized_name;
+    public CreateValueBuilder synonyms(List<String> synonyms) {
+      this.synonyms_serialized_name = synonyms;
       return this;
     }
 
@@ -2548,22 +2548,22 @@ public class IBMConversationV1Models {
      * Set the patterns_serialized_name.
      * Existing patterns_serialized_name will be replaced.
      *
-     * @param patterns_serialized_name the patterns_serialized_name
+     * @param patterns the patterns
      * @return the CreateValue builder
      */
-    public CreateValueBuilder patterns(List<String> patterns_serialized_name) {
-      this.patterns_serialized_name = patterns_serialized_name;
+    public CreateValueBuilder patterns(List<String> patterns) {
+      this.patterns_serialized_name = patterns;
       return this;
     }
 
     /**
      * Set the type_serialized_name.
      *
-     * @param type_serialized_name the type_serialized_name
+     * @param typeVar the typeVar
      * @return the CreateValue builder
      */
-    public CreateValueBuilder typeField(String type_serialized_name) {
-      this.type_serialized_name = type_serialized_name;
+    public CreateValueBuilder typeField(String typeVar) {
+      this.type_serialized_name = typeVar;
       return this;
     }
   }
@@ -2685,14 +2685,14 @@ public class IBMConversationV1Models {
     private List<String> patterns_serialized_name;
     private String type_serialized_name;
 
-    private CreateValueOptionsBuilder(CreateValueOptions create_value_options) {
-      workspace_id_serialized_name = create_value_options.workspace_id_serialized_name;
-      entity_serialized_name = create_value_options.entity_serialized_name;
-      value_serialized_name = create_value_options.value_serialized_name;
-      metadata_serialized_name = create_value_options.metadata_serialized_name;
-      synonyms_serialized_name = create_value_options.synonyms_serialized_name;
-      patterns_serialized_name = create_value_options.patterns_serialized_name;
-      type_serialized_name = create_value_options.type_serialized_name;
+    private CreateValueOptionsBuilder(CreateValueOptions createValueOptions) {
+      workspace_id_serialized_name = createValueOptions.workspace_id_serialized_name;
+      entity_serialized_name = createValueOptions.entity_serialized_name;
+      value_serialized_name = createValueOptions.value_serialized_name;
+      metadata_serialized_name = createValueOptions.metadata_serialized_name;
+      synonyms_serialized_name = createValueOptions.synonyms_serialized_name;
+      patterns_serialized_name = createValueOptions.patterns_serialized_name;
+      type_serialized_name = createValueOptions.type_serialized_name;
     }
 
     /**
@@ -2704,96 +2704,96 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param entity_serialized_name the entity_serialized_name
-     * @param value_serialized_name the value_serialized_name
+     * @param workspaceId the workspaceId
+     * @param entity the entity
+     * @param value the value
      */
-    public CreateValueOptionsBuilder(String workspace_id_serialized_name, String entity_serialized_name, String value_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.entity_serialized_name = entity_serialized_name;
-      this.value_serialized_name = value_serialized_name;
+    public CreateValueOptionsBuilder(String workspaceId, String entity, String value) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
+      this.value_serialized_name = value;
     }
 
     /**
      * Builds a CreateValueOptions.
      *
-     * @return the create_value_options
+     * @return the createValueOptions
      */
     public CreateValueOptions build() {
       return new CreateValueOptions(this);
     }
 
     /**
-     * Adds an synonyms_serialized_name to synonyms_serialized_name.
+     * Adds an synonyms to synonyms_serialized_name.
      *
-     * @param synonyms_serialized_name the new synonyms_serialized_name
+     * @param synonyms the new synonyms
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder addSynonyms(String synonyms_serialized_name) {
-      IBMWatsonValidator.notNull(synonyms_serialized_name, 'synonyms_serialized_name cannot be null');
+    public CreateValueOptionsBuilder addSynonyms(String synonyms) {
+      IBMWatsonValidator.notNull(synonyms, 'synonyms cannot be null');
       if (this.synonyms_serialized_name == null) {
         this.synonyms_serialized_name = new List<String>();
       }
-      this.synonyms_serialized_name.add(synonyms_serialized_name);
+      this.synonyms_serialized_name.add(synonyms);
       return this;
     }
 
     /**
-     * Adds an patterns_serialized_name to patterns_serialized_name.
+     * Adds an patterns to patterns_serialized_name.
      *
-     * @param patterns_serialized_name the new patterns_serialized_name
+     * @param patterns the new patterns
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder addPatterns(String patterns_serialized_name) {
-      IBMWatsonValidator.notNull(patterns_serialized_name, 'patterns_serialized_name cannot be null');
+    public CreateValueOptionsBuilder addPatterns(String patterns) {
+      IBMWatsonValidator.notNull(patterns, 'patterns cannot be null');
       if (this.patterns_serialized_name == null) {
         this.patterns_serialized_name = new List<String>();
       }
-      this.patterns_serialized_name.add(patterns_serialized_name);
+      this.patterns_serialized_name.add(patterns);
       return this;
     }
 
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public CreateValueOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public CreateValueOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
 
     /**
      * Set the value_serialized_name.
      *
-     * @param value_serialized_name the value_serialized_name
+     * @param value the value
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder value(String value_serialized_name) {
-      this.value_serialized_name = value_serialized_name;
+    public CreateValueOptionsBuilder value(String value) {
+      this.value_serialized_name = value;
       return this;
     }
 
     /**
      * Set the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the metadata_serialized_name
+     * @param metadata the metadata
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public CreateValueOptionsBuilder metadata(IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
       return this;
     }
 
@@ -2801,11 +2801,11 @@ public class IBMConversationV1Models {
      * Set the synonyms_serialized_name.
      * Existing synonyms_serialized_name will be replaced.
      *
-     * @param synonyms_serialized_name the synonyms_serialized_name
+     * @param synonyms the synonyms
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder synonyms(List<String> synonyms_serialized_name) {
-      this.synonyms_serialized_name = synonyms_serialized_name;
+    public CreateValueOptionsBuilder synonyms(List<String> synonyms) {
+      this.synonyms_serialized_name = synonyms;
       return this;
     }
 
@@ -2813,22 +2813,22 @@ public class IBMConversationV1Models {
      * Set the patterns_serialized_name.
      * Existing patterns_serialized_name will be replaced.
      *
-     * @param patterns_serialized_name the patterns_serialized_name
+     * @param patterns the patterns
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder patterns(List<String> patterns_serialized_name) {
-      this.patterns_serialized_name = patterns_serialized_name;
+    public CreateValueOptionsBuilder patterns(List<String> patterns) {
+      this.patterns_serialized_name = patterns;
       return this;
     }
 
     /**
      * Set the type_serialized_name.
      *
-     * @param type_serialized_name the type_serialized_name
+     * @param typeVar the typeVar
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder typeField(String type_serialized_name) {
-      this.type_serialized_name = type_serialized_name;
+    public CreateValueOptionsBuilder typeField(String typeVar) {
+      this.type_serialized_name = typeVar;
       return this;
     }
   }
@@ -2973,16 +2973,16 @@ public class IBMConversationV1Models {
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
 
-    private CreateWorkspaceOptionsBuilder(CreateWorkspaceOptions create_workspace_options) {
-      name_serialized_name = create_workspace_options.name_serialized_name;
-      description_serialized_name = create_workspace_options.description_serialized_name;
-      language_serialized_name = create_workspace_options.language_serialized_name;
-      intents_serialized_name = create_workspace_options.intents_serialized_name;
-      entities_serialized_name = create_workspace_options.entities_serialized_name;
-      dialog_nodes_serialized_name = create_workspace_options.dialog_nodes_serialized_name;
-      counterexamples_serialized_name = create_workspace_options.counterexamples_serialized_name;
-      metadata_serialized_name = create_workspace_options.metadata_serialized_name;
-      learning_opt_out_serialized_name = create_workspace_options.learning_opt_out_serialized_name;
+    private CreateWorkspaceOptionsBuilder(CreateWorkspaceOptions createWorkspaceOptions) {
+      name_serialized_name = createWorkspaceOptions.name_serialized_name;
+      description_serialized_name = createWorkspaceOptions.description_serialized_name;
+      language_serialized_name = createWorkspaceOptions.language_serialized_name;
+      intents_serialized_name = createWorkspaceOptions.intents_serialized_name;
+      entities_serialized_name = createWorkspaceOptions.entities_serialized_name;
+      dialog_nodes_serialized_name = createWorkspaceOptions.dialog_nodes_serialized_name;
+      counterexamples_serialized_name = createWorkspaceOptions.counterexamples_serialized_name;
+      metadata_serialized_name = createWorkspaceOptions.metadata_serialized_name;
+      learning_opt_out_serialized_name = createWorkspaceOptions.learning_opt_out_serialized_name;
     }
 
     /**
@@ -2994,102 +2994,102 @@ public class IBMConversationV1Models {
     /**
      * Builds a CreateWorkspaceOptions.
      *
-     * @return the create_workspace_options
+     * @return the createWorkspaceOptions
      */
     public CreateWorkspaceOptions build() {
       return new CreateWorkspaceOptions(this);
     }
 
     /**
-     * Adds an intents_serialized_name to intents_serialized_name.
+     * Adds an intents to intents_serialized_name.
      *
-     * @param intents_serialized_name the new intents_serialized_name
+     * @param intents the new intents
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder addIntents(CreateIntent intents_serialized_name) {
-      IBMWatsonValidator.notNull(intents_serialized_name, 'intents_serialized_name cannot be null');
+    public CreateWorkspaceOptionsBuilder addIntents(CreateIntent intents) {
+      IBMWatsonValidator.notNull(intents, 'intents cannot be null');
       if (this.intents_serialized_name == null) {
         this.intents_serialized_name = new List<CreateIntent>();
       }
-      this.intents_serialized_name.add(intents_serialized_name);
+      this.intents_serialized_name.add(intents);
       return this;
     }
 
     /**
-     * Adds an entities_serialized_name to entities_serialized_name.
+     * Adds an entities to entities_serialized_name.
      *
-     * @param entities_serialized_name the new entities_serialized_name
+     * @param entities the new entities
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder addEntities(CreateEntity entities_serialized_name) {
-      IBMWatsonValidator.notNull(entities_serialized_name, 'entities_serialized_name cannot be null');
+    public CreateWorkspaceOptionsBuilder addEntities(CreateEntity entities) {
+      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
       if (this.entities_serialized_name == null) {
         this.entities_serialized_name = new List<CreateEntity>();
       }
-      this.entities_serialized_name.add(entities_serialized_name);
+      this.entities_serialized_name.add(entities);
       return this;
     }
 
     /**
-     * Adds an dialog_nodes_serialized_name to dialog_nodes_serialized_name.
+     * Adds an dialogNodes to dialog_nodes_serialized_name.
      *
-     * @param dialog_nodes_serialized_name the new dialog_nodes_serialized_name
+     * @param dialogNodes the new dialogNodes
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder addDialogNodes(CreateDialogNode dialog_nodes_serialized_name) {
-      IBMWatsonValidator.notNull(dialog_nodes_serialized_name, 'dialog_nodes_serialized_name cannot be null');
+    public CreateWorkspaceOptionsBuilder addDialogNodes(CreateDialogNode dialogNodes) {
+      IBMWatsonValidator.notNull(dialogNodes, 'dialogNodes cannot be null');
       if (this.dialog_nodes_serialized_name == null) {
         this.dialog_nodes_serialized_name = new List<CreateDialogNode>();
       }
-      this.dialog_nodes_serialized_name.add(dialog_nodes_serialized_name);
+      this.dialog_nodes_serialized_name.add(dialogNodes);
       return this;
     }
 
     /**
-     * Adds an counterexamples_serialized_name to counterexamples_serialized_name.
+     * Adds an counterexamples to counterexamples_serialized_name.
      *
-     * @param counterexamples_serialized_name the new counterexamples_serialized_name
+     * @param counterexamples the new counterexamples
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder addCounterexamples(CreateCounterexample counterexamples_serialized_name) {
-      IBMWatsonValidator.notNull(counterexamples_serialized_name, 'counterexamples_serialized_name cannot be null');
+    public CreateWorkspaceOptionsBuilder addCounterexamples(CreateCounterexample counterexamples) {
+      IBMWatsonValidator.notNull(counterexamples, 'counterexamples cannot be null');
       if (this.counterexamples_serialized_name == null) {
         this.counterexamples_serialized_name = new List<CreateCounterexample>();
       }
-      this.counterexamples_serialized_name.add(counterexamples_serialized_name);
+      this.counterexamples_serialized_name.add(counterexamples);
       return this;
     }
 
     /**
      * Set the name_serialized_name.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder name(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public CreateWorkspaceOptionsBuilder name(String name) {
+      this.name_serialized_name = name;
       return this;
     }
 
     /**
      * Set the description_serialized_name.
      *
-     * @param description_serialized_name the description_serialized_name
+     * @param description the description
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder description(String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public CreateWorkspaceOptionsBuilder description(String description) {
+      this.description_serialized_name = description;
       return this;
     }
 
     /**
      * Set the language_serialized_name.
      *
-     * @param language_serialized_name the language_serialized_name
+     * @param language the language
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder language(String language_serialized_name) {
-      this.language_serialized_name = language_serialized_name;
+    public CreateWorkspaceOptionsBuilder language(String language) {
+      this.language_serialized_name = language;
       return this;
     }
 
@@ -3097,11 +3097,11 @@ public class IBMConversationV1Models {
      * Set the intents_serialized_name.
      * Existing intents_serialized_name will be replaced.
      *
-     * @param intents_serialized_name the intents_serialized_name
+     * @param intents the intents
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder intents(List<CreateIntent> intents_serialized_name) {
-      this.intents_serialized_name = intents_serialized_name;
+    public CreateWorkspaceOptionsBuilder intents(List<CreateIntent> intents) {
+      this.intents_serialized_name = intents;
       return this;
     }
 
@@ -3109,11 +3109,11 @@ public class IBMConversationV1Models {
      * Set the entities_serialized_name.
      * Existing entities_serialized_name will be replaced.
      *
-     * @param entities_serialized_name the entities_serialized_name
+     * @param entities the entities
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder entities(List<CreateEntity> entities_serialized_name) {
-      this.entities_serialized_name = entities_serialized_name;
+    public CreateWorkspaceOptionsBuilder entities(List<CreateEntity> entities) {
+      this.entities_serialized_name = entities;
       return this;
     }
 
@@ -3121,11 +3121,11 @@ public class IBMConversationV1Models {
      * Set the dialog_nodes_serialized_name.
      * Existing dialog_nodes_serialized_name will be replaced.
      *
-     * @param dialog_nodes_serialized_name the dialog_nodes_serialized_name
+     * @param dialogNodes the dialogNodes
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder dialogNodes(List<CreateDialogNode> dialog_nodes_serialized_name) {
-      this.dialog_nodes_serialized_name = dialog_nodes_serialized_name;
+    public CreateWorkspaceOptionsBuilder dialogNodes(List<CreateDialogNode> dialogNodes) {
+      this.dialog_nodes_serialized_name = dialogNodes;
       return this;
     }
 
@@ -3133,33 +3133,33 @@ public class IBMConversationV1Models {
      * Set the counterexamples_serialized_name.
      * Existing counterexamples_serialized_name will be replaced.
      *
-     * @param counterexamples_serialized_name the counterexamples_serialized_name
+     * @param counterexamples the counterexamples
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder counterexamples(List<CreateCounterexample> counterexamples_serialized_name) {
-      this.counterexamples_serialized_name = counterexamples_serialized_name;
+    public CreateWorkspaceOptionsBuilder counterexamples(List<CreateCounterexample> counterexamples) {
+      this.counterexamples_serialized_name = counterexamples;
       return this;
     }
 
     /**
      * Set the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the metadata_serialized_name
+     * @param metadata the metadata
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public CreateWorkspaceOptionsBuilder metadata(IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
       return this;
     }
 
     /**
      * Set the learning_opt_out_serialized_name.
      *
-     * @param learning_opt_out_serialized_name the learning_opt_out_serialized_name
+     * @param learningOptOut the learningOptOut
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder learningOptOut(Boolean learning_opt_out_serialized_name) {
-      this.learning_opt_out_serialized_name = learning_opt_out_serialized_name;
+    public CreateWorkspaceOptionsBuilder learningOptOut(Boolean learningOptOut) {
+      this.learning_opt_out_serialized_name = learningOptOut;
       return this;
     }
   }
@@ -3215,9 +3215,9 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String text_serialized_name;
 
-    private DeleteCounterexampleOptionsBuilder(DeleteCounterexampleOptions delete_counterexample_options) {
-      workspace_id_serialized_name = delete_counterexample_options.workspace_id_serialized_name;
-      text_serialized_name = delete_counterexample_options.text_serialized_name;
+    private DeleteCounterexampleOptionsBuilder(DeleteCounterexampleOptions deleteCounterexampleOptions) {
+      workspace_id_serialized_name = deleteCounterexampleOptions.workspace_id_serialized_name;
+      text_serialized_name = deleteCounterexampleOptions.text_serialized_name;
     }
 
     /**
@@ -3229,18 +3229,18 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param text_serialized_name the text_serialized_name
+     * @param workspaceId the workspaceId
+     * @param text the text
      */
-    public DeleteCounterexampleOptionsBuilder(String workspace_id_serialized_name, String text_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.text_serialized_name = text_serialized_name;
+    public DeleteCounterexampleOptionsBuilder(String workspaceId, String text) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a DeleteCounterexampleOptions.
      *
-     * @return the delete_counterexample_options
+     * @return the deleteCounterexampleOptions
      */
     public DeleteCounterexampleOptions build() {
       return new DeleteCounterexampleOptions(this);
@@ -3249,22 +3249,22 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the DeleteCounterexampleOptions builder
      */
-    public DeleteCounterexampleOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public DeleteCounterexampleOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the DeleteCounterexampleOptions builder
      */
-    public DeleteCounterexampleOptionsBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public DeleteCounterexampleOptionsBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
   }
@@ -3320,9 +3320,9 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String dialog_node_serialized_name;
 
-    private DeleteDialogNodeOptionsBuilder(DeleteDialogNodeOptions delete_dialog_node_options) {
-      workspace_id_serialized_name = delete_dialog_node_options.workspace_id_serialized_name;
-      dialog_node_serialized_name = delete_dialog_node_options.dialog_node_serialized_name;
+    private DeleteDialogNodeOptionsBuilder(DeleteDialogNodeOptions deleteDialogNodeOptions) {
+      workspace_id_serialized_name = deleteDialogNodeOptions.workspace_id_serialized_name;
+      dialog_node_serialized_name = deleteDialogNodeOptions.dialog_node_serialized_name;
     }
 
     /**
@@ -3334,18 +3334,18 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param dialog_node_serialized_name the dialog_node_serialized_name
+     * @param workspaceId the workspaceId
+     * @param dialogNode the dialogNode
      */
-    public DeleteDialogNodeOptionsBuilder(String workspace_id_serialized_name, String dialog_node_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.dialog_node_serialized_name = dialog_node_serialized_name;
+    public DeleteDialogNodeOptionsBuilder(String workspaceId, String dialogNode) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.dialog_node_serialized_name = dialogNode;
     }
 
     /**
      * Builds a DeleteDialogNodeOptions.
      *
-     * @return the delete_dialog_node_options
+     * @return the deleteDialogNodeOptions
      */
     public DeleteDialogNodeOptions build() {
       return new DeleteDialogNodeOptions(this);
@@ -3354,22 +3354,22 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the DeleteDialogNodeOptions builder
      */
-    public DeleteDialogNodeOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public DeleteDialogNodeOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the dialog_node_serialized_name.
      *
-     * @param dialog_node_serialized_name the dialog_node_serialized_name
+     * @param dialogNode the dialogNode
      * @return the DeleteDialogNodeOptions builder
      */
-    public DeleteDialogNodeOptionsBuilder dialogNode(String dialog_node_serialized_name) {
-      this.dialog_node_serialized_name = dialog_node_serialized_name;
+    public DeleteDialogNodeOptionsBuilder dialogNode(String dialogNode) {
+      this.dialog_node_serialized_name = dialogNode;
       return this;
     }
   }
@@ -3425,9 +3425,9 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
 
-    private DeleteEntityOptionsBuilder(DeleteEntityOptions delete_entity_options) {
-      workspace_id_serialized_name = delete_entity_options.workspace_id_serialized_name;
-      entity_serialized_name = delete_entity_options.entity_serialized_name;
+    private DeleteEntityOptionsBuilder(DeleteEntityOptions deleteEntityOptions) {
+      workspace_id_serialized_name = deleteEntityOptions.workspace_id_serialized_name;
+      entity_serialized_name = deleteEntityOptions.entity_serialized_name;
     }
 
     /**
@@ -3439,18 +3439,18 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param entity_serialized_name the entity_serialized_name
+     * @param workspaceId the workspaceId
+     * @param entity the entity
      */
-    public DeleteEntityOptionsBuilder(String workspace_id_serialized_name, String entity_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.entity_serialized_name = entity_serialized_name;
+    public DeleteEntityOptionsBuilder(String workspaceId, String entity) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
     }
 
     /**
      * Builds a DeleteEntityOptions.
      *
-     * @return the delete_entity_options
+     * @return the deleteEntityOptions
      */
     public DeleteEntityOptions build() {
       return new DeleteEntityOptions(this);
@@ -3459,22 +3459,22 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the DeleteEntityOptions builder
      */
-    public DeleteEntityOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public DeleteEntityOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the DeleteEntityOptions builder
      */
-    public DeleteEntityOptionsBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public DeleteEntityOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
   }
@@ -3544,10 +3544,10 @@ public class IBMConversationV1Models {
     private String intent_serialized_name;
     private String text_serialized_name;
 
-    private DeleteExampleOptionsBuilder(DeleteExampleOptions delete_example_options) {
-      workspace_id_serialized_name = delete_example_options.workspace_id_serialized_name;
-      intent_serialized_name = delete_example_options.intent_serialized_name;
-      text_serialized_name = delete_example_options.text_serialized_name;
+    private DeleteExampleOptionsBuilder(DeleteExampleOptions deleteExampleOptions) {
+      workspace_id_serialized_name = deleteExampleOptions.workspace_id_serialized_name;
+      intent_serialized_name = deleteExampleOptions.intent_serialized_name;
+      text_serialized_name = deleteExampleOptions.text_serialized_name;
     }
 
     /**
@@ -3559,20 +3559,20 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param intent_serialized_name the intent_serialized_name
-     * @param text_serialized_name the text_serialized_name
+     * @param workspaceId the workspaceId
+     * @param intent the intent
+     * @param text the text
      */
-    public DeleteExampleOptionsBuilder(String workspace_id_serialized_name, String intent_serialized_name, String text_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.intent_serialized_name = intent_serialized_name;
-      this.text_serialized_name = text_serialized_name;
+    public DeleteExampleOptionsBuilder(String workspaceId, String intent, String text) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.intent_serialized_name = intent;
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a DeleteExampleOptions.
      *
-     * @return the delete_example_options
+     * @return the deleteExampleOptions
      */
     public DeleteExampleOptions build() {
       return new DeleteExampleOptions(this);
@@ -3581,33 +3581,33 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the DeleteExampleOptions builder
      */
-    public DeleteExampleOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public DeleteExampleOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the intent_serialized_name.
      *
-     * @param intent_serialized_name the intent_serialized_name
+     * @param intent the intent
      * @return the DeleteExampleOptions builder
      */
-    public DeleteExampleOptionsBuilder intent(String intent_serialized_name) {
-      this.intent_serialized_name = intent_serialized_name;
+    public DeleteExampleOptionsBuilder intent(String intent) {
+      this.intent_serialized_name = intent;
       return this;
     }
 
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the DeleteExampleOptions builder
      */
-    public DeleteExampleOptionsBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public DeleteExampleOptionsBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
   }
@@ -3663,9 +3663,9 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
 
-    private DeleteIntentOptionsBuilder(DeleteIntentOptions delete_intent_options) {
-      workspace_id_serialized_name = delete_intent_options.workspace_id_serialized_name;
-      intent_serialized_name = delete_intent_options.intent_serialized_name;
+    private DeleteIntentOptionsBuilder(DeleteIntentOptions deleteIntentOptions) {
+      workspace_id_serialized_name = deleteIntentOptions.workspace_id_serialized_name;
+      intent_serialized_name = deleteIntentOptions.intent_serialized_name;
     }
 
     /**
@@ -3677,18 +3677,18 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param intent_serialized_name the intent_serialized_name
+     * @param workspaceId the workspaceId
+     * @param intent the intent
      */
-    public DeleteIntentOptionsBuilder(String workspace_id_serialized_name, String intent_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.intent_serialized_name = intent_serialized_name;
+    public DeleteIntentOptionsBuilder(String workspaceId, String intent) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.intent_serialized_name = intent;
     }
 
     /**
      * Builds a DeleteIntentOptions.
      *
-     * @return the delete_intent_options
+     * @return the deleteIntentOptions
      */
     public DeleteIntentOptions build() {
       return new DeleteIntentOptions(this);
@@ -3697,22 +3697,22 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the DeleteIntentOptions builder
      */
-    public DeleteIntentOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public DeleteIntentOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the intent_serialized_name.
      *
-     * @param intent_serialized_name the intent_serialized_name
+     * @param intent the intent
      * @return the DeleteIntentOptions builder
      */
-    public DeleteIntentOptionsBuilder intent(String intent_serialized_name) {
-      this.intent_serialized_name = intent_serialized_name;
+    public DeleteIntentOptionsBuilder intent(String intent) {
+      this.intent_serialized_name = intent;
       return this;
     }
   }
@@ -3796,11 +3796,11 @@ public class IBMConversationV1Models {
     private String value_serialized_name;
     private String synonym_serialized_name;
 
-    private DeleteSynonymOptionsBuilder(DeleteSynonymOptions delete_synonym_options) {
-      workspace_id_serialized_name = delete_synonym_options.workspace_id_serialized_name;
-      entity_serialized_name = delete_synonym_options.entity_serialized_name;
-      value_serialized_name = delete_synonym_options.value_serialized_name;
-      synonym_serialized_name = delete_synonym_options.synonym_serialized_name;
+    private DeleteSynonymOptionsBuilder(DeleteSynonymOptions deleteSynonymOptions) {
+      workspace_id_serialized_name = deleteSynonymOptions.workspace_id_serialized_name;
+      entity_serialized_name = deleteSynonymOptions.entity_serialized_name;
+      value_serialized_name = deleteSynonymOptions.value_serialized_name;
+      synonym_serialized_name = deleteSynonymOptions.synonym_serialized_name;
     }
 
     /**
@@ -3812,22 +3812,22 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param entity_serialized_name the entity_serialized_name
-     * @param value_serialized_name the value_serialized_name
-     * @param synonym_serialized_name the synonym_serialized_name
+     * @param workspaceId the workspaceId
+     * @param entity the entity
+     * @param value the value
+     * @param synonym the synonym
      */
-    public DeleteSynonymOptionsBuilder(String workspace_id_serialized_name, String entity_serialized_name, String value_serialized_name, String synonym_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.entity_serialized_name = entity_serialized_name;
-      this.value_serialized_name = value_serialized_name;
-      this.synonym_serialized_name = synonym_serialized_name;
+    public DeleteSynonymOptionsBuilder(String workspaceId, String entity, String value, String synonym) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
+      this.value_serialized_name = value;
+      this.synonym_serialized_name = synonym;
     }
 
     /**
      * Builds a DeleteSynonymOptions.
      *
-     * @return the delete_synonym_options
+     * @return the deleteSynonymOptions
      */
     public DeleteSynonymOptions build() {
       return new DeleteSynonymOptions(this);
@@ -3836,44 +3836,44 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the DeleteSynonymOptions builder
      */
-    public DeleteSynonymOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public DeleteSynonymOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the DeleteSynonymOptions builder
      */
-    public DeleteSynonymOptionsBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public DeleteSynonymOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
 
     /**
      * Set the value_serialized_name.
      *
-     * @param value_serialized_name the value_serialized_name
+     * @param value the value
      * @return the DeleteSynonymOptions builder
      */
-    public DeleteSynonymOptionsBuilder value(String value_serialized_name) {
-      this.value_serialized_name = value_serialized_name;
+    public DeleteSynonymOptionsBuilder value(String value) {
+      this.value_serialized_name = value;
       return this;
     }
 
     /**
      * Set the synonym_serialized_name.
      *
-     * @param synonym_serialized_name the synonym_serialized_name
+     * @param synonym the synonym
      * @return the DeleteSynonymOptions builder
      */
-    public DeleteSynonymOptionsBuilder synonym(String synonym_serialized_name) {
-      this.synonym_serialized_name = synonym_serialized_name;
+    public DeleteSynonymOptionsBuilder synonym(String synonym) {
+      this.synonym_serialized_name = synonym;
       return this;
     }
   }
@@ -3943,10 +3943,10 @@ public class IBMConversationV1Models {
     private String entity_serialized_name;
     private String value_serialized_name;
 
-    private DeleteValueOptionsBuilder(DeleteValueOptions delete_value_options) {
-      workspace_id_serialized_name = delete_value_options.workspace_id_serialized_name;
-      entity_serialized_name = delete_value_options.entity_serialized_name;
-      value_serialized_name = delete_value_options.value_serialized_name;
+    private DeleteValueOptionsBuilder(DeleteValueOptions deleteValueOptions) {
+      workspace_id_serialized_name = deleteValueOptions.workspace_id_serialized_name;
+      entity_serialized_name = deleteValueOptions.entity_serialized_name;
+      value_serialized_name = deleteValueOptions.value_serialized_name;
     }
 
     /**
@@ -3958,20 +3958,20 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param entity_serialized_name the entity_serialized_name
-     * @param value_serialized_name the value_serialized_name
+     * @param workspaceId the workspaceId
+     * @param entity the entity
+     * @param value the value
      */
-    public DeleteValueOptionsBuilder(String workspace_id_serialized_name, String entity_serialized_name, String value_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.entity_serialized_name = entity_serialized_name;
-      this.value_serialized_name = value_serialized_name;
+    public DeleteValueOptionsBuilder(String workspaceId, String entity, String value) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
+      this.value_serialized_name = value;
     }
 
     /**
      * Builds a DeleteValueOptions.
      *
-     * @return the delete_value_options
+     * @return the deleteValueOptions
      */
     public DeleteValueOptions build() {
       return new DeleteValueOptions(this);
@@ -3980,33 +3980,33 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the DeleteValueOptions builder
      */
-    public DeleteValueOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public DeleteValueOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the DeleteValueOptions builder
      */
-    public DeleteValueOptionsBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public DeleteValueOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
 
     /**
      * Set the value_serialized_name.
      *
-     * @param value_serialized_name the value_serialized_name
+     * @param value the value
      * @return the DeleteValueOptions builder
      */
-    public DeleteValueOptionsBuilder value(String value_serialized_name) {
-      this.value_serialized_name = value_serialized_name;
+    public DeleteValueOptionsBuilder value(String value) {
+      this.value_serialized_name = value;
       return this;
     }
   }
@@ -4048,8 +4048,8 @@ public class IBMConversationV1Models {
   public class DeleteWorkspaceOptionsBuilder {
     private String workspace_id_serialized_name;
 
-    private DeleteWorkspaceOptionsBuilder(DeleteWorkspaceOptions delete_workspace_options) {
-      workspace_id_serialized_name = delete_workspace_options.workspace_id_serialized_name;
+    private DeleteWorkspaceOptionsBuilder(DeleteWorkspaceOptions deleteWorkspaceOptions) {
+      workspace_id_serialized_name = deleteWorkspaceOptions.workspace_id_serialized_name;
     }
 
     /**
@@ -4061,16 +4061,16 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      */
-    public DeleteWorkspaceOptionsBuilder(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public DeleteWorkspaceOptionsBuilder(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
     }
 
     /**
      * Builds a DeleteWorkspaceOptions.
      *
-     * @return the delete_workspace_options
+     * @return the deleteWorkspaceOptions
      */
     public DeleteWorkspaceOptions build() {
       return new DeleteWorkspaceOptions(this);
@@ -4079,11 +4079,11 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the DeleteWorkspaceOptions builder
      */
-    public DeleteWorkspaceOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public DeleteWorkspaceOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
   }
@@ -4288,127 +4288,127 @@ public class IBMConversationV1Models {
     /**
      * Sets the dialog_node_serialized_name.
      *
-     * @param dialog_node_serialized_name the new dialog_node_serialized_name
+     * @param dialogNode the new dialogNode
      */
-    public void setDialogNode(final String dialog_node_serialized_name) {
-      this.dialog_node_serialized_name = dialog_node_serialized_name;
+    public void setDialogNode(final String dialogNode) {
+      this.dialog_node_serialized_name = dialogNode;
     }
 
     /**
      * Sets the description_serialized_name.
      *
-     * @param description_serialized_name the new description_serialized_name
+     * @param description the new description
      */
-    public void setDescription(final String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
     }
 
     /**
      * Sets the conditions_serialized_name.
      *
-     * @param conditions_serialized_name the new conditions_serialized_name
+     * @param conditions the new conditions
      */
-    public void setConditions(final String conditions_serialized_name) {
-      this.conditions_serialized_name = conditions_serialized_name;
+    public void setConditions(final String conditions) {
+      this.conditions_serialized_name = conditions;
     }
 
     /**
      * Sets the parent_serialized_name.
      *
-     * @param parent_serialized_name the new parent_serialized_name
+     * @param parent the new parent
      */
-    public void setParent(final String parent_serialized_name) {
-      this.parent_serialized_name = parent_serialized_name;
+    public void setParent(final String parent) {
+      this.parent_serialized_name = parent;
     }
 
     /**
      * Sets the previous_sibling_serialized_name.
      *
-     * @param previous_sibling_serialized_name the new previous_sibling_serialized_name
+     * @param previousSibling the new previousSibling
      */
-    public void setPreviousSibling(final String previous_sibling_serialized_name) {
-      this.previous_sibling_serialized_name = previous_sibling_serialized_name;
+    public void setPreviousSibling(final String previousSibling) {
+      this.previous_sibling_serialized_name = previousSibling;
     }
 
     /**
      * Sets the output_serialized_name.
      *
-     * @param output_serialized_name the new output_serialized_name
+     * @param output the new output
      */
-    public void setOutput(final IBMWatsonMapModel output_serialized_name) {
-      this.output_serialized_name = output_serialized_name;
+    public void setOutput(final IBMWatsonMapModel output) {
+      this.output_serialized_name = output;
     }
 
     /**
      * Sets the context_serialized_name.
      *
-     * @param context_serialized_name the new context_serialized_name
+     * @param context the new context
      */
-    public void setContext(final IBMWatsonMapModel context_serialized_name) {
-      this.context_serialized_name = context_serialized_name;
+    public void setContext(final IBMWatsonMapModel context) {
+      this.context_serialized_name = context;
     }
 
     /**
      * Sets the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the new metadata_serialized_name
+     * @param metadata the new metadata
      */
-    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public void setMetadata(final IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
     }
 
     /**
      * Sets the next_step_serialized_name.
      *
-     * @param next_step_serialized_name the new next_step_serialized_name
+     * @param nextStep the new nextStep
      */
-    public void setNextStep(final DialogNodeNextStep next_step_serialized_name) {
-      this.next_step_serialized_name = next_step_serialized_name;
+    public void setNextStep(final DialogNodeNextStep nextStep) {
+      this.next_step_serialized_name = nextStep;
     }
 
     /**
      * Sets the actions_serialized_name.
      *
-     * @param actions_serialized_name the new actions_serialized_name
+     * @param actions the new actions
      */
-    public void setActions(final List<DialogNodeAction> actions_serialized_name) {
-      this.actions_serialized_name = actions_serialized_name;
+    public void setActions(final List<DialogNodeAction> actions) {
+      this.actions_serialized_name = actions;
     }
 
     /**
      * Sets the title_serialized_name.
      *
-     * @param title_serialized_name the new title_serialized_name
+     * @param title the new title
      */
-    public void setTitle(final String title_serialized_name) {
-      this.title_serialized_name = title_serialized_name;
+    public void setTitle(final String title) {
+      this.title_serialized_name = title;
     }
 
     /**
      * Sets the type_serialized_name.
      *
-     * @param type_serialized_name the new type_serialized_name
+     * @param typeVar the new typeVar
      */
-    public void setType(final String type_serialized_name) {
-      this.type_serialized_name = type_serialized_name;
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
     }
 
     /**
      * Sets the event_name_serialized_name.
      *
-     * @param event_name_serialized_name the new event_name_serialized_name
+     * @param eventName the new eventName
      */
-    public void setEventName(final String event_name_serialized_name) {
-      this.event_name_serialized_name = event_name_serialized_name;
+    public void setEventName(final String eventName) {
+      this.event_name_serialized_name = eventName;
     }
 
     /**
      * Sets the variable_serialized_name.
      *
-     * @param variable_serialized_name the new variable_serialized_name
+     * @param variable the new variable
      */
-    public void setVariable(final String variable_serialized_name) {
-      this.variable_serialized_name = variable_serialized_name;
+    public void setVariable(final String variable) {
+      this.variable_serialized_name = variable;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4519,46 +4519,46 @@ public class IBMConversationV1Models {
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     /**
      * Sets the type_serialized_name.
      *
-     * @param type_serialized_name the new type_serialized_name
+     * @param typeVar the new typeVar
      */
-    public void setType(final String type_serialized_name) {
-      this.type_serialized_name = type_serialized_name;
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
     }
 
     /**
      * Sets the parameters_serialized_name.
      *
-     * @param parameters_serialized_name the new parameters_serialized_name
+     * @param parameters the new parameters
      */
-    public void setParameters(final IBMWatsonMapModel parameters_serialized_name) {
-      this.parameters_serialized_name = parameters_serialized_name;
+    public void setParameters(final IBMWatsonMapModel parameters) {
+      this.parameters_serialized_name = parameters;
     }
 
     /**
      * Sets the result_variable_serialized_name.
      *
-     * @param result_variable_serialized_name the new result_variable_serialized_name
+     * @param resultVariable the new resultVariable
      */
-    public void setResultVariable(final String result_variable_serialized_name) {
-      this.result_variable_serialized_name = result_variable_serialized_name;
+    public void setResultVariable(final String resultVariable) {
+      this.result_variable_serialized_name = resultVariable;
     }
 
     /**
      * Sets the credentials_serialized_name.
      *
-     * @param credentials_serialized_name the new credentials_serialized_name
+     * @param credentials the new credentials
      */
-    public void setCredentials(final String credentials_serialized_name) {
-      this.credentials_serialized_name = credentials_serialized_name;
+    public void setCredentials(final String credentials) {
+      this.credentials_serialized_name = credentials;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4606,19 +4606,19 @@ public class IBMConversationV1Models {
     /**
      * Sets the dialog_nodes_serialized_name.
      *
-     * @param dialog_nodes_serialized_name the new dialog_nodes_serialized_name
+     * @param dialogNodes the new dialogNodes
      */
-    public void setDialogNodes(final List<DialogNode> dialog_nodes_serialized_name) {
-      this.dialog_nodes_serialized_name = dialog_nodes_serialized_name;
+    public void setDialogNodes(final List<DialogNode> dialogNodes) {
+      this.dialog_nodes_serialized_name = dialogNodes;
     }
 
     /**
      * Sets the pagination_serialized_name.
      *
-     * @param pagination_serialized_name the new pagination_serialized_name
+     * @param pagination the new pagination
      */
-    public void setPagination(final Pagination pagination_serialized_name) {
-      this.pagination_serialized_name = pagination_serialized_name;
+    public void setPagination(final Pagination pagination) {
+      this.pagination_serialized_name = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4693,28 +4693,28 @@ public class IBMConversationV1Models {
     /**
      * Sets the behavior_serialized_name.
      *
-     * @param behavior_serialized_name the new behavior_serialized_name
+     * @param behavior the new behavior
      */
-    public void setBehavior(final String behavior_serialized_name) {
-      this.behavior_serialized_name = behavior_serialized_name;
+    public void setBehavior(final String behavior) {
+      this.behavior_serialized_name = behavior;
     }
 
     /**
      * Sets the dialog_node_serialized_name.
      *
-     * @param dialog_node_serialized_name the new dialog_node_serialized_name
+     * @param dialogNode the new dialogNode
      */
-    public void setDialogNode(final String dialog_node_serialized_name) {
-      this.dialog_node_serialized_name = dialog_node_serialized_name;
+    public void setDialogNode(final String dialogNode) {
+      this.dialog_node_serialized_name = dialogNode;
     }
 
     /**
      * Sets the selector_serialized_name.
      *
-     * @param selector_serialized_name the new selector_serialized_name
+     * @param selector the new selector
      */
-    public void setSelector(final String selector_serialized_name) {
-      this.selector_serialized_name = selector_serialized_name;
+    public void setSelector(final String selector) {
+      this.selector_serialized_name = selector;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4808,37 +4808,37 @@ public class IBMConversationV1Models {
     /**
      * Sets the entity_serialized_name.
      *
-     * @param entity_serialized_name the new entity_serialized_name
+     * @param entity the new entity
      */
-    public void setEntity(final String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public void setEntity(final String entity) {
+      this.entity_serialized_name = entity;
     }
 
     /**
      * Sets the description_serialized_name.
      *
-     * @param description_serialized_name the new description_serialized_name
+     * @param description the new description
      */
-    public void setDescription(final String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
     }
 
     /**
      * Sets the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the new metadata_serialized_name
+     * @param metadata the new metadata
      */
-    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public void setMetadata(final IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
     }
 
     /**
      * Sets the fuzzy_match_serialized_name.
      *
-     * @param fuzzy_match_serialized_name the new fuzzy_match_serialized_name
+     * @param fuzzyMatch the new fuzzyMatch
      */
-    public void setFuzzyMatch(final Boolean fuzzy_match_serialized_name) {
-      this.fuzzy_match_serialized_name = fuzzy_match_serialized_name;
+    public void setFuzzyMatch(final Boolean fuzzyMatch) {
+      this.fuzzy_match_serialized_name = fuzzyMatch;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4888,19 +4888,19 @@ public class IBMConversationV1Models {
     /**
      * Sets the entities_serialized_name.
      *
-     * @param entities_serialized_name the new entities_serialized_name
+     * @param entities the new entities
      */
-    public void setEntities(final List<EntityExport> entities_serialized_name) {
-      this.entities_serialized_name = entities_serialized_name;
+    public void setEntities(final List<EntityExport> entities) {
+      this.entities_serialized_name = entities;
     }
 
     /**
      * Sets the pagination_serialized_name.
      *
-     * @param pagination_serialized_name the new pagination_serialized_name
+     * @param pagination the new pagination
      */
-    public void setPagination(final Pagination pagination_serialized_name) {
-      this.pagination_serialized_name = pagination_serialized_name;
+    public void setPagination(final Pagination pagination) {
+      this.pagination_serialized_name = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5023,46 +5023,46 @@ public class IBMConversationV1Models {
     /**
      * Sets the entity_serialized_name.
      *
-     * @param entity_serialized_name the new entity_serialized_name
+     * @param entity the new entity
      */
-    public void setEntity(final String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public void setEntity(final String entity) {
+      this.entity_serialized_name = entity;
     }
 
     /**
      * Sets the description_serialized_name.
      *
-     * @param description_serialized_name the new description_serialized_name
+     * @param description the new description
      */
-    public void setDescription(final String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
     }
 
     /**
      * Sets the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the new metadata_serialized_name
+     * @param metadata the new metadata
      */
-    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public void setMetadata(final IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
     }
 
     /**
      * Sets the fuzzy_match_serialized_name.
      *
-     * @param fuzzy_match_serialized_name the new fuzzy_match_serialized_name
+     * @param fuzzyMatch the new fuzzyMatch
      */
-    public void setFuzzyMatch(final Boolean fuzzy_match_serialized_name) {
-      this.fuzzy_match_serialized_name = fuzzy_match_serialized_name;
+    public void setFuzzyMatch(final Boolean fuzzyMatch) {
+      this.fuzzy_match_serialized_name = fuzzyMatch;
     }
 
     /**
      * Sets the values_serialized_name.
      *
-     * @param values_serialized_name the new values_serialized_name
+     * @param values the new values
      */
-    public void setValues(final List<ValueExport> values_serialized_name) {
-      this.values_serialized_name = values_serialized_name;
+    public void setValues(final List<ValueExport> values) {
+      this.values_serialized_name = values;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5137,10 +5137,10 @@ public class IBMConversationV1Models {
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5186,19 +5186,19 @@ public class IBMConversationV1Models {
     /**
      * Sets the examples_serialized_name.
      *
-     * @param examples_serialized_name the new examples_serialized_name
+     * @param examples the new examples
      */
-    public void setExamples(final List<Example> examples_serialized_name) {
-      this.examples_serialized_name = examples_serialized_name;
+    public void setExamples(final List<Example> examples) {
+      this.examples_serialized_name = examples;
     }
 
     /**
      * Sets the pagination_serialized_name.
      *
-     * @param pagination_serialized_name the new pagination_serialized_name
+     * @param pagination the new pagination
      */
-    public void setPagination(final Pagination pagination_serialized_name) {
-      this.pagination_serialized_name = pagination_serialized_name;
+    public void setPagination(final Pagination pagination) {
+      this.pagination_serialized_name = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5280,9 +5280,9 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String text_serialized_name;
 
-    private GetCounterexampleOptionsBuilder(GetCounterexampleOptions get_counterexample_options) {
-      workspace_id_serialized_name = get_counterexample_options.workspace_id_serialized_name;
-      text_serialized_name = get_counterexample_options.text_serialized_name;
+    private GetCounterexampleOptionsBuilder(GetCounterexampleOptions getCounterexampleOptions) {
+      workspace_id_serialized_name = getCounterexampleOptions.workspace_id_serialized_name;
+      text_serialized_name = getCounterexampleOptions.text_serialized_name;
     }
 
     /**
@@ -5294,18 +5294,18 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param text_serialized_name the text_serialized_name
+     * @param workspaceId the workspaceId
+     * @param text the text
      */
-    public GetCounterexampleOptionsBuilder(String workspace_id_serialized_name, String text_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.text_serialized_name = text_serialized_name;
+    public GetCounterexampleOptionsBuilder(String workspaceId, String text) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a GetCounterexampleOptions.
      *
-     * @return the get_counterexample_options
+     * @return the getCounterexampleOptions
      */
     public GetCounterexampleOptions build() {
       return new GetCounterexampleOptions(this);
@@ -5314,22 +5314,22 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the GetCounterexampleOptions builder
      */
-    public GetCounterexampleOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public GetCounterexampleOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the GetCounterexampleOptions builder
      */
-    public GetCounterexampleOptionsBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public GetCounterexampleOptionsBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
   }
@@ -5385,9 +5385,9 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String dialog_node_serialized_name;
 
-    private GetDialogNodeOptionsBuilder(GetDialogNodeOptions get_dialog_node_options) {
-      workspace_id_serialized_name = get_dialog_node_options.workspace_id_serialized_name;
-      dialog_node_serialized_name = get_dialog_node_options.dialog_node_serialized_name;
+    private GetDialogNodeOptionsBuilder(GetDialogNodeOptions getDialogNodeOptions) {
+      workspace_id_serialized_name = getDialogNodeOptions.workspace_id_serialized_name;
+      dialog_node_serialized_name = getDialogNodeOptions.dialog_node_serialized_name;
     }
 
     /**
@@ -5399,18 +5399,18 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param dialog_node_serialized_name the dialog_node_serialized_name
+     * @param workspaceId the workspaceId
+     * @param dialogNode the dialogNode
      */
-    public GetDialogNodeOptionsBuilder(String workspace_id_serialized_name, String dialog_node_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.dialog_node_serialized_name = dialog_node_serialized_name;
+    public GetDialogNodeOptionsBuilder(String workspaceId, String dialogNode) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.dialog_node_serialized_name = dialogNode;
     }
 
     /**
      * Builds a GetDialogNodeOptions.
      *
-     * @return the get_dialog_node_options
+     * @return the getDialogNodeOptions
      */
     public GetDialogNodeOptions build() {
       return new GetDialogNodeOptions(this);
@@ -5419,22 +5419,22 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the GetDialogNodeOptions builder
      */
-    public GetDialogNodeOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public GetDialogNodeOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the dialog_node_serialized_name.
      *
-     * @param dialog_node_serialized_name the dialog_node_serialized_name
+     * @param dialogNode the dialogNode
      * @return the GetDialogNodeOptions builder
      */
-    public GetDialogNodeOptionsBuilder dialogNode(String dialog_node_serialized_name) {
-      this.dialog_node_serialized_name = dialog_node_serialized_name;
+    public GetDialogNodeOptionsBuilder dialogNode(String dialogNode) {
+      this.dialog_node_serialized_name = dialogNode;
       return this;
     }
   }
@@ -5503,10 +5503,10 @@ public class IBMConversationV1Models {
     private String entity_serialized_name;
     private Boolean export_serialized_name;
 
-    private GetEntityOptionsBuilder(GetEntityOptions get_entity_options) {
-      workspace_id_serialized_name = get_entity_options.workspace_id_serialized_name;
-      entity_serialized_name = get_entity_options.entity_serialized_name;
-      export_serialized_name = get_entity_options.export_serialized_name;
+    private GetEntityOptionsBuilder(GetEntityOptions getEntityOptions) {
+      workspace_id_serialized_name = getEntityOptions.workspace_id_serialized_name;
+      entity_serialized_name = getEntityOptions.entity_serialized_name;
+      export_serialized_name = getEntityOptions.export_serialized_name;
     }
 
     /**
@@ -5518,18 +5518,18 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param entity_serialized_name the entity_serialized_name
+     * @param workspaceId the workspaceId
+     * @param entity the entity
      */
-    public GetEntityOptionsBuilder(String workspace_id_serialized_name, String entity_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.entity_serialized_name = entity_serialized_name;
+    public GetEntityOptionsBuilder(String workspaceId, String entity) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
     }
 
     /**
      * Builds a GetEntityOptions.
      *
-     * @return the get_entity_options
+     * @return the getEntityOptions
      */
     public GetEntityOptions build() {
       return new GetEntityOptions(this);
@@ -5538,33 +5538,33 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the GetEntityOptions builder
      */
-    public GetEntityOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public GetEntityOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the GetEntityOptions builder
      */
-    public GetEntityOptionsBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public GetEntityOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
 
     /**
      * Set the export_serialized_name.
      *
-     * @param export_serialized_name the export_serialized_name
+     * @param exportVar the exportVar
      * @return the GetEntityOptions builder
      */
-    public GetEntityOptionsBuilder exportField(Boolean export_serialized_name) {
-      this.export_serialized_name = export_serialized_name;
+    public GetEntityOptionsBuilder exportField(Boolean exportVar) {
+      this.export_serialized_name = exportVar;
       return this;
     }
   }
@@ -5634,10 +5634,10 @@ public class IBMConversationV1Models {
     private String intent_serialized_name;
     private String text_serialized_name;
 
-    private GetExampleOptionsBuilder(GetExampleOptions get_example_options) {
-      workspace_id_serialized_name = get_example_options.workspace_id_serialized_name;
-      intent_serialized_name = get_example_options.intent_serialized_name;
-      text_serialized_name = get_example_options.text_serialized_name;
+    private GetExampleOptionsBuilder(GetExampleOptions getExampleOptions) {
+      workspace_id_serialized_name = getExampleOptions.workspace_id_serialized_name;
+      intent_serialized_name = getExampleOptions.intent_serialized_name;
+      text_serialized_name = getExampleOptions.text_serialized_name;
     }
 
     /**
@@ -5649,20 +5649,20 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param intent_serialized_name the intent_serialized_name
-     * @param text_serialized_name the text_serialized_name
+     * @param workspaceId the workspaceId
+     * @param intent the intent
+     * @param text the text
      */
-    public GetExampleOptionsBuilder(String workspace_id_serialized_name, String intent_serialized_name, String text_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.intent_serialized_name = intent_serialized_name;
-      this.text_serialized_name = text_serialized_name;
+    public GetExampleOptionsBuilder(String workspaceId, String intent, String text) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.intent_serialized_name = intent;
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a GetExampleOptions.
      *
-     * @return the get_example_options
+     * @return the getExampleOptions
      */
     public GetExampleOptions build() {
       return new GetExampleOptions(this);
@@ -5671,33 +5671,33 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the GetExampleOptions builder
      */
-    public GetExampleOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public GetExampleOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the intent_serialized_name.
      *
-     * @param intent_serialized_name the intent_serialized_name
+     * @param intent the intent
      * @return the GetExampleOptions builder
      */
-    public GetExampleOptionsBuilder intent(String intent_serialized_name) {
-      this.intent_serialized_name = intent_serialized_name;
+    public GetExampleOptionsBuilder intent(String intent) {
+      this.intent_serialized_name = intent;
       return this;
     }
 
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the GetExampleOptions builder
      */
-    public GetExampleOptionsBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public GetExampleOptionsBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
   }
@@ -5766,10 +5766,10 @@ public class IBMConversationV1Models {
     private String intent_serialized_name;
     private Boolean export_serialized_name;
 
-    private GetIntentOptionsBuilder(GetIntentOptions get_intent_options) {
-      workspace_id_serialized_name = get_intent_options.workspace_id_serialized_name;
-      intent_serialized_name = get_intent_options.intent_serialized_name;
-      export_serialized_name = get_intent_options.export_serialized_name;
+    private GetIntentOptionsBuilder(GetIntentOptions getIntentOptions) {
+      workspace_id_serialized_name = getIntentOptions.workspace_id_serialized_name;
+      intent_serialized_name = getIntentOptions.intent_serialized_name;
+      export_serialized_name = getIntentOptions.export_serialized_name;
     }
 
     /**
@@ -5781,18 +5781,18 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param intent_serialized_name the intent_serialized_name
+     * @param workspaceId the workspaceId
+     * @param intent the intent
      */
-    public GetIntentOptionsBuilder(String workspace_id_serialized_name, String intent_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.intent_serialized_name = intent_serialized_name;
+    public GetIntentOptionsBuilder(String workspaceId, String intent) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.intent_serialized_name = intent;
     }
 
     /**
      * Builds a GetIntentOptions.
      *
-     * @return the get_intent_options
+     * @return the getIntentOptions
      */
     public GetIntentOptions build() {
       return new GetIntentOptions(this);
@@ -5801,33 +5801,33 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the GetIntentOptions builder
      */
-    public GetIntentOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public GetIntentOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the intent_serialized_name.
      *
-     * @param intent_serialized_name the intent_serialized_name
+     * @param intent the intent
      * @return the GetIntentOptions builder
      */
-    public GetIntentOptionsBuilder intent(String intent_serialized_name) {
-      this.intent_serialized_name = intent_serialized_name;
+    public GetIntentOptionsBuilder intent(String intent) {
+      this.intent_serialized_name = intent;
       return this;
     }
 
     /**
      * Set the export_serialized_name.
      *
-     * @param export_serialized_name the export_serialized_name
+     * @param exportVar the exportVar
      * @return the GetIntentOptions builder
      */
-    public GetIntentOptionsBuilder exportField(Boolean export_serialized_name) {
-      this.export_serialized_name = export_serialized_name;
+    public GetIntentOptionsBuilder exportField(Boolean exportVar) {
+      this.export_serialized_name = exportVar;
       return this;
     }
   }
@@ -5911,11 +5911,11 @@ public class IBMConversationV1Models {
     private String value_serialized_name;
     private String synonym_serialized_name;
 
-    private GetSynonymOptionsBuilder(GetSynonymOptions get_synonym_options) {
-      workspace_id_serialized_name = get_synonym_options.workspace_id_serialized_name;
-      entity_serialized_name = get_synonym_options.entity_serialized_name;
-      value_serialized_name = get_synonym_options.value_serialized_name;
-      synonym_serialized_name = get_synonym_options.synonym_serialized_name;
+    private GetSynonymOptionsBuilder(GetSynonymOptions getSynonymOptions) {
+      workspace_id_serialized_name = getSynonymOptions.workspace_id_serialized_name;
+      entity_serialized_name = getSynonymOptions.entity_serialized_name;
+      value_serialized_name = getSynonymOptions.value_serialized_name;
+      synonym_serialized_name = getSynonymOptions.synonym_serialized_name;
     }
 
     /**
@@ -5927,22 +5927,22 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param entity_serialized_name the entity_serialized_name
-     * @param value_serialized_name the value_serialized_name
-     * @param synonym_serialized_name the synonym_serialized_name
+     * @param workspaceId the workspaceId
+     * @param entity the entity
+     * @param value the value
+     * @param synonym the synonym
      */
-    public GetSynonymOptionsBuilder(String workspace_id_serialized_name, String entity_serialized_name, String value_serialized_name, String synonym_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.entity_serialized_name = entity_serialized_name;
-      this.value_serialized_name = value_serialized_name;
-      this.synonym_serialized_name = synonym_serialized_name;
+    public GetSynonymOptionsBuilder(String workspaceId, String entity, String value, String synonym) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
+      this.value_serialized_name = value;
+      this.synonym_serialized_name = synonym;
     }
 
     /**
      * Builds a GetSynonymOptions.
      *
-     * @return the get_synonym_options
+     * @return the getSynonymOptions
      */
     public GetSynonymOptions build() {
       return new GetSynonymOptions(this);
@@ -5951,44 +5951,44 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the GetSynonymOptions builder
      */
-    public GetSynonymOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public GetSynonymOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the GetSynonymOptions builder
      */
-    public GetSynonymOptionsBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public GetSynonymOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
 
     /**
      * Set the value_serialized_name.
      *
-     * @param value_serialized_name the value_serialized_name
+     * @param value the value
      * @return the GetSynonymOptions builder
      */
-    public GetSynonymOptionsBuilder value(String value_serialized_name) {
-      this.value_serialized_name = value_serialized_name;
+    public GetSynonymOptionsBuilder value(String value) {
+      this.value_serialized_name = value;
       return this;
     }
 
     /**
      * Set the synonym_serialized_name.
      *
-     * @param synonym_serialized_name the synonym_serialized_name
+     * @param synonym the synonym
      * @return the GetSynonymOptions builder
      */
-    public GetSynonymOptionsBuilder synonym(String synonym_serialized_name) {
-      this.synonym_serialized_name = synonym_serialized_name;
+    public GetSynonymOptionsBuilder synonym(String synonym) {
+      this.synonym_serialized_name = synonym;
       return this;
     }
   }
@@ -6071,11 +6071,11 @@ public class IBMConversationV1Models {
     private String value_serialized_name;
     private Boolean export_serialized_name;
 
-    private GetValueOptionsBuilder(GetValueOptions get_value_options) {
-      workspace_id_serialized_name = get_value_options.workspace_id_serialized_name;
-      entity_serialized_name = get_value_options.entity_serialized_name;
-      value_serialized_name = get_value_options.value_serialized_name;
-      export_serialized_name = get_value_options.export_serialized_name;
+    private GetValueOptionsBuilder(GetValueOptions getValueOptions) {
+      workspace_id_serialized_name = getValueOptions.workspace_id_serialized_name;
+      entity_serialized_name = getValueOptions.entity_serialized_name;
+      value_serialized_name = getValueOptions.value_serialized_name;
+      export_serialized_name = getValueOptions.export_serialized_name;
     }
 
     /**
@@ -6087,20 +6087,20 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param entity_serialized_name the entity_serialized_name
-     * @param value_serialized_name the value_serialized_name
+     * @param workspaceId the workspaceId
+     * @param entity the entity
+     * @param value the value
      */
-    public GetValueOptionsBuilder(String workspace_id_serialized_name, String entity_serialized_name, String value_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.entity_serialized_name = entity_serialized_name;
-      this.value_serialized_name = value_serialized_name;
+    public GetValueOptionsBuilder(String workspaceId, String entity, String value) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
+      this.value_serialized_name = value;
     }
 
     /**
      * Builds a GetValueOptions.
      *
-     * @return the get_value_options
+     * @return the getValueOptions
      */
     public GetValueOptions build() {
       return new GetValueOptions(this);
@@ -6109,44 +6109,44 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the GetValueOptions builder
      */
-    public GetValueOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public GetValueOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the GetValueOptions builder
      */
-    public GetValueOptionsBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public GetValueOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
 
     /**
      * Set the value_serialized_name.
      *
-     * @param value_serialized_name the value_serialized_name
+     * @param value the value
      * @return the GetValueOptions builder
      */
-    public GetValueOptionsBuilder value(String value_serialized_name) {
-      this.value_serialized_name = value_serialized_name;
+    public GetValueOptionsBuilder value(String value) {
+      this.value_serialized_name = value;
       return this;
     }
 
     /**
      * Set the export_serialized_name.
      *
-     * @param export_serialized_name the export_serialized_name
+     * @param exportVar the exportVar
      * @return the GetValueOptions builder
      */
-    public GetValueOptionsBuilder exportField(Boolean export_serialized_name) {
-      this.export_serialized_name = export_serialized_name;
+    public GetValueOptionsBuilder exportField(Boolean exportVar) {
+      this.export_serialized_name = exportVar;
       return this;
     }
   }
@@ -6201,9 +6201,9 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private Boolean export_serialized_name;
 
-    private GetWorkspaceOptionsBuilder(GetWorkspaceOptions get_workspace_options) {
-      workspace_id_serialized_name = get_workspace_options.workspace_id_serialized_name;
-      export_serialized_name = get_workspace_options.export_serialized_name;
+    private GetWorkspaceOptionsBuilder(GetWorkspaceOptions getWorkspaceOptions) {
+      workspace_id_serialized_name = getWorkspaceOptions.workspace_id_serialized_name;
+      export_serialized_name = getWorkspaceOptions.export_serialized_name;
     }
 
     /**
@@ -6215,16 +6215,16 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      */
-    public GetWorkspaceOptionsBuilder(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public GetWorkspaceOptionsBuilder(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
     }
 
     /**
      * Builds a GetWorkspaceOptions.
      *
-     * @return the get_workspace_options
+     * @return the getWorkspaceOptions
      */
     public GetWorkspaceOptions build() {
       return new GetWorkspaceOptions(this);
@@ -6233,22 +6233,22 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the GetWorkspaceOptions builder
      */
-    public GetWorkspaceOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public GetWorkspaceOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the export_serialized_name.
      *
-     * @param export_serialized_name the export_serialized_name
+     * @param exportVar the exportVar
      * @return the GetWorkspaceOptions builder
      */
-    public GetWorkspaceOptionsBuilder exportField(Boolean export_serialized_name) {
-      this.export_serialized_name = export_serialized_name;
+    public GetWorkspaceOptionsBuilder exportField(Boolean exportVar) {
+      this.export_serialized_name = exportVar;
       return this;
     }
   }
@@ -6290,8 +6290,8 @@ public class IBMConversationV1Models {
   public class InputDataBuilder {
     private String text_serialized_name;
 
-    private InputDataBuilder(InputData input_data) {
-      text_serialized_name = input_data.text_serialized_name;
+    private InputDataBuilder(InputData inputData) {
+      text_serialized_name = inputData.text_serialized_name;
     }
 
     /**
@@ -6303,16 +6303,16 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      */
-    public InputDataBuilder(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public InputDataBuilder(String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a InputData.
      *
-     * @return the input_data
+     * @return the inputData
      */
     public InputData build() {
       return new InputData(this);
@@ -6321,11 +6321,11 @@ public class IBMConversationV1Models {
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the InputData builder
      */
-    public InputDataBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public InputDataBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
   }
@@ -6386,19 +6386,19 @@ public class IBMConversationV1Models {
     /**
      * Sets the intent_serialized_name.
      *
-     * @param intent_serialized_name the new intent_serialized_name
+     * @param intent the new intent
      */
-    public void setIntent(final String intent_serialized_name) {
-      this.intent_serialized_name = intent_serialized_name;
+    public void setIntent(final String intent) {
+      this.intent_serialized_name = intent;
     }
 
     /**
      * Sets the description_serialized_name.
      *
-     * @param description_serialized_name the new description_serialized_name
+     * @param description the new description
      */
-    public void setDescription(final String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6444,19 +6444,19 @@ public class IBMConversationV1Models {
     /**
      * Sets the intents_serialized_name.
      *
-     * @param intents_serialized_name the new intents_serialized_name
+     * @param intents the new intents
      */
-    public void setIntents(final List<IntentExport> intents_serialized_name) {
-      this.intents_serialized_name = intents_serialized_name;
+    public void setIntents(final List<IntentExport> intents) {
+      this.intents_serialized_name = intents;
     }
 
     /**
      * Sets the pagination_serialized_name.
      *
-     * @param pagination_serialized_name the new pagination_serialized_name
+     * @param pagination the new pagination
      */
-    public void setPagination(final Pagination pagination_serialized_name) {
-      this.pagination_serialized_name = pagination_serialized_name;
+    public void setPagination(final Pagination pagination) {
+      this.pagination_serialized_name = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6555,28 +6555,28 @@ public class IBMConversationV1Models {
     /**
      * Sets the intent_serialized_name.
      *
-     * @param intent_serialized_name the new intent_serialized_name
+     * @param intent the new intent
      */
-    public void setIntent(final String intent_serialized_name) {
-      this.intent_serialized_name = intent_serialized_name;
+    public void setIntent(final String intent) {
+      this.intent_serialized_name = intent;
     }
 
     /**
      * Sets the description_serialized_name.
      *
-     * @param description_serialized_name the new description_serialized_name
+     * @param description the new description
      */
-    public void setDescription(final String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
     }
 
     /**
      * Sets the examples_serialized_name.
      *
-     * @param examples_serialized_name the new examples_serialized_name
+     * @param examples the new examples
      */
-    public void setExamples(final List<Example> examples_serialized_name) {
-      this.examples_serialized_name = examples_serialized_name;
+    public void setExamples(final List<Example> examples) {
+      this.examples_serialized_name = examples;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6692,12 +6692,12 @@ public class IBMConversationV1Models {
     private String sort_serialized_name;
     private String cursor_serialized_name;
 
-    private ListCounterexamplesOptionsBuilder(ListCounterexamplesOptions list_counterexamples_options) {
-      workspace_id_serialized_name = list_counterexamples_options.workspace_id_serialized_name;
-      page_limit_serialized_name = list_counterexamples_options.page_limit_serialized_name;
-      include_count_serialized_name = list_counterexamples_options.include_count_serialized_name;
-      sort_serialized_name = list_counterexamples_options.sort_serialized_name;
-      cursor_serialized_name = list_counterexamples_options.cursor_serialized_name;
+    private ListCounterexamplesOptionsBuilder(ListCounterexamplesOptions listCounterexamplesOptions) {
+      workspace_id_serialized_name = listCounterexamplesOptions.workspace_id_serialized_name;
+      page_limit_serialized_name = listCounterexamplesOptions.page_limit_serialized_name;
+      include_count_serialized_name = listCounterexamplesOptions.include_count_serialized_name;
+      sort_serialized_name = listCounterexamplesOptions.sort_serialized_name;
+      cursor_serialized_name = listCounterexamplesOptions.cursor_serialized_name;
     }
 
     /**
@@ -6709,16 +6709,16 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      */
-    public ListCounterexamplesOptionsBuilder(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public ListCounterexamplesOptionsBuilder(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
     }
 
     /**
      * Builds a ListCounterexamplesOptions.
      *
-     * @return the list_counterexamples_options
+     * @return the listCounterexamplesOptions
      */
     public ListCounterexamplesOptions build() {
       return new ListCounterexamplesOptions(this);
@@ -6727,55 +6727,55 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the ListCounterexamplesOptions builder
      */
-    public ListCounterexamplesOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public ListCounterexamplesOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the page_limit_serialized_name.
      *
-     * @param page_limit_serialized_name the page_limit_serialized_name
+     * @param pageLimit the pageLimit
      * @return the ListCounterexamplesOptions builder
      */
-    public ListCounterexamplesOptionsBuilder pageLimit(Long page_limit_serialized_name) {
-      this.page_limit_serialized_name = page_limit_serialized_name;
+    public ListCounterexamplesOptionsBuilder pageLimit(Long pageLimit) {
+      this.page_limit_serialized_name = pageLimit;
       return this;
     }
 
     /**
      * Set the include_count_serialized_name.
      *
-     * @param include_count_serialized_name the include_count_serialized_name
+     * @param includeCount the includeCount
      * @return the ListCounterexamplesOptions builder
      */
-    public ListCounterexamplesOptionsBuilder includeCount(Boolean include_count_serialized_name) {
-      this.include_count_serialized_name = include_count_serialized_name;
+    public ListCounterexamplesOptionsBuilder includeCount(Boolean includeCount) {
+      this.include_count_serialized_name = includeCount;
       return this;
     }
 
     /**
      * Set the sort_serialized_name.
      *
-     * @param sort_serialized_name the sort_serialized_name
+     * @param sortVar the sortVar
      * @return the ListCounterexamplesOptions builder
      */
-    public ListCounterexamplesOptionsBuilder sortField(String sort_serialized_name) {
-      this.sort_serialized_name = sort_serialized_name;
+    public ListCounterexamplesOptionsBuilder sortField(String sortVar) {
+      this.sort_serialized_name = sortVar;
       return this;
     }
 
     /**
      * Set the cursor_serialized_name.
      *
-     * @param cursor_serialized_name the cursor_serialized_name
+     * @param cursor the cursor
      * @return the ListCounterexamplesOptions builder
      */
-    public ListCounterexamplesOptionsBuilder cursor(String cursor_serialized_name) {
-      this.cursor_serialized_name = cursor_serialized_name;
+    public ListCounterexamplesOptionsBuilder cursor(String cursor) {
+      this.cursor_serialized_name = cursor;
       return this;
     }
   }
@@ -6869,12 +6869,12 @@ public class IBMConversationV1Models {
     private String sort_serialized_name;
     private String cursor_serialized_name;
 
-    private ListDialogNodesOptionsBuilder(ListDialogNodesOptions list_dialog_nodes_options) {
-      workspace_id_serialized_name = list_dialog_nodes_options.workspace_id_serialized_name;
-      page_limit_serialized_name = list_dialog_nodes_options.page_limit_serialized_name;
-      include_count_serialized_name = list_dialog_nodes_options.include_count_serialized_name;
-      sort_serialized_name = list_dialog_nodes_options.sort_serialized_name;
-      cursor_serialized_name = list_dialog_nodes_options.cursor_serialized_name;
+    private ListDialogNodesOptionsBuilder(ListDialogNodesOptions listDialogNodesOptions) {
+      workspace_id_serialized_name = listDialogNodesOptions.workspace_id_serialized_name;
+      page_limit_serialized_name = listDialogNodesOptions.page_limit_serialized_name;
+      include_count_serialized_name = listDialogNodesOptions.include_count_serialized_name;
+      sort_serialized_name = listDialogNodesOptions.sort_serialized_name;
+      cursor_serialized_name = listDialogNodesOptions.cursor_serialized_name;
     }
 
     /**
@@ -6886,16 +6886,16 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      */
-    public ListDialogNodesOptionsBuilder(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public ListDialogNodesOptionsBuilder(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
     }
 
     /**
      * Builds a ListDialogNodesOptions.
      *
-     * @return the list_dialog_nodes_options
+     * @return the listDialogNodesOptions
      */
     public ListDialogNodesOptions build() {
       return new ListDialogNodesOptions(this);
@@ -6904,55 +6904,55 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the ListDialogNodesOptions builder
      */
-    public ListDialogNodesOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public ListDialogNodesOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the page_limit_serialized_name.
      *
-     * @param page_limit_serialized_name the page_limit_serialized_name
+     * @param pageLimit the pageLimit
      * @return the ListDialogNodesOptions builder
      */
-    public ListDialogNodesOptionsBuilder pageLimit(Long page_limit_serialized_name) {
-      this.page_limit_serialized_name = page_limit_serialized_name;
+    public ListDialogNodesOptionsBuilder pageLimit(Long pageLimit) {
+      this.page_limit_serialized_name = pageLimit;
       return this;
     }
 
     /**
      * Set the include_count_serialized_name.
      *
-     * @param include_count_serialized_name the include_count_serialized_name
+     * @param includeCount the includeCount
      * @return the ListDialogNodesOptions builder
      */
-    public ListDialogNodesOptionsBuilder includeCount(Boolean include_count_serialized_name) {
-      this.include_count_serialized_name = include_count_serialized_name;
+    public ListDialogNodesOptionsBuilder includeCount(Boolean includeCount) {
+      this.include_count_serialized_name = includeCount;
       return this;
     }
 
     /**
      * Set the sort_serialized_name.
      *
-     * @param sort_serialized_name the sort_serialized_name
+     * @param sortVar the sortVar
      * @return the ListDialogNodesOptions builder
      */
-    public ListDialogNodesOptionsBuilder sortField(String sort_serialized_name) {
-      this.sort_serialized_name = sort_serialized_name;
+    public ListDialogNodesOptionsBuilder sortField(String sortVar) {
+      this.sort_serialized_name = sortVar;
       return this;
     }
 
     /**
      * Set the cursor_serialized_name.
      *
-     * @param cursor_serialized_name the cursor_serialized_name
+     * @param cursor the cursor
      * @return the ListDialogNodesOptions builder
      */
-    public ListDialogNodesOptionsBuilder cursor(String cursor_serialized_name) {
-      this.cursor_serialized_name = cursor_serialized_name;
+    public ListDialogNodesOptionsBuilder cursor(String cursor) {
+      this.cursor_serialized_name = cursor;
       return this;
     }
   }
@@ -7059,13 +7059,13 @@ public class IBMConversationV1Models {
     private String sort_serialized_name;
     private String cursor_serialized_name;
 
-    private ListEntitiesOptionsBuilder(ListEntitiesOptions list_entities_options) {
-      workspace_id_serialized_name = list_entities_options.workspace_id_serialized_name;
-      export_serialized_name = list_entities_options.export_serialized_name;
-      page_limit_serialized_name = list_entities_options.page_limit_serialized_name;
-      include_count_serialized_name = list_entities_options.include_count_serialized_name;
-      sort_serialized_name = list_entities_options.sort_serialized_name;
-      cursor_serialized_name = list_entities_options.cursor_serialized_name;
+    private ListEntitiesOptionsBuilder(ListEntitiesOptions listEntitiesOptions) {
+      workspace_id_serialized_name = listEntitiesOptions.workspace_id_serialized_name;
+      export_serialized_name = listEntitiesOptions.export_serialized_name;
+      page_limit_serialized_name = listEntitiesOptions.page_limit_serialized_name;
+      include_count_serialized_name = listEntitiesOptions.include_count_serialized_name;
+      sort_serialized_name = listEntitiesOptions.sort_serialized_name;
+      cursor_serialized_name = listEntitiesOptions.cursor_serialized_name;
     }
 
     /**
@@ -7077,16 +7077,16 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      */
-    public ListEntitiesOptionsBuilder(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public ListEntitiesOptionsBuilder(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
     }
 
     /**
      * Builds a ListEntitiesOptions.
      *
-     * @return the list_entities_options
+     * @return the listEntitiesOptions
      */
     public ListEntitiesOptions build() {
       return new ListEntitiesOptions(this);
@@ -7095,66 +7095,66 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public ListEntitiesOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the export_serialized_name.
      *
-     * @param export_serialized_name the export_serialized_name
+     * @param exportVar the exportVar
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder exportField(Boolean export_serialized_name) {
-      this.export_serialized_name = export_serialized_name;
+    public ListEntitiesOptionsBuilder exportField(Boolean exportVar) {
+      this.export_serialized_name = exportVar;
       return this;
     }
 
     /**
      * Set the page_limit_serialized_name.
      *
-     * @param page_limit_serialized_name the page_limit_serialized_name
+     * @param pageLimit the pageLimit
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder pageLimit(Long page_limit_serialized_name) {
-      this.page_limit_serialized_name = page_limit_serialized_name;
+    public ListEntitiesOptionsBuilder pageLimit(Long pageLimit) {
+      this.page_limit_serialized_name = pageLimit;
       return this;
     }
 
     /**
      * Set the include_count_serialized_name.
      *
-     * @param include_count_serialized_name the include_count_serialized_name
+     * @param includeCount the includeCount
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder includeCount(Boolean include_count_serialized_name) {
-      this.include_count_serialized_name = include_count_serialized_name;
+    public ListEntitiesOptionsBuilder includeCount(Boolean includeCount) {
+      this.include_count_serialized_name = includeCount;
       return this;
     }
 
     /**
      * Set the sort_serialized_name.
      *
-     * @param sort_serialized_name the sort_serialized_name
+     * @param sortVar the sortVar
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder sortField(String sort_serialized_name) {
-      this.sort_serialized_name = sort_serialized_name;
+    public ListEntitiesOptionsBuilder sortField(String sortVar) {
+      this.sort_serialized_name = sortVar;
       return this;
     }
 
     /**
      * Set the cursor_serialized_name.
      *
-     * @param cursor_serialized_name the cursor_serialized_name
+     * @param cursor the cursor
      * @return the ListEntitiesOptions builder
      */
-    public ListEntitiesOptionsBuilder cursor(String cursor_serialized_name) {
-      this.cursor_serialized_name = cursor_serialized_name;
+    public ListEntitiesOptionsBuilder cursor(String cursor) {
+      this.cursor_serialized_name = cursor;
       return this;
     }
   }
@@ -7262,13 +7262,13 @@ public class IBMConversationV1Models {
     private String sort_serialized_name;
     private String cursor_serialized_name;
 
-    private ListExamplesOptionsBuilder(ListExamplesOptions list_examples_options) {
-      workspace_id_serialized_name = list_examples_options.workspace_id_serialized_name;
-      intent_serialized_name = list_examples_options.intent_serialized_name;
-      page_limit_serialized_name = list_examples_options.page_limit_serialized_name;
-      include_count_serialized_name = list_examples_options.include_count_serialized_name;
-      sort_serialized_name = list_examples_options.sort_serialized_name;
-      cursor_serialized_name = list_examples_options.cursor_serialized_name;
+    private ListExamplesOptionsBuilder(ListExamplesOptions listExamplesOptions) {
+      workspace_id_serialized_name = listExamplesOptions.workspace_id_serialized_name;
+      intent_serialized_name = listExamplesOptions.intent_serialized_name;
+      page_limit_serialized_name = listExamplesOptions.page_limit_serialized_name;
+      include_count_serialized_name = listExamplesOptions.include_count_serialized_name;
+      sort_serialized_name = listExamplesOptions.sort_serialized_name;
+      cursor_serialized_name = listExamplesOptions.cursor_serialized_name;
     }
 
     /**
@@ -7280,18 +7280,18 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param intent_serialized_name the intent_serialized_name
+     * @param workspaceId the workspaceId
+     * @param intent the intent
      */
-    public ListExamplesOptionsBuilder(String workspace_id_serialized_name, String intent_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.intent_serialized_name = intent_serialized_name;
+    public ListExamplesOptionsBuilder(String workspaceId, String intent) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.intent_serialized_name = intent;
     }
 
     /**
      * Builds a ListExamplesOptions.
      *
-     * @return the list_examples_options
+     * @return the listExamplesOptions
      */
     public ListExamplesOptions build() {
       return new ListExamplesOptions(this);
@@ -7300,66 +7300,66 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the ListExamplesOptions builder
      */
-    public ListExamplesOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public ListExamplesOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the intent_serialized_name.
      *
-     * @param intent_serialized_name the intent_serialized_name
+     * @param intent the intent
      * @return the ListExamplesOptions builder
      */
-    public ListExamplesOptionsBuilder intent(String intent_serialized_name) {
-      this.intent_serialized_name = intent_serialized_name;
+    public ListExamplesOptionsBuilder intent(String intent) {
+      this.intent_serialized_name = intent;
       return this;
     }
 
     /**
      * Set the page_limit_serialized_name.
      *
-     * @param page_limit_serialized_name the page_limit_serialized_name
+     * @param pageLimit the pageLimit
      * @return the ListExamplesOptions builder
      */
-    public ListExamplesOptionsBuilder pageLimit(Long page_limit_serialized_name) {
-      this.page_limit_serialized_name = page_limit_serialized_name;
+    public ListExamplesOptionsBuilder pageLimit(Long pageLimit) {
+      this.page_limit_serialized_name = pageLimit;
       return this;
     }
 
     /**
      * Set the include_count_serialized_name.
      *
-     * @param include_count_serialized_name the include_count_serialized_name
+     * @param includeCount the includeCount
      * @return the ListExamplesOptions builder
      */
-    public ListExamplesOptionsBuilder includeCount(Boolean include_count_serialized_name) {
-      this.include_count_serialized_name = include_count_serialized_name;
+    public ListExamplesOptionsBuilder includeCount(Boolean includeCount) {
+      this.include_count_serialized_name = includeCount;
       return this;
     }
 
     /**
      * Set the sort_serialized_name.
      *
-     * @param sort_serialized_name the sort_serialized_name
+     * @param sortVar the sortVar
      * @return the ListExamplesOptions builder
      */
-    public ListExamplesOptionsBuilder sortField(String sort_serialized_name) {
-      this.sort_serialized_name = sort_serialized_name;
+    public ListExamplesOptionsBuilder sortField(String sortVar) {
+      this.sort_serialized_name = sortVar;
       return this;
     }
 
     /**
      * Set the cursor_serialized_name.
      *
-     * @param cursor_serialized_name the cursor_serialized_name
+     * @param cursor the cursor
      * @return the ListExamplesOptions builder
      */
-    public ListExamplesOptionsBuilder cursor(String cursor_serialized_name) {
-      this.cursor_serialized_name = cursor_serialized_name;
+    public ListExamplesOptionsBuilder cursor(String cursor) {
+      this.cursor_serialized_name = cursor;
       return this;
     }
   }
@@ -7466,13 +7466,13 @@ public class IBMConversationV1Models {
     private String sort_serialized_name;
     private String cursor_serialized_name;
 
-    private ListIntentsOptionsBuilder(ListIntentsOptions list_intents_options) {
-      workspace_id_serialized_name = list_intents_options.workspace_id_serialized_name;
-      export_serialized_name = list_intents_options.export_serialized_name;
-      page_limit_serialized_name = list_intents_options.page_limit_serialized_name;
-      include_count_serialized_name = list_intents_options.include_count_serialized_name;
-      sort_serialized_name = list_intents_options.sort_serialized_name;
-      cursor_serialized_name = list_intents_options.cursor_serialized_name;
+    private ListIntentsOptionsBuilder(ListIntentsOptions listIntentsOptions) {
+      workspace_id_serialized_name = listIntentsOptions.workspace_id_serialized_name;
+      export_serialized_name = listIntentsOptions.export_serialized_name;
+      page_limit_serialized_name = listIntentsOptions.page_limit_serialized_name;
+      include_count_serialized_name = listIntentsOptions.include_count_serialized_name;
+      sort_serialized_name = listIntentsOptions.sort_serialized_name;
+      cursor_serialized_name = listIntentsOptions.cursor_serialized_name;
     }
 
     /**
@@ -7484,16 +7484,16 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      */
-    public ListIntentsOptionsBuilder(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public ListIntentsOptionsBuilder(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
     }
 
     /**
      * Builds a ListIntentsOptions.
      *
-     * @return the list_intents_options
+     * @return the listIntentsOptions
      */
     public ListIntentsOptions build() {
       return new ListIntentsOptions(this);
@@ -7502,66 +7502,66 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public ListIntentsOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the export_serialized_name.
      *
-     * @param export_serialized_name the export_serialized_name
+     * @param exportVar the exportVar
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder exportField(Boolean export_serialized_name) {
-      this.export_serialized_name = export_serialized_name;
+    public ListIntentsOptionsBuilder exportField(Boolean exportVar) {
+      this.export_serialized_name = exportVar;
       return this;
     }
 
     /**
      * Set the page_limit_serialized_name.
      *
-     * @param page_limit_serialized_name the page_limit_serialized_name
+     * @param pageLimit the pageLimit
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder pageLimit(Long page_limit_serialized_name) {
-      this.page_limit_serialized_name = page_limit_serialized_name;
+    public ListIntentsOptionsBuilder pageLimit(Long pageLimit) {
+      this.page_limit_serialized_name = pageLimit;
       return this;
     }
 
     /**
      * Set the include_count_serialized_name.
      *
-     * @param include_count_serialized_name the include_count_serialized_name
+     * @param includeCount the includeCount
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder includeCount(Boolean include_count_serialized_name) {
-      this.include_count_serialized_name = include_count_serialized_name;
+    public ListIntentsOptionsBuilder includeCount(Boolean includeCount) {
+      this.include_count_serialized_name = includeCount;
       return this;
     }
 
     /**
      * Set the sort_serialized_name.
      *
-     * @param sort_serialized_name the sort_serialized_name
+     * @param sortVar the sortVar
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder sortField(String sort_serialized_name) {
-      this.sort_serialized_name = sort_serialized_name;
+    public ListIntentsOptionsBuilder sortField(String sortVar) {
+      this.sort_serialized_name = sortVar;
       return this;
     }
 
     /**
      * Set the cursor_serialized_name.
      *
-     * @param cursor_serialized_name the cursor_serialized_name
+     * @param cursor the cursor
      * @return the ListIntentsOptions builder
      */
-    public ListIntentsOptionsBuilder cursor(String cursor_serialized_name) {
-      this.cursor_serialized_name = cursor_serialized_name;
+    public ListIntentsOptionsBuilder cursor(String cursor) {
+      this.cursor_serialized_name = cursor;
       return this;
     }
   }
@@ -7655,12 +7655,12 @@ public class IBMConversationV1Models {
     private Long page_limit_serialized_name;
     private String cursor_serialized_name;
 
-    private ListLogsOptionsBuilder(ListLogsOptions list_logs_options) {
-      workspace_id_serialized_name = list_logs_options.workspace_id_serialized_name;
-      sort_serialized_name = list_logs_options.sort_serialized_name;
-      filter_serialized_name = list_logs_options.filter_serialized_name;
-      page_limit_serialized_name = list_logs_options.page_limit_serialized_name;
-      cursor_serialized_name = list_logs_options.cursor_serialized_name;
+    private ListLogsOptionsBuilder(ListLogsOptions listLogsOptions) {
+      workspace_id_serialized_name = listLogsOptions.workspace_id_serialized_name;
+      sort_serialized_name = listLogsOptions.sort_serialized_name;
+      filter_serialized_name = listLogsOptions.filter_serialized_name;
+      page_limit_serialized_name = listLogsOptions.page_limit_serialized_name;
+      cursor_serialized_name = listLogsOptions.cursor_serialized_name;
     }
 
     /**
@@ -7672,16 +7672,16 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      */
-    public ListLogsOptionsBuilder(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public ListLogsOptionsBuilder(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
     }
 
     /**
      * Builds a ListLogsOptions.
      *
-     * @return the list_logs_options
+     * @return the listLogsOptions
      */
     public ListLogsOptions build() {
       return new ListLogsOptions(this);
@@ -7690,55 +7690,55 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the ListLogsOptions builder
      */
-    public ListLogsOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public ListLogsOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the sort_serialized_name.
      *
-     * @param sort_serialized_name the sort_serialized_name
+     * @param sortVar the sortVar
      * @return the ListLogsOptions builder
      */
-    public ListLogsOptionsBuilder sortField(String sort_serialized_name) {
-      this.sort_serialized_name = sort_serialized_name;
+    public ListLogsOptionsBuilder sortField(String sortVar) {
+      this.sort_serialized_name = sortVar;
       return this;
     }
 
     /**
      * Set the filter_serialized_name.
      *
-     * @param filter_serialized_name the filter_serialized_name
+     * @param filter the filter
      * @return the ListLogsOptions builder
      */
-    public ListLogsOptionsBuilder filter(String filter_serialized_name) {
-      this.filter_serialized_name = filter_serialized_name;
+    public ListLogsOptionsBuilder filter(String filter) {
+      this.filter_serialized_name = filter;
       return this;
     }
 
     /**
      * Set the page_limit_serialized_name.
      *
-     * @param page_limit_serialized_name the page_limit_serialized_name
+     * @param pageLimit the pageLimit
      * @return the ListLogsOptions builder
      */
-    public ListLogsOptionsBuilder pageLimit(Long page_limit_serialized_name) {
-      this.page_limit_serialized_name = page_limit_serialized_name;
+    public ListLogsOptionsBuilder pageLimit(Long pageLimit) {
+      this.page_limit_serialized_name = pageLimit;
       return this;
     }
 
     /**
      * Set the cursor_serialized_name.
      *
-     * @param cursor_serialized_name the cursor_serialized_name
+     * @param cursor the cursor
      * @return the ListLogsOptions builder
      */
-    public ListLogsOptionsBuilder cursor(String cursor_serialized_name) {
-      this.cursor_serialized_name = cursor_serialized_name;
+    public ListLogsOptionsBuilder cursor(String cursor) {
+      this.cursor_serialized_name = cursor;
       return this;
     }
   }
@@ -7860,14 +7860,14 @@ public class IBMConversationV1Models {
     private String sort_serialized_name;
     private String cursor_serialized_name;
 
-    private ListSynonymsOptionsBuilder(ListSynonymsOptions list_synonyms_options) {
-      workspace_id_serialized_name = list_synonyms_options.workspace_id_serialized_name;
-      entity_serialized_name = list_synonyms_options.entity_serialized_name;
-      value_serialized_name = list_synonyms_options.value_serialized_name;
-      page_limit_serialized_name = list_synonyms_options.page_limit_serialized_name;
-      include_count_serialized_name = list_synonyms_options.include_count_serialized_name;
-      sort_serialized_name = list_synonyms_options.sort_serialized_name;
-      cursor_serialized_name = list_synonyms_options.cursor_serialized_name;
+    private ListSynonymsOptionsBuilder(ListSynonymsOptions listSynonymsOptions) {
+      workspace_id_serialized_name = listSynonymsOptions.workspace_id_serialized_name;
+      entity_serialized_name = listSynonymsOptions.entity_serialized_name;
+      value_serialized_name = listSynonymsOptions.value_serialized_name;
+      page_limit_serialized_name = listSynonymsOptions.page_limit_serialized_name;
+      include_count_serialized_name = listSynonymsOptions.include_count_serialized_name;
+      sort_serialized_name = listSynonymsOptions.sort_serialized_name;
+      cursor_serialized_name = listSynonymsOptions.cursor_serialized_name;
     }
 
     /**
@@ -7879,20 +7879,20 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param entity_serialized_name the entity_serialized_name
-     * @param value_serialized_name the value_serialized_name
+     * @param workspaceId the workspaceId
+     * @param entity the entity
+     * @param value the value
      */
-    public ListSynonymsOptionsBuilder(String workspace_id_serialized_name, String entity_serialized_name, String value_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.entity_serialized_name = entity_serialized_name;
-      this.value_serialized_name = value_serialized_name;
+    public ListSynonymsOptionsBuilder(String workspaceId, String entity, String value) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
+      this.value_serialized_name = value;
     }
 
     /**
      * Builds a ListSynonymsOptions.
      *
-     * @return the list_synonyms_options
+     * @return the listSynonymsOptions
      */
     public ListSynonymsOptions build() {
       return new ListSynonymsOptions(this);
@@ -7901,77 +7901,77 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the ListSynonymsOptions builder
      */
-    public ListSynonymsOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public ListSynonymsOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the ListSynonymsOptions builder
      */
-    public ListSynonymsOptionsBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public ListSynonymsOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
 
     /**
      * Set the value_serialized_name.
      *
-     * @param value_serialized_name the value_serialized_name
+     * @param value the value
      * @return the ListSynonymsOptions builder
      */
-    public ListSynonymsOptionsBuilder value(String value_serialized_name) {
-      this.value_serialized_name = value_serialized_name;
+    public ListSynonymsOptionsBuilder value(String value) {
+      this.value_serialized_name = value;
       return this;
     }
 
     /**
      * Set the page_limit_serialized_name.
      *
-     * @param page_limit_serialized_name the page_limit_serialized_name
+     * @param pageLimit the pageLimit
      * @return the ListSynonymsOptions builder
      */
-    public ListSynonymsOptionsBuilder pageLimit(Long page_limit_serialized_name) {
-      this.page_limit_serialized_name = page_limit_serialized_name;
+    public ListSynonymsOptionsBuilder pageLimit(Long pageLimit) {
+      this.page_limit_serialized_name = pageLimit;
       return this;
     }
 
     /**
      * Set the include_count_serialized_name.
      *
-     * @param include_count_serialized_name the include_count_serialized_name
+     * @param includeCount the includeCount
      * @return the ListSynonymsOptions builder
      */
-    public ListSynonymsOptionsBuilder includeCount(Boolean include_count_serialized_name) {
-      this.include_count_serialized_name = include_count_serialized_name;
+    public ListSynonymsOptionsBuilder includeCount(Boolean includeCount) {
+      this.include_count_serialized_name = includeCount;
       return this;
     }
 
     /**
      * Set the sort_serialized_name.
      *
-     * @param sort_serialized_name the sort_serialized_name
+     * @param sortVar the sortVar
      * @return the ListSynonymsOptions builder
      */
-    public ListSynonymsOptionsBuilder sortField(String sort_serialized_name) {
-      this.sort_serialized_name = sort_serialized_name;
+    public ListSynonymsOptionsBuilder sortField(String sortVar) {
+      this.sort_serialized_name = sortVar;
       return this;
     }
 
     /**
      * Set the cursor_serialized_name.
      *
-     * @param cursor_serialized_name the cursor_serialized_name
+     * @param cursor the cursor
      * @return the ListSynonymsOptions builder
      */
-    public ListSynonymsOptionsBuilder cursor(String cursor_serialized_name) {
-      this.cursor_serialized_name = cursor_serialized_name;
+    public ListSynonymsOptionsBuilder cursor(String cursor) {
+      this.cursor_serialized_name = cursor;
       return this;
     }
   }
@@ -8092,14 +8092,14 @@ public class IBMConversationV1Models {
     private String sort_serialized_name;
     private String cursor_serialized_name;
 
-    private ListValuesOptionsBuilder(ListValuesOptions list_values_options) {
-      workspace_id_serialized_name = list_values_options.workspace_id_serialized_name;
-      entity_serialized_name = list_values_options.entity_serialized_name;
-      export_serialized_name = list_values_options.export_serialized_name;
-      page_limit_serialized_name = list_values_options.page_limit_serialized_name;
-      include_count_serialized_name = list_values_options.include_count_serialized_name;
-      sort_serialized_name = list_values_options.sort_serialized_name;
-      cursor_serialized_name = list_values_options.cursor_serialized_name;
+    private ListValuesOptionsBuilder(ListValuesOptions listValuesOptions) {
+      workspace_id_serialized_name = listValuesOptions.workspace_id_serialized_name;
+      entity_serialized_name = listValuesOptions.entity_serialized_name;
+      export_serialized_name = listValuesOptions.export_serialized_name;
+      page_limit_serialized_name = listValuesOptions.page_limit_serialized_name;
+      include_count_serialized_name = listValuesOptions.include_count_serialized_name;
+      sort_serialized_name = listValuesOptions.sort_serialized_name;
+      cursor_serialized_name = listValuesOptions.cursor_serialized_name;
     }
 
     /**
@@ -8111,18 +8111,18 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param entity_serialized_name the entity_serialized_name
+     * @param workspaceId the workspaceId
+     * @param entity the entity
      */
-    public ListValuesOptionsBuilder(String workspace_id_serialized_name, String entity_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.entity_serialized_name = entity_serialized_name;
+    public ListValuesOptionsBuilder(String workspaceId, String entity) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
     }
 
     /**
      * Builds a ListValuesOptions.
      *
-     * @return the list_values_options
+     * @return the listValuesOptions
      */
     public ListValuesOptions build() {
       return new ListValuesOptions(this);
@@ -8131,77 +8131,77 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public ListValuesOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public ListValuesOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
 
     /**
      * Set the export_serialized_name.
      *
-     * @param export_serialized_name the export_serialized_name
+     * @param exportVar the exportVar
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder exportField(Boolean export_serialized_name) {
-      this.export_serialized_name = export_serialized_name;
+    public ListValuesOptionsBuilder exportField(Boolean exportVar) {
+      this.export_serialized_name = exportVar;
       return this;
     }
 
     /**
      * Set the page_limit_serialized_name.
      *
-     * @param page_limit_serialized_name the page_limit_serialized_name
+     * @param pageLimit the pageLimit
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder pageLimit(Long page_limit_serialized_name) {
-      this.page_limit_serialized_name = page_limit_serialized_name;
+    public ListValuesOptionsBuilder pageLimit(Long pageLimit) {
+      this.page_limit_serialized_name = pageLimit;
       return this;
     }
 
     /**
      * Set the include_count_serialized_name.
      *
-     * @param include_count_serialized_name the include_count_serialized_name
+     * @param includeCount the includeCount
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder includeCount(Boolean include_count_serialized_name) {
-      this.include_count_serialized_name = include_count_serialized_name;
+    public ListValuesOptionsBuilder includeCount(Boolean includeCount) {
+      this.include_count_serialized_name = includeCount;
       return this;
     }
 
     /**
      * Set the sort_serialized_name.
      *
-     * @param sort_serialized_name the sort_serialized_name
+     * @param sortVar the sortVar
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder sortField(String sort_serialized_name) {
-      this.sort_serialized_name = sort_serialized_name;
+    public ListValuesOptionsBuilder sortField(String sortVar) {
+      this.sort_serialized_name = sortVar;
       return this;
     }
 
     /**
      * Set the cursor_serialized_name.
      *
-     * @param cursor_serialized_name the cursor_serialized_name
+     * @param cursor the cursor
      * @return the ListValuesOptions builder
      */
-    public ListValuesOptionsBuilder cursor(String cursor_serialized_name) {
-      this.cursor_serialized_name = cursor_serialized_name;
+    public ListValuesOptionsBuilder cursor(String cursor) {
+      this.cursor_serialized_name = cursor;
       return this;
     }
   }
@@ -8281,11 +8281,11 @@ public class IBMConversationV1Models {
     private String sort_serialized_name;
     private String cursor_serialized_name;
 
-    private ListWorkspacesOptionsBuilder(ListWorkspacesOptions list_workspaces_options) {
-      page_limit_serialized_name = list_workspaces_options.page_limit_serialized_name;
-      include_count_serialized_name = list_workspaces_options.include_count_serialized_name;
-      sort_serialized_name = list_workspaces_options.sort_serialized_name;
-      cursor_serialized_name = list_workspaces_options.cursor_serialized_name;
+    private ListWorkspacesOptionsBuilder(ListWorkspacesOptions listWorkspacesOptions) {
+      page_limit_serialized_name = listWorkspacesOptions.page_limit_serialized_name;
+      include_count_serialized_name = listWorkspacesOptions.include_count_serialized_name;
+      sort_serialized_name = listWorkspacesOptions.sort_serialized_name;
+      cursor_serialized_name = listWorkspacesOptions.cursor_serialized_name;
     }
 
     /**
@@ -8297,7 +8297,7 @@ public class IBMConversationV1Models {
     /**
      * Builds a ListWorkspacesOptions.
      *
-     * @return the list_workspaces_options
+     * @return the listWorkspacesOptions
      */
     public ListWorkspacesOptions build() {
       return new ListWorkspacesOptions(this);
@@ -8306,44 +8306,44 @@ public class IBMConversationV1Models {
     /**
      * Set the page_limit_serialized_name.
      *
-     * @param page_limit_serialized_name the page_limit_serialized_name
+     * @param pageLimit the pageLimit
      * @return the ListWorkspacesOptions builder
      */
-    public ListWorkspacesOptionsBuilder pageLimit(Long page_limit_serialized_name) {
-      this.page_limit_serialized_name = page_limit_serialized_name;
+    public ListWorkspacesOptionsBuilder pageLimit(Long pageLimit) {
+      this.page_limit_serialized_name = pageLimit;
       return this;
     }
 
     /**
      * Set the include_count_serialized_name.
      *
-     * @param include_count_serialized_name the include_count_serialized_name
+     * @param includeCount the includeCount
      * @return the ListWorkspacesOptions builder
      */
-    public ListWorkspacesOptionsBuilder includeCount(Boolean include_count_serialized_name) {
-      this.include_count_serialized_name = include_count_serialized_name;
+    public ListWorkspacesOptionsBuilder includeCount(Boolean includeCount) {
+      this.include_count_serialized_name = includeCount;
       return this;
     }
 
     /**
      * Set the sort_serialized_name.
      *
-     * @param sort_serialized_name the sort_serialized_name
+     * @param sortVar the sortVar
      * @return the ListWorkspacesOptions builder
      */
-    public ListWorkspacesOptionsBuilder sortField(String sort_serialized_name) {
-      this.sort_serialized_name = sort_serialized_name;
+    public ListWorkspacesOptionsBuilder sortField(String sortVar) {
+      this.sort_serialized_name = sortVar;
       return this;
     }
 
     /**
      * Set the cursor_serialized_name.
      *
-     * @param cursor_serialized_name the cursor_serialized_name
+     * @param cursor the cursor
      * @return the ListWorkspacesOptions builder
      */
-    public ListWorkspacesOptionsBuilder cursor(String cursor_serialized_name) {
-      this.cursor_serialized_name = cursor_serialized_name;
+    public ListWorkspacesOptionsBuilder cursor(String cursor) {
+      this.cursor_serialized_name = cursor;
       return this;
     }
   }
@@ -8380,19 +8380,19 @@ public class IBMConversationV1Models {
     /**
      * Sets the logs_serialized_name.
      *
-     * @param logs_serialized_name the new logs_serialized_name
+     * @param logs the new logs
      */
-    public void setLogs(final List<LogExport> logs_serialized_name) {
-      this.logs_serialized_name = logs_serialized_name;
+    public void setLogs(final List<LogExport> logs) {
+      this.logs_serialized_name = logs;
     }
 
     /**
      * Sets the pagination_serialized_name.
      *
-     * @param pagination_serialized_name the new pagination_serialized_name
+     * @param pagination the new pagination
      */
-    public void setPagination(final LogPagination pagination_serialized_name) {
-      this.pagination_serialized_name = pagination_serialized_name;
+    public void setPagination(final LogPagination pagination) {
+      this.pagination_serialized_name = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8515,64 +8515,64 @@ public class IBMConversationV1Models {
     /**
      * Sets the request_serialized_name.
      *
-     * @param request_serialized_name the new request_serialized_name
+     * @param request the new request
      */
-    public void setRequest(final MessageRequest request_serialized_name) {
-      this.request_serialized_name = request_serialized_name;
+    public void setRequest(final MessageRequest request) {
+      this.request_serialized_name = request;
     }
 
     /**
      * Sets the response_serialized_name.
      *
-     * @param response_serialized_name the new response_serialized_name
+     * @param response the new response
      */
-    public void setResponse(final MessageResponse response_serialized_name) {
-      this.response_serialized_name = response_serialized_name;
+    public void setResponse(final MessageResponse response) {
+      this.response_serialized_name = response;
     }
 
     /**
      * Sets the log_id_serialized_name.
      *
-     * @param log_id_serialized_name the new log_id_serialized_name
+     * @param logId the new logId
      */
-    public void setLogId(final String log_id_serialized_name) {
-      this.log_id_serialized_name = log_id_serialized_name;
+    public void setLogId(final String logId) {
+      this.log_id_serialized_name = logId;
     }
 
     /**
      * Sets the request_timestamp_serialized_name.
      *
-     * @param request_timestamp_serialized_name the new request_timestamp_serialized_name
+     * @param requestTimestamp the new requestTimestamp
      */
-    public void setRequestTimestamp(final String request_timestamp_serialized_name) {
-      this.request_timestamp_serialized_name = request_timestamp_serialized_name;
+    public void setRequestTimestamp(final String requestTimestamp) {
+      this.request_timestamp_serialized_name = requestTimestamp;
     }
 
     /**
      * Sets the response_timestamp_serialized_name.
      *
-     * @param response_timestamp_serialized_name the new response_timestamp_serialized_name
+     * @param responseTimestamp the new responseTimestamp
      */
-    public void setResponseTimestamp(final String response_timestamp_serialized_name) {
-      this.response_timestamp_serialized_name = response_timestamp_serialized_name;
+    public void setResponseTimestamp(final String responseTimestamp) {
+      this.response_timestamp_serialized_name = responseTimestamp;
     }
 
     /**
      * Sets the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the new workspace_id_serialized_name
+     * @param workspaceId the new workspaceId
      */
-    public void setWorkspaceId(final String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public void setWorkspaceId(final String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
     }
 
     /**
      * Sets the language_serialized_name.
      *
-     * @param language_serialized_name the new language_serialized_name
+     * @param language the new language
      */
-    public void setLanguage(final String language_serialized_name) {
-      this.language_serialized_name = language_serialized_name;
+    public void setLanguage(final String language) {
+      this.language_serialized_name = language;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8701,19 +8701,19 @@ public class IBMConversationV1Models {
     /**
      * Sets the next_url_serialized_name.
      *
-     * @param next_url_serialized_name the new next_url_serialized_name
+     * @param nextUrl the new nextUrl
      */
-    public void setNextUrl(final String next_url_serialized_name) {
-      this.next_url_serialized_name = next_url_serialized_name;
+    public void setNextUrl(final String nextUrl) {
+      this.next_url_serialized_name = nextUrl;
     }
 
     /**
      * Sets the matched_serialized_name.
      *
-     * @param matched_serialized_name the new matched_serialized_name
+     * @param matched the new matched
      */
-    public void setMatched(final long matched_serialized_name) {
-      this.matched_serialized_name = matched_serialized_name;
+    public void setMatched(final long matched) {
+      this.matched_serialized_name = matched;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8747,10 +8747,10 @@ public class IBMConversationV1Models {
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8879,14 +8879,14 @@ public class IBMConversationV1Models {
     private List<RuntimeIntent> intents_serialized_name;
     private OutputData output_serialized_name;
 
-    private MessageOptionsBuilder(MessageOptions message_options) {
-      workspace_id_serialized_name = message_options.workspace_id_serialized_name;
-      input_serialized_name = message_options.input_serialized_name;
-      alternate_intents_serialized_name = message_options.alternate_intents_serialized_name;
-      context_serialized_name = message_options.context_serialized_name;
-      entities_serialized_name = message_options.entities_serialized_name;
-      intents_serialized_name = message_options.intents_serialized_name;
-      output_serialized_name = message_options.output_serialized_name;
+    private MessageOptionsBuilder(MessageOptions messageOptions) {
+      workspace_id_serialized_name = messageOptions.workspace_id_serialized_name;
+      input_serialized_name = messageOptions.input_serialized_name;
+      alternate_intents_serialized_name = messageOptions.alternate_intents_serialized_name;
+      context_serialized_name = messageOptions.context_serialized_name;
+      entities_serialized_name = messageOptions.entities_serialized_name;
+      intents_serialized_name = messageOptions.intents_serialized_name;
+      output_serialized_name = messageOptions.output_serialized_name;
     }
 
     /**
@@ -8898,92 +8898,92 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      */
-    public MessageOptionsBuilder(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public MessageOptionsBuilder(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
     }
 
     /**
      * Builds a MessageOptions.
      *
-     * @return the message_options
+     * @return the messageOptions
      */
     public MessageOptions build() {
       return new MessageOptions(this);
     }
 
     /**
-     * Adds an entities_serialized_name to entities_serialized_name.
+     * Adds an entities to entities_serialized_name.
      *
-     * @param entities_serialized_name the new entities_serialized_name
+     * @param entities the new entities
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder addEntities(RuntimeEntity entities_serialized_name) {
-      IBMWatsonValidator.notNull(entities_serialized_name, 'entities_serialized_name cannot be null');
+    public MessageOptionsBuilder addEntities(RuntimeEntity entities) {
+      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
       if (this.entities_serialized_name == null) {
         this.entities_serialized_name = new List<RuntimeEntity>();
       }
-      this.entities_serialized_name.add(entities_serialized_name);
+      this.entities_serialized_name.add(entities);
       return this;
     }
 
     /**
-     * Adds an intents_serialized_name to intents_serialized_name.
+     * Adds an intents to intents_serialized_name.
      *
-     * @param intents_serialized_name the new intents_serialized_name
+     * @param intents the new intents
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder addIntents(RuntimeIntent intents_serialized_name) {
-      IBMWatsonValidator.notNull(intents_serialized_name, 'intents_serialized_name cannot be null');
+    public MessageOptionsBuilder addIntents(RuntimeIntent intents) {
+      IBMWatsonValidator.notNull(intents, 'intents cannot be null');
       if (this.intents_serialized_name == null) {
         this.intents_serialized_name = new List<RuntimeIntent>();
       }
-      this.intents_serialized_name.add(intents_serialized_name);
+      this.intents_serialized_name.add(intents);
       return this;
     }
 
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public MessageOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the input_serialized_name.
      *
-     * @param input_serialized_name the input_serialized_name
+     * @param input the input
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder input(InputData input_serialized_name) {
-      this.input_serialized_name = input_serialized_name;
+    public MessageOptionsBuilder input(InputData input) {
+      this.input_serialized_name = input;
       return this;
     }
 
     /**
      * Set the alternate_intents_serialized_name.
      *
-     * @param alternate_intents_serialized_name the alternate_intents_serialized_name
+     * @param alternateIntents the alternateIntents
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder alternateIntents(Boolean alternate_intents_serialized_name) {
-      this.alternate_intents_serialized_name = alternate_intents_serialized_name;
+    public MessageOptionsBuilder alternateIntents(Boolean alternateIntents) {
+      this.alternate_intents_serialized_name = alternateIntents;
       return this;
     }
 
     /**
      * Set the context_serialized_name.
      *
-     * @param context_serialized_name the context_serialized_name
+     * @param context the context
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder context(Context context_serialized_name) {
-      this.context_serialized_name = context_serialized_name;
+    public MessageOptionsBuilder context(Context context) {
+      this.context_serialized_name = context;
       return this;
     }
 
@@ -8991,11 +8991,11 @@ public class IBMConversationV1Models {
      * Set the entities_serialized_name.
      * Existing entities_serialized_name will be replaced.
      *
-     * @param entities_serialized_name the entities_serialized_name
+     * @param entities the entities
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder entities(List<RuntimeEntity> entities_serialized_name) {
-      this.entities_serialized_name = entities_serialized_name;
+    public MessageOptionsBuilder entities(List<RuntimeEntity> entities) {
+      this.entities_serialized_name = entities;
       return this;
     }
 
@@ -9003,22 +9003,22 @@ public class IBMConversationV1Models {
      * Set the intents_serialized_name.
      * Existing intents_serialized_name will be replaced.
      *
-     * @param intents_serialized_name the intents_serialized_name
+     * @param intents the intents
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder intents(List<RuntimeIntent> intents_serialized_name) {
-      this.intents_serialized_name = intents_serialized_name;
+    public MessageOptionsBuilder intents(List<RuntimeIntent> intents) {
+      this.intents_serialized_name = intents;
       return this;
     }
 
     /**
      * Set the output_serialized_name.
      *
-     * @param output_serialized_name the output_serialized_name
+     * @param output the output
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder output(OutputData output_serialized_name) {
-      this.output_serialized_name = output_serialized_name;
+    public MessageOptionsBuilder output(OutputData output) {
+      this.output_serialized_name = output;
       return this;
     }
   }
@@ -9103,55 +9103,55 @@ public class IBMConversationV1Models {
     /**
      * Sets the input_serialized_name.
      *
-     * @param input_serialized_name the new input_serialized_name
+     * @param input the new input
      */
-    public void setInput(final InputData input_serialized_name) {
-      this.input_serialized_name = input_serialized_name;
+    public void setInput(final InputData input) {
+      this.input_serialized_name = input;
     }
 
     /**
      * Sets the alternate_intents_serialized_name.
      *
-     * @param alternate_intents_serialized_name the new alternate_intents_serialized_name
+     * @param alternateIntents the new alternateIntents
      */
-    public void setAlternateIntents(final Boolean alternate_intents_serialized_name) {
-      this.alternate_intents_serialized_name = alternate_intents_serialized_name;
+    public void setAlternateIntents(final Boolean alternateIntents) {
+      this.alternate_intents_serialized_name = alternateIntents;
     }
 
     /**
      * Sets the context_serialized_name.
      *
-     * @param context_serialized_name the new context_serialized_name
+     * @param context the new context
      */
-    public void setContext(final Context context_serialized_name) {
-      this.context_serialized_name = context_serialized_name;
+    public void setContext(final Context context) {
+      this.context_serialized_name = context;
     }
 
     /**
      * Sets the entities_serialized_name.
      *
-     * @param entities_serialized_name the new entities_serialized_name
+     * @param entities the new entities
      */
-    public void setEntities(final List<RuntimeEntity> entities_serialized_name) {
-      this.entities_serialized_name = entities_serialized_name;
+    public void setEntities(final List<RuntimeEntity> entities) {
+      this.entities_serialized_name = entities;
     }
 
     /**
      * Sets the intents_serialized_name.
      *
-     * @param intents_serialized_name the new intents_serialized_name
+     * @param intents the new intents
      */
-    public void setIntents(final List<RuntimeIntent> intents_serialized_name) {
-      this.intents_serialized_name = intents_serialized_name;
+    public void setIntents(final List<RuntimeIntent> intents) {
+      this.intents_serialized_name = intents;
     }
 
     /**
      * Sets the output_serialized_name.
      *
-     * @param output_serialized_name the new output_serialized_name
+     * @param output the new output
      */
-    public void setOutput(final OutputData output_serialized_name) {
-      this.output_serialized_name = output_serialized_name;
+    public void setOutput(final OutputData output) {
+      this.output_serialized_name = output;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9556,37 +9556,37 @@ public class IBMConversationV1Models {
     /**
      * Sets the refresh_url_serialized_name.
      *
-     * @param refresh_url_serialized_name the new refresh_url_serialized_name
+     * @param refreshUrl the new refreshUrl
      */
-    public void setRefreshUrl(final String refresh_url_serialized_name) {
-      this.refresh_url_serialized_name = refresh_url_serialized_name;
+    public void setRefreshUrl(final String refreshUrl) {
+      this.refresh_url_serialized_name = refreshUrl;
     }
 
     /**
      * Sets the next_url_serialized_name.
      *
-     * @param next_url_serialized_name the new next_url_serialized_name
+     * @param nextUrl the new nextUrl
      */
-    public void setNextUrl(final String next_url_serialized_name) {
-      this.next_url_serialized_name = next_url_serialized_name;
+    public void setNextUrl(final String nextUrl) {
+      this.next_url_serialized_name = nextUrl;
     }
 
     /**
      * Sets the total_serialized_name.
      *
-     * @param total_serialized_name the new total_serialized_name
+     * @param total the new total
      */
-    public void setTotal(final long total_serialized_name) {
-      this.total_serialized_name = total_serialized_name;
+    public void setTotal(final long total) {
+      this.total_serialized_name = total;
     }
 
     /**
      * Sets the matched_serialized_name.
      *
-     * @param matched_serialized_name the new matched_serialized_name
+     * @param matched the new matched
      */
-    public void setMatched(final long matched_serialized_name) {
-      this.matched_serialized_name = matched_serialized_name;
+    public void setMatched(final long matched) {
+      this.matched_serialized_name = matched;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9858,10 +9858,10 @@ public class IBMConversationV1Models {
     /**
      * Sets the synonym_serialized_name.
      *
-     * @param synonym_serialized_name the new synonym_serialized_name
+     * @param synonym the new synonym
      */
-    public void setSynonym(final String synonym_serialized_name) {
-      this.synonym_serialized_name = synonym_serialized_name;
+    public void setSynonym(final String synonym) {
+      this.synonym_serialized_name = synonym;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9907,19 +9907,19 @@ public class IBMConversationV1Models {
     /**
      * Sets the synonyms_serialized_name.
      *
-     * @param synonyms_serialized_name the new synonyms_serialized_name
+     * @param synonyms the new synonyms
      */
-    public void setSynonyms(final List<Synonym> synonyms_serialized_name) {
-      this.synonyms_serialized_name = synonyms_serialized_name;
+    public void setSynonyms(final List<Synonym> synonyms) {
+      this.synonyms_serialized_name = synonyms;
     }
 
     /**
      * Sets the pagination_serialized_name.
      *
-     * @param pagination_serialized_name the new pagination_serialized_name
+     * @param pagination the new pagination
      */
-    public void setPagination(final Pagination pagination_serialized_name) {
-      this.pagination_serialized_name = pagination_serialized_name;
+    public void setPagination(final Pagination pagination) {
+      this.pagination_serialized_name = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -10049,10 +10049,10 @@ public class IBMConversationV1Models {
     private String text_serialized_name;
     private String new_text_serialized_name;
 
-    private UpdateCounterexampleOptionsBuilder(UpdateCounterexampleOptions update_counterexample_options) {
-      workspace_id_serialized_name = update_counterexample_options.workspace_id_serialized_name;
-      text_serialized_name = update_counterexample_options.text_serialized_name;
-      new_text_serialized_name = update_counterexample_options.new_text_serialized_name;
+    private UpdateCounterexampleOptionsBuilder(UpdateCounterexampleOptions updateCounterexampleOptions) {
+      workspace_id_serialized_name = updateCounterexampleOptions.workspace_id_serialized_name;
+      text_serialized_name = updateCounterexampleOptions.text_serialized_name;
+      new_text_serialized_name = updateCounterexampleOptions.new_text_serialized_name;
     }
 
     /**
@@ -10064,18 +10064,18 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param text_serialized_name the text_serialized_name
+     * @param workspaceId the workspaceId
+     * @param text the text
      */
-    public UpdateCounterexampleOptionsBuilder(String workspace_id_serialized_name, String text_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.text_serialized_name = text_serialized_name;
+    public UpdateCounterexampleOptionsBuilder(String workspaceId, String text) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a UpdateCounterexampleOptions.
      *
-     * @return the update_counterexample_options
+     * @return the updateCounterexampleOptions
      */
     public UpdateCounterexampleOptions build() {
       return new UpdateCounterexampleOptions(this);
@@ -10084,33 +10084,33 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the UpdateCounterexampleOptions builder
      */
-    public UpdateCounterexampleOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public UpdateCounterexampleOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the UpdateCounterexampleOptions builder
      */
-    public UpdateCounterexampleOptionsBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public UpdateCounterexampleOptionsBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
 
     /**
      * Set the new_text_serialized_name.
      *
-     * @param new_text_serialized_name the new_text_serialized_name
+     * @param newText the newText
      * @return the UpdateCounterexampleOptions builder
      */
-    public UpdateCounterexampleOptionsBuilder newText(String new_text_serialized_name) {
-      this.new_text_serialized_name = new_text_serialized_name;
+    public UpdateCounterexampleOptionsBuilder newText(String newText) {
+      this.new_text_serialized_name = newText;
       return this;
     }
   }
@@ -10349,23 +10349,23 @@ public class IBMConversationV1Models {
     private String new_parent_serialized_name;
     private String new_dialog_node_serialized_name;
 
-    private UpdateDialogNodeOptionsBuilder(UpdateDialogNodeOptions update_dialog_node_options) {
-      workspace_id_serialized_name = update_dialog_node_options.workspace_id_serialized_name;
-      dialog_node_serialized_name = update_dialog_node_options.dialog_node_serialized_name;
-      new_type_serialized_name = update_dialog_node_options.new_type_serialized_name;
-      new_actions_serialized_name = update_dialog_node_options.new_actions_serialized_name;
-      new_conditions_serialized_name = update_dialog_node_options.new_conditions_serialized_name;
-      new_context_serialized_name = update_dialog_node_options.new_context_serialized_name;
-      new_previous_sibling_serialized_name = update_dialog_node_options.new_previous_sibling_serialized_name;
-      new_variable_serialized_name = update_dialog_node_options.new_variable_serialized_name;
-      new_metadata_serialized_name = update_dialog_node_options.new_metadata_serialized_name;
-      new_title_serialized_name = update_dialog_node_options.new_title_serialized_name;
-      new_description_serialized_name = update_dialog_node_options.new_description_serialized_name;
-      new_event_name_serialized_name = update_dialog_node_options.new_event_name_serialized_name;
-      new_next_step_serialized_name = update_dialog_node_options.new_next_step_serialized_name;
-      new_output_serialized_name = update_dialog_node_options.new_output_serialized_name;
-      new_parent_serialized_name = update_dialog_node_options.new_parent_serialized_name;
-      new_dialog_node_serialized_name = update_dialog_node_options.new_dialog_node_serialized_name;
+    private UpdateDialogNodeOptionsBuilder(UpdateDialogNodeOptions updateDialogNodeOptions) {
+      workspace_id_serialized_name = updateDialogNodeOptions.workspace_id_serialized_name;
+      dialog_node_serialized_name = updateDialogNodeOptions.dialog_node_serialized_name;
+      new_type_serialized_name = updateDialogNodeOptions.new_type_serialized_name;
+      new_actions_serialized_name = updateDialogNodeOptions.new_actions_serialized_name;
+      new_conditions_serialized_name = updateDialogNodeOptions.new_conditions_serialized_name;
+      new_context_serialized_name = updateDialogNodeOptions.new_context_serialized_name;
+      new_previous_sibling_serialized_name = updateDialogNodeOptions.new_previous_sibling_serialized_name;
+      new_variable_serialized_name = updateDialogNodeOptions.new_variable_serialized_name;
+      new_metadata_serialized_name = updateDialogNodeOptions.new_metadata_serialized_name;
+      new_title_serialized_name = updateDialogNodeOptions.new_title_serialized_name;
+      new_description_serialized_name = updateDialogNodeOptions.new_description_serialized_name;
+      new_event_name_serialized_name = updateDialogNodeOptions.new_event_name_serialized_name;
+      new_next_step_serialized_name = updateDialogNodeOptions.new_next_step_serialized_name;
+      new_output_serialized_name = updateDialogNodeOptions.new_output_serialized_name;
+      new_parent_serialized_name = updateDialogNodeOptions.new_parent_serialized_name;
+      new_dialog_node_serialized_name = updateDialogNodeOptions.new_dialog_node_serialized_name;
     }
 
     /**
@@ -10377,70 +10377,70 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param dialog_node_serialized_name the dialog_node_serialized_name
-     * @param new_dialog_node_serialized_name the new_dialog_node_serialized_name
+     * @param workspaceId the workspaceId
+     * @param dialogNode the dialogNode
+     * @param newDialogNode the newDialogNode
      */
-    public UpdateDialogNodeOptionsBuilder(String workspace_id_serialized_name, String dialog_node_serialized_name, String new_dialog_node_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.dialog_node_serialized_name = dialog_node_serialized_name;
-      this.new_dialog_node_serialized_name = new_dialog_node_serialized_name;
+    public UpdateDialogNodeOptionsBuilder(String workspaceId, String dialogNode, String newDialogNode) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.dialog_node_serialized_name = dialogNode;
+      this.new_dialog_node_serialized_name = newDialogNode;
     }
 
     /**
      * Builds a UpdateDialogNodeOptions.
      *
-     * @return the update_dialog_node_options
+     * @return the updateDialogNodeOptions
      */
     public UpdateDialogNodeOptions build() {
       return new UpdateDialogNodeOptions(this);
     }
 
     /**
-     * Adds an new_actions_serialized_name to new_actions_serialized_name.
+     * Adds an newActions to new_actions_serialized_name.
      *
-     * @param new_actions_serialized_name the new new_actions_serialized_name
+     * @param newActions the new newActions
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder addNewActions(DialogNodeAction new_actions_serialized_name) {
-      IBMWatsonValidator.notNull(new_actions_serialized_name, 'new_actions_serialized_name cannot be null');
+    public UpdateDialogNodeOptionsBuilder addNewActions(DialogNodeAction newActions) {
+      IBMWatsonValidator.notNull(newActions, 'newActions cannot be null');
       if (this.new_actions_serialized_name == null) {
         this.new_actions_serialized_name = new List<DialogNodeAction>();
       }
-      this.new_actions_serialized_name.add(new_actions_serialized_name);
+      this.new_actions_serialized_name.add(newActions);
       return this;
     }
 
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public UpdateDialogNodeOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the dialog_node_serialized_name.
      *
-     * @param dialog_node_serialized_name the dialog_node_serialized_name
+     * @param dialogNode the dialogNode
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder dialogNode(String dialog_node_serialized_name) {
-      this.dialog_node_serialized_name = dialog_node_serialized_name;
+    public UpdateDialogNodeOptionsBuilder dialogNode(String dialogNode) {
+      this.dialog_node_serialized_name = dialogNode;
       return this;
     }
 
     /**
      * Set the new_type_serialized_name.
      *
-     * @param new_type_serialized_name the new_type_serialized_name
+     * @param newType the newType
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newType(String new_type_serialized_name) {
-      this.new_type_serialized_name = new_type_serialized_name;
+    public UpdateDialogNodeOptionsBuilder newType(String newType) {
+      this.new_type_serialized_name = newType;
       return this;
     }
 
@@ -10448,143 +10448,143 @@ public class IBMConversationV1Models {
      * Set the new_actions_serialized_name.
      * Existing new_actions_serialized_name will be replaced.
      *
-     * @param new_actions_serialized_name the new_actions_serialized_name
+     * @param newActions the newActions
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newActions(List<DialogNodeAction> new_actions_serialized_name) {
-      this.new_actions_serialized_name = new_actions_serialized_name;
+    public UpdateDialogNodeOptionsBuilder newActions(List<DialogNodeAction> newActions) {
+      this.new_actions_serialized_name = newActions;
       return this;
     }
 
     /**
      * Set the new_conditions_serialized_name.
      *
-     * @param new_conditions_serialized_name the new_conditions_serialized_name
+     * @param newConditions the newConditions
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newConditions(String new_conditions_serialized_name) {
-      this.new_conditions_serialized_name = new_conditions_serialized_name;
+    public UpdateDialogNodeOptionsBuilder newConditions(String newConditions) {
+      this.new_conditions_serialized_name = newConditions;
       return this;
     }
 
     /**
      * Set the new_context_serialized_name.
      *
-     * @param new_context_serialized_name the new_context_serialized_name
+     * @param newContext the newContext
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newContext(IBMWatsonMapModel new_context_serialized_name) {
-      this.new_context_serialized_name = new_context_serialized_name;
+    public UpdateDialogNodeOptionsBuilder newContext(IBMWatsonMapModel newContext) {
+      this.new_context_serialized_name = newContext;
       return this;
     }
 
     /**
      * Set the new_previous_sibling_serialized_name.
      *
-     * @param new_previous_sibling_serialized_name the new_previous_sibling_serialized_name
+     * @param newPreviousSibling the newPreviousSibling
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newPreviousSibling(String new_previous_sibling_serialized_name) {
-      this.new_previous_sibling_serialized_name = new_previous_sibling_serialized_name;
+    public UpdateDialogNodeOptionsBuilder newPreviousSibling(String newPreviousSibling) {
+      this.new_previous_sibling_serialized_name = newPreviousSibling;
       return this;
     }
 
     /**
      * Set the new_variable_serialized_name.
      *
-     * @param new_variable_serialized_name the new_variable_serialized_name
+     * @param newVariable the newVariable
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newVariable(String new_variable_serialized_name) {
-      this.new_variable_serialized_name = new_variable_serialized_name;
+    public UpdateDialogNodeOptionsBuilder newVariable(String newVariable) {
+      this.new_variable_serialized_name = newVariable;
       return this;
     }
 
     /**
      * Set the new_metadata_serialized_name.
      *
-     * @param new_metadata_serialized_name the new_metadata_serialized_name
+     * @param newMetadata the newMetadata
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newMetadata(IBMWatsonMapModel new_metadata_serialized_name) {
-      this.new_metadata_serialized_name = new_metadata_serialized_name;
+    public UpdateDialogNodeOptionsBuilder newMetadata(IBMWatsonMapModel newMetadata) {
+      this.new_metadata_serialized_name = newMetadata;
       return this;
     }
 
     /**
      * Set the new_title_serialized_name.
      *
-     * @param new_title_serialized_name the new_title_serialized_name
+     * @param newTitle the newTitle
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newTitle(String new_title_serialized_name) {
-      this.new_title_serialized_name = new_title_serialized_name;
+    public UpdateDialogNodeOptionsBuilder newTitle(String newTitle) {
+      this.new_title_serialized_name = newTitle;
       return this;
     }
 
     /**
      * Set the new_description_serialized_name.
      *
-     * @param new_description_serialized_name the new_description_serialized_name
+     * @param newDescription the newDescription
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newDescription(String new_description_serialized_name) {
-      this.new_description_serialized_name = new_description_serialized_name;
+    public UpdateDialogNodeOptionsBuilder newDescription(String newDescription) {
+      this.new_description_serialized_name = newDescription;
       return this;
     }
 
     /**
      * Set the new_event_name_serialized_name.
      *
-     * @param new_event_name_serialized_name the new_event_name_serialized_name
+     * @param newEventName the newEventName
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newEventName(String new_event_name_serialized_name) {
-      this.new_event_name_serialized_name = new_event_name_serialized_name;
+    public UpdateDialogNodeOptionsBuilder newEventName(String newEventName) {
+      this.new_event_name_serialized_name = newEventName;
       return this;
     }
 
     /**
      * Set the new_next_step_serialized_name.
      *
-     * @param new_next_step_serialized_name the new_next_step_serialized_name
+     * @param newNextStep the newNextStep
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newNextStep(DialogNodeNextStep new_next_step_serialized_name) {
-      this.new_next_step_serialized_name = new_next_step_serialized_name;
+    public UpdateDialogNodeOptionsBuilder newNextStep(DialogNodeNextStep newNextStep) {
+      this.new_next_step_serialized_name = newNextStep;
       return this;
     }
 
     /**
      * Set the new_output_serialized_name.
      *
-     * @param new_output_serialized_name the new_output_serialized_name
+     * @param newOutput the newOutput
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newOutput(IBMWatsonMapModel new_output_serialized_name) {
-      this.new_output_serialized_name = new_output_serialized_name;
+    public UpdateDialogNodeOptionsBuilder newOutput(IBMWatsonMapModel newOutput) {
+      this.new_output_serialized_name = newOutput;
       return this;
     }
 
     /**
      * Set the new_parent_serialized_name.
      *
-     * @param new_parent_serialized_name the new_parent_serialized_name
+     * @param newParent the newParent
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newParent(String new_parent_serialized_name) {
-      this.new_parent_serialized_name = new_parent_serialized_name;
+    public UpdateDialogNodeOptionsBuilder newParent(String newParent) {
+      this.new_parent_serialized_name = newParent;
       return this;
     }
 
     /**
      * Set the new_dialog_node_serialized_name.
      *
-     * @param new_dialog_node_serialized_name the new_dialog_node_serialized_name
+     * @param newDialogNode the newDialogNode
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newDialogNode(String new_dialog_node_serialized_name) {
-      this.new_dialog_node_serialized_name = new_dialog_node_serialized_name;
+    public UpdateDialogNodeOptionsBuilder newDialogNode(String newDialogNode) {
+      this.new_dialog_node_serialized_name = newDialogNode;
       return this;
     }
   }
@@ -10705,14 +10705,14 @@ public class IBMConversationV1Models {
     private List<CreateValue> new_values_serialized_name;
     private String new_description_serialized_name;
 
-    private UpdateEntityOptionsBuilder(UpdateEntityOptions update_entity_options) {
-      workspace_id_serialized_name = update_entity_options.workspace_id_serialized_name;
-      entity_serialized_name = update_entity_options.entity_serialized_name;
-      new_fuzzy_match_serialized_name = update_entity_options.new_fuzzy_match_serialized_name;
-      new_entity_serialized_name = update_entity_options.new_entity_serialized_name;
-      new_metadata_serialized_name = update_entity_options.new_metadata_serialized_name;
-      new_values_serialized_name = update_entity_options.new_values_serialized_name;
-      new_description_serialized_name = update_entity_options.new_description_serialized_name;
+    private UpdateEntityOptionsBuilder(UpdateEntityOptions updateEntityOptions) {
+      workspace_id_serialized_name = updateEntityOptions.workspace_id_serialized_name;
+      entity_serialized_name = updateEntityOptions.entity_serialized_name;
+      new_fuzzy_match_serialized_name = updateEntityOptions.new_fuzzy_match_serialized_name;
+      new_entity_serialized_name = updateEntityOptions.new_entity_serialized_name;
+      new_metadata_serialized_name = updateEntityOptions.new_metadata_serialized_name;
+      new_values_serialized_name = updateEntityOptions.new_values_serialized_name;
+      new_description_serialized_name = updateEntityOptions.new_description_serialized_name;
     }
 
     /**
@@ -10724,90 +10724,90 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param entity_serialized_name the entity_serialized_name
+     * @param workspaceId the workspaceId
+     * @param entity the entity
      */
-    public UpdateEntityOptionsBuilder(String workspace_id_serialized_name, String entity_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.entity_serialized_name = entity_serialized_name;
+    public UpdateEntityOptionsBuilder(String workspaceId, String entity) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
     }
 
     /**
      * Builds a UpdateEntityOptions.
      *
-     * @return the update_entity_options
+     * @return the updateEntityOptions
      */
     public UpdateEntityOptions build() {
       return new UpdateEntityOptions(this);
     }
 
     /**
-     * Adds an new_values_serialized_name to new_values_serialized_name.
+     * Adds an newValues to new_values_serialized_name.
      *
-     * @param new_values_serialized_name the new new_values_serialized_name
+     * @param newValues the new newValues
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder addNewValues(CreateValue new_values_serialized_name) {
-      IBMWatsonValidator.notNull(new_values_serialized_name, 'new_values_serialized_name cannot be null');
+    public UpdateEntityOptionsBuilder addNewValues(CreateValue newValues) {
+      IBMWatsonValidator.notNull(newValues, 'newValues cannot be null');
       if (this.new_values_serialized_name == null) {
         this.new_values_serialized_name = new List<CreateValue>();
       }
-      this.new_values_serialized_name.add(new_values_serialized_name);
+      this.new_values_serialized_name.add(newValues);
       return this;
     }
 
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public UpdateEntityOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public UpdateEntityOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
 
     /**
      * Set the new_fuzzy_match_serialized_name.
      *
-     * @param new_fuzzy_match_serialized_name the new_fuzzy_match_serialized_name
+     * @param newFuzzyMatch the newFuzzyMatch
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder newFuzzyMatch(Boolean new_fuzzy_match_serialized_name) {
-      this.new_fuzzy_match_serialized_name = new_fuzzy_match_serialized_name;
+    public UpdateEntityOptionsBuilder newFuzzyMatch(Boolean newFuzzyMatch) {
+      this.new_fuzzy_match_serialized_name = newFuzzyMatch;
       return this;
     }
 
     /**
      * Set the new_entity_serialized_name.
      *
-     * @param new_entity_serialized_name the new_entity_serialized_name
+     * @param newEntity the newEntity
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder newEntity(String new_entity_serialized_name) {
-      this.new_entity_serialized_name = new_entity_serialized_name;
+    public UpdateEntityOptionsBuilder newEntity(String newEntity) {
+      this.new_entity_serialized_name = newEntity;
       return this;
     }
 
     /**
      * Set the new_metadata_serialized_name.
      *
-     * @param new_metadata_serialized_name the new_metadata_serialized_name
+     * @param newMetadata the newMetadata
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder newMetadata(IBMWatsonMapModel new_metadata_serialized_name) {
-      this.new_metadata_serialized_name = new_metadata_serialized_name;
+    public UpdateEntityOptionsBuilder newMetadata(IBMWatsonMapModel newMetadata) {
+      this.new_metadata_serialized_name = newMetadata;
       return this;
     }
 
@@ -10815,22 +10815,22 @@ public class IBMConversationV1Models {
      * Set the new_values_serialized_name.
      * Existing new_values_serialized_name will be replaced.
      *
-     * @param new_values_serialized_name the new_values_serialized_name
+     * @param newValues the newValues
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder newValues(List<CreateValue> new_values_serialized_name) {
-      this.new_values_serialized_name = new_values_serialized_name;
+    public UpdateEntityOptionsBuilder newValues(List<CreateValue> newValues) {
+      this.new_values_serialized_name = newValues;
       return this;
     }
 
     /**
      * Set the new_description_serialized_name.
      *
-     * @param new_description_serialized_name the new_description_serialized_name
+     * @param newDescription the newDescription
      * @return the UpdateEntityOptions builder
      */
-    public UpdateEntityOptionsBuilder newDescription(String new_description_serialized_name) {
-      this.new_description_serialized_name = new_description_serialized_name;
+    public UpdateEntityOptionsBuilder newDescription(String newDescription) {
+      this.new_description_serialized_name = newDescription;
       return this;
     }
   }
@@ -10913,11 +10913,11 @@ public class IBMConversationV1Models {
     private String text_serialized_name;
     private String new_text_serialized_name;
 
-    private UpdateExampleOptionsBuilder(UpdateExampleOptions update_example_options) {
-      workspace_id_serialized_name = update_example_options.workspace_id_serialized_name;
-      intent_serialized_name = update_example_options.intent_serialized_name;
-      text_serialized_name = update_example_options.text_serialized_name;
-      new_text_serialized_name = update_example_options.new_text_serialized_name;
+    private UpdateExampleOptionsBuilder(UpdateExampleOptions updateExampleOptions) {
+      workspace_id_serialized_name = updateExampleOptions.workspace_id_serialized_name;
+      intent_serialized_name = updateExampleOptions.intent_serialized_name;
+      text_serialized_name = updateExampleOptions.text_serialized_name;
+      new_text_serialized_name = updateExampleOptions.new_text_serialized_name;
     }
 
     /**
@@ -10929,20 +10929,20 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param intent_serialized_name the intent_serialized_name
-     * @param text_serialized_name the text_serialized_name
+     * @param workspaceId the workspaceId
+     * @param intent the intent
+     * @param text the text
      */
-    public UpdateExampleOptionsBuilder(String workspace_id_serialized_name, String intent_serialized_name, String text_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.intent_serialized_name = intent_serialized_name;
-      this.text_serialized_name = text_serialized_name;
+    public UpdateExampleOptionsBuilder(String workspaceId, String intent, String text) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.intent_serialized_name = intent;
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a UpdateExampleOptions.
      *
-     * @return the update_example_options
+     * @return the updateExampleOptions
      */
     public UpdateExampleOptions build() {
       return new UpdateExampleOptions(this);
@@ -10951,44 +10951,44 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the UpdateExampleOptions builder
      */
-    public UpdateExampleOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public UpdateExampleOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the intent_serialized_name.
      *
-     * @param intent_serialized_name the intent_serialized_name
+     * @param intent the intent
      * @return the UpdateExampleOptions builder
      */
-    public UpdateExampleOptionsBuilder intent(String intent_serialized_name) {
-      this.intent_serialized_name = intent_serialized_name;
+    public UpdateExampleOptionsBuilder intent(String intent) {
+      this.intent_serialized_name = intent;
       return this;
     }
 
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the UpdateExampleOptions builder
      */
-    public UpdateExampleOptionsBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public UpdateExampleOptionsBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
 
     /**
      * Set the new_text_serialized_name.
      *
-     * @param new_text_serialized_name the new_text_serialized_name
+     * @param newText the newText
      * @return the UpdateExampleOptions builder
      */
-    public UpdateExampleOptionsBuilder newText(String new_text_serialized_name) {
-      this.new_text_serialized_name = new_text_serialized_name;
+    public UpdateExampleOptionsBuilder newText(String newText) {
+      this.new_text_serialized_name = newText;
       return this;
     }
   }
@@ -11083,12 +11083,12 @@ public class IBMConversationV1Models {
     private List<CreateExample> new_examples_serialized_name;
     private String new_description_serialized_name;
 
-    private UpdateIntentOptionsBuilder(UpdateIntentOptions update_intent_options) {
-      workspace_id_serialized_name = update_intent_options.workspace_id_serialized_name;
-      intent_serialized_name = update_intent_options.intent_serialized_name;
-      new_intent_serialized_name = update_intent_options.new_intent_serialized_name;
-      new_examples_serialized_name = update_intent_options.new_examples_serialized_name;
-      new_description_serialized_name = update_intent_options.new_description_serialized_name;
+    private UpdateIntentOptionsBuilder(UpdateIntentOptions updateIntentOptions) {
+      workspace_id_serialized_name = updateIntentOptions.workspace_id_serialized_name;
+      intent_serialized_name = updateIntentOptions.intent_serialized_name;
+      new_intent_serialized_name = updateIntentOptions.new_intent_serialized_name;
+      new_examples_serialized_name = updateIntentOptions.new_examples_serialized_name;
+      new_description_serialized_name = updateIntentOptions.new_description_serialized_name;
     }
 
     /**
@@ -11100,68 +11100,68 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param intent_serialized_name the intent_serialized_name
+     * @param workspaceId the workspaceId
+     * @param intent the intent
      */
-    public UpdateIntentOptionsBuilder(String workspace_id_serialized_name, String intent_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.intent_serialized_name = intent_serialized_name;
+    public UpdateIntentOptionsBuilder(String workspaceId, String intent) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.intent_serialized_name = intent;
     }
 
     /**
      * Builds a UpdateIntentOptions.
      *
-     * @return the update_intent_options
+     * @return the updateIntentOptions
      */
     public UpdateIntentOptions build() {
       return new UpdateIntentOptions(this);
     }
 
     /**
-     * Adds an new_examples_serialized_name to new_examples_serialized_name.
+     * Adds an newExamples to new_examples_serialized_name.
      *
-     * @param new_examples_serialized_name the new new_examples_serialized_name
+     * @param newExamples the new newExamples
      * @return the UpdateIntentOptions builder
      */
-    public UpdateIntentOptionsBuilder addNewExamples(CreateExample new_examples_serialized_name) {
-      IBMWatsonValidator.notNull(new_examples_serialized_name, 'new_examples_serialized_name cannot be null');
+    public UpdateIntentOptionsBuilder addNewExamples(CreateExample newExamples) {
+      IBMWatsonValidator.notNull(newExamples, 'newExamples cannot be null');
       if (this.new_examples_serialized_name == null) {
         this.new_examples_serialized_name = new List<CreateExample>();
       }
-      this.new_examples_serialized_name.add(new_examples_serialized_name);
+      this.new_examples_serialized_name.add(newExamples);
       return this;
     }
 
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the UpdateIntentOptions builder
      */
-    public UpdateIntentOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public UpdateIntentOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the intent_serialized_name.
      *
-     * @param intent_serialized_name the intent_serialized_name
+     * @param intent the intent
      * @return the UpdateIntentOptions builder
      */
-    public UpdateIntentOptionsBuilder intent(String intent_serialized_name) {
-      this.intent_serialized_name = intent_serialized_name;
+    public UpdateIntentOptionsBuilder intent(String intent) {
+      this.intent_serialized_name = intent;
       return this;
     }
 
     /**
      * Set the new_intent_serialized_name.
      *
-     * @param new_intent_serialized_name the new_intent_serialized_name
+     * @param newIntent the newIntent
      * @return the UpdateIntentOptions builder
      */
-    public UpdateIntentOptionsBuilder newIntent(String new_intent_serialized_name) {
-      this.new_intent_serialized_name = new_intent_serialized_name;
+    public UpdateIntentOptionsBuilder newIntent(String newIntent) {
+      this.new_intent_serialized_name = newIntent;
       return this;
     }
 
@@ -11169,22 +11169,22 @@ public class IBMConversationV1Models {
      * Set the new_examples_serialized_name.
      * Existing new_examples_serialized_name will be replaced.
      *
-     * @param new_examples_serialized_name the new_examples_serialized_name
+     * @param newExamples the newExamples
      * @return the UpdateIntentOptions builder
      */
-    public UpdateIntentOptionsBuilder newExamples(List<CreateExample> new_examples_serialized_name) {
-      this.new_examples_serialized_name = new_examples_serialized_name;
+    public UpdateIntentOptionsBuilder newExamples(List<CreateExample> newExamples) {
+      this.new_examples_serialized_name = newExamples;
       return this;
     }
 
     /**
      * Set the new_description_serialized_name.
      *
-     * @param new_description_serialized_name the new_description_serialized_name
+     * @param newDescription the newDescription
      * @return the UpdateIntentOptions builder
      */
-    public UpdateIntentOptionsBuilder newDescription(String new_description_serialized_name) {
-      this.new_description_serialized_name = new_description_serialized_name;
+    public UpdateIntentOptionsBuilder newDescription(String newDescription) {
+      this.new_description_serialized_name = newDescription;
       return this;
     }
   }
@@ -11281,12 +11281,12 @@ public class IBMConversationV1Models {
     private String synonym_serialized_name;
     private String new_synonym_serialized_name;
 
-    private UpdateSynonymOptionsBuilder(UpdateSynonymOptions update_synonym_options) {
-      workspace_id_serialized_name = update_synonym_options.workspace_id_serialized_name;
-      entity_serialized_name = update_synonym_options.entity_serialized_name;
-      value_serialized_name = update_synonym_options.value_serialized_name;
-      synonym_serialized_name = update_synonym_options.synonym_serialized_name;
-      new_synonym_serialized_name = update_synonym_options.new_synonym_serialized_name;
+    private UpdateSynonymOptionsBuilder(UpdateSynonymOptions updateSynonymOptions) {
+      workspace_id_serialized_name = updateSynonymOptions.workspace_id_serialized_name;
+      entity_serialized_name = updateSynonymOptions.entity_serialized_name;
+      value_serialized_name = updateSynonymOptions.value_serialized_name;
+      synonym_serialized_name = updateSynonymOptions.synonym_serialized_name;
+      new_synonym_serialized_name = updateSynonymOptions.new_synonym_serialized_name;
     }
 
     /**
@@ -11298,22 +11298,22 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param entity_serialized_name the entity_serialized_name
-     * @param value_serialized_name the value_serialized_name
-     * @param synonym_serialized_name the synonym_serialized_name
+     * @param workspaceId the workspaceId
+     * @param entity the entity
+     * @param value the value
+     * @param synonym the synonym
      */
-    public UpdateSynonymOptionsBuilder(String workspace_id_serialized_name, String entity_serialized_name, String value_serialized_name, String synonym_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.entity_serialized_name = entity_serialized_name;
-      this.value_serialized_name = value_serialized_name;
-      this.synonym_serialized_name = synonym_serialized_name;
+    public UpdateSynonymOptionsBuilder(String workspaceId, String entity, String value, String synonym) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
+      this.value_serialized_name = value;
+      this.synonym_serialized_name = synonym;
     }
 
     /**
      * Builds a UpdateSynonymOptions.
      *
-     * @return the update_synonym_options
+     * @return the updateSynonymOptions
      */
     public UpdateSynonymOptions build() {
       return new UpdateSynonymOptions(this);
@@ -11322,55 +11322,55 @@ public class IBMConversationV1Models {
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the UpdateSynonymOptions builder
      */
-    public UpdateSynonymOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public UpdateSynonymOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the UpdateSynonymOptions builder
      */
-    public UpdateSynonymOptionsBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public UpdateSynonymOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
 
     /**
      * Set the value_serialized_name.
      *
-     * @param value_serialized_name the value_serialized_name
+     * @param value the value
      * @return the UpdateSynonymOptions builder
      */
-    public UpdateSynonymOptionsBuilder value(String value_serialized_name) {
-      this.value_serialized_name = value_serialized_name;
+    public UpdateSynonymOptionsBuilder value(String value) {
+      this.value_serialized_name = value;
       return this;
     }
 
     /**
      * Set the synonym_serialized_name.
      *
-     * @param synonym_serialized_name the synonym_serialized_name
+     * @param synonym the synonym
      * @return the UpdateSynonymOptions builder
      */
-    public UpdateSynonymOptionsBuilder synonym(String synonym_serialized_name) {
-      this.synonym_serialized_name = synonym_serialized_name;
+    public UpdateSynonymOptionsBuilder synonym(String synonym) {
+      this.synonym_serialized_name = synonym;
       return this;
     }
 
     /**
      * Set the new_synonym_serialized_name.
      *
-     * @param new_synonym_serialized_name the new_synonym_serialized_name
+     * @param newSynonym the newSynonym
      * @return the UpdateSynonymOptions builder
      */
-    public UpdateSynonymOptionsBuilder newSynonym(String new_synonym_serialized_name) {
-      this.new_synonym_serialized_name = new_synonym_serialized_name;
+    public UpdateSynonymOptionsBuilder newSynonym(String newSynonym) {
+      this.new_synonym_serialized_name = newSynonym;
       return this;
     }
   }
@@ -11505,15 +11505,15 @@ public class IBMConversationV1Models {
     private List<String> new_patterns_serialized_name;
     private String new_value_serialized_name;
 
-    private UpdateValueOptionsBuilder(UpdateValueOptions update_value_options) {
-      workspace_id_serialized_name = update_value_options.workspace_id_serialized_name;
-      entity_serialized_name = update_value_options.entity_serialized_name;
-      value_serialized_name = update_value_options.value_serialized_name;
-      new_synonyms_serialized_name = update_value_options.new_synonyms_serialized_name;
-      new_type_serialized_name = update_value_options.new_type_serialized_name;
-      new_metadata_serialized_name = update_value_options.new_metadata_serialized_name;
-      new_patterns_serialized_name = update_value_options.new_patterns_serialized_name;
-      new_value_serialized_name = update_value_options.new_value_serialized_name;
+    private UpdateValueOptionsBuilder(UpdateValueOptions updateValueOptions) {
+      workspace_id_serialized_name = updateValueOptions.workspace_id_serialized_name;
+      entity_serialized_name = updateValueOptions.entity_serialized_name;
+      value_serialized_name = updateValueOptions.value_serialized_name;
+      new_synonyms_serialized_name = updateValueOptions.new_synonyms_serialized_name;
+      new_type_serialized_name = updateValueOptions.new_type_serialized_name;
+      new_metadata_serialized_name = updateValueOptions.new_metadata_serialized_name;
+      new_patterns_serialized_name = updateValueOptions.new_patterns_serialized_name;
+      new_value_serialized_name = updateValueOptions.new_value_serialized_name;
     }
 
     /**
@@ -11525,85 +11525,85 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
-     * @param entity_serialized_name the entity_serialized_name
-     * @param value_serialized_name the value_serialized_name
+     * @param workspaceId the workspaceId
+     * @param entity the entity
+     * @param value the value
      */
-    public UpdateValueOptionsBuilder(String workspace_id_serialized_name, String entity_serialized_name, String value_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
-      this.entity_serialized_name = entity_serialized_name;
-      this.value_serialized_name = value_serialized_name;
+    public UpdateValueOptionsBuilder(String workspaceId, String entity, String value) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
+      this.value_serialized_name = value;
     }
 
     /**
      * Builds a UpdateValueOptions.
      *
-     * @return the update_value_options
+     * @return the updateValueOptions
      */
     public UpdateValueOptions build() {
       return new UpdateValueOptions(this);
     }
 
     /**
-     * Adds an new_synonyms_serialized_name to new_synonyms_serialized_name.
+     * Adds an newSynonyms to new_synonyms_serialized_name.
      *
-     * @param new_synonyms_serialized_name the new new_synonyms_serialized_name
+     * @param newSynonyms the new newSynonyms
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder addNewSynonyms(String new_synonyms_serialized_name) {
-      IBMWatsonValidator.notNull(new_synonyms_serialized_name, 'new_synonyms_serialized_name cannot be null');
+    public UpdateValueOptionsBuilder addNewSynonyms(String newSynonyms) {
+      IBMWatsonValidator.notNull(newSynonyms, 'newSynonyms cannot be null');
       if (this.new_synonyms_serialized_name == null) {
         this.new_synonyms_serialized_name = new List<String>();
       }
-      this.new_synonyms_serialized_name.add(new_synonyms_serialized_name);
+      this.new_synonyms_serialized_name.add(newSynonyms);
       return this;
     }
 
     /**
-     * Adds an new_patterns_serialized_name to new_patterns_serialized_name.
+     * Adds an newPatterns to new_patterns_serialized_name.
      *
-     * @param new_patterns_serialized_name the new new_patterns_serialized_name
+     * @param newPatterns the new newPatterns
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder addNewPatterns(String new_patterns_serialized_name) {
-      IBMWatsonValidator.notNull(new_patterns_serialized_name, 'new_patterns_serialized_name cannot be null');
+    public UpdateValueOptionsBuilder addNewPatterns(String newPatterns) {
+      IBMWatsonValidator.notNull(newPatterns, 'newPatterns cannot be null');
       if (this.new_patterns_serialized_name == null) {
         this.new_patterns_serialized_name = new List<String>();
       }
-      this.new_patterns_serialized_name.add(new_patterns_serialized_name);
+      this.new_patterns_serialized_name.add(newPatterns);
       return this;
     }
 
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public UpdateValueOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the entity_serialized_name.
      *
-     * @param entity_serialized_name the entity_serialized_name
+     * @param entity the entity
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder entity(String entity_serialized_name) {
-      this.entity_serialized_name = entity_serialized_name;
+    public UpdateValueOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
       return this;
     }
 
     /**
      * Set the value_serialized_name.
      *
-     * @param value_serialized_name the value_serialized_name
+     * @param value the value
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder value(String value_serialized_name) {
-      this.value_serialized_name = value_serialized_name;
+    public UpdateValueOptionsBuilder value(String value) {
+      this.value_serialized_name = value;
       return this;
     }
 
@@ -11611,33 +11611,33 @@ public class IBMConversationV1Models {
      * Set the new_synonyms_serialized_name.
      * Existing new_synonyms_serialized_name will be replaced.
      *
-     * @param new_synonyms_serialized_name the new_synonyms_serialized_name
+     * @param newSynonyms the newSynonyms
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder newSynonyms(List<String> new_synonyms_serialized_name) {
-      this.new_synonyms_serialized_name = new_synonyms_serialized_name;
+    public UpdateValueOptionsBuilder newSynonyms(List<String> newSynonyms) {
+      this.new_synonyms_serialized_name = newSynonyms;
       return this;
     }
 
     /**
      * Set the new_type_serialized_name.
      *
-     * @param new_type_serialized_name the new_type_serialized_name
+     * @param newType the newType
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder newType(String new_type_serialized_name) {
-      this.new_type_serialized_name = new_type_serialized_name;
+    public UpdateValueOptionsBuilder newType(String newType) {
+      this.new_type_serialized_name = newType;
       return this;
     }
 
     /**
      * Set the new_metadata_serialized_name.
      *
-     * @param new_metadata_serialized_name the new_metadata_serialized_name
+     * @param newMetadata the newMetadata
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder newMetadata(IBMWatsonMapModel new_metadata_serialized_name) {
-      this.new_metadata_serialized_name = new_metadata_serialized_name;
+    public UpdateValueOptionsBuilder newMetadata(IBMWatsonMapModel newMetadata) {
+      this.new_metadata_serialized_name = newMetadata;
       return this;
     }
 
@@ -11645,22 +11645,22 @@ public class IBMConversationV1Models {
      * Set the new_patterns_serialized_name.
      * Existing new_patterns_serialized_name will be replaced.
      *
-     * @param new_patterns_serialized_name the new_patterns_serialized_name
+     * @param newPatterns the newPatterns
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder newPatterns(List<String> new_patterns_serialized_name) {
-      this.new_patterns_serialized_name = new_patterns_serialized_name;
+    public UpdateValueOptionsBuilder newPatterns(List<String> newPatterns) {
+      this.new_patterns_serialized_name = newPatterns;
       return this;
     }
 
     /**
      * Set the new_value_serialized_name.
      *
-     * @param new_value_serialized_name the new_value_serialized_name
+     * @param newValue the newValue
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder newValue(String new_value_serialized_name) {
-      this.new_value_serialized_name = new_value_serialized_name;
+    public UpdateValueOptionsBuilder newValue(String newValue) {
+      this.new_value_serialized_name = newValue;
       return this;
     }
   }
@@ -11819,17 +11819,17 @@ public class IBMConversationV1Models {
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
 
-    private UpdateWorkspaceOptionsBuilder(UpdateWorkspaceOptions update_workspace_options) {
-      workspace_id_serialized_name = update_workspace_options.workspace_id_serialized_name;
-      name_serialized_name = update_workspace_options.name_serialized_name;
-      description_serialized_name = update_workspace_options.description_serialized_name;
-      language_serialized_name = update_workspace_options.language_serialized_name;
-      intents_serialized_name = update_workspace_options.intents_serialized_name;
-      entities_serialized_name = update_workspace_options.entities_serialized_name;
-      dialog_nodes_serialized_name = update_workspace_options.dialog_nodes_serialized_name;
-      counterexamples_serialized_name = update_workspace_options.counterexamples_serialized_name;
-      metadata_serialized_name = update_workspace_options.metadata_serialized_name;
-      learning_opt_out_serialized_name = update_workspace_options.learning_opt_out_serialized_name;
+    private UpdateWorkspaceOptionsBuilder(UpdateWorkspaceOptions updateWorkspaceOptions) {
+      workspace_id_serialized_name = updateWorkspaceOptions.workspace_id_serialized_name;
+      name_serialized_name = updateWorkspaceOptions.name_serialized_name;
+      description_serialized_name = updateWorkspaceOptions.description_serialized_name;
+      language_serialized_name = updateWorkspaceOptions.language_serialized_name;
+      intents_serialized_name = updateWorkspaceOptions.intents_serialized_name;
+      entities_serialized_name = updateWorkspaceOptions.entities_serialized_name;
+      dialog_nodes_serialized_name = updateWorkspaceOptions.dialog_nodes_serialized_name;
+      counterexamples_serialized_name = updateWorkspaceOptions.counterexamples_serialized_name;
+      metadata_serialized_name = updateWorkspaceOptions.metadata_serialized_name;
+      learning_opt_out_serialized_name = updateWorkspaceOptions.learning_opt_out_serialized_name;
     }
 
     /**
@@ -11841,122 +11841,122 @@ public class IBMConversationV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      */
-    public UpdateWorkspaceOptionsBuilder(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public UpdateWorkspaceOptionsBuilder(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
     }
 
     /**
      * Builds a UpdateWorkspaceOptions.
      *
-     * @return the update_workspace_options
+     * @return the updateWorkspaceOptions
      */
     public UpdateWorkspaceOptions build() {
       return new UpdateWorkspaceOptions(this);
     }
 
     /**
-     * Adds an intents_serialized_name to intents_serialized_name.
+     * Adds an intents to intents_serialized_name.
      *
-     * @param intents_serialized_name the new intents_serialized_name
+     * @param intents the new intents
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder addIntents(CreateIntent intents_serialized_name) {
-      IBMWatsonValidator.notNull(intents_serialized_name, 'intents_serialized_name cannot be null');
+    public UpdateWorkspaceOptionsBuilder addIntents(CreateIntent intents) {
+      IBMWatsonValidator.notNull(intents, 'intents cannot be null');
       if (this.intents_serialized_name == null) {
         this.intents_serialized_name = new List<CreateIntent>();
       }
-      this.intents_serialized_name.add(intents_serialized_name);
+      this.intents_serialized_name.add(intents);
       return this;
     }
 
     /**
-     * Adds an entities_serialized_name to entities_serialized_name.
+     * Adds an entities to entities_serialized_name.
      *
-     * @param entities_serialized_name the new entities_serialized_name
+     * @param entities the new entities
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder addEntities(CreateEntity entities_serialized_name) {
-      IBMWatsonValidator.notNull(entities_serialized_name, 'entities_serialized_name cannot be null');
+    public UpdateWorkspaceOptionsBuilder addEntities(CreateEntity entities) {
+      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
       if (this.entities_serialized_name == null) {
         this.entities_serialized_name = new List<CreateEntity>();
       }
-      this.entities_serialized_name.add(entities_serialized_name);
+      this.entities_serialized_name.add(entities);
       return this;
     }
 
     /**
-     * Adds an dialog_nodes_serialized_name to dialog_nodes_serialized_name.
+     * Adds an dialogNodes to dialog_nodes_serialized_name.
      *
-     * @param dialog_nodes_serialized_name the new dialog_nodes_serialized_name
+     * @param dialogNodes the new dialogNodes
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder addDialogNodes(CreateDialogNode dialog_nodes_serialized_name) {
-      IBMWatsonValidator.notNull(dialog_nodes_serialized_name, 'dialog_nodes_serialized_name cannot be null');
+    public UpdateWorkspaceOptionsBuilder addDialogNodes(CreateDialogNode dialogNodes) {
+      IBMWatsonValidator.notNull(dialogNodes, 'dialogNodes cannot be null');
       if (this.dialog_nodes_serialized_name == null) {
         this.dialog_nodes_serialized_name = new List<CreateDialogNode>();
       }
-      this.dialog_nodes_serialized_name.add(dialog_nodes_serialized_name);
+      this.dialog_nodes_serialized_name.add(dialogNodes);
       return this;
     }
 
     /**
-     * Adds an counterexamples_serialized_name to counterexamples_serialized_name.
+     * Adds an counterexamples to counterexamples_serialized_name.
      *
-     * @param counterexamples_serialized_name the new counterexamples_serialized_name
+     * @param counterexamples the new counterexamples
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder addCounterexamples(CreateCounterexample counterexamples_serialized_name) {
-      IBMWatsonValidator.notNull(counterexamples_serialized_name, 'counterexamples_serialized_name cannot be null');
+    public UpdateWorkspaceOptionsBuilder addCounterexamples(CreateCounterexample counterexamples) {
+      IBMWatsonValidator.notNull(counterexamples, 'counterexamples cannot be null');
       if (this.counterexamples_serialized_name == null) {
         this.counterexamples_serialized_name = new List<CreateCounterexample>();
       }
-      this.counterexamples_serialized_name.add(counterexamples_serialized_name);
+      this.counterexamples_serialized_name.add(counterexamples);
       return this;
     }
 
     /**
      * Set the workspace_id_serialized_name.
      *
-     * @param workspace_id_serialized_name the workspace_id_serialized_name
+     * @param workspaceId the workspaceId
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder workspaceId(String workspace_id_serialized_name) {
-      this.workspace_id_serialized_name = workspace_id_serialized_name;
+    public UpdateWorkspaceOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
       return this;
     }
 
     /**
      * Set the name_serialized_name.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder name(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public UpdateWorkspaceOptionsBuilder name(String name) {
+      this.name_serialized_name = name;
       return this;
     }
 
     /**
      * Set the description_serialized_name.
      *
-     * @param description_serialized_name the description_serialized_name
+     * @param description the description
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder description(String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public UpdateWorkspaceOptionsBuilder description(String description) {
+      this.description_serialized_name = description;
       return this;
     }
 
     /**
      * Set the language_serialized_name.
      *
-     * @param language_serialized_name the language_serialized_name
+     * @param language the language
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder language(String language_serialized_name) {
-      this.language_serialized_name = language_serialized_name;
+    public UpdateWorkspaceOptionsBuilder language(String language) {
+      this.language_serialized_name = language;
       return this;
     }
 
@@ -11964,11 +11964,11 @@ public class IBMConversationV1Models {
      * Set the intents_serialized_name.
      * Existing intents_serialized_name will be replaced.
      *
-     * @param intents_serialized_name the intents_serialized_name
+     * @param intents the intents
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder intents(List<CreateIntent> intents_serialized_name) {
-      this.intents_serialized_name = intents_serialized_name;
+    public UpdateWorkspaceOptionsBuilder intents(List<CreateIntent> intents) {
+      this.intents_serialized_name = intents;
       return this;
     }
 
@@ -11976,11 +11976,11 @@ public class IBMConversationV1Models {
      * Set the entities_serialized_name.
      * Existing entities_serialized_name will be replaced.
      *
-     * @param entities_serialized_name the entities_serialized_name
+     * @param entities the entities
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder entities(List<CreateEntity> entities_serialized_name) {
-      this.entities_serialized_name = entities_serialized_name;
+    public UpdateWorkspaceOptionsBuilder entities(List<CreateEntity> entities) {
+      this.entities_serialized_name = entities;
       return this;
     }
 
@@ -11988,11 +11988,11 @@ public class IBMConversationV1Models {
      * Set the dialog_nodes_serialized_name.
      * Existing dialog_nodes_serialized_name will be replaced.
      *
-     * @param dialog_nodes_serialized_name the dialog_nodes_serialized_name
+     * @param dialogNodes the dialogNodes
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder dialogNodes(List<CreateDialogNode> dialog_nodes_serialized_name) {
-      this.dialog_nodes_serialized_name = dialog_nodes_serialized_name;
+    public UpdateWorkspaceOptionsBuilder dialogNodes(List<CreateDialogNode> dialogNodes) {
+      this.dialog_nodes_serialized_name = dialogNodes;
       return this;
     }
 
@@ -12000,33 +12000,33 @@ public class IBMConversationV1Models {
      * Set the counterexamples_serialized_name.
      * Existing counterexamples_serialized_name will be replaced.
      *
-     * @param counterexamples_serialized_name the counterexamples_serialized_name
+     * @param counterexamples the counterexamples
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder counterexamples(List<CreateCounterexample> counterexamples_serialized_name) {
-      this.counterexamples_serialized_name = counterexamples_serialized_name;
+    public UpdateWorkspaceOptionsBuilder counterexamples(List<CreateCounterexample> counterexamples) {
+      this.counterexamples_serialized_name = counterexamples;
       return this;
     }
 
     /**
      * Set the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the metadata_serialized_name
+     * @param metadata the metadata
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder metadata(IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public UpdateWorkspaceOptionsBuilder metadata(IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
       return this;
     }
 
     /**
      * Set the learning_opt_out_serialized_name.
      *
-     * @param learning_opt_out_serialized_name the learning_opt_out_serialized_name
+     * @param learningOptOut the learningOptOut
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder learningOptOut(Boolean learning_opt_out_serialized_name) {
-      this.learning_opt_out_serialized_name = learning_opt_out_serialized_name;
+    public UpdateWorkspaceOptionsBuilder learningOptOut(Boolean learningOptOut) {
+      this.learning_opt_out_serialized_name = learningOptOut;
       return this;
     }
   }
@@ -12123,46 +12123,46 @@ public class IBMConversationV1Models {
     /**
      * Sets the value_serialized_name.
      *
-     * @param value_serialized_name the new value_serialized_name
+     * @param value the new value
      */
-    public void setValue(final String value_serialized_name) {
-      this.value_serialized_name = value_serialized_name;
+    public void setValue(final String value) {
+      this.value_serialized_name = value;
     }
 
     /**
      * Sets the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the new metadata_serialized_name
+     * @param metadata the new metadata
      */
-    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public void setMetadata(final IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
     }
 
     /**
      * Sets the synonyms_serialized_name.
      *
-     * @param synonyms_serialized_name the new synonyms_serialized_name
+     * @param synonyms the new synonyms
      */
-    public void setSynonyms(final List<String> synonyms_serialized_name) {
-      this.synonyms_serialized_name = synonyms_serialized_name;
+    public void setSynonyms(final List<String> synonyms) {
+      this.synonyms_serialized_name = synonyms;
     }
 
     /**
      * Sets the patterns_serialized_name.
      *
-     * @param patterns_serialized_name the new patterns_serialized_name
+     * @param patterns the new patterns
      */
-    public void setPatterns(final List<String> patterns_serialized_name) {
-      this.patterns_serialized_name = patterns_serialized_name;
+    public void setPatterns(final List<String> patterns) {
+      this.patterns_serialized_name = patterns;
     }
 
     /**
      * Sets the type_serialized_name.
      *
-     * @param type_serialized_name the new type_serialized_name
+     * @param typeVar the new typeVar
      */
-    public void setType(final String type_serialized_name) {
-      this.type_serialized_name = type_serialized_name;
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12212,19 +12212,19 @@ public class IBMConversationV1Models {
     /**
      * Sets the values_serialized_name.
      *
-     * @param values_serialized_name the new values_serialized_name
+     * @param values the new values
      */
-    public void setValues(final List<ValueExport> values_serialized_name) {
-      this.values_serialized_name = values_serialized_name;
+    public void setValues(final List<ValueExport> values) {
+      this.values_serialized_name = values;
     }
 
     /**
      * Sets the pagination_serialized_name.
      *
-     * @param pagination_serialized_name the new pagination_serialized_name
+     * @param pagination the new pagination
      */
-    public void setPagination(final Pagination pagination_serialized_name) {
-      this.pagination_serialized_name = pagination_serialized_name;
+    public void setPagination(final Pagination pagination) {
+      this.pagination_serialized_name = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12347,46 +12347,46 @@ public class IBMConversationV1Models {
     /**
      * Sets the value_serialized_name.
      *
-     * @param value_serialized_name the new value_serialized_name
+     * @param value the new value
      */
-    public void setValue(final String value_serialized_name) {
-      this.value_serialized_name = value_serialized_name;
+    public void setValue(final String value) {
+      this.value_serialized_name = value;
     }
 
     /**
      * Sets the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the new metadata_serialized_name
+     * @param metadata the new metadata
      */
-    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public void setMetadata(final IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
     }
 
     /**
      * Sets the synonyms_serialized_name.
      *
-     * @param synonyms_serialized_name the new synonyms_serialized_name
+     * @param synonyms the new synonyms
      */
-    public void setSynonyms(final List<String> synonyms_serialized_name) {
-      this.synonyms_serialized_name = synonyms_serialized_name;
+    public void setSynonyms(final List<String> synonyms) {
+      this.synonyms_serialized_name = synonyms;
     }
 
     /**
      * Sets the patterns_serialized_name.
      *
-     * @param patterns_serialized_name the new patterns_serialized_name
+     * @param patterns the new patterns
      */
-    public void setPatterns(final List<String> patterns_serialized_name) {
-      this.patterns_serialized_name = patterns_serialized_name;
+    public void setPatterns(final List<String> patterns) {
+      this.patterns_serialized_name = patterns;
     }
 
     /**
      * Sets the type_serialized_name.
      *
-     * @param type_serialized_name the new type_serialized_name
+     * @param typeVar the new typeVar
      */
-    public void setType(final String type_serialized_name) {
-      this.type_serialized_name = type_serialized_name;
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12508,46 +12508,46 @@ public class IBMConversationV1Models {
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     /**
      * Sets the language_serialized_name.
      *
-     * @param language_serialized_name the new language_serialized_name
+     * @param language the new language
      */
-    public void setLanguage(final String language_serialized_name) {
-      this.language_serialized_name = language_serialized_name;
+    public void setLanguage(final String language) {
+      this.language_serialized_name = language;
     }
 
     /**
      * Sets the description_serialized_name.
      *
-     * @param description_serialized_name the new description_serialized_name
+     * @param description the new description
      */
-    public void setDescription(final String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
     }
 
     /**
      * Sets the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the new metadata_serialized_name
+     * @param metadata the new metadata
      */
-    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public void setMetadata(final IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
     }
 
     /**
      * Sets the learning_opt_out_serialized_name.
      *
-     * @param learning_opt_out_serialized_name the new learning_opt_out_serialized_name
+     * @param learningOptOut the new learningOptOut
      */
-    public void setLearningOptOut(final Boolean learning_opt_out_serialized_name) {
-      this.learning_opt_out_serialized_name = learning_opt_out_serialized_name;
+    public void setLearningOptOut(final Boolean learningOptOut) {
+      this.learning_opt_out_serialized_name = learningOptOut;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12597,19 +12597,19 @@ public class IBMConversationV1Models {
     /**
      * Sets the workspaces_serialized_name.
      *
-     * @param workspaces_serialized_name the new workspaces_serialized_name
+     * @param workspaces the new workspaces
      */
-    public void setWorkspaces(final List<Workspace> workspaces_serialized_name) {
-      this.workspaces_serialized_name = workspaces_serialized_name;
+    public void setWorkspaces(final List<Workspace> workspaces) {
+      this.workspaces_serialized_name = workspaces;
     }
 
     /**
      * Sets the pagination_serialized_name.
      *
-     * @param pagination_serialized_name the new pagination_serialized_name
+     * @param pagination the new pagination
      */
-    public void setPagination(final Pagination pagination_serialized_name) {
-      this.pagination_serialized_name = pagination_serialized_name;
+    public void setPagination(final Pagination pagination) {
+      this.pagination_serialized_name = pagination;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12804,91 +12804,91 @@ public class IBMConversationV1Models {
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     /**
      * Sets the description_serialized_name.
      *
-     * @param description_serialized_name the new description_serialized_name
+     * @param description the new description
      */
-    public void setDescription(final String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
     }
 
     /**
      * Sets the language_serialized_name.
      *
-     * @param language_serialized_name the new language_serialized_name
+     * @param language the new language
      */
-    public void setLanguage(final String language_serialized_name) {
-      this.language_serialized_name = language_serialized_name;
+    public void setLanguage(final String language) {
+      this.language_serialized_name = language;
     }
 
     /**
      * Sets the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the new metadata_serialized_name
+     * @param metadata the new metadata
      */
-    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public void setMetadata(final IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
     }
 
     /**
      * Sets the status_serialized_name.
      *
-     * @param status_serialized_name the new status_serialized_name
+     * @param status the new status
      */
-    public void setStatus(final String status_serialized_name) {
-      this.status_serialized_name = status_serialized_name;
+    public void setStatus(final String status) {
+      this.status_serialized_name = status;
     }
 
     /**
      * Sets the learning_opt_out_serialized_name.
      *
-     * @param learning_opt_out_serialized_name the new learning_opt_out_serialized_name
+     * @param learningOptOut the new learningOptOut
      */
-    public void setLearningOptOut(final Boolean learning_opt_out_serialized_name) {
-      this.learning_opt_out_serialized_name = learning_opt_out_serialized_name;
+    public void setLearningOptOut(final Boolean learningOptOut) {
+      this.learning_opt_out_serialized_name = learningOptOut;
     }
 
     /**
      * Sets the intents_serialized_name.
      *
-     * @param intents_serialized_name the new intents_serialized_name
+     * @param intents the new intents
      */
-    public void setIntents(final List<IntentExport> intents_serialized_name) {
-      this.intents_serialized_name = intents_serialized_name;
+    public void setIntents(final List<IntentExport> intents) {
+      this.intents_serialized_name = intents;
     }
 
     /**
      * Sets the entities_serialized_name.
      *
-     * @param entities_serialized_name the new entities_serialized_name
+     * @param entities the new entities
      */
-    public void setEntities(final List<EntityExport> entities_serialized_name) {
-      this.entities_serialized_name = entities_serialized_name;
+    public void setEntities(final List<EntityExport> entities) {
+      this.entities_serialized_name = entities;
     }
 
     /**
      * Sets the counterexamples_serialized_name.
      *
-     * @param counterexamples_serialized_name the new counterexamples_serialized_name
+     * @param counterexamples the new counterexamples
      */
-    public void setCounterexamples(final List<Counterexample> counterexamples_serialized_name) {
-      this.counterexamples_serialized_name = counterexamples_serialized_name;
+    public void setCounterexamples(final List<Counterexample> counterexamples) {
+      this.counterexamples_serialized_name = counterexamples;
     }
 
     /**
      * Sets the dialog_nodes_serialized_name.
      *
-     * @param dialog_nodes_serialized_name the new dialog_nodes_serialized_name
+     * @param dialogNodes the new dialogNodes
      */
-    public void setDialogNodes(final List<DialogNode> dialog_nodes_serialized_name) {
-      this.dialog_nodes_serialized_name = dialog_nodes_serialized_name;
+    public void setDialogNodes(final List<DialogNode> dialogNodes) {
+      this.dialog_nodes_serialized_name = dialogNodes;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {

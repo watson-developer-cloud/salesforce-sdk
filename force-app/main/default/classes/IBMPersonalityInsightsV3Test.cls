@@ -44,7 +44,7 @@ private class IBMPersonalityInsightsV3Test {
       .rawScores(true)
       .csvHeaders(false)
       .consumptionPreferences(true)
-      .content_serialized_name(content)
+      .content(content)
       .html('<html><body>test</body></html>')
       .text('test')
       .build();

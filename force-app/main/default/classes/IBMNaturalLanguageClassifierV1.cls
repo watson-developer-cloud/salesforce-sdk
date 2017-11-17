@@ -61,10 +61,9 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/classifiers');
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    IBMWatsonRequestBody fileBody;
-    fileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingMetadata(), 'application/json');
+    IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingMetadata(), 'application/json');
     multipartBuilder.addFormDataPart('training_metadata', createClassifierOptions.trainingMetadataFilename(), fileBody);
-    fileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingData(), 'text/csv');
+    IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingData(), 'text/csv');
     multipartBuilder.addFormDataPart('training_data', createClassifierOptions.trainingDataFilename(), fileBody);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
