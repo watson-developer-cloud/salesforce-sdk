@@ -19,7 +19,7 @@ script:
 - sfdx force:org:create -v HubOrg -s -f config/project-scratch-def.json -a ciorg
 - sfdx force:source:push -u ciorg
 - sfdx force:apex:test:run -u ciorg -c -r human
-- sfdx force:apex:execute -f force-app/main/test/DiscoveryTestRunner.apex
+- sfdx force:apex:execute -f test-runners/DiscoveryTestRunner.apex
 - sfdx force:org:delete -u ciorg -p
 - mv install/package.xml force-app/main/default
 - "./install/deploy.sh"
