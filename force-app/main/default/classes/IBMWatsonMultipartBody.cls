@@ -55,14 +55,15 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     form64 = '';
     for (Integer i = 0; i < parts.size(); i++){
       Part p = parts[i];
+      Boolean isEndingPart = (i == parts.size() - 1);
       if (p.body().hasBase64Data()) {
         String fileName = p.body().name;
-        String contentType = p.body.bodyContentType().toString();
+        String mimeType = p.body.bodyContentType().toString();
         String file64Body = EncodingUtil.base64Encode(p.body().blobContent);
-        form64 += writeBlobBody(p.headers().get('Content-Disposition'), file64Body, (i == parts.size() - 1));
+        form64 += writeBlobBody(p.headers().get('Content-Disposition'), file64Body, mimeType, isEndingPart);
       } else {
         form64 += writeBoundary();
-        form64 += writeBodyParameter(p.headers().get('Content-Disposition'), p.body().content);
+        form64 += writeBodyParameter(p.headers().get('Content-Disposition'), p.body().content, isEndingPart);
       }
     }
 
@@ -89,7 +90,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   /**
    *  Write a key-value pair to the form's body.
    */
-  public String writeBodyParameter(String key, String value) {
+  public String writeBodyParameter(String key, String value, Boolean isEndingPart) {
     String contentDisposition = 'Content-Disposition: ' + key;
     String contentDispositionCrLf = contentDisposition + CRLF + CRLF;
     Blob contentDispositionCrLfBlob = blob.valueOf(contentDispositionCrLf);
@@ -100,20 +101,29 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     String valueCrLf64 = EncodingUtil.base64Encode(valueCrLfBlob);
 
     content += safelyPad(value, valueCrLf64, CRLF);
-
+    if(isEndingPart == true){
+      String footer = '--' + this.boundary + '--';
+      Blob footerBlob = blob.valueOf(footer);
+      String footerEncoded = EncodingUtil.base64Encode(footerBlob);
+      while (footerEncoded.endsWith('=')) {
+        footer += ' ';
+        footerEncoded = EncodingUtil.base64Encode(blob.valueOf(footer));
+      }
+      content += safelyPad(footer, footerEncoded, CRLF);
+    }
     return content;
   }
   
   /**
    *  Write a Blob type to the form's body.
    */
-  public String writeBlobBody(String contentDispositionValue, String bodyEncoded, Boolean isEndingPart){
+  public String writeBlobBody(String contentDispositionValue, String bodyEncoded, String mimeType, Boolean isEndingPart){
     String boundaryCrlf = '--'+this.boundary + CRLF;
       
     String contentDisposition = 'Content-Disposition: ' + contentDispositionValue;
     String contentDispositionCrlf = contentDisposition + CRLF;
       
-    String contentType = 'Content-Type: application/octet-stream';
+    String contentType = 'Content-Type: ' + mimeType;
     String contentTypeCrlf = contentType + CRLF;
       
     String header = boundaryCrlf + contentDispositionCrlf + contentTypeCrlf;
@@ -125,9 +135,9 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
       	
     String footer;
     if (isEndingPart) {
-     footer = CRLF + '--' + this.boundary + '--';
+     footer = '--' + this.boundary + '--';
     }else{
-     footer = CRLF;
+     footer = '';
     } 
     String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
       
