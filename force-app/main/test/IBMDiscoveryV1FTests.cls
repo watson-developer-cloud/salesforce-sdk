@@ -1,4 +1,3 @@
-@isTest
 public with sharing class IBMDiscoveryV1FTests {
   private static String VERSION_2017_09_01 = '2017-09-01';
   // Make sure the named credentials below is defined
@@ -31,7 +30,7 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test listing the environments.
    *
    */
-  public static IBMDiscoveryV1Models.ListEnvironmentsResponse testListEnvironment() {
+  public static IBMDiscoveryV1Models.ListEnvironmentsResponse testListEnvironments() {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
     discovery.setEndPoint(NAMED_CREDENTIALS);
 
@@ -40,7 +39,7 @@ public with sharing class IBMDiscoveryV1FTests {
       IBMDiscoveryV1Models.ListEnvironmentsOptionsBuilder()
       .build();
     IBMDiscoveryV1Models.ListEnvironmentsResponse resp = discovery.listEnvironments(options);
-    System.debug('IBMDiscoveryV1FTests.testListEnvironment():' + resp);
+    System.debug('IBMDiscoveryV1FTests.testListEnvironments():' + resp);
     return resp;
   }
 
