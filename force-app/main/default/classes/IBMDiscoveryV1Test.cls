@@ -975,7 +975,7 @@ private class IBMDiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('en')
-      .training_example(te)
+      .trainingExample(te)
       .documentId('test')
       .relevance(2)
       .crossReference('test')
