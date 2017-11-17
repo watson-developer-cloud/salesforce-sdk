@@ -674,7 +674,7 @@ public class IBMVisualRecognitionV3Models {
    * The classify options.
    */
   public class ClassifyOptions {
-    private File images_file_serialized_name;
+    private IBMWatsonFile images_file_serialized_name;
     private String images_filename_serialized_name;
     private String parameters_serialized_name;
     private String accept_language_serialized_name;
@@ -686,7 +686,7 @@ public class IBMVisualRecognitionV3Models {
      *
      * @return the images_file_serialized_name
      */
-    public File imagesFile() {
+    public IBMWatsonFile imagesFile() {
       return images_file_serialized_name;
     }
     /**
@@ -752,7 +752,7 @@ public class IBMVisualRecognitionV3Models {
    * ClassifyOptions Builder.
    */
   public class ClassifyOptionsBuilder {
-    private File images_file_serialized_name;
+    private IBMWatsonFile images_file_serialized_name;
     private String images_filename_serialized_name;
     private String parameters_serialized_name;
     private String accept_language_serialized_name;
@@ -787,7 +787,7 @@ public class IBMVisualRecognitionV3Models {
      * @param imagesFile the imagesFile
      * @return the ClassifyOptions builder
      */
-    public ClassifyOptionsBuilder imagesFile(File imagesFile) {
+    public ClassifyOptionsBuilder imagesFile(IBMWatsonFile imagesFile) {
       this.images_file_serialized_name = imagesFile;
       return this;
     }
@@ -1087,7 +1087,7 @@ public class IBMVisualRecognitionV3Models {
    * The detectFaces options.
    */
   public class DetectFacesOptions {
-    private File images_file_serialized_name;
+    private IBMWatsonFile images_file_serialized_name;
     private String images_filename_serialized_name;
     private String parameters_serialized_name;
     private String images_file_content_type_serialized_name;
@@ -1098,7 +1098,7 @@ public class IBMVisualRecognitionV3Models {
      *
      * @return the images_file_serialized_name
      */
-    public File imagesFile() {
+    public IBMWatsonFile imagesFile() {
       return images_file_serialized_name;
     }
     /**
@@ -1153,7 +1153,7 @@ public class IBMVisualRecognitionV3Models {
    * DetectFacesOptions Builder.
    */
   public class DetectFacesOptionsBuilder {
-    private File images_file_serialized_name;
+    private IBMWatsonFile images_file_serialized_name;
     private String images_filename_serialized_name;
     private String parameters_serialized_name;
     private String images_file_content_type_serialized_name;
@@ -1186,7 +1186,7 @@ public class IBMVisualRecognitionV3Models {
      * @param imagesFile the imagesFile
      * @return the DetectFacesOptions builder
      */
-    public DetectFacesOptionsBuilder imagesFile(File imagesFile) {
+    public DetectFacesOptionsBuilder imagesFile(IBMWatsonFile imagesFile) {
       this.images_file_serialized_name = imagesFile;
       return this;
     }
