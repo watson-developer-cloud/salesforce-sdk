@@ -32,9 +32,8 @@ public with sharing class IBMDiscoveryV1FTests {
    */
   public static IBMDiscoveryV1Models.ListEnvironmentsResponse testListEnvironments() {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
 
-    String text = 'test_environment';
     IBMDiscoveryV1Models.ListEnvironmentsOptions options = new
       IBMDiscoveryV1Models.ListEnvironmentsOptionsBuilder()
       .build();
