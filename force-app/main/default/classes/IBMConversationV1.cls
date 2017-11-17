@@ -87,7 +87,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (createWorkspaceOptions.learningOptOut() != null) {
       contentJson.put('learning_opt_out', createWorkspaceOptions.learningOptOut());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.Workspace) createServiceCall(builder.build(), IBMConversationV1Models.Workspace.class);
   }
@@ -194,7 +194,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (updateWorkspaceOptions.learningOptOut() != null) {
       contentJson.put('learning_opt_out', updateWorkspaceOptions.learningOptOut());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.Workspace) createServiceCall(builder.build(), IBMConversationV1Models.Workspace.class);
   }
@@ -228,7 +228,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (messageOptions.output() != null) {
       contentJson.put('output', messageOptions.output());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.MessageResponse) createServiceCall(builder.build(), IBMConversationV1Models.MessageResponse.class);
   }
@@ -253,7 +253,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (createIntentOptions.examples() != null) {
       contentJson.put('examples', createIntentOptions.examples());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.Intent) createServiceCall(builder.build(), IBMConversationV1Models.Intent.class);
   }
@@ -346,7 +346,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (updateIntentOptions.newDescription() != null) {
       contentJson.put('description', updateIntentOptions.newDescription());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.Intent) createServiceCall(builder.build(), IBMConversationV1Models.Intent.class);
   }
@@ -365,7 +365,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', createExampleOptions.text());
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.Example) createServiceCall(builder.build(), IBMConversationV1Models.Example.class);
   }
@@ -446,7 +446,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (updateExampleOptions.newText() != null) {
       contentJson.put('text', updateExampleOptions.newText());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.Example) createServiceCall(builder.build(), IBMConversationV1Models.Example.class);
   }
@@ -477,7 +477,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (createEntityOptions.fuzzyMatch() != null) {
       contentJson.put('fuzzy_match', createEntityOptions.fuzzyMatch());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.Entity) createServiceCall(builder.build(), IBMConversationV1Models.Entity.class);
   }
@@ -576,7 +576,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (updateEntityOptions.newDescription() != null) {
       contentJson.put('description', updateEntityOptions.newDescription());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.Entity) createServiceCall(builder.build(), IBMConversationV1Models.Entity.class);
   }
@@ -607,7 +607,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (createValueOptions.typeField() != null) {
       contentJson.put('type', createValueOptions.typeField());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.Value) createServiceCall(builder.build(), IBMConversationV1Models.Value.class);
   }
@@ -706,7 +706,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (updateValueOptions.newValue() != null) {
       contentJson.put('value', updateValueOptions.newValue());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.Value) createServiceCall(builder.build(), IBMConversationV1Models.Value.class);
   }
@@ -725,7 +725,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('synonym', createSynonymOptions.synonym());
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.Synonym) createServiceCall(builder.build(), IBMConversationV1Models.Synonym.class);
   }
@@ -806,7 +806,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (updateSynonymOptions.newSynonym() != null) {
       contentJson.put('synonym', updateSynonymOptions.newSynonym());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.Synonym) createServiceCall(builder.build(), IBMConversationV1Models.Synonym.class);
   }
@@ -864,7 +864,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (createDialogNodeOptions.variable() != null) {
       contentJson.put('variable', createDialogNodeOptions.variable());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.DialogNode) createServiceCall(builder.build(), IBMConversationV1Models.DialogNode.class);
   }
@@ -982,7 +982,7 @@ public class IBMConversationV1 extends IBMWatsonService {
       contentJson.put('parent', updateDialogNodeOptions.newParent());
     }
     contentJson.put('dialog_node', updateDialogNodeOptions.newDialogNode());
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.DialogNode) createServiceCall(builder.build(), IBMConversationV1Models.DialogNode.class);
   }
@@ -1029,7 +1029,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', createCounterexampleOptions.text());
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.Counterexample) createServiceCall(builder.build(), IBMConversationV1Models.Counterexample.class);
   }
@@ -1110,7 +1110,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (updateCounterexampleOptions.newText() != null) {
       contentJson.put('text', updateCounterexampleOptions.newText());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.Counterexample) createServiceCall(builder.build(), IBMConversationV1Models.Counterexample.class);
   }

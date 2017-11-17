@@ -41,8 +41,8 @@ public abstract class IBMWatsonService {
    */
   protected Object processResponse(IBMWatsonResponse response, Type targetType) {
     String responseText = response.getBody();
-    if (!String.isBlank(responseText) && (targetType != null)) {
-      String jsonString = IBMWatsonJSONUtil.addReservedWordSuffix(responseText);
+    if (String.isNotBlank(responseText) && (targetType != null)) {
+      String jsonString = IBMWatsonJSONUtil.prepareResponseString(responseText);
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
       Object targetObject = targetType.newInstance();
 
@@ -179,7 +179,7 @@ public abstract class IBMWatsonService {
    * @param endPoint the new end point. Will be ignored if empty or null
    */
   public void setEndPoint(String endPointParam) {
-    if (endPointParam != null && !String.isBlank(endPointParam)) {
+    if (String.isNotBlank(endPointParam)) {
       this.endPoint = endPointParam.endsWith('/') ? endPointParam.removeEnd('/') : endPointParam;
     } else {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('endPointParam cannot be null or empty');
