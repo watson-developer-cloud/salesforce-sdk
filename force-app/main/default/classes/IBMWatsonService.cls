@@ -42,7 +42,7 @@ public abstract class IBMWatsonService {
   protected Object processResponse(IBMWatsonResponse response, Type targetType) {
     String responseText = response.getBody();
     if (String.isNotBlank(responseText) && (targetType != null)) {
-      String jsonString = IBMWatsonJSONUtil.addReservedWordSuffix(responseText);
+      String jsonString = IBMWatsonJSONUtil.prepareResponseString(responseText);
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
       Object targetObject = targetType.newInstance();
 

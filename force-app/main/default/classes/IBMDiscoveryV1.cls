@@ -304,7 +304,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       multipartBuilder.addFormDataPart('configuration', testConfigurationInEnvironmentOptions.configuration());
     }
     if (testConfigurationInEnvironmentOptions.file() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(testConfigurationInEnvironmentOptions.file(), testConfigurationInEnvironmentOptions.fileContentType());
+      // for Discovery, we always want to use application/octet-stream
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(testConfigurationInEnvironmentOptions.file(), IBMWatsonHttpMediaType.APPLICATION_OCTET_STREAM);
       multipartBuilder.addFormDataPart('file', testConfigurationInEnvironmentOptions.filename(), fileBody);
     }
     if (testConfigurationInEnvironmentOptions.metadata() != null) {
@@ -446,7 +447,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (addDocumentOptions.file() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(addDocumentOptions.file(), addDocumentOptions.fileContentType());
+      // for Discovery, we always want to use application/octet-stream
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(addDocumentOptions.file(), IBMWatsonHttpMediaType.APPLICATION_OCTET_STREAM);
       multipartBuilder.addFormDataPart('file', addDocumentOptions.filename(), fileBody);
     }
     if (addDocumentOptions.metadata() != null) {
@@ -506,7 +508,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (updateDocumentOptions.file() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateDocumentOptions.file(), updateDocumentOptions.fileContentType());
+      // for Discovery, we always want to use application/octet-stream
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateDocumentOptions.file(), IBMWatsonHttpMediaType.APPLICATION_OCTET_STREAM);
       multipartBuilder.addFormDataPart('file', updateDocumentOptions.filename(), fileBody);
     }
     if (updateDocumentOptions.metadata() != null) {
