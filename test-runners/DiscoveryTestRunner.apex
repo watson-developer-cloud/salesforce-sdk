@@ -1,1 +1,0 @@
-IBMDiscoveryV1FTests.testListEnvironments();

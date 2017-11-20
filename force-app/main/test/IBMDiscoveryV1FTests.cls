@@ -2,6 +2,7 @@ public with sharing class IBMDiscoveryV1FTests {
   private static String VERSION_2017_09_01 = '2017-09-01';
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_discovery_v1';
+  private static String URL = 'https://gateway.watsonplatform.net/discovery/api';
   private static String ENVIRONMENT_ID ='20ab41e1-1f5f-4b3f-8745-4173319ad611';
   private static String CONFIGURATION_ID ='8a813a61-3b2d-4d43-b4e0-3d70d8d4e260';
   private static String COLLECTION_ID ='895392cd-a81b-4ba1-b2d8-34c0536f79e6';
@@ -12,33 +13,33 @@ public with sharing class IBMDiscoveryV1FTests {
   /**
    *  Test run functional tests.
    */
-  public static void runAllTests()
+  public static void runAllTests(String username, String password)
   {
     //testCreateEnvironment();
-    testListEnvironment();
-    testGetEnvironment(ENVIRONMENT_ID);
+    testListEnvironment(username, password);
+    testGetEnvironment(ENVIRONMENT_ID, username, password);
  //   testUpdateEnvironment(ENVIRONMENT_ID);
-    testListConfigurations(ENVIRONMENT_ID);
+    testListConfigurations(ENVIRONMENT_ID, username, password);
 //    testCreateConfiguration(ENVIRONMENT_ID);
-    testGetConfiguration(ENVIRONMENT_ID, CONFIGURATION_ID);
+    testGetConfiguration(ENVIRONMENT_ID, CONFIGURATION_ID, username, password);
 //    testUpdateConfiguration(ENVIRONMENT_ID, CONFIGURATION_ID);
-    testListCollections(ENVIRONMENT_ID);
+    testListCollections(ENVIRONMENT_ID, username, password);
 //    testCreateCollection(ENVIRONMENT_ID, CONFIGURATION_ID);
-    testGetCollection(ENVIRONMENT_ID, COLLECTION_ID);
+    testGetCollection(ENVIRONMENT_ID, COLLECTION_ID, username, password);
 //    testUpdateCollection(ENVIRONMENT_ID, COLLECTION_ID);
-    testListCollectionFields(ENVIRONMENT_ID, COLLECTION_ID);
-    testListCollectionsFields(ENVIRONMENT_ID, COLLECTION_ID);
-    testFederatedQuery(ENVIRONMENT_ID, COLLECTION_ID);
-    testGetDocumentStatus(ENVIRONMENT_ID, COLLECTION_ID, DOCUMENT_ID);
-    testQuery(ENVIRONMENT_ID, COLLECTION_ID);
-    testQueryNotices(ENVIRONMENT_ID, COLLECTION_ID);
+    testListCollectionFields(ENVIRONMENT_ID, COLLECTION_ID, username, password);
+    testListCollectionsFields(ENVIRONMENT_ID, COLLECTION_ID, username, password);
+    testFederatedQuery(ENVIRONMENT_ID, COLLECTION_ID, username, password);
+    testGetDocumentStatus(ENVIRONMENT_ID, COLLECTION_ID, DOCUMENT_ID, username, password);
+    testQuery(ENVIRONMENT_ID, COLLECTION_ID, username, password);
+    testQueryNotices(ENVIRONMENT_ID, COLLECTION_ID, username, password);
  //   testAddTrainingData(ENVIRONMENT_ID, COLLECTION_ID);
  //   testCreateTrainingExample(ENVIRONMENT_ID, COLLECTION_ID, QUERY_ID);
-    testGetTrainingExample(ENVIRONMENT_ID, COLLECTION_ID, QUERY_ID,EXAMPLE_ID);
-    testGetTrainingData(ENVIRONMENT_ID, COLLECTION_ID, QUERY_ID);
-    testListTrainingData(ENVIRONMENT_ID, COLLECTION_ID);
+    testGetTrainingExample(ENVIRONMENT_ID, COLLECTION_ID, QUERY_ID,EXAMPLE_ID, username, password);
+    testGetTrainingData(ENVIRONMENT_ID, COLLECTION_ID, QUERY_ID, username, password);
+    testListTrainingData(ENVIRONMENT_ID, COLLECTION_ID, username, password);
  //   testUpdateTrainingExample(ENVIRONMENT_ID, COLLECTION_ID, QUERY_ID, EXAMPLE_ID);
-    testFederatedQueryNotices(ENVIRONMENT_ID, COLLECTION_ID);
+    testFederatedQueryNotices(ENVIRONMENT_ID, COLLECTION_ID, username, password);
  //   testAddDocument(ENVIRONMENT_ID, COLLECTION_ID);
  //   testConfigurationInEnvironment(ENVIRONMENT_ID, CONFIGURATION_ID);
  //   testUpdateDocument(ENVIRONMENT_ID, COLLECTION_ID, DOCUMENT_ID);
@@ -46,9 +47,13 @@ public with sharing class IBMDiscoveryV1FTests {
   /**
    *  Test Successfully creating a new environment.
    */
-  public static String testCreateEnvironment() {
+  public static String testCreateEnvironment(String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     String text = 'test_environment2';
     try {
@@ -70,9 +75,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test listing the environments.
    *
    */
-  public static IBMDiscoveryV1Models.ListEnvironmentsResponse testListEnvironment() {
+  public static IBMDiscoveryV1Models.ListEnvironmentsResponse testListEnvironment(String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     String text = 'test_environment';
     IBMDiscoveryV1Models.ListEnvironmentsOptions options = new
@@ -89,9 +98,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *
    * Use environment id as parameter to delete environment
    */
-  public static void testDeleteEnvironment(String environmentId) {
+  public static void testDeleteEnvironment(String environmentId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.DeleteEnvironmentOptions options = new
      IBMDiscoveryV1Models.DeleteEnvironmentOptionsBuilder()
@@ -104,9 +117,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test get the environment.
    *
    */
-  public static IBMDiscoveryV1Models.Environment testGetEnvironment(String environmentId) {
+  public static IBMDiscoveryV1Models.Environment testGetEnvironment(String environmentId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.GetEnvironmentOptions options = new
      IBMDiscoveryV1Models.GetEnvironmentOptionsBuilder()
@@ -121,9 +138,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test update the environment.
    *
    */
-  public static IBMDiscoveryV1Models.Environment testUpdateEnvironment(String environmentId) {
+  public static IBMDiscoveryV1Models.Environment testUpdateEnvironment(String environmentId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
     IBMDiscoveryV1Models.UpdateEnvironmentOptions options = new
      IBMDiscoveryV1Models.UpdateEnvironmentOptionsBuilder()
      .environmentId(environmentId)
@@ -139,9 +160,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test list configurations
    *
    */
-  public static IBMDiscoveryV1Models.ListConfigurationsResponse testListConfigurations(String environmentId) {
+  public static IBMDiscoveryV1Models.ListConfigurationsResponse testListConfigurations(String environmentId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.ListConfigurationsOptions options = new
      IBMDiscoveryV1Models.ListConfigurationsOptionsBuilder()
@@ -156,9 +181,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test create configuration
    *
    */
-  public static IBMDiscoveryV1Models.Configuration testCreateConfiguration(String environmentId) {
+  public static IBMDiscoveryV1Models.Configuration testCreateConfiguration(String environmentId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.Enrichment enrichment =new IBMDiscoveryV1Models.Enrichment();
     enrichment.setDescription('test Description');
@@ -196,9 +225,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test delete configuration
    *
    */
-  public static void testDeleteConfiguration(String environmentId, String configurationId) {
+  public static void testDeleteConfiguration(String environmentId, String configurationId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.DeleteConfigurationOptions options = new
      IBMDiscoveryV1Models.DeleteConfigurationOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283','5ae96bb9-80e5-43ea-916e-1f3412fbc283')
@@ -212,9 +245,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test get configuration
    *
    */
-  public static IBMDiscoveryV1Models.Configuration testGetConfiguration(String environmentId, String configurationId) {
+  public static IBMDiscoveryV1Models.Configuration testGetConfiguration(String environmentId, String configurationId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.GetConfigurationOptions options = new
      IBMDiscoveryV1Models.GetConfigurationOptionsBuilder()
@@ -230,9 +267,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test update configuration
    *
    */
-  public static IBMDiscoveryV1Models.Configuration testUpdateConfiguration(String environmentId, String configurationId) {
+  public static IBMDiscoveryV1Models.Configuration testUpdateConfiguration(String environmentId, String configurationId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.UpdateConfigurationOptions options = new
      IBMDiscoveryV1Models.UpdateConfigurationOptionsBuilder()
@@ -250,9 +291,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test list collections
    *
    */
-  public static IBMDiscoveryV1Models.ListCollectionsResponse testListCollections(String environmentId) {
+  public static IBMDiscoveryV1Models.ListCollectionsResponse testListCollections(String environmentId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.ListCollectionsOptions options = new
      IBMDiscoveryV1Models.ListCollectionsOptionsBuilder()
@@ -267,9 +312,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test create collection
    *
    */
-  public static IBMDiscoveryV1Models.Collection testCreateCollection(String environmentId, String configurationId) {
+  public static IBMDiscoveryV1Models.Collection testCreateCollection(String environmentId, String configurationId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.CreateCollectionOptions options = new
      IBMDiscoveryV1Models.CreateCollectionOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283','5ae96bb9-80e5-43ea-916e-1f3412fbc283')
@@ -289,9 +338,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test get collection
    *
    */
-  public static IBMDiscoveryV1Models.Collection testGetCollection(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.Collection testGetCollection(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.GetCollectionOptions options = new
       IBMDiscoveryV1Models.GetCollectionOptionsBuilder()
@@ -307,9 +360,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test delete collection
    *
    */
-  public static void testDeleteCollection(String environmentId, String collectionId) {
+  public static void testDeleteCollection(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.DeleteCollectionOptions options = new
      IBMDiscoveryV1Models.DeleteCollectionOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283','5ae96bb9-80e5-43ea-916e-1f3412fbc283')
@@ -323,9 +380,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test update collection
    *
    */
-  public static IBMDiscoveryV1Models.Collection testUpdateCollection(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.Collection testUpdateCollection(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.UpdateCollectionOptions options = new
      IBMDiscoveryV1Models.UpdateCollectionOptionsBuilder()
@@ -343,9 +404,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test list fields in a single collection. (IBMDiscoveryV1.listCollectionFields)
    *
    */
-  public static IBMDiscoveryV1Models.ListCollectionFieldsResponse testListCollectionFields(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.ListCollectionFieldsResponse testListCollectionFields(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.ListCollectionFieldsOptions options = new
      IBMDiscoveryV1Models.ListCollectionFieldsOptionsBuilder()
@@ -361,9 +426,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test list fields in multiple collections.
    *
    */
-  public static IBMDiscoveryV1Models.ListCollectionFieldsResponse testListCollectionsFields(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.ListCollectionFieldsResponse testListCollectionsFields(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     List<String> collectionIds=new List<String>{collectionId};
     IBMDiscoveryV1Models.ListFieldsOptions options = new
@@ -380,9 +449,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test Query documents in multiple collections.
    *
    */
-  public static IBMDiscoveryV1Models.QueryResponse testFederatedQuery(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.QueryResponse testFederatedQuery(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     List<String> collectionIds=new List<String>{collectionId};
     IBMDiscoveryV1Models.FederatedQueryOptions options = new
@@ -399,9 +472,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test get document
    *
    */
-  public static IBMDiscoveryV1Models.DocumentStatus testGetDocumentStatus(String environmentId, String collectionId, String documentId) {
+  public static IBMDiscoveryV1Models.DocumentStatus testGetDocumentStatus(String environmentId, String collectionId, String documentId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.GetDocumentStatusOptions options = new
      IBMDiscoveryV1Models.GetDocumentStatusOptionsBuilder()
@@ -417,9 +494,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test Query documents in single collection.
    *
    */
-  public static IBMDiscoveryV1Models.QueryResponse testQuery(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.QueryResponse testQuery(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.QueryOptions options = new
      IBMDiscoveryV1Models.QueryOptionsBuilder()
@@ -435,9 +516,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test query collection system notices
    *
    */
-  public static IBMDiscoveryV1Models.QueryNoticesResponse testQueryNotices(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.QueryNoticesResponse testQueryNotices(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.QueryNoticesOptions options = new
      IBMDiscoveryV1Models.QueryNoticesOptionsBuilder()
@@ -453,9 +538,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test adding a query to the training data in single collection.
    *
    */
-  public static IBMDiscoveryV1Models.TrainingQuery testAddTrainingData(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.TrainingQuery testAddTrainingData(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.TrainingExample te=new IBMDiscoveryV1Models.TrainingExample();
     te.setDocumentId('008948a1-d9b5-432e-88ba-f744b60b49e0');
@@ -477,9 +566,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test adding a query to the training data in single collection.
    *
    */
-  public static IBMDiscoveryV1Models.TrainingExample testCreateTrainingExample(String environmentId, String collectionId, String queryId) {
+  public static IBMDiscoveryV1Models.TrainingExample testCreateTrainingExample(String environmentId, String collectionId, String queryId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     List<String> collectionIds=new List<String>{'Collection1','Collection2'};
     IBMDiscoveryV1Models.TrainingExample te=new IBMDiscoveryV1Models.TrainingExample();
@@ -502,9 +595,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test get training example
    *
    */
-  public static IBMDiscoveryV1Models.TrainingExample testGetTrainingExample(String environmentId, String collectionId, String queryId, String exampleId) {
+  public static IBMDiscoveryV1Models.TrainingExample testGetTrainingExample(String environmentId, String collectionId, String queryId, String exampleId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.GetTrainingExampleOptions options = new
      IBMDiscoveryV1Models.GetTrainingExampleOptionsBuilder()
@@ -522,9 +619,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test get training data
    *
    */
-  public static IBMDiscoveryV1Models.TrainingQuery testGetTrainingData(String environmentId, String collectionId, String queryId) {
+  public static IBMDiscoveryV1Models.TrainingQuery testGetTrainingData(String environmentId, String collectionId, String queryId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.GetTrainingDataOptions options = new
      IBMDiscoveryV1Models.GetTrainingDataOptionsBuilder()
@@ -542,9 +643,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test list training data
    *
    */
-  public static IBMDiscoveryV1Models.TrainingDataSet testListTrainingData(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.TrainingDataSet testListTrainingData(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.ListTrainingDataOptions options = new
      IBMDiscoveryV1Models.ListTrainingDataOptionsBuilder()
@@ -561,9 +666,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test adding a query to the training data in single collection.
    *
    */
-  public static IBMDiscoveryV1Models.TrainingExample testUpdateTrainingExample(String environmentId, String collectionId, String queryId, String exampleId) {
+  public static IBMDiscoveryV1Models.TrainingExample testUpdateTrainingExample(String environmentId, String collectionId, String queryId, String exampleId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.UpdateTrainingExampleOptions options = new
      IBMDiscoveryV1Models.UpdateTrainingExampleOptionsBuilder()
@@ -581,9 +690,13 @@ public with sharing class IBMDiscoveryV1FTests {
   /**
    *  Test deleting the example with the given ID for the training data query.
    */
-  public static void testDeleteTrainingExample(String environmentId, String collectionId,String queryId, String exampleId) {
+  public static void testDeleteTrainingExample(String environmentId, String collectionId,String queryId, String exampleId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.DeleteTrainingExampleOptions options = new
      IBMDiscoveryV1Models.DeleteTrainingExampleOptionsBuilder('test','test','test','test')
@@ -599,9 +712,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test delete training data for a collection
    *
    */
-  public static void testDeleteAllTrainingData(String environmentId, String collectionId) {
+  public static void testDeleteAllTrainingData(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.DeleteAllTrainingDataOptions options = new
      IBMDiscoveryV1Models.DeleteAllTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283','5ae96bb9-80e5-43ea-916e-1f3412fbc283')
@@ -615,9 +732,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Test delete training data and all associated examples from the training data set
    *
    */
-  public static void testDeleteTrainingData(String environmentId, String collectionId) {
+  public static void testDeleteTrainingData(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.DeleteTrainingDataOptions options = new
      IBMDiscoveryV1Models.DeleteTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283','5ae96bb9-80e5-43ea-916e-1f3412fbc283','5ae96bb9-80e5-43ea-916e-1f3412fbc283')
@@ -633,9 +754,13 @@ public with sharing class IBMDiscoveryV1FTests {
    * used explorer to upload document
    *
    */
-  public static void testDeleteDocument(String environmentId, String collectionId,String documentId) {
+  public static void testDeleteDocument(String environmentId, String collectionId,String documentId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     IBMDiscoveryV1Models.DeleteDocumentOptions options = new
      IBMDiscoveryV1Models.DeleteDocumentOptionsBuilder()
@@ -651,9 +776,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *
    * Used List fields to get fields
    */
-  public static IBMDiscoveryV1Models.QueryNoticesResponse testFederatedQueryNotices(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.QueryNoticesResponse testFederatedQueryNotices(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     List<String> collectionIds=new List<String>{collectionId};
     IBMDiscoveryV1Models.FederatedQueryNoticesOptions options = new
@@ -673,9 +802,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *
    * then test using testGetDocumentStatus if document is loaded successfully
    */
-  public static IBMDiscoveryV1Models.DocumentAccepted testAddDocument(String environmentId, String collectionId) {
+  public static IBMDiscoveryV1Models.DocumentAccepted testAddDocument(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION_2017_09_01);
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
 
     Attachment att=createFile();
     IBMWatsonFile testfile=new IBMWatsonFile.FileBuilder()
@@ -694,9 +827,13 @@ public with sharing class IBMDiscoveryV1FTests {
     return resp;
   }
   
-   public static IBMDiscoveryV1Models.TestDocument testConfigurationInEnvironment(String environmentId, String configurationId) {
+   public static IBMDiscoveryV1Models.TestDocument testConfigurationInEnvironment(String environmentId, String configurationId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
     Attachment att=createFile();
     IBMWatsonFile testfile=new IBMWatsonFile.FileBuilder()
      .body(att.Body)
@@ -721,9 +858,13 @@ public with sharing class IBMDiscoveryV1FTests {
    *  Update a document.
    *
    */
-  public static IBMDiscoveryV1Models.DocumentAccepted testUpdateDocument(String environmentId, String collectionId, String documentId) {
+  public static IBMDiscoveryV1Models.DocumentAccepted testUpdateDocument(String environmentId, String collectionId, String documentId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
-    discovery.setEndPoint(NAMED_CREDENTIALS);
+    //discovery.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
     Attachment att=createFile();
     IBMWatsonFile testfile=new IBMWatsonFile.FileBuilder()
      .body(att.Body)
