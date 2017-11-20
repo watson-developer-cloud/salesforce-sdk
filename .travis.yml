@@ -20,6 +20,7 @@ script:
 - sfdx force:org:create -v HubOrg -s -f config/project-scratch-def.json -a ciorg
 - sfdx force:source:push -u ciorg
 - sfdx force:apex:test:run -u ciorg -c -r human
+- touch test-runners/DiscoveryTestRunner.apex
 - echo "IBMDiscoveryV1FTests.runAllTests($DISCOVERY_USERNAME, $DISCOVERY_PASSWORD);" > test-runners/DiscoveryTestRunner.apex
 - sfdx force:apex:execute -f test-runners/DiscoveryTestRunner.apex
 - rm test-runners/DiscoveryTestRunner.apex
