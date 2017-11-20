@@ -449,7 +449,7 @@ public with sharing class IBMDiscoveryV1FTests {
       .environmentId(environmentId)
       .collectionId(collectionId)
       .queryId(queryId)
-      .training_example(te)
+      .trainingExample(te)
       .relevance(0)
       .build();
     IBMDiscoveryV1Models.TrainingExample resp = discovery.createTrainingExample(options);

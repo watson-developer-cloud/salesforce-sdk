@@ -39,13 +39,40 @@ public class IBMWatsonJSONUtil {
   }
 
   /**
+   * Calls appropriate methods to prepare the JSON response for deserialization. This involves removing empty
+   * string values and adding the property suffix to avoid using reserved words.
+   *
+   * @param jsonString String representation of the JSON response
+   *
+   * return String representing our JSON object ready to be deserialized
+   */
+  public static String prepareResponseString(String jsonString) {
+    jsonString = addPropertySuffix(jsonString);
+    jsonString = replaceEmptyStrings(jsonString);
+    return jsonString;
+  }
+
+  /**
+   * Replaces any empty string values with 'null'. This will cause that property to be left out of the
+   * string reprentation of the object and will prevent any deserialization issues with empty
+   * strings being returned.
+   *
+   * @param jsonString String representation of the JSON response
+   *
+   * return String representing our modified JSON response object
+   */
+  private static String replaceEmptyStrings(String jsonString) {
+    return jsonString.replace('""', 'null');
+  }
+
+  /**
    * Adds 'serialized_name' suffix to all property keys.
    *
    * @param jsonString String representation of the JSON response
    *
    * @return String representing the JSON response with modified keys
    */
-  public static String addReservedWordSuffix(String jsonString) {
+  private static String addPropertySuffix(String jsonString) {
     List<String> jsonStringPieces = new List<String>();
     String restOfString = jsonString;
     Integer indexOffset = 5000;
