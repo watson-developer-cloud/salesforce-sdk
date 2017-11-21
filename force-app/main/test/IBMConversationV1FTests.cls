@@ -47,7 +47,6 @@ public with sharing class IBMConversationV1FTests {
     deleteSynonym(workspaceId);
     deleteValue(workspaceId);
     deleteEntity(workspaceId);
-    //deleteExample(workspaceId);
     deleteIntent(workspaceId);
     testDeleteWorkspace(workspaceId);
   }
