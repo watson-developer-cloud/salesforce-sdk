@@ -5,8 +5,7 @@
       "default": true
     },
     {
-      "path": "force-app/main/default/remoteSiteSettings",
-      "default": true
+      "path": "force-app/main/default/remoteSiteSettings"
     }
   ],
   "namespace": "",
