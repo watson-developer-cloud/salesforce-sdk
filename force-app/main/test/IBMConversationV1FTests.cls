@@ -1,10 +1,56 @@
-@isTest
 public with sharing class IBMConversationV1FTests {
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_conversation_v1_test';
   private static String VERSION_2017_05_26 = '2017-05-26';
-  private static String workspaceId = '<workspaceId>';
-
+ // private static String workspaceId = 'c7e447ed-4dca-44b1-b48e-7b9275f409bd';
+  /**
+   *  Test run functional tests.
+   */
+  public static void runAllTests()
+  {
+    String workspaceId=testCreateWorkspace().getWorkspaceId();
+    testGetWorkspace(workspaceId);
+    updateWorkspace(workspaceId);
+    testListWorkspaces();
+    message(workspaceId);
+    createIntent(workspaceId);
+    getIntent(workspaceId);
+    listIntents(workspaceId);
+    updateIntent(workspaceId);
+    createExample(workspaceId);
+    getExample(workspaceId);
+    listExamples(workspaceId);
+    updateExample(workspaceId);
+    createEntity(workspaceId);
+    getEntity(workspaceId);
+    listEntities(workspaceId);
+    updateEntity(workspaceId);
+    createValue(workspaceId);
+    getValue(workspaceId);
+    updateValue(workspaceId);
+    listValues(workspaceId);
+    createSynonym(workspaceId);
+    getSynonym(workspaceId);
+    listSynonyms(workspaceId);
+    updateSynonym(workspaceId);
+    createDialogNode(workspaceId);
+    getDialogNode(workspaceId);
+    listDialogNodes(workspaceId);
+    updateDialogNode(workspaceId);
+    listLogs(workspaceId);
+    testCreateCounterexample(workspaceId);
+    testGetCounterexample(workspaceId);
+    testListCounterexamples(workspaceId);
+    testUpdateCounterexample(workspaceId);
+    testDeleteCounterexample(workspaceId);
+    deleteDialogNode(workspaceId);
+    deleteSynonym(workspaceId);
+    deleteValue(workspaceId);
+    deleteEntity(workspaceId);
+    //deleteExample(workspaceId);
+    deleteIntent(workspaceId);
+    testDeleteWorkspace(workspaceId);
+  }
   public static IBMConversationV1Models.Workspace testCreateWorkspace() {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
@@ -15,11 +61,11 @@ public with sharing class IBMConversationV1FTests {
       .language('en')
       .build();
     IBMConversationV1Models.Workspace response = conversation.createWorkspace(createWorkspaceOptions);
-
+    System.debug('IBMConversationV1FTests.testCreateWorkspace(): ' + response);
     return response;
   }
 
-  public static void testDeleteWorkspace() {
+  public static void testDeleteWorkspace(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -29,7 +75,7 @@ public with sharing class IBMConversationV1FTests {
     conversation.deleteWorkspace(deleteOptions);
   }
 
-  public static IBMConversationV1Models.WorkspaceExport testGetWorkspace() {
+  public static IBMConversationV1Models.WorkspaceExport testGetWorkspace(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -41,7 +87,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.Workspace updateWorkspace() {
+  public static IBMConversationV1Models.Workspace updateWorkspace(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -66,76 +112,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.Value createValue() {
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setEndPoint(NAMED_CREDENTIALS);
-
-    IBMConversationV1Models.CreateValueOptions createOptions = new IBMConversationV1Models.CreateValueOptionsBuilder()
-      .workspaceId(workspaceId)
-      .entity('TestEntity')
-      .value('Dog')
-      .build();
-    IBMConversationV1Models.Value response = conversation.createValue(createOptions);
-
-    return response;
-  }
-
-  public static void deleteValue() {
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setEndPoint(NAMED_CREDENTIALS);
-
-    IBMConversationV1Models.DeleteValueOptions deleteOptions = new IBMConversationV1Models.DeleteValueOptionsBuilder()
-      .workspaceId(workspaceId)
-      .entity('TestEntity')
-      .value('Dog')
-      .build();
-    conversation.deleteValue(deleteOptions);
-  }
-
-  public static IBMConversationV1Models.ValueExport getValue() {
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setEndPoint(NAMED_CREDENTIALS);
-
-    IBMConversationV1Models.GetValueOptions getOptions = new IBMConversationV1Models.GetValueOptionsBuilder()
-      .workspaceId(workspaceId)
-      .entity('TestEntity')
-      .value('Cat')
-      .exportField(true)
-      .build();
-    IBMConversationV1Models.ValueExport response = conversation.getValue(getOptions);
-
-    return response;
-  }
-
-  public static IBMConversationV1Models.Value updateValue() {
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setEndPoint(NAMED_CREDENTIALS);
-
-    IBMConversationV1Models.UpdateValueOptions updateOptions = new IBMConversationV1Models.UpdateValueOptionsBuilder()
-      .workspaceId(workspaceId)
-      .entity('TestEntity')
-      .value('Cat')
-      .addNewSynonyms('Kitty')
-      .build();
-    IBMConversationV1Models.Value response = conversation.updateValue(updateOptions);
-
-    return response;
-  }
-
-  public static IBMConversationV1Models.ValueCollection listValues() {
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
-    conversation.setEndPoint(NAMED_CREDENTIALS);
-
-    IBMConversationV1Models.ListValuesOptions listOptions = new IBMConversationV1Models.ListValuesOptionsBuilder()
-      .workspaceId(workspaceId)
-      .entity('TestEntity')
-      .build();
-    IBMConversationV1Models.ValueCollection response = conversation.listValues(listOptions);
-
-    return response;
-  }
-
-  public static IBMConversationV1Models.MessageResponse message() {
+  public static IBMConversationV1Models.MessageResponse message(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -151,7 +128,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.Intent createIntent() {
+  public static IBMConversationV1Models.Intent createIntent(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -165,7 +142,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static void deleteIntent() {
+  public static void deleteIntent(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -176,7 +153,7 @@ public with sharing class IBMConversationV1FTests {
     conversation.deleteIntent(deleteOptions);
   }
 
-  public static IBMConversationV1Models.IntentExport getIntent() {
+  public static IBMConversationV1Models.IntentExport getIntent(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -190,7 +167,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.IntentCollection listIntents() {
+  public static IBMConversationV1Models.IntentCollection listIntents(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -203,7 +180,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.Intent updateIntent() {
+  public static IBMConversationV1Models.Intent updateIntent(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -217,7 +194,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.Example createExample() {
+  public static IBMConversationV1Models.Example createExample(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -231,33 +208,33 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static void deleteExample() {
+  public static void deleteExample(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.DeleteExampleOptions deleteOptions = new IBMConversationV1Models.DeleteExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
-      .text('example A')
+      .text('Does this work?')
       .build();
     conversation.deleteExample(deleteOptions);
   }
 
-  public static IBMConversationV1Models.Example getExample() {
+  public static IBMConversationV1Models.Example getExample(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.GetExampleOptions getOptions = new IBMConversationV1Models.GetExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
-      .text('this is a test')
+      .text('example A')
       .build();
     IBMConversationV1Models.Example response = conversation.getExample(getOptions);
 
     return response;
   }
 
-  public static IBMConversationV1Models.ExampleCollection listExamples() {
+  public static IBMConversationV1Models.ExampleCollection listExamples(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -270,14 +247,14 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.Example updateExample() {
+  public static IBMConversationV1Models.Example updateExample(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.UpdateExampleOptions updateOptions = new IBMConversationV1Models.UpdateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
-      .text('this is a test')
+      .text('example A')
       .newText('Does this work?')
       .build();
     IBMConversationV1Models.Example response = conversation.updateExample(updateOptions);
@@ -285,7 +262,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.Entity createEntity() {
+  public static IBMConversationV1Models.Entity createEntity(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -303,18 +280,18 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static void deleteEntity() {
+  public static void deleteEntity(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.DeleteEntityOptions deleteOptions = new IBMConversationV1Models.DeleteEntityOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('TestEntity')
+      .entity('City')
       .build();
     conversation.deleteEntity(deleteOptions);
   }
 
-  public static IBMConversationV1Models.EntityExport getEntity() {
+  public static IBMConversationV1Models.EntityExport getEntity(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -328,7 +305,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.EntityCollection listEntities() {
+  public static IBMConversationV1Models.EntityCollection listEntities(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -341,7 +318,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.Entity updateEntity() {
+  public static IBMConversationV1Models.Entity updateEntity(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -354,8 +331,77 @@ public with sharing class IBMConversationV1FTests {
 
     return response;
   }
+  
+  public static IBMConversationV1Models.Value createValue(String workspaceId) {
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
 
-  public static IBMConversationV1Models.Synonym createSynonym() {
+    IBMConversationV1Models.CreateValueOptions createOptions = new IBMConversationV1Models.CreateValueOptionsBuilder()
+      .workspaceId(workspaceId)
+      .entity('City')
+      .value('Boston')
+      .build();
+    IBMConversationV1Models.Value response = conversation.createValue(createOptions);
+
+    return response;
+  }
+
+  public static void deleteValue(String workspaceId) {
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
+
+    IBMConversationV1Models.DeleteValueOptions deleteOptions = new IBMConversationV1Models.DeleteValueOptionsBuilder()
+      .workspaceId(workspaceId)
+      .entity('City')
+      .value('Boston')
+      .build();
+    conversation.deleteValue(deleteOptions);
+  }
+
+  public static IBMConversationV1Models.ValueExport getValue(String workspaceId) {
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
+
+    IBMConversationV1Models.GetValueOptions getOptions = new IBMConversationV1Models.GetValueOptionsBuilder()
+      .workspaceId(workspaceId)
+      .entity('City')
+      .value('Boston')
+      .exportField(true)
+      .build();
+    IBMConversationV1Models.ValueExport response = conversation.getValue(getOptions);
+
+    return response;
+  }
+
+  public static IBMConversationV1Models.Value updateValue(String workspaceId) {
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
+
+    IBMConversationV1Models.UpdateValueOptions updateOptions = new IBMConversationV1Models.UpdateValueOptionsBuilder()
+      .workspaceId(workspaceId)
+      .entity('City')
+      .value('Boston')
+      .addNewSynonyms('Kitty')
+      .build();
+    IBMConversationV1Models.Value response = conversation.updateValue(updateOptions);
+
+    return response;
+  }
+
+  public static IBMConversationV1Models.ValueCollection listValues(String workspaceId) {
+    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    conversation.setEndPoint(NAMED_CREDENTIALS);
+
+    IBMConversationV1Models.ListValuesOptions listOptions = new IBMConversationV1Models.ListValuesOptionsBuilder()
+      .workspaceId(workspaceId)
+      .entity('City')
+      .build();
+    IBMConversationV1Models.ValueCollection response = conversation.listValues(listOptions);
+
+    return response;
+  }
+  
+  public static IBMConversationV1Models.Synonym createSynonym(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -370,7 +416,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static void deleteSynonym() {
+  public static void deleteSynonym(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -383,7 +429,7 @@ public with sharing class IBMConversationV1FTests {
     conversation.deleteSynonym(deleteOptions);
   }
 
-  public static IBMConversationV1Models.Synonym getSynonym() {
+  public static IBMConversationV1Models.Synonym getSynonym(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -391,14 +437,14 @@ public with sharing class IBMConversationV1FTests {
       .workspaceId(workspaceId)
       .entity('City')
       .value('Boston')
-      .synonym('Beantown')
+      .synonym('Kitty')
       .build();
     IBMConversationV1Models.Synonym response = conversation.getSynonym(getOptions);
 
     return response;
   }
 
-  public static IBMConversationV1Models.SynonymCollection listSynonyms() {
+  public static IBMConversationV1Models.SynonymCollection listSynonyms(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -412,7 +458,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.Synonym updateSynonym() {
+  public static IBMConversationV1Models.Synonym updateSynonym(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -420,7 +466,7 @@ public with sharing class IBMConversationV1FTests {
       .workspaceId(workspaceId)
       .entity('City')
       .value('Boston')
-      .synonym('Beantown')
+      .synonym('Kitty')
       .newSynonym('City of Champions')
       .build();
     IBMConversationV1Models.Synonym response = conversation.updateSynonym(updateOptions);
@@ -428,7 +474,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.DialogNode createDialogNode() {
+  public static IBMConversationV1Models.DialogNode createDialogNode(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -441,31 +487,31 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static void deleteDialogNode() {
+  public static void deleteDialogNode(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.DeleteDialogNodeOptions deleteOptions = new IBMConversationV1Models.DeleteDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
-      .dialogNode('new_dialog_name')
+      .dialogNode('New Name')
       .build();
     conversation.deleteDialogNode(deleteOptions);
   }
 
-  public static IBMConversationV1Models.DialogNode getDialogNode() {
+  public static IBMConversationV1Models.DialogNode getDialogNode(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.GetDialogNodeOptions getOptions = new IBMConversationV1Models.GetDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
-      .dialogNode('Welcome')
+      .dialogNode('new_dialog_name')
       .build();
     IBMConversationV1Models.DialogNode response = conversation.getDialogNode(getOptions);
 
     return response;
   }
 
-  public static IBMConversationV1Models.DialogNodeCollection listDialogNodes() {
+  public static IBMConversationV1Models.DialogNodeCollection listDialogNodes(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -477,13 +523,13 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.DialogNode updateDialogNode() {
+  public static IBMConversationV1Models.DialogNode updateDialogNode(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.UpdateDialogNodeOptions updateOptions = new IBMConversationV1Models.UpdateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
-      .dialogNode('Welcome')
+      .dialogNode('new_dialog_name')
       .newDialogNode('New Name')
       .newDescription('This is a new description')
       .build();
@@ -492,7 +538,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.LogCollection listLogs() {
+  public static IBMConversationV1Models.LogCollection listLogs(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -504,7 +550,7 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.Counterexample testCreateCounterexample() {
+  public static IBMConversationV1Models.Counterexample testCreateCounterexample(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -517,31 +563,30 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static void testDeleteCounterexample() {
+  public static void testDeleteCounterexample(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
-
     IBMConversationV1Models.DeleteCounterexampleOptions deleteOptions = new IBMConversationV1Models.DeleteCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
-      .text('Text for a counterexample')
+      .text('new text')
       .build();
     conversation.deleteCounterexample(deleteOptions);
   }
 
-  public static IBMConversationV1Models.Counterexample testGetCounterexample() {
+  public static IBMConversationV1Models.Counterexample testGetCounterexample(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.GetCounterexampleOptions getOptions = new IBMConversationV1Models.GetCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
-      .text('text')
+      .text('Text for a counterexample')
       .build();
     IBMConversationV1Models.Counterexample response = conversation.getCounterexample(getOptions);
 
     return response;
   }
 
-  public static IBMConversationV1Models.CounterexampleCollection testListCounterexamples() {
+  public static IBMConversationV1Models.CounterexampleCollection testListCounterexamples(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
@@ -553,13 +598,13 @@ public with sharing class IBMConversationV1FTests {
     return response;
   }
 
-  public static IBMConversationV1Models.Counterexample testUpdateCounterexample() {
+  public static IBMConversationV1Models.Counterexample testUpdateCounterexample(String workspaceId) {
     IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
     conversation.setEndPoint(NAMED_CREDENTIALS);
 
     IBMConversationV1Models.UpdateCounterexampleOptions updateOptions = new IBMConversationV1Models.UpdateCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
-      .text('text')
+      .text('Text for a counterexample')
       .newText('new text')
       .build();
     IBMConversationV1Models.Counterexample response = conversation.updateCounterexample(updateOptions);
