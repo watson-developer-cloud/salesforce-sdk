@@ -22,7 +22,7 @@ script:
 - sfdx force:mdapi:deploy -d config/remoteSiteEndpoint -w 1
 - sfdx force:apex:test:run -u ciorg -c -r human
 - echo "IBMDiscoveryV1FTests.runAllTests('$DISCOVERY_USERNAME', '$DISCOVERY_PASSWORD');" > DiscoveryTestRunner.apex
-- $(sfdx force:apex:execute -f DiscoveryTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && exit 0 || exit 1
+- $(sfdx force:apex:execute -f DiscoveryTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
 - rm DiscoveryTestRunner.apex
 - sfdx force:org:delete -u ciorg -p
 - mv install/package.xml force-app/main/default
