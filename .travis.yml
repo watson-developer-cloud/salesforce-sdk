@@ -24,6 +24,9 @@ script:
 - echo "IBMDiscoveryV1FTests.runAllTests('$DISCOVERY_USERNAME', '$DISCOVERY_PASSWORD');" > DiscoveryTestRunner.apex
 - $(sfdx force:apex:execute -f DiscoveryTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
 - rm DiscoveryTestRunner.apex
+- echo "IBMConversationV1FTests.runAllTests('$CONVERSATION_USERNAME', '$CONVERSATION_PASSWORD');" > ConversationTestRunner.apex
+- $(sfdx force:apex:execute -f ConversationTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
+- rm ConversationTestRunner.apex
 - sfdx force:org:delete -u ciorg -p
 - mv install/package.xml force-app/main/default
 - "./install/deploy.sh"
