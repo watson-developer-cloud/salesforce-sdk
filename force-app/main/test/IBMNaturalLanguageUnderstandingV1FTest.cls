@@ -1,15 +1,25 @@
 public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
+  private static String URL = 'https://gateway.watsonplatform.net/natural-language-understanding/api';
   private static String VERSION_2017_09_01 = '2017-09-01';
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_natural_language_understanding_v1';
+  
+  public static void runAllTests(String username, String password)
+  {
+    testAnalyze(username, password);
+    testListModels(username, password);
+  }
   
   /**
    *  Test Analyze text, HTML, or a public webpage.
    *
    */
-  public static IBMNaturalLanguageUnderstandingV1Models.AnalysisResults testAnalyze() {
+  public static IBMNaturalLanguageUnderstandingV1Models.AnalysisResults testAnalyze(String username, String password) {
     IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1(VERSION_2017_09_01);
-    naturalLanguageUnderstanding.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      naturalLanguageUnderstanding.setEndPoint(URL);
+      naturalLanguageUnderstanding.setUsernameAndPassword(username, password);
+    }
     IBMNaturalLanguageUnderstandingV1Models.ConceptsOptions concepts=new IBMNaturalLanguageUnderstandingV1Models.ConceptsOptionsBuilder()
       .limitField(8)
       .build();
@@ -75,9 +85,13 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
     return resp;  
   }
   
-  public static IBMNaturalLanguageUnderstandingV1Models.ListModelsResults testListModels() {
+  public static IBMNaturalLanguageUnderstandingV1Models.ListModelsResults testListModels(String username, String password) {
     IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1(VERSION_2017_09_01);
-    naturalLanguageUnderstanding.setEndPoint(NAMED_CREDENTIALS);IBMNaturalLanguageUnderstandingV1Models.ListModelsOptions options = new IBMNaturalLanguageUnderstandingV1Models.ListModelsOptionsBuilder()
+    if (username != null && password != null) {
+      naturalLanguageUnderstanding.setEndPoint(URL);
+      naturalLanguageUnderstanding.setUsernameAndPassword(username, password);
+    }
+    IBMNaturalLanguageUnderstandingV1Models.ListModelsOptions options = new IBMNaturalLanguageUnderstandingV1Models.ListModelsOptionsBuilder()
       .build();
     IBMNaturalLanguageUnderstandingV1Models.ListModelsResults resp =
       naturalLanguageUnderstanding.listModels(options);
