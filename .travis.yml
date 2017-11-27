@@ -27,7 +27,7 @@ script:
 - echo "IBMConversationV1FTests.runAllTests('$CONVERSATION_USERNAME', '$CONVERSATION_PASSWORD');" > ConversationTestRunner.apex
 - $(sfdx force:apex:execute -f ConversationTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
 - rm ConversationTestRunner.apex
-- echo "IBMPersonalityInsightsV3Test.runAllTests('$PERSONALITY_INSIGHTS_USERNAME', '$PERSONALITY_INSIGHTS_PASSWORD');" > PersonalityInsightsTestRunner.apex
+- echo "IBMPersonalityInsightsV3FTest.runAllTests('$PERSONALITY_INSIGHTS_USERNAME', '$PERSONALITY_INSIGHTS_PASSWORD');" > PersonalityInsightsTestRunner.apex
 - $(sfdx force:apex:execute -f PersonalityInsightsTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
 - rm PersonalityInsightsTestRunner.apex
 - echo "IBMToneAnalyzerV3FTest.runAllTests('$TONE_ANALYZER_USERNAME', '$TONE_ANALYZER_PASSWORD');" > ToneAnalyzerTestRunner.apex
