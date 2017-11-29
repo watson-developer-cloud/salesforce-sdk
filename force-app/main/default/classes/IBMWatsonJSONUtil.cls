@@ -39,13 +39,40 @@ public class IBMWatsonJSONUtil {
   }
 
   /**
-   * Adds 'serialized_name' suffix to any properties which are reserved words in Apex.
+   * Calls appropriate methods to prepare the JSON response for deserialization. This involves removing empty
+   * string values and adding the property suffix to avoid using reserved words.
+   *
+   * @param jsonString String representation of the JSON response
+   *
+   * return String representing our JSON object ready to be deserialized
+   */
+  public static String prepareResponseString(String jsonString) {
+    jsonString = addPropertySuffix(jsonString);
+    jsonString = replaceEmptyStrings(jsonString);
+    return jsonString;
+  }
+
+  /**
+   * Replaces any empty string values with 'null'. This will cause that property to be left out of the
+   * string reprentation of the object and will prevent any deserialization issues with empty
+   * strings being returned.
+   *
+   * @param jsonString String representation of the JSON response
+   *
+   * return String representing our modified JSON response object
+   */
+  private static String replaceEmptyStrings(String jsonString) {
+    return jsonString.replace('""', 'null');
+  }
+
+  /**
+   * Adds 'serialized_name' suffix to all property keys.
    *
    * @param jsonString String representation of the JSON response
    *
    * @return String representing the JSON response with modified keys
    */
-  public static String addReservedWordSuffix(String jsonString) {
+  private static String addPropertySuffix(String jsonString) {
     List<String> jsonStringPieces = new List<String>();
     String restOfString = jsonString;
     Integer indexOffset = 5000;
@@ -102,6 +129,9 @@ public class IBMWatsonJSONUtil {
           // looping until we find the end of the additional_properties object
           while (lastToken != JSONToken.END_OBJECT || braceCount > 0) {
             String replacementString = parser.getText();
+            
+            // getText above will remove any escape characters
+            replacementString = replacementString.replace('"', '\\"');
 
             if (current == JSONToken.START_OBJECT) {
               braceCount++;
@@ -110,16 +140,22 @@ public class IBMWatsonJSONUtil {
               braceCount--;
               Integer lastIndex = replacementList.size() - 1;
               String lastVal = replacementList.get(lastIndex);
-
-              lastVal = lastVal.substring(0, lastVal.length() - 1);
-              replacementList.set(lastIndex, lastVal);
+              
+              // only want to remove trailing commas
+              if (!lastVal.equals('{')) {
+                lastVal = lastVal.substring(0, lastVal.length() - 1);
+                replacementList.set(lastIndex, lastVal);
+              }
             }
             else if (current == JSONToken.END_ARRAY) {
               Integer lastIndex = replacementList.size() - 1;
               String lastVal = replacementList.get(lastIndex);
 
-              lastVal = lastVal.substring(0, lastVal.length() - 1);
-              replacementList.set(lastIndex, lastVal);
+              // only want to remove trailing commas
+              if (!lastVal.equals('[')) {
+                lastVal = lastVal.substring(0, lastVal.length() - 1);
+                replacementList.set(lastIndex, lastVal);
+              }
             }
 
             if (current == JSONToken.FIELD_NAME) {
@@ -129,6 +165,7 @@ public class IBMWatsonJSONUtil {
               replacementString = '"' + replacementString + '",';
             }
             else if (current == JSONToken.VALUE_NUMBER_INT
+                || current == JSONToken.VALUE_NUMBER_FLOAT
                 || current == JSONToken.VALUE_TRUE
                 || current == JSONToken.VALUE_FALSE
                 || current == JSONToken.VALUE_NULL
@@ -155,8 +192,6 @@ public class IBMWatsonJSONUtil {
           replacementList.remove(0);
           replacementList.remove(replacementList.size() - 1);
           String replacementString = String.join(replacementList, '');
-
-          Integer replacementIndex = jsonString.indexOf(stringToReplace);
           jsonString = jsonString.replace(stringToReplace, replacementString);
         }
 

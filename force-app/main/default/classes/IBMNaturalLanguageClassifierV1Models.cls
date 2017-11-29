@@ -67,46 +67,46 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Sets the classifier_id_serialized_name.
      *
-     * @param classifier_id_serialized_name the new classifier_id_serialized_name
+     * @param classifierId the new classifierId
      */
-    public void setClassifierId(final String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public void setClassifierId(final String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
     }
 
     /**
      * Sets the url_serialized_name.
      *
-     * @param url_serialized_name the new url_serialized_name
+     * @param url the new url
      */
-    public void setUrl(final String url_serialized_name) {
-      this.url_serialized_name = url_serialized_name;
+    public void setUrl(final String url) {
+      this.url_serialized_name = url;
     }
 
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Sets the top_class_serialized_name.
      *
-     * @param top_class_serialized_name the new top_class_serialized_name
+     * @param topClass the new topClass
      */
-    public void setTopClass(final String top_class_serialized_name) {
-      this.top_class_serialized_name = top_class_serialized_name;
+    public void setTopClass(final String topClass) {
+      this.top_class_serialized_name = topClass;
     }
 
     /**
      * Sets the classes_serialized_name.
      *
-     * @param classes_serialized_name the new classes_serialized_name
+     * @param classes the new classes
      */
-    public void setClasses(final List<ClassifiedClass> classes_serialized_name) {
-      this.classes_serialized_name = classes_serialized_name;
+    public void setClasses(final List<ClassifiedClass> classes) {
+      this.classes_serialized_name = classes;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -165,19 +165,19 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Sets the confidence_serialized_name.
      *
-     * @param confidence_serialized_name the new confidence_serialized_name
+     * @param confidence the new confidence
      */
-    public void setConfidence(final Double confidence_serialized_name) {
-      this.confidence_serialized_name = confidence_serialized_name;
+    public void setConfidence(final Double confidence) {
+      this.confidence_serialized_name = confidence;
     }
 
     /**
      * Sets the class_name_serialized_name.
      *
-     * @param class_name_serialized_name the new class_name_serialized_name
+     * @param className the new className
      */
-    public void setClassName(final String class_name_serialized_name) {
-      this.class_name_serialized_name = class_name_serialized_name;
+    public void setClassName(final String className) {
+      this.class_name_serialized_name = className;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -283,37 +283,37 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     /**
      * Sets the url_serialized_name.
      *
-     * @param url_serialized_name the new url_serialized_name
+     * @param url the new url
      */
-    public void setUrl(final String url_serialized_name) {
-      this.url_serialized_name = url_serialized_name;
+    public void setUrl(final String url) {
+      this.url_serialized_name = url;
     }
 
     /**
      * Sets the classifier_id_serialized_name.
      *
-     * @param classifier_id_serialized_name the new classifier_id_serialized_name
+     * @param classifierId the new classifierId
      */
-    public void setClassifierId(final String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public void setClassifierId(final String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
     }
 
     /**
      * Sets the language_serialized_name.
      *
-     * @param language_serialized_name the new language_serialized_name
+     * @param language the new language
      */
-    public void setLanguage(final String language_serialized_name) {
-      this.language_serialized_name = language_serialized_name;
+    public void setLanguage(final String language) {
+      this.language_serialized_name = language;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -347,10 +347,10 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Sets the classifiers_serialized_name.
      *
-     * @param classifiers_serialized_name the new classifiers_serialized_name
+     * @param classifiers the new classifiers
      */
-    public void setClassifiers(final List<Classifier> classifiers_serialized_name) {
-      this.classifiers_serialized_name = classifiers_serialized_name;
+    public void setClassifiers(final List<Classifier> classifiers) {
+      this.classifiers_serialized_name = classifiers;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -428,9 +428,9 @@ public class IBMNaturalLanguageClassifierV1Models {
     private String classifier_id_serialized_name;
     private String text_serialized_name;
 
-    private ClassifyOptionsBuilder(ClassifyOptions classify_options) {
-      classifier_id_serialized_name = classify_options.classifier_id_serialized_name;
-      text_serialized_name = classify_options.text_serialized_name;
+    private ClassifyOptionsBuilder(ClassifyOptions classifyOptions) {
+      classifier_id_serialized_name = classifyOptions.classifier_id_serialized_name;
+      text_serialized_name = classifyOptions.text_serialized_name;
     }
 
     /**
@@ -442,18 +442,18 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param classifier_id_serialized_name the classifier_id_serialized_name
-     * @param text_serialized_name the text_serialized_name
+     * @param classifierId the classifierId
+     * @param text the text
      */
-    public ClassifyOptionsBuilder(String classifier_id_serialized_name, String text_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
-      this.text_serialized_name = text_serialized_name;
+    public ClassifyOptionsBuilder(String classifierId, String text) {
+      this.classifier_id_serialized_name = classifierId;
+      this.text_serialized_name = text;
     }
 
     /**
      * Builds a ClassifyOptions.
      *
-     * @return the classify_options
+     * @return the classifyOptions
      */
     public ClassifyOptions build() {
       return new ClassifyOptions(this);
@@ -462,22 +462,22 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Set the classifier_id_serialized_name.
      *
-     * @param classifier_id_serialized_name the classifier_id_serialized_name
+     * @param classifierId the classifierId
      * @return the ClassifyOptions builder
      */
-    public ClassifyOptionsBuilder classifierId(String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public ClassifyOptionsBuilder classifierId(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
       return this;
     }
 
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the ClassifyOptions builder
      */
-    public ClassifyOptionsBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public ClassifyOptionsBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
   }
@@ -559,11 +559,11 @@ public class IBMNaturalLanguageClassifierV1Models {
     private IBMWatsonFile training_data_serialized_name;
     private String training_data_filename_serialized_name;
 
-    private CreateClassifierOptionsBuilder(CreateClassifierOptions create_classifier_options) {
-      training_metadata_serialized_name = create_classifier_options.training_metadata_serialized_name;
-      training_metadata_filename_serialized_name = create_classifier_options.training_metadata_filename_serialized_name;
-      training_data_serialized_name = create_classifier_options.training_data_serialized_name;
-      training_data_filename_serialized_name = create_classifier_options.training_data_filename_serialized_name;
+    private CreateClassifierOptionsBuilder(CreateClassifierOptions createClassifierOptions) {
+      training_metadata_serialized_name = createClassifierOptions.training_metadata_serialized_name;
+      training_metadata_filename_serialized_name = createClassifierOptions.training_metadata_filename_serialized_name;
+      training_data_serialized_name = createClassifierOptions.training_data_serialized_name;
+      training_data_filename_serialized_name = createClassifierOptions.training_data_filename_serialized_name;
     }
 
     /**
@@ -575,18 +575,18 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param training_metadata_serialized_name the training_metadata_serialized_name
-     * @param training_data_serialized_name the training_data_serialized_name
+     * @param trainingMetadata the trainingMetadata
+     * @param trainingData the trainingData
      */
-    public CreateClassifierOptionsBuilder(IBMWatsonFile training_metadata_serialized_name, IBMWatsonFile training_data_serialized_name) {
-      this.training_metadata_serialized_name = training_metadata_serialized_name;
-      this.training_data_serialized_name = training_data_serialized_name;
+    public CreateClassifierOptionsBuilder(IBMWatsonFile trainingMetadata, IBMWatsonFile trainingData) {
+      this.training_metadata_serialized_name = trainingMetadata;
+      this.training_data_serialized_name = trainingData;
     }
 
     /**
      * Builds a CreateClassifierOptions.
      *
-     * @return the create_classifier_options
+     * @return the createClassifierOptions
      */
     public CreateClassifierOptions build() {
       return new CreateClassifierOptions(this);
@@ -595,44 +595,44 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Set the training_metadata_serialized_name.
      *
-     * @param training_metadata_serialized_name the training_metadata_serialized_name
+     * @param trainingMetadata the trainingMetadata
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder trainingMetadata(IBMWatsonFile training_metadata_serialized_name) {
-      this.training_metadata_serialized_name = training_metadata_serialized_name;
+    public CreateClassifierOptionsBuilder trainingMetadata(IBMWatsonFile trainingMetadata) {
+      this.training_metadata_serialized_name = trainingMetadata;
       return this;
     }
 
     /**
      * Set the training_metadata_filename_serialized_name.
      *
-     * @param training_metadata_filename_serialized_name the training_metadata_filename_serialized_name
+     * @param trainingMetadataFilename the trainingMetadataFilename
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder trainingMetadataFilename(String training_metadata_filename_serialized_name) {
-      this.training_metadata_filename_serialized_name = training_metadata_filename_serialized_name;
+    public CreateClassifierOptionsBuilder trainingMetadataFilename(String trainingMetadataFilename) {
+      this.training_metadata_filename_serialized_name = trainingMetadataFilename;
       return this;
     }
 
     /**
      * Set the training_data_serialized_name.
      *
-     * @param training_data_serialized_name the training_data_serialized_name
+     * @param trainingData the trainingData
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder trainingData(IBMWatsonFile training_data_serialized_name) {
-      this.training_data_serialized_name = training_data_serialized_name;
+    public CreateClassifierOptionsBuilder trainingData(IBMWatsonFile trainingData) {
+      this.training_data_serialized_name = trainingData;
       return this;
     }
 
     /**
      * Set the training_data_filename_serialized_name.
      *
-     * @param training_data_filename_serialized_name the training_data_filename_serialized_name
+     * @param trainingDataFilename the trainingDataFilename
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder trainingDataFilename(String training_data_filename_serialized_name) {
-      this.training_data_filename_serialized_name = training_data_filename_serialized_name;
+    public CreateClassifierOptionsBuilder trainingDataFilename(String trainingDataFilename) {
+      this.training_data_filename_serialized_name = trainingDataFilename;
       return this;
     }
   }
@@ -674,8 +674,8 @@ public class IBMNaturalLanguageClassifierV1Models {
   public class DeleteClassifierOptionsBuilder {
     private String classifier_id_serialized_name;
 
-    private DeleteClassifierOptionsBuilder(DeleteClassifierOptions delete_classifier_options) {
-      classifier_id_serialized_name = delete_classifier_options.classifier_id_serialized_name;
+    private DeleteClassifierOptionsBuilder(DeleteClassifierOptions deleteClassifierOptions) {
+      classifier_id_serialized_name = deleteClassifierOptions.classifier_id_serialized_name;
     }
 
     /**
@@ -687,16 +687,16 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param classifier_id_serialized_name the classifier_id_serialized_name
+     * @param classifierId the classifierId
      */
-    public DeleteClassifierOptionsBuilder(String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public DeleteClassifierOptionsBuilder(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
     }
 
     /**
      * Builds a DeleteClassifierOptions.
      *
-     * @return the delete_classifier_options
+     * @return the deleteClassifierOptions
      */
     public DeleteClassifierOptions build() {
       return new DeleteClassifierOptions(this);
@@ -705,11 +705,11 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Set the classifier_id_serialized_name.
      *
-     * @param classifier_id_serialized_name the classifier_id_serialized_name
+     * @param classifierId the classifierId
      * @return the DeleteClassifierOptions builder
      */
-    public DeleteClassifierOptionsBuilder classifierId(String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public DeleteClassifierOptionsBuilder classifierId(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
       return this;
     }
   }
@@ -751,8 +751,8 @@ public class IBMNaturalLanguageClassifierV1Models {
   public class GetClassifierOptionsBuilder {
     private String classifier_id_serialized_name;
 
-    private GetClassifierOptionsBuilder(GetClassifierOptions get_classifier_options) {
-      classifier_id_serialized_name = get_classifier_options.classifier_id_serialized_name;
+    private GetClassifierOptionsBuilder(GetClassifierOptions getClassifierOptions) {
+      classifier_id_serialized_name = getClassifierOptions.classifier_id_serialized_name;
     }
 
     /**
@@ -764,16 +764,16 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param classifier_id_serialized_name the classifier_id_serialized_name
+     * @param classifierId the classifierId
      */
-    public GetClassifierOptionsBuilder(String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public GetClassifierOptionsBuilder(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
     }
 
     /**
      * Builds a GetClassifierOptions.
      *
-     * @return the get_classifier_options
+     * @return the getClassifierOptions
      */
     public GetClassifierOptions build() {
       return new GetClassifierOptions(this);
@@ -782,11 +782,11 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Set the classifier_id_serialized_name.
      *
-     * @param classifier_id_serialized_name the classifier_id_serialized_name
+     * @param classifierId the classifierId
      * @return the GetClassifierOptions builder
      */
-    public GetClassifierOptionsBuilder classifierId(String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public GetClassifierOptionsBuilder classifierId(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
       return this;
     }
   }
@@ -814,7 +814,7 @@ public class IBMNaturalLanguageClassifierV1Models {
    */
   public class ListClassifiersOptionsBuilder {
 
-    private ListClassifiersOptionsBuilder(ListClassifiersOptions list_classifiers_options) {
+    private ListClassifiersOptionsBuilder(ListClassifiersOptions listClassifiersOptions) {
     }
 
     /**
@@ -826,7 +826,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Builds a ListClassifiersOptions.
      *
-     * @return the list_classifiers_options
+     * @return the listClassifiersOptions
      */
     public ListClassifiersOptions build() {
       return new ListClassifiersOptions(this);

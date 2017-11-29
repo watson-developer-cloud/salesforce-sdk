@@ -32,7 +32,7 @@ public with sharing class IBMPersonalityInsightsV3FTest {
       .rawScores(true)
       .csvHeaders(false)
       .consumptionPreferences(true)
-      .content_serialized_name(content)
+      .content(content)
       .html('<html><body>I love Apples not oranges</body></html>')
       .text('Salesforce is making it easier for developers to use IBM Watson\'s artificial intelligence engine within the firm\'s customer relationship management software, which could lead to some exciting new technology for advisers.' + 
              ' To kick off the annual Dreamforce conference in San Francisco, Salesforce announced a new IBM Watson SDK, or software development kit. For the non-geeks out there, SDKs help make it easier for coders to develop new features and functionality within a software like Salesforce without having to write all the underlying code.' + 

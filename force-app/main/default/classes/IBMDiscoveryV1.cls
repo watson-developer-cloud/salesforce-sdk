@@ -70,7 +70,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createEnvironmentOptions.size() != null) {
       contentJson.put('size', createEnvironmentOptions.size());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Environment) createServiceCall(builder.build(), IBMDiscoveryV1Models.Environment.class);
   }
@@ -159,7 +159,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateEnvironmentOptions.description() != null) {
       contentJson.put('description', updateEnvironmentOptions.description());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Environment) createServiceCall(builder.build(), IBMDiscoveryV1Models.Environment.class);
   }
@@ -192,7 +192,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createConfigurationOptions.normalizations() != null) {
       contentJson.put('normalizations', createConfigurationOptions.normalizations());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Configuration) createServiceCall(builder.build(), IBMDiscoveryV1Models.Configuration.class);
   }
@@ -274,7 +274,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateConfigurationOptions.normalizations() != null) {
       contentJson.put('normalizations', updateConfigurationOptions.normalizations());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Configuration) createServiceCall(builder.build(), IBMDiscoveryV1Models.Configuration.class);
   }
@@ -304,7 +304,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       multipartBuilder.addFormDataPart('configuration', testConfigurationInEnvironmentOptions.configuration());
     }
     if (testConfigurationInEnvironmentOptions.file() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(testConfigurationInEnvironmentOptions.file(), testConfigurationInEnvironmentOptions.fileContentType());
+      // for Discovery, we always want to use application/octet-stream
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(testConfigurationInEnvironmentOptions.file(), IBMWatsonHttpMediaType.APPLICATION_OCTET_STREAM);
       multipartBuilder.addFormDataPart('file', testConfigurationInEnvironmentOptions.filename(), fileBody);
     }
     if (testConfigurationInEnvironmentOptions.metadata() != null) {
@@ -337,7 +338,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createCollectionOptions.language() != null) {
       contentJson.put('language', createCollectionOptions.language());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Collection) createServiceCall(builder.build(), IBMDiscoveryV1Models.Collection.class);
   }
@@ -425,7 +426,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateCollectionOptions.configurationId() != null) {
       contentJson.put('configuration_id', updateCollectionOptions.configurationId());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Collection) createServiceCall(builder.build(), IBMDiscoveryV1Models.Collection.class);
   }
@@ -446,7 +447,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (addDocumentOptions.file() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(addDocumentOptions.file(), addDocumentOptions.fileContentType());
+      // for Discovery, we always want to use application/octet-stream
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(addDocumentOptions.file(), IBMWatsonHttpMediaType.APPLICATION_OCTET_STREAM);
       multipartBuilder.addFormDataPart('file', addDocumentOptions.filename(), fileBody);
     }
     if (addDocumentOptions.metadata() != null) {
@@ -506,7 +508,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (updateDocumentOptions.file() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateDocumentOptions.file(), updateDocumentOptions.fileContentType());
+      // for Discovery, we always want to use application/octet-stream
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateDocumentOptions.file(), IBMWatsonHttpMediaType.APPLICATION_OCTET_STREAM);
       multipartBuilder.addFormDataPart('file', updateDocumentOptions.filename(), fileBody);
     }
     if (updateDocumentOptions.metadata() != null) {
@@ -758,7 +761,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (addTrainingDataOptions.examples() != null) {
       contentJson.put('examples', addTrainingDataOptions.examples());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.TrainingQuery) createServiceCall(builder.build(), IBMDiscoveryV1Models.TrainingQuery.class);
   }
@@ -783,7 +786,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (createTrainingExampleOptions.relevance() != null) {
       contentJson.put('relevance', createTrainingExampleOptions.relevance());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), IBMDiscoveryV1Models.TrainingExample.class);
   }
@@ -889,7 +892,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (updateTrainingExampleOptions.relevance() != null) {
       contentJson.put('relevance', updateTrainingExampleOptions.relevance());
     }
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), IBMDiscoveryV1Models.TrainingExample.class);
   }

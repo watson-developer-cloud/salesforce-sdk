@@ -16,7 +16,7 @@ public abstract class IBMWatsonService {
   private static final String BASIC = 'Basic ';
   private static final String VERSION = 'version';
   private static final String USER_AGENT_FORMAT = 'watson-apis-salesforce-sdk/{0}/({1})';
-  private static final String SDK_VERSION = '0.1.1';
+  private static final String SDK_VERSION = '0.2.0';
 
   /**
    * Instantiates a new Watson service.
@@ -42,7 +42,7 @@ public abstract class IBMWatsonService {
   protected Object processResponse(IBMWatsonResponse response, Type targetType) {
     String responseText = response.getBody();
     if (String.isNotBlank(responseText) && (targetType != null)) {
-      String jsonString = IBMWatsonJSONUtil.addReservedWordSuffix(responseText);
+      String jsonString = IBMWatsonJSONUtil.prepareResponseString(responseText);
       Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
       Object targetObject = targetType.newInstance();
 
@@ -153,7 +153,7 @@ public abstract class IBMWatsonService {
    *
    * @param builder the new authentication
    */
-  protected void setAuthentication(IBMWatsonRequest.Builder builder) {
+  protected virtual void setAuthentication(IBMWatsonRequest.Builder builder) {
     if (getApiKey() == null) {
       if (skipAuthentication) {
         return; // chosen to skip authentication with the service
@@ -213,7 +213,7 @@ public abstract class IBMWatsonService {
    *
    * @return the apiKey
    */
-  private String getApiKey() {
+  protected String getApiKey() {
     return apiKey;
   }
 }

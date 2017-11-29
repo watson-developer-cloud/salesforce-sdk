@@ -43,7 +43,7 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/classifiers/{0}/classify', new String[]{ classifyOptions.classifierId() }));
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', classifyOptions.text());
-    builder.bodyJson(JSON.serialize(contentJson));
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMNaturalLanguageClassifierV1Models.Classification) createServiceCall(builder.build(), IBMNaturalLanguageClassifierV1Models.Classification.class);
   }
@@ -61,11 +61,10 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/classifiers');
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    IBMWatsonRequestBody fileBody;
-    fileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingMetadata(), 'application/json');
-    multipartBuilder.addFormDataPart('training_metadata', createClassifierOptions.trainingMetadataFilename(), fileBody);
-    fileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingData(), 'text/csv');
-    multipartBuilder.addFormDataPart('training_data', createClassifierOptions.trainingDataFilename(), fileBody);
+    IBMWatsonRequestBody metadataFileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingMetadata(), 'application/json');
+    multipartBuilder.addFormDataPart('training_metadata', createClassifierOptions.trainingMetadataFilename(), metadataFileBody);
+    IBMWatsonRequestBody dataFileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingData(), 'text/csv');
+    multipartBuilder.addFormDataPart('training_data', createClassifierOptions.trainingDataFilename(), dataFileBody);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 

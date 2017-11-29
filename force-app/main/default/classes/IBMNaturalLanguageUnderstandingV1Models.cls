@@ -163,118 +163,118 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the language_serialized_name.
      *
-     * @param language_serialized_name the new language_serialized_name
+     * @param language the new language
      */
-    public void setLanguage(final String language_serialized_name) {
-      this.language_serialized_name = language_serialized_name;
+    public void setLanguage(final String language) {
+      this.language_serialized_name = language;
     }
 
     /**
      * Sets the analyzed_text_serialized_name.
      *
-     * @param analyzed_text_serialized_name the new analyzed_text_serialized_name
+     * @param analyzedText the new analyzedText
      */
-    public void setAnalyzedText(final String analyzed_text_serialized_name) {
-      this.analyzed_text_serialized_name = analyzed_text_serialized_name;
+    public void setAnalyzedText(final String analyzedText) {
+      this.analyzed_text_serialized_name = analyzedText;
     }
 
     /**
      * Sets the retrieved_url_serialized_name.
      *
-     * @param retrieved_url_serialized_name the new retrieved_url_serialized_name
+     * @param retrievedUrl the new retrievedUrl
      */
-    public void setRetrievedUrl(final String retrieved_url_serialized_name) {
-      this.retrieved_url_serialized_name = retrieved_url_serialized_name;
+    public void setRetrievedUrl(final String retrievedUrl) {
+      this.retrieved_url_serialized_name = retrievedUrl;
     }
 
     /**
      * Sets the usage_serialized_name.
      *
-     * @param usage_serialized_name the new usage_serialized_name
+     * @param usage the new usage
      */
-    public void setUsage(final Usage usage_serialized_name) {
-      this.usage_serialized_name = usage_serialized_name;
+    public void setUsage(final Usage usage) {
+      this.usage_serialized_name = usage;
     }
 
     /**
      * Sets the concepts_serialized_name.
      *
-     * @param concepts_serialized_name the new concepts_serialized_name
+     * @param concepts the new concepts
      */
-    public void setConcepts(final List<ConceptsResult> concepts_serialized_name) {
-      this.concepts_serialized_name = concepts_serialized_name;
+    public void setConcepts(final List<ConceptsResult> concepts) {
+      this.concepts_serialized_name = concepts;
     }
 
     /**
      * Sets the entities_serialized_name.
      *
-     * @param entities_serialized_name the new entities_serialized_name
+     * @param entities the new entities
      */
-    public void setEntities(final List<EntitiesResult> entities_serialized_name) {
-      this.entities_serialized_name = entities_serialized_name;
+    public void setEntities(final List<EntitiesResult> entities) {
+      this.entities_serialized_name = entities;
     }
 
     /**
      * Sets the keywords_serialized_name.
      *
-     * @param keywords_serialized_name the new keywords_serialized_name
+     * @param keywords the new keywords
      */
-    public void setKeywords(final List<KeywordsResult> keywords_serialized_name) {
-      this.keywords_serialized_name = keywords_serialized_name;
+    public void setKeywords(final List<KeywordsResult> keywords) {
+      this.keywords_serialized_name = keywords;
     }
 
     /**
      * Sets the categories_serialized_name.
      *
-     * @param categories_serialized_name the new categories_serialized_name
+     * @param categories the new categories
      */
-    public void setCategories(final List<CategoriesResult> categories_serialized_name) {
-      this.categories_serialized_name = categories_serialized_name;
+    public void setCategories(final List<CategoriesResult> categories) {
+      this.categories_serialized_name = categories;
     }
 
     /**
      * Sets the emotion_serialized_name.
      *
-     * @param emotion_serialized_name the new emotion_serialized_name
+     * @param emotion the new emotion
      */
-    public void setEmotion(final EmotionResult emotion_serialized_name) {
-      this.emotion_serialized_name = emotion_serialized_name;
+    public void setEmotion(final EmotionResult emotion) {
+      this.emotion_serialized_name = emotion;
     }
 
     /**
      * Sets the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the new metadata_serialized_name
+     * @param metadata the new metadata
      */
-    public void setMetadata(final MetadataResult metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public void setMetadata(final MetadataResult metadata) {
+      this.metadata_serialized_name = metadata;
     }
 
     /**
      * Sets the relations_serialized_name.
      *
-     * @param relations_serialized_name the new relations_serialized_name
+     * @param relations the new relations
      */
-    public void setRelations(final List<RelationsResult> relations_serialized_name) {
-      this.relations_serialized_name = relations_serialized_name;
+    public void setRelations(final List<RelationsResult> relations) {
+      this.relations_serialized_name = relations;
     }
 
     /**
      * Sets the semantic_roles_serialized_name.
      *
-     * @param semantic_roles_serialized_name the new semantic_roles_serialized_name
+     * @param semanticRoles the new semanticRoles
      */
-    public void setSemanticRoles(final List<SemanticRolesResult> semantic_roles_serialized_name) {
-      this.semantic_roles_serialized_name = semantic_roles_serialized_name;
+    public void setSemanticRoles(final List<SemanticRolesResult> semanticRoles) {
+      this.semantic_roles_serialized_name = semanticRoles;
     }
 
     /**
      * Sets the sentiment_serialized_name.
      *
-     * @param sentiment_serialized_name the new sentiment_serialized_name
+     * @param sentiment the new sentiment
      */
-    public void setSentiment(final SentimentResult sentiment_serialized_name) {
-      this.sentiment_serialized_name = sentiment_serialized_name;
+    public void setSentiment(final SentimentResult sentiment) {
+      this.sentiment_serialized_name = sentiment;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -536,17 +536,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String language_serialized_name;
     private Long limit_text_characters_serialized_name;
 
-    private AnalyzeOptionsBuilder(AnalyzeOptions analyze_options) {
-      text_serialized_name = analyze_options.text_serialized_name;
-      html_serialized_name = analyze_options.html_serialized_name;
-      url_serialized_name = analyze_options.url_serialized_name;
-      features_serialized_name = analyze_options.features_serialized_name;
-      clean_serialized_name = analyze_options.clean_serialized_name;
-      xpath_serialized_name = analyze_options.xpath_serialized_name;
-      fallback_to_raw_serialized_name = analyze_options.fallback_to_raw_serialized_name;
-      return_analyzed_text_serialized_name = analyze_options.return_analyzed_text_serialized_name;
-      language_serialized_name = analyze_options.language_serialized_name;
-      limit_text_characters_serialized_name = analyze_options.limit_text_characters_serialized_name;
+    private AnalyzeOptionsBuilder(AnalyzeOptions analyzeOptions) {
+      text_serialized_name = analyzeOptions.text_serialized_name;
+      html_serialized_name = analyzeOptions.html_serialized_name;
+      url_serialized_name = analyzeOptions.url_serialized_name;
+      features_serialized_name = analyzeOptions.features_serialized_name;
+      clean_serialized_name = analyzeOptions.clean_serialized_name;
+      xpath_serialized_name = analyzeOptions.xpath_serialized_name;
+      fallback_to_raw_serialized_name = analyzeOptions.fallback_to_raw_serialized_name;
+      return_analyzed_text_serialized_name = analyzeOptions.return_analyzed_text_serialized_name;
+      language_serialized_name = analyzeOptions.language_serialized_name;
+      limit_text_characters_serialized_name = analyzeOptions.limit_text_characters_serialized_name;
     }
 
     /**
@@ -558,16 +558,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param features_serialized_name the features_serialized_name
+     * @param features the features
      */
-    public AnalyzeOptionsBuilder(Features features_serialized_name) {
-      this.features_serialized_name = features_serialized_name;
+    public AnalyzeOptionsBuilder(Features features) {
+      this.features_serialized_name = features;
     }
 
     /**
      * Builds a AnalyzeOptions.
      *
-     * @return the analyze_options
+     * @return the analyzeOptions
      */
     public AnalyzeOptions build() {
       return new AnalyzeOptions(this);
@@ -576,110 +576,110 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Set the text_serialized_name.
      *
-     * @param text_serialized_name the text_serialized_name
+     * @param text the text
      * @return the AnalyzeOptions builder
      */
-    public AnalyzeOptionsBuilder text(String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public AnalyzeOptionsBuilder text(String text) {
+      this.text_serialized_name = text;
       return this;
     }
 
     /**
      * Set the html_serialized_name.
      *
-     * @param html_serialized_name the html_serialized_name
+     * @param html the html
      * @return the AnalyzeOptions builder
      */
-    public AnalyzeOptionsBuilder html(String html_serialized_name) {
-      this.html_serialized_name = html_serialized_name;
+    public AnalyzeOptionsBuilder html(String html) {
+      this.html_serialized_name = html;
       return this;
     }
 
     /**
      * Set the url_serialized_name.
      *
-     * @param url_serialized_name the url_serialized_name
+     * @param url the url
      * @return the AnalyzeOptions builder
      */
-    public AnalyzeOptionsBuilder url(String url_serialized_name) {
-      this.url_serialized_name = url_serialized_name;
+    public AnalyzeOptionsBuilder url(String url) {
+      this.url_serialized_name = url;
       return this;
     }
 
     /**
      * Set the features_serialized_name.
      *
-     * @param features_serialized_name the features_serialized_name
+     * @param features the features
      * @return the AnalyzeOptions builder
      */
-    public AnalyzeOptionsBuilder features(Features features_serialized_name) {
-      this.features_serialized_name = features_serialized_name;
+    public AnalyzeOptionsBuilder features(Features features) {
+      this.features_serialized_name = features;
       return this;
     }
 
     /**
      * Set the clean_serialized_name.
      *
-     * @param clean_serialized_name the clean_serialized_name
+     * @param clean the clean
      * @return the AnalyzeOptions builder
      */
-    public AnalyzeOptionsBuilder clean(Boolean clean_serialized_name) {
-      this.clean_serialized_name = clean_serialized_name;
+    public AnalyzeOptionsBuilder clean(Boolean clean) {
+      this.clean_serialized_name = clean;
       return this;
     }
 
     /**
      * Set the xpath_serialized_name.
      *
-     * @param xpath_serialized_name the xpath_serialized_name
+     * @param xpath the xpath
      * @return the AnalyzeOptions builder
      */
-    public AnalyzeOptionsBuilder xpath(String xpath_serialized_name) {
-      this.xpath_serialized_name = xpath_serialized_name;
+    public AnalyzeOptionsBuilder xpath(String xpath) {
+      this.xpath_serialized_name = xpath;
       return this;
     }
 
     /**
      * Set the fallback_to_raw_serialized_name.
      *
-     * @param fallback_to_raw_serialized_name the fallback_to_raw_serialized_name
+     * @param fallbackToRaw the fallbackToRaw
      * @return the AnalyzeOptions builder
      */
-    public AnalyzeOptionsBuilder fallbackToRaw(Boolean fallback_to_raw_serialized_name) {
-      this.fallback_to_raw_serialized_name = fallback_to_raw_serialized_name;
+    public AnalyzeOptionsBuilder fallbackToRaw(Boolean fallbackToRaw) {
+      this.fallback_to_raw_serialized_name = fallbackToRaw;
       return this;
     }
 
     /**
      * Set the return_analyzed_text_serialized_name.
      *
-     * @param return_analyzed_text_serialized_name the return_analyzed_text_serialized_name
+     * @param returnAnalyzedText the returnAnalyzedText
      * @return the AnalyzeOptions builder
      */
-    public AnalyzeOptionsBuilder returnAnalyzedText(Boolean return_analyzed_text_serialized_name) {
-      this.return_analyzed_text_serialized_name = return_analyzed_text_serialized_name;
+    public AnalyzeOptionsBuilder returnAnalyzedText(Boolean returnAnalyzedText) {
+      this.return_analyzed_text_serialized_name = returnAnalyzedText;
       return this;
     }
 
     /**
      * Set the language_serialized_name.
      *
-     * @param language_serialized_name the language_serialized_name
+     * @param language the language
      * @return the AnalyzeOptions builder
      */
-    public AnalyzeOptionsBuilder language(String language_serialized_name) {
-      this.language_serialized_name = language_serialized_name;
+    public AnalyzeOptionsBuilder language(String language) {
+      this.language_serialized_name = language;
       return this;
     }
 
     /**
      * Set the limit_text_characters_serialized_name.
      *
-     * @param limit_text_characters_serialized_name the limit_text_characters_serialized_name
+     * @param limitTextCharacters the limitTextCharacters
      * @return the AnalyzeOptions builder
      */
-    public AnalyzeOptionsBuilder limitTextCharacters(Long limit_text_characters_serialized_name) {
-      this.limit_text_characters_serialized_name = limit_text_characters_serialized_name;
+    public AnalyzeOptionsBuilder limitTextCharacters(Long limitTextCharacters) {
+      this.limit_text_characters_serialized_name = limitTextCharacters;
       return this;
     }
   }
@@ -704,10 +704,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -725,6 +725,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * The hierarchical 5-level taxonomy the content is categorized into.
    */
   public class CategoriesOptions extends IBMWatsonDynamicModel {
+    private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * Gets the dynamic properties attached to CategoriesOptions.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
+    }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
@@ -777,19 +788,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the label_serialized_name.
      *
-     * @param label_serialized_name the new label_serialized_name
+     * @param label the new label
      */
-    public void setLabel(final String label_serialized_name) {
-      this.label_serialized_name = label_serialized_name;
+    public void setLabel(final String label) {
+      this.label_serialized_name = label;
     }
 
     /**
      * Sets the score_serialized_name.
      *
-     * @param score_serialized_name the new score_serialized_name
+     * @param score the new score
      */
-    public void setScore(final Double score_serialized_name) {
-      this.score_serialized_name = score_serialized_name;
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -839,8 +850,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class ConceptsOptionsBuilder {
     private Long limit_serialized_name;
 
-    private ConceptsOptionsBuilder(ConceptsOptions concepts_options) {
-      limit_serialized_name = concepts_options.limit_serialized_name;
+    private ConceptsOptionsBuilder(ConceptsOptions conceptsOptions) {
+      limit_serialized_name = conceptsOptions.limit_serialized_name;
     }
 
     /**
@@ -852,7 +863,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Builds a ConceptsOptions.
      *
-     * @return the concepts_options
+     * @return the conceptsOptions
      */
     public ConceptsOptions build() {
       return new ConceptsOptions(this);
@@ -861,11 +872,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Set the limit_serialized_name.
      *
-     * @param limit_serialized_name the limit_serialized_name
+     * @param limitVar the limitVar
      * @return the ConceptsOptions builder
      */
-    public ConceptsOptionsBuilder limitField(Long limit_serialized_name) {
-      this.limit_serialized_name = limit_serialized_name;
+    public ConceptsOptionsBuilder limitField(Long limitVar) {
+      this.limit_serialized_name = limitVar;
       return this;
     }
   }
@@ -914,28 +925,28 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Sets the relevance_serialized_name.
      *
-     * @param relevance_serialized_name the new relevance_serialized_name
+     * @param relevance the new relevance
      */
-    public void setRelevance(final Double relevance_serialized_name) {
-      this.relevance_serialized_name = relevance_serialized_name;
+    public void setRelevance(final Double relevance) {
+      this.relevance_serialized_name = relevance;
     }
 
     /**
      * Sets the dbpedia_resource_serialized_name.
      *
-     * @param dbpedia_resource_serialized_name the new dbpedia_resource_serialized_name
+     * @param dbpediaResource the new dbpediaResource
      */
-    public void setDbpediaResource(final String dbpedia_resource_serialized_name) {
-      this.dbpedia_resource_serialized_name = dbpedia_resource_serialized_name;
+    public void setDbpediaResource(final String dbpediaResource) {
+      this.dbpedia_resource_serialized_name = dbpediaResource;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -986,8 +997,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class DeleteModelOptionsBuilder {
     private String model_id_serialized_name;
 
-    private DeleteModelOptionsBuilder(DeleteModelOptions delete_model_options) {
-      model_id_serialized_name = delete_model_options.model_id_serialized_name;
+    private DeleteModelOptionsBuilder(DeleteModelOptions deleteModelOptions) {
+      model_id_serialized_name = deleteModelOptions.model_id_serialized_name;
     }
 
     /**
@@ -999,16 +1010,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param model_id_serialized_name the model_id_serialized_name
+     * @param modelId the modelId
      */
-    public DeleteModelOptionsBuilder(String model_id_serialized_name) {
-      this.model_id_serialized_name = model_id_serialized_name;
+    public DeleteModelOptionsBuilder(String modelId) {
+      this.model_id_serialized_name = modelId;
     }
 
     /**
      * Builds a DeleteModelOptions.
      *
-     * @return the delete_model_options
+     * @return the deleteModelOptions
      */
     public DeleteModelOptions build() {
       return new DeleteModelOptions(this);
@@ -1017,11 +1028,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Set the model_id_serialized_name.
      *
-     * @param model_id_serialized_name the model_id_serialized_name
+     * @param modelId the modelId
      * @return the DeleteModelOptions builder
      */
-    public DeleteModelOptionsBuilder modelId(String model_id_serialized_name) {
-      this.model_id_serialized_name = model_id_serialized_name;
+    public DeleteModelOptionsBuilder modelId(String modelId) {
+      this.model_id_serialized_name = modelId;
       return this;
     }
   }
@@ -1070,28 +1081,28 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the name_serialized_name.
      *
-     * @param name_serialized_name the new name_serialized_name
+     * @param name the new name
      */
-    public void setName(final String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public void setName(final String name) {
+      this.name_serialized_name = name;
     }
 
     /**
      * Sets the dbpedia_resource_serialized_name.
      *
-     * @param dbpedia_resource_serialized_name the new dbpedia_resource_serialized_name
+     * @param dbpediaResource the new dbpediaResource
      */
-    public void setDbpediaResource(final String dbpedia_resource_serialized_name) {
-      this.dbpedia_resource_serialized_name = dbpedia_resource_serialized_name;
+    public void setDbpediaResource(final String dbpediaResource) {
+      this.dbpedia_resource_serialized_name = dbpediaResource;
     }
 
     /**
      * Sets the subtype_serialized_name.
      *
-     * @param subtype_serialized_name the new subtype_serialized_name
+     * @param subtype the new subtype
      */
-    public void setSubtype(final List<String> subtype_serialized_name) {
-      this.subtype_serialized_name = subtype_serialized_name;
+    public void setSubtype(final List<String> subtype) {
+      this.subtype_serialized_name = subtype;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1125,10 +1136,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the emotion_serialized_name.
      *
-     * @param emotion_serialized_name the new emotion_serialized_name
+     * @param emotion the new emotion
      */
-    public void setEmotion(final EmotionScores emotion_serialized_name) {
-      this.emotion_serialized_name = emotion_serialized_name;
+    public void setEmotion(final EmotionScores emotion) {
+      this.emotion_serialized_name = emotion;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1178,19 +1189,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the label_serialized_name.
      *
-     * @param label_serialized_name the new label_serialized_name
+     * @param label the new label
      */
-    public void setLabel(final String label_serialized_name) {
-      this.label_serialized_name = label_serialized_name;
+    public void setLabel(final String label) {
+      this.label_serialized_name = label;
     }
 
     /**
      * Sets the score_serialized_name.
      *
-     * @param score_serialized_name the new score_serialized_name
+     * @param score the new score
      */
-    public void setScore(final Double score_serialized_name) {
-      this.score_serialized_name = score_serialized_name;
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1253,9 +1264,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Boolean document_serialized_name;
     private List<String> targets_serialized_name;
 
-    private EmotionOptionsBuilder(EmotionOptions emotion_options) {
-      document_serialized_name = emotion_options.document_serialized_name;
-      targets_serialized_name = emotion_options.targets_serialized_name;
+    private EmotionOptionsBuilder(EmotionOptions emotionOptions) {
+      document_serialized_name = emotionOptions.document_serialized_name;
+      targets_serialized_name = emotionOptions.targets_serialized_name;
     }
 
     /**
@@ -1267,35 +1278,35 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Builds a EmotionOptions.
      *
-     * @return the emotion_options
+     * @return the emotionOptions
      */
     public EmotionOptions build() {
       return new EmotionOptions(this);
     }
 
     /**
-     * Adds an targets_serialized_name to targets_serialized_name.
+     * Adds an targets to targets_serialized_name.
      *
-     * @param targets_serialized_name the new targets_serialized_name
+     * @param targets the new targets
      * @return the EmotionOptions builder
      */
-    public EmotionOptionsBuilder addTargets(String targets_serialized_name) {
-      IBMWatsonValidator.notNull(targets_serialized_name, 'targets_serialized_name cannot be null');
+    public EmotionOptionsBuilder addTargets(String targets) {
+      IBMWatsonValidator.notNull(targets, 'targets cannot be null');
       if (this.targets_serialized_name == null) {
         this.targets_serialized_name = new List<String>();
       }
-      this.targets_serialized_name.add(targets_serialized_name);
+      this.targets_serialized_name.add(targets);
       return this;
     }
 
     /**
      * Set the document_serialized_name.
      *
-     * @param document_serialized_name the document_serialized_name
+     * @param document the document
      * @return the EmotionOptions builder
      */
-    public EmotionOptionsBuilder document(Boolean document_serialized_name) {
-      this.document_serialized_name = document_serialized_name;
+    public EmotionOptionsBuilder document(Boolean document) {
+      this.document_serialized_name = document;
       return this;
     }
 
@@ -1303,11 +1314,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Set the targets_serialized_name.
      * Existing targets_serialized_name will be replaced.
      *
-     * @param targets_serialized_name the targets_serialized_name
+     * @param targets the targets
      * @return the EmotionOptions builder
      */
-    public EmotionOptionsBuilder targets(List<String> targets_serialized_name) {
-      this.targets_serialized_name = targets_serialized_name;
+    public EmotionOptionsBuilder targets(List<String> targets) {
+      this.targets_serialized_name = targets;
       return this;
     }
   }
@@ -1344,19 +1355,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the document_serialized_name.
      *
-     * @param document_serialized_name the new document_serialized_name
+     * @param document the new document
      */
-    public void setDocument(final DocumentEmotionResults document_serialized_name) {
-      this.document_serialized_name = document_serialized_name;
+    public void setDocument(final DocumentEmotionResults document) {
+      this.document_serialized_name = document;
     }
 
     /**
      * Sets the targets_serialized_name.
      *
-     * @param targets_serialized_name the new targets_serialized_name
+     * @param targets the new targets
      */
-    public void setTargets(final List<TargetedEmotionResults> targets_serialized_name) {
-      this.targets_serialized_name = targets_serialized_name;
+    public void setTargets(final List<TargetedEmotionResults> targets) {
+      this.targets_serialized_name = targets;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1455,46 +1466,46 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the anger_serialized_name.
      *
-     * @param anger_serialized_name the new anger_serialized_name
+     * @param anger the new anger
      */
-    public void setAnger(final Double anger_serialized_name) {
-      this.anger_serialized_name = anger_serialized_name;
+    public void setAnger(final Double anger) {
+      this.anger_serialized_name = anger;
     }
 
     /**
      * Sets the disgust_serialized_name.
      *
-     * @param disgust_serialized_name the new disgust_serialized_name
+     * @param disgust the new disgust
      */
-    public void setDisgust(final Double disgust_serialized_name) {
-      this.disgust_serialized_name = disgust_serialized_name;
+    public void setDisgust(final Double disgust) {
+      this.disgust_serialized_name = disgust;
     }
 
     /**
      * Sets the fear_serialized_name.
      *
-     * @param fear_serialized_name the new fear_serialized_name
+     * @param fear the new fear
      */
-    public void setFear(final Double fear_serialized_name) {
-      this.fear_serialized_name = fear_serialized_name;
+    public void setFear(final Double fear) {
+      this.fear_serialized_name = fear;
     }
 
     /**
      * Sets the joy_serialized_name.
      *
-     * @param joy_serialized_name the new joy_serialized_name
+     * @param joy the new joy
      */
-    public void setJoy(final Double joy_serialized_name) {
-      this.joy_serialized_name = joy_serialized_name;
+    public void setJoy(final Double joy) {
+      this.joy_serialized_name = joy;
     }
 
     /**
      * Sets the sadness_serialized_name.
      *
-     * @param sadness_serialized_name the new sadness_serialized_name
+     * @param sadness the new sadness
      */
-    public void setSadness(final Double sadness_serialized_name) {
-      this.sadness_serialized_name = sadness_serialized_name;
+    public void setSadness(final Double sadness) {
+      this.sadness_serialized_name = sadness;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1583,11 +1594,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Boolean sentiment_serialized_name;
     private Boolean emotion_serialized_name;
 
-    private EntitiesOptionsBuilder(EntitiesOptions entities_options) {
-      limit_serialized_name = entities_options.limit_serialized_name;
-      model_serialized_name = entities_options.model_serialized_name;
-      sentiment_serialized_name = entities_options.sentiment_serialized_name;
-      emotion_serialized_name = entities_options.emotion_serialized_name;
+    private EntitiesOptionsBuilder(EntitiesOptions entitiesOptions) {
+      limit_serialized_name = entitiesOptions.limit_serialized_name;
+      model_serialized_name = entitiesOptions.model_serialized_name;
+      sentiment_serialized_name = entitiesOptions.sentiment_serialized_name;
+      emotion_serialized_name = entitiesOptions.emotion_serialized_name;
     }
 
     /**
@@ -1599,7 +1610,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Builds a EntitiesOptions.
      *
-     * @return the entities_options
+     * @return the entitiesOptions
      */
     public EntitiesOptions build() {
       return new EntitiesOptions(this);
@@ -1608,44 +1619,44 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Set the limit_serialized_name.
      *
-     * @param limit_serialized_name the limit_serialized_name
+     * @param limitVar the limitVar
      * @return the EntitiesOptions builder
      */
-    public EntitiesOptionsBuilder limitField(Long limit_serialized_name) {
-      this.limit_serialized_name = limit_serialized_name;
+    public EntitiesOptionsBuilder limitField(Long limitVar) {
+      this.limit_serialized_name = limitVar;
       return this;
     }
 
     /**
      * Set the model_serialized_name.
      *
-     * @param model_serialized_name the model_serialized_name
+     * @param model the model
      * @return the EntitiesOptions builder
      */
-    public EntitiesOptionsBuilder model(String model_serialized_name) {
-      this.model_serialized_name = model_serialized_name;
+    public EntitiesOptionsBuilder model(String model) {
+      this.model_serialized_name = model;
       return this;
     }
 
     /**
      * Set the sentiment_serialized_name.
      *
-     * @param sentiment_serialized_name the sentiment_serialized_name
+     * @param sentiment the sentiment
      * @return the EntitiesOptions builder
      */
-    public EntitiesOptionsBuilder sentiment(Boolean sentiment_serialized_name) {
-      this.sentiment_serialized_name = sentiment_serialized_name;
+    public EntitiesOptionsBuilder sentiment(Boolean sentiment) {
+      this.sentiment_serialized_name = sentiment;
       return this;
     }
 
     /**
      * Set the emotion_serialized_name.
      *
-     * @param emotion_serialized_name the emotion_serialized_name
+     * @param emotion the emotion
      * @return the EntitiesOptions builder
      */
-    public EntitiesOptionsBuilder emotion(Boolean emotion_serialized_name) {
-      this.emotion_serialized_name = emotion_serialized_name;
+    public EntitiesOptionsBuilder emotion(Boolean emotion) {
+      this.emotion_serialized_name = emotion;
       return this;
     }
   }
@@ -1742,64 +1753,64 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the type_serialized_name.
      *
-     * @param type_serialized_name the new type_serialized_name
+     * @param typeVar the new typeVar
      */
-    public void setType(final String type_serialized_name) {
-      this.type_serialized_name = type_serialized_name;
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
     }
 
     /**
      * Sets the relevance_serialized_name.
      *
-     * @param relevance_serialized_name the new relevance_serialized_name
+     * @param relevance the new relevance
      */
-    public void setRelevance(final Double relevance_serialized_name) {
-      this.relevance_serialized_name = relevance_serialized_name;
+    public void setRelevance(final Double relevance) {
+      this.relevance_serialized_name = relevance;
     }
 
     /**
      * Sets the count_serialized_name.
      *
-     * @param count_serialized_name the new count_serialized_name
+     * @param count the new count
      */
-    public void setCount(final long count_serialized_name) {
-      this.count_serialized_name = count_serialized_name;
+    public void setCount(final long count) {
+      this.count_serialized_name = count;
     }
 
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Sets the emotion_serialized_name.
      *
-     * @param emotion_serialized_name the new emotion_serialized_name
+     * @param emotion the new emotion
      */
-    public void setEmotion(final EmotionScores emotion_serialized_name) {
-      this.emotion_serialized_name = emotion_serialized_name;
+    public void setEmotion(final EmotionScores emotion) {
+      this.emotion_serialized_name = emotion;
     }
 
     /**
      * Sets the sentiment_serialized_name.
      *
-     * @param sentiment_serialized_name the new sentiment_serialized_name
+     * @param sentiment the new sentiment
      */
-    public void setSentiment(final FeatureSentimentResults sentiment_serialized_name) {
-      this.sentiment_serialized_name = sentiment_serialized_name;
+    public void setSentiment(final FeatureSentimentResults sentiment) {
+      this.sentiment_serialized_name = sentiment;
     }
 
     /**
      * Sets the disambiguation_serialized_name.
      *
-     * @param disambiguation_serialized_name the new disambiguation_serialized_name
+     * @param disambiguation the new disambiguation
      */
-    public void setDisambiguation(final DisambiguationResult disambiguation_serialized_name) {
-      this.disambiguation_serialized_name = disambiguation_serialized_name;
+    public void setDisambiguation(final DisambiguationResult disambiguation) {
+      this.disambiguation_serialized_name = disambiguation;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1845,10 +1856,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the score_serialized_name.
      *
-     * @param score_serialized_name the new score_serialized_name
+     * @param score the new score
      */
-    public void setScore(final Double score_serialized_name) {
-      this.score_serialized_name = score_serialized_name;
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2032,99 +2043,99 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Set the concepts_serialized_name.
      *
-     * @param concepts_serialized_name the concepts_serialized_name
+     * @param concepts the concepts
      * @return the Features builder
      */
-    public FeaturesBuilder concepts(ConceptsOptions concepts_serialized_name) {
-      this.concepts_serialized_name = concepts_serialized_name;
+    public FeaturesBuilder concepts(ConceptsOptions concepts) {
+      this.concepts_serialized_name = concepts;
       return this;
     }
 
     /**
      * Set the emotion_serialized_name.
      *
-     * @param emotion_serialized_name the emotion_serialized_name
+     * @param emotion the emotion
      * @return the Features builder
      */
-    public FeaturesBuilder emotion(EmotionOptions emotion_serialized_name) {
-      this.emotion_serialized_name = emotion_serialized_name;
+    public FeaturesBuilder emotion(EmotionOptions emotion) {
+      this.emotion_serialized_name = emotion;
       return this;
     }
 
     /**
      * Set the entities_serialized_name.
      *
-     * @param entities_serialized_name the entities_serialized_name
+     * @param entities the entities
      * @return the Features builder
      */
-    public FeaturesBuilder entities(EntitiesOptions entities_serialized_name) {
-      this.entities_serialized_name = entities_serialized_name;
+    public FeaturesBuilder entities(EntitiesOptions entities) {
+      this.entities_serialized_name = entities;
       return this;
     }
 
     /**
      * Set the keywords_serialized_name.
      *
-     * @param keywords_serialized_name the keywords_serialized_name
+     * @param keywords the keywords
      * @return the Features builder
      */
-    public FeaturesBuilder keywords(KeywordsOptions keywords_serialized_name) {
-      this.keywords_serialized_name = keywords_serialized_name;
+    public FeaturesBuilder keywords(KeywordsOptions keywords) {
+      this.keywords_serialized_name = keywords;
       return this;
     }
 
     /**
      * Set the metadata_serialized_name.
      *
-     * @param metadata_serialized_name the metadata_serialized_name
+     * @param metadata the metadata
      * @return the Features builder
      */
-    public FeaturesBuilder metadata(MetadataOptions metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public FeaturesBuilder metadata(MetadataOptions metadata) {
+      this.metadata_serialized_name = metadata;
       return this;
     }
 
     /**
      * Set the relations_serialized_name.
      *
-     * @param relations_serialized_name the relations_serialized_name
+     * @param relations the relations
      * @return the Features builder
      */
-    public FeaturesBuilder relations(RelationsOptions relations_serialized_name) {
-      this.relations_serialized_name = relations_serialized_name;
+    public FeaturesBuilder relations(RelationsOptions relations) {
+      this.relations_serialized_name = relations;
       return this;
     }
 
     /**
      * Set the semantic_roles_serialized_name.
      *
-     * @param semantic_roles_serialized_name the semantic_roles_serialized_name
+     * @param semanticRoles the semanticRoles
      * @return the Features builder
      */
-    public FeaturesBuilder semanticRoles(SemanticRolesOptions semantic_roles_serialized_name) {
-      this.semantic_roles_serialized_name = semantic_roles_serialized_name;
+    public FeaturesBuilder semanticRoles(SemanticRolesOptions semanticRoles) {
+      this.semantic_roles_serialized_name = semanticRoles;
       return this;
     }
 
     /**
      * Set the sentiment_serialized_name.
      *
-     * @param sentiment_serialized_name the sentiment_serialized_name
+     * @param sentiment the sentiment
      * @return the Features builder
      */
-    public FeaturesBuilder sentiment(SentimentOptions sentiment_serialized_name) {
-      this.sentiment_serialized_name = sentiment_serialized_name;
+    public FeaturesBuilder sentiment(SentimentOptions sentiment) {
+      this.sentiment_serialized_name = sentiment;
       return this;
     }
 
     /**
      * Set the categories_serialized_name.
      *
-     * @param categories_serialized_name the categories_serialized_name
+     * @param categories the categories
      * @return the Features builder
      */
-    public FeaturesBuilder categories(CategoriesOptions categories_serialized_name) {
-      this.categories_serialized_name = categories_serialized_name;
+    public FeaturesBuilder categories(CategoriesOptions categories) {
+      this.categories_serialized_name = categories;
       return this;
     }
   }
@@ -2191,10 +2202,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Boolean sentiment_serialized_name;
     private Boolean emotion_serialized_name;
 
-    private KeywordsOptionsBuilder(KeywordsOptions keywords_options) {
-      limit_serialized_name = keywords_options.limit_serialized_name;
-      sentiment_serialized_name = keywords_options.sentiment_serialized_name;
-      emotion_serialized_name = keywords_options.emotion_serialized_name;
+    private KeywordsOptionsBuilder(KeywordsOptions keywordsOptions) {
+      limit_serialized_name = keywordsOptions.limit_serialized_name;
+      sentiment_serialized_name = keywordsOptions.sentiment_serialized_name;
+      emotion_serialized_name = keywordsOptions.emotion_serialized_name;
     }
 
     /**
@@ -2206,7 +2217,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Builds a KeywordsOptions.
      *
-     * @return the keywords_options
+     * @return the keywordsOptions
      */
     public KeywordsOptions build() {
       return new KeywordsOptions(this);
@@ -2215,33 +2226,33 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Set the limit_serialized_name.
      *
-     * @param limit_serialized_name the limit_serialized_name
+     * @param limitVar the limitVar
      * @return the KeywordsOptions builder
      */
-    public KeywordsOptionsBuilder limitField(Long limit_serialized_name) {
-      this.limit_serialized_name = limit_serialized_name;
+    public KeywordsOptionsBuilder limitField(Long limitVar) {
+      this.limit_serialized_name = limitVar;
       return this;
     }
 
     /**
      * Set the sentiment_serialized_name.
      *
-     * @param sentiment_serialized_name the sentiment_serialized_name
+     * @param sentiment the sentiment
      * @return the KeywordsOptions builder
      */
-    public KeywordsOptionsBuilder sentiment(Boolean sentiment_serialized_name) {
-      this.sentiment_serialized_name = sentiment_serialized_name;
+    public KeywordsOptionsBuilder sentiment(Boolean sentiment) {
+      this.sentiment_serialized_name = sentiment;
       return this;
     }
 
     /**
      * Set the emotion_serialized_name.
      *
-     * @param emotion_serialized_name the emotion_serialized_name
+     * @param emotion the emotion
      * @return the KeywordsOptions builder
      */
-    public KeywordsOptionsBuilder emotion(Boolean emotion_serialized_name) {
-      this.emotion_serialized_name = emotion_serialized_name;
+    public KeywordsOptionsBuilder emotion(Boolean emotion) {
+      this.emotion_serialized_name = emotion;
       return this;
     }
   }
@@ -2302,37 +2313,37 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the relevance_serialized_name.
      *
-     * @param relevance_serialized_name the new relevance_serialized_name
+     * @param relevance the new relevance
      */
-    public void setRelevance(final Double relevance_serialized_name) {
-      this.relevance_serialized_name = relevance_serialized_name;
+    public void setRelevance(final Double relevance) {
+      this.relevance_serialized_name = relevance;
     }
 
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Sets the emotion_serialized_name.
      *
-     * @param emotion_serialized_name the new emotion_serialized_name
+     * @param emotion the new emotion
      */
-    public void setEmotion(final EmotionScores emotion_serialized_name) {
-      this.emotion_serialized_name = emotion_serialized_name;
+    public void setEmotion(final EmotionScores emotion) {
+      this.emotion_serialized_name = emotion;
     }
 
     /**
      * Sets the sentiment_serialized_name.
      *
-     * @param sentiment_serialized_name the new sentiment_serialized_name
+     * @param sentiment the new sentiment
      */
-    public void setSentiment(final FeatureSentimentResults sentiment_serialized_name) {
-      this.sentiment_serialized_name = sentiment_serialized_name;
+    public void setSentiment(final FeatureSentimentResults sentiment) {
+      this.sentiment_serialized_name = sentiment;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2377,7 +2388,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class ListModelsOptionsBuilder {
 
-    private ListModelsOptionsBuilder(ListModelsOptions list_models_options) {
+    private ListModelsOptionsBuilder(ListModelsOptions listModelsOptions) {
     }
 
     /**
@@ -2389,7 +2400,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Builds a ListModelsOptions.
      *
-     * @return the list_models_options
+     * @return the listModelsOptions
      */
     public ListModelsOptions build() {
       return new ListModelsOptions(this);
@@ -2414,10 +2425,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the models_serialized_name.
      *
-     * @param models_serialized_name the new models_serialized_name
+     * @param models the new models
      */
-    public void setModels(final List<Model> models_serialized_name) {
-      this.models_serialized_name = models_serialized_name;
+    public void setModels(final List<Model> models) {
+      this.models_serialized_name = models;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2448,6 +2459,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * The Authors, Publication Date, and Title of the document. Supports URL and HTML input types.
    */
   public class MetadataOptions extends IBMWatsonDynamicModel {
+    private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * Gets the dynamic properties attached to MetadataOptions.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
+    }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
@@ -2512,28 +2534,28 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the authors_serialized_name.
      *
-     * @param authors_serialized_name the new authors_serialized_name
+     * @param authors the new authors
      */
-    public void setAuthors(final List<Author> authors_serialized_name) {
-      this.authors_serialized_name = authors_serialized_name;
+    public void setAuthors(final List<Author> authors) {
+      this.authors_serialized_name = authors;
     }
 
     /**
      * Sets the publication_date_serialized_name.
      *
-     * @param publication_date_serialized_name the new publication_date_serialized_name
+     * @param publicationDate the new publicationDate
      */
-    public void setPublicationDate(final String publication_date_serialized_name) {
-      this.publication_date_serialized_name = publication_date_serialized_name;
+    public void setPublicationDate(final String publicationDate) {
+      this.publication_date_serialized_name = publicationDate;
     }
 
     /**
      * Sets the title_serialized_name.
      *
-     * @param title_serialized_name the new title_serialized_name
+     * @param title the new title
      */
-    public void setTitle(final String title_serialized_name) {
-      this.title_serialized_name = title_serialized_name;
+    public void setTitle(final String title) {
+      this.title_serialized_name = title;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2616,37 +2638,37 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the status_serialized_name.
      *
-     * @param status_serialized_name the new status_serialized_name
+     * @param status the new status
      */
-    public void setStatus(final String status_serialized_name) {
-      this.status_serialized_name = status_serialized_name;
+    public void setStatus(final String status) {
+      this.status_serialized_name = status;
     }
 
     /**
      * Sets the model_id_serialized_name.
      *
-     * @param model_id_serialized_name the new model_id_serialized_name
+     * @param modelId the new modelId
      */
-    public void setModelId(final String model_id_serialized_name) {
-      this.model_id_serialized_name = model_id_serialized_name;
+    public void setModelId(final String modelId) {
+      this.model_id_serialized_name = modelId;
     }
 
     /**
      * Sets the language_serialized_name.
      *
-     * @param language_serialized_name the new language_serialized_name
+     * @param language the new language
      */
-    public void setLanguage(final String language_serialized_name) {
-      this.language_serialized_name = language_serialized_name;
+    public void setLanguage(final String language) {
+      this.language_serialized_name = language;
     }
 
     /**
      * Sets the description_serialized_name.
      *
-     * @param description_serialized_name the new description_serialized_name
+     * @param description the new description
      */
-    public void setDescription(final String description_serialized_name) {
-      this.description_serialized_name = description_serialized_name;
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2690,19 +2712,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the entities_serialized_name.
      *
-     * @param entities_serialized_name the new entities_serialized_name
+     * @param entities the new entities
      */
-    public void setEntities(final List<RelationEntity> entities_serialized_name) {
-      this.entities_serialized_name = entities_serialized_name;
+    public void setEntities(final List<RelationEntity> entities) {
+      this.entities_serialized_name = entities;
     }
 
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2761,19 +2783,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Sets the type_serialized_name.
      *
-     * @param type_serialized_name the new type_serialized_name
+     * @param typeVar the new typeVar
      */
-    public void setType(final String type_serialized_name) {
-      this.type_serialized_name = type_serialized_name;
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2823,8 +2845,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class RelationsOptionsBuilder {
     private String model_serialized_name;
 
-    private RelationsOptionsBuilder(RelationsOptions relations_options) {
-      model_serialized_name = relations_options.model_serialized_name;
+    private RelationsOptionsBuilder(RelationsOptions relationsOptions) {
+      model_serialized_name = relationsOptions.model_serialized_name;
     }
 
     /**
@@ -2836,7 +2858,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Builds a RelationsOptions.
      *
-     * @return the relations_options
+     * @return the relationsOptions
      */
     public RelationsOptions build() {
       return new RelationsOptions(this);
@@ -2845,11 +2867,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Set the model_serialized_name.
      *
-     * @param model_serialized_name the model_serialized_name
+     * @param model the model
      * @return the RelationsOptions builder
      */
-    public RelationsOptionsBuilder model(String model_serialized_name) {
-      this.model_serialized_name = model_serialized_name;
+    public RelationsOptionsBuilder model(String model) {
+      this.model_serialized_name = model;
       return this;
     }
   }
@@ -2910,37 +2932,37 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the score_serialized_name.
      *
-     * @param score_serialized_name the new score_serialized_name
+     * @param score the new score
      */
-    public void setScore(final Double score_serialized_name) {
-      this.score_serialized_name = score_serialized_name;
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
     }
 
     /**
      * Sets the sentence_serialized_name.
      *
-     * @param sentence_serialized_name the new sentence_serialized_name
+     * @param sentence the new sentence
      */
-    public void setSentence(final String sentence_serialized_name) {
-      this.sentence_serialized_name = sentence_serialized_name;
+    public void setSentence(final String sentence) {
+      this.sentence_serialized_name = sentence;
     }
 
     /**
      * Sets the type_serialized_name.
      *
-     * @param type_serialized_name the new type_serialized_name
+     * @param typeVar the new typeVar
      */
-    public void setType(final String type_serialized_name) {
-      this.type_serialized_name = type_serialized_name;
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
     }
 
     /**
      * Sets the arguments_serialized_name.
      *
-     * @param arguments_serialized_name the new arguments_serialized_name
+     * @param arguments the new arguments
      */
-    public void setArguments(final List<RelationArgument> arguments_serialized_name) {
-      this.arguments_serialized_name = arguments_serialized_name;
+    public void setArguments(final List<RelationArgument> arguments) {
+      this.arguments_serialized_name = arguments;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3009,28 +3031,28 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Sets the normalized_serialized_name.
      *
-     * @param normalized_serialized_name the new normalized_serialized_name
+     * @param normalized the new normalized
      */
-    public void setNormalized(final String normalized_serialized_name) {
-      this.normalized_serialized_name = normalized_serialized_name;
+    public void setNormalized(final String normalized) {
+      this.normalized_serialized_name = normalized;
     }
 
     /**
      * Sets the verb_serialized_name.
      *
-     * @param verb_serialized_name the new verb_serialized_name
+     * @param verb the new verb
      */
-    public void setVerb(final SemanticRolesVerb verb_serialized_name) {
-      this.verb_serialized_name = verb_serialized_name;
+    public void setVerb(final SemanticRolesVerb verb) {
+      this.verb_serialized_name = verb;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3080,19 +3102,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the type_serialized_name.
      *
-     * @param type_serialized_name the new type_serialized_name
+     * @param typeVar the new typeVar
      */
-    public void setType(final String type_serialized_name) {
-      this.type_serialized_name = type_serialized_name;
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
     }
 
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3126,10 +3148,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3173,19 +3195,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Sets the keywords_serialized_name.
      *
-     * @param keywords_serialized_name the new keywords_serialized_name
+     * @param keywords the new keywords
      */
-    public void setKeywords(final List<SemanticRolesKeyword> keywords_serialized_name) {
-      this.keywords_serialized_name = keywords_serialized_name;
+    public void setKeywords(final List<SemanticRolesKeyword> keywords) {
+      this.keywords_serialized_name = keywords;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3274,10 +3296,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Boolean keywords_serialized_name;
     private Boolean entities_serialized_name;
 
-    private SemanticRolesOptionsBuilder(SemanticRolesOptions semantic_roles_options) {
-      limit_serialized_name = semantic_roles_options.limit_serialized_name;
-      keywords_serialized_name = semantic_roles_options.keywords_serialized_name;
-      entities_serialized_name = semantic_roles_options.entities_serialized_name;
+    private SemanticRolesOptionsBuilder(SemanticRolesOptions semanticRolesOptions) {
+      limit_serialized_name = semanticRolesOptions.limit_serialized_name;
+      keywords_serialized_name = semanticRolesOptions.keywords_serialized_name;
+      entities_serialized_name = semanticRolesOptions.entities_serialized_name;
     }
 
     /**
@@ -3289,7 +3311,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Builds a SemanticRolesOptions.
      *
-     * @return the semantic_roles_options
+     * @return the semanticRolesOptions
      */
     public SemanticRolesOptions build() {
       return new SemanticRolesOptions(this);
@@ -3298,33 +3320,33 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Set the limit_serialized_name.
      *
-     * @param limit_serialized_name the limit_serialized_name
+     * @param limitVar the limitVar
      * @return the SemanticRolesOptions builder
      */
-    public SemanticRolesOptionsBuilder limitField(Long limit_serialized_name) {
-      this.limit_serialized_name = limit_serialized_name;
+    public SemanticRolesOptionsBuilder limitField(Long limitVar) {
+      this.limit_serialized_name = limitVar;
       return this;
     }
 
     /**
      * Set the keywords_serialized_name.
      *
-     * @param keywords_serialized_name the keywords_serialized_name
+     * @param keywords the keywords
      * @return the SemanticRolesOptions builder
      */
-    public SemanticRolesOptionsBuilder keywords(Boolean keywords_serialized_name) {
-      this.keywords_serialized_name = keywords_serialized_name;
+    public SemanticRolesOptionsBuilder keywords(Boolean keywords) {
+      this.keywords_serialized_name = keywords;
       return this;
     }
 
     /**
      * Set the entities_serialized_name.
      *
-     * @param entities_serialized_name the entities_serialized_name
+     * @param entities the entities
      * @return the SemanticRolesOptions builder
      */
-    public SemanticRolesOptionsBuilder entities(Boolean entities_serialized_name) {
-      this.entities_serialized_name = entities_serialized_name;
+    public SemanticRolesOptionsBuilder entities(Boolean entities) {
+      this.entities_serialized_name = entities;
       return this;
     }
   }
@@ -3385,37 +3407,37 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the sentence_serialized_name.
      *
-     * @param sentence_serialized_name the new sentence_serialized_name
+     * @param sentence the new sentence
      */
-    public void setSentence(final String sentence_serialized_name) {
-      this.sentence_serialized_name = sentence_serialized_name;
+    public void setSentence(final String sentence) {
+      this.sentence_serialized_name = sentence;
     }
 
     /**
      * Sets the subject_serialized_name.
      *
-     * @param subject_serialized_name the new subject_serialized_name
+     * @param subject the new subject
      */
-    public void setSubject(final SemanticRolesSubject subject_serialized_name) {
-      this.subject_serialized_name = subject_serialized_name;
+    public void setSubject(final SemanticRolesSubject subject) {
+      this.subject_serialized_name = subject;
     }
 
     /**
      * Sets the action_serialized_name.
      *
-     * @param action_serialized_name the new action_serialized_name
+     * @param action the new action
      */
-    public void setAction(final SemanticRolesAction action_serialized_name) {
-      this.action_serialized_name = action_serialized_name;
+    public void setAction(final SemanticRolesAction action) {
+      this.action_serialized_name = action;
     }
 
     /**
      * Sets the object_serialized_name.
      *
-     * @param object_serialized_name the new object_serialized_name
+     * @param objectVar the new objectVar
      */
-    public void setObject(final SemanticRolesObject object_serialized_name) {
-      this.object_serialized_name = object_serialized_name;
+    public void setObject(final SemanticRolesObject objectVar) {
+      this.object_serialized_name = objectVar;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3481,28 +3503,28 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Sets the entities_serialized_name.
      *
-     * @param entities_serialized_name the new entities_serialized_name
+     * @param entities the new entities
      */
-    public void setEntities(final List<SemanticRolesEntity> entities_serialized_name) {
-      this.entities_serialized_name = entities_serialized_name;
+    public void setEntities(final List<SemanticRolesEntity> entities) {
+      this.entities_serialized_name = entities;
     }
 
     /**
      * Sets the keywords_serialized_name.
      *
-     * @param keywords_serialized_name the new keywords_serialized_name
+     * @param keywords the new keywords
      */
-    public void setKeywords(final List<SemanticRolesKeyword> keywords_serialized_name) {
-      this.keywords_serialized_name = keywords_serialized_name;
+    public void setKeywords(final List<SemanticRolesKeyword> keywords) {
+      this.keywords_serialized_name = keywords;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3574,19 +3596,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Sets the tense_serialized_name.
      *
-     * @param tense_serialized_name the new tense_serialized_name
+     * @param tense the new tense
      */
-    public void setTense(final String tense_serialized_name) {
-      this.tense_serialized_name = tense_serialized_name;
+    public void setTense(final String tense) {
+      this.tense_serialized_name = tense;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3649,9 +3671,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Boolean document_serialized_name;
     private List<String> targets_serialized_name;
 
-    private SentimentOptionsBuilder(SentimentOptions sentiment_options) {
-      document_serialized_name = sentiment_options.document_serialized_name;
-      targets_serialized_name = sentiment_options.targets_serialized_name;
+    private SentimentOptionsBuilder(SentimentOptions sentimentOptions) {
+      document_serialized_name = sentimentOptions.document_serialized_name;
+      targets_serialized_name = sentimentOptions.targets_serialized_name;
     }
 
     /**
@@ -3663,35 +3685,35 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Builds a SentimentOptions.
      *
-     * @return the sentiment_options
+     * @return the sentimentOptions
      */
     public SentimentOptions build() {
       return new SentimentOptions(this);
     }
 
     /**
-     * Adds an targets_serialized_name to targets_serialized_name.
+     * Adds an targets to targets_serialized_name.
      *
-     * @param targets_serialized_name the new targets_serialized_name
+     * @param targets the new targets
      * @return the SentimentOptions builder
      */
-    public SentimentOptionsBuilder addTargets(String targets_serialized_name) {
-      IBMWatsonValidator.notNull(targets_serialized_name, 'targets_serialized_name cannot be null');
+    public SentimentOptionsBuilder addTargets(String targets) {
+      IBMWatsonValidator.notNull(targets, 'targets cannot be null');
       if (this.targets_serialized_name == null) {
         this.targets_serialized_name = new List<String>();
       }
-      this.targets_serialized_name.add(targets_serialized_name);
+      this.targets_serialized_name.add(targets);
       return this;
     }
 
     /**
      * Set the document_serialized_name.
      *
-     * @param document_serialized_name the document_serialized_name
+     * @param document the document
      * @return the SentimentOptions builder
      */
-    public SentimentOptionsBuilder document(Boolean document_serialized_name) {
-      this.document_serialized_name = document_serialized_name;
+    public SentimentOptionsBuilder document(Boolean document) {
+      this.document_serialized_name = document;
       return this;
     }
 
@@ -3699,11 +3721,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Set the targets_serialized_name.
      * Existing targets_serialized_name will be replaced.
      *
-     * @param targets_serialized_name the targets_serialized_name
+     * @param targets the targets
      * @return the SentimentOptions builder
      */
-    public SentimentOptionsBuilder targets(List<String> targets_serialized_name) {
-      this.targets_serialized_name = targets_serialized_name;
+    public SentimentOptionsBuilder targets(List<String> targets) {
+      this.targets_serialized_name = targets;
       return this;
     }
   }
@@ -3740,19 +3762,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the document_serialized_name.
      *
-     * @param document_serialized_name the new document_serialized_name
+     * @param document the new document
      */
-    public void setDocument(final DocumentSentimentResults document_serialized_name) {
-      this.document_serialized_name = document_serialized_name;
+    public void setDocument(final DocumentSentimentResults document) {
+      this.document_serialized_name = document;
     }
 
     /**
      * Sets the targets_serialized_name.
      *
-     * @param targets_serialized_name the new targets_serialized_name
+     * @param targets the new targets
      */
-    public void setTargets(final List<TargetedSentimentResults> targets_serialized_name) {
-      this.targets_serialized_name = targets_serialized_name;
+    public void setTargets(final List<TargetedSentimentResults> targets) {
+      this.targets_serialized_name = targets;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3815,19 +3837,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Sets the emotion_serialized_name.
      *
-     * @param emotion_serialized_name the new emotion_serialized_name
+     * @param emotion the new emotion
      */
-    public void setEmotion(final EmotionScores emotion_serialized_name) {
-      this.emotion_serialized_name = emotion_serialized_name;
+    public void setEmotion(final EmotionScores emotion) {
+      this.emotion_serialized_name = emotion;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3877,19 +3899,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the text_serialized_name.
      *
-     * @param text_serialized_name the new text_serialized_name
+     * @param text the new text
      */
-    public void setText(final String text_serialized_name) {
-      this.text_serialized_name = text_serialized_name;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     /**
      * Sets the score_serialized_name.
      *
-     * @param score_serialized_name the new score_serialized_name
+     * @param score the new score
      */
-    public void setScore(final Double score_serialized_name) {
-      this.score_serialized_name = score_serialized_name;
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3947,28 +3969,28 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Sets the features_serialized_name.
      *
-     * @param features_serialized_name the new features_serialized_name
+     * @param features the new features
      */
-    public void setFeatures(final long features_serialized_name) {
-      this.features_serialized_name = features_serialized_name;
+    public void setFeatures(final long features) {
+      this.features_serialized_name = features;
     }
 
     /**
      * Sets the text_characters_serialized_name.
      *
-     * @param text_characters_serialized_name the new text_characters_serialized_name
+     * @param textCharacters the new textCharacters
      */
-    public void setTextCharacters(final long text_characters_serialized_name) {
-      this.text_characters_serialized_name = text_characters_serialized_name;
+    public void setTextCharacters(final long textCharacters) {
+      this.text_characters_serialized_name = textCharacters;
     }
 
     /**
      * Sets the text_units_serialized_name.
      *
-     * @param text_units_serialized_name the new text_units_serialized_name
+     * @param textUnits the new textUnits
      */
-    public void setTextUnits(final long text_units_serialized_name) {
-      this.text_units_serialized_name = text_units_serialized_name;
+    public void setTextUnits(final long textUnits) {
+      this.text_units_serialized_name = textUnits;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {

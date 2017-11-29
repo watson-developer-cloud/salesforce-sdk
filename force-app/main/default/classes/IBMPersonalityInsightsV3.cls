@@ -95,7 +95,7 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
       builder.query('consumption_preferences', String.valueOf(profileOptions.consumptionPreferences()));
     }
     if (profileOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-      builder.bodyJson(JSON.serialize(profileOptions.content()));
+      builder.bodyJson(JSON.serialize(profileOptions.content(), true));
     }
     else {
       builder.bodyContent(profileOptions.body(), profileOptions.contentType());

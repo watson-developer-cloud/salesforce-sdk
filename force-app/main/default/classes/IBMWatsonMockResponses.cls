@@ -1362,6 +1362,81 @@ public class IBMWatsonMockResponses {
             '  ]' +
             '}';
   }
+  public static String toneAnalysis() {
+    return  '{' +
+            ' "document_tone": {' +
+            ' "tones": [' +
+            '   {' +
+            '     "score": 0,' +
+            '     "tone_id": "string",' +
+            '     "tone_name": "string"' +
+            '   }' +
+            ' ],' +
+            ' "tone_categories": [' +
+            '   {' +
+            '     "tones": [' +
+            '       {' +
+            '         "score": 0,' +
+            '         "tone_id": "string",' +
+            '         "tone_name": "string"' +
+            '       }' +
+            '     ],' +
+            '     "category_id": "string",' +
+            '     "category_name": "string"' +
+            '   }' +
+            ' ],' +
+            ' "warning": "string"' +
+            '  },' +
+            '  "sentences_tone": [' +
+            '    {' +
+            '      "sentence_id": 0,' +
+            '      "text": "string",' +
+            '      "tones": [' +
+            '        {' +
+            '          "score": 0,' +
+            '          "tone_id": "string",' +
+            '          "tone_name": "string"' +
+            '        }' +
+            '      ],' +
+            '      "tone_categories": [' +
+            '        {' +
+            '          "tones": [' +
+            '            {' +
+            '              "score": 0,' +
+            '              "tone_id": "string",' +
+            '              "tone_name": "string"' +
+            '            }' +
+            '          ],' +
+            '          "category_id": "string",' +
+            '          "category_name": "string"' +
+            '        }' +
+            '      ],' +
+            '      "input_from": 0,' +
+            '      "input_to": 0' +
+            '    }' +
+            '  ]' +
+            '}';
+  }
+  
+  public static String utteranceAnalyses() {
+    return  '{' +
+            '  "utterances_tone": [' +
+            '    {' +
+            '      "utterance_id": "string",' +
+            '      "utterance_text": "string",' +
+            '      "tones": [' +
+            '        {' +
+            '          "score": 0,' +
+            '          "tone_id": "string",' +
+            '          "tone_name": "string"' +
+            '        }' +
+            '      ],' +
+            '      "error": "string"' +
+            '    }' +
+            '  ],' +
+            '  "warning": "string"' +
+            '}';
+  }
   
   public static String CreateModel(){
   	return '{' +
