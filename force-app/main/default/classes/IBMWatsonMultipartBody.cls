@@ -136,9 +136,10 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     String footer;
     if (isEndingPart) {
      footer = '--' + this.boundary + '--';
-    }else{
+    } else {
      footer = '';
-    } 
+    }
+    
     String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
       
     Blob bodyBlob = null;
