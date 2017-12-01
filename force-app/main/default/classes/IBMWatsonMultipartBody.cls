@@ -127,18 +127,26 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     String contentTypeCrlf = contentType + CRLF;
       
     String header = boundaryCrlf + contentDispositionCrlf + contentTypeCrlf;
-    String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
+
+    String HeaderCRLF = CRLF;
+    if( !String.isBlank(mimeType) && 
+        (mimeType.equalsIgnoreCase('application/json') || 
+        mimeType.startsWith('text/')) ){
+    	 HeaderCRLF += CRLF;
+    }
+    String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + HeaderCRLF));
     while (headerEncoded.endsWith('=')) {
       header+=' ';
-      headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
+      headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + HeaderCRLF));
     }
       	
     String footer;
     if (isEndingPart) {
-     footer = '--' + this.boundary + '--';
+     footer = CRLF + '--' + this.boundary + '--';
     }else{
-     footer = '';
+     footer = CRLF;
     } 
+    
     String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
       
     Blob bodyBlob = null;
