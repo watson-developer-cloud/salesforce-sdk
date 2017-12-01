@@ -142,8 +142,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     IBMVisualRecognitionV3Models.CreateClassifierOptions options = new IBMVisualRecognitionV3Models.CreateClassifierOptionsBuilder()
       .name('test')
-      .classnamePositiveExamples(testfile)
-      .classnamePositiveExamplesFilename('test')
+      .addClass('test', testfile)
       .negativeExamples(testfile)
       .negativeExamplesFilename('test')
       .build();
@@ -215,8 +214,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     IBMVisualRecognitionV3Models.UpdateClassifierOptions options = new IBMVisualRecognitionV3Models.UpdateClassifierOptionsBuilder()
       .classifierId('classifierId')
-      .classnamePositiveExamples(testfile)
-      .classnamePositiveExamplesFilename('test')
+      .addClass('test', testfile)
       .negativeExamples(testfile)
       .negativeExamplesFilename('test')
       .build();
