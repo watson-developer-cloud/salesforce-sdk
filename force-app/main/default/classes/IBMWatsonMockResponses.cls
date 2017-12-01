@@ -1288,7 +1288,7 @@ public class IBMWatsonMockResponses {
             '  ]' +
             '}';
   }
-    
+  
   public static String profile() {
     return  '{' +
             '  "processed_language": "ar",' +
@@ -1557,4 +1557,82 @@ public class IBMWatsonMockResponses {
             '}';
   }
   
+}
+
+  public static String CreateModel(){
+  	return '{' +
+           '  "model_id": "3e7dfdbe-f757-4150-afee-458e71eb93fb"' +
+           '}';
+  }
+  
+  public static String DeleteModel(){
+  	return '{}';
+  }
+  
+  public static String GetModel(){
+    return '{' +
+           '  "models": [{' +
+           '  "model_id ": "3e7dfdbe-f757-4150-afee-458e71eb93fb",' +
+           '  "source": "en",' +
+           '  "target": "es",' +
+           '  "base_model_id": "en-es",' +
+           '  "customizable": "false",' +
+           '  "default_model": "false",' +
+           '  "domain": "travel",' +
+           '  "owner": "74a239fa-f2db-42ef-8737-7bf74f49e35f",' +
+           '  "status": "available",' +
+           '  "name": "mymodel"' +
+           ' }]' +
+           '}';
+  }
+  
+  public static String ListModels(){
+    return '{' +
+           '  "models": [{' +
+           '  "model_id ": "3e7dfdbe-f757-4150-afee-458e71eb93fb",' +
+           '  "source": "en",' +
+           '  "target": "es",' +
+           '  "base_model_id": "en-es",' +
+           //'  "customizable": "false",' +
+           //'  "default_model": "false",' +
+           '  "domain": "travel",' +
+           '  "owner": "74a239fa-f2db-42ef-8737-7bf74f49e35f",' +
+           '  "status": "available",' +
+           '  "name": "mymodel"' +
+           ' }]' +
+           '}';
+  }
+  
+  public static String ListIdentifiableLanguages(){
+    return '{' +
+           ' "languages": [' +
+           '  {' +
+           '   "language": "af",' +
+           '   "name": "Afrikaans"' +
+           '  },' +
+           '  {' +
+           '   "language": "ar",' +
+           '   "name": "Arabic"' +
+           '  },' +
+           '  {' +
+           '   "language": "az",' +
+           '   "name": "Azerbaijani"' +
+           '  },' +
+           '  {' +
+           '   "language": "ba",' +
+           '   "name": "Bashkir"' +
+           '  }' +
+           '  ]' +
+           '}';
+  }
+  
+  public static String Translate(){
+  	return '{' +
+           ' "translations": [{' +
+           ' "translation": "Hola"' +
+           ' }],' +
+           ' "word_count": 1,' +
+           ' "character_count": 5' +
+           '}';
+  }
 }

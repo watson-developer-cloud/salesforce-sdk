@@ -38,7 +38,7 @@ public virtual class IBMWatsonRequestBody {
         contentType = IBMWatsonMediaType.parse(contentType + '; charset=utf-8');
       }
     }
-    reqBody.contentSize = (!String.isBlank(content)) ? content.length() : 0;
+    reqBody.contentSize = (String.isNotBlank(content)) ? content.length() : 0;
     reqBody.contentType = contentType;
     reqBody.content = content;
     return reqBody;
