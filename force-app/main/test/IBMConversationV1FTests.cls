@@ -3,7 +3,7 @@ public with sharing class IBMConversationV1FTests {
   private static String NAMED_CREDENTIALS = 'callout:watson_conversation_v1_test';
   private static String URL = 'https://gateway.watsonplatform.net/conversation/api';
   private static String VERSION_2017_05_26 = '2017-05-26';
- // private static String workspaceId = 'c7e447ed-4dca-44b1-b48e-7b9275f409bd';
+
   /**
    *  Test run functional tests.
    */

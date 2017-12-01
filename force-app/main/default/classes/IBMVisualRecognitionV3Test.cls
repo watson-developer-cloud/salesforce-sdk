@@ -16,7 +16,7 @@ private class IBMVisualRecognitionV3Test {
     IBMVisualRecognitionV3Models.ClassifyOptions options = new IBMVisualRecognitionV3Models.ClassifyOptionsBuilder()
       .parameters(parameters)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMVisualRecognitionV3Models.ClassifiedImages resp = visualRecognition.classify(options);
     System.assertEquals(resp.getImagesProcessed(),0);
@@ -32,7 +32,7 @@ private class IBMVisualRecognitionV3Test {
     System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClasses()[0].getTypeHierarchy(),'string');
     System.assertEquals(resp.getWarnings()[0].getWarningId(),'string');
     System.assertEquals(resp.getWarnings()[0].getDescription(),'string');
-    Test.stopTest();   
+    Test.stopTest();
   }
   /**
    *  Test Analyze text, HTML, or a public webpage.
@@ -59,13 +59,13 @@ private class IBMVisualRecognitionV3Test {
       .imagesFilename(att.Name)
       .imagesFileContentType(att.ContentType)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
-    options = options.newBuilder().build();  
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
     IBMVisualRecognitionV3Models.ClassifiedImages resp = visualRecognition.classify(options);
      System.assertEquals(resp.getImagesProcessed(),0);
     System.assertEquals(resp.getImages()[0].getSourceUrl(),'string');
     System.assertEquals(resp.getImages()[0].getResolvedUrl(),'string');
-    Test.stopTest(); 
+    Test.stopTest();
   }
   /**
    *  Test Analyze text, HTML, or a public webpage.
@@ -95,7 +95,7 @@ private class IBMVisualRecognitionV3Test {
       .imagesFilename(att.Name)
       .imagesFileContentType(att.ContentType)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMVisualRecognitionV3Models.DetectedFaces resp = visualRecognition.detectFaces(options);
     System.assertEquals(resp.getImagesProcessed(),0);
@@ -115,7 +115,7 @@ private class IBMVisualRecognitionV3Test {
     System.assertEquals(resp.getImages()[0].getFaces()[0].getIdentity().getName(),'string');
     System.assertEquals(resp.getImages()[0].getFaces()[0].getIdentity().getTypeHierarchy(),'string');
     System.assertEquals(resp.getImages()[0].getError().getErrorId(),'string');
-    Test.stopTest();   
+    Test.stopTest();
   }
   /**
    *  Test Create a classifier.
@@ -146,7 +146,7 @@ private class IBMVisualRecognitionV3Test {
       .negativeExamples(testfile)
       .negativeExamplesFilename('test')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMVisualRecognitionV3Models.Classifier resp = visualRecognition.createClassifier(options);
     System.assertEquals(resp.getClassifierId(),'string');
@@ -155,7 +155,7 @@ private class IBMVisualRecognitionV3Test {
     System.assertEquals(resp.getStatus(),'ready');
     System.assertEquals(resp.getExplanation(),'string');
     System.assertEquals(resp.getClasses()[0].getClass(),'string');
-    Test.stopTest();   
+    Test.stopTest();
   }
   /**
    *  Test Get a classifier.
@@ -183,11 +183,11 @@ private class IBMVisualRecognitionV3Test {
     IBMVisualRecognitionV3Models.GetClassifierOptions options = new IBMVisualRecognitionV3Models.GetClassifierOptionsBuilder('classifierId')
       .classifierId('classifierId')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMVisualRecognitionV3Models.Classifier resp = visualRecognition.getClassifier(options);
     System.assertEquals(resp.getClassifierId(),'string');
-    Test.stopTest();   
+    Test.stopTest();
   }
   /**
    *  Test Update a classifier.
@@ -218,11 +218,11 @@ private class IBMVisualRecognitionV3Test {
       .negativeExamples(testfile)
       .negativeExamplesFilename('test')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMVisualRecognitionV3Models.Classifier resp = visualRecognition.updateClassifier(options);
     System.assertEquals(resp.getClassifierId(),'string');
-    Test.stopTest();   
+    Test.stopTest();
   }
   /**
    *  Test Delete a classifier.
@@ -250,10 +250,10 @@ private class IBMVisualRecognitionV3Test {
     IBMVisualRecognitionV3Models.DeleteClassifierOptions options = new IBMVisualRecognitionV3Models.DeleteClassifierOptionsBuilder('classifierId')
       .classifierId('classifierId')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     visualRecognition.deleteClassifier(options);
-    Test.stopTest();   
+    Test.stopTest();
   }
   /**
    *  Test List classifiers.
@@ -269,10 +269,10 @@ private class IBMVisualRecognitionV3Test {
     IBMVisualRecognitionV3Models.ListClassifiersOptions options = new IBMVisualRecognitionV3Models.ListClassifiersOptionsBuilder()
       .verbose(true)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMVisualRecognitionV3Models.Classifiers resp = visualRecognition.listClassifiers(options);
     System.assertEquals(resp.getClassifiers()[0].getClassifierId(),'string');
-    Test.stopTest();   
+    Test.stopTest();
   }
 }

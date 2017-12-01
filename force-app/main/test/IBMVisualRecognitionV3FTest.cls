@@ -12,15 +12,13 @@ public with sharing class IBMVisualRecognitionV3FTest {
     IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3(IBMVisualRecognitionV3.VERSION_DATE_2016_05_20,API_KEY);
     visualRecognition.setEndPoint('https://gateway-a.watsonplatform.net/visual-recognition/api/');
     visualRecognition.setApiKey(API_KEY);
-    //String parameters = '{"url":"http://www.indya101.com/gallery/Actors_TV/Sumeet_Sachdev/2011/12/27/Sumeet_Sachdevjpg_3_arnem.jpg"}';
     String parameters = '{"url":"http://www.godalmingmuseum.org.uk/uploads/images/People/Jekyll/Jekyll,_Gertrude,_middle_aged_Y.JPG"}';
     IBMVisualRecognitionV3Models.ClassifyOptions options = new IBMVisualRecognitionV3Models.ClassifyOptionsBuilder()
-    .parameters(parameters)
-    .build();
-    IBMVisualRecognitionV3Models.ClassifiedImages resp =
-      visualRecognition.classify(options);
-    System.debug('IBMVisualRecognitionV3FTest.testClassify(): '+ resp);  
-    return resp;  
+      .parameters(parameters)
+      .build();
+    IBMVisualRecognitionV3Models.ClassifiedImages resp = visualRecognition.classify(options);
+    System.debug('IBMVisualRecognitionV3FTest.testClassify(): '+ resp);
+    return resp;
   }
   /**
    *  Test Analyze text, HTML, or a public webpage.
@@ -30,7 +28,7 @@ public with sharing class IBMVisualRecognitionV3FTest {
    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3(IBMVisualRecognitionV3.VERSION_DATE_2016_05_20,API_KEY);
     visualRecognition.setEndPoint('https://gateway-a.watsonplatform.net/visual-recognition/api/');
     visualRecognition.setApiKey(API_KEY);
-    Attachment att=[Select Id,Body,BodyLength,ContentType,Name,Description From Attachment where Id=:attachmentId];
+    Attachment att = [Select Id,Body,BodyLength,ContentType,Name,Description From Attachment where Id=:attachmentId];
     IBMWatsonFile testfile = new IBMWatsonFile.FileBuilder()
       .attachment(att)
       .build();
@@ -40,10 +38,9 @@ public with sharing class IBMVisualRecognitionV3FTest {
       .imagesFilename(att.Name)
       .imagesFileContentType(att.ContentType)
       .build();
-    IBMVisualRecognitionV3Models.ClassifiedImages resp =
-      visualRecognition.classify(options);
-    System.debug('IBMVisualRecognitionV3FTest.testClassify(): '+ resp);  
-    return resp;  
+    IBMVisualRecognitionV3Models.ClassifiedImages resp = visualRecognition.classify(options);
+    System.debug('IBMVisualRecognitionV3FTest.testClassify(): '+ resp);
+    return resp;
   }
   /**
    *  Test Analyze text, HTML, or a public webpage.
@@ -52,10 +49,8 @@ public with sharing class IBMVisualRecognitionV3FTest {
   public static IBMVisualRecognitionV3Models.DetectedFaces testDetectFaces() {
     IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3(VERSION_2016_05_20,API_KEY);
     visualRecognition.setEndPoint(NAMED_CREDENTIALS);
-    //visualRecognition.setEndPoint('https://gateway.watsonplatform.net/visual-recognition/api/');
-    //visualRecognition.setApiKey(API_KEY);
-    Attachment att=[Select Id,Body,BodyLength,ContentType,Name,Description From Attachment where Id=:attachmentId];
-    IBMWatsonFile testfile=new IBMWatsonFile.FileBuilder()
+    Attachment att = [Select Id,Body,BodyLength,ContentType,Name,Description From Attachment where Id=:attachmentId];
+    IBMWatsonFile testfile = new IBMWatsonFile.FileBuilder()
       .body(att.Body)
       .name(att.Name)
       .description(att.Description)
@@ -66,9 +61,8 @@ public with sharing class IBMVisualRecognitionV3FTest {
       .imagesFilename(att.Name)
       .imagesFileContentType(att.ContentType)
       .build();
-    IBMVisualRecognitionV3Models.DetectedFaces resp =
-      visualRecognition.detectFaces(options);
-    System.debug('IBMVisualRecognitionV3FTest.testDetectFaces(): '+ resp);  
-    return resp;  
+    IBMVisualRecognitionV3Models.DetectedFaces resp = visualRecognition.detectFaces(options);
+    System.debug('IBMVisualRecognitionV3FTest.testDetectFaces(): '+ resp);
+    return resp;
   }
 }
