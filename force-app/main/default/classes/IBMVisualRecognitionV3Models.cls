@@ -924,6 +924,7 @@ public class IBMVisualRecognitionV3Models {
     private String negative_examples_filename_serialized_name;
 
     private CreateClassifierOptionsBuilder(CreateClassifierOptions create_classifier_options) {
+      this();
       name_serialized_name = create_classifier_options.name_serialized_name;
       classname_positive_examples_serialized_name.putAll(create_classifier_options.classname_positive_examples_serialized_name);
       negative_examples_serialized_name = create_classifier_options.negative_examples_serialized_name;
@@ -2178,6 +2179,7 @@ public class IBMVisualRecognitionV3Models {
     private String negative_examples_filename_serialized_name;
 
     private UpdateClassifierOptionsBuilder(UpdateClassifierOptions update_classifier_options) {
+      this();
       classifier_id_serialized_name = update_classifier_options.classifier_id_serialized_name;
       classname_positive_examples_serialized_name.putAll(update_classifier_options.classname_positive_examples_serialized_name);
       negative_examples_serialized_name = update_classifier_options.negative_examples_serialized_name;
