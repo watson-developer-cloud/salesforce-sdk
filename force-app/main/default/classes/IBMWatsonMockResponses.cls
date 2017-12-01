@@ -1556,8 +1556,6 @@ public class IBMWatsonMockResponses {
             '      ]' +
             '}';
   }
-  
-}
 
   public static String CreateModel(){
   	return '{' +
