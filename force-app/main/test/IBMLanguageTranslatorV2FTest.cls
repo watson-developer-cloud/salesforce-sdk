@@ -7,126 +7,127 @@ public class IBMLanguageTranslatorV2FTest {
   public static final String password = '<password>';
   public static final String BaseModelId = '<base model id>';//i.e es-en
   public static String ModelId = '<custom model>';// automatically populated using runAllTests()
-  
+
   public class IBMLanguageTranslatorV2FException extends Exception {}
-   
+
   /**
    *  Test all features on a single method call
    *
    */
   public static void runAllTests(){
-  	// Translate a simple text using a source and target languages
-  	try{
-  	  testSourceTargetTranslate();
-  	} catch(Exception err){
-  	  String testMsg = '[Translate] - Error while translating using source and target. ';
-  	  system.debug(testMsg + err.getMessage());
-  	  throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
-  	}
-  	
-  	// Identify a language
-  	try{
-  	  testSourceTargetTranslate();
-  	} catch(Exception err){
-  	  String testMsg = '[Identify] - Error while identifying language. ';
-  	  system.debug(testMsg + err.getMessage());
-  	  throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
-  	}
-  	
-  	// Identify all languages
-  	try{
-  	  testListIdentifiableLanguages();
-  	} catch(Exception err){
-  	  String testMsg = '[ListIdentifiableLanguages] - Error while identifying all languages. ';
-  	  system.debug(testMsg + err.getMessage());
-  	  throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
-  	}
-  	
-  	// Test creating a model using forced glossary
-  	try{
-  	  testCreateModelForcedGlossary();
-  	} catch(Exception err){
-  	  String testMsg = '[CreateModel] - Error while creating a forced-glossary model. ';
-  	  system.debug(testMsg + err.getMessage());
-  	  throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
-  	}
-  	
-  	// Get model information
-  	try{
-  	  testGetModel();
-  	} catch(Exception err){
-  	  String testMsg = '[GetModel] - Error while retrieving model data. ';
-  	  system.debug(testMsg + err.getMessage());
-  	  throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
-  	}
-  	
-  	// Delete model
-  	try{
-  	  testDeleteModel();
-  	} catch(Exception err){
-  	  String testMsg = '[DeleteModel] - Error while deleting model. ';
-  	  system.debug(testMsg + err.getMessage());
-  	  throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
-  	}
+    // Translate a simple text using a source and target languages
+    try {
+      testSourceTargetTranslate();
+    } catch(Exception err) {
+      String testMsg = '[Translate] - Error while translating using source and target. ';
+      System.debug(testMsg + err.getMessage());
+      throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
+    }
+
+    // Identify a language
+    try {
+      testSourceTargetTranslate();
+    } catch(Exception err){
+      String testMsg = '[Identify] - Error while identifying language. ';
+      System.debug(testMsg + err.getMessage());
+      throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
+    }
+
+    // Identify all languages
+    try {
+      testListIdentifiableLanguages();
+    } catch(Exception err){
+      String testMsg = '[ListIdentifiableLanguages] - Error while identifying all languages. ';
+      System.debug(testMsg + err.getMessage());
+      throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
+    }
+
+    // Test creating a model using forced glossary
+    try {
+      testCreateModelForcedGlossary();
+    } catch(Exception err){
+      String testMsg = '[CreateModel] - Error while creating a forced-glossary model. ';
+      System.debug(testMsg + err.getMessage());
+      throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
+    }
+
+    // Get model information
+    try {
+      testGetModel();
+    } catch(Exception err){
+      String testMsg = '[GetModel] - Error while retrieving model data. ';
+      System.debug(testMsg + err.getMessage());
+      throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
+    }
+
+    // Delete model
+    try {
+      testDeleteModel();
+    } catch(Exception err){
+      String testMsg = '[DeleteModel] - Error while deleting model. ';
+      System.debug(testMsg + err.getMessage());
+      throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
+    }
   }
-    
+
   /**
    *  Test translate
    */
   public static void testSourceTargetTranslate() {
-  	IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
+    IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
     service.setEndPoint(EndpointURL);
     service.setUsernameAndPassword(username, password);
-  	String source = 'en';
-  	String target = 'es';
-    IBMLanguageTranslatorV2Models.TranslateOptions translateOptions = 
+    String source = 'en';
+    String target = 'es';
+    IBMLanguageTranslatorV2Models.TranslateOptions translateOptions =
       new IBMLanguageTranslatorV2Models.TranslateOptionsBuilder()
       .source(source)
       .target(target)
       .text(new List<String>{'Hello'})
       .addText('World')
       .build();
-    IBMLanguageTranslatorV2Models.TranslationResult translate =
-      service.translate(translateOptions);
-    system.debug('\n**SourceTargetTranslate**\n'+translate);  
+
+    IBMLanguageTranslatorV2Models.TranslationResult translate = service.translate(translateOptions);
+    System.debug('\n**SourceTargetTranslate**\n' + translate);
   }
 
   /**
    *  Test identify
    */
   public static void testIdentify(){
-  	IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
+    IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
     service.setEndPoint(EndpointURL);
     service.setUsernameAndPassword(username, password);
-  	IBMLanguageTranslatorV2Models.IdentifyOptions identifyOptions =
-  	  new IBMLanguageTranslatorV2Models.IdentifyOptionsBuilder()
-  	  .text('You know my methods, Watson.')
-  	  .build();
-  	IBMLanguageTranslatorV2Models.IdentifiedLanguages identify =
-  	  service.identify(identifyOptions);
-  	system.debug('\n**Identify**\n'+identify);
+    IBMLanguageTranslatorV2Models.IdentifyOptions identifyOptions =
+      new IBMLanguageTranslatorV2Models.IdentifyOptionsBuilder()
+      .text('You know my methods, Watson.')
+      .build();
+
+    IBMLanguageTranslatorV2Models.IdentifiedLanguages identify = service.identify(identifyOptions);
+    System.debug('\n**Identify**\n' + identify);
   }
 
   /**
    *  Test Identifiable Languages
    */
   public static void testListIdentifiableLanguages(){
-  	IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
+    IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
     service.setEndPoint(EndpointURL);
     service.setUsernameAndPassword(username, password);
-  	IBMLanguageTranslatorV2Models.ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptions =
-  	  new IBMLanguageTranslatorV2Models.ListIdentifiableLanguagesOptionsBuilder()
-  	  .build();
-  	IBMLanguageTranslatorV2Models.IdentifiableLanguages listIdentifiableLanguages =
-  	  service.listIdentifiableLanguages(listIdentifiableLanguagesOptions);
-  	system.debug('\n**IdentifiableLanguages**\n'+listIdentifiableLanguages);  
+    IBMLanguageTranslatorV2Models.ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptions =
+      new IBMLanguageTranslatorV2Models.ListIdentifiableLanguagesOptionsBuilder()
+      .build();
+    IBMLanguageTranslatorV2Models.IdentifiableLanguages listIdentifiableLanguages =
+      service.listIdentifiableLanguages(listIdentifiableLanguagesOptions);
+
+    System.debug('\n**IdentifiableLanguages**\n' + listIdentifiableLanguages);
   }
 
   /**
    *  Test create a model
    */
   public static void testCreateModelForcedGlossary(){
-  	IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
+    IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
     service.setEndPoint(NAMED_CREDENTIALS);
     String forcedGlossaryStr = '<tmx version="1.4">' +
         '<header' +
@@ -150,67 +151,66 @@ public class IBMLanguageTranslatorV2FTest {
       Name='glossary.tmx',
       Description='language glossary',
       ContentType='application/xml');
+
     IBMWatsonFile forcedGlossary = new IBMWatsonFile.FileBuilder()
       .attachment(forcedGlossaryAttachment)
       .build();
-  	IBMLanguageTranslatorV2Models.CreateModelOptions createModelOptions =
-  	  new IBMLanguageTranslatorV2Models.CreateModelOptionsBuilder()
-  	  .name('custom-english-to-spanish')
-  	  .baseModelId(BaseModelId)
-  	  .forcedGlossary(forcedGlossary)
-  	  .forcedGlossaryFilename(forcedGlossaryAttachment.Name)
-  	  .forcedGlossaryContentType(forcedGlossaryAttachment.ContentType)
-  	  .build();
-  	IBMLanguageTranslatorV2Models.TranslationModel TranslationModel =
-  	  service.createModel(createModelOptions);
-  	ModelId = TranslationModel.getModelId();
-  	system.debug('\n**CreateModel**\n'+TranslationModel);
+      
+    IBMLanguageTranslatorV2Models.CreateModelOptions createModelOptions =
+      new IBMLanguageTranslatorV2Models.CreateModelOptionsBuilder()
+      .name('custom-english-to-spanish')
+      .baseModelId(BaseModelId)
+      .forcedGlossary(forcedGlossary)
+      .forcedGlossaryFilename(forcedGlossaryAttachment.Name)
+      .forcedGlossaryContentType(forcedGlossaryAttachment.ContentType)
+      .build();
+
+    IBMLanguageTranslatorV2Models.TranslationModel TranslationModel = service.createModel(createModelOptions);
+    ModelId = TranslationModel.getModelId();
+    System.debug('\n**CreateModel**\n' + TranslationModel);
   }
 
   /**
    *  Test delete a model
    */
   public static void testDeleteModel(){
-  	IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
+    IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
     service.setEndPoint(EndpointURL);
     service.setUsernameAndPassword(username, password);
-  	IBMLanguageTranslatorV2Models.DeleteModelOptions deleteModelOptions =
-  	  new IBMLanguageTranslatorV2Models.DeleteModelOptionsBuilder()
-  	  .modelId(ModelId)
-  	  .build();
-  	service.deleteModel(deleteModelOptions);  
-  	system.debug('\n**DeleteModel**\nSuccess');
+    IBMLanguageTranslatorV2Models.DeleteModelOptions deleteModelOptions =
+      new IBMLanguageTranslatorV2Models.DeleteModelOptionsBuilder()
+      .modelId(ModelId)
+      .build();
+    service.deleteModel(deleteModelOptions);
+    System.debug('\n**DeleteModel**\nSuccess');
   }
 
   /**
    *  Test get model data
    */
   public static void testGetModel(){
-  	IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
+    IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
     service.setEndPoint(EndpointURL);
     service.setUsernameAndPassword(username, password);
-  	IBMLanguageTranslatorV2Models.GetModelOptions getModelOptions =
-  	  new IBMLanguageTranslatorV2Models.GetModelOptionsBuilder()
-  	  .modelId(ModelId)
-  	  .build();
-  	IBMLanguageTranslatorV2Models.TranslationModel getModel =
-  	  service.getModel(getModelOptions);
-  	system.debug('\n**GetModel**\n'+getModel);  
+    IBMLanguageTranslatorV2Models.GetModelOptions getModelOptions =
+      new IBMLanguageTranslatorV2Models.GetModelOptionsBuilder()
+      .modelId(ModelId)
+      .build();
+    IBMLanguageTranslatorV2Models.TranslationModel getModel = service.getModel(getModelOptions);
+    System.debug('\n**GetModel**\n' + getModel);
   }
 
   /**
    *  Test list model data
    */
   public static void testListModels(){
-  	IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
+    IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
     service.setEndPoint(EndpointURL);
     service.setUsernameAndPassword(username, password);
-  	IBMLanguageTranslatorV2Models.ListModelsOptions listModelsOptions =
-  	  new IBMLanguageTranslatorV2Models.ListModelsOptionsBuilder()
-  	  .build();
-  	IBMLanguageTranslatorV2Models.TranslationModels listModels =
-  	  service.listModels(listModelsOptions);
-  	system.debug('\n**ListModels**\n'+listModels);  
+    IBMLanguageTranslatorV2Models.ListModelsOptions listModelsOptions =
+      new IBMLanguageTranslatorV2Models.ListModelsOptionsBuilder()
+      .build();
+    IBMLanguageTranslatorV2Models.TranslationModels listModels = service.listModels(listModelsOptions);
+    System.debug('\n**ListModels**\n' + listModels);
   }
-    
 }
