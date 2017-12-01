@@ -3,14 +3,22 @@ public with sharing class IBMPersonalityInsightsV3FTest {
   private static String VERSION_2017_09_01 = '2017-09-01';
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_personality_insights_v3';
+  private static String URL = 'https://gateway.watsonplatform.net/personality-insights/api';
   
+  public static void runAllTests(String username, String password)
+  {
+    testProfile(username, password);
+  }
   /**
    * Generates a personality profile based on input text.
    *
    */
-  public static IBMPersonalityInsightsV3Models.Profile testProfile() {
+  public static IBMPersonalityInsightsV3Models.Profile testProfile(String username, String password) {
     IBMPersonalityInsightsV3 personalityInsights = new IBMPersonalityInsightsV3('2017-09-01');
-    personalityInsights.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      personalityInsights.setEndPoint(URL);
+      personalityInsights.setUsernameAndPassword(username, password);
+    }
     IBMPersonalityInsightsV3Models.ContentItem contentItem=new IBMPersonalityInsightsV3Models.ContentItemBuilder()
       .content('text/plain')
       .id('test')

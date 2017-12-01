@@ -132,7 +132,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
       header+=' ';
       headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + CRLF + CRLF));
     }
-      	
+        
     String footer;
     if (isEndingPart) {
      footer = '--' + this.boundary + '--';

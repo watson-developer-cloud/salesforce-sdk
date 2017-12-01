@@ -1,8 +1,9 @@
 public without sharing class IBMNaturalLanguageClassifierV1FTests {
   // Make sure the named credentials below is defined
+  private static String URL = 'https://gateway.watsonplatform.net/natural-language-classifier/api';
   private static String NAMED_CREDENTIALS = 'callout:watson_natural_language_classifier_v1';
   private static String VERSION_2017_05_26 = '2017-05-26';
-  private static String ClassifierId = '<your classifier id>';
+ // private static String ClassifierId = '<your classifier id>';
   private static String ClassifierText = 'How hot will it be today?';
   
   /*
@@ -21,24 +22,37 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
   system.debug(IBMNaturalLanguageClassifierV1FTests.testListClassifiers());  
   */
   
+  public static void runAllTests(String username, String password)
+  {
+    String classifierId = testCreateClassifier(username, password).getClassifierId();
+    testListClassifiers(username, password);
+    String classifierStatus=testGetClassifier(classifierId, username, password).getStatus();
+    if(classifierStatus.equalsIgnoreCase('ready'))
+      testClassify(classifierId, username, password);
+    testDeleteClassifier(classifierId, username, password);
+  }
   private static String CSVFormat(List<String> strRows){
-  	String CSVBody = '';
-  	for(String str: strRows){
-  		CSVBody += str + '\n';
-  	}
-  	return CSVBody;
+    String CSVBody = '';
+    for(String str: strRows){
+      CSVBody += str + '\n';
+    }
+    return CSVBody;
   }
   
   /**
    *  Test classify
    *
    */
-  public static IBMNaturalLanguageClassifierV1Models.Classification testClassify(){
+  public static IBMNaturalLanguageClassifierV1Models.Classification testClassify(String classifierId, String username, String password){
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-    service.setEndPoint(NAMED_CREDENTIALS);
-  	IBMNaturalLanguageClassifierV1Models.ClassifyOptions classifyOptions = 
-  	  new IBMNaturalLanguageClassifierV1Models.ClassifyOptionsBuilder()
-      .classifierId(ClassifierId)
+    //service.setEndPoint(NAMED_CREDENTIALS);(Use either named credentials or username and paasword as below)
+    if (username != null && password != null) {
+      service.setEndPoint(URL);
+      service.setUsernameAndPassword(username, password);
+    }
+    IBMNaturalLanguageClassifierV1Models.ClassifyOptions classifyOptions = 
+      new IBMNaturalLanguageClassifierV1Models.ClassifyOptionsBuilder()
+      .classifierId(classifierId)
       .text(ClassifierText)
       .build();
     IBMNaturalLanguageClassifierV1Models.Classification classification = service.classify(classifyOptions);
@@ -49,9 +63,12 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
    *  Test create a classifier
    *
    */
-  public static IBMNaturalLanguageClassifierV1Models.Classifier testCreateClassifier() {
+  public static IBMNaturalLanguageClassifierV1Models.Classifier testCreateClassifier(String username, String password) {
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-    service.setEndPoint(NAMED_CREDENTIALS);
+    if (username != null && password != null) {
+      service.setEndPoint(URL);
+      service.setUsernameAndPassword(username, password);
+    }
     
     //
     //  Metadata
@@ -122,37 +139,46 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
    *  Test delete a classifier
    *
    */
-  public static void testDeleteClassifier(){
+  public static void testDeleteClassifier(String classifierId, String username, String password){
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-    service.setEndPoint(NAMED_CREDENTIALS);
-  	IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptions deleteClassifierOptions = 
-  	  new IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptionsBuilder(ClassifierId)
-  	  .build();
-  	service.deleteClassifier(deleteClassifierOptions);
+    if (username != null && password != null) {
+      service.setEndPoint(URL);
+      service.setUsernameAndPassword(username, password);
+    }
+    IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptions deleteClassifierOptions = 
+      new IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptionsBuilder(classifierId)
+      .build();
+    service.deleteClassifier(deleteClassifierOptions);
   }
   
   /**
    *  Test retrieve information about an existing classifier
    */
-  public static IBMNaturalLanguageClassifierV1Models.Classifier testGetClassifier(){
+  public static IBMNaturalLanguageClassifierV1Models.Classifier testGetClassifier(String classifierId, String username, String password){
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-    service.setEndPoint(NAMED_CREDENTIALS);
-  	IBMNaturalLanguageClassifierV1Models.GetClassifierOptions getClassifierOptions = 
-  	  new IBMNaturalLanguageClassifierV1Models.GetClassifierOptionsBuilder(ClassifierId)
-  	  .build();
-  	return service.getClassifier(getClassifierOptions);
+    if (username != null && password != null) {
+      service.setEndPoint(URL);
+      service.setUsernameAndPassword(username, password);
+    }
+    IBMNaturalLanguageClassifierV1Models.GetClassifierOptions getClassifierOptions = 
+      new IBMNaturalLanguageClassifierV1Models.GetClassifierOptionsBuilder(ClassifierId)
+      .build();
+    return service.getClassifier(getClassifierOptions);
   }
   
   /**
    *  Test retrieve information about all classifiers
    *
    */
-  public static IBMNaturalLanguageClassifierV1Models.ClassifierList testListClassifiers() {
+  public static IBMNaturalLanguageClassifierV1Models.ClassifierList testListClassifiers(String username, String password) {
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
-    service.setEndPoint(NAMED_CREDENTIALS);
-  	IBMNaturalLanguageClassifierV1Models.ListClassifiersOptions listClassifiersOptions = 
-  	  new IBMNaturalLanguageClassifierV1Models.ListClassifiersOptionsBuilder()
-  	  .build();
+    if (username != null && password != null) {
+      service.setEndPoint(URL);
+      service.setUsernameAndPassword(username, password);
+    }
+    IBMNaturalLanguageClassifierV1Models.ListClassifiersOptions listClassifiersOptions = 
+      new IBMNaturalLanguageClassifierV1Models.ListClassifiersOptionsBuilder()
+      .build();
     return service.listClassifiers(listClassifiersOptions);
   }
 }
