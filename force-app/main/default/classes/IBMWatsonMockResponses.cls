@@ -1189,7 +1189,7 @@ public class IBMWatsonMockResponses {
   }
 
   public static String getClassifier(){
-  	return '{' +
+    return '{' +
     '"classifier_id": "10D41B-nlc-1",' +
     '"name": "My Classifier",' +
     '"language": "en",' +
@@ -1201,7 +1201,7 @@ public class IBMWatsonMockResponses {
   }
   
   public static String listClassifiers(){
-  	return '{' +
+    return '{' +
     '"classifiers": [' +
     '  {' +
     '    "classifier_id": "10D41B-nlc-1",' +
@@ -1438,6 +1438,125 @@ public class IBMWatsonMockResponses {
             '}';
   }
   
+  public static String classifiedImages() {
+    return  '{' +
+                      '  "custom_classes": 0,' +
+                      '  "images_processed": 0,' +
+                      '  "images": [' +
+                      '    {' +
+                      '      "source_url": "string",' +
+                      '      "resolved_url": "string",' +
+                      '      "image": "string",' +
+                      '      "error": {' +
+                      '        "error_id": "string",' +
+                      '        "description": "string"' +
+                      '      },' +
+                      '      "classifiers": [' +
+                      '        {' +
+                      '          "name": "string",' +
+                      '          "classifier_id": "string",' +
+                      '          "classes": [' +
+                      '            {' +
+                      '              "class": "string",' +
+                      '              "score": 0,' +
+                      '              "type_hierarchy": "string"' +
+                      '            }' +
+                      '          ]' +
+                      '        }' +
+                      '      ]' +
+                      '    }' +
+                      '  ],' +
+                      '  "warnings": [' +
+                      '    {' +
+                      '      "warning_id": "string",' +
+                      '      "description": "string"' +
+                      '    }' +
+                      '  ]' +
+                      '}';
+  }
+  
+  public static String detectedFaces() {
+    return  '{' +
+                      '  "images_processed": 0,' +
+                      '  "images": [' +
+                      '    {' +
+                      '      "faces": [' +
+                      '        {' +
+                      '          "age": {' +
+                      '            "min": 0,' +
+                      '            "max": 0,' +
+                      '            "score": 0' +
+                      '          },' +
+                      '          "gender": {' +
+                      '            "gender": "string",' +
+                      '            "score": 0' +
+                      '          },' +
+                      '          "face_location": {' +
+                      '            "width": 0,' +
+                      '            "height": 0,' +
+                      '            "left": 0,' +
+                      '            "top": 0' +
+                      '          },' +
+                      '          "identity": {' +
+                      '            "name": "string",' +
+                      '            "score": 0,' +
+                      '            "type_hierarchy": "string"' +
+                      '          }' +
+                      '        }' +
+                      '      ],' +
+                      '      "image": "string",' +
+                      '      "source_url": "string",' +
+                      '      "resolved_url": "string",' +
+                      '      "error": {' +
+                      '        "error_id": "string",' +
+                      '        "description": "string"' +
+                      '      }' +
+                      '    }' +
+                      '  ],' +
+                      '  "warnings": [' +
+                      '    {' +
+                      '      "warning_id": "string",' +
+                      '      "description": "string"' +
+                      '    }' +
+                      '  ]' +
+                      '}';
+  }
+    
+  public static String classifiers() {
+    return  '{' +
+                      '  "classifiers": [' +
+                      '    {' +
+                      '      "classifier_id": "string",' +
+                      '      "name": "string",' +
+                      '      "owner": "string",' +
+                      '      "status": "ready",' +
+                      '      "explanation": "string",' +
+                      '      "created": "2017-12-01T17:50:28.684Z",' +
+                      '      "classes": [' +
+                      '        {' +
+                      '          "class": "string"' +
+                      '        }' +
+                      '      ]' +
+                      '    }' +
+                      '  ]' +
+                      '}';
+  }
+  public static String classifier() {
+    return  '{' +
+            '      "classifier_id": "string",' +
+            '      "name": "string",' +
+            '      "owner": "string",' +
+            '      "status": "ready",' +
+            '      "explanation": "string",' +
+            '      "created": "2017-12-01T17:50:28.684Z",' +
+            '      "classes": [' +
+            '        {' +
+            '          "class": "string"' +
+            '        }' +
+            '      ]' +
+            '}';
+  }
+
   public static String CreateModel(){
   	return '{' +
            '  "model_id": "3e7dfdbe-f757-4150-afee-458e71eb93fb"' +
