@@ -242,11 +242,15 @@ Both methods shown above will print out the same information.
 The SDK currently supports:
   * Conversation v1
   * Discovery v1
+  * Language Translator v2
+  * Natural Language Classifier v1
+  * Natural Language Understanding v1
+  * Personality Insights v3
+  * Tone Analyzer v3
 
-The remaining services will be added in the soon. You can find the ones that are close to be release in the `generated` branch:
- * Natural Language Understanding v1
- * Natural Language Classifier v1
- * Personality Insights v3
+The remaining services will be added in the soon. You can find the ones that are close to be release in the `develop` branch:
+ * Speech to Text v1
+ * Text to Speech v1
 
 ## Functional Tests
 
