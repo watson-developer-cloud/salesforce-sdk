@@ -42,14 +42,15 @@ public abstract class IBMWatsonService {
   protected Object processResponse(IBMWatsonResponse response, Type targetType) {
     String responseText = response.getBody();
     if (String.isNotBlank(responseText) && (targetType != null)) {
-      String jsonString = IBMWatsonJSONUtil.prepareResponseString(responseText);
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
+      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(responseText);
+      Map<String, Object> safeJsonMap = IBMWatsonJSONUtil.prepareResponse(jsonMap);
       Object targetObject = targetType.newInstance();
+      String jsonString = JSON.serialize(safeJsonMap);
 
       if (targetObject instanceof IBMWatsonDynamicModel) {
-        return ((IBMWatsonDynamicModel) targetObject).deserialize(jsonString, jsonMap, targetType);
+        return ((IBMWatsonDynamicModel) targetObject).deserialize(jsonString, safeJsonMap, targetType);
       } else {
-        return ((IBMWatsonGenericModel) targetObject).deserialize(jsonString, jsonMap, targetType);
+        return ((IBMWatsonGenericModel) targetObject).deserialize(jsonString, safeJsonMap, targetType);
       }
     }
     return null;
@@ -65,11 +66,11 @@ public abstract class IBMWatsonService {
 
     IBMWatsonRequest.Builder builder = request.newBuilder();
     setDefaultHeaders(builder);
-    
+
     if (String.isNotBlank(endpoint) && !endPoint.startsWith(CALLOUT)) {
       setAuthentication(builder);
     }
-    
+
     // Execute the request
     IBMWatsonResponse response = IBMWatsonClient.executeRequest(builder.build());
 
