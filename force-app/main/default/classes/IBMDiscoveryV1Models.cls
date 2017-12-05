@@ -719,7 +719,8 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      Collection ret = (Collection) super.deserialize(jsonString, jsonMap, classType);
+      Map<String, Object> trainingStatus = (Map<String, Object>) jsonMap.remove('training_status_serialized_name');
+      Collection ret = (Collection) super.deserialize(JSON.serialize(jsonMap), jsonMap, classType);
 
       // calling custom deserializer for document_counts_serialized_name
       DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('document_counts_serialized_name'), DocumentCounts.class);
@@ -730,7 +731,7 @@ public class IBMDiscoveryV1Models {
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for training_status_serialized_name
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(ret.getTrainingStatus()), (Map<String, Object>) jsonMap.get('training_status_serialized_name'), TrainingStatus.class);
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatus), trainingStatus, TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
       return ret;
@@ -9515,8 +9516,17 @@ public class IBMDiscoveryV1Models {
       if (jsonMap == null) {
         return null;
       }
+      String data_updated = (String) jsonMap.remove('data_updated_serialized_name');
+      String successfully_trained = (String) jsonMap.remove('successfully_trained_serialized_name');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
 
-      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonString, jsonMap, classType);
+      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
+      if (String.isNotBlank(data_updated)) {
+        ret.setDataUpdated((Datetime) JSON.deserialize(data_updated, Datetime.class));
+      }
+      if (String.isNotBlank(successfully_trained)) {
+        ret.setSuccessfullyTrained((Datetime) JSON.deserialize(successfully_trained, Datetime.class));
+      }
 
       return ret;
     }
