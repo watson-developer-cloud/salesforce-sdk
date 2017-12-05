@@ -51,29 +51,11 @@ public class IBMWatsonJSONUtil {
   }
 
   /**
-   * Replaces any empty string values with 'null'. This will cause that property to be left out of the
-   * string reprentation of the object and will prevent any deserialization issues with empty
-   * strings being returned.
+   * Adds '_serialized_name' suffix to all property keys.
    *
-   * @param jsonString String representation of the JSON response
+   * @param jsonMap Map<String, Object> representation of the JSON response
    *
-   * return String representing our modified JSON response object
-   */
-  private static Object replaceEmptyStrings(Object jsonString) {
-    if (jsonString instanceof String) {
-      if (String.isEmpty((String)jsonString)) {
-        return null;
-      }
-    }
-    return jsonString;
-  }
-
-  /**
-   * Adds 'serialized_name' suffix to all property keys.
-   *
-   * @param jsonString String representation of the JSON response
-   *
-   * @return String representing the JSON response with modified keys
+   * @return Map<String, Object> representing the JSON response with modified keys
    */
   public static Map<String, Object> addPropertySuffix(Map<String, Object> jsonMap) {
     Map<String, Object> safeMap = new Map<String, Object>();
@@ -86,7 +68,7 @@ public class IBMWatsonJSONUtil {
       } else if (jsonValue instanceof List<Object>) {
         safeMap.put(safeKey, addPropertySuffixList((List<Object>) jsonValue));
       } else {
-        safeMap.put(safeKey, replaceEmptyStrings(jsonValue));
+        safeMap.put(safeKey, jsonValue);
       }
     }
     return safeMap;
