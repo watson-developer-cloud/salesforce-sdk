@@ -1633,4 +1633,136 @@ public class IBMWatsonMockResponses {
            ' "character_count": 5' +
            '}';
   }
+
+  public static String voices(){
+    return '{' +
+                     ' "voices": [' +
+                     '   {' +
+                     '     "url": "string",' +
+                     '     "gender": "string",' +
+                     '     "name": "string",' +
+                     '     "language": "string",' +
+                     '     "description": "string",' +
+                     '     "customizable": true,' +
+                     '     "supported_features": {' +
+                     '       "custom_pronunciation": true,' +
+                     '       "voice_transformation": true' +
+                     '     },' +
+                     '     "customization": {' +
+                     '       "customization_id": "string",' +
+                     '       "name": "string",' +
+                     '       "language": "string",' +
+                     '       "owner": "string",' +
+                     '       "created": "string",' +
+                     '       "last_modified": "string",' +
+                     '       "description": "string",' +
+                     '       "words": [' +
+                     '         {' +
+                     '           "word": "string",' +
+                     '           "translation": "string",' +
+                     '           "part_of_speech": "Josi"' +
+                     '         }' +
+                     '       ]' +
+                     '     }' +
+                     '   }' +
+                     ' ]' +
+                   '}';
+  }
+
+  public static String voice(){
+    return '{' +
+           '     "url": "string",' +
+           '     "gender": "string",' +
+           '     "name": "string",' +
+           '     "language": "string",' +
+           '     "description": "string",' +
+           '     "customizable": true,' +
+           '     "supported_features": {' +
+           '       "custom_pronunciation": true,' +
+           '       "voice_transformation": true' +
+           '     },' +
+           '     "customization": {' +
+           '       "customization_id": "string",' +
+           '       "name": "string",' +
+           '       "language": "string",' +
+           '       "owner": "string",' +
+           '       "created": "string",' +
+           '       "last_modified": "string",' +
+           '       "description": "string",' +
+           '       "words": [' +
+           '         {' +
+           '           "word": "string",' +
+           '           "translation": "string",' +
+           '           "part_of_speech": "Josi"' +
+           '         }' +
+           '       ]' +
+           '     }' +
+           '}';
+  }
+
+  public static String pronunciation(){
+    return '{' +
+                   '  "pronunciation": "string"' +
+                   '}';
+  }
+
+  public static String voiceModels(){
+    return '{' +
+                   '  "customizations": [' +
+                   '    {' +
+                   '      "customization_id": "string",' +
+                   '      "name": "string",' +
+                   '      "language": "string",' +
+                   '      "owner": "string",' +
+                   '      "created": "string",' +
+                   '      "last_modified": "string",' +
+                   '      "description": "string",' +
+                   '      "words": [' +
+                   '        {' +
+                   '          "word": "string",' +
+                   '          "translation": "string",' +
+                   '          "part_of_speech": "Josi"' +
+                   '        }' +
+                   '      ]' +
+                   '    }' +
+                   '  ]' +
+                   '}';
+  }
+
+  public static String voiceModel(){
+    return '{' +
+           '      "customization_id": "string",' +
+           '      "name": "string",' +
+           '      "language": "string",' +
+           '      "owner": "string",' +
+           '      "created": "string",' +
+           '      "last_modified": "string",' +
+           '      "description": "string",' +
+           '      "words": [' +
+           '        {' +
+           '          "word": "string",' +
+           '          "translation": "string",' +
+           '          "part_of_speech": "Josi"' +
+           '        }' +
+           '      ]' +
+           '}';
+  }
+
+  public static String words(){
+    return '{' +
+           '  "words": [' +
+           '    {' +
+           '      "word": "string",' +
+           '      "translation": "string",' +
+           '      "part_of_speech": "Josi"' +
+           '    }' +
+           '  ]' +
+           '}';
+  }
+
+  public static String word(){
+    return '{' +
+           '  "translation": "string",' +
+           '  "part_of_speech": "Josi"' +
+           '}';
 }
