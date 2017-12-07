@@ -1566,7 +1566,7 @@ public class IBMWatsonMockResponses {
   public static String DeleteModel(){
     return '{}';
   }
-
+  
   public static String GetModel(){
     return '{' +
            '  "models": [{' +
@@ -1583,7 +1583,7 @@ public class IBMWatsonMockResponses {
            ' }]' +
            '}';
   }
-
+  
   public static String ListModels(){
     return '{' +
            '  "models": [{' +
@@ -1600,7 +1600,7 @@ public class IBMWatsonMockResponses {
            ' }]' +
            '}';
   }
-
+  
   public static String ListIdentifiableLanguages(){
     return '{' +
            ' "languages": [' +
@@ -1623,7 +1623,7 @@ public class IBMWatsonMockResponses {
            '  ]' +
            '}';
   }
-
+  
   public static String Translate(){
     return '{' +
            ' "translations": [{' +
@@ -1633,7 +1633,7 @@ public class IBMWatsonMockResponses {
            ' "character_count": 5' +
            '}';
   }
-
+  
   public static String voices(){
     return '{' +
            ' "voices": [' +
@@ -1668,7 +1668,7 @@ public class IBMWatsonMockResponses {
            ' ]' +
            '}';
   }
-
+  
   public static String voice(){
     return '{' +
            '     "url": "string",' +
@@ -1699,13 +1699,13 @@ public class IBMWatsonMockResponses {
            '     }' +
            '}';
   }
-
+  
   public static String pronunciation(){
     return '{' +
            '  "pronunciation": "string"' +
            '}';
   }
-
+  
   public static String voiceModels(){
     return '{' +
            '  "customizations": [' +
@@ -1728,7 +1728,7 @@ public class IBMWatsonMockResponses {
            '  ]' +
            '}';
   }
-
+  
   public static String voiceModel(){
     return '{' +
            '      "customization_id": "string",' +
@@ -1747,7 +1747,7 @@ public class IBMWatsonMockResponses {
            '      ]' +
            '}';
   }
-
+  
   public static String words(){
     return '{' +
            '  "words": [' +
@@ -1759,10 +1759,12 @@ public class IBMWatsonMockResponses {
            '  ]' +
            '}';
   }
-
+  
   public static String word(){
     return '{' +
+           '  "word": "string",' +
            '  "translation": "string",' +
            '  "part_of_speech": "Josi"' +
            '}';
+  }
 }
