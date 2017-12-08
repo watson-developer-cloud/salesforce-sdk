@@ -42,49 +42,48 @@ public class IBMWatsonJSONUtil {
    * Calls appropriate methods to prepare the JSON response for deserialization. This involves removing empty
    * string values and adding the property suffix to avoid using reserved words.
    *
-   * @param jsonString String representation of the JSON response
+   * @param jsonMap Map<String, Object> representation of the JSON response
    *
-   * return String representing our JSON object ready to be deserialized
+   * return Map<String, Object> representing our JSON object ready to be deserialized
    */
-  public static String prepareResponseString(String jsonString) {
-    jsonString = addPropertySuffix(jsonString);
-    jsonString = replaceEmptyStrings(jsonString);
-    return jsonString;
+  public static Map<String, Object> prepareResponse(Map<String, Object> jsonMap) {
+    return addPropertySuffix(jsonMap);
   }
 
   /**
-   * Replaces any empty string values with 'null'. This will cause that property to be left out of the
-   * string reprentation of the object and will prevent any deserialization issues with empty
-   * strings being returned.
+   * Adds '_serialized_name' suffix to all property keys.
    *
-   * @param jsonString String representation of the JSON response
+   * @param jsonMap Map<String, Object> representation of the JSON response
    *
-   * return String representing our modified JSON response object
+   * @return Map<String, Object> representing the JSON response with modified keys
    */
-  private static String replaceEmptyStrings(String jsonString) {
-    return jsonString.replace('""', 'null');
-  }
+  public static Map<String, Object> addPropertySuffix(Map<String, Object> jsonMap) {
+    Map<String, Object> safeMap = new Map<String, Object>();
 
-  /**
-   * Adds 'serialized_name' suffix to all property keys.
-   *
-   * @param jsonString String representation of the JSON response
-   *
-   * @return String representing the JSON response with modified keys
-   */
-  private static String addPropertySuffix(String jsonString) {
-    List<String> jsonStringPieces = new List<String>();
-    String restOfString = jsonString;
-    Integer indexOffset = 5000;
-    Integer braceIndex = restOfString.indexOf('{', indexOffset);
-    while (braceIndex >= 0) {
-      String newPiece = restOfString.substring(0, braceIndex);
-      restOfString = restOfString.substring(braceIndex);
-      jsonStringPieces.add(newPiece.replaceAll('" :','":').replaceAll('":', '_serialized_name":'));
-      braceIndex = restOfString.indexOf('{', indexOffset);
+    for (String key : jsonMap.keySet()) {
+      String safeKey = key + '_serialized_name';
+      Object jsonValue = jsonMap.get(key);
+      if (jsonValue instanceof Map<String, Object>) {
+        safeMap.put(safeKey, addPropertySuffix((Map<String, Object>) jsonValue));
+      } else if (jsonValue instanceof List<Object>) {
+        safeMap.put(safeKey, addPropertySuffixList((List<Object>) jsonValue));
+      } else {
+        safeMap.put(safeKey, jsonValue);
+      }
     }
-    jsonStringPieces.add(restOfString.replaceAll('" :','":').replaceAll('":', '_serialized_name":'));
-    return String.join(jsonStringPieces, '');
+    return safeMap;
+  }
+
+  private static List<Object> addPropertySuffixList(List<Object> jsonList) {
+    List<Object> safeList = new List<Object>();
+    for (Object jsonValue : jsonList) {
+      if (jsonValue instanceof Map<String, Object>) {
+        safeList.add(addPropertySuffix((Map<String, Object>) jsonValue));
+      } else {
+        safeList.add(jsonValue);
+      }
+    }
+    return safeList;
   }
 
   /**
@@ -96,126 +95,14 @@ public class IBMWatsonJSONUtil {
    * @return String representing the JSON request with moved additional properties
    */
   private static String raiseAdditionalProperties(String jsonString) {
-    JSONParser parser = JSON.createParser(jsonString);
-
-    while (jsonString.contains('additional_properties')) {
-      JSONToken token = parser.getCurrentToken();
-
-      while (token == JSONToken.START_ARRAY
-          || token == JSONToken.END_ARRAY
-          || token == JSONToken.START_OBJECT
-          || token == JSONToken.END_OBJECT) {
-        token = parser.nextToken();
+    Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
+    Map<String, Object> additionalProperties = (Map<String, Object>) jsonMap.get('additional_properties');
+    if (additionalProperties != null) {
+      for (String key : additionalProperties.keySet()) {
+        jsonMap.put(key, additionalProperties.get(key));
       }
-
-      // this should be a key
-      String key = parser.getCurrentName();
-
-      if (key != null && key.equals('additional_properties')) {
-        List<String> replacementList = new List<String>();
-        replacementList.add('"' + parser.getText() + '":');
-        Boolean hasAdditionalProperties = false;
-
-        if (parser.nextToken() == JSONToken.START_OBJECT) {
-          hasAdditionalProperties = true;
-        }
-
-        // we actually have additional properties to extract
-        if (hasAdditionalProperties) {
-          Integer braceCount = 0;
-          JSONToken lastToken = parser.getCurrentToken();
-          JSONToken current = lastToken;
-
-          // looping until we find the end of the additional_properties object
-          while (lastToken != JSONToken.END_OBJECT || braceCount > 0) {
-            String replacementString = parser.getText();
-            
-            // getText above will remove any escape characters
-            replacementString = replacementString.replace('"', '\\"');
-
-            if (current == JSONToken.START_OBJECT) {
-              braceCount++;
-            }
-            else if (current == JSONToken.END_OBJECT) {
-              braceCount--;
-              Integer lastIndex = replacementList.size() - 1;
-              String lastVal = replacementList.get(lastIndex);
-              
-              // only want to remove trailing commas
-              if (!lastVal.equals('{')) {
-                lastVal = lastVal.substring(0, lastVal.length() - 1);
-                replacementList.set(lastIndex, lastVal);
-              }
-            }
-            else if (current == JSONToken.END_ARRAY) {
-              Integer lastIndex = replacementList.size() - 1;
-              String lastVal = replacementList.get(lastIndex);
-
-              // only want to remove trailing commas
-              if (!lastVal.equals('[')) {
-                lastVal = lastVal.substring(0, lastVal.length() - 1);
-                replacementList.set(lastIndex, lastVal);
-              }
-            }
-
-            if (current == JSONToken.FIELD_NAME) {
-              replacementString = '"' + replacementString + '":';
-            }
-            else if (current == JSONToken.VALUE_STRING) {
-              replacementString = '"' + replacementString + '",';
-            }
-            else if (current == JSONToken.VALUE_NUMBER_INT
-                || current == JSONToken.VALUE_NUMBER_FLOAT
-                || current == JSONToken.VALUE_TRUE
-                || current == JSONToken.VALUE_FALSE
-                || current == JSONToken.VALUE_NULL
-                || current == JSONToken.END_ARRAY
-                || current == JSONToken.END_OBJECT) {
-              replacementString = replacementString + ',';
-            }
-
-            replacementList.add(replacementString);
-
-            lastToken = current;
-            current = parser.nextToken();
-          }
-
-          Integer lastIndex = replacementList.size() - 1;
-          String lastString = replacementList.get(lastIndex);
-          replacementList.set(lastIndex, lastString.substring(0, lastString.length() - 1));
-
-          String stringToReplace = String.join(replacementList, '');
-
-          // getting rid of "additional_properties": { }
-          // which leaves just the inner properties
-          replacementList.remove(0);
-          replacementList.remove(0);
-          replacementList.remove(replacementList.size() - 1);
-          String replacementString = String.join(replacementList, '');
-          jsonString = jsonString.replace(stringToReplace, replacementString);
-        }
-
-        // we just need to remove the line with additional_properties as null
-        else {
-          String emptyAdditionalProperties = '"additional_properties":null';
-
-          Integer indexWithoutComma = jsonString.indexOf(emptyAdditionalProperties);
-          Integer indexWithComma = jsonString.indexOf(emptyAdditionalProperties + ',');
-
-          if (indexWithComma <= indexWithoutComma) {
-            jsonString = jsonString.replaceFirst(emptyAdditionalProperties + ',', '');
-          }
-          else {
-            jsonString = jsonString.replaceFirst(emptyAdditionalProperties, '');
-          }
-        }
-        parser = JSON.createParser(jsonString);
-      }
-      else {
-        parser.nextToken();
-      }
+      jsonMap.remove('additional_properties');
     }
-
-    return jsonString;
+    return JSON.serialize(jsonMap);
   }
 }
