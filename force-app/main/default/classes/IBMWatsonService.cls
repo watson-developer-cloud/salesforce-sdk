@@ -71,7 +71,6 @@ public abstract class IBMWatsonService {
         }
   	  }
   	}
-  	
     return null;
   }
 
@@ -85,11 +84,11 @@ public abstract class IBMWatsonService {
 
     IBMWatsonRequest.Builder builder = request.newBuilder();
     setDefaultHeaders(builder);
-    
+
     if (String.isNotBlank(endpoint) && !endPoint.startsWith(CALLOUT)) {
       setAuthentication(builder);
     }
-    
+
     // Execute the request
     IBMWatsonResponse response = IBMWatsonClient.executeRequest(builder.build());
 
