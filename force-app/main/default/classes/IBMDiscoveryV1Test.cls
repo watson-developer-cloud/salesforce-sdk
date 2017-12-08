@@ -577,6 +577,50 @@ private class IBMDiscoveryV1Test {
   }
 
   /**
+   *  Test get trained collection
+   *
+   */
+  static testMethod void testGetCollectionTrained() {
+    String body = IBMWatsonMockResponses.collectionTrained();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+    IBMDiscoveryV1Models.GetCollectionOptions options = new IBMDiscoveryV1Models.GetCollectionOptionsBuilder()
+      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .build();
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
+    IBMDiscoveryV1Models.Collection resp =
+      discovery.getCollection(options);
+    System.assertEquals(resp.getName(), 'test-collection');
+    System.assertEquals(resp.getCollectionId(), '800e58e4-198d-45eb-be87-74e1d6df4e96');
+    System.assertEquals(resp.getCreated(),(DateTime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',DateTime.class));
+    System.assertEquals(resp.getUpdated(),(DateTime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',DateTime.class));
+    System.assertEquals(resp.getStatus(), 'active');
+    System.assertEquals(resp.getConfigurationId(), '3c4fff84-1500-455c-b125-eaa2d319f6d3');
+    System.assertEquals(resp.getLanguage(), 'de');
+    System.assertEquals(resp.getDescription(), 'A trained test collection to show as an example');
+    System.assertEquals(resp.getDocumentCounts().getAvailable(), 0);
+    System.assertEquals(resp.getDocumentCounts().getProcessing(), 0);
+    System.assertEquals(resp.getDocumentCounts().getFailed(), 0);
+    System.assertEquals(resp.getDiskUsage().getUsedBytes(), 260);
+    System.assertEquals(resp.getTrainingStatus().getTotalExamples(), 10);
+    System.assertEquals(resp.getTrainingStatus().getAvailable(), true);
+    System.assertEquals(resp.getTrainingStatus().getProcessing(), false);
+    System.assertEquals(resp.getTrainingStatus().getMinimumQueriesAdded(), true);
+    System.assertEquals(resp.getTrainingStatus().getMinimumExamplesAdded(), true);
+    System.assertEquals(resp.getTrainingStatus().getSufficientLabelDiversity(), true);
+    System.assertEquals(resp.getTrainingStatus().getNotices(), 0);
+    System.assertEquals(resp.getTrainingStatus().getSuccessfullyTrained(), (DateTime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',DateTime.class));
+    System.assertEquals(resp.getTrainingStatus().getDataUpdated(), (DateTime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',DateTime.class));
+    Test.stopTest();
+  }
+
+  /**
    *  Test list collections
    *
    */

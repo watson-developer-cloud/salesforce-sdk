@@ -288,15 +288,47 @@ public class IBMWatsonMockResponses {
             '    "used_bytes": 260'+
             '  },'+
             '  "training_status": {'+
-            '    "data_updated": null,'+
+            '    "data_updated": "",'+
             '    "total_examples": 0,'+
             '    "sufficient_label_diversity": false,'+
             '    "processing": false,'+
             '    "minimum_examples_added": false,'+
-            '    "successfully_trained": null,'+
+            '    "successfully_trained": "",'+
             '    "available": false,'+
             '    "notices": 0,'+
             '    "minimum_queries_added": false'+
+            '  }'+
+            '}';
+  }
+
+  public static String collectionTrained() {
+    return  '{'+
+            '  "collection_id": "800e58e4-198d-45eb-be87-74e1d6df4e96",'+
+            '  "name": "test-collection",'+
+            '  "configuration_id": "3c4fff84-1500-455c-b125-eaa2d319f6d3",'+
+            '  "language": "de",'+
+            '  "status": "active",'+
+            '  "description": "A trained test collection to show as an example",'+
+            '  "created": "2017-07-14T12:55:40.652Z",'+
+            '  "updated": "2017-07-14T12:55:40.652Z",'+
+            '  "document_counts": {'+
+            '    "available": 0,'+
+            '    "processing": 0,'+
+            '    "failed": 0'+
+            '  },'+
+            '  "disk_usage": {'+
+            '    "used_bytes": 260'+
+            '  },'+
+            '  "training_status": {'+
+            '    "data_updated": "2017-07-14T12:55:40.652Z",'+
+            '    "total_examples": 10,'+
+            '    "sufficient_label_diversity": true,'+
+            '    "processing": false,'+
+            '    "minimum_examples_added": true,'+
+            '    "successfully_trained": "2017-07-14T12:55:40.652Z",'+
+            '    "available": true,'+
+            '    "notices": 0,'+
+            '    "minimum_queries_added": true'+
             '  }'+
             '}';
   }
@@ -1558,13 +1590,13 @@ public class IBMWatsonMockResponses {
   }
 
   public static String CreateModel(){
-  	return '{' +
+    return '{' +
            '  "model_id": "3e7dfdbe-f757-4150-afee-458e71eb93fb"' +
            '}';
   }
   
   public static String DeleteModel(){
-  	return '{}';
+    return '{}';
   }
   
   public static String GetModel(){
@@ -1625,12 +1657,146 @@ public class IBMWatsonMockResponses {
   }
   
   public static String Translate(){
-  	return '{' +
+    return '{' +
            ' "translations": [{' +
            ' "translation": "Hola"' +
            ' }],' +
            ' "word_count": 1,' +
            ' "character_count": 5' +
+           '}';
+  }
+  
+  public static String voices(){
+    return '{' +
+           ' "voices": [' +
+           '   {' +
+           '     "url": "string",' +
+           '     "gender": "string",' +
+           '     "name": "string",' +
+           '     "language": "string",' +
+           '     "description": "string",' +
+           '     "customizable": true,' +
+           '     "supported_features": {' +
+           '       "custom_pronunciation": true,' +
+           '       "voice_transformation": true' +
+           '     },' +
+           '     "customization": {' +
+           '       "customization_id": "string",' +
+           '       "name": "string",' +
+           '       "language": "string",' +
+           '       "owner": "string",' +
+           '       "created": "string",' +
+           '       "last_modified": "string",' +
+           '       "description": "string",' +
+           '       "words": [' +
+           '         {' +
+           '           "word": "string",' +
+           '           "translation": "string",' +
+           '           "part_of_speech": "Josi"' +
+           '         }' +
+           '       ]' +
+           '     }' +
+           '   }' +
+           ' ]' +
+           '}';
+  }
+  
+  public static String voice(){
+    return '{' +
+           '     "url": "string",' +
+           '     "gender": "string",' +
+           '     "name": "string",' +
+           '     "language": "string",' +
+           '     "description": "string",' +
+           '     "customizable": true,' +
+           '     "supported_features": {' +
+           '       "custom_pronunciation": true,' +
+           '       "voice_transformation": true' +
+           '     },' +
+           '     "customization": {' +
+           '       "customization_id": "string",' +
+           '       "name": "string",' +
+           '       "language": "string",' +
+           '       "owner": "string",' +
+           '       "created": "string",' +
+           '       "last_modified": "string",' +
+           '       "description": "string",' +
+           '       "words": [' +
+           '         {' +
+           '           "word": "string",' +
+           '           "translation": "string",' +
+           '           "part_of_speech": "Josi"' +
+           '         }' +
+           '       ]' +
+           '     }' +
+           '}';
+  }
+  
+  public static String pronunciation(){
+    return '{' +
+           '  "pronunciation": "string"' +
+           '}';
+  }
+  
+  public static String voiceModels(){
+    return '{' +
+           '  "customizations": [' +
+           '    {' +
+           '      "customization_id": "string",' +
+           '      "name": "string",' +
+           '      "language": "string",' +
+           '      "owner": "string",' +
+           '      "created": "string",' +
+           '      "last_modified": "string",' +
+           '      "description": "string",' +
+           '      "words": [' +
+           '        {' +
+           '          "word": "string",' +
+           '          "translation": "string",' +
+           '          "part_of_speech": "Josi"' +
+           '        }' +
+           '      ]' +
+           '    }' +
+           '  ]' +
+           '}';
+  }
+  
+  public static String voiceModel(){
+    return '{' +
+           '      "customization_id": "string",' +
+           '      "name": "string",' +
+           '      "language": "string",' +
+           '      "owner": "string",' +
+           '      "created": "string",' +
+           '      "last_modified": "string",' +
+           '      "description": "string",' +
+           '      "words": [' +
+           '        {' +
+           '          "word": "string",' +
+           '          "translation": "string",' +
+           '          "part_of_speech": "Josi"' +
+           '        }' +
+           '      ]' +
+           '}';
+  }
+  
+  public static String words(){
+    return '{' +
+           '  "words": [' +
+           '    {' +
+           '      "word": "string",' +
+           '      "translation": "string",' +
+           '      "part_of_speech": "Josi"' +
+           '    }' +
+           '  ]' +
+           '}';
+  }
+  
+  public static String word(){
+    return '{' +
+           '  "word": "string",' +
+           '  "translation": "string",' +
+           '  "part_of_speech": "Josi"' +
            '}';
   }
 }
