@@ -59,14 +59,14 @@ public abstract class IBMWatsonService {
   	  else{
         String responseText = response.getBody();
         if (String.isNotBlank(responseText)) {
-          String jsonString = IBMWatsonJSONUtil.prepareResponseString(responseText);
-          Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
+          Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(responseText);
+          Map<String, Object> safeJsonMap = IBMWatsonJSONUtil.prepareResponse(jsonMap);
           Object targetObject = targetType.newInstance();
-       
+          String jsonString = JSON.serialize(safeJsonMap);
           if (targetObject instanceof IBMWatsonDynamicModel) {
-            return ((IBMWatsonDynamicModel) targetObject).deserialize(jsonString, jsonMap, targetType);
+            return ((IBMWatsonDynamicModel) targetObject).deserialize(jsonString, safeJsonMap, targetType);
           } else {
-            return ((IBMWatsonGenericModel) targetObject).deserialize(jsonString, jsonMap, targetType);
+            return ((IBMWatsonGenericModel) targetObject).deserialize(jsonString, safeJsonMap, targetType);
           }
         }
   	  }
