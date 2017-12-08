@@ -288,15 +288,47 @@ public class IBMWatsonMockResponses {
             '    "used_bytes": 260'+
             '  },'+
             '  "training_status": {'+
-            '    "data_updated": null,'+
+            '    "data_updated": "",'+
             '    "total_examples": 0,'+
             '    "sufficient_label_diversity": false,'+
             '    "processing": false,'+
             '    "minimum_examples_added": false,'+
-            '    "successfully_trained": null,'+
+            '    "successfully_trained": "",'+
             '    "available": false,'+
             '    "notices": 0,'+
             '    "minimum_queries_added": false'+
+            '  }'+
+            '}';
+  }
+
+  public static String collectionTrained() {
+    return  '{'+
+            '  "collection_id": "800e58e4-198d-45eb-be87-74e1d6df4e96",'+
+            '  "name": "test-collection",'+
+            '  "configuration_id": "3c4fff84-1500-455c-b125-eaa2d319f6d3",'+
+            '  "language": "de",'+
+            '  "status": "active",'+
+            '  "description": "A trained test collection to show as an example",'+
+            '  "created": "2017-07-14T12:55:40.652Z",'+
+            '  "updated": "2017-07-14T12:55:40.652Z",'+
+            '  "document_counts": {'+
+            '    "available": 0,'+
+            '    "processing": 0,'+
+            '    "failed": 0'+
+            '  },'+
+            '  "disk_usage": {'+
+            '    "used_bytes": 260'+
+            '  },'+
+            '  "training_status": {'+
+            '    "data_updated": "2017-07-14T12:55:40.652Z",'+
+            '    "total_examples": 10,'+
+            '    "sufficient_label_diversity": true,'+
+            '    "processing": false,'+
+            '    "minimum_examples_added": true,'+
+            '    "successfully_trained": "2017-07-14T12:55:40.652Z",'+
+            '    "available": true,'+
+            '    "notices": 0,'+
+            '    "minimum_queries_added": true'+
             '  }'+
             '}';
   }
