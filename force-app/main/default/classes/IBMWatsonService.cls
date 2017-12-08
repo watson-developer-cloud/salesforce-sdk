@@ -40,18 +40,38 @@ public abstract class IBMWatsonService {
    * Parses the IBMWatsonResponse.
    */
   protected Object processResponse(IBMWatsonResponse response, Type targetType) {
-    String responseText = response.getBody();
-    if (String.isNotBlank(responseText) && (targetType != null)) {
-      String jsonString = IBMWatsonJSONUtil.prepareResponseString(responseText);
-      Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
-      Object targetObject = targetType.newInstance();
-
-      if (targetObject instanceof IBMWatsonDynamicModel) {
-        return ((IBMWatsonDynamicModel) targetObject).deserialize(jsonString, jsonMap, targetType);
-      } else {
-        return ((IBMWatsonGenericModel) targetObject).deserialize(jsonString, jsonMap, targetType);
-      }
-    }
+    if(targetType != null){
+      // this service is expecting a file response
+  	  if(targetType == IBMWatsonFile.class){
+  	  	String contentDisposition = response.getHeader(IBMWatsonHttpHeaders.CONTENT_DISPOSITION);
+  	  	String filename = contentDisposition.substringAfter('filename=');
+  	  	filename = (String.isNotBlank(filename)) ? filename.replaceAll('"','') : 'result';
+  	  	String contentType = response.getHeader(IBMWatsonHttpHeaders.CONTENT_TYPE);
+  	  	IBMWatsonFile resFile = new IBMWatsonFile.FileBuilder()
+  	  	  .name(filename)
+  	  	  .description('Synthesize audio file')
+  	  	  .contentType(contentType)
+  	  	  .body(response.getBodyAsBlob())
+  	  	  .build();
+  	  	return resFile;
+  	  }
+  	  // all other response types
+  	  else{
+        String responseText = response.getBody();
+        if (String.isNotBlank(responseText)) {
+          String jsonString = IBMWatsonJSONUtil.prepareResponseString(responseText);
+          Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
+          Object targetObject = targetType.newInstance();
+       
+          if (targetObject instanceof IBMWatsonDynamicModel) {
+            return ((IBMWatsonDynamicModel) targetObject).deserialize(jsonString, jsonMap, targetType);
+          } else {
+            return ((IBMWatsonGenericModel) targetObject).deserialize(jsonString, jsonMap, targetType);
+          }
+        }
+  	  }
+  	}
+  	
     return null;
   }
 
