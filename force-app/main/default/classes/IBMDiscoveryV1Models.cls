@@ -719,7 +719,7 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      Map<String, Object> trainingStatus = (Map<String, Object>) jsonMap.remove('training_status_serialized_name');
+      Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.remove('training_status_serialized_name');
       Collection ret = (Collection) super.deserialize(JSON.serialize(jsonMap), jsonMap, classType);
 
       // calling custom deserializer for document_counts_serialized_name
@@ -731,7 +731,7 @@ public class IBMDiscoveryV1Models {
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for training_status_serialized_name
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatus), trainingStatus, TrainingStatus.class);
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
       return ret;
