@@ -243,13 +243,18 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * @param createJobOptions the {@link IBMSpeechToTextV1Models.CreateJobOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.RecognitionJob} with the response
    */
-  /* public IBMSpeechToTextV1Models.RecognitionJob createJob(IBMSpeechToTextV1Models.CreateJobOptions createJobOptions) {
+  public IBMSpeechToTextV1Models.RecognitionJob createJob(IBMSpeechToTextV1Models.CreateJobOptions createJobOptions) {
     IBMWatsonValidator.notNull(createJobOptions, 'createJobOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/recognitions');
     if (createJobOptions.transferEncoding() != null) {
       builder.addHeader('Transfer-Encoding', createJobOptions.transferEncoding());
     }
-    builder.addHeader('Content-Type', createJobOptions.contentType());
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (createJobOptions.audio() != null) {
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createJobOptions.audio(), createJobOptions.contentType());
+      multipartBuilder.addFormDataPart('audio', createJobOptions.audioFilename(), fileBody);
+    }
     if (createJobOptions.callbackUrl() != null) {
       builder.query('callback_url', createJobOptions.callbackUrl());
     }
@@ -304,10 +309,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createJobOptions.speakerLabels() != null) {
       builder.query('speaker_labels', String.valueOf(createJobOptions.speakerLabels()));
     }
-    builder.bodyContent(options.audio(), createJobOptions.contentType());
 
     return (IBMSpeechToTextV1Models.RecognitionJob) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RecognitionJob.class);
-  } */
+  }
 
   /**
    * Deletes the specified asynchronous job

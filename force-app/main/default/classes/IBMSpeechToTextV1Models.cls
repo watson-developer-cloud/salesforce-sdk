@@ -1904,12 +1904,14 @@ public class IBMSpeechToTextV1Models {
    * The createJob options
    */
   public class CreateJobOptions {
+    private IBMWatsonFile audio_serialized_name;
+    private String audio_filename_serialized_name;
+    private String content_type_serialized_name;
     private String callback_url_serialized_name;
     private String events_serialized_name;
     private String user_token_serialized_name;
     private Long results_ttl_serialized_name;
     private String transfer_encoding_serialized_name;
-    private String content_type_serialized_name;
     private String model_serialized_name;
     private String customization_id_serialized_name;
     private String acoustic_customization_id_serialized_name;
@@ -1924,6 +1926,15 @@ public class IBMSpeechToTextV1Models {
     private Boolean profanity_filter_serialized_name;
     private Boolean smart_formatting_serialized_name;
     private Boolean speaker_labels_serialized_name;
+
+    public IBMWatsonFile audio() {
+      return audio_serialized_name;
+    }
+
+    public String audioFilename() {
+      return audio_filename_serialized_name;
+    }
+
     /**
      * Gets the callback_url_serialized_name.
      *
@@ -2125,7 +2136,11 @@ public class IBMSpeechToTextV1Models {
       return speaker_labels_serialized_name;
     }
     private CreateJobOptions(CreateJobOptionsBuilder builder) {
+      IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be null');
+      IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be empty');
       IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
+      audio_serialized_name = builder.audio_serialized_name;
+      audio_filename_serialized_name = builder.audio_filename_serialized_name;
       callback_url_serialized_name = builder.callback_url_serialized_name;
       events_serialized_name = builder.events_serialized_name;
       user_token_serialized_name = builder.user_token_serialized_name;
@@ -2163,6 +2178,8 @@ public class IBMSpeechToTextV1Models {
    * CreateJobOptions Builder.
    */
   public class CreateJobOptionsBuilder {
+    private IBMWatsonFile audio_serialized_name;
+    private String audio_filename_serialized_name;
     private String callback_url_serialized_name;
     private String events_serialized_name;
     private String user_token_serialized_name;
@@ -2185,6 +2202,8 @@ public class IBMSpeechToTextV1Models {
     private Boolean speaker_labels_serialized_name;
 
     private CreateJobOptionsBuilder(CreateJobOptions createJobOptions) {
+      audio_serialized_name = createJobOptions.audio_serialized_name;
+      audio_filename_serialized_name = createJobOptions.audio_filename_serialized_name;
       callback_url_serialized_name = createJobOptions.callback_url_serialized_name;
       events_serialized_name = createJobOptions.events_serialized_name;
       user_token_serialized_name = createJobOptions.user_token_serialized_name;
@@ -2220,6 +2239,16 @@ public class IBMSpeechToTextV1Models {
      */
     public CreateJobOptions build() {
       return new CreateJobOptions(this);
+    }
+
+    public CreateJobOptionsBuilder audio(IBMWatsonFile audio) {
+      this.audio_serialized_name = audio;
+      return this;
+    }
+
+    public CreateJobOptionsBuilder audioFilename(String audioFilename) {
+      this.audio_filename_serialized_name = audioFilename;
+      return this;
     }
 
     /**
