@@ -564,19 +564,19 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * @param addWordOptions the {@link IBMSpeechToTextV1Models.AddWordOptions} containing the options for the call
    * @return the service call
    */
-  /* public void addWord(IBMSpeechToTextV1Models.AddWordOptions addWordOptions) {
+  public void addWord(IBMSpeechToTextV1Models.AddWordOptions addWordOptions) {
     IBMWatsonValidator.notNull(addWordOptions, 'addWordOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getEndPoint() + String.format('/v1/customizations/{0}/words/{1}', new String[]{ addWordOptions.customizationId(), addWordOptions.wordName() }));
     builder.addHeader('Content-Type', addWordOptions.contentType());
     if (addWordOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-      builder.bodyJson(JSON.serialize(addWordOptions.custom_word(), true));
+      builder.bodyJson(JSON.serialize(addWordOptions.customWord(), true));
     }
     else {
       builder.bodyContent(addWordOptions.body(), addWordOptions.contentType());
     }
 
     createServiceCall(builder.build(), null);
-  } */
+  }
 
   /**
    * Adds one or more custom words to a custom language model
@@ -586,19 +586,19 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * @param addWordsOptions the {@link IBMSpeechToTextV1Models.AddWordsOptions} containing the options for the call
    * @return the service call
    */
-  /* public void addWords(IBMSpeechToTextV1Models.AddWordsOptions addWordsOptions) {
+  public void addWords(IBMSpeechToTextV1Models.AddWordsOptions addWordsOptions) {
     IBMWatsonValidator.notNull(addWordsOptions, 'addWordsOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/words', new String[]{ addWordsOptions.customizationId() }));
     builder.addHeader('Content-Type', addWordsOptions.contentType());
     if (addWordsOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-      builder.bodyJson(JSON.serialize(addWordsOptions.custom_words(), true));
+      builder.bodyJson(JSON.serialize(addWordsOptions.customWords(), true));
     }
     else {
       builder.bodyContent(addWordsOptions.body(), addWordsOptions.contentType());
     }
 
     createServiceCall(builder.build(), null);
-  } */
+  }
 
   /**
    * Deletes a custom word from a custom language model
