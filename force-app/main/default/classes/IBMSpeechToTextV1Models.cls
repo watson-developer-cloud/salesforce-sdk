@@ -5467,6 +5467,7 @@ public class IBMSpeechToTextV1Models {
 
   public class RecognizeOptions {
     private IBMWatsonFile audio_serialized_name;
+    private String audio_filename_serialized_name;
     private String file_content_type_serialized_name;
     private Boolean continuous_serialized_name;
     private Integer max_alternatives_serialized_name;
@@ -5486,6 +5487,10 @@ public class IBMSpeechToTextV1Models {
 
     public IBMWatsonFile audio() {
       return audio_serialized_name;
+    }
+
+    public String audioFilename() {
+      return audio_filename_serialized_name;
     }
 
     public String fileContentType() {
@@ -5554,8 +5559,10 @@ public class IBMSpeechToTextV1Models {
 
     private RecognizeOptions(RecognizeOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be empty');
       IBMWatsonValidator.notEmpty(builder.file_content_type_serialized_name, 'fileContenttype cannot be empty');
       audio_serialized_name = builder.audio_serialized_name;
+      audio_filename_serialized_name = builder.audio_filename_serialized_name;
       file_content_type_serialized_name = builder.file_content_type_serialized_name;
       continuous_serialized_name = builder.continuous_serialized_name;
       max_alternatives_serialized_name = builder.max_alternatives_serialized_name;
@@ -5581,6 +5588,7 @@ public class IBMSpeechToTextV1Models {
 
   public class RecognizeOptionsBuilder {
     private IBMWatsonFile audio_serialized_name;
+    private String audio_filename_serialized_name;
     private String file_content_type_serialized_name;
     private Boolean continuous_serialized_name;
     private Integer max_alternatives_serialized_name;
@@ -5600,6 +5608,7 @@ public class IBMSpeechToTextV1Models {
 
     private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
       audio_serialized_name = recognizeOptions.audio_serialized_name;
+      audio_filename_serialized_name = recognizeOptions.audio_filename_serialized_name;
       file_content_type_serialized_name = recognizeOptions.file_content_type_serialized_name;
       continuous_serialized_name = recognizeOptions.continuous_serialized_name;
       max_alternatives_serialized_name = recognizeOptions.max_alternatives_serialized_name;
@@ -5621,8 +5630,9 @@ public class IBMSpeechToTextV1Models {
     public RecognizeOptionsBuilder() {
     }
 
-    public RecognizeOptionsBuilder(IBMWatsonFile audio, String fileContentType) {
+    public RecognizeOptionsBuilder(IBMWatsonFile audio, String audioFilename, String fileContentType) {
       this.audio_serialized_name = audio;
+      this.audio_filename_serialized_name = audioFilename;
       this.file_content_type_serialized_name = fileContentType;
     }
 
@@ -5632,6 +5642,11 @@ public class IBMSpeechToTextV1Models {
 
     public RecognizeOptionsBuilder audio(IBMWatsonFile audio) {
       this.audio_serialized_name = audio;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder audioFilename(String audioFilename) {
+      this.audio_filename_serialized_name = audioFilename;
       return this;
     }
 

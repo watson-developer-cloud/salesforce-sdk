@@ -817,4 +817,64 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     return (IBMSpeechToTextV1Models.AudioResources) createServiceCall(builder.build(), IBMSpeechToTextV1Models.AudioResources.class);
   }
 
+  public IBMSpeechToTextV1Models.SpeechResults recognize(IBMSpeechToTextV1Models.RecognizeOptions recognizeOptions) {
+    IBMWatsonValidator.notNull(recognizeOptions, 'recognizeOptions cannot be null');
+    String url = '/v1';
+    if (recognizeOptions.sessionId() != null) {
+      url += '/sessions/' + recognizeOptions.sessionId();
+    }
+    url += '/recognize';
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + url);
+
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (recognizeOptions.audio() != null) {
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(recognizeOptions.audio(), recognizeOptions.fileContentType());
+      multipartBuilder.addFormDataPart('audio', recognizeOptions.audioFilename(), fileBody);
+    }
+    if (recognizeOptions.continuous() != null) {
+      builder.query('continuous', String.valueOf(recognizeOptions.continuous()));
+    }
+    if (recognizeOptions.maxAlternatives() != null) {
+      builder.query('max_alternatives', String.valueOf(recognizeOptions.maxAlternatives()));
+    }
+    if (recognizeOptions.timestamps() != null) {
+      builder.query('timestamps', String.valueOf(recognizeOptions.timestamps()));
+    }
+    if (recognizeOptions.wordConfidence() != null) {
+      builder.query('word_confidence', String.valueOf(recognizeOptions.wordConfidence()));
+    }
+    if (recognizeOptions.inactivityTimeout() != null) {
+      builder.query('inactivity_timeout', String.valueOf(recognizeOptions.inactivityTimeout()));
+    }
+    if (recognizeOptions.model() != null) {
+      builder.query('model', recognizeOptions.model());
+    }
+    if (recognizeOptions.interimResults() != null) {
+      builder.query('interim_results', String.valueOf(recognizeOptions.interimResults()));
+    }
+    if (recognizeOptions.keywords() != null) {
+      builder.query('keywords', String.valueOf(recognizeOptions.keywords()));
+    }
+    if (recognizeOptions.keywordsThreshold() != null) {
+      builder.query('keywords_threshold', String.valueOf(recognizeOptions.keywordsThreshold()));
+    }
+    if (recognizeOptions.wordAlternativesThreshold() != null) {
+      builder.query('word_alternatives_threshold', String.valueOf(recognizeOptions.wordAlternativesThreshold()));
+    }
+    if (recognizeOptions.profanityFilter() != null) {
+      builder.query('profanity_filter', String.valueOf(recognizeOptions.profanityFilter()));
+    }
+    if (recognizeOptions.smartFormatting() != null) {
+      builder.query('smart_formatting', String.valueOf(recognizeOptions.smartFormatting()));
+    }
+    if (recognizeOptions.customizationId() != null) {
+      builder.query('customization_id', recognizeOptions.customizationId());
+    }
+    if (recognizeOptions.speakerLabels() != null) {
+      builder.query('speaker_labels', String.valueOf(recognizeOptions.speakerLabels()));
+    }
+
+    return (IBMSpeechToTextV1Models.SpeechResults) createServiceCall(builder.build(), IBMSpeechToTextV1Models.SpeechResults.class);
+  }
 }
