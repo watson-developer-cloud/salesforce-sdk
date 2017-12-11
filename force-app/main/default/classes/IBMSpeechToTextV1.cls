@@ -375,19 +375,19 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * @param createLanguageModelOptions the {@link IBMSpeechToTextV1Models.CreateLanguageModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.LanguageModel} with the response
    */
-  /* public IBMSpeechToTextV1Models.LanguageModel createLanguageModel(IBMSpeechToTextV1Models.CreateLanguageModelOptions createLanguageModelOptions) {
+  public IBMSpeechToTextV1Models.LanguageModel createLanguageModel(IBMSpeechToTextV1Models.CreateLanguageModelOptions createLanguageModelOptions) {
     IBMWatsonValidator.notNull(createLanguageModelOptions, 'createLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/customizations');
     builder.addHeader('Content-Type', createLanguageModelOptions.contentType());
     if (createLanguageModelOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-      builder.bodyJson(JSON.serialize(createLanguageModelOptions.create_language_model(), true));
+      builder.bodyJson(JSON.serialize(createLanguageModelOptions.createLanguageModel(), true));
     }
     else {
       builder.bodyContent(createLanguageModelOptions.body(), createLanguageModelOptions.contentType());
     }
 
     return (IBMSpeechToTextV1Models.LanguageModel) createServiceCall(builder.build(), IBMSpeechToTextV1Models.LanguageModel.class);
-  } */
+  }
 
   /**
    * Deletes a custom language model
