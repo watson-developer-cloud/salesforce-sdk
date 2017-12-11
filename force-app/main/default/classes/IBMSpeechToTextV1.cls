@@ -659,19 +659,19 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * @param createAcousticModelOptions the {@link IBMSpeechToTextV1Models.CreateAcousticModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AcousticModel} with the response
    */
-  /* public IBMSpeechToTextV1Models.AcousticModel createAcousticModel(IBMSpeechToTextV1Models.CreateAcousticModelOptions createAcousticModelOptions) {
+  public IBMSpeechToTextV1Models.AcousticModel createAcousticModel(IBMSpeechToTextV1Models.CreateAcousticModelOptions createAcousticModelOptions) {
     IBMWatsonValidator.notNull(createAcousticModelOptions, 'createAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/acoustic_customizations');
     builder.addHeader('Content-Type', createAcousticModelOptions.contentType());
     if (createAcousticModelOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-      builder.bodyJson(JSON.serialize(createAcousticModelOptions.create_acoustic_model(), true));
+      builder.bodyJson(JSON.serialize(createAcousticModelOptions.createAcousticModel(), true));
     }
     else {
       builder.bodyContent(createAcousticModelOptions.body(), createAcousticModelOptions.contentType());
     }
 
     return (IBMSpeechToTextV1Models.AcousticModel) createServiceCall(builder.build(), IBMSpeechToTextV1Models.AcousticModel.class);
-  } */
+  }
 
   /**
    * Deletes a custom acoustic model
