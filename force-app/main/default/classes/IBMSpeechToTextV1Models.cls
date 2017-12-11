@@ -5465,6 +5465,257 @@ public class IBMSpeechToTextV1Models {
     }
   }
 
+  public class RecognizeOptions {
+    private IBMWatsonFile audio_serialized_name;
+    private String file_content_type_serialized_name;
+    private Boolean continuous_serialized_name;
+    private Integer max_alternatives_serialized_name;
+    private Boolean timestamps_serialized_name;
+    private Boolean word_confidence_serialized_name;
+    private Integer inactivity_timeout_serialized_name;
+    private String model_serialized_name;
+    private Boolean interim_results_serialized_name;
+    private Boolean keywords_serialized_name;
+    private Double keywords_threshold_serialized_name;
+    private Double word_alternatives_threshold_serialized_name;
+    private Boolean profanity_filter_serialized_name;
+    private Boolean smart_formatting_serialized_name;
+    private String customization_id_serialized_name;
+    private Boolean speaker_labels_serialized_name;
+    private String session_id_serialized_name;
+
+    public IBMWatsonFile audio() {
+      return audio_serialized_name;
+    }
+
+    public String fileContentType() {
+      return file_content_type_serialized_name;
+    }
+
+    public Boolean continuous() {
+      return continuous_serialized_name;
+    }
+
+    public Integer maxAlternatives() {
+      return max_alternatives_serialized_name;
+    }
+
+    public Boolean timestamps() {
+      return timestamps_serialized_name;
+    }
+
+    public Boolean wordConfidence() {
+      return word_confidence_serialized_name;
+    }
+
+    public Integer inactivityTimeout() {
+      return inactivity_timeout_serialized_name;
+    }
+
+    public String model() {
+      return model_serialized_name;
+    }
+
+    public Boolean interimResults() {
+      return interim_results_serialized_name;
+    }
+
+    public Boolean keywords() {
+      return keywords_serialized_name;
+    }
+
+    public Double keywordsThreshold() {
+      return keywords_threshold_serialized_name;
+    }
+
+    public Double wordAlternativesThreshold() {
+      return word_alternatives_threshold_serialized_name;
+    }
+
+    public Boolean profanityFilter() {
+      return profanity_filter_serialized_name;
+    }
+
+    public Boolean smartFormatting() {
+      return smart_formatting_serialized_name;
+    }
+
+    public String customizationId() {
+      return customization_id_serialized_name;
+    }
+
+    public Boolean speakerLabels() {
+      return speaker_labels_serialized_name;
+    }
+
+    public String sessionId() {
+      return session_id_serialized_name;
+    }
+
+    private RecognizeOptions(RecognizeOptionsBuilder builder) {
+      IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.file_content_type_serialized_name, 'fileContenttype cannot be empty');
+      audio_serialized_name = builder.audio_serialized_name;
+      file_content_type_serialized_name = builder.file_content_type_serialized_name;
+      continuous_serialized_name = builder.continuous_serialized_name;
+      max_alternatives_serialized_name = builder.max_alternatives_serialized_name;
+      timestamps_serialized_name = builder.timestamps_serialized_name;
+      word_confidence_serialized_name = builder.word_confidence_serialized_name;
+      inactivity_timeout_serialized_name = builder.inactivity_timeout_serialized_name;
+      model_serialized_name = builder.model_serialized_name;
+      interim_results_serialized_name = builder.interim_results_serialized_name;
+      keywords_serialized_name = builder.keywords_serialized_name;
+      keywords_threshold_serialized_name = builder.keywords_threshold_serialized_name;
+      word_alternatives_threshold_serialized_name = builder.word_alternatives_threshold_serialized_name;
+      profanity_filter_serialized_name = builder.profanity_filter_serialized_name;
+      smart_formatting_serialized_name = builder.smart_formatting_serialized_name;
+      customization_id_serialized_name = builder.customization_id_serialized_name;
+      speaker_labels_serialized_name = builder.speaker_labels_serialized_name;
+      session_id_serialized_name = builder.session_id_serialized_name;
+    }
+
+    public RecognizeOptionsBuilder newBuilder() {
+      return new RecognizeOptionsBuilder(this);
+    }
+  }
+
+  public class RecognizeOptionsBuilder {
+    private IBMWatsonFile audio_serialized_name;
+    private String file_content_type_serialized_name;
+    private Boolean continuous_serialized_name;
+    private Integer max_alternatives_serialized_name;
+    private Boolean timestamps_serialized_name;
+    private Boolean word_confidence_serialized_name;
+    private Integer inactivity_timeout_serialized_name;
+    private String model_serialized_name;
+    private Boolean interim_results_serialized_name;
+    private Boolean keywords_serialized_name;
+    private Double keywords_threshold_serialized_name;
+    private Double word_alternatives_threshold_serialized_name;
+    private Boolean profanity_filter_serialized_name;
+    private Boolean smart_formatting_serialized_name;
+    private String customization_id_serialized_name;
+    private Boolean speaker_labels_serialized_name;
+    private String session_id_serialized_name;
+
+    private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
+      audio_serialized_name = recognizeOptions.audio_serialized_name;
+      file_content_type_serialized_name = recognizeOptions.file_content_type_serialized_name;
+      continuous_serialized_name = recognizeOptions.continuous_serialized_name;
+      max_alternatives_serialized_name = recognizeOptions.max_alternatives_serialized_name;
+      timestamps_serialized_name = recognizeOptions.timestamps_serialized_name;
+      word_confidence_serialized_name = recognizeOptions.word_confidence_serialized_name;
+      inactivity_timeout_serialized_name = recognizeOptions.inactivity_timeout_serialized_name;
+      model_serialized_name = recognizeOptions.model_serialized_name;
+      interim_results_serialized_name = recognizeOptions.interim_results_serialized_name;
+      keywords_serialized_name = recognizeOptions.keywords_serialized_name;
+      keywords_threshold_serialized_name = recognizeOptions.keywords_threshold_serialized_name;
+      word_alternatives_threshold_serialized_name = recognizeOptions.word_alternatives_threshold_serialized_name;
+      profanity_filter_serialized_name = recognizeOptions.profanity_filter_serialized_name;
+      smart_formatting_serialized_name = recognizeOptions.smart_formatting_serialized_name;
+      customization_id_serialized_name = recognizeOptions.customization_id_serialized_name;
+      speaker_labels_serialized_name = recognizeOptions.speaker_labels_serialized_name;
+      session_id_serialized_name = recognizeOptions.session_id_serialized_name;
+    }
+
+    public RecognizeOptionsBuilder() {
+    }
+
+    public RecognizeOptionsBuilder(IBMWatsonFile audio, String fileContentType) {
+      this.audio_serialized_name = audio;
+      this.file_content_type_serialized_name = fileContentType;
+    }
+
+    public RecognizeOptions build() {
+      return new RecognizeOptions(this);
+    }
+
+    public RecognizeOptionsBuilder audio(IBMWatsonFile audio) {
+      this.audio_serialized_name = audio;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder fileContentType(String fileContentType) {
+      this.file_content_type_serialized_name = fileContentType;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder continuous(Boolean continuous) {
+      this.continuous_serialized_name = continuous;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder maxAlternatives(Integer maxAlternatives) {
+      this.max_alternatives_serialized_name = maxAlternatives;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder timestamps(Boolean timestamps) {
+      this.timestamps_serialized_name = timestamps;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder wordConfidence(Boolean wordConfidence) {
+      this.word_confidence_serialized_name = wordConfidence;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder inactivityTimeout(Integer inactivityTimeout) {
+      this.inactivity_timeout_serialized_name = inactivityTimeout;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder model(String model) {
+      this.model_serialized_name = model;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder interimResults(Boolean interimResults) {
+      this.interim_results_serialized_name = interimResults;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder keywords(Boolean keywords) {
+      this.keywords_serialized_name = keywords;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder keywordsThreshold(Double keywordsThreshold) {
+      this.keywords_threshold_serialized_name = keywordsThreshold;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder wordAlternativesThreshold(Double wordAlternativesThreshold) {
+      this.word_alternatives_threshold_serialized_name = wordAlternativesThreshold;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder profanityFilter(Boolean profanityFilter) {
+      this.profanity_filter_serialized_name = profanityFilter;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder smartFormatting(Boolean smartFormatting) {
+      this.smart_formatting_serialized_name = smartFormatting;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder customizationId(String customizationId) {
+      this.customization_id_serialized_name = customizationId;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder speakerLabels(Boolean speakerLabels) {
+      this.speaker_labels_serialized_name = speakerLabels;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder sessionId(String sessionId) {
+      this.session_id_serialized_name = sessionId;
+      return this;
+    }
+  }
+
   /**
    * The registerCallback options
    */
@@ -5936,6 +6187,59 @@ public class IBMSpeechToTextV1Models {
       }
 
       SpeakerLabelsResult ret = (SpeakerLabelsResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  public class SpeechAlternative extends IBMWatsonGenericModel {
+    private Double confidence_serialized_name;
+    private List<SpeechTimestamp> timestamps_serialized_name;
+    private String transcript_serialized_name;
+    private List<SpeechWordConfidence> word_confidences_serialized_name;
+
+    @AuraEnabled
+    public Double getConfidence() {
+      return confidence_serialized_name;
+    }
+
+    @AuraEnabled
+    public List<SpeechTimestamp> getTimestamps() {
+      return timestamps_serialized_name;
+    }
+
+    @AuraEnabled
+    public String getTranscript() {
+      return transcript_serialized_name;
+    }
+
+    @AuraEnabled
+    public List<SpeechWordConfidence> getWordConfidences() {
+      return word_confidences_serialized_name;
+    }
+
+    public void setConfidence(final Double confidence) {
+      this.confidence_serialized_name = confidence;
+    }
+
+    public void setTimestamps(final List<SpeechTimestamp> timestamps) {
+      this.timestamps_serialized_name = timestamps;
+    }
+
+    public void setTranscript(final String transcript) {
+      this.transcript_serialized_name = transcript;
+    }
+
+    public void setWordConfidences(final List<SpeechWordConfidence> wordConfidences) {
+      this.word_confidences_serialized_name = wordConfidences;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SpeechAlternative ret = (SpeechAlternative) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -6514,6 +6818,49 @@ public class IBMSpeechToTextV1Models {
     }
   }
 
+  public class SpeechResults extends IBMWatsonGenericModel {
+    private Integer result_index_serialized_name;
+    private List<Transcript> results_serialized_name;
+    private List<SpeakerLabelsResult> speaker_labels_serialized_name;
+
+    @AuraEnabled
+    public Integer getResultIndex() {
+      return result_index_serialized_name;
+    }
+
+    @AuraEnabled
+    public List<Transcript> getResults() {
+      return results_serialized_name;
+    }
+
+    @AuraEnabled
+    public List<SpeakerLabelsResult> getSpeakerLabels() {
+      return speaker_labels_serialized_name;
+    }
+
+    public void setResultIndex(final Integer resultIndex) {
+      this.result_index_serialized_name = resultIndex;
+    }
+
+    public void setResults(final List<Transcript> results) {
+      this.results_serialized_name = results;
+    }
+
+    public void setSpeakerLabels(final List<SpeakerLabelsResult> speakerLabels) {
+      this.speaker_labels_serialized_name = speakerLabels;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SpeechResults ret = (SpeechResults) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
   /**
    * SpeechSession
    */
@@ -6672,6 +7019,125 @@ public class IBMSpeechToTextV1Models {
       }
 
       SpeechSession ret = (SpeechSession) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  public class SpeechTimestamp extends IBMWatsonGenericModel {
+    private Double end_time_serialized_name;
+    private Double start_time_serialized_name;
+    private String word_serialized_name;
+
+    @AuraEnabled
+    public Double getEndTime() {
+      return end_time_serialized_name;
+    }
+
+    @AuraEnabled
+    public Double getStartTime() {
+      return start_time_serialized_name;
+    }
+
+    @AuraEnabled
+    public String getWord() {
+      return word_serialized_name;
+    }
+
+    public void setEndTime(final Double endTime) {
+      this.end_time_serialized_name = endTime;
+    }
+
+    public void setStartTime(final Double startTime) {
+      this.start_time_serialized_name = startTime;
+    }
+
+    public void setWord(final String word) {
+      this.word_serialized_name = word;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SpeechTimestamp ret = (SpeechTimestamp) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  public class SpeechWordAlternatives extends IBMWatsonGenericModel {
+    private Double start_time_serialized_name;
+    private Double end_time_serialized_name;
+    private List<WordAlternativeResult> alternatives_serialized_name;
+
+    @AuraEnabled
+    public Double getStartTime() {
+      return start_time_serialized_name;
+    }
+
+    @AuraEnabled
+    public Double getEndTime() {
+      return end_time_serialized_name;
+    }
+
+    @AuraEnabled
+    public List<WordAlternativeResult> getAlternatives() {
+      return alternatives_serialized_name;
+    }
+
+    public void setStartTime(final Double startTime) {
+      this.start_time_serialized_name = startTime;
+    }
+
+    public void setEndTime(final Double endTime) {
+      this.end_time_serialized_name = endTime;
+    }
+
+    public void setAlternatives(final List<WordAlternativeResult> alternatives) {
+      this.alternatives_serialized_name = alternatives;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SpeechWordAlternatives ret = (SpeechWordAlternatives) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  public class SpeechWordConfidence extends IBMWatsonGenericModel {
+    private Double confidence_serialized_name;
+    private String word_serialized_name;
+
+    @AuraEnabled
+    public Double getConfidence() {
+      return confidence_serialized_name;
+    }
+
+    @AuraEnabled
+    public String getWord() {
+      return word_serialized_name;
+    }
+
+    public void setConfidence(final Double confidence) {
+      this.confidence_serialized_name = confidence;
+    }
+
+    public void setWord(final String word) {
+      this.word_serialized_name = word;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SpeechWordConfidence ret = (SpeechWordConfidence) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -6961,6 +7427,59 @@ public class IBMSpeechToTextV1Models {
     public TrainLanguageModelOptionsBuilder customizationWeight(Double customizationWeight) {
       this.customization_weight_serialized_name = customizationWeight;
       return this;
+    }
+  }
+
+  public class Transcript extends IBMWatsonGenericModel {
+    private Boolean ffinal_serialize_name;
+    private List<SpeechAlternative> alternatives_serialized_name;
+    private Map<String, List<KeywordResult>> keyword_results_serialized_name;
+    private List<SpeechWordAlternatives> word_alternatives_serialized_name;
+
+    @AuraEnabled
+    public Boolean getFinal() {
+      return ffinal_serialize_name;
+    }
+
+    @AuraEnabled
+    public List<SpeechAlternative> getAlternatives() {
+      return alternatives_serialized_name;
+    }
+
+    @AuraEnabled
+    public Map<String, List<KeywordResult>> getKeywordResults() {
+      return keyword_results_serialized_name;
+    }
+
+    @AuraEnabled
+    public List<SpeechWordAlternatives> getWordAlternatives() {
+      return word_alternatives_serialized_name;
+    }
+
+    public void setFinal(final Boolean isFinal) {
+      this.ffinal_serialize_name = isFinal;
+    }
+    
+    public void setAlternatives(final List<SpeechAlternative> alternatives) {
+      this.alternatives_serialized_name = alternatives;
+    }
+
+    public void setKeywordResults(final Map<String, List<KeywordResult>> keywordResults) {
+      this.keyword_results_serialized_name = keywordResults;
+    }
+
+    public void setWordAlternatives(final List<SpeechWordAlternatives> wordAlternatives) {
+      this.word_alternatives_serialized_name = wordAlternatives;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Transcript ret = (Transcript) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
