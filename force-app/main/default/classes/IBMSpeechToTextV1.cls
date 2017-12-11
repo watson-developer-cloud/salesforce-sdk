@@ -249,6 +249,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createJobOptions.transferEncoding() != null) {
       builder.addHeader('Transfer-Encoding', createJobOptions.transferEncoding());
     }
+    builder.addHeader('Content-Type', createJobOptions.contentType());
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (createJobOptions.audio() != null) {
@@ -309,6 +310,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createJobOptions.speakerLabels() != null) {
       builder.query('speaker_labels', String.valueOf(createJobOptions.speakerLabels()));
     }
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody);
 
     return (IBMSpeechToTextV1Models.RecognitionJob) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RecognitionJob.class);
   }
@@ -761,20 +764,27 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * @param addAudioOptions the {@link IBMSpeechToTextV1Models.AddAudioOptions} containing the options for the call
    * @return the service call
    */
-  /* public void addAudio(IBMSpeechToTextV1Models.AddAudioOptions addAudioOptions) {
+  public void addAudio(IBMSpeechToTextV1Models.AddAudioOptions addAudioOptions) {
     IBMWatsonValidator.notNull(addAudioOptions, 'addAudioOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio/{1}', new String[]{ addAudioOptions.customizationId(), addAudioOptions.audioName() }));
     if (addAudioOptions.containedContentType() != null) {
       builder.addHeader('Contained-Content-Type', addAudioOptions.containedContentType());
     }
     builder.addHeader('Content-Type', addAudioOptions.contentType());
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (addAudioOptions.audio() != null) {
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(addAudioOptions.audio(), addAudioOptions.contentType());
+      multipartBuilder.addFormDataPart('audio', addAudioOptions.audioFilename(), fileBody);
+    }
     if (addAudioOptions.allowOverwrite() != null) {
       builder.query('allow_overwrite', String.valueOf(addAudioOptions.allowOverwrite()));
     }
-    builder.bodyContent(options.body(), addAudioOptions.contentType());
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody);
 
     createServiceCall(builder.build(), null);
-  } */
+  }
 
   /**
    * Deletes an audio resource from a custom acoustic model
@@ -830,6 +840,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     url += '/recognize';
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + url);
 
+    builder.addHeader('Content-Type', recognizeOptions.fileContentType());
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (recognizeOptions.audio() != null) {
@@ -878,6 +889,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (recognizeOptions.speakerLabels() != null) {
       builder.query('speaker_labels', String.valueOf(recognizeOptions.speakerLabels()));
     }
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody);
 
     return (IBMSpeechToTextV1Models.SpeechResults) createServiceCall(builder.build(), IBMSpeechToTextV1Models.SpeechResults.class);
   }

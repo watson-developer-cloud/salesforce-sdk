@@ -279,11 +279,22 @@ public class IBMSpeechToTextV1Models {
    * The addAudio options
    */
   public class AddAudioOptions {
+    private IBMWatsonFile audio_serialized_name;
+    private String audio_filename_serialized_name;
     private String customization_id_serialized_name;
     private String audio_name_serialized_name;
     private String contained_content_type_serialized_name;
     private Boolean allow_overwrite_serialized_name;
     private String content_type_serialized_name;
+
+    public IBMWatsonFile audio() {
+      return audio_serialized_name;
+    }
+
+    public String audioFilename() {
+      return audio_filename_serialized_name;
+    }
+
     /**
      * Gets the customization_id_serialized_name.
      *
@@ -335,9 +346,13 @@ public class IBMSpeechToTextV1Models {
       return content_type_serialized_name;
     }
     private AddAudioOptions(AddAudioOptionsBuilder builder) {
+      IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be null');
+      IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be null');
       IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.audio_name_serialized_name, 'audio_name_serialized_name cannot be empty');
       IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
+      audio_serialized_name = builder.audio_serialized_name;
+      audio_filename_serialized_name = builder.audio_filename_serialized_name;
       customization_id_serialized_name = builder.customization_id_serialized_name;
       audio_name_serialized_name = builder.audio_name_serialized_name;
       contained_content_type_serialized_name = builder.contained_content_type_serialized_name;
@@ -360,6 +375,8 @@ public class IBMSpeechToTextV1Models {
    * AddAudioOptions Builder.
    */
   public class AddAudioOptionsBuilder {
+    private IBMWatsonFile audio_serialized_name;
+    private String audio_filename_serialized_name;
     private String customization_id_serialized_name;
     private String audio_name_serialized_name;
     private String contained_content_type_serialized_name;
@@ -367,6 +384,8 @@ public class IBMSpeechToTextV1Models {
     private String content_type_serialized_name;
 
     private AddAudioOptionsBuilder(AddAudioOptions addAudioOptions) {
+      audio_serialized_name = addAudioOptions.audio_serialized_name;
+      audio_filename_serialized_name = addAudioOptions.audio_filename_serialized_name;
       customization_id_serialized_name = addAudioOptions.customization_id_serialized_name;
       audio_name_serialized_name = addAudioOptions.audio_name_serialized_name;
       contained_content_type_serialized_name = addAudioOptions.contained_content_type_serialized_name;
@@ -386,7 +405,9 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      * @param audioName the audioName
      */
-    public AddAudioOptionsBuilder(String customizationId, String audioName) {
+    public AddAudioOptionsBuilder(IBMWatsonFile audio, String audioFilename, String customizationId, String audioName) {
+      this.audio_serialized_name = audio;
+      this.audio_filename_serialized_name = audioFilename;
       this.customization_id_serialized_name = customizationId;
       this.audio_name_serialized_name = audioName;
     }
@@ -398,6 +419,16 @@ public class IBMSpeechToTextV1Models {
      */
     public AddAudioOptions build() {
       return new AddAudioOptions(this);
+    }
+
+    public AddAudioOptionsBuilder audio(IBMWatsonFile audio) {
+      this.audio_serialized_name = audio;
+      return this;
+    }
+
+    public AddAudioOptionsBuilder audioFilename(String audioFilename) {
+      this.audio_filename_serialized_name = audioFilename;
+      return this;
     }
 
     /**
