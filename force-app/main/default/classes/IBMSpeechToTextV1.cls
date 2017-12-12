@@ -151,62 +151,6 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * Creates a session
-   *
-   * Creates a session and locks recognition requests to that engine. You can use the session for multiple recognition requests so that each request is processed with the same Speech to Text engine. The session expires after 30 seconds of inactivity. For information about avoiding session timeouts, see [Timeouts](https://console.bluemix.net/docs/services/speech-to-text/input.html#timeouts).   The method returns a cookie in the `Set-Cookie` response header. You must pass this cookie with each request that uses the session. For more information, see [Using cookies with sessions](https://console.bluemix.net/docs/services/speech-to-text/http.html#cookies).
-   *
-   * @param createSessionOptions the {@link IBMSpeechToTextV1Models.CreateSessionOptions} containing the options for the call
-   * @return the {@link IBMSpeechToTextV1Models.SpeechSession} with the response
-   */
-  public IBMSpeechToTextV1Models.SpeechSession createSession(IBMSpeechToTextV1Models.CreateSessionOptions createSessionOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/sessions');
-    if (createSessionOptions != null && createSessionOptions.model() != null) {
-      builder.query('model', createSessionOptions.model());
-    }
-    if (createSessionOptions != null && createSessionOptions.customizationId() != null) {
-      builder.query('customization_id', createSessionOptions.customizationId());
-    }
-    if (createSessionOptions != null && createSessionOptions.acousticCustomizationId() != null) {
-      builder.query('acoustic_customization_id', createSessionOptions.acousticCustomizationId());
-    }
-    if (createSessionOptions != null && createSessionOptions.customizationWeight() != null) {
-      builder.query('customization_weight', String.valueOf(createSessionOptions.customizationWeight()));
-    }
-
-    return (IBMSpeechToTextV1Models.SpeechSession) createServiceCall(builder.build(), IBMSpeechToTextV1Models.SpeechSession.class);
-  }
-
-  /**
-   * Deletes the specified session
-   *
-   * Deletes an existing session and its engine. The request must pass the cookie that was returned by the `POST /v1/sessions` method. You cannot send requests to a session after it is deleted. By default, a session expires after 30 seconds of inactivity if you do not delete it first.
-   *
-   * @param deleteSessionOptions the {@link IBMSpeechToTextV1Models.DeleteSessionOptions} containing the options for the call
-   * @return the service call
-   */
-  public void deleteSession(IBMSpeechToTextV1Models.DeleteSessionOptions deleteSessionOptions) {
-    IBMWatsonValidator.notNull(deleteSessionOptions, 'deleteSessionOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/sessions/{0}', new String[]{ deleteSessionOptions.sessionId() }));
-
-    createServiceCall(builder.build(), null);
-  }
-
-  /**
-   * Checks whether a session is ready to accept a new recognition task
-   *
-   * Checks whether a specified session can accept another recognition request. Concurrent recognition tasks during the same session are not allowed. The returned state must be `initialized` to indicate that you can send another recognition request with the `POST /v1/recognize` method. The request must pass the cookie that was returned by the `POST /v1/sessions` method.
-   *
-   * @param getSessionStatusOptions the {@link IBMSpeechToTextV1Models.GetSessionStatusOptions} containing the options for the call
-   * @return the {@link IBMSpeechToTextV1Models.SessionStatus} with the response
-   */
-  public IBMSpeechToTextV1Models.SessionStatus getSessionStatus(IBMSpeechToTextV1Models.GetSessionStatusOptions getSessionStatusOptions) {
-    IBMWatsonValidator.notNull(getSessionStatusOptions, 'getSessionStatusOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/sessions/{0}/recognize', new String[]{ getSessionStatusOptions.sessionId() }));
-
-    return (IBMSpeechToTextV1Models.SessionStatus) createServiceCall(builder.build(), IBMSpeechToTextV1Models.SessionStatus.class);
-  }
-
-  /**
    * Checks the status of the specified asynchronous job
    *
    * Returns information about the specified job. The response always includes the status of the job and its creation and update times. If the status is `completed`, the response includes the results of the recognition request. You must submit the request with the service credentials of the user who created the job.   You can use the method to retrieve the results of any job, regardless of whether it was submitted with a callback URL and the `recognitions.completed_with_results` event, and you can retrieve the results multiple times for as long as they remain available.
@@ -833,12 +777,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
 
   public IBMSpeechToTextV1Models.SpeechResults recognize(IBMSpeechToTextV1Models.RecognizeOptions recognizeOptions) {
     IBMWatsonValidator.notNull(recognizeOptions, 'recognizeOptions cannot be null');
-    String url = '/v1';
-    if (recognizeOptions.sessionId() != null) {
-      url += '/sessions/' + recognizeOptions.sessionId();
-    }
-    url += '/recognize';
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + url);
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/recognize');
 
     builder.addHeader('Content-Type', recognizeOptions.fileContentType());
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();

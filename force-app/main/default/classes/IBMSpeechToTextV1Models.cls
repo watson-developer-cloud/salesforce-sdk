@@ -2761,148 +2761,6 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * The createSession options
-   */
-  public class CreateSessionOptions {
-    private String model_serialized_name;
-    private String customization_id_serialized_name;
-    private String acoustic_customization_id_serialized_name;
-    private Double customization_weight_serialized_name;
-    /**
-     * Gets the model_serialized_name.
-     *
-     * The identifier of the model to be used by the new session. (Use `GET /v1/models` or `GET /v1/models/{model_id}` for information about available models.)
-     *
-     * @return the model_serialized_name
-     */
-    public String model() {
-      return model_serialized_name;
-    }
-    /**
-     * Gets the customization_id_serialized_name.
-     *
-     * The GUID of a custom language model that is to be used with the new session. The base model of the specified custom language model must match the model specified with the `model` parameter. You must make the request with service credentials created for the instance of the service that owns the custom model. By default, no custom language model is used.
-     *
-     * @return the customization_id_serialized_name
-     */
-    public String customizationId() {
-      return customization_id_serialized_name;
-    }
-    /**
-     * Gets the acoustic_customization_id_serialized_name.
-     *
-     * The GUID of a custom acoustic model that is to be used with the new session. The base model of the specified custom acoustic model must match the model specified with the `model` parameter. You must make the request with service credentials created for the instance of the service that owns the custom model. By default, no custom acoustic model is used.
-     *
-     * @return the acoustic_customization_id_serialized_name
-     */
-    public String acousticCustomizationId() {
-      return acoustic_customization_id_serialized_name;
-    }
-    /**
-     * Gets the customization_weight_serialized_name.
-     *
-     * If you specify a `customization_id` when you create the session, you can use the `customization_weight` parameter to tell the service how much weight to give to words from the custom language model compared to those from the base model for recognition requests made with the session.   Specify a value between 0.0 and 1.0. Unless a different customization weight was specified for the custom model when it was trained, the default value is 0.3. A customization weight that you specify overrides a weight that was specified when the custom model was trained.   The default value yields the best performance in general. Assign a higher value if your audio makes frequent use of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
-     *
-     * @return the customization_weight_serialized_name
-     */
-    public Double customizationWeight() {
-      return customization_weight_serialized_name;
-    }
-    private CreateSessionOptions(CreateSessionOptionsBuilder builder) {
-      model_serialized_name = builder.model_serialized_name;
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      acoustic_customization_id_serialized_name = builder.acoustic_customization_id_serialized_name;
-      customization_weight_serialized_name = builder.customization_weight_serialized_name;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a CreateSessionOptions builder
-     */
-    public CreateSessionOptionsBuilder newBuilder() {
-      return new CreateSessionOptionsBuilder(this);
-    }
-
-  }
-
-  /**
-   * CreateSessionOptions Builder.
-   */
-  public class CreateSessionOptionsBuilder {
-    private String model_serialized_name;
-    private String customization_id_serialized_name;
-    private String acoustic_customization_id_serialized_name;
-    private Double customization_weight_serialized_name;
-
-    private CreateSessionOptionsBuilder(CreateSessionOptions createSessionOptions) {
-      model_serialized_name = createSessionOptions.model_serialized_name;
-      customization_id_serialized_name = createSessionOptions.customization_id_serialized_name;
-      acoustic_customization_id_serialized_name = createSessionOptions.acoustic_customization_id_serialized_name;
-      customization_weight_serialized_name = createSessionOptions.customization_weight_serialized_name;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public CreateSessionOptionsBuilder() {
-    }
-
-    /**
-     * Builds a CreateSessionOptions.
-     *
-     * @return the createSessionOptions
-     */
-    public CreateSessionOptions build() {
-      return new CreateSessionOptions(this);
-    }
-
-    /**
-     * Set the model_serialized_name.
-     *
-     * @param model the model
-     * @return the CreateSessionOptions builder
-     */
-    public CreateSessionOptionsBuilder model(String model) {
-      this.model_serialized_name = model;
-      return this;
-    }
-
-    /**
-     * Set the customization_id_serialized_name.
-     *
-     * @param customizationId the customizationId
-     * @return the CreateSessionOptions builder
-     */
-    public CreateSessionOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
-      return this;
-    }
-
-    /**
-     * Set the acoustic_customization_id_serialized_name.
-     *
-     * @param acousticCustomizationId the acousticCustomizationId
-     * @return the CreateSessionOptions builder
-     */
-    public CreateSessionOptionsBuilder acousticCustomizationId(String acousticCustomizationId) {
-      this.acoustic_customization_id_serialized_name = acousticCustomizationId;
-      return this;
-    }
-
-    /**
-     * Set the customization_weight_serialized_name.
-     *
-     * @param customizationWeight the customizationWeight
-     * @return the CreateSessionOptions builder
-     */
-    public CreateSessionOptionsBuilder customizationWeight(Double customizationWeight) {
-      this.customization_weight_serialized_name = customizationWeight;
-      return this;
-    }
-  }
-
-  /**
    * CustomWord
    */
   public class CustomWord {
@@ -3570,83 +3428,6 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * The deleteSession options
-   */
-  public class DeleteSessionOptions {
-    private String session_id_serialized_name;
-    /**
-     * Gets the session_id_serialized_name.
-     *
-     * The ID of the session to be deleted.
-     *
-     * @return the session_id_serialized_name
-     */
-    public String sessionId() {
-      return session_id_serialized_name;
-    }
-    private DeleteSessionOptions(DeleteSessionOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.session_id_serialized_name, 'session_id_serialized_name cannot be empty');
-      session_id_serialized_name = builder.session_id_serialized_name;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a DeleteSessionOptions builder
-     */
-    public DeleteSessionOptionsBuilder newBuilder() {
-      return new DeleteSessionOptionsBuilder(this);
-    }
-
-  }
-
-  /**
-   * DeleteSessionOptions Builder.
-   */
-  public class DeleteSessionOptionsBuilder {
-    private String session_id_serialized_name;
-
-    private DeleteSessionOptionsBuilder(DeleteSessionOptions deleteSessionOptions) {
-      session_id_serialized_name = deleteSessionOptions.session_id_serialized_name;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public DeleteSessionOptionsBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param sessionId the sessionId
-     */
-    public DeleteSessionOptionsBuilder(String sessionId) {
-      this.session_id_serialized_name = sessionId;
-    }
-
-    /**
-     * Builds a DeleteSessionOptions.
-     *
-     * @return the deleteSessionOptions
-     */
-    public DeleteSessionOptions build() {
-      return new DeleteSessionOptions(this);
-    }
-
-    /**
-     * Set the session_id_serialized_name.
-     *
-     * @param sessionId the sessionId
-     * @return the DeleteSessionOptions builder
-     */
-    public DeleteSessionOptionsBuilder sessionId(String sessionId) {
-      this.session_id_serialized_name = sessionId;
-      return this;
-    }
-  }
-
-  /**
    * The deleteWord options
    */
   public class DeleteWordOptions {
@@ -4188,83 +3969,6 @@ public class IBMSpeechToTextV1Models {
      */
     public GetModelOptionsBuilder modelId(String modelId) {
       this.model_id_serialized_name = modelId;
-      return this;
-    }
-  }
-
-  /**
-   * The getSessionStatus options
-   */
-  public class GetSessionStatusOptions {
-    private String session_id_serialized_name;
-    /**
-     * Gets the session_id_serialized_name.
-     *
-     * The ID of the session for the recognition task.
-     *
-     * @return the session_id_serialized_name
-     */
-    public String sessionId() {
-      return session_id_serialized_name;
-    }
-    private GetSessionStatusOptions(GetSessionStatusOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.session_id_serialized_name, 'session_id_serialized_name cannot be empty');
-      session_id_serialized_name = builder.session_id_serialized_name;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a GetSessionStatusOptions builder
-     */
-    public GetSessionStatusOptionsBuilder newBuilder() {
-      return new GetSessionStatusOptionsBuilder(this);
-    }
-
-  }
-
-  /**
-   * GetSessionStatusOptions Builder.
-   */
-  public class GetSessionStatusOptionsBuilder {
-    private String session_id_serialized_name;
-
-    private GetSessionStatusOptionsBuilder(GetSessionStatusOptions getSessionStatusOptions) {
-      session_id_serialized_name = getSessionStatusOptions.session_id_serialized_name;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public GetSessionStatusOptionsBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param sessionId the sessionId
-     */
-    public GetSessionStatusOptionsBuilder(String sessionId) {
-      this.session_id_serialized_name = sessionId;
-    }
-
-    /**
-     * Builds a GetSessionStatusOptions.
-     *
-     * @return the getSessionStatusOptions
-     */
-    public GetSessionStatusOptions build() {
-      return new GetSessionStatusOptions(this);
-    }
-
-    /**
-     * Set the session_id_serialized_name.
-     *
-     * @param sessionId the sessionId
-     * @return the GetSessionStatusOptions builder
-     */
-    public GetSessionStatusOptionsBuilder sessionId(String sessionId) {
-      this.session_id_serialized_name = sessionId;
       return this;
     }
   }
@@ -5543,7 +5247,6 @@ public class IBMSpeechToTextV1Models {
     private Boolean smart_formatting_serialized_name;
     private String customization_id_serialized_name;
     private Boolean speaker_labels_serialized_name;
-    private String session_id_serialized_name;
 
     public IBMWatsonFile audio() {
       return audio_serialized_name;
@@ -5613,10 +5316,6 @@ public class IBMSpeechToTextV1Models {
       return speaker_labels_serialized_name;
     }
 
-    public String sessionId() {
-      return session_id_serialized_name;
-    }
-
     private RecognizeOptions(RecognizeOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be empty');
       IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be empty');
@@ -5638,7 +5337,6 @@ public class IBMSpeechToTextV1Models {
       smart_formatting_serialized_name = builder.smart_formatting_serialized_name;
       customization_id_serialized_name = builder.customization_id_serialized_name;
       speaker_labels_serialized_name = builder.speaker_labels_serialized_name;
-      session_id_serialized_name = builder.session_id_serialized_name;
     }
 
     public RecognizeOptionsBuilder newBuilder() {
@@ -5664,7 +5362,6 @@ public class IBMSpeechToTextV1Models {
     private Boolean smart_formatting_serialized_name;
     private String customization_id_serialized_name;
     private Boolean speaker_labels_serialized_name;
-    private String session_id_serialized_name;
 
     private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
       audio_serialized_name = recognizeOptions.audio_serialized_name;
@@ -5684,7 +5381,6 @@ public class IBMSpeechToTextV1Models {
       smart_formatting_serialized_name = recognizeOptions.smart_formatting_serialized_name;
       customization_id_serialized_name = recognizeOptions.customization_id_serialized_name;
       speaker_labels_serialized_name = recognizeOptions.speaker_labels_serialized_name;
-      session_id_serialized_name = recognizeOptions.session_id_serialized_name;
     }
 
     public RecognizeOptionsBuilder() {
@@ -5782,11 +5478,6 @@ public class IBMSpeechToTextV1Models {
 
     public RecognizeOptionsBuilder speakerLabels(Boolean speakerLabels) {
       this.speaker_labels_serialized_name = speakerLabels;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder sessionId(String sessionId) {
-      this.session_id_serialized_name = sessionId;
       return this;
     }
   }
@@ -6106,47 +5797,6 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * SessionStatus
-   */
-  public class SessionStatus extends IBMWatsonGenericModel {
-    private SpeechSession session_serialized_name;
-    /**
-     * Gets the session_serialized_name.
-     *
-     * Information about the specified existing session.
-     *
-     * @return the session_serialized_name
-     */
-    @AuraEnabled
-    public SpeechSession getSession() {
-      return session_serialized_name;
-    }
-
-    /**
-     * Sets the session_serialized_name.
-     *
-     * @param session the new session
-     */
-    public void setSession(final SpeechSession session) {
-      this.session_serialized_name = session;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SessionStatus ret = (SessionStatus) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for session_serialized_name
-      SpeechSession newSession = (SpeechSession) new SpeechSession().deserialize(JSON.serialize(ret.getSession()), (Map<String, Object>) jsonMap.get('session_serialized_name'), SpeechSession.class);
-      ret.setSession(newSession);
-
-      return ret;
-    }
-  }
-
-  /**
    * SpeakerLabelsResult
    */
   public class SpeakerLabelsResult extends IBMWatsonGenericModel {
@@ -6330,7 +5980,6 @@ public class IBMSpeechToTextV1Models {
     private String url_serialized_name;
     private SupportedFeatures supported_features_serialized_name;
     private String description_serialized_name;
-    private String sessions_serialized_name;
     /**
      * Gets the name_serialized_name.
      *
@@ -6397,17 +6046,6 @@ public class IBMSpeechToTextV1Models {
     public String getDescription() {
       return description_serialized_name;
     }
-    /**
-     * Gets the sessions_serialized_name.
-     *
-     * The URI for the model for use with the `POST /v1/sessions` method. (Returned only for requests for a single model with the `GET /v1/models/{model_id}` method.)
-     *
-     * @return the sessions_serialized_name
-     */
-    @AuraEnabled
-    public String getSessions() {
-      return sessions_serialized_name;
-    }
 
     /**
      * Sets the name_serialized_name.
@@ -6461,15 +6099,6 @@ public class IBMSpeechToTextV1Models {
      */
     public void setDescription(final String description) {
       this.description_serialized_name = description;
-    }
-
-    /**
-     * Sets the sessions_serialized_name.
-     *
-     * @param sessions the new sessions
-     */
-    public void setSessions(final String sessions) {
-      this.sessions_serialized_name = sessions;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6931,169 +6560,6 @@ public class IBMSpeechToTextV1Models {
       }
 
       SpeechResults ret = (SpeechResults) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
-   * SpeechSession
-   */
-  public class SpeechSession extends IBMWatsonGenericModel {
-    private String recognize_serialized_name;
-    private String recognize_ws_serialized_name;
-    private String observe_result_serialized_name;
-    private String session_id_serialized_name;
-    private String new_session_uri_serialized_name;
-    private String state_serialized_name;
-    private String model_serialized_name;
-    /**
-     * Gets the recognize_serialized_name.
-     *
-     * URI for HTTP REST recognition requests.
-     *
-     * @return the recognize_serialized_name
-     */
-    @AuraEnabled
-    public String getRecognize() {
-      return recognize_serialized_name;
-    }
-    /**
-     * Gets the recognize_ws_serialized_name.
-     *
-     * URI for WebSocket recognition requests. Needed only for working with the WebSocket interface.
-     *
-     * @return the recognize_ws_serialized_name
-     */
-    @AuraEnabled
-    public String getRecognizeWs() {
-      return recognize_ws_serialized_name;
-    }
-    /**
-     * Gets the observe_result_serialized_name.
-     *
-     * URI for HTTP REST results observers.
-     *
-     * @return the observe_result_serialized_name
-     */
-    @AuraEnabled
-    public String getObserveResult() {
-      return observe_result_serialized_name;
-    }
-    /**
-     * Gets the session_id_serialized_name.
-     *
-     * Identifier for the new session. **Note:** This field is returned only when you create a new session.
-     *
-     * @return the session_id_serialized_name
-     */
-    @AuraEnabled
-    public String getSessionId() {
-      return session_id_serialized_name;
-    }
-    /**
-     * Gets the new_session_uri_serialized_name.
-     *
-     * URI for the new session. **Note:** This field is returned only when you create a new session.
-     *
-     * @return the new_session_uri_serialized_name
-     */
-    @AuraEnabled
-    public String getNewSessionUri() {
-      return new_session_uri_serialized_name;
-    }
-    /**
-     * Gets the state_serialized_name.
-     *
-     * State of the session. The state must be `initialized` to perform a new recognition request on the session. **Note:** This field is returned only when you request the status of an existing session.
-     *
-     * @return the state_serialized_name
-     */
-    @AuraEnabled
-    public String getState() {
-      return state_serialized_name;
-    }
-    /**
-     * Gets the model_serialized_name.
-     *
-     * URI for information about the model that is used with the session. **Note:** This field is returned only when you request the status of an existing session.
-     *
-     * @return the model_serialized_name
-     */
-    @AuraEnabled
-    public String getModel() {
-      return model_serialized_name;
-    }
-
-    /**
-     * Sets the recognize_serialized_name.
-     *
-     * @param recognize the new recognize
-     */
-    public void setRecognize(final String recognize) {
-      this.recognize_serialized_name = recognize;
-    }
-
-    /**
-     * Sets the recognize_ws_serialized_name.
-     *
-     * @param recognizeWs the new recognizeWs
-     */
-    public void setRecognizeWs(final String recognizeWs) {
-      this.recognize_ws_serialized_name = recognizeWs;
-    }
-
-    /**
-     * Sets the observe_result_serialized_name.
-     *
-     * @param observeResult the new observeResult
-     */
-    public void setObserveResult(final String observeResult) {
-      this.observe_result_serialized_name = observeResult;
-    }
-
-    /**
-     * Sets the session_id_serialized_name.
-     *
-     * @param sessionId the new sessionId
-     */
-    public void setSessionId(final String sessionId) {
-      this.session_id_serialized_name = sessionId;
-    }
-
-    /**
-     * Sets the new_session_uri_serialized_name.
-     *
-     * @param newSessionUri the new newSessionUri
-     */
-    public void setNewSessionUri(final String newSessionUri) {
-      this.new_session_uri_serialized_name = newSessionUri;
-    }
-
-    /**
-     * Sets the state_serialized_name.
-     *
-     * @param state the new state
-     */
-    public void setState(final String state) {
-      this.state_serialized_name = state;
-    }
-
-    /**
-     * Sets the model_serialized_name.
-     *
-     * @param model the new model
-     */
-    public void setModel(final String model) {
-      this.model_serialized_name = model;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SpeechSession ret = (SpeechSession) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
