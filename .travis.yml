@@ -42,7 +42,8 @@ script:
 - echo "IBMTextToSpeechV1FTest.runAllTests('$TEXT_TO_SPEECH_USERNAME', '$TEXT_TO_SPEECH_PASSWORD');" > TextToSpeechTestRunner.apex
 - $(sfdx force:apex:execute -f TextToSpeechTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
 - rm TextToSpeechTestRunner.apex
-- sfdx force:org:delete -u ciorg -p
 - mv install/package.xml force-app/main/default
 - "./install/deploy.sh"
 
+after_script:
+- sfdx force:org:delete -u ciorg -p
