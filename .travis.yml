@@ -45,5 +45,5 @@ script:
 - rm TextToSpeechTestRunner.apex
 - mv install/package.xml force-app/main/default
 - "./install/deploy.sh"
-after_script:
+after_failure:
 - sfdx force:org:delete -u ciorg -p
