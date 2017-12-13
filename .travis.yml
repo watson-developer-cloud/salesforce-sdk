@@ -16,10 +16,11 @@ before_install:
 - sfdx force:auth:jwt:grant --clientid $CONSUMER_KEY --jwtkeyfile assets/server.key
   --username $USERNAME --setdefaultdevhubusername -a HubOrg
 - mv force-app/main/test/* force-app/main/default/classes
-script:
+before_script:
 - sfdx force:org:create -v HubOrg -s -f config/project-scratch-def.json -a ciorg
 - sfdx force:source:push -u ciorg
 - sfdx force:mdapi:deploy -d config/remoteSiteEndpoint -w 1
+script:
 - sfdx force:apex:test:run -u ciorg -c -r human
 - echo "IBMDiscoveryV1FTests.runAllTests('$DISCOVERY_USERNAME', '$DISCOVERY_PASSWORD');" > DiscoveryTestRunner.apex
 - $(sfdx force:apex:execute -f DiscoveryTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
@@ -44,9 +45,5 @@ script:
 - rm TextToSpeechTestRunner.apex
 - mv install/package.xml force-app/main/default
 - "./install/deploy.sh"
-
-after_success:
-- sfdx force:org:delete -u ciorg -p
-
-after_failure:
+after_script:
 - sfdx force:org:delete -u ciorg -p
