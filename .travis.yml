@@ -20,6 +20,7 @@ script:
 - sfdx force:org:create -v HubOrg -s -f config/project-scratch-def.json -a ciorg
 - sfdx force:source:push -u ciorg
 - sfdx force:mdapi:deploy -d config/remoteSiteEndpoint -w 1
+- sfdx force:mdapi:deploy -d config/DocumentsFTest -w 1
 - sfdx force:apex:test:run -u ciorg -c -r human
 - echo "IBMDiscoveryV1FTests.runAllTests('$DISCOVERY_USERNAME', '$DISCOVERY_PASSWORD');" > DiscoveryTestRunner.apex
 - $(sfdx force:apex:execute -f DiscoveryTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
