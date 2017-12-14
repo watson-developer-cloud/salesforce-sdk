@@ -292,7 +292,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (registerCallbackOptions.userSecret() != null) {
       builder.query('user_secret', registerCallbackOptions.userSecret());
     }
-    builder.bodyJson(JSON.serialize('{}'));
+    builder.bodyJson('{}');
 
     return (IBMSpeechToTextV1Models.RegisterStatus) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RegisterStatus.class);
   }
@@ -311,7 +311,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (unregisterCallbackOptions.callbackUrl() != null) {
       builder.query('callback_url', unregisterCallbackOptions.callbackUrl());
     }
-    builder.bodyJson(JSON.serialize('{}'));
+    builder.bodyJson('{}');
 
     createServiceCall(builder.build(), null);
   }
@@ -396,7 +396,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public void resetLanguageModel(IBMSpeechToTextV1Models.ResetLanguageModelOptions resetLanguageModelOptions) {
     IBMWatsonValidator.notNull(resetLanguageModelOptions, 'resetLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/reset', new String[]{ resetLanguageModelOptions.customizationId() }));
-    builder.bodyJson(JSON.serialize('{}'));
+    builder.bodyJson('{}');
 
     createServiceCall(builder.build(), null);
   }
@@ -418,7 +418,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (trainLanguageModelOptions.customizationWeight() != null) {
       builder.query('customization_weight', String.valueOf(trainLanguageModelOptions.customizationWeight()));
     }
-    builder.bodyJson(JSON.serialize('{}'));
+    builder.bodyJson('{}');
 
     createServiceCall(builder.build(), null);
   }
@@ -434,7 +434,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public void upgradeLanguageModel(IBMSpeechToTextV1Models.UpgradeLanguageModelOptions upgradeLanguageModelOptions) {
     IBMWatsonValidator.notNull(upgradeLanguageModelOptions, 'upgradeLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/upgrade', new String[]{ upgradeLanguageModelOptions.customizationId() }));
-    builder.bodyJson(JSON.serialize('{}'));
+    builder.bodyJson('{}');
 
     createServiceCall(builder.build(), null);
   }
@@ -683,7 +683,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public void resetAcousticModel(IBMSpeechToTextV1Models.ResetAcousticModelOptions resetAcousticModelOptions) {
     IBMWatsonValidator.notNull(resetAcousticModelOptions, 'resetAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/reset', new String[]{ resetAcousticModelOptions.customizationId() }));
-    builder.bodyJson(JSON.serialize('{}'));
+    builder.bodyJson('{}');
 
     createServiceCall(builder.build(), null);
   }
@@ -702,7 +702,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (trainAcousticModelOptions.customLanguageModelId() != null) {
       builder.query('custom_language_model_id', trainAcousticModelOptions.customLanguageModelId());
     }
-    builder.bodyJson(JSON.serialize('{}'));
+    builder.bodyJson('{}');
 
     createServiceCall(builder.build(), null);
   }
