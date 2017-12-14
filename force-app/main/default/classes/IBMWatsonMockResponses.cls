@@ -1799,4 +1799,425 @@ public class IBMWatsonMockResponses {
            '  "part_of_speech": "Josi"' +
            '}';
   }
+
+  public static String speechToTextListModels() {
+    return '{' +
+      ' "models": [' +
+      '  {' +
+      '    "name": "en-US_NarrowbandModel",' +
+      '    "language": "en-US",' +
+      '    "url": "https://stream.watsonplatform.net/speech-to-text/api/v1/models/en-US_NarrowbandModel",' +
+      '    "rate": 8000,' +
+      '    "supported_features": {' +
+      '      "custom_language_model": true,' +
+      '      "speaker_labels": true' +
+      '    },' +
+      '    "description": "US English narrowband model."' +
+      '  },' +
+      '  {' +
+      '    "name": "es-ES_BroadbandModel",' +
+      '    "language": "es-ES",' +
+      '    "url": "https://stream.watsonplatform.net/speech-to-text/api/v1/models/es-ES_BroadbandModel",' +
+      '    "rate": 16000,' +
+      '    "supported_features": {' +
+      '      "custom_language_model": true,' +
+      '      "speaker_labels": true' +
+      '    },' +
+      '    "description": "Spanish broadband model."' +
+      '  },' +
+      '  {' +
+      '    "name": "es-ES_NarrowbandModel",' +
+      '    "language": "es-ES",' +
+      '    "url": "https://stream.watsonplatform.net/speech-to-text/api/v1/models/es-ES_NarrowbandModel",' +
+      '    "rate": 8000,' +
+      '    "supported_features": {' +
+      '      "custom_language_model": true,' +
+      '      "speaker_labels": true' +
+      '    },' +
+      '    "description": "Spanish narrowband model."' +
+      '  },' +
+      '  {' +
+      '    "name": "en-US_BroadbandModel",' +
+      '    "language": "en-US",' +
+      '    "url": "https://stream.watsonplatform.net/speech-to-text/api/v1/models/en-US_BroadbandModel",' +
+      '    "rate": 16000,' +
+      '    "supported_features": {' +
+      '      "custom_language_model": true,' +
+      '      "speaker_labels": true' +
+      '    },' +
+      '    "description": "US English broadband model."' +
+      '  }' +
+      ' ]' +
+      '}';
+  }
+  
+  public static String speechToTextGetModel() {
+    return '{' +
+     ' "name": "en-US_NarrowbandModel",' +
+     ' "language": "en-US",' +
+     ' "sessions": "https://stream.watsonplatform.net/speech-to-text/api/v1/sessions?model=en-US_NarrowbandModel",' +
+     ' "url": "https://stream.watsonplatform.net/speech-to-text/api/v1/models/en-US_NarrowbandModel",' +
+     ' "rate": 8000,' +
+     ' "supported_features": {' +
+     '   "custom_language_model": true,' +
+     '   "speaker_labels": true' +
+     ' },' +
+     ' "description": "US English narrowband model."' +
+     ' }';
+  }
+  
+  public static String speechToTextCreateJob() {
+    return '{' +
+      ' "created": "2017-12-13T16:11:55.815Z",' +
+      ' "id": "56d09f2c-e020-11e7-9ee3-33bf91161141",' +
+      ' "url": "https://watson-api-explorer.mybluemix.net/speech-to-text/api/v1/recognitions/56d09f2c-e020-11e7-9ee3-33bf91161141",' +
+      ' "status": "processing"' +
+    '}';
+  }
+  
+  public static String speechToTextCheckJob() {
+    return '{' +
+      ' "created": "2017-12-13T16:11:55.815Z",' +
+      ' "id": "56d09f2c-e020-11e7-9ee3-33bf91161141",' +
+      ' "updated": "2017-12-13T16:11:57.393Z",' +
+      ' "status": "failed"' +
+      '}';
+  }
+  
+  public static String speechToTextCheckJobs() {
+    return '{' +
+      ' "recognitions": [' +
+      ' {' +
+      '   "created": "2017-12-13T16:11:55.815Z",' +
+      '   "id": "56d09f2c-e020-11e7-9ee3-33bf91161141",' +
+      '   "updated": "2017-12-13T16:11:57.393Z",' +
+      '   "status": "completed"' +
+      ' }' +
+    ' ]' +
+    ' }';
+  }
+  
+  public static String speechToTextDeleteJob() {
+    return '{}';
+  }
+  
+  public static String speechToTextRegisterCallback() {
+    return '{' +
+    ' "status": "created",' +
+    ' "url": "https://ibmdf17-watson-dxhub.my.salesforce.com/"' +
+    '}';
+  }
+  
+  public static String speechToTextUnRegisterCallback() {
+    return '{}';
+  }
+  
+  public static String speechToTextListLanguageModels() {
+    return '{' +
+      ' "customizations": [' +
+      ' {' +
+      '  "owner": "952e2069-9ece-48d8-96c9-0206b4473819",' +
+      '  "base_model_name": "en-US_BroadbandModel",' +
+      '  "customization_id": "d0bdc477-59e6-4e45-86f3-1a9a39664eb5",' +
+      '  "dialect": "en-US",' +
+      '  "created": "2017-12-11T17:50:11.862Z",' +
+      '  "name": "custom_en_US",' +
+      '  "description": "language customization",' +
+      '  "progress": 100,' +
+      '  "language": "en-US",' +
+      '  "status": "available"' +
+      ' }' +
+      ']' +
+      '}';
+  }
+  
+  public static String speechToTextGetLanguageModel() {
+    return '{' +
+      ' "owner": "952e2069-9ece-48d8-96c9-0206b4473819",' +
+      ' "base_model_name": "en-US_BroadbandModel",' +
+      ' "customization_id": "d0bdc477-59e6-4e45-86f3-1a9a39664eb5",' +
+      ' "dialect": "en-US",' +
+      ' "created": "2017-12-11T17:50:11.862Z",' +
+      ' "name": "custom_en_US",' +
+      ' "description": "language customization",' +
+      ' "progress": 100,' +
+      ' "language": "en-US",' +
+      ' "status": "available"' +
+      ' }';
+  }
+  
+  public static String speechToTextTrainLanguageModel() {
+    return '{}';
+  }
+  
+  public static String speechToTextUpgradeLanguageModel() {
+    return '{}';
+  }
+  
+  public static String speechToTextResetLanguageModel() {
+    return '{}';
+  }
+
+  public static String speechToTextDeleteLanguageModel() {
+    return '{}';
+  }
+
+  public static String speechToTextListCorpora() {
+    return '{' +
+      ' "corpora": [' +
+      ' {' +
+      '   "out_of_vocabulary_words": 3,' +
+      '   "total_words": 160,' +
+      '   "name": "custom_corpus",' +
+      '   "status": "analyzed"' +
+      ' }' +
+      ']' +
+      '}';
+  }
+
+  public static String speechToTextGetCorpus() {
+    return '{' +
+      ' "out_of_vocabulary_words": 3,' +
+      ' "total_words": 160,' +
+      ' "name": "custom_corpus",' +
+      ' "status": "analyzed"' +
+      '}';
+  }
+
+  public static String speechToTextDeleteCorpus() {
+    return '{}';
+  }
+  
+  public static String speechToTextAddCorpus() {
+    return '{}';
+  }
+
+  public static String speechToTextDeleteWord() {
+    return '{}';
+  }
+
+  public static String speechToTextGetWord() {
+    return '{' +
+      ' "display_as": "words matter",' +
+      ' "sounds_like": [' +
+      '   "words matter"' +
+      ' ],' +
+      ' "count": 2,' +
+      ' "source": [' +
+       '  "custom_corpus"' +
+      ' ],' +
+      ' "word": "words matter"' +
+      '}';
+  }
+  
+  public static String speechToTextListWords() {
+    return '{}';
+  }
+
+  public static String speechToTextListAcousticModels() {
+    return '{' +
+      ' "customizations": [' +
+      '   {' +
+      '     "owner": "952e2069-9ece-48d8-96c9-0206b4473819",' +
+      '     "base_model_name": "en-US_BroadbandModel",' +
+      '     "customization_id": "825485d7-af3f-44e7-b1ea-76130dec8a61",' +
+      '     "created": "2017-12-11T17:57:06.654Z",' +
+      '     "name": "custom acoustic",' +
+      '     "description": "customization",' +
+      '     "progress": 0,' +
+      '     "language": "en-US",' +
+      '     "status": "ready"' +
+      '   }' +
+      ' ]' +
+      '}';
+  }
+  
+  public static String speechToTextGetAcousticModel() {
+    return '{' +
+      ' "owner": "952e2069-9ece-48d8-96c9-0206b4473819",' +
+      ' "base_model_name": "en-US_BroadbandModel",' +
+      ' "customization_id": "825485d7-af3f-44e7-b1ea-76130dec8a61",' +
+      ' "created": "2017-12-11T17:57:06.654Z",' +
+      ' "name": "custom acoustic",' +
+      ' "description": "customization",' +
+      ' "progress": 0,' +
+      ' "language": "en-US",' +
+      ' "status": "ready"' +
+      '}';
+  }
+
+  public static String speechToTextDeleteAcousticModel() {
+    return '{}';
+  }
+  
+  public static String speechToTextTrainAcousticModel() {
+    return '{}';
+  }
+
+  public static String speechToTextResetAcousticModel() {
+    return '{}';
+  }
+
+  public static String speechToTextDeleteAudio() {
+    return '{}';
+  }
+  
+  public static String speechToTextGetAudio() {
+    return '{' +
+      ' "total_minutes_of_audio": 0,' +
+      ' "audio": [' +
+      '  {' +
+      '   "duration": 0,' +
+      '   "name": "string",' +
+      '   "details": {' +
+      '   "type": "audio",' +
+      '   "codec": "string",' +
+      '   "frequency": 0,' +
+      '   "compression": "zip"' +
+      '  },' +
+      ' "status": "ok"' +
+      '}' +
+      ']' +
+      '}';
+  }
+  
+  public static String speechToTextListAudio() {
+    return '{}';
+  }
+  
+  public static String speechToTextAddAudio() {
+    return '{}';
+  }
+  
+  public static String speechToTextAddWord() {
+    return '{}';
+  }
+  
+  public static String speechToTextCreateAcousticModel() {
+    return '{}';
+  }
+  
+  public static String speechToTextCreateLanguageModel() {
+    return '{' +
+     ' "customization_id": "74f4807e-b5ff-4866-824e-6bba1a84fe96"' +
+     '}';
+  }
+  
+  public static String speechToTextRecognize() {
+    return '{' +
+     ' "results": [' +
+     '   {' +
+     '     "word_alternatives": [' +
+     '       {' +
+     '         "start_time": 0.09,' +
+     '         "alternatives": [' +
+     '           {' +
+     '             "confidence": 1,' +
+     '             "word": "latest"' +
+     '           }' +
+     '         ],' +
+     '         "end_time": 0.6' +
+     '       },' +
+     '       {' +
+     '         "start_time": 0.85,' +
+     '         "alternatives": [' +
+     '           {' +
+     '             "confidence": 0.9979,' +
+     '             "word": "report"' +
+     '            }' +
+     '         ],' +
+     '         "end_time": 1.52' +
+     '       }' +
+     '     ],' +
+     '     "keywords_result": {},' +
+     '     "alternatives": [' +
+     '       {' +
+     '         "timestamps": [' +
+     '           {' +
+     '             "word": "the",' +
+     '             "start_time": 0.03,' +
+     '             "end_time": 0.09' +
+     '           },' +
+     '           {' +
+     '             "word": "report",' +
+     '             "start_time": 0.85,' +
+     '             "end_time": 1.52' +
+     '           }' +
+     '         ],' +
+     '         "confidence": 0.983,' +
+     '         "transcript": "the latest weather report "' +
+     '       }' +
+     '     ],' +
+     '     "final": true' +
+     '   }' +
+     ' ],' +
+     ' "result_index": 0' +
+     ' }' +
+     ' {' +
+     ' "results": [' +
+     '   {' +
+     '     "word_alternatives": [' +
+     '       {' +
+     '         "start_time": 0.14,' +
+     '         "alternatives": [' +
+     '           {' +
+     '             "confidence": 1,' +
+     '             "word": "a"' +
+     '           }' +
+     '         ],' +
+     '         "end_time": 0.28' +
+     '       },' +
+     '       {' +
+     '         "start_time": 5.33,' +
+     '         "alternatives": [' +
+     '           {' +
+     '             "confidence": 0.9953,' +
+     '             "word": "Sunday"' +
+     '           }' +
+     '         ],' +
+     '         "end_time": 6.04' +
+     '       }' +
+     '     ],' +
+     '     "keywords_result": {' +
+     '       "tornadoes": [' +
+     '         {' +
+     '           "normalized_text": "tornadoes",' +
+     '           "start_time": 3.03,' +
+     '           "confidence": 0.953,' +
+     '           "end_time": 3.85' +
+     '         }' +
+     '       ],' +
+     '       "colorado": [' +
+     '         {' +
+     '           "normalized_text": "Colorado",' +
+     '           "start_time": 4.59,' +
+     '           "confidence": 0.999,' +
+     '           "end_time": 5.18' +
+     '         }' +
+     '       ]' +
+     '     },' +
+     '     "alternatives": [' +
+     '       {' +
+     '         "timestamps": [' +
+     '           [' +
+     '             "a",' +
+     '             0.14,' +
+     '             0.28' +
+     '           ],' +
+     '           [' +
+     '             "Sunday",' +
+     '             5.33,' +
+     '             6.04' +
+     '           ]' +
+     '         ],' +
+     '         "confidence": 0.983,' +
+     '         "transcript": "a line of severe thunderstorms with several possible tornadoes is approaching Colorado on Sunday "' +
+     '       }' +
+     '     ],' +
+     '     "final": true' +
+     '   }' +
+     ' ],' +
+     ' "result_index": 0' +
+     ' }';
+  }
 }

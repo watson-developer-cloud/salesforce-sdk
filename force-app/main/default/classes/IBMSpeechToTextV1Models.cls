@@ -410,6 +410,7 @@ public class IBMSpeechToTextV1Models {
       this.audio_filename_serialized_name = audioFilename;
       this.customization_id_serialized_name = customizationId;
       this.audio_name_serialized_name = audioName;
+      this.content_type_serialized_name = audio.contentType();
     }
 
     /**
@@ -423,6 +424,7 @@ public class IBMSpeechToTextV1Models {
 
     public AddAudioOptionsBuilder audio(IBMWatsonFile audio) {
       this.audio_serialized_name = audio;
+      this.content_type_serialized_name = audio.contentType();
       return this;
     }
 
@@ -2274,6 +2276,7 @@ public class IBMSpeechToTextV1Models {
 
     public CreateJobOptionsBuilder audio(IBMWatsonFile audio) {
       this.audio_serialized_name = audio;
+      this.content_type_serialized_name = audio.contentType();
       return this;
     }
 
