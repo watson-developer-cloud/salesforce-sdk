@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Public_Documents</members>
+        <members>Public_Documents/cap047_wav</members>
+        <members>Public_Documents/sample1_wav</members>
+        <members>Public_Documents/sample1_webm</members>
+        <members>Public_Documents/sound_with_pause_wav</members>
+        <name>Document</name>
+    </types>
+    <version>39.0</version>
+</Package>
