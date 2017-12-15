@@ -238,9 +238,9 @@ $A.enqueueAction(action);
 Both methods shown above will print out the same information.
 
 ## WebSocket Support
-Both the Text to Speech and Speech to Text services have API endpoints which support the use of WebSockets. However, the use of WebSockets are not supported natively by Apex. If you would like to take advantage of this functionality, the recommendation would be to leverage the [Watson Node SDK](https://github.com/watson-developer-cloud/node-sdk).
+Both the Text to Speech and Speech to Text services have API endpoints which support the use of WebSockets. However, the use of WebSockets are not supported natively by Apex. If you would like to take advantage of this functionality, the recommendation would be to leverage the [Watson Speech Javascript SDK](https://github.com/watson-developer-cloud/speech-javascript-sdk).
 
-Being Javascript, this SDK can integrate smoothly with Lightning apps and be used alongside the Salesforce SDK.
+The above library adds minimal overhead and will allow for the use of WebSockets. Also, being Javascript, this SDK can integrate smoothly with Lightning apps and be used alongside the Salesforce SDK.
 
 ## Functional Tests
 
