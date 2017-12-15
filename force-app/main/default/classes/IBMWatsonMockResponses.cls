@@ -1875,6 +1875,76 @@ public class IBMWatsonMockResponses {
     '}';
   }
   
+  public static String speechToTextCheckJobCreate() {
+    return '{' +
+           '  "id": "string",' +
+           '  "status": "waiting",' +
+           '  "created": "string",' +
+           '  "updated": "string",' +
+           '  "url": "string",' +
+           '  "user_token": "string",' +
+           '  "results": [' +
+           '    {' +
+           '      "results": [' +
+           '        {' +
+           '          "final": true,' +
+           '          "alternatives": [' +
+           '            {' +
+           '              "transcript": "string",' +
+           '              "confidence": 0,' +
+           '              "timestamps": [' +
+           '                "string"' +
+           '              ],' +
+           '              "word_confidence": [' +
+           '                "string"' +
+           '              ]' +
+           '            }' +
+           '          ],' +
+           '          "keywords_result": {' +
+           '            "keyword": [' +
+           '              {' +
+           '                "normalized_text": "string",' +
+           '                "start_time": 0,' +
+           '                "end_time": 0,' +
+           '                "confidence": 0' +
+           '              }' +
+           '            ]' +
+           '          },' +
+           '          "word_alternatives": [' +
+           '            {' +
+           '              "start_time": 0,' +
+           '              "end_time": 0,' +
+           '              "alternatives": [' +
+           '                {' +
+           '                  "confidence": 0,' +
+           '                  "word": "string"' +
+           '                }' +
+           '              ]' +
+           '            }' +
+           '          ]' +
+           '        }' +
+           '      ],' +
+           '      "result_index": 0,' +
+           '      "speaker_labels": [' +
+           '        {' +
+           '          "from": 0,' +
+           '          "to": 0,' +
+           '          "speaker": 0,' +
+           '          "confidence": 0,' +
+           '          "final": true' +
+           '        }' +
+           '      ],' +
+           '      "warnings": [' +
+           '        "string"' +
+           '      ]' +
+           '    }' +
+           '  ],' +
+           '  "warnings": [' +
+           '    "string"' +
+           '  ]' +
+           '}';
+  }
+  
   public static String speechToTextCheckJob() {
     return '{' +
       ' "created": "2017-12-13T16:11:55.815Z",' +
@@ -1942,7 +2012,9 @@ public class IBMWatsonMockResponses {
       ' "description": "language customization",' +
       ' "progress": 100,' +
       ' "language": "en-US",' +
-      ' "status": "available"' +
+      ' "status": "available",' +
+      ' "dialect": "customization",' +
+      ' "warnings": "customization"' +
       ' }';
   }
   
@@ -1980,7 +2052,8 @@ public class IBMWatsonMockResponses {
       ' "out_of_vocabulary_words": 3,' +
       ' "total_words": 160,' +
       ' "name": "custom_corpus",' +
-      ' "status": "analyzed"' +
+      ' "status": "analyzed",' +
+      ' "error": "none"' +
       '}';
   }
 
@@ -2006,14 +2079,33 @@ public class IBMWatsonMockResponses {
       ' "source": [' +
        '  "custom_corpus"' +
       ' ],' +
+      ' "error": [{' +
+      '  "element": "custom_corpus"' +
+      ' }],' +
       ' "word": "words matter"' +
       '}';
   }
   
   public static String speechToTextListWords() {
-    return '{}';
+    return '{' +
+      ' "words": [' +
+      ' {' +
+      ' "display_as": "words matter",' +
+      ' "sounds_like": [' +
+      '   "words matter"' +
+      ' ],' +
+      ' "count": 2,' +
+      ' "source": [' +
+      '  "custom_corpus"' +
+      ' ],' +
+      ' "error": [{' +
+       '  "element": "custom_corpus"' +
+      ' }],' +
+      ' "word": "words matter"' +
+      '}]}';
   }
-
+  
+  
   public static String speechToTextListAcousticModels() {
     return '{' +
       ' "customizations": [' +
@@ -2042,7 +2134,8 @@ public class IBMWatsonMockResponses {
       ' "description": "customization",' +
       ' "progress": 0,' +
       ' "language": "en-US",' +
-      ' "status": "ready"' +
+      ' "status": "ready",' +
+      ' "warnings": "customization"' +
       '}';
   }
 
@@ -2064,7 +2157,27 @@ public class IBMWatsonMockResponses {
   
   public static String speechToTextGetAudio() {
     return '{' +
-      ' "total_minutes_of_audio": 0,' +
+      '  "duration": 0,' +
+      '  "name": "string",' +
+      '  "details": {' +
+      '   "type": "audio",' +
+      '   "codec": "string",' +
+      '   "frequency": 0,' +
+      '   "compression": "zip"' +
+      '  },' +
+      ' "status": "ok",' +
+      ' "container": ' +
+      '  {' +
+      '   "duration": 0,' +
+      '   "name": "string",' +
+      '   "details": {' +
+      '   "type": "audio",' +
+      '   "codec": "string",' +
+      '   "frequency": 0,' +
+      '   "compression": "zip"' +
+      '  },' +
+      ' "status": "ok"' +
+      ' },' +
       ' "audio": [' +
       '  {' +
       '   "duration": 0,' +
@@ -2099,10 +2212,20 @@ public class IBMWatsonMockResponses {
   
   public static String speechToTextCreateLanguageModel() {
     return '{' +
-     ' "customization_id": "74f4807e-b5ff-4866-824e-6bba1a84fe96"' +
+     ' "customization_id": "74f4807e-b5ff-4866-824e-6bba1a84fe96",' +
+     ' "owner": "952e2069-9ece-48d8-96c9-0206b4473819",' +
+     ' "base_model_name": "en-US_BroadbandModel",' +
+     ' "created": "2017-12-11T17:57:06.654Z",' +
+     ' "name": "custom acoustic",' +
+     ' "description": "customization",' +
+     ' "progress": 0,' +
+     ' "language": "en-US",' +
+     ' "status": "ready",' +
+     ' "dialect": "customization",' +
+     ' "warnings": "customization"' +
      '}';
   }
-  
+
   public static String speechToTextRecognize() {
     return '{' +
      ' "results": [' +
