@@ -29,7 +29,7 @@ public class IBMWatsonClient {
     }
 
     // Set request body
-    if (request.getBody() != null && request.getBody().contentType != null && (request.getMethod().equals('POST') || request.getMethod().equals('PUT') )) {
+    if (request.getMethod().equals('POST') || request.getMethod().equals('PUT')) {
       if (request.getBody() instanceof IBMWatsonMultipartBody) {
         // form-multipart request will be send as Base64 request
       	String form64 = ((IBMWatsonMultipartBody)request.getBody()).form64();

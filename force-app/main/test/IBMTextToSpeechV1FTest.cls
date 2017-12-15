@@ -13,7 +13,7 @@ public with sharing class IBMTextToSpeechV1FTest {
     testAddWords(username, password, customizationId);
     testListWords(username, password, customizationId);
     testGetWord(username, password, customizationId);
-  //  testSynthesize(username, password, customizationId);
+    testSynthesize(username, password, customizationId);
     testDeleteWord(username, password, customizationId);
     testDeleteVoiceModel(username, password, customizationId);
   }  
@@ -264,14 +264,12 @@ public with sharing class IBMTextToSpeechV1FTest {
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.SynthesizeOptions options = new IBMTextToSpeechV1Models.SynthesizeOptionsBuilder()
-      .accept('audio/basic')
+      .accept('audio/mp3')
       .voice('de-DE_DieterVoice')
       .customizationId(customizationId)
-      .text('Hello World')
+      .text('IBM Watson wird die Kundenerfahrung revolutionieren.')
       .build();
-    IBMWatsonFile resp =
-      textToSpeech.synthesize(options);
-    System.debug('IBMTextToSpeechV1FTest.testListWords(): '+ resp);  
-    return resp;  
+    IBMWatsonFile resp = textToSpeech.synthesize(options);
+    return resp;
   }
 }
