@@ -2,9 +2,9 @@ public class IBMSpeechToTextV1FTest {
   private static String URL = 'https://stream.watsonplatform.net/speech-to-text/api'; 
 
   public static void runAllTests(String username, String password) {
-  	IBMSpeechToTextV1Models.LanguageModel LanguageModel = testCreateLanguageModel(username, password);
-  	IBMSpeechToTextV1Models.LanguageModels LanguageModels = testListLanguageModels(username, password);
-  	IBMSpeechToTextV1Models.LanguageModel getLanguageModel = testGetLanguageModel(username, password, LanguageModel.getCustomizationId());
+    IBMSpeechToTextV1Models.LanguageModel LanguageModel = testCreateLanguageModel(username, password);
+    IBMSpeechToTextV1Models.LanguageModels LanguageModels = testListLanguageModels(username, password);
+    IBMSpeechToTextV1Models.LanguageModel getLanguageModel = testGetLanguageModel(username, password, LanguageModel.getCustomizationId());
   }
   
   /**
