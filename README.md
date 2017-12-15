@@ -37,7 +37,7 @@ If you want to use the Watson SDK within a non-scratch environment you can deplo
 1. Authenticate the Salesforce DX CLI to the target environment:
 
     ```bash
-    sfdx force:auth:web:login
+    sfdx force:auth:web:login --setdefaultusername
     ```
     In the browser window that opens, sign in to your org with your credentials. More information [here](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_web_flow.htm)
 
@@ -56,7 +56,7 @@ If you want to use the Watson SDK within a non-scratch environment you can deplo
 1. Deploy the source code:
 
     ```bash
-    sfdx force:mdapi:deploy -d mdapioutput/ -u TargetOrg -w 100
+    sfdx force:mdapi:deploy -d mdapioutput/ -w 100
     ```
 
 ## Installation using the Ant Build Tool
@@ -237,20 +237,10 @@ $A.enqueueAction(action);
 
 Both methods shown above will print out the same information.
 
-## Supported Services
+## WebSocket Support
+Both the Text to Speech and Speech to Text services have API endpoints which support the use of WebSockets. However, the use of WebSockets are not supported natively by Apex. If you would like to take advantage of this functionality, the recommendation would be to leverage the [Watson Node SDK](https://github.com/watson-developer-cloud/node-sdk).
 
-The SDK currently supports:
-  * Conversation v1
-  * Discovery v1
-  * Language Translator v2
-  * Natural Language Classifier v1
-  * Natural Language Understanding v1
-  * Personality Insights v3
-  * Tone Analyzer v3
-
-The remaining services will be added in the soon. You can find the ones that are close to be release in the `develop` branch:
- * Speech to Text v1
- * Text to Speech v1
+Being Javascript, this SDK can integrate smoothly with Lightning apps and be used alongside the Salesforce SDK.
 
 ## Functional Tests
 
