@@ -43,6 +43,9 @@ script:
 - echo "IBMTextToSpeechV1FTest.runAllTests('$TEXT_TO_SPEECH_USERNAME', '$TEXT_TO_SPEECH_PASSWORD');" > TextToSpeechTestRunner.apex
 - $(sfdx force:apex:execute -f TextToSpeechTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
 - rm TextToSpeechTestRunner.apex
+- echo "IBMSpeechToTextV1FTest.runAllTests('$SPEECH_TO_TEXT_USERNAME', '$SPEECH_TO_TEXT_PASSWORD');" > SpeechToTextTestRunner.apex
+- $(sfdx force:apex:execute -f SpeechToTextTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
+- rm SpeechToTextTestRunner.apex
 - sfdx force:org:delete -u ciorg -p
 - mv install/package.xml force-app/main/default
 - "./install/deploy.sh"
