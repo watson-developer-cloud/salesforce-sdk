@@ -1,14 +1,12 @@
 sudo: true
 dist: trusty
 cache: false
-
-env:
-- URL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
-- SFDX_AUTOUPDATE_DISABLE=true
-- SFDX_USE_GENERIC_UNIX_KEYCHAIN=true
-- SFDX_DOMAIN_RETRY=300
-
-before_install:
+language: python
+install:
+- ex[prt URL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
+- ex[prt SFDX_AUTOUPDATE_DISABLE=true
+- ex[prt SFDX_USE_GENERIC_UNIX_KEYCHAIN=true
+- ex[prt SFDX_DOMAIN_RETRY=300
 - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && openssl aes-256-cbc -K $encrypted_65674265f95b_key -iv $encrypted_65674265f95b_iv -in assets/server.key.enc -out assets/server.key -d || true'
 - wget -qO- $URL | tar xJf -
 - "./sfdx/install"
