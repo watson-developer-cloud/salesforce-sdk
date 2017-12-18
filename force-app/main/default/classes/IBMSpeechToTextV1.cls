@@ -228,7 +228,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
       builder.query('inactivity_timeout', String.valueOf(createJobOptions.inactivityTimeout()));
     }
     if (createJobOptions.keywords() != null) {
-      builder.query('keywords', String.join(createJobOptions.keywords(), ', '));
+      builder.query('keywords', String.join(createJobOptions.keywords(), ','));
     }
     if (createJobOptions.keywordsThreshold() != null) {
       builder.query('keywords_threshold', String.valueOf(createJobOptions.keywordsThreshold()));
