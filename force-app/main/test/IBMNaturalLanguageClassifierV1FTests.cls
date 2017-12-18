@@ -15,9 +15,9 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
     }
     testDeleteClassifier(classifierId, username, password);
   }
-  private static String CSVFormat(List<String> strRows){
+  private static String CSVFormat(List<String> strRows) {
     String CSVBody = '';
-    for (String str: strRows){
+    for (String str: strRows) {
       CSVBody += str + '\n';
     }
     return CSVBody;
@@ -26,7 +26,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
   /**
    *  Test classify.
    */
-  public static IBMNaturalLanguageClassifierV1Models.Classification testClassify(String classifierId, String username, String password){
+  public static IBMNaturalLanguageClassifierV1Models.Classification testClassify(String classifierId, String username, String password) {
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
 
     if (username != null && password != null) {
@@ -124,7 +124,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
    *  Test delete a classifier
    *
    */
-  public static void testDeleteClassifier(String classifierId, String username, String password){
+  public static void testDeleteClassifier(String classifierId, String username, String password) {
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
 
     if (username != null && password != null) {
@@ -142,7 +142,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
   /**
    *  Test retrieve information about an existing classifier
    */
-  public static IBMNaturalLanguageClassifierV1Models.Classifier testGetClassifier(String classifierId, String username, String password){
+  public static IBMNaturalLanguageClassifierV1Models.Classifier testGetClassifier(String classifierId, String username, String password) {
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
 
     if (username != null && password != null) {

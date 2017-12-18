@@ -53,7 +53,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   private long writeForm64(List<Part> parts) {
     headers.put('Content-Type', 'multipart/form-data; boundary="' + Boundary + '"');
     form64 = '';
-    for (Integer i = 0; i < parts.size(); i++){
+    for (Integer i = 0; i < parts.size(); i++) {
       Part p = parts[i];
       Boolean isEndingPart = (i == parts.size() - 1);
       if (p.body().hasBase64Data()) {
@@ -101,7 +101,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     String valueCrLf64 = EncodingUtil.base64Encode(valueCrLfBlob);
 
     content += safelyPad(value, valueCrLf64, CRLF);
-    if(isEndingPart == true){
+    if (isEndingPart == true) {
       String footer = '--' + this.boundary + '--';
       Blob footerBlob = blob.valueOf(footer);
       String footerEncoded = EncodingUtil.base64Encode(footerBlob);
@@ -113,51 +113,51 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     }
     return content;
   }
-  
+
   /**
    *  Write a Blob type to the form's body.
    */
-  public String writeBlobBody(String contentDispositionValue, String bodyEncoded, String mimeType, Boolean isEndingPart){
-    String boundaryCrlf = '--'+this.boundary + CRLF;
-      
+  public String writeBlobBody(String contentDispositionValue, String bodyEncoded, String mimeType, Boolean isEndingPart) {
+    String boundaryCrlf = '--' +this.boundary + CRLF;
+
     String contentDisposition = 'Content-Disposition: ' + contentDispositionValue;
     String contentDispositionCrlf = contentDisposition + CRLF;
-      
+
     String contentType = 'Content-Type: ' + mimeType;
     String contentTypeCrlf = contentType + CRLF;
-      
+
     String header = boundaryCrlf + contentDispositionCrlf + contentTypeCrlf;
 
     String HeaderCRLF = CRLF;
-    if( !String.isBlank(mimeType) && 
-        (mimeType.equalsIgnoreCase('application/json') || 
-        mimeType.startsWith('text/')) ){
-    	 HeaderCRLF += CRLF;
+    if ( !String.isBlank(mimeType) &&
+        (mimeType.equalsIgnoreCase('application/json') ||
+        mimeType.startsWith('text/')) ) {
+       HeaderCRLF += CRLF;
     }
     String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + HeaderCRLF));
     while (headerEncoded.endsWith('=')) {
       header+=' ';
       headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + HeaderCRLF));
     }
-      	
+
     String footer;
     if (isEndingPart) {
      footer = CRLF + '--' + this.boundary + '--';
     }else{
      footer = CRLF;
-    } 
-    
+    }
+
     String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
-      
+
     Blob bodyBlob = null;
     String last4Bytes = bodyEncoded.substring(bodyEncoded.length()-4,bodyEncoded.length());
-      
-    if(last4Bytes.endsWith('=')) {
+
+    if (last4Bytes.endsWith('=')) {
       Blob decoded4Bytes = EncodingUtil.base64Decode(last4Bytes);
       HttpRequest tmp = new HttpRequest();
       tmp.setBodyAsBlob(decoded4Bytes);
-      String last4BytesFooter = tmp.getBody()+footer;   
-      bodyBlob = EncodingUtil.base64Decode(headerEncoded+bodyEncoded.substring(0,bodyEncoded.length()-4) 
+      String last4BytesFooter = tmp.getBody()+footer;
+      bodyBlob = EncodingUtil.base64Decode(headerEncoded+bodyEncoded.substring(0,bodyEncoded.length()-4)
         + EncodingUtil.base64Encode(Blob.valueOf(last4BytesFooter)));
     } else {
       bodyBlob = EncodingUtil.base64Decode(headerEncoded + bodyEncoded + footerEncoded);
@@ -242,9 +242,9 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
       if (name == null) {
         throw new IBMWatsonServiceExceptions.IllegalArgumentException('name == null');
       }
-      String disposition = 'form-data; name="'+name+'"';
+      String disposition = 'form-data; name="' +name+'"';
       if (String.isNotBlank(filename)) {
-        disposition+='; filename="'+filename+'"';
+        disposition+='; filename="' +filename+'"';
       }
       this.headers.put('Content-Disposition', disposition);
       return create(this.headers, body);

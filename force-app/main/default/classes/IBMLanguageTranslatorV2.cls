@@ -64,7 +64,7 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
   public IBMLanguageTranslatorV2Models.IdentifiedLanguages identify(IBMLanguageTranslatorV2Models.IdentifyOptions identifyOptions) {
     IBMWatsonValidator.notNull(identifyOptions, 'identifyOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v2/identify');
-    builder.bodyContent(identifyOptions.text(),'text/plain');
+    builder.bodyContent(identifyOptions.text(), 'text/plain');
 
     return (IBMLanguageTranslatorV2Models.IdentifiedLanguages) createServiceCall(builder.build(), IBMLanguageTranslatorV2Models.IdentifiedLanguages.class);
   }

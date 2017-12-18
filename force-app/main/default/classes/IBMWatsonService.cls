@@ -31,8 +31,8 @@ public abstract class IBMWatsonService {
   }
 
   private static String buildUserAgent() {
-  	ApexClass ac = [Select ApiVersion From ApexClass Where Name = 'IBMWatsonService'];
-  	Organization org = [Select OrganizationType, InstanceName From Organization];
+    ApexClass ac = [Select ApiVersion From ApexClass Where Name = 'IBMWatsonService'];
+    Organization org = [Select OrganizationType, InstanceName From Organization];
     return String.format(USER_AGENT_FORMAT, new List<String>{SDK_VERSION, 'APEX_API_VERSION=' + ac.ApiVersion + ';ORG_TYPE=' + org.OrganizationType + ';INSTANCE=' + org.InstanceName });
   }
 
@@ -40,23 +40,23 @@ public abstract class IBMWatsonService {
    * Parses the IBMWatsonResponse.
    */
   protected Object processResponse(IBMWatsonResponse response, Type targetType) {
-    if(targetType != null){
+    if (targetType != null) {
       // this service is expecting a file response
-  	  if(targetType == IBMWatsonFile.class){
-  	  	String contentDisposition = response.getHeader(IBMWatsonHttpHeaders.CONTENT_DISPOSITION);
-  	  	String filename = contentDisposition.substringAfter('filename=');
-  	  	filename = (String.isNotBlank(filename)) ? filename.replaceAll('"','') : 'result';
-  	  	String contentType = response.getHeader(IBMWatsonHttpHeaders.CONTENT_TYPE);
-  	  	IBMWatsonFile resFile = new IBMWatsonFile.FileBuilder()
-  	  	  .name(filename)
-  	  	  .description('Synthesize audio file')
-  	  	  .contentType(contentType)
-  	  	  .body(response.getBodyAsBlob())
-  	  	  .build();
-  	  	return resFile;
-  	  }
-  	  // all other response types
-  	  else{
+      if (targetType == IBMWatsonFile.class) {
+        String contentDisposition = response.getHeader(IBMWatsonHttpHeaders.CONTENT_DISPOSITION);
+        String filename = contentDisposition.substringAfter('filename=');
+        filename = (String.isNotBlank(filename)) ? filename.replaceAll('"', '') : 'result';
+        String contentType = response.getHeader(IBMWatsonHttpHeaders.CONTENT_TYPE);
+        IBMWatsonFile resFile = new IBMWatsonFile.FileBuilder()
+          .name(filename)
+          .description('Synthesize audio file')
+          .contentType(contentType)
+          .body(response.getBodyAsBlob())
+          .build();
+        return resFile;
+      }
+      // all other response types
+      else{
         String responseText = response.getBody();
         if (String.isNotBlank(responseText)) {
           Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(responseText);
@@ -69,9 +69,9 @@ public abstract class IBMWatsonService {
             return ((IBMWatsonGenericModel) targetObject).deserialize(jsonString, safeJsonMap, targetType);
           }
         }
-  	  }
-  	}
-    
+      }
+    }
+
     return null;
   }
 
