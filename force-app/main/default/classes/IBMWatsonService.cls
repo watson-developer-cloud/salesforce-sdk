@@ -40,9 +40,9 @@ public abstract class IBMWatsonService {
    * Parses the IBMWatsonResponse.
    */
   protected Object processResponse(IBMWatsonResponse response, Type targetType) {
-    if(targetType != null) {
+    if (targetType != null) {
       // this service is expecting a file response
-      if(targetType == IBMWatsonFile.class) {
+      if (targetType == IBMWatsonFile.class) {
         String contentDisposition = response.getHeader(IBMWatsonHttpHeaders.CONTENT_DISPOSITION);
         String filename = contentDisposition.substringAfter('filename=');
         filename = (String.isNotBlank(filename)) ? filename.replaceAll('"', '') : 'result';

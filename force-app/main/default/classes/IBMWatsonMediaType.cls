@@ -34,13 +34,13 @@ public class IBMWatsonMediaType {
         return null; // This is not a well-formed media type.
       }
       String name;
-      if(parameterMatcher.groupCount() > 0) {
+      if (parameterMatcher.groupCount() > 0) {
         name = parameterMatcher.group(1);
       }
       if (name == null || !name.equalsIgnoreCase('charset')) continue;
       String charsetParameter;
       String token;
-      if(parameterMatcher.groupCount() > 1) {
+      if (parameterMatcher.groupCount() > 1) {
         token = parameterMatcher.group(2);
       }
       if (token != null) {

@@ -69,8 +69,8 @@ private class IBMLanguageTranslatorV2Test {
     List<IBMLanguageTranslatorV2Models.IdentifiableLanguage> languageList = listIdentifiableLanguages.getLanguages();
     System.assert(languageList != null && languageList.size() == 4);
     IBMLanguageTranslatorV2Models.IdentifiableLanguage IdentifiableLanguage;
-    for(Integer i = 0; i < languageList.size(); i++ ) {
-      if(languageList[i].getLanguage() == 'af' && languageList[i].getName() == 'Afrikaans' ) {
+    for (Integer i = 0; i < languageList.size(); i++) {
+      if (languageList[i].getLanguage() == 'af' && languageList[i].getName() == 'Afrikaans' ) {
         IdentifiableLanguage = languageList[i];
         break;
       }

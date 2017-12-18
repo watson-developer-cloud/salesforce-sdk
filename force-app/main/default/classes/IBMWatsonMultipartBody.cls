@@ -101,7 +101,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     String valueCrLf64 = EncodingUtil.base64Encode(valueCrLfBlob);
 
     content += safelyPad(value, valueCrLf64, CRLF);
-    if(isEndingPart == true) {
+    if (isEndingPart == true) {
       String footer = '--' + this.boundary + '--';
       Blob footerBlob = blob.valueOf(footer);
       String footerEncoded = EncodingUtil.base64Encode(footerBlob);
@@ -129,7 +129,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     String header = boundaryCrlf + contentDispositionCrlf + contentTypeCrlf;
 
     String HeaderCRLF = CRLF;
-    if( !String.isBlank(mimeType) &&
+    if ( !String.isBlank(mimeType) &&
         (mimeType.equalsIgnoreCase('application/json') ||
         mimeType.startsWith('text/')) ) {
        HeaderCRLF += CRLF;
@@ -152,7 +152,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     Blob bodyBlob = null;
     String last4Bytes = bodyEncoded.substring(bodyEncoded.length()-4,bodyEncoded.length());
 
-    if(last4Bytes.endsWith('=')) {
+    if (last4Bytes.endsWith('=')) {
       Blob decoded4Bytes = EncodingUtil.base64Decode(last4Bytes);
       HttpRequest tmp = new HttpRequest();
       tmp.setBodyAsBlob(decoded4Bytes);
