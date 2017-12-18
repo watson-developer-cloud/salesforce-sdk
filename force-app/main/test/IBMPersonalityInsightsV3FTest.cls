@@ -60,7 +60,7 @@ public with sharing class IBMPersonalityInsightsV3FTest {
       .build();
 
     IBMPersonalityInsightsV3Models.Profile resp = personalityInsights.profile(options);
-    System.debug('IBMNaturalLanguageUnderstandingV1FTest.testAnalyze(): '+ resp);
+    System.debug('IBMNaturalLanguageUnderstandingV1FTest.testAnalyze(): ' + resp);
     return resp;
   }
 }

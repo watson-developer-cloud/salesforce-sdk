@@ -134,7 +134,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/fields', new String[]{ listFieldsOptions.environmentId() }));
     builder.query('version', versionDate);
     if (listFieldsOptions.collectionIds() != null) {
-      builder.query('collection_ids', String.join(listFieldsOptions.collectionIds(), ','));
+      builder.query('collection_ids', String.join(listFieldsOptions.collectionIds(), ', '));
     }
 
     return (IBMDiscoveryV1Models.ListCollectionFieldsResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.ListCollectionFieldsResponse.class);
@@ -534,7 +534,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/query', new String[]{ federatedQueryOptions.environmentId() }));
     builder.query('version', versionDate);
     if (federatedQueryOptions.collectionIds() != null) {
-      builder.query('collection_ids', String.join(federatedQueryOptions.collectionIds(), ','));
+      builder.query('collection_ids', String.join(federatedQueryOptions.collectionIds(), ', '));
     }
     if (federatedQueryOptions.filter() != null) {
       builder.query('filter', federatedQueryOptions.filter());
@@ -552,13 +552,13 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       builder.query('count', String.valueOf(federatedQueryOptions.count()));
     }
     if (federatedQueryOptions.returnField() != null) {
-      builder.query('return_fields', String.join(federatedQueryOptions.returnField(), ','));
+      builder.query('return_fields', String.join(federatedQueryOptions.returnField(), ', '));
     }
     if (federatedQueryOptions.offset() != null) {
       builder.query('offset', String.valueOf(federatedQueryOptions.offset()));
     }
     if (federatedQueryOptions.sortField() != null) {
-      builder.query('sort', String.join(federatedQueryOptions.sortField(), ','));
+      builder.query('sort', String.join(federatedQueryOptions.sortField(), ', '));
     }
     if (federatedQueryOptions.highlight() != null) {
       builder.query('highlight', String.valueOf(federatedQueryOptions.highlight()));
@@ -586,7 +586,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/notices', new String[]{ federatedQueryNoticesOptions.environmentId() }));
     builder.query('version', versionDate);
     if (federatedQueryNoticesOptions.collectionIds() != null) {
-      builder.query('collection_ids', String.join(federatedQueryNoticesOptions.collectionIds(), ','));
+      builder.query('collection_ids', String.join(federatedQueryNoticesOptions.collectionIds(), ', '));
     }
     if (federatedQueryNoticesOptions.filter() != null) {
       builder.query('filter', federatedQueryNoticesOptions.filter());
@@ -604,13 +604,13 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       builder.query('count', String.valueOf(federatedQueryNoticesOptions.count()));
     }
     if (federatedQueryNoticesOptions.returnField() != null) {
-      builder.query('return_fields', String.join(federatedQueryNoticesOptions.returnField(), ','));
+      builder.query('return_fields', String.join(federatedQueryNoticesOptions.returnField(), ', '));
     }
     if (federatedQueryNoticesOptions.offset() != null) {
       builder.query('offset', String.valueOf(federatedQueryNoticesOptions.offset()));
     }
     if (federatedQueryNoticesOptions.sortField() != null) {
-      builder.query('sort', String.join(federatedQueryNoticesOptions.sortField(), ','));
+      builder.query('sort', String.join(federatedQueryNoticesOptions.sortField(), ', '));
     }
     if (federatedQueryNoticesOptions.highlight() != null) {
       builder.query('highlight', String.valueOf(federatedQueryNoticesOptions.highlight()));
@@ -653,19 +653,19 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       builder.query('count', String.valueOf(queryOptions.count()));
     }
     if (queryOptions.returnField() != null) {
-      builder.query('return', String.join(queryOptions.returnField(), ','));
+      builder.query('return', String.join(queryOptions.returnField(), ', '));
     }
     if (queryOptions.offset() != null) {
       builder.query('offset', String.valueOf(queryOptions.offset()));
     }
     if (queryOptions.sortField() != null) {
-      builder.query('sort', String.join(queryOptions.sortField(), ','));
+      builder.query('sort', String.join(queryOptions.sortField(), ', '));
     }
     if (queryOptions.highlight() != null) {
       builder.query('highlight', String.valueOf(queryOptions.highlight()));
     }
     if (queryOptions.passagesFields() != null) {
-      builder.query('passages.fields', String.join(queryOptions.passagesFields(), ','));
+      builder.query('passages.fields', String.join(queryOptions.passagesFields(), ', '));
     }
     if (queryOptions.passagesCount() != null) {
       builder.query('passages.count', String.valueOf(queryOptions.passagesCount()));
@@ -714,19 +714,19 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       builder.query('count', String.valueOf(queryNoticesOptions.count()));
     }
     if (queryNoticesOptions.returnField() != null) {
-      builder.query('return_fields', String.join(queryNoticesOptions.returnField(), ','));
+      builder.query('return_fields', String.join(queryNoticesOptions.returnField(), ', '));
     }
     if (queryNoticesOptions.offset() != null) {
       builder.query('offset', String.valueOf(queryNoticesOptions.offset()));
     }
     if (queryNoticesOptions.sortField() != null) {
-      builder.query('sort', String.join(queryNoticesOptions.sortField(), ','));
+      builder.query('sort', String.join(queryNoticesOptions.sortField(), ', '));
     }
     if (queryNoticesOptions.highlight() != null) {
       builder.query('highlight', String.valueOf(queryNoticesOptions.highlight()));
     }
     if (queryNoticesOptions.passagesFields() != null) {
-      builder.query('passages.fields', String.join(queryNoticesOptions.passagesFields(), ','));
+      builder.query('passages.fields', String.join(queryNoticesOptions.passagesFields(), ', '));
     }
     if (queryNoticesOptions.passagesCount() != null) {
       builder.query('passages.count', String.valueOf(queryNoticesOptions.passagesCount()));

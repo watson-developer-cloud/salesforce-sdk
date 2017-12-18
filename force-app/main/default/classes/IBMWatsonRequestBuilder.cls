@@ -269,10 +269,10 @@ public class IBMWatsonRequestBuilder {
   }
 
   public IBMWatsonRequestBuilder addHeaders(Map<String, String> headerMap) {
-  	for (String k: headerMap.keySet()) {
-  	  addHeader(k, headerMap.get(k));
-  	}
-  	return this;
+    for (String k: headerMap.keySet()) {
+      addHeader(k, headerMap.get(k));
+    }
+    return this;
   }
 
   public String queryString() {

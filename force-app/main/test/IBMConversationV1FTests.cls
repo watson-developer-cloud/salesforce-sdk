@@ -7,8 +7,7 @@ public with sharing class IBMConversationV1FTests {
   /**
    *  Test run functional tests.
    */
-  public static void runAllTests(String username, String password)
-  {
+  public static void runAllTests(String username, String password) {
     String workspaceId=testCreateWorkspace(username, password).getWorkspaceId();
     testGetWorkspace(workspaceId, username, password);
     updateWorkspace(workspaceId, username, password);

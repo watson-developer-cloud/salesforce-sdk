@@ -1,5 +1,5 @@
 public with sharing class IBMTextToSpeechV1FTest {
-  private static String URL = 'https://stream.watsonplatform.net/text-to-speech/api';    
+  private static String URL = 'https://stream.watsonplatform.net/text-to-speech/api';
 
   public static void runAllTests(String username, String password)
   {
@@ -16,7 +16,7 @@ public with sharing class IBMTextToSpeechV1FTest {
     testSynthesize(username, password, customizationId);
     testDeleteWord(username, password, customizationId);
     testDeleteVoiceModel(username, password, customizationId);
-  }  
+  }
   /**
    * Creates a new custom voice model.
    *
@@ -30,10 +30,10 @@ public with sharing class IBMTextToSpeechV1FTest {
     IBMTextToSpeechV1Models.CreateVoiceModelOptions options = new IBMTextToSpeechV1Models.CreateVoiceModelOptionsBuilder()
       .name('I love Apples not oranges')
       .language('de-DE')
-      .description('Salesforce is making it easier for developers to use IBM Watson\'s artificial intelligence engine within the firm\'s customer relationship management software, which could lead to some exciting new technology for advisers.' + 
-             ' To kick off the annual Dreamforce conference in San Francisco, Salesforce announced a new IBM Watson SDK, or software development kit. For the non-geeks out there, SDKs help make it easier for coders to develop new features and functionality within a software like Salesforce without having to write all the underlying code.' + 
-             ' This is especially useful for a program as sophisticated as Watson, and should help engineers at fintech vendors and large financial services firms create new applications for the AI engine and bring them to market faster.' + 
-             'Jamie Cox, the managing principle at Harris Financial Group, which has $750 million in assets under management, has used Salesforce for 11 years, and has been waiting for the chance to use Watson\'s capabilities.' + 
+      .description('Salesforce is making it easier for developers to use IBM Watson\'s artificial intelligence engine within the firm\'s customer relationship management software, which could lead to some exciting new technology for advisers.' +
+             ' To kick off the annual Dreamforce conference in San Francisco, Salesforce announced a new IBM Watson SDK, or software development kit. For the non-geeks out there, SDKs help make it easier for coders to develop new features and functionality within a software like Salesforce without having to write all the underlying code.' +
+             ' This is especially useful for a program as sophisticated as Watson, and should help engineers at fintech vendors and large financial services firms create new applications for the AI engine and bring them to market faster.' +
+             'Jamie Cox, the managing principle at Harris Financial Group, which has $750 million in assets under management, has used Salesforce for 11 years, and has been waiting for the chance to use Watson\'s capabilities.' +
              'For example, Mr. Cox thinks Watson could track a client\'s social media, spending accounts and any other data feeds plugged into Salesforce to get a more complete picture of the client and how to best serve them.' +
              'Watson could be continually working in the background to predict which clients are worrying about the markets, which clients\' risk tolerances have changed and which clients need an adjustment to their financial plan because of a life event, for example. ' +
              'Mr. Cox believes the insights Watson generates also could help determine which prospects are most worth the adviser\'s time and resources, and how to best pursue them. ' +
@@ -44,10 +44,10 @@ public with sharing class IBMTextToSpeechV1FTest {
       .build();
     IBMTextToSpeechV1Models.VoiceModel resp =
       textToSpeech.createVoiceModel(options);
-    System.debug('IBMTextToSpeechV1FTest.testCreateVoiceModel(): '+ resp);  
-    return resp;  
+    System.debug('IBMTextToSpeechV1FTest.testCreateVoiceModel(): ' + resp);
+    return resp;
   }
-  
+
   /**
    * Retrieves a specific voice available for speech synthesis.
    *
@@ -64,10 +64,10 @@ public with sharing class IBMTextToSpeechV1FTest {
       .build();
     IBMTextToSpeechV1Models.Voice resp =
       textToSpeech.getVoice(options);
-    System.debug('IBMTextToSpeechV1FTest.testGetVoice(): '+ resp);  
-    return resp;  
+    System.debug('IBMTextToSpeechV1FTest.testGetVoice(): ' + resp);
+    return resp;
   }
-  
+
   /**
    * Retrieves all voices available for speech synthesis.
    *
@@ -82,10 +82,10 @@ public with sharing class IBMTextToSpeechV1FTest {
       .build();
     IBMTextToSpeechV1Models.Voices resp =
       textToSpeech.listVoices(options);
-    System.debug('IBMTextToSpeechV1FTest.testListVoices(): '+ resp);  
-    return resp;  
+    System.debug('IBMTextToSpeechV1FTest.testListVoices(): ' + resp);
+    return resp;
   }
-  
+
   /**
    * Deletes a custom voice model.
    *
@@ -101,7 +101,7 @@ public with sharing class IBMTextToSpeechV1FTest {
       .build();
     textToSpeech.deleteVoiceModel(options);
   }
-  
+
   /**
    * Queries the contents of a custom voice model.
    *
@@ -117,10 +117,10 @@ public with sharing class IBMTextToSpeechV1FTest {
       .build();
     IBMTextToSpeechV1Models.VoiceModel resp =
       textToSpeech.getVoiceModel(options);
-    System.debug('IBMTextToSpeechV1FTest.testGetVoiceModel(): '+ resp);  
-    return resp;  
+    System.debug('IBMTextToSpeechV1FTest.testGetVoiceModel(): ' + resp);
+    return resp;
   }
-  
+
   /**
    * Lists all available custom voice models for a language or for all languages.
    *
@@ -135,10 +135,10 @@ public with sharing class IBMTextToSpeechV1FTest {
       .build();
     IBMTextToSpeechV1Models.VoiceModels resp =
       textToSpeech.listVoiceModels(options);
-    System.debug('IBMTextToSpeechV1FTest.testListVoiceModels(): '+ resp);  
-    return resp;  
+    System.debug('IBMTextToSpeechV1FTest.testListVoiceModels(): ' + resp);
+    return resp;
   }
-  
+
   /**
    * Update a custom voice model.
    *
@@ -158,7 +158,7 @@ public with sharing class IBMTextToSpeechV1FTest {
       .build();
     textToSpeech.updateVoiceModel(options);
   }
-  
+
   /**
    * Add word to a custom voice model.
    *
@@ -176,7 +176,7 @@ public with sharing class IBMTextToSpeechV1FTest {
       .build();
     textToSpeech.addWord(options);
   }
-  
+
   /**
    * Add words to a custom voice model.
    *
@@ -196,7 +196,7 @@ public with sharing class IBMTextToSpeechV1FTest {
       .build();
     textToSpeech.addWords(options);
   }
-  
+
   /**
    * delete word from a custom voice model.
    *
@@ -213,7 +213,7 @@ public with sharing class IBMTextToSpeechV1FTest {
       .build();
     textToSpeech.deleteWord(options);
   }
-  
+
   /**
    * Queries details about a word in a custom voice model.
    *
@@ -230,10 +230,10 @@ public with sharing class IBMTextToSpeechV1FTest {
       .build();
     IBMTextToSpeechV1Models.Translation resp =
       textToSpeech.getWord(options);
-    System.debug('IBMTextToSpeechV1FTest.testGetWord(): '+ resp);  
-    return resp;  
+    System.debug('IBMTextToSpeechV1FTest.testGetWord(): ' + resp);
+    return resp;
   }
-  
+
   /**
    * Queries details about the words in a custom voice model..
    *
@@ -249,10 +249,10 @@ public with sharing class IBMTextToSpeechV1FTest {
       .build();
     IBMTextToSpeechV1Models.Words resp =
       textToSpeech.listWords(options);
-    System.debug('IBMTextToSpeechV1FTest.testListWords(): '+ resp);  
-    return resp;  
+    System.debug('IBMTextToSpeechV1FTest.testListWords(): ' + resp);
+    return resp;
   }
-  
+
    /**
    * Streaming speech synthesis of the text in the body parameter.
    *

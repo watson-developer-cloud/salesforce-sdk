@@ -1,6 +1,6 @@
 @isTest
 private class IBMTextToSpeechV1Test {
-  private static String URL = 'https://stream.watsonplatform.net/text-to-speech/api';    
+  private static String URL = 'https://stream.watsonplatform.net/text-to-speech/api';
   private static String username = 'username';
   private static String password = 'password';
   /**
@@ -22,23 +22,23 @@ private class IBMTextToSpeechV1Test {
       .language('de-DE')
       .description('Salesforce is making it easier for developers to use IBM Watson\'s artificial intelligence engine within the firm\'s customer relationship management software, which could lead to some exciting new technology for advisers.')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
-    options = options.newBuilder().build(); 
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
     IBMTextToSpeechV1Models.VoiceModel resp =
       textToSpeech.createVoiceModel(options);
-    System.assertEquals(resp.getCustomizationId(),'string');  
-    System.assertEquals(resp.getName(),'string');
-    System.assertEquals(resp.getLanguage(),'string');
-    System.assertEquals(resp.getOwner(),'string');
-    System.assertEquals(resp.getCreated(),'string');
-    System.assertEquals(resp.getLastModified(),'string');
-    System.assertEquals(resp.getDescription(),'string');
-    System.assertEquals(resp.getWords()[0].getWord(),'string');
-    System.assertEquals(resp.getWords()[0].getTranslation(),'string');
-    System.assertEquals(resp.getWords()[0].getPartOfSpeech(),'Josi');
-    Test.stopTest();  
+    System.assertEquals(resp.getCustomizationId(), 'string');
+    System.assertEquals(resp.getName(), 'string');
+    System.assertEquals(resp.getLanguage(), 'string');
+    System.assertEquals(resp.getOwner(), 'string');
+    System.assertEquals(resp.getCreated(), 'string');
+    System.assertEquals(resp.getLastModified(), 'string');
+    System.assertEquals(resp.getDescription(), 'string');
+    System.assertEquals(resp.getWords()[0].getWord(), 'string');
+    System.assertEquals(resp.getWords()[0].getTranslation(), 'string');
+    System.assertEquals(resp.getWords()[0].getPartOfSpeech(), 'Josi');
+    Test.stopTest();
   }
-  
+
   /**
    * Retrieves a specific voice available for speech synthesis.
    *
@@ -57,22 +57,22 @@ private class IBMTextToSpeechV1Test {
       .customizationId('customizationId')
       .voice('en-US_AllisonVoice')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
-    options = options.newBuilder().build(); 
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
     IBMTextToSpeechV1Models.Voice resp =
       textToSpeech.getVoice(options);
-    System.assertEquals(resp.getURL(),'string');
-    System.assertEquals(resp.getGender(),'string');
-    System.assertEquals(resp.getName(),'string');
-    System.assertEquals(resp.getLanguage(),'string');
-    System.assertEquals(resp.getDescription(),'string');
+    System.assertEquals(resp.getURL(), 'string');
+    System.assertEquals(resp.getGender(), 'string');
+    System.assertEquals(resp.getName(), 'string');
+    System.assertEquals(resp.getLanguage(), 'string');
+    System.assertEquals(resp.getDescription(), 'string');
     System.assertEquals(resp.getCustomizable(),true);
     System.assertEquals(resp.getSupportedFeatures().getCustomPronunciation(),true);
     System.assertEquals(resp.getSupportedFeatures().getVoiceTransformation(),true);
-    System.assertEquals(resp.getCustomization().getCustomizationId(),'string');
-    Test.stopTest();  
+    System.assertEquals(resp.getCustomization().getCustomizationId(), 'string');
+    Test.stopTest();
   }
-  
+
   /**
    * Retrieves all voices available for speech synthesis.
    *
@@ -89,14 +89,14 @@ private class IBMTextToSpeechV1Test {
     }
     IBMTextToSpeechV1Models.ListVoicesOptions options = new IBMTextToSpeechV1Models.ListVoicesOptionsBuilder()
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
-    options = options.newBuilder().build(); 
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
     IBMTextToSpeechV1Models.Voices resp =
       textToSpeech.listVoices(options);
-    System.assertEquals(resp.getVoices()[0].getURL(),'string'); 
-    Test.stopTest();  
+    System.assertEquals(resp.getVoices()[0].getURL(), 'string');
+    Test.stopTest();
   }
-  
+
   /**
    * Deletes a custom voice model.
    *
@@ -114,12 +114,12 @@ private class IBMTextToSpeechV1Test {
     IBMTextToSpeechV1Models.DeleteVoiceModelOptions options = new IBMTextToSpeechV1Models.DeleteVoiceModelOptionsBuilder()
       .customizationId('customizationId')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
-    options = options.newBuilder().build(); 
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
     textToSpeech.deleteVoiceModel(options);
     Test.stopTest();
   }
-  
+
   /**
    * Queries the contents of a custom voice model.
    *
@@ -137,14 +137,14 @@ private class IBMTextToSpeechV1Test {
     IBMTextToSpeechV1Models.GetVoiceModelOptions options = new IBMTextToSpeechV1Models.GetVoiceModelOptionsBuilder()
       .customizationId('customizationId')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
-    options = options.newBuilder().build(); 
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
     IBMTextToSpeechV1Models.VoiceModel resp =
       textToSpeech.getVoiceModel(options);
-    System.assertEquals(resp.getCustomizationId(),'string');   
-    Test.stopTest();  
+    System.assertEquals(resp.getCustomizationId(), 'string');
+    Test.stopTest();
   }
-  
+
   /**
    * Lists all available custom voice models for a language or for all languages.
    *
@@ -161,14 +161,14 @@ private class IBMTextToSpeechV1Test {
     }
     IBMTextToSpeechV1Models.ListVoiceModelsOptions options = new IBMTextToSpeechV1Models.ListVoiceModelsOptionsBuilder()
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
-    options = options.newBuilder().build(); 
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
     IBMTextToSpeechV1Models.VoiceModels resp =
       textToSpeech.listVoiceModels(options);
-    System.assertEquals(resp.getCustomizations()[0].getCustomizationId(),'string');   
-    Test.stopTest();  
+    System.assertEquals(resp.getCustomizations()[0].getCustomizationId(), 'string');
+    Test.stopTest();
   }
-  
+
   /**
    * Update a custom voice model.
    *
@@ -190,12 +190,12 @@ private class IBMTextToSpeechV1Test {
       .customizationId('customizationId')
       .addWords(customWord)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
-    options = options.newBuilder().build(); 
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
     textToSpeech.updateVoiceModel(options);
     Test.stopTest();
   }
-  
+
   /**
    * Add word to a custom voice model.
    *
@@ -220,12 +220,12 @@ private class IBMTextToSpeechV1Test {
       .partOfSpeech('Josi')
       .translation(translation)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
-    options = options.newBuilder().build(); 
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
     textToSpeech.addWord(options);
     Test.stopTest();
   }
-  
+
   /**
    * Add words to a custom voice model.
    *
@@ -249,12 +249,12 @@ private class IBMTextToSpeechV1Test {
       .addWords(customWord)
       .words(new List<IBMTextToSpeechV1Models.CustomWord>{customWord})
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
-    options = options.newBuilder().build(); 
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
     textToSpeech.addWords(options);
     Test.stopTest();
   }
-  
+
   /**
    * delete word from a custom voice model.
    *
@@ -273,12 +273,12 @@ private class IBMTextToSpeechV1Test {
       .customizationId('customizationId')
       .word('World')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
-    options = options.newBuilder().build(); 
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
     textToSpeech.deleteWord(options);
     Test.stopTest();
   }
-  
+
   /**
    * Queries details about a word in a custom voice model.
    *
@@ -288,7 +288,7 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1('username','pasword');
+    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1('username', 'pasword');
     if (username != null && password != null) {
       textToSpeech.setEndPoint(URL);
       textToSpeech.setUsernameAndPassword(username, password);
@@ -297,15 +297,15 @@ private class IBMTextToSpeechV1Test {
       .customizationId('customizationId')
       .word('World')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
-    options = options.newBuilder().build(); 
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
     IBMTextToSpeechV1Models.Translation resp =
       textToSpeech.getWord(options);
-    System.assertEquals(resp.getTranslation(),'string'); 
-    System.assertEquals(resp.getPartOfSpeech(),'Josi');   
-    Test.stopTest();  
+    System.assertEquals(resp.getTranslation(), 'string');
+    System.assertEquals(resp.getPartOfSpeech(), 'Josi');
+    Test.stopTest();
   }
-  
+
   /**
    * Queries details about the words in a custom voice model..
    *
@@ -323,14 +323,14 @@ private class IBMTextToSpeechV1Test {
     IBMTextToSpeechV1Models.ListWordsOptions options = new IBMTextToSpeechV1Models.ListWordsOptionsBuilder()
       .customizationId('customizationId')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
-    options = options.newBuilder().build();  
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
     IBMTextToSpeechV1Models.Words resp =
       textToSpeech.listWords(options);
-    System.assertEquals(resp.getWords()[0].getWord(),'string');
-    Test.stopTest();  
+    System.assertEquals(resp.getWords()[0].getWord(), 'string');
+    Test.stopTest();
   }
-  
+
   /**
    * Queries details about the words in a custom voice model..
    *
@@ -351,18 +351,18 @@ private class IBMTextToSpeechV1Test {
       .format('ipa')
       .customizationId('customizationId')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMTextToSpeechV1Models.Pronunciation resp =
       textToSpeech.getPronunciation(options);
-    System.assertEquals(resp.getPronunciation(),'string');    
-    Test.stopTest();  
+    System.assertEquals(resp.getPronunciation(), 'string');
+    Test.stopTest();
   }
-  
+
    /**
    * Streaming speech synthesis of the text in the body parameter.
    *
-   
+
   static testMethod void testSynthesize() {
     String body = IBMWatsonMockResponses.profile();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
@@ -382,9 +382,9 @@ private class IBMTextToSpeechV1Test {
       .build();
     Blob resp =
       textToSpeech.synthesize(options);
-    System.debug('IBMTextToSpeechV1FTest.testListWords(): '+ resp);  
+    System.debug('IBMTextToSpeechV1FTest.testListWords(): ' + resp);
     Attachment att=new Attachment(Name='test.mp3', parentId='0011I000005Owfk',Body=resp);
     insert att;
-    Test.stopTest();  
+    Test.stopTest();
   }*/
 }

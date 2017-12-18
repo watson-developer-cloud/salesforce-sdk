@@ -30,8 +30,8 @@ public class IBMWatsonFile {
      * @return the FileBuilder builder
      */
     public FileBuilder name(String name) {
-    	this.name = name;
-    	return this;
+      this.name = name;
+      return this;
     }
 
 
@@ -42,11 +42,11 @@ public class IBMWatsonFile {
      * @return the FileBuilder builder
      */
     public FileBuilder attachment(Attachment attach) {
-    	this.name = attach.name;
+      this.name = attach.name;
       this.body = attach.Body;
       this.description = attach.Description;
       this.contentType = attach.ContentType;
-    	return this;
+      return this;
     }
 
     /**
@@ -56,8 +56,8 @@ public class IBMWatsonFile {
      * @return the FileBuilder builder
      */
     public FileBuilder description(String description) {
-    	this.description = description;
-    	return this;
+      this.description = description;
+      return this;
     }
 
     /**
@@ -67,8 +67,8 @@ public class IBMWatsonFile {
      * @return the FileBuilder builder
      */
     public FileBuilder contentType(String contentType) {
-    	this.contentType = contentType;
-    	return this;
+      this.contentType = contentType;
+      return this;
     }
 
     /**
@@ -78,9 +78,9 @@ public class IBMWatsonFile {
      * @return the FileBuilder builder
      */
     public FileBuilder body(Blob body) {
-    	this.body = body;
-    	this.bodyLength = body != null ? body.size() : -1;
-    	return this;
+      this.body = body;
+      this.bodyLength = body != null ? body.size() : -1;
+      return this;
     }
 
     /**
@@ -123,9 +123,9 @@ public class IBMWatsonFile {
   }
 
   public String bodyAsString() {
-  	if (this.body != null) {
-  	  return this.body.toString();
-  	}
-  	return null;
+    if (this.body != null) {
+      return this.body.toString();
+    }
+    return null;
   }
 }

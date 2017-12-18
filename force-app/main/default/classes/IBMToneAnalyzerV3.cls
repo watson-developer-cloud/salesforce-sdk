@@ -88,7 +88,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
       builder.query('sentences', String.valueOf(toneOptions.sentences()));
     }
     if (toneOptions.tones() != null) {
-      builder.query('tones', String.join(toneOptions.tones(), ','));
+      builder.query('tones', String.join(toneOptions.tones(), ', '));
     }
     if (toneOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
       builder.bodyJson(JSON.serialize(toneOptions.toneInput(), true));
