@@ -9,7 +9,7 @@ private class IBMPersonalityInsightsV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMPersonalityInsightsV3 personalityInsights = new IBMPersonalityInsightsV3('2017-09-01','username', 'password');
+    IBMPersonalityInsightsV3 personalityInsights = new IBMPersonalityInsightsV3('2017-09-01', 'username', 'password');
     //or use
     personalityInsights = new IBMPersonalityInsightsV3('2017-09-01');
     personalityInsights.setUsernameAndPassword('username', 'password');
@@ -25,7 +25,7 @@ private class IBMPersonalityInsightsV3Test {
       .reply(false)
       .forward(false)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     contentItem = contentItem.newBuilder().build();
     IBMPersonalityInsightsV3Models.Content content=new IBMPersonalityInsightsV3Models.ContentBuilder()
       .addContentItems(contentItem)
@@ -35,9 +35,9 @@ private class IBMPersonalityInsightsV3Test {
     content=new IBMPersonalityInsightsV3Models.ContentBuilder(new List<IBMPersonalityInsightsV3Models.ContentItem>{contentItem})
       .addContentItems(contentItem)
       .contentItems(new List<IBMPersonalityInsightsV3Models.ContentItem>{contentItem})
-      .build();  
-    //you can add more attributes using following builder method. This step is not necessary 
-    content = content.newBuilder().build();  
+      .build();
+    //you can add more attributes using following builder method. This step is not necessary
+    content = content.newBuilder().build();
     IBMPersonalityInsightsV3Models.ProfileOptions options = new IBMPersonalityInsightsV3Models.ProfileOptionsBuilder()
       .contentLanguage('en')
       .acceptLanguage('en')
@@ -48,20 +48,20 @@ private class IBMPersonalityInsightsV3Test {
       .html('<html><body>test</body></html>')
       .text('test')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMPersonalityInsightsV3Models.Profile resp =
       personalityInsights.profile(options);
     System.assertEquals(content.contentItems().size(), 1);
     System.assertEquals(contentItem.content(), 'text/plain');
-    System.assertEquals(contentItem.contenttype(), IBMWatsonHttpMediaType.APPLICATION_JSON);  
-    System.assertEquals(contentItem.created(), 1); 
-    System.assertEquals(contentItem.updated(), 1); 
-    System.assertEquals(contentItem.id(), 'test'); 
+    System.assertEquals(contentItem.contenttype(), IBMWatsonHttpMediaType.APPLICATION_JSON);
+    System.assertEquals(contentItem.created(), 1);
+    System.assertEquals(contentItem.updated(), 1);
+    System.assertEquals(contentItem.id(), 'test');
     System.assertEquals(contentItem.parentid(), 'test');
-    System.assertEquals(contentItem.language(), 'en'); 
-    System.assertEquals(contentItem.reply(), false); 
-    System.assertEquals(contentItem.forward(), false); 
+    System.assertEquals(contentItem.language(), 'en');
+    System.assertEquals(contentItem.reply(), false);
+    System.assertEquals(contentItem.forward(), false);
     System.assertEquals(resp.getProcessedLanguage(), 'ar');
     System.assertEquals(resp.getPersonality()[0].getTraitId(), 'string');
     System.assertEquals(resp.getPersonality()[0].getName(), 'string');

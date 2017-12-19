@@ -9,15 +9,15 @@ public virtual class IBMWatsonRequestBody {
   private static final String UTF_8 = 'UTF-8';
 
   public IBMWatsonRequestBody() {
-  	name = '';
+    name = '';
   }
 
   public IBMWatsonMediaType bodyContentType() {
-  	return contentType;
+    return contentType;
   }
 
   public Boolean hasBase64Data() {
-  	return blobContent != null;
+    return blobContent != null;
   }
 
   public static IBMWatsonRequestBody create() {
@@ -50,7 +50,7 @@ public virtual class IBMWatsonRequestBody {
   }
 
   public static IBMWatsonRequestBody create(IBMWatsonFile fileContent, IBMWatsonMediaType mediaType) {
-  	IBMWatsonRequestBody reqBody = new IBMWatsonRequestBody();
+    IBMWatsonRequestBody reqBody = new IBMWatsonRequestBody();
     reqBody.contentSize = (fileContent != null) ? fileContent.bodyLength() : 0;
     reqBody.contentType = mediaType;
     reqBody.blobContent = fileContent.body();

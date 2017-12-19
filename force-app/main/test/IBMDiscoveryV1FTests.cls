@@ -13,8 +13,7 @@ public with sharing class IBMDiscoveryV1FTests {
   /**
    *  Test run functional tests.
    */
-  public static void runAllTests(String username, String password)
-  {
+  public static void runAllTests(String username, String password) {
     testListEnvironment(username, password);
     testGetEnvironment(ENVIRONMENT_ID, username, password);
     testListConfigurations(ENVIRONMENT_ID, username, password);
@@ -217,7 +216,7 @@ public with sharing class IBMDiscoveryV1FTests {
     }
 
     IBMDiscoveryV1Models.DeleteConfigurationOptions options = new
-      IBMDiscoveryV1Models.DeleteConfigurationOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283','5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      IBMDiscoveryV1Models.DeleteConfigurationOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .environmentId(environmentId)
       .configurationId(configurationId)
       .build();
@@ -305,7 +304,7 @@ public with sharing class IBMDiscoveryV1FTests {
     }
 
     IBMDiscoveryV1Models.CreateCollectionOptions options = new
-     IBMDiscoveryV1Models.CreateCollectionOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283','5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+     IBMDiscoveryV1Models.CreateCollectionOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
      .environmentId(environmentId)
      .configurationId(configurationId)
      .name('test_collection1')
@@ -353,7 +352,7 @@ public with sharing class IBMDiscoveryV1FTests {
     }
 
     IBMDiscoveryV1Models.DeleteCollectionOptions options = new
-     IBMDiscoveryV1Models.DeleteCollectionOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283','5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+     IBMDiscoveryV1Models.DeleteCollectionOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
      .environmentId(environmentId)
      .collectionId(collectionId)
      .build();
@@ -534,7 +533,7 @@ public with sharing class IBMDiscoveryV1FTests {
     te.setDocumentId('008948a1-d9b5-432e-88ba-f744b60b49e0');
     te.setRelevance(0);
     IBMDiscoveryV1Models.AddTrainingDataOptions options = new
-     IBMDiscoveryV1Models.AddTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283','5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+     IBMDiscoveryV1Models.AddTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
      .environmentId(environmentId)
      .collectionId(collectionId)
      .naturalLanguageQuery('en')
@@ -558,7 +557,7 @@ public with sharing class IBMDiscoveryV1FTests {
       discovery.setUsernameAndPassword(username, password);
     }
 
-    List<String> collectionIds=new List<String>{'Collection1','Collection2'};
+    List<String> collectionIds=new List<String>{'Collection1', 'Collection2'};
     IBMDiscoveryV1Models.TrainingExample te=new IBMDiscoveryV1Models.TrainingExample();
     te.setDocumentId('008948a1-d9b5-432e-88ba-f744b60b49e0');
     te.setRelevance(0);
@@ -683,7 +682,7 @@ public with sharing class IBMDiscoveryV1FTests {
     }
 
     IBMDiscoveryV1Models.DeleteTrainingExampleOptions options = new
-     IBMDiscoveryV1Models.DeleteTrainingExampleOptionsBuilder('test','test','test','test')
+     IBMDiscoveryV1Models.DeleteTrainingExampleOptionsBuilder('test', 'test', 'test', 'test')
      .environmentId(environmentId)
      .collectionId(collectionId)
      .queryId(queryId)
@@ -705,7 +704,7 @@ public with sharing class IBMDiscoveryV1FTests {
     }
 
     IBMDiscoveryV1Models.DeleteAllTrainingDataOptions options = new
-     IBMDiscoveryV1Models.DeleteAllTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283','5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+     IBMDiscoveryV1Models.DeleteAllTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
      .environmentId(environmentId)
      .collectionId(collectionId)
      .build();
@@ -725,7 +724,7 @@ public with sharing class IBMDiscoveryV1FTests {
     }
 
     IBMDiscoveryV1Models.DeleteTrainingDataOptions options = new
-     IBMDiscoveryV1Models.DeleteTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283','5ae96bb9-80e5-43ea-916e-1f3412fbc283','5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+     IBMDiscoveryV1Models.DeleteTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
      .environmentId(environmentId)
      .collectionId(collectionId)
      .queryId('8eec1310ae41ecddac8fa7acba159a2ea0a54b7d')
@@ -773,8 +772,8 @@ public with sharing class IBMDiscoveryV1FTests {
      IBMDiscoveryV1Models.FederatedQueryNoticesOptionsBuilder()
      .environmentId(environmentId)
      .collectionIds(collectionIds)
-     .returnField(new List<String>{'extracted_metadata.title','enriched_text.sentiment.document.label'})
-     .sortField(new List<String>{'extracted_metadata.title','enriched_text.sentiment.document.label'})
+     .returnField(new List<String>{'extracted_metadata.title', 'enriched_text.sentiment.document.label'})
+     .sortField(new List<String>{'extracted_metadata.title', 'enriched_text.sentiment.document.label'})
      .build();
     IBMDiscoveryV1Models.QueryNoticesResponse resp = discovery.federatedQueryNotices(options);
     System.debug('IBMDiscoveryV1FTests.testFederatedQueryNotices: ' + resp);

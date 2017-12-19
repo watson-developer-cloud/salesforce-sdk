@@ -18,7 +18,7 @@ private class IBMDiscoveryV1Test {
       .name(text)
       .description('test_environment description')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
@@ -100,7 +100,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.ListEnvironmentsOptions options = new IBMDiscoveryV1Models.ListEnvironmentsOptionsBuilder()
       .name(text)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.ListEnvironmentsResponse resp =
       discovery.listEnvironments(options);
@@ -127,7 +127,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.DeleteEnvironmentOptions options = new IBMDiscoveryV1Models.DeleteEnvironmentOptionsBuilder()
       .environmentId(text)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     discovery.deleteEnvironment(options);
     Test.stopTest();
@@ -174,7 +174,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.GetEnvironmentOptions options = new IBMDiscoveryV1Models.GetEnvironmentOptionsBuilder()
       .environmentId(text)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.Environment resp =
       discovery.getEnvironment(options);
@@ -226,7 +226,7 @@ private class IBMDiscoveryV1Test {
       .name('test_environment')
       .description('test_environment description')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.Environment resp =
       discovery.updateEnvironment(options);
@@ -277,7 +277,7 @@ private class IBMDiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .collectionIds(collectionIds)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.ListCollectionFieldsResponse resp =
       discovery.listFields(options);
@@ -325,7 +325,7 @@ private class IBMDiscoveryV1Test {
       .normalizations(new List<IBMDiscoveryV1Models.NormalizationOperation>{normalizationOperation})
       .conversions(conversions)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.Configuration resp =
       discovery.createConfiguration(options);
@@ -378,7 +378,7 @@ private class IBMDiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .configurationId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     discovery.deleteConfiguration(options);
     Test.stopTest();
@@ -400,7 +400,7 @@ private class IBMDiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .configurationId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.Configuration resp =
       discovery.getConfiguration(options);
@@ -423,7 +423,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.ListConfigurationsOptions options = new IBMDiscoveryV1Models.ListConfigurationsOptionsBuilder()
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.ListConfigurationsResponse resp =
       discovery.listConfigurations(options);
@@ -448,7 +448,7 @@ private class IBMDiscoveryV1Test {
       .description('test_environment description')
       .configurationId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.Configuration resp =
       discovery.updateConfiguration(options);
@@ -502,7 +502,7 @@ private class IBMDiscoveryV1Test {
       .description('test_environment description')
       .language('de')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.Collection resp =
       discovery.createCollection(options);
@@ -526,7 +526,7 @@ private class IBMDiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     discovery.deleteCollection(options);
     Test.stopTest();
@@ -548,7 +548,7 @@ private class IBMDiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.Collection resp =
       discovery.getCollection(options);
@@ -635,7 +635,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.ListCollectionsOptions options = new IBMDiscoveryV1Models.ListCollectionsOptionsBuilder()
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.ListCollectionsResponse resp =
       discovery.listCollections(options);
@@ -660,7 +660,7 @@ private class IBMDiscoveryV1Test {
       .name('test_environment')
       .description('test_environment description')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.Collection resp =
       discovery.updateCollection(options);
@@ -712,7 +712,7 @@ private class IBMDiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.ListCollectionFieldsResponse resp =
       discovery.listCollectionFields(options);
@@ -737,7 +737,7 @@ private class IBMDiscoveryV1Test {
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .documentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     discovery.deleteDocument(options);
     Test.stopTest();
@@ -760,7 +760,7 @@ private class IBMDiscoveryV1Test {
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .documentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.DocumentStatus resp =
       discovery.getDocumentStatus(options);
@@ -807,7 +807,7 @@ private class IBMDiscoveryV1Test {
       .returnField(collectionIds)
       .sortField(collectionIds)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.QueryResponse resp =
       discovery.federatedQuery(options);
@@ -845,7 +845,7 @@ private class IBMDiscoveryV1Test {
       .highlight(true)
       .deduplicateField('test')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.QueryNoticesResponse resp =
       discovery.federatedQueryNotices(options);
@@ -924,7 +924,7 @@ private class IBMDiscoveryV1Test {
       .sortField(collectionIds)
       .passagesFields(collectionIds)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.QueryResponse resp =
       discovery.query(options);
@@ -952,7 +952,7 @@ private class IBMDiscoveryV1Test {
       .sortField(collectionIds)
       .passagesFields(collectionIds)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.QueryNoticesResponse resp =
       discovery.queryNotices(options);
@@ -986,7 +986,7 @@ private class IBMDiscoveryV1Test {
       .addExamples(te)
       .examples(new List<IBMDiscoveryV1Models.TrainingExample>{te})
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.TrainingQuery resp =
       discovery.addTrainingData(options);
@@ -1024,7 +1024,7 @@ private class IBMDiscoveryV1Test {
       .relevance(2)
       .crossReference('test')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.TrainingExample resp =
       discovery.createTrainingExample(options);
@@ -1048,7 +1048,7 @@ private class IBMDiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     discovery.deleteAllTrainingData(options);
     Test.stopTest();
@@ -1071,7 +1071,7 @@ private class IBMDiscoveryV1Test {
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     discovery.deleteTrainingData(options);
     Test.stopTest();
@@ -1094,7 +1094,7 @@ private class IBMDiscoveryV1Test {
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.TrainingQuery resp =
       discovery.getTrainingData(options);
@@ -1122,7 +1122,7 @@ private class IBMDiscoveryV1Test {
       .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .exampleId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.TrainingExample resp =
       discovery.getTrainingExample(options);
@@ -1147,7 +1147,7 @@ private class IBMDiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.TrainingDataSet resp =
       discovery.listTrainingData(options);
@@ -1178,7 +1178,7 @@ private class IBMDiscoveryV1Test {
       .relevance(2)
       .crossReference('test')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.TrainingExample resp =
       discovery.updateTrainingExample(options);
@@ -1308,7 +1308,7 @@ private class IBMDiscoveryV1Test {
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .configuration(configuration)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.Configuration resp =
       discovery.createConfiguration(options);
@@ -1368,16 +1368,16 @@ private class IBMDiscoveryV1Test {
       .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .exampleId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     discovery.deleteTrainingExample(options);
     Test.stopTest();
   }
-  
+
   /**
    *  Add a document.
    *
-   * then test using testGetDocumentStatus if document is loaded successfully 
+   * then test using testGetDocumentStatus if document is loaded successfully
    */
   static testMethod void testAddDocument() {
     String body = IBMWatsonMockResponses.documentAccepted();
@@ -1394,7 +1394,7 @@ private class IBMDiscoveryV1Test {
     IBMWatsonFile testfile = new IBMWatsonFile.FileBuilder()
       .attachment(att)
       .build();
-      
+
     IBMDiscoveryV1Models.AddDocumentOptions options = new IBMDiscoveryV1Models.AddDocumentOptionsBuilder()
       .environmentId('environment_id')
       .collectionId('collection_id')
@@ -1402,15 +1402,15 @@ private class IBMDiscoveryV1Test {
       .filename('test.txt')
       .fileContentType('text/plain')
       .build();
-     //you can add more attributes using following builder method. This step is not necessary 
-     options = options.newBuilder().build(); 
+     //you can add more attributes using following builder method. This step is not necessary
+     options = options.newBuilder().build();
     IBMDiscoveryV1Models.DocumentAccepted resp =
       discovery.addDocument(options);
     System.assertEquals(resp.getDocumentId(), 'f1360220-ea2d-4271-9d62-89a910b13c37');
     System.assertEquals(resp.getStatus(), 'processing');
     Test.stopTest();
   }
-  
+
   /**
    *  Test configuration
    */
@@ -1435,13 +1435,13 @@ private class IBMDiscoveryV1Test {
       .filename('test.txt')
       .fileContentType('text/plain')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
-    options = options.newBuilder().build(); 
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
     IBMDiscoveryV1Models.TestDocument resp =
       discovery.testConfigurationInEnvironment(options);
     Test.stopTest();
   }
-  
+
   /**
    *  Update a document.
    *
@@ -1468,7 +1468,7 @@ private class IBMDiscoveryV1Test {
       .filename('test.txt')
       .fileContentType('text/plain')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMDiscoveryV1Models.DocumentAccepted resp =
       discovery.updateDocument(options);
