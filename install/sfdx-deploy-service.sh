@@ -7,6 +7,14 @@ echo "-c          Deploy core files";
 echo "-s          Service to deploy, available services are:";
 echo "              * discovery";
 echo "              * conversation";
+echo "              * language-translator";
+echo "              * natural-language-classifier";
+echo "              * natural-language-understanding";
+echo "              * personality-insights";
+echo "              * speech-to-text";
+echo "              * text-to-speech";
+echo "              * tone-analyzer";
+echo "              * visual-recognition";
 echo "-u          Username associated with scratch org";
 echo "";
 echo "# Using the -c option to include the core files as part of this deployment";
@@ -16,7 +24,11 @@ echo "";
 exit 1;
 fi
 
+<<<<<<< HEAD
+echo -e "executing script..."
+=======
 echo -e "running script..."
+>>>>>>> 5ecf64d6e90c2d4cc16adbda32b3d846b3f003cd
 
 POSITIONAL=()
 
