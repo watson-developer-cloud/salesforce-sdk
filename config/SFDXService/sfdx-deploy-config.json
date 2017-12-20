@@ -1,0 +1,39 @@
+{
+  "watsonServices": [
+    {
+      "name": "discovery",
+      "apexClasses": [
+        {
+         "fileName": "IBMDiscoveryV1.cls",
+         "metadata": "IBMDiscoveryV1.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMDiscoveryV1Models.cls",
+         "metadata": "IBMDiscoveryV1Models.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMDiscoveryV1Models.cls",
+         "metadata": "IBMDiscoveryV1Models.cls-meta.xml"
+        }
+      ]
+    },
+    {
+      "name": "conversation",
+      "apexClasses": [
+        {
+         "fileName": "IBMConversationV1.cls",
+         "metadata": "IBMConversationV1.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMConversationV1Models.cls",
+         "metadata": "IBMConversationV1Models.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMDiscoveryV1Test.cls",
+         "metadata": "IBMDiscoveryV1Test.cls-meta.xml"
+        }
+      ]
+    }
+  ],
+  "sourceApiVersion": "41.0"
+}
