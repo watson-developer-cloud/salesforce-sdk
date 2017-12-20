@@ -33,7 +33,143 @@
          "metadata": "IBMConversationV1Test.cls-meta.xml"
         }
       ]
-    }
+    },
+    {
+      "name": "language-translator",
+      "apexClasses": [
+        {
+         "fileName": "IBMLanguageTranslatorV2.cls",
+         "metadata": "IBMLanguageTranslatorV2.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMLanguageTranslatorV2Models.cls",
+         "metadata": "IBMLanguageTranslatorV2Models.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMLanguageTranslatorV2Test.cls",
+         "metadata": "IBMLanguageTranslatorV2Test.cls-meta.xml"
+        }
+      ]
+    },
+    {
+      "name": "natural-language-classifier",
+      "apexClasses": [
+        {
+         "fileName": "IBMNaturalLanguageClassifierV1.cls",
+         "metadata": "IBMNaturalLanguageClassifierV1.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMNaturalLanguageClassifierV1Models.cls",
+         "metadata": "IBMNaturalLanguageClassifierV1Models.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMNaturalLanguageClassifierV1Test.cls",
+         "metadata": "IBMNaturalLanguageClassifierV1Test.cls-meta.xml"
+        }
+      ]
+    },
+    {
+      "name": "natural-language-understanding",
+      "apexClasses": [
+        {
+         "fileName": "IBMNaturalLanguageUnderstandingV1.cls",
+         "metadata": "IBMNaturalLanguageUnderstandingV1.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMNaturalLanguageUnderstandingV1Models.cls",
+         "metadata": "IBMNaturalLanguageUnderstandingV1Models.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMNaturalLanguageUnderstandingV1Test.cls",
+         "metadata": "IBMNaturalLanguageUnderstandingV1Test.cls-meta.xml"
+        }
+      ]
+    },
+    {
+      "name": "personality-insights",
+      "apexClasses": [
+        {
+         "fileName": "IBMPersonalityInsightsV3.cls",
+         "metadata": "IBMPersonalityInsightsV3.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMPersonalityInsightsV3Models.cls",
+         "metadata": "IBMPersonalityInsightsV3Models.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMPersonalityInsightsV3Test.cls",
+         "metadata": "IBMPersonalityInsightsV3Test.cls-meta.xml"
+        }
+      ]
+    },
+    {
+      "name": "speech-to-text",
+      "apexClasses": [
+        {
+         "fileName": "IBMSpeechToTextV1.cls",
+         "metadata": "IBMSpeechToTextV1.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMSpeechToTextV1Models.cls",
+         "metadata": "IBMSpeechToTextV1Models.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMSpeechToTextV1Test.cls",
+         "metadata": "IBMSpeechToTextV1Test.cls-meta.xml"
+        }
+      ]
+    },
+    {
+      "name": "text-to-speech",
+      "apexClasses": [
+        {
+         "fileName": "IBMTextToSpeechV1.cls",
+         "metadata": "IBMTextToSpeechV1.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMTextToSpeechV1Models.cls",
+         "metadata": "IBMTextToSpeechV1Models.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMTextToSpeechV1Test.cls",
+         "metadata": "IBMTextToSpeechV1Test.cls-meta.xml"
+        }
+      ]
+    },
+    {
+      "name": "tone-analyzer",
+      "apexClasses": [
+        {
+         "fileName": "IBMToneAnalyzerV3.cls",
+         "metadata": "IBMToneAnalyzerV3.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMToneAnalyzerV3Models.cls",
+         "metadata": "IBMToneAnalyzerV3Models.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMToneAnalyzerV3Test.cls",
+         "metadata": "IBMToneAnalyzerV3Test.cls-meta.xml"
+        }
+      ]
+    },
+    {
+      "name": "visual-recognition",
+      "apexClasses": [
+        {
+         "fileName": "IBMVisualRecognitionV3.cls",
+         "metadata": "IBMVisualRecognitionV3.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMVisualRecognitionV3Models.cls",
+         "metadata": "IBMVisualRecognitionV3Models.cls-meta.xml"
+        },
+        {
+         "fileName": "IBMVisualRecognitionV3Test.cls",
+         "metadata": "IBMVisualRecognitionV3Test.cls-meta.xml"
+        }
+      ]
+    },
   ],
   "sourceApiVersion": "41.0"
 }
