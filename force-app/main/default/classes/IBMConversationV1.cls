@@ -8,7 +8,7 @@
 public class IBMConversationV1 extends IBMWatsonService {
 
   private static final String URL = 'https://gateway.watsonplatform.net/conversation/api';
-  private String versionDate
+  private String versionDate;
 
   /** The Constant VERSION_DATE_2017_05_26. */
     public static final String VERSION_DATE_2017_05_26 = '2017-05-26';
