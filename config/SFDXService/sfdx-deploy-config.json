@@ -12,8 +12,8 @@
          "metadata": "IBMDiscoveryV1Models.cls-meta.xml"
         },
         {
-         "fileName": "IBMDiscoveryV1Models.cls",
-         "metadata": "IBMDiscoveryV1Models.cls-meta.xml"
+         "fileName": "IBMDiscoveryV1Test.cls",
+         "metadata": "IBMDiscoveryV1Test.cls-meta.xml"
         }
       ]
     },
@@ -29,8 +29,8 @@
          "metadata": "IBMConversationV1Models.cls-meta.xml"
         },
         {
-         "fileName": "IBMDiscoveryV1Test.cls",
-         "metadata": "IBMDiscoveryV1Test.cls-meta.xml"
+         "fileName": "IBMConversationV1Test.cls",
+         "metadata": "IBMConversationV1Test.cls-meta.xml"
         }
       ]
     }
