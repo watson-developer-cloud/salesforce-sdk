@@ -100,5 +100,5 @@ cat >../sfdx-deploy/package.xml <<EOF
 </Package>
 EOF
 
-
+sfdx force:config:set defaultusername=$SFDX_USERNAME
 sfdx force:mdapi:deploy -d ../sfdx-deploy -w 5 -f ../sfdx-deploy/servicePackage.zip
