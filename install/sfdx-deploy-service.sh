@@ -57,7 +57,6 @@ apex_classes=(`cat ../config/SFDXService/sfdx-deploy-config.json | jq --arg WATS
 apex_classes_metadata=(`cat ../config/SFDXService/sfdx-deploy-config.json | jq --arg WATSON_SERVICE "$WATSON_SERVICE" '.watsonServices[] | select(.name == $WATSON_SERVICE).apexClasses[] | .metadata'`)
 
 # api version
-#$sourceApiVersion = ../config/SFDXService/sfdx-deploy-config.json | jq '.sourceApiVersion'
 sourceApiVersion=`cat ../config/SFDXService/sfdx-deploy-config.json | jq '.sourceApiVersion'`
 
 echo "sourceApiVersion=$sourceApiVersion"
