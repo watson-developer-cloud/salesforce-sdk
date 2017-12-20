@@ -16,7 +16,7 @@ echo "";
 exit 1;
 fi
 
-echo -e "starting..."
+echo -e "running script..."
 
 POSITIONAL=()
 
