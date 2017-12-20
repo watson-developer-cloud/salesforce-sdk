@@ -16,4 +16,8 @@ install:
 
 script:
 - "./install/test-in-scratch-org.sh"
+after_success:
+- sfdx force:org:delete -u ciorg -p
+after_failure:
+- sfdx force:org:delete -u ciorg -p
 
