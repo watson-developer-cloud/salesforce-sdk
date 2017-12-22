@@ -24,11 +24,7 @@ echo "";
 exit 1;
 fi
 
-<<<<<<< HEAD
 echo -e "executing script..."
-=======
-echo -e "running script..."
->>>>>>> 5ecf64d6e90c2d4cc16adbda32b3d846b3f003cd
 
 POSITIONAL=()
 
