@@ -7744,6 +7744,10 @@ public class IBMDiscoveryV1Models {
     private Long passages_characters_serialized_name;
     private Boolean deduplicate_serialized_name;
     private String deduplicate_field_serialized_name;
+    private Boolean summary_serialized_name;
+    private List<String> summary_fields_serialized_name;
+    private String summary_length_type_serialized_name;
+    private Long summary_summary_length_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
      *
@@ -7914,6 +7918,46 @@ public class IBMDiscoveryV1Models {
     public String deduplicateField() {
       return deduplicate_field_serialized_name;
     }
+    /**
+     * Gets the summary_serialized_name.
+     *
+     * The summary feature works with both structured and natural language queries.
+     *
+     * @return the summary_serialized_name
+     */
+    public Boolean summary() {
+      return summary_serialized_name;
+    }
+    /**
+     * Gets the summary_fields_serialized_name.
+     *
+     * A comma-separated list of fields used to control the fields used to pull summary text from, not what fields are used to do the searching for documents. The searching for documents is not affected by this parameter. If none are specified, the default is all top level fields.
+     *
+     * @return the summary_fields_serialized_name
+     */
+    public List<String> summaryFields() {
+      return summary_fields_serialized_name;
+    }
+    /**
+     * Gets the summary_length_type_serialized_name.
+     *
+     * (words (=default) or sentences) can be set by the user.
+     *
+     * @return the summary_length_type_serialized_name
+     */
+    public String summaryLengthType() {
+      return summary_length_type_serialized_name;
+    }
+    /**
+     * Gets the summary_summary_length_serialized_name.
+     *
+     * will be an integer that varies according to length_type, i.e., default length for words will differ from the default length for sentences. Reasonable defaults for each type TBD empirically.
+     *
+     * @return the summary_summary_length_serialized_name
+     */
+    public Long summarySummaryLength() {
+      return summary_summary_length_serialized_name;
+    }
     private QueryOptions(QueryOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
@@ -7934,6 +7978,10 @@ public class IBMDiscoveryV1Models {
       passages_characters_serialized_name = builder.passages_characters_serialized_name;
       deduplicate_serialized_name = builder.deduplicate_serialized_name;
       deduplicate_field_serialized_name = builder.deduplicate_field_serialized_name;
+      summary_serialized_name = builder.summary_serialized_name;
+      summary_fields_serialized_name = builder.summary_fields_serialized_name;
+      summary_length_type_serialized_name = builder.summary_length_type_serialized_name;
+      summary_summary_length_serialized_name = builder.summary_summary_length_serialized_name;
     }
 
     /**
@@ -7968,6 +8016,10 @@ public class IBMDiscoveryV1Models {
     private Long passages_characters_serialized_name;
     private Boolean deduplicate_serialized_name;
     private String deduplicate_field_serialized_name;
+    private Boolean summary_serialized_name;
+    private List<String> summary_fields_serialized_name;
+    private String summary_length_type_serialized_name;
+    private Long summary_summary_length_serialized_name;
 
     private QueryOptionsBuilder(QueryOptions queryOptions) {
       environment_id_serialized_name = queryOptions.environment_id_serialized_name;
@@ -7987,6 +8039,10 @@ public class IBMDiscoveryV1Models {
       passages_characters_serialized_name = queryOptions.passages_characters_serialized_name;
       deduplicate_serialized_name = queryOptions.deduplicate_serialized_name;
       deduplicate_field_serialized_name = queryOptions.deduplicate_field_serialized_name;
+      summary_serialized_name = queryOptions.summary_serialized_name;
+      summary_fields_serialized_name = queryOptions.summary_fields_serialized_name;
+      summary_length_type_serialized_name = queryOptions.summary_length_type_serialized_name;
+      summary_summary_length_serialized_name = queryOptions.summary_summary_length_serialized_name;
     }
 
     /**
@@ -8057,6 +8113,21 @@ public class IBMDiscoveryV1Models {
         this.passages_fields_serialized_name = new List<String>();
       }
       this.passages_fields_serialized_name.add(passagesFields);
+      return this;
+    }
+
+    /**
+     * Adds a summaryField to summary_fields_serialized_name.
+     *
+     * @param summaryField the new passagesFields
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder addSummaryField(String summaryField) {
+      IBMWatsonValidator.notNull(summaryField, 'summaryField cannot be null');
+      if (this.summary_fields_serialized_name == null) {
+        this.summary_fields_serialized_name = new List<String>();
+      }
+      this.summary_fields_serialized_name.add(summaryField);
       return this;
     }
 
@@ -8249,6 +8320,51 @@ public class IBMDiscoveryV1Models {
       this.deduplicate_field_serialized_name = deduplicateField;
       return this;
     }
+
+    /**
+     * Set the summary_serialized_name.
+     *
+     * @param summary the summary
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder summary(Boolean summary) {
+      this.summary_serialized_name = summary;
+      return this;
+    }
+
+    /**
+     * Set the summary_fields_serialized_name.
+     * Existing summary_fields_serialized_name will be replaced.
+     *
+     * @param summaryFields the passagesFields
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder summaryFields(List<String> summaryFields) {
+      this.summary_fields_serialized_name = summaryFields;
+      return this;
+    }
+
+    /**
+     * Set the summary_length_type_serialized_name.
+     *
+     * @param summaryLengthType the summaryLengthType
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder summaryLengthType(String summaryLengthType) {
+      this.summary_length_type_serialized_name = summaryLengthType;
+      return this;
+    }
+
+    /**
+     * Set the summary_summary_length_serialized_name.
+     *
+     * @param summarySummaryLength the summarySummaryLength
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder summarySummaryLength(Long summarySummaryLength) {
+      this.summary_summary_length_serialized_name = summarySummaryLength;
+      return this;
+    }
   }
 
   /**
@@ -8394,6 +8510,194 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * QuerySummary.
+   */
+  public class QuerySummary extends IBMWatsonGenericModel {
+    private Double score_serialized_name;
+    private List<QuerySummaryUnit> summary_units_serialized_name;
+    /**
+     * Gets the score_serialized_name.
+     *
+     * The score of the summary
+     *
+     * @return the score_serialized_name
+     */
+    @AuraEnabled
+    public Double getScore() {
+      return score_serialized_name;
+    }
+    /**
+     * Gets the summary_units_serialized_name.
+     *
+     * The list of sources contributing to the summary text
+     *
+     * @return the sources_serialized_name
+     */
+    @AuraEnabled
+    public List<QuerySummaryUnit> getSummaryUnits() {
+      return summary_units_serialized_name;
+    }
+
+    /**
+     * Sets the summary_units_serialized_name.
+     *
+     * @param summaryUnits the new summary units
+     */
+    public void setSummaryUnits(final List<QuerySummaryUnit> summaryUnits) {
+      this.summary_units_serialized_name = summaryUnits;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QuerySummary ret = (QuerySummary) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for summary_units_serialized_name
+      List<QuerySummaryUnit> newSummaryUnits = new List<QuerySummaryUnit>();
+      List<QuerySummaryUnit> deserializedSummaryUnits = ret.getSummaryUnits();
+      if (deserializedSummaryUnits != null) {
+        for (Integer i = 0; i < deserializedSummaryUnits.size(); i++) {
+          QuerySummaryUnit currentItem = ret.getSummaryUnits().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('summary_units_serialized_name');
+          QuerySummaryUnit newItem = (QuerySummaryUnit) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QuerySummaryUnit.class);
+          newSummaryUnits.add(newItem);
+        }
+        ret.setSummaryUnits(newSummaryUnits);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * QuerySummaryUnit.
+   */
+  public class QuerySummaryUnit extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    private List<QuerySummaryUnitSource> sources_serialized_name;
+    /**
+     * Gets the text_serialized_name.
+     *
+     * The text of the summary
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+    /**
+     * Gets the sources_serialized_name.
+     *
+     * The list of sources contributing to the summary text
+     *
+     * @return the sources_serialized_name
+     */
+    @AuraEnabled
+    public List<QuerySummaryUnitSource> getSources() {
+      return sources_serialized_name;
+    }
+
+    /**
+     * Sets the sources_serialized_name.
+     *
+     * @param sources the new sources
+     */
+    public void setSources(final List<QuerySummaryUnitSource> sources) {
+      this.sources_serialized_name = sources;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QuerySummaryUnit ret = (QuerySummaryUnit) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for summary_units_serialized_name
+      List<QuerySummaryUnitSource> newSummaryUnitSources = new List<QuerySummaryUnitSource>();
+      List<QuerySummaryUnitSource> deserializedSummaryUnitSources = ret.getSources();
+      if (deserializedSummaryUnitSources != null) {
+        for (Integer i = 0; i < deserializedSummaryUnitSources.size(); i++) {
+          QuerySummaryUnitSource currentItem = ret.getSources().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('sources_serialized_name');
+          QuerySummaryUnitSource newItem = (QuerySummaryUnitSource) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QuerySummaryUnitSource.class);
+          newSummaryUnitSources.add(newItem);
+        }
+        ret.setSources(newSummaryUnitSources);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * QuerySummaryUnitSource.
+   */
+  public class QuerySummaryUnitSource extends IBMWatsonGenericModel {
+    private String document_id_serialized_name;
+    private Long start_offset_serialized_name;
+    private Long end_offset_serialized_name;
+    private String field_serialized_name;
+    /**
+     * Gets the document_id_serialized_name.
+     *
+     * The unique identifier of the document from which the summary has been extracted.
+     *
+     * @return the document_id_serialized_name
+     */
+    @AuraEnabled
+    public String getDocumentId() {
+      return document_id_serialized_name;
+    }
+    /**
+     * Gets the start_offset_serialized_name.
+     *
+     * The position of the first character of the extracted summary in the originating field.
+     *
+     * @return the start_offset_serialized_name
+     */
+    @AuraEnabled
+    public Long getStartOffset() {
+      return start_offset_serialized_name;
+    }
+    /**
+     * Gets the end_offset_serialized_name.
+     *
+     * The position of the last character of the extracted summary in the originating field.
+     *
+     * @return the end_offset_serialized_name
+     */
+    @AuraEnabled
+    public Long getEndOffset() {
+      return end_offset_serialized_name;
+    }
+    /**
+     * Gets the field_serialized_name.
+     *
+     * The label of the field from which the summary has been extracted.
+     *
+     * @return the field_serialized_name
+     */
+    @AuraEnabled
+    public String getField() {
+      return field_serialized_name;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QuerySummaryUnitSource ret = (QuerySummaryUnitSource) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
    * A response containing the documents and aggregations for the query.
    */
   public class QueryResponse extends IBMWatsonGenericModel {
@@ -8401,6 +8705,7 @@ public class IBMDiscoveryV1Models {
     private List<QueryResult> results_serialized_name;
     private List<QueryAggregation> aggregations_serialized_name;
     private List<QueryPassages> passages_serialized_name;
+    private QuerySummary summary_serialized_name;
     private Long duplicates_removed_serialized_name;
     /**
      * Gets the matching_results_serialized_name.
@@ -8437,6 +8742,15 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public List<QueryPassages> getPassages() {
       return passages_serialized_name;
+    }
+    /**
+     * Gets the summary_serialized_name.
+     *
+     * @return the summary_serialized_name
+     */
+    @AuraEnabled
+    public QuerySummary getSummary() {
+      return summary_serialized_name;
     }
     /**
      * Gets the duplicates_removed_serialized_name.

@@ -679,6 +679,18 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryOptions.deduplicateField() != null) {
       builder.query('deduplicate.field', queryOptions.deduplicateField());
     }
+    if (queryOptions.summary() != null) {
+      builder.query('summary', String.valueOf(queryOptions.summary()));
+    }
+    if (queryOptions.summaryFields() != null) {
+      builder.query('summary.fields', String.join(queryOptions.summaryFields(), ','));
+    }
+    if (queryOptions.summaryLengthType() != null) {
+      builder.query('summary.length_type', String.valueOf(queryOptions.summaryLengthType()));
+    }
+    if (queryOptions.summarySummaryLength() != null) {
+      builder.query('summary.summary_length', String.valueOf(queryOptions.summarySummaryLength()));
+    }
 
     return (IBMDiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryResponse.class);
   }
