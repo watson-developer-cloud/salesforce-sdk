@@ -20,18 +20,18 @@ private class IBMVisualRecognitionV3Test {
     options = options.newBuilder().build();
     IBMVisualRecognitionV3Models.ClassifiedImages resp = visualRecognition.classify(options);
     System.assertEquals(resp.getImagesProcessed(),0);
-    System.assertEquals(resp.getImages()[0].getSourceUrl(),'string');
-    System.assertEquals(resp.getImages()[0].getResolvedUrl(),'string');
-    System.assertEquals(resp.getImages()[0].getImage(),'string');
-    System.assertEquals(resp.getImages()[0].getError().getErrorId(),'string');
-    System.assertEquals(resp.getImages()[0].getError().getDescription(),'string');
-    System.assertEquals(resp.getImages()[0].getClassifiers()[0].getName(),'string');
-    System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClassifierId(),'string');
-    System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClasses()[0].getClass(),'string');
+    System.assertEquals(resp.getImages()[0].getSourceUrl(), 'string');
+    System.assertEquals(resp.getImages()[0].getResolvedUrl(), 'string');
+    System.assertEquals(resp.getImages()[0].getImage(), 'string');
+    System.assertEquals(resp.getImages()[0].getError().getErrorId(), 'string');
+    System.assertEquals(resp.getImages()[0].getError().getDescription(), 'string');
+    System.assertEquals(resp.getImages()[0].getClassifiers()[0].getName(), 'string');
+    System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClassifierId(), 'string');
+    System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClasses()[0].getClass(), 'string');
     System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClasses()[0].getScore(),0);
-    System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClasses()[0].getTypeHierarchy(),'string');
-    System.assertEquals(resp.getWarnings()[0].getWarningId(),'string');
-    System.assertEquals(resp.getWarnings()[0].getDescription(),'string');
+    System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClasses()[0].getTypeHierarchy(), 'string');
+    System.assertEquals(resp.getWarnings()[0].getWarningId(), 'string');
+    System.assertEquals(resp.getWarnings()[0].getDescription(), 'string');
     Test.stopTest();
   }
   /**
@@ -63,8 +63,8 @@ private class IBMVisualRecognitionV3Test {
     options = options.newBuilder().build();
     IBMVisualRecognitionV3Models.ClassifiedImages resp = visualRecognition.classify(options);
      System.assertEquals(resp.getImagesProcessed(),0);
-    System.assertEquals(resp.getImages()[0].getSourceUrl(),'string');
-    System.assertEquals(resp.getImages()[0].getResolvedUrl(),'string');
+    System.assertEquals(resp.getImages()[0].getSourceUrl(), 'string');
+    System.assertEquals(resp.getImages()[0].getResolvedUrl(), 'string');
     Test.stopTest();
   }
   /**
@@ -99,22 +99,22 @@ private class IBMVisualRecognitionV3Test {
     options = options.newBuilder().build();
     IBMVisualRecognitionV3Models.DetectedFaces resp = visualRecognition.detectFaces(options);
     System.assertEquals(resp.getImagesProcessed(),0);
-    System.assertEquals(resp.getImages()[0].getImage(),'string');
-    System.assertEquals(resp.getImages()[0].getSourceUrl(),'string');
-    System.assertEquals(resp.getImages()[0].getResolvedUrl(),'string');
+    System.assertEquals(resp.getImages()[0].getImage(), 'string');
+    System.assertEquals(resp.getImages()[0].getSourceUrl(), 'string');
+    System.assertEquals(resp.getImages()[0].getResolvedUrl(), 'string');
     System.assertEquals(resp.getImages()[0].getFaces()[0].getAge().getMin(),0);
     System.assertEquals(resp.getImages()[0].getFaces()[0].getAge().getMax(),0);
     System.assertEquals(resp.getImages()[0].getFaces()[0].getAge().getScore(),0);
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getGender().getGender(),'string');
+    System.assertEquals(resp.getImages()[0].getFaces()[0].getGender().getGender(), 'string');
     System.assertEquals(resp.getImages()[0].getFaces()[0].getGender().getScore(),0);
     System.assertEquals(resp.getImages()[0].getFaces()[0].getFaceLocation().getWidth(),0);
     System.assertEquals(resp.getImages()[0].getFaces()[0].getFaceLocation().getHeight(),0);
     System.assertEquals(resp.getImages()[0].getFaces()[0].getFaceLocation().getLeft(),0);
     System.assertEquals(resp.getImages()[0].getFaces()[0].getFaceLocation().getTop(),0);
     System.assertEquals(resp.getImages()[0].getFaces()[0].getIdentity().getScore(),0);
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getIdentity().getName(),'string');
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getIdentity().getTypeHierarchy(),'string');
-    System.assertEquals(resp.getImages()[0].getError().getErrorId(),'string');
+    System.assertEquals(resp.getImages()[0].getFaces()[0].getIdentity().getName(), 'string');
+    System.assertEquals(resp.getImages()[0].getFaces()[0].getIdentity().getTypeHierarchy(), 'string');
+    System.assertEquals(resp.getImages()[0].getError().getErrorId(), 'string');
     Test.stopTest();
   }
   /**
@@ -149,12 +149,12 @@ private class IBMVisualRecognitionV3Test {
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMVisualRecognitionV3Models.Classifier resp = visualRecognition.createClassifier(options);
-    System.assertEquals(resp.getClassifierId(),'string');
-    System.assertEquals(resp.getName(),'string');
-    System.assertEquals(resp.getOwner(),'string');
-    System.assertEquals(resp.getStatus(),'ready');
-    System.assertEquals(resp.getExplanation(),'string');
-    System.assertEquals(resp.getClasses()[0].getClass(),'string');
+    System.assertEquals(resp.getClassifierId(), 'string');
+    System.assertEquals(resp.getName(), 'string');
+    System.assertEquals(resp.getOwner(), 'string');
+    System.assertEquals(resp.getStatus(), 'ready');
+    System.assertEquals(resp.getExplanation(), 'string');
+    System.assertEquals(resp.getClasses()[0].getClass(), 'string');
     Test.stopTest();
   }
   /**
@@ -186,7 +186,7 @@ private class IBMVisualRecognitionV3Test {
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMVisualRecognitionV3Models.Classifier resp = visualRecognition.getClassifier(options);
-    System.assertEquals(resp.getClassifierId(),'string');
+    System.assertEquals(resp.getClassifierId(), 'string');
     Test.stopTest();
   }
   /**
@@ -221,7 +221,7 @@ private class IBMVisualRecognitionV3Test {
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMVisualRecognitionV3Models.Classifier resp = visualRecognition.updateClassifier(options);
-    System.assertEquals(resp.getClassifierId(),'string');
+    System.assertEquals(resp.getClassifierId(), 'string');
     Test.stopTest();
   }
   /**
@@ -272,7 +272,7 @@ private class IBMVisualRecognitionV3Test {
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMVisualRecognitionV3Models.Classifiers resp = visualRecognition.listClassifiers(options);
-    System.assertEquals(resp.getClassifiers()[0].getClassifierId(),'string');
+    System.assertEquals(resp.getClassifiers()[0].getClassifierId(), 'string');
     Test.stopTest();
   }
 }

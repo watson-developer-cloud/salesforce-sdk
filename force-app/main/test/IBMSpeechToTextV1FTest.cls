@@ -1,12 +1,12 @@
 public class IBMSpeechToTextV1FTest {
-  private static String URL = 'https://stream.watsonplatform.net/speech-to-text/api'; 
+  private static String URL = 'https://stream.watsonplatform.net/speech-to-text/api';
 
   public static void runAllTests(String username, String password) {
     IBMSpeechToTextV1Models.LanguageModel LanguageModel = testCreateLanguageModel(username, password);
     IBMSpeechToTextV1Models.LanguageModels LanguageModels = testListLanguageModels(username, password);
     IBMSpeechToTextV1Models.LanguageModel getLanguageModel = testGetLanguageModel(username, password, LanguageModel.getCustomizationId());
   }
-  
+
   /**
    *  Test create a new Language Model
    */
@@ -16,7 +16,7 @@ public class IBMSpeechToTextV1FTest {
       speechToText.setEndPoint(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
-    String name = 'custom_model'; 
+    String name = 'custom_model';
     String baseModelName = 'en-US_BroadbandModel';
     IBMSpeechToTextV1Models.CreateLanguageModel createLanguageModel = new IBMSpeechToTextV1Models.CreateLanguageModelBuilder(name, baseModelName)
       .name(name)
@@ -29,7 +29,7 @@ public class IBMSpeechToTextV1FTest {
       .build();
     return speechToText.createLanguageModel(createLanguageModelOptions);
   }
-  
+
   /**
    *  Test list all existing Language Model
    */
@@ -44,7 +44,7 @@ public class IBMSpeechToTextV1FTest {
       .build();
     return speechToText.listLanguageModels(listLanguageModelsOptions);
   }
-  
+
   /**
    *  Test list an existing Language Model
    */
@@ -59,7 +59,7 @@ public class IBMSpeechToTextV1FTest {
       .build();
     return speechToText.getLanguageModel(getLanguageModelOptions);
   }
-  
+
   /**
    *  Test upgrade an existing Language Model
    */
@@ -74,7 +74,7 @@ public class IBMSpeechToTextV1FTest {
       .build();
     speechToText.upgradeLanguageModel(upgradeLanguageModelOptions);
   }
-  
+
   /**
    *  Test train a Language Model
    */
@@ -89,7 +89,7 @@ public class IBMSpeechToTextV1FTest {
       .build();
     speechToText.trainLanguageModel(trainLanguageModelOptions);
   }
-  
+
   /**
    *  Test reset an existing Language Model
    */
@@ -104,7 +104,7 @@ public class IBMSpeechToTextV1FTest {
       .build();
     speechToText.resetLanguageModel(resetLanguageModelOptions);
   }
-  
+
   /**
    * Test delete a Language Model
    */
@@ -119,7 +119,7 @@ public class IBMSpeechToTextV1FTest {
       .build();
     speechToText.deleteLanguageModel(deleteLanguageModelOptions);
   }
-  
+
   /**
    *  Test add corpora
    */
@@ -159,7 +159,7 @@ public class IBMSpeechToTextV1FTest {
     speechToText.addCorpus(addCorpusOptions);
     addCorpusOptions = addCorpusOptions.newBuilder().build();
   }
-  
+
   /**
    *  Test delete existing corpora
    */
@@ -175,7 +175,7 @@ public class IBMSpeechToTextV1FTest {
       .build();
     speechToText.deleteCorpus(deleteCorpusOptions);
   }
-  
+
   /**
    *  Test retrieve an existing corpora
    */
@@ -191,7 +191,7 @@ public class IBMSpeechToTextV1FTest {
       .build();
     return speechToText.getCorpus(getCorpusOptions);
   }
-  
+
   /**
    *  Test list existing corpora for a language customization
    */
@@ -206,7 +206,7 @@ public class IBMSpeechToTextV1FTest {
       .build();
     return speechToText.listCorpora(listCorporaOptions);
   }
-  
+
   /**
    *  Test add word
    */
@@ -229,7 +229,7 @@ public class IBMSpeechToTextV1FTest {
       .build();
     speechToText.addWord(addWordOptions);
   }
-  
+
   /**
    *  Test add words
    */
@@ -255,5 +255,5 @@ public class IBMSpeechToTextV1FTest {
       .build();
     speechToText.addWords(addWordsOptions);
   }
-   
+
 }

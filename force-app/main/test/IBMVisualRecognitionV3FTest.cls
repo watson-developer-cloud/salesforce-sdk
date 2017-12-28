@@ -17,7 +17,7 @@ public with sharing class IBMVisualRecognitionV3FTest {
       .parameters(parameters)
       .build();
     IBMVisualRecognitionV3Models.ClassifiedImages resp = visualRecognition.classify(options);
-    System.debug('IBMVisualRecognitionV3FTest.testClassify(): '+ resp);
+    System.debug('IBMVisualRecognitionV3FTest.testClassify(): ' + resp);
     return resp;
   }
   /**
@@ -39,7 +39,7 @@ public with sharing class IBMVisualRecognitionV3FTest {
       .imagesFileContentType(att.ContentType)
       .build();
     IBMVisualRecognitionV3Models.ClassifiedImages resp = visualRecognition.classify(options);
-    System.debug('IBMVisualRecognitionV3FTest.testClassify(): '+ resp);
+    System.debug('IBMVisualRecognitionV3FTest.testClassify(): ' + resp);
     return resp;
   }
   /**
@@ -62,7 +62,7 @@ public with sharing class IBMVisualRecognitionV3FTest {
       .imagesFileContentType(att.ContentType)
       .build();
     IBMVisualRecognitionV3Models.DetectedFaces resp = visualRecognition.detectFaces(options);
-    System.debug('IBMVisualRecognitionV3FTest.testDetectFaces(): '+ resp);
+    System.debug('IBMVisualRecognitionV3FTest.testDetectFaces(): ' + resp);
     return resp;
   }
 }
