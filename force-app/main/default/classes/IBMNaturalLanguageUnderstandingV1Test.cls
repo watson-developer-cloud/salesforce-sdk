@@ -10,7 +10,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('2017-09-01');
-    naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
     naturalLanguageUnderstanding.setUsernameAndPassword('username', 'password');
     IBMNaturalLanguageUnderstandingV1Models.ConceptsOptions concepts = new IBMNaturalLanguageUnderstandingV1Models.ConceptsOptionsBuilder()
       .limitField(40)
@@ -272,7 +272,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('2017-09-01');
-    naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
     naturalLanguageUnderstanding.setUsernameAndPassword('username', 'password');
     IBMNaturalLanguageUnderstandingV1Models.ListModelsOptions options = new IBMNaturalLanguageUnderstandingV1Models.ListModelsOptionsBuilder()
       .build();
@@ -294,7 +294,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('2017-09-01', 'username', 'password');
-    naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
     IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptions options = new IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptionsBuilder()
       .modelId('test')
       .build();
@@ -311,7 +311,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     try
     {
       IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('');
-      naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+      naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
       IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptions options = new IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptionsBuilder()
         .modelId('test')
         .build();
