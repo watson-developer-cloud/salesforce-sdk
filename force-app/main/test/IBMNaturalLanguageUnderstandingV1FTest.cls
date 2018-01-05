@@ -28,7 +28,7 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
 
     IBMNaturalLanguageUnderstandingV1Models.EmotionOptions emotion = new IBMNaturalLanguageUnderstandingV1Models.EmotionOptionsBuilder()
       .document(true)
-      .targets(new List<String>{'apples','oranges'})
+      .targets(new List<String>{'apples', 'oranges'})
       .build();
     emotion = emotion.newBuilder().build();
 
@@ -92,7 +92,7 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
       .build();
 
     IBMNaturalLanguageUnderstandingV1Models.AnalysisResults resp = naturalLanguageUnderstanding.analyze(options);
-    System.debug('IBMNaturalLanguageUnderstandingV1FTest.testAnalyze(): '+ resp);
+    System.debug('IBMNaturalLanguageUnderstandingV1FTest.testAnalyze(): ' + resp);
     return resp;
   }
 
@@ -108,7 +108,7 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
       .build();
 
     IBMNaturalLanguageUnderstandingV1Models.ListModelsResults resp = naturalLanguageUnderstanding.listModels(options);
-    System.debug('IBMNaturalLanguageUnderstandingV1FTest.testListModels(): '+ resp);
+    System.debug('IBMNaturalLanguageUnderstandingV1FTest.testListModels(): ' + resp);
     return resp;
   }
 }

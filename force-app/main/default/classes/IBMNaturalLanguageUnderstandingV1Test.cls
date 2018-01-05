@@ -10,12 +10,12 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('2017-09-01');
-    naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
     naturalLanguageUnderstanding.setUsernameAndPassword('username', 'password');
     IBMNaturalLanguageUnderstandingV1Models.ConceptsOptions concepts = new IBMNaturalLanguageUnderstandingV1Models.ConceptsOptionsBuilder()
       .limitField(40)
       .build();
-    concepts = concepts.newBuilder().build();  
+    concepts = concepts.newBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.EmotionOptions emotion = new IBMNaturalLanguageUnderstandingV1Models.EmotionOptionsBuilder()
       .document(true)
       .addTargets('test')
@@ -28,17 +28,17 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .sentiment(true)
       .emotion(true)
       .build();
-    entities = entities.newBuilder().build();  
+    entities = entities.newBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.KeywordsOptions keywords = new IBMNaturalLanguageUnderstandingV1Models.KeywordsOptionsBuilder()
       .limitField(40)
       .sentiment(true)
       .emotion(true)
       .build();
-    keywords = keywords.newBuilder().build();  
+    keywords = keywords.newBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.RelationsOptions relations = new IBMNaturalLanguageUnderstandingV1Models.RelationsOptionsBuilder()
       .model('test')
       .build();
-    relations = relations.newBuilder().build();  
+    relations = relations.newBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.SemanticRolesOptions semanticRoles = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesOptionsBuilder()
       .limitField(40)
       .keywords(true)
@@ -66,8 +66,8 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .categories(categories)
       .sentiment(sentiment)
       .build();
-    features = features.newBuilder().build();  
-    
+    features = features.newBuilder().build();
+
     IBMNaturalLanguageUnderstandingV1Models.AnalyzeOptions options = new IBMNaturalLanguageUnderstandingV1Models.AnalyzeOptionsBuilder()
       .text('text')
       .html('<html><body>test</body></html>')
@@ -80,7 +80,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .language('en')
       .limitTextCharacters(100)
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.AnalysisResults resp =
       naturalLanguageUnderstanding.analyze(options);
@@ -108,13 +108,13 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(resp.getKeywords()[0].getEmotion().getAnger(), 0.044105);
     System.assertEquals(resp.getKeywords()[0].getRelevance(), 0.900808);
     System.assertEquals(resp.getKeywords()[0].getSentiment().getScore(), 0.419889);
-    System.assertEquals(resp.getKeywords()[0].getText(),'free trial');
+    System.assertEquals(resp.getKeywords()[0].getText(), 'free trial');
     System.assertEquals(resp.getCategories()[0].getScore(), 0.89792);
-    System.assertEquals(resp.getCategories()[0].getLabel(),'Company');
+    System.assertEquals(resp.getCategories()[0].getLabel(), 'Company');
     System.assertEquals(resp.getEmotion().getDocument().getEmotion().getAnger(), 0.099437);
-    System.assertEquals(resp.getEmotion().getTargets()[0].getText(),'test');
+    System.assertEquals(resp.getEmotion().getTargets()[0].getText(), 'test');
     System.assertEquals(resp.getEmotion().getTargets()[0].getEmotion().getAnger(), 0.099437);
-    System.assertEquals(resp.getRelations()[0].getArguments()[0].getEntities()[0].getText(),'test');
+    System.assertEquals(resp.getRelations()[0].getArguments()[0].getEntities()[0].getText(), 'test');
     System.assertEquals(resp.getRelations()[0].getArguments()[0].getEntities()[0].getType(), 'Company');
     System.assertEquals(resp.getRelations()[0].getType(), 'Company');
     System.assertEquals(resp.getRelations()[0].getSentence(), 'Company');
@@ -122,26 +122,26 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(resp.getMetadata().getAuthors()[0].getName(), 'test');
     System.assertEquals(resp.getMetadata().getTitle(), 'test');
     System.assertEquals(resp.getMetadata().getPublicationDate(), '2017-05-16T13:56:54.957Z');
-    System.assertEquals(resp.getSemanticRoles()[0].getSentence(),'Company');
+    System.assertEquals(resp.getSemanticRoles()[0].getSentence(), 'Company');
     System.assertEquals(resp.getSemanticRoles()[0].getSubject().getEntities()[0].getType(), 'Company');
-    System.assertEquals(resp.getSemanticRoles()[0].getSubject().getEntities()[0].getText(),'test');
-    System.assertEquals(resp.getSemanticRoles()[0].getSubject().getText(),'test');
-    System.assertEquals(resp.getSemanticRoles()[0].getSubject().getKeywords()[0].getText(),'test');
-    System.assertEquals(resp.getSemanticRoles()[0].getAction().getText(),'test');
-    System.assertEquals(resp.getSemanticRoles()[0].getAction().getNormalized(),'test');
-    System.assertEquals(resp.getSemanticRoles()[0].getAction().getVerb().getText(),'test');
-    System.assertEquals(resp.getSemanticRoles()[0].getAction().getVerb().getTense(),'test');
-    System.assertEquals(resp.getSemanticRoles()[0].getObject().getText(),'test');
-    System.assertEquals(resp.getSemanticRoles()[0].getObject().getKeywords()[0].getText(),'test');
-    System.assertEquals(resp.getSentiment().getTargets()[0].getText(),'test');
+    System.assertEquals(resp.getSemanticRoles()[0].getSubject().getEntities()[0].getText(), 'test');
+    System.assertEquals(resp.getSemanticRoles()[0].getSubject().getText(), 'test');
+    System.assertEquals(resp.getSemanticRoles()[0].getSubject().getKeywords()[0].getText(), 'test');
+    System.assertEquals(resp.getSemanticRoles()[0].getAction().getText(), 'test');
+    System.assertEquals(resp.getSemanticRoles()[0].getAction().getNormalized(), 'test');
+    System.assertEquals(resp.getSemanticRoles()[0].getAction().getVerb().getText(), 'test');
+    System.assertEquals(resp.getSemanticRoles()[0].getAction().getVerb().getTense(), 'test');
+    System.assertEquals(resp.getSemanticRoles()[0].getObject().getText(), 'test');
+    System.assertEquals(resp.getSemanticRoles()[0].getObject().getKeywords()[0].getText(), 'test');
+    System.assertEquals(resp.getSentiment().getTargets()[0].getText(), 'test');
     System.assertEquals(resp.getSentiment().getTargets()[0].getScore(), 0.89792);
-    System.assertEquals(resp.getSentiment().getDocument().getLabel(),'test');
+    System.assertEquals(resp.getSentiment().getDocument().getLabel(), 'test');
     System.assertEquals(resp.getSentiment().getDocument().getScore(), 0.89792);
     Test.stopTest();
   }
   static testMethod void testAnalysisResultsAttributes() {
     Test.startTest();
-    IBMNaturalLanguageUnderstandingV1Models.AnalysisResults analysisResults = 
+    IBMNaturalLanguageUnderstandingV1Models.AnalysisResults analysisResults =
       new IBMNaturalLanguageUnderstandingV1Models.AnalysisResults();
     analysisResults.setLanguage('de');
     analysisResults.setAnalyzedText('test');
@@ -161,7 +161,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     entitiesResult.setRelevance((Double)0.89792);
     entitiesResult.setCount(12);
     entitiesResult.setText('test');
-    IBMNaturalLanguageUnderstandingV1Models.DisambiguationResult disambiguationResult = new IBMNaturalLanguageUnderstandingV1Models.DisambiguationResult();    
+    IBMNaturalLanguageUnderstandingV1Models.DisambiguationResult disambiguationResult = new IBMNaturalLanguageUnderstandingV1Models.DisambiguationResult();
     disambiguationResult.setName('IBM');
     disambiguationResult.setDbpediaResource('http://dbpedia.org/resource/IBM');
     disambiguationResult.setSubtype(new List<String>{'test'});
@@ -253,13 +253,13 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(analysisResults.getKeywords()[0].getEmotion().getAnger(), 0.099437);
     System.assertEquals(analysisResults.getKeywords()[0].getRelevance(), 0.89792);
     System.assertEquals(analysisResults.getKeywords()[0].getSentiment().getScore(), 0.099437);
-    System.assertEquals(analysisResults.getKeywords()[0].getText(),'test');
+    System.assertEquals(analysisResults.getKeywords()[0].getText(), 'test');
     System.assertEquals(analysisResults.getCategories()[0].getScore(), 0.89792);
-    System.assertEquals(analysisResults.getCategories()[0].getLabel(),'Company');
+    System.assertEquals(analysisResults.getCategories()[0].getLabel(), 'Company');
     System.assertEquals(analysisResults.getEmotion().getDocument().getEmotion().getAnger(), 0.099437);
-    System.assertEquals(analysisResults.getEmotion().getTargets()[0].getText(),'test');
+    System.assertEquals(analysisResults.getEmotion().getTargets()[0].getText(), 'test');
     System.assertEquals(analysisResults.getEmotion().getTargets()[0].getEmotion().getAnger(), 0.099437);
-    System.assertEquals(analysisResults.getRelations()[0].getArguments()[0].getEntities()[0].getText(),'test');
+    System.assertEquals(analysisResults.getRelations()[0].getArguments()[0].getEntities()[0].getText(), 'test');
     System.assertEquals(analysisResults.getRelations()[0].getArguments()[0].getEntities()[0].getType(), 'Company');
     System.assertEquals(analysisResults.getRelations()[0].getType(), 'Company');
     System.assertEquals(analysisResults.getRelations()[0].getSentence(), 'Company');
@@ -272,33 +272,33 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('2017-09-01');
-    naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
     naturalLanguageUnderstanding.setUsernameAndPassword('username', 'password');
     IBMNaturalLanguageUnderstandingV1Models.ListModelsOptions options = new IBMNaturalLanguageUnderstandingV1Models.ListModelsOptionsBuilder()
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.ListModelsResults resp =
       naturalLanguageUnderstanding.listModels(options);
     System.assertEquals(resp.getModels().size(),1);
-    System.assertEquals(resp.getModels()[0].getStatus(),'string');
-    System.assertEquals(resp.getModels()[0].getmodelId(),'string');
-    System.assertEquals(resp.getModels()[0].getLanguage(),'string');
-    System.assertEquals(resp.getModels()[0].getDescription(),'string');
+    System.assertEquals(resp.getModels()[0].getStatus(), 'string');
+    System.assertEquals(resp.getModels()[0].getmodelId(), 'string');
+    System.assertEquals(resp.getModels()[0].getLanguage(), 'string');
+    System.assertEquals(resp.getModels()[0].getDescription(), 'string');
     Test.stopTest();
   }
-  
+
   static testMethod void testDeleteModel() {
     String body = '';
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('2017-09-01','username', 'password');
-    naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('2017-09-01', 'username', 'password');
+    naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
     IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptions options = new IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptionsBuilder()
       .modelId('test')
       .build();
-    //you can add more attributes using following builder method. This step is not necessary 
+    //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     naturalLanguageUnderstanding.deleteModel(options);
     Test.stopTest();
@@ -311,14 +311,14 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     try
     {
       IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('');
-      naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+      naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
       IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptions options = new IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptionsBuilder()
         .modelId('test')
         .build();
       naturalLanguageUnderstanding.deleteModel(options);
     }
-    catch( IBMWatsonServiceExceptions.IllegalArgumentException exptn){
-      System.assertEquals(exptn.getMessage(),'versionDate cannot be null.');      
+    catch( IBMWatsonServiceExceptions.IllegalArgumentException exptn) {
+      System.assertEquals(exptn.getMessage(), 'versionDate cannot be null.');
     }
     Test.stopTest();
   }

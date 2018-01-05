@@ -36,7 +36,7 @@ private class IBMLanguageTranslatorV2Test {
   /**
    *  Test identify
    */
-  static testMethod void testIdentify(){
+  static testMethod void testIdentify() {
     String body = IBMWatsonMockResponses.ListIdentifiableLanguages();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -54,7 +54,7 @@ private class IBMLanguageTranslatorV2Test {
   /**
    *  Test Identifiable Languages
    */
-  static testMethod void testListIdentifiableLanguages(){
+  static testMethod void testListIdentifiableLanguages() {
     String body = IBMWatsonMockResponses.ListIdentifiableLanguages();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -69,8 +69,8 @@ private class IBMLanguageTranslatorV2Test {
     List<IBMLanguageTranslatorV2Models.IdentifiableLanguage> languageList = listIdentifiableLanguages.getLanguages();
     System.assert(languageList != null && languageList.size() == 4);
     IBMLanguageTranslatorV2Models.IdentifiableLanguage IdentifiableLanguage;
-    for(Integer i = 0; i < languageList.size(); i++ ){
-      if(languageList[i].getLanguage() == 'af' && languageList[i].getName() == 'Afrikaans' ){
+    for (Integer i = 0; i < languageList.size(); i++) {
+      if (languageList[i].getLanguage() == 'af' && languageList[i].getName() == 'Afrikaans' ) {
         IdentifiableLanguage = languageList[i];
         break;
       }
@@ -84,7 +84,7 @@ private class IBMLanguageTranslatorV2Test {
   /**
    *  Test create a model
    */
-  static testMethod void testCreateModel(){
+  static testMethod void testCreateModel() {
     String body = IBMWatsonMockResponses.CreateModel();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -157,7 +157,7 @@ private class IBMLanguageTranslatorV2Test {
   /**
    *  Test delete a model
    */
-  static testMethod void testDeleteModel(){
+  static testMethod void testDeleteModel() {
     String body = IBMWatsonMockResponses.DeleteModel();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -178,7 +178,7 @@ private class IBMLanguageTranslatorV2Test {
   /**
    *  Test get model data
    */
-  static testMethod void testGetModel(){
+  static testMethod void testGetModel() {
     String body = IBMWatsonMockResponses.GetModel();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
@@ -200,7 +200,7 @@ private class IBMLanguageTranslatorV2Test {
   /**
    *  Test list model data
    */
-  static testMethod void testListModels(){
+  static testMethod void testListModels() {
     String body = IBMWatsonMockResponses.ListModels();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);

@@ -14,7 +14,7 @@ public class IBMLanguageTranslatorV2FTest {
    *  Test all features on a single method call
    *
    */
-  public static void runAllTests(){
+  public static void runAllTests() {
     // Translate a simple text using a source and target languages
     try {
       testSourceTargetTranslate();
@@ -27,7 +27,7 @@ public class IBMLanguageTranslatorV2FTest {
     // Identify a language
     try {
       testSourceTargetTranslate();
-    } catch(Exception err){
+    } catch(Exception err) {
       String testMsg = '[Identify] - Error while identifying language. ';
       System.debug(testMsg + err.getMessage());
       throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
@@ -36,7 +36,7 @@ public class IBMLanguageTranslatorV2FTest {
     // Identify all languages
     try {
       testListIdentifiableLanguages();
-    } catch(Exception err){
+    } catch(Exception err) {
       String testMsg = '[ListIdentifiableLanguages] - Error while identifying all languages. ';
       System.debug(testMsg + err.getMessage());
       throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
@@ -45,7 +45,7 @@ public class IBMLanguageTranslatorV2FTest {
     // Test creating a model using forced glossary
     try {
       testCreateModelForcedGlossary();
-    } catch(Exception err){
+    } catch(Exception err) {
       String testMsg = '[CreateModel] - Error while creating a forced-glossary model. ';
       System.debug(testMsg + err.getMessage());
       throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
@@ -54,7 +54,7 @@ public class IBMLanguageTranslatorV2FTest {
     // Get model information
     try {
       testGetModel();
-    } catch(Exception err){
+    } catch(Exception err) {
       String testMsg = '[GetModel] - Error while retrieving model data. ';
       System.debug(testMsg + err.getMessage());
       throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
@@ -63,7 +63,7 @@ public class IBMLanguageTranslatorV2FTest {
     // Delete model
     try {
       testDeleteModel();
-    } catch(Exception err){
+    } catch(Exception err) {
       String testMsg = '[DeleteModel] - Error while deleting model. ';
       System.debug(testMsg + err.getMessage());
       throw new IBMLanguageTranslatorV2FException(testMsg + err.getMessage());
@@ -94,7 +94,7 @@ public class IBMLanguageTranslatorV2FTest {
   /**
    *  Test identify
    */
-  public static void testIdentify(){
+  public static void testIdentify() {
     IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
     service.setEndPoint(EndpointURL);
     service.setUsernameAndPassword(username, password);
@@ -110,7 +110,7 @@ public class IBMLanguageTranslatorV2FTest {
   /**
    *  Test Identifiable Languages
    */
-  public static void testListIdentifiableLanguages(){
+  public static void testListIdentifiableLanguages() {
     IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
     service.setEndPoint(EndpointURL);
     service.setUsernameAndPassword(username, password);
@@ -126,7 +126,7 @@ public class IBMLanguageTranslatorV2FTest {
   /**
    *  Test create a model
    */
-  public static void testCreateModelForcedGlossary(){
+  public static void testCreateModelForcedGlossary() {
     IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
     service.setEndPoint(NAMED_CREDENTIALS);
     String forcedGlossaryStr = '<tmx version="1.4">' +
@@ -172,7 +172,7 @@ public class IBMLanguageTranslatorV2FTest {
   /**
    *  Test delete a model
    */
-  public static void testDeleteModel(){
+  public static void testDeleteModel() {
     IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
     service.setEndPoint(EndpointURL);
     service.setUsernameAndPassword(username, password);
@@ -187,7 +187,7 @@ public class IBMLanguageTranslatorV2FTest {
   /**
    *  Test get model data
    */
-  public static void testGetModel(){
+  public static void testGetModel() {
     IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
     service.setEndPoint(EndpointURL);
     service.setUsernameAndPassword(username, password);
@@ -202,7 +202,7 @@ public class IBMLanguageTranslatorV2FTest {
   /**
    *  Test list model data
    */
-  public static void testListModels(){
+  public static void testListModels() {
     IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
     service.setEndPoint(EndpointURL);
     service.setUsernameAndPassword(username, password);

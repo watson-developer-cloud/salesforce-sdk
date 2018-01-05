@@ -1,6 +1,6 @@
 @isTest
 private class IBMWatsonServiceTest {
-	/**
+  /**
     *  Test available Request methods that are not used in example but available for developers.
     *
     */
@@ -11,7 +11,7 @@ private class IBMWatsonServiceTest {
     builder.addHeader('test', 'testvalue');
     Test.stopTest();
   }
-  
+
   /**
    *  Test bad request exception scenario.
    *
@@ -24,7 +24,7 @@ private class IBMWatsonServiceTest {
     try {
       IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password'); 
+      discovery.setUsernameAndPassword('username', 'password');
       IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
       IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
@@ -34,7 +34,7 @@ private class IBMWatsonServiceTest {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test conflict exception scenario.
    *
@@ -47,7 +47,7 @@ private class IBMWatsonServiceTest {
     try {
       IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password'); 
+      discovery.setUsernameAndPassword('username', 'password');
       IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
       IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
@@ -57,7 +57,7 @@ private class IBMWatsonServiceTest {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test forbidden exception scenario.
    *
@@ -70,7 +70,7 @@ private class IBMWatsonServiceTest {
     try {
       IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password'); 
+      discovery.setUsernameAndPassword('username', 'password');
       IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
       IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
@@ -80,7 +80,7 @@ private class IBMWatsonServiceTest {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test forbidden exception scenario 406.
    *
@@ -93,7 +93,7 @@ private class IBMWatsonServiceTest {
     try {
       IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password'); 
+      discovery.setUsernameAndPassword('username', 'password');
       IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
       IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
@@ -103,7 +103,7 @@ private class IBMWatsonServiceTest {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test internal server error exception scenario.
    *
@@ -116,7 +116,7 @@ private class IBMWatsonServiceTest {
     try {
       IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password'); 
+      discovery.setUsernameAndPassword('username', 'password');
       IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
       IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
@@ -126,7 +126,7 @@ private class IBMWatsonServiceTest {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test not found exception scenario.
    *
@@ -139,7 +139,7 @@ private class IBMWatsonServiceTest {
     try {
       IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password'); 
+      discovery.setUsernameAndPassword('username', 'password');
       IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
       IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
@@ -149,7 +149,7 @@ private class IBMWatsonServiceTest {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test request too large exception scenario.
    *
@@ -162,7 +162,7 @@ private class IBMWatsonServiceTest {
     try {
       IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password'); 
+      discovery.setUsernameAndPassword('username', 'password');
       IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
       IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
@@ -172,7 +172,7 @@ private class IBMWatsonServiceTest {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test response exception scenario.
    *
@@ -185,7 +185,7 @@ private class IBMWatsonServiceTest {
     try {
       IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password'); 
+      discovery.setUsernameAndPassword('username', 'password');
       IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
       IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
@@ -195,7 +195,7 @@ private class IBMWatsonServiceTest {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test service unavailable exception scenario.
    *
@@ -208,7 +208,7 @@ private class IBMWatsonServiceTest {
     try {
       IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password'); 
+      discovery.setUsernameAndPassword('username', 'password');
       IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
       IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
@@ -218,7 +218,7 @@ private class IBMWatsonServiceTest {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test too many requests exception scenario.
    *
@@ -231,7 +231,7 @@ private class IBMWatsonServiceTest {
     try {
       IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password'); 
+      discovery.setUsernameAndPassword('username', 'password');
       IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
       IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
@@ -241,7 +241,7 @@ private class IBMWatsonServiceTest {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test unauthorized exception scenario.
    *
@@ -254,7 +254,7 @@ private class IBMWatsonServiceTest {
     try {
       IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password'); 
+      discovery.setUsernameAndPassword('username', 'password');
       IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
       IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
@@ -276,7 +276,7 @@ private class IBMWatsonServiceTest {
     try {
       IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
       discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password'); 
+      discovery.setUsernameAndPassword('username', 'password');
       IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
       IBMDiscoveryV1Models.Environment resp =
       discovery.createEnvironment(options);
@@ -314,7 +314,7 @@ private class IBMWatsonServiceTest {
     }
     Test.stopTest();
   }
-  
+
   /**
    *  Test IBMWatsonResponse.
    *
@@ -331,9 +331,9 @@ private class IBMWatsonServiceTest {
     System.assertEquals(response.getStatus(), 'Success');
     System.assertEquals(response.getHeaderKeys()[1], 'Content-Type');
     System.assertEquals(response.getBodyAsBlob(), Blob.valueOf('test string'));
-    Test.stopTest();   
+    Test.stopTest();
   }
-  
+
   /**
    *  Test IBMWatsonRequest.
    *
@@ -349,10 +349,10 @@ private class IBMWatsonServiceTest {
     System.assertEquals(request.getMethod(), 'POST');
     System.assertEquals(request.getHeadersByName('key').size(), 1);
     System.assert(request.toString().contains('POST'));
-    
-    Test.stopTest();  
+
+    Test.stopTest();
   }
-  
+
   /**
    *  Test IBMWatsonMediaType.
    *
@@ -365,19 +365,19 @@ private class IBMWatsonServiceTest {
     System.assertEquals(IBMWatsonHttpMediaType.createAudioRaw(5), IBMWatsonHttpMediaType.AUDIO_RAW + '; rate=5');
     System.assertEquals(mediaType.equals(obj), false);
     System.assertEquals(mediaType.hashCode(), 817335912);
-    
-    Test.stopTest();  
+
+    Test.stopTest();
   }
-  
+
    /**
    *  Test IBMWatsonMultipartBody.
    *
    */
   static testMethod void testIBMWatsonMultipartBody() {
-    Test.startTest(); 
+    Test.startTest();
     IBMWatsonMultipartBody multipartBody = new IBMWatsonMultipartBody.Builder()
       .setType(IBMWatsonMultipartBody.FORM)
-      .addPart(new Map<String, String>{'test' => 'test','Content-Disposition'=>'Content-Disposition'}, IBMWatsonRequestBody.create())
+      .addPart(new Map<String, String>{'test' => 'test', 'Content-Disposition'=>'Content-Disposition'}, IBMWatsonRequestBody.create())
       .addFormDataPart('key', 'value')
       .build();
     System.assertEquals(IBMWatsonMultipartBody.safelyPad('test', 'test=test=', 'test'), EncodingUtil.base64Encode(blob.valueOf('test test')));
@@ -385,6 +385,6 @@ private class IBMWatsonServiceTest {
     System.assertEquals(multipartBody.parts().size(), 2);
     System.assert(multipartBody.getAllHeaders().get('Content-Type').contains('multipart/form-data; boundary'));
     System.assert(multipartBody.form64().contains(multipartBody.writeBoundary()));
-    Test.stopTest();  
+    Test.stopTest();
   }
 }
