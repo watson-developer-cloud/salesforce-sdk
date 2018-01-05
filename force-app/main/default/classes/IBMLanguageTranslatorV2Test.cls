@@ -120,13 +120,10 @@ private class IBMLanguageTranslatorV2Test {
       .baseModelId('en-es')
       .forcedGlossary(forcedGlossary)
       .forcedGlossaryFilename('glossary.txt')
-      .forcedGlossaryContentType('text/plain')
       .parallelCorpus(parallelCorpus)
       .parallelCorpusFilename('parallelCorpus.txt')
-      .parallelCorpusContentType('text/plain')
       .monolingualCorpus(monolingualCorpus)
       .monolingualCorpusFilename('monolingualCorpus.txt')
-      .monolingualCorpusContentType('text/plain')
       .build();
     IBMLanguageTranslatorV2Models.TranslationModel TranslationModel =
       service.createModel(createModelOptions);

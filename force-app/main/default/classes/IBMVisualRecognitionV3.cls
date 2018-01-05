@@ -145,15 +145,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     multipartBuilder.addFormDataPart('name', createClassifierOptions.name());
     // Classes
-    IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
-      createClassifierOptions.classnamePositiveExamples(),
-      'application/octet-stream'
-    );
     for (String className : createClassifierOptions.classNames()) {
-      multipartBuilder.addFormDataPart(
-        'classname_positive_examples',createClassifierOptions.classnamePositiveExamplesFilename(),
-        fileBody
-      );
       String dataName = className + '_positive_examples';
       IBMWatsonFile positiveExamples = createClassifierOptions.positiveExamplesByClassName(className);
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
@@ -233,26 +225,11 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     // Classes
-    if (updateClassifierOptions.classnamePositiveExamples() != null) {
-      for (String className : updateClassifierOptions.classNames()) {
-        IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
-          updateClassifierOptions.classnamePositiveExamples(),
-          'application/octet-stream'
-        );
-        String dataName = className + '_positive_examples';
-        multipartBuilder.addFormDataPart(
-          'classname_positive_examples',
-          updateClassifierOptions.classnamePositiveExamplesFilename(),
-          fileBody
-        );
-        IBMWatsonFile positiveExamples =
-          updateClassifierOptions.positiveExamplesByClassName(className);
-        IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
-          positiveExamples,
-          'application/octet-stream'
-        );
-        multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
-      }
+    for (String className : updateClassifierOptions.classNames()) {
+      String dataName = className + '_positive_examples';
+      IBMWatsonFile positiveExamples = updateClassifierOptions.positiveExamplesByClassName(className);
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(positiveExamples, 'application/octet-stream');
+      multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
     }
     if (updateClassifierOptions.negativeExamples() != null) {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateClassifierOptions.negativeExamples(), 'application/octet-stream');

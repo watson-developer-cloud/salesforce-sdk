@@ -426,7 +426,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      * @param audioName the audioName
      */
-    public AddAudioOptionsBuilder(IBMWatsonFile audio, String customizationId, String audioName) {
+    public AddAudioOptionsBuilder(IBMWatsonFile audio, String audioFilename, String customizationId, String audioName) {
       this.audio_serialized_name = audio;		
       this.audio_filename_serialized_name = audioFilename;
       this.content_type_serialized_name = audio.contentType();
