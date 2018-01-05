@@ -162,7 +162,6 @@ public class IBMLanguageTranslatorV2FTest {
       .baseModelId(BaseModelId)
       .forcedGlossary(forcedGlossary)
       .forcedGlossaryFilename(forcedGlossaryAttachment.Name)
-      .forcedGlossaryContentType(forcedGlossaryAttachment.ContentType)
       .build();
 
     IBMLanguageTranslatorV2Models.TranslationModel TranslationModel = service.createModel(createModelOptions);

@@ -960,7 +960,7 @@ public class IBMVisualRecognitionV3Models {
     private CreateClassifierOptionsBuilder(CreateClassifierOptions createClassifierOptions) {
       this();
       name_serialized_name = createClassifierOptions.name_serialized_name;
-      classname_positive_examples_serialized_name.putAll(create_classifier_options.classname_positive_examples_serialized_name);
+      classname_positive_examples_serialized_name.putAll(createClassifierOptions.classname_positive_examples_serialized_name);
       negative_examples_serialized_name = createClassifierOptions.negative_examples_serialized_name;
       negative_examples_filename_serialized_name = createClassifierOptions.negative_examples_filename_serialized_name;
     }
@@ -978,7 +978,7 @@ public class IBMVisualRecognitionV3Models {
      * @param name the name
      * @param classnamePositiveExamples the classnamePositiveExamples
      */
-    public CreateClassifierOptionsBuilder(String name, IBMWatsonFile classnamePositiveExamples) {
+    public CreateClassifierOptionsBuilder(String name, Map<String, IBMWatsonFile> classnamePositiveExamples) {
       this();
       this.name_serialized_name = name;
       this.classname_positive_examples_serialized_name = classnamePositiveExamples;
@@ -2230,7 +2230,7 @@ public class IBMVisualRecognitionV3Models {
     private UpdateClassifierOptionsBuilder(UpdateClassifierOptions updateClassifierOptions) {
       this();
       classifier_id_serialized_name = updateClassifierOptions.classifier_id_serialized_name;
-      classname_positive_examples_serialized_name.putAll(create_classifier_options.classname_positive_examples_serialized_name);
+      classname_positive_examples_serialized_name.putAll(createClassifierOptions.classname_positive_examples_serialized_name);
       negative_examples_serialized_name = updateClassifierOptions.negative_examples_serialized_name;
       negative_examples_filename_serialized_name = updateClassifierOptions.negative_examples_filename_serialized_name;
     }
