@@ -2230,7 +2230,7 @@ public class IBMVisualRecognitionV3Models {
     private UpdateClassifierOptionsBuilder(UpdateClassifierOptions updateClassifierOptions) {
       this();
       classifier_id_serialized_name = updateClassifierOptions.classifier_id_serialized_name;
-      classname_positive_examples_serialized_name.putAll(createClassifierOptions.classname_positive_examples_serialized_name);
+      classname_positive_examples_serialized_name.putAll(updateClassifierOptions.classname_positive_examples_serialized_name);
       negative_examples_serialized_name = updateClassifierOptions.negative_examples_serialized_name;
       negative_examples_filename_serialized_name = updateClassifierOptions.negative_examples_filename_serialized_name;
     }
