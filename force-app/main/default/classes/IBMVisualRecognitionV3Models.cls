@@ -57,7 +57,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the score_serialized_name.
      *
-     * Confidence score for the property. Scores range from 0-1, with a higher score indicating greater correlation.
+     * Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
      *
      * @return the score_serialized_name
      */
@@ -253,9 +253,21 @@ public class IBMVisualRecognitionV3Models {
    * Classify results for multiple images.
    */
   public class ClassifiedImages extends IBMWatsonGenericModel {
+    private Long custom_classes_serialized_name;
     private Long images_processed_serialized_name;
     private List<ClassifiedImage> images_serialized_name;
     private List<WarningInfo> warnings_serialized_name;
+    /**
+     * Gets the custom_classes_serialized_name.
+     *
+     * The number of custom classes identified in the images.
+     *
+     * @return the custom_classes_serialized_name
+     */
+    @AuraEnabled
+    public Long getCustomClasses() {
+      return custom_classes_serialized_name;
+    }
     /**
      * Gets the images_processed_serialized_name.
      *
@@ -288,6 +300,15 @@ public class IBMVisualRecognitionV3Models {
     @AuraEnabled
     public List<WarningInfo> getWarnings() {
       return warnings_serialized_name;
+    }
+
+    /**
+     * Sets the custom_classes_serialized_name.
+     *
+     * @param customClasses the new customClasses
+     */
+    public void setCustomClasses(final long customClasses) {
+      this.custom_classes_serialized_name = customClasses;
     }
 
     /**
@@ -368,7 +389,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the classifier_id_serialized_name.
      *
-     * The ID of the classifier.
+     * The ID of a classifier identified in the image.
      *
      * @return the classifier_id_serialized_name
      */
@@ -551,7 +572,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the classifier_id_serialized_name.
      *
-     * Classifier ID.  Only returned if custom classifier.
+     * The ID of a classifier identified in the image.
      *
      * @return the classifier_id_serialized_name
      */
@@ -562,7 +583,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the classes_serialized_name.
      *
-     * An array of classes within a classifier.
+     * An array of classes within the classifier.
      *
      * @return the classes_serialized_name
      */
@@ -682,7 +703,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the images_file_serialized_name.
      *
-     * An image file (.jpg, .png) or .zip file with images. Include no more than 20 images and limit the .zip file to 5 MB. You can also include images with the `url` property in the **parameters** object.
+     * An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters. You can also include images with the `url` property in the **parameters** object.
      *
      * @return the images_file_serialized_name
      */
@@ -702,7 +723,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the parameters_serialized_name.
      *
-     * Specifies input parameters. The parameter can include these inputs in a JSON object:  - url: A string with the image URL to analyze. You can also include images in the **images_file** parameter. - classifier_ids: An array of classifier IDs to classify the images against. - owners: An array with the values IBM, me, or both to specify which classifiers to run. - threshold: A floating point value that specifies the minimum score a class must have to be displayed in the response.  For example: {"url": "...", "classifier_ids": ["...","..."], "owners": ["IBM", "me"], "threshold": 0.4}.
+     * A JSON object that specifies additional request options. The parameter can be sent as a string or a file, and can include these inputs:  - **url**: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images in the **images_file** parameter. - **threshold**: A floating point value that specifies the minimum score a class must have to be displayed in the response. The default threshold for returning scores from a classifier is `0.5`. Set the threshold to `0.0` to ignore the classification score and return all values. - **owners**: An array of the categories of classifiers to apply. Use `IBM` to classify against the `default` general classifier, and use `me` to classify against your custom classifiers. To analyze the image against both classifier categories, set the value to both `IBM` and `me`. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.      The **classifier_ids** parameter overrides **owners**, so make sure that **classifier_ids** is empty. - **classifier_ids**: Specifies which classifiers to apply and overrides the **owners** parameter. You can specify both custom and built-in classifiers. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.  The following built-in classifier IDs require no training: - `default`: Returns classes from thousands of general tags. - `food`: (Beta) Enhances specificity and accuracy for images of food items. - `explicit`: (Beta) Evaluates whether the image might be pornographic.  Example: `{"classifier_ids":["CarsvsTrucks_1479118188","explicit"],"threshold":0.6}`.
      *
      * @return the parameters_serialized_name
      */
@@ -848,25 +869,35 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the name_serialized_name.
      *
-     * The name of the new classifier. Cannot contain special characters.
+     * The name of the new classifier. Encode special characters in UTF-8.
      *
      * @return the name_serialized_name
      */
     public String name() {
       return name_serialized_name;
     }
+    
     /**
      * Gets the class names.
-     *
-     * A compressed (.zip) file of images that depict the visual subject for a class within the new classifier. Must contain a minimum of 10 images. The swagger limits you to training only one class. To train more classes, use the API functionality.
      *
      * @return the classNames
      */
     public Set<String> classNames() {
       return classname_positive_examples_serialized_name.keySet();
     }
+
     /**
      * Gets the positive examples by class name.
+     *
+     * A .zip file of images that depict the visual subject of a class in the new classifier. 
+     * You can include more than one positive example file in a call. Append
+     * `_positive_examples` to the form name. The prefix is used as the class name. For
+     * example, `goldenretriever_positive_examples` creates the
+     * class **goldenretriever**.  Include at least 10 images in .jpg or .png format. The
+     * minimum recommended image resolution is 32X32 pixels. The maximum number of
+     * images is 10,000 images or 100 MB per .zip file.  Encode special characters in the file
+     * name in UTF-8.  The API explorer limits you to training only one class. To train
+     * more classes, use the API functionality.
      *
      * @param className the class name
      * @return the positiveExamples
@@ -874,10 +905,11 @@ public class IBMVisualRecognitionV3Models {
     public IBMWatsonFile positiveExamplesByClassName(String className) {
       return classname_positive_examples_serialized_name.get(className);
     }
+
     /**
      * Gets the negative_examples_serialized_name.
      *
-     * A compressed (.zip) file of images that do not depict the visual subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
+     * A compressed (.zip) file of images that do not depict the visual subject of any of the classes of the new classifier. Must contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
      *
      * @return the negative_examples_serialized_name
      */
@@ -896,7 +928,9 @@ public class IBMVisualRecognitionV3Models {
     }
     private CreateClassifierOptions(CreateClassifierOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.name_serialized_name, 'name_serialized_name cannot be null');
-      IBMWatsonValidator.isTrue(!builder.classname_positive_examples_serialized_name.isEmpty(), 'To create a classifier, you must supply at least one positive examples file.');
+      IBMWatsonValidator.isTrue(!builder.classname_positive_examples_serialized_name.isEmpty()
+        || (builder.negative_examples_serialized_name != null),
+        'To update a classifier, you must supply at least one positive examples file or a negative examples file.');
       name_serialized_name = builder.name_serialized_name;
       classname_positive_examples_serialized_name = builder.classname_positive_examples_serialized_name;
       negative_examples_serialized_name = builder.negative_examples_serialized_name;
@@ -923,12 +957,12 @@ public class IBMVisualRecognitionV3Models {
     private IBMWatsonFile negative_examples_serialized_name;
     private String negative_examples_filename_serialized_name;
 
-    private CreateClassifierOptionsBuilder(CreateClassifierOptions create_classifier_options) {
+    private CreateClassifierOptionsBuilder(CreateClassifierOptions createClassifierOptions) {
       this();
-      name_serialized_name = create_classifier_options.name_serialized_name;
-      classname_positive_examples_serialized_name.putAll(create_classifier_options.classname_positive_examples_serialized_name);
-      negative_examples_serialized_name = create_classifier_options.negative_examples_serialized_name;
-      negative_examples_filename_serialized_name = create_classifier_options.negative_examples_filename_serialized_name;
+      name_serialized_name = createClassifierOptions.name_serialized_name;
+      classname_positive_examples_serialized_name.putAll(createClassifierOptions.classname_positive_examples_serialized_name);
+      negative_examples_serialized_name = createClassifierOptions.negative_examples_serialized_name;
+      negative_examples_filename_serialized_name = createClassifierOptions.negative_examples_filename_serialized_name;
     }
 
     /**
@@ -941,18 +975,19 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param name_serialized_name the name_serialized_name
-     * @param classname_positive_examples_serialized_name the classname_positive_examples_serialized_name
+     * @param name the name
+     * @param classnamePositiveExamples the classnamePositiveExamples
      */
-    public CreateClassifierOptionsBuilder(String name_serialized_name) {
+    public CreateClassifierOptionsBuilder(String name, Map<String, IBMWatsonFile> classnamePositiveExamples) {
       this();
-      this.name_serialized_name = name_serialized_name;
+      this.name_serialized_name = name;
+      this.classname_positive_examples_serialized_name = classnamePositiveExamples;
     }
 
     /**
      * Builds a CreateClassifierOptions.
      *
-     * @return the create_classifier_options
+     * @return the createClassifierOptions
      */
     public CreateClassifierOptions build() {
       return new CreateClassifierOptions(this);
@@ -961,48 +996,49 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Set the name_serialized_name.
      *
-     * @param name_serialized_name the name_serialized_name
+     * @param name the name
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder name(String name_serialized_name) {
-      this.name_serialized_name = name_serialized_name;
+    public CreateClassifierOptionsBuilder name(String name) {
+      this.name_serialized_name = name;
       return this;
     }
 
     /**
-     * Adds a classifier with a name and positive examples. If the classifier name is already contained, the old
-     * positive examples are replaced by the specified value.
+     * Adds a classifier with a name and positive examples. If the classifier name is 
+     * already contained, the old positive examples are replaced by the specified value.
      *
      * @param className the class name
      * @param positiveExamples the positive examples
      * @return the builder
      */
-    public CreateClassifierOptionsBuilder addClass(String className, IBMWatsonFile positiveExamples) {
+    public CreateClassifierOptionsBuilder addClass(String className,
+      IBMWatsonFile positiveExamples) {
       IBMWatsonValidator.notNull(className, 'className cannot be null');
       IBMWatsonValidator.notNull(positiveExamples, 'positiveExamples cannot be null');
       classname_positive_examples_serialized_name.put(className, positiveExamples);
       return this;
-    } 
+    }
 
     /**
      * Set the negative_examples_serialized_name.
      *
-     * @param negative_examples_serialized_name the negative_examples_serialized_name
+     * @param negativeExamples the negativeExamples
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder negativeExamples(IBMWatsonFile negative_examples_serialized_name) {
-      this.negative_examples_serialized_name = negative_examples_serialized_name;
+    public CreateClassifierOptionsBuilder negativeExamples(IBMWatsonFile negativeExamples) {
+      this.negative_examples_serialized_name = negativeExamples;
       return this;
     }
 
     /**
      * Set the negative_examples_filename_serialized_name.
      *
-     * @param negative_examples_filename_serialized_name the negative_examples_filename_serialized_name
+     * @param negativeExamplesFilename the negativeExamplesFilename
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder negativeExamplesFilename(String negative_examples_filename_serialized_name) {
-      this.negative_examples_filename_serialized_name = negative_examples_filename_serialized_name;
+    public CreateClassifierOptionsBuilder negativeExamplesFilename(String negativeExamplesFilename) {
+      this.negative_examples_filename_serialized_name = negativeExamplesFilename;
       return this;
     }
   }
@@ -1115,7 +1151,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the parameters_serialized_name.
      *
-     * A JSON string containing the image URL to analyze.   For example: {"url": "..."}.
+     * A JSON object that specifies a single image (.jpg, .png) to analyze by URL. The parameter can be sent as a string or a file.  Example: `{"url":"http://www.example.com/images/myimage.jpg"}`.
      *
      * @return the parameters_serialized_name
      */
@@ -1529,7 +1565,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the score_serialized_name.
      *
-     * Confidence score for the property. Scores range from 0-1, with a higher score indicating greater correlation.
+     * Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
      *
      * @return the score_serialized_name
      */
@@ -1596,7 +1632,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the score_serialized_name.
      *
-     * Confidence score for the property. Scores range from 0-1, with a higher score indicating greater correlation.
+     * Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
      *
      * @return the score_serialized_name
      */
@@ -1655,7 +1691,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the score_serialized_name.
      *
-     * Confidence score for the property. Scores range from 0-1, with a higher score indicating greater correlation.
+     * Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
      *
      * @return the score_serialized_name
      */
@@ -2034,7 +2070,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the verbose_serialized_name.
      *
-     * Specify true to return classifier details. Omit this parameter to return a brief list of classifiers.
+     * Specify `true` to return classifier details. Omit this parameter to return a brief list of classifiers.
      *
      * @return the verbose_serialized_name
      */
@@ -2111,27 +2147,39 @@ public class IBMVisualRecognitionV3Models {
     public String classifierId() {
       return classifier_id_serialized_name;
     }
+
     /**
      * Gets the class names.
      *
-     * @return the contentItems
+     * @return the classNames
      */
     public Set<String> classNames() {
       return classname_positive_examples_serialized_name.keySet();
     }
+
     /**
      * Gets the positive examples by class name.
      *
+     * A .zip file of images that depict the visual subject of a class in the new classifier. 
+     * You can include more than one positive example file in a call. Append
+     * `_positive_examples` to the form name. The prefix is used as the class name. For
+     * example, `goldenretriever_positive_examples` creates the
+     * class **goldenretriever**.  Include at least 10 images in .jpg or .png format. The
+     * minimum recommended image resolution is 32X32 pixels. The maximum number of
+     * images is 10,000 images or 100 MB per .zip file.  Encode special characters in the file
+     * name in UTF-8.
+     *
      * @param className the class name
-     * @return the classes
+     * @return the positiveExamples
      */
     public IBMWatsonFile positiveExamplesByClassName(String className) {
       return classname_positive_examples_serialized_name.get(className);
     }
+
     /**
      * Gets the negative_examples_serialized_name.
      *
-     * A compressed (.zip) file of images that do not depict the visual subject of any of the classes of the new classifier. Must contain a minimum of 10 images.
+     * A compressed (.zip) file of images that do not depict the visual subject of any of the classes of the new classifier. Must contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
      *
      * @return the negative_examples_serialized_name
      */
@@ -2150,7 +2198,8 @@ public class IBMVisualRecognitionV3Models {
     }
     private UpdateClassifierOptions(UpdateClassifierOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.classifier_id_serialized_name, 'classifier_id_serialized_name cannot be empty');
-      IBMWatsonValidator.isTrue(!builder.classname_positive_examples_serialized_name.isEmpty() || (builder.negative_examples_serialized_name != null), 
+      IBMWatsonValidator.isTrue(!builder.classname_positive_examples_serialized_name.isEmpty()
+        || (builder.negative_examples_serialized_name != null),
         'To update a classifier, you must supply at least one positive examples file or a negative examples file.');
       classifier_id_serialized_name = builder.classifier_id_serialized_name;
       classname_positive_examples_serialized_name = builder.classname_positive_examples_serialized_name;
@@ -2178,12 +2227,12 @@ public class IBMVisualRecognitionV3Models {
     private IBMWatsonFile negative_examples_serialized_name;
     private String negative_examples_filename_serialized_name;
 
-    private UpdateClassifierOptionsBuilder(UpdateClassifierOptions update_classifier_options) {
+    private UpdateClassifierOptionsBuilder(UpdateClassifierOptions updateClassifierOptions) {
       this();
-      classifier_id_serialized_name = update_classifier_options.classifier_id_serialized_name;
-      classname_positive_examples_serialized_name.putAll(update_classifier_options.classname_positive_examples_serialized_name);
-      negative_examples_serialized_name = update_classifier_options.negative_examples_serialized_name;
-      negative_examples_filename_serialized_name = update_classifier_options.negative_examples_filename_serialized_name;
+      classifier_id_serialized_name = updateClassifierOptions.classifier_id_serialized_name;
+      classname_positive_examples_serialized_name.putAll(updateClassifierOptions.classname_positive_examples_serialized_name);
+      negative_examples_serialized_name = updateClassifierOptions.negative_examples_serialized_name;
+      negative_examples_filename_serialized_name = updateClassifierOptions.negative_examples_filename_serialized_name;
     }
 
     /**
@@ -2196,17 +2245,17 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param classifier_id_serialized_name the classifier_id_serialized_name
+     * @param classifierId the classifierId
      */
-    public UpdateClassifierOptionsBuilder(String classifier_id_serialized_name) {
+    public UpdateClassifierOptionsBuilder(String classifierId) {
       this();
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+      this.classifier_id_serialized_name = classifierId;
     }
 
     /**
      * Builds a UpdateClassifierOptions.
      *
-     * @return the update_classifier_options
+     * @return the updateClassifierOptions
      */
     public UpdateClassifierOptions build() {
       return new UpdateClassifierOptions(this);
@@ -2215,48 +2264,49 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Set the classifier_id_serialized_name.
      *
-     * @param classifier_id_serialized_name the classifier_id_serialized_name
+     * @param classifierId the classifierId
      * @return the UpdateClassifierOptions builder
      */
-    public UpdateClassifierOptionsBuilder classifierId(String classifier_id_serialized_name) {
-      this.classifier_id_serialized_name = classifier_id_serialized_name;
+    public UpdateClassifierOptionsBuilder classifierId(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
       return this;
     }
 
     /**
-     * Adds a classifier with a name and positive examples. If the classifier name is already contained, the old
-     * positive examples are replaced by the specified value.
+     * Adds a classifier with a name and positive examples. If the classifier name is 
+     * already contained, the old positive examples are replaced by the specified value.
      *
      * @param className the class name
      * @param positiveExamples the positive examples
-     * @return the UpdateClassifierOptions builder
+     * @return the builder
      */
-    public UpdateClassifierOptionsBuilder addClass(String className, IBMWatsonFile positiveExamples) {
+    public UpdateClassifierOptionsBuilder addClass(String className,
+      IBMWatsonFile positiveExamples) {
       IBMWatsonValidator.notNull(className, 'className cannot be null');
       IBMWatsonValidator.notNull(positiveExamples, 'positiveExamples cannot be null');
       classname_positive_examples_serialized_name.put(className, positiveExamples);
       return this;
-    }
+    } 
 
     /**
      * Set the negative_examples_serialized_name.
      *
-     * @param negative_examples_serialized_name the negative_examples_serialized_name
+     * @param negativeExamples the negativeExamples
      * @return the UpdateClassifierOptions builder
      */
-    public UpdateClassifierOptionsBuilder negativeExamples(IBMWatsonFile negative_examples_serialized_name) {
-      this.negative_examples_serialized_name = negative_examples_serialized_name;
+    public UpdateClassifierOptionsBuilder negativeExamples(IBMWatsonFile negativeExamples) {
+      this.negative_examples_serialized_name = negativeExamples;
       return this;
     }
 
     /**
      * Set the negative_examples_filename_serialized_name.
      *
-     * @param negative_examples_filename_serialized_name the negative_examples_filename_serialized_name
+     * @param negativeExamplesFilename the negativeExamplesFilename
      * @return the UpdateClassifierOptions builder
      */
-    public UpdateClassifierOptionsBuilder negativeExamplesFilename(String negative_examples_filename_serialized_name) {
-      this.negative_examples_filename_serialized_name = negative_examples_filename_serialized_name;
+    public UpdateClassifierOptionsBuilder negativeExamplesFilename(String negativeExamplesFilename) {
+      this.negative_examples_filename_serialized_name = negativeExamplesFilename;
       return this;
     }
   }

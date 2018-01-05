@@ -166,6 +166,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(updateWorkspaceOptions, 'updateWorkspaceOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}', new String[]{ updateWorkspaceOptions.workspaceId() }));
     builder.query('version', versionDate);
+    if (updateWorkspaceOptions.append() != null) {
+      builder.query('append', String.valueOf(updateWorkspaceOptions.append()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (updateWorkspaceOptions.name() != null) {
       contentJson.put('name', updateWorkspaceOptions.name());
@@ -824,7 +827,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/dialog_nodes', new String[]{ createDialogNodeOptions.workspaceId() }));
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('dialog_node', createDialogNodeOptions.dialogNode());
+    if (createDialogNodeOptions.dialogNode() != null) {
+      contentJson.put('dialog_node', createDialogNodeOptions.dialogNode());
+    }
     if (createDialogNodeOptions.description() != null) {
       contentJson.put('description', createDialogNodeOptions.description());
     }
@@ -981,10 +986,40 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (updateDialogNodeOptions.newParent() != null) {
       contentJson.put('parent', updateDialogNodeOptions.newParent());
     }
-    contentJson.put('dialog_node', updateDialogNodeOptions.newDialogNode());
+    if (updateDialogNodeOptions.newDialogNode() != null) {
+      contentJson.put('dialog_node', updateDialogNodeOptions.newDialogNode());
+    }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMConversationV1Models.DialogNode) createServiceCall(builder.build(), IBMConversationV1Models.DialogNode.class);
+  }
+
+  /**
+   * List log events in all workspaces.
+   *
+   * List log events in all workspaces in the service instance.
+   *
+   * @param listAllLogsOptions the {@link IBMConversationV1Models.ListAllLogsOptions} containing the options for the call
+   * @return the {@link IBMConversationV1Models.LogCollection} with the response
+   */
+  public IBMConversationV1Models.LogCollection listAllLogs(IBMConversationV1Models.ListAllLogsOptions listAllLogsOptions) {
+    IBMWatsonValidator.notNull(listAllLogsOptions, 'listAllLogsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/logs');
+    builder.query('version', versionDate);
+    if (listAllLogsOptions.sortField() != null) {
+      builder.query('sort', listAllLogsOptions.sortField());
+    }
+    if (listAllLogsOptions.filter() != null) {
+      builder.query('filter', listAllLogsOptions.filter());
+    }
+    if (listAllLogsOptions.pageLimit() != null) {
+      builder.query('page_limit', String.valueOf(listAllLogsOptions.pageLimit()));
+    }
+    if (listAllLogsOptions.cursor() != null) {
+      builder.query('cursor', listAllLogsOptions.cursor());
+    }
+
+    return (IBMConversationV1Models.LogCollection) createServiceCall(builder.build(), IBMConversationV1Models.LogCollection.class);
   }
 
   /**

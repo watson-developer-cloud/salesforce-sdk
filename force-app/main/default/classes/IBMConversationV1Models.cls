@@ -1,5 +1,63 @@
 public class IBMConversationV1Models {
   /**
+   * CaptureGroup.
+   */
+  public class CaptureGroup extends IBMWatsonGenericModel {
+    private String group_serialized_name;
+    private List<Long> location_serialized_name;
+    /**
+     * Gets the group_serialized_name.
+     *
+     * A recognized capture group for the entity.
+     *
+     * @return the group_serialized_name
+     */
+    @AuraEnabled
+    public String getGroup() {
+      return group_serialized_name;
+    }
+    /**
+     * Gets the location_serialized_name.
+     *
+     * Zero-based character offsets that indicate where the entity value begins and ends in the input text.
+     *
+     * @return the location_serialized_name
+     */
+    @AuraEnabled
+    public List<Long> getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
+     * Sets the group_serialized_name.
+     *
+     * @param groupVar the new groupVar
+     */
+    public void setGroup(final String groupVar) {
+      this.group_serialized_name = groupVar;
+    }
+
+    /**
+     * Sets the location_serialized_name.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final List<Long> location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      CaptureGroup ret = (CaptureGroup) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
    * Context information for the message. Include the context from the previous response to maintain state for the conversation.
    */
   public class Context extends IBMWatsonDynamicModel {
@@ -985,7 +1043,6 @@ public class IBMConversationV1Models {
     }
     private CreateDialogNodeOptions(CreateDialogNodeOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notNull(builder.dialog_node_serialized_name, 'dialog_node_serialized_name cannot be null');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       dialog_node_serialized_name = builder.dialog_node_serialized_name;
       description_serialized_name = builder.description_serialized_name;
@@ -1062,11 +1119,9 @@ public class IBMConversationV1Models {
      * Instantiates a new builder with required properties.
      *
      * @param workspaceId the workspaceId
-     * @param dialogNode the dialogNode
      */
-    public CreateDialogNodeOptionsBuilder(String workspaceId, String dialogNode) {
+    public CreateDialogNodeOptionsBuilder(String workspaceId) {
       this.workspace_id_serialized_name = workspaceId;
-      this.dialog_node_serialized_name = dialogNode;
     }
 
     /**
@@ -6604,6 +6659,158 @@ public class IBMConversationV1Models {
   }
 
   /**
+   * The listAllLogs options.
+   */
+  public class ListAllLogsOptions {
+    private String sort_serialized_name;
+    private String filter_serialized_name;
+    private Long page_limit_serialized_name;
+    private String cursor_serialized_name;
+    /**
+     * Gets the sort_serialized_name.
+     *
+     * Sorts the response according to the value of the specified property, in ascending or descending order.
+     *
+     * @return the sort_serialized_name
+     */
+    public String sortField() {
+      return sort_serialized_name;
+    }
+    /**
+     * Gets the filter_serialized_name.
+     *
+     * A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter query that includes a value for `language`, as well as a value for `workspace_id` or `request.context.metadata.deployment`. For more information, see the [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
+     *
+     * @return the filter_serialized_name
+     */
+    public String filter() {
+      return filter_serialized_name;
+    }
+    /**
+     * Gets the page_limit_serialized_name.
+     *
+     * The number of records to return in each page of results. The default page limit is 100.
+     *
+     * @return the page_limit_serialized_name
+     */
+    public Long pageLimit() {
+      return page_limit_serialized_name;
+    }
+    /**
+     * Gets the cursor_serialized_name.
+     *
+     * A token identifying the last value from the previous page of results.
+     *
+     * @return the cursor_serialized_name
+     */
+    public String cursor() {
+      return cursor_serialized_name;
+    }
+    private ListAllLogsOptions(ListAllLogsOptionsBuilder builder) {
+      IBMWatsonValidator.notNull(builder.filter_serialized_name, 'filter_serialized_name cannot be null');
+      sort_serialized_name = builder.sort_serialized_name;
+      filter_serialized_name = builder.filter_serialized_name;
+      page_limit_serialized_name = builder.page_limit_serialized_name;
+      cursor_serialized_name = builder.cursor_serialized_name;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ListAllLogsOptions builder
+     */
+    public ListAllLogsOptionsBuilder newBuilder() {
+      return new ListAllLogsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * ListAllLogsOptions Builder.
+   */
+  public class ListAllLogsOptionsBuilder {
+    private String sort_serialized_name;
+    private String filter_serialized_name;
+    private Long page_limit_serialized_name;
+    private String cursor_serialized_name;
+
+    private ListAllLogsOptionsBuilder(ListAllLogsOptions listAllLogsOptions) {
+      sort_serialized_name = listAllLogsOptions.sort_serialized_name;
+      filter_serialized_name = listAllLogsOptions.filter_serialized_name;
+      page_limit_serialized_name = listAllLogsOptions.page_limit_serialized_name;
+      cursor_serialized_name = listAllLogsOptions.cursor_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ListAllLogsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param filter the filter
+     */
+    public ListAllLogsOptionsBuilder(String filter) {
+      this.filter_serialized_name = filter;
+    }
+
+    /**
+     * Builds a ListAllLogsOptions.
+     *
+     * @return the listAllLogsOptions
+     */
+    public ListAllLogsOptions build() {
+      return new ListAllLogsOptions(this);
+    }
+
+    /**
+     * Set the sort_serialized_name.
+     *
+     * @param sortVar the sortVar
+     * @return the ListAllLogsOptions builder
+     */
+    public ListAllLogsOptionsBuilder sortField(String sortVar) {
+      this.sort_serialized_name = sortVar;
+      return this;
+    }
+
+    /**
+     * Set the filter_serialized_name.
+     *
+     * @param filter the filter
+     * @return the ListAllLogsOptions builder
+     */
+    public ListAllLogsOptionsBuilder filter(String filter) {
+      this.filter_serialized_name = filter;
+      return this;
+    }
+
+    /**
+     * Set the page_limit_serialized_name.
+     *
+     * @param pageLimit the pageLimit
+     * @return the ListAllLogsOptions builder
+     */
+    public ListAllLogsOptionsBuilder pageLimit(Long pageLimit) {
+      this.page_limit_serialized_name = pageLimit;
+      return this;
+    }
+
+    /**
+     * Set the cursor_serialized_name.
+     *
+     * @param cursor the cursor
+     * @return the ListAllLogsOptions builder
+     */
+    public ListAllLogsOptionsBuilder cursor(String cursor) {
+      this.cursor_serialized_name = cursor;
+      return this;
+    }
+  }
+
+  /**
    * The listCounterexamples options.
    */
   public class ListCounterexamplesOptions {
@@ -9609,6 +9816,7 @@ public class IBMConversationV1Models {
     private String value_serialized_name;
     private Double confidence_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
+    private List<CaptureGroup> groups_serialized_name;
     private Map<String, Object> additional_properties_serialized_name;
 
     /**
@@ -9659,6 +9867,16 @@ public class IBMConversationV1Models {
     @AuraEnabled
     public IBMWatsonMapModel getMetadata() {
       return metadata_serialized_name;
+    }
+
+    /**
+     * Gets the groups_serialized_name.
+     *
+     * @return the groups_serialized_name
+     */
+    @AuraEnabled
+    public List<CaptureGroup> getGroups() {
+      return groups_serialized_name;
     }
 
     /**
@@ -9716,6 +9934,15 @@ public class IBMConversationV1Models {
       this.metadata_serialized_name = metadata_serialized_name;
     }
 
+    /**
+     * Sets the groups_serialized_name.
+     *
+     * @param groups_serialized_name the new groups_serialized_name
+     */
+    public void setGroups(final List<CaptureGroup> groups_serialized_name) {
+      this.groups_serialized_name = groups_serialized_name;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -9726,6 +9953,19 @@ public class IBMConversationV1Models {
       // calling custom deserializer for metadata_serialized_name
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
+
+      // calling custom deserializer for groups_serialized_name
+      List<CaptureGroup> newGroups = new List<CaptureGroup>();
+      List<CaptureGroup> deserializedGroups = ret.getGroups();
+      if (deserializedGroups != null) {
+        for (Integer i = 0; i < deserializedGroups.size(); i++) {
+          CaptureGroup currentItem = ret.getGroups().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('groups_serialized_name');
+          CaptureGroup newItem = (CaptureGroup) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CaptureGroup.class);
+          newGroups.add(newItem);
+        }
+        ret.setGroups(newGroups);
+      }
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
@@ -10158,7 +10398,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_type_serialized_name.
      *
-     * How the node is processed.
+     * How the dialog node is processed.
      *
      * @return the new_type_serialized_name
      */
@@ -10298,7 +10538,6 @@ public class IBMConversationV1Models {
     private UpdateDialogNodeOptions(UpdateDialogNodeOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.dialog_node_serialized_name, 'dialog_node_serialized_name cannot be empty');
-      IBMWatsonValidator.notNull(builder.new_dialog_node_serialized_name, 'new_dialog_node_serialized_name cannot be null');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       dialog_node_serialized_name = builder.dialog_node_serialized_name;
       new_type_serialized_name = builder.new_type_serialized_name;
@@ -10379,12 +10618,10 @@ public class IBMConversationV1Models {
      *
      * @param workspaceId the workspaceId
      * @param dialogNode the dialogNode
-     * @param newDialogNode the newDialogNode
      */
-    public UpdateDialogNodeOptionsBuilder(String workspaceId, String dialogNode, String newDialogNode) {
+    public UpdateDialogNodeOptionsBuilder(String workspaceId, String dialogNode) {
       this.workspace_id_serialized_name = workspaceId;
       this.dialog_node_serialized_name = dialogNode;
-      this.new_dialog_node_serialized_name = newDialogNode;
     }
 
     /**
@@ -11679,6 +11916,7 @@ public class IBMConversationV1Models {
     private List<CreateCounterexample> counterexamples_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
+    private Boolean append_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -11779,6 +12017,16 @@ public class IBMConversationV1Models {
     public Boolean learningOptOut() {
       return learning_opt_out_serialized_name;
     }
+    /**
+     * Gets the append_serialized_name.
+     *
+     * Specifies that the elements included in the request body are to be appended to the existing data in the workspace. The default value is `false`.
+     *
+     * @return the append_serialized_name
+     */
+    public Boolean append() {
+      return append_serialized_name;
+    }
     private UpdateWorkspaceOptions(UpdateWorkspaceOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
@@ -11791,6 +12039,7 @@ public class IBMConversationV1Models {
       counterexamples_serialized_name = builder.counterexamples_serialized_name;
       metadata_serialized_name = builder.metadata_serialized_name;
       learning_opt_out_serialized_name = builder.learning_opt_out_serialized_name;
+      append_serialized_name = builder.append_serialized_name;
     }
 
     /**
@@ -11818,6 +12067,7 @@ public class IBMConversationV1Models {
     private List<CreateCounterexample> counterexamples_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
+    private Boolean append_serialized_name;
 
     private UpdateWorkspaceOptionsBuilder(UpdateWorkspaceOptions updateWorkspaceOptions) {
       workspace_id_serialized_name = updateWorkspaceOptions.workspace_id_serialized_name;
@@ -11830,6 +12080,7 @@ public class IBMConversationV1Models {
       counterexamples_serialized_name = updateWorkspaceOptions.counterexamples_serialized_name;
       metadata_serialized_name = updateWorkspaceOptions.metadata_serialized_name;
       learning_opt_out_serialized_name = updateWorkspaceOptions.learning_opt_out_serialized_name;
+      append_serialized_name = updateWorkspaceOptions.append_serialized_name;
     }
 
     /**
@@ -12027,6 +12278,17 @@ public class IBMConversationV1Models {
      */
     public UpdateWorkspaceOptionsBuilder learningOptOut(Boolean learningOptOut) {
       this.learning_opt_out_serialized_name = learningOptOut;
+      return this;
+    }
+
+    /**
+     * Set the append_serialized_name.
+     *
+     * @param append the append
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public UpdateWorkspaceOptionsBuilder append(Boolean append) {
+      this.append_serialized_name = append;
       return this;
     }
   }
