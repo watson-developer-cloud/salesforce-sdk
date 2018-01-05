@@ -7689,4 +7689,57 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
   }
+
+  public class Transcript extends IBMWatsonGenericModel {
+    private Boolean ffinal_serialize_name;
+    private List<SpeechAlternative> alternatives_serialized_name;
+    private Map<String, List<KeywordResult>> keyword_results_serialized_name;
+    private List<SpeechWordAlternatives> word_alternatives_serialized_name;
+
+    @AuraEnabled
+    public Boolean getFinal() {
+      return ffinal_serialize_name;
+    }
+
+    @AuraEnabled
+    public List<SpeechAlternative> getAlternatives() {
+      return alternatives_serialized_name;
+    }
+
+    @AuraEnabled
+    public Map<String, List<KeywordResult>> getKeywordResults() {
+      return keyword_results_serialized_name;
+    }
+
+    @AuraEnabled
+    public List<SpeechWordAlternatives> getWordAlternatives() {
+      return word_alternatives_serialized_name;
+    }
+
+    public void setFinal(final Boolean isFinal) {
+      this.ffinal_serialize_name = isFinal;
+    }
+    
+    public void setAlternatives(final List<SpeechAlternative> alternatives) {
+      this.alternatives_serialized_name = alternatives;
+    }
+
+    public void setKeywordResults(final Map<String, List<KeywordResult>> keywordResults) {
+      this.keyword_results_serialized_name = keywordResults;
+    }
+
+    public void setWordAlternatives(final List<SpeechWordAlternatives> wordAlternatives) {
+      this.word_alternatives_serialized_name = wordAlternatives;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Transcript ret = (Transcript) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
 }
