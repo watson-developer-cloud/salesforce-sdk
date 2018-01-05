@@ -1397,6 +1397,7 @@ public class IBMTextToSpeechV1Models {
    */
   public class SynthesizeOptions {
     private String accept_serialized_name;
+    private String accept_serialized_name;
     private String voice_serialized_name;
     private String customization_id_serialized_name;
     private String text_serialized_name;
@@ -1404,6 +1405,16 @@ public class IBMTextToSpeechV1Models {
      * Gets the accept_serialized_name.
      *
      * The requested audio format (MIME type) of the audio. You can use this header or the `accept` query parameter to specify the audio format. (For the `audio/l16` format, you can optionally specify `endianness=big-endian` or `endianness=little-endian`; the default is little endian.).
+     *
+     * @return the accept_serialized_name
+     */
+    public String accept() {
+      return accept_serialized_name;
+    }
+    /**
+     * Gets the accept_serialized_name.
+     *
+     * The requested audio format (MIME type) of the audio. You can use this query parameter or the `Accept` header to specify the audio format. (For the `audio/l16` format, you can optionally specify `endianness=big-endian` or `endianness=little-endian`; the default is little endian.).
      *
      * @return the accept_serialized_name
      */
@@ -1443,6 +1454,7 @@ public class IBMTextToSpeechV1Models {
     private SynthesizeOptions(SynthesizeOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.text_serialized_name, 'text_serialized_name cannot be null');
       accept_serialized_name = builder.accept_serialized_name;
+      accept_serialized_name = builder.accept_serialized_name;
       voice_serialized_name = builder.voice_serialized_name;
       customization_id_serialized_name = builder.customization_id_serialized_name;
       text_serialized_name = builder.text_serialized_name;
@@ -1464,11 +1476,13 @@ public class IBMTextToSpeechV1Models {
    */
   public class SynthesizeOptionsBuilder {
     private String accept_serialized_name;
+    private String accept_serialized_name;
     private String voice_serialized_name;
     private String customization_id_serialized_name;
     private String text_serialized_name;
 
     private SynthesizeOptionsBuilder(SynthesizeOptions synthesizeOptions) {
+      accept_serialized_name = synthesizeOptions.accept_serialized_name;
       accept_serialized_name = synthesizeOptions.accept_serialized_name;
       voice_serialized_name = synthesizeOptions.voice_serialized_name;
       customization_id_serialized_name = synthesizeOptions.customization_id_serialized_name;
@@ -1497,6 +1511,17 @@ public class IBMTextToSpeechV1Models {
      */
     public SynthesizeOptions build() {
       return new SynthesizeOptions(this);
+    }
+
+    /**
+     * Set the accept_serialized_name.
+     *
+     * @param accept the accept
+     * @return the SynthesizeOptions builder
+     */
+    public SynthesizeOptionsBuilder accept(String accept) {
+      this.accept_serialized_name = accept;
+      return this;
     }
 
     /**

@@ -11,9 +11,6 @@ public class IBMLanguageTranslatorV2Models {
     private String parallel_corpus_filename_serialized_name;
     private IBMWatsonFile monolingual_corpus_serialized_name;
     private String monolingual_corpus_filename_serialized_name;
-    private String forced_glossary_content_type_serialized_name;
-    private String parallel_corpus_content_type_serialized_name;
-    private String monolingual_corpus_content_type_serialized_name;
     /**
      * Gets the base_model_id_serialized_name.
      *
@@ -94,36 +91,6 @@ public class IBMLanguageTranslatorV2Models {
     public String monolingualCorpusFilename() {
       return monolingual_corpus_filename_serialized_name;
     }
-    /**
-     * Gets the forced_glossary_content_type_serialized_name.
-     *
-     * The content type of forced_glossary.
-     *
-     * @return the forced_glossary_content_type_serialized_name
-     */
-    public String forcedGlossaryContentType() {
-      return forced_glossary_content_type_serialized_name;
-    }
-    /**
-     * Gets the parallel_corpus_content_type_serialized_name.
-     *
-     * The content type of parallel_corpus.
-     *
-     * @return the parallel_corpus_content_type_serialized_name
-     */
-    public String parallelCorpusContentType() {
-      return parallel_corpus_content_type_serialized_name;
-    }
-    /**
-     * Gets the monolingual_corpus_content_type_serialized_name.
-     *
-     * The content type of monolingual_corpus.
-     *
-     * @return the monolingual_corpus_content_type_serialized_name
-     */
-    public String monolingualCorpusContentType() {
-      return monolingual_corpus_content_type_serialized_name;
-    }
     private CreateModelOptions(CreateModelOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.base_model_id_serialized_name, 'base_model_id_serialized_name cannot be null');
       base_model_id_serialized_name = builder.base_model_id_serialized_name;
@@ -134,9 +101,6 @@ public class IBMLanguageTranslatorV2Models {
       parallel_corpus_filename_serialized_name = builder.parallel_corpus_filename_serialized_name;
       monolingual_corpus_serialized_name = builder.monolingual_corpus_serialized_name;
       monolingual_corpus_filename_serialized_name = builder.monolingual_corpus_filename_serialized_name;
-      forced_glossary_content_type_serialized_name = builder.forced_glossary_content_type_serialized_name;
-      parallel_corpus_content_type_serialized_name = builder.parallel_corpus_content_type_serialized_name;
-      monolingual_corpus_content_type_serialized_name = builder.monolingual_corpus_content_type_serialized_name;
     }
 
     /**
@@ -162,9 +126,6 @@ public class IBMLanguageTranslatorV2Models {
     private String parallel_corpus_filename_serialized_name;
     private IBMWatsonFile monolingual_corpus_serialized_name;
     private String monolingual_corpus_filename_serialized_name;
-    private String forced_glossary_content_type_serialized_name;
-    private String parallel_corpus_content_type_serialized_name;
-    private String monolingual_corpus_content_type_serialized_name;
 
     private CreateModelOptionsBuilder(CreateModelOptions createModelOptions) {
       base_model_id_serialized_name = createModelOptions.base_model_id_serialized_name;
@@ -175,9 +136,6 @@ public class IBMLanguageTranslatorV2Models {
       parallel_corpus_filename_serialized_name = createModelOptions.parallel_corpus_filename_serialized_name;
       monolingual_corpus_serialized_name = createModelOptions.monolingual_corpus_serialized_name;
       monolingual_corpus_filename_serialized_name = createModelOptions.monolingual_corpus_filename_serialized_name;
-      forced_glossary_content_type_serialized_name = createModelOptions.forced_glossary_content_type_serialized_name;
-      parallel_corpus_content_type_serialized_name = createModelOptions.parallel_corpus_content_type_serialized_name;
-      monolingual_corpus_content_type_serialized_name = createModelOptions.monolingual_corpus_content_type_serialized_name;
     }
 
     /**
@@ -289,39 +247,6 @@ public class IBMLanguageTranslatorV2Models {
      */
     public CreateModelOptionsBuilder monolingualCorpusFilename(String monolingualCorpusFilename) {
       this.monolingual_corpus_filename_serialized_name = monolingualCorpusFilename;
-      return this;
-    }
-
-    /**
-     * Set the forced_glossary_content_type_serialized_name.
-     *
-     * @param forcedGlossaryContentType the forcedGlossaryContentType
-     * @return the CreateModelOptions builder
-     */
-    public CreateModelOptionsBuilder forcedGlossaryContentType(String forcedGlossaryContentType) {
-      this.forced_glossary_content_type_serialized_name = forcedGlossaryContentType;
-      return this;
-    }
-
-    /**
-     * Set the parallel_corpus_content_type_serialized_name.
-     *
-     * @param parallelCorpusContentType the parallelCorpusContentType
-     * @return the CreateModelOptions builder
-     */
-    public CreateModelOptionsBuilder parallelCorpusContentType(String parallelCorpusContentType) {
-      this.parallel_corpus_content_type_serialized_name = parallelCorpusContentType;
-      return this;
-    }
-
-    /**
-     * Set the monolingual_corpus_content_type_serialized_name.
-     *
-     * @param monolingualCorpusContentType the monolingualCorpusContentType
-     * @return the CreateModelOptions builder
-     */
-    public CreateModelOptionsBuilder monolingualCorpusContentType(String monolingualCorpusContentType) {
-      this.monolingual_corpus_content_type_serialized_name = monolingualCorpusContentType;
       return this;
     }
   }
@@ -1242,7 +1167,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the owner_serialized_name.
      *
-     * Returns the Bluemix ID of the instance that created the model, or an empty string if it is a model that is trained by IBM.
+     * Returns the ID of the Language Translator service instance that created the model, or an empty string if it is a model that is trained by IBM.
      *
      * @return the owner_serialized_name
      */

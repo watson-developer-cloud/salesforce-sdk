@@ -9,13 +9,19 @@
  * The Text to Speech service consists of the following related endpoints:
  * * `/v1/voices` provides information about the voices available for synthesized speech.
  * * `/v1/synthesize` synthesizes written text to audio speech.
- * * `/v1/pronunciation` returns the pronunciation for a specified word.
+ * * `/v1/pronunciation` returns the pronunciation for a specified word. The `/v1/pronunciation` method is currently
+ * beta functionality.
  * * `/v1/customizations` and `/v1/customizations/{customization_id}` lets users create custom voice models, which are
- * dictionaries of words and their translations for use in speech synthesis.
+ * dictionaries of words and their translations for use in speech synthesis. All `/v1/customizations` methods are
+ * currently beta functionality.
  * * `/v1/customizations/{customization_id}/words` and `/v1/customizations/{customization_id}/words/{word}` lets users
  * manage the words in a custom voice model.
  *
- * **Note:** The `/v1/pronunciation` and `/v1/customizations` interfaces are currently beta functionality.
+ *
+ * **Note about the Try It Out feature:** The `Try it out!` button lets you experiment with the methods of the API by
+ * making actual cURL calls to the service. The feature is **not** supported for use with the `POST /v1/synthesize`
+ * method. For examples of calls to this method, see the [Text to Speech API
+ * reference](http://www.ibm.com/watson/developercloud/text-to-speech/api/v1/).
  * ### API Usage
  * The following information provides details about using the service to synthesize audio:
  * * **Audio formats:** The service supports a number of audio formats (MIME types). For more information about audio
@@ -75,7 +81,7 @@
  */
 public class IBMTextToSpeechV1 extends IBMWatsonService {
 
-  private static final String URL = 'https://gateway.watsonplatform.net/text-to-speech/api';
+  private static final String URL = 'https://stream.watsonplatform.net/text-to-speech/api';
   private String versionDate;
 
   /**
@@ -132,10 +138,10 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Streaming speech synthesis of the text in the body parameter.
    *
-   * Synthesizes text to spoken audio, returning the synthesized audio stream as an array of bytes. Identical to the `GET` method but passes longer text in the body of the request, not with the URL. Text size is limited to 5 KB.   If a request includes invalid query parameters, the service returns a `Warnings` response header that provides messages about the invalid parameters. The warning includes a descriptive message and a list of invalid argument strings. For example, a message such as `\"Unknown arguments:\"` or `\"Unknown url query arguments:\"` followed by a list of the form `\"invalid_arg_1, invalid_arg_2.\"` The request succeeds despite the warnings.
+   * Synthesizes text to spoken audio, returning the synthesized audio stream as an array of bytes. Identical to the `GET` method but passes longer text in the body of the request, not with the URL. Text size is limited to 5 KB.   If a request includes invalid query parameters, the service returns a `Warnings` response header that provides messages about the invalid parameters. The warning includes a descriptive message and a list of invalid argument strings. For example, a message such as `\"Unknown arguments:\"` or `\"Unknown url query arguments:\"` followed by a list of the form `\"invalid_arg_1, invalid_arg_2.\"` The request succeeds despite the warnings.   **Note about the Try It Out feature:** The `Try it out!` button is **not** supported for use with the the `POST /v1/synthesize` method. For examples of calls to the method, see the [Text to Speech API reference](http://www.ibm.com/watson/developercloud/text-to-speech/api/v1/).
    *
    * @param synthesizeOptions the {@link IBMTextToSpeechV1Models.SynthesizeOptions} containing the options for the call
-   * @return the {@link IBMTextToSpeechV1Models.File} with the response
+   * @return the {@link IBMWatsonFile} with the response
    */
   public IBMWatsonFile synthesize(IBMTextToSpeechV1Models.SynthesizeOptions synthesizeOptions) {
     IBMWatsonValidator.notNull(synthesizeOptions, 'synthesizeOptions cannot be null');

@@ -719,7 +719,7 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.remove('training_status_serialized_name');
+      Map<String, Object> trainingStatus = (Map<String, Object>) jsonMap.remove('training_status_serialized_name');
       Collection ret = (Collection) super.deserialize(JSON.serialize(jsonMap), jsonMap, classType);
 
       // calling custom deserializer for document_counts_serialized_name
@@ -731,7 +731,7 @@ public class IBMDiscoveryV1Models {
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for training_status_serialized_name
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatus), trainingStatus, TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
       return ret;
@@ -761,6 +761,46 @@ public class IBMDiscoveryV1Models {
       }
 
       CollectionDiskUsage ret = (CollectionDiskUsage) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Summary of the collection usage in the environment.
+   */
+  public class CollectionUsage extends IBMWatsonGenericModel {
+    private Long available_serialized_name;
+    private Long maximum_allowed_serialized_name;
+    /**
+     * Gets the available_serialized_name.
+     *
+     * Number of active collections in the environment.
+     *
+     * @return the available_serialized_name
+     */
+    @AuraEnabled
+    public Long getAvailable() {
+      return available_serialized_name;
+    }
+    /**
+     * Gets the maximum_allowed_serialized_name.
+     *
+     * Total number of collections allowed in the environment.
+     *
+     * @return the maximum_allowed_serialized_name
+     */
+    @AuraEnabled
+    public Long getMaximumAllowed() {
+      return maximum_allowed_serialized_name;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      CollectionUsage ret = (CollectionUsage) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -3201,7 +3241,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the enrichment_serialized_name.
      *
-     * Name of the enrichment service to call. Currently the only valid value is `alchemy_language`.
+     * Name of the enrichment service to call. Current options are `natural_language_understanding` and `elements`.   When using `natual_language_understanding`, the `options` object must contain Natural Language Understanding Options.   When using `elements` the `options` object must contain Element Classification options. Additionally, when using the `elements` enrichment the configuration specified and files ingested must meet all the criteria specified in [the documentation](https://console.bluemix.net/docs/services/discovery/element-classification.html)     Previous API versions also supported `alchemy_language`.
      *
      * @return the enrichment_serialized_name
      */
@@ -3314,64 +3354,23 @@ public class IBMDiscoveryV1Models {
    * Options which are specific to a particular enrichment.
    */
   public class EnrichmentOptions extends IBMWatsonGenericModel {
-    private List<String> extract_serialized_name;
-    private Boolean sentiment_serialized_name;
-    private Boolean quotations_serialized_name;
-    private Boolean show_source_text_serialized_name;
-    private Boolean hierarchical_typed_relations_serialized_name;
+    private NluEnrichmentFeatures features_serialized_name;
     private String model_serialized_name;
-    private String language_serialized_name;
     /**
-     * Gets the extract_serialized_name.
+     * Gets the features_serialized_name.
      *
-     * A comma-separated list of analyses that will be applied when using the `alchemy_language` enrichment. See the service documentation for details on each extract option.  Possible values include:    * entity   * keyword   * taxonomy   * concept   * relation   * doc-sentiment   * doc-emotion   * typed-rels.
+     * An object representing the enrichment features that will be applied to the specified field.
      *
-     * @return the extract_serialized_name
+     * @return the features_serialized_name
      */
     @AuraEnabled
-    public List<String> getExtract() {
-      return extract_serialized_name;
-    }
-    /**
-     * Gets the sentiment_serialized_name.
-     *
-     * @return the sentiment_serialized_name
-     */
-    @AuraEnabled
-    public Boolean getSentiment() {
-      return sentiment_serialized_name;
-    }
-    /**
-     * Gets the quotations_serialized_name.
-     *
-     * @return the quotations_serialized_name
-     */
-    @AuraEnabled
-    public Boolean getQuotations() {
-      return quotations_serialized_name;
-    }
-    /**
-     * Gets the show_source_text_serialized_name.
-     *
-     * @return the show_source_text_serialized_name
-     */
-    @AuraEnabled
-    public Boolean getShowSourceText() {
-      return show_source_text_serialized_name;
-    }
-    /**
-     * Gets the hierarchical_typed_relations_serialized_name.
-     *
-     * @return the hierarchical_typed_relations_serialized_name
-     */
-    @AuraEnabled
-    public Boolean getHierarchicalTypedRelations() {
-      return hierarchical_typed_relations_serialized_name;
+    public NluEnrichmentFeatures getFeatures() {
+      return features_serialized_name;
     }
     /**
      * Gets the model_serialized_name.
      *
-     * Required when using the `typed-rel` extract option. Should be set to the ID of a previously published custom Watson Knowledge Studio model.
+     * *For use with `elements` enrichments only.* The element extraction model to use. Models available are: `contract`.
      *
      * @return the model_serialized_name
      */
@@ -3379,61 +3378,14 @@ public class IBMDiscoveryV1Models {
     public String getModel() {
       return model_serialized_name;
     }
-    /**
-     * Gets the language_serialized_name.
-     *
-     * If provided, then do not attempt to detect the language of the input document. Instead, assume the language is the one specified in this field.  You can set this property to work around `unsupported-text-language` errors.  Supported languages include English, German, French, Italian, Portuguese, Russian, Spanish and Swedish. Supported language codes are the ISO-639-1, ISO-639-2, ISO-639-3, and the plain english name of the language (for example "russian").
-     *
-     * @return the language_serialized_name
-     */
-    @AuraEnabled
-    public String getLanguage() {
-      return language_serialized_name;
-    }
 
     /**
-     * Sets the extract_serialized_name.
+     * Sets the features_serialized_name.
      *
-     * @param extract the new extract
+     * @param features the new features
      */
-    public void setExtract(final List<String> extract) {
-      this.extract_serialized_name = extract;
-    }
-
-    /**
-     * Sets the sentiment_serialized_name.
-     *
-     * @param sentiment the new sentiment
-     */
-    public void setSentiment(final Boolean sentiment) {
-      this.sentiment_serialized_name = sentiment;
-    }
-
-    /**
-     * Sets the quotations_serialized_name.
-     *
-     * @param quotations the new quotations
-     */
-    public void setQuotations(final Boolean quotations) {
-      this.quotations_serialized_name = quotations;
-    }
-
-    /**
-     * Sets the show_source_text_serialized_name.
-     *
-     * @param showSourceText the new showSourceText
-     */
-    public void setShowSourceText(final Boolean showSourceText) {
-      this.show_source_text_serialized_name = showSourceText;
-    }
-
-    /**
-     * Sets the hierarchical_typed_relations_serialized_name.
-     *
-     * @param hierarchicalTypedRelations the new hierarchicalTypedRelations
-     */
-    public void setHierarchicalTypedRelations(final Boolean hierarchicalTypedRelations) {
-      this.hierarchical_typed_relations_serialized_name = hierarchicalTypedRelations;
+    public void setFeatures(final NluEnrichmentFeatures features) {
+      this.features_serialized_name = features;
     }
 
     /**
@@ -3445,21 +3397,16 @@ public class IBMDiscoveryV1Models {
       this.model_serialized_name = model;
     }
 
-    /**
-     * Sets the language_serialized_name.
-     *
-     * @param language the new language
-     */
-    public void setLanguage(final String language) {
-      this.language_serialized_name = language;
-    }
-
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
       EnrichmentOptions ret = (EnrichmentOptions) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for features_serialized_name
+      NluEnrichmentFeatures newFeatures = (NluEnrichmentFeatures) new NluEnrichmentFeatures().deserialize(JSON.serialize(ret.getFeatures()), (Map<String, Object>) jsonMap.get('features_serialized_name'), NluEnrichmentFeatures.class);
+      ret.setFeatures(newFeatures);
 
       return ret;
     }
@@ -5556,6 +5503,7 @@ public class IBMDiscoveryV1Models {
   public class IndexCapacity extends IBMWatsonGenericModel {
     private EnvironmentDocuments documents_serialized_name;
     private DiskUsage disk_usage_serialized_name;
+    private CollectionUsage collections_serialized_name;
     private MemoryUsage memory_usage_serialized_name;
     /**
      * Gets the documents_serialized_name.
@@ -5578,6 +5526,17 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public DiskUsage getDiskUsage() {
       return disk_usage_serialized_name;
+    }
+    /**
+     * Gets the collections_serialized_name.
+     *
+     * Summary of the collection usage in the environment.
+     *
+     * @return the collections_serialized_name
+     */
+    @AuraEnabled
+    public CollectionUsage getCollections() {
+      return collections_serialized_name;
     }
     /**
      * Gets the memory_usage_serialized_name.
@@ -5610,6 +5569,15 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
+     * Sets the collections_serialized_name.
+     *
+     * @param collections the new collections
+     */
+    public void setCollections(final CollectionUsage collections) {
+      this.collections_serialized_name = collections;
+    }
+
+    /**
      * Sets the memory_usage_serialized_name.
      *
      * @param memoryUsage the new memoryUsage
@@ -5632,6 +5600,10 @@ public class IBMDiscoveryV1Models {
       // calling custom deserializer for disk_usage_serialized_name
       DiskUsage newDiskUsage = (DiskUsage) new DiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('disk_usage_serialized_name'), DiskUsage.class);
       ret.setDiskUsage(newDiskUsage);
+
+      // calling custom deserializer for collections_serialized_name
+      CollectionUsage newCollections = (CollectionUsage) new CollectionUsage().deserialize(JSON.serialize(ret.getCollections()), (Map<String, Object>) jsonMap.get('collections_serialized_name'), CollectionUsage.class);
+      ret.setCollections(newCollections);
 
       // calling custom deserializer for memory_usage_serialized_name
       MemoryUsage newMemoryUsage = (MemoryUsage) new MemoryUsage().deserialize(JSON.serialize(ret.getMemoryUsage()), (Map<String, Object>) jsonMap.get('memory_usage_serialized_name'), MemoryUsage.class);
@@ -6444,6 +6416,139 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * The listTrainingExamples options.
+   */
+  public class ListTrainingExamplesOptions {
+    private String environment_id_serialized_name;
+    private String collection_id_serialized_name;
+    private String query_id_serialized_name;
+    /**
+     * Gets the environment_id_serialized_name.
+     *
+     * The ID of the environment.
+     *
+     * @return the environment_id_serialized_name
+     */
+    public String environmentId() {
+      return environment_id_serialized_name;
+    }
+    /**
+     * Gets the collection_id_serialized_name.
+     *
+     * The ID of the collection.
+     *
+     * @return the collection_id_serialized_name
+     */
+    public String collectionId() {
+      return collection_id_serialized_name;
+    }
+    /**
+     * Gets the query_id_serialized_name.
+     *
+     * The ID of the query used for training.
+     *
+     * @return the query_id_serialized_name
+     */
+    public String queryId() {
+      return query_id_serialized_name;
+    }
+    private ListTrainingExamplesOptions(ListTrainingExamplesOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.query_id_serialized_name, 'query_id_serialized_name cannot be empty');
+      environment_id_serialized_name = builder.environment_id_serialized_name;
+      collection_id_serialized_name = builder.collection_id_serialized_name;
+      query_id_serialized_name = builder.query_id_serialized_name;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ListTrainingExamplesOptions builder
+     */
+    public ListTrainingExamplesOptionsBuilder newBuilder() {
+      return new ListTrainingExamplesOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * ListTrainingExamplesOptions Builder.
+   */
+  public class ListTrainingExamplesOptionsBuilder {
+    private String environment_id_serialized_name;
+    private String collection_id_serialized_name;
+    private String query_id_serialized_name;
+
+    private ListTrainingExamplesOptionsBuilder(ListTrainingExamplesOptions listTrainingExamplesOptions) {
+      environment_id_serialized_name = listTrainingExamplesOptions.environment_id_serialized_name;
+      collection_id_serialized_name = listTrainingExamplesOptions.collection_id_serialized_name;
+      query_id_serialized_name = listTrainingExamplesOptions.query_id_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ListTrainingExamplesOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     * @param queryId the queryId
+     */
+    public ListTrainingExamplesOptionsBuilder(String environmentId, String collectionId, String queryId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+      this.query_id_serialized_name = queryId;
+    }
+
+    /**
+     * Builds a ListTrainingExamplesOptions.
+     *
+     * @return the listTrainingExamplesOptions
+     */
+    public ListTrainingExamplesOptions build() {
+      return new ListTrainingExamplesOptions(this);
+    }
+
+    /**
+     * Set the environment_id_serialized_name.
+     *
+     * @param environmentId the environmentId
+     * @return the ListTrainingExamplesOptions builder
+     */
+    public ListTrainingExamplesOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collection_id_serialized_name.
+     *
+     * @param collectionId the collectionId
+     * @return the ListTrainingExamplesOptions builder
+     */
+    public ListTrainingExamplesOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
+      return this;
+    }
+
+    /**
+     * Set the query_id_serialized_name.
+     *
+     * @param queryId the queryId
+     * @return the ListTrainingExamplesOptions builder
+     */
+    public ListTrainingExamplesOptionsBuilder queryId(String queryId) {
+      this.query_id_serialized_name = queryId;
+      return this;
+    }
+  }
+
+  /**
    * **Deprecated**: Summary of the memory usage statistics for this environment.
    */
   public class MemoryUsage extends IBMWatsonGenericModel {
@@ -6514,6 +6619,706 @@ public class IBMDiscoveryV1Models {
       }
 
       MemoryUsage ret = (MemoryUsage) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object that indicates the Categories enrichment will be applied to the specified field.
+   */
+  public class NluEnrichmentCategories extends IBMWatsonDynamicModel {
+    private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * Gets the dynamic properties attached to NluEnrichmentCategories.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      NluEnrichmentCategories ret = (NluEnrichmentCategories) super.deserialize(jsonString, jsonMap, classType);
+
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key)) {
+          ret.put(key, jsonMap.get(key));
+        }
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object specifying the emotion detection enrichment and related parameters.
+   */
+  public class NluEnrichmentEmotion extends IBMWatsonGenericModel {
+    private Boolean document_serialized_name;
+    private List<String> targets_serialized_name;
+    /**
+     * Gets the document_serialized_name.
+     *
+     * When `true`, emotion detection is performed on the entire field.
+     *
+     * @return the document_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getDocument() {
+      return document_serialized_name;
+    }
+    /**
+     * Gets the targets_serialized_name.
+     *
+     * A comma-separated list of target strings that will have any associated emotions detected.
+     *
+     * @return the targets_serialized_name
+     */
+    @AuraEnabled
+    public List<String> getTargets() {
+      return targets_serialized_name;
+    }
+
+    /**
+     * Sets the document_serialized_name.
+     *
+     * @param document the new document
+     */
+    public void setDocument(final Boolean document) {
+      this.document_serialized_name = document;
+    }
+
+    /**
+     * Sets the targets_serialized_name.
+     *
+     * @param targets the new targets
+     */
+    public void setTargets(final List<String> targets) {
+      this.targets_serialized_name = targets;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      NluEnrichmentEmotion ret = (NluEnrichmentEmotion) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object speficying the Entities enrichment and related parameters.
+   */
+  public class NluEnrichmentEntities extends IBMWatsonGenericModel {
+    private Boolean sentiment_serialized_name;
+    private Boolean emotion_serialized_name;
+    private Long limit_serialized_name;
+    private Boolean mentions_serialized_name;
+    private Boolean mention_types_serialized_name;
+    private Boolean sentence_location_serialized_name;
+    private String model_serialized_name;
+    /**
+     * Gets the sentiment_serialized_name.
+     *
+     * When `true`, sentiment analysis of entities will be performed on the specified field.
+     *
+     * @return the sentiment_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getSentiment() {
+      return sentiment_serialized_name;
+    }
+    /**
+     * Gets the emotion_serialized_name.
+     *
+     * When `true`, emotion detection of entities will be performed on the specified field.
+     *
+     * @return the emotion_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getEmotion() {
+      return emotion_serialized_name;
+    }
+    /**
+     * Gets the limit_serialized_name.
+     *
+     * The maximum number of entities to extract for each instance of the specified field.
+     *
+     * @return the limit_serialized_name
+     */
+    @AuraEnabled
+    public Long getLimit() {
+      return limit_serialized_name;
+    }
+    /**
+     * Gets the mentions_serialized_name.
+     *
+     * When `true`, the number of mentions of each identified entity is recorded. The default is `false`.
+     *
+     * @return the mentions_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getMentions() {
+      return mentions_serialized_name;
+    }
+    /**
+     * Gets the mention_types_serialized_name.
+     *
+     * When `true`, the types of mentions for each idetifieid entity is recorded. The default is `false`.
+     *
+     * @return the mention_types_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getMentionTypes() {
+      return mention_types_serialized_name;
+    }
+    /**
+     * Gets the sentence_location_serialized_name.
+     *
+     * When `true`, a list of sentence locations for each instance of each identified entity is recorded. The default is `false`.
+     *
+     * @return the sentence_location_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getSentenceLocation() {
+      return sentence_location_serialized_name;
+    }
+    /**
+     * Gets the model_serialized_name.
+     *
+     * The enrichement model to use with entity extraction. May be a custom model provided by Watson Knowledge Studio, the public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
+     *
+     * @return the model_serialized_name
+     */
+    @AuraEnabled
+    public String getModel() {
+      return model_serialized_name;
+    }
+
+    /**
+     * Sets the sentiment_serialized_name.
+     *
+     * @param sentiment the new sentiment
+     */
+    public void setSentiment(final Boolean sentiment) {
+      this.sentiment_serialized_name = sentiment;
+    }
+
+    /**
+     * Sets the emotion_serialized_name.
+     *
+     * @param emotion the new emotion
+     */
+    public void setEmotion(final Boolean emotion) {
+      this.emotion_serialized_name = emotion;
+    }
+
+    /**
+     * Sets the limit_serialized_name.
+     *
+     * @param limitVar the new limitVar
+     */
+    public void setLimit(final long limitVar) {
+      this.limit_serialized_name = limitVar;
+    }
+
+    /**
+     * Sets the mentions_serialized_name.
+     *
+     * @param mentions the new mentions
+     */
+    public void setMentions(final Boolean mentions) {
+      this.mentions_serialized_name = mentions;
+    }
+
+    /**
+     * Sets the mention_types_serialized_name.
+     *
+     * @param mentionTypes the new mentionTypes
+     */
+    public void setMentionTypes(final Boolean mentionTypes) {
+      this.mention_types_serialized_name = mentionTypes;
+    }
+
+    /**
+     * Sets the sentence_location_serialized_name.
+     *
+     * @param sentenceLocation the new sentenceLocation
+     */
+    public void setSentenceLocation(final Boolean sentenceLocation) {
+      this.sentence_location_serialized_name = sentenceLocation;
+    }
+
+    /**
+     * Sets the model_serialized_name.
+     *
+     * @param model the new model
+     */
+    public void setModel(final String model) {
+      this.model_serialized_name = model;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      NluEnrichmentEntities ret = (NluEnrichmentEntities) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * NluEnrichmentFeatures.
+   */
+  public class NluEnrichmentFeatures extends IBMWatsonGenericModel {
+    private NluEnrichmentKeywords keywords_serialized_name;
+    private NluEnrichmentEntities entities_serialized_name;
+    private NluEnrichmentSentiment sentiment_serialized_name;
+    private NluEnrichmentEmotion emotion_serialized_name;
+    private NluEnrichmentCategories categories_serialized_name;
+    private NluEnrichmentSemanticRoles semantic_roles_serialized_name;
+    private NluEnrichmentRelations relations_serialized_name;
+    /**
+     * Gets the keywords_serialized_name.
+     *
+     * An object specifying the Keyword enrichment and related parameters.
+     *
+     * @return the keywords_serialized_name
+     */
+    @AuraEnabled
+    public NluEnrichmentKeywords getKeywords() {
+      return keywords_serialized_name;
+    }
+    /**
+     * Gets the entities_serialized_name.
+     *
+     * An object speficying the Entities enrichment and related parameters.
+     *
+     * @return the entities_serialized_name
+     */
+    @AuraEnabled
+    public NluEnrichmentEntities getEntities() {
+      return entities_serialized_name;
+    }
+    /**
+     * Gets the sentiment_serialized_name.
+     *
+     * An object specifying the sentiment extraction enrichment and related parameters.
+     *
+     * @return the sentiment_serialized_name
+     */
+    @AuraEnabled
+    public NluEnrichmentSentiment getSentiment() {
+      return sentiment_serialized_name;
+    }
+    /**
+     * Gets the emotion_serialized_name.
+     *
+     * An object specifying the emotion detection enrichment and related parameters.
+     *
+     * @return the emotion_serialized_name
+     */
+    @AuraEnabled
+    public NluEnrichmentEmotion getEmotion() {
+      return emotion_serialized_name;
+    }
+    /**
+     * Gets the categories_serialized_name.
+     *
+     * An object specifying the categories enrichment and related parameters.
+     *
+     * @return the categories_serialized_name
+     */
+    @AuraEnabled
+    public NluEnrichmentCategories getCategories() {
+      return categories_serialized_name;
+    }
+    /**
+     * Gets the semantic_roles_serialized_name.
+     *
+     * An object specifiying the semantic roles enrichment and related parameters.
+     *
+     * @return the semantic_roles_serialized_name
+     */
+    @AuraEnabled
+    public NluEnrichmentSemanticRoles getSemanticRoles() {
+      return semantic_roles_serialized_name;
+    }
+    /**
+     * Gets the relations_serialized_name.
+     *
+     * An object specifying the relations enrichment and related parameters.
+     *
+     * @return the relations_serialized_name
+     */
+    @AuraEnabled
+    public NluEnrichmentRelations getRelations() {
+      return relations_serialized_name;
+    }
+
+    /**
+     * Sets the keywords_serialized_name.
+     *
+     * @param keywords the new keywords
+     */
+    public void setKeywords(final NluEnrichmentKeywords keywords) {
+      this.keywords_serialized_name = keywords;
+    }
+
+    /**
+     * Sets the entities_serialized_name.
+     *
+     * @param entities the new entities
+     */
+    public void setEntities(final NluEnrichmentEntities entities) {
+      this.entities_serialized_name = entities;
+    }
+
+    /**
+     * Sets the sentiment_serialized_name.
+     *
+     * @param sentiment the new sentiment
+     */
+    public void setSentiment(final NluEnrichmentSentiment sentiment) {
+      this.sentiment_serialized_name = sentiment;
+    }
+
+    /**
+     * Sets the emotion_serialized_name.
+     *
+     * @param emotion the new emotion
+     */
+    public void setEmotion(final NluEnrichmentEmotion emotion) {
+      this.emotion_serialized_name = emotion;
+    }
+
+    /**
+     * Sets the categories_serialized_name.
+     *
+     * @param categories the new categories
+     */
+    public void setCategories(final NluEnrichmentCategories categories) {
+      this.categories_serialized_name = categories;
+    }
+
+    /**
+     * Sets the semantic_roles_serialized_name.
+     *
+     * @param semanticRoles the new semanticRoles
+     */
+    public void setSemanticRoles(final NluEnrichmentSemanticRoles semanticRoles) {
+      this.semantic_roles_serialized_name = semanticRoles;
+    }
+
+    /**
+     * Sets the relations_serialized_name.
+     *
+     * @param relations the new relations
+     */
+    public void setRelations(final NluEnrichmentRelations relations) {
+      this.relations_serialized_name = relations;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      NluEnrichmentFeatures ret = (NluEnrichmentFeatures) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for keywords_serialized_name
+      NluEnrichmentKeywords newKeywords = (NluEnrichmentKeywords) new NluEnrichmentKeywords().deserialize(JSON.serialize(ret.getKeywords()), (Map<String, Object>) jsonMap.get('keywords_serialized_name'), NluEnrichmentKeywords.class);
+      ret.setKeywords(newKeywords);
+
+      // calling custom deserializer for entities_serialized_name
+      NluEnrichmentEntities newEntities = (NluEnrichmentEntities) new NluEnrichmentEntities().deserialize(JSON.serialize(ret.getEntities()), (Map<String, Object>) jsonMap.get('entities_serialized_name'), NluEnrichmentEntities.class);
+      ret.setEntities(newEntities);
+
+      // calling custom deserializer for sentiment_serialized_name
+      NluEnrichmentSentiment newSentiment = (NluEnrichmentSentiment) new NluEnrichmentSentiment().deserialize(JSON.serialize(ret.getSentiment()), (Map<String, Object>) jsonMap.get('sentiment_serialized_name'), NluEnrichmentSentiment.class);
+      ret.setSentiment(newSentiment);
+
+      // calling custom deserializer for emotion_serialized_name
+      NluEnrichmentEmotion newEmotion = (NluEnrichmentEmotion) new NluEnrichmentEmotion().deserialize(JSON.serialize(ret.getEmotion()), (Map<String, Object>) jsonMap.get('emotion_serialized_name'), NluEnrichmentEmotion.class);
+      ret.setEmotion(newEmotion);
+
+      // calling custom deserializer for categories_serialized_name
+      NluEnrichmentCategories newCategories = (NluEnrichmentCategories) new NluEnrichmentCategories().deserialize(JSON.serialize(ret.getCategories()), (Map<String, Object>) jsonMap.get('categories_serialized_name'), NluEnrichmentCategories.class);
+      ret.setCategories(newCategories);
+
+      // calling custom deserializer for semantic_roles_serialized_name
+      NluEnrichmentSemanticRoles newSemanticRoles = (NluEnrichmentSemanticRoles) new NluEnrichmentSemanticRoles().deserialize(JSON.serialize(ret.getSemanticRoles()), (Map<String, Object>) jsonMap.get('semantic_roles_serialized_name'), NluEnrichmentSemanticRoles.class);
+      ret.setSemanticRoles(newSemanticRoles);
+
+      // calling custom deserializer for relations_serialized_name
+      NluEnrichmentRelations newRelations = (NluEnrichmentRelations) new NluEnrichmentRelations().deserialize(JSON.serialize(ret.getRelations()), (Map<String, Object>) jsonMap.get('relations_serialized_name'), NluEnrichmentRelations.class);
+      ret.setRelations(newRelations);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object specifying the Keyword enrichment and related parameters.
+   */
+  public class NluEnrichmentKeywords extends IBMWatsonGenericModel {
+    private Boolean sentiment_serialized_name;
+    private Boolean emotion_serialized_name;
+    private Long limit_serialized_name;
+    /**
+     * Gets the sentiment_serialized_name.
+     *
+     * When `true`, sentiment analysis of keywords will be performed on the specified field.
+     *
+     * @return the sentiment_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getSentiment() {
+      return sentiment_serialized_name;
+    }
+    /**
+     * Gets the emotion_serialized_name.
+     *
+     * When `true`, emotion detection of keywords will be performed on the specified field.
+     *
+     * @return the emotion_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getEmotion() {
+      return emotion_serialized_name;
+    }
+    /**
+     * Gets the limit_serialized_name.
+     *
+     * The maximum number of keywords to extract for each instance of the specified field.
+     *
+     * @return the limit_serialized_name
+     */
+    @AuraEnabled
+    public Long getLimit() {
+      return limit_serialized_name;
+    }
+
+    /**
+     * Sets the sentiment_serialized_name.
+     *
+     * @param sentiment the new sentiment
+     */
+    public void setSentiment(final Boolean sentiment) {
+      this.sentiment_serialized_name = sentiment;
+    }
+
+    /**
+     * Sets the emotion_serialized_name.
+     *
+     * @param emotion the new emotion
+     */
+    public void setEmotion(final Boolean emotion) {
+      this.emotion_serialized_name = emotion;
+    }
+
+    /**
+     * Sets the limit_serialized_name.
+     *
+     * @param limitVar the new limitVar
+     */
+    public void setLimit(final long limitVar) {
+      this.limit_serialized_name = limitVar;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      NluEnrichmentKeywords ret = (NluEnrichmentKeywords) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object specifying the relations enrichment and related parameters.
+   */
+  public class NluEnrichmentRelations extends IBMWatsonGenericModel {
+    private String model_serialized_name;
+    /**
+     * Gets the model_serialized_name.
+     *
+     * *For use with `natural_language_understanding` enrichments only.* The enrichement model to use with relationship extraction. May be a custom model provided by Watson Knowledge Studio, the public model for use with Knowledge Graph `en-news`, the default is`en-news`.
+     *
+     * @return the model_serialized_name
+     */
+    @AuraEnabled
+    public String getModel() {
+      return model_serialized_name;
+    }
+
+    /**
+     * Sets the model_serialized_name.
+     *
+     * @param model the new model
+     */
+    public void setModel(final String model) {
+      this.model_serialized_name = model;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      NluEnrichmentRelations ret = (NluEnrichmentRelations) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object specifiying the semantic roles enrichment and related parameters.
+   */
+  public class NluEnrichmentSemanticRoles extends IBMWatsonGenericModel {
+    private Boolean entities_serialized_name;
+    private Boolean keywords_serialized_name;
+    private Long limit_serialized_name;
+    /**
+     * Gets the entities_serialized_name.
+     *
+     * When `true` entities are extracted from the identified sentence parts.
+     *
+     * @return the entities_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getEntities() {
+      return entities_serialized_name;
+    }
+    /**
+     * Gets the keywords_serialized_name.
+     *
+     * When `true`, keywords are extracted from the identified sentence parts.
+     *
+     * @return the keywords_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getKeywords() {
+      return keywords_serialized_name;
+    }
+    /**
+     * Gets the limit_serialized_name.
+     *
+     * The maximum number of semantic roles enrichments to extact from each instance of the specified field.
+     *
+     * @return the limit_serialized_name
+     */
+    @AuraEnabled
+    public Long getLimit() {
+      return limit_serialized_name;
+    }
+
+    /**
+     * Sets the entities_serialized_name.
+     *
+     * @param entities the new entities
+     */
+    public void setEntities(final Boolean entities) {
+      this.entities_serialized_name = entities;
+    }
+
+    /**
+     * Sets the keywords_serialized_name.
+     *
+     * @param keywords the new keywords
+     */
+    public void setKeywords(final Boolean keywords) {
+      this.keywords_serialized_name = keywords;
+    }
+
+    /**
+     * Sets the limit_serialized_name.
+     *
+     * @param limitVar the new limitVar
+     */
+    public void setLimit(final long limitVar) {
+      this.limit_serialized_name = limitVar;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      NluEnrichmentSemanticRoles ret = (NluEnrichmentSemanticRoles) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object specifying the sentiment extraction enrichment and related parameters.
+   */
+  public class NluEnrichmentSentiment extends IBMWatsonGenericModel {
+    private Boolean document_serialized_name;
+    private List<String> targets_serialized_name;
+    /**
+     * Gets the document_serialized_name.
+     *
+     * When `true`, sentiment analysis is performed on the entire field.
+     *
+     * @return the document_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getDocument() {
+      return document_serialized_name;
+    }
+    /**
+     * Gets the targets_serialized_name.
+     *
+     * A comma-separated list of target strings that will have any associated sentiment analyzed.
+     *
+     * @return the targets_serialized_name
+     */
+    @AuraEnabled
+    public List<String> getTargets() {
+      return targets_serialized_name;
+    }
+
+    /**
+     * Sets the document_serialized_name.
+     *
+     * @param document the new document
+     */
+    public void setDocument(final Boolean document) {
+      this.document_serialized_name = document;
+    }
+
+    /**
+     * Sets the targets_serialized_name.
+     *
+     * @param targets the new targets
+     */
+    public void setTargets(final List<String> targets) {
+      this.targets_serialized_name = targets;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      NluEnrichmentSentiment ret = (NluEnrichmentSentiment) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -6946,6 +7751,412 @@ public class IBMDiscoveryV1Models {
         }
         ret.setAggregations(newAggregations);
       }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to query the city of London in England your query would look for `London` with the context of `England`.
+   */
+  public class QueryEntitiesContext extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    /**
+     * Gets the text_serialized_name.
+     *
+     * Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to query the city of London in England your query would look for `London` with the context of `England`.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+
+    /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryEntitiesContext ret = (QueryEntitiesContext) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * A text string that appears within the entity text field.
+   */
+  public class QueryEntitiesEntity extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    private String type_serialized_name;
+    /**
+     * Gets the text_serialized_name.
+     *
+     * Entity text content.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+    /**
+     * Gets the type_serialized_name.
+     *
+     * The type of the specified entity.
+     *
+     * @return the type_serialized_name
+     */
+    @AuraEnabled
+    public String getType() {
+      return type_serialized_name;
+    }
+
+    /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the type_serialized_name.
+     *
+     * @param typeVar the new typeVar
+     */
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryEntitiesEntity ret = (QueryEntitiesEntity) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * The queryEntities options.
+   */
+  public class QueryEntitiesOptions {
+    private String environment_id_serialized_name;
+    private String collection_id_serialized_name;
+    private String feature_serialized_name;
+    private QueryEntitiesEntity entity_serialized_name;
+    private QueryEntitiesContext context_serialized_name;
+    private Long count_serialized_name;
+    /**
+     * Gets the environment_id_serialized_name.
+     *
+     * The ID of the environment.
+     *
+     * @return the environment_id_serialized_name
+     */
+    public String environmentId() {
+      return environment_id_serialized_name;
+    }
+    /**
+     * Gets the collection_id_serialized_name.
+     *
+     * The ID of the collection.
+     *
+     * @return the collection_id_serialized_name
+     */
+    public String collectionId() {
+      return collection_id_serialized_name;
+    }
+    /**
+     * Gets the feature_serialized_name.
+     *
+     * The entity query feature to perform. Must be `disambiguate`.
+     *
+     * @return the feature_serialized_name
+     */
+    public String feature() {
+      return feature_serialized_name;
+    }
+    /**
+     * Gets the entity_serialized_name.
+     *
+     * A text string that appears within the entity text field.
+     *
+     * @return the entity_serialized_name
+     */
+    public QueryEntitiesEntity entity() {
+      return entity_serialized_name;
+    }
+    /**
+     * Gets the context_serialized_name.
+     *
+     * Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to query the city of London in England your query would look for `London` with the context of `England`.
+     *
+     * @return the context_serialized_name
+     */
+    public QueryEntitiesContext context() {
+      return context_serialized_name;
+    }
+    /**
+     * Gets the count_serialized_name.
+     *
+     * The number of results to return. The default is `10`. The maximum is `1000`.
+     *
+     * @return the count_serialized_name
+     */
+    public Long count() {
+      return count_serialized_name;
+    }
+    private QueryEntitiesOptions(QueryEntitiesOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
+      environment_id_serialized_name = builder.environment_id_serialized_name;
+      collection_id_serialized_name = builder.collection_id_serialized_name;
+      feature_serialized_name = builder.feature_serialized_name;
+      entity_serialized_name = builder.entity_serialized_name;
+      context_serialized_name = builder.context_serialized_name;
+      count_serialized_name = builder.count_serialized_name;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a QueryEntitiesOptions builder
+     */
+    public QueryEntitiesOptionsBuilder newBuilder() {
+      return new QueryEntitiesOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * QueryEntitiesOptions Builder.
+   */
+  public class QueryEntitiesOptionsBuilder {
+    private String environment_id_serialized_name;
+    private String collection_id_serialized_name;
+    private String feature_serialized_name;
+    private QueryEntitiesEntity entity_serialized_name;
+    private QueryEntitiesContext context_serialized_name;
+    private Long count_serialized_name;
+
+    private QueryEntitiesOptionsBuilder(QueryEntitiesOptions queryEntitiesOptions) {
+      environment_id_serialized_name = queryEntitiesOptions.environment_id_serialized_name;
+      collection_id_serialized_name = queryEntitiesOptions.collection_id_serialized_name;
+      feature_serialized_name = queryEntitiesOptions.feature_serialized_name;
+      entity_serialized_name = queryEntitiesOptions.entity_serialized_name;
+      context_serialized_name = queryEntitiesOptions.context_serialized_name;
+      count_serialized_name = queryEntitiesOptions.count_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public QueryEntitiesOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     */
+    public QueryEntitiesOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+    }
+
+    /**
+     * Builds a QueryEntitiesOptions.
+     *
+     * @return the queryEntitiesOptions
+     */
+    public QueryEntitiesOptions build() {
+      return new QueryEntitiesOptions(this);
+    }
+
+    /**
+     * Set the environment_id_serialized_name.
+     *
+     * @param environmentId the environmentId
+     * @return the QueryEntitiesOptions builder
+     */
+    public QueryEntitiesOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collection_id_serialized_name.
+     *
+     * @param collectionId the collectionId
+     * @return the QueryEntitiesOptions builder
+     */
+    public QueryEntitiesOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
+      return this;
+    }
+
+    /**
+     * Set the feature_serialized_name.
+     *
+     * @param feature the feature
+     * @return the QueryEntitiesOptions builder
+     */
+    public QueryEntitiesOptionsBuilder feature(String feature) {
+      this.feature_serialized_name = feature;
+      return this;
+    }
+
+    /**
+     * Set the entity_serialized_name.
+     *
+     * @param entity the entity
+     * @return the QueryEntitiesOptions builder
+     */
+    public QueryEntitiesOptionsBuilder entity(QueryEntitiesEntity entity) {
+      this.entity_serialized_name = entity;
+      return this;
+    }
+
+    /**
+     * Set the context_serialized_name.
+     *
+     * @param context the context
+     * @return the QueryEntitiesOptions builder
+     */
+    public QueryEntitiesOptionsBuilder context(QueryEntitiesContext context) {
+      this.context_serialized_name = context;
+      return this;
+    }
+
+    /**
+     * Set the count_serialized_name.
+     *
+     * @param count the count
+     * @return the QueryEntitiesOptions builder
+     */
+    public QueryEntitiesOptionsBuilder count(Long count) {
+      this.count_serialized_name = count;
+      return this;
+    }
+  }
+
+  /**
+   * An array of entities resulting from the query.
+   */
+  public class QueryEntitiesResponse extends IBMWatsonGenericModel {
+    private List<QueryEntitiesEntity> entities_serialized_name;
+    /**
+     * Gets the entities_serialized_name.
+     *
+     * @return the entities_serialized_name
+     */
+    @AuraEnabled
+    public List<QueryEntitiesEntity> getEntities() {
+      return entities_serialized_name;
+    }
+
+    /**
+     * Sets the entities_serialized_name.
+     *
+     * @param entities the new entities
+     */
+    public void setEntities(final List<QueryEntitiesEntity> entities) {
+      this.entities_serialized_name = entities;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryEntitiesResponse ret = (QueryEntitiesResponse) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for entities_serialized_name
+      List<QueryEntitiesEntity> newEntities = new List<QueryEntitiesEntity>();
+      List<QueryEntitiesEntity> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          QueryEntitiesEntity currentItem = ret.getEntities().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          QueryEntitiesEntity newItem = (QueryEntitiesEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEntitiesEntity.class);
+          newEntities.add(newItem);
+        }
+        ret.setEntities(newEntities);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * QueryFilterType.
+   */
+  public class QueryFilterType extends IBMWatsonGenericModel {
+    private List<String> exclude_serialized_name;
+    private List<String> include_serialized_name;
+    /**
+     * Gets the exclude_serialized_name.
+     *
+     * A comma-separated list of types to exclude.
+     *
+     * @return the exclude_serialized_name
+     */
+    @AuraEnabled
+    public List<String> getExclude() {
+      return exclude_serialized_name;
+    }
+    /**
+     * Gets the include_serialized_name.
+     *
+     * A comma-separated list of types to include. All other types are excluded.
+     *
+     * @return the include_serialized_name
+     */
+    @AuraEnabled
+    public List<String> getInclude() {
+      return include_serialized_name;
+    }
+
+    /**
+     * Sets the exclude_serialized_name.
+     *
+     * @param exclude the new exclude
+     */
+    public void setExclude(final List<String> exclude) {
+      this.exclude_serialized_name = exclude;
+    }
+
+    /**
+     * Sets the include_serialized_name.
+     *
+     * @param include the new include
+     */
+    public void setInclude(final List<String> include) {
+      this.include_serialized_name = include;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryFilterType ret = (QueryFilterType) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -7612,6 +8823,7 @@ public class IBMDiscoveryV1Models {
     private Double score_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private String collection_id_serialized_name;
+    private QueryResultResultMetadata result_metadata_serialized_name;
     private Map<String, Object> additional_properties_serialized_name;
 
     /**
@@ -7652,6 +8864,16 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public String getCollectionId() {
       return collection_id_serialized_name;
+    }
+
+    /**
+     * Gets the result_metadata_serialized_name.
+     *
+     * @return the result_metadata_serialized_name
+     */
+    @AuraEnabled
+    public QueryResultResultMetadata getResultMetadata() {
+      return result_metadata_serialized_name;
     }
 
     /**
@@ -7700,6 +8922,15 @@ public class IBMDiscoveryV1Models {
       this.collection_id_serialized_name = collection_id_serialized_name;
     }
 
+    /**
+     * Sets the result_metadata_serialized_name.
+     *
+     * @param result_metadata_serialized_name the new result_metadata_serialized_name
+     */
+    public void setResultMetadata(final QueryResultResultMetadata result_metadata_serialized_name) {
+      this.result_metadata_serialized_name = result_metadata_serialized_name;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -7710,6 +8941,10 @@ public class IBMDiscoveryV1Models {
       // calling custom deserializer for metadata_serialized_name
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
+
+      // calling custom deserializer for result_metadata_serialized_name
+      QueryResultResultMetadata newResultMetadata = (QueryResultResultMetadata) new QueryResultResultMetadata().deserialize(JSON.serialize(ret.getResultMetadata()), (Map<String, Object>) jsonMap.get('result_metadata_serialized_name'), QueryResultResultMetadata.class);
+      ret.setResultMetadata(newResultMetadata);
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
@@ -8258,8 +9493,8 @@ public class IBMDiscoveryV1Models {
     private String document_id_serialized_name;
     private Double passage_score_serialized_name;
     private String passage_text_serialized_name;
-    private Double start_offset_serialized_name;
-    private Double end_offset_serialized_name;
+    private Long start_offset_serialized_name;
+    private Long end_offset_serialized_name;
     private String field_serialized_name;
     /**
      * Gets the document_id_serialized_name.
@@ -8302,7 +9537,7 @@ public class IBMDiscoveryV1Models {
      * @return the start_offset_serialized_name
      */
     @AuraEnabled
-    public Double getStartOffset() {
+    public Long getStartOffset() {
       return start_offset_serialized_name;
     }
     /**
@@ -8313,7 +9548,7 @@ public class IBMDiscoveryV1Models {
      * @return the end_offset_serialized_name
      */
     @AuraEnabled
-    public Double getEndOffset() {
+    public Long getEndOffset() {
       return end_offset_serialized_name;
     }
     /**
@@ -8360,7 +9595,7 @@ public class IBMDiscoveryV1Models {
      *
      * @param startOffset the new startOffset
      */
-    public void setStartOffset(final Double startOffset) {
+    public void setStartOffset(final long startOffset) {
       this.start_offset_serialized_name = startOffset;
     }
 
@@ -8369,7 +9604,7 @@ public class IBMDiscoveryV1Models {
      *
      * @param endOffset the new endOffset
      */
-    public void setEndOffset(final Double endOffset) {
+    public void setEndOffset(final long endOffset) {
       this.end_offset_serialized_name = endOffset;
     }
 
@@ -8388,6 +9623,606 @@ public class IBMDiscoveryV1Models {
       }
 
       QueryPassages ret = (QueryPassages) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * QueryRelationsArgument.
+   */
+  public class QueryRelationsArgument extends IBMWatsonGenericModel {
+    private List<QueryEntitiesEntity> entities_serialized_name;
+    /**
+     * Gets the entities_serialized_name.
+     *
+     * @return the entities_serialized_name
+     */
+    @AuraEnabled
+    public List<QueryEntitiesEntity> getEntities() {
+      return entities_serialized_name;
+    }
+
+    /**
+     * Sets the entities_serialized_name.
+     *
+     * @param entities the new entities
+     */
+    public void setEntities(final List<QueryEntitiesEntity> entities) {
+      this.entities_serialized_name = entities;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryRelationsArgument ret = (QueryRelationsArgument) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for entities_serialized_name
+      List<QueryEntitiesEntity> newEntities = new List<QueryEntitiesEntity>();
+      List<QueryEntitiesEntity> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          QueryEntitiesEntity currentItem = ret.getEntities().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          QueryEntitiesEntity newItem = (QueryEntitiesEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEntitiesEntity.class);
+          newEntities.add(newItem);
+        }
+        ret.setEntities(newEntities);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * QueryRelationsEntity.
+   */
+  public class QueryRelationsEntity extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    private String type_serialized_name;
+    private Boolean exact_serialized_name;
+    /**
+     * Gets the text_serialized_name.
+     *
+     * Entity text content.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+    /**
+     * Gets the type_serialized_name.
+     *
+     * The type of the specified entity.
+     *
+     * @return the type_serialized_name
+     */
+    @AuraEnabled
+    public String getType() {
+      return type_serialized_name;
+    }
+    /**
+     * Gets the exact_serialized_name.
+     *
+     * If false, implicit disambiguation is performed. The default is `false`.
+     *
+     * @return the exact_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getExact() {
+      return exact_serialized_name;
+    }
+
+    /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the type_serialized_name.
+     *
+     * @param typeVar the new typeVar
+     */
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
+    }
+
+    /**
+     * Sets the exact_serialized_name.
+     *
+     * @param exact the new exact
+     */
+    public void setExact(final Boolean exact) {
+      this.exact_serialized_name = exact;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryRelationsEntity ret = (QueryRelationsEntity) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * QueryRelationsFilter.
+   */
+  public class QueryRelationsFilter extends IBMWatsonGenericModel {
+    private QueryFilterType relation_types_serialized_name;
+    private QueryFilterType entity_types_serialized_name;
+    private List<String> document_ids_serialized_name;
+    /**
+     * Gets the relation_types_serialized_name.
+     *
+     * A list of relation types to include or exclude from the query.
+     *
+     * @return the relation_types_serialized_name
+     */
+    @AuraEnabled
+    public QueryFilterType getRelationTypes() {
+      return relation_types_serialized_name;
+    }
+    /**
+     * Gets the entity_types_serialized_name.
+     *
+     * A list of entity types to include or exclude from the query.
+     *
+     * @return the entity_types_serialized_name
+     */
+    @AuraEnabled
+    public QueryFilterType getEntityTypes() {
+      return entity_types_serialized_name;
+    }
+    /**
+     * Gets the document_ids_serialized_name.
+     *
+     * A comma-separated list of document IDs to include in the query.
+     *
+     * @return the document_ids_serialized_name
+     */
+    @AuraEnabled
+    public List<String> getDocumentIds() {
+      return document_ids_serialized_name;
+    }
+
+    /**
+     * Sets the relation_types_serialized_name.
+     *
+     * @param relationTypes the new relationTypes
+     */
+    public void setRelationTypes(final QueryFilterType relationTypes) {
+      this.relation_types_serialized_name = relationTypes;
+    }
+
+    /**
+     * Sets the entity_types_serialized_name.
+     *
+     * @param entityTypes the new entityTypes
+     */
+    public void setEntityTypes(final QueryFilterType entityTypes) {
+      this.entity_types_serialized_name = entityTypes;
+    }
+
+    /**
+     * Sets the document_ids_serialized_name.
+     *
+     * @param documentIds the new documentIds
+     */
+    public void setDocumentIds(final List<String> documentIds) {
+      this.document_ids_serialized_name = documentIds;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryRelationsFilter ret = (QueryRelationsFilter) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for relation_types_serialized_name
+      QueryFilterType newRelationTypes = (QueryFilterType) new QueryFilterType().deserialize(JSON.serialize(ret.getRelationTypes()), (Map<String, Object>) jsonMap.get('relation_types_serialized_name'), QueryFilterType.class);
+      ret.setRelationTypes(newRelationTypes);
+
+      // calling custom deserializer for entity_types_serialized_name
+      QueryFilterType newEntityTypes = (QueryFilterType) new QueryFilterType().deserialize(JSON.serialize(ret.getEntityTypes()), (Map<String, Object>) jsonMap.get('entity_types_serialized_name'), QueryFilterType.class);
+      ret.setEntityTypes(newEntityTypes);
+
+      return ret;
+    }
+  }
+
+  /**
+   * The queryRelations options.
+   */
+  public class QueryRelationsOptions {
+    private String environment_id_serialized_name;
+    private String collection_id_serialized_name;
+    private List<QueryRelationsEntity> entities_serialized_name;
+    private QueryEntitiesContext context_serialized_name;
+    private String sort_serialized_name;
+    private QueryRelationsFilter filter_serialized_name;
+    private Long count_serialized_name;
+    /**
+     * Gets the environment_id_serialized_name.
+     *
+     * The ID of the environment.
+     *
+     * @return the environment_id_serialized_name
+     */
+    public String environmentId() {
+      return environment_id_serialized_name;
+    }
+    /**
+     * Gets the collection_id_serialized_name.
+     *
+     * The ID of the collection.
+     *
+     * @return the collection_id_serialized_name
+     */
+    public String collectionId() {
+      return collection_id_serialized_name;
+    }
+    /**
+     * Gets the entities_serialized_name.
+     *
+     * An array of entities to find relationships for.
+     *
+     * @return the entities_serialized_name
+     */
+    public List<QueryRelationsEntity> entities() {
+      return entities_serialized_name;
+    }
+    /**
+     * Gets the context_serialized_name.
+     *
+     * Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to query the city of London in England your query would look for `London` with the context of `England`.
+     *
+     * @return the context_serialized_name
+     */
+    public QueryEntitiesContext context() {
+      return context_serialized_name;
+    }
+    /**
+     * Gets the sort_serialized_name.
+     *
+     * The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the number of unique times each entity is identified. The default is `score`.
+     *
+     * @return the sort_serialized_name
+     */
+    public String sortField() {
+      return sort_serialized_name;
+    }
+    /**
+     * Gets the filter_serialized_name.
+     *
+     * Filters to apply to the relationship query.
+     *
+     * @return the filter_serialized_name
+     */
+    public QueryRelationsFilter filter() {
+      return filter_serialized_name;
+    }
+    /**
+     * Gets the count_serialized_name.
+     *
+     * The number of results to return. The default is `10`. The maximum is `1000`.
+     *
+     * @return the count_serialized_name
+     */
+    public Long count() {
+      return count_serialized_name;
+    }
+    private QueryRelationsOptions(QueryRelationsOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
+      environment_id_serialized_name = builder.environment_id_serialized_name;
+      collection_id_serialized_name = builder.collection_id_serialized_name;
+      entities_serialized_name = builder.entities_serialized_name;
+      context_serialized_name = builder.context_serialized_name;
+      sort_serialized_name = builder.sort_serialized_name;
+      filter_serialized_name = builder.filter_serialized_name;
+      count_serialized_name = builder.count_serialized_name;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a QueryRelationsOptions builder
+     */
+    public QueryRelationsOptionsBuilder newBuilder() {
+      return new QueryRelationsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * QueryRelationsOptions Builder.
+   */
+  public class QueryRelationsOptionsBuilder {
+    private String environment_id_serialized_name;
+    private String collection_id_serialized_name;
+    private List<QueryRelationsEntity> entities_serialized_name;
+    private QueryEntitiesContext context_serialized_name;
+    private String sort_serialized_name;
+    private QueryRelationsFilter filter_serialized_name;
+    private Long count_serialized_name;
+
+    private QueryRelationsOptionsBuilder(QueryRelationsOptions queryRelationsOptions) {
+      environment_id_serialized_name = queryRelationsOptions.environment_id_serialized_name;
+      collection_id_serialized_name = queryRelationsOptions.collection_id_serialized_name;
+      entities_serialized_name = queryRelationsOptions.entities_serialized_name;
+      context_serialized_name = queryRelationsOptions.context_serialized_name;
+      sort_serialized_name = queryRelationsOptions.sort_serialized_name;
+      filter_serialized_name = queryRelationsOptions.filter_serialized_name;
+      count_serialized_name = queryRelationsOptions.count_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public QueryRelationsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     */
+    public QueryRelationsOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+    }
+
+    /**
+     * Builds a QueryRelationsOptions.
+     *
+     * @return the queryRelationsOptions
+     */
+    public QueryRelationsOptions build() {
+      return new QueryRelationsOptions(this);
+    }
+
+    /**
+     * Adds an entities to entities_serialized_name.
+     *
+     * @param entities the new entities
+     * @return the QueryRelationsOptions builder
+     */
+    public QueryRelationsOptionsBuilder addEntities(QueryRelationsEntity entities) {
+      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
+      if (this.entities_serialized_name == null) {
+        this.entities_serialized_name = new List<QueryRelationsEntity>();
+      }
+      this.entities_serialized_name.add(entities);
+      return this;
+    }
+
+    /**
+     * Set the environment_id_serialized_name.
+     *
+     * @param environmentId the environmentId
+     * @return the QueryRelationsOptions builder
+     */
+    public QueryRelationsOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collection_id_serialized_name.
+     *
+     * @param collectionId the collectionId
+     * @return the QueryRelationsOptions builder
+     */
+    public QueryRelationsOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
+      return this;
+    }
+
+    /**
+     * Set the entities_serialized_name.
+     * Existing entities_serialized_name will be replaced.
+     *
+     * @param entities the entities
+     * @return the QueryRelationsOptions builder
+     */
+    public QueryRelationsOptionsBuilder entities(List<QueryRelationsEntity> entities) {
+      this.entities_serialized_name = entities;
+      return this;
+    }
+
+    /**
+     * Set the context_serialized_name.
+     *
+     * @param context the context
+     * @return the QueryRelationsOptions builder
+     */
+    public QueryRelationsOptionsBuilder context(QueryEntitiesContext context) {
+      this.context_serialized_name = context;
+      return this;
+    }
+
+    /**
+     * Set the sort_serialized_name.
+     *
+     * @param sortVar the sortVar
+     * @return the QueryRelationsOptions builder
+     */
+    public QueryRelationsOptionsBuilder sortField(String sortVar) {
+      this.sort_serialized_name = sortVar;
+      return this;
+    }
+
+    /**
+     * Set the filter_serialized_name.
+     *
+     * @param filter the filter
+     * @return the QueryRelationsOptions builder
+     */
+    public QueryRelationsOptionsBuilder filter(QueryRelationsFilter filter) {
+      this.filter_serialized_name = filter;
+      return this;
+    }
+
+    /**
+     * Set the count_serialized_name.
+     *
+     * @param count the count
+     * @return the QueryRelationsOptions builder
+     */
+    public QueryRelationsOptionsBuilder count(Long count) {
+      this.count_serialized_name = count;
+      return this;
+    }
+  }
+
+  /**
+   * QueryRelationsRelationship.
+   */
+  public class QueryRelationsRelationship extends IBMWatsonGenericModel {
+    private String type_serialized_name;
+    private Long frequency_serialized_name;
+    private List<QueryRelationsArgument> arguments_serialized_name;
+    /**
+     * Gets the type_serialized_name.
+     *
+     * The identified relationship type.
+     *
+     * @return the type_serialized_name
+     */
+    @AuraEnabled
+    public String getType() {
+      return type_serialized_name;
+    }
+    /**
+     * Gets the frequency_serialized_name.
+     *
+     * The number of times the relationship is mentioned.
+     *
+     * @return the frequency_serialized_name
+     */
+    @AuraEnabled
+    public Long getFrequency() {
+      return frequency_serialized_name;
+    }
+    /**
+     * Gets the arguments_serialized_name.
+     *
+     * Information about the relationship.
+     *
+     * @return the arguments_serialized_name
+     */
+    @AuraEnabled
+    public List<QueryRelationsArgument> getArguments() {
+      return arguments_serialized_name;
+    }
+
+    /**
+     * Sets the type_serialized_name.
+     *
+     * @param typeVar the new typeVar
+     */
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
+    }
+
+    /**
+     * Sets the frequency_serialized_name.
+     *
+     * @param frequency the new frequency
+     */
+    public void setFrequency(final long frequency) {
+      this.frequency_serialized_name = frequency;
+    }
+
+    /**
+     * Sets the arguments_serialized_name.
+     *
+     * @param arguments the new arguments
+     */
+    public void setArguments(final List<QueryRelationsArgument> arguments) {
+      this.arguments_serialized_name = arguments;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryRelationsRelationship ret = (QueryRelationsRelationship) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for arguments_serialized_name
+      List<QueryRelationsArgument> newArguments = new List<QueryRelationsArgument>();
+      List<QueryRelationsArgument> deserializedArguments = ret.getArguments();
+      if (deserializedArguments != null) {
+        for (Integer i = 0; i < deserializedArguments.size(); i++) {
+          QueryRelationsArgument currentItem = ret.getArguments().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('arguments_serialized_name');
+          QueryRelationsArgument newItem = (QueryRelationsArgument) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryRelationsArgument.class);
+          newArguments.add(newItem);
+        }
+        ret.setArguments(newArguments);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * QueryRelationsResponse.
+   */
+  public class QueryRelationsResponse extends IBMWatsonGenericModel {
+    private List<QueryRelationsRelationship> relations_serialized_name;
+    /**
+     * Gets the relations_serialized_name.
+     *
+     * @return the relations_serialized_name
+     */
+    @AuraEnabled
+    public List<QueryRelationsRelationship> getRelations() {
+      return relations_serialized_name;
+    }
+
+    /**
+     * Sets the relations_serialized_name.
+     *
+     * @param relations the new relations
+     */
+    public void setRelations(final List<QueryRelationsRelationship> relations) {
+      this.relations_serialized_name = relations;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryRelationsResponse ret = (QueryRelationsResponse) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for relations_serialized_name
+      List<QueryRelationsRelationship> newRelations = new List<QueryRelationsRelationship>();
+      List<QueryRelationsRelationship> deserializedRelations = ret.getRelations();
+      if (deserializedRelations != null) {
+        for (Integer i = 0; i < deserializedRelations.size(); i++) {
+          QueryRelationsRelationship currentItem = ret.getRelations().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('relations_serialized_name');
+          QueryRelationsRelationship newItem = (QueryRelationsRelationship) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryRelationsRelationship.class);
+          newRelations.add(newItem);
+        }
+        ret.setRelations(newRelations);
+      }
 
       return ret;
     }
@@ -8551,6 +10386,7 @@ public class IBMDiscoveryV1Models {
     private Double score_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private String collection_id_serialized_name;
+    private QueryResultResultMetadata result_metadata_serialized_name;
     private Map<String, Object> additional_properties_serialized_name;
 
     /**
@@ -8591,6 +10427,16 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public String getCollectionId() {
       return collection_id_serialized_name;
+    }
+
+    /**
+     * Gets the result_metadata_serialized_name.
+     *
+     * @return the result_metadata_serialized_name
+     */
+    @AuraEnabled
+    public QueryResultResultMetadata getResultMetadata() {
+      return result_metadata_serialized_name;
     }
 
     /**
@@ -8639,6 +10485,15 @@ public class IBMDiscoveryV1Models {
       this.collection_id_serialized_name = collection_id_serialized_name;
     }
 
+    /**
+     * Sets the result_metadata_serialized_name.
+     *
+     * @param result_metadata_serialized_name the new result_metadata_serialized_name
+     */
+    public void setResultMetadata(final QueryResultResultMetadata result_metadata_serialized_name) {
+      this.result_metadata_serialized_name = result_metadata_serialized_name;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -8650,6 +10505,10 @@ public class IBMDiscoveryV1Models {
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
+      // calling custom deserializer for result_metadata_serialized_name
+      QueryResultResultMetadata newResultMetadata = (QueryResultResultMetadata) new QueryResultResultMetadata().deserialize(JSON.serialize(ret.getResultMetadata()), (Map<String, Object>) jsonMap.get('result_metadata_serialized_name'), QueryResultResultMetadata.class);
+      ret.setResultMetadata(newResultMetadata);
+
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
@@ -8657,6 +10516,43 @@ public class IBMDiscoveryV1Models {
           ret.put(key, jsonMap.get(key));
         }
       }
+
+      return ret;
+    }
+  }
+
+  /**
+   * QueryResultResultMetadata.
+   */
+  public class QueryResultResultMetadata extends IBMWatsonGenericModel {
+    private Double score_serialized_name;
+    /**
+     * Gets the score_serialized_name.
+     *
+     * The confidence score of the result's analysis. A higher score indicating greater confidence.
+     *
+     * @return the score_serialized_name
+     */
+    @AuraEnabled
+    public Double getScore() {
+      return score_serialized_name;
+    }
+
+    /**
+     * Sets the score_serialized_name.
+     *
+     * @param score the new score
+     */
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryResultResultMetadata ret = (QueryResultResultMetadata) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -9232,6 +11128,54 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * TrainingExampleList.
+   */
+  public class TrainingExampleList extends IBMWatsonGenericModel {
+    private List<TrainingExample> examples_serialized_name;
+    /**
+     * Gets the examples_serialized_name.
+     *
+     * @return the examples_serialized_name
+     */
+    @AuraEnabled
+    public List<TrainingExample> getExamples() {
+      return examples_serialized_name;
+    }
+
+    /**
+     * Sets the examples_serialized_name.
+     *
+     * @param examples the new examples
+     */
+    public void setExamples(final List<TrainingExample> examples) {
+      this.examples_serialized_name = examples;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      TrainingExampleList ret = (TrainingExampleList) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for examples_serialized_name
+      List<TrainingExample> newExamples = new List<TrainingExample>();
+      List<TrainingExample> deserializedExamples = ret.getExamples();
+      if (deserializedExamples != null) {
+        for (Integer i = 0; i < deserializedExamples.size(); i++) {
+          TrainingExample currentItem = ret.getExamples().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('examples_serialized_name');
+          TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingExample.class);
+          newExamples.add(newItem);
+        }
+        ret.setExamples(newExamples);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
    * TrainingQuery.
    */
   public class TrainingQuery extends IBMWatsonGenericModel {
@@ -9516,6 +11460,7 @@ public class IBMDiscoveryV1Models {
       if (jsonMap == null) {
         return null;
       }
+
       String data_updated = (String) jsonMap.remove('data_updated_serialized_name');
       String successfully_trained = (String) jsonMap.remove('successfully_trained_serialized_name');
       String jsonStringWithoutDates = JSON.serialize(jsonMap);

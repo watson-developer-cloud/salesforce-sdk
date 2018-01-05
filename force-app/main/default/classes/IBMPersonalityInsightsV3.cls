@@ -13,7 +13,7 @@
  * produces results in JSON or CSV format. The service accepts input in Arabic, English, Japanese, Korean, or Spanish
  * and can produce output in a variety of languages.
  * * **Authentication:** You authenticate to the service by using your service credentials. You can use your credentials
- * to authenticate via a proxy server that resides in Bluemix, or you can use your credentials to obtain a token and
+ * to authenticate via a proxy server that resides in IBM Cloud, or you can use your credentials to obtain a token and
  * contact the service directly. See [Service credentials for Watson
  * services](https://console.bluemix.net/docs/services/watson/getting-started-credentials.html) and [Tokens for
  * authentication](https://console.bluemix.net/docs/services/watson/getting-started-tokens.html).
@@ -77,7 +77,7 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
   public IBMPersonalityInsightsV3Models.Profile profile(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
-    builder.addHeader('content-type', profileOptions.contentType());
+    builder.addHeader('Content-Type', profileOptions.contentType());
     if (profileOptions.contentLanguage() != null) {
       builder.addHeader('Content-Language', profileOptions.contentLanguage());
     }

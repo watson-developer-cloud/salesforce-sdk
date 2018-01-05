@@ -961,6 +961,22 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
+   * Link to the corresponding DBpedia resource.
+   */
+  public class DBpediaResource extends IBMWatsonGenericModel {
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DBpediaResource ret = (DBpediaResource) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
    * The deleteModel options.
    */
   public class DeleteModelOptions {
@@ -1524,6 +1540,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class EntitiesOptions {
     private Long limit_serialized_name;
+    private Boolean mentions_serialized_name;
     private String model_serialized_name;
     private Boolean sentiment_serialized_name;
     private Boolean emotion_serialized_name;
@@ -1536,6 +1553,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public Long limitField() {
       return limit_serialized_name;
+    }
+    /**
+     * Gets the mentions_serialized_name.
+     *
+     * Set this to true to return locations of entity mentions.
+     *
+     * @return the mentions_serialized_name
+     */
+    public Boolean mentions() {
+      return mentions_serialized_name;
     }
     /**
      * Gets the model_serialized_name.
@@ -1569,6 +1596,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
     private EntitiesOptions(EntitiesOptionsBuilder builder) {
       limit_serialized_name = builder.limit_serialized_name;
+      mentions_serialized_name = builder.mentions_serialized_name;
       model_serialized_name = builder.model_serialized_name;
       sentiment_serialized_name = builder.sentiment_serialized_name;
       emotion_serialized_name = builder.emotion_serialized_name;
@@ -1590,12 +1618,14 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class EntitiesOptionsBuilder {
     private Long limit_serialized_name;
+    private Boolean mentions_serialized_name;
     private String model_serialized_name;
     private Boolean sentiment_serialized_name;
     private Boolean emotion_serialized_name;
 
     private EntitiesOptionsBuilder(EntitiesOptions entitiesOptions) {
       limit_serialized_name = entitiesOptions.limit_serialized_name;
+      mentions_serialized_name = entitiesOptions.mentions_serialized_name;
       model_serialized_name = entitiesOptions.model_serialized_name;
       sentiment_serialized_name = entitiesOptions.sentiment_serialized_name;
       emotion_serialized_name = entitiesOptions.emotion_serialized_name;
@@ -1624,6 +1654,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public EntitiesOptionsBuilder limitField(Long limitVar) {
       this.limit_serialized_name = limitVar;
+      return this;
+    }
+
+    /**
+     * Set the mentions_serialized_name.
+     *
+     * @param mentions the mentions
+     * @return the EntitiesOptions builder
+     */
+    public EntitiesOptionsBuilder mentions(Boolean mentions) {
+      this.mentions_serialized_name = mentions;
       return this;
     }
 
@@ -1666,9 +1707,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class EntitiesResult extends IBMWatsonGenericModel {
     private String type_serialized_name;
-    private Double relevance_serialized_name;
-    private Long count_serialized_name;
     private String text_serialized_name;
+    private Double relevance_serialized_name;
+    private List<EntityMention> mentions_serialized_name;
+    private Long count_serialized_name;
     private EmotionScores emotion_serialized_name;
     private FeatureSentimentResults sentiment_serialized_name;
     private DisambiguationResult disambiguation_serialized_name;
@@ -1684,6 +1726,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return type_serialized_name;
     }
     /**
+     * Gets the text_serialized_name.
+     *
+     * The name of the entity.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+    /**
      * Gets the relevance_serialized_name.
      *
      * Relevance score from 0 to 1. Higher values indicate greater relevance.
@@ -1695,6 +1748,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return relevance_serialized_name;
     }
     /**
+     * Gets the mentions_serialized_name.
+     *
+     * Entity mentions and locations.
+     *
+     * @return the mentions_serialized_name
+     */
+    @AuraEnabled
+    public List<EntityMention> getMentions() {
+      return mentions_serialized_name;
+    }
+    /**
      * Gets the count_serialized_name.
      *
      * How many times the entity was mentioned in the text.
@@ -1704,17 +1768,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     @AuraEnabled
     public Long getCount() {
       return count_serialized_name;
-    }
-    /**
-     * Gets the text_serialized_name.
-     *
-     * The name of the entity.
-     *
-     * @return the text_serialized_name
-     */
-    @AuraEnabled
-    public String getText() {
-      return text_serialized_name;
     }
     /**
      * Gets the emotion_serialized_name.
@@ -1760,6 +1813,15 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
      * Sets the relevance_serialized_name.
      *
      * @param relevance the new relevance
@@ -1769,21 +1831,21 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
+     * Sets the mentions_serialized_name.
+     *
+     * @param mentions the new mentions
+     */
+    public void setMentions(final List<EntityMention> mentions) {
+      this.mentions_serialized_name = mentions;
+    }
+
+    /**
      * Sets the count_serialized_name.
      *
      * @param count the new count
      */
     public void setCount(final long count) {
       this.count_serialized_name = count;
-    }
-
-    /**
-     * Sets the text_serialized_name.
-     *
-     * @param text the new text
-     */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
     }
 
     /**
@@ -1820,6 +1882,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       EntitiesResult ret = (EntitiesResult) super.deserialize(jsonString, jsonMap, classType);
 
+      // calling custom deserializer for mentions_serialized_name
+      List<EntityMention> newMentions = new List<EntityMention>();
+      List<EntityMention> deserializedMentions = ret.getMentions();
+      if (deserializedMentions != null) {
+        for (Integer i = 0; i < deserializedMentions.size(); i++) {
+          EntityMention currentItem = ret.getMentions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('mentions_serialized_name');
+          EntityMention newItem = (EntityMention) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntityMention.class);
+          newMentions.add(newItem);
+        }
+        ret.setMentions(newMentions);
+      }
+
       // calling custom deserializer for emotion_serialized_name
       EmotionScores newEmotion = (EmotionScores) new EmotionScores().deserialize(JSON.serialize(ret.getEmotion()), (Map<String, Object>) jsonMap.get('emotion_serialized_name'), EmotionScores.class);
       ret.setEmotion(newEmotion);
@@ -1831,6 +1906,64 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       // calling custom deserializer for disambiguation_serialized_name
       DisambiguationResult newDisambiguation = (DisambiguationResult) new DisambiguationResult().deserialize(JSON.serialize(ret.getDisambiguation()), (Map<String, Object>) jsonMap.get('disambiguation_serialized_name'), DisambiguationResult.class);
       ret.setDisambiguation(newDisambiguation);
+
+      return ret;
+    }
+  }
+
+  /**
+   * EntityMention.
+   */
+  public class EntityMention extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    private List<Long> location_serialized_name;
+    /**
+     * Gets the text_serialized_name.
+     *
+     * Entity mention text.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+    /**
+     * Gets the location_serialized_name.
+     *
+     * Character offsets indicating the beginning and end of the mention in the analyzed text.
+     *
+     * @return the location_serialized_name
+     */
+    @AuraEnabled
+    public List<Long> getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the location_serialized_name.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final List<Long> location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      EntityMention ret = (EntityMention) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -2137,6 +2270,338 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public FeaturesBuilder categories(CategoriesOptions categories) {
       this.categories_serialized_name = categories;
       return this;
+    }
+  }
+
+  /**
+   * Analysis results for each requested feature.
+   */
+  public class FeaturesResults extends IBMWatsonGenericModel {
+    private List<ConceptsResult> concepts_serialized_name;
+    private List<EntitiesResult> entities_serialized_name;
+    private List<KeywordsResult> keywords_serialized_name;
+    private List<CategoriesResult> categories_serialized_name;
+    private EmotionResult emotion_serialized_name;
+    private MetadataResult metadata_serialized_name;
+    private List<RelationsResult> relations_serialized_name;
+    private List<SemanticRolesResult> semantic_roles_serialized_name;
+    private SentimentResult sentiment_serialized_name;
+    /**
+     * Gets the concepts_serialized_name.
+     *
+     * The general concepts referenced or alluded to in the specified content.
+     *
+     * @return the concepts_serialized_name
+     */
+    @AuraEnabled
+    public List<ConceptsResult> getConcepts() {
+      return concepts_serialized_name;
+    }
+    /**
+     * Gets the entities_serialized_name.
+     *
+     * The important entities in the specified content.
+     *
+     * @return the entities_serialized_name
+     */
+    @AuraEnabled
+    public List<EntitiesResult> getEntities() {
+      return entities_serialized_name;
+    }
+    /**
+     * Gets the keywords_serialized_name.
+     *
+     * The important keywords in content organized by relevance.
+     *
+     * @return the keywords_serialized_name
+     */
+    @AuraEnabled
+    public List<KeywordsResult> getKeywords() {
+      return keywords_serialized_name;
+    }
+    /**
+     * Gets the categories_serialized_name.
+     *
+     * The hierarchical 5-level taxonomy the content is categorized into.
+     *
+     * @return the categories_serialized_name
+     */
+    @AuraEnabled
+    public List<CategoriesResult> getCategories() {
+      return categories_serialized_name;
+    }
+    /**
+     * Gets the emotion_serialized_name.
+     *
+     * The anger, disgust, fear, joy, or sadness conveyed by the content.
+     *
+     * @return the emotion_serialized_name
+     */
+    @AuraEnabled
+    public EmotionResult getEmotion() {
+      return emotion_serialized_name;
+    }
+    /**
+     * Gets the metadata_serialized_name.
+     *
+     * The metadata holds author information, publication date and the title of the text/HTML content.
+     *
+     * @return the metadata_serialized_name
+     */
+    @AuraEnabled
+    public MetadataResult getMetadata() {
+      return metadata_serialized_name;
+    }
+    /**
+     * Gets the relations_serialized_name.
+     *
+     * The relationships between entities in the content.
+     *
+     * @return the relations_serialized_name
+     */
+    @AuraEnabled
+    public List<RelationsResult> getRelations() {
+      return relations_serialized_name;
+    }
+    /**
+     * Gets the semantic_roles_serialized_name.
+     *
+     * The subjects of actions and the objects the actions act upon.
+     *
+     * @return the semantic_roles_serialized_name
+     */
+    @AuraEnabled
+    public List<SemanticRolesResult> getSemanticRoles() {
+      return semantic_roles_serialized_name;
+    }
+    /**
+     * Gets the sentiment_serialized_name.
+     *
+     * The sentiment of the content.
+     *
+     * @return the sentiment_serialized_name
+     */
+    @AuraEnabled
+    public SentimentResult getSentiment() {
+      return sentiment_serialized_name;
+    }
+
+    /**
+     * Sets the concepts_serialized_name.
+     *
+     * @param concepts the new concepts
+     */
+    public void setConcepts(final List<ConceptsResult> concepts) {
+      this.concepts_serialized_name = concepts;
+    }
+
+    /**
+     * Sets the entities_serialized_name.
+     *
+     * @param entities the new entities
+     */
+    public void setEntities(final List<EntitiesResult> entities) {
+      this.entities_serialized_name = entities;
+    }
+
+    /**
+     * Sets the keywords_serialized_name.
+     *
+     * @param keywords the new keywords
+     */
+    public void setKeywords(final List<KeywordsResult> keywords) {
+      this.keywords_serialized_name = keywords;
+    }
+
+    /**
+     * Sets the categories_serialized_name.
+     *
+     * @param categories the new categories
+     */
+    public void setCategories(final List<CategoriesResult> categories) {
+      this.categories_serialized_name = categories;
+    }
+
+    /**
+     * Sets the emotion_serialized_name.
+     *
+     * @param emotion the new emotion
+     */
+    public void setEmotion(final EmotionResult emotion) {
+      this.emotion_serialized_name = emotion;
+    }
+
+    /**
+     * Sets the metadata_serialized_name.
+     *
+     * @param metadata the new metadata
+     */
+    public void setMetadata(final MetadataResult metadata) {
+      this.metadata_serialized_name = metadata;
+    }
+
+    /**
+     * Sets the relations_serialized_name.
+     *
+     * @param relations the new relations
+     */
+    public void setRelations(final List<RelationsResult> relations) {
+      this.relations_serialized_name = relations;
+    }
+
+    /**
+     * Sets the semantic_roles_serialized_name.
+     *
+     * @param semanticRoles the new semanticRoles
+     */
+    public void setSemanticRoles(final List<SemanticRolesResult> semanticRoles) {
+      this.semantic_roles_serialized_name = semanticRoles;
+    }
+
+    /**
+     * Sets the sentiment_serialized_name.
+     *
+     * @param sentiment the new sentiment
+     */
+    public void setSentiment(final SentimentResult sentiment) {
+      this.sentiment_serialized_name = sentiment;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      FeaturesResults ret = (FeaturesResults) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for concepts_serialized_name
+      List<ConceptsResult> newConcepts = new List<ConceptsResult>();
+      List<ConceptsResult> deserializedConcepts = ret.getConcepts();
+      if (deserializedConcepts != null) {
+        for (Integer i = 0; i < deserializedConcepts.size(); i++) {
+          ConceptsResult currentItem = ret.getConcepts().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('concepts_serialized_name');
+          ConceptsResult newItem = (ConceptsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConceptsResult.class);
+          newConcepts.add(newItem);
+        }
+        ret.setConcepts(newConcepts);
+      }
+
+      // calling custom deserializer for entities_serialized_name
+      List<EntitiesResult> newEntities = new List<EntitiesResult>();
+      List<EntitiesResult> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          EntitiesResult currentItem = ret.getEntities().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          EntitiesResult newItem = (EntitiesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntitiesResult.class);
+          newEntities.add(newItem);
+        }
+        ret.setEntities(newEntities);
+      }
+
+      // calling custom deserializer for keywords_serialized_name
+      List<KeywordsResult> newKeywords = new List<KeywordsResult>();
+      List<KeywordsResult> deserializedKeywords = ret.getKeywords();
+      if (deserializedKeywords != null) {
+        for (Integer i = 0; i < deserializedKeywords.size(); i++) {
+          KeywordsResult currentItem = ret.getKeywords().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('keywords_serialized_name');
+          KeywordsResult newItem = (KeywordsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), KeywordsResult.class);
+          newKeywords.add(newItem);
+        }
+        ret.setKeywords(newKeywords);
+      }
+
+      // calling custom deserializer for categories_serialized_name
+      List<CategoriesResult> newCategories = new List<CategoriesResult>();
+      List<CategoriesResult> deserializedCategories = ret.getCategories();
+      if (deserializedCategories != null) {
+        for (Integer i = 0; i < deserializedCategories.size(); i++) {
+          CategoriesResult currentItem = ret.getCategories().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('categories_serialized_name');
+          CategoriesResult newItem = (CategoriesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoriesResult.class);
+          newCategories.add(newItem);
+        }
+        ret.setCategories(newCategories);
+      }
+
+      // calling custom deserializer for emotion_serialized_name
+      EmotionResult newEmotion = (EmotionResult) new EmotionResult().deserialize(JSON.serialize(ret.getEmotion()), (Map<String, Object>) jsonMap.get('emotion_serialized_name'), EmotionResult.class);
+      ret.setEmotion(newEmotion);
+
+      // calling custom deserializer for metadata_serialized_name
+      MetadataResult newMetadata = (MetadataResult) new MetadataResult().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), MetadataResult.class);
+      ret.setMetadata(newMetadata);
+
+      // calling custom deserializer for relations_serialized_name
+      List<RelationsResult> newRelations = new List<RelationsResult>();
+      List<RelationsResult> deserializedRelations = ret.getRelations();
+      if (deserializedRelations != null) {
+        for (Integer i = 0; i < deserializedRelations.size(); i++) {
+          RelationsResult currentItem = ret.getRelations().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('relations_serialized_name');
+          RelationsResult newItem = (RelationsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RelationsResult.class);
+          newRelations.add(newItem);
+        }
+        ret.setRelations(newRelations);
+      }
+
+      // calling custom deserializer for semantic_roles_serialized_name
+      List<SemanticRolesResult> newSemanticRoles = new List<SemanticRolesResult>();
+      List<SemanticRolesResult> deserializedSemanticRoles = ret.getSemanticRoles();
+      if (deserializedSemanticRoles != null) {
+        for (Integer i = 0; i < deserializedSemanticRoles.size(); i++) {
+          SemanticRolesResult currentItem = ret.getSemanticRoles().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('semantic_roles_serialized_name');
+          SemanticRolesResult newItem = (SemanticRolesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesResult.class);
+          newSemanticRoles.add(newItem);
+        }
+        ret.setSemanticRoles(newSemanticRoles);
+      }
+
+      // calling custom deserializer for sentiment_serialized_name
+      SentimentResult newSentiment = (SentimentResult) new SentimentResult().deserialize(JSON.serialize(ret.getSentiment()), (Map<String, Object>) jsonMap.get('sentiment_serialized_name'), SentimentResult.class);
+      ret.setSentiment(newSentiment);
+
+      return ret;
+    }
+  }
+
+  /**
+   * RSS or ATOM feed found on the webpage.
+   */
+  public class Feed extends IBMWatsonGenericModel {
+    private String link_serialized_name;
+    /**
+     * Gets the link_serialized_name.
+     *
+     * URL of the RSS or ATOM feed.
+     *
+     * @return the link_serialized_name
+     */
+    @AuraEnabled
+    public String getLink() {
+      return link_serialized_name;
+    }
+
+    /**
+     * Sets the link_serialized_name.
+     *
+     * @param link the new link
+     */
+    public void setLink(final String link) {
+      this.link_serialized_name = link;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Feed ret = (Feed) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -2497,6 +2962,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private List<Author> authors_serialized_name;
     private String publication_date_serialized_name;
     private String title_serialized_name;
+    private String image_serialized_name;
+    private List<Feed> feeds_serialized_name;
     /**
      * Gets the authors_serialized_name.
      *
@@ -2530,6 +2997,28 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public String getTitle() {
       return title_serialized_name;
     }
+    /**
+     * Gets the image_serialized_name.
+     *
+     * URL of a prominent image on the webpage.
+     *
+     * @return the image_serialized_name
+     */
+    @AuraEnabled
+    public String getImage() {
+      return image_serialized_name;
+    }
+    /**
+     * Gets the feeds_serialized_name.
+     *
+     * RSS/ATOM feeds found on the webpage.
+     *
+     * @return the feeds_serialized_name
+     */
+    @AuraEnabled
+    public List<Feed> getFeeds() {
+      return feeds_serialized_name;
+    }
 
     /**
      * Sets the authors_serialized_name.
@@ -2558,6 +3047,24 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.title_serialized_name = title;
     }
 
+    /**
+     * Sets the image_serialized_name.
+     *
+     * @param image the new image
+     */
+    public void setImage(final String image) {
+      this.image_serialized_name = image;
+    }
+
+    /**
+     * Sets the feeds_serialized_name.
+     *
+     * @param feeds the new feeds
+     */
+    public void setFeeds(final List<Feed> feeds) {
+      this.feeds_serialized_name = feeds;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -2576,6 +3083,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
           newAuthors.add(newItem);
         }
         ret.setAuthors(newAuthors);
+      }
+
+      // calling custom deserializer for feeds_serialized_name
+      List<Feed> newFeeds = new List<Feed>();
+      List<Feed> deserializedFeeds = ret.getFeeds();
+      if (deserializedFeeds != null) {
+        for (Integer i = 0; i < deserializedFeeds.size(); i++) {
+          Feed currentItem = ret.getFeeds().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('feeds_serialized_name');
+          Feed newItem = (Feed) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Feed.class);
+          newFeeds.add(newItem);
+        }
+        ret.setFeeds(newFeeds);
       }
 
       return ret;
@@ -2683,10 +3203,313 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
+   * An object containing request parameters.
+   */
+  public class Parameters {
+    private String text_serialized_name;
+    private String html_serialized_name;
+    private String url_serialized_name;
+    private Features features_serialized_name;
+    private Boolean clean_serialized_name;
+    private String xpath_serialized_name;
+    private Boolean fallback_to_raw_serialized_name;
+    private Boolean return_analyzed_text_serialized_name;
+    private String language_serialized_name;
+    private Long limit_text_characters_serialized_name;
+    /**
+     * Gets the text_serialized_name.
+     *
+     * The plain text to analyze.
+     *
+     * @return the text_serialized_name
+     */
+    public String text() {
+      return text_serialized_name;
+    }
+    /**
+     * Gets the html_serialized_name.
+     *
+     * The HTML file to analyze.
+     *
+     * @return the html_serialized_name
+     */
+    public String html() {
+      return html_serialized_name;
+    }
+    /**
+     * Gets the url_serialized_name.
+     *
+     * The web page to analyze.
+     *
+     * @return the url_serialized_name
+     */
+    public String url() {
+      return url_serialized_name;
+    }
+    /**
+     * Gets the features_serialized_name.
+     *
+     * Specific features to analyze the document for.
+     *
+     * @return the features_serialized_name
+     */
+    public Features features() {
+      return features_serialized_name;
+    }
+    /**
+     * Gets the clean_serialized_name.
+     *
+     * Remove website elements, such as links, ads, etc.
+     *
+     * @return the clean_serialized_name
+     */
+    public Boolean clean() {
+      return clean_serialized_name;
+    }
+    /**
+     * Gets the xpath_serialized_name.
+     *
+     * XPath query for targeting nodes in HTML.
+     *
+     * @return the xpath_serialized_name
+     */
+    public String xpath() {
+      return xpath_serialized_name;
+    }
+    /**
+     * Gets the fallback_to_raw_serialized_name.
+     *
+     * Whether to use raw HTML content if text cleaning fails.
+     *
+     * @return the fallback_to_raw_serialized_name
+     */
+    public Boolean fallbackToRaw() {
+      return fallback_to_raw_serialized_name;
+    }
+    /**
+     * Gets the return_analyzed_text_serialized_name.
+     *
+     * Whether or not to return the analyzed text.
+     *
+     * @return the return_analyzed_text_serialized_name
+     */
+    public Boolean returnAnalyzedText() {
+      return return_analyzed_text_serialized_name;
+    }
+    /**
+     * Gets the language_serialized_name.
+     *
+     * ISO 639-1 code indicating the language to use in the analysis.
+     *
+     * @return the language_serialized_name
+     */
+    public String language() {
+      return language_serialized_name;
+    }
+    /**
+     * Gets the limit_text_characters_serialized_name.
+     *
+     * Sets the maximum number of characters that are processed by the service.
+     *
+     * @return the limit_text_characters_serialized_name
+     */
+    public Long limitTextCharacters() {
+      return limit_text_characters_serialized_name;
+    }
+    private Parameters(ParametersBuilder builder) {
+      IBMWatsonValidator.notNull(builder.features_serialized_name, 'features_serialized_name cannot be null');
+      text_serialized_name = builder.text_serialized_name;
+      html_serialized_name = builder.html_serialized_name;
+      url_serialized_name = builder.url_serialized_name;
+      features_serialized_name = builder.features_serialized_name;
+      clean_serialized_name = builder.clean_serialized_name;
+      xpath_serialized_name = builder.xpath_serialized_name;
+      fallback_to_raw_serialized_name = builder.fallback_to_raw_serialized_name;
+      return_analyzed_text_serialized_name = builder.return_analyzed_text_serialized_name;
+      language_serialized_name = builder.language_serialized_name;
+      limit_text_characters_serialized_name = builder.limit_text_characters_serialized_name;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a Parameters builder
+     */
+    public ParametersBuilder newBuilder() {
+      return new ParametersBuilder(this);
+    }
+
+  }
+
+  /**
+   * Parameters Builder.
+   */
+  public class ParametersBuilder {
+    private String text_serialized_name;
+    private String html_serialized_name;
+    private String url_serialized_name;
+    private Features features_serialized_name;
+    private Boolean clean_serialized_name;
+    private String xpath_serialized_name;
+    private Boolean fallback_to_raw_serialized_name;
+    private Boolean return_analyzed_text_serialized_name;
+    private String language_serialized_name;
+    private Long limit_text_characters_serialized_name;
+
+    private ParametersBuilder(Parameters parameters) {
+      text_serialized_name = parameters.text_serialized_name;
+      html_serialized_name = parameters.html_serialized_name;
+      url_serialized_name = parameters.url_serialized_name;
+      features_serialized_name = parameters.features_serialized_name;
+      clean_serialized_name = parameters.clean_serialized_name;
+      xpath_serialized_name = parameters.xpath_serialized_name;
+      fallback_to_raw_serialized_name = parameters.fallback_to_raw_serialized_name;
+      return_analyzed_text_serialized_name = parameters.return_analyzed_text_serialized_name;
+      language_serialized_name = parameters.language_serialized_name;
+      limit_text_characters_serialized_name = parameters.limit_text_characters_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ParametersBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param features the features
+     */
+    public ParametersBuilder(Features features) {
+      this.features_serialized_name = features;
+    }
+
+    /**
+     * Builds a Parameters.
+     *
+     * @return the parameters
+     */
+    public Parameters build() {
+      return new Parameters(this);
+    }
+
+    /**
+     * Set the text_serialized_name.
+     *
+     * @param text the text
+     * @return the Parameters builder
+     */
+    public ParametersBuilder text(String text) {
+      this.text_serialized_name = text;
+      return this;
+    }
+
+    /**
+     * Set the html_serialized_name.
+     *
+     * @param html the html
+     * @return the Parameters builder
+     */
+    public ParametersBuilder html(String html) {
+      this.html_serialized_name = html;
+      return this;
+    }
+
+    /**
+     * Set the url_serialized_name.
+     *
+     * @param url the url
+     * @return the Parameters builder
+     */
+    public ParametersBuilder url(String url) {
+      this.url_serialized_name = url;
+      return this;
+    }
+
+    /**
+     * Set the features_serialized_name.
+     *
+     * @param features the features
+     * @return the Parameters builder
+     */
+    public ParametersBuilder features(Features features) {
+      this.features_serialized_name = features;
+      return this;
+    }
+
+    /**
+     * Set the clean_serialized_name.
+     *
+     * @param clean the clean
+     * @return the Parameters builder
+     */
+    public ParametersBuilder clean(Boolean clean) {
+      this.clean_serialized_name = clean;
+      return this;
+    }
+
+    /**
+     * Set the xpath_serialized_name.
+     *
+     * @param xpath the xpath
+     * @return the Parameters builder
+     */
+    public ParametersBuilder xpath(String xpath) {
+      this.xpath_serialized_name = xpath;
+      return this;
+    }
+
+    /**
+     * Set the fallback_to_raw_serialized_name.
+     *
+     * @param fallbackToRaw the fallbackToRaw
+     * @return the Parameters builder
+     */
+    public ParametersBuilder fallbackToRaw(Boolean fallbackToRaw) {
+      this.fallback_to_raw_serialized_name = fallbackToRaw;
+      return this;
+    }
+
+    /**
+     * Set the return_analyzed_text_serialized_name.
+     *
+     * @param returnAnalyzedText the returnAnalyzedText
+     * @return the Parameters builder
+     */
+    public ParametersBuilder returnAnalyzedText(Boolean returnAnalyzedText) {
+      this.return_analyzed_text_serialized_name = returnAnalyzedText;
+      return this;
+    }
+
+    /**
+     * Set the language_serialized_name.
+     *
+     * @param language the language
+     * @return the Parameters builder
+     */
+    public ParametersBuilder language(String language) {
+      this.language_serialized_name = language;
+      return this;
+    }
+
+    /**
+     * Set the limit_text_characters_serialized_name.
+     *
+     * @param limitTextCharacters the limitTextCharacters
+     * @return the Parameters builder
+     */
+    public ParametersBuilder limitTextCharacters(Long limitTextCharacters) {
+      this.limit_text_characters_serialized_name = limitTextCharacters;
+      return this;
+    }
+  }
+
+  /**
    * RelationArgument.
    */
   public class RelationArgument extends IBMWatsonGenericModel {
     private List<RelationEntity> entities_serialized_name;
+    private List<Long> location_serialized_name;
     private String text_serialized_name;
     /**
      * Gets the entities_serialized_name.
@@ -2696,6 +3519,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     @AuraEnabled
     public List<RelationEntity> getEntities() {
       return entities_serialized_name;
+    }
+    /**
+     * Gets the location_serialized_name.
+     *
+     * Character offsets indicating the beginning and end of the mention in the analyzed text.
+     *
+     * @return the location_serialized_name
+     */
+    @AuraEnabled
+    public List<Long> getLocation() {
+      return location_serialized_name;
     }
     /**
      * Gets the text_serialized_name.
@@ -2716,6 +3550,15 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public void setEntities(final List<RelationEntity> entities) {
       this.entities_serialized_name = entities;
+    }
+
+    /**
+     * Sets the location_serialized_name.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final List<Long> location) {
+      this.location_serialized_name = location;
     }
 
     /**
@@ -2752,7 +3595,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * The entities extracted from a sentence in a given document.
+   * An entity that corresponds with an argument in a relation.
    */
   public class RelationEntity extends IBMWatsonGenericModel {
     private String text_serialized_name;
