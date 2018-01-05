@@ -9368,10 +9368,6 @@ public class IBMConversationV1Models {
 
       MessageRequest ret = (MessageRequest) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for input_serialized_name
-      InputData newInput = (InputData) new InputData().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), InputData.class);
-      ret.setInput(newInput);
-
       // calling custom deserializer for context_serialized_name
       Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'), Context.class);
       ret.setContext(newContext);
