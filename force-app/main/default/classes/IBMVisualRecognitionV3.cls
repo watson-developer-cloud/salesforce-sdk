@@ -1,5 +1,5 @@
 /**
- * **Important**: As of September 8, 2017, the beta period for Similarity Search is closed. For more information, see
+ * **Important:** As of September 8, 2017, the beta period for Similarity Search is closed. For more information, see
  * [Visual Recognition API – Similarity Search
  * Update](https://www.ibm.com/blogs/bluemix/2017/08/visual-recognition-api-similarity-search-update).
  *
@@ -7,8 +7,8 @@
  * images you upload to the service. You can create and train a custom classifier to identify subjects that suit your
  * needs.
  *
- * **Tip**: To test calls to the **Custom classifiers** methods with the API explorer, provide your `api_key` from your
- * Bluemix service instance.
+ * **Tip:** To test calls to the **Custom classifiers** methods with the API explorer, provide your `api_key` from your
+ * IBM&reg; Cloud service instance.
  *
  * @version V3
  * @see <a href="http://www.ibm.com/watson/developercloud/visual-recognition.html">Visual Recognition</a>
@@ -54,24 +54,26 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     setApiKey(apiKey);
   }
 
-   /*
-    * Override authentication mechanism for this endpoint
-    *
-    */
-   protected override void setAuthentication(IBMWatsonRequest.Builder builder) {
-     if (getApiKey() == null) {
-       throw new IBMWatsonServiceExceptions.IllegalArgumentException('api_key needs to be specified. Use setApiKey()');
-     }
-     Url url = builder.build().getUrl();
-     if (String.isBlank(url.getQuery())) {
-       builder.url(builder.build().getUrl().toExternalForm() + '?api_key=' + getApiKey());
-     } else {
-       builder.url(builder.build().getUrl().toExternalForm() + '&api_key=' + getApiKey());
-     }
-   }
+  /*
+   * Override authentication mechanism for this endpoint
+   *
+   */
+  protected override void setAuthentication(IBMWatsonRequest.Builder builder) {
+    if (getApiKey() == null) {
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('api_key needs to be specified. Use setApiKey()');
+    }
+    Url url = builder.build().getUrl();
+    if (String.isBlank(url.getQuery())) {
+      builder.url(builder.build().getUrl().toExternalForm() + '?api_key=' + getApiKey());
+    } else {
+      builder.url(builder.build().getUrl().toExternalForm() + '&api_key=' + getApiKey());
+    }
+  }
 
   /**
    * Classify images.
+   *
+   * Classify images with built-in or custom classifiers.
    *
    * @param classifyOptions the {@link IBMVisualRecognitionV3Models.ClassifyOptions} containing the options for the call
    * @return the {@link IBMVisualRecognitionV3Models.ClassifiedImages} with the response
@@ -100,7 +102,9 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   }
 
   /**
-   * Detect faces in an image.
+   * Detect faces in images.
+   *
+   * Analyze and get data about faces in images. Responses can include estimated age and gender, and the service can identify celebrities. This feature uses a built-in classifier, so you do not train it on custom classifiers. The Detect faces method does not support general biometric facial recognition.
    *
    * @param detectFacesOptions the {@link IBMVisualRecognitionV3Models.DetectFacesOptions} containing the options for the call
    * @return the {@link IBMVisualRecognitionV3Models.DetectedFaces} with the response
@@ -128,6 +132,8 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   /**
    * Create a classifier.
    *
+   * Train a new multi-faceted classifier on the uploaded image data. Create your custom classifier with positive or negative examples. Include at least two sets of examples, either two positive example files or one positive and one negative file. You can upload a maximum of 256 MB per call.  Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
+   *
    * @param createClassifierOptions the {@link IBMVisualRecognitionV3Models.CreateClassifierOptions} containing the options for the call
    * @return the {@link IBMVisualRecognitionV3Models.Classifier} with the response
    */
@@ -142,7 +148,10 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     for (String className : createClassifierOptions.classNames()) {
       String dataName = className + '_positive_examples';
       IBMWatsonFile positiveExamples = createClassifierOptions.positiveExamplesByClassName(className);
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(positiveExamples, 'application/octet-stream');
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
+        positiveExamples,
+        'application/octet-stream'
+      );
       multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
     }
     if (createClassifierOptions.negativeExamples() != null) {
@@ -156,7 +165,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   }
 
   /**
-   * Delete a custom classifier.
+   * Delete a classifier.
    *
    * @param deleteClassifierOptions the {@link IBMVisualRecognitionV3Models.DeleteClassifierOptions} containing the options for the call
    * @return the service call
@@ -170,6 +179,8 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   }
 
   /**
+   * Retrieve classifier details.
+   *
    * Retrieve information about a custom classifier.
    *
    * @param getClassifierOptions the {@link IBMVisualRecognitionV3Models.GetClassifierOptions} containing the options for the call
@@ -201,6 +212,8 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
 
   /**
    * Update a classifier.
+   *
+   * Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to existing classes. You must supply at least one set of positive or negative examples. For details, see [Updating custom classifiers](https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).  Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.  **Important:** You can't update a custom classifier with a free API key. If you have a free key, you can upgrade to a Standard plan. For details, see [Changing your plan](https://console.bluemix.net/docs/pricing/changing_plan.html).  **Tip:** Don't make retraining calls on a classifier until the status is ready. When you submit retraining requests in parallel, the last request overwrites the previous requests. The retrained property shows the last time the classifier retraining finished.
    *
    * @param updateClassifierOptions the {@link IBMVisualRecognitionV3Models.UpdateClassifierOptions} containing the options for the call
    * @return the {@link IBMVisualRecognitionV3Models.Classifier} with the response

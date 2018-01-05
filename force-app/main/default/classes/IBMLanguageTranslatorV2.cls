@@ -102,15 +102,15 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (createModelOptions.forcedGlossary() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createModelOptions.forcedGlossary(), createModelOptions.forcedGlossaryContentType());
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createModelOptions.forcedGlossary(), 'application/octet-stream');
       multipartBuilder.addFormDataPart('forced_glossary', createModelOptions.forcedGlossaryFilename(), fileBody);
     }
     if (createModelOptions.parallelCorpus() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createModelOptions.parallelCorpus(), createModelOptions.parallelCorpusContentType());
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createModelOptions.parallelCorpus(), 'application/octet-stream');
       multipartBuilder.addFormDataPart('parallel_corpus', createModelOptions.parallelCorpusFilename(), fileBody);
     }
     if (createModelOptions.monolingualCorpus() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createModelOptions.monolingualCorpus(), createModelOptions.monolingualCorpusContentType());
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createModelOptions.monolingualCorpus(), 'text/plain');
       multipartBuilder.addFormDataPart('monolingual_corpus', createModelOptions.monolingualCorpusFilename(), fileBody);
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();

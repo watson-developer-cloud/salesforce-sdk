@@ -13,7 +13,7 @@
  * endpoint to analyze the tone of customer service and customer support conversations. The method accepts content in
  * JSON format.
  * * **Authentication:** You authenticate to the service by using your service credentials. You can use your credentials
- * to authenticate via a proxy server that resides in Bluemix, or you can use your credentials to obtain a token and
+ * to authenticate via a proxy server that resides in IBM Cloud, or you can use your credentials to obtain a token and
  * contact the service directly. See [Service credentials for Watson
  * services](https://console.bluemix.net/docs/services/watson/getting-started-credentials.html) and [Tokens for
  * authentication](https://console.bluemix.net/docs/services/watson/getting-started-tokens.html).
@@ -76,7 +76,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
   public IBMToneAnalyzerV3Models.ToneAnalysis tone(IBMToneAnalyzerV3Models.ToneOptions toneOptions) {
     IBMWatsonValidator.notNull(toneOptions, 'toneOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/tone');
-    builder.addHeader('content-type', toneOptions.contentType());
+    builder.addHeader('Content-Type', toneOptions.contentType());
     if (toneOptions.contentLanguage() != null) {
       builder.addHeader('Content-Language', toneOptions.contentLanguage());
     }
