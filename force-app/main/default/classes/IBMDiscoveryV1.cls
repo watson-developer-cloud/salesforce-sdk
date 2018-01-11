@@ -12,6 +12,10 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   private static final String URL = 'https://gateway.watsonplatform.net/discovery/api';
   private String versionDate;
 
+  /** The Constant VERSION_DATE_2018_01_01. */
+    public static final String VERSION_DATE_2018_01_01 = '2018-01-01';
+  /** The Constant VERSION_DATE_2017_11_07. */
+    public static final String VERSION_DATE_2017_11_07 = '2017-11-07';
   /** The Constant VERSION_DATE_2017_09_01. */
     public static final String VERSION_DATE_2017_09_01 = '2017-09-01';
   /** The Constant VERSION_DATE_2017_08_01. */
@@ -532,8 +536,11 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   public IBMDiscoveryV1Models.QueryResponse federatedQuery(IBMDiscoveryV1Models.FederatedQueryOptions federatedQueryOptions) {
     IBMWatsonValidator.notNull(federatedQueryOptions, 'federatedQueryOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/query', new String[]{ federatedQueryOptions.environmentId() }));
+    if(federatedQueryOptions.summary() != null){
+      builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/query', new String[]{ federatedQueryOptions.environmentId(), federatedQueryOptions.collectionIds().get(0) }));
+    }
     builder.query('version', versionDate);
-    if (federatedQueryOptions.collectionIds() != null) {
+    if (federatedQueryOptions.collectionIds() != null && federatedQueryOptions.summary() == null) {
       builder.query('collection_ids', String.join(federatedQueryOptions.collectionIds(), ','));
     }
     if (federatedQueryOptions.filter() != null) {
@@ -568,6 +575,12 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     if (federatedQueryOptions.deduplicateField() != null) {
       builder.query('deduplicate.field', federatedQueryOptions.deduplicateField());
+    }
+    if(federatedQueryOptions.summary() != null){
+      builder.query('summary',String.valueOf(federatedQueryOptions.summary()));
+    }
+    if(federatedQueryoptions.summaryFields() != null){
+      builder.query('summary.fields',federatedQueryOptions.summaryFields());
     }
 
     return (IBMDiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryResponse.class);
