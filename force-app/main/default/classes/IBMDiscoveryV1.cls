@@ -2,7 +2,7 @@
  * The IBM Watson Discovery Service is a cognitive search and content analytics engine that you can add to applications
  * to identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and
  * unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual
- * filtering of results.
+ * filtering of results. //test
  *
  * @version V1
  * @see <a href="http://www.ibm.com/watson/developercloud/discovery.html">Discovery</a>
