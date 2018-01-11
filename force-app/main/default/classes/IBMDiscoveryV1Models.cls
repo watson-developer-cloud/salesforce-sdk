@@ -4089,6 +4089,8 @@ public class IBMDiscoveryV1Models {
     private Boolean highlight_serialized_name;
     private Boolean deduplicate_serialized_name;
     private String deduplicate_field_serialized_name;
+    private Boolean summary_serialized_name;
+    private String summary_fields_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
      *
@@ -4219,6 +4221,26 @@ public class IBMDiscoveryV1Models {
     public String deduplicateField() {
       return deduplicate_field_serialized_name;
     }
+    /**
+     * Gets the summary_serialized_name.
+     *
+     * Used to capture Summary Name
+     *
+     * @return the summary_serialized_name
+     */
+    public Boolean summary(){
+      return summary_serialized_name;
+    }
+    /**
+     * Gets the summary_fields_serialized_name.
+     *
+     * Used to capture Summary result feilds
+     *
+     * @return the summary_fields_serialized_name
+     */
+    public String summaryFields(){
+      return summary_fields_serialized_name;
+    }
     private FederatedQueryOptions(FederatedQueryOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notNull(builder.collection_ids_serialized_name, 'collection_ids_serialized_name cannot be null');
@@ -4235,6 +4257,8 @@ public class IBMDiscoveryV1Models {
       highlight_serialized_name = builder.highlight_serialized_name;
       deduplicate_serialized_name = builder.deduplicate_serialized_name;
       deduplicate_field_serialized_name = builder.deduplicate_field_serialized_name;
+      summary_serialized_name = builder.summary_serialized_name;
+      summary_fields_serialized_name = builder.summary_fields_serialized_name;
     }
 
     /**
@@ -4265,6 +4289,8 @@ public class IBMDiscoveryV1Models {
     private Boolean highlight_serialized_name;
     private Boolean deduplicate_serialized_name;
     private String deduplicate_field_serialized_name;
+    private Boolean summary_serialized_name;
+    private String summary_fields_serialized_name;
 
     private FederatedQueryOptionsBuilder(FederatedQueryOptions federatedQueryOptions) {
       environment_id_serialized_name = federatedQueryOptions.environment_id_serialized_name;
@@ -4496,6 +4522,26 @@ public class IBMDiscoveryV1Models {
      */
     public FederatedQueryOptionsBuilder deduplicateField(String deduplicateField) {
       this.deduplicate_field_serialized_name = deduplicateField;
+      return this;
+    }
+    /**
+     * Set the summary_serialized_name.
+     *
+     * @param summary the summary
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder summary(Boolean summary){
+      this.summary_serialized_name = summary;
+      return this;
+    }
+    /**
+     * Set the summary_fields_serialized_name.
+     *
+     * @param summaryFields the summaryFields
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryoptionsBuilder summaryFields(String summaryFields){
+      this.summary_fields_serialized_name = summaryFields;
       return this;
     }
   }
@@ -8820,9 +8866,13 @@ public class IBMDiscoveryV1Models {
       if (deserializedResults != null) {
         for (Integer i = 0; i < deserializedResults.size(); i++) {
           QueryResult currentItem = ret.getResults().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
-          QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryResult.class);
-          newResults.add(newItem);
+          //List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          Map<String,Object> summarySerializedNameMap = (Map<String,Object>)jsonMap.get('summary_serialized_name');
+          List<Object> itemInMap = (List<Object>) summarySerializedNameMap.get('summary_units_serialized_name');
+          if(itemInMap.size()>i){
+            QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryResult.class);
+            newResults.add(newItem);
+          }
         }
         ret.setResults(newResults);
       }
@@ -8861,7 +8911,7 @@ public class IBMDiscoveryV1Models {
    * QueryResult.
    */
   public class QueryResult extends IBMWatsonDynamicModel {
-    private String id_serialized_name;
+    //private String id_serialized_name;
     private Double score_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private String collection_id_serialized_name;
@@ -8872,10 +8922,10 @@ public class IBMDiscoveryV1Models {
      *
      * @return the id_serialized_name
      */
-    @AuraEnabled
+    /*@AuraEnabled
     public String getId() {
       return id_serialized_name;
-    }
+    }*/
 
     /**
      * Gets the score_serialized_name.
@@ -8906,6 +8956,25 @@ public class IBMDiscoveryV1Models {
     public String getCollectionId() {
       return collection_id_serialized_name;
     }
+    /**
+     * Gets the summary_units_serialized_name.
+     *
+     * @return the summary_units_serialized_name
+     */
+    @AuraEnabled
+    public List<Object> getSummaryUnits() {
+      return summary_units_serialized_name;
+    }
+
+    /**
+     * Gets the result_metadata_serialized_name.
+     *
+     * @return the result_metadata_serialized_name
+     */
+    @AuraEnabled
+    public QueryResultResultMetadata getResultMetadata() {
+      return result_metadata_serialized_name;
+    }
 
     /**
      * Gets the dynamic properties attached to QueryResult.
@@ -8922,9 +8991,9 @@ public class IBMDiscoveryV1Models {
      *
      * @param id_serialized_name the new id_serialized_name
      */
-    public void setId(final String id_serialized_name) {
+    /*public void setId(final String id_serialized_name) {
       this.id_serialized_name = id_serialized_name;
-    }
+    }*/
 
     /**
      * Sets the score_serialized_name.
@@ -8952,6 +9021,23 @@ public class IBMDiscoveryV1Models {
     public void setCollectionId(final String collection_id_serialized_name) {
       this.collection_id_serialized_name = collection_id_serialized_name;
     }
+    /**
+     * Sets the summary_units_serialized_name.
+     *
+     * @param summary_units_serialized_name the new summary_units_serialized_name
+     */
+    public void setSummaryUnits(final List<Object> summary_units_serialized_name) {
+      this.summary_units_serialized_name = summary_units_serialized_name;
+    }
+
+    /**
+     * Sets the result_metadata_serialized_name.
+     *
+     * @param result_metadata_serialized_name the new result_metadata_serialized_name
+     */
+    public void setResultMetadata(final QueryResultResultMetadata result_metadata_serialized_name) {
+      this.result_metadata_serialized_name = result_metadata_serialized_name;
+    }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
@@ -8964,6 +9050,10 @@ public class IBMDiscoveryV1Models {
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
+      // calling custom deserializer for result_metadata_serialized_name
+      QueryResultResultMetadata newResultMetadata = (QueryResultResultMetadata) new QueryResultResultMetadata().deserialize(JSON.serialize(ret.getResultMetadata()), (Map<String, Object>) jsonMap.get('result_metadata_serialized_name'), QueryResultResultMetadata.class);
+      ret.setResultMetadata(newResultMetadata);
+
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
       for (String key : jsonMap.keySet()) {
@@ -8971,6 +9061,43 @@ public class IBMDiscoveryV1Models {
           ret.put(key, jsonMap.get(key));
         }
       }
+
+      return ret;
+    }
+  }
+
+   /**
+   * QueryResultResultMetadata.
+   */
+  public class QueryResultResultMetadata extends IBMWatsonGenericModel {
+    private Double score_serialized_name;
+    /**
+     * Gets the score_serialized_name.
+     *
+     * The confidence score of the result's analysis. A higher score indicating greater confidence.
+     *
+     * @return the score_serialized_name
+     */
+    @AuraEnabled
+    public Double getScore() {
+      return score_serialized_name;
+    }
+
+    /**
+     * Sets the score_serialized_name.
+     *
+     * @param score the new score
+     */
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryResultResultMetadata ret = (QueryResultResultMetadata) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
