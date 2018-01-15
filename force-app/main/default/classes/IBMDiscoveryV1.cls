@@ -12,6 +12,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   private static final String URL = 'https://gateway.watsonplatform.net/discovery/api';
   private String versionDate;
 
+  /** The Constant VERSION_DATE_2018_01_01. */
+    public static final String VERSION_DATE_2018_01_01 = '2018-01-01';
   /** The Constant VERSION_DATE_2017_09_01. */
     public static final String VERSION_DATE_2017_09_01 = '2017-09-01';
   /** The Constant VERSION_DATE_2017_08_01. */

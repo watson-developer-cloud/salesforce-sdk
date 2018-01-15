@@ -8861,7 +8861,7 @@ public class IBMDiscoveryV1Models {
    * QueryResult.
    */
   public class QueryResult extends IBMWatsonDynamicModel {
-    private String id_serialized_name;
+    //private String id_serialized_name;
     private Double score_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private String collection_id_serialized_name;
@@ -8872,10 +8872,10 @@ public class IBMDiscoveryV1Models {
      *
      * @return the id_serialized_name
      */
-    @AuraEnabled
+    /*@AuraEnabled
     public String getId() {
       return id_serialized_name;
-    }
+    }*/
 
     /**
      * Gets the score_serialized_name.
@@ -8922,9 +8922,9 @@ public class IBMDiscoveryV1Models {
      *
      * @param id_serialized_name the new id_serialized_name
      */
-    public void setId(final String id_serialized_name) {
+    /*public void setId(final String id_serialized_name) {
       this.id_serialized_name = id_serialized_name;
-    }
+    }*/
 
     /**
      * Sets the score_serialized_name.
