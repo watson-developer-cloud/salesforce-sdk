@@ -87,14 +87,14 @@ You can install or update the SDK using the Ant Build Tool by following these st
 
 ## Getting Started
 
-Using the Watson services require service credentials in [Bluemix](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&), meaning you will need to create a Bluemix account if you do not have one already.
+Using the Watson services require service credentials in [IBM Cloud](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&), meaning you will need to create an IBM Cloud account if you do not have one already.
 
 To get your service-specific credentials, follow these steps:
 
-1. Log in to [Bluemix](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&)
+1. Log in to [IBM Cloud](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&)
 
 1. Create an instance of the desired service:
-    1. In the Bluemix **Catalog**, select the service you want to use.
+    1. In the IBM Cloud **Catalog**, select the service you want to use.
     1. Click **Create**.
 
 1. Copy your credentials:
