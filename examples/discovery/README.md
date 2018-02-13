@@ -3,11 +3,11 @@
 ## Introduction
 In this lab, you'll get the chance to try out the new Watson Salesforce SDK by interacting with the Watson Discovery API in Apex. After completing the lab, you should have a better idea of the capabilities of the Watson Discovery service and be familiar with the general structure of the SDK.
 
- If throughout the lab you have any other questions, you can find more details about the Discovery service [here](https://www.ibm.com/watson/services/discovery/). Otherwise, let's get started!
+If throughout the lab you have any other questions, you can find more details about the Discovery service [here](https://www.ibm.com/watson/services/discovery/). Otherwise, let's get started!
 
 ## Setup
 
-In real-world use, using the SDK requires the following setup steps:
+Using the SDK requires the following setup steps:
 
 - Sign up/login to IBM Cloud
 - Create desired Watson service instance
@@ -16,9 +16,7 @@ In real-world use, using the SDK requires the following setup steps:
 
 These steps are detailed in the README of the [Watson Salesforce SDK GitHub page](https://github.com/watson-developer-cloud/salesforce-sdk).
 
-However, for the purpose of this lab, we have set up preconfigured Salesforce and IBM Cloud accounts on the lab laptops. All of the usernames and passwords necessary can be found [here](https://ibm-cloudintegration.github.io/techguides/df17labs_creds.html).
-
-If you have any questions about login information, please ask an IBMer staffing the booth.
+Once those steps are complete, you should be ready to continue with the lab.
 
 ## Using the SDK
 Head over to the Developer Console in your Salesforce environment, where we'll be putting our Apex code to call the Discovery service. For most of the Discovery methods, we need to supply an environment ID. 
@@ -171,4 +169,4 @@ If you're interested in exploring further or would like some resources to refere
 - [**IBM Cloud console**](https://console.bluemix.net/) - Where to create and manage Watson services
 - [**Watson documentation**](https://www.ibm.com/watson/developercloud/doc/index.html) - Where to find all documentation on the various Watson services
 - [**Watson API explorer**](https://watson-api-explorer.mybluemix.net/) - Where to see detailed API information and make sample calls
-- [**Watson Developer Cloud GitHub Organization**](https://github.com/watson-developer-cloud) - Public GitHub organization containing other SDKs, starter kits, etc.
+- [**Watson APIs GitHub Organization**](https://github.com/watson-developer-cloud) - Public GitHub organization containing other SDKs, starter kits, etc.
