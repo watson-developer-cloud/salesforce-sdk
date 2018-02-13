@@ -23,6 +23,18 @@ public class IBMWatsonJSONUtil {
         'using', 'virtual', 'webservice', 'when', 'where', 'while', 'yesterday'
     };
   }
+  /**
+   * Replaces any empty string values with 'null'. This will cause that property to be left out of the
+   * string reprentation of the object and will prevent any deserialization issues with empty
+   * strings being returned.
+   *
+   * @param jsonString String representation of the JSON response
+   *
+   * @return String representing our modified JSON response object
+   */
+  public static String replaceEmptyStrings(String jsonString) {
+    return jsonString.replace('""', 'null');
+  }
 
   /**
    * Removes '_serialized_name' suffix to match API spec and modifies JSON request string
@@ -34,8 +46,8 @@ public class IBMWatsonJSONUtil {
    */
   public static String serialize(String jsonString) {
     jsonString = jsonString.remove('_serialized_name');
-    jsonString = raiseAdditionalProperties(jsonString);
-    return jsonString;
+    Map<String, Object> jsonMap = raiseAdditionalProperties((Map<String, Object>) JSON.deserializeUntyped(jsonString));
+    return JSON.serialize(jsonMap);
   }
 
   /**
@@ -90,12 +102,11 @@ public class IBMWatsonJSONUtil {
    * Brings additional properties on dynamic models up one JSON level so that they can
    * be processed properly by the service.
    *
-   * @param jsonString String representation of the JSON request
+   * @param jsonMap Map representation of the JSON request
    *
-   * @return String representing the JSON request with moved additional properties
+   * @return Map representing the JSON request with moved additional properties
    */
-  private static String raiseAdditionalProperties(String jsonString) {
-    Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(jsonString);
+  private static Map<String, Object> raiseAdditionalProperties(Map<String, Object> jsonMap) {
     Map<String, Object> additionalProperties = (Map<String, Object>) jsonMap.get('additional_properties');
     if (additionalProperties != null) {
       for (String key : additionalProperties.keySet()) {
@@ -103,6 +114,15 @@ public class IBMWatsonJSONUtil {
       }
       jsonMap.remove('additional_properties');
     }
-    return JSON.serialize(jsonMap);
+
+    for (String key : jsonMap.keySet()) {
+      Object jsonSection = jsonMap.get(key);
+      if (jsonSection instanceof Map<String, Object>) {
+        Map<String, Object> raisedSection = raiseAdditionalProperties((Map<String, Object>) jsonSection);
+        jsonMap.put(key, raisedSection);
+      }
+    }
+
+    return jsonMap;
   }
 }

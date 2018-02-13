@@ -38,4 +38,17 @@ private class IBMWatsonJSONUtilTest {
 
     System.assertEquals(actualJSON, expectedJSON);
   }
+
+  /**
+   * Test raiseAdditionalProperties with nested additional properties
+   *
+   */
+  static testMethod void testSerializeWithNestedAdditionalProperties() {
+    String mockJSON = '{"foo_serialized_name":"bar","additional_properties":{"baz_serialized_name":"bat"},"bird_serialized_name":{"ohio_serialized_name":"cardinal","additional_properties":{"nest_materials_serialized_name":"twigs"}}}';
+
+    String expectedJSON = '{"baz":"bat","bird":{"nest_materials":"twigs","ohio":"cardinal"},"foo":"bar"}';
+    String actualJSON = IBMWatsonJSONUtil.serialize(mockJSON);
+
+    System.assertEquals(actualJSON, expectedJSON);
+  }
 }
