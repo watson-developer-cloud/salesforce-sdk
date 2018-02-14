@@ -167,6 +167,6 @@ Congratulations! You've completed the lab and hopefully feel more familiar with 
 If you're interested in exploring further or would like some resources to reference in the future, below are some helpful links:
 
 - [**IBM Cloud console**](https://console.bluemix.net/) - Where to create and manage Watson services
-- [**Watson documentation**](https://www.ibm.com/watson/developercloud/doc/index.html) - Where to find all documentation on the various Watson services
+- [**Watson documentation**](https://console.bluemix.net/developer/watson/documentation) - Where to find all documentation on the various Watson services
 - [**Watson API explorer**](https://watson-api-explorer.mybluemix.net/) - Where to see detailed API information and make sample calls
 - [**Watson APIs GitHub Organization**](https://github.com/watson-developer-cloud) - Public GitHub organization containing other SDKs, starter kits, etc.
