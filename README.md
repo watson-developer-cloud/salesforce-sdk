@@ -18,13 +18,15 @@ _Note: To use the automatic deployment button, you must log in using a **Dev Hub
 
 You can also manually deploy the SDK code using the Salesforce DX CLI, which you can install [here](https://developer.salesforce.com/tools/sfdxcli).
 
+The first step to manual deployment is cloning the repository from GitHub using the following command:
+
+```bash
+git clone https://github.com/watson-developer-cloud/salesforce-sdk
+```
+
+Be sure to navigate to the cloned directory before continuing.
+
 To deploy to a scratch org, do the following:
-
-1. Clone this repository from GitHub using the following command:
-
-    ```bash
-    git clone https://github.com/watson-developer-cloud/salesforce-sdk
-    ```
 
 1. Create a new scratch environment (optional if you don't want to re-use an existing one):
 
