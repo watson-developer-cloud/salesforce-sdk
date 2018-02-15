@@ -2,6 +2,12 @@
 
 The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment.
 
+## Prerequisites
+
+Using the Watson services requires creating service instances and getting credentials in [IBM Cloud](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&). This means you will need to create an IBM Cloud account if you do not have one already.
+
+You'll also need a Salesforce account to run your Apex code. To get one, you can visit [this link](https://developer.salesforce.com/signup).
+
 ## Installation
 
 There are three supported installation methods: automatically using Salesforce DX, manually using Salesforce DX, and manually using the Ant build tool. By default, all classes in the SDK will be deployed to your Salesforce org, but using Ant allows you to specify which services you want to deploy to save space. Note though that this is **only** supported with the Ant build tool method.
@@ -94,8 +100,6 @@ Finally, you can also install or update the SDK using the Ant Build Tool. This m
     Valid service names are all services listed [here](https://console.bluemix.net/catalog/?category=watson) written as one word (e.g. Visual Recognition becomes visualrecognition). The parameter is case-insensitive. To deploy multiple services, just run the command again with the next desired service flag.
 
 ## Getting Started
-
-Using the Watson services require service credentials in [IBM Cloud](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&), meaning you will need to create an IBM Cloud account if you do not have one already.
 
 To get your service-specific credentials, follow these steps:
 
