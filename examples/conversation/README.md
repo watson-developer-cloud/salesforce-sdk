@@ -35,7 +35,8 @@ This sample workspace is designed to mimic a smart car assistant that you can as
 In fact, go ahead and delete it by clicking **Delete** in the options menu on the right side of the dialog node. We'll create a new one in a bit.
 
 ## Using the SDK
-Head over to the Developer Console in your Salesforce environment, where we'll be putting our Apex code to call the Conversation service.
+### 1. Creating Entities
+Head over to the Developer Console in your Salesforce environment, where we'll be putting our Apex code to call the Conversation service. **After running each snippet, be sure to clear your code and start fresh for the next one.**
 
 Before performing any actions, we need to create an instance of a Conversation object, whose class is named IBMConversationV1 in the Apex SDK. We can do this with just one line:
 
@@ -47,9 +48,11 @@ The argument passed into the constructor is the version date, and the possible v
 
 Note as well that no code has to be written for authentication, as we set up the named credentials earlier in this lab. However, if we didn't set that up, we could use the `setUsernameAndPassword` method to get the same result.
 
-The first thing we'll do is create two new **entities**: `city` and `city_bad`. These will contain values for cities with good weather and bad weather respectively. Here's what the code looks like:
+The first thing we'll do is create two new **entities**: `city` and `city_bad`. These will contain values for cities with good weather and bad weather respectively. Here's what all the code you should run looks like:
 
 ```apex
+IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+
 // configuring the two entities we want to create
 IBMConversationV1Models.CreateEntityOptions createCityOptions
   = new IBMConversationV1Models.CreateEntityOptionsBuilder()
@@ -91,9 +94,12 @@ You can also check back in your Conversation workspace to verify that your new e
 
 Congratulations! You've made your first successful Watson Conversation call using Apex. Let's continue exploring more of the Conversation API.
 
-Now that we have our entities, we're going to populate them with **values**: basically cities that have good and bad weather. Here's the code for it:
+### 2. Adding Values to our Entities
+Now that we have our entities, we're going to populate them with **values**: basically cities that have good and bad weather. Replace your previous code with this:
 
 ```apex
+IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+
 // create lists of good and bad weather cities
 List<IBMConversationV1Models.CreateValue> cityValues
   = new List<IBMConversationV1Models.CreateValue> {
@@ -139,11 +145,14 @@ conversation.updateEntity(updateCityOptions);
 conversation.updateEntity(updateCityBadOptions);
 ```
 
-Don't forget to remove the old code for creating the entities so that the service doesn't complain about trying to create duplicates. In the above code we don't bother grabbing the responses from the API calls since they won't tell us anything new. If you want to verify that the calls worked, check out the entities in the tooling again and you should see the new values.
+In the above code we don't bother grabbing the responses from the API calls since they won't tell us anything new. If you want to verify that the calls worked, check out the entities in the tooling again and you should see the new values.
 
+### 3. Creating New Dialog Nodes
 Now that we have some cities for good and bad weather, we can modify the dialog to handle these values. We'll start by creating a new dialog node to replace the old weather one we deleted at the beginning of this lab.
 
 ```apex
+IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+
 // set output for weather node
 IBMWatsonMapModel output = new IBMWatsonMapModel();
 output.put('text', 'Can you just remind me what city we\'re in again?');
@@ -170,9 +179,11 @@ With the `conditions` parameter, we specify the conditions that trigger our dial
 
 Besides the very important `conditions` parameter, we've also set the `output` as text and the `previousSibling`, which just determines where in the tree our dialog node will be placed. In our case, we place it right after the first node.
 
-Now that our service can recognize a weather inquiry, we can add the two child nodes to respond to the user's location. By default, the `weather` node we created will trigger and then wait for further user input. These next two nodes will handle that response:
+Now that our service can recognize a weather inquiry, we can add the two child nodes to respond to the user's location. By default, the `weather` node we created will trigger and then wait for further user input. These next two nodes will handle that response. Run this first:
 
 ```apex
+IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+
 // set output for city node
 IBMWatsonMapModel output = new IBMWatsonMapModel();
 output.put('text', 'The weather is looking great as always!');
@@ -191,7 +202,11 @@ IBMConversationV1Models.DialogNode dialogNode = conversation.createDialogNode(cr
 System.debug(dialogNode);
 ```
 
+And then this:
+
 ```apex
+IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+
 // set output for city_bad node
 IBMWatsonMapModel output = new IBMWatsonMapModel();
 output.put('text', 'Sorry, it\'s not looking too nice out.');
@@ -217,9 +232,13 @@ You'll notice that in this case, the `conditions` we chose are prepended with an
 
 The `parent` parameter specifies that both of these nodes can only be triggered after the `weather` dialog node. Remember, you can refresh your tooling screen to get a feel for the new structure of your dialog tree.
 
+### 4. Talking to our Smart Car Assistant
+
 Now, for the moment of truth. Let's go ahead and simulate a small dialog with our updated chatbot by sending three messages. We'll also carry around a `Context` object, which the Conversation service uses to follow chains of conversation. We'll then just loop through the messages, calling the service and updating our context each time:
 
 ```apex
+IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+
 // set messages and initial context
 List<String> messages = new List<String> {
   'Hello!',
