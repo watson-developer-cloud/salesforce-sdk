@@ -59,8 +59,7 @@ public abstract class IBMWatsonService {
       else{
         String responseText = response.getBody();
         if (String.isNotBlank(responseText)) {
-          String responseTextWithNulls = IBMWatsonJSONUtil.replaceEmptyStrings(responseText);
-          Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(responseTextWithNulls);
+          Map<String, Object> jsonMap = (Map<String, Object>) JSON.deserializeUntyped(responseText);
           Map<String, Object> safeJsonMap = IBMWatsonJSONUtil.prepareResponse(jsonMap);
           Object targetObject = targetType.newInstance();
           String jsonString = JSON.serialize(safeJsonMap);

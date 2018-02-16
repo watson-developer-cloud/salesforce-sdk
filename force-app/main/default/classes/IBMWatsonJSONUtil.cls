@@ -23,18 +23,6 @@ public class IBMWatsonJSONUtil {
         'using', 'virtual', 'webservice', 'when', 'where', 'while', 'yesterday'
     };
   }
-  /**
-   * Replaces any empty string values with 'null'. This will cause that property to be left out of the
-   * string reprentation of the object and will prevent any deserialization issues with empty
-   * strings being returned.
-   *
-   * @param jsonString String representation of the JSON response
-   *
-   * @return String representing our modified JSON response object
-   */
-  public static String replaceEmptyStrings(String jsonString) {
-    return jsonString.replace('""', 'null');
-  }
 
   /**
    * Removes '_serialized_name' suffix to match API spec and modifies JSON request string
