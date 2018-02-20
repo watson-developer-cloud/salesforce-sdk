@@ -55,12 +55,6 @@ If you want to use the Watson SDK within a non-scratch environment you can follo
     ```
     In the browser window that opens, sign in to your org with your credentials. More information [here](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_web_flow.htm)
 
-1. Create an output directory:
-
-    ```bash
-    mkdir mdapioutput
-    ```
-
 1. Convert the source code:
 
     ```bash
@@ -116,7 +110,7 @@ There are two ways of specifying credentials, [Using Named Credentials](#using-n
 
 ### Using `Named Credentials`
 
-When creating a service instance like with `new Discovery()`. Each service loads the credentials from `Named Credentials`. The SDK will use the service name and API version to build the `Named Credentials` name.
+When creating a service instance like with `new Discovery()`, each service loads the credentials from `Named Credentials`. The SDK will use the service name and API version to build the `Named Credentials` name.
 
 For example
 
@@ -134,7 +128,7 @@ Will look for `watson_conversation_v1`.
 
 In order to create **Named credentials**:
 
-1. Go to _Setup_
+1. Go to _Setup_ by clicking on the gear icon on the top right of the Salesforce dashboard
 1. Enter _Named Credentials_ in the quick find box and select the highlighted entry
 1. Click on _New Named Credential_
 1. Enter the following values:
@@ -151,13 +145,23 @@ In order to create **Named credentials**:
 
 Storing credentials in the Apex code is not recommended. If possible, use **Named Credentials**.
 
-For example:
+However, if you choose to, here's an example of setting the credentials in your code:
 
 ```java
 IBMDiscoveryV1 discovery = new IBMDiscoveryV1(DiscoveryV1.VERSION_DATE_2017_09_01);
 discovery.setEndPoint('URL');
 discovery.setUsernameAndPassword('USERNAME', 'PASSWORD');
 ```
+
+### Setting Remote Site Settings
+
+The final piece of setup to access Watson services from your Salesforce environment is setting your remote site settings. To do so:
+
+1. Go to _Setup_ by clicking on the gear icon on the top right of the Salesforce dashboard
+1. Enter _Remote Site Settings_ in the quick find box and select the highlighted entry
+1. Click _New Remote Site_
+1. Add whatever name you desire, with the following URL: `https://gateway.watsonplatform.net/`
+1. Click _Save_
 
 ## Examples
 

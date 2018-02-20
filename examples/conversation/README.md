@@ -1,7 +1,7 @@
 # IBM Watson Salesforce SDK - Conversation Lab
 
 ## Introduction
-In this lab, you'll get the chance to try out the new Watson Salesforce SDK by interacting with the Watson Discovery API in Apex. After completing the lab, you should have a better idea of the capabilities of the Watson Conversation service and be familiar with the general structure of the SDK.
+In this lab, you'll get the chance to try out the new Watson Salesforce SDK by interacting with the Watson Conversation API in Apex. After completing the lab, you should have a better idea of the capabilities of the Watson Conversation service and be familiar with the general structure of the SDK.
 
 If throughout the lab you have any other questions, you can find more details about the Conversation service [here](https://www.ibm.com/watson/services/conversation/). Additionally, if you're curious about any API details, you can find them in the [API explorer](https://watson-api-explorer.mybluemix.net/apis/conversation-v1). Otherwise, let's get started!
 
@@ -10,7 +10,7 @@ Using the SDK requires the following setup steps:
 
 - Sign up/login to IBM Cloud
 - Create desired Watson service instance
-- Deploy SDK to your Salesforce org
+- Deploy SDK to your Salesforce org (for the lab, the quickest option will be the manual deployment to a non-scratch org)
 - Set named credentials and remote site settings in Salesforce
 
 These steps are detailed in the README of the [Watson Salesforce SDK GitHub page](https://github.com/watson-developer-cloud/salesforce-sdk).
@@ -36,7 +36,11 @@ In fact, go ahead and delete it by clicking **Delete** in the options menu on th
 
 ## Using the SDK
 ### 1. Creating Entities
-Head over to the Developer Console in your Salesforce environment, where we'll be putting our Apex code to call the Conversation service. **After running each snippet, be sure to clear your code and start fresh for the next one.**
+Head over to the Developer Console in your Salesforce environment, where we'll be putting our Apex code to call the Conversation service. You can get there by clicking on the gear icon in the top right of the Salesforce dashboard:
+
+![Developer console](readme_images/developer_console.png "Developer console")
+
+**After running each snippet, be sure to clear your code and start fresh for the next one.**
 
 Before performing any actions, we need to create an instance of a Conversation object, whose class is named IBMConversationV1 in the Apex SDK. We can do this with just one line:
 
@@ -84,7 +88,7 @@ Be sure to keep it handy, as it will be used throughout the lab for other API ca
 
 It's important to note the pattern here, as it's consistent across the SDK. Before calling a method, we first create an appropriately named Options class using the builder pattern. With the builder, we specify any parameters we'd like to send as options. We then pass the options variable into our method and get some model as a result. With our resulting object, we can access its properties or print it out. By default, all response models in the SDK print out in JSON, coinciding with the service response and making debugging simple.
 
-After running the provided code, you should be able to see the following result in the Developer Console after checking the "Debug Only" option for the logs:
+To execute the provided code, click on the "Execute" button at the bottom of the anonymous code window. Ensure the "Open Log" option is checked. If a log window doesn't open up automatically, double-click on the top row of the "Logs" window at the bottom of the page to do so. After running the code, you should be able to see the following result in the Developer Console after checking the "Debug Only" option for the logs:
 
 ![createEntity results](readme_images/create_entities_result.png "createEntity results")
 
@@ -95,7 +99,7 @@ You can also check back in your Conversation workspace to verify that your new e
 Congratulations! You've made your first successful Watson Conversation call using Apex. Let's continue exploring more of the Conversation API.
 
 ### 2. Adding Values to our Entities
-Now that we have our entities, we're going to populate them with **values**: basically cities that have good and bad weather. Replace your previous code with this:
+Now that we have our entities, we're going to populate them with **values**: basically cities that have good and bad weather. Replace your previous code with the following, making sure to update the `WORKSPACE_ID`s with our workspace ID from your Conversation workspace. Once that's done, execute it.
 
 ```apex
 IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
@@ -145,7 +149,7 @@ conversation.updateEntity(updateCityOptions);
 conversation.updateEntity(updateCityBadOptions);
 ```
 
-In the above code we don't bother grabbing the responses from the API calls since they won't tell us anything new. If you want to verify that the calls worked, check out the entities in the tooling again and you should see the new values.
+In the above code we don't bother grabbing the responses from the API calls since they won't tell us anything new. If you want to verify that the calls worked, check out the entities in the Watson Conversation tooling again and you should see the new values.
 
 ### 3. Creating New Dialog Nodes
 Now that we have some cities for good and bad weather, we can modify the dialog to handle these values. We'll start by creating a new dialog node to replace the old weather one we deleted at the beginning of this lab.
@@ -173,7 +177,7 @@ System.debug(dialogNode);
 
 Run the above code and refresh the **Dialog** tab of the tooling and you should see a dialog node called `weather` added back to the tree. We also set a few other important attributes on this dialog node.
 
-With the `conditions` parameter, we specify the conditions that trigger our dialog node. In this case, `#weather` corresponds to the weather **intent**. If you go to the **Intents** tab and click on `#weather` you can see that we have some preset examples of what a weather intent might look like. Watson Conversation is trained on these examples to recognize user input that falls in this category, triggering the `#weather` intent. When that happens, our new dialog node will be active.
+With the `conditions` parameter, we specify the conditions that trigger our dialog node. In this case, `#weather` corresponds to the weather **intent**. If you go to the **Intents** tab in the Conversation service and click on `#weather` you can see that we have some preset examples of what a weather intent might look like. Watson Conversation is trained on these examples to recognize user input that falls in this category, triggering the `#weather` intent. When that happens, our new dialog node will be active.
 
 ![Weather intent](readme_images/weather_intent.png "Weather intent")
 
@@ -230,7 +234,7 @@ The above code snippets should look pretty similar to when we created the `weath
 
 You'll notice that in this case, the `conditions` we chose are prepended with an `@`. This refers to an **entity**, and they should look very familiar! The `city` node triggers when it recognizes a `@city` entity and the `city_bad` node triggers when it recognizes a `@city_bad` entity, both of which we created and populated earlier.
 
-The `parent` parameter specifies that both of these nodes can only be triggered after the `weather` dialog node. Remember, you can refresh your tooling screen to get a feel for the new structure of your dialog tree.
+The `parent` parameter specifies that both of these nodes can only be triggered after the `weather` dialog node. Remember, you can refresh your Conversation tooling screen to get a feel for the new structure of your dialog tree.
 
 ### 4. Talking to our Smart Car Assistant
 

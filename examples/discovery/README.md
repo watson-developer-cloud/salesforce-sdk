@@ -11,7 +11,7 @@ Using the SDK requires the following setup steps:
 
 - Sign up/login to IBM Cloud
 - Create desired Watson service instance
-- Deploy SDK to your Salesforce org
+- Deploy SDK to your Salesforce org (for the lab, the quickest option will be the manual deployment to a non-scratch org)
 - Set named credentials and remote site settings in Salesforce
 
 These steps are detailed in the README of the [Watson Salesforce SDK GitHub page](https://github.com/watson-developer-cloud/salesforce-sdk).
@@ -20,7 +20,11 @@ Once those steps are complete, you should be ready to continue with the lab.
 
 ## Using the SDK
 ### 1. Listing Environments
-Head over to the Developer Console in your Salesforce environment, where we'll be putting our Apex code to call the Discovery service. **After running each snippet, be sure to clear your code and start fresh for the next one.** For most of the Discovery methods, we need to supply an environment ID. 
+Head over to the Developer Console in your Salesforce environment, where we'll be putting our Apex code to call the Discovery service. You can get there by clicking on the gear icon in the top right of the Salesforce dashboard:
+
+![Developer console](readme_images/developer_console.png "Developer console")
+
+**After running each snippet, be sure to clear your code and start fresh for the next one.** For most of the Discovery methods, we need to supply an environment ID. 
 
 Before going further, it's helpful to understand the structure of the Watson Discovery service. As a user, you upload documents to your Discovery service, which you can later query and analyze. Those documents are stored in **collections**. These can be thought of as boxes of related data. We then can package multiple boxes, or collections, into something like a warehouse, which in Discovery is an **environment**. 
 
@@ -55,7 +59,7 @@ It's important to note the pattern here, as it's consistent across the SDK. Befo
 
 Now that we have our resulting object, we can access its properties or print it out. By default, all response models in the SDK print out in JSON, coinciding with the service response and making debugging simple. At the end of the above code, we print out our `ListEnvironmentsResponse` model to see what came back from the service.
 
-Be sure to check the "Debug Only" option to see only the desired output. After executing the code above, you should see something like the following, with the highlighted property the desired ID. Be sure to write this down for later use.
+To execute the provided code, click on the "Execute" button at the bottom of the anonymous code window. Ensure the "Open Log" option is checked. If a log window doesn't open up automatically, double-click on the top row of the "Logs" window at the bottom of the page to do so. Be sure to check the "Debug Only" option to see only the desired output. After execution, you should see something like the following, with the highlighted property the desired ID. Be sure to write this down for later use.
 
 ![listEnvironments response](readme_images/list_environments_response.png "listEnvironments response")
 
