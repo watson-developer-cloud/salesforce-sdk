@@ -1,6 +1,12 @@
 # IBM Watson Salesforce SDK
 
-The IBM Watson Salesforce SDK uses the [Watson Developer Cloud](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment.
+The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment.
+
+## Prerequisites
+
+Using the Watson services requires creating service instances and getting credentials in [IBM Cloud](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&). This means you will need to create an IBM Cloud account if you do not have one already.
+
+You'll also need a Salesforce account to run your Apex code. To get one, you can visit [this link](https://developer.salesforce.com/signup).
 
 ## Installation
 
@@ -10,15 +16,23 @@ There are three supported installation methods: automatically using Salesforce D
 
 You can automatically deploy the SDK to a new scratch environment using the _Deploy to SFDX_ button.
 
+_Note: To use the automatic deployment button, you must log in using a **Dev Hub** org. If you do not have one, there should be a link to get one after you click the button._
+
 [![Deploy](https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.com/)
 
 ### Salesforce DX Manual deployment
 
-1. Clone this repository from GitHub using the following command:
+You can also manually deploy the SDK code using the Salesforce DX CLI, which you can install [here](https://developer.salesforce.com/tools/sfdxcli).
 
-    ```bash
-    git clone https://github.com/watson-developer-cloud/salesforce-sdk
-    ```
+The first step to manual deployment is cloning the repository from GitHub using the following command:
+
+```bash
+git clone https://github.com/watson-developer-cloud/salesforce-sdk
+```
+
+Be sure to navigate to the cloned directory before continuing.
+
+To deploy to a scratch org, do the following:
 
 1. Create a new scratch environment (optional if you don't want to re-use an existing one):
 
@@ -32,7 +46,7 @@ You can automatically deploy the SDK to a new scratch environment using the _Dep
     sfdx force:source:push
     ```
 
-If you want to use the Watson SDK within a non-scratch environment you can deploy it using the Salesforce DX CLI.
+If you want to use the Watson SDK within a non-scratch environment you can follow these steps:
 
 1. Authenticate the Salesforce DX CLI to the target environment:
 
@@ -40,12 +54,6 @@ If you want to use the Watson SDK within a non-scratch environment you can deplo
     sfdx force:auth:web:login --setdefaultusername
     ```
     In the browser window that opens, sign in to your org with your credentials. More information [here](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_web_flow.htm)
-
-1. Create an output directory:
-
-    ```bash
-    mkdir mdapioutput
-    ```
 
 1. Convert the source code:
 
@@ -61,7 +69,7 @@ If you want to use the Watson SDK within a non-scratch environment you can deplo
 
 ## Installation using the Ant Build Tool
 
-You can install or update the SDK using the Ant Build Tool by following these steps:
+Finally, you can also install or update the SDK using the Ant Build Tool. This method also allows you to specify which services you'd like to deploy.
 
 1. Clone this repository from GitHub using the following command:
 
@@ -87,25 +95,22 @@ You can install or update the SDK using the Ant Build Tool by following these st
 
 ## Getting Started
 
-Using the Watson services require service credentials in [Bluemix](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&), meaning you will need to create a Bluemix account if you do not have one already.
-
 To get your service-specific credentials, follow these steps:
 
-1. Log in to [Bluemix](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&)
+1. Log in to [IBM Cloud](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&)
 
 1. Create an instance of the desired service:
-    1. In the Bluemix **Catalog**, select the service you want to use.
-    1. Click **Create**.
+    1. In the left hamburger menu, select **Watson**.
+    1. Click on **Browse Services**, located under **Watson Services** in the left menu.
+    1. Select the services you'd like to use.
 
-1. Copy your credentials:
-    1. On the left side of the page, click **Service Credentials**, and then **View credentials** to view your service credentials.
-    1. Copy `url`, `username` and `password`.
+1. Copy the credentials at the bottom of the page for the selected services.
 
 There are two ways of specifying credentials, [Using Named Credentials](#using-named-credentials) or [Specifying credentials in the Apex code](#specifying-credentials-in-the-apex-code)
 
 ### Using `Named Credentials`
 
-When creating a service instance like with `new Discovery()`. Each service loads the credentials from `Named Credentials`. The SDK will use the service name and API version to build the `Named Credentials` name.
+When creating a service instance like with `new Discovery()`, each service loads the credentials from `Named Credentials`. The SDK will use the service name and API version to build the `Named Credentials` name.
 
 For example
 
@@ -123,7 +128,7 @@ Will look for `watson_conversation_v1`.
 
 In order to create **Named credentials**:
 
-1. Go to _Setup_
+1. Go to _Setup_ by clicking on the gear icon on the top right of the Salesforce dashboard
 1. Enter _Named Credentials_ in the quick find box and select the highlighted entry
 1. Click on _New Named Credential_
 1. Enter the following values:
@@ -140,13 +145,23 @@ In order to create **Named credentials**:
 
 Storing credentials in the Apex code is not recommended. If possible, use **Named Credentials**.
 
-For example:
+However, if you choose to, here's an example of setting the credentials in your code:
 
 ```java
 IBMDiscoveryV1 discovery = new IBMDiscoveryV1(DiscoveryV1.VERSION_DATE_2017_09_01);
 discovery.setEndPoint('URL');
 discovery.setUsernameAndPassword('USERNAME', 'PASSWORD');
 ```
+
+### Setting Remote Site Settings
+
+The final piece of setup to access Watson services from your Salesforce environment is setting your remote site settings. To do so:
+
+1. Go to _Setup_ by clicking on the gear icon on the top right of the Salesforce dashboard
+1. Enter _Remote Site Settings_ in the quick find box and select the highlighted entry
+1. Click _New Remote Site_
+1. Add whatever name you desire, with the following URL: `https://gateway.watsonplatform.net/`
+1. Click _Save_
 
 ## Examples
 
