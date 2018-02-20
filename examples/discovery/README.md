@@ -79,7 +79,7 @@ IBMDiscoveryV1Models.QueryOptions options
   = new IBMDiscoveryV1Models.QueryOptionsBuilder()
     .environmentId('system')
     .collectionId('news')
-    .naturalLanguageQuery('Dreamforce 2017')
+    .naturalLanguageQuery('IBM Think 2018')
     .count(5)
     .build();
 IBMDiscoveryV1Models.QueryResponse response = discovery.query(options);
@@ -112,7 +112,7 @@ IBMDiscoveryV1Models.QueryOptions options
   = new IBMDiscoveryV1Models.QueryOptionsBuilder()
     .environmentId('system')
     .collectionId('news')
-    .naturalLanguageQuery('Dreamforce 2017')
+    .naturalLanguageQuery('IBM Think 2018')
     .count(5)
     .build();
 IBMDiscoveryV1Models.QueryResponse response = discovery.query(options);
@@ -134,8 +134,8 @@ IBMDiscoveryV1 discovery = new IBMDiscoveryV1(IBMDiscoveryV1.VERSION_DATE_2017_0
 IBMDiscoveryV1Models.CreateCollectionOptions options 
   = new IBMDiscoveryV1Models.CreateCollectionOptionsBuilder()
     .environmentId('ENVIRONMENT_ID') // enter your environment ID here!
-    .name('dreamforce-collection')
-    .description('Collection created at Dreamforce 2017')
+    .name('think-collection')
+    .description('My custom collection')
     .build();
 IBMDiscoveryV1Models.Collection response = discovery.createCollection(options);
 ```
@@ -144,19 +144,19 @@ IBMDiscoveryV1Models.Collection response = discovery.createCollection(options);
 
 If you print out your response object, you should see the details of your newly created collection. Like the environment ID, be sure to keep a note of the returned collection ID, as it will be used when uploading documents and querying. If you'd like extra verification that this worked, head back over to the Discovery tooling. This is a visual way to add and query your Discovery documents on the IBM Cloud platform. You can click [here](https://console.bluemix.net/dashboard/apps/) and then click on your Discovery service and the "Launch tool" button to open up the tooling. If you need to log in, remember to use the credentials in the "Setup" section of this lab.
 
-Once you get there, you should see the default Discovery News collection and your new collection named "dreamforce-collection".
+Once you get there, you should see the default Discovery News collection and your new collection named "think-collection".
 
 ![New collection](readme_images/new_collection.png "New collection")
 
 ### 5. Uploading Documents
-With our new collection, we're now going to upload some documents to it to be able to analyze them. If you look in the `examples/discovery/sample_documents` folder, you'll see that we've provided 10 sample documents, each containing the bio of a Dreamforce 2017 speaker pulled from the Dreamforce website. These are what we'll be using to populate our collection.
+With our new collection, we're now going to upload some documents to it to be able to analyze them. If you look in the `examples/discovery/sample_documents` folder, you'll see that we've provided 5 sample documents, each containing the bio of an IBM Think 2018 speaker. These are what we'll be using to populate our collection.
 
 The easiest way to upload a small set of local documents is to use the tooling, which allows you to drag-and-drop a set of documents into your collection. This functionality is available through the SDK, allowing developers the ablity to upload documents programmatically or to create their own upload interfaces, but for the purpose of this lab, we're going to go with the simpler route.
 
-In the tooling page where you see the Discovery News collection and your custom "dreamforce-collection", click on your custom collection. From here simply grab the 10 sample documents and drag them into your browser window:
+In the tooling page where you see the Discovery News collection and your custom "think-collection", click on your custom collection. From here simply grab the 5 sample documents and drag them into your browser window:
 
 <p align="center">
-  <img src="http://g.recordit.co/cpbD6TSvhU.gif" alt="add documents" />
+  <img src="readme_images/upload_documents.gif" alt="add documents" />
 </p>
 
 After a little bit of processing, you should be taken to the following page, which confirms that the documents have been successfully processed. From here, you can also look at some extracted insights from your data and view the data schema or build queries using the tabs on the left sidebar.
@@ -164,7 +164,7 @@ After a little bit of processing, you should be taken to the following page, whi
 ![Add documents result](readme_images/add_documents_result.png "Add documents result")
 
 ### 6. Querying our Custom Data
-In our case, we're going to make a query using the SDK again, this time using the Discovery Query Language. Our goal will be to pick out documents which contain the `entity` Harvard, which should return to us the speakers who have some connection to the university. To make things easier to digest, we'll filter for just the extracted title of each document, using dot notation to navigate the full JSON response. Paste the following into your developer console, again making sure to substitute your personal environment and collection IDs:
+In our case, we're going to make a query using the SDK again, this time using the Discovery Query Language. Our goal will be to pick out documents which contain the `entity` IBM, which should return to us the speakers who have some connection to the company. To make things easier to digest, we'll filter for just the extracted title of each document, using dot notation to navigate the full JSON response. Paste the following into your developer console, again making sure to substitute your personal environment and collection IDs:
 
 ```apex
 IBMDiscoveryV1 discovery = new IBMDiscoveryV1(IBMDiscoveryV1.VERSION_DATE_2017_09_01);
@@ -173,13 +173,15 @@ IBMDiscoveryV1Models.QueryOptions options
   = new IBMDiscoveryV1Models.QueryOptionsBuilder()
     .environmentId('ENVIRONMENT_ID')
     .collectionId('COLLECTION_ID')
-    .query('enriched_text.entities.text:Harvard')
+    .query('enriched_text.entities.text:IBM')
     .returnField(new List<String> { 'extracted_metadata.title' })
     .build();
 IBMDiscoveryV1Models.QueryResponse response = discovery.query(options);
+
+System.debug(response);
 ```
 
-Taking a look at the printed result, you should see 6 names returned. Sure enough, 5 of the returned speakers hold degrees from Harvard University, with Marc Benioff having the connection due to a mention in Harvard Business Review.
+Taking a look at the printed result, you should see 1 name returned, that name being Ginni Rometty, the IBM President and CEO.
 
 ## Conclusion
 Congratulations! You've completed the lab and hopefully feel more familiar with the Watson Salesforce SDK and navigating IBM Cloud to create and manage your Watson services. We hope that the new SDK will make it easy to integrate Watson into your Salesforce apps by offering a simple, consistent interface.
