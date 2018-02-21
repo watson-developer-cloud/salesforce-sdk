@@ -274,20 +274,20 @@ public class IBMPersonalityInsightsV3Models {
    * Content.
    */
   public class Content {
-    private List<ContentItem> content_items_serialized_name;
+    private List<ContentItem> contentItems_serialized_name;
     /**
-     * Gets the content_items_serialized_name.
+     * Gets the contentItems_serialized_name.
      *
      * An array of `ContentItem` objects that provides the text that is to be analyzed.
      *
-     * @return the content_items_serialized_name
+     * @return the contentItems_serialized_name
      */
     public List<ContentItem> contentItems() {
-      return content_items_serialized_name;
+      return contentItems_serialized_name;
     }
     private Content(ContentBuilder builder) {
-      IBMWatsonValidator.notNull(builder.content_items_serialized_name, 'content_items_serialized_name cannot be null');
-      content_items_serialized_name = builder.content_items_serialized_name;
+      IBMWatsonValidator.notNull(builder.contentItems_serialized_name, 'contentItems_serialized_name cannot be null');
+      contentItems_serialized_name = builder.contentItems_serialized_name;
     }
 
     /**
@@ -305,10 +305,10 @@ public class IBMPersonalityInsightsV3Models {
    * Content Builder.
    */
   public class ContentBuilder {
-    private List<ContentItem> content_items_serialized_name;
+    private List<ContentItem> contentItems_serialized_name;
 
     private ContentBuilder(Content content) {
-      content_items_serialized_name = content.content_items_serialized_name;
+      contentItems_serialized_name = content.contentItems_serialized_name;
     }
 
     /**
@@ -323,7 +323,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param contentItems the contentItems
      */
     public ContentBuilder(List<ContentItem> contentItems) {
-      this.content_items_serialized_name = contentItems;
+      this.contentItems_serialized_name = contentItems;
     }
 
     /**
@@ -336,29 +336,29 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Adds an contentItems to content_items_serialized_name.
+     * Adds an contentItems to contentItems_serialized_name.
      *
      * @param contentItems the new contentItems
      * @return the Content builder
      */
     public ContentBuilder addContentItems(ContentItem contentItems) {
       IBMWatsonValidator.notNull(contentItems, 'contentItems cannot be null');
-      if (this.content_items_serialized_name == null) {
-        this.content_items_serialized_name = new List<ContentItem>();
+      if (this.contentItems_serialized_name == null) {
+        this.contentItems_serialized_name = new List<ContentItem>();
       }
-      this.content_items_serialized_name.add(contentItems);
+      this.contentItems_serialized_name.add(contentItems);
       return this;
     }
 
     /**
-     * Set the content_items_serialized_name.
-     * Existing content_items_serialized_name will be replaced.
+     * Set the contentItems_serialized_name.
+     * Existing contentItems_serialized_name will be replaced.
      *
      * @param contentItems the contentItems
      * @return the Content builder
      */
     public ContentBuilder contentItems(List<ContentItem> contentItems) {
-      this.content_items_serialized_name = contentItems;
+      this.contentItems_serialized_name = contentItems;
       return this;
     }
   }
