@@ -10,20 +10,9 @@
 public class IBMDiscoveryV1 extends IBMWatsonService {
 
   private static final String URL = 'https://gateway.watsonplatform.net/discovery/api';
+
   private String versionDate;
 
-  /** The Constant VERSION_DATE_2017_11_07. */
-    public static final String VERSION_DATE_2017_11_07 = '2017-11-07';
-  /** The Constant VERSION_DATE_2017_09_01. */
-    public static final String VERSION_DATE_2017_09_01 = '2017-09-01';
-  /** The Constant VERSION_DATE_2017_08_01. */
-    public static final String VERSION_DATE_2017_08_01 = '2017-08-01';
-  /** The Constant VERSION_DATE_2017_07_19. */
-    public static final String VERSION_DATE_2017_07_19 = '2017-07-19';
-  /** The Constant VERSION_DATE_2017_06_25. */
-    public static final String VERSION_DATE_2017_06_25 = '2017-06-25';
-  /** The Constant VERSION_DATE_2016_12_01. */
-    public static final String VERSION_DATE_2016_12_01 = '2016-12-01';
   /**
    * Instantiates a new `IBMDiscoveryV1`.
    *
@@ -124,9 +113,9 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
-   * List fields in specified collecitons.
+   * List fields in specified collections.
    *
-   * Gets a list of the unique fields (and their types) stored in the indexes of the specified collecitons.
+   * Gets a list of the unique fields (and their types) stored in the indexes of the specified collections.
    *
    * @param listFieldsOptions the {@link IBMDiscoveryV1Models.ListFieldsOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.ListCollectionFieldsResponse} with the response
@@ -345,6 +334,27 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
+   * Set the expansion list.
+   *
+   * Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is `500`. The current expansion list is replaced with the uploaded content.
+   *
+   * @param createExpansionsOptions the {@link IBMDiscoveryV1Models.CreateExpansionsOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.Expansions} with the response
+   */
+  public IBMDiscoveryV1Models.Expansions createExpansions(IBMDiscoveryV1Models.CreateExpansionsOptions createExpansionsOptions) {
+    IBMWatsonValidator.notNull(createExpansionsOptions, 'createExpansionsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ createExpansionsOptions.environmentId(), createExpansionsOptions.collectionId() }));
+    builder.query('version', versionDate);
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    if (createExpansionsOptions.expansions() != null) {
+      contentJson.put('expansions', createExpansionsOptions.expansions());
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
+
+    return (IBMDiscoveryV1Models.Expansions) createServiceCall(builder.build(), IBMDiscoveryV1Models.Expansions.class);
+  }
+
+  /**
    * Delete a collection.
    *
    * @param deleteCollectionOptions the {@link IBMDiscoveryV1Models.DeleteCollectionOptions} containing the options for the call
@@ -353,6 +363,22 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   public void deleteCollection(IBMDiscoveryV1Models.DeleteCollectionOptions deleteCollectionOptions) {
     IBMWatsonValidator.notNull(deleteCollectionOptions, 'deleteCollectionOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}', new String[]{ deleteCollectionOptions.environmentId(), deleteCollectionOptions.collectionId() }));
+    builder.query('version', versionDate);
+
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * Delete the expansions list.
+   *
+   * Remove the expansion information for this collection. The expansion list must be deleted to disable query expansion for a collection.
+   *
+   * @param deleteExpansionsOptions the {@link IBMDiscoveryV1Models.DeleteExpansionsOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteExpansions(IBMDiscoveryV1Models.DeleteExpansionsOptions deleteExpansionsOptions) {
+    IBMWatsonValidator.notNull(deleteExpansionsOptions, 'deleteExpansionsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ deleteExpansionsOptions.environmentId(), deleteExpansionsOptions.collectionId() }));
     builder.query('version', versionDate);
 
     createServiceCall(builder.build(), null);
@@ -405,6 +431,22 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
 
     return (IBMDiscoveryV1Models.ListCollectionsResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.ListCollectionsResponse.class);
+  }
+
+  /**
+   * List current expansions.
+   *
+   * Returns the current expansion list for the specified collection. If an expansion list is not specified, an object with empty expansion arrays is returned.
+   *
+   * @param listExpansionsOptions the {@link IBMDiscoveryV1Models.ListExpansionsOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.Expansions} with the response
+   */
+  public IBMDiscoveryV1Models.Expansions listExpansions(IBMDiscoveryV1Models.ListExpansionsOptions listExpansionsOptions) {
+    IBMWatsonValidator.notNull(listExpansionsOptions, 'listExpansionsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ listExpansionsOptions.environmentId(), listExpansionsOptions.collectionId() }));
+    builder.query('version', versionDate);
+
+    return (IBMDiscoveryV1Models.Expansions) createServiceCall(builder.build(), IBMDiscoveryV1Models.Expansions.class);
   }
 
   /**
@@ -568,6 +610,15 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (federatedQueryOptions.deduplicateField() != null) {
       builder.query('deduplicate.field', federatedQueryOptions.deduplicateField());
     }
+    if (federatedQueryOptions.similar() != null) {
+      builder.query('similar', String.valueOf(federatedQueryOptions.similar()));
+    }
+    if (federatedQueryOptions.similarDocumentIds() != null) {
+      builder.query('similar.document_ids', String.join(federatedQueryOptions.similarDocumentIds(), ','));
+    }
+    if (federatedQueryOptions.similarFields() != null) {
+      builder.query('similar.fields', String.join(federatedQueryOptions.similarFields(), ','));
+    }
 
     return (IBMDiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryResponse.class);
   }
@@ -616,6 +667,15 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     if (federatedQueryNoticesOptions.deduplicateField() != null) {
       builder.query('deduplicate.field', federatedQueryNoticesOptions.deduplicateField());
+    }
+    if (federatedQueryNoticesOptions.similar() != null) {
+      builder.query('similar', String.valueOf(federatedQueryNoticesOptions.similar()));
+    }
+    if (federatedQueryNoticesOptions.similarDocumentIds() != null) {
+      builder.query('similar.document_ids', String.join(federatedQueryNoticesOptions.similarDocumentIds(), ','));
+    }
+    if (federatedQueryNoticesOptions.similarFields() != null) {
+      builder.query('similar.fields', String.join(federatedQueryNoticesOptions.similarFields(), ','));
     }
 
     return (IBMDiscoveryV1Models.QueryNoticesResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryNoticesResponse.class);
@@ -677,6 +737,15 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     if (queryOptions.deduplicateField() != null) {
       builder.query('deduplicate.field', queryOptions.deduplicateField());
+    }
+    if (queryOptions.similar() != null) {
+      builder.query('similar', String.valueOf(queryOptions.similar()));
+    }
+    if (queryOptions.similarDocumentIds() != null) {
+      builder.query('similar.document_ids', String.join(queryOptions.similarDocumentIds(), ','));
+    }
+    if (queryOptions.similarFields() != null) {
+      builder.query('similar.fields', String.join(queryOptions.similarFields(), ','));
     }
 
     return (IBMDiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryResponse.class);
@@ -765,6 +834,15 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     if (queryNoticesOptions.deduplicateField() != null) {
       builder.query('deduplicate.field', queryNoticesOptions.deduplicateField());
+    }
+    if (queryNoticesOptions.similar() != null) {
+      builder.query('similar', String.valueOf(queryNoticesOptions.similar()));
+    }
+    if (queryNoticesOptions.similarDocumentIds() != null) {
+      builder.query('similar.document_ids', String.join(queryNoticesOptions.similarDocumentIds(), ','));
+    }
+    if (queryNoticesOptions.similarFields() != null) {
+      builder.query('similar.fields', String.join(queryNoticesOptions.similarFields(), ','));
     }
 
     return (IBMDiscoveryV1Models.QueryNoticesResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryNoticesResponse.class);
