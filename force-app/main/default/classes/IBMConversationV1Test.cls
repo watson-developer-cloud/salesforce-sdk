@@ -130,7 +130,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
     IBMConversationV1Models.CreateCounterexample counterexample = new IBMConversationV1Models.CreateCounterexampleBuilder('text')
       .text(counterexampleText)
@@ -229,7 +229,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.DeleteWorkspaceOptions deleteOptions = new IBMConversationV1Models.DeleteWorkspaceOptionsBuilder()
@@ -252,7 +252,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.GetWorkspaceOptions getOptions = new IBMConversationV1Models.GetWorkspaceOptionsBuilder()
@@ -290,7 +290,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.UpdateWorkspaceOptions updateOptions = new IBMConversationV1Models.UpdateWorkspaceOptionsBuilder()
@@ -321,7 +321,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.ListWorkspacesOptions listOptions = new IBMConversationV1Models.ListWorkspacesOptionsBuilder()
@@ -354,7 +354,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.CreateValueOptions createOptions = new IBMConversationV1Models.CreateValueOptionsBuilder()
@@ -388,7 +388,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.DeleteValueOptions deleteOptions = new IBMConversationV1Models.DeleteValueOptionsBuilder()
@@ -413,7 +413,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.GetValueOptions getOptions = new IBMConversationV1Models.GetValueOptionsBuilder()
@@ -445,7 +445,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.UpdateValueOptions updateOptions = new IBMConversationV1Models.UpdateValueOptionsBuilder()
@@ -479,7 +479,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.ListValuesOptions listOptions = new IBMConversationV1Models.ListValuesOptionsBuilder()
@@ -513,7 +513,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.InputData input = new IBMConversationV1Models.InputDataBuilder()
@@ -557,7 +557,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.CreateIntentOptions createOptions = new IBMConversationV1Models.CreateIntentOptionsBuilder()
@@ -586,7 +586,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.DeleteIntentOptions deleteOptions = new IBMConversationV1Models.DeleteIntentOptionsBuilder()
@@ -610,7 +610,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.GetIntentOptions getOptions = new IBMConversationV1Models.GetIntentOptionsBuilder()
@@ -642,7 +642,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.ListIntentsOptions listOptions = new IBMConversationV1Models.ListIntentsOptionsBuilder()
@@ -677,7 +677,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.UpdateIntentOptions updateOptions = new IBMConversationV1Models.UpdateIntentOptionsBuilder()
@@ -706,7 +706,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.CreateExampleOptions createOptions = new IBMConversationV1Models.CreateExampleOptionsBuilder()
@@ -734,7 +734,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.DeleteExampleOptions deleteOptions = new IBMConversationV1Models.DeleteExampleOptionsBuilder()
@@ -759,7 +759,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.GetExampleOptions getOptions = new IBMConversationV1Models.GetExampleOptionsBuilder()
@@ -787,7 +787,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.ListExamplesOptions listOptions = new IBMConversationV1Models.ListExamplesOptionsBuilder()
@@ -818,7 +818,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.UpdateExampleOptions updateOptions = new IBMConversationV1Models.UpdateExampleOptionsBuilder()
@@ -847,7 +847,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.CreateEntityOptions createOptions = new IBMConversationV1Models.CreateEntityOptionsBuilder()
@@ -878,7 +878,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.DeleteEntityOptions deleteOptions = new IBMConversationV1Models.DeleteEntityOptionsBuilder()
@@ -902,7 +902,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.GetEntityOptions getOptions = new IBMConversationV1Models.GetEntityOptionsBuilder()
@@ -939,7 +939,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.ListEntitiesOptions listOptions = new IBMConversationV1Models.ListEntitiesOptionsBuilder()
@@ -979,7 +979,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.UpdateEntityOptions updateOptions = new IBMConversationV1Models.UpdateEntityOptionsBuilder()
@@ -1010,7 +1010,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.CreateSynonymOptions createOptions = new IBMConversationV1Models.CreateSynonymOptionsBuilder()
@@ -1039,7 +1039,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.DeleteSynonymOptions deleteOptions = new IBMConversationV1Models.DeleteSynonymOptionsBuilder()
@@ -1065,7 +1065,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.GetSynonymOptions getOptions = new IBMConversationV1Models.GetSynonymOptionsBuilder()
@@ -1094,7 +1094,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.ListSynonymsOptions listOptions = new IBMConversationV1Models.ListSynonymsOptionsBuilder()
@@ -1126,7 +1126,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.UpdateSynonymOptions updateOptions = new IBMConversationV1Models.UpdateSynonymOptionsBuilder()
@@ -1156,7 +1156,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.CreateDialogNodeOptions createOptions = new IBMConversationV1Models.CreateDialogNodeOptionsBuilder()
@@ -1202,7 +1202,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.DeleteDialogNodeOptions deleteOptions = new IBMConversationV1Models.DeleteDialogNodeOptionsBuilder()
@@ -1226,7 +1226,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.GetDialogNodeOptions getOptions = new IBMConversationV1Models.GetDialogNodeOptionsBuilder()
@@ -1272,7 +1272,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.ListDialogNodesOptions listOptions = new IBMConversationV1Models.ListDialogNodesOptionsBuilder()
@@ -1319,7 +1319,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.UpdateDialogNodeOptions updateOptions = new IBMConversationV1Models.UpdateDialogNodeOptionsBuilder()
@@ -1365,7 +1365,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.ListLogsOptions listOptions = new IBMConversationV1Models.ListLogsOptionsBuilder()
@@ -1410,7 +1410,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.CreateCounterexampleOptions createOptions = new IBMConversationV1Models.CreateCounterexampleOptionsBuilder()
@@ -1436,7 +1436,7 @@ private class IBMConversationV1Test {
       null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.CreateCounterexampleOptions createOptions =
@@ -1462,7 +1462,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.DeleteCounterexampleOptions deleteOptions = new IBMConversationV1Models.DeleteCounterexampleOptionsBuilder()
@@ -1486,7 +1486,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.GetCounterexampleOptions getOptions = new IBMConversationV1Models.GetCounterexampleOptionsBuilder()
@@ -1513,7 +1513,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.ListCounterexamplesOptions listOptions = new IBMConversationV1Models.ListCounterexamplesOptionsBuilder()
@@ -1543,7 +1543,7 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.UpdateCounterexampleOptions updateOptions = new IBMConversationV1Models.UpdateCounterexampleOptionsBuilder()
