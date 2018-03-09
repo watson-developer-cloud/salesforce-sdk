@@ -55,6 +55,9 @@ public abstract class IBMWatsonService {
           .build();
         return resFile;
       }
+      else if (targetType.equals(String.class)) {
+        return response.getBody();
+      }
       // all other response types
       else{
         String responseText = response.getBody();

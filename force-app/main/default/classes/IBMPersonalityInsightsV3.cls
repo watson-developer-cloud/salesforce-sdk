@@ -36,6 +36,7 @@
 public class IBMPersonalityInsightsV3 extends IBMWatsonService {
 
   private static final String URL = 'https://gateway.watsonplatform.net/personality-insights/api';
+
   private String versionDate;
 
   /**
@@ -88,9 +89,6 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     if (profileOptions.rawScores() != null) {
       builder.query('raw_scores', String.valueOf(profileOptions.rawScores()));
     }
-    if (profileOptions.csvHeaders() != null) {
-      builder.query('csv_headers', String.valueOf(profileOptions.csvHeaders()));
-    }
     if (profileOptions.consumptionPreferences() != null) {
       builder.query('consumption_preferences', String.valueOf(profileOptions.consumptionPreferences()));
     }
@@ -102,6 +100,35 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     }
 
     return (IBMPersonalityInsightsV3Models.Profile) createServiceCall(builder.build(), IBMPersonalityInsightsV3Models.Profile.class);
+  }
+
+  public String getProfileAsCSV(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions, boolean includeHeaders) {
+    IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
+    builder.query('version', versionDate);
+    builder.addHeader('Content-Type', profileOptions.contentType());
+    if (profileOptions.contentLanguage() != null) {
+      builder.addHeader('Content-Language', profileOptions.contentLanguage());
+    }
+    if (profileOptions.acceptLanguage() != null) {
+      builder.addHeader('Accept-Language', profileOptions.acceptLanguage());
+    }
+    if (profileOptions.rawScores() != null) {
+      builder.query('raw_scores', String.valueOf(profileOptions.rawScores()));
+    }
+    if (profileOptions.consumptionPreferences() != null) {
+      builder.query('consumption_preferences', String.valueOf(profileOptions.consumptionPreferences()));
+    }
+    if (profileOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
+      builder.bodyJson(JSON.serialize(profileOptions.content(), true));
+    } else {
+      builder.bodyContent(profileOptions.body(), profileOptions.contentType());
+    }
+
+    builder.addHeader('Accept', IBMWatsonHttpMediaType.TEXT_CSV);
+    builder.query('csv_headers', String.valueOf(includeHeaders));
+
+    return String.valueOf(createServiceCall(builder.build(), String.class));
   }
 
 }
