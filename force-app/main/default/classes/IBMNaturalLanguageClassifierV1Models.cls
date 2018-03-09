@@ -378,43 +378,6 @@ public class IBMNaturalLanguageClassifierV1Models {
   }
 
   /**
-   * Request payload to classify.
-   */
-  public class ClassifyInput extends IBMWatsonGenericModel {
-    private String text_serialized_name;
-    /**
-     * Gets the text_serialized_name.
-     *
-     * The submitted phrase.
-     *
-     * @return the text_serialized_name
-     */
-    @AuraEnabled
-    public String getText() {
-      return text_serialized_name;
-    }
-
-    /**
-     * Sets the text_serialized_name.
-     *
-     * @param text the new text
-     */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ClassifyInput ret = (ClassifyInput) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
    * The classify options.
    */
   public class ClassifyOptions {
@@ -530,7 +493,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Gets the training_metadata_serialized_name.
      *
-     * Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the classifier. For details, see the [API reference](https://www.ibm.com/watson/developercloud/natural-language-classifier/api/v1/#create_classifier).
+     * Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the classifier.
      *
      * @return the training_metadata_serialized_name
      */
@@ -550,7 +513,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Gets the training_data_serialized_name.
      *
-     * Training data in CSV format. Each text value must have at least one class. The data can include up to 15,000 records. For details, see [Using your own data](https://www.ibm.com/watson/developercloud/doc/natural-language-classifier/using-your-data.html).
+     * Training data in CSV format. Each text value must have at least one class. The data can include up to 15,000 records. For details, see [Using your own data](https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html).
      *
      * @return the training_data_serialized_name
      */
@@ -748,85 +711,6 @@ public class IBMNaturalLanguageClassifierV1Models {
     public DeleteClassifierOptionsBuilder classifierId(String classifierId) {
       this.classifier_id_serialized_name = classifierId;
       return this;
-    }
-  }
-
-  /**
-   * Response payload for HTTP errors.
-   */
-  public class ErrorResponse extends IBMWatsonGenericModel {
-    private Long code_serialized_name;
-    private String error_serialized_name;
-    private String description_serialized_name;
-    /**
-     * Gets the code_serialized_name.
-     *
-     * HTTP status code.
-     *
-     * @return the code_serialized_name
-     */
-    @AuraEnabled
-    public Long getCode() {
-      return code_serialized_name;
-    }
-    /**
-     * Gets the error_serialized_name.
-     *
-     * Error name.
-     *
-     * @return the error_serialized_name
-     */
-    @AuraEnabled
-    public String getError() {
-      return error_serialized_name;
-    }
-    /**
-     * Gets the description_serialized_name.
-     *
-     * Error description.
-     *
-     * @return the description_serialized_name
-     */
-    @AuraEnabled
-    public String getDescription() {
-      return description_serialized_name;
-    }
-
-    /**
-     * Sets the code_serialized_name.
-     *
-     * @param code the new code
-     */
-    public void setCode(final long code) {
-      this.code_serialized_name = code;
-    }
-
-    /**
-     * Sets the error_serialized_name.
-     *
-     * @param error the new error
-     */
-    public void setError(final String error) {
-      this.error_serialized_name = error;
-    }
-
-    /**
-     * Sets the description_serialized_name.
-     *
-     * @param description the new description
-     */
-    public void setDescription(final String description) {
-      this.description_serialized_name = description;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ErrorResponse ret = (ErrorResponse) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
     }
   }
 
