@@ -1,6 +1,5 @@
 public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
   private static String URL = 'https://gateway.watsonplatform.net/natural-language-understanding/api';
-  private static String VERSION_2017_09_01 = '2017-09-01';
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_natural_language_understanding_v1';
 
@@ -14,7 +13,7 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
    *
    */
   public static IBMNaturalLanguageUnderstandingV1Models.AnalysisResults testAnalyze(String username, String password) {
-    IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1(VERSION_2017_09_01);
+    IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('2017-02-27');
 
     if (username != null && password != null) {
       naturalLanguageUnderstanding.setEndPoint(URL);
@@ -97,7 +96,7 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
   }
 
   public static IBMNaturalLanguageUnderstandingV1Models.ListModelsResults testListModels(String username, String password) {
-    IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1(VERSION_2017_09_01);
+    IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('2017-02-27');
 
     if (username != null && password != null) {
       naturalLanguageUnderstanding.setEndPoint(URL);
