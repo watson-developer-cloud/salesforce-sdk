@@ -724,6 +724,7 @@ public class IBMVisualRecognitionV3Models {
     private List<String> owners_serialized_name;
     private List<String> classifier_ids_serialized_name;
     private String images_file_content_type_serialized_name;
+    private String parameters_serialized_name; 
     /**
      * Gets the images_file_serialized_name.
      *
@@ -804,6 +805,16 @@ public class IBMVisualRecognitionV3Models {
     public String imagesFileContentType() {
       return images_file_content_type_serialized_name;
     }
+    /**
+     * Gets the parameters_serialized_name.
+     *
+     * A JSON object that specifies additional request options. The parameter can be sent as a string or a file, and can include these inputs:  - **url**: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images in the **images_file** parameter. - **threshold**: A floating point value that specifies the minimum score a class must have to be displayed in the response. The default threshold for returning scores from a classifier is `0.5`. Set the threshold to `0.0` to ignore the classification score and return all values. - **owners**: An array of the categories of classifiers to apply. Use `IBM` to classify against the `default` general classifier, and use `me` to classify against your custom classifiers. To analyze the image against both classifier categories, set the value to both `IBM` and `me`. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.      The **classifier_ids** parameter overrides **owners**, so make sure that **classifier_ids** is empty. - **classifier_ids**: Specifies which classifiers to apply and overrides the **owners** parameter. You can specify both custom and built-in classifiers. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.  The following built-in classifier IDs require no training: - `default`: Returns classes from thousands of general tags. - `food`: (Beta) Enhances specificity and accuracy for images of food items. - `explicit`: (Beta) Evaluates whether the image might be pornographic.  Example: `{"classifier_ids":["CarsvsTrucks_1479118188","explicit"],"threshold":0.6}`.
+     *
+     * @return the parameters_serialized_name
+     */
+    public String parameters() {
+      return parameters_serialized_name;
+    }
     private ClassifyOptions(ClassifyOptionsBuilder builder) {
       images_file_serialized_name = builder.images_file_serialized_name;
       images_filename_serialized_name = builder.images_filename_serialized_name;
@@ -813,6 +824,7 @@ public class IBMVisualRecognitionV3Models {
       owners_serialized_name = builder.owners_serialized_name;
       classifier_ids_serialized_name = builder.classifier_ids_serialized_name;
       images_file_content_type_serialized_name = builder.images_file_content_type_serialized_name;
+      parameters_serialized_name = builder.parameters_serialized_name;
     }
 
     /**
@@ -838,6 +850,7 @@ public class IBMVisualRecognitionV3Models {
     private List<String> owners_serialized_name;
     private List<String> classifier_ids_serialized_name;
     private String images_file_content_type_serialized_name;
+    private String parameters_serialized_name;
 
     private ClassifyOptionsBuilder(ClassifyOptions classifyOptions) {
       images_file_serialized_name = classifyOptions.images_file_serialized_name;
@@ -848,6 +861,7 @@ public class IBMVisualRecognitionV3Models {
       owners_serialized_name = classifyOptions.owners_serialized_name;
       classifier_ids_serialized_name = classifyOptions.classifier_ids_serialized_name;
       images_file_content_type_serialized_name = classifyOptions.images_file_content_type_serialized_name;
+      parameters_serialized_name = classifyOptions.parameters_serialized_name;
     }
 
     /**
@@ -983,6 +997,16 @@ public class IBMVisualRecognitionV3Models {
     public ClassifyOptionsBuilder imagesFileContentType(String imagesFileContentType) {
       this.images_file_content_type_serialized_name = imagesFileContentType;
       return this;
+    }
+
+    /**
+     * Set the parameters_serialized_name.
+     *
+     * @param parameters the parameters
+     * @return the ClassifyOptions builder
+     */
+    public ClassifyOptionsBuilder parameters(String parameters) {
+      this.parameters_serialized_name = parameters;
     }
   }
 
@@ -1254,6 +1278,7 @@ public class IBMVisualRecognitionV3Models {
     private String images_filename_serialized_name;
     private String url_serialized_name;
     private String images_file_content_type_serialized_name;
+    private String parameters_serialized_name;
     /**
      * Gets the images_file_serialized_name.
      *
@@ -1294,11 +1319,22 @@ public class IBMVisualRecognitionV3Models {
     public String imagesFileContentType() {
       return images_file_content_type_serialized_name;
     }
+    /**
+     * Gets the parameters_serialized_name.
+     *
+     * A JSON object that specifies a single image (.jpg, .png) to analyze by URL. The parameter can be sent as a string or a file.  Example: `{"url":"http://www.example.com/images/myimage.jpg"}`.
+     *
+     * @return the parameters_serialized_name
+     */
+    public String parameters() {
+      return parameters_serialized_name;
+    }
     private DetectFacesOptions(DetectFacesOptionsBuilder builder) {
       images_file_serialized_name = builder.images_file_serialized_name;
       images_filename_serialized_name = builder.images_filename_serialized_name;
       url_serialized_name = builder.url_serialized_name;
       images_file_content_type_serialized_name = builder.images_file_content_type_serialized_name;
+      parameters_serialized_name = builder.parameters_serialized_name;
     }
 
     /**
@@ -1320,12 +1356,14 @@ public class IBMVisualRecognitionV3Models {
     private String images_filename_serialized_name;
     private String url_serialized_name;
     private String images_file_content_type_serialized_name;
+    private String parameters_serialized_name;
 
     private DetectFacesOptionsBuilder(DetectFacesOptions detectFacesOptions) {
       images_file_serialized_name = detectFacesOptions.images_file_serialized_name;
       images_filename_serialized_name = detectFacesOptions.images_filename_serialized_name;
       url_serialized_name = detectFacesOptions.url_serialized_name;
       images_file_content_type_serialized_name = detectFacesOptions.images_file_content_type_serialized_name;
+      parameters_serialized_name = detectFacesOptions.parameters_serialized_name;
     }
 
     /**
@@ -1384,6 +1422,17 @@ public class IBMVisualRecognitionV3Models {
      */
     public DetectFacesOptionsBuilder imagesFileContentType(String imagesFileContentType) {
       this.images_file_content_type_serialized_name = imagesFileContentType;
+      return this;
+    }
+
+    /**
+     * Set the parameters_serialized_name.
+     *
+     * @param parameters the parameters
+     * @return the DetectFacesOptions builder
+     */
+    public DetectFacesOptionsBuilder parameters(String parameters) {
+      this.parameters_serialized_name = parameters;
       return this;
     }
   }

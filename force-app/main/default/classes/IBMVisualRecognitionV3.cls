@@ -90,6 +90,9 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(classifyOptions.imagesFile(), classifyOptions.imagesFileContentType());
       multipartBuilder.addFormDataPart('images_file', classifyOptions.imagesFilename(), fileBody);
     }
+    if (classifyOptions.parameters() != null) {
+      multipartBuilder.addFormDataPart('parameters', classifyOptions.parameters());
+    }
     if (classifyOptions.url() != null) {
       multipartBuilder.addFormDataPart('url', classifyOptions.url());
     }
@@ -123,6 +126,9 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (detectFacesOptions.parameters() != null) {
+      multipartBuilder.addFormDataPart('parameters', detectFacesOptions.parameters());
+    }
     if (detectFacesOptions.imagesFile() != null) {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(detectFacesOptions.imagesFile(), detectFacesOptions.imagesFileContentType());
       multipartBuilder.addFormDataPart('images_file', detectFacesOptions.imagesFilename(), fileBody);
