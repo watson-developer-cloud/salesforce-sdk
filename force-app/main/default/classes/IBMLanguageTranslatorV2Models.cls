@@ -14,7 +14,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the base_model_id_serialized_name.
      *
-     * Specifies the domain model that is used as the base for the training. To see current supported domain models, use the GET /v2/models parameter.
+     * The model ID of the model to use as the base for customization. To see available models, use the `List models` method.
      *
      * @return the base_model_id_serialized_name
      */
@@ -24,7 +24,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the name_serialized_name.
      *
-     * The model name. Valid characters are letters, numbers, -, and _. No spaces.
+     * An optional model name that you can use to identify the model. Valid characters are letters, numbers, dashes, underscores, spaces and apostrophes. The maximum length is 32 characters.
      *
      * @return the name_serialized_name
      */
@@ -34,7 +34,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the forced_glossary_serialized_name.
      *
-     * A TMX file with your customizations. The customizations in the file completely overwrite the domain data translation, including high frequency or high confidence phrase translations. You can upload only one glossary with a file size less than 10 MB per call.
+     * A TMX file with your customizations. The customizations in the file completely overwrite the domain translaton data, including high frequency or high confidence phrase translations. You can upload only one glossary with a file size less than 10 MB per call.
      *
      * @return the forced_glossary_serialized_name
      */
@@ -259,7 +259,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the model_id_serialized_name.
      *
-     * The model identifier.
+     * Model ID of the model to delete.
      *
      * @return the model_id_serialized_name
      */
@@ -336,7 +336,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the model_id_serialized_name.
      *
-     * Model ID to use.
+     * Model ID of the model to get.
      *
      * @return the model_id_serialized_name
      */
@@ -414,7 +414,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the language_serialized_name.
      *
-     * The code for an identifiable language.
+     * The language code for an identifiable language.
      *
      * @return the language_serialized_name
      */
@@ -522,7 +522,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the language_serialized_name.
      *
-     * The code for an identified language.
+     * The language code for an identified language.
      *
      * @return the language_serialized_name
      */
@@ -750,7 +750,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the source_serialized_name.
      *
-     * Filter models by source language.
+     * Specify a language code to filter results by source language.
      *
      * @return the source_serialized_name
      */
@@ -760,7 +760,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the target_serialized_name.
      *
-     * Filter models by target language.
+     * Specify a language code to filter results by target language.
      *
      * @return the target_serialized_name
      */
@@ -770,7 +770,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the default_serialized_name.
      *
-     * Valid values are leaving it unset, `true`, and `false`. When `true`, it filters models to return the default model or models. When `false`, it returns the non-default model or models. If not set, it returns all models, default and non-default.
+     * If the default parameter isn't specified, the service will return all models (default and non-default) for each language pair. To return only default models, set this to `true`. To return only non-default models, set this to `false`.
      *
      * @return the default_serialized_name
      */
@@ -868,7 +868,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the text_serialized_name.
      *
-     * Input text in UTF-8 encoding. It is a list so that multiple paragraphs can be submitted. Also accept a single string, instead of an array, as valid input.
+     * Input text in UTF-8 encoding. Multiple entries will result in multiple translations in the response.
      *
      * @return the text_serialized_name
      */
@@ -878,7 +878,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the model_id_serialized_name.
      *
-     * The unique model_id of the translation model being used to translate text. The model_id inherently specifies source language, target language, and domain. If the model_id is specified, there is no need for the source and target parameters and the values are ignored.
+     * Model ID of the translation model to use. If this is specified, the `source` and `target` parameters will be ignored. The method requires either a model ID or both the `source` and `target` parameters.
      *
      * @return the model_id_serialized_name
      */
@@ -888,7 +888,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the source_serialized_name.
      *
-     * Used in combination with target as an alternative way to select the model for translation. When target and source are set, and model_id is not set, the system chooses a default model with the right language pair to translate (usually the model based on the news domain).
+     * Language code of the source text language. Use with `target` as an alternative way to select a translation model. When `source` and `target` are set, and a model ID is not set, the system chooses a default model for the language pair (usually the model based on the news domain).
      *
      * @return the source_serialized_name
      */
@@ -898,7 +898,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the target_serialized_name.
      *
-     * Used in combination with source as an alternative way to select the model for translation. When target and source are set, and model_id is not set, the system chooses a default model with the right language pair to translate (usually the model based on the news domain).
+     * Language code of the translation target language. Use with source as an alternative way to select a translation model.
      *
      * @return the target_serialized_name
      */
@@ -1079,7 +1079,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the model_id_serialized_name.
      *
-     * A globally unique string that identifies the underlying model that is used for translation. This string contains all the information about source language, target language, domain, and various other related configurations.
+     * A globally unique string that identifies the underlying model that is used for translation.
      *
      * @return the model_id_serialized_name
      */
@@ -1090,7 +1090,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the name_serialized_name.
      *
-     * If a model is trained by a user, there might be an optional “name” parameter attached during training to help the user identify the model.
+     * Optional name that can be specified when the model is created.
      *
      * @return the name_serialized_name
      */
@@ -1101,7 +1101,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the source_serialized_name.
      *
-     * Source language in two letter language code. Use the five letter code when clarifying between multiple supported languages. When model_id is used directly, it will override the source-target language combination. Also, when a two letter language code is used, but no suitable default is found, it returns an error.
+     * Translation source language code.
      *
      * @return the source_serialized_name
      */
@@ -1112,7 +1112,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the target_serialized_name.
      *
-     * Target language in two letter language code.
+     * Translation target language code.
      *
      * @return the target_serialized_name
      */
@@ -1123,7 +1123,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the base_model_id_serialized_name.
      *
-     * If this model is a custom model, this returns the base model that it is trained on. For a base model, this response value is empty.
+     * Model ID of the base model that was used to customize the model. If the model is not a custom model, this will be an empty string.
      *
      * @return the base_model_id_serialized_name
      */
@@ -1145,7 +1145,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the customizable_serialized_name.
      *
-     * Whether this model can be used as a base for customization. Customized models are not further customizable, and we don't allow the customization of certain base models.
+     * Whether this model can be used as a base for customization. Customized models are not further customizable, and some base models are not customizable.
      *
      * @return the customizable_serialized_name
      */
@@ -1156,7 +1156,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the default_model_serialized_name.
      *
-     * Whether this model is considered a default model and is used when the source and target languages are specified without the model_id.
+     * Whether or not the model is a default model. A default model is the model for a given language pair that will be used when that language pair is specified in the source and target parameters.
      *
      * @return the default_model_serialized_name
      */
@@ -1167,7 +1167,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the owner_serialized_name.
      *
-     * Returns the ID of the Language Translator service instance that created the model, or an empty string if it is a model that is trained by IBM.
+     * Either an empty string, indicating the model is not a custom model, or the ID of the service instance that created the model.
      *
      * @return the owner_serialized_name
      */
@@ -1348,7 +1348,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the word_count_serialized_name.
      *
-     * Number of words of the complete input text.
+     * Number of words in the input text.
      *
      * @return the word_count_serialized_name
      */
@@ -1359,7 +1359,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the character_count_serialized_name.
      *
-     * Number of characters of the complete input text.
+     * Number of characters in the input text.
      *
      * @return the character_count_serialized_name
      */
@@ -1370,7 +1370,7 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the translations_serialized_name.
      *
-     * List of translation output in UTF-8, corresponding to the list of input text.
+     * List of translation output in UTF-8, corresponding to the input text entries.
      *
      * @return the translations_serialized_name
      */
