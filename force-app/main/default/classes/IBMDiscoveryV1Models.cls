@@ -609,7 +609,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the language_serialized_name.
      *
-     * The language of the documents stored in the collection. Permitted values include `en_us` (U.S. English), `de` (German), and `es` (Spanish).
+     * The language of the documents stored in the collection. Permitted values include `en` (English), `de` (German), and `es` (Spanish).
      *
      * @return the language_serialized_name
      */
@@ -1675,6 +1675,163 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * The createExpansions options.
+   */
+  public class CreateExpansionsOptions {
+    private String environment_id_serialized_name;
+    private String collection_id_serialized_name;
+    private List<Expansion> expansions_serialized_name;
+    /**
+     * Gets the environment_id_serialized_name.
+     *
+     * The ID of the environment.
+     *
+     * @return the environment_id_serialized_name
+     */
+    public String environmentId() {
+      return environment_id_serialized_name;
+    }
+    /**
+     * Gets the collection_id_serialized_name.
+     *
+     * The ID of the collection.
+     *
+     * @return the collection_id_serialized_name
+     */
+    public String collectionId() {
+      return collection_id_serialized_name;
+    }
+    /**
+     * Gets the expansions_serialized_name.
+     *
+     * An array of query expansion definitions.    Each object in the `expansions` array represents a term or set of terms that will be expanded into other terms. Each expansion object can be configured so that all terms are expanded to all other terms in the object - bi-directional, or a set list of terms can be expanded into a second list of terms - uni-directional.   To create a bi-directional expansion specify an `expanded_terms` array. When found in a query, all items in the `expanded_terms` array are then expanded to the other items in the same array.   To create a uni-directional expansion, specify both an array of `input_terms` and an array of `expanded_terms`. When items in the `input_terms` array are present in a query, they are expanded using the items listed in the `expanded_terms` array.
+     *
+     * @return the expansions_serialized_name
+     */
+    public List<Expansion> expansions() {
+      return expansions_serialized_name;
+    }
+    private CreateExpansionsOptions(CreateExpansionsOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
+      environment_id_serialized_name = builder.environment_id_serialized_name;
+      collection_id_serialized_name = builder.collection_id_serialized_name;
+      expansions_serialized_name = builder.expansions_serialized_name;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a CreateExpansionsOptions builder
+     */
+    public CreateExpansionsOptionsBuilder newBuilder() {
+      return new CreateExpansionsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * CreateExpansionsOptions Builder.
+   */
+  public class CreateExpansionsOptionsBuilder {
+    private String environment_id_serialized_name;
+    private String collection_id_serialized_name;
+    private List<Expansion> expansions_serialized_name;
+
+    private CreateExpansionsOptionsBuilder(CreateExpansionsOptions createExpansionsOptions) {
+      environment_id_serialized_name = createExpansionsOptions.environment_id_serialized_name;
+      collection_id_serialized_name = createExpansionsOptions.collection_id_serialized_name;
+      expansions_serialized_name = createExpansionsOptions.expansions_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public CreateExpansionsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     */
+    public CreateExpansionsOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+    }
+
+    /**
+     * Builds a CreateExpansionsOptions.
+     *
+     * @return the createExpansionsOptions
+     */
+    public CreateExpansionsOptions build() {
+      return new CreateExpansionsOptions(this);
+    }
+
+    /**
+     * Adds an expansions to expansions_serialized_name.
+     *
+     * @param expansions the new expansions
+     * @return the CreateExpansionsOptions builder
+     */
+    public CreateExpansionsOptionsBuilder addExpansions(Expansion expansions) {
+      IBMWatsonValidator.notNull(expansions, 'expansions cannot be null');
+      if (this.expansions_serialized_name == null) {
+        this.expansions_serialized_name = new List<Expansion>();
+      }
+      this.expansions_serialized_name.add(expansions);
+      return this;
+    }
+
+    /**
+     * Set the environment_id_serialized_name.
+     *
+     * @param environmentId the environmentId
+     * @return the CreateExpansionsOptions builder
+     */
+    public CreateExpansionsOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collection_id_serialized_name.
+     *
+     * @param collectionId the collectionId
+     * @return the CreateExpansionsOptions builder
+     */
+    public CreateExpansionsOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
+      return this;
+    }
+
+    /**
+     * Set the expansions_serialized_name.
+     * Existing expansions_serialized_name will be replaced.
+     *
+     * @param expansions the expansions
+     * @return the CreateExpansionsOptions builder
+     */
+    public CreateExpansionsOptionsBuilder expansions(List<Expansion> expansions) {
+      this.expansions_serialized_name = expansions;
+      return this;
+    }
+
+    /**
+     * Set the expansions.
+     *
+     * @param expansions the expansions
+     * @return the CreateExpansionsOptions builder
+     */
+    public CreateExpansionsOptionsBuilder expansions(Expansions expansions) {
+      this.expansions_serialized_name = expansions.getExpansions();
+      return this;
+    }
+  }
+
+  /**
    * The createTrainingExample options.
    */
   public class CreateTrainingExampleOptions {
@@ -2410,6 +2567,111 @@ public class IBMDiscoveryV1Models {
      */
     public DeleteEnvironmentOptionsBuilder environmentId(String environmentId) {
       this.environment_id_serialized_name = environmentId;
+      return this;
+    }
+  }
+
+  /**
+   * The deleteExpansions options.
+   */
+  public class DeleteExpansionsOptions {
+    private String environment_id_serialized_name;
+    private String collection_id_serialized_name;
+    /**
+     * Gets the environment_id_serialized_name.
+     *
+     * The ID of the environment.
+     *
+     * @return the environment_id_serialized_name
+     */
+    public String environmentId() {
+      return environment_id_serialized_name;
+    }
+    /**
+     * Gets the collection_id_serialized_name.
+     *
+     * The ID of the collection.
+     *
+     * @return the collection_id_serialized_name
+     */
+    public String collectionId() {
+      return collection_id_serialized_name;
+    }
+    private DeleteExpansionsOptions(DeleteExpansionsOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
+      environment_id_serialized_name = builder.environment_id_serialized_name;
+      collection_id_serialized_name = builder.collection_id_serialized_name;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DeleteExpansionsOptions builder
+     */
+    public DeleteExpansionsOptionsBuilder newBuilder() {
+      return new DeleteExpansionsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * DeleteExpansionsOptions Builder.
+   */
+  public class DeleteExpansionsOptionsBuilder {
+    private String environment_id_serialized_name;
+    private String collection_id_serialized_name;
+
+    private DeleteExpansionsOptionsBuilder(DeleteExpansionsOptions deleteExpansionsOptions) {
+      environment_id_serialized_name = deleteExpansionsOptions.environment_id_serialized_name;
+      collection_id_serialized_name = deleteExpansionsOptions.collection_id_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DeleteExpansionsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     */
+    public DeleteExpansionsOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+    }
+
+    /**
+     * Builds a DeleteExpansionsOptions.
+     *
+     * @return the deleteExpansionsOptions
+     */
+    public DeleteExpansionsOptions build() {
+      return new DeleteExpansionsOptions(this);
+    }
+
+    /**
+     * Set the environment_id_serialized_name.
+     *
+     * @param environmentId the environmentId
+     * @return the DeleteExpansionsOptions builder
+     */
+    public DeleteExpansionsOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collection_id_serialized_name.
+     *
+     * @param collectionId the collectionId
+     * @return the DeleteExpansionsOptions builder
+     */
+    public DeleteExpansionsOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
       return this;
     }
   }
@@ -3617,6 +3879,114 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * An expansion definition. Each object respresents one set of expandable strings. For example, you could have expansions for the word `hot` in one object, and expansions for the word `cold` in another.
+   */
+  public class Expansion extends IBMWatsonGenericModel {
+    private List<String> input_terms_serialized_name;
+    private List<String> expanded_terms_serialized_name;
+    /**
+     * Gets the input_terms_serialized_name.
+     *
+     * A list of terms that will be expanded for this expansion. If specified, only the items in this list are expanded.
+     *
+     * @return the input_terms_serialized_name
+     */
+    @AuraEnabled
+    public List<String> getInputTerms() {
+      return input_terms_serialized_name;
+    }
+    /**
+     * Gets the expanded_terms_serialized_name.
+     *
+     * A list of terms that this expansion will be expanded to. If specified without `input_terms`, it also functions as the input term list.
+     *
+     * @return the expanded_terms_serialized_name
+     */
+    @AuraEnabled
+    public List<String> getExpandedTerms() {
+      return expanded_terms_serialized_name;
+    }
+
+    /**
+     * Sets the input_terms_serialized_name.
+     *
+     * @param inputTerms the new inputTerms
+     */
+    public void setInputTerms(final List<String> inputTerms) {
+      this.input_terms_serialized_name = inputTerms;
+    }
+
+    /**
+     * Sets the expanded_terms_serialized_name.
+     *
+     * @param expandedTerms the new expandedTerms
+     */
+    public void setExpandedTerms(final List<String> expandedTerms) {
+      this.expanded_terms_serialized_name = expandedTerms;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Expansion ret = (Expansion) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * The query expansion definitions for the specified collection.
+   */
+  public class Expansions extends IBMWatsonGenericModel {
+    private List<Expansion> expansions_serialized_name;
+    /**
+     * Gets the expansions_serialized_name.
+     *
+     * An array of query expansion definitions.    Each object in the `expansions` array represents a term or set of terms that will be expanded into other terms. Each expansion object can be configured so that all terms are expanded to all other terms in the object - bi-directional, or a set list of terms can be expanded into a second list of terms - uni-directional.   To create a bi-directional expansion specify an `expanded_terms` array. When found in a query, all items in the `expanded_terms` array are then expanded to the other items in the same array.   To create a uni-directional expansion, specify both an array of `input_terms` and an array of `expanded_terms`. When items in the `input_terms` array are present in a query, they are expanded using the items listed in the `expanded_terms` array.
+     *
+     * @return the expansions_serialized_name
+     */
+    @AuraEnabled
+    public List<Expansion> getExpansions() {
+      return expansions_serialized_name;
+    }
+
+    /**
+     * Sets the expansions_serialized_name.
+     *
+     * @param expansions the new expansions
+     */
+    public void setExpansions(final List<Expansion> expansions) {
+      this.expansions_serialized_name = expansions;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Expansions ret = (Expansions) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for expansions_serialized_name
+      List<Expansion> newExpansions = new List<Expansion>();
+      List<Expansion> deserializedExpansions = ret.getExpansions();
+      if (deserializedExpansions != null) {
+        for (Integer i = 0; i < deserializedExpansions.size(); i++) {
+          Expansion currentItem = ret.getExpansions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('expansions_serialized_name');
+          Expansion newItem = (Expansion) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Expansion.class);
+          newExpansions.add(newItem);
+        }
+        ret.setExpansions(newExpansions);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
    * The federatedQueryNotices options.
    */
   public class FederatedQueryNoticesOptions {
@@ -3632,6 +4002,9 @@ public class IBMDiscoveryV1Models {
     private List<String> sort_serialized_name;
     private Boolean highlight_serialized_name;
     private String deduplicate_field_serialized_name;
+    private Boolean similar_serialized_name;
+    private List<String> similar_document_ids_serialized_name;
+    private List<String> similar_fields_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
      *
@@ -3752,6 +4125,36 @@ public class IBMDiscoveryV1Models {
     public String deduplicateField() {
       return deduplicate_field_serialized_name;
     }
+    /**
+     * Gets the similar_serialized_name.
+     *
+     * When `true`, results are returned based on their similarity to the document IDs specified in the `similar.document_ids` parameter. The default is `false`.
+     *
+     * @return the similar_serialized_name
+     */
+    public Boolean similar() {
+      return similar_serialized_name;
+    }
+    /**
+     * Gets the similar_document_ids_serialized_name.
+     *
+     * A comma-separated list of document IDs that will be used to find similar documents.   **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as `filter` and `query` are subsequently applied and reduce the query scope.
+     *
+     * @return the similar_document_ids_serialized_name
+     */
+    public List<String> similarDocumentIds() {
+      return similar_document_ids_serialized_name;
+    }
+    /**
+     * Gets the similar_fields_serialized_name.
+     *
+     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.
+     *
+     * @return the similar_fields_serialized_name
+     */
+    public List<String> similarFields() {
+      return similar_fields_serialized_name;
+    }
     private FederatedQueryNoticesOptions(FederatedQueryNoticesOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notNull(builder.collection_ids_serialized_name, 'collection_ids_serialized_name cannot be null');
@@ -3767,6 +4170,9 @@ public class IBMDiscoveryV1Models {
       sort_serialized_name = builder.sort_serialized_name;
       highlight_serialized_name = builder.highlight_serialized_name;
       deduplicate_field_serialized_name = builder.deduplicate_field_serialized_name;
+      similar_serialized_name = builder.similar_serialized_name;
+      similar_document_ids_serialized_name = builder.similar_document_ids_serialized_name;
+      similar_fields_serialized_name = builder.similar_fields_serialized_name;
     }
 
     /**
@@ -3796,6 +4202,9 @@ public class IBMDiscoveryV1Models {
     private List<String> sort_serialized_name;
     private Boolean highlight_serialized_name;
     private String deduplicate_field_serialized_name;
+    private Boolean similar_serialized_name;
+    private List<String> similar_document_ids_serialized_name;
+    private List<String> similar_fields_serialized_name;
 
     private FederatedQueryNoticesOptionsBuilder(FederatedQueryNoticesOptions federatedQueryNoticesOptions) {
       environment_id_serialized_name = federatedQueryNoticesOptions.environment_id_serialized_name;
@@ -3810,6 +4219,9 @@ public class IBMDiscoveryV1Models {
       sort_serialized_name = federatedQueryNoticesOptions.sort_serialized_name;
       highlight_serialized_name = federatedQueryNoticesOptions.highlight_serialized_name;
       deduplicate_field_serialized_name = federatedQueryNoticesOptions.deduplicate_field_serialized_name;
+      similar_serialized_name = federatedQueryNoticesOptions.similar_serialized_name;
+      similar_document_ids_serialized_name = federatedQueryNoticesOptions.similar_document_ids_serialized_name;
+      similar_fields_serialized_name = federatedQueryNoticesOptions.similar_fields_serialized_name;
     }
 
     /**
@@ -3880,6 +4292,36 @@ public class IBMDiscoveryV1Models {
         this.sort_serialized_name = new List<String>();
       }
       this.sort_serialized_name.add(sortVar);
+      return this;
+    }
+
+    /**
+     * Adds an similarDocumentIds to similar_document_ids_serialized_name.
+     *
+     * @param similarDocumentIds the new similarDocumentIds
+     * @return the FederatedQueryNoticesOptions builder
+     */
+    public FederatedQueryNoticesOptionsBuilder addSimilarDocumentIds(String similarDocumentIds) {
+      IBMWatsonValidator.notNull(similarDocumentIds, 'similarDocumentIds cannot be null');
+      if (this.similar_document_ids_serialized_name == null) {
+        this.similar_document_ids_serialized_name = new List<String>();
+      }
+      this.similar_document_ids_serialized_name.add(similarDocumentIds);
+      return this;
+    }
+
+    /**
+     * Adds an similarFields to similar_fields_serialized_name.
+     *
+     * @param similarFields the new similarFields
+     * @return the FederatedQueryNoticesOptions builder
+     */
+    public FederatedQueryNoticesOptionsBuilder addSimilarFields(String similarFields) {
+      IBMWatsonValidator.notNull(similarFields, 'similarFields cannot be null');
+      if (this.similar_fields_serialized_name == null) {
+        this.similar_fields_serialized_name = new List<String>();
+      }
+      this.similar_fields_serialized_name.add(similarFields);
       return this;
     }
 
@@ -4017,6 +4459,41 @@ public class IBMDiscoveryV1Models {
       this.deduplicate_field_serialized_name = deduplicateField;
       return this;
     }
+
+    /**
+     * Set the similar_serialized_name.
+     *
+     * @param similar the similar
+     * @return the FederatedQueryNoticesOptions builder
+     */
+    public FederatedQueryNoticesOptionsBuilder similar(Boolean similar) {
+      this.similar_serialized_name = similar;
+      return this;
+    }
+
+    /**
+     * Set the similar_document_ids_serialized_name.
+     * Existing similar_document_ids_serialized_name will be replaced.
+     *
+     * @param similarDocumentIds the similarDocumentIds
+     * @return the FederatedQueryNoticesOptions builder
+     */
+    public FederatedQueryNoticesOptionsBuilder similarDocumentIds(List<String> similarDocumentIds) {
+      this.similar_document_ids_serialized_name = similarDocumentIds;
+      return this;
+    }
+
+    /**
+     * Set the similar_fields_serialized_name.
+     * Existing similar_fields_serialized_name will be replaced.
+     *
+     * @param similarFields the similarFields
+     * @return the FederatedQueryNoticesOptions builder
+     */
+    public FederatedQueryNoticesOptionsBuilder similarFields(List<String> similarFields) {
+      this.similar_fields_serialized_name = similarFields;
+      return this;
+    }
   }
 
   /**
@@ -4036,6 +4513,9 @@ public class IBMDiscoveryV1Models {
     private Boolean highlight_serialized_name;
     private Boolean deduplicate_serialized_name;
     private String deduplicate_field_serialized_name;
+    private Boolean similar_serialized_name;
+    private List<String> similar_document_ids_serialized_name;
+    private List<String> similar_fields_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
      *
@@ -4166,6 +4646,36 @@ public class IBMDiscoveryV1Models {
     public String deduplicateField() {
       return deduplicate_field_serialized_name;
     }
+    /**
+     * Gets the similar_serialized_name.
+     *
+     * When `true`, results are returned based on their similarity to the document IDs specified in the `similar.document_ids` parameter. The default is `false`.
+     *
+     * @return the similar_serialized_name
+     */
+    public Boolean similar() {
+      return similar_serialized_name;
+    }
+    /**
+     * Gets the similar_document_ids_serialized_name.
+     *
+     * A comma-separated list of document IDs that will be used to find similar documents.   **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as `filter` and `query` are subsequently applied and reduce the query scope.
+     *
+     * @return the similar_document_ids_serialized_name
+     */
+    public List<String> similarDocumentIds() {
+      return similar_document_ids_serialized_name;
+    }
+    /**
+     * Gets the similar_fields_serialized_name.
+     *
+     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.
+     *
+     * @return the similar_fields_serialized_name
+     */
+    public List<String> similarFields() {
+      return similar_fields_serialized_name;
+    }
     private FederatedQueryOptions(FederatedQueryOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notNull(builder.collection_ids_serialized_name, 'collection_ids_serialized_name cannot be null');
@@ -4182,6 +4692,9 @@ public class IBMDiscoveryV1Models {
       highlight_serialized_name = builder.highlight_serialized_name;
       deduplicate_serialized_name = builder.deduplicate_serialized_name;
       deduplicate_field_serialized_name = builder.deduplicate_field_serialized_name;
+      similar_serialized_name = builder.similar_serialized_name;
+      similar_document_ids_serialized_name = builder.similar_document_ids_serialized_name;
+      similar_fields_serialized_name = builder.similar_fields_serialized_name;
     }
 
     /**
@@ -4212,6 +4725,9 @@ public class IBMDiscoveryV1Models {
     private Boolean highlight_serialized_name;
     private Boolean deduplicate_serialized_name;
     private String deduplicate_field_serialized_name;
+    private Boolean similar_serialized_name;
+    private List<String> similar_document_ids_serialized_name;
+    private List<String> similar_fields_serialized_name;
 
     private FederatedQueryOptionsBuilder(FederatedQueryOptions federatedQueryOptions) {
       environment_id_serialized_name = federatedQueryOptions.environment_id_serialized_name;
@@ -4227,6 +4743,9 @@ public class IBMDiscoveryV1Models {
       highlight_serialized_name = federatedQueryOptions.highlight_serialized_name;
       deduplicate_serialized_name = federatedQueryOptions.deduplicate_serialized_name;
       deduplicate_field_serialized_name = federatedQueryOptions.deduplicate_field_serialized_name;
+      similar_serialized_name = federatedQueryOptions.similar_serialized_name;
+      similar_document_ids_serialized_name = federatedQueryOptions.similar_document_ids_serialized_name;
+      similar_fields_serialized_name = federatedQueryOptions.similar_fields_serialized_name;
     }
 
     /**
@@ -4297,6 +4816,36 @@ public class IBMDiscoveryV1Models {
         this.sort_serialized_name = new List<String>();
       }
       this.sort_serialized_name.add(sortVar);
+      return this;
+    }
+
+    /**
+     * Adds an similarDocumentIds to similar_document_ids_serialized_name.
+     *
+     * @param similarDocumentIds the new similarDocumentIds
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder addSimilarDocumentIds(String similarDocumentIds) {
+      IBMWatsonValidator.notNull(similarDocumentIds, 'similarDocumentIds cannot be null');
+      if (this.similar_document_ids_serialized_name == null) {
+        this.similar_document_ids_serialized_name = new List<String>();
+      }
+      this.similar_document_ids_serialized_name.add(similarDocumentIds);
+      return this;
+    }
+
+    /**
+     * Adds an similarFields to similar_fields_serialized_name.
+     *
+     * @param similarFields the new similarFields
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder addSimilarFields(String similarFields) {
+      IBMWatsonValidator.notNull(similarFields, 'similarFields cannot be null');
+      if (this.similar_fields_serialized_name == null) {
+        this.similar_fields_serialized_name = new List<String>();
+      }
+      this.similar_fields_serialized_name.add(similarFields);
       return this;
     }
 
@@ -4443,6 +4992,41 @@ public class IBMDiscoveryV1Models {
      */
     public FederatedQueryOptionsBuilder deduplicateField(String deduplicateField) {
       this.deduplicate_field_serialized_name = deduplicateField;
+      return this;
+    }
+
+    /**
+     * Set the similar_serialized_name.
+     *
+     * @param similar the similar
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder similar(Boolean similar) {
+      this.similar_serialized_name = similar;
+      return this;
+    }
+
+    /**
+     * Set the similar_document_ids_serialized_name.
+     * Existing similar_document_ids_serialized_name will be replaced.
+     *
+     * @param similarDocumentIds the similarDocumentIds
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder similarDocumentIds(List<String> similarDocumentIds) {
+      this.similar_document_ids_serialized_name = similarDocumentIds;
+      return this;
+    }
+
+    /**
+     * Set the similar_fields_serialized_name.
+     * Existing similar_fields_serialized_name will be replaced.
+     *
+     * @param similarFields the similarFields
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder similarFields(List<String> similarFields) {
+      this.similar_fields_serialized_name = similarFields;
       return this;
     }
   }
@@ -6186,6 +6770,111 @@ public class IBMDiscoveryV1Models {
       }
 
       return ret;
+    }
+  }
+
+  /**
+   * The listExpansions options.
+   */
+  public class ListExpansionsOptions {
+    private String environment_id_serialized_name;
+    private String collection_id_serialized_name;
+    /**
+     * Gets the environment_id_serialized_name.
+     *
+     * The ID of the environment.
+     *
+     * @return the environment_id_serialized_name
+     */
+    public String environmentId() {
+      return environment_id_serialized_name;
+    }
+    /**
+     * Gets the collection_id_serialized_name.
+     *
+     * The ID of the collection.
+     *
+     * @return the collection_id_serialized_name
+     */
+    public String collectionId() {
+      return collection_id_serialized_name;
+    }
+    private ListExpansionsOptions(ListExpansionsOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
+      environment_id_serialized_name = builder.environment_id_serialized_name;
+      collection_id_serialized_name = builder.collection_id_serialized_name;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ListExpansionsOptions builder
+     */
+    public ListExpansionsOptionsBuilder newBuilder() {
+      return new ListExpansionsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * ListExpansionsOptions Builder.
+   */
+  public class ListExpansionsOptionsBuilder {
+    private String environment_id_serialized_name;
+    private String collection_id_serialized_name;
+
+    private ListExpansionsOptionsBuilder(ListExpansionsOptions listExpansionsOptions) {
+      environment_id_serialized_name = listExpansionsOptions.environment_id_serialized_name;
+      collection_id_serialized_name = listExpansionsOptions.collection_id_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ListExpansionsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     */
+    public ListExpansionsOptionsBuilder(String environmentId, String collectionId) {
+      this.environment_id_serialized_name = environmentId;
+      this.collection_id_serialized_name = collectionId;
+    }
+
+    /**
+     * Builds a ListExpansionsOptions.
+     *
+     * @return the listExpansionsOptions
+     */
+    public ListExpansionsOptions build() {
+      return new ListExpansionsOptions(this);
+    }
+
+    /**
+     * Set the environment_id_serialized_name.
+     *
+     * @param environmentId the environmentId
+     * @return the ListExpansionsOptions builder
+     */
+    public ListExpansionsOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collection_id_serialized_name.
+     *
+     * @param collectionId the collectionId
+     * @return the ListExpansionsOptions builder
+     */
+    public ListExpansionsOptionsBuilder collectionId(String collectionId) {
+      this.collection_id_serialized_name = collectionId;
+      return this;
     }
   }
 
@@ -8182,6 +8871,9 @@ public class IBMDiscoveryV1Models {
     private Long passages_count_serialized_name;
     private Long passages_characters_serialized_name;
     private String deduplicate_field_serialized_name;
+    private Boolean similar_serialized_name;
+    private List<String> similar_document_ids_serialized_name;
+    private List<String> similar_fields_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
      *
@@ -8342,6 +9034,36 @@ public class IBMDiscoveryV1Models {
     public String deduplicateField() {
       return deduplicate_field_serialized_name;
     }
+    /**
+     * Gets the similar_serialized_name.
+     *
+     * When `true`, results are returned based on their similarity to the document IDs specified in the `similar.document_ids` parameter. The default is `false`.
+     *
+     * @return the similar_serialized_name
+     */
+    public Boolean similar() {
+      return similar_serialized_name;
+    }
+    /**
+     * Gets the similar_document_ids_serialized_name.
+     *
+     * A comma-separated list of document IDs that will be used to find similar documents.   **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as `filter` and `query` are subsequently applied and reduce the query scope.
+     *
+     * @return the similar_document_ids_serialized_name
+     */
+    public List<String> similarDocumentIds() {
+      return similar_document_ids_serialized_name;
+    }
+    /**
+     * Gets the similar_fields_serialized_name.
+     *
+     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.
+     *
+     * @return the similar_fields_serialized_name
+     */
+    public List<String> similarFields() {
+      return similar_fields_serialized_name;
+    }
     private QueryNoticesOptions(QueryNoticesOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
@@ -8361,6 +9083,9 @@ public class IBMDiscoveryV1Models {
       passages_count_serialized_name = builder.passages_count_serialized_name;
       passages_characters_serialized_name = builder.passages_characters_serialized_name;
       deduplicate_field_serialized_name = builder.deduplicate_field_serialized_name;
+      similar_serialized_name = builder.similar_serialized_name;
+      similar_document_ids_serialized_name = builder.similar_document_ids_serialized_name;
+      similar_fields_serialized_name = builder.similar_fields_serialized_name;
     }
 
     /**
@@ -8394,6 +9119,9 @@ public class IBMDiscoveryV1Models {
     private Long passages_count_serialized_name;
     private Long passages_characters_serialized_name;
     private String deduplicate_field_serialized_name;
+    private Boolean similar_serialized_name;
+    private List<String> similar_document_ids_serialized_name;
+    private List<String> similar_fields_serialized_name;
 
     private QueryNoticesOptionsBuilder(QueryNoticesOptions queryNoticesOptions) {
       environment_id_serialized_name = queryNoticesOptions.environment_id_serialized_name;
@@ -8412,6 +9140,9 @@ public class IBMDiscoveryV1Models {
       passages_count_serialized_name = queryNoticesOptions.passages_count_serialized_name;
       passages_characters_serialized_name = queryNoticesOptions.passages_characters_serialized_name;
       deduplicate_field_serialized_name = queryNoticesOptions.deduplicate_field_serialized_name;
+      similar_serialized_name = queryNoticesOptions.similar_serialized_name;
+      similar_document_ids_serialized_name = queryNoticesOptions.similar_document_ids_serialized_name;
+      similar_fields_serialized_name = queryNoticesOptions.similar_fields_serialized_name;
     }
 
     /**
@@ -8482,6 +9213,36 @@ public class IBMDiscoveryV1Models {
         this.passages_fields_serialized_name = new List<String>();
       }
       this.passages_fields_serialized_name.add(passagesFields);
+      return this;
+    }
+
+    /**
+     * Adds an similarDocumentIds to similar_document_ids_serialized_name.
+     *
+     * @param similarDocumentIds the new similarDocumentIds
+     * @return the QueryNoticesOptions builder
+     */
+    public QueryNoticesOptionsBuilder addSimilarDocumentIds(String similarDocumentIds) {
+      IBMWatsonValidator.notNull(similarDocumentIds, 'similarDocumentIds cannot be null');
+      if (this.similar_document_ids_serialized_name == null) {
+        this.similar_document_ids_serialized_name = new List<String>();
+      }
+      this.similar_document_ids_serialized_name.add(similarDocumentIds);
+      return this;
+    }
+
+    /**
+     * Adds an similarFields to similar_fields_serialized_name.
+     *
+     * @param similarFields the new similarFields
+     * @return the QueryNoticesOptions builder
+     */
+    public QueryNoticesOptionsBuilder addSimilarFields(String similarFields) {
+      IBMWatsonValidator.notNull(similarFields, 'similarFields cannot be null');
+      if (this.similar_fields_serialized_name == null) {
+        this.similar_fields_serialized_name = new List<String>();
+      }
+      this.similar_fields_serialized_name.add(similarFields);
       return this;
     }
 
@@ -8661,6 +9422,41 @@ public class IBMDiscoveryV1Models {
      */
     public QueryNoticesOptionsBuilder deduplicateField(String deduplicateField) {
       this.deduplicate_field_serialized_name = deduplicateField;
+      return this;
+    }
+
+    /**
+     * Set the similar_serialized_name.
+     *
+     * @param similar the similar
+     * @return the QueryNoticesOptions builder
+     */
+    public QueryNoticesOptionsBuilder similar(Boolean similar) {
+      this.similar_serialized_name = similar;
+      return this;
+    }
+
+    /**
+     * Set the similar_document_ids_serialized_name.
+     * Existing similar_document_ids_serialized_name will be replaced.
+     *
+     * @param similarDocumentIds the similarDocumentIds
+     * @return the QueryNoticesOptions builder
+     */
+    public QueryNoticesOptionsBuilder similarDocumentIds(List<String> similarDocumentIds) {
+      this.similar_document_ids_serialized_name = similarDocumentIds;
+      return this;
+    }
+
+    /**
+     * Set the similar_fields_serialized_name.
+     * Existing similar_fields_serialized_name will be replaced.
+     *
+     * @param similarFields the similarFields
+     * @return the QueryNoticesOptions builder
+     */
+    public QueryNoticesOptionsBuilder similarFields(List<String> similarFields) {
+      this.similar_fields_serialized_name = similarFields;
       return this;
     }
   }
@@ -8979,6 +9775,9 @@ public class IBMDiscoveryV1Models {
     private Long passages_characters_serialized_name;
     private Boolean deduplicate_serialized_name;
     private String deduplicate_field_serialized_name;
+    private Boolean similar_serialized_name;
+    private List<String> similar_document_ids_serialized_name;
+    private List<String> similar_fields_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
      *
@@ -9149,6 +9948,36 @@ public class IBMDiscoveryV1Models {
     public String deduplicateField() {
       return deduplicate_field_serialized_name;
     }
+    /**
+     * Gets the similar_serialized_name.
+     *
+     * When `true`, results are returned based on their similarity to the document IDs specified in the `similar.document_ids` parameter. The default is `false`.
+     *
+     * @return the similar_serialized_name
+     */
+    public Boolean similar() {
+      return similar_serialized_name;
+    }
+    /**
+     * Gets the similar_document_ids_serialized_name.
+     *
+     * A comma-separated list of document IDs that will be used to find similar documents.   **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as `filter` and `query` are subsequently applied and reduce the query scope.
+     *
+     * @return the similar_document_ids_serialized_name
+     */
+    public List<String> similarDocumentIds() {
+      return similar_document_ids_serialized_name;
+    }
+    /**
+     * Gets the similar_fields_serialized_name.
+     *
+     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.
+     *
+     * @return the similar_fields_serialized_name
+     */
+    public List<String> similarFields() {
+      return similar_fields_serialized_name;
+    }
     private QueryOptions(QueryOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
@@ -9169,6 +9998,9 @@ public class IBMDiscoveryV1Models {
       passages_characters_serialized_name = builder.passages_characters_serialized_name;
       deduplicate_serialized_name = builder.deduplicate_serialized_name;
       deduplicate_field_serialized_name = builder.deduplicate_field_serialized_name;
+      similar_serialized_name = builder.similar_serialized_name;
+      similar_document_ids_serialized_name = builder.similar_document_ids_serialized_name;
+      similar_fields_serialized_name = builder.similar_fields_serialized_name;
     }
 
     /**
@@ -9203,6 +10035,9 @@ public class IBMDiscoveryV1Models {
     private Long passages_characters_serialized_name;
     private Boolean deduplicate_serialized_name;
     private String deduplicate_field_serialized_name;
+    private Boolean similar_serialized_name;
+    private List<String> similar_document_ids_serialized_name;
+    private List<String> similar_fields_serialized_name;
 
     private QueryOptionsBuilder(QueryOptions queryOptions) {
       environment_id_serialized_name = queryOptions.environment_id_serialized_name;
@@ -9222,6 +10057,9 @@ public class IBMDiscoveryV1Models {
       passages_characters_serialized_name = queryOptions.passages_characters_serialized_name;
       deduplicate_serialized_name = queryOptions.deduplicate_serialized_name;
       deduplicate_field_serialized_name = queryOptions.deduplicate_field_serialized_name;
+      similar_serialized_name = queryOptions.similar_serialized_name;
+      similar_document_ids_serialized_name = queryOptions.similar_document_ids_serialized_name;
+      similar_fields_serialized_name = queryOptions.similar_fields_serialized_name;
     }
 
     /**
@@ -9292,6 +10130,36 @@ public class IBMDiscoveryV1Models {
         this.passages_fields_serialized_name = new List<String>();
       }
       this.passages_fields_serialized_name.add(passagesFields);
+      return this;
+    }
+
+    /**
+     * Adds an similarDocumentIds to similar_document_ids_serialized_name.
+     *
+     * @param similarDocumentIds the new similarDocumentIds
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder addSimilarDocumentIds(String similarDocumentIds) {
+      IBMWatsonValidator.notNull(similarDocumentIds, 'similarDocumentIds cannot be null');
+      if (this.similar_document_ids_serialized_name == null) {
+        this.similar_document_ids_serialized_name = new List<String>();
+      }
+      this.similar_document_ids_serialized_name.add(similarDocumentIds);
+      return this;
+    }
+
+    /**
+     * Adds an similarFields to similar_fields_serialized_name.
+     *
+     * @param similarFields the new similarFields
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder addSimilarFields(String similarFields) {
+      IBMWatsonValidator.notNull(similarFields, 'similarFields cannot be null');
+      if (this.similar_fields_serialized_name == null) {
+        this.similar_fields_serialized_name = new List<String>();
+      }
+      this.similar_fields_serialized_name.add(similarFields);
       return this;
     }
 
@@ -9482,6 +10350,41 @@ public class IBMDiscoveryV1Models {
      */
     public QueryOptionsBuilder deduplicateField(String deduplicateField) {
       this.deduplicate_field_serialized_name = deduplicateField;
+      return this;
+    }
+
+    /**
+     * Set the similar_serialized_name.
+     *
+     * @param similar the similar
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder similar(Boolean similar) {
+      this.similar_serialized_name = similar;
+      return this;
+    }
+
+    /**
+     * Set the similar_document_ids_serialized_name.
+     * Existing similar_document_ids_serialized_name will be replaced.
+     *
+     * @param similarDocumentIds the similarDocumentIds
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder similarDocumentIds(List<String> similarDocumentIds) {
+      this.similar_document_ids_serialized_name = similarDocumentIds;
+      return this;
+    }
+
+    /**
+     * Set the similar_fields_serialized_name.
+     * Existing similar_fields_serialized_name will be replaced.
+     *
+     * @param similarFields the similarFields
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder similarFields(List<String> similarFields) {
+      this.similar_fields_serialized_name = similarFields;
       return this;
     }
   }
@@ -11460,7 +12363,6 @@ public class IBMDiscoveryV1Models {
       if (jsonMap == null) {
         return null;
       }
-
       String data_updated = (String) jsonMap.remove('data_updated_serialized_name');
       String successfully_trained = (String) jsonMap.remove('successfully_trained_serialized_name');
       String jsonStringWithoutDates = JSON.serialize(jsonMap);

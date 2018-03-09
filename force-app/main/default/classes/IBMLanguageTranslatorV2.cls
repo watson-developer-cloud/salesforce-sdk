@@ -9,7 +9,6 @@
 public class IBMLanguageTranslatorV2 extends IBMWatsonService {
 
   private static final String URL = 'https://gateway.watsonplatform.net/language-translator/api';
-  private String versionDate;
 
   /**
    * Instantiates a new `IBMLanguageTranslatorV2`.
@@ -31,6 +30,8 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
   }
 
   /**
+   * Translate.
+   *
    * Translates the input text from the source language to the target language.
    *
    * @param translateOptions the {@link IBMLanguageTranslatorV2Models.TranslateOptions} containing the options for the call
@@ -56,6 +57,8 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
   }
 
   /**
+   * Identify language.
+   *
    * Identifies the language of the input text.
    *
    * @param identifyOptions the {@link IBMLanguageTranslatorV2Models.IdentifyOptions} containing the options for the call
@@ -70,9 +73,9 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
   }
 
   /**
-   * Lists all languages that can be identified by the API.
+   * List identifiable languages.
    *
-   * Lists all languages that the service can identify. Returns the two-letter code (for example, `en` for English or `es` for Spanish) and name of each language.
+   * Lists the languages that the service can identify. Returns the language code (for example, `en` for English or `es` for Spanish) and name of each language.
    *
    * @param listIdentifiableLanguagesOptions the {@link IBMLanguageTranslatorV2Models.ListIdentifiableLanguagesOptions} containing the options for the call
    * @return the {@link IBMLanguageTranslatorV2Models.IdentifiableLanguages} with the response
@@ -84,7 +87,9 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
   }
 
   /**
-   * Uploads a TMX glossary file on top of a domain to customize a translation model.
+   * Create model.
+   *
+   * Uploads a TMX glossary file on top of a domain to customize a translation model.  Depending on the size of the file, training can range from minutes for a glossary to several hours for a large parallel corpus. Glossary files must be less than 10 MB. The cumulative file size of all uploaded glossary and corpus files is limited to 250 MB.
    *
    * @param createModelOptions the {@link IBMLanguageTranslatorV2Models.CreateModelOptions} containing the options for the call
    * @return the {@link IBMLanguageTranslatorV2Models.TranslationModel} with the response
@@ -120,6 +125,8 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
   }
 
   /**
+   * Delete model.
+   *
    * Deletes a custom translation model.
    *
    * @param deleteModelOptions the {@link IBMLanguageTranslatorV2Models.DeleteModelOptions} containing the options for the call
@@ -133,7 +140,9 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
   }
 
   /**
-   * Get information about the given translation model, including training status.
+   * Get model details.
+   *
+   * Gets information about a translation model, including training status for custom models.
    *
    * @param getModelOptions the {@link IBMLanguageTranslatorV2Models.GetModelOptions} containing the options for the call
    * @return the {@link IBMLanguageTranslatorV2Models.TranslationModel} with the response
@@ -146,7 +155,9 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
   }
 
   /**
-   * Lists available standard and custom models by source or target language.
+   * List models.
+   *
+   * Lists available translation models.
    *
    * @param listModelsOptions the {@link IBMLanguageTranslatorV2Models.ListModelsOptions} containing the options for the call
    * @return the {@link IBMLanguageTranslatorV2Models.TranslationModels} with the response

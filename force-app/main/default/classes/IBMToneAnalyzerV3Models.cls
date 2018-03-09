@@ -444,6 +444,7 @@ public class IBMToneAnalyzerV3Models {
    */
   public class ToneChatOptions {
     private List<Utterance> utterances_serialized_name;
+    private String content_language_serialized_name;
     private String accept_language_serialized_name;
     /**
      * Gets the utterances_serialized_name.
@@ -454,6 +455,16 @@ public class IBMToneAnalyzerV3Models {
      */
     public List<Utterance> utterances() {
       return utterances_serialized_name;
+    }
+    /**
+     * Gets the content_language_serialized_name.
+     *
+     * The language of the input text for the request: English or French. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do not submit content that contains both languages. You can specify any combination of languages for `Content-Language` and `Accept-Language`. * **`2017-09-21`:** Accepts `en` or `fr`. * **`2016-05-19`:** Accepts only `en`.
+     *
+     * @return the content_language_serialized_name
+     */
+    public String contentLanguage() {
+      return content_language_serialized_name;
     }
     /**
      * Gets the accept_language_serialized_name.
@@ -468,6 +479,7 @@ public class IBMToneAnalyzerV3Models {
     private ToneChatOptions(ToneChatOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.utterances_serialized_name, 'utterances_serialized_name cannot be null');
       utterances_serialized_name = builder.utterances_serialized_name;
+      content_language_serialized_name = builder.content_language_serialized_name;
       accept_language_serialized_name = builder.accept_language_serialized_name;
     }
 
@@ -487,10 +499,12 @@ public class IBMToneAnalyzerV3Models {
    */
   public class ToneChatOptionsBuilder {
     private List<Utterance> utterances_serialized_name;
+    private String content_language_serialized_name;
     private String accept_language_serialized_name;
 
     private ToneChatOptionsBuilder(ToneChatOptions toneChatOptions) {
       utterances_serialized_name = toneChatOptions.utterances_serialized_name;
+      content_language_serialized_name = toneChatOptions.content_language_serialized_name;
       accept_language_serialized_name = toneChatOptions.accept_language_serialized_name;
     }
 
@@ -542,6 +556,17 @@ public class IBMToneAnalyzerV3Models {
      */
     public ToneChatOptionsBuilder utterances(List<Utterance> utterances) {
       this.utterances_serialized_name = utterances;
+      return this;
+    }
+
+    /**
+     * Set the content_language_serialized_name.
+     *
+     * @param contentLanguage the contentLanguage
+     * @return the ToneChatOptions builder
+     */
+    public ToneChatOptionsBuilder contentLanguage(String contentLanguage) {
+      this.content_language_serialized_name = contentLanguage;
       return this;
     }
 
@@ -1206,7 +1231,7 @@ public class IBMToneAnalyzerV3Models {
    * UtteranceAnalysis.
    */
   public class UtteranceAnalysis extends IBMWatsonGenericModel {
-    private String utterance_id_serialized_name;
+    private Long utterance_id_serialized_name;
     private String utterance_text_serialized_name;
     private List<ToneChatScore> tones_serialized_name;
     private String error_serialized_name;
@@ -1218,7 +1243,7 @@ public class IBMToneAnalyzerV3Models {
      * @return the utterance_id_serialized_name
      */
     @AuraEnabled
-    public String getUtteranceId() {
+    public Long getUtteranceId() {
       return utterance_id_serialized_name;
     }
     /**
@@ -1260,7 +1285,7 @@ public class IBMToneAnalyzerV3Models {
      *
      * @param utteranceId the new utteranceId
      */
-    public void setUtteranceId(final String utteranceId) {
+    public void setUtteranceId(final long utteranceId) {
       this.utterance_id_serialized_name = utteranceId;
     }
 

@@ -7,11 +7,11 @@ public virtual class IBMWatsonGenericModel {
    */
   public override String toString() {
     // get JSON string representation
-    String jsonString = JSON.serialize(this, true).remove('\\n');
-    
+    String jsonString = JSON.serialize(this, true);
+
     // call custom serializer to raise additional properties
     jsonString = IBMWatsonJSONUtil.serialize(jsonString);
-    
+
     // pretty print formatting
     jsonString = JSON.serializePretty(JSON.deserializeUntyped(jsonString));
     return jsonString;
