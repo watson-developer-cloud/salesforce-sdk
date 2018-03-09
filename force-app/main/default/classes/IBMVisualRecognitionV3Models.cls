@@ -1007,6 +1007,7 @@ public class IBMVisualRecognitionV3Models {
      */
     public ClassifyOptionsBuilder parameters(String parameters) {
       this.parameters_serialized_name = parameters;
+      return this;
     }
   }
 
