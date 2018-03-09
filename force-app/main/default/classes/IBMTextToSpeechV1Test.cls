@@ -183,12 +183,12 @@ private class IBMTextToSpeechV1Test {
       textToSpeech.setEndPoint(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
-    IBMTextToSpeechV1Models.CustomWord customWord =new IBMTextToSpeechV1Models.CustomWord();
-    customWord.setWord('Hello');
-    customWord.setTranslation('de-DE');
+    IBMTextToSpeechV1Models.Word word =new IBMTextToSpeechV1Models.Word();
+    word.setWord('Hello');
+    word.setTranslation('de-DE');
     IBMTextToSpeechV1Models.UpdateVoiceModelOptions options = new IBMTextToSpeechV1Models.UpdateVoiceModelOptionsBuilder()
       .customizationId('customizationId')
-      .addWords(customWord)
+      .addWords(word)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -240,14 +240,14 @@ private class IBMTextToSpeechV1Test {
       textToSpeech.setEndPoint(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
-    IBMTextToSpeechV1Models.CustomWord customWord =new IBMTextToSpeechV1Models.CustomWord();
-    customWord.setWord('Again');
-    customWord.setTranslation('de-DE');
-    customWord.setPartOfSpeech('Josi');
-    IBMTextToSpeechV1Models.AddWordsOptions options = new IBMTextToSpeechV1Models.AddWordsOptionsBuilder('customizationId', new List<IBMTextToSpeechV1Models.CustomWord>{customWord})
+    IBMTextToSpeechV1Models.Word word =new IBMTextToSpeechV1Models.Word();
+    word.setWord('Again');
+    word.setTranslation('de-DE');
+    word.setPartOfSpeech('Josi');
+    IBMTextToSpeechV1Models.AddWordsOptions options = new IBMTextToSpeechV1Models.AddWordsOptionsBuilder('customizationId')
       .customizationId('customizationId')
-      .addWords(customWord)
-      .words(new List<IBMTextToSpeechV1Models.CustomWord>{customWord})
+      .addWords(word)
+      .words(new List<IBMTextToSpeechV1Models.Word>{word})
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
