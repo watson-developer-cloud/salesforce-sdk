@@ -1,106 +1,14 @@
 /**
- * ### Service Overview
- *  The IBM Speech to Text service provides a Representational State Transfer (REST) Application Programming Interface
- * (API) that enables you to add IBM's speech transcription capabilities to your applications. The service also supports
- * an asynchronous HTTP interface for transcribing audio via non-blocking calls. And it supports a customization
- * interface that lets you expand the vocabulary of a base model with domain-specific terminology or adapt a base model
- * for the acoustic characteristics of your audio.
+ * The Speech to Text service uses IBM's speech recognition capabilities to convert English speech into text. The
+ * transcription of incoming audio is continuously sent back to the client with minimal delay, and it is corrected as
+ * more speech is heard.
  *
- *  The service transcribes speech from various languages and audio formats to text with low latency. The service
- * supports transcription of the following languages: Brazilian Portuguese, French, Japanese, Mandarin Chinese, Modern
- * Standard Arabic, Spanish, UK English, and US English. For most languages, the service supports two sampling rates,
- * broadband and narrowband.
- * ### API Overview
- * The Speech to Text service provides the following endpoints:
- * * `/v1/models` returns information about the language models that are available for speech recognition.
- * * `/v1/recognize` (sessionless) includes a single method that provides a simple means of transcribing audio without
- * the overhead of establishing and maintaining a session, but it lacks some of the capabilities available with
- * sessions.
- * * `/v1/sessions` provides a collection of methods that provide a mechanism for a client to maintain a long,
- * multi-turn exchange, or session, with the service or to establish multiple parallel conversations with a particular
- * instance of the service.
- * * `/v1/recognitions` (asynchronous) provides a set of non-blocking methods for submitting, querying, and deleting
- * jobs for recognition requests with the asynchronous HTTP interface. The interface includes calls to register
- * (white-list) and unregister a callback URL.
- * * `/v1/customizations` provides methods for creating and managing custom language models. Custom language models let
- * you expand the vocabulary of a base model with domain-specific terminology.
- * * `/v1/customizations/{customization_id}/corpora` provides methods for managing the corpora associated with a custom
- * language model. You add corpora to extract out-of-vocabulary (OOV) words from the corpora into the custom language
- * model's vocabulary. You can add, list, and delete corpora from a custom language model.
- * * `/v1/customizations/{customization_id}/words` includes methods for managing individual words in a custom language
- * model. You can add, modify, list, and delete words from a custom language model.
- * * `/v1/acoustic_customizations` provides methods for creating and managing custom acoustic models. The interface lets
- * you adapt a base model for the audio characteristics of your environment and speakers.
- * * `/v1/acoustic_customizations/{customization_id}/audio` provides methods for managing the audio resources associated
- * with a custom acoustic model. You add audio resources that closely match the acoustic characteristics of the audio
- * that you want to transcribe. You can add, list, and delete audio resources from a custom acoustic model.
- *
- *
- * **Note about the Try It Out feature:** The `Try it out!` button lets you experiment with the methods of the API by
- * making actual cURL calls to the service. The feature is **not** supported for use with the session-based `POST
- * /v1/sessions/{session_id}/recognize` and sessionless `POST /v1/recognize` methods. For examples of calls to these
- * methods, see the [Speech to Text API reference](http://www.ibm.com/watson/developercloud/speech-to-text/api/v1/).
- * ### API Usage
- * The following information provides details about using the service to transcribe audio:
- * * **HTTP REST interfaces:** You can use methods of the session-based, sessionless, or asynchronous HTTP interfaces to
- * pass audio data to the service. All interfaces let you send the data via the body of the request; the session-based
- * and sessionless methods also let you pass data as multipart form data. With the former approach, you control the
- * transcription via a collection of request headers and query parameters. With the latter, you control the
- * transcription primarily via JSON metadata sent as form data.
- * * **WebSocket interface:** The service also offers a WebSocket interface as an alternative to its HTTP interfaces.
- * The WebSocket interface supports efficient implementation, lower latency, and higher throughput. The interface
- * establishes a persistent connection with the service, eliminating the need for session-based calls from the HTTP
- * interface. See [The WebSocket interface](https://console.bluemix.net/docs/services/speech-to-text/websockets.html).
- * * **Audio formats:** The service supports a variety of popular audio formats. For more information, including links
- * to a number of Internet sites that provide technical and usage details about the different formats, see [Audio
- * formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
- * * **Audio transmission:** You can pass the audio to be transcribed as a one-shot delivery or in streaming mode. With
- * one-shot delivery, you pass all of the audio data to the service at one time. With streaming mode, you send audio
- * data to the service in chunks over a persistent connection. To use streaming, you must pass the `Transfer-Encoding`
- * request header with a value of `chunked`. Both forms of data transmission impose a limit of 100 MB of total data for
- * transcription. See [Audio
- * transmission](https://console.bluemix.net/docs/services/speech-to-text/input.html#transmission).
- * * **Authentication:** You authenticate to the service by using your service credentials. You can use your credentials
- * to authenticate via a proxy server that resides in IBM Cloud, or you can use your credentials to obtain a token and
- * contact the service directly. See [Service credentials for Watson
- * services](https://console.bluemix.net/docs/services/watson/getting-started-credentials.html) and [Tokens for
- * authentication](https://console.bluemix.net/docs/services/watson/getting-started-tokens.html).
- * * **Request Logging:** By default, all Watson services log requests and their results. Data is collected only to
- * improve the Watson services. If you do not want to share your data, set the header parameter
- * `X-Watson-Learning-Opt-Out` to `true` for each request. Data is collected for any request that omits this header. See
- * [Controlling request logging for Watson
- * services](https://console.bluemix.net/docs/services/watson/getting-started-logging.html).
- *
- * For more information about the service and its various interfaces, see [About Speech to
- * Text](https://console.bluemix.net/docs/services/speech-to-text/index.html).
- * ### Customization API Usage
- *   The following information pertains to methods of the customization interface:
- * * Language model customization and acoustic model customization are available only for a limited set of languages.
- * They are generally available for production use for some languages but are beta offerings for other languages. For a
- * complete list of supported languages and the status of their availability, see [Language support for
- * customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
- * * In all cases, you must use service credentials created for the instance of the service that owns a custom model to
- * use the methods described in this documentation with that model. For more information, see [Ownership of custom
- * language models](https://console.bluemix.net/docs/services/speech-to-text/custom.html#customOwner).
- * * How the service handles request logging for the customization interface depends on the request. The service does
- * not log data that are used to build custom models. But it does log data when a custom model is used with a
- * recognition request. For more information, see [Request logging and data
- * privacy](https://console.bluemix.net/docs/services/speech-to-text/custom.html#customLogging).
- * * Each custom model is identified by a customization ID, which is a Globally Unique Identifier (GUID). A GUID is a
- * hexadecimal string that has the same format as Watson service credentials: `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`.
- * You specify a custom model's GUID with the appropriate customization parameter of methods that support customization.
- *
- *
- * For more information about using the service's customization interface, see [The customization
- * interface](https://console.bluemix.net/docs/services/speech-to-text/custom.html).
- *
- * @version V1
+ * @version v1
  * @see <a href="http://www.ibm.com/watson/developercloud/speech-to-text.html">Speech to Text</a>
  */
 public class IBMSpeechToTextV1 extends IBMWatsonService {
 
   private static final String URL = 'https://stream.watsonplatform.net/speech-to-text/api';
-  private String versionDate;
 
   /**
    * Instantiates a new `IBMSpeechToTextV1`.
@@ -151,6 +59,87 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
+   * Recognizes an audio file and returns {@link SpeechRecognitionResults}.<br>
+   * <br>
+   * Here is an example of how to recognize an audio file:
+   *
+   * <pre>
+   * SpeechToText service = new SpeechToText();
+   * service.setUsernameAndPassword(&quot;USERNAME&quot;, &quot;PASSWORD&quot;);
+   * service.setEndPoint(&quot;SERVICE_URL&quot;);
+   *
+   * RecognizeOptions options = new RecognizeOptions().maxAlternatives(3).continuous(true);
+   *
+   * File audio = new File(&quot;sample1.wav&quot;);
+   *
+   * SpeechResults results = service.recognize(audio, options).execute();
+   * System.out.println(results);
+   * </pre>
+   *
+   * @param recognizeOptions the recognize options
+   * @return the {@link SpeechRecognitionResults}
+   */
+  public IBMSpeechToTextV1Models.SpeechResults recognize(IBMSpeechToTextV1Models.RecognizeOptions recognizeOptions) {
+    IBMWatsonValidator.notNull(recognizeOptions, 'recognizeOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint()
+      + '/v1/recognize');
+
+    builder.addHeader('Content-Type', recognizeOptions.fileContentType());
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (recognizeOptions.audio() != null) {
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(recognizeOptions.audio(), recognizeOptions.fileContentType());
+      multipartBuilder.addFormDataPart('audio', recognizeOptions.audioFilename(), fileBody);
+    }
+    if (recognizeOptions.continuous() != null) {
+      builder.query('continuous', String.valueOf(recognizeOptions.continuous()));
+    }
+    if (recognizeOptions.maxAlternatives() != null) {
+      builder.query('max_alternatives', String.valueOf(recognizeOptions.maxAlternatives()));
+    }
+    if (recognizeOptions.timestamps() != null) {
+      builder.query('timestamps', String.valueOf(recognizeOptions.timestamps()));
+    }
+    if (recognizeOptions.wordConfidence() != null) {
+      builder.query('word_confidence', String.valueOf(recognizeOptions.wordConfidence()));
+    }
+    if (recognizeOptions.inactivityTimeout() != null) {
+      builder.query('inactivity_timeout', String.valueOf(recognizeOptions.inactivityTimeout()));
+    }
+    if (recognizeOptions.model() != null) {
+      builder.query('model', recognizeOptions.model());
+    }
+    if (recognizeOptions.interimResults() != null) {
+      builder.query('interim_results', String.valueOf(recognizeOptions.interimResults()));
+    }
+    if (recognizeOptions.keywords() != null) {
+      builder.query('keywords', String.valueOf(recognizeOptions.keywords()));
+    }
+    if (recognizeOptions.keywordsThreshold() != null) {
+      builder.query('keywords_threshold', String.valueOf(recognizeOptions.keywordsThreshold()));
+    }
+    if (recognizeOptions.wordAlternativesThreshold() != null) {
+      builder.query('word_alternatives_threshold', String.valueOf(recognizeOptions.wordAlternativesThreshold()));
+    }
+    if (recognizeOptions.profanityFilter() != null) {
+      builder.query('profanity_filter', String.valueOf(recognizeOptions.profanityFilter()));
+    }
+    if (recognizeOptions.smartFormatting() != null) {
+      builder.query('smart_formatting', String.valueOf(recognizeOptions.smartFormatting()));
+    }
+    if (recognizeOptions.customizationId() != null) {
+      builder.query('customization_id', recognizeOptions.customizationId());
+    }
+    if (recognizeOptions.speakerLabels() != null) {
+      builder.query('speaker_labels', String.valueOf(recognizeOptions.speakerLabels()));
+    }
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody);
+
+    return (IBMSpeechToTextV1Models.SpeechResults) createServiceCall(builder.build(), IBMSpeechToTextV1Models.SpeechResults.class);
+  }
+
+  /**
    * Checks the status of the specified asynchronous job.
    *
    * Returns information about the specified job. The response always includes the status of the job and its creation and update times. If the status is `completed`, the response includes the results of the recognition request. You must submit the request with the service credentials of the user who created the job.   You can use the method to retrieve the results of any job, regardless of whether it was submitted with a callback URL and the `recognitions.completed_with_results` event, and you can retrieve the results multiple times for as long as they remain available.
@@ -168,7 +157,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   /**
    * Checks the status of all asynchronous jobs.
    *
-   * Returns the ID and status of all outstanding jobs associated with the service credentials with which it is called. The method also returns the creation and update times of each job, and, if a job was created with a callback URL and a user token, the user token for the job. To obtain the results for a job whose status is `completed`, use the `GET /v1/recognitions/{id}` method. A job and its results remain available until you delete them with the `DELETE /v1/recognitions/{id}` method or until the job's time to live expires, whichever comes first.
+   * Returns the ID and status of the latest 100 outstanding jobs associated with the service credentials with which it is called. The method also returns the creation and update times of each job, and, if a job was created with a callback URL and a user token, the user token for the job. To obtain the results for a job whose status is `completed` or not one of the latest 100 outstanding jobs, use the `GET /v1/recognitions/{id}` method. A job and its results remain available until you delete them with the `DELETE /v1/recognitions/{id}` method or until the job's time to live expires, whichever comes first.
    *
    * @param checkJobsOptions the {@link IBMSpeechToTextV1Models.CheckJobsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.RecognitionJobs} with the response
@@ -190,17 +179,17 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public IBMSpeechToTextV1Models.RecognitionJob createJob(IBMSpeechToTextV1Models.CreateJobOptions createJobOptions) {
     IBMWatsonValidator.notNull(createJobOptions, 'createJobOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/recognitions');
-    if (createJobOptions.transferEncoding() != null) {
-      builder.addHeader('Transfer-Encoding', createJobOptions.transferEncoding());
-    }
     builder.addHeader('Content-Type', createJobOptions.contentType());
-    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();		
-    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);		
-    if (createJobOptions.audio() != null) {		
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (createJobOptions.audio() != null) {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
         createJobOptions.audio(), createJobOptions.contentType()
-      );		
-      multipartBuilder.addFormDataPart('audio', createJobOptions.audioFilename(), fileBody);		
+      );
+      multipartBuilder.addFormDataPart('audio', createJobOptions.audioFilename(), fileBody);
+    }
+    if (createJobOptions.model() != null) {
+      builder.query('model', createJobOptions.model());
     }
     if (createJobOptions.callbackUrl() != null) {
       builder.query('callback_url', createJobOptions.callbackUrl());
@@ -214,9 +203,6 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createJobOptions.resultsTtl() != null) {
       builder.query('results_ttl', String.valueOf(createJobOptions.resultsTtl()));
     }
-    if (createJobOptions.model() != null) {
-      builder.query('model', createJobOptions.model());
-    }
     if (createJobOptions.customizationId() != null) {
       builder.query('customization_id', createJobOptions.customizationId());
     }
@@ -226,8 +212,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createJobOptions.customizationWeight() != null) {
       builder.query('customization_weight', String.valueOf(createJobOptions.customizationWeight()));
     }
-    if (createJobOptions.versionTest() != null) {
-      builder.query('version_test', createJobOptions.versionTest());
+    if (createJobOptions.version() != null) {
+      builder.query('version', createJobOptions.version());
     }
     if (createJobOptions.inactivityTimeout() != null) {
       builder.query('inactivity_timeout', String.valueOf(createJobOptions.inactivityTimeout()));
@@ -332,13 +318,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public IBMSpeechToTextV1Models.LanguageModel createLanguageModel(IBMSpeechToTextV1Models.CreateLanguageModelOptions createLanguageModelOptions) {
     IBMWatsonValidator.notNull(createLanguageModelOptions, 'createLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/customizations');
-    builder.addHeader('Content-Type', createLanguageModelOptions.contentType());
-    if (createLanguageModelOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-      builder.bodyJson(JSON.serialize(createLanguageModelOptions.createLanguageModel(), true));
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('name', createLanguageModelOptions.name());
+    contentJson.put('base_model_name', createLanguageModelOptions.baseModelName());
+    if (createLanguageModelOptions.dialect() != null) {
+      contentJson.put('dialect', createLanguageModelOptions.dialect());
     }
-    else {
-      builder.bodyContent(createLanguageModelOptions.body(), createLanguageModelOptions.contentType());
+    if (createLanguageModelOptions.description() != null) {
+      contentJson.put('description', createLanguageModelOptions.description());
     }
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMSpeechToTextV1Models.LanguageModel) createServiceCall(builder.build(), IBMSpeechToTextV1Models.LanguageModel.class);
   }
@@ -438,7 +427,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    */
   public void upgradeLanguageModel(IBMSpeechToTextV1Models.UpgradeLanguageModelOptions upgradeLanguageModelOptions) {
     IBMWatsonValidator.notNull(upgradeLanguageModelOptions, 'upgradeLanguageModelOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/upgrade', new String[]{ upgradeLanguageModelOptions.customizationId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/upgrade_model', new String[]{ upgradeLanguageModelOptions.customizationId() }));
     builder.bodyJson('{}');
 
     createServiceCall(builder.build(), null);
@@ -524,13 +513,17 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public void addWord(IBMSpeechToTextV1Models.AddWordOptions addWordOptions) {
     IBMWatsonValidator.notNull(addWordOptions, 'addWordOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getEndPoint() + String.format('/v1/customizations/{0}/words/{1}', new String[]{ addWordOptions.customizationId(), addWordOptions.wordName() }));
-    builder.addHeader('Content-Type', addWordOptions.contentType());
-    if (addWordOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-      builder.bodyJson(JSON.serialize(addWordOptions.customWord(), true));
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    if (addWordOptions.word() != null) {
+      contentJson.put('word', addWordOptions.word());
     }
-    else {
-      builder.bodyContent(addWordOptions.body(), addWordOptions.contentType());
+    if (addWordOptions.soundsLike() != null) {
+      contentJson.put('sounds_like', addWordOptions.soundsLike());
     }
+    if (addWordOptions.displayAs() != null) {
+      contentJson.put('display_as', addWordOptions.displayAs());
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     createServiceCall(builder.build(), null);
   }
@@ -546,13 +539,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public void addWords(IBMSpeechToTextV1Models.AddWordsOptions addWordsOptions) {
     IBMWatsonValidator.notNull(addWordsOptions, 'addWordsOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/words', new String[]{ addWordsOptions.customizationId() }));
-    builder.addHeader('Content-Type', addWordsOptions.contentType());
-    if (addWordsOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-      builder.bodyJson(JSON.serialize(addWordsOptions.customWords(), true));
-    }
-    else {
-      builder.bodyContent(addWordsOptions.body(), addWordsOptions.contentType());
-    }
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('words', addWordsOptions.words());
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     createServiceCall(builder.build(), null);
   }
@@ -619,13 +608,13 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public IBMSpeechToTextV1Models.AcousticModel createAcousticModel(IBMSpeechToTextV1Models.CreateAcousticModelOptions createAcousticModelOptions) {
     IBMWatsonValidator.notNull(createAcousticModelOptions, 'createAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/acoustic_customizations');
-    builder.addHeader('Content-Type', createAcousticModelOptions.contentType());
-    if (createAcousticModelOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-      builder.bodyJson(JSON.serialize(createAcousticModelOptions.createAcousticModel(), true));
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('name', createAcousticModelOptions.name());
+    contentJson.put('base_model_name', createAcousticModelOptions.baseModelName());
+    if (createAcousticModelOptions.description() != null) {
+      contentJson.put('description', createAcousticModelOptions.description());
     }
-    else {
-      builder.bodyContent(createAcousticModelOptions.body(), createAcousticModelOptions.contentType());
-    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMSpeechToTextV1Models.AcousticModel) createServiceCall(builder.build(), IBMSpeechToTextV1Models.AcousticModel.class);
   }
@@ -696,7 +685,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   /**
    * Trains a custom acoustic model.
    *
-   * Initiates the training of a custom acoustic model with new or changed audio resources. After adding or deleting audio resources for a custom acoustic model, use this method to begin the actual training of the model on the latest audio data. The custom acoustic model does not reflect its changed data until you train it. You must use credentials for the instance of the service that owns a model to train it.   The training method is asynchronous. It can take on the order of minutes or hours to complete depending on the total amount of audio data on which the model is being trained and the current load on the service. Typically, training takes approximately twice the length of the total audio contained in the custom model. The method returns an HTTP 200 response code to indicate that the training process has begun.   You can monitor the status of the training by using the `GET /v1/acoustic_customizations/{customization_id}` method to poll the model's status. Use a loop to check the status once a minute. The method returns an `Customization` object that includes `status` and `progress` fields. A status of `available` indicates that the custom model is trained and ready to use. The service cannot accept subsequent training requests, or requests to add new audio resources, until the existing request completes.   You can use the optional `custom_language_model_id` query parameter to specify the GUID of a separately created custom language model that is to be used during training. Specify a custom language model if you have verbatim transcriptions of the audio files that you have added to the custom model or you have either corpora (text files) or a list of words that are relevant to the contents of the audio files. For information about creating a separate custom language model, see [Creating a custom language model](https://console.bluemix.net/docs/services/speech-to-text/language-create.html).   Training can fail to start for the following reasons: * The service is currently handling another request for the custom model, such as another training request or a request to add audio resources to the model. * The custom model contains less than 10 minutes or more than 50 hours of audio data. * One or more of the custom model's audio resources is invalid.
+   * Initiates the training of a custom acoustic model with new or changed audio resources. After adding or deleting audio resources for a custom acoustic model, use this method to begin the actual training of the model on the latest audio data. The custom acoustic model does not reflect its changed data until you train it. You must use credentials for the instance of the service that owns a model to train it.   The training method is asynchronous. It can take on the order of minutes or hours to complete depending on the total amount of audio data on which the model is being trained and the current load on the service. Typically, training takes approximately two to four times the length of its audio data. The range of time depends on the model being trained and the nature of the audio, such as whether the audio is clean or noisy. The method returns an HTTP 200 response code to indicate that the training process has begun.   You can monitor the status of the training by using the `GET /v1/acoustic_customizations/{customization_id}` method to poll the model's status. Use a loop to check the status once a minute. The method returns an `Customization` object that includes `status` and `progress` fields. A status of `available` indicates that the custom model is trained and ready to use. The service cannot accept subsequent training requests, or requests to add new audio resources, until the existing request completes.   You can use the optional `custom_language_model_id` query parameter to specify the GUID of a separately created custom language model that is to be used during training. Specify a custom language model if you have verbatim transcriptions of the audio files that you have added to the custom model or you have either corpora (text files) or a list of words that are relevant to the contents of the audio files. For information about creating a separate custom language model, see [Creating a custom language model](https://console.bluemix.net/docs/services/speech-to-text/language-create.html).   Training can fail to start for the following reasons: * The service is currently handling another request for the custom model, such as another training request or a request to add audio resources to the model. * The custom model contains less than 10 minutes or more than 50 hours of audio data. * One or more of the custom model's audio resources is invalid.
    *
    * @param trainAcousticModelOptions the {@link IBMSpeechToTextV1Models.TrainAcousticModelOptions} containing the options for the call
    * @return the service call
@@ -722,7 +711,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    */
   public void upgradeAcousticModel(IBMSpeechToTextV1Models.UpgradeAcousticModelOptions upgradeAcousticModelOptions) {
     IBMWatsonValidator.notNull(upgradeAcousticModelOptions, 'upgradeAcousticModelOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/upgrade', new String[]{ upgradeAcousticModelOptions.customizationId() }));
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/upgrade_model', new String[]{ upgradeAcousticModelOptions.customizationId() }));
     if (upgradeAcousticModelOptions.customLanguageModelId() != null) {
       builder.query('custom_language_model_id', upgradeAcousticModelOptions.customLanguageModelId());
     }
@@ -742,17 +731,17 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public void addAudio(IBMSpeechToTextV1Models.AddAudioOptions addAudioOptions) {
     IBMWatsonValidator.notNull(addAudioOptions, 'addAudioOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio/{1}', new String[]{ addAudioOptions.customizationId(), addAudioOptions.audioName() }));
-    if (addAudioOptions.containedContentType() != null) {
-      builder.addHeader('Contained-Content-Type', addAudioOptions.containedContentType());
-    }
     builder.addHeader('Content-Type', addAudioOptions.contentType());
-    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();		
-    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);		
-    if (addAudioOptions.audio() != null) {		
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (addAudioOptions.audio() != null) {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
         addAudioOptions.audio(), addAudioOptions.contentType()
-      );		
+      );
       multipartBuilder.addFormDataPart('audio', addAudioOptions.audioFilename(), fileBody);
+    }
+    if (addAudioOptions.containedContentType() != null) {
+      builder.addHeader('Contained-Content-Type', addAudioOptions.containedContentType());
     }
     if (addAudioOptions.allowOverwrite() != null) {
       builder.query('allow_overwrite', String.valueOf(addAudioOptions.allowOverwrite()));
@@ -808,62 +797,4 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     return (IBMSpeechToTextV1Models.AudioResources) createServiceCall(builder.build(), IBMSpeechToTextV1Models.AudioResources.class);
   }
 
-  public IBMSpeechToTextV1Models.SpeechResults recognize(IBMSpeechToTextV1Models.RecognizeOptions recognizeOptions) {
-    IBMWatsonValidator.notNull(recognizeOptions, 'recognizeOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/recognize');
-
-    builder.addHeader('Content-Type', recognizeOptions.fileContentType());
-    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
-    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    if (recognizeOptions.audio() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(recognizeOptions.audio(), recognizeOptions.fileContentType());
-      multipartBuilder.addFormDataPart('audio', recognizeOptions.audioFilename(), fileBody);
-    }
-    if (recognizeOptions.continuous() != null) {
-      builder.query('continuous', String.valueOf(recognizeOptions.continuous()));
-    }
-    if (recognizeOptions.maxAlternatives() != null) {
-      builder.query('max_alternatives', String.valueOf(recognizeOptions.maxAlternatives()));
-    }
-    if (recognizeOptions.timestamps() != null) {
-      builder.query('timestamps', String.valueOf(recognizeOptions.timestamps()));
-    }
-    if (recognizeOptions.wordConfidence() != null) {
-      builder.query('word_confidence', String.valueOf(recognizeOptions.wordConfidence()));
-    }
-    if (recognizeOptions.inactivityTimeout() != null) {
-      builder.query('inactivity_timeout', String.valueOf(recognizeOptions.inactivityTimeout()));
-    }
-    if (recognizeOptions.model() != null) {
-      builder.query('model', recognizeOptions.model());
-    }
-    if (recognizeOptions.interimResults() != null) {
-      builder.query('interim_results', String.valueOf(recognizeOptions.interimResults()));
-    }
-    if (recognizeOptions.keywords() != null) {
-      builder.query('keywords', String.valueOf(recognizeOptions.keywords()));
-    }
-    if (recognizeOptions.keywordsThreshold() != null) {
-      builder.query('keywords_threshold', String.valueOf(recognizeOptions.keywordsThreshold()));
-    }
-    if (recognizeOptions.wordAlternativesThreshold() != null) {
-      builder.query('word_alternatives_threshold', String.valueOf(recognizeOptions.wordAlternativesThreshold()));
-    }
-    if (recognizeOptions.profanityFilter() != null) {
-      builder.query('profanity_filter', String.valueOf(recognizeOptions.profanityFilter()));
-    }
-    if (recognizeOptions.smartFormatting() != null) {
-      builder.query('smart_formatting', String.valueOf(recognizeOptions.smartFormatting()));
-    }
-    if (recognizeOptions.customizationId() != null) {
-      builder.query('customization_id', recognizeOptions.customizationId());
-    }
-    if (recognizeOptions.speakerLabels() != null) {
-      builder.query('speaker_labels', String.valueOf(recognizeOptions.speakerLabels()));
-    }
-    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
-    builder.body(multipartBody);
-
-    return (IBMSpeechToTextV1Models.SpeechResults) createServiceCall(builder.build(), IBMSpeechToTextV1Models.SpeechResults.class);
-  }
 }
