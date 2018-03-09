@@ -16,10 +16,8 @@
 public class IBMVisualRecognitionV3 extends IBMWatsonService {
 
   private static final String URL = 'https://gateway-a.watsonplatform.net/visual-recognition/api';
-  private String versionDate;
 
-  /** The Constant VERSION_DATE_2016_05_20. */
-  public static final String VERSION_DATE_2016_05_20 = '2016-05-20';
+  private String versionDate;
 
   /**
    * Instantiates a new `IBMVisualRecognitionV3`.
@@ -80,7 +78,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    */
   public IBMVisualRecognitionV3Models.ClassifiedImages classify(IBMVisualRecognitionV3Models.ClassifyOptions classifyOptions) {
     IBMWatsonValidator.notNull(classifyOptions, 'classifyOptions cannot be null');
-    IBMWatsonValidator.isTrue((classifyOptions.imagesFile() != null) || (classifyOptions.parameters() != null), 'At least one of images_file or parameters must be supplied.');
+    IBMWatsonValidator.isTrue((classifyOptions.imagesFile() != null) || (classifyOptions.url() != null) || (classifyOptions.threshold() != null) || (classifyOptions.owners() != null) || (classifyOptions.classifierIds() != null), 'At least one of images_file, url, threshold, owners, or classifier_ids must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/classify');
     if (classifyOptions.acceptLanguage() != null) {
       builder.addHeader('Accept-Language', classifyOptions.acceptLanguage());
@@ -92,8 +90,17 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(classifyOptions.imagesFile(), classifyOptions.imagesFileContentType());
       multipartBuilder.addFormDataPart('images_file', classifyOptions.imagesFilename(), fileBody);
     }
-    if (classifyOptions.parameters() != null) {
-      multipartBuilder.addFormDataPart('parameters', classifyOptions.parameters());
+    if (classifyOptions.url() != null) {
+      multipartBuilder.addFormDataPart('url', classifyOptions.url());
+    }
+    if (classifyOptions.threshold() != null) {
+      multipartBuilder.addFormDataPart('threshold', String.valueOf(classifyOptions.threshold()));
+    }
+    if (classifyOptions.owners() != null) {
+      multipartBuilder.addFormDataPart('owners', String.join(classifyOptions.owners(), ','));
+    }
+    if (classifyOptions.classifierIds() != null) {
+      multipartBuilder.addFormDataPart('classifier_ids', String.join(classifyOptions.classifierIds(), ','));
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
@@ -111,7 +118,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    */
   public IBMVisualRecognitionV3Models.DetectedFaces detectFaces(IBMVisualRecognitionV3Models.DetectFacesOptions detectFacesOptions) {
     IBMWatsonValidator.notNull(detectFacesOptions, 'detectFacesOptions cannot be null');
-    IBMWatsonValidator.isTrue((detectFacesOptions.imagesFile() != null) || (detectFacesOptions.parameters() != null), 'At least one of images_file or parameters must be supplied.');
+    IBMWatsonValidator.isTrue((detectFacesOptions.imagesFile() != null) || (detectFacesOptions.url() != null), 'At least one of images_file or url must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/detect_faces');
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
@@ -120,8 +127,8 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(detectFacesOptions.imagesFile(), detectFacesOptions.imagesFileContentType());
       multipartBuilder.addFormDataPart('images_file', detectFacesOptions.imagesFilename(), fileBody);
     }
-    if (detectFacesOptions.parameters() != null) {
-      multipartBuilder.addFormDataPart('parameters', detectFacesOptions.parameters());
+    if (detectFacesOptions.url() != null) {
+      multipartBuilder.addFormDataPart('url', detectFacesOptions.url());
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
@@ -213,7 +220,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   /**
    * Update a classifier.
    *
-   * Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to existing classes. You must supply at least one set of positive or negative examples. For details, see [Updating custom classifiers](https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).  Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.  **Important:** You can't update a custom classifier with a free API key. If you have a free key, you can upgrade to a Standard plan. For details, see [Changing your plan](https://console.bluemix.net/docs/pricing/changing_plan.html).  **Tip:** Don't make retraining calls on a classifier until the status is ready. When you submit retraining requests in parallel, the last request overwrites the previous requests. The retrained property shows the last time the classifier retraining finished.
+   * Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to existing classes. You must supply at least one set of positive or negative examples. For details, see [Updating custom classifiers](https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).  Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.  **Important:** You can't update a custom classifier with an API key for a Lite plan. To update a custom classifer on a Lite plan, create another service instance on a Standard plan and re-create your custom classifier.  **Tip:** Don't make retraining calls on a classifier until the status is ready. When you submit retraining requests in parallel, the last request overwrites the previous requests. The retrained property shows the last time the classifier retraining finished.
    *
    * @param updateClassifierOptions the {@link IBMVisualRecognitionV3Models.UpdateClassifierOptions} containing the options for the call
    * @return the {@link IBMVisualRecognitionV3Models.Classifier} with the response
