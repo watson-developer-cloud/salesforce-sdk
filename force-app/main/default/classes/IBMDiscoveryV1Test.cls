@@ -806,6 +806,9 @@ private class IBMDiscoveryV1Test {
       .collectionIds(collectionIds)
       .returnField(collectionIds)
       .sortField(collectionIds)
+      .similar(true)
+      .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
+      .similarFields(new List<String> { 'field1', 'field2' })
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -844,6 +847,9 @@ private class IBMDiscoveryV1Test {
       .sortField(new List<String>{'test'})
       .highlight(true)
       .deduplicateField('test')
+      .similar(true)
+      .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
+      .similarFields(new List<String> { 'field1', 'field2' })
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -923,6 +929,9 @@ private class IBMDiscoveryV1Test {
       .returnField(collectionIds)
       .sortField(collectionIds)
       .passagesFields(collectionIds)
+      .similar(true)
+      .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
+      .similarFields(new List<String> { 'field1', 'field2' })
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -951,6 +960,9 @@ private class IBMDiscoveryV1Test {
       .returnField(collectionIds)
       .sortField(collectionIds)
       .passagesFields(collectionIds)
+      .similar(true)
+      .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
+      .similarFields(new List<String> { 'field1', 'field2' })
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -1512,6 +1524,91 @@ private class IBMDiscoveryV1Test {
       discovery.updateDocument(options);
     System.assertEquals(resp.getDocumentId(), 'f1360220-ea2d-4271-9d62-89a910b13c37');
     System.assertEquals(resp.getStatus(), 'processing');
+    Test.stopTest();
+  }
+
+  static testMethod void testCreateExpansions() {
+    String body = IBMWatsonMockResponses.expansionsResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    List<String> expansion1InputTerms = new List<String> { 'weekday', 'week day' };
+    List<String> expansion1ExpandedTerms = new List<String> { 'monday', 'tuesday', 'wednesday', 'thursday', 'friday' };
+    List<String> expansion2InputTerms = new List<String> { 'weekend', 'week end' };
+    List<String> expansion2ExpandedTerms = new List<String> { 'saturday', 'sunday' };
+    IBMDiscoveryV1Models.Expansion expansion1 = new IBMDiscoveryV1Models.Expansion();
+    expansion1.setInputTerms(expansion1InputTerms);
+    expansion1.setExpandedTerms(expansion1ExpandedTerms);
+    IBMDiscoveryV1Models.Expansion expansion2 = new IBMDiscoveryV1Models.Expansion();
+    expansion2.setInputTerms(expansion2InputTerms);
+    expansion2.setExpandedTerms(expansion2ExpandedTerms);
+    IBMDiscoveryV1Models.Expansions expansions = new IBMDiscoveryV1Models.Expansions();
+    expansions.setExpansions(new List<IBMDiscoveryV1Models.Expansion> { expansion1, expansion2 });
+
+    IBMDiscoveryV1Models.CreateExpansionsOptions createOptions = new IBMDiscoveryV1Models.CreateExpansionsOptionsBuilder()
+        .environmentId('environment_id')
+        .collectionId('collection_id')
+        .expansions(expansions)
+        .build();
+    IBMDiscoveryV1Models.Expansions createResults = discovery.createExpansions(createOptions);
+
+    System.assertEquals(expansion1, createResults.getExpansions().get(0));
+    System.assertEquals(expansion2, createResults.getExpansions().get(1));
+    Test.stopTest();
+  }
+
+  static testMethod void testListExpansions() {
+    String body = IBMWatsonMockResponses.expansionsResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    List<String> expansion1InputTerms = new List<String> { 'weekday', 'week day' };
+    List<String> expansion1ExpandedTerms = new List<String> { 'monday', 'tuesday', 'wednesday', 'thursday', 'friday' };
+    List<String> expansion2InputTerms = new List<String> { 'weekend', 'week end' };
+    List<String> expansion2ExpandedTerms = new List<String> { 'saturday', 'sunday' };
+    IBMDiscoveryV1Models.Expansion expansion1 = new IBMDiscoveryV1Models.Expansion();
+    expansion1.setInputTerms(expansion1InputTerms);
+    expansion1.setExpandedTerms(expansion1ExpandedTerms);
+    IBMDiscoveryV1Models.Expansion expansion2 = new IBMDiscoveryV1Models.Expansion();
+    expansion2.setInputTerms(expansion2InputTerms);
+    expansion2.setExpandedTerms(expansion2ExpandedTerms);
+    IBMDiscoveryV1Models.Expansions expansions = new IBMDiscoveryV1Models.Expansions();
+    expansions.setExpansions(new List<IBMDiscoveryV1Models.Expansion> { expansion1, expansion2 });
+
+    IBMDiscoveryV1Models.ListExpansionsOptions listOptions = new IBMDiscoveryV1Models.ListExpansionsOptionsBuilder()
+        .environmentId('environment_id')
+        .collectionId('collection_id')
+        .build();
+    IBMDiscoveryV1Models.Expansions listResults = discovery.listExpansions(listOptions);
+
+    System.assertEquals(expansion1, listResults.getExpansions().get(0));
+    System.assertEquals(expansion2, listResults.getExpansions().get(1));
+    Test.stopTest();
+  }
+
+  static testMethod void testDeleteExpansions() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    IBMDiscoveryV1Models.DeleteExpansionsOptions deleteOptions = new IBMDiscoveryV1Models.DeleteExpansionsOptionsBuilder()
+        .environmentId('environment_id')
+        .collectionId('collection_id')
+        .build();
+    discovery.deleteExpansions(deleteOptions);
+
     Test.stopTest();
   }
 }
