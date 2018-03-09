@@ -1043,6 +1043,7 @@ public class IBMConversationV1Models {
     }
     private CreateDialogNodeOptions(CreateDialogNodeOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
+      IBMWatsonValidator.notNull(builder.dialog_node_serialized_name, 'dialog_node_serialized_name cannot be null');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       dialog_node_serialized_name = builder.dialog_node_serialized_name;
       description_serialized_name = builder.description_serialized_name;
@@ -1119,9 +1120,11 @@ public class IBMConversationV1Models {
      * Instantiates a new builder with required properties.
      *
      * @param workspaceId the workspaceId
+     * @param dialogNode the dialogNode
      */
-    public CreateDialogNodeOptionsBuilder(String workspaceId) {
+    public CreateDialogNodeOptionsBuilder(String workspaceId, String dialogNode) {
       this.workspace_id_serialized_name = workspaceId;
+      this.dialog_node_serialized_name = dialogNode;
     }
 
     /**
@@ -4714,7 +4717,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the behavior_serialized_name.
      *
-     * How the `next_step` reference is processed.
+     * How the `next_step` reference is processed. If you specify `jump_to`, then you must also specify a value for the `dialog_node` property.
      *
      * @return the behavior_serialized_name
      */
@@ -4725,7 +4728,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the dialog_node_serialized_name.
      *
-     * The ID of the dialog node to process next.
+     * The ID of the dialog node to process next. This parameter is required if `behavior`=`jump_to`.
      *
      * @return the dialog_node_serialized_name
      */
@@ -4778,6 +4781,64 @@ public class IBMConversationV1Models {
       }
 
       DialogNodeNextStep ret = (DialogNodeNextStep) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * DialogNodeVisitedDetails.
+   */
+  public class DialogNodeVisitedDetails extends IBMWatsonGenericModel {
+    private String dialog_node_serialized_name;
+    private String title_serialized_name;
+    /**
+     * Gets the dialog_node_serialized_name.
+     *
+     * A dialog node that was triggered during processing of the input message.
+     *
+     * @return the dialog_node_serialized_name
+     */
+    @AuraEnabled
+    public String getDialogNode() {
+      return dialog_node_serialized_name;
+    }
+    /**
+     * Gets the title_serialized_name.
+     *
+     * The title of the dialog node.
+     *
+     * @return the title_serialized_name
+     */
+    @AuraEnabled
+    public String getTitle() {
+      return title_serialized_name;
+    }
+
+    /**
+     * Sets the dialog_node_serialized_name.
+     *
+     * @param dialogNode the new dialogNode
+     */
+    public void setDialogNode(final String dialogNode) {
+      this.dialog_node_serialized_name = dialogNode;
+    }
+
+    /**
+     * Sets the title_serialized_name.
+     *
+     * @param title the new title
+     */
+    public void setTitle(final String title) {
+      this.title_serialized_name = title;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeVisitedDetails ret = (DialogNodeVisitedDetails) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -5290,6 +5351,7 @@ public class IBMConversationV1Models {
   public class GetCounterexampleOptions {
     private String workspace_id_serialized_name;
     private String text_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -5310,11 +5372,22 @@ public class IBMConversationV1Models {
     public String text() {
       return text_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private GetCounterexampleOptions(GetCounterexampleOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.text_serialized_name, 'text_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       text_serialized_name = builder.text_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -5334,10 +5407,12 @@ public class IBMConversationV1Models {
   public class GetCounterexampleOptionsBuilder {
     private String workspace_id_serialized_name;
     private String text_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private GetCounterexampleOptionsBuilder(GetCounterexampleOptions getCounterexampleOptions) {
       workspace_id_serialized_name = getCounterexampleOptions.workspace_id_serialized_name;
       text_serialized_name = getCounterexampleOptions.text_serialized_name;
+      include_audit_serialized_name = getCounterexampleOptions.include_audit_serialized_name;
     }
 
     /**
@@ -5387,6 +5462,17 @@ public class IBMConversationV1Models {
       this.text_serialized_name = text;
       return this;
     }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the GetCounterexampleOptions builder
+     */
+    public GetCounterexampleOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
   }
 
   /**
@@ -5395,6 +5481,7 @@ public class IBMConversationV1Models {
   public class GetDialogNodeOptions {
     private String workspace_id_serialized_name;
     private String dialog_node_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -5415,11 +5502,22 @@ public class IBMConversationV1Models {
     public String dialogNode() {
       return dialog_node_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private GetDialogNodeOptions(GetDialogNodeOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.dialog_node_serialized_name, 'dialog_node_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       dialog_node_serialized_name = builder.dialog_node_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -5439,10 +5537,12 @@ public class IBMConversationV1Models {
   public class GetDialogNodeOptionsBuilder {
     private String workspace_id_serialized_name;
     private String dialog_node_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private GetDialogNodeOptionsBuilder(GetDialogNodeOptions getDialogNodeOptions) {
       workspace_id_serialized_name = getDialogNodeOptions.workspace_id_serialized_name;
       dialog_node_serialized_name = getDialogNodeOptions.dialog_node_serialized_name;
+      include_audit_serialized_name = getDialogNodeOptions.include_audit_serialized_name;
     }
 
     /**
@@ -5492,6 +5592,17 @@ public class IBMConversationV1Models {
       this.dialog_node_serialized_name = dialogNode;
       return this;
     }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the GetDialogNodeOptions builder
+     */
+    public GetDialogNodeOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
   }
 
   /**
@@ -5501,6 +5612,7 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private Boolean export_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -5531,12 +5643,23 @@ public class IBMConversationV1Models {
     public Boolean exportField() {
       return export_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private GetEntityOptions(GetEntityOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity_serialized_name, 'entity_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       entity_serialized_name = builder.entity_serialized_name;
       export_serialized_name = builder.export_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -5557,11 +5680,13 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private Boolean export_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private GetEntityOptionsBuilder(GetEntityOptions getEntityOptions) {
       workspace_id_serialized_name = getEntityOptions.workspace_id_serialized_name;
       entity_serialized_name = getEntityOptions.entity_serialized_name;
       export_serialized_name = getEntityOptions.export_serialized_name;
+      include_audit_serialized_name = getEntityOptions.include_audit_serialized_name;
     }
 
     /**
@@ -5622,6 +5747,17 @@ public class IBMConversationV1Models {
       this.export_serialized_name = exportVar;
       return this;
     }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the GetEntityOptions builder
+     */
+    public GetEntityOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
   }
 
   /**
@@ -5631,6 +5767,7 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String text_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -5661,6 +5798,16 @@ public class IBMConversationV1Models {
     public String text() {
       return text_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private GetExampleOptions(GetExampleOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent_serialized_name, 'intent_serialized_name cannot be empty');
@@ -5668,6 +5815,7 @@ public class IBMConversationV1Models {
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       intent_serialized_name = builder.intent_serialized_name;
       text_serialized_name = builder.text_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -5688,11 +5836,13 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String text_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private GetExampleOptionsBuilder(GetExampleOptions getExampleOptions) {
       workspace_id_serialized_name = getExampleOptions.workspace_id_serialized_name;
       intent_serialized_name = getExampleOptions.intent_serialized_name;
       text_serialized_name = getExampleOptions.text_serialized_name;
+      include_audit_serialized_name = getExampleOptions.include_audit_serialized_name;
     }
 
     /**
@@ -5755,6 +5905,17 @@ public class IBMConversationV1Models {
       this.text_serialized_name = text;
       return this;
     }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the GetExampleOptions builder
+     */
+    public GetExampleOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
   }
 
   /**
@@ -5764,6 +5925,7 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private Boolean export_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -5794,12 +5956,23 @@ public class IBMConversationV1Models {
     public Boolean exportField() {
       return export_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private GetIntentOptions(GetIntentOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent_serialized_name, 'intent_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       intent_serialized_name = builder.intent_serialized_name;
       export_serialized_name = builder.export_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -5820,11 +5993,13 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private Boolean export_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private GetIntentOptionsBuilder(GetIntentOptions getIntentOptions) {
       workspace_id_serialized_name = getIntentOptions.workspace_id_serialized_name;
       intent_serialized_name = getIntentOptions.intent_serialized_name;
       export_serialized_name = getIntentOptions.export_serialized_name;
+      include_audit_serialized_name = getIntentOptions.include_audit_serialized_name;
     }
 
     /**
@@ -5885,6 +6060,17 @@ public class IBMConversationV1Models {
       this.export_serialized_name = exportVar;
       return this;
     }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the GetIntentOptions builder
+     */
+    public GetIntentOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
   }
 
   /**
@@ -5895,6 +6081,7 @@ public class IBMConversationV1Models {
     private String entity_serialized_name;
     private String value_serialized_name;
     private String synonym_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -5935,6 +6122,16 @@ public class IBMConversationV1Models {
     public String synonym() {
       return synonym_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private GetSynonymOptions(GetSynonymOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity_serialized_name, 'entity_serialized_name cannot be empty');
@@ -5944,6 +6141,7 @@ public class IBMConversationV1Models {
       entity_serialized_name = builder.entity_serialized_name;
       value_serialized_name = builder.value_serialized_name;
       synonym_serialized_name = builder.synonym_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -5965,12 +6163,14 @@ public class IBMConversationV1Models {
     private String entity_serialized_name;
     private String value_serialized_name;
     private String synonym_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private GetSynonymOptionsBuilder(GetSynonymOptions getSynonymOptions) {
       workspace_id_serialized_name = getSynonymOptions.workspace_id_serialized_name;
       entity_serialized_name = getSynonymOptions.entity_serialized_name;
       value_serialized_name = getSynonymOptions.value_serialized_name;
       synonym_serialized_name = getSynonymOptions.synonym_serialized_name;
+      include_audit_serialized_name = getSynonymOptions.include_audit_serialized_name;
     }
 
     /**
@@ -6046,6 +6246,17 @@ public class IBMConversationV1Models {
       this.synonym_serialized_name = synonym;
       return this;
     }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the GetSynonymOptions builder
+     */
+    public GetSynonymOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
   }
 
   /**
@@ -6056,6 +6267,7 @@ public class IBMConversationV1Models {
     private String entity_serialized_name;
     private String value_serialized_name;
     private Boolean export_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -6096,6 +6308,16 @@ public class IBMConversationV1Models {
     public Boolean exportField() {
       return export_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private GetValueOptions(GetValueOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity_serialized_name, 'entity_serialized_name cannot be empty');
@@ -6104,6 +6326,7 @@ public class IBMConversationV1Models {
       entity_serialized_name = builder.entity_serialized_name;
       value_serialized_name = builder.value_serialized_name;
       export_serialized_name = builder.export_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -6125,12 +6348,14 @@ public class IBMConversationV1Models {
     private String entity_serialized_name;
     private String value_serialized_name;
     private Boolean export_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private GetValueOptionsBuilder(GetValueOptions getValueOptions) {
       workspace_id_serialized_name = getValueOptions.workspace_id_serialized_name;
       entity_serialized_name = getValueOptions.entity_serialized_name;
       value_serialized_name = getValueOptions.value_serialized_name;
       export_serialized_name = getValueOptions.export_serialized_name;
+      include_audit_serialized_name = getValueOptions.include_audit_serialized_name;
     }
 
     /**
@@ -6204,6 +6429,17 @@ public class IBMConversationV1Models {
       this.export_serialized_name = exportVar;
       return this;
     }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the GetValueOptions builder
+     */
+    public GetValueOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
   }
 
   /**
@@ -6212,6 +6448,7 @@ public class IBMConversationV1Models {
   public class GetWorkspaceOptions {
     private String workspace_id_serialized_name;
     private Boolean export_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -6232,10 +6469,21 @@ public class IBMConversationV1Models {
     public Boolean exportField() {
       return export_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private GetWorkspaceOptions(GetWorkspaceOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       export_serialized_name = builder.export_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -6255,10 +6503,12 @@ public class IBMConversationV1Models {
   public class GetWorkspaceOptionsBuilder {
     private String workspace_id_serialized_name;
     private Boolean export_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private GetWorkspaceOptionsBuilder(GetWorkspaceOptions getWorkspaceOptions) {
       workspace_id_serialized_name = getWorkspaceOptions.workspace_id_serialized_name;
       export_serialized_name = getWorkspaceOptions.export_serialized_name;
+      include_audit_serialized_name = getWorkspaceOptions.include_audit_serialized_name;
     }
 
     /**
@@ -6304,6 +6554,17 @@ public class IBMConversationV1Models {
      */
     public GetWorkspaceOptionsBuilder exportField(Boolean exportVar) {
       this.export_serialized_name = exportVar;
+      return this;
+    }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the GetWorkspaceOptions builder
+     */
+    public GetWorkspaceOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
       return this;
     }
   }
@@ -6662,20 +6923,10 @@ public class IBMConversationV1Models {
    * The listAllLogs options.
    */
   public class ListAllLogsOptions {
-    private String sort_serialized_name;
     private String filter_serialized_name;
+    private String sort_serialized_name;
     private Long page_limit_serialized_name;
     private String cursor_serialized_name;
-    /**
-     * Gets the sort_serialized_name.
-     *
-     * Sorts the response according to the value of the specified property, in ascending or descending order.
-     *
-     * @return the sort_serialized_name
-     */
-    public String sortField() {
-      return sort_serialized_name;
-    }
     /**
      * Gets the filter_serialized_name.
      *
@@ -6685,6 +6936,16 @@ public class IBMConversationV1Models {
      */
     public String filter() {
       return filter_serialized_name;
+    }
+    /**
+     * Gets the sort_serialized_name.
+     *
+     * Sorts the response according to the value of the specified property, in ascending or descending order.
+     *
+     * @return the sort_serialized_name
+     */
+    public String sortField() {
+      return sort_serialized_name;
     }
     /**
      * Gets the page_limit_serialized_name.
@@ -6708,8 +6969,8 @@ public class IBMConversationV1Models {
     }
     private ListAllLogsOptions(ListAllLogsOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.filter_serialized_name, 'filter_serialized_name cannot be null');
-      sort_serialized_name = builder.sort_serialized_name;
       filter_serialized_name = builder.filter_serialized_name;
+      sort_serialized_name = builder.sort_serialized_name;
       page_limit_serialized_name = builder.page_limit_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
     }
@@ -6729,14 +6990,14 @@ public class IBMConversationV1Models {
    * ListAllLogsOptions Builder.
    */
   public class ListAllLogsOptionsBuilder {
-    private String sort_serialized_name;
     private String filter_serialized_name;
+    private String sort_serialized_name;
     private Long page_limit_serialized_name;
     private String cursor_serialized_name;
 
     private ListAllLogsOptionsBuilder(ListAllLogsOptions listAllLogsOptions) {
-      sort_serialized_name = listAllLogsOptions.sort_serialized_name;
       filter_serialized_name = listAllLogsOptions.filter_serialized_name;
+      sort_serialized_name = listAllLogsOptions.sort_serialized_name;
       page_limit_serialized_name = listAllLogsOptions.page_limit_serialized_name;
       cursor_serialized_name = listAllLogsOptions.cursor_serialized_name;
     }
@@ -6766,17 +7027,6 @@ public class IBMConversationV1Models {
     }
 
     /**
-     * Set the sort_serialized_name.
-     *
-     * @param sortVar the sortVar
-     * @return the ListAllLogsOptions builder
-     */
-    public ListAllLogsOptionsBuilder sortField(String sortVar) {
-      this.sort_serialized_name = sortVar;
-      return this;
-    }
-
-    /**
      * Set the filter_serialized_name.
      *
      * @param filter the filter
@@ -6784,6 +7034,17 @@ public class IBMConversationV1Models {
      */
     public ListAllLogsOptionsBuilder filter(String filter) {
       this.filter_serialized_name = filter;
+      return this;
+    }
+
+    /**
+     * Set the sort_serialized_name.
+     *
+     * @param sortVar the sortVar
+     * @return the ListAllLogsOptions builder
+     */
+    public ListAllLogsOptionsBuilder sortField(String sortVar) {
+      this.sort_serialized_name = sortVar;
       return this;
     }
 
@@ -6819,6 +7080,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -6869,6 +7131,16 @@ public class IBMConversationV1Models {
     public String cursor() {
       return cursor_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private ListCounterexamplesOptions(ListCounterexamplesOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
@@ -6876,6 +7148,7 @@ public class IBMConversationV1Models {
       include_count_serialized_name = builder.include_count_serialized_name;
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -6898,6 +7171,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private ListCounterexamplesOptionsBuilder(ListCounterexamplesOptions listCounterexamplesOptions) {
       workspace_id_serialized_name = listCounterexamplesOptions.workspace_id_serialized_name;
@@ -6905,6 +7179,7 @@ public class IBMConversationV1Models {
       include_count_serialized_name = listCounterexamplesOptions.include_count_serialized_name;
       sort_serialized_name = listCounterexamplesOptions.sort_serialized_name;
       cursor_serialized_name = listCounterexamplesOptions.cursor_serialized_name;
+      include_audit_serialized_name = listCounterexamplesOptions.include_audit_serialized_name;
     }
 
     /**
@@ -6985,6 +7260,17 @@ public class IBMConversationV1Models {
       this.cursor_serialized_name = cursor;
       return this;
     }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the ListCounterexamplesOptions builder
+     */
+    public ListCounterexamplesOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
   }
 
   /**
@@ -6996,6 +7282,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -7046,6 +7333,16 @@ public class IBMConversationV1Models {
     public String cursor() {
       return cursor_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private ListDialogNodesOptions(ListDialogNodesOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
@@ -7053,6 +7350,7 @@ public class IBMConversationV1Models {
       include_count_serialized_name = builder.include_count_serialized_name;
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -7075,6 +7373,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private ListDialogNodesOptionsBuilder(ListDialogNodesOptions listDialogNodesOptions) {
       workspace_id_serialized_name = listDialogNodesOptions.workspace_id_serialized_name;
@@ -7082,6 +7381,7 @@ public class IBMConversationV1Models {
       include_count_serialized_name = listDialogNodesOptions.include_count_serialized_name;
       sort_serialized_name = listDialogNodesOptions.sort_serialized_name;
       cursor_serialized_name = listDialogNodesOptions.cursor_serialized_name;
+      include_audit_serialized_name = listDialogNodesOptions.include_audit_serialized_name;
     }
 
     /**
@@ -7162,6 +7462,17 @@ public class IBMConversationV1Models {
       this.cursor_serialized_name = cursor;
       return this;
     }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the ListDialogNodesOptions builder
+     */
+    public ListDialogNodesOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
   }
 
   /**
@@ -7174,6 +7485,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -7234,6 +7546,16 @@ public class IBMConversationV1Models {
     public String cursor() {
       return cursor_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private ListEntitiesOptions(ListEntitiesOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
@@ -7242,6 +7564,7 @@ public class IBMConversationV1Models {
       include_count_serialized_name = builder.include_count_serialized_name;
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -7265,6 +7588,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private ListEntitiesOptionsBuilder(ListEntitiesOptions listEntitiesOptions) {
       workspace_id_serialized_name = listEntitiesOptions.workspace_id_serialized_name;
@@ -7273,6 +7597,7 @@ public class IBMConversationV1Models {
       include_count_serialized_name = listEntitiesOptions.include_count_serialized_name;
       sort_serialized_name = listEntitiesOptions.sort_serialized_name;
       cursor_serialized_name = listEntitiesOptions.cursor_serialized_name;
+      include_audit_serialized_name = listEntitiesOptions.include_audit_serialized_name;
     }
 
     /**
@@ -7364,6 +7689,17 @@ public class IBMConversationV1Models {
       this.cursor_serialized_name = cursor;
       return this;
     }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the ListEntitiesOptions builder
+     */
+    public ListEntitiesOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
   }
 
   /**
@@ -7376,6 +7712,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -7436,6 +7773,16 @@ public class IBMConversationV1Models {
     public String cursor() {
       return cursor_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private ListExamplesOptions(ListExamplesOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent_serialized_name, 'intent_serialized_name cannot be empty');
@@ -7445,6 +7792,7 @@ public class IBMConversationV1Models {
       include_count_serialized_name = builder.include_count_serialized_name;
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -7468,6 +7816,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private ListExamplesOptionsBuilder(ListExamplesOptions listExamplesOptions) {
       workspace_id_serialized_name = listExamplesOptions.workspace_id_serialized_name;
@@ -7476,6 +7825,7 @@ public class IBMConversationV1Models {
       include_count_serialized_name = listExamplesOptions.include_count_serialized_name;
       sort_serialized_name = listExamplesOptions.sort_serialized_name;
       cursor_serialized_name = listExamplesOptions.cursor_serialized_name;
+      include_audit_serialized_name = listExamplesOptions.include_audit_serialized_name;
     }
 
     /**
@@ -7569,6 +7919,17 @@ public class IBMConversationV1Models {
       this.cursor_serialized_name = cursor;
       return this;
     }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the ListExamplesOptions builder
+     */
+    public ListExamplesOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
   }
 
   /**
@@ -7581,6 +7942,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -7641,6 +8003,16 @@ public class IBMConversationV1Models {
     public String cursor() {
       return cursor_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private ListIntentsOptions(ListIntentsOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
@@ -7649,6 +8021,7 @@ public class IBMConversationV1Models {
       include_count_serialized_name = builder.include_count_serialized_name;
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -7672,6 +8045,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private ListIntentsOptionsBuilder(ListIntentsOptions listIntentsOptions) {
       workspace_id_serialized_name = listIntentsOptions.workspace_id_serialized_name;
@@ -7680,6 +8054,7 @@ public class IBMConversationV1Models {
       include_count_serialized_name = listIntentsOptions.include_count_serialized_name;
       sort_serialized_name = listIntentsOptions.sort_serialized_name;
       cursor_serialized_name = listIntentsOptions.cursor_serialized_name;
+      include_audit_serialized_name = listIntentsOptions.include_audit_serialized_name;
     }
 
     /**
@@ -7769,6 +8144,17 @@ public class IBMConversationV1Models {
      */
     public ListIntentsOptionsBuilder cursor(String cursor) {
       this.cursor_serialized_name = cursor;
+      return this;
+    }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the ListIntentsOptions builder
+     */
+    public ListIntentsOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
       return this;
     }
   }
@@ -7961,6 +8347,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -8031,6 +8418,16 @@ public class IBMConversationV1Models {
     public String cursor() {
       return cursor_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private ListSynonymsOptions(ListSynonymsOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity_serialized_name, 'entity_serialized_name cannot be empty');
@@ -8042,6 +8439,7 @@ public class IBMConversationV1Models {
       include_count_serialized_name = builder.include_count_serialized_name;
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -8066,6 +8464,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private ListSynonymsOptionsBuilder(ListSynonymsOptions listSynonymsOptions) {
       workspace_id_serialized_name = listSynonymsOptions.workspace_id_serialized_name;
@@ -8075,6 +8474,7 @@ public class IBMConversationV1Models {
       include_count_serialized_name = listSynonymsOptions.include_count_serialized_name;
       sort_serialized_name = listSynonymsOptions.sort_serialized_name;
       cursor_serialized_name = listSynonymsOptions.cursor_serialized_name;
+      include_audit_serialized_name = listSynonymsOptions.include_audit_serialized_name;
     }
 
     /**
@@ -8181,6 +8581,17 @@ public class IBMConversationV1Models {
       this.cursor_serialized_name = cursor;
       return this;
     }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the ListSynonymsOptions builder
+     */
+    public ListSynonymsOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
   }
 
   /**
@@ -8194,6 +8605,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -8264,6 +8676,16 @@ public class IBMConversationV1Models {
     public String cursor() {
       return cursor_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private ListValuesOptions(ListValuesOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.entity_serialized_name, 'entity_serialized_name cannot be empty');
@@ -8274,6 +8696,7 @@ public class IBMConversationV1Models {
       include_count_serialized_name = builder.include_count_serialized_name;
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -8298,6 +8721,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private ListValuesOptionsBuilder(ListValuesOptions listValuesOptions) {
       workspace_id_serialized_name = listValuesOptions.workspace_id_serialized_name;
@@ -8307,6 +8731,7 @@ public class IBMConversationV1Models {
       include_count_serialized_name = listValuesOptions.include_count_serialized_name;
       sort_serialized_name = listValuesOptions.sort_serialized_name;
       cursor_serialized_name = listValuesOptions.cursor_serialized_name;
+      include_audit_serialized_name = listValuesOptions.include_audit_serialized_name;
     }
 
     /**
@@ -8411,6 +8836,17 @@ public class IBMConversationV1Models {
       this.cursor_serialized_name = cursor;
       return this;
     }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the ListValuesOptions builder
+     */
+    public ListValuesOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
   }
 
   /**
@@ -8421,6 +8857,7 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
     /**
      * Gets the page_limit_serialized_name.
      *
@@ -8461,11 +8898,22 @@ public class IBMConversationV1Models {
     public String cursor() {
       return cursor_serialized_name;
     }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
     private ListWorkspacesOptions(ListWorkspacesOptionsBuilder builder) {
       page_limit_serialized_name = builder.page_limit_serialized_name;
       include_count_serialized_name = builder.include_count_serialized_name;
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
     }
 
     /**
@@ -8487,12 +8935,14 @@ public class IBMConversationV1Models {
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
     private String cursor_serialized_name;
+    private Boolean include_audit_serialized_name;
 
     private ListWorkspacesOptionsBuilder(ListWorkspacesOptions listWorkspacesOptions) {
       page_limit_serialized_name = listWorkspacesOptions.page_limit_serialized_name;
       include_count_serialized_name = listWorkspacesOptions.include_count_serialized_name;
       sort_serialized_name = listWorkspacesOptions.sort_serialized_name;
       cursor_serialized_name = listWorkspacesOptions.cursor_serialized_name;
+      include_audit_serialized_name = listWorkspacesOptions.include_audit_serialized_name;
     }
 
     /**
@@ -8551,6 +9001,17 @@ public class IBMConversationV1Models {
      */
     public ListWorkspacesOptionsBuilder cursor(String cursor) {
       this.cursor_serialized_name = cursor;
+      return this;
+    }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the ListWorkspacesOptions builder
+     */
+    public ListWorkspacesOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
       return this;
     }
   }
@@ -8982,6 +9443,7 @@ public class IBMConversationV1Models {
     private List<RuntimeEntity> entities_serialized_name;
     private List<RuntimeIntent> intents_serialized_name;
     private OutputData output_serialized_name;
+    private Boolean nodes_visited_details_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -9052,6 +9514,16 @@ public class IBMConversationV1Models {
     public OutputData output() {
       return output_serialized_name;
     }
+    /**
+     * Gets the nodes_visited_details_serialized_name.
+     *
+     * Whether to include additional diagnostic information about the dialog nodes that were visited during processing of the message.
+     *
+     * @return the nodes_visited_details_serialized_name
+     */
+    public Boolean nodesVisitedDetails() {
+      return nodes_visited_details_serialized_name;
+    }
     private MessageOptions(MessageOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
@@ -9061,6 +9533,7 @@ public class IBMConversationV1Models {
       entities_serialized_name = builder.entities_serialized_name;
       intents_serialized_name = builder.intents_serialized_name;
       output_serialized_name = builder.output_serialized_name;
+      nodes_visited_details_serialized_name = builder.nodes_visited_details_serialized_name;
     }
 
     /**
@@ -9085,6 +9558,7 @@ public class IBMConversationV1Models {
     private List<RuntimeEntity> entities_serialized_name;
     private List<RuntimeIntent> intents_serialized_name;
     private OutputData output_serialized_name;
+    private Boolean nodes_visited_details_serialized_name;
 
     private MessageOptionsBuilder(MessageOptions messageOptions) {
       workspace_id_serialized_name = messageOptions.workspace_id_serialized_name;
@@ -9094,6 +9568,7 @@ public class IBMConversationV1Models {
       entities_serialized_name = messageOptions.entities_serialized_name;
       intents_serialized_name = messageOptions.intents_serialized_name;
       output_serialized_name = messageOptions.output_serialized_name;
+      nodes_visited_details_serialized_name = messageOptions.nodes_visited_details_serialized_name;
     }
 
     /**
@@ -9226,6 +9701,33 @@ public class IBMConversationV1Models {
      */
     public MessageOptionsBuilder output(OutputData output) {
       this.output_serialized_name = output;
+      return this;
+    }
+
+    /**
+     * Set the nodes_visited_details_serialized_name.
+     *
+     * @param nodesVisitedDetails the nodesVisitedDetails
+     * @return the MessageOptions builder
+     */
+    public MessageOptionsBuilder nodesVisitedDetails(Boolean nodesVisitedDetails) {
+      this.nodes_visited_details_serialized_name = nodesVisitedDetails;
+      return this;
+    }
+
+    /**
+     * Set the messageRequest.
+     *
+     * @param messageRequest the messageRequest
+     * @return the MessageOptions builder
+     */
+    public MessageOptionsBuilder messageRequest(MessageRequest messageRequest) {
+      this.input_serialized_name = messageRequest.getInput();
+      this.alternate_intents_serialized_name = messageRequest.getAlternateIntents();
+      this.context_serialized_name = messageRequest.getContext();
+      this.entities_serialized_name = messageRequest.getEntities();
+      this.intents_serialized_name = messageRequest.getIntents();
+      this.output_serialized_name = messageRequest.getOutput();
       return this;
     }
   }
@@ -9606,6 +10108,7 @@ public class IBMConversationV1Models {
     private List<LogMessage> log_messages_serialized_name;
     private List<String> text_serialized_name;
     private List<String> nodes_visited_serialized_name;
+    private List<DialogNodeVisitedDetails> nodes_visited_details_serialized_name;
     private Map<String, Object> additional_properties_serialized_name;
 
     /**
@@ -9636,6 +10139,16 @@ public class IBMConversationV1Models {
     @AuraEnabled
     public List<String> getNodesVisited() {
       return nodes_visited_serialized_name;
+    }
+
+    /**
+     * Gets the nodes_visited_details_serialized_name.
+     *
+     * @return the nodes_visited_details_serialized_name
+     */
+    @AuraEnabled
+    public List<DialogNodeVisitedDetails> getNodesVisitedDetails() {
+      return nodes_visited_details_serialized_name;
     }
 
     /**
@@ -9675,6 +10188,15 @@ public class IBMConversationV1Models {
       this.nodes_visited_serialized_name = nodes_visited_serialized_name;
     }
 
+    /**
+     * Sets the nodes_visited_details_serialized_name.
+     *
+     * @param nodes_visited_details_serialized_name the new nodes_visited_details_serialized_name
+     */
+    public void setNodesVisitedDetails(final List<DialogNodeVisitedDetails> nodes_visited_details_serialized_name) {
+      this.nodes_visited_details_serialized_name = nodes_visited_details_serialized_name;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -9693,6 +10215,19 @@ public class IBMConversationV1Models {
           newLogMessages.add(newItem);
         }
         ret.setLogMessages(newLogMessages);
+      }
+
+      // calling custom deserializer for nodes_visited_details_serialized_name
+      List<DialogNodeVisitedDetails> newNodesVisitedDetails = new List<DialogNodeVisitedDetails>();
+      List<DialogNodeVisitedDetails> deserializedNodesVisitedDetails = ret.getNodesVisitedDetails();
+      if (deserializedNodesVisitedDetails != null) {
+        for (Integer i = 0; i < deserializedNodesVisitedDetails.size(); i++) {
+          DialogNodeVisitedDetails currentItem = ret.getNodesVisitedDetails().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('nodes_visited_details_serialized_name');
+          DialogNodeVisitedDetails newItem = (DialogNodeVisitedDetails) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeVisitedDetails.class);
+          newNodesVisitedDetails.add(newItem);
+        }
+        ret.setNodesVisitedDetails(newNodesVisitedDetails);
       }
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
@@ -12575,7 +13110,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the synonyms_serialized_name.
      *
-     * An array of synonyms.
+     * An array of synonyms for the entity value.
      *
      * @return the synonyms_serialized_name
      */

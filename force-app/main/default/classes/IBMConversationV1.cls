@@ -8,18 +8,9 @@
 public class IBMConversationV1 extends IBMWatsonService {
 
   private static final String URL = 'https://gateway.watsonplatform.net/conversation/api';
+
   private String versionDate;
 
-  /** The Constant VERSION_DATE_2017_05_26. */
-    public static final String VERSION_DATE_2017_05_26 = '2017-05-26';
-  /** The Constant VERSION_DATE_2017_04_21. */
-    public static final String VERSION_DATE_2017_04_21 = '2017-04-21';
-  /** The Constant VERSION_DATE_2017_02_03. */
-    public static final String VERSION_DATE_2017_02_03 = '2017-02-03';
-  /** The Constant VERSION_DATE_2016_09_20. */
-    public static final String VERSION_DATE_2016_09_20 = '2016-09-20';
-  /** The Constant VERSION_DATE_2016_07_11. */
-    public static final String VERSION_DATE_2016_07_11 = '2016-07-11';
   /**
    * Instantiates a new `IBMConversationV1`.
    *
@@ -123,6 +114,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (getWorkspaceOptions.exportField() != null) {
       builder.query('export', String.valueOf(getWorkspaceOptions.exportField()));
     }
+    if (getWorkspaceOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(getWorkspaceOptions.includeAudit()));
+    }
 
     return (IBMConversationV1Models.WorkspaceExport) createServiceCall(builder.build(), IBMConversationV1Models.WorkspaceExport.class);
   }
@@ -149,6 +143,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     }
     if (listWorkspacesOptions != null && listWorkspacesOptions.cursor() != null) {
       builder.query('cursor', listWorkspacesOptions.cursor());
+    }
+    if (listWorkspacesOptions != null && listWorkspacesOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(listWorkspacesOptions.includeAudit()));
     }
 
     return (IBMConversationV1Models.WorkspaceCollection) createServiceCall(builder.build(), IBMConversationV1Models.WorkspaceCollection.class);
@@ -212,6 +209,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(messageOptions, 'messageOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/message', new String[]{ messageOptions.workspaceId() }));
     builder.query('version', versionDate);
+    if (messageOptions.nodesVisitedDetails() != null) {
+      builder.query('nodes_visited_details', String.valueOf(messageOptions.nodesVisitedDetails()));
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (messageOptions.input() != null) {
       contentJson.put('input', messageOptions.input());
@@ -292,6 +292,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (getIntentOptions.exportField() != null) {
       builder.query('export', String.valueOf(getIntentOptions.exportField()));
     }
+    if (getIntentOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(getIntentOptions.includeAudit()));
+    }
 
     return (IBMConversationV1Models.IntentExport) createServiceCall(builder.build(), IBMConversationV1Models.IntentExport.class);
   }
@@ -322,6 +325,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     }
     if (listIntentsOptions.cursor() != null) {
       builder.query('cursor', listIntentsOptions.cursor());
+    }
+    if (listIntentsOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(listIntentsOptions.includeAudit()));
     }
 
     return (IBMConversationV1Models.IntentCollection) createServiceCall(builder.build(), IBMConversationV1Models.IntentCollection.class);
@@ -401,6 +407,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(getExampleOptions, 'getExampleOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}/examples/{2}', new String[]{ getExampleOptions.workspaceId(), getExampleOptions.intent(), getExampleOptions.text() }));
     builder.query('version', versionDate);
+    if (getExampleOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(getExampleOptions.includeAudit()));
+    }
 
     return (IBMConversationV1Models.Example) createServiceCall(builder.build(), IBMConversationV1Models.Example.class);
   }
@@ -428,6 +437,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     }
     if (listExamplesOptions.cursor() != null) {
       builder.query('cursor', listExamplesOptions.cursor());
+    }
+    if (listExamplesOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(listExamplesOptions.includeAudit()));
     }
 
     return (IBMConversationV1Models.ExampleCollection) createServiceCall(builder.build(), IBMConversationV1Models.ExampleCollection.class);
@@ -516,6 +528,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (getEntityOptions.exportField() != null) {
       builder.query('export', String.valueOf(getEntityOptions.exportField()));
     }
+    if (getEntityOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(getEntityOptions.includeAudit()));
+    }
 
     return (IBMConversationV1Models.EntityExport) createServiceCall(builder.build(), IBMConversationV1Models.EntityExport.class);
   }
@@ -546,6 +561,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     }
     if (listEntitiesOptions.cursor() != null) {
       builder.query('cursor', listEntitiesOptions.cursor());
+    }
+    if (listEntitiesOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(listEntitiesOptions.includeAudit()));
     }
 
     return (IBMConversationV1Models.EntityCollection) createServiceCall(builder.build(), IBMConversationV1Models.EntityCollection.class);
@@ -646,6 +664,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     if (getValueOptions.exportField() != null) {
       builder.query('export', String.valueOf(getValueOptions.exportField()));
     }
+    if (getValueOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(getValueOptions.includeAudit()));
+    }
 
     return (IBMConversationV1Models.ValueExport) createServiceCall(builder.build(), IBMConversationV1Models.ValueExport.class);
   }
@@ -676,6 +697,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     }
     if (listValuesOptions.cursor() != null) {
       builder.query('cursor', listValuesOptions.cursor());
+    }
+    if (listValuesOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(listValuesOptions.includeAudit()));
     }
 
     return (IBMConversationV1Models.ValueCollection) createServiceCall(builder.build(), IBMConversationV1Models.ValueCollection.class);
@@ -761,6 +785,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(getSynonymOptions, 'getSynonymOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms/{3}', new String[]{ getSynonymOptions.workspaceId(), getSynonymOptions.entity(), getSynonymOptions.value(), getSynonymOptions.synonym() }));
     builder.query('version', versionDate);
+    if (getSynonymOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(getSynonymOptions.includeAudit()));
+    }
 
     return (IBMConversationV1Models.Synonym) createServiceCall(builder.build(), IBMConversationV1Models.Synonym.class);
   }
@@ -788,6 +815,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     }
     if (listSynonymsOptions.cursor() != null) {
       builder.query('cursor', listSynonymsOptions.cursor());
+    }
+    if (listSynonymsOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(listSynonymsOptions.includeAudit()));
     }
 
     return (IBMConversationV1Models.SynonymCollection) createServiceCall(builder.build(), IBMConversationV1Models.SynonymCollection.class);
@@ -827,9 +857,7 @@ public class IBMConversationV1 extends IBMWatsonService {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/dialog_nodes', new String[]{ createDialogNodeOptions.workspaceId() }));
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    if (createDialogNodeOptions.dialogNode() != null) {
-      contentJson.put('dialog_node', createDialogNodeOptions.dialogNode());
-    }
+    contentJson.put('dialog_node', createDialogNodeOptions.dialogNode());
     if (createDialogNodeOptions.description() != null) {
       contentJson.put('description', createDialogNodeOptions.description());
     }
@@ -902,6 +930,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(getDialogNodeOptions, 'getDialogNodeOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/dialog_nodes/{1}', new String[]{ getDialogNodeOptions.workspaceId(), getDialogNodeOptions.dialogNode() }));
     builder.query('version', versionDate);
+    if (getDialogNodeOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(getDialogNodeOptions.includeAudit()));
+    }
 
     return (IBMConversationV1Models.DialogNode) createServiceCall(builder.build(), IBMConversationV1Models.DialogNode.class);
   }
@@ -929,6 +960,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     }
     if (listDialogNodesOptions.cursor() != null) {
       builder.query('cursor', listDialogNodesOptions.cursor());
+    }
+    if (listDialogNodesOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(listDialogNodesOptions.includeAudit()));
     }
 
     return (IBMConversationV1Models.DialogNodeCollection) createServiceCall(builder.build(), IBMConversationV1Models.DialogNodeCollection.class);
@@ -1006,11 +1040,11 @@ public class IBMConversationV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(listAllLogsOptions, 'listAllLogsOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/logs');
     builder.query('version', versionDate);
-    if (listAllLogsOptions.sortField() != null) {
-      builder.query('sort', listAllLogsOptions.sortField());
-    }
     if (listAllLogsOptions.filter() != null) {
       builder.query('filter', listAllLogsOptions.filter());
+    }
+    if (listAllLogsOptions.sortField() != null) {
+      builder.query('sort', listAllLogsOptions.sortField());
     }
     if (listAllLogsOptions.pageLimit() != null) {
       builder.query('page_limit', String.valueOf(listAllLogsOptions.pageLimit()));
@@ -1097,6 +1131,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(getCounterexampleOptions, 'getCounterexampleOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/counterexamples/{1}', new String[]{ getCounterexampleOptions.workspaceId(), getCounterexampleOptions.text() }));
     builder.query('version', versionDate);
+    if (getCounterexampleOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(getCounterexampleOptions.includeAudit()));
+    }
 
     return (IBMConversationV1Models.Counterexample) createServiceCall(builder.build(), IBMConversationV1Models.Counterexample.class);
   }
@@ -1124,6 +1161,9 @@ public class IBMConversationV1 extends IBMWatsonService {
     }
     if (listCounterexamplesOptions.cursor() != null) {
       builder.query('cursor', listCounterexamplesOptions.cursor());
+    }
+    if (listCounterexamplesOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(listCounterexamplesOptions.includeAudit()));
     }
 
     return (IBMConversationV1Models.CounterexampleCollection) createServiceCall(builder.build(), IBMConversationV1Models.CounterexampleCollection.class);
