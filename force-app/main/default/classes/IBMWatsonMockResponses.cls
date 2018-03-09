@@ -653,6 +653,12 @@ public class IBMWatsonMockResponses {
             '"level": "warn", ' +
             '"msg": "test_warning"' +
           '}' +
+          '],' +
+          '"nodes_visited_details": [' +
+          '{' +
+            '"dialog_node": "node",' +
+            '"title": "node_title"' +
+          '}' +  
           ']' +
         '}' +
         '}';

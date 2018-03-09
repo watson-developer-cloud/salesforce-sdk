@@ -256,6 +256,7 @@ private class IBMConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.GetWorkspaceOptions getOptions = new IBMConversationV1Models.GetWorkspaceOptionsBuilder()
+      .includeAudit(true)
       .workspaceId(workspaceId)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -295,6 +296,7 @@ private class IBMConversationV1Test {
 
     IBMConversationV1Models.UpdateWorkspaceOptions updateOptions = new IBMConversationV1Models.UpdateWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
+      .append(false)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -325,6 +327,7 @@ private class IBMConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.ListWorkspacesOptions listOptions = new IBMConversationV1Models.ListWorkspacesOptionsBuilder()
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -421,6 +424,7 @@ private class IBMConversationV1Test {
       .entity(entityName)
       .value(valueName)
       .exportField(true)
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -485,6 +489,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.ListValuesOptions listOptions = new IBMConversationV1Models.ListValuesOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -525,6 +530,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .input(input)
       .alternateIntents(alternateIntents)
+      .nodesVisitedDetails(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     messageOptions = messageOptions.newBuilder().build();
@@ -544,6 +550,7 @@ private class IBMConversationV1Test {
     System.assertEquals(response.getOutput().getNodesVisited().get(0), nodeVisited);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getLevel(), logMessageLevel);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getMsg(), logMessageText);
+    System.assert(response.getOuptut().getNodesVisitedDetails() != null);
     Test.stopTest();
   }
 
@@ -617,6 +624,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .exportField(true)
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -648,6 +656,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.ListIntentsOptions listOptions = new IBMConversationV1Models.ListIntentsOptionsBuilder()
       .workspaceId(workspaceId)
       .exportField(true)
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -766,6 +775,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .text(exampleText)
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -793,6 +803,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.ListExamplesOptions listOptions = new IBMConversationV1Models.ListExamplesOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -909,6 +920,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .exportField(true)
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -945,6 +957,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.ListEntitiesOptions listOptions = new IBMConversationV1Models.ListEntitiesOptionsBuilder()
       .workspaceId(workspaceId)
       .exportField(true)
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -1073,6 +1086,7 @@ private class IBMConversationV1Test {
       .entity(entityName)
       .value(valueName)
       .synonym(valueSynonym)
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -1101,6 +1115,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -1232,6 +1247,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.GetDialogNodeOptions getOptions = new IBMConversationV1Models.GetDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -1277,6 +1293,7 @@ private class IBMConversationV1Test {
 
     IBMConversationV1Models.ListDialogNodesOptions listOptions = new IBMConversationV1Models.ListDialogNodesOptionsBuilder()
       .workspaceId(workspaceId)
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -1492,6 +1509,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.GetCounterexampleOptions getOptions = new IBMConversationV1Models.GetCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(counterexampleText)
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -1518,6 +1536,7 @@ private class IBMConversationV1Test {
 
     IBMConversationV1Models.ListCounterexamplesOptions listOptions = new IBMConversationV1Models.ListCounterexamplesOptionsBuilder()
       .workspaceId(workspaceId)
+      .includeAudit(true)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();

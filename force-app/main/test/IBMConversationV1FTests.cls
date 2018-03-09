@@ -107,6 +107,7 @@ public with sharing class IBMConversationV1FTests {
       .workspaceId(workspaceId)
       .name('new test workspace')
       .description('new description')
+      .append(false)
       .build();
     IBMConversationV1Models.Workspace response = conversation.updateWorkspace(updateOptions);
 
