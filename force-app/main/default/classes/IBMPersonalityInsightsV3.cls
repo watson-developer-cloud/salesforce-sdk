@@ -89,9 +89,6 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     if (profileOptions.rawScores() != null) {
       builder.query('raw_scores', String.valueOf(profileOptions.rawScores()));
     }
-    if (profileOptions.csvHeaders() != null) {
-      builder.query('csv_headers', String.valueOf(profileOptions.csvHeaders()));
-    }
     if (profileOptions.consumptionPreferences() != null) {
       builder.query('consumption_preferences', String.valueOf(profileOptions.consumptionPreferences()));
     }
