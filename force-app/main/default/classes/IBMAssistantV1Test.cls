@@ -56,7 +56,9 @@ private class IBMAssistantV1Test {
   private static String dialogNodeType;
   private static String dialogNodeEventName;
   private static String dialogNodeVariable;
-
+  private static String dialogNodeDigressIn;
+  private static String dialogNodeDigressOut;
+  private static String dialogNodeDigressOutSlots;
 
   static {
     workspaceName = 'test_workspace';
@@ -118,6 +120,9 @@ private class IBMAssistantV1Test {
     dialogNodeType = 'standard';
     dialogNodeEventName = 'dialog_node_event';
     dialogNodeVariable = 'dialog_node_var';
+    dialogNodeDigressIn = 'returns';
+    dialogNodeDigressOut = 'allow_all';
+    dialogNodeDigressOutSlots = 'allow_all';
   }
 
   static testMethod void testCreateWorkspace() {
@@ -1162,6 +1167,9 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.CreateDialogNodeOptions createOptions = new IBMAssistantV1Models.CreateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
+      .digressIn(dialogNodeDigressIn)
+      .digressOut(dialogNodeDigressOut)
+      .digressOutSlots(dialogNodeDigressOutSlots)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -1189,6 +1197,9 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getType(), dialogNodeType);
     System.assertEquals(response.getEventName(), dialogNodeEventName);
     System.assertEquals(response.getVariable(), dialogNodeVariable);
+    System.assertEquals(response.getDigressIn(), dialogNodeDigressIn);
+    System.assertEquals(response.getDigressOut(), dialogNodeDigressOut);
+    System.assertEquals(response.getDigressOutSlots(), dialogNodeDigressOutSlots);
     Test.stopTest();
   }
 
@@ -1327,6 +1338,9 @@ private class IBMAssistantV1Test {
       .dialogNode(dialogNodeName)
       .newDialogNode(dialogNodeName)
       .newDescription(dialogNodeDescription)
+      .newDigressIn(dialogNodeDigressIn)
+      .newDigressOut(dialogNodeDigressOut)
+      .newDigressOutSlots(dialogNodeDigressOutSlots)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -1352,6 +1366,9 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getActions().get(0).getCredentials(), actionCredentials);
     System.assertEquals(response.getEventName(), dialogNodeEventName);
     System.assertEquals(response.getVariable(), dialogNodeVariable);
+    System.assertEquals(response.getDigressIn(), dialogNodeDigressIn);
+    System.assertEquals(response.getDigressOut(), dialogNodeDigressOut);
+    System.assertEquals(response.getDigressOutSlots(), dialogNodeDigressOutSlots);
     Test.stopTest();
   }
 

@@ -879,7 +879,10 @@ public class IBMWatsonMockResponses {
         '], ' +
         '"type": "standard", ' +
         '"event_name": "dialog_node_event", ' +
-        '"variable": "dialog_node_var"' +
+        '"variable": "dialog_node_var",' +
+        '"digress_in": "returns",' +
+        '"digress_out": "allow_all",' +
+        '"digress_out_slots": "allow_all"' +
         '}';
   }
 
