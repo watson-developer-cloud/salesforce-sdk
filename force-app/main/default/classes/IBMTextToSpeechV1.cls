@@ -82,7 +82,6 @@
 public class IBMTextToSpeechV1 extends IBMWatsonService {
 
   private static final String URL = 'https://stream.watsonplatform.net/text-to-speech/api';
-  private String versionDate;
 
   /**
    * Instantiates a new `IBMTextToSpeechV1`.
@@ -138,7 +137,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Streaming speech synthesis of the text in the body parameter.
    *
-   * Synthesizes text to spoken audio, returning the synthesized audio stream as an array of bytes. Identical to the `GET` method but passes longer text in the body of the request, not with the URL. Text size is limited to 5 KB.   If a request includes invalid query parameters, the service returns a `Warnings` response header that provides messages about the invalid parameters. The warning includes a descriptive message and a list of invalid argument strings. For example, a message such as `\"Unknown arguments:\"` or `\"Unknown url query arguments:\"` followed by a list of the form `\"invalid_arg_1, invalid_arg_2.\"` The request succeeds despite the warnings.   **Note about the Try It Out feature:** The `Try it out!` button is **not** supported for use with the the `POST /v1/synthesize` method. For examples of calls to the method, see the [Text to Speech API reference](http://www.ibm.com/watson/developercloud/text-to-speech/api/v1/).
+   * Synthesizes text to spoken audio, returning the synthesized audio stream as an array of bytes. Identical to the `GET` method but passes longer text in the body of the request, not with the URL. Text size is limited to 5 KB. (For the `audio/l16` format, you can optionally specify `endianness=big-endian` or `endianness=little-endian`; the default is little endian.)   If a request includes invalid query parameters, the service returns a `Warnings` response header that provides messages about the invalid parameters. The warning includes a descriptive message and a list of invalid argument strings. For example, a message such as `\"Unknown arguments:\"` or `\"Unknown url query arguments:\"` followed by a list of the form `\"invalid_arg_1, invalid_arg_2.\"` The request succeeds despite the warnings.   **Note about the Try It Out feature:** The `Try it out!` button is **not** supported for use with the the `POST /v1/synthesize` method. For examples of calls to the method, see the [Text to Speech API reference](http://www.ibm.com/watson/developercloud/text-to-speech/api/v1/).
    *
    * @param synthesizeOptions the {@link IBMTextToSpeechV1Models.SynthesizeOptions} containing the options for the call
    * @return the {@link IBMWatsonFile} with the response
@@ -148,9 +147,6 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/synthesize');
     if (synthesizeOptions.accept() != null) {
       builder.addHeader('Accept', synthesizeOptions.accept());
-    }
-    if (synthesizeOptions.accept() != null) {
-      builder.query('accept', synthesizeOptions.accept());
     }
     if (synthesizeOptions.voice() != null) {
       builder.query('voice', synthesizeOptions.voice());
@@ -324,7 +320,9 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(addWordsOptions, 'addWordsOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/words', new String[]{ addWordsOptions.customizationId() }));
     final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('words', addWordsOptions.words());
+    if (addWordsOptions.words() != null) {
+      contentJson.put('words', addWordsOptions.words());
+    }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     createServiceCall(builder.build(), null);

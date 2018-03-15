@@ -653,6 +653,12 @@ public class IBMWatsonMockResponses {
             '"level": "warn", ' +
             '"msg": "test_warning"' +
           '}' +
+          '],' +
+          '"nodes_visited_details": [' +
+          '{' +
+            '"dialog_node": "node",' +
+            '"title": "node_title"' +
+          '}' +  
           ']' +
         '}' +
         '}';
@@ -2345,5 +2351,35 @@ public class IBMWatsonMockResponses {
      ' ], ' +
      ' "result_index": 0' +
      ' }';
+  }
+  
+  public static String expansionsResponse() {
+    return '{' +
+    ' "expansions": [' +
+    ' {' +
+    '   "input_terms": [' +
+    '     "weekday",' +
+    '     "week day"' +
+    '   ],' +
+    '   "expanded_terms": [' +
+    '     "monday",' +
+    '     "tuesday",' +
+    '     "wednesday",' +
+    '     "thursday",' +
+    '     "friday"' +
+    '   ]' +
+    ' },' +
+    ' {' +
+    '   "input_terms": [' +
+    '     "weekend",' +
+    '     "week end"' +
+    '   ],' +
+    '   "expanded_terms": [' +
+    '     "saturday",' +
+    '     "sunday"' +
+    '   ]' +
+    ' }' +
+    ' ]' +
+    '}';
   }
 }

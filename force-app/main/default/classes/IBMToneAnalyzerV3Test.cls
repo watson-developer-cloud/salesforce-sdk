@@ -9,7 +9,7 @@ private class IBMToneAnalyzerV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2016-05-19');
+    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21');
     toneAnalyzer.setEndPoint('https://gateway.watsonplatform.net/tone-analyzer/api');
     //username and password Not needed if you are providing named credentials in place of url
     toneAnalyzer.setUsernameAndPassword('username', 'password');
@@ -53,7 +53,7 @@ private class IBMToneAnalyzerV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2016-05-19', 'username', 'password');
+    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21', 'username', 'password');
     toneAnalyzer.setEndPoint('https://gateway.watsonplatform.net/tone-analyzer/api');
     IBMToneAnalyzerV3Models.Utterance utterance = new IBMToneAnalyzerV3Models.UtteranceBuilder()
       .text('We have a better product. We can do better selling by having more campaigns')
@@ -64,6 +64,7 @@ private class IBMToneAnalyzerV3Test {
     IBMToneAnalyzerV3Models.ToneChatOptions options = new IBMToneAnalyzerV3Models.ToneChatOptionsBuilder()
       .addUtterances(utterance)
       .acceptLanguage('en')
+      .contentLanguage('en')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();

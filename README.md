@@ -115,13 +115,13 @@ When creating a service instance like with `new Discovery()`, each service loads
 For example
 
 ```java
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
 ```
 
 Will look for the `watson_discovery_v1` named credentials while:
 
 ```java
-IBMConversationV1 discovery = new IBMConversationV1('2017-05-26');
+IBMConversationV1 discovery = new IBMConversationV1('2018-02-16');
 ```
 
 Will look for `watson_conversation_v1`.
@@ -148,7 +148,7 @@ Storing credentials in the Apex code is not recommended. If possible, use **Name
 However, if you choose to, here's an example of setting the credentials in your code:
 
 ```java
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1(DiscoveryV1.VERSION_DATE_2017_09_01);
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
 discovery.setEndPoint('URL');
 discovery.setUsernameAndPassword('USERNAME', 'PASSWORD');
 ```
@@ -169,7 +169,7 @@ Getting started using a service is very simple! All services follow the same pat
 
 ```java
 // Will load credentials from the `watson_discovery_v1` named credential
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1(IBMDiscoveryV1.VERSION_DATE_2017_09_01);
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
 
 // configuring options for listing environments
 IBMDiscoveryV1Models.ListEnvironmentsOptions options = new
@@ -185,7 +185,7 @@ Similarly, here is an example of creating an intent in the Conversation service:
 
 ```java
 // Will load credentials from the `watson_conversation_v1` named credential
-IBMConversationV1 conversation = new IBMConversationV1(IBMConversationV1.VERSION_DATE_2017_05_26);
+IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
 
 // configuring options for creating intent
 IBMConversationV1Models.CreateIntentOptions options = new
@@ -228,7 +228,7 @@ If going through the `additionalProperties` object is undesired for any reason, 
 public class ServerSideController {
   @AuraEnabled
   public static String query(String environmentId, String collectionId) {        
-    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(IBMDiscoveryV1.VERSION_DATE_2017_09_01);
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
     IBMDiscoveryV1Models.QueryOptions options = new IBMDiscoveryV1Models.QueryOptionsBuilder(environmentId, collectionId)
       .naturalLanguageQuery('example query')
       .build();

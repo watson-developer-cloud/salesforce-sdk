@@ -46,10 +46,8 @@
 public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
 
   private static final String URL = 'https://gateway.watsonplatform.net/natural-language-understanding/api';
-  private String versionDate;
 
-  /** The Constant VERSION_DATE_2017_02_27. */
-  public static final String VERSION_DATE_2017_02_27 = '2017-02-27';
+  private String versionDate;
 
   /**
    * Instantiates a new `IBMNaturalLanguageUnderstandingV1`.

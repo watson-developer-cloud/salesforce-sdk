@@ -16,7 +16,7 @@ public abstract class IBMWatsonService {
   private static final String BASIC = 'Basic ';
   private static final String VERSION = 'version';
   private static final String USER_AGENT_FORMAT = 'watson-apis-salesforce-sdk/{0}/({1})';
-  private static final String SDK_VERSION = '1.0.1';
+  private static final String SDK_VERSION = '1.1.0';
 
   /**
    * Instantiates a new Watson service.
@@ -54,6 +54,9 @@ public abstract class IBMWatsonService {
           .body(response.getBodyAsBlob())
           .build();
         return resFile;
+      }
+      else if (targetType.equals(String.class)) {
+        return response.getBody();
       }
       // all other response types
       else{

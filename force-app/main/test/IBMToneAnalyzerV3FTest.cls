@@ -1,6 +1,5 @@
 public with sharing class IBMToneAnalyzerV3FTest {
 
-  private static String VERSION_2016_05_20 = '2016-05-19';
   private static String NAMED_CREDENTIALS = 'callout:watson_tone_analyzer_v3';
   private static String URL = 'https://gateway.watsonplatform.net/tone-analyzer/api';
 
@@ -15,7 +14,7 @@ public with sharing class IBMToneAnalyzerV3FTest {
    *
    */
   public static IBMToneAnalyzerV3Models.ToneAnalysis testTone(String username, String password) {
-    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3(VERSION_2016_05_20);
+    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21');
 
     if (username != null && password != null) {
       toneAnalyzer.setEndPoint(URL);
@@ -40,7 +39,7 @@ public with sharing class IBMToneAnalyzerV3FTest {
    *
    */
   public static IBMToneAnalyzerV3Models.ToneAnalysis testToneWithToneInput(String username, String password) {
-    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3(VERSION_2016_05_20);
+    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21');
 
     if (username != null && password != null) {
       toneAnalyzer.setEndPoint(URL);
@@ -65,7 +64,7 @@ public with sharing class IBMToneAnalyzerV3FTest {
    *
    */
   public static IBMToneAnalyzerV3Models.UtteranceAnalyses testToneChat(String username, String password) {
-    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3(VERSION_2016_05_20);
+    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21');
 
     if (username != null && password != null) {
       toneAnalyzer.setEndPoint(URL);

@@ -1,7 +1,6 @@
 public class IBMLanguageTranslatorV2FTest {
 
   private static String NAMED_CREDENTIALS = 'callout:watson_language_translator_v2'; // when using named credentials
-  private static String VERSION_2017_05_26 = '2017-05-26';
   public static final String EndpointURL = 'https://gateway.watsonplatform.net/language-translator/api';
   public static final String username = '<username>';
   public static final String password = '<password>';
