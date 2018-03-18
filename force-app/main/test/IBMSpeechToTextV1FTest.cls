@@ -18,14 +18,11 @@ public class IBMSpeechToTextV1FTest {
     }
     String name = 'custom_model';
     String baseModelName = 'en-US_BroadbandModel';
-    IBMSpeechToTextV1Models.CreateLanguageModel createLanguageModel = new IBMSpeechToTextV1Models.CreateLanguageModelBuilder(name, baseModelName)
+    IBMSpeechToTextV1Models.CreateLanguageModelOptions createLanguageModelOptions = new IBMSpeechToTextV1Models.CreateLanguageModelOptionsBuilder()
       .name(name)
       .baseModelName(baseModelName)
       .dialect('en-US')
       .description('model description')
-      .build();
-    IBMSpeechToTextV1Models.CreateLanguageModelOptions createLanguageModelOptions = new IBMSpeechToTextV1Models.CreateLanguageModelOptionsBuilder()
-      .createLanguageModel(createLanguageModel)
       .build();
     return speechToText.createLanguageModel(createLanguageModelOptions);
   }
@@ -216,16 +213,13 @@ public class IBMSpeechToTextV1FTest {
       speechToText.setEndPoint(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
-    IBMSpeechToTextV1Models.CustomWord customWord = new IBMSpeechToTextV1Models.CustomWordBuilder()
+    IBMSpeechToTextV1Models.AddWordOptions addWordOptions = new IBMSpeechToTextV1Models.AddWordOptionsBuilder(customizationId, wordName)
+      .soundsLike(new List<String>{soundsLike})
       .addSoundsLike(soundsLike)
       .word(wordName)
-      .soundsLike(new List<String>{soundsLike})
       .displayAs(wordName)
-      .build();
-    IBMSpeechToTextV1Models.AddWordOptions addWordOptions = new IBMSpeechToTextV1Models.AddWordOptionsBuilder(customizationId, wordName)
       .customizationId(customizationId)
       .wordName(wordName)
-      .customWord(customWord)
       .build();
     speechToText.addWord(addWordOptions);
   }
@@ -239,19 +233,13 @@ public class IBMSpeechToTextV1FTest {
       speechToText.setEndPoint(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
-    IBMSpeechToTextV1Models.CustomWord customWord = new IBMSpeechToTextV1Models.CustomWordBuilder()
-      .addSoundsLike(soundsLike)
-      .word(wordName)
-      .soundsLike(new List<String>{soundsLike})
-      .displayAs(wordName)
-      .build();
-    IBMSpeechToTextV1Models.CustomWords customWords = new IBMSpeechToTextV1Models.CustomWordsBuilder(new List<IBMSpeechToTextV1Models.CustomWord>{customWord})
-      .addWords(customWord)
-      .words(new List<IBMSpeechToTextV1Models.CustomWord>{customWord})
-      .build();
-    IBMSpeechToTextV1Models.AddWordsOptions addWordsOptions = new IBMSpeechToTextV1Models.AddWordsOptionsBuilder(customizationId)
+    IBMSpeechToTextV1Models.CustomWord customWord = new IBMSpeechToTextV1Models.CustomWord();
+    customWord.setWord(wordName);
+    customWord.setSoundsLike(soundsLike);
+    customWord.setDisplayAs(wordName);
+    IBMSpeechToTextV1Models.AddWordsOptions addWordsOptions = new IBMSpeechToTextV1Models.AddWordsOptionsBuilder()
       .customizationId(customizationId)
-      .customWords(customWords)
+      .word(new List<IBMSpeechToTextV1Models.CustomWord> { customWord })
       .build();
     speechToText.addWords(addWordsOptions);
   }

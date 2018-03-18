@@ -550,7 +550,7 @@ private class IBMConversationV1Test {
     System.assertEquals(response.getOutput().getNodesVisited().get(0), nodeVisited);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getLevel(), logMessageLevel);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getMsg(), logMessageText);
-    System.assert(response.getOuptut().getNodesVisitedDetails() != null);
+    System.assert(response.getOutput().getNodesVisitedDetails() != null);
     Test.stopTest();
   }
 
