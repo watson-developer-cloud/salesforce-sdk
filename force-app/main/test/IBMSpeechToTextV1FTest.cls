@@ -235,11 +235,11 @@ public class IBMSpeechToTextV1FTest {
     }
     IBMSpeechToTextV1Models.CustomWord customWord = new IBMSpeechToTextV1Models.CustomWord();
     customWord.setWord(wordName);
-    customWord.setSoundsLike(soundsLike);
+    customWord.setSoundsLike(new List<String>{ soundsLike });
     customWord.setDisplayAs(wordName);
     IBMSpeechToTextV1Models.AddWordsOptions addWordsOptions = new IBMSpeechToTextV1Models.AddWordsOptionsBuilder()
       .customizationId(customizationId)
-      .word(new List<IBMSpeechToTextV1Models.CustomWord> { customWord })
+      .words(new List<IBMSpeechToTextV1Models.CustomWord> { customWord })
       .build();
     speechToText.addWords(addWordsOptions);
   }
