@@ -5759,8 +5759,9 @@ public class IBMSpeechToTextV1Models {
           List<KeywordResult> keywordResultList = deserializedKeywordsResult.get(key);
           for (Integer i = 0; i < keywordResultList.size(); i++) {
             KeywordResult currentItem = keywordResultList.get(i);
-            Map<String, List<Object>> itemInMap = (Map<String, List<Object>>) jsonMap.get('keywords_result_serialized_name');
-            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(key).get(i))), KeywordResult.class);
+            Map<String, Object> itemInMap = (Map<String, Object>) jsonMap.get('keywords_result_serialized_name');
+            List<Object> currentList = (List<Object>) itemInMap.get(key);
+            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(currentList.get(i))), KeywordResult.class);
             newKeywordResult.add(newItem);
           }
           newKeywordsResult.put(key, newKeywordResult);
