@@ -22,9 +22,9 @@ Before starting with the SDK, it'll be helpful to take a look at our new Watson 
 
 ![Launch tool button](readme_images/launch_tool.png "Launch tool button")
 
-Once you're in the tool, you'll see a page listing the Watson Assistant **workspaces**. You'll also see that one has already been created for you called _Car Dashboard - Sample_. This is the workspace that we'll be using in this lab. Go ahead and click on it to edit it.
+Once you're in the tool, click on the "Workspaces" tab on top and you'll see a page listing the Watson Assistant **workspaces**. You'll also see that one has already been created for you called _Car Dashboard - Sample_. This is the workspace that we'll be using in this lab. Go ahead and click on "Edit sample" to edit it.
 
-This sample workspace is designed to mimic a smart car assistant that you can ask questions or issue commands to while driving. With that in mind, let's get started talking to our smart car assistant.
+This sample workspace is designed to mimic a smart car assistant that you can ask questions or issue commands to while driving. You can browse through the intents, entities and dialog to see what types of things exist in this workspace. With that in mind, let's get started talking to our smart car assistant.
 
 ## Using the SDK
 ### 1. Sending Your First Message
@@ -34,7 +34,7 @@ To get started, we'll send a simple message to the Watson Assistant service and 
 
 **After running each snippet, be sure to clear your code and start fresh for the next one.**
 
-Before performing any actions, we need to create an instance of an Assistant object, whose class is named IBMAssistantV1 in the Apex SDK. We can do this with just one line:
+Click on the "Debug" tab and then select "Open Execute Anonymous Window". Before performing any actions, we need to create an instance of an Assistant object, whose class is named IBMAssistantV1 in the Apex SDK. We can do this with just one line:
 
 ```apex
 IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
@@ -64,7 +64,7 @@ String reply = response.getOutput().getText().get(0);
 System.debug(reply);
 ```
 
-Note that in the above code, a placeholder was added for the `workspaceId` parameter of the `MessageOptions`. This is a unique value corresponding to your Assistant workspace, which can be found here in the tooling:
+Note that in the above code, a placeholder was added for the `workspaceId` parameter of the `MessageOptions`. This is a unique value corresponding to your Assistant workspace, which can be found here in the tooling after clicking on the "Deploy" icon and then selecting the "Credentials" tab to find your workspace ID:
 
 ![Workspace ID](readme_images/workspace_id.png "Workspace ID")
 
@@ -140,6 +140,7 @@ IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
 
 // Create the Discovery object and set the credentials
 IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
+discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
 discovery.setUsernameAndPassword('c9226893-8b38-415e-8c36-ed6ce670db3b', 'gPxACNc6t4LO');
 
 // Set messages and initial context
