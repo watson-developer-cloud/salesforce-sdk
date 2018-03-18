@@ -85,10 +85,10 @@ Finally, you can also install or update the SDK using the Ant Build Tool. This m
     ant deployWatson
     ```
 
-    By default, this will deploy all of the classes. To specify a service, use the `-Dservice` flag. Here is an example of just deploying the Conversation service:
+    By default, this will deploy all of the classes. To specify a service, use the `-Dservice` flag. Here is an example of just deploying the Watson Assistant service:
 
     ```bash
-    ant deployWatson -Dservice=conversation
+    ant deployWatson -Dservice=assistant
     ```
 
     Valid service names are all services listed [here](https://console.bluemix.net/catalog/?category=watson) written as one word (e.g. Visual Recognition becomes visualrecognition). The parameter is case-insensitive. To deploy multiple services, just run the command again with the next desired service flag.
@@ -121,10 +121,10 @@ IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
 Will look for the `watson_discovery_v1` named credentials while:
 
 ```java
-IBMConversationV1 discovery = new IBMConversationV1('2018-02-16');
+IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
 ```
 
-Will look for `watson_conversation_v1`.
+Will look for `watson_assistant_v1`.
 
 In order to create **Named credentials**:
 
@@ -133,8 +133,8 @@ In order to create **Named credentials**:
 1. Click on _New Named Credential_
 1. Enter the following values:
     * Label: _A unique label that identifies your named credentials_
-    * Name: `watson_<service_name_snake_case>_<api_version>`, e.g: `watson_conversation_v1`
-    * URL: `<SERVICE_URL>`, e.g: `https://gateway.watsonplatform.net/conversation/api`
+    * Name: `watson_<service_name_snake_case>_<api_version>`, e.g: `watson_assistant_v1`
+    * URL: `<SERVICE_URL>`, e.g: `https://gateway.watsonplatform.net/assistant/api`
     * Identity Type: **Named Principial**
     * Authentication Protocol: **Password Authentication**
     * Username: `<USERNAME>`
@@ -181,22 +181,22 @@ IBMDiscoveryV1Models.ListEnvironmentsResponse environmentList = discovery.listEn
 System.debug(environmentList);
 ```
 
-Similarly, here is an example of creating an intent in the Conversation service:
+Similarly, here is an example of creating an intent in the Watson Assistant service:
 
 ```java
-// Will load credentials from the `watson_conversation_v1` named credential
-IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+// Will load credentials from the `watson_assistant_v1` named credential
+IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
 
 // configuring options for creating intent
-IBMConversationV1Models.CreateIntentOptions options = new
-  IBMConversationV1Models.CreateIntentOptionsBuilder()
+IBMAssistantV1Models.CreateIntentOptions options = new
+  IBMAssistantV1Models.CreateIntentOptionsBuilder()
   .workspaceId('<workspace_id>')
   .intent('MyIntent')
   .description('This is an example of creating an intent!')
   .build();
 
 // making request
-IBMConversationV1Models.Intent intent = conversation.createIntent(options);
+IBMAssistantV1Models.Intent intent = assistant.createIntent(options);
 System.debug(intent);
 ```
 
@@ -227,13 +227,13 @@ If going through the `additionalProperties` object is undesired for any reason, 
 ```apex
 public class ServerSideController {
   @AuraEnabled
-  public static String query(String environmentId, String collectionId) {        
+  public static String query(String environmentId, String collectionId) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
     IBMDiscoveryV1Models.QueryOptions options = new IBMDiscoveryV1Models.QueryOptionsBuilder(environmentId, collectionId)
       .naturalLanguageQuery('example query')
       .build();
     IBMDiscoveryV1Models.QueryResponse response = discovery.query(options);
-    
+
     // IMPORTANT: return the string instead of the model
     return response.toString();
   }
