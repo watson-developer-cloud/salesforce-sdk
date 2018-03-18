@@ -129,7 +129,7 @@ Integrating the Assistant service with Discovery is a typical use case meant to 
 
 To get started, we're going to use a slightly different workspace. It will still be based around a smart car assistant, but it will have some extra functionality added to flag when it doesn't know something and we should query our Discovery instance.
 
-To upload this workspace, go to the "Workspaces" section of the Watson Assistant tooling and click on the button to import a workspace, using the `workspace.json` located in this folder:
+To upload this workspace, go to the "Workspaces" section of the Watson Assistant tooling and click on the button to import a workspace, using the [`workspace.json`](workspace.json) located in this folder:
 
 ![Workspace import](readme_images/workspace_import.png "Workspace import")
 
