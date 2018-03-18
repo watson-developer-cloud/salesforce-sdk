@@ -6,6 +6,17 @@ The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/de
 
 Using the Watson services requires creating service instances and getting credentials in IBM Cloud, which you can do [here](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&). This means you will need to create an IBM Cloud account if you do not have one already.
 
+Once you create an account, you can get credentials for the services you want by following these steps:
+
+1. Log in to [IBM Cloud](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&)
+
+1. Create an instance of the desired service:
+    1. In the left hamburger menu, select **Watson**.
+    1. Click on **Browse Services**, located under **Watson Services** in the left menu.
+    1. Select the services you'd like to use.
+
+1. Copy the credentials at the bottom of the page for the selected services.
+
 You'll also need a Salesforce account to run your Apex code. To get one, you can visit [this link](https://developer.salesforce.com/signup).
 
 ## Installation
@@ -93,20 +104,8 @@ Finally, you can also install or update the SDK using the Ant Build Tool. This m
 
     Valid service names are all services listed [here](https://console.bluemix.net/catalog/?category=watson) written as one word (e.g. Visual Recognition becomes visualrecognition). The parameter is case-insensitive. To deploy multiple services, just run the command again with the next desired service flag.
 
-## Getting Started
-
-To get your service-specific credentials, follow these steps:
-
-1. Log in to [IBM Cloud](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&)
-
-1. Create an instance of the desired service:
-    1. In the left hamburger menu, select **Watson**.
-    1. Click on **Browse Services**, located under **Watson Services** in the left menu.
-    1. Select the services you'd like to use.
-
-1. Copy the credentials at the bottom of the page for the selected services.
-
-There are two ways of specifying credentials, [Using Named Credentials](#using-named-credentials) or [Specifying credentials in the Apex code](#specifying-credentials-in-the-apex-code)
+## Authentication
+To access your Watson services through Apex, you'll need to authenticate with your service credentials. There are two ways to do this: [using named credentials](#using-named-credentials) or [specifying credentials in the Apex code](#specifying-credentials-in-the-apex-code)
 
 ### Using `Named Credentials`
 
