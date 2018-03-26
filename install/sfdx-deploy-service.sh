@@ -5,8 +5,9 @@ echo "Usage: $0 -c -s [service] -u [username]";
 echo "";
 echo "-c          Deploy core files";
 echo "-s          Service to deploy, available services are:";
-echo "              * discovery";
+echo "              * assistant"
 echo "              * conversation";
+echo "              * discovery";
 echo "              * language-translator";
 echo "              * natural-language-classifier";
 echo "              * natural-language-understanding";

@@ -3,6 +3,7 @@ public with sharing class IBMVisualRecognitionV3FTest {
   private static String NAMED_CREDENTIALS = 'callout:watson_visual_recognition_v3';
   private static String API_KEY = '<your API key>';
   private static String attachmentId = '<your attachment id>';
+
   /**
    *  Test Analyze text, HTML, or a public webpage.
    *
@@ -62,5 +63,29 @@ public with sharing class IBMVisualRecognitionV3FTest {
     IBMVisualRecognitionV3Models.DetectedFaces resp = visualRecognition.detectFaces(options);
     System.debug('IBMVisualRecognitionV3FTest.testDetectFaces(): ' + resp);
     return resp;
+  }
+
+  /**
+   * Test getting a Core ML model.
+   */
+  public static IBMWatsonFile testGetCoreMlModel() {
+    IBMVisualRecognitionV3 service = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
+    service.setEndPoint(NAMED_CREDENTIALS);
+
+    IBMVisualRecognitionV3Models.IBMVisualRecognitionV3Models.ListClassifiersOptions listOptions
+      = new IBMVisualRecognitionV3Models.ListClassifiersOptionsBuilder()
+      .verbose(true)
+      .build();
+    IBMVisualRecognitionV3Models.Classifiers classifiers = service.listClassifiers(listOptions);
+
+    for (IBMVisualRecognitionV3Models.Classifier classifier : classifiers) {
+      if (classifier.getCoreMlEnabled()) {
+        IBMVisualRecognitionV3Models.GetCoreMlModelOptions getOptions = new IBMVisualRecognitionV3Models.GetCoreMlModelOptionsBuilder()
+          .classifierId(classifier.getClassifierId())
+          .build();
+        IBMWatsonFile modelFile = service.getCoreMlModel(getOptions);
+        return modelFile;
+      }
+    }
   }
 }
