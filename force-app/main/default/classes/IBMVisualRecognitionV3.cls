@@ -1,14 +1,7 @@
 /**
- * **Important:** As of September 8, 2017, the beta period for Similarity Search is closed. For more information, see
- * [Visual Recognition API – Similarity Search
- * Update](https://www.ibm.com/blogs/bluemix/2017/08/visual-recognition-api-similarity-search-update).
- *
  * The IBM Watson Visual Recognition service uses deep learning algorithms to identify scenes, objects, and faces  in
  * images you upload to the service. You can create and train a custom classifier to identify subjects that suit your
  * needs.
- *
- * **Tip:** To test calls to the **Custom classifiers** methods with the API explorer, provide your `api_key` from your
- * IBM&reg; Cloud service instance.
  *
  * @version V3
  * @see <a href="http://www.ibm.com/watson/developercloud/visual-recognition.html">Visual Recognition</a>
@@ -114,7 +107,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   /**
    * Detect faces in images.
    *
-   * Analyze and get data about faces in images. Responses can include estimated age and gender, and the service can identify celebrities. This feature uses a built-in classifier, so you do not train it on custom classifiers. The Detect faces method does not support general biometric facial recognition.
+   * **Important:** On April 2, 2018, the identity information in the response to calls to the Face model will be removed. The identity information refers to the `name` of the person, `score`, and `type_hierarchy` knowledge graph. For details about the enhanced Face model, see the [Release notes](https://console.bluemix.net/docs/services/visual-recognition/release-notes.html#23february2018).  Analyze and get data about faces in images. Responses can include estimated age and gender, and the service can identify celebrities. This feature uses a built-in classifier, so you do not train it on custom classifiers. The Detect faces method does not support general biometric facial recognition.
    *
    * @param detectFacesOptions the {@link IBMVisualRecognitionV3Models.DetectFacesOptions} containing the options for the call
    * @return the {@link IBMVisualRecognitionV3Models.DetectedFaces} with the response
@@ -208,7 +201,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   }
 
   /**
-   * Retrieve a list of custom classifiers.
+   * Retrieve a list of classifiers.
    *
    * @param listClassifiersOptions the {@link IBMVisualRecognitionV3Models.ListClassifiersOptions} containing the options for the call
    * @return the {@link IBMVisualRecognitionV3Models.Classifiers} with the response
@@ -226,7 +219,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   /**
    * Update a classifier.
    *
-   * Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to existing classes. You must supply at least one set of positive or negative examples. For details, see [Updating custom classifiers](https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).  Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.  **Important:** You can't update a custom classifier with an API key for a Lite plan. To update a custom classifer on a Lite plan, create another service instance on a Standard plan and re-create your custom classifier.  **Tip:** Don't make retraining calls on a classifier until the status is ready. When you submit retraining requests in parallel, the last request overwrites the previous requests. The retrained property shows the last time the classifier retraining finished.
+   * Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to existing classes. You must supply at least one set of positive or negative examples. For details, see [Updating custom classifiers](https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).  Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.  **Important:** You can't update a custom classifier with an API key for a Lite plan. To update a custom classifier on a Lite plan, create another service instance on a Standard plan and re-create your custom classifier.  **Tip:** Don't make retraining calls on a classifier until the status is ready. When you submit retraining requests in parallel, the last request overwrites the previous requests. The retrained property shows the last time the classifier retraining finished.
    *
    * @param updateClassifierOptions the {@link IBMVisualRecognitionV3Models.UpdateClassifierOptions} containing the options for the call
    * @return the {@link IBMVisualRecognitionV3Models.Classifier} with the response
@@ -252,6 +245,22 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
     return (IBMVisualRecognitionV3Models.Classifier) createServiceCall(builder.build(), IBMVisualRecognitionV3Models.Classifier.class);
+  }
+
+  /**
+   * Retrieve a Core ML model of a classifier.
+   *
+   * Download a Core ML model file (.mlmodel) of a custom classifier that returns <tt>\"core_ml_enabled\": true</tt> in the classifier details.
+   *
+   * @param getCoreMlModelOptions the {@link IBMVisualRecognitionV3Models.GetCoreMlModelOptions} containing the options for the call
+   * @return the {@link IBMWatsonFile} with the response
+   */
+  public IBMWatsonFile getCoreMlModel(IBMVisualRecognitionV3Models.GetCoreMlModelOptions getCoreMlModelOptions) {
+    IBMWatsonValidator.notNull(getCoreMlModelOptions, 'getCoreMlModelOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v3/classifiers/{0}/core_ml_model', new String[]{ getCoreMlModelOptions.classifierId() }));
+    builder.query('version', versionDate);
+
+    return (IBMWatsonFile) createServiceCall(builder.build(), IBMWatsonFile.class);
   }
 
 }
