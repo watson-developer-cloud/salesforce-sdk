@@ -1463,7 +1463,7 @@ public class IBMWatsonMockResponses {
     return  '{' +
             '  "utterances_tone": [' +
             '    {' +
-            '      "utterance_id": "string", ' +
+            '      "utterance_id": 0, ' +
             '      "utterance_text": "string", ' +
             '      "tones": [' +
             '        {' +

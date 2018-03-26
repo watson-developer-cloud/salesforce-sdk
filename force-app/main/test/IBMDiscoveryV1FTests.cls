@@ -868,7 +868,8 @@ public with sharing class IBMDiscoveryV1FTests {
     return resp;
   }
 
-  public static void testExpansionsOperations(String envirionmentId, String collectionId) {
+  public static void testExpansionsOperations(String environmentId, String collectionId) {
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
     List<String> expansion1InputTerms = new List<String> { 'weekday', 'week day' };
     List<String> expansion1ExpandedTerms = new List<String> { 'monday', 'tuesday', 'wednesday', 'thursday', 'friday' };
     List<String> expansion2InputTerms = new List<String> { 'weekend', 'week end' };

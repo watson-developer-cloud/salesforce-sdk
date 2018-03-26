@@ -70,7 +70,7 @@ private class IBMToneAnalyzerV3Test {
     options = options.newBuilder().build();
     IBMToneAnalyzerV3Models.UtteranceAnalyses resp = toneAnalyzer.toneChat(options);
     System.assertEquals(resp.getWarning(), 'string');
-    System.assertEquals(resp.getUtterancesTone()[0].getUtteranceId(), 'string');
+    System.assertEquals(resp.getUtterancesTone()[0].getUtteranceId(), 0);
     System.assertEquals(resp.getUtterancesTone()[0].getUtteranceText(), 'string');
     System.assertEquals(resp.getUtterancesTone()[0].getError(), 'string');
     System.assertEquals(resp.getUtterancesTone()[0].getTones()[0].getScore(),0);
