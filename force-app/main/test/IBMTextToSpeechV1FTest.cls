@@ -149,12 +149,12 @@ public with sharing class IBMTextToSpeechV1FTest {
       textToSpeech.setEndPoint(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
-    IBMTextToSpeechV1Models.CustomWord customWord =new IBMTextToSpeechV1Models.CustomWord();
-    customWord.setWord('Hello');
-    customWord.setTranslation('de-DE');
+    IBMTextToSpeechV1Models.Word word =new IBMTextToSpeechV1Models.Word();
+    word.setWord('Hello');
+    word.setTranslation('de-DE');
     IBMTextToSpeechV1Models.UpdateVoiceModelOptions options = new IBMTextToSpeechV1Models.UpdateVoiceModelOptionsBuilder()
       .customizationId(customizationId)
-      .addWords(customWord)
+      .addWords(word)
       .build();
     textToSpeech.updateVoiceModel(options);
   }
@@ -187,12 +187,12 @@ public with sharing class IBMTextToSpeechV1FTest {
       textToSpeech.setEndPoint(URL);
       textToSpeech.setUsernameAndPassword(username, password);
     }
-    IBMTextToSpeechV1Models.CustomWord customWord =new IBMTextToSpeechV1Models.CustomWord();
-    customWord.setWord('Again');
-    customWord.setTranslation('de-DE');
+    IBMTextToSpeechV1Models.Word word =new IBMTextToSpeechV1Models.Word();
+    word.setWord('Again');
+    word.setTranslation('de-DE');
     IBMTextToSpeechV1Models.AddWordsOptions options = new IBMTextToSpeechV1Models.AddWordsOptionsBuilder()
       .customizationId(customizationId)
-      .addWords(customWord)
+      .addWords(word)
       .build();
     textToSpeech.addWords(options);
   }

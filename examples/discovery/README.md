@@ -35,7 +35,7 @@ Each collection and environment has a unique ID, and it's an environment ID that
 Before performing any actions, we need to create an instance of a Discovery object, whose class is named `IBMDiscoveryV1` in the Apex SDK. We can do this with just one line:
 
 ```apex
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1(IBMDiscoveryV1.VERSION_DATE_2017_09_01);
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
 ```
 
 The argument passed into the constructor is the version date, and the possible values are exposed as static strings in the service classes. Using the latest version ensures the most up-to-date functionality, but the option is there to use older versions if any app-specific functionality would be broken otherwise.
@@ -45,7 +45,7 @@ Note as well that no code has to be written for authentication, as we set up the
 Now, we can use our new `discovery` object to make the `listEnvironments` call. This can be done by running the following code:
 
 ```apex
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1(IBMDiscoveryV1.VERSION_DATE_2017_09_01);
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
 
 IBMDiscoveryV1Models.ListEnvironmentsOptions options 
   = new IBMDiscoveryV1Models.ListEnvironmentsOptionsBuilder().build();
@@ -73,7 +73,7 @@ There are two ways to make queries in Discovery: with the Discovery Query Langua
 Remove all of the previous code and replace it with the following:
 
 ```apex
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1(IBMDiscoveryV1.VERSION_DATE_2017_09_01);
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
 
 IBMDiscoveryV1Models.QueryOptions options 
   = new IBMDiscoveryV1Models.QueryOptionsBuilder()
@@ -106,7 +106,7 @@ If we take a look at the `query` method in the [API explorer](https://watson-api
 Knowing this, let's print out the document ID of the 5 documents we get back from our query, using the following code:
 
 ```apex
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1(IBMDiscoveryV1.VERSION_DATE_2017_09_01);
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
 
 IBMDiscoveryV1Models.QueryOptions options 
   = new IBMDiscoveryV1Models.QueryOptionsBuilder()
@@ -129,7 +129,7 @@ Now, you should just see the IDs of the returned documents.
 Since you're a bit more familiar with the Discovery service and the SDK, let's create our own collection to upload documents into and query. To do so, we'll use the `createCollection` method. By now you should get the idea of the pattern to build this request, so if you're feeling confident, go ahead and try it yourself, using the API explorer and the `IBMDiscoveryV1` and `IBMDiscoveryV1Models` classes as reference. Otherwise, here's the code we need to do it:
 
 ```apex
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1(IBMDiscoveryV1.VERSION_DATE_2017_09_01);
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
 
 IBMDiscoveryV1Models.CreateCollectionOptions options 
   = new IBMDiscoveryV1Models.CreateCollectionOptionsBuilder()
@@ -167,7 +167,7 @@ After a little bit of processing, you should be taken to the following page, whi
 In our case, we're going to make a query using the SDK again, this time using the Discovery Query Language. Our goal will be to pick out documents which contain the `entity` IBM, which should return to us the speakers who have some connection to the company. To make things easier to digest, we'll filter for just the extracted title of each document, using dot notation to navigate the full JSON response. Paste the following into your developer console, again making sure to substitute your personal environment and collection IDs:
 
 ```apex
-IBMDiscoveryV1 discovery = new IBMDiscoveryV1(IBMDiscoveryV1.VERSION_DATE_2017_09_01);
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
 
 IBMDiscoveryV1Models.QueryOptions options 
   = new IBMDiscoveryV1Models.QueryOptionsBuilder()
