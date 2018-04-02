@@ -48,6 +48,24 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
   }
 
   /**
+   * Classify multiple phrases.
+   *
+   * Returns label information for multiple phrases. The status must be `Available` before you can use the classifier to classify text.  Note that classifying Japanese texts is a beta feature.
+   *
+   * @param classifyCollectionOptions the {@link IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptions} containing the options for the call
+   * @return the {@link IBMNaturalLanguageClassifierV1Models.ClassificationCollection} with the response
+   */
+  public IBMNaturalLanguageClassifierV1Models.ClassificationCollection classifyCollection(IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptions classifyCollectionOptions) {
+    IBMWatsonValidator.notNull(classifyCollectionOptions, 'classifyCollectionOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/classifiers/{0}/classify_collection', new String[]{ classifyCollectionOptions.classifierId() }));
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('collection', classifyCollectionOptions.collection());
+    builder.bodyJson(JSON.serialize(contentJson, true));
+
+    return (IBMNaturalLanguageClassifierV1Models.ClassificationCollection) createServiceCall(builder.build(), IBMNaturalLanguageClassifierV1Models.ClassificationCollection.class);
+  }
+
+  /**
    * Create classifier.
    *
    * Sends data to create and train a classifier and returns information about the new classifier.

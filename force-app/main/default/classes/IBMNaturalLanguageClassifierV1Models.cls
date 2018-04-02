@@ -134,6 +134,98 @@ public class IBMNaturalLanguageClassifierV1Models {
   }
 
   /**
+   * Response from the classifier for multiple phrases.
+   */
+  public class ClassificationCollection extends IBMWatsonGenericModel {
+    private String classifier_id_serialized_name;
+    private String url_serialized_name;
+    private List<CollectionItem> collection_serialized_name;
+    /**
+     * Gets the classifier_id_serialized_name.
+     *
+     * Unique identifier for this classifier.
+     *
+     * @return the classifier_id_serialized_name
+     */
+    @AuraEnabled
+    public String getClassifierId() {
+      return classifier_id_serialized_name;
+    }
+    /**
+     * Gets the url_serialized_name.
+     *
+     * Link to the classifier.
+     *
+     * @return the url_serialized_name
+     */
+    @AuraEnabled
+    public String getUrl() {
+      return url_serialized_name;
+    }
+    /**
+     * Gets the collection_serialized_name.
+     *
+     * An array of classifier responses for each submitted phrase.
+     *
+     * @return the collection_serialized_name
+     */
+    @AuraEnabled
+    public List<CollectionItem> getCollection() {
+      return collection_serialized_name;
+    }
+
+    /**
+     * Sets the classifier_id_serialized_name.
+     *
+     * @param classifierId the new classifierId
+     */
+    public void setClassifierId(final String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
+    }
+
+    /**
+     * Sets the url_serialized_name.
+     *
+     * @param url the new url
+     */
+    public void setUrl(final String url) {
+      this.url_serialized_name = url;
+    }
+
+    /**
+     * Sets the collection_serialized_name.
+     *
+     * @param collection the new collection
+     */
+    public void setCollection(final List<CollectionItem> collection) {
+      this.collection_serialized_name = collection;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ClassificationCollection ret = (ClassificationCollection) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for collection_serialized_name
+      List<CollectionItem> newCollection = new List<CollectionItem>();
+      List<CollectionItem> deserializedCollection = ret.getCollection();
+      if (deserializedCollection != null) {
+        for (Integer i = 0; i < deserializedCollection.size(); i++) {
+          CollectionItem currentItem = ret.getCollection().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('collection_serialized_name');
+          CollectionItem newItem = (CollectionItem) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CollectionItem.class);
+          newCollection.add(newItem);
+        }
+        ret.setCollection(newCollection);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
    * Class and confidence.
    */
   public class ClassifiedClass extends IBMWatsonGenericModel {
@@ -378,6 +470,164 @@ public class IBMNaturalLanguageClassifierV1Models {
   }
 
   /**
+   * The classifyCollection options.
+   */
+  public class ClassifyCollectionOptions {
+    private String classifier_id_serialized_name;
+    private List<ClassifyInput> collection_serialized_name;
+    /**
+     * Gets the classifier_id_serialized_name.
+     *
+     * Classifier ID to use.
+     *
+     * @return the classifier_id_serialized_name
+     */
+    public String classifierId() {
+      return classifier_id_serialized_name;
+    }
+    /**
+     * Gets the collection_serialized_name.
+     *
+     * The submitted phrases.
+     *
+     * @return the collection_serialized_name
+     */
+    public List<ClassifyInput> collection() {
+      return collection_serialized_name;
+    }
+    private ClassifyCollectionOptions(ClassifyCollectionOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.classifier_id_serialized_name, 'classifier_id_serialized_name cannot be empty');
+      IBMWatsonValidator.notNull(builder.collection_serialized_name, 'collection_serialized_name cannot be null');
+      classifier_id_serialized_name = builder.classifier_id_serialized_name;
+      collection_serialized_name = builder.collection_serialized_name;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ClassifyCollectionOptions builder
+     */
+    public ClassifyCollectionOptionsBuilder newBuilder() {
+      return new ClassifyCollectionOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * ClassifyCollectionOptions Builder.
+   */
+  public class ClassifyCollectionOptionsBuilder {
+    private String classifier_id_serialized_name;
+    private List<ClassifyInput> collection_serialized_name;
+
+    private ClassifyCollectionOptionsBuilder(ClassifyCollectionOptions classifyCollectionOptions) {
+      classifier_id_serialized_name = classifyCollectionOptions.classifier_id_serialized_name;
+      collection_serialized_name = classifyCollectionOptions.collection_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ClassifyCollectionOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param classifierId the classifierId
+     * @param collection the collection
+     */
+    public ClassifyCollectionOptionsBuilder(String classifierId, List<ClassifyInput> collection) {
+      this.classifier_id_serialized_name = classifierId;
+      this.collection_serialized_name = collection;
+    }
+
+    /**
+     * Builds a ClassifyCollectionOptions.
+     *
+     * @return the classifyCollectionOptions
+     */
+    public ClassifyCollectionOptions build() {
+      return new ClassifyCollectionOptions(this);
+    }
+
+    /**
+     * Adds an collection to collection_serialized_name.
+     *
+     * @param collection the new collection
+     * @return the ClassifyCollectionOptions builder
+     */
+    public ClassifyCollectionOptionsBuilder addCollection(ClassifyInput collection) {
+      IBMWatsonValidator.notNull(collection, 'collection cannot be null');
+      if (this.collection_serialized_name == null) {
+        this.collection_serialized_name = new List<ClassifyInput>();
+      }
+      this.collection_serialized_name.add(collection);
+      return this;
+    }
+
+    /**
+     * Set the classifier_id_serialized_name.
+     *
+     * @param classifierId the classifierId
+     * @return the ClassifyCollectionOptions builder
+     */
+    public ClassifyCollectionOptionsBuilder classifierId(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
+      return this;
+    }
+
+    /**
+     * Set the collection_serialized_name.
+     * Existing collection_serialized_name will be replaced.
+     *
+     * @param collection the collection
+     * @return the ClassifyCollectionOptions builder
+     */
+    public ClassifyCollectionOptionsBuilder collection(List<ClassifyInput> collection) {
+      this.collection_serialized_name = collection;
+      return this;
+    }
+  }
+
+  /**
+   * Request payload to classify.
+   */
+  public class ClassifyInput extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    /**
+     * Gets the text_serialized_name.
+     *
+     * The submitted phrase.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+
+    /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ClassifyInput ret = (ClassifyInput) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
    * The classify options.
    */
   public class ClassifyOptions {
@@ -483,6 +733,98 @@ public class IBMNaturalLanguageClassifierV1Models {
   }
 
   /**
+   * Response from the classifier for a phrase in a collection.
+   */
+  public class CollectionItem extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    private String top_class_serialized_name;
+    private List<ClassifiedClass> classes_serialized_name;
+    /**
+     * Gets the text_serialized_name.
+     *
+     * The submitted phrase.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+    /**
+     * Gets the top_class_serialized_name.
+     *
+     * The class with the highest confidence.
+     *
+     * @return the top_class_serialized_name
+     */
+    @AuraEnabled
+    public String getTopClass() {
+      return top_class_serialized_name;
+    }
+    /**
+     * Gets the classes_serialized_name.
+     *
+     * An array of up to ten class-confidence pairs sorted in descending order of confidence.
+     *
+     * @return the classes_serialized_name
+     */
+    @AuraEnabled
+    public List<ClassifiedClass> getClasses() {
+      return classes_serialized_name;
+    }
+
+    /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the top_class_serialized_name.
+     *
+     * @param topClass the new topClass
+     */
+    public void setTopClass(final String topClass) {
+      this.top_class_serialized_name = topClass;
+    }
+
+    /**
+     * Sets the classes_serialized_name.
+     *
+     * @param classes the new classes
+     */
+    public void setClasses(final List<ClassifiedClass> classes) {
+      this.classes_serialized_name = classes;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      CollectionItem ret = (CollectionItem) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for classes_serialized_name
+      List<ClassifiedClass> newClasses = new List<ClassifiedClass>();
+      List<ClassifiedClass> deserializedClasses = ret.getClasses();
+      if (deserializedClasses != null) {
+        for (Integer i = 0; i < deserializedClasses.size(); i++) {
+          ClassifiedClass currentItem = ret.getClasses().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('classes_serialized_name');
+          ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedClass.class);
+          newClasses.add(newItem);
+        }
+        ret.setClasses(newClasses);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
    * The createClassifier options.
    */
   public class CreateClassifierOptions {
@@ -493,7 +835,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Gets the training_metadata_serialized_name.
      *
-     * Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the classifier.
+     * Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the classifier. Specify the language with the 2-letter primary language code as assigned in ISO standard 639.  Supported languages are English (`en`), Arabic (`ar`), French (`fr`), German, (`de`), Italian (`it`), Japanese (`ja`), Korean (`ko`), Brazilian Portuguese (`pt`), and Spanish (`es`).
      *
      * @return the training_metadata_serialized_name
      */
@@ -513,7 +855,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Gets the training_data_serialized_name.
      *
-     * Training data in CSV format. Each text value must have at least one class. The data can include up to 15,000 records. For details, see [Using your own data](https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html).
+     * Training data in CSV format. Each text value must have at least one class. The data can include up to 20,000 records. For details, see [Data preparation](https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html).
      *
      * @return the training_data_serialized_name
      */
