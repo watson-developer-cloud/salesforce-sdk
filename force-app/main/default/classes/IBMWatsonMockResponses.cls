@@ -1212,6 +1212,34 @@ public class IBMWatsonMockResponses {
     '  ]' +
     '}';
   }
+
+  public static String ClassifyCollection() {
+    return '{' +
+    '  "classifier_id" : "10D41B-nlc-1",' +
+    '  "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1",' +
+    '  "collection" : [ {' +
+    '    "text" : "How hot will it be today?",' +
+    '    "top_class" : "temperature",' +
+    '    "classes" : [ {' +
+    '      "class_name" : "temperature",' +
+    '      "confidence" : 0.9930558798985937' +
+    '    }, {' +
+    '      "class_name" : "conditions",' +
+    '      "confidence" : 0.006944120101406304' +
+    '    } ]' +
+    '  }, {' +
+    '    "text" : "Is it hot outside?",' +
+    '    "top_class" : "temperature",' +
+    '    "classes" : [ {' +
+    '      "class_name" : "temperature",' +
+    '      "confidence" : 1' +
+    '    }, {' +
+    '      "class_name" : "conditions",' +
+    '      "confidence" : 0' +
+    '    } ]' +
+    '  } ]' +
+    '}';
+  }
   
   public static String CreateClassifier() {
     return '{' +
