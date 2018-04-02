@@ -13,6 +13,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
 
     if (classifierStatus.equalsIgnoreCase('ready')) {
       testClassify(classifierId, username, password);
+      textClassifyCollection(classifierId, username, password);
     }
     testDeleteClassifier(classifierId, username, password);
   }
@@ -56,7 +57,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
       service.setUsernameAndPassword(username, password);
     }
 
-    BMNaturalLanguageClassifierV1Models.ClassifyInput input1 = new IBMNaturalLanguageClassifierV1Models.ClassifyInput();
+    IBMNaturalLanguageClassifierV1Models.ClassifyInput input1 = new IBMNaturalLanguageClassifierV1Models.ClassifyInput();
     input1.setText(CLASSIFIER_TEXT_1);
     IBMNaturalLanguageClassifierV1Models.ClassifyInput input2 = new IBMNaturalLanguageClassifierV1Models.ClassifyInput();
     input2.setText(CLASSIFIER_TEXT_2);
