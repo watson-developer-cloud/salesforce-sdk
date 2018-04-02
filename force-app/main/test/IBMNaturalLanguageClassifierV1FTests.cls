@@ -3,7 +3,8 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
   private static String URL = 'https://gateway.watsonplatform.net/natural-language-classifier/api';
   private static String NAMED_CREDENTIALS = 'callout:watson_natural_language_classifier_v1';
   private static String VERSION_2017_05_26 = '2017-05-26';
-  private static String ClassifierText = 'How hot will it be today?';
+  private static final String CLASSIFIER_TEXT_1 = 'How hot will it be today?';
+  private static final String CLASSIFIER_TEXT_2 = 'Is it hot outside?';
 
   public static void runAllTests(String username, String password) {
     String classifierId = testCreateClassifier(username, password).getClassifierId();
@@ -37,10 +38,37 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
     IBMNaturalLanguageClassifierV1Models.ClassifyOptions classifyOptions =
       new IBMNaturalLanguageClassifierV1Models.ClassifyOptionsBuilder()
       .classifierId(classifierId)
-      .text(ClassifierText)
+      .text(CLASSIFIER_TEXT_1)
       .build();
 
     IBMNaturalLanguageClassifierV1Models.Classification classification = service.classify(classifyOptions);
+    return classification;
+  }
+
+  /**
+   * Test classifying multiple phrases at once.
+   */
+  public static IBMNaturalLanguageClassifierV1Models.ClassificationCollection textClassifyCollection(String classifierId, String username, String password) {
+    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
+
+    if (username != null && password != null) {
+      service.setEndPoint(URL);
+      service.setUsernameAndPassword(username, password);
+    }
+
+    BMNaturalLanguageClassifierV1Models.ClassifyInput input1 = new IBMNaturalLanguageClassifierV1Models.ClassifyInput();
+    input1.setText(CLASSIFIER_TEXT_1);
+    IBMNaturalLanguageClassifierV1Models.ClassifyInput input2 = new IBMNaturalLanguageClassifierV1Models.ClassifyInput();
+    input2.setText(CLASSIFIER_TEXT_2);
+    List<IBMNaturalLanguageClassifierV1Models.ClassifyInput> inputCollection = new List<IBMNaturalLanguageClassifierV1Models.ClassifyInput> {
+      input1,
+      input2
+    };
+    IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptions classifyOptions = new IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptionsBuilder()
+      .classifierId(classifierId)
+      .collection(inputCollection)
+      .build();
+    IBMNaturalLanguageClassifierV1Models.ClassificationCollection classification = service.classifyCollection(classifyOptions);
     return classification;
   }
 

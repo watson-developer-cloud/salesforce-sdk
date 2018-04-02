@@ -41,6 +41,9 @@ private class IBMNaturalLanguageClassifierV1Test {
     Test.stopTest();
   }
 
+  /**
+   * Test classifying multiple phrases at once.
+   */
   static testMethod void testClassifyCollection() {
     String body = IBMWatsonMockResponses.ClassifyCollection();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
