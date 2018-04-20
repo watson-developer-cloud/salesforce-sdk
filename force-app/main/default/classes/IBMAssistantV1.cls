@@ -40,6 +40,8 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
+   * Get response to user input.
+   *
    * Get a response to a user's input.    There is no rate limit for this operation.
    *
    * @param messageOptions the {@link IBMAssistantV1Models.MessageOptions} containing the options for the call
@@ -161,7 +163,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * List workspaces.
    *
-   * List the workspaces associated with an Assistant service instance.    This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
+   * List the workspaces associated with a Watson Assistant service instance.    This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listWorkspacesOptions the {@link IBMAssistantV1Models.ListWorkspacesOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.WorkspaceCollection} with the response
