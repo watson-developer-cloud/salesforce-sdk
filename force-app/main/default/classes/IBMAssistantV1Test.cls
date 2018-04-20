@@ -31,9 +31,9 @@ private class IBMAssistantV1Test {
   private static Long systemResponseValue;
   private static String messageResponse;
   private static String nodeVisited;
-  private static Dtring nodeVisitedDetailsNode;
-  private static Dtring nodeVisitedDetailsTitle;
-  private static Dtring nodeVisitedDetailsCondition;
+  private static String nodeVisitedDetailsNode;
+  private static String nodeVisitedDetailsTitle;
+  private static String nodeVisitedDetailsCondition;
   private static String logMessageLevel;
   private static String logMessageText;
   private static String requestTimestamp;
