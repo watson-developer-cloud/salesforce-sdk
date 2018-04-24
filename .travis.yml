@@ -12,7 +12,6 @@ install:
 - wget -qO- $URL | tar xJ -C sfdx --strip-components 1
 - "./sfdx/install"
 - export PATH=./sfdx/$(pwd):$PATH
-- sfdx update
 - mv force-app/main/test/* force-app/main/default/classes
 
 script:
