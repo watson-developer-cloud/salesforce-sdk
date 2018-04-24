@@ -13,7 +13,7 @@ install:
 - tar xJf sfdx-linux-amd64.tar.xz -C sfdx --strip-components 1
 - sudo ./sfdx/install
 - export PATH=./sfdx/$(pwd):$PATH
-- sfdx update
+- sudo sfdx update
 - mv force-app/main/test/* force-app/main/default/classes
 
 script:
