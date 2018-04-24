@@ -11,7 +11,7 @@ install:
 - wget -q $URL
 - mkdir sfdx
 - tar xJf sfdx-linux-amd64.tar.xz -C sfdx --strip-components 1
-- "./sfdx/install"
+- sudo ./sfdx/install
 - export PATH=./sfdx/$(pwd):$PATH
 - sfdx update
 - mv force-app/main/test/* force-app/main/default/classes
