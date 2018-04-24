@@ -8,7 +8,7 @@ install:
 - export SFDX_USE_GENERIC_UNIX_KEYCHAIN=true
 - export SFDX_DOMAIN_RETRY=300
 - '[ "${TRAVIS_PULL_REQUEST}" = "false" ] && openssl aes-256-cbc -K $encrypted_65674265f95b_key -iv $encrypted_65674265f95b_iv -in assets/server.key.enc -out assets/server.key -d || true'
-- wget -q $URL
+- wget $URL -q -o /dev/null
 - tar -xvJf sfdx-cli-v6.12.0-8b887b22cc-linux-x64.tar.xz
 - cd sfdx
 - ./install
