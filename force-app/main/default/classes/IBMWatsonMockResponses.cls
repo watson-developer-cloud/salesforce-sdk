@@ -2410,4 +2410,68 @@ public class IBMWatsonMockResponses {
     ' ]' +
     '}';
   }
+
+  public static String queryEntitiesResponse() {
+    return '{' +
+      '"entities": [' +
+      '{' +
+        '"text": "Steve Jobs",' +
+        '"type": "PERSON",' +
+        '"evidence": [' +
+        '{' +
+          '"document_id": "cb77ce6b-bb93-42a0-8643-dfb523e14da8",' +
+          '"field": "description",' +
+          '"start_offset": 305,' +
+          '"end_offset": 392,' +
+          '"entities": [' +
+          '{' +
+            '"type": "Person",' +
+            '"text": "Steve Jobs",' +
+            '"start_offset": 311,' +
+            '"end_offset": 321' +
+          '}' +
+          ']' +
+        '}' +
+        ']' +
+      '}' +
+      ']' +
+    '}';
+  }
+
+  public static String queryRelationsResponse() {
+    return '{' +
+      '"relations": [' +
+      '{' +
+        '"type": "FOUNDEROF",' +
+        '"frequency": 7,' +
+        '"arguments": [' +
+        '{' +
+          '"entities": [' +
+          '{' +
+            '"type": "PERSON",' +
+            '"text": "Steve Jobs"' +
+          '}' +
+          ']' +
+        '}' +
+        '],' +
+        '"evidence": [' +
+        '{' +
+          '"document_id": "b95df4c1-d00f-4771-abb2-a52baea0444a",' +
+          '"field": "text",' +
+          '"start_offset": 243,' +
+          '"end_offset": 303,' +
+          '"entities": [' +
+          '{' +
+            '"type": "Person",' +
+            '"text": "Steve Jobs",' +
+            '"start_offset": 243,' +
+            '"end_offset": 253' +
+          '}' +
+          ']' +
+        '}' +
+        ']' +
+      '}' +
+      ']' +
+    '}';
+  }
 }

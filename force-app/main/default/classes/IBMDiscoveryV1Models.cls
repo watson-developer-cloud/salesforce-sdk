@@ -487,64 +487,6 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * Calculation.
-   */
-  public class Calculation extends IBMWatsonGenericModel {
-    private String field_serialized_name;
-    private Double value_serialized_name;
-    /**
-     * Gets the field_serialized_name.
-     *
-     * The field where the aggregation is located in the document.
-     *
-     * @return the field_serialized_name
-     */
-    @AuraEnabled
-    public String getField() {
-      return field_serialized_name;
-    }
-    /**
-     * Gets the value_serialized_name.
-     *
-     * Value of the aggregation.
-     *
-     * @return the value_serialized_name
-     */
-    @AuraEnabled
-    public Double getValue() {
-      return value_serialized_name;
-    }
-
-    /**
-     * Sets the field_serialized_name.
-     *
-     * @param field the new field
-     */
-    public void setField(final String field) {
-      this.field_serialized_name = field;
-    }
-
-    /**
-     * Sets the value_serialized_name.
-     *
-     * @param value the new value
-     */
-    public void setValue(final Double value) {
-      this.value_serialized_name = value;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Calculation ret = (Calculation) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
    * A collection for storing documents.
    */
   public class Collection extends IBMWatsonGenericModel {
@@ -5127,43 +5069,6 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * Filter.
-   */
-  public class Filter extends IBMWatsonGenericModel {
-    private String match_serialized_name;
-    /**
-     * Gets the match_serialized_name.
-     *
-     * The match the aggregated results queried for.
-     *
-     * @return the match_serialized_name
-     */
-    @AuraEnabled
-    public String getMatch() {
-      return match_serialized_name;
-    }
-
-    /**
-     * Sets the match_serialized_name.
-     *
-     * @param match the new match
-     */
-    public void setMatch(final String match) {
-      this.match_serialized_name = match;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Filter ret = (Filter) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
    * FontSetting.
    */
   public class FontSetting extends IBMWatsonGenericModel {
@@ -6004,64 +5909,6 @@ public class IBMDiscoveryV1Models {
     public GetTrainingExampleOptionsBuilder exampleId(String exampleId) {
       this.example_id_serialized_name = exampleId;
       return this;
-    }
-  }
-
-  /**
-   * Histogram.
-   */
-  public class Histogram extends IBMWatsonGenericModel {
-    private String field_serialized_name;
-    private Long interval_serialized_name;
-    /**
-     * Gets the field_serialized_name.
-     *
-     * The field where the aggregation is located in the document.
-     *
-     * @return the field_serialized_name
-     */
-    @AuraEnabled
-    public String getField() {
-      return field_serialized_name;
-    }
-    /**
-     * Gets the interval_serialized_name.
-     *
-     * Interval of the aggregation. (For 'histogram' type).
-     *
-     * @return the interval_serialized_name
-     */
-    @AuraEnabled
-    public Long getInterval() {
-      return interval_serialized_name;
-    }
-
-    /**
-     * Sets the field_serialized_name.
-     *
-     * @param field the new field
-     */
-    public void setField(final String field) {
-      this.field_serialized_name = field;
-    }
-
-    /**
-     * Sets the interval_serialized_name.
-     *
-     * @param interval the new interval
-     */
-    public void setInterval(final long interval) {
-      this.interval_serialized_name = interval;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Histogram ret = (Histogram) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
     }
   }
 
@@ -7436,43 +7283,6 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * Nested.
-   */
-  public class Nested extends IBMWatsonGenericModel {
-    private String path_serialized_name;
-    /**
-     * Gets the path_serialized_name.
-     *
-     * The area of the results the aggregation was restricted to.
-     *
-     * @return the path_serialized_name
-     */
-    @AuraEnabled
-    public String getPath() {
-      return path_serialized_name;
-    }
-
-    /**
-     * Sets the path_serialized_name.
-     *
-     * @param path the new path
-     */
-    public void setPath(final String path) {
-      this.path_serialized_name = path;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Nested ret = (Nested) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
    * An object that indicates the Categories enrichment will be applied to the specified field.
    */
   public class NluEnrichmentCategories extends IBMWatsonDynamicModel {
@@ -8442,10 +8252,114 @@ public class IBMDiscoveryV1Models {
    * An aggregation produced by the Discovery service to analyze the input provided.
    */
   public class QueryAggregation extends IBMWatsonGenericModel {
+    private Long count_serialized_name;
+    private String field_serialized_name;
+    private Double value_serialized_name;
+    private String match_serialized_name;
+    private String path_serialized_name;
+    private String interval_serialized_name;
+    private Boolean anomaly_serialized_name;
+    private Long size_serialized_name;
+    private TopHitsResults hits_serialized_name;
     private String type_serialized_name;
     private List<AggregationResult> results_serialized_name;
     private Long matching_results_serialized_name;
     private List<QueryAggregation> aggregations_serialized_name;
+    /**
+     * Gets the field_serialized_name.
+     *
+     * The field where the aggregation is located in the document.
+     *
+     * @return the field_serialized_name
+     */
+    @AuraEnabled
+    public String getField() {
+      return field_serialized_name;
+    }
+    /**
+     * Gets the count_serialized_name.
+     *
+     * @return the count_serialized_name
+     */
+    @AuraEnabled
+    public Long getCount() {
+      return count_serialized_name;
+    }
+    /**
+     * Gets the value_serialized_name.
+     *
+     * Value of the aggregation.
+     *
+     * @return the value_serialized_name
+     */
+    @AuraEnabled
+    public Double getValue() {
+      return value_serialized_name;
+    }
+    /**
+     * Gets the match_serialized_name.
+     *
+     * The match the aggregated results queried for.
+     *
+     * @return the match_serialized_name
+     */
+    @AuraEnabled
+    public String getMatch() {
+      return match_serialized_name;
+    }
+    /**
+     * Gets the path_serialized_name.
+     *
+     * The area of the results the aggregation was restricted to.
+     *
+     * @return the path_serialized_name
+     */
+    @AuraEnabled
+    public String getPath() {
+      return path_serialized_name;
+    }
+    /**
+     * Gets the interval_serialized_name.
+     *
+     * Interval of the aggregation. Valid date interval values are second/seconds minute/minutes, hour/hours, day/days, week/weeks, month/months, and year/years.
+     *
+     * @return the interval_serialized_name
+     */
+    @AuraEnabled
+    public String getInterval() {
+      return interval_serialized_name;
+    }
+    /**
+     * Gets the anomaly_serialized_name.
+     *
+     * Used to inducate that anomaly detection should be performed. Anomaly detection is used to locate unusual datapoints within a time series.
+     *
+     * @return the anomaly_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getAnomaly() {
+      return anomaly_serialized_name;
+    }
+    /**
+     * Gets the size_serialized_name.
+     *
+     * Number of top hits returned by the aggregation.
+     *
+     * @return the size_serialized_name
+     */
+    @AuraEnabled
+    public Long getSize() {
+      return size_serialized_name;
+    }
+    /**
+     * Gets the hits_serialized_name.
+     *
+     * @return the hits_serialized_name
+     */
+    @AuraEnabled
+    public TopHitsResults getHits() {
+      return hits_serialized_name;
+    }
     /**
      * Gets the type_serialized_name.
      *
@@ -8490,6 +8404,78 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
+     * Sets the value_serialized_name.
+     *
+     * @param value the new value
+     */
+    public void setValue(final Double value) {
+      this.value_serialized_name = value;
+    }
+
+    /**
+     * Sets the match_serialized_name.
+     *
+     * @param match the new match
+     */
+    public void setMatch(final String match) {
+      this.match_serialized_name = match;
+    }
+
+    /**
+     * Sets the path_serialized_name.
+     *
+     * @param path the new path
+     */
+    public void setPath(final String path) {
+      this.path_serialized_name = path;
+    }
+
+    /**
+     * Sets the field_serialized_name.
+     *
+     * @param field the new field
+     */
+    public void setField(final String field) {
+      this.field_serialized_name = field;
+    }
+
+    /**
+     * Sets the interval_serialized_name.
+     *
+     * @param interval the new interval
+     */
+    public void setInterval(final String interval) {
+      this.interval_serialized_name = interval;
+    }
+
+    /**
+     * Sets the anomaly_serialized_name.
+     *
+     * @param anomaly the new anomaly
+     */
+    public void setAnomaly(final Boolean anomaly) {
+      this.anomaly_serialized_name = anomaly;
+    }
+
+    /**
+     * Sets the size_serialized_name.
+     *
+     * @param size the new size
+     */
+    public void setSize(final long size) {
+      this.size_serialized_name = size;
+    }
+
+    /**
+     * Sets the hits_serialized_name.
+     *
+     * @param hits the new hits
+     */
+    public void setHits(final TopHitsResults hits) {
+      this.hits_serialized_name = hits;
+    }
+
+    /**
      * Sets the type_serialized_name.
      *
      * @param typeVar the new typeVar
@@ -8525,6 +8511,15 @@ public class IBMDiscoveryV1Models {
       this.aggregations_serialized_name = aggregations;
     }
 
+    /**
+     * Sets the count_serialized_name.
+     *
+     * @param count the new count
+     */
+    public void setCount(final long count) {
+      this.count_serialized_name = count;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -8557,6 +8552,10 @@ public class IBMDiscoveryV1Models {
         }
         ret.setAggregations(newAggregations);
       }
+
+      // calling custom deserializer for hits_serialized_name
+      TopHitsResults newHits = (TopHitsResults) new TopHitsResults().deserialize(JSON.serialize(ret.getHits()), (Map<String, Object>) jsonMap.get('hits_serialized_name'), TopHitsResults.class);
+      ret.setHits(newHits);
 
       return ret;
     }
@@ -12160,62 +12159,6 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * Term.
-   */
-  public class Term extends IBMWatsonGenericModel {
-    private String field_serialized_name;
-    private Long count_serialized_name;
-    /**
-     * Gets the field_serialized_name.
-     *
-     * The field where the aggregation is located in the document.
-     *
-     * @return the field_serialized_name
-     */
-    @AuraEnabled
-    public String getField() {
-      return field_serialized_name;
-    }
-    /**
-     * Gets the count_serialized_name.
-     *
-     * @return the count_serialized_name
-     */
-    @AuraEnabled
-    public Long getCount() {
-      return count_serialized_name;
-    }
-
-    /**
-     * Sets the field_serialized_name.
-     *
-     * @param field the new field
-     */
-    public void setField(final String field) {
-      this.field_serialized_name = field;
-    }
-
-    /**
-     * Sets the count_serialized_name.
-     *
-     * @param count the new count
-     */
-    public void setCount(final long count) {
-      this.count_serialized_name = count;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Term ret = (Term) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
    * The testConfigurationInEnvironment options.
    */
   public class TestConfigurationInEnvironmentOptions {
@@ -12594,145 +12537,6 @@ public class IBMDiscoveryV1Models {
         }
         ret.setNotices(newNotices);
       }
-
-      return ret;
-    }
-  }
-
-  /**
-   * Timeslice.
-   */
-  public class Timeslice extends IBMWatsonGenericModel {
-    private String field_serialized_name;
-    private String interval_serialized_name;
-    private Boolean anomaly_serialized_name;
-    /**
-     * Gets the field_serialized_name.
-     *
-     * The field where the aggregation is located in the document.
-     *
-     * @return the field_serialized_name
-     */
-    @AuraEnabled
-    public String getField() {
-      return field_serialized_name;
-    }
-    /**
-     * Gets the interval_serialized_name.
-     *
-     * Interval of the aggregation. Valid date interval values are second/seconds minute/minutes, hour/hours, day/days, week/weeks, month/months, and year/years.
-     *
-     * @return the interval_serialized_name
-     */
-    @AuraEnabled
-    public String getInterval() {
-      return interval_serialized_name;
-    }
-    /**
-     * Gets the anomaly_serialized_name.
-     *
-     * Used to inducate that anomaly detection should be performed. Anomaly detection is used to locate unusual datapoints within a time series.
-     *
-     * @return the anomaly_serialized_name
-     */
-    @AuraEnabled
-    public Boolean getAnomaly() {
-      return anomaly_serialized_name;
-    }
-
-    /**
-     * Sets the field_serialized_name.
-     *
-     * @param field the new field
-     */
-    public void setField(final String field) {
-      this.field_serialized_name = field;
-    }
-
-    /**
-     * Sets the interval_serialized_name.
-     *
-     * @param interval the new interval
-     */
-    public void setInterval(final String interval) {
-      this.interval_serialized_name = interval;
-    }
-
-    /**
-     * Sets the anomaly_serialized_name.
-     *
-     * @param anomaly the new anomaly
-     */
-    public void setAnomaly(final Boolean anomaly) {
-      this.anomaly_serialized_name = anomaly;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Timeslice ret = (Timeslice) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
-   * TopHits.
-   */
-  public class TopHits extends IBMWatsonGenericModel {
-    private Long size_serialized_name;
-    private TopHitsResults hits_serialized_name;
-    /**
-     * Gets the size_serialized_name.
-     *
-     * Number of top hits returned by the aggregation.
-     *
-     * @return the size_serialized_name
-     */
-    @AuraEnabled
-    public Long getSize() {
-      return size_serialized_name;
-    }
-    /**
-     * Gets the hits_serialized_name.
-     *
-     * @return the hits_serialized_name
-     */
-    @AuraEnabled
-    public TopHitsResults getHits() {
-      return hits_serialized_name;
-    }
-
-    /**
-     * Sets the size_serialized_name.
-     *
-     * @param size the new size
-     */
-    public void setSize(final long size) {
-      this.size_serialized_name = size;
-    }
-
-    /**
-     * Sets the hits_serialized_name.
-     *
-     * @param hits the new hits
-     */
-    public void setHits(final TopHitsResults hits) {
-      this.hits_serialized_name = hits;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      TopHits ret = (TopHits) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for hits_serialized_name
-      TopHitsResults newHits = (TopHitsResults) new TopHitsResults().deserialize(JSON.serialize(ret.getHits()), (Map<String, Object>) jsonMap.get('hits_serialized_name'), TopHitsResults.class);
-      ret.setHits(newHits);
 
       return ret;
     }

@@ -299,22 +299,47 @@ private class IBMDiscoveryV1Test {
     discovery.setUsernameAndPassword('username', 'password');
     IBMDiscoveryV1Models.Enrichment enrichment = new IBMDiscoveryV1Models.Enrichment();
     enrichment.setDescription('test Description');
-    IBMDiscoveryV1Models.NormalizationOperation normalizationOperation = new IBMDiscoveryV1Models.NormalizationOperation();
-    normalizationOperation.setOperation('test operation');
     IBMDiscoveryV1Models.Conversions conversions = new IBMDiscoveryV1Models.Conversions();
+    IBMDiscoveryV1Models.HtmlSettings html = new IBMDiscoveryV1Models.HtmlSettings();
+    IBMDiscoveryV1Models.XPathPatterns patterns = new IBMDiscoveryV1Models.XPathPatterns();
+    patterns.setXpaths(new List<String>{ 'xpath' });
+    html.setExcludeContent(patterns);
+    html.setExcludeTagAttributes(new List<String>{ 'attribute' });
+    html.setExcludeTagsCompletely(new List<String>{ 'tag' });
+    html.setExcludeTagsKeepContent(new List<String>{ 'tag' });
+    html.setKeepContent(patterns);
+    html.setKeepTagAttributes(new List<String>{ 'tag' });
+    conversions.setHtml(html);
+    IBMDiscoveryV1Models.NormalizationOperation normalizationOperation = new IBMDiscoveryV1Models.NormalizationOperation();
+    normalizationOperation.setDestinationField('field');
+    normalizationOperation.setOperation('operation');
+    normalizationOperation.setSourceField('field');
+    conversions.setJsonNormalizations(new List<IBMDiscoveryV1Models.NormalizationOperation>{ normalizationOperation });
     IBMDiscoveryV1Models.PdfSettings pdfSettings = new IBMDiscoveryV1Models.PdfSettings();
     IBMDiscoveryV1Models.PdfHeadingDetection pdfHeadingDetection = new IBMDiscoveryV1Models.PdfHeadingDetection();
     IBMDiscoveryV1Models.FontSetting fontSetting = new IBMDiscoveryV1Models.FontSetting();
-    fontSetting.setLevel(1);
-    fontSetting.setMinSize(4);
-    fontSetting.setMaxSize(10);
     fontSetting.setBold(true);
     fontSetting.setItalic(true);
-    fontSetting.setName('ariel');
-    List<IBMDiscoveryV1Models.FontSetting> fontSettings= new List<IBMDiscoveryV1Models.FontSetting>{fontSetting};
-    pdfHeadingDetection.setFonts(fontSettings);
+    fontSetting.setLevel(10);
+    fontSetting.setMaxSize(10);
+    fontSetting.setMinSize(10);
+    fontSetting.setName('name');
+    pdfHeadingDetection.setFonts(new List<IBMDiscoveryV1Models.FontSetting>{ fontSetting });
     pdfSettings.setHeading(pdfHeadingDetection);
     conversions.setPdf(pdfSettings);
+    IBMDiscoveryV1Models.SegmentSettings segment = new IBMDiscoveryV1Models.SegmentSettings();
+    segment.setEnabled(true);
+    segment.setSelectorTags(new List<String>{ 'tag' });
+    conversions.setSegment(segment);
+    IBMDiscoveryV1Models.WordSettings word = new IBMDiscoveryV1Models.WordSettings();
+    IBMDiscoveryV1Models.WordHeadingDetection wordHeading = new IBMDiscoveryV1Models.WordHeadingDetection();
+    wordHeading.setFonts(new List<IBMDiscoveryV1Models.FontSetting>{ fontSetting });
+    IBMDiscoveryV1Models.WordStyle style = new IBMDiscoveryV1Models.WordStyle();
+    style.setLevel(10);
+    style.setNames(new List<String>{ 'name' });
+    wordHeading.setStyles(new List<IBMDiscoveryV1Models.WordStyle>{ style });
+    word.setHeading(wordHeading);
+    conversions.setWord(word);
     IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .name('test_environment')
@@ -857,7 +882,7 @@ private class IBMDiscoveryV1Test {
       discovery.federatedQueryNotices(options);
     System.assertEquals(resp.getResults().size(), 1);
     resp.setMatchingResults(4);
-    IBMDiscoveryV1Models.QueryNoticesResult queryNoticesResult= new IBMDiscoveryV1Models.QueryNoticesResult();
+    IBMDiscoveryV1Models.QueryNoticesResult queryNoticesResult = new IBMDiscoveryV1Models.QueryNoticesResult();
     queryNoticesResult.setId('5ae96bb9-80e5-43ea-916e-1f3412fbc283');
     queryNoticesResult.setScore(2);
     IBMWatsonMapModel mapModel= new IBMWatsonMapModel();
@@ -869,6 +894,15 @@ private class IBMDiscoveryV1Test {
     queryAggregation.setType('test');
     queryAggregation.setField('test');
     queryAggregation.setMatch('test');
+    queryAggregation.setCount(10);
+    queryAggregation.setValue(10);
+    queryAggregation.setPath('test');
+    queryAggregation.setInterval('test');
+    queryAggregation.setAnomaly(true);
+    queryAggregation.setSize(10);
+    IBMDiscoveryV1Models.TopHitsResults hits = new IBMDiscoveryV1Models.TopHitsResults();
+    hits.setMatchingResults(10);
+    queryAggregation.setHits(hits);
     queryAggregation.setMatchingResults(4);
     IBMDiscoveryV1Models.AggregationResult aggregationResult= new IBMDiscoveryV1Models.AggregationResult();
     aggregationResult.setKey('test');
@@ -900,6 +934,13 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(queryAggregation.getType(), 'test');
     System.assertEquals(queryAggregation.getField(), 'test');
     System.assertEquals(queryAggregation.getMatch(), 'test');
+    System.assertEquals(queryAggregation.getCount(), 10);
+    System.assertEquals(queryAggregation.getValue(), 10);
+    System.assertEquals(queryAggregation.getPath(), 'test');
+    System.assertEquals(queryAggregation.getInterval(), 'test');
+    System.assertEquals(queryAggregation.getAnomaly(), true);
+    System.assertEquals(queryAggregation.getSize(), 10);
+    System.assert(queryAggregation.getHits() != null);
     System.assertEquals(queryAggregation.getMatchingResults(), 4);
     System.assertEquals(queryPassages.getDocumentId(), '5ae96bb9-80e5-43ea-916e-1f3412fbc283');
     System.assertEquals(queryPassages.getPassageText(), 'test');
@@ -969,6 +1010,18 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.QueryNoticesResponse resp =
       discovery.queryNotices(options);
     System.assertEquals(resp.getResults().size(), 1);
+    System.assertEquals('030ba125-29db-43f2-8552-f941ae30a7a8', resp.getResults().get(0).getId());
+    System.assertEquals('f1360220-ea2d-4271-9d62-89a910b13c37', resp.getResults().get(0).getCollectionId());
+    System.assertEquals(200, resp.getResults().get(0).getCode());
+    System.assertEquals(1, resp.getResults().get(0).getScore());
+    System.assertEquals('instructions.html', resp.getResults().get(0).getFilename());
+    System.assertEquals('html', resp.getResults().get(0).getFileType());
+    System.assertEquals('de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3', resp.getResults().get(0).getSha1());
+    System.assertEquals('xpath_not_found', resp.getResults().get(0).getNotices().get(0).getNoticeId());
+    System.assertEquals('030ba125-29db-43f2-8552-f941ae30a7a8', resp.getResults().get(0).getNotices().get(0).getDocumentId());
+    System.assertEquals('warning', resp.getResults().get(0).getNotices().get(0).getSeverity());
+    System.assertEquals('html-to-html', resp.getResults().get(0).getNotices().get(0).getStep());
+    System.assertEquals('The xpath expression boom was not found.', resp.getResults().get(0).getNotices().get(0).getDescription());
     Test.stopTest();
   }
 
@@ -1609,6 +1662,96 @@ private class IBMDiscoveryV1Test {
         .build();
     discovery.deleteExpansions(deleteOptions);
 
+    Test.stopTest();
+  }
+
+  static testMethod void testQueryEntities() {
+    String body = IBMWatsonMockResponses.queryEntitiesResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    IBMDiscoveryV1Models.QueryEntitiesContext context = new IBMDiscoveryV1Models.QueryEntitiesContext();
+    context.setText('text');
+    IBMDiscoveryV1Models.QueryEntitiesEntity entity = new IBMDiscoveryV1Models.QueryEntitiesEntity();
+    entity.setType('type');
+    entity.setText('text');
+    IBMDiscoveryV1Models.QueryEntitiesOptions options = new IBMDiscoveryV1Models.QueryEntitiesOptionsBuilder()
+      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .context(context)
+      .count(10)
+      .entity(entity)
+      .evidenceCount(10)
+      .feature('feature')
+      .build();
+    IBMDiscoveryV1Models.QueryEntitiesResponse resp = discovery.queryEntities(options);
+
+    System.assertEquals(1, resp.getEntities().size());
+    System.assertEquals('Steve Jobs', resp.getEntities().get(0).getText());
+    System.assertEquals('PERSON', resp.getEntities().get(0).getType());
+    System.assertEquals(1, resp.getEntities().get(0).getEvidence().size());
+    System.assertEquals('cb77ce6b-bb93-42a0-8643-dfb523e14da8', resp.getEntities().get(0).getEvidence().get(0).getDocumentId());
+    System.assertEquals('description', resp.getEntities().get(0).getEvidence().get(0).getField());
+    System.assertEquals(305, resp.getEntities().get(0).getEvidence().get(0).getStartOffset());
+    System.assertEquals(392, resp.getEntities().get(0).getEvidence().get(0).getEndOffset());
+    System.assertEquals('Person', resp.getEntities().get(0).getEvidence().get(0).getEntities().get(0).getType());
+    System.assertEquals('Steve Jobs', resp.getEntities().get(0).getEvidence().get(0).getEntities().get(0).getText());
+    System.assertEquals(311, resp.getEntities().get(0).getEvidence().get(0).getEntities().get(0).getStartOffset());
+    System.assertEquals(321, resp.getEntities().get(0).getEvidence().get(0).getEntities().get(0).getEndOffset());
+    Test.stopTest();
+  }
+
+  static testMethod void testQueryRelations() {
+    String body = IBMWatsonMockResponses.queryRelationsResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    IBMDiscoveryV1Models.QueryEntitiesContext context = new IBMDiscoveryV1Models.QueryEntitiesContext();
+    context.setText('text');
+    IBMDiscoveryV1Models.QueryRelationsEntity entity = new IBMDiscoveryV1Models.QueryRelationsEntity();
+    entity.setType('text');
+    entity.setExact(true);
+    entity.setText('text');
+    IBMDiscoveryV1Models.QueryFilterType filterType = new IBMDiscoveryV1Models.QueryFilterType();
+    filterType.setInclude(new List<String>{ 'include' });
+    filterType.setExclude(new List<String>{ 'exclude' });
+    IBMDiscoveryV1Models.QueryRelationsFilter filter = new IBMDiscoveryV1Models.QueryRelationsFilter();
+    filter.setDocumentIds(new List<String>{ 'id' });
+    filter.setEntityTypes(filterType);
+    filter.setRelationTypes(filterType);
+    IBMDiscoveryV1Models.QueryRelationsOptions options = new IBMDiscoveryV1Models.QueryRelationsOptionsBuilder()
+      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .addEntities(entity)
+      .context(context)
+      .count(10)
+      .evidenceCount(10)
+      .filter(filter)
+      .sortField('text')
+      .build();
+    IBMDiscoveryV1Models.QueryRelationsResponse resp = discovery.queryRelations(options);
+
+    System.assertEquals(1, resp.getRelations().size());
+    System.assertEquals('FOUNDEROF', resp.getRelations().get(0).getType());
+    System.assertEquals(7, resp.getRelations().get(0).getFrequency());
+    System.assertEquals('PERSON', resp.getRelations().get(0).getArguments().get(0).getEntities().get(0).getType());
+    System.assertEquals('Steve Jobs', resp.getRelations().get(0).getArguments().get(0).getEntities().get(0).getText());
+    System.assertEquals('b95df4c1-d00f-4771-abb2-a52baea0444a', resp.getRelations().get(0).getEvidence().get(0).getDocumentId());
+    System.assertEquals('text', resp.getRelations().get(0).getEvidence().get(0).getField());
+    System.assertEquals(243, resp.getRelations().get(0).getEvidence().get(0).getStartOffset());
+    System.assertEquals(303, resp.getRelations().get(0).getEvidence().get(0).getEndOffset());
+    System.assertEquals('Person', resp.getRelations().get(0).getEvidence().get(0).getEntities().get(0).getType());
+    System.assertEquals('Steve Jobs', resp.getRelations().get(0).getEvidence().get(0).getEntities().get(0).getText());
+    System.assertEquals(243, resp.getRelations().get(0).getEvidence().get(0).getEntities().get(0).getStartOffset());
+    System.assertEquals(253, resp.getRelations().get(0).getEvidence().get(0).getEntities().get(0).getEndOffset());
     Test.stopTest();
   }
 }
