@@ -6865,6 +6865,7 @@ public class IBMSpeechToTextV1Models {
     private Boolean smart_formatting_serialized_name;
     private String customization_id_serialized_name;
     private Boolean speaker_labels_serialized_name;
+    private String base_model_version_serialized_name;
 
     public IBMWatsonFile audio() {
       return audio_serialized_name;
@@ -6934,6 +6935,10 @@ public class IBMSpeechToTextV1Models {
       return speaker_labels_serialized_name;
     }
 
+    public String baseModelVersion() {
+      return base_model_version_serialized_name;
+    }
+
     private RecognizeOptions(RecognizeOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be empty');
       IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be empty');
@@ -6955,6 +6960,7 @@ public class IBMSpeechToTextV1Models {
       smart_formatting_serialized_name = builder.smart_formatting_serialized_name;
       customization_id_serialized_name = builder.customization_id_serialized_name;
       speaker_labels_serialized_name = builder.speaker_labels_serialized_name;
+      base_model_version_serialized_name = builder.base_model_version_serialized_name;
     }
 
     public RecognizeOptionsBuilder newBuilder() {
@@ -6980,6 +6986,7 @@ public class IBMSpeechToTextV1Models {
     private Boolean smart_formatting_serialized_name;
     private String customization_id_serialized_name;
     private Boolean speaker_labels_serialized_name;
+    private String base_model_version_serialized_name;
 
     private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
       audio_serialized_name = recognizeOptions.audio_serialized_name;
@@ -6999,6 +7006,7 @@ public class IBMSpeechToTextV1Models {
       smart_formatting_serialized_name = recognizeOptions.smart_formatting_serialized_name;
       customization_id_serialized_name = recognizeOptions.customization_id_serialized_name;
       speaker_labels_serialized_name = recognizeOptions.speaker_labels_serialized_name;
+      base_model_version_serialized_name = recognizeOptions.base_model_version_serialized_name;
     }
 
     public RecognizeOptionsBuilder() {
@@ -7096,6 +7104,11 @@ public class IBMSpeechToTextV1Models {
 
     public RecognizeOptionsBuilder speakerLabels(Boolean speakerLabels) {
       this.speaker_labels_serialized_name = speakerLabels;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder baseModelVersion(String baseModelVersion) {
+      this.base_model_version_serialized_name = baseModelVersion;
       return this;
     }
   }
