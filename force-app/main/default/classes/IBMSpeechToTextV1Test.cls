@@ -123,6 +123,7 @@ private class IBMSpeechToTextV1Test {
       .profanityFilter(true)
       .smartFormatting(true)
       .speakerLabels(true)
+      .version('version')
       .build();
     IBMSpeechToTextV1Models.RecognitionJob createJob = speechToText.createJob(createJobOptions);
     System.assertEquals(createJob.getUrl(), 'string');
@@ -894,6 +895,7 @@ private class IBMSpeechToTextV1Test {
       .smartFormatting(true)
       .customizationId(customizationId)
       .speakerLabels(true)
+      .baseModelVersion('version')
       .build();
     IBMSpeechToTextV1Models.SpeechResults speechResults = speechToText.recognize(recognizeOptions);
     System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getStartTime(),0.09);
