@@ -68,7 +68,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the type_hierarchy_serialized_name.
      *
-     * Knowledge graph of the property. For example, `People/Leaders/Presidents/USA/Barack Obama`. Included only if identified.
+     * Knowledge graph of the property. For example, `/fruit/pome/apple/eating apple/Granny Smith`. Included only if identified.
      *
      * @return the type_hierarchy_serialized_name
      */
@@ -830,7 +830,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the classifier_ids_serialized_name.
      *
-     * Which classifiers to apply. Overrides the **owners** parameter. You can specify both custom and built-in classifiers. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.  The following built-in classifier IDs require no training: - `default`: Returns classes from thousands of general tags. - `food`: (Beta) Enhances specificity and accuracy for images of food items. - `explicit`: (Beta) Evaluates whether the image might be pornographic.
+     * Which classifiers to apply. Overrides the **owners** parameter. You can specify both custom and built-in classifier IDs. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.  The following built-in classifier IDs require no training: - `default`: Returns classes from thousands of general tags. - `food`: (Beta) Enhances specificity and accuracy for images of food items. - `explicit`: (Beta) Evaluates whether the image might be pornographic.
      *
      * @return the classifier_ids_serialized_name
      */
@@ -1323,7 +1323,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the images_file_serialized_name.
      *
-     * An image file (.jpg, .png) or .zip file with images. Include no more than 15 images. All faces are detected, but if there are more than 10 faces in an image, age and gender confidence scores might return scores of 0.  You can also include an image with the **url** parameter.
+     * An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to 100 MB. You can include a maximum of 15 images in a request.  Encode the image and .zip file names in UTF-8 if they contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.  You can also include an image with the **url** parameter.
      *
      * @return the images_file_serialized_name
      */
@@ -1343,7 +1343,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the url_serialized_name.
      *
-     * The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel density is 32X32 pixels per inch, and the maximum image size is 2 MB.  You can also include images with the **images_file** parameter.
+     * The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed, so you can use a shortened URL.  You can also include images with the **images_file** parameter.
      *
      * @return the url_serialized_name
      */
@@ -1669,7 +1669,6 @@ public class IBMVisualRecognitionV3Models {
     private FaceAge age_serialized_name;
     private FaceGender gender_serialized_name;
     private FaceLocation face_location_serialized_name;
-    private FaceIdentity identity_serialized_name;
     /**
      * Gets the age_serialized_name.
      *
@@ -1696,15 +1695,6 @@ public class IBMVisualRecognitionV3Models {
     @AuraEnabled
     public FaceLocation getFaceLocation() {
       return face_location_serialized_name;
-    }
-    /**
-     * Gets the identity_serialized_name.
-     *
-     * @return the identity_serialized_name
-     */
-    @AuraEnabled
-    public FaceIdentity getIdentity() {
-      return identity_serialized_name;
     }
 
     /**
@@ -1734,15 +1724,6 @@ public class IBMVisualRecognitionV3Models {
       this.face_location_serialized_name = faceLocation;
     }
 
-    /**
-     * Sets the identity_serialized_name.
-     *
-     * @param identity the new identity
-     */
-    public void setIdentity(final FaceIdentity identity) {
-      this.identity_serialized_name = identity;
-    }
-
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -1762,16 +1743,12 @@ public class IBMVisualRecognitionV3Models {
       FaceLocation newFaceLocation = (FaceLocation) new FaceLocation().deserialize(JSON.serialize(ret.getFaceLocation()), (Map<String, Object>) jsonMap.get('face_location_serialized_name'), FaceLocation.class);
       ret.setFaceLocation(newFaceLocation);
 
-      // calling custom deserializer for identity_serialized_name
-      FaceIdentity newIdentity = (FaceIdentity) new FaceIdentity().deserialize(JSON.serialize(ret.getIdentity()), (Map<String, Object>) jsonMap.get('identity_serialized_name'), FaceIdentity.class);
-      ret.setIdentity(newIdentity);
-
       return ret;
     }
   }
 
   /**
-   * Provides age information about a face. If there are more than 10 faces in an image, the response might return the confidence score `0`.
+   * Provides age information about a face.
    */
   public class FaceAge extends IBMWatsonGenericModel {
     private Long min_serialized_name;
@@ -1802,7 +1779,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the score_serialized_name.
      *
-     * Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
+     * Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for the property.
      *
      * @return the score_serialized_name
      */
@@ -1850,7 +1827,7 @@ public class IBMVisualRecognitionV3Models {
   }
 
   /**
-   * Provides information about the gender of the face. If there are more than 10 faces in an image, the response might return the confidence score 0.
+   * Provides information about the gender of the face.
    */
   public class FaceGender extends IBMWatsonGenericModel {
     private String gender_serialized_name;
@@ -1869,7 +1846,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the score_serialized_name.
      *
-     * Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
+     * Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for the property.
      *
      * @return the score_serialized_name
      */
@@ -1902,85 +1879,6 @@ public class IBMVisualRecognitionV3Models {
       }
 
       FaceGender ret = (FaceGender) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
-   * Provides information about a celebrity who is detected in the image. Not returned when a celebrity is not detected.
-   */
-  public class FaceIdentity extends IBMWatsonGenericModel {
-    private String name_serialized_name;
-    private Double score_serialized_name;
-    private String type_hierarchy_serialized_name;
-    /**
-     * Gets the name_serialized_name.
-     *
-     * Name of the person.
-     *
-     * @return the name_serialized_name
-     */
-    @AuraEnabled
-    public String getName() {
-      return name_serialized_name;
-    }
-    /**
-     * Gets the score_serialized_name.
-     *
-     * Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
-     *
-     * @return the score_serialized_name
-     */
-    @AuraEnabled
-    public Double getScore() {
-      return score_serialized_name;
-    }
-    /**
-     * Gets the type_hierarchy_serialized_name.
-     *
-     * Knowledge graph of the property. For example, `People/Leaders/Presidents/USA/Barack Obama`. Included only if identified.
-     *
-     * @return the type_hierarchy_serialized_name
-     */
-    @AuraEnabled
-    public String getTypeHierarchy() {
-      return type_hierarchy_serialized_name;
-    }
-
-    /**
-     * Sets the name_serialized_name.
-     *
-     * @param name the new name
-     */
-    public void setName(final String name) {
-      this.name_serialized_name = name;
-    }
-
-    /**
-     * Sets the score_serialized_name.
-     *
-     * @param score the new score
-     */
-    public void setScore(final Double score) {
-      this.score_serialized_name = score;
-    }
-
-    /**
-     * Sets the type_hierarchy_serialized_name.
-     *
-     * @param typeHierarchy the new typeHierarchy
-     */
-    public void setTypeHierarchy(final String typeHierarchy) {
-      this.type_hierarchy_serialized_name = typeHierarchy;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      FaceIdentity ret = (FaceIdentity) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
