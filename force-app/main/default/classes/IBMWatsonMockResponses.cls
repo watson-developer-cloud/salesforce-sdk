@@ -657,7 +657,8 @@ public class IBMWatsonMockResponses {
           '"nodes_visited_details": [' +
           '{' +
             '"dialog_node": "node",' +
-            '"title": "node_title"' +
+            '"title": "node_title",' +
+            '"conditions": "#condition"' +
           '}' +  
           ']' +
         '}' +
@@ -710,7 +711,9 @@ public class IBMWatsonMockResponses {
           '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1", ' +
           '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1", ' +
           '"total": 1, ' +
-          '"matched": 1' +
+          '"matched": 1,' +
+          '"next_cursor": "next_cursor",' +
+          '"refresh_cursor": "refresh_cursor"' +
         '}' +
         '}';
   }
@@ -1004,7 +1007,9 @@ public class IBMWatsonMockResponses {
         '], ' +
         '"pagination": {' +
           '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1", ' +
-          '"matched": 1' +
+          '"matched": 1,' +
+          '"next_cursor": "next_cursor",' +
+          '"refresh_cursor": "refresh_cursor"' +
         '}' +
       '}';
   }

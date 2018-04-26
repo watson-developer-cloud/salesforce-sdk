@@ -58,7 +58,7 @@ public class IBMConversationV1Models {
   }
 
   /**
-   * Context information for the message. Include the context from the previous response to maintain state for the conversation.
+   * State information for the conversation. To maintain state, include the context from the previous response.
    */
   public class Context extends IBMWatsonDynamicModel {
     private String conversation_id_serialized_name;
@@ -217,7 +217,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the pagination_serialized_name.
      *
-     * An object defining the pagination data for the returned objects.
+     * The pagination data for the returned objects.
      *
      * @return the pagination_serialized_name
      */
@@ -280,7 +280,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The text of a user input marked as irrelevant input.
+     * The text of a user input marked as irrelevant input. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters  - It cannot consist of only whitespace characters  - It must be no longer than 1024 characters.
      *
      * @return the text_serialized_name
      */
@@ -358,7 +358,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -368,7 +368,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The text of a user input marked as irrelevant input.
+     * The text of a user input marked as irrelevant input. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters  - It cannot consist of only whitespace characters  - It must be no longer than 1024 characters.
      *
      * @return the text_serialized_name
      */
@@ -472,10 +472,13 @@ public class IBMConversationV1Models {
     private String type_serialized_name;
     private String event_name_serialized_name;
     private String variable_serialized_name;
+    private String digress_in_serialized_name;
+    private String digress_out_serialized_name;
+    private String digress_out_slots_serialized_name;
     /**
      * Gets the dialog_node_serialized_name.
      *
-     * The dialog node ID.
+     * The dialog node ID. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 1024 characters.
      *
      * @return the dialog_node_serialized_name
      */
@@ -485,7 +488,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the dialog node.
+     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -495,7 +498,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the conditions_serialized_name.
      *
-     * The condition that will trigger the dialog node.
+     * The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.
      *
      * @return the conditions_serialized_name
      */
@@ -505,7 +508,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the parent_serialized_name.
      *
-     * The ID of the parent dialog node (if any).
+     * The ID of the parent dialog node.
      *
      * @return the parent_serialized_name
      */
@@ -515,7 +518,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the previous_sibling_serialized_name.
      *
-     * The previous dialog node.
+     * The ID of the previous dialog node.
      *
      * @return the previous_sibling_serialized_name
      */
@@ -525,7 +528,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the output_serialized_name.
      *
-     * The output of the dialog node.
+     * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
      *
      * @return the output_serialized_name
      */
@@ -555,7 +558,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the next_step_serialized_name.
      *
-     * The next step to execute following this dialog node.
+     * The next step to be executed in dialog processing.
      *
      * @return the next_step_serialized_name
      */
@@ -565,7 +568,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the actions_serialized_name.
      *
-     * The actions for the dialog node.
+     * An array of objects describing any actions to be invoked by the dialog node.
      *
      * @return the actions_serialized_name
      */
@@ -575,7 +578,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the title_serialized_name.
      *
-     * The alias used to identify the dialog node.
+     * The alias used to identify the dialog node. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 64 characters.
      *
      * @return the title_serialized_name
      */
@@ -612,6 +615,36 @@ public class IBMConversationV1Models {
     public String variable() {
       return variable_serialized_name;
     }
+    /**
+     * Gets the digress_in_serialized_name.
+     *
+     * Whether this top-level dialog node can be digressed into.
+     *
+     * @return the digress_in_serialized_name
+     */
+    public String digressIn() {
+      return digress_in_serialized_name;
+    }
+    /**
+     * Gets the digress_out_serialized_name.
+     *
+     * Whether this dialog node can be returned to after a digression.
+     *
+     * @return the digress_out_serialized_name
+     */
+    public String digressOut() {
+      return digress_out_serialized_name;
+    }
+    /**
+     * Gets the digress_out_slots_serialized_name.
+     *
+     * Whether the user can digress to top-level nodes while filling out slots.
+     *
+     * @return the digress_out_slots_serialized_name
+     */
+    public String digressOutSlots() {
+      return digress_out_slots_serialized_name;
+    }
     private CreateDialogNode(CreateDialogNodeBuilder builder) {
       IBMWatsonValidator.notNull(builder.dialog_node_serialized_name, 'dialog_node_serialized_name cannot be null');
       dialog_node_serialized_name = builder.dialog_node_serialized_name;
@@ -628,6 +661,9 @@ public class IBMConversationV1Models {
       type_serialized_name = builder.type_serialized_name;
       event_name_serialized_name = builder.event_name_serialized_name;
       variable_serialized_name = builder.variable_serialized_name;
+      digress_in_serialized_name = builder.digress_in_serialized_name;
+      digress_out_serialized_name = builder.digress_out_serialized_name;
+      digress_out_slots_serialized_name = builder.digress_out_slots_serialized_name;
     }
 
     /**
@@ -659,6 +695,9 @@ public class IBMConversationV1Models {
     private String type_serialized_name;
     private String event_name_serialized_name;
     private String variable_serialized_name;
+    private String digress_in_serialized_name;
+    private String digress_out_serialized_name;
+    private String digress_out_slots_serialized_name;
 
     private CreateDialogNodeBuilder(CreateDialogNode createDialogNode) {
       dialog_node_serialized_name = createDialogNode.dialog_node_serialized_name;
@@ -675,6 +714,9 @@ public class IBMConversationV1Models {
       type_serialized_name = createDialogNode.type_serialized_name;
       event_name_serialized_name = createDialogNode.event_name_serialized_name;
       variable_serialized_name = createDialogNode.variable_serialized_name;
+      digress_in_serialized_name = createDialogNode.digress_in_serialized_name;
+      digress_out_serialized_name = createDialogNode.digress_out_serialized_name;
+      digress_out_slots_serialized_name = createDialogNode.digress_out_slots_serialized_name;
     }
 
     /**
@@ -870,6 +912,39 @@ public class IBMConversationV1Models {
       this.variable_serialized_name = variable;
       return this;
     }
+
+    /**
+     * Set the digress_in_serialized_name.
+     *
+     * @param digressIn the digressIn
+     * @return the CreateDialogNode builder
+     */
+    public CreateDialogNodeBuilder digressIn(String digressIn) {
+      this.digress_in_serialized_name = digressIn;
+      return this;
+    }
+
+    /**
+     * Set the digress_out_serialized_name.
+     *
+     * @param digressOut the digressOut
+     * @return the CreateDialogNode builder
+     */
+    public CreateDialogNodeBuilder digressOut(String digressOut) {
+      this.digress_out_serialized_name = digressOut;
+      return this;
+    }
+
+    /**
+     * Set the digress_out_slots_serialized_name.
+     *
+     * @param digressOutSlots the digressOutSlots
+     * @return the CreateDialogNode builder
+     */
+    public CreateDialogNodeBuilder digressOutSlots(String digressOutSlots) {
+      this.digress_out_slots_serialized_name = digressOutSlots;
+      return this;
+    }
   }
 
   /**
@@ -891,10 +966,13 @@ public class IBMConversationV1Models {
     private String type_serialized_name;
     private String event_name_serialized_name;
     private String variable_serialized_name;
+    private String digress_in_serialized_name;
+    private String digress_out_serialized_name;
+    private String digress_out_slots_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -904,7 +982,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the dialog_node_serialized_name.
      *
-     * The dialog node ID.
+     * The dialog node ID. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 1024 characters.
      *
      * @return the dialog_node_serialized_name
      */
@@ -914,7 +992,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the dialog node.
+     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -924,7 +1002,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the conditions_serialized_name.
      *
-     * The condition that will trigger the dialog node.
+     * The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.
      *
      * @return the conditions_serialized_name
      */
@@ -934,7 +1012,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the parent_serialized_name.
      *
-     * The ID of the parent dialog node (if any).
+     * The ID of the parent dialog node.
      *
      * @return the parent_serialized_name
      */
@@ -944,7 +1022,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the previous_sibling_serialized_name.
      *
-     * The previous dialog node.
+     * The ID of the previous dialog node.
      *
      * @return the previous_sibling_serialized_name
      */
@@ -954,7 +1032,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the output_serialized_name.
      *
-     * The output of the dialog node.
+     * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
      *
      * @return the output_serialized_name
      */
@@ -984,7 +1062,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the next_step_serialized_name.
      *
-     * The next step to execute following this dialog node.
+     * The next step to be executed in dialog processing.
      *
      * @return the next_step_serialized_name
      */
@@ -994,7 +1072,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the actions_serialized_name.
      *
-     * The actions for the dialog node.
+     * An array of objects describing any actions to be invoked by the dialog node.
      *
      * @return the actions_serialized_name
      */
@@ -1004,7 +1082,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the title_serialized_name.
      *
-     * The alias used to identify the dialog node.
+     * The alias used to identify the dialog node. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 64 characters.
      *
      * @return the title_serialized_name
      */
@@ -1041,6 +1119,36 @@ public class IBMConversationV1Models {
     public String variable() {
       return variable_serialized_name;
     }
+    /**
+     * Gets the digress_in_serialized_name.
+     *
+     * Whether this top-level dialog node can be digressed into.
+     *
+     * @return the digress_in_serialized_name
+     */
+    public String digressIn() {
+      return digress_in_serialized_name;
+    }
+    /**
+     * Gets the digress_out_serialized_name.
+     *
+     * Whether this dialog node can be returned to after a digression.
+     *
+     * @return the digress_out_serialized_name
+     */
+    public String digressOut() {
+      return digress_out_serialized_name;
+    }
+    /**
+     * Gets the digress_out_slots_serialized_name.
+     *
+     * Whether the user can digress to top-level nodes while filling out slots.
+     *
+     * @return the digress_out_slots_serialized_name
+     */
+    public String digressOutSlots() {
+      return digress_out_slots_serialized_name;
+    }
     private CreateDialogNodeOptions(CreateDialogNodeOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notNull(builder.dialog_node_serialized_name, 'dialog_node_serialized_name cannot be null');
@@ -1059,6 +1167,9 @@ public class IBMConversationV1Models {
       type_serialized_name = builder.type_serialized_name;
       event_name_serialized_name = builder.event_name_serialized_name;
       variable_serialized_name = builder.variable_serialized_name;
+      digress_in_serialized_name = builder.digress_in_serialized_name;
+      digress_out_serialized_name = builder.digress_out_serialized_name;
+      digress_out_slots_serialized_name = builder.digress_out_slots_serialized_name;
     }
 
     /**
@@ -1091,6 +1202,9 @@ public class IBMConversationV1Models {
     private String type_serialized_name;
     private String event_name_serialized_name;
     private String variable_serialized_name;
+    private String digress_in_serialized_name;
+    private String digress_out_serialized_name;
+    private String digress_out_slots_serialized_name;
 
     private CreateDialogNodeOptionsBuilder(CreateDialogNodeOptions createDialogNodeOptions) {
       workspace_id_serialized_name = createDialogNodeOptions.workspace_id_serialized_name;
@@ -1108,6 +1222,9 @@ public class IBMConversationV1Models {
       type_serialized_name = createDialogNodeOptions.type_serialized_name;
       event_name_serialized_name = createDialogNodeOptions.event_name_serialized_name;
       variable_serialized_name = createDialogNodeOptions.variable_serialized_name;
+      digress_in_serialized_name = createDialogNodeOptions.digress_in_serialized_name;
+      digress_out_serialized_name = createDialogNodeOptions.digress_out_serialized_name;
+      digress_out_slots_serialized_name = createDialogNodeOptions.digress_out_slots_serialized_name;
     }
 
     /**
@@ -1316,6 +1433,39 @@ public class IBMConversationV1Models {
       this.variable_serialized_name = variable;
       return this;
     }
+
+    /**
+     * Set the digress_in_serialized_name.
+     *
+     * @param digressIn the digressIn
+     * @return the CreateDialogNodeOptions builder
+     */
+    public CreateDialogNodeOptionsBuilder digressIn(String digressIn) {
+      this.digress_in_serialized_name = digressIn;
+      return this;
+    }
+
+    /**
+     * Set the digress_out_serialized_name.
+     *
+     * @param digressOut the digressOut
+     * @return the CreateDialogNodeOptions builder
+     */
+    public CreateDialogNodeOptionsBuilder digressOut(String digressOut) {
+      this.digress_out_serialized_name = digressOut;
+      return this;
+    }
+
+    /**
+     * Set the digress_out_slots_serialized_name.
+     *
+     * @param digressOutSlots the digressOutSlots
+     * @return the CreateDialogNodeOptions builder
+     */
+    public CreateDialogNodeOptionsBuilder digressOutSlots(String digressOutSlots) {
+      this.digress_out_slots_serialized_name = digressOutSlots;
+      return this;
+    }
   }
 
   /**
@@ -1330,7 +1480,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the entity_serialized_name.
      *
-     * The name of the entity.
+     * The name of the entity. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, and hyphen characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 64 characters.
      *
      * @return the entity_serialized_name
      */
@@ -1340,7 +1490,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the entity.
+     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -1360,7 +1510,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the values_serialized_name.
      *
-     * An array of entity values.
+     * An array of objects describing the entity values.
      *
      * @return the values_serialized_name
      */
@@ -1524,7 +1674,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -1534,7 +1684,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the entity_serialized_name.
      *
-     * The name of the entity.
+     * The name of the entity. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, and hyphen characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 64 characters.
      *
      * @return the entity_serialized_name
      */
@@ -1544,7 +1694,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the entity.
+     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -1564,7 +1714,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the values_serialized_name.
      *
-     * An array of entity values.
+     * An array of objects describing the entity values.
      *
      * @return the values_serialized_name
      */
@@ -1740,7 +1890,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The text of a user input example.
+     * The text of a user input example. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 1024 characters.
      *
      * @return the text_serialized_name
      */
@@ -1819,7 +1969,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -1829,7 +1979,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the intent_serialized_name.
      *
-     * The intent name (for example, `pizza_order`).
+     * The intent name.
      *
      * @return the intent_serialized_name
      */
@@ -1839,7 +1989,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The text of a user input example.
+     * The text of a user input example. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 1024 characters.
      *
      * @return the text_serialized_name
      */
@@ -1952,7 +2102,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the intent_serialized_name.
      *
-     * The name of the intent.
+     * The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 128 characters.
      *
      * @return the intent_serialized_name
      */
@@ -1962,7 +2112,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the intent.
+     * The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -1972,7 +2122,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the examples_serialized_name.
      *
-     * An array of user input examples.
+     * An array of user input examples for the intent.
      *
      * @return the examples_serialized_name
      */
@@ -2096,7 +2246,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -2106,7 +2256,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the intent_serialized_name.
      *
-     * The name of the intent.
+     * The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 128 characters.
      *
      * @return the intent_serialized_name
      */
@@ -2116,7 +2266,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the intent.
+     * The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -2126,7 +2276,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the examples_serialized_name.
      *
-     * An array of user input examples.
+     * An array of user input examples for the intent.
      *
      * @return the examples_serialized_name
      */
@@ -2267,7 +2417,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -2297,7 +2447,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the synonym_serialized_name.
      *
-     * The text of the synonym.
+     * The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
      *
      * @return the synonym_serialized_name
      */
@@ -2429,7 +2579,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the value_serialized_name.
      *
-     * The text of the entity value.
+     * The text of the entity value. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
      *
      * @return the value_serialized_name
      */
@@ -2449,7 +2599,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the synonyms_serialized_name.
      *
-     * An array of synonyms for the entity value.
+     * An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A synonym must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
      *
      * @return the synonyms_serialized_name
      */
@@ -2459,7 +2609,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the patterns_serialized_name.
      *
-     * An array of patterns for the entity value. A pattern is specified as a regular expression.
+     * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A pattern is a regular expression no longer than 128 characters. For more information about how to specify a pattern, see the [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
      *
      * @return the patterns_serialized_name
      */
@@ -2469,7 +2619,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the type_serialized_name.
      *
-     * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
+     * Specifies the type of value.
      *
      * @return the type_serialized_name
      */
@@ -2640,7 +2790,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -2660,7 +2810,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the value_serialized_name.
      *
-     * The text of the entity value.
+     * The text of the entity value. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
      *
      * @return the value_serialized_name
      */
@@ -2680,7 +2830,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the synonyms_serialized_name.
      *
-     * An array of synonyms for the entity value.
+     * An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A synonym must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
      *
      * @return the synonyms_serialized_name
      */
@@ -2690,7 +2840,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the patterns_serialized_name.
      *
-     * An array of patterns for the entity value. A pattern is specified as a regular expression.
+     * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A pattern is a regular expression no longer than 128 characters. For more information about how to specify a pattern, see the [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
      *
      * @return the patterns_serialized_name
      */
@@ -2700,7 +2850,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the type_serialized_name.
      *
-     * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
+     * Specifies the type of value.
      *
      * @return the type_serialized_name
      */
@@ -2907,7 +3057,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the name_serialized_name.
      *
-     * The name of the workspace.
+     * The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 64 characters.
      *
      * @return the name_serialized_name
      */
@@ -2917,7 +3067,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the workspace.
+     * The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -3231,7 +3381,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -3336,7 +3486,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -3441,7 +3591,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -3547,7 +3697,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -3557,7 +3707,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the intent_serialized_name.
      *
-     * The intent name (for example, `pizza_order`).
+     * The intent name.
      *
      * @return the intent_serialized_name
      */
@@ -3679,7 +3829,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -3689,7 +3839,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the intent_serialized_name.
      *
-     * The intent name (for example, `pizza_order`).
+     * The intent name.
      *
      * @return the intent_serialized_name
      */
@@ -3786,7 +3936,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -3946,7 +4096,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -4077,7 +4227,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -4166,6 +4316,9 @@ public class IBMConversationV1Models {
     private String type_serialized_name;
     private String event_name_serialized_name;
     private String variable_serialized_name;
+    private String digress_in_serialized_name;
+    private String digress_out_serialized_name;
+    private String digress_out_slots_serialized_name;
     /**
      * Gets the dialog_node_serialized_name.
      *
@@ -4202,7 +4355,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the parent_serialized_name.
      *
-     * The ID of the parent dialog node.
+     * The ID of the parent dialog node. This property is not returned if the dialog node has no parent.
      *
      * @return the parent_serialized_name
      */
@@ -4213,7 +4366,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the previous_sibling_serialized_name.
      *
-     * The ID of the previous sibling dialog node.
+     * The ID of the previous sibling dialog node. This property is not returned if the dialog node has no previous sibling.
      *
      * @return the previous_sibling_serialized_name
      */
@@ -4246,7 +4399,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the metadata_serialized_name.
      *
-     * The metadata (if any) for the dialog node.
+     * Any metadata for the dialog node.
      *
      * @return the metadata_serialized_name
      */
@@ -4341,6 +4494,39 @@ public class IBMConversationV1Models {
     @AuraEnabled
     public String getVariable() {
       return variable_serialized_name;
+    }
+    /**
+     * Gets the digress_in_serialized_name.
+     *
+     * Whether this top-level dialog node can be digressed into.
+     *
+     * @return the digress_in_serialized_name
+     */
+    @AuraEnabled
+    public String getDigressIn() {
+      return digress_in_serialized_name;
+    }
+    /**
+     * Gets the digress_out_serialized_name.
+     *
+     * Whether this dialog node can be returned to after a digression.
+     *
+     * @return the digress_out_serialized_name
+     */
+    @AuraEnabled
+    public String getDigressOut() {
+      return digress_out_serialized_name;
+    }
+    /**
+     * Gets the digress_out_slots_serialized_name.
+     *
+     * Whether the user can digress to top-level nodes while filling out slots.
+     *
+     * @return the digress_out_slots_serialized_name
+     */
+    @AuraEnabled
+    public String getDigressOutSlots() {
+      return digress_out_slots_serialized_name;
     }
 
     /**
@@ -4467,6 +4653,33 @@ public class IBMConversationV1Models {
      */
     public void setVariable(final String variable) {
       this.variable_serialized_name = variable;
+    }
+
+    /**
+     * Sets the digress_in_serialized_name.
+     *
+     * @param digressIn the new digressIn
+     */
+    public void setDigressIn(final String digressIn) {
+      this.digress_in_serialized_name = digressIn;
+    }
+
+    /**
+     * Sets the digress_out_serialized_name.
+     *
+     * @param digressOut the new digressOut
+     */
+    public void setDigressOut(final String digressOut) {
+      this.digress_out_serialized_name = digressOut;
+    }
+
+    /**
+     * Sets the digress_out_slots_serialized_name.
+     *
+     * @param digressOutSlots the new digressOutSlots
+     */
+    public void setDigressOutSlots(final String digressOutSlots) {
+      this.digress_out_slots_serialized_name = digressOutSlots;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4635,13 +4848,15 @@ public class IBMConversationV1Models {
   }
 
   /**
-   * DialogNodeCollection.
+   * An array of dialog nodes.
    */
   public class DialogNodeCollection extends IBMWatsonGenericModel {
     private List<DialogNode> dialog_nodes_serialized_name;
     private Pagination pagination_serialized_name;
     /**
      * Gets the dialog_nodes_serialized_name.
+     *
+     * An array of objects describing the dialog nodes defined for the workspace.
      *
      * @return the dialog_nodes_serialized_name
      */
@@ -4652,7 +4867,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the pagination_serialized_name.
      *
-     * An object defining the pagination data for the returned objects.
+     * The pagination data for the returned objects.
      *
      * @return the pagination_serialized_name
      */
@@ -4717,7 +4932,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the behavior_serialized_name.
      *
-     * How the `next_step` reference is processed. If you specify `jump_to`, then you must also specify a value for the `dialog_node` property.
+     * What happens after the dialog node completes. The valid values depend on the node type:  - The following values are valid for any node:    - `get_user_input`    - `skip_user_input`    - `jump_to`  - If the node is of type `event_handler` and its parent node is of type `slot` or `frame`, additional values are also valid:    - if **event_name**=`filled` and the type of the parent node is `slot`:      - `reprompt`      - `skip_all_slots`  - if **event_name**=`nomatch` and the type of the parent node is `slot`:      - `reprompt`      - `skip_slot`      - `skip_all_slots`  - if **event_name**=`generic` and the type of the parent node is `frame`:      - `reprompt`      - `skip_slot`      - `skip_all_slots`        If you specify `jump_to`, then you must also specify a value for the `dialog_node` property.
      *
      * @return the behavior_serialized_name
      */
@@ -4728,7 +4943,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the dialog_node_serialized_name.
      *
-     * The ID of the dialog node to process next. This parameter is required if `behavior`=`jump_to`.
+     * The ID of the dialog node to process next. This parameter is required if **behavior**=`jump_to`.
      *
      * @return the dialog_node_serialized_name
      */
@@ -4792,6 +5007,7 @@ public class IBMConversationV1Models {
   public class DialogNodeVisitedDetails extends IBMWatsonGenericModel {
     private String dialog_node_serialized_name;
     private String title_serialized_name;
+    private String conditions_serialized_name;
     /**
      * Gets the dialog_node_serialized_name.
      *
@@ -4814,6 +5030,17 @@ public class IBMConversationV1Models {
     public String getTitle() {
       return title_serialized_name;
     }
+    /**
+     * Gets the conditions_serialized_name.
+     *
+     * The conditions that trigger the dialog node.
+     *
+     * @return the conditions_serialized_name
+     */
+    @AuraEnabled
+    public String getConditions() {
+      return conditions_serialized_name;
+    }
 
     /**
      * Sets the dialog_node_serialized_name.
@@ -4831,6 +5058,15 @@ public class IBMConversationV1Models {
      */
     public void setTitle(final String title) {
       this.title_serialized_name = title;
+    }
+
+    /**
+     * Sets the conditions_serialized_name.
+     *
+     * @param conditions the new conditions
+     */
+    public void setConditions(final String conditions) {
+      this.conditions_serialized_name = conditions;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4981,7 +5217,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the entities_serialized_name.
      *
-     * An array of entities.
+     * An array of objects describing the entities defined for the workspace.
      *
      * @return the entities_serialized_name
      */
@@ -4992,7 +5228,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the pagination_serialized_name.
      *
-     * An object defining the pagination data for the returned objects.
+     * The pagination data for the returned objects.
      *
      * @return the pagination_serialized_name
      */
@@ -5127,7 +5363,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the values_serialized_name.
      *
-     * An array of entity values.
+     * An array objects describing the entity values.
      *
      * @return the values_serialized_name
      */
@@ -5219,7 +5455,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The text of the example.
+     * The text of the user input example.
      *
      * @return the text_serialized_name
      */
@@ -5279,7 +5515,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the examples_serialized_name.
      *
-     * An array of Example objects describing the examples defined for the intent.
+     * An array of objects describing the examples defined for the intent.
      *
      * @return the examples_serialized_name
      */
@@ -5290,7 +5526,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the pagination_serialized_name.
      *
-     * An object defining the pagination data for the returned objects.
+     * The pagination data for the returned objects.
      *
      * @return the pagination_serialized_name
      */
@@ -5355,7 +5591,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -5485,7 +5721,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -5616,7 +5852,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -5636,7 +5872,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the export_serialized_name.
      *
-     * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
      * @return the export_serialized_name
      */
@@ -5771,7 +6007,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -5781,7 +6017,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the intent_serialized_name.
      *
-     * The intent name (for example, `pizza_order`).
+     * The intent name.
      *
      * @return the intent_serialized_name
      */
@@ -5929,7 +6165,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -5939,7 +6175,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the intent_serialized_name.
      *
-     * The intent name (for example, `pizza_order`).
+     * The intent name.
      *
      * @return the intent_serialized_name
      */
@@ -5949,7 +6185,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the export_serialized_name.
      *
-     * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
      * @return the export_serialized_name
      */
@@ -6085,7 +6321,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -6271,7 +6507,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -6301,7 +6537,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the export_serialized_name.
      *
-     * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
      * @return the export_serialized_name
      */
@@ -6452,7 +6688,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -6462,7 +6698,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the export_serialized_name.
      *
-     * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
      * @return the export_serialized_name
      */
@@ -6570,14 +6806,14 @@ public class IBMConversationV1Models {
   }
 
   /**
-   * An object defining the user input.
+   * The user input.
    */
   public class InputData {
     private String text_serialized_name;
     /**
      * Gets the text_serialized_name.
      *
-     * The text of the user input.
+     * The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.
      *
      * @return the text_serialized_name
      */
@@ -6737,7 +6973,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the intents_serialized_name.
      *
-     * An array of intents.
+     * An array of objects describing the intents defined for the workspace.
      *
      * @return the intents_serialized_name
      */
@@ -6748,7 +6984,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the pagination_serialized_name.
      *
-     * An object defining the pagination data for the returned objects.
+     * The pagination data for the returned objects.
      *
      * @return the pagination_serialized_name
      */
@@ -6859,7 +7095,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the examples_serialized_name.
      *
-     * An array of user input examples.
+     * An array of objects describing the user input examples for the intent.
      *
      * @return the examples_serialized_name
      */
@@ -6940,7 +7176,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * Sorts the response according to the value of the specified property, in ascending or descending order.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -6950,7 +7186,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the page_limit_serialized_name.
      *
-     * The number of records to return in each page of results. The default page limit is 100.
+     * The number of records to return in each page of results.
      *
      * @return the page_limit_serialized_name
      */
@@ -6960,7 +7196,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last value from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -7084,7 +7320,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -7094,7 +7330,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the page_limit_serialized_name.
      *
-     * The number of records to return in each page of results. The default page limit is 100.
+     * The number of records to return in each page of results.
      *
      * @return the page_limit_serialized_name
      */
@@ -7114,7 +7350,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * Sorts the response according to the value of the specified property, in ascending or descending order.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -7124,7 +7360,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last value from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -7286,7 +7522,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -7296,7 +7532,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the page_limit_serialized_name.
      *
-     * The number of records to return in each page of results. The default page limit is 100.
+     * The number of records to return in each page of results.
      *
      * @return the page_limit_serialized_name
      */
@@ -7316,7 +7552,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * Sorts the response according to the value of the specified property, in ascending or descending order.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -7326,7 +7562,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last value from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -7489,7 +7725,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -7499,7 +7735,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the export_serialized_name.
      *
-     * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
      * @return the export_serialized_name
      */
@@ -7509,7 +7745,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the page_limit_serialized_name.
      *
-     * The number of records to return in each page of results. The default page limit is 100.
+     * The number of records to return in each page of results.
      *
      * @return the page_limit_serialized_name
      */
@@ -7529,7 +7765,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * Sorts the response according to the value of the specified property, in ascending or descending order.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -7539,7 +7775,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last value from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -7716,7 +7952,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -7726,7 +7962,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the intent_serialized_name.
      *
-     * The intent name (for example, `pizza_order`).
+     * The intent name.
      *
      * @return the intent_serialized_name
      */
@@ -7736,7 +7972,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the page_limit_serialized_name.
      *
-     * The number of records to return in each page of results. The default page limit is 100.
+     * The number of records to return in each page of results.
      *
      * @return the page_limit_serialized_name
      */
@@ -7756,7 +7992,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * Sorts the response according to the value of the specified property, in ascending or descending order.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -7766,7 +8002,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last value from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -7946,7 +8182,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -7956,7 +8192,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the export_serialized_name.
      *
-     * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
      * @return the export_serialized_name
      */
@@ -7966,7 +8202,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the page_limit_serialized_name.
      *
-     * The number of records to return in each page of results. The default page limit is 100.
+     * The number of records to return in each page of results.
      *
      * @return the page_limit_serialized_name
      */
@@ -7986,7 +8222,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * Sorts the response according to the value of the specified property, in ascending or descending order.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -7996,7 +8232,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last value from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -8171,7 +8407,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -8181,7 +8417,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * Sorts the response according to the value of the specified property, in ascending or descending order.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -8201,7 +8437,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the page_limit_serialized_name.
      *
-     * The number of records to return in each page of results. The default page limit is 100.
+     * The number of records to return in each page of results.
      *
      * @return the page_limit_serialized_name
      */
@@ -8211,7 +8447,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last value from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -8351,7 +8587,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -8381,7 +8617,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the page_limit_serialized_name.
      *
-     * The number of records to return in each page of results. The default page limit is 100.
+     * The number of records to return in each page of results.
      *
      * @return the page_limit_serialized_name
      */
@@ -8401,7 +8637,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * Sorts the response according to the value of the specified property, in ascending or descending order.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -8411,7 +8647,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last value from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -8609,7 +8845,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -8629,7 +8865,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the export_serialized_name.
      *
-     * Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
      * @return the export_serialized_name
      */
@@ -8639,7 +8875,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the page_limit_serialized_name.
      *
-     * The number of records to return in each page of results. The default page limit is 100.
+     * The number of records to return in each page of results.
      *
      * @return the page_limit_serialized_name
      */
@@ -8659,7 +8895,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * Sorts the response according to the value of the specified property, in ascending or descending order.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -8669,7 +8905,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last value from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -8861,7 +9097,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the page_limit_serialized_name.
      *
-     * The number of records to return in each page of results. The default page limit is 100.
+     * The number of records to return in each page of results.
      *
      * @return the page_limit_serialized_name
      */
@@ -8881,7 +9117,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * Sorts the response according to the value of the specified property, in ascending or descending order.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -8891,7 +9127,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last value from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -9025,7 +9261,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the logs_serialized_name.
      *
-     * An array of log events.
+     * An array of objects describing log events.
      *
      * @return the logs_serialized_name
      */
@@ -9036,7 +9272,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the pagination_serialized_name.
      *
-     * An object defining the pagination data for the returned objects.
+     * The pagination data for the returned objects.
      *
      * @return the pagination_serialized_name
      */
@@ -9105,7 +9341,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the request_serialized_name.
      *
-     * A request formatted for the Conversation service.
+     * A request received by the workspace, including the user input and context.
      *
      * @return the request_serialized_name
      */
@@ -9116,7 +9352,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the response_serialized_name.
      *
-     * A response from the Conversation service.
+     * The response sent by the workspace, including the output text, detected intents and entities, and context.
      *
      * @return the response_serialized_name
      */
@@ -9127,7 +9363,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the log_id_serialized_name.
      *
-     * A unique identifier for the logged message.
+     * A unique identifier for the logged event.
      *
      * @return the log_id_serialized_name
      */
@@ -9160,7 +9396,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * The unique identifier of the workspace where the request was made.
      *
      * @return the workspace_id_serialized_name
      */
@@ -9343,10 +9579,11 @@ public class IBMConversationV1Models {
   public class LogPagination extends IBMWatsonGenericModel {
     private String next_url_serialized_name;
     private Long matched_serialized_name;
+    private String next_cursor_serialized_name;
     /**
      * Gets the next_url_serialized_name.
      *
-     * The URL that will return the next page of results.
+     * The URL that will return the next page of results, if any.
      *
      * @return the next_url_serialized_name
      */
@@ -9364,6 +9601,17 @@ public class IBMConversationV1Models {
     @AuraEnabled
     public Long getMatched() {
       return matched_serialized_name;
+    }
+    /**
+     * Gets the next_cursor_serialized_name.
+     *
+     * A token identifying the next page of results.
+     *
+     * @return the next_cursor_serialized_name
+     */
+    @AuraEnabled
+    public String getNextCursor() {
+      return next_cursor_serialized_name;
     }
 
     /**
@@ -9384,6 +9632,15 @@ public class IBMConversationV1Models {
       this.matched_serialized_name = matched;
     }
 
+    /**
+     * Sets the next_cursor_serialized_name.
+     *
+     * @param nextCursor the new nextCursor
+     */
+    public void setNextCursor(final String nextCursor) {
+      this.next_cursor_serialized_name = nextCursor;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -9396,7 +9653,7 @@ public class IBMConversationV1Models {
   }
 
   /**
-   * An input object that includes the input text.
+   * The text of the user input.
    */
   public class MessageInput extends IBMWatsonGenericModel {
     private String text_serialized_name;
@@ -9487,7 +9744,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the entities_serialized_name.
      *
-     * Include the entities from the previous response when they do not need to change and to prevent Watson from trying to identify them.
+     * Entities to use when evaluating the message. Include entities from the previous response to continue using those entities rather than detecting entities in the new input.
      *
      * @return the entities_serialized_name
      */
@@ -9497,7 +9754,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the intents_serialized_name.
      *
-     * An array of name-confidence pairs for the user input. Include the intents from the previous response when they do not need to change and to prevent Watson from trying to identify them.
+     * Intents to use when evaluating the user input. Include intents from the previous response to continue using those intents rather than trying to recognize intents in the new input.
      *
      * @return the intents_serialized_name
      */
@@ -9507,7 +9764,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the output_serialized_name.
      *
-     * System output. Include the output from the request when you have several requests within the same Dialog turn to pass back in the intermediate information.
+     * System output. Include the output from the previous response to maintain intermediate information over multiple requests.
      *
      * @return the output_serialized_name
      */
@@ -9778,7 +10035,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the entities_serialized_name.
      *
-     * Include the entities from the previous response when they do not need to change and to prevent Watson from trying to identify them.
+     * Entities to use when evaluating the message. Include entities from the previous response to continue using those entities rather than detecting entities in the new input.
      *
      * @return the entities_serialized_name
      */
@@ -9789,7 +10046,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the intents_serialized_name.
      *
-     * An array of name-confidence pairs for the user input. Include the intents from the previous response when they do not need to change and to prevent Watson from trying to identify them.
+     * Intents to use when evaluating the user input. Include intents from the previous response to continue using those intents rather than trying to recognize intents in the new input.
      *
      * @return the intents_serialized_name
      */
@@ -9800,7 +10057,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the output_serialized_name.
      *
-     * System output. Include the output from the request when you have several requests within the same Dialog turn to pass back in the intermediate information.
+     * System output. Include the output from the previous response to maintain intermediate information over multiple requests.
      *
      * @return the output_serialized_name
      */
@@ -10250,6 +10507,8 @@ public class IBMConversationV1Models {
     private String next_url_serialized_name;
     private Long total_serialized_name;
     private Long matched_serialized_name;
+    private String refresh_cursor_serialized_name;
+    private String next_cursor_serialized_name;
     /**
      * Gets the refresh_url_serialized_name.
      *
@@ -10294,6 +10553,28 @@ public class IBMConversationV1Models {
     public Long getMatched() {
       return matched_serialized_name;
     }
+    /**
+     * Gets the refresh_cursor_serialized_name.
+     *
+     * A token identifying the current page of results.
+     *
+     * @return the refresh_cursor_serialized_name
+     */
+    @AuraEnabled
+    public String getRefreshCursor() {
+      return refresh_cursor_serialized_name;
+    }
+    /**
+     * Gets the next_cursor_serialized_name.
+     *
+     * A token identifying the next page of results.
+     *
+     * @return the next_cursor_serialized_name
+     */
+    @AuraEnabled
+    public String getNextCursor() {
+      return next_cursor_serialized_name;
+    }
 
     /**
      * Sets the refresh_url_serialized_name.
@@ -10329,6 +10610,24 @@ public class IBMConversationV1Models {
      */
     public void setMatched(final long matched) {
       this.matched_serialized_name = matched;
+    }
+
+    /**
+     * Sets the refresh_cursor_serialized_name.
+     *
+     * @param refreshCursor the new refreshCursor
+     */
+    public void setRefreshCursor(final String refreshCursor) {
+      this.refresh_cursor_serialized_name = refreshCursor;
+    }
+
+    /**
+     * Sets the next_cursor_serialized_name.
+     *
+     * @param nextCursor the new nextCursor
+     */
+    public void setNextCursor(final String nextCursor) {
+      this.next_cursor_serialized_name = nextCursor;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -10670,7 +10969,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the pagination_serialized_name.
      *
-     * An object defining the pagination data for the returned objects.
+     * The pagination data for the returned objects.
      *
      * @return the pagination_serialized_name
      */
@@ -10770,7 +11069,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -10790,7 +11089,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_text_serialized_name.
      *
-     * The text of the example to be marked as irrelevant input.
+     * The text of a user input counterexample.
      *
      * @return the new_text_serialized_name
      */
@@ -10905,15 +11204,18 @@ public class IBMConversationV1Models {
     private IBMWatsonMapModel new_metadata_serialized_name;
     private String new_title_serialized_name;
     private String new_description_serialized_name;
+    private String new_digress_out_serialized_name;
     private String new_event_name_serialized_name;
+    private String new_digress_out_slots_serialized_name;
     private DialogNodeNextStep new_next_step_serialized_name;
+    private String new_digress_in_serialized_name;
     private IBMWatsonMapModel new_output_serialized_name;
     private String new_parent_serialized_name;
     private String new_dialog_node_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -10943,7 +11245,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_actions_serialized_name.
      *
-     * The actions for the dialog node.
+     * An array of objects describing any actions to be invoked by the dialog node.
      *
      * @return the new_actions_serialized_name
      */
@@ -10953,7 +11255,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_conditions_serialized_name.
      *
-     * The condition that will trigger the dialog node.
+     * The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.
      *
      * @return the new_conditions_serialized_name
      */
@@ -10973,7 +11275,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_previous_sibling_serialized_name.
      *
-     * The previous dialog node.
+     * The ID of the previous sibling dialog node.
      *
      * @return the new_previous_sibling_serialized_name
      */
@@ -11003,7 +11305,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_title_serialized_name.
      *
-     * The alias used to identify the dialog node.
+     * The alias used to identify the dialog node. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 64 characters.
      *
      * @return the new_title_serialized_name
      */
@@ -11013,12 +11315,22 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_description_serialized_name.
      *
-     * The description of the dialog node.
+     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
      *
      * @return the new_description_serialized_name
      */
     public String newDescription() {
       return new_description_serialized_name;
+    }
+    /**
+     * Gets the new_digress_out_serialized_name.
+     *
+     * Whether this dialog node can be returned to after a digression.
+     *
+     * @return the new_digress_out_serialized_name
+     */
+    public String newDigressOut() {
+      return new_digress_out_serialized_name;
     }
     /**
      * Gets the new_event_name_serialized_name.
@@ -11031,9 +11343,19 @@ public class IBMConversationV1Models {
       return new_event_name_serialized_name;
     }
     /**
+     * Gets the new_digress_out_slots_serialized_name.
+     *
+     * Whether the user can digress to top-level nodes while filling out slots.
+     *
+     * @return the new_digress_out_slots_serialized_name
+     */
+    public String newDigressOutSlots() {
+      return new_digress_out_slots_serialized_name;
+    }
+    /**
      * Gets the new_next_step_serialized_name.
      *
-     * The next step to execute following this dialog node.
+     * The next step to be executed in dialog processing.
      *
      * @return the new_next_step_serialized_name
      */
@@ -11041,9 +11363,19 @@ public class IBMConversationV1Models {
       return new_next_step_serialized_name;
     }
     /**
+     * Gets the new_digress_in_serialized_name.
+     *
+     * Whether this top-level dialog node can be digressed into.
+     *
+     * @return the new_digress_in_serialized_name
+     */
+    public String newDigressIn() {
+      return new_digress_in_serialized_name;
+    }
+    /**
      * Gets the new_output_serialized_name.
      *
-     * The output of the dialog node.
+     * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
      *
      * @return the new_output_serialized_name
      */
@@ -11053,7 +11385,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_parent_serialized_name.
      *
-     * The ID of the parent dialog node (if any).
+     * The ID of the parent dialog node.
      *
      * @return the new_parent_serialized_name
      */
@@ -11063,7 +11395,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_dialog_node_serialized_name.
      *
-     * The dialog node ID.
+     * The dialog node ID. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 1024 characters.
      *
      * @return the new_dialog_node_serialized_name
      */
@@ -11084,8 +11416,11 @@ public class IBMConversationV1Models {
       new_metadata_serialized_name = builder.new_metadata_serialized_name;
       new_title_serialized_name = builder.new_title_serialized_name;
       new_description_serialized_name = builder.new_description_serialized_name;
+      new_digress_out_serialized_name = builder.new_digress_out_serialized_name;
       new_event_name_serialized_name = builder.new_event_name_serialized_name;
+      new_digress_out_slots_serialized_name = builder.new_digress_out_slots_serialized_name;
       new_next_step_serialized_name = builder.new_next_step_serialized_name;
+      new_digress_in_serialized_name = builder.new_digress_in_serialized_name;
       new_output_serialized_name = builder.new_output_serialized_name;
       new_parent_serialized_name = builder.new_parent_serialized_name;
       new_dialog_node_serialized_name = builder.new_dialog_node_serialized_name;
@@ -11117,8 +11452,11 @@ public class IBMConversationV1Models {
     private IBMWatsonMapModel new_metadata_serialized_name;
     private String new_title_serialized_name;
     private String new_description_serialized_name;
+    private String new_digress_out_serialized_name;
     private String new_event_name_serialized_name;
+    private String new_digress_out_slots_serialized_name;
     private DialogNodeNextStep new_next_step_serialized_name;
+    private String new_digress_in_serialized_name;
     private IBMWatsonMapModel new_output_serialized_name;
     private String new_parent_serialized_name;
     private String new_dialog_node_serialized_name;
@@ -11135,8 +11473,11 @@ public class IBMConversationV1Models {
       new_metadata_serialized_name = updateDialogNodeOptions.new_metadata_serialized_name;
       new_title_serialized_name = updateDialogNodeOptions.new_title_serialized_name;
       new_description_serialized_name = updateDialogNodeOptions.new_description_serialized_name;
+      new_digress_out_serialized_name = updateDialogNodeOptions.new_digress_out_serialized_name;
       new_event_name_serialized_name = updateDialogNodeOptions.new_event_name_serialized_name;
+      new_digress_out_slots_serialized_name = updateDialogNodeOptions.new_digress_out_slots_serialized_name;
       new_next_step_serialized_name = updateDialogNodeOptions.new_next_step_serialized_name;
+      new_digress_in_serialized_name = updateDialogNodeOptions.new_digress_in_serialized_name;
       new_output_serialized_name = updateDialogNodeOptions.new_output_serialized_name;
       new_parent_serialized_name = updateDialogNodeOptions.new_parent_serialized_name;
       new_dialog_node_serialized_name = updateDialogNodeOptions.new_dialog_node_serialized_name;
@@ -11306,6 +11647,17 @@ public class IBMConversationV1Models {
     }
 
     /**
+     * Set the new_digress_out_serialized_name.
+     *
+     * @param newDigressOut the newDigressOut
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newDigressOut(String newDigressOut) {
+      this.new_digress_out_serialized_name = newDigressOut;
+      return this;
+    }
+
+    /**
      * Set the new_event_name_serialized_name.
      *
      * @param newEventName the newEventName
@@ -11317,6 +11669,17 @@ public class IBMConversationV1Models {
     }
 
     /**
+     * Set the new_digress_out_slots_serialized_name.
+     *
+     * @param newDigressOutSlots the newDigressOutSlots
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newDigressOutSlots(String newDigressOutSlots) {
+      this.new_digress_out_slots_serialized_name = newDigressOutSlots;
+      return this;
+    }
+
+    /**
      * Set the new_next_step_serialized_name.
      *
      * @param newNextStep the newNextStep
@@ -11324,6 +11687,17 @@ public class IBMConversationV1Models {
      */
     public UpdateDialogNodeOptionsBuilder newNextStep(DialogNodeNextStep newNextStep) {
       this.new_next_step_serialized_name = newNextStep;
+      return this;
+    }
+
+    /**
+     * Set the new_digress_in_serialized_name.
+     *
+     * @param newDigressIn the newDigressIn
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newDigressIn(String newDigressIn) {
+      this.new_digress_in_serialized_name = newDigressIn;
       return this;
     }
 
@@ -11375,7 +11749,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -11405,7 +11779,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_entity_serialized_name.
      *
-     * The name of the entity.
+     * The name of the entity. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, and hyphen characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 64 characters.
      *
      * @return the new_entity_serialized_name
      */
@@ -11435,7 +11809,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_description_serialized_name.
      *
-     * The description of the entity.
+     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
      *
      * @return the new_description_serialized_name
      */
@@ -11618,7 +11992,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -11628,7 +12002,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the intent_serialized_name.
      *
-     * The intent name (for example, `pizza_order`).
+     * The intent name.
      *
      * @return the intent_serialized_name
      */
@@ -11648,7 +12022,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_text_serialized_name.
      *
-     * The text of the user input example.
+     * The text of the user input example. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 1024 characters.
      *
      * @return the new_text_serialized_name
      */
@@ -11777,7 +12151,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -11787,7 +12161,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the intent_serialized_name.
      *
-     * The intent name (for example, `pizza_order`).
+     * The intent name.
      *
      * @return the intent_serialized_name
      */
@@ -11797,7 +12171,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_intent_serialized_name.
      *
-     * The name of the intent.
+     * The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 128 characters.
      *
      * @return the new_intent_serialized_name
      */
@@ -11973,7 +12347,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -12013,7 +12387,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_synonym_serialized_name.
      *
-     * The text of the synonym.
+     * The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
      *
      * @return the new_synonym_serialized_name
      */
@@ -12162,7 +12536,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -12192,7 +12566,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_synonyms_serialized_name.
      *
-     * An array of synonyms for the entity value.
+     * An array of synonyms for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A synonym must conform to the following resrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
      *
      * @return the new_synonyms_serialized_name
      */
@@ -12202,7 +12576,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_type_serialized_name.
      *
-     * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
+     * Specifies the type of value.
      *
      * @return the new_type_serialized_name
      */
@@ -12222,7 +12596,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_patterns_serialized_name.
      *
-     * An array of patterns for the entity value. A pattern is specified as a regular expression.
+     * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A pattern is a regular expression no longer than 128 characters. For more information about how to specify a pattern, see the [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
      *
      * @return the new_patterns_serialized_name
      */
@@ -12232,7 +12606,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_value_serialized_name.
      *
-     * The text of the entity value.
+     * The text of the entity value. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
      *
      * @return the new_value_serialized_name
      */
@@ -12455,7 +12829,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspace_id_serialized_name.
      *
-     * The workspace ID.
+     * Unique identifier of the workspace.
      *
      * @return the workspace_id_serialized_name
      */
@@ -12465,7 +12839,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the name_serialized_name.
      *
-     * The name of the workspace.
+     * The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 64 characters.
      *
      * @return the name_serialized_name
      */
@@ -12475,7 +12849,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the workspace.
+     * The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -12555,7 +12929,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the append_serialized_name.
      *
-     * Specifies that the elements included in the request body are to be appended to the existing data in the workspace. The default value is `false`.
+     * Whether the new data is to be appended to the existing data in the workspace. If **append**=`false`, elements included in the new data completely replace the corresponding existing elements, including all subelements. For example, if the new data includes **entities** and **append**=`false`, all existing entities in the workspace are discarded and replaced with the new entities.    If **append**=`true`, existing elements are preserved, and the new elements are added. If any elements in the new data collide with existing elements, the update request fails.
      *
      * @return the append_serialized_name
      */
@@ -12886,7 +13260,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the synonyms_serialized_name.
      *
-     * An array of synonyms for the entity value.
+     * An array containing any synonyms for the entity value.
      *
      * @return the synonyms_serialized_name
      */
@@ -12897,7 +13271,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the patterns_serialized_name.
      *
-     * An array of patterns for the entity value. A pattern is specified as a regular expression.
+     * An array containing any patterns for the entity value.
      *
      * @return the patterns_serialized_name
      */
@@ -12908,7 +13282,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the type_serialized_name.
      *
-     * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
+     * Specifies the type of value.
      *
      * @return the type_serialized_name
      */
@@ -13110,7 +13484,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the synonyms_serialized_name.
      *
-     * An array of synonyms for the entity value.
+     * An array containing any synonyms for the entity value.
      *
      * @return the synonyms_serialized_name
      */
@@ -13121,7 +13495,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the patterns_serialized_name.
      *
-     * An array of patterns for the entity value. A pattern is specified as a regular expression.
+     * An array containing any patterns for the entity value.
      *
      * @return the patterns_serialized_name
      */
@@ -13132,7 +13506,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the type_serialized_name.
      *
-     * Specifies the type of value (`synonyms` or `patterns`). The default value is `synonyms`.
+     * Specifies the type of value.
      *
      * @return the type_serialized_name
      */
@@ -13282,7 +13656,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the metadata_serialized_name.
      *
-     * Any metadata that is required by the workspace.
+     * Any metadata related to the workspace.
      *
      * @return the metadata_serialized_name
      */
@@ -13293,7 +13667,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the learning_opt_out_serialized_name.
      *
-     * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
+     * Whether training data from the workspace (including artifacts such as intents and entities) can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
      *
      * @return the learning_opt_out_serialized_name
      */
@@ -13371,7 +13745,7 @@ public class IBMConversationV1Models {
     /**
      * Gets the workspaces_serialized_name.
      *
-     * An array of workspaces.
+     * An array of objects describing the workspaces associated with the service instance.
      *
      * @return the workspaces_serialized_name
      */

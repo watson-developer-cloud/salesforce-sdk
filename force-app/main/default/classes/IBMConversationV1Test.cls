@@ -31,6 +31,9 @@ private class IBMConversationV1Test {
   private static Long systemResponseValue;
   private static String messageResponse;
   private static String nodeVisited;
+  private static String nodeVisitedDetailsNode;
+  private static String nodeVisitedDetailsTitle;
+  private static String nodeVisitedDetailsCondition;
   private static String logMessageLevel;
   private static String logMessageText;
   private static String requestTimestamp;
@@ -56,6 +59,11 @@ private class IBMConversationV1Test {
   private static String dialogNodeType;
   private static String dialogNodeEventName;
   private static String dialogNodeVariable;
+  private static String dialogNodeDigressIn;
+  private static String dialogNodeDigressOut;
+  private static String dialogNodeDigressOutSlots;
+  private static String nextCursor;
+  private static String refreshCursor;
 
 
   static {
@@ -90,6 +98,9 @@ private class IBMConversationV1Test {
     systemResponseValue = 5;
     messageResponse = 'This is a response';
     nodeVisited = 'node_1';
+    nodeVisitedDetailsNode = 'node';
+    nodeVisitedDetailsTitle = 'node_title';
+    nodeVisitedDetailsCondition = '#condition';
     logMessageLevel = 'warn';
     logMessageText = 'test_warning';
     requestTimestamp = '2017-12-06T23:53:59.153Z';
@@ -118,6 +129,11 @@ private class IBMConversationV1Test {
     dialogNodeType = 'standard';
     dialogNodeEventName = 'dialog_node_event';
     dialogNodeVariable = 'dialog_node_var';
+    dialogNodeDigressIn = 'returns';
+    dialogNodeDigressOut = 'allow_all';
+    dialogNodeDigressOutSlots = 'allow_all';
+    nextCursor = 'next_cursor';
+    refreshCursor = 'refresh_cursor';
   }
 
   static testMethod void testCreateWorkspace() {
@@ -548,6 +564,9 @@ private class IBMConversationV1Test {
     System.assertEquals(Long.valueOf((String) response.getContext().getSystem().get(systemResponseKey)), systemResponseValue);
     System.assertEquals(response.getOutput().getText().get(0), messageResponse);
     System.assertEquals(response.getOutput().getNodesVisited().get(0), nodeVisited);
+    System.assertEquals(response.getOutput().getNodesVisitedDetails().get(0).getDialogNode(), nodeVisitedDetailsNode);
+    System.assertEquals(response.getOutput().getNodesVisitedDetails().get(0).getTitle(), nodeVisitedDetailsTitle);
+    System.assertEquals(response.getOutput().getNodesVisitedDetails().get(0).getConditions(), nodeVisitedDetailsCondition);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getLevel(), logMessageLevel);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getMsg(), logMessageText);
     System.assert(response.getOutput().getNodesVisitedDetails() != null);
@@ -673,6 +692,8 @@ private class IBMConversationV1Test {
     System.assertEquals(response.getPagination().getNextUrl(), nextUrl);
     System.assertEquals(response.getPagination().getTotal(), paginationTotal);
     System.assertEquals(response.getPagination().getMatched(), paginationMatched);
+    System.assertEquals(response.getPagination().getNextCursor(), nextCursor);
+    System.assertEquals(response.getPagination().getRefreshCursor(), refreshCursor);
     Test.stopTest();
   }
 
@@ -1177,6 +1198,9 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.CreateDialogNodeOptions createOptions = new IBMConversationV1Models.CreateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
+      .digressIn(dialogNodeDigressIn)
+      .digressOut(dialogNodeDigressOut)
+      .digressOutSlots(dialogNodeDigressOutSlots)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -1204,6 +1228,9 @@ private class IBMConversationV1Test {
     System.assertEquals(response.getType(), dialogNodeType);
     System.assertEquals(response.getEventName(), dialogNodeEventName);
     System.assertEquals(response.getVariable(), dialogNodeVariable);
+    System.assertEquals(response.getDigressIn(), dialogNodeDigressIn);
+    System.assertEquals(response.getDigressOut(), dialogNodeDigressOut);
+    System.assertEquals(response.getDigressOutSlots(), dialogNodeDigressOutSlots);
     Test.stopTest();
   }
 
@@ -1344,6 +1371,9 @@ private class IBMConversationV1Test {
       .dialogNode(dialogNodeName)
       .newDialogNode(dialogNodeName)
       .newDescription(dialogNodeDescription)
+      .newDigressIn(dialogNodeDigressIn)
+      .newDigressOut(dialogNodeDigressOut)
+      .newDigressOutSlots(dialogNodeDigressOutSlots)
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -1369,6 +1399,9 @@ private class IBMConversationV1Test {
     System.assertEquals(response.getActions().get(0).getCredentials(), actionCredentials);
     System.assertEquals(response.getEventName(), dialogNodeEventName);
     System.assertEquals(response.getVariable(), dialogNodeVariable);
+    System.assertEquals(response.getDigressIn(), dialogNodeDigressIn);
+    System.assertEquals(response.getDigressOut(), dialogNodeDigressOut);
+    System.assertEquals(response.getDigressOutSlots(), dialogNodeDigressOutSlots);
     Test.stopTest();
   }
 
@@ -1414,6 +1447,8 @@ private class IBMConversationV1Test {
     System.assertEquals(response.getLogs().get(0).getLogId(), logId);
     System.assertEquals(response.getPagination().getNextUrl(), nextUrl);
     System.assertEquals(response.getPagination().getMatched(), paginationMatched);
+    System.assertEquals(response.getPagination().getNextCursor(), nextCursor);
+    System.assertEquals(response.getPagination().getRefreshCursor(), refreshCursor);
     Test.stopTest();
   }
 
