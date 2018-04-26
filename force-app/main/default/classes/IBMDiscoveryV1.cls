@@ -334,27 +334,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
-   * Set the expansion list.
-   *
-   * Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is `500`. The current expansion list is replaced with the uploaded content.
-   *
-   * @param createExpansionsOptions the {@link IBMDiscoveryV1Models.CreateExpansionsOptions} containing the options for the call
-   * @return the {@link IBMDiscoveryV1Models.Expansions} with the response
-   */
-  public IBMDiscoveryV1Models.Expansions createExpansions(IBMDiscoveryV1Models.CreateExpansionsOptions createExpansionsOptions) {
-    IBMWatsonValidator.notNull(createExpansionsOptions, 'createExpansionsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ createExpansionsOptions.environmentId(), createExpansionsOptions.collectionId() }));
-    builder.query('version', versionDate);
-    final Map<String, Object> contentJson = new Map<String, Object>();
-    if (createExpansionsOptions.expansions() != null) {
-      contentJson.put('expansions', createExpansionsOptions.expansions());
-    }
-    builder.bodyJson(JSON.serialize(contentJson, true));
-
-    return (IBMDiscoveryV1Models.Expansions) createServiceCall(builder.build(), IBMDiscoveryV1Models.Expansions.class);
-  }
-
-  /**
    * Delete a collection.
    *
    * @param deleteCollectionOptions the {@link IBMDiscoveryV1Models.DeleteCollectionOptions} containing the options for the call
@@ -363,22 +342,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   public void deleteCollection(IBMDiscoveryV1Models.DeleteCollectionOptions deleteCollectionOptions) {
     IBMWatsonValidator.notNull(deleteCollectionOptions, 'deleteCollectionOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}', new String[]{ deleteCollectionOptions.environmentId(), deleteCollectionOptions.collectionId() }));
-    builder.query('version', versionDate);
-
-    createServiceCall(builder.build(), null);
-  }
-
-  /**
-   * Delete the expansions list.
-   *
-   * Remove the expansion information for this collection. The expansion list must be deleted to disable query expansion for a collection.
-   *
-   * @param deleteExpansionsOptions the {@link IBMDiscoveryV1Models.DeleteExpansionsOptions} containing the options for the call
-   * @return the service call
-   */
-  public void deleteExpansions(IBMDiscoveryV1Models.DeleteExpansionsOptions deleteExpansionsOptions) {
-    IBMWatsonValidator.notNull(deleteExpansionsOptions, 'deleteExpansionsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ deleteExpansionsOptions.environmentId(), deleteExpansionsOptions.collectionId() }));
     builder.query('version', versionDate);
 
     createServiceCall(builder.build(), null);
@@ -434,22 +397,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
-   * List current expansions.
-   *
-   * Returns the current expansion list for the specified collection. If an expansion list is not specified, an object with empty expansion arrays is returned.
-   *
-   * @param listExpansionsOptions the {@link IBMDiscoveryV1Models.ListExpansionsOptions} containing the options for the call
-   * @return the {@link IBMDiscoveryV1Models.Expansions} with the response
-   */
-  public IBMDiscoveryV1Models.Expansions listExpansions(IBMDiscoveryV1Models.ListExpansionsOptions listExpansionsOptions) {
-    IBMWatsonValidator.notNull(listExpansionsOptions, 'listExpansionsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ listExpansionsOptions.environmentId(), listExpansionsOptions.collectionId() }));
-    builder.query('version', versionDate);
-
-    return (IBMDiscoveryV1Models.Expansions) createServiceCall(builder.build(), IBMDiscoveryV1Models.Expansions.class);
-  }
-
-  /**
    * Update a collection.
    *
    * @param updateCollectionOptions the {@link IBMDiscoveryV1Models.UpdateCollectionOptions} containing the options for the call
@@ -472,6 +419,59 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Collection) createServiceCall(builder.build(), IBMDiscoveryV1Models.Collection.class);
+  }
+
+  /**
+   * Set the expansion list.
+   *
+   * Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is `500`. The current expansion list is replaced with the uploaded content.
+   *
+   * @param createExpansionsOptions the {@link IBMDiscoveryV1Models.CreateExpansionsOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.Expansions} with the response
+   */
+  public IBMDiscoveryV1Models.Expansions createExpansions(IBMDiscoveryV1Models.CreateExpansionsOptions createExpansionsOptions) {
+    IBMWatsonValidator.notNull(createExpansionsOptions, 'createExpansionsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ createExpansionsOptions.environmentId(), createExpansionsOptions.collectionId() }));
+    builder.query('version', versionDate);
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    if (createExpansionsOptions.expansions() != null) {
+      contentJson.put('expansions', createExpansionsOptions.expansions());
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
+
+    return (IBMDiscoveryV1Models.Expansions) createServiceCall(builder.build(), IBMDiscoveryV1Models.Expansions.class);
+  }
+
+  /**
+   * Delete the expansions list.
+   *
+   * Remove the expansion information for this collection. The expansion list must be deleted to disable query expansion for a collection.
+   *
+   * @param deleteExpansionsOptions the {@link IBMDiscoveryV1Models.DeleteExpansionsOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteExpansions(IBMDiscoveryV1Models.DeleteExpansionsOptions deleteExpansionsOptions) {
+    IBMWatsonValidator.notNull(deleteExpansionsOptions, 'deleteExpansionsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ deleteExpansionsOptions.environmentId(), deleteExpansionsOptions.collectionId() }));
+    builder.query('version', versionDate);
+
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * List current expansions.
+   *
+   * Returns the current expansion list for the specified collection. If an expansion list is not specified, an object with empty expansion arrays is returned.
+   *
+   * @param listExpansionsOptions the {@link IBMDiscoveryV1Models.ListExpansionsOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.Expansions} with the response
+   */
+  public IBMDiscoveryV1Models.Expansions listExpansions(IBMDiscoveryV1Models.ListExpansionsOptions listExpansionsOptions) {
+    IBMWatsonValidator.notNull(listExpansionsOptions, 'listExpansionsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ listExpansionsOptions.environmentId(), listExpansionsOptions.collectionId() }));
+    builder.query('version', versionDate);
+
+    return (IBMDiscoveryV1Models.Expansions) createServiceCall(builder.build(), IBMDiscoveryV1Models.Expansions.class);
   }
 
   /**
@@ -776,6 +776,9 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryEntitiesOptions.count() != null) {
       contentJson.put('count', queryEntitiesOptions.count());
     }
+    if (queryEntitiesOptions.evidenceCount() != null) {
+      contentJson.put('evidence_count', queryEntitiesOptions.evidenceCount());
+    }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.QueryEntitiesResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryEntitiesResponse.class);
@@ -875,6 +878,9 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     if (queryRelationsOptions.count() != null) {
       contentJson.put('count', queryRelationsOptions.count());
+    }
+    if (queryRelationsOptions.evidenceCount() != null) {
+      contentJson.put('evidence_count', queryRelationsOptions.evidenceCount());
     }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
