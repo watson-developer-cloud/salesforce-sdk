@@ -31,6 +31,9 @@ private class IBMAssistantV1Test {
   private static Long systemResponseValue;
   private static String messageResponse;
   private static String nodeVisited;
+  private static String nodeVisitedDetailsNode;
+  private static String nodeVisitedDetailsTitle;
+  private static String nodeVisitedDetailsCondition;
   private static String logMessageLevel;
   private static String logMessageText;
   private static String requestTimestamp;
@@ -59,6 +62,8 @@ private class IBMAssistantV1Test {
   private static String dialogNodeDigressIn;
   private static String dialogNodeDigressOut;
   private static String dialogNodeDigressOutSlots;
+  private static String nextCursor;
+  private static String refreshCursor;
 
   static {
     workspaceName = 'test_workspace';
@@ -92,6 +97,9 @@ private class IBMAssistantV1Test {
     systemResponseValue = 5;
     messageResponse = 'This is a response';
     nodeVisited = 'node_1';
+    nodeVisitedDetailsNode = 'node';
+    nodeVisitedDetailsTitle = 'node_title';
+    nodeVisitedDetailsCondition = '#condition';
     logMessageLevel = 'warn';
     logMessageText = 'test_warning';
     requestTimestamp = '2017-12-06T23:53:59.153Z';
@@ -123,6 +131,8 @@ private class IBMAssistantV1Test {
     dialogNodeDigressIn = 'returns';
     dialogNodeDigressOut = 'allow_all';
     dialogNodeDigressOutSlots = 'allow_all';
+    nextCursor = 'next_cursor';
+    refreshCursor = 'refresh_cursor';
   }
 
   static testMethod void testCreateWorkspace() {
@@ -547,6 +557,9 @@ private class IBMAssistantV1Test {
     System.assertEquals(Long.valueOf((String) response.getContext().getSystem().get(systemResponseKey)), systemResponseValue);
     System.assertEquals(response.getOutput().getText().get(0), messageResponse);
     System.assertEquals(response.getOutput().getNodesVisited().get(0), nodeVisited);
+    System.assertEquals(response.getOutput().getNodesVisitedDetails().get(0).getDialogNode(), nodeVisitedDetailsNode);
+    System.assertEquals(response.getOutput().getNodesVisitedDetails().get(0).getTitle(), nodeVisitedDetailsTitle);
+    System.assertEquals(response.getOutput().getNodesVisitedDetails().get(0).getConditions(), nodeVisitedDetailsCondition);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getLevel(), logMessageLevel);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getMsg(), logMessageText);
     Test.stopTest();
@@ -669,6 +682,8 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getPagination().getNextUrl(), nextUrl);
     System.assertEquals(response.getPagination().getTotal(), paginationTotal);
     System.assertEquals(response.getPagination().getMatched(), paginationMatched);
+    System.assertEquals(response.getPagination().getNextCursor(), nextCursor);
+    System.assertEquals(response.getPagination().getRefreshCursor(), refreshCursor);
     Test.stopTest();
   }
 
@@ -1414,6 +1429,8 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getLogs().get(0).getLogId(), logId);
     System.assertEquals(response.getPagination().getNextUrl(), nextUrl);
     System.assertEquals(response.getPagination().getMatched(), paginationMatched);
+    System.assertEquals(response.getPagination().getNextCursor(), nextCursor);
+    System.assertEquals(response.getPagination().getRefreshCursor(), refreshCursor);
     Test.stopTest();
   }
 
