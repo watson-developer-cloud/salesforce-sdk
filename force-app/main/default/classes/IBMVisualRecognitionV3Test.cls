@@ -109,9 +109,6 @@ private class IBMVisualRecognitionV3Test {
     System.assertEquals(resp.getImages()[0].getFaces()[0].getFaceLocation().getHeight(),0);
     System.assertEquals(resp.getImages()[0].getFaces()[0].getFaceLocation().getLeft(),0);
     System.assertEquals(resp.getImages()[0].getFaces()[0].getFaceLocation().getTop(),0);
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getIdentity().getScore(),0);
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getIdentity().getName(), 'string');
-    System.assertEquals(resp.getImages()[0].getFaces()[0].getIdentity().getTypeHierarchy(), 'string');
     System.assertEquals(resp.getImages()[0].getError().getErrorId(), 'string');
     Test.stopTest();
   }
