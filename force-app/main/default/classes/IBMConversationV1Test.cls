@@ -1448,7 +1448,6 @@ private class IBMConversationV1Test {
     System.assertEquals(response.getPagination().getNextUrl(), nextUrl);
     System.assertEquals(response.getPagination().getMatched(), paginationMatched);
     System.assertEquals(response.getPagination().getNextCursor(), nextCursor);
-    System.assertEquals(response.getPagination().getRefreshCursor(), refreshCursor);
     Test.stopTest();
   }
 
