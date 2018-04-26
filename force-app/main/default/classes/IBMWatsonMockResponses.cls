@@ -657,7 +657,8 @@ public class IBMWatsonMockResponses {
           '"nodes_visited_details": [' +
           '{' +
             '"dialog_node": "node",' +
-            '"title": "node_title"' +
+            '"title": "node_title",' +
+            '"conditions": "#condition"' +
           '}' +  
           ']' +
         '}' +
@@ -710,7 +711,9 @@ public class IBMWatsonMockResponses {
           '"refresh_url": "/v1/workspaces?version=2016-01-24&page_limit=1", ' +
           '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1", ' +
           '"total": 1, ' +
-          '"matched": 1' +
+          '"matched": 1,' +
+          '"next_cursor": "next_cursor",' +
+          '"refresh_cursor": "refresh_cursor"' +
         '}' +
         '}';
   }
@@ -1004,7 +1007,9 @@ public class IBMWatsonMockResponses {
         '], ' +
         '"pagination": {' +
           '"next_url": "/v1/workspaces?cursor=base64=&version=2016-01-24&page_limit=1", ' +
-          '"matched": 1' +
+          '"matched": 1,' +
+          '"next_cursor": "next_cursor",' +
+          '"refresh_cursor": "refresh_cursor"' +
         '}' +
       '}';
   }
@@ -1210,6 +1215,34 @@ public class IBMWatsonMockResponses {
     '      "confidence": 0.00017987414502176904' +
     '    }' +
     '  ]' +
+    '}';
+  }
+
+  public static String ClassifyCollection() {
+    return '{' +
+    '  "classifier_id" : "10D41B-nlc-1",' +
+    '  "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1",' +
+    '  "collection" : [ {' +
+    '    "text" : "How hot will it be today?",' +
+    '    "top_class" : "temperature",' +
+    '    "classes" : [ {' +
+    '      "class_name" : "temperature",' +
+    '      "confidence" : 0.9930558798985937' +
+    '    }, {' +
+    '      "class_name" : "conditions",' +
+    '      "confidence" : 0.006944120101406304' +
+    '    } ]' +
+    '  }, {' +
+    '    "text" : "Is it hot outside?",' +
+    '    "top_class" : "temperature",' +
+    '    "classes" : [ {' +
+    '      "class_name" : "temperature",' +
+    '      "confidence" : 1' +
+    '    }, {' +
+    '      "class_name" : "conditions",' +
+    '      "confidence" : 0' +
+    '    } ]' +
+    '  } ]' +
     '}';
   }
   
@@ -2380,6 +2413,70 @@ public class IBMWatsonMockResponses {
     '   ]' +
     ' }' +
     ' ]' +
+    '}';
+  }
+
+  public static String queryEntitiesResponse() {
+    return '{' +
+      '"entities": [' +
+      '{' +
+        '"text": "Steve Jobs",' +
+        '"type": "PERSON",' +
+        '"evidence": [' +
+        '{' +
+          '"document_id": "cb77ce6b-bb93-42a0-8643-dfb523e14da8",' +
+          '"field": "description",' +
+          '"start_offset": 305,' +
+          '"end_offset": 392,' +
+          '"entities": [' +
+          '{' +
+            '"type": "Person",' +
+            '"text": "Steve Jobs",' +
+            '"start_offset": 311,' +
+            '"end_offset": 321' +
+          '}' +
+          ']' +
+        '}' +
+        ']' +
+      '}' +
+      ']' +
+    '}';
+  }
+
+  public static String queryRelationsResponse() {
+    return '{' +
+      '"relations": [' +
+      '{' +
+        '"type": "FOUNDEROF",' +
+        '"frequency": 7,' +
+        '"arguments": [' +
+        '{' +
+          '"entities": [' +
+          '{' +
+            '"type": "PERSON",' +
+            '"text": "Steve Jobs"' +
+          '}' +
+          ']' +
+        '}' +
+        '],' +
+        '"evidence": [' +
+        '{' +
+          '"document_id": "b95df4c1-d00f-4771-abb2-a52baea0444a",' +
+          '"field": "text",' +
+          '"start_offset": 243,' +
+          '"end_offset": 303,' +
+          '"entities": [' +
+          '{' +
+            '"type": "Person",' +
+            '"text": "Steve Jobs",' +
+            '"start_offset": 243,' +
+            '"end_offset": 253' +
+          '}' +
+          ']' +
+        '}' +
+        ']' +
+      '}' +
+      ']' +
     '}';
   }
 }

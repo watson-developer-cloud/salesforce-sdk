@@ -487,34 +487,6 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * Calculation.
-   */
-  public class Calculation extends IBMWatsonGenericModel {
-    private Double value_serialized_name;
-    /**
-     * Gets the value_serialized_name.
-     *
-     * Value of the aggregation. (For 'max' and 'min' type).
-     *
-     * @return the value_serialized_name
-     */
-    @AuraEnabled
-    public Double getValue() {
-      return value_serialized_name;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Calculation ret = (Calculation) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
    * A collection for storing documents.
    */
   public class Collection extends IBMWatsonGenericModel {
@@ -1000,6 +972,7 @@ public class IBMDiscoveryV1Models {
     private PdfSettings pdf_serialized_name;
     private WordSettings word_serialized_name;
     private HtmlSettings html_serialized_name;
+    private SegmentSettings segment_serialized_name;
     private List<NormalizationOperation> json_normalizations_serialized_name;
     /**
      * Gets the pdf_serialized_name.
@@ -1033,6 +1006,17 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public HtmlSettings getHtml() {
       return html_serialized_name;
+    }
+    /**
+     * Gets the segment_serialized_name.
+     *
+     * A list of Document Segmentation settings.
+     *
+     * @return the segment_serialized_name
+     */
+    @AuraEnabled
+    public SegmentSettings getSegment() {
+      return segment_serialized_name;
     }
     /**
      * Gets the json_normalizations_serialized_name.
@@ -1074,6 +1058,15 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
+     * Sets the segment_serialized_name.
+     *
+     * @param segment the new segment
+     */
+    public void setSegment(final SegmentSettings segment) {
+      this.segment_serialized_name = segment;
+    }
+
+    /**
      * Sets the json_normalizations_serialized_name.
      *
      * @param jsonNormalizations the new jsonNormalizations
@@ -1100,6 +1093,10 @@ public class IBMDiscoveryV1Models {
       // calling custom deserializer for html_serialized_name
       HtmlSettings newHtml = (HtmlSettings) new HtmlSettings().deserialize(JSON.serialize(ret.getHtml()), (Map<String, Object>) jsonMap.get('html_serialized_name'), HtmlSettings.class);
       ret.setHtml(newHtml);
+
+      // calling custom deserializer for segment_serialized_name
+      SegmentSettings newSegment = (SegmentSettings) new SegmentSettings().deserialize(JSON.serialize(ret.getSegment()), (Map<String, Object>) jsonMap.get('segment_serialized_name'), SegmentSettings.class);
+      ret.setSegment(newSegment);
 
       // calling custom deserializer for json_normalizations_serialized_name
       List<NormalizationOperation> newJsonNormalizations = new List<NormalizationOperation>();
@@ -5916,34 +5913,6 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * Histogram.
-   */
-  public class Histogram extends IBMWatsonGenericModel {
-    private Long interval_serialized_name;
-    /**
-     * Gets the interval_serialized_name.
-     *
-     * Interval of the aggregation. (For 'histogram' type).
-     *
-     * @return the interval_serialized_name
-     */
-    @AuraEnabled
-    public Long getInterval() {
-      return interval_serialized_name;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Histogram ret = (Histogram) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
    * A list of HTML conversion settings.
    */
   public class HtmlSettings extends IBMWatsonGenericModel {
@@ -8283,23 +8252,19 @@ public class IBMDiscoveryV1Models {
    * An aggregation produced by the Discovery service to analyze the input provided.
    */
   public class QueryAggregation extends IBMWatsonGenericModel {
-    private String type_serialized_name;
+    private Long count_serialized_name;
     private String field_serialized_name;
-    private List<AggregationResult> results_serialized_name;
+    private Double value_serialized_name;
     private String match_serialized_name;
+    private String path_serialized_name;
+    private String interval_serialized_name;
+    private Boolean anomaly_serialized_name;
+    private Long size_serialized_name;
+    private TopHitsResults hits_serialized_name;
+    private String type_serialized_name;
+    private List<AggregationResult> results_serialized_name;
     private Long matching_results_serialized_name;
     private List<QueryAggregation> aggregations_serialized_name;
-    /**
-     * Gets the type_serialized_name.
-     *
-     * The type of aggregation command used. For example: term, filter, max, min, etc.
-     *
-     * @return the type_serialized_name
-     */
-    @AuraEnabled
-    public String getType() {
-      return type_serialized_name;
-    }
     /**
      * Gets the field_serialized_name.
      *
@@ -8312,13 +8277,24 @@ public class IBMDiscoveryV1Models {
       return field_serialized_name;
     }
     /**
-     * Gets the results_serialized_name.
+     * Gets the count_serialized_name.
      *
-     * @return the results_serialized_name
+     * @return the count_serialized_name
      */
     @AuraEnabled
-    public List<AggregationResult> getResults() {
-      return results_serialized_name;
+    public Long getCount() {
+      return count_serialized_name;
+    }
+    /**
+     * Gets the value_serialized_name.
+     *
+     * Value of the aggregation.
+     *
+     * @return the value_serialized_name
+     */
+    @AuraEnabled
+    public Double getValue() {
+      return value_serialized_name;
     }
     /**
      * Gets the match_serialized_name.
@@ -8330,6 +8306,79 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public String getMatch() {
       return match_serialized_name;
+    }
+    /**
+     * Gets the path_serialized_name.
+     *
+     * The area of the results the aggregation was restricted to.
+     *
+     * @return the path_serialized_name
+     */
+    @AuraEnabled
+    public String getPath() {
+      return path_serialized_name;
+    }
+    /**
+     * Gets the interval_serialized_name.
+     *
+     * Interval of the aggregation. Valid date interval values are second/seconds minute/minutes, hour/hours, day/days, week/weeks, month/months, and year/years.
+     *
+     * @return the interval_serialized_name
+     */
+    @AuraEnabled
+    public String getInterval() {
+      return interval_serialized_name;
+    }
+    /**
+     * Gets the anomaly_serialized_name.
+     *
+     * Used to inducate that anomaly detection should be performed. Anomaly detection is used to locate unusual datapoints within a time series.
+     *
+     * @return the anomaly_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getAnomaly() {
+      return anomaly_serialized_name;
+    }
+    /**
+     * Gets the size_serialized_name.
+     *
+     * Number of top hits returned by the aggregation.
+     *
+     * @return the size_serialized_name
+     */
+    @AuraEnabled
+    public Long getSize() {
+      return size_serialized_name;
+    }
+    /**
+     * Gets the hits_serialized_name.
+     *
+     * @return the hits_serialized_name
+     */
+    @AuraEnabled
+    public TopHitsResults getHits() {
+      return hits_serialized_name;
+    }
+    /**
+     * Gets the type_serialized_name.
+     *
+     * The type of aggregation command used. For example: term, filter, max, min, etc.
+     *
+     * @return the type_serialized_name
+     */
+    @AuraEnabled
+    public String getType() {
+      return type_serialized_name;
+    }
+    /**
+     * Gets the results_serialized_name.
+     *
+     * @return the results_serialized_name
+     */
+    @AuraEnabled
+    public List<AggregationResult> getResults() {
+      return results_serialized_name;
     }
     /**
      * Gets the matching_results_serialized_name.
@@ -8355,12 +8404,30 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the type_serialized_name.
+     * Sets the value_serialized_name.
      *
-     * @param typeVar the new typeVar
+     * @param value the new value
      */
-    public void setType(final String typeVar) {
-      this.type_serialized_name = typeVar;
+    public void setValue(final Double value) {
+      this.value_serialized_name = value;
+    }
+
+    /**
+     * Sets the match_serialized_name.
+     *
+     * @param match the new match
+     */
+    public void setMatch(final String match) {
+      this.match_serialized_name = match;
+    }
+
+    /**
+     * Sets the path_serialized_name.
+     *
+     * @param path the new path
+     */
+    public void setPath(final String path) {
+      this.path_serialized_name = path;
     }
 
     /**
@@ -8373,21 +8440,57 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
+     * Sets the interval_serialized_name.
+     *
+     * @param interval the new interval
+     */
+    public void setInterval(final String interval) {
+      this.interval_serialized_name = interval;
+    }
+
+    /**
+     * Sets the anomaly_serialized_name.
+     *
+     * @param anomaly the new anomaly
+     */
+    public void setAnomaly(final Boolean anomaly) {
+      this.anomaly_serialized_name = anomaly;
+    }
+
+    /**
+     * Sets the size_serialized_name.
+     *
+     * @param size the new size
+     */
+    public void setSize(final long size) {
+      this.size_serialized_name = size;
+    }
+
+    /**
+     * Sets the hits_serialized_name.
+     *
+     * @param hits the new hits
+     */
+    public void setHits(final TopHitsResults hits) {
+      this.hits_serialized_name = hits;
+    }
+
+    /**
+     * Sets the type_serialized_name.
+     *
+     * @param typeVar the new typeVar
+     */
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
+    }
+
+    /**
      * Sets the results_serialized_name.
      *
      * @param results the new results
      */
     public void setResults(final List<AggregationResult> results) {
       this.results_serialized_name = results;
-    }
-
-    /**
-     * Sets the match_serialized_name.
-     *
-     * @param match the new match
-     */
-    public void setMatch(final String match) {
-      this.match_serialized_name = match;
     }
 
     /**
@@ -8406,6 +8509,15 @@ public class IBMDiscoveryV1Models {
      */
     public void setAggregations(final List<QueryAggregation> aggregations) {
       this.aggregations_serialized_name = aggregations;
+    }
+
+    /**
+     * Sets the count_serialized_name.
+     *
+     * @param count the new count
+     */
+    public void setCount(final long count) {
+      this.count_serialized_name = count;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8440,6 +8552,10 @@ public class IBMDiscoveryV1Models {
         }
         ret.setAggregations(newAggregations);
       }
+
+      // calling custom deserializer for hits_serialized_name
+      TopHitsResults newHits = (TopHitsResults) new TopHitsResults().deserialize(JSON.serialize(ret.getHits()), (Map<String, Object>) jsonMap.get('hits_serialized_name'), TopHitsResults.class);
+      ret.setHits(newHits);
 
       return ret;
     }
@@ -8550,6 +8666,7 @@ public class IBMDiscoveryV1Models {
     private QueryEntitiesEntity entity_serialized_name;
     private QueryEntitiesContext context_serialized_name;
     private Long count_serialized_name;
+    private Long evidence_count_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
      *
@@ -8573,7 +8690,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the feature_serialized_name.
      *
-     * The entity query feature to perform. Must be `disambiguate`.
+     * The entity query feature to perform. Supported features are `disambiguate` and `similar_entities`.
      *
      * @return the feature_serialized_name
      */
@@ -8610,6 +8727,16 @@ public class IBMDiscoveryV1Models {
     public Long count() {
       return count_serialized_name;
     }
+    /**
+     * Gets the evidence_count_serialized_name.
+     *
+     * The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items per query is 10,000.
+     *
+     * @return the evidence_count_serialized_name
+     */
+    public Long evidenceCount() {
+      return evidence_count_serialized_name;
+    }
     private QueryEntitiesOptions(QueryEntitiesOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
@@ -8619,6 +8746,7 @@ public class IBMDiscoveryV1Models {
       entity_serialized_name = builder.entity_serialized_name;
       context_serialized_name = builder.context_serialized_name;
       count_serialized_name = builder.count_serialized_name;
+      evidence_count_serialized_name = builder.evidence_count_serialized_name;
     }
 
     /**
@@ -8642,6 +8770,7 @@ public class IBMDiscoveryV1Models {
     private QueryEntitiesEntity entity_serialized_name;
     private QueryEntitiesContext context_serialized_name;
     private Long count_serialized_name;
+    private Long evidence_count_serialized_name;
 
     private QueryEntitiesOptionsBuilder(QueryEntitiesOptions queryEntitiesOptions) {
       environment_id_serialized_name = queryEntitiesOptions.environment_id_serialized_name;
@@ -8650,6 +8779,7 @@ public class IBMDiscoveryV1Models {
       entity_serialized_name = queryEntitiesOptions.entity_serialized_name;
       context_serialized_name = queryEntitiesOptions.context_serialized_name;
       count_serialized_name = queryEntitiesOptions.count_serialized_name;
+      evidence_count_serialized_name = queryEntitiesOptions.evidence_count_serialized_name;
     }
 
     /**
@@ -8743,20 +8873,31 @@ public class IBMDiscoveryV1Models {
       this.count_serialized_name = count;
       return this;
     }
+
+    /**
+     * Set the evidence_count_serialized_name.
+     *
+     * @param evidenceCount the evidenceCount
+     * @return the QueryEntitiesOptions builder
+     */
+    public QueryEntitiesOptionsBuilder evidenceCount(Long evidenceCount) {
+      this.evidence_count_serialized_name = evidenceCount;
+      return this;
+    }
   }
 
   /**
    * An array of entities resulting from the query.
    */
   public class QueryEntitiesResponse extends IBMWatsonGenericModel {
-    private List<QueryEntitiesEntity> entities_serialized_name;
+    private List<QueryEntitiesResponseItem> entities_serialized_name;
     /**
      * Gets the entities_serialized_name.
      *
      * @return the entities_serialized_name
      */
     @AuraEnabled
-    public List<QueryEntitiesEntity> getEntities() {
+    public List<QueryEntitiesResponseItem> getEntities() {
       return entities_serialized_name;
     }
 
@@ -8765,7 +8906,7 @@ public class IBMDiscoveryV1Models {
      *
      * @param entities the new entities
      */
-    public void setEntities(final List<QueryEntitiesEntity> entities) {
+    public void setEntities(final List<QueryEntitiesResponseItem> entities) {
       this.entities_serialized_name = entities;
     }
 
@@ -8777,17 +8918,343 @@ public class IBMDiscoveryV1Models {
       QueryEntitiesResponse ret = (QueryEntitiesResponse) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for entities_serialized_name
-      List<QueryEntitiesEntity> newEntities = new List<QueryEntitiesEntity>();
-      List<QueryEntitiesEntity> deserializedEntities = ret.getEntities();
+      List<QueryEntitiesResponseItem> newEntities = new List<QueryEntitiesResponseItem>();
+      List<QueryEntitiesResponseItem> deserializedEntities = ret.getEntities();
       if (deserializedEntities != null) {
         for (Integer i = 0; i < deserializedEntities.size(); i++) {
-          QueryEntitiesEntity currentItem = ret.getEntities().get(i);
+          QueryEntitiesResponseItem currentItem = ret.getEntities().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
-          QueryEntitiesEntity newItem = (QueryEntitiesEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEntitiesEntity.class);
+          QueryEntitiesResponseItem newItem = (QueryEntitiesResponseItem) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEntitiesResponseItem.class);
           newEntities.add(newItem);
         }
         ret.setEntities(newEntities);
       }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Object containing Entity query response information.
+   */
+  public class QueryEntitiesResponseItem extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    private String type_serialized_name;
+    private List<QueryEvidence> evidence_serialized_name;
+    /**
+     * Gets the text_serialized_name.
+     *
+     * Entity text content.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+    /**
+     * Gets the type_serialized_name.
+     *
+     * The type of the result entity.
+     *
+     * @return the type_serialized_name
+     */
+    @AuraEnabled
+    public String getType() {
+      return type_serialized_name;
+    }
+    /**
+     * Gets the evidence_serialized_name.
+     *
+     * List of different evidentiary items to support the result.
+     *
+     * @return the evidence_serialized_name
+     */
+    @AuraEnabled
+    public List<QueryEvidence> getEvidence() {
+      return evidence_serialized_name;
+    }
+
+    /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the type_serialized_name.
+     *
+     * @param typeVar the new typeVar
+     */
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
+    }
+
+    /**
+     * Sets the evidence_serialized_name.
+     *
+     * @param evidence the new evidence
+     */
+    public void setEvidence(final List<QueryEvidence> evidence) {
+      this.evidence_serialized_name = evidence;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryEntitiesResponseItem ret = (QueryEntitiesResponseItem) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for evidence_serialized_name
+      List<QueryEvidence> newEvidence = new List<QueryEvidence>();
+      List<QueryEvidence> deserializedEvidence = ret.getEvidence();
+      if (deserializedEvidence != null) {
+        for (Integer i = 0; i < deserializedEvidence.size(); i++) {
+          QueryEvidence currentItem = ret.getEvidence().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('evidence_serialized_name');
+          QueryEvidence newItem = (QueryEvidence) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidence.class);
+          newEvidence.add(newItem);
+        }
+        ret.setEvidence(newEvidence);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Description of evidence location supporting Knoweldge Graph query result.
+   */
+  public class QueryEvidence extends IBMWatsonGenericModel {
+    private String document_id_serialized_name;
+    private String field_serialized_name;
+    private Long start_offset_serialized_name;
+    private Long end_offset_serialized_name;
+    private List<QueryEvidenceEntity> entities_serialized_name;
+    /**
+     * Gets the document_id_serialized_name.
+     *
+     * The docuemnt ID (as indexed in Discovery) of the evidence location.
+     *
+     * @return the document_id_serialized_name
+     */
+    @AuraEnabled
+    public String getDocumentId() {
+      return document_id_serialized_name;
+    }
+    /**
+     * Gets the field_serialized_name.
+     *
+     * The field of the document where the supporting evidence was identified.
+     *
+     * @return the field_serialized_name
+     */
+    @AuraEnabled
+    public String getField() {
+      return field_serialized_name;
+    }
+    /**
+     * Gets the start_offset_serialized_name.
+     *
+     * The start location of the evidence in the identified field. This value is inclusive.
+     *
+     * @return the start_offset_serialized_name
+     */
+    @AuraEnabled
+    public Long getStartOffset() {
+      return start_offset_serialized_name;
+    }
+    /**
+     * Gets the end_offset_serialized_name.
+     *
+     * The end location of the evidence in the identified field. This value is inclusive.
+     *
+     * @return the end_offset_serialized_name
+     */
+    @AuraEnabled
+    public Long getEndOffset() {
+      return end_offset_serialized_name;
+    }
+    /**
+     * Gets the entities_serialized_name.
+     *
+     * An array of entity objects that show evidence of the result.
+     *
+     * @return the entities_serialized_name
+     */
+    @AuraEnabled
+    public List<QueryEvidenceEntity> getEntities() {
+      return entities_serialized_name;
+    }
+
+    /**
+     * Sets the document_id_serialized_name.
+     *
+     * @param documentId the new documentId
+     */
+    public void setDocumentId(final String documentId) {
+      this.document_id_serialized_name = documentId;
+    }
+
+    /**
+     * Sets the field_serialized_name.
+     *
+     * @param field the new field
+     */
+    public void setField(final String field) {
+      this.field_serialized_name = field;
+    }
+
+    /**
+     * Sets the start_offset_serialized_name.
+     *
+     * @param startOffset the new startOffset
+     */
+    public void setStartOffset(final long startOffset) {
+      this.start_offset_serialized_name = startOffset;
+    }
+
+    /**
+     * Sets the end_offset_serialized_name.
+     *
+     * @param endOffset the new endOffset
+     */
+    public void setEndOffset(final long endOffset) {
+      this.end_offset_serialized_name = endOffset;
+    }
+
+    /**
+     * Sets the entities_serialized_name.
+     *
+     * @param entities the new entities
+     */
+    public void setEntities(final List<QueryEvidenceEntity> entities) {
+      this.entities_serialized_name = entities;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryEvidence ret = (QueryEvidence) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for entities_serialized_name
+      List<QueryEvidenceEntity> newEntities = new List<QueryEvidenceEntity>();
+      List<QueryEvidenceEntity> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          QueryEvidenceEntity currentItem = ret.getEntities().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          QueryEvidenceEntity newItem = (QueryEvidenceEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidenceEntity.class);
+          newEntities.add(newItem);
+        }
+        ret.setEntities(newEntities);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Entity description and location within evidence field.
+   */
+  public class QueryEvidenceEntity extends IBMWatsonGenericModel {
+    private String type_serialized_name;
+    private String text_serialized_name;
+    private Long start_offset_serialized_name;
+    private Long end_offset_serialized_name;
+    /**
+     * Gets the type_serialized_name.
+     *
+     * The entity type for this entity. Possible types vary based on model used.
+     *
+     * @return the type_serialized_name
+     */
+    @AuraEnabled
+    public String getType() {
+      return type_serialized_name;
+    }
+    /**
+     * Gets the text_serialized_name.
+     *
+     * The original text of this entity as found in the evidence field.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+    /**
+     * Gets the start_offset_serialized_name.
+     *
+     * The start location of the entity text in the identified field. This value is inclusive.
+     *
+     * @return the start_offset_serialized_name
+     */
+    @AuraEnabled
+    public Long getStartOffset() {
+      return start_offset_serialized_name;
+    }
+    /**
+     * Gets the end_offset_serialized_name.
+     *
+     * The end location of the entity text in the identified field. This value is exclusive.
+     *
+     * @return the end_offset_serialized_name
+     */
+    @AuraEnabled
+    public Long getEndOffset() {
+      return end_offset_serialized_name;
+    }
+
+    /**
+     * Sets the type_serialized_name.
+     *
+     * @param typeVar the new typeVar
+     */
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
+    }
+
+    /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the start_offset_serialized_name.
+     *
+     * @param startOffset the new startOffset
+     */
+    public void setStartOffset(final long startOffset) {
+      this.start_offset_serialized_name = startOffset;
+    }
+
+    /**
+     * Sets the end_offset_serialized_name.
+     *
+     * @param endOffset the new endOffset
+     */
+    public void setEndOffset(final long endOffset) {
+      this.end_offset_serialized_name = endOffset;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      QueryEvidenceEntity ret = (QueryEvidenceEntity) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -9620,6 +10087,11 @@ public class IBMDiscoveryV1Models {
     private IBMWatsonMapModel metadata_serialized_name;
     private String collection_id_serialized_name;
     private QueryResultResultMetadata result_metadata_serialized_name;
+    private Long code_serialized_name;
+    private String filename_serialized_name;
+    private String file_type_serialized_name;
+    private String sha1_serialized_name;
+    private List<Notice> notices_serialized_name;
     private Map<String, Object> additional_properties_serialized_name;
 
     /**
@@ -9670,6 +10142,56 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public QueryResultResultMetadata getResultMetadata() {
       return result_metadata_serialized_name;
+    }
+
+    /**
+     * Gets the code_serialized_name.
+     *
+     * @return the code_serialized_name
+     */
+    @AuraEnabled
+    public Long getCode() {
+      return code_serialized_name;
+    }
+
+    /**
+     * Gets the filename_serialized_name.
+     *
+     * @return the filename_serialized_name
+     */
+    @AuraEnabled
+    public String getFilename() {
+      return filename_serialized_name;
+    }
+
+    /**
+     * Gets the file_type_serialized_name.
+     *
+     * @return the file_type_serialized_name
+     */
+    @AuraEnabled
+    public String getFileType() {
+      return file_type_serialized_name;
+    }
+
+    /**
+     * Gets the sha1_serialized_name.
+     *
+     * @return the sha1_serialized_name
+     */
+    @AuraEnabled
+    public String getSha1() {
+      return sha1_serialized_name;
+    }
+
+    /**
+     * Gets the notices_serialized_name.
+     *
+     * @return the notices_serialized_name
+     */
+    @AuraEnabled
+    public List<Notice> getNotices() {
+      return notices_serialized_name;
     }
 
     /**
@@ -9727,6 +10249,51 @@ public class IBMDiscoveryV1Models {
       this.result_metadata_serialized_name = result_metadata_serialized_name;
     }
 
+    /**
+     * Sets the code_serialized_name.
+     *
+     * @param code_serialized_name the new code_serialized_name
+     */
+    public void setCode(final Long code_serialized_name) {
+      this.code_serialized_name = code_serialized_name;
+    }
+
+    /**
+     * Sets the filename_serialized_name.
+     *
+     * @param filename_serialized_name the new filename_serialized_name
+     */
+    public void setFilename(final String filename_serialized_name) {
+      this.filename_serialized_name = filename_serialized_name;
+    }
+
+    /**
+     * Sets the file_type_serialized_name.
+     *
+     * @param file_type_serialized_name the new file_type_serialized_name
+     */
+    public void setFileType(final String file_type_serialized_name) {
+      this.file_type_serialized_name = file_type_serialized_name;
+    }
+
+    /**
+     * Sets the sha1_serialized_name.
+     *
+     * @param sha1_serialized_name the new sha1_serialized_name
+     */
+    public void setSha1(final String sha1_serialized_name) {
+      this.sha1_serialized_name = sha1_serialized_name;
+    }
+
+    /**
+     * Sets the notices_serialized_name.
+     *
+     * @param notices_serialized_name the new notices_serialized_name
+     */
+    public void setNotices(final List<Notice> notices_serialized_name) {
+      this.notices_serialized_name = notices_serialized_name;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -9741,6 +10308,19 @@ public class IBMDiscoveryV1Models {
       // calling custom deserializer for result_metadata_serialized_name
       QueryResultResultMetadata newResultMetadata = (QueryResultResultMetadata) new QueryResultResultMetadata().deserialize(JSON.serialize(ret.getResultMetadata()), (Map<String, Object>) jsonMap.get('result_metadata_serialized_name'), QueryResultResultMetadata.class);
       ret.setResultMetadata(newResultMetadata);
+
+      // calling custom deserializer for notices_serialized_name
+      List<Notice> newNotices = new List<Notice>();
+      List<Notice> deserializedNotices = ret.getNotices();
+      if (deserializedNotices != null) {
+        for (Integer i = 0; i < deserializedNotices.size(); i++) {
+          Notice currentItem = ret.getNotices().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('notices_serialized_name');
+          Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
+          newNotices.add(newItem);
+        }
+        ret.setNotices(newNotices);
+      }
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
@@ -10611,7 +11191,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the exact_serialized_name.
      *
-     * If false, implicit disambiguation is performed. The default is `false`.
+     * If false, implicit querying is performed. The default is `false`.
      *
      * @return the exact_serialized_name
      */
@@ -10756,6 +11336,7 @@ public class IBMDiscoveryV1Models {
     private String sort_serialized_name;
     private QueryRelationsFilter filter_serialized_name;
     private Long count_serialized_name;
+    private Long evidence_count_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
      *
@@ -10826,6 +11407,16 @@ public class IBMDiscoveryV1Models {
     public Long count() {
       return count_serialized_name;
     }
+    /**
+     * Gets the evidence_count_serialized_name.
+     *
+     * The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items per query is 10,000.
+     *
+     * @return the evidence_count_serialized_name
+     */
+    public Long evidenceCount() {
+      return evidence_count_serialized_name;
+    }
     private QueryRelationsOptions(QueryRelationsOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
@@ -10836,6 +11427,7 @@ public class IBMDiscoveryV1Models {
       sort_serialized_name = builder.sort_serialized_name;
       filter_serialized_name = builder.filter_serialized_name;
       count_serialized_name = builder.count_serialized_name;
+      evidence_count_serialized_name = builder.evidence_count_serialized_name;
     }
 
     /**
@@ -10860,6 +11452,7 @@ public class IBMDiscoveryV1Models {
     private String sort_serialized_name;
     private QueryRelationsFilter filter_serialized_name;
     private Long count_serialized_name;
+    private Long evidence_count_serialized_name;
 
     private QueryRelationsOptionsBuilder(QueryRelationsOptions queryRelationsOptions) {
       environment_id_serialized_name = queryRelationsOptions.environment_id_serialized_name;
@@ -10869,6 +11462,7 @@ public class IBMDiscoveryV1Models {
       sort_serialized_name = queryRelationsOptions.sort_serialized_name;
       filter_serialized_name = queryRelationsOptions.filter_serialized_name;
       count_serialized_name = queryRelationsOptions.count_serialized_name;
+      evidence_count_serialized_name = queryRelationsOptions.evidence_count_serialized_name;
     }
 
     /**
@@ -10989,6 +11583,17 @@ public class IBMDiscoveryV1Models {
       this.count_serialized_name = count;
       return this;
     }
+
+    /**
+     * Set the evidence_count_serialized_name.
+     *
+     * @param evidenceCount the evidenceCount
+     * @return the QueryRelationsOptions builder
+     */
+    public QueryRelationsOptionsBuilder evidenceCount(Long evidenceCount) {
+      this.evidence_count_serialized_name = evidenceCount;
+      return this;
+    }
   }
 
   /**
@@ -10998,6 +11603,7 @@ public class IBMDiscoveryV1Models {
     private String type_serialized_name;
     private Long frequency_serialized_name;
     private List<QueryRelationsArgument> arguments_serialized_name;
+    private List<QueryEvidence> evidence_serialized_name;
     /**
      * Gets the type_serialized_name.
      *
@@ -11031,6 +11637,17 @@ public class IBMDiscoveryV1Models {
     public List<QueryRelationsArgument> getArguments() {
       return arguments_serialized_name;
     }
+    /**
+     * Gets the evidence_serialized_name.
+     *
+     * List of different evidentiary items to support the result.
+     *
+     * @return the evidence_serialized_name
+     */
+    @AuraEnabled
+    public List<QueryEvidence> getEvidence() {
+      return evidence_serialized_name;
+    }
 
     /**
      * Sets the type_serialized_name.
@@ -11059,6 +11676,15 @@ public class IBMDiscoveryV1Models {
       this.arguments_serialized_name = arguments;
     }
 
+    /**
+     * Sets the evidence_serialized_name.
+     *
+     * @param evidence the new evidence
+     */
+    public void setEvidence(final List<QueryEvidence> evidence) {
+      this.evidence_serialized_name = evidence;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -11077,6 +11703,19 @@ public class IBMDiscoveryV1Models {
           newArguments.add(newItem);
         }
         ret.setArguments(newArguments);
+      }
+
+      // calling custom deserializer for evidence_serialized_name
+      List<QueryEvidence> newEvidence = new List<QueryEvidence>();
+      List<QueryEvidence> deserializedEvidence = ret.getEvidence();
+      if (deserializedEvidence != null) {
+        for (Integer i = 0; i < deserializedEvidence.size(); i++) {
+          QueryEvidence currentItem = ret.getEvidence().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('evidence_serialized_name');
+          QueryEvidence newItem = (QueryEvidence) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidence.class);
+          newEvidence.add(newItem);
+        }
+        ret.setEvidence(newEvidence);
       }
 
       return ret;
@@ -11425,7 +12064,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * QueryResultResultMetadata.
+   * Metadata of a query result.
    */
   public class QueryResultResultMetadata extends IBMWatsonGenericModel {
     private Double score_serialized_name;
@@ -11462,18 +12101,50 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * Term.
+   * A list of Document Segmentation settings.
    */
-  public class Term extends IBMWatsonGenericModel {
-    private Long count_serialized_name;
+  public class SegmentSettings extends IBMWatsonGenericModel {
+    private Boolean enabled_serialized_name;
+    private List<String> selector_tags_serialized_name;
     /**
-     * Gets the count_serialized_name.
+     * Gets the enabled_serialized_name.
      *
-     * @return the count_serialized_name
+     * Enables/disables the Document Segmentation feature.
+     *
+     * @return the enabled_serialized_name
      */
     @AuraEnabled
-    public Long getCount() {
-      return count_serialized_name;
+    public Boolean getEnabled() {
+      return enabled_serialized_name;
+    }
+    /**
+     * Gets the selector_tags_serialized_name.
+     *
+     * Defines the heading level that splits into document segments. Valid values are h1, h2, h3, h4, h5, h6.
+     *
+     * @return the selector_tags_serialized_name
+     */
+    @AuraEnabled
+    public List<String> getSelectorTags() {
+      return selector_tags_serialized_name;
+    }
+
+    /**
+     * Sets the enabled_serialized_name.
+     *
+     * @param enabled the new enabled
+     */
+    public void setEnabled(final Boolean enabled) {
+      this.enabled_serialized_name = enabled;
+    }
+
+    /**
+     * Sets the selector_tags_serialized_name.
+     *
+     * @param selectorTags the new selectorTags
+     */
+    public void setSelectorTags(final List<String> selectorTags) {
+      this.selector_tags_serialized_name = selectorTags;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -11481,7 +12152,7 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      Term ret = (Term) super.deserialize(jsonString, jsonMap, classType);
+      SegmentSettings ret = (SegmentSettings) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -11865,6 +12536,77 @@ public class IBMDiscoveryV1Models {
           newNotices.add(newItem);
         }
         ret.setNotices(newNotices);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * TopHitsResults.
+   */
+  public class TopHitsResults extends IBMWatsonGenericModel {
+    private Long matching_results_serialized_name;
+    private List<QueryResult> hits_serialized_name;
+    /**
+     * Gets the matching_results_serialized_name.
+     *
+     * Number of matching results.
+     *
+     * @return the matching_results_serialized_name
+     */
+    @AuraEnabled
+    public Long getMatchingResults() {
+      return matching_results_serialized_name;
+    }
+    /**
+     * Gets the hits_serialized_name.
+     *
+     * Top results returned by the aggregation.
+     *
+     * @return the hits_serialized_name
+     */
+    @AuraEnabled
+    public List<QueryResult> getHits() {
+      return hits_serialized_name;
+    }
+
+    /**
+     * Sets the matching_results_serialized_name.
+     *
+     * @param matchingResults the new matchingResults
+     */
+    public void setMatchingResults(final long matchingResults) {
+      this.matching_results_serialized_name = matchingResults;
+    }
+
+    /**
+     * Sets the hits_serialized_name.
+     *
+     * @param hits the new hits
+     */
+    public void setHits(final List<QueryResult> hits) {
+      this.hits_serialized_name = hits;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      TopHitsResults ret = (TopHitsResults) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for hits_serialized_name
+      List<QueryResult> newHits = new List<QueryResult>();
+      List<QueryResult> deserializedHits = ret.getHits();
+      if (deserializedHits != null) {
+        for (Integer i = 0; i < deserializedHits.size(); i++) {
+          QueryResult currentItem = ret.getHits().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('hits_serialized_name');
+          QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryResult.class);
+          newHits.add(newItem);
+        }
+        ret.setHits(newHits);
       }
 
       return ret;

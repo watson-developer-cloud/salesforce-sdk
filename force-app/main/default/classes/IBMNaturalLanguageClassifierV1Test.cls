@@ -42,6 +42,42 @@ private class IBMNaturalLanguageClassifierV1Test {
   }
 
   /**
+   * Test classifying multiple phrases at once.
+   */
+  static testMethod void testClassifyCollection() {
+    String body = IBMWatsonMockResponses.ClassifyCollection();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
+    service.setEndPoint('https://gateway.watsonplatform.net/natural-language-classifier/api');
+    service.setUsernameAndPassword('username', 'password');
+    String classifierId = '10D41B-nlc-1';
+    IBMNaturalLanguageClassifierV1Models.ClassifyInput input1 = new IBMNaturalLanguageClassifierV1Models.ClassifyInput();
+    String text1 = 'How hot will it be today?';
+    input1.setText(text1);
+    IBMNaturalLanguageClassifierV1Models.ClassifyInput input2 = new IBMNaturalLanguageClassifierV1Models.ClassifyInput();
+    String text2 = 'Is it hot outside?';
+    input2.setText(text2);
+    List<IBMNaturalLanguageClassifierV1Models.ClassifyInput> inputCollection = new List<IBMNaturalLanguageClassifierV1Models.ClassifyInput> {
+      input1,
+      input2
+    };
+    IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptions classifyOptions = new IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptionsBuilder()
+      .classifierId(classifierId)
+      .collection(inputCollection)
+      .build();
+    IBMNaturalLanguageClassifierV1Models.ClassificationCollection classification = service.classifyCollection(classifyOptions);
+    System.assertEquals(classification.getClassifierId(), classifierId);
+    System.assertEquals(classification.getUrl(), 'https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/' + classifierId);
+    System.assertEquals(classification.getCollection().get(0).getText(), text1);
+    System.assertEquals(classification.getCollection().get(0).getTopClass(), 'temperature');
+    System.assertEquals(classification.getCollection().get(1).getText(), text2);
+    System.assertEquals(classification.getCollection().get(1).getTopClass(), 'temperature');
+    Test.stopTest();
+  }
+
+  /**
    *  Test send data to create and train a classifier.
    *
    */

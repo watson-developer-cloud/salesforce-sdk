@@ -133,6 +133,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (recognizeOptions.speakerLabels() != null) {
       builder.query('speaker_labels', String.valueOf(recognizeOptions.speakerLabels()));
     }
+    if (recognizeOptions.baseModelVersion() != null) {
+      builder.query('base_model_version', recognizeOptions.baseModelVersion());
+    }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody);
 
@@ -213,7 +216,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
       builder.query('customization_weight', String.valueOf(createJobOptions.customizationWeight()));
     }
     if (createJobOptions.version() != null) {
-      builder.query('version', createJobOptions.version());
+      builder.query('base_model_version', createJobOptions.version());
     }
     if (createJobOptions.inactivityTimeout() != null) {
       builder.query('inactivity_timeout', String.valueOf(createJobOptions.inactivityTimeout()));

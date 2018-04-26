@@ -68,7 +68,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the type_hierarchy_serialized_name.
      *
-     * Knowledge graph of the property. For example, `People/Leaders/Presidents/USA/Barack Obama`. Included only if identified.
+     * Knowledge graph of the property. For example, `/fruit/pome/apple/eating apple/Granny Smith`. Included only if identified.
      *
      * @return the type_hierarchy_serialized_name
      */
@@ -383,10 +383,12 @@ public class IBMVisualRecognitionV3Models {
     private String name_serialized_name;
     private String owner_serialized_name;
     private String status_serialized_name;
+    private Boolean core_ml_enabled_serialized_name;
     private String explanation_serialized_name;
     private Datetime created_serialized_name;
     private List<ModelClass> classes_serialized_name;
     private Datetime retrained_serialized_name;
+    private Datetime updated_serialized_name;
     /**
      * Gets the classifier_id_serialized_name.
      *
@@ -432,6 +434,17 @@ public class IBMVisualRecognitionV3Models {
       return status_serialized_name;
     }
     /**
+     * Gets the core_ml_enabled_serialized_name.
+     *
+     * Whether the classifier can be downloaded as a Core ML model after the training status is `ready`.
+     *
+     * @return the core_ml_enabled_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getCoreMlEnabled() {
+      return core_ml_enabled_serialized_name;
+    }
+    /**
      * Gets the explanation_serialized_name.
      *
      * If classifier training has failed, this field may explain why.
@@ -445,7 +458,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the created_serialized_name.
      *
-     * Date and time in Coordinated Universal Time that the classifier was created.
+     * Date and time in Coordinated Universal Time (UTC) that the classifier was created.
      *
      * @return the created_serialized_name
      */
@@ -467,13 +480,24 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the retrained_serialized_name.
      *
-     * Date and time in Coordinated Universal Time that the classifier was updated. Returned when verbose=`true`. Might not be returned by some requests.
+     * Date and time in Coordinated Universal Time (UTC) that the classifier was updated. Returned when verbose=`true`. Might not be returned by some requests. Identical to `updated` and retained for backward compatibility.
      *
      * @return the retrained_serialized_name
      */
     @AuraEnabled
     public Datetime getRetrained() {
       return retrained_serialized_name;
+    }
+    /**
+     * Gets the updated_serialized_name.
+     *
+     * Date and time in Coordinated Universal Time (UTC) that the classifier was most recently updated. The field matches either `retrained` or `created`.  Returned when verbose=`true`. Might not be returned by some requests.
+     *
+     * @return the updated_serialized_name
+     */
+    @AuraEnabled
+    public Datetime getUpdated() {
+      return updated_serialized_name;
     }
 
     /**
@@ -513,6 +537,15 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
+     * Sets the core_ml_enabled_serialized_name.
+     *
+     * @param coreMlEnabled the new coreMlEnabled
+     */
+    public void setCoreMlEnabled(final Boolean coreMlEnabled) {
+      this.core_ml_enabled_serialized_name = coreMlEnabled;
+    }
+
+    /**
      * Sets the explanation_serialized_name.
      *
      * @param explanation the new explanation
@@ -546,6 +579,15 @@ public class IBMVisualRecognitionV3Models {
      */
     public void setRetrained(final Datetime retrained) {
       this.retrained_serialized_name = retrained;
+    }
+
+    /**
+     * Sets the updated_serialized_name.
+     *
+     * @param updated the new updated
+     */
+    public void setUpdated(final Datetime updated) {
+      this.updated_serialized_name = updated;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -665,7 +707,7 @@ public class IBMVisualRecognitionV3Models {
   }
 
   /**
-   * Verbose list of classifiers retrieved in the GET v2/classifiers call.
+   * List of classifiers.
    */
   public class Classifiers extends IBMWatsonGenericModel {
     private List<Classifier> classifiers_serialized_name;
@@ -728,7 +770,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the images_file_serialized_name.
      *
-     * An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters. You can also include images with the `url` property in the **parameters** object.
+     * An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.  You can also include an image with the **url** parameter.
      *
      * @return the images_file_serialized_name
      */
@@ -748,7 +790,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the accept_language_serialized_name.
      *
-     * Specifies the language of the output class names.  Can be `en` (English), `ar` (Arabic), `de` (German), `es` (Spanish), `it` (Italian), `ja` (Japanese), or `ko` (Korean).  Classes for which no translation is available are omitted.  The response might not be in the specified language under these conditions: - English is returned when the requested language is not supported. - Classes are not returned when there is no translation for them. - Custom classifiers returned with this method return tags in the language of the custom classifier.
+     * The language of the output class names. The full set of languages is supported only for the built-in `default` classifier ID. The class names of custom classifiers are not translated.  The response might not be in the specified language when the requested language is not supported or when there is no translation for the class name.
      *
      * @return the accept_language_serialized_name
      */
@@ -758,7 +800,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the url_serialized_name.
      *
-     * A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images in the **images_file** parameter.
+     * The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB.  You can also include images with the **images_file** parameter.
      *
      * @return the url_serialized_name
      */
@@ -768,7 +810,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the threshold_serialized_name.
      *
-     * A floating point value that specifies the minimum score a class must have to be displayed in the response. The default threshold for returning scores from a classifier is `0.5`. Set the threshold to `0.0` to ignore the classification score and return all values.
+     * The minimum score a class must have to be displayed in the response. Set the threshold to `0.0` to ignore the classification score and return all values.
      *
      * @return the threshold_serialized_name
      */
@@ -778,7 +820,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the owners_serialized_name.
      *
-     * An array of the categories of classifiers to apply. Use `IBM` to classify against the `default` general classifier, and use `me` to classify against your custom classifiers. To analyze the image against both classifier categories, set the value to both `IBM` and `me`.   The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.  The **classifier_ids** parameter overrides **owners**, so make sure that **classifier_ids** is empty.
+     * The categories of classifiers to apply. Use `IBM` to classify against the `default` general classifier, and use `me` to classify against your custom classifiers. To analyze the image against both classifier categories, set the value to both `IBM` and `me`.   The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.  The **classifier_ids** parameter overrides **owners**, so make sure that **classifier_ids** is empty.
      *
      * @return the owners_serialized_name
      */
@@ -788,7 +830,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the classifier_ids_serialized_name.
      *
-     * The **classifier_ids** parameter overrides **owners**, so make sure that **classifier_ids** is empty. - **classifier_ids**: Specifies which classifiers to apply and overrides the **owners** parameter. You can specify both custom and built-in classifiers. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.  The following built-in classifier IDs require no training: - `default`: Returns classes from thousands of general tags. - `food`: (Beta) Enhances specificity and accuracy for images of food items. - `explicit`: (Beta) Evaluates whether the image might be pornographic.  Example: `"classifier_ids="CarsvsTrucks_1479118188","explicit"`.
+     * Which classifiers to apply. Overrides the **owners** parameter. You can specify both custom and built-in classifier IDs. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.  The following built-in classifier IDs require no training: - `default`: Returns classes from thousands of general tags. - `food`: (Beta) Enhances specificity and accuracy for images of food items. - `explicit`: (Beta) Evaluates whether the image might be pornographic.
      *
      * @return the classifier_ids_serialized_name
      */
@@ -1030,37 +1072,36 @@ public class IBMVisualRecognitionV3Models {
       return name_serialized_name;
     }
     /**
-    * Gets the class names.
-    *
-    * @return the classNames
-    */
+     * Gets the class names.
+     *
+     * @return the classNames
+     */
     public Set<String> classNames() {
       return classname_positive_examples_serialized_name.keySet();
     }
-
     /**
-    * Gets the positive examples by class name.
-    *
-    * A .zip file of images that depict the visual subject of a class in the new classifier.
-    * You can include more than one positive example file in a call. Append
-    * `_positive_examples` to the form name. The prefix is used as the class name. For
-    * example, `goldenretriever_positive_examples` creates the
-    * class **goldenretriever**.  Include at least 10 images in .jpg or .png format. The
-    * minimum recommended image resolution is 32X32 pixels. The maximum number of
-    * images is 10,000 images or 100 MB per .zip file.  Encode special characters in the file
-    * name in UTF-8.  The API explorer limits you to training only one class. To train
-    * more classes, use the API functionality.
-    *
-    * @param className the class name
-    * @return the positiveExamples
-    */
+     * Gets the positive examples by class name.
+     *
+     * A .zip file of images that depict the visual subject of a class in the new classifier.
+     * You can include more than one positive example file in a call. Append
+     * `_positive_examples` to the form name. The prefix is used as the class name. For
+     * example, `goldenretriever_positive_examples` creates the
+     * class **goldenretriever**.  Include at least 10 images in .jpg or .png format. The
+     * minimum recommended image resolution is 32X32 pixels. The maximum number of
+     * images is 10,000 images or 100 MB per .zip file.  Encode special characters in the file
+     * name in UTF-8.  The API explorer limits you to training only one class. To train
+     * more classes, use the API functionality.
+     *
+     * @param className the class name
+     * @return the positiveExamples
+     */
     public IBMWatsonFile positiveExamplesByClassName(String className) {
       return classname_positive_examples_serialized_name.get(className);
     }
     /**
      * Gets the negative_examples_serialized_name.
      *
-     * A compressed (.zip) file of images that do not depict the visual subject of any of the classes of the new classifier. Must contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
+     * A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
      *
      * @return the negative_examples_serialized_name
      */
@@ -1156,15 +1197,14 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-    * Adds a classifier with a name and positive examples. If the classifier name is
-    * already contained, the old positive examples are replaced by the specified value.
-    *
-    * @param className the class name
-    * @param positiveExamples the positive examples
-    * @return the builder
-    */
-    public CreateClassifierOptionsBuilder addClass(String className,
-      IBMWatsonFile positiveExamples) {
+     * Adds a classifier with a name and positive examples. If the classifier name is
+     * already contained, the old positive examples are replaced by the specified value.
+     *
+     * @param className the class name
+     * @param positiveExamples the positive examples
+     * @return the builder
+     */
+    public CreateClassifierOptionsBuilder addClass(String className, IBMWatsonFile positiveExamples) {
       IBMWatsonValidator.notNull(className, 'className cannot be null');
       IBMWatsonValidator.notNull(positiveExamples, 'positiveExamples cannot be null');
       classname_positive_examples_serialized_name.put(className, positiveExamples);
@@ -1283,7 +1323,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the images_file_serialized_name.
      *
-     * An image file (.jpg, .png) or .zip file with images. Include no more than 15 images. You can also include an image with the**url** parameter.  All faces are detected, but if there are more than 10 faces in an image, age and gender confidence scores might return scores of 0.
+     * An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to 100 MB. You can include a maximum of 15 images in a request.  Encode the image and .zip file names in UTF-8 if they contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.  You can also include an image with the **url** parameter.
      *
      * @return the images_file_serialized_name
      */
@@ -1303,7 +1343,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the url_serialized_name.
      *
-     * A string with the image URL to analyze.
+     * The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed, so you can use a shortened URL.  You can also include images with the **images_file** parameter.
      *
      * @return the url_serialized_name
      */
@@ -1629,7 +1669,6 @@ public class IBMVisualRecognitionV3Models {
     private FaceAge age_serialized_name;
     private FaceGender gender_serialized_name;
     private FaceLocation face_location_serialized_name;
-    private FaceIdentity identity_serialized_name;
     /**
      * Gets the age_serialized_name.
      *
@@ -1656,15 +1695,6 @@ public class IBMVisualRecognitionV3Models {
     @AuraEnabled
     public FaceLocation getFaceLocation() {
       return face_location_serialized_name;
-    }
-    /**
-     * Gets the identity_serialized_name.
-     *
-     * @return the identity_serialized_name
-     */
-    @AuraEnabled
-    public FaceIdentity getIdentity() {
-      return identity_serialized_name;
     }
 
     /**
@@ -1694,15 +1724,6 @@ public class IBMVisualRecognitionV3Models {
       this.face_location_serialized_name = faceLocation;
     }
 
-    /**
-     * Sets the identity_serialized_name.
-     *
-     * @param identity the new identity
-     */
-    public void setIdentity(final FaceIdentity identity) {
-      this.identity_serialized_name = identity;
-    }
-
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -1722,16 +1743,12 @@ public class IBMVisualRecognitionV3Models {
       FaceLocation newFaceLocation = (FaceLocation) new FaceLocation().deserialize(JSON.serialize(ret.getFaceLocation()), (Map<String, Object>) jsonMap.get('face_location_serialized_name'), FaceLocation.class);
       ret.setFaceLocation(newFaceLocation);
 
-      // calling custom deserializer for identity_serialized_name
-      FaceIdentity newIdentity = (FaceIdentity) new FaceIdentity().deserialize(JSON.serialize(ret.getIdentity()), (Map<String, Object>) jsonMap.get('identity_serialized_name'), FaceIdentity.class);
-      ret.setIdentity(newIdentity);
-
       return ret;
     }
   }
 
   /**
-   * Provides age information about a face. If there are more than 10 faces in an image, the response might return the confidence score `0g.
+   * Provides age information about a face.
    */
   public class FaceAge extends IBMWatsonGenericModel {
     private Long min_serialized_name;
@@ -1762,7 +1779,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the score_serialized_name.
      *
-     * Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
+     * Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for the property.
      *
      * @return the score_serialized_name
      */
@@ -1810,7 +1827,7 @@ public class IBMVisualRecognitionV3Models {
   }
 
   /**
-   * Provides information about the gender of the face. If there are more than 10 faces in an image, the response might return the confidence score 0.
+   * Provides information about the gender of the face.
    */
   public class FaceGender extends IBMWatsonGenericModel {
     private String gender_serialized_name;
@@ -1829,7 +1846,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the score_serialized_name.
      *
-     * Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
+     * Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for the property.
      *
      * @return the score_serialized_name
      */
@@ -1862,85 +1879,6 @@ public class IBMVisualRecognitionV3Models {
       }
 
       FaceGender ret = (FaceGender) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
-   * Provides information about a celebrity who is detected in the image. Not returned when a celebrity is not detected.
-   */
-  public class FaceIdentity extends IBMWatsonGenericModel {
-    private String name_serialized_name;
-    private Double score_serialized_name;
-    private String type_hierarchy_serialized_name;
-    /**
-     * Gets the name_serialized_name.
-     *
-     * Name of the person.
-     *
-     * @return the name_serialized_name
-     */
-    @AuraEnabled
-    public String getName() {
-      return name_serialized_name;
-    }
-    /**
-     * Gets the score_serialized_name.
-     *
-     * Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
-     *
-     * @return the score_serialized_name
-     */
-    @AuraEnabled
-    public Double getScore() {
-      return score_serialized_name;
-    }
-    /**
-     * Gets the type_hierarchy_serialized_name.
-     *
-     * Knowledge graph of the property. For example, `People/Leaders/Presidents/USA/Barack Obama`. Included only if identified.
-     *
-     * @return the type_hierarchy_serialized_name
-     */
-    @AuraEnabled
-    public String getTypeHierarchy() {
-      return type_hierarchy_serialized_name;
-    }
-
-    /**
-     * Sets the name_serialized_name.
-     *
-     * @param name the new name
-     */
-    public void setName(final String name) {
-      this.name_serialized_name = name;
-    }
-
-    /**
-     * Sets the score_serialized_name.
-     *
-     * @param score the new score
-     */
-    public void setScore(final Double score) {
-      this.score_serialized_name = score;
-    }
-
-    /**
-     * Sets the type_hierarchy_serialized_name.
-     *
-     * @param typeHierarchy the new typeHierarchy
-     */
-    public void setTypeHierarchy(final String typeHierarchy) {
-      this.type_hierarchy_serialized_name = typeHierarchy;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      FaceIdentity ret = (FaceIdentity) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -2118,6 +2056,83 @@ public class IBMVisualRecognitionV3Models {
      * @return the GetClassifierOptions builder
      */
     public GetClassifierOptionsBuilder classifierId(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
+      return this;
+    }
+  }
+
+  /**
+   * The getCoreMlModel options.
+   */
+  public class GetCoreMlModelOptions {
+    private String classifier_id_serialized_name;
+    /**
+     * Gets the classifier_id_serialized_name.
+     *
+     * The ID of the classifier.
+     *
+     * @return the classifier_id_serialized_name
+     */
+    public String classifierId() {
+      return classifier_id_serialized_name;
+    }
+    private GetCoreMlModelOptions(GetCoreMlModelOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.classifier_id_serialized_name, 'classifier_id_serialized_name cannot be empty');
+      classifier_id_serialized_name = builder.classifier_id_serialized_name;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetCoreMlModelOptions builder
+     */
+    public GetCoreMlModelOptionsBuilder newBuilder() {
+      return new GetCoreMlModelOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetCoreMlModelOptions Builder.
+   */
+  public class GetCoreMlModelOptionsBuilder {
+    private String classifier_id_serialized_name;
+
+    private GetCoreMlModelOptionsBuilder(GetCoreMlModelOptions getCoreMlModelOptions) {
+      classifier_id_serialized_name = getCoreMlModelOptions.classifier_id_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetCoreMlModelOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param classifierId the classifierId
+     */
+    public GetCoreMlModelOptionsBuilder(String classifierId) {
+      this.classifier_id_serialized_name = classifierId;
+    }
+
+    /**
+     * Builds a GetCoreMlModelOptions.
+     *
+     * @return the getCoreMlModelOptions
+     */
+    public GetCoreMlModelOptions build() {
+      return new GetCoreMlModelOptions(this);
+    }
+
+    /**
+     * Set the classifier_id_serialized_name.
+     *
+     * @param classifierId the classifierId
+     * @return the GetCoreMlModelOptions builder
+     */
+    public GetCoreMlModelOptionsBuilder classifierId(String classifierId) {
       this.classifier_id_serialized_name = classifierId;
       return this;
     }
@@ -2345,36 +2360,35 @@ public class IBMVisualRecognitionV3Models {
       return classifier_id_serialized_name;
     }
     /**
-    * Gets the class names.
-    *
-    * @return the classNames
-    */
+     * Gets the class names.
+     *
+     * @return the classNames
+     */
     public Set<String> classNames() {
       return classname_positive_examples_serialized_name.keySet();
     }
-
     /**
-    * Gets the positive examples by class name.
-    *
-    * A .zip file of images that depict the visual subject of a class in the new classifier.
-    * You can include more than one positive example file in a call. Append
-    * `_positive_examples` to the form name. The prefix is used as the class name. For
-    * example, `goldenretriever_positive_examples` creates the
-    * class **goldenretriever**.  Include at least 10 images in .jpg or .png format. The
-    * minimum recommended image resolution is 32X32 pixels. The maximum number of
-    * images is 10,000 images or 100 MB per .zip file.  Encode special characters in the file
-    * name in UTF-8.
-    *
-    * @param className the class name
-    * @return the positiveExamples
-    */
+     * Gets the positive examples by class name.
+     *
+     * A .zip file of images that depict the visual subject of a class in the new classifier.
+     * You can include more than one positive example file in a call. Append
+     * `_positive_examples` to the form name. The prefix is used as the class name. For
+     * example, `goldenretriever_positive_examples` creates the
+     * class **goldenretriever**.  Include at least 10 images in .jpg or .png format. The
+     * minimum recommended image resolution is 32X32 pixels. The maximum number of
+     * images is 10,000 images or 100 MB per .zip file.  Encode special characters in the file
+     * name in UTF-8.
+     *
+     * @param className the class name
+     * @return the positiveExamples
+     */
     public IBMWatsonFile positiveExamplesByClassName(String className) {
       return classname_positive_examples_serialized_name.get(className);
     }
     /**
      * Gets the negative_examples_serialized_name.
      *
-     * A compressed (.zip) file of images that do not depict the visual subject of any of the classes of the new classifier. Must contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
+     * A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
      *
      * @return the negative_examples_serialized_name
      */
@@ -2468,13 +2482,13 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-    * Adds a classifier with a name and positive examples. If the classifier name is
-    * already contained, the old positive examples are replaced by the specified value.
-    *
-    * @param className the class name
-    * @param positiveExamples the positive examples
-    * @return the builder
-    */
+     * Adds a classifier with a name and positive examples. If the classifier name is
+     * already contained, the old positive examples are replaced by the specified value.
+     *
+     * @param className the class name
+     * @param positiveExamples the positive examples
+     * @return the builder
+     */
     public UpdateClassifierOptionsBuilder addClass(String className,
       IBMWatsonFile positiveExamples) {
       IBMWatsonValidator.notNull(className, 'className cannot be null');

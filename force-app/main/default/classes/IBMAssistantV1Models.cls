@@ -5007,6 +5007,7 @@ public class IBMAssistantV1Models {
   public class DialogNodeVisitedDetails extends IBMWatsonGenericModel {
     private String dialog_node_serialized_name;
     private String title_serialized_name;
+    private String conditions_serialized_name;
     /**
      * Gets the dialog_node_serialized_name.
      *
@@ -5029,6 +5030,17 @@ public class IBMAssistantV1Models {
     public String getTitle() {
       return title_serialized_name;
     }
+    /**
+     * Gets the conditions_serialized_name.
+     *
+     * The conditions that trigger the dialog node.
+     *
+     * @return the conditions_serialized_name
+     */
+    @AuraEnabled
+    public String getConditions() {
+      return conditions_serialized_name;
+    }
 
     /**
      * Sets the dialog_node_serialized_name.
@@ -5046,6 +5058,15 @@ public class IBMAssistantV1Models {
      */
     public void setTitle(final String title) {
       this.title_serialized_name = title;
+    }
+
+    /**
+     * Sets the conditions_serialized_name.
+     *
+     * @param conditions the new conditions
+     */
+    public void setConditions(final String conditions) {
+      this.conditions_serialized_name = conditions;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7175,7 +7196,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last object from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -7339,7 +7360,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last object from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -7541,7 +7562,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last object from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -7754,7 +7775,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last object from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -7981,7 +8002,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last object from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -8211,7 +8232,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last object from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -8426,7 +8447,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last object from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -8626,7 +8647,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last object from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -8884,7 +8905,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last object from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -9106,7 +9127,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the cursor_serialized_name.
      *
-     * A token identifying the last object from the previous page of results.
+     * A token identifying the page of results to retrieve.
      *
      * @return the cursor_serialized_name
      */
@@ -9558,6 +9579,7 @@ public class IBMAssistantV1Models {
   public class LogPagination extends IBMWatsonGenericModel {
     private String next_url_serialized_name;
     private Long matched_serialized_name;
+    private String next_cursor_serialized_name;
     /**
      * Gets the next_url_serialized_name.
      *
@@ -9580,6 +9602,17 @@ public class IBMAssistantV1Models {
     public Long getMatched() {
       return matched_serialized_name;
     }
+    /**
+     * Gets the next_cursor_serialized_name.
+     *
+     * A token identifying the next page of results.
+     *
+     * @return the next_cursor_serialized_name
+     */
+    @AuraEnabled
+    public String getNextCursor() {
+      return next_cursor_serialized_name;
+    }
 
     /**
      * Sets the next_url_serialized_name.
@@ -9597,6 +9630,15 @@ public class IBMAssistantV1Models {
      */
     public void setMatched(final long matched) {
       this.matched_serialized_name = matched;
+    }
+
+    /**
+     * Sets the next_cursor_serialized_name.
+     *
+     * @param nextCursor the new nextCursor
+     */
+    public void setNextCursor(final String nextCursor) {
+      this.next_cursor_serialized_name = nextCursor;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9948,7 +9990,7 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * A request formatted for the Assistant service.
+   * A request formatted for the Watson Assistant service.
    */
   public class MessageRequest extends IBMWatsonGenericModel {
     private InputData input_serialized_name;
@@ -10124,7 +10166,7 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * A response from the Assistant service.
+   * A response from the Watson Assistant service.
    */
   public class MessageResponse extends IBMWatsonDynamicModel {
     private MessageInput input_serialized_name;
@@ -10465,6 +10507,8 @@ public class IBMAssistantV1Models {
     private String next_url_serialized_name;
     private Long total_serialized_name;
     private Long matched_serialized_name;
+    private String refresh_cursor_serialized_name;
+    private String next_cursor_serialized_name;
     /**
      * Gets the refresh_url_serialized_name.
      *
@@ -10509,6 +10553,28 @@ public class IBMAssistantV1Models {
     public Long getMatched() {
       return matched_serialized_name;
     }
+    /**
+     * Gets the refresh_cursor_serialized_name.
+     *
+     * A token identifying the current page of results.
+     *
+     * @return the refresh_cursor_serialized_name
+     */
+    @AuraEnabled
+    public String getRefreshCursor() {
+      return refresh_cursor_serialized_name;
+    }
+    /**
+     * Gets the next_cursor_serialized_name.
+     *
+     * A token identifying the next page of results.
+     *
+     * @return the next_cursor_serialized_name
+     */
+    @AuraEnabled
+    public String getNextCursor() {
+      return next_cursor_serialized_name;
+    }
 
     /**
      * Sets the refresh_url_serialized_name.
@@ -10544,6 +10610,24 @@ public class IBMAssistantV1Models {
      */
     public void setMatched(final long matched) {
       this.matched_serialized_name = matched;
+    }
+
+    /**
+     * Sets the refresh_cursor_serialized_name.
+     *
+     * @param refreshCursor the new refreshCursor
+     */
+    public void setRefreshCursor(final String refreshCursor) {
+      this.refresh_cursor_serialized_name = refreshCursor;
+    }
+
+    /**
+     * Sets the next_cursor_serialized_name.
+     *
+     * @param nextCursor the new nextCursor
+     */
+    public void setNextCursor(final String nextCursor) {
+      this.next_cursor_serialized_name = nextCursor;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
