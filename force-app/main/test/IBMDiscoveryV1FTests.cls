@@ -29,7 +29,7 @@ public with sharing class IBMDiscoveryV1FTests {
     testGetTrainingData(ENVIRONMENT_ID, COLLECTION_ID, QUERY_ID, username, password);
     testListTrainingData(ENVIRONMENT_ID, COLLECTION_ID, username, password);
     testFederatedQueryNotices(ENVIRONMENT_ID, COLLECTION_ID, username, password);
-    testAddAndDeleteDocument(environmentId, collectionId, username, password);
+    testAddAndDeleteDocument(ENVIRONMENT_ID, COLLECTION_ID, username, password);
   }
 
   /**
