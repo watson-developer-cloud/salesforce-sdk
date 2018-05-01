@@ -69,10 +69,10 @@ public class IBMWatsonIAMTokenManager {
     builder.addHeader(IBMWatsonHttpHeaders.CONTENT_TYPE, IBMWatsonHttpMediaType.APPLICATION_FORM_URLENCODED);
     builder.addHeader(IBMWatsonHttpHeaders.AUTHORIZATION, DEFAULT_AUTHORIZATION);
 
-    IBMWatsonMultipartBody formBody = new IBMWatsonMultipartBody.Builder()
-      .addFormDataPart(GRANT_TYPE, REQUEST_GRANT_TYPE)
-      .addFormDataPart(API_KEY, apiKey)
-      .addFormDataPart(RESPONSE_TYPE, CLOUD_IAM)
+    IBMWatsonFormBody formBody = new IBMWatsonFormBody.Builder()
+      .add(GRANT_TYPE, REQUEST_GRANT_TYPE)
+      .add(API_KEY, apiKey)
+      .add(RESPONSE_TYPE, CLOUD_IAM)
       .build();
     builder.body(formBody);
 
@@ -91,9 +91,9 @@ public class IBMWatsonIAMTokenManager {
     builder.addHeader(IBMWatsonHttpHeaders.CONTENT_TYPE, IBMWatsonHttpMediaType.APPLICATION_FORM_URLENCODED);
     builder.addHeader(IBMWatsonHttpHeaders.AUTHORIZATION, DEFAULT_AUTHORIZATION);
 
-    IBMWatsonMultipartBody formBody = new IBMWatsonMultipartBody.Builder()
-      .addFormDataPart(GRANT_TYPE, REFRESH_GRANT_TYPE)
-      .addFormDataPart(REFRESH_TOKEN, tokenData.getRefreshToken())
+    IBMWatsonFormBody formBody = new IBMWatsonFormBody.Builder()
+      .add(GRANT_TYPE, REFRESH_GRANT_TYPE)
+      .add(REFRESH_TOKEN, tokenData.getRefreshToken())
       .build();
     builder.body(formBody);
 
