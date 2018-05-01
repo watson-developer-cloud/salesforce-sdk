@@ -62,6 +62,21 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   }
 
   /**
+   * Instantiates a new `IBMVisualRecognitionV3` with IAM. Note that if the access token is specified in the
+   * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
+   * one expires or after receiving a 401 error from the service. Failing to do so will result in authentication errors
+   * after this token expires.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   * @param iamOptions the options for authenticating through IAM
+   */
+  public IBMVisualRecognitionV3(String versionDate, IBMWatsonIAMOptions iamOptions) {
+    this(versionDate);
+    setIamCredentials(iamOptions);
+  }
+
+  /**
    * Classify images.
    *
    * Classify images with built-in or custom classifiers.
