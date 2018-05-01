@@ -72,13 +72,12 @@ public with sharing class IBMVisualRecognitionV3FTest {
     IBMVisualRecognitionV3 service = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
     service.setEndPoint(NAMED_CREDENTIALS);
 
-    IBMVisualRecognitionV3Models.IBMVisualRecognitionV3Models.ListClassifiersOptions listOptions
-      = new IBMVisualRecognitionV3Models.ListClassifiersOptionsBuilder()
+    IBMVisualRecognitionV3Models.ListClassifiersOptions listOptions = new IBMVisualRecognitionV3Models.ListClassifiersOptionsBuilder()
       .verbose(true)
       .build();
     IBMVisualRecognitionV3Models.Classifiers classifiers = service.listClassifiers(listOptions);
 
-    for (IBMVisualRecognitionV3Models.Classifier classifier : classifiers) {
+    for (IBMVisualRecognitionV3Models.Classifier classifier : classifiers.getClassifiers()) {
       if (classifier.getCoreMlEnabled()) {
         IBMVisualRecognitionV3Models.GetCoreMlModelOptions getOptions = new IBMVisualRecognitionV3Models.GetCoreMlModelOptionsBuilder()
           .classifierId(classifier.getClassifierId())
@@ -87,5 +86,7 @@ public with sharing class IBMVisualRecognitionV3FTest {
         return modelFile;
       }
     }
+
+    return null;
   }
 }
