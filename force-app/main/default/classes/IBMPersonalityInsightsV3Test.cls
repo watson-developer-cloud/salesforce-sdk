@@ -9,10 +9,12 @@ private class IBMPersonalityInsightsV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMPersonalityInsightsV3 personalityInsights = new IBMPersonalityInsightsV3('2017-09-01', 'username', 'password');
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMPersonalityInsightsV3 personalityInsights = new IBMPersonalityInsightsV3('2017-09-01', iamOptions);
     //or use
     personalityInsights = new IBMPersonalityInsightsV3('2017-09-01');
-    personalityInsights.setUsernameAndPassword('username', 'password');
     personalityInsights.setEndPoint('https://gateway.watsonplatform.net/personality-insights/api');
     IBMPersonalityInsightsV3Models.ContentItem contentItem=new IBMPersonalityInsightsV3Models.ContentItemBuilder()
       .content('text/plain')

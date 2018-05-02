@@ -145,8 +145,10 @@ private class IBMAssistantV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
-    assistant.setUsernameAndPassword('username', 'password');
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16', iamOptions);
     IBMAssistantV1Models.CreateCounterexample counterexample = new IBMAssistantV1Models.CreateCounterexampleBuilder('text')
       .text(counterexampleText)
       .build();

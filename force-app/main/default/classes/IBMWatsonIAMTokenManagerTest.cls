@@ -70,7 +70,6 @@ private class IBMWatsonIAMTokenManagerTest {
 
     IBMWatsonIAMOptions options = new IBMWatsonIAMOptions.Builder()
       .apiKey(API_KEY)
-      .url(URL)
       .build();
     IBMWatsonIAMTokenManager manager = new IBMWatsonIAMTokenManager(options);
 

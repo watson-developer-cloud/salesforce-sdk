@@ -10,9 +10,11 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1(iamOptions);
     service.setEndPoint('https://gateway.watsonplatform.net/natural-language-classifier/api');
-    service.setUsernameAndPassword('username', 'password');
     String classifier_id_serialized_name = '10D41B-nlc-1';
     String text_serialized_name = 'How hot will it be today?';
     // this would be the expected top class as defined on the mock response
