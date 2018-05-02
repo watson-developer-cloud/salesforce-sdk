@@ -2489,14 +2489,4 @@ public class IBMWatsonMockResponses {
       '"expiration": 999999999999999999' +
     '}';
   }
-
-  public static String expiredTokenData() {
-    return '{' +
-      '"access_token": "wxyz-9876",' +
-      '"refresh_token": "00000000",' +
-      '"token_type": "Bearer",' +
-      '"expires_in": 3600,' +
-      '"expiration": 1522788645' +
-    '}';
-  }
 }
