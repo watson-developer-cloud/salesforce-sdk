@@ -12,7 +12,6 @@ public abstract class IBMWatsonService {
 
   private static final String URL = 'url';
   private static final String PATH_AUTHORIZATION_V1_TOKEN = '/v1/token';
-  private static final String AUTHORIZATION = 'authorization';
   private static final String CALLOUT = 'callout:';
   private static final String BASIC = 'Basic ';
   private static final String BEARER = 'Bearer ';
@@ -257,5 +256,14 @@ public abstract class IBMWatsonService {
    */
   protected String getApiKey() {
     return apiKey;
+  }
+
+  /**
+   * Checks the status of the tokenManager.
+   *
+   * @return true if the tokenManager has been set
+   */
+  protected Boolean isTokenManagerSet() {
+    return tokenManager != null;
   }
 }
