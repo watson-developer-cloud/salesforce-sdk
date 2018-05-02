@@ -50,17 +50,19 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    *
    */
   protected override void setAuthentication(IBMWatsonRequest.Builder builder) {
-    if (isTokenManagerSet()) {
-      super.setAuthentication(builder);
-    } else if (getApiKey() != null) {
+    if (!isTokenManagerSet() && getApiKey() == null) {
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('Credentials need to be specified. Use setApiKey() or setIamCredentials().');
+    }
+    if (getApiKey() != null) {
       Url url = builder.build().getUrl();
       if (String.isBlank(url.getQuery())) {
         builder.url(builder.build().getUrl().toExternalForm() + '?api_key=' + getApiKey());
       } else {
         builder.url(builder.build().getUrl().toExternalForm() + '&api_key=' + getApiKey());
       }
-    } else {
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('Credentials need to be specified. Use setApiKey() or setIamCredentials().');
+    }
+    if (isTokenManagerSet()) {
+      super.setAuthentication(builder);
     }
   }
 
