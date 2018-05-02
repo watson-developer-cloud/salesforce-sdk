@@ -9,6 +9,7 @@
 public class IBMVisualRecognitionV3 extends IBMWatsonService {
 
   private static final String URL = 'https://gateway-a.watsonplatform.net/visual-recognition/api';
+  private static final String DUMMY_API_KEY = '00000';
 
   private String versionDate;
 
@@ -47,22 +48,32 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
 
   /*
    * Override authentication mechanism for this endpoint
-   *
    */
   protected override void setAuthentication(IBMWatsonRequest.Builder builder) {
-    if (!isTokenManagerSet() && getApiKey() == null) {
+    if (isTokenManagerSet()) {
+      // add dummy API key as a query parameter for backwards-compatibility until it's not required by the service
+      addApiKeyQueryParameter(builder, DUMMY_API_KEY);
+      super.setAuthentication(builder);
+    } else if (getApiKey() != null) {
+      addApiKeyQueryParameter(builder, getApiKey());
+    } else {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('Credentials need to be specified. Use setApiKey() or setIamCredentials().');
     }
-    if (getApiKey() != null) {
-      Url url = builder.build().getUrl();
-      if (String.isBlank(url.getQuery())) {
-        builder.url(builder.build().getUrl().toExternalForm() + '?api_key=' + getApiKey());
-      } else {
-        builder.url(builder.build().getUrl().toExternalForm() + '&api_key=' + getApiKey());
-      }
-    }
-    if (isTokenManagerSet()) {
-      super.setAuthentication(builder);
+  }
+
+  /**
+   * Adds the API key as a query parameter to the request URL.
+   *
+   * @param builder builder for the current request
+   * @param apiKey API key to be added
+   */
+  private void addApiKeyQueryParameter(IBMWatsonRequest.Builder builder, String apiKey) {
+    Url url = builder.build().getUrl();
+
+    if (String.isBlank(url.getQuery())) {
+      builder.url(builder.build().getUrl().toExternalForm() + '?api_key=' + apiKey);
+    } else {
+      builder.url(builder.build().getUrl().toExternalForm() + '&api_key=' + apiKey);
     }
   }
 
