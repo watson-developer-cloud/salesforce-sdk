@@ -12,11 +12,11 @@ private class IBMTextToSpeechV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
-    if (username != null && password != null) {
-      textToSpeech.setEndPoint(URL);
-      textToSpeech.setUsernameAndPassword(username, password);
-    }
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1(iamOptions);
+    textToSpeech.setEndPoint(URL);
     IBMTextToSpeechV1Models.CreateVoiceModelOptions options = new IBMTextToSpeechV1Models.CreateVoiceModelOptionsBuilder()
       .name('I love Apples not oranges')
       .language('de-DE')

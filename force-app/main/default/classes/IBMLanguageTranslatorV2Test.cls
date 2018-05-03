@@ -9,7 +9,10 @@ private class IBMLanguageTranslatorV2Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2('username', 'password');
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2(iamOptions);
     String modelId = '3e7dfdbe-f757-4150-afee-458e71eb93fb';
     String source = 'en';
     String target = 'es';

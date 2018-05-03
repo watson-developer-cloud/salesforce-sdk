@@ -9,6 +9,7 @@
 public class IBMVisualRecognitionV3 extends IBMWatsonService {
 
   private static final String URL = 'https://gateway-a.watsonplatform.net/visual-recognition/api';
+  private static final String DUMMY_API_KEY = '00000';
 
   private String versionDate;
 
@@ -47,18 +48,48 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
 
   /*
    * Override authentication mechanism for this endpoint
-   *
    */
   protected override void setAuthentication(IBMWatsonRequest.Builder builder) {
-    if (getApiKey() == null) {
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('api_key needs to be specified. Use setApiKey()');
-    }
-    Url url = builder.build().getUrl();
-    if (String.isBlank(url.getQuery())) {
-      builder.url(builder.build().getUrl().toExternalForm() + '?api_key=' + getApiKey());
+    if (isTokenManagerSet()) {
+      // add dummy API key as a query parameter for backwards-compatibility until it's not required by the service
+      addApiKeyQueryParameter(builder, DUMMY_API_KEY);
+      super.setAuthentication(builder);
+    } else if (getApiKey() != null) {
+      addApiKeyQueryParameter(builder, getApiKey());
     } else {
-      builder.url(builder.build().getUrl().toExternalForm() + '&api_key=' + getApiKey());
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('Credentials need to be specified. Use setApiKey() or setIamCredentials().');
     }
+  }
+
+  /**
+   * Adds the API key as a query parameter to the request URL.
+   *
+   * @param builder builder for the current request
+   * @param apiKey API key to be added
+   */
+  private void addApiKeyQueryParameter(IBMWatsonRequest.Builder builder, String apiKey) {
+    Url url = builder.build().getUrl();
+
+    if (String.isBlank(url.getQuery())) {
+      builder.url(builder.build().getUrl().toExternalForm() + '?api_key=' + apiKey);
+    } else {
+      builder.url(builder.build().getUrl().toExternalForm() + '&api_key=' + apiKey);
+    }
+  }
+
+  /**
+   * Instantiates a new `IBMVisualRecognitionV3` with IAM. Note that if the access token is specified in the
+   * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
+   * one expires or after receiving a 401 error from the service. Failing to do so will result in authentication errors
+   * after this token expires.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   * @param iamOptions the options for authenticating through IAM
+   */
+  public IBMVisualRecognitionV3(String versionDate, IBMWatsonIAMOptions iamOptions) {
+    this(versionDate);
+    setIamCredentials(iamOptions);
   }
 
   /**

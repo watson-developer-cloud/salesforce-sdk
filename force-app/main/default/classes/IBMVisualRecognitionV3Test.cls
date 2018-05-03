@@ -8,9 +8,11 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
     visualRecognition.setEndPoint('https://gateway-a.watsonplatform.net/visual-recognition/api');
-    visualRecognition.setApiKey('80bc2e663293e8d13564c260cdb4cbf891b606c0');
     IBMVisualRecognitionV3Models.ClassifyOptions options = new IBMVisualRecognitionV3Models.ClassifyOptionsBuilder()
       .url('http://www.indya101.com/gallery/Actors_TV/Sumeet_Sachdev/2011/12/27/Sumeet_Sachdevjpg_3_arnem.jpg')
       .build();

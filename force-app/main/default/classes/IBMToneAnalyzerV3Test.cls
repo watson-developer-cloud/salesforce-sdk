@@ -9,10 +9,11 @@ private class IBMToneAnalyzerV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21');
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMToneAnalyzerV3 toneAnalyzer = new IBMToneAnalyzerV3('2017-09-21', iamOptions);
     toneAnalyzer.setEndPoint('https://gateway.watsonplatform.net/tone-analyzer/api');
-    //username and password Not needed if you are providing named credentials in place of url
-    toneAnalyzer.setUsernameAndPassword('username', 'password');
     IBMToneAnalyzerV3Models.ToneInput toneInput = new IBMToneAnalyzerV3Models.ToneInputBuilder()
       .text('We have a better product. We can do better selling by having more campaigns')
       .build();
