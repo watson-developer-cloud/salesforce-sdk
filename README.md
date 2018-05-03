@@ -200,7 +200,7 @@ service.setEndPoint('SERVICE_URL');
 
 ```java
 // after instantiation, letting the SDK manage the IAM token
-IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', options);
+IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07');
 IBMWatsonIAMOptions options = new IBMWatsonIAMOptions.Builder()
   .apiKey('IAM_API_KEY')
   .build();
