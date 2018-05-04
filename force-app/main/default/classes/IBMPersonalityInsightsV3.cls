@@ -68,6 +68,21 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
   }
 
   /**
+   * Instantiates a new `IBMPersonalityInsightsV3` with IAM. Note that if the access token is specified in the
+   * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
+   * one expires or after receiving a 401 error from the service. Failing to do so will result in authentication errors
+   * after this token expires.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   * @param iamOptions the options for authenticating through IAM
+   */
+  public IBMPersonalityInsightsV3(String versionDate, IBMWatsonIAMOptions iamOptions) {
+    this(versionDate);
+    setIamCredentials(iamOptions);
+  }
+
+  /**
    * Generates a personality profile based on input text.
    *
    * Derives personality insights for up to 20 MB of input content written by an author, though the service requires much less text to produce an accurate profile; for more information, see [Providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). Accepts input in Arabic, English, Japanese, Korean, or Spanish and produces output in one of eleven languages. Provide plain text, HTML, or JSON content, and receive results in JSON or CSV format.

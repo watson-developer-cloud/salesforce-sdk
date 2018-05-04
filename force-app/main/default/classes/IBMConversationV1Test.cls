@@ -1461,8 +1461,10 @@ private class IBMConversationV1Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
-    conversation.setUsernameAndPassword('username', 'password');
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16', iamOptions);
 
     IBMConversationV1Models.CreateCounterexampleOptions createOptions = new IBMConversationV1Models.CreateCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)

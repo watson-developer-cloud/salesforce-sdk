@@ -29,6 +29,7 @@ public with sharing class IBMDiscoveryV1FTests {
     testGetTrainingData(ENVIRONMENT_ID, COLLECTION_ID, QUERY_ID, username, password);
     testListTrainingData(ENVIRONMENT_ID, COLLECTION_ID, username, password);
     testFederatedQueryNotices(ENVIRONMENT_ID, COLLECTION_ID, username, password);
+    testAddAndDeleteDocument(ENVIRONMENT_ID, COLLECTION_ID, username, password);
   }
 
   /**
@@ -780,11 +781,9 @@ public with sharing class IBMDiscoveryV1FTests {
   }
 
   /**
-   *  Add a document.
-   *
-   * then test using testGetDocumentStatus if document is loaded successfully
+   *  Add and delete a document.
    */
-  public static IBMDiscoveryV1Models.DocumentAccepted testAddDocument(String environmentId, String collectionId, String username, String password) {
+  public static Boolean testAddAndDeleteDocument(String environmentId, String collectionId, String username, String password) {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
     //discovery.setEndPoint(NAMED_CREDENTIALS);
     if (username != null && password != null) {
@@ -794,19 +793,39 @@ public with sharing class IBMDiscoveryV1FTests {
 
     Attachment att=createFile();
     IBMWatsonFile testfile=new IBMWatsonFile.FileBuilder()
-     .attachment(att)
-     .build();
-    IBMDiscoveryV1Models.AddDocumentOptions options = new
-     IBMDiscoveryV1Models.AddDocumentOptionsBuilder()
-     .environmentId(environmentId)
-     .collectionId(collectionId)
-     .file(testfile)
-     .filename(att.Name)
-     .fileContentType(att.ContentType)
-     .build();
-    IBMDiscoveryV1Models.DocumentAccepted resp = discovery.addDocument(options);
-    System.debug('IBMDiscoveryV1FTests.testAddDocument: ' + resp);
-    return resp;
+      .attachment(att)
+      .build();
+    IBMDiscoveryV1Models.AddDocumentOptions addOptions = new IBMDiscoveryV1Models.AddDocumentOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .file(testfile)
+      .filename(att.Name)
+      .fileContentType(att.ContentType)
+      .build();
+    IBMDiscoveryV1Models.DocumentAccepted resp = discovery.addDocument(addOptions);
+    String documentId = resp.getDocumentId();
+    System.debug('IBMDiscoveryV1FTests.testAddAndDeleteDocument (add): ' + resp);
+
+    IBMDiscoveryV1Models.GetDocumentStatusOptions getOptions = new IBMDiscoveryV1Models.GetDocumentStatusOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .documentId(documentId)
+      .build();
+
+    String status = discovery.getDocumentStatus(getOptions).getStatus();
+    while (!status.equals('available')) {
+      status = discovery.getDocumentStatus(getOptions).getStatus();
+    }
+
+    IBMDiscoveryV1Models.DeleteDocumentOptions options = new IBMDiscoveryV1Models.DeleteDocumentOptionsBuilder()
+      .environmentId(environmentId)
+      .collectionId(collectionId)
+      .documentId(documentId)
+      .build();
+    discovery.deleteDocument(options);
+
+    System.debug('Document successfully deleted');
+    return true;
   }
 
    public static IBMDiscoveryV1Models.TestDocument testConfigurationInEnvironment(String environmentId, String configurationId, String username, String password) {

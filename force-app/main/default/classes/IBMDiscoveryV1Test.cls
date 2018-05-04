@@ -10,9 +10,11 @@ private class IBMDiscoveryV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07', iamOptions);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-    discovery.setUsernameAndPassword('username', 'password');
     String text = 'test_environment';
     IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder()
       .name(text)

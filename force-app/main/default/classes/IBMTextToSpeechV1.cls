@@ -103,6 +103,19 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   }
 
   /**
+   * Instantiates a new `IBMTextToSpeechV1` with IAM. Note that if the access token is specified in the
+   * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
+   * one expires or after receiving a 401 error from the service. Failing to do so will result in authentication errors
+   * after this token expires.
+   *
+   * @param iamOptions the options for authenticating through IAM
+   */
+  public IBMTextToSpeechV1(IBMWatsonIAMOptions iamOptions) {
+    this();
+    setIamCredentials(iamOptions);
+  }
+
+  /**
    * Retrieves a specific voice available for speech synthesis.
    *
    * Lists information about the voice specified with the `voice` path parameter. Specify the `customization_id` query parameter to obtain information for that custom voice model of the specified voice. Use the `GET /v1/voices` method to see a list of all available voices.

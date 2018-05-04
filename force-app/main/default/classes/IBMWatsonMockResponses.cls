@@ -2479,4 +2479,14 @@ public class IBMWatsonMockResponses {
       ']' +
     '}';
   }
+
+  public static String validTokenData() {
+    return '{' +
+      '"access_token": "aaaa-1111",' +
+      '"refresh_token": "99999999",' +
+      '"token_type": "Bearer",' +
+      '"expires_in": 3600,' +
+      '"expiration": 999999999999999999' +
+    '}';
+  }
 }

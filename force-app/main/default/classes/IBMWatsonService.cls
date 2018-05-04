@@ -6,14 +6,15 @@ public abstract class IBMWatsonService {
   private String endPoint;
   private String userAgent;
   private String name;
+  private IBMWatsonIAMTokenManager tokenManager;
   private boolean skipAuthentication = false;
   private Map<String, String> defaultHeaders = null;
 
   private static final String URL = 'url';
   private static final String PATH_AUTHORIZATION_V1_TOKEN = '/v1/token';
-  private static final String AUTHORIZATION = 'authorization';
   private static final String CALLOUT = 'callout:';
   private static final String BASIC = 'Basic ';
+  private static final String BEARER = 'Bearer ';
   private static final String VERSION = 'version';
   private static final String USER_AGENT_FORMAT = 'watson-apis-salesforce-sdk/{0}/({1})';
   private static final String SDK_VERSION = '1.2.1';
@@ -177,13 +178,17 @@ public abstract class IBMWatsonService {
    * @param builder the new authentication
    */
   protected virtual void setAuthentication(IBMWatsonRequest.Builder builder) {
-    if (getApiKey() == null) {
+    if (tokenManager != null) {
+      String accessToken = tokenManager.getToken();
+      builder.addHeader(IBMWatsonHttpHeaders.AUTHORIZATION, BEARER + accessToken);
+    } else if (getApiKey() == null) {
       if (skipAuthentication) {
         return; // chosen to skip authentication with the service
       }
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('apiKey or username and password were not specified');
+    } else {
+      builder.addHeader(IBMWatsonHttpHeaders.AUTHORIZATION, apiKey.startsWith(BASIC) ? apiKey : BASIC + apiKey);
     }
-    builder.addHeader(IBMWatsonHttpHeaders.AUTHORIZATION, apiKey.startsWith(BASIC) ? apiKey : BASIC + apiKey);
   }
 
   /**
@@ -221,6 +226,19 @@ public abstract class IBMWatsonService {
   }
 
   /**
+   * Sets IAM information.
+   *
+   * Be aware that if you pass in an access token using this method, you accept responsibility for managing the access
+   * token yourself. You must set a new access token before this one expires. Failing to do so will result in
+   * authentication errors after this token expires.
+   *
+   * @param iamOptions object containing values to be used for authenticating with IAM
+   */
+  public void setIamCredentials(IBMWatsonIAMOptions iamOptions) {
+    this.tokenManager = new IBMWatsonIAMTokenManager(iamOptions);
+  }
+
+  /**
    * Gets the API endpoint.
    *
    *
@@ -238,5 +256,14 @@ public abstract class IBMWatsonService {
    */
   protected String getApiKey() {
     return apiKey;
+  }
+
+  /**
+   * Checks the status of the tokenManager.
+   *
+   * @return true if the tokenManager has been set
+   */
+  protected Boolean isTokenManagerSet() {
+    return tokenManager != null;
   }
 }

@@ -42,6 +42,21 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
+   * Instantiates a new `IBMDiscoveryV1` with IAM. Note that if the access token is specified in the
+   * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
+   * one expires or after receiving a 401 error from the service. Failing to do so will result in authentication errors
+   * after this token expires.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   * @param iamOptions the options for authenticating through IAM
+   */
+  public IBMDiscoveryV1(String versionDate, IBMWatsonIAMOptions iamOptions) {
+    this(versionDate);
+    setIamCredentials(iamOptions);
+  }
+
+  /**
    * Add an environment.
    *
    * Creates a new environment.  You can create only one environment per service instance. An attempt to create another environment results in an error.
@@ -295,7 +310,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       multipartBuilder.addFormDataPart('configuration', testConfigurationInEnvironmentOptions.configuration());
     }
     if (testConfigurationInEnvironmentOptions.file() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(testConfigurationInEnvironmentOptions.file(), IBMWatsonHttpMediaType.APPLICATION_OCTET_STREAM);
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(testConfigurationInEnvironmentOptions.file(), testConfigurationInEnvironmentOptions.fileContentType());
       multipartBuilder.addFormDataPart('file', testConfigurationInEnvironmentOptions.filename(), fileBody);
     }
     if (testConfigurationInEnvironmentOptions.metadata() != null) {
@@ -490,7 +505,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (addDocumentOptions.file() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(addDocumentOptions.file(), IBMWatsonHttpMediaType.APPLICATION_OCTET_STREAM);
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(addDocumentOptions.file(), addDocumentOptions.fileContentType());
       multipartBuilder.addFormDataPart('file', addDocumentOptions.filename(), fileBody);
     }
     if (addDocumentOptions.metadata() != null) {
@@ -550,7 +565,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (updateDocumentOptions.file() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateDocumentOptions.file(), IBMWatsonHttpMediaType.APPLICATION_OCTET_STREAM);
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateDocumentOptions.file(), updateDocumentOptions.fileContentType());
       multipartBuilder.addFormDataPart('file', updateDocumentOptions.filename(), fileBody);
     }
     if (updateDocumentOptions.metadata() != null) {

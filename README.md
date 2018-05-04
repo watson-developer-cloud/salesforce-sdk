@@ -1,5 +1,8 @@
 # IBM Watson Salesforce SDK
 
+[![Build Status](https://travis-ci.org/watson-developer-cloud/salesforce-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/salesforce-sdk/)
+[![Slack](http://wdc-slack-inviter.mybluemix.net/badge.svg)](https://wdc-slack-inviter.mybluemix.net)
+
 The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment.
 
 ## Prerequisites
@@ -109,6 +112,8 @@ To access your Watson services through Apex, you'll need to authenticate with yo
 
 ### Using `Named Credentials`
 
+`Named Credentials` are the preferred way of authentication, since they allow you to keep sensitive information out of your code. However, they only work when using a **username and password**, so if you'd like to authenticate with an API key or IAM, you'll need to [set that up in your Apex code](#specifying-credentials-in-the-apex-code).
+
 When creating a service instance like with `new Discovery()`, each service loads the credentials from `Named Credentials`. The SDK will use the service name and API version to build the `Named Credentials` name.
 
 For example
@@ -142,15 +147,90 @@ In order to create **Named credentials**:
 
 ### Specifying credentials in the Apex code
 
-Storing credentials in the Apex code is not recommended. If possible, use **Named Credentials**.
+Setting credentials in the code is always an option, and in fact, it's the only option if you're authenticating with an API key (in the case of the Visual Recognition service) or with IAM.
 
-However, if you choose to, here's an example of setting the credentials in your code:
+You can always set these values directly in the constructor or with a method call after instantiating your service.
+
+_Note: You must set the service endpoint manually when setting your credentials this way. Otherwise, the SDK will default to searching for `Named Credentials` that you won't have set up._
+
+#### Username and Password
 
 ```java
+// in the constructor
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07', 'USERNAME', 'PASSWORD');
+discovery.setEndPoint('URL');
+```
+
+```java
+// after instantiation
 IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
 discovery.setEndPoint('URL');
 discovery.setUsernameAndPassword('USERNAME', 'PASSWORD');
 ```
+
+#### API Key
+
+```java
+// in the constructor
+IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', 'API_KEY');
+visualRecognition.setEndPoint('URL');
+```
+
+```java
+// after instantiation
+IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20');
+visualRecognition.setEndPoint('URL');
+visualRecognition.setApiKey('API_KEY');
+```
+
+#### Using IAM
+
+When authenticating with IAM, you have the option of passing in:
+  - the IAM API key and, optionally, the IAM service URL
+  - an IAM access token
+
+**Be aware that passing in an access token means that you're assuming responsibility for maintaining that token's lifecycle.** If you instead pass in an IAM API key, the SDK will manage it for you.
+
+```java
+// in the constructor, letting the SDK manage the IAM token
+IBMWatsonIAMOptions options = new IBMWatsonIAMOptions.Builder()
+  .apiKey('IAM_API_KEY')
+  .url('IAM_URL') // optional - the default value is https://iam.ng.bluemix.net/identity/token
+  .build();
+IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', options);
+service.setEndPoint('SERVICE_URL');
+```
+
+```java
+// after instantiation, letting the SDK manage the IAM token
+IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07');
+IBMWatsonIAMOptions options = new IBMWatsonIAMOptions.Builder()
+  .apiKey('IAM_API_KEY')
+  .build();
+service.setIamCredentials(options);
+service.setEndPoint('SERVICE_URL');
+```
+
+```java
+// in the constructor, assuming control of managing IAM token
+IBMWatsonIAMOptions options = new IBMWatsonIAMOptions.Builder()
+  .accessToken('ACCESS_TOKEN')
+  .build();
+IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', options);
+service.setEndPoint('SERVICE_URL');
+```
+
+```java
+// after instantiation, assuming control of managing IAM token
+IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07');
+IBMWatsonIAMOptions options = new IBMWatsonIAMOptions.Builder()
+  .accessToken('ACCESS_TOKEN')
+  .build();
+service.setIamCredentials(options);
+service.setEndPoint('SERVICE_URL');
+```
+
+If at any time you would like to let the SDK take over managing your IAM token, simply override your stored IAM credentials with an IAM API key by calling the `setIamCredentials()` method again.
 
 ### Setting Remote Site Settings
 
@@ -161,6 +241,8 @@ The final piece of setup to access Watson services from your Salesforce environm
 1. Click _New Remote Site_
 1. Add whatever name you desire, with the following URL: `https://gateway.watsonplatform.net/`
 1. Click _Save_
+
+If you're authenticating with IAM, you'll also need to add your IAM URL in your remote site settings. The default URL is `https://iam.ng.bluemix.net`.
 
 ## Examples
 

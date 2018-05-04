@@ -72,6 +72,9 @@ public class IBMDiscoveryV1Models {
     private AddDocumentOptions(AddDocumentOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
+      IBMWatsonValidator.isTrue((builder.file_serialized_name == null)
+        || (builder.filename_serialized_name != null && builder.file_content_type_serialized_name != null),
+        'filename and content type cannot be null if file is not null');
       environment_id_serialized_name = builder.environment_id_serialized_name;
       collection_id_serialized_name = builder.collection_id_serialized_name;
       file_serialized_name = builder.file_serialized_name;
@@ -12252,6 +12255,9 @@ public class IBMDiscoveryV1Models {
     }
     private TestConfigurationInEnvironmentOptions(TestConfigurationInEnvironmentOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
+      IBMWatsonValidator.isTrue((builder.file_serialized_name == null)
+        || (builder.filename_serialized_name != null && builder.file_content_type_serialized_name != null),
+        'filename and content type cannot be null if file is not null');
       environment_id_serialized_name = builder.environment_id_serialized_name;
       configuration_serialized_name = builder.configuration_serialized_name;
       step_serialized_name = builder.step_serialized_name;
@@ -13663,6 +13669,9 @@ public class IBMDiscoveryV1Models {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.document_id_serialized_name, 'document_id_serialized_name cannot be empty');
+      IBMWatsonValidator.isTrue((builder.file_serialized_name == null)
+        || (builder.filename_serialized_name != null && builder.file_content_type_serialized_name != null),
+        'filename and content type cannot be null if file is not null');
       environment_id_serialized_name = builder.environment_id_serialized_name;
       collection_id_serialized_name = builder.collection_id_serialized_name;
       document_id_serialized_name = builder.document_id_serialized_name;

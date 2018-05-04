@@ -45,11 +45,11 @@ private class IBMSpeechToTextV1Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1(iamOptions);
+    speechToText.setEndPoint(URL);
     IBMSpeechToTextV1Models.GetModelOptions getModelOptions = new IBMSpeechToTextV1Models.GetModelOptionsBuilder('en-US_NarrowbandModel')
       .modelId('en-US_NarrowbandModel')
       .build();
