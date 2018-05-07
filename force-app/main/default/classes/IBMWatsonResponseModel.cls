@@ -52,6 +52,9 @@ public virtual class IBMWatsonResponseModel {
   }
 
   public void addHeader(String name, String value) {
+    if (this.headers == null) {
+      this.headers = new Map<String, String>();
+    }
     this.headers.put(name, value);
   }
 }
