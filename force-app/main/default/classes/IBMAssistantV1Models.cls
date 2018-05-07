@@ -7122,6 +7122,13 @@ public class IBMAssistantV1Models {
    */
   public class InputData extends IBMWatsonGenericModel {
     private String text_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public InputData() { }
+
     /**
      * Gets the text_serialized_name.
      *
@@ -7129,7 +7136,8 @@ public class IBMAssistantV1Models {
      *
      * @return the text_serialized_name
      */
-    public String text() {
+    @AuraEnabled
+    public String getText() {
       return text_serialized_name;
     }
     private InputData(InputDataBuilder builder) {
@@ -7144,6 +7152,16 @@ public class IBMAssistantV1Models {
      */
     public InputDataBuilder newBuilder() {
       return new InputDataBuilder(this);
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      InputData ret = (InputData) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
   }
 
@@ -10580,6 +10598,10 @@ public class IBMAssistantV1Models {
       }
 
       MessageRequest ret = (MessageRequest) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for input_serialized_name
+      InputData newInput = (InputData) new InputData().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), InputData.class);
+      ret.setInput(newInput);
 
       // calling custom deserializer for context_serialized_name
       Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'), Context.class);
