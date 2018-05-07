@@ -30,7 +30,7 @@ public virtual class IBMWatsonResponseModel {
       return false;
     }
 
-    IBMWatsonGenericModel other = (IBMWatsonGenericModel) obj;
+    IBMWatsonResponseModel other = (IBMWatsonResponseModel) obj;
 
     return this.toString().equals(other.toString());
   }
