@@ -139,7 +139,7 @@ public class IBMAssistantV1Models {
   /**
    * Counterexample.
    */
-  public class Counterexample extends IBMWatsonGenericModel {
+  public class Counterexample extends IBMWatsonResponseModel {
     private String text_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
@@ -200,7 +200,7 @@ public class IBMAssistantV1Models {
   /**
    * CounterexampleCollection.
    */
-  public class CounterexampleCollection extends IBMWatsonGenericModel {
+  public class CounterexampleCollection extends IBMWatsonResponseModel {
     private List<Counterexample> counterexamples_serialized_name;
     private Pagination pagination_serialized_name;
     /**
@@ -352,7 +352,7 @@ public class IBMAssistantV1Models {
   /**
    * The createCounterexample options.
    */
-  public class CreateCounterexampleOptions {
+  public class CreateCounterexampleOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String text_serialized_name;
     /**
@@ -380,6 +380,7 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notNull(builder.text_serialized_name, 'text_serialized_name cannot be null');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       text_serialized_name = builder.text_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -396,7 +397,7 @@ public class IBMAssistantV1Models {
   /**
    * CreateCounterexampleOptions Builder.
    */
-  public class CreateCounterexampleOptionsBuilder {
+  public class CreateCounterexampleOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String text_serialized_name;
 
@@ -450,6 +451,18 @@ public class IBMAssistantV1Models {
      */
     public CreateCounterexampleOptionsBuilder text(String text) {
       this.text_serialized_name = text;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the CreateCounterexampleOptions builder
+     */
+    public CreateCounterexampleOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
       return this;
     }
   }
@@ -950,7 +963,7 @@ public class IBMAssistantV1Models {
   /**
    * The createDialogNode options.
    */
-  public class CreateDialogNodeOptions {
+  public class CreateDialogNodeOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String dialog_node_serialized_name;
     private String description_serialized_name;
@@ -1170,6 +1183,7 @@ public class IBMAssistantV1Models {
       digress_in_serialized_name = builder.digress_in_serialized_name;
       digress_out_serialized_name = builder.digress_out_serialized_name;
       digress_out_slots_serialized_name = builder.digress_out_slots_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -1186,7 +1200,7 @@ public class IBMAssistantV1Models {
   /**
    * CreateDialogNodeOptions Builder.
    */
-  public class CreateDialogNodeOptionsBuilder {
+  public class CreateDialogNodeOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String dialog_node_serialized_name;
     private String description_serialized_name;
@@ -1466,6 +1480,18 @@ public class IBMAssistantV1Models {
       this.digress_out_slots_serialized_name = digressOutSlots;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the CreateDialogNodeOptions builder
+     */
+    public CreateDialogNodeOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
@@ -1664,7 +1690,7 @@ public class IBMAssistantV1Models {
   /**
    * The createEntity options.
    */
-  public class CreateEntityOptions {
+  public class CreateEntityOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String description_serialized_name;
@@ -1740,6 +1766,7 @@ public class IBMAssistantV1Models {
       metadata_serialized_name = builder.metadata_serialized_name;
       values_serialized_name = builder.values_serialized_name;
       fuzzy_match_serialized_name = builder.fuzzy_match_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -1756,7 +1783,7 @@ public class IBMAssistantV1Models {
   /**
    * CreateEntityOptions Builder.
    */
-  public class CreateEntityOptionsBuilder {
+  public class CreateEntityOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String description_serialized_name;
@@ -1880,6 +1907,18 @@ public class IBMAssistantV1Models {
       this.fuzzy_match_serialized_name = fuzzyMatch;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the CreateEntityOptions builder
+     */
+    public CreateEntityOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
@@ -1962,7 +2001,7 @@ public class IBMAssistantV1Models {
   /**
    * The createExample options.
    */
-  public class CreateExampleOptions {
+  public class CreateExampleOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String text_serialized_name;
@@ -2003,6 +2042,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       intent_serialized_name = builder.intent_serialized_name;
       text_serialized_name = builder.text_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -2019,7 +2059,7 @@ public class IBMAssistantV1Models {
   /**
    * CreateExampleOptions Builder.
    */
-  public class CreateExampleOptionsBuilder {
+  public class CreateExampleOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String text_serialized_name;
@@ -2088,6 +2128,18 @@ public class IBMAssistantV1Models {
      */
     public CreateExampleOptionsBuilder text(String text) {
       this.text_serialized_name = text;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the CreateExampleOptions builder
+     */
+    public CreateExampleOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
       return this;
     }
   }
@@ -2238,7 +2290,7 @@ public class IBMAssistantV1Models {
   /**
    * The createIntent options.
    */
-  public class CreateIntentOptions {
+  public class CreateIntentOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String description_serialized_name;
@@ -2290,6 +2342,7 @@ public class IBMAssistantV1Models {
       intent_serialized_name = builder.intent_serialized_name;
       description_serialized_name = builder.description_serialized_name;
       examples_serialized_name = builder.examples_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -2306,7 +2359,7 @@ public class IBMAssistantV1Models {
   /**
    * CreateIntentOptions Builder.
    */
-  public class CreateIntentOptionsBuilder {
+  public class CreateIntentOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String description_serialized_name;
@@ -2404,12 +2457,24 @@ public class IBMAssistantV1Models {
       this.examples_serialized_name = examples;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the CreateIntentOptions builder
+     */
+    public CreateIntentOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The createSynonym options.
    */
-  public class CreateSynonymOptions {
+  public class CreateSynonymOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -2463,6 +2528,7 @@ public class IBMAssistantV1Models {
       entity_serialized_name = builder.entity_serialized_name;
       value_serialized_name = builder.value_serialized_name;
       synonym_serialized_name = builder.synonym_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -2479,7 +2545,7 @@ public class IBMAssistantV1Models {
   /**
    * CreateSynonymOptions Builder.
    */
-  public class CreateSynonymOptionsBuilder {
+  public class CreateSynonymOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -2563,6 +2629,18 @@ public class IBMAssistantV1Models {
      */
     public CreateSynonymOptionsBuilder synonym(String synonym) {
       this.synonym_serialized_name = synonym;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the CreateSynonymOptions builder
+     */
+    public CreateSynonymOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
       return this;
     }
   }
@@ -2779,7 +2857,7 @@ public class IBMAssistantV1Models {
   /**
    * The createValue options.
    */
-  public class CreateValueOptions {
+  public class CreateValueOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -2868,6 +2946,7 @@ public class IBMAssistantV1Models {
       synonyms_serialized_name = builder.synonyms_serialized_name;
       patterns_serialized_name = builder.patterns_serialized_name;
       type_serialized_name = builder.type_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -2884,7 +2963,7 @@ public class IBMAssistantV1Models {
   /**
    * CreateValueOptions Builder.
    */
-  public class CreateValueOptionsBuilder {
+  public class CreateValueOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -3039,12 +3118,24 @@ public class IBMAssistantV1Models {
       this.type_serialized_name = typeVar;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the CreateValueOptions builder
+     */
+    public CreateValueOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The createWorkspace options.
    */
-  public class CreateWorkspaceOptions {
+  public class CreateWorkspaceOptions extends IBMWatsonOptionsModel {
     private String name_serialized_name;
     private String description_serialized_name;
     private String language_serialized_name;
@@ -3154,6 +3245,7 @@ public class IBMAssistantV1Models {
       counterexamples_serialized_name = builder.counterexamples_serialized_name;
       metadata_serialized_name = builder.metadata_serialized_name;
       learning_opt_out_serialized_name = builder.learning_opt_out_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -3170,7 +3262,7 @@ public class IBMAssistantV1Models {
   /**
    * CreateWorkspaceOptions Builder.
    */
-  public class CreateWorkspaceOptionsBuilder {
+  public class CreateWorkspaceOptionsBuilder extends IBMWatsonOptionsModel {
     private String name_serialized_name;
     private String description_serialized_name;
     private String language_serialized_name;
@@ -3370,12 +3462,24 @@ public class IBMAssistantV1Models {
       this.learning_opt_out_serialized_name = learningOptOut;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the CreateWorkspaceOptions builder
+     */
+    public CreateWorkspaceOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The deleteCounterexample options.
    */
-  public class DeleteCounterexampleOptions {
+  public class DeleteCounterexampleOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String text_serialized_name;
     /**
@@ -3403,6 +3507,7 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notEmpty(builder.text_serialized_name, 'text_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       text_serialized_name = builder.text_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -3419,7 +3524,7 @@ public class IBMAssistantV1Models {
   /**
    * DeleteCounterexampleOptions Builder.
    */
-  public class DeleteCounterexampleOptionsBuilder {
+  public class DeleteCounterexampleOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String text_serialized_name;
 
@@ -3475,12 +3580,24 @@ public class IBMAssistantV1Models {
       this.text_serialized_name = text;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteCounterexampleOptions builder
+     */
+    public DeleteCounterexampleOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The deleteDialogNode options.
    */
-  public class DeleteDialogNodeOptions {
+  public class DeleteDialogNodeOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String dialog_node_serialized_name;
     /**
@@ -3508,6 +3625,7 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notEmpty(builder.dialog_node_serialized_name, 'dialog_node_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       dialog_node_serialized_name = builder.dialog_node_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -3524,7 +3642,7 @@ public class IBMAssistantV1Models {
   /**
    * DeleteDialogNodeOptions Builder.
    */
-  public class DeleteDialogNodeOptionsBuilder {
+  public class DeleteDialogNodeOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String dialog_node_serialized_name;
 
@@ -3580,12 +3698,24 @@ public class IBMAssistantV1Models {
       this.dialog_node_serialized_name = dialogNode;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteDialogNodeOptions builder
+     */
+    public DeleteDialogNodeOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The deleteEntity options.
    */
-  public class DeleteEntityOptions {
+  public class DeleteEntityOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     /**
@@ -3613,6 +3743,7 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notEmpty(builder.entity_serialized_name, 'entity_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       entity_serialized_name = builder.entity_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -3629,7 +3760,7 @@ public class IBMAssistantV1Models {
   /**
    * DeleteEntityOptions Builder.
    */
-  public class DeleteEntityOptionsBuilder {
+  public class DeleteEntityOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
 
@@ -3685,12 +3816,24 @@ public class IBMAssistantV1Models {
       this.entity_serialized_name = entity;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteEntityOptions builder
+     */
+    public DeleteEntityOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The deleteExample options.
    */
-  public class DeleteExampleOptions {
+  public class DeleteExampleOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String text_serialized_name;
@@ -3731,6 +3874,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       intent_serialized_name = builder.intent_serialized_name;
       text_serialized_name = builder.text_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -3747,7 +3891,7 @@ public class IBMAssistantV1Models {
   /**
    * DeleteExampleOptions Builder.
    */
-  public class DeleteExampleOptionsBuilder {
+  public class DeleteExampleOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String text_serialized_name;
@@ -3818,12 +3962,24 @@ public class IBMAssistantV1Models {
       this.text_serialized_name = text;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteExampleOptions builder
+     */
+    public DeleteExampleOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The deleteIntent options.
    */
-  public class DeleteIntentOptions {
+  public class DeleteIntentOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     /**
@@ -3851,6 +4007,7 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notEmpty(builder.intent_serialized_name, 'intent_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       intent_serialized_name = builder.intent_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -3867,7 +4024,7 @@ public class IBMAssistantV1Models {
   /**
    * DeleteIntentOptions Builder.
    */
-  public class DeleteIntentOptionsBuilder {
+  public class DeleteIntentOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
 
@@ -3923,12 +4080,24 @@ public class IBMAssistantV1Models {
       this.intent_serialized_name = intent;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteIntentOptions builder
+     */
+    public DeleteIntentOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The deleteSynonym options.
    */
-  public class DeleteSynonymOptions {
+  public class DeleteSynonymOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -3982,6 +4151,7 @@ public class IBMAssistantV1Models {
       entity_serialized_name = builder.entity_serialized_name;
       value_serialized_name = builder.value_serialized_name;
       synonym_serialized_name = builder.synonym_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -3998,7 +4168,7 @@ public class IBMAssistantV1Models {
   /**
    * DeleteSynonymOptions Builder.
    */
-  public class DeleteSynonymOptionsBuilder {
+  public class DeleteSynonymOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -4084,12 +4254,24 @@ public class IBMAssistantV1Models {
       this.synonym_serialized_name = synonym;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteSynonymOptions builder
+     */
+    public DeleteSynonymOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The deleteValue options.
    */
-  public class DeleteValueOptions {
+  public class DeleteValueOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -4130,6 +4312,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       entity_serialized_name = builder.entity_serialized_name;
       value_serialized_name = builder.value_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -4146,7 +4329,7 @@ public class IBMAssistantV1Models {
   /**
    * DeleteValueOptions Builder.
    */
-  public class DeleteValueOptionsBuilder {
+  public class DeleteValueOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -4217,12 +4400,24 @@ public class IBMAssistantV1Models {
       this.value_serialized_name = value;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteValueOptions builder
+     */
+    public DeleteValueOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The deleteWorkspace options.
    */
-  public class DeleteWorkspaceOptions {
+  public class DeleteWorkspaceOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
@@ -4237,6 +4432,7 @@ public class IBMAssistantV1Models {
     private DeleteWorkspaceOptions(DeleteWorkspaceOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -4253,7 +4449,7 @@ public class IBMAssistantV1Models {
   /**
    * DeleteWorkspaceOptions Builder.
    */
-  public class DeleteWorkspaceOptionsBuilder {
+  public class DeleteWorkspaceOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
 
     private DeleteWorkspaceOptionsBuilder(DeleteWorkspaceOptions deleteWorkspaceOptions) {
@@ -4294,12 +4490,24 @@ public class IBMAssistantV1Models {
       this.workspace_id_serialized_name = workspaceId;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteWorkspaceOptions builder
+     */
+    public DeleteWorkspaceOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * DialogNode.
    */
-  public class DialogNode extends IBMWatsonGenericModel {
+  public class DialogNode extends IBMWatsonResponseModel {
     private String dialog_node_serialized_name;
     private String description_serialized_name;
     private String conditions_serialized_name;
@@ -4850,7 +5058,7 @@ public class IBMAssistantV1Models {
   /**
    * An array of dialog nodes.
    */
-  public class DialogNodeCollection extends IBMWatsonGenericModel {
+  public class DialogNodeCollection extends IBMWatsonResponseModel {
     private List<DialogNode> dialog_nodes_serialized_name;
     private Pagination pagination_serialized_name;
     /**
@@ -5083,7 +5291,7 @@ public class IBMAssistantV1Models {
   /**
    * Entity.
    */
-  public class Entity extends IBMWatsonGenericModel {
+  public class Entity extends IBMWatsonResponseModel {
     private String entity_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
@@ -5211,7 +5419,7 @@ public class IBMAssistantV1Models {
   /**
    * An array of entities.
    */
-  public class EntityCollection extends IBMWatsonGenericModel {
+  public class EntityCollection extends IBMWatsonResponseModel {
     private List<EntityExport> entities_serialized_name;
     private Pagination pagination_serialized_name;
     /**
@@ -5286,7 +5494,7 @@ public class IBMAssistantV1Models {
   /**
    * EntityExport.
    */
-  public class EntityExport extends IBMWatsonGenericModel {
+  public class EntityExport extends IBMWatsonResponseModel {
     private String entity_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
@@ -5448,7 +5656,7 @@ public class IBMAssistantV1Models {
   /**
    * Example.
    */
-  public class Example extends IBMWatsonGenericModel {
+  public class Example extends IBMWatsonResponseModel {
     private String text_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
@@ -5509,7 +5717,7 @@ public class IBMAssistantV1Models {
   /**
    * ExampleCollection.
    */
-  public class ExampleCollection extends IBMWatsonGenericModel {
+  public class ExampleCollection extends IBMWatsonResponseModel {
     private List<Example> examples_serialized_name;
     private Pagination pagination_serialized_name;
     /**
@@ -5584,7 +5792,7 @@ public class IBMAssistantV1Models {
   /**
    * The getCounterexample options.
    */
-  public class GetCounterexampleOptions {
+  public class GetCounterexampleOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String text_serialized_name;
     private Boolean include_audit_serialized_name;
@@ -5624,6 +5832,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       text_serialized_name = builder.text_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -5640,7 +5849,7 @@ public class IBMAssistantV1Models {
   /**
    * GetCounterexampleOptions Builder.
    */
-  public class GetCounterexampleOptionsBuilder {
+  public class GetCounterexampleOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String text_serialized_name;
     private Boolean include_audit_serialized_name;
@@ -5709,12 +5918,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetCounterexampleOptions builder
+     */
+    public GetCounterexampleOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The getDialogNode options.
    */
-  public class GetDialogNodeOptions {
+  public class GetDialogNodeOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String dialog_node_serialized_name;
     private Boolean include_audit_serialized_name;
@@ -5754,6 +5975,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       dialog_node_serialized_name = builder.dialog_node_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -5770,7 +5992,7 @@ public class IBMAssistantV1Models {
   /**
    * GetDialogNodeOptions Builder.
    */
-  public class GetDialogNodeOptionsBuilder {
+  public class GetDialogNodeOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String dialog_node_serialized_name;
     private Boolean include_audit_serialized_name;
@@ -5839,12 +6061,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetDialogNodeOptions builder
+     */
+    public GetDialogNodeOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The getEntity options.
    */
-  public class GetEntityOptions {
+  public class GetEntityOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private Boolean export_serialized_name;
@@ -5896,6 +6130,7 @@ public class IBMAssistantV1Models {
       entity_serialized_name = builder.entity_serialized_name;
       export_serialized_name = builder.export_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -5912,7 +6147,7 @@ public class IBMAssistantV1Models {
   /**
    * GetEntityOptions Builder.
    */
-  public class GetEntityOptionsBuilder {
+  public class GetEntityOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private Boolean export_serialized_name;
@@ -5994,12 +6229,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetEntityOptions builder
+     */
+    public GetEntityOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The getExample options.
    */
-  public class GetExampleOptions {
+  public class GetExampleOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String text_serialized_name;
@@ -6052,6 +6299,7 @@ public class IBMAssistantV1Models {
       intent_serialized_name = builder.intent_serialized_name;
       text_serialized_name = builder.text_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -6068,7 +6316,7 @@ public class IBMAssistantV1Models {
   /**
    * GetExampleOptions Builder.
    */
-  public class GetExampleOptionsBuilder {
+  public class GetExampleOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String text_serialized_name;
@@ -6152,12 +6400,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetExampleOptions builder
+     */
+    public GetExampleOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The getIntent options.
    */
-  public class GetIntentOptions {
+  public class GetIntentOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private Boolean export_serialized_name;
@@ -6209,6 +6469,7 @@ public class IBMAssistantV1Models {
       intent_serialized_name = builder.intent_serialized_name;
       export_serialized_name = builder.export_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -6225,7 +6486,7 @@ public class IBMAssistantV1Models {
   /**
    * GetIntentOptions Builder.
    */
-  public class GetIntentOptionsBuilder {
+  public class GetIntentOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private Boolean export_serialized_name;
@@ -6307,12 +6568,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetIntentOptions builder
+     */
+    public GetIntentOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The getSynonym options.
    */
-  public class GetSynonymOptions {
+  public class GetSynonymOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -6378,6 +6651,7 @@ public class IBMAssistantV1Models {
       value_serialized_name = builder.value_serialized_name;
       synonym_serialized_name = builder.synonym_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -6394,7 +6668,7 @@ public class IBMAssistantV1Models {
   /**
    * GetSynonymOptions Builder.
    */
-  public class GetSynonymOptionsBuilder {
+  public class GetSynonymOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -6493,12 +6767,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetSynonymOptions builder
+     */
+    public GetSynonymOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The getValue options.
    */
-  public class GetValueOptions {
+  public class GetValueOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -6563,6 +6849,7 @@ public class IBMAssistantV1Models {
       value_serialized_name = builder.value_serialized_name;
       export_serialized_name = builder.export_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -6579,7 +6866,7 @@ public class IBMAssistantV1Models {
   /**
    * GetValueOptions Builder.
    */
-  public class GetValueOptionsBuilder {
+  public class GetValueOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -6676,12 +6963,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetValueOptions builder
+     */
+    public GetValueOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The getWorkspace options.
    */
-  public class GetWorkspaceOptions {
+  public class GetWorkspaceOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private Boolean export_serialized_name;
     private Boolean include_audit_serialized_name;
@@ -6720,6 +7019,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       export_serialized_name = builder.export_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -6736,7 +7036,7 @@ public class IBMAssistantV1Models {
   /**
    * GetWorkspaceOptions Builder.
    */
-  public class GetWorkspaceOptionsBuilder {
+  public class GetWorkspaceOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private Boolean export_serialized_name;
     private Boolean include_audit_serialized_name;
@@ -6803,12 +7103,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetWorkspaceOptions builder
+     */
+    public GetWorkspaceOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The user input.
    */
-  public class InputData {
+  public class InputData extends IBMWatsonGenericModel {
     private String text_serialized_name;
     /**
      * Gets the text_serialized_name.
@@ -6833,7 +7145,6 @@ public class IBMAssistantV1Models {
     public InputDataBuilder newBuilder() {
       return new InputDataBuilder(this);
     }
-
   }
 
   /**
@@ -6885,7 +7196,7 @@ public class IBMAssistantV1Models {
   /**
    * Intent.
    */
-  public class Intent extends IBMWatsonGenericModel {
+  public class Intent extends IBMWatsonResponseModel {
     private String intent_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
@@ -6967,7 +7278,7 @@ public class IBMAssistantV1Models {
   /**
    * IntentCollection.
    */
-  public class IntentCollection extends IBMWatsonGenericModel {
+  public class IntentCollection extends IBMWatsonResponseModel {
     private List<IntentExport> intents_serialized_name;
     private Pagination pagination_serialized_name;
     /**
@@ -7042,7 +7353,7 @@ public class IBMAssistantV1Models {
   /**
    * IntentExport.
    */
-  public class IntentExport extends IBMWatsonGenericModel {
+  public class IntentExport extends IBMWatsonResponseModel {
     private String intent_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
@@ -7158,7 +7469,7 @@ public class IBMAssistantV1Models {
   /**
    * The listAllLogs options.
    */
-  public class ListAllLogsOptions {
+  public class ListAllLogsOptions extends IBMWatsonOptionsModel {
     private String filter_serialized_name;
     private String sort_serialized_name;
     private Long page_limit_serialized_name;
@@ -7209,6 +7520,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = builder.sort_serialized_name;
       page_limit_serialized_name = builder.page_limit_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -7225,7 +7537,7 @@ public class IBMAssistantV1Models {
   /**
    * ListAllLogsOptions Builder.
    */
-  public class ListAllLogsOptionsBuilder {
+  public class ListAllLogsOptionsBuilder extends IBMWatsonOptionsModel {
     private String filter_serialized_name;
     private String sort_serialized_name;
     private Long page_limit_serialized_name;
@@ -7305,12 +7617,24 @@ public class IBMAssistantV1Models {
       this.cursor_serialized_name = cursor;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListAllLogsOptions builder
+     */
+    public ListAllLogsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The listCounterexamples options.
    */
-  public class ListCounterexamplesOptions {
+  public class ListCounterexamplesOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private Long page_limit_serialized_name;
     private Boolean include_count_serialized_name;
@@ -7385,6 +7709,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -7401,7 +7726,7 @@ public class IBMAssistantV1Models {
   /**
    * ListCounterexamplesOptions Builder.
    */
-  public class ListCounterexamplesOptionsBuilder {
+  public class ListCounterexamplesOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private Long page_limit_serialized_name;
     private Boolean include_count_serialized_name;
@@ -7507,12 +7832,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListCounterexamplesOptions builder
+     */
+    public ListCounterexamplesOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The listDialogNodes options.
    */
-  public class ListDialogNodesOptions {
+  public class ListDialogNodesOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private Long page_limit_serialized_name;
     private Boolean include_count_serialized_name;
@@ -7587,6 +7924,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -7603,7 +7941,7 @@ public class IBMAssistantV1Models {
   /**
    * ListDialogNodesOptions Builder.
    */
-  public class ListDialogNodesOptionsBuilder {
+  public class ListDialogNodesOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private Long page_limit_serialized_name;
     private Boolean include_count_serialized_name;
@@ -7709,12 +8047,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListDialogNodesOptions builder
+     */
+    public ListDialogNodesOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The listEntities options.
    */
-  public class ListEntitiesOptions {
+  public class ListEntitiesOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private Boolean export_serialized_name;
     private Long page_limit_serialized_name;
@@ -7801,6 +8151,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -7817,7 +8168,7 @@ public class IBMAssistantV1Models {
   /**
    * ListEntitiesOptions Builder.
    */
-  public class ListEntitiesOptionsBuilder {
+  public class ListEntitiesOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private Boolean export_serialized_name;
     private Long page_limit_serialized_name;
@@ -7936,12 +8287,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListEntitiesOptions builder
+     */
+    public ListEntitiesOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The listExamples options.
    */
-  public class ListExamplesOptions {
+  public class ListExamplesOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private Long page_limit_serialized_name;
@@ -8029,6 +8392,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -8045,7 +8409,7 @@ public class IBMAssistantV1Models {
   /**
    * ListExamplesOptions Builder.
    */
-  public class ListExamplesOptionsBuilder {
+  public class ListExamplesOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private Long page_limit_serialized_name;
@@ -8166,12 +8530,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListExamplesOptions builder
+     */
+    public ListExamplesOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The listIntents options.
    */
-  public class ListIntentsOptions {
+  public class ListIntentsOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private Boolean export_serialized_name;
     private Long page_limit_serialized_name;
@@ -8258,6 +8634,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -8274,7 +8651,7 @@ public class IBMAssistantV1Models {
   /**
    * ListIntentsOptions Builder.
    */
-  public class ListIntentsOptionsBuilder {
+  public class ListIntentsOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private Boolean export_serialized_name;
     private Long page_limit_serialized_name;
@@ -8393,12 +8770,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListIntentsOptions builder
+     */
+    public ListIntentsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The listLogs options.
    */
-  public class ListLogsOptions {
+  public class ListLogsOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String sort_serialized_name;
     private String filter_serialized_name;
@@ -8461,6 +8850,7 @@ public class IBMAssistantV1Models {
       filter_serialized_name = builder.filter_serialized_name;
       page_limit_serialized_name = builder.page_limit_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -8477,7 +8867,7 @@ public class IBMAssistantV1Models {
   /**
    * ListLogsOptions Builder.
    */
-  public class ListLogsOptionsBuilder {
+  public class ListLogsOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String sort_serialized_name;
     private String filter_serialized_name;
@@ -8570,12 +8960,24 @@ public class IBMAssistantV1Models {
       this.cursor_serialized_name = cursor;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListLogsOptions builder
+     */
+    public ListLogsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The listSynonyms options.
    */
-  public class ListSynonymsOptions {
+  public class ListSynonymsOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -8676,6 +9078,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -8692,7 +9095,7 @@ public class IBMAssistantV1Models {
   /**
    * ListSynonymsOptions Builder.
    */
-  public class ListSynonymsOptionsBuilder {
+  public class ListSynonymsOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -8828,12 +9231,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListSynonymsOptions builder
+     */
+    public ListSynonymsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The listValues options.
    */
-  public class ListValuesOptions {
+  public class ListValuesOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private Boolean export_serialized_name;
@@ -8933,6 +9348,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -8949,7 +9365,7 @@ public class IBMAssistantV1Models {
   /**
    * ListValuesOptions Builder.
    */
-  public class ListValuesOptionsBuilder {
+  public class ListValuesOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private Boolean export_serialized_name;
@@ -9083,12 +9499,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListValuesOptions builder
+     */
+    public ListValuesOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The listWorkspaces options.
    */
-  public class ListWorkspacesOptions {
+  public class ListWorkspacesOptions extends IBMWatsonOptionsModel {
     private Long page_limit_serialized_name;
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
@@ -9150,6 +9578,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = builder.sort_serialized_name;
       cursor_serialized_name = builder.cursor_serialized_name;
       include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -9166,7 +9595,7 @@ public class IBMAssistantV1Models {
   /**
    * ListWorkspacesOptions Builder.
    */
-  public class ListWorkspacesOptionsBuilder {
+  public class ListWorkspacesOptionsBuilder extends IBMWatsonOptionsModel {
     private Long page_limit_serialized_name;
     private Boolean include_count_serialized_name;
     private String sort_serialized_name;
@@ -9250,12 +9679,24 @@ public class IBMAssistantV1Models {
       this.include_audit_serialized_name = includeAudit;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListWorkspacesOptions builder
+     */
+    public ListWorkspacesOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * LogCollection.
    */
-  public class LogCollection extends IBMWatsonGenericModel {
+  public class LogCollection extends IBMWatsonResponseModel {
     private List<LogExport> logs_serialized_name;
     private LogPagination pagination_serialized_name;
     /**
@@ -9692,7 +10133,7 @@ public class IBMAssistantV1Models {
   /**
    * The message options.
    */
-  public class MessageOptions {
+  public class MessageOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private InputData input_serialized_name;
     private Boolean alternate_intents_serialized_name;
@@ -9791,6 +10232,7 @@ public class IBMAssistantV1Models {
       intents_serialized_name = builder.intents_serialized_name;
       output_serialized_name = builder.output_serialized_name;
       nodes_visited_details_serialized_name = builder.nodes_visited_details_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -9807,7 +10249,7 @@ public class IBMAssistantV1Models {
   /**
    * MessageOptions Builder.
    */
-  public class MessageOptionsBuilder {
+  public class MessageOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private InputData input_serialized_name;
     private Boolean alternate_intents_serialized_name;
@@ -9985,6 +10427,18 @@ public class IBMAssistantV1Models {
       this.entities_serialized_name = messageRequest.getEntities();
       this.intents_serialized_name = messageRequest.getIntents();
       this.output_serialized_name = messageRequest.getOutput();
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the MessageOptions builder
+     */
+    public MessageOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
       return this;
     }
   }
@@ -10168,7 +10622,7 @@ public class IBMAssistantV1Models {
   /**
    * A response from the Watson Assistant service.
    */
-  public class MessageResponse extends IBMWatsonDynamicModel {
+  public class MessageResponse extends IBMWatsonDynamicResponseModel {
     private MessageInput input_serialized_name;
     private List<RuntimeIntent> intents_serialized_name;
     private List<RuntimeEntity> entities_serialized_name;
@@ -10891,7 +11345,7 @@ public class IBMAssistantV1Models {
   /**
    * Synonym.
    */
-  public class Synonym extends IBMWatsonGenericModel {
+  public class Synonym extends IBMWatsonResponseModel {
     private String synonym_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
@@ -10952,7 +11406,7 @@ public class IBMAssistantV1Models {
   /**
    * SynonymCollection.
    */
-  public class SynonymCollection extends IBMWatsonGenericModel {
+  public class SynonymCollection extends IBMWatsonResponseModel {
     private List<Synonym> synonyms_serialized_name;
     private Pagination pagination_serialized_name;
     /**
@@ -11062,7 +11516,7 @@ public class IBMAssistantV1Models {
   /**
    * The updateCounterexample options.
    */
-  public class UpdateCounterexampleOptions {
+  public class UpdateCounterexampleOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String text_serialized_name;
     private String new_text_serialized_name;
@@ -11102,6 +11556,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       text_serialized_name = builder.text_serialized_name;
       new_text_serialized_name = builder.new_text_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -11118,7 +11573,7 @@ public class IBMAssistantV1Models {
   /**
    * UpdateCounterexampleOptions Builder.
    */
-  public class UpdateCounterexampleOptionsBuilder {
+  public class UpdateCounterexampleOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String text_serialized_name;
     private String new_text_serialized_name;
@@ -11187,12 +11642,24 @@ public class IBMAssistantV1Models {
       this.new_text_serialized_name = newText;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the UpdateCounterexampleOptions builder
+     */
+    public UpdateCounterexampleOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The UpdateDialogNode options.
    */
-  public class UpdateDialogNodeOptions {
+  public class UpdateDialogNodeOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String dialog_node_serialized_name;
     private String new_type_serialized_name;
@@ -11424,6 +11891,7 @@ public class IBMAssistantV1Models {
       new_output_serialized_name = builder.new_output_serialized_name;
       new_parent_serialized_name = builder.new_parent_serialized_name;
       new_dialog_node_serialized_name = builder.new_dialog_node_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -11440,7 +11908,7 @@ public class IBMAssistantV1Models {
   /**
    * UpdateDialogNodeOptions Builder.
    */
-  public class UpdateDialogNodeOptionsBuilder {
+  public class UpdateDialogNodeOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String dialog_node_serialized_name;
     private String new_type_serialized_name;
@@ -11733,12 +12201,24 @@ public class IBMAssistantV1Models {
       this.new_dialog_node_serialized_name = newDialogNode;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The updateEntity options.
    */
-  public class UpdateEntityOptions {
+  public class UpdateEntityOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private Boolean new_fuzzy_match_serialized_name;
@@ -11826,6 +12306,7 @@ public class IBMAssistantV1Models {
       new_metadata_serialized_name = builder.new_metadata_serialized_name;
       new_values_serialized_name = builder.new_values_serialized_name;
       new_description_serialized_name = builder.new_description_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -11842,7 +12323,7 @@ public class IBMAssistantV1Models {
   /**
    * UpdateEntityOptions Builder.
    */
-  public class UpdateEntityOptionsBuilder {
+  public class UpdateEntityOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private Boolean new_fuzzy_match_serialized_name;
@@ -11979,12 +12460,24 @@ public class IBMAssistantV1Models {
       this.new_description_serialized_name = newDescription;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the UpdateEntityOptions builder
+     */
+    public UpdateEntityOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The updateExample options.
    */
-  public class UpdateExampleOptions {
+  public class UpdateExampleOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String text_serialized_name;
@@ -12037,6 +12530,7 @@ public class IBMAssistantV1Models {
       intent_serialized_name = builder.intent_serialized_name;
       text_serialized_name = builder.text_serialized_name;
       new_text_serialized_name = builder.new_text_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -12053,7 +12547,7 @@ public class IBMAssistantV1Models {
   /**
    * UpdateExampleOptions Builder.
    */
-  public class UpdateExampleOptionsBuilder {
+  public class UpdateExampleOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String text_serialized_name;
@@ -12137,12 +12631,24 @@ public class IBMAssistantV1Models {
       this.new_text_serialized_name = newText;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the UpdateExampleOptions builder
+     */
+    public UpdateExampleOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The updateIntent options.
    */
-  public class UpdateIntentOptions {
+  public class UpdateIntentOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String new_intent_serialized_name;
@@ -12206,6 +12712,7 @@ public class IBMAssistantV1Models {
       new_intent_serialized_name = builder.new_intent_serialized_name;
       new_examples_serialized_name = builder.new_examples_serialized_name;
       new_description_serialized_name = builder.new_description_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -12222,7 +12729,7 @@ public class IBMAssistantV1Models {
   /**
    * UpdateIntentOptions Builder.
    */
-  public class UpdateIntentOptionsBuilder {
+  public class UpdateIntentOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String new_intent_serialized_name;
@@ -12333,12 +12840,24 @@ public class IBMAssistantV1Models {
       this.new_description_serialized_name = newDescription;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the UpdateIntentOptions builder
+     */
+    public UpdateIntentOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The updateSynonym options.
    */
-  public class UpdateSynonymOptions {
+  public class UpdateSynonymOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -12404,6 +12923,7 @@ public class IBMAssistantV1Models {
       value_serialized_name = builder.value_serialized_name;
       synonym_serialized_name = builder.synonym_serialized_name;
       new_synonym_serialized_name = builder.new_synonym_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -12420,7 +12940,7 @@ public class IBMAssistantV1Models {
   /**
    * UpdateSynonymOptions Builder.
    */
-  public class UpdateSynonymOptionsBuilder {
+  public class UpdateSynonymOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -12519,12 +13039,24 @@ public class IBMAssistantV1Models {
       this.new_synonym_serialized_name = newSynonym;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the UpdateSynonymOptions builder
+     */
+    public UpdateSynonymOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The updateValue options.
    */
-  public class UpdateValueOptions {
+  public class UpdateValueOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -12625,6 +13157,7 @@ public class IBMAssistantV1Models {
       new_metadata_serialized_name = builder.new_metadata_serialized_name;
       new_patterns_serialized_name = builder.new_patterns_serialized_name;
       new_value_serialized_name = builder.new_value_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -12641,7 +13174,7 @@ public class IBMAssistantV1Models {
   /**
    * UpdateValueOptions Builder.
    */
-  public class UpdateValueOptionsBuilder {
+  public class UpdateValueOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String entity_serialized_name;
     private String value_serialized_name;
@@ -12809,12 +13342,24 @@ public class IBMAssistantV1Models {
       this.new_value_serialized_name = newValue;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the UpdateValueOptions builder
+     */
+    public UpdateValueOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The updateWorkspace options.
    */
-  public class UpdateWorkspaceOptions {
+  public class UpdateWorkspaceOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String name_serialized_name;
     private String description_serialized_name;
@@ -12949,6 +13494,7 @@ public class IBMAssistantV1Models {
       metadata_serialized_name = builder.metadata_serialized_name;
       learning_opt_out_serialized_name = builder.learning_opt_out_serialized_name;
       append_serialized_name = builder.append_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -12965,7 +13511,7 @@ public class IBMAssistantV1Models {
   /**
    * UpdateWorkspaceOptions Builder.
    */
-  public class UpdateWorkspaceOptionsBuilder {
+  public class UpdateWorkspaceOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
     private String name_serialized_name;
     private String description_serialized_name;
@@ -13200,12 +13746,24 @@ public class IBMAssistantV1Models {
       this.append_serialized_name = append;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public UpdateWorkspaceOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * Value.
    */
-  public class Value extends IBMWatsonGenericModel {
+  public class Value extends IBMWatsonResponseModel {
     private String value_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Datetime created_serialized_name;
@@ -13354,7 +13912,7 @@ public class IBMAssistantV1Models {
   /**
    * ValueCollection.
    */
-  public class ValueCollection extends IBMWatsonGenericModel {
+  public class ValueCollection extends IBMWatsonResponseModel {
     private List<ValueExport> values_serialized_name;
     private Pagination pagination_serialized_name;
     /**
@@ -13429,7 +13987,7 @@ public class IBMAssistantV1Models {
   /**
    * ValueExport.
    */
-  public class ValueExport extends IBMWatsonGenericModel {
+  public class ValueExport extends IBMWatsonResponseModel {
     private String value_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Datetime created_serialized_name;
@@ -13578,7 +14136,7 @@ public class IBMAssistantV1Models {
   /**
    * Workspace.
    */
-  public class Workspace extends IBMWatsonGenericModel {
+  public class Workspace extends IBMWatsonResponseModel {
     private String name_serialized_name;
     private String language_serialized_name;
     private Datetime created_serialized_name;
@@ -13739,7 +14297,7 @@ public class IBMAssistantV1Models {
   /**
    * WorkspaceCollection.
    */
-  public class WorkspaceCollection extends IBMWatsonGenericModel {
+  public class WorkspaceCollection extends IBMWatsonResponseModel {
     private List<Workspace> workspaces_serialized_name;
     private Pagination pagination_serialized_name;
     /**
@@ -13814,7 +14372,7 @@ public class IBMAssistantV1Models {
   /**
    * WorkspaceExport.
    */
-  public class WorkspaceExport extends IBMWatsonGenericModel {
+  public class WorkspaceExport extends IBMWatsonResponseModel {
     private String name_serialized_name;
     private String description_serialized_name;
     private String language_serialized_name;
