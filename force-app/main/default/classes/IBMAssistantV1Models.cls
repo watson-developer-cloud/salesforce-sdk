@@ -7160,8 +7160,9 @@ public class IBMAssistantV1Models {
       }
 
       InputData ret = (InputData) super.deserialize(jsonString, jsonMap, classType);
+      InputDataBuilder retBuilder = ret.newBuilder();
 
-      return ret;
+      return retBuilder.build();
     }
   }
 
