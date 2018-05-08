@@ -2,7 +2,7 @@ public class IBMLanguageTranslatorV2Models {
   /**
    * The createModel options.
    */
-  public class CreateModelOptions {
+  public class CreateModelOptions extends IBMWatsonOptionsModel {
     private String base_model_id_serialized_name;
     private String name_serialized_name;
     private IBMWatsonFile forced_glossary_serialized_name;
@@ -101,6 +101,7 @@ public class IBMLanguageTranslatorV2Models {
       parallel_corpus_filename_serialized_name = builder.parallel_corpus_filename_serialized_name;
       monolingual_corpus_serialized_name = builder.monolingual_corpus_serialized_name;
       monolingual_corpus_filename_serialized_name = builder.monolingual_corpus_filename_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -117,7 +118,7 @@ public class IBMLanguageTranslatorV2Models {
   /**
    * CreateModelOptions Builder.
    */
-  public class CreateModelOptionsBuilder {
+  public class CreateModelOptionsBuilder extends IBMWatsonOptionsModel {
     private String base_model_id_serialized_name;
     private String name_serialized_name;
     private IBMWatsonFile forced_glossary_serialized_name;
@@ -249,12 +250,24 @@ public class IBMLanguageTranslatorV2Models {
       this.monolingual_corpus_filename_serialized_name = monolingualCorpusFilename;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the CreateModelOptions builder
+     */
+    public CreateModelOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The deleteModel options.
    */
-  public class DeleteModelOptions {
+  public class DeleteModelOptions extends IBMWatsonOptionsModel {
     private String model_id_serialized_name;
     /**
      * Gets the model_id_serialized_name.
@@ -269,6 +282,7 @@ public class IBMLanguageTranslatorV2Models {
     private DeleteModelOptions(DeleteModelOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.model_id_serialized_name, 'model_id_serialized_name cannot be empty');
       model_id_serialized_name = builder.model_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -285,7 +299,7 @@ public class IBMLanguageTranslatorV2Models {
   /**
    * DeleteModelOptions Builder.
    */
-  public class DeleteModelOptionsBuilder {
+  public class DeleteModelOptionsBuilder extends IBMWatsonOptionsModel {
     private String model_id_serialized_name;
 
     private DeleteModelOptionsBuilder(DeleteModelOptions deleteModelOptions) {
@@ -326,12 +340,24 @@ public class IBMLanguageTranslatorV2Models {
       this.model_id_serialized_name = modelId;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteModelOptions builder
+     */
+    public DeleteModelOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The getModel options.
    */
-  public class GetModelOptions {
+  public class GetModelOptions extends IBMWatsonOptionsModel {
     private String model_id_serialized_name;
     /**
      * Gets the model_id_serialized_name.
@@ -346,6 +372,7 @@ public class IBMLanguageTranslatorV2Models {
     private GetModelOptions(GetModelOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.model_id_serialized_name, 'model_id_serialized_name cannot be empty');
       model_id_serialized_name = builder.model_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -362,7 +389,7 @@ public class IBMLanguageTranslatorV2Models {
   /**
    * GetModelOptions Builder.
    */
-  public class GetModelOptionsBuilder {
+  public class GetModelOptionsBuilder extends IBMWatsonOptionsModel {
     private String model_id_serialized_name;
 
     private GetModelOptionsBuilder(GetModelOptions getModelOptions) {
@@ -401,6 +428,18 @@ public class IBMLanguageTranslatorV2Models {
      */
     public GetModelOptionsBuilder modelId(String modelId) {
       this.model_id_serialized_name = modelId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetModelOptions builder
+     */
+    public GetModelOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
       return this;
     }
   }
@@ -466,7 +505,7 @@ public class IBMLanguageTranslatorV2Models {
   /**
    * IdentifiableLanguages.
    */
-  public class IdentifiableLanguages extends IBMWatsonGenericModel {
+  public class IdentifiableLanguages extends IBMWatsonResponseModel {
     private List<IdentifiableLanguage> languages_serialized_name;
     /**
      * Gets the languages_serialized_name.
@@ -574,7 +613,7 @@ public class IBMLanguageTranslatorV2Models {
   /**
    * IdentifiedLanguages.
    */
-  public class IdentifiedLanguages extends IBMWatsonGenericModel {
+  public class IdentifiedLanguages extends IBMWatsonResponseModel {
     private List<IdentifiedLanguage> languages_serialized_name;
     /**
      * Gets the languages_serialized_name.
@@ -624,7 +663,7 @@ public class IBMLanguageTranslatorV2Models {
   /**
    * The identify options.
    */
-  public class IdentifyOptions {
+  public class IdentifyOptions extends IBMWatsonOptionsModel {
     private String text_serialized_name;
     /**
      * Gets the text_serialized_name.
@@ -639,6 +678,7 @@ public class IBMLanguageTranslatorV2Models {
     private IdentifyOptions(IdentifyOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.text_serialized_name, 'text_serialized_name cannot be null');
       text_serialized_name = builder.text_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -655,7 +695,7 @@ public class IBMLanguageTranslatorV2Models {
   /**
    * IdentifyOptions Builder.
    */
-  public class IdentifyOptionsBuilder {
+  public class IdentifyOptionsBuilder extends IBMWatsonOptionsModel {
     private String text_serialized_name;
 
     private IdentifyOptionsBuilder(IdentifyOptions identifyOptions) {
@@ -696,13 +736,26 @@ public class IBMLanguageTranslatorV2Models {
       this.text_serialized_name = text;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the IdentifyOptions builder
+     */
+    public IdentifyOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The listIdentifiableLanguages options.
    */
-  public class ListIdentifiableLanguagesOptions {
+  public class ListIdentifiableLanguagesOptions extends IBMWatsonOptionsModel {
     private ListIdentifiableLanguagesOptions(ListIdentifiableLanguagesOptionsBuilder builder) {
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -719,7 +772,7 @@ public class IBMLanguageTranslatorV2Models {
   /**
    * ListIdentifiableLanguagesOptions Builder.
    */
-  public class ListIdentifiableLanguagesOptionsBuilder {
+  public class ListIdentifiableLanguagesOptionsBuilder extends IBMWatsonOptionsModel {
 
     private ListIdentifiableLanguagesOptionsBuilder(ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptions) {
     }
@@ -738,12 +791,24 @@ public class IBMLanguageTranslatorV2Models {
     public ListIdentifiableLanguagesOptions build() {
       return new ListIdentifiableLanguagesOptions(this);
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListIdentifiableLanguagesOptions builder
+     */
+    public ListIdentifiableLanguagesOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The listModels options.
    */
-  public class ListModelsOptions {
+  public class ListModelsOptions extends IBMWatsonOptionsModel {
     private String source_serialized_name;
     private String target_serialized_name;
     private Boolean default_serialized_name;
@@ -781,6 +846,7 @@ public class IBMLanguageTranslatorV2Models {
       source_serialized_name = builder.source_serialized_name;
       target_serialized_name = builder.target_serialized_name;
       default_serialized_name = builder.default_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -797,7 +863,7 @@ public class IBMLanguageTranslatorV2Models {
   /**
    * ListModelsOptions Builder.
    */
-  public class ListModelsOptionsBuilder {
+  public class ListModelsOptionsBuilder extends IBMWatsonOptionsModel {
     private String source_serialized_name;
     private String target_serialized_name;
     private Boolean default_serialized_name;
@@ -855,12 +921,24 @@ public class IBMLanguageTranslatorV2Models {
       this.default_serialized_name = defaultVar;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListModelsOptions builder
+     */
+    public ListModelsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The translate options.
    */
-  public class TranslateOptions {
+  public class TranslateOptions extends IBMWatsonOptionsModel {
     private List<String> text_serialized_name;
     private String model_id_serialized_name;
     private String source_serialized_name;
@@ -911,6 +989,7 @@ public class IBMLanguageTranslatorV2Models {
       model_id_serialized_name = builder.model_id_serialized_name;
       source_serialized_name = builder.source_serialized_name;
       target_serialized_name = builder.target_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -927,7 +1006,7 @@ public class IBMLanguageTranslatorV2Models {
   /**
    * TranslateOptions Builder.
    */
-  public class TranslateOptionsBuilder {
+  public class TranslateOptionsBuilder extends IBMWatsonOptionsModel {
     private List<String> text_serialized_name;
     private String model_id_serialized_name;
     private String source_serialized_name;
@@ -1023,6 +1102,18 @@ public class IBMLanguageTranslatorV2Models {
       this.target_serialized_name = target;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the TranslateOptions builder
+     */
+    public TranslateOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
@@ -1065,7 +1156,7 @@ public class IBMLanguageTranslatorV2Models {
   /**
    * Response payload for models.
    */
-  public class TranslationModel extends IBMWatsonGenericModel {
+  public class TranslationModel extends IBMWatsonResponseModel {
     private String model_id_serialized_name;
     private String name_serialized_name;
     private String source_serialized_name;
@@ -1291,7 +1382,7 @@ public class IBMLanguageTranslatorV2Models {
   /**
    * The response type for listing existing translation models.
    */
-  public class TranslationModels extends IBMWatsonGenericModel {
+  public class TranslationModels extends IBMWatsonResponseModel {
     private List<TranslationModel> models_serialized_name;
     /**
      * Gets the models_serialized_name.
@@ -1341,7 +1432,7 @@ public class IBMLanguageTranslatorV2Models {
   /**
    * TranslationResult.
    */
-  public class TranslationResult extends IBMWatsonGenericModel {
+  public class TranslationResult extends IBMWatsonResponseModel {
     private Long word_count_serialized_name;
     private Long character_count_serialized_name;
     private List<Translation> translations_serialized_name;
