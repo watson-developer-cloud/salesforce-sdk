@@ -1425,7 +1425,7 @@ private class IBMConversationV1Test {
     listOptions = listOptions.newBuilder().build();
     IBMConversationV1Models.LogCollection response = conversation.listLogs(listOptions);
 
-    System.assertEquals(response.getLogs().get(0).getRequest().getInput().text(), messageInput);
+    System.assertEquals(response.getLogs().get(0).getRequest().getInput().getText(), messageInput);
     System.assertEquals(response.getLogs().get(0).getResponse().getIntents().get(0).getIntent(), intentName);
     System.assertEquals(response.getLogs().get(0).getResponse().getIntents().get(0).getConfidence(), confidence);
     System.assertEquals(response.getLogs().get(0).getResponse().getEntities().get(0).getEntity(), entityName);
