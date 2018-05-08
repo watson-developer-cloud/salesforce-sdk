@@ -3,43 +3,6 @@
  * Language Understanding will give you results for the features you request. The service cleans HTML content before
  * analysis by default, so the results can ignore most advertisements and other unwanted content.
  *
- * ### Concepts
- * Identify general concepts that are referenced or alluded to in your content. Concepts that are detected typically
- * have an associated link to a DBpedia resource.
- *
- * ### Entities
- * Detect important people, places, geopolitical entities and other types of entities in your content. Entity detection
- * recognizes consecutive coreferences of each entity. For example, analysis of the following text would count "Barack
- * Obama" and "He" as the same entity:
- *
- * "Barack Obama was the 44th President of the United States. He took office in January 2009."
- *
- * ### Keywords
- * Determine the most important keywords in your content. Keyword phrases are organized by relevance in the results.
- *
- * ### Categories
- * Categorize your content into a hierarchical 5-level taxonomy. For example, "Leonardo DiCaprio won an Oscar" returns
- * "/art and entertainment/movies and tv/movies" as the most confident classification.
- *
- * ### Sentiment
- * Determine whether your content conveys postive or negative sentiment. Sentiment information can be returned for
- * detected entities, keywords, or user-specified target phrases found in the text.
- *
- * ### Emotion
- * Detect anger, disgust, fear, joy, or sadness that is conveyed by your content. Emotion information can be returned
- * for detected entities, keywords, or user-specified target phrases found in the text.
- *
- * ### Relations
- * Recognize when two entities are related, and identify the type of relation.  For example, you can identify an
- * "awardedTo" relation between an award and its recipient.
- *
- * ### Semantic Roles
- * Parse sentences into subject-action-object form, and identify entities and keywords that are subjects or objects of
- * an action.
- *
- * ### Metadata
- * Get author information, publication date, and the title of your text/HTML content.
- *
  * @version V1
  * @see <a href="http://www.ibm.com/watson/developercloud/natural-language-understanding.html">Natural Language Understanding</a>
  */
@@ -103,6 +66,12 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
   public IBMNaturalLanguageUnderstandingV1Models.AnalysisResults analyze(IBMNaturalLanguageUnderstandingV1Models.AnalyzeOptions analyzeOptions) {
     IBMWatsonValidator.notNull(analyzeOptions, 'analyzeOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/analyze');
+    Map<String, String> requestHeaders = (analyzeOptions != null) ? analyzeOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (analyzeOptions.text() != null) {
@@ -149,6 +118,12 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
   public void deleteModel(IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptions deleteModelOptions) {
     IBMWatsonValidator.notNull(deleteModelOptions, 'deleteModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/models/{0}', new String[]{ deleteModelOptions.modelId() }));
+    Map<String, String> requestHeaders = (deleteModelOptions != null) ? deleteModelOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
     builder.query('version', versionDate);
 
     createServiceCall(builder.build(), null);
@@ -164,6 +139,12 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
    */
   public IBMNaturalLanguageUnderstandingV1Models.ListModelsResults listModels(IBMNaturalLanguageUnderstandingV1Models.ListModelsOptions listModelsOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/models');
+    Map<String, String> requestHeaders = (listModelsOptions != null) ? listModelsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
     builder.query('version', versionDate);
 
     return (IBMNaturalLanguageUnderstandingV1Models.ListModelsResults) createServiceCall(builder.build(), IBMNaturalLanguageUnderstandingV1Models.ListModelsResults.class);
