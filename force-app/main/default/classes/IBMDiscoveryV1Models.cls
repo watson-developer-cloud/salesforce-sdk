@@ -217,7 +217,7 @@ public class IBMDiscoveryV1Models {
     public AddDocumentOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -420,7 +420,7 @@ public class IBMDiscoveryV1Models {
     public AddTrainingDataOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -1334,7 +1334,7 @@ public class IBMDiscoveryV1Models {
     public CreateCollectionOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -1596,7 +1596,7 @@ public class IBMDiscoveryV1Models {
     public CreateConfigurationOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -1736,7 +1736,7 @@ public class IBMDiscoveryV1Models {
     public CreateEnvironmentOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -1906,7 +1906,7 @@ public class IBMDiscoveryV1Models {
     public CreateExpansionsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -2134,7 +2134,7 @@ public class IBMDiscoveryV1Models {
     public CreateTrainingExampleOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -2252,7 +2252,7 @@ public class IBMDiscoveryV1Models {
     public DeleteAllTrainingDataOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -2370,7 +2370,7 @@ public class IBMDiscoveryV1Models {
     public DeleteCollectionOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -2488,7 +2488,7 @@ public class IBMDiscoveryV1Models {
     public DeleteConfigurationOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -2634,7 +2634,7 @@ public class IBMDiscoveryV1Models {
     public DeleteDocumentOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -2724,7 +2724,7 @@ public class IBMDiscoveryV1Models {
     public DeleteEnvironmentOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -2842,7 +2842,7 @@ public class IBMDiscoveryV1Models {
     public DeleteExpansionsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -2988,7 +2988,7 @@ public class IBMDiscoveryV1Models {
     public DeleteTrainingDataOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -3162,7 +3162,7 @@ public class IBMDiscoveryV1Models {
     public DeleteTrainingExampleOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -4754,7 +4754,7 @@ public class IBMDiscoveryV1Models {
     public FederatedQueryNoticesOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -5302,7 +5302,7 @@ public class IBMDiscoveryV1Models {
     public FederatedQueryOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -5590,7 +5590,7 @@ public class IBMDiscoveryV1Models {
     public GetCollectionOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -5708,7 +5708,7 @@ public class IBMDiscoveryV1Models {
     public GetConfigurationOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -5854,7 +5854,7 @@ public class IBMDiscoveryV1Models {
     public GetDocumentStatusOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -5944,7 +5944,7 @@ public class IBMDiscoveryV1Models {
     public GetEnvironmentOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -6090,7 +6090,7 @@ public class IBMDiscoveryV1Models {
     public GetTrainingDataOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -6264,7 +6264,7 @@ public class IBMDiscoveryV1Models {
     public GetTrainingExampleOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -6636,7 +6636,7 @@ public class IBMDiscoveryV1Models {
     public ListCollectionFieldsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -6801,7 +6801,7 @@ public class IBMDiscoveryV1Models {
     public ListCollectionsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -6966,7 +6966,7 @@ public class IBMDiscoveryV1Models {
     public ListConfigurationsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -7096,7 +7096,7 @@ public class IBMDiscoveryV1Models {
     public ListEnvironmentsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -7264,7 +7264,7 @@ public class IBMDiscoveryV1Models {
     public ListExpansionsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -7398,7 +7398,7 @@ public class IBMDiscoveryV1Models {
     public ListFieldsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -7516,7 +7516,7 @@ public class IBMDiscoveryV1Models {
     public ListTrainingDataOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -7662,7 +7662,7 @@ public class IBMDiscoveryV1Models {
     public ListTrainingExamplesOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -7831,8 +7831,9 @@ public class IBMDiscoveryV1Models {
       }
 
       NluEnrichmentEmotion ret = (NluEnrichmentEmotion) super.deserialize(jsonString, jsonMap, classType);
+      NluEnrichmentEmotionBuilder retBuilder = ret.newBuilder();
 
-      return ret;
+      return retBuilder.build();
     }
   }
 
@@ -8022,8 +8023,9 @@ public class IBMDiscoveryV1Models {
       }
 
       NluEnrichmentEntities ret = (NluEnrichmentEntities) super.deserialize(jsonString, jsonMap, classType);
+      NluEnrichmentEntitiesBuilder retBuilder = ret.newBuilder();
 
-      return ret;
+      return retBuilder.build();
     }
   }
 
@@ -8479,8 +8481,9 @@ public class IBMDiscoveryV1Models {
       }
 
       NluEnrichmentKeywords ret = (NluEnrichmentKeywords) super.deserialize(jsonString, jsonMap, classType);
+      NluEnrichmentKeywordsBuilder retBuilder = ret.newBuilder();
 
-      return ret;
+      return retBuilder.build();
     }
   }
 
@@ -8652,8 +8655,9 @@ public class IBMDiscoveryV1Models {
       }
 
       NluEnrichmentSemanticRoles ret = (NluEnrichmentSemanticRoles) super.deserialize(jsonString, jsonMap, classType);
+      NluEnrichmentSemanticRolesBuilder retBuilder = ret.newBuilder();
 
-      return ret;
+      return retBuilder.build();
     }
   }
 
@@ -8775,8 +8779,9 @@ public class IBMDiscoveryV1Models {
       }
 
       NluEnrichmentSentiment ret = (NluEnrichmentSentiment) super.deserialize(jsonString, jsonMap, classType);
+      NluEnrichmentSentimentBuilder retBuilder = ret.newBuilder();
 
-      return ret;
+      return retBuilder.build();
     }
   }
 
@@ -9750,7 +9755,7 @@ public class IBMDiscoveryV1Models {
     public QueryEntitiesOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -10794,7 +10799,7 @@ public class IBMDiscoveryV1Models {
     public QueryNoticesOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -11848,7 +11853,7 @@ public class IBMDiscoveryV1Models {
     public QueryOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
@@ -12456,7 +12461,7 @@ public class IBMDiscoveryV1Models {
     public QueryRelationsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
-  }
+    }
   }
 
   /**
