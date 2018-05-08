@@ -10,7 +10,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the trait_id_serialized_name.
      *
-     * The unique identifier of the characteristic to which the results pertain. IDs have the form `behavior_{value}`.
+     * The unique, non-localized identifier of the characteristic to which the results pertain. IDs have the form `behavior_{value}`.
      *
      * @return the trait_id_serialized_name
      */
@@ -21,7 +21,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the name_serialized_name.
      *
-     * The user-visible name of the characteristic.
+     * The user-visible, localized name of the characteristic.
      *
      * @return the name_serialized_name
      */
@@ -109,7 +109,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the consumption_preference_id_serialized_name.
      *
-     * The unique identifier of the consumption preference to which the results pertain. IDs have the form `consumption_preferences_{preference}`.
+     * The unique, non-localized identifier of the consumption preference to which the results pertain. IDs have the form `consumption_preferences_{preference}`.
      *
      * @return the consumption_preference_id_serialized_name
      */
@@ -120,7 +120,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the name_serialized_name.
      *
-     * The user-visible name of the consumption preference.
+     * The user-visible, localized name of the consumption preference.
      *
      * @return the name_serialized_name
      */
@@ -188,7 +188,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the consumption_preference_category_id_serialized_name.
      *
-     * The unique identifier of the consumption preferences category to which the results pertain. IDs have the form `consumption_preferences_{category}`.
+     * The unique, non-localized identifier of the consumption preferences category to which the results pertain. IDs have the form `consumption_preferences_{category}`.
      *
      * @return the consumption_preference_category_id_serialized_name
      */
@@ -379,7 +379,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the content_serialized_name.
      *
-     * Content that is to be analyzed. The service supports up to 20 MB of content for all items combined.
+     * The content that is to be analyzed. The service supports up to 20 MB of content for all `ContentItem` objects combined.
      *
      * @return the content_serialized_name
      */
@@ -389,7 +389,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the id_serialized_name.
      *
-     * Unique identifier for this content item.
+     * A unique identifier for this content item.
      *
      * @return the id_serialized_name
      */
@@ -399,7 +399,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the created_serialized_name.
      *
-     * Timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
+     * A timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
      *
      * @return the created_serialized_name
      */
@@ -409,7 +409,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the updated_serialized_name.
      *
-     * Timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
+     * A timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
      *
      * @return the updated_serialized_name
      */
@@ -419,7 +419,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the contenttype_serialized_name.
      *
-     * MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is analyzed; plain text is processed as submitted.
+     * The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is analyzed; plain text is processed as submitted.
      *
      * @return the contenttype_serialized_name
      */
@@ -429,7 +429,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the language_serialized_name.
      *
-     * Language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is `en` (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. A language specified with the `Content-Type` header overrides the value of this parameter; any content items that specify a different language are ignored. Omit the `Content-Type` header to base the language on the most prevalent specification among the content items; again, content items that specify a different language are ignored. You can specify any combination of languages for the input and response content.
+     * The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is `en` (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. A language specified with the **Content-Type** parameter overrides the value of this parameter; any content items that specify a different language are ignored. Omit the **Content-Type** parameter to base the language on the most prevalent specification among the content items; again, content items that specify a different language are ignored. You can specify any combination of languages for the input and response content.
      *
      * @return the language_serialized_name
      */
@@ -439,7 +439,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the parentid_serialized_name.
      *
-     * Unique ID of the parent content item for this item. Used to identify hierarchical relationships between posts/replies, messages/replies, and so on.
+     * The unique ID of the parent content item for this item. Used to identify hierarchical relationships between posts/replies, messages/replies, and so on.
      *
      * @return the parentid_serialized_name
      */
@@ -643,13 +643,13 @@ public class IBMPersonalityInsightsV3Models {
   /**
    * Profile.
    */
-  public class Profile extends IBMWatsonGenericModel {
+  public class Profile extends IBMWatsonResponseModel {
     private String processed_language_serialized_name;
     private Long word_count_serialized_name;
     private String word_count_message_serialized_name;
     private List<Trait> personality_serialized_name;
-    private List<Trait> values_serialized_name;
     private List<Trait> needs_serialized_name;
+    private List<Trait> values_serialized_name;
     private List<Behavior> behavior_serialized_name;
     private List<ConsumptionPreferencesCategory> consumption_preferences_serialized_name;
     private List<Warning> warnings_serialized_name;
@@ -667,7 +667,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the word_count_serialized_name.
      *
-     * The number of words that were found in the input.
+     * The number of words from the input that were used to produce the profile.
      *
      * @return the word_count_serialized_name
      */
@@ -689,7 +689,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the personality_serialized_name.
      *
-     * Detailed results for the Big Five personality characteristics (dimensions and facets) inferred from the input text.
+     * A recursive array of `Trait` objects that provides detailed results for the Big Five personality characteristics (dimensions and facets) inferred from the input text.
      *
      * @return the personality_serialized_name
      */
@@ -698,26 +698,26 @@ public class IBMPersonalityInsightsV3Models {
       return personality_serialized_name;
     }
     /**
-     * Gets the values_serialized_name.
-     *
-     * Detailed results for the Needs characteristics inferred from the input text.
-     *
-     * @return the values_serialized_name
-     */
-    @AuraEnabled
-    public List<Trait> getValues() {
-      return values_serialized_name;
-    }
-    /**
      * Gets the needs_serialized_name.
      *
-     * Detailed results for the Values characteristics inferred from the input text.
+     * Detailed results for the Needs characteristics inferred from the input text.
      *
      * @return the needs_serialized_name
      */
     @AuraEnabled
     public List<Trait> getNeeds() {
       return needs_serialized_name;
+    }
+    /**
+     * Gets the values_serialized_name.
+     *
+     * Detailed results for the Values characteristics inferred from the input text.
+     *
+     * @return the values_serialized_name
+     */
+    @AuraEnabled
+    public List<Trait> getValues() {
+      return values_serialized_name;
     }
     /**
      * Gets the behavior_serialized_name.
@@ -733,7 +733,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the consumption_preferences_serialized_name.
      *
-     * If the `consumption_preferences` query parameter is `true`, detailed results for each category of consumption preferences. Each element of the array provides information inferred from the input text for the individual preferences of that category.
+     * If the **consumption_preferences** parameter is `true`, detailed results for each category of consumption preferences. Each element of the array provides information inferred from the input text for the individual preferences of that category.
      *
      * @return the consumption_preferences_serialized_name
      */
@@ -790,21 +790,21 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the values_serialized_name.
-     *
-     * @param values the new values
-     */
-    public void setValues(final List<Trait> values) {
-      this.values_serialized_name = values;
-    }
-
-    /**
      * Sets the needs_serialized_name.
      *
      * @param needs the new needs
      */
     public void setNeeds(final List<Trait> needs) {
       this.needs_serialized_name = needs;
+    }
+
+    /**
+     * Sets the values_serialized_name.
+     *
+     * @param values the new values
+     */
+    public void setValues(final List<Trait> values) {
+      this.values_serialized_name = values;
     }
 
     /**
@@ -854,19 +854,6 @@ public class IBMPersonalityInsightsV3Models {
         ret.setPersonality(newPersonality);
       }
 
-      // calling custom deserializer for values_serialized_name
-      List<Trait> newValues = new List<Trait>();
-      List<Trait> deserializedValues = ret.getValues();
-      if (deserializedValues != null) {
-        for (Integer i = 0; i < deserializedValues.size(); i++) {
-          Trait currentItem = ret.getValues().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('values_serialized_name');
-          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
-          newValues.add(newItem);
-        }
-        ret.setValues(newValues);
-      }
-
       // calling custom deserializer for needs_serialized_name
       List<Trait> newNeeds = new List<Trait>();
       List<Trait> deserializedNeeds = ret.getNeeds();
@@ -878,6 +865,19 @@ public class IBMPersonalityInsightsV3Models {
           newNeeds.add(newItem);
         }
         ret.setNeeds(newNeeds);
+      }
+
+      // calling custom deserializer for values_serialized_name
+      List<Trait> newValues = new List<Trait>();
+      List<Trait> deserializedValues = ret.getValues();
+      if (deserializedValues != null) {
+        for (Integer i = 0; i < deserializedValues.size(); i++) {
+          Trait currentItem = ret.getValues().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('values_serialized_name');
+          Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
+          newValues.add(newItem);
+        }
+        ret.setValues(newValues);
       }
 
       // calling custom deserializer for behavior_serialized_name
@@ -926,7 +926,7 @@ public class IBMPersonalityInsightsV3Models {
   /**
    * The profile options.
    */
-  public class ProfileOptions {
+  public class ProfileOptions extends IBMWatsonOptionsModel {
     private Content content_serialized_name;
     private String body_serialized_name;
     private String content_type_serialized_name;
@@ -937,7 +937,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the content_serialized_name.
      *
-     * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see [Providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). A JSON request must conform to the `Content` model.
+     * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see [Providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input, provide an object of type `Content`.
      *
      * @return the content_serialized_name
      */
@@ -947,7 +947,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the body_serialized_name.
      *
-     * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see [Providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). A JSON request must conform to the `Content` model.
+     * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see [Providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input, provide an object of type `Content`.
      *
      * @return the body_serialized_name
      */
@@ -967,7 +967,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the content_language_serialized_name.
      *
-     * The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. The effect of the `Content-Language` header depends on the `Content-Type` header. When `Content-Type` is `text/plain` or `text/html`, `Content-Language` is the only way to specify the language. When `Content-Type` is `application/json`, `Content-Language` overrides a language specified with the `language` parameter of a `ContentItem` object, and content items that specify a different language are ignored; omit this header to base the language on the specification of the content items. You can specify any combination of languages for `Content-Language` and `Accept-Language`.
+     * The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`.   The effect of the **Content-Language** parameter depends on the **Content-Type** parameter. When **Content-Type** is `text/plain` or `text/html`, **Content-Language** is the only way to specify the language. When **Content-Type** is `application/json`, **Content-Language** overrides a language specified with the `language` parameter of a `ContentItem` object, and content items that specify a different language are ignored; omit this parameter to base the language on the specification of the content items. You can specify any combination of languages for **Content-Language** and **Accept-Language**.
      *
      * @return the content_language_serialized_name
      */
@@ -987,7 +987,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the raw_scores_serialized_name.
      *
-     * If `true`, a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. If `false` (the default), only normalized percentiles are returned.
+     * Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. By default, only normalized percentiles are returned.
      *
      * @return the raw_scores_serialized_name
      */
@@ -997,7 +997,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the consumption_preferences_serialized_name.
      *
-     * If `true`, information about consumption preferences is returned with the results; if `false` (the default), the response does not include the information.
+     * Indicates whether consumption preferences are returned with the results. By default, no consumption preferences are returned.
      *
      * @return the consumption_preferences_serialized_name
      */
@@ -1013,6 +1013,7 @@ public class IBMPersonalityInsightsV3Models {
       accept_language_serialized_name = builder.accept_language_serialized_name;
       raw_scores_serialized_name = builder.raw_scores_serialized_name;
       consumption_preferences_serialized_name = builder.consumption_preferences_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -1029,7 +1030,7 @@ public class IBMPersonalityInsightsV3Models {
   /**
    * ProfileOptions Builder.
    */
-  public class ProfileOptionsBuilder {
+  public class ProfileOptionsBuilder extends IBMWatsonOptionsModel {
     private Content content_serialized_name;
     private String body_serialized_name;
     private String content_type_serialized_name;
@@ -1142,6 +1143,18 @@ public class IBMPersonalityInsightsV3Models {
       this.content_type_serialized_name = IBMWatsonHttpMediaType.TEXT_PLAIN;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ProfileOptions builder
+     */
+    public ProfileOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
@@ -1158,7 +1171,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the trait_id_serialized_name.
      *
-     * The unique identifier of the characteristic to which the results pertain. IDs have the form `big5_{characteristic}` for Big Five personality characteristics, `need_{characteristic}` for Needs, or `value_{characteristic}` for Values.
+     * The unique, non-localized identifier of the characteristic to which the results pertain. IDs have the form * `big5_{characteristic}` for Big Five personality dimensions * `facet_{characteristic}` for Big Five personality facets * `need_{characteristic}` for Needs  *`value_{characteristic}` for Values.
      *
      * @return the trait_id_serialized_name
      */
@@ -1169,7 +1182,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the name_serialized_name.
      *
-     * The user-visible name of the characteristic.
+     * The user-visible, localized name of the characteristic.
      *
      * @return the name_serialized_name
      */
@@ -1180,7 +1193,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the category_serialized_name.
      *
-     * The category of the characteristic: * `personality` for Big Five personality characteristics * `needs` for Needs * `values` for Values.
+     * The category of the characteristic: `personality` for Big Five personality characteristics, `needs` for Needs, and `values` for Values.
      *
      * @return the category_serialized_name
      */
@@ -1202,7 +1215,7 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the raw_score_serialized_name.
      *
-     * The raw score for the characteristic. The range is 0 to 1. A higher score generally indicates a greater likelihood that the author has that characteristic, but raw scores must be considered in aggregate: The range of values in practice might be much smaller than 0 to 1, so an individual score must be considered in the context of the overall scores and their range. The raw score is computed based on the input and the service model; it is not normalized or compared with a sample population. The raw score enables comparison of the results against a different sampling population and with a custom normalization approach.
+     * The raw score for the characteristic. The range is 0 to 1. A higher score generally indicates a greater likelihood that the author has that characteristic, but raw scores must be considered in aggregate: The range of values in practice might be much smaller than 0 to 1, so an individual score must be considered in the context of the overall scores and their range.   The raw score is computed based on the input and the service model; it is not normalized or compared with a sample population. The raw score enables comparison of the results against a different sampling population and with a custom normalization approach.
      *
      * @return the raw_score_serialized_name
      */
