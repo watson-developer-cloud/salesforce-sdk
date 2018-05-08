@@ -1357,40 +1357,47 @@ private class IBMDiscoveryV1Test {
     enrichment.setOverwrite(true);
     enrichment.setEnrichment('test Description');
     enrichment.setIgnoreDownstreamErrors(true);
-    IBMDiscoveryV1Models.EnrichmentOptions enrichmentOptions = new IBMDiscoveryV1Models.EnrichmentOptions();
-    IBMDiscoveryV1Models.NluEnrichmentFeatures enrichmentFeatures = new IBMDiscoveryV1Models.NluEnrichmentFeatures();
-    IBMDiscoveryV1Models.NluEnrichmentEmotion enrichmentEmotion = new IBMDiscoveryV1Models.NluEnrichmentEmotion();
-    enrichmentEmotion.setDocument(true);
-    enrichmentEmotion.setTargets(new List<String>{'Target1', 'Target2'});
-    enrichmentFeatures.setEmotion(enrichmentEmotion);
-    IBMDiscoveryV1Models.NluEnrichmentEntities enrichmentEntities = new IBMDiscoveryV1Models.NluEnrichmentEntities();
-    enrichmentEntities.setEmotion(true);
-    enrichmentEntities.setLimit(5);
-    enrichmentEntities.setMentions(true);
-    enrichmentEntities.setMentionTypes(true);
-    enrichmentEntities.setModel('test');
-    enrichmentEntities.setSentenceLocation(true);
-    enrichmentEntities.setSentiment(true);
-    enrichmentFeatures.setEntities(enrichmentEntities);
-    IBMDiscoveryV1Models.NluEnrichmentKeywords enrichmentKeywords = new IBMDiscoveryV1Models.NluEnrichmentKeywords();
-    enrichmentKeywords.setEmotion(true);
-    enrichmentKeywords.setLimit(5);
-    enrichmentKeywords.setSentiment(true);
-    enrichmentFeatures.setKeywords(enrichmentKeywords);
+    IBMDiscoveryV1Models.NluEnrichmentEmotion enrichmentEmotion = new IBMDiscoveryV1Models.NluEnrichmentEmotionBuilder()
+      .document(true)
+      .targets(new List<String>{'Target1', 'Target2'})
+      .build();
+    IBMDiscoveryV1Models.NluEnrichmentEntities enrichmentEntities = new IBMDiscoveryV1Models.NluEnrichmentEntitiesBuilder()
+      .emotion(true)
+      .limitField(5)
+      .mentions(true)
+      .mentionTypes(true)
+      .model('test')
+      .sentenceLocation(true)
+      .sentiment(true)
+      .build();
+    IBMDiscoveryV1Models.NluEnrichmentKeywords enrichmentKeywords = new IBMDiscoveryV1Models.NluEnrichmentKeywordsBuilder()
+      .emotion(true)
+      .limitField(5)
+      .sentiment(true)
+      .build();
     IBMDiscoveryV1Models.NluEnrichmentRelations enrichmentRelations = new IBMDiscoveryV1Models.NluEnrichmentRelations();
     enrichmentRelations.setModel('test');
-    enrichmentFeatures.setRelations(enrichmentRelations);
-    IBMDiscoveryV1Models.NluEnrichmentSemanticRoles enrichmentSemanticRoles = new IBMDiscoveryV1Models.NluEnrichmentSemanticRoles();
-    enrichmentSemanticRoles.setEntities(true);
-    enrichmentSemanticRoles.setKeywords(true);
-    enrichmentSemanticRoles.setLimit(5);
-    enrichmentFeatures.setSemanticRoles(enrichmentSemanticRoles);
-    IBMDiscoveryV1Models.NluEnrichmentSentiment enrichmentSentiment = new IBMDiscoveryV1Models.NluEnrichmentSentiment();
-    enrichmentSentiment.setDocument(true);
-    enrichmentSentiment.setTargets(new List<String>{'Target1', 'Target2'});
-    enrichmentFeatures.setSentiment(enrichmentSentiment);
-    enrichmentOptions.setFeatures(enrichmentFeatures);
-    enrichmentOptions.setModel('test');
+    IBMDiscoveryV1Models.NluEnrichmentSemanticRoles enrichmentSemanticRoles = new IBMDiscoveryV1Models.NluEnrichmentSemanticRolesBuilder()
+      .entities(true)
+      .keywords(true)
+      .limitField(5)
+      .build();
+    IBMDiscoveryV1Models.NluEnrichmentSentiment enrichmentSentiment = new IBMDiscoveryV1Models.NluEnrichmentSentimentBuilder()
+      .document(true)
+      .targets(new List<String>{'Target1', 'Target2'})
+      .build();
+    IBMDiscoveryV1Models.NluEnrichmentFeatures enrichmentFeatures = new IBMDiscoveryV1Models.NluEnrichmentFeaturesBuilder()
+      .emotion(enrichmentEmotion)
+      .entities(enrichmentEntities)
+      .keywords(enrichmentKeywords)
+      .relations(enrichmentRelations)
+      .semanticRoles(enrichmentSemanticRoles)
+      .sentiment(enrichmentSentiment)
+      .build();
+    IBMDiscoveryV1Models.EnrichmentOptions enrichmentOptions = new IBMDiscoveryV1Models.EnrichmentOptionsBuilder()
+      .features(enrichmentFeatures)
+      .model('test')
+      .build();
     enrichment.setOptions(enrichmentOptions);
     configuration.setEnrichments(new List<IBMDiscoveryV1Models.Enrichment>{enrichment});
     configuration.setNormalizations(new List<IBMDiscoveryV1Models.NormalizationOperation>{normalizationOperation});
