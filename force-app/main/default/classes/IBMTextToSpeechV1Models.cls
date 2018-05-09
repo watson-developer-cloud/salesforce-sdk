@@ -82,6 +82,7 @@ public class IBMTextToSpeechV1Models {
       word_serialized_name = addWordOptions.word_serialized_name;
       translation_serialized_name = addWordOptions.translation_serialized_name;
       part_of_speech_serialized_name = addWordOptions.part_of_speech_serialized_name;
+      this.requestHeaders.putAll(addWordOptions.requestHeaders());
     }
 
     /**
@@ -233,6 +234,7 @@ public class IBMTextToSpeechV1Models {
     private AddWordsOptionsBuilder(AddWordsOptions addWordsOptions) {
       customization_id_serialized_name = addWordsOptions.customization_id_serialized_name;
       words_serialized_name = addWordsOptions.words_serialized_name;
+      this.requestHeaders.putAll(addWordsOptions.requestHeaders());
     }
 
     /**
@@ -389,6 +391,7 @@ public class IBMTextToSpeechV1Models {
       name_serialized_name = createVoiceModelOptions.name_serialized_name;
       language_serialized_name = createVoiceModelOptions.language_serialized_name;
       description_serialized_name = createVoiceModelOptions.description_serialized_name;
+      this.requestHeaders.putAll(createVoiceModelOptions.requestHeaders());
     }
 
     /**
@@ -501,6 +504,7 @@ public class IBMTextToSpeechV1Models {
 
     private DeleteVoiceModelOptionsBuilder(DeleteVoiceModelOptions deleteVoiceModelOptions) {
       customization_id_serialized_name = deleteVoiceModelOptions.customization_id_serialized_name;
+      this.requestHeaders.putAll(deleteVoiceModelOptions.requestHeaders());
     }
 
     /**
@@ -606,6 +610,7 @@ public class IBMTextToSpeechV1Models {
     private DeleteWordOptionsBuilder(DeleteWordOptions deleteWordOptions) {
       customization_id_serialized_name = deleteWordOptions.customization_id_serialized_name;
       word_serialized_name = deleteWordOptions.word_serialized_name;
+      this.requestHeaders.putAll(deleteWordOptions.requestHeaders());
     }
 
     /**
@@ -751,6 +756,7 @@ public class IBMTextToSpeechV1Models {
       voice_serialized_name = getPronunciationOptions.voice_serialized_name;
       format_serialized_name = getPronunciationOptions.format_serialized_name;
       customization_id_serialized_name = getPronunciationOptions.customization_id_serialized_name;
+      this.requestHeaders.putAll(getPronunciationOptions.requestHeaders());
     }
 
     /**
@@ -874,6 +880,7 @@ public class IBMTextToSpeechV1Models {
 
     private GetVoiceModelOptionsBuilder(GetVoiceModelOptions getVoiceModelOptions) {
       customization_id_serialized_name = getVoiceModelOptions.customization_id_serialized_name;
+      this.requestHeaders.putAll(getVoiceModelOptions.requestHeaders());
     }
 
     /**
@@ -978,6 +985,7 @@ public class IBMTextToSpeechV1Models {
     private GetVoiceOptionsBuilder(GetVoiceOptions getVoiceOptions) {
       voice_serialized_name = getVoiceOptions.voice_serialized_name;
       customization_id_serialized_name = getVoiceOptions.customization_id_serialized_name;
+      this.requestHeaders.putAll(getVoiceOptions.requestHeaders());
     }
 
     /**
@@ -1094,6 +1102,7 @@ public class IBMTextToSpeechV1Models {
     private GetWordOptionsBuilder(GetWordOptions getWordOptions) {
       customization_id_serialized_name = getWordOptions.customization_id_serialized_name;
       word_serialized_name = getWordOptions.word_serialized_name;
+      this.requestHeaders.putAll(getWordOptions.requestHeaders());
     }
 
     /**
@@ -1196,6 +1205,7 @@ public class IBMTextToSpeechV1Models {
 
     private ListVoiceModelsOptionsBuilder(ListVoiceModelsOptions listVoiceModelsOptions) {
       language_serialized_name = listVoiceModelsOptions.language_serialized_name;
+      this.requestHeaders.putAll(listVoiceModelsOptions.requestHeaders());
     }
 
     /**
@@ -1262,6 +1272,7 @@ public class IBMTextToSpeechV1Models {
   public class ListVoicesOptionsBuilder extends IBMWatsonOptionsModel {
 
     private ListVoicesOptionsBuilder(ListVoicesOptions listVoicesOptions) {
+      this.requestHeaders.putAll(listVoicesOptions.requestHeaders());
     }
 
     /**
@@ -1332,6 +1343,7 @@ public class IBMTextToSpeechV1Models {
 
     private ListWordsOptionsBuilder(ListWordsOptions listWordsOptions) {
       customization_id_serialized_name = listWordsOptions.customization_id_serialized_name;
+      this.requestHeaders.putAll(listWordsOptions.requestHeaders());
     }
 
     /**
@@ -1559,6 +1571,7 @@ public class IBMTextToSpeechV1Models {
       accept_serialized_name = synthesizeOptions.accept_serialized_name;
       voice_serialized_name = synthesizeOptions.voice_serialized_name;
       customization_id_serialized_name = synthesizeOptions.customization_id_serialized_name;
+      this.requestHeaders.putAll(synthesizeOptions.requestHeaders());
     }
 
     /**
@@ -1782,6 +1795,7 @@ public class IBMTextToSpeechV1Models {
       name_serialized_name = updateVoiceModelOptions.name_serialized_name;
       description_serialized_name = updateVoiceModelOptions.description_serialized_name;
       words_serialized_name = updateVoiceModelOptions.words_serialized_name;
+      this.requestHeaders.putAll(updateVoiceModelOptions.requestHeaders());
     }
 
     /**
