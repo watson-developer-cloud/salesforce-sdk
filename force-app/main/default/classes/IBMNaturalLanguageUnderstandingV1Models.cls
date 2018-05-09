@@ -548,6 +548,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return_analyzed_text_serialized_name = analyzeOptions.return_analyzed_text_serialized_name;
       language_serialized_name = analyzeOptions.language_serialized_name;
       limit_text_characters_serialized_name = analyzeOptions.limit_text_characters_serialized_name;
+      this.requestHeaders.putAll(analyzeOptions.requestHeaders());
     }
 
     /**
@@ -996,6 +997,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
     private DeleteModelOptionsBuilder(DeleteModelOptions deleteModelOptions) {
       model_id_serialized_name = deleteModelOptions.model_id_serialized_name;
+      this.requestHeaders.putAll(deleteModelOptions.requestHeaders());
     }
 
     /**
@@ -2553,6 +2555,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   public class ListModelsOptionsBuilder extends IBMWatsonOptionsModel {
 
     private ListModelsOptionsBuilder(ListModelsOptions listModelsOptions) {
+      this.requestHeaders.putAll(listModelsOptions.requestHeaders());
     }
 
     /**
