@@ -1047,6 +1047,7 @@ public class IBMPersonalityInsightsV3Models {
       accept_language_serialized_name = profileOptions.accept_language_serialized_name;
       raw_scores_serialized_name = profileOptions.raw_scores_serialized_name;
       consumption_preferences_serialized_name = profileOptions.consumption_preferences_serialized_name;
+      this.requestHeaders.putAll(profileOptions.requestHeaders());
     }
 
     /**
