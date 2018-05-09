@@ -123,7 +123,7 @@ private class IBMSpeechToTextV1Test {
       .profanityFilter(true)
       .smartFormatting(true)
       .speakerLabels(true)
-      .version('version')
+      .baseModelVersion('version')
       .build();
     IBMSpeechToTextV1Models.RecognitionJob createJob = speechToText.createJob(createJobOptions);
     System.assertEquals(createJob.getUrl(), 'string');
@@ -135,8 +135,6 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(createJob.getresults()[0].getresults()[0].getFinal(),true);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getTranscript(), 'string');
     System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getConfidence(),0);
-    System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getTimestamps()[0], 'string');
-    System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getWordConfidence()[0], 'string');
     System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getNormalizedText(), 'string');
     System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getStartTime(),0);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getEndTime(),0);
@@ -897,11 +895,11 @@ private class IBMSpeechToTextV1Test {
       .speakerLabels(true)
       .baseModelVersion('version')
       .build();
-    IBMSpeechToTextV1Models.SpeechResults speechResults = speechToText.recognize(recognizeOptions);
-    System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getStartTime(),0.09);
-    System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getEndTime(),0.6);
+    IBMSpeechToTextV1Models.SpeechRecognitionResults speechResults = speechToText.recognize(recognizeOptions);
+    System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getStartTime(),0.14);
+    System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getEndTime(),0.28);
     System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getAlternatives()[0].getConfidence(),1);
-    System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getAlternatives()[0].getWord(), 'latest');
+    System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getAlternatives()[0].getWord(), 'a');
     recognizeOptions = recognizeOptions.newBuilder().build();
     Test.stopTest();
   }
