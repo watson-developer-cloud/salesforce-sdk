@@ -500,6 +500,18 @@ public class IBMSpeechToTextV1Models {
       this.audio_filename_serialized_name = audioFilename;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the {{classname}} builder
+     */
+    public AddAudioOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
