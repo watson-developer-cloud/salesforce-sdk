@@ -909,6 +909,7 @@ public class IBMVisualRecognitionV3Models {
       classifier_ids_serialized_name = classifyOptions.classifier_ids_serialized_name;
       images_file_content_type_serialized_name = classifyOptions.images_file_content_type_serialized_name;
       parameters_serialized_name = classifyOptions.parameters_serialized_name;
+      this.requestHeaders.putAll(classifyOptions.requestHeaders());
     }
 
     /**
@@ -1173,6 +1174,7 @@ public class IBMVisualRecognitionV3Models {
       classname_positive_examples_serialized_name.putAll(createClassifierOptions.classname_positive_examples_serialized_name);
       negative_examples_serialized_name = createClassifierOptions.negative_examples_serialized_name;
       negative_examples_filename_serialized_name = createClassifierOptions.negative_examples_filename_serialized_name;
+      this.requestHeaders.putAll(createClassifierOptions.requestHeaders());
     }
 
     /**
@@ -1304,6 +1306,7 @@ public class IBMVisualRecognitionV3Models {
 
     private DeleteClassifierOptionsBuilder(DeleteClassifierOptions deleteClassifierOptions) {
       classifier_id_serialized_name = deleteClassifierOptions.classifier_id_serialized_name;
+      this.requestHeaders.putAll(deleteClassifierOptions.requestHeaders());
     }
 
     /**
@@ -1449,6 +1452,7 @@ public class IBMVisualRecognitionV3Models {
       url_serialized_name = detectFacesOptions.url_serialized_name;
       images_file_content_type_serialized_name = detectFacesOptions.images_file_content_type_serialized_name;
       parameters_serialized_name = detectFacesOptions.parameters_serialized_name;
+      this.requestHeaders.putAll(detectFacesOptions.requestHeaders());
     }
 
     /**
@@ -2080,6 +2084,7 @@ public class IBMVisualRecognitionV3Models {
 
     private GetClassifierOptionsBuilder(GetClassifierOptions getClassifierOptions) {
       classifier_id_serialized_name = getClassifierOptions.classifier_id_serialized_name;
+      this.requestHeaders.putAll(getClassifierOptions.requestHeaders());
     }
 
     /**
@@ -2170,6 +2175,7 @@ public class IBMVisualRecognitionV3Models {
 
     private GetCoreMlModelOptionsBuilder(GetCoreMlModelOptions getCoreMlModelOptions) {
       classifier_id_serialized_name = getCoreMlModelOptions.classifier_id_serialized_name;
+      this.requestHeaders.putAll(getCoreMlModelOptions.requestHeaders());
     }
 
     /**
@@ -2395,6 +2401,7 @@ public class IBMVisualRecognitionV3Models {
 
     private ListClassifiersOptionsBuilder(ListClassifiersOptions listClassifiersOptions) {
       verbose_serialized_name = listClassifiersOptions.verbose_serialized_name;
+      this.requestHeaders.putAll(listClassifiersOptions.requestHeaders());
     }
 
     /**
@@ -2538,6 +2545,7 @@ public class IBMVisualRecognitionV3Models {
       classname_positive_examples_serialized_name.putAll(updateClassifierOptions.classname_positive_examples_serialized_name);
       negative_examples_serialized_name = updateClassifierOptions.negative_examples_serialized_name;
       negative_examples_filename_serialized_name = updateClassifierOptions.negative_examples_filename_serialized_name;
+      this.requestHeaders.putAll(updateClassifierOptions.requestHeaders());
     }
 
     /**
