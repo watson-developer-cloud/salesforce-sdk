@@ -404,6 +404,7 @@ public class IBMAssistantV1Models {
     private CreateCounterexampleOptionsBuilder(CreateCounterexampleOptions createCounterexampleOptions) {
       workspace_id_serialized_name = createCounterexampleOptions.workspace_id_serialized_name;
       text_serialized_name = createCounterexampleOptions.text_serialized_name;
+      this.requestHeaders.putAll(createCounterexampleOptions.requestHeaders());
     }
 
     /**
@@ -1239,6 +1240,7 @@ public class IBMAssistantV1Models {
       digress_in_serialized_name = createDialogNodeOptions.digress_in_serialized_name;
       digress_out_serialized_name = createDialogNodeOptions.digress_out_serialized_name;
       digress_out_slots_serialized_name = createDialogNodeOptions.digress_out_slots_serialized_name;
+      this.requestHeaders.putAll(createDialogNodeOptions.requestHeaders());
     }
 
     /**
@@ -1798,6 +1800,7 @@ public class IBMAssistantV1Models {
       metadata_serialized_name = createEntityOptions.metadata_serialized_name;
       values_serialized_name = createEntityOptions.values_serialized_name;
       fuzzy_match_serialized_name = createEntityOptions.fuzzy_match_serialized_name;
+      this.requestHeaders.putAll(createEntityOptions.requestHeaders());
     }
 
     /**
@@ -2068,6 +2071,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = createExampleOptions.workspace_id_serialized_name;
       intent_serialized_name = createExampleOptions.intent_serialized_name;
       text_serialized_name = createExampleOptions.text_serialized_name;
+      this.requestHeaders.putAll(createExampleOptions.requestHeaders());
     }
 
     /**
@@ -2370,6 +2374,7 @@ public class IBMAssistantV1Models {
       intent_serialized_name = createIntentOptions.intent_serialized_name;
       description_serialized_name = createIntentOptions.description_serialized_name;
       examples_serialized_name = createIntentOptions.examples_serialized_name;
+      this.requestHeaders.putAll(createIntentOptions.requestHeaders());
     }
 
     /**
@@ -2556,6 +2561,7 @@ public class IBMAssistantV1Models {
       entity_serialized_name = createSynonymOptions.entity_serialized_name;
       value_serialized_name = createSynonymOptions.value_serialized_name;
       synonym_serialized_name = createSynonymOptions.synonym_serialized_name;
+      this.requestHeaders.putAll(createSynonymOptions.requestHeaders());
     }
 
     /**
@@ -2980,6 +2986,7 @@ public class IBMAssistantV1Models {
       synonyms_serialized_name = createValueOptions.synonyms_serialized_name;
       patterns_serialized_name = createValueOptions.patterns_serialized_name;
       type_serialized_name = createValueOptions.type_serialized_name;
+      this.requestHeaders.putAll(createValueOptions.requestHeaders());
     }
 
     /**
@@ -3283,6 +3290,7 @@ public class IBMAssistantV1Models {
       counterexamples_serialized_name = createWorkspaceOptions.counterexamples_serialized_name;
       metadata_serialized_name = createWorkspaceOptions.metadata_serialized_name;
       learning_opt_out_serialized_name = createWorkspaceOptions.learning_opt_out_serialized_name;
+      this.requestHeaders.putAll(createWorkspaceOptions.requestHeaders());
     }
 
     /**
@@ -3531,6 +3539,7 @@ public class IBMAssistantV1Models {
     private DeleteCounterexampleOptionsBuilder(DeleteCounterexampleOptions deleteCounterexampleOptions) {
       workspace_id_serialized_name = deleteCounterexampleOptions.workspace_id_serialized_name;
       text_serialized_name = deleteCounterexampleOptions.text_serialized_name;
+      this.requestHeaders.putAll(deleteCounterexampleOptions.requestHeaders());
     }
 
     /**
@@ -3649,6 +3658,7 @@ public class IBMAssistantV1Models {
     private DeleteDialogNodeOptionsBuilder(DeleteDialogNodeOptions deleteDialogNodeOptions) {
       workspace_id_serialized_name = deleteDialogNodeOptions.workspace_id_serialized_name;
       dialog_node_serialized_name = deleteDialogNodeOptions.dialog_node_serialized_name;
+      this.requestHeaders.putAll(deleteDialogNodeOptions.requestHeaders());
     }
 
     /**
@@ -3767,6 +3777,7 @@ public class IBMAssistantV1Models {
     private DeleteEntityOptionsBuilder(DeleteEntityOptions deleteEntityOptions) {
       workspace_id_serialized_name = deleteEntityOptions.workspace_id_serialized_name;
       entity_serialized_name = deleteEntityOptions.entity_serialized_name;
+      this.requestHeaders.putAll(deleteEntityOptions.requestHeaders());
     }
 
     /**
@@ -3900,6 +3911,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = deleteExampleOptions.workspace_id_serialized_name;
       intent_serialized_name = deleteExampleOptions.intent_serialized_name;
       text_serialized_name = deleteExampleOptions.text_serialized_name;
+      this.requestHeaders.putAll(deleteExampleOptions.requestHeaders());
     }
 
     /**
@@ -4031,6 +4043,7 @@ public class IBMAssistantV1Models {
     private DeleteIntentOptionsBuilder(DeleteIntentOptions deleteIntentOptions) {
       workspace_id_serialized_name = deleteIntentOptions.workspace_id_serialized_name;
       intent_serialized_name = deleteIntentOptions.intent_serialized_name;
+      this.requestHeaders.putAll(deleteIntentOptions.requestHeaders());
     }
 
     /**
@@ -4179,6 +4192,7 @@ public class IBMAssistantV1Models {
       entity_serialized_name = deleteSynonymOptions.entity_serialized_name;
       value_serialized_name = deleteSynonymOptions.value_serialized_name;
       synonym_serialized_name = deleteSynonymOptions.synonym_serialized_name;
+      this.requestHeaders.putAll(deleteSynonymOptions.requestHeaders());
     }
 
     /**
@@ -4338,6 +4352,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = deleteValueOptions.workspace_id_serialized_name;
       entity_serialized_name = deleteValueOptions.entity_serialized_name;
       value_serialized_name = deleteValueOptions.value_serialized_name;
+      this.requestHeaders.putAll(deleteValueOptions.requestHeaders());
     }
 
     /**
@@ -4454,6 +4469,7 @@ public class IBMAssistantV1Models {
 
     private DeleteWorkspaceOptionsBuilder(DeleteWorkspaceOptions deleteWorkspaceOptions) {
       workspace_id_serialized_name = deleteWorkspaceOptions.workspace_id_serialized_name;
+      this.requestHeaders.putAll(deleteWorkspaceOptions.requestHeaders());
     }
 
     /**
@@ -5858,6 +5874,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = getCounterexampleOptions.workspace_id_serialized_name;
       text_serialized_name = getCounterexampleOptions.text_serialized_name;
       include_audit_serialized_name = getCounterexampleOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(getCounterexampleOptions.requestHeaders());
     }
 
     /**
@@ -6001,6 +6018,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = getDialogNodeOptions.workspace_id_serialized_name;
       dialog_node_serialized_name = getDialogNodeOptions.dialog_node_serialized_name;
       include_audit_serialized_name = getDialogNodeOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(getDialogNodeOptions.requestHeaders());
     }
 
     /**
@@ -6158,6 +6176,7 @@ public class IBMAssistantV1Models {
       entity_serialized_name = getEntityOptions.entity_serialized_name;
       export_serialized_name = getEntityOptions.export_serialized_name;
       include_audit_serialized_name = getEntityOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(getEntityOptions.requestHeaders());
     }
 
     /**
@@ -6327,6 +6346,7 @@ public class IBMAssistantV1Models {
       intent_serialized_name = getExampleOptions.intent_serialized_name;
       text_serialized_name = getExampleOptions.text_serialized_name;
       include_audit_serialized_name = getExampleOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(getExampleOptions.requestHeaders());
     }
 
     /**
@@ -6497,6 +6517,7 @@ public class IBMAssistantV1Models {
       intent_serialized_name = getIntentOptions.intent_serialized_name;
       export_serialized_name = getIntentOptions.export_serialized_name;
       include_audit_serialized_name = getIntentOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(getIntentOptions.requestHeaders());
     }
 
     /**
@@ -6681,6 +6702,7 @@ public class IBMAssistantV1Models {
       value_serialized_name = getSynonymOptions.value_serialized_name;
       synonym_serialized_name = getSynonymOptions.synonym_serialized_name;
       include_audit_serialized_name = getSynonymOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(getSynonymOptions.requestHeaders());
     }
 
     /**
@@ -6879,6 +6901,7 @@ public class IBMAssistantV1Models {
       value_serialized_name = getValueOptions.value_serialized_name;
       export_serialized_name = getValueOptions.export_serialized_name;
       include_audit_serialized_name = getValueOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(getValueOptions.requestHeaders());
     }
 
     /**
@@ -7045,6 +7068,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = getWorkspaceOptions.workspace_id_serialized_name;
       export_serialized_name = getWorkspaceOptions.export_serialized_name;
       include_audit_serialized_name = getWorkspaceOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(getWorkspaceOptions.requestHeaders());
     }
 
     /**
@@ -7567,6 +7591,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = listAllLogsOptions.sort_serialized_name;
       page_limit_serialized_name = listAllLogsOptions.page_limit_serialized_name;
       cursor_serialized_name = listAllLogsOptions.cursor_serialized_name;
+      this.requestHeaders.putAll(listAllLogsOptions.requestHeaders());
     }
 
     /**
@@ -7760,6 +7785,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = listCounterexamplesOptions.sort_serialized_name;
       cursor_serialized_name = listCounterexamplesOptions.cursor_serialized_name;
       include_audit_serialized_name = listCounterexamplesOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(listCounterexamplesOptions.requestHeaders());
     }
 
     /**
@@ -7975,6 +8001,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = listDialogNodesOptions.sort_serialized_name;
       cursor_serialized_name = listDialogNodesOptions.cursor_serialized_name;
       include_audit_serialized_name = listDialogNodesOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(listDialogNodesOptions.requestHeaders());
     }
 
     /**
@@ -8204,6 +8231,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = listEntitiesOptions.sort_serialized_name;
       cursor_serialized_name = listEntitiesOptions.cursor_serialized_name;
       include_audit_serialized_name = listEntitiesOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(listEntitiesOptions.requestHeaders());
     }
 
     /**
@@ -8445,6 +8473,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = listExamplesOptions.sort_serialized_name;
       cursor_serialized_name = listExamplesOptions.cursor_serialized_name;
       include_audit_serialized_name = listExamplesOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(listExamplesOptions.requestHeaders());
     }
 
     /**
@@ -8687,6 +8716,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = listIntentsOptions.sort_serialized_name;
       cursor_serialized_name = listIntentsOptions.cursor_serialized_name;
       include_audit_serialized_name = listIntentsOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(listIntentsOptions.requestHeaders());
     }
 
     /**
@@ -8899,6 +8929,7 @@ public class IBMAssistantV1Models {
       filter_serialized_name = listLogsOptions.filter_serialized_name;
       page_limit_serialized_name = listLogsOptions.page_limit_serialized_name;
       cursor_serialized_name = listLogsOptions.cursor_serialized_name;
+      this.requestHeaders.putAll(listLogsOptions.requestHeaders());
     }
 
     /**
@@ -9133,6 +9164,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = listSynonymsOptions.sort_serialized_name;
       cursor_serialized_name = listSynonymsOptions.cursor_serialized_name;
       include_audit_serialized_name = listSynonymsOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(listSynonymsOptions.requestHeaders());
     }
 
     /**
@@ -9403,6 +9435,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = listValuesOptions.sort_serialized_name;
       cursor_serialized_name = listValuesOptions.cursor_serialized_name;
       include_audit_serialized_name = listValuesOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(listValuesOptions.requestHeaders());
     }
 
     /**
@@ -9627,6 +9660,7 @@ public class IBMAssistantV1Models {
       sort_serialized_name = listWorkspacesOptions.sort_serialized_name;
       cursor_serialized_name = listWorkspacesOptions.cursor_serialized_name;
       include_audit_serialized_name = listWorkspacesOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(listWorkspacesOptions.requestHeaders());
     }
 
     /**
@@ -10287,6 +10321,7 @@ public class IBMAssistantV1Models {
       intents_serialized_name = messageOptions.intents_serialized_name;
       output_serialized_name = messageOptions.output_serialized_name;
       nodes_visited_details_serialized_name = messageOptions.nodes_visited_details_serialized_name;
+      this.requestHeaders.putAll(messageOptions.requestHeaders());
     }
 
     /**
@@ -11605,6 +11640,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = updateCounterexampleOptions.workspace_id_serialized_name;
       text_serialized_name = updateCounterexampleOptions.text_serialized_name;
       new_text_serialized_name = updateCounterexampleOptions.new_text_serialized_name;
+      this.requestHeaders.putAll(updateCounterexampleOptions.requestHeaders());
     }
 
     /**
@@ -11972,6 +12008,7 @@ public class IBMAssistantV1Models {
       new_output_serialized_name = updateDialogNodeOptions.new_output_serialized_name;
       new_parent_serialized_name = updateDialogNodeOptions.new_parent_serialized_name;
       new_dialog_node_serialized_name = updateDialogNodeOptions.new_dialog_node_serialized_name;
+      this.requestHeaders.putAll(updateDialogNodeOptions.requestHeaders());
     }
 
     /**
@@ -12363,6 +12400,7 @@ public class IBMAssistantV1Models {
       new_metadata_serialized_name = updateEntityOptions.new_metadata_serialized_name;
       new_values_serialized_name = updateEntityOptions.new_values_serialized_name;
       new_description_serialized_name = updateEntityOptions.new_description_serialized_name;
+      this.requestHeaders.putAll(updateEntityOptions.requestHeaders());
     }
 
     /**
@@ -12581,6 +12619,7 @@ public class IBMAssistantV1Models {
       intent_serialized_name = updateExampleOptions.intent_serialized_name;
       text_serialized_name = updateExampleOptions.text_serialized_name;
       new_text_serialized_name = updateExampleOptions.new_text_serialized_name;
+      this.requestHeaders.putAll(updateExampleOptions.requestHeaders());
     }
 
     /**
@@ -12765,6 +12804,7 @@ public class IBMAssistantV1Models {
       new_intent_serialized_name = updateIntentOptions.new_intent_serialized_name;
       new_examples_serialized_name = updateIntentOptions.new_examples_serialized_name;
       new_description_serialized_name = updateIntentOptions.new_description_serialized_name;
+      this.requestHeaders.putAll(updateIntentOptions.requestHeaders());
     }
 
     /**
@@ -12976,6 +13016,7 @@ public class IBMAssistantV1Models {
       value_serialized_name = updateSynonymOptions.value_serialized_name;
       synonym_serialized_name = updateSynonymOptions.synonym_serialized_name;
       new_synonym_serialized_name = updateSynonymOptions.new_synonym_serialized_name;
+      this.requestHeaders.putAll(updateSynonymOptions.requestHeaders());
     }
 
     /**
@@ -13216,6 +13257,7 @@ public class IBMAssistantV1Models {
       new_metadata_serialized_name = updateValueOptions.new_metadata_serialized_name;
       new_patterns_serialized_name = updateValueOptions.new_patterns_serialized_name;
       new_value_serialized_name = updateValueOptions.new_value_serialized_name;
+      this.requestHeaders.putAll(updateValueOptions.requestHeaders());
     }
 
     /**
@@ -13559,6 +13601,7 @@ public class IBMAssistantV1Models {
       metadata_serialized_name = updateWorkspaceOptions.metadata_serialized_name;
       learning_opt_out_serialized_name = updateWorkspaceOptions.learning_opt_out_serialized_name;
       append_serialized_name = updateWorkspaceOptions.append_serialized_name;
+      this.requestHeaders.putAll(updateWorkspaceOptions.requestHeaders());
     }
 
     /**
