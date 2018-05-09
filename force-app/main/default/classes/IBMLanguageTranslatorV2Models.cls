@@ -137,6 +137,7 @@ public class IBMLanguageTranslatorV2Models {
       parallel_corpus_filename_serialized_name = createModelOptions.parallel_corpus_filename_serialized_name;
       monolingual_corpus_serialized_name = createModelOptions.monolingual_corpus_serialized_name;
       monolingual_corpus_filename_serialized_name = createModelOptions.monolingual_corpus_filename_serialized_name;
+      this.requestHeaders.putAll(createModelOptions.requestHeaders());
     }
 
     /**
@@ -304,6 +305,7 @@ public class IBMLanguageTranslatorV2Models {
 
     private DeleteModelOptionsBuilder(DeleteModelOptions deleteModelOptions) {
       model_id_serialized_name = deleteModelOptions.model_id_serialized_name;
+      this.requestHeaders.putAll(deleteModelOptions.requestHeaders());
     }
 
     /**
@@ -394,6 +396,7 @@ public class IBMLanguageTranslatorV2Models {
 
     private GetModelOptionsBuilder(GetModelOptions getModelOptions) {
       model_id_serialized_name = getModelOptions.model_id_serialized_name;
+      this.requestHeaders.putAll(getModelOptions.requestHeaders());
     }
 
     /**
@@ -700,6 +703,7 @@ public class IBMLanguageTranslatorV2Models {
 
     private IdentifyOptionsBuilder(IdentifyOptions identifyOptions) {
       text_serialized_name = identifyOptions.text_serialized_name;
+      this.requestHeaders.putAll(identifyOptions.requestHeaders());
     }
 
     /**
@@ -775,6 +779,7 @@ public class IBMLanguageTranslatorV2Models {
   public class ListIdentifiableLanguagesOptionsBuilder extends IBMWatsonOptionsModel {
 
     private ListIdentifiableLanguagesOptionsBuilder(ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptions) {
+      this.requestHeaders.putAll(listIdentifiableLanguagesOptions.requestHeaders());
     }
 
     /**
@@ -872,6 +877,7 @@ public class IBMLanguageTranslatorV2Models {
       source_serialized_name = listModelsOptions.source_serialized_name;
       target_serialized_name = listModelsOptions.target_serialized_name;
       default_serialized_name = listModelsOptions.default_serialized_name;
+      this.requestHeaders.putAll(listModelsOptions.requestHeaders());
     }
 
     /**
@@ -1017,6 +1023,7 @@ public class IBMLanguageTranslatorV2Models {
       model_id_serialized_name = translateOptions.model_id_serialized_name;
       source_serialized_name = translateOptions.source_serialized_name;
       target_serialized_name = translateOptions.target_serialized_name;
+      this.requestHeaders.putAll(translateOptions.requestHeaders());
     }
 
     /**
