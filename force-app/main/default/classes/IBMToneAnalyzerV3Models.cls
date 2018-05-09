@@ -507,6 +507,7 @@ public class IBMToneAnalyzerV3Models {
       utterances_serialized_name = toneChatOptions.utterances_serialized_name;
       content_language_serialized_name = toneChatOptions.content_language_serialized_name;
       accept_language_serialized_name = toneChatOptions.accept_language_serialized_name;
+      this.requestHeaders.putAll(toneChatOptions.requestHeaders());
     }
 
     /**
@@ -875,6 +876,7 @@ public class IBMToneAnalyzerV3Models {
       tones_serialized_name = toneOptions.tones_serialized_name;
       content_language_serialized_name = toneOptions.content_language_serialized_name;
       accept_language_serialized_name = toneOptions.accept_language_serialized_name;
+      this.requestHeaders.putAll(toneOptions.requestHeaders());
     }
 
     /**
