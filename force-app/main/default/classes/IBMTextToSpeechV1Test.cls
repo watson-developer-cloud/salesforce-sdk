@@ -21,6 +21,7 @@ private class IBMTextToSpeechV1Test {
       .name('I love Apples not oranges')
       .language('de-DE')
       .description('Salesforce is making it easier for developers to use IBM Watson\'s artificial intelligence engine within the firm\'s customer relationship management software, which could lead to some exciting new technology for advisers.')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -56,6 +57,7 @@ private class IBMTextToSpeechV1Test {
     IBMTextToSpeechV1Models.GetVoiceOptions options = new IBMTextToSpeechV1Models.GetVoiceOptionsBuilder()
       .customizationId('customizationId')
       .voice('en-US_AllisonVoice')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -88,6 +90,7 @@ private class IBMTextToSpeechV1Test {
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.ListVoicesOptions options = new IBMTextToSpeechV1Models.ListVoicesOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -113,6 +116,7 @@ private class IBMTextToSpeechV1Test {
     }
     IBMTextToSpeechV1Models.DeleteVoiceModelOptions options = new IBMTextToSpeechV1Models.DeleteVoiceModelOptionsBuilder()
       .customizationId('customizationId')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -136,6 +140,7 @@ private class IBMTextToSpeechV1Test {
     }
     IBMTextToSpeechV1Models.GetVoiceModelOptions options = new IBMTextToSpeechV1Models.GetVoiceModelOptionsBuilder()
       .customizationId('customizationId')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -160,6 +165,7 @@ private class IBMTextToSpeechV1Test {
       textToSpeech.setUsernameAndPassword(username, password);
     }
     IBMTextToSpeechV1Models.ListVoiceModelsOptions options = new IBMTextToSpeechV1Models.ListVoiceModelsOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -189,6 +195,7 @@ private class IBMTextToSpeechV1Test {
     IBMTextToSpeechV1Models.UpdateVoiceModelOptions options = new IBMTextToSpeechV1Models.UpdateVoiceModelOptionsBuilder()
       .customizationId('customizationId')
       .addWords(word)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -219,6 +226,7 @@ private class IBMTextToSpeechV1Test {
       .translation('de-DE')
       .partOfSpeech('Josi')
       .translation(translation)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -248,6 +256,7 @@ private class IBMTextToSpeechV1Test {
       .customizationId('customizationId')
       .addWords(word)
       .words(new List<IBMTextToSpeechV1Models.Word>{word})
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -272,6 +281,7 @@ private class IBMTextToSpeechV1Test {
     IBMTextToSpeechV1Models.DeleteWordOptions options = new IBMTextToSpeechV1Models.DeleteWordOptionsBuilder()
       .customizationId('customizationId')
       .word('World')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -296,6 +306,7 @@ private class IBMTextToSpeechV1Test {
     IBMTextToSpeechV1Models.GetWordOptions options = new IBMTextToSpeechV1Models.GetWordOptionsBuilder()
       .customizationId('customizationId')
       .word('World')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -322,6 +333,7 @@ private class IBMTextToSpeechV1Test {
     }
     IBMTextToSpeechV1Models.ListWordsOptions options = new IBMTextToSpeechV1Models.ListWordsOptionsBuilder()
       .customizationId('customizationId')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -350,6 +362,7 @@ private class IBMTextToSpeechV1Test {
       .voice('de-DE_DieterVoice')
       .format('ipa')
       .customizationId('customizationId')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
