@@ -28,6 +28,7 @@ private class IBMToneAnalyzerV3Test {
     .contentLanguage('en')
     .acceptLanguage('en')
     .toneInput(toneInput)
+    .addHeader('Test-Header', 'test_value')
     .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -66,6 +67,7 @@ private class IBMToneAnalyzerV3Test {
       .addUtterances(utterance)
       .acceptLanguage('en')
       .contentLanguage('en')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
