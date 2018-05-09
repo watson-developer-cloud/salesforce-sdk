@@ -219,6 +219,7 @@ private class IBMConversationV1Test {
       .addentities(createEntity)
       .entities(new List<IBMConversationV1Models.CreateEntity>{createEntity})
       .language(workspaceLanguage)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
      createWorkspaceOptions = createWorkspaceOptions.newBuilder().build();
@@ -250,6 +251,7 @@ private class IBMConversationV1Test {
 
     IBMConversationV1Models.DeleteWorkspaceOptions deleteOptions = new IBMConversationV1Models.DeleteWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -274,6 +276,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.GetWorkspaceOptions getOptions = new IBMConversationV1Models.GetWorkspaceOptionsBuilder()
       .includeAudit(true)
       .workspaceId(workspaceId)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -313,6 +316,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.UpdateWorkspaceOptions updateOptions = new IBMConversationV1Models.UpdateWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
       .append(false)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -344,6 +348,7 @@ private class IBMConversationV1Test {
 
     IBMConversationV1Models.ListWorkspacesOptions listOptions = new IBMConversationV1Models.ListWorkspacesOptionsBuilder()
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -383,6 +388,7 @@ private class IBMConversationV1Test {
       .metadata(metadata)
       .addPatterns(valuePattern)
       .addSynonyms(valueSynonym)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -414,6 +420,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -441,6 +448,7 @@ private class IBMConversationV1Test {
       .value(valueName)
       .exportField(true)
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -475,6 +483,7 @@ private class IBMConversationV1Test {
       .newMetadata(metadata)
       .addNewPatterns(valuePattern)
       .addNewSynonyms(valueSynonym)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -506,6 +515,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -547,6 +557,7 @@ private class IBMConversationV1Test {
       .input(input)
       .alternateIntents(alternateIntents)
       .nodesVisitedDetails(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     messageOptions = messageOptions.newBuilder().build();
@@ -590,6 +601,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .description(intentDescription)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -618,6 +630,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.DeleteIntentOptions deleteOptions = new IBMConversationV1Models.DeleteIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -644,6 +657,7 @@ private class IBMConversationV1Test {
       .intent(intentName)
       .exportField(true)
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -676,6 +690,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .exportField(true)
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -714,6 +729,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .newDescription(intentDescription)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -743,6 +759,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .text(exampleText)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -771,6 +788,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .text('example A')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -797,6 +815,7 @@ private class IBMConversationV1Test {
       .intent(intentName)
       .text(exampleText)
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -825,6 +844,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -858,6 +878,7 @@ private class IBMConversationV1Test {
       .intent(intentName)
       .text(exampleText)
       .newText(exampleText)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -886,6 +907,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .description(entityDescription)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -916,6 +938,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.DeleteEntityOptions deleteOptions = new IBMConversationV1Models.DeleteEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -942,6 +965,7 @@ private class IBMConversationV1Test {
       .entity(entityName)
       .exportField(true)
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -979,6 +1003,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .exportField(true)
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -1020,6 +1045,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .newDescription(entityDescription)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -1052,6 +1078,7 @@ private class IBMConversationV1Test {
       .entity(entityName)
       .value(valueName)
       .synonym(valueSynonym)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -1081,6 +1108,7 @@ private class IBMConversationV1Test {
       .entity(entityName)
       .value(valueName)
       .synonym(valueSynonym)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -1108,6 +1136,7 @@ private class IBMConversationV1Test {
       .value(valueName)
       .synonym(valueSynonym)
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -1137,6 +1166,7 @@ private class IBMConversationV1Test {
       .entity(entityName)
       .value(valueName)
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -1171,6 +1201,7 @@ private class IBMConversationV1Test {
       .value(valueName)
       .synonym(valueSynonym)
       .newSynonym(valueSynonym)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -1201,6 +1232,7 @@ private class IBMConversationV1Test {
       .digressIn(dialogNodeDigressIn)
       .digressOut(dialogNodeDigressOut)
       .digressOutSlots(dialogNodeDigressOutSlots)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -1250,6 +1282,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.DeleteDialogNodeOptions deleteOptions = new IBMConversationV1Models.DeleteDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -1275,6 +1308,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -1321,6 +1355,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.ListDialogNodesOptions listOptions = new IBMConversationV1Models.ListDialogNodesOptionsBuilder()
       .workspaceId(workspaceId)
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -1374,6 +1409,7 @@ private class IBMConversationV1Test {
       .newDigressIn(dialogNodeDigressIn)
       .newDigressOut(dialogNodeDigressOut)
       .newDigressOutSlots(dialogNodeDigressOutSlots)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
@@ -1420,6 +1456,7 @@ private class IBMConversationV1Test {
 
     IBMConversationV1Models.ListLogsOptions listOptions = new IBMConversationV1Models.ListLogsOptionsBuilder()
       .workspaceId(workspaceId)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -1469,6 +1506,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.CreateCounterexampleOptions createOptions = new IBMConversationV1Models.CreateCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(counterexampleText)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -1494,6 +1532,7 @@ private class IBMConversationV1Test {
 
     IBMConversationV1Models.CreateCounterexampleOptions createOptions =
       new IBMConversationV1Models.CreateCounterexampleOptionsBuilder(workspaceId,counterexampleText)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
@@ -1521,6 +1560,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.DeleteCounterexampleOptions deleteOptions = new IBMConversationV1Models.DeleteCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(counterexampleText)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
@@ -1546,6 +1586,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .text(counterexampleText)
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
@@ -1573,6 +1614,7 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.ListCounterexamplesOptions listOptions = new IBMConversationV1Models.ListCounterexamplesOptionsBuilder()
       .workspaceId(workspaceId)
       .includeAudit(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
@@ -1605,6 +1647,7 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .text(counterexampleText)
       .newText(counterexampleText)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     updateOptions = updateOptions.newBuilder().build();
