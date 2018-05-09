@@ -524,6 +524,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     private ClassifyCollectionOptionsBuilder(ClassifyCollectionOptions classifyCollectionOptions) {
       classifier_id_serialized_name = classifyCollectionOptions.classifier_id_serialized_name;
       collection_serialized_name = classifyCollectionOptions.collection_serialized_name;
+      this.requestHeaders.putAll(classifyCollectionOptions.requestHeaders());
     }
 
     /**
@@ -685,6 +686,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     private ClassifyOptionsBuilder(ClassifyOptions classifyOptions) {
       classifier_id_serialized_name = classifyOptions.classifier_id_serialized_name;
       text_serialized_name = classifyOptions.text_serialized_name;
+      this.requestHeaders.putAll(classifyOptions.requestHeaders());
     }
 
     /**
@@ -923,6 +925,7 @@ public class IBMNaturalLanguageClassifierV1Models {
       training_metadata_filename_serialized_name = createClassifierOptions.training_metadata_filename_serialized_name;
       training_data_serialized_name = createClassifierOptions.training_data_serialized_name;
       training_data_filename_serialized_name = createClassifierOptions.training_data_filename_serialized_name;
+      this.requestHeaders.putAll(createClassifierOptions.requestHeaders());
     }
 
     /**
@@ -1048,6 +1051,7 @@ public class IBMNaturalLanguageClassifierV1Models {
 
     private DeleteClassifierOptionsBuilder(DeleteClassifierOptions deleteClassifierOptions) {
       classifier_id_serialized_name = deleteClassifierOptions.classifier_id_serialized_name;
+      this.requestHeaders.putAll(deleteClassifierOptions.requestHeaders());
     }
 
     /**
@@ -1138,6 +1142,7 @@ public class IBMNaturalLanguageClassifierV1Models {
 
     private GetClassifierOptionsBuilder(GetClassifierOptions getClassifierOptions) {
       classifier_id_serialized_name = getClassifierOptions.classifier_id_serialized_name;
+      this.requestHeaders.putAll(getClassifierOptions.requestHeaders());
     }
 
     /**
@@ -1213,6 +1218,7 @@ public class IBMNaturalLanguageClassifierV1Models {
   public class ListClassifiersOptionsBuilder extends IBMWatsonOptionsModel {
 
     private ListClassifiersOptionsBuilder(ListClassifiersOptions listClassifiersOptions) {
+      this.requestHeaders.putAll(listClassifiersOptions.requestHeaders());
     }
 
     /**
