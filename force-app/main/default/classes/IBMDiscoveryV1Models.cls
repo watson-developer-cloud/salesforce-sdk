@@ -113,6 +113,7 @@ public class IBMDiscoveryV1Models {
       filename_serialized_name = addDocumentOptions.filename_serialized_name;
       metadata_serialized_name = addDocumentOptions.metadata_serialized_name;
       file_content_type_serialized_name = addDocumentOptions.file_content_type_serialized_name;
+      this.requestHeaders.putAll(addDocumentOptions.requestHeaders());
     }
 
     /**
@@ -311,6 +312,7 @@ public class IBMDiscoveryV1Models {
       natural_language_query_serialized_name = addTrainingDataOptions.natural_language_query_serialized_name;
       filter_serialized_name = addTrainingDataOptions.filter_serialized_name;
       examples_serialized_name = addTrainingDataOptions.examples_serialized_name;
+      this.requestHeaders.putAll(addTrainingDataOptions.requestHeaders());
     }
 
     /**
@@ -1241,6 +1243,7 @@ public class IBMDiscoveryV1Models {
       description_serialized_name = createCollectionOptions.description_serialized_name;
       configuration_id_serialized_name = createCollectionOptions.configuration_id_serialized_name;
       language_serialized_name = createCollectionOptions.language_serialized_name;
+      this.requestHeaders.putAll(createCollectionOptions.requestHeaders());
     }
 
     /**
@@ -1447,6 +1450,7 @@ public class IBMDiscoveryV1Models {
       conversions_serialized_name = createConfigurationOptions.conversions_serialized_name;
       enrichments_serialized_name = createConfigurationOptions.enrichments_serialized_name;
       normalizations_serialized_name = createConfigurationOptions.normalizations_serialized_name;
+      this.requestHeaders.putAll(createConfigurationOptions.requestHeaders());
     }
 
     /**
@@ -1667,6 +1671,7 @@ public class IBMDiscoveryV1Models {
       name_serialized_name = createEnvironmentOptions.name_serialized_name;
       description_serialized_name = createEnvironmentOptions.description_serialized_name;
       size_serialized_name = createEnvironmentOptions.size_serialized_name;
+      this.requestHeaders.putAll(createEnvironmentOptions.requestHeaders());
     }
 
     /**
@@ -1808,6 +1813,7 @@ public class IBMDiscoveryV1Models {
       environment_id_serialized_name = createExpansionsOptions.environment_id_serialized_name;
       collection_id_serialized_name = createExpansionsOptions.collection_id_serialized_name;
       expansions_serialized_name = createExpansionsOptions.expansions_serialized_name;
+      this.requestHeaders.putAll(createExpansionsOptions.requestHeaders());
     }
 
     /**
@@ -2015,6 +2021,7 @@ public class IBMDiscoveryV1Models {
       document_id_serialized_name = createTrainingExampleOptions.document_id_serialized_name;
       cross_reference_serialized_name = createTrainingExampleOptions.cross_reference_serialized_name;
       relevance_serialized_name = createTrainingExampleOptions.relevance_serialized_name;
+      this.requestHeaders.putAll(createTrainingExampleOptions.requestHeaders());
     }
 
     /**
@@ -2192,6 +2199,7 @@ public class IBMDiscoveryV1Models {
     private DeleteAllTrainingDataOptionsBuilder(DeleteAllTrainingDataOptions deleteAllTrainingDataOptions) {
       environment_id_serialized_name = deleteAllTrainingDataOptions.environment_id_serialized_name;
       collection_id_serialized_name = deleteAllTrainingDataOptions.collection_id_serialized_name;
+      this.requestHeaders.putAll(deleteAllTrainingDataOptions.requestHeaders());
     }
 
     /**
@@ -2310,6 +2318,7 @@ public class IBMDiscoveryV1Models {
     private DeleteCollectionOptionsBuilder(DeleteCollectionOptions deleteCollectionOptions) {
       environment_id_serialized_name = deleteCollectionOptions.environment_id_serialized_name;
       collection_id_serialized_name = deleteCollectionOptions.collection_id_serialized_name;
+      this.requestHeaders.putAll(deleteCollectionOptions.requestHeaders());
     }
 
     /**
@@ -2428,6 +2437,7 @@ public class IBMDiscoveryV1Models {
     private DeleteConfigurationOptionsBuilder(DeleteConfigurationOptions deleteConfigurationOptions) {
       environment_id_serialized_name = deleteConfigurationOptions.environment_id_serialized_name;
       configuration_id_serialized_name = deleteConfigurationOptions.configuration_id_serialized_name;
+      this.requestHeaders.putAll(deleteConfigurationOptions.requestHeaders());
     }
 
     /**
@@ -2561,6 +2571,7 @@ public class IBMDiscoveryV1Models {
       environment_id_serialized_name = deleteDocumentOptions.environment_id_serialized_name;
       collection_id_serialized_name = deleteDocumentOptions.collection_id_serialized_name;
       document_id_serialized_name = deleteDocumentOptions.document_id_serialized_name;
+      this.requestHeaders.putAll(deleteDocumentOptions.requestHeaders());
     }
 
     /**
@@ -2677,6 +2688,7 @@ public class IBMDiscoveryV1Models {
 
     private DeleteEnvironmentOptionsBuilder(DeleteEnvironmentOptions deleteEnvironmentOptions) {
       environment_id_serialized_name = deleteEnvironmentOptions.environment_id_serialized_name;
+      this.requestHeaders.putAll(deleteEnvironmentOptions.requestHeaders());
     }
 
     /**
@@ -2782,6 +2794,7 @@ public class IBMDiscoveryV1Models {
     private DeleteExpansionsOptionsBuilder(DeleteExpansionsOptions deleteExpansionsOptions) {
       environment_id_serialized_name = deleteExpansionsOptions.environment_id_serialized_name;
       collection_id_serialized_name = deleteExpansionsOptions.collection_id_serialized_name;
+      this.requestHeaders.putAll(deleteExpansionsOptions.requestHeaders());
     }
 
     /**
@@ -2915,6 +2928,7 @@ public class IBMDiscoveryV1Models {
       environment_id_serialized_name = deleteTrainingDataOptions.environment_id_serialized_name;
       collection_id_serialized_name = deleteTrainingDataOptions.collection_id_serialized_name;
       query_id_serialized_name = deleteTrainingDataOptions.query_id_serialized_name;
+      this.requestHeaders.putAll(deleteTrainingDataOptions.requestHeaders());
     }
 
     /**
@@ -3076,6 +3090,7 @@ public class IBMDiscoveryV1Models {
       collection_id_serialized_name = deleteTrainingExampleOptions.collection_id_serialized_name;
       query_id_serialized_name = deleteTrainingExampleOptions.query_id_serialized_name;
       example_id_serialized_name = deleteTrainingExampleOptions.example_id_serialized_name;
+      this.requestHeaders.putAll(deleteTrainingExampleOptions.requestHeaders());
     }
 
     /**
@@ -4471,6 +4486,7 @@ public class IBMDiscoveryV1Models {
       similar_serialized_name = federatedQueryNoticesOptions.similar_serialized_name;
       similar_document_ids_serialized_name = federatedQueryNoticesOptions.similar_document_ids_serialized_name;
       similar_fields_serialized_name = federatedQueryNoticesOptions.similar_fields_serialized_name;
+      this.requestHeaders.putAll(federatedQueryNoticesOptions.requestHeaders());
     }
 
     /**
@@ -5008,6 +5024,7 @@ public class IBMDiscoveryV1Models {
       similar_serialized_name = federatedQueryOptions.similar_serialized_name;
       similar_document_ids_serialized_name = federatedQueryOptions.similar_document_ids_serialized_name;
       similar_fields_serialized_name = federatedQueryOptions.similar_fields_serialized_name;
+      this.requestHeaders.putAll(federatedQueryOptions.requestHeaders());
     }
 
     /**
@@ -5530,6 +5547,7 @@ public class IBMDiscoveryV1Models {
     private GetCollectionOptionsBuilder(GetCollectionOptions getCollectionOptions) {
       environment_id_serialized_name = getCollectionOptions.environment_id_serialized_name;
       collection_id_serialized_name = getCollectionOptions.collection_id_serialized_name;
+      this.requestHeaders.putAll(getCollectionOptions.requestHeaders());
     }
 
     /**
@@ -5648,6 +5666,7 @@ public class IBMDiscoveryV1Models {
     private GetConfigurationOptionsBuilder(GetConfigurationOptions getConfigurationOptions) {
       environment_id_serialized_name = getConfigurationOptions.environment_id_serialized_name;
       configuration_id_serialized_name = getConfigurationOptions.configuration_id_serialized_name;
+      this.requestHeaders.putAll(getConfigurationOptions.requestHeaders());
     }
 
     /**
@@ -5781,6 +5800,7 @@ public class IBMDiscoveryV1Models {
       environment_id_serialized_name = getDocumentStatusOptions.environment_id_serialized_name;
       collection_id_serialized_name = getDocumentStatusOptions.collection_id_serialized_name;
       document_id_serialized_name = getDocumentStatusOptions.document_id_serialized_name;
+      this.requestHeaders.putAll(getDocumentStatusOptions.requestHeaders());
     }
 
     /**
@@ -5897,6 +5917,7 @@ public class IBMDiscoveryV1Models {
 
     private GetEnvironmentOptionsBuilder(GetEnvironmentOptions getEnvironmentOptions) {
       environment_id_serialized_name = getEnvironmentOptions.environment_id_serialized_name;
+      this.requestHeaders.putAll(getEnvironmentOptions.requestHeaders());
     }
 
     /**
@@ -6017,6 +6038,7 @@ public class IBMDiscoveryV1Models {
       environment_id_serialized_name = getTrainingDataOptions.environment_id_serialized_name;
       collection_id_serialized_name = getTrainingDataOptions.collection_id_serialized_name;
       query_id_serialized_name = getTrainingDataOptions.query_id_serialized_name;
+      this.requestHeaders.putAll(getTrainingDataOptions.requestHeaders());
     }
 
     /**
@@ -6178,6 +6200,7 @@ public class IBMDiscoveryV1Models {
       collection_id_serialized_name = getTrainingExampleOptions.collection_id_serialized_name;
       query_id_serialized_name = getTrainingExampleOptions.query_id_serialized_name;
       example_id_serialized_name = getTrainingExampleOptions.example_id_serialized_name;
+      this.requestHeaders.putAll(getTrainingExampleOptions.requestHeaders());
     }
 
     /**
@@ -6576,6 +6599,7 @@ public class IBMDiscoveryV1Models {
     private ListCollectionFieldsOptionsBuilder(ListCollectionFieldsOptions listCollectionFieldsOptions) {
       environment_id_serialized_name = listCollectionFieldsOptions.environment_id_serialized_name;
       collection_id_serialized_name = listCollectionFieldsOptions.collection_id_serialized_name;
+      this.requestHeaders.putAll(listCollectionFieldsOptions.requestHeaders());
     }
 
     /**
@@ -6743,6 +6767,7 @@ public class IBMDiscoveryV1Models {
     private ListCollectionsOptionsBuilder(ListCollectionsOptions listCollectionsOptions) {
       environment_id_serialized_name = listCollectionsOptions.environment_id_serialized_name;
       name_serialized_name = listCollectionsOptions.name_serialized_name;
+      this.requestHeaders.putAll(listCollectionsOptions.requestHeaders());
     }
 
     /**
@@ -6908,6 +6933,7 @@ public class IBMDiscoveryV1Models {
     private ListConfigurationsOptionsBuilder(ListConfigurationsOptions listConfigurationsOptions) {
       environment_id_serialized_name = listConfigurationsOptions.environment_id_serialized_name;
       name_serialized_name = listConfigurationsOptions.name_serialized_name;
+      this.requestHeaders.putAll(listConfigurationsOptions.requestHeaders());
     }
 
     /**
@@ -7058,6 +7084,7 @@ public class IBMDiscoveryV1Models {
 
     private ListEnvironmentsOptionsBuilder(ListEnvironmentsOptions listEnvironmentsOptions) {
       name_serialized_name = listEnvironmentsOptions.name_serialized_name;
+      this.requestHeaders.putAll(listEnvironmentsOptions.requestHeaders());
     }
 
     /**
@@ -7204,6 +7231,7 @@ public class IBMDiscoveryV1Models {
     private ListExpansionsOptionsBuilder(ListExpansionsOptions listExpansionsOptions) {
       environment_id_serialized_name = listExpansionsOptions.environment_id_serialized_name;
       collection_id_serialized_name = listExpansionsOptions.collection_id_serialized_name;
+      this.requestHeaders.putAll(listExpansionsOptions.requestHeaders());
     }
 
     /**
@@ -7322,6 +7350,7 @@ public class IBMDiscoveryV1Models {
     private ListFieldsOptionsBuilder(ListFieldsOptions listFieldsOptions) {
       environment_id_serialized_name = listFieldsOptions.environment_id_serialized_name;
       collection_ids_serialized_name = listFieldsOptions.collection_ids_serialized_name;
+      this.requestHeaders.putAll(listFieldsOptions.requestHeaders());
     }
 
     /**
@@ -7456,6 +7485,7 @@ public class IBMDiscoveryV1Models {
     private ListTrainingDataOptionsBuilder(ListTrainingDataOptions listTrainingDataOptions) {
       environment_id_serialized_name = listTrainingDataOptions.environment_id_serialized_name;
       collection_id_serialized_name = listTrainingDataOptions.collection_id_serialized_name;
+      this.requestHeaders.putAll(listTrainingDataOptions.requestHeaders());
     }
 
     /**
@@ -7589,6 +7619,7 @@ public class IBMDiscoveryV1Models {
       environment_id_serialized_name = listTrainingExamplesOptions.environment_id_serialized_name;
       collection_id_serialized_name = listTrainingExamplesOptions.collection_id_serialized_name;
       query_id_serialized_name = listTrainingExamplesOptions.query_id_serialized_name;
+      this.requestHeaders.putAll(listTrainingExamplesOptions.requestHeaders());
     }
 
     /**
@@ -9640,6 +9671,7 @@ public class IBMDiscoveryV1Models {
       context_serialized_name = queryEntitiesOptions.context_serialized_name;
       count_serialized_name = queryEntitiesOptions.count_serialized_name;
       evidence_count_serialized_name = queryEntitiesOptions.evidence_count_serialized_name;
+      this.requestHeaders.putAll(queryEntitiesOptions.requestHeaders());
     }
 
     /**
@@ -10472,6 +10504,7 @@ public class IBMDiscoveryV1Models {
       similar_serialized_name = queryNoticesOptions.similar_serialized_name;
       similar_document_ids_serialized_name = queryNoticesOptions.similar_document_ids_serialized_name;
       similar_fields_serialized_name = queryNoticesOptions.similar_fields_serialized_name;
+      this.requestHeaders.putAll(queryNoticesOptions.requestHeaders());
     }
 
     /**
@@ -11515,6 +11548,7 @@ public class IBMDiscoveryV1Models {
       similar_serialized_name = queryOptions.similar_serialized_name;
       similar_document_ids_serialized_name = queryOptions.similar_document_ids_serialized_name;
       similar_fields_serialized_name = queryOptions.similar_fields_serialized_name;
+      this.requestHeaders.putAll(queryOptions.requestHeaders());
     }
 
     /**
@@ -12319,6 +12353,7 @@ public class IBMDiscoveryV1Models {
       filter_serialized_name = queryRelationsOptions.filter_serialized_name;
       count_serialized_name = queryRelationsOptions.count_serialized_name;
       evidence_count_serialized_name = queryRelationsOptions.evidence_count_serialized_name;
+      this.requestHeaders.putAll(queryRelationsOptions.requestHeaders());
     }
 
     /**
@@ -13167,6 +13202,7 @@ public class IBMDiscoveryV1Models {
       filename_serialized_name = testConfigurationInEnvironmentOptions.filename_serialized_name;
       metadata_serialized_name = testConfigurationInEnvironmentOptions.metadata_serialized_name;
       file_content_type_serialized_name = testConfigurationInEnvironmentOptions.file_content_type_serialized_name;
+      this.requestHeaders.putAll(testConfigurationInEnvironmentOptions.requestHeaders());
     }
 
     /**
@@ -14102,6 +14138,7 @@ public class IBMDiscoveryV1Models {
       name_serialized_name = updateCollectionOptions.name_serialized_name;
       description_serialized_name = updateCollectionOptions.description_serialized_name;
       configuration_id_serialized_name = updateCollectionOptions.configuration_id_serialized_name;
+      this.requestHeaders.putAll(updateCollectionOptions.requestHeaders());
     }
 
     /**
@@ -14323,6 +14360,7 @@ public class IBMDiscoveryV1Models {
       conversions_serialized_name = updateConfigurationOptions.conversions_serialized_name;
       enrichments_serialized_name = updateConfigurationOptions.enrichments_serialized_name;
       normalizations_serialized_name = updateConfigurationOptions.normalizations_serialized_name;
+      this.requestHeaders.putAll(updateConfigurationOptions.requestHeaders());
     }
 
     /**
@@ -14617,6 +14655,7 @@ public class IBMDiscoveryV1Models {
       filename_serialized_name = updateDocumentOptions.filename_serialized_name;
       metadata_serialized_name = updateDocumentOptions.metadata_serialized_name;
       file_content_type_serialized_name = updateDocumentOptions.file_content_type_serialized_name;
+      this.requestHeaders.putAll(updateDocumentOptions.requestHeaders());
     }
 
     /**
@@ -14805,6 +14844,7 @@ public class IBMDiscoveryV1Models {
       environment_id_serialized_name = updateEnvironmentOptions.environment_id_serialized_name;
       name_serialized_name = updateEnvironmentOptions.name_serialized_name;
       description_serialized_name = updateEnvironmentOptions.description_serialized_name;
+      this.requestHeaders.putAll(updateEnvironmentOptions.requestHeaders());
     }
 
     /**
@@ -14986,6 +15026,7 @@ public class IBMDiscoveryV1Models {
       example_id_serialized_name = updateTrainingExampleOptions.example_id_serialized_name;
       cross_reference_serialized_name = updateTrainingExampleOptions.cross_reference_serialized_name;
       relevance_serialized_name = updateTrainingExampleOptions.relevance_serialized_name;
+      this.requestHeaders.putAll(updateTrainingExampleOptions.requestHeaders());
     }
 
     /**
