@@ -52,10 +52,18 @@ public virtual class IBMWatsonResponseModel {
     return ret;
   }
 
+  /**
+   * Gets the response headers attached to this response model.
+   */
   public Map<String, String> getHeaders() {
     return this.headers;
   }
 
+  /**
+   * Adds a header to this response model.
+   *
+   * Meant to only be used internally to populate response headers from the IBMWatsonService class.
+   */
   public void addHeader(String name, String value) {
     if (this.headers == null) {
       this.headers = new Map<String, String>();
