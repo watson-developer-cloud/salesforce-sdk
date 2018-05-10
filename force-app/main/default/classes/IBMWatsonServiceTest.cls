@@ -1,5 +1,36 @@
 @isTest
 private class IBMWatsonServiceTest {
+
+  /**
+   * Simple service to use for testing purposes.
+   */
+  class TestService extends IBMWatsonService {
+    public TestService() {
+      super('test_service_v1');
+    }
+
+    public TestClass testingMethod() {
+      IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet('https://www.test.com');
+      builder.query('test_query', 'test_val');
+      return (TestClass) createServiceCall(builder.build(), TestClass.class);
+    }
+  }
+
+  /**
+   * Simple response model to use for testing purposes.
+   */
+  class TestClass extends IBMWatsonResponseModel {
+    public String test_key_serialized_name;
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+      TestClass ret = (TestClass) super.deserialize(jsonString, jsonMap, classType);
+      return ret;
+    }
+  }
+
   /**
     *  Test available Request methods that are not used in example but available for developers.
     *
@@ -385,6 +416,25 @@ private class IBMWatsonServiceTest {
     System.assertEquals(multipartBody.parts().size(), 2);
     System.assert(multipartBody.getAllHeaders().get('Content-Type').contains('multipart/form-data; boundary'));
     System.assert(multipartBody.form64().contains(multipartBody.writeBoundary()));
+    Test.stopTest();
+  }
+
+  /**
+   * Test getting response headers from response model.
+   */
+  static testMethod void testResponseHeaders() {
+    Test.startTest();
+    String body = '{"test_key":"test_value"}';
+    Map<String, String> responseHeaders = new Map<String, String> { 'Test-Name' => 'test_val' };
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, responseHeaders);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+
+    TestService testService = new TestService();
+    TestClass testClass = testService.testingMethod();
+
+    System.assert(testClass.getHeaders() != null);
+    System.assert(testClass.getHeaders().size() == 1);
+    System.assert(testClass.getHeaders().get('Test-Name').equals('test_val'));
     Test.stopTest();
   }
 }
