@@ -1,5 +1,36 @@
 @isTest
 private class IBMWatsonServiceTest {
+
+  /**
+   * Simple service to use for testing purposes.
+   */
+  class TestService extends IBMWatsonService {
+    public TestService() {
+      super('test_service_v1');
+    }
+
+    public TestClass testingMethod() {
+      IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet('https://www.test.com');
+      builder.query('test_query', 'test_val');
+      return (TestClass) createServiceCall(builder.build(), TestClass.class);
+    }
+  }
+
+  /**
+   * Simple response model to use for testing purposes.
+   */
+  class TestClass extends IBMWatsonResponseModel {
+    public String test_key_serialized_name;
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+      TestClass ret = (TestClass) super.deserialize(jsonString, jsonMap, classType);
+      return ret;
+    }
+  }
+
   /**
     *  Test available Request methods that are not used in example but available for developers.
     *
@@ -18,16 +49,12 @@ private class IBMWatsonServiceTest {
    */
   static testMethod void testBadRequestException() {
     String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(400, 'Success', body, null);
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(400, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
-      discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password');
-      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      IBMDiscoveryV1Models.Environment resp =
-      discovery.createEnvironment(options);
+      TestService testService = new TestService();
+      TestClass testClass = testService.testingMethod();
     }
     catch(IBMWatsonServiceExceptions.BadRequestException ex) {
       System.assertEquals(ex.getStatusCode(), IBMWatsonHttpStatus.BAD_REQUEST);
@@ -41,16 +68,12 @@ private class IBMWatsonServiceTest {
    */
   static testMethod void testConflictException() {
     String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(409, 'Success', body, null);
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(409, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
-      discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password');
-      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      IBMDiscoveryV1Models.Environment resp =
-      discovery.createEnvironment(options);
+      TestService testService = new TestService();
+      TestClass testClass = testService.testingMethod();
     }
     catch(IBMWatsonServiceExceptions.ConflictException ex) {
       System.assertEquals(ex.getStatusCode(), IBMWatsonHttpStatus.CONFLICT);
@@ -64,16 +87,12 @@ private class IBMWatsonServiceTest {
    */
   static testMethod void testForbiddenException() {
     String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(403, 'Success', body, null);
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(403, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
-      discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password');
-      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      IBMDiscoveryV1Models.Environment resp =
-      discovery.createEnvironment(options);
+      TestService testService = new TestService();
+      TestClass testClass = testService.testingMethod();
     }
     catch(IBMWatsonServiceExceptions.ForbiddenException ex) {
       System.assertEquals(ex.getStatusCode(), IBMWatsonHttpStatus.FORBIDDEN);
@@ -87,16 +106,12 @@ private class IBMWatsonServiceTest {
    */
   static testMethod void testNotAcceptableException() {
     String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(406, 'Success', body, null);
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(406, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
-      discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password');
-      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      IBMDiscoveryV1Models.Environment resp =
-      discovery.createEnvironment(options);
+      TestService testService = new TestService();
+      TestClass testClass = testService.testingMethod();
     }
     catch(IBMWatsonServiceExceptions.ForbiddenException ex) {
       System.assertEquals(ex.getStatusCode(), IBMWatsonHttpStatus.FORBIDDEN);
@@ -110,16 +125,12 @@ private class IBMWatsonServiceTest {
    */
   static testMethod void testInternalServerErrorException() {
     String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(500, 'Success', body, null);
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(500, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
-      discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password');
-      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      IBMDiscoveryV1Models.Environment resp =
-      discovery.createEnvironment(options);
+      TestService testService = new TestService();
+      TestClass testClass = testService.testingMethod();
     }
     catch(IBMWatsonServiceExceptions.InternalServerErrorException ex) {
       System.assertEquals(ex.getStatusCode(), IBMWatsonHttpStatus.INTERNAL_SERVER_ERROR);
@@ -133,16 +144,12 @@ private class IBMWatsonServiceTest {
    */
   static testMethod void testNotFoundException() {
     String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(404, 'Success', body, null);
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(404, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
-      discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password');
-      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      IBMDiscoveryV1Models.Environment resp =
-      discovery.createEnvironment(options);
+      TestService testService = new TestService();
+      TestClass testClass = testService.testingMethod();
     }
     catch(IBMWatsonServiceExceptions.NotFoundException ex) {
       System.assertEquals(ex.getStatusCode(), IBMWatsonHttpStatus.NOT_FOUND);
@@ -156,16 +163,12 @@ private class IBMWatsonServiceTest {
    */
   static testMethod void testRequestTooLargeException() {
     String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(413, 'Success', body, null);
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(413, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
-      discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password');
-      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      IBMDiscoveryV1Models.Environment resp =
-      discovery.createEnvironment(options);
+      TestService testService = new TestService();
+      TestClass testClass = testService.testingMethod();
     }
     catch(IBMWatsonServiceExceptions.RequestTooLargeException ex) {
       System.assertEquals(ex.getStatusCode(), IBMWatsonHttpStatus.REQUEST_TOO_LONG);
@@ -179,16 +182,12 @@ private class IBMWatsonServiceTest {
    */
   static testMethod void testResponseException() {
     String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(519, 'Success', body, null);
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(519, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
-      discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password');
-      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      IBMDiscoveryV1Models.Environment resp =
-      discovery.createEnvironment(options);
+      TestService testService = new TestService();
+      TestClass testClass = testService.testingMethod();
     }
     catch(IBMWatsonServiceExceptions.ResponseException ex) {
       System.assertEquals(ex.getStatusCode(), 519);
@@ -202,16 +201,12 @@ private class IBMWatsonServiceTest {
    */
   static testMethod void testServiceUnavailableException() {
     String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(503, 'Success', body, null);
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(503, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
-      discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password');
-      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      IBMDiscoveryV1Models.Environment resp =
-      discovery.createEnvironment(options);
+      TestService testService = new TestService();
+      TestClass testClass = testService.testingMethod();
     }
     catch(IBMWatsonServiceExceptions.ServiceUnavailableException ex) {
       System.assertEquals(ex.getStatusCode(), IBMWatsonHttpStatus.SERVICE_UNAVAILABLE);
@@ -225,16 +220,12 @@ private class IBMWatsonServiceTest {
    */
   static testMethod void testTooManyRequestsException() {
     String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(429, 'Success', body, null);
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(429, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
-      discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password');
-      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      IBMDiscoveryV1Models.Environment resp =
-      discovery.createEnvironment(options);
+      TestService testService = new TestService();
+      TestClass testClass = testService.testingMethod();
     }
     catch(IBMWatsonServiceExceptions.TooManyRequestsException ex) {
       System.assertEquals(ex.getStatusCode(), 429);
@@ -248,16 +239,12 @@ private class IBMWatsonServiceTest {
    */
   static testMethod void testUnauthorizedException() {
     String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(401, 'Success', body, null);
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(401, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
-      discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password');
-      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      IBMDiscoveryV1Models.Environment resp =
-      discovery.createEnvironment(options);
+      TestService testService = new TestService();
+      TestClass testClass = testService.testingMethod();
     }
     catch(IBMWatsonServiceExceptions.UnauthorizedException ex) {
       System.assertEquals(ex.getStatusCode(), IBMWatsonHttpStatus.UNAUTHORIZED);
@@ -270,16 +257,12 @@ private class IBMWatsonServiceTest {
    */
   static testMethod void testUnsupportedExceptionException() {
     String body = IBMWatsonMockResponses.environment();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(415, 'Success', body, null);
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(415, 'Error', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
     try {
-      IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-09-01');
-      discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
-      discovery.setUsernameAndPassword('username', 'password');
-      IBMDiscoveryV1Models.CreateEnvironmentOptions options = new IBMDiscoveryV1Models.CreateEnvironmentOptionsBuilder().name('test').description('test description').build();
-      IBMDiscoveryV1Models.Environment resp =
-      discovery.createEnvironment(options);
+      TestService testService = new TestService();
+      TestClass testClass = testService.testingMethod();
     }
     catch(IBMWatsonServiceExceptions.UnsupportedException ex) {
       System.assertEquals(ex.getStatusCode(), IBMWatsonHttpStatus.UNSUPPORTED_MEDIA_TYPE);
@@ -385,6 +368,25 @@ private class IBMWatsonServiceTest {
     System.assertEquals(multipartBody.parts().size(), 2);
     System.assert(multipartBody.getAllHeaders().get('Content-Type').contains('multipart/form-data; boundary'));
     System.assert(multipartBody.form64().contains(multipartBody.writeBoundary()));
+    Test.stopTest();
+  }
+
+  /**
+   * Test getting response headers from response model.
+   */
+  static testMethod void testResponseHeaders() {
+    Test.startTest();
+    String body = '{"test_key":"test_value"}';
+    Map<String, String> responseHeaders = new Map<String, String> { 'Test-Name' => 'test_val' };
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, responseHeaders);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+
+    TestService testService = new TestService();
+    TestClass testClass = testService.testingMethod();
+
+    System.assert(testClass.getHeaders() != null);
+    System.assert(testClass.getHeaders().size() == 1);
+    System.assert(testClass.getHeaders().get('Test-Name').equals('test_val'));
     Test.stopTest();
   }
 }

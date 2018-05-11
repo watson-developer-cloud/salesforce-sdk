@@ -46,6 +46,7 @@ private class IBMPersonalityInsightsV3Test {
       .content(content)
       .html('<html><body>test</body></html>')
       .text('test')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -127,6 +128,7 @@ private class IBMPersonalityInsightsV3Test {
       .content(content)
       .html('<html><body>test</body></html>')
       .text('test')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();

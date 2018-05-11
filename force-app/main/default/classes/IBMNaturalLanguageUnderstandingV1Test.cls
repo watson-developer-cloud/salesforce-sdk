@@ -81,6 +81,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .returnAnalyzedText(true)
       .language('en')
       .limitTextCharacters(100)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -277,6 +278,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
     naturalLanguageUnderstanding.setUsernameAndPassword('username', 'password');
     IBMNaturalLanguageUnderstandingV1Models.ListModelsOptions options = new IBMNaturalLanguageUnderstandingV1Models.ListModelsOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -299,6 +301,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
     IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptions options = new IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptionsBuilder()
       .modelId('test')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -316,6 +319,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
       IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptions options = new IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptionsBuilder()
         .modelId('test')
+        .addHeader('Test-Header', 'test_value')
         .build();
       naturalLanguageUnderstanding.deleteModel(options);
     }

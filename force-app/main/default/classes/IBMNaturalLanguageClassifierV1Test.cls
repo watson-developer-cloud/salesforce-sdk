@@ -22,6 +22,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMNaturalLanguageClassifierV1Models.ClassifyOptions classifyOptions = new IBMNaturalLanguageClassifierV1Models.ClassifyOptionsBuilder()
       .classifierId(classifier_id_serialized_name)
       .text(text_serialized_name)
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMNaturalLanguageClassifierV1Models.Classification classification = service.classify(classifyOptions);
     System.assertEquals(classification.getClassifierId(), classifier_id_serialized_name);
@@ -68,6 +69,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptions classifyOptions = new IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptionsBuilder()
       .classifierId(classifierId)
       .collection(inputCollection)
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMNaturalLanguageClassifierV1Models.ClassificationCollection classification = service.classifyCollection(classifyOptions);
     System.assertEquals(classification.getClassifierId(), classifierId);
@@ -113,6 +115,7 @@ private class IBMNaturalLanguageClassifierV1Test {
       .trainingMetadataFilename(training_metadata_filename_serialized_name)
       .trainingData(training_data_serialized_name)
       .trainingDataFilename(training_data_filename_serialized_name)
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMNaturalLanguageClassifierV1Models.Classifier Classifier = service.createClassifier(createClassifierOptions);
     System.assertEquals(Classifier.getName(), 'My Classifier');
@@ -145,6 +148,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptions deleteClassifierOptions =
       new IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptionsBuilder()
       .classifierId(classifier_id_serialized_name)
+      .addHeader('Test-Header', 'test_value')
       .build();
     service.deleteClassifier(deleteClassifierOptions);
     IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptionsBuilder DeleteClassifierOptionsBuilder =
@@ -165,6 +169,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMNaturalLanguageClassifierV1Models.GetClassifierOptions getClassifierOption =
       new IBMNaturalLanguageClassifierV1Models.GetClassifierOptionsBuilder()
       .classifierId(classifier_id_serialized_name)
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMNaturalLanguageClassifierV1Models.Classifier Classifier = service.getClassifier(getClassifierOption);
     System.assertEquals(Classifier.getName(), 'My Classifier');
@@ -188,6 +193,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMNaturalLanguageClassifierV1 service = new IBMNaturalLanguageClassifierV1();
     IBMNaturalLanguageClassifierV1Models.ListClassifiersOptions listClassifiersOptions =
       new IBMNaturalLanguageClassifierV1Models.ListClassifiersOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMNaturalLanguageClassifierV1Models.ClassifierList ClassifierList = service.listClassifiers(listClassifiersOptions);
     List<IBMNaturalLanguageClassifierV1Models.Classifier> Classifiers = ClassifierList.getClassifiers();

@@ -67,16 +67,28 @@ public abstract class IBMWatsonService {
           Map<String, Object> safeJsonMap = IBMWatsonJSONUtil.prepareResponse(jsonMap);
           Object targetObject = targetType.newInstance();
           String jsonString = JSON.serialize(safeJsonMap);
-          if (targetObject instanceof IBMWatsonDynamicModel) {
-            return ((IBMWatsonDynamicModel) targetObject).deserialize(jsonString, safeJsonMap, targetType);
+          if (targetObject instanceof IBMWatsonDynamicResponseModel) {
+            return (IBMWatsonDynamicResponseModel) addResponseHeaders(response, ((IBMWatsonResponseModel) targetObject).deserialize(jsonString, safeJsonMap, targetType));
           } else {
-            return ((IBMWatsonGenericModel) targetObject).deserialize(jsonString, safeJsonMap, targetType);
+            return (IBMWatsonResponseModel) addResponseHeaders(response, ((IBMWatsonResponseModel) targetObject).deserialize(jsonString, safeJsonMap, targetType));
           }
         }
       }
     }
 
     return null;
+  }
+
+  /**
+   * Adds headers onto the model returned from the service.
+   */
+  private Object addResponseHeaders(IBMWatsonResponse response, Object responseObject) {
+  	IBMWatsonResponseModel testModel = (IBMWatsonResponseModel) responseObject;
+    String[] headerKeys = response.getHeaderKeys();
+    for (String key : headerKeys) {
+      testModel.addHeader(key, response.getHeader(key));
+    }
+    return testModel;
   }
 
   /**

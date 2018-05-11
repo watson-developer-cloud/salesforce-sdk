@@ -2,7 +2,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * Results of the analysis, organized by feature.
    */
-  public class AnalysisResults extends IBMWatsonGenericModel {
+  public class AnalysisResults extends IBMWatsonResponseModel {
     private String language_serialized_name;
     private String analyzed_text_serialized_name;
     private String retrieved_url_serialized_name;
@@ -385,7 +385,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * The analyze options.
    */
-  public class AnalyzeOptions {
+  public class AnalyzeOptions extends IBMWatsonOptionsModel {
     private String text_serialized_name;
     private String html_serialized_name;
     private String url_serialized_name;
@@ -508,6 +508,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return_analyzed_text_serialized_name = builder.return_analyzed_text_serialized_name;
       language_serialized_name = builder.language_serialized_name;
       limit_text_characters_serialized_name = builder.limit_text_characters_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -524,7 +525,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * AnalyzeOptions Builder.
    */
-  public class AnalyzeOptionsBuilder {
+  public class AnalyzeOptionsBuilder extends IBMWatsonOptionsModel {
     private String text_serialized_name;
     private String html_serialized_name;
     private String url_serialized_name;
@@ -547,6 +548,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return_analyzed_text_serialized_name = analyzeOptions.return_analyzed_text_serialized_name;
       language_serialized_name = analyzeOptions.language_serialized_name;
       limit_text_characters_serialized_name = analyzeOptions.limit_text_characters_serialized_name;
+      this.requestHeaders.putAll(analyzeOptions.requestHeaders());
     }
 
     /**
@@ -682,6 +684,18 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.limit_text_characters_serialized_name = limitTextCharacters;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the AnalyzeOptions builder
+     */
+    public AnalyzeOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
@@ -737,23 +751,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return this.getDynamicProperties();
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      CategoriesOptions ret = (CategoriesOptions) super.deserialize(jsonString, jsonMap, classType);
-
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
-
-      for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key)) {
-          ret.put(key, jsonMap.get(key));
-        }
-      }
-
-      return ret;
-    }
   }
 
   /**
@@ -963,7 +960,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * The deleteModel options.
    */
-  public class DeleteModelOptions {
+  public class DeleteModelOptions extends IBMWatsonOptionsModel {
     private String model_id_serialized_name;
     /**
      * Gets the model_id_serialized_name.
@@ -978,6 +975,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private DeleteModelOptions(DeleteModelOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.model_id_serialized_name, 'model_id_serialized_name cannot be empty');
       model_id_serialized_name = builder.model_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -994,11 +992,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * DeleteModelOptions Builder.
    */
-  public class DeleteModelOptionsBuilder {
+  public class DeleteModelOptionsBuilder extends IBMWatsonOptionsModel {
     private String model_id_serialized_name;
 
     private DeleteModelOptionsBuilder(DeleteModelOptions deleteModelOptions) {
       model_id_serialized_name = deleteModelOptions.model_id_serialized_name;
+      this.requestHeaders.putAll(deleteModelOptions.requestHeaders());
     }
 
     /**
@@ -1033,6 +1032,18 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public DeleteModelOptionsBuilder modelId(String modelId) {
       this.model_id_serialized_name = modelId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteModelOptions builder
+     */
+    public DeleteModelOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
       return this;
     }
   }
@@ -2522,8 +2533,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * The listModels options.
    */
-  public class ListModelsOptions {
+  public class ListModelsOptions extends IBMWatsonOptionsModel {
     private ListModelsOptions(ListModelsOptionsBuilder builder) {
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -2540,9 +2552,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * ListModelsOptions Builder.
    */
-  public class ListModelsOptionsBuilder {
+  public class ListModelsOptionsBuilder extends IBMWatsonOptionsModel {
 
     private ListModelsOptionsBuilder(ListModelsOptions listModelsOptions) {
+      this.requestHeaders.putAll(listModelsOptions.requestHeaders());
     }
 
     /**
@@ -2559,12 +2572,24 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public ListModelsOptions build() {
       return new ListModelsOptions(this);
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListModelsOptions builder
+     */
+    public ListModelsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * Models available for Relations and Entities features.
    */
-  public class ListModelsResults extends IBMWatsonGenericModel {
+  public class ListModelsResults extends IBMWatsonResponseModel {
     private List<Model> models_serialized_name;
     /**
      * Gets the models_serialized_name.
@@ -2625,23 +2650,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       return this.getDynamicProperties();
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      MetadataOptions ret = (MetadataOptions) super.deserialize(jsonString, jsonMap, classType);
-
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
-
-      for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key)) {
-          ret.put(key, jsonMap.get(key));
-        }
-      }
-
-      return ret;
-    }
   }
 
   /**
