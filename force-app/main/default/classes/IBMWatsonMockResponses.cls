@@ -1935,10 +1935,17 @@ public class IBMWatsonMockResponses {
            '              "transcript": "string", ' +
            '              "confidence": 0, ' +
            '              "timestamps": [' +
-           '                "string"' +
+           '                [' +
+           '                  "thunderstorms", ' +
+           '                  1.49, ' +
+           '                  2.32 ' +
+           '                ]' +
            '              ], ' +
-           '              "word_confidence": [' +
-           '                "string"' +
+           '              "word_confidence": [ ' +
+           '                [' +
+           '                  "thunderstorms", ' +
+           '                  1' +
+           '                ]' +
            '              ]' +
            '            }' +
            '          ], ' +
@@ -2269,56 +2276,7 @@ public class IBMWatsonMockResponses {
   }
 
   public static String speechToTextRecognize() {
-    return '{' +
-     ' "results": [' +
-     '   {' +
-     '     "word_alternatives": [' +
-     '       {' +
-     '         "start_time": 0.09, ' +
-     '         "alternatives": [' +
-     '           {' +
-     '             "confidence": 1, ' +
-     '             "word": "latest"' +
-     '           }' +
-     '         ], ' +
-     '         "end_time": 0.6' +
-     '       }, ' +
-     '       {' +
-     '         "start_time": 0.85, ' +
-     '         "alternatives": [' +
-     '           {' +
-     '             "confidence": 0.9979, ' +
-     '             "word": "report"' +
-     '            }' +
-     '         ], ' +
-     '         "end_time": 1.52' +
-     '       }' +
-     '     ], ' +
-     '     "keywords_result": {}, ' +
-     '     "alternatives": [' +
-     '       {' +
-     '         "timestamps": [' +
-     '           {' +
-     '             "word": "the", ' +
-     '             "start_time": 0.03, ' +
-     '             "end_time": 0.09' +
-     '           }, ' +
-     '           {' +
-     '             "word": "report", ' +
-     '             "start_time": 0.85, ' +
-     '             "end_time": 1.52' +
-     '           }' +
-     '         ], ' +
-     '         "confidence": 0.983, ' +
-     '         "transcript": "the latest weather report "' +
-     '       }' +
-     '     ], ' +
-     '     "final": true' +
-     '   }' +
-     ' ], ' +
-     ' "result_index": 0' +
-     ' }' +
-     ' {' +
+    return ' {' +
      ' "results": [' +
      '   {' +
      '     "word_alternatives": [' +

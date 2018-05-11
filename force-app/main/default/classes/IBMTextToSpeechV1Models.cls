@@ -2,7 +2,7 @@ public class IBMTextToSpeechV1Models {
   /**
    * The addWord options.
    */
-  public class AddWordOptions {
+  public class AddWordOptions extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
     private String word_serialized_name;
     private String translation_serialized_name;
@@ -10,7 +10,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The GUID of the custom voice model that is to be updated. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -54,6 +54,7 @@ public class IBMTextToSpeechV1Models {
       word_serialized_name = builder.word_serialized_name;
       translation_serialized_name = builder.translation_serialized_name;
       part_of_speech_serialized_name = builder.part_of_speech_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -70,7 +71,7 @@ public class IBMTextToSpeechV1Models {
   /**
    * AddWordOptions Builder.
    */
-  public class AddWordOptionsBuilder {
+  public class AddWordOptionsBuilder extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
     private String word_serialized_name;
     private String translation_serialized_name;
@@ -81,6 +82,7 @@ public class IBMTextToSpeechV1Models {
       word_serialized_name = addWordOptions.word_serialized_name;
       translation_serialized_name = addWordOptions.translation_serialized_name;
       part_of_speech_serialized_name = addWordOptions.part_of_speech_serialized_name;
+      this.requestHeaders.putAll(addWordOptions.requestHeaders());
     }
 
     /**
@@ -164,18 +166,30 @@ public class IBMTextToSpeechV1Models {
       this.part_of_speech_serialized_name = translation.getPartOfSpeech();
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the AddWordOptions builder
+     */
+    public AddWordOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The addWords options.
    */
-  public class AddWordsOptions {
+  public class AddWordsOptions extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
     private List<Word> words_serialized_name;
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The GUID of the custom voice model that is to be updated. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -185,7 +199,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the words_serialized_name.
      *
-     * An array of words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
+     * **When adding words to a custom voice model,** an array of `Word` objects that provides one or more words that are to be added or updated for the custom voice model and the translation for each specified word. **When listing words from a custom voice model,** an array of `Word` objects that lists the words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
      *
      * @return the words_serialized_name
      */
@@ -196,6 +210,7 @@ public class IBMTextToSpeechV1Models {
       IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
       customization_id_serialized_name = builder.customization_id_serialized_name;
       words_serialized_name = builder.words_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -212,13 +227,14 @@ public class IBMTextToSpeechV1Models {
   /**
    * AddWordsOptions Builder.
    */
-  public class AddWordsOptionsBuilder {
+  public class AddWordsOptionsBuilder extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
     private List<Word> words_serialized_name;
 
     private AddWordsOptionsBuilder(AddWordsOptions addWordsOptions) {
       customization_id_serialized_name = addWordsOptions.customization_id_serialized_name;
       words_serialized_name = addWordsOptions.words_serialized_name;
+      this.requestHeaders.putAll(addWordsOptions.requestHeaders());
     }
 
     /**
@@ -293,12 +309,24 @@ public class IBMTextToSpeechV1Models {
       this.words_serialized_name = words.getWords();
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the AddWordsOptions builder
+     */
+    public AddWordsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The createVoiceModel options.
    */
-  public class CreateVoiceModelOptions {
+  public class CreateVoiceModelOptions extends IBMWatsonOptionsModel {
     private String name_serialized_name;
     private String language_serialized_name;
     private String description_serialized_name;
@@ -337,6 +365,7 @@ public class IBMTextToSpeechV1Models {
       name_serialized_name = builder.name_serialized_name;
       language_serialized_name = builder.language_serialized_name;
       description_serialized_name = builder.description_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -353,7 +382,7 @@ public class IBMTextToSpeechV1Models {
   /**
    * CreateVoiceModelOptions Builder.
    */
-  public class CreateVoiceModelOptionsBuilder {
+  public class CreateVoiceModelOptionsBuilder extends IBMWatsonOptionsModel {
     private String name_serialized_name;
     private String language_serialized_name;
     private String description_serialized_name;
@@ -362,6 +391,7 @@ public class IBMTextToSpeechV1Models {
       name_serialized_name = createVoiceModelOptions.name_serialized_name;
       language_serialized_name = createVoiceModelOptions.language_serialized_name;
       description_serialized_name = createVoiceModelOptions.description_serialized_name;
+      this.requestHeaders.putAll(createVoiceModelOptions.requestHeaders());
     }
 
     /**
@@ -420,17 +450,29 @@ public class IBMTextToSpeechV1Models {
       this.description_serialized_name = description;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the CreateVoiceModelOptions builder
+     */
+    public CreateVoiceModelOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The deleteVoiceModel options.
    */
-  public class DeleteVoiceModelOptions {
+  public class DeleteVoiceModelOptions extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The GUID of the custom voice model that is to be deleted. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -440,6 +482,7 @@ public class IBMTextToSpeechV1Models {
     private DeleteVoiceModelOptions(DeleteVoiceModelOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
       customization_id_serialized_name = builder.customization_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -456,11 +499,12 @@ public class IBMTextToSpeechV1Models {
   /**
    * DeleteVoiceModelOptions Builder.
    */
-  public class DeleteVoiceModelOptionsBuilder {
+  public class DeleteVoiceModelOptionsBuilder extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
 
     private DeleteVoiceModelOptionsBuilder(DeleteVoiceModelOptions deleteVoiceModelOptions) {
       customization_id_serialized_name = deleteVoiceModelOptions.customization_id_serialized_name;
+      this.requestHeaders.putAll(deleteVoiceModelOptions.requestHeaders());
     }
 
     /**
@@ -497,18 +541,30 @@ public class IBMTextToSpeechV1Models {
       this.customization_id_serialized_name = customizationId;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteVoiceModelOptions builder
+     */
+    public DeleteVoiceModelOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The deleteWord options.
    */
-  public class DeleteWordOptions {
+  public class DeleteWordOptions extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
     private String word_serialized_name;
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The GUID of the custom voice model from which to delete a word. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -530,6 +586,7 @@ public class IBMTextToSpeechV1Models {
       IBMWatsonValidator.notEmpty(builder.word_serialized_name, 'word_serialized_name cannot be empty');
       customization_id_serialized_name = builder.customization_id_serialized_name;
       word_serialized_name = builder.word_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -546,13 +603,14 @@ public class IBMTextToSpeechV1Models {
   /**
    * DeleteWordOptions Builder.
    */
-  public class DeleteWordOptionsBuilder {
+  public class DeleteWordOptionsBuilder extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
     private String word_serialized_name;
 
     private DeleteWordOptionsBuilder(DeleteWordOptions deleteWordOptions) {
       customization_id_serialized_name = deleteWordOptions.customization_id_serialized_name;
       word_serialized_name = deleteWordOptions.word_serialized_name;
+      this.requestHeaders.putAll(deleteWordOptions.requestHeaders());
     }
 
     /**
@@ -602,12 +660,24 @@ public class IBMTextToSpeechV1Models {
       this.word_serialized_name = word;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteWordOptions builder
+     */
+    public DeleteWordOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The getPronunciation options.
    */
-  public class GetPronunciationOptions {
+  public class GetPronunciationOptions extends IBMWatsonOptionsModel {
     private String text_serialized_name;
     private String voice_serialized_name;
     private String format_serialized_name;
@@ -625,7 +695,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the voice_serialized_name.
      *
-     * A voice that specifies the language in which the pronunciation is to be returned. All voices for the same language (for example, `en-US`) return the same translation. Retrieve available voices with the `GET /v1/voices` method.
+     * A voice that specifies the language in which the pronunciation is to be returned. All voices for the same language (for example, `en-US`) return the same translation.
      *
      * @return the voice_serialized_name
      */
@@ -645,7 +715,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The GUID of a custom voice model for which the pronunciation is to be returned. The language of a specified custom model must match the language of the specified voice. If the word is not defined in the specified custom model, the service returns the default translation for the custom model's language. You must make the request with service credentials created for the instance of the service that owns the custom model. Omit the parameter to see the translation for the specified voice with no customization.
+     * The customization ID (GUID) of a custom voice model for which the pronunciation is to be returned. The language of a specified custom model must match the language of the specified voice. If the word is not defined in the specified custom model, the service returns the default translation for the custom model's language. You must make the request with service credentials created for the instance of the service that owns the custom model. Omit the parameter to see the translation for the specified voice with no customization.
      *
      * @return the customization_id_serialized_name
      */
@@ -658,6 +728,7 @@ public class IBMTextToSpeechV1Models {
       voice_serialized_name = builder.voice_serialized_name;
       format_serialized_name = builder.format_serialized_name;
       customization_id_serialized_name = builder.customization_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -674,7 +745,7 @@ public class IBMTextToSpeechV1Models {
   /**
    * GetPronunciationOptions Builder.
    */
-  public class GetPronunciationOptionsBuilder {
+  public class GetPronunciationOptionsBuilder extends IBMWatsonOptionsModel {
     private String text_serialized_name;
     private String voice_serialized_name;
     private String format_serialized_name;
@@ -685,6 +756,7 @@ public class IBMTextToSpeechV1Models {
       voice_serialized_name = getPronunciationOptions.voice_serialized_name;
       format_serialized_name = getPronunciationOptions.format_serialized_name;
       customization_id_serialized_name = getPronunciationOptions.customization_id_serialized_name;
+      this.requestHeaders.putAll(getPronunciationOptions.requestHeaders());
     }
 
     /**
@@ -754,17 +826,29 @@ public class IBMTextToSpeechV1Models {
       this.customization_id_serialized_name = customizationId;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetPronunciationOptions builder
+     */
+    public GetPronunciationOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The getVoiceModel options.
    */
-  public class GetVoiceModelOptions {
+  public class GetVoiceModelOptions extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The GUID of the custom voice model that is to be queried. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -774,6 +858,7 @@ public class IBMTextToSpeechV1Models {
     private GetVoiceModelOptions(GetVoiceModelOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
       customization_id_serialized_name = builder.customization_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -790,11 +875,12 @@ public class IBMTextToSpeechV1Models {
   /**
    * GetVoiceModelOptions Builder.
    */
-  public class GetVoiceModelOptionsBuilder {
+  public class GetVoiceModelOptionsBuilder extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
 
     private GetVoiceModelOptionsBuilder(GetVoiceModelOptions getVoiceModelOptions) {
       customization_id_serialized_name = getVoiceModelOptions.customization_id_serialized_name;
+      this.requestHeaders.putAll(getVoiceModelOptions.requestHeaders());
     }
 
     /**
@@ -831,18 +917,30 @@ public class IBMTextToSpeechV1Models {
       this.customization_id_serialized_name = customizationId;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetVoiceModelOptions builder
+     */
+    public GetVoiceModelOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The getVoice options.
    */
-  public class GetVoiceOptions {
+  public class GetVoiceOptions extends IBMWatsonOptionsModel {
     private String voice_serialized_name;
     private String customization_id_serialized_name;
     /**
      * Gets the voice_serialized_name.
      *
-     * The voice for which information is to be returned. Retrieve available voices with the `GET /v1/voices` method.
+     * The voice for which information is to be returned.
      *
      * @return the voice_serialized_name
      */
@@ -852,7 +950,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The GUID of a custom voice model for which information is to be returned. You must make the request with service credentials created for the instance of the service that owns the custom model. Omit the parameter to see information about the specified voice with no customization.
+     * The customization ID (GUID) of a custom voice model for which information is to be returned. You must make the request with service credentials created for the instance of the service that owns the custom model. Omit the parameter to see information about the specified voice with no customization.
      *
      * @return the customization_id_serialized_name
      */
@@ -863,6 +961,7 @@ public class IBMTextToSpeechV1Models {
       IBMWatsonValidator.notEmpty(builder.voice_serialized_name, 'voice_serialized_name cannot be empty');
       voice_serialized_name = builder.voice_serialized_name;
       customization_id_serialized_name = builder.customization_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -879,13 +978,14 @@ public class IBMTextToSpeechV1Models {
   /**
    * GetVoiceOptions Builder.
    */
-  public class GetVoiceOptionsBuilder {
+  public class GetVoiceOptionsBuilder extends IBMWatsonOptionsModel {
     private String voice_serialized_name;
     private String customization_id_serialized_name;
 
     private GetVoiceOptionsBuilder(GetVoiceOptions getVoiceOptions) {
       voice_serialized_name = getVoiceOptions.voice_serialized_name;
       customization_id_serialized_name = getVoiceOptions.customization_id_serialized_name;
+      this.requestHeaders.putAll(getVoiceOptions.requestHeaders());
     }
 
     /**
@@ -933,18 +1033,30 @@ public class IBMTextToSpeechV1Models {
       this.customization_id_serialized_name = customizationId;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetVoiceOptions builder
+     */
+    public GetVoiceOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The getWord options.
    */
-  public class GetWordOptions {
+  public class GetWordOptions extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
     private String word_serialized_name;
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The GUID of the custom voice model from which to query a word. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -966,6 +1078,7 @@ public class IBMTextToSpeechV1Models {
       IBMWatsonValidator.notEmpty(builder.word_serialized_name, 'word_serialized_name cannot be empty');
       customization_id_serialized_name = builder.customization_id_serialized_name;
       word_serialized_name = builder.word_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -982,13 +1095,14 @@ public class IBMTextToSpeechV1Models {
   /**
    * GetWordOptions Builder.
    */
-  public class GetWordOptionsBuilder {
+  public class GetWordOptionsBuilder extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
     private String word_serialized_name;
 
     private GetWordOptionsBuilder(GetWordOptions getWordOptions) {
       customization_id_serialized_name = getWordOptions.customization_id_serialized_name;
       word_serialized_name = getWordOptions.word_serialized_name;
+      this.requestHeaders.putAll(getWordOptions.requestHeaders());
     }
 
     /**
@@ -1038,12 +1152,24 @@ public class IBMTextToSpeechV1Models {
       this.word_serialized_name = word;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetWordOptions builder
+     */
+    public GetWordOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The listVoiceModels options.
    */
-  public class ListVoiceModelsOptions {
+  public class ListVoiceModelsOptions extends IBMWatsonOptionsModel {
     private String language_serialized_name;
     /**
      * Gets the language_serialized_name.
@@ -1057,6 +1183,7 @@ public class IBMTextToSpeechV1Models {
     }
     private ListVoiceModelsOptions(ListVoiceModelsOptionsBuilder builder) {
       language_serialized_name = builder.language_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -1073,11 +1200,12 @@ public class IBMTextToSpeechV1Models {
   /**
    * ListVoiceModelsOptions Builder.
    */
-  public class ListVoiceModelsOptionsBuilder {
+  public class ListVoiceModelsOptionsBuilder extends IBMWatsonOptionsModel {
     private String language_serialized_name;
 
     private ListVoiceModelsOptionsBuilder(ListVoiceModelsOptions listVoiceModelsOptions) {
       language_serialized_name = listVoiceModelsOptions.language_serialized_name;
+      this.requestHeaders.putAll(listVoiceModelsOptions.requestHeaders());
     }
 
     /**
@@ -1105,13 +1233,26 @@ public class IBMTextToSpeechV1Models {
       this.language_serialized_name = language;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListVoiceModelsOptions builder
+     */
+    public ListVoiceModelsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The listVoices options.
    */
-  public class ListVoicesOptions {
+  public class ListVoicesOptions extends IBMWatsonOptionsModel {
     private ListVoicesOptions(ListVoicesOptionsBuilder builder) {
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -1128,9 +1269,10 @@ public class IBMTextToSpeechV1Models {
   /**
    * ListVoicesOptions Builder.
    */
-  public class ListVoicesOptionsBuilder {
+  public class ListVoicesOptionsBuilder extends IBMWatsonOptionsModel {
 
     private ListVoicesOptionsBuilder(ListVoicesOptions listVoicesOptions) {
+      this.requestHeaders.putAll(listVoicesOptions.requestHeaders());
     }
 
     /**
@@ -1147,17 +1289,29 @@ public class IBMTextToSpeechV1Models {
     public ListVoicesOptions build() {
       return new ListVoicesOptions(this);
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListVoicesOptions builder
+     */
+    public ListVoicesOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * The listWords options.
    */
-  public class ListWordsOptions {
+  public class ListWordsOptions extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The GUID of the custom voice model that is to be queried. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -1167,6 +1321,7 @@ public class IBMTextToSpeechV1Models {
     private ListWordsOptions(ListWordsOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
       customization_id_serialized_name = builder.customization_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -1183,11 +1338,12 @@ public class IBMTextToSpeechV1Models {
   /**
    * ListWordsOptions Builder.
    */
-  public class ListWordsOptionsBuilder {
+  public class ListWordsOptionsBuilder extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
 
     private ListWordsOptionsBuilder(ListWordsOptions listWordsOptions) {
       customization_id_serialized_name = listWordsOptions.customization_id_serialized_name;
+      this.requestHeaders.putAll(listWordsOptions.requestHeaders());
     }
 
     /**
@@ -1224,12 +1380,24 @@ public class IBMTextToSpeechV1Models {
       this.customization_id_serialized_name = customizationId;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListWordsOptions builder
+     */
+    public ListWordsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * Pronunciation.
    */
-  public class Pronunciation extends IBMWatsonGenericModel {
+  public class Pronunciation extends IBMWatsonResponseModel {
     private String pronunciation_serialized_name;
     /**
      * Gets the pronunciation_serialized_name.
@@ -1324,7 +1492,7 @@ public class IBMTextToSpeechV1Models {
   /**
    * The synthesize options.
    */
-  public class SynthesizeOptions {
+  public class SynthesizeOptions extends IBMWatsonOptionsModel {
     private String text_serialized_name;
     private String accept_serialized_name;
     private String voice_serialized_name;
@@ -1352,7 +1520,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the voice_serialized_name.
      *
-     * The voice to use for synthesis. Retrieve available voices with the `GET /v1/voices` method.
+     * The voice to use for synthesis.
      *
      * @return the voice_serialized_name
      */
@@ -1362,7 +1530,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The GUID of a custom voice model to use for the synthesis. If a custom voice model is specified, it is guaranteed to work only if it matches the language of the indicated voice. You must make the request with service credentials created for the instance of the service that owns the custom model. Omit the parameter to use the specified voice with no customization.
+     * The customization ID (GUID) of a custom voice model to use for the synthesis. If a custom voice model is specified, it is guaranteed to work only if it matches the language of the indicated voice. You must make the request with service credentials created for the instance of the service that owns the custom model. Omit the parameter to use the specified voice with no customization.
      *
      * @return the customization_id_serialized_name
      */
@@ -1375,6 +1543,7 @@ public class IBMTextToSpeechV1Models {
       accept_serialized_name = builder.accept_serialized_name;
       voice_serialized_name = builder.voice_serialized_name;
       customization_id_serialized_name = builder.customization_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -1391,7 +1560,7 @@ public class IBMTextToSpeechV1Models {
   /**
    * SynthesizeOptions Builder.
    */
-  public class SynthesizeOptionsBuilder {
+  public class SynthesizeOptionsBuilder extends IBMWatsonOptionsModel {
     private String text_serialized_name;
     private String accept_serialized_name;
     private String voice_serialized_name;
@@ -1402,6 +1571,7 @@ public class IBMTextToSpeechV1Models {
       accept_serialized_name = synthesizeOptions.accept_serialized_name;
       voice_serialized_name = synthesizeOptions.voice_serialized_name;
       customization_id_serialized_name = synthesizeOptions.customization_id_serialized_name;
+      this.requestHeaders.putAll(synthesizeOptions.requestHeaders());
     }
 
     /**
@@ -1471,12 +1641,24 @@ public class IBMTextToSpeechV1Models {
       this.customization_id_serialized_name = customizationId;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the SynthesizeOptions builder
+     */
+    public SynthesizeOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * Translation.
    */
-  public class Translation extends IBMWatsonGenericModel {
+  public class Translation extends IBMWatsonResponseModel {
     private String translation_serialized_name;
     private String part_of_speech_serialized_name;
     /**
@@ -1534,7 +1716,7 @@ public class IBMTextToSpeechV1Models {
   /**
    * The updateVoiceModel options.
    */
-  public class UpdateVoiceModelOptions {
+  public class UpdateVoiceModelOptions extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
     private String name_serialized_name;
     private String description_serialized_name;
@@ -1542,7 +1724,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The GUID of the custom voice model that is to be updated. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -1572,7 +1754,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the words_serialized_name.
      *
-     * An array of words and their translations that are to be added or updated for the custom voice model. Pass an empty array to make no additions or updates.
+     * An array of `Word` objects that provides the words and their translations that are to be added or updated for the custom voice model. Pass an empty array to make no additions or updates.
      *
      * @return the words_serialized_name
      */
@@ -1585,6 +1767,7 @@ public class IBMTextToSpeechV1Models {
       name_serialized_name = builder.name_serialized_name;
       description_serialized_name = builder.description_serialized_name;
       words_serialized_name = builder.words_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -1601,7 +1784,7 @@ public class IBMTextToSpeechV1Models {
   /**
    * UpdateVoiceModelOptions Builder.
    */
-  public class UpdateVoiceModelOptionsBuilder {
+  public class UpdateVoiceModelOptionsBuilder extends IBMWatsonOptionsModel {
     private String customization_id_serialized_name;
     private String name_serialized_name;
     private String description_serialized_name;
@@ -1612,6 +1795,7 @@ public class IBMTextToSpeechV1Models {
       name_serialized_name = updateVoiceModelOptions.name_serialized_name;
       description_serialized_name = updateVoiceModelOptions.description_serialized_name;
       words_serialized_name = updateVoiceModelOptions.words_serialized_name;
+      this.requestHeaders.putAll(updateVoiceModelOptions.requestHeaders());
     }
 
     /**
@@ -1697,12 +1881,24 @@ public class IBMTextToSpeechV1Models {
       this.words_serialized_name = words;
       return this;
     }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the UpdateVoiceModelOptions builder
+     */
+    public UpdateVoiceModelOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**
    * Voice.
    */
-  public class Voice extends IBMWatsonGenericModel {
+  public class Voice extends IBMWatsonResponseModel {
     private String url_serialized_name;
     private String gender_serialized_name;
     private String name_serialized_name;
@@ -1894,7 +2090,7 @@ public class IBMTextToSpeechV1Models {
   /**
    * VoiceModel.
    */
-  public class VoiceModel extends IBMWatsonGenericModel {
+  public class VoiceModel extends IBMWatsonResponseModel {
     private String customization_id_serialized_name;
     private String name_serialized_name;
     private String language_serialized_name;
@@ -1983,7 +2179,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the words_serialized_name.
      *
-     * An array of words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words. **Note:** This field is returned only when you list information about a specific custom voice model.
+     * An array of `Word` objects that lists the words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words. **Note:** This field is returned only when you list information about a specific custom voice model.
      *
      * @return the words_serialized_name
      */
@@ -2091,7 +2287,7 @@ public class IBMTextToSpeechV1Models {
   /**
    * VoiceModels.
    */
-  public class VoiceModels extends IBMWatsonGenericModel {
+  public class VoiceModels extends IBMWatsonResponseModel {
     private List<VoiceModel> customizations_serialized_name;
     /**
      * Gets the customizations_serialized_name.
@@ -2141,7 +2337,7 @@ public class IBMTextToSpeechV1Models {
   /**
    * Voices.
    */
-  public class Voices extends IBMWatsonGenericModel {
+  public class Voices extends IBMWatsonResponseModel {
     private List<Voice> voices_serialized_name;
     /**
      * Gets the voices_serialized_name.
@@ -2270,12 +2466,12 @@ public class IBMTextToSpeechV1Models {
   /**
    * Words.
    */
-  public class Words extends IBMWatsonGenericModel {
+  public class Words extends IBMWatsonResponseModel {
     private List<Word> words_serialized_name;
     /**
      * Gets the words_serialized_name.
      *
-     * An array of words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
+     * **When adding words to a custom voice model,** an array of `Word` objects that provides one or more words that are to be added or updated for the custom voice model and the translation for each specified word. **When listing words from a custom voice model,** an array of `Word` objects that lists the words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
      *
      * @return the words_serialized_name
      */

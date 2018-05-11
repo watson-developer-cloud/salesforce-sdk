@@ -275,7 +275,7 @@ public class IBMToneAnalyzerV3Models {
   /**
    * ToneAnalysis.
    */
-  public class ToneAnalysis extends IBMWatsonGenericModel {
+  public class ToneAnalysis extends IBMWatsonResponseModel {
     private DocumentAnalysis document_tone_serialized_name;
     private List<SentenceAnalysis> sentences_tone_serialized_name;
     /**
@@ -442,7 +442,7 @@ public class IBMToneAnalyzerV3Models {
   /**
    * The toneChat options.
    */
-  public class ToneChatOptions {
+  public class ToneChatOptions extends IBMWatsonOptionsModel {
     private List<Utterance> utterances_serialized_name;
     private String content_language_serialized_name;
     private String accept_language_serialized_name;
@@ -459,7 +459,7 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the content_language_serialized_name.
      *
-     * The language of the input text for the request: English or French. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do not submit content that contains both languages. You can specify any combination of languages for `Content-Language` and `Accept-Language`. * **`2017-09-21`:** Accepts `en` or `fr`. * **`2016-05-19`:** Accepts only `en`.
+     * The language of the input text for the request: English or French. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do not submit content that contains both languages. You can use different languages for **Content-Language** and **Accept-Language**. * **`2017-09-21`:** Accepts `en` or `fr`. * **`2016-05-19`:** Accepts only `en`.
      *
      * @return the content_language_serialized_name
      */
@@ -469,7 +469,7 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the accept_language_serialized_name.
      *
-     * The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`.
+     * The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language** and **Accept-Language**.
      *
      * @return the accept_language_serialized_name
      */
@@ -481,6 +481,7 @@ public class IBMToneAnalyzerV3Models {
       utterances_serialized_name = builder.utterances_serialized_name;
       content_language_serialized_name = builder.content_language_serialized_name;
       accept_language_serialized_name = builder.accept_language_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -497,7 +498,7 @@ public class IBMToneAnalyzerV3Models {
   /**
    * ToneChatOptions Builder.
    */
-  public class ToneChatOptionsBuilder {
+  public class ToneChatOptionsBuilder extends IBMWatsonOptionsModel {
     private List<Utterance> utterances_serialized_name;
     private String content_language_serialized_name;
     private String accept_language_serialized_name;
@@ -506,6 +507,7 @@ public class IBMToneAnalyzerV3Models {
       utterances_serialized_name = toneChatOptions.utterances_serialized_name;
       content_language_serialized_name = toneChatOptions.content_language_serialized_name;
       accept_language_serialized_name = toneChatOptions.accept_language_serialized_name;
+      this.requestHeaders.putAll(toneChatOptions.requestHeaders());
     }
 
     /**
@@ -578,6 +580,18 @@ public class IBMToneAnalyzerV3Models {
      */
     public ToneChatOptionsBuilder acceptLanguage(String acceptLanguage) {
       this.accept_language_serialized_name = acceptLanguage;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ToneChatOptions builder
+     */
+    public ToneChatOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
       return this;
     }
   }
@@ -741,7 +755,7 @@ public class IBMToneAnalyzerV3Models {
   /**
    * The tone options.
    */
-  public class ToneOptions {
+  public class ToneOptions extends IBMWatsonOptionsModel {
     private ToneInput tone_input_serialized_name;
     private String body_serialized_name;
     private String content_type_serialized_name;
@@ -802,7 +816,7 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the content_language_serialized_name.
      *
-     * The language of the input text for the request: English or French. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do not submit content that contains both languages. You can specify any combination of languages for `Content-Language` and `Accept-Language`. * **`2017-09-21`:** Accepts `en` or `fr`. * **`2016-05-19`:** Accepts only `en`.
+     * The language of the input text for the request: English or French. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do not submit content that contains both languages. You can use different languages for **Content-Language** and **Accept-Language**. * **`2017-09-21`:** Accepts `en` or `fr`. * **`2016-05-19`:** Accepts only `en`.
      *
      * @return the content_language_serialized_name
      */
@@ -812,7 +826,7 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the accept_language_serialized_name.
      *
-     * The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. You can specify any combination of languages for `Content-Language` and `Accept-Language`.
+     * The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language** and **Accept-Language**.
      *
      * @return the accept_language_serialized_name
      */
@@ -828,6 +842,7 @@ public class IBMToneAnalyzerV3Models {
       tones_serialized_name = builder.tones_serialized_name;
       content_language_serialized_name = builder.content_language_serialized_name;
       accept_language_serialized_name = builder.accept_language_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
     }
 
     /**
@@ -844,7 +859,7 @@ public class IBMToneAnalyzerV3Models {
   /**
    * ToneOptions Builder.
    */
-  public class ToneOptionsBuilder {
+  public class ToneOptionsBuilder extends IBMWatsonOptionsModel {
     private ToneInput tone_input_serialized_name;
     private String body_serialized_name;
     private String content_type_serialized_name;
@@ -861,6 +876,7 @@ public class IBMToneAnalyzerV3Models {
       tones_serialized_name = toneOptions.tones_serialized_name;
       content_language_serialized_name = toneOptions.content_language_serialized_name;
       accept_language_serialized_name = toneOptions.accept_language_serialized_name;
+      this.requestHeaders.putAll(toneOptions.requestHeaders());
     }
 
     /**
@@ -971,6 +987,18 @@ public class IBMToneAnalyzerV3Models {
     public ToneOptionsBuilder html(String html) {
       this.body_serialized_name = html;
       this.content_type_serialized_name = IBMWatsonHttpMediaType.TEXT_HTML;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ToneOptions builder
+     */
+    public ToneOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
       return this;
     }
   }
@@ -1159,7 +1187,7 @@ public class IBMToneAnalyzerV3Models {
   /**
    * UtteranceAnalyses.
    */
-  public class UtteranceAnalyses extends IBMWatsonGenericModel {
+  public class UtteranceAnalyses extends IBMWatsonResponseModel {
     private List<UtteranceAnalysis> utterances_tone_serialized_name;
     private String warning_serialized_name;
     /**

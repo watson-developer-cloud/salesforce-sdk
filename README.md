@@ -283,6 +283,29 @@ System.debug(intent);
 
 The manner of instantiating and using services should be consistent no matter which you decide to use, which should make it easy to explore the many capabilities Watson services have to offer.
 
+## Request and Response Headers
+
+The SDK supports sending custom headers with any request as well as parsing headers that are returned by the service.
+
+To send request headers, simply add them as a property when building up your `Options` model. Here's an example in the Discovery service:
+
+```java
+IBMDiscoveryV1Models.QueryOptions options = new
+  IBMDiscoveryV1Models.QueryOptionsBuilder()
+  .environmentId('<environment_id>')
+  .collectionId('<collection_id>')
+  .naturalLanguageQuery('Articles about the Boston Celtics')
+  .addHeader('Custon-Header', 'custom_value') // custom header added here
+  .build();
+```
+
+To get headers returned by the service, call the `getHeaders()` method on a response model. This is what it looks like to get the headers returned after making the above call:
+
+```java
+IBMDiscoveryV1Models.QueryResponse response = discovery.query(options);
+Map<String, String> responseHeaders = response.getHeaders();
+```
+
 ## Using the SDK with Lightning
 
 The Watson Salesforce SDK models are Lightning-ready, meaning that you can access model properties through Javascript for your Lightning apps. Everything should work as expected, but it's important to note that there are two ways to go about dealing with dynamic models through Javascript. These models are ones which may have properties unknown until runtime and which extend `IBMWatsonDynamicModel`.

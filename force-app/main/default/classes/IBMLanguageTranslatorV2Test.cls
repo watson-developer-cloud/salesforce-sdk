@@ -23,6 +23,7 @@ private class IBMLanguageTranslatorV2Test {
       .modelId(modelId)
       .text(new List<String>{'Hello'})
       .addText('World')
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMLanguageTranslatorV2Models.TranslationResult translate =
       service.translate(translateOptions);
@@ -48,6 +49,7 @@ private class IBMLanguageTranslatorV2Test {
     IBMLanguageTranslatorV2Models.IdentifyOptions identifyOptions =
       new IBMLanguageTranslatorV2Models.IdentifyOptionsBuilder()
       .text('sample')
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMLanguageTranslatorV2Models.IdentifiedLanguages identify =
       service.identify(identifyOptions);
@@ -65,6 +67,7 @@ private class IBMLanguageTranslatorV2Test {
     IBMLanguageTranslatorV2 service = new IBMLanguageTranslatorV2();
     IBMLanguageTranslatorV2Models.ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptions =
       new IBMLanguageTranslatorV2Models.ListIdentifiableLanguagesOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMLanguageTranslatorV2Models.IdentifiableLanguages listIdentifiableLanguages =
       service.listIdentifiableLanguages(listIdentifiableLanguagesOptions);
@@ -127,6 +130,7 @@ private class IBMLanguageTranslatorV2Test {
       .parallelCorpusFilename('parallelCorpus.txt')
       .monolingualCorpus(monolingualCorpus)
       .monolingualCorpusFilename('monolingualCorpus.txt')
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMLanguageTranslatorV2Models.TranslationModel TranslationModel =
       service.createModel(createModelOptions);
@@ -169,6 +173,7 @@ private class IBMLanguageTranslatorV2Test {
     IBMLanguageTranslatorV2Models.DeleteModelOptions deleteModelOptions =
       new IBMLanguageTranslatorV2Models.DeleteModelOptionsBuilder()
       .modelId('3e7dfdbe-f757-4150-afee-458e71eb93fb')
+      .addHeader('Test-Header', 'test_value')
       .build();
     service.deleteModel(deleteModelOptions);
     IBMLanguageTranslatorV2Models.DeleteModelOptionsBuilder newDeleteModelOptionsBuilder1 =
@@ -190,6 +195,7 @@ private class IBMLanguageTranslatorV2Test {
     IBMLanguageTranslatorV2Models.GetModelOptions getModelOptions =
       new IBMLanguageTranslatorV2Models.GetModelOptionsBuilder()
       .modelId('3e7dfdbe-f757-4150-afee-458e71eb93fb')
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMLanguageTranslatorV2Models.TranslationModel getModel =
       service.getModel(getModelOptions);
@@ -214,6 +220,7 @@ private class IBMLanguageTranslatorV2Test {
       .source('en')
       .target('es')
       .defaultField(false)
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMLanguageTranslatorV2Models.TranslationModels listModels =
       service.listModels(listModelsOptions);

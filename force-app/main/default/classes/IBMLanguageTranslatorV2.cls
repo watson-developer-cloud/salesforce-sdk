@@ -54,6 +54,12 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
   public IBMLanguageTranslatorV2Models.TranslationResult translate(IBMLanguageTranslatorV2Models.TranslateOptions translateOptions) {
     IBMWatsonValidator.notNull(translateOptions, 'translateOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v2/translate');
+    Map<String, String> requestHeaders = (translateOptions != null) ? translateOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', translateOptions.text());
     if (translateOptions.modelId() != null) {
@@ -81,6 +87,12 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
   public IBMLanguageTranslatorV2Models.IdentifiedLanguages identify(IBMLanguageTranslatorV2Models.IdentifyOptions identifyOptions) {
     IBMWatsonValidator.notNull(identifyOptions, 'identifyOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v2/identify');
+    Map<String, String> requestHeaders = (identifyOptions != null) ? identifyOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
     builder.bodyContent(identifyOptions.text(), 'text/plain');
 
     return (IBMLanguageTranslatorV2Models.IdentifiedLanguages) createServiceCall(builder.build(), IBMLanguageTranslatorV2Models.IdentifiedLanguages.class);
@@ -96,6 +108,12 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
    */
   public IBMLanguageTranslatorV2Models.IdentifiableLanguages listIdentifiableLanguages(IBMLanguageTranslatorV2Models.ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v2/identifiable_languages');
+    Map<String, String> requestHeaders = (listIdentifiableLanguagesOptions != null) ? listIdentifiableLanguagesOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
 
     return (IBMLanguageTranslatorV2Models.IdentifiableLanguages) createServiceCall(builder.build(), IBMLanguageTranslatorV2Models.IdentifiableLanguages.class);
   }
@@ -112,6 +130,12 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
     IBMWatsonValidator.notNull(createModelOptions, 'createModelOptions cannot be null');
     IBMWatsonValidator.isTrue((createModelOptions.forcedGlossary() != null) || (createModelOptions.parallelCorpus() != null) || (createModelOptions.monolingualCorpus() != null), 'At least one of forced_glossary, parallel_corpus, or monolingual_corpus must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v2/models');
+    Map<String, String> requestHeaders = (createModelOptions != null) ? createModelOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
     if (createModelOptions.baseModelId() != null) {
       builder.query('base_model_id', createModelOptions.baseModelId());
     }
@@ -149,6 +173,12 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
   public void deleteModel(IBMLanguageTranslatorV2Models.DeleteModelOptions deleteModelOptions) {
     IBMWatsonValidator.notNull(deleteModelOptions, 'deleteModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v2/models/{0}', new String[]{ deleteModelOptions.modelId() }));
+    Map<String, String> requestHeaders = (deleteModelOptions != null) ? deleteModelOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
 
     createServiceCall(builder.build(), null);
   }
@@ -164,6 +194,12 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
   public IBMLanguageTranslatorV2Models.TranslationModel getModel(IBMLanguageTranslatorV2Models.GetModelOptions getModelOptions) {
     IBMWatsonValidator.notNull(getModelOptions, 'getModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v2/models/{0}', new String[]{ getModelOptions.modelId() }));
+    Map<String, String> requestHeaders = (getModelOptions != null) ? getModelOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
 
     return (IBMLanguageTranslatorV2Models.TranslationModel) createServiceCall(builder.build(), IBMLanguageTranslatorV2Models.TranslationModel.class);
   }
@@ -178,6 +214,12 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
    */
   public IBMLanguageTranslatorV2Models.TranslationModels listModels(IBMLanguageTranslatorV2Models.ListModelsOptions listModelsOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v2/models');
+    Map<String, String> requestHeaders = (listModelsOptions != null) ? listModelsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
     if (listModelsOptions != null && listModelsOptions.source() != null) {
       builder.query('source', listModelsOptions.source());
     }

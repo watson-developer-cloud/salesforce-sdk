@@ -53,6 +53,12 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
   public IBMNaturalLanguageClassifierV1Models.Classification classify(IBMNaturalLanguageClassifierV1Models.ClassifyOptions classifyOptions) {
     IBMWatsonValidator.notNull(classifyOptions, 'classifyOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/classifiers/{0}/classify', new String[]{ classifyOptions.classifierId() }));
+    Map<String, String> requestHeaders = (classifyOptions != null) ? classifyOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', classifyOptions.text());
     builder.bodyJson(JSON.serialize(contentJson, true));
@@ -71,6 +77,12 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
   public IBMNaturalLanguageClassifierV1Models.ClassificationCollection classifyCollection(IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptions classifyCollectionOptions) {
     IBMWatsonValidator.notNull(classifyCollectionOptions, 'classifyCollectionOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/classifiers/{0}/classify_collection', new String[]{ classifyCollectionOptions.classifierId() }));
+    Map<String, String> requestHeaders = (classifyCollectionOptions != null) ? classifyCollectionOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('collection', classifyCollectionOptions.collection());
     builder.bodyJson(JSON.serialize(contentJson, true));
@@ -89,6 +101,12 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
   public IBMNaturalLanguageClassifierV1Models.Classifier createClassifier(IBMNaturalLanguageClassifierV1Models.CreateClassifierOptions createClassifierOptions) {
     IBMWatsonValidator.notNull(createClassifierOptions, 'createClassifierOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/classifiers');
+    Map<String, String> requestHeaders = (createClassifierOptions != null) ? createClassifierOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     IBMWatsonRequestBody metadataFileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingMetadata(), 'application/json');
@@ -110,6 +128,12 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
   public void deleteClassifier(IBMNaturalLanguageClassifierV1Models.DeleteClassifierOptions deleteClassifierOptions) {
     IBMWatsonValidator.notNull(deleteClassifierOptions, 'deleteClassifierOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/classifiers/{0}', new String[]{ deleteClassifierOptions.classifierId() }));
+    Map<String, String> requestHeaders = (deleteClassifierOptions != null) ? deleteClassifierOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
 
     createServiceCall(builder.build(), null);
   }
@@ -125,6 +149,12 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
   public IBMNaturalLanguageClassifierV1Models.Classifier getClassifier(IBMNaturalLanguageClassifierV1Models.GetClassifierOptions getClassifierOptions) {
     IBMWatsonValidator.notNull(getClassifierOptions, 'getClassifierOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/classifiers/{0}', new String[]{ getClassifierOptions.classifierId() }));
+    Map<String, String> requestHeaders = (getClassifierOptions != null) ? getClassifierOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
 
     return (IBMNaturalLanguageClassifierV1Models.Classifier) createServiceCall(builder.build(), IBMNaturalLanguageClassifierV1Models.Classifier.class);
   }
@@ -139,6 +169,12 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
    */
   public IBMNaturalLanguageClassifierV1Models.ClassifierList listClassifiers(IBMNaturalLanguageClassifierV1Models.ListClassifiersOptions listClassifiersOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/classifiers');
+    Map<String, String> requestHeaders = (listClassifiersOptions != null) ? listClassifiersOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
 
     return (IBMNaturalLanguageClassifierV1Models.ClassifierList) createServiceCall(builder.build(), IBMNaturalLanguageClassifierV1Models.ClassifierList.class);
   }

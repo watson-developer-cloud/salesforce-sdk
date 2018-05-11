@@ -5,6 +5,9 @@
  * service to learn the tone of their customers' communications and to respond to each customer appropriately, or to
  * understand and improve their customer conversations.
  *
+ * **Note:** Request logging is disabled for the Tone Analyzer service. The service neither logs nor retains data from
+ * requests and responses, regardless of whether the `X-Watson-Learning-Opt-Out` request header is set.
+ *
  * @version V3
  * @see <a href="http://www.ibm.com/watson/developercloud/tone-analyzer.html">Tone Analyzer</a>
  */
@@ -75,6 +78,12 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
     if (toneOptions.acceptLanguage() != null) {
       builder.addHeader('Accept-Language', toneOptions.acceptLanguage());
     }
+    Map<String, String> requestHeaders = (toneOptions != null) ? toneOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
     builder.query('version', versionDate);
     if (toneOptions.sentences() != null) {
       builder.query('sentences', String.valueOf(toneOptions.sentences()));
@@ -108,6 +117,12 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
     }
     if (toneChatOptions.acceptLanguage() != null) {
       builder.addHeader('Accept-Language', toneChatOptions.acceptLanguage());
+    }
+    Map<String, String> requestHeaders = (toneChatOptions != null) ? toneChatOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();

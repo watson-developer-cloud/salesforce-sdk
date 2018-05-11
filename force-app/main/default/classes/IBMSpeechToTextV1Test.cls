@@ -52,6 +52,7 @@ private class IBMSpeechToTextV1Test {
     speechToText.setEndPoint(URL);
     IBMSpeechToTextV1Models.GetModelOptions getModelOptions = new IBMSpeechToTextV1Models.GetModelOptionsBuilder('en-US_NarrowbandModel')
       .modelId('en-US_NarrowbandModel')
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.SpeechModel speechModel = speechToText.getModel(getModelOptions);
     System.assertEquals(speechModel.getName(), 'en-US_NarrowbandModel');
@@ -77,6 +78,7 @@ private class IBMSpeechToTextV1Test {
       speechToText.setUsernameAndPassword(username, password);
     }
     IBMSpeechToTextV1Models.ListModelsOptions listModelsOptions = new IBMSpeechToTextV1Models.ListModelsOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.SpeechModels speechModels = speechToText.listModels(listModelsOptions);
     System.assertEquals(speechModels.getModels()[0].getName(), 'en-US_NarrowbandModel');
@@ -123,7 +125,8 @@ private class IBMSpeechToTextV1Test {
       .profanityFilter(true)
       .smartFormatting(true)
       .speakerLabels(true)
-      .version('version')
+      .baseModelVersion('version')
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.RecognitionJob createJob = speechToText.createJob(createJobOptions);
     System.assertEquals(createJob.getUrl(), 'string');
@@ -135,8 +138,6 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(createJob.getresults()[0].getresults()[0].getFinal(),true);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getTranscript(), 'string');
     System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getConfidence(),0);
-    System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getTimestamps()[0], 'string');
-    System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getWordConfidence()[0], 'string');
     System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getNormalizedText(), 'string');
     System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getStartTime(),0);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getEndTime(),0);
@@ -170,6 +171,7 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.CheckJobOptionsBuilder CheckJobOptionsBuilder = new IBMSpeechToTextV1Models.CheckJobOptionsBuilder();
     IBMSpeechToTextV1Models.CheckJobOptions checkJobOptions = new IBMSpeechToTextV1Models.CheckJobOptionsBuilder('56d09f2c-e020-11e7-9ee3-33bf91161141')
       .id('56d09f2c-e020-11e7-9ee3-33bf91161141')
+      .addHeader('Test-Header', 'test_value')
       .build();
     checkJobOptions = checkJobOptions.newBuilder().build();
     IBMSpeechToTextV1Models.RecognitionJob checkJob = speechToText.checkJob(checkJobOptions);
@@ -188,6 +190,7 @@ private class IBMSpeechToTextV1Test {
       speechToText.setUsernameAndPassword(username, password);
     }
     IBMSpeechToTextV1Models.CheckJobsOptions checkJobsOptions = new IBMSpeechToTextV1Models.CheckJobsOptionsBuilder()
+      .addHeader('Test-Header', 'test_value')
       .build();
     checkJobsOptions = checkJobsOptions.newBuilder().build();
     IBMSpeechToTextV1Models.RecognitionJobs checkJobs = speechToText.checkJobs(checkJobsOptions);
@@ -207,6 +210,7 @@ private class IBMSpeechToTextV1Test {
     }
     IBMSpeechToTextV1Models.DeleteJobOptions deleteJobOptions = new IBMSpeechToTextV1Models.DeleteJobOptionsBuilder('56d09f2c-e020-11e7-9ee3-33bf91161141')
       .id('56d09f2c-e020-11e7-9ee3-33bf91161141')
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.deleteJob(deleteJobOptions);
     deleteJobOptions = deleteJobOptions.newBuilder().build();
@@ -226,6 +230,7 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.RegisterCallbackOptions registerCallbackOptions = new IBMSpeechToTextV1Models.RegisterCallbackOptionsBuilder(callbackBaseURL)
       .callbackUrl(callbackBaseURL)
       .userSecret('UserSecretTest')
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.RegisterStatus registerCallback = speechToText.registerCallback(registerCallbackOptions);
     System.assertEquals(registerCallback.getStatus(), 'created');
@@ -245,6 +250,7 @@ private class IBMSpeechToTextV1Test {
       speechToText.setUsernameAndPassword(username, password);
     }
     IBMSpeechToTextV1Models.UnregisterCallbackOptions unregisterCallbackOptions = new IBMSpeechToTextV1Models.UnregisterCallbackOptionsBuilder(callbackBaseURL)
+      .addHeader('Test-Header', 'test_value')
       .build();
     unregisterCallbackOptions = unregisterCallbackOptions.newBuilder().build();
     speechToText.unregisterCallback(unregisterCallbackOptions);
@@ -268,6 +274,7 @@ private class IBMSpeechToTextV1Test {
       .baseModelName(baseModelName)
       .dialect('en-US')
       .description('model description')
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.LanguageModel languageModel = speechToText.createLanguageModel(createLanguageModelOptions);
     System.assertEquals(languageModel.getCustomizationId(), '74f4807e-b5ff-4866-824e-6bba1a84fe96');
@@ -303,6 +310,7 @@ private class IBMSpeechToTextV1Test {
       .word('tornado')
       .soundsLike(new List<String>{'tornado', 'hurricane'})
       .displayAs('tornado')
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.addWord(addWordOptions);
     addWordOptions = addWordOptions.newBuilder().build();
@@ -327,6 +335,7 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.AddWordsOptions addWordsOptions = new IBMSpeechToTextV1Models.AddWordsOptionsBuilder()
       .customizationId(customizationId)
       .words(new List<IBMSpeechToTextV1Models.CustomWord>{ customWord })
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.addWords(addWordsOptions);
     addWordsOptions = addWordsOptions.newBuilder().build();
@@ -352,6 +361,7 @@ private class IBMSpeechToTextV1Test {
       .name(name)
       .baseModelName(baseModelName)
       .description('test')
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.AcousticModel AcousticModel = speechToText.createAcousticModel(createAcousticModelOptions);
     createAcousticModelOptions = createAcousticModelOptions.newBuilder().build();
@@ -370,6 +380,7 @@ private class IBMSpeechToTextV1Test {
     }
     IBMSpeechToTextV1Models.DeleteLanguageModelOptions deleteLanguageModelOptions = new IBMSpeechToTextV1Models.DeleteLanguageModelOptionsBuilder('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
       .customizationId('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.deleteLanguageModel(deleteLanguageModelOptions);
     deleteLanguageModelOptions = deleteLanguageModelOptions.newBuilder().build();
@@ -402,6 +413,7 @@ private class IBMSpeechToTextV1Test {
       .audioName(audioName)
       .containedContentType('audio/mp3')
       .allowOverwrite(false)
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.addAudio(addAudioOptions);
     addAudioOptions = addAudioOptions.newBuilder().build();
@@ -420,6 +432,7 @@ private class IBMSpeechToTextV1Test {
     }
     IBMSpeechToTextV1Models.GetLanguageModelOptions getLanguageModelOptions = new IBMSpeechToTextV1Models.GetLanguageModelOptionsBuilder('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
       .customizationId('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.LanguageModel languageModel = speechToText.getLanguageModel(getLanguageModelOptions);
     System.assertEquals(languageModel.getCustomizationId(), 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5');
@@ -449,6 +462,7 @@ private class IBMSpeechToTextV1Test {
     }
     IBMSpeechToTextV1Models.ListLanguageModelsOptions listLanguageModelsOptions = new IBMSpeechToTextV1Models.ListLanguageModelsOptionsBuilder()
       .language('en-US')
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.LanguageModels languageModels = speechToText.listLanguageModels(listLanguageModelsOptions);
     System.assertEquals(languageModels.getCustomizations()[0].getCustomizationId(), 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5');
@@ -468,6 +482,7 @@ private class IBMSpeechToTextV1Test {
     }
     IBMSpeechToTextV1Models.ResetLanguageModelOptions resetLanguageModelOptions = new IBMSpeechToTextV1Models.ResetLanguageModelOptionsBuilder('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
       .customizationId('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.resetLanguageModel(resetLanguageModelOptions);
     resetLanguageModelOptions = resetLanguageModelOptions.newBuilder().build();
@@ -487,6 +502,7 @@ private class IBMSpeechToTextV1Test {
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.TrainLanguageModelOptions trainLanguageModelOptions = new IBMSpeechToTextV1Models.TrainLanguageModelOptionsBuilder(customizationId)
       .customizationId(customizationId)
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.trainLanguageModel(trainLanguageModelOptions);
     Test.stopTest();
@@ -505,6 +521,7 @@ private class IBMSpeechToTextV1Test {
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.UpgradeLanguageModelOptions upgradeLanguageModelOptions = new IBMSpeechToTextV1Models.UpgradeLanguageModelOptionsBuilder(customizationId)
       .customizationId(customizationId)
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.upgradeLanguageModel(upgradeLanguageModelOptions);
     Test.stopTest();
@@ -535,6 +552,7 @@ private class IBMSpeechToTextV1Test {
       .corpusFile(corpusFile)
       .corpusFilename('corpora.txt')
       .corpusFileContentType('text/plain')
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.addCorpus(addCorpusOptions);
     addCorpusOptions = addCorpusOptions.newBuilder().build();
@@ -556,6 +574,7 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.DeleteCorpusOptions deleteCorpusOptions = new IBMSpeechToTextV1Models.DeleteCorpusOptionsBuilder(customizationId, corpusName)
       .customizationId(customizationId)
       .corpusName(corpusName)
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.deleteCorpus(deleteCorpusOptions);
     deleteCorpusOptions = deleteCorpusOptions.newBuilder().build();
@@ -577,6 +596,7 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.GetCorpusOptions getCorpusOptions = new IBMSpeechToTextV1Models.GetCorpusOptionsBuilder(customizationId, corpusName)
       .customizationId(customizationId)
       .corpusName(corpusName)
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.Corpus corpus = speechToText.getCorpus(getCorpusOptions);
     System.assertEquals(corpus.getError(), 'none');
@@ -600,6 +620,7 @@ private class IBMSpeechToTextV1Test {
     }
     IBMSpeechToTextV1Models.ListCorporaOptions listCorporaOptions = new IBMSpeechToTextV1Models.ListCorporaOptionsBuilder('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
       .customizationId('d0bdc477-59e6-4e45-86f3-1a9a39664eb5')
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.Corpora corpora = speechToText.listCorpora(listCorporaOptions);
     System.assertEquals(corpora.getCorpora()[0].getName(), 'custom_corpus');
@@ -622,6 +643,7 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.DeleteWordOptions deleteWordOptions = new IBMSpeechToTextV1Models.DeleteWordOptionsBuilder(customizationId, wordName)
       .customizationId(customizationId)
       .wordName(wordName)
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.deleteWord(deleteWordOptions);
     deleteWordOptions = deleteWordOptions.newBuilder().build();
@@ -643,6 +665,7 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.GetWordOptions getWordOptions = new IBMSpeechToTextV1Models.GetWordOptionsBuilder(customizationId, wordName)
       .customizationId(customizationId)
       .wordName(wordName)
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.Word wordResult =  speechToText.getWord(getWordOptions);
     System.assertEquals(wordResult.getDisplayAs(), 'words matter');
@@ -672,6 +695,7 @@ private class IBMSpeechToTextV1Test {
       .customizationId(customizationId)
       .wordType(wordType)
       .sortField(sortField)
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.Words wordList = speechToText.listWords(listWordsOptions);
     System.assertEquals(wordList.getWords()[0].getDisplayAs(), 'words matter');
@@ -692,6 +716,7 @@ private class IBMSpeechToTextV1Test {
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.DeleteAcousticModelOptions deleteAcousticModelOptions = new IBMSpeechToTextV1Models.DeleteAcousticModelOptionsBuilder(customizationId)
       .customizationId(customizationId)
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.deleteAcousticModel(deleteAcousticModelOptions);
     deleteAcousticModelOptions = deleteAcousticModelOptions.newBuilder().build();
@@ -711,6 +736,7 @@ private class IBMSpeechToTextV1Test {
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.GetAcousticModelOptions getAcousticModelOptions = new IBMSpeechToTextV1Models.GetAcousticModelOptionsBuilder(customizationId)
       .customizationId(customizationId)
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.AcousticModel acousticModel = speechToText.getAcousticModel(getAcousticModelOptions);
     System.assertEquals(acousticModel.getCustomizationId(), '825485d7-af3f-44e7-b1ea-76130dec8a61');
@@ -739,6 +765,7 @@ private class IBMSpeechToTextV1Test {
     }
     IBMSpeechToTextV1Models.ListAcousticModelsOptions listAcousticModelsOptions = new IBMSpeechToTextV1Models.ListAcousticModelsOptionsBuilder()
       .language('en-US')
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.AcousticModels acousticModels = speechToText.listAcousticModels(listAcousticModelsOptions);
     System.assertEquals(acousticModels.getCustomizations()[0].getCustomizationId(), '825485d7-af3f-44e7-b1ea-76130dec8a61');
@@ -759,6 +786,7 @@ private class IBMSpeechToTextV1Test {
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.ResetAcousticModelOptions resetAcousticModelOptions = new IBMSpeechToTextV1Models.ResetAcousticModelOptionsBuilder(customizationId)
       .customizationId(customizationId)
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.resetAcousticModel(resetAcousticModelOptions);
     resetAcousticModelOptions = resetAcousticModelOptions.newBuilder().build();
@@ -779,6 +807,7 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.TrainAcousticModelOptions trainAcousticModelOptions = new IBMSpeechToTextV1Models.TrainAcousticModelOptionsBuilder(customizationId)
       .customizationId(customizationId)
       .customLanguageModelId('custom_language')
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.trainAcousticModel(trainAcousticModelOptions);
     Test.stopTest();
@@ -799,6 +828,7 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.DeleteAudioOptions deleteAudioOptions = new IBMSpeechToTextV1Models.DeleteAudioOptionsBuilder(customizationId, audioName)
       .customizationId(customizationId)
       .audioName(audioName)
+      .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.deleteAudio(deleteAudioOptions);
     deleteAudioOptions = deleteAudioOptions.newBuilder().build();
@@ -820,6 +850,7 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.GetAudioOptions getAudioOptions = new IBMSpeechToTextV1Models.GetAudioOptionsBuilder(customizationId, audioName)
       .customizationId(customizationId)
       .audioName(audioName)
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.AudioListing audioListing = speechToText.getAudio(getAudioOptions);
 //    System.assertEquals(audioListing.getTotalMinutesOfAudio(),0);
@@ -852,6 +883,7 @@ private class IBMSpeechToTextV1Test {
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.ListAudioOptions listAudioOptions = new IBMSpeechToTextV1Models.ListAudioOptionsBuilder(customizationId)
       .customizationId(customizationId)
+      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.AudioResources AudioResources = speechToText.listAudio(listAudioOptions);
     listAudioOptions = listAudioOptions.newBuilder().build();
@@ -896,12 +928,13 @@ private class IBMSpeechToTextV1Test {
       .customizationId(customizationId)
       .speakerLabels(true)
       .baseModelVersion('version')
+      .addHeader('Test-Header', 'test_value')
       .build();
-    IBMSpeechToTextV1Models.SpeechResults speechResults = speechToText.recognize(recognizeOptions);
-    System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getStartTime(),0.09);
-    System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getEndTime(),0.6);
+    IBMSpeechToTextV1Models.SpeechRecognitionResults speechResults = speechToText.recognize(recognizeOptions);
+    System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getStartTime(),0.14);
+    System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getEndTime(),0.28);
     System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getAlternatives()[0].getConfidence(),1);
-    System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getAlternatives()[0].getWord(), 'latest');
+    System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getAlternatives()[0].getWord(), 'a');
     recognizeOptions = recognizeOptions.newBuilder().build();
     Test.stopTest();
   }
