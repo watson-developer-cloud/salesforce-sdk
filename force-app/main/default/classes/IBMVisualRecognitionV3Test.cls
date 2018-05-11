@@ -15,6 +15,7 @@ private class IBMVisualRecognitionV3Test {
     visualRecognition.setEndPoint('https://gateway-a.watsonplatform.net/visual-recognition/api');
     IBMVisualRecognitionV3Models.ClassifyOptions options = new IBMVisualRecognitionV3Models.ClassifyOptionsBuilder()
       .url('http://www.indya101.com/gallery/Actors_TV/Sumeet_Sachdev/2011/12/27/Sumeet_Sachdevjpg_3_arnem.jpg')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -58,6 +59,7 @@ private class IBMVisualRecognitionV3Test {
       .imagesFile(testfile)
       .imagesFilename(att.Name)
       .imagesFileContentType(att.ContentType)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -94,6 +96,7 @@ private class IBMVisualRecognitionV3Test {
       .imagesFile(testfile)
       .imagesFilename(att.Name)
       .imagesFileContentType(att.ContentType)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -142,6 +145,7 @@ private class IBMVisualRecognitionV3Test {
       .addClass('test', testfile)
       .negativeExamples(testfile)
       .negativeExamplesFilename('test')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -179,6 +183,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     IBMVisualRecognitionV3Models.GetClassifierOptions options = new IBMVisualRecognitionV3Models.GetClassifierOptionsBuilder('classifierId')
       .classifierId('classifierId')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -214,6 +219,7 @@ private class IBMVisualRecognitionV3Test {
       .addClass('test', testfile)
       .negativeExamples(testfile)
       .negativeExamplesFilename('test')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -246,6 +252,7 @@ private class IBMVisualRecognitionV3Test {
       .build();
     IBMVisualRecognitionV3Models.DeleteClassifierOptions options = new IBMVisualRecognitionV3Models.DeleteClassifierOptionsBuilder('classifierId')
       .classifierId('classifierId')
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
@@ -265,6 +272,7 @@ private class IBMVisualRecognitionV3Test {
     visualRecognition.setEndPoint(NAMED_CREDENTIALS);
     IBMVisualRecognitionV3Models.ListClassifiersOptions options = new IBMVisualRecognitionV3Models.ListClassifiersOptionsBuilder()
       .verbose(true)
+      .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
