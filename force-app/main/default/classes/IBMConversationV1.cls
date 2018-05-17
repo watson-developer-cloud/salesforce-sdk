@@ -39,20 +39,6 @@ public class IBMConversationV1 extends IBMWatsonService {
     setUsernameAndPassword(username, password);
   }
 
-  /**
-   * Instantiates a new `IBMConversationV1` with IAM. Note that if the access token is specified in the
-   * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
-   * one expires or after receiving a 401 error from the service. Failing to do so will result in authentication errors
-   * after this token expires.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param iamOptions the options for authenticating through IAM
-   */
-  public IBMConversationV1(String versionDate, IBMWatsonIAMOptions iamOptions) {
-    this(versionDate);
-    setIamCredentials(iamOptions);
-  }
 
   /**
    * Get response to user input.
@@ -1481,6 +1467,31 @@ public class IBMConversationV1 extends IBMWatsonService {
     }
 
     return (IBMConversationV1Models.LogCollection) createServiceCall(builder.build(), IBMConversationV1Models.LogCollection.class);
+  }
+
+  /**
+   * Delete labeled data.
+   *
+   * Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with the customer ID.   You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data. For more information about personal data and customer IDs, see [Information security](https://console.bluemix.net/docs/services/conversation/information-security.html).
+   *
+   * @param deleteUserDataOptions the {@link IBMConversationV1Models.DeleteUserDataOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteUserData(IBMConversationV1Models.DeleteUserDataOptions deleteUserDataOptions) {
+    IBMWatsonValidator.notNull(deleteUserDataOptions, 'deleteUserDataOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + '/v1/user_data');
+    Map<String, String> requestHeaders = (deleteUserDataOptions != null) ? deleteUserDataOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (deleteUserDataOptions.customerId() != null) {
+      builder.query('customer_id', deleteUserDataOptions.customerId());
+    }
+
+    createServiceCall(builder.build(), null);
   }
 
 }
