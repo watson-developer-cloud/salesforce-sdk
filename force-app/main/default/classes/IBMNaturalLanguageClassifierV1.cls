@@ -29,18 +29,6 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
     setUsernameAndPassword(username, password);
   }
 
-  /**
-   * Instantiates a new `IBMNaturalLanguageClassifierV1` with IAM. Note that if the access token is specified in the
-   * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
-   * one expires or after receiving a 401 error from the service. Failing to do so will result in authentication errors
-   * after this token expires.
-   *
-   * @param iamOptions the options for authenticating through IAM
-   */
-  public IBMNaturalLanguageClassifierV1(IBMWatsonIAMOptions iamOptions) {
-    this();
-    setIamCredentials(iamOptions);
-  }
 
   /**
    * Classify a phrase.
@@ -109,10 +97,10 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
     }
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    IBMWatsonRequestBody metadataFileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingMetadata(), 'application/json');
-    multipartBuilder.addFormDataPart('training_metadata', createClassifierOptions.trainingMetadataFilename(), metadataFileBody);
-    IBMWatsonRequestBody dataFileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingData(), 'text/csv');
-    multipartBuilder.addFormDataPart('training_data', createClassifierOptions.trainingDataFilename(), dataFileBody);
+    IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createClassifierOptions.metadata(), 'application/json');
+    multipartBuilder.addFormDataPart('training_metadata', createClassifierOptions.trainingMetadataFilename(), fileBody);
+    IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingData(), 'text/csv');
+    multipartBuilder.addFormDataPart('training_data', createClassifierOptions.trainingDataFilename(), fileBody);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
