@@ -52,20 +52,6 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     setUsernameAndPassword(username, password);
   }
 
-  /**
-   * Instantiates a new `IBMPersonalityInsightsV3` with IAM. Note that if the access token is specified in the
-   * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
-   * one expires or after receiving a 401 error from the service. Failing to do so will result in authentication errors
-   * after this token expires.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param iamOptions the options for authenticating through IAM
-   */
-  public IBMPersonalityInsightsV3(String versionDate, IBMWatsonIAMOptions iamOptions) {
-    this(versionDate);
-    setIamCredentials(iamOptions);
-  }
 
   /**
    * Get profile.
@@ -95,6 +81,9 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     if (profileOptions.rawScores() != null) {
       builder.query('raw_scores', String.valueOf(profileOptions.rawScores()));
     }
+    if (profileOptions.csvHeaders() != null) {
+      builder.query('csv_headers', String.valueOf(profileOptions.csvHeaders()));
+    }
     if (profileOptions.consumptionPreferences() != null) {
       builder.query('consumption_preferences', String.valueOf(profileOptions.consumptionPreferences()));
     }
@@ -116,10 +105,9 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    * @param profileOptions the {@link IBMPersonalityInsightsV3Models.ProfileOptions} containing the options for the call
    * @return the {@link IBMPersonalityInsightsV3Models.Profile} with the response
    */
-  public String getProfileAsCSV(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions, boolean includeHeaders) {
+  public IBMPersonalityInsightsV3Models.Profile profileAsCsv(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
-    builder.query('version', versionDate);
     builder.addHeader('Content-Type', profileOptions.contentType());
     if (profileOptions.contentLanguage() != null) {
       builder.addHeader('Content-Language', profileOptions.contentLanguage());
@@ -133,22 +121,24 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
+    builder.query('version', versionDate);
     if (profileOptions.rawScores() != null) {
       builder.query('raw_scores', String.valueOf(profileOptions.rawScores()));
+    }
+    if (profileOptions.csvHeaders() != null) {
+      builder.query('csv_headers', String.valueOf(profileOptions.csvHeaders()));
     }
     if (profileOptions.consumptionPreferences() != null) {
       builder.query('consumption_preferences', String.valueOf(profileOptions.consumptionPreferences()));
     }
     if (profileOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
       builder.bodyJson(JSON.serialize(profileOptions.content(), true));
-    } else {
+    }
+    else {
       builder.bodyContent(profileOptions.body(), profileOptions.contentType());
     }
 
-    builder.addHeader('Accept', IBMWatsonHttpMediaType.TEXT_CSV);
-    builder.query('csv_headers', String.valueOf(includeHeaders));
-
-    return String.valueOf(createServiceCall(builder.build(), String.class));
+    return (IBMPersonalityInsightsV3Models.Profile) createServiceCall(builder.build(), IBMPersonalityInsightsV3Models.Profile.class);
   }
 
 }
