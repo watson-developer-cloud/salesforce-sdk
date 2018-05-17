@@ -1638,4 +1638,29 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     Test.stopTest();
   }
+
+  static testMethod void testDeleteUserData() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
+    assistant.setUsernameAndPassword('username', 'password');
+
+    String customerId = 'salesforce_sdk_test_id';
+    IBMAssistantV1Models.DeleteUserDataOptions deleteOptions = new IBMAssistantV1Models.DeleteUserDataOptionsBuilder()
+      .customerId(customerId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+    //you can add more attributes using following builder method. This step is not necessary
+    deleteOptions = deleteOptions.newBuilder().build();
+    assistant.deleteUserData(deleteOptions);
+
+    Test.stopTest();
+  }
 }
