@@ -115,9 +115,9 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    *
    * @param profileOptions the {@link IBMPersonalityInsightsV3Models.ProfileOptions} containing the options for the call
    * @param includeHeaders whether to include headers in the response or not
-   * @return the {@link IBMPersonalityInsightsV3Models.Profile} with the response
+   * @return the String with the response
    */
-  public IBMPersonalityInsightsV3Models.Profile getProfileAsCSV(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions, Boolean includeHeaders) {
+  public String getProfileAsCSV(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions, Boolean includeHeaders) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
     builder.addHeader('Content-Type', profileOptions.contentType());
