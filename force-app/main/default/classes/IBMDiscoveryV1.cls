@@ -59,7 +59,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Create an environment.
    *
-   * Creates a new environment.  You can create only one environment per service instance. An attempt to create another environment results in an error.
+   * Creates a new environment for private data. An environment must be created before collections can be created.   **Note**: You can create only one environment for private data per service instance. An attempt to create another environment results in an error.
    *
    * @param createEnvironmentOptions the {@link IBMDiscoveryV1Models.CreateEnvironmentOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.Environment} with the response
@@ -1336,6 +1336,31 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.TrainingExample) createServiceCall(builder.build(), IBMDiscoveryV1Models.TrainingExample.class);
+  }
+
+  /**
+   * Delete labeled data.
+   *
+   * Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with the customer ID.   You associate a customer ID with data by passing the **X-Watson-Metadata** header with a request that passes data. For more information about personal data and customer IDs, see [Information security](https://console.bluemix.net/docs/services/discovery/information-security.html).
+   *
+   * @param deleteUserDataOptions the {@link IBMDiscoveryV1Models.DeleteUserDataOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteUserData(IBMDiscoveryV1Models.DeleteUserDataOptions deleteUserDataOptions) {
+    IBMWatsonValidator.notNull(deleteUserDataOptions, 'deleteUserDataOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + '/v1/user_data');
+    Map<String, String> requestHeaders = (deleteUserDataOptions != null) ? deleteUserDataOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (deleteUserDataOptions.customerId() != null) {
+      builder.query('customer_id', deleteUserDataOptions.customerId());
+    }
+
+    createServiceCall(builder.build(), null);
   }
 
 }

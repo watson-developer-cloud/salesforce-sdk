@@ -1,3 +1,4 @@
+@isTest
 /**
  * This class provide the mockresponses for unit tests.<br>
  * mock responses are copied from IBM Watson Api Explorer.
@@ -8,14 +9,14 @@ public class IBMWatsonMockResponses {
   public static String IBMNaturalLanguageClassifierClassifyURL = 
     IBMNaturalLanguageClassifierClassifyBaseURL + '/classify?text=How%20hot%20wil/10D41B-nlc-1';
     
-  public static String environment() {
+  public static testMethod String environment() {
     return '{"environment_id": "f822208e-e4c2-45f8-a0d6-c2be950fbcc8","name": "test_environment", ' +
                         '"description": "Test environment", "created": "2016-06-16T10:56:54.957Z", ' +
                           '"updated": "2017-05-16T13:56:54.957Z", "status": "active", "read_only": false, ' +
                           '"index_capacity": {"documents": {"indexed": 0, "maximum_allowed": 1000000}, ' +
                           '"disk_usage": {"used_bytes": 0, "maximum_allowed_bytes": 99345920}}}';
   }
-  public static String configuration() {
+  public static testMethod String configuration() {
     return  '{' +
             '  "configuration_id": "448e3545-51ca-4530-a03b-6ff282ceac2e", ' +
             '  "name": "IBM News", ' +
@@ -117,7 +118,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
 
-  public static String listConfigurationsResponse() {
+  public static testMethod String listConfigurationsResponse() {
     return '{' +
            ' "configurations": [' +
            '{' +
@@ -223,7 +224,7 @@ public class IBMWatsonMockResponses {
            '}';
   }
 
-   public static String listCollectionFieldsResponse() {
+   public static testMethod String listCollectionFieldsResponse() {
     return '{' +
               '  "fields": [' +
               '    {' +
@@ -246,7 +247,7 @@ public class IBMWatsonMockResponses {
               '}';
   }
 
-  public static String listEnvironmentsResponse() {
+  public static testMethod String listEnvironmentsResponse() {
     return '{' +
               '  "environments": [' +
               '    {' +
@@ -269,7 +270,7 @@ public class IBMWatsonMockResponses {
               '}';
   }
 
-   public static String collection() {
+   public static testMethod String collection() {
     return  '{' +
             '   "collection_id": "800e58e4-198d-45eb-be87-74e1d6df4e96", ' +
             '  "name": "test-collection", ' +
@@ -301,7 +302,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
 
-  public static String collectionTrained() {
+  public static testMethod String collectionTrained() {
     return  '{' +
             '  "collection_id": "800e58e4-198d-45eb-be87-74e1d6df4e96", ' +
             '  "name": "test-collection", ' +
@@ -333,7 +334,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
 
-  public static String listCollectionsResponse() {
+  public static testMethod String listCollectionsResponse() {
     return '{ "collections": [' +
            '   {' +
            '     "collection_id": "f1360220-ea2d-4271-9d62-89a910b13c37", ' +
@@ -349,7 +350,7 @@ public class IBMWatsonMockResponses {
            '}';
   }
 
-  public static String documentStatus() {
+  public static testMethod String documentStatus() {
     return '{' +
             '  "document_id": "f1360220-ea2d-4271-9d62-89a910b13c37", ' +
             '  "configuration_id": "e8b9d793-b163-452a-9373-bce07efb510b", ' +
@@ -374,7 +375,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
 
-  public static String queryResponse() {
+  public static testMethod String queryResponse() {
     return '{' +
             '  "matching_results": 24, ' +
             '  "results": [' +
@@ -396,7 +397,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
 
-  public static String queryNoticesResponse() {
+  public static testMethod String queryNoticesResponse() {
     return '{' +
             '  "matching_results": 24, ' +
             '  "results": [' +
@@ -433,7 +434,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
 
-   public static String trainingQuery() {
+   public static testMethod String trainingQuery() {
     return  '{' +
             '  "query_id": "string", ' +
             '  "natural_language_query": "string", ' +
@@ -448,7 +449,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
 
-  public static String trainingDataSet() {
+  public static testMethod String trainingDataSet() {
     return  '{ "queries": [{' +
             '  "query_id": "string", ' +
             '  "natural_language_query": "string", ' +
@@ -463,7 +464,7 @@ public class IBMWatsonMockResponses {
             '}]}';
   }
 
-  public static String trainingExample() {
+  public static testMethod String trainingExample() {
     return  '{' +
             '  "document_id": "string", ' +
             '  "cross_reference": "string", ' +
@@ -471,7 +472,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
 
-  public static String workspace() {
+  public static testMethod String workspace() {
     return '{' +
         '"name": "test_workspace", ' +
         '"created": "2015-12-06T23:53:59.153Z", ' +
@@ -487,7 +488,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String workspaceExport() {
+  public static testMethod String workspaceExport() {
     return '{' +
         '"name": "test_workspace", ' +
         '"description": "Description of test_workspace", ' +
@@ -544,7 +545,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String workspaceCollection() {
+  public static testMethod String workspaceCollection() {
     return '{' +
         '"workspaces": [' +
         '{' +
@@ -569,7 +570,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String value() {
+  public static testMethod String value() {
     return '{' +
         '"value": "Value of test_entity", ' +
         '"metadata": {' +
@@ -586,7 +587,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String valueCollection() {
+  public static testMethod String valueCollection() {
     return '{' +
         '"values": [' +
         '{' +
@@ -613,7 +614,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String messageResponse() {
+  public static testMethod String messageResponse() {
     return '{' +
         '"intents": [' +
         '{' +
@@ -665,7 +666,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String intent() {
+  public static testMethod String intent() {
     return '{' +
         '"intent": "test_intent", ' +
         '"created": "2015-12-06T23:53:59.153Z", ' +
@@ -674,7 +675,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String intentExport() {
+  public static testMethod String intentExport() {
     return '{' +
         '"intent": "test_intent", ' +
         '"created": "2015-12-06T23:53:59.153Z", ' +
@@ -690,7 +691,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String intentCollection() {
+  public static testMethod String intentCollection() {
     return '{' +
         '"intents": [' +
         '{' +
@@ -718,7 +719,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String example() {
+  public static testMethod String example() {
     return '{' +
         '"text": "Example of test_intent", ' +
         '"created": "2015-12-06T23:53:59.153Z", ' +
@@ -726,7 +727,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String exampleCollection() {
+  public static testMethod String exampleCollection() {
     return '{' +
         '"examples": [' +
         '{' +
@@ -744,7 +745,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String entity() {
+  public static testMethod String entity() {
     return '{' +
         '"entity": "test_entity", ' +
         '"description": "Description of test_entity", ' +
@@ -757,7 +758,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String entityExport() {
+  public static testMethod String entityExport() {
     return '{' +
         '"entity": "test_entity", ' +
         '"description": "Description of test_entity", ' +
@@ -786,7 +787,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String entityCollection() {
+  public static testMethod String entityCollection() {
     return '{' +
         '"entities": [' +
         '{' +
@@ -825,7 +826,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String synonym() {
+  public static testMethod String synonym() {
     return '{' +
         '"synonym": "Synonym for value of test_entity", ' +
         '"created": "2015-12-06T23:53:59.153Z", ' +
@@ -833,7 +834,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String synonymCollection() {
+  public static testMethod String synonymCollection() {
     return '{' +
         '"synonyms": [' +
         '{' +
@@ -851,7 +852,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String dialogNode() {
+  public static testMethod String dialogNode() {
     return '{' +
         '"dialog_node": "dialog_node", ' +
         '"description": "Description of dialog_node", ' +
@@ -895,7 +896,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String dialogNodeCollection() {
+  public static testMethod String dialogNodeCollection() {
     return '{' +
         '"dialog_nodes": [' +
         '{' +
@@ -946,7 +947,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String logCollection() {
+  public static testMethod String logCollection() {
     return '{' +
         '"logs": [' +
         '{' +
@@ -1014,7 +1015,7 @@ public class IBMWatsonMockResponses {
       '}';
   }
 
-  public static String counterexample() {
+  public static testMethod String counterexample() {
     return '{' +
         '"text": "Counterexample for test_workspace", ' +
         '"created": "2015-12-06T23:53:59.153Z", ' +
@@ -1022,7 +1023,7 @@ public class IBMWatsonMockResponses {
         '}';
   }
 
-  public static String counterexampleCollection() {
+  public static testMethod String counterexampleCollection() {
     return '{' +
         '"counterexamples": [' +
         '{' +
@@ -1039,14 +1040,14 @@ public class IBMWatsonMockResponses {
         '}' +
         '}';
   }
-  public static String documentAccepted() {
+  public static testMethod String documentAccepted() {
     return '{' +
             '"document_id": "f1360220-ea2d-4271-9d62-89a910b13c37", ' +
             '"status": "processing"' +
            '}';
   }
   
-  public static String testDocument() {
+  public static testMethod String testDocument() {
     return  '{' +
             '  "configuration_id": "e8b9d793-b163-452a-9373-bce07efb510b", ' +
             '  "status": "completed", ' +
@@ -1199,7 +1200,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
   
-  public static String Classify() {
+  public static testMethod String Classify() {
     return '{' +
     '  "classifier_id": "10D41B-nlc-1", ' +
     '  "url": "' +IBMNaturalLanguageClassifierClassifyURL+'", ' +
@@ -1218,7 +1219,7 @@ public class IBMWatsonMockResponses {
     '}';
   }
 
-  public static String ClassifyCollection() {
+  public static testMethod String ClassifyCollection() {
     return '{' +
     '  "classifier_id" : "10D41B-nlc-1",' +
     '  "url" : "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1",' +
@@ -1246,7 +1247,7 @@ public class IBMWatsonMockResponses {
     '}';
   }
   
-  public static String CreateClassifier() {
+  public static testMethod String CreateClassifier() {
     return '{' +
     '  "classifier_id": "10D41B-nlc-1", ' +
     '  "name": "My Classifier", ' +
@@ -1258,11 +1259,11 @@ public class IBMWatsonMockResponses {
     '}';
   }
   
-  public static String DeleteClassifier() {
+  public static testMethod String DeleteClassifier() {
     return '{}';
   }
 
-  public static String getClassifier() {
+  public static testMethod String getClassifier() {
     return '{' +
     '"classifier_id": "10D41B-nlc-1", ' +
     '"name": "My Classifier", ' +
@@ -1274,7 +1275,7 @@ public class IBMWatsonMockResponses {
     '}';
   }
   
-  public static String listClassifiers() {
+  public static testMethod String listClassifiers() {
     return '{' +
     '"classifiers": [' +
     '  {' +
@@ -1288,7 +1289,7 @@ public class IBMWatsonMockResponses {
     '}';
   }
   
-  public static String analysisResults() {
+  public static testMethod String analysisResults() {
     return  '{' +
             '  "entities": [' +
             '    {' +
@@ -1350,7 +1351,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
   
-   public static String listModelsResults() {
+   public static testMethod String listModelsResults() {
     return  '{' +
             '  "models": [' +
             '    {' +
@@ -1363,7 +1364,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
   
-  public static String profile() {
+  public static testMethod String profile() {
     return  '{' +
             '  "processed_language": "ar", ' +
             '  "word_count": 0, ' +
@@ -1436,7 +1437,7 @@ public class IBMWatsonMockResponses {
             '  ]' +
             '}';
   }
-  public static String toneAnalysis() {
+  public static testMethod String toneAnalysis() {
     return  '{' +
             ' "document_tone": {' +
             ' "tones": [' +
@@ -1492,7 +1493,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
   
-  public static String utteranceAnalyses() {
+  public static testMethod String utteranceAnalyses() {
     return  '{' +
             '  "utterances_tone": [' +
             '    {' +
@@ -1512,7 +1513,7 @@ public class IBMWatsonMockResponses {
             '}';
   }
   
-  public static String classifiedImages() {
+  public static testMethod String classifiedImages() {
     return  '{' +
                       '  "custom_classes": 0, ' +
                       '  "images_processed": 0, ' +
@@ -1549,7 +1550,7 @@ public class IBMWatsonMockResponses {
                       '}';
   }
   
-  public static String detectedFaces() {
+  public static testMethod String detectedFaces() {
     return  '{' +
                       '  "images_processed": 0, ' +
                       '  "images": [' +
@@ -1596,7 +1597,7 @@ public class IBMWatsonMockResponses {
                       '}';
   }
     
-  public static String classifiers() {
+  public static testMethod String classifiers() {
     return  '{' +
                       '  "classifiers": [' +
                       '    {' +
@@ -1615,7 +1616,7 @@ public class IBMWatsonMockResponses {
                       '  ]' +
                       '}';
   }
-  public static String classifier() {
+  public static testMethod String classifier() {
     return  '{' +
             '      "classifier_id": "string", ' +
             '      "name": "string", ' +
@@ -1631,17 +1632,17 @@ public class IBMWatsonMockResponses {
             '}';
   }
 
-  public static String CreateModel() {
+  public static testMethod String CreateModel() {
     return '{' +
            '  "model_id": "3e7dfdbe-f757-4150-afee-458e71eb93fb"' +
            '}';
   }
   
-  public static String DeleteModel() {
+  public static testMethod String DeleteModel() {
     return '{}';
   }
   
-  public static String GetModel() {
+  public static testMethod String GetModel() {
     return '{' +
            '  "models": [{' +
            '  "model_id ": "3e7dfdbe-f757-4150-afee-458e71eb93fb", ' +
@@ -1658,7 +1659,7 @@ public class IBMWatsonMockResponses {
            '}';
   }
   
-  public static String ListModels() {
+  public static testMethod String ListModels() {
     return '{' +
            '  "models": [{' +
            '  "model_id ": "3e7dfdbe-f757-4150-afee-458e71eb93fb", ' +
@@ -1675,7 +1676,7 @@ public class IBMWatsonMockResponses {
            '}';
   }
   
-  public static String ListIdentifiableLanguages() {
+  public static testMethod String ListIdentifiableLanguages() {
     return '{' +
            ' "languages": [' +
            '  {' +
@@ -1698,7 +1699,7 @@ public class IBMWatsonMockResponses {
            '}';
   }
   
-  public static String Translate() {
+  public static testMethod String Translate() {
     return '{' +
            ' "translations": [{' +
            ' "translation": "Hola"' +
@@ -1708,7 +1709,7 @@ public class IBMWatsonMockResponses {
            '}';
   }
   
-  public static String voices() {
+  public static testMethod String voices() {
     return '{' +
            ' "voices": [' +
            '   {' +
@@ -1743,7 +1744,7 @@ public class IBMWatsonMockResponses {
            '}';
   }
   
-  public static String voice() {
+  public static testMethod String voice() {
     return '{' +
            '     "url": "string", ' +
            '     "gender": "string", ' +
@@ -1774,13 +1775,13 @@ public class IBMWatsonMockResponses {
            '}';
   }
   
-  public static String pronunciation() {
+  public static testMethod String pronunciation() {
     return '{' +
            '  "pronunciation": "string"' +
            '}';
   }
   
-  public static String voiceModels() {
+  public static testMethod String voiceModels() {
     return '{' +
            '  "customizations": [' +
            '    {' +
@@ -1803,7 +1804,7 @@ public class IBMWatsonMockResponses {
            '}';
   }
   
-  public static String voiceModel() {
+  public static testMethod String voiceModel() {
     return '{' +
            '      "customization_id": "string", ' +
            '      "name": "string", ' +
@@ -1822,7 +1823,7 @@ public class IBMWatsonMockResponses {
            '}';
   }
   
-  public static String words() {
+  public static testMethod String words() {
     return '{' +
            '  "words": [' +
            '    {' +
@@ -1834,7 +1835,7 @@ public class IBMWatsonMockResponses {
            '}';
   }
   
-  public static String word() {
+  public static testMethod String word() {
     return '{' +
            '  "word": "string", ' +
            '  "translation": "string", ' +
@@ -1842,7 +1843,7 @@ public class IBMWatsonMockResponses {
            '}';
   }
 
-  public static String speechToTextListModels() {
+  public static testMethod String speechToTextListModels() {
     return '{' +
       ' "models": [' +
       '  {' +
@@ -1893,7 +1894,7 @@ public class IBMWatsonMockResponses {
       '}';
   }
   
-  public static String speechToTextGetModel() {
+  public static testMethod String speechToTextGetModel() {
     return '{' +
      ' "name": "en-US_NarrowbandModel", ' +
      ' "language": "en-US", ' +
@@ -1908,7 +1909,7 @@ public class IBMWatsonMockResponses {
      ' }';
   }
   
-  public static String speechToTextCreateJob() {
+  public static testMethod String speechToTextCreateJob() {
     return '{' +
       ' "created": "2017-12-13T16:11:55.815Z", ' +
       ' "id": "56d09f2c-e020-11e7-9ee3-33bf91161141", ' +
@@ -1917,7 +1918,7 @@ public class IBMWatsonMockResponses {
     '}';
   }
   
-  public static String speechToTextCheckJobCreate() {
+  public static testMethod String speechToTextCheckJobCreate() {
     return '{' +
            '  "id": "string", ' +
            '  "status": "waiting", ' +
@@ -1994,7 +1995,7 @@ public class IBMWatsonMockResponses {
            '}';
   }
   
-  public static String speechToTextCheckJob() {
+  public static testMethod String speechToTextCheckJob() {
     return '{' +
       ' "created": "2017-12-13T16:11:55.815Z", ' +
       ' "id": "56d09f2c-e020-11e7-9ee3-33bf91161141", ' +
@@ -2003,7 +2004,7 @@ public class IBMWatsonMockResponses {
       '}';
   }
   
-  public static String speechToTextCheckJobs() {
+  public static testMethod String speechToTextCheckJobs() {
     return '{' +
       ' "recognitions": [' +
       ' {' +
@@ -2016,22 +2017,22 @@ public class IBMWatsonMockResponses {
     ' }';
   }
   
-  public static String speechToTextDeleteJob() {
+  public static testMethod String speechToTextDeleteJob() {
     return '{}';
   }
   
-  public static String speechToTextRegisterCallback() {
+  public static testMethod String speechToTextRegisterCallback() {
     return '{' +
     ' "status": "created", ' +
     ' "url": "https://ibmdf17-watson-dxhub.my.salesforce.com/"' +
     '}';
   }
   
-  public static String speechToTextUnRegisterCallback() {
+  public static testMethod String speechToTextUnRegisterCallback() {
     return '{}';
   }
   
-  public static String speechToTextListLanguageModels() {
+  public static testMethod String speechToTextListLanguageModels() {
     return '{' +
       ' "customizations": [' +
       ' {' +
@@ -2050,7 +2051,7 @@ public class IBMWatsonMockResponses {
       '}';
   }
   
-  public static String speechToTextGetLanguageModel() {
+  public static testMethod String speechToTextGetLanguageModel() {
     return '{' +
       ' "owner": "952e2069-9ece-48d8-96c9-0206b4473819", ' +
       ' "base_model_name": "en-US_BroadbandModel", ' +
@@ -2067,23 +2068,23 @@ public class IBMWatsonMockResponses {
       ' }';
   }
   
-  public static String speechToTextTrainLanguageModel() {
+  public static testMethod String speechToTextTrainLanguageModel() {
     return '{}';
   }
   
-  public static String speechToTextUpgradeLanguageModel() {
+  public static testMethod String speechToTextUpgradeLanguageModel() {
     return '{}';
   }
   
-  public static String speechToTextResetLanguageModel() {
+  public static testMethod String speechToTextResetLanguageModel() {
     return '{}';
   }
 
-  public static String speechToTextDeleteLanguageModel() {
+  public static testMethod String speechToTextDeleteLanguageModel() {
     return '{}';
   }
 
-  public static String speechToTextListCorpora() {
+  public static testMethod String speechToTextListCorpora() {
     return '{' +
       ' "corpora": [' +
       ' {' +
@@ -2096,7 +2097,7 @@ public class IBMWatsonMockResponses {
       '}';
   }
 
-  public static String speechToTextGetCorpus() {
+  public static testMethod String speechToTextGetCorpus() {
     return '{' +
       ' "out_of_vocabulary_words": 3, ' +
       ' "total_words": 160, ' +
@@ -2106,19 +2107,19 @@ public class IBMWatsonMockResponses {
       '}';
   }
 
-  public static String speechToTextDeleteCorpus() {
+  public static testMethod String speechToTextDeleteCorpus() {
     return '{}';
   }
   
-  public static String speechToTextAddCorpus() {
+  public static testMethod String speechToTextAddCorpus() {
     return '{}';
   }
 
-  public static String speechToTextDeleteWord() {
+  public static testMethod String speechToTextDeleteWord() {
     return '{}';
   }
 
-  public static String speechToTextGetWord() {
+  public static testMethod String speechToTextGetWord() {
     return '{' +
       ' "display_as": "words matter", ' +
       ' "sounds_like": [' +
@@ -2135,7 +2136,7 @@ public class IBMWatsonMockResponses {
       '}';
   }
   
-  public static String speechToTextListWords() {
+  public static testMethod String speechToTextListWords() {
     return '{' +
       ' "words": [' +
       ' {' +
@@ -2155,7 +2156,7 @@ public class IBMWatsonMockResponses {
   }
   
   
-  public static String speechToTextListAcousticModels() {
+  public static testMethod String speechToTextListAcousticModels() {
     return '{' +
       ' "customizations": [' +
       '   {' +
@@ -2173,7 +2174,7 @@ public class IBMWatsonMockResponses {
       '}';
   }
   
-  public static String speechToTextGetAcousticModel() {
+  public static testMethod String speechToTextGetAcousticModel() {
     return '{' +
       ' "owner": "952e2069-9ece-48d8-96c9-0206b4473819", ' +
       ' "base_model_name": "en-US_BroadbandModel", ' +
@@ -2188,23 +2189,23 @@ public class IBMWatsonMockResponses {
       '}';
   }
 
-  public static String speechToTextDeleteAcousticModel() {
+  public static testMethod String speechToTextDeleteAcousticModel() {
     return '{}';
   }
   
-  public static String speechToTextTrainAcousticModel() {
+  public static testMethod String speechToTextTrainAcousticModel() {
     return '{}';
   }
 
-  public static String speechToTextResetAcousticModel() {
+  public static testMethod String speechToTextResetAcousticModel() {
     return '{}';
   }
 
-  public static String speechToTextDeleteAudio() {
+  public static testMethod String speechToTextDeleteAudio() {
     return '{}';
   }
   
-  public static String speechToTextGetAudio() {
+  public static testMethod String speechToTextGetAudio() {
     return '{' +
       '  "duration": 0, ' +
       '  "name": "string", ' +
@@ -2243,23 +2244,23 @@ public class IBMWatsonMockResponses {
       '}';
   }
   
-  public static String speechToTextListAudio() {
+  public static testMethod String speechToTextListAudio() {
     return '{}';
   }
   
-  public static String speechToTextAddAudio() {
+  public static testMethod String speechToTextAddAudio() {
     return '{}';
   }
   
-  public static String speechToTextAddWord() {
+  public static testMethod String speechToTextAddWord() {
     return '{}';
   }
   
-  public static String speechToTextCreateAcousticModel() {
+  public static testMethod String speechToTextCreateAcousticModel() {
     return '{}';
   }
   
-  public static String speechToTextCreateLanguageModel() {
+  public static testMethod String speechToTextCreateLanguageModel() {
     return '{' +
      ' "customization_id": "74f4807e-b5ff-4866-824e-6bba1a84fe96", ' +
      ' "owner": "952e2069-9ece-48d8-96c9-0206b4473819", ' +
@@ -2275,7 +2276,7 @@ public class IBMWatsonMockResponses {
      '}';
   }
 
-  public static String speechToTextRecognize() {
+  public static testMethod String speechToTextRecognize() {
     return ' {' +
      ' "results": [' +
      '   {' +
@@ -2344,7 +2345,7 @@ public class IBMWatsonMockResponses {
      ' }';
   }
   
-  public static String expansionsResponse() {
+  public static testMethod String expansionsResponse() {
     return '{' +
     ' "expansions": [' +
     ' {' +
@@ -2374,7 +2375,7 @@ public class IBMWatsonMockResponses {
     '}';
   }
 
-  public static String queryEntitiesResponse() {
+  public static testMethod String queryEntitiesResponse() {
     return '{' +
       '"entities": [' +
       '{' +
@@ -2401,7 +2402,7 @@ public class IBMWatsonMockResponses {
     '}';
   }
 
-  public static String queryRelationsResponse() {
+  public static testMethod String queryRelationsResponse() {
     return '{' +
       '"relations": [' +
       '{' +
@@ -2438,7 +2439,7 @@ public class IBMWatsonMockResponses {
     '}';
   }
 
-  public static String validTokenData() {
+  public static testMethod String validTokenData() {
     return '{' +
       '"access_token": "aaaa-1111",' +
       '"refresh_token": "99999999",' +
