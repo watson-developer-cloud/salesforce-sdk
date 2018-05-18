@@ -1812,4 +1812,28 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(253, resp.getRelations().get(0).getEvidence().get(0).getEntities().get(0).getEndOffset());
     Test.stopTest();
   }
+
+  /**
+   *  Test deleting the example with the given ID for the training data query.
+   */
+  static testMethod void testDeleteUserData() {
+    String body='';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String customerId = 'salesforce_sdk_test_id';
+    IBMDiscoveryV1Models.DeleteUserDataOptions options = new IBMDiscoveryV1Models.DeleteUserDataOptionsBuilder()
+      .customerId(customerId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+    //you can add more attributes using following builder method. This step is not necessary
+    options = options.newBuilder().build();
+    discovery.deleteUserData(options);
+    Test.stopTest();
+  }
 }
