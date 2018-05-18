@@ -358,7 +358,6 @@ public class IBMSpeechToTextV1Models {
     public Boolean allowOverwrite() {
       return allow_overwrite_serialized_name;
     }
-
     public IBMWatsonFile audio() {
       return audio_serialized_name;
     }
@@ -366,7 +365,6 @@ public class IBMSpeechToTextV1Models {
     public String audioFilename() {
       return audio_filename_serialized_name;
     }
-
     private AddAudioOptions(AddAudioOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be null');
       IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be null');
@@ -490,15 +488,12 @@ public class IBMSpeechToTextV1Models {
       return this;
     }
 
-    public AddAudioOptionsBuilder audio(IBMWatsonFile audio) {
-      this.audio_serialized_name = audio;
-      this.content_type_serialized_name = audio.contentType();
-      return this;
+    public IBMWatsonFile audio() {
+      return audio_serialized_name;
     }
 
-    public AddAudioOptionsBuilder audioFilename(String audioFilename) {
-      this.audio_filename_serialized_name = audioFilename;
-      return this;
+    public String audioFilename() {
+      return audio_filename_serialized_name;
     }
 
     /**
@@ -506,7 +501,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param name the header name
      * @param value the header value
-     * @return the {{classname}} builder
+     * @return the AddAudioOptions builder
      */
     public AddAudioOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
@@ -2007,7 +2002,6 @@ public class IBMSpeechToTextV1Models {
     private Boolean speaker_labels_serialized_name;
     private IBMWatsonFile audio_serialized_name;
     private String audio_filename_serialized_name;
-
     /**
      * Gets the content_type_serialized_name.
      *
@@ -2215,7 +2209,6 @@ public class IBMSpeechToTextV1Models {
     public String audioFilename() {
       return audio_filename_serialized_name;
     }
-
     private CreateJobOptions(CreateJobOptionsBuilder builder) {
       IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
       IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be null');
@@ -4163,7 +4156,6 @@ public class IBMSpeechToTextV1Models {
 
       return ret;
     }
-
   }
 
   /**
@@ -5269,6 +5261,285 @@ public class IBMSpeechToTextV1Models {
       }
 
       return ret;
+    }
+  }
+
+  public class RecognizeOptions extends IBMWatsonOptionsModel {
+    private IBMWatsonFile audio_serialized_name;
+    private String audio_filename_serialized_name;
+    private String file_content_type_serialized_name;
+    private Boolean continuous_serialized_name;
+    private Integer max_alternatives_serialized_name;
+    private Boolean timestamps_serialized_name;
+    private Boolean word_confidence_serialized_name;
+    private Integer inactivity_timeout_serialized_name;
+    private String model_serialized_name;
+    private Boolean interim_results_serialized_name;
+    private Boolean keywords_serialized_name;
+    private Double keywords_threshold_serialized_name;
+    private Double word_alternatives_threshold_serialized_name;
+    private Boolean profanity_filter_serialized_name;
+    private Boolean smart_formatting_serialized_name;
+    private String customization_id_serialized_name;
+    private Boolean speaker_labels_serialized_name;
+    private String base_model_version_serialized_name;
+
+    public IBMWatsonFile audio() {
+      return audio_serialized_name;
+    }
+
+    public String audioFilename() {
+      return audio_filename_serialized_name;
+    }
+
+    public String fileContentType() {
+      return file_content_type_serialized_name;
+    }
+
+    public Boolean continuous() {
+      return continuous_serialized_name;
+    }
+
+    public Integer maxAlternatives() {
+      return max_alternatives_serialized_name;
+    }
+
+    public Boolean timestamps() {
+      return timestamps_serialized_name;
+    }
+
+    public Boolean wordConfidence() {
+      return word_confidence_serialized_name;
+    }
+
+    public Integer inactivityTimeout() {
+      return inactivity_timeout_serialized_name;
+    }
+
+    public String model() {
+      return model_serialized_name;
+    }
+
+    public Boolean interimResults() {
+      return interim_results_serialized_name;
+    }
+
+    public Boolean keywords() {
+      return keywords_serialized_name;
+    }
+
+    public Double keywordsThreshold() {
+      return keywords_threshold_serialized_name;
+    }
+
+    public Double wordAlternativesThreshold() {
+      return word_alternatives_threshold_serialized_name;
+    }
+
+    public Boolean profanityFilter() {
+      return profanity_filter_serialized_name;
+    }
+
+    public Boolean smartFormatting() {
+      return smart_formatting_serialized_name;
+    }
+
+    public String customizationId() {
+      return customization_id_serialized_name;
+    }
+
+    public Boolean speakerLabels() {
+      return speaker_labels_serialized_name;
+    }
+
+    public String baseModelVersion() {
+      return base_model_version_serialized_name;
+    }
+
+    private RecognizeOptions(RecognizeOptionsBuilder builder) {
+      IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.file_content_type_serialized_name, 'fileContenttype cannot be empty');
+      audio_serialized_name = builder.audio_serialized_name;
+      audio_filename_serialized_name = builder.audio_filename_serialized_name;
+      file_content_type_serialized_name = builder.file_content_type_serialized_name;
+      continuous_serialized_name = builder.continuous_serialized_name;
+      max_alternatives_serialized_name = builder.max_alternatives_serialized_name;
+      timestamps_serialized_name = builder.timestamps_serialized_name;
+      word_confidence_serialized_name = builder.word_confidence_serialized_name;
+      inactivity_timeout_serialized_name = builder.inactivity_timeout_serialized_name;
+      model_serialized_name = builder.model_serialized_name;
+      interim_results_serialized_name = builder.interim_results_serialized_name;
+      keywords_serialized_name = builder.keywords_serialized_name;
+      keywords_threshold_serialized_name = builder.keywords_threshold_serialized_name;
+      word_alternatives_threshold_serialized_name = builder.word_alternatives_threshold_serialized_name;
+      profanity_filter_serialized_name = builder.profanity_filter_serialized_name;
+      smart_formatting_serialized_name = builder.smart_formatting_serialized_name;
+      customization_id_serialized_name = builder.customization_id_serialized_name;
+      speaker_labels_serialized_name = builder.speaker_labels_serialized_name;
+      base_model_version_serialized_name = builder.base_model_version_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    public RecognizeOptionsBuilder newBuilder() {
+      return new RecognizeOptionsBuilder(this);
+    }
+  }
+
+  public class RecognizeOptionsBuilder extends IBMWatsonOptionsModel {
+    private IBMWatsonFile audio_serialized_name;
+    private String audio_filename_serialized_name;
+    private String file_content_type_serialized_name;
+    private Boolean continuous_serialized_name;
+    private Integer max_alternatives_serialized_name;
+    private Boolean timestamps_serialized_name;
+    private Boolean word_confidence_serialized_name;
+    private Integer inactivity_timeout_serialized_name;
+    private String model_serialized_name;
+    private Boolean interim_results_serialized_name;
+    private Boolean keywords_serialized_name;
+    private Double keywords_threshold_serialized_name;
+    private Double word_alternatives_threshold_serialized_name;
+    private Boolean profanity_filter_serialized_name;
+    private Boolean smart_formatting_serialized_name;
+    private String customization_id_serialized_name;
+    private Boolean speaker_labels_serialized_name;
+    private String base_model_version_serialized_name;
+
+    private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
+      audio_serialized_name = recognizeOptions.audio_serialized_name;
+      audio_filename_serialized_name = recognizeOptions.audio_filename_serialized_name;
+      file_content_type_serialized_name = recognizeOptions.file_content_type_serialized_name;
+      continuous_serialized_name = recognizeOptions.continuous_serialized_name;
+      max_alternatives_serialized_name = recognizeOptions.max_alternatives_serialized_name;
+      timestamps_serialized_name = recognizeOptions.timestamps_serialized_name;
+      word_confidence_serialized_name = recognizeOptions.word_confidence_serialized_name;
+      inactivity_timeout_serialized_name = recognizeOptions.inactivity_timeout_serialized_name;
+      model_serialized_name = recognizeOptions.model_serialized_name;
+      interim_results_serialized_name = recognizeOptions.interim_results_serialized_name;
+      keywords_serialized_name = recognizeOptions.keywords_serialized_name;
+      keywords_threshold_serialized_name = recognizeOptions.keywords_threshold_serialized_name;
+      word_alternatives_threshold_serialized_name = recognizeOptions.word_alternatives_threshold_serialized_name;
+      profanity_filter_serialized_name = recognizeOptions.profanity_filter_serialized_name;
+      smart_formatting_serialized_name = recognizeOptions.smart_formatting_serialized_name;
+      customization_id_serialized_name = recognizeOptions.customization_id_serialized_name;
+      speaker_labels_serialized_name = recognizeOptions.speaker_labels_serialized_name;
+      base_model_version_serialized_name = recognizeOptions.base_model_version_serialized_name;
+    }
+
+    public RecognizeOptionsBuilder() {
+    }
+
+    public RecognizeOptionsBuilder(IBMWatsonFile audio, String audioFilename, String fileContentType) {
+      this.audio_serialized_name = audio;
+      this.audio_filename_serialized_name = audioFilename;
+      this.file_content_type_serialized_name = fileContentType;
+    }
+
+    public RecognizeOptions build() {
+      return new RecognizeOptions(this);
+    }
+
+    public RecognizeOptionsBuilder audio(IBMWatsonFile audio) {
+      this.audio_serialized_name = audio;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder audioFilename(String audioFilename) {
+      this.audio_filename_serialized_name = audioFilename;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder fileContentType(String fileContentType) {
+      this.file_content_type_serialized_name = fileContentType;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder continuous(Boolean continuous) {
+      this.continuous_serialized_name = continuous;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder maxAlternatives(Integer maxAlternatives) {
+      this.max_alternatives_serialized_name = maxAlternatives;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder timestamps(Boolean timestamps) {
+      this.timestamps_serialized_name = timestamps;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder wordConfidence(Boolean wordConfidence) {
+      this.word_confidence_serialized_name = wordConfidence;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder inactivityTimeout(Integer inactivityTimeout) {
+      this.inactivity_timeout_serialized_name = inactivityTimeout;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder model(String model) {
+      this.model_serialized_name = model;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder interimResults(Boolean interimResults) {
+      this.interim_results_serialized_name = interimResults;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder keywords(Boolean keywords) {
+      this.keywords_serialized_name = keywords;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder keywordsThreshold(Double keywordsThreshold) {
+      this.keywords_threshold_serialized_name = keywordsThreshold;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder wordAlternativesThreshold(Double wordAlternativesThreshold) {
+      this.word_alternatives_threshold_serialized_name = wordAlternativesThreshold;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder profanityFilter(Boolean profanityFilter) {
+      this.profanity_filter_serialized_name = profanityFilter;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder smartFormatting(Boolean smartFormatting) {
+      this.smart_formatting_serialized_name = smartFormatting;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder customizationId(String customizationId) {
+      this.customization_id_serialized_name = customizationId;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder speakerLabels(Boolean speakerLabels) {
+      this.speaker_labels_serialized_name = speakerLabels;
+      return this;
+    }
+
+    public RecognizeOptionsBuilder baseModelVersion(String baseModelVersion) {
+      this.base_model_version_serialized_name = baseModelVersion;
+      return this;
+    }
+
+    /**
+    * Add a request header.
+    *
+    * @param name the header name
+    * @param value the header value
+    * @return the UpgradeLanguageModelOptions builder
+    */
+    public RecognizeOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
     }
   }
 
@@ -7406,7 +7677,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the element_serialized_name.
      *
-     * A key-value pair that describes an error associated with the definition of a word in the words resource. Each pair has the format `"element": "message"`, where `element` is the aspect of the definition that caused the problem and `message` describes the problem. The following example describes a problem with one of the word's sounds-like definitions: `"sounds_like_string": "Numbers are not allowed in sounds-like. You can try for example 'suggested_string'."` You must correct the error before you can train the model.
+     * A key-value pair that describes an error associated with the definition of a word in the words resource. Each pair has the format `"element": "message"`, where `element` is the aspect of the definition that caused the problem and `message` describes the problem. The following example describes a problem with one of the word's sounds-like definitions: `"sounds_like_string": "Numbers are not allowed in sounds-like. You can try for example '{suggested_string}'."` You must correct the error before you can train the model.
      *
      * @return the element_serialized_name
      */
@@ -7485,283 +7756,4 @@ public class IBMSpeechToTextV1Models {
     }
   }
 
-  public class RecognizeOptions extends IBMWatsonOptionsModel {
-    private IBMWatsonFile audio_serialized_name;
-    private String audio_filename_serialized_name;
-    private String file_content_type_serialized_name;
-    private Boolean continuous_serialized_name;
-    private Integer max_alternatives_serialized_name;
-    private Boolean timestamps_serialized_name;
-    private Boolean word_confidence_serialized_name;
-    private Integer inactivity_timeout_serialized_name;
-    private String model_serialized_name;
-    private Boolean interim_results_serialized_name;
-    private Boolean keywords_serialized_name;
-    private Double keywords_threshold_serialized_name;
-    private Double word_alternatives_threshold_serialized_name;
-    private Boolean profanity_filter_serialized_name;
-    private Boolean smart_formatting_serialized_name;
-    private String customization_id_serialized_name;
-    private Boolean speaker_labels_serialized_name;
-    private String base_model_version_serialized_name;
-
-    public IBMWatsonFile audio() {
-      return audio_serialized_name;
-    }
-
-    public String audioFilename() {
-      return audio_filename_serialized_name;
-    }
-
-    public String fileContentType() {
-      return file_content_type_serialized_name;
-    }
-
-    public Boolean continuous() {
-      return continuous_serialized_name;
-    }
-
-    public Integer maxAlternatives() {
-      return max_alternatives_serialized_name;
-    }
-
-    public Boolean timestamps() {
-      return timestamps_serialized_name;
-    }
-
-    public Boolean wordConfidence() {
-      return word_confidence_serialized_name;
-    }
-
-    public Integer inactivityTimeout() {
-      return inactivity_timeout_serialized_name;
-    }
-
-    public String model() {
-      return model_serialized_name;
-    }
-
-    public Boolean interimResults() {
-      return interim_results_serialized_name;
-    }
-
-    public Boolean keywords() {
-      return keywords_serialized_name;
-    }
-
-    public Double keywordsThreshold() {
-      return keywords_threshold_serialized_name;
-    }
-
-    public Double wordAlternativesThreshold() {
-      return word_alternatives_threshold_serialized_name;
-    }
-
-    public Boolean profanityFilter() {
-      return profanity_filter_serialized_name;
-    }
-
-    public Boolean smartFormatting() {
-      return smart_formatting_serialized_name;
-    }
-
-    public String customizationId() {
-      return customization_id_serialized_name;
-    }
-
-    public Boolean speakerLabels() {
-      return speaker_labels_serialized_name;
-    }
-
-    public String baseModelVersion() {
-      return base_model_version_serialized_name;
-    }
-
-    private RecognizeOptions(RecognizeOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.file_content_type_serialized_name, 'fileContenttype cannot be empty');
-      audio_serialized_name = builder.audio_serialized_name;
-      audio_filename_serialized_name = builder.audio_filename_serialized_name;
-      file_content_type_serialized_name = builder.file_content_type_serialized_name;
-      continuous_serialized_name = builder.continuous_serialized_name;
-      max_alternatives_serialized_name = builder.max_alternatives_serialized_name;
-      timestamps_serialized_name = builder.timestamps_serialized_name;
-      word_confidence_serialized_name = builder.word_confidence_serialized_name;
-      inactivity_timeout_serialized_name = builder.inactivity_timeout_serialized_name;
-      model_serialized_name = builder.model_serialized_name;
-      interim_results_serialized_name = builder.interim_results_serialized_name;
-      keywords_serialized_name = builder.keywords_serialized_name;
-      keywords_threshold_serialized_name = builder.keywords_threshold_serialized_name;
-      word_alternatives_threshold_serialized_name = builder.word_alternatives_threshold_serialized_name;
-      profanity_filter_serialized_name = builder.profanity_filter_serialized_name;
-      smart_formatting_serialized_name = builder.smart_formatting_serialized_name;
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      speaker_labels_serialized_name = builder.speaker_labels_serialized_name;
-      base_model_version_serialized_name = builder.base_model_version_serialized_name;
-      this.requestHeaders = builder.requestHeaders;
-    }
-
-    public RecognizeOptionsBuilder newBuilder() {
-      return new RecognizeOptionsBuilder(this);
-    }
-  }
-
-  public class RecognizeOptionsBuilder extends IBMWatsonOptionsModel {
-    private IBMWatsonFile audio_serialized_name;
-    private String audio_filename_serialized_name;
-    private String file_content_type_serialized_name;
-    private Boolean continuous_serialized_name;
-    private Integer max_alternatives_serialized_name;
-    private Boolean timestamps_serialized_name;
-    private Boolean word_confidence_serialized_name;
-    private Integer inactivity_timeout_serialized_name;
-    private String model_serialized_name;
-    private Boolean interim_results_serialized_name;
-    private Boolean keywords_serialized_name;
-    private Double keywords_threshold_serialized_name;
-    private Double word_alternatives_threshold_serialized_name;
-    private Boolean profanity_filter_serialized_name;
-    private Boolean smart_formatting_serialized_name;
-    private String customization_id_serialized_name;
-    private Boolean speaker_labels_serialized_name;
-    private String base_model_version_serialized_name;
-
-    private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
-      audio_serialized_name = recognizeOptions.audio_serialized_name;
-      audio_filename_serialized_name = recognizeOptions.audio_filename_serialized_name;
-      file_content_type_serialized_name = recognizeOptions.file_content_type_serialized_name;
-      continuous_serialized_name = recognizeOptions.continuous_serialized_name;
-      max_alternatives_serialized_name = recognizeOptions.max_alternatives_serialized_name;
-      timestamps_serialized_name = recognizeOptions.timestamps_serialized_name;
-      word_confidence_serialized_name = recognizeOptions.word_confidence_serialized_name;
-      inactivity_timeout_serialized_name = recognizeOptions.inactivity_timeout_serialized_name;
-      model_serialized_name = recognizeOptions.model_serialized_name;
-      interim_results_serialized_name = recognizeOptions.interim_results_serialized_name;
-      keywords_serialized_name = recognizeOptions.keywords_serialized_name;
-      keywords_threshold_serialized_name = recognizeOptions.keywords_threshold_serialized_name;
-      word_alternatives_threshold_serialized_name = recognizeOptions.word_alternatives_threshold_serialized_name;
-      profanity_filter_serialized_name = recognizeOptions.profanity_filter_serialized_name;
-      smart_formatting_serialized_name = recognizeOptions.smart_formatting_serialized_name;
-      customization_id_serialized_name = recognizeOptions.customization_id_serialized_name;
-      speaker_labels_serialized_name = recognizeOptions.speaker_labels_serialized_name;
-      base_model_version_serialized_name = recognizeOptions.base_model_version_serialized_name;
-      this.requestHeaders.putAll(recognizeOptions.requestHeaders());
-    }
-
-    public RecognizeOptionsBuilder() {
-    }
-
-    public RecognizeOptionsBuilder(IBMWatsonFile audio, String audioFilename, String fileContentType) {
-      this.audio_serialized_name = audio;
-      this.audio_filename_serialized_name = audioFilename;
-      this.file_content_type_serialized_name = fileContentType;
-    }
-
-    public RecognizeOptions build() {
-      return new RecognizeOptions(this);
-    }
-
-    public RecognizeOptionsBuilder audio(IBMWatsonFile audio) {
-      this.audio_serialized_name = audio;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder audioFilename(String audioFilename) {
-      this.audio_filename_serialized_name = audioFilename;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder fileContentType(String fileContentType) {
-      this.file_content_type_serialized_name = fileContentType;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder continuous(Boolean continuous) {
-      this.continuous_serialized_name = continuous;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder maxAlternatives(Integer maxAlternatives) {
-      this.max_alternatives_serialized_name = maxAlternatives;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder timestamps(Boolean timestamps) {
-      this.timestamps_serialized_name = timestamps;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder wordConfidence(Boolean wordConfidence) {
-      this.word_confidence_serialized_name = wordConfidence;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder inactivityTimeout(Integer inactivityTimeout) {
-      this.inactivity_timeout_serialized_name = inactivityTimeout;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder model(String model) {
-      this.model_serialized_name = model;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder interimResults(Boolean interimResults) {
-      this.interim_results_serialized_name = interimResults;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder keywords(Boolean keywords) {
-      this.keywords_serialized_name = keywords;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder keywordsThreshold(Double keywordsThreshold) {
-      this.keywords_threshold_serialized_name = keywordsThreshold;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder wordAlternativesThreshold(Double wordAlternativesThreshold) {
-      this.word_alternatives_threshold_serialized_name = wordAlternativesThreshold;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder profanityFilter(Boolean profanityFilter) {
-      this.profanity_filter_serialized_name = profanityFilter;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder smartFormatting(Boolean smartFormatting) {
-      this.smart_formatting_serialized_name = smartFormatting;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder speakerLabels(Boolean speakerLabels) {
-      this.speaker_labels_serialized_name = speakerLabels;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder baseModelVersion(String baseModelVersion) {
-      this.base_model_version_serialized_name = baseModelVersion;
-      return this;
-    }
-
-    /**
-     * Add a request header.
-     *
-     * @param name the header name
-     * @param value the header value
-     * @return the UpgradeLanguageModelOptions builder
-     */
-    public RecognizeOptionsBuilder addHeader(String name, String value) {
-      this.requestHeaders.put(name, value);
-      return this;
-    }
-  }
 }
