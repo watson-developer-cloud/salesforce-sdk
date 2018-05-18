@@ -14,12 +14,6 @@
  * for use in speech synthesis. All custom model methods are currently beta features.
  * * **Custom words** let users manage the words in a custom voice model. All custom word methods are currently beta
  * features.
- *
- *
- * **Note about the Try It Out feature:** The `Try it out!` button lets you experiment with the methods of the API by
- * making actual cURL calls to the service. The feature is **not** supported for use with the `POST /v1/synthesize`
- * method. For examples of calls to this method, see the [Text to Speech API
- * reference](http://www.ibm.com/watson/developercloud/text-to-speech/api/v1/).
  * ### API Usage
  * The following information provides details about using the service to synthesize audio:
  * * **Audio formats:** The service supports a number of audio formats (MIME types). For more information about audio
@@ -35,13 +29,13 @@
  * A phonetic translation is based on the SSML format for representing the phonetic string of a word. Phonetic
  * translations can use standard International Phonetic Alphabet (IPA) representation:
  *
- *  &lt;phoneme alphabet="ipa" ph="t&#601;m&#712;&#593;to"&gt;&lt;/phoneme&gt;
+ *   &lt;phoneme alphabet="ipa" ph="t&#601;m&#712;&#593;to"&gt;&lt;/phoneme&gt;
  *
- *  or the proprietary IBM Symbolic Phonetic Representation (SPR):
+ *   or the proprietary IBM Symbolic Phonetic Representation (SPR):
  *
- *  &lt;phoneme alphabet="ibm" ph="1gAstroEntxrYFXs"&gt;&lt;/phoneme&gt;
+ *   &lt;phoneme alphabet="ibm" ph="1gAstroEntxrYFXs"&gt;&lt;/phoneme&gt;
  *
- *  For more information about customization and about sounds-like and phonetic translations, see [Understanding
+ *   For more information about customization and about sounds-like and phonetic translations, see [Understanding
  * customization](https://console.bluemix.net/docs/services/text-to-speech/custom-intro.html).
  * * **WebSocket interface:** The service also offers a WebSocket interface as an alternative to its HTTP REST interface
  * for speech synthesis. The WebSocket interface supports both plain text and SSML input, including the SSML
@@ -97,7 +91,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Get a voice.
    *
-   * Lists information about the specified voice. The information includes the name, language, gender, and other details about the voice. Specify a customization ID to obtain information for that custom voice model of the specified voice.
+   * Gets information about the specified voice. The information includes the name, language, gender, and other details about the voice. Specify a customization ID to obtain information for that custom voice model of the specified voice.
    *
    * @param getVoiceOptions the {@link IBMTextToSpeechV1Models.GetVoiceOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.Voice} with the response
@@ -119,9 +113,9 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   }
 
   /**
-   * Get voices.
+   * List voices.
    *
-   * Retrieves a list of all voices available for use with the service. The information includes the name, language, gender, and other details about the voice.
+   * Lists all voices available for use with the service. The information includes the name, language, gender, and other details about the voice.
    *
    * @param listVoicesOptions the {@link IBMTextToSpeechV1Models.ListVoicesOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.Voices} with the response
@@ -174,7 +168,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Get pronunciation.
    *
-   * Returns the phonetic pronunciation for the specified word. You can request the pronunciation for a specific format. You can also request the pronunciation for a specific voice to see the default translation for the language of that voice or for a specific custom voice model to see the translation for that voice model.  **Note:** This method is currently a beta release.
+   * Gets the phonetic pronunciation for the specified word. You can request the pronunciation for a specific format. You can also request the pronunciation for a specific voice to see the default translation for the language of that voice or for a specific custom voice model to see the translation for that voice model.  **Note:** This method is currently a beta release.
    *
    * @param getPronunciationOptions the {@link IBMTextToSpeechV1Models.GetPronunciationOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.Pronunciation} with the response
@@ -256,9 +250,9 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   }
 
   /**
-   * List a custom model.
+   * Get a custom model.
    *
-   * Lists all information about a specified custom voice model. In addition to metadata such as the name and description of the voice model, the output includes the words and their translations as defined in the model. To see just the metadata for a voice model, use the **List custom models** method.   **Note:** This method is currently a beta release.
+   * Gets all information about a specified custom voice model. In addition to metadata such as the name and description of the voice model, the output includes the words and their translations as defined in the model. To see just the metadata for a voice model, use the **List custom models** method.   **Note:** This method is currently a beta release.
    *
    * @param getVoiceModelOptions the {@link IBMTextToSpeechV1Models.GetVoiceModelOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.VoiceModel} with the response
@@ -408,9 +402,9 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   }
 
   /**
-   * List a custom word.
+   * Get a custom word.
    *
-   * Returns the translation for a single word from the specified custom model. The output shows the translation as it is defined in the model.  **Note:** This method is currently a beta release.
+   * Gets the translation for a single word from the specified custom model. The output shows the translation as it is defined in the model.  **Note:** This method is currently a beta release.
    *
    * @param getWordOptions the {@link IBMTextToSpeechV1Models.GetWordOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.Translation} with the response
