@@ -4283,6 +4283,97 @@ public class IBMConversationV1Models {
   }
 
   /**
+   * The deleteUserData options.
+   */
+  public class DeleteUserDataOptions extends IBMWatsonOptionsModel {
+    private String customer_id_serialized_name;
+    /**
+     * Gets the customer_id_serialized_name.
+     *
+     * The customer ID for which all data is to be deleted.
+     *
+     * @return the customer_id_serialized_name
+     */
+    public String customerId() {
+      return customer_id_serialized_name;
+    }
+    private DeleteUserDataOptions(DeleteUserDataOptionsBuilder builder) {
+      IBMWatsonValidator.notNull(builder.customer_id_serialized_name, 'customer_id_serialized_name cannot be null');
+      customer_id_serialized_name = builder.customer_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DeleteUserDataOptions builder
+     */
+    public DeleteUserDataOptionsBuilder newBuilder() {
+      return new DeleteUserDataOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * DeleteUserDataOptions Builder.
+   */
+  public class DeleteUserDataOptionsBuilder extends IBMWatsonOptionsModel {
+    private String customer_id_serialized_name;
+
+    private DeleteUserDataOptionsBuilder(DeleteUserDataOptions deleteUserDataOptions) {
+      customer_id_serialized_name = deleteUserDataOptions.customer_id_serialized_name;
+      this.requestHeaders.putAll(deleteUserDataOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DeleteUserDataOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param customerId the customerId
+     */
+    public DeleteUserDataOptionsBuilder(String customerId) {
+      this.customer_id_serialized_name = customerId;
+    }
+
+    /**
+     * Builds a DeleteUserDataOptions.
+     *
+     * @return the deleteUserDataOptions
+     */
+    public DeleteUserDataOptions build() {
+      return new DeleteUserDataOptions(this);
+    }
+
+    /**
+     * Set the customer_id_serialized_name.
+     *
+     * @param customerId the customerId
+     * @return the DeleteUserDataOptions builder
+     */
+    public DeleteUserDataOptionsBuilder customerId(String customerId) {
+      this.customer_id_serialized_name = customerId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteUserDataOptions builder
+     */
+    public DeleteUserDataOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The deleteValue options.
    */
   public class DeleteValueOptions extends IBMWatsonOptionsModel {

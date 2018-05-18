@@ -1658,4 +1658,29 @@ private class IBMConversationV1Test {
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     Test.stopTest();
   }
+
+  static testMethod void testDeleteUserData() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    conversation.setUsernameAndPassword('username', 'password');
+
+    String customerId = 'salesforce_sdk_test_id';
+    IBMConversationV1Models.DeleteUserDataOptions deleteOptions = new IBMConversationV1Models.DeleteUserDataOptionsBuilder()
+      .customerId(customerId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+    //you can add more attributes using following builder method. This step is not necessary
+    deleteOptions = deleteOptions.newBuilder().build();
+    conversation.deleteUserData(deleteOptions);
+
+    Test.stopTest();
+  }
 }
