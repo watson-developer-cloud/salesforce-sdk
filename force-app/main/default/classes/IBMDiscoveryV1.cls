@@ -41,6 +41,20 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     setUsernameAndPassword(username, password);
   }
 
+  /**
+   * Instantiates a new `IBMDiscoveryV1` with IAM. Note that if the access token is specified in the
+   * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
+   * one expires or after receiving a 401 error from the service. Failing to do so will result in authentication errors
+   * after this token expires.
+   *
+   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
+   *        calls from failing when the service introduces breaking changes.
+   * @param iamOptions the options for authenticating through IAM
+   */
+  public IBMDiscoveryV1(String versionDate, IBMWatsonIAMOptions iamOptions) {
+    this(versionDate);
+    setIamCredentials(iamOptions);
+  }
 
   /**
    * Create an environment.
@@ -749,8 +763,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (federatedQueryOptions.count() != null) {
       builder.query('count', String.valueOf(federatedQueryOptions.count()));
     }
-    if (federatedQueryOptions.returnFields() != null) {
-      builder.query('return_fields', String.join(federatedQueryOptions.returnFields(), ','));
+    if (federatedQueryOptions.returnField() != null) {
+      builder.query('return_fields', String.join(federatedQueryOptions.returnField(), ','));
     }
     if (federatedQueryOptions.offset() != null) {
       builder.query('offset', String.valueOf(federatedQueryOptions.offset()));
@@ -816,8 +830,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (federatedQueryNoticesOptions.count() != null) {
       builder.query('count', String.valueOf(federatedQueryNoticesOptions.count()));
     }
-    if (federatedQueryNoticesOptions.returnFields() != null) {
-      builder.query('return_fields', String.join(federatedQueryNoticesOptions.returnFields(), ','));
+    if (federatedQueryNoticesOptions.returnField() != null) {
+      builder.query('return_fields', String.join(federatedQueryNoticesOptions.returnField(), ','));
     }
     if (federatedQueryNoticesOptions.offset() != null) {
       builder.query('offset', String.valueOf(federatedQueryNoticesOptions.offset()));
@@ -995,8 +1009,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryNoticesOptions.count() != null) {
       builder.query('count', String.valueOf(queryNoticesOptions.count()));
     }
-    if (queryNoticesOptions.returnFields() != null) {
-      builder.query('return_fields', String.join(queryNoticesOptions.returnFields(), ','));
+    if (queryNoticesOptions.returnField() != null) {
+      builder.query('return_fields', String.join(queryNoticesOptions.returnField(), ','));
     }
     if (queryNoticesOptions.offset() != null) {
       builder.query('offset', String.valueOf(queryNoticesOptions.offset()));
