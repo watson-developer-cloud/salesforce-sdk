@@ -17,7 +17,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom acoustic model. **Note:** When you create a new custom acoustic model, the service returns only the GUID of the new model; it does not return the other fields of this object.
+     * The customization ID (GUID) of the custom acoustic model. The **Create a custom acoustic model** method returns only this field of the object; it does not return the other fields.
      *
      * @return the customization_id_serialized_name
      */
@@ -116,7 +116,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the progress_serialized_name.
      *
-     * A percentage that indicates the progress of the custom acoustic model's current training. A value of `100` means that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the training; the field changes from `0` to `100` when training is complete.
+     * A percentage that indicates the progress of the custom acoustic model's current training. A value of `100` means that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the training. The field changes from `0` to `100` when training is complete.
      *
      * @return the progress_serialized_name
      */
@@ -305,9 +305,6 @@ public class IBMSpeechToTextV1Models {
     private String content_type_serialized_name;
     private String contained_content_type_serialized_name;
     private Boolean allow_overwrite_serialized_name;
-    private IBMWatsonFile audio_serialized_name;
-    private String audio_filename_serialized_name;
-
     /**
      * Gets the customization_id_serialized_name.
      *
@@ -358,16 +355,7 @@ public class IBMSpeechToTextV1Models {
     public Boolean allowOverwrite() {
       return allow_overwrite_serialized_name;
     }
-    public IBMWatsonFile audio() {
-      return audio_serialized_name;
-    }
-
-    public String audioFilename() {
-      return audio_filename_serialized_name;
-    }
     private AddAudioOptions(AddAudioOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be null');
-      IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be null');
       IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.audio_name_serialized_name, 'audio_name_serialized_name cannot be empty');
       IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
@@ -376,8 +364,6 @@ public class IBMSpeechToTextV1Models {
       content_type_serialized_name = builder.content_type_serialized_name;
       contained_content_type_serialized_name = builder.contained_content_type_serialized_name;
       allow_overwrite_serialized_name = builder.allow_overwrite_serialized_name;
-      audio_serialized_name = builder.audio_serialized_name;
-      audio_filename_serialized_name = builder.audio_filename_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -401,8 +387,6 @@ public class IBMSpeechToTextV1Models {
     private String content_type_serialized_name;
     private String contained_content_type_serialized_name;
     private Boolean allow_overwrite_serialized_name;
-    private IBMWatsonFile audio_serialized_name;
-    private String audio_filename_serialized_name;
 
     private AddAudioOptionsBuilder(AddAudioOptions addAudioOptions) {
       customization_id_serialized_name = addAudioOptions.customization_id_serialized_name;
@@ -410,8 +394,6 @@ public class IBMSpeechToTextV1Models {
       content_type_serialized_name = addAudioOptions.content_type_serialized_name;
       contained_content_type_serialized_name = addAudioOptions.contained_content_type_serialized_name;
       allow_overwrite_serialized_name = addAudioOptions.allow_overwrite_serialized_name;
-      audio_serialized_name = addAudioOptions.audio_serialized_name;
-      audio_filename_serialized_name = addAudioOptions.audio_filename_serialized_name;
       this.requestHeaders.putAll(addAudioOptions.requestHeaders());
     }
 
@@ -427,12 +409,9 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      * @param audioName the audioName
      */
-    public AddAudioOptionsBuilder(String customizationId, String audioName, IBMWatsonFile audio, String audioFilename) {
+    public AddAudioOptionsBuilder(String customizationId, String audioName) {
       this.customization_id_serialized_name = customizationId;
       this.audio_name_serialized_name = audioName;
-      this.audio_serialized_name = audio;
-      this.audio_filename_serialized_name = audioFilename;
-      this.content_type_serialized_name = audio.contentType();
     }
 
     /**
@@ -488,12 +467,154 @@ public class IBMSpeechToTextV1Models {
       return this;
     }
 
-    public IBMWatsonFile audio() {
-      return audio_serialized_name;
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
     }
 
-    public String audioFilename() {
-      return audio_filename_serialized_name;
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
     }
 
     /**
@@ -753,7 +874,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_name_serialized_name.
      *
-     * The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
+     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
      *
      * @return the word_name_serialized_name
      */
@@ -763,7 +884,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_serialized_name.
      *
-     * **When specifying an array of one or more words,** you must specify the custom word that is to be added to or updated in the custom model. Do not include spaces in the word. Use a - (dash) or _ (underscore) to connect the tokens of compound words. **When adding or updating a single word directly,** omit this field.
+     * For the **Add custom words** method, you must specify the custom word that is to be added to or updated in the custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.   Omit this field for the **Add a custom word** method.
      *
      * @return the word_serialized_name
      */
@@ -2000,8 +2121,6 @@ public class IBMSpeechToTextV1Models {
     private Boolean profanity_filter_serialized_name;
     private Boolean smart_formatting_serialized_name;
     private Boolean speaker_labels_serialized_name;
-    private IBMWatsonFile audio_serialized_name;
-    private String audio_filename_serialized_name;
     /**
      * Gets the content_type_serialized_name.
      *
@@ -2185,7 +2304,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the smart_formatting_serialized_name.
      *
-     * If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and Internet addresses into more readable, conventional representations in the final transcript of a recognition request. By default, no smart formatting is performed. Applies to US English transcription only.
+     * If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and internet addresses into more readable, conventional representations in the final transcript of a recognition request. For US English, also converts certain keyword strings to punctuation symbols. By default, no smart formatting is performed. Applies to US English and Spanish transcription only.
      *
      * @return the smart_formatting_serialized_name
      */
@@ -2202,17 +2321,8 @@ public class IBMSpeechToTextV1Models {
     public Boolean speakerLabels() {
       return speaker_labels_serialized_name;
     }
-    public IBMWatsonFile audio() {
-      return audio_serialized_name;
-    }
-
-    public String audioFilename() {
-      return audio_filename_serialized_name;
-    }
     private CreateJobOptions(CreateJobOptionsBuilder builder) {
       IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
-      IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be null');
-      IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be null');
       content_type_serialized_name = builder.content_type_serialized_name;
       model_serialized_name = builder.model_serialized_name;
       callback_url_serialized_name = builder.callback_url_serialized_name;
@@ -2233,8 +2343,6 @@ public class IBMSpeechToTextV1Models {
       profanity_filter_serialized_name = builder.profanity_filter_serialized_name;
       smart_formatting_serialized_name = builder.smart_formatting_serialized_name;
       speaker_labels_serialized_name = builder.speaker_labels_serialized_name;
-      audio_serialized_name = builder.audio_serialized_name;
-      audio_filename_serialized_name = builder.audio_filename_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2273,8 +2381,6 @@ public class IBMSpeechToTextV1Models {
     private Boolean profanity_filter_serialized_name;
     private Boolean smart_formatting_serialized_name;
     private Boolean speaker_labels_serialized_name;
-    private IBMWatsonFile audio_serialized_name;
-    private String audio_filename_serialized_name;
 
     private CreateJobOptionsBuilder(CreateJobOptions createJobOptions) {
       content_type_serialized_name = createJobOptions.content_type_serialized_name;
@@ -2297,8 +2403,6 @@ public class IBMSpeechToTextV1Models {
       profanity_filter_serialized_name = createJobOptions.profanity_filter_serialized_name;
       smart_formatting_serialized_name = createJobOptions.smart_formatting_serialized_name;
       speaker_labels_serialized_name = createJobOptions.speaker_labels_serialized_name;
-      audio_serialized_name = createJobOptions.audio_serialized_name;
-      audio_filename_serialized_name = createJobOptions.audio_filename_serialized_name;
       this.requestHeaders.putAll(createJobOptions.requestHeaders());
     }
 
@@ -2542,14 +2646,133 @@ public class IBMSpeechToTextV1Models {
       return this;
     }
 
-    public CreateJobOptionsBuilder audio(IBMWatsonFile audio) {
-      this.audio_serialized_name = audio;
-      this.content_type_serialized_name = audio.contentType();
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
       return this;
     }
 
-    public CreateJobOptionsBuilder audioFilename(String audioFilename) {
-      this.audio_filename_serialized_name = audioFilename;
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
       return this;
     }
 
@@ -2745,7 +2968,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_serialized_name.
      *
-     * **When specifying an array of one or more words,** you must specify the custom word that is to be added to or updated in the custom model. Do not include spaces in the word. Use a - (dash) or _ (underscore) to connect the tokens of compound words. **When adding or updating a single word directly,** omit this field.
+     * For the **Add custom words** method, you must specify the custom word that is to be added to or updated in the custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.   Omit this field for the **Add a custom word** method.
      *
      * @return the word_serialized_name
      */
@@ -3314,6 +3537,97 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
+   * The deleteUserData options.
+   */
+  public class DeleteUserDataOptions extends IBMWatsonOptionsModel {
+    private String customer_id_serialized_name;
+    /**
+     * Gets the customer_id_serialized_name.
+     *
+     * The customer ID for which all data is to be deleted.
+     *
+     * @return the customer_id_serialized_name
+     */
+    public String customerId() {
+      return customer_id_serialized_name;
+    }
+    private DeleteUserDataOptions(DeleteUserDataOptionsBuilder builder) {
+      IBMWatsonValidator.notNull(builder.customer_id_serialized_name, 'customer_id_serialized_name cannot be null');
+      customer_id_serialized_name = builder.customer_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DeleteUserDataOptions builder
+     */
+    public DeleteUserDataOptionsBuilder newBuilder() {
+      return new DeleteUserDataOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * DeleteUserDataOptions Builder.
+   */
+  public class DeleteUserDataOptionsBuilder extends IBMWatsonOptionsModel {
+    private String customer_id_serialized_name;
+
+    private DeleteUserDataOptionsBuilder(DeleteUserDataOptions deleteUserDataOptions) {
+      customer_id_serialized_name = deleteUserDataOptions.customer_id_serialized_name;
+      this.requestHeaders.putAll(deleteUserDataOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DeleteUserDataOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param customerId the customerId
+     */
+    public DeleteUserDataOptionsBuilder(String customerId) {
+      this.customer_id_serialized_name = customerId;
+    }
+
+    /**
+     * Builds a DeleteUserDataOptions.
+     *
+     * @return the deleteUserDataOptions
+     */
+    public DeleteUserDataOptions build() {
+      return new DeleteUserDataOptions(this);
+    }
+
+    /**
+     * Set the customer_id_serialized_name.
+     *
+     * @param customerId the customerId
+     * @return the DeleteUserDataOptions builder
+     */
+    public DeleteUserDataOptionsBuilder customerId(String customerId) {
+      this.customer_id_serialized_name = customerId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteUserDataOptions builder
+     */
+    public DeleteUserDataOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The deleteWord options.
    */
   public class DeleteWordOptions extends IBMWatsonOptionsModel {
@@ -3332,7 +3646,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_name_serialized_name.
      *
-     * The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
+     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
      *
      * @return the word_name_serialized_name
      */
@@ -3962,7 +4276,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_name_serialized_name.
      *
-     * The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
+     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
      *
      * @return the word_name_serialized_name
      */
@@ -4065,7 +4379,7 @@ public class IBMSpeechToTextV1Models {
   /**
    * KeywordResult.
    */
-  public class KeywordResult extends IBMWatsonGenericModel {
+  public class KeywordResult {
     private String normalized_text_serialized_name;
     private Double start_time_serialized_name;
     private Double end_time_serialized_name;
@@ -4147,15 +4461,6 @@ public class IBMSpeechToTextV1Models {
       this.confidence_serialized_name = confidence;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      KeywordResult ret = (KeywordResult) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -4177,7 +4482,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. **Note:** When you create a new custom language model, the service returns only the GUID of the new model; it does not return the other fields of this object.
+     * The customization ID (GUID) of the custom language model. The **Create a custom language model** method returns only this field of the object; it does not return the other fields.
      *
      * @return the customization_id_serialized_name
      */
@@ -4287,7 +4592,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the progress_serialized_name.
      *
-     * A percentage that indicates the progress of the custom language model's current training. A value of `100` means that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the training; the field changes from `0` to `100` when training is complete.
+     * A percentage that indicates the progress of the custom language model's current training. A value of `100` means that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the training. The field changes from `0` to `100` when training is complete.
      *
      * @return the progress_serialized_name
      */
@@ -5065,7 +5370,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the updated_serialized_name.
      *
-     * The date and time in Coordinated Universal Time (UTC) at which the job was last updated by the service. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`). **Note:** This field is returned only when you list information about a specific or all existing jobs.
+     * The date and time in Coordinated Universal Time (UTC) at which the job was last updated by the service. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`). This field is returned only by the **Check jobs** and **Check a job** methods.
      *
      * @return the updated_serialized_name
      */
@@ -5076,7 +5381,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the url_serialized_name.
      *
-     * The URL to use to request information about the job with the **Check a job** method. **Note:** This field is returned only when you create a new job.
+     * The URL to use to request information about the job with the **Check a job** method. This field is returned only by the **Create a job** method.
      *
      * @return the url_serialized_name
      */
@@ -5087,7 +5392,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the user_token_serialized_name.
      *
-     * The user token associated with a job that was created with a callback URL and a user token. **Note:** This field can be returned only when you list information about all existing jobs.
+     * The user token associated with a job that was created with a callback URL and a user token. This field can be returned only by the **Check jobs** method.
      *
      * @return the user_token_serialized_name
      */
@@ -5098,7 +5403,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the results_serialized_name.
      *
-     * If the status is `completed`, the results of the recognition request as an array that includes a single instance of a `SpeechRecognitionResults` object. **Note:** This field can be returned only when you list information about a specific existing job.
+     * If the status is `completed`, the results of the recognition request as an array that includes a single instance of a `SpeechRecognitionResults` object. This field is returned only by the **Check a job** method.
      *
      * @return the results_serialized_name
      */
@@ -5109,7 +5414,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the warnings_serialized_name.
      *
-     * An array of warning messages about invalid parameters included with the request. Each warning includes a descriptive message and a list of invalid argument strings, for example, `"unexpected query parameter 'user_token', query parameter 'callback_url' was not specified"`. The request succeeds despite the warnings. **Note:** This field can be returned only when you create a new job.
+     * An array of warning messages about invalid parameters included with the request. Each warning includes a descriptive message and a list of invalid argument strings, for example, `"unexpected query parameter 'user_token', query parameter 'callback_url' was not specified"`. The request succeeds despite the warnings. This field can be returned only by the **Create a job** method.
      *
      * @return the warnings_serialized_name
      */
@@ -5264,280 +5569,593 @@ public class IBMSpeechToTextV1Models {
     }
   }
 
-  public class RecognizeOptions extends IBMWatsonOptionsModel {
-    private IBMWatsonFile audio_serialized_name;
-    private String audio_filename_serialized_name;
-    private String file_content_type_serialized_name;
-    private Boolean continuous_serialized_name;
-    private Integer max_alternatives_serialized_name;
-    private Boolean timestamps_serialized_name;
-    private Boolean word_confidence_serialized_name;
-    private Integer inactivity_timeout_serialized_name;
+  /**
+   * The recognizeSessionless options.
+   */
+  public class RecognizeSessionlessOptions extends IBMWatsonOptionsModel {
+    private String content_type_serialized_name;
     private String model_serialized_name;
-    private Boolean interim_results_serialized_name;
-    private Boolean keywords_serialized_name;
+    private String customization_id_serialized_name;
+    private String acoustic_customization_id_serialized_name;
+    private String base_model_version_serialized_name;
+    private Double customization_weight_serialized_name;
+    private Long inactivity_timeout_serialized_name;
+    private List<String> keywords_serialized_name;
     private Double keywords_threshold_serialized_name;
+    private Long max_alternatives_serialized_name;
     private Double word_alternatives_threshold_serialized_name;
+    private Boolean word_confidence_serialized_name;
+    private Boolean timestamps_serialized_name;
     private Boolean profanity_filter_serialized_name;
     private Boolean smart_formatting_serialized_name;
-    private String customization_id_serialized_name;
     private Boolean speaker_labels_serialized_name;
-    private String base_model_version_serialized_name;
-
-    public IBMWatsonFile audio() {
-      return audio_serialized_name;
+    /**
+     * Gets the content_type_serialized_name.
+     *
+     * The type of the input: audio/basic, audio/flac, audio/l16, audio/mp3, audio/mpeg, audio/mulaw, audio/ogg, audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/wav, audio/webm, audio/webm;codecs=opus, or audio/webm;codecs=vorbis.
+     *
+     * @return the content_type_serialized_name
+     */
+    public String contentType() {
+      return content_type_serialized_name;
     }
-
-    public String audioFilename() {
-      return audio_filename_serialized_name;
-    }
-
-    public String fileContentType() {
-      return file_content_type_serialized_name;
-    }
-
-    public Boolean continuous() {
-      return continuous_serialized_name;
-    }
-
-    public Integer maxAlternatives() {
-      return max_alternatives_serialized_name;
-    }
-
-    public Boolean timestamps() {
-      return timestamps_serialized_name;
-    }
-
-    public Boolean wordConfidence() {
-      return word_confidence_serialized_name;
-    }
-
-    public Integer inactivityTimeout() {
-      return inactivity_timeout_serialized_name;
-    }
-
+    /**
+     * Gets the model_serialized_name.
+     *
+     * The identifier of the model that is to be used for the recognition request or, for the **Create a session** method, with the new session.
+     *
+     * @return the model_serialized_name
+     */
     public String model() {
       return model_serialized_name;
     }
-
-    public Boolean interimResults() {
-      return interim_results_serialized_name;
-    }
-
-    public Boolean keywords() {
-      return keywords_serialized_name;
-    }
-
-    public Double keywordsThreshold() {
-      return keywords_threshold_serialized_name;
-    }
-
-    public Double wordAlternativesThreshold() {
-      return word_alternatives_threshold_serialized_name;
-    }
-
-    public Boolean profanityFilter() {
-      return profanity_filter_serialized_name;
-    }
-
-    public Boolean smartFormatting() {
-      return smart_formatting_serialized_name;
-    }
-
+    /**
+     * Gets the customization_id_serialized_name.
+     *
+     * The customization ID (GUID) of a custom language model that is to be used with the recognition request or, for the **Create a session** method, with the new session. The base model of the specified custom language model must match the model specified with the `model` parameter. You must make the request with service credentials created for the instance of the service that owns the custom model. By default, no custom language model is used.
+     *
+     * @return the customization_id_serialized_name
+     */
     public String customizationId() {
       return customization_id_serialized_name;
     }
-
-    public Boolean speakerLabels() {
-      return speaker_labels_serialized_name;
+    /**
+     * Gets the acoustic_customization_id_serialized_name.
+     *
+     * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request or, for the **Create a session** method, with the new session. The base model of the specified custom acoustic model must match the model specified with the `model` parameter. You must make the request with service credentials created for the instance of the service that owns the custom model. By default, no custom acoustic model is used.
+     *
+     * @return the acoustic_customization_id_serialized_name
+     */
+    public String acousticCustomizationId() {
+      return acoustic_customization_id_serialized_name;
     }
-
+    /**
+     * Gets the base_model_version_serialized_name.
+     *
+     * The version of the specified base model that is to be used with recognition request or, for the **Create a session** method, with the new session. Multiple versions of a base model can exist when a model is updated for internal improvements. The parameter is intended primarily for use with custom models that have been upgraded for a new base model. The default value depends on whether the parameter is used with or without a custom model. For more information, see [Base model version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
+     *
+     * @return the base_model_version_serialized_name
+     */
     public String baseModelVersion() {
       return base_model_version_serialized_name;
     }
-
-    private RecognizeOptions(RecognizeOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.file_content_type_serialized_name, 'fileContenttype cannot be empty');
-      audio_serialized_name = builder.audio_serialized_name;
-      audio_filename_serialized_name = builder.audio_filename_serialized_name;
-      file_content_type_serialized_name = builder.file_content_type_serialized_name;
-      continuous_serialized_name = builder.continuous_serialized_name;
-      max_alternatives_serialized_name = builder.max_alternatives_serialized_name;
-      timestamps_serialized_name = builder.timestamps_serialized_name;
-      word_confidence_serialized_name = builder.word_confidence_serialized_name;
-      inactivity_timeout_serialized_name = builder.inactivity_timeout_serialized_name;
+    /**
+     * Gets the customization_weight_serialized_name.
+     *
+     * If you specify the customization ID (GUID) of a custom language model with the recognition request or, for sessions, with the **Create a session** method, the customization weight tells the service how much weight to give to words from the custom language model compared to those from the base model for the current request.   Specify a value between 0.0 and 1.0. Unless a different customization weight was specified for the custom model when it was trained, the default value is 0.3. A customization weight that you specify overrides a weight that was specified when the custom model was trained.   The default value yields the best performance in general. Assign a higher value if your audio makes frequent use of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
+     *
+     * @return the customization_weight_serialized_name
+     */
+    public Double customizationWeight() {
+      return customization_weight_serialized_name;
+    }
+    /**
+     * Gets the inactivity_timeout_serialized_name.
+     *
+     * The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is closed with a 400 error. Useful for stopping audio submission from a live microphone when a user simply walks away. Use `-1` for infinity.
+     *
+     * @return the inactivity_timeout_serialized_name
+     */
+    public Long inactivityTimeout() {
+      return inactivity_timeout_serialized_name;
+    }
+    /**
+     * Gets the keywords_serialized_name.
+     *
+     * An array of keyword strings to spot in the audio. Each keyword string can include one or more tokens. Keywords are spotted only in the final hypothesis, not in interim results. If you specify any keywords, you must also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an empty array if you do not need to spot keywords.
+     *
+     * @return the keywords_serialized_name
+     */
+    public List<String> keywords() {
+      return keywords_serialized_name;
+    }
+    /**
+     * Gets the keywords_threshold_serialized_name.
+     *
+     * A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No keyword spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more keywords.
+     *
+     * @return the keywords_threshold_serialized_name
+     */
+    public Double keywordsThreshold() {
+      return keywords_threshold_serialized_name;
+    }
+    /**
+     * Gets the max_alternatives_serialized_name.
+     *
+     * The maximum number of alternative transcripts to be returned. By default, a single transcription is returned.
+     *
+     * @return the max_alternatives_serialized_name
+     */
+    public Long maxAlternatives() {
+      return max_alternatives_serialized_name;
+    }
+    /**
+     * Gets the word_alternatives_threshold_serialized_name.
+     *
+     * A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also known as "Confusion Networks"). An alternative word is considered if its confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No alternative words are computed if you omit the parameter.
+     *
+     * @return the word_alternatives_threshold_serialized_name
+     */
+    public Double wordAlternativesThreshold() {
+      return word_alternatives_threshold_serialized_name;
+    }
+    /**
+     * Gets the word_confidence_serialized_name.
+     *
+     * If `true`, a confidence measure in the range of 0 to 1 is returned for each word. By default, no word confidence measures are returned.
+     *
+     * @return the word_confidence_serialized_name
+     */
+    public Boolean wordConfidence() {
+      return word_confidence_serialized_name;
+    }
+    /**
+     * Gets the timestamps_serialized_name.
+     *
+     * If `true`, time alignment is returned for each word. By default, no timestamps are returned.
+     *
+     * @return the timestamps_serialized_name
+     */
+    public Boolean timestamps() {
+      return timestamps_serialized_name;
+    }
+    /**
+     * Gets the profanity_filter_serialized_name.
+     *
+     * If `true` (the default), filters profanity from all output except for keyword results by replacing inappropriate words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US English transcription only.
+     *
+     * @return the profanity_filter_serialized_name
+     */
+    public Boolean profanityFilter() {
+      return profanity_filter_serialized_name;
+    }
+    /**
+     * Gets the smart_formatting_serialized_name.
+     *
+     * If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and internet addresses into more readable, conventional representations in the final transcript of a recognition request. For US English, also converts certain keyword strings to punctuation symbols. By default, no smart formatting is performed. Applies to US English and Spanish transcription only.
+     *
+     * @return the smart_formatting_serialized_name
+     */
+    public Boolean smartFormatting() {
+      return smart_formatting_serialized_name;
+    }
+    /**
+     * Gets the speaker_labels_serialized_name.
+     *
+     * If `true`, the response includes labels that identify which words were spoken by which participants in a multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.   To determine whether a language model supports speaker labels, use the **Get models** method and check that the attribute `speaker_labels` is set to `true`. You can also refer to [Speaker labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
+     *
+     * @return the speaker_labels_serialized_name
+     */
+    public Boolean speakerLabels() {
+      return speaker_labels_serialized_name;
+    }
+    private RecognizeSessionlessOptions(RecognizeSessionlessOptionsBuilder builder) {
+      IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
+      content_type_serialized_name = builder.content_type_serialized_name;
       model_serialized_name = builder.model_serialized_name;
-      interim_results_serialized_name = builder.interim_results_serialized_name;
+      customization_id_serialized_name = builder.customization_id_serialized_name;
+      acoustic_customization_id_serialized_name = builder.acoustic_customization_id_serialized_name;
+      base_model_version_serialized_name = builder.base_model_version_serialized_name;
+      customization_weight_serialized_name = builder.customization_weight_serialized_name;
+      inactivity_timeout_serialized_name = builder.inactivity_timeout_serialized_name;
       keywords_serialized_name = builder.keywords_serialized_name;
       keywords_threshold_serialized_name = builder.keywords_threshold_serialized_name;
+      max_alternatives_serialized_name = builder.max_alternatives_serialized_name;
       word_alternatives_threshold_serialized_name = builder.word_alternatives_threshold_serialized_name;
+      word_confidence_serialized_name = builder.word_confidence_serialized_name;
+      timestamps_serialized_name = builder.timestamps_serialized_name;
       profanity_filter_serialized_name = builder.profanity_filter_serialized_name;
       smart_formatting_serialized_name = builder.smart_formatting_serialized_name;
-      customization_id_serialized_name = builder.customization_id_serialized_name;
       speaker_labels_serialized_name = builder.speaker_labels_serialized_name;
-      base_model_version_serialized_name = builder.base_model_version_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
-    public RecognizeOptionsBuilder newBuilder() {
-      return new RecognizeOptionsBuilder(this);
+    /**
+     * New builder.
+     *
+     * @return a RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder newBuilder() {
+      return new RecognizeSessionlessOptionsBuilder(this);
     }
+
   }
 
-  public class RecognizeOptionsBuilder extends IBMWatsonOptionsModel {
-    private IBMWatsonFile audio_serialized_name;
-    private String audio_filename_serialized_name;
-    private String file_content_type_serialized_name;
-    private Boolean continuous_serialized_name;
-    private Integer max_alternatives_serialized_name;
-    private Boolean timestamps_serialized_name;
-    private Boolean word_confidence_serialized_name;
-    private Integer inactivity_timeout_serialized_name;
+  /**
+   * RecognizeSessionlessOptions Builder.
+   */
+  public class RecognizeSessionlessOptionsBuilder extends IBMWatsonOptionsModel {
+    private String content_type_serialized_name;
     private String model_serialized_name;
-    private Boolean interim_results_serialized_name;
-    private Boolean keywords_serialized_name;
+    private String customization_id_serialized_name;
+    private String acoustic_customization_id_serialized_name;
+    private String base_model_version_serialized_name;
+    private Double customization_weight_serialized_name;
+    private Long inactivity_timeout_serialized_name;
+    private List<String> keywords_serialized_name;
     private Double keywords_threshold_serialized_name;
+    private Long max_alternatives_serialized_name;
     private Double word_alternatives_threshold_serialized_name;
+    private Boolean word_confidence_serialized_name;
+    private Boolean timestamps_serialized_name;
     private Boolean profanity_filter_serialized_name;
     private Boolean smart_formatting_serialized_name;
-    private String customization_id_serialized_name;
     private Boolean speaker_labels_serialized_name;
-    private String base_model_version_serialized_name;
 
-    private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
-      audio_serialized_name = recognizeOptions.audio_serialized_name;
-      audio_filename_serialized_name = recognizeOptions.audio_filename_serialized_name;
-      file_content_type_serialized_name = recognizeOptions.file_content_type_serialized_name;
-      continuous_serialized_name = recognizeOptions.continuous_serialized_name;
-      max_alternatives_serialized_name = recognizeOptions.max_alternatives_serialized_name;
-      timestamps_serialized_name = recognizeOptions.timestamps_serialized_name;
-      word_confidence_serialized_name = recognizeOptions.word_confidence_serialized_name;
-      inactivity_timeout_serialized_name = recognizeOptions.inactivity_timeout_serialized_name;
-      model_serialized_name = recognizeOptions.model_serialized_name;
-      interim_results_serialized_name = recognizeOptions.interim_results_serialized_name;
-      keywords_serialized_name = recognizeOptions.keywords_serialized_name;
-      keywords_threshold_serialized_name = recognizeOptions.keywords_threshold_serialized_name;
-      word_alternatives_threshold_serialized_name = recognizeOptions.word_alternatives_threshold_serialized_name;
-      profanity_filter_serialized_name = recognizeOptions.profanity_filter_serialized_name;
-      smart_formatting_serialized_name = recognizeOptions.smart_formatting_serialized_name;
-      customization_id_serialized_name = recognizeOptions.customization_id_serialized_name;
-      speaker_labels_serialized_name = recognizeOptions.speaker_labels_serialized_name;
-      base_model_version_serialized_name = recognizeOptions.base_model_version_serialized_name;
+    private RecognizeSessionlessOptionsBuilder(RecognizeSessionlessOptions recognizeSessionlessOptions) {
+      content_type_serialized_name = recognizeSessionlessOptions.content_type_serialized_name;
+      model_serialized_name = recognizeSessionlessOptions.model_serialized_name;
+      customization_id_serialized_name = recognizeSessionlessOptions.customization_id_serialized_name;
+      acoustic_customization_id_serialized_name = recognizeSessionlessOptions.acoustic_customization_id_serialized_name;
+      base_model_version_serialized_name = recognizeSessionlessOptions.base_model_version_serialized_name;
+      customization_weight_serialized_name = recognizeSessionlessOptions.customization_weight_serialized_name;
+      inactivity_timeout_serialized_name = recognizeSessionlessOptions.inactivity_timeout_serialized_name;
+      keywords_serialized_name = recognizeSessionlessOptions.keywords_serialized_name;
+      keywords_threshold_serialized_name = recognizeSessionlessOptions.keywords_threshold_serialized_name;
+      max_alternatives_serialized_name = recognizeSessionlessOptions.max_alternatives_serialized_name;
+      word_alternatives_threshold_serialized_name = recognizeSessionlessOptions.word_alternatives_threshold_serialized_name;
+      word_confidence_serialized_name = recognizeSessionlessOptions.word_confidence_serialized_name;
+      timestamps_serialized_name = recognizeSessionlessOptions.timestamps_serialized_name;
+      profanity_filter_serialized_name = recognizeSessionlessOptions.profanity_filter_serialized_name;
+      smart_formatting_serialized_name = recognizeSessionlessOptions.smart_formatting_serialized_name;
+      speaker_labels_serialized_name = recognizeSessionlessOptions.speaker_labels_serialized_name;
+      this.requestHeaders.putAll(recognizeSessionlessOptions.requestHeaders());
     }
 
-    public RecognizeOptionsBuilder() {
+    /**
+     * Instantiates a new builder.
+     */
+    public RecognizeSessionlessOptionsBuilder() {
     }
 
-    public RecognizeOptionsBuilder(IBMWatsonFile audio, String audioFilename, String fileContentType) {
-      this.audio_serialized_name = audio;
-      this.audio_filename_serialized_name = audioFilename;
-      this.file_content_type_serialized_name = fileContentType;
+    /**
+     * Builds a RecognizeSessionlessOptions.
+     *
+     * @return the recognizeSessionlessOptions
+     */
+    public RecognizeSessionlessOptions build() {
+      return new RecognizeSessionlessOptions(this);
     }
 
-    public RecognizeOptions build() {
-      return new RecognizeOptions(this);
-    }
-
-    public RecognizeOptionsBuilder audio(IBMWatsonFile audio) {
-      this.audio_serialized_name = audio;
+    /**
+     * Adds an keywords to keywords_serialized_name.
+     *
+     * @param keywords the new keywords
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder addKeywords(String keywords) {
+      IBMWatsonValidator.notNull(keywords, 'keywords cannot be null');
+      if (this.keywords_serialized_name == null) {
+        this.keywords_serialized_name = new List<String>();
+      }
+      this.keywords_serialized_name.add(keywords);
       return this;
     }
 
-    public RecognizeOptionsBuilder audioFilename(String audioFilename) {
-      this.audio_filename_serialized_name = audioFilename;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder fileContentType(String fileContentType) {
-      this.file_content_type_serialized_name = fileContentType;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder continuous(Boolean continuous) {
-      this.continuous_serialized_name = continuous;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder maxAlternatives(Integer maxAlternatives) {
-      this.max_alternatives_serialized_name = maxAlternatives;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder timestamps(Boolean timestamps) {
-      this.timestamps_serialized_name = timestamps;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder wordConfidence(Boolean wordConfidence) {
-      this.word_confidence_serialized_name = wordConfidence;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder inactivityTimeout(Integer inactivityTimeout) {
-      this.inactivity_timeout_serialized_name = inactivityTimeout;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder model(String model) {
+    /**
+     * Set the model_serialized_name.
+     *
+     * @param model the model
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder model(String model) {
       this.model_serialized_name = model;
       return this;
     }
 
-    public RecognizeOptionsBuilder interimResults(Boolean interimResults) {
-      this.interim_results_serialized_name = interimResults;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder keywords(Boolean keywords) {
-      this.keywords_serialized_name = keywords;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder keywordsThreshold(Double keywordsThreshold) {
-      this.keywords_threshold_serialized_name = keywordsThreshold;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder wordAlternativesThreshold(Double wordAlternativesThreshold) {
-      this.word_alternatives_threshold_serialized_name = wordAlternativesThreshold;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder profanityFilter(Boolean profanityFilter) {
-      this.profanity_filter_serialized_name = profanityFilter;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder smartFormatting(Boolean smartFormatting) {
-      this.smart_formatting_serialized_name = smartFormatting;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder customizationId(String customizationId) {
+    /**
+     * Set the customization_id_serialized_name.
+     *
+     * @param customizationId the customizationId
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder customizationId(String customizationId) {
       this.customization_id_serialized_name = customizationId;
       return this;
     }
 
-    public RecognizeOptionsBuilder speakerLabels(Boolean speakerLabels) {
-      this.speaker_labels_serialized_name = speakerLabels;
+    /**
+     * Set the acoustic_customization_id_serialized_name.
+     *
+     * @param acousticCustomizationId the acousticCustomizationId
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder acousticCustomizationId(String acousticCustomizationId) {
+      this.acoustic_customization_id_serialized_name = acousticCustomizationId;
       return this;
     }
 
-    public RecognizeOptionsBuilder baseModelVersion(String baseModelVersion) {
+    /**
+     * Set the base_model_version_serialized_name.
+     *
+     * @param baseModelVersion the baseModelVersion
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder baseModelVersion(String baseModelVersion) {
       this.base_model_version_serialized_name = baseModelVersion;
       return this;
     }
 
     /**
-    * Add a request header.
-    *
-    * @param name the header name
-    * @param value the header value
-    * @return the UpgradeLanguageModelOptions builder
-    */
-    public RecognizeOptionsBuilder addHeader(String name, String value) {
+     * Set the customization_weight_serialized_name.
+     *
+     * @param customizationWeight the customizationWeight
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder customizationWeight(Double customizationWeight) {
+      this.customization_weight_serialized_name = customizationWeight;
+      return this;
+    }
+
+    /**
+     * Set the inactivity_timeout_serialized_name.
+     *
+     * @param inactivityTimeout the inactivityTimeout
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder inactivityTimeout(Long inactivityTimeout) {
+      this.inactivity_timeout_serialized_name = inactivityTimeout;
+      return this;
+    }
+
+    /**
+     * Set the keywords_serialized_name.
+     * Existing keywords_serialized_name will be replaced.
+     *
+     * @param keywords the keywords
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder keywords(List<String> keywords) {
+      this.keywords_serialized_name = keywords;
+      return this;
+    }
+
+    /**
+     * Set the keywords_threshold_serialized_name.
+     *
+     * @param keywordsThreshold the keywordsThreshold
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder keywordsThreshold(Double keywordsThreshold) {
+      this.keywords_threshold_serialized_name = keywordsThreshold;
+      return this;
+    }
+
+    /**
+     * Set the max_alternatives_serialized_name.
+     *
+     * @param maxAlternatives the maxAlternatives
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder maxAlternatives(Long maxAlternatives) {
+      this.max_alternatives_serialized_name = maxAlternatives;
+      return this;
+    }
+
+    /**
+     * Set the word_alternatives_threshold_serialized_name.
+     *
+     * @param wordAlternativesThreshold the wordAlternativesThreshold
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder wordAlternativesThreshold(Double wordAlternativesThreshold) {
+      this.word_alternatives_threshold_serialized_name = wordAlternativesThreshold;
+      return this;
+    }
+
+    /**
+     * Set the word_confidence_serialized_name.
+     *
+     * @param wordConfidence the wordConfidence
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder wordConfidence(Boolean wordConfidence) {
+      this.word_confidence_serialized_name = wordConfidence;
+      return this;
+    }
+
+    /**
+     * Set the timestamps_serialized_name.
+     *
+     * @param timestamps the timestamps
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder timestamps(Boolean timestamps) {
+      this.timestamps_serialized_name = timestamps;
+      return this;
+    }
+
+    /**
+     * Set the profanity_filter_serialized_name.
+     *
+     * @param profanityFilter the profanityFilter
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder profanityFilter(Boolean profanityFilter) {
+      this.profanity_filter_serialized_name = profanityFilter;
+      return this;
+    }
+
+    /**
+     * Set the smart_formatting_serialized_name.
+     *
+     * @param smartFormatting the smartFormatting
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder smartFormatting(Boolean smartFormatting) {
+      this.smart_formatting_serialized_name = smartFormatting;
+      return this;
+    }
+
+    /**
+     * Set the speaker_labels_serialized_name.
+     *
+     * @param speakerLabels the speakerLabels
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder speakerLabels(Boolean speakerLabels) {
+      this.speaker_labels_serialized_name = speakerLabels;
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -6030,7 +6648,7 @@ public class IBMSpeechToTextV1Models {
     private String url_serialized_name;
     private SupportedFeatures supported_features_serialized_name;
     private String description_serialized_name;
-
+    private String sessions_serialized_name;
     /**
      * Gets the name_serialized_name.
      *
@@ -6097,6 +6715,17 @@ public class IBMSpeechToTextV1Models {
     public String getDescription() {
       return description_serialized_name;
     }
+    /**
+     * Gets the sessions_serialized_name.
+     *
+     * The URI for the model for use with the **Create a session** method. This field is returned only by the **Get a model** method.
+     *
+     * @return the sessions_serialized_name
+     */
+    @AuraEnabled
+    public String getSessions() {
+      return sessions_serialized_name;
+    }
 
     /**
      * Sets the name_serialized_name.
@@ -6150,6 +6779,15 @@ public class IBMSpeechToTextV1Models {
      */
     public void setDescription(final String description) {
       this.description_serialized_name = description;
+    }
+
+    /**
+     * Sets the sessions_serialized_name.
+     *
+     * @param sessions the new sessions
+     */
+    public void setSessions(final String sessions) {
+      this.sessions_serialized_name = sessions;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6223,8 +6861,8 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript_serialized_name;
     private Double confidence_serialized_name;
-    private List<List<String>> timestamps_serialized_name;
-    private List<List<String>> word_confidence_serialized_name;
+    private List<String> timestamps_serialized_name;
+    private List<String> word_confidence_serialized_name;
     /**
      * Gets the transcript_serialized_name.
      *
@@ -6255,7 +6893,7 @@ public class IBMSpeechToTextV1Models {
      * @return the timestamps_serialized_name
      */
     @AuraEnabled
-    public List<List<String>> getTimestamps() {
+    public List<String> getTimestamps() {
       return timestamps_serialized_name;
     }
     /**
@@ -6266,7 +6904,7 @@ public class IBMSpeechToTextV1Models {
      * @return the word_confidence_serialized_name
      */
     @AuraEnabled
-    public List<List<String>> getWordConfidence() {
+    public List<String> getWordConfidence() {
       return word_confidence_serialized_name;
     }
 
@@ -6293,7 +6931,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<List<String>> timestamps) {
+    public void setTimestamps(final List<String> timestamps) {
       this.timestamps_serialized_name = timestamps;
     }
 
@@ -6302,7 +6940,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<List<String>> wordConfidence) {
+    public void setWordConfidence(final List<String> wordConfidence) {
       this.word_confidence_serialized_name = wordConfidence;
     }
 
@@ -6427,23 +7065,8 @@ public class IBMSpeechToTextV1Models {
       }
 
       // calling custom deserializer for keywords_result_serialized_name
-      Map<String, List<KeywordResult>> newKeywordsResult = new Map<String, List<KeywordResult>>();
-      Map<String, List<KeywordResult>> deserializedKeywordsResult = ret.getKeywordsResult();
-      if (deserializedKeywordsResult != null) {
-        for (String key : deserializedKeywordsResult.keySet()) {
-          List<KeywordResult> newKeywordResult = new List<KeywordResult>();
-          List<KeywordResult> keywordResultList = deserializedKeywordsResult.get(key);
-          for (Integer i = 0; i < keywordResultList.size(); i++) {
-            KeywordResult currentItem = keywordResultList.get(i);
-            Map<String, Object> itemInMap = (Map<String, Object>) jsonMap.get('keywords_result_serialized_name');
-            Object innerKeywordResult = ((List<Object>) itemInMap.get(key)).get(i);
-            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(innerKeywordResult)), KeywordResult.class);
-            newKeywordResult.add(newItem);
-          }
-          newKeywordsResult.put(key, newKeywordResult);
-        }
-        ret.setKeywordsResult(newKeywordsResult);
-      }
+      Map<String, List<KeywordResult>> newKeywordsResult = (Map<String, List<KeywordResult>>) new Map<String, List<KeywordResult>>().deserialize(JSON.serialize(ret.getKeywordsResult()), (Map<String, Object>) jsonMap.get('keywords_result_serialized_name'), Map<String, List<KeywordResult>>.class);
+      ret.setKeywordsResult(newKeywordsResult);
 
       // calling custom deserializer for word_alternatives_serialized_name
       List<WordAlternativeResults> newWordAlternatives = new List<WordAlternativeResults>();
@@ -6589,169 +7212,6 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * SpeechSession.
-   */
-  public class SpeechSession extends IBMWatsonResponseModel {
-    private String recognize_serialized_name;
-    private String recognizeWS_serialized_name;
-    private String observe_result_serialized_name;
-    private String session_id_serialized_name;
-    private String new_session_uri_serialized_name;
-    private String state_serialized_name;
-    private String model_serialized_name;
-    /**
-     * Gets the recognize_serialized_name.
-     *
-     * URI for HTTP REST recognition requests.
-     *
-     * @return the recognize_serialized_name
-     */
-    @AuraEnabled
-    public String getRecognize() {
-      return recognize_serialized_name;
-    }
-    /**
-     * Gets the recognizeWS_serialized_name.
-     *
-     * URI for WebSocket recognition requests. **Note:** This field is needed only for working with the WebSocket interface.
-     *
-     * @return the recognizeWS_serialized_name
-     */
-    @AuraEnabled
-    public String getRecognizeWS() {
-      return recognizeWS_serialized_name;
-    }
-    /**
-     * Gets the observe_result_serialized_name.
-     *
-     * URI for HTTP REST results observers.
-     *
-     * @return the observe_result_serialized_name
-     */
-    @AuraEnabled
-    public String getObserveResult() {
-      return observe_result_serialized_name;
-    }
-    /**
-     * Gets the session_id_serialized_name.
-     *
-     * Identifier for the new session. **Note:** This field is returned only when you create a new session.
-     *
-     * @return the session_id_serialized_name
-     */
-    @AuraEnabled
-    public String getSessionId() {
-      return session_id_serialized_name;
-    }
-    /**
-     * Gets the new_session_uri_serialized_name.
-     *
-     * URI for the new session. **Note:** This field is returned only when you create a new session.
-     *
-     * @return the new_session_uri_serialized_name
-     */
-    @AuraEnabled
-    public String getNewSessionUri() {
-      return new_session_uri_serialized_name;
-    }
-    /**
-     * Gets the state_serialized_name.
-     *
-     * State of the session. The state must be `initialized` for the session to accept another recognition request. Other internal states are possible, but they have no meaning for the user. **Note:** This field is returned only when you request the status of an existing session.
-     *
-     * @return the state_serialized_name
-     */
-    @AuraEnabled
-    public String getState() {
-      return state_serialized_name;
-    }
-    /**
-     * Gets the model_serialized_name.
-     *
-     * URI for information about the model that is used with the session. **Note:** This field is returned only when you request the status of an existing session.
-     *
-     * @return the model_serialized_name
-     */
-    @AuraEnabled
-    public String getModel() {
-      return model_serialized_name;
-    }
-
-    /**
-     * Sets the recognize_serialized_name.
-     *
-     * @param recognize the new recognize
-     */
-    public void setRecognize(final String recognize) {
-      this.recognize_serialized_name = recognize;
-    }
-
-    /**
-     * Sets the recognizeWS_serialized_name.
-     *
-     * @param recognizeWS the new recognizeWS
-     */
-    public void setRecognizeWS(final String recognizeWS) {
-      this.recognizeWS_serialized_name = recognizeWS;
-    }
-
-    /**
-     * Sets the observe_result_serialized_name.
-     *
-     * @param observeResult the new observeResult
-     */
-    public void setObserveResult(final String observeResult) {
-      this.observe_result_serialized_name = observeResult;
-    }
-
-    /**
-     * Sets the session_id_serialized_name.
-     *
-     * @param sessionId the new sessionId
-     */
-    public void setSessionId(final String sessionId) {
-      this.session_id_serialized_name = sessionId;
-    }
-
-    /**
-     * Sets the new_session_uri_serialized_name.
-     *
-     * @param newSessionUri the new newSessionUri
-     */
-    public void setNewSessionUri(final String newSessionUri) {
-      this.new_session_uri_serialized_name = newSessionUri;
-    }
-
-    /**
-     * Sets the state_serialized_name.
-     *
-     * @param state the new state
-     */
-    public void setState(final String state) {
-      this.state_serialized_name = state;
-    }
-
-    /**
-     * Sets the model_serialized_name.
-     *
-     * @param model the new model
-     */
-    public void setModel(final String model) {
-      this.model_serialized_name = model;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SpeechSession ret = (SpeechSession) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
    * SupportedFeatures.
    */
   public class SupportedFeatures extends IBMWatsonGenericModel {
@@ -6771,7 +7231,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the speaker_labels_serialized_name.
      *
-     * Indicates whether the **speaker_labels** parameter can be used with the language model.
+     * Indicates whether the `speaker_labels` parameter can be used with the language model.
      *
      * @return the speaker_labels_serialized_name
      */
@@ -7677,7 +8137,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the element_serialized_name.
      *
-     * A key-value pair that describes an error associated with the definition of a word in the words resource. Each pair has the format `"element": "message"`, where `element` is the aspect of the definition that caused the problem and `message` describes the problem. The following example describes a problem with one of the word's sounds-like definitions: `"sounds_like_string": "Numbers are not allowed in sounds-like. You can try for example '{suggested_string}'."` You must correct the error before you can train the model.
+     * A key-value pair that describes an error associated with the definition of a word in the words resource. Each pair has the format `"element": "message"`, where `element` is the aspect of the definition that caused the problem and `message` describes the problem. The following example describes a problem with one of the word's sounds-like definitions: `"{sounds_like_string}": "Numbers are not allowed in sounds-like. You can try for example '{suggested_string}'."` You must correct the error before you can train the model.
      *
      * @return the element_serialized_name
      */
