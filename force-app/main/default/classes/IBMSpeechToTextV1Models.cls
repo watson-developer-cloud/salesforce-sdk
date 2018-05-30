@@ -17,7 +17,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom acoustic model. **Note:** When you create a new custom acoustic model, the service returns only the GUID of the new model; it does not return the other fields of this object.
+     * The customization ID (GUID) of the custom acoustic model. The **Create a custom acoustic model** method returns only this field of the object; it does not return the other fields.
      *
      * @return the customization_id_serialized_name
      */
@@ -116,7 +116,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the progress_serialized_name.
      *
-     * A percentage that indicates the progress of the custom acoustic model's current training. A value of `100` means that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the training; the field changes from `0` to `100` when training is complete.
+     * A percentage that indicates the progress of the custom acoustic model's current training. A value of `100` means that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the training. The field changes from `0` to `100` when training is complete.
      *
      * @return the progress_serialized_name
      */
@@ -488,12 +488,15 @@ public class IBMSpeechToTextV1Models {
       return this;
     }
 
-    public IBMWatsonFile audio() {
-      return audio_serialized_name;
+    public AddAudioOptionsBuilder audio(IBMWatsonFile audio) {
+      this.audio_serialized_name = audio;
+      this.content_type_serialized_name = audio.contentType();
+      return this;
     }
 
-    public String audioFilename() {
-      return audio_filename_serialized_name;
+    public AddAudioOptionsBuilder audioFilename(String audioFilename) {
+      this.audio_filename_serialized_name = audioFilename;
+      return this;
     }
 
     /**
@@ -753,7 +756,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_name_serialized_name.
      *
-     * The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
+     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
      *
      * @return the word_name_serialized_name
      */
@@ -763,7 +766,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_serialized_name.
      *
-     * **When specifying an array of one or more words,** you must specify the custom word that is to be added to or updated in the custom model. Do not include spaces in the word. Use a - (dash) or _ (underscore) to connect the tokens of compound words. **When adding or updating a single word directly,** omit this field.
+     * For the **Add custom words** method, you must specify the custom word that is to be added to or updated in the custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.   Omit this field for the **Add a custom word** method.
      *
      * @return the word_serialized_name
      */
@@ -2185,7 +2188,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the smart_formatting_serialized_name.
      *
-     * If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and Internet addresses into more readable, conventional representations in the final transcript of a recognition request. By default, no smart formatting is performed. Applies to US English transcription only.
+     * If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and internet addresses into more readable, conventional representations in the final transcript of a recognition request. For US English, also converts certain keyword strings to punctuation symbols. By default, no smart formatting is performed. Applies to US English and Spanish transcription only.
      *
      * @return the smart_formatting_serialized_name
      */
@@ -2745,7 +2748,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_serialized_name.
      *
-     * **When specifying an array of one or more words,** you must specify the custom word that is to be added to or updated in the custom model. Do not include spaces in the word. Use a - (dash) or _ (underscore) to connect the tokens of compound words. **When adding or updating a single word directly,** omit this field.
+     * For the **Add custom words** method, you must specify the custom word that is to be added to or updated in the custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.   Omit this field for the **Add a custom word** method.
      *
      * @return the word_serialized_name
      */
@@ -3314,6 +3317,97 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
+   * The deleteUserData options.
+   */
+  public class DeleteUserDataOptions extends IBMWatsonOptionsModel {
+    private String customer_id_serialized_name;
+    /**
+     * Gets the customer_id_serialized_name.
+     *
+     * The customer ID for which all data is to be deleted.
+     *
+     * @return the customer_id_serialized_name
+     */
+    public String customerId() {
+      return customer_id_serialized_name;
+    }
+    private DeleteUserDataOptions(DeleteUserDataOptionsBuilder builder) {
+      IBMWatsonValidator.notNull(builder.customer_id_serialized_name, 'customer_id_serialized_name cannot be null');
+      customer_id_serialized_name = builder.customer_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DeleteUserDataOptions builder
+     */
+    public DeleteUserDataOptionsBuilder newBuilder() {
+      return new DeleteUserDataOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * DeleteUserDataOptions Builder.
+   */
+  public class DeleteUserDataOptionsBuilder extends IBMWatsonOptionsModel {
+    private String customer_id_serialized_name;
+
+    private DeleteUserDataOptionsBuilder(DeleteUserDataOptions deleteUserDataOptions) {
+      customer_id_serialized_name = deleteUserDataOptions.customer_id_serialized_name;
+      this.requestHeaders.putAll(deleteUserDataOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DeleteUserDataOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param customerId the customerId
+     */
+    public DeleteUserDataOptionsBuilder(String customerId) {
+      this.customer_id_serialized_name = customerId;
+    }
+
+    /**
+     * Builds a DeleteUserDataOptions.
+     *
+     * @return the deleteUserDataOptions
+     */
+    public DeleteUserDataOptions build() {
+      return new DeleteUserDataOptions(this);
+    }
+
+    /**
+     * Set the customer_id_serialized_name.
+     *
+     * @param customerId the customerId
+     * @return the DeleteUserDataOptions builder
+     */
+    public DeleteUserDataOptionsBuilder customerId(String customerId) {
+      this.customer_id_serialized_name = customerId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteUserDataOptions builder
+     */
+    public DeleteUserDataOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The deleteWord options.
    */
   public class DeleteWordOptions extends IBMWatsonOptionsModel {
@@ -3332,7 +3426,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_name_serialized_name.
      *
-     * The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
+     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
      *
      * @return the word_name_serialized_name
      */
@@ -3962,7 +4056,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_name_serialized_name.
      *
-     * The custom word for the custom language model. When adding or updating a custom word, do not include spaces in the word; use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
+     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
      *
      * @return the word_name_serialized_name
      */
@@ -4177,7 +4271,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. **Note:** When you create a new custom language model, the service returns only the GUID of the new model; it does not return the other fields of this object.
+     * The customization ID (GUID) of the custom language model. The **Create a custom language model** method returns only this field of the object; it does not return the other fields.
      *
      * @return the customization_id_serialized_name
      */
@@ -4287,7 +4381,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the progress_serialized_name.
      *
-     * A percentage that indicates the progress of the custom language model's current training. A value of `100` means that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the training; the field changes from `0` to `100` when training is complete.
+     * A percentage that indicates the progress of the custom language model's current training. A value of `100` means that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the training. The field changes from `0` to `100` when training is complete.
      *
      * @return the progress_serialized_name
      */
@@ -5065,7 +5159,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the updated_serialized_name.
      *
-     * The date and time in Coordinated Universal Time (UTC) at which the job was last updated by the service. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`). **Note:** This field is returned only when you list information about a specific or all existing jobs.
+     * The date and time in Coordinated Universal Time (UTC) at which the job was last updated by the service. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`). This field is returned only by the **Check jobs** and **Check a job** methods.
      *
      * @return the updated_serialized_name
      */
@@ -5076,7 +5170,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the url_serialized_name.
      *
-     * The URL to use to request information about the job with the **Check a job** method. **Note:** This field is returned only when you create a new job.
+     * The URL to use to request information about the job with the **Check a job** method. This field is returned only by the **Create a job** method.
      *
      * @return the url_serialized_name
      */
@@ -5087,7 +5181,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the user_token_serialized_name.
      *
-     * The user token associated with a job that was created with a callback URL and a user token. **Note:** This field can be returned only when you list information about all existing jobs.
+     * The user token associated with a job that was created with a callback URL and a user token. This field can be returned only by the **Check jobs** method.
      *
      * @return the user_token_serialized_name
      */
@@ -5098,7 +5192,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the results_serialized_name.
      *
-     * If the status is `completed`, the results of the recognition request as an array that includes a single instance of a `SpeechRecognitionResults` object. **Note:** This field can be returned only when you list information about a specific existing job.
+     * If the status is `completed`, the results of the recognition request as an array that includes a single instance of a `SpeechRecognitionResults` object. This field is returned only by the **Check a job** method.
      *
      * @return the results_serialized_name
      */
@@ -5109,7 +5203,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the warnings_serialized_name.
      *
-     * An array of warning messages about invalid parameters included with the request. Each warning includes a descriptive message and a list of invalid argument strings, for example, `"unexpected query parameter 'user_token', query parameter 'callback_url' was not specified"`. The request succeeds despite the warnings. **Note:** This field can be returned only when you create a new job.
+     * An array of warning messages about invalid parameters included with the request. Each warning includes a descriptive message and a list of invalid argument strings, for example, `"unexpected query parameter 'user_token', query parameter 'callback_url' was not specified"`. The request succeeds despite the warnings. This field can be returned only by the **Create a job** method.
      *
      * @return the warnings_serialized_name
      */
@@ -6589,169 +6683,6 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * SpeechSession.
-   */
-  public class SpeechSession extends IBMWatsonResponseModel {
-    private String recognize_serialized_name;
-    private String recognizeWS_serialized_name;
-    private String observe_result_serialized_name;
-    private String session_id_serialized_name;
-    private String new_session_uri_serialized_name;
-    private String state_serialized_name;
-    private String model_serialized_name;
-    /**
-     * Gets the recognize_serialized_name.
-     *
-     * URI for HTTP REST recognition requests.
-     *
-     * @return the recognize_serialized_name
-     */
-    @AuraEnabled
-    public String getRecognize() {
-      return recognize_serialized_name;
-    }
-    /**
-     * Gets the recognizeWS_serialized_name.
-     *
-     * URI for WebSocket recognition requests. **Note:** This field is needed only for working with the WebSocket interface.
-     *
-     * @return the recognizeWS_serialized_name
-     */
-    @AuraEnabled
-    public String getRecognizeWS() {
-      return recognizeWS_serialized_name;
-    }
-    /**
-     * Gets the observe_result_serialized_name.
-     *
-     * URI for HTTP REST results observers.
-     *
-     * @return the observe_result_serialized_name
-     */
-    @AuraEnabled
-    public String getObserveResult() {
-      return observe_result_serialized_name;
-    }
-    /**
-     * Gets the session_id_serialized_name.
-     *
-     * Identifier for the new session. **Note:** This field is returned only when you create a new session.
-     *
-     * @return the session_id_serialized_name
-     */
-    @AuraEnabled
-    public String getSessionId() {
-      return session_id_serialized_name;
-    }
-    /**
-     * Gets the new_session_uri_serialized_name.
-     *
-     * URI for the new session. **Note:** This field is returned only when you create a new session.
-     *
-     * @return the new_session_uri_serialized_name
-     */
-    @AuraEnabled
-    public String getNewSessionUri() {
-      return new_session_uri_serialized_name;
-    }
-    /**
-     * Gets the state_serialized_name.
-     *
-     * State of the session. The state must be `initialized` for the session to accept another recognition request. Other internal states are possible, but they have no meaning for the user. **Note:** This field is returned only when you request the status of an existing session.
-     *
-     * @return the state_serialized_name
-     */
-    @AuraEnabled
-    public String getState() {
-      return state_serialized_name;
-    }
-    /**
-     * Gets the model_serialized_name.
-     *
-     * URI for information about the model that is used with the session. **Note:** This field is returned only when you request the status of an existing session.
-     *
-     * @return the model_serialized_name
-     */
-    @AuraEnabled
-    public String getModel() {
-      return model_serialized_name;
-    }
-
-    /**
-     * Sets the recognize_serialized_name.
-     *
-     * @param recognize the new recognize
-     */
-    public void setRecognize(final String recognize) {
-      this.recognize_serialized_name = recognize;
-    }
-
-    /**
-     * Sets the recognizeWS_serialized_name.
-     *
-     * @param recognizeWS the new recognizeWS
-     */
-    public void setRecognizeWS(final String recognizeWS) {
-      this.recognizeWS_serialized_name = recognizeWS;
-    }
-
-    /**
-     * Sets the observe_result_serialized_name.
-     *
-     * @param observeResult the new observeResult
-     */
-    public void setObserveResult(final String observeResult) {
-      this.observe_result_serialized_name = observeResult;
-    }
-
-    /**
-     * Sets the session_id_serialized_name.
-     *
-     * @param sessionId the new sessionId
-     */
-    public void setSessionId(final String sessionId) {
-      this.session_id_serialized_name = sessionId;
-    }
-
-    /**
-     * Sets the new_session_uri_serialized_name.
-     *
-     * @param newSessionUri the new newSessionUri
-     */
-    public void setNewSessionUri(final String newSessionUri) {
-      this.new_session_uri_serialized_name = newSessionUri;
-    }
-
-    /**
-     * Sets the state_serialized_name.
-     *
-     * @param state the new state
-     */
-    public void setState(final String state) {
-      this.state_serialized_name = state;
-    }
-
-    /**
-     * Sets the model_serialized_name.
-     *
-     * @param model the new model
-     */
-    public void setModel(final String model) {
-      this.model_serialized_name = model;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SpeechSession ret = (SpeechSession) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
    * SupportedFeatures.
    */
   public class SupportedFeatures extends IBMWatsonGenericModel {
@@ -6771,7 +6702,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the speaker_labels_serialized_name.
      *
-     * Indicates whether the **speaker_labels** parameter can be used with the language model.
+     * Indicates whether the `speaker_labels` parameter can be used with the language model.
      *
      * @return the speaker_labels_serialized_name
      */
@@ -7677,7 +7608,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the element_serialized_name.
      *
-     * A key-value pair that describes an error associated with the definition of a word in the words resource. Each pair has the format `"element": "message"`, where `element` is the aspect of the definition that caused the problem and `message` describes the problem. The following example describes a problem with one of the word's sounds-like definitions: `"sounds_like_string": "Numbers are not allowed in sounds-like. You can try for example '{suggested_string}'."` You must correct the error before you can train the model.
+     * A key-value pair that describes an error associated with the definition of a word in the words resource. Each pair has the format `"element": "message"`, where `element` is the aspect of the definition that caused the problem and `message` describes the problem. The following example describes a problem with one of the word's sounds-like definitions: `"{sounds_like_string}": "Numbers are not allowed in sounds-like. You can try for example '{suggested_string}'."` You must correct the error before you can train the model.
      *
      * @return the element_serialized_name
      */

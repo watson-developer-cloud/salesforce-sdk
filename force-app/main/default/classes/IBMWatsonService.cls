@@ -3,6 +3,7 @@ public abstract class IBMWatsonService {
   protected String serviceName {get;set;}
 
   private String apiKey;
+  private String defaultEndPoint;
   private String endPoint;
   private String userAgent;
   private String name;
@@ -17,7 +18,7 @@ public abstract class IBMWatsonService {
   private static final String BEARER = 'Bearer ';
   private static final String VERSION = 'version';
   private static final String USER_AGENT_FORMAT = 'watson-apis-salesforce-sdk/{0}/({1})';
-  private static final String SDK_VERSION = '2.0.0';
+  private static final String SDK_VERSION = '2.1.0';
 
   /**
    * Instantiates a new Watson service.
@@ -220,7 +221,11 @@ public abstract class IBMWatsonService {
    */
   public void setEndPoint(String endPointParam) {
     if (String.isNotBlank(endPointParam)) {
-      this.endPoint = endPointParam.endsWith('/') ? endPointParam.removeEnd('/') : endPointParam;
+      String newEndPoint = endPointParam.endsWith('/') ? endPointParam.removeEnd('/') : endPointParam;
+      if (this.endPoint == null) {
+        this.defaultEndPoint = newEndPoint;
+      }
+      this.endPoint = newEndPoint;
     } else {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('endPointParam cannot be null or empty');
     }
@@ -233,6 +238,9 @@ public abstract class IBMWatsonService {
    */
   public void setApiKey(String apiKey) {
     if (String.isNotBlank(apiKey)) {
+      if (this.endPoint.equals(this.defaultEndPoint)) {
+        this.endPoint = 'https://gateway-a.watsonplatform.net/visual-recognition/api';
+      }
       this.apiKey = apiKey;
     }
   }
