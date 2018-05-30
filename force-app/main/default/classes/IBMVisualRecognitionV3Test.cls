@@ -305,4 +305,15 @@ private class IBMVisualRecognitionV3Test {
 
     Test.stopTest();
   }
+
+  /**
+   * Tests that when this service is authenticated with an API key, the endpoint is changed to the correct one.
+   */
+  static testMethod void testApiKeyEndPoint() {
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20');
+    visualRecognition.setApiKey(API_KEY);
+    String correctEndPoint = visualRecognition.getEndPoint();
+
+    System.assertEquals('https://gateway-a.watsonplatform.net/visual-recognition/api', correctEndPoint);
+  }
 }
