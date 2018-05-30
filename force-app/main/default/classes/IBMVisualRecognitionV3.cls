@@ -8,8 +8,7 @@
  */
 public class IBMVisualRecognitionV3 extends IBMWatsonService {
 
-  private static final String URL = 'https://gateway-a.watsonplatform.net/visual-recognition/api';
-  private static final String DUMMY_API_KEY = '00000';
+  private static final String URL = 'https://gateway.watsonplatform.net/visual-recognition/api';
 
   private String versionDate;
 
@@ -76,7 +75,6 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
       builder.url(builder.build().getUrl().toExternalForm() + '&api_key=' + apiKey);
     }
   }
-
   /**
    * Instantiates a new `IBMVisualRecognitionV3` with IAM. Note that if the access token is specified in the
    * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
@@ -120,9 +118,6 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(classifyOptions.imagesFile(), classifyOptions.imagesFileContentType());
       multipartBuilder.addFormDataPart('images_file', classifyOptions.imagesFilename(), fileBody);
     }
-    if (classifyOptions.parameters() != null) {
-      multipartBuilder.addFormDataPart('parameters', classifyOptions.parameters());
-    }
     if (classifyOptions.url() != null) {
       multipartBuilder.addFormDataPart('url', classifyOptions.url());
     }
@@ -162,9 +157,6 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    if (detectFacesOptions.parameters() != null) {
-      multipartBuilder.addFormDataPart('parameters', detectFacesOptions.parameters());
-    }
     if (detectFacesOptions.imagesFile() != null) {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(detectFacesOptions.imagesFile(), detectFacesOptions.imagesFileContentType());
       multipartBuilder.addFormDataPart('images_file', detectFacesOptions.imagesFilename(), fileBody);
@@ -199,16 +191,8 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     multipartBuilder.addFormDataPart('name', createClassifierOptions.name());
-    // Classes
-    for (String className : createClassifierOptions.classNames()) {
-      String dataName = className + '_positive_examples';
-      IBMWatsonFile positiveExamples = createClassifierOptions.positiveExamplesByClassName(className);
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
-        positiveExamples,
-        'application/octet-stream'
-      );
-      multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
-    }
+    IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createClassifierOptions.classnamePositiveExamples(), 'application/octet-stream');
+    multipartBuilder.addFormDataPart('classname_positive_examples', createClassifierOptions.classnamePositiveExamplesFilename(), fileBody);
     if (createClassifierOptions.negativeExamples() != null) {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createClassifierOptions.negativeExamples(), 'application/octet-stream');
       multipartBuilder.addFormDataPart('negative_examples', createClassifierOptions.negativeExamplesFilename(), fileBody);
@@ -293,6 +277,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    */
   public IBMVisualRecognitionV3Models.Classifier updateClassifier(IBMVisualRecognitionV3Models.UpdateClassifierOptions updateClassifierOptions) {
     IBMWatsonValidator.notNull(updateClassifierOptions, 'updateClassifierOptions cannot be null');
+    IBMWatsonValidator.isTrue((updateClassifierOptions.classnamePositiveExamples() != null) || (updateClassifierOptions.negativeExamples() != null), 'At least one of classname_positive_examples or negative_examples must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v3/classifiers/{0}', new String[]{ updateClassifierOptions.classifierId() }));
     Map<String, String> requestHeaders = (updateClassifierOptions != null) ? updateClassifierOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -303,12 +288,9 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    // Classes
-    for (String className : updateClassifierOptions.classNames()) {
-      String dataName = className + '_positive_examples';
-      IBMWatsonFile positiveExamples = updateClassifierOptions.positiveExamplesByClassName(className);
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(positiveExamples, 'application/octet-stream');
-      multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
+    if (updateClassifierOptions.classnamePositiveExamples() != null) {
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateClassifierOptions.classnamePositiveExamples(), 'application/octet-stream');
+      multipartBuilder.addFormDataPart('classname_positive_examples', updateClassifierOptions.classnamePositiveExamplesFilename(), fileBody);
     }
     if (updateClassifierOptions.negativeExamples() != null) {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateClassifierOptions.negativeExamples(), 'application/octet-stream');
@@ -340,6 +322,31 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.query('version', versionDate);
 
     return (IBMWatsonFile) createServiceCall(builder.build(), IBMWatsonFile.class);
+  }
+
+  /**
+   * Delete labeled data.
+   *
+   * Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with the customer ID.   You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data. For more information about personal data and customer IDs, see [Information security](https://console.bluemix.net/docs/services/visual-recognition/information-security.html).
+   *
+   * @param deleteUserDataOptions the {@link IBMVisualRecognitionV3Models.DeleteUserDataOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteUserData(IBMVisualRecognitionV3Models.DeleteUserDataOptions deleteUserDataOptions) {
+    IBMWatsonValidator.notNull(deleteUserDataOptions, 'deleteUserDataOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + '/v3/user_data');
+    Map<String, String> requestHeaders = (deleteUserDataOptions != null) ? deleteUserDataOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (deleteUserDataOptions.customerId() != null) {
+      builder.query('customer_id', deleteUserDataOptions.customerId());
+    }
+
+    createServiceCall(builder.build(), null);
   }
 
 }
