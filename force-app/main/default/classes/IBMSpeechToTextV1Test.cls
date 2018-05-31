@@ -938,4 +938,29 @@ private class IBMSpeechToTextV1Test {
     recognizeOptions = recognizeOptions.newBuilder().build();
     Test.stopTest();
   }
+
+  static testMethod void testDeleteUserData() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
+    speechToText.setUsernameAndPassword('username', 'password');
+
+    String customerId = 'salesforce_sdk_test_id';
+    IBMSpeechToTextV1Models.DeleteUserDataOptions deleteOptions = new IBMSpeechToTextV1Models.DeleteUserDataOptionsBuilder()
+      .customerId(customerId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+    //you can add more attributes using following builder method. This step is not necessary
+    deleteOptions = deleteOptions.newBuilder().build();
+    speechToText.deleteUserData(deleteOptions);
+
+    Test.stopTest();
+  }
 }

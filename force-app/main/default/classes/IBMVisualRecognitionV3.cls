@@ -8,8 +8,7 @@
  */
 public class IBMVisualRecognitionV3 extends IBMWatsonService {
 
-  private static final String URL = 'https://gateway-a.watsonplatform.net/visual-recognition/api';
-  private static final String DUMMY_API_KEY = '00000';
+  private static final String URL = 'https://gateway.watsonplatform.net/visual-recognition/api';
 
   private String versionDate;
 
@@ -51,8 +50,6 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    */
   protected override void setAuthentication(IBMWatsonRequest.Builder builder) {
     if (isTokenManagerSet()) {
-      // add dummy API key as a query parameter for backwards-compatibility until it's not required by the service
-      addApiKeyQueryParameter(builder, DUMMY_API_KEY);
       super.setAuthentication(builder);
     } else if (getApiKey() != null) {
       addApiKeyQueryParameter(builder, getApiKey());
@@ -76,7 +73,6 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
       builder.url(builder.build().getUrl().toExternalForm() + '&api_key=' + apiKey);
     }
   }
-
   /**
    * Instantiates a new `IBMVisualRecognitionV3` with IAM. Note that if the access token is specified in the
    * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
@@ -340,6 +336,31 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.query('version', versionDate);
 
     return (IBMWatsonFile) createServiceCall(builder.build(), IBMWatsonFile.class);
+  }
+
+  /**
+   * Delete labeled data.
+   *
+   * Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with the customer ID.   You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data. For more information about personal data and customer IDs, see [Information security](https://console.bluemix.net/docs/services/visual-recognition/information-security.html).
+   *
+   * @param deleteUserDataOptions the {@link IBMVisualRecognitionV3Models.DeleteUserDataOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteUserData(IBMVisualRecognitionV3Models.DeleteUserDataOptions deleteUserDataOptions) {
+    IBMWatsonValidator.notNull(deleteUserDataOptions, 'deleteUserDataOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + '/v3/user_data');
+    Map<String, String> requestHeaders = (deleteUserDataOptions != null) ? deleteUserDataOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (deleteUserDataOptions.customerId() != null) {
+      builder.query('customer_id', deleteUserDataOptions.customerId());
+    }
+
+    createServiceCall(builder.build(), null);
   }
 
 }

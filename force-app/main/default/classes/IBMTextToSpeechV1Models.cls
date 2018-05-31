@@ -199,7 +199,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the words_serialized_name.
      *
-     * **When adding words to a custom voice model,** an array of `Word` objects that provides one or more words that are to be added or updated for the custom voice model and the translation for each specified word. **When listing words from a custom voice model,** an array of `Word` objects that lists the words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
+     * The **Add custom words** method accepts an array of `Word` objects. Each object provides a word that is to be added or updated for the custom voice model and the word's translation.   The **List custom words** method returns an array of `Word` objects. Each object shows a word and its translation from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
      *
      * @return the words_serialized_name
      */
@@ -459,6 +459,97 @@ public class IBMTextToSpeechV1Models {
      * @return the CreateVoiceModelOptions builder
      */
     public CreateVoiceModelOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The deleteUserData options.
+   */
+  public class DeleteUserDataOptions extends IBMWatsonOptionsModel {
+    private String customer_id_serialized_name;
+    /**
+     * Gets the customer_id_serialized_name.
+     *
+     * The customer ID for which all data is to be deleted.
+     *
+     * @return the customer_id_serialized_name
+     */
+    public String customerId() {
+      return customer_id_serialized_name;
+    }
+    private DeleteUserDataOptions(DeleteUserDataOptionsBuilder builder) {
+      IBMWatsonValidator.notNull(builder.customer_id_serialized_name, 'customer_id_serialized_name cannot be null');
+      customer_id_serialized_name = builder.customer_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DeleteUserDataOptions builder
+     */
+    public DeleteUserDataOptionsBuilder newBuilder() {
+      return new DeleteUserDataOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * DeleteUserDataOptions Builder.
+   */
+  public class DeleteUserDataOptionsBuilder extends IBMWatsonOptionsModel {
+    private String customer_id_serialized_name;
+
+    private DeleteUserDataOptionsBuilder(DeleteUserDataOptions deleteUserDataOptions) {
+      customer_id_serialized_name = deleteUserDataOptions.customer_id_serialized_name;
+      this.requestHeaders.putAll(deleteUserDataOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DeleteUserDataOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param customerId the customerId
+     */
+    public DeleteUserDataOptionsBuilder(String customerId) {
+      this.customer_id_serialized_name = customerId;
+    }
+
+    /**
+     * Builds a DeleteUserDataOptions.
+     *
+     * @return the deleteUserDataOptions
+     */
+    public DeleteUserDataOptions build() {
+      return new DeleteUserDataOptions(this);
+    }
+
+    /**
+     * Set the customer_id_serialized_name.
+     *
+     * @param customerId the customerId
+     * @return the DeleteUserDataOptions builder
+     */
+    public DeleteUserDataOptionsBuilder customerId(String customerId) {
+      this.customer_id_serialized_name = customerId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteUserDataOptions builder
+     */
+    public DeleteUserDataOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -1402,7 +1493,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the pronunciation_serialized_name.
      *
-     * The pronunciation of the requested text in the specified voice and format.
+     * The pronunciation of the specified text in the requested voice and format. If a custom voice model is specified, the pronunciation also reflects that custom voice.
      *
      * @return the pronunciation_serialized_name
      */
@@ -1987,7 +2078,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_serialized_name.
      *
-     * Returns information about a specified custom voice model. **Note:** This field is returned only when you list information about a specific voice and specify the GUID of a custom voice model that is based on that voice.
+     * Returns information about a specified custom voice model. This field is returned only by the **Get a voice** method and only when you specify the customization ID of a custom voice model.
      *
      * @return the customization_serialized_name
      */
@@ -2102,7 +2193,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom voice model. **Note:** When you create a new custom voice model, the service returns only the GUID of the new custom model; it does not return the other fields of this object.
+     * The customization ID (GUID) of the custom voice model. The **Create a custom model** method returns only this field. It does not not return the other fields of this object.
      *
      * @return the customization_id_serialized_name
      */
@@ -2179,7 +2270,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the words_serialized_name.
      *
-     * An array of `Word` objects that lists the words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words. **Note:** This field is returned only when you list information about a specific custom voice model.
+     * An array of `Word` objects that lists the words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words. This field is returned only by the **Get a voice** method and only when you specify the customization ID of a custom voice model.
      *
      * @return the words_serialized_name
      */
@@ -2471,7 +2562,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the words_serialized_name.
      *
-     * **When adding words to a custom voice model,** an array of `Word` objects that provides one or more words that are to be added or updated for the custom voice model and the translation for each specified word. **When listing words from a custom voice model,** an array of `Word` objects that lists the words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
+     * The **Add custom words** method accepts an array of `Word` objects. Each object provides a word that is to be added or updated for the custom voice model and the word's translation.   The **List custom words** method returns an array of `Word` objects. Each object shows a word and its translation from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
      *
      * @return the words_serialized_name
      */

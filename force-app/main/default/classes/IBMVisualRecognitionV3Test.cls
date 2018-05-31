@@ -280,4 +280,40 @@ private class IBMVisualRecognitionV3Test {
     System.assertEquals(resp.getClassifiers()[0].getClassifierId(), 'string');
     Test.stopTest();
   }
+
+  static testMethod void testDeleteUserData() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
+    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
+
+    String customerId = 'salesforce_sdk_test_id';
+    IBMVisualRecognitionV3Models.DeleteUserDataOptions deleteOptions = new IBMVisualRecognitionV3Models.DeleteUserDataOptionsBuilder()
+      .customerId(customerId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+    //you can add more attributes using following builder method. This step is not necessary
+    deleteOptions = deleteOptions.newBuilder().build();
+    visualRecognition.deleteUserData(deleteOptions);
+
+    Test.stopTest();
+  }
+
+  /**
+   * Tests that when this service is authenticated with an API key, the endpoint is changed to the correct one.
+   */
+  static testMethod void testApiKeyEndPoint() {
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20');
+    visualRecognition.setApiKey(API_KEY);
+    String correctEndPoint = visualRecognition.getEndPoint();
+
+    System.assertEquals('https://gateway-a.watsonplatform.net/visual-recognition/api', correctEndPoint);
+  }
 }

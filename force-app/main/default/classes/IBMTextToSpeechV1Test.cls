@@ -372,6 +372,31 @@ private class IBMTextToSpeechV1Test {
     Test.stopTest();
   }
 
+  static testMethod void testDeleteUserData() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMTextToSpeechV1 textToSpeech = new IBMTextToSpeechV1();
+    textToSpeech.setUsernameAndPassword('username', 'password');
+
+    String customerId = 'salesforce_sdk_test_id';
+    IBMTextToSpeechV1Models.DeleteUserDataOptions deleteOptions = new IBMTextToSpeechV1Models.DeleteUserDataOptionsBuilder()
+      .customerId(customerId)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+    //you can add more attributes using following builder method. This step is not necessary
+    deleteOptions = deleteOptions.newBuilder().build();
+    textToSpeech.deleteUserData(deleteOptions);
+
+    Test.stopTest();
+  }
+
    /**
    * Streaming speech synthesis of the text in the body parameter.
    *

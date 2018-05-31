@@ -195,7 +195,7 @@ When authenticating with IAM, you have the option of passing in:
 // in the constructor, letting the SDK manage the IAM token
 IBMWatsonIAMOptions options = new IBMWatsonIAMOptions.Builder()
   .apiKey('IAM_API_KEY')
-  .url('IAM_URL') // optional - the default value is https://iam.ng.bluemix.net/identity/token
+  .url('IAM_URL') // optional - the default value is https://iam.bluemix.net/identity/token
   .build();
 IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', options);
 service.setEndPoint('SERVICE_URL');
