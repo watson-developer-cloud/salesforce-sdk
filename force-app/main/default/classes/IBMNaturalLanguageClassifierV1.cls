@@ -1,7 +1,7 @@
 /**
- * IBM Watson Natural Language Classifier uses machine learning algorithms to return the top matching predefined classes
- * for short text input. You create and train a classifier to connect predefined classes to example texts so that the
- * service can apply those classes to new inputs.
+ * IBM Watson&trade; Natural Language Classifier uses machine learning algorithms to return the top matching predefined
+ * classes for short text input. You create and train a classifier to connect predefined classes to example texts so
+ * that the service can apply those classes to new inputs.
  *
  * @version V1
  * @see <a href="http://www.ibm.com/watson/developercloud/natural-language-classifier.html">Natural Language Classifier</a>
@@ -29,23 +29,12 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
     setUsernameAndPassword(username, password);
   }
 
-  /**
-   * Instantiates a new `IBMNaturalLanguageClassifierV1` with IAM. Note that if the access token is specified in the
-   * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
-   * one expires or after receiving a 401 error from the service. Failing to do so will result in authentication errors
-   * after this token expires.
-   *
-   * @param iamOptions the options for authenticating through IAM
-   */
-  public IBMNaturalLanguageClassifierV1(IBMWatsonIAMOptions iamOptions) {
-    this();
-    setIamCredentials(iamOptions);
-  }
 
   /**
    * Classify a phrase.
    *
-   * Returns label information for the input. The status must be `Available` before you can use the classifier to classify text.
+   * Returns label information for the input. The status must be `Available` before you can use the classifier to
+   * classify text.
    *
    * @param classifyOptions the {@link IBMNaturalLanguageClassifierV1Models.ClassifyOptions} containing the options for the call
    * @return the {@link IBMNaturalLanguageClassifierV1Models.Classification} with the response
@@ -69,7 +58,10 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
   /**
    * Classify multiple phrases.
    *
-   * Returns label information for multiple phrases. The status must be `Available` before you can use the classifier to classify text.  Note that classifying Japanese texts is a beta feature.
+   * Returns label information for multiple phrases. The status must be `Available` before you can use the classifier to
+   * classify text.
+   *
+   * Note that classifying Japanese texts is a beta feature.
    *
    * @param classifyCollectionOptions the {@link IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptions} containing the options for the call
    * @return the {@link IBMNaturalLanguageClassifierV1Models.ClassificationCollection} with the response
@@ -109,10 +101,10 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
     }
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    IBMWatsonRequestBody metadataFileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingMetadata(), 'application/json');
-    multipartBuilder.addFormDataPart('training_metadata', createClassifierOptions.trainingMetadataFilename(), metadataFileBody);
-    IBMWatsonRequestBody dataFileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingData(), 'text/csv');
-    multipartBuilder.addFormDataPart('training_data', createClassifierOptions.trainingDataFilename(), dataFileBody);
+    IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createClassifierOptions.metadata(), 'application/json');
+    multipartBuilder.addFormDataPart('training_metadata', createClassifierOptions.trainingMetadataFilename(), fileBody);
+    IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingData(), 'text/csv');
+    multipartBuilder.addFormDataPart('training_data', createClassifierOptions.trainingDataFilename(), fileBody);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 

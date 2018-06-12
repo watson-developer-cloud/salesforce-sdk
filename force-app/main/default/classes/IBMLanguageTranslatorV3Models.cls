@@ -1,4 +1,4 @@
-public class IBMLanguageTranslatorV2Models {
+public class IBMLanguageTranslatorV3Models {
   /**
    * The createModel options.
    */
@@ -9,13 +9,12 @@ public class IBMLanguageTranslatorV2Models {
     private String forced_glossary_filename_serialized_name;
     private IBMWatsonFile parallel_corpus_serialized_name;
     private String parallel_corpus_filename_serialized_name;
-    private IBMWatsonFile monolingual_corpus_serialized_name;
-    private String monolingual_corpus_filename_serialized_name;
     /**
      * Gets the base_model_id_serialized_name.
      *
      * The model ID of the model to use as the base for customization. To see available models, use the `List models`
-     * method.
+     * method. Usually all IBM provided models are customizable. In addition, all your models that have been created via
+     * parallel corpus customization, can be further customized with a forced glossary.
      *
      * @return the base_model_id_serialized_name
      */
@@ -38,7 +37,7 @@ public class IBMLanguageTranslatorV2Models {
      *
      * A TMX file with your customizations. The customizations in the file completely overwrite the domain translaton
      * data, including high frequency or high confidence phrase translations. You can upload only one glossary with a
-     * file size less than 10 MB per call.
+     * file size less than 10 MB per call. A forced glossary should contain single words or short phrases.
      *
      * @return the forced_glossary_serialized_name
      */
@@ -58,7 +57,9 @@ public class IBMLanguageTranslatorV2Models {
     /**
      * Gets the parallel_corpus_serialized_name.
      *
-     * A TMX file that contains entries that are treated as a parallel corpus instead of a glossary.
+     * A TMX file with parallel sentences for source and target language. You can upload multiple parallel_corpus files
+     * in one request. All uploaded parallel_corpus files combined, your parallel corpus must contain at least 5,000
+     * parallel sentences to train successfully.
      *
      * @return the parallel_corpus_serialized_name
      */
@@ -75,26 +76,6 @@ public class IBMLanguageTranslatorV2Models {
     public String parallelCorpusFilename() {
       return parallel_corpus_filename_serialized_name;
     }
-    /**
-     * Gets the monolingual_corpus_serialized_name.
-     *
-     * A UTF-8 encoded plain text file that is used to customize the target language model.
-     *
-     * @return the monolingual_corpus_serialized_name
-     */
-    public IBMWatsonFile monolingualCorpus() {
-      return monolingual_corpus_serialized_name;
-    }
-    /**
-     * Gets the monolingual_corpus_filename_serialized_name.
-     *
-     * The filename for monolingual_corpus.
-     *
-     * @return the monolingual_corpus_filename_serialized_name
-     */
-    public String monolingualCorpusFilename() {
-      return monolingual_corpus_filename_serialized_name;
-    }
     private CreateModelOptions(CreateModelOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.base_model_id_serialized_name, 'base_model_id_serialized_name cannot be null');
       base_model_id_serialized_name = builder.base_model_id_serialized_name;
@@ -103,8 +84,6 @@ public class IBMLanguageTranslatorV2Models {
       forced_glossary_filename_serialized_name = builder.forced_glossary_filename_serialized_name;
       parallel_corpus_serialized_name = builder.parallel_corpus_serialized_name;
       parallel_corpus_filename_serialized_name = builder.parallel_corpus_filename_serialized_name;
-      monolingual_corpus_serialized_name = builder.monolingual_corpus_serialized_name;
-      monolingual_corpus_filename_serialized_name = builder.monolingual_corpus_filename_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -129,8 +108,6 @@ public class IBMLanguageTranslatorV2Models {
     private String forced_glossary_filename_serialized_name;
     private IBMWatsonFile parallel_corpus_serialized_name;
     private String parallel_corpus_filename_serialized_name;
-    private IBMWatsonFile monolingual_corpus_serialized_name;
-    private String monolingual_corpus_filename_serialized_name;
 
     private CreateModelOptionsBuilder(CreateModelOptions createModelOptions) {
       base_model_id_serialized_name = createModelOptions.base_model_id_serialized_name;
@@ -139,8 +116,6 @@ public class IBMLanguageTranslatorV2Models {
       forced_glossary_filename_serialized_name = createModelOptions.forced_glossary_filename_serialized_name;
       parallel_corpus_serialized_name = createModelOptions.parallel_corpus_serialized_name;
       parallel_corpus_filename_serialized_name = createModelOptions.parallel_corpus_filename_serialized_name;
-      monolingual_corpus_serialized_name = createModelOptions.monolingual_corpus_serialized_name;
-      monolingual_corpus_filename_serialized_name = createModelOptions.monolingual_corpus_filename_serialized_name;
       this.requestHeaders.putAll(createModelOptions.requestHeaders());
     }
 
@@ -231,28 +206,6 @@ public class IBMLanguageTranslatorV2Models {
      */
     public CreateModelOptionsBuilder parallelCorpusFilename(String parallelCorpusFilename) {
       this.parallel_corpus_filename_serialized_name = parallelCorpusFilename;
-      return this;
-    }
-
-    /**
-     * Set the monolingual_corpus_serialized_name.
-     *
-     * @param monolingualCorpus the monolingualCorpus
-     * @return the CreateModelOptions builder
-     */
-    public CreateModelOptionsBuilder monolingualCorpus(IBMWatsonFile monolingualCorpus) {
-      this.monolingual_corpus_serialized_name = monolingualCorpus;
-      return this;
-    }
-
-    /**
-     * Set the monolingual_corpus_filename_serialized_name.
-     *
-     * @param monolingualCorpusFilename the monolingualCorpusFilename
-     * @return the CreateModelOptions builder
-     */
-    public CreateModelOptionsBuilder monolingualCorpusFilename(String monolingualCorpusFilename) {
-      this.monolingual_corpus_filename_serialized_name = monolingualCorpusFilename;
       return this;
     }
 
@@ -846,7 +799,7 @@ public class IBMLanguageTranslatorV2Models {
      *
      * If the default parameter isn't specified, the service will return all models (default and non-default) for each
      * language pair. To return only default models, set this to `true`. To return only non-default models, set this to
-     * `false`.
+     * `false`. There is exactly one default model per language pair, the IBM provided base model.
      *
      * @return the default_serialized_name
      */

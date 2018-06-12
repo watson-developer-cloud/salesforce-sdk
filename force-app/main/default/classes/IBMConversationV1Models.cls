@@ -280,7 +280,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The text of a user input marked as irrelevant input. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters  - It cannot consist of only whitespace characters  - It must be no longer than 1024 characters.
+     * The text of a user input marked as irrelevant input. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters
+     * - It cannot consist of only whitespace characters
+     * - It must be no longer than 1024 characters.
      *
      * @return the text_serialized_name
      */
@@ -368,7 +371,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The text of a user input marked as irrelevant input. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters  - It cannot consist of only whitespace characters  - It must be no longer than 1024 characters.
+     * The text of a user input marked as irrelevant input. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters
+     * - It cannot consist of only whitespace characters
+     * - It must be no longer than 1024 characters.
      *
      * @return the text_serialized_name
      */
@@ -492,7 +498,9 @@ public class IBMConversationV1Models {
     /**
      * Gets the dialog_node_serialized_name.
      *
-     * The dialog node ID. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 1024 characters.
+     * The dialog node ID. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     * - It must be no longer than 1024 characters.
      *
      * @return the dialog_node_serialized_name
      */
@@ -502,7 +510,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and
+     * it must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -512,7 +521,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the conditions_serialized_name.
      *
-     * The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.
+     * The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab
+     * characters, and it must be no longer than 2048 characters.
      *
      * @return the conditions_serialized_name
      */
@@ -542,7 +552,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the output_serialized_name.
      *
-     * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+     * The output of the dialog node. For more information about how to specify dialog node output, see the
+     * [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
      *
      * @return the output_serialized_name
      */
@@ -592,7 +603,9 @@ public class IBMConversationV1Models {
     /**
      * Gets the title_serialized_name.
      *
-     * The alias used to identify the dialog node. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 64 characters.
+     * The alias used to identify the dialog node. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     * - It must be no longer than 64 characters.
      *
      * @return the title_serialized_name
      */
@@ -996,7 +1009,9 @@ public class IBMConversationV1Models {
     /**
      * Gets the dialog_node_serialized_name.
      *
-     * The dialog node ID. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 1024 characters.
+     * The dialog node ID. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     * - It must be no longer than 1024 characters.
      *
      * @return the dialog_node_serialized_name
      */
@@ -1006,7 +1021,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and
+     * it must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -1016,7 +1032,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the conditions_serialized_name.
      *
-     * The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.
+     * The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab
+     * characters, and it must be no longer than 2048 characters.
      *
      * @return the conditions_serialized_name
      */
@@ -1046,7 +1063,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the output_serialized_name.
      *
-     * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+     * The output of the dialog node. For more information about how to specify dialog node output, see the
+     * [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
      *
      * @return the output_serialized_name
      */
@@ -1096,7 +1114,9 @@ public class IBMConversationV1Models {
     /**
      * Gets the title_serialized_name.
      *
-     * The alias used to identify the dialog node. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 64 characters.
+     * The alias used to identify the dialog node. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     * - It must be no longer than 64 characters.
      *
      * @return the title_serialized_name
      */
@@ -1508,7 +1528,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the entity_serialized_name.
      *
-     * The name of the entity. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, and hyphen characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 64 characters.
+     * The name of the entity. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
+     * - It cannot begin with the reserved prefix `sys-`.
+     * - It must be no longer than 64 characters.
      *
      * @return the entity_serialized_name
      */
@@ -1518,7 +1541,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it
+     * must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -1712,7 +1736,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the entity_serialized_name.
      *
-     * The name of the entity. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, and hyphen characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 64 characters.
+     * The name of the entity. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
+     * - It cannot begin with the reserved prefix `sys-`.
+     * - It must be no longer than 64 characters.
      *
      * @return the entity_serialized_name
      */
@@ -1722,7 +1749,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it
+     * must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -1932,7 +1960,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The text of a user input example. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 1024 characters.
+     * The text of a user input example. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 1024 characters.
      *
      * @return the text_serialized_name
      */
@@ -2031,7 +2062,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The text of a user input example. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 1024 characters.
+     * The text of a user input example. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 1024 characters.
      *
      * @return the text_serialized_name
      */
@@ -2158,7 +2192,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the intent_serialized_name.
      *
-     * The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 128 characters.
+     * The name of the intent. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
+     * - It cannot begin with the reserved prefix `sys-`.
+     * - It must be no longer than 128 characters.
      *
      * @return the intent_serialized_name
      */
@@ -2168,7 +2205,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+     * The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it
+     * must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -2312,7 +2350,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the intent_serialized_name.
      *
-     * The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 128 characters.
+     * The name of the intent. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
+     * - It cannot begin with the reserved prefix `sys-`.
+     * - It must be no longer than 128 characters.
      *
      * @return the intent_serialized_name
      */
@@ -2322,7 +2363,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+     * The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it
+     * must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -2517,7 +2559,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the synonym_serialized_name.
      *
-     * The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
+     * The text of the synonym. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 64 characters.
      *
      * @return the synonym_serialized_name
      */
@@ -2663,7 +2708,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the value_serialized_name.
      *
-     * The text of the entity value. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
+     * The text of the entity value. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 64 characters.
      *
      * @return the value_serialized_name
      */
@@ -2683,7 +2731,11 @@ public class IBMConversationV1Models {
     /**
      * Gets the synonyms_serialized_name.
      *
-     * An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A synonym must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
+     * An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated
+     * by **type**), but not both. A synonym must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 64 characters.
      *
      * @return the synonyms_serialized_name
      */
@@ -2693,7 +2745,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the patterns_serialized_name.
      *
-     * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A pattern is a regular expression no longer than 128 characters. For more information about how to specify a pattern, see the [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
+     * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by
+     * **type**), but not both. A pattern is a regular expression no longer than 128 characters. For more information
+     * about how to specify a pattern, see the
+     * [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
      *
      * @return the patterns_serialized_name
      */
@@ -2894,7 +2949,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the value_serialized_name.
      *
-     * The text of the entity value. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
+     * The text of the entity value. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 64 characters.
      *
      * @return the value_serialized_name
      */
@@ -2914,7 +2972,11 @@ public class IBMConversationV1Models {
     /**
      * Gets the synonyms_serialized_name.
      *
-     * An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A synonym must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
+     * An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated
+     * by **type**), but not both. A synonym must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 64 characters.
      *
      * @return the synonyms_serialized_name
      */
@@ -2924,7 +2986,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the patterns_serialized_name.
      *
-     * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A pattern is a regular expression no longer than 128 characters. For more information about how to specify a pattern, see the [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
+     * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by
+     * **type**), but not both. A pattern is a regular expression no longer than 128 characters. For more information
+     * about how to specify a pattern, see the
+     * [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
      *
      * @return the patterns_serialized_name
      */
@@ -3155,7 +3220,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the name_serialized_name.
      *
-     * The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 64 characters.
+     * The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be
+     * no longer than 64 characters.
      *
      * @return the name_serialized_name
      */
@@ -3165,7 +3231,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+     * The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it
+     * must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -3235,7 +3302,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the learning_opt_out_serialized_name.
      *
-     * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
+     * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates
+     * that workspace training data is not to be used.
      *
      * @return the learning_opt_out_serialized_name
      */
@@ -4681,7 +4749,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the previous_sibling_serialized_name.
      *
-     * The ID of the previous sibling dialog node. This property is not returned if the dialog node has no previous sibling.
+     * The ID of the previous sibling dialog node. This property is not returned if the dialog node has no previous
+     * sibling.
      *
      * @return the previous_sibling_serialized_name
      */
@@ -5247,7 +5316,26 @@ public class IBMConversationV1Models {
     /**
      * Gets the behavior_serialized_name.
      *
-     * What happens after the dialog node completes. The valid values depend on the node type:  - The following values are valid for any node:    - `get_user_input`    - `skip_user_input`    - `jump_to`  - If the node is of type `event_handler` and its parent node is of type `slot` or `frame`, additional values are also valid:    - if **event_name**=`filled` and the type of the parent node is `slot`:      - `reprompt`      - `skip_all_slots`  - if **event_name**=`nomatch` and the type of the parent node is `slot`:      - `reprompt`      - `skip_slot`      - `skip_all_slots`  - if **event_name**=`generic` and the type of the parent node is `frame`:      - `reprompt`      - `skip_slot`      - `skip_all_slots`        If you specify `jump_to`, then you must also specify a value for the `dialog_node` property.
+     * What happens after the dialog node completes. The valid values depend on the node type:
+     * - The following values are valid for any node:
+     *   - `get_user_input`
+     *   - `skip_user_input`
+     *   - `jump_to`
+     * - If the node is of type `event_handler` and its parent node is of type `slot` or `frame`, additional values are
+     * also valid:
+     *   - if **event_name**=`filled` and the type of the parent node is `slot`:
+     *     - `reprompt`
+     *     - `skip_all_slots`
+     * - if **event_name**=`nomatch` and the type of the parent node is `slot`:
+     *     - `reprompt`
+     *     - `skip_slot`
+     *     - `skip_all_slots`
+     * - if **event_name**=`generic` and the type of the parent node is `frame`:
+     *     - `reprompt`
+     *     - `skip_slot`
+     *     - `skip_all_slots`
+     *
+     * If you specify `jump_to`, then you must also specify a value for the `dialog_node` property.
      *
      * @return the behavior_serialized_name
      */
@@ -6215,7 +6303,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the export_serialized_name.
      *
-     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
+     * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
      * @return the export_serialized_name
      */
@@ -6556,7 +6645,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the export_serialized_name.
      *
-     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
+     * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
      * @return the export_serialized_name
      */
@@ -6936,7 +7026,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the export_serialized_name.
      *
-     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
+     * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
      * @return the export_serialized_name
      */
@@ -7111,7 +7202,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the export_serialized_name.
      *
-     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
+     * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
      * @return the export_serialized_name
      */
@@ -7247,7 +7339,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.
+     * The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must
+     * be no longer than 2048 characters.
      *
      * @return the text_serialized_name
      */
@@ -7611,7 +7704,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the filter_serialized_name.
      *
-     * A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter query that includes a value for `language`, as well as a value for `workspace_id` or `request.context.metadata.deployment`. For more information, see the [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
+     * A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter
+     * query that includes a value for `language`, as well as a value for `workspace_id` or
+     * `request.context.metadata.deployment`. For more information, see the
+     * [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
      *
      * @return the filter_serialized_name
      */
@@ -7621,7 +7717,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -7809,7 +7906,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -8025,7 +8123,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -8222,7 +8321,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the export_serialized_name.
      *
-     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
+     * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
      * @return the export_serialized_name
      */
@@ -8252,7 +8352,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -8493,7 +8594,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -8707,7 +8809,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the export_serialized_name.
      *
-     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
+     * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
      * @return the export_serialized_name
      */
@@ -8737,7 +8840,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -8946,7 +9050,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -8956,7 +9061,9 @@ public class IBMConversationV1Models {
     /**
      * Gets the filter_serialized_name.
      *
-     * A cacheable parameter that limits the results to those matching the specified filter. For more information, see the [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
+     * A cacheable parameter that limits the results to those matching the specified filter. For more information, see
+     * the
+     * [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
      *
      * @return the filter_serialized_name
      */
@@ -9180,7 +9287,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -9422,7 +9530,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the export_serialized_name.
      *
-     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
+     * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
      *
      * @return the export_serialized_name
      */
@@ -9452,7 +9561,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -9688,7 +9798,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
      *
      * @return the sort_serialized_name
      */
@@ -10319,7 +10430,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the context_serialized_name.
      *
-     * State information for the conversation. Continue a conversation by including the context object from the previous response.
+     * State information for the conversation. Continue a conversation by including the context object from the previous
+     * response.
      *
      * @return the context_serialized_name
      */
@@ -10329,7 +10441,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the entities_serialized_name.
      *
-     * Entities to use when evaluating the message. Include entities from the previous response to continue using those entities rather than detecting entities in the new input.
+     * Entities to use when evaluating the message. Include entities from the previous response to continue using those
+     * entities rather than detecting entities in the new input.
      *
      * @return the entities_serialized_name
      */
@@ -10339,7 +10452,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the intents_serialized_name.
      *
-     * Intents to use when evaluating the user input. Include intents from the previous response to continue using those intents rather than trying to recognize intents in the new input.
+     * Intents to use when evaluating the user input. Include intents from the previous response to continue using those
+     * intents rather than trying to recognize intents in the new input.
      *
      * @return the intents_serialized_name
      */
@@ -10349,7 +10463,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the output_serialized_name.
      *
-     * System output. Include the output from the previous response to maintain intermediate information over multiple requests.
+     * System output. Include the output from the previous response to maintain intermediate information over multiple
+     * requests.
      *
      * @return the output_serialized_name
      */
@@ -10359,7 +10474,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the nodes_visited_details_serialized_name.
      *
-     * Whether to include additional diagnostic information about the dialog nodes that were visited during processing of the message.
+     * Whether to include additional diagnostic information about the dialog nodes that were visited during processing
+     * of the message.
      *
      * @return the nodes_visited_details_serialized_name
      */
@@ -10623,7 +10739,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the context_serialized_name.
      *
-     * State information for the conversation. Continue a conversation by including the context object from the previous response.
+     * State information for the conversation. Continue a conversation by including the context object from the previous
+     * response.
      *
      * @return the context_serialized_name
      */
@@ -10634,7 +10751,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the entities_serialized_name.
      *
-     * Entities to use when evaluating the message. Include entities from the previous response to continue using those entities rather than detecting entities in the new input.
+     * Entities to use when evaluating the message. Include entities from the previous response to continue using those
+     * entities rather than detecting entities in the new input.
      *
      * @return the entities_serialized_name
      */
@@ -10645,7 +10763,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the intents_serialized_name.
      *
-     * Intents to use when evaluating the user input. Include intents from the previous response to continue using those intents rather than trying to recognize intents in the new input.
+     * Intents to use when evaluating the user input. Include intents from the previous response to continue using those
+     * intents rather than trying to recognize intents in the new input.
      *
      * @return the intents_serialized_name
      */
@@ -10656,7 +10775,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the output_serialized_name.
      *
-     * System output. Include the output from the previous response to maintain intermediate information over multiple requests.
+     * System output. Include the output from the previous response to maintain intermediate information over multiple
+     * requests.
      *
      * @return the output_serialized_name
      */
@@ -11872,7 +11992,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_conditions_serialized_name.
      *
-     * The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 2048 characters.
+     * The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab
+     * characters, and it must be no longer than 2048 characters.
      *
      * @return the new_conditions_serialized_name
      */
@@ -11922,7 +12043,9 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_title_serialized_name.
      *
-     * The alias used to identify the dialog node. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 64 characters.
+     * The alias used to identify the dialog node. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     * - It must be no longer than 64 characters.
      *
      * @return the new_title_serialized_name
      */
@@ -11932,7 +12055,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_description_serialized_name.
      *
-     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and
+     * it must be no longer than 128 characters.
      *
      * @return the new_description_serialized_name
      */
@@ -11992,7 +12116,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_output_serialized_name.
      *
-     * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+     * The output of the dialog node. For more information about how to specify dialog node output, see the
+     * [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
      *
      * @return the new_output_serialized_name
      */
@@ -12012,7 +12137,9 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_dialog_node_serialized_name.
      *
-     * The dialog node ID. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.  - It must be no longer than 1024 characters.
+     * The dialog node ID. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     * - It must be no longer than 1024 characters.
      *
      * @return the new_dialog_node_serialized_name
      */
@@ -12410,7 +12537,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_entity_serialized_name.
      *
-     * The name of the entity. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, and hyphen characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 64 characters.
+     * The name of the entity. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
+     * - It cannot begin with the reserved prefix `sys-`.
+     * - It must be no longer than 64 characters.
      *
      * @return the new_entity_serialized_name
      */
@@ -12440,7 +12570,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_description_serialized_name.
      *
-     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it
+     * must be no longer than 128 characters.
      *
      * @return the new_description_serialized_name
      */
@@ -12667,7 +12798,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_text_serialized_name.
      *
-     * The text of the user input example. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 1024 characters.
+     * The text of the user input example. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 1024 characters.
      *
      * @return the new_text_serialized_name
      */
@@ -12830,7 +12964,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_intent_serialized_name.
      *
-     * The name of the intent. This string must conform to the following restrictions:  - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.  - It cannot begin with the reserved prefix `sys-`.  - It must be no longer than 128 characters.
+     * The name of the intent. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
+     * - It cannot begin with the reserved prefix `sys-`.
+     * - It must be no longer than 128 characters.
      *
      * @return the new_intent_serialized_name
      */
@@ -13060,7 +13197,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_synonym_serialized_name.
      *
-     * The text of the synonym. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
+     * The text of the synonym. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 64 characters.
      *
      * @return the new_synonym_serialized_name
      */
@@ -13253,7 +13393,11 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_synonyms_serialized_name.
      *
-     * An array of synonyms for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A synonym must conform to the following resrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
+     * An array of synonyms for the entity value. You can provide either synonyms or patterns (as indicated by
+     * **type**), but not both. A synonym must conform to the following resrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 64 characters.
      *
      * @return the new_synonyms_serialized_name
      */
@@ -13283,7 +13427,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_patterns_serialized_name.
      *
-     * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by **type**), but not both. A pattern is a regular expression no longer than 128 characters. For more information about how to specify a pattern, see the [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
+     * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by
+     * **type**), but not both. A pattern is a regular expression no longer than 128 characters. For more information
+     * about how to specify a pattern, see the
+     * [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
      *
      * @return the new_patterns_serialized_name
      */
@@ -13293,7 +13440,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_value_serialized_name.
      *
-     * The text of the entity value. This string must conform to the following restrictions:  - It cannot contain carriage return, newline, or tab characters.  - It cannot consist of only whitespace characters.  - It must be no longer than 64 characters.
+     * The text of the entity value. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 64 characters.
      *
      * @return the new_value_serialized_name
      */
@@ -13540,7 +13690,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the name_serialized_name.
      *
-     * The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 64 characters.
+     * The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be
+     * no longer than 64 characters.
      *
      * @return the name_serialized_name
      */
@@ -13550,7 +13701,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be no longer than 128 characters.
+     * The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it
+     * must be no longer than 128 characters.
      *
      * @return the description_serialized_name
      */
@@ -13620,7 +13772,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the learning_opt_out_serialized_name.
      *
-     * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
+     * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates
+     * that workspace training data is not to be used.
      *
      * @return the learning_opt_out_serialized_name
      */
@@ -13630,7 +13783,13 @@ public class IBMConversationV1Models {
     /**
      * Gets the append_serialized_name.
      *
-     * Whether the new data is to be appended to the existing data in the workspace. If **append**=`false`, elements included in the new data completely replace the corresponding existing elements, including all subelements. For example, if the new data includes **entities** and **append**=`false`, all existing entities in the workspace are discarded and replaced with the new entities.    If **append**=`true`, existing elements are preserved, and the new elements are added. If any elements in the new data collide with existing elements, the update request fails.
+     * Whether the new data is to be appended to the existing data in the workspace. If **append**=`false`, elements
+     * included in the new data completely replace the corresponding existing elements, including all subelements. For
+     * example, if the new data includes **entities** and **append**=`false`, all existing entities in the workspace are
+     * discarded and replaced with the new entities.
+     *
+     * If **append**=`true`, existing elements are preserved, and the new elements are added. If any elements in the new
+     * data collide with existing elements, the update request fails.
      *
      * @return the append_serialized_name
      */
@@ -14382,7 +14541,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the learning_opt_out_serialized_name.
      *
-     * Whether training data from the workspace (including artifacts such as intents and entities) can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
+     * Whether training data from the workspace (including artifacts such as intents and entities) can be used by IBM
+     * for general service improvements. `true` indicates that workspace training data is not to be used.
      *
      * @return the learning_opt_out_serialized_name
      */
@@ -14634,7 +14794,8 @@ public class IBMConversationV1Models {
     /**
      * Gets the learning_opt_out_serialized_name.
      *
-     * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates that workspace training data is not to be used.
+     * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates
+     * that workspace training data is not to be used.
      *
      * @return the learning_opt_out_serialized_name
      */

@@ -1,7 +1,7 @@
 /**
- * The IBM Watson Visual Recognition service uses deep learning algorithms to identify scenes, objects, and faces  in
- * images you upload to the service. You can create and train a custom classifier to identify subjects that suit your
- * needs.
+ * The IBM Watson&trade; Visual Recognition service uses deep learning algorithms to identify scenes, objects, and faces
+ *  in images you upload to the service. You can create and train a custom classifier to identify subjects that suit
+ * your needs.
  *
  * @version V3
  * @see <a href="http://www.ibm.com/watson/developercloud/visual-recognition.html">Visual Recognition</a>
@@ -116,9 +116,6 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(classifyOptions.imagesFile(), classifyOptions.imagesFileContentType());
       multipartBuilder.addFormDataPart('images_file', classifyOptions.imagesFilename(), fileBody);
     }
-    if (classifyOptions.parameters() != null) {
-      multipartBuilder.addFormDataPart('parameters', classifyOptions.parameters());
-    }
     if (classifyOptions.url() != null) {
       multipartBuilder.addFormDataPart('url', classifyOptions.url());
     }
@@ -140,7 +137,17 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   /**
    * Detect faces in images.
    *
-   * **Important:** On April 2, 2018, the identity information in the response to calls to the Face model was removed. The identity information refers to the `name` of the person, `score`, and `type_hierarchy` knowledge graph. For details about the enhanced Face model, see the [Release notes](https://console.bluemix.net/docs/services/visual-recognition/release-notes.html#2april2018).  Analyze and get data about faces in images. Responses can include estimated age and gender. This feature uses a built-in model, so no training is necessary. The Detect faces method does not support general biometric facial recognition.  Supported image formats include .gif, .jpg, .png, and .tif. The maximum image size is 10 MB. The minimum recommended pixel density is 32X32 pixels per inch.
+   * **Important:** On April 2, 2018, the identity information in the response to calls to the Face model was removed.
+   * The identity information refers to the `name` of the person, `score`, and `type_hierarchy` knowledge graph. For
+   * details about the enhanced Face model, see the [Release
+   * notes](https://console.bluemix.net/docs/services/visual-recognition/release-notes.html#2april2018).
+   *
+   * Analyze and get data about faces in images. Responses can include estimated age and gender. This feature uses a
+   * built-in model, so no training is necessary. The Detect faces method does not support general biometric facial
+   * recognition.
+   *
+   * Supported image formats include .gif, .jpg, .png, and .tif. The maximum image size is 10 MB. The minimum
+   * recommended pixel density is 32X32 pixels per inch.
    *
    * @param detectFacesOptions the {@link IBMVisualRecognitionV3Models.DetectFacesOptions} containing the options for the call
    * @return the {@link IBMVisualRecognitionV3Models.DetectedFaces} with the response
@@ -158,9 +165,6 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    if (detectFacesOptions.parameters() != null) {
-      multipartBuilder.addFormDataPart('parameters', detectFacesOptions.parameters());
-    }
     if (detectFacesOptions.imagesFile() != null) {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(detectFacesOptions.imagesFile(), detectFacesOptions.imagesFileContentType());
       multipartBuilder.addFormDataPart('images_file', detectFacesOptions.imagesFilename(), fileBody);
@@ -177,7 +181,12 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   /**
    * Create a classifier.
    *
-   * Train a new multi-faceted classifier on the uploaded image data. Create your custom classifier with positive or negative examples. Include at least two sets of examples, either two positive example files or one positive and one negative file. You can upload a maximum of 256 MB per call.  Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
+   * Train a new multi-faceted classifier on the uploaded image data. Create your custom classifier with positive or
+   * negative examples. Include at least two sets of examples, either two positive example files or one positive and one
+   * negative file. You can upload a maximum of 256 MB per call.
+   *
+   * Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
+   * names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
    *
    * @param createClassifierOptions the {@link IBMVisualRecognitionV3Models.CreateClassifierOptions} containing the options for the call
    * @return the {@link IBMVisualRecognitionV3Models.Classifier} with the response
@@ -195,16 +204,8 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     multipartBuilder.addFormDataPart('name', createClassifierOptions.name());
-    // Classes
-    for (String className : createClassifierOptions.classNames()) {
-      String dataName = className + '_positive_examples';
-      IBMWatsonFile positiveExamples = createClassifierOptions.positiveExamplesByClassName(className);
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
-        positiveExamples,
-        'application/octet-stream'
-      );
-      multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
-    }
+    IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createClassifierOptions.classnamePositiveExamples(), 'application/octet-stream');
+    multipartBuilder.addFormDataPart('classname_positive_examples', createClassifierOptions.classnamePositiveExamplesFilename(), fileBody);
     if (createClassifierOptions.negativeExamples() != null) {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createClassifierOptions.negativeExamples(), 'application/octet-stream');
       multipartBuilder.addFormDataPart('negative_examples', createClassifierOptions.negativeExamplesFilename(), fileBody);
@@ -282,13 +283,24 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   /**
    * Update a classifier.
    *
-   * Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to existing classes. You must supply at least one set of positive or negative examples. For details, see [Updating custom classifiers](https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).  Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.  **Tip:** Don't make retraining calls on a classifier until the status is ready. When you submit retraining requests in parallel, the last request overwrites the previous requests. The retrained property shows the last time the classifier retraining finished.
+   * Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to
+   * existing classes. You must supply at least one set of positive or negative examples. For details, see [Updating
+   * custom
+   * classifiers](https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).
+   *
+   * Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
+   * names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
+   *
+   * **Tip:** Don't make retraining calls on a classifier until the status is ready. When you submit retraining requests
+   * in parallel, the last request overwrites the previous requests. The retrained property shows the last time the
+   * classifier retraining finished.
    *
    * @param updateClassifierOptions the {@link IBMVisualRecognitionV3Models.UpdateClassifierOptions} containing the options for the call
    * @return the {@link IBMVisualRecognitionV3Models.Classifier} with the response
    */
   public IBMVisualRecognitionV3Models.Classifier updateClassifier(IBMVisualRecognitionV3Models.UpdateClassifierOptions updateClassifierOptions) {
     IBMWatsonValidator.notNull(updateClassifierOptions, 'updateClassifierOptions cannot be null');
+    IBMWatsonValidator.isTrue((updateClassifierOptions.classnamePositiveExamples() != null) || (updateClassifierOptions.negativeExamples() != null), 'At least one of classname_positive_examples or negative_examples must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v3/classifiers/{0}', new String[]{ updateClassifierOptions.classifierId() }));
     Map<String, String> requestHeaders = (updateClassifierOptions != null) ? updateClassifierOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -299,12 +311,9 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    // Classes
-    for (String className : updateClassifierOptions.classNames()) {
-      String dataName = className + '_positive_examples';
-      IBMWatsonFile positiveExamples = updateClassifierOptions.positiveExamplesByClassName(className);
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(positiveExamples, 'application/octet-stream');
-      multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
+    if (updateClassifierOptions.classnamePositiveExamples() != null) {
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateClassifierOptions.classnamePositiveExamples(), 'application/octet-stream');
+      multipartBuilder.addFormDataPart('classname_positive_examples', updateClassifierOptions.classnamePositiveExamplesFilename(), fileBody);
     }
     if (updateClassifierOptions.negativeExamples() != null) {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateClassifierOptions.negativeExamples(), 'application/octet-stream');
@@ -319,7 +328,8 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   /**
    * Retrieve a Core ML model of a classifier.
    *
-   * Download a Core ML model file (.mlmodel) of a custom classifier that returns <tt>\"core_ml_enabled\": true</tt> in the classifier details.
+   * Download a Core ML model file (.mlmodel) of a custom classifier that returns <tt>\"core_ml_enabled\": true</tt> in
+   * the classifier details.
    *
    * @param getCoreMlModelOptions the {@link IBMVisualRecognitionV3Models.GetCoreMlModelOptions} containing the options for the call
    * @return the {@link IBMWatsonFile} with the response
@@ -341,7 +351,12 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   /**
    * Delete labeled data.
    *
-   * Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with the customer ID.   You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data. For more information about personal data and customer IDs, see [Information security](https://console.bluemix.net/docs/services/visual-recognition/information-security.html).
+   * Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
+   * the customer ID.
+   *
+   * You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
+   * For more information about personal data and customer IDs, see [Information
+   * security](https://console.bluemix.net/docs/services/visual-recognition/information-security.html).
    *
    * @param deleteUserDataOptions the {@link IBMVisualRecognitionV3Models.DeleteUserDataOptions} containing the options for the call
    * @return the service call

@@ -10,7 +10,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the trait_id_serialized_name.
      *
-     * The unique, non-localized identifier of the characteristic to which the results pertain. IDs have the form `behavior_{value}`.
+     * The unique, non-localized identifier of the characteristic to which the results pertain. IDs have the form
+     * `behavior_{value}`.
      *
      * @return the trait_id_serialized_name
      */
@@ -43,7 +44,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the percentage_serialized_name.
      *
-     * For JSON content that is timestamped, the percentage of timestamped input data that occurred during that day of the week or hour of the day. The range is 0 to 1.
+     * For JSON content that is timestamped, the percentage of timestamped input data that occurred during that day of
+     * the week or hour of the day. The range is 0 to 1.
      *
      * @return the percentage_serialized_name
      */
@@ -109,7 +111,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the consumption_preference_id_serialized_name.
      *
-     * The unique, non-localized identifier of the consumption preference to which the results pertain. IDs have the form `consumption_preferences_{preference}`.
+     * The unique, non-localized identifier of the consumption preference to which the results pertain. IDs have the
+     * form `consumption_preferences_{preference}`.
      *
      * @return the consumption_preference_id_serialized_name
      */
@@ -131,7 +134,13 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the score_serialized_name.
      *
-     * The score for the consumption preference: * `0.0`: Unlikely * `0.5`: Neutral * `1.0`: Likely   The scores for some preferences are binary and do not allow a neutral value. The score is an indication of preference based on the results inferred from the input text, not a normalized percentile.
+     * The score for the consumption preference:
+     * * `0.0`: Unlikely
+     * * `0.5`: Neutral
+     * * `1.0`: Likely
+     *
+     * The scores for some preferences are binary and do not allow a neutral value. The score is an indication of
+     * preference based on the results inferred from the input text, not a normalized percentile.
      *
      * @return the score_serialized_name
      */
@@ -188,7 +197,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the consumption_preference_category_id_serialized_name.
      *
-     * The unique, non-localized identifier of the consumption preferences category to which the results pertain. IDs have the form `consumption_preferences_{category}`.
+     * The unique, non-localized identifier of the consumption preferences category to which the results pertain. IDs
+     * have the form `consumption_preferences_{category}`.
      *
      * @return the consumption_preference_category_id_serialized_name
      */
@@ -379,7 +389,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the content_serialized_name.
      *
-     * The content that is to be analyzed. The service supports up to 20 MB of content for all `ContentItem` objects combined.
+     * The content that is to be analyzed. The service supports up to 20 MB of content for all `ContentItem` objects
+     * combined.
      *
      * @return the content_serialized_name
      */
@@ -399,7 +410,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the created_serialized_name.
      *
-     * A timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
+     * A timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch
+     * (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
      *
      * @return the created_serialized_name
      */
@@ -409,7 +421,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the updated_serialized_name.
      *
-     * A timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
+     * A timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX
+     * Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
      *
      * @return the updated_serialized_name
      */
@@ -419,7 +432,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the contenttype_serialized_name.
      *
-     * The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is analyzed; plain text is processed as submitted.
+     * The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is
+     * analyzed; plain text is processed as submitted.
      *
      * @return the contenttype_serialized_name
      */
@@ -429,7 +443,12 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the language_serialized_name.
      *
-     * The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is `en` (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. A language specified with the **Content-Type** parameter overrides the value of this parameter; any content items that specify a different language are ignored. Omit the **Content-Type** parameter to base the language on the most prevalent specification among the content items; again, content items that specify a different language are ignored. You can specify any combination of languages for the input and response content.
+     * The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is
+     * `en` (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as
+     * `en`. A language specified with the **Content-Type** parameter overrides the value of this parameter; any content
+     * items that specify a different language are ignored. Omit the **Content-Type** parameter to base the language on
+     * the most prevalent specification among the content items; again, content items that specify a different language
+     * are ignored. You can specify any combination of languages for the input and response content.
      *
      * @return the language_serialized_name
      */
@@ -439,7 +458,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the parentid_serialized_name.
      *
-     * The unique ID of the parent content item for this item. Used to identify hierarchical relationships between posts/replies, messages/replies, and so on.
+     * The unique ID of the parent content item for this item. Used to identify hierarchical relationships between
+     * posts/replies, messages/replies, and so on.
      *
      * @return the parentid_serialized_name
      */
@@ -678,7 +698,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the word_count_message_serialized_name.
      *
-     * When guidance is appropriate, a string that provides a message that indicates the number of words found and where that value falls in the range of required or suggested number of words.
+     * When guidance is appropriate, a string that provides a message that indicates the number of words found and where
+     * that value falls in the range of required or suggested number of words.
      *
      * @return the word_count_message_serialized_name
      */
@@ -689,7 +710,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the personality_serialized_name.
      *
-     * A recursive array of `Trait` objects that provides detailed results for the Big Five personality characteristics (dimensions and facets) inferred from the input text.
+     * A recursive array of `Trait` objects that provides detailed results for the Big Five personality characteristics
+     * (dimensions and facets) inferred from the input text.
      *
      * @return the personality_serialized_name
      */
@@ -722,7 +744,9 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the behavior_serialized_name.
      *
-     * For JSON content that is timestamped, detailed results about the social behavior disclosed by the input in terms of temporal characteristics. The results include information about the distribution of the content over the days of the week and the hours of the day.
+     * For JSON content that is timestamped, detailed results about the social behavior disclosed by the input in terms
+     * of temporal characteristics. The results include information about the distribution of the content over the days
+     * of the week and the hours of the day.
      *
      * @return the behavior_serialized_name
      */
@@ -733,7 +757,9 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the consumption_preferences_serialized_name.
      *
-     * If the **consumption_preferences** parameter is `true`, detailed results for each category of consumption preferences. Each element of the array provides information inferred from the input text for the individual preferences of that category.
+     * If the **consumption_preferences** parameter is `true`, detailed results for each category of consumption
+     * preferences. Each element of the array provides information inferred from the input text for the individual
+     * preferences of that category.
      *
      * @return the consumption_preferences_serialized_name
      */
@@ -744,7 +770,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the warnings_serialized_name.
      *
-     * Warning messages associated with the input text submitted with the request. The array is empty if the input generated no warnings.
+     * Warning messages associated with the input text submitted with the request. The array is empty if the input
+     * generated no warnings.
      *
      * @return the warnings_serialized_name
      */
@@ -933,11 +960,15 @@ public class IBMPersonalityInsightsV3Models {
     private String content_language_serialized_name;
     private String accept_language_serialized_name;
     private Boolean raw_scores_serialized_name;
+    private Boolean csv_headers_serialized_name;
     private Boolean consumption_preferences_serialized_name;
     /**
      * Gets the content_serialized_name.
      *
-     * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see [Providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input, provide an object of type `Content`.
+     * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
+     * [Providing sufficient
+     * input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input,
+     * provide an object of type `Content`.
      *
      * @return the content_serialized_name
      */
@@ -947,7 +978,10 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the body_serialized_name.
      *
-     * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see [Providing sufficient input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input, provide an object of type `Content`.
+     * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
+     * [Providing sufficient
+     * input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input,
+     * provide an object of type `Content`.
      *
      * @return the body_serialized_name
      */
@@ -957,7 +991,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the content_type_serialized_name.
      *
-     * The type of the input: application/json, text/html, or text/plain. A character encoding can be specified by including a `charset` parameter. For example, 'text/html;charset=utf-8'.
+     * The type of the input: application/json, text/html, or text/plain. A character encoding can be specified by
+     * including a `charset` parameter. For example, 'text/html;charset=utf-8'.
      *
      * @return the content_type_serialized_name
      */
@@ -967,7 +1002,15 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the content_language_serialized_name.
      *
-     * The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`.   The effect of the **Content-Language** parameter depends on the **Content-Type** parameter. When **Content-Type** is `text/plain` or `text/html`, **Content-Language** is the only way to specify the language. When **Content-Type** is `application/json`, **Content-Language** overrides a language specified with the `language` parameter of a `ContentItem` object, and content items that specify a different language are ignored; omit this parameter to base the language on the specification of the content items. You can specify any combination of languages for **Content-Language** and **Accept-Language**.
+     * The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
+     * are treated as their parent language; for example, `en-US` is interpreted as `en`.
+     *
+     * The effect of the **Content-Language** parameter depends on the **Content-Type** parameter. When **Content-Type**
+     * is `text/plain` or `text/html`, **Content-Language** is the only way to specify the language. When
+     * **Content-Type** is `application/json`, **Content-Language** overrides a language specified with the `language`
+     * parameter of a `ContentItem` object, and content items that specify a different language are ignored; omit this
+     * parameter to base the language on the specification of the content items. You can specify any combination of
+     * languages for **Content-Language** and **Accept-Language**.
      *
      * @return the content_language_serialized_name
      */
@@ -977,7 +1020,9 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the accept_language_serialized_name.
      *
-     * The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. You can specify any combination of languages for the input and response content.
+     * The desired language of the response. For two-character arguments, regional variants are treated as their parent
+     * language; for example, `en-US` is interpreted as `en`. You can specify any combination of languages for the input
+     * and response content.
      *
      * @return the accept_language_serialized_name
      */
@@ -987,7 +1032,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the raw_scores_serialized_name.
      *
-     * Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw scores are not compared with a sample population. By default, only normalized percentiles are returned.
+     * Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
+     * scores are not compared with a sample population. By default, only normalized percentiles are returned.
      *
      * @return the raw_scores_serialized_name
      */
@@ -995,9 +1041,21 @@ public class IBMPersonalityInsightsV3Models {
       return raw_scores_serialized_name;
     }
     /**
+     * Gets the csv_headers_serialized_name.
+     *
+     * Indicates whether column labels are returned with a CSV response. By default, no column labels are returned.
+     * Applies only when the **Accept** parameter is set to `text/csv`.
+     *
+     * @return the csv_headers_serialized_name
+     */
+    public Boolean csvHeaders() {
+      return csv_headers_serialized_name;
+    }
+    /**
      * Gets the consumption_preferences_serialized_name.
      *
-     * Indicates whether consumption preferences are returned with the results. By default, no consumption preferences are returned.
+     * Indicates whether consumption preferences are returned with the results. By default, no consumption preferences
+     * are returned.
      *
      * @return the consumption_preferences_serialized_name
      */
@@ -1012,6 +1070,7 @@ public class IBMPersonalityInsightsV3Models {
       content_language_serialized_name = builder.content_language_serialized_name;
       accept_language_serialized_name = builder.accept_language_serialized_name;
       raw_scores_serialized_name = builder.raw_scores_serialized_name;
+      csv_headers_serialized_name = builder.csv_headers_serialized_name;
       consumption_preferences_serialized_name = builder.consumption_preferences_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -1037,6 +1096,7 @@ public class IBMPersonalityInsightsV3Models {
     private String content_language_serialized_name;
     private String accept_language_serialized_name;
     private Boolean raw_scores_serialized_name;
+    private Boolean csv_headers_serialized_name;
     private Boolean consumption_preferences_serialized_name;
 
     private ProfileOptionsBuilder(ProfileOptions profileOptions) {
@@ -1046,6 +1106,7 @@ public class IBMPersonalityInsightsV3Models {
       content_language_serialized_name = profileOptions.content_language_serialized_name;
       accept_language_serialized_name = profileOptions.accept_language_serialized_name;
       raw_scores_serialized_name = profileOptions.raw_scores_serialized_name;
+      csv_headers_serialized_name = profileOptions.csv_headers_serialized_name;
       consumption_preferences_serialized_name = profileOptions.consumption_preferences_serialized_name;
       this.requestHeaders.putAll(profileOptions.requestHeaders());
     }
@@ -1095,6 +1156,17 @@ public class IBMPersonalityInsightsV3Models {
      */
     public ProfileOptionsBuilder rawScores(Boolean rawScores) {
       this.raw_scores_serialized_name = rawScores;
+      return this;
+    }
+
+    /**
+     * Set the csv_headers_serialized_name.
+     *
+     * @param csvHeaders the csvHeaders
+     * @return the ProfileOptions builder
+     */
+    public ProfileOptionsBuilder csvHeaders(Boolean csvHeaders) {
+      this.csv_headers_serialized_name = csvHeaders;
       return this;
     }
 
@@ -1172,7 +1244,11 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the trait_id_serialized_name.
      *
-     * The unique, non-localized identifier of the characteristic to which the results pertain. IDs have the form * `big5_{characteristic}` for Big Five personality dimensions * `facet_{characteristic}` for Big Five personality facets * `need_{characteristic}` for Needs  *`value_{characteristic}` for Values.
+     * The unique, non-localized identifier of the characteristic to which the results pertain. IDs have the form
+     * * `big5_{characteristic}` for Big Five personality dimensions
+     * * `facet_{characteristic}` for Big Five personality facets
+     * * `need_{characteristic}` for Needs
+     *  *`value_{characteristic}` for Values.
      *
      * @return the trait_id_serialized_name
      */
@@ -1194,7 +1270,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the category_serialized_name.
      *
-     * The category of the characteristic: `personality` for Big Five personality characteristics, `needs` for Needs, and `values` for Values.
+     * The category of the characteristic: `personality` for Big Five personality characteristics, `needs` for Needs,
+     * and `values` for Values.
      *
      * @return the category_serialized_name
      */
@@ -1205,7 +1282,9 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the percentile_serialized_name.
      *
-     * The normalized percentile score for the characteristic. The range is 0 to 1. For example, if the percentage for Openness is 0.60, the author scored in the 60th percentile; the author is more open than 59 percent of the population and less open than 39 percent of the population.
+     * The normalized percentile score for the characteristic. The range is 0 to 1. For example, if the percentage for
+     * Openness is 0.60, the author scored in the 60th percentile; the author is more open than 59 percent of the
+     * population and less open than 39 percent of the population.
      *
      * @return the percentile_serialized_name
      */
@@ -1216,7 +1295,14 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the raw_score_serialized_name.
      *
-     * The raw score for the characteristic. The range is 0 to 1. A higher score generally indicates a greater likelihood that the author has that characteristic, but raw scores must be considered in aggregate: The range of values in practice might be much smaller than 0 to 1, so an individual score must be considered in the context of the overall scores and their range.   The raw score is computed based on the input and the service model; it is not normalized or compared with a sample population. The raw score enables comparison of the results against a different sampling population and with a custom normalization approach.
+     * The raw score for the characteristic. The range is 0 to 1. A higher score generally indicates a greater
+     * likelihood that the author has that characteristic, but raw scores must be considered in aggregate: The range of
+     * values in practice might be much smaller than 0 to 1, so an individual score must be considered in the context of
+     * the overall scores and their range.
+     *
+     * The raw score is computed based on the input and the service model; it is not normalized or compared with a
+     * sample population. The raw score enables comparison of the results against a different sampling population and
+     * with a custom normalization approach.
      *
      * @return the raw_score_serialized_name
      */
@@ -1227,7 +1313,10 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the significant_serialized_name.
      *
-     * **`2017-10-13`**: Indicates whether the characteristic is meaningful for the input language. The field is always `true` for all characteristics of English, Spanish, and Japanese input. The field is `false` for the subset of characteristics of Arabic and Korean input for which the service's models are unable to generate meaningful results. **`2016-10-19`**: Not returned.
+     * **`2017-10-13`**: Indicates whether the characteristic is meaningful for the input language. The field is always
+     * `true` for all characteristics of English, Spanish, and Japanese input. The field is `false` for the subset of
+     * characteristics of Arabic and Korean input for which the service's models are unable to generate meaningful
+     * results. **`2016-10-19`**: Not returned.
      *
      * @return the significant_serialized_name
      */
@@ -1238,7 +1327,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the children_serialized_name.
      *
-     * For `personality` (Big Five) dimensions, more detailed results for the facets of each dimension as inferred from the input text.
+     * For `personality` (Big Five) dimensions, more detailed results for the facets of each dimension as inferred from
+     * the input text.
      *
      * @return the children_serialized_name
      */
@@ -1354,7 +1444,17 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the message_serialized_name.
      *
-     * The message associated with the `warning_id`: * `WORD_COUNT_MESSAGE`: "There were {number} words in the input. We need a minimum of 600, preferably 1,200 or more, to compute statistically significant estimates." * `JSON_AS_TEXT`: "Request input was processed as text/plain as indicated, however detected a JSON input. Did you mean application/json?" * `CONTENT_TRUNCATED`: "For maximum accuracy while also optimizing processing time, only the first 250KB of input text (excluding markup) was analyzed. Accuracy levels off at approximately 3,000 words so this did not affect the accuracy of the profile." * `PARTIAL_TEXT_USED`, "The text provided to compute the profile was trimmed for performance reasons. This action does not affect the accuracy of the output, as not all of the input text was required." Applies only when Arabic input text exceeds a threshold at which additional words do not contribute to the accuracy of the profile.
+     * The message associated with the `warning_id`:
+     * * `WORD_COUNT_MESSAGE`: "There were {number} words in the input. We need a minimum of 600, preferably 1,200 or
+     * more, to compute statistically significant estimates."
+     * * `JSON_AS_TEXT`: "Request input was processed as text/plain as indicated, however detected a JSON input. Did you
+     * mean application/json?"
+     * * `CONTENT_TRUNCATED`: "For maximum accuracy while also optimizing processing time, only the first 250KB of input
+     * text (excluding markup) was analyzed. Accuracy levels off at approximately 3,000 words so this did not affect the
+     * accuracy of the profile."
+     * * `PARTIAL_TEXT_USED`, "The text provided to compute the profile was trimmed for performance reasons. This action
+     * does not affect the accuracy of the output, as not all of the input text was required." Applies only when Arabic
+     * input text exceeds a threshold at which additional words do not contribute to the accuracy of the profile.
      *
      * @return the message_serialized_name
      */

@@ -1,8 +1,8 @@
 /**
- * The IBM Watson Discovery Service is a cognitive search and content analytics engine that you can add to applications
- * to identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and
- * unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual
- * filtering of results.
+ * The IBM Watson&trade; Discovery Service is a cognitive search and content analytics engine that you can add to
+ * applications to identify patterns, trends and actionable insights to drive better decision-making. Securely unify
+ * structured and unstructured data with pre-enriched content, and use a simplified query language to eliminate the need
+ * for manual filtering of results.
  *
  * @version V1
  * @see <a href="http://www.ibm.com/watson/developercloud/discovery.html">Discovery</a>
@@ -59,7 +59,10 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Create an environment.
    *
-   * Creates a new environment for private data. An environment must be created before collections can be created.   **Note**: You can create only one environment for private data per service instance. An attempt to create another environment results in an error.
+   * Creates a new environment for private data. An environment must be created before collections can be created.
+   *
+   * **Note**: You can create only one environment for private data per service instance. An attempt to create another
+   * environment results in an error.
    *
    * @param createEnvironmentOptions the {@link IBMDiscoveryV1Models.CreateEnvironmentOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.Environment} with the response
@@ -179,7 +182,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Update an environment.
    *
-   * Updates an environment. The environment's `name` and  `description` parameters can be changed. You must specify a `name` for the environment.
+   * Updates an environment. The environment's `name` and  `description` parameters can be changed. You must specify a
+   * `name` for the environment.
    *
    * @param updateEnvironmentOptions the {@link IBMDiscoveryV1Models.UpdateEnvironmentOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.Environment} with the response
@@ -209,7 +213,15 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Add configuration.
    *
-   * Creates a new configuration.  If the input configuration contains the `configuration_id`, `created`, or `updated` properties, then they are ignored and overridden by the system, and an error is not returned so that the overridden fields do not need to be removed when copying a configuration.  The configuration can contain unrecognized JSON fields. Any such fields are ignored and do not generate an error. This makes it easier to use newer configuration files with older versions of the API and the service. It also makes it possible for the tooling to add additional metadata and information to the configuration.
+   * Creates a new configuration.
+   *
+   * If the input configuration contains the `configuration_id`, `created`, or `updated` properties, then they are
+   * ignored and overridden by the system, and an error is not returned so that the overridden fields do not need to be
+   * removed when copying a configuration.
+   *
+   * The configuration can contain unrecognized JSON fields. Any such fields are ignored and do not generate an error.
+   * This makes it easier to use newer configuration files with older versions of the API and the service. It also makes
+   * it possible for the tooling to add additional metadata and information to the configuration.
    *
    * @param createConfigurationOptions the {@link IBMDiscoveryV1Models.CreateConfigurationOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.Configuration} with the response
@@ -248,7 +260,10 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Delete a configuration.
    *
-   * The deletion is performed unconditionally. A configuration deletion request succeeds even if the configuration is referenced by a collection or document ingestion. However, documents that have already been submitted for processing continue to use the deleted configuration. Documents are always processed with a snapshot of the configuration as it existed at the time the document was submitted.
+   * The deletion is performed unconditionally. A configuration deletion request succeeds even if the configuration is
+   * referenced by a collection or document ingestion. However, documents that have already been submitted for
+   * processing continue to use the deleted configuration. Documents are always processed with a snapshot of the
+   * configuration as it existed at the time the document was submitted.
    *
    * @param deleteConfigurationOptions the {@link IBMDiscoveryV1Models.DeleteConfigurationOptions} containing the options for the call
    * @return the service call
@@ -315,7 +330,13 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Update a configuration.
    *
-   * Replaces an existing configuration.   * Completely replaces the original configuration.   * The `configuration_id`, `updated`, and `created` fields are accepted in the request, but they are ignored, and an error is not generated. It is also acceptable for users to submit an updated configuration with none of the three properties.   * Documents are processed with a snapshot of the configuration as it was at the time the document was submitted to be ingested. This means that already submitted documents will not see any updates made to the configuration.
+   * Replaces an existing configuration.
+   *   * Completely replaces the original configuration.
+   *   * The `configuration_id`, `updated`, and `created` fields are accepted in the request, but they are ignored, and
+   * an error is not generated. It is also acceptable for users to submit an updated configuration with none of the
+   * three properties.
+   *   * Documents are processed with a snapshot of the configuration as it was at the time the document was submitted
+   * to be ingested. This means that already submitted documents will not see any updates made to the configuration.
    *
    * @param updateConfigurationOptions the {@link IBMDiscoveryV1Models.UpdateConfigurationOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.Configuration} with the response
@@ -354,7 +375,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Test configuration.
    *
-   * Runs a sample document through the default or your configuration and returns diagnostic information designed to help you understand how the document was processed. The document is not added to the index.
+   * Runs a sample document through the default or your configuration and returns diagnostic information designed to
+   * help you understand how the document was processed. The document is not added to the index.
    *
    * @param testConfigurationInEnvironmentOptions the {@link IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.TestDocument} with the response
@@ -547,7 +569,9 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Create or update expansion list.
    *
-   * Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is `500`. The current expansion list is replaced with the uploaded content.
+   * Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is
+   * `500`.
+   * The current expansion list is replaced with the uploaded content.
    *
    * @param createExpansionsOptions the {@link IBMDiscoveryV1Models.CreateExpansionsOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.Expansions} with the response
@@ -574,7 +598,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Delete the expansion list.
    *
-   * Remove the expansion information for this collection. The expansion list must be deleted to disable query expansion for a collection.
+   * Remove the expansion information for this collection. The expansion list must be deleted to disable query expansion
+   * for a collection.
    *
    * @param deleteExpansionsOptions the {@link IBMDiscoveryV1Models.DeleteExpansionsOptions} containing the options for the call
    * @return the service call
@@ -596,7 +621,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Get the expansion list.
    *
-   * Returns the current expansion list for the specified collection. If an expansion list is not specified, an object with empty expansion arrays is returned.
+   * Returns the current expansion list for the specified collection. If an expansion list is not specified, an object
+   * with empty expansion arrays is returned.
    *
    * @param listExpansionsOptions the {@link IBMDiscoveryV1Models.ListExpansionsOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.Expansions} with the response
@@ -618,7 +644,25 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Add a document.
    *
-   * Add a document to a collection with optional metadata.    * The `version` query parameter is still required.    * Returns immediately after the system has accepted the document for processing.    * The user must provide document content, metadata, or both. If the request is missing both document content and metadata, it is rejected.    * The user can set the `Content-Type` parameter on the `file` part to indicate the media type of the document. If the `Content-Type` parameter is missing or is one of the generic media types (for example, `application/octet-stream`), then the service attempts to automatically detect the document's media type.    * The following field names are reserved and will be filtered out if present after normalization: `id`, `score`, `highlight`, and any field with the prefix of: `_`, `+`, or `-`    * Fields with empty name values after normalization are filtered out before indexing.    * Fields containing the following characters after normalization are filtered out before indexing: `#` and `,`.
+   * Add a document to a collection with optional metadata.
+   *
+   *   * The `version` query parameter is still required.
+   *
+   *   * Returns immediately after the system has accepted the document for processing.
+   *
+   *   * The user must provide document content, metadata, or both. If the request is missing both document content and
+   * metadata, it is rejected.
+   *
+   *   * The user can set the `Content-Type` parameter on the `file` part to indicate the media type of the document. If
+   * the `Content-Type` parameter is missing or is one of the generic media types (for example,
+   * `application/octet-stream`), then the service attempts to automatically detect the document's media type.
+   *
+   *   * The following field names are reserved and will be filtered out if present after normalization: `id`, `score`,
+   * `highlight`, and any field with the prefix of: `_`, `+`, or `-`
+   *
+   *   * Fields with empty name values after normalization are filtered out before indexing.
+   *
+   *   * Fields containing the following characters after normalization are filtered out before indexing: `#` and `,`.
    *
    * @param addDocumentOptions the {@link IBMDiscoveryV1Models.AddDocumentOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.DocumentAccepted} with the response
@@ -652,7 +696,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Delete a document.
    *
-   * If the given document ID is invalid, or if the document is not found, then the a success response is returned (HTTP status code `200`) with the status set to 'deleted'.
+   * If the given document ID is invalid, or if the document is not found, then the a success response is returned (HTTP
+   * status code `200`) with the status set to 'deleted'.
    *
    * @param deleteDocumentOptions the {@link IBMDiscoveryV1Models.DeleteDocumentOptions} containing the options for the call
    * @return the service call
@@ -674,7 +719,9 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Get document details.
    *
-   * Fetch status details about a submitted document. **Note:** this operation does not return the document itself. Instead, it returns only the document's processing status and any notices (warnings or errors) that were generated when the document was ingested. Use the query API to retrieve the actual document content.
+   * Fetch status details about a submitted document. **Note:** this operation does not return the document itself.
+   * Instead, it returns only the document's processing status and any notices (warnings or errors) that were generated
+   * when the document was ingested. Use the query API to retrieve the actual document content.
    *
    * @param getDocumentStatusOptions the {@link IBMDiscoveryV1Models.GetDocumentStatusOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.DocumentStatus} with the response
@@ -730,7 +777,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Query documents in multiple collections.
    *
-   * See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details.
+   * See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more
+   * details.
    *
    * @param federatedQueryOptions the {@link IBMDiscoveryV1Models.FederatedQueryOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.QueryResponse} with the response
@@ -763,8 +811,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (federatedQueryOptions.count() != null) {
       builder.query('count', String.valueOf(federatedQueryOptions.count()));
     }
-    if (federatedQueryOptions.returnField() != null) {
-      builder.query('return_fields', String.join(federatedQueryOptions.returnField(), ','));
+    if (federatedQueryOptions.returnFields() != null) {
+      builder.query('return_fields', String.join(federatedQueryOptions.returnFields(), ','));
     }
     if (federatedQueryOptions.offset() != null) {
       builder.query('offset', String.valueOf(federatedQueryOptions.offset()));
@@ -797,7 +845,10 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Query multiple collection system notices.
    *
-   * Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when ingesting documents and performing relevance training. See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details on the query language.
+   * Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
+   * ingesting documents and performing relevance training. See the [Discovery service
+   * documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details on the query
+   * language.
    *
    * @param federatedQueryNoticesOptions the {@link IBMDiscoveryV1Models.FederatedQueryNoticesOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.QueryNoticesResponse} with the response
@@ -830,8 +881,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (federatedQueryNoticesOptions.count() != null) {
       builder.query('count', String.valueOf(federatedQueryNoticesOptions.count()));
     }
-    if (federatedQueryNoticesOptions.returnField() != null) {
-      builder.query('return_fields', String.join(federatedQueryNoticesOptions.returnField(), ','));
+    if (federatedQueryNoticesOptions.returnFields() != null) {
+      builder.query('return_fields', String.join(federatedQueryNoticesOptions.returnFields(), ','));
     }
     if (federatedQueryNoticesOptions.offset() != null) {
       builder.query('offset', String.valueOf(federatedQueryNoticesOptions.offset()));
@@ -861,7 +912,9 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Query your collection.
    *
-   * After your content is uploaded and enriched by the Discovery service, you can build queries to search your content. For details, see the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html).
+   * After your content is uploaded and enriched by the Discovery service, you can build queries to search your content.
+   * For details, see the [Discovery service
+   * documentation](https://console.bluemix.net/docs/services/discovery/using.html).
    *
    * @param queryOptions the {@link IBMDiscoveryV1Models.QueryOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.QueryResponse} with the response
@@ -937,7 +990,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Knowledge Graph entity query.
    *
-   * See the [Knowledge Graph documentation](https://console.bluemix.net/docs/services/discovery/building-kg.html) for more details.
+   * See the [Knowledge Graph documentation](https://console.bluemix.net/docs/services/discovery/building-kg.html) for
+   * more details.
    *
    * @param queryEntitiesOptions the {@link IBMDiscoveryV1Models.QueryEntitiesOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.QueryEntitiesResponse} with the response
@@ -976,7 +1030,10 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Query system notices.
    *
-   * Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when ingesting documents and performing relevance training. See the [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details on the query language.
+   * Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
+   * ingesting documents and performing relevance training. See the [Discovery service
+   * documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details on the query
+   * language.
    *
    * @param queryNoticesOptions the {@link IBMDiscoveryV1Models.QueryNoticesOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.QueryNoticesResponse} with the response
@@ -1009,8 +1066,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     if (queryNoticesOptions.count() != null) {
       builder.query('count', String.valueOf(queryNoticesOptions.count()));
     }
-    if (queryNoticesOptions.returnField() != null) {
-      builder.query('return_fields', String.join(queryNoticesOptions.returnField(), ','));
+    if (queryNoticesOptions.returnFields() != null) {
+      builder.query('return_fields', String.join(queryNoticesOptions.returnFields(), ','));
     }
     if (queryNoticesOptions.offset() != null) {
       builder.query('offset', String.valueOf(queryNoticesOptions.offset()));
@@ -1049,7 +1106,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Knowledge Graph relationship query.
    *
-   * See the [Knowledge Graph documentation](https://console.bluemix.net/docs/services/discovery/building-kg.html) for more details.
+   * See the [Knowledge Graph documentation](https://console.bluemix.net/docs/services/discovery/building-kg.html) for
+   * more details.
    *
    * @param queryRelationsOptions the {@link IBMDiscoveryV1Models.QueryRelationsOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.QueryRelationsResponse} with the response
@@ -1341,7 +1399,12 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Delete labeled data.
    *
-   * Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with the customer ID.   You associate a customer ID with data by passing the **X-Watson-Metadata** header with a request that passes data. For more information about personal data and customer IDs, see [Information security](https://console.bluemix.net/docs/services/discovery/information-security.html).
+   * Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
+   * the customer ID.
+   *
+   * You associate a customer ID with data by passing the **X-Watson-Metadata** header with a request that passes data.
+   * For more information about personal data and customer IDs, see [Information
+   * security](https://console.bluemix.net/docs/services/discovery/information-security.html).
    *
    * @param deleteUserDataOptions the {@link IBMDiscoveryV1Models.DeleteUserDataOptions} containing the options for the call
    * @return the service call

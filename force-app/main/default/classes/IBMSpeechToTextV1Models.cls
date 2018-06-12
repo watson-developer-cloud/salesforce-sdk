@@ -17,7 +17,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom acoustic model. The **Create a custom acoustic model** method returns only this field of the object; it does not return the other fields.
+     * The customization ID (GUID) of the custom acoustic model. The **Create a custom acoustic model** method returns
+     * only this field of the object; it does not return the other fields.
      *
      * @return the customization_id_serialized_name
      */
@@ -28,7 +29,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the created_serialized_name.
      *
-     * The date and time in Coordinated Universal Time (UTC) at which the custom acoustic model was created. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
+     * The date and time in Coordinated Universal Time (UTC) at which the custom acoustic model was created. The value
+     * is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
      *
      * @return the created_serialized_name
      */
@@ -50,7 +52,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the versions_serialized_name.
      *
-     * A list of the available versions of the custom acoustic model. Each element of the array indicates a version of the base model with which the custom model can be used. Multiple versions exist only if the custom model has been upgraded; otherwise, only a single version is shown.
+     * A list of the available versions of the custom acoustic model. Each element of the array indicates a version of
+     * the base model with which the custom model can be used. Multiple versions exist only if the custom model has been
+     * upgraded; otherwise, only a single version is shown.
      *
      * @return the versions_serialized_name
      */
@@ -105,7 +109,14 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the status_serialized_name.
      *
-     * The current status of the custom acoustic model: * `pending` indicates that the model was created but is waiting either for training data to be added or for the service to finish analyzing added data. * `ready` indicates that the model contains data and is ready to be trained. * `training` indicates that the model is currently being trained. * `available` indicates that the model is trained and ready to use. * `upgrading` indicates that the model is currently being upgraded. * `failed` indicates that training of the model failed.
+     * The current status of the custom acoustic model:
+     * * `pending` indicates that the model was created but is waiting either for training data to be added or for the
+     * service to finish analyzing added data.
+     * * `ready` indicates that the model contains data and is ready to be trained.
+     * * `training` indicates that the model is currently being trained.
+     * * `available` indicates that the model is trained and ready to use.
+     * * `upgrading` indicates that the model is currently being upgraded.
+     * * `failed` indicates that training of the model failed.
      *
      * @return the status_serialized_name
      */
@@ -116,7 +127,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the progress_serialized_name.
      *
-     * A percentage that indicates the progress of the custom acoustic model's current training. A value of `100` means that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the training. The field changes from `0` to `100` when training is complete.
+     * A percentage that indicates the progress of the custom acoustic model's current training. A value of `100` means
+     * that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the
+     * training. The field changes from `0` to `100` when training is complete.
      *
      * @return the progress_serialized_name
      */
@@ -127,7 +140,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the warnings_serialized_name.
      *
-     * If the request included unknown parameters, the following message: `Unexpected query parameter(s) ['parameters'] detected`, where `parameters` is a list that includes a quoted string for each unknown parameter.
+     * If the request included unknown parameters, the following message: `Unexpected query parameter(s) ['parameters']
+     * detected`, where `parameters` is a list that includes a quoted string for each unknown parameter.
      *
      * @return the warnings_serialized_name
      */
@@ -254,7 +268,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizations_serialized_name.
      *
-     * An array of objects that provides information about each available custom acoustic model. The array is empty if the requesting service credentials own no custom acoustic models (if no language is specified) or own no custom acoustic models for the specified language.
+     * An array of objects that provides information about each available custom acoustic model. The array is empty if
+     * the requesting service credentials own no custom acoustic models (if no language is specified) or own no custom
+     * acoustic models for the specified language.
      *
      * @return the customizations_serialized_name
      */
@@ -305,13 +321,11 @@ public class IBMSpeechToTextV1Models {
     private String content_type_serialized_name;
     private String contained_content_type_serialized_name;
     private Boolean allow_overwrite_serialized_name;
-    private IBMWatsonFile audio_serialized_name;
-    private String audio_filename_serialized_name;
-
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -321,7 +335,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the audio_name_serialized_name.
      *
-     * The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include spaces in the name; use a localized name that matches the language of the custom model.
+     * The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include
+     * spaces in the name; use a localized name that matches the language of the custom model.
      *
      * @return the audio_name_serialized_name
      */
@@ -331,7 +346,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the content_type_serialized_name.
      *
-     * The type of the input: application/zip, application/gzip, audio/basic, audio/flac, audio/l16, audio/mp3, audio/mpeg, audio/mulaw, audio/ogg, audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/wav, audio/webm, audio/webm;codecs=opus, or audio/webm;codecs=vorbis.
+     * The type of the input: application/zip, application/gzip, audio/basic, audio/flac, audio/l16, audio/mp3,
+     * audio/mpeg, audio/mulaw, audio/ogg, audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/wav, audio/webm,
+     * audio/webm;codecs=opus, or audio/webm;codecs=vorbis.
      *
      * @return the content_type_serialized_name
      */
@@ -341,7 +358,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the contained_content_type_serialized_name.
      *
-     * For an archive-type resource, specifies the format of the audio files contained in the archive file. The parameter accepts all of the audio formats supported for use with speech recognition, including the `rate`, `channels`, and `endianness` parameters that are used with some formats. For a complete list of supported audio formats, see [Audio formats](/docs/services/speech-to-text/input.html#formats).
+     * For an archive-type resource, specifies the format of the audio files contained in the archive file. The
+     * parameter accepts all of the audio formats supported for use with speech recognition, including the `rate`,
+     * `channels`, and `endianness` parameters that are used with some formats. For a complete list of supported audio
+     * formats, see [Audio formats](/docs/services/speech-to-text/input.html#formats).
      *
      * @return the contained_content_type_serialized_name
      */
@@ -351,23 +371,16 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the allow_overwrite_serialized_name.
      *
-     * If `true`, the specified corpus or audio resource overwrites an existing corpus or audio resource with the same name. If `false` (the default), the request fails if a corpus or audio resource with the same name already exists. The parameter has no effect if a corpus or audio resource with the same name does not already exist.
+     * If `true`, the specified corpus or audio resource overwrites an existing corpus or audio resource with the same
+     * name. If `false` (the default), the request fails if a corpus or audio resource with the same name already
+     * exists. The parameter has no effect if a corpus or audio resource with the same name does not already exist.
      *
      * @return the allow_overwrite_serialized_name
      */
     public Boolean allowOverwrite() {
       return allow_overwrite_serialized_name;
     }
-    public IBMWatsonFile audio() {
-      return audio_serialized_name;
-    }
-
-    public String audioFilename() {
-      return audio_filename_serialized_name;
-    }
     private AddAudioOptions(AddAudioOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be null');
-      IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be null');
       IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.audio_name_serialized_name, 'audio_name_serialized_name cannot be empty');
       IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
@@ -376,8 +389,6 @@ public class IBMSpeechToTextV1Models {
       content_type_serialized_name = builder.content_type_serialized_name;
       contained_content_type_serialized_name = builder.contained_content_type_serialized_name;
       allow_overwrite_serialized_name = builder.allow_overwrite_serialized_name;
-      audio_serialized_name = builder.audio_serialized_name;
-      audio_filename_serialized_name = builder.audio_filename_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -401,8 +412,6 @@ public class IBMSpeechToTextV1Models {
     private String content_type_serialized_name;
     private String contained_content_type_serialized_name;
     private Boolean allow_overwrite_serialized_name;
-    private IBMWatsonFile audio_serialized_name;
-    private String audio_filename_serialized_name;
 
     private AddAudioOptionsBuilder(AddAudioOptions addAudioOptions) {
       customization_id_serialized_name = addAudioOptions.customization_id_serialized_name;
@@ -410,8 +419,6 @@ public class IBMSpeechToTextV1Models {
       content_type_serialized_name = addAudioOptions.content_type_serialized_name;
       contained_content_type_serialized_name = addAudioOptions.contained_content_type_serialized_name;
       allow_overwrite_serialized_name = addAudioOptions.allow_overwrite_serialized_name;
-      audio_serialized_name = addAudioOptions.audio_serialized_name;
-      audio_filename_serialized_name = addAudioOptions.audio_filename_serialized_name;
       this.requestHeaders.putAll(addAudioOptions.requestHeaders());
     }
 
@@ -427,12 +434,9 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      * @param audioName the audioName
      */
-    public AddAudioOptionsBuilder(String customizationId, String audioName, IBMWatsonFile audio, String audioFilename) {
+    public AddAudioOptionsBuilder(String customizationId, String audioName) {
       this.customization_id_serialized_name = customizationId;
       this.audio_name_serialized_name = audioName;
-      this.audio_serialized_name = audio;
-      this.audio_filename_serialized_name = audioFilename;
-      this.content_type_serialized_name = audio.contentType();
     }
 
     /**
@@ -488,14 +492,153 @@ public class IBMSpeechToTextV1Models {
       return this;
     }
 
-    public AddAudioOptionsBuilder audio(IBMWatsonFile audio) {
-      this.audio_serialized_name = audio;
-      this.content_type_serialized_name = audio.contentType();
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
       return this;
     }
 
-    public AddAudioOptionsBuilder audioFilename(String audioFilename) {
-      this.audio_filename_serialized_name = audioFilename;
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+      return this;
+    }
+
+    /**
+     * Set the AddAudioOptions.
+     *
+     * @param AddAudioOptions the AddAudioOptions
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
       return this;
     }
 
@@ -521,11 +664,11 @@ public class IBMSpeechToTextV1Models {
     private IBMWatsonFile corpus_file_serialized_name;
     private String corpus_filename_serialized_name;
     private Boolean allow_overwrite_serialized_name;
-    private String corpus_file_content_type_serialized_name;
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -535,7 +678,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the corpus_name_serialized_name.
      *
-     * The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name; use a localized name that matches the language of the custom model; and do not use the name `user`, which is reserved by the service to denote custom words added or modified by the user.
+     * The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name;
+     * use a localized name that matches the language of the custom model; and do not use the name `user`, which is
+     * reserved by the service to denote custom words added or modified by the user.
      *
      * @return the corpus_name_serialized_name
      */
@@ -545,7 +690,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the corpus_file_serialized_name.
      *
-     * A plain text file that contains the training data for the corpus. Encode the file in UTF-8 if it contains non-ASCII characters; the service assumes UTF-8 encoding if it encounters non-ASCII characters. With cURL, use the `--data-binary` option to upload the file for the request.
+     * A plain text file that contains the training data for the corpus. Encode the file in UTF-8 if it contains
+     * non-ASCII characters; the service assumes UTF-8 encoding if it encounters non-ASCII characters. With cURL, use
+     * the `--data-binary` option to upload the file for the request.
      *
      * @return the corpus_file_serialized_name
      */
@@ -565,22 +712,14 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the allow_overwrite_serialized_name.
      *
-     * If `true`, the specified corpus or audio resource overwrites an existing corpus or audio resource with the same name. If `false` (the default), the request fails if a corpus or audio resource with the same name already exists. The parameter has no effect if a corpus or audio resource with the same name does not already exist.
+     * If `true`, the specified corpus or audio resource overwrites an existing corpus or audio resource with the same
+     * name. If `false` (the default), the request fails if a corpus or audio resource with the same name already
+     * exists. The parameter has no effect if a corpus or audio resource with the same name does not already exist.
      *
      * @return the allow_overwrite_serialized_name
      */
     public Boolean allowOverwrite() {
       return allow_overwrite_serialized_name;
-    }
-    /**
-     * Gets the corpus_file_content_type_serialized_name.
-     *
-     * The content type of corpus_file.
-     *
-     * @return the corpus_file_content_type_serialized_name
-     */
-    public String corpusFileContentType() {
-      return corpus_file_content_type_serialized_name;
     }
     private AddCorpusOptions(AddCorpusOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
@@ -591,7 +730,6 @@ public class IBMSpeechToTextV1Models {
       corpus_file_serialized_name = builder.corpus_file_serialized_name;
       corpus_filename_serialized_name = builder.corpus_filename_serialized_name;
       allow_overwrite_serialized_name = builder.allow_overwrite_serialized_name;
-      corpus_file_content_type_serialized_name = builder.corpus_file_content_type_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -615,7 +753,6 @@ public class IBMSpeechToTextV1Models {
     private IBMWatsonFile corpus_file_serialized_name;
     private String corpus_filename_serialized_name;
     private Boolean allow_overwrite_serialized_name;
-    private String corpus_file_content_type_serialized_name;
 
     private AddCorpusOptionsBuilder(AddCorpusOptions addCorpusOptions) {
       customization_id_serialized_name = addCorpusOptions.customization_id_serialized_name;
@@ -623,7 +760,6 @@ public class IBMSpeechToTextV1Models {
       corpus_file_serialized_name = addCorpusOptions.corpus_file_serialized_name;
       corpus_filename_serialized_name = addCorpusOptions.corpus_filename_serialized_name;
       allow_overwrite_serialized_name = addCorpusOptions.allow_overwrite_serialized_name;
-      corpus_file_content_type_serialized_name = addCorpusOptions.corpus_file_content_type_serialized_name;
       this.requestHeaders.putAll(addCorpusOptions.requestHeaders());
     }
 
@@ -711,17 +847,6 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the corpus_file_content_type_serialized_name.
-     *
-     * @param corpusFileContentType the corpusFileContentType
-     * @return the AddCorpusOptions builder
-     */
-    public AddCorpusOptionsBuilder corpusFileContentType(String corpusFileContentType) {
-      this.corpus_file_content_type_serialized_name = corpusFileContentType;
-      return this;
-    }
-
-    /**
      * Add a request header.
      *
      * @param name the header name
@@ -746,7 +871,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -756,7 +882,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_name_serialized_name.
      *
-     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
+     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom
+     * word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
+     * compound words.
      *
      * @return the word_name_serialized_name
      */
@@ -766,7 +894,11 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_serialized_name.
      *
-     * For the **Add custom words** method, you must specify the custom word that is to be added to or updated in the custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.   Omit this field for the **Add a custom word** method.
+     * For the **Add custom words** method, you must specify the custom word that is to be added to or updated in the
+     * custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
+     * compound words.
+     *
+     * Omit this field for the **Add a custom word** method.
      *
      * @return the word_serialized_name
      */
@@ -776,7 +908,13 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the sounds_like_serialized_name.
      *
-     * An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce, foreign words, acronyms, and so on can be pronounced by users. For a word that is not in the service's base vocabulary, omit the parameter to have the service automatically generate a sounds-like pronunciation for the word. For a word that is in the service's base vocabulary, use the parameter to specify additional pronunciations for the word. You cannot override the default pronunciation of a word; pronunciations you add augment the pronunciation from the base vocabulary. A word can have at most five sounds-like pronunciations, and a pronunciation can include at most 40 characters not including spaces.
+     * An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce,
+     * foreign words, acronyms, and so on can be pronounced by users. For a word that is not in the service's base
+     * vocabulary, omit the parameter to have the service automatically generate a sounds-like pronunciation for the
+     * word. For a word that is in the service's base vocabulary, use the parameter to specify additional pronunciations
+     * for the word. You cannot override the default pronunciation of a word; pronunciations you add augment the
+     * pronunciation from the base vocabulary. A word can have at most five sounds-like pronunciations, and a
+     * pronunciation can include at most 40 characters not including spaces.
      *
      * @return the sounds_like_serialized_name
      */
@@ -786,7 +924,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the display_as_serialized_name.
      *
-     * An alternative spelling for the custom word when it appears in a transcript. Use the parameter when you want the word to have a spelling that is different from its usual representation or from its spelling in corpora training data.
+     * An alternative spelling for the custom word when it appears in a transcript. Use the parameter when you want the
+     * word to have a spelling that is different from its usual representation or from its spelling in corpora training
+     * data.
      *
      * @return the display_as_serialized_name
      */
@@ -953,7 +1093,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -963,7 +1104,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the words_serialized_name.
      *
-     * An array of objects that provides information about each custom word that is to be added to or updated in the custom language model.
+     * An array of objects that provides information about each custom word that is to be added to or updated in the
+     * custom language model.
      *
      * @return the words_serialized_name
      */
@@ -1090,7 +1232,11 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the type_serialized_name.
      *
-     * The type of the audio resource: * `audio` for an individual audio file * `archive` for an archive (**.zip** or **.tar.gz**) file that contains audio files.
+     * The type of the audio resource:
+     * * `audio` for an individual audio file
+     * * `archive` for an archive (**.zip** or **.tar.gz**) file that contains audio files
+     * * `undetermined` for a resource that the service cannot validate (for example, if the user mistakenly passes a
+     * file that does not contain audio, such as a JPEG file).
      *
      * @return the type_serialized_name
      */
@@ -1112,7 +1258,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the frequency_serialized_name.
      *
-     * **For an audio-type resource,** the sampling rate of the audio in Hertz (samples per second). Omitted for an archive-type resource.
+     * **For an audio-type resource,** the sampling rate of the audio in Hertz (samples per second). Omitted for an
+     * archive-type resource.
      *
      * @return the frequency_serialized_name
      */
@@ -1123,7 +1270,11 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the compression_serialized_name.
      *
-     * **For an archive-type resource,** the format of the compressed archive: * `zip` for a **.zip** file * `gzip` for a **.tar.gz** file   Omitted for an audio-type resource.
+     * **For an archive-type resource,** the format of the compressed archive:
+     * * `zip` for a **.zip** file
+     * * `gzip` for a **.tar.gz** file
+     *
+     * Omitted for an audio-type resource.
      *
      * @return the compression_serialized_name
      */
@@ -1192,7 +1343,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the duration_serialized_name.
      *
-     * **For an audio-type resource,**  the total seconds of audio in the resource. Omitted for an archive-type resource.
+     * **For an audio-type resource,**  the total seconds of audio in the resource. The value is always a whole number.
+     * Omitted for an archive-type resource.
      *
      * @return the duration_serialized_name
      */
@@ -1203,7 +1355,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the name_serialized_name.
      *
-     * **For an audio-type resource,** the name of the resource. Omitted for an archive-type resource.
+     * **For an audio-type resource,** the user-specified name of the resource. Omitted for an archive-type resource.
      *
      * @return the name_serialized_name
      */
@@ -1214,7 +1366,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the details_serialized_name.
      *
-     * **For an audio-type resource,** an `AudioDetails` object that provides detailed information about the resource. The object is empty until the service finishes processing the audio. Omitted for an archive-type resource.
+     * **For an audio-type resource,** an `AudioDetails` object that provides detailed information about the resource.
+     * The object is empty until the service finishes processing the audio. Omitted for an archive-type resource.
      *
      * @return the details_serialized_name
      */
@@ -1225,7 +1378,15 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the status_serialized_name.
      *
-     * **For an audio-type resource,** the status of the resource: * `ok` indicates that the service has successfully analyzed the audio data. The data can be used to train the custom model. * `being_processed` indicates that the service is still analyzing the audio data. The service cannot accept requests to add new audio resources or to train the custom model until its analysis is complete. * `invalid` indicates that the audio data is not valid for training the custom model (possibly because it has the wrong format or sampling rate, or because it is corrupted).   Omitted for an archive-type resource.
+     * **For an audio-type resource,** the status of the resource:
+     * * `ok` indicates that the service has successfully analyzed the audio data. The data can be used to train the
+     * custom model.
+     * * `being_processed` indicates that the service is still analyzing the audio data. The service cannot accept
+     * requests to add new audio resources or to train the custom model until its analysis is complete.
+     * * `invalid` indicates that the audio data is not valid for training the custom model (possibly because it has the
+     * wrong format or sampling rate, or because it is corrupted).
+     *
+     * Omitted for an archive-type resource.
      *
      * @return the status_serialized_name
      */
@@ -1236,7 +1397,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the container_serialized_name.
      *
-     * **For an archive-type resource,** an object of type `AudioResource` that provides information about the resource. Omitted for an audio-type resource.
+     * **For an archive-type resource,** an object of type `AudioResource` that provides information about the resource.
+     * Omitted for an audio-type resource.
      *
      * @return the container_serialized_name
      */
@@ -1247,7 +1409,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the audio_serialized_name.
      *
-     * **For an archive-type resource,** an array of `AudioResource` objects that provides information about the audio-type resources that are contained in the resource. Omitted for an audio-type resource.
+     * **For an archive-type resource,** an array of `AudioResource` objects that provides information about the
+     * audio-type resources that are contained in the resource. Omitted for an audio-type resource.
      *
      * @return the audio_serialized_name
      */
@@ -1353,7 +1516,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the duration_serialized_name.
      *
-     * The total seconds of audio in the audio resource.
+     * The total seconds of audio in the audio resource. The value is always a whole number.
      *
      * @return the duration_serialized_name
      */
@@ -1364,7 +1527,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the name_serialized_name.
      *
-     * The name of the audio resource.
+     * **For an archive-type resource,** the user-specified name of the resource.
+     *
+     * **For an audio-type resource,** the user-specified name of the resource or the name of the audio file that the
+     * user added for the resource. The value depends on the method that is called.
      *
      * @return the name_serialized_name
      */
@@ -1375,7 +1541,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the details_serialized_name.
      *
-     * An `AudioDetails` object that provides detailed information about the audio resource. The object is empty until the service finishes processing the audio.
+     * An `AudioDetails` object that provides detailed information about the audio resource. The object is empty until
+     * the service finishes processing the audio.
      *
      * @return the details_serialized_name
      */
@@ -1386,7 +1553,14 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the status_serialized_name.
      *
-     * The status of the audio resource: * `ok` indicates that the service has successfully analyzed the audio data. The data can be used to train the custom model. * `being_processed` indicates that the service is still analyzing the audio data. The service cannot accept requests to add new audio resources or to train the custom model until its analysis is complete. * `invalid` indicates that the audio data is not valid for training the custom model (possibly because it has the wrong format or sampling rate, or because it is corrupted). For an archive file, the entire archive is invalid if any of its audio files are invalid.
+     * The status of the audio resource:
+     * * `ok` indicates that the service has successfully analyzed the audio data. The data can be used to train the
+     * custom model.
+     * * `being_processed` indicates that the service is still analyzing the audio data. The service cannot accept
+     * requests to add new audio resources or to train the custom model until its analysis is complete.
+     * * `invalid` indicates that the audio data is not valid for training the custom model (possibly because it has the
+     * wrong format or sampling rate, or because it is corrupted). For an archive file, the entire archive is invalid if
+     * any of its audio files are invalid.
      *
      * @return the status_serialized_name
      */
@@ -1455,7 +1629,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the total_minutes_of_audio_serialized_name.
      *
-     * The total minutes of accumulated audio summed over all of the valid audio resources for the custom acoustic model. You can use this value to determine whether the custom model has too little or too much audio to begin training.
+     * The total minutes of accumulated audio summed over all of the valid audio resources for the custom acoustic
+     * model. You can use this value to determine whether the custom model has too little or too much audio to begin
+     * training.
      *
      * @return the total_minutes_of_audio_serialized_name
      */
@@ -1466,7 +1642,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the audio_serialized_name.
      *
-     * An array of `AudioResource` objects that provides information about the audio resources of the custom acoustic model. The array is empty if the custom model has no audio resources.
+     * An array of `AudioResource` objects that provides information about the audio resources of the custom acoustic
+     * model. The array is empty if the custom model has no audio resources.
      *
      * @return the audio_serialized_name
      */
@@ -1672,7 +1849,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the corpora_serialized_name.
      *
-     * Information about corpora of the custom model. The array is empty if the custom model has no corpora.
+     * An array of objects that provides information about the corpora for the custom model. The array is empty if the
+     * custom model has no corpora.
      *
      * @return the corpora_serialized_name
      */
@@ -1759,7 +1937,12 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the status_serialized_name.
      *
-     * The status of the corpus: * `analyzed` indicates that the service has successfully analyzed the corpus; the custom model can be trained with data from the corpus. * `being_processed` indicates that the service is still analyzing the corpus; the service cannot accept requests to add new corpora or words, or to train the custom model. * `undetermined` indicates that the service encountered an error while processing the corpus.
+     * The status of the corpus:
+     * * `analyzed` indicates that the service has successfully analyzed the corpus; the custom model can be trained
+     * with data from the corpus.
+     * * `being_processed` indicates that the service is still analyzing the corpus; the service cannot accept requests
+     * to add new corpora or words, or to train the custom model.
+     * * `undetermined` indicates that the service encountered an error while processing the corpus.
      *
      * @return the status_serialized_name
      */
@@ -1770,7 +1953,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the error_serialized_name.
      *
-     * If the status of the corpus is `undetermined`, the following message: `Analysis of corpus 'name' failed. Please try adding the corpus again by setting the 'allow_overwrite' flag to 'true'`.
+     * If the status of the corpus is `undetermined`, the following message: `Analysis of corpus 'name' failed. Please
+     * try adding the corpus again by setting the 'allow_overwrite' flag to 'true'`.
      *
      * @return the error_serialized_name
      */
@@ -1845,7 +2029,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the name_serialized_name.
      *
-     * A user-defined name for the new custom acoustic model. Use a name that is unique among all custom acoustic models that you own. Use a localized name that matches the language of the custom model. Use a name that describes the acoustic environment of the custom model, such as `Mobile custom model` or `Noisy car custom model`.
+     * A user-defined name for the new custom acoustic model. Use a name that is unique among all custom acoustic models
+     * that you own. Use a localized name that matches the language of the custom model. Use a name that describes the
+     * acoustic environment of the custom model, such as `Mobile custom model` or `Noisy car custom model`.
      *
      * @return the name_serialized_name
      */
@@ -1855,7 +2041,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the base_model_name_serialized_name.
      *
-     * The name of the base language model that is to be customized by the new custom acoustic model. The new custom model can be used only with the base model that it customizes. To determine whether a base model supports acoustic model customization, refer to [Language support for customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
+     * The name of the base language model that is to be customized by the new custom acoustic model. The new custom
+     * model can be used only with the base model that it customizes. To determine whether a base model supports
+     * acoustic model customization, refer to [Language support for
+     * customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
      *
      * @return the base_model_name_serialized_name
      */
@@ -1865,7 +2054,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * A description of the new custom acoustic model. Use a localized description that matches the language of the custom model.
+     * A description of the new custom acoustic model. Use a localized description that matches the language of the
+     * custom model.
      *
      * @return the description_serialized_name
      */
@@ -2003,12 +2193,12 @@ public class IBMSpeechToTextV1Models {
     private Boolean profanity_filter_serialized_name;
     private Boolean smart_formatting_serialized_name;
     private Boolean speaker_labels_serialized_name;
-    private IBMWatsonFile audio_serialized_name;
-    private String audio_filename_serialized_name;
     /**
      * Gets the content_type_serialized_name.
      *
-     * The type of the input: audio/basic, audio/flac, audio/l16, audio/mp3, audio/mpeg, audio/mulaw, audio/ogg, audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/wav, audio/webm, audio/webm;codecs=opus, or audio/webm;codecs=vorbis.
+     * The type of the input: audio/basic, audio/flac, audio/l16, audio/mp3, audio/mpeg, audio/mulaw, audio/ogg,
+     * audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/wav, audio/webm, audio/webm;codecs=opus, or
+     * audio/webm;codecs=vorbis.
      *
      * @return the content_type_serialized_name
      */
@@ -2018,7 +2208,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the model_serialized_name.
      *
-     * The identifier of the model that is to be used for the recognition request or, for the **Create a session** method, with the new session.
+     * The identifier of the model that is to be used for the recognition request or, for the **Create a session**
+     * method, with the new session.
      *
      * @return the model_serialized_name
      */
@@ -2028,7 +2219,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the callback_url_serialized_name.
      *
-     * A URL to which callback notifications are to be sent. The URL must already be successfully white-listed by using the **Register a callback** method. Omit the parameter to poll the service for job completion and results. You can include the same callback URL with any number of job creation requests. Use the `user_token` parameter to specify a unique user-specified string with each job to differentiate the callback notifications for the jobs.
+     * A URL to which callback notifications are to be sent. The URL must already be successfully white-listed by using
+     * the **Register a callback** method. Omit the parameter to poll the service for job completion and results. You
+     * can include the same callback URL with any number of job creation requests. Use the `user_token` parameter to
+     * specify a unique user-specified string with each job to differentiate the callback notifications for the jobs.
      *
      * @return the callback_url_serialized_name
      */
@@ -2038,7 +2232,16 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the events_serialized_name.
      *
-     * If the job includes a callback URL, a comma-separated list of notification events to which to subscribe. Valid events are: `recognitions.started` generates a callback notification when the service begins to process the job. `recognitions.completed` generates a callback notification when the job is complete; you must use the **Check a job** method to retrieve the results before they time out or are deleted. `recognitions.completed_with_results` generates a callback notification when the job is complete; the notification includes the results of the request. `recognitions.failed` generates a callback notification if the service experiences an error while processing the job. Omit the parameter to subscribe to the default events: `recognitions.started`, `recognitions.completed`, and `recognitions.failed`. The `recognitions.completed` and `recognitions.completed_with_results` events are incompatible; you can specify only of the two events. If the job does not include a callback URL, omit the parameter.
+     * If the job includes a callback URL, a comma-separated list of notification events to which to subscribe. Valid
+     * events are: `recognitions.started` generates a callback notification when the service begins to process the job.
+     * `recognitions.completed` generates a callback notification when the job is complete; you must use the **Check a
+     * job** method to retrieve the results before they time out or are deleted. `recognitions.completed_with_results`
+     * generates a callback notification when the job is complete; the notification includes the results of the request.
+     * `recognitions.failed` generates a callback notification if the service experiences an error while processing the
+     * job. Omit the parameter to subscribe to the default events: `recognitions.started`, `recognitions.completed`, and
+     * `recognitions.failed`. The `recognitions.completed` and `recognitions.completed_with_results` events are
+     * incompatible; you can specify only of the two events. If the job does not include a callback URL, omit the
+     * parameter.
      *
      * @return the events_serialized_name
      */
@@ -2048,7 +2251,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the user_token_serialized_name.
      *
-     * If the job includes a callback URL, a user-specified string that the service is to include with each callback notification for the job; the token allows the user to maintain an internal mapping between jobs and notification events. If the job does not include a callback URL, omit the parameter.
+     * If the job includes a callback URL, a user-specified string that the service is to include with each callback
+     * notification for the job; the token allows the user to maintain an internal mapping between jobs and notification
+     * events. If the job does not include a callback URL, omit the parameter.
      *
      * @return the user_token_serialized_name
      */
@@ -2058,7 +2263,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the results_ttl_serialized_name.
      *
-     * The number of minutes for which the results are to be available after the job has finished. If not delivered via a callback, the results must be retrieved within this time. Omit the parameter to use a time to live of one week. The parameter is valid with or without a callback URL.
+     * The number of minutes for which the results are to be available after the job has finished. If not delivered via
+     * a callback, the results must be retrieved within this time. Omit the parameter to use a time to live of one week.
+     * The parameter is valid with or without a callback URL.
      *
      * @return the results_ttl_serialized_name
      */
@@ -2068,7 +2275,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of a custom language model that is to be used with the recognition request or, for the **Create a session** method, with the new session. The base model of the specified custom language model must match the model specified with the `model` parameter. You must make the request with service credentials created for the instance of the service that owns the custom model. By default, no custom language model is used.
+     * The customization ID (GUID) of a custom language model that is to be used with the recognition request or, for
+     * the **Create a session** method, with the new session. The base model of the specified custom language model must
+     * match the model specified with the `model` parameter. You must make the request with service credentials created
+     * for the instance of the service that owns the custom model. By default, no custom language model is used.
      *
      * @return the customization_id_serialized_name
      */
@@ -2078,7 +2288,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the acoustic_customization_id_serialized_name.
      *
-     * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request or, for the **Create a session** method, with the new session. The base model of the specified custom acoustic model must match the model specified with the `model` parameter. You must make the request with service credentials created for the instance of the service that owns the custom model. By default, no custom acoustic model is used.
+     * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request or, for
+     * the **Create a session** method, with the new session. The base model of the specified custom acoustic model must
+     * match the model specified with the `model` parameter. You must make the request with service credentials created
+     * for the instance of the service that owns the custom model. By default, no custom acoustic model is used.
      *
      * @return the acoustic_customization_id_serialized_name
      */
@@ -2088,7 +2301,12 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the base_model_version_serialized_name.
      *
-     * The version of the specified base model that is to be used with recognition request or, for the **Create a session** method, with the new session. Multiple versions of a base model can exist when a model is updated for internal improvements. The parameter is intended primarily for use with custom models that have been upgraded for a new base model. The default value depends on whether the parameter is used with or without a custom model. For more information, see [Base model version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
+     * The version of the specified base model that is to be used with recognition request or, for the **Create a
+     * session** method, with the new session. Multiple versions of a base model can exist when a model is updated for
+     * internal improvements. The parameter is intended primarily for use with custom models that have been upgraded for
+     * a new base model. The default value depends on whether the parameter is used with or without a custom model. For
+     * more information, see [Base model
+     * version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
      *
      * @return the base_model_version_serialized_name
      */
@@ -2098,7 +2316,17 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_weight_serialized_name.
      *
-     * If you specify the customization ID (GUID) of a custom language model with the recognition request or, for sessions, with the **Create a session** method, the customization weight tells the service how much weight to give to words from the custom language model compared to those from the base model for the current request.   Specify a value between 0.0 and 1.0. Unless a different customization weight was specified for the custom model when it was trained, the default value is 0.3. A customization weight that you specify overrides a weight that was specified when the custom model was trained.   The default value yields the best performance in general. Assign a higher value if your audio makes frequent use of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
+     * If you specify the customization ID (GUID) of a custom language model with the recognition request or, for
+     * sessions, with the **Create a session** method, the customization weight tells the service how much weight to
+     * give to words from the custom language model compared to those from the base model for the current request.
+     *
+     * Specify a value between 0.0 and 1.0. Unless a different customization weight was specified for the custom model
+     * when it was trained, the default value is 0.3. A customization weight that you specify overrides a weight that
+     * was specified when the custom model was trained.
+     *
+     * The default value yields the best performance in general. Assign a higher value if your audio makes frequent use
+     * of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
+     * of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
      *
      * @return the customization_weight_serialized_name
      */
@@ -2108,7 +2336,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the inactivity_timeout_serialized_name.
      *
-     * The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is closed with a 400 error. Useful for stopping audio submission from a live microphone when a user simply walks away. Use `-1` for infinity.
+     * The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
+     * closed with a 400 error. Useful for stopping audio submission from a live microphone when a user simply walks
+     * away. Use `-1` for infinity.
      *
      * @return the inactivity_timeout_serialized_name
      */
@@ -2118,7 +2348,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the keywords_serialized_name.
      *
-     * An array of keyword strings to spot in the audio. Each keyword string can include one or more tokens. Keywords are spotted only in the final hypothesis, not in interim results. If you specify any keywords, you must also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an empty array if you do not need to spot keywords.
+     * An array of keyword strings to spot in the audio. Each keyword string can include one or more tokens. Keywords
+     * are spotted only in the final hypothesis, not in interim results. If you specify any keywords, you must also
+     * specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an empty
+     * array if you do not need to spot keywords.
      *
      * @return the keywords_serialized_name
      */
@@ -2128,7 +2361,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the keywords_threshold_serialized_name.
      *
-     * A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No keyword spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more keywords.
+     * A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
+     * confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No keyword
+     * spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
+     * keywords.
      *
      * @return the keywords_threshold_serialized_name
      */
@@ -2148,7 +2384,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_alternatives_threshold_serialized_name.
      *
-     * A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also known as "Confusion Networks"). An alternative word is considered if its confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No alternative words are computed if you omit the parameter.
+     * A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also
+     * known as "Confusion Networks"). An alternative word is considered if its confidence is greater than or equal to
+     * the threshold. Specify a probability between 0 and 1 inclusive. No alternative words are computed if you omit the
+     * parameter.
      *
      * @return the word_alternatives_threshold_serialized_name
      */
@@ -2158,7 +2397,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_confidence_serialized_name.
      *
-     * If `true`, a confidence measure in the range of 0 to 1 is returned for each word. By default, no word confidence measures are returned.
+     * If `true`, a confidence measure in the range of 0 to 1 is returned for each word. By default, no word confidence
+     * measures are returned.
      *
      * @return the word_confidence_serialized_name
      */
@@ -2178,7 +2418,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the profanity_filter_serialized_name.
      *
-     * If `true` (the default), filters profanity from all output except for keyword results by replacing inappropriate words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US English transcription only.
+     * If `true` (the default), filters profanity from all output except for keyword results by replacing inappropriate
+     * words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US
+     * English transcription only.
      *
      * @return the profanity_filter_serialized_name
      */
@@ -2188,7 +2430,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the smart_formatting_serialized_name.
      *
-     * If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and internet addresses into more readable, conventional representations in the final transcript of a recognition request. For US English, also converts certain keyword strings to punctuation symbols. By default, no smart formatting is performed. Applies to US English and Spanish transcription only.
+     * If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and internet
+     * addresses into more readable, conventional representations in the final transcript of a recognition request. For
+     * US English, also converts certain keyword strings to punctuation symbols. By default, no smart formatting is
+     * performed. Applies to US English and Spanish transcription only.
      *
      * @return the smart_formatting_serialized_name
      */
@@ -2198,24 +2443,21 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the speaker_labels_serialized_name.
      *
-     * If `true`, the response includes labels that identify which words were spoken by which participants in a multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.   To determine whether a language model supports speaker labels, use the **Get models** method and check that the attribute `speaker_labels` is set to `true`. You can also refer to [Speaker labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
+     * If `true`, the response includes labels that identify which words were spoken by which participants in a
+     * multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
+     * `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
+     *
+     *  To determine whether a language model supports speaker labels, use the **Get models** method and check that the
+     * attribute `speaker_labels` is set to `true`. You can also refer to [Speaker
+     * labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
      *
      * @return the speaker_labels_serialized_name
      */
     public Boolean speakerLabels() {
       return speaker_labels_serialized_name;
     }
-    public IBMWatsonFile audio() {
-      return audio_serialized_name;
-    }
-
-    public String audioFilename() {
-      return audio_filename_serialized_name;
-    }
     private CreateJobOptions(CreateJobOptionsBuilder builder) {
       IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
-      IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be null');
-      IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be null');
       content_type_serialized_name = builder.content_type_serialized_name;
       model_serialized_name = builder.model_serialized_name;
       callback_url_serialized_name = builder.callback_url_serialized_name;
@@ -2236,8 +2478,6 @@ public class IBMSpeechToTextV1Models {
       profanity_filter_serialized_name = builder.profanity_filter_serialized_name;
       smart_formatting_serialized_name = builder.smart_formatting_serialized_name;
       speaker_labels_serialized_name = builder.speaker_labels_serialized_name;
-      audio_serialized_name = builder.audio_serialized_name;
-      audio_filename_serialized_name = builder.audio_filename_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2276,8 +2516,6 @@ public class IBMSpeechToTextV1Models {
     private Boolean profanity_filter_serialized_name;
     private Boolean smart_formatting_serialized_name;
     private Boolean speaker_labels_serialized_name;
-    private IBMWatsonFile audio_serialized_name;
-    private String audio_filename_serialized_name;
 
     private CreateJobOptionsBuilder(CreateJobOptions createJobOptions) {
       content_type_serialized_name = createJobOptions.content_type_serialized_name;
@@ -2300,8 +2538,6 @@ public class IBMSpeechToTextV1Models {
       profanity_filter_serialized_name = createJobOptions.profanity_filter_serialized_name;
       smart_formatting_serialized_name = createJobOptions.smart_formatting_serialized_name;
       speaker_labels_serialized_name = createJobOptions.speaker_labels_serialized_name;
-      audio_serialized_name = createJobOptions.audio_serialized_name;
-      audio_filename_serialized_name = createJobOptions.audio_filename_serialized_name;
       this.requestHeaders.putAll(createJobOptions.requestHeaders());
     }
 
@@ -2545,14 +2781,133 @@ public class IBMSpeechToTextV1Models {
       return this;
     }
 
-    public CreateJobOptionsBuilder audio(IBMWatsonFile audio) {
-      this.audio_serialized_name = audio;
-      this.content_type_serialized_name = audio.contentType();
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
       return this;
     }
 
-    public CreateJobOptionsBuilder audioFilename(String audioFilename) {
-      this.audio_filename_serialized_name = audioFilename;
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+      return this;
+    }
+
+    /**
+     * Set the CreateJobOptions.
+     *
+     * @param CreateJobOptions the CreateJobOptions
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
       return this;
     }
 
@@ -2580,7 +2935,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the name_serialized_name.
      *
-     * A user-defined name for the new custom language model. Use a name that is unique among all custom language models that you own. Use a localized name that matches the language of the custom model. Use a name that describes the domain of the custom model, such as `Medical custom model` or `Legal custom model`.
+     * A user-defined name for the new custom language model. Use a name that is unique among all custom language models
+     * that you own. Use a localized name that matches the language of the custom model. Use a name that describes the
+     * domain of the custom model, such as `Medical custom model` or `Legal custom model`.
      *
      * @return the name_serialized_name
      */
@@ -2590,7 +2947,11 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the base_model_name_serialized_name.
      *
-     * The name of the base language model that is to be customized by the new custom language model. The new custom model can be used only with the base model that it customizes. To determine whether a base model supports language model customization, request information about the base model and check that the attribute `custom_language_model` is set to `true`, or refer to [Language support for customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
+     * The name of the base language model that is to be customized by the new custom language model. The new custom
+     * model can be used only with the base model that it customizes. To determine whether a base model supports
+     * language model customization, request information about the base model and check that the attribute
+     * `custom_language_model` is set to `true`, or refer to [Language support for
+     * customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
      *
      * @return the base_model_name_serialized_name
      */
@@ -2600,7 +2961,15 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the dialect_serialized_name.
      *
-     * The dialect of the specified language that is to be used with the custom language model. The parameter is meaningful only for Spanish models, for which the service creates a custom language model that is suited for speech in one of the following dialects: * `es-ES` for Castilian Spanish (the default) * `es-LA` for Latin American Spanish * `es-US` for North American (Mexican) Spanish   A specified dialect must be valid for the base model. By default, the dialect matches the language of the base model; for example, `en-US` for either of the US English language models.
+     * The dialect of the specified language that is to be used with the custom language model. The parameter is
+     * meaningful only for Spanish models, for which the service creates a custom language model that is suited for
+     * speech in one of the following dialects:
+     * * `es-ES` for Castilian Spanish (the default)
+     * * `es-LA` for Latin American Spanish
+     * * `es-US` for North American (Mexican) Spanish
+     *
+     * A specified dialect must be valid for the base model. By default, the dialect matches the language of the base
+     * model; for example, `en-US` for either of the US English language models.
      *
      * @return the dialect_serialized_name
      */
@@ -2610,7 +2979,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * A description of the new custom language model. Use a localized description that matches the language of the custom model.
+     * A description of the new custom language model. Use a localized description that matches the language of the
+     * custom model.
      *
      * @return the description_serialized_name
      */
@@ -2748,7 +3118,11 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_serialized_name.
      *
-     * For the **Add custom words** method, you must specify the custom word that is to be added to or updated in the custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.   Omit this field for the **Add a custom word** method.
+     * For the **Add custom words** method, you must specify the custom word that is to be added to or updated in the
+     * custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
+     * compound words.
+     *
+     * Omit this field for the **Add a custom word** method.
      *
      * @return the word_serialized_name
      */
@@ -2758,7 +3132,13 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the sounds_like_serialized_name.
      *
-     * An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce, foreign words, acronyms, and so on can be pronounced by users. For a word that is not in the service's base vocabulary, omit the parameter to have the service automatically generate a sounds-like pronunciation for the word. For a word that is in the service's base vocabulary, use the parameter to specify additional pronunciations for the word. You cannot override the default pronunciation of a word; pronunciations you add augment the pronunciation from the base vocabulary. A word can have at most five sounds-like pronunciations, and a pronunciation can include at most 40 characters not including spaces.
+     * An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce,
+     * foreign words, acronyms, and so on can be pronounced by users. For a word that is not in the service's base
+     * vocabulary, omit the parameter to have the service automatically generate a sounds-like pronunciation for the
+     * word. For a word that is in the service's base vocabulary, use the parameter to specify additional pronunciations
+     * for the word. You cannot override the default pronunciation of a word; pronunciations you add augment the
+     * pronunciation from the base vocabulary. A word can have at most five sounds-like pronunciations, and a
+     * pronunciation can include at most 40 characters not including spaces.
      *
      * @return the sounds_like_serialized_name
      */
@@ -2768,7 +3148,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the display_as_serialized_name.
      *
-     * An alternative spelling for the custom word when it appears in a transcript. Use the parameter when you want the word to have a spelling that is different from its usual representation or from its spelling in corpora training data.
+     * An alternative spelling for the custom word when it appears in a transcript. Use the parameter when you want the
+     * word to have a spelling that is different from its usual representation or from its spelling in corpora training
+     * data.
      *
      * @return the display_as_serialized_name
      */
@@ -2813,7 +3195,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -2905,7 +3288,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -2915,7 +3299,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the audio_name_serialized_name.
      *
-     * The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include spaces in the name; use a localized name that matches the language of the custom model.
+     * The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include
+     * spaces in the name; use a localized name that matches the language of the custom model.
      *
      * @return the audio_name_serialized_name
      */
@@ -3024,7 +3409,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -3034,7 +3420,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the corpus_name_serialized_name.
      *
-     * The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name; use a localized name that matches the language of the custom model; and do not use the name `user`, which is reserved by the service to denote custom words added or modified by the user.
+     * The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name;
+     * use a localized name that matches the language of the custom model; and do not use the name `user`, which is
+     * reserved by the service to denote custom words added or modified by the user.
      *
      * @return the corpus_name_serialized_name
      */
@@ -3233,7 +3621,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -3416,7 +3805,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -3426,7 +3816,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_name_serialized_name.
      *
-     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
+     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom
+     * word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
+     * compound words.
      *
      * @return the word_name_serialized_name
      */
@@ -3534,7 +3926,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -3626,7 +4019,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -3636,7 +4030,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the audio_name_serialized_name.
      *
-     * The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include spaces in the name; use a localized name that matches the language of the custom model.
+     * The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include
+     * spaces in the name; use a localized name that matches the language of the custom model.
      *
      * @return the audio_name_serialized_name
      */
@@ -3745,7 +4140,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -3755,7 +4151,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the corpus_name_serialized_name.
      *
-     * The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name; use a localized name that matches the language of the custom model; and do not use the name `user`, which is reserved by the service to denote custom words added or modified by the user.
+     * The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name;
+     * use a localized name that matches the language of the custom model; and do not use the name `user`, which is
+     * reserved by the service to denote custom words added or modified by the user.
      *
      * @return the corpus_name_serialized_name
      */
@@ -3863,7 +4261,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -4046,7 +4445,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -4056,7 +4456,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_name_serialized_name.
      *
-     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
+     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom
+     * word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
+     * compound words.
      *
      * @return the word_name_serialized_name
      */
@@ -4159,7 +4561,7 @@ public class IBMSpeechToTextV1Models {
   /**
    * KeywordResult.
    */
-  public class KeywordResult extends IBMWatsonGenericModel {
+  public class KeywordResult {
     private String normalized_text_serialized_name;
     private Double start_time_serialized_name;
     private Double end_time_serialized_name;
@@ -4241,15 +4643,6 @@ public class IBMSpeechToTextV1Models {
       this.confidence_serialized_name = confidence;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      KeywordResult ret = (KeywordResult) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -4271,7 +4664,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. The **Create a custom language model** method returns only this field of the object; it does not return the other fields.
+     * The customization ID (GUID) of the custom language model. The **Create a custom language model** method returns
+     * only this field of the object; it does not return the other fields.
      *
      * @return the customization_id_serialized_name
      */
@@ -4282,7 +4676,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the created_serialized_name.
      *
-     * The date and time in Coordinated Universal Time (UTC) at which the custom language model was created. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
+     * The date and time in Coordinated Universal Time (UTC) at which the custom language model was created. The value
+     * is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
      *
      * @return the created_serialized_name
      */
@@ -4304,7 +4699,12 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the dialect_serialized_name.
      *
-     * The dialect of the language for the custom language model. By default, the dialect matches the language of the base model; for example, `en-US` for either of the US English language models. For Spanish models, the field indicates the dialect for which the model was created: * `es-ES` for Castilian Spanish (the default) * `es-LA` for Latin American Spanish * `es-US` for North American (Mexican) Spanish.
+     * The dialect of the language for the custom language model. By default, the dialect matches the language of the
+     * base model; for example, `en-US` for either of the US English language models. For Spanish models, the field
+     * indicates the dialect for which the model was created:
+     * * `es-ES` for Castilian Spanish (the default)
+     * * `es-LA` for Latin American Spanish
+     * * `es-US` for North American (Mexican) Spanish.
      *
      * @return the dialect_serialized_name
      */
@@ -4315,7 +4715,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the versions_serialized_name.
      *
-     * A list of the available versions of the custom language model. Each element of the array indicates a version of the base model with which the custom model can be used. Multiple versions exist only if the custom model has been upgraded; otherwise, only a single version is shown.
+     * A list of the available versions of the custom language model. Each element of the array indicates a version of
+     * the base model with which the custom model can be used. Multiple versions exist only if the custom model has been
+     * upgraded; otherwise, only a single version is shown.
      *
      * @return the versions_serialized_name
      */
@@ -4370,7 +4772,14 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the status_serialized_name.
      *
-     * The current status of the custom language model: * `pending` indicates that the model was created but is waiting either for training data to be added or for the service to finish analyzing added data. * `ready` indicates that the model contains data and is ready to be trained. * `training` indicates that the model is currently being trained. * `available` indicates that the model is trained and ready to use. * `upgrading` indicates that the model is currently being upgraded. * `failed` indicates that training of the model failed.
+     * The current status of the custom language model:
+     * * `pending` indicates that the model was created but is waiting either for training data to be added or for the
+     * service to finish analyzing added data.
+     * * `ready` indicates that the model contains data and is ready to be trained.
+     * * `training` indicates that the model is currently being trained.
+     * * `available` indicates that the model is trained and ready to use.
+     * * `upgrading` indicates that the model is currently being upgraded.
+     * * `failed` indicates that training of the model failed.
      *
      * @return the status_serialized_name
      */
@@ -4381,7 +4790,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the progress_serialized_name.
      *
-     * A percentage that indicates the progress of the custom language model's current training. A value of `100` means that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the training. The field changes from `0` to `100` when training is complete.
+     * A percentage that indicates the progress of the custom language model's current training. A value of `100` means
+     * that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the
+     * training. The field changes from `0` to `100` when training is complete.
      *
      * @return the progress_serialized_name
      */
@@ -4392,7 +4803,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the warnings_serialized_name.
      *
-     * If the request included unknown parameters, the following message: `Unexpected query parameter(s) ['parameters'] detected`, where `parameters` is a list that includes a quoted string for each unknown parameter.
+     * If the request included unknown parameters, the following message: `Unexpected query parameter(s) ['parameters']
+     * detected`, where `parameters` is a list that includes a quoted string for each unknown parameter.
      *
      * @return the warnings_serialized_name
      */
@@ -4528,7 +4940,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizations_serialized_name.
      *
-     * An array of objects that provides information about each available custom language model. The array is empty if the requesting service credentials own no custom language models (if no language is specified) or own no custom language models for the specified language.
+     * An array of objects that provides information about each available custom language model. The array is empty if
+     * the requesting service credentials own no custom language models (if no language is specified) or own no custom
+     * language models for the specified language.
      *
      * @return the customizations_serialized_name
      */
@@ -4578,7 +4992,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the language_serialized_name.
      *
-     * The identifier of the language for which custom language or custom acoustic models are to be returned (for example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the requesting service credentials.
+     * The identifier of the language for which custom language or custom acoustic models are to be returned (for
+     * example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the
+     * requesting service credentials.
      *
      * @return the language_serialized_name
      */
@@ -4659,7 +5075,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -4750,7 +5167,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -4841,7 +5259,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the language_serialized_name.
      *
-     * The identifier of the language for which custom language or custom acoustic models are to be returned (for example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the requesting service credentials.
+     * The identifier of the language for which custom language or custom acoustic models are to be returned (for
+     * example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the
+     * requesting service credentials.
      *
      * @return the language_serialized_name
      */
@@ -4980,7 +5400,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -4990,7 +5411,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_type_serialized_name.
      *
-     * The type of words to be listed from the custom language model's words resource: * `all` (the default) shows all words. * `user` shows only custom words that were added or modified by the user. * `corpora` shows only OOV that were extracted from corpora.
+     * The type of words to be listed from the custom language model's words resource:
+     * * `all` (the default) shows all words.
+     * * `user` shows only custom words that were added or modified by the user.
+     * * `corpora` shows only OOV that were extracted from corpora.
      *
      * @return the word_type_serialized_name
      */
@@ -5000,7 +5424,11 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * Indicates the order in which the words are to be listed, `alphabetical` or by `count`. You can prepend an optional `+` or `-` to an argument to indicate whether the results are to be sorted in ascending or descending order. By default, words are sorted in ascending alphabetical order. For alphabetical ordering, the lexicographical precedence is numeric values, uppercase letters, and lowercase letters. For count ordering, values with the same count are ordered alphabetically. With cURL, URL encode the `+` symbol as `%2B`.
+     * Indicates the order in which the words are to be listed, `alphabetical` or by `count`. You can prepend an
+     * optional `+` or `-` to an argument to indicate whether the results are to be sorted in ascending or descending
+     * order. By default, words are sorted in ascending alphabetical order. For alphabetical ordering, the
+     * lexicographical precedence is numeric values, uppercase letters, and lowercase letters. For count ordering,
+     * values with the same count are ordered alphabetically. With cURL, URL encode the `+` symbol as `%2B`.
      *
      * @return the sort_serialized_name
      */
@@ -5137,7 +5565,15 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the status_serialized_name.
      *
-     * The current status of the job: * `waiting`: The service is preparing the job for processing. The service returns this status when the job is initially created or when it is waiting for capacity to process the job. The job remains in this state until the service has the capacity to begin processing it. * `processing`: The service is actively processing the job. * `completed`: The service has finished processing the job. If the job specified a callback URL and the event `recognitions.completed_with_results`, the service sent the results with the callback notification; otherwise, you must retrieve the results by checking the individual job. * `failed`: The job failed.
+     * The current status of the job:
+     * * `waiting`: The service is preparing the job for processing. The service returns this status when the job is
+     * initially created or when it is waiting for capacity to process the job. The job remains in this state until the
+     * service has the capacity to begin processing it.
+     * * `processing`: The service is actively processing the job.
+     * * `completed`: The service has finished processing the job. If the job specified a callback URL and the event
+     * `recognitions.completed_with_results`, the service sent the results with the callback notification; otherwise,
+     * you must retrieve the results by checking the individual job.
+     * * `failed`: The job failed.
      *
      * @return the status_serialized_name
      */
@@ -5148,7 +5584,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the created_serialized_name.
      *
-     * The date and time in Coordinated Universal Time (UTC) at which the job was created. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
+     * The date and time in Coordinated Universal Time (UTC) at which the job was created. The value is provided in full
+     * ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
      *
      * @return the created_serialized_name
      */
@@ -5159,7 +5596,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the updated_serialized_name.
      *
-     * The date and time in Coordinated Universal Time (UTC) at which the job was last updated by the service. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`). This field is returned only by the **Check jobs** and **Check a job** methods.
+     * The date and time in Coordinated Universal Time (UTC) at which the job was last updated by the service. The value
+     * is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`). This field is returned only by the **Check
+     * jobs** and **Check a job** methods.
      *
      * @return the updated_serialized_name
      */
@@ -5170,7 +5609,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the url_serialized_name.
      *
-     * The URL to use to request information about the job with the **Check a job** method. This field is returned only by the **Create a job** method.
+     * The URL to use to request information about the job with the **Check a job** method. This field is returned only
+     * by the **Create a job** method.
      *
      * @return the url_serialized_name
      */
@@ -5181,7 +5621,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the user_token_serialized_name.
      *
-     * The user token associated with a job that was created with a callback URL and a user token. This field can be returned only by the **Check jobs** method.
+     * The user token associated with a job that was created with a callback URL and a user token. This field can be
+     * returned only by the **Check jobs** method.
      *
      * @return the user_token_serialized_name
      */
@@ -5192,7 +5633,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the results_serialized_name.
      *
-     * If the status is `completed`, the results of the recognition request as an array that includes a single instance of a `SpeechRecognitionResults` object. This field is returned only by the **Check a job** method.
+     * If the status is `completed`, the results of the recognition request as an array that includes a single instance
+     * of a `SpeechRecognitionResults` object. This field is returned only by the **Check a job** method.
      *
      * @return the results_serialized_name
      */
@@ -5203,7 +5645,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the warnings_serialized_name.
      *
-     * An array of warning messages about invalid parameters included with the request. Each warning includes a descriptive message and a list of invalid argument strings, for example, `"unexpected query parameter 'user_token', query parameter 'callback_url' was not specified"`. The request succeeds despite the warnings. This field can be returned only by the **Create a job** method.
+     * An array of warning messages about invalid parameters included with the request. Each warning includes a
+     * descriptive message and a list of invalid argument strings, for example, `"unexpected query parameter
+     * 'user_token', query parameter 'callback_url' was not specified"`. The request succeeds despite the warnings. This
+     * field can be returned only by the **Create a job** method.
      *
      * @return the warnings_serialized_name
      */
@@ -5316,7 +5761,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the recognitions_serialized_name.
      *
-     * An array of objects that provides the status for each of the user's current jobs. The array is empty if the user has no current jobs.
+     * An array of objects that provides the status for each of the user's current jobs. The array is empty if the user
+     * has no current jobs.
      *
      * @return the recognitions_serialized_name
      */
@@ -5358,280 +5804,640 @@ public class IBMSpeechToTextV1Models {
     }
   }
 
-  public class RecognizeOptions extends IBMWatsonOptionsModel {
-    private IBMWatsonFile audio_serialized_name;
-    private String audio_filename_serialized_name;
-    private String file_content_type_serialized_name;
-    private Boolean continuous_serialized_name;
-    private Integer max_alternatives_serialized_name;
-    private Boolean timestamps_serialized_name;
-    private Boolean word_confidence_serialized_name;
-    private Integer inactivity_timeout_serialized_name;
+  /**
+   * The recognizeSessionless options.
+   */
+  public class RecognizeSessionlessOptions extends IBMWatsonOptionsModel {
+    private String content_type_serialized_name;
     private String model_serialized_name;
-    private Boolean interim_results_serialized_name;
-    private Boolean keywords_serialized_name;
+    private String customization_id_serialized_name;
+    private String acoustic_customization_id_serialized_name;
+    private String base_model_version_serialized_name;
+    private Double customization_weight_serialized_name;
+    private Long inactivity_timeout_serialized_name;
+    private List<String> keywords_serialized_name;
     private Double keywords_threshold_serialized_name;
+    private Long max_alternatives_serialized_name;
     private Double word_alternatives_threshold_serialized_name;
+    private Boolean word_confidence_serialized_name;
+    private Boolean timestamps_serialized_name;
     private Boolean profanity_filter_serialized_name;
     private Boolean smart_formatting_serialized_name;
-    private String customization_id_serialized_name;
     private Boolean speaker_labels_serialized_name;
-    private String base_model_version_serialized_name;
-
-    public IBMWatsonFile audio() {
-      return audio_serialized_name;
+    /**
+     * Gets the content_type_serialized_name.
+     *
+     * The type of the input: audio/basic, audio/flac, audio/l16, audio/mp3, audio/mpeg, audio/mulaw, audio/ogg,
+     * audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/wav, audio/webm, audio/webm;codecs=opus, or
+     * audio/webm;codecs=vorbis.
+     *
+     * @return the content_type_serialized_name
+     */
+    public String contentType() {
+      return content_type_serialized_name;
     }
-
-    public String audioFilename() {
-      return audio_filename_serialized_name;
-    }
-
-    public String fileContentType() {
-      return file_content_type_serialized_name;
-    }
-
-    public Boolean continuous() {
-      return continuous_serialized_name;
-    }
-
-    public Integer maxAlternatives() {
-      return max_alternatives_serialized_name;
-    }
-
-    public Boolean timestamps() {
-      return timestamps_serialized_name;
-    }
-
-    public Boolean wordConfidence() {
-      return word_confidence_serialized_name;
-    }
-
-    public Integer inactivityTimeout() {
-      return inactivity_timeout_serialized_name;
-    }
-
+    /**
+     * Gets the model_serialized_name.
+     *
+     * The identifier of the model that is to be used for the recognition request or, for the **Create a session**
+     * method, with the new session.
+     *
+     * @return the model_serialized_name
+     */
     public String model() {
       return model_serialized_name;
     }
-
-    public Boolean interimResults() {
-      return interim_results_serialized_name;
-    }
-
-    public Boolean keywords() {
-      return keywords_serialized_name;
-    }
-
-    public Double keywordsThreshold() {
-      return keywords_threshold_serialized_name;
-    }
-
-    public Double wordAlternativesThreshold() {
-      return word_alternatives_threshold_serialized_name;
-    }
-
-    public Boolean profanityFilter() {
-      return profanity_filter_serialized_name;
-    }
-
-    public Boolean smartFormatting() {
-      return smart_formatting_serialized_name;
-    }
-
+    /**
+     * Gets the customization_id_serialized_name.
+     *
+     * The customization ID (GUID) of a custom language model that is to be used with the recognition request or, for
+     * the **Create a session** method, with the new session. The base model of the specified custom language model must
+     * match the model specified with the `model` parameter. You must make the request with service credentials created
+     * for the instance of the service that owns the custom model. By default, no custom language model is used.
+     *
+     * @return the customization_id_serialized_name
+     */
     public String customizationId() {
       return customization_id_serialized_name;
     }
-
-    public Boolean speakerLabels() {
-      return speaker_labels_serialized_name;
+    /**
+     * Gets the acoustic_customization_id_serialized_name.
+     *
+     * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request or, for
+     * the **Create a session** method, with the new session. The base model of the specified custom acoustic model must
+     * match the model specified with the `model` parameter. You must make the request with service credentials created
+     * for the instance of the service that owns the custom model. By default, no custom acoustic model is used.
+     *
+     * @return the acoustic_customization_id_serialized_name
+     */
+    public String acousticCustomizationId() {
+      return acoustic_customization_id_serialized_name;
     }
-
+    /**
+     * Gets the base_model_version_serialized_name.
+     *
+     * The version of the specified base model that is to be used with recognition request or, for the **Create a
+     * session** method, with the new session. Multiple versions of a base model can exist when a model is updated for
+     * internal improvements. The parameter is intended primarily for use with custom models that have been upgraded for
+     * a new base model. The default value depends on whether the parameter is used with or without a custom model. For
+     * more information, see [Base model
+     * version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
+     *
+     * @return the base_model_version_serialized_name
+     */
     public String baseModelVersion() {
       return base_model_version_serialized_name;
     }
-
-    private RecognizeOptions(RecognizeOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.file_content_type_serialized_name, 'fileContenttype cannot be empty');
-      audio_serialized_name = builder.audio_serialized_name;
-      audio_filename_serialized_name = builder.audio_filename_serialized_name;
-      file_content_type_serialized_name = builder.file_content_type_serialized_name;
-      continuous_serialized_name = builder.continuous_serialized_name;
-      max_alternatives_serialized_name = builder.max_alternatives_serialized_name;
-      timestamps_serialized_name = builder.timestamps_serialized_name;
-      word_confidence_serialized_name = builder.word_confidence_serialized_name;
-      inactivity_timeout_serialized_name = builder.inactivity_timeout_serialized_name;
+    /**
+     * Gets the customization_weight_serialized_name.
+     *
+     * If you specify the customization ID (GUID) of a custom language model with the recognition request or, for
+     * sessions, with the **Create a session** method, the customization weight tells the service how much weight to
+     * give to words from the custom language model compared to those from the base model for the current request.
+     *
+     * Specify a value between 0.0 and 1.0. Unless a different customization weight was specified for the custom model
+     * when it was trained, the default value is 0.3. A customization weight that you specify overrides a weight that
+     * was specified when the custom model was trained.
+     *
+     * The default value yields the best performance in general. Assign a higher value if your audio makes frequent use
+     * of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
+     * of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
+     *
+     * @return the customization_weight_serialized_name
+     */
+    public Double customizationWeight() {
+      return customization_weight_serialized_name;
+    }
+    /**
+     * Gets the inactivity_timeout_serialized_name.
+     *
+     * The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
+     * closed with a 400 error. Useful for stopping audio submission from a live microphone when a user simply walks
+     * away. Use `-1` for infinity.
+     *
+     * @return the inactivity_timeout_serialized_name
+     */
+    public Long inactivityTimeout() {
+      return inactivity_timeout_serialized_name;
+    }
+    /**
+     * Gets the keywords_serialized_name.
+     *
+     * An array of keyword strings to spot in the audio. Each keyword string can include one or more tokens. Keywords
+     * are spotted only in the final hypothesis, not in interim results. If you specify any keywords, you must also
+     * specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an empty
+     * array if you do not need to spot keywords.
+     *
+     * @return the keywords_serialized_name
+     */
+    public List<String> keywords() {
+      return keywords_serialized_name;
+    }
+    /**
+     * Gets the keywords_threshold_serialized_name.
+     *
+     * A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
+     * confidence is greater than or equal to the threshold. Specify a probability between 0 and 1 inclusive. No keyword
+     * spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
+     * keywords.
+     *
+     * @return the keywords_threshold_serialized_name
+     */
+    public Double keywordsThreshold() {
+      return keywords_threshold_serialized_name;
+    }
+    /**
+     * Gets the max_alternatives_serialized_name.
+     *
+     * The maximum number of alternative transcripts to be returned. By default, a single transcription is returned.
+     *
+     * @return the max_alternatives_serialized_name
+     */
+    public Long maxAlternatives() {
+      return max_alternatives_serialized_name;
+    }
+    /**
+     * Gets the word_alternatives_threshold_serialized_name.
+     *
+     * A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also
+     * known as "Confusion Networks"). An alternative word is considered if its confidence is greater than or equal to
+     * the threshold. Specify a probability between 0 and 1 inclusive. No alternative words are computed if you omit the
+     * parameter.
+     *
+     * @return the word_alternatives_threshold_serialized_name
+     */
+    public Double wordAlternativesThreshold() {
+      return word_alternatives_threshold_serialized_name;
+    }
+    /**
+     * Gets the word_confidence_serialized_name.
+     *
+     * If `true`, a confidence measure in the range of 0 to 1 is returned for each word. By default, no word confidence
+     * measures are returned.
+     *
+     * @return the word_confidence_serialized_name
+     */
+    public Boolean wordConfidence() {
+      return word_confidence_serialized_name;
+    }
+    /**
+     * Gets the timestamps_serialized_name.
+     *
+     * If `true`, time alignment is returned for each word. By default, no timestamps are returned.
+     *
+     * @return the timestamps_serialized_name
+     */
+    public Boolean timestamps() {
+      return timestamps_serialized_name;
+    }
+    /**
+     * Gets the profanity_filter_serialized_name.
+     *
+     * If `true` (the default), filters profanity from all output except for keyword results by replacing inappropriate
+     * words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US
+     * English transcription only.
+     *
+     * @return the profanity_filter_serialized_name
+     */
+    public Boolean profanityFilter() {
+      return profanity_filter_serialized_name;
+    }
+    /**
+     * Gets the smart_formatting_serialized_name.
+     *
+     * If `true`, converts dates, times, series of digits and numbers, phone numbers, currency values, and internet
+     * addresses into more readable, conventional representations in the final transcript of a recognition request. For
+     * US English, also converts certain keyword strings to punctuation symbols. By default, no smart formatting is
+     * performed. Applies to US English and Spanish transcription only.
+     *
+     * @return the smart_formatting_serialized_name
+     */
+    public Boolean smartFormatting() {
+      return smart_formatting_serialized_name;
+    }
+    /**
+     * Gets the speaker_labels_serialized_name.
+     *
+     * If `true`, the response includes labels that identify which words were spoken by which participants in a
+     * multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
+     * `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
+     *
+     *  To determine whether a language model supports speaker labels, use the **Get models** method and check that the
+     * attribute `speaker_labels` is set to `true`. You can also refer to [Speaker
+     * labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
+     *
+     * @return the speaker_labels_serialized_name
+     */
+    public Boolean speakerLabels() {
+      return speaker_labels_serialized_name;
+    }
+    private RecognizeSessionlessOptions(RecognizeSessionlessOptionsBuilder builder) {
+      IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
+      content_type_serialized_name = builder.content_type_serialized_name;
       model_serialized_name = builder.model_serialized_name;
-      interim_results_serialized_name = builder.interim_results_serialized_name;
+      customization_id_serialized_name = builder.customization_id_serialized_name;
+      acoustic_customization_id_serialized_name = builder.acoustic_customization_id_serialized_name;
+      base_model_version_serialized_name = builder.base_model_version_serialized_name;
+      customization_weight_serialized_name = builder.customization_weight_serialized_name;
+      inactivity_timeout_serialized_name = builder.inactivity_timeout_serialized_name;
       keywords_serialized_name = builder.keywords_serialized_name;
       keywords_threshold_serialized_name = builder.keywords_threshold_serialized_name;
+      max_alternatives_serialized_name = builder.max_alternatives_serialized_name;
       word_alternatives_threshold_serialized_name = builder.word_alternatives_threshold_serialized_name;
+      word_confidence_serialized_name = builder.word_confidence_serialized_name;
+      timestamps_serialized_name = builder.timestamps_serialized_name;
       profanity_filter_serialized_name = builder.profanity_filter_serialized_name;
       smart_formatting_serialized_name = builder.smart_formatting_serialized_name;
-      customization_id_serialized_name = builder.customization_id_serialized_name;
       speaker_labels_serialized_name = builder.speaker_labels_serialized_name;
-      base_model_version_serialized_name = builder.base_model_version_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
-    public RecognizeOptionsBuilder newBuilder() {
-      return new RecognizeOptionsBuilder(this);
+    /**
+     * New builder.
+     *
+     * @return a RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder newBuilder() {
+      return new RecognizeSessionlessOptionsBuilder(this);
     }
+
   }
 
-  public class RecognizeOptionsBuilder extends IBMWatsonOptionsModel {
-    private IBMWatsonFile audio_serialized_name;
-    private String audio_filename_serialized_name;
-    private String file_content_type_serialized_name;
-    private Boolean continuous_serialized_name;
-    private Integer max_alternatives_serialized_name;
-    private Boolean timestamps_serialized_name;
-    private Boolean word_confidence_serialized_name;
-    private Integer inactivity_timeout_serialized_name;
+  /**
+   * RecognizeSessionlessOptions Builder.
+   */
+  public class RecognizeSessionlessOptionsBuilder extends IBMWatsonOptionsModel {
+    private String content_type_serialized_name;
     private String model_serialized_name;
-    private Boolean interim_results_serialized_name;
-    private Boolean keywords_serialized_name;
+    private String customization_id_serialized_name;
+    private String acoustic_customization_id_serialized_name;
+    private String base_model_version_serialized_name;
+    private Double customization_weight_serialized_name;
+    private Long inactivity_timeout_serialized_name;
+    private List<String> keywords_serialized_name;
     private Double keywords_threshold_serialized_name;
+    private Long max_alternatives_serialized_name;
     private Double word_alternatives_threshold_serialized_name;
+    private Boolean word_confidence_serialized_name;
+    private Boolean timestamps_serialized_name;
     private Boolean profanity_filter_serialized_name;
     private Boolean smart_formatting_serialized_name;
-    private String customization_id_serialized_name;
     private Boolean speaker_labels_serialized_name;
-    private String base_model_version_serialized_name;
 
-    private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
-      audio_serialized_name = recognizeOptions.audio_serialized_name;
-      audio_filename_serialized_name = recognizeOptions.audio_filename_serialized_name;
-      file_content_type_serialized_name = recognizeOptions.file_content_type_serialized_name;
-      continuous_serialized_name = recognizeOptions.continuous_serialized_name;
-      max_alternatives_serialized_name = recognizeOptions.max_alternatives_serialized_name;
-      timestamps_serialized_name = recognizeOptions.timestamps_serialized_name;
-      word_confidence_serialized_name = recognizeOptions.word_confidence_serialized_name;
-      inactivity_timeout_serialized_name = recognizeOptions.inactivity_timeout_serialized_name;
-      model_serialized_name = recognizeOptions.model_serialized_name;
-      interim_results_serialized_name = recognizeOptions.interim_results_serialized_name;
-      keywords_serialized_name = recognizeOptions.keywords_serialized_name;
-      keywords_threshold_serialized_name = recognizeOptions.keywords_threshold_serialized_name;
-      word_alternatives_threshold_serialized_name = recognizeOptions.word_alternatives_threshold_serialized_name;
-      profanity_filter_serialized_name = recognizeOptions.profanity_filter_serialized_name;
-      smart_formatting_serialized_name = recognizeOptions.smart_formatting_serialized_name;
-      customization_id_serialized_name = recognizeOptions.customization_id_serialized_name;
-      speaker_labels_serialized_name = recognizeOptions.speaker_labels_serialized_name;
-      base_model_version_serialized_name = recognizeOptions.base_model_version_serialized_name;
+    private RecognizeSessionlessOptionsBuilder(RecognizeSessionlessOptions recognizeSessionlessOptions) {
+      content_type_serialized_name = recognizeSessionlessOptions.content_type_serialized_name;
+      model_serialized_name = recognizeSessionlessOptions.model_serialized_name;
+      customization_id_serialized_name = recognizeSessionlessOptions.customization_id_serialized_name;
+      acoustic_customization_id_serialized_name = recognizeSessionlessOptions.acoustic_customization_id_serialized_name;
+      base_model_version_serialized_name = recognizeSessionlessOptions.base_model_version_serialized_name;
+      customization_weight_serialized_name = recognizeSessionlessOptions.customization_weight_serialized_name;
+      inactivity_timeout_serialized_name = recognizeSessionlessOptions.inactivity_timeout_serialized_name;
+      keywords_serialized_name = recognizeSessionlessOptions.keywords_serialized_name;
+      keywords_threshold_serialized_name = recognizeSessionlessOptions.keywords_threshold_serialized_name;
+      max_alternatives_serialized_name = recognizeSessionlessOptions.max_alternatives_serialized_name;
+      word_alternatives_threshold_serialized_name = recognizeSessionlessOptions.word_alternatives_threshold_serialized_name;
+      word_confidence_serialized_name = recognizeSessionlessOptions.word_confidence_serialized_name;
+      timestamps_serialized_name = recognizeSessionlessOptions.timestamps_serialized_name;
+      profanity_filter_serialized_name = recognizeSessionlessOptions.profanity_filter_serialized_name;
+      smart_formatting_serialized_name = recognizeSessionlessOptions.smart_formatting_serialized_name;
+      speaker_labels_serialized_name = recognizeSessionlessOptions.speaker_labels_serialized_name;
+      this.requestHeaders.putAll(recognizeSessionlessOptions.requestHeaders());
     }
 
-    public RecognizeOptionsBuilder() {
+    /**
+     * Instantiates a new builder.
+     */
+    public RecognizeSessionlessOptionsBuilder() {
     }
 
-    public RecognizeOptionsBuilder(IBMWatsonFile audio, String audioFilename, String fileContentType) {
-      this.audio_serialized_name = audio;
-      this.audio_filename_serialized_name = audioFilename;
-      this.file_content_type_serialized_name = fileContentType;
+    /**
+     * Builds a RecognizeSessionlessOptions.
+     *
+     * @return the recognizeSessionlessOptions
+     */
+    public RecognizeSessionlessOptions build() {
+      return new RecognizeSessionlessOptions(this);
     }
 
-    public RecognizeOptions build() {
-      return new RecognizeOptions(this);
-    }
-
-    public RecognizeOptionsBuilder audio(IBMWatsonFile audio) {
-      this.audio_serialized_name = audio;
+    /**
+     * Adds an keywords to keywords_serialized_name.
+     *
+     * @param keywords the new keywords
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder addKeywords(String keywords) {
+      IBMWatsonValidator.notNull(keywords, 'keywords cannot be null');
+      if (this.keywords_serialized_name == null) {
+        this.keywords_serialized_name = new List<String>();
+      }
+      this.keywords_serialized_name.add(keywords);
       return this;
     }
 
-    public RecognizeOptionsBuilder audioFilename(String audioFilename) {
-      this.audio_filename_serialized_name = audioFilename;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder fileContentType(String fileContentType) {
-      this.file_content_type_serialized_name = fileContentType;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder continuous(Boolean continuous) {
-      this.continuous_serialized_name = continuous;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder maxAlternatives(Integer maxAlternatives) {
-      this.max_alternatives_serialized_name = maxAlternatives;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder timestamps(Boolean timestamps) {
-      this.timestamps_serialized_name = timestamps;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder wordConfidence(Boolean wordConfidence) {
-      this.word_confidence_serialized_name = wordConfidence;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder inactivityTimeout(Integer inactivityTimeout) {
-      this.inactivity_timeout_serialized_name = inactivityTimeout;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder model(String model) {
+    /**
+     * Set the model_serialized_name.
+     *
+     * @param model the model
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder model(String model) {
       this.model_serialized_name = model;
       return this;
     }
 
-    public RecognizeOptionsBuilder interimResults(Boolean interimResults) {
-      this.interim_results_serialized_name = interimResults;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder keywords(Boolean keywords) {
-      this.keywords_serialized_name = keywords;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder keywordsThreshold(Double keywordsThreshold) {
-      this.keywords_threshold_serialized_name = keywordsThreshold;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder wordAlternativesThreshold(Double wordAlternativesThreshold) {
-      this.word_alternatives_threshold_serialized_name = wordAlternativesThreshold;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder profanityFilter(Boolean profanityFilter) {
-      this.profanity_filter_serialized_name = profanityFilter;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder smartFormatting(Boolean smartFormatting) {
-      this.smart_formatting_serialized_name = smartFormatting;
-      return this;
-    }
-
-    public RecognizeOptionsBuilder customizationId(String customizationId) {
+    /**
+     * Set the customization_id_serialized_name.
+     *
+     * @param customizationId the customizationId
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder customizationId(String customizationId) {
       this.customization_id_serialized_name = customizationId;
       return this;
     }
 
-    public RecognizeOptionsBuilder speakerLabels(Boolean speakerLabels) {
-      this.speaker_labels_serialized_name = speakerLabels;
+    /**
+     * Set the acoustic_customization_id_serialized_name.
+     *
+     * @param acousticCustomizationId the acousticCustomizationId
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder acousticCustomizationId(String acousticCustomizationId) {
+      this.acoustic_customization_id_serialized_name = acousticCustomizationId;
       return this;
     }
 
-    public RecognizeOptionsBuilder baseModelVersion(String baseModelVersion) {
+    /**
+     * Set the base_model_version_serialized_name.
+     *
+     * @param baseModelVersion the baseModelVersion
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder baseModelVersion(String baseModelVersion) {
       this.base_model_version_serialized_name = baseModelVersion;
       return this;
     }
 
     /**
-    * Add a request header.
-    *
-    * @param name the header name
-    * @param value the header value
-    * @return the UpgradeLanguageModelOptions builder
-    */
-    public RecognizeOptionsBuilder addHeader(String name, String value) {
+     * Set the customization_weight_serialized_name.
+     *
+     * @param customizationWeight the customizationWeight
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder customizationWeight(Double customizationWeight) {
+      this.customization_weight_serialized_name = customizationWeight;
+      return this;
+    }
+
+    /**
+     * Set the inactivity_timeout_serialized_name.
+     *
+     * @param inactivityTimeout the inactivityTimeout
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder inactivityTimeout(Long inactivityTimeout) {
+      this.inactivity_timeout_serialized_name = inactivityTimeout;
+      return this;
+    }
+
+    /**
+     * Set the keywords_serialized_name.
+     * Existing keywords_serialized_name will be replaced.
+     *
+     * @param keywords the keywords
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder keywords(List<String> keywords) {
+      this.keywords_serialized_name = keywords;
+      return this;
+    }
+
+    /**
+     * Set the keywords_threshold_serialized_name.
+     *
+     * @param keywordsThreshold the keywordsThreshold
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder keywordsThreshold(Double keywordsThreshold) {
+      this.keywords_threshold_serialized_name = keywordsThreshold;
+      return this;
+    }
+
+    /**
+     * Set the max_alternatives_serialized_name.
+     *
+     * @param maxAlternatives the maxAlternatives
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder maxAlternatives(Long maxAlternatives) {
+      this.max_alternatives_serialized_name = maxAlternatives;
+      return this;
+    }
+
+    /**
+     * Set the word_alternatives_threshold_serialized_name.
+     *
+     * @param wordAlternativesThreshold the wordAlternativesThreshold
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder wordAlternativesThreshold(Double wordAlternativesThreshold) {
+      this.word_alternatives_threshold_serialized_name = wordAlternativesThreshold;
+      return this;
+    }
+
+    /**
+     * Set the word_confidence_serialized_name.
+     *
+     * @param wordConfidence the wordConfidence
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder wordConfidence(Boolean wordConfidence) {
+      this.word_confidence_serialized_name = wordConfidence;
+      return this;
+    }
+
+    /**
+     * Set the timestamps_serialized_name.
+     *
+     * @param timestamps the timestamps
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder timestamps(Boolean timestamps) {
+      this.timestamps_serialized_name = timestamps;
+      return this;
+    }
+
+    /**
+     * Set the profanity_filter_serialized_name.
+     *
+     * @param profanityFilter the profanityFilter
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder profanityFilter(Boolean profanityFilter) {
+      this.profanity_filter_serialized_name = profanityFilter;
+      return this;
+    }
+
+    /**
+     * Set the smart_formatting_serialized_name.
+     *
+     * @param smartFormatting the smartFormatting
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder smartFormatting(Boolean smartFormatting) {
+      this.smart_formatting_serialized_name = smartFormatting;
+      return this;
+    }
+
+    /**
+     * Set the speaker_labels_serialized_name.
+     *
+     * @param speakerLabels the speakerLabels
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder speakerLabels(Boolean speakerLabels) {
+      this.speaker_labels_serialized_name = speakerLabels;
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Set the RecognizeSessionlessOptions.
+     *
+     * @param RecognizeSessionlessOptions the RecognizeSessionlessOptions
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder RecognizeSessionlessOptions( RecognizeSessionlessOptions) {
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the RecognizeSessionlessOptions builder
+     */
+    public RecognizeSessionlessOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -5646,7 +6452,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the callback_url_serialized_name.
      *
-     * An HTTP or HTTPS URL to which callback notifications are to be sent. To be white-listed, the URL must successfully echo the challenge string during URL verification. During verification, the client can also check the signature that the service sends in the `X-Callback-Signature` header to verify the origin of the request.
+     * An HTTP or HTTPS URL to which callback notifications are to be sent. To be white-listed, the URL must
+     * successfully echo the challenge string during URL verification. During verification, the client can also check
+     * the signature that the service sends in the `X-Callback-Signature` header to verify the origin of the request.
      *
      * @return the callback_url_serialized_name
      */
@@ -5656,7 +6464,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the user_secret_serialized_name.
      *
-     * A user-specified string that the service uses to generate the HMAC-SHA1 signature that it sends via the `X-Callback-Signature` header. The service includes the header during URL verification and with every notification sent to the callback URL. It calculates the signature over the payload of the notification. If you omit the parameter, the service does not send the header.
+     * A user-specified string that the service uses to generate the HMAC-SHA1 signature that it sends via the
+     * `X-Callback-Signature` header. The service includes the header during URL verification and with every
+     * notification sent to the callback URL. It calculates the signature over the payload of the notification. If you
+     * omit the parameter, the service does not send the header.
      *
      * @return the user_secret_serialized_name
      */
@@ -5762,7 +6573,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the status_serialized_name.
      *
-     * The current status of the job: * `created` if the callback URL was successfully white-listed as a result of the call. * `already created` if the URL was already white-listed.
+     * The current status of the job:
+     * * `created` if the callback URL was successfully white-listed as a result of the call.
+     * * `already created` if the URL was already white-listed.
      *
      * @return the status_serialized_name
      */
@@ -5819,7 +6632,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -5910,7 +6724,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -6005,7 +6820,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the from_serialized_name.
      *
-     * The start time of a word from the transcript. The value matches the start time of a word from the `timestamps` array.
+     * The start time of a word from the transcript. The value matches the start time of a word from the `timestamps`
+     * array.
      *
      * @return the from_serialized_name
      */
@@ -6027,7 +6843,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the speaker_serialized_name.
      *
-     * The numeric identifier that the service assigns to a speaker from the audio. Speaker IDs begin at `0` initially but can evolve and change across interim results (if supported by the method) and between interim and final results as the service processes the audio. They are not guaranteed to be sequential, contiguous, or ordered.
+     * The numeric identifier that the service assigns to a speaker from the audio. Speaker IDs begin at `0` initially
+     * but can evolve and change across interim results (if supported by the method) and between interim and final
+     * results as the service processes the audio. They are not guaranteed to be sequential, contiguous, or ordered.
      *
      * @return the speaker_serialized_name
      */
@@ -6049,7 +6867,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the final_serialized_name.
      *
-     * An indication of whether the service might further change word and speaker-label results. A value of `true` means that the service guarantees not to send any further updates for the current or any preceding results; `false` means that the service might send further updates to the results.
+     * An indication of whether the service might further change word and speaker-label results. A value of `true` means
+     * that the service guarantees not to send any further updates for the current or any preceding results; `false`
+     * means that the service might send further updates to the results.
      *
      * @return the final_serialized_name
      */
@@ -6124,7 +6944,7 @@ public class IBMSpeechToTextV1Models {
     private String url_serialized_name;
     private SupportedFeatures supported_features_serialized_name;
     private String description_serialized_name;
-
+    private String sessions_serialized_name;
     /**
      * Gets the name_serialized_name.
      *
@@ -6191,6 +7011,18 @@ public class IBMSpeechToTextV1Models {
     public String getDescription() {
       return description_serialized_name;
     }
+    /**
+     * Gets the sessions_serialized_name.
+     *
+     * The URI for the model for use with the **Create a session** method. This field is returned only by the **Get a
+     * model** method.
+     *
+     * @return the sessions_serialized_name
+     */
+    @AuraEnabled
+    public String getSessions() {
+      return sessions_serialized_name;
+    }
 
     /**
      * Sets the name_serialized_name.
@@ -6246,6 +7078,15 @@ public class IBMSpeechToTextV1Models {
       this.description_serialized_name = description;
     }
 
+    /**
+     * Sets the sessions_serialized_name.
+     *
+     * @param sessions the new sessions
+     */
+    public void setSessions(final String sessions) {
+      this.sessions_serialized_name = sessions;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -6269,7 +7110,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the models_serialized_name.
      *
-     * Information about each available model.
+     * An array of objects that provides information about each available model.
      *
      * @return the models_serialized_name
      */
@@ -6317,8 +7158,8 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript_serialized_name;
     private Double confidence_serialized_name;
-    private List<List<String>> timestamps_serialized_name;
-    private List<List<String>> word_confidence_serialized_name;
+    private List<String> timestamps_serialized_name;
+    private List<String> word_confidence_serialized_name;
     /**
      * Gets the transcript_serialized_name.
      *
@@ -6333,7 +7174,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the confidence_serialized_name.
      *
-     * A score that indicates the service's confidence in the transcript in the range of 0 to 1. Returned only for the best alternative and only with results marked as final.
+     * A score that indicates the service's confidence in the transcript in the range of 0 to 1. Returned only for the
+     * best alternative and only with results marked as final.
      *
      * @return the confidence_serialized_name
      */
@@ -6344,23 +7186,27 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the timestamps_serialized_name.
      *
-     * Time alignments for each word from the transcript as a list of lists. Each inner list consists of three elements: the word followed by its start and end time in seconds. Example: `[["hello",0.0,1.2],["world",1.2,2.5]]`. Returned only for the best alternative.
+     * Time alignments for each word from the transcript as a list of lists. Each inner list consists of three elements:
+     * the word followed by its start and end time in seconds. Example: `[["hello",0.0,1.2],["world",1.2,2.5]]`.
+     * Returned only for the best alternative.
      *
      * @return the timestamps_serialized_name
      */
     @AuraEnabled
-    public List<List<String>> getTimestamps() {
+    public List<String> getTimestamps() {
       return timestamps_serialized_name;
     }
     /**
      * Gets the word_confidence_serialized_name.
      *
-     * A confidence score for each word of the transcript as a list of lists. Each inner list consists of two elements: the word and its confidence score in the range of 0 to 1. Example: `[["hello",0.95],["world",0.866]]`. Returned only for the best alternative and only with results marked as final.
+     * A confidence score for each word of the transcript as a list of lists. Each inner list consists of two elements:
+     * the word and its confidence score in the range of 0 to 1. Example: `[["hello",0.95],["world",0.866]]`. Returned
+     * only for the best alternative and only with results marked as final.
      *
      * @return the word_confidence_serialized_name
      */
     @AuraEnabled
-    public List<List<String>> getWordConfidence() {
+    public List<String> getWordConfidence() {
       return word_confidence_serialized_name;
     }
 
@@ -6387,7 +7233,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<List<String>> timestamps) {
+    public void setTimestamps(final List<String> timestamps) {
       this.timestamps_serialized_name = timestamps;
     }
 
@@ -6396,7 +7242,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<List<String>> wordConfidence) {
+    public void setWordConfidence(final List<String> wordConfidence) {
       this.word_confidence_serialized_name = wordConfidence;
     }
 
@@ -6422,7 +7268,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the final_serialized_name.
      *
-     * An indication of whether the transcription results are final. If `true`, the results for this utterance are not updated further; no additional results are sent for a `result_index` once its results are indicated as final.
+     * An indication of whether the transcription results are final. If `true`, the results for this utterance are not
+     * updated further; no additional results are sent for a `result_index` once its results are indicated as final.
      *
      * @return the final_serialized_name
      */
@@ -6433,7 +7280,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the alternatives_serialized_name.
      *
-     * An array of alternative transcripts. The `alternatives` array can include additional requested output such as word confidence or timestamps.
+     * An array of alternative transcripts. The `alternatives` array can include additional requested output such as
+     * word confidence or timestamps.
      *
      * @return the alternatives_serialized_name
      */
@@ -6444,7 +7292,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the keywords_result_serialized_name.
      *
-     * A dictionary (or associative array) whose keys are the strings specified for `keywords` if both that parameter and `keywords_threshold` are specified. A keyword for which no matches are found is omitted from the array. The array is omitted if no matches are found for any keywords.
+     * A dictionary (or associative array) whose keys are the strings specified for `keywords` if both that parameter
+     * and `keywords_threshold` are specified. A keyword for which no matches are found is omitted from the array. The
+     * array is omitted if no matches are found for any keywords.
      *
      * @return the keywords_result_serialized_name
      */
@@ -6455,7 +7305,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_alternatives_serialized_name.
      *
-     * An array of alternative hypotheses found for words of the input audio if a `word_alternatives_threshold` is specified.
+     * An array of alternative hypotheses found for words of the input audio if a `word_alternatives_threshold` is
+     * specified.
      *
      * @return the word_alternatives_serialized_name
      */
@@ -6521,23 +7372,8 @@ public class IBMSpeechToTextV1Models {
       }
 
       // calling custom deserializer for keywords_result_serialized_name
-      Map<String, List<KeywordResult>> newKeywordsResult = new Map<String, List<KeywordResult>>();
-      Map<String, List<KeywordResult>> deserializedKeywordsResult = ret.getKeywordsResult();
-      if (deserializedKeywordsResult != null) {
-        for (String key : deserializedKeywordsResult.keySet()) {
-          List<KeywordResult> newKeywordResult = new List<KeywordResult>();
-          List<KeywordResult> keywordResultList = deserializedKeywordsResult.get(key);
-          for (Integer i = 0; i < keywordResultList.size(); i++) {
-            KeywordResult currentItem = keywordResultList.get(i);
-            Map<String, Object> itemInMap = (Map<String, Object>) jsonMap.get('keywords_result_serialized_name');
-            Object innerKeywordResult = ((List<Object>) itemInMap.get(key)).get(i);
-            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(innerKeywordResult)), KeywordResult.class);
-            newKeywordResult.add(newItem);
-          }
-          newKeywordsResult.put(key, newKeywordResult);
-        }
-        ret.setKeywordsResult(newKeywordsResult);
-      }
+      Map<String, List<KeywordResult>> newKeywordsResult = (Map<String, List<KeywordResult>>) new Map<String, List<KeywordResult>>().deserialize(JSON.serialize(ret.getKeywordsResult()), (Map<String, Object>) jsonMap.get('keywords_result_serialized_name'), Map<String, List<KeywordResult>>.class);
+      ret.setKeywordsResult(newKeywordsResult);
 
       // calling custom deserializer for word_alternatives_serialized_name
       List<WordAlternativeResults> newWordAlternatives = new List<WordAlternativeResults>();
@@ -6567,7 +7403,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the results_serialized_name.
      *
-     * An array that can include interim and final results (interim results are returned only if supported by the method). Final results are guaranteed not to change; interim results might be replaced by further interim results and final results. The service periodically sends updates to the results list; the `result_index` is set to the lowest index in the array that has changed; it is incremented for new results.
+     * An array that can include interim and final results (interim results are returned only if supported by the
+     * method). Final results are guaranteed not to change; interim results might be replaced by further interim results
+     * and final results. The service periodically sends updates to the results list; the `result_index` is set to the
+     * lowest index in the array that has changed; it is incremented for new results.
      *
      * @return the results_serialized_name
      */
@@ -6578,7 +7417,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the result_index_serialized_name.
      *
-     * An index that indicates a change point in the `results` array. The service increments the index only for additional results that it sends for new audio for the same request.
+     * An index that indicates a change point in the `results` array. The service increments the index only for
+     * additional results that it sends for new audio for the same request.
      *
      * @return the result_index_serialized_name
      */
@@ -6589,7 +7429,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the speaker_labels_serialized_name.
      *
-     * An array that identifies which words were spoken by which speakers in a multi-person exchange. Returned in the response only if `speaker_labels` is `true`. When interim results are also requested for methods that support them, it is possible for a `SpeechRecognitionResults` object to include only the `speaker_labels` field.
+     * An array that identifies which words were spoken by which speakers in a multi-person exchange. Returned in the
+     * response only if `speaker_labels` is `true`. When interim results are also requested for methods that support
+     * them, it is possible for a `SpeechRecognitionResults` object to include only the `speaker_labels` field.
      *
      * @return the speaker_labels_serialized_name
      */
@@ -6600,7 +7442,17 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the warnings_serialized_name.
      *
-     * An array of warning messages associated with the request: * Warnings for invalid parameters or fields can include a descriptive message and a list of invalid argument strings, for example, `"Unknown arguments:"` or `"Unknown url query arguments:"` followed by a list of the form `"invalid_arg_1, invalid_arg_2."` * The following warning is returned if the request passes a custom model that is based on an older version of a base model for which an updated version is available: `"Using previous version of base model, because your custom model has been built with it. Please note that this version will be supported only for a limited time. Consider updating your custom model to the new base model. If you do not do that you will be automatically switched to base model when you used the non-updated custom model."`  In both cases, the request succeeds despite the warnings.
+     * An array of warning messages associated with the request:
+     * * Warnings for invalid parameters or fields can include a descriptive message and a list of invalid argument
+     * strings, for example, `"Unknown arguments:"` or `"Unknown url query arguments:"` followed by a list of the form
+     * `"invalid_arg_1, invalid_arg_2."`
+     * * The following warning is returned if the request passes a custom model that is based on an older version of a
+     * base model for which an updated version is available: `"Using previous version of base model, because your custom
+     * model has been built with it. Please note that this version will be supported only for a limited time. Consider
+     * updating your custom model to the new base model. If you do not do that you will be automatically switched to
+     * base model when you used the non-updated custom model."`
+     *
+     * In both cases, the request succeeds despite the warnings.
      *
      * @return the warnings_serialized_name
      */
@@ -6691,7 +7543,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the custom_language_model_serialized_name.
      *
-     * Indicates whether the customization interface can be used to create a custom language model based on the language model.
+     * Indicates whether the customization interface can be used to create a custom language model based on the language
+     * model.
      *
      * @return the custom_language_model_serialized_name
      */
@@ -6749,7 +7602,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -6759,7 +7613,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the custom_language_model_id_serialized_name.
      *
-     * The customization ID (GUID) of a custom language model that is to be used during training of the custom acoustic model. Specify a custom language model that has been trained with verbatim transcriptions of the audio resources or that contains words that are relevant to the contents of the audio resources.
+     * The customization ID (GUID) of a custom language model that is to be used during training of the custom acoustic
+     * model. Specify a custom language model that has been trained with verbatim transcriptions of the audio resources
+     * or that contains words that are relevant to the contents of the audio resources.
      *
      * @return the custom_language_model_id_serialized_name
      */
@@ -6866,7 +7722,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -6876,7 +7733,11 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the word_type_to_add_serialized_name.
      *
-     * The type of words from the custom language model's words resource on which to train the model: * `all` (the default) trains the model on all new words, regardless of whether they were extracted from corpora or were added or modified by the user. * `user` trains the model only on new words that were added or modified by the user; the model is not trained on new words extracted from corpora.
+     * The type of words from the custom language model's words resource on which to train the model:
+     * * `all` (the default) trains the model on all new words, regardless of whether they were extracted from corpora
+     * or were added or modified by the user.
+     * * `user` trains the model only on new words that were added or modified by the user; the model is not trained on
+     * new words extracted from corpora.
      *
      * @return the word_type_to_add_serialized_name
      */
@@ -6886,7 +7747,16 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_weight_serialized_name.
      *
-     * Specifies a customization weight for the custom language model. The customization weight tells the service how much weight to give to words from the custom language model compared to those from the base model for speech recognition. Specify a value between 0.0 and 1.0; the default is 0.3.   The default value yields the best performance in general. Assign a higher value if your audio makes frequent use of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.   The value that you assign is used for all recognition requests that use the model. You can override it for any recognition request by specifying a customization weight for that request.
+     * Specifies a customization weight for the custom language model. The customization weight tells the service how
+     * much weight to give to words from the custom language model compared to those from the base model for speech
+     * recognition. Specify a value between 0.0 and 1.0; the default is 0.3.
+     *
+     * The default value yields the best performance in general. Assign a higher value if your audio makes frequent use
+     * of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
+     * of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
+     *
+     * The value that you assign is used for all recognition requests that use the model. You can override it for any
+     * recognition request by specifying a customization weight for that request.
      *
      * @return the customization_weight_serialized_name
      */
@@ -7097,7 +7967,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -7107,7 +7978,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the custom_language_model_id_serialized_name.
      *
-     * If the custom acoustic model was trained with a custom language model, the customization ID (GUID) of that custom language model. The custom language model must be upgraded before the custom acoustic model can be upgraded.
+     * If the custom acoustic model was trained with a custom language model, the customization ID (GUID) of that custom
+     * language model. The custom language model must be upgraded before the custom acoustic model can be upgraded.
      *
      * @return the custom_language_model_id_serialized_name
      */
@@ -7212,7 +8084,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
+     * created for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -7319,7 +8192,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the sounds_like_serialized_name.
      *
-     * An array of pronunciations for the word. The array can include the sounds-like pronunciation automatically generated by the service if none is provided for the word; the service adds this pronunciation when it finishes processing the word.
+     * An array of pronunciations for the word. The array can include the sounds-like pronunciation automatically
+     * generated by the service if none is provided for the word; the service adds this pronunciation when it finishes
+     * processing the word.
      *
      * @return the sounds_like_serialized_name
      */
@@ -7330,7 +8205,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the display_as_serialized_name.
      *
-     * The spelling of the word that the service uses to display the word in a transcript. The field contains an empty string if no display-as value is provided for the word, in which case the word is displayed as it is spelled.
+     * The spelling of the word that the service uses to display the word in a transcript. The field contains an empty
+     * string if no display-as value is provided for the word, in which case the word is displayed as it is spelled.
      *
      * @return the display_as_serialized_name
      */
@@ -7341,7 +8217,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the count_serialized_name.
      *
-     * A sum of the number of times the word is found across all corpora. For example, if the word occurs five times in one corpus and seven times in another, its count is `12`. If you add a custom word to a model before it is added by any corpora, the count begins at `1`; if the word is added from a corpus first and later modified, the count reflects only the number of times it is found in corpora.
+     * A sum of the number of times the word is found across all corpora. For example, if the word occurs five times in
+     * one corpus and seven times in another, its count is `12`. If you add a custom word to a model before it is added
+     * by any corpora, the count begins at `1`; if the word is added from a corpus first and later modified, the count
+     * reflects only the number of times it is found in corpora.
      *
      * @return the count_serialized_name
      */
@@ -7352,7 +8231,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the source_serialized_name.
      *
-     * An array of sources that describes how the word was added to the custom model's words resource. For OOV words added from a corpus, includes the name of the corpus; if the word was added by multiple corpora, the names of all corpora are listed. If the word was modified or added by the user directly, the field includes the string `user`.
+     * An array of sources that describes how the word was added to the custom model's words resource. For OOV words
+     * added from a corpus, includes the name of the corpus; if the word was added by multiple corpora, the names of all
+     * corpora are listed. If the word was modified or added by the user directly, the field includes the string `user`.
      *
      * @return the source_serialized_name
      */
@@ -7363,7 +8244,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the error_serialized_name.
      *
-     * If the service discovered one or more problems that you need to correct for the word's definition, an array that describes each of the errors.
+     * If the service discovered one or more problems that you need to correct for the word's definition, an array that
+     * describes each of the errors.
      *
      * @return the error_serialized_name
      */
@@ -7608,7 +8490,11 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the element_serialized_name.
      *
-     * A key-value pair that describes an error associated with the definition of a word in the words resource. Each pair has the format `"element": "message"`, where `element` is the aspect of the definition that caused the problem and `message` describes the problem. The following example describes a problem with one of the word's sounds-like definitions: `"{sounds_like_string}": "Numbers are not allowed in sounds-like. You can try for example '{suggested_string}'."` You must correct the error before you can train the model.
+     * A key-value pair that describes an error associated with the definition of a word in the words resource. Each
+     * pair has the format `"element": "message"`, where `element` is the aspect of the definition that caused the
+     * problem and `message` describes the problem. The following example describes a problem with one of the word's
+     * sounds-like definitions: `"{sounds_like_string}": "Numbers are not allowed in sounds-like. You can try for
+     * example '{suggested_string}'."` You must correct the error before you can train the model.
      *
      * @return the element_serialized_name
      */
@@ -7645,7 +8531,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the words_serialized_name.
      *
-     * Information about each word in the custom model's words resource. The array is empty if the custom model has no words.
+     * An array of objects that provides information about each word in the custom model's words resource. The array is
+     * empty if the custom model has no words.
      *
      * @return the words_serialized_name
      */

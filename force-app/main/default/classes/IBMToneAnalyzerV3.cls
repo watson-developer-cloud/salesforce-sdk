@@ -1,9 +1,9 @@
 /**
- * The IBM Watson Tone Analyzer service uses linguistic analysis to detect emotional and language tones in written text.
- * The service can analyze tone at both the document and sentence levels. You can use the service to understand how your
- * written communications are perceived and then to improve the tone of your communications. Businesses can use the
- * service to learn the tone of their customers' communications and to respond to each customer appropriately, or to
- * understand and improve their customer conversations.
+ * The IBM Watson&trade; Tone Analyzer service uses linguistic analysis to detect emotional and language tones in
+ * written text. The service can analyze tone at both the document and sentence levels. You can use the service to
+ * understand how your written communications are perceived and then to improve the tone of your communications.
+ * Businesses can use the service to learn the tone of their customers' communications and to respond to each customer
+ * appropriately, or to understand and improve their customer conversations.
  *
  * **Note:** Request logging is disabled for the Tone Analyzer service. The service neither logs nor retains data from
  * requests and responses, regardless of whether the `X-Watson-Learning-Opt-Out` request header is set.
@@ -63,7 +63,19 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
   /**
    * Analyze general tone.
    *
-   * Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for emotional and language tones. The method always analyzes the tone of the full document; by default, it also analyzes the tone of each individual sentence of the content.   You can submit no more than 128 KB of total input content and no more than 1000 individual sentences in JSON, plain text, or HTML format. The service analyzes the first 1000 sentences for document-level analysis and only the first 100 sentences for sentence-level analysis.   Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character set). When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the service removes HTML tags and analyzes only the textual content.
+   * Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
+   * emotional and language tones. The method always analyzes the tone of the full document; by default, it also
+   * analyzes the tone of each individual sentence of the content.
+   *
+   * You can submit no more than 128 KB of total input content and no more than 1000 individual sentences in JSON, plain
+   * text, or HTML format. The service analyzes the first 1000 sentences for document-level analysis and only the first
+   * 100 sentences for sentence-level analysis.
+   *
+   * Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8; per the
+   * HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (effectively, the ASCII character
+   * set). When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the
+   * character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
+   * service removes HTML tags and analyzes only the textual content.
    *
    * @param toneOptions the {@link IBMToneAnalyzerV3Models.ToneOptions} containing the options for the call
    * @return the {@link IBMToneAnalyzerV3Models.ToneAnalysis} with the response
@@ -104,7 +116,16 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
   /**
    * Analyze customer engagement tone.
    *
-   * Use the customer engagement endpoint to analyze the tone of customer service and customer support conversations. For each utterance of a conversation, the method reports the most prevalent subset of the following seven tones: sad, frustrated, satisfied, excited, polite, impolite, and sympathetic.   If you submit more than 50 utterances, the service returns a warning for the overall content and analyzes only the first 50 utterances. If you submit a single utterance that contains more than 500 characters, the service returns an error for that utterance and does not analyze the utterance. The request fails if all utterances have more than 500 characters.   Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8.
+   * Use the customer engagement endpoint to analyze the tone of customer service and customer support conversations.
+   * For each utterance of a conversation, the method reports the most prevalent subset of the following seven tones:
+   * sad, frustrated, satisfied, excited, polite, impolite, and sympathetic.
+   *
+   * If you submit more than 50 utterances, the service returns a warning for the overall content and analyzes only the
+   * first 50 utterances. If you submit a single utterance that contains more than 500 characters, the service returns
+   * an error for that utterance and does not analyze the utterance. The request fails if all utterances have more than
+   * 500 characters.
+   *
+   * Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8.
    *
    * @param toneChatOptions the {@link IBMToneAnalyzerV3Models.ToneChatOptions} containing the options for the call
    * @return the {@link IBMToneAnalyzerV3Models.UtteranceAnalyses} with the response

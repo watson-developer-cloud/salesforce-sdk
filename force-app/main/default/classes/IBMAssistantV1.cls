@@ -1,6 +1,6 @@
 /**
- * The IBM Watson Assistant service combines machine learning, natural language understanding, and integrated dialog
- * tools to create conversation flows between your apps and your users.
+ * The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and integrated
+ * dialog tools to create conversation flows between your apps and your users.
  *
  * @version V1
  * @see <a href="http://www.ibm.com/watson/developercloud/assistant.html">Assistant</a>
@@ -57,7 +57,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Get response to user input.
    *
-   * Get a response to a user's input.    There is no rate limit for this operation.
+   * Get a response to a user's input.
+   *
+   * There is no rate limit for this operation.
    *
    * @param messageOptions the {@link IBMAssistantV1Models.MessageOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.MessageResponse} with the response
@@ -102,7 +104,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Create workspace.
    *
-   * Create a workspace based on component objects. You must provide workspace components defining the content of the new workspace.    This operation is limited to 30 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Create a workspace based on component objects. You must provide workspace components defining the content of the
+   * new workspace.
+   *
+   * This operation is limited to 30 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createWorkspaceOptions the {@link IBMAssistantV1Models.CreateWorkspaceOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Workspace} with the response
@@ -152,7 +157,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Delete workspace.
    *
-   * Delete a workspace from the service instance.    This operation is limited to 30 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Delete a workspace from the service instance.
+   *
+   * This operation is limited to 30 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteWorkspaceOptions the {@link IBMAssistantV1Models.DeleteWorkspaceOptions} containing the options for the call
    * @return the service call
@@ -174,7 +181,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Get information about a workspace.
    *
-   * Get information about a workspace, optionally including all workspace content.    With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the limit is 20 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Get information about a workspace, optionally including all workspace content.
+   *
+   * With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the
+   * limit is 20 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param getWorkspaceOptions the {@link IBMAssistantV1Models.GetWorkspaceOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.WorkspaceExport} with the response
@@ -202,7 +212,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * List workspaces.
    *
-   * List the workspaces associated with a Watson Assistant service instance.    This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
+   * List the workspaces associated with a Watson Assistant service instance.
+   *
+   * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listWorkspacesOptions the {@link IBMAssistantV1Models.ListWorkspacesOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.WorkspaceCollection} with the response
@@ -238,7 +250,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Update workspace.
    *
-   * Update an existing workspace with new or modified data. You must provide component objects defining the content of the updated workspace.    This operation is limited to 30 request per 30 minutes. For more information, see **Rate limiting**.
+   * Update an existing workspace with new or modified data. You must provide component objects defining the content of
+   * the updated workspace.
+   *
+   * This operation is limited to 30 request per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateWorkspaceOptions the {@link IBMAssistantV1Models.UpdateWorkspaceOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Workspace} with the response
@@ -292,7 +307,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Create intent.
    *
-   * Create a new intent.    This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Create a new intent.
+   *
+   * This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createIntentOptions the {@link IBMAssistantV1Models.CreateIntentOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Intent} with the response
@@ -323,7 +340,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Delete intent.
    *
-   * Delete an intent from a workspace.    This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Delete an intent from a workspace.
+   *
+   * This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteIntentOptions the {@link IBMAssistantV1Models.DeleteIntentOptions} containing the options for the call
    * @return the service call
@@ -345,7 +364,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Get intent.
    *
-   * Get information about an intent, optionally including all intent content.    With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the limit is 400 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Get information about an intent, optionally including all intent content.
+   *
+   * With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the
+   * limit is 400 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param getIntentOptions the {@link IBMAssistantV1Models.GetIntentOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.IntentExport} with the response
@@ -373,7 +395,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * List intents.
    *
-   * List the intents for a workspace.    With **export**=`false`, this operation is limited to 2000 requests per 30 minutes. With **export**=`true`, the limit is 400 requests per 30 minutes. For more information, see **Rate limiting**.
+   * List the intents for a workspace.
+   *
+   * With **export**=`false`, this operation is limited to 2000 requests per 30 minutes. With **export**=`true`, the
+   * limit is 400 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listIntentsOptions the {@link IBMAssistantV1Models.ListIntentsOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.IntentCollection} with the response
@@ -413,7 +438,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Update intent.
    *
-   * Update an existing intent with new or modified data. You must provide component objects defining the content of the updated intent.    This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Update an existing intent with new or modified data. You must provide component objects defining the content of the
+   * updated intent.
+   *
+   * This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateIntentOptions the {@link IBMAssistantV1Models.UpdateIntentOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Intent} with the response
@@ -446,7 +474,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Create user input example.
    *
-   * Add a new user input example to an intent.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Add a new user input example to an intent.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createExampleOptions the {@link IBMAssistantV1Models.CreateExampleOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Example} with the response
@@ -471,7 +501,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Delete user input example.
    *
-   * Delete a user input example from an intent.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Delete a user input example from an intent.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteExampleOptions the {@link IBMAssistantV1Models.DeleteExampleOptions} containing the options for the call
    * @return the service call
@@ -493,7 +525,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Get user input example.
    *
-   * Get information about a user input example.    This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
+   * Get information about a user input example.
+   *
+   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
    *
    * @param getExampleOptions the {@link IBMAssistantV1Models.GetExampleOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Example} with the response
@@ -518,7 +552,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * List user input examples.
    *
-   * List the user input examples for an intent.    This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
+   * List the user input examples for an intent.
+   *
+   * This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listExamplesOptions the {@link IBMAssistantV1Models.ListExamplesOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.ExampleCollection} with the response
@@ -555,7 +591,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Update user input example.
    *
-   * Update the text of a user input example.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Update the text of a user input example.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateExampleOptions the {@link IBMAssistantV1Models.UpdateExampleOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Example} with the response
@@ -582,7 +620,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Create counterexample.
    *
-   * Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createCounterexampleOptions the {@link IBMAssistantV1Models.CreateCounterexampleOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Counterexample} with the response
@@ -607,7 +647,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Delete counterexample.
    *
-   * Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteCounterexampleOptions the {@link IBMAssistantV1Models.DeleteCounterexampleOptions} containing the options for the call
    * @return the service call
@@ -629,7 +671,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Get counterexample.
    *
-   * Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.    This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
+   * Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.
+   *
+   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
    *
    * @param getCounterexampleOptions the {@link IBMAssistantV1Models.GetCounterexampleOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Counterexample} with the response
@@ -654,7 +698,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * List counterexamples.
    *
-   * List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.    This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
+   * List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.
+   *
+   * This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listCounterexamplesOptions the {@link IBMAssistantV1Models.ListCounterexamplesOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.CounterexampleCollection} with the response
@@ -691,7 +737,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Update counterexample.
    *
-   * Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateCounterexampleOptions the {@link IBMAssistantV1Models.UpdateCounterexampleOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Counterexample} with the response
@@ -718,7 +766,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Create entity.
    *
-   * Create a new entity.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Create a new entity.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createEntityOptions the {@link IBMAssistantV1Models.CreateEntityOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Entity} with the response
@@ -755,7 +805,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Delete entity.
    *
-   * Delete an entity from a workspace.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Delete an entity from a workspace.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteEntityOptions the {@link IBMAssistantV1Models.DeleteEntityOptions} containing the options for the call
    * @return the service call
@@ -777,7 +829,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Get entity.
    *
-   * Get information about an entity, optionally including all entity content.    With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the limit is 200 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Get information about an entity, optionally including all entity content.
+   *
+   * With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the
+   * limit is 200 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param getEntityOptions the {@link IBMAssistantV1Models.GetEntityOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.EntityExport} with the response
@@ -805,7 +860,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * List entities.
    *
-   * List the entities for a workspace.    With **export**=`false`, this operation is limited to 1000 requests per 30 minutes. With **export**=`true`, the limit is 200 requests per 30 minutes. For more information, see **Rate limiting**.
+   * List the entities for a workspace.
+   *
+   * With **export**=`false`, this operation is limited to 1000 requests per 30 minutes. With **export**=`true`, the
+   * limit is 200 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listEntitiesOptions the {@link IBMAssistantV1Models.ListEntitiesOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.EntityCollection} with the response
@@ -845,7 +903,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Update entity.
    *
-   * Update an existing entity with new or modified data. You must provide component objects defining the content of the updated entity.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Update an existing entity with new or modified data. You must provide component objects defining the content of the
+   * updated entity.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateEntityOptions the {@link IBMAssistantV1Models.UpdateEntityOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Entity} with the response
@@ -884,7 +945,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Add entity value.
    *
-   * Create a new value for an entity.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Create a new value for an entity.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createValueOptions the {@link IBMAssistantV1Models.CreateValueOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Value} with the response
@@ -921,7 +984,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Delete entity value.
    *
-   * Delete a value from an entity.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Delete a value from an entity.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteValueOptions the {@link IBMAssistantV1Models.DeleteValueOptions} containing the options for the call
    * @return the service call
@@ -943,7 +1008,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Get entity value.
    *
-   * Get information about an entity value.    This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
+   * Get information about an entity value.
+   *
+   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
    *
    * @param getValueOptions the {@link IBMAssistantV1Models.GetValueOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.ValueExport} with the response
@@ -971,7 +1038,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * List entity values.
    *
-   * List the values for an entity.    This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
+   * List the values for an entity.
+   *
+   * This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listValuesOptions the {@link IBMAssistantV1Models.ListValuesOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.ValueCollection} with the response
@@ -1011,7 +1080,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Update entity value.
    *
-   * Update an existing entity value with new or modified data. You must provide component objects defining the content of the updated entity value.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Update an existing entity value with new or modified data. You must provide component objects defining the content
+   * of the updated entity value.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateValueOptions the {@link IBMAssistantV1Models.UpdateValueOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Value} with the response
@@ -1050,7 +1122,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Add entity value synonym.
    *
-   * Add a new synonym to an entity value.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Add a new synonym to an entity value.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createSynonymOptions the {@link IBMAssistantV1Models.CreateSynonymOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Synonym} with the response
@@ -1075,7 +1149,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Delete entity value synonym.
    *
-   * Delete a synonym from an entity value.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Delete a synonym from an entity value.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteSynonymOptions the {@link IBMAssistantV1Models.DeleteSynonymOptions} containing the options for the call
    * @return the service call
@@ -1097,7 +1173,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Get entity value synonym.
    *
-   * Get information about a synonym of an entity value.    This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
+   * Get information about a synonym of an entity value.
+   *
+   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
    *
    * @param getSynonymOptions the {@link IBMAssistantV1Models.GetSynonymOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Synonym} with the response
@@ -1122,7 +1200,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * List entity value synonyms.
    *
-   * List the synonyms for an entity value.    This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
+   * List the synonyms for an entity value.
+   *
+   * This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listSynonymsOptions the {@link IBMAssistantV1Models.ListSynonymsOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.SynonymCollection} with the response
@@ -1159,7 +1239,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Update entity value synonym.
    *
-   * Update an existing entity value synonym with new text.    This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Update an existing entity value synonym with new text.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateSynonymOptions the {@link IBMAssistantV1Models.UpdateSynonymOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.Synonym} with the response
@@ -1186,7 +1268,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Create dialog node.
    *
-   * Create a new dialog node.    This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Create a new dialog node.
+   *
+   * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param createDialogNodeOptions the {@link IBMAssistantV1Models.CreateDialogNodeOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.DialogNode} with the response
@@ -1259,7 +1343,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Delete dialog node.
    *
-   * Delete a dialog node from a workspace.    This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Delete a dialog node from a workspace.
+   *
+   * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param deleteDialogNodeOptions the {@link IBMAssistantV1Models.DeleteDialogNodeOptions} containing the options for the call
    * @return the service call
@@ -1281,7 +1367,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Get dialog node.
    *
-   * Get information about a dialog node.    This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
+   * Get information about a dialog node.
+   *
+   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
    *
    * @param getDialogNodeOptions the {@link IBMAssistantV1Models.GetDialogNodeOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.DialogNode} with the response
@@ -1306,7 +1394,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * List dialog nodes.
    *
-   * List the dialog nodes for a workspace.    This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
+   * List the dialog nodes for a workspace.
+   *
+   * This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param listDialogNodesOptions the {@link IBMAssistantV1Models.ListDialogNodesOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.DialogNodeCollection} with the response
@@ -1343,7 +1433,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Update dialog node.
    *
-   * Update an existing dialog node with new or modified data.    This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
+   * Update an existing dialog node with new or modified data.
+   *
+   * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
    * @param updateDialogNodeOptions the {@link IBMAssistantV1Models.UpdateDialogNodeOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.DialogNode} with the response
@@ -1418,7 +1510,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * List log events in all workspaces.
    *
-   * List the events from the logs of all workspaces in the service instance.    If **cursor** is not specified, this operation is limited to 40 requests per 30 minutes. If **cursor** is specified, the limit is 120 requests per minute. For more information, see **Rate limiting**.
+   * List the events from the logs of all workspaces in the service instance.
+   *
+   * If **cursor** is not specified, this operation is limited to 40 requests per 30 minutes. If **cursor** is
+   * specified, the limit is 120 requests per minute. For more information, see **Rate limiting**.
    *
    * @param listAllLogsOptions the {@link IBMAssistantV1Models.ListAllLogsOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.LogCollection} with the response
@@ -1452,7 +1547,10 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * List log events in a workspace.
    *
-   * List the events from the log of a specific workspace.    If **cursor** is not specified, this operation is limited to 40 requests per 30 minutes. If **cursor** is specified, the limit is 120 requests per minute. For more information, see **Rate limiting**.
+   * List the events from the log of a specific workspace.
+   *
+   * If **cursor** is not specified, this operation is limited to 40 requests per 30 minutes. If **cursor** is
+   * specified, the limit is 120 requests per minute. For more information, see **Rate limiting**.
    *
    * @param listLogsOptions the {@link IBMAssistantV1Models.ListLogsOptions} containing the options for the call
    * @return the {@link IBMAssistantV1Models.LogCollection} with the response
@@ -1486,7 +1584,12 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Delete labeled data.
    *
-   * Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with the customer ID.   You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data. For more information about personal data and customer IDs, see [Information security](https://console.bluemix.net/docs/services/conversation/information-security.html).
+   * Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
+   * the customer ID.
+   *
+   * You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
+   * For more information about personal data and customer IDs, see [Information
+   * security](https://console.bluemix.net/docs/services/conversation/information-security.html).
    *
    * @param deleteUserDataOptions the {@link IBMAssistantV1Models.DeleteUserDataOptions} containing the options for the call
    * @return the service call
