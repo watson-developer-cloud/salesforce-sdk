@@ -124,120 +124,81 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * Recognize audio (sessionless).
+   * Sends audio for speech recognition.
    *
-   * Sends audio and returns transcription results for a sessionless recognition request. Returns only the final
-   * results; to enable interim results, use session-based requests or the WebSocket API. The service imposes a data
-   * size limit of 100 MB. It automatically detects the endianness of the incoming audio and, for audio that includes
-   * multiple channels, downmixes the audio to one-channel mono during transcoding. (For the `audio/l16` format, you can
-   * specify the endianness.)
+   * Sends audio and returns transcription results for a recognition request. Returns only the final results; to enable interim results, use session-based requests or the WebSocket API. The service imposes a data size limit of 100 MB. It automatically detects the endianness of the incoming audio and, for audio that includes multiple channels, downmixes the audio to one-channel mono during transcoding. (For the `audio/l16` format, you can specify the endianness.)   ### Streaming mode   For requests to transcribe live audio as it becomes available, you must set the `Transfer-Encoding` header to `chunked` to use streaming mode. In streaming mode, the server closes the connection (status code 408) if the service receives no data chunk for 30 seconds and the service has no audio to transcribe for 30 seconds. The server also closes the connection (status code 400) if no speech is detected for `inactivity_timeout` seconds of audio (not processing time); use the `inactivity_timeout` parameter to change the default of 30 seconds.   ### Audio formats (content types)   Use the `Content-Type` header to specify the audio format (MIME type) of the audio. The service accepts the following formats: * `audio/basic` (Use only with narrowband models.) * `audio/flac` * `audio/l16` (Specify the sampling rate (`rate`) and optionally the number of channels (`channels`) and endianness (`endianness`) of the audio.) * `audio/mp3` * `audio/mpeg` * `audio/mulaw` (Specify the sampling rate (`rate`) of the audio.) * `audio/ogg` (The service automatically detects the codec of the input audio.) * `audio/ogg;codecs=opus` * `audio/ogg;codecs=vorbis` * `audio/wav` (Provide audio with a maximum of nine channels.) * `audio/webm` (The service automatically detects the codec of the input audio.) * `audio/webm;codecs=opus` * `audio/webm;codecs=vorbis`   For information about the supported audio formats, including specifying the sampling rate, channels, and endianness for the indicated formats, see [Audio formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).   ### Multipart speech recognition   The method also supports multipart recognition requests. With multipart requests, you pass all audio data as multipart form data. You specify some parameters as request headers and query parameters, but you pass JSON metadata as form data to control most aspects of the transcription.   The multipart approach is intended for use with browsers for which JavaScript is disabled or when the parameters used with the request are greater than the 8 KB limit imposed by most HTTP servers and proxies. You can encounter this limit, for example, if you want to spot a very large number of keywords.   For information about submitting a multipart request, see [Submitting multipart requests as form data](https://console.bluemix.net/docs/services/speech-to-text/http.html#HTTP-multi).
    *
-   * ### Streaming mode
-   *
-   *  For requests to transcribe live audio as it becomes available, you must set the `Transfer-Encoding` header to
-   * `chunked` to use streaming mode. In streaming mode, the server closes the connection (status code 408) if the
-   * service receives no data chunk for 30 seconds and the service has no audio to transcribe for 30 seconds. The server
-   * also closes the connection (status code 400) if no speech is detected for `inactivity_timeout` seconds of audio
-   * (not processing time); use the `inactivity_timeout` parameter to change the default of 30 seconds.
-   *
-   * ### Audio formats (content types)
-   *
-   *  Use the `Content-Type` header to specify the audio format (MIME type) of the audio. The service accepts the
-   * following formats:
-   * * `audio/basic` (Use only with narrowband models.)
-   * * `audio/flac`
-   * * `audio/l16` (Specify the sampling rate (`rate`) and optionally the number of channels (`channels`) and endianness
-   * (`endianness`) of the audio.)
-   * * `audio/mp3`
-   * * `audio/mpeg`
-   * * `audio/mulaw` (Specify the sampling rate (`rate`) of the audio.)
-   * * `audio/ogg` (The service automatically detects the codec of the input audio.)
-   * * `audio/ogg;codecs=opus`
-   * * `audio/ogg;codecs=vorbis`
-   * * `audio/wav` (Provide audio with a maximum of nine channels.)
-   * * `audio/webm` (The service automatically detects the codec of the input audio.)
-   * * `audio/webm;codecs=opus`
-   * * `audio/webm;codecs=vorbis`
-   *
-   * For information about the supported audio formats, including specifying the sampling rate, channels, and endianness
-   * for the indicated formats, see [Audio
-   * formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
-   *
-   * ### Multipart speech recognition
-   *
-   *  The method also supports multipart recognition requests. With multipart requests, you pass all audio data as
-   * multipart form data. You specify some parameters as request headers and query parameters, but you pass JSON
-   * metadata as form data to control most aspects of the transcription.
-   *
-   * The multipart approach is intended for use with browsers for which JavaScript is disabled or when the parameters
-   * used with the request are greater than the 8 KB limit imposed by most HTTP servers and proxies. You can encounter
-   * this limit, for example, if you want to spot a very large number of keywords.
-   *
-   * For information about submitting a multipart request, see [Submitting multipart requests as form
-   * data](https://console.bluemix.net/docs/services/speech-to-text/http.html#HTTP-multi).
-   *
-   * @param recognizeSessionlessOptions the {@link IBMSpeechToTextV1Models.RecognizeSessionlessOptions} containing the options for the call
+   * @param recognizeOptions the {@link IBMSpeechToTextV1Models.RecognizeOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.SpeechRecognitionResults} with the response
    */
-  public IBMSpeechToTextV1Models.SpeechRecognitionResults recognizeSessionless(IBMSpeechToTextV1Models.RecognizeSessionlessOptions recognizeSessionlessOptions) {
-    IBMWatsonValidator.notNull(recognizeSessionlessOptions, 'recognizeSessionlessOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/recognize');
-    builder.addHeader('Content-Type', recognizeSessionlessOptions.contentType());
-    Map<String, String> requestHeaders = (recognizeSessionlessOptions != null) ? recognizeSessionlessOptions.requestHeaders() : null;
+  public IBMSpeechToTextV1Models.SpeechRecognitionResults recognize(IBMSpeechToTextV1Models.RecognizeOptions recognizeOptions) {
+    IBMWatsonValidator.notNull(recognizeOptions, 'recognizeOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint()+ '/v1/recognize');
+
+    builder.addHeader('Content-Type', recognizeOptions.fileContentType());
+    Map<String, String> requestHeaders = (recognizeOptions != null) ? recognizeOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
-    if (recognizeSessionlessOptions.model() != null) {
-      builder.query('model', recognizeSessionlessOptions.model());
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (recognizeOptions.audio() != null) {
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(recognizeOptions.audio(), recognizeOptions.fileContentType());
+      multipartBuilder.addFormDataPart('audio', recognizeOptions.audioFilename(), fileBody);
     }
-    if (recognizeSessionlessOptions.customizationId() != null) {
-      builder.query('customization_id', recognizeSessionlessOptions.customizationId());
+    if (recognizeOptions.continuous() != null) {
+      builder.query('continuous', String.valueOf(recognizeOptions.continuous()));
     }
-    if (recognizeSessionlessOptions.acousticCustomizationId() != null) {
-      builder.query('acoustic_customization_id', recognizeSessionlessOptions.acousticCustomizationId());
+    if (recognizeOptions.maxAlternatives() != null) {
+      builder.query('max_alternatives', String.valueOf(recognizeOptions.maxAlternatives()));
     }
-    if (recognizeSessionlessOptions.baseModelVersion() != null) {
-      builder.query('base_model_version', recognizeSessionlessOptions.baseModelVersion());
+    if (recognizeOptions.timestamps() != null) {
+      builder.query('timestamps', String.valueOf(recognizeOptions.timestamps()));
     }
-    if (recognizeSessionlessOptions.customizationWeight() != null) {
-      builder.query('customization_weight', String.valueOf(recognizeSessionlessOptions.customizationWeight()));
+    if (recognizeOptions.wordConfidence() != null) {
+      builder.query('word_confidence', String.valueOf(recognizeOptions.wordConfidence()));
     }
-    if (recognizeSessionlessOptions.inactivityTimeout() != null) {
-      builder.query('inactivity_timeout', String.valueOf(recognizeSessionlessOptions.inactivityTimeout()));
+    if (recognizeOptions.inactivityTimeout() != null) {
+      builder.query('inactivity_timeout', String.valueOf(recognizeOptions.inactivityTimeout()));
     }
-    if (recognizeSessionlessOptions.keywords() != null) {
-      builder.query('keywords', String.join(recognizeSessionlessOptions.keywords(), ','));
+    if (recognizeOptions.model() != null) {
+      builder.query('model', recognizeOptions.model());
     }
-    if (recognizeSessionlessOptions.keywordsThreshold() != null) {
-      builder.query('keywords_threshold', String.valueOf(recognizeSessionlessOptions.keywordsThreshold()));
+    if (recognizeOptions.interimResults() != null) {
+      builder.query('interim_results', String.valueOf(recognizeOptions.interimResults()));
     }
-    if (recognizeSessionlessOptions.maxAlternatives() != null) {
-      builder.query('max_alternatives', String.valueOf(recognizeSessionlessOptions.maxAlternatives()));
+    if (recognizeOptions.keywords() != null) {
+      builder.query('keywords', String.valueOf(recognizeOptions.keywords()));
     }
-    if (recognizeSessionlessOptions.wordAlternativesThreshold() != null) {
-      builder.query('word_alternatives_threshold', String.valueOf(recognizeSessionlessOptions.wordAlternativesThreshold()));
+    if (recognizeOptions.keywordsThreshold() != null) {
+      builder.query('keywords_threshold', String.valueOf(recognizeOptions.keywordsThreshold()));
     }
-    if (recognizeSessionlessOptions.wordConfidence() != null) {
-      builder.query('word_confidence', String.valueOf(recognizeSessionlessOptions.wordConfidence()));
+    if (recognizeOptions.wordAlternativesThreshold() != null) {
+      builder.query('word_alternatives_threshold', String.valueOf(recognizeOptions.wordAlternativesThreshold()));
     }
-    if (recognizeSessionlessOptions.timestamps() != null) {
-      builder.query('timestamps', String.valueOf(recognizeSessionlessOptions.timestamps()));
+    if (recognizeOptions.profanityFilter() != null) {
+      builder.query('profanity_filter', String.valueOf(recognizeOptions.profanityFilter()));
     }
-    if (recognizeSessionlessOptions.profanityFilter() != null) {
-      builder.query('profanity_filter', String.valueOf(recognizeSessionlessOptions.profanityFilter()));
+    if (recognizeOptions.smartFormatting() != null) {
+      builder.query('smart_formatting', String.valueOf(recognizeOptions.smartFormatting()));
     }
-    if (recognizeSessionlessOptions.smartFormatting() != null) {
-      builder.query('smart_formatting', String.valueOf(recognizeSessionlessOptions.smartFormatting()));
+    if (recognizeOptions.customizationId() != null) {
+      builder.query('customization_id', recognizeOptions.customizationId());
     }
-    if (recognizeSessionlessOptions.speakerLabels() != null) {
-      builder.query('speaker_labels', String.valueOf(recognizeSessionlessOptions.speakerLabels()));
+    if (recognizeOptions.speakerLabels() != null) {
+      builder.query('speaker_labels', String.valueOf(recognizeOptions.speakerLabels()));
     }
-    builder.bodyContent(options.body(), recognizeSessionlessOptions.contentType());
+    if (recognizeOptions.baseModelVersion() != null) {
+      builder.query('base_model_version', recognizeOptions.baseModelVersion());
+    }
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody);
 
     return (IBMSpeechToTextV1Models.SpeechRecognitionResults) createServiceCall(builder.build(), IBMSpeechToTextV1Models.SpeechRecognitionResults.class);
   }
+
 
   /**
    * Check a job.
@@ -354,6 +315,14 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (createJobOptions.audio() != null) {
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
+        createJobOptions.audio(), createJobOptions.contentType()
+      );
+      multipartBuilder.addFormDataPart('audio', createJobOptions.audioFilename(), fileBody);
+    }
     if (createJobOptions.model() != null) {
       builder.query('model', createJobOptions.model());
     }
@@ -411,7 +380,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createJobOptions.speakerLabels() != null) {
       builder.query('speaker_labels', String.valueOf(createJobOptions.speakerLabels()));
     }
-    builder.bodyContent(options.body(), createJobOptions.contentType());
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody);
 
     return (IBMSpeechToTextV1Models.RecognitionJob) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RecognitionJob.class);
   }
@@ -1370,10 +1340,19 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (addAudioOptions.audio() != null) {
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
+        addAudioOptions.audio(), addAudioOptions.contentType()
+      );
+      multipartBuilder.addFormDataPart('audio', addAudioOptions.audioFilename(), fileBody);
+    }
     if (addAudioOptions.allowOverwrite() != null) {
       builder.query('allow_overwrite', String.valueOf(addAudioOptions.allowOverwrite()));
     }
-    builder.bodyContent(options.body(), addAudioOptions.contentType());
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody);
 
     createServiceCall(builder.build(), null);
   }
