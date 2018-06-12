@@ -111,9 +111,6 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     if (profileOptions.rawScores() != null) {
       builder.query('raw_scores', String.valueOf(profileOptions.rawScores()));
     }
-    if (profileOptions.csvHeaders() != null) {
-      builder.query('csv_headers', String.valueOf(profileOptions.csvHeaders()));
-    }
     if (profileOptions.consumptionPreferences() != null) {
       builder.query('consumption_preferences', String.valueOf(profileOptions.consumptionPreferences()));
     }
@@ -149,9 +146,10 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    * profile](https://console.bluemix.net/docs/services/personality-insights/output-csv.html).
    *
    * @param profileOptions the {@link IBMPersonalityInsightsV3Models.ProfileOptions} containing the options for the call
-   * @return the {@link IBMWatsonFile} with the response
+   * @param includeHeaders whether to include headers in the response or not
+   * @return the String with the response
    */
-  public IBMWatsonFile profileAsCsv(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions) {
+  public String getProfileAsCSV(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions, Boolean includeHeaders) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
     builder.addHeader('Content-Type', profileOptions.contentType());
@@ -171,20 +169,19 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     if (profileOptions.rawScores() != null) {
       builder.query('raw_scores', String.valueOf(profileOptions.rawScores()));
     }
-    if (profileOptions.csvHeaders() != null) {
-      builder.query('csv_headers', String.valueOf(profileOptions.csvHeaders()));
-    }
     if (profileOptions.consumptionPreferences() != null) {
       builder.query('consumption_preferences', String.valueOf(profileOptions.consumptionPreferences()));
     }
     if (profileOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
       builder.bodyJson(JSON.serialize(profileOptions.content(), true));
-    }
-    else {
+    } else {
       builder.bodyContent(profileOptions.body(), profileOptions.contentType());
     }
 
-    return (IBMWatsonFile) createServiceCall(builder.build(), IBMWatsonFile.class);
+    builder.addHeader('Accept', IBMWatsonHttpMediaType.TEXT_CSV);
+    builder.query('csv_headers', String.valueOf(includeHeaders));
+
+    return String.valueOf(createServiceCall(builder.build(), String.class));
   }
 
 }
