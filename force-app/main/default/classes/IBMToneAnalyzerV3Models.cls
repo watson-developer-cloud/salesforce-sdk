@@ -9,7 +9,9 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the tones_serialized_name.
      *
-     * **`2017-09-21`:** An array of `ToneScore` objects that provides the results of the analysis for each qualifying tone of the document. The array includes results for any tone whose score is at least 0.5. The array is empty if no tone has a score that meets this threshold. **`2016-05-19`:** Not returned.
+     * **`2017-09-21`:** An array of `ToneScore` objects that provides the results of the analysis for each qualifying
+     * tone of the document. The array includes results for any tone whose score is at least 0.5. The array is empty if
+     * no tone has a score that meets this threshold. **`2016-05-19`:** Not returned.
      *
      * @return the tones_serialized_name
      */
@@ -20,7 +22,9 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the tone_categories_serialized_name.
      *
-     * **`2017-09-21`:** Not returned. **`2016-05-19`:** An array of `ToneCategory` objects that provides the results of the tone analysis for the full document of the input content. The service returns results only for the tones specified with the `tones` parameter of the request.
+     * **`2017-09-21`:** Not returned. **`2016-05-19`:** An array of `ToneCategory` objects that provides the results of
+     * the tone analysis for the full document of the input content. The service returns results only for the tones
+     * specified with the `tones` parameter of the request.
      *
      * @return the tone_categories_serialized_name
      */
@@ -31,7 +35,9 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the warning_serialized_name.
      *
-     * **`2017-09-21`:** A warning message if the overall content exceeds 128 KB or contains more than 1000 sentences. The service analyzes only the first 1000 sentences for document-level analysis and the first 100 sentences for sentence-level analysis. **`2016-05-19`:** Not returned.
+     * **`2017-09-21`:** A warning message if the overall content exceeds 128 KB or contains more than 1000 sentences.
+     * The service analyzes only the first 1000 sentences for document-level analysis and the first 100 sentences for
+     * sentence-level analysis. **`2016-05-19`:** Not returned.
      *
      * @return the warning_serialized_name
      */
@@ -117,7 +123,8 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the sentence_id_serialized_name.
      *
-     * The unique identifier of a sentence of the input content. The first sentence has ID 0, and the ID of each subsequent sentence is incremented by one.
+     * The unique identifier of a sentence of the input content. The first sentence has ID 0, and the ID of each
+     * subsequent sentence is incremented by one.
      *
      * @return the sentence_id_serialized_name
      */
@@ -139,7 +146,9 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the tones_serialized_name.
      *
-     * **`2017-09-21`:** An array of `ToneScore` objects that provides the results of the analysis for each qualifying tone of the sentence. The array includes results for any tone whose score is at least 0.5. The array is empty if no tone has a score that meets this threshold. **`2016-05-19`:** Not returned.
+     * **`2017-09-21`:** An array of `ToneScore` objects that provides the results of the analysis for each qualifying
+     * tone of the sentence. The array includes results for any tone whose score is at least 0.5. The array is empty if
+     * no tone has a score that meets this threshold. **`2016-05-19`:** Not returned.
      *
      * @return the tones_serialized_name
      */
@@ -150,7 +159,9 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the tone_categories_serialized_name.
      *
-     * **`2017-09-21`:** Not returned. **`2016-05-19`:** An array of `ToneCategory` objects that provides the results of the tone analysis for the sentence. The service returns results only for the tones specified with the `tones` parameter of the request.
+     * **`2017-09-21`:** Not returned. **`2016-05-19`:** An array of `ToneCategory` objects that provides the results of
+     * the tone analysis for the sentence. The service returns results only for the tones specified with the `tones`
+     * parameter of the request.
      *
      * @return the tone_categories_serialized_name
      */
@@ -161,7 +172,8 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the input_from_serialized_name.
      *
-     * **`2017-09-21`:** Not returned. **`2016-05-19`:** The offset of the first character of the sentence in the overall input content.
+     * **`2017-09-21`:** Not returned. **`2016-05-19`:** The offset of the first character of the sentence in the
+     * overall input content.
      *
      * @return the input_from_serialized_name
      */
@@ -172,7 +184,8 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the input_to_serialized_name.
      *
-     * **`2017-09-21`:** Not returned. **`2016-05-19`:** The offset of the last character of the sentence in the overall input content.
+     * **`2017-09-21`:** Not returned. **`2016-05-19`:** The offset of the last character of the sentence in the overall
+     * input content.
      *
      * @return the input_to_serialized_name
      */
@@ -292,7 +305,9 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the sentences_tone_serialized_name.
      *
-     * An array of `SentenceAnalysis` objects that provides the results of the analysis for the individual sentences of the input content. The service returns results only for the first 100 sentences of the input. The field is omitted if the `sentences` parameter of the request is set to `false`.
+     * An array of `SentenceAnalysis` objects that provides the results of the analysis for the individual sentences of
+     * the input content. The service returns results only for the first 100 sentences of the input. The field is
+     * omitted if the `sentences` parameter of the request is set to `false`.
      *
      * @return the sentences_tone_serialized_name
      */
@@ -368,7 +383,8 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the category_id_serialized_name.
      *
-     * The unique, non-localized identifier of the category for the results. The service can return results for the following category IDs: `emotion_tone`, `language_tone`, and `social_tone`.
+     * The unique, non-localized identifier of the category for the results. The service can return results for the
+     * following category IDs: `emotion_tone`, `language_tone`, and `social_tone`.
      *
      * @return the category_id_serialized_name
      */
@@ -459,7 +475,12 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the content_language_serialized_name.
      *
-     * The language of the input text for the request: English or French. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do not submit content that contains both languages. You can use different languages for **Content-Language** and **Accept-Language**. * **`2017-09-21`:** Accepts `en` or `fr`. * **`2016-05-19`:** Accepts only `en`.
+     * The language of the input text for the request: English or French. Regional variants are treated as their parent
+     * language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do
+     * not submit content that contains both languages. You can use different languages for **Content-Language** and
+     * **Accept-Language**.
+     * * **`2017-09-21`:** Accepts `en` or `fr`.
+     * * **`2016-05-19`:** Accepts only `en`.
      *
      * @return the content_language_serialized_name
      */
@@ -469,7 +490,9 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the accept_language_serialized_name.
      *
-     * The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language** and **Accept-Language**.
+     * The desired language of the response. For two-character arguments, regional variants are treated as their parent
+     * language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language**
+     * and **Accept-Language**.
      *
      * @return the accept_language_serialized_name
      */
@@ -606,7 +629,8 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the score_serialized_name.
      *
-     * The score for the tone in the range of 0.5 to 1. A score greater than 0.75 indicates a high likelihood that the tone is perceived in the utterance.
+     * The score for the tone in the range of 0.5 to 1. A score greater than 0.75 indicates a high likelihood that the
+     * tone is perceived in the utterance.
      *
      * @return the score_serialized_name
      */
@@ -617,7 +641,9 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the tone_id_serialized_name.
      *
-     * The unique, non-localized identifier of the tone for the results. The service can return results for the following tone IDs: `sad`, `frustrated`, `satisfied`, `excited`, `polite`, `impolite`, and `sympathetic`. The service returns results only for tones whose scores meet a minimum threshold of 0.5.
+     * The unique, non-localized identifier of the tone for the results. The service can return results for the
+     * following tone IDs: `sad`, `frustrated`, `satisfied`, `excited`, `polite`, `impolite`, and `sympathetic`. The
+     * service returns results only for tones whose scores meet a minimum threshold of 0.5.
      *
      * @return the tone_id_serialized_name
      */
@@ -766,7 +792,8 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the tone_input_serialized_name.
      *
-     * JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of type `ToneInput`.
+     * JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of
+     * type `ToneInput`.
      *
      * @return the tone_input_serialized_name
      */
@@ -776,7 +803,8 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the body_serialized_name.
      *
-     * JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of type `ToneInput`.
+     * JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of
+     * type `ToneInput`.
      *
      * @return the body_serialized_name
      */
@@ -786,7 +814,8 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the content_type_serialized_name.
      *
-     * The type of the input: application/json, text/plain, or text/html. A character encoding can be specified by including a `charset` parameter. For example, 'text/plain;charset=utf-8'.
+     * The type of the input: application/json, text/plain, or text/html. A character encoding can be specified by
+     * including a `charset` parameter. For example, 'text/plain;charset=utf-8'.
      *
      * @return the content_type_serialized_name
      */
@@ -796,7 +825,8 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the sentences_serialized_name.
      *
-     * Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of the full document. If `true` (the default), the service returns results for each sentence.
+     * Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
+     * the full document. If `true` (the default), the service returns results for each sentence.
      *
      * @return the sentences_serialized_name
      */
@@ -806,7 +836,12 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the tones_serialized_name.
      *
-     * **`2017-09-21`:** Deprecated. The service continues to accept the parameter for backward-compatibility, but the parameter no longer affects the response.   **`2016-05-19`:** A comma-separated list of tones for which the service is to return its analysis of the input; the indicated tones apply both to the full document and to individual sentences of the document. You can specify one or more of the valid values. Omit the parameter to request results for all three tones.
+     * **`2017-09-21`:** Deprecated. The service continues to accept the parameter for backward-compatibility, but the
+     * parameter no longer affects the response.
+     *
+     * **`2016-05-19`:** A comma-separated list of tones for which the service is to return its analysis of the input;
+     * the indicated tones apply both to the full document and to individual sentences of the document. You can specify
+     * one or more of the valid values. Omit the parameter to request results for all three tones.
      *
      * @return the tones_serialized_name
      */
@@ -816,7 +851,12 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the content_language_serialized_name.
      *
-     * The language of the input text for the request: English or French. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do not submit content that contains both languages. You can use different languages for **Content-Language** and **Accept-Language**. * **`2017-09-21`:** Accepts `en` or `fr`. * **`2016-05-19`:** Accepts only `en`.
+     * The language of the input text for the request: English or French. Regional variants are treated as their parent
+     * language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do
+     * not submit content that contains both languages. You can use different languages for **Content-Language** and
+     * **Accept-Language**.
+     * * **`2017-09-21`:** Accepts `en` or `fr`.
+     * * **`2016-05-19`:** Accepts only `en`.
      *
      * @return the content_language_serialized_name
      */
@@ -826,7 +866,9 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the accept_language_serialized_name.
      *
-     * The desired language of the response. For two-character arguments, regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language** and **Accept-Language**.
+     * The desired language of the response. For two-character arguments, regional variants are treated as their parent
+     * language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language**
+     * and **Accept-Language**.
      *
      * @return the accept_language_serialized_name
      */
@@ -1013,7 +1055,12 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the score_serialized_name.
      *
-     * The score for the tone. * **`2017-09-21`:** The score that is returned lies in the range of 0.5 to 1. A score greater than 0.75 indicates a high likelihood that the tone is perceived in the content. * **`2016-05-19`:** The score that is returned lies in the range of 0 to 1. A score less than 0.5 indicates that the tone is unlikely to be perceived in the content; a score greater than 0.75 indicates a high likelihood that the tone is perceived.
+     * The score for the tone.
+     * * **`2017-09-21`:** The score that is returned lies in the range of 0.5 to 1. A score greater than 0.75 indicates
+     * a high likelihood that the tone is perceived in the content.
+     * * **`2016-05-19`:** The score that is returned lies in the range of 0 to 1. A score less than 0.5 indicates that
+     * the tone is unlikely to be perceived in the content; a score greater than 0.75 indicates a high likelihood that
+     * the tone is perceived.
      *
      * @return the score_serialized_name
      */
@@ -1024,7 +1071,15 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the tone_id_serialized_name.
      *
-     * The unique, non-localized identifier of the tone. * **`2017-09-21`:** The service can return results for the following tone IDs: `anger`, `fear`, `joy`, and `sadness` (emotional tones); `analytical`, `confident`, and `tentative` (language tones). The service returns results only for tones whose scores meet a minimum threshold of 0.5. * **`2016-05-19`:** The service can return results for the following tone IDs of the different categories: for the `emotion` category: `anger`, `disgust`, `fear`, `joy`, and `sadness`; for the `language` category: `analytical`, `confident`, and `tentative`; for the `social` category: `openness_big5`, `conscientiousness_big5`, `extraversion_big5`, `agreeableness_big5`, and `emotional_range_big5`. The service returns scores for all tones of a category, regardless of their values.
+     * The unique, non-localized identifier of the tone.
+     * * **`2017-09-21`:** The service can return results for the following tone IDs: `anger`, `fear`, `joy`, and
+     * `sadness` (emotional tones); `analytical`, `confident`, and `tentative` (language tones). The service returns
+     * results only for tones whose scores meet a minimum threshold of 0.5.
+     * * **`2016-05-19`:** The service can return results for the following tone IDs of the different categories: for
+     * the `emotion` category: `anger`, `disgust`, `fear`, `joy`, and `sadness`; for the `language` category:
+     * `analytical`, `confident`, and `tentative`; for the `social` category: `openness_big5`, `conscientiousness_big5`,
+     * `extraversion_big5`, `agreeableness_big5`, and `emotional_range_big5`. The service returns scores for all tones
+     * of a category, regardless of their values.
      *
      * @return the tone_id_serialized_name
      */
@@ -1091,7 +1146,8 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the text_serialized_name.
      *
-     * An utterance contributed by a user in the conversation that is to be analyzed. The utterance can contain multiple sentences.
+     * An utterance contributed by a user in the conversation that is to be analyzed. The utterance can contain multiple
+     * sentences.
      *
      * @return the text_serialized_name
      */
@@ -1204,7 +1260,8 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the warning_serialized_name.
      *
-     * **`2017-09-21`:** A warning message if the content contains more than 50 utterances. The service analyzes only the first 50 utterances. **`2016-05-19`:** Not returned.
+     * **`2017-09-21`:** A warning message if the content contains more than 50 utterances. The service analyzes only
+     * the first 50 utterances. **`2016-05-19`:** Not returned.
      *
      * @return the warning_serialized_name
      */
@@ -1266,7 +1323,8 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the utterance_id_serialized_name.
      *
-     * The unique identifier of the utterance. The first utterance has ID 0, and the ID of each subsequent utterance is incremented by one.
+     * The unique identifier of the utterance. The first utterance has ID 0, and the ID of each subsequent utterance is
+     * incremented by one.
      *
      * @return the utterance_id_serialized_name
      */
@@ -1288,7 +1346,9 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the tones_serialized_name.
      *
-     * An array of `ToneChatScore` objects that provides results for the most prevalent tones of the utterance. The array includes results for any tone whose score is at least 0.5. The array is empty if no tone has a score that meets this threshold.
+     * An array of `ToneChatScore` objects that provides results for the most prevalent tones of the utterance. The
+     * array includes results for any tone whose score is at least 0.5. The array is empty if no tone has a score that
+     * meets this threshold.
      *
      * @return the tones_serialized_name
      */
@@ -1299,7 +1359,8 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the error_serialized_name.
      *
-     * **`2017-09-21`:** An error message if the utterance contains more than 500 characters. The service does not analyze the utterance. **`2016-05-19`:** Not returned.
+     * **`2017-09-21`:** An error message if the utterance contains more than 500 characters. The service does not
+     * analyze the utterance. **`2016-05-19`:** Not returned.
      *
      * @return the error_serialized_name
      */

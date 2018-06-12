@@ -85,7 +85,9 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Get a voice.
    *
-   * Gets information about the specified voice. The information includes the name, language, gender, and other details about the voice. Specify a customization ID to obtain information for that custom voice model of the specified voice. To list information about all available voices, use the **List voices** method.
+   * Gets information about the specified voice. The information includes the name, language, gender, and other details
+   * about the voice. Specify a customization ID to obtain information for that custom voice model of the specified
+   * voice. To list information about all available voices, use the **List voices** method.
    *
    * @param getVoiceOptions the {@link IBMTextToSpeechV1Models.GetVoiceOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.Voice} with the response
@@ -109,7 +111,8 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * List voices.
    *
-   * Lists all voices available for use with the service. The information includes the name, language, gender, and other details about the voice. To see information about a specific voice, use the **Get a voice** method.
+   * Lists all voices available for use with the service. The information includes the name, language, gender, and other
+   * details about the voice. To see information about a specific voice, use the **Get a voice** method.
    *
    * @param listVoicesOptions the {@link IBMTextToSpeechV1Models.ListVoicesOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.Voices} with the response
@@ -129,7 +132,16 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Synthesize audio.
    *
-   * Synthesizes text to spoken audio, returning the synthesized audio stream as an array of bytes. You can pass a maximum of 5 KB of text.  Use the `Accept` header or the `accept` query parameter to specify the requested format (MIME type) of the response audio. By default, the service uses `audio/ogg;codecs=opus`. For detailed information about the supported audio formats and sampling rates, see [Specifying an audio format](https://console.bluemix.net/docs/services/text-to-speech/http.html#format). Specify a value of `application/json` for the `Content-Type` header.   If a request includes invalid query parameters, the service returns a `Warnings` response header that provides messages about the invalid parameters. The warning includes a descriptive message and a list of invalid argument strings. For example, a message such as `\"Unknown arguments:\"` or `\"Unknown url query arguments:\"` followed by a list of the form `\"invalid_arg_1, invalid_arg_2.\"` The request succeeds despite the warnings.
+   * Synthesizes text to spoken audio, returning the synthesized audio stream as an array of bytes. You can pass a
+   * maximum of 5 KB of text.  Use the `Accept` header or the `accept` query parameter to specify the requested format
+   * (MIME type) of the response audio. By default, the service uses `audio/ogg;codecs=opus`. For detailed information
+   * about the supported audio formats and sampling rates, see [Specifying an audio
+   * format](https://console.bluemix.net/docs/services/text-to-speech/http.html#format).
+   *
+   * If a request includes invalid query parameters, the service returns a `Warnings` response header that provides
+   * messages about the invalid parameters. The warning includes a descriptive message and a list of invalid argument
+   * strings. For example, a message such as `\"Unknown arguments:\"` or `\"Unknown url query arguments:\"` followed by
+   * a list of the form `\"invalid_arg_1, invalid_arg_2.\"` The request succeeds despite the warnings.
    *
    * @param synthesizeOptions the {@link IBMTextToSpeechV1Models.SynthesizeOptions} containing the options for the call
    * @return the {@link IBMWatsonFile} with the response
@@ -162,7 +174,11 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Get pronunciation.
    *
-   * Gets the phonetic pronunciation for the specified word. You can request the pronunciation for a specific format. You can also request the pronunciation for a specific voice to see the default translation for the language of that voice or for a specific custom voice model to see the translation for that voice model.  **Note:** This method is currently a beta release.
+   * Gets the phonetic pronunciation for the specified word. You can request the pronunciation for a specific format.
+   * You can also request the pronunciation for a specific voice to see the default translation for the language of that
+   * voice or for a specific custom voice model to see the translation for that voice model.
+   *
+   * **Note:** This method is currently a beta release.
    *
    * @param getPronunciationOptions the {@link IBMTextToSpeechV1Models.GetPronunciationOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.Pronunciation} with the response
@@ -195,7 +211,11 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Create a custom model.
    *
-   * Creates a new empty custom voice model. You must specify a name for the new custom model. You can optionally specify the language and a description for the new model. Specify a value of `application/json` for the `Content-Type` header. The model is owned by the instance of the service whose credentials are used to create it.  **Note:** This method is currently a beta release.
+   * Creates a new empty custom voice model. You must specify a name for the new custom model. You can optionally
+   * specify the language and a description for the new model. The model is owned by the instance of the service whose
+   * credentials are used to create it.
+   *
+   * **Note:** This method is currently a beta release.
    *
    * @param createVoiceModelOptions the {@link IBMTextToSpeechV1Models.CreateVoiceModelOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.VoiceModel} with the response
@@ -225,7 +245,10 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Delete a custom model.
    *
-   * Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a model to delete it.  **Note:** This method is currently a beta release.
+   * Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a
+   * model to delete it.
+   *
+   * **Note:** This method is currently a beta release.
    *
    * @param deleteVoiceModelOptions the {@link IBMTextToSpeechV1Models.DeleteVoiceModelOptions} containing the options for the call
    * @return the service call
@@ -246,7 +269,11 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Get a custom model.
    *
-   * Gets all information about a specified custom voice model. In addition to metadata such as the name and description of the voice model, the output includes the words and their translations as defined in the model. To see just the metadata for a voice model, use the **List custom models** method.   **Note:** This method is currently a beta release.
+   * Gets all information about a specified custom voice model. In addition to metadata such as the name and description
+   * of the voice model, the output includes the words and their translations as defined in the model. To see just the
+   * metadata for a voice model, use the **List custom models** method.
+   *
+   * **Note:** This method is currently a beta release.
    *
    * @param getVoiceModelOptions the {@link IBMTextToSpeechV1Models.GetVoiceModelOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.VoiceModel} with the response
@@ -267,7 +294,12 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * List custom models.
    *
-   * Lists metadata such as the name and description for all custom voice models that are owned by an instance of the service. Specify a language to list the voice models for that language only. To see the words in addition to the metadata for a specific voice model, use the **List a custom model** method. You must use credentials for the instance of the service that owns a model to list information about it.  **Note:** This method is currently a beta release.
+   * Lists metadata such as the name and description for all custom voice models that are owned by an instance of the
+   * service. Specify a language to list the voice models for that language only. To see the words in addition to the
+   * metadata for a specific voice model, use the **List a custom model** method. You must use credentials for the
+   * instance of the service that owns a model to list information about it.
+   *
+   * **Note:** This method is currently a beta release.
    *
    * @param listVoiceModelsOptions the {@link IBMTextToSpeechV1Models.ListVoiceModelsOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.VoiceModels} with the response
@@ -290,7 +322,13 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Update a custom model.
    *
-   * Updates information for the specified custom voice model. You can update metadata such as the name and description of the voice model. You can also update the words in the model and their translations. Adding a new translation for a word that already exists in a custom model overwrites the word's existing translation. A custom model can contain no more than 20,000 entries. Specify a value of `application/json` for the `Content-Type` header. You must use credentials for the instance of the service that owns a model to update it.  **Note:** This method is currently a beta release.
+   * Updates information for the specified custom voice model. You can update metadata such as the name and description
+   * of the voice model. You can also update the words in the model and their translations. Adding a new translation for
+   * a word that already exists in a custom model overwrites the word's existing translation. A custom model can contain
+   * no more than 20,000 entries. You must use credentials for the instance of the service that owns a model to update
+   * it.
+   *
+   * **Note:** This method is currently a beta release.
    *
    * @param updateVoiceModelOptions the {@link IBMTextToSpeechV1Models.UpdateVoiceModelOptions} containing the options for the call
    * @return the service call
@@ -322,7 +360,12 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Add a custom word.
    *
-   * Adds a single word and its translation to the specified custom voice model. Adding a new translation for a word that already exists in a custom model overwrites the word's existing translation. A custom model can contain no more than 20,000 entries. Specify a value of `application/json` for the `Content-Type` header. You must use credentials for the instance of the service that owns a model to add a word to it.   **Note:** This method is currently a beta release.
+   * Adds a single word and its translation to the specified custom voice model. Adding a new translation for a word
+   * that already exists in a custom model overwrites the word's existing translation. A custom model can contain no
+   * more than 20,000 entries. You must use credentials for the instance of the service that owns a model to add a word
+   * to it.
+   *
+   * **Note:** This method is currently a beta release.
    *
    * @param addWordOptions the {@link IBMTextToSpeechV1Models.AddWordOptions} containing the options for the call
    * @return the service call
@@ -351,7 +394,12 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Add custom words.
    *
-   * Adds one or more words and their translations to the specified custom voice model. Adding a new translation for a word that already exists in a custom model overwrites the word's existing translation. A custom model can contain no more than 20,000 entries. Specify a value of `application/json` for the `Content-Type` header. You must use credentials for the instance of the service that owns a model to add words to it.   **Note:** This method is currently a beta release.
+   * Adds one or more words and their translations to the specified custom voice model. Adding a new translation for a
+   * word that already exists in a custom model overwrites the word's existing translation. A custom model can contain
+   * no more than 20,000 entries. You must use credentials for the instance of the service that owns a model to add
+   * words to it.
+   *
+   * **Note:** This method is currently a beta release.
    *
    * @param addWordsOptions the {@link IBMTextToSpeechV1Models.AddWordsOptions} containing the options for the call
    * @return the service call
@@ -377,7 +425,10 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Delete a custom word.
    *
-   * Deletes a single word from the specified custom voice model. You must use credentials for the instance of the service that owns a model to delete its words.   **Note:** This method is currently a beta release.
+   * Deletes a single word from the specified custom voice model. You must use credentials for the instance of the
+   * service that owns a model to delete its words.
+   *
+   * **Note:** This method is currently a beta release.
    *
    * @param deleteWordOptions the {@link IBMTextToSpeechV1Models.DeleteWordOptions} containing the options for the call
    * @return the service call
@@ -398,7 +449,11 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Get a custom word.
    *
-   * Gets the translation for a single word from the specified custom model. The output shows the translation as it is defined in the model. You must use credentials for the instance of the service that owns a model to list its words.   **Note:** This method is currently a beta release.
+   * Gets the translation for a single word from the specified custom model. The output shows the translation as it is
+   * defined in the model. You must use credentials for the instance of the service that owns a model to list its words.
+   *
+   *
+   * **Note:** This method is currently a beta release.
    *
    * @param getWordOptions the {@link IBMTextToSpeechV1Models.GetWordOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.Translation} with the response
@@ -419,7 +474,11 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * List custom words.
    *
-   * Lists all of the words and their translations for the specified custom voice model. The output shows the translations as they are defined in the model. You must use credentials for the instance of the service that owns a model to list its words.  **Note:** This method is currently a beta release.
+   * Lists all of the words and their translations for the specified custom voice model. The output shows the
+   * translations as they are defined in the model. You must use credentials for the instance of the service that owns a
+   * model to list its words.
+   *
+   * **Note:** This method is currently a beta release.
    *
    * @param listWordsOptions the {@link IBMTextToSpeechV1Models.ListWordsOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.Words} with the response
@@ -440,7 +499,14 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
   /**
    * Delete labeled data.
    *
-   * Deletes all data that is associated with a specified customer ID. The method deletes all data for the customer ID, regardless of the method by which the information was added. The method has no effect if no data is associated with the customer ID. You must issue the request with credentials for the same instance of the service that was used to associate the customer ID with the data.   You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes the data. For more information about customer IDs and about using this method, see [Information security](https://console.bluemix.net/docs/services/text-to-speech/information-security.html).
+   * Deletes all data that is associated with a specified customer ID. The method deletes all data for the customer ID,
+   * regardless of the method by which the information was added. The method has no effect if no data is associated with
+   * the customer ID. You must issue the request with credentials for the same instance of the service that was used to
+   * associate the customer ID with the data.
+   *
+   * You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes the
+   * data. For more information about customer IDs and about using this method, see [Information
+   * security](https://console.bluemix.net/docs/services/text-to-speech/information-security.html).
    *
    * @param deleteUserDataOptions the {@link IBMTextToSpeechV1Models.DeleteUserDataOptions} containing the options for the call
    * @return the service call

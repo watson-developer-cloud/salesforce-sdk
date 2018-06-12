@@ -57,7 +57,8 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the score_serialized_name.
      *
-     * Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
+     * Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the
+     * class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
      *
      * @return the score_serialized_name
      */
@@ -68,7 +69,8 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the type_hierarchy_serialized_name.
      *
-     * Knowledge graph of the property. For example, `/fruit/pome/apple/eating apple/Granny Smith`. Included only if identified.
+     * Knowledge graph of the property. For example, `/fruit/pome/apple/eating apple/Granny Smith`. Included only if
+     * identified.
      *
      * @return the type_hierarchy_serialized_name
      */
@@ -295,7 +297,9 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the warnings_serialized_name.
      *
-     * Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file and a list of image URLs will still complete, but does not return the expected output. Not returned when there is no warning.
+     * Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file
+     * and a list of image URLs will still complete, but does not return the expected output. Not returned when there is
+     * no warning.
      *
      * @return the warnings_serialized_name
      */
@@ -416,7 +420,8 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the owner_serialized_name.
      *
-     * Unique ID of the account who owns the classifier. Returned when verbose=`true`. Might not be returned by some requests.
+     * Unique ID of the account who owns the classifier. Returned when verbose=`true`. Might not be returned by some
+     * requests.
      *
      * @return the owner_serialized_name
      */
@@ -482,7 +487,8 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the retrained_serialized_name.
      *
-     * Date and time in Coordinated Universal Time (UTC) that the classifier was updated. Returned when verbose=`true`. Might not be returned by some requests. Identical to `updated` and retained for backward compatibility.
+     * Date and time in Coordinated Universal Time (UTC) that the classifier was updated. Returned when verbose=`true`.
+     * Might not be returned by some requests. Identical to `updated` and retained for backward compatibility.
      *
      * @return the retrained_serialized_name
      */
@@ -493,7 +499,8 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the updated_serialized_name.
      *
-     * Date and time in Coordinated Universal Time (UTC) that the classifier was most recently updated. The field matches either `retrained` or `created`.  Returned when verbose=`true`. Might not be returned by some requests.
+     * Date and time in Coordinated Universal Time (UTC) that the classifier was most recently updated. The field
+     * matches either `retrained` or `created`.  Returned when verbose=`true`. Might not be returned by some requests.
      *
      * @return the updated_serialized_name
      */
@@ -774,7 +781,11 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the images_file_serialized_name.
      *
-     * An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.  You can also include an image with the **url** parameter.
+     * An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include no more than 20 images
+     * and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they contain non-ASCII
+     * characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.
+     *
+     * You can also include an image with the **url** parameter.
      *
      * @return the images_file_serialized_name
      */
@@ -794,7 +805,11 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the accept_language_serialized_name.
      *
-     * The language of the output class names. The full set of languages is supported only for the built-in `default` classifier ID. The class names of custom classifiers are not translated.  The response might not be in the specified language when the requested language is not supported or when there is no translation for the class name.
+     * The language of the output class names. The full set of languages is supported only for the built-in `default`
+     * classifier ID. The class names of custom classifiers are not translated.
+     *
+     * The response might not be in the specified language when the requested language is not supported or when there is
+     * no translation for the class name.
      *
      * @return the accept_language_serialized_name
      */
@@ -804,7 +819,10 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the url_serialized_name.
      *
-     * The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB.  You can also include images with the **images_file** parameter.
+     * The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel density is 32X32
+     * pixels per inch, and the maximum image size is 10 MB.
+     *
+     * You can also include images with the **images_file** parameter.
      *
      * @return the url_serialized_name
      */
@@ -814,7 +832,8 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the threshold_serialized_name.
      *
-     * The minimum score a class must have to be displayed in the response. Set the threshold to `0.0` to ignore the classification score and return all values.
+     * The minimum score a class must have to be displayed in the response. Set the threshold to `0.0` to ignore the
+     * classification score and return all values.
      *
      * @return the threshold_serialized_name
      */
@@ -824,7 +843,13 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the owners_serialized_name.
      *
-     * The categories of classifiers to apply. Use `IBM` to classify against the `default` general classifier, and use `me` to classify against your custom classifiers. To analyze the image against both classifier categories, set the value to both `IBM` and `me`.   The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.  The **classifier_ids** parameter overrides **owners**, so make sure that **classifier_ids** is empty.
+     * The categories of classifiers to apply. Use `IBM` to classify against the `default` general classifier, and use
+     * `me` to classify against your custom classifiers. To analyze the image against both classifier categories, set
+     * the value to both `IBM` and `me`.
+     *
+     * The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.
+     *
+     * The **classifier_ids** parameter overrides **owners**, so make sure that **classifier_ids** is empty.
      *
      * @return the owners_serialized_name
      */
@@ -834,7 +859,14 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the classifier_ids_serialized_name.
      *
-     * Which classifiers to apply. Overrides the **owners** parameter. You can specify both custom and built-in classifier IDs. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.  The following built-in classifier IDs require no training: - `default`: Returns classes from thousands of general tags. - `food`: (Beta) Enhances specificity and accuracy for images of food items. - `explicit`: (Beta) Evaluates whether the image might be pornographic.
+     * Which classifiers to apply. Overrides the **owners** parameter. You can specify both custom and built-in
+     * classifier IDs. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters
+     * are empty.
+     *
+     * The following built-in classifier IDs require no training:
+     * - `default`: Returns classes from thousands of general tags.
+     * - `food`: (Beta) Enhances specificity and accuracy for images of food items.
+     * - `explicit`: (Beta) Evaluates whether the image might be pornographic.
      *
      * @return the classifier_ids_serialized_name
      */
@@ -1119,7 +1151,10 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the negative_examples_serialized_name.
      *
-     * A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
+     * A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
+     * contain a minimum of 10 images.
+     *
+     * Encode special characters in the file name in UTF-8.
      *
      * @return the negative_examples_serialized_name
      */
@@ -1460,7 +1495,13 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the images_file_serialized_name.
      *
-     * An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to 100 MB. You can include a maximum of 15 images in a request.  Encode the image and .zip file names in UTF-8 if they contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.  You can also include an image with the **url** parameter.
+     * An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to 100 MB. You can include a
+     * maximum of 15 images in a request.
+     *
+     * Encode the image and .zip file names in UTF-8 if they contain non-ASCII characters. The service assumes UTF-8
+     * encoding if it encounters non-ASCII characters.
+     *
+     * You can also include an image with the **url** parameter.
      *
      * @return the images_file_serialized_name
      */
@@ -1480,7 +1521,11 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the url_serialized_name.
      *
-     * The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed, so you can use a shortened URL.  You can also include images with the **images_file** parameter.
+     * The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel
+     * density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed, so you can use a
+     * shortened URL.
+     *
+     * You can also include images with the **images_file** parameter.
      *
      * @return the url_serialized_name
      */
@@ -1661,7 +1706,9 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the warnings_serialized_name.
      *
-     * Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file and a list of image URLs will still complete, but does not return the expected output. Not returned when there is no warning.
+     * Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file
+     * and a list of image URLs will still complete, but does not return the expected output. Not returned when there is
+     * no warning.
      *
      * @return the warnings_serialized_name
      */
@@ -1735,7 +1782,8 @@ public class IBMVisualRecognitionV3Models {
   }
 
   /**
-   * Information about what might have caused a failure, such as an image that is too large. Not returned when there is no error.
+   * Information about what might have caused a failure, such as an image that is too large. Not returned when there is
+   * no error.
    */
   public class ErrorInfo extends IBMWatsonResponseModel {
     private Long code_serialized_name;
@@ -1930,7 +1978,8 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the score_serialized_name.
      *
-     * Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for the property.
+     * Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for
+     * the property.
      *
      * @return the score_serialized_name
      */
@@ -1997,7 +2046,8 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the score_serialized_name.
      *
-     * Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for the property.
+     * Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for
+     * the property.
      *
      * @return the score_serialized_name
      */
@@ -2461,7 +2511,8 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the verbose_serialized_name.
      *
-     * Specify `true` to return details about the classifiers. Omit this parameter to return a brief list of classifiers.
+     * Specify `true` to return details about the classifiers. Omit this parameter to return a brief list of
+     * classifiers.
      *
      * @return the verbose_serialized_name
      */
@@ -2581,7 +2632,10 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the negative_examples_serialized_name.
      *
-     * A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must contain a minimum of 10 images.  Encode special characters in the file name in UTF-8.
+     * A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
+     * contain a minimum of 10 images.
+     *
+     * Encode special characters in the file name in UTF-8.
      *
      * @return the negative_examples_serialized_name
      */
