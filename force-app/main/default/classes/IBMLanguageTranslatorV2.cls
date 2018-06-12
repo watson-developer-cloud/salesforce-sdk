@@ -1,5 +1,5 @@
 /**
- * IBM Watson Language Translator translates text from one language to another. The service offers multiple
+ * IBM Watson&trade; Language Translator translates text from one language to another. The service offers multiple
  * domain-specific models that you can customize based on your unique terminology and language. Use Language Translator
  * to take news from across the globe and present it in your language, communicate with your customers in their own
  * language, and more.
@@ -101,7 +101,8 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
   /**
    * List identifiable languages.
    *
-   * Lists the languages that the service can identify. Returns the language code (for example, `en` for English or `es` for Spanish) and name of each language.
+   * Lists the languages that the service can identify. Returns the language code (for example, `en` for English or `es`
+   * for Spanish) and name of each language.
    *
    * @param listIdentifiableLanguagesOptions the {@link IBMLanguageTranslatorV2Models.ListIdentifiableLanguagesOptions} containing the options for the call
    * @return the {@link IBMLanguageTranslatorV2Models.IdentifiableLanguages} with the response
@@ -121,7 +122,11 @@ public class IBMLanguageTranslatorV2 extends IBMWatsonService {
   /**
    * Create model.
    *
-   * Uploads a TMX glossary file on top of a domain to customize a translation model.  Depending on the size of the file, training can range from minutes for a glossary to several hours for a large parallel corpus. Glossary files must be less than 10 MB. The cumulative file size of all uploaded glossary and corpus files is limited to 250 MB.
+   * Uploads a TMX glossary file on top of a domain to customize a translation model.
+   *
+   * Depending on the size of the file, training can range from minutes for a glossary to several hours for a large
+   * parallel corpus. Glossary files must be less than 10 MB. The cumulative file size of all uploaded glossary and
+   * corpus files is limited to 250 MB.
    *
    * @param createModelOptions the {@link IBMLanguageTranslatorV2Models.CreateModelOptions} containing the options for the call
    * @return the {@link IBMLanguageTranslatorV2Models.TranslationModel} with the response

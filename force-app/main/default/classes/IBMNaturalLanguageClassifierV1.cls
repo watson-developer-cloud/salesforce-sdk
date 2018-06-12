@@ -1,7 +1,7 @@
 /**
- * IBM Watson Natural Language Classifier uses machine learning algorithms to return the top matching predefined classes
- * for short text input. You create and train a classifier to connect predefined classes to example texts so that the
- * service can apply those classes to new inputs.
+ * IBM Watson&trade; Natural Language Classifier uses machine learning algorithms to return the top matching predefined
+ * classes for short text input. You create and train a classifier to connect predefined classes to example texts so
+ * that the service can apply those classes to new inputs.
  *
  * @version V1
  * @see <a href="http://www.ibm.com/watson/developercloud/natural-language-classifier.html">Natural Language Classifier</a>
@@ -45,7 +45,8 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
   /**
    * Classify a phrase.
    *
-   * Returns label information for the input. The status must be `Available` before you can use the classifier to classify text.
+   * Returns label information for the input. The status must be `Available` before you can use the classifier to
+   * classify text.
    *
    * @param classifyOptions the {@link IBMNaturalLanguageClassifierV1Models.ClassifyOptions} containing the options for the call
    * @return the {@link IBMNaturalLanguageClassifierV1Models.Classification} with the response
@@ -69,7 +70,10 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
   /**
    * Classify multiple phrases.
    *
-   * Returns label information for multiple phrases. The status must be `Available` before you can use the classifier to classify text.  Note that classifying Japanese texts is a beta feature.
+   * Returns label information for multiple phrases. The status must be `Available` before you can use the classifier to
+   * classify text.
+   *
+   * Note that classifying Japanese texts is a beta feature.
    *
    * @param classifyCollectionOptions the {@link IBMNaturalLanguageClassifierV1Models.ClassifyCollectionOptions} containing the options for the call
    * @return the {@link IBMNaturalLanguageClassifierV1Models.ClassificationCollection} with the response

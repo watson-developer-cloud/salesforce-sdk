@@ -10,7 +10,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+     * for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -30,7 +31,9 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the translation_serialized_name.
      *
-     * The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for representing the phonetic string of a word either as an IPA translation or as an IBM SPR translation. A sounds-like is one or more words that, when combined, sound like the word.
+     * The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for
+     * representing the phonetic string of a word either as an IPA translation or as an IBM SPR translation. A
+     * sounds-like is one or more words that, when combined, sound like the word.
      *
      * @return the translation_serialized_name
      */
@@ -40,7 +43,11 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the part_of_speech_serialized_name.
      *
-     * **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see [Working with Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     * **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
+     * for the word. You can create only a single entry, with or without a single part of speech, for any word; you
+     * cannot create multiple entries with different parts of speech for the same word. For more information, see
+     * [Working with Japanese
+     * entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
      *
      * @return the part_of_speech_serialized_name
      */
@@ -189,7 +196,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+     * for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -199,7 +207,12 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the words_serialized_name.
      *
-     * The **Add custom words** method accepts an array of `Word` objects. Each object provides a word that is to be added or updated for the custom voice model and the word's translation.   The **List custom words** method returns an array of `Word` objects. Each object shows a word and its translation from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
+     * The **Add custom words** method accepts an array of `Word` objects. Each object provides a word that is to be
+     * added or updated for the custom voice model and the word's translation.
+     *
+     * The **List custom words** method returns an array of `Word` objects. Each object shows a word and its translation
+     * from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before
+     * lowercase letters. The array is empty if the custom model contains no words.
      *
      * @return the words_serialized_name
      */
@@ -563,7 +576,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+     * for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -655,7 +669,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+     * for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -786,7 +801,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the voice_serialized_name.
      *
-     * A voice that specifies the language in which the pronunciation is to be returned. All voices for the same language (for example, `en-US`) return the same translation.
+     * A voice that specifies the language in which the pronunciation is to be returned. All voices for the same
+     * language (for example, `en-US`) return the same translation.
      *
      * @return the voice_serialized_name
      */
@@ -796,7 +812,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the format_serialized_name.
      *
-     * The phoneme format in which to return the pronunciation. Omit the parameter to obtain the pronunciation in the default format.
+     * The phoneme format in which to return the pronunciation. Omit the parameter to obtain the pronunciation in the
+     * default format.
      *
      * @return the format_serialized_name
      */
@@ -806,7 +823,11 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of a custom voice model for which the pronunciation is to be returned. The language of a specified custom model must match the language of the specified voice. If the word is not defined in the specified custom model, the service returns the default translation for the custom model's language. You must make the request with service credentials created for the instance of the service that owns the custom model. Omit the parameter to see the translation for the specified voice with no customization.
+     * The customization ID (GUID) of a custom voice model for which the pronunciation is to be returned. The language
+     * of a specified custom model must match the language of the specified voice. If the word is not defined in the
+     * specified custom model, the service returns the default translation for the custom model's language. You must
+     * make the request with service credentials created for the instance of the service that owns the custom model.
+     * Omit the parameter to see the translation for the specified voice with no customization.
      *
      * @return the customization_id_serialized_name
      */
@@ -939,7 +960,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+     * for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -1041,7 +1063,9 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of a custom voice model for which information is to be returned. You must make the request with service credentials created for the instance of the service that owns the custom model. Omit the parameter to see information about the specified voice with no customization.
+     * The customization ID (GUID) of a custom voice model for which information is to be returned. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model. Omit the
+     * parameter to see information about the specified voice with no customization.
      *
      * @return the customization_id_serialized_name
      */
@@ -1147,7 +1171,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+     * for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -1265,7 +1290,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the language_serialized_name.
      *
-     * The language for which custom voice models that are owned by the requesting service credentials are to be returned. Omit the parameter to see all custom voice models that are owned by the requester.
+     * The language for which custom voice models that are owned by the requesting service credentials are to be
+     * returned. Omit the parameter to see all custom voice models that are owned by the requester.
      *
      * @return the language_serialized_name
      */
@@ -1402,7 +1428,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+     * for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -1493,7 +1520,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the pronunciation_serialized_name.
      *
-     * The pronunciation of the specified text in the requested voice and format. If a custom voice model is specified, the pronunciation also reflects that custom voice.
+     * The pronunciation of the specified text in the requested voice and format. If a custom voice model is specified,
+     * the pronunciation also reflects that custom voice.
      *
      * @return the pronunciation_serialized_name
      */
@@ -1542,7 +1570,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the voice_transformation_serialized_name.
      *
-     * If `true`, the voice can be transformed by using the SSML &lt;voice-transformation&gt; element; if `false`, the voice cannot be transformed.
+     * If `true`, the voice can be transformed by using the SSML &lt;voice-transformation&gt; element; if `false`, the
+     * voice cannot be transformed.
      *
      * @return the voice_transformation_serialized_name
      */
@@ -1601,7 +1630,11 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the accept_serialized_name.
      *
-     * The type of the response: audio/basic, audio/flac, audio/l16;rate=nnnn, audio/ogg, audio/ogg;codecs=opus, audio/ogg;codecs=vorbis, audio/mp3, audio/mpeg, audio/mulaw;rate=nnnn, audio/wav, audio/webm, audio/webm;codecs=opus, or audio/webm;codecs=vorbis.
+     * The requested audio format (MIME type) of the audio. You can use the `Accept` header or the `accept` query
+     * parameter to specify the audio format. (For the `audio/l16` format, you can optionally specify
+     * `endianness=big-endian` or `endianness=little-endian`; the default is little endian.) For detailed information
+     * about the supported audio formats and sampling rates, see [Specifying an audio
+     * format](https://console.bluemix.net/docs/services/text-to-speech/http.html#format).
      *
      * @return the accept_serialized_name
      */
@@ -1621,7 +1654,10 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of a custom voice model to use for the synthesis. If a custom voice model is specified, it is guaranteed to work only if it matches the language of the indicated voice. You must make the request with service credentials created for the instance of the service that owns the custom model. Omit the parameter to use the specified voice with no customization.
+     * The customization ID (GUID) of a custom voice model to use for the synthesis. If a custom voice model is
+     * specified, it is guaranteed to work only if it matches the language of the indicated voice. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model. Omit the
+     * parameter to use the specified voice with no customization.
      *
      * @return the customization_id_serialized_name
      */
@@ -1755,7 +1791,9 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the translation_serialized_name.
      *
-     * The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for representing the phonetic string of a word either as an IPA translation or as an IBM SPR translation. A sounds-like is one or more words that, when combined, sound like the word.
+     * The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for
+     * representing the phonetic string of a word either as an IPA translation or as an IBM SPR translation. A
+     * sounds-like is one or more words that, when combined, sound like the word.
      *
      * @return the translation_serialized_name
      */
@@ -1766,7 +1804,11 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the part_of_speech_serialized_name.
      *
-     * **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see [Working with Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     * **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
+     * for the word. You can create only a single entry, with or without a single part of speech, for any word; you
+     * cannot create multiple entries with different parts of speech for the same word. For more information, see
+     * [Working with Japanese
+     * entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
      *
      * @return the part_of_speech_serialized_name
      */
@@ -1815,7 +1857,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom voice model. You must make the request with service credentials created
+     * for the instance of the service that owns the custom model.
      *
      * @return the customization_id_serialized_name
      */
@@ -1845,7 +1888,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the words_serialized_name.
      *
-     * An array of `Word` objects that provides the words and their translations that are to be added or updated for the custom voice model. Pass an empty array to make no additions or updates.
+     * An array of `Word` objects that provides the words and their translations that are to be added or updated for the
+     * custom voice model. Pass an empty array to make no additions or updates.
      *
      * @return the words_serialized_name
      */
@@ -2056,7 +2100,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customizable_serialized_name.
      *
-     * If `true`, the voice can be customized; if `false`, the voice cannot be customized. (Same as `custom_pronunciation`; maintained for backward compatibility.).
+     * If `true`, the voice can be customized; if `false`, the voice cannot be customized. (Same as
+     * `custom_pronunciation`; maintained for backward compatibility.).
      *
      * @return the customizable_serialized_name
      */
@@ -2078,7 +2123,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_serialized_name.
      *
-     * Returns information about a specified custom voice model. This field is returned only by the **Get a voice** method and only when you specify the customization ID of a custom voice model.
+     * Returns information about a specified custom voice model. This field is returned only by the **Get a voice**
+     * method and only when you specify the customization ID of a custom voice model.
      *
      * @return the customization_serialized_name
      */
@@ -2193,7 +2239,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of the custom voice model. The **Create a custom model** method returns only this field. It does not not return the other fields of this object.
+     * The customization ID (GUID) of the custom voice model. The **Create a custom model** method returns only this
+     * field. It does not not return the other fields of this object.
      *
      * @return the customization_id_serialized_name
      */
@@ -2237,7 +2284,8 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the created_serialized_name.
      *
-     * The date and time in Coordinated Universal Time (UTC) at which the custom voice model was created. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
+     * The date and time in Coordinated Universal Time (UTC) at which the custom voice model was created. The value is
+     * provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
      *
      * @return the created_serialized_name
      */
@@ -2248,7 +2296,9 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the last_modified_serialized_name.
      *
-     * The date and time in Coordinated Universal Time (UTC) at which the custom voice model was last modified. Equals `created` when a new voice model is first added but has yet to be updated. The value is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
+     * The date and time in Coordinated Universal Time (UTC) at which the custom voice model was last modified. Equals
+     * `created` when a new voice model is first added but has yet to be updated. The value is provided in full ISO 8601
+     * format (`YYYY-MM-DDThh:mm:ss.sTZD`).
      *
      * @return the last_modified_serialized_name
      */
@@ -2270,7 +2320,10 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the words_serialized_name.
      *
-     * An array of `Word` objects that lists the words and their translations from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words. This field is returned only by the **Get a voice** method and only when you specify the customization ID of a custom voice model.
+     * An array of `Word` objects that lists the words and their translations from the custom voice model. The words are
+     * listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the
+     * custom model contains no words. This field is returned only by the **Get a voice** method and only when you
+     * specify the customization ID of a custom voice model.
      *
      * @return the words_serialized_name
      */
@@ -2383,7 +2436,9 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the customizations_serialized_name.
      *
-     * An array of `VoiceModel` objects that provides information about each available custom voice model. The array is empty if the requesting service credentials own no custom voice models (if no language is specified) or own no custom voice models for the specified language.
+     * An array of `VoiceModel` objects that provides information about each available custom voice model. The array is
+     * empty if the requesting service credentials own no custom voice models (if no language is specified) or own no
+     * custom voice models for the specified language.
      *
      * @return the customizations_serialized_name
      */
@@ -2496,7 +2551,9 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the translation_serialized_name.
      *
-     * The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for representing the phonetic string of a word either as an IPA or IBM SPR translation. A sounds-like translation consists of one or more words that, when combined, sound like the word.
+     * The phonetic or sounds-like translation for the word. A phonetic translation is based on the SSML format for
+     * representing the phonetic string of a word either as an IPA or IBM SPR translation. A sounds-like translation
+     * consists of one or more words that, when combined, sound like the word.
      *
      * @return the translation_serialized_name
      */
@@ -2507,7 +2564,11 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the part_of_speech_serialized_name.
      *
-     * **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For more information, see [Working with Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     * **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
+     * for the word. You can create only a single entry, with or without a single part of speech, for any word; you
+     * cannot create multiple entries with different parts of speech for the same word. For more information, see
+     * [Working with Japanese
+     * entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
      *
      * @return the part_of_speech_serialized_name
      */
@@ -2562,7 +2623,12 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the words_serialized_name.
      *
-     * The **Add custom words** method accepts an array of `Word` objects. Each object provides a word that is to be added or updated for the custom voice model and the word's translation.   The **List custom words** method returns an array of `Word` objects. Each object shows a word and its translation from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom model contains no words.
+     * The **Add custom words** method accepts an array of `Word` objects. Each object provides a word that is to be
+     * added or updated for the custom voice model and the word's translation.
+     *
+     * The **List custom words** method returns an array of `Word` objects. Each object shows a word and its translation
+     * from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before
+     * lowercase letters. The array is empty if the custom model contains no words.
      *
      * @return the words_serialized_name
      */

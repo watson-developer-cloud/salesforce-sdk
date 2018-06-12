@@ -32,7 +32,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the file_serialized_name.
      *
-     * The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50 megabytes is rejected.
+     * The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50
+     * megabytes is rejected.
      *
      * @return the file_serialized_name
      */
@@ -52,7 +53,13 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the metadata_serialized_name.
      *
-     * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {   "Creator": "Johnny Appleseed",   "Subject": "Apples" } ```.
+     * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata
+     * that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1
+     * MB are rejected.
+     * Example:  ``` {
+     *   "Creator": "Johnny Appleseed",
+     *   "Subject": "Apples"
+     * } ```.
      *
      * @return the metadata_serialized_name
      */
@@ -612,7 +619,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the language_serialized_name.
      *
-     * The language of the documents stored in the collection. Permitted values include `en` (English), `de` (German), and `es` (Spanish).
+     * The language of the documents stored in the collection. Permitted values include `en` (English), `de` (German),
+     * and `es` (Spanish).
      *
      * @return the language_serialized_name
      */
@@ -623,7 +631,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the document_counts_serialized_name.
      *
-     * The object providing information about the documents in the collection. Present only when retrieving details of a collection.
+     * The object providing information about the documents in the collection. Present only when retrieving details of a
+     * collection.
      *
      * @return the document_counts_serialized_name
      */
@@ -634,7 +643,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the disk_usage_serialized_name.
      *
-     * The object providing information about the disk usage of the collection. Present only when retrieving details of a collection.
+     * The object providing information about the disk usage of the collection. Present only when retrieving details of
+     * a collection.
      *
      * @return the disk_usage_serialized_name
      */
@@ -901,7 +911,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the normalizations_serialized_name.
      *
-     * Defines operations that can be used to transform the final output JSON into a normalized form. Operations are executed in the order that they appear in the array.
+     * Defines operations that can be used to transform the final output JSON into a normalized form. Operations are
+     * executed in the order that they appear in the array.
      *
      * @return the normalizations_serialized_name
      */
@@ -1052,7 +1063,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the json_normalizations_serialized_name.
      *
-     * Defines operations that can be used to transform the final output JSON into a normalized form. Operations are executed in the order that they appear in the array.
+     * Defines operations that can be used to transform the final output JSON into a normalized form. Operations are
+     * executed in the order that they appear in the array.
      *
      * @return the json_normalizations_serialized_name
      */
@@ -1403,7 +1415,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the normalizations_serialized_name.
      *
-     * Defines operations that can be used to transform the final output JSON into a normalized form. Operations are executed in the order that they appear in the array.
+     * Defines operations that can be used to transform the final output JSON into a normalized form. Operations are
+     * executed in the order that they appear in the array.
      *
      * @return the normalizations_serialized_name
      */
@@ -1774,7 +1787,18 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the expansions_serialized_name.
      *
-     * An array of query expansion definitions.    Each object in the `expansions` array represents a term or set of terms that will be expanded into other terms. Each expansion object can be configured so that all terms are expanded to all other terms in the object - bi-directional, or a set list of terms can be expanded into a second list of terms - uni-directional.   To create a bi-directional expansion specify an `expanded_terms` array. When found in a query, all items in the `expanded_terms` array are then expanded to the other items in the same array.   To create a uni-directional expansion, specify both an array of `input_terms` and an array of `expanded_terms`. When items in the `input_terms` array are present in a query, they are expanded using the items listed in the `expanded_terms` array.
+     * An array of query expansion definitions.
+     *
+     *  Each object in the `expansions` array represents a term or set of terms that will be expanded into other terms.
+     * Each expansion object can be configured so that all terms are expanded to all other terms in the object -
+     * bi-directional, or a set list of terms can be expanded into a second list of terms - uni-directional.
+     *
+     *  To create a bi-directional expansion specify an `expanded_terms` array. When found in a query, all items in the
+     * `expanded_terms` array are then expanded to the other items in the same array.
+     *
+     *  To create a uni-directional expansion, specify both an array of `input_terms` and an array of `expanded_terms`.
+     * When items in the `input_terms` array are present in a query, they are expanded using the items listed in the
+     * `expanded_terms` array.
      *
      * @return the expansions_serialized_name
      */
@@ -3771,7 +3795,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the destination_field_serialized_name.
      *
-     * Field where enrichments will be stored. This field must already exist or be at most 1 level deeper than an existing field. For example, if `text` is a top-level field with no sub-fields, `text.foo` is a valid destination but `text.foo.bar` is not.
+     * Field where enrichments will be stored. This field must already exist or be at most 1 level deeper than an
+     * existing field. For example, if `text` is a top-level field with no sub-fields, `text.foo` is a valid destination
+     * but `text.foo.bar` is not.
      *
      * @return the destination_field_serialized_name
      */
@@ -3804,7 +3830,18 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the enrichment_serialized_name.
      *
-     * Name of the enrichment service to call. Current options are `natural_language_understanding` and `elements`.   When using `natual_language_understanding`, the `options` object must contain Natural Language Understanding Options.   When using `elements` the `options` object must contain Element Classification options. Additionally, when using the `elements` enrichment the configuration specified and files ingested must meet all the criteria specified in [the documentation](https://console.bluemix.net/docs/services/discovery/element-classification.html)     Previous API versions also supported `alchemy_language`.
+     * Name of the enrichment service to call. Current options are `natural_language_understanding` and `elements`.
+     *
+     *  When using `natual_language_understanding`, the `options` object must contain Natural Language Understanding
+     * Options.
+     *
+     *  When using `elements` the `options` object must contain Element Classification options. Additionally, when using
+     * the `elements` enrichment the configuration specified and files ingested must meet all the criteria specified in
+     * [the documentation](https://console.bluemix.net/docs/services/discovery/element-classification.html)
+     *
+     *
+     *
+     *  Previous API versions also supported `alchemy_language`.
      *
      * @return the enrichment_serialized_name
      */
@@ -3815,7 +3852,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the ignore_downstream_errors_serialized_name.
      *
-     * If true, then most errors generated during the enrichment process will be treated as warnings and will not cause the document to fail processing.
+     * If true, then most errors generated during the enrichment process will be treated as warnings and will not cause
+     * the document to fail processing.
      *
      * @return the ignore_downstream_errors_serialized_name
      */
@@ -3940,7 +3978,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the model_serialized_name.
      *
-     * *For use with `elements` enrichments only.* The element extraction model to use. Models available are: `contract`.
+     * *For use with `elements` enrichments only.* The element extraction model to use. Models available are:
+     * `contract`.
      *
      * @return the model_serialized_name
      */
@@ -4233,7 +4272,8 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * An expansion definition. Each object respresents one set of expandable strings. For example, you could have expansions for the word `hot` in one object, and expansions for the word `cold` in another.
+   * An expansion definition. Each object respresents one set of expandable strings. For example, you could have
+   * expansions for the word `hot` in one object, and expansions for the word `cold` in another.
    */
   public class Expansion extends IBMWatsonGenericModel {
     private List<String> input_terms_serialized_name;
@@ -4252,7 +4292,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the expanded_terms_serialized_name.
      *
-     * A list of terms that this expansion will be expanded to. If specified without `input_terms`, it also functions as the input term list.
+     * A list of terms that this expansion will be expanded to. If specified without `input_terms`, it also functions as
+     * the input term list.
      *
      * @return the expanded_terms_serialized_name
      */
@@ -4298,7 +4339,18 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the expansions_serialized_name.
      *
-     * An array of query expansion definitions.    Each object in the `expansions` array represents a term or set of terms that will be expanded into other terms. Each expansion object can be configured so that all terms are expanded to all other terms in the object - bi-directional, or a set list of terms can be expanded into a second list of terms - uni-directional.   To create a bi-directional expansion specify an `expanded_terms` array. When found in a query, all items in the `expanded_terms` array are then expanded to the other items in the same array.   To create a uni-directional expansion, specify both an array of `input_terms` and an array of `expanded_terms`. When items in the `input_terms` array are present in a query, they are expanded using the items listed in the `expanded_terms` array.
+     * An array of query expansion definitions.
+     *
+     *  Each object in the `expansions` array represents a term or set of terms that will be expanded into other terms.
+     * Each expansion object can be configured so that all terms are expanded to all other terms in the object -
+     * bi-directional, or a set list of terms can be expanded into a second list of terms - uni-directional.
+     *
+     *  To create a bi-directional expansion specify an `expanded_terms` array. When found in a query, all items in the
+     * `expanded_terms` array are then expanded to the other items in the same array.
+     *
+     *  To create a uni-directional expansion, specify both an array of `input_terms` and an array of `expanded_terms`.
+     * When items in the `input_terms` array are present in a query, they are expanded using the items listed in the
+     * `expanded_terms` array.
      *
      * @return the expansions_serialized_name
      */
@@ -4382,7 +4434,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the filter_serialized_name.
      *
-     * A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.
+     * A cacheable query that limits the documents returned to exclude any documents that don't mention the query
+     * content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts
+     * in the data set.
      *
      * @return the filter_serialized_name
      */
@@ -4392,7 +4446,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the query_serialized_name.
      *
-     * A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.
+     * A query search returns all documents in your data set with full enrichments and full text, but with the most
+     * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
+     * cannot use `natural_language_query` and `query` at the same time.
      *
      * @return the query_serialized_name
      */
@@ -4402,7 +4458,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the natural_language_query_serialized_name.
      *
-     * A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
+     * A natural language query that returns relevant documents by utilizing training data and natural language
+     * understanding. You cannot use `natural_language_query` and `query` at the same time.
      *
      * @return the natural_language_query_serialized_name
      */
@@ -4412,7 +4469,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the aggregation_serialized_name.
      *
-     * An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.
+     * An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are
+     * useful for building applications, because you can use them to build lists, tables, and time series. For a full
+     * list of possible aggregrations, see the Query reference.
      *
      * @return the aggregation_serialized_name
      */
@@ -4442,7 +4501,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the offset_serialized_name.
      *
-     * The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.
+     * The number of query results to skip at the beginning. For example, if the total number of results that are
+     * returned is 10, and the offset is 8, it returns the last two results.
      *
      * @return the offset_serialized_name
      */
@@ -4452,7 +4512,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
+     * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by
+     * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
+     * prefix is specified.
      *
      * @return the sort_serialized_name
      */
@@ -4462,7 +4524,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the highlight_serialized_name.
      *
-     * When true a highlight field is returned for each result which contains the fields that match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+     * When true a highlight field is returned for each result which contains the fields that match the query with
+     * `<em></em>` tags around the matching query terms. Defaults to false.
      *
      * @return the highlight_serialized_name
      */
@@ -4472,7 +4535,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the deduplicate_field_serialized_name.
      *
-     * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
+     * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
+     * comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta
+     * functionality.
      *
      * @return the deduplicate_field_serialized_name
      */
@@ -4482,7 +4547,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the similar_serialized_name.
      *
-     * When `true`, results are returned based on their similarity to the document IDs specified in the `similar.document_ids` parameter. The default is `false`.
+     * When `true`, results are returned based on their similarity to the document IDs specified in the
+     * `similar.document_ids` parameter. The default is `false`.
      *
      * @return the similar_serialized_name
      */
@@ -4492,7 +4558,11 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the similar_document_ids_serialized_name.
      *
-     * A comma-separated list of document IDs that will be used to find similar documents.   **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as `filter` and `query` are subsequently applied and reduce the query scope.
+     * A comma-separated list of document IDs that will be used to find similar documents.
+     *
+     * **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
+     * document similarity search to include the natural language query. Other query parameters, such as `filter` and
+     * `query` are subsequently applied and reduce the query scope.
      *
      * @return the similar_document_ids_serialized_name
      */
@@ -4502,7 +4572,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the similar_fields_serialized_name.
      *
-     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.
+     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents.
+     * If not specified, the entire document is used for comparison.
      *
      * @return the similar_fields_serialized_name
      */
@@ -4907,7 +4978,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the filter_serialized_name.
      *
-     * A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.
+     * A cacheable query that limits the documents returned to exclude any documents that don't mention the query
+     * content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts
+     * in the data set.
      *
      * @return the filter_serialized_name
      */
@@ -4917,7 +4990,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the query_serialized_name.
      *
-     * A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.
+     * A query search returns all documents in your data set with full enrichments and full text, but with the most
+     * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
+     * cannot use `natural_language_query` and `query` at the same time.
      *
      * @return the query_serialized_name
      */
@@ -4927,7 +5002,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the natural_language_query_serialized_name.
      *
-     * A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
+     * A natural language query that returns relevant documents by utilizing training data and natural language
+     * understanding. You cannot use `natural_language_query` and `query` at the same time.
      *
      * @return the natural_language_query_serialized_name
      */
@@ -4937,7 +5013,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the aggregation_serialized_name.
      *
-     * An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.
+     * An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are
+     * useful for building applications, because you can use them to build lists, tables, and time series. For a full
+     * list of possible aggregrations, see the Query reference.
      *
      * @return the aggregation_serialized_name
      */
@@ -4967,7 +5045,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the offset_serialized_name.
      *
-     * The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.
+     * The number of query results to skip at the beginning. For example, if the total number of results that are
+     * returned is 10, and the offset is 8, it returns the last two results.
      *
      * @return the offset_serialized_name
      */
@@ -4977,7 +5056,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
+     * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by
+     * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
+     * prefix is specified.
      *
      * @return the sort_serialized_name
      */
@@ -4987,7 +5068,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the highlight_serialized_name.
      *
-     * When true a highlight field is returned for each result which contains the fields that match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+     * When true a highlight field is returned for each result which contains the fields that match the query with
+     * `<em></em>` tags around the matching query terms. Defaults to false.
      *
      * @return the highlight_serialized_name
      */
@@ -4997,7 +5079,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the deduplicate_serialized_name.
      *
-     * When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the `title` field) are removed. Duplicate comparison is limited to the current query only, `offset` is not considered. Defaults to `false`. This parameter is currently Beta functionality.
+     * When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the
+     * `title` field) are removed. Duplicate comparison is limited to the current query only, `offset` is not
+     * considered. Defaults to `false`. This parameter is currently Beta functionality.
      *
      * @return the deduplicate_serialized_name
      */
@@ -5007,7 +5091,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the deduplicate_field_serialized_name.
      *
-     * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
+     * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
+     * comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta
+     * functionality.
      *
      * @return the deduplicate_field_serialized_name
      */
@@ -5017,7 +5103,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the similar_serialized_name.
      *
-     * When `true`, results are returned based on their similarity to the document IDs specified in the `similar.document_ids` parameter. The default is `false`.
+     * When `true`, results are returned based on their similarity to the document IDs specified in the
+     * `similar.document_ids` parameter. The default is `false`.
      *
      * @return the similar_serialized_name
      */
@@ -5027,7 +5114,11 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the similar_document_ids_serialized_name.
      *
-     * A comma-separated list of document IDs that will be used to find similar documents.   **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as `filter` and `query` are subsequently applied and reduce the query scope.
+     * A comma-separated list of document IDs that will be used to find similar documents.
+     *
+     * **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
+     * document similarity search to include the natural language query. Other query parameters, such as `filter` and
+     * `query` are subsequently applied and reduce the query scope.
      *
      * @return the similar_document_ids_serialized_name
      */
@@ -5037,7 +5128,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the similar_fields_serialized_name.
      *
-     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.
+     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents.
+     * If not specified, the entire document is used for comparison.
      *
      * @return the similar_fields_serialized_name
      */
@@ -6755,7 +6847,18 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * The list of fetched fields.  The fields are returned using a fully qualified name format, however, the format differs slightly from that used by the query operations.    * Fields which contain nested JSON objects are assigned a type of "nested".    * Fields which belong to a nested object are prefixed with `.properties` (for example, `warnings.properties.severity` means that the `warnings` object has a property called `severity`).    * Fields returned from the News collection are prefixed with `v{N}-fullnews-t3-{YEAR}.mappings` (for example, `v5-fullnews-t3-2016.mappings.text.properties.author`).
+   * The list of fetched fields.
+   *
+   * The fields are returned using a fully qualified name format, however, the format differs slightly from that used by
+   * the query operations.
+   *
+   *   * Fields which contain nested JSON objects are assigned a type of "nested".
+   *
+   *   * Fields which belong to a nested object are prefixed with `.properties` (for example,
+   * `warnings.properties.severity` means that the `warnings` object has a property called `severity`).
+   *
+   *   * Fields returned from the News collection are prefixed with `v{N}-fullnews-t3-{YEAR}.mappings` (for example,
+   * `v5-fullnews-t3-2016.mappings.text.properties.author`).
    */
   public class ListCollectionFieldsResponse extends IBMWatsonResponseModel {
     private List<Field> fields_serialized_name;
@@ -8101,7 +8204,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the sentence_location_serialized_name.
      *
-     * When `true`, a list of sentence locations for each instance of each identified entity is recorded. The default is `false`.
+     * When `true`, a list of sentence locations for each instance of each identified entity is recorded. The default is
+     * `false`.
      *
      * @return the sentence_location_serialized_name
      */
@@ -8112,7 +8216,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the model_serialized_name.
      *
-     * The enrichement model to use with entity extraction. May be a custom model provided by Watson Knowledge Studio, the public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
+     * The enrichement model to use with entity extraction. May be a custom model provided by Watson Knowledge Studio,
+     * the public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
      *
      * @return the model_serialized_name
      */
@@ -8680,7 +8785,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the model_serialized_name.
      *
-     * *For use with `natural_language_understanding` enrichments only.* The enrichement model to use with relationship extraction. May be a custom model provided by Watson Knowledge Studio, the public model for use with Knowledge Graph `en-news`, the default is`en-news`.
+     * *For use with `natural_language_understanding` enrichments only.* The enrichement model to use with relationship
+     * extraction. May be a custom model provided by Watson Knowledge Studio, the public model for use with Knowledge
+     * Graph `en-news`, the default is`en-news`.
      *
      * @return the model_serialized_name
      */
@@ -8983,7 +9090,28 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the operation_serialized_name.
      *
-     * Identifies what type of operation to perform.   **copy** - Copies the value of the `source_field` to the `destination_field` field. If the `destination_field` already exists, then the value of the `source_field` overwrites the original value of the `destination_field`.   **move** - Renames (moves) the `source_field` to the `destination_field`. If the `destination_field` already exists, then the value of the `source_field` overwrites the original value of the `destination_field`. Rename is identical to copy, except that the `source_field` is removed after the value has been copied to the `destination_field` (it is the same as a _copy_ followed by a _remove_).   **merge** - Merges the value of the `source_field` with the value of the `destination_field`. The `destination_field` is converted into an array if it is not already an array, and the value of the `source_field` is appended to the array. This operation removes the `source_field` after the merge. If the `source_field` does not exist in the current document, then the `destination_field` is still converted into an array (if it is not an array already). This is ensures the type for `destination_field` is consistent across all documents.   **remove** - Deletes the `source_field` field. The `destination_field` is ignored for this operation.   **remove_nulls** - Removes all nested null (blank) leif values from the JSON tree. `source_field` and `destination_field` are ignored by this operation because _remove_nulls_ operates on the entire JSON tree. Typically, `remove_nulls` is invoked as the last normalization operation (if it is inoked at all, it can be time-expensive).
+     * Identifies what type of operation to perform.
+     *
+     * **copy** - Copies the value of the `source_field` to the `destination_field` field. If the `destination_field`
+     * already exists, then the value of the `source_field` overwrites the original value of the `destination_field`.
+     *
+     * **move** - Renames (moves) the `source_field` to the `destination_field`. If the `destination_field` already
+     * exists, then the value of the `source_field` overwrites the original value of the `destination_field`. Rename is
+     * identical to copy, except that the `source_field` is removed after the value has been copied to the
+     * `destination_field` (it is the same as a _copy_ followed by a _remove_).
+     *
+     * **merge** - Merges the value of the `source_field` with the value of the `destination_field`. The
+     * `destination_field` is converted into an array if it is not already an array, and the value of the `source_field`
+     * is appended to the array. This operation removes the `source_field` after the merge. If the `source_field` does
+     * not exist in the current document, then the `destination_field` is still converted into an array (if it is not an
+     * array already). This is ensures the type for `destination_field` is consistent across all documents.
+     *
+     * **remove** - Deletes the `source_field` field. The `destination_field` is ignored for this operation.
+     *
+     * **remove_nulls** - Removes all nested null (blank) leif values from the JSON tree. `source_field` and
+     * `destination_field` are ignored by this operation because _remove_nulls_ operates on the entire JSON tree.
+     * Typically, `remove_nulls` is invoked as the last normalization operation (if it is inoked at all, it can be
+     * time-expensive).
      *
      * @return the operation_serialized_name
      */
@@ -9066,7 +9194,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the notice_id_serialized_name.
      *
-     * Identifies the notice. Many notices might have the same ID. This field exists so that user applications can programmatically identify a notice and take automatic corrective action.
+     * Identifies the notice. Many notices might have the same ID. This field exists so that user applications can
+     * programmatically identify a notice and take automatic corrective action.
      *
      * @return the notice_id_serialized_name
      */
@@ -9553,14 +9682,16 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to query the city of London in England your query would look for `London` with the context of `England`.
+   * Entity text to provide context for the queried entity and rank based on that association. For example, if you
+   * wanted to query the city of London in England your query would look for `London` with the context of `England`.
    */
   public class QueryEntitiesContext {
     private String text_serialized_name;
     /**
      * Gets the text_serialized_name.
      *
-     * Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to query the city of London in England your query would look for `London` with the context of `England`.
+     * Entity text to provide context for the queried entity and rank based on that association. For example, if you
+     * wanted to query the city of London in England your query would look for `London` with the context of `England`.
      *
      * @return the text_serialized_name
      */
@@ -9691,7 +9822,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the context_serialized_name.
      *
-     * Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to query the city of London in England your query would look for `London` with the context of `England`.
+     * Entity text to provide context for the queried entity and rank based on that association. For example, if you
+     * wanted to query the city of London in England your query would look for `London` with the context of `England`.
      *
      * @return the context_serialized_name
      */
@@ -9711,7 +9843,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the evidence_count_serialized_name.
      *
-     * The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items per query is 10,000.
+     * The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items
+     * per query is 10,000.
      *
      * @return the evidence_count_serialized_name
      */
@@ -10348,7 +10481,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the filter_serialized_name.
      *
-     * A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.
+     * A cacheable query that limits the documents returned to exclude any documents that don't mention the query
+     * content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts
+     * in the data set.
      *
      * @return the filter_serialized_name
      */
@@ -10358,7 +10493,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the query_serialized_name.
      *
-     * A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.
+     * A query search returns all documents in your data set with full enrichments and full text, but with the most
+     * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
+     * cannot use `natural_language_query` and `query` at the same time.
      *
      * @return the query_serialized_name
      */
@@ -10368,7 +10505,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the natural_language_query_serialized_name.
      *
-     * A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
+     * A natural language query that returns relevant documents by utilizing training data and natural language
+     * understanding. You cannot use `natural_language_query` and `query` at the same time.
      *
      * @return the natural_language_query_serialized_name
      */
@@ -10388,7 +10526,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the aggregation_serialized_name.
      *
-     * An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.
+     * An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are
+     * useful for building applications, because you can use them to build lists, tables, and time series. For a full
+     * list of possible aggregrations, see the Query reference.
      *
      * @return the aggregation_serialized_name
      */
@@ -10418,7 +10558,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the offset_serialized_name.
      *
-     * The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.
+     * The number of query results to skip at the beginning. For example, if the total number of results that are
+     * returned is 10, and the offset is 8, it returns the last two results.
      *
      * @return the offset_serialized_name
      */
@@ -10428,7 +10569,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
+     * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by
+     * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
+     * prefix is specified.
      *
      * @return the sort_serialized_name
      */
@@ -10438,7 +10581,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the highlight_serialized_name.
      *
-     * When true a highlight field is returned for each result which contains the fields that match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+     * When true a highlight field is returned for each result which contains the fields that match the query with
+     * `<em></em>` tags around the matching query terms. Defaults to false.
      *
      * @return the highlight_serialized_name
      */
@@ -10448,7 +10592,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the passages_fields_serialized_name.
      *
-     * A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all top-level fields are included.
+     * A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all
+     * top-level fields are included.
      *
      * @return the passages_fields_serialized_name
      */
@@ -10458,7 +10603,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the passages_count_serialized_name.
      *
-     * The maximum number of passages to return. The search returns fewer passages if the requested total is not found. The default is `10`. The maximum is `100`.
+     * The maximum number of passages to return. The search returns fewer passages if the requested total is not found.
+     * The default is `10`. The maximum is `100`.
      *
      * @return the passages_count_serialized_name
      */
@@ -10468,7 +10614,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the passages_characters_serialized_name.
      *
-     * The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`. The maximum is `2000`.
+     * The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`.
+     * The maximum is `2000`.
      *
      * @return the passages_characters_serialized_name
      */
@@ -10478,7 +10625,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the deduplicate_field_serialized_name.
      *
-     * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
+     * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
+     * comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta
+     * functionality.
      *
      * @return the deduplicate_field_serialized_name
      */
@@ -10488,7 +10637,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the similar_serialized_name.
      *
-     * When `true`, results are returned based on their similarity to the document IDs specified in the `similar.document_ids` parameter. The default is `false`.
+     * When `true`, results are returned based on their similarity to the document IDs specified in the
+     * `similar.document_ids` parameter. The default is `false`.
      *
      * @return the similar_serialized_name
      */
@@ -10498,7 +10648,11 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the similar_document_ids_serialized_name.
      *
-     * A comma-separated list of document IDs that will be used to find similar documents.   **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as `filter` and `query` are subsequently applied and reduce the query scope.
+     * A comma-separated list of document IDs that will be used to find similar documents.
+     *
+     * **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
+     * document similarity search to include the natural language query. Other query parameters, such as `filter` and
+     * `query` are subsequently applied and reduce the query scope.
      *
      * @return the similar_document_ids_serialized_name
      */
@@ -10508,7 +10662,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the similar_fields_serialized_name.
      *
-     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.
+     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents.
+     * If not specified, the entire document is used for comparison.
      *
      * @return the similar_fields_serialized_name
      */
@@ -11379,7 +11534,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the filter_serialized_name.
      *
-     * A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.
+     * A cacheable query that limits the documents returned to exclude any documents that don't mention the query
+     * content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts
+     * in the data set.
      *
      * @return the filter_serialized_name
      */
@@ -11389,7 +11546,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the query_serialized_name.
      *
-     * A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.
+     * A query search returns all documents in your data set with full enrichments and full text, but with the most
+     * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
+     * cannot use `natural_language_query` and `query` at the same time.
      *
      * @return the query_serialized_name
      */
@@ -11399,7 +11558,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the natural_language_query_serialized_name.
      *
-     * A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.
+     * A natural language query that returns relevant documents by utilizing training data and natural language
+     * understanding. You cannot use `natural_language_query` and `query` at the same time.
      *
      * @return the natural_language_query_serialized_name
      */
@@ -11419,7 +11579,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the aggregation_serialized_name.
      *
-     * An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.
+     * An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are
+     * useful for building applications, because you can use them to build lists, tables, and time series. For a full
+     * list of possible aggregrations, see the Query reference.
      *
      * @return the aggregation_serialized_name
      */
@@ -11449,7 +11611,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the offset_serialized_name.
      *
-     * The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.
+     * The number of query results to skip at the beginning. For example, if the total number of results that are
+     * returned is 10, and the offset is 8, it returns the last two results.
      *
      * @return the offset_serialized_name
      */
@@ -11459,7 +11622,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.
+     * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by
+     * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
+     * prefix is specified.
      *
      * @return the sort_serialized_name
      */
@@ -11469,7 +11634,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the highlight_serialized_name.
      *
-     * When true a highlight field is returned for each result which contains the fields that match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+     * When true a highlight field is returned for each result which contains the fields that match the query with
+     * `<em></em>` tags around the matching query terms. Defaults to false.
      *
      * @return the highlight_serialized_name
      */
@@ -11479,7 +11645,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the passages_fields_serialized_name.
      *
-     * A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all top-level fields are included.
+     * A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all
+     * top-level fields are included.
      *
      * @return the passages_fields_serialized_name
      */
@@ -11489,7 +11656,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the passages_count_serialized_name.
      *
-     * The maximum number of passages to return. The search returns fewer passages if the requested total is not found. The default is `10`. The maximum is `100`.
+     * The maximum number of passages to return. The search returns fewer passages if the requested total is not found.
+     * The default is `10`. The maximum is `100`.
      *
      * @return the passages_count_serialized_name
      */
@@ -11499,7 +11667,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the passages_characters_serialized_name.
      *
-     * The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`. The maximum is `2000`.
+     * The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`.
+     * The maximum is `2000`.
      *
      * @return the passages_characters_serialized_name
      */
@@ -11509,7 +11678,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the deduplicate_serialized_name.
      *
-     * When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the `title` field) are removed. Duplicate comparison is limited to the current query only, `offset` is not considered. Defaults to `false`. This parameter is currently Beta functionality.
+     * When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the
+     * `title` field) are removed. Duplicate comparison is limited to the current query only, `offset` is not
+     * considered. Defaults to `false`. This parameter is currently Beta functionality.
      *
      * @return the deduplicate_serialized_name
      */
@@ -11519,7 +11690,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the deduplicate_field_serialized_name.
      *
-     * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta functionality.
+     * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
+     * comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta
+     * functionality.
      *
      * @return the deduplicate_field_serialized_name
      */
@@ -11529,7 +11702,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the similar_serialized_name.
      *
-     * When `true`, results are returned based on their similarity to the document IDs specified in the `similar.document_ids` parameter. The default is `false`.
+     * When `true`, results are returned based on their similarity to the document IDs specified in the
+     * `similar.document_ids` parameter. The default is `false`.
      *
      * @return the similar_serialized_name
      */
@@ -11539,7 +11713,11 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the similar_document_ids_serialized_name.
      *
-     * A comma-separated list of document IDs that will be used to find similar documents.   **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the document similarity search to include the natural language query. Other query parameters, such as `filter` and `query` are subsequently applied and reduce the query scope.
+     * A comma-separated list of document IDs that will be used to find similar documents.
+     *
+     * **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
+     * document similarity search to include the natural language query. Other query parameters, such as `filter` and
+     * `query` are subsequently applied and reduce the query scope.
      *
      * @return the similar_document_ids_serialized_name
      */
@@ -11549,7 +11727,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the similar_fields_serialized_name.
      *
-     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents. If not specified, the entire document is used for comparison.
+     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents.
+     * If not specified, the entire document is used for comparison.
      *
      * @return the similar_fields_serialized_name
      */
@@ -12350,7 +12529,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the context_serialized_name.
      *
-     * Entity text to provide context for the queried entity and rank based on that association. For example, if you wanted to query the city of London in England your query would look for `London` with the context of `England`.
+     * Entity text to provide context for the queried entity and rank based on that association. For example, if you
+     * wanted to query the city of London in England your query would look for `London` with the context of `England`.
      *
      * @return the context_serialized_name
      */
@@ -12360,7 +12540,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the number of unique times each entity is identified. The default is `score`.
+     * The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the number of unique
+     * times each entity is identified. The default is `score`.
      *
      * @return the sort_serialized_name
      */
@@ -12390,7 +12571,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the evidence_count_serialized_name.
      *
-     * The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items per query is 10,000.
+     * The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items
+     * per query is 10,000.
      *
      * @return the evidence_count_serialized_name
      */
@@ -13177,7 +13359,11 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the configuration_serialized_name.
      *
-     * The configuration to use to process the document. If this part is provided, then the provided configuration is used to process the document. If the `configuration_id` is also provided (both are present at the same time), then request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB are rejected. See the `GET /configurations/{configuration_id}` operation for an example configuration.
+     * The configuration to use to process the document. If this part is provided, then the provided configuration is
+     * used to process the document. If the `configuration_id` is also provided (both are present at the same time),
+     * then request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB
+     * are rejected.
+     * See the `GET /configurations/{configuration_id}` operation for an example configuration.
      *
      * @return the configuration_serialized_name
      */
@@ -13187,7 +13373,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the step_serialized_name.
      *
-     * Specify to only run the input document through the given step instead of running the input document through the entire ingestion workflow. Valid values are `convert`, `enrich`, and `normalize`.
+     * Specify to only run the input document through the given step instead of running the input document through the
+     * entire ingestion workflow. Valid values are `convert`, `enrich`, and `normalize`.
      *
      * @return the step_serialized_name
      */
@@ -13197,7 +13384,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the configuration_id_serialized_name.
      *
-     * The ID of the configuration to use to process the document. If the `configuration` form part is also provided (both are present at the same time), then request will be rejected.
+     * The ID of the configuration to use to process the document. If the `configuration` form part is also provided
+     * (both are present at the same time), then request will be rejected.
      *
      * @return the configuration_id_serialized_name
      */
@@ -13207,7 +13395,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the file_serialized_name.
      *
-     * The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50 megabytes is rejected.
+     * The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50
+     * megabytes is rejected.
      *
      * @return the file_serialized_name
      */
@@ -13227,7 +13416,13 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the metadata_serialized_name.
      *
-     * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {   "Creator": "Johnny Appleseed",   "Subject": "Apples" } ```.
+     * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata
+     * that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1
+     * MB are rejected.
+     * Example:  ``` {
+     *   "Creator": "Johnny Appleseed",
+     *   "Subject": "Apples"
+     * } ```.
      *
      * @return the metadata_serialized_name
      */
@@ -13453,7 +13648,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the enriched_field_units_serialized_name.
      *
-     * The number of 10-kB chunks of field data that were enriched. This can be used to estimate the cost of running a real ingestion.
+     * The number of 10-kB chunks of field data that were enriched. This can be used to estimate the cost of running a
+     * real ingestion.
      *
      * @return the enriched_field_units_serialized_name
      */
@@ -13557,42 +13753,42 @@ public class IBMDiscoveryV1Models {
     private Long matching_results_serialized_name;
     private List<QueryResult> hits_serialized_name;
     /**
-    * Gets the matching_results_serialized_name.
-    *
-    * Number of matching results.
-    *
-    * @return the matching_results_serialized_name
-    */
+     * Gets the matching_results_serialized_name.
+     *
+     * Number of matching results.
+     *
+     * @return the matching_results_serialized_name
+     */
     @AuraEnabled
     public Long getMatchingResults() {
       return matching_results_serialized_name;
     }
     /**
-    * Gets the hits_serialized_name.
-    *
-    * Top results returned by the aggregation.
-    *
-    * @return the hits_serialized_name
-    */
+     * Gets the hits_serialized_name.
+     *
+     * Top results returned by the aggregation.
+     *
+     * @return the hits_serialized_name
+     */
     @AuraEnabled
     public List<QueryResult> getHits() {
       return hits_serialized_name;
     }
 
     /**
-    * Sets the matching_results_serialized_name.
-    *
-    * @param matchingResults the new matchingResults
-    */
+     * Sets the matching_results_serialized_name.
+     *
+     * @param matchingResults the new matchingResults
+     */
     public void setMatchingResults(final long matchingResults) {
       this.matching_results_serialized_name = matchingResults;
     }
 
     /**
-    * Sets the hits_serialized_name.
-    *
-    * @param hits the new hits
-    */
+     * Sets the hits_serialized_name.
+     *
+     * @param hits the new hits
+     */
     public void setHits(final List<QueryResult> hits) {
       this.hits_serialized_name = hits;
     }
@@ -14398,7 +14594,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the normalizations_serialized_name.
      *
-     * Defines operations that can be used to transform the final output JSON into a normalized form. Operations are executed in the order that they appear in the array.
+     * Defines operations that can be used to transform the final output JSON into a normalized form. Operations are
+     * executed in the order that they appear in the array.
      *
      * @return the normalizations_serialized_name
      */
@@ -14659,7 +14856,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the file_serialized_name.
      *
-     * The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50 megabytes is rejected.
+     * The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50
+     * megabytes is rejected.
      *
      * @return the file_serialized_name
      */
@@ -14679,7 +14877,13 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the metadata_serialized_name.
      *
-     * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {   "Creator": "Johnny Appleseed",   "Subject": "Apples" } ```.
+     * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata
+     * that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1
+     * MB are rejected.
+     * Example:  ``` {
+     *   "Creator": "Johnny Appleseed",
+     *   "Subject": "Apples"
+     * } ```.
      *
      * @return the metadata_serialized_name
      */

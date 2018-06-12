@@ -1335,7 +1335,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * The detected anger, disgust, fear, joy, or sadness that is conveyed by the content. Emotion information can be returned for detected entities, keywords, or user-specified target phrases found in the text.
+   * The detected anger, disgust, fear, joy, or sadness that is conveyed by the content. Emotion information can be
+   * returned for detected entities, keywords, or user-specified target phrases found in the text.
    */
   public class EmotionResult extends IBMWatsonGenericModel {
     private DocumentEmotionResults document_serialized_name;
@@ -1531,7 +1532,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * Whether or not to return important people, places, geopolitical, and other entities detected in the analyzed content.
+   * Whether or not to return important people, places, geopolitical, and other entities detected in the analyzed
+   * content.
    */
   public class EntitiesOptions {
     private Long limit_serialized_name;
@@ -2057,7 +2059,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the metadata_serialized_name.
      *
-     * Whether or not the author, publication date, and title of the analyzed text should be returned. This parameter is only available for URL and HTML input.
+     * Whether or not the author, publication date, and title of the analyzed text should be returned. This parameter is
+     * only available for URL and HTML input.
      *
      * @return the metadata_serialized_name
      */

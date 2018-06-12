@@ -234,7 +234,8 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Gets the confidence_serialized_name.
      *
-     * A decimal percentage that represents the confidence that Watson has in this class. Higher values represent higher confidences.
+     * A decimal percentage that represents the confidence that Watson has in this class. Higher values represent higher
+     * confidences.
      *
      * @return the confidence_serialized_name
      */
@@ -853,7 +854,11 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Gets the training_metadata_serialized_name.
      *
-     * Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the classifier. Specify the language with the 2-letter primary language code as assigned in ISO standard 639.  Supported languages are English (`en`), Arabic (`ar`), French (`fr`), German, (`de`), Italian (`it`), Japanese (`ja`), Korean (`ko`), Brazilian Portuguese (`pt`), and Spanish (`es`).
+     * Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the
+     * classifier. Specify the language with the 2-letter primary language code as assigned in ISO standard 639.
+     *
+     * Supported languages are English (`en`), Arabic (`ar`), French (`fr`), German, (`de`), Italian (`it`), Japanese
+     * (`ja`), Korean (`ko`), Brazilian Portuguese (`pt`), and Spanish (`es`).
      *
      * @return the training_metadata_serialized_name
      */
@@ -873,7 +878,9 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Gets the training_data_serialized_name.
      *
-     * Training data in CSV format. Each text value must have at least one class. The data can include up to 20,000 records. For details, see [Data preparation](https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html).
+     * Training data in CSV format. Each text value must have at least one class. The data can include up to 20,000
+     * records. For details, see [Data
+     * preparation](https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html).
      *
      * @return the training_data_serialized_name
      */
