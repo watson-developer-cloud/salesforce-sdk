@@ -5,6 +5,9 @@
 
 The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment.
 
+## Before you begin
+* You need an [IBM Cloud][ibm-cloud-onboarding] account.
+
 ## Prerequisites
 
 Using the Watson services requires creating service instances and getting credentials in IBM Cloud, which you can do [here](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&). This means you will need to create an IBM Cloud account if you do not have one already.
@@ -373,3 +376,5 @@ If you're interested in helping to make this project better, see [Contributing.m
 
 This library is licensed under the MIT license. Full license text is
 available in [LICENSE](LICENSE).
+
+[ibm-cloud-onboarding]: http://console.bluemix.net/registration?target=/developer/watson&cm_sp=WatsonPlatform-WatsonServices-_-OnPageNavLink-IBMWatson_SDKs-_-SalesForce
