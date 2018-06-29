@@ -19,9 +19,7 @@ If you want to contribute to the repository, here's a quick guide:
     * Check for unnecessary whitespace with git diff --check before committing.
   3. Make the test pass
   4. Commit your changes:   
-    * Use the present tense (`"Add feature"` not `"Added Feature"`)
-    * Use the imperative mood (`"Move cursor to…"` not `"Moves cursor to…"`)
-    * Include relevant Emoji from our [Emoji cheatsheet](#emoji-cheatsheet)
+    * Commits should follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines). This is because our release tool uses this format for determining release versions and generating changelogs. To make this easier, we recommend using the [Commitizen CLI](https://github.com/commitizen/cz-cli) with the `cz-conventional-changelog` adapter.
   5. Push to your fork and submit a pull request to the **master** branch
 
 # Deploy, Develop and Test
@@ -59,24 +57,6 @@ By making a contribution to this project, I certify that:
    personal information I submit with it, including my sign-off) is
    maintained indefinitely and may be redistributed consistent with
    this project or the open source license(s) involved.
-
-## Emoji Cheatsheet
-
-When creating creating commits or updating the `CHANGELOG`, please **start** the commit message or update with one of the following applicable Emoji. Emoji should not be used at the start of issue or pull request titles.
-
-* :new: `:new:` when adding new functionality
-* :bug: `:bug:` when fixing a bug
-* :memo: `:memo:` when writing documentation
-* :art: `:art:` when improving the format/structure of the code
-* :fire: `:fire:` when removing code or files
-* :racehorse: `:racehorse:` when improving performance
-* :white_check_mark: `:white_check_mark:` when adding tests
-* :green_heart: `:green_heart:` when fixing the CI build
-* :lock: `:lock:` when dealing with security
-* :crystal_ball: `:crystal_ball:` when experimenting
-* :unamused: `:unamused:` when doing chore work (updating dependencies, etc…)
-* :boom: `:boom:` when changing in a non-backwards-compatible way current functionality
-* :shipit: `:shipit:` when creating a new release
 
 ## Coding Guidelines
 

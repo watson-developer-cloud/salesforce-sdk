@@ -1,0 +1,2 @@
+## Releasing
+Releases happen automatically after successful builds in the `master` branch. If no release happens, it could be that there wasn't a commit merged which triggered one of the [semantic-release default release rules](https://github.com/semantic-release/commit-analyzer/blob/master/lib/default-release-rules.js).
