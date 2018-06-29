@@ -2,6 +2,12 @@ sudo: true
 dist: trusty
 cache: false
 language: python
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install python
+  - npm install npm@latest -g
+
 install:
 - export URL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
 - export SFDX_AUTOUPDATE_DISABLE=true
@@ -13,6 +19,8 @@ install:
 - "./sfdx/install"
 - export PATH=./sfdx/$(pwd):$PATH
 - mv force-app/main/test/* force-app/main/default/classes
+- install --user bumpversion
+- npm install @semantic-release/exec
 
 script:
 - "./install/test-in-scratch-org.sh"
@@ -21,3 +29,7 @@ after_success:
 after_failure:
 - sfdx force:org:delete -u ciorg -p
 
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: npx travis-deploy-once "npx semantic-release"
