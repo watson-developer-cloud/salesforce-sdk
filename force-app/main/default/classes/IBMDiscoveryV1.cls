@@ -812,7 +812,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       builder.query('count', String.valueOf(federatedQueryOptions.count()));
     }
     if (federatedQueryOptions.returnField() != null) {
-      builder.query('return_fields', String.join(federatedQueryOptions.returnField(), ','));
+      builder.query('return', String.join(federatedQueryOptions.returnField(), ','));
     }
     if (federatedQueryOptions.offset() != null) {
       builder.query('offset', String.valueOf(federatedQueryOptions.offset()));
@@ -882,7 +882,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       builder.query('count', String.valueOf(federatedQueryNoticesOptions.count()));
     }
     if (federatedQueryNoticesOptions.returnField() != null) {
-      builder.query('return_fields', String.join(federatedQueryNoticesOptions.returnField(), ','));
+      builder.query('return', String.join(federatedQueryNoticesOptions.returnField(), ','));
     }
     if (federatedQueryNoticesOptions.offset() != null) {
       builder.query('offset', String.valueOf(federatedQueryNoticesOptions.offset()));
@@ -1067,7 +1067,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
       builder.query('count', String.valueOf(queryNoticesOptions.count()));
     }
     if (queryNoticesOptions.returnField() != null) {
-      builder.query('return_fields', String.join(queryNoticesOptions.returnField(), ','));
+      builder.query('return', String.join(queryNoticesOptions.returnField(), ','));
     }
     if (queryNoticesOptions.offset() != null) {
       builder.query('offset', String.valueOf(queryNoticesOptions.offset()));
