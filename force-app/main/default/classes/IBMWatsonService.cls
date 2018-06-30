@@ -18,7 +18,7 @@ public abstract class IBMWatsonService {
   private static final String BEARER = 'Bearer ';
   private static final String VERSION = 'version';
   private static final String USER_AGENT_FORMAT = 'watson-apis-salesforce-sdk/{0}/({1})';
-  private static final String SDK_VERSION = '2.3.0';
+  private static final String SDK_VERSION = '2.3.1';
 
   /**
    * Instantiates a new Watson service.
