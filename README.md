@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/watson-developer-cloud/salesforce-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/salesforce-sdk/)
 [![Slack](http://wdc-slack-inviter.mybluemix.net/badge.svg)](https://wdc-slack-inviter.mybluemix.net)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment.
 
