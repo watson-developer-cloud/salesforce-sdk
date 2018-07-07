@@ -134,28 +134,29 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     }
     String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + HeaderCRLF));
     while (headerEncoded.endsWith('=')) {
-      header+=' ';
+      header += ' ';
       headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + HeaderCRLF));
     }
 
     String footer;
     if (isEndingPart) {
      footer = CRLF + '--' + this.boundary + '--';
-    }else{
+    } else {
      footer = CRLF;
     }
 
     String footerEncoded = EncodingUtil.base64Encode(Blob.valueOf(footer));
 
     Blob bodyBlob = null;
-    String last4Bytes = bodyEncoded.substring(bodyEncoded.length()-4,bodyEncoded.length());
+    String last4Bytes = bodyEncoded.substring(bodyEncoded.length() - 4, bodyEncoded.length());
 
     if (last4Bytes.endsWith('=')) {
       Blob decoded4Bytes = EncodingUtil.base64Decode(last4Bytes);
       HttpRequest tmp = new HttpRequest();
       tmp.setBodyAsBlob(decoded4Bytes);
-      String last4BytesFooter = tmp.getBody()+footer;
-      bodyBlob = EncodingUtil.base64Decode(headerEncoded+bodyEncoded.substring(0,bodyEncoded.length()-4)
+      String last4BytesFooter = tmp.getBody() + footer;
+      bodyBlob = EncodingUtil.base64Decode(headerEncoded
+        + bodyEncoded.substring(0, bodyEncoded.length() - 4)
         + EncodingUtil.base64Encode(Blob.valueOf(last4BytesFooter)));
     } else {
       bodyBlob = EncodingUtil.base64Decode(headerEncoded + bodyEncoded + footerEncoded);
@@ -240,9 +241,9 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
       if (name == null) {
         throw new IBMWatsonServiceExceptions.IllegalArgumentException('name == null');
       }
-      String disposition = 'form-data; name="' +name+'"';
+      String disposition = 'form-data; name="' + name + '"';
       if (String.isNotBlank(filename)) {
-        disposition+='; filename="' +filename+'"';
+        disposition += '; filename="' + filename + '"';
       }
       this.headers.put('Content-Disposition', disposition);
       return create(this.headers, body);
@@ -256,10 +257,10 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
   private static String UUID() {
     Blob b = Crypto.GenerateAESKey(128);
     String h = EncodingUtil.ConvertTohex(b);
-    String UUID = h.substring(0,8) + '-'
-      + h.substring(8,12) + '-'
-      + h.substring(12,16) + '-'
-      + h.substring(16,20) + '-'
+    String UUID = h.substring(0, 8) + '-'
+      + h.substring(8, 12) + '-'
+      + h.substring(12, 16) + '-'
+      + h.substring(16, 20) + '-'
       + h.substring(20);
     return UUID.toUpperCase();
   }
