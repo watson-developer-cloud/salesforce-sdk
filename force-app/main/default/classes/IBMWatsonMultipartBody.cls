@@ -129,9 +129,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
     String header = boundaryCrlf + contentDispositionCrlf + contentTypeCrlf;
 
     String HeaderCRLF = CRLF;
-    if ( !String.isBlank(mimeType) &&
-        (mimeType.equalsIgnoreCase('application/json') ||
-        mimeType.startsWith('text/')) ) {
+    if (!String.isBlank(mimeType)) {
        HeaderCRLF += CRLF;
     }
     String headerEncoded = EncodingUtil.base64Encode(Blob.valueOf(header + HeaderCRLF));
