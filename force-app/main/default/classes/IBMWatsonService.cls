@@ -19,6 +19,10 @@ public abstract class IBMWatsonService {
   private static final String VERSION = 'version';
   private static final String USER_AGENT_FORMAT = 'watson-apis-salesforce-sdk/{0}/({1})';
   private static final String SDK_VERSION = '2.3.2';
+  private static final String AUTH_HEADER_DEPRECATION_MESSAGE = 'Authenticating with the X-Watson-Authorization-Token'
+    + 'header is deprecated. The token continues to work with Cloud Foundry services, but is not supported for '
+    + 'services that use Identity and Access Management (IAM) authentication. For details see the IAM '
+    + 'authentication section in the README.';
 
   /**
    * Instantiates a new Watson service.
@@ -196,7 +200,11 @@ public abstract class IBMWatsonService {
       builder.addHeader(IBMWatsonHttpHeaders.AUTHORIZATION, BEARER + accessToken);
     } else if (getApiKey() == null) {
       if (skipAuthentication) {
-        return; // chosen to skip authentication with the service
+        Map<String, String> currentHeaders = builder.build().getAllHeaders();
+        if (currentHeaders.containsKey(IBMWatsonHttpHeaders.X_WATSON_AUTHORIZATION_TOKEN)) {
+          System.debug(System.LoggingLevel.WARN, AUTH_HEADER_DEPRECATION_MESSAGE);
+        }
+        return;
       }
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('apiKey or username and password were not specified');
     } else {
