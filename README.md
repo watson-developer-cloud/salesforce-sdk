@@ -9,9 +9,9 @@ The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/de
 ## Language Translator v2 deprecation notice
 Language Translator v3 is now available. The v2 Language Translator API will no longer be available after July 31, 2018. To take advantage of the latest service enhancements, migrate to the v3 API. View the [Migrating to Language Translator v3](https://console.bluemix.net/docs/services/language-translator/migrating.html) page for more information.
 
-## Prerequisites
+## Before you begin
 
-Using the Watson services requires creating service instances and getting credentials in IBM Cloud, which you can do [here](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&). This means you will need to create an IBM Cloud account if you do not have one already.
+* You need an [IBM Cloud][ibm-cloud-onboarding] account.
 
 Once you create an account, you can get credentials for the services you want by following these steps:
 
