@@ -33,7 +33,7 @@ public abstract class IBMWatsonService {
   }
 
   private static String buildUserAgent() {
-    ApexClass ac = [Select ApiVersion From ApexClass Where Name = 'IBMWatsonService'];
+    ApexClass ac = [Select ApiVersion From ApexClass Where Name = 'IBMWatsonService' LIMIT 1];
     Organization org = [Select OrganizationType, InstanceName From Organization];
     return String.format(USER_AGENT_FORMAT, new List<String>{SDK_VERSION, 'APEX_API_VERSION=' + ac.ApiVersion + ';ORG_TYPE=' + org.OrganizationType + ';INSTANCE=' + org.InstanceName });
   }
