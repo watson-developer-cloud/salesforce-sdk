@@ -112,7 +112,9 @@ Finally, you can also install or update the SDK using the Ant Build Tool. This m
     Valid service names are all services listed [here](https://console.bluemix.net/catalog/?category=watson) written as one word (e.g. Visual Recognition becomes visualrecognition). The parameter is case-insensitive. To deploy multiple services, just run the command again with the next desired service flag.
 
 ## Authentication
-To access your Watson services through Apex, you'll need to authenticate with your service credentials. There are two ways to do this: [using named credentials](#using-named-credentials) or [specifying credentials in the Apex code](#specifying-credentials-in-the-apex-code)
+To access your Watson services through Apex, you'll need to authenticate with your service credentials. There are two ways to do this: [using named credentials](#using-named-credentials) or [specifying credentials in the Apex code](#specifying-credentials-in-the-apex-code).
+
+**Note:** Previously, it was possible to authenticate using a token in a header called `X-Watson-Authorization-Token`. This method is deprecated. The token continues to work with Cloud Foundry services, but is not supported for services that use Identity and Access Management (IAM) authentication. See [here](#using-iam) for details.
 
 ### Using `Named Credentials`
 
