@@ -389,4 +389,13 @@ private class IBMWatsonServiceTest {
     System.assert(testClass.getHeaders().get('Test-Name').equals('test_val'));
     Test.stopTest();
   }
+
+  static testMethod void testAuthenticationWithApiKeyAsUsername() {
+    Test.startTest();
+    String testApiKey = '12345';
+    TestService testService = new TestService();
+    testService.setUsernameAndPassword('apikey', testApiKey);
+    System.assert(testService.isTokenManagerSet() == true);
+    Test.stopTest();
+  }
 }

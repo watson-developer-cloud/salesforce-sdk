@@ -19,6 +19,7 @@ public abstract class IBMWatsonService {
   private static final String VERSION = 'version';
   private static final String USER_AGENT_FORMAT = 'watson-apis-salesforce-sdk/{0}/({1})';
   private static final String SDK_VERSION = '2.3.2';
+  private static final String APIKEY_AS_USERNAME = 'apikey';
   private static final String AUTH_HEADER_DEPRECATION_MESSAGE = 'Authenticating with the X-Watson-Authorization-Token'
     + 'header is deprecated. The token continues to work with Cloud Foundry services, but is not supported for '
     + 'services that use Identity and Access Management (IAM) authentication. For details see the IAM '
@@ -219,7 +220,14 @@ public abstract class IBMWatsonService {
    * @param password the password
    */
   public void setUsernameAndPassword(final String username, final String password) {
-    apiKey = IBMWatsonCredentialUtils.toBasicAuth(username, password);
+    if (username.equals(APIKEY_AS_USERNAME)) {
+      IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+        .apiKey(password)
+        .build();
+      setIamCredentials(iamOptions);
+    } else {
+      apiKey = IBMWatsonCredentialUtils.toBasicAuth(username, password);
+    }
   }
 
   /**
@@ -291,7 +299,7 @@ public abstract class IBMWatsonService {
    *
    * @return true if the tokenManager has been set
    */
-  protected Boolean isTokenManagerSet() {
+  public Boolean isTokenManagerSet() {
     return tokenManager != null;
   }
 }
