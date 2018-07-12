@@ -179,62 +179,72 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * @param recognizeSessionlessOptions the {@link IBMSpeechToTextV1Models.RecognizeSessionlessOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.SpeechRecognitionResults} with the response
    */
-  public IBMSpeechToTextV1Models.SpeechRecognitionResults recognizeSessionless(IBMSpeechToTextV1Models.RecognizeSessionlessOptions recognizeSessionlessOptions) {
-    IBMWatsonValidator.notNull(recognizeSessionlessOptions, 'recognizeSessionlessOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/recognize');
-    builder.addHeader('Content-Type', recognizeSessionlessOptions.contentType());
-    Map<String, String> requestHeaders = (recognizeSessionlessOptions != null) ? recognizeSessionlessOptions.requestHeaders() : null;
+  public IBMSpeechToTextV1Models.SpeechRecognitionResults recognize(
+    IBMSpeechToTextV1Models.RecognizeOptions recognizeOptions) {
+    IBMWatsonValidator.notNull(recognizeOptions, 'recognizeOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint()
+      + '/v1/recognize');
+
+    builder.addHeader('Content-Type', recognizeOptions.fileContentType());
+    Map<String, String> requestHeaders = (recognizeOptions != null) ? recognizeOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
-    if (recognizeSessionlessOptions.model() != null) {
-      builder.query('model', recognizeSessionlessOptions.model());
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (recognizeOptions.audio() != null) {
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(recognizeOptions.audio(), recognizeOptions.fileContentType());
+      multipartBuilder.addFormDataPart('audio', recognizeOptions.audioFilename(), fileBody);
     }
-    if (recognizeSessionlessOptions.customizationId() != null) {
-      builder.query('customization_id', recognizeSessionlessOptions.customizationId());
+    if (recognizeOptions.continuous() != null) {
+      builder.query('continuous', String.valueOf(recognizeOptions.continuous()));
     }
-    if (recognizeSessionlessOptions.acousticCustomizationId() != null) {
-      builder.query('acoustic_customization_id', recognizeSessionlessOptions.acousticCustomizationId());
+    if (recognizeOptions.maxAlternatives() != null) {
+      builder.query('max_alternatives', String.valueOf(recognizeOptions.maxAlternatives()));
     }
-    if (recognizeSessionlessOptions.baseModelVersion() != null) {
-      builder.query('base_model_version', recognizeSessionlessOptions.baseModelVersion());
+    if (recognizeOptions.timestamps() != null) {
+      builder.query('timestamps', String.valueOf(recognizeOptions.timestamps()));
     }
-    if (recognizeSessionlessOptions.customizationWeight() != null) {
-      builder.query('customization_weight', String.valueOf(recognizeSessionlessOptions.customizationWeight()));
+    if (recognizeOptions.wordConfidence() != null) {
+      builder.query('word_confidence', String.valueOf(recognizeOptions.wordConfidence()));
     }
-    if (recognizeSessionlessOptions.inactivityTimeout() != null) {
-      builder.query('inactivity_timeout', String.valueOf(recognizeSessionlessOptions.inactivityTimeout()));
+    if (recognizeOptions.inactivityTimeout() != null) {
+      builder.query('inactivity_timeout', String.valueOf(recognizeOptions.inactivityTimeout()));
     }
-    if (recognizeSessionlessOptions.keywords() != null) {
-      builder.query('keywords', String.join(recognizeSessionlessOptions.keywords(), ','));
+    if (recognizeOptions.model() != null) {
+      builder.query('model', recognizeOptions.model());
     }
-    if (recognizeSessionlessOptions.keywordsThreshold() != null) {
-      builder.query('keywords_threshold', String.valueOf(recognizeSessionlessOptions.keywordsThreshold()));
+    if (recognizeOptions.interimResults() != null) {
+      builder.query('interim_results', String.valueOf(recognizeOptions.interimResults()));
     }
-    if (recognizeSessionlessOptions.maxAlternatives() != null) {
-      builder.query('max_alternatives', String.valueOf(recognizeSessionlessOptions.maxAlternatives()));
+    if (recognizeOptions.keywords() != null) {
+      builder.query('keywords', String.valueOf(recognizeOptions.keywords()));
     }
-    if (recognizeSessionlessOptions.wordAlternativesThreshold() != null) {
-      builder.query('word_alternatives_threshold', String.valueOf(recognizeSessionlessOptions.wordAlternativesThreshold()));
+    if (recognizeOptions.keywordsThreshold() != null) {
+      builder.query('keywords_threshold', String.valueOf(recognizeOptions.keywordsThreshold()));
     }
-    if (recognizeSessionlessOptions.wordConfidence() != null) {
-      builder.query('word_confidence', String.valueOf(recognizeSessionlessOptions.wordConfidence()));
+    if (recognizeOptions.wordAlternativesThreshold() != null) {
+      builder.query('word_alternatives_threshold', String.valueOf(recognizeOptions.wordAlternativesThreshold()));
     }
-    if (recognizeSessionlessOptions.timestamps() != null) {
-      builder.query('timestamps', String.valueOf(recognizeSessionlessOptions.timestamps()));
+    if (recognizeOptions.profanityFilter() != null) {
+      builder.query('profanity_filter', String.valueOf(recognizeOptions.profanityFilter()));
     }
-    if (recognizeSessionlessOptions.profanityFilter() != null) {
-      builder.query('profanity_filter', String.valueOf(recognizeSessionlessOptions.profanityFilter()));
+    if (recognizeOptions.smartFormatting() != null) {
+      builder.query('smart_formatting', String.valueOf(recognizeOptions.smartFormatting()));
     }
-    if (recognizeSessionlessOptions.smartFormatting() != null) {
-      builder.query('smart_formatting', String.valueOf(recognizeSessionlessOptions.smartFormatting()));
+    if (recognizeOptions.customizationId() != null) {
+      builder.query('customization_id', recognizeOptions.customizationId());
     }
-    if (recognizeSessionlessOptions.speakerLabels() != null) {
-      builder.query('speaker_labels', String.valueOf(recognizeSessionlessOptions.speakerLabels()));
+    if (recognizeOptions.speakerLabels() != null) {
+      builder.query('speaker_labels', String.valueOf(recognizeOptions.speakerLabels()));
     }
-    builder.bodyContent(options.body(), recognizeSessionlessOptions.contentType());
+    if (recognizeOptions.baseModelVersion() != null) {
+      builder.query('base_model_version', recognizeOptions.baseModelVersion());
+    }
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody);
 
     return (IBMSpeechToTextV1Models.SpeechRecognitionResults) createServiceCall(builder.build(), IBMSpeechToTextV1Models.SpeechRecognitionResults.class);
   }
@@ -360,6 +370,14 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (createJobOptions.audio() != null) {
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
+        createJobOptions.audio(), createJobOptions.contentType()
+      );
+      multipartBuilder.addFormDataPart('audio', createJobOptions.audioFilename(), fileBody);
+    }
     if (createJobOptions.model() != null) {
       builder.query('model', createJobOptions.model());
     }
@@ -417,7 +435,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createJobOptions.speakerLabels() != null) {
       builder.query('speaker_labels', String.valueOf(createJobOptions.speakerLabels()));
     }
-    builder.bodyContent(options.body(), createJobOptions.contentType());
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody);
 
     return (IBMSpeechToTextV1Models.RecognitionJob) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RecognitionJob.class);
   }
@@ -1378,10 +1397,19 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (addAudioOptions.audio() != null) {
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
+        addAudioOptions.audio(), addAudioOptions.contentType()
+      );
+      multipartBuilder.addFormDataPart('audio', addAudioOptions.audioFilename(), fileBody);
+    }
     if (addAudioOptions.allowOverwrite() != null) {
       builder.query('allow_overwrite', String.valueOf(addAudioOptions.allowOverwrite()));
     }
-    builder.bodyContent(options.body(), addAudioOptions.contentType());
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody);
 
     createServiceCall(builder.build(), null);
   }
