@@ -814,8 +814,8 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the content_type_serialized_name.
      *
-     * The type of the input: application/json, text/plain, or text/html. A character encoding can be specified by
-     * including a `charset` parameter. For example, 'text/plain;charset=utf-8'.
+     * The type of the input. A character encoding can be specified by including a `charset` parameter. For example,
+     * 'text/plain;charset=utf-8'.
      *
      * @return the content_type_serialized_name
      */
