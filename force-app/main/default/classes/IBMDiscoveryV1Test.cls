@@ -2,6 +2,8 @@
 private class IBMDiscoveryV1Test {
 
   private static final String VERSION = '2018-03-05';
+  private static final String ENVIRONMENT_ID = '5ae96bb9-80e5-43ea-916e-1f3412fbc283';
+  private static final String CONFIGURATION_ID = 'configuration_id';
 
   /**
    *  Test Successfully creating a new environment.
@@ -233,7 +235,7 @@ private class IBMDiscoveryV1Test {
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
     IBMDiscoveryV1Models.UpdateEnvironmentOptions options = new IBMDiscoveryV1Models.UpdateEnvironmentOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .name('test_environment')
       .description('test_environment description')
       .addHeader('Test-Header', 'test_value')
@@ -259,7 +261,7 @@ private class IBMDiscoveryV1Test {
     discovery.setUsernameAndPassword('username', 'password');
     try{
       IBMDiscoveryV1Models.UpdateEnvironmentOptions options = new IBMDiscoveryV1Models.UpdateEnvironmentOptionsBuilder()
-        .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+        .environmentId(ENVIRONMENT_ID)
         .name('')
         .description('test_environment description')
         .addHeader('Test-Header', 'test_value')
@@ -287,7 +289,7 @@ private class IBMDiscoveryV1Test {
     discovery.setUsernameAndPassword('username', 'password');
     List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
     IBMDiscoveryV1Models.ListFieldsOptions options = new IBMDiscoveryV1Models.ListFieldsOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionIds(collectionIds)
       .addHeader('Test-Header', 'test_value')
       .build();
@@ -354,8 +356,8 @@ private class IBMDiscoveryV1Test {
     wordHeading.setStyles(new List<IBMDiscoveryV1Models.WordStyle>{ style });
     word.setHeading(wordHeading);
     conversions.setWord(word);
-    IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+    IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder(ENVIRONMENT_ID)
+      .environmentId(ENVIRONMENT_ID)
       .name('test_environment')
       .description('test_environment description')
       .addEnrichments(enrichment)
@@ -415,9 +417,9 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
-    IBMDiscoveryV1Models.DeleteConfigurationOptions options = new IBMDiscoveryV1Models.DeleteConfigurationOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .configurationId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+    IBMDiscoveryV1Models.DeleteConfigurationOptions options = new IBMDiscoveryV1Models.DeleteConfigurationOptionsBuilder(ENVIRONMENT_ID, CONFIGURATION_ID)
+      .environmentId(ENVIRONMENT_ID)
+      .configurationId(CONFIGURATION_ID)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -439,8 +441,8 @@ private class IBMDiscoveryV1Test {
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
     IBMDiscoveryV1Models.GetConfigurationOptions options = new IBMDiscoveryV1Models.GetConfigurationOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .configurationId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
+      .configurationId(CONFIGURATION_ID)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -464,7 +466,7 @@ private class IBMDiscoveryV1Test {
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
     IBMDiscoveryV1Models.ListConfigurationsOptions options = new IBMDiscoveryV1Models.ListConfigurationsOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -487,10 +489,10 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
-    IBMDiscoveryV1Models.UpdateConfigurationOptions options = new IBMDiscoveryV1Models.UpdateConfigurationOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+    IBMDiscoveryV1Models.UpdateConfigurationOptions options = new IBMDiscoveryV1Models.UpdateConfigurationOptionsBuilder(ENVIRONMENT_ID, CONFIGURATION_ID)
       .name('test_environment')
       .description('test_environment description')
-      .configurationId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .configurationId(CONFIGURATION_ID)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -515,7 +517,7 @@ private class IBMDiscoveryV1Test {
     discovery.setUsernameAndPassword('username', 'password');
     try {
       IBMDiscoveryV1Models.UpdateConfigurationOptions options = new IBMDiscoveryV1Models.UpdateConfigurationOptionsBuilder()
-        .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+        .environmentId(ENVIRONMENT_ID)
         .name('test_environment')
         .description('test_environment description')
         .addHeader('Test-Header', 'test_value')
@@ -541,9 +543,9 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
-    IBMDiscoveryV1Models.CreateCollectionOptions options = new IBMDiscoveryV1Models.CreateCollectionOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .configurationId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+    IBMDiscoveryV1Models.CreateCollectionOptions options = new IBMDiscoveryV1Models.CreateCollectionOptionsBuilder(ENVIRONMENT_ID, CONFIGURATION_ID)
+      .environmentId(ENVIRONMENT_ID)
+      .configurationId(CONFIGURATION_ID)
       .name('test_environment')
       .description('test_environment description')
       .addHeader('Test-Header', 'test_value')
@@ -569,9 +571,9 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
-    IBMDiscoveryV1Models.DeleteCollectionOptions options = new IBMDiscoveryV1Models.DeleteCollectionOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+    IBMDiscoveryV1Models.DeleteCollectionOptions options = new IBMDiscoveryV1Models.DeleteCollectionOptionsBuilder(ENVIRONMENT_ID, CONFIGURATION_ID)
+      .environmentId(ENVIRONMENT_ID)
+      .collectionId(CONFIGURATION_ID)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -593,7 +595,7 @@ private class IBMDiscoveryV1Test {
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
     IBMDiscoveryV1Models.GetCollectionOptions options = new IBMDiscoveryV1Models.GetCollectionOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .addHeader('Test-Header', 'test_value')
       .build();
@@ -638,7 +640,7 @@ private class IBMDiscoveryV1Test {
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
     IBMDiscoveryV1Models.GetCollectionOptions options = new IBMDiscoveryV1Models.GetCollectionOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .addHeader('Test-Header', 'test_value')
       .build();
@@ -683,7 +685,7 @@ private class IBMDiscoveryV1Test {
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
     IBMDiscoveryV1Models.ListCollectionsOptions options = new IBMDiscoveryV1Models.ListCollectionsOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -706,7 +708,7 @@ private class IBMDiscoveryV1Test {
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
     IBMDiscoveryV1Models.UpdateCollectionOptions options = new IBMDiscoveryV1Models.UpdateCollectionOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .name('test_environment')
       .description('test_environment description')
@@ -734,7 +736,7 @@ private class IBMDiscoveryV1Test {
     discovery.setUsernameAndPassword('username', 'password');
     try {
       IBMDiscoveryV1Models.UpdateCollectionOptions options = new IBMDiscoveryV1Models.UpdateCollectionOptionsBuilder()
-        .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+        .environmentId(ENVIRONMENT_ID)
         .name('test_environment')
         .description('test_environment description')
         .addHeader('Test-Header', 'test_value')
@@ -762,7 +764,7 @@ private class IBMDiscoveryV1Test {
     discovery.setUsernameAndPassword('username', 'password');
     List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
     IBMDiscoveryV1Models.ListCollectionFieldsOptions options = new IBMDiscoveryV1Models.ListCollectionFieldsOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .addHeader('Test-Header', 'test_value')
       .build();
@@ -786,8 +788,8 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
-    IBMDiscoveryV1Models.DeleteDocumentOptions options = new IBMDiscoveryV1Models.DeleteDocumentOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+    IBMDiscoveryV1Models.DeleteDocumentOptions options = new IBMDiscoveryV1Models.DeleteDocumentOptionsBuilder(ENVIRONMENT_ID, '5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .documentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .addHeader('Test-Header', 'test_value')
@@ -811,7 +813,7 @@ private class IBMDiscoveryV1Test {
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
     IBMDiscoveryV1Models.GetDocumentStatusOptions options = new IBMDiscoveryV1Models.GetDocumentStatusOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .documentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .addHeader('Test-Header', 'test_value')
@@ -858,7 +860,7 @@ private class IBMDiscoveryV1Test {
     discovery.setUsernameAndPassword('username', 'password');
     List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
     IBMDiscoveryV1Models.FederatedQueryOptions options = new IBMDiscoveryV1Models.FederatedQueryOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionIds(collectionIds)
       .returnField(collectionIds)
       .sortField(collectionIds)
@@ -889,7 +891,7 @@ private class IBMDiscoveryV1Test {
     discovery.setUsernameAndPassword('username', 'password');
     List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
     IBMDiscoveryV1Models.FederatedQueryNoticesOptions options = new IBMDiscoveryV1Models.FederatedQueryNoticesOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .addCollectionIds('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .collectionIds(collectionIds)
       .addReturn('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
@@ -998,7 +1000,7 @@ private class IBMDiscoveryV1Test {
     discovery.setUsernameAndPassword('username', 'password');
     List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
     IBMDiscoveryV1Models.QueryOptions options = new IBMDiscoveryV1Models.QueryOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .returnField(collectionIds)
       .sortField(collectionIds)
@@ -1030,7 +1032,7 @@ private class IBMDiscoveryV1Test {
     discovery.setUsernameAndPassword('username', 'password');
     List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
     IBMDiscoveryV1Models.QueryNoticesOptions options = new IBMDiscoveryV1Models.QueryNoticesOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .returnField(collectionIds)
       .sortField(collectionIds)
@@ -1078,8 +1080,8 @@ private class IBMDiscoveryV1Test {
     te.setDocumentId('string');
     te.setCrossReference('string');
     te.setRelevance(0);
-    IBMDiscoveryV1Models.AddTrainingDataOptions options = new IBMDiscoveryV1Models.AddTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+    IBMDiscoveryV1Models.AddTrainingDataOptions options = new IBMDiscoveryV1Models.AddTrainingDataOptionsBuilder(ENVIRONMENT_ID, '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .naturalLanguageQuery('en')
       .filter('test')
@@ -1116,8 +1118,8 @@ private class IBMDiscoveryV1Test {
     te.setDocumentId('string');
     te.setCrossReference('string');
     te.setRelevance(0);
-    IBMDiscoveryV1Models.CreateTrainingExampleOptions options = new IBMDiscoveryV1Models.CreateTrainingExampleOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+    IBMDiscoveryV1Models.CreateTrainingExampleOptions options = new IBMDiscoveryV1Models.CreateTrainingExampleOptionsBuilder(ENVIRONMENT_ID, '5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('en')
       .trainingExample(te)
@@ -1146,8 +1148,8 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
-    IBMDiscoveryV1Models.DeleteAllTrainingDataOptions options = new IBMDiscoveryV1Models.DeleteAllTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+    IBMDiscoveryV1Models.DeleteAllTrainingDataOptions options = new IBMDiscoveryV1Models.DeleteAllTrainingDataOptionsBuilder(ENVIRONMENT_ID, '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .addHeader('Test-Header', 'test_value')
       .build();
@@ -1169,8 +1171,8 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
-    IBMDiscoveryV1Models.DeleteTrainingDataOptions options = new IBMDiscoveryV1Models.DeleteTrainingDataOptionsBuilder('5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+    IBMDiscoveryV1Models.DeleteTrainingDataOptions options = new IBMDiscoveryV1Models.DeleteTrainingDataOptionsBuilder(ENVIRONMENT_ID, '5ae96bb9-80e5-43ea-916e-1f3412fbc283', '5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .addHeader('Test-Header', 'test_value')
@@ -1194,7 +1196,7 @@ private class IBMDiscoveryV1Test {
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
     IBMDiscoveryV1Models.GetTrainingDataOptions options = new IBMDiscoveryV1Models.GetTrainingDataOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .addHeader('Test-Header', 'test_value')
@@ -1222,7 +1224,7 @@ private class IBMDiscoveryV1Test {
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
     IBMDiscoveryV1Models.GetTrainingExampleOptions options = new IBMDiscoveryV1Models.GetTrainingExampleOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .exampleId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
@@ -1250,7 +1252,7 @@ private class IBMDiscoveryV1Test {
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
     IBMDiscoveryV1Models.ListTrainingDataOptions options = new IBMDiscoveryV1Models.ListTrainingDataOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .addHeader('Test-Header', 'test_value')
       .build();
@@ -1278,7 +1280,7 @@ private class IBMDiscoveryV1Test {
     discovery.setUsernameAndPassword('username', 'password');
     List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
     IBMDiscoveryV1Models.UpdateTrainingExampleOptions options = new IBMDiscoveryV1Models.UpdateTrainingExampleOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('en')
       .exampleId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
@@ -1446,7 +1448,7 @@ private class IBMDiscoveryV1Test {
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
     IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .configuration(configuration)
       .addHeader('Test-Header', 'test_value')
       .build();
@@ -1517,7 +1519,7 @@ private class IBMDiscoveryV1Test {
     discovery.setUsernameAndPassword('username', 'password');
     String text = '5ae96bb9-80e5-43ea-916e-1f3412fbc283';
     IBMDiscoveryV1Models.DeleteTrainingExampleOptions options = new IBMDiscoveryV1Models.DeleteTrainingExampleOptionsBuilder('test', 'test', 'test', 'test')
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .queryId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .exampleId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
@@ -1585,7 +1587,7 @@ private class IBMDiscoveryV1Test {
       .contentType('text/plain')
       .build();
     IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptions options = new IBMDiscoveryV1Models.TestConfigurationInEnvironmentOptionsBuilder()
-      .environmentId('environment_id')
+      .environmentId(ENVIRONMENT_ID)
       .configurationId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .file(testfile)
       .filename('test.txt')
@@ -1618,7 +1620,7 @@ private class IBMDiscoveryV1Test {
       .contentType('text/plain')
       .build();
     IBMDiscoveryV1Models.UpdateDocumentOptions options = new IBMDiscoveryV1Models.UpdateDocumentOptionsBuilder()
-      .environmentId('environment_id')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('collection_id')
       .documentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .file(testfile)
@@ -1738,7 +1740,7 @@ private class IBMDiscoveryV1Test {
     entity.setType('type');
     entity.setText('text');
     IBMDiscoveryV1Models.QueryEntitiesOptions options = new IBMDiscoveryV1Models.QueryEntitiesOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .context(context)
       .count(10)
@@ -1787,7 +1789,7 @@ private class IBMDiscoveryV1Test {
     filter.setEntityTypes(filterType);
     filter.setRelationTypes(filterType);
     IBMDiscoveryV1Models.QueryRelationsOptions options = new IBMDiscoveryV1Models.QueryRelationsOptionsBuilder()
-      .environmentId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .addEntities(entity)
       .context(context)
@@ -1836,6 +1838,167 @@ private class IBMDiscoveryV1Test {
     //you can add more attributes using following builder method. This step is not necessary
     options = options.newBuilder().build();
     discovery.deleteUserData(options);
+    Test.stopTest();
+  }
+
+  static testMethod void testCreateCredentials() {
+    String body = IBMWatsonMockResponses.credentials();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String sourceType = 'salesforce';
+    String credentialType = 'username_password';
+    String url = 'login.salesforce.com';
+    String username = 'user@email.address';
+
+    IBMDiscoveryV1Models.CredentialDetails details = new IBMDiscoveryV1Models.CredentialDetails();
+    details.setClientId('client_id');
+    details.setClientSecret('client_secret');
+    details.setCredentialType(credentialType);
+    details.setEnterpriseId('enterprise_id');
+    details.setOrganizationUrl('organization_url');
+    details.setPassphrase('passphrase');
+    details.setPassword('password');
+    details.setPrivateKey('private_key');
+    details.setPublicKeyId('public_key_id');
+    details.setSiteCollectionPath('site_collection_path');
+    details.setUrl(url);
+    details.setUsername(username);
+    IBMDiscoveryV1Models.Credentials credentials = new IBMDiscoveryV1Models.Credentials();
+    credentials.setSourceType(sourceType);
+    credentials.setCredentialDetails(details);
+
+    IBMDiscoveryV1Models.CreateCredentialsOptions options = new IBMDiscoveryV1Models.CreateCredentialsOptionsBuilder()
+      .environmentId(ENVIRONMENT_ID)
+      .sourceType(sourceType)
+      .credentials(credentials)
+      .credentialDetails(details)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+    IBMDiscoveryV1Models.Credentials credentialsResponse = discovery.createCredentials(options);
+
+    System.assertEquals(sourceType, credentialsResponse.getSourceType());
+    System.assertEquals(credentialType, credentialsResponse.getCredentialDetails().getCredentialType());
+    System.assertEquals(url, credentialsResponse.getCredentialDetails().getUrl());
+    System.assertEquals(username, credentialsResponse.getCredentialDetails().getUsername());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testDeleteCredentials() {
+    String body='';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    IBMDiscoveryV1Models.DeleteCredentialsOptions options = new IBMDiscoveryV1Models.DeleteCredentialsOptionsBuilder()
+      .environmentId(ENVIRONMENT_ID)
+      .credentialId('credential_id')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+    discovery.deleteCredentials(options);
+
+    Test.stopTest();
+  }
+
+  static testMethod void testGetCredentials() {
+    String body = IBMWatsonMockResponses.credentials();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    IBMDiscoveryV1Models.GetCredentialsOptions options = new IBMDiscoveryV1Models.GetCredentialsOptionsBuilder()
+      .environmentId(ENVIRONMENT_ID)
+      .credentialId('credential_id')
+      .addHeader('Test-Header', 'test_value')
+      .build();
+    IBMDiscoveryV1Models.Credentials credentialsResponse = discovery.getCredentials(options);
+
+    System.assert(credentialsResponse != null);
+
+    Test.stopTest();
+  }
+
+  static testMethod void testListCredentials() {
+    String body = IBMWatsonMockResponses.credentialList();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    IBMDiscoveryV1Models.ListCredentialsOptions options = new IBMDiscoveryV1Models.ListCredentialsOptionsBuilder()
+      .environmentId(ENVIRONMENT_ID)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+    IBMDiscoveryV1Models.CredentialsList credentialsResponse = discovery.listCredentials(options);
+
+    System.assert(credentialsResponse != null);
+
+    Test.stopTest();
+  }
+
+  static testMethod void testUpdateCredentials() {
+    String body = IBMWatsonMockResponses.credentials();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String sourceType = 'salesforce';
+    String credentialType = 'username_password';
+    String url = 'login.salesforce.com';
+    String username = 'user@email.address';
+
+    IBMDiscoveryV1Models.CredentialDetails newDetails = new IBMDiscoveryV1Models.CredentialDetails();
+    newDetails.setClientId('client_id');
+    newDetails.setClientSecret('client_secret');
+    newDetails.setCredentialType(credentialType);
+    newDetails.setEnterpriseId('enterprise_id');
+    newDetails.setOrganizationUrl('organization_url');
+    newDetails.setPassphrase('passphrase');
+    newDetails.setPassword('password');
+    newDetails.setPrivateKey('private_key');
+    newDetails.setPublicKeyId('public_key_id');
+    newDetails.setSiteCollectionPath('site_collection_path');
+    newDetails.setUrl(url);
+    newDetails.setUsername(username);
+    IBMDiscoveryV1Models.Credentials newCredentials = new IBMDiscoveryV1Models.Credentials();
+    newCredentials.setSourceType(sourceType);
+    newCredentials.setCredentialDetails(newDetails);
+
+    IBMDiscoveryV1Models.UpdateCredentialsOptions options = new IBMDiscoveryV1Models.UpdateCredentialsOptionsBuilder()
+      .environmentId(ENVIRONMENT_ID)
+      .credentialId('credential_id')
+      .sourceType(sourceType)
+      .credentials(newCredentials)
+      .credentialDetails(newDetails)
+      .build();
+    IBMDiscoveryV1Models.Credentials credentialsResponse = discovery.updateCredentials(options);
+
+    System.assertEquals(sourceType, credentialsResponse.getSourceType());
+    System.assertEquals(credentialType, credentialsResponse.getCredentialDetails().getCredentialType());
+    System.assertEquals(url, credentialsResponse.getCredentialDetails().getUrl());
+    System.assertEquals(username, credentialsResponse.getCredentialDetails().getUsername());
+
     Test.stopTest();
   }
 }
