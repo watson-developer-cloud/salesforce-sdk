@@ -942,14 +942,14 @@ public with sharing class IBMDiscoveryV1FTests {
     String sourceType = 'salesforce';
     String credentialType = 'username_password';
     String url = 'https://login.salesforce.com';
-    String username = 'test@username.com';
-    String password = 'test_password';
+    String credentialsUsername = 'test@username.com';
+    String credentialsPassword = 'test_password';
 
     IBMDiscoveryV1Models.CredentialDetails credentialDetails = new IBMDiscoveryV1Models.CredentialDetails();
     credentialDetails.setCredentialType(credentialType);
     credentialDetails.setUrl(url);
-    credentialDetails.setUsername(username);
-    credentialDetails.setPassword(password);
+    credentialDetails.setUsername(credentialsUsername);
+    credentialDetails.setPassword(credentialsPassword);
     IBMDiscoveryV1Models.Credentials credentials = new IBMDiscoveryV1Models.Credentials();
     credentials.setSourceType(sourceType);
     credentials.setCredentialDetails(credentialDetails);
@@ -965,8 +965,8 @@ public with sharing class IBMDiscoveryV1FTests {
     IBMDiscoveryV1Models.CredentialDetails updatedDetails = new IBMDiscoveryV1Models.CredentialDetails();
     updatedDetails.setCredentialType(credentialType);
     updatedDetails.setUrl(newUrl);
-    updatedDetails.setUsername(username);
-    updatedDetails.setPassword(password);
+    updatedDetails.setUsername(credentialsUsername);
+    updatedDetails.setPassword(credentialsPassword);
 
     IBMDiscoveryV1Models.UpdateCredentialsOptions updateOptions = new IBMDiscoveryV1Models.UpdateCredentialsOptionsBuilder()
       .environmentId(environmentId)
