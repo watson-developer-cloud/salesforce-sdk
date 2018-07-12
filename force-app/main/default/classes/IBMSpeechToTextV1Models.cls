@@ -544,6 +544,7 @@ public class IBMSpeechToTextV1Models {
     private IBMWatsonFile corpus_file_serialized_name;
     private String corpus_filename_serialized_name;
     private Boolean allow_overwrite_serialized_name;
+    private String corpus_file_content_type_serialized_name;
     /**
      * Gets the customization_id_serialized_name.
      *
@@ -601,6 +602,16 @@ public class IBMSpeechToTextV1Models {
     public Boolean allowOverwrite() {
       return allow_overwrite_serialized_name;
     }
+    /**
+     * Gets the corpus_file_content_type_serialized_name.
+     *
+     * The content type of corpus_file.
+     *
+     * @return the corpus_file_content_type_serialized_name
+     */
+    public String corpusFileContentType() {
+      return corpus_file_content_type_serialized_name;
+    }
     private AddCorpusOptions(AddCorpusOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.corpus_name_serialized_name, 'corpus_name_serialized_name cannot be empty');
@@ -610,6 +621,7 @@ public class IBMSpeechToTextV1Models {
       corpus_file_serialized_name = builder.corpus_file_serialized_name;
       corpus_filename_serialized_name = builder.corpus_filename_serialized_name;
       allow_overwrite_serialized_name = builder.allow_overwrite_serialized_name;
+      corpus_file_content_type_serialized_name = builder.corpus_file_content_type_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -633,6 +645,7 @@ public class IBMSpeechToTextV1Models {
     private IBMWatsonFile corpus_file_serialized_name;
     private String corpus_filename_serialized_name;
     private Boolean allow_overwrite_serialized_name;
+    private String corpus_file_content_type_serialized_name;
 
     private AddCorpusOptionsBuilder(AddCorpusOptions addCorpusOptions) {
       customization_id_serialized_name = addCorpusOptions.customization_id_serialized_name;
@@ -640,6 +653,7 @@ public class IBMSpeechToTextV1Models {
       corpus_file_serialized_name = addCorpusOptions.corpus_file_serialized_name;
       corpus_filename_serialized_name = addCorpusOptions.corpus_filename_serialized_name;
       allow_overwrite_serialized_name = addCorpusOptions.allow_overwrite_serialized_name;
+      corpus_file_content_type_serialized_name = addCorpusOptions.corpus_file_content_type_serialized_name;
       this.requestHeaders.putAll(addCorpusOptions.requestHeaders());
     }
 
@@ -723,6 +737,17 @@ public class IBMSpeechToTextV1Models {
      */
     public AddCorpusOptionsBuilder allowOverwrite(Boolean allowOverwrite) {
       this.allow_overwrite_serialized_name = allowOverwrite;
+      return this;
+    }
+
+    /**
+     * Set the corpus_file_content_type_serialized_name.
+     *
+     * @param corpusFileContentType the corpusFileContentType
+     * @return the AddCorpusOptions builder
+     */
+    public AddCorpusOptionsBuilder corpusFileContentType(String corpusFileContentType) {
+      this.corpus_file_content_type_serialized_name = corpusFileContentType;
       return this;
     }
 
