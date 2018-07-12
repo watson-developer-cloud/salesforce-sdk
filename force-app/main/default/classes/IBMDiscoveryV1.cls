@@ -182,8 +182,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Update an environment.
    *
-   * Updates an environment. The environment's `name` and  `description` parameters can be changed. You must specify a
-   * `name` for the environment.
+   * Updates an environment. The environment's **name** and  **description** parameters can be changed. You must specify
+   * a **name** for the environment.
    *
    * @param updateEnvironmentOptions the {@link IBMDiscoveryV1Models.UpdateEnvironmentOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.Environment} with the response
@@ -215,7 +215,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    *
    * Creates a new configuration.
    *
-   * If the input configuration contains the `configuration_id`, `created`, or `updated` properties, then they are
+   * If the input configuration contains the **configuration_id**, **created**, or **updated** properties, then they are
    * ignored and overridden by the system, and an error is not returned so that the overridden fields do not need to be
    * removed when copying a configuration.
    *
@@ -251,6 +251,9 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     if (createConfigurationOptions.normalizations() != null) {
       contentJson.put('normalizations', createConfigurationOptions.normalizations());
+    }
+    if (createConfigurationOptions.source() != null) {
+      contentJson.put('source', createConfigurationOptions.source());
     }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
@@ -332,9 +335,9 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    *
    * Replaces an existing configuration.
    *   * Completely replaces the original configuration.
-   *   * The `configuration_id`, `updated`, and `created` fields are accepted in the request, but they are ignored, and
-   * an error is not generated. It is also acceptable for users to submit an updated configuration with none of the
-   * three properties.
+   *   * The **configuration_id**, **updated**, and **created** fields are accepted in the request, but they are
+   * ignored, and an error is not generated. It is also acceptable for users to submit an updated configuration with
+   * none of the three properties.
    *   * Documents are processed with a snapshot of the configuration as it was at the time the document was submitted
    * to be ingested. This means that already submitted documents will not see any updates made to the configuration.
    *
@@ -366,6 +369,9 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     if (updateConfigurationOptions.normalizations() != null) {
       contentJson.put('normalizations', updateConfigurationOptions.normalizations());
+    }
+    if (updateConfigurationOptions.source() != null) {
+      contentJson.put('source', updateConfigurationOptions.source());
     }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
@@ -646,15 +652,15 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    *
    * Add a document to a collection with optional metadata.
    *
-   *   * The `version` query parameter is still required.
+   *   * The **version** query parameter is still required.
    *
    *   * Returns immediately after the system has accepted the document for processing.
    *
    *   * The user must provide document content, metadata, or both. If the request is missing both document content and
    * metadata, it is rejected.
    *
-   *   * The user can set the `Content-Type` parameter on the `file` part to indicate the media type of the document. If
-   * the `Content-Type` parameter is missing or is one of the generic media types (for example,
+   *   * The user can set the **Content-Type** parameter on the **file** part to indicate the media type of the
+   * document. If the **Content-Type** parameter is missing or is one of the generic media types (for example,
    * `application/octet-stream`), then the service attempts to automatically detect the document's media type.
    *
    *   * The following field names are reserved and will be filtered out if present after normalization: `id`, `score`,
@@ -837,6 +843,18 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     if (federatedQueryOptions.similarFields() != null) {
       builder.query('similar.fields', String.join(federatedQueryOptions.similarFields(), ','));
+    }
+    if (federatedQueryOptions.passages() != null) {
+      builder.query('passages', String.valueOf(federatedQueryOptions.passages()));
+    }
+    if (federatedQueryOptions.passagesFields() != null) {
+      builder.query('passages.fields', String.join(federatedQueryOptions.passagesFields(), ','));
+    }
+    if (federatedQueryOptions.passagesCount() != null) {
+      builder.query('passages.count', String.valueOf(federatedQueryOptions.passagesCount()));
+    }
+    if (federatedQueryOptions.passagesCharacters() != null) {
+      builder.query('passages.characters', String.valueOf(federatedQueryOptions.passagesCharacters()));
     }
 
     return (IBMDiscoveryV1Models.QueryResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.QueryResponse.class);
@@ -1424,6 +1442,142 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
 
     createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * Create credentials.
+   *
+   * Creates a set of credentials to connect to a remote source. Created credentials are used in a configuration to
+   * associate a collection with the remote source.
+   *
+   * **Note:** All credentials are sent over an encrypted connection and encrypted at rest.
+   *
+   * @param createCredentialsOptions the {@link IBMDiscoveryV1Models.CreateCredentialsOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.Credentials} with the response
+   */
+  public IBMDiscoveryV1Models.Credentials createCredentials(IBMDiscoveryV1Models.CreateCredentialsOptions createCredentialsOptions) {
+    IBMWatsonValidator.notNull(createCredentialsOptions, 'createCredentialsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/credentials', new String[]{ createCredentialsOptions.environmentId() }));
+    Map<String, String> requestHeaders = (createCredentialsOptions != null) ? createCredentialsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    if (createCredentialsOptions.sourceType() != null) {
+      contentJson.put('source_type', createCredentialsOptions.sourceType());
+    }
+    if (createCredentialsOptions.credentialDetails() != null) {
+      contentJson.put('credential_details', createCredentialsOptions.credentialDetails());
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
+
+    return (IBMDiscoveryV1Models.Credentials) createServiceCall(builder.build(), IBMDiscoveryV1Models.Credentials.class);
+  }
+
+  /**
+   * Delete credentials.
+   *
+   * Deletes a set of stored credentials from your Discovery instance.
+   *
+   * @param deleteCredentialsOptions the {@link IBMDiscoveryV1Models.DeleteCredentialsOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteCredentials(IBMDiscoveryV1Models.DeleteCredentialsOptions deleteCredentialsOptions) {
+    IBMWatsonValidator.notNull(deleteCredentialsOptions, 'deleteCredentialsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/credentials/{1}', new String[]{ deleteCredentialsOptions.environmentId(), deleteCredentialsOptions.credentialId() }));
+    Map<String, String> requestHeaders = (deleteCredentialsOptions != null) ? deleteCredentialsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * View Credentials.
+   *
+   * Returns details about the specified credentials.
+   *
+   *  **Note:** Secure credential information such as a password or SSH key is never returned and must be obtained from
+   * the source system.
+   *
+   * @param getCredentialsOptions the {@link IBMDiscoveryV1Models.GetCredentialsOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.Credentials} with the response
+   */
+  public IBMDiscoveryV1Models.Credentials getCredentials(IBMDiscoveryV1Models.GetCredentialsOptions getCredentialsOptions) {
+    IBMWatsonValidator.notNull(getCredentialsOptions, 'getCredentialsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/credentials/{1}', new String[]{ getCredentialsOptions.environmentId(), getCredentialsOptions.credentialId() }));
+    Map<String, String> requestHeaders = (getCredentialsOptions != null) ? getCredentialsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    return (IBMDiscoveryV1Models.Credentials) createServiceCall(builder.build(), IBMDiscoveryV1Models.Credentials.class);
+  }
+
+  /**
+   * List credentials.
+   *
+   * List all the source credentials that have been created for this service instance.
+   *
+   *  **Note:**  All credentials are sent over an encrypted connection and encrypted at rest.
+   *
+   * @param listCredentialsOptions the {@link IBMDiscoveryV1Models.ListCredentialsOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.CredentialsList} with the response
+   */
+  public IBMDiscoveryV1Models.CredentialsList listCredentials(IBMDiscoveryV1Models.ListCredentialsOptions listCredentialsOptions) {
+    IBMWatsonValidator.notNull(listCredentialsOptions, 'listCredentialsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/credentials', new String[]{ listCredentialsOptions.environmentId() }));
+    Map<String, String> requestHeaders = (listCredentialsOptions != null) ? listCredentialsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    return (IBMDiscoveryV1Models.CredentialsList) createServiceCall(builder.build(), IBMDiscoveryV1Models.CredentialsList.class);
+  }
+
+  /**
+   * Update credentials.
+   *
+   * Updates an existing set of source credentials.
+   *
+   * **Note:** All credentials are sent over an encrypted connection and encrypted at rest.
+   *
+   * @param updateCredentialsOptions the {@link IBMDiscoveryV1Models.UpdateCredentialsOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.Credentials} with the response
+   */
+  public IBMDiscoveryV1Models.Credentials updateCredentials(IBMDiscoveryV1Models.UpdateCredentialsOptions updateCredentialsOptions) {
+    IBMWatsonValidator.notNull(updateCredentialsOptions, 'updateCredentialsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getEndPoint() + String.format('/v1/environments/{0}/credentials/{1}', new String[]{ updateCredentialsOptions.environmentId(), updateCredentialsOptions.credentialId() }));
+    Map<String, String> requestHeaders = (updateCredentialsOptions != null) ? updateCredentialsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    if (updateCredentialsOptions.sourceType() != null) {
+      contentJson.put('source_type', updateCredentialsOptions.sourceType());
+    }
+    if (updateCredentialsOptions.credentialDetails() != null) {
+      contentJson.put('credential_details', updateCredentialsOptions.credentialDetails());
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
+
+    return (IBMDiscoveryV1Models.Credentials) createServiceCall(builder.build(), IBMDiscoveryV1Models.Credentials.class);
   }
 
 }

@@ -539,6 +539,7 @@ public class IBMDiscoveryV1Models {
     private DocumentCounts document_counts_serialized_name;
     private CollectionDiskUsage disk_usage_serialized_name;
     private TrainingStatus training_status_serialized_name;
+    private SourceStatus source_crawl_serialized_name;
     /**
      * Gets the collection_id_serialized_name.
      *
@@ -663,6 +664,15 @@ public class IBMDiscoveryV1Models {
     public TrainingStatus getTrainingStatus() {
       return training_status_serialized_name;
     }
+    /**
+     * Gets the source_crawl_serialized_name.
+     *
+     * @return the source_crawl_serialized_name
+     */
+    @AuraEnabled
+    public SourceStatus getSourceCrawl() {
+      return source_crawl_serialized_name;
+    }
 
     /**
      * Sets the name_serialized_name.
@@ -727,6 +737,15 @@ public class IBMDiscoveryV1Models {
       this.training_status_serialized_name = trainingStatus;
     }
 
+    /**
+     * Sets the source_crawl_serialized_name.
+     *
+     * @param sourceCrawl the new sourceCrawl
+     */
+    public void setSourceCrawl(final SourceStatus sourceCrawl) {
+      this.source_crawl_serialized_name = sourceCrawl;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -746,6 +765,10 @@ public class IBMDiscoveryV1Models {
       // calling custom deserializer for training_status_serialized_name
       TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
+
+      // calling custom deserializer for source_crawl_serialized_name
+      SourceStatus newSourceCrawl = (SourceStatus) new SourceStatus().deserialize(JSON.serialize(ret.getSourceCrawl()), (Map<String, Object>) jsonMap.get('source_crawl_serialized_name'), SourceStatus.class);
+      ret.setSourceCrawl(newSourceCrawl);
 
       return ret;
     }
@@ -831,6 +854,7 @@ public class IBMDiscoveryV1Models {
     private Conversions conversions_serialized_name;
     private List<Enrichment> enrichments_serialized_name;
     private List<NormalizationOperation> normalizations_serialized_name;
+    private Source source_serialized_name;
     /**
      * Gets the configuration_id_serialized_name.
      *
@@ -920,6 +944,15 @@ public class IBMDiscoveryV1Models {
     public List<NormalizationOperation> getNormalizations() {
       return normalizations_serialized_name;
     }
+    /**
+     * Gets the source_serialized_name.
+     *
+     * @return the source_serialized_name
+     */
+    @AuraEnabled
+    public Source getSource() {
+      return source_serialized_name;
+    }
 
     /**
      * Sets the name_serialized_name.
@@ -966,6 +999,15 @@ public class IBMDiscoveryV1Models {
       this.normalizations_serialized_name = normalizations;
     }
 
+    /**
+     * Sets the source_serialized_name.
+     *
+     * @param source the new source
+     */
+    public void setSource(final Source source) {
+      this.source_serialized_name = source;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -1002,6 +1044,10 @@ public class IBMDiscoveryV1Models {
         }
         ret.setNormalizations(newNormalizations);
       }
+
+      // calling custom deserializer for source_serialized_name
+      Source newSource = (Source) new Source().deserialize(JSON.serialize(ret.getSource()), (Map<String, Object>) jsonMap.get('source_serialized_name'), Source.class);
+      ret.setSource(newSource);
 
       return ret;
     }
@@ -1362,6 +1408,7 @@ public class IBMDiscoveryV1Models {
     private Conversions conversions_serialized_name;
     private List<Enrichment> enrichments_serialized_name;
     private List<NormalizationOperation> normalizations_serialized_name;
+    private Source source_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
      *
@@ -1423,6 +1470,14 @@ public class IBMDiscoveryV1Models {
     public List<NormalizationOperation> normalizations() {
       return normalizations_serialized_name;
     }
+    /**
+     * Gets the source_serialized_name.
+     *
+     * @return the source_serialized_name
+     */
+    public Source source() {
+      return source_serialized_name;
+    }
     private CreateConfigurationOptions(CreateConfigurationOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       environment_id_serialized_name = builder.environment_id_serialized_name;
@@ -1431,6 +1486,7 @@ public class IBMDiscoveryV1Models {
       conversions_serialized_name = builder.conversions_serialized_name;
       enrichments_serialized_name = builder.enrichments_serialized_name;
       normalizations_serialized_name = builder.normalizations_serialized_name;
+      source_serialized_name = builder.source_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1455,6 +1511,7 @@ public class IBMDiscoveryV1Models {
     private Conversions conversions_serialized_name;
     private List<Enrichment> enrichments_serialized_name;
     private List<NormalizationOperation> normalizations_serialized_name;
+    private Source source_serialized_name;
 
     private CreateConfigurationOptionsBuilder(CreateConfigurationOptions createConfigurationOptions) {
       environment_id_serialized_name = createConfigurationOptions.environment_id_serialized_name;
@@ -1463,6 +1520,7 @@ public class IBMDiscoveryV1Models {
       conversions_serialized_name = createConfigurationOptions.conversions_serialized_name;
       enrichments_serialized_name = createConfigurationOptions.enrichments_serialized_name;
       normalizations_serialized_name = createConfigurationOptions.normalizations_serialized_name;
+      source_serialized_name = createConfigurationOptions.source_serialized_name;
       this.requestHeaders.putAll(createConfigurationOptions.requestHeaders());
     }
 
@@ -1589,6 +1647,17 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
+     * Set the source_serialized_name.
+     *
+     * @param source the source
+     * @return the CreateConfigurationOptions builder
+     */
+    public CreateConfigurationOptionsBuilder source(Source source) {
+      this.source_serialized_name = source;
+      return this;
+    }
+
+    /**
      * Set the configuration.
      *
      * @param configuration the configuration
@@ -1600,6 +1669,7 @@ public class IBMDiscoveryV1Models {
       this.conversions_serialized_name = configuration.getConversions();
       this.enrichments_serialized_name = configuration.getEnrichments();
       this.normalizations_serialized_name = configuration.getNormalizations();
+      this.source_serialized_name = configuration.getSource();
       return this;
     }
 
@@ -1611,6 +1681,160 @@ public class IBMDiscoveryV1Models {
      * @return the CreateConfigurationOptions builder
      */
     public CreateConfigurationOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The createCredentials options.
+   */
+  public class CreateCredentialsOptions extends IBMWatsonOptionsModel {
+    private String environment_id_serialized_name;
+    private String source_type_serialized_name;
+    private CredentialDetails credential_details_serialized_name;
+    /**
+     * Gets the environment_id_serialized_name.
+     *
+     * The ID of the environment.
+     *
+     * @return the environment_id_serialized_name
+     */
+    public String environmentId() {
+      return environment_id_serialized_name;
+    }
+    /**
+     * Gets the source_type_serialized_name.
+     *
+     * The source that this credentials object connects to.
+     * -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
+     * -  `salesforce` indicates the credentials are used to connect to Salesforce.
+     * -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
+     *
+     * @return the source_type_serialized_name
+     */
+    public String sourceType() {
+      return source_type_serialized_name;
+    }
+    /**
+     * Gets the credential_details_serialized_name.
+     *
+     * @return the credential_details_serialized_name
+     */
+    public CredentialDetails credentialDetails() {
+      return credential_details_serialized_name;
+    }
+    private CreateCredentialsOptions(CreateCredentialsOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
+      environment_id_serialized_name = builder.environment_id_serialized_name;
+      source_type_serialized_name = builder.source_type_serialized_name;
+      credential_details_serialized_name = builder.credential_details_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a CreateCredentialsOptions builder
+     */
+    public CreateCredentialsOptionsBuilder newBuilder() {
+      return new CreateCredentialsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * CreateCredentialsOptions Builder.
+   */
+  public class CreateCredentialsOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environment_id_serialized_name;
+    private String source_type_serialized_name;
+    private CredentialDetails credential_details_serialized_name;
+
+    private CreateCredentialsOptionsBuilder(CreateCredentialsOptions createCredentialsOptions) {
+      environment_id_serialized_name = createCredentialsOptions.environment_id_serialized_name;
+      source_type_serialized_name = createCredentialsOptions.source_type_serialized_name;
+      credential_details_serialized_name = createCredentialsOptions.credential_details_serialized_name;
+      this.requestHeaders.putAll(createCredentialsOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public CreateCredentialsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     */
+    public CreateCredentialsOptionsBuilder(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
+    }
+
+    /**
+     * Builds a CreateCredentialsOptions.
+     *
+     * @return the createCredentialsOptions
+     */
+    public CreateCredentialsOptions build() {
+      return new CreateCredentialsOptions(this);
+    }
+
+    /**
+     * Set the environment_id_serialized_name.
+     *
+     * @param environmentId the environmentId
+     * @return the CreateCredentialsOptions builder
+     */
+    public CreateCredentialsOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the source_type_serialized_name.
+     *
+     * @param sourceType the sourceType
+     * @return the CreateCredentialsOptions builder
+     */
+    public CreateCredentialsOptionsBuilder sourceType(String sourceType) {
+      this.source_type_serialized_name = sourceType;
+      return this;
+    }
+
+    /**
+     * Set the credential_details_serialized_name.
+     *
+     * @param credentialDetails the credentialDetails
+     * @return the CreateCredentialsOptions builder
+     */
+    public CreateCredentialsOptionsBuilder credentialDetails(CredentialDetails credentialDetails) {
+      this.credential_details_serialized_name = credentialDetails;
+      return this;
+    }
+
+    /**
+     * Set the credentials.
+     *
+     * @param credentials the credentials
+     * @return the CreateCredentialsOptions builder
+     */
+    public CreateCredentialsOptionsBuilder credentials(Credentials credentials) {
+      this.source_type_serialized_name = credentials.getSourceType();
+      this.credential_details_serialized_name = credentials.getCredentialDetails();
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the CreateCredentialsOptions builder
+     */
+    public CreateCredentialsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -1789,16 +2013,17 @@ public class IBMDiscoveryV1Models {
      *
      * An array of query expansion definitions.
      *
-     *  Each object in the `expansions` array represents a term or set of terms that will be expanded into other terms.
-     * Each expansion object can be configured so that all terms are expanded to all other terms in the object -
-     * bi-directional, or a set list of terms can be expanded into a second list of terms - uni-directional.
+     *  Each object in the **expansions** array represents a term or set of terms that will be expanded into other
+     * terms. Each expansion object can be configured as bidirectional or unidirectional. Bidirectional means that all
+     * terms are expanded to all other terms in the object. Unidirectional means that a set list of terms can be
+     * expanded into a second list of terms.
      *
-     *  To create a bi-directional expansion specify an `expanded_terms` array. When found in a query, all items in the
-     * `expanded_terms` array are then expanded to the other items in the same array.
+     *  To create a bi-directional expansion specify an **expanded_terms** array. When found in a query, all items in
+     * the **expanded_terms** array are then expanded to the other items in the same array.
      *
-     *  To create a uni-directional expansion, specify both an array of `input_terms` and an array of `expanded_terms`.
-     * When items in the `input_terms` array are present in a query, they are expanded using the items listed in the
-     * `expanded_terms` array.
+     *  To create a uni-directional expansion, specify both an array of **input_terms** and an array of
+     * **expanded_terms**. When items in the **input_terms** array are present in a query, they are expanded using the
+     * items listed in the **expanded_terms** array.
      *
      * @return the expansions_serialized_name
      */
@@ -2169,6 +2394,425 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * Object containing details of the stored credentials.
+   *
+   * Obtain credentials for your source from the administrator of the source.
+   */
+  public class CredentialDetails extends IBMWatsonGenericModel {
+    private String credential_type_serialized_name;
+    private String client_id_serialized_name;
+    private String enterprise_id_serialized_name;
+    private String url_serialized_name;
+    private String username_serialized_name;
+    private String organization_url_serialized_name;
+    private String site_collection_path_serialized_name;
+    private String client_secret_serialized_name;
+    private String public_key_id_serialized_name;
+    private String private_key_serialized_name;
+    private String passphrase_serialized_name;
+    private String password_serialized_name;
+    /**
+     * Gets the credential_type_serialized_name.
+     *
+     * The authentication method for this credentials definition. The  **credential_type** specified must be supported
+     * by the **source_type**. The following combinations are possible:
+     *
+     * -  `"source_type": "box"` - valid `credential_type`s: `oauth2`
+     * -  `"source_type": "salesforce"` - valid `credential_type`s: `username_password`
+     * -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml`.
+     *
+     * @return the credential_type_serialized_name
+     */
+    @AuraEnabled
+    public String getCredentialType() {
+      return credential_type_serialized_name;
+    }
+    /**
+     * Gets the client_id_serialized_name.
+     *
+     * The **client_id** of the source that these credentials connect to. Only valid, and required, with a
+     * **credential_type** of `oauth2`.
+     *
+     * @return the client_id_serialized_name
+     */
+    @AuraEnabled
+    public String getClientId() {
+      return client_id_serialized_name;
+    }
+    /**
+     * Gets the enterprise_id_serialized_name.
+     *
+     * The **enterprise_id** of the Box site that these credentials connect to. Only valid, and required, with a
+     * **source_type** of `box`.
+     *
+     * @return the enterprise_id_serialized_name
+     */
+    @AuraEnabled
+    public String getEnterpriseId() {
+      return enterprise_id_serialized_name;
+    }
+    /**
+     * Gets the url_serialized_name.
+     *
+     * The **url** of the source that these credentials connect to. Only valid, and required, with a **credential_type**
+     * of `username_password`.
+     *
+     * @return the url_serialized_name
+     */
+    @AuraEnabled
+    public String getUrl() {
+      return url_serialized_name;
+    }
+    /**
+     * Gets the username_serialized_name.
+     *
+     * The **username** of the source that these credentials connect to. Only valid, and required, with a
+     * **credential_type** of `saml` and `username_password`.
+     *
+     * @return the username_serialized_name
+     */
+    @AuraEnabled
+    public String getUsername() {
+      return username_serialized_name;
+    }
+    /**
+     * Gets the organization_url_serialized_name.
+     *
+     * The **organization_url** of the source that these credentials connect to. Only valid, and required, with a
+     * **credential_type** of `saml`.
+     *
+     * @return the organization_url_serialized_name
+     */
+    @AuraEnabled
+    public String getOrganizationUrl() {
+      return organization_url_serialized_name;
+    }
+    /**
+     * Gets the site_collection_path_serialized_name.
+     *
+     * The **site_collection.path** of the source that these credentials connect to. Only valid, and required, with a
+     * **source_type** of `sharepoint`.
+     *
+     * @return the site_collection_path_serialized_name
+     */
+    @AuraEnabled
+    public String getSiteCollectionPath() {
+      return site_collection_path_serialized_name;
+    }
+    /**
+     * Gets the client_secret_serialized_name.
+     *
+     * The **client_secret** of the source that these credentials connect to. Only valid, and required, with a
+     * **credential_type** of `oauth2`. This value is never returned and is only used when creating or modifying
+     * **credentials**.
+     *
+     * @return the client_secret_serialized_name
+     */
+    @AuraEnabled
+    public String getClientSecret() {
+      return client_secret_serialized_name;
+    }
+    /**
+     * Gets the public_key_id_serialized_name.
+     *
+     * The **public_key_id** of the source that these credentials connect to. Only valid, and required, with a
+     * **credential_type** of `oauth2`. This value is never returned and is only used when creating or modifying
+     * **credentials**.
+     *
+     * @return the public_key_id_serialized_name
+     */
+    @AuraEnabled
+    public String getPublicKeyId() {
+      return public_key_id_serialized_name;
+    }
+    /**
+     * Gets the private_key_serialized_name.
+     *
+     * The **private_key** of the source that these credentials connect to. Only valid, and required, with a
+     * **credential_type** of `oauth2`. This value is never returned and is only used when creating or modifying
+     * **credentials**.
+     *
+     * @return the private_key_serialized_name
+     */
+    @AuraEnabled
+    public String getPrivateKey() {
+      return private_key_serialized_name;
+    }
+    /**
+     * Gets the passphrase_serialized_name.
+     *
+     * The **passphrase** of the source that these credentials connect to. Only valid, and required, with a
+     * **credential_type** of `oauth2`. This value is never returned and is only used when creating or modifying
+     * **credentials**.
+     *
+     * @return the passphrase_serialized_name
+     */
+    @AuraEnabled
+    public String getPassphrase() {
+      return passphrase_serialized_name;
+    }
+    /**
+     * Gets the password_serialized_name.
+     *
+     * The **password** of the source that these credentials connect to. Only valid, and required, with
+     * **credential_type**s of `saml` and `username_password`.
+     *
+     * **Note:** When used with a **source_type** of `salesforce`, the password consists of the Salesforce password and
+     * a valid Salesforce security token concatenated. This value is never returned and is only used when creating or
+     * modifying **credentials**.
+     *
+     * @return the password_serialized_name
+     */
+    @AuraEnabled
+    public String getPassword() {
+      return password_serialized_name;
+    }
+
+    /**
+     * Sets the credential_type_serialized_name.
+     *
+     * @param credentialType the new credentialType
+     */
+    public void setCredentialType(final String credentialType) {
+      this.credential_type_serialized_name = credentialType;
+    }
+
+    /**
+     * Sets the client_id_serialized_name.
+     *
+     * @param clientId the new clientId
+     */
+    public void setClientId(final String clientId) {
+      this.client_id_serialized_name = clientId;
+    }
+
+    /**
+     * Sets the enterprise_id_serialized_name.
+     *
+     * @param enterpriseId the new enterpriseId
+     */
+    public void setEnterpriseId(final String enterpriseId) {
+      this.enterprise_id_serialized_name = enterpriseId;
+    }
+
+    /**
+     * Sets the url_serialized_name.
+     *
+     * @param url the new url
+     */
+    public void setUrl(final String url) {
+      this.url_serialized_name = url;
+    }
+
+    /**
+     * Sets the username_serialized_name.
+     *
+     * @param username the new username
+     */
+    public void setUsername(final String username) {
+      this.username_serialized_name = username;
+    }
+
+    /**
+     * Sets the organization_url_serialized_name.
+     *
+     * @param organizationUrl the new organizationUrl
+     */
+    public void setOrganizationUrl(final String organizationUrl) {
+      this.organization_url_serialized_name = organizationUrl;
+    }
+
+    /**
+     * Sets the site_collection_path_serialized_name.
+     *
+     * @param siteCollectionPath the new siteCollectionPath
+     */
+    public void setSiteCollectionPath(final String siteCollectionPath) {
+      this.site_collection_path_serialized_name = siteCollectionPath;
+    }
+
+    /**
+     * Sets the client_secret_serialized_name.
+     *
+     * @param clientSecret the new clientSecret
+     */
+    public void setClientSecret(final String clientSecret) {
+      this.client_secret_serialized_name = clientSecret;
+    }
+
+    /**
+     * Sets the public_key_id_serialized_name.
+     *
+     * @param publicKeyId the new publicKeyId
+     */
+    public void setPublicKeyId(final String publicKeyId) {
+      this.public_key_id_serialized_name = publicKeyId;
+    }
+
+    /**
+     * Sets the private_key_serialized_name.
+     *
+     * @param privateKey the new privateKey
+     */
+    public void setPrivateKey(final String privateKey) {
+      this.private_key_serialized_name = privateKey;
+    }
+
+    /**
+     * Sets the passphrase_serialized_name.
+     *
+     * @param passphrase the new passphrase
+     */
+    public void setPassphrase(final String passphrase) {
+      this.passphrase_serialized_name = passphrase;
+    }
+
+    /**
+     * Sets the password_serialized_name.
+     *
+     * @param password the new password
+     */
+    public void setPassword(final String password) {
+      this.password_serialized_name = password;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      CredentialDetails ret = (CredentialDetails) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Object containing credential information.
+   */
+  public class Credentials extends IBMWatsonResponseModel {
+    private String credential_id_serialized_name;
+    private String source_type_serialized_name;
+    private CredentialDetails credential_details_serialized_name;
+    /**
+     * Gets the credential_id_serialized_name.
+     *
+     * Unique identifier for this set of credentials.
+     *
+     * @return the credential_id_serialized_name
+     */
+    @AuraEnabled
+    public String getCredentialId() {
+      return credential_id_serialized_name;
+    }
+    /**
+     * Gets the source_type_serialized_name.
+     *
+     * The source that this credentials object connects to.
+     * -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
+     * -  `salesforce` indicates the credentials are used to connect to Salesforce.
+     * -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
+     *
+     * @return the source_type_serialized_name
+     */
+    @AuraEnabled
+    public String getSourceType() {
+      return source_type_serialized_name;
+    }
+    /**
+     * Gets the credential_details_serialized_name.
+     *
+     * @return the credential_details_serialized_name
+     */
+    @AuraEnabled
+    public CredentialDetails getCredentialDetails() {
+      return credential_details_serialized_name;
+    }
+
+    /**
+     * Sets the source_type_serialized_name.
+     *
+     * @param sourceType the new sourceType
+     */
+    public void setSourceType(final String sourceType) {
+      this.source_type_serialized_name = sourceType;
+    }
+
+    /**
+     * Sets the credential_details_serialized_name.
+     *
+     * @param credentialDetails the new credentialDetails
+     */
+    public void setCredentialDetails(final CredentialDetails credentialDetails) {
+      this.credential_details_serialized_name = credentialDetails;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Credentials ret = (Credentials) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for credential_details_serialized_name
+      CredentialDetails newCredentialDetails = (CredentialDetails) new CredentialDetails().deserialize(JSON.serialize(ret.getCredentialDetails()), (Map<String, Object>) jsonMap.get('credential_details_serialized_name'), CredentialDetails.class);
+      ret.setCredentialDetails(newCredentialDetails);
+
+      return ret;
+    }
+  }
+
+  /**
+   * CredentialsList.
+   */
+  public class CredentialsList extends IBMWatsonResponseModel {
+    private List<Credentials> credentials_serialized_name;
+    /**
+     * Gets the credentials_serialized_name.
+     *
+     * An array of credential definitions that were created for this instance.
+     *
+     * @return the credentials_serialized_name
+     */
+    @AuraEnabled
+    public List<Credentials> getCredentials() {
+      return credentials_serialized_name;
+    }
+
+    /**
+     * Sets the credentials_serialized_name.
+     *
+     * @param credentials the new credentials
+     */
+    public void setCredentials(final List<Credentials> credentials) {
+      this.credentials_serialized_name = credentials;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      CredentialsList ret = (CredentialsList) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for credentials_serialized_name
+      List<Credentials> newCredentials = new List<Credentials>();
+      List<Credentials> deserializedCredentials = ret.getCredentials();
+      if (deserializedCredentials != null) {
+        for (Integer i = 0; i < deserializedCredentials.size(); i++) {
+          Credentials currentItem = ret.getCredentials().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('credentials_serialized_name');
+          Credentials newItem = (Credentials) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Credentials.class);
+          newCredentials.add(newItem);
+        }
+        ret.setCredentials(newCredentials);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
    * The deleteAllTrainingData options.
    */
   public class DeleteAllTrainingDataOptions extends IBMWatsonOptionsModel {
@@ -2520,6 +3164,125 @@ public class IBMDiscoveryV1Models {
      * @return the DeleteConfigurationOptions builder
      */
     public DeleteConfigurationOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The deleteCredentials options.
+   */
+  public class DeleteCredentialsOptions extends IBMWatsonOptionsModel {
+    private String environment_id_serialized_name;
+    private String credential_id_serialized_name;
+    /**
+     * Gets the environment_id_serialized_name.
+     *
+     * The ID of the environment.
+     *
+     * @return the environment_id_serialized_name
+     */
+    public String environmentId() {
+      return environment_id_serialized_name;
+    }
+    /**
+     * Gets the credential_id_serialized_name.
+     *
+     * The unique identifier for a set of source credentials.
+     *
+     * @return the credential_id_serialized_name
+     */
+    public String credentialId() {
+      return credential_id_serialized_name;
+    }
+    private DeleteCredentialsOptions(DeleteCredentialsOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.credential_id_serialized_name, 'credential_id_serialized_name cannot be empty');
+      environment_id_serialized_name = builder.environment_id_serialized_name;
+      credential_id_serialized_name = builder.credential_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DeleteCredentialsOptions builder
+     */
+    public DeleteCredentialsOptionsBuilder newBuilder() {
+      return new DeleteCredentialsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * DeleteCredentialsOptions Builder.
+   */
+  public class DeleteCredentialsOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environment_id_serialized_name;
+    private String credential_id_serialized_name;
+
+    private DeleteCredentialsOptionsBuilder(DeleteCredentialsOptions deleteCredentialsOptions) {
+      environment_id_serialized_name = deleteCredentialsOptions.environment_id_serialized_name;
+      credential_id_serialized_name = deleteCredentialsOptions.credential_id_serialized_name;
+      this.requestHeaders.putAll(deleteCredentialsOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DeleteCredentialsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param credentialId the credentialId
+     */
+    public DeleteCredentialsOptionsBuilder(String environmentId, String credentialId) {
+      this.environment_id_serialized_name = environmentId;
+      this.credential_id_serialized_name = credentialId;
+    }
+
+    /**
+     * Builds a DeleteCredentialsOptions.
+     *
+     * @return the deleteCredentialsOptions
+     */
+    public DeleteCredentialsOptions build() {
+      return new DeleteCredentialsOptions(this);
+    }
+
+    /**
+     * Set the environment_id_serialized_name.
+     *
+     * @param environmentId the environmentId
+     * @return the DeleteCredentialsOptions builder
+     */
+    public DeleteCredentialsOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the credential_id_serialized_name.
+     *
+     * @param credentialId the credentialId
+     * @return the DeleteCredentialsOptions builder
+     */
+    public DeleteCredentialsOptionsBuilder credentialId(String credentialId) {
+      this.credential_id_serialized_name = credentialId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteCredentialsOptions builder
+     */
+    public DeleteCredentialsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -3308,7 +4071,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the used_bytes_serialized_name.
      *
-     * Number of bytes used on the environment's disk capacity.
+     * Number of bytes within the environment's disk capacity that are currently used to store data.
      *
      * @return the used_bytes_serialized_name
      */
@@ -3832,12 +4595,12 @@ public class IBMDiscoveryV1Models {
      *
      * Name of the enrichment service to call. Current options are `natural_language_understanding` and `elements`.
      *
-     *  When using `natual_language_understanding`, the `options` object must contain Natural Language Understanding
-     * Options.
+     *  When using `natual_language_understanding`, the **options** object must contain Natural Language Understanding
+     * options.
      *
-     *  When using `elements` the `options` object must contain Element Classification options. Additionally, when using
-     * the `elements` enrichment the configuration specified and files ingested must meet all the criteria specified in
-     * [the documentation](https://console.bluemix.net/docs/services/discovery/element-classification.html)
+     *  When using `elements` the **options** object must contain Element Classification options. Additionally, when
+     * using the `elements` enrichment the configuration specified and files ingested must meet all the criteria
+     * specified in [the documentation](https://console.bluemix.net/docs/services/discovery/element-classification.html)
      *
      *
      *
@@ -4116,7 +4879,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the created_serialized_name.
      *
-     * Creation date of the environment, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     * Creation date of the environment, in the format `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`.
      *
      * @return the created_serialized_name
      */
@@ -4127,7 +4890,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the updated_serialized_name.
      *
-     * Date of most recent environment update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+     * Date of most recent environment update, in the format `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`.
      *
      * @return the updated_serialized_name
      */
@@ -4149,7 +4912,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the read_only_serialized_name.
      *
-     * If true, then the environment contains read-only collections which are maintained by IBM.
+     * If `true`, the environment contains read-only collections that are maintained by IBM.
      *
      * @return the read_only_serialized_name
      */
@@ -4292,8 +5055,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the expanded_terms_serialized_name.
      *
-     * A list of terms that this expansion will be expanded to. If specified without `input_terms`, it also functions as
-     * the input term list.
+     * A list of terms that this expansion will be expanded to. If specified without **input_terms**, it also functions
+     * as the input term list.
      *
      * @return the expanded_terms_serialized_name
      */
@@ -4341,16 +5104,17 @@ public class IBMDiscoveryV1Models {
      *
      * An array of query expansion definitions.
      *
-     *  Each object in the `expansions` array represents a term or set of terms that will be expanded into other terms.
-     * Each expansion object can be configured so that all terms are expanded to all other terms in the object -
-     * bi-directional, or a set list of terms can be expanded into a second list of terms - uni-directional.
+     *  Each object in the **expansions** array represents a term or set of terms that will be expanded into other
+     * terms. Each expansion object can be configured as bidirectional or unidirectional. Bidirectional means that all
+     * terms are expanded to all other terms in the object. Unidirectional means that a set list of terms can be
+     * expanded into a second list of terms.
      *
-     *  To create a bi-directional expansion specify an `expanded_terms` array. When found in a query, all items in the
-     * `expanded_terms` array are then expanded to the other items in the same array.
+     *  To create a bi-directional expansion specify an **expanded_terms** array. When found in a query, all items in
+     * the **expanded_terms** array are then expanded to the other items in the same array.
      *
-     *  To create a uni-directional expansion, specify both an array of `input_terms` and an array of `expanded_terms`.
-     * When items in the `input_terms` array are present in a query, they are expanded using the items listed in the
-     * `expanded_terms` array.
+     *  To create a uni-directional expansion, specify both an array of **input_terms** and an array of
+     * **expanded_terms**. When items in the **input_terms** array are present in a query, they are expanded using the
+     * items listed in the **expanded_terms** array.
      *
      * @return the expansions_serialized_name
      */
@@ -4448,7 +5212,7 @@ public class IBMDiscoveryV1Models {
      *
      * A query search returns all documents in your data set with full enrichments and full text, but with the most
      * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
-     * cannot use `natural_language_query` and `query` at the same time.
+     * cannot use **natural_language_query** and **query** at the same time.
      *
      * @return the query_serialized_name
      */
@@ -4459,7 +5223,7 @@ public class IBMDiscoveryV1Models {
      * Gets the natural_language_query_serialized_name.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language
-     * understanding. You cannot use `natural_language_query` and `query` at the same time.
+     * understanding. You cannot use **natural_language_query** and **query** at the same time.
      *
      * @return the natural_language_query_serialized_name
      */
@@ -4536,7 +5300,7 @@ public class IBMDiscoveryV1Models {
      * Gets the deduplicate_field_serialized_name.
      *
      * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
-     * comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta
+     * comparison is limited to the current query only, **offset** is not considered. This parameter is currently Beta
      * functionality.
      *
      * @return the deduplicate_field_serialized_name
@@ -4548,7 +5312,7 @@ public class IBMDiscoveryV1Models {
      * Gets the similar_serialized_name.
      *
      * When `true`, results are returned based on their similarity to the document IDs specified in the
-     * `similar.document_ids` parameter. The default is `false`.
+     * **similar.document_ids** parameter.
      *
      * @return the similar_serialized_name
      */
@@ -4560,9 +5324,9 @@ public class IBMDiscoveryV1Models {
      *
      * A comma-separated list of document IDs that will be used to find similar documents.
      *
-     * **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
-     * document similarity search to include the natural language query. Other query parameters, such as `filter` and
-     * `query` are subsequently applied and reduce the query scope.
+     * **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
+     * the document similarity search to include the natural language query. Other query parameters, such as **filter**
+     * and **query** are subsequently applied and reduce the query scope.
      *
      * @return the similar_document_ids_serialized_name
      */
@@ -4955,6 +5719,10 @@ public class IBMDiscoveryV1Models {
     private Boolean similar_serialized_name;
     private List<String> similar_document_ids_serialized_name;
     private List<String> similar_fields_serialized_name;
+    private Boolean passages_serialized_name;
+    private List<String> passages_fields_serialized_name;
+    private Long passages_count_serialized_name;
+    private Long passages_characters_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
      *
@@ -4992,7 +5760,7 @@ public class IBMDiscoveryV1Models {
      *
      * A query search returns all documents in your data set with full enrichments and full text, but with the most
      * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
-     * cannot use `natural_language_query` and `query` at the same time.
+     * cannot use **natural_language_query** and **query** at the same time.
      *
      * @return the query_serialized_name
      */
@@ -5003,7 +5771,7 @@ public class IBMDiscoveryV1Models {
      * Gets the natural_language_query_serialized_name.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language
-     * understanding. You cannot use `natural_language_query` and `query` at the same time.
+     * understanding. You cannot use **natural_language_query** and **query** at the same time.
      *
      * @return the natural_language_query_serialized_name
      */
@@ -5080,8 +5848,8 @@ public class IBMDiscoveryV1Models {
      * Gets the deduplicate_serialized_name.
      *
      * When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the
-     * `title` field) are removed. Duplicate comparison is limited to the current query only, `offset` is not
-     * considered. Defaults to `false`. This parameter is currently Beta functionality.
+     * **title** field) are removed. Duplicate comparison is limited to the current query only; **offset** is not
+     * considered. This parameter is currently Beta functionality.
      *
      * @return the deduplicate_serialized_name
      */
@@ -5092,7 +5860,7 @@ public class IBMDiscoveryV1Models {
      * Gets the deduplicate_field_serialized_name.
      *
      * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
-     * comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta
+     * comparison is limited to the current query only, **offset** is not considered. This parameter is currently Beta
      * functionality.
      *
      * @return the deduplicate_field_serialized_name
@@ -5104,7 +5872,7 @@ public class IBMDiscoveryV1Models {
      * Gets the similar_serialized_name.
      *
      * When `true`, results are returned based on their similarity to the document IDs specified in the
-     * `similar.document_ids` parameter. The default is `false`.
+     * **similar.document_ids** parameter.
      *
      * @return the similar_serialized_name
      */
@@ -5116,9 +5884,9 @@ public class IBMDiscoveryV1Models {
      *
      * A comma-separated list of document IDs that will be used to find similar documents.
      *
-     * **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
-     * document similarity search to include the natural language query. Other query parameters, such as `filter` and
-     * `query` are subsequently applied and reduce the query scope.
+     * **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
+     * the document similarity search to include the natural language query. Other query parameters, such as **filter**
+     * and **query** are subsequently applied and reduce the query scope.
      *
      * @return the similar_document_ids_serialized_name
      */
@@ -5135,6 +5903,49 @@ public class IBMDiscoveryV1Models {
      */
     public List<String> similarFields() {
       return similar_fields_serialized_name;
+    }
+    /**
+     * Gets the passages_serialized_name.
+     *
+     * A passages query that returns the most relevant passages from the results.
+     *
+     * @return the passages_serialized_name
+     */
+    public Boolean passages() {
+      return passages_serialized_name;
+    }
+    /**
+     * Gets the passages_fields_serialized_name.
+     *
+     * A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all
+     * top-level fields are included.
+     *
+     * @return the passages_fields_serialized_name
+     */
+    public List<String> passagesFields() {
+      return passages_fields_serialized_name;
+    }
+    /**
+     * Gets the passages_count_serialized_name.
+     *
+     * The maximum number of passages to return. The search returns fewer passages if the requested total is not found.
+     * The default is `10`. The maximum is `100`.
+     *
+     * @return the passages_count_serialized_name
+     */
+    public Long passagesCount() {
+      return passages_count_serialized_name;
+    }
+    /**
+     * Gets the passages_characters_serialized_name.
+     *
+     * The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`.
+     * The maximum is `2000`.
+     *
+     * @return the passages_characters_serialized_name
+     */
+    public Long passagesCharacters() {
+      return passages_characters_serialized_name;
     }
     private FederatedQueryOptions(FederatedQueryOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
@@ -5155,6 +5966,10 @@ public class IBMDiscoveryV1Models {
       similar_serialized_name = builder.similar_serialized_name;
       similar_document_ids_serialized_name = builder.similar_document_ids_serialized_name;
       similar_fields_serialized_name = builder.similar_fields_serialized_name;
+      passages_serialized_name = builder.passages_serialized_name;
+      passages_fields_serialized_name = builder.passages_fields_serialized_name;
+      passages_count_serialized_name = builder.passages_count_serialized_name;
+      passages_characters_serialized_name = builder.passages_characters_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -5189,6 +6004,10 @@ public class IBMDiscoveryV1Models {
     private Boolean similar_serialized_name;
     private List<String> similar_document_ids_serialized_name;
     private List<String> similar_fields_serialized_name;
+    private Boolean passages_serialized_name;
+    private List<String> passages_fields_serialized_name;
+    private Long passages_count_serialized_name;
+    private Long passages_characters_serialized_name;
 
     private FederatedQueryOptionsBuilder(FederatedQueryOptions federatedQueryOptions) {
       environment_id_serialized_name = federatedQueryOptions.environment_id_serialized_name;
@@ -5207,6 +6026,10 @@ public class IBMDiscoveryV1Models {
       similar_serialized_name = federatedQueryOptions.similar_serialized_name;
       similar_document_ids_serialized_name = federatedQueryOptions.similar_document_ids_serialized_name;
       similar_fields_serialized_name = federatedQueryOptions.similar_fields_serialized_name;
+      passages_serialized_name = federatedQueryOptions.passages_serialized_name;
+      passages_fields_serialized_name = federatedQueryOptions.passages_fields_serialized_name;
+      passages_count_serialized_name = federatedQueryOptions.passages_count_serialized_name;
+      passages_characters_serialized_name = federatedQueryOptions.passages_characters_serialized_name;
       this.requestHeaders.putAll(federatedQueryOptions.requestHeaders());
     }
 
@@ -5308,6 +6131,21 @@ public class IBMDiscoveryV1Models {
         this.similar_fields_serialized_name = new List<String>();
       }
       this.similar_fields_serialized_name.add(similarFields);
+      return this;
+    }
+
+    /**
+     * Adds an passagesFields to passages_fields_serialized_name.
+     *
+     * @param passagesFields the new passagesFields
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder addPassagesFields(String passagesFields) {
+      IBMWatsonValidator.notNull(passagesFields, 'passagesFields cannot be null');
+      if (this.passages_fields_serialized_name == null) {
+        this.passages_fields_serialized_name = new List<String>();
+      }
+      this.passages_fields_serialized_name.add(passagesFields);
       return this;
     }
 
@@ -5489,6 +6327,51 @@ public class IBMDiscoveryV1Models {
      */
     public FederatedQueryOptionsBuilder similarFields(List<String> similarFields) {
       this.similar_fields_serialized_name = similarFields;
+      return this;
+    }
+
+    /**
+     * Set the passages_serialized_name.
+     *
+     * @param passages the passages
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder passages(Boolean passages) {
+      this.passages_serialized_name = passages;
+      return this;
+    }
+
+    /**
+     * Set the passages_fields_serialized_name.
+     * Existing passages_fields_serialized_name will be replaced.
+     *
+     * @param passagesFields the passagesFields
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder passagesFields(List<String> passagesFields) {
+      this.passages_fields_serialized_name = passagesFields;
+      return this;
+    }
+
+    /**
+     * Set the passages_count_serialized_name.
+     *
+     * @param passagesCount the passagesCount
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder passagesCount(Long passagesCount) {
+      this.passages_count_serialized_name = passagesCount;
+      return this;
+    }
+
+    /**
+     * Set the passages_characters_serialized_name.
+     *
+     * @param passagesCharacters the passagesCharacters
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder passagesCharacters(Long passagesCharacters) {
+      this.passages_characters_serialized_name = passagesCharacters;
       return this;
     }
 
@@ -5908,6 +6791,125 @@ public class IBMDiscoveryV1Models {
      * @return the GetConfigurationOptions builder
      */
     public GetConfigurationOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The getCredentials options.
+   */
+  public class GetCredentialsOptions extends IBMWatsonOptionsModel {
+    private String environment_id_serialized_name;
+    private String credential_id_serialized_name;
+    /**
+     * Gets the environment_id_serialized_name.
+     *
+     * The ID of the environment.
+     *
+     * @return the environment_id_serialized_name
+     */
+    public String environmentId() {
+      return environment_id_serialized_name;
+    }
+    /**
+     * Gets the credential_id_serialized_name.
+     *
+     * The unique identifier for a set of source credentials.
+     *
+     * @return the credential_id_serialized_name
+     */
+    public String credentialId() {
+      return credential_id_serialized_name;
+    }
+    private GetCredentialsOptions(GetCredentialsOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.credential_id_serialized_name, 'credential_id_serialized_name cannot be empty');
+      environment_id_serialized_name = builder.environment_id_serialized_name;
+      credential_id_serialized_name = builder.credential_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetCredentialsOptions builder
+     */
+    public GetCredentialsOptionsBuilder newBuilder() {
+      return new GetCredentialsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetCredentialsOptions Builder.
+   */
+  public class GetCredentialsOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environment_id_serialized_name;
+    private String credential_id_serialized_name;
+
+    private GetCredentialsOptionsBuilder(GetCredentialsOptions getCredentialsOptions) {
+      environment_id_serialized_name = getCredentialsOptions.environment_id_serialized_name;
+      credential_id_serialized_name = getCredentialsOptions.credential_id_serialized_name;
+      this.requestHeaders.putAll(getCredentialsOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetCredentialsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param credentialId the credentialId
+     */
+    public GetCredentialsOptionsBuilder(String environmentId, String credentialId) {
+      this.environment_id_serialized_name = environmentId;
+      this.credential_id_serialized_name = credentialId;
+    }
+
+    /**
+     * Builds a GetCredentialsOptions.
+     *
+     * @return the getCredentialsOptions
+     */
+    public GetCredentialsOptions build() {
+      return new GetCredentialsOptions(this);
+    }
+
+    /**
+     * Set the environment_id_serialized_name.
+     *
+     * @param environmentId the environmentId
+     * @return the GetCredentialsOptions builder
+     */
+    public GetCredentialsOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the credential_id_serialized_name.
+     *
+     * @param credentialId the credentialId
+     * @return the GetCredentialsOptions builder
+     */
+    public GetCredentialsOptionsBuilder credentialId(String credentialId) {
+      this.credential_id_serialized_name = credentialId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetCredentialsOptions builder
+     */
+    public GetCredentialsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -7236,6 +8238,97 @@ public class IBMDiscoveryV1Models {
       }
 
       return ret;
+    }
+  }
+
+  /**
+   * The listCredentials options.
+   */
+  public class ListCredentialsOptions extends IBMWatsonOptionsModel {
+    private String environment_id_serialized_name;
+    /**
+     * Gets the environment_id_serialized_name.
+     *
+     * The ID of the environment.
+     *
+     * @return the environment_id_serialized_name
+     */
+    public String environmentId() {
+      return environment_id_serialized_name;
+    }
+    private ListCredentialsOptions(ListCredentialsOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
+      environment_id_serialized_name = builder.environment_id_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ListCredentialsOptions builder
+     */
+    public ListCredentialsOptionsBuilder newBuilder() {
+      return new ListCredentialsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * ListCredentialsOptions Builder.
+   */
+  public class ListCredentialsOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environment_id_serialized_name;
+
+    private ListCredentialsOptionsBuilder(ListCredentialsOptions listCredentialsOptions) {
+      environment_id_serialized_name = listCredentialsOptions.environment_id_serialized_name;
+      this.requestHeaders.putAll(listCredentialsOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ListCredentialsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     */
+    public ListCredentialsOptionsBuilder(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
+    }
+
+    /**
+     * Builds a ListCredentialsOptions.
+     *
+     * @return the listCredentialsOptions
+     */
+    public ListCredentialsOptions build() {
+      return new ListCredentialsOptions(this);
+    }
+
+    /**
+     * Set the environment_id_serialized_name.
+     *
+     * @param environmentId the environmentId
+     * @return the ListCredentialsOptions builder
+     */
+    public ListCredentialsOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListCredentialsOptions builder
+     */
+    public ListCredentialsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
     }
   }
 
@@ -8833,7 +9926,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the entities_serialized_name.
      *
-     * When `true` entities are extracted from the identified sentence parts.
+     * When `true`, entities are extracted from the identified sentence parts.
      *
      * @return the entities_serialized_name
      */
@@ -9092,25 +10185,27 @@ public class IBMDiscoveryV1Models {
      *
      * Identifies what type of operation to perform.
      *
-     * **copy** - Copies the value of the `source_field` to the `destination_field` field. If the `destination_field`
-     * already exists, then the value of the `source_field` overwrites the original value of the `destination_field`.
+     * **copy** - Copies the value of the **source_field** to the **destination_field** field. If the
+     * **destination_field** already exists, then the value of the **source_field** overwrites the original value of the
+     * **destination_field**.
      *
-     * **move** - Renames (moves) the `source_field` to the `destination_field`. If the `destination_field` already
-     * exists, then the value of the `source_field` overwrites the original value of the `destination_field`. Rename is
-     * identical to copy, except that the `source_field` is removed after the value has been copied to the
-     * `destination_field` (it is the same as a _copy_ followed by a _remove_).
+     * **move** - Renames (moves) the **source_field** to the **destination_field**. If the **destination_field**
+     * already exists, then the value of the **source_field** overwrites the original value of the
+     * **destination_field**. Rename is identical to copy, except that the **source_field** is removed after the value
+     * has been copied to the **destination_field** (it is the same as a _copy_ followed by a _remove_).
      *
-     * **merge** - Merges the value of the `source_field` with the value of the `destination_field`. The
-     * `destination_field` is converted into an array if it is not already an array, and the value of the `source_field`
-     * is appended to the array. This operation removes the `source_field` after the merge. If the `source_field` does
-     * not exist in the current document, then the `destination_field` is still converted into an array (if it is not an
-     * array already). This is ensures the type for `destination_field` is consistent across all documents.
+     * **merge** - Merges the value of the **source_field** with the value of the **destination_field**. The
+     * **destination_field** is converted into an array if it is not already an array, and the value of the
+     * **source_field** is appended to the array. This operation removes the **source_field** after the merge. If the
+     * **source_field** does not exist in the current document, then the **destination_field** is still converted into
+     * an array (if it is not an array already). This conversion ensures the type for **destination_field** is
+     * consistent across all documents.
      *
-     * **remove** - Deletes the `source_field` field. The `destination_field` is ignored for this operation.
+     * **remove** - Deletes the **source_field** field. The **destination_field** is ignored for this operation.
      *
-     * **remove_nulls** - Removes all nested null (blank) leif values from the JSON tree. `source_field` and
-     * `destination_field` are ignored by this operation because _remove_nulls_ operates on the entire JSON tree.
-     * Typically, `remove_nulls` is invoked as the last normalization operation (if it is inoked at all, it can be
+     * **remove_nulls** - Removes all nested null (blank) field values from the JSON tree. **source_field** and
+     * **destination_field** are ignored by this operation because _remove_nulls_ operates on the entire JSON tree.
+     * Typically, **remove_nulls** is invoked as the last normalization operation (if it is invoked at all, it can be
      * time-expensive).
      *
      * @return the operation_serialized_name
@@ -10495,7 +11590,7 @@ public class IBMDiscoveryV1Models {
      *
      * A query search returns all documents in your data set with full enrichments and full text, but with the most
      * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
-     * cannot use `natural_language_query` and `query` at the same time.
+     * cannot use **natural_language_query** and **query** at the same time.
      *
      * @return the query_serialized_name
      */
@@ -10506,7 +11601,7 @@ public class IBMDiscoveryV1Models {
      * Gets the natural_language_query_serialized_name.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language
-     * understanding. You cannot use `natural_language_query` and `query` at the same time.
+     * understanding. You cannot use **natural_language_query** and **query** at the same time.
      *
      * @return the natural_language_query_serialized_name
      */
@@ -10626,7 +11721,7 @@ public class IBMDiscoveryV1Models {
      * Gets the deduplicate_field_serialized_name.
      *
      * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
-     * comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta
+     * comparison is limited to the current query only, **offset** is not considered. This parameter is currently Beta
      * functionality.
      *
      * @return the deduplicate_field_serialized_name
@@ -10638,7 +11733,7 @@ public class IBMDiscoveryV1Models {
      * Gets the similar_serialized_name.
      *
      * When `true`, results are returned based on their similarity to the document IDs specified in the
-     * `similar.document_ids` parameter. The default is `false`.
+     * **similar.document_ids** parameter.
      *
      * @return the similar_serialized_name
      */
@@ -10650,9 +11745,9 @@ public class IBMDiscoveryV1Models {
      *
      * A comma-separated list of document IDs that will be used to find similar documents.
      *
-     * **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
-     * document similarity search to include the natural language query. Other query parameters, such as `filter` and
-     * `query` are subsequently applied and reduce the query scope.
+     * **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
+     * the document similarity search to include the natural language query. Other query parameters, such as **filter**
+     * and **query** are subsequently applied and reduce the query scope.
      *
      * @return the similar_document_ids_serialized_name
      */
@@ -11548,7 +12643,7 @@ public class IBMDiscoveryV1Models {
      *
      * A query search returns all documents in your data set with full enrichments and full text, but with the most
      * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
-     * cannot use `natural_language_query` and `query` at the same time.
+     * cannot use **natural_language_query** and **query** at the same time.
      *
      * @return the query_serialized_name
      */
@@ -11559,7 +12654,7 @@ public class IBMDiscoveryV1Models {
      * Gets the natural_language_query_serialized_name.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language
-     * understanding. You cannot use `natural_language_query` and `query` at the same time.
+     * understanding. You cannot use **natural_language_query** and **query** at the same time.
      *
      * @return the natural_language_query_serialized_name
      */
@@ -11679,8 +12774,8 @@ public class IBMDiscoveryV1Models {
      * Gets the deduplicate_serialized_name.
      *
      * When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the
-     * `title` field) are removed. Duplicate comparison is limited to the current query only, `offset` is not
-     * considered. Defaults to `false`. This parameter is currently Beta functionality.
+     * **title** field) are removed. Duplicate comparison is limited to the current query only; **offset** is not
+     * considered. This parameter is currently Beta functionality.
      *
      * @return the deduplicate_serialized_name
      */
@@ -11691,7 +12786,7 @@ public class IBMDiscoveryV1Models {
      * Gets the deduplicate_field_serialized_name.
      *
      * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
-     * comparison is limited to the current query only, `offset` is not considered. This parameter is currently Beta
+     * comparison is limited to the current query only, **offset** is not considered. This parameter is currently Beta
      * functionality.
      *
      * @return the deduplicate_field_serialized_name
@@ -11703,7 +12798,7 @@ public class IBMDiscoveryV1Models {
      * Gets the similar_serialized_name.
      *
      * When `true`, results are returned based on their similarity to the document IDs specified in the
-     * `similar.document_ids` parameter. The default is `false`.
+     * **similar.document_ids** parameter.
      *
      * @return the similar_serialized_name
      */
@@ -11715,9 +12810,9 @@ public class IBMDiscoveryV1Models {
      *
      * A comma-separated list of document IDs that will be used to find similar documents.
      *
-     * **Note:** If the `natural_language_query` parameter is also specified, it will be used to expand the scope of the
-     * document similarity search to include the natural language query. Other query parameters, such as `filter` and
-     * `query` are subsequently applied and reduce the query scope.
+     * **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
+     * the document similarity search to include the natural language query. Other query parameters, such as **filter**
+     * and **query** are subsequently applied and reduce the query scope.
      *
      * @return the similar_document_ids_serialized_name
      */
@@ -12955,6 +14050,7 @@ public class IBMDiscoveryV1Models {
     private List<QueryAggregation> aggregations_serialized_name;
     private List<QueryPassages> passages_serialized_name;
     private Long duplicates_removed_serialized_name;
+    private String session_token_serialized_name;
     /**
      * Gets the matching_results_serialized_name.
      *
@@ -13000,6 +14096,18 @@ public class IBMDiscoveryV1Models {
     public Long getDuplicatesRemoved() {
       return duplicates_removed_serialized_name;
     }
+    /**
+     * Gets the session_token_serialized_name.
+     *
+     * The session token for this query. The session token can be used to add events associated with this query to the
+     * query and event log.
+     *
+     * @return the session_token_serialized_name
+     */
+    @AuraEnabled
+    public String getSessionToken() {
+      return session_token_serialized_name;
+    }
 
     /**
      * Sets the matching_results_serialized_name.
@@ -13044,6 +14152,15 @@ public class IBMDiscoveryV1Models {
      */
     public void setDuplicatesRemoved(final long duplicatesRemoved) {
       this.duplicates_removed_serialized_name = duplicatesRemoved;
+    }
+
+    /**
+     * Sets the session_token_serialized_name.
+     *
+     * @param sessionToken the new sessionToken
+     */
+    public void setSessionToken(final String sessionToken) {
+      this.session_token_serialized_name = sessionToken;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -13244,16 +14361,28 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryResultResultMetadata extends IBMWatsonGenericModel {
     private Double score_serialized_name;
+    private Double confidence_serialized_name;
     /**
      * Gets the score_serialized_name.
      *
-     * The confidence score of the result's analysis. A higher score indicating greater confidence.
+     * The raw score of the result. A higher score indicates a greater match to the query parameters.
      *
      * @return the score_serialized_name
      */
     @AuraEnabled
     public Double getScore() {
       return score_serialized_name;
+    }
+    /**
+     * Gets the confidence_serialized_name.
+     *
+     * The confidence score of the result's analysis. A higher score indicates greater confidence.
+     *
+     * @return the confidence_serialized_name
+     */
+    @AuraEnabled
+    public Double getConfidence() {
+      return confidence_serialized_name;
     }
 
     /**
@@ -13263,6 +14392,15 @@ public class IBMDiscoveryV1Models {
      */
     public void setScore(final Double score) {
       this.score_serialized_name = score;
+    }
+
+    /**
+     * Sets the confidence_serialized_name.
+     *
+     * @param confidence the new confidence
+     */
+    public void setConfidence(final Double confidence) {
+      this.confidence_serialized_name = confidence;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -13335,6 +14473,584 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * Object containing source parameters for the configuration.
+   */
+  public class Source extends IBMWatsonGenericModel {
+    private String type_serialized_name;
+    private String credential_id_serialized_name;
+    private SourceSchedule schedule_serialized_name;
+    private SourceOptions options_serialized_name;
+    /**
+     * Gets the type_serialized_name.
+     *
+     * The type of source to connect to.
+     * -  `box` indicates the configuration is to connect an instance of Enterprise Box.
+     * -  `salesforce` indicates the configuration is to connect to Salesforce.
+     * -  `sharepoint` indicates the configuration is to connect to Microsoft SharePoint Online.
+     *
+     * @return the type_serialized_name
+     */
+    @AuraEnabled
+    public String getType() {
+      return type_serialized_name;
+    }
+    /**
+     * Gets the credential_id_serialized_name.
+     *
+     * The **credential_id** of the credentials to use to connect to the source. Credentials are defined using the
+     * **credentials** method. The **source_type** of the credentials used must match the **type** field specified in
+     * this object.
+     *
+     * @return the credential_id_serialized_name
+     */
+    @AuraEnabled
+    public String getCredentialId() {
+      return credential_id_serialized_name;
+    }
+    /**
+     * Gets the schedule_serialized_name.
+     *
+     * @return the schedule_serialized_name
+     */
+    @AuraEnabled
+    public SourceSchedule getSchedule() {
+      return schedule_serialized_name;
+    }
+    /**
+     * Gets the options_serialized_name.
+     *
+     * @return the options_serialized_name
+     */
+    @AuraEnabled
+    public SourceOptions getOptions() {
+      return options_serialized_name;
+    }
+
+    /**
+     * Sets the type_serialized_name.
+     *
+     * @param typeVar the new typeVar
+     */
+    public void setType(final String typeVar) {
+      this.type_serialized_name = typeVar;
+    }
+
+    /**
+     * Sets the credential_id_serialized_name.
+     *
+     * @param credentialId the new credentialId
+     */
+    public void setCredentialId(final String credentialId) {
+      this.credential_id_serialized_name = credentialId;
+    }
+
+    /**
+     * Sets the schedule_serialized_name.
+     *
+     * @param schedule the new schedule
+     */
+    public void setSchedule(final SourceSchedule schedule) {
+      this.schedule_serialized_name = schedule;
+    }
+
+    /**
+     * Sets the options_serialized_name.
+     *
+     * @param options the new options
+     */
+    public void setOptions(final SourceOptions options) {
+      this.options_serialized_name = options;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Source ret = (Source) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for schedule_serialized_name
+      SourceSchedule newSchedule = (SourceSchedule) new SourceSchedule().deserialize(JSON.serialize(ret.getSchedule()), (Map<String, Object>) jsonMap.get('schedule_serialized_name'), SourceSchedule.class);
+      ret.setSchedule(newSchedule);
+
+      // calling custom deserializer for options_serialized_name
+      SourceOptions newOptions = (SourceOptions) new SourceOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options_serialized_name'), SourceOptions.class);
+      ret.setOptions(newOptions);
+
+      return ret;
+    }
+  }
+
+  /**
+   * The **options** object defines which items to crawl from the source system.
+   */
+  public class SourceOptions extends IBMWatsonGenericModel {
+    private List<SourceOptionsFolder> folders_serialized_name;
+    private List<SourceOptionsObject> objects_serialized_name;
+    private List<SourceOptionsSiteColl> site_collections_serialized_name;
+    /**
+     * Gets the folders_serialized_name.
+     *
+     * Array of folders to crawl from the Box source. Only valid, and required, when the **type** field of the
+     * **source** object is set to `box`.
+     *
+     * @return the folders_serialized_name
+     */
+    @AuraEnabled
+    public List<SourceOptionsFolder> getFolders() {
+      return folders_serialized_name;
+    }
+    /**
+     * Gets the objects_serialized_name.
+     *
+     * Array of Salesforce document object types to crawl from the Salesforce source. Only valid, and required, when the
+     * **type** field of the **source** object is set to `salesforce`.
+     *
+     * @return the objects_serialized_name
+     */
+    @AuraEnabled
+    public List<SourceOptionsObject> getObjects() {
+      return objects_serialized_name;
+    }
+    /**
+     * Gets the site_collections_serialized_name.
+     *
+     * Array of Microsoft SharePointoint Online site collections to crawl from the SharePoint source. Only valid and
+     * required when the **type** field of the **source** object is set to `sharepoint`.
+     *
+     * @return the site_collections_serialized_name
+     */
+    @AuraEnabled
+    public List<SourceOptionsSiteColl> getSiteCollections() {
+      return site_collections_serialized_name;
+    }
+
+    /**
+     * Sets the folders_serialized_name.
+     *
+     * @param folders the new folders
+     */
+    public void setFolders(final List<SourceOptionsFolder> folders) {
+      this.folders_serialized_name = folders;
+    }
+
+    /**
+     * Sets the objects_serialized_name.
+     *
+     * @param objects the new objects
+     */
+    public void setObjects(final List<SourceOptionsObject> objects) {
+      this.objects_serialized_name = objects;
+    }
+
+    /**
+     * Sets the site_collections_serialized_name.
+     *
+     * @param siteCollections the new siteCollections
+     */
+    public void setSiteCollections(final List<SourceOptionsSiteColl> siteCollections) {
+      this.site_collections_serialized_name = siteCollections;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SourceOptions ret = (SourceOptions) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for folders_serialized_name
+      List<SourceOptionsFolder> newFolders = new List<SourceOptionsFolder>();
+      List<SourceOptionsFolder> deserializedFolders = ret.getFolders();
+      if (deserializedFolders != null) {
+        for (Integer i = 0; i < deserializedFolders.size(); i++) {
+          SourceOptionsFolder currentItem = ret.getFolders().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('folders_serialized_name');
+          SourceOptionsFolder newItem = (SourceOptionsFolder) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsFolder.class);
+          newFolders.add(newItem);
+        }
+        ret.setFolders(newFolders);
+      }
+
+      // calling custom deserializer for objects_serialized_name
+      List<SourceOptionsObject> newObjects = new List<SourceOptionsObject>();
+      List<SourceOptionsObject> deserializedObjects = ret.getObjects();
+      if (deserializedObjects != null) {
+        for (Integer i = 0; i < deserializedObjects.size(); i++) {
+          SourceOptionsObject currentItem = ret.getObjects().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('objects_serialized_name');
+          SourceOptionsObject newItem = (SourceOptionsObject) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsObject.class);
+          newObjects.add(newItem);
+        }
+        ret.setObjects(newObjects);
+      }
+
+      // calling custom deserializer for site_collections_serialized_name
+      List<SourceOptionsSiteColl> newSiteCollections = new List<SourceOptionsSiteColl>();
+      List<SourceOptionsSiteColl> deserializedSiteCollections = ret.getSiteCollections();
+      if (deserializedSiteCollections != null) {
+        for (Integer i = 0; i < deserializedSiteCollections.size(); i++) {
+          SourceOptionsSiteColl currentItem = ret.getSiteCollections().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('site_collections_serialized_name');
+          SourceOptionsSiteColl newItem = (SourceOptionsSiteColl) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsSiteColl.class);
+          newSiteCollections.add(newItem);
+        }
+        ret.setSiteCollections(newSiteCollections);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Object that defines a box folder to crawl with this configuration.
+   */
+  public class SourceOptionsFolder extends IBMWatsonGenericModel {
+    private String owner_user_id_serialized_name;
+    private String folder_id_serialized_name;
+    private Long limit_serialized_name;
+    /**
+     * Gets the owner_user_id_serialized_name.
+     *
+     * The Box user ID of the user who owns the folder to crawl.
+     *
+     * @return the owner_user_id_serialized_name
+     */
+    @AuraEnabled
+    public String getOwnerUserId() {
+      return owner_user_id_serialized_name;
+    }
+    /**
+     * Gets the folder_id_serialized_name.
+     *
+     * The Box folder ID of the folder to crawl.
+     *
+     * @return the folder_id_serialized_name
+     */
+    @AuraEnabled
+    public String getFolderId() {
+      return folder_id_serialized_name;
+    }
+    /**
+     * Gets the limit_serialized_name.
+     *
+     * The maximum number of documents to crawl for this folder. By default, all documents in the folder are crawled.
+     *
+     * @return the limit_serialized_name
+     */
+    @AuraEnabled
+    public Long getLimit() {
+      return limit_serialized_name;
+    }
+
+    /**
+     * Sets the owner_user_id_serialized_name.
+     *
+     * @param ownerUserId the new ownerUserId
+     */
+    public void setOwnerUserId(final String ownerUserId) {
+      this.owner_user_id_serialized_name = ownerUserId;
+    }
+
+    /**
+     * Sets the folder_id_serialized_name.
+     *
+     * @param folderId the new folderId
+     */
+    public void setFolderId(final String folderId) {
+      this.folder_id_serialized_name = folderId;
+    }
+
+    /**
+     * Sets the limit_serialized_name.
+     *
+     * @param limitVar the new limitVar
+     */
+    public void setLimit(final long limitVar) {
+      this.limit_serialized_name = limitVar;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SourceOptionsFolder ret = (SourceOptionsFolder) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Object that defines a Salesforce document object type crawl with this configuration.
+   */
+  public class SourceOptionsObject extends IBMWatsonGenericModel {
+    private String name_serialized_name;
+    private Long limit_serialized_name;
+    /**
+     * Gets the name_serialized_name.
+     *
+     * The name of the Salesforce document object to crawl. For example, `case`.
+     *
+     * @return the name_serialized_name
+     */
+    @AuraEnabled
+    public String getName() {
+      return name_serialized_name;
+    }
+    /**
+     * Gets the limit_serialized_name.
+     *
+     * The maximum number of documents to crawl for this document object. By default, all documents in the document
+     * object are crawled.
+     *
+     * @return the limit_serialized_name
+     */
+    @AuraEnabled
+    public Long getLimit() {
+      return limit_serialized_name;
+    }
+
+    /**
+     * Sets the name_serialized_name.
+     *
+     * @param name the new name
+     */
+    public void setName(final String name) {
+      this.name_serialized_name = name;
+    }
+
+    /**
+     * Sets the limit_serialized_name.
+     *
+     * @param limitVar the new limitVar
+     */
+    public void setLimit(final long limitVar) {
+      this.limit_serialized_name = limitVar;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SourceOptionsObject ret = (SourceOptionsObject) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Object that defines a Microsoft SharePoint site collection to crawl with this configuration.
+   */
+  public class SourceOptionsSiteColl extends IBMWatsonGenericModel {
+    private String site_collection_path_serialized_name;
+    private Long limit_serialized_name;
+    /**
+     * Gets the site_collection_path_serialized_name.
+     *
+     * The Microsoft SharePoint Online site collection path to crawl. The path must be be relative to the
+     * **organization_url** that was specified in the credentials associated with this source configuration.
+     *
+     * @return the site_collection_path_serialized_name
+     */
+    @AuraEnabled
+    public String getSiteCollectionPath() {
+      return site_collection_path_serialized_name;
+    }
+    /**
+     * Gets the limit_serialized_name.
+     *
+     * The maximum number of documents to crawl for this site collection. By default, all documents in the site
+     * collection are crawled.
+     *
+     * @return the limit_serialized_name
+     */
+    @AuraEnabled
+    public Long getLimit() {
+      return limit_serialized_name;
+    }
+
+    /**
+     * Sets the site_collection_path_serialized_name.
+     *
+     * @param siteCollectionPath the new siteCollectionPath
+     */
+    public void setSiteCollectionPath(final String siteCollectionPath) {
+      this.site_collection_path_serialized_name = siteCollectionPath;
+    }
+
+    /**
+     * Sets the limit_serialized_name.
+     *
+     * @param limitVar the new limitVar
+     */
+    public void setLimit(final long limitVar) {
+      this.limit_serialized_name = limitVar;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SourceOptionsSiteColl ret = (SourceOptionsSiteColl) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Object containing the schedule information for the source.
+   */
+  public class SourceSchedule extends IBMWatsonGenericModel {
+    private Boolean enabled_serialized_name;
+    private String time_zone_serialized_name;
+    private String frequency_serialized_name;
+    /**
+     * Gets the enabled_serialized_name.
+     *
+     * When `true`, the source is re-crawled based on the **frequency** field in this object. When `false` the source is
+     * not re-crawled; When `false` and connecting to Salesforce the source is crawled annually.
+     *
+     * @return the enabled_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getEnabled() {
+      return enabled_serialized_name;
+    }
+    /**
+     * Gets the time_zone_serialized_name.
+     *
+     * The time zone to base source crawl times on. Possible values correspond to the IANA (Internet Assigned Numbers
+     * Authority) time zones list.
+     *
+     * @return the time_zone_serialized_name
+     */
+    @AuraEnabled
+    public String getTimeZone() {
+      return time_zone_serialized_name;
+    }
+    /**
+     * Gets the frequency_serialized_name.
+     *
+     * The crawl schedule in the specified **time_zone**.
+     *
+     * -  `daily`: Runs every day between 00:00 and 06:00.
+     * -  `weekly`: Runs every week on Sunday between 00:00 and 06:00.
+     * -  `monthly`: Runs the on the first Sunday of every month between 00:00 and 06:00.
+     *
+     * @return the frequency_serialized_name
+     */
+    @AuraEnabled
+    public String getFrequency() {
+      return frequency_serialized_name;
+    }
+
+    /**
+     * Sets the enabled_serialized_name.
+     *
+     * @param enabled the new enabled
+     */
+    public void setEnabled(final Boolean enabled) {
+      this.enabled_serialized_name = enabled;
+    }
+
+    /**
+     * Sets the time_zone_serialized_name.
+     *
+     * @param timeZone the new timeZone
+     */
+    public void setTimeZone(final String timeZone) {
+      this.time_zone_serialized_name = timeZone;
+    }
+
+    /**
+     * Sets the frequency_serialized_name.
+     *
+     * @param frequency the new frequency
+     */
+    public void setFrequency(final String frequency) {
+      this.frequency_serialized_name = frequency;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SourceSchedule ret = (SourceSchedule) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Object containing source crawl status information.
+   */
+  public class SourceStatus extends IBMWatsonGenericModel {
+    private String status_serialized_name;
+    private Datetime last_updated_serialized_name;
+    /**
+     * Gets the status_serialized_name.
+     *
+     * The current status of the source crawl for this collection. This field returns `not_configured` if the default
+     * configuration for this source does not have a **source** object defined.
+     *
+     * -  `running` indicates that a crawl to fetch more documents is in progress.
+     * -  `complete` indicates that the crawl has completed with no errors.
+     * -  `complete_with_notices` indicates that some notices were generated during the crawl. Notices can be checked by
+     * using the **notices** query method.
+     * -  `stopped` indicates that the crawl has stopped but is not complete.
+     *
+     * @return the status_serialized_name
+     */
+    @AuraEnabled
+    public String getStatus() {
+      return status_serialized_name;
+    }
+    /**
+     * Gets the last_updated_serialized_name.
+     *
+     * Date in UTC format indicating when the last crawl was attempted. If `null`, no crawl was completed.
+     *
+     * @return the last_updated_serialized_name
+     */
+    @AuraEnabled
+    public Datetime getLastUpdated() {
+      return last_updated_serialized_name;
+    }
+
+    /**
+     * Sets the status_serialized_name.
+     *
+     * @param status the new status
+     */
+    public void setStatus(final String status) {
+      this.status_serialized_name = status;
+    }
+
+    /**
+     * Sets the last_updated_serialized_name.
+     *
+     * @param lastUpdated the new lastUpdated
+     */
+    public void setLastUpdated(final Datetime lastUpdated) {
+      this.last_updated_serialized_name = lastUpdated;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SourceStatus ret = (SourceStatus) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
    * The testConfigurationInEnvironment options.
    */
   public class TestConfigurationInEnvironmentOptions extends IBMWatsonOptionsModel {
@@ -13360,7 +15076,7 @@ public class IBMDiscoveryV1Models {
      * Gets the configuration_serialized_name.
      *
      * The configuration to use to process the document. If this part is provided, then the provided configuration is
-     * used to process the document. If the `configuration_id` is also provided (both are present at the same time),
+     * used to process the document. If the **configuration_id** is also provided (both are present at the same time),
      * then request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB
      * are rejected.
      * See the `GET /configurations/{configuration_id}` operation for an example configuration.
@@ -13384,8 +15100,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the configuration_id_serialized_name.
      *
-     * The ID of the configuration to use to process the document. If the `configuration` form part is also provided
-     * (both are present at the same time), then request will be rejected.
+     * The ID of the configuration to use to process the document. If the **configuration** form part is also provided
+     * (both are present at the same time), then the request will be rejected.
      *
      * @return the configuration_id_serialized_name
      */
@@ -14531,6 +16247,7 @@ public class IBMDiscoveryV1Models {
     private Conversions conversions_serialized_name;
     private List<Enrichment> enrichments_serialized_name;
     private List<NormalizationOperation> normalizations_serialized_name;
+    private Source source_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
      *
@@ -14602,6 +16319,14 @@ public class IBMDiscoveryV1Models {
     public List<NormalizationOperation> normalizations() {
       return normalizations_serialized_name;
     }
+    /**
+     * Gets the source_serialized_name.
+     *
+     * @return the source_serialized_name
+     */
+    public Source source() {
+      return source_serialized_name;
+    }
     private UpdateConfigurationOptions(UpdateConfigurationOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.configuration_id_serialized_name, 'configuration_id_serialized_name cannot be empty');
@@ -14612,6 +16337,7 @@ public class IBMDiscoveryV1Models {
       conversions_serialized_name = builder.conversions_serialized_name;
       enrichments_serialized_name = builder.enrichments_serialized_name;
       normalizations_serialized_name = builder.normalizations_serialized_name;
+      source_serialized_name = builder.source_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -14637,6 +16363,7 @@ public class IBMDiscoveryV1Models {
     private Conversions conversions_serialized_name;
     private List<Enrichment> enrichments_serialized_name;
     private List<NormalizationOperation> normalizations_serialized_name;
+    private Source source_serialized_name;
 
     private UpdateConfigurationOptionsBuilder(UpdateConfigurationOptions updateConfigurationOptions) {
       environment_id_serialized_name = updateConfigurationOptions.environment_id_serialized_name;
@@ -14646,6 +16373,7 @@ public class IBMDiscoveryV1Models {
       conversions_serialized_name = updateConfigurationOptions.conversions_serialized_name;
       enrichments_serialized_name = updateConfigurationOptions.enrichments_serialized_name;
       normalizations_serialized_name = updateConfigurationOptions.normalizations_serialized_name;
+      source_serialized_name = updateConfigurationOptions.source_serialized_name;
       this.requestHeaders.putAll(updateConfigurationOptions.requestHeaders());
     }
 
@@ -14785,6 +16513,17 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
+     * Set the source_serialized_name.
+     *
+     * @param source the source
+     * @return the UpdateConfigurationOptions builder
+     */
+    public UpdateConfigurationOptionsBuilder source(Source source) {
+      this.source_serialized_name = source;
+      return this;
+    }
+
+    /**
      * Set the configuration.
      *
      * @param configuration the configuration
@@ -14796,6 +16535,7 @@ public class IBMDiscoveryV1Models {
       this.conversions_serialized_name = configuration.getConversions();
       this.enrichments_serialized_name = configuration.getEnrichments();
       this.normalizations_serialized_name = configuration.getNormalizations();
+      this.source_serialized_name = configuration.getSource();
       return this;
     }
 
@@ -14807,6 +16547,188 @@ public class IBMDiscoveryV1Models {
      * @return the UpdateConfigurationOptions builder
      */
     public UpdateConfigurationOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The updateCredentials options.
+   */
+  public class UpdateCredentialsOptions extends IBMWatsonOptionsModel {
+    private String environment_id_serialized_name;
+    private String credential_id_serialized_name;
+    private String source_type_serialized_name;
+    private CredentialDetails credential_details_serialized_name;
+    /**
+     * Gets the environment_id_serialized_name.
+     *
+     * The ID of the environment.
+     *
+     * @return the environment_id_serialized_name
+     */
+    public String environmentId() {
+      return environment_id_serialized_name;
+    }
+    /**
+     * Gets the credential_id_serialized_name.
+     *
+     * The unique identifier for a set of source credentials.
+     *
+     * @return the credential_id_serialized_name
+     */
+    public String credentialId() {
+      return credential_id_serialized_name;
+    }
+    /**
+     * Gets the source_type_serialized_name.
+     *
+     * The source that this credentials object connects to.
+     * -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
+     * -  `salesforce` indicates the credentials are used to connect to Salesforce.
+     * -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
+     *
+     * @return the source_type_serialized_name
+     */
+    public String sourceType() {
+      return source_type_serialized_name;
+    }
+    /**
+     * Gets the credential_details_serialized_name.
+     *
+     * @return the credential_details_serialized_name
+     */
+    public CredentialDetails credentialDetails() {
+      return credential_details_serialized_name;
+    }
+    private UpdateCredentialsOptions(UpdateCredentialsOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.credential_id_serialized_name, 'credential_id_serialized_name cannot be empty');
+      environment_id_serialized_name = builder.environment_id_serialized_name;
+      credential_id_serialized_name = builder.credential_id_serialized_name;
+      source_type_serialized_name = builder.source_type_serialized_name;
+      credential_details_serialized_name = builder.credential_details_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a UpdateCredentialsOptions builder
+     */
+    public UpdateCredentialsOptionsBuilder newBuilder() {
+      return new UpdateCredentialsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * UpdateCredentialsOptions Builder.
+   */
+  public class UpdateCredentialsOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environment_id_serialized_name;
+    private String credential_id_serialized_name;
+    private String source_type_serialized_name;
+    private CredentialDetails credential_details_serialized_name;
+
+    private UpdateCredentialsOptionsBuilder(UpdateCredentialsOptions updateCredentialsOptions) {
+      environment_id_serialized_name = updateCredentialsOptions.environment_id_serialized_name;
+      credential_id_serialized_name = updateCredentialsOptions.credential_id_serialized_name;
+      source_type_serialized_name = updateCredentialsOptions.source_type_serialized_name;
+      credential_details_serialized_name = updateCredentialsOptions.credential_details_serialized_name;
+      this.requestHeaders.putAll(updateCredentialsOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public UpdateCredentialsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param credentialId the credentialId
+     */
+    public UpdateCredentialsOptionsBuilder(String environmentId, String credentialId) {
+      this.environment_id_serialized_name = environmentId;
+      this.credential_id_serialized_name = credentialId;
+    }
+
+    /**
+     * Builds a UpdateCredentialsOptions.
+     *
+     * @return the updateCredentialsOptions
+     */
+    public UpdateCredentialsOptions build() {
+      return new UpdateCredentialsOptions(this);
+    }
+
+    /**
+     * Set the environment_id_serialized_name.
+     *
+     * @param environmentId the environmentId
+     * @return the UpdateCredentialsOptions builder
+     */
+    public UpdateCredentialsOptionsBuilder environmentId(String environmentId) {
+      this.environment_id_serialized_name = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the credential_id_serialized_name.
+     *
+     * @param credentialId the credentialId
+     * @return the UpdateCredentialsOptions builder
+     */
+    public UpdateCredentialsOptionsBuilder credentialId(String credentialId) {
+      this.credential_id_serialized_name = credentialId;
+      return this;
+    }
+
+    /**
+     * Set the source_type_serialized_name.
+     *
+     * @param sourceType the sourceType
+     * @return the UpdateCredentialsOptions builder
+     */
+    public UpdateCredentialsOptionsBuilder sourceType(String sourceType) {
+      this.source_type_serialized_name = sourceType;
+      return this;
+    }
+
+    /**
+     * Set the credential_details_serialized_name.
+     *
+     * @param credentialDetails the credentialDetails
+     * @return the UpdateCredentialsOptions builder
+     */
+    public UpdateCredentialsOptionsBuilder credentialDetails(CredentialDetails credentialDetails) {
+      this.credential_details_serialized_name = credentialDetails;
+      return this;
+    }
+
+    /**
+     * Set the credentials.
+     *
+     * @param credentials the credentials
+     * @return the UpdateCredentialsOptions builder
+     */
+    public UpdateCredentialsOptionsBuilder credentials(Credentials credentials) {
+      this.source_type_serialized_name = credentials.getSourceType();
+      this.credential_details_serialized_name = credentials.getCredentialDetails();
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the UpdateCredentialsOptions builder
+     */
+    public UpdateCredentialsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
