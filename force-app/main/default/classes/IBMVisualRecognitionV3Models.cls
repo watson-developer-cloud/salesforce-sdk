@@ -805,8 +805,8 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the accept_language_serialized_name.
      *
-     * The language of the output class names. The full set of languages is supported only for the built-in `default`
-     * classifier ID. The class names of custom classifiers are not translated.
+     * The language of the output class names. The full set of languages is supported for the built-in classifier IDs:
+     * `default`, `food`, and `explicit`. The class names of custom classifiers are not translated.
      *
      * The response might not be in the specified language when the requested language is not supported or when there is
      * no translation for the class name.
