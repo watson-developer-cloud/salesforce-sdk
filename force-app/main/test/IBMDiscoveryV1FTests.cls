@@ -30,6 +30,7 @@ public with sharing class IBMDiscoveryV1FTests {
     testListTrainingData(ENVIRONMENT_ID, COLLECTION_ID, username, password);
     testFederatedQueryNotices(ENVIRONMENT_ID, COLLECTION_ID, username, password);
     testAddAndDeleteDocument(ENVIRONMENT_ID, COLLECTION_ID, username, password);
+    testCredentialsOperations(ENVIRONMENT_ID, username, password);
   }
 
   /**
@@ -929,6 +930,68 @@ public with sharing class IBMDiscoveryV1FTests {
     discovery.deleteExpansions(deleteOptions);
 
     IBMDiscoveryV1Models.Expansions emptyListResults = discovery.listExpansions(listOptions);
+  }
+
+  public static void testCredentialsOperations(String environmentId, String username, String password) {
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
+
+    String sourceType = 'salesforce';
+    String credentialType = 'username_password';
+    String url = 'https://login.salesforce.com';
+    String username = 'test@username.com';
+    String password = 'test_password';
+
+    IBMDiscoveryV1Models.CredentialDetails credentialDetails = new IBMDiscoveryV1Models.CredentialDetails();
+    credentialDetails.setCredentialType(credentialType);
+    credentialDetails.setUrl(url);
+    credentialDetails.setUsername(username);
+    credentialDetails.setPassword(password);
+    IBMDiscoveryV1Models.Credentials credentials = new IBMDiscoveryV1Models.Credentials();
+    credentials.setSourceType(sourceType);
+    credentials.setCredentialDetails(credentialDetails);
+
+    IBMDiscoveryV1Models.CreateCredentialsOptions createOptions = new IBMDiscoveryV1Models.CreateCredentialsOptionsBuilder()
+      .environmentId(environmentId)
+      .credentials(credentials)
+      .build();
+    IBMDiscoveryV1Models.Credentials createdCredentials = discovery.createCredentials(createOptions);
+    String credentialId = createdCredentials.getCredentialId();
+
+    String newUrl = 'https://newlogin.salesforce.com';
+    IBMDiscoveryV1Models.CredentialDetails updatedDetails = new IBMDiscoveryV1Models.CredentialDetails();
+    updatedDetails.setCredentialType(credentialType);
+    updatedDetails.setUrl(newUrl);
+    updatedDetails.setUsername(username);
+    updatedDetails.setPassword(password);
+
+    IBMDiscoveryV1Models.UpdateCredentialsOptions updateOptions = new IBMDiscoveryV1Models.UpdateCredentialsOptionsBuilder()
+      .environmentId(environmentId)
+      .credentialId(credentialId)
+      .sourceType(sourceType)
+      .credentialDetails(updatedDetails)
+      .build();
+    IBMDiscoveryV1Models.Credentials updatedCredentials = discovery.updateCredentials(updateOptions);
+
+    IBMDiscoveryV1Models.GetCredentialsOptions getOptions = new IBMDiscoveryV1Models.GetCredentialsOptionsBuilder()
+      .environmentId(environmentId)
+      .credentialId(credentialId)
+      .build();
+    IBMDiscoveryV1Models.Credentials retrievedCredentials = discovery.getCredentials(getOptions);
+
+    IBMDiscoveryV1Models.ListCredentialsOptions listOptions = new IBMDiscoveryV1Models.ListCredentialsOptionsBuilder()
+      .environmentId(environmentId)
+      .build();
+    IBMDiscoveryV1Models.CredentialsList credentialsList = discovery.listCredentials(listOptions);
+
+    IBMDiscoveryV1Models.DeleteCredentialsOptions deleteOptions = new IBMDiscoveryV1Models.DeleteCredentialsOptionsBuilder()
+      .environmentId(environmentId)
+      .credentialId(credentialId)
+      .build();
+    discovery.deleteCredentials(deleteOptions);
   }
 
   public static Attachment createFile()
