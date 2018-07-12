@@ -990,8 +990,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the content_type_serialized_name.
      *
-     * The type of the input: application/json, text/html, or text/plain. A character encoding can be specified by
-     * including a `charset` parameter. For example, 'text/html;charset=utf-8'.
+     * The type of the input. A character encoding can be specified by including a `charset` parameter. For example,
+     * 'text/html;charset=utf-8'.
      *
      * @return the content_type_serialized_name
      */
