@@ -321,6 +321,9 @@ public class IBMSpeechToTextV1Models {
     private String content_type_serialized_name;
     private String contained_content_type_serialized_name;
     private Boolean allow_overwrite_serialized_name;
+    private IBMWatsonFile audio_serialized_name;
+    private String audio_filename_serialized_name;
+
     /**
      * Gets the customization_id_serialized_name.
      *
@@ -378,7 +381,16 @@ public class IBMSpeechToTextV1Models {
     public Boolean allowOverwrite() {
       return allow_overwrite_serialized_name;
     }
+    public IBMWatsonFile audio() {
+      return audio_serialized_name;
+    }
+
+    public String audioFilename() {
+      return audio_filename_serialized_name;
+    }
     private AddAudioOptions(AddAudioOptionsBuilder builder) {
+      IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be null');
+      IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be null');
       IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.audio_name_serialized_name, 'audio_name_serialized_name cannot be empty');
       IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
@@ -387,6 +399,8 @@ public class IBMSpeechToTextV1Models {
       content_type_serialized_name = builder.content_type_serialized_name;
       contained_content_type_serialized_name = builder.contained_content_type_serialized_name;
       allow_overwrite_serialized_name = builder.allow_overwrite_serialized_name;
+      audio_serialized_name = builder.audio_serialized_name;
+      audio_filename_serialized_name = builder.audio_filename_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -410,6 +424,8 @@ public class IBMSpeechToTextV1Models {
     private String content_type_serialized_name;
     private String contained_content_type_serialized_name;
     private Boolean allow_overwrite_serialized_name;
+    private IBMWatsonFile audio_serialized_name;
+    private String audio_filename_serialized_name;
 
     private AddAudioOptionsBuilder(AddAudioOptions addAudioOptions) {
       customization_id_serialized_name = addAudioOptions.customization_id_serialized_name;
@@ -417,6 +433,8 @@ public class IBMSpeechToTextV1Models {
       content_type_serialized_name = addAudioOptions.content_type_serialized_name;
       contained_content_type_serialized_name = addAudioOptions.contained_content_type_serialized_name;
       allow_overwrite_serialized_name = addAudioOptions.allow_overwrite_serialized_name;
+      audio_serialized_name = addAudioOptions.audio_serialized_name;
+      audio_filename_serialized_name = addAudioOptions.audio_filename_serialized_name;
       this.requestHeaders.putAll(addAudioOptions.requestHeaders());
     }
 
@@ -432,9 +450,12 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      * @param audioName the audioName
      */
-    public AddAudioOptionsBuilder(String customizationId, String audioName) {
+    public AddAudioOptionsBuilder(String customizationId, String audioName, IBMWatsonFile audio, String audioFilename) {
       this.customization_id_serialized_name = customizationId;
       this.audio_name_serialized_name = audioName;
+      this.audio_serialized_name = audio;
+      this.audio_filename_serialized_name = audioFilename;
+      this.content_type_serialized_name = audio.contentType();
     }
 
     /**
@@ -490,153 +511,14 @@ public class IBMSpeechToTextV1Models {
       return this;
     }
 
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+    public AddAudioOptionsBuilder audio(IBMWatsonFile audio) {
+      this.audio_serialized_name = audio;
+      this.content_type_serialized_name = audio.contentType();
       return this;
     }
 
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
-      return this;
-    }
-
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
-      return this;
-    }
-
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
-      return this;
-    }
-
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
-      return this;
-    }
-
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
-      return this;
-    }
-
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
-      return this;
-    }
-
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
-      return this;
-    }
-
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
-      return this;
-    }
-
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
-      return this;
-    }
-
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
-      return this;
-    }
-
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
-      return this;
-    }
-
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
-      return this;
-    }
-
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
-      return this;
-    }
-
-    /**
-     * Set the AddAudioOptions.
-     *
-     * @param AddAudioOptions the AddAudioOptions
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder AddAudioOptions( AddAudioOptions) {
+    public AddAudioOptionsBuilder audioFilename(String audioFilename) {
+      this.audio_filename_serialized_name = audioFilename;
       return this;
     }
 
@@ -2191,6 +2073,8 @@ public class IBMSpeechToTextV1Models {
     private Boolean profanity_filter_serialized_name;
     private Boolean smart_formatting_serialized_name;
     private Boolean speaker_labels_serialized_name;
+    private IBMWatsonFile audio_serialized_name;
+    private String audio_filename_serialized_name;
     /**
      * Gets the content_type_serialized_name.
      *
@@ -2458,8 +2342,17 @@ public class IBMSpeechToTextV1Models {
     public Boolean speakerLabels() {
       return speaker_labels_serialized_name;
     }
+    public IBMWatsonFile audio() {
+      return audio_serialized_name;
+    }
+
+    public String audioFilename() {
+      return audio_filename_serialized_name;
+    }
     private CreateJobOptions(CreateJobOptionsBuilder builder) {
       IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
+      IBMWatsonValidator.notNull(builder.audio_serialized_name, 'audio cannot be null');
+      IBMWatsonValidator.notEmpty(builder.audio_filename_serialized_name, 'audioFilename cannot be null');
       content_type_serialized_name = builder.content_type_serialized_name;
       model_serialized_name = builder.model_serialized_name;
       callback_url_serialized_name = builder.callback_url_serialized_name;
@@ -2480,6 +2373,8 @@ public class IBMSpeechToTextV1Models {
       profanity_filter_serialized_name = builder.profanity_filter_serialized_name;
       smart_formatting_serialized_name = builder.smart_formatting_serialized_name;
       speaker_labels_serialized_name = builder.speaker_labels_serialized_name;
+      audio_serialized_name = builder.audio_serialized_name;
+      audio_filename_serialized_name = builder.audio_filename_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2518,6 +2413,8 @@ public class IBMSpeechToTextV1Models {
     private Boolean profanity_filter_serialized_name;
     private Boolean smart_formatting_serialized_name;
     private Boolean speaker_labels_serialized_name;
+    private IBMWatsonFile audio_serialized_name;
+    private String audio_filename_serialized_name;
 
     private CreateJobOptionsBuilder(CreateJobOptions createJobOptions) {
       content_type_serialized_name = createJobOptions.content_type_serialized_name;
@@ -2540,6 +2437,8 @@ public class IBMSpeechToTextV1Models {
       profanity_filter_serialized_name = createJobOptions.profanity_filter_serialized_name;
       smart_formatting_serialized_name = createJobOptions.smart_formatting_serialized_name;
       speaker_labels_serialized_name = createJobOptions.speaker_labels_serialized_name;
+      audio_serialized_name = createJobOptions.audio_serialized_name;
+      audio_filename_serialized_name = createJobOptions.audio_filename_serialized_name;
       this.requestHeaders.putAll(createJobOptions.requestHeaders());
     }
 
@@ -2783,133 +2682,14 @@ public class IBMSpeechToTextV1Models {
       return this;
     }
 
-    /**
-     * Set the CreateJobOptions.
-     *
-     * @param CreateJobOptions the CreateJobOptions
-     * @return the CreateJobOptions builder
-     */
-    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+    public CreateJobOptionsBuilder audio(IBMWatsonFile audio) {
+      this.audio_serialized_name = audio;
+      this.content_type_serialized_name = audio.contentType();
       return this;
     }
 
-    /**
-     * Set the CreateJobOptions.
-     *
-     * @param CreateJobOptions the CreateJobOptions
-     * @return the CreateJobOptions builder
-     */
-    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
-      return this;
-    }
-
-    /**
-     * Set the CreateJobOptions.
-     *
-     * @param CreateJobOptions the CreateJobOptions
-     * @return the CreateJobOptions builder
-     */
-    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
-      return this;
-    }
-
-    /**
-     * Set the CreateJobOptions.
-     *
-     * @param CreateJobOptions the CreateJobOptions
-     * @return the CreateJobOptions builder
-     */
-    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
-      return this;
-    }
-
-    /**
-     * Set the CreateJobOptions.
-     *
-     * @param CreateJobOptions the CreateJobOptions
-     * @return the CreateJobOptions builder
-     */
-    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
-      return this;
-    }
-
-    /**
-     * Set the CreateJobOptions.
-     *
-     * @param CreateJobOptions the CreateJobOptions
-     * @return the CreateJobOptions builder
-     */
-    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
-      return this;
-    }
-
-    /**
-     * Set the CreateJobOptions.
-     *
-     * @param CreateJobOptions the CreateJobOptions
-     * @return the CreateJobOptions builder
-     */
-    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
-      return this;
-    }
-
-    /**
-     * Set the CreateJobOptions.
-     *
-     * @param CreateJobOptions the CreateJobOptions
-     * @return the CreateJobOptions builder
-     */
-    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
-      return this;
-    }
-
-    /**
-     * Set the CreateJobOptions.
-     *
-     * @param CreateJobOptions the CreateJobOptions
-     * @return the CreateJobOptions builder
-     */
-    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
-      return this;
-    }
-
-    /**
-     * Set the CreateJobOptions.
-     *
-     * @param CreateJobOptions the CreateJobOptions
-     * @return the CreateJobOptions builder
-     */
-    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
-      return this;
-    }
-
-    /**
-     * Set the CreateJobOptions.
-     *
-     * @param CreateJobOptions the CreateJobOptions
-     * @return the CreateJobOptions builder
-     */
-    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
-      return this;
-    }
-
-    /**
-     * Set the CreateJobOptions.
-     *
-     * @param CreateJobOptions the CreateJobOptions
-     * @return the CreateJobOptions builder
-     */
-    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
-      return this;
-    }
-
-    /**
-     * Set the CreateJobOptions.
-     *
-     * @param CreateJobOptions the CreateJobOptions
-     * @return the CreateJobOptions builder
-     */
-    public CreateJobOptionsBuilder CreateJobOptions( CreateJobOptions) {
+    public CreateJobOptionsBuilder audioFilename(String audioFilename) {
+      this.audio_filename_serialized_name = audioFilename;
       return this;
     }
 
@@ -4563,7 +4343,7 @@ public class IBMSpeechToTextV1Models {
   /**
    * KeywordResult.
    */
-  public class KeywordResult {
+  public class KeywordResult extends IBMWatsonGenericModel {
     private String normalized_text_serialized_name;
     private Double start_time_serialized_name;
     private Double end_time_serialized_name;
@@ -4645,6 +4425,15 @@ public class IBMSpeechToTextV1Models {
       this.confidence_serialized_name = confidence;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      KeywordResult ret = (KeywordResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
   }
 
   /**
@@ -6944,7 +6733,7 @@ public class IBMSpeechToTextV1Models {
     private String url_serialized_name;
     private SupportedFeatures supported_features_serialized_name;
     private String description_serialized_name;
-    private String sessions_serialized_name;
+
     /**
      * Gets the name_serialized_name.
      *
@@ -7011,18 +6800,6 @@ public class IBMSpeechToTextV1Models {
     public String getDescription() {
       return description_serialized_name;
     }
-    /**
-     * Gets the sessions_serialized_name.
-     *
-     * The URI for the model for use with the **Create a session** method. This field is returned only by the **Get a
-     * model** method.
-     *
-     * @return the sessions_serialized_name
-     */
-    @AuraEnabled
-    public String getSessions() {
-      return sessions_serialized_name;
-    }
 
     /**
      * Sets the name_serialized_name.
@@ -7076,15 +6853,6 @@ public class IBMSpeechToTextV1Models {
      */
     public void setDescription(final String description) {
       this.description_serialized_name = description;
-    }
-
-    /**
-     * Sets the sessions_serialized_name.
-     *
-     * @param sessions the new sessions
-     */
-    public void setSessions(final String sessions) {
-      this.sessions_serialized_name = sessions;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7158,8 +6926,8 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript_serialized_name;
     private Double confidence_serialized_name;
-    private List<String> timestamps_serialized_name;
-    private List<String> word_confidence_serialized_name;
+    private List<List<String>> timestamps_serialized_name;
+    private List<List<String>> word_confidence_serialized_name;
     /**
      * Gets the transcript_serialized_name.
      *
@@ -7193,7 +6961,7 @@ public class IBMSpeechToTextV1Models {
      * @return the timestamps_serialized_name
      */
     @AuraEnabled
-    public List<String> getTimestamps() {
+    public List<List<String>> getTimestamps() {
       return timestamps_serialized_name;
     }
     /**
@@ -7206,7 +6974,7 @@ public class IBMSpeechToTextV1Models {
      * @return the word_confidence_serialized_name
      */
     @AuraEnabled
-    public List<String> getWordConfidence() {
+    public List<List<String>> getWordConfidence() {
       return word_confidence_serialized_name;
     }
 
@@ -7233,7 +7001,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<String> timestamps) {
+    public void setTimestamps(final List<List<String>> timestamps) {
       this.timestamps_serialized_name = timestamps;
     }
 
@@ -7242,7 +7010,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<String> wordConfidence) {
+    public void setWordConfidence(final List<List<String>> wordConfidence) {
       this.word_confidence_serialized_name = wordConfidence;
     }
 
@@ -7372,8 +7140,23 @@ public class IBMSpeechToTextV1Models {
       }
 
       // calling custom deserializer for keywords_result_serialized_name
-      Map<String, List<KeywordResult>> newKeywordsResult = (Map<String, List<KeywordResult>>) new Map<String, List<KeywordResult>>().deserialize(JSON.serialize(ret.getKeywordsResult()), (Map<String, Object>) jsonMap.get('keywords_result_serialized_name'), Map<String, List<KeywordResult>>.class);
-      ret.setKeywordsResult(newKeywordsResult);
+      Map<String, List<KeywordResult>> newKeywordsResult = new Map<String, List<KeywordResult>>();
+      Map<String, List<KeywordResult>> deserializedKeywordsResult = ret.getKeywordsResult();
+      if (deserializedKeywordsResult != null) {
+        for (String key : deserializedKeywordsResult.keySet()) {
+          List<KeywordResult> newKeywordResult = new List<KeywordResult>();
+          List<KeywordResult> keywordResultList = deserializedKeywordsResult.get(key);
+          for (Integer i = 0; i < keywordResultList.size(); i++) {
+            KeywordResult currentItem = keywordResultList.get(i);
+            Map<String, Object> itemInMap = (Map<String, Object>) jsonMap.get('keywords_result_serialized_name');
+            Object innerKeywordResult = ((List<Object>) itemInMap.get(key)).get(i);
+            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(innerKeywordResult)), KeywordResult.class);
+            newKeywordResult.add(newItem);
+          }
+          newKeywordsResult.put(key, newKeywordResult);
+        }
+        ret.setKeywordsResult(newKeywordsResult);
+      }
 
       // calling custom deserializer for word_alternatives_serialized_name
       List<WordAlternativeResults> newWordAlternatives = new List<WordAlternativeResults>();
