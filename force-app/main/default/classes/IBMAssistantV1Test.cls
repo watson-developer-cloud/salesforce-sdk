@@ -1731,4 +1731,32 @@ private class IBMAssistantV1Test {
 
     Test.stopTest();
   }
+
+  static testMethod void testListMentions() {
+    String body = IBMWatsonMockResponses.mentions();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
+    assistant.setUsernameAndPassword('username', 'password');
+
+    String entity = 'amenity';
+
+    IBMAssistantV1Models.ListMentionsOptions listMentionsOptions = new IBMAssistantV1Models.ListMentionsOptionsBuilder()
+      .workspaceId(workspaceId)
+      .entity(entity)
+      .build();
+    //you can add more attributes using following builder method. This step is not necessary
+    listMentionsOptions = listMentionsOptions.newBuilder().build();
+    IBMAssistantV1Models.EntityMentionCollection response = assistant.listMentions(listMentionsOptions);
+
+    System.assert(!response.getExamples().isEmpty());
+
+    Test.stopTest();
+  }
 }

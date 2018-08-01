@@ -2491,4 +2491,14 @@ public class IBMWatsonMockResponses {
     '} ]' +
   '}';
   }
+
+  public static testMethod String mentions() {
+    return '{' +
+      '"examples" : [ {' +
+        '"text" : "I would like to order a pizza",' +
+        '"intent" : "FoodTypes",' +
+        '"location" : [ 20, 24 ]' +
+      '} ]' +
+    '}';
+  }
 }
