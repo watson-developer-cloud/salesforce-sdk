@@ -14791,6 +14791,7 @@ public class IBMAssistantV1Models {
     private String description_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
+    private WorkspaceSystemSettings system_settings_serialized_name;
     /**
      * Gets the name_serialized_name.
      *
@@ -14880,6 +14881,17 @@ public class IBMAssistantV1Models {
     public Boolean getLearningOptOut() {
       return learning_opt_out_serialized_name;
     }
+    /**
+     * Gets the system_settings_serialized_name.
+     *
+     * Global settings for the workspace.
+     *
+     * @return the system_settings_serialized_name
+     */
+    @AuraEnabled
+    public WorkspaceSystemSettings getSystemSettings() {
+      return system_settings_serialized_name;
+    }
 
     /**
      * Sets the name_serialized_name.
@@ -14926,6 +14938,15 @@ public class IBMAssistantV1Models {
       this.learning_opt_out_serialized_name = learningOptOut;
     }
 
+    /**
+     * Sets the system_settings_serialized_name.
+     *
+     * @param systemSettings the new systemSettings
+     */
+    public void setSystemSettings(final WorkspaceSystemSettings systemSettings) {
+      this.system_settings_serialized_name = systemSettings;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -14936,6 +14957,10 @@ public class IBMAssistantV1Models {
       // calling custom deserializer for metadata_serialized_name
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
+
+      // calling custom deserializer for system_settings_serialized_name
+      WorkspaceSystemSettings newSystemSettings = (WorkspaceSystemSettings) new WorkspaceSystemSettings().deserialize(JSON.serialize(ret.getSystemSettings()), (Map<String, Object>) jsonMap.get('system_settings_serialized_name'), WorkspaceSystemSettings.class);
+      ret.setSystemSettings(newSystemSettings);
 
       return ret;
     }
@@ -15029,6 +15054,7 @@ public class IBMAssistantV1Models {
     private String workspace_id_serialized_name;
     private String status_serialized_name;
     private Boolean learning_opt_out_serialized_name;
+    private WorkspaceSystemSettings system_settings_serialized_name;
     private List<IntentExport> intents_serialized_name;
     private List<EntityExport> entities_serialized_name;
     private List<Counterexample> counterexamples_serialized_name;
@@ -15134,6 +15160,17 @@ public class IBMAssistantV1Models {
       return learning_opt_out_serialized_name;
     }
     /**
+     * Gets the system_settings_serialized_name.
+     *
+     * Global settings for the workspace.
+     *
+     * @return the system_settings_serialized_name
+     */
+    @AuraEnabled
+    public WorkspaceSystemSettings getSystemSettings() {
+      return system_settings_serialized_name;
+    }
+    /**
      * Gets the intents_serialized_name.
      *
      * An array of intents.
@@ -15233,6 +15270,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Sets the system_settings_serialized_name.
+     *
+     * @param systemSettings the new systemSettings
+     */
+    public void setSystemSettings(final WorkspaceSystemSettings systemSettings) {
+      this.system_settings_serialized_name = systemSettings;
+    }
+
+    /**
      * Sets the intents_serialized_name.
      *
      * @param intents the new intents
@@ -15278,6 +15324,10 @@ public class IBMAssistantV1Models {
       // calling custom deserializer for metadata_serialized_name
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
+
+      // calling custom deserializer for system_settings_serialized_name
+      WorkspaceSystemSettings newSystemSettings = (WorkspaceSystemSettings) new WorkspaceSystemSettings().deserialize(JSON.serialize(ret.getSystemSettings()), (Map<String, Object>) jsonMap.get('system_settings_serialized_name'), WorkspaceSystemSettings.class);
+      ret.setSystemSettings(newSystemSettings);
 
       // calling custom deserializer for intents_serialized_name
       List<IntentExport> newIntents = new List<IntentExport>();
