@@ -149,6 +149,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createWorkspaceOptions.learningOptOut() != null) {
       contentJson.put('learning_opt_out', createWorkspaceOptions.learningOptOut());
     }
+    if (createWorkspaceOptions.systemSettings() != null) {
+      contentJson.put('system_settings', createWorkspaceOptions.systemSettings());
+    }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Workspace) createServiceCall(builder.build(), IBMAssistantV1Models.Workspace.class);
@@ -298,6 +301,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
     }
     if (updateWorkspaceOptions.learningOptOut() != null) {
       contentJson.put('learning_opt_out', updateWorkspaceOptions.learningOptOut());
+    }
+    if (updateWorkspaceOptions.systemSettings() != null) {
+      contentJson.put('system_settings', updateWorkspaceOptions.systemSettings());
     }
     builder.bodyJson(JSON.serialize(contentJson, true));
 

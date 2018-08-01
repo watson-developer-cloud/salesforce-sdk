@@ -3217,6 +3217,7 @@ public class IBMAssistantV1Models {
     private List<CreateCounterexample> counterexamples_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
+    private WorkspaceSystemSettings system_settings_serialized_name;
     /**
      * Gets the name_serialized_name.
      *
@@ -3310,6 +3311,16 @@ public class IBMAssistantV1Models {
     public Boolean learningOptOut() {
       return learning_opt_out_serialized_name;
     }
+    /**
+     * Gets the system_settings_serialized_name.
+     *
+     * Global settings for the workspace.
+     *
+     * @return the system_settings_serialized_name
+     */
+    public WorkspaceSystemSettings systemSettings() {
+      return system_settings_serialized_name;
+    }
     private CreateWorkspaceOptions(CreateWorkspaceOptionsBuilder builder) {
       name_serialized_name = builder.name_serialized_name;
       description_serialized_name = builder.description_serialized_name;
@@ -3320,6 +3331,7 @@ public class IBMAssistantV1Models {
       counterexamples_serialized_name = builder.counterexamples_serialized_name;
       metadata_serialized_name = builder.metadata_serialized_name;
       learning_opt_out_serialized_name = builder.learning_opt_out_serialized_name;
+      system_settings_serialized_name = builder.system_settings_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3347,6 +3359,7 @@ public class IBMAssistantV1Models {
     private List<CreateCounterexample> counterexamples_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
+    private WorkspaceSystemSettings system_settings_serialized_name;
 
     private CreateWorkspaceOptionsBuilder(CreateWorkspaceOptions createWorkspaceOptions) {
       name_serialized_name = createWorkspaceOptions.name_serialized_name;
@@ -3358,6 +3371,7 @@ public class IBMAssistantV1Models {
       counterexamples_serialized_name = createWorkspaceOptions.counterexamples_serialized_name;
       metadata_serialized_name = createWorkspaceOptions.metadata_serialized_name;
       learning_opt_out_serialized_name = createWorkspaceOptions.learning_opt_out_serialized_name;
+      system_settings_serialized_name = createWorkspaceOptions.system_settings_serialized_name;
       this.requestHeaders.putAll(createWorkspaceOptions.requestHeaders());
     }
 
@@ -3536,6 +3550,17 @@ public class IBMAssistantV1Models {
      */
     public CreateWorkspaceOptionsBuilder learningOptOut(Boolean learningOptOut) {
       this.learning_opt_out_serialized_name = learningOptOut;
+      return this;
+    }
+
+    /**
+     * Set the system_settings_serialized_name.
+     *
+     * @param systemSettings the systemSettings
+     * @return the CreateWorkspaceOptions builder
+     */
+    public CreateWorkspaceOptionsBuilder systemSettings(WorkspaceSystemSettings systemSettings) {
+      this.system_settings_serialized_name = systemSettings;
       return this;
     }
 
@@ -13676,6 +13701,7 @@ public class IBMAssistantV1Models {
     private List<CreateCounterexample> counterexamples_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
+    private WorkspaceSystemSettings system_settings_serialized_name;
     private Boolean append_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
@@ -13781,6 +13807,16 @@ public class IBMAssistantV1Models {
       return learning_opt_out_serialized_name;
     }
     /**
+     * Gets the system_settings_serialized_name.
+     *
+     * Global settings for the workspace.
+     *
+     * @return the system_settings_serialized_name
+     */
+    public WorkspaceSystemSettings systemSettings() {
+      return system_settings_serialized_name;
+    }
+    /**
      * Gets the append_serialized_name.
      *
      * Whether the new data is to be appended to the existing data in the workspace. If **append**=`false`, elements
@@ -13808,6 +13844,7 @@ public class IBMAssistantV1Models {
       counterexamples_serialized_name = builder.counterexamples_serialized_name;
       metadata_serialized_name = builder.metadata_serialized_name;
       learning_opt_out_serialized_name = builder.learning_opt_out_serialized_name;
+      system_settings_serialized_name = builder.system_settings_serialized_name;
       append_serialized_name = builder.append_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -13837,6 +13874,7 @@ public class IBMAssistantV1Models {
     private List<CreateCounterexample> counterexamples_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
+    private WorkspaceSystemSettings system_settings_serialized_name;
     private Boolean append_serialized_name;
 
     private UpdateWorkspaceOptionsBuilder(UpdateWorkspaceOptions updateWorkspaceOptions) {
@@ -13850,6 +13888,7 @@ public class IBMAssistantV1Models {
       counterexamples_serialized_name = updateWorkspaceOptions.counterexamples_serialized_name;
       metadata_serialized_name = updateWorkspaceOptions.metadata_serialized_name;
       learning_opt_out_serialized_name = updateWorkspaceOptions.learning_opt_out_serialized_name;
+      system_settings_serialized_name = updateWorkspaceOptions.system_settings_serialized_name;
       append_serialized_name = updateWorkspaceOptions.append_serialized_name;
       this.requestHeaders.putAll(updateWorkspaceOptions.requestHeaders());
     }
@@ -14049,6 +14088,17 @@ public class IBMAssistantV1Models {
      */
     public UpdateWorkspaceOptionsBuilder learningOptOut(Boolean learningOptOut) {
       this.learning_opt_out_serialized_name = learningOptOut;
+      return this;
+    }
+
+    /**
+     * Set the system_settings_serialized_name.
+     *
+     * @param systemSettings the systemSettings
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public UpdateWorkspaceOptionsBuilder systemSettings(WorkspaceSystemSettings systemSettings) {
+      this.system_settings_serialized_name = systemSettings;
       return this;
     }
 
@@ -15000,6 +15050,238 @@ public class IBMAssistantV1Models {
         }
         ret.setDialogNodes(newDialogNodes);
       }
+
+      return ret;
+    }
+  }
+
+  /**
+   * WorkspaceSystemSettings.
+   */
+  public class WorkspaceSystemSettings extends IBMWatsonGenericModel {
+    private WorkspaceSystemSettingsTooling tooling_serialized_name;
+    private WorkspaceSystemSettingsDisambiguation disambiguation_serialized_name;
+    private IBMWatsonMapModel human_agent_assist_serialized_name;
+    /**
+     * Gets the tooling_serialized_name.
+     *
+     * Workspace settings related to the Watson Assistant tool.
+     *
+     * @return the tooling_serialized_name
+     */
+    @AuraEnabled
+    public WorkspaceSystemSettingsTooling getTooling() {
+      return tooling_serialized_name;
+    }
+    /**
+     * Gets the disambiguation_serialized_name.
+     *
+     * Workspace settings related to the disambiguation feature.
+     *
+     * **Note:** This feature is available only to Premium users.
+     *
+     * @return the disambiguation_serialized_name
+     */
+    @AuraEnabled
+    public WorkspaceSystemSettingsDisambiguation getDisambiguation() {
+      return disambiguation_serialized_name;
+    }
+    /**
+     * Gets the human_agent_assist_serialized_name.
+     *
+     * For internal use only.
+     *
+     * @return the human_agent_assist_serialized_name
+     */
+    @AuraEnabled
+    public IBMWatsonMapModel getHumanAgentAssist() {
+      return human_agent_assist_serialized_name;
+    }
+
+    /**
+     * Sets the tooling_serialized_name.
+     *
+     * @param tooling the new tooling
+     */
+    public void setTooling(final WorkspaceSystemSettingsTooling tooling) {
+      this.tooling_serialized_name = tooling;
+    }
+
+    /**
+     * Sets the disambiguation_serialized_name.
+     *
+     * @param disambiguation the new disambiguation
+     */
+    public void setDisambiguation(final WorkspaceSystemSettingsDisambiguation disambiguation) {
+      this.disambiguation_serialized_name = disambiguation;
+    }
+
+    /**
+     * Sets the human_agent_assist_serialized_name.
+     *
+     * @param humanAgentAssist the new humanAgentAssist
+     */
+    public void setHumanAgentAssist(final IBMWatsonMapModel humanAgentAssist) {
+      this.human_agent_assist_serialized_name = humanAgentAssist;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WorkspaceSystemSettings ret = (WorkspaceSystemSettings) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for tooling_serialized_name
+      WorkspaceSystemSettingsTooling newTooling = (WorkspaceSystemSettingsTooling) new WorkspaceSystemSettingsTooling().deserialize(JSON.serialize(ret.getTooling()), (Map<String, Object>) jsonMap.get('tooling_serialized_name'), WorkspaceSystemSettingsTooling.class);
+      ret.setTooling(newTooling);
+
+      // calling custom deserializer for disambiguation_serialized_name
+      WorkspaceSystemSettingsDisambiguation newDisambiguation = (WorkspaceSystemSettingsDisambiguation) new WorkspaceSystemSettingsDisambiguation().deserialize(JSON.serialize(ret.getDisambiguation()), (Map<String, Object>) jsonMap.get('disambiguation_serialized_name'), WorkspaceSystemSettingsDisambiguation.class);
+      ret.setDisambiguation(newDisambiguation);
+
+      // calling custom deserializer for human_agent_assist_serialized_name
+      IBMWatsonMapModel newHumanAgentAssist = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getHumanAgentAssist()), (Map<String, Object>) jsonMap.get('human_agent_assist_serialized_name'), IBMWatsonMapModel.class);
+      ret.setHumanAgentAssist(newHumanAgentAssist);
+
+      return ret;
+    }
+  }
+
+  /**
+   * WorkspaceSystemSettingsDisambiguation.
+   */
+  public class WorkspaceSystemSettingsDisambiguation extends IBMWatsonGenericModel {
+    private String prompt_serialized_name;
+    private String none_of_the_above_prompt_serialized_name;
+    private Boolean enabled_serialized_name;
+    private String sensitivity_serialized_name;
+    /**
+     * Gets the prompt_serialized_name.
+     *
+     * The text of the introductory prompt that accompanies disambiguation options presented to the user.
+     *
+     * @return the prompt_serialized_name
+     */
+    @AuraEnabled
+    public String getPrompt() {
+      return prompt_serialized_name;
+    }
+    /**
+     * Gets the none_of_the_above_prompt_serialized_name.
+     *
+     * The user-facing label for the option users can select if none of the suggested options is correct. If no value is
+     * specified for this property, this option does not appear.
+     *
+     * @return the none_of_the_above_prompt_serialized_name
+     */
+    @AuraEnabled
+    public String getNoneOfTheAbovePrompt() {
+      return none_of_the_above_prompt_serialized_name;
+    }
+    /**
+     * Gets the enabled_serialized_name.
+     *
+     * Whether the disambiguation feature is enabled for the workspace.
+     *
+     * @return the enabled_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getEnabled() {
+      return enabled_serialized_name;
+    }
+    /**
+     * Gets the sensitivity_serialized_name.
+     *
+     * The sensitivity of the disambiguation feature to intent detection conflicts. Set to **high** if you want the
+     * disambiguation feature to be triggered more often. This can be useful for testing or demonstration purposes.
+     *
+     * @return the sensitivity_serialized_name
+     */
+    @AuraEnabled
+    public String getSensitivity() {
+      return sensitivity_serialized_name;
+    }
+
+    /**
+     * Sets the prompt_serialized_name.
+     *
+     * @param prompt the new prompt
+     */
+    public void setPrompt(final String prompt) {
+      this.prompt_serialized_name = prompt;
+    }
+
+    /**
+     * Sets the none_of_the_above_prompt_serialized_name.
+     *
+     * @param noneOfTheAbovePrompt the new noneOfTheAbovePrompt
+     */
+    public void setNoneOfTheAbovePrompt(final String noneOfTheAbovePrompt) {
+      this.none_of_the_above_prompt_serialized_name = noneOfTheAbovePrompt;
+    }
+
+    /**
+     * Sets the enabled_serialized_name.
+     *
+     * @param enabled the new enabled
+     */
+    public void setEnabled(final Boolean enabled) {
+      this.enabled_serialized_name = enabled;
+    }
+
+    /**
+     * Sets the sensitivity_serialized_name.
+     *
+     * @param sensitivity the new sensitivity
+     */
+    public void setSensitivity(final String sensitivity) {
+      this.sensitivity_serialized_name = sensitivity;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WorkspaceSystemSettingsDisambiguation ret = (WorkspaceSystemSettingsDisambiguation) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * WorkspaceSystemSettingsTooling.
+   */
+  public class WorkspaceSystemSettingsTooling extends IBMWatsonGenericModel {
+    private Boolean store_generic_responses_serialized_name;
+    /**
+     * Gets the store_generic_responses_serialized_name.
+     *
+     * Whether the dialog JSON editor displays text responses within the `output.generic` object.
+     *
+     * @return the store_generic_responses_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getStoreGenericResponses() {
+      return store_generic_responses_serialized_name;
+    }
+
+    /**
+     * Sets the store_generic_responses_serialized_name.
+     *
+     * @param storeGenericResponses the new storeGenericResponses
+     */
+    public void setStoreGenericResponses(final Boolean storeGenericResponses) {
+      this.store_generic_responses_serialized_name = storeGenericResponses;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WorkspaceSystemSettingsTooling ret = (WorkspaceSystemSettingsTooling) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
