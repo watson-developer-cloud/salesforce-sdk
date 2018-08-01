@@ -483,7 +483,7 @@ public class IBMAssistantV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private IBMWatsonMapModel output_serialized_name;
+    private DialogNodeOutput output_serialized_name;
     private IBMWatsonMapModel context_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
@@ -495,6 +495,7 @@ public class IBMAssistantV1Models {
     private String digress_in_serialized_name;
     private String digress_out_serialized_name;
     private String digress_out_slots_serialized_name;
+    private String user_label_serialized_name;
     /**
      * Gets the dialog_node_serialized_name.
      *
@@ -552,12 +553,9 @@ public class IBMAssistantV1Models {
     /**
      * Gets the output_serialized_name.
      *
-     * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
-     *
      * @return the output_serialized_name
      */
-    public IBMWatsonMapModel output() {
+    public DialogNodeOutput output() {
       return output_serialized_name;
     }
     /**
@@ -672,6 +670,16 @@ public class IBMAssistantV1Models {
     public String digressOutSlots() {
       return digress_out_slots_serialized_name;
     }
+    /**
+     * Gets the user_label_serialized_name.
+     *
+     * A label that can be displayed externally to describe the purpose of the node to users.
+     *
+     * @return the user_label_serialized_name
+     */
+    public String userLabel() {
+      return user_label_serialized_name;
+    }
     private CreateDialogNode(CreateDialogNodeBuilder builder) {
       IBMWatsonValidator.notNull(builder.dialog_node_serialized_name, 'dialog_node_serialized_name cannot be null');
       dialog_node_serialized_name = builder.dialog_node_serialized_name;
@@ -691,6 +699,7 @@ public class IBMAssistantV1Models {
       digress_in_serialized_name = builder.digress_in_serialized_name;
       digress_out_serialized_name = builder.digress_out_serialized_name;
       digress_out_slots_serialized_name = builder.digress_out_slots_serialized_name;
+      user_label_serialized_name = builder.user_label_serialized_name;
     }
 
     /**
@@ -713,7 +722,7 @@ public class IBMAssistantV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private IBMWatsonMapModel output_serialized_name;
+    private DialogNodeOutput output_serialized_name;
     private IBMWatsonMapModel context_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
@@ -725,6 +734,7 @@ public class IBMAssistantV1Models {
     private String digress_in_serialized_name;
     private String digress_out_serialized_name;
     private String digress_out_slots_serialized_name;
+    private String user_label_serialized_name;
 
     private CreateDialogNodeBuilder(CreateDialogNode createDialogNode) {
       dialog_node_serialized_name = createDialogNode.dialog_node_serialized_name;
@@ -744,6 +754,7 @@ public class IBMAssistantV1Models {
       digress_in_serialized_name = createDialogNode.digress_in_serialized_name;
       digress_out_serialized_name = createDialogNode.digress_out_serialized_name;
       digress_out_slots_serialized_name = createDialogNode.digress_out_slots_serialized_name;
+      user_label_serialized_name = createDialogNode.user_label_serialized_name;
     }
 
     /**
@@ -846,7 +857,7 @@ public class IBMAssistantV1Models {
      * @param output the output
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder output(IBMWatsonMapModel output) {
+    public CreateDialogNodeBuilder output(DialogNodeOutput output) {
       this.output_serialized_name = output;
       return this;
     }
@@ -970,6 +981,17 @@ public class IBMAssistantV1Models {
      */
     public CreateDialogNodeBuilder digressOutSlots(String digressOutSlots) {
       this.digress_out_slots_serialized_name = digressOutSlots;
+      return this;
+    }
+
+    /**
+     * Set the user_label_serialized_name.
+     *
+     * @param userLabel the userLabel
+     * @return the CreateDialogNode builder
+     */
+    public CreateDialogNodeBuilder userLabel(String userLabel) {
+      this.user_label_serialized_name = userLabel;
       return this;
     }
   }
@@ -4776,7 +4798,7 @@ public class IBMAssistantV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private IBMWatsonMapModel output_serialized_name;
+    private DialogNodeOutput output_serialized_name;
     private IBMWatsonMapModel context_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
@@ -4790,6 +4812,7 @@ public class IBMAssistantV1Models {
     private String digress_in_serialized_name;
     private String digress_out_serialized_name;
     private String digress_out_slots_serialized_name;
+    private String user_label_serialized_name;
     /**
      * Gets the dialog_node_serialized_name.
      *
@@ -4849,12 +4872,10 @@ public class IBMAssistantV1Models {
     /**
      * Gets the output_serialized_name.
      *
-     * The output of the dialog node.
-     *
      * @return the output_serialized_name
      */
     @AuraEnabled
-    public IBMWatsonMapModel getOutput() {
+    public DialogNodeOutput getOutput() {
       return output_serialized_name;
     }
     /**
@@ -5000,6 +5021,17 @@ public class IBMAssistantV1Models {
     public String getDigressOutSlots() {
       return digress_out_slots_serialized_name;
     }
+    /**
+     * Gets the user_label_serialized_name.
+     *
+     * A label that can be displayed externally to describe the purpose of the node to users.
+     *
+     * @return the user_label_serialized_name
+     */
+    @AuraEnabled
+    public String getUserLabel() {
+      return user_label_serialized_name;
+    }
 
     /**
      * Sets the dialog_node_serialized_name.
@@ -5051,7 +5083,7 @@ public class IBMAssistantV1Models {
      *
      * @param output the new output
      */
-    public void setOutput(final IBMWatsonMapModel output) {
+    public void setOutput(final DialogNodeOutput output) {
       this.output_serialized_name = output;
     }
 
@@ -5154,6 +5186,15 @@ public class IBMAssistantV1Models {
       this.digress_out_slots_serialized_name = digressOutSlots;
     }
 
+    /**
+     * Sets the user_label_serialized_name.
+     *
+     * @param userLabel the new userLabel
+     */
+    public void setUserLabel(final String userLabel) {
+      this.user_label_serialized_name = userLabel;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -5162,7 +5203,7 @@ public class IBMAssistantV1Models {
       DialogNode ret = (DialogNode) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for output_serialized_name
-      IBMWatsonMapModel newOutput = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), IBMWatsonMapModel.class);
+      DialogNodeOutput newOutput = (DialogNodeOutput) new DialogNodeOutput().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), DialogNodeOutput.class);
       ret.setOutput(newOutput);
 
       // calling custom deserializer for context_serialized_name
@@ -5493,6 +5534,575 @@ public class IBMAssistantV1Models {
   }
 
   /**
+   * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+   */
+  public class DialogNodeOutput extends IBMWatsonDynamicModel {
+    private List<DialogNodeOutputGeneric> generic_serialized_name;
+    private DialogNodeOutputModifiers modifiers_serialized_name;
+    private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * Gets the generic_serialized_name.
+     *
+     * @return the generic_serialized_name
+     */
+    @AuraEnabled
+    public List<DialogNodeOutputGeneric> getGeneric() {
+      return generic_serialized_name;
+    }
+
+    /**
+     * Gets the modifiers_serialized_name.
+     *
+     * @return the modifiers_serialized_name
+     */
+    @AuraEnabled
+    public DialogNodeOutputModifiers getModifiers() {
+      return modifiers_serialized_name;
+    }
+
+    /**
+     * Gets the dynamic properties attached to DialogNodeOutput.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
+    }
+
+    /**
+     * Sets the generic_serialized_name.
+     *
+     * @param generic_serialized_name the new generic_serialized_name
+     */
+    public void setGeneric(final List<DialogNodeOutputGeneric> generic_serialized_name) {
+      this.generic_serialized_name = generic_serialized_name;
+    }
+
+    /**
+     * Sets the modifiers_serialized_name.
+     *
+     * @param modifiers_serialized_name the new modifiers_serialized_name
+     */
+    public void setModifiers(final DialogNodeOutputModifiers modifiers_serialized_name) {
+      this.modifiers_serialized_name = modifiers_serialized_name;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeOutput ret = (DialogNodeOutput) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for generic_serialized_name
+      List<DialogNodeOutputGeneric> newGeneric = new List<DialogNodeOutputGeneric>();
+      List<DialogNodeOutputGeneric> deserializedGeneric = ret.getGeneric();
+      if (deserializedGeneric != null) {
+        for (Integer i = 0; i < deserializedGeneric.size(); i++) {
+          DialogNodeOutputGeneric currentItem = ret.getGeneric().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('generic_serialized_name');
+          DialogNodeOutputGeneric newItem = (DialogNodeOutputGeneric) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputGeneric.class);
+          newGeneric.add(newItem);
+        }
+        ret.setGeneric(newGeneric);
+      }
+
+      // calling custom deserializer for modifiers_serialized_name
+      DialogNodeOutputModifiers newModifiers = (DialogNodeOutputModifiers) new DialogNodeOutputModifiers().deserialize(JSON.serialize(ret.getModifiers()), (Map<String, Object>) jsonMap.get('modifiers_serialized_name'), DialogNodeOutputModifiers.class);
+      ret.setModifiers(newModifiers);
+
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key)) {
+          ret.put(key, jsonMap.get(key));
+        }
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * DialogNodeOutputGeneric.
+   */
+  public class DialogNodeOutputGeneric extends IBMWatsonGenericModel {
+    private String response_type_serialized_name;
+    private List<DialogNodeOutputTextValuesElement> values_serialized_name;
+    private String selection_policy_serialized_name;
+    private String delimiter_serialized_name;
+    private Long time_serialized_name;
+    private Boolean typing_serialized_name;
+    private String source_serialized_name;
+    private String title_serialized_name;
+    private String description_serialized_name;
+    private String preference_serialized_name;
+    private List<DialogNodeOutputOptionsElement> options_serialized_name;
+    private String message_to_human_agent_serialized_name;
+    /**
+     * Gets the response_type_serialized_name.
+     *
+     * The type of response returned by the dialog node. The specified response type must be supported by the client
+     * application or channel.
+     *
+     * @return the response_type_serialized_name
+     */
+    @AuraEnabled
+    public String getResponseType() {
+      return response_type_serialized_name;
+    }
+    /**
+     * Gets the values_serialized_name.
+     *
+     * A list of one or more objects defining text responses. Required when **response_type**=`text`.
+     *
+     * @return the values_serialized_name
+     */
+    @AuraEnabled
+    public List<DialogNodeOutputTextValuesElement> getValues() {
+      return values_serialized_name;
+    }
+    /**
+     * Gets the selection_policy_serialized_name.
+     *
+     * How a response is selected from the list, if more than one response is specified. Valid only when
+     * **response_type**=`text`.
+     *
+     * @return the selection_policy_serialized_name
+     */
+    @AuraEnabled
+    public String getSelectionPolicy() {
+      return selection_policy_serialized_name;
+    }
+    /**
+     * Gets the delimiter_serialized_name.
+     *
+     * The delimiter to use as a separator between responses when `selection_policy`=`multiline`.
+     *
+     * @return the delimiter_serialized_name
+     */
+    @AuraEnabled
+    public String getDelimiter() {
+      return delimiter_serialized_name;
+    }
+    /**
+     * Gets the time_serialized_name.
+     *
+     * How long to pause, in milliseconds. The valid values are from 0 to 10000. Valid only when
+     * **response_type**=`pause`.
+     *
+     * @return the time_serialized_name
+     */
+    @AuraEnabled
+    public Long getTime() {
+      return time_serialized_name;
+    }
+    /**
+     * Gets the typing_serialized_name.
+     *
+     * Whether to send a "user is typing" event during the pause. Ignored if the channel does not support this event.
+     * Valid only when **response_type**=`pause`.
+     *
+     * @return the typing_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getTyping() {
+      return typing_serialized_name;
+    }
+    /**
+     * Gets the source_serialized_name.
+     *
+     * The URL of the image. Required when **response_type**=`image`.
+     *
+     * @return the source_serialized_name
+     */
+    @AuraEnabled
+    public String getSource() {
+      return source_serialized_name;
+    }
+    /**
+     * Gets the title_serialized_name.
+     *
+     * An optional title to show before the response. Valid only when **response_type**=`image` or `option`.
+     *
+     * @return the title_serialized_name
+     */
+    @AuraEnabled
+    public String getTitle() {
+      return title_serialized_name;
+    }
+    /**
+     * Gets the description_serialized_name.
+     *
+     * An optional description to show with the response. Valid only when **response_type**=`image` or `option`.
+     *
+     * @return the description_serialized_name
+     */
+    @AuraEnabled
+    public String getDescription() {
+      return description_serialized_name;
+    }
+    /**
+     * Gets the preference_serialized_name.
+     *
+     * The preferred type of control to display, if supported by the channel. Valid only when
+     * **response_type**=`option`.
+     *
+     * @return the preference_serialized_name
+     */
+    @AuraEnabled
+    public String getPreference() {
+      return preference_serialized_name;
+    }
+    /**
+     * Gets the options_serialized_name.
+     *
+     * An array of objects describing the options from which the user can choose. Required when
+     * **response_type**=`option`.
+     *
+     * @return the options_serialized_name
+     */
+    @AuraEnabled
+    public List<DialogNodeOutputOptionsElement> getOptions() {
+      return options_serialized_name;
+    }
+    /**
+     * Gets the message_to_human_agent_serialized_name.
+     *
+     * An optional message to be sent to the human agent who will be taking over the conversation. Valid only when
+     * **reponse_type**=`connect_to_agent`.
+     *
+     * @return the message_to_human_agent_serialized_name
+     */
+    @AuraEnabled
+    public String getMessageToHumanAgent() {
+      return message_to_human_agent_serialized_name;
+    }
+
+    /**
+     * Sets the response_type_serialized_name.
+     *
+     * @param responseType the new responseType
+     */
+    public void setResponseType(final String responseType) {
+      this.response_type_serialized_name = responseType;
+    }
+
+    /**
+     * Sets the values_serialized_name.
+     *
+     * @param values the new values
+     */
+    public void setValues(final List<DialogNodeOutputTextValuesElement> values) {
+      this.values_serialized_name = values;
+    }
+
+    /**
+     * Sets the selection_policy_serialized_name.
+     *
+     * @param selectionPolicy the new selectionPolicy
+     */
+    public void setSelectionPolicy(final String selectionPolicy) {
+      this.selection_policy_serialized_name = selectionPolicy;
+    }
+
+    /**
+     * Sets the delimiter_serialized_name.
+     *
+     * @param delimiter the new delimiter
+     */
+    public void setDelimiter(final String delimiter) {
+      this.delimiter_serialized_name = delimiter;
+    }
+
+    /**
+     * Sets the time_serialized_name.
+     *
+     * @param time the new time
+     */
+    public void setTime(final long time) {
+      this.time_serialized_name = time;
+    }
+
+    /**
+     * Sets the typing_serialized_name.
+     *
+     * @param typing the new typing
+     */
+    public void setTyping(final Boolean typing) {
+      this.typing_serialized_name = typing;
+    }
+
+    /**
+     * Sets the source_serialized_name.
+     *
+     * @param source the new source
+     */
+    public void setSource(final String source) {
+      this.source_serialized_name = source;
+    }
+
+    /**
+     * Sets the title_serialized_name.
+     *
+     * @param title the new title
+     */
+    public void setTitle(final String title) {
+      this.title_serialized_name = title;
+    }
+
+    /**
+     * Sets the description_serialized_name.
+     *
+     * @param description the new description
+     */
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
+    }
+
+    /**
+     * Sets the preference_serialized_name.
+     *
+     * @param preference the new preference
+     */
+    public void setPreference(final String preference) {
+      this.preference_serialized_name = preference;
+    }
+
+    /**
+     * Sets the options_serialized_name.
+     *
+     * @param options the new options
+     */
+    public void setOptions(final List<DialogNodeOutputOptionsElement> options) {
+      this.options_serialized_name = options;
+    }
+
+    /**
+     * Sets the message_to_human_agent_serialized_name.
+     *
+     * @param messageToHumanAgent the new messageToHumanAgent
+     */
+    public void setMessageToHumanAgent(final String messageToHumanAgent) {
+      this.message_to_human_agent_serialized_name = messageToHumanAgent;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeOutputGeneric ret = (DialogNodeOutputGeneric) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for values_serialized_name
+      List<DialogNodeOutputTextValuesElement> newValues = new List<DialogNodeOutputTextValuesElement>();
+      List<DialogNodeOutputTextValuesElement> deserializedValues = ret.getValues();
+      if (deserializedValues != null) {
+        for (Integer i = 0; i < deserializedValues.size(); i++) {
+          DialogNodeOutputTextValuesElement currentItem = ret.getValues().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('values_serialized_name');
+          DialogNodeOutputTextValuesElement newItem = (DialogNodeOutputTextValuesElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputTextValuesElement.class);
+          newValues.add(newItem);
+        }
+        ret.setValues(newValues);
+      }
+
+      // calling custom deserializer for options_serialized_name
+      List<DialogNodeOutputOptionsElement> newOptions = new List<DialogNodeOutputOptionsElement>();
+      List<DialogNodeOutputOptionsElement> deserializedOptions = ret.getOptions();
+      if (deserializedOptions != null) {
+        for (Integer i = 0; i < deserializedOptions.size(); i++) {
+          DialogNodeOutputOptionsElement currentItem = ret.getOptions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('options_serialized_name');
+          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
+          newOptions.add(newItem);
+        }
+        ret.setOptions(newOptions);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Options that modify how specified output is handled.
+   */
+  public class DialogNodeOutputModifiers extends IBMWatsonGenericModel {
+    private Boolean overwrite_serialized_name;
+    /**
+     * Gets the overwrite_serialized_name.
+     *
+     * Whether values in the output will overwrite output values in an array specified by previously executed dialog
+     * nodes. If this option is set to **false**, new values will be appended to previously specified values.
+     *
+     * @return the overwrite_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getOverwrite() {
+      return overwrite_serialized_name;
+    }
+
+    /**
+     * Sets the overwrite_serialized_name.
+     *
+     * @param overwrite the new overwrite
+     */
+    public void setOverwrite(final Boolean overwrite) {
+      this.overwrite_serialized_name = overwrite;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeOutputModifiers ret = (DialogNodeOutputModifiers) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * DialogNodeOutputOptionsElement.
+   */
+  public class DialogNodeOutputOptionsElement extends IBMWatsonGenericModel {
+    private String label_serialized_name;
+    private DialogNodeOutputOptionsElementValue value_serialized_name;
+    /**
+     * Gets the label_serialized_name.
+     *
+     * The user-facing label for the option.
+     *
+     * @return the label_serialized_name
+     */
+    @AuraEnabled
+    public String getLabel() {
+      return label_serialized_name;
+    }
+    /**
+     * Gets the value_serialized_name.
+     *
+     * @return the value_serialized_name
+     */
+    @AuraEnabled
+    public DialogNodeOutputOptionsElementValue getValue() {
+      return value_serialized_name;
+    }
+
+    /**
+     * Sets the label_serialized_name.
+     *
+     * @param label the new label
+     */
+    public void setLabel(final String label) {
+      this.label_serialized_name = label;
+    }
+
+    /**
+     * Sets the value_serialized_name.
+     *
+     * @param value the new value
+     */
+    public void setValue(final DialogNodeOutputOptionsElementValue value) {
+      this.value_serialized_name = value;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeOutputOptionsElement ret = (DialogNodeOutputOptionsElement) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for value_serialized_name
+      DialogNodeOutputOptionsElementValue newValue = (DialogNodeOutputOptionsElementValue) new DialogNodeOutputOptionsElementValue().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value_serialized_name'), DialogNodeOutputOptionsElementValue.class);
+      ret.setValue(newValue);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object defining the message input to be sent to the Watson Assistant service if the user selects the
+   * corresponding option.
+   */
+  public class DialogNodeOutputOptionsElementValue extends IBMWatsonGenericModel {
+    private InputData input_serialized_name;
+    /**
+     * Gets the input_serialized_name.
+     *
+     * @return the input_serialized_name
+     */
+    @AuraEnabled
+    public InputData getInput() {
+      return input_serialized_name;
+    }
+
+    /**
+     * Sets the input_serialized_name.
+     *
+     * @param input the new input
+     */
+    public void setInput(final InputData input) {
+      this.input_serialized_name = input;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeOutputOptionsElementValue ret = (DialogNodeOutputOptionsElementValue) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for input_serialized_name
+      InputData newInput = (InputData) new InputData().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), InputData.class);
+      ret.setInput(newInput);
+
+      return ret;
+    }
+  }
+
+  /**
+   * DialogNodeOutputTextValuesElement.
+   */
+  public class DialogNodeOutputTextValuesElement extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    /**
+     * Gets the text_serialized_name.
+     *
+     * The text of a response. This can include newline characters (`
+     * `), Markdown tagging, or other special characters, if supported by the channel.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+
+    /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeOutputTextValuesElement ret = (DialogNodeOutputTextValuesElement) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
    * DialogNodeVisitedDetails.
    */
   public class DialogNodeVisitedDetails extends IBMWatsonGenericModel {
@@ -5566,6 +6176,493 @@ public class IBMAssistantV1Models {
       }
 
       DialogNodeVisitedDetails ret = (DialogNodeVisitedDetails) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * DialogRuntimeResponseGeneric.
+   */
+  public class DialogRuntimeResponseGeneric extends IBMWatsonGenericModel {
+    private String response_type_serialized_name;
+    private String text_serialized_name;
+    private Long time_serialized_name;
+    private Boolean typing_serialized_name;
+    private String source_serialized_name;
+    private String title_serialized_name;
+    private String description_serialized_name;
+    private String preference_serialized_name;
+    private List<DialogNodeOutputOptionsElement> options_serialized_name;
+    private String message_to_human_agent_serialized_name;
+    private String topic_serialized_name;
+    private List<DialogSuggestion> suggestions_serialized_name;
+    /**
+     * Gets the response_type_serialized_name.
+     *
+     * The type of response returned by the dialog node. The specified response type must be supported by the client
+     * application or channel.
+     *
+     * **Note:** The **suggestion** response type is part of the disambiguation feature, which is only available for
+     * Premium users.
+     *
+     * @return the response_type_serialized_name
+     */
+    @AuraEnabled
+    public String getResponseType() {
+      return response_type_serialized_name;
+    }
+    /**
+     * Gets the text_serialized_name.
+     *
+     * The text of the response.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+    /**
+     * Gets the time_serialized_name.
+     *
+     * How long to pause, in milliseconds.
+     *
+     * @return the time_serialized_name
+     */
+    @AuraEnabled
+    public Long getTime() {
+      return time_serialized_name;
+    }
+    /**
+     * Gets the typing_serialized_name.
+     *
+     * Whether to send a "user is typing" event during the pause.
+     *
+     * @return the typing_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getTyping() {
+      return typing_serialized_name;
+    }
+    /**
+     * Gets the source_serialized_name.
+     *
+     * The URL of the image.
+     *
+     * @return the source_serialized_name
+     */
+    @AuraEnabled
+    public String getSource() {
+      return source_serialized_name;
+    }
+    /**
+     * Gets the title_serialized_name.
+     *
+     * The title to show before the response.
+     *
+     * @return the title_serialized_name
+     */
+    @AuraEnabled
+    public String getTitle() {
+      return title_serialized_name;
+    }
+    /**
+     * Gets the description_serialized_name.
+     *
+     * The description to show with the the response.
+     *
+     * @return the description_serialized_name
+     */
+    @AuraEnabled
+    public String getDescription() {
+      return description_serialized_name;
+    }
+    /**
+     * Gets the preference_serialized_name.
+     *
+     * The preferred type of control to display.
+     *
+     * @return the preference_serialized_name
+     */
+    @AuraEnabled
+    public String getPreference() {
+      return preference_serialized_name;
+    }
+    /**
+     * Gets the options_serialized_name.
+     *
+     * An array of objects describing the options from which the user can choose.
+     *
+     * @return the options_serialized_name
+     */
+    @AuraEnabled
+    public List<DialogNodeOutputOptionsElement> getOptions() {
+      return options_serialized_name;
+    }
+    /**
+     * Gets the message_to_human_agent_serialized_name.
+     *
+     * A message to be sent to the human agent who will be taking over the conversation.
+     *
+     * @return the message_to_human_agent_serialized_name
+     */
+    @AuraEnabled
+    public String getMessageToHumanAgent() {
+      return message_to_human_agent_serialized_name;
+    }
+    /**
+     * Gets the topic_serialized_name.
+     *
+     * A label identifying the topic of the conversation, derived from the **user_label** property of the relevant node.
+     *
+     * @return the topic_serialized_name
+     */
+    @AuraEnabled
+    public String getTopic() {
+      return topic_serialized_name;
+    }
+    /**
+     * Gets the suggestions_serialized_name.
+     *
+     * An array of objects describing the possible matching dialog nodes from which the user can choose.
+     *
+     * **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Premium
+     * users.
+     *
+     * @return the suggestions_serialized_name
+     */
+    @AuraEnabled
+    public List<DialogSuggestion> getSuggestions() {
+      return suggestions_serialized_name;
+    }
+
+    /**
+     * Sets the response_type_serialized_name.
+     *
+     * @param responseType the new responseType
+     */
+    public void setResponseType(final String responseType) {
+      this.response_type_serialized_name = responseType;
+    }
+
+    /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the time_serialized_name.
+     *
+     * @param time the new time
+     */
+    public void setTime(final long time) {
+      this.time_serialized_name = time;
+    }
+
+    /**
+     * Sets the typing_serialized_name.
+     *
+     * @param typing the new typing
+     */
+    public void setTyping(final Boolean typing) {
+      this.typing_serialized_name = typing;
+    }
+
+    /**
+     * Sets the source_serialized_name.
+     *
+     * @param source the new source
+     */
+    public void setSource(final String source) {
+      this.source_serialized_name = source;
+    }
+
+    /**
+     * Sets the title_serialized_name.
+     *
+     * @param title the new title
+     */
+    public void setTitle(final String title) {
+      this.title_serialized_name = title;
+    }
+
+    /**
+     * Sets the description_serialized_name.
+     *
+     * @param description the new description
+     */
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
+    }
+
+    /**
+     * Sets the preference_serialized_name.
+     *
+     * @param preference the new preference
+     */
+    public void setPreference(final String preference) {
+      this.preference_serialized_name = preference;
+    }
+
+    /**
+     * Sets the options_serialized_name.
+     *
+     * @param options the new options
+     */
+    public void setOptions(final List<DialogNodeOutputOptionsElement> options) {
+      this.options_serialized_name = options;
+    }
+
+    /**
+     * Sets the message_to_human_agent_serialized_name.
+     *
+     * @param messageToHumanAgent the new messageToHumanAgent
+     */
+    public void setMessageToHumanAgent(final String messageToHumanAgent) {
+      this.message_to_human_agent_serialized_name = messageToHumanAgent;
+    }
+
+    /**
+     * Sets the suggestions_serialized_name.
+     *
+     * @param suggestions the new suggestions
+     */
+    public void setSuggestions(final List<DialogSuggestion> suggestions) {
+      this.suggestions_serialized_name = suggestions;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogRuntimeResponseGeneric ret = (DialogRuntimeResponseGeneric) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for options_serialized_name
+      List<DialogNodeOutputOptionsElement> newOptions = new List<DialogNodeOutputOptionsElement>();
+      List<DialogNodeOutputOptionsElement> deserializedOptions = ret.getOptions();
+      if (deserializedOptions != null) {
+        for (Integer i = 0; i < deserializedOptions.size(); i++) {
+          DialogNodeOutputOptionsElement currentItem = ret.getOptions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('options_serialized_name');
+          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
+          newOptions.add(newItem);
+        }
+        ret.setOptions(newOptions);
+      }
+
+      // calling custom deserializer for suggestions_serialized_name
+      List<DialogSuggestion> newSuggestions = new List<DialogSuggestion>();
+      List<DialogSuggestion> deserializedSuggestions = ret.getSuggestions();
+      if (deserializedSuggestions != null) {
+        for (Integer i = 0; i < deserializedSuggestions.size(); i++) {
+          DialogSuggestion currentItem = ret.getSuggestions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('suggestions_serialized_name');
+          DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestion.class);
+          newSuggestions.add(newItem);
+        }
+        ret.setSuggestions(newSuggestions);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * DialogSuggestion.
+   */
+  public class DialogSuggestion extends IBMWatsonGenericModel {
+    private String label_serialized_name;
+    private DialogSuggestionValue value_serialized_name;
+    private IBMWatsonMapModel output_serialized_name;
+    /**
+     * Gets the label_serialized_name.
+     *
+     * The user-facing label for the disambiguation option. This label is taken from the **user_label** property of the
+     * corresponding dialog node.
+     *
+     * @return the label_serialized_name
+     */
+    @AuraEnabled
+    public String getLabel() {
+      return label_serialized_name;
+    }
+    /**
+     * Gets the value_serialized_name.
+     *
+     * @return the value_serialized_name
+     */
+    @AuraEnabled
+    public DialogSuggestionValue getValue() {
+      return value_serialized_name;
+    }
+    /**
+     * Gets the output_serialized_name.
+     *
+     * The dialog output that will be returned from the Watson Assistant service if the user selects the corresponding
+     * option.
+     *
+     * @return the output_serialized_name
+     */
+    @AuraEnabled
+    public IBMWatsonMapModel getOutput() {
+      return output_serialized_name;
+    }
+
+    /**
+     * Sets the label_serialized_name.
+     *
+     * @param label the new label
+     */
+    public void setLabel(final String label) {
+      this.label_serialized_name = label;
+    }
+
+    /**
+     * Sets the value_serialized_name.
+     *
+     * @param value the new value
+     */
+    public void setValue(final DialogSuggestionValue value) {
+      this.value_serialized_name = value;
+    }
+
+    /**
+     * Sets the output_serialized_name.
+     *
+     * @param output the new output
+     */
+    public void setOutput(final IBMWatsonMapModel output) {
+      this.output_serialized_name = output;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogSuggestion ret = (DialogSuggestion) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for value_serialized_name
+      DialogSuggestionValue newValue = (DialogSuggestionValue) new DialogSuggestionValue().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value_serialized_name'), DialogSuggestionValue.class);
+      ret.setValue(newValue);
+
+      // calling custom deserializer for output_serialized_name
+      IBMWatsonMapModel newOutput = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), IBMWatsonMapModel.class);
+      ret.setOutput(newOutput);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object defining the message input, intents, and entities to be sent to the Watson Assistant service if the user
+   * selects the corresponding disambiguation option.
+   */
+  public class DialogSuggestionValue extends IBMWatsonGenericModel {
+    private InputData input_serialized_name;
+    private List<RuntimeIntent> intents_serialized_name;
+    private List<RuntimeEntity> entities_serialized_name;
+    /**
+     * Gets the input_serialized_name.
+     *
+     * @return the input_serialized_name
+     */
+    @AuraEnabled
+    public InputData getInput() {
+      return input_serialized_name;
+    }
+    /**
+     * Gets the intents_serialized_name.
+     *
+     * An array of intents to be sent along with the user input.
+     *
+     * @return the intents_serialized_name
+     */
+    @AuraEnabled
+    public List<RuntimeIntent> getIntents() {
+      return intents_serialized_name;
+    }
+    /**
+     * Gets the entities_serialized_name.
+     *
+     * An array of entities to be sent along with the user input.
+     *
+     * @return the entities_serialized_name
+     */
+    @AuraEnabled
+    public List<RuntimeEntity> getEntities() {
+      return entities_serialized_name;
+    }
+
+    /**
+     * Sets the input_serialized_name.
+     *
+     * @param input the new input
+     */
+    public void setInput(final InputData input) {
+      this.input_serialized_name = input;
+    }
+
+    /**
+     * Sets the intents_serialized_name.
+     *
+     * @param intents the new intents
+     */
+    public void setIntents(final List<RuntimeIntent> intents) {
+      this.intents_serialized_name = intents;
+    }
+
+    /**
+     * Sets the entities_serialized_name.
+     *
+     * @param entities the new entities
+     */
+    public void setEntities(final List<RuntimeEntity> entities) {
+      this.entities_serialized_name = entities;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogSuggestionValue ret = (DialogSuggestionValue) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for input_serialized_name
+      InputData newInput = (InputData) new InputData().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), InputData.class);
+      ret.setInput(newInput);
+
+      // calling custom deserializer for intents_serialized_name
+      List<RuntimeIntent> newIntents = new List<RuntimeIntent>();
+      List<RuntimeIntent> deserializedIntents = ret.getIntents();
+      if (deserializedIntents != null) {
+        for (Integer i = 0; i < deserializedIntents.size(); i++) {
+          RuntimeIntent currentItem = ret.getIntents().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
+          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
+          newIntents.add(newItem);
+        }
+        ret.setIntents(newIntents);
+      }
+
+      // calling custom deserializer for entities_serialized_name
+      List<RuntimeEntity> newEntities = new List<RuntimeEntity>();
+      List<RuntimeEntity> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          RuntimeEntity currentItem = ret.getEntities().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
+          newEntities.add(newItem);
+        }
+        ret.setEntities(newEntities);
+      }
 
       return ret;
     }
