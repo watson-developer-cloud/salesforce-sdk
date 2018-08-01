@@ -65,7 +65,6 @@ private class IBMConversationV1Test {
   private static String nextCursor;
   private static String refreshCursor;
 
-
   static {
     workspaceName = 'test_workspace';
     workspaceDescription = 'Description of ' + workspaceName;
@@ -171,23 +170,25 @@ private class IBMConversationV1Test {
     dialogNodeNextStep.setBehavior('test');
     dialogNodeNextStep.setDialogNode('test');
     dialogNodeNextStep.setSelector('test');
+    String userLabel = 'user_label';
     IBMConversationV1Models.CreateDialogNode createDialogNode = new IBMConversationV1Models.CreateDialogNodeBuilder()
-    .addActions(dialogNodeAction)
-    .dialogNode('test')
-    .description('test')
-    .conditions('test')
-    .parent('test')
-    .previousSibling('test')
-    .output(metadata)
-    .context(metadata)
-    .metadata(metadata)
-    .nextStep(dialogNodeNextStep)
-    .actions(new List<IBMConversationV1Models.DialogNodeAction>{dialogNodeAction})
-    .title('test')
-    .typeField('test')
-    .eventName('test')
-    .variable('test')
-    .build();
+      .addActions(dialogNodeAction)
+      .dialogNode('test')
+      .description('test')
+      .conditions('test')
+      .parent('test')
+      .previousSibling('test')
+      .output(metadata)
+      .context(metadata)
+      .metadata(metadata)
+      .nextStep(dialogNodeNextStep)
+      .actions(new List<IBMConversationV1Models.DialogNodeAction>{dialogNodeAction})
+      .title('test')
+      .typeField('test')
+      .eventName('test')
+      .variable('test')
+      .userLabel(userLabel)
+      .build();
     createDialogNode = createDialogNode.newBuilder().build();
     IBMConversationV1Models.CreateValue createValue = new IBMConversationV1Models.CreateValueBuilder('test')
       .addSynonyms('test')
@@ -207,6 +208,20 @@ private class IBMConversationV1Test {
       .values(new List<IBMConversationV1Models.CreateValue>{createValue})
       .build();
     createEntity = createEntity.newBuilder().build();
+    IBMConversationV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMConversationV1Models.WorkspaceSystemSettingsDisambiguation();
+    disambiguation.setEnabled(true);
+    disambiguation.setNoneOfTheAbovePrompt('none of the above');
+    disambiguation.setPrompt('prompt');
+    disambiguation.setSensitivity('high');
+    IBMConversationV1Models.WorkspaceSystemSettingsTooling tooling = new IBMConversationV1Models.WorkspaceSystemSettingsTooling();
+    tooling.setStoreGenericResponses(true);
+    Map<String, String> humanAgentAssist = new Map<String, String>();
+    humanAgentAssist.put('help', 'ok');
+    IBMConversationV1Models.WorkspaceSystemSettings systemSettings = new IBMConversationV1Models.WorkspaceSystemSettings();
+    systemSettings.setDisambiguation(disambiguation);
+    systemSettings.setTooling(tooling);
+    systemSettings.setHumanAgentAssist(humanAgentAssist);
+
     IBMConversationV1Models.CreateWorkspaceOptions createWorkspaceOptions = new IBMConversationV1Models.CreateWorkspaceOptionsBuilder()
       .name(workspaceName)
       .description(workspaceDescription)
@@ -219,10 +234,11 @@ private class IBMConversationV1Test {
       .addentities(createEntity)
       .entities(new List<IBMConversationV1Models.CreateEntity>{createEntity})
       .language(workspaceLanguage)
+      .systemSettings(systemSettings)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
-     createWorkspaceOptions = createWorkspaceOptions.newBuilder().build();
+    createWorkspaceOptions = createWorkspaceOptions.newBuilder().build();
     IBMConversationV1Models.Workspace response = conversation.createWorkspace(createWorkspaceOptions);
 
     System.assertEquals(response.getName(), workspaceName);
@@ -233,6 +249,13 @@ private class IBMConversationV1Test {
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getWorkspaceId(), workspaceId);
     System.assertEquals(response.getLearningOptOut(), learningOptOut);
+    System.assert(response.getSystemSettings() != null);
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getNoneOfTheAbovePrompt(), disambiguation.getNoneOfTheAbovePrompt());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getPrompt(), disambiguation.getPrompt());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getSensitivity(), disambiguation.getSensitivity());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().isEnabled(), disambiguation.isEnabled());
+    System.assertEquals(response.getSystemSettings().getTooling().isStoreGenericResponses(), tooling.isStoreGenericResponses());
+    System.assertEquals(response.getSystemSettings().getHumanAgentAssist(), humanAgentAssist);
     Test.stopTest();
   }
 
@@ -274,7 +297,6 @@ private class IBMConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.GetWorkspaceOptions getOptions = new IBMConversationV1Models.GetWorkspaceOptionsBuilder()
-      .includeAudit(true)
       .workspaceId(workspaceId)
       .addHeader('Test-Header', 'test_value')
       .build();
@@ -313,9 +335,23 @@ private class IBMConversationV1Test {
     IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
+    IBMConversationV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMConversationV1Models.WorkspaceSystemSettingsDisambiguation();
+    disambiguation.setEnabled(true);
+    disambiguation.setNoneOfTheAbovePrompt('none of the above');
+    disambiguation.setPrompt('prompt');
+    disambiguation.setSensitivity('high');
+    IBMConversationV1Models.WorkspaceSystemSettingsTooling tooling = new IBMConversationV1Models.WorkspaceSystemSettingsTooling();
+    tooling.setStoreGenericResponses(true);
+    Map<String, String> humanAgentAssist = new Map<String, String>();
+    humanAgentAssist.put('help', 'ok');
+    IBMConversationV1Models.WorkspaceSystemSettings systemSettings = new IBMConversationV1Models.WorkspaceSystemSettings();
+    systemSettings.setDisambiguation(disambiguation);
+    systemSettings.setTooling(tooling);
+    systemSettings.setHumanAgentAssist(humanAgentAssist);
+
     IBMConversationV1Models.UpdateWorkspaceOptions updateOptions = new IBMConversationV1Models.UpdateWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
-      .append(false)
+      .systemSettings(systemSettings)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -330,6 +366,13 @@ private class IBMConversationV1Test {
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getWorkspaceId(), workspaceId);
     System.assertEquals(response.getLearningOptOut(), learningOptOut);
+    System.assert(response.getSystemSettings() != null);
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getNoneOfTheAbovePrompt(), disambiguation.getNoneOfTheAbovePrompt());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getSensitivity(), disambiguation.getSensitivity());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getPrompt(), disambiguation.getPrompt());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().isEnabled(), disambiguation.isEnabled());
+    System.assertEquals(response.getSystemSettings().getTooling().isStoreGenericResponses(), tooling.isStoreGenericResponses());
+    System.assertEquals(response.getSystemSettings().getHumanAgentAssist(), humanAgentAssist);
     Test.stopTest();
   }
 
@@ -347,7 +390,6 @@ private class IBMConversationV1Test {
     conversation.setUsernameAndPassword('username', 'password');
 
     IBMConversationV1Models.ListWorkspacesOptions listOptions = new IBMConversationV1Models.ListWorkspacesOptionsBuilder()
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -447,7 +489,6 @@ private class IBMConversationV1Test {
       .entity(entityName)
       .value(valueName)
       .exportField(true)
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -514,7 +555,6 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.ListValuesOptions listOptions = new IBMConversationV1Models.ListValuesOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -556,7 +596,6 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .input(input)
       .alternateIntents(alternateIntents)
-      .nodesVisitedDetails(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -580,7 +619,6 @@ private class IBMConversationV1Test {
     System.assertEquals(response.getOutput().getNodesVisitedDetails().get(0).getConditions(), nodeVisitedDetailsCondition);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getLevel(), logMessageLevel);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getMsg(), logMessageText);
-    System.assert(response.getOutput().getNodesVisitedDetails() != null);
     Test.stopTest();
   }
 
@@ -656,7 +694,6 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .exportField(true)
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -689,7 +726,6 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.ListIntentsOptions listOptions = new IBMConversationV1Models.ListIntentsOptionsBuilder()
       .workspaceId(workspaceId)
       .exportField(true)
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -755,15 +791,28 @@ private class IBMConversationV1Test {
     IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
+    IBMConversationV1Models.Mentions mentions1 = new IBMConversationV1Models.Mentions();
+    mentions1.setEntity('entity');
+    mentions1.setLocation(new List<Long> { 0L, 10L });
+    List<IBMConversationV1Models.Mentions> mentionsList = new List<IBMConversationV1Models.Mentions>();
+    mentionsList.add(mentions1);
+    IBMConversationV1Models.Mentions mentions2 = new IBMConversationV1Models.Mentions();
+    mentions2.setEntity('second_entity');
+    mentions2.setLocation(new List<Long> { 0L, 10L });
+
     IBMConversationV1Models.CreateExampleOptions createOptions = new IBMConversationV1Models.CreateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .text(exampleText)
+      .mentions(mentionsList)
+      .addMentions(mentions2)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
     IBMConversationV1Models.Example response = conversation.createExample(createOptions);
+
+    mentionsList.add(mentions2);
 
     System.assertEquals(response.getText(), exampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -814,7 +863,6 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .intent(intentName)
       .text(exampleText)
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -843,7 +891,6 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.ListExamplesOptions listOptions = new IBMConversationV1Models.ListExamplesOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -873,11 +920,22 @@ private class IBMConversationV1Test {
     IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
+    IBMConversationV1Models.Mentions mentions1 = new IBMConversationV1Models.Mentions();
+    mentions1.setEntity('entity');
+    mentions1.setLocation(new List<Long> { 0L, 10L });
+    List<IBMConversationV1Models.Mentions> mentionsList = new List<IBMConversationV1Models.Mentions>();
+    mentionsList.add(mentions1);
+    IBMConversationV1Models.Mentions mentions2 = new IBMConversationV1Models.Mentions();
+    mentions2.setEntity('second_entity');
+    mentions2.setLocation(new List<Long> { 0L, 10L });
+
     IBMConversationV1Models.UpdateExampleOptions updateOptions = new IBMConversationV1Models.UpdateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .text(exampleText)
       .newText(exampleText)
+      .newMentions(mentionsList)
+      .addNewMentions(mentions2)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -964,7 +1022,6 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .exportField(true)
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1002,7 +1059,6 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.ListEntitiesOptions listOptions = new IBMConversationV1Models.ListEntitiesOptionsBuilder()
       .workspaceId(workspaceId)
       .exportField(true)
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1135,7 +1191,6 @@ private class IBMConversationV1Test {
       .entity(entityName)
       .value(valueName)
       .synonym(valueSynonym)
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1165,7 +1220,6 @@ private class IBMConversationV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1226,12 +1280,15 @@ private class IBMConversationV1Test {
     IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
+    String userLabel = 'user_label';
+
     IBMConversationV1Models.CreateDialogNodeOptions createOptions = new IBMConversationV1Models.CreateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
       .digressIn(dialogNodeDigressIn)
       .digressOut(dialogNodeDigressOut)
       .digressOutSlots(dialogNodeDigressOutSlots)
+      .userLabel(userLabel)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1263,6 +1320,7 @@ private class IBMConversationV1Test {
     System.assertEquals(response.getDigressIn(), dialogNodeDigressIn);
     System.assertEquals(response.getDigressOut(), dialogNodeDigressOut);
     System.assertEquals(response.getDigressOutSlots(), dialogNodeDigressOutSlots);
+    System.assertEquals(response.getUserLabel(), userLabel);
     Test.stopTest();
   }
 
@@ -1307,7 +1365,6 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.GetDialogNodeOptions getOptions = new IBMConversationV1Models.GetDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1354,7 +1411,6 @@ private class IBMConversationV1Test {
 
     IBMConversationV1Models.ListDialogNodesOptions listOptions = new IBMConversationV1Models.ListDialogNodesOptionsBuilder()
       .workspaceId(workspaceId)
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1401,6 +1457,8 @@ private class IBMConversationV1Test {
     IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
     conversation.setUsernameAndPassword('username', 'password');
 
+    String newUserLabel = 'new_user_label';
+
     IBMConversationV1Models.UpdateDialogNodeOptions updateOptions = new IBMConversationV1Models.UpdateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
@@ -1409,6 +1467,7 @@ private class IBMConversationV1Test {
       .newDigressIn(dialogNodeDigressIn)
       .newDigressOut(dialogNodeDigressOut)
       .newDigressOutSlots(dialogNodeDigressOutSlots)
+      .newUserLabel(newUserLabel)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1438,6 +1497,7 @@ private class IBMConversationV1Test {
     System.assertEquals(response.getDigressIn(), dialogNodeDigressIn);
     System.assertEquals(response.getDigressOut(), dialogNodeDigressOut);
     System.assertEquals(response.getDigressOutSlots(), dialogNodeDigressOutSlots);
+    System.assertEquals(response.getUserLabel(), newUserLabel);
     Test.stopTest();
   }
 
@@ -1585,7 +1645,6 @@ private class IBMConversationV1Test {
     IBMConversationV1Models.GetCounterexampleOptions getOptions = new IBMConversationV1Models.GetCounterexampleOptionsBuilder()
       .workspaceId(workspaceId)
       .text(counterexampleText)
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1613,7 +1672,6 @@ private class IBMConversationV1Test {
 
     IBMConversationV1Models.ListCounterexamplesOptions listOptions = new IBMConversationV1Models.ListCounterexamplesOptionsBuilder()
       .workspaceId(workspaceId)
-      .includeAudit(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1680,6 +1738,34 @@ private class IBMConversationV1Test {
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
     conversation.deleteUserData(deleteOptions);
+
+    Test.stopTest();
+  }
+
+  static testMethod void testListMentions() {
+    String body = IBMWatsonMockResponses.mentions();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    conversation.setUsernameAndPassword('username', 'password');
+
+    String entity = 'amenity';
+
+    IBMConversationV1Models.ListMentionsOptions listMentionsOptions = new IBMConversationV1Models.ListMentionsOptionsBuilder()
+      .workspaceId(workspaceId)
+      .entity(entity)
+      .build();
+    //you can add more attributes using following builder method. This step is not necessary
+    listMentionsOptions = listMentionsOptions.newBuilder().build();
+    IBMConversationV1Models.EntityMentionCollection response = conversation.listMentions(listMentionsOptions);
+
+    System.assert(!response.getExamples().isEmpty());
 
     Test.stopTest();
   }

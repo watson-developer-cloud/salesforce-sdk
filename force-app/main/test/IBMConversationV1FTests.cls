@@ -2,7 +2,7 @@ public with sharing class IBMConversationV1FTests {
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_conversation_v1_test';
   private static String URL = 'https://gateway.watsonplatform.net/conversation/api';
-  private static String VERSION_2017_05_26 = '2017-05-26';
+  private static String VERSION = '2018-02-16';
 
   /**
    *  Test run functional tests.
@@ -51,17 +51,31 @@ public with sharing class IBMConversationV1FTests {
     testDeleteWorkspace(workspaceId, username, password);
   }
   public static IBMConversationV1Models.Workspace testCreateWorkspace(String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
-    //conversation.setEndPoint(NAMED_CREDENTIALS);(Use either named credentials or username and paasword as below)
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
     }
 
+    IBMConversationV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMConversationV1Models.WorkspaceSystemSettingsDisambiguation();
+    disambiguation.setEnabled(true);
+    disambiguation.setNoneOfTheAbovePrompt('none of the above');
+    disambiguation.setPrompt('prompt');
+    disambiguation.setSensitivity('high');
+    IBMConversationV1Models.WorkspaceSystemSettingsTooling tooling = new IBMConversationV1Models.WorkspaceSystemSettingsTooling();
+    tooling.setStoreGenericResponses(true);
+    Map<String, String> humanAgentAssist = new Map<String, String>();
+    humanAgentAssist.put('help', 'ok');
+    IBMConversationV1Models.WorkspaceSystemSettings systemSettings = new IBMConversationV1Models.WorkspaceSystemSettings();
+    systemSettings.setDisambiguation(disambiguation);
+    systemSettings.setTooling(tooling);
+    systemSettings.setHumanAgentAssist(humanAgentAssist);
+
     IBMConversationV1Models.CreateWorkspaceOptions createWorkspaceOptions = new IBMConversationV1Models.CreateWorkspaceOptionsBuilder()
       .name('functional-test-workspace')
       .description('workspace description')
       .language('en')
+      .systemSettings(systemSettings)
       .build();
     IBMConversationV1Models.Workspace response = conversation.createWorkspace(createWorkspaceOptions);
     System.debug('IBMConversationV1FTests.testCreateWorkspace(): ' + response);
@@ -69,7 +83,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static void testDeleteWorkspace(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -82,7 +96,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.WorkspaceExport testGetWorkspace(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -97,7 +111,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.Workspace updateWorkspace(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -107,7 +121,6 @@ public with sharing class IBMConversationV1FTests {
       .workspaceId(workspaceId)
       .name('new test workspace')
       .description('new description')
-      .append(false)
       .build();
     IBMConversationV1Models.Workspace response = conversation.updateWorkspace(updateOptions);
 
@@ -115,7 +128,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.WorkspaceCollection testListWorkspaces(String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -129,7 +142,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.MessageResponse message(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -148,7 +161,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.Intent createIntent(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -165,7 +178,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static void deleteIntent(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -179,7 +192,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.IntentExport getIntent(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -196,7 +209,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.IntentCollection listIntents(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -212,7 +225,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.Intent updateIntent(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -229,16 +242,23 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.Example createExample(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
     }
 
+    IBMConversationV1Models.Mentions mentions1 = new IBMConversationV1Models.Mentions();
+    mentions1.setEntity('entity');
+    mentions1.setLocation(new List<Long> { 0L, 10L });
+    List<IBMConversationV1Models.Mentions> mentionsList = new List<IBMConversationV1Models.Mentions>();
+    mentionsList.add(mentions1);
+
     IBMConversationV1Models.CreateExampleOptions createOptions = new IBMConversationV1Models.CreateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
       .text('example A')
+      .mentions(mentionsList)
       .build();
     IBMConversationV1Models.Example response = conversation.createExample(createOptions);
 
@@ -246,7 +266,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static void deleteExample(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -261,7 +281,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.Example getExample(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -278,7 +298,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.ExampleCollection listExamples(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -294,7 +314,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.Example updateExample(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -312,7 +332,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.Entity createEntity(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -333,7 +353,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static void deleteEntity(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -347,7 +367,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.EntityExport getEntity(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -364,7 +384,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.EntityCollection listEntities(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -380,7 +400,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.Entity updateEntity(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -397,7 +417,7 @@ public with sharing class IBMConversationV1FTests {
   }
   
   public static IBMConversationV1Models.Value createValue(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -414,7 +434,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static void deleteValue(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -429,7 +449,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.ValueExport getValue(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -447,7 +467,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.Value updateValue(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -465,7 +485,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.ValueCollection listValues(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -481,7 +501,7 @@ public with sharing class IBMConversationV1FTests {
   }
   
   public static IBMConversationV1Models.Synonym createSynonym(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -499,7 +519,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static void deleteSynonym(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -515,7 +535,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.Synonym getSynonym(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -533,7 +553,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.SynonymCollection listSynonyms(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -550,7 +570,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.Synonym updateSynonym(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -569,7 +589,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.DialogNode createDialogNode(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -585,7 +605,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static void deleteDialogNode(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -599,7 +619,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.DialogNode getDialogNode(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -615,7 +635,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.DialogNodeCollection listDialogNodes(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -630,7 +650,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.DialogNode updateDialogNode(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -648,7 +668,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.LogCollection listLogs(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -663,7 +683,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.Counterexample testCreateCounterexample(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -679,7 +699,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static void testDeleteCounterexample(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -692,7 +712,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.Counterexample testGetCounterexample(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -708,7 +728,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.CounterexampleCollection testListCounterexamples(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
@@ -723,7 +743,7 @@ public with sharing class IBMConversationV1FTests {
   }
 
   public static IBMConversationV1Models.Counterexample testUpdateCounterexample(String workspaceId, String username, String password) {
-    IBMConversationV1 conversation = new IBMConversationV1('2018-02-16');
+    IBMConversationV1 conversation = new IBMConversationV1(VERSION);
     if (username != null && password != null) {
       conversation.setEndPoint(URL);
       conversation.setUsernameAndPassword(username, password);
