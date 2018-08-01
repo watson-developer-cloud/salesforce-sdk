@@ -10603,6 +10603,176 @@ public class IBMAssistantV1Models {
   }
 
   /**
+   * The listMentions options.
+   */
+  public class ListMentionsOptions extends IBMWatsonOptionsModel {
+    private String workspace_id_serialized_name;
+    private String entity_serialized_name;
+    private Boolean export_serialized_name;
+    private Boolean include_audit_serialized_name;
+    /**
+     * Gets the workspace_id_serialized_name.
+     *
+     * Unique identifier of the workspace.
+     *
+     * @return the workspace_id_serialized_name
+     */
+    public String workspaceId() {
+      return workspace_id_serialized_name;
+    }
+    /**
+     * Gets the entity_serialized_name.
+     *
+     * The name of the entity.
+     *
+     * @return the entity_serialized_name
+     */
+    public String entity() {
+      return entity_serialized_name;
+    }
+    /**
+     * Gets the export_serialized_name.
+     *
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
+     * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     *
+     * @return the export_serialized_name
+     */
+    public Boolean exportField() {
+      return export_serialized_name;
+    }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
+    private ListMentionsOptions(ListMentionsOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.entity_serialized_name, 'entity_serialized_name cannot be empty');
+      workspace_id_serialized_name = builder.workspace_id_serialized_name;
+      entity_serialized_name = builder.entity_serialized_name;
+      export_serialized_name = builder.export_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ListMentionsOptions builder
+     */
+    public ListMentionsOptionsBuilder newBuilder() {
+      return new ListMentionsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * ListMentionsOptions Builder.
+   */
+  public class ListMentionsOptionsBuilder extends IBMWatsonOptionsModel {
+    private String workspace_id_serialized_name;
+    private String entity_serialized_name;
+    private Boolean export_serialized_name;
+    private Boolean include_audit_serialized_name;
+
+    private ListMentionsOptionsBuilder(ListMentionsOptions listMentionsOptions) {
+      workspace_id_serialized_name = listMentionsOptions.workspace_id_serialized_name;
+      entity_serialized_name = listMentionsOptions.entity_serialized_name;
+      export_serialized_name = listMentionsOptions.export_serialized_name;
+      include_audit_serialized_name = listMentionsOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(listMentionsOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ListMentionsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param workspaceId the workspaceId
+     * @param entity the entity
+     */
+    public ListMentionsOptionsBuilder(String workspaceId, String entity) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
+    }
+
+    /**
+     * Builds a ListMentionsOptions.
+     *
+     * @return the listMentionsOptions
+     */
+    public ListMentionsOptions build() {
+      return new ListMentionsOptions(this);
+    }
+
+    /**
+     * Set the workspace_id_serialized_name.
+     *
+     * @param workspaceId the workspaceId
+     * @return the ListMentionsOptions builder
+     */
+    public ListMentionsOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
+      return this;
+    }
+
+    /**
+     * Set the entity_serialized_name.
+     *
+     * @param entity the entity
+     * @return the ListMentionsOptions builder
+     */
+    public ListMentionsOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
+      return this;
+    }
+
+    /**
+     * Set the export_serialized_name.
+     *
+     * @param exportVar the exportVar
+     * @return the ListMentionsOptions builder
+     */
+    public ListMentionsOptionsBuilder exportField(Boolean exportVar) {
+      this.export_serialized_name = exportVar;
+      return this;
+    }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the ListMentionsOptions builder
+     */
+    public ListMentionsOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListMentionsOptions builder
+     */
+    public ListMentionsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The listSynonyms options.
    */
   public class ListSynonymsOptions extends IBMWatsonOptionsModel {
