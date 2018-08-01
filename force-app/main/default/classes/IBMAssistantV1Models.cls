@@ -5915,6 +5915,160 @@ public class IBMAssistantV1Models {
   }
 
   /**
+   * An object describing a contextual entity mention.
+   */
+  public class EntityMention extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    private String intent_serialized_name;
+    private List<Long> location_serialized_name;
+    /**
+     * Gets the text_serialized_name.
+     *
+     * The text of the user input example.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+    /**
+     * Gets the intent_serialized_name.
+     *
+     * The name of the intent.
+     *
+     * @return the intent_serialized_name
+     */
+    @AuraEnabled
+    public String getIntent() {
+      return intent_serialized_name;
+    }
+    /**
+     * Gets the location_serialized_name.
+     *
+     * An array of zero-based character offsets that indicate where the entity mentions begin and end in the input text.
+     *
+     * @return the location_serialized_name
+     */
+    @AuraEnabled
+    public List<Long> getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the intent_serialized_name.
+     *
+     * @param intent the new intent
+     */
+    public void setIntent(final String intent) {
+      this.intent_serialized_name = intent;
+    }
+
+    /**
+     * Sets the location_serialized_name.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final List<Long> location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      EntityMention ret = (EntityMention) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * EntityMentionCollection.
+   */
+  public class EntityMentionCollection extends IBMWatsonResponseModel {
+    private List<EntityMention> examples_serialized_name;
+    private Pagination pagination_serialized_name;
+    /**
+     * Gets the examples_serialized_name.
+     *
+     * An array of objects describing the entity mentions defined for an entity.
+     *
+     * @return the examples_serialized_name
+     */
+    @AuraEnabled
+    public List<EntityMention> getExamples() {
+      return examples_serialized_name;
+    }
+    /**
+     * Gets the pagination_serialized_name.
+     *
+     * The pagination data for the returned objects.
+     *
+     * @return the pagination_serialized_name
+     */
+    @AuraEnabled
+    public Pagination getPagination() {
+      return pagination_serialized_name;
+    }
+
+    /**
+     * Sets the examples_serialized_name.
+     *
+     * @param examples the new examples
+     */
+    public void setExamples(final List<EntityMention> examples) {
+      this.examples_serialized_name = examples;
+    }
+
+    /**
+     * Sets the pagination_serialized_name.
+     *
+     * @param pagination the new pagination
+     */
+    public void setPagination(final Pagination pagination) {
+      this.pagination_serialized_name = pagination;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      EntityMentionCollection ret = (EntityMentionCollection) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for examples_serialized_name
+      List<EntityMention> newExamples = new List<EntityMention>();
+      List<EntityMention> deserializedExamples = ret.getExamples();
+      if (deserializedExamples != null) {
+        for (Integer i = 0; i < deserializedExamples.size(); i++) {
+          EntityMention currentItem = ret.getExamples().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('examples_serialized_name');
+          EntityMention newItem = (EntityMention) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntityMention.class);
+          newExamples.add(newItem);
+        }
+        ret.setExamples(newExamples);
+      }
+
+      // calling custom deserializer for pagination_serialized_name
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
+      ret.setPagination(newPagination);
+
+      return ret;
+    }
+  }
+
+  /**
    * Example.
    */
   public class Example extends IBMWatsonResponseModel {

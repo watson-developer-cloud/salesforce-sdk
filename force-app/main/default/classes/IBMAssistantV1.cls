@@ -955,6 +955,37 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
+   * List entity mentions.
+   *
+   * List mentions for a contextual entity. An entity mention is an occurrence of a contextual entity in the context of
+   * an intent user input example.
+   *
+   * This operation is limited to 200 requests per 30 minutes. For more information, see **Rate limiting**.
+   *
+   * @param listMentionsOptions the {@link IBMAssistantV1Models.ListMentionsOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.EntityMentionCollection} with the response
+   */
+  public IBMAssistantV1Models.EntityMentionCollection listMentions(IBMAssistantV1Models.ListMentionsOptions listMentionsOptions) {
+    IBMWatsonValidator.notNull(listMentionsOptions, 'listMentionsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/mentions', new String[]{ listMentionsOptions.workspaceId(), listMentionsOptions.entity() }));
+    Map<String, String> requestHeaders = (listMentionsOptions != null) ? listMentionsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (listMentionsOptions.exportField() != null) {
+      builder.query('export', String.valueOf(listMentionsOptions.exportField()));
+    }
+    if (listMentionsOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(listMentionsOptions.includeAudit()));
+    }
+
+    return (IBMAssistantV1Models.EntityMentionCollection) createServiceCall(builder.build(), IBMAssistantV1Models.EntityMentionCollection.class);
+  }
+
+  /**
    * Add entity value.
    *
    * Create a new value for an entity.
