@@ -12421,11 +12421,12 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * An output object that includes the response to the user, the nodes that were hit, and messages from the log.
+   * An output object that includes the response to the user, the dialog nodes that were triggered, and messages from the log.
    */
   public class OutputData extends IBMWatsonDynamicModel {
     private List<LogMessage> log_messages_serialized_name;
     private List<String> text_serialized_name;
+    private List<DialogRuntimeResponseGeneric> generic_serialized_name;
     private List<String> nodes_visited_serialized_name;
     private List<DialogNodeVisitedDetails> nodes_visited_details_serialized_name;
     private Map<String, Object> additional_properties_serialized_name;
@@ -12448,6 +12449,16 @@ public class IBMAssistantV1Models {
     @AuraEnabled
     public List<String> getText() {
       return text_serialized_name;
+    }
+
+    /**
+     * Gets the generic_serialized_name.
+     *
+     * @return the generic_serialized_name
+     */
+    @AuraEnabled
+    public List<DialogRuntimeResponseGeneric> getGeneric() {
+      return generic_serialized_name;
     }
 
     /**
@@ -12499,6 +12510,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Sets the generic_serialized_name.
+     *
+     * @param generic_serialized_name the new generic_serialized_name
+     */
+    public void setGeneric(final List<DialogRuntimeResponseGeneric> generic_serialized_name) {
+      this.generic_serialized_name = generic_serialized_name;
+    }
+
+    /**
      * Sets the nodes_visited_serialized_name.
      *
      * @param nodes_visited_serialized_name the new nodes_visited_serialized_name
@@ -12534,6 +12554,19 @@ public class IBMAssistantV1Models {
           newLogMessages.add(newItem);
         }
         ret.setLogMessages(newLogMessages);
+      }
+
+      // calling custom deserializer for generic_serialized_name
+      List<DialogRuntimeResponseGeneric> newGeneric = new List<DialogRuntimeResponseGeneric>();
+      List<DialogRuntimeResponseGeneric> deserializedGeneric = ret.getGeneric();
+      if (deserializedGeneric != null) {
+        for (Integer i = 0; i < deserializedGeneric.size(); i++) {
+          DialogRuntimeResponseGeneric currentItem = ret.getGeneric().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('generic_serialized_name');
+          DialogRuntimeResponseGeneric newItem = (DialogRuntimeResponseGeneric) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogRuntimeResponseGeneric.class);
+          newGeneric.add(newItem);
+        }
+        ret.setGeneric(newGeneric);
       }
 
       // calling custom deserializer for nodes_visited_details_serialized_name
