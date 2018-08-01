@@ -984,7 +984,7 @@ public class IBMAssistantV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private IBMWatsonMapModel output_serialized_name;
+    private DialogNodeOutput output_serialized_name;
     private IBMWatsonMapModel context_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
@@ -996,6 +996,7 @@ public class IBMAssistantV1Models {
     private String digress_in_serialized_name;
     private String digress_out_serialized_name;
     private String digress_out_slots_serialized_name;
+    private String user_label_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -1063,12 +1064,9 @@ public class IBMAssistantV1Models {
     /**
      * Gets the output_serialized_name.
      *
-     * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
-     *
      * @return the output_serialized_name
      */
-    public IBMWatsonMapModel output() {
+    public DialogNodeOutput output() {
       return output_serialized_name;
     }
     /**
@@ -1183,6 +1181,16 @@ public class IBMAssistantV1Models {
     public String digressOutSlots() {
       return digress_out_slots_serialized_name;
     }
+    /**
+     * Gets the user_label_serialized_name.
+     *
+     * A label that can be displayed externally to describe the purpose of the node to users.
+     *
+     * @return the user_label_serialized_name
+     */
+    public String userLabel() {
+      return user_label_serialized_name;
+    }
     private CreateDialogNodeOptions(CreateDialogNodeOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notNull(builder.dialog_node_serialized_name, 'dialog_node_serialized_name cannot be null');
@@ -1204,6 +1212,7 @@ public class IBMAssistantV1Models {
       digress_in_serialized_name = builder.digress_in_serialized_name;
       digress_out_serialized_name = builder.digress_out_serialized_name;
       digress_out_slots_serialized_name = builder.digress_out_slots_serialized_name;
+      user_label_serialized_name = builder.user_label_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1228,7 +1237,7 @@ public class IBMAssistantV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private IBMWatsonMapModel output_serialized_name;
+    private DialogNodeOutput output_serialized_name;
     private IBMWatsonMapModel context_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
@@ -1240,6 +1249,7 @@ public class IBMAssistantV1Models {
     private String digress_in_serialized_name;
     private String digress_out_serialized_name;
     private String digress_out_slots_serialized_name;
+    private String user_label_serialized_name;
 
     private CreateDialogNodeOptionsBuilder(CreateDialogNodeOptions createDialogNodeOptions) {
       workspace_id_serialized_name = createDialogNodeOptions.workspace_id_serialized_name;
@@ -1260,6 +1270,7 @@ public class IBMAssistantV1Models {
       digress_in_serialized_name = createDialogNodeOptions.digress_in_serialized_name;
       digress_out_serialized_name = createDialogNodeOptions.digress_out_serialized_name;
       digress_out_slots_serialized_name = createDialogNodeOptions.digress_out_slots_serialized_name;
+      user_label_serialized_name = createDialogNodeOptions.user_label_serialized_name;
       this.requestHeaders.putAll(createDialogNodeOptions.requestHeaders());
     }
 
@@ -1376,7 +1387,7 @@ public class IBMAssistantV1Models {
      * @param output the output
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder output(IBMWatsonMapModel output) {
+    public CreateDialogNodeOptionsBuilder output(DialogNodeOutput output) {
       this.output_serialized_name = output;
       return this;
     }
@@ -1500,6 +1511,17 @@ public class IBMAssistantV1Models {
      */
     public CreateDialogNodeOptionsBuilder digressOutSlots(String digressOutSlots) {
       this.digress_out_slots_serialized_name = digressOutSlots;
+      return this;
+    }
+
+    /**
+     * Set the user_label_serialized_name.
+     *
+     * @param userLabel the userLabel
+     * @return the CreateDialogNodeOptions builder
+     */
+    public CreateDialogNodeOptionsBuilder userLabel(String userLabel) {
+      this.user_label_serialized_name = userLabel;
       return this;
     }
 
@@ -12158,6 +12180,7 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel new_context_serialized_name;
     private String new_previous_sibling_serialized_name;
     private String new_variable_serialized_name;
+    private String new_user_label_serialized_name;
     private IBMWatsonMapModel new_metadata_serialized_name;
     private String new_title_serialized_name;
     private String new_description_serialized_name;
@@ -12166,7 +12189,7 @@ public class IBMAssistantV1Models {
     private String new_digress_out_slots_serialized_name;
     private DialogNodeNextStep new_next_step_serialized_name;
     private String new_digress_in_serialized_name;
-    private IBMWatsonMapModel new_output_serialized_name;
+    private DialogNodeOutput new_output_serialized_name;
     private String new_parent_serialized_name;
     private String new_dialog_node_serialized_name;
     /**
@@ -12249,6 +12272,16 @@ public class IBMAssistantV1Models {
      */
     public String newVariable() {
       return new_variable_serialized_name;
+    }
+    /**
+     * Gets the new_user_label_serialized_name.
+     *
+     * A label that can be displayed externally to describe the purpose of the node to users.
+     *
+     * @return the new_user_label_serialized_name
+     */
+    public String newUserLabel() {
+      return new_user_label_serialized_name;
     }
     /**
      * Gets the new_metadata_serialized_name.
@@ -12336,12 +12369,9 @@ public class IBMAssistantV1Models {
     /**
      * Gets the new_output_serialized_name.
      *
-     * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
-     *
      * @return the new_output_serialized_name
      */
-    public IBMWatsonMapModel newOutput() {
+    public DialogNodeOutput newOutput() {
       return new_output_serialized_name;
     }
     /**
@@ -12377,6 +12407,7 @@ public class IBMAssistantV1Models {
       new_context_serialized_name = builder.new_context_serialized_name;
       new_previous_sibling_serialized_name = builder.new_previous_sibling_serialized_name;
       new_variable_serialized_name = builder.new_variable_serialized_name;
+      new_user_label_serialized_name = builder.new_user_label_serialized_name;
       new_metadata_serialized_name = builder.new_metadata_serialized_name;
       new_title_serialized_name = builder.new_title_serialized_name;
       new_description_serialized_name = builder.new_description_serialized_name;
@@ -12414,6 +12445,7 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel new_context_serialized_name;
     private String new_previous_sibling_serialized_name;
     private String new_variable_serialized_name;
+    private String new_user_label_serialized_name;
     private IBMWatsonMapModel new_metadata_serialized_name;
     private String new_title_serialized_name;
     private String new_description_serialized_name;
@@ -12422,7 +12454,7 @@ public class IBMAssistantV1Models {
     private String new_digress_out_slots_serialized_name;
     private DialogNodeNextStep new_next_step_serialized_name;
     private String new_digress_in_serialized_name;
-    private IBMWatsonMapModel new_output_serialized_name;
+    private DialogNodeOutput new_output_serialized_name;
     private String new_parent_serialized_name;
     private String new_dialog_node_serialized_name;
 
@@ -12435,6 +12467,7 @@ public class IBMAssistantV1Models {
       new_context_serialized_name = updateDialogNodeOptions.new_context_serialized_name;
       new_previous_sibling_serialized_name = updateDialogNodeOptions.new_previous_sibling_serialized_name;
       new_variable_serialized_name = updateDialogNodeOptions.new_variable_serialized_name;
+      new_user_label_serialized_name = updateDialogNodeOptions.new_user_label_serialized_name;
       new_metadata_serialized_name = updateDialogNodeOptions.new_metadata_serialized_name;
       new_title_serialized_name = updateDialogNodeOptions.new_title_serialized_name;
       new_description_serialized_name = updateDialogNodeOptions.new_description_serialized_name;
@@ -12580,6 +12613,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the new_user_label_serialized_name.
+     *
+     * @param newUserLabel the newUserLabel
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newUserLabel(String newUserLabel) {
+      this.new_user_label_serialized_name = newUserLabel;
+      return this;
+    }
+
+    /**
      * Set the new_metadata_serialized_name.
      *
      * @param newMetadata the newMetadata
@@ -12673,7 +12717,7 @@ public class IBMAssistantV1Models {
      * @param newOutput the newOutput
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newOutput(IBMWatsonMapModel newOutput) {
+    public UpdateDialogNodeOptionsBuilder newOutput(DialogNodeOutput newOutput) {
       this.new_output_serialized_name = newOutput;
       return this;
     }
