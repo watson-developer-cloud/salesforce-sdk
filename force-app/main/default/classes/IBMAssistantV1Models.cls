@@ -2039,6 +2039,7 @@ public class IBMAssistantV1Models {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String text_serialized_name;
+    private List<Mentions> mentions_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -2072,6 +2073,16 @@ public class IBMAssistantV1Models {
     public String text() {
       return text_serialized_name;
     }
+    /**
+     * Gets the mentions_serialized_name.
+     *
+     * An array of contextual entity mentions.
+     *
+     * @return the mentions_serialized_name
+     */
+    public List<Mentions> mentions() {
+      return mentions_serialized_name;
+    }
     private CreateExampleOptions(CreateExampleOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent_serialized_name, 'intent_serialized_name cannot be empty');
@@ -2079,6 +2090,7 @@ public class IBMAssistantV1Models {
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       intent_serialized_name = builder.intent_serialized_name;
       text_serialized_name = builder.text_serialized_name;
+      mentions_serialized_name = builder.mentions_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2100,11 +2112,13 @@ public class IBMAssistantV1Models {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String text_serialized_name;
+    private List<Mentions> mentions_serialized_name;
 
     private CreateExampleOptionsBuilder(CreateExampleOptions createExampleOptions) {
       workspace_id_serialized_name = createExampleOptions.workspace_id_serialized_name;
       intent_serialized_name = createExampleOptions.intent_serialized_name;
       text_serialized_name = createExampleOptions.text_serialized_name;
+      mentions_serialized_name = createExampleOptions.mentions_serialized_name;
       this.requestHeaders.putAll(createExampleOptions.requestHeaders());
     }
 
@@ -2137,6 +2151,21 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Adds an mentions to mentions_serialized_name.
+     *
+     * @param mentions the new mentions
+     * @return the CreateExampleOptions builder
+     */
+    public CreateExampleOptionsBuilder addMentions(Mentions mentions) {
+      IBMWatsonValidator.notNull(mentions, 'mentions cannot be null');
+      if (this.mentions_serialized_name == null) {
+        this.mentions_serialized_name = new List<Mentions>();
+      }
+      this.mentions_serialized_name.add(mentions);
+      return this;
+    }
+
+    /**
      * Set the workspace_id_serialized_name.
      *
      * @param workspaceId the workspaceId
@@ -2166,6 +2195,18 @@ public class IBMAssistantV1Models {
      */
     public CreateExampleOptionsBuilder text(String text) {
       this.text_serialized_name = text;
+      return this;
+    }
+
+    /**
+     * Set the mentions_serialized_name.
+     * Existing mentions_serialized_name will be replaced.
+     *
+     * @param mentions the mentions
+     * @return the CreateExampleOptions builder
+     */
+    public CreateExampleOptionsBuilder mentions(List<Mentions> mentions) {
+      this.mentions_serialized_name = mentions;
       return this;
     }
 
@@ -12790,6 +12831,7 @@ public class IBMAssistantV1Models {
     private String intent_serialized_name;
     private String text_serialized_name;
     private String new_text_serialized_name;
+    private List<Mentions> new_mentions_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -12833,6 +12875,16 @@ public class IBMAssistantV1Models {
     public String newText() {
       return new_text_serialized_name;
     }
+    /**
+     * Gets the new_mentions_serialized_name.
+     *
+     * An array of contextual entity mentions.
+     *
+     * @return the new_mentions_serialized_name
+     */
+    public List<Mentions> newMentions() {
+      return new_mentions_serialized_name;
+    }
     private UpdateExampleOptions(UpdateExampleOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent_serialized_name, 'intent_serialized_name cannot be empty');
@@ -12841,6 +12893,7 @@ public class IBMAssistantV1Models {
       intent_serialized_name = builder.intent_serialized_name;
       text_serialized_name = builder.text_serialized_name;
       new_text_serialized_name = builder.new_text_serialized_name;
+      new_mentions_serialized_name = builder.new_mentions_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -12863,12 +12916,14 @@ public class IBMAssistantV1Models {
     private String intent_serialized_name;
     private String text_serialized_name;
     private String new_text_serialized_name;
+    private List<Mentions> new_mentions_serialized_name;
 
     private UpdateExampleOptionsBuilder(UpdateExampleOptions updateExampleOptions) {
       workspace_id_serialized_name = updateExampleOptions.workspace_id_serialized_name;
       intent_serialized_name = updateExampleOptions.intent_serialized_name;
       text_serialized_name = updateExampleOptions.text_serialized_name;
       new_text_serialized_name = updateExampleOptions.new_text_serialized_name;
+      new_mentions_serialized_name = updateExampleOptions.new_mentions_serialized_name;
       this.requestHeaders.putAll(updateExampleOptions.requestHeaders());
     }
 
@@ -12898,6 +12953,21 @@ public class IBMAssistantV1Models {
      */
     public UpdateExampleOptions build() {
       return new UpdateExampleOptions(this);
+    }
+
+    /**
+     * Adds an newMentions to new_mentions_serialized_name.
+     *
+     * @param newMentions the new newMentions
+     * @return the UpdateExampleOptions builder
+     */
+    public UpdateExampleOptionsBuilder addNewMentions(Mentions newMentions) {
+      IBMWatsonValidator.notNull(newMentions, 'newMentions cannot be null');
+      if (this.new_mentions_serialized_name == null) {
+        this.new_mentions_serialized_name = new List<Mentions>();
+      }
+      this.new_mentions_serialized_name.add(newMentions);
+      return this;
     }
 
     /**
@@ -12941,6 +13011,18 @@ public class IBMAssistantV1Models {
      */
     public UpdateExampleOptionsBuilder newText(String newText) {
       this.new_text_serialized_name = newText;
+      return this;
+    }
+
+    /**
+     * Set the new_mentions_serialized_name.
+     * Existing new_mentions_serialized_name will be replaced.
+     *
+     * @param newMentions the newMentions
+     * @return the UpdateExampleOptions builder
+     */
+    public UpdateExampleOptionsBuilder newMentions(List<Mentions> newMentions) {
+      this.new_mentions_serialized_name = newMentions;
       return this;
     }
 

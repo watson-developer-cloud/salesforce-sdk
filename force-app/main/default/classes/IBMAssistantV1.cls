@@ -499,6 +499,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', createExampleOptions.text());
+    if (createExampleOptions.mentions() != null) {
+      contentJson.put('mentions', createExampleOptions.mentions());
+    }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Example) createServiceCall(builder.build(), IBMAssistantV1Models.Example.class);
@@ -558,7 +561,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * List user input examples.
    *
-   * List the user input examples for an intent.
+   * List the user input examples for an intent, optionally including contextual entity mentions.
    *
    * This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
@@ -617,6 +620,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (updateExampleOptions.newText() != null) {
       contentJson.put('text', updateExampleOptions.newText());
+    }
+    if (updateExampleOptions.newMentions() != null) {
+      contentJson.put('mentions', updateExampleOptions.newMentions());
     }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
