@@ -2,7 +2,7 @@ public with sharing class IBMConversationV1FTests {
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_conversation_v1_test';
   private static String URL = 'https://gateway.watsonplatform.net/conversation/api';
-  private static String VERSION = '2018-02-16';
+  private static String VERSION = '2018-07-10';
 
   /**
    *  Test run functional tests.
