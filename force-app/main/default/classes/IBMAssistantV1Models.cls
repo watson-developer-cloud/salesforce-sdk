@@ -2001,6 +2001,7 @@ public class IBMAssistantV1Models {
    */
   public class CreateExample {
     private String text_serialized_name;
+    private List<Mentions> mentions_serialized_name;
     /**
      * Gets the text_serialized_name.
      *
@@ -2014,9 +2015,20 @@ public class IBMAssistantV1Models {
     public String text() {
       return text_serialized_name;
     }
+    /**
+     * Gets the mentions_serialized_name.
+     *
+     * An array of contextual entity mentions.
+     *
+     * @return the mentions_serialized_name
+     */
+    public List<Mentions> mentions() {
+      return mentions_serialized_name;
+    }
     private CreateExample(CreateExampleBuilder builder) {
       IBMWatsonValidator.notNull(builder.text_serialized_name, 'text_serialized_name cannot be null');
       text_serialized_name = builder.text_serialized_name;
+      mentions_serialized_name = builder.mentions_serialized_name;
     }
 
     /**
@@ -2035,9 +2047,11 @@ public class IBMAssistantV1Models {
    */
   public class CreateExampleBuilder {
     private String text_serialized_name;
+    private List<Mentions> mentions_serialized_name;
 
     private CreateExampleBuilder(CreateExample createExample) {
       text_serialized_name = createExample.text_serialized_name;
+      mentions_serialized_name = createExample.mentions_serialized_name;
     }
 
     /**
@@ -2065,6 +2079,21 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Adds an mentions to mentions_serialized_name.
+     *
+     * @param mentions the new mentions
+     * @return the CreateExample builder
+     */
+    public CreateExampleBuilder addMentions(Mentions mentions) {
+      IBMWatsonValidator.notNull(mentions, 'mentions cannot be null');
+      if (this.mentions_serialized_name == null) {
+        this.mentions_serialized_name = new List<Mentions>();
+      }
+      this.mentions_serialized_name.add(mentions);
+      return this;
+    }
+
+    /**
      * Set the text_serialized_name.
      *
      * @param text the text
@@ -2072,6 +2101,18 @@ public class IBMAssistantV1Models {
      */
     public CreateExampleBuilder text(String text) {
       this.text_serialized_name = text;
+      return this;
+    }
+
+    /**
+     * Set the mentions_serialized_name.
+     * Existing mentions_serialized_name will be replaced.
+     *
+     * @param mentions the mentions
+     * @return the CreateExample builder
+     */
+    public CreateExampleBuilder mentions(List<Mentions> mentions) {
+      this.mentions_serialized_name = mentions;
       return this;
     }
   }
@@ -11682,6 +11723,64 @@ public class IBMAssistantV1Models {
       }
 
       LogPagination ret = (LogPagination) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * A mention of a contextual entity.
+   */
+  public class Mentions extends IBMWatsonGenericModel {
+    private String entity_serialized_name;
+    private List<Long> location_serialized_name;
+    /**
+     * Gets the entity_serialized_name.
+     *
+     * The name of the entity.
+     *
+     * @return the entity_serialized_name
+     */
+    @AuraEnabled
+    public String getEntity() {
+      return entity_serialized_name;
+    }
+    /**
+     * Gets the location_serialized_name.
+     *
+     * An array of zero-based character offsets that indicate where the entity mentions begin and end in the input text.
+     *
+     * @return the location_serialized_name
+     */
+    @AuraEnabled
+    public List<Long> getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
+     * Sets the entity_serialized_name.
+     *
+     * @param entity the new entity
+     */
+    public void setEntity(final String entity) {
+      this.entity_serialized_name = entity;
+    }
+
+    /**
+     * Sets the location_serialized_name.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final List<Long> location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Mentions ret = (Mentions) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
