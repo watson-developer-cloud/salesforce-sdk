@@ -12044,7 +12044,7 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * A request formatted for the Watson Assistant service.
+   * A message request formatted for the Watson Assistant service.
    */
   public class MessageRequest extends IBMWatsonGenericModel {
     private InputData input_serialized_name;
