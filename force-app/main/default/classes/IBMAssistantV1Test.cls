@@ -172,6 +172,7 @@ private class IBMAssistantV1Test {
     dialogNodeNextStep.setBehavior('test');
     dialogNodeNextStep.setDialogNode('test');
     dialogNodeNextStep.setSelector('test');
+    String userLabel = 'user_label';
     IBMAssistantV1Models.CreateDialogNode createDialogNode = new IBMAssistantV1Models.CreateDialogNodeBuilder()
       .addActions(dialogNodeAction)
       .dialogNode('test')
@@ -188,6 +189,7 @@ private class IBMAssistantV1Test {
       .typeField('test')
       .eventName('test')
       .variable('test')
+      .userLabel(userLabel)
       .build();
     createDialogNode = createDialogNode.newBuilder().build();
     IBMAssistantV1Models.CreateValue createValue = new IBMAssistantV1Models.CreateValueBuilder('test')
@@ -1280,12 +1282,15 @@ private class IBMAssistantV1Test {
     IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
     assistant.setUsernameAndPassword('username', 'password');
 
+    String userLabel = 'user_label';
+
     IBMAssistantV1Models.CreateDialogNodeOptions createOptions = new IBMAssistantV1Models.CreateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
       .digressIn(dialogNodeDigressIn)
       .digressOut(dialogNodeDigressOut)
       .digressOutSlots(dialogNodeDigressOutSlots)
+      .userLabel(userLabel)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1317,6 +1322,7 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getDigressIn(), dialogNodeDigressIn);
     System.assertEquals(response.getDigressOut(), dialogNodeDigressOut);
     System.assertEquals(response.getDigressOutSlots(), dialogNodeDigressOutSlots);
+    System.assertEquals(response.getUserLabel(), userLabel);
     Test.stopTest();
   }
 
@@ -1453,6 +1459,8 @@ private class IBMAssistantV1Test {
     IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
     assistant.setUsernameAndPassword('username', 'password');
 
+    String newUserLabel = 'new_user_label';
+
     IBMAssistantV1Models.UpdateDialogNodeOptions updateOptions = new IBMAssistantV1Models.UpdateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
@@ -1461,6 +1469,7 @@ private class IBMAssistantV1Test {
       .newDigressIn(dialogNodeDigressIn)
       .newDigressOut(dialogNodeDigressOut)
       .newDigressOutSlots(dialogNodeDigressOutSlots)
+      .newUserLabel(newUserLabel)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1490,6 +1499,7 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getDigressIn(), dialogNodeDigressIn);
     System.assertEquals(response.getDigressOut(), dialogNodeDigressOut);
     System.assertEquals(response.getDigressOutSlots(), dialogNodeDigressOutSlots);
+    System.assertEquals(response.getUserLabel(), newUserLabel);
     Test.stopTest();
   }
 
