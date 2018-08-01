@@ -791,15 +791,28 @@ private class IBMAssistantV1Test {
     IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
     assistant.setUsernameAndPassword('username', 'password');
 
+    IBMAssistantV1Models.Mentions mentions1 = new IBMAssistantV1Models.Mentions();
+    mentions1.setEntity('entity');
+    mentions1.setLocation(new List<Long> { 0L, 10L });
+    List<IBMAssistantV1Models.Mentions> mentionsList = new List<IBMAssistantV1Models.Mentions>();
+    mentionsList.add(mentions1);
+    IBMAssistantV1Models.Mentions mentions2 = new IBMAssistantV1Models.Mentions();
+    mentions2.setEntity('second_entity');
+    mentions2.setLocation(new List<Long> { 0L, 10L });
+
     IBMAssistantV1Models.CreateExampleOptions createOptions = new IBMAssistantV1Models.CreateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .text(exampleText)
+      .mentions(mentionsList)
+      .addMentions(mentions2)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
     IBMAssistantV1Models.Example response = assistant.createExample(createOptions);
+
+    mentionsList.add(mentions2);
 
     System.assertEquals(response.getText(), exampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -907,11 +920,22 @@ private class IBMAssistantV1Test {
     IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
     assistant.setUsernameAndPassword('username', 'password');
 
+    IBMAssistantV1Models.Mentions mentions1 = new IBMAssistantV1Models.Mentions();
+    mentions1.setEntity('entity');
+    mentions1.setLocation(new List<Long> { 0L, 10L });
+    List<IBMAssistantV1Models.Mentions> mentionsList = new List<IBMAssistantV1Models.Mentions>();
+    mentionsList.add(mentions1);
+    IBMAssistantV1Models.Mentions mentions2 = new IBMAssistantV1Models.Mentions();
+    mentions2.setEntity('second_entity');
+    mentions2.setLocation(new List<Long> { 0L, 10L });
+
     IBMAssistantV1Models.UpdateExampleOptions updateOptions = new IBMAssistantV1Models.UpdateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .text(exampleText)
       .newText(exampleText)
+      .newMentions(mentionsList)
+      .addNewMentions(mentions2)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary

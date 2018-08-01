@@ -248,10 +248,17 @@ public with sharing class IBMAssistantV1FTests {
       assistant.setUsernameAndPassword(username, password);
     }
 
+    IBMAssistantV1Models.Mentions mentions1 = new IBMAssistantV1Models.Mentions();
+    mentions1.setEntity('entity');
+    mentions1.setLocation(new List<Long> { 0L, 10L });
+    List<IBMAssistantV1Models.Mentions> mentionsList = new List<IBMAssistantV1Models.Mentions>();
+    mentionsList.add(mentions1);
+
     IBMAssistantV1Models.CreateExampleOptions createOptions = new IBMAssistantV1Models.CreateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
       .text('example A')
+      .mentions(mentionsList)
       .build();
     IBMAssistantV1Models.Example response = assistant.createExample(createOptions);
 
