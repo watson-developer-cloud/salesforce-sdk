@@ -173,22 +173,22 @@ private class IBMAssistantV1Test {
     dialogNodeNextStep.setDialogNode('test');
     dialogNodeNextStep.setSelector('test');
     IBMAssistantV1Models.CreateDialogNode createDialogNode = new IBMAssistantV1Models.CreateDialogNodeBuilder()
-    .addActions(dialogNodeAction)
-    .dialogNode('test')
-    .description('test')
-    .conditions('test')
-    .parent('test')
-    .previousSibling('test')
-    .output(metadata)
-    .context(metadata)
-    .metadata(metadata)
-    .nextStep(dialogNodeNextStep)
-    .actions(new List<IBMAssistantV1Models.DialogNodeAction>{dialogNodeAction})
-    .title('test')
-    .typeField('test')
-    .eventName('test')
-    .variable('test')
-    .build();
+      .addActions(dialogNodeAction)
+      .dialogNode('test')
+      .description('test')
+      .conditions('test')
+      .parent('test')
+      .previousSibling('test')
+      .output(metadata)
+      .context(metadata)
+      .metadata(metadata)
+      .nextStep(dialogNodeNextStep)
+      .actions(new List<IBMAssistantV1Models.DialogNodeAction>{dialogNodeAction})
+      .title('test')
+      .typeField('test')
+      .eventName('test')
+      .variable('test')
+      .build();
     createDialogNode = createDialogNode.newBuilder().build();
     IBMAssistantV1Models.CreateValue createValue = new IBMAssistantV1Models.CreateValueBuilder('test')
       .addSynonyms('test')
@@ -208,6 +208,20 @@ private class IBMAssistantV1Test {
       .values(new List<IBMAssistantV1Models.CreateValue>{createValue})
       .build();
     createEntity = createEntity.newBuilder().build();
+    IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation();
+    disambiguation.setEnabled(true);
+    disambiguation.setNoneOfTheAbovePrompt('none of the above');
+    disambiguation.setPrompt('prompt');
+    disambiguation.setSensitivity('high');
+    IBMAssistantV1Models.WorkspaceSystemSettingsTooling tooling = new IBMAssistantV1Models.WorkspaceSystemSettingsTooling();
+    tooling.setStoreGenericResponses(true);
+    Map<String, String> humanAgentAssist = new Map<String, String>();
+    humanAgentAssist.put('help', 'ok');
+    IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettings();
+    systemSettings.setDisambiguation(disambiguation);
+    systemSettings.setTooling(tooling);
+    systemSettings.setHumanAgentAssist(humanAgentAssist);
+
     IBMAssistantV1Models.CreateWorkspaceOptions createWorkspaceOptions = new IBMAssistantV1Models.CreateWorkspaceOptionsBuilder()
       .name(workspaceName)
       .description(workspaceDescription)
@@ -220,6 +234,7 @@ private class IBMAssistantV1Test {
       .addentities(createEntity)
       .entities(new List<IBMAssistantV1Models.CreateEntity>{createEntity})
       .language(workspaceLanguage)
+      .systemSettings(systemSettings)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -234,6 +249,13 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getWorkspaceId(), workspaceId);
     System.assertEquals(response.getLearningOptOut(), learningOptOut);
+    System.assert(response.getSystemSettings() != null);
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getNoneOfTheAbovePrompt(), disambiguation.getNoneOfTheAbovePrompt());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getPrompt(), disambiguation.getPrompt());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getSensitivity(), disambiguation.getSensitivity());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().isEnabled(), disambiguation.isEnabled());
+    System.assertEquals(response.getSystemSettings().getTooling().isStoreGenericResponses(), tooling.isStoreGenericResponses());
+    System.assertEquals(response.getSystemSettings().getHumanAgentAssist(), humanAgentAssist);
     Test.stopTest();
   }
 
@@ -313,8 +335,23 @@ private class IBMAssistantV1Test {
     IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
     assistant.setUsernameAndPassword('username', 'password');
 
+    IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation();
+    disambiguation.setEnabled(true);
+    disambiguation.setNoneOfTheAbovePrompt('none of the above');
+    disambiguation.setPrompt('prompt');
+    disambiguation.setSensitivity('high');
+    IBMAssistantV1Models.WorkspaceSystemSettingsTooling tooling = new IBMAssistantV1Models.WorkspaceSystemSettingsTooling();
+    tooling.setStoreGenericResponses(true);
+    Map<String, String> humanAgentAssist = new Map<String, String>();
+    humanAgentAssist.put('help', 'ok');
+    IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettings();
+    systemSettings.setDisambiguation(disambiguation);
+    systemSettings.setTooling(tooling);
+    systemSettings.setHumanAgentAssist(humanAgentAssist);
+
     IBMAssistantV1Models.UpdateWorkspaceOptions updateOptions = new IBMAssistantV1Models.UpdateWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
+      .systemSettings(systemSettings)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -329,6 +366,13 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getWorkspaceId(), workspaceId);
     System.assertEquals(response.getLearningOptOut(), learningOptOut);
+    System.assert(response.getSystemSettings() != null);
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getNoneOfTheAbovePrompt(), disambiguation.getNoneOfTheAbovePrompt());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getSensitivity(), disambiguation.getSensitivity());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getPrompt(), disambiguation.getPrompt());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().isEnabled(), disambiguation.isEnabled());
+    System.assertEquals(response.getSystemSettings().getTooling().isStoreGenericResponses(), tooling.isStoreGenericResponses());
+    System.assertEquals(response.getSystemSettings().getHumanAgentAssist(), humanAgentAssist);
     Test.stopTest();
   }
 
