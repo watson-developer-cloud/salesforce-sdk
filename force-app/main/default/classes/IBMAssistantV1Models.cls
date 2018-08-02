@@ -5861,10 +5861,10 @@ public class IBMAssistantV1Models {
     /**
      * Sets the time_serialized_name.
      *
-     * @param time the new time
+     * @param xtime the new xtime
      */
-    public void setTime(final long time) {
-      this.time_serialized_name = time;
+    public void setTime(final long xtime) {
+      this.time_serialized_name = xtime;
     }
 
     /**
@@ -6399,10 +6399,10 @@ public class IBMAssistantV1Models {
     /**
      * Sets the time_serialized_name.
      *
-     * @param time the new time
+     * @param xtime the new xtime
      */
-    public void setTime(final long time) {
-      this.time_serialized_name = time;
+    public void setTime(final long xtime) {
+      this.time_serialized_name = xtime;
     }
 
     /**

@@ -46,7 +46,7 @@ private class IBMAssistantV1Test {
   private static String dialogNodeConditions;
   private static String dialogNodeParent;
   private static String dialogNodePreviousSibling;
-  private static IBMWatsonMapModel dialogNodeOutput;
+  private static IBMAssistantV1Models.DialogNodeOutput dialogNodeOutput;
   private static IBMWatsonMapModel dialogNodeContext;
   private static String nextStepBehavior;
   private static String nextStepDialogNode;
@@ -112,7 +112,7 @@ private class IBMAssistantV1Test {
     dialogNodeConditions = '#test';
     dialogNodeParent = 'parent';
     dialogNodePreviousSibling = 'sibling';
-    dialogNodeOutput = new IBMWatsonMapModel();
+    dialogNodeOutput = new IBMAssistantV1Models.DialogNodeOutput();
     dialogNodeOutput.put('text', 'output text');
     dialogNodeContext = new IBMWatsonMapModel();
     dialogNodeContext.put('context', 'context_val');
@@ -180,7 +180,7 @@ private class IBMAssistantV1Test {
       .conditions('test')
       .parent('test')
       .previousSibling('test')
-      .output(metadata)
+      .output(dialogNodeOutput)
       .context(metadata)
       .metadata(metadata)
       .nextStep(dialogNodeNextStep)
@@ -217,7 +217,7 @@ private class IBMAssistantV1Test {
     disambiguation.setSensitivity('high');
     IBMAssistantV1Models.WorkspaceSystemSettingsTooling tooling = new IBMAssistantV1Models.WorkspaceSystemSettingsTooling();
     tooling.setStoreGenericResponses(true);
-    Map<String, String> humanAgentAssist = new Map<String, String>();
+    IBMWatsonMapModel humanAgentAssist = new IBMWatsonMapModel();
     humanAgentAssist.put('help', 'ok');
     IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettings();
     systemSettings.setDisambiguation(disambiguation);
@@ -255,8 +255,8 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getSystemSettings().getDisambiguation().getNoneOfTheAbovePrompt(), disambiguation.getNoneOfTheAbovePrompt());
     System.assertEquals(response.getSystemSettings().getDisambiguation().getPrompt(), disambiguation.getPrompt());
     System.assertEquals(response.getSystemSettings().getDisambiguation().getSensitivity(), disambiguation.getSensitivity());
-    System.assertEquals(response.getSystemSettings().getDisambiguation().isEnabled(), disambiguation.isEnabled());
-    System.assertEquals(response.getSystemSettings().getTooling().isStoreGenericResponses(), tooling.isStoreGenericResponses());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getEnabled(), disambiguation.getEnabled());
+    System.assertEquals(response.getSystemSettings().getTooling().getStoreGenericResponses(), tooling.getStoreGenericResponses());
     System.assertEquals(response.getSystemSettings().getHumanAgentAssist(), humanAgentAssist);
     Test.stopTest();
   }
@@ -344,7 +344,7 @@ private class IBMAssistantV1Test {
     disambiguation.setSensitivity('high');
     IBMAssistantV1Models.WorkspaceSystemSettingsTooling tooling = new IBMAssistantV1Models.WorkspaceSystemSettingsTooling();
     tooling.setStoreGenericResponses(true);
-    Map<String, String> humanAgentAssist = new Map<String, String>();
+    IBMWatsonMapModel humanAgentAssist = new IBMWatsonMapModel();
     humanAgentAssist.put('help', 'ok');
     IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettings();
     systemSettings.setDisambiguation(disambiguation);
@@ -372,8 +372,8 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getSystemSettings().getDisambiguation().getNoneOfTheAbovePrompt(), disambiguation.getNoneOfTheAbovePrompt());
     System.assertEquals(response.getSystemSettings().getDisambiguation().getSensitivity(), disambiguation.getSensitivity());
     System.assertEquals(response.getSystemSettings().getDisambiguation().getPrompt(), disambiguation.getPrompt());
-    System.assertEquals(response.getSystemSettings().getDisambiguation().isEnabled(), disambiguation.isEnabled());
-    System.assertEquals(response.getSystemSettings().getTooling().isStoreGenericResponses(), tooling.isStoreGenericResponses());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getEnabled(), disambiguation.getEnabled());
+    System.assertEquals(response.getSystemSettings().getTooling().getStoreGenericResponses(), tooling.getStoreGenericResponses());
     System.assertEquals(response.getSystemSettings().getHumanAgentAssist(), humanAgentAssist);
     Test.stopTest();
   }
