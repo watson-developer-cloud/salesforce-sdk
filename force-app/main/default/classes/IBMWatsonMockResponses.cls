@@ -2460,6 +2460,16 @@ public class IBMWatsonMockResponses {
     '}';
   }
 
+  public static testMethod String expiredTokenData() {
+    return '{' +
+      '"access_token": "wxyz-9876",' +
+      '"refresh_token": "00000000",' +
+      '"token_type": "Bearer",' +
+      '"expires_in": 3600,' +
+      '"expiration": 10000' +
+    '}';
+  }
+
   public static testMethod String credentials() {
     return '{' +
       '"credential_id" : "00000d8c-0000-00e8-ba89-0ed5f89f718b",' +

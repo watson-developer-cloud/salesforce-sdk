@@ -52,19 +52,11 @@ private class IBMWatsonIAMTokenManagerTest {
    * Tests that if the stored access token is expired, it can be refreshed properly.
    */
   static testMethod void getTokenAfterRefresh() {
-    Double currentTime = Math.floor(System.now().getTime() / 1000);
-    String expiredTokenDataBody = '{' +
-      '"access_token": "wxyz-9876",' +
-      '"refresh_token": "00000000",' +
-      '"token_type": "Bearer",' +
-      '"expires_in": 3600,' +
-      '"expiration": ' + String.valueOf(currentTime) +
-    '}';
-
+    String body = IBMWatsonMockResponses.expiredTokenData();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
       200,
       'Success',
-      expiredTokenDataBody,
+      body,
       null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();

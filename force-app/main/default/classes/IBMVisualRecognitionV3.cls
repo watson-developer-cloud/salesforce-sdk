@@ -113,8 +113,8 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (classifyOptions.imagesFile() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(classifyOptions.imagesFile(), classifyOptions.imagesFileContentTypeSerializedName());
-      multipartBuilder.addFormDataPart('images_file', classifyOptions.imagesFilenameSerializedName(), fileBody);
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(classifyOptions.imagesFile(), classifyOptions.imagesFileContentType());
+      multipartBuilder.addFormDataPart('images_file', classifyOptions.imagesFilename(), fileBody);
     }
     if (classifyOptions.parameters() != null) {
       multipartBuilder.addFormDataPart('parameters', classifyOptions.parameters());
@@ -172,8 +172,8 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
       multipartBuilder.addFormDataPart('parameters', detectFacesOptions.parameters());
     }
     if (detectFacesOptions.imagesFile() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(detectFacesOptions.imagesFile(), detectFacesOptions.imagesFileContentTypeSerializedName());
-      multipartBuilder.addFormDataPart('images_file', detectFacesOptions.imagesFilenameSerializedName(), fileBody);
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(detectFacesOptions.imagesFile(), detectFacesOptions.imagesFileContentType());
+      multipartBuilder.addFormDataPart('images_file', detectFacesOptions.imagesFilename(), fileBody);
     }
     if (detectFacesOptions.url() != null) {
       multipartBuilder.addFormDataPart('url', detectFacesOptions.url());
@@ -210,11 +210,19 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     multipartBuilder.addFormDataPart('name', createClassifierOptions.name());
-    IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createClassifierOptions.classnamePositiveExamples(), 'application/octet-stream');
-    multipartBuilder.addFormDataPart('classname_positive_examples', createClassifierOptions.classnamePositiveExamplesFilenameSerializedName(), fileBody);
+    // Classes
+    for (String className : createClassifierOptions.classNames()) {
+      String dataName = className + '_positive_examples';
+      IBMWatsonFile positiveExamples = createClassifierOptions.positiveExamplesByClassName(className);
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
+        positiveExamples,
+        'application/octet-stream'
+      );
+      multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
+    }
     if (createClassifierOptions.negativeExamples() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createClassifierOptions.negativeExamples(), 'application/octet-stream');
-      multipartBuilder.addFormDataPart('negative_examples', createClassifierOptions.negativeExamplesFilenameSerializedName(), fileBody);
+      IBMWatsonRequestBody negativeExamplesBody = IBMWatsonRequestBody.create(createClassifierOptions.negativeExamples(), 'application/octet-stream');
+      multipartBuilder.addFormDataPart('negative_examples', createClassifierOptions.negativeExamplesFilename(), negativeExamplesBody);
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
@@ -316,13 +324,16 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    if (updateClassifierOptions.classnamePositiveExamples() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateClassifierOptions.classnamePositiveExamples(), 'application/octet-stream');
-      multipartBuilder.addFormDataPart('classname_positive_examples', updateClassifierOptions.classnamePositiveExamplesFilenameSerializedName(), fileBody);
+    // Classes
+    for (String className : updateClassifierOptions.classNames()) {
+      String dataName = className + '_positive_examples';
+      IBMWatsonFile positiveExamples = updateClassifierOptions.positiveExamplesByClassName(className);
+      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(positiveExamples, 'application/octet-stream');
+      multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
     }
     if (updateClassifierOptions.negativeExamples() != null) {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateClassifierOptions.negativeExamples(), 'application/octet-stream');
-      multipartBuilder.addFormDataPart('negative_examples', updateClassifierOptions.negativeExamplesFilenameSerializedName(), fileBody);
+      multipartBuilder.addFormDataPart('negative_examples', updateClassifierOptions.negativeExamplesFilename(), fileBody);
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());

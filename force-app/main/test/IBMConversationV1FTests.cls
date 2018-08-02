@@ -249,15 +249,15 @@ public with sharing class IBMConversationV1FTests {
     }
 
     IBMConversationV1Models.Mentions mentions1 = new IBMConversationV1Models.Mentions();
-    mentions1.setEntity('entity');
-    mentions1.setLocation(new List<Long> { 0L, 10L });
+    mentions1.setEntity('genre');
+    mentions1.setLocation(new List<Long> { 0L, 5L });
     List<IBMConversationV1Models.Mentions> mentionsList = new List<IBMConversationV1Models.Mentions>();
     mentionsList.add(mentions1);
 
     IBMConversationV1Models.CreateExampleOptions createOptions = new IBMConversationV1Models.CreateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
-      .text('example A')
+      .text('This is a test!')
       .mentions(mentionsList)
       .build();
     IBMConversationV1Models.Example response = conversation.createExample(createOptions);

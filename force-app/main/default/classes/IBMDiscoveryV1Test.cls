@@ -622,8 +622,8 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(resp.getTrainingStatus().getMinimumExamplesAdded(), false);
     System.assertEquals(resp.getTrainingStatus().getSufficientLabelDiversity(), false);
     System.assertEquals(resp.getTrainingStatus().getNotices(), 0);
-    System.assertEquals(resp.getTrainingStatus().getSuccessfullyTrained(), null);
-    System.assertEquals(resp.getTrainingStatus().getDataUpdated(), null);
+    System.assertEquals(resp.getTrainingStatus().getSuccessfullyTrained(), (DateTime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',DateTime.class));
+    System.assertEquals(resp.getTrainingStatus().getDataUpdated(), (DateTime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',DateTime.class));
     Test.stopTest();
   }
 
@@ -867,7 +867,6 @@ private class IBMDiscoveryV1Test {
       .similar(true)
       .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
       .similarFields(new List<String> { 'field1', 'field2' })
-      .loggingOptOut(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1009,6 +1008,7 @@ private class IBMDiscoveryV1Test {
       .similar(true)
       .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
       .similarFields(new List<String> { 'field1', 'field2' })
+      .loggingOptOut(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary

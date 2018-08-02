@@ -105,7 +105,7 @@ private class IBMSpeechToTextV1Test {
       .build();
     IBMSpeechToTextV1Models.CreateJobOptions createJobOptions = new IBMSpeechToTextV1Models.CreateJobOptionsBuilder()
       .audio(audioFile)
-      .audioFilename('audioTestFile.mp3')
+      .contentType('audio/mp3')
       .addKeywords('TestKeyword')
       .callbackUrl(callbackBaseURL)
       .events('recognitions.started,recognitions.completed,recognitions.failed')
@@ -403,12 +403,11 @@ private class IBMSpeechToTextV1Test {
       .contentType('audio/mp3')
       .body(blob.valueOf('Test string not an audio content'))
       .build();
-    String audioFilename = 'audioTestFile.mp3';
     String audioName = 'audio';
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.AddAudioOptions addAudioOptions = new IBMSpeechToTextV1Models.AddAudioOptionsBuilder()
       .audio(audio)
-      .audioFilename(audioFilename)
+      .contentType('audio/mp3')
       .customizationId(customizationId)
       .audioName(audioName)
       .containedContentType('audio/mp3')
@@ -551,7 +550,6 @@ private class IBMSpeechToTextV1Test {
       .allowOverwrite(true)
       .corpusFile(corpusFile)
       .corpusFilename('corpora.txt')
-      .corpusFileContentType('text/plain')
       .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.addCorpus(addCorpusOptions);
@@ -906,21 +904,17 @@ private class IBMSpeechToTextV1Test {
       .contentType('audio/mp3')
       .body(blob.valueOf('Test string not an audio content'))
       .build();
-    String audioFilename = 'audioTestFile.mp3';
     String fileContentType = 'audio/mp3';
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
-    IBMSpeechToTextV1Models.RecognizeOptions recognizeOptions = new IBMSpeechToTextV1Models.RecognizeOptionsBuilder(audio, audioFilename, fileContentType)
+    IBMSpeechToTextV1Models.RecognizeOptions recognizeOptions = new IBMSpeechToTextV1Models.RecognizeOptionsBuilder()
       .audio(audio)
-      .audioFilename(audioFilename)
-      .fileContentType(fileContentType)
-      .continuous(false)
+      .contentType(fileContentType)
       .maxAlternatives(5)
       .timestamps(true)
       .wordConfidence(true)
       .inactivityTimeout(10)
       .model('TestModel')
-      .interimResults(true)
-      .keywords(false)
+      .keywords(new List<String> { 'keyword_1' })
       .keywordsThreshold((double)0.4)
       .wordAlternativesThreshold((double)0.4)
       .profanityFilter(true)
