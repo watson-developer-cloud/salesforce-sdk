@@ -12606,6 +12606,7 @@ public class IBMDiscoveryV1Models {
     private Boolean similar_serialized_name;
     private List<String> similar_document_ids_serialized_name;
     private List<String> similar_fields_serialized_name;
+    private Boolean x_watson_logging_opt_out_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
      *
@@ -12830,6 +12831,16 @@ public class IBMDiscoveryV1Models {
     public List<String> similarFields() {
       return similar_fields_serialized_name;
     }
+    /**
+     * Gets the x_watson_logging_opt_out_serialized_name.
+     *
+     * If `true`, queries are not stored in the Discovery **Logs** endpoint.
+     *
+     * @return the x_watson_logging_opt_out_serialized_name
+     */
+    public Boolean xWatsonLoggingOptOut() {
+      return x_watson_logging_opt_out_serialized_name;
+    }
     private QueryOptions(QueryOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
@@ -12853,6 +12864,7 @@ public class IBMDiscoveryV1Models {
       similar_serialized_name = builder.similar_serialized_name;
       similar_document_ids_serialized_name = builder.similar_document_ids_serialized_name;
       similar_fields_serialized_name = builder.similar_fields_serialized_name;
+      x_watson_logging_opt_out_serialized_name = builder.x_watson_logging_opt_out_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -12891,6 +12903,7 @@ public class IBMDiscoveryV1Models {
     private Boolean similar_serialized_name;
     private List<String> similar_document_ids_serialized_name;
     private List<String> similar_fields_serialized_name;
+    private Boolean x_watson_logging_opt_out_serialized_name;
 
     private QueryOptionsBuilder(QueryOptions queryOptions) {
       environment_id_serialized_name = queryOptions.environment_id_serialized_name;
@@ -12913,6 +12926,7 @@ public class IBMDiscoveryV1Models {
       similar_serialized_name = queryOptions.similar_serialized_name;
       similar_document_ids_serialized_name = queryOptions.similar_document_ids_serialized_name;
       similar_fields_serialized_name = queryOptions.similar_fields_serialized_name;
+      x_watson_logging_opt_out_serialized_name = queryOptions.x_watson_logging_opt_out_serialized_name;
       this.requestHeaders.putAll(queryOptions.requestHeaders());
     }
 
@@ -13239,6 +13253,17 @@ public class IBMDiscoveryV1Models {
      */
     public QueryOptionsBuilder similarFields(List<String> similarFields) {
       this.similar_fields_serialized_name = similarFields;
+      return this;
+    }
+
+    /**
+     * Set the x_watson_logging_opt_out_serialized_name.
+     *
+     * @param xWatsonLoggingOptOut the xWatsonLoggingOptOut
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder xWatsonLoggingOptOut(Boolean xWatsonLoggingOptOut) {
+      this.x_watson_logging_opt_out_serialized_name = xWatsonLoggingOptOut;
       return this;
     }
 
