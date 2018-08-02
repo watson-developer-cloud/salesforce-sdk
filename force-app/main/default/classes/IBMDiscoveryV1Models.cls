@@ -4719,6 +4719,7 @@ public class IBMDiscoveryV1Models {
    */
   public class EnrichmentOptions extends IBMWatsonGenericModel {
     private NluEnrichmentFeatures features_serialized_name;
+    private String language_serialized_name;
     private String model_serialized_name;
 
     /**
@@ -4739,6 +4740,20 @@ public class IBMDiscoveryV1Models {
       return features_serialized_name;
     }
     /**
+     * Gets the language_serialized_name.
+     *
+     * ISO 639-1 code indicating the language to use for the analysis. This code overrides the automatic language
+     * detection performed by the service. Valid codes are `ar` (Arabic), `en` (English), `fr` (French), `de` (German),
+     * `it` (Italian), `pt` (Portuguese), `ru` (Russian), `es` (Spanish), and `sv` (Swedish). **Note:** Not all features
+     * support all languages, automatic detection is recommended.
+     *
+     * @return the language_serialized_name
+     */
+    @AuraEnabled
+    public String getLanguage() {
+      return language_serialized_name;
+    }
+    /**
      * Gets the model_serialized_name.
      *
      * *For use with `elements` enrichments only.* The element extraction model to use. Models available are:
@@ -4752,6 +4767,7 @@ public class IBMDiscoveryV1Models {
     }
     private EnrichmentOptions(EnrichmentOptionsBuilder builder) {
       features_serialized_name = builder.features_serialized_name;
+      language_serialized_name = builder.language_serialized_name;
       model_serialized_name = builder.model_serialized_name;
     }
 
@@ -4785,10 +4801,12 @@ public class IBMDiscoveryV1Models {
    */
   public class EnrichmentOptionsBuilder {
     private NluEnrichmentFeatures features_serialized_name;
+    private String language_serialized_name;
     private String model_serialized_name;
 
     private EnrichmentOptionsBuilder(EnrichmentOptions enrichmentOptions) {
       features_serialized_name = enrichmentOptions.features_serialized_name;
+      language_serialized_name = enrichmentOptions.language_serialized_name;
       model_serialized_name = enrichmentOptions.model_serialized_name;
     }
 
@@ -4815,6 +4833,17 @@ public class IBMDiscoveryV1Models {
      */
     public EnrichmentOptionsBuilder features(NluEnrichmentFeatures features) {
       this.features_serialized_name = features;
+      return this;
+    }
+
+    /**
+     * Set the language_serialized_name.
+     *
+     * @param language the language
+     * @return the EnrichmentOptions builder
+     */
+    public EnrichmentOptionsBuilder language(String language) {
+      this.language_serialized_name = language;
       return this;
     }
 
