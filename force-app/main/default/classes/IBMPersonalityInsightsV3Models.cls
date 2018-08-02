@@ -960,6 +960,7 @@ public class IBMPersonalityInsightsV3Models {
     private String content_language_serialized_name;
     private String accept_language_serialized_name;
     private Boolean raw_scores_serialized_name;
+    private Boolean csv_headers_serialized_name;
     private Boolean consumption_preferences_serialized_name;
     /**
      * Gets the content_serialized_name.
@@ -1040,6 +1041,17 @@ public class IBMPersonalityInsightsV3Models {
       return raw_scores_serialized_name;
     }
     /**
+     * Gets the csv_headers_serialized_name.
+     *
+     * Indicates whether column labels are returned with a CSV response. By default, no column labels are returned.
+     * Applies only when the **Accept** parameter is set to `text/csv`.
+     *
+     * @return the csv_headers_serialized_name
+     */
+    public Boolean csvHeaders() {
+      return csv_headers_serialized_name;
+    }
+    /**
      * Gets the consumption_preferences_serialized_name.
      *
      * Indicates whether consumption preferences are returned with the results. By default, no consumption preferences
@@ -1058,6 +1070,7 @@ public class IBMPersonalityInsightsV3Models {
       content_language_serialized_name = builder.content_language_serialized_name;
       accept_language_serialized_name = builder.accept_language_serialized_name;
       raw_scores_serialized_name = builder.raw_scores_serialized_name;
+      csv_headers_serialized_name = builder.csv_headers_serialized_name;
       consumption_preferences_serialized_name = builder.consumption_preferences_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -1083,6 +1096,7 @@ public class IBMPersonalityInsightsV3Models {
     private String content_language_serialized_name;
     private String accept_language_serialized_name;
     private Boolean raw_scores_serialized_name;
+    private Boolean csv_headers_serialized_name;
     private Boolean consumption_preferences_serialized_name;
 
     private ProfileOptionsBuilder(ProfileOptions profileOptions) {
@@ -1092,6 +1106,7 @@ public class IBMPersonalityInsightsV3Models {
       content_language_serialized_name = profileOptions.content_language_serialized_name;
       accept_language_serialized_name = profileOptions.accept_language_serialized_name;
       raw_scores_serialized_name = profileOptions.raw_scores_serialized_name;
+      csv_headers_serialized_name = profileOptions.csv_headers_serialized_name;
       consumption_preferences_serialized_name = profileOptions.consumption_preferences_serialized_name;
       this.requestHeaders.putAll(profileOptions.requestHeaders());
     }
@@ -1141,6 +1156,17 @@ public class IBMPersonalityInsightsV3Models {
      */
     public ProfileOptionsBuilder rawScores(Boolean rawScores) {
       this.raw_scores_serialized_name = rawScores;
+      return this;
+    }
+
+    /**
+     * Set the csv_headers_serialized_name.
+     *
+     * @param csvHeaders the csvHeaders
+     * @return the ProfileOptions builder
+     */
+    public ProfileOptionsBuilder csvHeaders(Boolean csvHeaders) {
+      this.csv_headers_serialized_name = csvHeaders;
       return this;
     }
 
