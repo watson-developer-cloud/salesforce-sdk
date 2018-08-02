@@ -867,6 +867,7 @@ private class IBMDiscoveryV1Test {
       .similar(true)
       .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
       .similarFields(new List<String> { 'field1', 'field2' })
+      .loggingOptOut(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1440,6 +1441,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.EnrichmentOptions enrichmentOptions = new IBMDiscoveryV1Models.EnrichmentOptionsBuilder()
       .features(enrichmentFeatures)
       .model('test')
+      .language('en')
       .build();
     enrichment.setOptions(enrichmentOptions);
     configuration.setEnrichments(new List<IBMDiscoveryV1Models.Enrichment>{enrichment});
