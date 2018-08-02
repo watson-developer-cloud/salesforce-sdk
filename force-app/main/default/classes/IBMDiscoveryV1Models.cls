@@ -12632,7 +12632,7 @@ public class IBMDiscoveryV1Models {
     private Boolean similar_serialized_name;
     private List<String> similar_document_ids_serialized_name;
     private List<String> similar_fields_serialized_name;
-    private Boolean x_watson_logging_opt_out_serialized_name;
+    private Boolean logging_opt_out_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
      *
@@ -12858,14 +12858,14 @@ public class IBMDiscoveryV1Models {
       return similar_fields_serialized_name;
     }
     /**
-     * Gets the x_watson_logging_opt_out_serialized_name.
+     * Gets the logging_opt_out_serialized_name.
      *
      * If `true`, queries are not stored in the Discovery **Logs** endpoint.
      *
-     * @return the x_watson_logging_opt_out_serialized_name
+     * @return the logging_opt_out_serialized_name
      */
-    public Boolean xWatsonLoggingOptOut() {
-      return x_watson_logging_opt_out_serialized_name;
+    public Boolean loggingOptOut() {
+      return logging_opt_out_serialized_name;
     }
     private QueryOptions(QueryOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
@@ -12890,7 +12890,7 @@ public class IBMDiscoveryV1Models {
       similar_serialized_name = builder.similar_serialized_name;
       similar_document_ids_serialized_name = builder.similar_document_ids_serialized_name;
       similar_fields_serialized_name = builder.similar_fields_serialized_name;
-      x_watson_logging_opt_out_serialized_name = builder.x_watson_logging_opt_out_serialized_name;
+      logging_opt_out_serialized_name = builder.logging_opt_out_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -12929,7 +12929,7 @@ public class IBMDiscoveryV1Models {
     private Boolean similar_serialized_name;
     private List<String> similar_document_ids_serialized_name;
     private List<String> similar_fields_serialized_name;
-    private Boolean x_watson_logging_opt_out_serialized_name;
+    private Boolean logging_opt_out_serialized_name;
 
     private QueryOptionsBuilder(QueryOptions queryOptions) {
       environment_id_serialized_name = queryOptions.environment_id_serialized_name;
@@ -12952,7 +12952,7 @@ public class IBMDiscoveryV1Models {
       similar_serialized_name = queryOptions.similar_serialized_name;
       similar_document_ids_serialized_name = queryOptions.similar_document_ids_serialized_name;
       similar_fields_serialized_name = queryOptions.similar_fields_serialized_name;
-      x_watson_logging_opt_out_serialized_name = queryOptions.x_watson_logging_opt_out_serialized_name;
+      logging_opt_out_serialized_name = queryOptions.logging_opt_out_serialized_name;
       this.requestHeaders.putAll(queryOptions.requestHeaders());
     }
 
@@ -13283,13 +13283,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the x_watson_logging_opt_out_serialized_name.
+     * Set the logging_opt_out_serialized_name.
      *
-     * @param xWatsonLoggingOptOut the xWatsonLoggingOptOut
+     * @param loggingOptOut the loggingOptOut
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder xWatsonLoggingOptOut(Boolean xWatsonLoggingOptOut) {
-      this.x_watson_logging_opt_out_serialized_name = xWatsonLoggingOptOut;
+    public QueryOptionsBuilder loggingOptOut(Boolean loggingOptOut) {
+      this.logging_opt_out_serialized_name = loggingOptOut;
       return this;
     }
 
@@ -16083,7 +16083,17 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonString, jsonMap, classType);
+      String data_updated = (String) jsonMap.remove('data_updated_serialized_name');
+      String successfully_trained = (String) jsonMap.remove('successfully_trained_serialized_name');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+
+      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
+      if (String.isNotBlank(data_updated)) {
+        ret.setDataUpdated((Datetime) JSON.deserialize('"' + data_updated + '"', Datetime.class));
+      }
+      if (String.isNotBlank(successfully_trained)) {
+        ret.setSuccessfullyTrained((Datetime) JSON.deserialize('"' + successfully_trained + '"', Datetime.class));
+      }
 
       return ret;
     }
