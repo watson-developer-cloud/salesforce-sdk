@@ -322,6 +322,7 @@ public class IBMSpeechToTextV1Models {
     private String content_type_serialized_name;
     private String contained_content_type_serialized_name;
     private Boolean allow_overwrite_serialized_name;
+    private IBMWatsonFile audio_serialized_name;
     /**
      * Gets the customization_id_serialized_name.
      *
@@ -350,6 +351,14 @@ public class IBMSpeechToTextV1Models {
      * @return the audio_resource_serialized_name
      */
     public IBMWatsonFile audioResource() {
+      return audio_resource_serialized_name;
+    }
+    /**
+     * Gets the audio_resource_serialized_name.
+     *
+     * @return the audio_resource_serialized_name
+     */
+    public IBMWatsonFile audio() {
       return audio_resource_serialized_name;
     }
     /**
@@ -397,6 +406,7 @@ public class IBMSpeechToTextV1Models {
       content_type_serialized_name = builder.content_type_serialized_name;
       contained_content_type_serialized_name = builder.contained_content_type_serialized_name;
       allow_overwrite_serialized_name = builder.allow_overwrite_serialized_name;
+      audio_resource_serialized_name = builder.audio_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -421,6 +431,7 @@ public class IBMSpeechToTextV1Models {
     private String content_type_serialized_name;
     private String contained_content_type_serialized_name;
     private Boolean allow_overwrite_serialized_name;
+    private IBMWatsonFile audio_serialized_name;
 
     private AddAudioOptionsBuilder(AddAudioOptions addAudioOptions) {
       customization_id_serialized_name = addAudioOptions.customization_id_serialized_name;
@@ -429,6 +440,7 @@ public class IBMSpeechToTextV1Models {
       content_type_serialized_name = addAudioOptions.content_type_serialized_name;
       contained_content_type_serialized_name = addAudioOptions.contained_content_type_serialized_name;
       allow_overwrite_serialized_name = addAudioOptions.allow_overwrite_serialized_name;
+      audio_resource_serialized_name = addAudioOptions.audio_serialized_name;
       this.requestHeaders.putAll(addAudioOptions.requestHeaders());
     }
 
@@ -488,6 +500,17 @@ public class IBMSpeechToTextV1Models {
      */
     public AddAudioOptionsBuilder audioResource(IBMWatsonFile audioResource) {
       this.audio_resource_serialized_name = audioResource;
+      return this;
+    }
+
+    /**
+     * Set the audio_resource_serialized_name.
+     *
+     * @param audio the audio
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder audio(IBMWatsonFile audio) {
+      this.audio_resource_serialized_name = audio;
       return this;
     }
 
@@ -6843,8 +6866,8 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript_serialized_name;
     private Double confidence_serialized_name;
-    private List<String> timestamps_serialized_name;
-    private List<String> word_confidence_serialized_name;
+    private List<List<String>> timestamps_serialized_name;
+    private List<List<String>> word_confidence_serialized_name;
     /**
      * Gets the transcript_serialized_name.
      *
@@ -6878,7 +6901,7 @@ public class IBMSpeechToTextV1Models {
      * @return the timestamps_serialized_name
      */
     @AuraEnabled
-    public List<String> getTimestamps() {
+    public List<List<String>> getTimestamps() {
       return timestamps_serialized_name;
     }
     /**
@@ -6891,7 +6914,7 @@ public class IBMSpeechToTextV1Models {
      * @return the word_confidence_serialized_name
      */
     @AuraEnabled
-    public List<String> getWordConfidence() {
+    public List<List<String>> getWordConfidence() {
       return word_confidence_serialized_name;
     }
 
@@ -6918,7 +6941,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<String> timestamps) {
+    public void setTimestamps(final List<List<String>> timestamps) {
       this.timestamps_serialized_name = timestamps;
     }
 
@@ -6927,7 +6950,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<String> wordConfidence) {
+    public void setWordConfidence(final List<List<String>> wordConfidence) {
       this.word_confidence_serialized_name = wordConfidence;
     }
 
@@ -7057,8 +7080,23 @@ public class IBMSpeechToTextV1Models {
       }
 
       // calling custom deserializer for keywords_result_serialized_name
-      Map<String, List<KeywordResult>> newKeywordsResult = (Map<String, List<KeywordResult>>) new Map<String, List<KeywordResult>>().deserialize(JSON.serialize(ret.getKeywordsResult()), (Map<String, Object>) jsonMap.get('keywords_result_serialized_name'), Map<String, List<KeywordResult>>.class);
-      ret.setKeywordsResult(newKeywordsResult);
+      Map<String, List<KeywordResult>> newKeywordsResult = new Map<String, List<KeywordResult>>();
+      Map<String, List<KeywordResult>> deserializedKeywordsResult = ret.getKeywordsResult();
+      if (deserializedKeywordsResult != null) {
+        for (String key : deserializedKeywordsResult.keySet()) {
+          List<KeywordResult> newKeywordResult = new List<KeywordResult>();
+          List<KeywordResult> keywordResultList = deserializedKeywordsResult.get(key);
+          for (Integer i = 0; i < keywordResultList.size(); i++) {
+            KeywordResult currentItem = keywordResultList.get(i);
+            Map<String, Object> itemInMap = (Map<String, Object>) jsonMap.get('keywords_result_serialized_name');
+            Object innerKeywordResult = ((List<Object>) itemInMap.get(key)).get(i);
+            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(innerKeywordResult)), KeywordResult.class);
+            newKeywordResult.add(newItem);
+          }
+          newKeywordsResult.put(key, newKeywordResult);
+        }
+        ret.setKeywordsResult(newKeywordsResult);
+      }
 
       // calling custom deserializer for word_alternatives_serialized_name
       List<WordAlternativeResults> newWordAlternatives = new List<WordAlternativeResults>();
