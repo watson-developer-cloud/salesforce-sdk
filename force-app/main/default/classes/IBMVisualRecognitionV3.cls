@@ -116,6 +116,9 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(classifyOptions.imagesFile(), classifyOptions.imagesFileContentTypeSerializedName());
       multipartBuilder.addFormDataPart('images_file', classifyOptions.imagesFilenameSerializedName(), fileBody);
     }
+    if (classifyOptions.parameters() != null) {
+      multipartBuilder.addFormDataPart('parameters', classifyOptions.parameters());
+    }
     if (classifyOptions.url() != null) {
       multipartBuilder.addFormDataPart('url', classifyOptions.url());
     }
@@ -165,6 +168,9 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    if (detectFacesOptions.parameters() != null) {
+      multipartBuilder.addFormDataPart('parameters', detectFacesOptions.parameters());
+    }
     if (detectFacesOptions.imagesFile() != null) {
       IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(detectFacesOptions.imagesFile(), detectFacesOptions.imagesFileContentTypeSerializedName());
       multipartBuilder.addFormDataPart('images_file', detectFacesOptions.imagesFilenameSerializedName(), fileBody);
@@ -300,7 +306,6 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    */
   public IBMVisualRecognitionV3Models.Classifier updateClassifier(IBMVisualRecognitionV3Models.UpdateClassifierOptions updateClassifierOptions) {
     IBMWatsonValidator.notNull(updateClassifierOptions, 'updateClassifierOptions cannot be null');
-    IBMWatsonValidator.isTrue((updateClassifierOptions.classnamePositiveExamples() != null) || (updateClassifierOptions.negativeExamples() != null), 'At least one of classname_positive_examples or negative_examples must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v3/classifiers/{0}', new String[]{ updateClassifierOptions.classifierId() }));
     Map<String, String> requestHeaders = (updateClassifierOptions != null) ? updateClassifierOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
