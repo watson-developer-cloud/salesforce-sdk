@@ -79,9 +79,7 @@ public class IBMDiscoveryV1Models {
     private AddDocumentOptions(AddDocumentOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      IBMWatsonValidator.isTrue((builder.file_serialized_name == null)
-        || (builder.filename_serialized_name != null && builder.file_content_type_serialized_name != null),
-        'filename and content type cannot be null if file is not null');
+      IBMWatsonValidator.isTrue(builder.file_serialized_name == null || builder.file_content_type_serialized_name != null, 'content type cannot be null if file is not null');
       environment_id_serialized_name = builder.environment_id_serialized_name;
       collection_id_serialized_name = builder.collection_id_serialized_name;
       file_serialized_name = builder.file_serialized_name;
@@ -751,8 +749,7 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.remove('training_status_serialized_name');
-      Collection ret = (Collection) super.deserialize(JSON.serialize(jsonMap), jsonMap, classType);
+      Collection ret = (Collection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for document_counts_serialized_name
       DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('document_counts_serialized_name'), DocumentCounts.class);
@@ -763,7 +760,7 @@ public class IBMDiscoveryV1Models {
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for training_status_serialized_name
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(ret.getTrainingStatus()), (Map<String, Object>) jsonMap.get('training_status_serialized_name'), TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
       // calling custom deserializer for source_crawl_serialized_name
@@ -10576,7 +10573,7 @@ public class IBMDiscoveryV1Models {
     /**
     * Gets the anomaly_serialized_name.
     *
-    * Used to inducate that anomaly detection should be performed. Anomaly detection is used to locate unusual datapoints within a time series.
+    * Used to indicate that anomaly detection should be performed. Anomaly detection is used to locate unusual datapoints within a time series.
     *
     * @return the anomaly_serialized_name
     */
@@ -14156,6 +14153,8 @@ public class IBMDiscoveryV1Models {
      * The session token for this query. The session token can be used to add events associated with this query to the
      * query and event log.
      *
+     * **Important:** Session tokens are case sensitive.
+     *
      * @return the session_token_serialized_name
      */
     @AuraEnabled
@@ -15214,6 +15213,7 @@ public class IBMDiscoveryV1Models {
     }
     private TestConfigurationInEnvironmentOptions(TestConfigurationInEnvironmentOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
+      IBMWatsonValidator.isTrue(builder.file_serialized_name == null || builder.file_content_type_serialized_name != null, 'content type cannot be null if file is not null');
       environment_id_serialized_name = builder.environment_id_serialized_name;
       configuration_serialized_name = builder.configuration_serialized_name;
       step_serialized_name = builder.step_serialized_name;
@@ -16083,17 +16083,7 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      String data_updated = (String) jsonMap.remove('data_updated_serialized_name');
-      String successfully_trained = (String) jsonMap.remove('successfully_trained_serialized_name');
-      String jsonStringWithoutDates = JSON.serialize(jsonMap);
-
-      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
-      if (String.isNotBlank(data_updated)) {
-        ret.setDataUpdated((Datetime) JSON.deserialize('"' + data_updated + '"', Datetime.class));
-      }
-      if (String.isNotBlank(successfully_trained)) {
-        ret.setSuccessfullyTrained((Datetime) JSON.deserialize('"' + successfully_trained + '"', Datetime.class));
-      }
+      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -16883,6 +16873,7 @@ public class IBMDiscoveryV1Models {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.document_id_serialized_name, 'document_id_serialized_name cannot be empty');
+      IBMWatsonValidator.isTrue(builder.file_serialized_name == null || builder.file_content_type_serialized_name != null, 'content type cannot be null if file is not null');
       environment_id_serialized_name = builder.environment_id_serialized_name;
       collection_id_serialized_name = builder.collection_id_serialized_name;
       document_id_serialized_name = builder.document_id_serialized_name;
