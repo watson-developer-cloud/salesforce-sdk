@@ -64,7 +64,7 @@ public with sharing class IBMAssistantV1FTests {
     disambiguation.setSensitivity('high');
     IBMAssistantV1Models.WorkspaceSystemSettingsTooling tooling = new IBMAssistantV1Models.WorkspaceSystemSettingsTooling();
     tooling.setStoreGenericResponses(true);
-    Map<String, String> humanAgentAssist = new Map<String, String>();
+    IBMWatsonMapModel humanAgentAssist = new IBMWatsonMapModel();
     humanAgentAssist.put('help', 'ok');
     IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettings();
     systemSettings.setDisambiguation(disambiguation);

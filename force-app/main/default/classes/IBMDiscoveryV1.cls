@@ -941,7 +941,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(queryOptions, 'queryOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/query', new String[]{ queryOptions.environmentId(), queryOptions.collectionId() }));
     if (queryOptions.loggingOptOut() != null) {
-      builder.addHeader('X-Watson-Logging-Opt-Out', queryOptions.loggingOptOut());
+      builder.addHeader('X-Watson-Logging-Opt-Out', String.valueOf(queryOptions.loggingOptOut()));
     }
     Map<String, String> requestHeaders = (queryOptions != null) ? queryOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
