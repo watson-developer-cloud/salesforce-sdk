@@ -494,7 +494,7 @@ public class IBMWatsonMockResponses {
             '"enabled": true,' +
             '"prompt": "prompt",' +
             '"sensitivity": "high"' +
-          '},' +
+          '}' +
         '},' +
       '}';
   }
