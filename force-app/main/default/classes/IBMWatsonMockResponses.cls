@@ -478,14 +478,25 @@ public class IBMWatsonMockResponses {
         '"created": "2015-12-06T23:53:59.153Z", ' +
         '"language": "en", ' +
         '"metadata": {' +
-        '"code": "test_code"' +
+          '"code": "test_code"' +
         '}, ' +
         '"updated": "2017-10-18T15:44:56.800", ' +
         '"description": "Description of test_workspace", ' +
         '"status": "Available", ' +
         '"workspace_id": "123456789", ' +
-        '"learning_opt_out": false' +
-        '}';
+        '"learning_opt_out": false,' +
+        '"system_settings": {' +
+          '"tooling": {' +
+            '"store_generic_responses": true' +
+          '},' +
+          '"disambiguation": {' +
+            '"none_of_the_above_prompt": "none of the above",' +
+            '"enabled": true,' +
+            '"prompt": "prompt",' +
+            '"sensitivity": "high"' +
+          '},' +
+        '},' +
+      '}';
   }
 
   public static testMethod String workspaceExport() {

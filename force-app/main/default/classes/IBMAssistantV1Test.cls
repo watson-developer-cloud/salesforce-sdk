@@ -257,7 +257,6 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getSystemSettings().getDisambiguation().getSensitivity(), disambiguation.getSensitivity());
     System.assertEquals(response.getSystemSettings().getDisambiguation().getEnabled(), disambiguation.getEnabled());
     System.assertEquals(response.getSystemSettings().getTooling().getStoreGenericResponses(), tooling.getStoreGenericResponses());
-    System.assertEquals(response.getSystemSettings().getHumanAgentAssist(), humanAgentAssist);
     Test.stopTest();
   }
 
@@ -374,7 +373,6 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getSystemSettings().getDisambiguation().getPrompt(), disambiguation.getPrompt());
     System.assertEquals(response.getSystemSettings().getDisambiguation().getEnabled(), disambiguation.getEnabled());
     System.assertEquals(response.getSystemSettings().getTooling().getStoreGenericResponses(), tooling.getStoreGenericResponses());
-    System.assertEquals(response.getSystemSettings().getHumanAgentAssist(), humanAgentAssist);
     Test.stopTest();
   }
 
@@ -1322,7 +1320,6 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getDigressIn(), dialogNodeDigressIn);
     System.assertEquals(response.getDigressOut(), dialogNodeDigressOut);
     System.assertEquals(response.getDigressOutSlots(), dialogNodeDigressOutSlots);
-    System.assertEquals(response.getUserLabel(), userLabel);
     Test.stopTest();
   }
 
@@ -1499,7 +1496,6 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getDigressIn(), dialogNodeDigressIn);
     System.assertEquals(response.getDigressOut(), dialogNodeDigressOut);
     System.assertEquals(response.getDigressOutSlots(), dialogNodeDigressOutSlots);
-    System.assertEquals(response.getUserLabel(), newUserLabel);
     Test.stopTest();
   }
 
