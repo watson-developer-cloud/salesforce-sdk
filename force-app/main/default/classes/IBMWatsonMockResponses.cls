@@ -289,12 +289,12 @@ public class IBMWatsonMockResponses {
             '    "used_bytes": 260' +
             '  }, ' +
             '  "training_status": {' +
-            '    "data_updated": "", ' +
+            '    "data_updated": "2017-07-14T12:55:40.652Z", ' +
             '    "total_examples": 0, ' +
             '    "sufficient_label_diversity": false, ' +
             '    "processing": false, ' +
             '    "minimum_examples_added": false, ' +
-            '    "successfully_trained": "", ' +
+            '    "successfully_trained": "2017-07-14T12:55:40.652Z", ' +
             '    "available": false, ' +
             '    "notices": 0, ' +
             '    "minimum_queries_added": false' +
