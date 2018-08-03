@@ -4,6 +4,11 @@ public with sharing class IBMConversationV1FTests {
   private static String URL = 'https://gateway.watsonplatform.net/conversation/api';
   private static String VERSION = '2018-07-10';
 
+  private static String entityName = 'City';
+  private static String intentName = 'TestIntent';
+  private static String newExampleText = 'This is a test!';
+  private static String updateExampleText = 'Does this work?';
+
   /**
    *  Test run functional tests.
    */
@@ -17,14 +22,14 @@ public with sharing class IBMConversationV1FTests {
     getIntent(workspaceId, username, password);
     listIntents(workspaceId, username, password);
     updateIntent(workspaceId, username, password);
-    createExample(workspaceId, username, password);
-    getExample(workspaceId, username, password);
-    listExamples(workspaceId, username, password);
-    updateExample(workspaceId, username, password);
     createEntity(workspaceId, username, password);
     getEntity(workspaceId, username, password);
     listEntities(workspaceId, username, password);
     updateEntity(workspaceId, username, password);
+    createExample(workspaceId, username, password);
+    getExample(workspaceId, username, password);
+    listExamples(workspaceId, username, password);
+    updateExample(workspaceId, username, password);
     createValue(workspaceId, username, password);
     getValue(workspaceId, username, password);
     updateValue(workspaceId, username, password);
@@ -169,7 +174,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.CreateIntentOptions createOptions = new IBMConversationV1Models.CreateIntentOptionsBuilder()
       .workspaceId(workspaceId)
-      .intent('TestIntent')
+      .intent(intentName)
       .description('new intent to test')
       .build();
     IBMConversationV1Models.Intent response = conversation.createIntent(createOptions);
@@ -186,7 +191,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.DeleteIntentOptions deleteOptions = new IBMConversationV1Models.DeleteIntentOptionsBuilder()
       .workspaceId(workspaceId)
-      .intent('TestIntent')
+      .intent(intentName)
       .build();
     conversation.deleteIntent(deleteOptions);
   }
@@ -200,7 +205,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.GetIntentOptions getOptions = new IBMConversationV1Models.GetIntentOptionsBuilder()
       .workspaceId(workspaceId)
-      .intent('TestIntent')
+      .intent(intentName)
       .exportField(true)
       .build();
     IBMConversationV1Models.IntentExport response = conversation.getIntent(getOptions);
@@ -233,7 +238,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.UpdateIntentOptions updateOptions = new IBMConversationV1Models.UpdateIntentOptionsBuilder()
       .workspaceId(workspaceId)
-      .intent('TestIntent')
+      .intent(intentName)
       .newDescription('new description!')
       .build();
     IBMConversationV1Models.Intent response = conversation.updateIntent(updateOptions);
@@ -249,15 +254,15 @@ public with sharing class IBMConversationV1FTests {
     }
 
     IBMConversationV1Models.Mentions mentions1 = new IBMConversationV1Models.Mentions();
-    mentions1.setEntity('genre');
+    mentions1.setEntity(entityName);
     mentions1.setLocation(new List<Long> { 0L, 5L });
     List<IBMConversationV1Models.Mentions> mentionsList = new List<IBMConversationV1Models.Mentions>();
     mentionsList.add(mentions1);
 
     IBMConversationV1Models.CreateExampleOptions createOptions = new IBMConversationV1Models.CreateExampleOptionsBuilder()
       .workspaceId(workspaceId)
-      .intent('TestIntent')
-      .text('This is a test!')
+      .intent(intentName)
+      .text(newExampleText)
       .mentions(mentionsList)
       .build();
     IBMConversationV1Models.Example response = conversation.createExample(createOptions);
@@ -274,8 +279,8 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.DeleteExampleOptions deleteOptions = new IBMConversationV1Models.DeleteExampleOptionsBuilder()
       .workspaceId(workspaceId)
-      .intent('TestIntent')
-      .text('Does this work?')
+      .intent(intentName)
+      .text(updateExampleText)
       .build();
     conversation.deleteExample(deleteOptions);
   }
@@ -289,8 +294,8 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.GetExampleOptions getOptions = new IBMConversationV1Models.GetExampleOptionsBuilder()
       .workspaceId(workspaceId)
-      .intent('TestIntent')
-      .text('example A')
+      .intent(intentName)
+      .text(newExampleText)
       .build();
     IBMConversationV1Models.Example response = conversation.getExample(getOptions);
 
@@ -306,7 +311,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.ListExamplesOptions listOptions = new IBMConversationV1Models.ListExamplesOptionsBuilder()
       .workspaceId(workspaceId)
-      .intent('TestIntent')
+      .intent(intentName)
       .build();
     IBMConversationV1Models.ExampleCollection response = conversation.listExamples(listOptions);
 
@@ -322,9 +327,9 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.UpdateExampleOptions updateOptions = new IBMConversationV1Models.UpdateExampleOptionsBuilder()
       .workspaceId(workspaceId)
-      .intent('TestIntent')
-      .text('example A')
-      .newText('Does this work?')
+      .intent(intentName)
+      .text(newExampleText)
+      .newText(updateExampleText)
       .build();
     IBMConversationV1Models.Example response = conversation.updateExample(updateOptions);
 
@@ -342,7 +347,7 @@ public with sharing class IBMConversationV1FTests {
     metadata.put('Boston', 'nice');
     IBMConversationV1Models.CreateEntityOptions createOptions = new IBMConversationV1Models.CreateEntityOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('City')
+      .entity(entityName)
       .description('A city')
       .metadata(metadata)
       .fuzzyMatch(false)
@@ -361,7 +366,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.DeleteEntityOptions deleteOptions = new IBMConversationV1Models.DeleteEntityOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('City')
+      .entity(entityName)
       .build();
     conversation.deleteEntity(deleteOptions);
   }
@@ -375,7 +380,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.GetEntityOptions getOptions = new IBMConversationV1Models.GetEntityOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('City')
+      .entity(entityName)
       .exportField(true)
       .build();
     IBMConversationV1Models.EntityExport response = conversation.getEntity(getOptions);
@@ -408,7 +413,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.UpdateEntityOptions updateOptions = new IBMConversationV1Models.UpdateEntityOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('City')
+      .entity(entityName)
       .newDescription('This description is new')
       .build();
     IBMConversationV1Models.Entity response = conversation.updateEntity(updateOptions);
@@ -425,7 +430,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.CreateValueOptions createOptions = new IBMConversationV1Models.CreateValueOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('City')
+      .entity(entityName)
       .value('Boston')
       .build();
     IBMConversationV1Models.Value response = conversation.createValue(createOptions);
@@ -442,7 +447,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.DeleteValueOptions deleteOptions = new IBMConversationV1Models.DeleteValueOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('City')
+      .entity(entityName)
       .value('Boston')
       .build();
     conversation.deleteValue(deleteOptions);
@@ -457,7 +462,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.GetValueOptions getOptions = new IBMConversationV1Models.GetValueOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('City')
+      .entity(entityName)
       .value('Boston')
       .exportField(true)
       .build();
@@ -475,7 +480,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.UpdateValueOptions updateOptions = new IBMConversationV1Models.UpdateValueOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('City')
+      .entity(entityName)
       .value('Boston')
       .addNewSynonyms('Kitty')
       .build();
@@ -493,7 +498,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.ListValuesOptions listOptions = new IBMConversationV1Models.ListValuesOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('City')
+      .entity(entityName)
       .build();
     IBMConversationV1Models.ValueCollection response = conversation.listValues(listOptions);
 
@@ -509,7 +514,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.CreateSynonymOptions createOptions = new IBMConversationV1Models.CreateSynonymOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('City')
+      .entity(entityName)
       .value('Boston')
       .synonym('The Hub')
       .build();
@@ -527,7 +532,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.DeleteSynonymOptions deleteOptions = new IBMConversationV1Models.DeleteSynonymOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('City')
+      .entity(entityName)
       .value('Boston')
       .synonym('The Hub')
       .build();
@@ -543,7 +548,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.GetSynonymOptions getOptions = new IBMConversationV1Models.GetSynonymOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('City')
+      .entity(entityName)
       .value('Boston')
       .synonym('Kitty')
       .build();
@@ -561,7 +566,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.ListSynonymsOptions listOptions = new IBMConversationV1Models.ListSynonymsOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('City')
+      .entity(entityName)
       .value('Boston')
       .build();
     IBMConversationV1Models.SynonymCollection response = conversation.listSynonyms(listOptions);
@@ -578,7 +583,7 @@ public with sharing class IBMConversationV1FTests {
 
     IBMConversationV1Models.UpdateSynonymOptions updateOptions = new IBMConversationV1Models.UpdateSynonymOptionsBuilder()
       .workspaceId(workspaceId)
-      .entity('City')
+      .entity(entityName)
       .value('Boston')
       .synonym('Kitty')
       .newSynonym('City of Champions')
