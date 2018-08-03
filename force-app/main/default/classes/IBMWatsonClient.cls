@@ -38,7 +38,11 @@ public class IBMWatsonClient {
       } else if (request.getBody().contentType.toString().contains(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
         httpRequest.setBody(IBMWatsonJSONUtil.serialize(request.getBody().content));
       } else {
-        httpRequest.setBody(request.getBody().content);
+        if (request.getBody().content != null) {
+          httpRequest.setBody(request.getBody().content);
+        } else {
+          httpRequest.setBody(request.getBody().blobContent.toString());
+        }
       }
     }
 
