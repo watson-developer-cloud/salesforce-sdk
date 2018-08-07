@@ -151,7 +151,6 @@ public class IBMSpeechToTextV1FTest {
       .allowOverwrite(true)
       .corpusFile(corpusFile)
       .corpusFilename('corpora.txt')
-      .corpusFileContentType('text/plain')
       .build();
     speechToText.addCorpus(addCorpusOptions);
     addCorpusOptions = addCorpusOptions.newBuilder().build();

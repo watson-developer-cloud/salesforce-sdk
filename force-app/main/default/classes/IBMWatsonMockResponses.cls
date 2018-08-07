@@ -289,12 +289,12 @@ public class IBMWatsonMockResponses {
             '    "used_bytes": 260' +
             '  }, ' +
             '  "training_status": {' +
-            '    "data_updated": "", ' +
+            '    "data_updated": "2017-07-14T12:55:40.652Z", ' +
             '    "total_examples": 0, ' +
             '    "sufficient_label_diversity": false, ' +
             '    "processing": false, ' +
             '    "minimum_examples_added": false, ' +
-            '    "successfully_trained": "", ' +
+            '    "successfully_trained": "2017-07-14T12:55:40.652Z", ' +
             '    "available": false, ' +
             '    "notices": 0, ' +
             '    "minimum_queries_added": false' +
@@ -478,14 +478,25 @@ public class IBMWatsonMockResponses {
         '"created": "2015-12-06T23:53:59.153Z", ' +
         '"language": "en", ' +
         '"metadata": {' +
-        '"code": "test_code"' +
+          '"code": "test_code"' +
         '}, ' +
         '"updated": "2017-10-18T15:44:56.800", ' +
         '"description": "Description of test_workspace", ' +
         '"status": "Available", ' +
         '"workspace_id": "123456789", ' +
-        '"learning_opt_out": false' +
-        '}';
+        '"learning_opt_out": false,' +
+        '"system_settings": {' +
+          '"tooling": {' +
+            '"store_generic_responses": true' +
+          '},' +
+          '"disambiguation": {' +
+            '"none_of_the_above_prompt": "none of the above",' +
+            '"enabled": true,' +
+            '"prompt": "prompt",' +
+            '"sensitivity": "high"' +
+          '}' +
+        '}' +
+      '}';
   }
 
   public static testMethod String workspaceExport() {
@@ -2449,6 +2460,16 @@ public class IBMWatsonMockResponses {
     '}';
   }
 
+  public static testMethod String expiredTokenData() {
+    return '{' +
+      '"access_token": "wxyz-9876",' +
+      '"refresh_token": "00000000",' +
+      '"token_type": "Bearer",' +
+      '"expires_in": 3600,' +
+      '"expiration": 10000' +
+    '}';
+  }
+
   public static testMethod String credentials() {
     return '{' +
       '"credential_id" : "00000d8c-0000-00e8-ba89-0ed5f89f718b",' +
@@ -2490,5 +2511,15 @@ public class IBMWatsonMockResponses {
       '}' +
     '} ]' +
   '}';
+  }
+
+  public static testMethod String mentions() {
+    return '{' +
+      '"examples" : [ {' +
+        '"text" : "I would like to order a pizza",' +
+        '"intent" : "FoodTypes",' +
+        '"location" : [ 20, 24 ]' +
+      '} ]' +
+    '}';
   }
 }

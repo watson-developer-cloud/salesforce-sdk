@@ -894,6 +894,7 @@ public class IBMVisualRecognitionV3Models {
       return parameters_serialized_name;
     }
     private ClassifyOptions(ClassifyOptionsBuilder builder) {
+      IBMWatsonValidator.isTrue(builder.images_file_serialized_name == null || builder.images_file_content_type_serialized_name != null, 'content type cannot be null if file is not null');
       images_file_serialized_name = builder.images_file_serialized_name;
       images_filename_serialized_name = builder.images_filename_serialized_name;
       accept_language_serialized_name = builder.accept_language_serialized_name;
@@ -1553,6 +1554,7 @@ public class IBMVisualRecognitionV3Models {
       return parameters_serialized_name;
     }
     private DetectFacesOptions(DetectFacesOptionsBuilder builder) {
+      IBMWatsonValidator.isTrue(builder.images_file_serialized_name == null || builder.images_file_content_type_serialized_name != null, 'content type cannot be null if file is not null');
       images_file_serialized_name = builder.images_file_serialized_name;
       images_filename_serialized_name = builder.images_filename_serialized_name;
       url_serialized_name = builder.url_serialized_name;

@@ -221,8 +221,8 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
       multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
     }
     if (createClassifierOptions.negativeExamples() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createClassifierOptions.negativeExamples(), 'application/octet-stream');
-      multipartBuilder.addFormDataPart('negative_examples', createClassifierOptions.negativeExamplesFilename(), fileBody);
+      IBMWatsonRequestBody negativeExamplesBody = IBMWatsonRequestBody.create(createClassifierOptions.negativeExamples(), 'application/octet-stream');
+      multipartBuilder.addFormDataPart('negative_examples', createClassifierOptions.negativeExamplesFilename(), negativeExamplesBody);
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());

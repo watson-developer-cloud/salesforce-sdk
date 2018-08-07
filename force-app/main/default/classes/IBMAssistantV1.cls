@@ -149,6 +149,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createWorkspaceOptions.learningOptOut() != null) {
       contentJson.put('learning_opt_out', createWorkspaceOptions.learningOptOut());
     }
+    if (createWorkspaceOptions.systemSettings() != null) {
+      contentJson.put('system_settings', createWorkspaceOptions.systemSettings());
+    }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Workspace) createServiceCall(builder.build(), IBMAssistantV1Models.Workspace.class);
@@ -298,6 +301,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
     }
     if (updateWorkspaceOptions.learningOptOut() != null) {
       contentJson.put('learning_opt_out', updateWorkspaceOptions.learningOptOut());
+    }
+    if (updateWorkspaceOptions.systemSettings() != null) {
+      contentJson.put('system_settings', updateWorkspaceOptions.systemSettings());
     }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
@@ -493,6 +499,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
     contentJson.put('text', createExampleOptions.text());
+    if (createExampleOptions.mentions() != null) {
+      contentJson.put('mentions', createExampleOptions.mentions());
+    }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Example) createServiceCall(builder.build(), IBMAssistantV1Models.Example.class);
@@ -552,7 +561,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * List user input examples.
    *
-   * List the user input examples for an intent.
+   * List the user input examples for an intent, optionally including contextual entity mentions.
    *
    * This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
@@ -611,6 +620,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
     final Map<String, Object> contentJson = new Map<String, Object>();
     if (updateExampleOptions.newText() != null) {
       contentJson.put('text', updateExampleOptions.newText());
+    }
+    if (updateExampleOptions.newMentions() != null) {
+      contentJson.put('mentions', updateExampleOptions.newMentions());
     }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
@@ -940,6 +952,37 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.Entity) createServiceCall(builder.build(), IBMAssistantV1Models.Entity.class);
+  }
+
+  /**
+   * List entity mentions.
+   *
+   * List mentions for a contextual entity. An entity mention is an occurrence of a contextual entity in the context of
+   * an intent user input example.
+   *
+   * This operation is limited to 200 requests per 30 minutes. For more information, see **Rate limiting**.
+   *
+   * @param listMentionsOptions the {@link IBMAssistantV1Models.ListMentionsOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.EntityMentionCollection} with the response
+   */
+  public IBMAssistantV1Models.EntityMentionCollection listMentions(IBMAssistantV1Models.ListMentionsOptions listMentionsOptions) {
+    IBMWatsonValidator.notNull(listMentionsOptions, 'listMentionsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/mentions', new String[]{ listMentionsOptions.workspaceId(), listMentionsOptions.entity() }));
+    Map<String, String> requestHeaders = (listMentionsOptions != null) ? listMentionsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (listMentionsOptions.exportField() != null) {
+      builder.query('export', String.valueOf(listMentionsOptions.exportField()));
+    }
+    if (listMentionsOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(listMentionsOptions.includeAudit()));
+    }
+
+    return (IBMAssistantV1Models.EntityMentionCollection) createServiceCall(builder.build(), IBMAssistantV1Models.EntityMentionCollection.class);
   }
 
   /**
@@ -1335,6 +1378,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
     if (createDialogNodeOptions.digressOutSlots() != null) {
       contentJson.put('digress_out_slots', createDialogNodeOptions.digressOutSlots());
     }
+    if (createDialogNodeOptions.userLabel() != null) {
+      contentJson.put('user_label', createDialogNodeOptions.userLabel());
+    }
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMAssistantV1Models.DialogNode) createServiceCall(builder.build(), IBMAssistantV1Models.DialogNode.class);
@@ -1468,6 +1514,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
     }
     if (updateDialogNodeOptions.newVariable() != null) {
       contentJson.put('variable', updateDialogNodeOptions.newVariable());
+    }
+    if (updateDialogNodeOptions.newUserLabel() != null) {
+      contentJson.put('user_label', updateDialogNodeOptions.newUserLabel());
     }
     if (updateDialogNodeOptions.newMetadata() != null) {
       contentJson.put('metadata', updateDialogNodeOptions.newMetadata());

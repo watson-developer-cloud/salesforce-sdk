@@ -46,7 +46,7 @@ private class IBMAssistantV1Test {
   private static String dialogNodeConditions;
   private static String dialogNodeParent;
   private static String dialogNodePreviousSibling;
-  private static IBMWatsonMapModel dialogNodeOutput;
+  private static IBMAssistantV1Models.DialogNodeOutput dialogNodeOutput;
   private static IBMWatsonMapModel dialogNodeContext;
   private static String nextStepBehavior;
   private static String nextStepDialogNode;
@@ -112,7 +112,7 @@ private class IBMAssistantV1Test {
     dialogNodeConditions = '#test';
     dialogNodeParent = 'parent';
     dialogNodePreviousSibling = 'sibling';
-    dialogNodeOutput = new IBMWatsonMapModel();
+    dialogNodeOutput = new IBMAssistantV1Models.DialogNodeOutput();
     dialogNodeOutput.put('text', 'output text');
     dialogNodeContext = new IBMWatsonMapModel();
     dialogNodeContext.put('context', 'context_val');
@@ -172,23 +172,25 @@ private class IBMAssistantV1Test {
     dialogNodeNextStep.setBehavior('test');
     dialogNodeNextStep.setDialogNode('test');
     dialogNodeNextStep.setSelector('test');
+    String userLabel = 'user_label';
     IBMAssistantV1Models.CreateDialogNode createDialogNode = new IBMAssistantV1Models.CreateDialogNodeBuilder()
-    .addActions(dialogNodeAction)
-    .dialogNode('test')
-    .description('test')
-    .conditions('test')
-    .parent('test')
-    .previousSibling('test')
-    .output(metadata)
-    .context(metadata)
-    .metadata(metadata)
-    .nextStep(dialogNodeNextStep)
-    .actions(new List<IBMAssistantV1Models.DialogNodeAction>{dialogNodeAction})
-    .title('test')
-    .typeField('test')
-    .eventName('test')
-    .variable('test')
-    .build();
+      .addActions(dialogNodeAction)
+      .dialogNode('test')
+      .description('test')
+      .conditions('test')
+      .parent('test')
+      .previousSibling('test')
+      .output(dialogNodeOutput)
+      .context(metadata)
+      .metadata(metadata)
+      .nextStep(dialogNodeNextStep)
+      .actions(new List<IBMAssistantV1Models.DialogNodeAction>{dialogNodeAction})
+      .title('test')
+      .typeField('test')
+      .eventName('test')
+      .variable('test')
+      .userLabel(userLabel)
+      .build();
     createDialogNode = createDialogNode.newBuilder().build();
     IBMAssistantV1Models.CreateValue createValue = new IBMAssistantV1Models.CreateValueBuilder('test')
       .addSynonyms('test')
@@ -208,6 +210,20 @@ private class IBMAssistantV1Test {
       .values(new List<IBMAssistantV1Models.CreateValue>{createValue})
       .build();
     createEntity = createEntity.newBuilder().build();
+    IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation();
+    disambiguation.setEnabled(true);
+    disambiguation.setNoneOfTheAbovePrompt('none of the above');
+    disambiguation.setPrompt('prompt');
+    disambiguation.setSensitivity('high');
+    IBMAssistantV1Models.WorkspaceSystemSettingsTooling tooling = new IBMAssistantV1Models.WorkspaceSystemSettingsTooling();
+    tooling.setStoreGenericResponses(true);
+    IBMWatsonMapModel humanAgentAssist = new IBMWatsonMapModel();
+    humanAgentAssist.put('help', 'ok');
+    IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettings();
+    systemSettings.setDisambiguation(disambiguation);
+    systemSettings.setTooling(tooling);
+    systemSettings.setHumanAgentAssist(humanAgentAssist);
+
     IBMAssistantV1Models.CreateWorkspaceOptions createWorkspaceOptions = new IBMAssistantV1Models.CreateWorkspaceOptionsBuilder()
       .name(workspaceName)
       .description(workspaceDescription)
@@ -220,6 +236,7 @@ private class IBMAssistantV1Test {
       .addentities(createEntity)
       .entities(new List<IBMAssistantV1Models.CreateEntity>{createEntity})
       .language(workspaceLanguage)
+      .systemSettings(systemSettings)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -234,6 +251,12 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getWorkspaceId(), workspaceId);
     System.assertEquals(response.getLearningOptOut(), learningOptOut);
+    System.assert(response.getSystemSettings() != null);
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getNoneOfTheAbovePrompt(), disambiguation.getNoneOfTheAbovePrompt());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getPrompt(), disambiguation.getPrompt());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getSensitivity(), disambiguation.getSensitivity());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getEnabled(), disambiguation.getEnabled());
+    System.assertEquals(response.getSystemSettings().getTooling().getStoreGenericResponses(), tooling.getStoreGenericResponses());
     Test.stopTest();
   }
 
@@ -313,8 +336,23 @@ private class IBMAssistantV1Test {
     IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
     assistant.setUsernameAndPassword('username', 'password');
 
+    IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation();
+    disambiguation.setEnabled(true);
+    disambiguation.setNoneOfTheAbovePrompt('none of the above');
+    disambiguation.setPrompt('prompt');
+    disambiguation.setSensitivity('high');
+    IBMAssistantV1Models.WorkspaceSystemSettingsTooling tooling = new IBMAssistantV1Models.WorkspaceSystemSettingsTooling();
+    tooling.setStoreGenericResponses(true);
+    IBMWatsonMapModel humanAgentAssist = new IBMWatsonMapModel();
+    humanAgentAssist.put('help', 'ok');
+    IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettings();
+    systemSettings.setDisambiguation(disambiguation);
+    systemSettings.setTooling(tooling);
+    systemSettings.setHumanAgentAssist(humanAgentAssist);
+
     IBMAssistantV1Models.UpdateWorkspaceOptions updateOptions = new IBMAssistantV1Models.UpdateWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
+      .systemSettings(systemSettings)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -329,6 +367,12 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getWorkspaceId(), workspaceId);
     System.assertEquals(response.getLearningOptOut(), learningOptOut);
+    System.assert(response.getSystemSettings() != null);
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getNoneOfTheAbovePrompt(), disambiguation.getNoneOfTheAbovePrompt());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getSensitivity(), disambiguation.getSensitivity());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getPrompt(), disambiguation.getPrompt());
+    System.assertEquals(response.getSystemSettings().getDisambiguation().getEnabled(), disambiguation.getEnabled());
+    System.assertEquals(response.getSystemSettings().getTooling().getStoreGenericResponses(), tooling.getStoreGenericResponses());
     Test.stopTest();
   }
 
@@ -747,15 +791,28 @@ private class IBMAssistantV1Test {
     IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
     assistant.setUsernameAndPassword('username', 'password');
 
+    IBMAssistantV1Models.Mentions mentions1 = new IBMAssistantV1Models.Mentions();
+    mentions1.setEntity('entity');
+    mentions1.setLocation(new List<Long> { 0L, 10L });
+    List<IBMAssistantV1Models.Mentions> mentionsList = new List<IBMAssistantV1Models.Mentions>();
+    mentionsList.add(mentions1);
+    IBMAssistantV1Models.Mentions mentions2 = new IBMAssistantV1Models.Mentions();
+    mentions2.setEntity('second_entity');
+    mentions2.setLocation(new List<Long> { 0L, 10L });
+
     IBMAssistantV1Models.CreateExampleOptions createOptions = new IBMAssistantV1Models.CreateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .text(exampleText)
+      .mentions(mentionsList)
+      .addMentions(mentions2)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     createOptions = createOptions.newBuilder().build();
     IBMAssistantV1Models.Example response = assistant.createExample(createOptions);
+
+    mentionsList.add(mentions2);
 
     System.assertEquals(response.getText(), exampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -863,11 +920,22 @@ private class IBMAssistantV1Test {
     IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
     assistant.setUsernameAndPassword('username', 'password');
 
+    IBMAssistantV1Models.Mentions mentions1 = new IBMAssistantV1Models.Mentions();
+    mentions1.setEntity('entity');
+    mentions1.setLocation(new List<Long> { 0L, 10L });
+    List<IBMAssistantV1Models.Mentions> mentionsList = new List<IBMAssistantV1Models.Mentions>();
+    mentionsList.add(mentions1);
+    IBMAssistantV1Models.Mentions mentions2 = new IBMAssistantV1Models.Mentions();
+    mentions2.setEntity('second_entity');
+    mentions2.setLocation(new List<Long> { 0L, 10L });
+
     IBMAssistantV1Models.UpdateExampleOptions updateOptions = new IBMAssistantV1Models.UpdateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
       .text(exampleText)
       .newText(exampleText)
+      .newMentions(mentionsList)
+      .addNewMentions(mentions2)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1212,12 +1280,15 @@ private class IBMAssistantV1Test {
     IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
     assistant.setUsernameAndPassword('username', 'password');
 
+    String userLabel = 'user_label';
+
     IBMAssistantV1Models.CreateDialogNodeOptions createOptions = new IBMAssistantV1Models.CreateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
       .digressIn(dialogNodeDigressIn)
       .digressOut(dialogNodeDigressOut)
       .digressOutSlots(dialogNodeDigressOutSlots)
+      .userLabel(userLabel)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1385,6 +1456,8 @@ private class IBMAssistantV1Test {
     IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
     assistant.setUsernameAndPassword('username', 'password');
 
+    String newUserLabel = 'new_user_label';
+
     IBMAssistantV1Models.UpdateDialogNodeOptions updateOptions = new IBMAssistantV1Models.UpdateDialogNodeOptionsBuilder()
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
@@ -1393,6 +1466,7 @@ private class IBMAssistantV1Test {
       .newDigressIn(dialogNodeDigressIn)
       .newDigressOut(dialogNodeDigressOut)
       .newDigressOutSlots(dialogNodeDigressOutSlots)
+      .newUserLabel(newUserLabel)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -1660,6 +1734,34 @@ private class IBMAssistantV1Test {
     //you can add more attributes using following builder method. This step is not necessary
     deleteOptions = deleteOptions.newBuilder().build();
     assistant.deleteUserData(deleteOptions);
+
+    Test.stopTest();
+  }
+
+  static testMethod void testListMentions() {
+    String body = IBMWatsonMockResponses.mentions();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
+    assistant.setUsernameAndPassword('username', 'password');
+
+    String entity = 'amenity';
+
+    IBMAssistantV1Models.ListMentionsOptions listMentionsOptions = new IBMAssistantV1Models.ListMentionsOptionsBuilder()
+      .workspaceId(workspaceId)
+      .entity(entity)
+      .build();
+    //you can add more attributes using following builder method. This step is not necessary
+    listMentionsOptions = listMentionsOptions.newBuilder().build();
+    IBMAssistantV1Models.EntityMentionCollection response = assistant.listMentions(listMentionsOptions);
+
+    System.assert(!response.getExamples().isEmpty());
 
     Test.stopTest();
   }

@@ -176,57 +176,54 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * For information about submitting a multipart request, see [Submitting multipart requests as form
    * data](https://console.bluemix.net/docs/services/speech-to-text/http.html#HTTP-multi).
    *
-   * @param recognizeSessionlessOptions the {@link IBMSpeechToTextV1Models.RecognizeSessionlessOptions} containing the options for the call
+   * @param recognizeOptions the {@link IBMSpeechToTextV1Models.RecognizeOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.SpeechRecognitionResults} with the response
    */
-  public IBMSpeechToTextV1Models.SpeechRecognitionResults recognize(
-    IBMSpeechToTextV1Models.RecognizeOptions recognizeOptions) {
+  public IBMSpeechToTextV1Models.SpeechRecognitionResults recognize(IBMSpeechToTextV1Models.RecognizeOptions recognizeOptions) {
     IBMWatsonValidator.notNull(recognizeOptions, 'recognizeOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint()
-      + '/v1/recognize');
-
-    builder.addHeader('Content-Type', recognizeOptions.fileContentType());
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/recognize');
+    builder.addHeader('Content-Type', recognizeOptions.contentType());
     Map<String, String> requestHeaders = (recognizeOptions != null) ? recognizeOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
-    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
-    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    if (recognizeOptions.audio() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(recognizeOptions.audio(), recognizeOptions.fileContentType());
-      multipartBuilder.addFormDataPart('audio', recognizeOptions.audioFilename(), fileBody);
+    if (recognizeOptions.model() != null) {
+      builder.query('model', recognizeOptions.model());
     }
-    if (recognizeOptions.continuous() != null) {
-      builder.query('continuous', String.valueOf(recognizeOptions.continuous()));
+    if (recognizeOptions.customizationId() != null) {
+      builder.query('customization_id', recognizeOptions.customizationId());
     }
-    if (recognizeOptions.maxAlternatives() != null) {
-      builder.query('max_alternatives', String.valueOf(recognizeOptions.maxAlternatives()));
+    if (recognizeOptions.acousticCustomizationId() != null) {
+      builder.query('acoustic_customization_id', recognizeOptions.acousticCustomizationId());
     }
-    if (recognizeOptions.timestamps() != null) {
-      builder.query('timestamps', String.valueOf(recognizeOptions.timestamps()));
+    if (recognizeOptions.baseModelVersion() != null) {
+      builder.query('base_model_version', recognizeOptions.baseModelVersion());
     }
-    if (recognizeOptions.wordConfidence() != null) {
-      builder.query('word_confidence', String.valueOf(recognizeOptions.wordConfidence()));
+    if (recognizeOptions.customizationWeight() != null) {
+      builder.query('customization_weight', String.valueOf(recognizeOptions.customizationWeight()));
     }
     if (recognizeOptions.inactivityTimeout() != null) {
       builder.query('inactivity_timeout', String.valueOf(recognizeOptions.inactivityTimeout()));
     }
-    if (recognizeOptions.model() != null) {
-      builder.query('model', recognizeOptions.model());
-    }
-    if (recognizeOptions.interimResults() != null) {
-      builder.query('interim_results', String.valueOf(recognizeOptions.interimResults()));
-    }
     if (recognizeOptions.keywords() != null) {
-      builder.query('keywords', String.valueOf(recognizeOptions.keywords()));
+      builder.query('keywords', String.join(recognizeOptions.keywords(), ','));
     }
     if (recognizeOptions.keywordsThreshold() != null) {
       builder.query('keywords_threshold', String.valueOf(recognizeOptions.keywordsThreshold()));
     }
+    if (recognizeOptions.maxAlternatives() != null) {
+      builder.query('max_alternatives', String.valueOf(recognizeOptions.maxAlternatives()));
+    }
     if (recognizeOptions.wordAlternativesThreshold() != null) {
       builder.query('word_alternatives_threshold', String.valueOf(recognizeOptions.wordAlternativesThreshold()));
+    }
+    if (recognizeOptions.wordConfidence() != null) {
+      builder.query('word_confidence', String.valueOf(recognizeOptions.wordConfidence()));
+    }
+    if (recognizeOptions.timestamps() != null) {
+      builder.query('timestamps', String.valueOf(recognizeOptions.timestamps()));
     }
     if (recognizeOptions.profanityFilter() != null) {
       builder.query('profanity_filter', String.valueOf(recognizeOptions.profanityFilter()));
@@ -234,17 +231,10 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (recognizeOptions.smartFormatting() != null) {
       builder.query('smart_formatting', String.valueOf(recognizeOptions.smartFormatting()));
     }
-    if (recognizeOptions.customizationId() != null) {
-      builder.query('customization_id', recognizeOptions.customizationId());
-    }
     if (recognizeOptions.speakerLabels() != null) {
       builder.query('speaker_labels', String.valueOf(recognizeOptions.speakerLabels()));
     }
-    if (recognizeOptions.baseModelVersion() != null) {
-      builder.query('base_model_version', recognizeOptions.baseModelVersion());
-    }
-    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
-    builder.body(multipartBody);
+    builder.body(IBMWatsonRequestBody.create(recognizeOptions.audio(), IBMWatsonMediaType.parse(recognizeOptions.contentType())));
 
     return (IBMSpeechToTextV1Models.SpeechRecognitionResults) createServiceCall(builder.build(), IBMSpeechToTextV1Models.SpeechRecognitionResults.class);
   }
@@ -370,14 +360,6 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
-    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
-    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    if (createJobOptions.audio() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
-        createJobOptions.audio(), createJobOptions.contentType()
-      );
-      multipartBuilder.addFormDataPart('audio', createJobOptions.audioFilename(), fileBody);
-    }
     if (createJobOptions.model() != null) {
       builder.query('model', createJobOptions.model());
     }
@@ -435,8 +417,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createJobOptions.speakerLabels() != null) {
       builder.query('speaker_labels', String.valueOf(createJobOptions.speakerLabels()));
     }
-    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
-    builder.body(multipartBody);
+    builder.body(IBMWatsonRequestBody.create(createJobOptions.audio(), IBMWatsonMediaType.parse(createJobOptions.contentType())));
 
     return (IBMSpeechToTextV1Models.RecognitionJob) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RecognitionJob.class);
   }
@@ -1397,19 +1378,10 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
-    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
-    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    if (addAudioOptions.audio() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
-        addAudioOptions.audio(), addAudioOptions.contentType()
-      );
-      multipartBuilder.addFormDataPart('audio', addAudioOptions.audioFilename(), fileBody);
-    }
     if (addAudioOptions.allowOverwrite() != null) {
       builder.query('allow_overwrite', String.valueOf(addAudioOptions.allowOverwrite()));
     }
-    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
-    builder.body(multipartBody);
+    builder.body(IBMWatsonRequestBody.create(addAudioOptions.audioResource(), IBMWatsonMediaType.parse(addAudioOptions.contentType())));
 
     createServiceCall(builder.build(), null);
   }

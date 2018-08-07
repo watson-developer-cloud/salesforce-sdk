@@ -79,9 +79,7 @@ public class IBMDiscoveryV1Models {
     private AddDocumentOptions(AddDocumentOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      IBMWatsonValidator.isTrue((builder.file_serialized_name == null)
-        || (builder.filename_serialized_name != null && builder.file_content_type_serialized_name != null),
-        'filename and content type cannot be null if file is not null');
+      IBMWatsonValidator.isTrue(builder.file_serialized_name == null || builder.file_content_type_serialized_name != null, 'content type cannot be null if file is not null');
       environment_id_serialized_name = builder.environment_id_serialized_name;
       collection_id_serialized_name = builder.collection_id_serialized_name;
       file_serialized_name = builder.file_serialized_name;
@@ -4719,6 +4717,7 @@ public class IBMDiscoveryV1Models {
    */
   public class EnrichmentOptions extends IBMWatsonGenericModel {
     private NluEnrichmentFeatures features_serialized_name;
+    private String language_serialized_name;
     private String model_serialized_name;
 
     /**
@@ -4739,6 +4738,20 @@ public class IBMDiscoveryV1Models {
       return features_serialized_name;
     }
     /**
+     * Gets the language_serialized_name.
+     *
+     * ISO 639-1 code indicating the language to use for the analysis. This code overrides the automatic language
+     * detection performed by the service. Valid codes are `ar` (Arabic), `en` (English), `fr` (French), `de` (German),
+     * `it` (Italian), `pt` (Portuguese), `ru` (Russian), `es` (Spanish), and `sv` (Swedish). **Note:** Not all features
+     * support all languages, automatic detection is recommended.
+     *
+     * @return the language_serialized_name
+     */
+    @AuraEnabled
+    public String getLanguage() {
+      return language_serialized_name;
+    }
+    /**
      * Gets the model_serialized_name.
      *
      * *For use with `elements` enrichments only.* The element extraction model to use. Models available are:
@@ -4752,6 +4765,7 @@ public class IBMDiscoveryV1Models {
     }
     private EnrichmentOptions(EnrichmentOptionsBuilder builder) {
       features_serialized_name = builder.features_serialized_name;
+      language_serialized_name = builder.language_serialized_name;
       model_serialized_name = builder.model_serialized_name;
     }
 
@@ -4785,10 +4799,12 @@ public class IBMDiscoveryV1Models {
    */
   public class EnrichmentOptionsBuilder {
     private NluEnrichmentFeatures features_serialized_name;
+    private String language_serialized_name;
     private String model_serialized_name;
 
     private EnrichmentOptionsBuilder(EnrichmentOptions enrichmentOptions) {
       features_serialized_name = enrichmentOptions.features_serialized_name;
+      language_serialized_name = enrichmentOptions.language_serialized_name;
       model_serialized_name = enrichmentOptions.model_serialized_name;
     }
 
@@ -4815,6 +4831,17 @@ public class IBMDiscoveryV1Models {
      */
     public EnrichmentOptionsBuilder features(NluEnrichmentFeatures features) {
       this.features_serialized_name = features;
+      return this;
+    }
+
+    /**
+     * Set the language_serialized_name.
+     *
+     * @param language the language
+     * @return the EnrichmentOptions builder
+     */
+    public EnrichmentOptionsBuilder language(String language) {
+      this.language_serialized_name = language;
       return this;
     }
 
@@ -10547,7 +10574,7 @@ public class IBMDiscoveryV1Models {
     /**
     * Gets the anomaly_serialized_name.
     *
-    * Used to inducate that anomaly detection should be performed. Anomaly detection is used to locate unusual datapoints within a time series.
+    * Used to indicate that anomaly detection should be performed. Anomaly detection is used to locate unusual datapoints within a time series.
     *
     * @return the anomaly_serialized_name
     */
@@ -12606,6 +12633,7 @@ public class IBMDiscoveryV1Models {
     private Boolean similar_serialized_name;
     private List<String> similar_document_ids_serialized_name;
     private List<String> similar_fields_serialized_name;
+    private Boolean logging_opt_out_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
      *
@@ -12830,6 +12858,16 @@ public class IBMDiscoveryV1Models {
     public List<String> similarFields() {
       return similar_fields_serialized_name;
     }
+    /**
+     * Gets the logging_opt_out_serialized_name.
+     *
+     * If `true`, queries are not stored in the Discovery **Logs** endpoint.
+     *
+     * @return the logging_opt_out_serialized_name
+     */
+    public Boolean loggingOptOut() {
+      return logging_opt_out_serialized_name;
+    }
     private QueryOptions(QueryOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
@@ -12853,6 +12891,7 @@ public class IBMDiscoveryV1Models {
       similar_serialized_name = builder.similar_serialized_name;
       similar_document_ids_serialized_name = builder.similar_document_ids_serialized_name;
       similar_fields_serialized_name = builder.similar_fields_serialized_name;
+      logging_opt_out_serialized_name = builder.logging_opt_out_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -12891,6 +12930,7 @@ public class IBMDiscoveryV1Models {
     private Boolean similar_serialized_name;
     private List<String> similar_document_ids_serialized_name;
     private List<String> similar_fields_serialized_name;
+    private Boolean logging_opt_out_serialized_name;
 
     private QueryOptionsBuilder(QueryOptions queryOptions) {
       environment_id_serialized_name = queryOptions.environment_id_serialized_name;
@@ -12913,6 +12953,7 @@ public class IBMDiscoveryV1Models {
       similar_serialized_name = queryOptions.similar_serialized_name;
       similar_document_ids_serialized_name = queryOptions.similar_document_ids_serialized_name;
       similar_fields_serialized_name = queryOptions.similar_fields_serialized_name;
+      logging_opt_out_serialized_name = queryOptions.logging_opt_out_serialized_name;
       this.requestHeaders.putAll(queryOptions.requestHeaders());
     }
 
@@ -13239,6 +13280,17 @@ public class IBMDiscoveryV1Models {
      */
     public QueryOptionsBuilder similarFields(List<String> similarFields) {
       this.similar_fields_serialized_name = similarFields;
+      return this;
+    }
+
+    /**
+     * Set the logging_opt_out_serialized_name.
+     *
+     * @param loggingOptOut the loggingOptOut
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder loggingOptOut(Boolean loggingOptOut) {
+      this.logging_opt_out_serialized_name = loggingOptOut;
       return this;
     }
 
@@ -14102,6 +14154,8 @@ public class IBMDiscoveryV1Models {
      * The session token for this query. The session token can be used to add events associated with this query to the
      * query and event log.
      *
+     * **Important:** Session tokens are case sensitive.
+     *
      * @return the session_token_serialized_name
      */
     @AuraEnabled
@@ -14365,7 +14419,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the score_serialized_name.
      *
-     * The raw score of the result. A higher score indicates a greater match to the query parameters.
+     * An unbounded measure of the relevance of a particular result, dependent on the query and matching document. A
+     * higher score indicates a greater match to the query parameters.
      *
      * @return the score_serialized_name
      */
@@ -14376,7 +14431,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the confidence_serialized_name.
      *
-     * The confidence score of the result's analysis. A higher score indicates greater confidence.
+     * The confidence score for the given result. Calculated based on how relevant the result is estimated to be,
+     * compared to a trained relevancy model. confidence can range from `0.0` to `1.0`. The higher the number, the more
+     * relevant the document.
      *
      * @return the confidence_serialized_name
      */
@@ -15157,6 +15214,7 @@ public class IBMDiscoveryV1Models {
     }
     private TestConfigurationInEnvironmentOptions(TestConfigurationInEnvironmentOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
+      IBMWatsonValidator.isTrue(builder.file_serialized_name == null || builder.file_content_type_serialized_name != null, 'content type cannot be null if file is not null');
       environment_id_serialized_name = builder.environment_id_serialized_name;
       configuration_serialized_name = builder.configuration_serialized_name;
       step_serialized_name = builder.step_serialized_name;
@@ -16826,6 +16884,7 @@ public class IBMDiscoveryV1Models {
       IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.document_id_serialized_name, 'document_id_serialized_name cannot be empty');
+      IBMWatsonValidator.isTrue(builder.file_serialized_name == null || builder.file_content_type_serialized_name != null, 'content type cannot be null if file is not null');
       environment_id_serialized_name = builder.environment_id_serialized_name;
       collection_id_serialized_name = builder.collection_id_serialized_name;
       document_id_serialized_name = builder.document_id_serialized_name;

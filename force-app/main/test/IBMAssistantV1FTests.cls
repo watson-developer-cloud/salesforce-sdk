@@ -2,7 +2,7 @@ public with sharing class IBMAssistantV1FTests {
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_assistant_v1_test';
   private static String URL = 'https://gateway.watsonplatform.net/assistant/api';
-  private static String VERSION = '2018-02-16';
+  private static String VERSION = '2018-07-10';
 
   /**
    *  Test run functional tests.
@@ -52,16 +52,30 @@ public with sharing class IBMAssistantV1FTests {
   }
   public static IBMAssistantV1Models.Workspace testCreateWorkspace(String username, String password) {
     IBMAssistantV1 assistant = new IBMAssistantV1(VERSION);
-    //assistant.setEndPoint(NAMED_CREDENTIALS);(Use either named credentials or username and paasword as below)
     if (username != null && password != null) {
       assistant.setEndPoint(URL);
       assistant.setUsernameAndPassword(username, password);
     }
 
+    IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation();
+    disambiguation.setEnabled(true);
+    disambiguation.setNoneOfTheAbovePrompt('none of the above');
+    disambiguation.setPrompt('prompt');
+    disambiguation.setSensitivity('high');
+    IBMAssistantV1Models.WorkspaceSystemSettingsTooling tooling = new IBMAssistantV1Models.WorkspaceSystemSettingsTooling();
+    tooling.setStoreGenericResponses(true);
+    IBMWatsonMapModel humanAgentAssist = new IBMWatsonMapModel();
+    humanAgentAssist.put('help', 'ok');
+    IBMAssistantV1Models.WorkspaceSystemSettings systemSettings = new IBMAssistantV1Models.WorkspaceSystemSettings();
+    systemSettings.setDisambiguation(disambiguation);
+    systemSettings.setTooling(tooling);
+    systemSettings.setHumanAgentAssist(humanAgentAssist);
+
     IBMAssistantV1Models.CreateWorkspaceOptions createWorkspaceOptions = new IBMAssistantV1Models.CreateWorkspaceOptionsBuilder()
       .name('functional-test-workspace')
       .description('workspace description')
       .language('en')
+      .systemSettings(systemSettings)
       .build();
     IBMAssistantV1Models.Workspace response = assistant.createWorkspace(createWorkspaceOptions);
     System.debug('IBMAssistantV1FTests.testCreateWorkspace(): ' + response);
@@ -234,10 +248,17 @@ public with sharing class IBMAssistantV1FTests {
       assistant.setUsernameAndPassword(username, password);
     }
 
+    IBMAssistantV1Models.Mentions mentions1 = new IBMAssistantV1Models.Mentions();
+    mentions1.setEntity('entity');
+    mentions1.setLocation(new List<Long> { 0L, 10L });
+    List<IBMAssistantV1Models.Mentions> mentionsList = new List<IBMAssistantV1Models.Mentions>();
+    mentionsList.add(mentions1);
+
     IBMAssistantV1Models.CreateExampleOptions createOptions = new IBMAssistantV1Models.CreateExampleOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
       .text('example A')
+      .mentions(mentionsList)
       .build();
     IBMAssistantV1Models.Example response = assistant.createExample(createOptions);
 

@@ -483,7 +483,7 @@ public class IBMConversationV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private IBMWatsonMapModel output_serialized_name;
+    private DialogNodeOutput output_serialized_name;
     private IBMWatsonMapModel context_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
@@ -495,6 +495,7 @@ public class IBMConversationV1Models {
     private String digress_in_serialized_name;
     private String digress_out_serialized_name;
     private String digress_out_slots_serialized_name;
+    private String user_label_serialized_name;
     /**
      * Gets the dialog_node_serialized_name.
      *
@@ -552,12 +553,9 @@ public class IBMConversationV1Models {
     /**
      * Gets the output_serialized_name.
      *
-     * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
-     *
      * @return the output_serialized_name
      */
-    public IBMWatsonMapModel output() {
+    public DialogNodeOutput output() {
       return output_serialized_name;
     }
     /**
@@ -672,6 +670,16 @@ public class IBMConversationV1Models {
     public String digressOutSlots() {
       return digress_out_slots_serialized_name;
     }
+    /**
+     * Gets the user_label_serialized_name.
+     *
+     * A label that can be displayed externally to describe the purpose of the node to users.
+     *
+     * @return the user_label_serialized_name
+     */
+    public String userLabel() {
+      return user_label_serialized_name;
+    }
     private CreateDialogNode(CreateDialogNodeBuilder builder) {
       IBMWatsonValidator.notNull(builder.dialog_node_serialized_name, 'dialog_node_serialized_name cannot be null');
       dialog_node_serialized_name = builder.dialog_node_serialized_name;
@@ -691,6 +699,7 @@ public class IBMConversationV1Models {
       digress_in_serialized_name = builder.digress_in_serialized_name;
       digress_out_serialized_name = builder.digress_out_serialized_name;
       digress_out_slots_serialized_name = builder.digress_out_slots_serialized_name;
+      user_label_serialized_name = builder.user_label_serialized_name;
     }
 
     /**
@@ -713,7 +722,7 @@ public class IBMConversationV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private IBMWatsonMapModel output_serialized_name;
+    private DialogNodeOutput output_serialized_name;
     private IBMWatsonMapModel context_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
@@ -725,6 +734,7 @@ public class IBMConversationV1Models {
     private String digress_in_serialized_name;
     private String digress_out_serialized_name;
     private String digress_out_slots_serialized_name;
+    private String user_label_serialized_name;
 
     private CreateDialogNodeBuilder(CreateDialogNode createDialogNode) {
       dialog_node_serialized_name = createDialogNode.dialog_node_serialized_name;
@@ -744,6 +754,7 @@ public class IBMConversationV1Models {
       digress_in_serialized_name = createDialogNode.digress_in_serialized_name;
       digress_out_serialized_name = createDialogNode.digress_out_serialized_name;
       digress_out_slots_serialized_name = createDialogNode.digress_out_slots_serialized_name;
+      user_label_serialized_name = createDialogNode.user_label_serialized_name;
     }
 
     /**
@@ -846,7 +857,7 @@ public class IBMConversationV1Models {
      * @param output the output
      * @return the CreateDialogNode builder
      */
-    public CreateDialogNodeBuilder output(IBMWatsonMapModel output) {
+    public CreateDialogNodeBuilder output(DialogNodeOutput output) {
       this.output_serialized_name = output;
       return this;
     }
@@ -972,6 +983,17 @@ public class IBMConversationV1Models {
       this.digress_out_slots_serialized_name = digressOutSlots;
       return this;
     }
+
+    /**
+     * Set the user_label_serialized_name.
+     *
+     * @param userLabel the userLabel
+     * @return the CreateDialogNode builder
+     */
+    public CreateDialogNodeBuilder userLabel(String userLabel) {
+      this.user_label_serialized_name = userLabel;
+      return this;
+    }
   }
 
   /**
@@ -984,7 +1006,7 @@ public class IBMConversationV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private IBMWatsonMapModel output_serialized_name;
+    private DialogNodeOutput output_serialized_name;
     private IBMWatsonMapModel context_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
@@ -996,6 +1018,7 @@ public class IBMConversationV1Models {
     private String digress_in_serialized_name;
     private String digress_out_serialized_name;
     private String digress_out_slots_serialized_name;
+    private String user_label_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -1063,12 +1086,9 @@ public class IBMConversationV1Models {
     /**
      * Gets the output_serialized_name.
      *
-     * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
-     *
      * @return the output_serialized_name
      */
-    public IBMWatsonMapModel output() {
+    public DialogNodeOutput output() {
       return output_serialized_name;
     }
     /**
@@ -1183,6 +1203,16 @@ public class IBMConversationV1Models {
     public String digressOutSlots() {
       return digress_out_slots_serialized_name;
     }
+    /**
+     * Gets the user_label_serialized_name.
+     *
+     * A label that can be displayed externally to describe the purpose of the node to users.
+     *
+     * @return the user_label_serialized_name
+     */
+    public String userLabel() {
+      return user_label_serialized_name;
+    }
     private CreateDialogNodeOptions(CreateDialogNodeOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notNull(builder.dialog_node_serialized_name, 'dialog_node_serialized_name cannot be null');
@@ -1204,6 +1234,7 @@ public class IBMConversationV1Models {
       digress_in_serialized_name = builder.digress_in_serialized_name;
       digress_out_serialized_name = builder.digress_out_serialized_name;
       digress_out_slots_serialized_name = builder.digress_out_slots_serialized_name;
+      user_label_serialized_name = builder.user_label_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1228,7 +1259,7 @@ public class IBMConversationV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private IBMWatsonMapModel output_serialized_name;
+    private DialogNodeOutput output_serialized_name;
     private IBMWatsonMapModel context_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
@@ -1240,6 +1271,7 @@ public class IBMConversationV1Models {
     private String digress_in_serialized_name;
     private String digress_out_serialized_name;
     private String digress_out_slots_serialized_name;
+    private String user_label_serialized_name;
 
     private CreateDialogNodeOptionsBuilder(CreateDialogNodeOptions createDialogNodeOptions) {
       workspace_id_serialized_name = createDialogNodeOptions.workspace_id_serialized_name;
@@ -1260,6 +1292,7 @@ public class IBMConversationV1Models {
       digress_in_serialized_name = createDialogNodeOptions.digress_in_serialized_name;
       digress_out_serialized_name = createDialogNodeOptions.digress_out_serialized_name;
       digress_out_slots_serialized_name = createDialogNodeOptions.digress_out_slots_serialized_name;
+      user_label_serialized_name = createDialogNodeOptions.user_label_serialized_name;
       this.requestHeaders.putAll(createDialogNodeOptions.requestHeaders());
     }
 
@@ -1376,7 +1409,7 @@ public class IBMConversationV1Models {
      * @param output the output
      * @return the CreateDialogNodeOptions builder
      */
-    public CreateDialogNodeOptionsBuilder output(IBMWatsonMapModel output) {
+    public CreateDialogNodeOptionsBuilder output(DialogNodeOutput output) {
       this.output_serialized_name = output;
       return this;
     }
@@ -1500,6 +1533,17 @@ public class IBMConversationV1Models {
      */
     public CreateDialogNodeOptionsBuilder digressOutSlots(String digressOutSlots) {
       this.digress_out_slots_serialized_name = digressOutSlots;
+      return this;
+    }
+
+    /**
+     * Set the user_label_serialized_name.
+     *
+     * @param userLabel the userLabel
+     * @return the CreateDialogNodeOptions builder
+     */
+    public CreateDialogNodeOptionsBuilder userLabel(String userLabel) {
+      this.user_label_serialized_name = userLabel;
       return this;
     }
 
@@ -1957,6 +2001,7 @@ public class IBMConversationV1Models {
    */
   public class CreateExample {
     private String text_serialized_name;
+    private List<Mentions> mentions_serialized_name;
     /**
      * Gets the text_serialized_name.
      *
@@ -1970,9 +2015,20 @@ public class IBMConversationV1Models {
     public String text() {
       return text_serialized_name;
     }
+    /**
+     * Gets the mentions_serialized_name.
+     *
+     * An array of contextual entity mentions.
+     *
+     * @return the mentions_serialized_name
+     */
+    public List<Mentions> mentions() {
+      return mentions_serialized_name;
+    }
     private CreateExample(CreateExampleBuilder builder) {
       IBMWatsonValidator.notNull(builder.text_serialized_name, 'text_serialized_name cannot be null');
       text_serialized_name = builder.text_serialized_name;
+      mentions_serialized_name = builder.mentions_serialized_name;
     }
 
     /**
@@ -1991,9 +2047,11 @@ public class IBMConversationV1Models {
    */
   public class CreateExampleBuilder {
     private String text_serialized_name;
+    private List<Mentions> mentions_serialized_name;
 
     private CreateExampleBuilder(CreateExample createExample) {
       text_serialized_name = createExample.text_serialized_name;
+      mentions_serialized_name = createExample.mentions_serialized_name;
     }
 
     /**
@@ -2021,6 +2079,21 @@ public class IBMConversationV1Models {
     }
 
     /**
+     * Adds an mentions to mentions_serialized_name.
+     *
+     * @param mentions the new mentions
+     * @return the CreateExample builder
+     */
+    public CreateExampleBuilder addMentions(Mentions mentions) {
+      IBMWatsonValidator.notNull(mentions, 'mentions cannot be null');
+      if (this.mentions_serialized_name == null) {
+        this.mentions_serialized_name = new List<Mentions>();
+      }
+      this.mentions_serialized_name.add(mentions);
+      return this;
+    }
+
+    /**
      * Set the text_serialized_name.
      *
      * @param text the text
@@ -2028,6 +2101,18 @@ public class IBMConversationV1Models {
      */
     public CreateExampleBuilder text(String text) {
       this.text_serialized_name = text;
+      return this;
+    }
+
+    /**
+     * Set the mentions_serialized_name.
+     * Existing mentions_serialized_name will be replaced.
+     *
+     * @param mentions the mentions
+     * @return the CreateExample builder
+     */
+    public CreateExampleBuilder mentions(List<Mentions> mentions) {
+      this.mentions_serialized_name = mentions;
       return this;
     }
   }
@@ -2039,6 +2124,7 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String text_serialized_name;
+    private List<Mentions> mentions_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -2072,6 +2158,16 @@ public class IBMConversationV1Models {
     public String text() {
       return text_serialized_name;
     }
+    /**
+     * Gets the mentions_serialized_name.
+     *
+     * An array of contextual entity mentions.
+     *
+     * @return the mentions_serialized_name
+     */
+    public List<Mentions> mentions() {
+      return mentions_serialized_name;
+    }
     private CreateExampleOptions(CreateExampleOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent_serialized_name, 'intent_serialized_name cannot be empty');
@@ -2079,6 +2175,7 @@ public class IBMConversationV1Models {
       workspace_id_serialized_name = builder.workspace_id_serialized_name;
       intent_serialized_name = builder.intent_serialized_name;
       text_serialized_name = builder.text_serialized_name;
+      mentions_serialized_name = builder.mentions_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2100,11 +2197,13 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String intent_serialized_name;
     private String text_serialized_name;
+    private List<Mentions> mentions_serialized_name;
 
     private CreateExampleOptionsBuilder(CreateExampleOptions createExampleOptions) {
       workspace_id_serialized_name = createExampleOptions.workspace_id_serialized_name;
       intent_serialized_name = createExampleOptions.intent_serialized_name;
       text_serialized_name = createExampleOptions.text_serialized_name;
+      mentions_serialized_name = createExampleOptions.mentions_serialized_name;
       this.requestHeaders.putAll(createExampleOptions.requestHeaders());
     }
 
@@ -2137,6 +2236,21 @@ public class IBMConversationV1Models {
     }
 
     /**
+     * Adds an mentions to mentions_serialized_name.
+     *
+     * @param mentions the new mentions
+     * @return the CreateExampleOptions builder
+     */
+    public CreateExampleOptionsBuilder addMentions(Mentions mentions) {
+      IBMWatsonValidator.notNull(mentions, 'mentions cannot be null');
+      if (this.mentions_serialized_name == null) {
+        this.mentions_serialized_name = new List<Mentions>();
+      }
+      this.mentions_serialized_name.add(mentions);
+      return this;
+    }
+
+    /**
      * Set the workspace_id_serialized_name.
      *
      * @param workspaceId the workspaceId
@@ -2166,6 +2280,18 @@ public class IBMConversationV1Models {
      */
     public CreateExampleOptionsBuilder text(String text) {
       this.text_serialized_name = text;
+      return this;
+    }
+
+    /**
+     * Set the mentions_serialized_name.
+     * Existing mentions_serialized_name will be replaced.
+     *
+     * @param mentions the mentions
+     * @return the CreateExampleOptions builder
+     */
+    public CreateExampleOptionsBuilder mentions(List<Mentions> mentions) {
+      this.mentions_serialized_name = mentions;
       return this;
     }
 
@@ -3217,6 +3343,7 @@ public class IBMConversationV1Models {
     private List<CreateCounterexample> counterexamples_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
+    private WorkspaceSystemSettings system_settings_serialized_name;
     /**
      * Gets the name_serialized_name.
      *
@@ -3310,6 +3437,16 @@ public class IBMConversationV1Models {
     public Boolean learningOptOut() {
       return learning_opt_out_serialized_name;
     }
+    /**
+     * Gets the system_settings_serialized_name.
+     *
+     * Global settings for the workspace.
+     *
+     * @return the system_settings_serialized_name
+     */
+    public WorkspaceSystemSettings systemSettings() {
+      return system_settings_serialized_name;
+    }
     private CreateWorkspaceOptions(CreateWorkspaceOptionsBuilder builder) {
       name_serialized_name = builder.name_serialized_name;
       description_serialized_name = builder.description_serialized_name;
@@ -3320,6 +3457,7 @@ public class IBMConversationV1Models {
       counterexamples_serialized_name = builder.counterexamples_serialized_name;
       metadata_serialized_name = builder.metadata_serialized_name;
       learning_opt_out_serialized_name = builder.learning_opt_out_serialized_name;
+      system_settings_serialized_name = builder.system_settings_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3347,6 +3485,7 @@ public class IBMConversationV1Models {
     private List<CreateCounterexample> counterexamples_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
+    private WorkspaceSystemSettings system_settings_serialized_name;
 
     private CreateWorkspaceOptionsBuilder(CreateWorkspaceOptions createWorkspaceOptions) {
       name_serialized_name = createWorkspaceOptions.name_serialized_name;
@@ -3358,6 +3497,7 @@ public class IBMConversationV1Models {
       counterexamples_serialized_name = createWorkspaceOptions.counterexamples_serialized_name;
       metadata_serialized_name = createWorkspaceOptions.metadata_serialized_name;
       learning_opt_out_serialized_name = createWorkspaceOptions.learning_opt_out_serialized_name;
+      system_settings_serialized_name = createWorkspaceOptions.system_settings_serialized_name;
       this.requestHeaders.putAll(createWorkspaceOptions.requestHeaders());
     }
 
@@ -3536,6 +3676,17 @@ public class IBMConversationV1Models {
      */
     public CreateWorkspaceOptionsBuilder learningOptOut(Boolean learningOptOut) {
       this.learning_opt_out_serialized_name = learningOptOut;
+      return this;
+    }
+
+    /**
+     * Set the system_settings_serialized_name.
+     *
+     * @param systemSettings the systemSettings
+     * @return the CreateWorkspaceOptions builder
+     */
+    public CreateWorkspaceOptionsBuilder systemSettings(WorkspaceSystemSettings systemSettings) {
+      this.system_settings_serialized_name = systemSettings;
       return this;
     }
 
@@ -4688,7 +4839,7 @@ public class IBMConversationV1Models {
     private String conditions_serialized_name;
     private String parent_serialized_name;
     private String previous_sibling_serialized_name;
-    private IBMWatsonMapModel output_serialized_name;
+    private DialogNodeOutput output_serialized_name;
     private IBMWatsonMapModel context_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
@@ -4702,6 +4853,7 @@ public class IBMConversationV1Models {
     private String digress_in_serialized_name;
     private String digress_out_serialized_name;
     private String digress_out_slots_serialized_name;
+    private String user_label_serialized_name;
     /**
      * Gets the dialog_node_serialized_name.
      *
@@ -4761,12 +4913,10 @@ public class IBMConversationV1Models {
     /**
      * Gets the output_serialized_name.
      *
-     * The output of the dialog node.
-     *
      * @return the output_serialized_name
      */
     @AuraEnabled
-    public IBMWatsonMapModel getOutput() {
+    public DialogNodeOutput getOutput() {
       return output_serialized_name;
     }
     /**
@@ -4912,6 +5062,17 @@ public class IBMConversationV1Models {
     public String getDigressOutSlots() {
       return digress_out_slots_serialized_name;
     }
+    /**
+     * Gets the user_label_serialized_name.
+     *
+     * A label that can be displayed externally to describe the purpose of the node to users.
+     *
+     * @return the user_label_serialized_name
+     */
+    @AuraEnabled
+    public String getUserLabel() {
+      return user_label_serialized_name;
+    }
 
     /**
      * Sets the dialog_node_serialized_name.
@@ -4963,7 +5124,7 @@ public class IBMConversationV1Models {
      *
      * @param output the new output
      */
-    public void setOutput(final IBMWatsonMapModel output) {
+    public void setOutput(final DialogNodeOutput output) {
       this.output_serialized_name = output;
     }
 
@@ -5066,6 +5227,15 @@ public class IBMConversationV1Models {
       this.digress_out_slots_serialized_name = digressOutSlots;
     }
 
+    /**
+     * Sets the user_label_serialized_name.
+     *
+     * @param userLabel the new userLabel
+     */
+    public void setUserLabel(final String userLabel) {
+      this.user_label_serialized_name = userLabel;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -5074,7 +5244,7 @@ public class IBMConversationV1Models {
       DialogNode ret = (DialogNode) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for output_serialized_name
-      IBMWatsonMapModel newOutput = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), IBMWatsonMapModel.class);
+      DialogNodeOutput newOutput = (DialogNodeOutput) new DialogNodeOutput().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), DialogNodeOutput.class);
       ret.setOutput(newOutput);
 
       // calling custom deserializer for context_serialized_name
@@ -5405,6 +5575,575 @@ public class IBMConversationV1Models {
   }
 
   /**
+   * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+   */
+  public class DialogNodeOutput extends IBMWatsonDynamicModel {
+    private List<DialogNodeOutputGeneric> generic_serialized_name;
+    private DialogNodeOutputModifiers modifiers_serialized_name;
+    private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * Gets the generic_serialized_name.
+     *
+     * @return the generic_serialized_name
+     */
+    @AuraEnabled
+    public List<DialogNodeOutputGeneric> getGeneric() {
+      return generic_serialized_name;
+    }
+
+    /**
+     * Gets the modifiers_serialized_name.
+     *
+     * @return the modifiers_serialized_name
+     */
+    @AuraEnabled
+    public DialogNodeOutputModifiers getModifiers() {
+      return modifiers_serialized_name;
+    }
+
+    /**
+     * Gets the dynamic properties attached to DialogNodeOutput.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
+    }
+
+    /**
+     * Sets the generic_serialized_name.
+     *
+     * @param generic_serialized_name the new generic_serialized_name
+     */
+    public void setGeneric(final List<DialogNodeOutputGeneric> generic_serialized_name) {
+      this.generic_serialized_name = generic_serialized_name;
+    }
+
+    /**
+     * Sets the modifiers_serialized_name.
+     *
+     * @param modifiers_serialized_name the new modifiers_serialized_name
+     */
+    public void setModifiers(final DialogNodeOutputModifiers modifiers_serialized_name) {
+      this.modifiers_serialized_name = modifiers_serialized_name;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeOutput ret = (DialogNodeOutput) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for generic_serialized_name
+      List<DialogNodeOutputGeneric> newGeneric = new List<DialogNodeOutputGeneric>();
+      List<DialogNodeOutputGeneric> deserializedGeneric = ret.getGeneric();
+      if (deserializedGeneric != null) {
+        for (Integer i = 0; i < deserializedGeneric.size(); i++) {
+          DialogNodeOutputGeneric currentItem = ret.getGeneric().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('generic_serialized_name');
+          DialogNodeOutputGeneric newItem = (DialogNodeOutputGeneric) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputGeneric.class);
+          newGeneric.add(newItem);
+        }
+        ret.setGeneric(newGeneric);
+      }
+
+      // calling custom deserializer for modifiers_serialized_name
+      DialogNodeOutputModifiers newModifiers = (DialogNodeOutputModifiers) new DialogNodeOutputModifiers().deserialize(JSON.serialize(ret.getModifiers()), (Map<String, Object>) jsonMap.get('modifiers_serialized_name'), DialogNodeOutputModifiers.class);
+      ret.setModifiers(newModifiers);
+
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key)) {
+          ret.put(key, jsonMap.get(key));
+        }
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * DialogNodeOutputGeneric.
+   */
+  public class DialogNodeOutputGeneric extends IBMWatsonGenericModel {
+    private String response_type_serialized_name;
+    private List<DialogNodeOutputTextValuesElement> values_serialized_name;
+    private String selection_policy_serialized_name;
+    private String delimiter_serialized_name;
+    private Long time_serialized_name;
+    private Boolean typing_serialized_name;
+    private String source_serialized_name;
+    private String title_serialized_name;
+    private String description_serialized_name;
+    private String preference_serialized_name;
+    private List<DialogNodeOutputOptionsElement> options_serialized_name;
+    private String message_to_human_agent_serialized_name;
+    /**
+     * Gets the response_type_serialized_name.
+     *
+     * The type of response returned by the dialog node. The specified response type must be supported by the client
+     * application or channel.
+     *
+     * @return the response_type_serialized_name
+     */
+    @AuraEnabled
+    public String getResponseType() {
+      return response_type_serialized_name;
+    }
+    /**
+     * Gets the values_serialized_name.
+     *
+     * A list of one or more objects defining text responses. Required when **response_type**=`text`.
+     *
+     * @return the values_serialized_name
+     */
+    @AuraEnabled
+    public List<DialogNodeOutputTextValuesElement> getValues() {
+      return values_serialized_name;
+    }
+    /**
+     * Gets the selection_policy_serialized_name.
+     *
+     * How a response is selected from the list, if more than one response is specified. Valid only when
+     * **response_type**=`text`.
+     *
+     * @return the selection_policy_serialized_name
+     */
+    @AuraEnabled
+    public String getSelectionPolicy() {
+      return selection_policy_serialized_name;
+    }
+    /**
+     * Gets the delimiter_serialized_name.
+     *
+     * The delimiter to use as a separator between responses when `selection_policy`=`multiline`.
+     *
+     * @return the delimiter_serialized_name
+     */
+    @AuraEnabled
+    public String getDelimiter() {
+      return delimiter_serialized_name;
+    }
+    /**
+     * Gets the time_serialized_name.
+     *
+     * How long to pause, in milliseconds. The valid values are from 0 to 10000. Valid only when
+     * **response_type**=`pause`.
+     *
+     * @return the time_serialized_name
+     */
+    @AuraEnabled
+    public Long getTime() {
+      return time_serialized_name;
+    }
+    /**
+     * Gets the typing_serialized_name.
+     *
+     * Whether to send a "user is typing" event during the pause. Ignored if the channel does not support this event.
+     * Valid only when **response_type**=`pause`.
+     *
+     * @return the typing_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getTyping() {
+      return typing_serialized_name;
+    }
+    /**
+     * Gets the source_serialized_name.
+     *
+     * The URL of the image. Required when **response_type**=`image`.
+     *
+     * @return the source_serialized_name
+     */
+    @AuraEnabled
+    public String getSource() {
+      return source_serialized_name;
+    }
+    /**
+     * Gets the title_serialized_name.
+     *
+     * An optional title to show before the response. Valid only when **response_type**=`image` or `option`.
+     *
+     * @return the title_serialized_name
+     */
+    @AuraEnabled
+    public String getTitle() {
+      return title_serialized_name;
+    }
+    /**
+     * Gets the description_serialized_name.
+     *
+     * An optional description to show with the response. Valid only when **response_type**=`image` or `option`.
+     *
+     * @return the description_serialized_name
+     */
+    @AuraEnabled
+    public String getDescription() {
+      return description_serialized_name;
+    }
+    /**
+     * Gets the preference_serialized_name.
+     *
+     * The preferred type of control to display, if supported by the channel. Valid only when
+     * **response_type**=`option`.
+     *
+     * @return the preference_serialized_name
+     */
+    @AuraEnabled
+    public String getPreference() {
+      return preference_serialized_name;
+    }
+    /**
+     * Gets the options_serialized_name.
+     *
+     * An array of objects describing the options from which the user can choose. Required when
+     * **response_type**=`option`.
+     *
+     * @return the options_serialized_name
+     */
+    @AuraEnabled
+    public List<DialogNodeOutputOptionsElement> getOptions() {
+      return options_serialized_name;
+    }
+    /**
+     * Gets the message_to_human_agent_serialized_name.
+     *
+     * An optional message to be sent to the human agent who will be taking over the conversation. Valid only when
+     * **reponse_type**=`connect_to_agent`.
+     *
+     * @return the message_to_human_agent_serialized_name
+     */
+    @AuraEnabled
+    public String getMessageToHumanAgent() {
+      return message_to_human_agent_serialized_name;
+    }
+
+    /**
+     * Sets the response_type_serialized_name.
+     *
+     * @param responseType the new responseType
+     */
+    public void setResponseType(final String responseType) {
+      this.response_type_serialized_name = responseType;
+    }
+
+    /**
+     * Sets the values_serialized_name.
+     *
+     * @param values the new values
+     */
+    public void setValues(final List<DialogNodeOutputTextValuesElement> values) {
+      this.values_serialized_name = values;
+    }
+
+    /**
+     * Sets the selection_policy_serialized_name.
+     *
+     * @param selectionPolicy the new selectionPolicy
+     */
+    public void setSelectionPolicy(final String selectionPolicy) {
+      this.selection_policy_serialized_name = selectionPolicy;
+    }
+
+    /**
+     * Sets the delimiter_serialized_name.
+     *
+     * @param delimiter the new delimiter
+     */
+    public void setDelimiter(final String delimiter) {
+      this.delimiter_serialized_name = delimiter;
+    }
+
+    /**
+     * Sets the time_serialized_name.
+     *
+     * @param xtime the new xtime
+     */
+    public void setTime(final long xtime) {
+      this.time_serialized_name = xtime;
+    }
+
+    /**
+     * Sets the typing_serialized_name.
+     *
+     * @param typing the new typing
+     */
+    public void setTyping(final Boolean typing) {
+      this.typing_serialized_name = typing;
+    }
+
+    /**
+     * Sets the source_serialized_name.
+     *
+     * @param source the new source
+     */
+    public void setSource(final String source) {
+      this.source_serialized_name = source;
+    }
+
+    /**
+     * Sets the title_serialized_name.
+     *
+     * @param title the new title
+     */
+    public void setTitle(final String title) {
+      this.title_serialized_name = title;
+    }
+
+    /**
+     * Sets the description_serialized_name.
+     *
+     * @param description the new description
+     */
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
+    }
+
+    /**
+     * Sets the preference_serialized_name.
+     *
+     * @param preference the new preference
+     */
+    public void setPreference(final String preference) {
+      this.preference_serialized_name = preference;
+    }
+
+    /**
+     * Sets the options_serialized_name.
+     *
+     * @param options the new options
+     */
+    public void setOptions(final List<DialogNodeOutputOptionsElement> options) {
+      this.options_serialized_name = options;
+    }
+
+    /**
+     * Sets the message_to_human_agent_serialized_name.
+     *
+     * @param messageToHumanAgent the new messageToHumanAgent
+     */
+    public void setMessageToHumanAgent(final String messageToHumanAgent) {
+      this.message_to_human_agent_serialized_name = messageToHumanAgent;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeOutputGeneric ret = (DialogNodeOutputGeneric) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for values_serialized_name
+      List<DialogNodeOutputTextValuesElement> newValues = new List<DialogNodeOutputTextValuesElement>();
+      List<DialogNodeOutputTextValuesElement> deserializedValues = ret.getValues();
+      if (deserializedValues != null) {
+        for (Integer i = 0; i < deserializedValues.size(); i++) {
+          DialogNodeOutputTextValuesElement currentItem = ret.getValues().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('values_serialized_name');
+          DialogNodeOutputTextValuesElement newItem = (DialogNodeOutputTextValuesElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputTextValuesElement.class);
+          newValues.add(newItem);
+        }
+        ret.setValues(newValues);
+      }
+
+      // calling custom deserializer for options_serialized_name
+      List<DialogNodeOutputOptionsElement> newOptions = new List<DialogNodeOutputOptionsElement>();
+      List<DialogNodeOutputOptionsElement> deserializedOptions = ret.getOptions();
+      if (deserializedOptions != null) {
+        for (Integer i = 0; i < deserializedOptions.size(); i++) {
+          DialogNodeOutputOptionsElement currentItem = ret.getOptions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('options_serialized_name');
+          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
+          newOptions.add(newItem);
+        }
+        ret.setOptions(newOptions);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Options that modify how specified output is handled.
+   */
+  public class DialogNodeOutputModifiers extends IBMWatsonGenericModel {
+    private Boolean overwrite_serialized_name;
+    /**
+     * Gets the overwrite_serialized_name.
+     *
+     * Whether values in the output will overwrite output values in an array specified by previously executed dialog
+     * nodes. If this option is set to **false**, new values will be appended to previously specified values.
+     *
+     * @return the overwrite_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getOverwrite() {
+      return overwrite_serialized_name;
+    }
+
+    /**
+     * Sets the overwrite_serialized_name.
+     *
+     * @param overwrite the new overwrite
+     */
+    public void setOverwrite(final Boolean overwrite) {
+      this.overwrite_serialized_name = overwrite;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeOutputModifiers ret = (DialogNodeOutputModifiers) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * DialogNodeOutputOptionsElement.
+   */
+  public class DialogNodeOutputOptionsElement extends IBMWatsonGenericModel {
+    private String label_serialized_name;
+    private DialogNodeOutputOptionsElementValue value_serialized_name;
+    /**
+     * Gets the label_serialized_name.
+     *
+     * The user-facing label for the option.
+     *
+     * @return the label_serialized_name
+     */
+    @AuraEnabled
+    public String getLabel() {
+      return label_serialized_name;
+    }
+    /**
+     * Gets the value_serialized_name.
+     *
+     * @return the value_serialized_name
+     */
+    @AuraEnabled
+    public DialogNodeOutputOptionsElementValue getValue() {
+      return value_serialized_name;
+    }
+
+    /**
+     * Sets the label_serialized_name.
+     *
+     * @param label the new label
+     */
+    public void setLabel(final String label) {
+      this.label_serialized_name = label;
+    }
+
+    /**
+     * Sets the value_serialized_name.
+     *
+     * @param value the new value
+     */
+    public void setValue(final DialogNodeOutputOptionsElementValue value) {
+      this.value_serialized_name = value;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeOutputOptionsElement ret = (DialogNodeOutputOptionsElement) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for value_serialized_name
+      DialogNodeOutputOptionsElementValue newValue = (DialogNodeOutputOptionsElementValue) new DialogNodeOutputOptionsElementValue().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value_serialized_name'), DialogNodeOutputOptionsElementValue.class);
+      ret.setValue(newValue);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object defining the message input to be sent to the Watson Conversation service if the user selects the
+   * corresponding option.
+   */
+  public class DialogNodeOutputOptionsElementValue extends IBMWatsonGenericModel {
+    private InputData input_serialized_name;
+    /**
+     * Gets the input_serialized_name.
+     *
+     * @return the input_serialized_name
+     */
+    @AuraEnabled
+    public InputData getInput() {
+      return input_serialized_name;
+    }
+
+    /**
+     * Sets the input_serialized_name.
+     *
+     * @param input the new input
+     */
+    public void setInput(final InputData input) {
+      this.input_serialized_name = input;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeOutputOptionsElementValue ret = (DialogNodeOutputOptionsElementValue) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for input_serialized_name
+      InputData newInput = (InputData) new InputData().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), InputData.class);
+      ret.setInput(newInput);
+
+      return ret;
+    }
+  }
+
+  /**
+   * DialogNodeOutputTextValuesElement.
+   */
+  public class DialogNodeOutputTextValuesElement extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    /**
+     * Gets the text_serialized_name.
+     *
+     * The text of a response. This can include newline characters (`
+     * `), Markdown tagging, or other special characters, if supported by the channel.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+
+    /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogNodeOutputTextValuesElement ret = (DialogNodeOutputTextValuesElement) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
    * DialogNodeVisitedDetails.
    */
   public class DialogNodeVisitedDetails extends IBMWatsonGenericModel {
@@ -5478,6 +6217,493 @@ public class IBMConversationV1Models {
       }
 
       DialogNodeVisitedDetails ret = (DialogNodeVisitedDetails) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * DialogRuntimeResponseGeneric.
+   */
+  public class DialogRuntimeResponseGeneric extends IBMWatsonGenericModel {
+    private String response_type_serialized_name;
+    private String text_serialized_name;
+    private Long time_serialized_name;
+    private Boolean typing_serialized_name;
+    private String source_serialized_name;
+    private String title_serialized_name;
+    private String description_serialized_name;
+    private String preference_serialized_name;
+    private List<DialogNodeOutputOptionsElement> options_serialized_name;
+    private String message_to_human_agent_serialized_name;
+    private String topic_serialized_name;
+    private List<DialogSuggestion> suggestions_serialized_name;
+    /**
+     * Gets the response_type_serialized_name.
+     *
+     * The type of response returned by the dialog node. The specified response type must be supported by the client
+     * application or channel.
+     *
+     * **Note:** The **suggestion** response type is part of the disambiguation feature, which is only available for
+     * Premium users.
+     *
+     * @return the response_type_serialized_name
+     */
+    @AuraEnabled
+    public String getResponseType() {
+      return response_type_serialized_name;
+    }
+    /**
+     * Gets the text_serialized_name.
+     *
+     * The text of the response.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+    /**
+     * Gets the time_serialized_name.
+     *
+     * How long to pause, in milliseconds.
+     *
+     * @return the time_serialized_name
+     */
+    @AuraEnabled
+    public Long getTime() {
+      return time_serialized_name;
+    }
+    /**
+     * Gets the typing_serialized_name.
+     *
+     * Whether to send a "user is typing" event during the pause.
+     *
+     * @return the typing_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getTyping() {
+      return typing_serialized_name;
+    }
+    /**
+     * Gets the source_serialized_name.
+     *
+     * The URL of the image.
+     *
+     * @return the source_serialized_name
+     */
+    @AuraEnabled
+    public String getSource() {
+      return source_serialized_name;
+    }
+    /**
+     * Gets the title_serialized_name.
+     *
+     * The title to show before the response.
+     *
+     * @return the title_serialized_name
+     */
+    @AuraEnabled
+    public String getTitle() {
+      return title_serialized_name;
+    }
+    /**
+     * Gets the description_serialized_name.
+     *
+     * The description to show with the the response.
+     *
+     * @return the description_serialized_name
+     */
+    @AuraEnabled
+    public String getDescription() {
+      return description_serialized_name;
+    }
+    /**
+     * Gets the preference_serialized_name.
+     *
+     * The preferred type of control to display.
+     *
+     * @return the preference_serialized_name
+     */
+    @AuraEnabled
+    public String getPreference() {
+      return preference_serialized_name;
+    }
+    /**
+     * Gets the options_serialized_name.
+     *
+     * An array of objects describing the options from which the user can choose.
+     *
+     * @return the options_serialized_name
+     */
+    @AuraEnabled
+    public List<DialogNodeOutputOptionsElement> getOptions() {
+      return options_serialized_name;
+    }
+    /**
+     * Gets the message_to_human_agent_serialized_name.
+     *
+     * A message to be sent to the human agent who will be taking over the conversation.
+     *
+     * @return the message_to_human_agent_serialized_name
+     */
+    @AuraEnabled
+    public String getMessageToHumanAgent() {
+      return message_to_human_agent_serialized_name;
+    }
+    /**
+     * Gets the topic_serialized_name.
+     *
+     * A label identifying the topic of the conversation, derived from the **user_label** property of the relevant node.
+     *
+     * @return the topic_serialized_name
+     */
+    @AuraEnabled
+    public String getTopic() {
+      return topic_serialized_name;
+    }
+    /**
+     * Gets the suggestions_serialized_name.
+     *
+     * An array of objects describing the possible matching dialog nodes from which the user can choose.
+     *
+     * **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Premium
+     * users.
+     *
+     * @return the suggestions_serialized_name
+     */
+    @AuraEnabled
+    public List<DialogSuggestion> getSuggestions() {
+      return suggestions_serialized_name;
+    }
+
+    /**
+     * Sets the response_type_serialized_name.
+     *
+     * @param responseType the new responseType
+     */
+    public void setResponseType(final String responseType) {
+      this.response_type_serialized_name = responseType;
+    }
+
+    /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the time_serialized_name.
+     *
+     * @param xtime the new xtime
+     */
+    public void setTime(final long xtime) {
+      this.time_serialized_name = xtime;
+    }
+
+    /**
+     * Sets the typing_serialized_name.
+     *
+     * @param typing the new typing
+     */
+    public void setTyping(final Boolean typing) {
+      this.typing_serialized_name = typing;
+    }
+
+    /**
+     * Sets the source_serialized_name.
+     *
+     * @param source the new source
+     */
+    public void setSource(final String source) {
+      this.source_serialized_name = source;
+    }
+
+    /**
+     * Sets the title_serialized_name.
+     *
+     * @param title the new title
+     */
+    public void setTitle(final String title) {
+      this.title_serialized_name = title;
+    }
+
+    /**
+     * Sets the description_serialized_name.
+     *
+     * @param description the new description
+     */
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
+    }
+
+    /**
+     * Sets the preference_serialized_name.
+     *
+     * @param preference the new preference
+     */
+    public void setPreference(final String preference) {
+      this.preference_serialized_name = preference;
+    }
+
+    /**
+     * Sets the options_serialized_name.
+     *
+     * @param options the new options
+     */
+    public void setOptions(final List<DialogNodeOutputOptionsElement> options) {
+      this.options_serialized_name = options;
+    }
+
+    /**
+     * Sets the message_to_human_agent_serialized_name.
+     *
+     * @param messageToHumanAgent the new messageToHumanAgent
+     */
+    public void setMessageToHumanAgent(final String messageToHumanAgent) {
+      this.message_to_human_agent_serialized_name = messageToHumanAgent;
+    }
+
+    /**
+     * Sets the suggestions_serialized_name.
+     *
+     * @param suggestions the new suggestions
+     */
+    public void setSuggestions(final List<DialogSuggestion> suggestions) {
+      this.suggestions_serialized_name = suggestions;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogRuntimeResponseGeneric ret = (DialogRuntimeResponseGeneric) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for options_serialized_name
+      List<DialogNodeOutputOptionsElement> newOptions = new List<DialogNodeOutputOptionsElement>();
+      List<DialogNodeOutputOptionsElement> deserializedOptions = ret.getOptions();
+      if (deserializedOptions != null) {
+        for (Integer i = 0; i < deserializedOptions.size(); i++) {
+          DialogNodeOutputOptionsElement currentItem = ret.getOptions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('options_serialized_name');
+          DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
+          newOptions.add(newItem);
+        }
+        ret.setOptions(newOptions);
+      }
+
+      // calling custom deserializer for suggestions_serialized_name
+      List<DialogSuggestion> newSuggestions = new List<DialogSuggestion>();
+      List<DialogSuggestion> deserializedSuggestions = ret.getSuggestions();
+      if (deserializedSuggestions != null) {
+        for (Integer i = 0; i < deserializedSuggestions.size(); i++) {
+          DialogSuggestion currentItem = ret.getSuggestions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('suggestions_serialized_name');
+          DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestion.class);
+          newSuggestions.add(newItem);
+        }
+        ret.setSuggestions(newSuggestions);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * DialogSuggestion.
+   */
+  public class DialogSuggestion extends IBMWatsonGenericModel {
+    private String label_serialized_name;
+    private DialogSuggestionValue value_serialized_name;
+    private IBMWatsonMapModel output_serialized_name;
+    /**
+     * Gets the label_serialized_name.
+     *
+     * The user-facing label for the disambiguation option. This label is taken from the **user_label** property of the
+     * corresponding dialog node.
+     *
+     * @return the label_serialized_name
+     */
+    @AuraEnabled
+    public String getLabel() {
+      return label_serialized_name;
+    }
+    /**
+     * Gets the value_serialized_name.
+     *
+     * @return the value_serialized_name
+     */
+    @AuraEnabled
+    public DialogSuggestionValue getValue() {
+      return value_serialized_name;
+    }
+    /**
+     * Gets the output_serialized_name.
+     *
+     * The dialog output that will be returned from the Watson Conversation service if the user selects the corresponding
+     * option.
+     *
+     * @return the output_serialized_name
+     */
+    @AuraEnabled
+    public IBMWatsonMapModel getOutput() {
+      return output_serialized_name;
+    }
+
+    /**
+     * Sets the label_serialized_name.
+     *
+     * @param label the new label
+     */
+    public void setLabel(final String label) {
+      this.label_serialized_name = label;
+    }
+
+    /**
+     * Sets the value_serialized_name.
+     *
+     * @param value the new value
+     */
+    public void setValue(final DialogSuggestionValue value) {
+      this.value_serialized_name = value;
+    }
+
+    /**
+     * Sets the output_serialized_name.
+     *
+     * @param output the new output
+     */
+    public void setOutput(final IBMWatsonMapModel output) {
+      this.output_serialized_name = output;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogSuggestion ret = (DialogSuggestion) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for value_serialized_name
+      DialogSuggestionValue newValue = (DialogSuggestionValue) new DialogSuggestionValue().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value_serialized_name'), DialogSuggestionValue.class);
+      ret.setValue(newValue);
+
+      // calling custom deserializer for output_serialized_name
+      IBMWatsonMapModel newOutput = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), IBMWatsonMapModel.class);
+      ret.setOutput(newOutput);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object defining the message input, intents, and entities to be sent to the Watson Conversation service if the user
+   * selects the corresponding disambiguation option.
+   */
+  public class DialogSuggestionValue extends IBMWatsonGenericModel {
+    private InputData input_serialized_name;
+    private List<RuntimeIntent> intents_serialized_name;
+    private List<RuntimeEntity> entities_serialized_name;
+    /**
+     * Gets the input_serialized_name.
+     *
+     * @return the input_serialized_name
+     */
+    @AuraEnabled
+    public InputData getInput() {
+      return input_serialized_name;
+    }
+    /**
+     * Gets the intents_serialized_name.
+     *
+     * An array of intents to be sent along with the user input.
+     *
+     * @return the intents_serialized_name
+     */
+    @AuraEnabled
+    public List<RuntimeIntent> getIntents() {
+      return intents_serialized_name;
+    }
+    /**
+     * Gets the entities_serialized_name.
+     *
+     * An array of entities to be sent along with the user input.
+     *
+     * @return the entities_serialized_name
+     */
+    @AuraEnabled
+    public List<RuntimeEntity> getEntities() {
+      return entities_serialized_name;
+    }
+
+    /**
+     * Sets the input_serialized_name.
+     *
+     * @param input the new input
+     */
+    public void setInput(final InputData input) {
+      this.input_serialized_name = input;
+    }
+
+    /**
+     * Sets the intents_serialized_name.
+     *
+     * @param intents the new intents
+     */
+    public void setIntents(final List<RuntimeIntent> intents) {
+      this.intents_serialized_name = intents;
+    }
+
+    /**
+     * Sets the entities_serialized_name.
+     *
+     * @param entities the new entities
+     */
+    public void setEntities(final List<RuntimeEntity> entities) {
+      this.entities_serialized_name = entities;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DialogSuggestionValue ret = (DialogSuggestionValue) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for input_serialized_name
+      InputData newInput = (InputData) new InputData().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), InputData.class);
+      ret.setInput(newInput);
+
+      // calling custom deserializer for intents_serialized_name
+      List<RuntimeIntent> newIntents = new List<RuntimeIntent>();
+      List<RuntimeIntent> deserializedIntents = ret.getIntents();
+      if (deserializedIntents != null) {
+        for (Integer i = 0; i < deserializedIntents.size(); i++) {
+          RuntimeIntent currentItem = ret.getIntents().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
+          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
+          newIntents.add(newItem);
+        }
+        ret.setIntents(newIntents);
+      }
+
+      // calling custom deserializer for entities_serialized_name
+      List<RuntimeEntity> newEntities = new List<RuntimeEntity>();
+      List<RuntimeEntity> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          RuntimeEntity currentItem = ret.getEntities().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
+          newEntities.add(newItem);
+        }
+        ret.setEntities(newEntities);
+      }
 
       return ret;
     }
@@ -5843,6 +7069,160 @@ public class IBMConversationV1Models {
         }
         ret.setValues(newValues);
       }
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object describing a contextual entity mention.
+   */
+  public class EntityMention extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    private String intent_serialized_name;
+    private List<Long> location_serialized_name;
+    /**
+     * Gets the text_serialized_name.
+     *
+     * The text of the user input example.
+     *
+     * @return the text_serialized_name
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+    /**
+     * Gets the intent_serialized_name.
+     *
+     * The name of the intent.
+     *
+     * @return the intent_serialized_name
+     */
+    @AuraEnabled
+    public String getIntent() {
+      return intent_serialized_name;
+    }
+    /**
+     * Gets the location_serialized_name.
+     *
+     * An array of zero-based character offsets that indicate where the entity mentions begin and end in the input text.
+     *
+     * @return the location_serialized_name
+     */
+    @AuraEnabled
+    public List<Long> getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
+     * Sets the text_serialized_name.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the intent_serialized_name.
+     *
+     * @param intent the new intent
+     */
+    public void setIntent(final String intent) {
+      this.intent_serialized_name = intent;
+    }
+
+    /**
+     * Sets the location_serialized_name.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final List<Long> location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      EntityMention ret = (EntityMention) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * EntityMentionCollection.
+   */
+  public class EntityMentionCollection extends IBMWatsonResponseModel {
+    private List<EntityMention> examples_serialized_name;
+    private Pagination pagination_serialized_name;
+    /**
+     * Gets the examples_serialized_name.
+     *
+     * An array of objects describing the entity mentions defined for an entity.
+     *
+     * @return the examples_serialized_name
+     */
+    @AuraEnabled
+    public List<EntityMention> getExamples() {
+      return examples_serialized_name;
+    }
+    /**
+     * Gets the pagination_serialized_name.
+     *
+     * The pagination data for the returned objects.
+     *
+     * @return the pagination_serialized_name
+     */
+    @AuraEnabled
+    public Pagination getPagination() {
+      return pagination_serialized_name;
+    }
+
+    /**
+     * Sets the examples_serialized_name.
+     *
+     * @param examples the new examples
+     */
+    public void setExamples(final List<EntityMention> examples) {
+      this.examples_serialized_name = examples;
+    }
+
+    /**
+     * Sets the pagination_serialized_name.
+     *
+     * @param pagination the new pagination
+     */
+    public void setPagination(final Pagination pagination) {
+      this.pagination_serialized_name = pagination;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      EntityMentionCollection ret = (EntityMentionCollection) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for examples_serialized_name
+      List<EntityMention> newExamples = new List<EntityMention>();
+      List<EntityMention> deserializedExamples = ret.getExamples();
+      if (deserializedExamples != null) {
+        for (Integer i = 0; i < deserializedExamples.size(); i++) {
+          EntityMention currentItem = ret.getExamples().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('examples_serialized_name');
+          EntityMention newItem = (EntityMention) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntityMention.class);
+          newExamples.add(newItem);
+        }
+        ret.setExamples(newExamples);
+      }
+
+      // calling custom deserializer for pagination_serialized_name
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
+      ret.setPagination(newPagination);
 
       return ret;
     }
@@ -9223,6 +10603,176 @@ public class IBMConversationV1Models {
   }
 
   /**
+   * The listMentions options.
+   */
+  public class ListMentionsOptions extends IBMWatsonOptionsModel {
+    private String workspace_id_serialized_name;
+    private String entity_serialized_name;
+    private Boolean export_serialized_name;
+    private Boolean include_audit_serialized_name;
+    /**
+     * Gets the workspace_id_serialized_name.
+     *
+     * Unique identifier of the workspace.
+     *
+     * @return the workspace_id_serialized_name
+     */
+    public String workspaceId() {
+      return workspace_id_serialized_name;
+    }
+    /**
+     * Gets the entity_serialized_name.
+     *
+     * The name of the entity.
+     *
+     * @return the entity_serialized_name
+     */
+    public String entity() {
+      return entity_serialized_name;
+    }
+    /**
+     * Gets the export_serialized_name.
+     *
+     * Whether to include all element content in the returned data. If **export**=`false`, the returned data includes
+     * only information about the element itself. If **export**=`true`, all content, including subelements, is included.
+     *
+     * @return the export_serialized_name
+     */
+    public Boolean exportField() {
+      return export_serialized_name;
+    }
+    /**
+     * Gets the include_audit_serialized_name.
+     *
+     * Whether to include the audit properties (`created` and `updated` timestamps) in the response.
+     *
+     * @return the include_audit_serialized_name
+     */
+    public Boolean includeAudit() {
+      return include_audit_serialized_name;
+    }
+    private ListMentionsOptions(ListMentionsOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.entity_serialized_name, 'entity_serialized_name cannot be empty');
+      workspace_id_serialized_name = builder.workspace_id_serialized_name;
+      entity_serialized_name = builder.entity_serialized_name;
+      export_serialized_name = builder.export_serialized_name;
+      include_audit_serialized_name = builder.include_audit_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ListMentionsOptions builder
+     */
+    public ListMentionsOptionsBuilder newBuilder() {
+      return new ListMentionsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * ListMentionsOptions Builder.
+   */
+  public class ListMentionsOptionsBuilder extends IBMWatsonOptionsModel {
+    private String workspace_id_serialized_name;
+    private String entity_serialized_name;
+    private Boolean export_serialized_name;
+    private Boolean include_audit_serialized_name;
+
+    private ListMentionsOptionsBuilder(ListMentionsOptions listMentionsOptions) {
+      workspace_id_serialized_name = listMentionsOptions.workspace_id_serialized_name;
+      entity_serialized_name = listMentionsOptions.entity_serialized_name;
+      export_serialized_name = listMentionsOptions.export_serialized_name;
+      include_audit_serialized_name = listMentionsOptions.include_audit_serialized_name;
+      this.requestHeaders.putAll(listMentionsOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ListMentionsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param workspaceId the workspaceId
+     * @param entity the entity
+     */
+    public ListMentionsOptionsBuilder(String workspaceId, String entity) {
+      this.workspace_id_serialized_name = workspaceId;
+      this.entity_serialized_name = entity;
+    }
+
+    /**
+     * Builds a ListMentionsOptions.
+     *
+     * @return the listMentionsOptions
+     */
+    public ListMentionsOptions build() {
+      return new ListMentionsOptions(this);
+    }
+
+    /**
+     * Set the workspace_id_serialized_name.
+     *
+     * @param workspaceId the workspaceId
+     * @return the ListMentionsOptions builder
+     */
+    public ListMentionsOptionsBuilder workspaceId(String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
+      return this;
+    }
+
+    /**
+     * Set the entity_serialized_name.
+     *
+     * @param entity the entity
+     * @return the ListMentionsOptions builder
+     */
+    public ListMentionsOptionsBuilder entity(String entity) {
+      this.entity_serialized_name = entity;
+      return this;
+    }
+
+    /**
+     * Set the export_serialized_name.
+     *
+     * @param exportVar the exportVar
+     * @return the ListMentionsOptions builder
+     */
+    public ListMentionsOptionsBuilder exportField(Boolean exportVar) {
+      this.export_serialized_name = exportVar;
+      return this;
+    }
+
+    /**
+     * Set the include_audit_serialized_name.
+     *
+     * @param includeAudit the includeAudit
+     * @return the ListMentionsOptions builder
+     */
+    public ListMentionsOptionsBuilder includeAudit(Boolean includeAudit) {
+      this.include_audit_serialized_name = includeAudit;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListMentionsOptions builder
+     */
+    public ListMentionsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The listSynonyms options.
    */
   public class ListSynonymsOptions extends IBMWatsonOptionsModel {
@@ -10349,6 +11899,64 @@ public class IBMConversationV1Models {
   }
 
   /**
+   * A mention of a contextual entity.
+   */
+  public class Mentions extends IBMWatsonGenericModel {
+    private String entity_serialized_name;
+    private List<Long> location_serialized_name;
+    /**
+     * Gets the entity_serialized_name.
+     *
+     * The name of the entity.
+     *
+     * @return the entity_serialized_name
+     */
+    @AuraEnabled
+    public String getEntity() {
+      return entity_serialized_name;
+    }
+    /**
+     * Gets the location_serialized_name.
+     *
+     * An array of zero-based character offsets that indicate where the entity mentions begin and end in the input text.
+     *
+     * @return the location_serialized_name
+     */
+    @AuraEnabled
+    public List<Long> getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
+     * Sets the entity_serialized_name.
+     *
+     * @param entity the new entity
+     */
+    public void setEntity(final String entity) {
+      this.entity_serialized_name = entity;
+    }
+
+    /**
+     * Sets the location_serialized_name.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final List<Long> location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Mentions ret = (Mentions) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
    * The text of the user input.
    */
   public class MessageInput extends IBMWatsonGenericModel {
@@ -10705,7 +12313,7 @@ public class IBMConversationV1Models {
   }
 
   /**
-   * A request formatted for the Conversation service.
+   * A message request formatted for the Watson Conversation service.
    */
   public class MessageRequest extends IBMWatsonGenericModel {
     private InputData input_serialized_name;
@@ -10889,7 +12497,7 @@ public class IBMConversationV1Models {
   }
 
   /**
-   * A response from the Conversation service.
+   * A response from the Watson Conversation service.
    */
   public class MessageResponse extends IBMWatsonDynamicResponseModel {
     private MessageInput input_serialized_name;
@@ -11082,11 +12690,12 @@ public class IBMConversationV1Models {
   }
 
   /**
-   * An output object that includes the response to the user, the nodes that were hit, and messages from the log.
+   * An output object that includes the response to the user, the dialog nodes that were triggered, and messages from the log.
    */
   public class OutputData extends IBMWatsonDynamicModel {
     private List<LogMessage> log_messages_serialized_name;
     private List<String> text_serialized_name;
+    private List<DialogRuntimeResponseGeneric> generic_serialized_name;
     private List<String> nodes_visited_serialized_name;
     private List<DialogNodeVisitedDetails> nodes_visited_details_serialized_name;
     private Map<String, Object> additional_properties_serialized_name;
@@ -11109,6 +12718,16 @@ public class IBMConversationV1Models {
     @AuraEnabled
     public List<String> getText() {
       return text_serialized_name;
+    }
+
+    /**
+     * Gets the generic_serialized_name.
+     *
+     * @return the generic_serialized_name
+     */
+    @AuraEnabled
+    public List<DialogRuntimeResponseGeneric> getGeneric() {
+      return generic_serialized_name;
     }
 
     /**
@@ -11160,6 +12779,15 @@ public class IBMConversationV1Models {
     }
 
     /**
+     * Sets the generic_serialized_name.
+     *
+     * @param generic_serialized_name the new generic_serialized_name
+     */
+    public void setGeneric(final List<DialogRuntimeResponseGeneric> generic_serialized_name) {
+      this.generic_serialized_name = generic_serialized_name;
+    }
+
+    /**
      * Sets the nodes_visited_serialized_name.
      *
      * @param nodes_visited_serialized_name the new nodes_visited_serialized_name
@@ -11195,6 +12823,19 @@ public class IBMConversationV1Models {
           newLogMessages.add(newItem);
         }
         ret.setLogMessages(newLogMessages);
+      }
+
+      // calling custom deserializer for generic_serialized_name
+      List<DialogRuntimeResponseGeneric> newGeneric = new List<DialogRuntimeResponseGeneric>();
+      List<DialogRuntimeResponseGeneric> deserializedGeneric = ret.getGeneric();
+      if (deserializedGeneric != null) {
+        for (Integer i = 0; i < deserializedGeneric.size(); i++) {
+          DialogRuntimeResponseGeneric currentItem = ret.getGeneric().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('generic_serialized_name');
+          DialogRuntimeResponseGeneric newItem = (DialogRuntimeResponseGeneric) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogRuntimeResponseGeneric.class);
+          newGeneric.add(newItem);
+        }
+        ret.setGeneric(newGeneric);
       }
 
       // calling custom deserializer for nodes_visited_details_serialized_name
@@ -11938,6 +13579,7 @@ public class IBMConversationV1Models {
     private IBMWatsonMapModel new_context_serialized_name;
     private String new_previous_sibling_serialized_name;
     private String new_variable_serialized_name;
+    private String new_user_label_serialized_name;
     private IBMWatsonMapModel new_metadata_serialized_name;
     private String new_title_serialized_name;
     private String new_description_serialized_name;
@@ -11946,7 +13588,7 @@ public class IBMConversationV1Models {
     private String new_digress_out_slots_serialized_name;
     private DialogNodeNextStep new_next_step_serialized_name;
     private String new_digress_in_serialized_name;
-    private IBMWatsonMapModel new_output_serialized_name;
+    private DialogNodeOutput new_output_serialized_name;
     private String new_parent_serialized_name;
     private String new_dialog_node_serialized_name;
     /**
@@ -12029,6 +13671,16 @@ public class IBMConversationV1Models {
      */
     public String newVariable() {
       return new_variable_serialized_name;
+    }
+    /**
+     * Gets the new_user_label_serialized_name.
+     *
+     * A label that can be displayed externally to describe the purpose of the node to users.
+     *
+     * @return the new_user_label_serialized_name
+     */
+    public String newUserLabel() {
+      return new_user_label_serialized_name;
     }
     /**
      * Gets the new_metadata_serialized_name.
@@ -12116,12 +13768,9 @@ public class IBMConversationV1Models {
     /**
      * Gets the new_output_serialized_name.
      *
-     * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
-     *
      * @return the new_output_serialized_name
      */
-    public IBMWatsonMapModel newOutput() {
+    public DialogNodeOutput newOutput() {
       return new_output_serialized_name;
     }
     /**
@@ -12157,6 +13806,7 @@ public class IBMConversationV1Models {
       new_context_serialized_name = builder.new_context_serialized_name;
       new_previous_sibling_serialized_name = builder.new_previous_sibling_serialized_name;
       new_variable_serialized_name = builder.new_variable_serialized_name;
+      new_user_label_serialized_name = builder.new_user_label_serialized_name;
       new_metadata_serialized_name = builder.new_metadata_serialized_name;
       new_title_serialized_name = builder.new_title_serialized_name;
       new_description_serialized_name = builder.new_description_serialized_name;
@@ -12194,6 +13844,7 @@ public class IBMConversationV1Models {
     private IBMWatsonMapModel new_context_serialized_name;
     private String new_previous_sibling_serialized_name;
     private String new_variable_serialized_name;
+    private String new_user_label_serialized_name;
     private IBMWatsonMapModel new_metadata_serialized_name;
     private String new_title_serialized_name;
     private String new_description_serialized_name;
@@ -12202,7 +13853,7 @@ public class IBMConversationV1Models {
     private String new_digress_out_slots_serialized_name;
     private DialogNodeNextStep new_next_step_serialized_name;
     private String new_digress_in_serialized_name;
-    private IBMWatsonMapModel new_output_serialized_name;
+    private DialogNodeOutput new_output_serialized_name;
     private String new_parent_serialized_name;
     private String new_dialog_node_serialized_name;
 
@@ -12215,6 +13866,7 @@ public class IBMConversationV1Models {
       new_context_serialized_name = updateDialogNodeOptions.new_context_serialized_name;
       new_previous_sibling_serialized_name = updateDialogNodeOptions.new_previous_sibling_serialized_name;
       new_variable_serialized_name = updateDialogNodeOptions.new_variable_serialized_name;
+      new_user_label_serialized_name = updateDialogNodeOptions.new_user_label_serialized_name;
       new_metadata_serialized_name = updateDialogNodeOptions.new_metadata_serialized_name;
       new_title_serialized_name = updateDialogNodeOptions.new_title_serialized_name;
       new_description_serialized_name = updateDialogNodeOptions.new_description_serialized_name;
@@ -12360,6 +14012,17 @@ public class IBMConversationV1Models {
     }
 
     /**
+     * Set the new_user_label_serialized_name.
+     *
+     * @param newUserLabel the newUserLabel
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newUserLabel(String newUserLabel) {
+      this.new_user_label_serialized_name = newUserLabel;
+      return this;
+    }
+
+    /**
      * Set the new_metadata_serialized_name.
      *
      * @param newMetadata the newMetadata
@@ -12453,7 +14116,7 @@ public class IBMConversationV1Models {
      * @param newOutput the newOutput
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newOutput(IBMWatsonMapModel newOutput) {
+    public UpdateDialogNodeOptionsBuilder newOutput(DialogNodeOutput newOutput) {
       this.new_output_serialized_name = newOutput;
       return this;
     }
@@ -12765,6 +14428,7 @@ public class IBMConversationV1Models {
     private String intent_serialized_name;
     private String text_serialized_name;
     private String new_text_serialized_name;
+    private List<Mentions> new_mentions_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
      *
@@ -12808,6 +14472,16 @@ public class IBMConversationV1Models {
     public String newText() {
       return new_text_serialized_name;
     }
+    /**
+     * Gets the new_mentions_serialized_name.
+     *
+     * An array of contextual entity mentions.
+     *
+     * @return the new_mentions_serialized_name
+     */
+    public List<Mentions> newMentions() {
+      return new_mentions_serialized_name;
+    }
     private UpdateExampleOptions(UpdateExampleOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspace_id_serialized_name, 'workspace_id_serialized_name cannot be empty');
       IBMWatsonValidator.notEmpty(builder.intent_serialized_name, 'intent_serialized_name cannot be empty');
@@ -12816,6 +14490,7 @@ public class IBMConversationV1Models {
       intent_serialized_name = builder.intent_serialized_name;
       text_serialized_name = builder.text_serialized_name;
       new_text_serialized_name = builder.new_text_serialized_name;
+      new_mentions_serialized_name = builder.new_mentions_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -12838,12 +14513,14 @@ public class IBMConversationV1Models {
     private String intent_serialized_name;
     private String text_serialized_name;
     private String new_text_serialized_name;
+    private List<Mentions> new_mentions_serialized_name;
 
     private UpdateExampleOptionsBuilder(UpdateExampleOptions updateExampleOptions) {
       workspace_id_serialized_name = updateExampleOptions.workspace_id_serialized_name;
       intent_serialized_name = updateExampleOptions.intent_serialized_name;
       text_serialized_name = updateExampleOptions.text_serialized_name;
       new_text_serialized_name = updateExampleOptions.new_text_serialized_name;
+      new_mentions_serialized_name = updateExampleOptions.new_mentions_serialized_name;
       this.requestHeaders.putAll(updateExampleOptions.requestHeaders());
     }
 
@@ -12873,6 +14550,21 @@ public class IBMConversationV1Models {
      */
     public UpdateExampleOptions build() {
       return new UpdateExampleOptions(this);
+    }
+
+    /**
+     * Adds an newMentions to new_mentions_serialized_name.
+     *
+     * @param newMentions the new newMentions
+     * @return the UpdateExampleOptions builder
+     */
+    public UpdateExampleOptionsBuilder addNewMentions(Mentions newMentions) {
+      IBMWatsonValidator.notNull(newMentions, 'newMentions cannot be null');
+      if (this.new_mentions_serialized_name == null) {
+        this.new_mentions_serialized_name = new List<Mentions>();
+      }
+      this.new_mentions_serialized_name.add(newMentions);
+      return this;
     }
 
     /**
@@ -12916,6 +14608,18 @@ public class IBMConversationV1Models {
      */
     public UpdateExampleOptionsBuilder newText(String newText) {
       this.new_text_serialized_name = newText;
+      return this;
+    }
+
+    /**
+     * Set the new_mentions_serialized_name.
+     * Existing new_mentions_serialized_name will be replaced.
+     *
+     * @param newMentions the newMentions
+     * @return the UpdateExampleOptions builder
+     */
+    public UpdateExampleOptionsBuilder newMentions(List<Mentions> newMentions) {
+      this.new_mentions_serialized_name = newMentions;
       return this;
     }
 
@@ -13676,6 +15380,7 @@ public class IBMConversationV1Models {
     private List<CreateCounterexample> counterexamples_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
+    private WorkspaceSystemSettings system_settings_serialized_name;
     private Boolean append_serialized_name;
     /**
      * Gets the workspace_id_serialized_name.
@@ -13781,6 +15486,16 @@ public class IBMConversationV1Models {
       return learning_opt_out_serialized_name;
     }
     /**
+     * Gets the system_settings_serialized_name.
+     *
+     * Global settings for the workspace.
+     *
+     * @return the system_settings_serialized_name
+     */
+    public WorkspaceSystemSettings systemSettings() {
+      return system_settings_serialized_name;
+    }
+    /**
      * Gets the append_serialized_name.
      *
      * Whether the new data is to be appended to the existing data in the workspace. If **append**=`false`, elements
@@ -13808,6 +15523,7 @@ public class IBMConversationV1Models {
       counterexamples_serialized_name = builder.counterexamples_serialized_name;
       metadata_serialized_name = builder.metadata_serialized_name;
       learning_opt_out_serialized_name = builder.learning_opt_out_serialized_name;
+      system_settings_serialized_name = builder.system_settings_serialized_name;
       append_serialized_name = builder.append_serialized_name;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -13837,6 +15553,7 @@ public class IBMConversationV1Models {
     private List<CreateCounterexample> counterexamples_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
+    private WorkspaceSystemSettings system_settings_serialized_name;
     private Boolean append_serialized_name;
 
     private UpdateWorkspaceOptionsBuilder(UpdateWorkspaceOptions updateWorkspaceOptions) {
@@ -13850,6 +15567,7 @@ public class IBMConversationV1Models {
       counterexamples_serialized_name = updateWorkspaceOptions.counterexamples_serialized_name;
       metadata_serialized_name = updateWorkspaceOptions.metadata_serialized_name;
       learning_opt_out_serialized_name = updateWorkspaceOptions.learning_opt_out_serialized_name;
+      system_settings_serialized_name = updateWorkspaceOptions.system_settings_serialized_name;
       append_serialized_name = updateWorkspaceOptions.append_serialized_name;
       this.requestHeaders.putAll(updateWorkspaceOptions.requestHeaders());
     }
@@ -14049,6 +15767,17 @@ public class IBMConversationV1Models {
      */
     public UpdateWorkspaceOptionsBuilder learningOptOut(Boolean learningOptOut) {
       this.learning_opt_out_serialized_name = learningOptOut;
+      return this;
+    }
+
+    /**
+     * Set the system_settings_serialized_name.
+     *
+     * @param systemSettings the systemSettings
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public UpdateWorkspaceOptionsBuilder systemSettings(WorkspaceSystemSettings systemSettings) {
+      this.system_settings_serialized_name = systemSettings;
       return this;
     }
 
@@ -14461,6 +16190,7 @@ public class IBMConversationV1Models {
     private String description_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
+    private WorkspaceSystemSettings system_settings_serialized_name;
     /**
      * Gets the name_serialized_name.
      *
@@ -14550,6 +16280,17 @@ public class IBMConversationV1Models {
     public Boolean getLearningOptOut() {
       return learning_opt_out_serialized_name;
     }
+    /**
+     * Gets the system_settings_serialized_name.
+     *
+     * Global settings for the workspace.
+     *
+     * @return the system_settings_serialized_name
+     */
+    @AuraEnabled
+    public WorkspaceSystemSettings getSystemSettings() {
+      return system_settings_serialized_name;
+    }
 
     /**
      * Sets the name_serialized_name.
@@ -14596,6 +16337,15 @@ public class IBMConversationV1Models {
       this.learning_opt_out_serialized_name = learningOptOut;
     }
 
+    /**
+     * Sets the system_settings_serialized_name.
+     *
+     * @param systemSettings the new systemSettings
+     */
+    public void setSystemSettings(final WorkspaceSystemSettings systemSettings) {
+      this.system_settings_serialized_name = systemSettings;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -14606,6 +16356,10 @@ public class IBMConversationV1Models {
       // calling custom deserializer for metadata_serialized_name
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
+
+      // calling custom deserializer for system_settings_serialized_name
+      WorkspaceSystemSettings newSystemSettings = (WorkspaceSystemSettings) new WorkspaceSystemSettings().deserialize(JSON.serialize(ret.getSystemSettings()), (Map<String, Object>) jsonMap.get('system_settings_serialized_name'), WorkspaceSystemSettings.class);
+      ret.setSystemSettings(newSystemSettings);
 
       return ret;
     }
@@ -14699,6 +16453,7 @@ public class IBMConversationV1Models {
     private String workspace_id_serialized_name;
     private String status_serialized_name;
     private Boolean learning_opt_out_serialized_name;
+    private WorkspaceSystemSettings system_settings_serialized_name;
     private List<IntentExport> intents_serialized_name;
     private List<EntityExport> entities_serialized_name;
     private List<Counterexample> counterexamples_serialized_name;
@@ -14804,6 +16559,17 @@ public class IBMConversationV1Models {
       return learning_opt_out_serialized_name;
     }
     /**
+     * Gets the system_settings_serialized_name.
+     *
+     * Global settings for the workspace.
+     *
+     * @return the system_settings_serialized_name
+     */
+    @AuraEnabled
+    public WorkspaceSystemSettings getSystemSettings() {
+      return system_settings_serialized_name;
+    }
+    /**
      * Gets the intents_serialized_name.
      *
      * An array of intents.
@@ -14903,6 +16669,15 @@ public class IBMConversationV1Models {
     }
 
     /**
+     * Sets the system_settings_serialized_name.
+     *
+     * @param systemSettings the new systemSettings
+     */
+    public void setSystemSettings(final WorkspaceSystemSettings systemSettings) {
+      this.system_settings_serialized_name = systemSettings;
+    }
+
+    /**
      * Sets the intents_serialized_name.
      *
      * @param intents the new intents
@@ -14948,6 +16723,10 @@ public class IBMConversationV1Models {
       // calling custom deserializer for metadata_serialized_name
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
+
+      // calling custom deserializer for system_settings_serialized_name
+      WorkspaceSystemSettings newSystemSettings = (WorkspaceSystemSettings) new WorkspaceSystemSettings().deserialize(JSON.serialize(ret.getSystemSettings()), (Map<String, Object>) jsonMap.get('system_settings_serialized_name'), WorkspaceSystemSettings.class);
+      ret.setSystemSettings(newSystemSettings);
 
       // calling custom deserializer for intents_serialized_name
       List<IntentExport> newIntents = new List<IntentExport>();
@@ -15000,6 +16779,238 @@ public class IBMConversationV1Models {
         }
         ret.setDialogNodes(newDialogNodes);
       }
+
+      return ret;
+    }
+  }
+
+  /**
+   * WorkspaceSystemSettings.
+   */
+  public class WorkspaceSystemSettings extends IBMWatsonGenericModel {
+    private WorkspaceSystemSettingsTooling tooling_serialized_name;
+    private WorkspaceSystemSettingsDisambiguation disambiguation_serialized_name;
+    private IBMWatsonMapModel human_agent_assist_serialized_name;
+    /**
+     * Gets the tooling_serialized_name.
+     *
+     * Workspace settings related to the Watson Conversation tool.
+     *
+     * @return the tooling_serialized_name
+     */
+    @AuraEnabled
+    public WorkspaceSystemSettingsTooling getTooling() {
+      return tooling_serialized_name;
+    }
+    /**
+     * Gets the disambiguation_serialized_name.
+     *
+     * Workspace settings related to the disambiguation feature.
+     *
+     * **Note:** This feature is available only to Premium users.
+     *
+     * @return the disambiguation_serialized_name
+     */
+    @AuraEnabled
+    public WorkspaceSystemSettingsDisambiguation getDisambiguation() {
+      return disambiguation_serialized_name;
+    }
+    /**
+     * Gets the human_agent_assist_serialized_name.
+     *
+     * For internal use only.
+     *
+     * @return the human_agent_assist_serialized_name
+     */
+    @AuraEnabled
+    public IBMWatsonMapModel getHumanAgentAssist() {
+      return human_agent_assist_serialized_name;
+    }
+
+    /**
+     * Sets the tooling_serialized_name.
+     *
+     * @param tooling the new tooling
+     */
+    public void setTooling(final WorkspaceSystemSettingsTooling tooling) {
+      this.tooling_serialized_name = tooling;
+    }
+
+    /**
+     * Sets the disambiguation_serialized_name.
+     *
+     * @param disambiguation the new disambiguation
+     */
+    public void setDisambiguation(final WorkspaceSystemSettingsDisambiguation disambiguation) {
+      this.disambiguation_serialized_name = disambiguation;
+    }
+
+    /**
+     * Sets the human_agent_assist_serialized_name.
+     *
+     * @param humanAgentAssist the new humanAgentAssist
+     */
+    public void setHumanAgentAssist(final IBMWatsonMapModel humanAgentAssist) {
+      this.human_agent_assist_serialized_name = humanAgentAssist;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WorkspaceSystemSettings ret = (WorkspaceSystemSettings) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for tooling_serialized_name
+      WorkspaceSystemSettingsTooling newTooling = (WorkspaceSystemSettingsTooling) new WorkspaceSystemSettingsTooling().deserialize(JSON.serialize(ret.getTooling()), (Map<String, Object>) jsonMap.get('tooling_serialized_name'), WorkspaceSystemSettingsTooling.class);
+      ret.setTooling(newTooling);
+
+      // calling custom deserializer for disambiguation_serialized_name
+      WorkspaceSystemSettingsDisambiguation newDisambiguation = (WorkspaceSystemSettingsDisambiguation) new WorkspaceSystemSettingsDisambiguation().deserialize(JSON.serialize(ret.getDisambiguation()), (Map<String, Object>) jsonMap.get('disambiguation_serialized_name'), WorkspaceSystemSettingsDisambiguation.class);
+      ret.setDisambiguation(newDisambiguation);
+
+      // calling custom deserializer for human_agent_assist_serialized_name
+      IBMWatsonMapModel newHumanAgentAssist = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getHumanAgentAssist()), (Map<String, Object>) jsonMap.get('human_agent_assist_serialized_name'), IBMWatsonMapModel.class);
+      ret.setHumanAgentAssist(newHumanAgentAssist);
+
+      return ret;
+    }
+  }
+
+  /**
+   * WorkspaceSystemSettingsDisambiguation.
+   */
+  public class WorkspaceSystemSettingsDisambiguation extends IBMWatsonGenericModel {
+    private String prompt_serialized_name;
+    private String none_of_the_above_prompt_serialized_name;
+    private Boolean enabled_serialized_name;
+    private String sensitivity_serialized_name;
+    /**
+     * Gets the prompt_serialized_name.
+     *
+     * The text of the introductory prompt that accompanies disambiguation options presented to the user.
+     *
+     * @return the prompt_serialized_name
+     */
+    @AuraEnabled
+    public String getPrompt() {
+      return prompt_serialized_name;
+    }
+    /**
+     * Gets the none_of_the_above_prompt_serialized_name.
+     *
+     * The user-facing label for the option users can select if none of the suggested options is correct. If no value is
+     * specified for this property, this option does not appear.
+     *
+     * @return the none_of_the_above_prompt_serialized_name
+     */
+    @AuraEnabled
+    public String getNoneOfTheAbovePrompt() {
+      return none_of_the_above_prompt_serialized_name;
+    }
+    /**
+     * Gets the enabled_serialized_name.
+     *
+     * Whether the disambiguation feature is enabled for the workspace.
+     *
+     * @return the enabled_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getEnabled() {
+      return enabled_serialized_name;
+    }
+    /**
+     * Gets the sensitivity_serialized_name.
+     *
+     * The sensitivity of the disambiguation feature to intent detection conflicts. Set to **high** if you want the
+     * disambiguation feature to be triggered more often. This can be useful for testing or demonstration purposes.
+     *
+     * @return the sensitivity_serialized_name
+     */
+    @AuraEnabled
+    public String getSensitivity() {
+      return sensitivity_serialized_name;
+    }
+
+    /**
+     * Sets the prompt_serialized_name.
+     *
+     * @param prompt the new prompt
+     */
+    public void setPrompt(final String prompt) {
+      this.prompt_serialized_name = prompt;
+    }
+
+    /**
+     * Sets the none_of_the_above_prompt_serialized_name.
+     *
+     * @param noneOfTheAbovePrompt the new noneOfTheAbovePrompt
+     */
+    public void setNoneOfTheAbovePrompt(final String noneOfTheAbovePrompt) {
+      this.none_of_the_above_prompt_serialized_name = noneOfTheAbovePrompt;
+    }
+
+    /**
+     * Sets the enabled_serialized_name.
+     *
+     * @param enabled the new enabled
+     */
+    public void setEnabled(final Boolean enabled) {
+      this.enabled_serialized_name = enabled;
+    }
+
+    /**
+     * Sets the sensitivity_serialized_name.
+     *
+     * @param sensitivity the new sensitivity
+     */
+    public void setSensitivity(final String sensitivity) {
+      this.sensitivity_serialized_name = sensitivity;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WorkspaceSystemSettingsDisambiguation ret = (WorkspaceSystemSettingsDisambiguation) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * WorkspaceSystemSettingsTooling.
+   */
+  public class WorkspaceSystemSettingsTooling extends IBMWatsonGenericModel {
+    private Boolean store_generic_responses_serialized_name;
+    /**
+     * Gets the store_generic_responses_serialized_name.
+     *
+     * Whether the dialog JSON editor displays text responses within the `output.generic` object.
+     *
+     * @return the store_generic_responses_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getStoreGenericResponses() {
+      return store_generic_responses_serialized_name;
+    }
+
+    /**
+     * Sets the store_generic_responses_serialized_name.
+     *
+     * @param storeGenericResponses the new storeGenericResponses
+     */
+    public void setStoreGenericResponses(final Boolean storeGenericResponses) {
+      this.store_generic_responses_serialized_name = storeGenericResponses;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      WorkspaceSystemSettingsTooling ret = (WorkspaceSystemSettingsTooling) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
