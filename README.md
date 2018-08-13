@@ -248,7 +248,7 @@ The final piece of setup to access Watson services from your Salesforce environm
 1. Add whatever name you desire, with the following URL: `https://gateway.watsonplatform.net/`
 1. Click _Save_
 
-If you're authenticating with IAM, you'll also need to add your IAM URL in your remote site settings. The default URL is `https://iam.ng.bluemix.net`.
+If you're authenticating with IAM, you'll also need to add your IAM URL in your remote site settings. The default URL is `https://iam.bluemix.net`.
 
 ## Examples
 
