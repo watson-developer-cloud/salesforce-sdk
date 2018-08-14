@@ -36,7 +36,7 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(resp.getIndexCapacity().getDiskUsage().getMaximumAllowedBytes(), 99345920);
     resp.setName('test');
     resp.setDescription('test');
-    resp.setSize(100);
+    resp.setSize('XS');
     IBMDiscoveryV1Models.IndexCapacity indexCapacity = new IBMDiscoveryV1Models.IndexCapacity();
     IBMDiscoveryV1Models.EnvironmentDocuments environmentDocuments = new IBMDiscoveryV1Models.EnvironmentDocuments();
     indexCapacity.setDocuments(environmentDocuments);
@@ -46,7 +46,7 @@ private class IBMDiscoveryV1Test {
     indexCapacity.setMemoryUsage(memoryUsage);
     resp.setIndexCapacity(indexCapacity);
     System.assertEquals(resp.getDescription(), 'test');
-    System.assertEquals(resp.getSize(), 100);
+    System.assertEquals(resp.getSize(), 'XS');
     System.assertEquals(resp.getIndexCapacity().getDiskUsage().getTotalBytes(), null);
     System.assertEquals(resp.getIndexCapacity().getDiskUsage().getUsed(), null);
     System.assertEquals(resp.getIndexCapacity().getDiskUsage().getTotal(), null);
@@ -932,7 +932,7 @@ private class IBMDiscoveryV1Test {
     queryAggregation.setCount(10);
     queryAggregation.setValue(10);
     queryAggregation.setPath('test');
-    queryAggregation.setInterval('test');
+    queryAggregation.setTimesliceInterval('test');
     queryAggregation.setAnomaly(true);
     queryAggregation.setSize(10);
     IBMDiscoveryV1Models.TopHitsResults hits = new IBMDiscoveryV1Models.TopHitsResults();
@@ -972,7 +972,7 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(queryAggregation.getCount(), 10);
     System.assertEquals(queryAggregation.getValue(), 10);
     System.assertEquals(queryAggregation.getPath(), 'test');
-    System.assertEquals(queryAggregation.getInterval(), 'test');
+    System.assertEquals(queryAggregation.getTimesliceInterval(), 'test');
     System.assertEquals(queryAggregation.getAnomaly(), true);
     System.assertEquals(queryAggregation.getSize(), 10);
     System.assert(queryAggregation.getHits() != null);
