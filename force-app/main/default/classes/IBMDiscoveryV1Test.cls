@@ -373,8 +373,8 @@ private class IBMDiscoveryV1Test {
       discovery.createConfiguration(options);
     System.assertEquals(resp.getName(), 'IBM News');
     System.assertEquals(resp.getConfigurationId(), '448e3545-51ca-4530-a03b-6ff282ceac2e');
-    System.assertEquals(resp.getCreated(),(DateTime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',DateTime.class));
-    System.assertEquals(resp.getUpdated(),(DateTime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',DateTime.class));
+    System.assertEquals(resp.getCreated(),(Datetime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',Datetime.class));
+    System.assertEquals(resp.getUpdated(),(Datetime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',Datetime.class));
     Test.stopTest();
   }
 
@@ -605,8 +605,8 @@ private class IBMDiscoveryV1Test {
       discovery.getCollection(options);
     System.assertEquals(resp.getName(), 'test-collection');
     System.assertEquals(resp.getCollectionId(), '800e58e4-198d-45eb-be87-74e1d6df4e96');
-    System.assertEquals(resp.getCreated(),(DateTime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',DateTime.class));
-    System.assertEquals(resp.getUpdated(),(DateTime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',DateTime.class));
+    System.assertEquals(resp.getCreated(),(Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
+    System.assertEquals(resp.getUpdated(),(Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
     System.assertEquals(resp.getStatus(), 'active');
     System.assertEquals(resp.getConfigurationId(), '3c4fff84-1500-455c-b125-eaa2d319f6d3');
     System.assertEquals(resp.getLanguage(), 'de');
@@ -622,8 +622,8 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(resp.getTrainingStatus().getMinimumExamplesAdded(), false);
     System.assertEquals(resp.getTrainingStatus().getSufficientLabelDiversity(), false);
     System.assertEquals(resp.getTrainingStatus().getNotices(), 0);
-    System.assertEquals(resp.getTrainingStatus().getSuccessfullyTrained(), (DateTime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',DateTime.class));
-    System.assertEquals(resp.getTrainingStatus().getDataUpdated(), (DateTime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',DateTime.class));
+    System.assertEquals(resp.getTrainingStatus().getSuccessfullyTrained(), (Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
+    System.assertEquals(resp.getTrainingStatus().getDataUpdated(), (Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
     Test.stopTest();
   }
 
@@ -650,8 +650,8 @@ private class IBMDiscoveryV1Test {
       discovery.getCollection(options);
     System.assertEquals(resp.getName(), 'test-collection');
     System.assertEquals(resp.getCollectionId(), '800e58e4-198d-45eb-be87-74e1d6df4e96');
-    System.assertEquals(resp.getCreated(),(DateTime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',DateTime.class));
-    System.assertEquals(resp.getUpdated(),(DateTime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',DateTime.class));
+    System.assertEquals(resp.getCreated(),(Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
+    System.assertEquals(resp.getUpdated(),(Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
     System.assertEquals(resp.getStatus(), 'active');
     System.assertEquals(resp.getConfigurationId(), '3c4fff84-1500-455c-b125-eaa2d319f6d3');
     System.assertEquals(resp.getLanguage(), 'de');
@@ -667,8 +667,8 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(resp.getTrainingStatus().getMinimumExamplesAdded(), true);
     System.assertEquals(resp.getTrainingStatus().getSufficientLabelDiversity(), true);
     System.assertEquals(resp.getTrainingStatus().getNotices(), 0);
-    System.assertEquals(resp.getTrainingStatus().getSuccessfullyTrained(), (DateTime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',DateTime.class));
-    System.assertEquals(resp.getTrainingStatus().getDataUpdated(), (DateTime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',DateTime.class));
+    System.assertEquals(resp.getTrainingStatus().getSuccessfullyTrained(), (Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
+    System.assertEquals(resp.getTrainingStatus().getDataUpdated(), (Datetime)JSON.deserialize('"2017-07-14T12:55:40.652Z"',Datetime.class));
     Test.stopTest();
   }
 
@@ -825,8 +825,8 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(resp.getStatus(), 'available with notices');
     System.assertEquals(resp.getDocumentId(), 'f1360220-ea2d-4271-9d62-89a910b13c37');
     System.assertEquals(resp.getConfigurationId(), 'e8b9d793-b163-452a-9373-bce07efb510b');
-    System.assertEquals(resp.getCreated(),(DateTime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',DateTime.class));
-    System.assertEquals(resp.getUpdated(),(DateTime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',DateTime.class));
+    System.assertEquals(resp.getCreated(),(Datetime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',Datetime.class));
+    System.assertEquals(resp.getUpdated(),(Datetime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',Datetime.class));
     System.assertEquals(resp.getStatusDescription(), 'Document is successfully ingested but was indexed with warnings');
     System.assertEquals(resp.getFilename(), 'instructions.html');
     System.assertEquals(resp.getFileType(), 'html');
@@ -836,7 +836,7 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(resp.getNotices()[0].getStep(), 'indexing');
     System.assertEquals(resp.getNotices()[0].getDescription(), 'something bad happened');
     System.assertEquals(resp.getNotices()[0].getDocumentId(), 'f1360220-ea2d-4271-9d62-89a910b13c37');
-    System.assertEquals(resp.getNotices()[0].getCreated(),(DateTime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',DateTime.class));
+    System.assertEquals(resp.getNotices()[0].getCreated(),(Datetime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',Datetime.class));
     resp.setFilename('instructions1.html');
     resp.setFileType('html');
     resp.setSha1('de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3');
@@ -2000,6 +2000,282 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(credentialType, credentialsResponse.getCredentialDetails().getCredentialType());
     System.assertEquals(url, credentialsResponse.getCredentialDetails().getUrl());
     System.assertEquals(username, credentialsResponse.getCredentialDetails().getUsername());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testCreateEvent() {
+    String body = IBMWatsonMockResponses.createEventResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String dateString = '"2017-07-14T12:55:40.652Z"';
+    Datetime dateValue = (Datetime) JSON.deserialize('"2017-07-14T12:55:40.652Z"', Datetime.class);
+    Long displayRank = 1L;
+    String sessionToken = 'mock_session_token';
+    String eventType = 'click';
+    String collectionId = 'mock_collid';
+    String documentId = 'mock_docid';
+    String queryId = 'mock_queryid';
+
+    IBMDiscoveryV1Models.EventData eventData = new IBMDiscoveryV1Models.EventData();
+    eventData.setEnvironmentId(ENVIRONMENT_ID);
+    eventData.setCollectionId(collectionId);
+    eventData.setDocumentId(documentId);
+    eventData.setDisplayRank(displayRank);
+    eventData.setSessionToken(sessionToken);
+    eventData.setClientTimestamp(dateValue);
+    IBMDiscoveryV1Models.CreateEventOptions createEventOptions = new IBMDiscoveryV1Models.CreateEventOptionsBuilder()
+        .typeField(eventType)
+        .data(eventData)
+        .build();
+    IBMDiscoveryV1Models.CreateEventResponse response = discovery.createEvent(createEventOptions);
+
+    System.assertEquals(eventType, response.getType());
+    System.assertEquals(ENVIRONMENT_ID, response.getData().getEnvironmentId());
+    System.assertEquals(collectionId, response.getData().getCollectionId());
+    System.assertEquals(documentId, response.getData().getDocumentId());
+    System.assertEquals(displayRank, response.getData().getDisplayRank());
+    System.assertEquals(queryId, response.getData().getQueryId());
+    System.assertEquals(sessionToken, response.getData().getSessionToken());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testGetMetricsEventRate() {
+    String body = IBMWatsonMockResponses.metricResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String dateString = '"2017-07-14T12:55:40.652Z"';
+    Datetime dateValue = (Datetime) JSON.deserialize('"2017-07-14T12:55:40.652Z"', Datetime.class);
+    String interval = '1d';
+    Long key = 1533513600000L;
+    Datetime keyAsString = (Datetime) JSON.deserialize('"2018-08-05T20:00:00.000"', Datetime.class);
+    Double eventRate = 0.0;
+    String eventType = 'click';
+    String resultType = 'document';
+
+    IBMDiscoveryV1Models.GetMetricsEventRateOptions options = new IBMDiscoveryV1Models.GetMetricsEventRateOptionsBuilder()
+        .startTime(dateValue)
+        .endTime(dateValue)
+        .resultType(resultType)
+        .build();
+
+    IBMDiscoveryV1Models.MetricResponse response = discovery.getMetricsEventRate(options);
+
+    System.assert(!response.getAggregations().isEmpty());
+    System.assertEquals(interval, response.getAggregations().get(0).getInterval());
+    System.assertEquals(eventType, response.getAggregations().get(0).getEventType());
+    System.assert(!response.getAggregations().get(0).getResults().isEmpty());
+    System.assertEquals(key, response.getAggregations().get(0).getResults().get(0).getKey());
+    System.assertEquals(keyAsString, response.getAggregations().get(0).getResults().get(0).getKeyAsString());
+    System.assertEquals(eventRate, response.getAggregations().get(0).getResults().get(0).getEventRate());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testGetMetricsQuery() {
+    String body = IBMWatsonMockResponses.metricResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String dateString = '"2017-07-14T12:55:40.652Z"';
+    Datetime dateValue = (Datetime) JSON.deserialize('"2017-07-14T12:55:40.652Z"', Datetime.class);
+    String interval = '1d';
+    Long key = 1533513600000L;
+    Datetime keyAsString = (Datetime) JSON.deserialize('"2018-08-05T20:00:00.000"', Datetime.class);
+    Double eventRate = 0.0;
+    String eventType = 'click';
+    String resultType = 'document';
+
+    IBMDiscoveryV1Models.GetMetricsQueryOptions options = new IBMDiscoveryV1Models.GetMetricsQueryOptionsBuilder()
+        .startTime(dateValue)
+        .endTime(dateValue)
+        .resultType(resultType)
+        .build();
+
+    IBMDiscoveryV1Models.MetricResponse response = discovery.getMetricsQuery(options);
+
+    System.assert(!response.getAggregations().isEmpty());
+    System.assertEquals(interval, response.getAggregations().get(0).getInterval());
+    System.assertEquals(eventType, response.getAggregations().get(0).getEventType());
+    System.assert(!response.getAggregations().get(0).getResults().isEmpty());
+    System.assertEquals(key, response.getAggregations().get(0).getResults().get(0).getKey());
+    System.assertEquals(keyAsString, response.getAggregations().get(0).getResults().get(0).getKeyAsString());
+    System.assertEquals(eventRate, response.getAggregations().get(0).getResults().get(0).getEventRate());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testGetMetricsQueryEvent() {
+    String body = IBMWatsonMockResponses.metricResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String dateString = '"2017-07-14T12:55:40.652Z"';
+    Datetime dateValue = (Datetime) JSON.deserialize('"2017-07-14T12:55:40.652Z"', Datetime.class);
+    String interval = '1d';
+    Long key = 1533513600000L;
+    Datetime keyAsString = (Datetime) JSON.deserialize('"2018-08-05T20:00:00.000"', Datetime.class);
+    Double eventRate = 0.0;
+    String eventType = 'click';
+    String resultType = 'document';
+
+    IBMDiscoveryV1Models.GetMetricsQueryEventOptions options = new IBMDiscoveryV1Models.GetMetricsQueryEventOptionsBuilder()
+        .startTime(dateValue)
+        .endTime(dateValue)
+        .resultType(resultType)
+        .build();
+
+    IBMDiscoveryV1Models.MetricResponse response = discovery.getMetricsQueryEvent(options);
+
+    System.assert(!response.getAggregations().isEmpty());
+    System.assertEquals(interval, response.getAggregations().get(0).getInterval());
+    System.assertEquals(eventType, response.getAggregations().get(0).getEventType());
+    System.assert(!response.getAggregations().get(0).getResults().isEmpty());
+    System.assertEquals(key, response.getAggregations().get(0).getResults().get(0).getKey());
+    System.assertEquals(keyAsString, response.getAggregations().get(0).getResults().get(0).getKeyAsString());
+    System.assertEquals(eventRate, response.getAggregations().get(0).getResults().get(0).getEventRate());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testGetMetricsQueryNoResults() {
+    String body = IBMWatsonMockResponses.metricResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String dateString = '"2017-07-14T12:55:40.652Z"';
+    Datetime dateValue = (Datetime) JSON.deserialize('"2017-07-14T12:55:40.652Z"', Datetime.class);
+    String interval = '1d';
+    Long key = 1533513600000L;
+    Datetime keyAsString = (Datetime) JSON.deserialize('"2018-08-05T20:00:00.000"', Datetime.class);
+    Double eventRate = 0.0;
+    String eventType = 'click';
+    String resultType = 'document';
+
+    IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptions options = new IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptionsBuilder()
+        .startTime(dateValue)
+        .endTime(dateValue)
+        .resultType(resultType)
+        .build();
+
+    IBMDiscoveryV1Models.MetricResponse response = discovery.getMetricsQueryNoResults(options);
+
+    System.assert(!response.getAggregations().isEmpty());
+    System.assertEquals(interval, response.getAggregations().get(0).getInterval());
+    System.assertEquals(eventType, response.getAggregations().get(0).getEventType());
+    System.assert(!response.getAggregations().get(0).getResults().isEmpty());
+    System.assertEquals(key, response.getAggregations().get(0).getResults().get(0).getKey());
+    System.assertEquals(keyAsString, response.getAggregations().get(0).getResults().get(0).getKeyAsString());
+    System.assertEquals(eventRate, response.getAggregations().get(0).getResults().get(0).getEventRate());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testGetMetricsQueryTokenEvent() {
+    String body = IBMWatsonMockResponses.metricTokenResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    Long count = 10L;
+    String key = 'beat';
+    Double eventRate = 0.0;
+    Long matchingResults = 117L;
+    String eventType = 'click';
+
+    IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptions options = new IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptionsBuilder()
+      .count(count)
+      .build();
+
+    IBMDiscoveryV1Models.MetricTokenResponse response = discovery.getMetricsQueryTokenEvent(options);
+
+    System.assert(!response.getAggregations().isEmpty());
+    System.assertEquals(eventType, response.getAggregations().get(0).getEventType());
+    System.assert(!response.getAggregations().get(0).getResults().isEmpty());
+    System.assertEquals(key, response.getAggregations().get(0).getResults().get(0).getKey());
+    System.assertEquals(matchingResults, response.getAggregations().get(0).getResults().get(0).getMatchingResults());
+    System.assertEquals(eventRate, response.getAggregations().get(0).getResults().get(0).getEventRate());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testQueryLog() {
+    String body = IBMWatsonMockResponses.logQueryResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    List<String> sortList = new List<String> { 'field_a' };
+    String extraSort = 'field_b';
+    String filter = 'filter';
+    String naturalLanguageQuery = 'Who beat Ken Jennings in Jeopardy!';
+    Long count = 5L;
+    Long offset = 5L;
+    Long matchingResults = 2L;
+    String customerId = '';
+    String sessionToken = 'mock_session_token';
+    String eventType = 'query';
+    Long resultCount = 0L;
+    String dateString = '"2017-07-14T12:55:40.652Z"';
+    Datetime dateValue = (Datetime) JSON.deserialize('"2017-07-14T12:55:40.652Z"', Datetime.class);
+    String queryId = 'mock_queryid';
+
+    IBMDiscoveryV1Models.QueryLogOptions options = new IBMDiscoveryV1Models.QueryLogOptionsBuilder()
+        .sortField(sortList)
+        .addSort(extraSort)
+        .count(count)
+        .filter(filter)
+        .offset(offset)
+        .query(naturalLanguageQuery)
+        .build();
+
+    IBMDiscoveryV1Models.LogQueryResponse response = discovery.queryLog(options);
+
+    System.assertEquals(matchingResults, response.getMatchingResults());
+    System.assert(!response.getResults().isEmpty());
+    System.assertEquals(ENVIRONMENT_ID, response.getResults().get(0).getEnvironmentId());
+    System.assertEquals(customerId, response.getResults().get(0).getCustomerId());
+    System.assertEquals(queryId, response.getResults().get(0).getQueryId());
+    System.assertEquals(sessionToken, response.getResults().get(0).getSessionToken());
+    System.assertEquals(eventType, response.getResults().get(0).getEventType());
+    System.assert(response.getResults().get(0).getDocumentResults().getResults() != null);
+    System.assertEquals(resultCount, response.getResults().get(0).getDocumentResults().getCount());
 
     Test.stopTest();
   }
