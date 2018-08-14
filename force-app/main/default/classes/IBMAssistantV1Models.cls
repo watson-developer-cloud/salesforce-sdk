@@ -5861,7 +5861,7 @@ public class IBMAssistantV1Models {
     /**
      * Sets the time_serialized_name.
      *
-     * @param xtime the new xtime
+     * @param time the new time
      */
     public void setTime(final long xtime) {
       this.time_serialized_name = xtime;
@@ -6399,7 +6399,7 @@ public class IBMAssistantV1Models {
     /**
      * Sets the time_serialized_name.
      *
-     * @param xtime the new xtime
+     * @param time the new time
      */
     public void setTime(final long xtime) {
       this.time_serialized_name = xtime;
@@ -7235,6 +7235,7 @@ public class IBMAssistantV1Models {
     private String text_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
+    private List<Mentions> mentions_serialized_name;
     /**
      * Gets the text_serialized_name.
      *
@@ -7268,6 +7269,17 @@ public class IBMAssistantV1Models {
     public Datetime getUpdated() {
       return updated_serialized_name;
     }
+    /**
+     * Gets the mentions_serialized_name.
+     *
+     * An array of contextual entity mentions.
+     *
+     * @return the mentions_serialized_name
+     */
+    @AuraEnabled
+    public List<Mentions> getMentions() {
+      return mentions_serialized_name;
+    }
 
     /**
      * Sets the text_serialized_name.
@@ -7278,12 +7290,34 @@ public class IBMAssistantV1Models {
       this.text_serialized_name = text;
     }
 
+    /**
+     * Sets the mentions_serialized_name.
+     *
+     * @param mentions the new mentions
+     */
+    public void setMentions(final List<Mentions> mentions) {
+      this.mentions_serialized_name = mentions;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
       Example ret = (Example) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for mentions_serialized_name
+      List<Mentions> newMentions = new List<Mentions>();
+      List<Mentions> deserializedMentions = ret.getMentions();
+      if (deserializedMentions != null) {
+        for (Integer i = 0; i < deserializedMentions.size(); i++) {
+          Mentions currentItem = ret.getMentions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('mentions_serialized_name');
+          Mentions newItem = (Mentions) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Mentions.class);
+          newMentions.add(newItem);
+        }
+        ret.setMentions(newMentions);
+      }
 
       return ret;
     }
