@@ -749,8 +749,7 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      Map<String, Object> trainingStatusMap = (Map<String, Object>) jsonMap.remove('training_status_serialized_name');
-      Collection ret = (Collection) super.deserialize(JSON.serialize(jsonMap), jsonMap, classType);
+      Collection ret = (Collection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for document_counts_serialized_name
       DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('document_counts_serialized_name'), DocumentCounts.class);
@@ -761,7 +760,7 @@ public class IBMDiscoveryV1Models {
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for training_status_serialized_name
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatusMap), trainingStatusMap, TrainingStatus.class);
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(ret.getTrainingStatus()), (Map<String, Object>) jsonMap.get('training_status_serialized_name'), TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
       // calling custom deserializer for source_crawl_serialized_name
@@ -1844,7 +1843,7 @@ public class IBMDiscoveryV1Models {
   public class CreateEnvironmentOptions extends IBMWatsonOptionsModel {
     private String name_serialized_name;
     private String description_serialized_name;
-    private Long size_serialized_name;
+    private String size_serialized_name;
     /**
      * Gets the name_serialized_name.
      *
@@ -1868,11 +1867,11 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the size_serialized_name.
      *
-     * **Deprecated**: Size of the environment.
+     * Size of the environment.
      *
      * @return the size_serialized_name
      */
-    public Long size() {
+    public String size() {
       return size_serialized_name;
     }
     private CreateEnvironmentOptions(CreateEnvironmentOptionsBuilder builder) {
@@ -1900,7 +1899,7 @@ public class IBMDiscoveryV1Models {
   public class CreateEnvironmentOptionsBuilder extends IBMWatsonOptionsModel {
     private String name_serialized_name;
     private String description_serialized_name;
-    private Long size_serialized_name;
+    private String size_serialized_name;
 
     private CreateEnvironmentOptionsBuilder(CreateEnvironmentOptions createEnvironmentOptions) {
       name_serialized_name = createEnvironmentOptions.name_serialized_name;
@@ -1961,7 +1960,7 @@ public class IBMDiscoveryV1Models {
      * @param size the size
      * @return the CreateEnvironmentOptions builder
      */
-    public CreateEnvironmentOptionsBuilder size(Long size) {
+    public CreateEnvironmentOptionsBuilder size(String size) {
       this.size_serialized_name = size;
       return this;
     }
@@ -5047,7 +5046,7 @@ public class IBMDiscoveryV1Models {
     private Datetime updated_serialized_name;
     private String status_serialized_name;
     private Boolean read_only_serialized_name;
-    private Long size_serialized_name;
+    private String size_serialized_name;
     private IndexCapacity index_capacity_serialized_name;
     /**
      * Gets the environment_id_serialized_name.
@@ -5129,12 +5128,12 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the size_serialized_name.
      *
-     * **Deprecated**: Size of the environment.
+     * Size of the environment.
      *
      * @return the size_serialized_name
      */
     @AuraEnabled
-    public Long getSize() {
+    public String getSize() {
       return size_serialized_name;
     }
     /**
@@ -5172,7 +5171,7 @@ public class IBMDiscoveryV1Models {
      *
      * @param size the new size
      */
-    public void setSize(final long size) {
+    public void setSize(final String size) {
       this.size_serialized_name = size;
     }
 
@@ -5607,7 +5606,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the count_serialized_name.
      *
-     * Number of documents to return.
+     * Number of results to return.
      *
      * @return the count_serialized_name
      */
@@ -6155,7 +6154,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the count_serialized_name.
      *
-     * Number of documents to return.
+     * Number of results to return.
      *
      * @return the count_serialized_name
      */
@@ -7510,6 +7509,611 @@ public class IBMDiscoveryV1Models {
      * @return the GetEnvironmentOptions builder
      */
     public GetEnvironmentOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The getMetricsEventRate options.
+   */
+  public class GetMetricsEventRateOptions extends IBMWatsonOptionsModel {
+    private Datetime start_time_serialized_name;
+    private Datetime end_time_serialized_name;
+    private String result_type_serialized_name;
+    /**
+     * Gets the start_time_serialized_name.
+     *
+     * Metric is computed from data recorded after this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
+     *
+     * @return the start_time_serialized_name
+     */
+    public Datetime startTime() {
+      return start_time_serialized_name;
+    }
+    /**
+     * Gets the end_time_serialized_name.
+     *
+     * Metric is computed from data recorded before this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
+     *
+     * @return the end_time_serialized_name
+     */
+    public Datetime endTime() {
+      return end_time_serialized_name;
+    }
+    /**
+     * Gets the result_type_serialized_name.
+     *
+     * The type of result to consider when calculating the metric.
+     *
+     * @return the result_type_serialized_name
+     */
+    public String resultType() {
+      return result_type_serialized_name;
+    }
+    private GetMetricsEventRateOptions(GetMetricsEventRateOptionsBuilder builder) {
+      start_time_serialized_name = builder.start_time_serialized_name;
+      end_time_serialized_name = builder.end_time_serialized_name;
+      result_type_serialized_name = builder.result_type_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetMetricsEventRateOptions builder
+     */
+    public GetMetricsEventRateOptionsBuilder newBuilder() {
+      return new GetMetricsEventRateOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetMetricsEventRateOptions Builder.
+   */
+  public class GetMetricsEventRateOptionsBuilder extends IBMWatsonOptionsModel {
+    private Datetime start_time_serialized_name;
+    private Datetime end_time_serialized_name;
+    private String result_type_serialized_name;
+
+    private GetMetricsEventRateOptionsBuilder(GetMetricsEventRateOptions getMetricsEventRateOptions) {
+      start_time_serialized_name = getMetricsEventRateOptions.start_time_serialized_name;
+      end_time_serialized_name = getMetricsEventRateOptions.end_time_serialized_name;
+      result_type_serialized_name = getMetricsEventRateOptions.result_type_serialized_name;
+      this.requestHeaders.putAll(getMetricsEventRateOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetMetricsEventRateOptionsBuilder() {
+    }
+
+    /**
+     * Builds a GetMetricsEventRateOptions.
+     *
+     * @return the getMetricsEventRateOptions
+     */
+    public GetMetricsEventRateOptions build() {
+      return new GetMetricsEventRateOptions(this);
+    }
+
+    /**
+     * Set the start_time_serialized_name.
+     *
+     * @param startTime the startTime
+     * @return the GetMetricsEventRateOptions builder
+     */
+    public GetMetricsEventRateOptionsBuilder startTime(Datetime startTime) {
+      this.start_time_serialized_name = startTime;
+      return this;
+    }
+
+    /**
+     * Set the end_time_serialized_name.
+     *
+     * @param endTime the endTime
+     * @return the GetMetricsEventRateOptions builder
+     */
+    public GetMetricsEventRateOptionsBuilder endTime(Datetime endTime) {
+      this.end_time_serialized_name = endTime;
+      return this;
+    }
+
+    /**
+     * Set the result_type_serialized_name.
+     *
+     * @param resultType the resultType
+     * @return the GetMetricsEventRateOptions builder
+     */
+    public GetMetricsEventRateOptionsBuilder resultType(String resultType) {
+      this.result_type_serialized_name = resultType;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetMetricsEventRateOptions builder
+     */
+    public GetMetricsEventRateOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The getMetricsQueryEvent options.
+   */
+  public class GetMetricsQueryEventOptions extends IBMWatsonOptionsModel {
+    private Datetime start_time_serialized_name;
+    private Datetime end_time_serialized_name;
+    private String result_type_serialized_name;
+    /**
+     * Gets the start_time_serialized_name.
+     *
+     * Metric is computed from data recorded after this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
+     *
+     * @return the start_time_serialized_name
+     */
+    public Datetime startTime() {
+      return start_time_serialized_name;
+    }
+    /**
+     * Gets the end_time_serialized_name.
+     *
+     * Metric is computed from data recorded before this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
+     *
+     * @return the end_time_serialized_name
+     */
+    public Datetime endTime() {
+      return end_time_serialized_name;
+    }
+    /**
+     * Gets the result_type_serialized_name.
+     *
+     * The type of result to consider when calculating the metric.
+     *
+     * @return the result_type_serialized_name
+     */
+    public String resultType() {
+      return result_type_serialized_name;
+    }
+    private GetMetricsQueryEventOptions(GetMetricsQueryEventOptionsBuilder builder) {
+      start_time_serialized_name = builder.start_time_serialized_name;
+      end_time_serialized_name = builder.end_time_serialized_name;
+      result_type_serialized_name = builder.result_type_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetMetricsQueryEventOptions builder
+     */
+    public GetMetricsQueryEventOptionsBuilder newBuilder() {
+      return new GetMetricsQueryEventOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetMetricsQueryEventOptions Builder.
+   */
+  public class GetMetricsQueryEventOptionsBuilder extends IBMWatsonOptionsModel {
+    private Datetime start_time_serialized_name;
+    private Datetime end_time_serialized_name;
+    private String result_type_serialized_name;
+
+    private GetMetricsQueryEventOptionsBuilder(GetMetricsQueryEventOptions getMetricsQueryEventOptions) {
+      start_time_serialized_name = getMetricsQueryEventOptions.start_time_serialized_name;
+      end_time_serialized_name = getMetricsQueryEventOptions.end_time_serialized_name;
+      result_type_serialized_name = getMetricsQueryEventOptions.result_type_serialized_name;
+      this.requestHeaders.putAll(getMetricsQueryEventOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetMetricsQueryEventOptionsBuilder() {
+    }
+
+    /**
+     * Builds a GetMetricsQueryEventOptions.
+     *
+     * @return the getMetricsQueryEventOptions
+     */
+    public GetMetricsQueryEventOptions build() {
+      return new GetMetricsQueryEventOptions(this);
+    }
+
+    /**
+     * Set the start_time_serialized_name.
+     *
+     * @param startTime the startTime
+     * @return the GetMetricsQueryEventOptions builder
+     */
+    public GetMetricsQueryEventOptionsBuilder startTime(Datetime startTime) {
+      this.start_time_serialized_name = startTime;
+      return this;
+    }
+
+    /**
+     * Set the end_time_serialized_name.
+     *
+     * @param endTime the endTime
+     * @return the GetMetricsQueryEventOptions builder
+     */
+    public GetMetricsQueryEventOptionsBuilder endTime(Datetime endTime) {
+      this.end_time_serialized_name = endTime;
+      return this;
+    }
+
+    /**
+     * Set the result_type_serialized_name.
+     *
+     * @param resultType the resultType
+     * @return the GetMetricsQueryEventOptions builder
+     */
+    public GetMetricsQueryEventOptionsBuilder resultType(String resultType) {
+      this.result_type_serialized_name = resultType;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetMetricsQueryEventOptions builder
+     */
+    public GetMetricsQueryEventOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The getMetricsQueryNoResults options.
+   */
+  public class GetMetricsQueryNoResultsOptions extends IBMWatsonOptionsModel {
+    private Datetime start_time_serialized_name;
+    private Datetime end_time_serialized_name;
+    private String result_type_serialized_name;
+    /**
+     * Gets the start_time_serialized_name.
+     *
+     * Metric is computed from data recorded after this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
+     *
+     * @return the start_time_serialized_name
+     */
+    public Datetime startTime() {
+      return start_time_serialized_name;
+    }
+    /**
+     * Gets the end_time_serialized_name.
+     *
+     * Metric is computed from data recorded before this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
+     *
+     * @return the end_time_serialized_name
+     */
+    public Datetime endTime() {
+      return end_time_serialized_name;
+    }
+    /**
+     * Gets the result_type_serialized_name.
+     *
+     * The type of result to consider when calculating the metric.
+     *
+     * @return the result_type_serialized_name
+     */
+    public String resultType() {
+      return result_type_serialized_name;
+    }
+    private GetMetricsQueryNoResultsOptions(GetMetricsQueryNoResultsOptionsBuilder builder) {
+      start_time_serialized_name = builder.start_time_serialized_name;
+      end_time_serialized_name = builder.end_time_serialized_name;
+      result_type_serialized_name = builder.result_type_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetMetricsQueryNoResultsOptions builder
+     */
+    public GetMetricsQueryNoResultsOptionsBuilder newBuilder() {
+      return new GetMetricsQueryNoResultsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetMetricsQueryNoResultsOptions Builder.
+   */
+  public class GetMetricsQueryNoResultsOptionsBuilder extends IBMWatsonOptionsModel {
+    private Datetime start_time_serialized_name;
+    private Datetime end_time_serialized_name;
+    private String result_type_serialized_name;
+
+    private GetMetricsQueryNoResultsOptionsBuilder(GetMetricsQueryNoResultsOptions getMetricsQueryNoResultsOptions) {
+      start_time_serialized_name = getMetricsQueryNoResultsOptions.start_time_serialized_name;
+      end_time_serialized_name = getMetricsQueryNoResultsOptions.end_time_serialized_name;
+      result_type_serialized_name = getMetricsQueryNoResultsOptions.result_type_serialized_name;
+      this.requestHeaders.putAll(getMetricsQueryNoResultsOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetMetricsQueryNoResultsOptionsBuilder() {
+    }
+
+    /**
+     * Builds a GetMetricsQueryNoResultsOptions.
+     *
+     * @return the getMetricsQueryNoResultsOptions
+     */
+    public GetMetricsQueryNoResultsOptions build() {
+      return new GetMetricsQueryNoResultsOptions(this);
+    }
+
+    /**
+     * Set the start_time_serialized_name.
+     *
+     * @param startTime the startTime
+     * @return the GetMetricsQueryNoResultsOptions builder
+     */
+    public GetMetricsQueryNoResultsOptionsBuilder startTime(Datetime startTime) {
+      this.start_time_serialized_name = startTime;
+      return this;
+    }
+
+    /**
+     * Set the end_time_serialized_name.
+     *
+     * @param endTime the endTime
+     * @return the GetMetricsQueryNoResultsOptions builder
+     */
+    public GetMetricsQueryNoResultsOptionsBuilder endTime(Datetime endTime) {
+      this.end_time_serialized_name = endTime;
+      return this;
+    }
+
+    /**
+     * Set the result_type_serialized_name.
+     *
+     * @param resultType the resultType
+     * @return the GetMetricsQueryNoResultsOptions builder
+     */
+    public GetMetricsQueryNoResultsOptionsBuilder resultType(String resultType) {
+      this.result_type_serialized_name = resultType;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetMetricsQueryNoResultsOptions builder
+     */
+    public GetMetricsQueryNoResultsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The getMetricsQuery options.
+   */
+  public class GetMetricsQueryOptions extends IBMWatsonOptionsModel {
+    private Datetime start_time_serialized_name;
+    private Datetime end_time_serialized_name;
+    private String result_type_serialized_name;
+    /**
+     * Gets the start_time_serialized_name.
+     *
+     * Metric is computed from data recorded after this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
+     *
+     * @return the start_time_serialized_name
+     */
+    public Datetime startTime() {
+      return start_time_serialized_name;
+    }
+    /**
+     * Gets the end_time_serialized_name.
+     *
+     * Metric is computed from data recorded before this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
+     *
+     * @return the end_time_serialized_name
+     */
+    public Datetime endTime() {
+      return end_time_serialized_name;
+    }
+    /**
+     * Gets the result_type_serialized_name.
+     *
+     * The type of result to consider when calculating the metric.
+     *
+     * @return the result_type_serialized_name
+     */
+    public String resultType() {
+      return result_type_serialized_name;
+    }
+    private GetMetricsQueryOptions(GetMetricsQueryOptionsBuilder builder) {
+      start_time_serialized_name = builder.start_time_serialized_name;
+      end_time_serialized_name = builder.end_time_serialized_name;
+      result_type_serialized_name = builder.result_type_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetMetricsQueryOptions builder
+     */
+    public GetMetricsQueryOptionsBuilder newBuilder() {
+      return new GetMetricsQueryOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetMetricsQueryOptions Builder.
+   */
+  public class GetMetricsQueryOptionsBuilder extends IBMWatsonOptionsModel {
+    private Datetime start_time_serialized_name;
+    private Datetime end_time_serialized_name;
+    private String result_type_serialized_name;
+
+    private GetMetricsQueryOptionsBuilder(GetMetricsQueryOptions getMetricsQueryOptions) {
+      start_time_serialized_name = getMetricsQueryOptions.start_time_serialized_name;
+      end_time_serialized_name = getMetricsQueryOptions.end_time_serialized_name;
+      result_type_serialized_name = getMetricsQueryOptions.result_type_serialized_name;
+      this.requestHeaders.putAll(getMetricsQueryOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetMetricsQueryOptionsBuilder() {
+    }
+
+    /**
+     * Builds a GetMetricsQueryOptions.
+     *
+     * @return the getMetricsQueryOptions
+     */
+    public GetMetricsQueryOptions build() {
+      return new GetMetricsQueryOptions(this);
+    }
+
+    /**
+     * Set the start_time_serialized_name.
+     *
+     * @param startTime the startTime
+     * @return the GetMetricsQueryOptions builder
+     */
+    public GetMetricsQueryOptionsBuilder startTime(Datetime startTime) {
+      this.start_time_serialized_name = startTime;
+      return this;
+    }
+
+    /**
+     * Set the end_time_serialized_name.
+     *
+     * @param endTime the endTime
+     * @return the GetMetricsQueryOptions builder
+     */
+    public GetMetricsQueryOptionsBuilder endTime(Datetime endTime) {
+      this.end_time_serialized_name = endTime;
+      return this;
+    }
+
+    /**
+     * Set the result_type_serialized_name.
+     *
+     * @param resultType the resultType
+     * @return the GetMetricsQueryOptions builder
+     */
+    public GetMetricsQueryOptionsBuilder resultType(String resultType) {
+      this.result_type_serialized_name = resultType;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetMetricsQueryOptions builder
+     */
+    public GetMetricsQueryOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The getMetricsQueryTokenEvent options.
+   */
+  public class GetMetricsQueryTokenEventOptions extends IBMWatsonOptionsModel {
+    private Long count_serialized_name;
+    /**
+     * Gets the count_serialized_name.
+     *
+     * Number of results to return.
+     *
+     * @return the count_serialized_name
+     */
+    public Long count() {
+      return count_serialized_name;
+    }
+    private GetMetricsQueryTokenEventOptions(GetMetricsQueryTokenEventOptionsBuilder builder) {
+      count_serialized_name = builder.count_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetMetricsQueryTokenEventOptions builder
+     */
+    public GetMetricsQueryTokenEventOptionsBuilder newBuilder() {
+      return new GetMetricsQueryTokenEventOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetMetricsQueryTokenEventOptions Builder.
+   */
+  public class GetMetricsQueryTokenEventOptionsBuilder extends IBMWatsonOptionsModel {
+    private Long count_serialized_name;
+
+    private GetMetricsQueryTokenEventOptionsBuilder(GetMetricsQueryTokenEventOptions getMetricsQueryTokenEventOptions) {
+      count_serialized_name = getMetricsQueryTokenEventOptions.count_serialized_name;
+      this.requestHeaders.putAll(getMetricsQueryTokenEventOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetMetricsQueryTokenEventOptionsBuilder() {
+    }
+
+    /**
+     * Builds a GetMetricsQueryTokenEventOptions.
+     *
+     * @return the getMetricsQueryTokenEventOptions
+     */
+    public GetMetricsQueryTokenEventOptions build() {
+      return new GetMetricsQueryTokenEventOptions(this);
+    }
+
+    /**
+     * Set the count_serialized_name.
+     *
+     * @param count the count
+     * @return the GetMetricsQueryTokenEventOptions builder
+     */
+    public GetMetricsQueryTokenEventOptionsBuilder count(Long count) {
+      this.count_serialized_name = count;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetMetricsQueryTokenEventOptions builder
+     */
+    public GetMetricsQueryTokenEventOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -9346,48 +9950,6 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * **Deprecated**: Summary of the memory usage statistics for this environment.
-   */
-  public class MemoryUsage extends IBMWatsonGenericModel {
-    private Long used_bytes_serialized_name;
-    private Long total_bytes_serialized_name;
-    private String used_serialized_name;
-    private String total_serialized_name;
-    private Double percent_used_serialized_name;
-    /**
-     * Gets the used_bytes_serialized_name.
-     *
-     * **Deprecated**: Number of bytes used in the environment's memory capacity.
-     *
-     * @return the used_bytes_serialized_name
-     */
-    @AuraEnabled
-    public Long getUsedBytes() {
-      return used_bytes_serialized_name;
-    }
-    /**
-     * Gets the total_bytes_serialized_name.
-     *
-     * **Deprecated**: Total number of bytes available in the environment's memory capacity.
-     *
-     * @return the total_bytes_serialized_name
-     */
-    @AuraEnabled
-    public Long getTotalBytes() {
-      return total_bytes_serialized_name;
-    }
-    /**
-     * Gets the used_serialized_name.
-     *
-     * **Deprecated**: Amount of memory capacity used, in KB or GB format.
-     *
-     * @return the used_serialized_name
-     */
-    @AuraEnabled
-    public String getUsed() {
-      return used_serialized_name;
-
-  /**
    * Object containing results that match the requested **logs** query.
    */
   public class LogQueryResponse extends IBMWatsonResponseModel {
@@ -9982,6 +10544,50 @@ public class IBMDiscoveryV1Models {
 
       return ret;
     }
+  }
+
+  /**
+   * **Deprecated**: Summary of the memory usage statistics for this environment.
+   */
+  public class MemoryUsage extends IBMWatsonGenericModel {
+    private Long used_bytes_serialized_name;
+    private Long total_bytes_serialized_name;
+    private String used_serialized_name;
+    private String total_serialized_name;
+    private Double percent_used_serialized_name;
+    /**
+     * Gets the used_bytes_serialized_name.
+     *
+     * **Deprecated**: Number of bytes used in the environment's memory capacity.
+     *
+     * @return the used_bytes_serialized_name
+     */
+    @AuraEnabled
+    public Long getUsedBytes() {
+      return used_bytes_serialized_name;
+    }
+    /**
+     * Gets the total_bytes_serialized_name.
+     *
+     * **Deprecated**: Total number of bytes available in the environment's memory capacity.
+     *
+     * @return the total_bytes_serialized_name
+     */
+    @AuraEnabled
+    public Long getTotalBytes() {
+      return total_bytes_serialized_name;
+    }
+    /**
+     * Gets the used_serialized_name.
+     *
+     * **Deprecated**: Amount of memory capacity used, in KB or GB format.
+     *
+     * @return the used_serialized_name
+     */
+    @AuraEnabled
+    public String getUsed() {
+      return used_serialized_name;
+    }
     /**
      * Gets the total_serialized_name.
      *
@@ -10011,6 +10617,442 @@ public class IBMDiscoveryV1Models {
       }
 
       MemoryUsage ret = (MemoryUsage) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An aggregation analyzing log information for queries and events.
+   */
+  public class MetricAggregation extends IBMWatsonGenericModel {
+    private String interval_serialized_name;
+    private String event_type_serialized_name;
+    private List<MetricAggregationResult> results_serialized_name;
+    /**
+     * Gets the interval_serialized_name.
+     *
+     * The measurement interval for this metric. Metric intervals are always 1 day (`1d`).
+     *
+     * @return the interval_serialized_name
+     */
+    @AuraEnabled
+    public String getInterval() {
+      return interval_serialized_name;
+    }
+    /**
+     * Gets the event_type_serialized_name.
+     *
+     * The event type associated with this metric result. This field, when present, will always be `click`.
+     *
+     * @return the event_type_serialized_name
+     */
+    @AuraEnabled
+    public String getEventType() {
+      return event_type_serialized_name;
+    }
+    /**
+     * Gets the results_serialized_name.
+     *
+     * @return the results_serialized_name
+     */
+    @AuraEnabled
+    public List<MetricAggregationResult> getResults() {
+      return results_serialized_name;
+    }
+
+    /**
+     * Sets the interval_serialized_name.
+     *
+     * @param interval the new interval
+     */
+    public void setInterval(final String interval) {
+      this.interval_serialized_name = interval;
+    }
+
+    /**
+     * Sets the event_type_serialized_name.
+     *
+     * @param eventType the new eventType
+     */
+    public void setEventType(final String eventType) {
+      this.event_type_serialized_name = eventType;
+    }
+
+    /**
+     * Sets the results_serialized_name.
+     *
+     * @param results the new results
+     */
+    public void setResults(final List<MetricAggregationResult> results) {
+      this.results_serialized_name = results;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      MetricAggregation ret = (MetricAggregation) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for results_serialized_name
+      List<MetricAggregationResult> newResults = new List<MetricAggregationResult>();
+      List<MetricAggregationResult> deserializedResults = ret.getResults();
+      if (deserializedResults != null) {
+        for (Integer i = 0; i < deserializedResults.size(); i++) {
+          MetricAggregationResult currentItem = ret.getResults().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          MetricAggregationResult newItem = (MetricAggregationResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricAggregationResult.class);
+          newResults.add(newItem);
+        }
+        ret.setResults(newResults);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Aggregation result data for the requested metric.
+   */
+  public class MetricAggregationResult extends IBMWatsonGenericModel {
+    private Datetime key_as_string_serialized_name;
+    private Long key_serialized_name;
+    private Long matching_results_serialized_name;
+    private Double event_rate_serialized_name;
+    /**
+     * Gets the key_as_string_serialized_name.
+     *
+     * Date in string form representing the start of this interval.
+     *
+     * @return the key_as_string_serialized_name
+     */
+    @AuraEnabled
+    public Datetime getKeyAsString() {
+      return key_as_string_serialized_name;
+    }
+    /**
+     * Gets the key_serialized_name.
+     *
+     * Unix epoch time equivalent of the **key_as_string**, that represents the start of this interval.
+     *
+     * @return the key_serialized_name
+     */
+    @AuraEnabled
+    public Long getKey() {
+      return key_serialized_name;
+    }
+    /**
+     * Gets the matching_results_serialized_name.
+     *
+     * Number of matching results.
+     *
+     * @return the matching_results_serialized_name
+     */
+    @AuraEnabled
+    public Long getMatchingResults() {
+      return matching_results_serialized_name;
+    }
+    /**
+     * Gets the event_rate_serialized_name.
+     *
+     * The number of queries with associated events divided by the total number of queries for the interval. Only
+     * returned with **event_rate** metrics.
+     *
+     * @return the event_rate_serialized_name
+     */
+    @AuraEnabled
+    public Double getEventRate() {
+      return event_rate_serialized_name;
+    }
+
+    /**
+     * Sets the key_as_string_serialized_name.
+     *
+     * @param keyAsString the new keyAsString
+     */
+    public void setKeyAsString(final Datetime keyAsString) {
+      this.key_as_string_serialized_name = keyAsString;
+    }
+
+    /**
+     * Sets the key_serialized_name.
+     *
+     * @param key the new key
+     */
+    public void setKey(final long key) {
+      this.key_serialized_name = key;
+    }
+
+    /**
+     * Sets the matching_results_serialized_name.
+     *
+     * @param matchingResults the new matchingResults
+     */
+    public void setMatchingResults(final long matchingResults) {
+      this.matching_results_serialized_name = matchingResults;
+    }
+
+    /**
+     * Sets the event_rate_serialized_name.
+     *
+     * @param eventRate the new eventRate
+     */
+    public void setEventRate(final Double eventRate) {
+      this.event_rate_serialized_name = eventRate;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      MetricAggregationResult ret = (MetricAggregationResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * The response generated from a call to a **metrics** method.
+   */
+  public class MetricResponse extends IBMWatsonResponseModel {
+    private List<MetricAggregation> aggregations_serialized_name;
+    /**
+     * Gets the aggregations_serialized_name.
+     *
+     * @return the aggregations_serialized_name
+     */
+    @AuraEnabled
+    public List<MetricAggregation> getAggregations() {
+      return aggregations_serialized_name;
+    }
+
+    /**
+     * Sets the aggregations_serialized_name.
+     *
+     * @param aggregations the new aggregations
+     */
+    public void setAggregations(final List<MetricAggregation> aggregations) {
+      this.aggregations_serialized_name = aggregations;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      MetricResponse ret = (MetricResponse) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for aggregations_serialized_name
+      List<MetricAggregation> newAggregations = new List<MetricAggregation>();
+      List<MetricAggregation> deserializedAggregations = ret.getAggregations();
+      if (deserializedAggregations != null) {
+        for (Integer i = 0; i < deserializedAggregations.size(); i++) {
+          MetricAggregation currentItem = ret.getAggregations().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations_serialized_name');
+          MetricAggregation newItem = (MetricAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricAggregation.class);
+          newAggregations.add(newItem);
+        }
+        ret.setAggregations(newAggregations);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * An aggregation analyzing log information for queries and events.
+   */
+  public class MetricTokenAggregation extends IBMWatsonGenericModel {
+    private String event_type_serialized_name;
+    private List<MetricTokenAggregationResult> results_serialized_name;
+    /**
+     * Gets the event_type_serialized_name.
+     *
+     * The event type associated with this metric result. This field, when present, will always be `click`.
+     *
+     * @return the event_type_serialized_name
+     */
+    @AuraEnabled
+    public String getEventType() {
+      return event_type_serialized_name;
+    }
+    /**
+     * Gets the results_serialized_name.
+     *
+     * @return the results_serialized_name
+     */
+    @AuraEnabled
+    public List<MetricTokenAggregationResult> getResults() {
+      return results_serialized_name;
+    }
+
+    /**
+     * Sets the event_type_serialized_name.
+     *
+     * @param eventType the new eventType
+     */
+    public void setEventType(final String eventType) {
+      this.event_type_serialized_name = eventType;
+    }
+
+    /**
+     * Sets the results_serialized_name.
+     *
+     * @param results the new results
+     */
+    public void setResults(final List<MetricTokenAggregationResult> results) {
+      this.results_serialized_name = results;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      MetricTokenAggregation ret = (MetricTokenAggregation) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for results_serialized_name
+      List<MetricTokenAggregationResult> newResults = new List<MetricTokenAggregationResult>();
+      List<MetricTokenAggregationResult> deserializedResults = ret.getResults();
+      if (deserializedResults != null) {
+        for (Integer i = 0; i < deserializedResults.size(); i++) {
+          MetricTokenAggregationResult currentItem = ret.getResults().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          MetricTokenAggregationResult newItem = (MetricTokenAggregationResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricTokenAggregationResult.class);
+          newResults.add(newItem);
+        }
+        ret.setResults(newResults);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Aggregation result data for the requested metric.
+   */
+  public class MetricTokenAggregationResult extends IBMWatsonGenericModel {
+    private String key_serialized_name;
+    private Long matching_results_serialized_name;
+    private Double event_rate_serialized_name;
+    /**
+     * Gets the key_serialized_name.
+     *
+     * The content of the **natural_language_query** parameter used in the query that this result represents.
+     *
+     * @return the key_serialized_name
+     */
+    @AuraEnabled
+    public String getKey() {
+      return key_serialized_name;
+    }
+    /**
+     * Gets the matching_results_serialized_name.
+     *
+     * Number of matching results.
+     *
+     * @return the matching_results_serialized_name
+     */
+    @AuraEnabled
+    public Long getMatchingResults() {
+      return matching_results_serialized_name;
+    }
+    /**
+     * Gets the event_rate_serialized_name.
+     *
+     * The number of queries with associated events divided by the total number of queries currently stored (queries and
+     * events are stored in the log for 30 days).
+     *
+     * @return the event_rate_serialized_name
+     */
+    @AuraEnabled
+    public Double getEventRate() {
+      return event_rate_serialized_name;
+    }
+
+    /**
+     * Sets the key_serialized_name.
+     *
+     * @param key the new key
+     */
+    public void setKey(final String key) {
+      this.key_serialized_name = key;
+    }
+
+    /**
+     * Sets the matching_results_serialized_name.
+     *
+     * @param matchingResults the new matchingResults
+     */
+    public void setMatchingResults(final long matchingResults) {
+      this.matching_results_serialized_name = matchingResults;
+    }
+
+    /**
+     * Sets the event_rate_serialized_name.
+     *
+     * @param eventRate the new eventRate
+     */
+    public void setEventRate(final Double eventRate) {
+      this.event_rate_serialized_name = eventRate;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      MetricTokenAggregationResult ret = (MetricTokenAggregationResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * The response generated from a call to a **metrics** method that evaluates tokens.
+   */
+  public class MetricTokenResponse extends IBMWatsonResponseModel {
+    private List<MetricTokenAggregation> aggregations_serialized_name;
+    /**
+     * Gets the aggregations_serialized_name.
+     *
+     * @return the aggregations_serialized_name
+     */
+    @AuraEnabled
+    public List<MetricTokenAggregation> getAggregations() {
+      return aggregations_serialized_name;
+    }
+
+    /**
+     * Sets the aggregations_serialized_name.
+     *
+     * @param aggregations the new aggregations
+     */
+    public void setAggregations(final List<MetricTokenAggregation> aggregations) {
+      this.aggregations_serialized_name = aggregations;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      MetricTokenResponse ret = (MetricTokenResponse) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for aggregations_serialized_name
+      List<MetricTokenAggregation> newAggregations = new List<MetricTokenAggregation>();
+      List<MetricTokenAggregation> deserializedAggregations = ret.getAggregations();
+      if (deserializedAggregations != null) {
+        for (Integer i = 0; i < deserializedAggregations.size(); i++) {
+          MetricTokenAggregation currentItem = ret.getAggregations().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('aggregations_serialized_name');
+          MetricTokenAggregation newItem = (MetricTokenAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricTokenAggregation.class);
+          newAggregations.add(newItem);
+        }
+        ret.setAggregations(newAggregations);
+      }
 
       return ret;
     }
@@ -11424,272 +12466,294 @@ public class IBMDiscoveryV1Models {
    * An aggregation produced by the Discovery service to analyze the input provided.
    */
   public class QueryAggregation extends IBMWatsonGenericModel {
-    private Long count_serialized_name;
-    private String field_serialized_name;
-    private Double value_serialized_name;
-    private String match_serialized_name;
-    private String path_serialized_name;
-    private String interval_serialized_name;
-    private Boolean anomaly_serialized_name;
-    private Long size_serialized_name;
-    private TopHitsResults hits_serialized_name;
     private String type_serialized_name;
     private List<AggregationResult> results_serialized_name;
     private Long matching_results_serialized_name;
     private List<QueryAggregation> aggregations_serialized_name;
+    private String field_serialized_name;
+    private Long histogram_interval_serialized_name;
+    private String timeslice_interval_serialized_name;
+    private Double value_serialized_name;
+    private Long count_serialized_name;
+    private String match_serialized_name;
+    private String path_serialized_name;
+    private Boolean anomaly_serialized_name;
+    private Long size_serialized_name;
+    private TopHitsResults hits_serialized_name;
     /**
-    * Gets the field_serialized_name.
-    *
-    * The field where the aggregation is located in the document.
-    *
-    * @return the field_serialized_name
-    */
-    @AuraEnabled
-    public String getField() {
-      return field_serialized_name;
-    }
-    /**
-    * Gets the count_serialized_name.
-    *
-    * @return the count_serialized_name
-    */
-    @AuraEnabled
-    public Long getCount() {
-      return count_serialized_name;
-    }
-    /**
-    * Gets the value_serialized_name.
-    *
-    * Value of the aggregation.
-    *
-    * @return the value_serialized_name
-    */
-    @AuraEnabled
-    public Double getValue() {
-      return value_serialized_name;
-    }
-    /**
-    * Gets the match_serialized_name.
-    *
-    * The match the aggregated results queried for.
-    *
-    * @return the match_serialized_name
-    */
-    @AuraEnabled
-    public String getMatch() {
-      return match_serialized_name;
-    }
-    /**
-    * Gets the path_serialized_name.
-    *
-    * The area of the results the aggregation was restricted to.
-    *
-    * @return the path_serialized_name
-    */
-    @AuraEnabled
-    public String getPath() {
-      return path_serialized_name;
-    }
-    /**
-    * Gets the interval_serialized_name.
-    *
-    * Interval of the aggregation. Valid date interval values are second/seconds minute/minutes, hour/hours, day/days, week/weeks, month/months, and year/years.
-    *
-    * @return the interval_serialized_name
-    */
-    @AuraEnabled
-    public String getInterval() {
-      return interval_serialized_name;
-    }
-    /**
-    * Gets the anomaly_serialized_name.
-    *
-    * Used to indicate that anomaly detection should be performed. Anomaly detection is used to locate unusual datapoints within a time series.
-    *
-    * @return the anomaly_serialized_name
-    */
-    @AuraEnabled
-    public Boolean getAnomaly() {
-      return anomaly_serialized_name;
-    }
-    /**
-    * Gets the size_serialized_name.
-    *
-    * Number of top hits returned by the aggregation.
-    *
-    * @return the size_serialized_name
-    */
-    @AuraEnabled
-    public Long getSize() {
-      return size_serialized_name;
-    }
-    /**
-    * Gets the hits_serialized_name.
-    *
-    * @return the hits_serialized_name
-    */
-    @AuraEnabled
-    public TopHitsResults getHits() {
-      return hits_serialized_name;
-    }
-    /**
-    * Gets the type_serialized_name.
-    *
-    * The type of aggregation command used. For example: term, filter, max, min, etc.
-    *
-    * @return the type_serialized_name
-    */
+     * Gets the type_serialized_name.
+     *
+     * The type of aggregation command used. For example: term, filter, max, min, etc.
+     *
+     * @return the type_serialized_name
+     */
     @AuraEnabled
     public String getType() {
       return type_serialized_name;
     }
     /**
-    * Gets the results_serialized_name.
-    *
-    * @return the results_serialized_name
-    */
+     * Gets the results_serialized_name.
+     *
+     * @return the results_serialized_name
+     */
     @AuraEnabled
     public List<AggregationResult> getResults() {
       return results_serialized_name;
     }
     /**
-    * Gets the matching_results_serialized_name.
-    *
-    * Number of matching results.
-    *
-    * @return the matching_results_serialized_name
-    */
+     * Gets the matching_results_serialized_name.
+     *
+     * Number of matching results.
+     *
+     * @return the matching_results_serialized_name
+     */
     @AuraEnabled
     public Long getMatchingResults() {
       return matching_results_serialized_name;
     }
     /**
-    * Gets the aggregations_serialized_name.
-    *
-    * Aggregations returned by the Discovery service.
-    *
-    * @return the aggregations_serialized_name
-    */
+     * Gets the aggregations_serialized_name.
+     *
+     * Aggregations returned by the Discovery service.
+     *
+     * @return the aggregations_serialized_name
+     */
     @AuraEnabled
     public List<QueryAggregation> getAggregations() {
       return aggregations_serialized_name;
     }
-
     /**
-    * Sets the value_serialized_name.
-    *
-    * @param value the new value
-    */
-    public void setValue(final Double value) {
-      this.value_serialized_name = value;
+     * Gets the field_serialized_name.
+     *
+     * The field where the aggregation is located in the document.
+     *
+     * @return the field_serialized_name
+     */
+    @AuraEnabled
+    public String getField() {
+      return field_serialized_name;
+    }
+    /**
+     * Gets the histogram_interval_serialized_name.
+     *
+     * Interval of the aggregation. (For 'histogram' type).
+     *
+     * @return the histogram_interval_serialized_name
+     */
+    @AuraEnabled
+    public Long getHistogramInterval() {
+      return histogram_interval_serialized_name;
+    }
+    /**
+     * Gets the timeslice_interval_serialized_name.
+     *
+     * Interval of the aggregation. Valid date interval values are second/seconds minute/minutes, hour/hours, day/days, week/weeks, month/months, and year/years.
+     *
+     * @return the timeslice_interval_serialized_name
+     */
+    @AuraEnabled
+    public String getTimesliceInterval() {
+      return timeslice_interval_serialized_name;
+    }
+    /**
+     * Gets the value_serialized_name.
+     *
+     * Value of the aggregation.
+     *
+     * @return the value_serialized_name
+     */
+    @AuraEnabled
+    public Double getValue() {
+      return value_serialized_name;
+    }
+    /**
+     * Gets the count_serialized_name.
+     *
+     * @return the count_serialized_name
+     */
+    @AuraEnabled
+    public Long getCount() {
+      return count_serialized_name;
+    }
+    /**
+     * Gets the match_serialized_name.
+     *
+     * The match the aggregated results queried for.
+     *
+     * @return the match_serialized_name
+     */
+    @AuraEnabled
+    public String getMatch() {
+      return match_serialized_name;
+    }
+    /**
+     * Gets the path_serialized_name.
+     *
+     * The area of the results the aggregation was restricted to.
+     *
+     * @return the path_serialized_name
+     */
+    @AuraEnabled
+    public String getPath() {
+      return path_serialized_name;
+    }
+    /**
+     * Gets the anomaly_serialized_name.
+     *
+     * Used to indicate that anomaly detection should be performed. Anomaly detection is used to locate unusual
+     * datapoints within a time series.
+     *
+     * @return the anomaly_serialized_name
+     */
+    @AuraEnabled
+    public Boolean getAnomaly() {
+      return anomaly_serialized_name;
+    }
+    /**
+     * Gets the size_serialized_name.
+     *
+     * Number of top hits returned by the aggregation.
+     *
+     * @return the size_serialized_name
+     */
+    @AuraEnabled
+    public Long getSize() {
+      return size_serialized_name;
+    }
+    /**
+     * Gets the hits_serialized_name.
+     *
+     * @return the hits_serialized_name
+     */
+    @AuraEnabled
+    public TopHitsResults getHits() {
+      return hits_serialized_name;
     }
 
     /**
-    * Sets the match_serialized_name.
-    *
-    * @param match the new match
-    */
-    public void setMatch(final String match) {
-      this.match_serialized_name = match;
-    }
-
-    /**
-    * Sets the path_serialized_name.
-    *
-    * @param path the new path
-    */
-    public void setPath(final String path) {
-      this.path_serialized_name = path;
-    }
-
-    /**
-    * Sets the field_serialized_name.
-    *
-    * @param field the new field
-    */
-    public void setField(final String field) {
-      this.field_serialized_name = field;
-    }
-
-    /**
-    * Sets the interval_serialized_name.
-    *
-    * @param interval the new interval
-    */
-    public void setInterval(final String interval) {
-      this.interval_serialized_name = interval;
-    }
-
-    /**
-    * Sets the anomaly_serialized_name.
-    *
-    * @param anomaly the new anomaly
-    */
-    public void setAnomaly(final Boolean anomaly) {
-      this.anomaly_serialized_name = anomaly;
-    }
-
-    /**
-    * Sets the size_serialized_name.
-    *
-    * @param size the new size
-    */
-    public void setSize(final long size) {
-      this.size_serialized_name = size;
-    }
-
-    /**
-    * Sets the hits_serialized_name.
-    *
-    * @param hits the new hits
-    */
-    public void setHits(final TopHitsResults hits) {
-      this.hits_serialized_name = hits;
-    }
-
-    /**
-    * Sets the type_serialized_name.
-    *
-    * @param typeVar the new typeVar
-    */
+     * Sets the type_serialized_name.
+     *
+     * @param typeVar the new typeVar
+     */
     public void setType(final String typeVar) {
       this.type_serialized_name = typeVar;
     }
 
     /**
-    * Sets the results_serialized_name.
-    *
-    * @param results the new results
-    */
+     * Sets the results_serialized_name.
+     *
+     * @param results the new results
+     */
     public void setResults(final List<AggregationResult> results) {
       this.results_serialized_name = results;
     }
 
     /**
-    * Sets the matching_results_serialized_name.
-    *
-    * @param matchingResults the new matchingResults
-    */
+     * Sets the matching_results_serialized_name.
+     *
+     * @param matchingResults the new matchingResults
+     */
     public void setMatchingResults(final long matchingResults) {
       this.matching_results_serialized_name = matchingResults;
     }
 
     /**
-    * Sets the aggregations_serialized_name.
-    *
-    * @param aggregations the new aggregations
-    */
+     * Sets the aggregations_serialized_name.
+     *
+     * @param aggregations the new aggregations
+     */
     public void setAggregations(final List<QueryAggregation> aggregations) {
       this.aggregations_serialized_name = aggregations;
     }
 
     /**
-    * Sets the count_serialized_name.
-    *
-    * @param count the new count
-    */
+     * Sets the field_serialized_name.
+     *
+     * @param field the new field
+     */
+    public void setField(final String field) {
+      this.field_serialized_name = field;
+    }
+
+    /**
+     * Sets the histogram_interval_serialized_name.
+     *
+     * @param interval the new interval
+     */
+    public void setHistogramInterval(final long interval) {
+      this.histogram_interval_serialized_name = interval;
+    }
+
+    /**
+     * Sets the timeslice_interval_serialized_name.
+     *
+     * @param interval the new interval
+     */
+    public void setTimesliceInterval(final String interval) {
+      this.timeslice_interval_serialized_name = interval;
+    }
+
+    /**
+     * Sets the value_serialized_name.
+     *
+     * @param value the new value
+     */
+    public void setValue(final Double value) {
+      this.value_serialized_name = value;
+    }
+
+    /**
+     * Sets the count_serialized_name.
+     *
+     * @param count the new count
+     */
     public void setCount(final long count) {
       this.count_serialized_name = count;
+    }
+
+    /**
+     * Sets the match_serialized_name.
+     *
+     * @param match the new match
+     */
+    public void setMatch(final String match) {
+      this.match_serialized_name = match;
+    }
+
+    /**
+     * Sets the path_serialized_name.
+     *
+     * @param path the new path
+     */
+    public void setPath(final String path) {
+      this.path_serialized_name = path;
+    }
+
+    /**
+     * Sets the anomaly_serialized_name.
+     *
+     * @param anomaly the new anomaly
+     */
+    public void setAnomaly(final Boolean anomaly) {
+      this.anomaly_serialized_name = anomaly;
+    }
+
+    /**
+     * Sets the size_serialized_name.
+     *
+     * @param size the new size
+     */
+    public void setSize(final long size) {
+      this.size_serialized_name = size;
+    }
+
+    /**
+     * Sets the hits_serialized_name.
+     *
+     * @param hits the new hits
+     */
+    public void setHits(final TopHitsResults hits) {
+      this.hits_serialized_name = hits;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12794,7 +13858,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the count_serialized_name.
      *
-     * Number of documents to return.
+     * Number of results to return.
      *
      * @return the count_serialized_name
      */
@@ -13848,7 +14912,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the count_serialized_name.
      *
-     * Number of documents to return.
+     * Number of results to return.
      *
      * @return the count_serialized_name
      */
@@ -17218,17 +18282,7 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      String data_updated = (String) jsonMap.remove('data_updated_serialized_name');
-      String successfully_trained = (String) jsonMap.remove('successfully_trained_serialized_name');
-      String jsonStringWithoutDates = JSON.serialize(jsonMap);
-
-      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
-      if (String.isNotBlank(data_updated)) {
-        ret.setDataUpdated((Datetime) JSON.deserialize('"' + data_updated + '"', Datetime.class));
-      }
-      if (String.isNotBlank(successfully_trained)) {
-        ret.setSuccessfullyTrained((Datetime) JSON.deserialize('"' + successfully_trained + '"', Datetime.class));
-      }
+      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }

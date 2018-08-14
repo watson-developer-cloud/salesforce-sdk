@@ -1475,6 +1475,157 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
+   * Percentage of queries with an associated event.
+   *
+   * The percentage of queries using the **natural_language_query** parameter that have a corresponding \"click\" event
+   * over a specified time window.  This metric requires having integrated event tracking in your application using the
+   * **Events** API.
+   *
+   * @param getMetricsEventRateOptions the {@link IBMDiscoveryV1Models.GetMetricsEventRateOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.MetricResponse} with the response
+   */
+  public IBMDiscoveryV1Models.MetricResponse getMetricsEventRate(IBMDiscoveryV1Models.GetMetricsEventRateOptions getMetricsEventRateOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/metrics/event_rate');
+    Map<String, String> requestHeaders = (getMetricsEventRateOptions != null) ? getMetricsEventRateOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (getMetricsEventRateOptions != null && getMetricsEventRateOptions.startTime() != null) {
+      builder.query('start_time', String.valueOf(getMetricsEventRateOptions.startTime()));
+    }
+    if (getMetricsEventRateOptions != null && getMetricsEventRateOptions.endTime() != null) {
+      builder.query('end_time', String.valueOf(getMetricsEventRateOptions.endTime()));
+    }
+    if (getMetricsEventRateOptions != null && getMetricsEventRateOptions.resultType() != null) {
+      builder.query('result_type', getMetricsEventRateOptions.resultType());
+    }
+
+    return (IBMDiscoveryV1Models.MetricResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.MetricResponse.class);
+  }
+
+  /**
+   * Number of queries over time.
+   *
+   * Total number of queries using the **natural_language_query** parameter over a specific time window.
+   *
+   * @param getMetricsQueryOptions the {@link IBMDiscoveryV1Models.GetMetricsQueryOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.MetricResponse} with the response
+   */
+  public IBMDiscoveryV1Models.MetricResponse getMetricsQuery(IBMDiscoveryV1Models.GetMetricsQueryOptions getMetricsQueryOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/metrics/number_of_queries');
+    Map<String, String> requestHeaders = (getMetricsQueryOptions != null) ? getMetricsQueryOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (getMetricsQueryOptions != null && getMetricsQueryOptions.startTime() != null) {
+      builder.query('start_time', String.valueOf(getMetricsQueryOptions.startTime()));
+    }
+    if (getMetricsQueryOptions != null && getMetricsQueryOptions.endTime() != null) {
+      builder.query('end_time', String.valueOf(getMetricsQueryOptions.endTime()));
+    }
+    if (getMetricsQueryOptions != null && getMetricsQueryOptions.resultType() != null) {
+      builder.query('result_type', getMetricsQueryOptions.resultType());
+    }
+
+    return (IBMDiscoveryV1Models.MetricResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.MetricResponse.class);
+  }
+
+  /**
+   * Number of queries with an event over time.
+   *
+   * Total number of queries using the **natural_language_query** parameter that have a corresponding \"click\" event
+   * over a specified time window. This metric requires having integrated event tracking in your application using the
+   * **Events** API.
+   *
+   * @param getMetricsQueryEventOptions the {@link IBMDiscoveryV1Models.GetMetricsQueryEventOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.MetricResponse} with the response
+   */
+  public IBMDiscoveryV1Models.MetricResponse getMetricsQueryEvent(IBMDiscoveryV1Models.GetMetricsQueryEventOptions getMetricsQueryEventOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/metrics/number_of_queries_with_event');
+    Map<String, String> requestHeaders = (getMetricsQueryEventOptions != null) ? getMetricsQueryEventOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (getMetricsQueryEventOptions != null && getMetricsQueryEventOptions.startTime() != null) {
+      builder.query('start_time', String.valueOf(getMetricsQueryEventOptions.startTime()));
+    }
+    if (getMetricsQueryEventOptions != null && getMetricsQueryEventOptions.endTime() != null) {
+      builder.query('end_time', String.valueOf(getMetricsQueryEventOptions.endTime()));
+    }
+    if (getMetricsQueryEventOptions != null && getMetricsQueryEventOptions.resultType() != null) {
+      builder.query('result_type', getMetricsQueryEventOptions.resultType());
+    }
+
+    return (IBMDiscoveryV1Models.MetricResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.MetricResponse.class);
+  }
+
+  /**
+   * Number of queries with no search results over time.
+   *
+   * Total number of queries using the **natural_language_query** parameter that have no results returned over a
+   * specified time window.
+   *
+   * @param getMetricsQueryNoResultsOptions the {@link IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.MetricResponse} with the response
+   */
+  public IBMDiscoveryV1Models.MetricResponse getMetricsQueryNoResults(IBMDiscoveryV1Models.GetMetricsQueryNoResultsOptions getMetricsQueryNoResultsOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/metrics/number_of_queries_with_no_search_results');
+    Map<String, String> requestHeaders = (getMetricsQueryNoResultsOptions != null) ? getMetricsQueryNoResultsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (getMetricsQueryNoResultsOptions != null && getMetricsQueryNoResultsOptions.startTime() != null) {
+      builder.query('start_time', String.valueOf(getMetricsQueryNoResultsOptions.startTime()));
+    }
+    if (getMetricsQueryNoResultsOptions != null && getMetricsQueryNoResultsOptions.endTime() != null) {
+      builder.query('end_time', String.valueOf(getMetricsQueryNoResultsOptions.endTime()));
+    }
+    if (getMetricsQueryNoResultsOptions != null && getMetricsQueryNoResultsOptions.resultType() != null) {
+      builder.query('result_type', getMetricsQueryNoResultsOptions.resultType());
+    }
+
+    return (IBMDiscoveryV1Models.MetricResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.MetricResponse.class);
+  }
+
+  /**
+   * Most frequent query tokens with an event.
+   *
+   * The most frequent query tokens parsed from the **natural_language_query** parameter and their corresponding
+   * \"click\" event rate within the recording period (queries and events are stored for 30 days). A query token is an
+   * individual word or unigram within the query string.
+   *
+   * @param getMetricsQueryTokenEventOptions the {@link IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.MetricTokenResponse} with the response
+   */
+  public IBMDiscoveryV1Models.MetricTokenResponse getMetricsQueryTokenEvent(IBMDiscoveryV1Models.GetMetricsQueryTokenEventOptions getMetricsQueryTokenEventOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/metrics/top_query_tokens_with_event_rate');
+    Map<String, String> requestHeaders = (getMetricsQueryTokenEventOptions != null) ? getMetricsQueryTokenEventOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (getMetricsQueryTokenEventOptions != null && getMetricsQueryTokenEventOptions.count() != null) {
+      builder.query('count', String.valueOf(getMetricsQueryTokenEventOptions.count()));
+    }
+
+    return (IBMDiscoveryV1Models.MetricTokenResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.MetricTokenResponse.class);
+  }
+
+  /**
    * Search the query and event log.
    *
    * Searches the query and event log to find query sessions that match the specified criteria. Searching the **logs**
