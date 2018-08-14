@@ -4,7 +4,7 @@
 [![Slack](http://wdc-slack-inviter.mybluemix.net/badge.svg)](https://wdc-slack-inviter.mybluemix.net)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment.
+The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment. If you'd like, you can follow along with our video playlist [here](https://www.youtube.com/playlist?list=PLZDyxLlNKRY8qrs90oRPvVHocJhYOOj3n) to start using the SDK. Otherwise, continue reading to learn how to get started.
 
 ## Language Translator v2 deprecation notice
 Language Translator v3 is now available. The v2 Language Translator API will no longer be available after July 31, 2018. To take advantage of the latest service enhancements, migrate to the v3 API. View the [Migrating to Language Translator v3](https://console.bluemix.net/docs/services/language-translator/migrating.html) page for more information.
@@ -13,16 +13,12 @@ Language Translator v3 is now available. The v2 Language Translator API will no 
 
 * You need an [IBM Cloud][ibm-cloud-onboarding] account.
 
-Once you create an account, you can get credentials for the services you want by following these steps:
+### Getting credentials
+To find out which authentication to use, view the service credentials. You find the service credentials for authentication the same way for all Watson services:
 
-1. Log in to [IBM Cloud](https://console.bluemix.net/registration/?target=/catalog/%3fcategory=watson&cm_mmc=OSocial_Wechat-_-Watson+Core_Watson+Core+-+Platform-_-WW_WW-_-salesforce&cm_mmca1=000000OF&cm_mmca2=10000409&)
-
-1. Create an instance of the desired service:
-    1. In the left hamburger menu, select **Watson**.
-    1. Click on **Browse Services**, located under **Watson Services** in the left menu.
-    1. Select the services you'd like to use.
-
-1. Copy the credentials at the bottom of the page for the selected services.
+1. Go to the IBM Cloud [Dashboard](https://console.bluemix.net/dashboard/apps?category=ai) page.
+1. Either click an existing Watson service instance or click [**Create resource > AI**](https://console.bluemix.net/catalog/?category=ai) and create a service instance.
+1. Copy the `url` and either `apikey` or `username` and `password`. Click **Show** if the credentials are masked.
 
 You'll also need a Salesforce account to run your Apex code. To get one, you can visit [this link](https://developer.salesforce.com/signup).
 

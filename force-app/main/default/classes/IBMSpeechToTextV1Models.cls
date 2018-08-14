@@ -506,7 +506,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param audio the audio
      * @return the AddAudioOptions builder
-     *
+     * 
      * @deprecated This method was incorrectly named. Please use the audioResource() setter.
      */
     public AddAudioOptionsBuilder audio(IBMWatsonFile audio) {

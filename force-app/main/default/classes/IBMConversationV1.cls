@@ -215,7 +215,7 @@ public class IBMConversationV1 extends IBMWatsonService {
   /**
    * List workspaces.
    *
-   * List the workspaces associated with a Watson Conversation service instance.
+   * List the workspaces associated with a Conversation service instance.
    *
    * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
    *

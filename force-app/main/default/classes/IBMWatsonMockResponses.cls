@@ -2522,4 +2522,180 @@ public class IBMWatsonMockResponses {
       '} ]' +
     '}';
   }
+
+  public static testMethod String createEventResponse() {
+    return '{' +
+      '"type": "click",' +
+      '"data": {' +
+        '"environment_id": "5ae96bb9-80e5-43ea-916e-1f3412fbc283",' +
+        '"session_token": "mock_session_token",' +
+        '"client_timestamp": "2017-07-14T12:55:40.652Z",' +
+        '"display_rank": 1,' +
+        '"collection_id": "mock_collid",' +
+        '"document_id": "mock_docid",' +
+        '"query_id": "mock_queryid"' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String logQueryResponse() {
+    return '{' +
+      '"matching_results": 2,' +
+      '"results": [' +
+        '{' +
+          '"environment_id": "5ae96bb9-80e5-43ea-916e-1f3412fbc283",' +
+          '"customer_id": "",' +
+          '"natural_language_query": "Who beat Ken Jennings in Jeopardy!",' +
+          '"document_results": {' +
+            '"results": [],' +
+            '"count": 0' +
+          '},' +
+          '"created_timestamp": "2017-07-14T12:55:40.652Z",' +
+          '"query_id": "mock_queryid",' +
+          '"session_token": "mock_session_token",' +
+          '"event_type": "query"' +
+        '},' +
+        '{' +
+          '"environment_id": "5ae96bb9-80e5-43ea-916e-1f3412fbc283",' +
+          '"customer_id": "",' +
+          '"document_results": {' +
+            '"results": [' +
+              '{' +
+                '"position": 1,' +
+                '"document_id": "mock_docid",' +
+                '"score": 1.0,' +
+                '"collection_id": "mock_collid"' +
+              '},' +
+              '{' +
+                '"position": 2,' +
+                '"document_id": "mock_docid",' +
+                '"score": 1.0,' +
+                '"collection_id": "mock_collid"' +
+              '}' +
+            '],' +
+            '"count": 2' +
+          '},' +
+          '"created_timestamp": "2017-07-14T12:55:40.652Z",' +
+          '"query_id": "mock_queryid",' +
+          '"session_token": "mock_session_token",' +
+          '"event_type": "query"' +
+        '}' +
+      ']' +
+    '}'; 
+  }
+
+  public static testMethod String metricResponse() {
+    return '{' +
+      '"aggregations": [' +
+        '{' +
+          '"interval": "1d",' +
+          '"event_type": "click",' +
+          '"results": [' +
+            '{' +
+              '"key_as_string": "2018-08-05T20:00:00.000",' +
+              '"key": 1533513600000,' +
+              '"event_rate": 0.0' +
+            '},' +
+            '{' +
+              '"key_as_string": "2018-08-06T20:00:00.000",' +
+              '"key": 1533600000000,' +
+              '"event_rate": 0.0' +
+            '},' +
+            '{' +
+              '"key_as_string": "2018-08-07T20:00:00.000",' +
+              '"key": 1533686400000,' +
+              '"event_rate": 0.0' +
+            '},' +
+            '{' +
+              '"key_as_string": "2018-08-08T20:00:00.000",' +
+              '"key": 1533772800000,' +
+              '"event_rate": 0.0' +
+            '},' +
+            '{' +
+              '"key_as_string": "2018-08-09T20:00:00.000",' +
+              '"key": 1533859200000,' +
+              '"event_rate": 0.0' +
+            '},' +
+            '{' +
+              '"key_as_string": "2018-08-10T20:00:00.000",' +
+              '"key": 1533945600000,' +
+              '"event_rate": 0.0' +
+            '},' +
+            '{' +
+              '"key_as_string": "2018-08-11T20:00:00.000",' +
+              '"key": 1534032000000,' +
+              '"event_rate": 0.0' +
+            '},' +
+            '{' +
+              '"key_as_string": "2018-08-12T20:00:00.000",' +
+              '"key": 1534118400000,' +
+              '"event_rate": 0.09090909090909091' +
+            '}' +
+          ']' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String metricTokenResponse() {
+    return '{' +
+      '"aggregations": [' +
+        '{' +
+          '"event_type": "click",' +
+          '"results": [' +
+            '{' +
+              '"key": "beat",' +
+              '"matching_results": 117,' +
+              '"event_rate": 0.0' +
+            '},' +
+            '{' +
+              '"key": "in",' +
+              '"matching_results": 117,' +
+              '"event_rate": 0.0' +
+            '},' +
+            '{' +
+              '"key": "jennings",' +
+              '"matching_results": 117,' +
+              '"event_rate": 0.0' +
+            '},' +
+            '{' +
+              '"key": "jeopardy",' +
+              '"matching_results": 117,' +
+              '"event_rate": 0.0' +
+            '},' +
+            '{' +
+              '"key": "ken",' +
+              '"matching_results": 117,' +
+              '"event_rate": 0.0' +
+            '},' +
+            '{' +
+              '"key": "who",' +
+              '"matching_results": 117,' +
+              '"event_rate": 0.0' +
+            '},' +
+            '{' +
+              '"key": "watson",' +
+              '"matching_results": 3,' +
+              '"event_rate": 0.0' +
+            '},' +
+            '{' +
+              '"key": "1",' +
+              '"matching_results": 2,' +
+              '"event_rate": 0.5' +
+            '},' +
+            '{' +
+              '"key": "field",' +
+              '"matching_results": 2,' +
+              '"event_rate": 0.5' +
+            '},' +
+            '{' +
+              '"key": "number",' +
+              '"matching_results": 2,' +
+              '"event_rate": 0.5' +
+            '}' +
+          ']' +
+        '}' +
+      ']' +
+    '}';
+  }
 }
