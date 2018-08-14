@@ -613,7 +613,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The submitted phrase.
+     * The submitted phrase. The maximum length is 2048 characters.
      *
      * @return the text_serialized_name
      */
@@ -651,7 +651,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The submitted phrase.
+     * The submitted phrase. The maximum length is 2048 characters.
      *
      * @return the text_serialized_name
      */
@@ -761,7 +761,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The submitted phrase.
+     * The submitted phrase. The maximum length is 2048 characters.
      *
      * @return the text_serialized_name
      */
