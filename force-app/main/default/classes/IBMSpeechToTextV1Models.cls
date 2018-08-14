@@ -353,6 +353,16 @@ public class IBMSpeechToTextV1Models {
       return audio_resource_serialized_name;
     }
     /**
+     * Gets the audio_resource_serialized_name.
+     *
+     * @return the audio_resource_serialized_name
+     *
+     * @deprecated This method is incorrectly named. Please use the audioResource() getter.
+     */
+    public IBMWatsonFile audio() {
+      return audio_resource_serialized_name;
+    }
+    /**
      * Gets the content_type_serialized_name.
      *
      * The type of the input.
@@ -492,6 +502,19 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
+     * Set the audio_resource_serialized_name.
+     *
+     * @param audio the audio
+     * @return the AddAudioOptions builder
+     * 
+     * @deprecated This method was incorrectly named. Please use the audioResource() setter.
+     */
+    public AddAudioOptionsBuilder audio(IBMWatsonFile audio) {
+      this.audio_resource_serialized_name = audio;
+      return this;
+    }
+
+    /**
      * Set the content_type_serialized_name.
      *
      * @param contentType the contentType
@@ -590,6 +613,12 @@ public class IBMSpeechToTextV1Models {
      */
     public String corpusFilename() {
       return corpus_filename_serialized_name;
+    }
+    /**
+     * @deprecated This method was incorrectly defined and this value is not returned by the API call.
+     */
+    public String corpusFileContentType() {
+      return '';
     }
     /**
      * Gets the allow_overwrite_serialized_name.
@@ -714,6 +743,13 @@ public class IBMSpeechToTextV1Models {
      */
     public AddCorpusOptionsBuilder corpusFilename(String corpusFilename) {
       this.corpus_filename_serialized_name = corpusFilename;
+      return this;
+    }
+
+    /**
+     * @deprecated This method was incorrectly defined and has no effect on the API call.
+     */
+    public AddCorpusOptionsBuilder corpusFileContentType(String corpusFileContentType) {
       return this;
     }
 
@@ -2085,6 +2121,12 @@ public class IBMSpeechToTextV1Models {
       return audio_serialized_name;
     }
     /**
+     * @deprecated This method was incorrectly defined and this value is not returned by the API call.
+     */
+    public String audioFilename() {
+      return '';
+    }
+    /**
      * Gets the content_type_serialized_name.
      *
      * The type of the input.
@@ -2478,6 +2520,13 @@ public class IBMSpeechToTextV1Models {
      */
     public CreateJobOptionsBuilder audio(IBMWatsonFile audio) {
       this.audio_serialized_name = audio;
+      return this;
+    }
+
+    /**
+     * @deprecated This method was incorrectly defined and has no effect on the API call.
+     */
+    public CreateJobOptionsBuilder audioFilename(IBMWatsonFile audioFilename) {
       return this;
     }
 
@@ -5638,6 +5687,12 @@ public class IBMSpeechToTextV1Models {
       return audio_serialized_name;
     }
     /**
+     * @deprecated This method was incorrectly defined and this value is not returned by the API call.
+     */
+    public String audioFilename() {
+      return '';
+    }
+    /**
      * Gets the content_type_serialized_name.
      *
      * The type of the input.
@@ -5743,6 +5798,18 @@ public class IBMSpeechToTextV1Models {
      */
     public List<String> keywords() {
       return keywords_serialized_name;
+    }
+    /**
+     * @deprecated This method was incorrectly defined and this value is not returned by the API call.
+     */
+    public Boolean continuous() {
+      return false;
+    }
+    /**
+     * @deprecated This method was incorrectly defined and this value is not returned by the API call.
+     */
+    public Boolean interimResults() {
+      return false;
     }
     /**
      * Gets the keywords_threshold_serialized_name.
@@ -5961,6 +6028,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
+     * @deprecated This method was incorrectly defined and has no effect on the API call.
+     */
+    public RecognizeOptionsBuilder audioFilename(String audioFilename) {
+      return this;
+    }
+
+    /**
      * Set the content_type_serialized_name.
      *
      * @param contentType the contentType
@@ -6046,6 +6120,20 @@ public class IBMSpeechToTextV1Models {
      */
     public RecognizeOptionsBuilder keywords(List<String> keywords) {
       this.keywords_serialized_name = keywords;
+      return this;
+    }
+
+    /**
+     * @deprecated This method was incorrectly defined and has no effect on the API call.
+     */
+    public RecognizeOptionsBuilder continuous(Boolean continuous) {
+      return this;
+    }
+
+    /**
+     * @deprecated This method was incorrectly defined and has no effect on the API call.
+     */
+    public RecognizeOptionsBuilder interimResults(Boolean interimResults) {
       return this;
     }
 
@@ -6843,8 +6931,8 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript_serialized_name;
     private Double confidence_serialized_name;
-    private List<String> timestamps_serialized_name;
-    private List<String> word_confidence_serialized_name;
+    private List<List<String>> timestamps_serialized_name;
+    private List<List<String>> word_confidence_serialized_name;
     /**
      * Gets the transcript_serialized_name.
      *
@@ -6878,7 +6966,7 @@ public class IBMSpeechToTextV1Models {
      * @return the timestamps_serialized_name
      */
     @AuraEnabled
-    public List<String> getTimestamps() {
+    public List<List<String>> getTimestamps() {
       return timestamps_serialized_name;
     }
     /**
@@ -6891,7 +6979,7 @@ public class IBMSpeechToTextV1Models {
      * @return the word_confidence_serialized_name
      */
     @AuraEnabled
-    public List<String> getWordConfidence() {
+    public List<List<String>> getWordConfidence() {
       return word_confidence_serialized_name;
     }
 
@@ -6918,7 +7006,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<String> timestamps) {
+    public void setTimestamps(final List<List<String>> timestamps) {
       this.timestamps_serialized_name = timestamps;
     }
 
@@ -6927,7 +7015,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<String> wordConfidence) {
+    public void setWordConfidence(final List<List<String>> wordConfidence) {
       this.word_confidence_serialized_name = wordConfidence;
     }
 
@@ -7057,8 +7145,23 @@ public class IBMSpeechToTextV1Models {
       }
 
       // calling custom deserializer for keywords_result_serialized_name
-      Map<String, List<KeywordResult>> newKeywordsResult = (Map<String, List<KeywordResult>>) new Map<String, List<KeywordResult>>().deserialize(JSON.serialize(ret.getKeywordsResult()), (Map<String, Object>) jsonMap.get('keywords_result_serialized_name'), Map<String, List<KeywordResult>>.class);
-      ret.setKeywordsResult(newKeywordsResult);
+      Map<String, List<KeywordResult>> newKeywordsResult = new Map<String, List<KeywordResult>>();
+      Map<String, List<KeywordResult>> deserializedKeywordsResult = ret.getKeywordsResult();
+      if (deserializedKeywordsResult != null) {
+        for (String key : deserializedKeywordsResult.keySet()) {
+          List<KeywordResult> newKeywordResult = new List<KeywordResult>();
+          List<KeywordResult> keywordResultList = deserializedKeywordsResult.get(key);
+          for (Integer i = 0; i < keywordResultList.size(); i++) {
+            KeywordResult currentItem = keywordResultList.get(i);
+            Map<String, Object> itemInMap = (Map<String, Object>) jsonMap.get('keywords_result_serialized_name');
+            Object innerKeywordResult = ((List<Object>) itemInMap.get(key)).get(i);
+            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(innerKeywordResult)), KeywordResult.class);
+            newKeywordResult.add(newItem);
+          }
+          newKeywordsResult.put(key, newKeywordResult);
+        }
+        ret.setKeywordsResult(newKeywordsResult);
+      }
 
       // calling custom deserializer for word_alternatives_serialized_name
       List<WordAlternativeResults> newWordAlternatives = new List<WordAlternativeResults>();
