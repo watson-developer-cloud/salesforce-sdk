@@ -1448,6 +1448,33 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
+   * Create event.
+   *
+   * The **Events** API can be used to create log entries that are associated with specific queries. For example, you
+   * can record which documents in the results set were \"clicked\" by a user and when that click occured.
+   *
+   * @param createEventOptions the {@link IBMDiscoveryV1Models.CreateEventOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.CreateEventResponse} with the response
+   */
+  public IBMDiscoveryV1Models.CreateEventResponse createEvent(IBMDiscoveryV1Models.CreateEventOptions createEventOptions) {
+    IBMWatsonValidator.notNull(createEventOptions, 'createEventOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/events');
+    Map<String, String> requestHeaders = (createEventOptions != null) ? createEventOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('type', createEventOptions.typeField());
+    contentJson.put('data', createEventOptions.data());
+    builder.bodyJson(JSON.serialize(contentJson, true));
+
+    return (IBMDiscoveryV1Models.CreateEventResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.CreateEventResponse.class);
+  }
+
+  /**
    * Create credentials.
    *
    * Creates a set of credentials to connect to a remote source. Created credentials are used in a configuration to
