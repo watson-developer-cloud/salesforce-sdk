@@ -9386,6 +9386,601 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public String getUsed() {
       return used_serialized_name;
+
+  /**
+   * Object containing results that match the requested **logs** query.
+   */
+  public class LogQueryResponse extends IBMWatsonResponseModel {
+    private Long matching_results_serialized_name;
+    private List<LogQueryResponseResult> results_serialized_name;
+    /**
+     * Gets the matching_results_serialized_name.
+     *
+     * Number of matching results.
+     *
+     * @return the matching_results_serialized_name
+     */
+    @AuraEnabled
+    public Long getMatchingResults() {
+      return matching_results_serialized_name;
+    }
+    /**
+     * Gets the results_serialized_name.
+     *
+     * @return the results_serialized_name
+     */
+    @AuraEnabled
+    public List<LogQueryResponseResult> getResults() {
+      return results_serialized_name;
+    }
+
+    /**
+     * Sets the matching_results_serialized_name.
+     *
+     * @param matchingResults the new matchingResults
+     */
+    public void setMatchingResults(final long matchingResults) {
+      this.matching_results_serialized_name = matchingResults;
+    }
+
+    /**
+     * Sets the results_serialized_name.
+     *
+     * @param results the new results
+     */
+    public void setResults(final List<LogQueryResponseResult> results) {
+      this.results_serialized_name = results;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      LogQueryResponse ret = (LogQueryResponse) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for results_serialized_name
+      List<LogQueryResponseResult> newResults = new List<LogQueryResponseResult>();
+      List<LogQueryResponseResult> deserializedResults = ret.getResults();
+      if (deserializedResults != null) {
+        for (Integer i = 0; i < deserializedResults.size(); i++) {
+          LogQueryResponseResult currentItem = ret.getResults().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          LogQueryResponseResult newItem = (LogQueryResponseResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogQueryResponseResult.class);
+          newResults.add(newItem);
+        }
+        ret.setResults(newResults);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Individual result object for a **logs** query. Each object represents either a query to a Discovery collection or
+   * an event that is associated with a query.
+   */
+  public class LogQueryResponseResult extends IBMWatsonGenericModel {
+    private String environment_id_serialized_name;
+    private String customer_id_serialized_name;
+    private String document_type_serialized_name;
+    private String natural_language_query_serialized_name;
+    private LogQueryResponseResultDocuments document_results_serialized_name;
+    private Datetime created_timestamp_serialized_name;
+    private Datetime client_timestamp_serialized_name;
+    private String query_id_serialized_name;
+    private String session_token_serialized_name;
+    private String collection_id_serialized_name;
+    private Long display_rank_serialized_name;
+    private String document_id_serialized_name;
+    private String event_type_serialized_name;
+    private String result_type_serialized_name;
+    /**
+     * Gets the environment_id_serialized_name.
+     *
+     * The environment ID that is associated with this log entry.
+     *
+     * @return the environment_id_serialized_name
+     */
+    @AuraEnabled
+    public String getEnvironmentId() {
+      return environment_id_serialized_name;
+    }
+    /**
+     * Gets the customer_id_serialized_name.
+     *
+     * The **customer_id** label that was specified in the header of the query or event API call that corresponds to
+     * this log entry.
+     *
+     * @return the customer_id_serialized_name
+     */
+    @AuraEnabled
+    public String getCustomerId() {
+      return customer_id_serialized_name;
+    }
+    /**
+     * Gets the document_type_serialized_name.
+     *
+     * The type of log entry returned.
+     *
+     *  **query** indicates that the log represents the results of a call to the single collection **query** method.
+     *
+     *  **event** indicates that the log represents  a call to the **events** API.
+     *
+     * @return the document_type_serialized_name
+     */
+    @AuraEnabled
+    public String getDocumentType() {
+      return document_type_serialized_name;
+    }
+    /**
+     * Gets the natural_language_query_serialized_name.
+     *
+     * The value of the **natural_language_query** query parameter that was used to create these results. Only returned
+     * with logs of type **query**.
+     *
+     * **Note:** Other query parameters (such as **filter** or **deduplicate**) might  have been used with this query,
+     * but are not recorded.
+     *
+     * @return the natural_language_query_serialized_name
+     */
+    @AuraEnabled
+    public String getNaturalLanguageQuery() {
+      return natural_language_query_serialized_name;
+    }
+    /**
+     * Gets the document_results_serialized_name.
+     *
+     * @return the document_results_serialized_name
+     */
+    @AuraEnabled
+    public LogQueryResponseResultDocuments getDocumentResults() {
+      return document_results_serialized_name;
+    }
+    /**
+     * Gets the created_timestamp_serialized_name.
+     *
+     * Date that the log result was created. Returned in `YYYY-MM-DDThh:mm:ssZ` format.
+     *
+     * @return the created_timestamp_serialized_name
+     */
+    @AuraEnabled
+    public Datetime getCreatedTimestamp() {
+      return created_timestamp_serialized_name;
+    }
+    /**
+     * Gets the client_timestamp_serialized_name.
+     *
+     * Date specified by the user when recording an event. Returned in `YYYY-MM-DDThh:mm:ssZ` format. Only returned with
+     * logs of type **event**.
+     *
+     * @return the client_timestamp_serialized_name
+     */
+    @AuraEnabled
+    public Datetime getClientTimestamp() {
+      return client_timestamp_serialized_name;
+    }
+    /**
+     * Gets the query_id_serialized_name.
+     *
+     * Identifier that corresponds to the **natural_language_query** string used in the original or associated query.
+     * All **event** and **query** log entries that have the same original **natural_language_query** string also have
+     * them same **query_id**. This field can be used to recall all **event** and **query** log results that have the
+     * same original query (**event** logs do not contain the original **natural_language_query** field).
+     *
+     * @return the query_id_serialized_name
+     */
+    @AuraEnabled
+    public String getQueryId() {
+      return query_id_serialized_name;
+    }
+    /**
+     * Gets the session_token_serialized_name.
+     *
+     * Unique identifier (within a 24-hour period) that identifies a single `query` log and any `event` logs that were
+     * created for it.
+     *
+     * **Note:** If the exact same query is run at the exact same time on different days, the **session_token** for
+     * those queries might be identical. However, the **created_timestamp** differs.
+     *
+     * **Note:** Session tokens are case sensitive. To avoid matching on session tokens that are identical except for
+     * case, use the exact match operator (`::`) when you query for a specific session token.
+     *
+     * @return the session_token_serialized_name
+     */
+    @AuraEnabled
+    public String getSessionToken() {
+      return session_token_serialized_name;
+    }
+    /**
+     * Gets the collection_id_serialized_name.
+     *
+     * The collection ID of the document associated with this event. Only returned with logs of type `event`.
+     *
+     * @return the collection_id_serialized_name
+     */
+    @AuraEnabled
+    public String getCollectionId() {
+      return collection_id_serialized_name;
+    }
+    /**
+     * Gets the display_rank_serialized_name.
+     *
+     * The original display rank of the document associated with this event. Only returned with logs of type `event`.
+     *
+     * @return the display_rank_serialized_name
+     */
+    @AuraEnabled
+    public Long getDisplayRank() {
+      return display_rank_serialized_name;
+    }
+    /**
+     * Gets the document_id_serialized_name.
+     *
+     * The document ID of the document associated with this event. Only returned with logs of type `event`.
+     *
+     * @return the document_id_serialized_name
+     */
+    @AuraEnabled
+    public String getDocumentId() {
+      return document_id_serialized_name;
+    }
+    /**
+     * Gets the event_type_serialized_name.
+     *
+     * The type of event that this object respresents. Possible values are
+     *
+     *  -  `query` the log of a query to a collection
+     *
+     *  -  `click` the result of a call to the **events** endpoint.
+     *
+     * @return the event_type_serialized_name
+     */
+    @AuraEnabled
+    public String getEventType() {
+      return event_type_serialized_name;
+    }
+    /**
+     * Gets the result_type_serialized_name.
+     *
+     * The type of result that this **event** is associated with. Only returned with logs of type `event`.
+     *
+     * @return the result_type_serialized_name
+     */
+    @AuraEnabled
+    public String getResultType() {
+      return result_type_serialized_name;
+    }
+
+    /**
+     * Sets the environment_id_serialized_name.
+     *
+     * @param environmentId the new environmentId
+     */
+    public void setEnvironmentId(final String environmentId) {
+      this.environment_id_serialized_name = environmentId;
+    }
+
+    /**
+     * Sets the customer_id_serialized_name.
+     *
+     * @param customerId the new customerId
+     */
+    public void setCustomerId(final String customerId) {
+      this.customer_id_serialized_name = customerId;
+    }
+
+    /**
+     * Sets the document_type_serialized_name.
+     *
+     * @param documentType the new documentType
+     */
+    public void setDocumentType(final String documentType) {
+      this.document_type_serialized_name = documentType;
+    }
+
+    /**
+     * Sets the natural_language_query_serialized_name.
+     *
+     * @param naturalLanguageQuery the new naturalLanguageQuery
+     */
+    public void setNaturalLanguageQuery(final String naturalLanguageQuery) {
+      this.natural_language_query_serialized_name = naturalLanguageQuery;
+    }
+
+    /**
+     * Sets the document_results_serialized_name.
+     *
+     * @param documentResults the new documentResults
+     */
+    public void setDocumentResults(final LogQueryResponseResultDocuments documentResults) {
+      this.document_results_serialized_name = documentResults;
+    }
+
+    /**
+     * Sets the created_timestamp_serialized_name.
+     *
+     * @param createdTimestamp the new createdTimestamp
+     */
+    public void setCreatedTimestamp(final Datetime createdTimestamp) {
+      this.created_timestamp_serialized_name = createdTimestamp;
+    }
+
+    /**
+     * Sets the client_timestamp_serialized_name.
+     *
+     * @param clientTimestamp the new clientTimestamp
+     */
+    public void setClientTimestamp(final Datetime clientTimestamp) {
+      this.client_timestamp_serialized_name = clientTimestamp;
+    }
+
+    /**
+     * Sets the query_id_serialized_name.
+     *
+     * @param queryId the new queryId
+     */
+    public void setQueryId(final String queryId) {
+      this.query_id_serialized_name = queryId;
+    }
+
+    /**
+     * Sets the session_token_serialized_name.
+     *
+     * @param sessionToken the new sessionToken
+     */
+    public void setSessionToken(final String sessionToken) {
+      this.session_token_serialized_name = sessionToken;
+    }
+
+    /**
+     * Sets the collection_id_serialized_name.
+     *
+     * @param collectionId the new collectionId
+     */
+    public void setCollectionId(final String collectionId) {
+      this.collection_id_serialized_name = collectionId;
+    }
+
+    /**
+     * Sets the display_rank_serialized_name.
+     *
+     * @param displayRank the new displayRank
+     */
+    public void setDisplayRank(final long displayRank) {
+      this.display_rank_serialized_name = displayRank;
+    }
+
+    /**
+     * Sets the document_id_serialized_name.
+     *
+     * @param documentId the new documentId
+     */
+    public void setDocumentId(final String documentId) {
+      this.document_id_serialized_name = documentId;
+    }
+
+    /**
+     * Sets the event_type_serialized_name.
+     *
+     * @param eventType the new eventType
+     */
+    public void setEventType(final String eventType) {
+      this.event_type_serialized_name = eventType;
+    }
+
+    /**
+     * Sets the result_type_serialized_name.
+     *
+     * @param resultType the new resultType
+     */
+    public void setResultType(final String resultType) {
+      this.result_type_serialized_name = resultType;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      LogQueryResponseResult ret = (LogQueryResponseResult) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for document_results_serialized_name
+      LogQueryResponseResultDocuments newDocumentResults = (LogQueryResponseResultDocuments) new LogQueryResponseResultDocuments().deserialize(JSON.serialize(ret.getDocumentResults()), (Map<String, Object>) jsonMap.get('document_results_serialized_name'), LogQueryResponseResultDocuments.class);
+      ret.setDocumentResults(newDocumentResults);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Object containing result information that was returned by the query used to create this log entry. Only returned
+   * with logs of type `query`.
+   */
+  public class LogQueryResponseResultDocuments extends IBMWatsonGenericModel {
+    private List<LogQueryResponseResultDocumentsResult> results_serialized_name;
+    private Long count_serialized_name;
+    /**
+     * Gets the results_serialized_name.
+     *
+     * @return the results_serialized_name
+     */
+    @AuraEnabled
+    public List<LogQueryResponseResultDocumentsResult> getResults() {
+      return results_serialized_name;
+    }
+    /**
+     * Gets the count_serialized_name.
+     *
+     * The number of results returned in the query associate with this log.
+     *
+     * @return the count_serialized_name
+     */
+    @AuraEnabled
+    public Long getCount() {
+      return count_serialized_name;
+    }
+
+    /**
+     * Sets the results_serialized_name.
+     *
+     * @param results the new results
+     */
+    public void setResults(final List<LogQueryResponseResultDocumentsResult> results) {
+      this.results_serialized_name = results;
+    }
+
+    /**
+     * Sets the count_serialized_name.
+     *
+     * @param count the new count
+     */
+    public void setCount(final long count) {
+      this.count_serialized_name = count;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      LogQueryResponseResultDocuments ret = (LogQueryResponseResultDocuments) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for results_serialized_name
+      List<LogQueryResponseResultDocumentsResult> newResults = new List<LogQueryResponseResultDocumentsResult>();
+      List<LogQueryResponseResultDocumentsResult> deserializedResults = ret.getResults();
+      if (deserializedResults != null) {
+        for (Integer i = 0; i < deserializedResults.size(); i++) {
+          LogQueryResponseResultDocumentsResult currentItem = ret.getResults().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          LogQueryResponseResultDocumentsResult newItem = (LogQueryResponseResultDocumentsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogQueryResponseResultDocumentsResult.class);
+          newResults.add(newItem);
+        }
+        ret.setResults(newResults);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Each object in the **results** array corresponds to an individual document returned by the original query.
+   */
+  public class LogQueryResponseResultDocumentsResult extends IBMWatsonGenericModel {
+    private Long position_serialized_name;
+    private String document_id_serialized_name;
+    private Double score_serialized_name;
+    private Double confidence_serialized_name;
+    private String collection_id_serialized_name;
+    /**
+     * Gets the position_serialized_name.
+     *
+     * The result rank of this document. A position of `1` indicates that it was the first returned result.
+     *
+     * @return the position_serialized_name
+     */
+    @AuraEnabled
+    public Long getPosition() {
+      return position_serialized_name;
+    }
+    /**
+     * Gets the document_id_serialized_name.
+     *
+     * The **document_id** of the document that this result represents.
+     *
+     * @return the document_id_serialized_name
+     */
+    @AuraEnabled
+    public String getDocumentId() {
+      return document_id_serialized_name;
+    }
+    /**
+     * Gets the score_serialized_name.
+     *
+     * The raw score of this result. A higher score indicates a greater match to the query parameters.
+     *
+     * @return the score_serialized_name
+     */
+    @AuraEnabled
+    public Double getScore() {
+      return score_serialized_name;
+    }
+    /**
+     * Gets the confidence_serialized_name.
+     *
+     * The confidence score of the result's analysis. A higher score indicating greater confidence.
+     *
+     * @return the confidence_serialized_name
+     */
+    @AuraEnabled
+    public Double getConfidence() {
+      return confidence_serialized_name;
+    }
+    /**
+     * Gets the collection_id_serialized_name.
+     *
+     * The **collection_id** of the document represented by this result.
+     *
+     * @return the collection_id_serialized_name
+     */
+    @AuraEnabled
+    public String getCollectionId() {
+      return collection_id_serialized_name;
+    }
+
+    /**
+     * Sets the position_serialized_name.
+     *
+     * @param position the new position
+     */
+    public void setPosition(final long position) {
+      this.position_serialized_name = position;
+    }
+
+    /**
+     * Sets the document_id_serialized_name.
+     *
+     * @param documentId the new documentId
+     */
+    public void setDocumentId(final String documentId) {
+      this.document_id_serialized_name = documentId;
+    }
+
+    /**
+     * Sets the score_serialized_name.
+     *
+     * @param score the new score
+     */
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
+    }
+
+    /**
+     * Sets the confidence_serialized_name.
+     *
+     * @param confidence the new confidence
+     */
+    public void setConfidence(final Double confidence) {
+      this.confidence_serialized_name = confidence;
+    }
+
+    /**
+     * Sets the collection_id_serialized_name.
+     *
+     * @param collectionId the new collectionId
+     */
+    public void setCollectionId(final String collectionId) {
+      this.collection_id_serialized_name = collectionId;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      LogQueryResponseResultDocumentsResult ret = (LogQueryResponseResultDocumentsResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
     }
     /**
      * Gets the total_serialized_name.
@@ -11890,6 +12485,210 @@ public class IBMDiscoveryV1Models {
       this.include_serialized_name = include;
     }
 
+  }
+
+  /**
+   * The queryLog options.
+   */
+  public class QueryLogOptions extends IBMWatsonOptionsModel {
+    private String filter_serialized_name;
+    private String query_serialized_name;
+    private Long count_serialized_name;
+    private Long offset_serialized_name;
+    private List<String> sort_serialized_name;
+    /**
+     * Gets the filter_serialized_name.
+     *
+     * A cacheable query that limits the documents returned to exclude any documents that don't mention the query
+     * content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts
+     * in the data set.
+     *
+     * @return the filter_serialized_name
+     */
+    public String filter() {
+      return filter_serialized_name;
+    }
+    /**
+     * Gets the query_serialized_name.
+     *
+     * A query search returns all documents in your data set with full enrichments and full text, but with the most
+     * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
+     * cannot use **natural_language_query** and **query** at the same time.
+     *
+     * @return the query_serialized_name
+     */
+    public String query() {
+      return query_serialized_name;
+    }
+    /**
+     * Gets the count_serialized_name.
+     *
+     * Number of results to return.
+     *
+     * @return the count_serialized_name
+     */
+    public Long count() {
+      return count_serialized_name;
+    }
+    /**
+     * Gets the offset_serialized_name.
+     *
+     * The number of query results to skip at the beginning. For example, if the total number of results that are
+     * returned is 10, and the offset is 8, it returns the last two results.
+     *
+     * @return the offset_serialized_name
+     */
+    public Long offset() {
+      return offset_serialized_name;
+    }
+    /**
+     * Gets the sort_serialized_name.
+     *
+     * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by
+     * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
+     * prefix is specified.
+     *
+     * @return the sort_serialized_name
+     */
+    public List<String> sortField() {
+      return sort_serialized_name;
+    }
+    private QueryLogOptions(QueryLogOptionsBuilder builder) {
+      filter_serialized_name = builder.filter_serialized_name;
+      query_serialized_name = builder.query_serialized_name;
+      count_serialized_name = builder.count_serialized_name;
+      offset_serialized_name = builder.offset_serialized_name;
+      sort_serialized_name = builder.sort_serialized_name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a QueryLogOptions builder
+     */
+    public QueryLogOptionsBuilder newBuilder() {
+      return new QueryLogOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * QueryLogOptions Builder.
+   */
+  public class QueryLogOptionsBuilder extends IBMWatsonOptionsModel {
+    private String filter_serialized_name;
+    private String query_serialized_name;
+    private Long count_serialized_name;
+    private Long offset_serialized_name;
+    private List<String> sort_serialized_name;
+
+    private QueryLogOptionsBuilder(QueryLogOptions queryLogOptions) {
+      filter_serialized_name = queryLogOptions.filter_serialized_name;
+      query_serialized_name = queryLogOptions.query_serialized_name;
+      count_serialized_name = queryLogOptions.count_serialized_name;
+      offset_serialized_name = queryLogOptions.offset_serialized_name;
+      sort_serialized_name = queryLogOptions.sort_serialized_name;
+      this.requestHeaders.putAll(queryLogOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public QueryLogOptionsBuilder() {
+    }
+
+    /**
+     * Builds a QueryLogOptions.
+     *
+     * @return the queryLogOptions
+     */
+    public QueryLogOptions build() {
+      return new QueryLogOptions(this);
+    }
+
+    /**
+     * Adds an sortVar to sort_serialized_name.
+     *
+     * @param sortVar the new sortVar
+     * @return the QueryLogOptions builder
+     */
+    public QueryLogOptionsBuilder addSort(String sortVar) {
+      IBMWatsonValidator.notNull(sortVar, 'sortVar cannot be null');
+      if (this.sort_serialized_name == null) {
+        this.sort_serialized_name = new List<String>();
+      }
+      this.sort_serialized_name.add(sortVar);
+      return this;
+    }
+
+    /**
+     * Set the filter_serialized_name.
+     *
+     * @param filter the filter
+     * @return the QueryLogOptions builder
+     */
+    public QueryLogOptionsBuilder filter(String filter) {
+      this.filter_serialized_name = filter;
+      return this;
+    }
+
+    /**
+     * Set the query_serialized_name.
+     *
+     * @param query the query
+     * @return the QueryLogOptions builder
+     */
+    public QueryLogOptionsBuilder query(String query) {
+      this.query_serialized_name = query;
+      return this;
+    }
+
+    /**
+     * Set the count_serialized_name.
+     *
+     * @param count the count
+     * @return the QueryLogOptions builder
+     */
+    public QueryLogOptionsBuilder count(Long count) {
+      this.count_serialized_name = count;
+      return this;
+    }
+
+    /**
+     * Set the offset_serialized_name.
+     *
+     * @param offset the offset
+     * @return the QueryLogOptions builder
+     */
+    public QueryLogOptionsBuilder offset(Long offset) {
+      this.offset_serialized_name = offset;
+      return this;
+    }
+
+    /**
+     * Set the sort_serialized_name.
+     * Existing sort_serialized_name will be replaced.
+     *
+     * @param sortVar the sortVar
+     * @return the QueryLogOptions builder
+     */
+    public QueryLogOptionsBuilder sortField(List<String> sortVar) {
+      this.sort_serialized_name = sortVar;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the QueryLogOptions builder
+     */
+    public QueryLogOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
   }
 
   /**

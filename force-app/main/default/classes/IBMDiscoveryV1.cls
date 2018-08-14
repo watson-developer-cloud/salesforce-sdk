@@ -1475,6 +1475,43 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
+   * Search the query and event log.
+   *
+   * Searches the query and event log to find query sessions that match the specified criteria. Searching the **logs**
+   * endpoint uses the standard Discovery query syntax for the parameters that are supported.
+   *
+   * @param queryLogOptions the {@link IBMDiscoveryV1Models.QueryLogOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.LogQueryResponse} with the response
+   */
+  public IBMDiscoveryV1Models.LogQueryResponse queryLog(IBMDiscoveryV1Models.QueryLogOptions queryLogOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/logs');
+    Map<String, String> requestHeaders = (queryLogOptions != null) ? queryLogOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (queryLogOptions != null && queryLogOptions.filter() != null) {
+      builder.query('filter', queryLogOptions.filter());
+    }
+    if (queryLogOptions != null && queryLogOptions.query() != null) {
+      builder.query('query', queryLogOptions.query());
+    }
+    if (queryLogOptions != null && queryLogOptions.count() != null) {
+      builder.query('count', String.valueOf(queryLogOptions.count()));
+    }
+    if (queryLogOptions != null && queryLogOptions.offset() != null) {
+      builder.query('offset', String.valueOf(queryLogOptions.offset()));
+    }
+    if (queryLogOptions != null && queryLogOptions.sortField() != null) {
+      builder.query('sort', String.join(queryLogOptions.sortField(), ','));
+    }
+
+    return (IBMDiscoveryV1Models.LogQueryResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.LogQueryResponse.class);
+  }
+
+  /**
    * Create credentials.
    *
    * Creates a set of credentials to connect to a remote source. Created credentials are used in a configuration to
