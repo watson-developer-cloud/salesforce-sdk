@@ -21,14 +21,14 @@ install:
 - mv force-app/main/test/* force-app/main/default/classes
 - pip install bumpversion
 - npm install @semantic-release/exec
-- make asoc-tool
+- 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then make asoc-tool; fi'
 
 before_script:
-- chmod a+x ./ASOC.sh
+- 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then chmod a+x ./ASOC.sh; fi'
 
 script:
 - "./install/test-in-scratch-org.sh"
-- ./ASOC.sh
+- 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then ./ASOC.sh; fi'
 after_success:
 - sfdx force:org:delete -u ciorg -p
 after_failure:
