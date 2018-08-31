@@ -21,9 +21,14 @@ install:
 - mv force-app/main/test/* force-app/main/default/classes
 - pip install bumpversion
 - npm install @semantic-release/exec
+- make asoc-tool
+
+before_script:
+- chmod a+x ./ASOC.sh
 
 script:
 - "./install/test-in-scratch-org.sh"
+- ./ASOC.sh
 after_success:
 - sfdx force:org:delete -u ciorg -p
 after_failure:
