@@ -21,17 +21,14 @@ install:
 - mv force-app/main/test/* force-app/main/default/classes
 - pip install bumpversion
 - npm install @semantic-release/exec
-# - 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then cd appscan; make asoc-tool; cd ../; fi'
-- cd appscan; make asoc-tool; cd ../;
+- 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then cd appscan; make asoc-tool; cd ../; fi'
 
 before_script:
-# - 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then chmod a+x ./appscan/ASOC.sh; fi'
-- chmod a+x ./appscan/ASOC.sh;
+- 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then chmod a+x ./appscan/ASOC.sh; fi'
 
 script:
 - "./install/test-in-scratch-org.sh"
-# - 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then ./appscan/ASOC.sh; fi'
-- ./appscan/ASOC.sh;
+- 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then ./appscan/ASOC.sh; fi'
 after_success:
 - sfdx force:org:delete -u ciorg -p
 after_failure:
