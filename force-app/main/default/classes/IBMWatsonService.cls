@@ -25,6 +25,13 @@ public abstract class IBMWatsonService {
     + 'services that use Identity and Access Management (IAM) authentication. For details see the IAM '
     + 'authentication section in the README.';
 
+
+  // Regular expression for JSON-related mimetypes.
+  private static final Pattern JSON_MIME_PATTERN =
+          Pattern.compile('(?i)application\\/((json)|(merge\\-patch\\+json))(;.*)?');
+  private static final Pattern JSON_PATCH_MIME_PATTERN =
+          Pattern.compile('(?i)application\\/json\\-patch\\+json(;.*)?'');
+
   /**
    * Instantiates a new Watson service.
    *
@@ -35,6 +42,26 @@ public abstract class IBMWatsonService {
     this.userAgent = buildUserAgent(); // initialize the `User-Agent` value
 
     setEndPoint(CALLOUT + name);
+  }
+
+  /**
+   * Returns true iff the specified mimeType indicates a JSON-related content type.
+   * (e.g. application/json, application/merge-patch+json, etc.).
+   * @param mimeType the mimetype to consider
+   * @return true if the mimeType indicates a JSON-related content type
+   */
+  public static boolean isJsonMimeType(String mimeType) {
+      return mimeType != null && JSON_MIME_PATTERN.matcher(mimeType).matches();
+  }
+
+  /**
+   * Returns true iff the specified mimeType indicates a JsonPatch-related content type.
+   * (e.g. application/json-patch+json).
+   * @param mimeType the mimetype to consider
+   * @return true if the mimeType indicates a JSON-related content type
+   */
+  public static boolean isJsonPatchMimeType(String mimeType) {
+      return mimeType != null && JSON_PATCH_MIME_PATTERN.matcher(mimeType).matches();
   }
 
   private static String buildUserAgent() {
