@@ -1,14 +1,14 @@
 public class IBMWatsonRequestBuilder {
 
   private enum HTTPMethod {
-    HTTP_DELETE, HTTP_GET, HTTP_POST, HTTP_PUT
+    HTTP_DELETE, HTTP_GET, HTTP_POST, HTTP_PUT, HTTP_PATCH
   }
 
   private static final Map<HTTPMethod, String> HTTPMethodValue = new  Map<HTTPMethod, String> {
     HTTPMethod.HTTP_DELETE => 'DELETE',
     HTTPMethod.HTTP_GET => 'GET',
     HTTPMethod.HTTP_POST => 'POST',
-    HTTPMethod.HTTP_PUT => 'PUT'
+    HTTPMethod.HTTP_PUT => 'PUT',
     HTTPMethod.HTTP_PATCH => 'PATCH'
   };
 
@@ -247,13 +247,16 @@ public class IBMWatsonRequestBuilder {
    * @param nonJsonContent the body content to be used if the content type indicates non-JSON content
    * @return this
   */
-  public IBMWatsonRequestBuilder bodyContent(String contentType, Object jsonContent, Object jsonPatchContent, IBMWatsonFile nonJsonContent) {
-    if (IBMWatsonService.isJsonMimeType(contentType)) {
+  public IBMWatsonRequestBuilder bodyContent(String contentType, Object jsonContent, Object jsonPatchContent,
+    IBMWatsonFile nonJsonContent) {
+    if (contentType != null) {
+      if (IBMWatsonService.isJsonMimeType(contentType)) {
         this.bodyContent(JSON.serialize(jsonContent, true), contentType);
-    } else if (IBMWatsonService.isJsonPatchMimeType(contentType)) {
+      } else if (IBMWatsonService.isJsonPatchMimeType(contentType)) {
         this.bodyContent(JSON.serialize(jsonPatchContent, true), contentType);
-    } else {
+      } else {
         this.bodyContent(nonJsonContent, contentType);
+      }
     }
     return this;
   }
