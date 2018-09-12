@@ -398,4 +398,13 @@ private class IBMWatsonServiceTest {
     System.assert(testService.isTokenManagerSet() == true);
     Test.stopTest();
   }
+
+  static testMethod void testAuthenticationWithIcp() {
+    Test.startTest();
+    String testApiKey = 'icp-12345';
+    TestService testService = new TestService();
+    testService.setUsernameAndPassword('apikey', testApiKey);
+    System.assert(testService.isTokenManagerSet() == false);
+    Test.stopTest();
+  }
 }
