@@ -666,6 +666,17 @@ public class IBMWatsonMockResponses {
             '"msg": "test_warning"' +
           '}' +
           '],' +
+          '"actions": [ ' +
+          '{' +
+            '"name": "action",' +
+            '"type": "server",' +
+            '"parameters": {' +
+              '"param_1": "param_1_val"' +
+            '},' +
+            '"result_variable": "action_var",' +
+            '"credentials": "creds"' +
+          '}' +
+          '],' +
           '"nodes_visited_details": [' +
           '{' +
             '"dialog_node": "node",' +
@@ -673,7 +684,18 @@ public class IBMWatsonMockResponses {
             '"conditions": "#condition"' +
           '}' +  
           ']' +
+        '},' +
+        '"actions": [ ' +
+        '{' +
+          '"name": "action",' +
+          '"type": "server",' +
+          '"parameters": {' +
+            '"param_1": "param_1_val"' +
+          '},' +
+          '"result_variable": "action_var",' +
+          '"credentials": "creds"' +
         '}' +
+        ']' +
         '}';
   }
 
