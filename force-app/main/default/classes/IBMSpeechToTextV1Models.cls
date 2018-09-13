@@ -827,12 +827,15 @@ public class IBMSpeechToTextV1Models {
      * Gets the sounds_like_serialized_name.
      *
      * An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce,
-     * foreign words, acronyms, and so on can be pronounced by users. For a word that is not in the service's base
-     * vocabulary, omit the parameter to have the service automatically generate a sounds-like pronunciation for the
-     * word. For a word that is in the service's base vocabulary, use the parameter to specify additional pronunciations
-     * for the word. You cannot override the default pronunciation of a word; pronunciations you add augment the
-     * pronunciation from the base vocabulary. A word can have at most five sounds-like pronunciations, and a
-     * pronunciation can include at most 40 characters not including spaces.
+     * foreign words, acronyms, and so on can be pronounced by users.
+     * * For a word that is not in the service's base vocabulary, omit the parameter to have the service automatically
+     * generate a sounds-like pronunciation for the word.
+     * * For a word that is in the service's base vocabulary, use the parameter to specify additional pronunciations for
+     * the word. You cannot override the default pronunciation of a word; pronunciations you add augment the
+     * pronunciation from the base vocabulary.
+     *
+     * A word can have at most five sounds-like pronunciations. A pronunciation can include at most 40 characters not
+     * including spaces.
      *
      * @return the sounds_like_serialized_name
      */
@@ -2139,8 +2142,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the model_serialized_name.
      *
-     * The identifier of the model that is to be used for the recognition request or, for the **Create a session**
-     * method, with the new session.
+     * The identifier of the model that is to be used for the recognition request.
      *
      * @return the model_serialized_name
      */
@@ -2175,10 +2177,12 @@ public class IBMSpeechToTextV1Models {
      * * `recognitions.failed` generates a callback notification if the service experiences an error while processing
      * the job.
      *
-     * Omit the parameter to subscribe to the default events: `recognitions.started`, `recognitions.completed`, and
-     * `recognitions.failed`. The `recognitions.completed` and `recognitions.completed_with_results` events are
-     * incompatible; you can specify only of the two events. If the job does not include a callback URL, omit the
-     * parameter.
+     * The `recognitions.completed` and `recognitions.completed_with_results` events are incompatible. You can specify
+     * only of the two events.
+     *
+     * If the job includes a callback URL, omit the parameter to subscribe to the default events:
+     * `recognitions.started`, `recognitions.completed`, and `recognitions.failed`. If the job does not include a
+     * callback URL, omit the parameter.
      *
      * @return the events_serialized_name
      */
@@ -2212,10 +2216,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of a custom language model that is to be used with the recognition request or, for
-     * the **Create a session** method, with the new session. The base model of the specified custom language model must
-     * match the model specified with the `model` parameter. You must make the request with service credentials created
-     * for the instance of the service that owns the custom model. By default, no custom language model is used.
+     * The customization ID (GUID) of a custom language model that is to be used with the recognition request. The base
+     * model of the specified custom language model must match the model specified with the `model` parameter. You must
+     * make the request with service credentials created for the instance of the service that owns the custom model. By
+     * default, no custom language model is used.
      *
      * @return the customization_id_serialized_name
      */
@@ -2225,10 +2229,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the acoustic_customization_id_serialized_name.
      *
-     * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request or, for
-     * the **Create a session** method, with the new session. The base model of the specified custom acoustic model must
-     * match the model specified with the `model` parameter. You must make the request with service credentials created
-     * for the instance of the service that owns the custom model. By default, no custom acoustic model is used.
+     * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request. The base
+     * model of the specified custom acoustic model must match the model specified with the `model` parameter. You must
+     * make the request with service credentials created for the instance of the service that owns the custom model. By
+     * default, no custom acoustic model is used.
      *
      * @return the acoustic_customization_id_serialized_name
      */
@@ -2238,11 +2242,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the base_model_version_serialized_name.
      *
-     * The version of the specified base model that is to be used with recognition request or, for the **Create a
-     * session** method, with the new session. Multiple versions of a base model can exist when a model is updated for
-     * internal improvements. The parameter is intended primarily for use with custom models that have been upgraded for
-     * a new base model. The default value depends on whether the parameter is used with or without a custom model. For
-     * more information, see [Base model
+     * The version of the specified base model that is to be used with recognition request. Multiple versions of a base
+     * model can exist when a model is updated for internal improvements. The parameter is intended primarily for use
+     * with custom models that have been upgraded for a new base model. The default value depends on whether the
+     * parameter is used with or without a custom model. For more information, see [Base model
      * version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
      *
      * @return the base_model_version_serialized_name
@@ -2253,9 +2256,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_weight_serialized_name.
      *
-     * If you specify the customization ID (GUID) of a custom language model with the recognition request or, for
-     * sessions, with the **Create a session** method, the customization weight tells the service how much weight to
-     * give to words from the custom language model compared to those from the base model for the current request.
+     * If you specify the customization ID (GUID) of a custom language model with the recognition request, the
+     * customization weight tells the service how much weight to give to words from the custom language model compared
+     * to those from the base model for the current request.
      *
      * Specify a value between 0.0 and 1.0. Unless a different customization weight was specified for the custom model
      * when it was trained, the default value is 0.3. A customization weight that you specify overrides a weight that
@@ -2973,12 +2976,15 @@ public class IBMSpeechToTextV1Models {
      * Gets the sounds_like_serialized_name.
      *
      * An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce,
-     * foreign words, acronyms, and so on can be pronounced by users. For a word that is not in the service's base
-     * vocabulary, omit the parameter to have the service automatically generate a sounds-like pronunciation for the
-     * word. For a word that is in the service's base vocabulary, use the parameter to specify additional pronunciations
-     * for the word. You cannot override the default pronunciation of a word; pronunciations you add augment the
-     * pronunciation from the base vocabulary. A word can have at most five sounds-like pronunciations, and a
-     * pronunciation can include at most 40 characters not including spaces.
+     * foreign words, acronyms, and so on can be pronounced by users.
+     * * For a word that is not in the service's base vocabulary, omit the parameter to have the service automatically
+     * generate a sounds-like pronunciation for the word.
+     * * For a word that is in the service's base vocabulary, use the parameter to specify additional pronunciations for
+     * the word. You cannot override the default pronunciation of a word; pronunciations you add augment the
+     * pronunciation from the base vocabulary.
+     *
+     * A word can have at most five sounds-like pronunciations. A pronunciation can include at most 40 characters not
+     * including spaces.
      *
      * @return the sounds_like_serialized_name
      */
@@ -5705,8 +5711,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the model_serialized_name.
      *
-     * The identifier of the model that is to be used for the recognition request or, for the **Create a session**
-     * method, with the new session.
+     * The identifier of the model that is to be used for the recognition request.
      *
      * @return the model_serialized_name
      */
@@ -5716,10 +5721,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_id_serialized_name.
      *
-     * The customization ID (GUID) of a custom language model that is to be used with the recognition request or, for
-     * the **Create a session** method, with the new session. The base model of the specified custom language model must
-     * match the model specified with the `model` parameter. You must make the request with service credentials created
-     * for the instance of the service that owns the custom model. By default, no custom language model is used.
+     * The customization ID (GUID) of a custom language model that is to be used with the recognition request. The base
+     * model of the specified custom language model must match the model specified with the `model` parameter. You must
+     * make the request with service credentials created for the instance of the service that owns the custom model. By
+     * default, no custom language model is used.
      *
      * @return the customization_id_serialized_name
      */
@@ -5729,10 +5734,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the acoustic_customization_id_serialized_name.
      *
-     * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request or, for
-     * the **Create a session** method, with the new session. The base model of the specified custom acoustic model must
-     * match the model specified with the `model` parameter. You must make the request with service credentials created
-     * for the instance of the service that owns the custom model. By default, no custom acoustic model is used.
+     * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request. The base
+     * model of the specified custom acoustic model must match the model specified with the `model` parameter. You must
+     * make the request with service credentials created for the instance of the service that owns the custom model. By
+     * default, no custom acoustic model is used.
      *
      * @return the acoustic_customization_id_serialized_name
      */
@@ -5742,11 +5747,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the base_model_version_serialized_name.
      *
-     * The version of the specified base model that is to be used with recognition request or, for the **Create a
-     * session** method, with the new session. Multiple versions of a base model can exist when a model is updated for
-     * internal improvements. The parameter is intended primarily for use with custom models that have been upgraded for
-     * a new base model. The default value depends on whether the parameter is used with or without a custom model. For
-     * more information, see [Base model
+     * The version of the specified base model that is to be used with recognition request. Multiple versions of a base
+     * model can exist when a model is updated for internal improvements. The parameter is intended primarily for use
+     * with custom models that have been upgraded for a new base model. The default value depends on whether the
+     * parameter is used with or without a custom model. For more information, see [Base model
      * version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
      *
      * @return the base_model_version_serialized_name
@@ -5757,9 +5761,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customization_weight_serialized_name.
      *
-     * If you specify the customization ID (GUID) of a custom language model with the recognition request or, for
-     * sessions, with the **Create a session** method, the customization weight tells the service how much weight to
-     * give to words from the custom language model compared to those from the base model for the current request.
+     * If you specify the customization ID (GUID) of a custom language model with the recognition request, the
+     * customization weight tells the service how much weight to give to words from the custom language model compared
+     * to those from the base model for the current request.
      *
      * Specify a value between 0.0 and 1.0. Unless a different customization weight was specified for the custom model
      * when it was trained, the default value is 0.3. A customization weight that you specify overrides a weight that
