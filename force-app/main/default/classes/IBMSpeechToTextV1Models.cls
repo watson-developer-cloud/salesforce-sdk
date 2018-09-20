@@ -336,8 +336,11 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the audio_name_serialized_name.
      *
-     * The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include
-     * spaces in the name; use a localized name that matches the language of the custom model.
+     * The name of the new audio resource for the custom acoustic model. Use a localized name that matches the language
+     * of the custom model and reflects the contents of the resource.
+     * * Include a maximum of 128 characters in the name.
+     * * Do not include spaces, slashes, or backslashes in the name.
+     * * Do not use the name of an audio resource that has already been added to the custom model.
      *
      * @return the audio_name_serialized_name
      */
@@ -583,9 +586,13 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the corpus_name_serialized_name.
      *
-     * The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name;
-     * use a localized name that matches the language of the custom model; and do not use the name `user`, which is
-     * reserved by the service to denote custom words added or modified by the user.
+     * The name of the new corpus for the custom language model. Use a localized name that matches the language of the
+     * custom model and reflects the contents of the corpus.
+     * * Include a maximum of 128 characters in the name.
+     * * Do not include spaces, slashes, or backslashes in the name.
+     * * Do not use the name of a corpus that has already been added to the custom model.
+     * * Do not use the name `user`, which is reserved by the service to denote custom words that are added or modified
+     * by the user.
      *
      * @return the corpus_name_serialized_name
      */
@@ -3145,8 +3152,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the audio_name_serialized_name.
      *
-     * The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include
-     * spaces in the name; use a localized name that matches the language of the custom model.
+     * The name of the audio resource for the custom acoustic model.
      *
      * @return the audio_name_serialized_name
      */
@@ -3266,9 +3272,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the corpus_name_serialized_name.
      *
-     * The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name;
-     * use a localized name that matches the language of the custom model; and do not use the name `user`, which is
-     * reserved by the service to denote custom words added or modified by the user.
+     * The name of the corpus for the custom language model.
      *
      * @return the corpus_name_serialized_name
      */
@@ -3876,8 +3880,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the audio_name_serialized_name.
      *
-     * The name of the audio resource for the custom acoustic model. When adding an audio resource, do not include
-     * spaces in the name; use a localized name that matches the language of the custom model.
+     * The name of the audio resource for the custom acoustic model.
      *
      * @return the audio_name_serialized_name
      */
@@ -3997,9 +4000,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the corpus_name_serialized_name.
      *
-     * The name of the corpus for the custom language model. When adding a corpus, do not include spaces in the name;
-     * use a localized name that matches the language of the custom model; and do not use the name `user`, which is
-     * reserved by the service to denote custom words added or modified by the user.
+     * The name of the corpus for the custom language model.
      *
      * @return the corpus_name_serialized_name
      */
