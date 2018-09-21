@@ -619,11 +619,6 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getOutput().getNodesVisitedDetails().get(0).getConditions(), nodeVisitedDetailsCondition);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getLevel(), logMessageLevel);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getMsg(), logMessageText);
-    System.assertEquals(response.getOutput().getActions().get(0).getName(), actionName);
-    System.assertEquals(response.getOutput().getActions().get(0).getType(), actionType);
-    System.assertEquals(response.getOutput().getActions().get(0).getParameters(), actionParameters);
-    System.assertEquals(response.getOutput().getActions().get(0).getResultVariable(), actionResultVariable);
-    System.assertEquals(response.getOutput().getActions().get(0).getCredentials(), actionCredentials);
     System.assertEquals(response.getActions().get(0).getName(), actionName);
     System.assertEquals(response.getActions().get(0).getType(), actionType);
     System.assertEquals(response.getActions().get(0).getParameters(), actionParameters);

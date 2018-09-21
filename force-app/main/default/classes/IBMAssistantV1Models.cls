@@ -12771,7 +12771,6 @@ public class IBMAssistantV1Models {
     private List<DialogRuntimeResponseGeneric> generic_serialized_name;
     private List<String> nodes_visited_serialized_name;
     private List<DialogNodeVisitedDetails> nodes_visited_details_serialized_name;
-    private List<DialogNodeAction> actions_serialized_name;
     private Map<String, Object> additional_properties_serialized_name;
 
     /**
@@ -12822,16 +12821,6 @@ public class IBMAssistantV1Models {
     @AuraEnabled
     public List<DialogNodeVisitedDetails> getNodesVisitedDetails() {
       return nodes_visited_details_serialized_name;
-    }
-
-    /**
-     * Gets the actions_serialized_name.
-     *
-     * @return the actions_serialized_name
-     */
-    @AuraEnabled
-    public List<DialogNodeAction> getActions() {
-      return actions_serialized_name;
     }
 
     /**
@@ -12889,15 +12878,6 @@ public class IBMAssistantV1Models {
       this.nodes_visited_details_serialized_name = nodes_visited_details_serialized_name;
     }
 
-    /**
-     * Sets the actions_serialized_name.
-     *
-     * @param actions_serialized_name the new actions_serialized_name
-     */
-    public void setActions(final List<DialogNodeAction> actions_serialized_name) {
-      this.actions_serialized_name = actions_serialized_name;
-    }
-
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -12942,19 +12922,6 @@ public class IBMAssistantV1Models {
           newNodesVisitedDetails.add(newItem);
         }
         ret.setNodesVisitedDetails(newNodesVisitedDetails);
-      }
-
-      // calling custom deserializer for actions_serialized_name
-      List<DialogNodeAction> newActions = new List<DialogNodeAction>();
-      List<DialogNodeAction> deserializedActions = ret.getActions();
-      if (deserializedActions != null) {
-        for (Integer i = 0; i < deserializedActions.size(); i++) {
-          DialogNodeAction currentItem = ret.getActions().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('actions_serialized_name');
-          DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
-          newActions.add(newItem);
-        }
-        ret.setActions(newActions);
       }
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
