@@ -39,6 +39,10 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" ]; then
   echo "IBMSpeechToTextV1FTest.runAllTests('$SPEECH_TO_TEXT_USERNAME', '$SPEECH_TO_TEXT_PASSWORD');" > SpeechToTextTestRunner.apex
   $(sfdx force:apex:execute -f SpeechToTextTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
   rm SpeechToTextTestRunner.apex
+
+  echo "IBMAssistantV2FTests.runAllTests('$ASSISTANT_V2_USERNAME', '$ASSISTANT_V2_PASSWORD', '$ASSISTANT_V2_ASSISTANT_ID');" > AssistantV2TestRunner.apex
+  $(sfdx force:apex:execute -f AssistantV2TestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
+  rm AssistantV2TestRunner.apex
   
   echo "Deploy to main organization"
   sfdx force:org:delete -u ciorg -p
