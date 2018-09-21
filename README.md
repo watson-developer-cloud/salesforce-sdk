@@ -6,8 +6,8 @@
 
 The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment. If you'd like, you can follow along with our video playlist [here](https://www.youtube.com/playlist?list=PLZDyxLlNKRY8qrs90oRPvVHocJhYOOj3n) to start using the SDK. Otherwise, continue reading to learn how to get started.
 
-## Language Translator v2 deprecation notice
-Language Translator v3 is now available. The v2 Language Translator API will no longer be available after July 31, 2018. To take advantage of the latest service enhancements, migrate to the v3 API. View the [Migrating to Language Translator v3](https://console.bluemix.net/docs/services/language-translator/migrating.html) page for more information.
+## Assistant v2 is now available :tada::tada::tada:
+Check it out with the `IBMAssistantV2` class!
 
 ## Before you begin
 
@@ -366,6 +366,9 @@ The above library adds minimal overhead and will allow for the use of WebSockets
 ## Functional Tests
 
 The `force-app/main/test` folder contains the example calls for each service. These examples are used for functional testing of services. Developers can use them for reference and testing the installed SDK.
+
+## Language Translator v2 deprecation notice
+The v2 Language Translator API will no longer be available after July 31, 2018. To take advantage of the latest service enhancements, migrate to the v3 API. View the [Migrating to Language Translator v3](https://console.bluemix.net/docs/services/language-translator/migrating.html) page for more information.
 
 ## Contributing
 
