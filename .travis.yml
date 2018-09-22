@@ -21,6 +21,7 @@ install:
 - mv force-app/main/test/* force-app/main/default/classes
 - pip install bumpversion
 - npm install @semantic-release/exec
+- npm i @babel/preset-env
 - 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then cd appscan; make asoc-tool; cd ../; fi'
 
 before_script:
@@ -37,4 +38,4 @@ after_failure:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: npx travis-deploy-once "npx semantic-release"
+    script: npx travis-deploy-once "npx semantic-release@15.8.0"
