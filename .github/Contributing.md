@@ -5,19 +5,15 @@ please ask a question on [dW Answers][dw] or [Stack Overflow][stackoverflow].
 
 ## Issues
 
-If you encounter an issue with the salesforce.com API, you are welcome to submit a  [bug report](https://github.com/watson-developer-cloud/salesforce-sdk/issues).
+If you encounter an issue with the Salesforce SDK, you are welcome to submit a [bug report](https://github.com/watson-developer-cloud/salesforce-sdk/issues).
 Before that, please search for similar issues. It's possible somebody has encountered this issue already.
 
 # Pull Requests
 
 If you want to contribute to the repository, here's a quick guide:
   1. Fork the repository
-  1. Create a `.config.properties` similar to [`config.properties`](https://github.com/watson-developer-cloud/java-sdk/blob/master/core/src/test/resources/config.properties).
-  2. develop and test your code changes, gradle: `gradle test`.
-    * Run `checkstyle`: `gradle checkstyle`. 🏁
-    * Create minimal diffs - disable on save actions like reformat source code or organize imports. If you feel the source code should be reformatted create a separate PR for this change.
-    * Check for unnecessary whitespace with git diff --check before committing.
-  3. Make the test pass
+  2. Develop and [deploy your code changes to your Salesforce org](https://github.com/watson-developer-cloud/salesforce-sdk#installation)
+  3. Ensure all tests pass
   4. Commit your changes:   
     * Commits should follow the [Angular commit message guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines). This is because our release tool uses this format for determining release versions and generating changelogs. To make this easier, we recommend using the [Commitizen CLI](https://github.com/commitizen/cz-cli) with the `cz-conventional-changelog` adapter.
   5. Push to your fork and submit a pull request to the **master** branch
@@ -25,11 +21,11 @@ If you want to contribute to the repository, here's a quick guide:
 # Deploy, Develop and Test
 
 If you want to contribute to the repository, here's a quick guide for making update:
-1.  Save the code from your fork to local machine using git clone
+1.  Save the code from your fork to local machine using `git clone`
 2.  A salesforce.com development org (environment) is needed to deploy, develop and test code updates. 
 3.  Deployment scripts “build.properties” and “build.xml” are provided in the package you saved locally from GitHub. You need salesforce [ant migration tool](https://developer.salesforce.com/docs/atlas.en-us.daas.meta/daas/meta_development.htm) to deploy the code to your developer org.
 4.  Thorough testing is required to avoid any errors or issues.
-5.  Make sure that unit test code is added for all the changes. This is required for deployment and quality of code. Minimum 75% code coverage is required. It is recommended to write unit test for all the code if possible.
+5.  Make sure that unit test code is added for all the changes. This is required for deployment and quality of code. Minimum 75% code coverage is required. It is recommended that you write unit test for all the code if possible.
 
 
 # Developer's Certificate of Origin 1.1
@@ -60,11 +56,11 @@ By making a contribution to this project, I certify that:
 
 ## Coding Guidelines
 
-Salesforce has very comprehensive developer guide. Please refer to [developer guide](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_dev_guide.htm) for any development related questions information. Our code is following [Salesforce best practices](https://developer.salesforce.com/page/Apex_Code_Best_Practices); please follow the apex coding best practices before you update the code.
+Salesforce has very comprehensive [developer guide](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_dev_guide.htm). Please refer to it for any development-related questions or information. Our code is following the [Salesforce best practices](https://developer.salesforce.com/page/Apex_Code_Best_Practices). Please follow the Apex coding best practices before updating the code.
 
 For code styling we recommend: https://github.com/PolarisProject/salesforceStyleGuide
 
-Please follow the salesforce.com guidelines for unit testing. The links to unit test guide lines are provided below. SDK contains unit test code that provides examples for writing unit test and how to use SDK to connect with Watson API.
+Please follow the Salesforce guidelines for unit testing. The links to unit test guide lines are provided below. This SDK contains unit test code that provides examples for writing unit tests and how to use the SDK to connect to the Watson APIs.
 
 * [Writing unit tests](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_testing.htm)
 * [running unit tests](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_testing_unit_tests_running.htm)
