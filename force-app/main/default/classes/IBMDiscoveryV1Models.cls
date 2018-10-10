@@ -3,55 +3,60 @@ public class IBMDiscoveryV1Models {
    * The addDocument options.
    */
   public class AddDocumentOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private IBMWatsonFile file_serialized_name;
-    private String filename_serialized_name;
-    private String metadata_serialized_name;
-    private String file_content_type_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private IBMWatsonFile file;
+    private String filename;
+    private String metadata;
+    private String fileContentType;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the file_serialized_name.
+     * Gets the file.
      *
      * The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50
      * megabytes is rejected.
      *
-     * @return the file_serialized_name
+     * @return the file
      */
     public IBMWatsonFile file() {
-      return file_serialized_name;
+      return file;
     }
+ 
     /**
-     * Gets the filename_serialized_name.
+     * Gets the filename.
      *
      * The filename for file.
      *
-     * @return the filename_serialized_name
+     * @return the filename
      */
     public String filename() {
-      return filename_serialized_name;
+      return filename;
     }
+ 
     /**
-     * Gets the metadata_serialized_name.
+     * Gets the metadata.
      *
      * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata
      * that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1
@@ -61,31 +66,33 @@ public class IBMDiscoveryV1Models {
      *   "Subject": "Apples"
      * } ```.
      *
-     * @return the metadata_serialized_name
+     * @return the metadata
      */
     public String metadata() {
-      return metadata_serialized_name;
+      return metadata;
     }
+ 
     /**
-     * Gets the file_content_type_serialized_name.
+     * Gets the fileContentType.
      *
      * The content type of file.
      *
-     * @return the file_content_type_serialized_name
+     * @return the fileContentType
      */
     public String fileContentType() {
-      return file_content_type_serialized_name;
+      return fileContentType;
     }
+
     private AddDocumentOptions(AddDocumentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      IBMWatsonValidator.isTrue(builder.file_serialized_name == null || builder.file_content_type_serialized_name != null, 'content type cannot be null if file is not null');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      file_serialized_name = builder.file_serialized_name;
-      filename_serialized_name = builder.filename_serialized_name;
-      metadata_serialized_name = builder.metadata_serialized_name;
-      file_content_type_serialized_name = builder.file_content_type_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.isTrue(builder.file == null || builder.fileContentType != null, 'content type cannot be null if file is not null');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      file = builder.file;
+      filename = builder.filename;
+      metadata = builder.metadata;
+      fileContentType = builder.fileContentType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -104,20 +111,20 @@ public class IBMDiscoveryV1Models {
    * AddDocumentOptions Builder.
    */
   public class AddDocumentOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private IBMWatsonFile file_serialized_name;
-    private String filename_serialized_name;
-    private String metadata_serialized_name;
-    private String file_content_type_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private IBMWatsonFile file;
+    private String filename;
+    private String metadata;
+    private String fileContentType;
 
     private AddDocumentOptionsBuilder(AddDocumentOptions addDocumentOptions) {
-      environment_id_serialized_name = addDocumentOptions.environment_id_serialized_name;
-      collection_id_serialized_name = addDocumentOptions.collection_id_serialized_name;
-      file_serialized_name = addDocumentOptions.file_serialized_name;
-      filename_serialized_name = addDocumentOptions.filename_serialized_name;
-      metadata_serialized_name = addDocumentOptions.metadata_serialized_name;
-      file_content_type_serialized_name = addDocumentOptions.file_content_type_serialized_name;
+      environmentId = addDocumentOptions.environmentId;
+      collectionId = addDocumentOptions.collectionId;
+      file = addDocumentOptions.file;
+      filename = addDocumentOptions.filename;
+      metadata = addDocumentOptions.metadata;
+      fileContentType = addDocumentOptions.fileContentType;
       this.requestHeaders.putAll(addDocumentOptions.requestHeaders());
     }
 
@@ -134,8 +141,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public AddDocumentOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -148,68 +155,68 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the AddDocumentOptions builder
      */
     public AddDocumentOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the AddDocumentOptions builder
      */
     public AddDocumentOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the file_serialized_name.
+     * Set the file.
      *
      * @param file the file
      * @return the AddDocumentOptions builder
      */
     public AddDocumentOptionsBuilder file(IBMWatsonFile file) {
-      this.file_serialized_name = file;
+      this.file = file;
       return this;
     }
 
     /**
-     * Set the filename_serialized_name.
+     * Set the filename.
      *
      * @param filename the filename
      * @return the AddDocumentOptions builder
      */
     public AddDocumentOptionsBuilder filename(String filename) {
-      this.filename_serialized_name = filename;
+      this.filename = filename;
       return this;
     }
 
     /**
-     * Set the metadata_serialized_name.
+     * Set the metadata.
      *
      * @param metadata the metadata
      * @return the AddDocumentOptions builder
      */
     public AddDocumentOptionsBuilder metadata(String metadata) {
-      this.metadata_serialized_name = metadata;
+      this.metadata = metadata;
       return this;
     }
 
     /**
-     * Set the file_content_type_serialized_name.
+     * Set the fileContentType.
      *
      * @param fileContentType the fileContentType
      * @return the AddDocumentOptions builder
      */
     public AddDocumentOptionsBuilder fileContentType(String fileContentType) {
-      this.file_content_type_serialized_name = fileContentType;
+      this.fileContentType = fileContentType;
       return this;
     }
 
@@ -230,63 +237,69 @@ public class IBMDiscoveryV1Models {
    * The addTrainingData options.
    */
   public class AddTrainingDataOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String natural_language_query_serialized_name;
-    private String filter_serialized_name;
-    private List<TrainingExample> examples_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String naturalLanguageQuery;
+    private String filter;
+    private List<TrainingExample> examples;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the natural_language_query_serialized_name.
+     * Gets the naturalLanguageQuery.
      *
-     * @return the natural_language_query_serialized_name
+     * @return the naturalLanguageQuery
      */
     public String naturalLanguageQuery() {
-      return natural_language_query_serialized_name;
+      return naturalLanguageQuery;
     }
+ 
     /**
-     * Gets the filter_serialized_name.
+     * Gets the filter.
      *
-     * @return the filter_serialized_name
+     * @return the filter
      */
     public String filter() {
-      return filter_serialized_name;
+      return filter;
     }
+ 
     /**
-     * Gets the examples_serialized_name.
+     * Gets the examples.
      *
-     * @return the examples_serialized_name
+     * @return the examples
      */
     public List<TrainingExample> examples() {
-      return examples_serialized_name;
+      return examples;
     }
+
     private AddTrainingDataOptions(AddTrainingDataOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      natural_language_query_serialized_name = builder.natural_language_query_serialized_name;
-      filter_serialized_name = builder.filter_serialized_name;
-      examples_serialized_name = builder.examples_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      naturalLanguageQuery = builder.naturalLanguageQuery;
+      filter = builder.filter;
+      examples = builder.examples;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -305,18 +318,18 @@ public class IBMDiscoveryV1Models {
    * AddTrainingDataOptions Builder.
    */
   public class AddTrainingDataOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String natural_language_query_serialized_name;
-    private String filter_serialized_name;
-    private List<TrainingExample> examples_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String naturalLanguageQuery;
+    private String filter;
+    private List<TrainingExample> examples;
 
     private AddTrainingDataOptionsBuilder(AddTrainingDataOptions addTrainingDataOptions) {
-      environment_id_serialized_name = addTrainingDataOptions.environment_id_serialized_name;
-      collection_id_serialized_name = addTrainingDataOptions.collection_id_serialized_name;
-      natural_language_query_serialized_name = addTrainingDataOptions.natural_language_query_serialized_name;
-      filter_serialized_name = addTrainingDataOptions.filter_serialized_name;
-      examples_serialized_name = addTrainingDataOptions.examples_serialized_name;
+      environmentId = addTrainingDataOptions.environmentId;
+      collectionId = addTrainingDataOptions.collectionId;
+      naturalLanguageQuery = addTrainingDataOptions.naturalLanguageQuery;
+      filter = addTrainingDataOptions.filter;
+      examples = addTrainingDataOptions.examples;
       this.requestHeaders.putAll(addTrainingDataOptions.requestHeaders());
     }
 
@@ -333,8 +346,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public AddTrainingDataOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -347,73 +360,73 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an examples to examples_serialized_name.
+     * Adds an examples to examples.
      *
      * @param examples the new examples
      * @return the AddTrainingDataOptions builder
      */
     public AddTrainingDataOptionsBuilder addExamples(TrainingExample examples) {
       IBMWatsonValidator.notNull(examples, 'examples cannot be null');
-      if (this.examples_serialized_name == null) {
-        this.examples_serialized_name = new List<TrainingExample>();
+      if (this.examples == null) {
+        this.examples = new List<TrainingExample>();
       }
-      this.examples_serialized_name.add(examples);
+      this.examples.add(examples);
       return this;
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the AddTrainingDataOptions builder
      */
     public AddTrainingDataOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the AddTrainingDataOptions builder
      */
     public AddTrainingDataOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the natural_language_query_serialized_name.
+     * Set the naturalLanguageQuery.
      *
      * @param naturalLanguageQuery the naturalLanguageQuery
      * @return the AddTrainingDataOptions builder
      */
     public AddTrainingDataOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
-      this.natural_language_query_serialized_name = naturalLanguageQuery;
+      this.naturalLanguageQuery = naturalLanguageQuery;
       return this;
     }
 
     /**
-     * Set the filter_serialized_name.
+     * Set the filter.
      *
      * @param filter the filter
      * @return the AddTrainingDataOptions builder
      */
     public AddTrainingDataOptionsBuilder filter(String filter) {
-      this.filter_serialized_name = filter;
+      this.filter = filter;
       return this;
     }
 
     /**
-     * Set the examples_serialized_name.
-     * Existing examples_serialized_name will be replaced.
+     * Set the examples.
+     * Existing examples will be replaced.
      *
      * @param examples the examples
      * @return the AddTrainingDataOptions builder
      */
     public AddTrainingDataOptionsBuilder examples(List<TrainingExample> examples) {
-      this.examples_serialized_name = examples;
+      this.examples = examples;
       return this;
     }
 
@@ -437,34 +450,37 @@ public class IBMDiscoveryV1Models {
     private String key_serialized_name;
     private Long matching_results_serialized_name;
     private List<QueryAggregation> aggregations_serialized_name;
+ 
     /**
-     * Gets the key_serialized_name.
+     * Gets the key.
      *
      * Key that matched the aggregation type.
      *
-     * @return the key_serialized_name
+     * @return the key
      */
     @AuraEnabled
     public String getKey() {
       return key_serialized_name;
     }
+ 
     /**
-     * Gets the matching_results_serialized_name.
+     * Gets the matchingResults.
      *
      * Number of matching results.
      *
-     * @return the matching_results_serialized_name
+     * @return the matchingResults
      */
     @AuraEnabled
     public Long getMatchingResults() {
       return matching_results_serialized_name;
     }
+ 
     /**
-     * Gets the aggregations_serialized_name.
+     * Gets the aggregations.
      *
      * Aggregations returned in the case of chained aggregations.
      *
-     * @return the aggregations_serialized_name
+     * @return the aggregations
      */
     @AuraEnabled
     public List<QueryAggregation> getAggregations() {
@@ -472,7 +488,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the key_serialized_name.
+     * Sets the key.
      *
      * @param key the new key
      */
@@ -481,7 +497,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the matching_results_serialized_name.
+     * Sets the matchingResults.
      *
      * @param matchingResults the new matchingResults
      */
@@ -490,7 +506,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the aggregations_serialized_name.
+     * Sets the aggregations.
      *
      * @param aggregations the new aggregations
      */
@@ -505,7 +521,7 @@ public class IBMDiscoveryV1Models {
 
       AggregationResult ret = (AggregationResult) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for aggregations_serialized_name
+      // calling custom deserializer for aggregations
       List<QueryAggregation> newAggregations = new List<QueryAggregation>();
       List<QueryAggregation> deserializedAggregations = ret.getAggregations();
       if (deserializedAggregations != null) {
@@ -538,134 +554,148 @@ public class IBMDiscoveryV1Models {
     private CollectionDiskUsage disk_usage_serialized_name;
     private TrainingStatus training_status_serialized_name;
     private SourceStatus source_crawl_serialized_name;
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The unique identifier of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     @AuraEnabled
     public String getCollectionId() {
       return collection_id_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The name of the collection.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * The description of the collection.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     @AuraEnabled
     public String getDescription() {
       return description_serialized_name;
     }
+ 
     /**
-     * Gets the created_serialized_name.
+     * Gets the created.
      *
      * The creation date of the collection in the format yyyy-MM-dd'T'HH:mmcon:ss.SSS'Z'.
      *
-     * @return the created_serialized_name
+     * @return the created
      */
     @AuraEnabled
     public Datetime getCreated() {
       return created_serialized_name;
     }
+ 
     /**
-     * Gets the updated_serialized_name.
+     * Gets the updated.
      *
      * The timestamp of when the collection was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      *
-     * @return the updated_serialized_name
+     * @return the updated
      */
     @AuraEnabled
     public Datetime getUpdated() {
       return updated_serialized_name;
     }
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * The status of the collection.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
       return status_serialized_name;
     }
+ 
     /**
-     * Gets the configuration_id_serialized_name.
+     * Gets the configurationId.
      *
      * The unique identifier of the collection's configuration.
      *
-     * @return the configuration_id_serialized_name
+     * @return the configurationId
      */
     @AuraEnabled
     public String getConfigurationId() {
       return configuration_id_serialized_name;
     }
+ 
     /**
-     * Gets the language_serialized_name.
+     * Gets the language.
      *
      * The language of the documents stored in the collection. Permitted values include `en` (English), `de` (German),
      * and `es` (Spanish).
      *
-     * @return the language_serialized_name
+     * @return the language
      */
     @AuraEnabled
     public String getLanguage() {
       return language_serialized_name;
     }
+ 
     /**
-     * Gets the document_counts_serialized_name.
+     * Gets the documentCounts.
      *
      * The object providing information about the documents in the collection. Present only when retrieving details of a
      * collection.
      *
-     * @return the document_counts_serialized_name
+     * @return the documentCounts
      */
     @AuraEnabled
     public DocumentCounts getDocumentCounts() {
       return document_counts_serialized_name;
     }
+ 
     /**
-     * Gets the disk_usage_serialized_name.
+     * Gets the diskUsage.
      *
      * The object providing information about the disk usage of the collection. Present only when retrieving details of
      * a collection.
      *
-     * @return the disk_usage_serialized_name
+     * @return the diskUsage
      */
     @AuraEnabled
     public CollectionDiskUsage getDiskUsage() {
       return disk_usage_serialized_name;
     }
+ 
     /**
-     * Gets the training_status_serialized_name.
+     * Gets the trainingStatus.
      *
      * Provides information about the status of relevance training for collection.
      *
-     * @return the training_status_serialized_name
+     * @return the trainingStatus
      */
     @AuraEnabled
     public TrainingStatus getTrainingStatus() {
       return training_status_serialized_name;
     }
+ 
     /**
-     * Gets the source_crawl_serialized_name.
+     * Gets the sourceCrawl.
      *
-     * @return the source_crawl_serialized_name
+     * Object containing source crawl status information.
+     *
+     * @return the sourceCrawl
      */
     @AuraEnabled
     public SourceStatus getSourceCrawl() {
@@ -673,7 +703,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -682,7 +712,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the description_serialized_name.
+     * Sets the description.
      *
      * @param description the new description
      */
@@ -691,7 +721,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the configuration_id_serialized_name.
+     * Sets the configurationId.
      *
      * @param configurationId the new configurationId
      */
@@ -700,7 +730,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the language_serialized_name.
+     * Sets the language.
      *
      * @param language the new language
      */
@@ -709,7 +739,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the document_counts_serialized_name.
+     * Sets the documentCounts.
      *
      * @param documentCounts the new documentCounts
      */
@@ -718,7 +748,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the disk_usage_serialized_name.
+     * Sets the diskUsage.
      *
      * @param diskUsage the new diskUsage
      */
@@ -727,7 +757,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the training_status_serialized_name.
+     * Sets the trainingStatus.
      *
      * @param trainingStatus the new trainingStatus
      */
@@ -736,7 +766,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the source_crawl_serialized_name.
+     * Sets the sourceCrawl.
      *
      * @param sourceCrawl the new sourceCrawl
      */
@@ -749,22 +779,21 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      Map<String, Object> trainingStatus = (Map<String, Object>) jsonMap.remove('training_status_serialized_name');
-      Collection ret = (Collection) super.deserialize(JSON.serialize(jsonMap), jsonMap, classType);
+      Collection ret = (Collection) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for document_counts_serialized_name
+      // calling custom deserializer for documentCounts
       DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('document_counts_serialized_name'), DocumentCounts.class);
       ret.setDocumentCounts(newDocumentCounts);
 
-      // calling custom deserializer for disk_usage_serialized_name
+      // calling custom deserializer for diskUsage
       CollectionDiskUsage newDiskUsage = (CollectionDiskUsage) new CollectionDiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('disk_usage_serialized_name'), CollectionDiskUsage.class);
       ret.setDiskUsage(newDiskUsage);
 
-      // calling custom deserializer for training_status_serialized_name
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatus), trainingStatus, TrainingStatus.class);
+      // calling custom deserializer for trainingStatus
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(ret.getTrainingStatus()), (Map<String, Object>) jsonMap.get('training_status_serialized_name'), TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
-      // calling custom deserializer for source_crawl_serialized_name
+      // calling custom deserializer for sourceCrawl
       SourceStatus newSourceCrawl = (SourceStatus) new SourceStatus().deserialize(JSON.serialize(ret.getSourceCrawl()), (Map<String, Object>) jsonMap.get('source_crawl_serialized_name'), SourceStatus.class);
       ret.setSourceCrawl(newSourceCrawl);
 
@@ -777,12 +806,13 @@ public class IBMDiscoveryV1Models {
    */
   public class CollectionDiskUsage extends IBMWatsonGenericModel {
     private Long used_bytes_serialized_name;
+ 
     /**
-     * Gets the used_bytes_serialized_name.
+     * Gets the usedBytes.
      *
      * Number of bytes used by the collection.
      *
-     * @return the used_bytes_serialized_name
+     * @return the usedBytes
      */
     @AuraEnabled
     public Long getUsedBytes() {
@@ -806,23 +836,25 @@ public class IBMDiscoveryV1Models {
   public class CollectionUsage extends IBMWatsonGenericModel {
     private Long available_serialized_name;
     private Long maximum_allowed_serialized_name;
+ 
     /**
-     * Gets the available_serialized_name.
+     * Gets the available.
      *
      * Number of active collections in the environment.
      *
-     * @return the available_serialized_name
+     * @return the available
      */
     @AuraEnabled
     public Long getAvailable() {
       return available_serialized_name;
     }
+ 
     /**
-     * Gets the maximum_allowed_serialized_name.
+     * Gets the maximumAllowed.
      *
      * Total number of collections allowed in the environment.
      *
-     * @return the maximum_allowed_serialized_name
+     * @return the maximumAllowed
      */
     @AuraEnabled
     public Long getMaximumAllowed() {
@@ -853,99 +885,110 @@ public class IBMDiscoveryV1Models {
     private List<Enrichment> enrichments_serialized_name;
     private List<NormalizationOperation> normalizations_serialized_name;
     private Source source_serialized_name;
+ 
     /**
-     * Gets the configuration_id_serialized_name.
+     * Gets the configurationId.
      *
      * The unique identifier of the configuration.
      *
-     * @return the configuration_id_serialized_name
+     * @return the configurationId
      */
     @AuraEnabled
     public String getConfigurationId() {
       return configuration_id_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The name of the configuration.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the created_serialized_name.
+     * Gets the created.
      *
      * The creation date of the configuration in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      *
-     * @return the created_serialized_name
+     * @return the created
      */
     @AuraEnabled
     public Datetime getCreated() {
       return created_serialized_name;
     }
+ 
     /**
-     * Gets the updated_serialized_name.
+     * Gets the updated.
      *
      * The timestamp of when the configuration was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      *
-     * @return the updated_serialized_name
+     * @return the updated
      */
     @AuraEnabled
     public Datetime getUpdated() {
       return updated_serialized_name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * The description of the configuration, if available.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     @AuraEnabled
     public String getDescription() {
       return description_serialized_name;
     }
+ 
     /**
-     * Gets the conversions_serialized_name.
+     * Gets the conversions.
      *
      * The document conversion settings for the configuration.
      *
-     * @return the conversions_serialized_name
+     * @return the conversions
      */
     @AuraEnabled
     public Conversions getConversions() {
       return conversions_serialized_name;
     }
+ 
     /**
-     * Gets the enrichments_serialized_name.
+     * Gets the enrichments.
      *
      * An array of document enrichment settings for the configuration.
      *
-     * @return the enrichments_serialized_name
+     * @return the enrichments
      */
     @AuraEnabled
     public List<Enrichment> getEnrichments() {
       return enrichments_serialized_name;
     }
+ 
     /**
-     * Gets the normalizations_serialized_name.
+     * Gets the normalizations.
      *
      * Defines operations that can be used to transform the final output JSON into a normalized form. Operations are
      * executed in the order that they appear in the array.
      *
-     * @return the normalizations_serialized_name
+     * @return the normalizations
      */
     @AuraEnabled
     public List<NormalizationOperation> getNormalizations() {
       return normalizations_serialized_name;
     }
+ 
     /**
-     * Gets the source_serialized_name.
+     * Gets the source.
      *
-     * @return the source_serialized_name
+     * Object containing source parameters for the configuration.
+     *
+     * @return the source
      */
     @AuraEnabled
     public Source getSource() {
@@ -953,7 +996,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -962,7 +1005,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the description_serialized_name.
+     * Sets the description.
      *
      * @param description the new description
      */
@@ -971,7 +1014,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the conversions_serialized_name.
+     * Sets the conversions.
      *
      * @param conversions the new conversions
      */
@@ -980,7 +1023,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the enrichments_serialized_name.
+     * Sets the enrichments.
      *
      * @param enrichments the new enrichments
      */
@@ -989,7 +1032,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the normalizations_serialized_name.
+     * Sets the normalizations.
      *
      * @param normalizations the new normalizations
      */
@@ -998,7 +1041,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the source_serialized_name.
+     * Sets the source.
      *
      * @param source the new source
      */
@@ -1013,11 +1056,11 @@ public class IBMDiscoveryV1Models {
 
       Configuration ret = (Configuration) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for conversions_serialized_name
+      // calling custom deserializer for conversions
       Conversions newConversions = (Conversions) new Conversions().deserialize(JSON.serialize(ret.getConversions()), (Map<String, Object>) jsonMap.get('conversions_serialized_name'), Conversions.class);
       ret.setConversions(newConversions);
 
-      // calling custom deserializer for enrichments_serialized_name
+      // calling custom deserializer for enrichments
       List<Enrichment> newEnrichments = new List<Enrichment>();
       List<Enrichment> deserializedEnrichments = ret.getEnrichments();
       if (deserializedEnrichments != null) {
@@ -1030,7 +1073,7 @@ public class IBMDiscoveryV1Models {
         ret.setEnrichments(newEnrichments);
       }
 
-      // calling custom deserializer for normalizations_serialized_name
+      // calling custom deserializer for normalizations
       List<NormalizationOperation> newNormalizations = new List<NormalizationOperation>();
       List<NormalizationOperation> deserializedNormalizations = ret.getNormalizations();
       if (deserializedNormalizations != null) {
@@ -1043,7 +1086,7 @@ public class IBMDiscoveryV1Models {
         ret.setNormalizations(newNormalizations);
       }
 
-      // calling custom deserializer for source_serialized_name
+      // calling custom deserializer for source
       Source newSource = (Source) new Source().deserialize(JSON.serialize(ret.getSource()), (Map<String, Object>) jsonMap.get('source_serialized_name'), Source.class);
       ret.setSource(newSource);
 
@@ -1060,57 +1103,62 @@ public class IBMDiscoveryV1Models {
     private HtmlSettings html_serialized_name;
     private SegmentSettings segment_serialized_name;
     private List<NormalizationOperation> json_normalizations_serialized_name;
+ 
     /**
-     * Gets the pdf_serialized_name.
+     * Gets the pdf.
      *
      * A list of PDF conversion settings.
      *
-     * @return the pdf_serialized_name
+     * @return the pdf
      */
     @AuraEnabled
     public PdfSettings getPdf() {
       return pdf_serialized_name;
     }
+ 
     /**
-     * Gets the word_serialized_name.
+     * Gets the word.
      *
      * A list of Word conversion settings.
      *
-     * @return the word_serialized_name
+     * @return the word
      */
     @AuraEnabled
     public WordSettings getWord() {
       return word_serialized_name;
     }
+ 
     /**
-     * Gets the html_serialized_name.
+     * Gets the html.
      *
      * A list of HTML conversion settings.
      *
-     * @return the html_serialized_name
+     * @return the html
      */
     @AuraEnabled
     public HtmlSettings getHtml() {
       return html_serialized_name;
     }
+ 
     /**
-     * Gets the segment_serialized_name.
+     * Gets the segment.
      *
      * A list of Document Segmentation settings.
      *
-     * @return the segment_serialized_name
+     * @return the segment
      */
     @AuraEnabled
     public SegmentSettings getSegment() {
       return segment_serialized_name;
     }
+ 
     /**
-     * Gets the json_normalizations_serialized_name.
+     * Gets the jsonNormalizations.
      *
      * Defines operations that can be used to transform the final output JSON into a normalized form. Operations are
      * executed in the order that they appear in the array.
      *
-     * @return the json_normalizations_serialized_name
+     * @return the jsonNormalizations
      */
     @AuraEnabled
     public List<NormalizationOperation> getJsonNormalizations() {
@@ -1118,7 +1166,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the pdf_serialized_name.
+     * Sets the pdf.
      *
      * @param pdf the new pdf
      */
@@ -1127,7 +1175,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the word_serialized_name.
+     * Sets the word.
      *
      * @param word the new word
      */
@@ -1136,7 +1184,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the html_serialized_name.
+     * Sets the html.
      *
      * @param html the new html
      */
@@ -1145,7 +1193,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the segment_serialized_name.
+     * Sets the segment.
      *
      * @param segment the new segment
      */
@@ -1154,7 +1202,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the json_normalizations_serialized_name.
+     * Sets the jsonNormalizations.
      *
      * @param jsonNormalizations the new jsonNormalizations
      */
@@ -1169,23 +1217,23 @@ public class IBMDiscoveryV1Models {
 
       Conversions ret = (Conversions) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for pdf_serialized_name
+      // calling custom deserializer for pdf
       PdfSettings newPdf = (PdfSettings) new PdfSettings().deserialize(JSON.serialize(ret.getPdf()), (Map<String, Object>) jsonMap.get('pdf_serialized_name'), PdfSettings.class);
       ret.setPdf(newPdf);
 
-      // calling custom deserializer for word_serialized_name
+      // calling custom deserializer for word
       WordSettings newWord = (WordSettings) new WordSettings().deserialize(JSON.serialize(ret.getWord()), (Map<String, Object>) jsonMap.get('word_serialized_name'), WordSettings.class);
       ret.setWord(newWord);
 
-      // calling custom deserializer for html_serialized_name
+      // calling custom deserializer for html
       HtmlSettings newHtml = (HtmlSettings) new HtmlSettings().deserialize(JSON.serialize(ret.getHtml()), (Map<String, Object>) jsonMap.get('html_serialized_name'), HtmlSettings.class);
       ret.setHtml(newHtml);
 
-      // calling custom deserializer for segment_serialized_name
+      // calling custom deserializer for segment
       SegmentSettings newSegment = (SegmentSettings) new SegmentSettings().deserialize(JSON.serialize(ret.getSegment()), (Map<String, Object>) jsonMap.get('segment_serialized_name'), SegmentSettings.class);
       ret.setSegment(newSegment);
 
-      // calling custom deserializer for json_normalizations_serialized_name
+      // calling custom deserializer for jsonNormalizations
       List<NormalizationOperation> newJsonNormalizations = new List<NormalizationOperation>();
       List<NormalizationOperation> deserializedJsonNormalizations = ret.getJsonNormalizations();
       if (deserializedJsonNormalizations != null) {
@@ -1206,69 +1254,75 @@ public class IBMDiscoveryV1Models {
    * The createCollection options.
    */
   public class CreateCollectionOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private String configuration_id_serialized_name;
-    private String language_serialized_name;
+    private String environmentId;
+    private String name;
+    private String description;
+    private String configurationId;
+    private String language;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The name of the collection to be created.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     public String name() {
-      return name_serialized_name;
+      return name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * A description of the collection.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     public String description() {
-      return description_serialized_name;
+      return description;
     }
+ 
     /**
-     * Gets the configuration_id_serialized_name.
+     * Gets the configurationId.
      *
      * The ID of the configuration in which the collection is to be created.
      *
-     * @return the configuration_id_serialized_name
+     * @return the configurationId
      */
     public String configurationId() {
-      return configuration_id_serialized_name;
+      return configurationId;
     }
+ 
     /**
-     * Gets the language_serialized_name.
+     * Gets the language.
      *
      * The language of the documents stored in the collection, in the form of an ISO 639-1 language code.
      *
-     * @return the language_serialized_name
+     * @return the language
      */
     public String language() {
-      return language_serialized_name;
+      return language;
     }
+
     private CreateCollectionOptions(CreateCollectionOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notNull(builder.name_serialized_name, 'name_serialized_name cannot be null');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      name_serialized_name = builder.name_serialized_name;
-      description_serialized_name = builder.description_serialized_name;
-      configuration_id_serialized_name = builder.configuration_id_serialized_name;
-      language_serialized_name = builder.language_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
+      environmentId = builder.environmentId;
+      name = builder.name;
+      description = builder.description;
+      configurationId = builder.configurationId;
+      language = builder.language;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1287,18 +1341,18 @@ public class IBMDiscoveryV1Models {
    * CreateCollectionOptions Builder.
    */
   public class CreateCollectionOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private String configuration_id_serialized_name;
-    private String language_serialized_name;
+    private String environmentId;
+    private String name;
+    private String description;
+    private String configurationId;
+    private String language;
 
     private CreateCollectionOptionsBuilder(CreateCollectionOptions createCollectionOptions) {
-      environment_id_serialized_name = createCollectionOptions.environment_id_serialized_name;
-      name_serialized_name = createCollectionOptions.name_serialized_name;
-      description_serialized_name = createCollectionOptions.description_serialized_name;
-      configuration_id_serialized_name = createCollectionOptions.configuration_id_serialized_name;
-      language_serialized_name = createCollectionOptions.language_serialized_name;
+      environmentId = createCollectionOptions.environmentId;
+      name = createCollectionOptions.name;
+      description = createCollectionOptions.description;
+      configurationId = createCollectionOptions.configurationId;
+      language = createCollectionOptions.language;
       this.requestHeaders.putAll(createCollectionOptions.requestHeaders());
     }
 
@@ -1315,8 +1369,8 @@ public class IBMDiscoveryV1Models {
      * @param name the name
      */
     public CreateCollectionOptionsBuilder(String environmentId, String name) {
-      this.environment_id_serialized_name = environmentId;
-      this.name_serialized_name = name;
+      this.environmentId = environmentId;
+      this.name = name;
     }
 
     /**
@@ -1329,57 +1383,57 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the CreateCollectionOptions builder
      */
     public CreateCollectionOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the name_serialized_name.
+     * Set the name.
      *
      * @param name the name
      * @return the CreateCollectionOptions builder
      */
     public CreateCollectionOptionsBuilder name(String name) {
-      this.name_serialized_name = name;
+      this.name = name;
       return this;
     }
 
     /**
-     * Set the description_serialized_name.
+     * Set the description.
      *
      * @param description the description
      * @return the CreateCollectionOptions builder
      */
     public CreateCollectionOptionsBuilder description(String description) {
-      this.description_serialized_name = description;
+      this.description = description;
       return this;
     }
 
     /**
-     * Set the configuration_id_serialized_name.
+     * Set the configurationId.
      *
      * @param configurationId the configurationId
      * @return the CreateCollectionOptions builder
      */
     public CreateCollectionOptionsBuilder configurationId(String configurationId) {
-      this.configuration_id_serialized_name = configurationId;
+      this.configurationId = configurationId;
       return this;
     }
 
     /**
-     * Set the language_serialized_name.
+     * Set the language.
      *
      * @param language the language
      * @return the CreateCollectionOptions builder
      */
     public CreateCollectionOptionsBuilder language(String language) {
-      this.language_serialized_name = language;
+      this.language = language;
       return this;
     }
 
@@ -1400,91 +1454,101 @@ public class IBMDiscoveryV1Models {
    * The createConfiguration options.
    */
   public class CreateConfigurationOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private Conversions conversions_serialized_name;
-    private List<Enrichment> enrichments_serialized_name;
-    private List<NormalizationOperation> normalizations_serialized_name;
-    private Source source_serialized_name;
+    private String environmentId;
+    private String name;
+    private String description;
+    private Conversions conversions;
+    private List<Enrichment> enrichments;
+    private List<NormalizationOperation> normalizations;
+    private Source source;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The name of the configuration.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     public String name() {
-      return name_serialized_name;
+      return name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * The description of the configuration, if available.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     public String description() {
-      return description_serialized_name;
+      return description;
     }
+ 
     /**
-     * Gets the conversions_serialized_name.
+     * Gets the conversions.
      *
      * The document conversion settings for the configuration.
      *
-     * @return the conversions_serialized_name
+     * @return the conversions
      */
     public Conversions conversions() {
-      return conversions_serialized_name;
+      return conversions;
     }
+ 
     /**
-     * Gets the enrichments_serialized_name.
+     * Gets the enrichments.
      *
      * An array of document enrichment settings for the configuration.
      *
-     * @return the enrichments_serialized_name
+     * @return the enrichments
      */
     public List<Enrichment> enrichments() {
-      return enrichments_serialized_name;
+      return enrichments;
     }
+ 
     /**
-     * Gets the normalizations_serialized_name.
+     * Gets the normalizations.
      *
      * Defines operations that can be used to transform the final output JSON into a normalized form. Operations are
      * executed in the order that they appear in the array.
      *
-     * @return the normalizations_serialized_name
+     * @return the normalizations
      */
     public List<NormalizationOperation> normalizations() {
-      return normalizations_serialized_name;
+      return normalizations;
     }
+ 
     /**
-     * Gets the source_serialized_name.
+     * Gets the source.
      *
-     * @return the source_serialized_name
+     * Object containing source parameters for the configuration.
+     *
+     * @return the source
      */
     public Source source() {
-      return source_serialized_name;
+      return source;
     }
+
     private CreateConfigurationOptions(CreateConfigurationOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      name_serialized_name = builder.name_serialized_name;
-      description_serialized_name = builder.description_serialized_name;
-      conversions_serialized_name = builder.conversions_serialized_name;
-      enrichments_serialized_name = builder.enrichments_serialized_name;
-      normalizations_serialized_name = builder.normalizations_serialized_name;
-      source_serialized_name = builder.source_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      environmentId = builder.environmentId;
+      name = builder.name;
+      description = builder.description;
+      conversions = builder.conversions;
+      enrichments = builder.enrichments;
+      normalizations = builder.normalizations;
+      source = builder.source;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1503,22 +1567,22 @@ public class IBMDiscoveryV1Models {
    * CreateConfigurationOptions Builder.
    */
   public class CreateConfigurationOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private Conversions conversions_serialized_name;
-    private List<Enrichment> enrichments_serialized_name;
-    private List<NormalizationOperation> normalizations_serialized_name;
-    private Source source_serialized_name;
+    private String environmentId;
+    private String name;
+    private String description;
+    private Conversions conversions;
+    private List<Enrichment> enrichments;
+    private List<NormalizationOperation> normalizations;
+    private Source source;
 
     private CreateConfigurationOptionsBuilder(CreateConfigurationOptions createConfigurationOptions) {
-      environment_id_serialized_name = createConfigurationOptions.environment_id_serialized_name;
-      name_serialized_name = createConfigurationOptions.name_serialized_name;
-      description_serialized_name = createConfigurationOptions.description_serialized_name;
-      conversions_serialized_name = createConfigurationOptions.conversions_serialized_name;
-      enrichments_serialized_name = createConfigurationOptions.enrichments_serialized_name;
-      normalizations_serialized_name = createConfigurationOptions.normalizations_serialized_name;
-      source_serialized_name = createConfigurationOptions.source_serialized_name;
+      environmentId = createConfigurationOptions.environmentId;
+      name = createConfigurationOptions.name;
+      description = createConfigurationOptions.description;
+      conversions = createConfigurationOptions.conversions;
+      enrichments = createConfigurationOptions.enrichments;
+      normalizations = createConfigurationOptions.normalizations;
+      source = createConfigurationOptions.source;
       this.requestHeaders.putAll(createConfigurationOptions.requestHeaders());
     }
 
@@ -1534,7 +1598,7 @@ public class IBMDiscoveryV1Models {
      * @param environmentId the environmentId
      */
     public CreateConfigurationOptionsBuilder(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
     }
 
     /**
@@ -1547,111 +1611,111 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an enrichments to enrichments_serialized_name.
+     * Adds an enrichments to enrichments.
      *
      * @param enrichments the new enrichments
      * @return the CreateConfigurationOptions builder
      */
     public CreateConfigurationOptionsBuilder addEnrichments(Enrichment enrichments) {
       IBMWatsonValidator.notNull(enrichments, 'enrichments cannot be null');
-      if (this.enrichments_serialized_name == null) {
-        this.enrichments_serialized_name = new List<Enrichment>();
+      if (this.enrichments == null) {
+        this.enrichments = new List<Enrichment>();
       }
-      this.enrichments_serialized_name.add(enrichments);
+      this.enrichments.add(enrichments);
       return this;
     }
 
     /**
-     * Adds an normalizations to normalizations_serialized_name.
+     * Adds an normalizations to normalizations.
      *
      * @param normalizations the new normalizations
      * @return the CreateConfigurationOptions builder
      */
     public CreateConfigurationOptionsBuilder addNormalizations(NormalizationOperation normalizations) {
       IBMWatsonValidator.notNull(normalizations, 'normalizations cannot be null');
-      if (this.normalizations_serialized_name == null) {
-        this.normalizations_serialized_name = new List<NormalizationOperation>();
+      if (this.normalizations == null) {
+        this.normalizations = new List<NormalizationOperation>();
       }
-      this.normalizations_serialized_name.add(normalizations);
+      this.normalizations.add(normalizations);
       return this;
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the CreateConfigurationOptions builder
      */
     public CreateConfigurationOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the name_serialized_name.
+     * Set the name.
      *
      * @param name the name
      * @return the CreateConfigurationOptions builder
      */
     public CreateConfigurationOptionsBuilder name(String name) {
-      this.name_serialized_name = name;
+      this.name = name;
       return this;
     }
 
     /**
-     * Set the description_serialized_name.
+     * Set the description.
      *
      * @param description the description
      * @return the CreateConfigurationOptions builder
      */
     public CreateConfigurationOptionsBuilder description(String description) {
-      this.description_serialized_name = description;
+      this.description = description;
       return this;
     }
 
     /**
-     * Set the conversions_serialized_name.
+     * Set the conversions.
      *
      * @param conversions the conversions
      * @return the CreateConfigurationOptions builder
      */
     public CreateConfigurationOptionsBuilder conversions(Conversions conversions) {
-      this.conversions_serialized_name = conversions;
+      this.conversions = conversions;
       return this;
     }
 
     /**
-     * Set the enrichments_serialized_name.
-     * Existing enrichments_serialized_name will be replaced.
+     * Set the enrichments.
+     * Existing enrichments will be replaced.
      *
      * @param enrichments the enrichments
      * @return the CreateConfigurationOptions builder
      */
     public CreateConfigurationOptionsBuilder enrichments(List<Enrichment> enrichments) {
-      this.enrichments_serialized_name = enrichments;
+      this.enrichments = enrichments;
       return this;
     }
 
     /**
-     * Set the normalizations_serialized_name.
-     * Existing normalizations_serialized_name will be replaced.
+     * Set the normalizations.
+     * Existing normalizations will be replaced.
      *
      * @param normalizations the normalizations
      * @return the CreateConfigurationOptions builder
      */
     public CreateConfigurationOptionsBuilder normalizations(List<NormalizationOperation> normalizations) {
-      this.normalizations_serialized_name = normalizations;
+      this.normalizations = normalizations;
       return this;
     }
 
     /**
-     * Set the source_serialized_name.
+     * Set the source.
      *
      * @param source the source
      * @return the CreateConfigurationOptions builder
      */
     public CreateConfigurationOptionsBuilder source(Source source) {
-      this.source_serialized_name = source;
+      this.source = source;
       return this;
     }
 
@@ -1662,12 +1726,12 @@ public class IBMDiscoveryV1Models {
      * @return the CreateConfigurationOptions builder
      */
     public CreateConfigurationOptionsBuilder configuration(Configuration configuration) {
-      this.name_serialized_name = configuration.getName();
-      this.description_serialized_name = configuration.getDescription();
-      this.conversions_serialized_name = configuration.getConversions();
-      this.enrichments_serialized_name = configuration.getEnrichments();
-      this.normalizations_serialized_name = configuration.getNormalizations();
-      this.source_serialized_name = configuration.getSource();
+      this.name = configuration.getName();
+      this.description = configuration.getDescription();
+      this.conversions = configuration.getConversions();
+      this.enrichments = configuration.getEnrichments();
+      this.normalizations = configuration.getNormalizations();
+      this.source = configuration.getSource();
       return this;
     }
 
@@ -1688,45 +1752,53 @@ public class IBMDiscoveryV1Models {
    * The createCredentials options.
    */
   public class CreateCredentialsOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String source_type_serialized_name;
-    private CredentialDetails credential_details_serialized_name;
+    private String environmentId;
+    private String sourceType;
+    private CredentialDetails credentialDetails;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the source_type_serialized_name.
+     * Gets the sourceType.
      *
      * The source that this credentials object connects to.
      * -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
      * -  `salesforce` indicates the credentials are used to connect to Salesforce.
      * -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
      *
-     * @return the source_type_serialized_name
+     * @return the sourceType
      */
     public String sourceType() {
-      return source_type_serialized_name;
+      return sourceType;
     }
+ 
     /**
-     * Gets the credential_details_serialized_name.
+     * Gets the credentialDetails.
      *
-     * @return the credential_details_serialized_name
+     * Object containing details of the stored credentials.
+     *
+     * Obtain credentials for your source from the administrator of the source.
+     *
+     * @return the credentialDetails
      */
     public CredentialDetails credentialDetails() {
-      return credential_details_serialized_name;
+      return credentialDetails;
     }
+
     private CreateCredentialsOptions(CreateCredentialsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      source_type_serialized_name = builder.source_type_serialized_name;
-      credential_details_serialized_name = builder.credential_details_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      environmentId = builder.environmentId;
+      sourceType = builder.sourceType;
+      credentialDetails = builder.credentialDetails;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1745,14 +1817,14 @@ public class IBMDiscoveryV1Models {
    * CreateCredentialsOptions Builder.
    */
   public class CreateCredentialsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String source_type_serialized_name;
-    private CredentialDetails credential_details_serialized_name;
+    private String environmentId;
+    private String sourceType;
+    private CredentialDetails credentialDetails;
 
     private CreateCredentialsOptionsBuilder(CreateCredentialsOptions createCredentialsOptions) {
-      environment_id_serialized_name = createCredentialsOptions.environment_id_serialized_name;
-      source_type_serialized_name = createCredentialsOptions.source_type_serialized_name;
-      credential_details_serialized_name = createCredentialsOptions.credential_details_serialized_name;
+      environmentId = createCredentialsOptions.environmentId;
+      sourceType = createCredentialsOptions.sourceType;
+      credentialDetails = createCredentialsOptions.credentialDetails;
       this.requestHeaders.putAll(createCredentialsOptions.requestHeaders());
     }
 
@@ -1768,7 +1840,7 @@ public class IBMDiscoveryV1Models {
      * @param environmentId the environmentId
      */
     public CreateCredentialsOptionsBuilder(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
     }
 
     /**
@@ -1781,35 +1853,35 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the CreateCredentialsOptions builder
      */
     public CreateCredentialsOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the source_type_serialized_name.
+     * Set the sourceType.
      *
      * @param sourceType the sourceType
      * @return the CreateCredentialsOptions builder
      */
     public CreateCredentialsOptionsBuilder sourceType(String sourceType) {
-      this.source_type_serialized_name = sourceType;
+      this.sourceType = sourceType;
       return this;
     }
 
     /**
-     * Set the credential_details_serialized_name.
+     * Set the credentialDetails.
      *
      * @param credentialDetails the credentialDetails
      * @return the CreateCredentialsOptions builder
      */
     public CreateCredentialsOptionsBuilder credentialDetails(CredentialDetails credentialDetails) {
-      this.credential_details_serialized_name = credentialDetails;
+      this.credentialDetails = credentialDetails;
       return this;
     }
 
@@ -1820,8 +1892,8 @@ public class IBMDiscoveryV1Models {
      * @return the CreateCredentialsOptions builder
      */
     public CreateCredentialsOptionsBuilder credentials(Credentials credentials) {
-      this.source_type_serialized_name = credentials.getSourceType();
-      this.credential_details_serialized_name = credentials.getCredentialDetails();
+      this.sourceType = credentials.getSourceType();
+      this.credentialDetails = credentials.getCredentialDetails();
       return this;
     }
 
@@ -1842,44 +1914,49 @@ public class IBMDiscoveryV1Models {
    * The createEnvironment options.
    */
   public class CreateEnvironmentOptions extends IBMWatsonOptionsModel {
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private String size_serialized_name;
+    private String name;
+    private String description;
+    private String size;
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * Name that identifies the environment.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     public String name() {
-      return name_serialized_name;
+      return name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * Description of the environment.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     public String description() {
-      return description_serialized_name;
+      return description;
     }
+ 
     /**
-     * Gets the size_serialized_name.
+     * Gets the size.
      *
-     * Size of the environment.
+     * Size of the environment. In the Lite plan the default and only accepted value is `LT`, in all other plans the
+     * default is `S`.
      *
-     * @return the size_serialized_name
+     * @return the size
      */
     public String size() {
-      return size_serialized_name;
+      return size;
     }
+
     private CreateEnvironmentOptions(CreateEnvironmentOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.name_serialized_name, 'name_serialized_name cannot be null');
-      name_serialized_name = builder.name_serialized_name;
-      description_serialized_name = builder.description_serialized_name;
-      size_serialized_name = builder.size_serialized_name;
+      IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
+      name = builder.name;
+      description = builder.description;
+      size = builder.size;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1898,14 +1975,14 @@ public class IBMDiscoveryV1Models {
    * CreateEnvironmentOptions Builder.
    */
   public class CreateEnvironmentOptionsBuilder extends IBMWatsonOptionsModel {
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private String size_serialized_name;
+    private String name;
+    private String description;
+    private String size;
 
     private CreateEnvironmentOptionsBuilder(CreateEnvironmentOptions createEnvironmentOptions) {
-      name_serialized_name = createEnvironmentOptions.name_serialized_name;
-      description_serialized_name = createEnvironmentOptions.description_serialized_name;
-      size_serialized_name = createEnvironmentOptions.size_serialized_name;
+      name = createEnvironmentOptions.name;
+      description = createEnvironmentOptions.description;
+      size = createEnvironmentOptions.size;
       this.requestHeaders.putAll(createEnvironmentOptions.requestHeaders());
     }
 
@@ -1921,7 +1998,7 @@ public class IBMDiscoveryV1Models {
      * @param name the name
      */
     public CreateEnvironmentOptionsBuilder(String name) {
-      this.name_serialized_name = name;
+      this.name = name;
     }
 
     /**
@@ -1934,42 +2011,35 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the name_serialized_name.
+     * Set the name.
      *
      * @param name the name
      * @return the CreateEnvironmentOptions builder
      */
     public CreateEnvironmentOptionsBuilder name(String name) {
-      this.name_serialized_name = name;
+      this.name = name;
       return this;
     }
 
     /**
-     * Set the description_serialized_name.
+     * Set the description.
      *
      * @param description the description
      * @return the CreateEnvironmentOptions builder
      */
     public CreateEnvironmentOptionsBuilder description(String description) {
-      this.description_serialized_name = description;
+      this.description = description;
       return this;
     }
 
     /**
-     * Set the size_serialized_name.
+     * Set the size.
      *
      * @param size the size
      * @return the CreateEnvironmentOptions builder
      */
     public CreateEnvironmentOptionsBuilder size(String size) {
-      this.size_serialized_name = size;
-      return this;
-    }
-
-    /**
-     * @deprecated This method no longer has an effect on the created environment. Please use the String method.
-     */
-    public CreateEnvironmentOptionsBuilder size(Long size) {
+      this.size = size;
       return this;
     }
 
@@ -1990,33 +2060,36 @@ public class IBMDiscoveryV1Models {
    * The createEvent options.
    */
   public class CreateEventOptions extends IBMWatsonOptionsModel {
-    private String type_serialized_name;
-    private EventData data_serialized_name;
+    private String xtype;
+    private EventData data;
+ 
     /**
-     * Gets the type_serialized_name.
+     * Gets the xtype.
      *
      * The event type to be created.
      *
-     * @return the type_serialized_name
+     * @return the xtype
      */
-    public String typeField() {
-      return type_serialized_name;
+    public String xtype() {
+      return xtype;
     }
+ 
     /**
-     * Gets the data_serialized_name.
+     * Gets the data.
      *
      * Data object used to create a query event.
      *
-     * @return the data_serialized_name
+     * @return the data
      */
     public EventData data() {
-      return data_serialized_name;
+      return data;
     }
+
     private CreateEventOptions(CreateEventOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.type_serialized_name, 'type_serialized_name cannot be null');
-      IBMWatsonValidator.notNull(builder.data_serialized_name, 'data_serialized_name cannot be null');
-      type_serialized_name = builder.type_serialized_name;
-      data_serialized_name = builder.data_serialized_name;
+      IBMWatsonValidator.notNull(builder.xtype, 'xtype cannot be null');
+      IBMWatsonValidator.notNull(builder.data, 'data cannot be null');
+      xtype = builder.xtype;
+      data = builder.data;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2035,12 +2108,12 @@ public class IBMDiscoveryV1Models {
    * CreateEventOptions Builder.
    */
   public class CreateEventOptionsBuilder extends IBMWatsonOptionsModel {
-    private String type_serialized_name;
-    private EventData data_serialized_name;
+    private String xtype;
+    private EventData data;
 
     private CreateEventOptionsBuilder(CreateEventOptions createEventOptions) {
-      type_serialized_name = createEventOptions.type_serialized_name;
-      data_serialized_name = createEventOptions.data_serialized_name;
+      xtype = createEventOptions.xtype;
+      data = createEventOptions.data;
       this.requestHeaders.putAll(createEventOptions.requestHeaders());
     }
 
@@ -2053,12 +2126,12 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param typeVar the typeVar
+     * @param xtype the xtype
      * @param data the data
      */
-    public CreateEventOptionsBuilder(String typeVar, EventData data) {
-      this.type_serialized_name = typeVar;
-      this.data_serialized_name = data;
+    public CreateEventOptionsBuilder(String xtype, EventData data) {
+      this.xtype = xtype;
+      this.data = data;
     }
 
     /**
@@ -2071,24 +2144,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the type_serialized_name.
+     * Set the xtype.
      *
-     * @param typeVar the typeVar
+     * @param xtype the xtype
      * @return the CreateEventOptions builder
      */
-    public CreateEventOptionsBuilder typeField(String typeVar) {
-      this.type_serialized_name = typeVar;
+    public CreateEventOptionsBuilder xtype(String xtype) {
+      this.xtype = xtype;
       return this;
     }
 
     /**
-     * Set the data_serialized_name.
+     * Set the data.
      *
      * @param data the data
      * @return the CreateEventOptions builder
      */
     public CreateEventOptionsBuilder data(EventData data) {
-      this.data_serialized_name = data;
+      this.data = data;
       return this;
     }
 
@@ -2111,21 +2184,25 @@ public class IBMDiscoveryV1Models {
   public class CreateEventResponse extends IBMWatsonResponseModel {
     private String type_serialized_name;
     private EventData data_serialized_name;
+ 
     /**
-     * Gets the type_serialized_name.
+     * Gets the xtype.
      *
      * The event type that was created.
      *
-     * @return the type_serialized_name
+     * @return the xtype
      */
     @AuraEnabled
-    public String getType() {
+    public String getXtype() {
       return type_serialized_name;
     }
+ 
     /**
-     * Gets the data_serialized_name.
+     * Gets the data.
      *
-     * @return the data_serialized_name
+     * Query event data object.
+     *
+     * @return the data
      */
     @AuraEnabled
     public EventData getData() {
@@ -2133,16 +2210,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the type_serialized_name.
+     * Sets the xtype.
      *
-     * @param typeVar the new typeVar
+     * @param xtype the new xtype
      */
-    public void setType(final String typeVar) {
-      this.type_serialized_name = typeVar;
+    public void setXtype(final String xtype) {
+      this.type_serialized_name = xtype;
     }
 
     /**
-     * Sets the data_serialized_name.
+     * Sets the data.
      *
      * @param data the new data
      */
@@ -2157,7 +2234,7 @@ public class IBMDiscoveryV1Models {
 
       CreateEventResponse ret = (CreateEventResponse) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for data_serialized_name
+      // calling custom deserializer for data
       EventData newData = (EventData) new EventData().deserialize(JSON.serialize(ret.getData()), (Map<String, Object>) jsonMap.get('data_serialized_name'), EventData.class);
       ret.setData(newData);
 
@@ -2169,31 +2246,34 @@ public class IBMDiscoveryV1Models {
    * The createExpansions options.
    */
   public class CreateExpansionsOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private List<Expansion> expansions_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private List<Expansion> expansions;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the expansions_serialized_name.
+     * Gets the expansions.
      *
      * An array of query expansion definitions.
      *
@@ -2209,17 +2289,18 @@ public class IBMDiscoveryV1Models {
      * **expanded_terms**. When items in the **input_terms** array are present in a query, they are expanded using the
      * items listed in the **expanded_terms** array.
      *
-     * @return the expansions_serialized_name
+     * @return the expansions
      */
     public List<Expansion> expansions() {
-      return expansions_serialized_name;
+      return expansions;
     }
+
     private CreateExpansionsOptions(CreateExpansionsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      expansions_serialized_name = builder.expansions_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      expansions = builder.expansions;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2238,14 +2319,14 @@ public class IBMDiscoveryV1Models {
    * CreateExpansionsOptions Builder.
    */
   public class CreateExpansionsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private List<Expansion> expansions_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private List<Expansion> expansions;
 
     private CreateExpansionsOptionsBuilder(CreateExpansionsOptions createExpansionsOptions) {
-      environment_id_serialized_name = createExpansionsOptions.environment_id_serialized_name;
-      collection_id_serialized_name = createExpansionsOptions.collection_id_serialized_name;
-      expansions_serialized_name = createExpansionsOptions.expansions_serialized_name;
+      environmentId = createExpansionsOptions.environmentId;
+      collectionId = createExpansionsOptions.collectionId;
+      expansions = createExpansionsOptions.expansions;
       this.requestHeaders.putAll(createExpansionsOptions.requestHeaders());
     }
 
@@ -2262,8 +2343,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public CreateExpansionsOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -2276,51 +2357,51 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an expansions to expansions_serialized_name.
+     * Adds an expansions to expansions.
      *
      * @param expansions the new expansions
      * @return the CreateExpansionsOptions builder
      */
     public CreateExpansionsOptionsBuilder addExpansions(Expansion expansions) {
       IBMWatsonValidator.notNull(expansions, 'expansions cannot be null');
-      if (this.expansions_serialized_name == null) {
-        this.expansions_serialized_name = new List<Expansion>();
+      if (this.expansions == null) {
+        this.expansions = new List<Expansion>();
       }
-      this.expansions_serialized_name.add(expansions);
+      this.expansions.add(expansions);
       return this;
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the CreateExpansionsOptions builder
      */
     public CreateExpansionsOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the CreateExpansionsOptions builder
      */
     public CreateExpansionsOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the expansions_serialized_name.
-     * Existing expansions_serialized_name will be replaced.
+     * Set the expansions.
+     * Existing expansions will be replaced.
      *
      * @param expansions the expansions
      * @return the CreateExpansionsOptions builder
      */
     public CreateExpansionsOptionsBuilder expansions(List<Expansion> expansions) {
-      this.expansions_serialized_name = expansions;
+      this.expansions = expansions;
       return this;
     }
 
@@ -2331,7 +2412,7 @@ public class IBMDiscoveryV1Models {
      * @return the CreateExpansionsOptions builder
      */
     public CreateExpansionsOptionsBuilder expansions(Expansions expansions) {
-      this.expansions_serialized_name = expansions.getExpansions();
+      this.expansions = expansions.getExpansions();
       return this;
     }
 
@@ -2352,76 +2433,83 @@ public class IBMDiscoveryV1Models {
    * The createTrainingExample options.
    */
   public class CreateTrainingExampleOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String query_id_serialized_name;
-    private String document_id_serialized_name;
-    private String cross_reference_serialized_name;
-    private Long relevance_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String queryId;
+    private String documentId;
+    private String crossReference;
+    private Long relevance;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the query_id_serialized_name.
+     * Gets the queryId.
      *
      * The ID of the query used for training.
      *
-     * @return the query_id_serialized_name
+     * @return the queryId
      */
     public String queryId() {
-      return query_id_serialized_name;
+      return queryId;
     }
+ 
     /**
-     * Gets the document_id_serialized_name.
+     * Gets the documentId.
      *
-     * @return the document_id_serialized_name
+     * @return the documentId
      */
     public String documentId() {
-      return document_id_serialized_name;
+      return documentId;
     }
+ 
     /**
-     * Gets the cross_reference_serialized_name.
+     * Gets the crossReference.
      *
-     * @return the cross_reference_serialized_name
+     * @return the crossReference
      */
     public String crossReference() {
-      return cross_reference_serialized_name;
+      return crossReference;
     }
+ 
     /**
-     * Gets the relevance_serialized_name.
+     * Gets the relevance.
      *
-     * @return the relevance_serialized_name
+     * @return the relevance
      */
     public Long relevance() {
-      return relevance_serialized_name;
+      return relevance;
     }
+
     private CreateTrainingExampleOptions(CreateTrainingExampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.query_id_serialized_name, 'query_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      query_id_serialized_name = builder.query_id_serialized_name;
-      document_id_serialized_name = builder.document_id_serialized_name;
-      cross_reference_serialized_name = builder.cross_reference_serialized_name;
-      relevance_serialized_name = builder.relevance_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.queryId, 'queryId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      queryId = builder.queryId;
+      documentId = builder.documentId;
+      crossReference = builder.crossReference;
+      relevance = builder.relevance;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2440,20 +2528,20 @@ public class IBMDiscoveryV1Models {
    * CreateTrainingExampleOptions Builder.
    */
   public class CreateTrainingExampleOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String query_id_serialized_name;
-    private String document_id_serialized_name;
-    private String cross_reference_serialized_name;
-    private Long relevance_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String queryId;
+    private String documentId;
+    private String crossReference;
+    private Long relevance;
 
     private CreateTrainingExampleOptionsBuilder(CreateTrainingExampleOptions createTrainingExampleOptions) {
-      environment_id_serialized_name = createTrainingExampleOptions.environment_id_serialized_name;
-      collection_id_serialized_name = createTrainingExampleOptions.collection_id_serialized_name;
-      query_id_serialized_name = createTrainingExampleOptions.query_id_serialized_name;
-      document_id_serialized_name = createTrainingExampleOptions.document_id_serialized_name;
-      cross_reference_serialized_name = createTrainingExampleOptions.cross_reference_serialized_name;
-      relevance_serialized_name = createTrainingExampleOptions.relevance_serialized_name;
+      environmentId = createTrainingExampleOptions.environmentId;
+      collectionId = createTrainingExampleOptions.collectionId;
+      queryId = createTrainingExampleOptions.queryId;
+      documentId = createTrainingExampleOptions.documentId;
+      crossReference = createTrainingExampleOptions.crossReference;
+      relevance = createTrainingExampleOptions.relevance;
       this.requestHeaders.putAll(createTrainingExampleOptions.requestHeaders());
     }
 
@@ -2471,9 +2559,9 @@ public class IBMDiscoveryV1Models {
      * @param queryId the queryId
      */
     public CreateTrainingExampleOptionsBuilder(String environmentId, String collectionId, String queryId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
-      this.query_id_serialized_name = queryId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+      this.queryId = queryId;
     }
 
     /**
@@ -2486,68 +2574,68 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the CreateTrainingExampleOptions builder
      */
     public CreateTrainingExampleOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the CreateTrainingExampleOptions builder
      */
     public CreateTrainingExampleOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the query_id_serialized_name.
+     * Set the queryId.
      *
      * @param queryId the queryId
      * @return the CreateTrainingExampleOptions builder
      */
     public CreateTrainingExampleOptionsBuilder queryId(String queryId) {
-      this.query_id_serialized_name = queryId;
+      this.queryId = queryId;
       return this;
     }
 
     /**
-     * Set the document_id_serialized_name.
+     * Set the documentId.
      *
      * @param documentId the documentId
      * @return the CreateTrainingExampleOptions builder
      */
     public CreateTrainingExampleOptionsBuilder documentId(String documentId) {
-      this.document_id_serialized_name = documentId;
+      this.documentId = documentId;
       return this;
     }
 
     /**
-     * Set the cross_reference_serialized_name.
+     * Set the crossReference.
      *
      * @param crossReference the crossReference
      * @return the CreateTrainingExampleOptions builder
      */
     public CreateTrainingExampleOptionsBuilder crossReference(String crossReference) {
-      this.cross_reference_serialized_name = crossReference;
+      this.crossReference = crossReference;
       return this;
     }
 
     /**
-     * Set the relevance_serialized_name.
+     * Set the relevance.
      *
      * @param relevance the relevance
      * @return the CreateTrainingExampleOptions builder
      */
     public CreateTrainingExampleOptionsBuilder relevance(Long relevance) {
-      this.relevance_serialized_name = relevance;
+      this.relevance = relevance;
       return this;
     }
 
@@ -2558,9 +2646,9 @@ public class IBMDiscoveryV1Models {
      * @return the CreateTrainingExampleOptions builder
      */
     public CreateTrainingExampleOptionsBuilder trainingExample(TrainingExample trainingExample) {
-      this.document_id_serialized_name = trainingExample.getDocumentId();
-      this.cross_reference_serialized_name = trainingExample.getCrossReference();
-      this.relevance_serialized_name = trainingExample.getRelevance();
+      this.documentId = trainingExample.getDocumentId();
+      this.crossReference = trainingExample.getCrossReference();
+      this.relevance = trainingExample.getRelevance();
       return this;
     }
 
@@ -2589,14 +2677,15 @@ public class IBMDiscoveryV1Models {
     private String url_serialized_name;
     private String username_serialized_name;
     private String organization_url_serialized_name;
-    private String site_collection_path_serialized_name;
+    private String site_collection.path_serialized_name;
     private String client_secret_serialized_name;
     private String public_key_id_serialized_name;
     private String private_key_serialized_name;
     private String passphrase_serialized_name;
     private String password_serialized_name;
+ 
     /**
-     * Gets the credential_type_serialized_name.
+     * Gets the credentialType.
      *
      * The authentication method for this credentials definition. The  **credential_type** specified must be supported
      * by the **source_type**. The following combinations are possible:
@@ -2605,138 +2694,149 @@ public class IBMDiscoveryV1Models {
      * -  `"source_type": "salesforce"` - valid `credential_type`s: `username_password`
      * -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml`.
      *
-     * @return the credential_type_serialized_name
+     * @return the credentialType
      */
     @AuraEnabled
     public String getCredentialType() {
       return credential_type_serialized_name;
     }
+ 
     /**
-     * Gets the client_id_serialized_name.
+     * Gets the clientId.
      *
      * The **client_id** of the source that these credentials connect to. Only valid, and required, with a
      * **credential_type** of `oauth2`.
      *
-     * @return the client_id_serialized_name
+     * @return the clientId
      */
     @AuraEnabled
     public String getClientId() {
       return client_id_serialized_name;
     }
+ 
     /**
-     * Gets the enterprise_id_serialized_name.
+     * Gets the enterpriseId.
      *
      * The **enterprise_id** of the Box site that these credentials connect to. Only valid, and required, with a
      * **source_type** of `box`.
      *
-     * @return the enterprise_id_serialized_name
+     * @return the enterpriseId
      */
     @AuraEnabled
     public String getEnterpriseId() {
       return enterprise_id_serialized_name;
     }
+ 
     /**
-     * Gets the url_serialized_name.
+     * Gets the url.
      *
      * The **url** of the source that these credentials connect to. Only valid, and required, with a **credential_type**
      * of `username_password`.
      *
-     * @return the url_serialized_name
+     * @return the url
      */
     @AuraEnabled
     public String getUrl() {
       return url_serialized_name;
     }
+ 
     /**
-     * Gets the username_serialized_name.
+     * Gets the username.
      *
      * The **username** of the source that these credentials connect to. Only valid, and required, with a
      * **credential_type** of `saml` and `username_password`.
      *
-     * @return the username_serialized_name
+     * @return the username
      */
     @AuraEnabled
     public String getUsername() {
       return username_serialized_name;
     }
+ 
     /**
-     * Gets the organization_url_serialized_name.
+     * Gets the organizationUrl.
      *
      * The **organization_url** of the source that these credentials connect to. Only valid, and required, with a
      * **credential_type** of `saml`.
      *
-     * @return the organization_url_serialized_name
+     * @return the organizationUrl
      */
     @AuraEnabled
     public String getOrganizationUrl() {
       return organization_url_serialized_name;
     }
+ 
     /**
-     * Gets the site_collection_path_serialized_name.
+     * Gets the siteCollectionPath.
      *
      * The **site_collection.path** of the source that these credentials connect to. Only valid, and required, with a
      * **source_type** of `sharepoint`.
      *
-     * @return the site_collection_path_serialized_name
+     * @return the siteCollectionPath
      */
     @AuraEnabled
     public String getSiteCollectionPath() {
-      return site_collection_path_serialized_name;
+      return site_collection.path_serialized_name;
     }
+ 
     /**
-     * Gets the client_secret_serialized_name.
+     * Gets the clientSecret.
      *
      * The **client_secret** of the source that these credentials connect to. Only valid, and required, with a
      * **credential_type** of `oauth2`. This value is never returned and is only used when creating or modifying
      * **credentials**.
      *
-     * @return the client_secret_serialized_name
+     * @return the clientSecret
      */
     @AuraEnabled
     public String getClientSecret() {
       return client_secret_serialized_name;
     }
+ 
     /**
-     * Gets the public_key_id_serialized_name.
+     * Gets the publicKeyId.
      *
      * The **public_key_id** of the source that these credentials connect to. Only valid, and required, with a
      * **credential_type** of `oauth2`. This value is never returned and is only used when creating or modifying
      * **credentials**.
      *
-     * @return the public_key_id_serialized_name
+     * @return the publicKeyId
      */
     @AuraEnabled
     public String getPublicKeyId() {
       return public_key_id_serialized_name;
     }
+ 
     /**
-     * Gets the private_key_serialized_name.
+     * Gets the privateKey.
      *
      * The **private_key** of the source that these credentials connect to. Only valid, and required, with a
      * **credential_type** of `oauth2`. This value is never returned and is only used when creating or modifying
      * **credentials**.
      *
-     * @return the private_key_serialized_name
+     * @return the privateKey
      */
     @AuraEnabled
     public String getPrivateKey() {
       return private_key_serialized_name;
     }
+ 
     /**
-     * Gets the passphrase_serialized_name.
+     * Gets the passphrase.
      *
      * The **passphrase** of the source that these credentials connect to. Only valid, and required, with a
      * **credential_type** of `oauth2`. This value is never returned and is only used when creating or modifying
      * **credentials**.
      *
-     * @return the passphrase_serialized_name
+     * @return the passphrase
      */
     @AuraEnabled
     public String getPassphrase() {
       return passphrase_serialized_name;
     }
+ 
     /**
-     * Gets the password_serialized_name.
+     * Gets the password.
      *
      * The **password** of the source that these credentials connect to. Only valid, and required, with
      * **credential_type**s of `saml` and `username_password`.
@@ -2745,7 +2845,7 @@ public class IBMDiscoveryV1Models {
      * a valid Salesforce security token concatenated. This value is never returned and is only used when creating or
      * modifying **credentials**.
      *
-     * @return the password_serialized_name
+     * @return the password
      */
     @AuraEnabled
     public String getPassword() {
@@ -2753,7 +2853,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the credential_type_serialized_name.
+     * Sets the credentialType.
      *
      * @param credentialType the new credentialType
      */
@@ -2762,7 +2862,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the client_id_serialized_name.
+     * Sets the clientId.
      *
      * @param clientId the new clientId
      */
@@ -2771,7 +2871,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the enterprise_id_serialized_name.
+     * Sets the enterpriseId.
      *
      * @param enterpriseId the new enterpriseId
      */
@@ -2780,7 +2880,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the url_serialized_name.
+     * Sets the url.
      *
      * @param url the new url
      */
@@ -2789,7 +2889,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the username_serialized_name.
+     * Sets the username.
      *
      * @param username the new username
      */
@@ -2798,7 +2898,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the organization_url_serialized_name.
+     * Sets the organizationUrl.
      *
      * @param organizationUrl the new organizationUrl
      */
@@ -2807,16 +2907,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the site_collection_path_serialized_name.
+     * Sets the siteCollectionPath.
      *
      * @param siteCollectionPath the new siteCollectionPath
      */
     public void setSiteCollectionPath(final String siteCollectionPath) {
-      this.site_collection_path_serialized_name = siteCollectionPath;
+      this.site_collection.path_serialized_name = siteCollectionPath;
     }
 
     /**
-     * Sets the client_secret_serialized_name.
+     * Sets the clientSecret.
      *
      * @param clientSecret the new clientSecret
      */
@@ -2825,7 +2925,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the public_key_id_serialized_name.
+     * Sets the publicKeyId.
      *
      * @param publicKeyId the new publicKeyId
      */
@@ -2834,7 +2934,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the private_key_serialized_name.
+     * Sets the privateKey.
      *
      * @param privateKey the new privateKey
      */
@@ -2843,7 +2943,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the passphrase_serialized_name.
+     * Sets the passphrase.
      *
      * @param passphrase the new passphrase
      */
@@ -2852,7 +2952,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the password_serialized_name.
+     * Sets the password.
      *
      * @param password the new password
      */
@@ -2878,35 +2978,42 @@ public class IBMDiscoveryV1Models {
     private String credential_id_serialized_name;
     private String source_type_serialized_name;
     private CredentialDetails credential_details_serialized_name;
+ 
     /**
-     * Gets the credential_id_serialized_name.
+     * Gets the credentialId.
      *
      * Unique identifier for this set of credentials.
      *
-     * @return the credential_id_serialized_name
+     * @return the credentialId
      */
     @AuraEnabled
     public String getCredentialId() {
       return credential_id_serialized_name;
     }
+ 
     /**
-     * Gets the source_type_serialized_name.
+     * Gets the sourceType.
      *
      * The source that this credentials object connects to.
      * -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
      * -  `salesforce` indicates the credentials are used to connect to Salesforce.
      * -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
      *
-     * @return the source_type_serialized_name
+     * @return the sourceType
      */
     @AuraEnabled
     public String getSourceType() {
       return source_type_serialized_name;
     }
+ 
     /**
-     * Gets the credential_details_serialized_name.
+     * Gets the credentialDetails.
      *
-     * @return the credential_details_serialized_name
+     * Object containing details of the stored credentials.
+     *
+     * Obtain credentials for your source from the administrator of the source.
+     *
+     * @return the credentialDetails
      */
     @AuraEnabled
     public CredentialDetails getCredentialDetails() {
@@ -2914,7 +3021,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the source_type_serialized_name.
+     * Sets the sourceType.
      *
      * @param sourceType the new sourceType
      */
@@ -2923,7 +3030,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the credential_details_serialized_name.
+     * Sets the credentialDetails.
      *
      * @param credentialDetails the new credentialDetails
      */
@@ -2938,7 +3045,7 @@ public class IBMDiscoveryV1Models {
 
       Credentials ret = (Credentials) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for credential_details_serialized_name
+      // calling custom deserializer for credentialDetails
       CredentialDetails newCredentialDetails = (CredentialDetails) new CredentialDetails().deserialize(JSON.serialize(ret.getCredentialDetails()), (Map<String, Object>) jsonMap.get('credential_details_serialized_name'), CredentialDetails.class);
       ret.setCredentialDetails(newCredentialDetails);
 
@@ -2951,12 +3058,13 @@ public class IBMDiscoveryV1Models {
    */
   public class CredentialsList extends IBMWatsonResponseModel {
     private List<Credentials> credentials_serialized_name;
+ 
     /**
-     * Gets the credentials_serialized_name.
+     * Gets the credentials.
      *
      * An array of credential definitions that were created for this instance.
      *
-     * @return the credentials_serialized_name
+     * @return the credentials
      */
     @AuraEnabled
     public List<Credentials> getCredentials() {
@@ -2964,7 +3072,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the credentials_serialized_name.
+     * Sets the credentials.
      *
      * @param credentials the new credentials
      */
@@ -2979,7 +3087,7 @@ public class IBMDiscoveryV1Models {
 
       CredentialsList ret = (CredentialsList) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for credentials_serialized_name
+      // calling custom deserializer for credentials
       List<Credentials> newCredentials = new List<Credentials>();
       List<Credentials> deserializedCredentials = ret.getCredentials();
       if (deserializedCredentials != null) {
@@ -3000,33 +3108,36 @@ public class IBMDiscoveryV1Models {
    * The deleteAllTrainingData options.
    */
   public class DeleteAllTrainingDataOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+
     private DeleteAllTrainingDataOptions(DeleteAllTrainingDataOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3045,12 +3156,12 @@ public class IBMDiscoveryV1Models {
    * DeleteAllTrainingDataOptions Builder.
    */
   public class DeleteAllTrainingDataOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
 
     private DeleteAllTrainingDataOptionsBuilder(DeleteAllTrainingDataOptions deleteAllTrainingDataOptions) {
-      environment_id_serialized_name = deleteAllTrainingDataOptions.environment_id_serialized_name;
-      collection_id_serialized_name = deleteAllTrainingDataOptions.collection_id_serialized_name;
+      environmentId = deleteAllTrainingDataOptions.environmentId;
+      collectionId = deleteAllTrainingDataOptions.collectionId;
       this.requestHeaders.putAll(deleteAllTrainingDataOptions.requestHeaders());
     }
 
@@ -3067,8 +3178,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public DeleteAllTrainingDataOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -3081,24 +3192,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the DeleteAllTrainingDataOptions builder
      */
     public DeleteAllTrainingDataOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the DeleteAllTrainingDataOptions builder
      */
     public DeleteAllTrainingDataOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
@@ -3119,33 +3230,36 @@ public class IBMDiscoveryV1Models {
    * The deleteCollection options.
    */
   public class DeleteCollectionOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+
     private DeleteCollectionOptions(DeleteCollectionOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3164,12 +3278,12 @@ public class IBMDiscoveryV1Models {
    * DeleteCollectionOptions Builder.
    */
   public class DeleteCollectionOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
 
     private DeleteCollectionOptionsBuilder(DeleteCollectionOptions deleteCollectionOptions) {
-      environment_id_serialized_name = deleteCollectionOptions.environment_id_serialized_name;
-      collection_id_serialized_name = deleteCollectionOptions.collection_id_serialized_name;
+      environmentId = deleteCollectionOptions.environmentId;
+      collectionId = deleteCollectionOptions.collectionId;
       this.requestHeaders.putAll(deleteCollectionOptions.requestHeaders());
     }
 
@@ -3186,8 +3300,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public DeleteCollectionOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -3200,24 +3314,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the DeleteCollectionOptions builder
      */
     public DeleteCollectionOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the DeleteCollectionOptions builder
      */
     public DeleteCollectionOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
@@ -3238,33 +3352,36 @@ public class IBMDiscoveryV1Models {
    * The deleteConfiguration options.
    */
   public class DeleteConfigurationOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String configuration_id_serialized_name;
+    private String environmentId;
+    private String configurationId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the configuration_id_serialized_name.
+     * Gets the configurationId.
      *
      * The ID of the configuration.
      *
-     * @return the configuration_id_serialized_name
+     * @return the configurationId
      */
     public String configurationId() {
-      return configuration_id_serialized_name;
+      return configurationId;
     }
+
     private DeleteConfigurationOptions(DeleteConfigurationOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.configuration_id_serialized_name, 'configuration_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      configuration_id_serialized_name = builder.configuration_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.configurationId, 'configurationId cannot be empty');
+      environmentId = builder.environmentId;
+      configurationId = builder.configurationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3283,12 +3400,12 @@ public class IBMDiscoveryV1Models {
    * DeleteConfigurationOptions Builder.
    */
   public class DeleteConfigurationOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String configuration_id_serialized_name;
+    private String environmentId;
+    private String configurationId;
 
     private DeleteConfigurationOptionsBuilder(DeleteConfigurationOptions deleteConfigurationOptions) {
-      environment_id_serialized_name = deleteConfigurationOptions.environment_id_serialized_name;
-      configuration_id_serialized_name = deleteConfigurationOptions.configuration_id_serialized_name;
+      environmentId = deleteConfigurationOptions.environmentId;
+      configurationId = deleteConfigurationOptions.configurationId;
       this.requestHeaders.putAll(deleteConfigurationOptions.requestHeaders());
     }
 
@@ -3305,8 +3422,8 @@ public class IBMDiscoveryV1Models {
      * @param configurationId the configurationId
      */
     public DeleteConfigurationOptionsBuilder(String environmentId, String configurationId) {
-      this.environment_id_serialized_name = environmentId;
-      this.configuration_id_serialized_name = configurationId;
+      this.environmentId = environmentId;
+      this.configurationId = configurationId;
     }
 
     /**
@@ -3319,24 +3436,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the DeleteConfigurationOptions builder
      */
     public DeleteConfigurationOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the configuration_id_serialized_name.
+     * Set the configurationId.
      *
      * @param configurationId the configurationId
      * @return the DeleteConfigurationOptions builder
      */
     public DeleteConfigurationOptionsBuilder configurationId(String configurationId) {
-      this.configuration_id_serialized_name = configurationId;
+      this.configurationId = configurationId;
       return this;
     }
 
@@ -3357,33 +3474,36 @@ public class IBMDiscoveryV1Models {
    * The deleteCredentials options.
    */
   public class DeleteCredentialsOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String credential_id_serialized_name;
+    private String environmentId;
+    private String credentialId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the credential_id_serialized_name.
+     * Gets the credentialId.
      *
      * The unique identifier for a set of source credentials.
      *
-     * @return the credential_id_serialized_name
+     * @return the credentialId
      */
     public String credentialId() {
-      return credential_id_serialized_name;
+      return credentialId;
     }
+
     private DeleteCredentialsOptions(DeleteCredentialsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.credential_id_serialized_name, 'credential_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      credential_id_serialized_name = builder.credential_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.credentialId, 'credentialId cannot be empty');
+      environmentId = builder.environmentId;
+      credentialId = builder.credentialId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3402,12 +3522,12 @@ public class IBMDiscoveryV1Models {
    * DeleteCredentialsOptions Builder.
    */
   public class DeleteCredentialsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String credential_id_serialized_name;
+    private String environmentId;
+    private String credentialId;
 
     private DeleteCredentialsOptionsBuilder(DeleteCredentialsOptions deleteCredentialsOptions) {
-      environment_id_serialized_name = deleteCredentialsOptions.environment_id_serialized_name;
-      credential_id_serialized_name = deleteCredentialsOptions.credential_id_serialized_name;
+      environmentId = deleteCredentialsOptions.environmentId;
+      credentialId = deleteCredentialsOptions.credentialId;
       this.requestHeaders.putAll(deleteCredentialsOptions.requestHeaders());
     }
 
@@ -3424,8 +3544,8 @@ public class IBMDiscoveryV1Models {
      * @param credentialId the credentialId
      */
     public DeleteCredentialsOptionsBuilder(String environmentId, String credentialId) {
-      this.environment_id_serialized_name = environmentId;
-      this.credential_id_serialized_name = credentialId;
+      this.environmentId = environmentId;
+      this.credentialId = credentialId;
     }
 
     /**
@@ -3438,24 +3558,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the DeleteCredentialsOptions builder
      */
     public DeleteCredentialsOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the credential_id_serialized_name.
+     * Set the credentialId.
      *
      * @param credentialId the credentialId
      * @return the DeleteCredentialsOptions builder
      */
     public DeleteCredentialsOptionsBuilder credentialId(String credentialId) {
-      this.credential_id_serialized_name = credentialId;
+      this.credentialId = credentialId;
       return this;
     }
 
@@ -3476,46 +3596,50 @@ public class IBMDiscoveryV1Models {
    * The deleteDocument options.
    */
   public class DeleteDocumentOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String document_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String documentId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the document_id_serialized_name.
+     * Gets the documentId.
      *
      * The ID of the document.
      *
-     * @return the document_id_serialized_name
+     * @return the documentId
      */
     public String documentId() {
-      return document_id_serialized_name;
+      return documentId;
     }
+
     private DeleteDocumentOptions(DeleteDocumentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.document_id_serialized_name, 'document_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      document_id_serialized_name = builder.document_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.documentId, 'documentId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      documentId = builder.documentId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3534,14 +3658,14 @@ public class IBMDiscoveryV1Models {
    * DeleteDocumentOptions Builder.
    */
   public class DeleteDocumentOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String document_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String documentId;
 
     private DeleteDocumentOptionsBuilder(DeleteDocumentOptions deleteDocumentOptions) {
-      environment_id_serialized_name = deleteDocumentOptions.environment_id_serialized_name;
-      collection_id_serialized_name = deleteDocumentOptions.collection_id_serialized_name;
-      document_id_serialized_name = deleteDocumentOptions.document_id_serialized_name;
+      environmentId = deleteDocumentOptions.environmentId;
+      collectionId = deleteDocumentOptions.collectionId;
+      documentId = deleteDocumentOptions.documentId;
       this.requestHeaders.putAll(deleteDocumentOptions.requestHeaders());
     }
 
@@ -3559,9 +3683,9 @@ public class IBMDiscoveryV1Models {
      * @param documentId the documentId
      */
     public DeleteDocumentOptionsBuilder(String environmentId, String collectionId, String documentId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
-      this.document_id_serialized_name = documentId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+      this.documentId = documentId;
     }
 
     /**
@@ -3574,35 +3698,35 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the DeleteDocumentOptions builder
      */
     public DeleteDocumentOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the DeleteDocumentOptions builder
      */
     public DeleteDocumentOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the document_id_serialized_name.
+     * Set the documentId.
      *
      * @param documentId the documentId
      * @return the DeleteDocumentOptions builder
      */
     public DeleteDocumentOptionsBuilder documentId(String documentId) {
-      this.document_id_serialized_name = documentId;
+      this.documentId = documentId;
       return this;
     }
 
@@ -3623,20 +3747,22 @@ public class IBMDiscoveryV1Models {
    * The deleteEnvironment options.
    */
   public class DeleteEnvironmentOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
+    private String environmentId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+
     private DeleteEnvironmentOptions(DeleteEnvironmentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      environmentId = builder.environmentId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3655,10 +3781,10 @@ public class IBMDiscoveryV1Models {
    * DeleteEnvironmentOptions Builder.
    */
   public class DeleteEnvironmentOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
+    private String environmentId;
 
     private DeleteEnvironmentOptionsBuilder(DeleteEnvironmentOptions deleteEnvironmentOptions) {
-      environment_id_serialized_name = deleteEnvironmentOptions.environment_id_serialized_name;
+      environmentId = deleteEnvironmentOptions.environmentId;
       this.requestHeaders.putAll(deleteEnvironmentOptions.requestHeaders());
     }
 
@@ -3674,7 +3800,7 @@ public class IBMDiscoveryV1Models {
      * @param environmentId the environmentId
      */
     public DeleteEnvironmentOptionsBuilder(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
     }
 
     /**
@@ -3687,13 +3813,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the DeleteEnvironmentOptions builder
      */
     public DeleteEnvironmentOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
@@ -3714,33 +3840,36 @@ public class IBMDiscoveryV1Models {
    * The deleteExpansions options.
    */
   public class DeleteExpansionsOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+
     private DeleteExpansionsOptions(DeleteExpansionsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3759,12 +3888,12 @@ public class IBMDiscoveryV1Models {
    * DeleteExpansionsOptions Builder.
    */
   public class DeleteExpansionsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
 
     private DeleteExpansionsOptionsBuilder(DeleteExpansionsOptions deleteExpansionsOptions) {
-      environment_id_serialized_name = deleteExpansionsOptions.environment_id_serialized_name;
-      collection_id_serialized_name = deleteExpansionsOptions.collection_id_serialized_name;
+      environmentId = deleteExpansionsOptions.environmentId;
+      collectionId = deleteExpansionsOptions.collectionId;
       this.requestHeaders.putAll(deleteExpansionsOptions.requestHeaders());
     }
 
@@ -3781,8 +3910,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public DeleteExpansionsOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -3795,24 +3924,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the DeleteExpansionsOptions builder
      */
     public DeleteExpansionsOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the DeleteExpansionsOptions builder
      */
     public DeleteExpansionsOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
@@ -3833,46 +3962,50 @@ public class IBMDiscoveryV1Models {
    * The deleteTrainingData options.
    */
   public class DeleteTrainingDataOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String query_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String queryId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the query_id_serialized_name.
+     * Gets the queryId.
      *
      * The ID of the query used for training.
      *
-     * @return the query_id_serialized_name
+     * @return the queryId
      */
     public String queryId() {
-      return query_id_serialized_name;
+      return queryId;
     }
+
     private DeleteTrainingDataOptions(DeleteTrainingDataOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.query_id_serialized_name, 'query_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      query_id_serialized_name = builder.query_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.queryId, 'queryId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      queryId = builder.queryId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3891,14 +4024,14 @@ public class IBMDiscoveryV1Models {
    * DeleteTrainingDataOptions Builder.
    */
   public class DeleteTrainingDataOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String query_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String queryId;
 
     private DeleteTrainingDataOptionsBuilder(DeleteTrainingDataOptions deleteTrainingDataOptions) {
-      environment_id_serialized_name = deleteTrainingDataOptions.environment_id_serialized_name;
-      collection_id_serialized_name = deleteTrainingDataOptions.collection_id_serialized_name;
-      query_id_serialized_name = deleteTrainingDataOptions.query_id_serialized_name;
+      environmentId = deleteTrainingDataOptions.environmentId;
+      collectionId = deleteTrainingDataOptions.collectionId;
+      queryId = deleteTrainingDataOptions.queryId;
       this.requestHeaders.putAll(deleteTrainingDataOptions.requestHeaders());
     }
 
@@ -3916,9 +4049,9 @@ public class IBMDiscoveryV1Models {
      * @param queryId the queryId
      */
     public DeleteTrainingDataOptionsBuilder(String environmentId, String collectionId, String queryId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
-      this.query_id_serialized_name = queryId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+      this.queryId = queryId;
     }
 
     /**
@@ -3931,35 +4064,35 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the DeleteTrainingDataOptions builder
      */
     public DeleteTrainingDataOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the DeleteTrainingDataOptions builder
      */
     public DeleteTrainingDataOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the query_id_serialized_name.
+     * Set the queryId.
      *
      * @param queryId the queryId
      * @return the DeleteTrainingDataOptions builder
      */
     public DeleteTrainingDataOptionsBuilder queryId(String queryId) {
-      this.query_id_serialized_name = queryId;
+      this.queryId = queryId;
       return this;
     }
 
@@ -3980,59 +4113,64 @@ public class IBMDiscoveryV1Models {
    * The deleteTrainingExample options.
    */
   public class DeleteTrainingExampleOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String query_id_serialized_name;
-    private String example_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String queryId;
+    private String exampleId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the query_id_serialized_name.
+     * Gets the queryId.
      *
      * The ID of the query used for training.
      *
-     * @return the query_id_serialized_name
+     * @return the queryId
      */
     public String queryId() {
-      return query_id_serialized_name;
+      return queryId;
     }
+ 
     /**
-     * Gets the example_id_serialized_name.
+     * Gets the exampleId.
      *
      * The ID of the document as it is indexed.
      *
-     * @return the example_id_serialized_name
+     * @return the exampleId
      */
     public String exampleId() {
-      return example_id_serialized_name;
+      return exampleId;
     }
+
     private DeleteTrainingExampleOptions(DeleteTrainingExampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.query_id_serialized_name, 'query_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.example_id_serialized_name, 'example_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      query_id_serialized_name = builder.query_id_serialized_name;
-      example_id_serialized_name = builder.example_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.queryId, 'queryId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.exampleId, 'exampleId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      queryId = builder.queryId;
+      exampleId = builder.exampleId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -4051,16 +4189,16 @@ public class IBMDiscoveryV1Models {
    * DeleteTrainingExampleOptions Builder.
    */
   public class DeleteTrainingExampleOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String query_id_serialized_name;
-    private String example_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String queryId;
+    private String exampleId;
 
     private DeleteTrainingExampleOptionsBuilder(DeleteTrainingExampleOptions deleteTrainingExampleOptions) {
-      environment_id_serialized_name = deleteTrainingExampleOptions.environment_id_serialized_name;
-      collection_id_serialized_name = deleteTrainingExampleOptions.collection_id_serialized_name;
-      query_id_serialized_name = deleteTrainingExampleOptions.query_id_serialized_name;
-      example_id_serialized_name = deleteTrainingExampleOptions.example_id_serialized_name;
+      environmentId = deleteTrainingExampleOptions.environmentId;
+      collectionId = deleteTrainingExampleOptions.collectionId;
+      queryId = deleteTrainingExampleOptions.queryId;
+      exampleId = deleteTrainingExampleOptions.exampleId;
       this.requestHeaders.putAll(deleteTrainingExampleOptions.requestHeaders());
     }
 
@@ -4079,10 +4217,10 @@ public class IBMDiscoveryV1Models {
      * @param exampleId the exampleId
      */
     public DeleteTrainingExampleOptionsBuilder(String environmentId, String collectionId, String queryId, String exampleId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
-      this.query_id_serialized_name = queryId;
-      this.example_id_serialized_name = exampleId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+      this.queryId = queryId;
+      this.exampleId = exampleId;
     }
 
     /**
@@ -4095,46 +4233,46 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the DeleteTrainingExampleOptions builder
      */
     public DeleteTrainingExampleOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the DeleteTrainingExampleOptions builder
      */
     public DeleteTrainingExampleOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the query_id_serialized_name.
+     * Set the queryId.
      *
      * @param queryId the queryId
      * @return the DeleteTrainingExampleOptions builder
      */
     public DeleteTrainingExampleOptionsBuilder queryId(String queryId) {
-      this.query_id_serialized_name = queryId;
+      this.queryId = queryId;
       return this;
     }
 
     /**
-     * Set the example_id_serialized_name.
+     * Set the exampleId.
      *
      * @param exampleId the exampleId
      * @return the DeleteTrainingExampleOptions builder
      */
     public DeleteTrainingExampleOptionsBuilder exampleId(String exampleId) {
-      this.example_id_serialized_name = exampleId;
+      this.exampleId = exampleId;
       return this;
     }
 
@@ -4155,20 +4293,22 @@ public class IBMDiscoveryV1Models {
    * The deleteUserData options.
    */
   public class DeleteUserDataOptions extends IBMWatsonOptionsModel {
-    private String customer_id_serialized_name;
+    private String customerId;
+ 
     /**
-     * Gets the customer_id_serialized_name.
+     * Gets the customerId.
      *
      * The customer ID for which all data is to be deleted.
      *
-     * @return the customer_id_serialized_name
+     * @return the customerId
      */
     public String customerId() {
-      return customer_id_serialized_name;
+      return customerId;
     }
+
     private DeleteUserDataOptions(DeleteUserDataOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.customer_id_serialized_name, 'customer_id_serialized_name cannot be null');
-      customer_id_serialized_name = builder.customer_id_serialized_name;
+      IBMWatsonValidator.notNull(builder.customerId, 'customerId cannot be null');
+      customerId = builder.customerId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -4187,10 +4327,10 @@ public class IBMDiscoveryV1Models {
    * DeleteUserDataOptions Builder.
    */
   public class DeleteUserDataOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customer_id_serialized_name;
+    private String customerId;
 
     private DeleteUserDataOptionsBuilder(DeleteUserDataOptions deleteUserDataOptions) {
-      customer_id_serialized_name = deleteUserDataOptions.customer_id_serialized_name;
+      customerId = deleteUserDataOptions.customerId;
       this.requestHeaders.putAll(deleteUserDataOptions.requestHeaders());
     }
 
@@ -4206,7 +4346,7 @@ public class IBMDiscoveryV1Models {
      * @param customerId the customerId
      */
     public DeleteUserDataOptionsBuilder(String customerId) {
-      this.customer_id_serialized_name = customerId;
+      this.customerId = customerId;
     }
 
     /**
@@ -4219,13 +4359,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the customer_id_serialized_name.
+     * Set the customerId.
      *
      * @param customerId the customerId
      * @return the DeleteUserDataOptions builder
      */
     public DeleteUserDataOptionsBuilder customerId(String customerId) {
-      this.customer_id_serialized_name = customerId;
+      this.customerId = customerId;
       return this;
     }
 
@@ -4252,67 +4392,73 @@ public class IBMDiscoveryV1Models {
     private String used_serialized_name;
     private String total_serialized_name;
     private Double percent_used_serialized_name;
+ 
     /**
-     * Gets the used_bytes_serialized_name.
+     * Gets the usedBytes.
      *
      * Number of bytes within the environment's disk capacity that are currently used to store data.
      *
-     * @return the used_bytes_serialized_name
+     * @return the usedBytes
      */
     @AuraEnabled
     public Long getUsedBytes() {
       return used_bytes_serialized_name;
     }
+ 
     /**
-     * Gets the maximum_allowed_bytes_serialized_name.
+     * Gets the maximumAllowedBytes.
      *
      * Total number of bytes available in the environment's disk capacity.
      *
-     * @return the maximum_allowed_bytes_serialized_name
+     * @return the maximumAllowedBytes
      */
     @AuraEnabled
     public Long getMaximumAllowedBytes() {
       return maximum_allowed_bytes_serialized_name;
     }
+ 
     /**
-     * Gets the total_bytes_serialized_name.
+     * Gets the totalBytes.
      *
      * **Deprecated**: Total number of bytes available in the environment's disk capacity.
      *
-     * @return the total_bytes_serialized_name
+     * @return the totalBytes
      */
     @AuraEnabled
     public Long getTotalBytes() {
       return total_bytes_serialized_name;
     }
+ 
     /**
-     * Gets the used_serialized_name.
+     * Gets the used.
      *
      * **Deprecated**: Amount of disk capacity used, in KB or GB format.
      *
-     * @return the used_serialized_name
+     * @return the used
      */
     @AuraEnabled
     public String getUsed() {
       return used_serialized_name;
     }
+ 
     /**
-     * Gets the total_serialized_name.
+     * Gets the total.
      *
      * **Deprecated**: Total amount of the environment's disk capacity, in KB or GB format.
      *
-     * @return the total_serialized_name
+     * @return the total
      */
     @AuraEnabled
     public String getTotal() {
       return total_serialized_name;
     }
+ 
     /**
-     * Gets the percent_used_serialized_name.
+     * Gets the percentUsed.
      *
      * **Deprecated**: Percentage of the environment's disk capacity that is being used.
      *
-     * @return the percent_used_serialized_name
+     * @return the percentUsed
      */
     @AuraEnabled
     public Double getPercentUsed() {
@@ -4337,34 +4483,37 @@ public class IBMDiscoveryV1Models {
     private String document_id_serialized_name;
     private String status_serialized_name;
     private List<Notice> notices_serialized_name;
+ 
     /**
-     * Gets the document_id_serialized_name.
+     * Gets the documentId.
      *
      * The unique identifier of the ingested document.
      *
-     * @return the document_id_serialized_name
+     * @return the documentId
      */
     @AuraEnabled
     public String getDocumentId() {
       return document_id_serialized_name;
     }
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * Status of the document in the ingestion process.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
       return status_serialized_name;
     }
+ 
     /**
-     * Gets the notices_serialized_name.
+     * Gets the notices.
      *
      * Array of notices produced by the document-ingestion process.
      *
-     * @return the notices_serialized_name
+     * @return the notices
      */
     @AuraEnabled
     public List<Notice> getNotices() {
@@ -4372,7 +4521,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the document_id_serialized_name.
+     * Sets the documentId.
      *
      * @param documentId the new documentId
      */
@@ -4381,7 +4530,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the status_serialized_name.
+     * Sets the status.
      *
      * @param status the new status
      */
@@ -4390,7 +4539,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the notices_serialized_name.
+     * Sets the notices.
      *
      * @param notices the new notices
      */
@@ -4405,7 +4554,7 @@ public class IBMDiscoveryV1Models {
 
       DocumentAccepted ret = (DocumentAccepted) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for notices_serialized_name
+      // calling custom deserializer for notices
       List<Notice> newNotices = new List<Notice>();
       List<Notice> deserializedNotices = ret.getNotices();
       if (deserializedNotices != null) {
@@ -4429,34 +4578,37 @@ public class IBMDiscoveryV1Models {
     private Long available_serialized_name;
     private Long processing_serialized_name;
     private Long failed_serialized_name;
+ 
     /**
-     * Gets the available_serialized_name.
+     * Gets the available.
      *
      * The total number of available documents in the collection.
      *
-     * @return the available_serialized_name
+     * @return the available
      */
     @AuraEnabled
     public Long getAvailable() {
       return available_serialized_name;
     }
+ 
     /**
-     * Gets the processing_serialized_name.
+     * Gets the processing.
      *
      * The number of documents in the collection that are currently being processed.
      *
-     * @return the processing_serialized_name
+     * @return the processing
      */
     @AuraEnabled
     public Long getProcessing() {
       return processing_serialized_name;
     }
+ 
     /**
-     * Gets the failed_serialized_name.
+     * Gets the failed.
      *
      * The number of documents in the collection that failed to be ingested.
      *
-     * @return the failed_serialized_name
+     * @return the failed
      */
     @AuraEnabled
     public Long getFailed() {
@@ -4480,19 +4632,21 @@ public class IBMDiscoveryV1Models {
   public class DocumentSnapshot extends IBMWatsonGenericModel {
     private String step_serialized_name;
     private IBMWatsonMapModel snapshot_serialized_name;
+ 
     /**
-     * Gets the step_serialized_name.
+     * Gets the step.
      *
-     * @return the step_serialized_name
+     * @return the step
      */
     @AuraEnabled
     public String getStep() {
       return step_serialized_name;
     }
+ 
     /**
-     * Gets the snapshot_serialized_name.
+     * Gets the snapshot.
      *
-     * @return the snapshot_serialized_name
+     * @return the snapshot
      */
     @AuraEnabled
     public IBMWatsonMapModel getSnapshot() {
@@ -4500,7 +4654,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the step_serialized_name.
+     * Sets the step.
      *
      * @param step the new step
      */
@@ -4509,7 +4663,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the snapshot_serialized_name.
+     * Sets the snapshot.
      *
      * @param snapshot the new snapshot
      */
@@ -4524,7 +4678,7 @@ public class IBMDiscoveryV1Models {
 
       DocumentSnapshot ret = (DocumentSnapshot) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for snapshot_serialized_name
+      // calling custom deserializer for snapshot
       IBMWatsonMapModel newSnapshot = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getSnapshot()), (Map<String, Object>) jsonMap.get('snapshot_serialized_name'), IBMWatsonMapModel.class);
       ret.setSnapshot(newSnapshot);
 
@@ -4546,111 +4700,121 @@ public class IBMDiscoveryV1Models {
     private String file_type_serialized_name;
     private String sha1_serialized_name;
     private List<Notice> notices_serialized_name;
+ 
     /**
-     * Gets the document_id_serialized_name.
+     * Gets the documentId.
      *
      * The unique identifier of the document.
      *
-     * @return the document_id_serialized_name
+     * @return the documentId
      */
     @AuraEnabled
     public String getDocumentId() {
       return document_id_serialized_name;
     }
+ 
     /**
-     * Gets the configuration_id_serialized_name.
+     * Gets the configurationId.
      *
      * The unique identifier for the configuration.
      *
-     * @return the configuration_id_serialized_name
+     * @return the configurationId
      */
     @AuraEnabled
     public String getConfigurationId() {
       return configuration_id_serialized_name;
     }
+ 
     /**
-     * Gets the created_serialized_name.
+     * Gets the created.
      *
      * The creation date of the document in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      *
-     * @return the created_serialized_name
+     * @return the created
      */
     @AuraEnabled
     public Datetime getCreated() {
       return created_serialized_name;
     }
+ 
     /**
-     * Gets the updated_serialized_name.
+     * Gets the updated.
      *
      * Date of the most recent document update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      *
-     * @return the updated_serialized_name
+     * @return the updated
      */
     @AuraEnabled
     public Datetime getUpdated() {
       return updated_serialized_name;
     }
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * Status of the document in the ingestion process.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
       return status_serialized_name;
     }
+ 
     /**
-     * Gets the status_description_serialized_name.
+     * Gets the statusDescription.
      *
      * Description of the document status.
      *
-     * @return the status_description_serialized_name
+     * @return the statusDescription
      */
     @AuraEnabled
     public String getStatusDescription() {
       return status_description_serialized_name;
     }
+ 
     /**
-     * Gets the filename_serialized_name.
+     * Gets the filename.
      *
      * Name of the original source file (if available).
      *
-     * @return the filename_serialized_name
+     * @return the filename
      */
     @AuraEnabled
     public String getFilename() {
       return filename_serialized_name;
     }
+ 
     /**
-     * Gets the file_type_serialized_name.
+     * Gets the fileType.
      *
      * The type of the original source file.
      *
-     * @return the file_type_serialized_name
+     * @return the fileType
      */
     @AuraEnabled
     public String getFileType() {
       return file_type_serialized_name;
     }
+ 
     /**
-     * Gets the sha1_serialized_name.
+     * Gets the sha1.
      *
      * The SHA-1 hash of the original source file (formatted as a hexadecimal string).
      *
-     * @return the sha1_serialized_name
+     * @return the sha1
      */
     @AuraEnabled
     public String getSha1() {
       return sha1_serialized_name;
     }
+ 
     /**
-     * Gets the notices_serialized_name.
+     * Gets the notices.
      *
      * Array of notices produced by the document-ingestion process.
      *
-     * @return the notices_serialized_name
+     * @return the notices
      */
     @AuraEnabled
     public List<Notice> getNotices() {
@@ -4658,7 +4822,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the filename_serialized_name.
+     * Sets the filename.
      *
      * @param filename the new filename
      */
@@ -4667,7 +4831,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the file_type_serialized_name.
+     * Sets the fileType.
      *
      * @param fileType the new fileType
      */
@@ -4676,7 +4840,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the sha1_serialized_name.
+     * Sets the sha1.
      *
      * @param sha1 the new sha1
      */
@@ -4685,7 +4849,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the notices_serialized_name.
+     * Sets the notices.
      *
      * @param notices the new notices
      */
@@ -4700,7 +4864,7 @@ public class IBMDiscoveryV1Models {
 
       DocumentStatus ret = (DocumentStatus) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for notices_serialized_name
+      // calling custom deserializer for notices
       List<Notice> newNotices = new List<Notice>();
       List<Notice> deserializedNotices = ret.getNotices();
       if (deserializedNotices != null) {
@@ -4728,54 +4892,59 @@ public class IBMDiscoveryV1Models {
     private String enrichment_serialized_name;
     private Boolean ignore_downstream_errors_serialized_name;
     private EnrichmentOptions options_serialized_name;
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * Describes what the enrichment step does.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     @AuraEnabled
     public String getDescription() {
       return description_serialized_name;
     }
+ 
     /**
-     * Gets the destination_field_serialized_name.
+     * Gets the destinationField.
      *
      * Field where enrichments will be stored. This field must already exist or be at most 1 level deeper than an
      * existing field. For example, if `text` is a top-level field with no sub-fields, `text.foo` is a valid destination
      * but `text.foo.bar` is not.
      *
-     * @return the destination_field_serialized_name
+     * @return the destinationField
      */
     @AuraEnabled
     public String getDestinationField() {
       return destination_field_serialized_name;
     }
+ 
     /**
-     * Gets the source_field_serialized_name.
+     * Gets the sourceField.
      *
      * Field to be enriched.
      *
-     * @return the source_field_serialized_name
+     * @return the sourceField
      */
     @AuraEnabled
     public String getSourceField() {
       return source_field_serialized_name;
     }
+ 
     /**
-     * Gets the overwrite_serialized_name.
+     * Gets the overwrite.
      *
      * Indicates that the enrichments will overwrite the destination_field field if it already exists.
      *
-     * @return the overwrite_serialized_name
+     * @return the overwrite
      */
     @AuraEnabled
     public Boolean getOverwrite() {
       return overwrite_serialized_name;
     }
+ 
     /**
-     * Gets the enrichment_serialized_name.
+     * Gets the enrichmentName.
      *
      * Name of the enrichment service to call. Current options are `natural_language_understanding` and `elements`.
      *
@@ -4790,30 +4959,32 @@ public class IBMDiscoveryV1Models {
      *
      *  Previous API versions also supported `alchemy_language`.
      *
-     * @return the enrichment_serialized_name
+     * @return the enrichmentName
      */
     @AuraEnabled
-    public String getEnrichment() {
+    public String getEnrichmentName() {
       return enrichment_serialized_name;
     }
+ 
     /**
-     * Gets the ignore_downstream_errors_serialized_name.
+     * Gets the ignoreDownstreamErrors.
      *
      * If true, then most errors generated during the enrichment process will be treated as warnings and will not cause
      * the document to fail processing.
      *
-     * @return the ignore_downstream_errors_serialized_name
+     * @return the ignoreDownstreamErrors
      */
     @AuraEnabled
     public Boolean getIgnoreDownstreamErrors() {
       return ignore_downstream_errors_serialized_name;
     }
+ 
     /**
-     * Gets the options_serialized_name.
+     * Gets the options.
      *
      * A list of options specific to the enrichment.
      *
-     * @return the options_serialized_name
+     * @return the options
      */
     @AuraEnabled
     public EnrichmentOptions getOptions() {
@@ -4821,7 +4992,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the description_serialized_name.
+     * Sets the description.
      *
      * @param description the new description
      */
@@ -4830,7 +5001,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the destination_field_serialized_name.
+     * Sets the destinationField.
      *
      * @param destinationField the new destinationField
      */
@@ -4839,7 +5010,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the source_field_serialized_name.
+     * Sets the sourceField.
      *
      * @param sourceField the new sourceField
      */
@@ -4848,7 +5019,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the overwrite_serialized_name.
+     * Sets the overwrite.
      *
      * @param overwrite the new overwrite
      */
@@ -4857,16 +5028,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the enrichment_serialized_name.
+     * Sets the enrichmentName.
      *
-     * @param enrichment the new enrichment
+     * @param enrichmentName the new enrichmentName
      */
-    public void setEnrichment(final String enrichment) {
-      this.enrichment_serialized_name = enrichment;
+    public void setEnrichmentName(final String enrichmentName) {
+      this.enrichment_serialized_name = enrichmentName;
     }
 
     /**
-     * Sets the ignore_downstream_errors_serialized_name.
+     * Sets the ignoreDownstreamErrors.
      *
      * @param ignoreDownstreamErrors the new ignoreDownstreamErrors
      */
@@ -4875,7 +5046,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the options_serialized_name.
+     * Sets the options.
      *
      * @param options the new options
      */
@@ -4890,7 +5061,7 @@ public class IBMDiscoveryV1Models {
 
       Enrichment ret = (Enrichment) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for options_serialized_name
+      // calling custom deserializer for options
       EnrichmentOptions newOptions = (EnrichmentOptions) new EnrichmentOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options_serialized_name'), EnrichmentOptions.class);
       ret.setOptions(newOptions);
 
@@ -4911,48 +5082,51 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public EnrichmentOptions() { }
-
+ 
     /**
-     * Gets the features_serialized_name.
+     * Gets the features.
      *
      * An object representing the enrichment features that will be applied to the specified field.
      *
-     * @return the features_serialized_name
+     * @return the features
      */
     @AuraEnabled
     public NluEnrichmentFeatures getFeatures() {
       return features_serialized_name;
     }
+ 
     /**
-     * Gets the language_serialized_name.
+     * Gets the language.
      *
      * ISO 639-1 code indicating the language to use for the analysis. This code overrides the automatic language
      * detection performed by the service. Valid codes are `ar` (Arabic), `en` (English), `fr` (French), `de` (German),
      * `it` (Italian), `pt` (Portuguese), `ru` (Russian), `es` (Spanish), and `sv` (Swedish). **Note:** Not all features
      * support all languages, automatic detection is recommended.
      *
-     * @return the language_serialized_name
+     * @return the language
      */
     @AuraEnabled
     public String getLanguage() {
       return language_serialized_name;
     }
+ 
     /**
-     * Gets the model_serialized_name.
+     * Gets the model.
      *
      * *For use with `elements` enrichments only.* The element extraction model to use. Models available are:
      * `contract`.
      *
-     * @return the model_serialized_name
+     * @return the model
      */
     @AuraEnabled
     public String getModel() {
       return model_serialized_name;
     }
+  
     private EnrichmentOptions(EnrichmentOptionsBuilder builder) {
-      features_serialized_name = builder.features_serialized_name;
-      language_serialized_name = builder.language_serialized_name;
-      model_serialized_name = builder.model_serialized_name;
+      features_serialized_name = builder.features;
+      language_serialized_name = builder.language;
+      model_serialized_name = builder.model;
     }
 
     /**
@@ -4972,7 +5146,7 @@ public class IBMDiscoveryV1Models {
       EnrichmentOptions ret = (EnrichmentOptions) super.deserialize(jsonString, jsonMap, classType);
       EnrichmentOptionsBuilder retBuilder = ret.newBuilder();
 
-      // calling custom deserializer for features_serialized_name
+      // calling custom deserializer for features
       NluEnrichmentFeatures newFeatures = (NluEnrichmentFeatures) new NluEnrichmentFeatures().deserialize(JSON.serialize(ret.getFeatures()), (Map<String, Object>) jsonMap.get('features_serialized_name'), NluEnrichmentFeatures.class);
       retBuilder.features(newFeatures);
 
@@ -4984,14 +5158,14 @@ public class IBMDiscoveryV1Models {
    * EnrichmentOptions Builder.
    */
   public class EnrichmentOptionsBuilder {
-    private NluEnrichmentFeatures features_serialized_name;
-    private String language_serialized_name;
-    private String model_serialized_name;
+    private NluEnrichmentFeatures features;
+    private String language;
+    private String model;
 
     private EnrichmentOptionsBuilder(EnrichmentOptions enrichmentOptions) {
-      features_serialized_name = enrichmentOptions.features_serialized_name;
-      language_serialized_name = enrichmentOptions.language_serialized_name;
-      model_serialized_name = enrichmentOptions.model_serialized_name;
+      features = enrichmentOptions.features_serialized_name;
+      language = enrichmentOptions.language_serialized_name;
+      model = enrichmentOptions.model_serialized_name;
     }
 
     /**
@@ -5010,35 +5184,35 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the features_serialized_name.
+     * Set the features.
      *
      * @param features the features
      * @return the EnrichmentOptions builder
      */
     public EnrichmentOptionsBuilder features(NluEnrichmentFeatures features) {
-      this.features_serialized_name = features;
+      this.features = features;
       return this;
     }
 
     /**
-     * Set the language_serialized_name.
+     * Set the language.
      *
      * @param language the language
      * @return the EnrichmentOptions builder
      */
     public EnrichmentOptionsBuilder language(String language) {
-      this.language_serialized_name = language;
+      this.language = language;
       return this;
     }
 
     /**
-     * Set the model_serialized_name.
+     * Set the model.
      *
      * @param model the model
      * @return the EnrichmentOptions builder
      */
     public EnrichmentOptionsBuilder model(String model) {
-      this.model_serialized_name = model;
+      this.model = model;
       return this;
     }
   }
@@ -5055,109 +5229,147 @@ public class IBMDiscoveryV1Models {
     private String status_serialized_name;
     private Boolean read_only_serialized_name;
     private String size_serialized_name;
+    private String requested_size_serialized_name;
     private IndexCapacity index_capacity_serialized_name;
+    private SearchStatus search_status_serialized_name;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * Unique identifier for the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     @AuraEnabled
     public String getEnvironmentId() {
       return environment_id_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * Name that identifies the environment.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * Description of the environment.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     @AuraEnabled
     public String getDescription() {
       return description_serialized_name;
     }
+ 
     /**
-     * Gets the created_serialized_name.
+     * Gets the created.
      *
      * Creation date of the environment, in the format `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`.
      *
-     * @return the created_serialized_name
+     * @return the created
      */
     @AuraEnabled
     public Datetime getCreated() {
       return created_serialized_name;
     }
+ 
     /**
-     * Gets the updated_serialized_name.
+     * Gets the updated.
      *
      * Date of most recent environment update, in the format `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`.
      *
-     * @return the updated_serialized_name
+     * @return the updated
      */
     @AuraEnabled
     public Datetime getUpdated() {
       return updated_serialized_name;
     }
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
-     * Status of the environment.
+     * Current status of the environment. `resizing` is displayed when a request to increase the environment size has
+     * been made, but is still in the process of being completed.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
       return status_serialized_name;
     }
+ 
     /**
-     * Gets the read_only_serialized_name.
+     * Gets the readOnly.
      *
      * If `true`, the environment contains read-only collections that are maintained by IBM.
      *
-     * @return the read_only_serialized_name
+     * @return the readOnly
      */
     @AuraEnabled
     public Boolean getReadOnly() {
       return read_only_serialized_name;
     }
+ 
     /**
-     * Gets the size_serialized_name.
+     * Gets the size.
      *
-     * Size of the environment.
+     * Current size of the environment.
      *
-     * @return the size_serialized_name
+     * @return the size
      */
     @AuraEnabled
     public String getSize() {
       return size_serialized_name;
     }
+ 
     /**
-     * Gets the index_capacity_serialized_name.
+     * Gets the requestedSize.
+     *
+     * The new size requested for this environment. Only returned when the environment *status* is `resizing`.
+     *
+     * *Note:* Querying and indexing can still be performed during an environment upsize.
+     *
+     * @return the requestedSize
+     */
+    @AuraEnabled
+    public String getRequestedSize() {
+      return requested_size_serialized_name;
+    }
+ 
+    /**
+     * Gets the indexCapacity.
      *
      * Details about the resource usage and capacity of the environment.
      *
-     * @return the index_capacity_serialized_name
+     * @return the indexCapacity
      */
     @AuraEnabled
     public IndexCapacity getIndexCapacity() {
       return index_capacity_serialized_name;
     }
+ 
+    /**
+     * Gets the searchStatus.
+     *
+     * Information about Continuous Relevancy Training for this environment.
+     *
+     * @return the searchStatus
+     */
+    @AuraEnabled
+    public SearchStatus getSearchStatus() {
+      return search_status_serialized_name;
+    }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -5166,7 +5378,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the description_serialized_name.
+     * Sets the description.
      *
      * @param description the new description
      */
@@ -5175,7 +5387,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the size_serialized_name.
+     * Sets the size.
      *
      * @param size the new size
      */
@@ -5184,12 +5396,30 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the index_capacity_serialized_name.
+     * Sets the requestedSize.
+     *
+     * @param requestedSize the new requestedSize
+     */
+    public void setRequestedSize(final String requestedSize) {
+      this.requested_size_serialized_name = requestedSize;
+    }
+
+    /**
+     * Sets the indexCapacity.
      *
      * @param indexCapacity the new indexCapacity
      */
     public void setIndexCapacity(final IndexCapacity indexCapacity) {
       this.index_capacity_serialized_name = indexCapacity;
+    }
+
+    /**
+     * Sets the searchStatus.
+     *
+     * @param searchStatus the new searchStatus
+     */
+    public void setSearchStatus(final SearchStatus searchStatus) {
+      this.search_status_serialized_name = searchStatus;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5199,9 +5429,13 @@ public class IBMDiscoveryV1Models {
 
       Environment ret = (Environment) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for index_capacity_serialized_name
+      // calling custom deserializer for indexCapacity
       IndexCapacity newIndexCapacity = (IndexCapacity) new IndexCapacity().deserialize(JSON.serialize(ret.getIndexCapacity()), (Map<String, Object>) jsonMap.get('index_capacity_serialized_name'), IndexCapacity.class);
       ret.setIndexCapacity(newIndexCapacity);
+
+      // calling custom deserializer for searchStatus
+      SearchStatus newSearchStatus = (SearchStatus) new SearchStatus().deserialize(JSON.serialize(ret.getSearchStatus()), (Map<String, Object>) jsonMap.get('search_status_serialized_name'), SearchStatus.class);
+      ret.setSearchStatus(newSearchStatus);
 
       return ret;
     }
@@ -5213,23 +5447,25 @@ public class IBMDiscoveryV1Models {
   public class EnvironmentDocuments extends IBMWatsonGenericModel {
     private Long indexed_serialized_name;
     private Long maximum_allowed_serialized_name;
+ 
     /**
-     * Gets the indexed_serialized_name.
+     * Gets the indexed.
      *
      * Number of documents indexed for the environment.
      *
-     * @return the indexed_serialized_name
+     * @return the indexed
      */
     @AuraEnabled
     public Long getIndexed() {
       return indexed_serialized_name;
     }
+ 
     /**
-     * Gets the maximum_allowed_serialized_name.
+     * Gets the maximumAllowed.
      *
      * Total number of documents allowed in the environment's capacity.
      *
-     * @return the maximum_allowed_serialized_name
+     * @return the maximumAllowed
      */
     @AuraEnabled
     public Long getMaximumAllowed() {
@@ -5258,80 +5494,87 @@ public class IBMDiscoveryV1Models {
     private String collection_id_serialized_name;
     private String document_id_serialized_name;
     private String query_id_serialized_name;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The **environment_id** associated with the query that the event is associated with.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     @AuraEnabled
     public String getEnvironmentId() {
       return environment_id_serialized_name;
     }
+ 
     /**
-     * Gets the session_token_serialized_name.
+     * Gets the sessionToken.
      *
      * The session token that was returned as part of the query results that this event is associated with.
      *
-     * @return the session_token_serialized_name
+     * @return the sessionToken
      */
     @AuraEnabled
     public String getSessionToken() {
       return session_token_serialized_name;
     }
+ 
     /**
-     * Gets the client_timestamp_serialized_name.
+     * Gets the clientTimestamp.
      *
      * The optional timestamp for the event that was created. If not provided, the time that the event was created in
      * the log was used.
      *
-     * @return the client_timestamp_serialized_name
+     * @return the clientTimestamp
      */
     @AuraEnabled
     public Datetime getClientTimestamp() {
       return client_timestamp_serialized_name;
     }
+ 
     /**
-     * Gets the display_rank_serialized_name.
+     * Gets the displayRank.
      *
      * The rank of the result item which the event is associated with.
      *
-     * @return the display_rank_serialized_name
+     * @return the displayRank
      */
     @AuraEnabled
     public Long getDisplayRank() {
       return display_rank_serialized_name;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The **collection_id** of the document that this event is associated with.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     @AuraEnabled
     public String getCollectionId() {
       return collection_id_serialized_name;
     }
+ 
     /**
-     * Gets the document_id_serialized_name.
+     * Gets the documentId.
      *
      * The **document_id** of the document that this event is associated with.
      *
-     * @return the document_id_serialized_name
+     * @return the documentId
      */
     @AuraEnabled
     public String getDocumentId() {
       return document_id_serialized_name;
     }
+ 
     /**
-     * Gets the query_id_serialized_name.
+     * Gets the queryId.
      *
      * The query identifier stored in the log. The query and any events associated with that query are stored with the
      * same **query_id**.
      *
-     * @return the query_id_serialized_name
+     * @return the queryId
      */
     @AuraEnabled
     public String getQueryId() {
@@ -5339,7 +5582,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the environment_id_serialized_name.
+     * Sets the environmentId.
      *
      * @param environmentId the new environmentId
      */
@@ -5348,7 +5591,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the session_token_serialized_name.
+     * Sets the sessionToken.
      *
      * @param sessionToken the new sessionToken
      */
@@ -5357,7 +5600,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the client_timestamp_serialized_name.
+     * Sets the clientTimestamp.
      *
      * @param clientTimestamp the new clientTimestamp
      */
@@ -5366,7 +5609,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the display_rank_serialized_name.
+     * Sets the displayRank.
      *
      * @param displayRank the new displayRank
      */
@@ -5375,7 +5618,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the collection_id_serialized_name.
+     * Sets the collectionId.
      *
      * @param collectionId the new collectionId
      */
@@ -5384,7 +5627,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the document_id_serialized_name.
+     * Sets the documentId.
      *
      * @param documentId the new documentId
      */
@@ -5410,24 +5653,26 @@ public class IBMDiscoveryV1Models {
   public class Expansion extends IBMWatsonGenericModel {
     private List<String> input_terms_serialized_name;
     private List<String> expanded_terms_serialized_name;
+ 
     /**
-     * Gets the input_terms_serialized_name.
+     * Gets the inputTerms.
      *
      * A list of terms that will be expanded for this expansion. If specified, only the items in this list are expanded.
      *
-     * @return the input_terms_serialized_name
+     * @return the inputTerms
      */
     @AuraEnabled
     public List<String> getInputTerms() {
       return input_terms_serialized_name;
     }
+ 
     /**
-     * Gets the expanded_terms_serialized_name.
+     * Gets the expandedTerms.
      *
      * A list of terms that this expansion will be expanded to. If specified without **input_terms**, it also functions
      * as the input term list.
      *
-     * @return the expanded_terms_serialized_name
+     * @return the expandedTerms
      */
     @AuraEnabled
     public List<String> getExpandedTerms() {
@@ -5435,7 +5680,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the input_terms_serialized_name.
+     * Sets the inputTerms.
      *
      * @param inputTerms the new inputTerms
      */
@@ -5444,7 +5689,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the expanded_terms_serialized_name.
+     * Sets the expandedTerms.
      *
      * @param expandedTerms the new expandedTerms
      */
@@ -5468,8 +5713,9 @@ public class IBMDiscoveryV1Models {
    */
   public class Expansions extends IBMWatsonResponseModel {
     private List<Expansion> expansions_serialized_name;
+ 
     /**
-     * Gets the expansions_serialized_name.
+     * Gets the expansions.
      *
      * An array of query expansion definitions.
      *
@@ -5485,7 +5731,7 @@ public class IBMDiscoveryV1Models {
      * **expanded_terms**. When items in the **input_terms** array are present in a query, they are expanded using the
      * items listed in the **expanded_terms** array.
      *
-     * @return the expansions_serialized_name
+     * @return the expansions
      */
     @AuraEnabled
     public List<Expansion> getExpansions() {
@@ -5493,7 +5739,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the expansions_serialized_name.
+     * Sets the expansions.
      *
      * @param expansions the new expansions
      */
@@ -5508,7 +5754,7 @@ public class IBMDiscoveryV1Models {
 
       Expansions ret = (Expansions) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for expansions_serialized_name
+      // calling custom deserializer for expansions
       List<Expansion> newExpansions = new List<Expansion>();
       List<Expansion> deserializedExpansions = ret.getExpansions();
       if (deserializedExpansions != null) {
@@ -5529,208 +5775,223 @@ public class IBMDiscoveryV1Models {
    * The federatedQueryNotices options.
    */
   public class FederatedQueryNoticesOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private List<String> collection_ids_serialized_name;
-    private String filter_serialized_name;
-    private String query_serialized_name;
-    private String natural_language_query_serialized_name;
-    private String aggregation_serialized_name;
-    private Long count_serialized_name;
-    private List<String> return_serialized_name;
-    private Long offset_serialized_name;
-    private List<String> sort_serialized_name;
-    private Boolean highlight_serialized_name;
-    private String deduplicate_field_serialized_name;
-    private Boolean similar_serialized_name;
-    private List<String> similar_document_ids_serialized_name;
-    private List<String> similar_fields_serialized_name;
+    private String environmentId;
+    private List<String> collectionIds;
+    private String filter;
+    private String query;
+    private String naturalLanguageQuery;
+    private String aggregation;
+    private Long count;
+    private List<String> returnFields;
+    private Long offset;
+    private List<String> xsort;
+    private Boolean highlight;
+    private String deduplicateField;
+    private Boolean similar;
+    private List<String> similarDocumentIds;
+    private List<String> similarFields;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_ids_serialized_name.
+     * Gets the collectionIds.
      *
      * A comma-separated list of collection IDs to be queried against.
      *
-     * @return the collection_ids_serialized_name
+     * @return the collectionIds
      */
     public List<String> collectionIds() {
-      return collection_ids_serialized_name;
+      return collectionIds;
     }
+ 
     /**
-     * Gets the filter_serialized_name.
+     * Gets the filter.
      *
-     * A cacheable query that limits the documents returned to exclude any documents that don't mention the query
-     * content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts
-     * in the data set.
+     * A cacheable query that excludes documents that don't mention the query content. Filter searches are better for
+     * metadata-type searches and for assessing the concepts in the data set.
      *
-     * @return the filter_serialized_name
+     * @return the filter
      */
     public String filter() {
-      return filter_serialized_name;
+      return filter;
     }
+ 
     /**
-     * Gets the query_serialized_name.
+     * Gets the query.
      *
      * A query search returns all documents in your data set with full enrichments and full text, but with the most
      * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
      * cannot use **natural_language_query** and **query** at the same time.
      *
-     * @return the query_serialized_name
+     * @return the query
      */
     public String query() {
-      return query_serialized_name;
+      return query;
     }
+ 
     /**
-     * Gets the natural_language_query_serialized_name.
+     * Gets the naturalLanguageQuery.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language
      * understanding. You cannot use **natural_language_query** and **query** at the same time.
      *
-     * @return the natural_language_query_serialized_name
+     * @return the naturalLanguageQuery
      */
     public String naturalLanguageQuery() {
-      return natural_language_query_serialized_name;
+      return naturalLanguageQuery;
     }
+ 
     /**
-     * Gets the aggregation_serialized_name.
+     * Gets the aggregation.
      *
-     * An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are
-     * useful for building applications, because you can use them to build lists, tables, and time series. For a full
-     * list of possible aggregrations, see the Query reference.
+     * An aggregation search that returns an exact answer by combining query search with filters. Useful for
+     * applications to build lists, tables, and time series. For a full list of possible aggregations, see the Query
+     * reference.
      *
-     * @return the aggregation_serialized_name
+     * @return the aggregation
      */
     public String aggregation() {
-      return aggregation_serialized_name;
+      return aggregation;
     }
+ 
     /**
-     * Gets the count_serialized_name.
+     * Gets the count.
      *
      * Number of results to return.
      *
-     * @return the count_serialized_name
+     * @return the count
      */
     public Long count() {
-      return count_serialized_name;
+      return count;
     }
+ 
     /**
-     * Gets the return_serialized_name.
+     * Gets the returnFields.
      *
-     * A comma separated list of the portion of the document hierarchy to return.
+     * A comma-separated list of the portion of the document hierarchy to return.
      *
-     * @return the return_serialized_name
+     * @return the returnFields
      */
-    public List<String> returnField() {
-      return return_serialized_name;
+    public List<String> returnFields() {
+      return returnFields;
     }
+ 
     /**
-     * Gets the offset_serialized_name.
+     * Gets the offset.
      *
      * The number of query results to skip at the beginning. For example, if the total number of results that are
-     * returned is 10, and the offset is 8, it returns the last two results.
+     * returned is 10 and the offset is 8, it returns the last two results.
      *
-     * @return the offset_serialized_name
+     * @return the offset
      */
     public Long offset() {
-      return offset_serialized_name;
+      return offset;
     }
+ 
     /**
-     * Gets the sort_serialized_name.
+     * Gets the xsort.
      *
-     * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by
+     * A comma-separated list of fields in the document to sort on. You can optionally specify a sort direction by
      * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
      * prefix is specified.
      *
-     * @return the sort_serialized_name
+     * @return the xsort
      */
-    public List<String> sortField() {
-      return sort_serialized_name;
+    public List<String> xsort() {
+      return xsort;
     }
+ 
     /**
-     * Gets the highlight_serialized_name.
+     * Gets the highlight.
      *
-     * When true a highlight field is returned for each result which contains the fields that match the query with
-     * `<em></em>` tags around the matching query terms. Defaults to false.
+     * When true, a highlight field is returned for each result which contains the fields which match the query with
+     * `<em></em>` tags around the matching query terms.
      *
-     * @return the highlight_serialized_name
+     * @return the highlight
      */
     public Boolean highlight() {
-      return highlight_serialized_name;
+      return highlight;
     }
+ 
     /**
-     * Gets the deduplicate_field_serialized_name.
+     * Gets the deduplicateField.
      *
      * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
      * comparison is limited to the current query only, **offset** is not considered. This parameter is currently Beta
      * functionality.
      *
-     * @return the deduplicate_field_serialized_name
+     * @return the deduplicateField
      */
     public String deduplicateField() {
-      return deduplicate_field_serialized_name;
+      return deduplicateField;
     }
+ 
     /**
-     * Gets the similar_serialized_name.
+     * Gets the similar.
      *
      * When `true`, results are returned based on their similarity to the document IDs specified in the
      * **similar.document_ids** parameter.
      *
-     * @return the similar_serialized_name
+     * @return the similar
      */
     public Boolean similar() {
-      return similar_serialized_name;
+      return similar;
     }
+ 
     /**
-     * Gets the similar_document_ids_serialized_name.
+     * Gets the similarDocumentIds.
      *
-     * A comma-separated list of document IDs that will be used to find similar documents.
+     * A comma-separated list of document IDs to find similar documents.
      *
-     * **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
-     * the document similarity search to include the natural language query. Other query parameters, such as **filter**
-     * and **query** are subsequently applied and reduce the query scope.
+     * **Tip:** Include the **natural_language_query** parameter to expand the scope of the document similarity search
+     * with the natural language query. Other query parameters, such as **filter** and **query**, are subsequently
+     * applied and reduce the scope.
      *
-     * @return the similar_document_ids_serialized_name
+     * @return the similarDocumentIds
      */
     public List<String> similarDocumentIds() {
-      return similar_document_ids_serialized_name;
+      return similarDocumentIds;
     }
+ 
     /**
-     * Gets the similar_fields_serialized_name.
+     * Gets the similarFields.
      *
-     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents.
-     * If not specified, the entire document is used for comparison.
+     * A comma-separated list of field names that are used as a basis for comparison to identify similar documents. If
+     * not specified, the entire document is used for comparison.
      *
-     * @return the similar_fields_serialized_name
+     * @return the similarFields
      */
     public List<String> similarFields() {
-      return similar_fields_serialized_name;
+      return similarFields;
     }
+
     private FederatedQueryNoticesOptions(FederatedQueryNoticesOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notNull(builder.collection_ids_serialized_name, 'collection_ids_serialized_name cannot be null');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_ids_serialized_name = builder.collection_ids_serialized_name;
-      filter_serialized_name = builder.filter_serialized_name;
-      query_serialized_name = builder.query_serialized_name;
-      natural_language_query_serialized_name = builder.natural_language_query_serialized_name;
-      aggregation_serialized_name = builder.aggregation_serialized_name;
-      count_serialized_name = builder.count_serialized_name;
-      return_serialized_name = builder.return_serialized_name;
-      offset_serialized_name = builder.offset_serialized_name;
-      sort_serialized_name = builder.sort_serialized_name;
-      highlight_serialized_name = builder.highlight_serialized_name;
-      deduplicate_field_serialized_name = builder.deduplicate_field_serialized_name;
-      similar_serialized_name = builder.similar_serialized_name;
-      similar_document_ids_serialized_name = builder.similar_document_ids_serialized_name;
-      similar_fields_serialized_name = builder.similar_fields_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notNull(builder.collectionIds, 'collectionIds cannot be null');
+      environmentId = builder.environmentId;
+      collectionIds = builder.collectionIds;
+      filter = builder.filter;
+      query = builder.query;
+      naturalLanguageQuery = builder.naturalLanguageQuery;
+      aggregation = builder.aggregation;
+      count = builder.count;
+      returnFields = builder.returnFields;
+      offset = builder.offset;
+      xsort = builder.xsort;
+      highlight = builder.highlight;
+      deduplicateField = builder.deduplicateField;
+      similar = builder.similar;
+      similarDocumentIds = builder.similarDocumentIds;
+      similarFields = builder.similarFields;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -5749,38 +6010,38 @@ public class IBMDiscoveryV1Models {
    * FederatedQueryNoticesOptions Builder.
    */
   public class FederatedQueryNoticesOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private List<String> collection_ids_serialized_name;
-    private String filter_serialized_name;
-    private String query_serialized_name;
-    private String natural_language_query_serialized_name;
-    private String aggregation_serialized_name;
-    private Long count_serialized_name;
-    private List<String> return_serialized_name;
-    private Long offset_serialized_name;
-    private List<String> sort_serialized_name;
-    private Boolean highlight_serialized_name;
-    private String deduplicate_field_serialized_name;
-    private Boolean similar_serialized_name;
-    private List<String> similar_document_ids_serialized_name;
-    private List<String> similar_fields_serialized_name;
+    private String environmentId;
+    private List<String> collectionIds;
+    private String filter;
+    private String query;
+    private String naturalLanguageQuery;
+    private String aggregation;
+    private Long count;
+    private List<String> returnFields;
+    private Long offset;
+    private List<String> xsort;
+    private Boolean highlight;
+    private String deduplicateField;
+    private Boolean similar;
+    private List<String> similarDocumentIds;
+    private List<String> similarFields;
 
     private FederatedQueryNoticesOptionsBuilder(FederatedQueryNoticesOptions federatedQueryNoticesOptions) {
-      environment_id_serialized_name = federatedQueryNoticesOptions.environment_id_serialized_name;
-      collection_ids_serialized_name = federatedQueryNoticesOptions.collection_ids_serialized_name;
-      filter_serialized_name = federatedQueryNoticesOptions.filter_serialized_name;
-      query_serialized_name = federatedQueryNoticesOptions.query_serialized_name;
-      natural_language_query_serialized_name = federatedQueryNoticesOptions.natural_language_query_serialized_name;
-      aggregation_serialized_name = federatedQueryNoticesOptions.aggregation_serialized_name;
-      count_serialized_name = federatedQueryNoticesOptions.count_serialized_name;
-      return_serialized_name = federatedQueryNoticesOptions.return_serialized_name;
-      offset_serialized_name = federatedQueryNoticesOptions.offset_serialized_name;
-      sort_serialized_name = federatedQueryNoticesOptions.sort_serialized_name;
-      highlight_serialized_name = federatedQueryNoticesOptions.highlight_serialized_name;
-      deduplicate_field_serialized_name = federatedQueryNoticesOptions.deduplicate_field_serialized_name;
-      similar_serialized_name = federatedQueryNoticesOptions.similar_serialized_name;
-      similar_document_ids_serialized_name = federatedQueryNoticesOptions.similar_document_ids_serialized_name;
-      similar_fields_serialized_name = federatedQueryNoticesOptions.similar_fields_serialized_name;
+      environmentId = federatedQueryNoticesOptions.environmentId;
+      collectionIds = federatedQueryNoticesOptions.collectionIds;
+      filter = federatedQueryNoticesOptions.filter;
+      query = federatedQueryNoticesOptions.query;
+      naturalLanguageQuery = federatedQueryNoticesOptions.naturalLanguageQuery;
+      aggregation = federatedQueryNoticesOptions.aggregation;
+      count = federatedQueryNoticesOptions.count;
+      returnFields = federatedQueryNoticesOptions.returnFields;
+      offset = federatedQueryNoticesOptions.offset;
+      xsort = federatedQueryNoticesOptions.xsort;
+      highlight = federatedQueryNoticesOptions.highlight;
+      deduplicateField = federatedQueryNoticesOptions.deduplicateField;
+      similar = federatedQueryNoticesOptions.similar;
+      similarDocumentIds = federatedQueryNoticesOptions.similarDocumentIds;
+      similarFields = federatedQueryNoticesOptions.similarFields;
       this.requestHeaders.putAll(federatedQueryNoticesOptions.requestHeaders());
     }
 
@@ -5797,8 +6058,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionIds the collectionIds
      */
     public FederatedQueryNoticesOptionsBuilder(String environmentId, List<String> collectionIds) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_ids_serialized_name = collectionIds;
+      this.environmentId = environmentId;
+      this.collectionIds = collectionIds;
     }
 
     /**
@@ -5811,247 +6072,247 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an collectionIds to collection_ids_serialized_name.
+     * Adds an collectionIds to collectionIds.
      *
      * @param collectionIds the new collectionIds
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder addCollectionIds(String collectionIds) {
       IBMWatsonValidator.notNull(collectionIds, 'collectionIds cannot be null');
-      if (this.collection_ids_serialized_name == null) {
-        this.collection_ids_serialized_name = new List<String>();
+      if (this.collectionIds == null) {
+        this.collectionIds = new List<String>();
       }
-      this.collection_ids_serialized_name.add(collectionIds);
+      this.collectionIds.add(collectionIds);
       return this;
     }
 
     /**
-     * Adds an returnVar to return_serialized_name.
+     * Adds an returnFields to returnFields.
      *
-     * @param returnVar the new returnVar
+     * @param returnFields the new returnFields
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder addReturn(String returnVar) {
-      IBMWatsonValidator.notNull(returnVar, 'returnVar cannot be null');
-      if (this.return_serialized_name == null) {
-        this.return_serialized_name = new List<String>();
+    public FederatedQueryNoticesOptionsBuilder addReturnFields(String returnFields) {
+      IBMWatsonValidator.notNull(returnFields, 'returnFields cannot be null');
+      if (this.returnFields == null) {
+        this.returnFields = new List<String>();
       }
-      this.return_serialized_name.add(returnVar);
+      this.returnFields.add(returnFields);
       return this;
     }
 
     /**
-     * Adds an sortVar to sort_serialized_name.
+     * Adds an xsort to xsort.
      *
-     * @param sortVar the new sortVar
+     * @param xsort the new xsort
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder addSort(String sortVar) {
-      IBMWatsonValidator.notNull(sortVar, 'sortVar cannot be null');
-      if (this.sort_serialized_name == null) {
-        this.sort_serialized_name = new List<String>();
+    public FederatedQueryNoticesOptionsBuilder addXsort(String xsort) {
+      IBMWatsonValidator.notNull(xsort, 'xsort cannot be null');
+      if (this.xsort == null) {
+        this.xsort = new List<String>();
       }
-      this.sort_serialized_name.add(sortVar);
+      this.xsort.add(xsort);
       return this;
     }
 
     /**
-     * Adds an similarDocumentIds to similar_document_ids_serialized_name.
+     * Adds an similarDocumentIds to similarDocumentIds.
      *
      * @param similarDocumentIds the new similarDocumentIds
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder addSimilarDocumentIds(String similarDocumentIds) {
       IBMWatsonValidator.notNull(similarDocumentIds, 'similarDocumentIds cannot be null');
-      if (this.similar_document_ids_serialized_name == null) {
-        this.similar_document_ids_serialized_name = new List<String>();
+      if (this.similarDocumentIds == null) {
+        this.similarDocumentIds = new List<String>();
       }
-      this.similar_document_ids_serialized_name.add(similarDocumentIds);
+      this.similarDocumentIds.add(similarDocumentIds);
       return this;
     }
 
     /**
-     * Adds an similarFields to similar_fields_serialized_name.
+     * Adds an similarFields to similarFields.
      *
      * @param similarFields the new similarFields
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder addSimilarFields(String similarFields) {
       IBMWatsonValidator.notNull(similarFields, 'similarFields cannot be null');
-      if (this.similar_fields_serialized_name == null) {
-        this.similar_fields_serialized_name = new List<String>();
+      if (this.similarFields == null) {
+        this.similarFields = new List<String>();
       }
-      this.similar_fields_serialized_name.add(similarFields);
+      this.similarFields.add(similarFields);
       return this;
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_ids_serialized_name.
-     * Existing collection_ids_serialized_name will be replaced.
+     * Set the collectionIds.
+     * Existing collectionIds will be replaced.
      *
      * @param collectionIds the collectionIds
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder collectionIds(List<String> collectionIds) {
-      this.collection_ids_serialized_name = collectionIds;
+      this.collectionIds = collectionIds;
       return this;
     }
 
     /**
-     * Set the filter_serialized_name.
+     * Set the filter.
      *
      * @param filter the filter
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder filter(String filter) {
-      this.filter_serialized_name = filter;
+      this.filter = filter;
       return this;
     }
 
     /**
-     * Set the query_serialized_name.
+     * Set the query.
      *
      * @param query the query
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder query(String query) {
-      this.query_serialized_name = query;
+      this.query = query;
       return this;
     }
 
     /**
-     * Set the natural_language_query_serialized_name.
+     * Set the naturalLanguageQuery.
      *
      * @param naturalLanguageQuery the naturalLanguageQuery
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
-      this.natural_language_query_serialized_name = naturalLanguageQuery;
+      this.naturalLanguageQuery = naturalLanguageQuery;
       return this;
     }
 
     /**
-     * Set the aggregation_serialized_name.
+     * Set the aggregation.
      *
      * @param aggregation the aggregation
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder aggregation(String aggregation) {
-      this.aggregation_serialized_name = aggregation;
+      this.aggregation = aggregation;
       return this;
     }
 
     /**
-     * Set the count_serialized_name.
+     * Set the count.
      *
      * @param count the count
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder count(Long count) {
-      this.count_serialized_name = count;
+      this.count = count;
       return this;
     }
 
     /**
-     * Set the return_serialized_name.
-     * Existing return_serialized_name will be replaced.
+     * Set the returnFields.
+     * Existing returnFields will be replaced.
      *
-     * @param returnVar the returnVar
+     * @param returnFields the returnFields
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder returnField(List<String> returnVar) {
-      this.return_serialized_name = returnVar;
+    public FederatedQueryNoticesOptionsBuilder returnFields(List<String> returnFields) {
+      this.returnFields = returnFields;
       return this;
     }
 
     /**
-     * Set the offset_serialized_name.
+     * Set the offset.
      *
      * @param offset the offset
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder offset(Long offset) {
-      this.offset_serialized_name = offset;
+      this.offset = offset;
       return this;
     }
 
     /**
-     * Set the sort_serialized_name.
-     * Existing sort_serialized_name will be replaced.
+     * Set the xsort.
+     * Existing xsort will be replaced.
      *
-     * @param sortVar the sortVar
+     * @param xsort the xsort
      * @return the FederatedQueryNoticesOptions builder
      */
-    public FederatedQueryNoticesOptionsBuilder sortField(List<String> sortVar) {
-      this.sort_serialized_name = sortVar;
+    public FederatedQueryNoticesOptionsBuilder xsort(List<String> xsort) {
+      this.xsort = xsort;
       return this;
     }
 
     /**
-     * Set the highlight_serialized_name.
+     * Set the highlight.
      *
      * @param highlight the highlight
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder highlight(Boolean highlight) {
-      this.highlight_serialized_name = highlight;
+      this.highlight = highlight;
       return this;
     }
 
     /**
-     * Set the deduplicate_field_serialized_name.
+     * Set the deduplicateField.
      *
      * @param deduplicateField the deduplicateField
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder deduplicateField(String deduplicateField) {
-      this.deduplicate_field_serialized_name = deduplicateField;
+      this.deduplicateField = deduplicateField;
       return this;
     }
 
     /**
-     * Set the similar_serialized_name.
+     * Set the similar.
      *
      * @param similar the similar
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder similar(Boolean similar) {
-      this.similar_serialized_name = similar;
+      this.similar = similar;
       return this;
     }
 
     /**
-     * Set the similar_document_ids_serialized_name.
-     * Existing similar_document_ids_serialized_name will be replaced.
+     * Set the similarDocumentIds.
+     * Existing similarDocumentIds will be replaced.
      *
      * @param similarDocumentIds the similarDocumentIds
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder similarDocumentIds(List<String> similarDocumentIds) {
-      this.similar_document_ids_serialized_name = similarDocumentIds;
+      this.similarDocumentIds = similarDocumentIds;
       return this;
     }
 
     /**
-     * Set the similar_fields_serialized_name.
-     * Existing similar_fields_serialized_name will be replaced.
+     * Set the similarFields.
+     * Existing similarFields will be replaced.
      *
      * @param similarFields the similarFields
      * @return the FederatedQueryNoticesOptions builder
      */
     public FederatedQueryNoticesOptionsBuilder similarFields(List<String> similarFields) {
-      this.similar_fields_serialized_name = similarFields;
+      this.similarFields = similarFields;
       return this;
     }
 
@@ -6072,273 +6333,321 @@ public class IBMDiscoveryV1Models {
    * The federatedQuery options.
    */
   public class FederatedQueryOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private List<String> collection_ids_serialized_name;
-    private String filter_serialized_name;
-    private String query_serialized_name;
-    private String natural_language_query_serialized_name;
-    private String aggregation_serialized_name;
-    private Long count_serialized_name;
-    private List<String> return_serialized_name;
-    private Long offset_serialized_name;
-    private List<String> sort_serialized_name;
-    private Boolean highlight_serialized_name;
-    private Boolean deduplicate_serialized_name;
-    private String deduplicate_field_serialized_name;
-    private Boolean similar_serialized_name;
-    private List<String> similar_document_ids_serialized_name;
-    private List<String> similar_fields_serialized_name;
-    private Boolean passages_serialized_name;
-    private List<String> passages_fields_serialized_name;
-    private Long passages_count_serialized_name;
-    private Long passages_characters_serialized_name;
+    private String environmentId;
+    private String filter;
+    private String query;
+    private String naturalLanguageQuery;
+    private Boolean passages;
+    private String aggregation;
+    private Long count;
+    private String returnFields;
+    private Long offset;
+    private String xsort;
+    private Boolean highlight;
+    private String passagesFields;
+    private Long passagesCount;
+    private Long passagesCharacters;
+    private Boolean deduplicate;
+    private String deduplicateField;
+    private String collectionIds;
+    private Boolean similar;
+    private String similarDocumentIds;
+    private String similarFields;
+    private String bias;
+    private Boolean loggingOptOut;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_ids_serialized_name.
+     * Gets the filter.
      *
-     * A comma-separated list of collection IDs to be queried against.
+     * A cacheable query that excludes documents that don't mention the query content. Filter searches are better for
+     * metadata-type searches and for assessing the concepts in the data set.
      *
-     * @return the collection_ids_serialized_name
-     */
-    public List<String> collectionIds() {
-      return collection_ids_serialized_name;
-    }
-    /**
-     * Gets the filter_serialized_name.
-     *
-     * A cacheable query that limits the documents returned to exclude any documents that don't mention the query
-     * content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts
-     * in the data set.
-     *
-     * @return the filter_serialized_name
+     * @return the filter
      */
     public String filter() {
-      return filter_serialized_name;
+      return filter;
     }
+ 
     /**
-     * Gets the query_serialized_name.
+     * Gets the query.
      *
      * A query search returns all documents in your data set with full enrichments and full text, but with the most
      * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
      * cannot use **natural_language_query** and **query** at the same time.
      *
-     * @return the query_serialized_name
+     * @return the query
      */
     public String query() {
-      return query_serialized_name;
+      return query;
     }
+ 
     /**
-     * Gets the natural_language_query_serialized_name.
+     * Gets the naturalLanguageQuery.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language
      * understanding. You cannot use **natural_language_query** and **query** at the same time.
      *
-     * @return the natural_language_query_serialized_name
+     * @return the naturalLanguageQuery
      */
     public String naturalLanguageQuery() {
-      return natural_language_query_serialized_name;
+      return naturalLanguageQuery;
     }
+ 
     /**
-     * Gets the aggregation_serialized_name.
+     * Gets the passages.
      *
-     * An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are
-     * useful for building applications, because you can use them to build lists, tables, and time series. For a full
-     * list of possible aggregrations, see the Query reference.
+     * A passages query that returns the most relevant passages from the results.
      *
-     * @return the aggregation_serialized_name
+     * @return the passages
+     */
+    public Boolean passages() {
+      return passages;
+    }
+ 
+    /**
+     * Gets the aggregation.
+     *
+     * An aggregation search that returns an exact answer by combining query search with filters. Useful for
+     * applications to build lists, tables, and time series. For a full list of possible aggregations, see the Query
+     * reference.
+     *
+     * @return the aggregation
      */
     public String aggregation() {
-      return aggregation_serialized_name;
+      return aggregation;
     }
+ 
     /**
-     * Gets the count_serialized_name.
+     * Gets the count.
      *
      * Number of results to return.
      *
-     * @return the count_serialized_name
+     * @return the count
      */
     public Long count() {
-      return count_serialized_name;
+      return count;
     }
+ 
     /**
-     * Gets the return_serialized_name.
+     * Gets the returnFields.
      *
-     * A comma separated list of the portion of the document hierarchy to return.
+     * A comma-separated list of the portion of the document hierarchy to return.
      *
-     * @return the return_serialized_name
+     * @return the returnFields
      */
-    public List<String> returnField() {
-      return return_serialized_name;
+    public String returnFields() {
+      return returnFields;
     }
+ 
     /**
-     * Gets the offset_serialized_name.
+     * Gets the offset.
      *
      * The number of query results to skip at the beginning. For example, if the total number of results that are
-     * returned is 10, and the offset is 8, it returns the last two results.
+     * returned is 10 and the offset is 8, it returns the last two results.
      *
-     * @return the offset_serialized_name
+     * @return the offset
      */
     public Long offset() {
-      return offset_serialized_name;
+      return offset;
     }
+ 
     /**
-     * Gets the sort_serialized_name.
+     * Gets the xsort.
      *
-     * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by
+     * A comma-separated list of fields in the document to sort on. You can optionally specify a sort direction by
      * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
-     * prefix is specified.
+     * prefix is specified. This parameter cannot be used in the same query as the **bias** parameter.
      *
-     * @return the sort_serialized_name
+     * @return the xsort
      */
-    public List<String> sortField() {
-      return sort_serialized_name;
+    public String xsort() {
+      return xsort;
     }
+ 
     /**
-     * Gets the highlight_serialized_name.
+     * Gets the highlight.
      *
-     * When true a highlight field is returned for each result which contains the fields that match the query with
-     * `<em></em>` tags around the matching query terms. Defaults to false.
+     * When true, a highlight field is returned for each result which contains the fields which match the query with
+     * `<em></em>` tags around the matching query terms.
      *
-     * @return the highlight_serialized_name
+     * @return the highlight
      */
     public Boolean highlight() {
-      return highlight_serialized_name;
+      return highlight;
     }
+ 
     /**
-     * Gets the deduplicate_serialized_name.
+     * Gets the passagesFields.
+     *
+     * A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all
+     * top-level fields are included.
+     *
+     * @return the passagesFields
+     */
+    public String passagesFields() {
+      return passagesFields;
+    }
+ 
+    /**
+     * Gets the passagesCount.
+     *
+     * The maximum number of passages to return. The search returns fewer passages if the requested total is not found.
+     * The default is `10`. The maximum is `100`.
+     *
+     * @return the passagesCount
+     */
+    public Long passagesCount() {
+      return passagesCount;
+    }
+ 
+    /**
+     * Gets the passagesCharacters.
+     *
+     * The approximate number of characters that any one passage will have.
+     *
+     * @return the passagesCharacters
+     */
+    public Long passagesCharacters() {
+      return passagesCharacters;
+    }
+ 
+    /**
+     * Gets the deduplicate.
      *
      * When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the
      * **title** field) are removed. Duplicate comparison is limited to the current query only; **offset** is not
      * considered. This parameter is currently Beta functionality.
      *
-     * @return the deduplicate_serialized_name
+     * @return the deduplicate
      */
     public Boolean deduplicate() {
-      return deduplicate_serialized_name;
+      return deduplicate;
     }
+ 
     /**
-     * Gets the deduplicate_field_serialized_name.
+     * Gets the deduplicateField.
      *
      * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
      * comparison is limited to the current query only, **offset** is not considered. This parameter is currently Beta
      * functionality.
      *
-     * @return the deduplicate_field_serialized_name
+     * @return the deduplicateField
      */
     public String deduplicateField() {
-      return deduplicate_field_serialized_name;
+      return deduplicateField;
     }
+ 
     /**
-     * Gets the similar_serialized_name.
+     * Gets the collectionIds.
+     *
+     * A comma-separated list of collection IDs to be queried against. Required when querying multiple collections,
+     * invalid when performing a single collection query.
+     *
+     * @return the collectionIds
+     */
+    public String collectionIds() {
+      return collectionIds;
+    }
+ 
+    /**
+     * Gets the similar.
      *
      * When `true`, results are returned based on their similarity to the document IDs specified in the
      * **similar.document_ids** parameter.
      *
-     * @return the similar_serialized_name
+     * @return the similar
      */
     public Boolean similar() {
-      return similar_serialized_name;
+      return similar;
     }
+ 
     /**
-     * Gets the similar_document_ids_serialized_name.
+     * Gets the similarDocumentIds.
      *
-     * A comma-separated list of document IDs that will be used to find similar documents.
+     * A comma-separated list of document IDs to find similar documents.
      *
-     * **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
-     * the document similarity search to include the natural language query. Other query parameters, such as **filter**
-     * and **query** are subsequently applied and reduce the query scope.
+     * **Tip:** Include the **natural_language_query** parameter to expand the scope of the document similarity search
+     * with the natural language query. Other query parameters, such as **filter** and **query**, are subsequently
+     * applied and reduce the scope.
      *
-     * @return the similar_document_ids_serialized_name
+     * @return the similarDocumentIds
      */
-    public List<String> similarDocumentIds() {
-      return similar_document_ids_serialized_name;
+    public String similarDocumentIds() {
+      return similarDocumentIds;
     }
+ 
     /**
-     * Gets the similar_fields_serialized_name.
+     * Gets the similarFields.
      *
-     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents.
-     * If not specified, the entire document is used for comparison.
+     * A comma-separated list of field names that are used as a basis for comparison to identify similar documents. If
+     * not specified, the entire document is used for comparison.
      *
-     * @return the similar_fields_serialized_name
+     * @return the similarFields
      */
-    public List<String> similarFields() {
-      return similar_fields_serialized_name;
+    public String similarFields() {
+      return similarFields;
     }
+ 
     /**
-     * Gets the passages_serialized_name.
+     * Gets the bias.
      *
-     * A passages query that returns the most relevant passages from the results.
+     * Field which the returned results will be biased against. The specified field must be either a **date** or
+     * **number** format. When a **date** type field is specified returned results are biased towards field values
+     * closer to the current date. When a **number** type field is specified, returned results are biased towards higher
+     * field values. This parameter cannot be used in the same query as the **sort** parameter.
      *
-     * @return the passages_serialized_name
+     * @return the bias
      */
-    public Boolean passages() {
-      return passages_serialized_name;
+    public String bias() {
+      return bias;
     }
+ 
     /**
-     * Gets the passages_fields_serialized_name.
+     * Gets the loggingOptOut.
      *
-     * A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all
-     * top-level fields are included.
+     * If `true`, queries are not stored in the Discovery **Logs** endpoint.
      *
-     * @return the passages_fields_serialized_name
+     * @return the loggingOptOut
      */
-    public List<String> passagesFields() {
-      return passages_fields_serialized_name;
+    public Boolean loggingOptOut() {
+      return loggingOptOut;
     }
-    /**
-     * Gets the passages_count_serialized_name.
-     *
-     * The maximum number of passages to return. The search returns fewer passages if the requested total is not found.
-     * The default is `10`. The maximum is `100`.
-     *
-     * @return the passages_count_serialized_name
-     */
-    public Long passagesCount() {
-      return passages_count_serialized_name;
-    }
-    /**
-     * Gets the passages_characters_serialized_name.
-     *
-     * The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`.
-     * The maximum is `2000`.
-     *
-     * @return the passages_characters_serialized_name
-     */
-    public Long passagesCharacters() {
-      return passages_characters_serialized_name;
-    }
+
     private FederatedQueryOptions(FederatedQueryOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notNull(builder.collection_ids_serialized_name, 'collection_ids_serialized_name cannot be null');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_ids_serialized_name = builder.collection_ids_serialized_name;
-      filter_serialized_name = builder.filter_serialized_name;
-      query_serialized_name = builder.query_serialized_name;
-      natural_language_query_serialized_name = builder.natural_language_query_serialized_name;
-      aggregation_serialized_name = builder.aggregation_serialized_name;
-      count_serialized_name = builder.count_serialized_name;
-      return_serialized_name = builder.return_serialized_name;
-      offset_serialized_name = builder.offset_serialized_name;
-      sort_serialized_name = builder.sort_serialized_name;
-      highlight_serialized_name = builder.highlight_serialized_name;
-      deduplicate_serialized_name = builder.deduplicate_serialized_name;
-      deduplicate_field_serialized_name = builder.deduplicate_field_serialized_name;
-      similar_serialized_name = builder.similar_serialized_name;
-      similar_document_ids_serialized_name = builder.similar_document_ids_serialized_name;
-      similar_fields_serialized_name = builder.similar_fields_serialized_name;
-      passages_serialized_name = builder.passages_serialized_name;
-      passages_fields_serialized_name = builder.passages_fields_serialized_name;
-      passages_count_serialized_name = builder.passages_count_serialized_name;
-      passages_characters_serialized_name = builder.passages_characters_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      environmentId = builder.environmentId;
+      filter = builder.filter;
+      query = builder.query;
+      naturalLanguageQuery = builder.naturalLanguageQuery;
+      passages = builder.passages;
+      aggregation = builder.aggregation;
+      count = builder.count;
+      returnFields = builder.returnFields;
+      offset = builder.offset;
+      xsort = builder.xsort;
+      highlight = builder.highlight;
+      passagesFields = builder.passagesFields;
+      passagesCount = builder.passagesCount;
+      passagesCharacters = builder.passagesCharacters;
+      deduplicate = builder.deduplicate;
+      deduplicateField = builder.deduplicateField;
+      collectionIds = builder.collectionIds;
+      similar = builder.similar;
+      similarDocumentIds = builder.similarDocumentIds;
+      similarFields = builder.similarFields;
+      bias = builder.bias;
+      loggingOptOut = builder.loggingOptOut;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -6357,48 +6666,52 @@ public class IBMDiscoveryV1Models {
    * FederatedQueryOptions Builder.
    */
   public class FederatedQueryOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private List<String> collection_ids_serialized_name;
-    private String filter_serialized_name;
-    private String query_serialized_name;
-    private String natural_language_query_serialized_name;
-    private String aggregation_serialized_name;
-    private Long count_serialized_name;
-    private List<String> return_serialized_name;
-    private Long offset_serialized_name;
-    private List<String> sort_serialized_name;
-    private Boolean highlight_serialized_name;
-    private Boolean deduplicate_serialized_name;
-    private String deduplicate_field_serialized_name;
-    private Boolean similar_serialized_name;
-    private List<String> similar_document_ids_serialized_name;
-    private List<String> similar_fields_serialized_name;
-    private Boolean passages_serialized_name;
-    private List<String> passages_fields_serialized_name;
-    private Long passages_count_serialized_name;
-    private Long passages_characters_serialized_name;
+    private String environmentId;
+    private String filter;
+    private String query;
+    private String naturalLanguageQuery;
+    private Boolean passages;
+    private String aggregation;
+    private Long count;
+    private String returnFields;
+    private Long offset;
+    private String xsort;
+    private Boolean highlight;
+    private String passagesFields;
+    private Long passagesCount;
+    private Long passagesCharacters;
+    private Boolean deduplicate;
+    private String deduplicateField;
+    private String collectionIds;
+    private Boolean similar;
+    private String similarDocumentIds;
+    private String similarFields;
+    private String bias;
+    private Boolean loggingOptOut;
 
     private FederatedQueryOptionsBuilder(FederatedQueryOptions federatedQueryOptions) {
-      environment_id_serialized_name = federatedQueryOptions.environment_id_serialized_name;
-      collection_ids_serialized_name = federatedQueryOptions.collection_ids_serialized_name;
-      filter_serialized_name = federatedQueryOptions.filter_serialized_name;
-      query_serialized_name = federatedQueryOptions.query_serialized_name;
-      natural_language_query_serialized_name = federatedQueryOptions.natural_language_query_serialized_name;
-      aggregation_serialized_name = federatedQueryOptions.aggregation_serialized_name;
-      count_serialized_name = federatedQueryOptions.count_serialized_name;
-      return_serialized_name = federatedQueryOptions.return_serialized_name;
-      offset_serialized_name = federatedQueryOptions.offset_serialized_name;
-      sort_serialized_name = federatedQueryOptions.sort_serialized_name;
-      highlight_serialized_name = federatedQueryOptions.highlight_serialized_name;
-      deduplicate_serialized_name = federatedQueryOptions.deduplicate_serialized_name;
-      deduplicate_field_serialized_name = federatedQueryOptions.deduplicate_field_serialized_name;
-      similar_serialized_name = federatedQueryOptions.similar_serialized_name;
-      similar_document_ids_serialized_name = federatedQueryOptions.similar_document_ids_serialized_name;
-      similar_fields_serialized_name = federatedQueryOptions.similar_fields_serialized_name;
-      passages_serialized_name = federatedQueryOptions.passages_serialized_name;
-      passages_fields_serialized_name = federatedQueryOptions.passages_fields_serialized_name;
-      passages_count_serialized_name = federatedQueryOptions.passages_count_serialized_name;
-      passages_characters_serialized_name = federatedQueryOptions.passages_characters_serialized_name;
+      environmentId = federatedQueryOptions.environmentId;
+      filter = federatedQueryOptions.filter;
+      query = federatedQueryOptions.query;
+      naturalLanguageQuery = federatedQueryOptions.naturalLanguageQuery;
+      passages = federatedQueryOptions.passages;
+      aggregation = federatedQueryOptions.aggregation;
+      count = federatedQueryOptions.count;
+      returnFields = federatedQueryOptions.returnFields;
+      offset = federatedQueryOptions.offset;
+      xsort = federatedQueryOptions.xsort;
+      highlight = federatedQueryOptions.highlight;
+      passagesFields = federatedQueryOptions.passagesFields;
+      passagesCount = federatedQueryOptions.passagesCount;
+      passagesCharacters = federatedQueryOptions.passagesCharacters;
+      deduplicate = federatedQueryOptions.deduplicate;
+      deduplicateField = federatedQueryOptions.deduplicateField;
+      collectionIds = federatedQueryOptions.collectionIds;
+      similar = federatedQueryOptions.similar;
+      similarDocumentIds = federatedQueryOptions.similarDocumentIds;
+      similarFields = federatedQueryOptions.similarFields;
+      bias = federatedQueryOptions.bias;
+      loggingOptOut = federatedQueryOptions.loggingOptOut;
       this.requestHeaders.putAll(federatedQueryOptions.requestHeaders());
     }
 
@@ -6412,11 +6725,9 @@ public class IBMDiscoveryV1Models {
      * Instantiates a new builder with required properties.
      *
      * @param environmentId the environmentId
-     * @param collectionIds the collectionIds
      */
-    public FederatedQueryOptionsBuilder(String environmentId, List<String> collectionIds) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_ids_serialized_name = collectionIds;
+    public FederatedQueryOptionsBuilder(String environmentId) {
+      this.environmentId = environmentId;
     }
 
     /**
@@ -6429,318 +6740,244 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an collectionIds to collection_ids_serialized_name.
-     *
-     * @param collectionIds the new collectionIds
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder addCollectionIds(String collectionIds) {
-      IBMWatsonValidator.notNull(collectionIds, 'collectionIds cannot be null');
-      if (this.collection_ids_serialized_name == null) {
-        this.collection_ids_serialized_name = new List<String>();
-      }
-      this.collection_ids_serialized_name.add(collectionIds);
-      return this;
-    }
-
-    /**
-     * Adds an returnVar to return_serialized_name.
-     *
-     * @param returnVar the new returnVar
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder addReturn(String returnVar) {
-      IBMWatsonValidator.notNull(returnVar, 'returnVar cannot be null');
-      if (this.return_serialized_name == null) {
-        this.return_serialized_name = new List<String>();
-      }
-      this.return_serialized_name.add(returnVar);
-      return this;
-    }
-
-    /**
-     * Adds an sortVar to sort_serialized_name.
-     *
-     * @param sortVar the new sortVar
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder addSort(String sortVar) {
-      IBMWatsonValidator.notNull(sortVar, 'sortVar cannot be null');
-      if (this.sort_serialized_name == null) {
-        this.sort_serialized_name = new List<String>();
-      }
-      this.sort_serialized_name.add(sortVar);
-      return this;
-    }
-
-    /**
-     * Adds an similarDocumentIds to similar_document_ids_serialized_name.
-     *
-     * @param similarDocumentIds the new similarDocumentIds
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder addSimilarDocumentIds(String similarDocumentIds) {
-      IBMWatsonValidator.notNull(similarDocumentIds, 'similarDocumentIds cannot be null');
-      if (this.similar_document_ids_serialized_name == null) {
-        this.similar_document_ids_serialized_name = new List<String>();
-      }
-      this.similar_document_ids_serialized_name.add(similarDocumentIds);
-      return this;
-    }
-
-    /**
-     * Adds an similarFields to similar_fields_serialized_name.
-     *
-     * @param similarFields the new similarFields
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder addSimilarFields(String similarFields) {
-      IBMWatsonValidator.notNull(similarFields, 'similarFields cannot be null');
-      if (this.similar_fields_serialized_name == null) {
-        this.similar_fields_serialized_name = new List<String>();
-      }
-      this.similar_fields_serialized_name.add(similarFields);
-      return this;
-    }
-
-    /**
-     * Adds an passagesFields to passages_fields_serialized_name.
-     *
-     * @param passagesFields the new passagesFields
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder addPassagesFields(String passagesFields) {
-      IBMWatsonValidator.notNull(passagesFields, 'passagesFields cannot be null');
-      if (this.passages_fields_serialized_name == null) {
-        this.passages_fields_serialized_name = new List<String>();
-      }
-      this.passages_fields_serialized_name.add(passagesFields);
-      return this;
-    }
-
-    /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the FederatedQueryOptions builder
      */
     public FederatedQueryOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_ids_serialized_name.
-     * Existing collection_ids_serialized_name will be replaced.
-     *
-     * @param collectionIds the collectionIds
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder collectionIds(List<String> collectionIds) {
-      this.collection_ids_serialized_name = collectionIds;
-      return this;
-    }
-
-    /**
-     * Set the filter_serialized_name.
+     * Set the filter.
      *
      * @param filter the filter
      * @return the FederatedQueryOptions builder
      */
     public FederatedQueryOptionsBuilder filter(String filter) {
-      this.filter_serialized_name = filter;
+      this.filter = filter;
       return this;
     }
 
     /**
-     * Set the query_serialized_name.
+     * Set the query.
      *
      * @param query the query
      * @return the FederatedQueryOptions builder
      */
     public FederatedQueryOptionsBuilder query(String query) {
-      this.query_serialized_name = query;
+      this.query = query;
       return this;
     }
 
     /**
-     * Set the natural_language_query_serialized_name.
+     * Set the naturalLanguageQuery.
      *
      * @param naturalLanguageQuery the naturalLanguageQuery
      * @return the FederatedQueryOptions builder
      */
     public FederatedQueryOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
-      this.natural_language_query_serialized_name = naturalLanguageQuery;
+      this.naturalLanguageQuery = naturalLanguageQuery;
       return this;
     }
 
     /**
-     * Set the aggregation_serialized_name.
-     *
-     * @param aggregation the aggregation
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder aggregation(String aggregation) {
-      this.aggregation_serialized_name = aggregation;
-      return this;
-    }
-
-    /**
-     * Set the count_serialized_name.
-     *
-     * @param count the count
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder count(Long count) {
-      this.count_serialized_name = count;
-      return this;
-    }
-
-    /**
-     * Set the return_serialized_name.
-     * Existing return_serialized_name will be replaced.
-     *
-     * @param returnVar the returnVar
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder returnField(List<String> returnVar) {
-      this.return_serialized_name = returnVar;
-      return this;
-    }
-
-    /**
-     * Set the offset_serialized_name.
-     *
-     * @param offset the offset
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder offset(Long offset) {
-      this.offset_serialized_name = offset;
-      return this;
-    }
-
-    /**
-     * Set the sort_serialized_name.
-     * Existing sort_serialized_name will be replaced.
-     *
-     * @param sortVar the sortVar
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder sortField(List<String> sortVar) {
-      this.sort_serialized_name = sortVar;
-      return this;
-    }
-
-    /**
-     * Set the highlight_serialized_name.
-     *
-     * @param highlight the highlight
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder highlight(Boolean highlight) {
-      this.highlight_serialized_name = highlight;
-      return this;
-    }
-
-    /**
-     * Set the deduplicate_serialized_name.
-     *
-     * @param deduplicate the deduplicate
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder deduplicate(Boolean deduplicate) {
-      this.deduplicate_serialized_name = deduplicate;
-      return this;
-    }
-
-    /**
-     * Set the deduplicate_field_serialized_name.
-     *
-     * @param deduplicateField the deduplicateField
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder deduplicateField(String deduplicateField) {
-      this.deduplicate_field_serialized_name = deduplicateField;
-      return this;
-    }
-
-    /**
-     * Set the similar_serialized_name.
-     *
-     * @param similar the similar
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder similar(Boolean similar) {
-      this.similar_serialized_name = similar;
-      return this;
-    }
-
-    /**
-     * Set the similar_document_ids_serialized_name.
-     * Existing similar_document_ids_serialized_name will be replaced.
-     *
-     * @param similarDocumentIds the similarDocumentIds
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder similarDocumentIds(List<String> similarDocumentIds) {
-      this.similar_document_ids_serialized_name = similarDocumentIds;
-      return this;
-    }
-
-    /**
-     * Set the similar_fields_serialized_name.
-     * Existing similar_fields_serialized_name will be replaced.
-     *
-     * @param similarFields the similarFields
-     * @return the FederatedQueryOptions builder
-     */
-    public FederatedQueryOptionsBuilder similarFields(List<String> similarFields) {
-      this.similar_fields_serialized_name = similarFields;
-      return this;
-    }
-
-    /**
-     * Set the passages_serialized_name.
+     * Set the passages.
      *
      * @param passages the passages
      * @return the FederatedQueryOptions builder
      */
     public FederatedQueryOptionsBuilder passages(Boolean passages) {
-      this.passages_serialized_name = passages;
+      this.passages = passages;
       return this;
     }
 
     /**
-     * Set the passages_fields_serialized_name.
-     * Existing passages_fields_serialized_name will be replaced.
+     * Set the aggregation.
+     *
+     * @param aggregation the aggregation
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder aggregation(String aggregation) {
+      this.aggregation = aggregation;
+      return this;
+    }
+
+    /**
+     * Set the count.
+     *
+     * @param count the count
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder count(Long count) {
+      this.count = count;
+      return this;
+    }
+
+    /**
+     * Set the returnFields.
+     *
+     * @param returnFields the returnFields
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder returnFields(String returnFields) {
+      this.returnFields = returnFields;
+      return this;
+    }
+
+    /**
+     * Set the offset.
+     *
+     * @param offset the offset
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder offset(Long offset) {
+      this.offset = offset;
+      return this;
+    }
+
+    /**
+     * Set the xsort.
+     *
+     * @param xsort the xsort
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder xsort(String xsort) {
+      this.xsort = xsort;
+      return this;
+    }
+
+    /**
+     * Set the highlight.
+     *
+     * @param highlight the highlight
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder highlight(Boolean highlight) {
+      this.highlight = highlight;
+      return this;
+    }
+
+    /**
+     * Set the passagesFields.
      *
      * @param passagesFields the passagesFields
      * @return the FederatedQueryOptions builder
      */
-    public FederatedQueryOptionsBuilder passagesFields(List<String> passagesFields) {
-      this.passages_fields_serialized_name = passagesFields;
+    public FederatedQueryOptionsBuilder passagesFields(String passagesFields) {
+      this.passagesFields = passagesFields;
       return this;
     }
 
     /**
-     * Set the passages_count_serialized_name.
+     * Set the passagesCount.
      *
      * @param passagesCount the passagesCount
      * @return the FederatedQueryOptions builder
      */
     public FederatedQueryOptionsBuilder passagesCount(Long passagesCount) {
-      this.passages_count_serialized_name = passagesCount;
+      this.passagesCount = passagesCount;
       return this;
     }
 
     /**
-     * Set the passages_characters_serialized_name.
+     * Set the passagesCharacters.
      *
      * @param passagesCharacters the passagesCharacters
      * @return the FederatedQueryOptions builder
      */
     public FederatedQueryOptionsBuilder passagesCharacters(Long passagesCharacters) {
-      this.passages_characters_serialized_name = passagesCharacters;
+      this.passagesCharacters = passagesCharacters;
+      return this;
+    }
+
+    /**
+     * Set the deduplicate.
+     *
+     * @param deduplicate the deduplicate
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder deduplicate(Boolean deduplicate) {
+      this.deduplicate = deduplicate;
+      return this;
+    }
+
+    /**
+     * Set the deduplicateField.
+     *
+     * @param deduplicateField the deduplicateField
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder deduplicateField(String deduplicateField) {
+      this.deduplicateField = deduplicateField;
+      return this;
+    }
+
+    /**
+     * Set the collectionIds.
+     *
+     * @param collectionIds the collectionIds
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder collectionIds(String collectionIds) {
+      this.collectionIds = collectionIds;
+      return this;
+    }
+
+    /**
+     * Set the similar.
+     *
+     * @param similar the similar
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder similar(Boolean similar) {
+      this.similar = similar;
+      return this;
+    }
+
+    /**
+     * Set the similarDocumentIds.
+     *
+     * @param similarDocumentIds the similarDocumentIds
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder similarDocumentIds(String similarDocumentIds) {
+      this.similarDocumentIds = similarDocumentIds;
+      return this;
+    }
+
+    /**
+     * Set the similarFields.
+     *
+     * @param similarFields the similarFields
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder similarFields(String similarFields) {
+      this.similarFields = similarFields;
+      return this;
+    }
+
+    /**
+     * Set the bias.
+     *
+     * @param bias the bias
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder bias(String bias) {
+      this.bias = bias;
+      return this;
+    }
+
+    /**
+     * Set the loggingOptOut.
+     *
+     * @param loggingOptOut the loggingOptOut
+     * @return the FederatedQueryOptions builder
+     */
+    public FederatedQueryOptionsBuilder loggingOptOut(Boolean loggingOptOut) {
+      this.loggingOptOut = loggingOptOut;
       return this;
     }
 
@@ -6763,26 +7000,28 @@ public class IBMDiscoveryV1Models {
   public class Field extends IBMWatsonGenericModel {
     private String field_serialized_name;
     private String type_serialized_name;
+ 
     /**
-     * Gets the field_serialized_name.
+     * Gets the fieldName.
      *
      * The name of the field.
      *
-     * @return the field_serialized_name
+     * @return the fieldName
      */
     @AuraEnabled
-    public String getField() {
+    public String getFieldName() {
       return field_serialized_name;
     }
+ 
     /**
-     * Gets the type_serialized_name.
+     * Gets the fieldType.
      *
      * The type of the field.
      *
-     * @return the type_serialized_name
+     * @return the fieldType
      */
     @AuraEnabled
-    public String getType() {
+    public String getFieldType() {
       return type_serialized_name;
     }
 
@@ -6807,55 +7046,61 @@ public class IBMDiscoveryV1Models {
     private Boolean bold_serialized_name;
     private Boolean italic_serialized_name;
     private String name_serialized_name;
+ 
     /**
-     * Gets the level_serialized_name.
+     * Gets the level.
      *
-     * @return the level_serialized_name
+     * @return the level
      */
     @AuraEnabled
     public Long getLevel() {
       return level_serialized_name;
     }
+ 
     /**
-     * Gets the min_size_serialized_name.
+     * Gets the minSize.
      *
-     * @return the min_size_serialized_name
+     * @return the minSize
      */
     @AuraEnabled
     public Long getMinSize() {
       return min_size_serialized_name;
     }
+ 
     /**
-     * Gets the max_size_serialized_name.
+     * Gets the maxSize.
      *
-     * @return the max_size_serialized_name
+     * @return the maxSize
      */
     @AuraEnabled
     public Long getMaxSize() {
       return max_size_serialized_name;
     }
+ 
     /**
-     * Gets the bold_serialized_name.
+     * Gets the bold.
      *
-     * @return the bold_serialized_name
+     * @return the bold
      */
     @AuraEnabled
     public Boolean getBold() {
       return bold_serialized_name;
     }
+ 
     /**
-     * Gets the italic_serialized_name.
+     * Gets the italic.
      *
-     * @return the italic_serialized_name
+     * @return the italic
      */
     @AuraEnabled
     public Boolean getItalic() {
       return italic_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
@@ -6863,7 +7108,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the level_serialized_name.
+     * Sets the level.
      *
      * @param level the new level
      */
@@ -6872,7 +7117,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the min_size_serialized_name.
+     * Sets the minSize.
      *
      * @param minSize the new minSize
      */
@@ -6881,7 +7126,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the max_size_serialized_name.
+     * Sets the maxSize.
      *
      * @param maxSize the new maxSize
      */
@@ -6890,7 +7135,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the bold_serialized_name.
+     * Sets the bold.
      *
      * @param bold the new bold
      */
@@ -6899,7 +7144,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the italic_serialized_name.
+     * Sets the italic.
      *
      * @param italic the new italic
      */
@@ -6908,7 +7153,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -6931,33 +7176,36 @@ public class IBMDiscoveryV1Models {
    * The getCollection options.
    */
   public class GetCollectionOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+
     private GetCollectionOptions(GetCollectionOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -6976,12 +7224,12 @@ public class IBMDiscoveryV1Models {
    * GetCollectionOptions Builder.
    */
   public class GetCollectionOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
 
     private GetCollectionOptionsBuilder(GetCollectionOptions getCollectionOptions) {
-      environment_id_serialized_name = getCollectionOptions.environment_id_serialized_name;
-      collection_id_serialized_name = getCollectionOptions.collection_id_serialized_name;
+      environmentId = getCollectionOptions.environmentId;
+      collectionId = getCollectionOptions.collectionId;
       this.requestHeaders.putAll(getCollectionOptions.requestHeaders());
     }
 
@@ -6998,8 +7246,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public GetCollectionOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -7012,24 +7260,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the GetCollectionOptions builder
      */
     public GetCollectionOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the GetCollectionOptions builder
      */
     public GetCollectionOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
@@ -7050,33 +7298,36 @@ public class IBMDiscoveryV1Models {
    * The getConfiguration options.
    */
   public class GetConfigurationOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String configuration_id_serialized_name;
+    private String environmentId;
+    private String configurationId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the configuration_id_serialized_name.
+     * Gets the configurationId.
      *
      * The ID of the configuration.
      *
-     * @return the configuration_id_serialized_name
+     * @return the configurationId
      */
     public String configurationId() {
-      return configuration_id_serialized_name;
+      return configurationId;
     }
+
     private GetConfigurationOptions(GetConfigurationOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.configuration_id_serialized_name, 'configuration_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      configuration_id_serialized_name = builder.configuration_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.configurationId, 'configurationId cannot be empty');
+      environmentId = builder.environmentId;
+      configurationId = builder.configurationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7095,12 +7346,12 @@ public class IBMDiscoveryV1Models {
    * GetConfigurationOptions Builder.
    */
   public class GetConfigurationOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String configuration_id_serialized_name;
+    private String environmentId;
+    private String configurationId;
 
     private GetConfigurationOptionsBuilder(GetConfigurationOptions getConfigurationOptions) {
-      environment_id_serialized_name = getConfigurationOptions.environment_id_serialized_name;
-      configuration_id_serialized_name = getConfigurationOptions.configuration_id_serialized_name;
+      environmentId = getConfigurationOptions.environmentId;
+      configurationId = getConfigurationOptions.configurationId;
       this.requestHeaders.putAll(getConfigurationOptions.requestHeaders());
     }
 
@@ -7117,8 +7368,8 @@ public class IBMDiscoveryV1Models {
      * @param configurationId the configurationId
      */
     public GetConfigurationOptionsBuilder(String environmentId, String configurationId) {
-      this.environment_id_serialized_name = environmentId;
-      this.configuration_id_serialized_name = configurationId;
+      this.environmentId = environmentId;
+      this.configurationId = configurationId;
     }
 
     /**
@@ -7131,24 +7382,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the GetConfigurationOptions builder
      */
     public GetConfigurationOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the configuration_id_serialized_name.
+     * Set the configurationId.
      *
      * @param configurationId the configurationId
      * @return the GetConfigurationOptions builder
      */
     public GetConfigurationOptionsBuilder configurationId(String configurationId) {
-      this.configuration_id_serialized_name = configurationId;
+      this.configurationId = configurationId;
       return this;
     }
 
@@ -7169,33 +7420,36 @@ public class IBMDiscoveryV1Models {
    * The getCredentials options.
    */
   public class GetCredentialsOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String credential_id_serialized_name;
+    private String environmentId;
+    private String credentialId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the credential_id_serialized_name.
+     * Gets the credentialId.
      *
      * The unique identifier for a set of source credentials.
      *
-     * @return the credential_id_serialized_name
+     * @return the credentialId
      */
     public String credentialId() {
-      return credential_id_serialized_name;
+      return credentialId;
     }
+
     private GetCredentialsOptions(GetCredentialsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.credential_id_serialized_name, 'credential_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      credential_id_serialized_name = builder.credential_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.credentialId, 'credentialId cannot be empty');
+      environmentId = builder.environmentId;
+      credentialId = builder.credentialId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7214,12 +7468,12 @@ public class IBMDiscoveryV1Models {
    * GetCredentialsOptions Builder.
    */
   public class GetCredentialsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String credential_id_serialized_name;
+    private String environmentId;
+    private String credentialId;
 
     private GetCredentialsOptionsBuilder(GetCredentialsOptions getCredentialsOptions) {
-      environment_id_serialized_name = getCredentialsOptions.environment_id_serialized_name;
-      credential_id_serialized_name = getCredentialsOptions.credential_id_serialized_name;
+      environmentId = getCredentialsOptions.environmentId;
+      credentialId = getCredentialsOptions.credentialId;
       this.requestHeaders.putAll(getCredentialsOptions.requestHeaders());
     }
 
@@ -7236,8 +7490,8 @@ public class IBMDiscoveryV1Models {
      * @param credentialId the credentialId
      */
     public GetCredentialsOptionsBuilder(String environmentId, String credentialId) {
-      this.environment_id_serialized_name = environmentId;
-      this.credential_id_serialized_name = credentialId;
+      this.environmentId = environmentId;
+      this.credentialId = credentialId;
     }
 
     /**
@@ -7250,24 +7504,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the GetCredentialsOptions builder
      */
     public GetCredentialsOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the credential_id_serialized_name.
+     * Set the credentialId.
      *
      * @param credentialId the credentialId
      * @return the GetCredentialsOptions builder
      */
     public GetCredentialsOptionsBuilder credentialId(String credentialId) {
-      this.credential_id_serialized_name = credentialId;
+      this.credentialId = credentialId;
       return this;
     }
 
@@ -7288,46 +7542,50 @@ public class IBMDiscoveryV1Models {
    * The getDocumentStatus options.
    */
   public class GetDocumentStatusOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String document_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String documentId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the document_id_serialized_name.
+     * Gets the documentId.
      *
      * The ID of the document.
      *
-     * @return the document_id_serialized_name
+     * @return the documentId
      */
     public String documentId() {
-      return document_id_serialized_name;
+      return documentId;
     }
+
     private GetDocumentStatusOptions(GetDocumentStatusOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.document_id_serialized_name, 'document_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      document_id_serialized_name = builder.document_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.documentId, 'documentId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      documentId = builder.documentId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7346,14 +7604,14 @@ public class IBMDiscoveryV1Models {
    * GetDocumentStatusOptions Builder.
    */
   public class GetDocumentStatusOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String document_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String documentId;
 
     private GetDocumentStatusOptionsBuilder(GetDocumentStatusOptions getDocumentStatusOptions) {
-      environment_id_serialized_name = getDocumentStatusOptions.environment_id_serialized_name;
-      collection_id_serialized_name = getDocumentStatusOptions.collection_id_serialized_name;
-      document_id_serialized_name = getDocumentStatusOptions.document_id_serialized_name;
+      environmentId = getDocumentStatusOptions.environmentId;
+      collectionId = getDocumentStatusOptions.collectionId;
+      documentId = getDocumentStatusOptions.documentId;
       this.requestHeaders.putAll(getDocumentStatusOptions.requestHeaders());
     }
 
@@ -7371,9 +7629,9 @@ public class IBMDiscoveryV1Models {
      * @param documentId the documentId
      */
     public GetDocumentStatusOptionsBuilder(String environmentId, String collectionId, String documentId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
-      this.document_id_serialized_name = documentId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+      this.documentId = documentId;
     }
 
     /**
@@ -7386,35 +7644,35 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the GetDocumentStatusOptions builder
      */
     public GetDocumentStatusOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the GetDocumentStatusOptions builder
      */
     public GetDocumentStatusOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the document_id_serialized_name.
+     * Set the documentId.
      *
      * @param documentId the documentId
      * @return the GetDocumentStatusOptions builder
      */
     public GetDocumentStatusOptionsBuilder documentId(String documentId) {
-      this.document_id_serialized_name = documentId;
+      this.documentId = documentId;
       return this;
     }
 
@@ -7435,20 +7693,22 @@ public class IBMDiscoveryV1Models {
    * The getEnvironment options.
    */
   public class GetEnvironmentOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
+    private String environmentId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+
     private GetEnvironmentOptions(GetEnvironmentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      environmentId = builder.environmentId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7467,10 +7727,10 @@ public class IBMDiscoveryV1Models {
    * GetEnvironmentOptions Builder.
    */
   public class GetEnvironmentOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
+    private String environmentId;
 
     private GetEnvironmentOptionsBuilder(GetEnvironmentOptions getEnvironmentOptions) {
-      environment_id_serialized_name = getEnvironmentOptions.environment_id_serialized_name;
+      environmentId = getEnvironmentOptions.environmentId;
       this.requestHeaders.putAll(getEnvironmentOptions.requestHeaders());
     }
 
@@ -7486,7 +7746,7 @@ public class IBMDiscoveryV1Models {
      * @param environmentId the environmentId
      */
     public GetEnvironmentOptionsBuilder(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
     }
 
     /**
@@ -7499,13 +7759,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the GetEnvironmentOptions builder
      */
     public GetEnvironmentOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
@@ -7526,43 +7786,47 @@ public class IBMDiscoveryV1Models {
    * The getMetricsEventRate options.
    */
   public class GetMetricsEventRateOptions extends IBMWatsonOptionsModel {
-    private Datetime start_time_serialized_name;
-    private Datetime end_time_serialized_name;
-    private String result_type_serialized_name;
+    private Datetime startTime;
+    private Datetime endTime;
+    private String resultType;
+ 
     /**
-     * Gets the start_time_serialized_name.
+     * Gets the startTime.
      *
      * Metric is computed from data recorded after this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
      *
-     * @return the start_time_serialized_name
+     * @return the startTime
      */
     public Datetime startTime() {
-      return start_time_serialized_name;
+      return startTime;
     }
+ 
     /**
-     * Gets the end_time_serialized_name.
+     * Gets the endTime.
      *
      * Metric is computed from data recorded before this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
      *
-     * @return the end_time_serialized_name
+     * @return the endTime
      */
     public Datetime endTime() {
-      return end_time_serialized_name;
+      return endTime;
     }
+ 
     /**
-     * Gets the result_type_serialized_name.
+     * Gets the resultType.
      *
      * The type of result to consider when calculating the metric.
      *
-     * @return the result_type_serialized_name
+     * @return the resultType
      */
     public String resultType() {
-      return result_type_serialized_name;
+      return resultType;
     }
+
     private GetMetricsEventRateOptions(GetMetricsEventRateOptionsBuilder builder) {
-      start_time_serialized_name = builder.start_time_serialized_name;
-      end_time_serialized_name = builder.end_time_serialized_name;
-      result_type_serialized_name = builder.result_type_serialized_name;
+      startTime = builder.startTime;
+      endTime = builder.endTime;
+      resultType = builder.resultType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7581,14 +7845,14 @@ public class IBMDiscoveryV1Models {
    * GetMetricsEventRateOptions Builder.
    */
   public class GetMetricsEventRateOptionsBuilder extends IBMWatsonOptionsModel {
-    private Datetime start_time_serialized_name;
-    private Datetime end_time_serialized_name;
-    private String result_type_serialized_name;
+    private Datetime startTime;
+    private Datetime endTime;
+    private String resultType;
 
     private GetMetricsEventRateOptionsBuilder(GetMetricsEventRateOptions getMetricsEventRateOptions) {
-      start_time_serialized_name = getMetricsEventRateOptions.start_time_serialized_name;
-      end_time_serialized_name = getMetricsEventRateOptions.end_time_serialized_name;
-      result_type_serialized_name = getMetricsEventRateOptions.result_type_serialized_name;
+      startTime = getMetricsEventRateOptions.startTime;
+      endTime = getMetricsEventRateOptions.endTime;
+      resultType = getMetricsEventRateOptions.resultType;
       this.requestHeaders.putAll(getMetricsEventRateOptions.requestHeaders());
     }
 
@@ -7608,35 +7872,35 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the start_time_serialized_name.
+     * Set the startTime.
      *
      * @param startTime the startTime
      * @return the GetMetricsEventRateOptions builder
      */
     public GetMetricsEventRateOptionsBuilder startTime(Datetime startTime) {
-      this.start_time_serialized_name = startTime;
+      this.startTime = startTime;
       return this;
     }
 
     /**
-     * Set the end_time_serialized_name.
+     * Set the endTime.
      *
      * @param endTime the endTime
      * @return the GetMetricsEventRateOptions builder
      */
     public GetMetricsEventRateOptionsBuilder endTime(Datetime endTime) {
-      this.end_time_serialized_name = endTime;
+      this.endTime = endTime;
       return this;
     }
 
     /**
-     * Set the result_type_serialized_name.
+     * Set the resultType.
      *
      * @param resultType the resultType
      * @return the GetMetricsEventRateOptions builder
      */
     public GetMetricsEventRateOptionsBuilder resultType(String resultType) {
-      this.result_type_serialized_name = resultType;
+      this.resultType = resultType;
       return this;
     }
 
@@ -7657,43 +7921,47 @@ public class IBMDiscoveryV1Models {
    * The getMetricsQueryEvent options.
    */
   public class GetMetricsQueryEventOptions extends IBMWatsonOptionsModel {
-    private Datetime start_time_serialized_name;
-    private Datetime end_time_serialized_name;
-    private String result_type_serialized_name;
+    private Datetime startTime;
+    private Datetime endTime;
+    private String resultType;
+ 
     /**
-     * Gets the start_time_serialized_name.
+     * Gets the startTime.
      *
      * Metric is computed from data recorded after this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
      *
-     * @return the start_time_serialized_name
+     * @return the startTime
      */
     public Datetime startTime() {
-      return start_time_serialized_name;
+      return startTime;
     }
+ 
     /**
-     * Gets the end_time_serialized_name.
+     * Gets the endTime.
      *
      * Metric is computed from data recorded before this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
      *
-     * @return the end_time_serialized_name
+     * @return the endTime
      */
     public Datetime endTime() {
-      return end_time_serialized_name;
+      return endTime;
     }
+ 
     /**
-     * Gets the result_type_serialized_name.
+     * Gets the resultType.
      *
      * The type of result to consider when calculating the metric.
      *
-     * @return the result_type_serialized_name
+     * @return the resultType
      */
     public String resultType() {
-      return result_type_serialized_name;
+      return resultType;
     }
+
     private GetMetricsQueryEventOptions(GetMetricsQueryEventOptionsBuilder builder) {
-      start_time_serialized_name = builder.start_time_serialized_name;
-      end_time_serialized_name = builder.end_time_serialized_name;
-      result_type_serialized_name = builder.result_type_serialized_name;
+      startTime = builder.startTime;
+      endTime = builder.endTime;
+      resultType = builder.resultType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7712,14 +7980,14 @@ public class IBMDiscoveryV1Models {
    * GetMetricsQueryEventOptions Builder.
    */
   public class GetMetricsQueryEventOptionsBuilder extends IBMWatsonOptionsModel {
-    private Datetime start_time_serialized_name;
-    private Datetime end_time_serialized_name;
-    private String result_type_serialized_name;
+    private Datetime startTime;
+    private Datetime endTime;
+    private String resultType;
 
     private GetMetricsQueryEventOptionsBuilder(GetMetricsQueryEventOptions getMetricsQueryEventOptions) {
-      start_time_serialized_name = getMetricsQueryEventOptions.start_time_serialized_name;
-      end_time_serialized_name = getMetricsQueryEventOptions.end_time_serialized_name;
-      result_type_serialized_name = getMetricsQueryEventOptions.result_type_serialized_name;
+      startTime = getMetricsQueryEventOptions.startTime;
+      endTime = getMetricsQueryEventOptions.endTime;
+      resultType = getMetricsQueryEventOptions.resultType;
       this.requestHeaders.putAll(getMetricsQueryEventOptions.requestHeaders());
     }
 
@@ -7739,35 +8007,35 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the start_time_serialized_name.
+     * Set the startTime.
      *
      * @param startTime the startTime
      * @return the GetMetricsQueryEventOptions builder
      */
     public GetMetricsQueryEventOptionsBuilder startTime(Datetime startTime) {
-      this.start_time_serialized_name = startTime;
+      this.startTime = startTime;
       return this;
     }
 
     /**
-     * Set the end_time_serialized_name.
+     * Set the endTime.
      *
      * @param endTime the endTime
      * @return the GetMetricsQueryEventOptions builder
      */
     public GetMetricsQueryEventOptionsBuilder endTime(Datetime endTime) {
-      this.end_time_serialized_name = endTime;
+      this.endTime = endTime;
       return this;
     }
 
     /**
-     * Set the result_type_serialized_name.
+     * Set the resultType.
      *
      * @param resultType the resultType
      * @return the GetMetricsQueryEventOptions builder
      */
     public GetMetricsQueryEventOptionsBuilder resultType(String resultType) {
-      this.result_type_serialized_name = resultType;
+      this.resultType = resultType;
       return this;
     }
 
@@ -7788,43 +8056,47 @@ public class IBMDiscoveryV1Models {
    * The getMetricsQueryNoResults options.
    */
   public class GetMetricsQueryNoResultsOptions extends IBMWatsonOptionsModel {
-    private Datetime start_time_serialized_name;
-    private Datetime end_time_serialized_name;
-    private String result_type_serialized_name;
+    private Datetime startTime;
+    private Datetime endTime;
+    private String resultType;
+ 
     /**
-     * Gets the start_time_serialized_name.
+     * Gets the startTime.
      *
      * Metric is computed from data recorded after this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
      *
-     * @return the start_time_serialized_name
+     * @return the startTime
      */
     public Datetime startTime() {
-      return start_time_serialized_name;
+      return startTime;
     }
+ 
     /**
-     * Gets the end_time_serialized_name.
+     * Gets the endTime.
      *
      * Metric is computed from data recorded before this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
      *
-     * @return the end_time_serialized_name
+     * @return the endTime
      */
     public Datetime endTime() {
-      return end_time_serialized_name;
+      return endTime;
     }
+ 
     /**
-     * Gets the result_type_serialized_name.
+     * Gets the resultType.
      *
      * The type of result to consider when calculating the metric.
      *
-     * @return the result_type_serialized_name
+     * @return the resultType
      */
     public String resultType() {
-      return result_type_serialized_name;
+      return resultType;
     }
+
     private GetMetricsQueryNoResultsOptions(GetMetricsQueryNoResultsOptionsBuilder builder) {
-      start_time_serialized_name = builder.start_time_serialized_name;
-      end_time_serialized_name = builder.end_time_serialized_name;
-      result_type_serialized_name = builder.result_type_serialized_name;
+      startTime = builder.startTime;
+      endTime = builder.endTime;
+      resultType = builder.resultType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7843,14 +8115,14 @@ public class IBMDiscoveryV1Models {
    * GetMetricsQueryNoResultsOptions Builder.
    */
   public class GetMetricsQueryNoResultsOptionsBuilder extends IBMWatsonOptionsModel {
-    private Datetime start_time_serialized_name;
-    private Datetime end_time_serialized_name;
-    private String result_type_serialized_name;
+    private Datetime startTime;
+    private Datetime endTime;
+    private String resultType;
 
     private GetMetricsQueryNoResultsOptionsBuilder(GetMetricsQueryNoResultsOptions getMetricsQueryNoResultsOptions) {
-      start_time_serialized_name = getMetricsQueryNoResultsOptions.start_time_serialized_name;
-      end_time_serialized_name = getMetricsQueryNoResultsOptions.end_time_serialized_name;
-      result_type_serialized_name = getMetricsQueryNoResultsOptions.result_type_serialized_name;
+      startTime = getMetricsQueryNoResultsOptions.startTime;
+      endTime = getMetricsQueryNoResultsOptions.endTime;
+      resultType = getMetricsQueryNoResultsOptions.resultType;
       this.requestHeaders.putAll(getMetricsQueryNoResultsOptions.requestHeaders());
     }
 
@@ -7870,35 +8142,35 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the start_time_serialized_name.
+     * Set the startTime.
      *
      * @param startTime the startTime
      * @return the GetMetricsQueryNoResultsOptions builder
      */
     public GetMetricsQueryNoResultsOptionsBuilder startTime(Datetime startTime) {
-      this.start_time_serialized_name = startTime;
+      this.startTime = startTime;
       return this;
     }
 
     /**
-     * Set the end_time_serialized_name.
+     * Set the endTime.
      *
      * @param endTime the endTime
      * @return the GetMetricsQueryNoResultsOptions builder
      */
     public GetMetricsQueryNoResultsOptionsBuilder endTime(Datetime endTime) {
-      this.end_time_serialized_name = endTime;
+      this.endTime = endTime;
       return this;
     }
 
     /**
-     * Set the result_type_serialized_name.
+     * Set the resultType.
      *
      * @param resultType the resultType
      * @return the GetMetricsQueryNoResultsOptions builder
      */
     public GetMetricsQueryNoResultsOptionsBuilder resultType(String resultType) {
-      this.result_type_serialized_name = resultType;
+      this.resultType = resultType;
       return this;
     }
 
@@ -7919,43 +8191,47 @@ public class IBMDiscoveryV1Models {
    * The getMetricsQuery options.
    */
   public class GetMetricsQueryOptions extends IBMWatsonOptionsModel {
-    private Datetime start_time_serialized_name;
-    private Datetime end_time_serialized_name;
-    private String result_type_serialized_name;
+    private Datetime startTime;
+    private Datetime endTime;
+    private String resultType;
+ 
     /**
-     * Gets the start_time_serialized_name.
+     * Gets the startTime.
      *
      * Metric is computed from data recorded after this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
      *
-     * @return the start_time_serialized_name
+     * @return the startTime
      */
     public Datetime startTime() {
-      return start_time_serialized_name;
+      return startTime;
     }
+ 
     /**
-     * Gets the end_time_serialized_name.
+     * Gets the endTime.
      *
      * Metric is computed from data recorded before this timestamp; must be in `YYYY-MM-DDThh:mm:ssZ` format.
      *
-     * @return the end_time_serialized_name
+     * @return the endTime
      */
     public Datetime endTime() {
-      return end_time_serialized_name;
+      return endTime;
     }
+ 
     /**
-     * Gets the result_type_serialized_name.
+     * Gets the resultType.
      *
      * The type of result to consider when calculating the metric.
      *
-     * @return the result_type_serialized_name
+     * @return the resultType
      */
     public String resultType() {
-      return result_type_serialized_name;
+      return resultType;
     }
+
     private GetMetricsQueryOptions(GetMetricsQueryOptionsBuilder builder) {
-      start_time_serialized_name = builder.start_time_serialized_name;
-      end_time_serialized_name = builder.end_time_serialized_name;
-      result_type_serialized_name = builder.result_type_serialized_name;
+      startTime = builder.startTime;
+      endTime = builder.endTime;
+      resultType = builder.resultType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7974,14 +8250,14 @@ public class IBMDiscoveryV1Models {
    * GetMetricsQueryOptions Builder.
    */
   public class GetMetricsQueryOptionsBuilder extends IBMWatsonOptionsModel {
-    private Datetime start_time_serialized_name;
-    private Datetime end_time_serialized_name;
-    private String result_type_serialized_name;
+    private Datetime startTime;
+    private Datetime endTime;
+    private String resultType;
 
     private GetMetricsQueryOptionsBuilder(GetMetricsQueryOptions getMetricsQueryOptions) {
-      start_time_serialized_name = getMetricsQueryOptions.start_time_serialized_name;
-      end_time_serialized_name = getMetricsQueryOptions.end_time_serialized_name;
-      result_type_serialized_name = getMetricsQueryOptions.result_type_serialized_name;
+      startTime = getMetricsQueryOptions.startTime;
+      endTime = getMetricsQueryOptions.endTime;
+      resultType = getMetricsQueryOptions.resultType;
       this.requestHeaders.putAll(getMetricsQueryOptions.requestHeaders());
     }
 
@@ -8001,35 +8277,35 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the start_time_serialized_name.
+     * Set the startTime.
      *
      * @param startTime the startTime
      * @return the GetMetricsQueryOptions builder
      */
     public GetMetricsQueryOptionsBuilder startTime(Datetime startTime) {
-      this.start_time_serialized_name = startTime;
+      this.startTime = startTime;
       return this;
     }
 
     /**
-     * Set the end_time_serialized_name.
+     * Set the endTime.
      *
      * @param endTime the endTime
      * @return the GetMetricsQueryOptions builder
      */
     public GetMetricsQueryOptionsBuilder endTime(Datetime endTime) {
-      this.end_time_serialized_name = endTime;
+      this.endTime = endTime;
       return this;
     }
 
     /**
-     * Set the result_type_serialized_name.
+     * Set the resultType.
      *
      * @param resultType the resultType
      * @return the GetMetricsQueryOptions builder
      */
     public GetMetricsQueryOptionsBuilder resultType(String resultType) {
-      this.result_type_serialized_name = resultType;
+      this.resultType = resultType;
       return this;
     }
 
@@ -8050,19 +8326,21 @@ public class IBMDiscoveryV1Models {
    * The getMetricsQueryTokenEvent options.
    */
   public class GetMetricsQueryTokenEventOptions extends IBMWatsonOptionsModel {
-    private Long count_serialized_name;
+    private Long count;
+ 
     /**
-     * Gets the count_serialized_name.
+     * Gets the count.
      *
      * Number of results to return.
      *
-     * @return the count_serialized_name
+     * @return the count
      */
     public Long count() {
-      return count_serialized_name;
+      return count;
     }
+
     private GetMetricsQueryTokenEventOptions(GetMetricsQueryTokenEventOptionsBuilder builder) {
-      count_serialized_name = builder.count_serialized_name;
+      count = builder.count;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -8081,10 +8359,10 @@ public class IBMDiscoveryV1Models {
    * GetMetricsQueryTokenEventOptions Builder.
    */
   public class GetMetricsQueryTokenEventOptionsBuilder extends IBMWatsonOptionsModel {
-    private Long count_serialized_name;
+    private Long count;
 
     private GetMetricsQueryTokenEventOptionsBuilder(GetMetricsQueryTokenEventOptions getMetricsQueryTokenEventOptions) {
-      count_serialized_name = getMetricsQueryTokenEventOptions.count_serialized_name;
+      count = getMetricsQueryTokenEventOptions.count;
       this.requestHeaders.putAll(getMetricsQueryTokenEventOptions.requestHeaders());
     }
 
@@ -8104,13 +8382,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the count_serialized_name.
+     * Set the count.
      *
      * @param count the count
      * @return the GetMetricsQueryTokenEventOptions builder
      */
     public GetMetricsQueryTokenEventOptionsBuilder count(Long count) {
-      this.count_serialized_name = count;
+      this.count = count;
       return this;
     }
 
@@ -8131,46 +8409,50 @@ public class IBMDiscoveryV1Models {
    * The getTrainingData options.
    */
   public class GetTrainingDataOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String query_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String queryId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the query_id_serialized_name.
+     * Gets the queryId.
      *
      * The ID of the query used for training.
      *
-     * @return the query_id_serialized_name
+     * @return the queryId
      */
     public String queryId() {
-      return query_id_serialized_name;
+      return queryId;
     }
+
     private GetTrainingDataOptions(GetTrainingDataOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.query_id_serialized_name, 'query_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      query_id_serialized_name = builder.query_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.queryId, 'queryId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      queryId = builder.queryId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -8189,14 +8471,14 @@ public class IBMDiscoveryV1Models {
    * GetTrainingDataOptions Builder.
    */
   public class GetTrainingDataOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String query_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String queryId;
 
     private GetTrainingDataOptionsBuilder(GetTrainingDataOptions getTrainingDataOptions) {
-      environment_id_serialized_name = getTrainingDataOptions.environment_id_serialized_name;
-      collection_id_serialized_name = getTrainingDataOptions.collection_id_serialized_name;
-      query_id_serialized_name = getTrainingDataOptions.query_id_serialized_name;
+      environmentId = getTrainingDataOptions.environmentId;
+      collectionId = getTrainingDataOptions.collectionId;
+      queryId = getTrainingDataOptions.queryId;
       this.requestHeaders.putAll(getTrainingDataOptions.requestHeaders());
     }
 
@@ -8214,9 +8496,9 @@ public class IBMDiscoveryV1Models {
      * @param queryId the queryId
      */
     public GetTrainingDataOptionsBuilder(String environmentId, String collectionId, String queryId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
-      this.query_id_serialized_name = queryId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+      this.queryId = queryId;
     }
 
     /**
@@ -8229,35 +8511,35 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the GetTrainingDataOptions builder
      */
     public GetTrainingDataOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the GetTrainingDataOptions builder
      */
     public GetTrainingDataOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the query_id_serialized_name.
+     * Set the queryId.
      *
      * @param queryId the queryId
      * @return the GetTrainingDataOptions builder
      */
     public GetTrainingDataOptionsBuilder queryId(String queryId) {
-      this.query_id_serialized_name = queryId;
+      this.queryId = queryId;
       return this;
     }
 
@@ -8278,59 +8560,64 @@ public class IBMDiscoveryV1Models {
    * The getTrainingExample options.
    */
   public class GetTrainingExampleOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String query_id_serialized_name;
-    private String example_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String queryId;
+    private String exampleId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the query_id_serialized_name.
+     * Gets the queryId.
      *
      * The ID of the query used for training.
      *
-     * @return the query_id_serialized_name
+     * @return the queryId
      */
     public String queryId() {
-      return query_id_serialized_name;
+      return queryId;
     }
+ 
     /**
-     * Gets the example_id_serialized_name.
+     * Gets the exampleId.
      *
      * The ID of the document as it is indexed.
      *
-     * @return the example_id_serialized_name
+     * @return the exampleId
      */
     public String exampleId() {
-      return example_id_serialized_name;
+      return exampleId;
     }
+
     private GetTrainingExampleOptions(GetTrainingExampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.query_id_serialized_name, 'query_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.example_id_serialized_name, 'example_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      query_id_serialized_name = builder.query_id_serialized_name;
-      example_id_serialized_name = builder.example_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.queryId, 'queryId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.exampleId, 'exampleId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      queryId = builder.queryId;
+      exampleId = builder.exampleId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -8349,16 +8636,16 @@ public class IBMDiscoveryV1Models {
    * GetTrainingExampleOptions Builder.
    */
   public class GetTrainingExampleOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String query_id_serialized_name;
-    private String example_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String queryId;
+    private String exampleId;
 
     private GetTrainingExampleOptionsBuilder(GetTrainingExampleOptions getTrainingExampleOptions) {
-      environment_id_serialized_name = getTrainingExampleOptions.environment_id_serialized_name;
-      collection_id_serialized_name = getTrainingExampleOptions.collection_id_serialized_name;
-      query_id_serialized_name = getTrainingExampleOptions.query_id_serialized_name;
-      example_id_serialized_name = getTrainingExampleOptions.example_id_serialized_name;
+      environmentId = getTrainingExampleOptions.environmentId;
+      collectionId = getTrainingExampleOptions.collectionId;
+      queryId = getTrainingExampleOptions.queryId;
+      exampleId = getTrainingExampleOptions.exampleId;
       this.requestHeaders.putAll(getTrainingExampleOptions.requestHeaders());
     }
 
@@ -8377,10 +8664,10 @@ public class IBMDiscoveryV1Models {
      * @param exampleId the exampleId
      */
     public GetTrainingExampleOptionsBuilder(String environmentId, String collectionId, String queryId, String exampleId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
-      this.query_id_serialized_name = queryId;
-      this.example_id_serialized_name = exampleId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+      this.queryId = queryId;
+      this.exampleId = exampleId;
     }
 
     /**
@@ -8393,46 +8680,46 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the GetTrainingExampleOptions builder
      */
     public GetTrainingExampleOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the GetTrainingExampleOptions builder
      */
     public GetTrainingExampleOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the query_id_serialized_name.
+     * Set the queryId.
      *
      * @param queryId the queryId
      * @return the GetTrainingExampleOptions builder
      */
     public GetTrainingExampleOptionsBuilder queryId(String queryId) {
-      this.query_id_serialized_name = queryId;
+      this.queryId = queryId;
       return this;
     }
 
     /**
-     * Set the example_id_serialized_name.
+     * Set the exampleId.
      *
      * @param exampleId the exampleId
      * @return the GetTrainingExampleOptions builder
      */
     public GetTrainingExampleOptionsBuilder exampleId(String exampleId) {
-      this.example_id_serialized_name = exampleId;
+      this.exampleId = exampleId;
       return this;
     }
 
@@ -8459,55 +8746,61 @@ public class IBMDiscoveryV1Models {
     private XPathPatterns exclude_content_serialized_name;
     private List<String> keep_tag_attributes_serialized_name;
     private List<String> exclude_tag_attributes_serialized_name;
+ 
     /**
-     * Gets the exclude_tags_completely_serialized_name.
+     * Gets the excludeTagsCompletely.
      *
-     * @return the exclude_tags_completely_serialized_name
+     * @return the excludeTagsCompletely
      */
     @AuraEnabled
     public List<String> getExcludeTagsCompletely() {
       return exclude_tags_completely_serialized_name;
     }
+ 
     /**
-     * Gets the exclude_tags_keep_content_serialized_name.
+     * Gets the excludeTagsKeepContent.
      *
-     * @return the exclude_tags_keep_content_serialized_name
+     * @return the excludeTagsKeepContent
      */
     @AuraEnabled
     public List<String> getExcludeTagsKeepContent() {
       return exclude_tags_keep_content_serialized_name;
     }
+ 
     /**
-     * Gets the keep_content_serialized_name.
+     * Gets the keepContent.
      *
-     * @return the keep_content_serialized_name
+     * @return the keepContent
      */
     @AuraEnabled
     public XPathPatterns getKeepContent() {
       return keep_content_serialized_name;
     }
+ 
     /**
-     * Gets the exclude_content_serialized_name.
+     * Gets the excludeContent.
      *
-     * @return the exclude_content_serialized_name
+     * @return the excludeContent
      */
     @AuraEnabled
     public XPathPatterns getExcludeContent() {
       return exclude_content_serialized_name;
     }
+ 
     /**
-     * Gets the keep_tag_attributes_serialized_name.
+     * Gets the keepTagAttributes.
      *
-     * @return the keep_tag_attributes_serialized_name
+     * @return the keepTagAttributes
      */
     @AuraEnabled
     public List<String> getKeepTagAttributes() {
       return keep_tag_attributes_serialized_name;
     }
+ 
     /**
-     * Gets the exclude_tag_attributes_serialized_name.
+     * Gets the excludeTagAttributes.
      *
-     * @return the exclude_tag_attributes_serialized_name
+     * @return the excludeTagAttributes
      */
     @AuraEnabled
     public List<String> getExcludeTagAttributes() {
@@ -8515,7 +8808,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the exclude_tags_completely_serialized_name.
+     * Sets the excludeTagsCompletely.
      *
      * @param excludeTagsCompletely the new excludeTagsCompletely
      */
@@ -8524,7 +8817,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the exclude_tags_keep_content_serialized_name.
+     * Sets the excludeTagsKeepContent.
      *
      * @param excludeTagsKeepContent the new excludeTagsKeepContent
      */
@@ -8533,7 +8826,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the keep_content_serialized_name.
+     * Sets the keepContent.
      *
      * @param keepContent the new keepContent
      */
@@ -8542,7 +8835,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the exclude_content_serialized_name.
+     * Sets the excludeContent.
      *
      * @param excludeContent the new excludeContent
      */
@@ -8551,7 +8844,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the keep_tag_attributes_serialized_name.
+     * Sets the keepTagAttributes.
      *
      * @param keepTagAttributes the new keepTagAttributes
      */
@@ -8560,7 +8853,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the exclude_tag_attributes_serialized_name.
+     * Sets the excludeTagAttributes.
      *
      * @param excludeTagAttributes the new excludeTagAttributes
      */
@@ -8575,11 +8868,11 @@ public class IBMDiscoveryV1Models {
 
       HtmlSettings ret = (HtmlSettings) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for keep_content_serialized_name
+      // calling custom deserializer for keepContent
       XPathPatterns newKeepContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getKeepContent()), (Map<String, Object>) jsonMap.get('keep_content_serialized_name'), XPathPatterns.class);
       ret.setKeepContent(newKeepContent);
 
-      // calling custom deserializer for exclude_content_serialized_name
+      // calling custom deserializer for excludeContent
       XPathPatterns newExcludeContent = (XPathPatterns) new XPathPatterns().deserialize(JSON.serialize(ret.getExcludeContent()), (Map<String, Object>) jsonMap.get('exclude_content_serialized_name'), XPathPatterns.class);
       ret.setExcludeContent(newExcludeContent);
 
@@ -8595,45 +8888,49 @@ public class IBMDiscoveryV1Models {
     private DiskUsage disk_usage_serialized_name;
     private CollectionUsage collections_serialized_name;
     private MemoryUsage memory_usage_serialized_name;
+ 
     /**
-     * Gets the documents_serialized_name.
+     * Gets the documents.
      *
      * Summary of the document usage statistics for the environment.
      *
-     * @return the documents_serialized_name
+     * @return the documents
      */
     @AuraEnabled
     public EnvironmentDocuments getDocuments() {
       return documents_serialized_name;
     }
+ 
     /**
-     * Gets the disk_usage_serialized_name.
+     * Gets the diskUsage.
      *
      * Summary of the disk usage of the environment.
      *
-     * @return the disk_usage_serialized_name
+     * @return the diskUsage
      */
     @AuraEnabled
     public DiskUsage getDiskUsage() {
       return disk_usage_serialized_name;
     }
+ 
     /**
-     * Gets the collections_serialized_name.
+     * Gets the collections.
      *
      * Summary of the collection usage in the environment.
      *
-     * @return the collections_serialized_name
+     * @return the collections
      */
     @AuraEnabled
     public CollectionUsage getCollections() {
       return collections_serialized_name;
     }
+ 
     /**
-     * Gets the memory_usage_serialized_name.
+     * Gets the memoryUsage.
      *
      * **Deprecated**: Summary of the memory usage of the environment.
      *
-     * @return the memory_usage_serialized_name
+     * @return the memoryUsage
      */
     @AuraEnabled
     public MemoryUsage getMemoryUsage() {
@@ -8641,7 +8938,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the documents_serialized_name.
+     * Sets the documents.
      *
      * @param documents the new documents
      */
@@ -8650,7 +8947,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the disk_usage_serialized_name.
+     * Sets the diskUsage.
      *
      * @param diskUsage the new diskUsage
      */
@@ -8659,7 +8956,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the collections_serialized_name.
+     * Sets the collections.
      *
      * @param collections the new collections
      */
@@ -8668,7 +8965,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the memory_usage_serialized_name.
+     * Sets the memoryUsage.
      *
      * @param memoryUsage the new memoryUsage
      */
@@ -8683,19 +8980,19 @@ public class IBMDiscoveryV1Models {
 
       IndexCapacity ret = (IndexCapacity) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for documents_serialized_name
+      // calling custom deserializer for documents
       EnvironmentDocuments newDocuments = (EnvironmentDocuments) new EnvironmentDocuments().deserialize(JSON.serialize(ret.getDocuments()), (Map<String, Object>) jsonMap.get('documents_serialized_name'), EnvironmentDocuments.class);
       ret.setDocuments(newDocuments);
 
-      // calling custom deserializer for disk_usage_serialized_name
+      // calling custom deserializer for diskUsage
       DiskUsage newDiskUsage = (DiskUsage) new DiskUsage().deserialize(JSON.serialize(ret.getDiskUsage()), (Map<String, Object>) jsonMap.get('disk_usage_serialized_name'), DiskUsage.class);
       ret.setDiskUsage(newDiskUsage);
 
-      // calling custom deserializer for collections_serialized_name
+      // calling custom deserializer for collections
       CollectionUsage newCollections = (CollectionUsage) new CollectionUsage().deserialize(JSON.serialize(ret.getCollections()), (Map<String, Object>) jsonMap.get('collections_serialized_name'), CollectionUsage.class);
       ret.setCollections(newCollections);
 
-      // calling custom deserializer for memory_usage_serialized_name
+      // calling custom deserializer for memoryUsage
       MemoryUsage newMemoryUsage = (MemoryUsage) new MemoryUsage().deserialize(JSON.serialize(ret.getMemoryUsage()), (Map<String, Object>) jsonMap.get('memory_usage_serialized_name'), MemoryUsage.class);
       ret.setMemoryUsage(newMemoryUsage);
 
@@ -8707,33 +9004,36 @@ public class IBMDiscoveryV1Models {
    * The listCollectionFields options.
    */
   public class ListCollectionFieldsOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+
     private ListCollectionFieldsOptions(ListCollectionFieldsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -8752,12 +9052,12 @@ public class IBMDiscoveryV1Models {
    * ListCollectionFieldsOptions Builder.
    */
   public class ListCollectionFieldsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
 
     private ListCollectionFieldsOptionsBuilder(ListCollectionFieldsOptions listCollectionFieldsOptions) {
-      environment_id_serialized_name = listCollectionFieldsOptions.environment_id_serialized_name;
-      collection_id_serialized_name = listCollectionFieldsOptions.collection_id_serialized_name;
+      environmentId = listCollectionFieldsOptions.environmentId;
+      collectionId = listCollectionFieldsOptions.collectionId;
       this.requestHeaders.putAll(listCollectionFieldsOptions.requestHeaders());
     }
 
@@ -8774,8 +9074,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public ListCollectionFieldsOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -8788,24 +9088,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the ListCollectionFieldsOptions builder
      */
     public ListCollectionFieldsOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the ListCollectionFieldsOptions builder
      */
     public ListCollectionFieldsOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
@@ -8838,12 +9138,13 @@ public class IBMDiscoveryV1Models {
    */
   public class ListCollectionFieldsResponse extends IBMWatsonResponseModel {
     private List<Field> fields_serialized_name;
+ 
     /**
-     * Gets the fields_serialized_name.
+     * Gets the fields.
      *
      * An array containing information about each field in the collections.
      *
-     * @return the fields_serialized_name
+     * @return the fields
      */
     @AuraEnabled
     public List<Field> getFields() {
@@ -8851,7 +9152,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the fields_serialized_name.
+     * Sets the fields.
      *
      * @param fields the new fields
      */
@@ -8866,7 +9167,7 @@ public class IBMDiscoveryV1Models {
 
       ListCollectionFieldsResponse ret = (ListCollectionFieldsResponse) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for fields_serialized_name
+      // calling custom deserializer for fields
       List<Field> newFields = new List<Field>();
       List<Field> deserializedFields = ret.getFields();
       if (deserializedFields != null) {
@@ -8887,32 +9188,35 @@ public class IBMDiscoveryV1Models {
    * The listCollections options.
    */
   public class ListCollectionsOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String name_serialized_name;
+    private String environmentId;
+    private String name;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * Find collections with the given name.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     public String name() {
-      return name_serialized_name;
+      return name;
     }
+
     private ListCollectionsOptions(ListCollectionsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      name_serialized_name = builder.name_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      environmentId = builder.environmentId;
+      name = builder.name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -8931,12 +9235,12 @@ public class IBMDiscoveryV1Models {
    * ListCollectionsOptions Builder.
    */
   public class ListCollectionsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String name_serialized_name;
+    private String environmentId;
+    private String name;
 
     private ListCollectionsOptionsBuilder(ListCollectionsOptions listCollectionsOptions) {
-      environment_id_serialized_name = listCollectionsOptions.environment_id_serialized_name;
-      name_serialized_name = listCollectionsOptions.name_serialized_name;
+      environmentId = listCollectionsOptions.environmentId;
+      name = listCollectionsOptions.name;
       this.requestHeaders.putAll(listCollectionsOptions.requestHeaders());
     }
 
@@ -8952,7 +9256,7 @@ public class IBMDiscoveryV1Models {
      * @param environmentId the environmentId
      */
     public ListCollectionsOptionsBuilder(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
     }
 
     /**
@@ -8965,24 +9269,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the ListCollectionsOptions builder
      */
     public ListCollectionsOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the name_serialized_name.
+     * Set the name.
      *
      * @param name the name
      * @return the ListCollectionsOptions builder
      */
     public ListCollectionsOptionsBuilder name(String name) {
-      this.name_serialized_name = name;
+      this.name = name;
       return this;
     }
 
@@ -9004,12 +9308,13 @@ public class IBMDiscoveryV1Models {
    */
   public class ListCollectionsResponse extends IBMWatsonResponseModel {
     private List<Collection> collections_serialized_name;
+ 
     /**
-     * Gets the collections_serialized_name.
+     * Gets the collections.
      *
      * An array containing information about each collection in the environment.
      *
-     * @return the collections_serialized_name
+     * @return the collections
      */
     @AuraEnabled
     public List<Collection> getCollections() {
@@ -9017,7 +9322,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the collections_serialized_name.
+     * Sets the collections.
      *
      * @param collections the new collections
      */
@@ -9032,7 +9337,7 @@ public class IBMDiscoveryV1Models {
 
       ListCollectionsResponse ret = (ListCollectionsResponse) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for collections_serialized_name
+      // calling custom deserializer for collections
       List<Collection> newCollections = new List<Collection>();
       List<Collection> deserializedCollections = ret.getCollections();
       if (deserializedCollections != null) {
@@ -9053,32 +9358,35 @@ public class IBMDiscoveryV1Models {
    * The listConfigurations options.
    */
   public class ListConfigurationsOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String name_serialized_name;
+    private String environmentId;
+    private String name;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * Find configurations with the given name.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     public String name() {
-      return name_serialized_name;
+      return name;
     }
+
     private ListConfigurationsOptions(ListConfigurationsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      name_serialized_name = builder.name_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      environmentId = builder.environmentId;
+      name = builder.name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -9097,12 +9405,12 @@ public class IBMDiscoveryV1Models {
    * ListConfigurationsOptions Builder.
    */
   public class ListConfigurationsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String name_serialized_name;
+    private String environmentId;
+    private String name;
 
     private ListConfigurationsOptionsBuilder(ListConfigurationsOptions listConfigurationsOptions) {
-      environment_id_serialized_name = listConfigurationsOptions.environment_id_serialized_name;
-      name_serialized_name = listConfigurationsOptions.name_serialized_name;
+      environmentId = listConfigurationsOptions.environmentId;
+      name = listConfigurationsOptions.name;
       this.requestHeaders.putAll(listConfigurationsOptions.requestHeaders());
     }
 
@@ -9118,7 +9426,7 @@ public class IBMDiscoveryV1Models {
      * @param environmentId the environmentId
      */
     public ListConfigurationsOptionsBuilder(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
     }
 
     /**
@@ -9131,24 +9439,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the ListConfigurationsOptions builder
      */
     public ListConfigurationsOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the name_serialized_name.
+     * Set the name.
      *
      * @param name the name
      * @return the ListConfigurationsOptions builder
      */
     public ListConfigurationsOptionsBuilder name(String name) {
-      this.name_serialized_name = name;
+      this.name = name;
       return this;
     }
 
@@ -9170,12 +9478,13 @@ public class IBMDiscoveryV1Models {
    */
   public class ListConfigurationsResponse extends IBMWatsonResponseModel {
     private List<Configuration> configurations_serialized_name;
+ 
     /**
-     * Gets the configurations_serialized_name.
+     * Gets the configurations.
      *
      * An array of Configurations that are available for the service instance.
      *
-     * @return the configurations_serialized_name
+     * @return the configurations
      */
     @AuraEnabled
     public List<Configuration> getConfigurations() {
@@ -9183,7 +9492,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the configurations_serialized_name.
+     * Sets the configurations.
      *
      * @param configurations the new configurations
      */
@@ -9198,7 +9507,7 @@ public class IBMDiscoveryV1Models {
 
       ListConfigurationsResponse ret = (ListConfigurationsResponse) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for configurations_serialized_name
+      // calling custom deserializer for configurations
       List<Configuration> newConfigurations = new List<Configuration>();
       List<Configuration> deserializedConfigurations = ret.getConfigurations();
       if (deserializedConfigurations != null) {
@@ -9219,20 +9528,22 @@ public class IBMDiscoveryV1Models {
    * The listCredentials options.
    */
   public class ListCredentialsOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
+    private String environmentId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+
     private ListCredentialsOptions(ListCredentialsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      environmentId = builder.environmentId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -9251,10 +9562,10 @@ public class IBMDiscoveryV1Models {
    * ListCredentialsOptions Builder.
    */
   public class ListCredentialsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
+    private String environmentId;
 
     private ListCredentialsOptionsBuilder(ListCredentialsOptions listCredentialsOptions) {
-      environment_id_serialized_name = listCredentialsOptions.environment_id_serialized_name;
+      environmentId = listCredentialsOptions.environmentId;
       this.requestHeaders.putAll(listCredentialsOptions.requestHeaders());
     }
 
@@ -9270,7 +9581,7 @@ public class IBMDiscoveryV1Models {
      * @param environmentId the environmentId
      */
     public ListCredentialsOptionsBuilder(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
     }
 
     /**
@@ -9283,13 +9594,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the ListCredentialsOptions builder
      */
     public ListCredentialsOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
@@ -9310,19 +9621,21 @@ public class IBMDiscoveryV1Models {
    * The listEnvironments options.
    */
   public class ListEnvironmentsOptions extends IBMWatsonOptionsModel {
-    private String name_serialized_name;
+    private String name;
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * Show only the environment with the given name.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     public String name() {
-      return name_serialized_name;
+      return name;
     }
+
     private ListEnvironmentsOptions(ListEnvironmentsOptionsBuilder builder) {
-      name_serialized_name = builder.name_serialized_name;
+      name = builder.name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -9341,10 +9654,10 @@ public class IBMDiscoveryV1Models {
    * ListEnvironmentsOptions Builder.
    */
   public class ListEnvironmentsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String name_serialized_name;
+    private String name;
 
     private ListEnvironmentsOptionsBuilder(ListEnvironmentsOptions listEnvironmentsOptions) {
-      name_serialized_name = listEnvironmentsOptions.name_serialized_name;
+      name = listEnvironmentsOptions.name;
       this.requestHeaders.putAll(listEnvironmentsOptions.requestHeaders());
     }
 
@@ -9364,13 +9677,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the name_serialized_name.
+     * Set the name.
      *
      * @param name the name
      * @return the ListEnvironmentsOptions builder
      */
     public ListEnvironmentsOptionsBuilder name(String name) {
-      this.name_serialized_name = name;
+      this.name = name;
       return this;
     }
 
@@ -9392,12 +9705,13 @@ public class IBMDiscoveryV1Models {
    */
   public class ListEnvironmentsResponse extends IBMWatsonResponseModel {
     private List<Environment> environments_serialized_name;
+ 
     /**
-     * Gets the environments_serialized_name.
+     * Gets the environments.
      *
      * An array of [environments] that are available for the service instance.
      *
-     * @return the environments_serialized_name
+     * @return the environments
      */
     @AuraEnabled
     public List<Environment> getEnvironments() {
@@ -9405,7 +9719,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the environments_serialized_name.
+     * Sets the environments.
      *
      * @param environments the new environments
      */
@@ -9420,7 +9734,7 @@ public class IBMDiscoveryV1Models {
 
       ListEnvironmentsResponse ret = (ListEnvironmentsResponse) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for environments_serialized_name
+      // calling custom deserializer for environments
       List<Environment> newEnvironments = new List<Environment>();
       List<Environment> deserializedEnvironments = ret.getEnvironments();
       if (deserializedEnvironments != null) {
@@ -9441,33 +9755,36 @@ public class IBMDiscoveryV1Models {
    * The listExpansions options.
    */
   public class ListExpansionsOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+
     private ListExpansionsOptions(ListExpansionsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -9486,12 +9803,12 @@ public class IBMDiscoveryV1Models {
    * ListExpansionsOptions Builder.
    */
   public class ListExpansionsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
 
     private ListExpansionsOptionsBuilder(ListExpansionsOptions listExpansionsOptions) {
-      environment_id_serialized_name = listExpansionsOptions.environment_id_serialized_name;
-      collection_id_serialized_name = listExpansionsOptions.collection_id_serialized_name;
+      environmentId = listExpansionsOptions.environmentId;
+      collectionId = listExpansionsOptions.collectionId;
       this.requestHeaders.putAll(listExpansionsOptions.requestHeaders());
     }
 
@@ -9508,8 +9825,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public ListExpansionsOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -9522,24 +9839,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the ListExpansionsOptions builder
      */
     public ListExpansionsOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the ListExpansionsOptions builder
      */
     public ListExpansionsOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
@@ -9560,33 +9877,36 @@ public class IBMDiscoveryV1Models {
    * The listFields options.
    */
   public class ListFieldsOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private List<String> collection_ids_serialized_name;
+    private String environmentId;
+    private List<String> collectionIds;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_ids_serialized_name.
+     * Gets the collectionIds.
      *
      * A comma-separated list of collection IDs to be queried against.
      *
-     * @return the collection_ids_serialized_name
+     * @return the collectionIds
      */
     public List<String> collectionIds() {
-      return collection_ids_serialized_name;
+      return collectionIds;
     }
+
     private ListFieldsOptions(ListFieldsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notNull(builder.collection_ids_serialized_name, 'collection_ids_serialized_name cannot be null');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_ids_serialized_name = builder.collection_ids_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notNull(builder.collectionIds, 'collectionIds cannot be null');
+      environmentId = builder.environmentId;
+      collectionIds = builder.collectionIds;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -9605,12 +9925,12 @@ public class IBMDiscoveryV1Models {
    * ListFieldsOptions Builder.
    */
   public class ListFieldsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private List<String> collection_ids_serialized_name;
+    private String environmentId;
+    private List<String> collectionIds;
 
     private ListFieldsOptionsBuilder(ListFieldsOptions listFieldsOptions) {
-      environment_id_serialized_name = listFieldsOptions.environment_id_serialized_name;
-      collection_ids_serialized_name = listFieldsOptions.collection_ids_serialized_name;
+      environmentId = listFieldsOptions.environmentId;
+      collectionIds = listFieldsOptions.collectionIds;
       this.requestHeaders.putAll(listFieldsOptions.requestHeaders());
     }
 
@@ -9627,8 +9947,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionIds the collectionIds
      */
     public ListFieldsOptionsBuilder(String environmentId, List<String> collectionIds) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_ids_serialized_name = collectionIds;
+      this.environmentId = environmentId;
+      this.collectionIds = collectionIds;
     }
 
     /**
@@ -9641,40 +9961,40 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an collectionIds to collection_ids_serialized_name.
+     * Adds an collectionIds to collectionIds.
      *
      * @param collectionIds the new collectionIds
      * @return the ListFieldsOptions builder
      */
     public ListFieldsOptionsBuilder addCollectionIds(String collectionIds) {
       IBMWatsonValidator.notNull(collectionIds, 'collectionIds cannot be null');
-      if (this.collection_ids_serialized_name == null) {
-        this.collection_ids_serialized_name = new List<String>();
+      if (this.collectionIds == null) {
+        this.collectionIds = new List<String>();
       }
-      this.collection_ids_serialized_name.add(collectionIds);
+      this.collectionIds.add(collectionIds);
       return this;
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the ListFieldsOptions builder
      */
     public ListFieldsOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_ids_serialized_name.
-     * Existing collection_ids_serialized_name will be replaced.
+     * Set the collectionIds.
+     * Existing collectionIds will be replaced.
      *
      * @param collectionIds the collectionIds
      * @return the ListFieldsOptions builder
      */
     public ListFieldsOptionsBuilder collectionIds(List<String> collectionIds) {
-      this.collection_ids_serialized_name = collectionIds;
+      this.collectionIds = collectionIds;
       return this;
     }
 
@@ -9695,33 +10015,36 @@ public class IBMDiscoveryV1Models {
    * The listTrainingData options.
    */
   public class ListTrainingDataOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+
     private ListTrainingDataOptions(ListTrainingDataOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -9740,12 +10063,12 @@ public class IBMDiscoveryV1Models {
    * ListTrainingDataOptions Builder.
    */
   public class ListTrainingDataOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
 
     private ListTrainingDataOptionsBuilder(ListTrainingDataOptions listTrainingDataOptions) {
-      environment_id_serialized_name = listTrainingDataOptions.environment_id_serialized_name;
-      collection_id_serialized_name = listTrainingDataOptions.collection_id_serialized_name;
+      environmentId = listTrainingDataOptions.environmentId;
+      collectionId = listTrainingDataOptions.collectionId;
       this.requestHeaders.putAll(listTrainingDataOptions.requestHeaders());
     }
 
@@ -9762,8 +10085,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public ListTrainingDataOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -9776,24 +10099,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the ListTrainingDataOptions builder
      */
     public ListTrainingDataOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the ListTrainingDataOptions builder
      */
     public ListTrainingDataOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
@@ -9814,46 +10137,50 @@ public class IBMDiscoveryV1Models {
    * The listTrainingExamples options.
    */
   public class ListTrainingExamplesOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String query_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String queryId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the query_id_serialized_name.
+     * Gets the queryId.
      *
      * The ID of the query used for training.
      *
-     * @return the query_id_serialized_name
+     * @return the queryId
      */
     public String queryId() {
-      return query_id_serialized_name;
+      return queryId;
     }
+
     private ListTrainingExamplesOptions(ListTrainingExamplesOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.query_id_serialized_name, 'query_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      query_id_serialized_name = builder.query_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.queryId, 'queryId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      queryId = builder.queryId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -9872,14 +10199,14 @@ public class IBMDiscoveryV1Models {
    * ListTrainingExamplesOptions Builder.
    */
   public class ListTrainingExamplesOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String query_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String queryId;
 
     private ListTrainingExamplesOptionsBuilder(ListTrainingExamplesOptions listTrainingExamplesOptions) {
-      environment_id_serialized_name = listTrainingExamplesOptions.environment_id_serialized_name;
-      collection_id_serialized_name = listTrainingExamplesOptions.collection_id_serialized_name;
-      query_id_serialized_name = listTrainingExamplesOptions.query_id_serialized_name;
+      environmentId = listTrainingExamplesOptions.environmentId;
+      collectionId = listTrainingExamplesOptions.collectionId;
+      queryId = listTrainingExamplesOptions.queryId;
       this.requestHeaders.putAll(listTrainingExamplesOptions.requestHeaders());
     }
 
@@ -9897,9 +10224,9 @@ public class IBMDiscoveryV1Models {
      * @param queryId the queryId
      */
     public ListTrainingExamplesOptionsBuilder(String environmentId, String collectionId, String queryId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
-      this.query_id_serialized_name = queryId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+      this.queryId = queryId;
     }
 
     /**
@@ -9912,35 +10239,35 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the ListTrainingExamplesOptions builder
      */
     public ListTrainingExamplesOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the ListTrainingExamplesOptions builder
      */
     public ListTrainingExamplesOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the query_id_serialized_name.
+     * Set the queryId.
      *
      * @param queryId the queryId
      * @return the ListTrainingExamplesOptions builder
      */
     public ListTrainingExamplesOptionsBuilder queryId(String queryId) {
-      this.query_id_serialized_name = queryId;
+      this.queryId = queryId;
       return this;
     }
 
@@ -9963,21 +10290,23 @@ public class IBMDiscoveryV1Models {
   public class LogQueryResponse extends IBMWatsonResponseModel {
     private Long matching_results_serialized_name;
     private List<LogQueryResponseResult> results_serialized_name;
+ 
     /**
-     * Gets the matching_results_serialized_name.
+     * Gets the matchingResults.
      *
      * Number of matching results.
      *
-     * @return the matching_results_serialized_name
+     * @return the matchingResults
      */
     @AuraEnabled
     public Long getMatchingResults() {
       return matching_results_serialized_name;
     }
+ 
     /**
-     * Gets the results_serialized_name.
+     * Gets the results.
      *
-     * @return the results_serialized_name
+     * @return the results
      */
     @AuraEnabled
     public List<LogQueryResponseResult> getResults() {
@@ -9985,7 +10314,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the matching_results_serialized_name.
+     * Sets the matchingResults.
      *
      * @param matchingResults the new matchingResults
      */
@@ -9994,7 +10323,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the results_serialized_name.
+     * Sets the results.
      *
      * @param results the new results
      */
@@ -10009,7 +10338,7 @@ public class IBMDiscoveryV1Models {
 
       LogQueryResponse ret = (LogQueryResponse) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for results_serialized_name
+      // calling custom deserializer for results
       List<LogQueryResponseResult> newResults = new List<LogQueryResponseResult>();
       List<LogQueryResponseResult> deserializedResults = ret.getResults();
       if (deserializedResults != null) {
@@ -10045,31 +10374,34 @@ public class IBMDiscoveryV1Models {
     private String document_id_serialized_name;
     private String event_type_serialized_name;
     private String result_type_serialized_name;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The environment ID that is associated with this log entry.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     @AuraEnabled
     public String getEnvironmentId() {
       return environment_id_serialized_name;
     }
+ 
     /**
-     * Gets the customer_id_serialized_name.
+     * Gets the customerId.
      *
      * The **customer_id** label that was specified in the header of the query or event API call that corresponds to
      * this log entry.
      *
-     * @return the customer_id_serialized_name
+     * @return the customerId
      */
     @AuraEnabled
     public String getCustomerId() {
       return customer_id_serialized_name;
     }
+ 
     /**
-     * Gets the document_type_serialized_name.
+     * Gets the documentType.
      *
      * The type of log entry returned.
      *
@@ -10077,14 +10409,15 @@ public class IBMDiscoveryV1Models {
      *
      *  **event** indicates that the log represents  a call to the **events** API.
      *
-     * @return the document_type_serialized_name
+     * @return the documentType
      */
     @AuraEnabled
     public String getDocumentType() {
       return document_type_serialized_name;
     }
+ 
     /**
-     * Gets the natural_language_query_serialized_name.
+     * Gets the naturalLanguageQuery.
      *
      * The value of the **natural_language_query** query parameter that was used to create these results. Only returned
      * with logs of type **query**.
@@ -10092,60 +10425,68 @@ public class IBMDiscoveryV1Models {
      * **Note:** Other query parameters (such as **filter** or **deduplicate**) might  have been used with this query,
      * but are not recorded.
      *
-     * @return the natural_language_query_serialized_name
+     * @return the naturalLanguageQuery
      */
     @AuraEnabled
     public String getNaturalLanguageQuery() {
       return natural_language_query_serialized_name;
     }
+ 
     /**
-     * Gets the document_results_serialized_name.
+     * Gets the documentResults.
      *
-     * @return the document_results_serialized_name
+     * Object containing result information that was returned by the query used to create this log entry. Only returned
+     * with logs of type `query`.
+     *
+     * @return the documentResults
      */
     @AuraEnabled
     public LogQueryResponseResultDocuments getDocumentResults() {
       return document_results_serialized_name;
     }
+ 
     /**
-     * Gets the created_timestamp_serialized_name.
+     * Gets the createdTimestamp.
      *
      * Date that the log result was created. Returned in `YYYY-MM-DDThh:mm:ssZ` format.
      *
-     * @return the created_timestamp_serialized_name
+     * @return the createdTimestamp
      */
     @AuraEnabled
     public Datetime getCreatedTimestamp() {
       return created_timestamp_serialized_name;
     }
+ 
     /**
-     * Gets the client_timestamp_serialized_name.
+     * Gets the clientTimestamp.
      *
      * Date specified by the user when recording an event. Returned in `YYYY-MM-DDThh:mm:ssZ` format. Only returned with
      * logs of type **event**.
      *
-     * @return the client_timestamp_serialized_name
+     * @return the clientTimestamp
      */
     @AuraEnabled
     public Datetime getClientTimestamp() {
       return client_timestamp_serialized_name;
     }
+ 
     /**
-     * Gets the query_id_serialized_name.
+     * Gets the queryId.
      *
      * Identifier that corresponds to the **natural_language_query** string used in the original or associated query.
      * All **event** and **query** log entries that have the same original **natural_language_query** string also have
      * them same **query_id**. This field can be used to recall all **event** and **query** log results that have the
      * same original query (**event** logs do not contain the original **natural_language_query** field).
      *
-     * @return the query_id_serialized_name
+     * @return the queryId
      */
     @AuraEnabled
     public String getQueryId() {
       return query_id_serialized_name;
     }
+ 
     /**
-     * Gets the session_token_serialized_name.
+     * Gets the sessionToken.
      *
      * Unique identifier (within a 24-hour period) that identifies a single `query` log and any `event` logs that were
      * created for it.
@@ -10156,47 +10497,51 @@ public class IBMDiscoveryV1Models {
      * **Note:** Session tokens are case sensitive. To avoid matching on session tokens that are identical except for
      * case, use the exact match operator (`::`) when you query for a specific session token.
      *
-     * @return the session_token_serialized_name
+     * @return the sessionToken
      */
     @AuraEnabled
     public String getSessionToken() {
       return session_token_serialized_name;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The collection ID of the document associated with this event. Only returned with logs of type `event`.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     @AuraEnabled
     public String getCollectionId() {
       return collection_id_serialized_name;
     }
+ 
     /**
-     * Gets the display_rank_serialized_name.
+     * Gets the displayRank.
      *
      * The original display rank of the document associated with this event. Only returned with logs of type `event`.
      *
-     * @return the display_rank_serialized_name
+     * @return the displayRank
      */
     @AuraEnabled
     public Long getDisplayRank() {
       return display_rank_serialized_name;
     }
+ 
     /**
-     * Gets the document_id_serialized_name.
+     * Gets the documentId.
      *
      * The document ID of the document associated with this event. Only returned with logs of type `event`.
      *
-     * @return the document_id_serialized_name
+     * @return the documentId
      */
     @AuraEnabled
     public String getDocumentId() {
       return document_id_serialized_name;
     }
+ 
     /**
-     * Gets the event_type_serialized_name.
+     * Gets the eventType.
      *
      * The type of event that this object respresents. Possible values are
      *
@@ -10204,18 +10549,19 @@ public class IBMDiscoveryV1Models {
      *
      *  -  `click` the result of a call to the **events** endpoint.
      *
-     * @return the event_type_serialized_name
+     * @return the eventType
      */
     @AuraEnabled
     public String getEventType() {
       return event_type_serialized_name;
     }
+ 
     /**
-     * Gets the result_type_serialized_name.
+     * Gets the resultType.
      *
      * The type of result that this **event** is associated with. Only returned with logs of type `event`.
      *
-     * @return the result_type_serialized_name
+     * @return the resultType
      */
     @AuraEnabled
     public String getResultType() {
@@ -10223,7 +10569,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the environment_id_serialized_name.
+     * Sets the environmentId.
      *
      * @param environmentId the new environmentId
      */
@@ -10232,7 +10578,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the customer_id_serialized_name.
+     * Sets the customerId.
      *
      * @param customerId the new customerId
      */
@@ -10241,7 +10587,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the document_type_serialized_name.
+     * Sets the documentType.
      *
      * @param documentType the new documentType
      */
@@ -10250,7 +10596,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the natural_language_query_serialized_name.
+     * Sets the naturalLanguageQuery.
      *
      * @param naturalLanguageQuery the new naturalLanguageQuery
      */
@@ -10259,7 +10605,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the document_results_serialized_name.
+     * Sets the documentResults.
      *
      * @param documentResults the new documentResults
      */
@@ -10268,7 +10614,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the created_timestamp_serialized_name.
+     * Sets the createdTimestamp.
      *
      * @param createdTimestamp the new createdTimestamp
      */
@@ -10277,7 +10623,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the client_timestamp_serialized_name.
+     * Sets the clientTimestamp.
      *
      * @param clientTimestamp the new clientTimestamp
      */
@@ -10286,7 +10632,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the query_id_serialized_name.
+     * Sets the queryId.
      *
      * @param queryId the new queryId
      */
@@ -10295,7 +10641,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the session_token_serialized_name.
+     * Sets the sessionToken.
      *
      * @param sessionToken the new sessionToken
      */
@@ -10304,7 +10650,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the collection_id_serialized_name.
+     * Sets the collectionId.
      *
      * @param collectionId the new collectionId
      */
@@ -10313,7 +10659,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the display_rank_serialized_name.
+     * Sets the displayRank.
      *
      * @param displayRank the new displayRank
      */
@@ -10322,7 +10668,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the document_id_serialized_name.
+     * Sets the documentId.
      *
      * @param documentId the new documentId
      */
@@ -10331,7 +10677,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the event_type_serialized_name.
+     * Sets the eventType.
      *
      * @param eventType the new eventType
      */
@@ -10340,7 +10686,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the result_type_serialized_name.
+     * Sets the resultType.
      *
      * @param resultType the new resultType
      */
@@ -10355,7 +10701,7 @@ public class IBMDiscoveryV1Models {
 
       LogQueryResponseResult ret = (LogQueryResponseResult) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for document_results_serialized_name
+      // calling custom deserializer for documentResults
       LogQueryResponseResultDocuments newDocumentResults = (LogQueryResponseResultDocuments) new LogQueryResponseResultDocuments().deserialize(JSON.serialize(ret.getDocumentResults()), (Map<String, Object>) jsonMap.get('document_results_serialized_name'), LogQueryResponseResultDocuments.class);
       ret.setDocumentResults(newDocumentResults);
 
@@ -10370,21 +10716,23 @@ public class IBMDiscoveryV1Models {
   public class LogQueryResponseResultDocuments extends IBMWatsonGenericModel {
     private List<LogQueryResponseResultDocumentsResult> results_serialized_name;
     private Long count_serialized_name;
+ 
     /**
-     * Gets the results_serialized_name.
+     * Gets the results.
      *
-     * @return the results_serialized_name
+     * @return the results
      */
     @AuraEnabled
     public List<LogQueryResponseResultDocumentsResult> getResults() {
       return results_serialized_name;
     }
+ 
     /**
-     * Gets the count_serialized_name.
+     * Gets the count.
      *
      * The number of results returned in the query associate with this log.
      *
-     * @return the count_serialized_name
+     * @return the count
      */
     @AuraEnabled
     public Long getCount() {
@@ -10392,7 +10740,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the results_serialized_name.
+     * Sets the results.
      *
      * @param results the new results
      */
@@ -10401,7 +10749,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the count_serialized_name.
+     * Sets the count.
      *
      * @param count the new count
      */
@@ -10416,7 +10764,7 @@ public class IBMDiscoveryV1Models {
 
       LogQueryResponseResultDocuments ret = (LogQueryResponseResultDocuments) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for results_serialized_name
+      // calling custom deserializer for results
       List<LogQueryResponseResultDocumentsResult> newResults = new List<LogQueryResponseResultDocumentsResult>();
       List<LogQueryResponseResultDocumentsResult> deserializedResults = ret.getResults();
       if (deserializedResults != null) {
@@ -10442,56 +10790,61 @@ public class IBMDiscoveryV1Models {
     private Double score_serialized_name;
     private Double confidence_serialized_name;
     private String collection_id_serialized_name;
+ 
     /**
-     * Gets the position_serialized_name.
+     * Gets the position.
      *
      * The result rank of this document. A position of `1` indicates that it was the first returned result.
      *
-     * @return the position_serialized_name
+     * @return the position
      */
     @AuraEnabled
     public Long getPosition() {
       return position_serialized_name;
     }
+ 
     /**
-     * Gets the document_id_serialized_name.
+     * Gets the documentId.
      *
      * The **document_id** of the document that this result represents.
      *
-     * @return the document_id_serialized_name
+     * @return the documentId
      */
     @AuraEnabled
     public String getDocumentId() {
       return document_id_serialized_name;
     }
+ 
     /**
-     * Gets the score_serialized_name.
+     * Gets the score.
      *
      * The raw score of this result. A higher score indicates a greater match to the query parameters.
      *
-     * @return the score_serialized_name
+     * @return the score
      */
     @AuraEnabled
     public Double getScore() {
       return score_serialized_name;
     }
+ 
     /**
-     * Gets the confidence_serialized_name.
+     * Gets the confidence.
      *
      * The confidence score of the result's analysis. A higher score indicating greater confidence.
      *
-     * @return the confidence_serialized_name
+     * @return the confidence
      */
     @AuraEnabled
     public Double getConfidence() {
       return confidence_serialized_name;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The **collection_id** of the document represented by this result.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     @AuraEnabled
     public String getCollectionId() {
@@ -10499,7 +10852,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the position_serialized_name.
+     * Sets the position.
      *
      * @param position the new position
      */
@@ -10508,7 +10861,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the document_id_serialized_name.
+     * Sets the documentId.
      *
      * @param documentId the new documentId
      */
@@ -10517,7 +10870,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the score_serialized_name.
+     * Sets the score.
      *
      * @param score the new score
      */
@@ -10526,7 +10879,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the confidence_serialized_name.
+     * Sets the confidence.
      *
      * @param confidence the new confidence
      */
@@ -10535,7 +10888,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the collection_id_serialized_name.
+     * Sets the collectionId.
      *
      * @param collectionId the new collectionId
      */
@@ -10563,56 +10916,61 @@ public class IBMDiscoveryV1Models {
     private String used_serialized_name;
     private String total_serialized_name;
     private Double percent_used_serialized_name;
+ 
     /**
-     * Gets the used_bytes_serialized_name.
+     * Gets the usedBytes.
      *
      * **Deprecated**: Number of bytes used in the environment's memory capacity.
      *
-     * @return the used_bytes_serialized_name
+     * @return the usedBytes
      */
     @AuraEnabled
     public Long getUsedBytes() {
       return used_bytes_serialized_name;
     }
+ 
     /**
-     * Gets the total_bytes_serialized_name.
+     * Gets the totalBytes.
      *
      * **Deprecated**: Total number of bytes available in the environment's memory capacity.
      *
-     * @return the total_bytes_serialized_name
+     * @return the totalBytes
      */
     @AuraEnabled
     public Long getTotalBytes() {
       return total_bytes_serialized_name;
     }
+ 
     /**
-     * Gets the used_serialized_name.
+     * Gets the used.
      *
      * **Deprecated**: Amount of memory capacity used, in KB or GB format.
      *
-     * @return the used_serialized_name
+     * @return the used
      */
     @AuraEnabled
     public String getUsed() {
       return used_serialized_name;
     }
+ 
     /**
-     * Gets the total_serialized_name.
+     * Gets the total.
      *
      * **Deprecated**: Total amount of the environment's memory capacity, in KB or GB format.
      *
-     * @return the total_serialized_name
+     * @return the total
      */
     @AuraEnabled
     public String getTotal() {
       return total_serialized_name;
     }
+ 
     /**
-     * Gets the percent_used_serialized_name.
+     * Gets the percentUsed.
      *
      * **Deprecated**: Percentage of the environment's memory capacity that is being used.
      *
-     * @return the percent_used_serialized_name
+     * @return the percentUsed
      */
     @AuraEnabled
     public Double getPercentUsed() {
@@ -10637,32 +10995,35 @@ public class IBMDiscoveryV1Models {
     private String interval_serialized_name;
     private String event_type_serialized_name;
     private List<MetricAggregationResult> results_serialized_name;
+ 
     /**
-     * Gets the interval_serialized_name.
+     * Gets the interval.
      *
      * The measurement interval for this metric. Metric intervals are always 1 day (`1d`).
      *
-     * @return the interval_serialized_name
+     * @return the interval
      */
     @AuraEnabled
     public String getInterval() {
       return interval_serialized_name;
     }
+ 
     /**
-     * Gets the event_type_serialized_name.
+     * Gets the eventType.
      *
      * The event type associated with this metric result. This field, when present, will always be `click`.
      *
-     * @return the event_type_serialized_name
+     * @return the eventType
      */
     @AuraEnabled
     public String getEventType() {
       return event_type_serialized_name;
     }
+ 
     /**
-     * Gets the results_serialized_name.
+     * Gets the results.
      *
-     * @return the results_serialized_name
+     * @return the results
      */
     @AuraEnabled
     public List<MetricAggregationResult> getResults() {
@@ -10670,7 +11031,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the interval_serialized_name.
+     * Sets the interval.
      *
      * @param interval the new interval
      */
@@ -10679,7 +11040,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the event_type_serialized_name.
+     * Sets the eventType.
      *
      * @param eventType the new eventType
      */
@@ -10688,7 +11049,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the results_serialized_name.
+     * Sets the results.
      *
      * @param results the new results
      */
@@ -10703,7 +11064,7 @@ public class IBMDiscoveryV1Models {
 
       MetricAggregation ret = (MetricAggregation) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for results_serialized_name
+      // calling custom deserializer for results
       List<MetricAggregationResult> newResults = new List<MetricAggregationResult>();
       List<MetricAggregationResult> deserializedResults = ret.getResults();
       if (deserializedResults != null) {
@@ -10728,46 +11089,50 @@ public class IBMDiscoveryV1Models {
     private Long key_serialized_name;
     private Long matching_results_serialized_name;
     private Double event_rate_serialized_name;
+ 
     /**
-     * Gets the key_as_string_serialized_name.
+     * Gets the keyAsString.
      *
      * Date in string form representing the start of this interval.
      *
-     * @return the key_as_string_serialized_name
+     * @return the keyAsString
      */
     @AuraEnabled
     public Datetime getKeyAsString() {
       return key_as_string_serialized_name;
     }
+ 
     /**
-     * Gets the key_serialized_name.
+     * Gets the key.
      *
      * Unix epoch time equivalent of the **key_as_string**, that represents the start of this interval.
      *
-     * @return the key_serialized_name
+     * @return the key
      */
     @AuraEnabled
     public Long getKey() {
       return key_serialized_name;
     }
+ 
     /**
-     * Gets the matching_results_serialized_name.
+     * Gets the matchingResults.
      *
      * Number of matching results.
      *
-     * @return the matching_results_serialized_name
+     * @return the matchingResults
      */
     @AuraEnabled
     public Long getMatchingResults() {
       return matching_results_serialized_name;
     }
+ 
     /**
-     * Gets the event_rate_serialized_name.
+     * Gets the eventRate.
      *
      * The number of queries with associated events divided by the total number of queries for the interval. Only
      * returned with **event_rate** metrics.
      *
-     * @return the event_rate_serialized_name
+     * @return the eventRate
      */
     @AuraEnabled
     public Double getEventRate() {
@@ -10775,7 +11140,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the key_as_string_serialized_name.
+     * Sets the keyAsString.
      *
      * @param keyAsString the new keyAsString
      */
@@ -10784,7 +11149,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the key_serialized_name.
+     * Sets the key.
      *
      * @param key the new key
      */
@@ -10793,7 +11158,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the matching_results_serialized_name.
+     * Sets the matchingResults.
      *
      * @param matchingResults the new matchingResults
      */
@@ -10802,7 +11167,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the event_rate_serialized_name.
+     * Sets the eventRate.
      *
      * @param eventRate the new eventRate
      */
@@ -10826,10 +11191,11 @@ public class IBMDiscoveryV1Models {
    */
   public class MetricResponse extends IBMWatsonResponseModel {
     private List<MetricAggregation> aggregations_serialized_name;
+ 
     /**
-     * Gets the aggregations_serialized_name.
+     * Gets the aggregations.
      *
-     * @return the aggregations_serialized_name
+     * @return the aggregations
      */
     @AuraEnabled
     public List<MetricAggregation> getAggregations() {
@@ -10837,7 +11203,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the aggregations_serialized_name.
+     * Sets the aggregations.
      *
      * @param aggregations the new aggregations
      */
@@ -10852,7 +11218,7 @@ public class IBMDiscoveryV1Models {
 
       MetricResponse ret = (MetricResponse) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for aggregations_serialized_name
+      // calling custom deserializer for aggregations
       List<MetricAggregation> newAggregations = new List<MetricAggregation>();
       List<MetricAggregation> deserializedAggregations = ret.getAggregations();
       if (deserializedAggregations != null) {
@@ -10875,21 +11241,23 @@ public class IBMDiscoveryV1Models {
   public class MetricTokenAggregation extends IBMWatsonGenericModel {
     private String event_type_serialized_name;
     private List<MetricTokenAggregationResult> results_serialized_name;
+ 
     /**
-     * Gets the event_type_serialized_name.
+     * Gets the eventType.
      *
      * The event type associated with this metric result. This field, when present, will always be `click`.
      *
-     * @return the event_type_serialized_name
+     * @return the eventType
      */
     @AuraEnabled
     public String getEventType() {
       return event_type_serialized_name;
     }
+ 
     /**
-     * Gets the results_serialized_name.
+     * Gets the results.
      *
-     * @return the results_serialized_name
+     * @return the results
      */
     @AuraEnabled
     public List<MetricTokenAggregationResult> getResults() {
@@ -10897,7 +11265,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the event_type_serialized_name.
+     * Sets the eventType.
      *
      * @param eventType the new eventType
      */
@@ -10906,7 +11274,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the results_serialized_name.
+     * Sets the results.
      *
      * @param results the new results
      */
@@ -10921,7 +11289,7 @@ public class IBMDiscoveryV1Models {
 
       MetricTokenAggregation ret = (MetricTokenAggregation) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for results_serialized_name
+      // calling custom deserializer for results
       List<MetricTokenAggregationResult> newResults = new List<MetricTokenAggregationResult>();
       List<MetricTokenAggregationResult> deserializedResults = ret.getResults();
       if (deserializedResults != null) {
@@ -10945,35 +11313,38 @@ public class IBMDiscoveryV1Models {
     private String key_serialized_name;
     private Long matching_results_serialized_name;
     private Double event_rate_serialized_name;
+ 
     /**
-     * Gets the key_serialized_name.
+     * Gets the key.
      *
      * The content of the **natural_language_query** parameter used in the query that this result represents.
      *
-     * @return the key_serialized_name
+     * @return the key
      */
     @AuraEnabled
     public String getKey() {
       return key_serialized_name;
     }
+ 
     /**
-     * Gets the matching_results_serialized_name.
+     * Gets the matchingResults.
      *
      * Number of matching results.
      *
-     * @return the matching_results_serialized_name
+     * @return the matchingResults
      */
     @AuraEnabled
     public Long getMatchingResults() {
       return matching_results_serialized_name;
     }
+ 
     /**
-     * Gets the event_rate_serialized_name.
+     * Gets the eventRate.
      *
      * The number of queries with associated events divided by the total number of queries currently stored (queries and
      * events are stored in the log for 30 days).
      *
-     * @return the event_rate_serialized_name
+     * @return the eventRate
      */
     @AuraEnabled
     public Double getEventRate() {
@@ -10981,7 +11352,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the key_serialized_name.
+     * Sets the key.
      *
      * @param key the new key
      */
@@ -10990,7 +11361,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the matching_results_serialized_name.
+     * Sets the matchingResults.
      *
      * @param matchingResults the new matchingResults
      */
@@ -10999,7 +11370,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the event_rate_serialized_name.
+     * Sets the eventRate.
      *
      * @param eventRate the new eventRate
      */
@@ -11023,10 +11394,11 @@ public class IBMDiscoveryV1Models {
    */
   public class MetricTokenResponse extends IBMWatsonResponseModel {
     private List<MetricTokenAggregation> aggregations_serialized_name;
+ 
     /**
-     * Gets the aggregations_serialized_name.
+     * Gets the aggregations.
      *
-     * @return the aggregations_serialized_name
+     * @return the aggregations
      */
     @AuraEnabled
     public List<MetricTokenAggregation> getAggregations() {
@@ -11034,7 +11406,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the aggregations_serialized_name.
+     * Sets the aggregations.
      *
      * @param aggregations the new aggregations
      */
@@ -11049,7 +11421,7 @@ public class IBMDiscoveryV1Models {
 
       MetricTokenResponse ret = (MetricTokenResponse) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for aggregations_serialized_name
+      // calling custom deserializer for aggregations
       List<MetricTokenAggregation> newAggregations = new List<MetricTokenAggregation>();
       List<MetricTokenAggregation> deserializedAggregations = ret.getAggregations();
       if (deserializedAggregations != null) {
@@ -11113,32 +11485,34 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NluEnrichmentEmotion() { }
-
+ 
     /**
-     * Gets the document_serialized_name.
+     * Gets the document.
      *
      * When `true`, emotion detection is performed on the entire field.
      *
-     * @return the document_serialized_name
+     * @return the document
      */
     @AuraEnabled
     public Boolean getDocument() {
       return document_serialized_name;
     }
+ 
     /**
-     * Gets the targets_serialized_name.
+     * Gets the targets.
      *
      * A comma-separated list of target strings that will have any associated emotions detected.
      *
-     * @return the targets_serialized_name
+     * @return the targets
      */
     @AuraEnabled
     public List<String> getTargets() {
       return targets_serialized_name;
     }
+  
     private NluEnrichmentEmotion(NluEnrichmentEmotionBuilder builder) {
-      document_serialized_name = builder.document_serialized_name;
-      targets_serialized_name = builder.targets_serialized_name;
+      document_serialized_name = builder.document;
+      targets_serialized_name = builder.targets;
     }
 
     /**
@@ -11166,12 +11540,12 @@ public class IBMDiscoveryV1Models {
    * NluEnrichmentEmotion Builder.
    */
   public class NluEnrichmentEmotionBuilder {
-    private Boolean document_serialized_name;
-    private List<String> targets_serialized_name;
+    private Boolean document;
+    private List<String> targets;
 
     private NluEnrichmentEmotionBuilder(NluEnrichmentEmotion nluEnrichmentEmotion) {
-      document_serialized_name = nluEnrichmentEmotion.document_serialized_name;
-      targets_serialized_name = nluEnrichmentEmotion.targets_serialized_name;
+      document = nluEnrichmentEmotion.document_serialized_name;
+      targets = nluEnrichmentEmotion.targets_serialized_name;
     }
 
     /**
@@ -11190,40 +11564,40 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an targets to targets_serialized_name.
+     * Adds an targets to targets.
      *
      * @param targets the new targets
      * @return the NluEnrichmentEmotion builder
      */
     public NluEnrichmentEmotionBuilder addTargets(String targets) {
       IBMWatsonValidator.notNull(targets, 'targets cannot be null');
-      if (this.targets_serialized_name == null) {
-        this.targets_serialized_name = new List<String>();
+      if (this.targets == null) {
+        this.targets = new List<String>();
       }
-      this.targets_serialized_name.add(targets);
+      this.targets.add(targets);
       return this;
     }
 
     /**
-     * Set the document_serialized_name.
+     * Set the document.
      *
      * @param document the document
      * @return the NluEnrichmentEmotion builder
      */
     public NluEnrichmentEmotionBuilder document(Boolean document) {
-      this.document_serialized_name = document;
+      this.document = document;
       return this;
     }
 
     /**
-     * Set the targets_serialized_name.
-     * Existing targets_serialized_name will be replaced.
+     * Set the targets.
+     * Existing targets will be replaced.
      *
      * @param targets the targets
      * @return the NluEnrichmentEmotion builder
      */
     public NluEnrichmentEmotionBuilder targets(List<String> targets) {
-      this.targets_serialized_name = targets;
+      this.targets = targets;
       return this;
     }
   }
@@ -11245,94 +11619,101 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NluEnrichmentEntities() { }
-
+ 
     /**
-     * Gets the sentiment_serialized_name.
+     * Gets the sentiment.
      *
      * When `true`, sentiment analysis of entities will be performed on the specified field.
      *
-     * @return the sentiment_serialized_name
+     * @return the sentiment
      */
     @AuraEnabled
     public Boolean getSentiment() {
       return sentiment_serialized_name;
     }
+ 
     /**
-     * Gets the emotion_serialized_name.
+     * Gets the emotion.
      *
      * When `true`, emotion detection of entities will be performed on the specified field.
      *
-     * @return the emotion_serialized_name
+     * @return the emotion
      */
     @AuraEnabled
     public Boolean getEmotion() {
       return emotion_serialized_name;
     }
+ 
     /**
-     * Gets the limit_serialized_name.
+     * Gets the xlimit.
      *
      * The maximum number of entities to extract for each instance of the specified field.
      *
-     * @return the limit_serialized_name
+     * @return the xlimit
      */
     @AuraEnabled
-    public Long getLimit() {
+    public Long getXlimit() {
       return limit_serialized_name;
     }
+ 
     /**
-     * Gets the mentions_serialized_name.
+     * Gets the mentions.
      *
      * When `true`, the number of mentions of each identified entity is recorded. The default is `false`.
      *
-     * @return the mentions_serialized_name
+     * @return the mentions
      */
     @AuraEnabled
     public Boolean getMentions() {
       return mentions_serialized_name;
     }
+ 
     /**
-     * Gets the mention_types_serialized_name.
+     * Gets the mentionTypes.
      *
      * When `true`, the types of mentions for each idetifieid entity is recorded. The default is `false`.
      *
-     * @return the mention_types_serialized_name
+     * @return the mentionTypes
      */
     @AuraEnabled
     public Boolean getMentionTypes() {
       return mention_types_serialized_name;
     }
+ 
     /**
-     * Gets the sentence_location_serialized_name.
+     * Gets the sentenceLocation.
      *
      * When `true`, a list of sentence locations for each instance of each identified entity is recorded. The default is
      * `false`.
      *
-     * @return the sentence_location_serialized_name
+     * @return the sentenceLocation
      */
     @AuraEnabled
     public Boolean getSentenceLocation() {
       return sentence_location_serialized_name;
     }
+ 
     /**
-     * Gets the model_serialized_name.
+     * Gets the model.
      *
      * The enrichement model to use with entity extraction. May be a custom model provided by Watson Knowledge Studio,
      * the public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
      *
-     * @return the model_serialized_name
+     * @return the model
      */
     @AuraEnabled
     public String getModel() {
       return model_serialized_name;
     }
+  
     private NluEnrichmentEntities(NluEnrichmentEntitiesBuilder builder) {
-      sentiment_serialized_name = builder.sentiment_serialized_name;
-      emotion_serialized_name = builder.emotion_serialized_name;
-      limit_serialized_name = builder.limit_serialized_name;
-      mentions_serialized_name = builder.mentions_serialized_name;
-      mention_types_serialized_name = builder.mention_types_serialized_name;
-      sentence_location_serialized_name = builder.sentence_location_serialized_name;
-      model_serialized_name = builder.model_serialized_name;
+      sentiment_serialized_name = builder.sentiment;
+      emotion_serialized_name = builder.emotion;
+      limit_serialized_name = builder.xlimit;
+      mentions_serialized_name = builder.mentions;
+      mention_types_serialized_name = builder.mentionTypes;
+      sentence_location_serialized_name = builder.sentenceLocation;
+      model_serialized_name = builder.model;
     }
 
     /**
@@ -11360,22 +11741,22 @@ public class IBMDiscoveryV1Models {
    * NluEnrichmentEntities Builder.
    */
   public class NluEnrichmentEntitiesBuilder {
-    private Boolean sentiment_serialized_name;
-    private Boolean emotion_serialized_name;
-    private Long limit_serialized_name;
-    private Boolean mentions_serialized_name;
-    private Boolean mention_types_serialized_name;
-    private Boolean sentence_location_serialized_name;
-    private String model_serialized_name;
+    private Boolean sentiment;
+    private Boolean emotion;
+    private Long xlimit;
+    private Boolean mentions;
+    private Boolean mentionTypes;
+    private Boolean sentenceLocation;
+    private String model;
 
     private NluEnrichmentEntitiesBuilder(NluEnrichmentEntities nluEnrichmentEntities) {
-      sentiment_serialized_name = nluEnrichmentEntities.sentiment_serialized_name;
-      emotion_serialized_name = nluEnrichmentEntities.emotion_serialized_name;
-      limit_serialized_name = nluEnrichmentEntities.limit_serialized_name;
-      mentions_serialized_name = nluEnrichmentEntities.mentions_serialized_name;
-      mention_types_serialized_name = nluEnrichmentEntities.mention_types_serialized_name;
-      sentence_location_serialized_name = nluEnrichmentEntities.sentence_location_serialized_name;
-      model_serialized_name = nluEnrichmentEntities.model_serialized_name;
+      sentiment = nluEnrichmentEntities.sentiment_serialized_name;
+      emotion = nluEnrichmentEntities.emotion_serialized_name;
+      xlimit = nluEnrichmentEntities.limit_serialized_name;
+      mentions = nluEnrichmentEntities.mentions_serialized_name;
+      mentionTypes = nluEnrichmentEntities.mention_types_serialized_name;
+      sentenceLocation = nluEnrichmentEntities.sentence_location_serialized_name;
+      model = nluEnrichmentEntities.model_serialized_name;
     }
 
     /**
@@ -11394,79 +11775,79 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the sentiment_serialized_name.
+     * Set the sentiment.
      *
      * @param sentiment the sentiment
      * @return the NluEnrichmentEntities builder
      */
     public NluEnrichmentEntitiesBuilder sentiment(Boolean sentiment) {
-      this.sentiment_serialized_name = sentiment;
+      this.sentiment = sentiment;
       return this;
     }
 
     /**
-     * Set the emotion_serialized_name.
+     * Set the emotion.
      *
      * @param emotion the emotion
      * @return the NluEnrichmentEntities builder
      */
     public NluEnrichmentEntitiesBuilder emotion(Boolean emotion) {
-      this.emotion_serialized_name = emotion;
+      this.emotion = emotion;
       return this;
     }
 
     /**
-     * Set the limit_serialized_name.
+     * Set the xlimit.
      *
-     * @param limitVar the limitVar
+     * @param xlimit the xlimit
      * @return the NluEnrichmentEntities builder
      */
-    public NluEnrichmentEntitiesBuilder limitField(Long limitVar) {
-      this.limit_serialized_name = limitVar;
+    public NluEnrichmentEntitiesBuilder xlimit(Long xlimit) {
+      this.xlimit = xlimit;
       return this;
     }
 
     /**
-     * Set the mentions_serialized_name.
+     * Set the mentions.
      *
      * @param mentions the mentions
      * @return the NluEnrichmentEntities builder
      */
     public NluEnrichmentEntitiesBuilder mentions(Boolean mentions) {
-      this.mentions_serialized_name = mentions;
+      this.mentions = mentions;
       return this;
     }
 
     /**
-     * Set the mention_types_serialized_name.
+     * Set the mentionTypes.
      *
      * @param mentionTypes the mentionTypes
      * @return the NluEnrichmentEntities builder
      */
     public NluEnrichmentEntitiesBuilder mentionTypes(Boolean mentionTypes) {
-      this.mention_types_serialized_name = mentionTypes;
+      this.mentionTypes = mentionTypes;
       return this;
     }
 
     /**
-     * Set the sentence_location_serialized_name.
+     * Set the sentenceLocation.
      *
      * @param sentenceLocation the sentenceLocation
      * @return the NluEnrichmentEntities builder
      */
     public NluEnrichmentEntitiesBuilder sentenceLocation(Boolean sentenceLocation) {
-      this.sentence_location_serialized_name = sentenceLocation;
+      this.sentenceLocation = sentenceLocation;
       return this;
     }
 
     /**
-     * Set the model_serialized_name.
+     * Set the model.
      *
      * @param model the model
      * @return the NluEnrichmentEntities builder
      */
     public NluEnrichmentEntitiesBuilder model(String model) {
-      this.model_serialized_name = model;
+      this.model = model;
       return this;
     }
   }
@@ -11488,92 +11869,99 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NluEnrichmentFeatures() { }
-
+ 
     /**
-     * Gets the keywords_serialized_name.
+     * Gets the keywords.
      *
      * An object specifying the Keyword enrichment and related parameters.
      *
-     * @return the keywords_serialized_name
+     * @return the keywords
      */
     @AuraEnabled
     public NluEnrichmentKeywords getKeywords() {
       return keywords_serialized_name;
     }
+ 
     /**
-     * Gets the entities_serialized_name.
+     * Gets the entities.
      *
      * An object speficying the Entities enrichment and related parameters.
      *
-     * @return the entities_serialized_name
+     * @return the entities
      */
     @AuraEnabled
     public NluEnrichmentEntities getEntities() {
       return entities_serialized_name;
     }
+ 
     /**
-     * Gets the sentiment_serialized_name.
+     * Gets the sentiment.
      *
      * An object specifying the sentiment extraction enrichment and related parameters.
      *
-     * @return the sentiment_serialized_name
+     * @return the sentiment
      */
     @AuraEnabled
     public NluEnrichmentSentiment getSentiment() {
       return sentiment_serialized_name;
     }
+ 
     /**
-     * Gets the emotion_serialized_name.
+     * Gets the emotion.
      *
      * An object specifying the emotion detection enrichment and related parameters.
      *
-     * @return the emotion_serialized_name
+     * @return the emotion
      */
     @AuraEnabled
     public NluEnrichmentEmotion getEmotion() {
       return emotion_serialized_name;
     }
+ 
     /**
-     * Gets the categories_serialized_name.
+     * Gets the categories.
      *
      * An object specifying the categories enrichment and related parameters.
      *
-     * @return the categories_serialized_name
+     * @return the categories
      */
     @AuraEnabled
     public NluEnrichmentCategories getCategories() {
       return categories_serialized_name;
     }
+ 
     /**
-     * Gets the semantic_roles_serialized_name.
+     * Gets the semanticRoles.
      *
      * An object specifiying the semantic roles enrichment and related parameters.
      *
-     * @return the semantic_roles_serialized_name
+     * @return the semanticRoles
      */
     @AuraEnabled
     public NluEnrichmentSemanticRoles getSemanticRoles() {
       return semantic_roles_serialized_name;
     }
+ 
     /**
-     * Gets the relations_serialized_name.
+     * Gets the relations.
      *
      * An object specifying the relations enrichment and related parameters.
      *
-     * @return the relations_serialized_name
+     * @return the relations
      */
     @AuraEnabled
     public NluEnrichmentRelations getRelations() {
       return relations_serialized_name;
     }
+  
     private NluEnrichmentFeatures(NluEnrichmentFeaturesBuilder builder) {
-      keywords_serialized_name = builder.keywords_serialized_name;
-      entities_serialized_name = builder.entities_serialized_name;
-      sentiment_serialized_name = builder.sentiment_serialized_name;
-      emotion_serialized_name = builder.emotion_serialized_name;
-      categories_serialized_name = builder.categories_serialized_name;
-      semantic_roles_serialized_name = builder.semantic_roles_serialized_name;
-      relations_serialized_name = builder.relations_serialized_name;
+      keywords_serialized_name = builder.keywords;
+      entities_serialized_name = builder.entities;
+      sentiment_serialized_name = builder.sentiment;
+      emotion_serialized_name = builder.emotion;
+      categories_serialized_name = builder.categories;
+      semantic_roles_serialized_name = builder.semanticRoles;
+      relations_serialized_name = builder.relations;
     }
 
     /**
@@ -11593,31 +11981,31 @@ public class IBMDiscoveryV1Models {
       NluEnrichmentFeatures ret = (NluEnrichmentFeatures) super.deserialize(jsonString, jsonMap, classType);
       NluEnrichmentFeaturesBuilder retBuilder = ret.newBuilder();
 
-      // calling custom deserializer for keywords_serialized_name
+      // calling custom deserializer for keywords
       NluEnrichmentKeywords newKeywords = (NluEnrichmentKeywords) new NluEnrichmentKeywords().deserialize(JSON.serialize(ret.getKeywords()), (Map<String, Object>) jsonMap.get('keywords_serialized_name'), NluEnrichmentKeywords.class);
       retBuilder.keywords(newKeywords);
 
-      // calling custom deserializer for entities_serialized_name
+      // calling custom deserializer for entities
       NluEnrichmentEntities newEntities = (NluEnrichmentEntities) new NluEnrichmentEntities().deserialize(JSON.serialize(ret.getEntities()), (Map<String, Object>) jsonMap.get('entities_serialized_name'), NluEnrichmentEntities.class);
       retBuilder.entities(newEntities);
 
-      // calling custom deserializer for sentiment_serialized_name
+      // calling custom deserializer for sentiment
       NluEnrichmentSentiment newSentiment = (NluEnrichmentSentiment) new NluEnrichmentSentiment().deserialize(JSON.serialize(ret.getSentiment()), (Map<String, Object>) jsonMap.get('sentiment_serialized_name'), NluEnrichmentSentiment.class);
       retBuilder.sentiment(newSentiment);
 
-      // calling custom deserializer for emotion_serialized_name
+      // calling custom deserializer for emotion
       NluEnrichmentEmotion newEmotion = (NluEnrichmentEmotion) new NluEnrichmentEmotion().deserialize(JSON.serialize(ret.getEmotion()), (Map<String, Object>) jsonMap.get('emotion_serialized_name'), NluEnrichmentEmotion.class);
       retBuilder.emotion(newEmotion);
 
-      // calling custom deserializer for categories_serialized_name
+      // calling custom deserializer for categories
       NluEnrichmentCategories newCategories = (NluEnrichmentCategories) new NluEnrichmentCategories().deserialize(JSON.serialize(ret.getCategories()), (Map<String, Object>) jsonMap.get('categories_serialized_name'), NluEnrichmentCategories.class);
       retBuilder.categories(newCategories);
 
-      // calling custom deserializer for semantic_roles_serialized_name
+      // calling custom deserializer for semanticRoles
       NluEnrichmentSemanticRoles newSemanticRoles = (NluEnrichmentSemanticRoles) new NluEnrichmentSemanticRoles().deserialize(JSON.serialize(ret.getSemanticRoles()), (Map<String, Object>) jsonMap.get('semantic_roles_serialized_name'), NluEnrichmentSemanticRoles.class);
       retBuilder.semanticRoles(newSemanticRoles);
 
-      // calling custom deserializer for relations_serialized_name
+      // calling custom deserializer for relations
       NluEnrichmentRelations newRelations = (NluEnrichmentRelations) new NluEnrichmentRelations().deserialize(JSON.serialize(ret.getRelations()), (Map<String, Object>) jsonMap.get('relations_serialized_name'), NluEnrichmentRelations.class);
       retBuilder.relations(newRelations);
 
@@ -11629,22 +12017,22 @@ public class IBMDiscoveryV1Models {
    * NluEnrichmentFeatures Builder.
    */
   public class NluEnrichmentFeaturesBuilder {
-    private NluEnrichmentKeywords keywords_serialized_name;
-    private NluEnrichmentEntities entities_serialized_name;
-    private NluEnrichmentSentiment sentiment_serialized_name;
-    private NluEnrichmentEmotion emotion_serialized_name;
-    private NluEnrichmentCategories categories_serialized_name;
-    private NluEnrichmentSemanticRoles semantic_roles_serialized_name;
-    private NluEnrichmentRelations relations_serialized_name;
+    private NluEnrichmentKeywords keywords;
+    private NluEnrichmentEntities entities;
+    private NluEnrichmentSentiment sentiment;
+    private NluEnrichmentEmotion emotion;
+    private NluEnrichmentCategories categories;
+    private NluEnrichmentSemanticRoles semanticRoles;
+    private NluEnrichmentRelations relations;
 
     private NluEnrichmentFeaturesBuilder(NluEnrichmentFeatures nluEnrichmentFeatures) {
-      keywords_serialized_name = nluEnrichmentFeatures.keywords_serialized_name;
-      entities_serialized_name = nluEnrichmentFeatures.entities_serialized_name;
-      sentiment_serialized_name = nluEnrichmentFeatures.sentiment_serialized_name;
-      emotion_serialized_name = nluEnrichmentFeatures.emotion_serialized_name;
-      categories_serialized_name = nluEnrichmentFeatures.categories_serialized_name;
-      semantic_roles_serialized_name = nluEnrichmentFeatures.semantic_roles_serialized_name;
-      relations_serialized_name = nluEnrichmentFeatures.relations_serialized_name;
+      keywords = nluEnrichmentFeatures.keywords_serialized_name;
+      entities = nluEnrichmentFeatures.entities_serialized_name;
+      sentiment = nluEnrichmentFeatures.sentiment_serialized_name;
+      emotion = nluEnrichmentFeatures.emotion_serialized_name;
+      categories = nluEnrichmentFeatures.categories_serialized_name;
+      semanticRoles = nluEnrichmentFeatures.semantic_roles_serialized_name;
+      relations = nluEnrichmentFeatures.relations_serialized_name;
     }
 
     /**
@@ -11663,79 +12051,79 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the keywords_serialized_name.
+     * Set the keywords.
      *
      * @param keywords the keywords
      * @return the NluEnrichmentFeatures builder
      */
     public NluEnrichmentFeaturesBuilder keywords(NluEnrichmentKeywords keywords) {
-      this.keywords_serialized_name = keywords;
+      this.keywords = keywords;
       return this;
     }
 
     /**
-     * Set the entities_serialized_name.
+     * Set the entities.
      *
      * @param entities the entities
      * @return the NluEnrichmentFeatures builder
      */
     public NluEnrichmentFeaturesBuilder entities(NluEnrichmentEntities entities) {
-      this.entities_serialized_name = entities;
+      this.entities = entities;
       return this;
     }
 
     /**
-     * Set the sentiment_serialized_name.
+     * Set the sentiment.
      *
      * @param sentiment the sentiment
      * @return the NluEnrichmentFeatures builder
      */
     public NluEnrichmentFeaturesBuilder sentiment(NluEnrichmentSentiment sentiment) {
-      this.sentiment_serialized_name = sentiment;
+      this.sentiment = sentiment;
       return this;
     }
 
     /**
-     * Set the emotion_serialized_name.
+     * Set the emotion.
      *
      * @param emotion the emotion
      * @return the NluEnrichmentFeatures builder
      */
     public NluEnrichmentFeaturesBuilder emotion(NluEnrichmentEmotion emotion) {
-      this.emotion_serialized_name = emotion;
+      this.emotion = emotion;
       return this;
     }
 
     /**
-     * Set the categories_serialized_name.
+     * Set the categories.
      *
      * @param categories the categories
      * @return the NluEnrichmentFeatures builder
      */
     public NluEnrichmentFeaturesBuilder categories(NluEnrichmentCategories categories) {
-      this.categories_serialized_name = categories;
+      this.categories = categories;
       return this;
     }
 
     /**
-     * Set the semantic_roles_serialized_name.
+     * Set the semanticRoles.
      *
      * @param semanticRoles the semanticRoles
      * @return the NluEnrichmentFeatures builder
      */
     public NluEnrichmentFeaturesBuilder semanticRoles(NluEnrichmentSemanticRoles semanticRoles) {
-      this.semantic_roles_serialized_name = semanticRoles;
+      this.semanticRoles = semanticRoles;
       return this;
     }
 
     /**
-     * Set the relations_serialized_name.
+     * Set the relations.
      *
      * @param relations the relations
      * @return the NluEnrichmentFeatures builder
      */
     public NluEnrichmentFeaturesBuilder relations(NluEnrichmentRelations relations) {
-      this.relations_serialized_name = relations;
+      this.relations = relations;
       return this;
     }
   }
@@ -11753,44 +12141,47 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NluEnrichmentKeywords() { }
-
+ 
     /**
-     * Gets the sentiment_serialized_name.
+     * Gets the sentiment.
      *
      * When `true`, sentiment analysis of keywords will be performed on the specified field.
      *
-     * @return the sentiment_serialized_name
+     * @return the sentiment
      */
     @AuraEnabled
     public Boolean getSentiment() {
       return sentiment_serialized_name;
     }
+ 
     /**
-     * Gets the emotion_serialized_name.
+     * Gets the emotion.
      *
      * When `true`, emotion detection of keywords will be performed on the specified field.
      *
-     * @return the emotion_serialized_name
+     * @return the emotion
      */
     @AuraEnabled
     public Boolean getEmotion() {
       return emotion_serialized_name;
     }
+ 
     /**
-     * Gets the limit_serialized_name.
+     * Gets the xlimit.
      *
      * The maximum number of keywords to extract for each instance of the specified field.
      *
-     * @return the limit_serialized_name
+     * @return the xlimit
      */
     @AuraEnabled
-    public Long getLimit() {
+    public Long getXlimit() {
       return limit_serialized_name;
     }
+  
     private NluEnrichmentKeywords(NluEnrichmentKeywordsBuilder builder) {
-      sentiment_serialized_name = builder.sentiment_serialized_name;
-      emotion_serialized_name = builder.emotion_serialized_name;
-      limit_serialized_name = builder.limit_serialized_name;
+      sentiment_serialized_name = builder.sentiment;
+      emotion_serialized_name = builder.emotion;
+      limit_serialized_name = builder.xlimit;
     }
 
     /**
@@ -11818,14 +12209,14 @@ public class IBMDiscoveryV1Models {
    * NluEnrichmentKeywords Builder.
    */
   public class NluEnrichmentKeywordsBuilder {
-    private Boolean sentiment_serialized_name;
-    private Boolean emotion_serialized_name;
-    private Long limit_serialized_name;
+    private Boolean sentiment;
+    private Boolean emotion;
+    private Long xlimit;
 
     private NluEnrichmentKeywordsBuilder(NluEnrichmentKeywords nluEnrichmentKeywords) {
-      sentiment_serialized_name = nluEnrichmentKeywords.sentiment_serialized_name;
-      emotion_serialized_name = nluEnrichmentKeywords.emotion_serialized_name;
-      limit_serialized_name = nluEnrichmentKeywords.limit_serialized_name;
+      sentiment = nluEnrichmentKeywords.sentiment_serialized_name;
+      emotion = nluEnrichmentKeywords.emotion_serialized_name;
+      xlimit = nluEnrichmentKeywords.limit_serialized_name;
     }
 
     /**
@@ -11844,35 +12235,35 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the sentiment_serialized_name.
+     * Set the sentiment.
      *
      * @param sentiment the sentiment
      * @return the NluEnrichmentKeywords builder
      */
     public NluEnrichmentKeywordsBuilder sentiment(Boolean sentiment) {
-      this.sentiment_serialized_name = sentiment;
+      this.sentiment = sentiment;
       return this;
     }
 
     /**
-     * Set the emotion_serialized_name.
+     * Set the emotion.
      *
      * @param emotion the emotion
      * @return the NluEnrichmentKeywords builder
      */
     public NluEnrichmentKeywordsBuilder emotion(Boolean emotion) {
-      this.emotion_serialized_name = emotion;
+      this.emotion = emotion;
       return this;
     }
 
     /**
-     * Set the limit_serialized_name.
+     * Set the xlimit.
      *
-     * @param limitVar the limitVar
+     * @param xlimit the xlimit
      * @return the NluEnrichmentKeywords builder
      */
-    public NluEnrichmentKeywordsBuilder limitField(Long limitVar) {
-      this.limit_serialized_name = limitVar;
+    public NluEnrichmentKeywordsBuilder xlimit(Long xlimit) {
+      this.xlimit = xlimit;
       return this;
     }
   }
@@ -11882,14 +12273,15 @@ public class IBMDiscoveryV1Models {
    */
   public class NluEnrichmentRelations extends IBMWatsonGenericModel {
     private String model_serialized_name;
+ 
     /**
-     * Gets the model_serialized_name.
+     * Gets the model.
      *
      * *For use with `natural_language_understanding` enrichments only.* The enrichement model to use with relationship
      * extraction. May be a custom model provided by Watson Knowledge Studio, the public model for use with Knowledge
      * Graph `en-news`, the default is`en-news`.
      *
-     * @return the model_serialized_name
+     * @return the model
      */
     @AuraEnabled
     public String getModel() {
@@ -11897,7 +12289,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the model_serialized_name.
+     * Sets the model.
      *
      * @param model the new model
      */
@@ -11929,44 +12321,47 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NluEnrichmentSemanticRoles() { }
-
+ 
     /**
-     * Gets the entities_serialized_name.
+     * Gets the entities.
      *
      * When `true`, entities are extracted from the identified sentence parts.
      *
-     * @return the entities_serialized_name
+     * @return the entities
      */
     @AuraEnabled
     public Boolean getEntities() {
       return entities_serialized_name;
     }
+ 
     /**
-     * Gets the keywords_serialized_name.
+     * Gets the keywords.
      *
      * When `true`, keywords are extracted from the identified sentence parts.
      *
-     * @return the keywords_serialized_name
+     * @return the keywords
      */
     @AuraEnabled
     public Boolean getKeywords() {
       return keywords_serialized_name;
     }
+ 
     /**
-     * Gets the limit_serialized_name.
+     * Gets the xlimit.
      *
      * The maximum number of semantic roles enrichments to extact from each instance of the specified field.
      *
-     * @return the limit_serialized_name
+     * @return the xlimit
      */
     @AuraEnabled
-    public Long getLimit() {
+    public Long getXlimit() {
       return limit_serialized_name;
     }
+  
     private NluEnrichmentSemanticRoles(NluEnrichmentSemanticRolesBuilder builder) {
-      entities_serialized_name = builder.entities_serialized_name;
-      keywords_serialized_name = builder.keywords_serialized_name;
-      limit_serialized_name = builder.limit_serialized_name;
+      entities_serialized_name = builder.entities;
+      keywords_serialized_name = builder.keywords;
+      limit_serialized_name = builder.xlimit;
     }
 
     /**
@@ -11994,14 +12389,14 @@ public class IBMDiscoveryV1Models {
    * NluEnrichmentSemanticRoles Builder.
    */
   public class NluEnrichmentSemanticRolesBuilder {
-    private Boolean entities_serialized_name;
-    private Boolean keywords_serialized_name;
-    private Long limit_serialized_name;
+    private Boolean entities;
+    private Boolean keywords;
+    private Long xlimit;
 
     private NluEnrichmentSemanticRolesBuilder(NluEnrichmentSemanticRoles nluEnrichmentSemanticRoles) {
-      entities_serialized_name = nluEnrichmentSemanticRoles.entities_serialized_name;
-      keywords_serialized_name = nluEnrichmentSemanticRoles.keywords_serialized_name;
-      limit_serialized_name = nluEnrichmentSemanticRoles.limit_serialized_name;
+      entities = nluEnrichmentSemanticRoles.entities_serialized_name;
+      keywords = nluEnrichmentSemanticRoles.keywords_serialized_name;
+      xlimit = nluEnrichmentSemanticRoles.limit_serialized_name;
     }
 
     /**
@@ -12020,35 +12415,35 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the entities_serialized_name.
+     * Set the entities.
      *
      * @param entities the entities
      * @return the NluEnrichmentSemanticRoles builder
      */
     public NluEnrichmentSemanticRolesBuilder entities(Boolean entities) {
-      this.entities_serialized_name = entities;
+      this.entities = entities;
       return this;
     }
 
     /**
-     * Set the keywords_serialized_name.
+     * Set the keywords.
      *
      * @param keywords the keywords
      * @return the NluEnrichmentSemanticRoles builder
      */
     public NluEnrichmentSemanticRolesBuilder keywords(Boolean keywords) {
-      this.keywords_serialized_name = keywords;
+      this.keywords = keywords;
       return this;
     }
 
     /**
-     * Set the limit_serialized_name.
+     * Set the xlimit.
      *
-     * @param limitVar the limitVar
+     * @param xlimit the xlimit
      * @return the NluEnrichmentSemanticRoles builder
      */
-    public NluEnrichmentSemanticRolesBuilder limitField(Long limitVar) {
-      this.limit_serialized_name = limitVar;
+    public NluEnrichmentSemanticRolesBuilder xlimit(Long xlimit) {
+      this.xlimit = xlimit;
       return this;
     }
   }
@@ -12065,32 +12460,34 @@ public class IBMDiscoveryV1Models {
      * and should not be called by the client.
      */
     public NluEnrichmentSentiment() { }
-
+ 
     /**
-     * Gets the document_serialized_name.
+     * Gets the document.
      *
      * When `true`, sentiment analysis is performed on the entire field.
      *
-     * @return the document_serialized_name
+     * @return the document
      */
     @AuraEnabled
     public Boolean getDocument() {
       return document_serialized_name;
     }
+ 
     /**
-     * Gets the targets_serialized_name.
+     * Gets the targets.
      *
      * A comma-separated list of target strings that will have any associated sentiment analyzed.
      *
-     * @return the targets_serialized_name
+     * @return the targets
      */
     @AuraEnabled
     public List<String> getTargets() {
       return targets_serialized_name;
     }
+  
     private NluEnrichmentSentiment(NluEnrichmentSentimentBuilder builder) {
-      document_serialized_name = builder.document_serialized_name;
-      targets_serialized_name = builder.targets_serialized_name;
+      document_serialized_name = builder.document;
+      targets_serialized_name = builder.targets;
     }
 
     /**
@@ -12118,12 +12515,12 @@ public class IBMDiscoveryV1Models {
    * NluEnrichmentSentiment Builder.
    */
   public class NluEnrichmentSentimentBuilder {
-    private Boolean document_serialized_name;
-    private List<String> targets_serialized_name;
+    private Boolean document;
+    private List<String> targets;
 
     private NluEnrichmentSentimentBuilder(NluEnrichmentSentiment nluEnrichmentSentiment) {
-      document_serialized_name = nluEnrichmentSentiment.document_serialized_name;
-      targets_serialized_name = nluEnrichmentSentiment.targets_serialized_name;
+      document = nluEnrichmentSentiment.document_serialized_name;
+      targets = nluEnrichmentSentiment.targets_serialized_name;
     }
 
     /**
@@ -12142,40 +12539,40 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an targets to targets_serialized_name.
+     * Adds an targets to targets.
      *
      * @param targets the new targets
      * @return the NluEnrichmentSentiment builder
      */
     public NluEnrichmentSentimentBuilder addTargets(String targets) {
       IBMWatsonValidator.notNull(targets, 'targets cannot be null');
-      if (this.targets_serialized_name == null) {
-        this.targets_serialized_name = new List<String>();
+      if (this.targets == null) {
+        this.targets = new List<String>();
       }
-      this.targets_serialized_name.add(targets);
+      this.targets.add(targets);
       return this;
     }
 
     /**
-     * Set the document_serialized_name.
+     * Set the document.
      *
      * @param document the document
      * @return the NluEnrichmentSentiment builder
      */
     public NluEnrichmentSentimentBuilder document(Boolean document) {
-      this.document_serialized_name = document;
+      this.document = document;
       return this;
     }
 
     /**
-     * Set the targets_serialized_name.
-     * Existing targets_serialized_name will be replaced.
+     * Set the targets.
+     * Existing targets will be replaced.
      *
      * @param targets the targets
      * @return the NluEnrichmentSentiment builder
      */
     public NluEnrichmentSentimentBuilder targets(List<String> targets) {
-      this.targets_serialized_name = targets;
+      this.targets = targets;
       return this;
     }
   }
@@ -12187,8 +12584,9 @@ public class IBMDiscoveryV1Models {
     private String operation_serialized_name;
     private String source_field_serialized_name;
     private String destination_field_serialized_name;
+ 
     /**
-     * Gets the operation_serialized_name.
+     * Gets the operation.
      *
      * Identifies what type of operation to perform.
      *
@@ -12215,29 +12613,31 @@ public class IBMDiscoveryV1Models {
      * Typically, **remove_nulls** is invoked as the last normalization operation (if it is invoked at all, it can be
      * time-expensive).
      *
-     * @return the operation_serialized_name
+     * @return the operation
      */
     @AuraEnabled
     public String getOperation() {
       return operation_serialized_name;
     }
+ 
     /**
-     * Gets the source_field_serialized_name.
+     * Gets the sourceField.
      *
      * The source field for the operation.
      *
-     * @return the source_field_serialized_name
+     * @return the sourceField
      */
     @AuraEnabled
     public String getSourceField() {
       return source_field_serialized_name;
     }
+ 
     /**
-     * Gets the destination_field_serialized_name.
+     * Gets the destinationField.
      *
      * The destination field for the operation.
      *
-     * @return the destination_field_serialized_name
+     * @return the destinationField
      */
     @AuraEnabled
     public String getDestinationField() {
@@ -12245,7 +12645,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the operation_serialized_name.
+     * Sets the operation.
      *
      * @param operation the new operation
      */
@@ -12254,7 +12654,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the source_field_serialized_name.
+     * Sets the sourceField.
      *
      * @param sourceField the new sourceField
      */
@@ -12263,7 +12663,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the destination_field_serialized_name.
+     * Sets the destinationField.
      *
      * @param destinationField the new destinationField
      */
@@ -12293,79 +12693,86 @@ public class IBMDiscoveryV1Models {
     private String severity_serialized_name;
     private String step_serialized_name;
     private String description_serialized_name;
+ 
     /**
-     * Gets the notice_id_serialized_name.
+     * Gets the noticeId.
      *
      * Identifies the notice. Many notices might have the same ID. This field exists so that user applications can
      * programmatically identify a notice and take automatic corrective action.
      *
-     * @return the notice_id_serialized_name
+     * @return the noticeId
      */
     @AuraEnabled
     public String getNoticeId() {
       return notice_id_serialized_name;
     }
+ 
     /**
-     * Gets the created_serialized_name.
+     * Gets the created.
      *
      * The creation date of the collection in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      *
-     * @return the created_serialized_name
+     * @return the created
      */
     @AuraEnabled
     public Datetime getCreated() {
       return created_serialized_name;
     }
+ 
     /**
-     * Gets the document_id_serialized_name.
+     * Gets the documentId.
      *
      * Unique identifier of the document.
      *
-     * @return the document_id_serialized_name
+     * @return the documentId
      */
     @AuraEnabled
     public String getDocumentId() {
       return document_id_serialized_name;
     }
+ 
     /**
-     * Gets the query_id_serialized_name.
+     * Gets the queryId.
      *
      * Unique identifier of the query used for relevance training.
      *
-     * @return the query_id_serialized_name
+     * @return the queryId
      */
     @AuraEnabled
     public String getQueryId() {
       return query_id_serialized_name;
     }
+ 
     /**
-     * Gets the severity_serialized_name.
+     * Gets the severity.
      *
      * Severity level of the notice.
      *
-     * @return the severity_serialized_name
+     * @return the severity
      */
     @AuraEnabled
     public String getSeverity() {
       return severity_serialized_name;
     }
+ 
     /**
-     * Gets the step_serialized_name.
+     * Gets the step.
      *
      * Ingestion or training step in which the notice occurred.
      *
-     * @return the step_serialized_name
+     * @return the step
      */
     @AuraEnabled
     public String getStep() {
       return step_serialized_name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * The description of the notice.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     @AuraEnabled
     public String getDescription() {
@@ -12388,10 +12795,11 @@ public class IBMDiscoveryV1Models {
    */
   public class PdfHeadingDetection extends IBMWatsonGenericModel {
     private List<FontSetting> fonts_serialized_name;
+ 
     /**
-     * Gets the fonts_serialized_name.
+     * Gets the fonts.
      *
-     * @return the fonts_serialized_name
+     * @return the fonts
      */
     @AuraEnabled
     public List<FontSetting> getFonts() {
@@ -12399,7 +12807,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the fonts_serialized_name.
+     * Sets the fonts.
      *
      * @param fonts the new fonts
      */
@@ -12414,7 +12822,7 @@ public class IBMDiscoveryV1Models {
 
       PdfHeadingDetection ret = (PdfHeadingDetection) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for fonts_serialized_name
+      // calling custom deserializer for fonts
       List<FontSetting> newFonts = new List<FontSetting>();
       List<FontSetting> deserializedFonts = ret.getFonts();
       if (deserializedFonts != null) {
@@ -12436,10 +12844,11 @@ public class IBMDiscoveryV1Models {
    */
   public class PdfSettings extends IBMWatsonGenericModel {
     private PdfHeadingDetection heading_serialized_name;
+ 
     /**
-     * Gets the heading_serialized_name.
+     * Gets the heading.
      *
-     * @return the heading_serialized_name
+     * @return the heading
      */
     @AuraEnabled
     public PdfHeadingDetection getHeading() {
@@ -12447,7 +12856,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the heading_serialized_name.
+     * Sets the heading.
      *
      * @param heading the new heading
      */
@@ -12462,7 +12871,7 @@ public class IBMDiscoveryV1Models {
 
       PdfSettings ret = (PdfSettings) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for heading_serialized_name
+      // calling custom deserializer for heading
       PdfHeadingDetection newHeading = (PdfHeadingDetection) new PdfHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading_serialized_name'), PdfHeadingDetection.class);
       ret.setHeading(newHeading);
 
@@ -12480,158 +12889,173 @@ public class IBMDiscoveryV1Models {
     private List<QueryAggregation> aggregations_serialized_name;
     private String field_serialized_name;
     private Long histogram_interval_serialized_name;
-    private String timeslice_interval_serialized_name;
     private Double value_serialized_name;
     private Long count_serialized_name;
     private String match_serialized_name;
     private String path_serialized_name;
+    private String timeslice_interval_serialized_name;
     private Boolean anomaly_serialized_name;
     private Long size_serialized_name;
     private TopHitsResults hits_serialized_name;
+ 
     /**
-     * Gets the type_serialized_name.
+     * Gets the xtype.
      *
      * The type of aggregation command used. For example: term, filter, max, min, etc.
      *
-     * @return the type_serialized_name
+     * @return the xtype
      */
     @AuraEnabled
-    public String getType() {
+    public String getXtype() {
       return type_serialized_name;
     }
+ 
     /**
-     * Gets the results_serialized_name.
+     * Gets the results.
      *
-     * @return the results_serialized_name
+     * @return the results
      */
     @AuraEnabled
     public List<AggregationResult> getResults() {
       return results_serialized_name;
     }
+ 
     /**
-     * Gets the matching_results_serialized_name.
+     * Gets the matchingResults.
      *
      * Number of matching results.
      *
-     * @return the matching_results_serialized_name
+     * @return the matchingResults
      */
     @AuraEnabled
     public Long getMatchingResults() {
       return matching_results_serialized_name;
     }
+ 
     /**
-     * Gets the aggregations_serialized_name.
+     * Gets the aggregations.
      *
      * Aggregations returned by the Discovery service.
      *
-     * @return the aggregations_serialized_name
+     * @return the aggregations
      */
     @AuraEnabled
     public List<QueryAggregation> getAggregations() {
       return aggregations_serialized_name;
     }
+ 
     /**
-     * Gets the field_serialized_name.
+     * Gets the field.
      *
      * The field where the aggregation is located in the document.
      *
-     * @return the field_serialized_name
+     * @return the field
      */
     @AuraEnabled
     public String getField() {
       return field_serialized_name;
     }
+ 
     /**
-     * Gets the histogram_interval_serialized_name.
+     * Gets the histogramInterval.
      *
      * Interval of the aggregation. (For 'histogram' type).
      *
-     * @return the histogram_interval_serialized_name
+     * @return the histogramInterval
      */
     @AuraEnabled
     public Long getHistogramInterval() {
       return histogram_interval_serialized_name;
     }
+ 
     /**
-     * Gets the timeslice_interval_serialized_name.
-     *
-     * Interval of the aggregation. Valid date interval values are second/seconds minute/minutes, hour/hours, day/days, week/weeks, month/months, and year/years.
-     *
-     * @return the timeslice_interval_serialized_name
-     */
-    @AuraEnabled
-    public String getTimesliceInterval() {
-      return timeslice_interval_serialized_name;
-    }
-    /**
-     * Gets the value_serialized_name.
+     * Gets the value.
      *
      * Value of the aggregation.
      *
-     * @return the value_serialized_name
+     * @return the value
      */
     @AuraEnabled
     public Double getValue() {
       return value_serialized_name;
     }
+ 
     /**
-     * Gets the count_serialized_name.
+     * Gets the count.
      *
-     * @return the count_serialized_name
+     * @return the count
      */
     @AuraEnabled
     public Long getCount() {
       return count_serialized_name;
     }
+ 
     /**
-     * Gets the match_serialized_name.
+     * Gets the match.
      *
      * The match the aggregated results queried for.
      *
-     * @return the match_serialized_name
+     * @return the match
      */
     @AuraEnabled
     public String getMatch() {
       return match_serialized_name;
     }
+ 
     /**
-     * Gets the path_serialized_name.
+     * Gets the path.
      *
      * The area of the results the aggregation was restricted to.
      *
-     * @return the path_serialized_name
+     * @return the path
      */
     @AuraEnabled
     public String getPath() {
       return path_serialized_name;
     }
+ 
     /**
-     * Gets the anomaly_serialized_name.
+     * Gets the timesliceInterval.
+     *
+     * Interval of the aggregation. Valid date interval values are second/seconds minute/minutes, hour/hours, day/days,
+     * week/weeks, month/months, and year/years.
+     *
+     * @return the timesliceInterval
+     */
+    @AuraEnabled
+    public String getTimesliceInterval() {
+      return timeslice_interval_serialized_name;
+    }
+ 
+    /**
+     * Gets the anomaly.
      *
      * Used to indicate that anomaly detection should be performed. Anomaly detection is used to locate unusual
      * datapoints within a time series.
      *
-     * @return the anomaly_serialized_name
+     * @return the anomaly
      */
     @AuraEnabled
     public Boolean getAnomaly() {
       return anomaly_serialized_name;
     }
+ 
     /**
-     * Gets the size_serialized_name.
+     * Gets the size.
      *
      * Number of top hits returned by the aggregation.
      *
-     * @return the size_serialized_name
+     * @return the size
      */
     @AuraEnabled
     public Long getSize() {
       return size_serialized_name;
     }
+ 
     /**
-     * Gets the hits_serialized_name.
+     * Gets the hits.
      *
-     * @return the hits_serialized_name
+     * @return the hits
      */
     @AuraEnabled
     public TopHitsResults getHits() {
@@ -12639,16 +13063,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the type_serialized_name.
+     * Sets the xtype.
      *
-     * @param typeVar the new typeVar
+     * @param xtype the new xtype
      */
-    public void setType(final String typeVar) {
-      this.type_serialized_name = typeVar;
+    public void setXtype(final String xtype) {
+      this.type_serialized_name = xtype;
     }
 
     /**
-     * Sets the results_serialized_name.
+     * Sets the results.
      *
      * @param results the new results
      */
@@ -12657,7 +13081,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the matching_results_serialized_name.
+     * Sets the matchingResults.
      *
      * @param matchingResults the new matchingResults
      */
@@ -12666,7 +13090,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the aggregations_serialized_name.
+     * Sets the aggregations.
      *
      * @param aggregations the new aggregations
      */
@@ -12675,7 +13099,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the field_serialized_name.
+     * Sets the field.
      *
      * @param field the new field
      */
@@ -12684,25 +13108,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the histogram_interval_serialized_name.
+     * Sets the histogramInterval.
      *
-     * @param interval the new interval
+     * @param histogramInterval the new histogramInterval
      */
-    public void setHistogramInterval(final long interval) {
-      this.histogram_interval_serialized_name = interval;
+    public void setHistogramInterval(final long histogramInterval) {
+      this.histogram_interval_serialized_name = histogramInterval;
     }
 
     /**
-     * Sets the timeslice_interval_serialized_name.
-     *
-     * @param interval the new interval
-     */
-    public void setTimesliceInterval(final String interval) {
-      this.timeslice_interval_serialized_name = interval;
-    }
-
-    /**
-     * Sets the value_serialized_name.
+     * Sets the value.
      *
      * @param value the new value
      */
@@ -12711,7 +13126,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the count_serialized_name.
+     * Sets the count.
      *
      * @param count the new count
      */
@@ -12720,7 +13135,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the match_serialized_name.
+     * Sets the match.
      *
      * @param match the new match
      */
@@ -12729,7 +13144,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the path_serialized_name.
+     * Sets the path.
      *
      * @param path the new path
      */
@@ -12738,7 +13153,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the anomaly_serialized_name.
+     * Sets the timesliceInterval.
+     *
+     * @param timesliceInterval the new timesliceInterval
+     */
+    public void setTimesliceInterval(final String timesliceInterval) {
+      this.timeslice_interval_serialized_name = timesliceInterval;
+    }
+
+    /**
+     * Sets the anomaly.
      *
      * @param anomaly the new anomaly
      */
@@ -12747,7 +13171,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the size_serialized_name.
+     * Sets the size.
      *
      * @param size the new size
      */
@@ -12756,7 +13180,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the hits_serialized_name.
+     * Sets the hits.
      *
      * @param hits the new hits
      */
@@ -12771,7 +13195,7 @@ public class IBMDiscoveryV1Models {
 
       QueryAggregation ret = (QueryAggregation) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for results_serialized_name
+      // calling custom deserializer for results
       List<AggregationResult> newResults = new List<AggregationResult>();
       List<AggregationResult> deserializedResults = ret.getResults();
       if (deserializedResults != null) {
@@ -12784,7 +13208,7 @@ public class IBMDiscoveryV1Models {
         ret.setResults(newResults);
       }
 
-      // calling custom deserializer for aggregations_serialized_name
+      // calling custom deserializer for aggregations
       List<QueryAggregation> newAggregations = new List<QueryAggregation>();
       List<QueryAggregation> deserializedAggregations = ret.getAggregations();
       if (deserializedAggregations != null) {
@@ -12797,7 +13221,7 @@ public class IBMDiscoveryV1Models {
         ret.setAggregations(newAggregations);
       }
 
-      // calling custom deserializer for hits_serialized_name
+      // calling custom deserializer for hits
       TopHitsResults newHits = (TopHitsResults) new TopHitsResults().deserialize(JSON.serialize(ret.getHits()), (Map<String, Object>) jsonMap.get('hits_serialized_name'), TopHitsResults.class);
       ret.setHits(newHits);
 
@@ -12811,20 +13235,21 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryEntitiesContext {
     private String text_serialized_name;
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * Entity text to provide context for the queried entity and rank based on that association. For example, if you
      * wanted to query the city of London in England your query would look for `London` with the context of `England`.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     public String getText() {
       return text_serialized_name;
     }
 
     /**
-     * Sets the text_serialized_name.
+     * Sets the text.
      *
      * @param text the new text
      */
@@ -12840,31 +13265,33 @@ public class IBMDiscoveryV1Models {
   public class QueryEntitiesEntity extends IBMWatsonGenericModel {
     private String text_serialized_name;
     private String type_serialized_name;
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * Entity text content.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     @AuraEnabled
     public String getText() {
       return text_serialized_name;
     }
+ 
     /**
-     * Gets the type_serialized_name.
+     * Gets the xtype.
      *
      * The type of the specified entity.
      *
-     * @return the type_serialized_name
+     * @return the xtype
      */
     @AuraEnabled
-    public String getType() {
+    public String getXtype() {
       return type_serialized_name;
     }
 
     /**
-     * Sets the text_serialized_name.
+     * Sets the text.
      *
      * @param text the new text
      */
@@ -12873,12 +13300,12 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the type_serialized_name.
+     * Sets the xtype.
      *
-     * @param typeVar the new typeVar
+     * @param xtype the new xtype
      */
-    public void setType(final String typeVar) {
-      this.type_serialized_name = typeVar;
+    public void setXtype(final String xtype) {
+      this.type_serialized_name = xtype;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12896,95 +13323,103 @@ public class IBMDiscoveryV1Models {
    * The queryEntities options.
    */
   public class QueryEntitiesOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String feature_serialized_name;
-    private QueryEntitiesEntity entity_serialized_name;
-    private QueryEntitiesContext context_serialized_name;
-    private Long count_serialized_name;
-    private Long evidence_count_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String feature;
+    private QueryEntitiesEntity entity;
+    private QueryEntitiesContext context;
+    private Long count;
+    private Long evidenceCount;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the feature_serialized_name.
+     * Gets the feature.
      *
      * The entity query feature to perform. Supported features are `disambiguate` and `similar_entities`.
      *
-     * @return the feature_serialized_name
+     * @return the feature
      */
     public String feature() {
-      return feature_serialized_name;
+      return feature;
     }
+ 
     /**
-     * Gets the entity_serialized_name.
+     * Gets the entity.
      *
      * A text string that appears within the entity text field.
      *
-     * @return the entity_serialized_name
+     * @return the entity
      */
     public QueryEntitiesEntity entity() {
-      return entity_serialized_name;
+      return entity;
     }
+ 
     /**
-     * Gets the context_serialized_name.
+     * Gets the context.
      *
      * Entity text to provide context for the queried entity and rank based on that association. For example, if you
      * wanted to query the city of London in England your query would look for `London` with the context of `England`.
      *
-     * @return the context_serialized_name
+     * @return the context
      */
     public QueryEntitiesContext context() {
-      return context_serialized_name;
+      return context;
     }
+ 
     /**
-     * Gets the count_serialized_name.
+     * Gets the count.
      *
      * The number of results to return. The default is `10`. The maximum is `1000`.
      *
-     * @return the count_serialized_name
+     * @return the count
      */
     public Long count() {
-      return count_serialized_name;
+      return count;
     }
+ 
     /**
-     * Gets the evidence_count_serialized_name.
+     * Gets the evidenceCount.
      *
      * The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items
      * per query is 10,000.
      *
-     * @return the evidence_count_serialized_name
+     * @return the evidenceCount
      */
     public Long evidenceCount() {
-      return evidence_count_serialized_name;
+      return evidenceCount;
     }
+
     private QueryEntitiesOptions(QueryEntitiesOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      feature_serialized_name = builder.feature_serialized_name;
-      entity_serialized_name = builder.entity_serialized_name;
-      context_serialized_name = builder.context_serialized_name;
-      count_serialized_name = builder.count_serialized_name;
-      evidence_count_serialized_name = builder.evidence_count_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      feature = builder.feature;
+      entity = builder.entity;
+      context = builder.context;
+      count = builder.count;
+      evidenceCount = builder.evidenceCount;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -13003,22 +13438,22 @@ public class IBMDiscoveryV1Models {
    * QueryEntitiesOptions Builder.
    */
   public class QueryEntitiesOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String feature_serialized_name;
-    private QueryEntitiesEntity entity_serialized_name;
-    private QueryEntitiesContext context_serialized_name;
-    private Long count_serialized_name;
-    private Long evidence_count_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String feature;
+    private QueryEntitiesEntity entity;
+    private QueryEntitiesContext context;
+    private Long count;
+    private Long evidenceCount;
 
     private QueryEntitiesOptionsBuilder(QueryEntitiesOptions queryEntitiesOptions) {
-      environment_id_serialized_name = queryEntitiesOptions.environment_id_serialized_name;
-      collection_id_serialized_name = queryEntitiesOptions.collection_id_serialized_name;
-      feature_serialized_name = queryEntitiesOptions.feature_serialized_name;
-      entity_serialized_name = queryEntitiesOptions.entity_serialized_name;
-      context_serialized_name = queryEntitiesOptions.context_serialized_name;
-      count_serialized_name = queryEntitiesOptions.count_serialized_name;
-      evidence_count_serialized_name = queryEntitiesOptions.evidence_count_serialized_name;
+      environmentId = queryEntitiesOptions.environmentId;
+      collectionId = queryEntitiesOptions.collectionId;
+      feature = queryEntitiesOptions.feature;
+      entity = queryEntitiesOptions.entity;
+      context = queryEntitiesOptions.context;
+      count = queryEntitiesOptions.count;
+      evidenceCount = queryEntitiesOptions.evidenceCount;
       this.requestHeaders.putAll(queryEntitiesOptions.requestHeaders());
     }
 
@@ -13035,8 +13470,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public QueryEntitiesOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -13049,79 +13484,79 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the QueryEntitiesOptions builder
      */
     public QueryEntitiesOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the QueryEntitiesOptions builder
      */
     public QueryEntitiesOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the feature_serialized_name.
+     * Set the feature.
      *
      * @param feature the feature
      * @return the QueryEntitiesOptions builder
      */
     public QueryEntitiesOptionsBuilder feature(String feature) {
-      this.feature_serialized_name = feature;
+      this.feature = feature;
       return this;
     }
 
     /**
-     * Set the entity_serialized_name.
+     * Set the entity.
      *
      * @param entity the entity
      * @return the QueryEntitiesOptions builder
      */
     public QueryEntitiesOptionsBuilder entity(QueryEntitiesEntity entity) {
-      this.entity_serialized_name = entity;
+      this.entity = entity;
       return this;
     }
 
     /**
-     * Set the context_serialized_name.
+     * Set the context.
      *
      * @param context the context
      * @return the QueryEntitiesOptions builder
      */
     public QueryEntitiesOptionsBuilder context(QueryEntitiesContext context) {
-      this.context_serialized_name = context;
+      this.context = context;
       return this;
     }
 
     /**
-     * Set the count_serialized_name.
+     * Set the count.
      *
      * @param count the count
      * @return the QueryEntitiesOptions builder
      */
     public QueryEntitiesOptionsBuilder count(Long count) {
-      this.count_serialized_name = count;
+      this.count = count;
       return this;
     }
 
     /**
-     * Set the evidence_count_serialized_name.
+     * Set the evidenceCount.
      *
      * @param evidenceCount the evidenceCount
      * @return the QueryEntitiesOptions builder
      */
     public QueryEntitiesOptionsBuilder evidenceCount(Long evidenceCount) {
-      this.evidence_count_serialized_name = evidenceCount;
+      this.evidenceCount = evidenceCount;
       return this;
     }
 
@@ -13143,10 +13578,11 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryEntitiesResponse extends IBMWatsonResponseModel {
     private List<QueryEntitiesResponseItem> entities_serialized_name;
+ 
     /**
-     * Gets the entities_serialized_name.
+     * Gets the entities.
      *
-     * @return the entities_serialized_name
+     * @return the entities
      */
     @AuraEnabled
     public List<QueryEntitiesResponseItem> getEntities() {
@@ -13154,7 +13590,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the entities_serialized_name.
+     * Sets the entities.
      *
      * @param entities the new entities
      */
@@ -13169,7 +13605,7 @@ public class IBMDiscoveryV1Models {
 
       QueryEntitiesResponse ret = (QueryEntitiesResponse) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for entities_serialized_name
+      // calling custom deserializer for entities
       List<QueryEntitiesResponseItem> newEntities = new List<QueryEntitiesResponseItem>();
       List<QueryEntitiesResponseItem> deserializedEntities = ret.getEntities();
       if (deserializedEntities != null) {
@@ -13193,34 +13629,37 @@ public class IBMDiscoveryV1Models {
     private String text_serialized_name;
     private String type_serialized_name;
     private List<QueryEvidence> evidence_serialized_name;
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * Entity text content.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     @AuraEnabled
     public String getText() {
       return text_serialized_name;
     }
+ 
     /**
-     * Gets the type_serialized_name.
+     * Gets the xtype.
      *
      * The type of the result entity.
      *
-     * @return the type_serialized_name
+     * @return the xtype
      */
     @AuraEnabled
-    public String getType() {
+    public String getXtype() {
       return type_serialized_name;
     }
+ 
     /**
-     * Gets the evidence_serialized_name.
+     * Gets the evidence.
      *
      * List of different evidentiary items to support the result.
      *
-     * @return the evidence_serialized_name
+     * @return the evidence
      */
     @AuraEnabled
     public List<QueryEvidence> getEvidence() {
@@ -13228,7 +13667,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the text_serialized_name.
+     * Sets the text.
      *
      * @param text the new text
      */
@@ -13237,16 +13676,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the type_serialized_name.
+     * Sets the xtype.
      *
-     * @param typeVar the new typeVar
+     * @param xtype the new xtype
      */
-    public void setType(final String typeVar) {
-      this.type_serialized_name = typeVar;
+    public void setXtype(final String xtype) {
+      this.type_serialized_name = xtype;
     }
 
     /**
-     * Sets the evidence_serialized_name.
+     * Sets the evidence.
      *
      * @param evidence the new evidence
      */
@@ -13261,7 +13700,7 @@ public class IBMDiscoveryV1Models {
 
       QueryEntitiesResponseItem ret = (QueryEntitiesResponseItem) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for evidence_serialized_name
+      // calling custom deserializer for evidence
       List<QueryEvidence> newEvidence = new List<QueryEvidence>();
       List<QueryEvidence> deserializedEvidence = ret.getEvidence();
       if (deserializedEvidence != null) {
@@ -13287,56 +13726,61 @@ public class IBMDiscoveryV1Models {
     private Long start_offset_serialized_name;
     private Long end_offset_serialized_name;
     private List<QueryEvidenceEntity> entities_serialized_name;
+ 
     /**
-     * Gets the document_id_serialized_name.
+     * Gets the documentId.
      *
      * The docuemnt ID (as indexed in Discovery) of the evidence location.
      *
-     * @return the document_id_serialized_name
+     * @return the documentId
      */
     @AuraEnabled
     public String getDocumentId() {
       return document_id_serialized_name;
     }
+ 
     /**
-     * Gets the field_serialized_name.
+     * Gets the field.
      *
      * The field of the document where the supporting evidence was identified.
      *
-     * @return the field_serialized_name
+     * @return the field
      */
     @AuraEnabled
     public String getField() {
       return field_serialized_name;
     }
+ 
     /**
-     * Gets the start_offset_serialized_name.
+     * Gets the startOffset.
      *
      * The start location of the evidence in the identified field. This value is inclusive.
      *
-     * @return the start_offset_serialized_name
+     * @return the startOffset
      */
     @AuraEnabled
     public Long getStartOffset() {
       return start_offset_serialized_name;
     }
+ 
     /**
-     * Gets the end_offset_serialized_name.
+     * Gets the endOffset.
      *
      * The end location of the evidence in the identified field. This value is inclusive.
      *
-     * @return the end_offset_serialized_name
+     * @return the endOffset
      */
     @AuraEnabled
     public Long getEndOffset() {
       return end_offset_serialized_name;
     }
+ 
     /**
-     * Gets the entities_serialized_name.
+     * Gets the entities.
      *
      * An array of entity objects that show evidence of the result.
      *
-     * @return the entities_serialized_name
+     * @return the entities
      */
     @AuraEnabled
     public List<QueryEvidenceEntity> getEntities() {
@@ -13344,7 +13788,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the document_id_serialized_name.
+     * Sets the documentId.
      *
      * @param documentId the new documentId
      */
@@ -13353,7 +13797,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the field_serialized_name.
+     * Sets the field.
      *
      * @param field the new field
      */
@@ -13362,7 +13806,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the start_offset_serialized_name.
+     * Sets the startOffset.
      *
      * @param startOffset the new startOffset
      */
@@ -13371,7 +13815,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the end_offset_serialized_name.
+     * Sets the endOffset.
      *
      * @param endOffset the new endOffset
      */
@@ -13380,7 +13824,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the entities_serialized_name.
+     * Sets the entities.
      *
      * @param entities the new entities
      */
@@ -13395,7 +13839,7 @@ public class IBMDiscoveryV1Models {
 
       QueryEvidence ret = (QueryEvidence) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for entities_serialized_name
+      // calling custom deserializer for entities
       List<QueryEvidenceEntity> newEntities = new List<QueryEvidenceEntity>();
       List<QueryEvidenceEntity> deserializedEntities = ret.getEntities();
       if (deserializedEntities != null) {
@@ -13420,45 +13864,49 @@ public class IBMDiscoveryV1Models {
     private String text_serialized_name;
     private Long start_offset_serialized_name;
     private Long end_offset_serialized_name;
+ 
     /**
-     * Gets the type_serialized_name.
+     * Gets the xtype.
      *
      * The entity type for this entity. Possible types vary based on model used.
      *
-     * @return the type_serialized_name
+     * @return the xtype
      */
     @AuraEnabled
-    public String getType() {
+    public String getXtype() {
       return type_serialized_name;
     }
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * The original text of this entity as found in the evidence field.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     @AuraEnabled
     public String getText() {
       return text_serialized_name;
     }
+ 
     /**
-     * Gets the start_offset_serialized_name.
+     * Gets the startOffset.
      *
      * The start location of the entity text in the identified field. This value is inclusive.
      *
-     * @return the start_offset_serialized_name
+     * @return the startOffset
      */
     @AuraEnabled
     public Long getStartOffset() {
       return start_offset_serialized_name;
     }
+ 
     /**
-     * Gets the end_offset_serialized_name.
+     * Gets the endOffset.
      *
      * The end location of the entity text in the identified field. This value is exclusive.
      *
-     * @return the end_offset_serialized_name
+     * @return the endOffset
      */
     @AuraEnabled
     public Long getEndOffset() {
@@ -13466,16 +13914,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the type_serialized_name.
+     * Sets the xtype.
      *
-     * @param typeVar the new typeVar
+     * @param xtype the new xtype
      */
-    public void setType(final String typeVar) {
-      this.type_serialized_name = typeVar;
+    public void setXtype(final String xtype) {
+      this.type_serialized_name = xtype;
     }
 
     /**
-     * Sets the text_serialized_name.
+     * Sets the text.
      *
      * @param text the new text
      */
@@ -13484,7 +13932,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the start_offset_serialized_name.
+     * Sets the startOffset.
      *
      * @param startOffset the new startOffset
      */
@@ -13493,7 +13941,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the end_offset_serialized_name.
+     * Sets the endOffset.
      *
      * @param endOffset the new endOffset
      */
@@ -13518,29 +13966,31 @@ public class IBMDiscoveryV1Models {
   public class QueryFilterType {
     private List<String> exclude_serialized_name;
     private List<String> include_serialized_name;
+ 
     /**
-     * Gets the exclude_serialized_name.
+     * Gets the exclude.
      *
      * A comma-separated list of types to exclude.
      *
-     * @return the exclude_serialized_name
+     * @return the exclude
      */
     public List<String> getExclude() {
       return exclude_serialized_name;
     }
+ 
     /**
-     * Gets the include_serialized_name.
+     * Gets the include.
      *
      * A comma-separated list of types to include. All other types are excluded.
      *
-     * @return the include_serialized_name
+     * @return the include
      */
     public List<String> getInclude() {
       return include_serialized_name;
     }
 
     /**
-     * Sets the exclude_serialized_name.
+     * Sets the exclude.
      *
      * @param exclude the new exclude
      */
@@ -13549,7 +13999,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the include_serialized_name.
+     * Sets the include.
      *
      * @param include the new include
      */
@@ -13563,74 +14013,79 @@ public class IBMDiscoveryV1Models {
    * The queryLog options.
    */
   public class QueryLogOptions extends IBMWatsonOptionsModel {
-    private String filter_serialized_name;
-    private String query_serialized_name;
-    private Long count_serialized_name;
-    private Long offset_serialized_name;
-    private List<String> sort_serialized_name;
+    private String filter;
+    private String query;
+    private Long count;
+    private Long offset;
+    private List<String> xsort;
+ 
     /**
-     * Gets the filter_serialized_name.
+     * Gets the filter.
      *
-     * A cacheable query that limits the documents returned to exclude any documents that don't mention the query
-     * content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts
-     * in the data set.
+     * A cacheable query that excludes documents that don't mention the query content. Filter searches are better for
+     * metadata-type searches and for assessing the concepts in the data set.
      *
-     * @return the filter_serialized_name
+     * @return the filter
      */
     public String filter() {
-      return filter_serialized_name;
+      return filter;
     }
+ 
     /**
-     * Gets the query_serialized_name.
+     * Gets the query.
      *
      * A query search returns all documents in your data set with full enrichments and full text, but with the most
      * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
      * cannot use **natural_language_query** and **query** at the same time.
      *
-     * @return the query_serialized_name
+     * @return the query
      */
     public String query() {
-      return query_serialized_name;
+      return query;
     }
+ 
     /**
-     * Gets the count_serialized_name.
+     * Gets the count.
      *
      * Number of results to return.
      *
-     * @return the count_serialized_name
+     * @return the count
      */
     public Long count() {
-      return count_serialized_name;
+      return count;
     }
+ 
     /**
-     * Gets the offset_serialized_name.
+     * Gets the offset.
      *
      * The number of query results to skip at the beginning. For example, if the total number of results that are
-     * returned is 10, and the offset is 8, it returns the last two results.
+     * returned is 10 and the offset is 8, it returns the last two results.
      *
-     * @return the offset_serialized_name
+     * @return the offset
      */
     public Long offset() {
-      return offset_serialized_name;
+      return offset;
     }
+ 
     /**
-     * Gets the sort_serialized_name.
+     * Gets the xsort.
      *
-     * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by
+     * A comma-separated list of fields in the document to sort on. You can optionally specify a sort direction by
      * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
      * prefix is specified.
      *
-     * @return the sort_serialized_name
+     * @return the xsort
      */
-    public List<String> sortField() {
-      return sort_serialized_name;
+    public List<String> xsort() {
+      return xsort;
     }
+
     private QueryLogOptions(QueryLogOptionsBuilder builder) {
-      filter_serialized_name = builder.filter_serialized_name;
-      query_serialized_name = builder.query_serialized_name;
-      count_serialized_name = builder.count_serialized_name;
-      offset_serialized_name = builder.offset_serialized_name;
-      sort_serialized_name = builder.sort_serialized_name;
+      filter = builder.filter;
+      query = builder.query;
+      count = builder.count;
+      offset = builder.offset;
+      xsort = builder.xsort;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -13649,18 +14104,18 @@ public class IBMDiscoveryV1Models {
    * QueryLogOptions Builder.
    */
   public class QueryLogOptionsBuilder extends IBMWatsonOptionsModel {
-    private String filter_serialized_name;
-    private String query_serialized_name;
-    private Long count_serialized_name;
-    private Long offset_serialized_name;
-    private List<String> sort_serialized_name;
+    private String filter;
+    private String query;
+    private Long count;
+    private Long offset;
+    private List<String> xsort;
 
     private QueryLogOptionsBuilder(QueryLogOptions queryLogOptions) {
-      filter_serialized_name = queryLogOptions.filter_serialized_name;
-      query_serialized_name = queryLogOptions.query_serialized_name;
-      count_serialized_name = queryLogOptions.count_serialized_name;
-      offset_serialized_name = queryLogOptions.offset_serialized_name;
-      sort_serialized_name = queryLogOptions.sort_serialized_name;
+      filter = queryLogOptions.filter;
+      query = queryLogOptions.query;
+      count = queryLogOptions.count;
+      offset = queryLogOptions.offset;
+      xsort = queryLogOptions.xsort;
       this.requestHeaders.putAll(queryLogOptions.requestHeaders());
     }
 
@@ -13680,73 +14135,73 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an sortVar to sort_serialized_name.
+     * Adds an xsort to xsort.
      *
-     * @param sortVar the new sortVar
+     * @param xsort the new xsort
      * @return the QueryLogOptions builder
      */
-    public QueryLogOptionsBuilder addSort(String sortVar) {
-      IBMWatsonValidator.notNull(sortVar, 'sortVar cannot be null');
-      if (this.sort_serialized_name == null) {
-        this.sort_serialized_name = new List<String>();
+    public QueryLogOptionsBuilder addXsort(String xsort) {
+      IBMWatsonValidator.notNull(xsort, 'xsort cannot be null');
+      if (this.xsort == null) {
+        this.xsort = new List<String>();
       }
-      this.sort_serialized_name.add(sortVar);
+      this.xsort.add(xsort);
       return this;
     }
 
     /**
-     * Set the filter_serialized_name.
+     * Set the filter.
      *
      * @param filter the filter
      * @return the QueryLogOptions builder
      */
     public QueryLogOptionsBuilder filter(String filter) {
-      this.filter_serialized_name = filter;
+      this.filter = filter;
       return this;
     }
 
     /**
-     * Set the query_serialized_name.
+     * Set the query.
      *
      * @param query the query
      * @return the QueryLogOptions builder
      */
     public QueryLogOptionsBuilder query(String query) {
-      this.query_serialized_name = query;
+      this.query = query;
       return this;
     }
 
     /**
-     * Set the count_serialized_name.
+     * Set the count.
      *
      * @param count the count
      * @return the QueryLogOptions builder
      */
     public QueryLogOptionsBuilder count(Long count) {
-      this.count_serialized_name = count;
+      this.count = count;
       return this;
     }
 
     /**
-     * Set the offset_serialized_name.
+     * Set the offset.
      *
      * @param offset the offset
      * @return the QueryLogOptions builder
      */
     public QueryLogOptionsBuilder offset(Long offset) {
-      this.offset_serialized_name = offset;
+      this.offset = offset;
       return this;
     }
 
     /**
-     * Set the sort_serialized_name.
-     * Existing sort_serialized_name will be replaced.
+     * Set the xsort.
+     * Existing xsort will be replaced.
      *
-     * @param sortVar the sortVar
+     * @param xsort the xsort
      * @return the QueryLogOptions builder
      */
-    public QueryLogOptionsBuilder sortField(List<String> sortVar) {
-      this.sort_serialized_name = sortVar;
+    public QueryLogOptionsBuilder xsort(List<String> xsort) {
+      this.xsort = xsort;
       return this;
     }
 
@@ -13767,259 +14222,276 @@ public class IBMDiscoveryV1Models {
    * The queryNotices options.
    */
   public class QueryNoticesOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String filter_serialized_name;
-    private String query_serialized_name;
-    private String natural_language_query_serialized_name;
-    private Boolean passages_serialized_name;
-    private String aggregation_serialized_name;
-    private Long count_serialized_name;
-    private List<String> return_serialized_name;
-    private Long offset_serialized_name;
-    private List<String> sort_serialized_name;
-    private Boolean highlight_serialized_name;
-    private List<String> passages_fields_serialized_name;
-    private Long passages_count_serialized_name;
-    private Long passages_characters_serialized_name;
-    private String deduplicate_field_serialized_name;
-    private Boolean similar_serialized_name;
-    private List<String> similar_document_ids_serialized_name;
-    private List<String> similar_fields_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String filter;
+    private String query;
+    private String naturalLanguageQuery;
+    private Boolean passages;
+    private String aggregation;
+    private Long count;
+    private List<String> returnFields;
+    private Long offset;
+    private List<String> xsort;
+    private Boolean highlight;
+    private List<String> passagesFields;
+    private Long passagesCount;
+    private Long passagesCharacters;
+    private String deduplicateField;
+    private Boolean similar;
+    private List<String> similarDocumentIds;
+    private List<String> similarFields;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the filter_serialized_name.
+     * Gets the filter.
      *
-     * A cacheable query that limits the documents returned to exclude any documents that don't mention the query
-     * content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts
-     * in the data set.
+     * A cacheable query that excludes documents that don't mention the query content. Filter searches are better for
+     * metadata-type searches and for assessing the concepts in the data set.
      *
-     * @return the filter_serialized_name
+     * @return the filter
      */
     public String filter() {
-      return filter_serialized_name;
+      return filter;
     }
+ 
     /**
-     * Gets the query_serialized_name.
+     * Gets the query.
      *
      * A query search returns all documents in your data set with full enrichments and full text, but with the most
      * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
      * cannot use **natural_language_query** and **query** at the same time.
      *
-     * @return the query_serialized_name
+     * @return the query
      */
     public String query() {
-      return query_serialized_name;
+      return query;
     }
+ 
     /**
-     * Gets the natural_language_query_serialized_name.
+     * Gets the naturalLanguageQuery.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language
      * understanding. You cannot use **natural_language_query** and **query** at the same time.
      *
-     * @return the natural_language_query_serialized_name
+     * @return the naturalLanguageQuery
      */
     public String naturalLanguageQuery() {
-      return natural_language_query_serialized_name;
+      return naturalLanguageQuery;
     }
+ 
     /**
-     * Gets the passages_serialized_name.
+     * Gets the passages.
      *
      * A passages query that returns the most relevant passages from the results.
      *
-     * @return the passages_serialized_name
+     * @return the passages
      */
     public Boolean passages() {
-      return passages_serialized_name;
+      return passages;
     }
+ 
     /**
-     * Gets the aggregation_serialized_name.
+     * Gets the aggregation.
      *
-     * An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are
-     * useful for building applications, because you can use them to build lists, tables, and time series. For a full
-     * list of possible aggregrations, see the Query reference.
+     * An aggregation search that returns an exact answer by combining query search with filters. Useful for
+     * applications to build lists, tables, and time series. For a full list of possible aggregations, see the Query
+     * reference.
      *
-     * @return the aggregation_serialized_name
+     * @return the aggregation
      */
     public String aggregation() {
-      return aggregation_serialized_name;
+      return aggregation;
     }
+ 
     /**
-     * Gets the count_serialized_name.
+     * Gets the count.
      *
      * Number of results to return.
      *
-     * @return the count_serialized_name
+     * @return the count
      */
     public Long count() {
-      return count_serialized_name;
+      return count;
     }
+ 
     /**
-     * Gets the return_serialized_name.
+     * Gets the returnFields.
      *
-     * A comma separated list of the portion of the document hierarchy to return.
+     * A comma-separated list of the portion of the document hierarchy to return.
      *
-     * @return the return_serialized_name
+     * @return the returnFields
      */
-    public List<String> returnField() {
-      return return_serialized_name;
+    public List<String> returnFields() {
+      return returnFields;
     }
+ 
     /**
-     * Gets the offset_serialized_name.
+     * Gets the offset.
      *
      * The number of query results to skip at the beginning. For example, if the total number of results that are
-     * returned is 10, and the offset is 8, it returns the last two results.
+     * returned is 10 and the offset is 8, it returns the last two results.
      *
-     * @return the offset_serialized_name
+     * @return the offset
      */
     public Long offset() {
-      return offset_serialized_name;
+      return offset;
     }
+ 
     /**
-     * Gets the sort_serialized_name.
+     * Gets the xsort.
      *
-     * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by
+     * A comma-separated list of fields in the document to sort on. You can optionally specify a sort direction by
      * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
      * prefix is specified.
      *
-     * @return the sort_serialized_name
+     * @return the xsort
      */
-    public List<String> sortField() {
-      return sort_serialized_name;
+    public List<String> xsort() {
+      return xsort;
     }
+ 
     /**
-     * Gets the highlight_serialized_name.
+     * Gets the highlight.
      *
-     * When true a highlight field is returned for each result which contains the fields that match the query with
-     * `<em></em>` tags around the matching query terms. Defaults to false.
+     * When true, a highlight field is returned for each result which contains the fields which match the query with
+     * `<em></em>` tags around the matching query terms.
      *
-     * @return the highlight_serialized_name
+     * @return the highlight
      */
     public Boolean highlight() {
-      return highlight_serialized_name;
+      return highlight;
     }
+ 
     /**
-     * Gets the passages_fields_serialized_name.
+     * Gets the passagesFields.
      *
      * A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all
      * top-level fields are included.
      *
-     * @return the passages_fields_serialized_name
+     * @return the passagesFields
      */
     public List<String> passagesFields() {
-      return passages_fields_serialized_name;
+      return passagesFields;
     }
+ 
     /**
-     * Gets the passages_count_serialized_name.
+     * Gets the passagesCount.
      *
      * The maximum number of passages to return. The search returns fewer passages if the requested total is not found.
-     * The default is `10`. The maximum is `100`.
      *
-     * @return the passages_count_serialized_name
+     * @return the passagesCount
      */
     public Long passagesCount() {
-      return passages_count_serialized_name;
+      return passagesCount;
     }
+ 
     /**
-     * Gets the passages_characters_serialized_name.
+     * Gets the passagesCharacters.
      *
-     * The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`.
-     * The maximum is `2000`.
+     * The approximate number of characters that any one passage will have.
      *
-     * @return the passages_characters_serialized_name
+     * @return the passagesCharacters
      */
     public Long passagesCharacters() {
-      return passages_characters_serialized_name;
+      return passagesCharacters;
     }
+ 
     /**
-     * Gets the deduplicate_field_serialized_name.
+     * Gets the deduplicateField.
      *
      * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
      * comparison is limited to the current query only, **offset** is not considered. This parameter is currently Beta
      * functionality.
      *
-     * @return the deduplicate_field_serialized_name
+     * @return the deduplicateField
      */
     public String deduplicateField() {
-      return deduplicate_field_serialized_name;
+      return deduplicateField;
     }
+ 
     /**
-     * Gets the similar_serialized_name.
+     * Gets the similar.
      *
      * When `true`, results are returned based on their similarity to the document IDs specified in the
      * **similar.document_ids** parameter.
      *
-     * @return the similar_serialized_name
+     * @return the similar
      */
     public Boolean similar() {
-      return similar_serialized_name;
+      return similar;
     }
+ 
     /**
-     * Gets the similar_document_ids_serialized_name.
+     * Gets the similarDocumentIds.
      *
-     * A comma-separated list of document IDs that will be used to find similar documents.
+     * A comma-separated list of document IDs to find similar documents.
      *
-     * **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
-     * the document similarity search to include the natural language query. Other query parameters, such as **filter**
-     * and **query** are subsequently applied and reduce the query scope.
+     * **Tip:** Include the **natural_language_query** parameter to expand the scope of the document similarity search
+     * with the natural language query. Other query parameters, such as **filter** and **query**, are subsequently
+     * applied and reduce the scope.
      *
-     * @return the similar_document_ids_serialized_name
+     * @return the similarDocumentIds
      */
     public List<String> similarDocumentIds() {
-      return similar_document_ids_serialized_name;
+      return similarDocumentIds;
     }
+ 
     /**
-     * Gets the similar_fields_serialized_name.
+     * Gets the similarFields.
      *
-     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents.
-     * If not specified, the entire document is used for comparison.
+     * A comma-separated list of field names that are used as a basis for comparison to identify similar documents. If
+     * not specified, the entire document is used for comparison.
      *
-     * @return the similar_fields_serialized_name
+     * @return the similarFields
      */
     public List<String> similarFields() {
-      return similar_fields_serialized_name;
+      return similarFields;
     }
+
     private QueryNoticesOptions(QueryNoticesOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      filter_serialized_name = builder.filter_serialized_name;
-      query_serialized_name = builder.query_serialized_name;
-      natural_language_query_serialized_name = builder.natural_language_query_serialized_name;
-      passages_serialized_name = builder.passages_serialized_name;
-      aggregation_serialized_name = builder.aggregation_serialized_name;
-      count_serialized_name = builder.count_serialized_name;
-      return_serialized_name = builder.return_serialized_name;
-      offset_serialized_name = builder.offset_serialized_name;
-      sort_serialized_name = builder.sort_serialized_name;
-      highlight_serialized_name = builder.highlight_serialized_name;
-      passages_fields_serialized_name = builder.passages_fields_serialized_name;
-      passages_count_serialized_name = builder.passages_count_serialized_name;
-      passages_characters_serialized_name = builder.passages_characters_serialized_name;
-      deduplicate_field_serialized_name = builder.deduplicate_field_serialized_name;
-      similar_serialized_name = builder.similar_serialized_name;
-      similar_document_ids_serialized_name = builder.similar_document_ids_serialized_name;
-      similar_fields_serialized_name = builder.similar_fields_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      filter = builder.filter;
+      query = builder.query;
+      naturalLanguageQuery = builder.naturalLanguageQuery;
+      passages = builder.passages;
+      aggregation = builder.aggregation;
+      count = builder.count;
+      returnFields = builder.returnFields;
+      offset = builder.offset;
+      xsort = builder.xsort;
+      highlight = builder.highlight;
+      passagesFields = builder.passagesFields;
+      passagesCount = builder.passagesCount;
+      passagesCharacters = builder.passagesCharacters;
+      deduplicateField = builder.deduplicateField;
+      similar = builder.similar;
+      similarDocumentIds = builder.similarDocumentIds;
+      similarFields = builder.similarFields;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -14038,46 +14510,46 @@ public class IBMDiscoveryV1Models {
    * QueryNoticesOptions Builder.
    */
   public class QueryNoticesOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String filter_serialized_name;
-    private String query_serialized_name;
-    private String natural_language_query_serialized_name;
-    private Boolean passages_serialized_name;
-    private String aggregation_serialized_name;
-    private Long count_serialized_name;
-    private List<String> return_serialized_name;
-    private Long offset_serialized_name;
-    private List<String> sort_serialized_name;
-    private Boolean highlight_serialized_name;
-    private List<String> passages_fields_serialized_name;
-    private Long passages_count_serialized_name;
-    private Long passages_characters_serialized_name;
-    private String deduplicate_field_serialized_name;
-    private Boolean similar_serialized_name;
-    private List<String> similar_document_ids_serialized_name;
-    private List<String> similar_fields_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String filter;
+    private String query;
+    private String naturalLanguageQuery;
+    private Boolean passages;
+    private String aggregation;
+    private Long count;
+    private List<String> returnFields;
+    private Long offset;
+    private List<String> xsort;
+    private Boolean highlight;
+    private List<String> passagesFields;
+    private Long passagesCount;
+    private Long passagesCharacters;
+    private String deduplicateField;
+    private Boolean similar;
+    private List<String> similarDocumentIds;
+    private List<String> similarFields;
 
     private QueryNoticesOptionsBuilder(QueryNoticesOptions queryNoticesOptions) {
-      environment_id_serialized_name = queryNoticesOptions.environment_id_serialized_name;
-      collection_id_serialized_name = queryNoticesOptions.collection_id_serialized_name;
-      filter_serialized_name = queryNoticesOptions.filter_serialized_name;
-      query_serialized_name = queryNoticesOptions.query_serialized_name;
-      natural_language_query_serialized_name = queryNoticesOptions.natural_language_query_serialized_name;
-      passages_serialized_name = queryNoticesOptions.passages_serialized_name;
-      aggregation_serialized_name = queryNoticesOptions.aggregation_serialized_name;
-      count_serialized_name = queryNoticesOptions.count_serialized_name;
-      return_serialized_name = queryNoticesOptions.return_serialized_name;
-      offset_serialized_name = queryNoticesOptions.offset_serialized_name;
-      sort_serialized_name = queryNoticesOptions.sort_serialized_name;
-      highlight_serialized_name = queryNoticesOptions.highlight_serialized_name;
-      passages_fields_serialized_name = queryNoticesOptions.passages_fields_serialized_name;
-      passages_count_serialized_name = queryNoticesOptions.passages_count_serialized_name;
-      passages_characters_serialized_name = queryNoticesOptions.passages_characters_serialized_name;
-      deduplicate_field_serialized_name = queryNoticesOptions.deduplicate_field_serialized_name;
-      similar_serialized_name = queryNoticesOptions.similar_serialized_name;
-      similar_document_ids_serialized_name = queryNoticesOptions.similar_document_ids_serialized_name;
-      similar_fields_serialized_name = queryNoticesOptions.similar_fields_serialized_name;
+      environmentId = queryNoticesOptions.environmentId;
+      collectionId = queryNoticesOptions.collectionId;
+      filter = queryNoticesOptions.filter;
+      query = queryNoticesOptions.query;
+      naturalLanguageQuery = queryNoticesOptions.naturalLanguageQuery;
+      passages = queryNoticesOptions.passages;
+      aggregation = queryNoticesOptions.aggregation;
+      count = queryNoticesOptions.count;
+      returnFields = queryNoticesOptions.returnFields;
+      offset = queryNoticesOptions.offset;
+      xsort = queryNoticesOptions.xsort;
+      highlight = queryNoticesOptions.highlight;
+      passagesFields = queryNoticesOptions.passagesFields;
+      passagesCount = queryNoticesOptions.passagesCount;
+      passagesCharacters = queryNoticesOptions.passagesCharacters;
+      deduplicateField = queryNoticesOptions.deduplicateField;
+      similar = queryNoticesOptions.similar;
+      similarDocumentIds = queryNoticesOptions.similarDocumentIds;
+      similarFields = queryNoticesOptions.similarFields;
       this.requestHeaders.putAll(queryNoticesOptions.requestHeaders());
     }
 
@@ -14094,8 +14566,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public QueryNoticesOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -14108,291 +14580,291 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an returnVar to return_serialized_name.
+     * Adds an returnFields to returnFields.
      *
-     * @param returnVar the new returnVar
+     * @param returnFields the new returnFields
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder addReturn(String returnVar) {
-      IBMWatsonValidator.notNull(returnVar, 'returnVar cannot be null');
-      if (this.return_serialized_name == null) {
-        this.return_serialized_name = new List<String>();
+    public QueryNoticesOptionsBuilder addReturnFields(String returnFields) {
+      IBMWatsonValidator.notNull(returnFields, 'returnFields cannot be null');
+      if (this.returnFields == null) {
+        this.returnFields = new List<String>();
       }
-      this.return_serialized_name.add(returnVar);
+      this.returnFields.add(returnFields);
       return this;
     }
 
     /**
-     * Adds an sortVar to sort_serialized_name.
+     * Adds an xsort to xsort.
      *
-     * @param sortVar the new sortVar
+     * @param xsort the new xsort
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder addSort(String sortVar) {
-      IBMWatsonValidator.notNull(sortVar, 'sortVar cannot be null');
-      if (this.sort_serialized_name == null) {
-        this.sort_serialized_name = new List<String>();
+    public QueryNoticesOptionsBuilder addXsort(String xsort) {
+      IBMWatsonValidator.notNull(xsort, 'xsort cannot be null');
+      if (this.xsort == null) {
+        this.xsort = new List<String>();
       }
-      this.sort_serialized_name.add(sortVar);
+      this.xsort.add(xsort);
       return this;
     }
 
     /**
-     * Adds an passagesFields to passages_fields_serialized_name.
+     * Adds an passagesFields to passagesFields.
      *
      * @param passagesFields the new passagesFields
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder addPassagesFields(String passagesFields) {
       IBMWatsonValidator.notNull(passagesFields, 'passagesFields cannot be null');
-      if (this.passages_fields_serialized_name == null) {
-        this.passages_fields_serialized_name = new List<String>();
+      if (this.passagesFields == null) {
+        this.passagesFields = new List<String>();
       }
-      this.passages_fields_serialized_name.add(passagesFields);
+      this.passagesFields.add(passagesFields);
       return this;
     }
 
     /**
-     * Adds an similarDocumentIds to similar_document_ids_serialized_name.
+     * Adds an similarDocumentIds to similarDocumentIds.
      *
      * @param similarDocumentIds the new similarDocumentIds
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder addSimilarDocumentIds(String similarDocumentIds) {
       IBMWatsonValidator.notNull(similarDocumentIds, 'similarDocumentIds cannot be null');
-      if (this.similar_document_ids_serialized_name == null) {
-        this.similar_document_ids_serialized_name = new List<String>();
+      if (this.similarDocumentIds == null) {
+        this.similarDocumentIds = new List<String>();
       }
-      this.similar_document_ids_serialized_name.add(similarDocumentIds);
+      this.similarDocumentIds.add(similarDocumentIds);
       return this;
     }
 
     /**
-     * Adds an similarFields to similar_fields_serialized_name.
+     * Adds an similarFields to similarFields.
      *
      * @param similarFields the new similarFields
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder addSimilarFields(String similarFields) {
       IBMWatsonValidator.notNull(similarFields, 'similarFields cannot be null');
-      if (this.similar_fields_serialized_name == null) {
-        this.similar_fields_serialized_name = new List<String>();
+      if (this.similarFields == null) {
+        this.similarFields = new List<String>();
       }
-      this.similar_fields_serialized_name.add(similarFields);
+      this.similarFields.add(similarFields);
       return this;
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the filter_serialized_name.
+     * Set the filter.
      *
      * @param filter the filter
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder filter(String filter) {
-      this.filter_serialized_name = filter;
+      this.filter = filter;
       return this;
     }
 
     /**
-     * Set the query_serialized_name.
+     * Set the query.
      *
      * @param query the query
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder query(String query) {
-      this.query_serialized_name = query;
+      this.query = query;
       return this;
     }
 
     /**
-     * Set the natural_language_query_serialized_name.
+     * Set the naturalLanguageQuery.
      *
      * @param naturalLanguageQuery the naturalLanguageQuery
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
-      this.natural_language_query_serialized_name = naturalLanguageQuery;
+      this.naturalLanguageQuery = naturalLanguageQuery;
       return this;
     }
 
     /**
-     * Set the passages_serialized_name.
+     * Set the passages.
      *
      * @param passages the passages
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder passages(Boolean passages) {
-      this.passages_serialized_name = passages;
+      this.passages = passages;
       return this;
     }
 
     /**
-     * Set the aggregation_serialized_name.
+     * Set the aggregation.
      *
      * @param aggregation the aggregation
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder aggregation(String aggregation) {
-      this.aggregation_serialized_name = aggregation;
+      this.aggregation = aggregation;
       return this;
     }
 
     /**
-     * Set the count_serialized_name.
+     * Set the count.
      *
      * @param count the count
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder count(Long count) {
-      this.count_serialized_name = count;
+      this.count = count;
       return this;
     }
 
     /**
-     * Set the return_serialized_name.
-     * Existing return_serialized_name will be replaced.
+     * Set the returnFields.
+     * Existing returnFields will be replaced.
      *
-     * @param returnVar the returnVar
+     * @param returnFields the returnFields
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder returnField(List<String> returnVar) {
-      this.return_serialized_name = returnVar;
+    public QueryNoticesOptionsBuilder returnFields(List<String> returnFields) {
+      this.returnFields = returnFields;
       return this;
     }
 
     /**
-     * Set the offset_serialized_name.
+     * Set the offset.
      *
      * @param offset the offset
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder offset(Long offset) {
-      this.offset_serialized_name = offset;
+      this.offset = offset;
       return this;
     }
 
     /**
-     * Set the sort_serialized_name.
-     * Existing sort_serialized_name will be replaced.
+     * Set the xsort.
+     * Existing xsort will be replaced.
      *
-     * @param sortVar the sortVar
+     * @param xsort the xsort
      * @return the QueryNoticesOptions builder
      */
-    public QueryNoticesOptionsBuilder sortField(List<String> sortVar) {
-      this.sort_serialized_name = sortVar;
+    public QueryNoticesOptionsBuilder xsort(List<String> xsort) {
+      this.xsort = xsort;
       return this;
     }
 
     /**
-     * Set the highlight_serialized_name.
+     * Set the highlight.
      *
      * @param highlight the highlight
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder highlight(Boolean highlight) {
-      this.highlight_serialized_name = highlight;
+      this.highlight = highlight;
       return this;
     }
 
     /**
-     * Set the passages_fields_serialized_name.
-     * Existing passages_fields_serialized_name will be replaced.
+     * Set the passagesFields.
+     * Existing passagesFields will be replaced.
      *
      * @param passagesFields the passagesFields
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder passagesFields(List<String> passagesFields) {
-      this.passages_fields_serialized_name = passagesFields;
+      this.passagesFields = passagesFields;
       return this;
     }
 
     /**
-     * Set the passages_count_serialized_name.
+     * Set the passagesCount.
      *
      * @param passagesCount the passagesCount
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder passagesCount(Long passagesCount) {
-      this.passages_count_serialized_name = passagesCount;
+      this.passagesCount = passagesCount;
       return this;
     }
 
     /**
-     * Set the passages_characters_serialized_name.
+     * Set the passagesCharacters.
      *
      * @param passagesCharacters the passagesCharacters
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder passagesCharacters(Long passagesCharacters) {
-      this.passages_characters_serialized_name = passagesCharacters;
+      this.passagesCharacters = passagesCharacters;
       return this;
     }
 
     /**
-     * Set the deduplicate_field_serialized_name.
+     * Set the deduplicateField.
      *
      * @param deduplicateField the deduplicateField
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder deduplicateField(String deduplicateField) {
-      this.deduplicate_field_serialized_name = deduplicateField;
+      this.deduplicateField = deduplicateField;
       return this;
     }
 
     /**
-     * Set the similar_serialized_name.
+     * Set the similar.
      *
      * @param similar the similar
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder similar(Boolean similar) {
-      this.similar_serialized_name = similar;
+      this.similar = similar;
       return this;
     }
 
     /**
-     * Set the similar_document_ids_serialized_name.
-     * Existing similar_document_ids_serialized_name will be replaced.
+     * Set the similarDocumentIds.
+     * Existing similarDocumentIds will be replaced.
      *
      * @param similarDocumentIds the similarDocumentIds
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder similarDocumentIds(List<String> similarDocumentIds) {
-      this.similar_document_ids_serialized_name = similarDocumentIds;
+      this.similarDocumentIds = similarDocumentIds;
       return this;
     }
 
     /**
-     * Set the similar_fields_serialized_name.
-     * Existing similar_fields_serialized_name will be replaced.
+     * Set the similarFields.
+     * Existing similarFields will be replaced.
      *
      * @param similarFields the similarFields
      * @return the QueryNoticesOptions builder
      */
     public QueryNoticesOptionsBuilder similarFields(List<String> similarFields) {
-      this.similar_fields_serialized_name = similarFields;
+      this.similarFields = similarFields;
       return this;
     }
 
@@ -14418,46 +14890,51 @@ public class IBMDiscoveryV1Models {
     private List<QueryAggregation> aggregations_serialized_name;
     private List<QueryPassages> passages_serialized_name;
     private Long duplicates_removed_serialized_name;
+ 
     /**
-     * Gets the matching_results_serialized_name.
+     * Gets the matchingResults.
      *
-     * @return the matching_results_serialized_name
+     * @return the matchingResults
      */
     @AuraEnabled
     public Long getMatchingResults() {
       return matching_results_serialized_name;
     }
+ 
     /**
-     * Gets the results_serialized_name.
+     * Gets the results.
      *
-     * @return the results_serialized_name
+     * @return the results
      */
     @AuraEnabled
     public List<QueryNoticesResult> getResults() {
       return results_serialized_name;
     }
+ 
     /**
-     * Gets the aggregations_serialized_name.
+     * Gets the aggregations.
      *
-     * @return the aggregations_serialized_name
+     * @return the aggregations
      */
     @AuraEnabled
     public List<QueryAggregation> getAggregations() {
       return aggregations_serialized_name;
     }
+ 
     /**
-     * Gets the passages_serialized_name.
+     * Gets the passages.
      *
-     * @return the passages_serialized_name
+     * @return the passages
      */
     @AuraEnabled
     public List<QueryPassages> getPassages() {
       return passages_serialized_name;
     }
+ 
     /**
-     * Gets the duplicates_removed_serialized_name.
+     * Gets the duplicatesRemoved.
      *
-     * @return the duplicates_removed_serialized_name
+     * @return the duplicatesRemoved
      */
     @AuraEnabled
     public Long getDuplicatesRemoved() {
@@ -14465,7 +14942,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the matching_results_serialized_name.
+     * Sets the matchingResults.
      *
      * @param matchingResults the new matchingResults
      */
@@ -14474,7 +14951,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the results_serialized_name.
+     * Sets the results.
      *
      * @param results the new results
      */
@@ -14483,7 +14960,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the aggregations_serialized_name.
+     * Sets the aggregations.
      *
      * @param aggregations the new aggregations
      */
@@ -14492,7 +14969,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the passages_serialized_name.
+     * Sets the passages.
      *
      * @param passages the new passages
      */
@@ -14501,7 +14978,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the duplicates_removed_serialized_name.
+     * Sets the duplicatesRemoved.
      *
      * @param duplicatesRemoved the new duplicatesRemoved
      */
@@ -14516,7 +14993,7 @@ public class IBMDiscoveryV1Models {
 
       QueryNoticesResponse ret = (QueryNoticesResponse) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for results_serialized_name
+      // calling custom deserializer for results
       List<QueryNoticesResult> newResults = new List<QueryNoticesResult>();
       List<QueryNoticesResult> deserializedResults = ret.getResults();
       if (deserializedResults != null) {
@@ -14529,7 +15006,7 @@ public class IBMDiscoveryV1Models {
         ret.setResults(newResults);
       }
 
-      // calling custom deserializer for aggregations_serialized_name
+      // calling custom deserializer for aggregations
       List<QueryAggregation> newAggregations = new List<QueryAggregation>();
       List<QueryAggregation> deserializedAggregations = ret.getAggregations();
       if (deserializedAggregations != null) {
@@ -14542,7 +15019,7 @@ public class IBMDiscoveryV1Models {
         ret.setAggregations(newAggregations);
       }
 
-      // calling custom deserializer for passages_serialized_name
+      // calling custom deserializer for passages
       List<QueryPassages> newPassages = new List<QueryPassages>();
       List<QueryPassages> deserializedPassages = ret.getPassages();
       if (deserializedPassages != null) {
@@ -14576,9 +15053,9 @@ public class IBMDiscoveryV1Models {
     private Map<String, Object> additional_properties_serialized_name;
 
     /**
-     * Gets the id_serialized_name.
+     * Gets the id.
      *
-     * @return the id_serialized_name
+     * @return the id
      */
     @AuraEnabled
     public String getId() {
@@ -14586,9 +15063,9 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the score_serialized_name.
+     * Gets the score.
      *
-     * @return the score_serialized_name
+     * @return the score
      */
     @AuraEnabled
     public Double getScore() {
@@ -14596,9 +15073,9 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the metadata_serialized_name.
+     * Gets the metadata.
      *
-     * @return the metadata_serialized_name
+     * @return the metadata
      */
     @AuraEnabled
     public IBMWatsonMapModel getMetadata() {
@@ -14606,9 +15083,9 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     @AuraEnabled
     public String getCollectionId() {
@@ -14616,9 +15093,9 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the result_metadata_serialized_name.
+     * Gets the resultMetadata.
      *
-     * @return the result_metadata_serialized_name
+     * @return the resultMetadata
      */
     @AuraEnabled
     public QueryResultResultMetadata getResultMetadata() {
@@ -14626,9 +15103,9 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the code_serialized_name.
+     * Gets the code.
      *
-     * @return the code_serialized_name
+     * @return the code
      */
     @AuraEnabled
     public Long getCode() {
@@ -14636,9 +15113,9 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the filename_serialized_name.
+     * Gets the filename.
      *
-     * @return the filename_serialized_name
+     * @return the filename
      */
     @AuraEnabled
     public String getFilename() {
@@ -14646,9 +15123,9 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the file_type_serialized_name.
+     * Gets the fileType.
      *
-     * @return the file_type_serialized_name
+     * @return the fileType
      */
     @AuraEnabled
     public String getFileType() {
@@ -14656,9 +15133,9 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the sha1_serialized_name.
+     * Gets the sha1.
      *
-     * @return the sha1_serialized_name
+     * @return the sha1
      */
     @AuraEnabled
     public String getSha1() {
@@ -14666,9 +15143,9 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the notices_serialized_name.
+     * Gets the notices.
      *
-     * @return the notices_serialized_name
+     * @return the notices
      */
     @AuraEnabled
     public List<Notice> getNotices() {
@@ -14686,93 +15163,93 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the id_serialized_name.
+     * Sets the id.
      *
-     * @param id_serialized_name the new id_serialized_name
+     * @param id the new id
      */
-    public void setId(final String id_serialized_name) {
-      this.id_serialized_name = id_serialized_name;
+    public void setId(final String id) {
+      this.id_serialized_name = id;
     }
 
     /**
-     * Sets the score_serialized_name.
+     * Sets the score.
      *
-     * @param score_serialized_name the new score_serialized_name
+     * @param score the new score
      */
-    public void setScore(final Double score_serialized_name) {
-      this.score_serialized_name = score_serialized_name;
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
     }
 
     /**
-     * Sets the metadata_serialized_name.
+     * Sets the metadata.
      *
-     * @param metadata_serialized_name the new metadata_serialized_name
+     * @param metadata the new metadata
      */
-    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public void setMetadata(final IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
     }
 
     /**
-     * Sets the collection_id_serialized_name.
+     * Sets the collectionId.
      *
-     * @param collection_id_serialized_name the new collection_id_serialized_name
+     * @param collectionId the new collectionId
      */
-    public void setCollectionId(final String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public void setCollectionId(final String collectionId) {
+      this.collection_id_serialized_name = collectionId;
     }
 
     /**
-     * Sets the result_metadata_serialized_name.
+     * Sets the resultMetadata.
      *
-     * @param result_metadata_serialized_name the new result_metadata_serialized_name
+     * @param resultMetadata the new resultMetadata
      */
-    public void setResultMetadata(final QueryResultResultMetadata result_metadata_serialized_name) {
-      this.result_metadata_serialized_name = result_metadata_serialized_name;
+    public void setResultMetadata(final QueryResultResultMetadata resultMetadata) {
+      this.result_metadata_serialized_name = resultMetadata;
     }
 
     /**
-     * Sets the code_serialized_name.
+     * Sets the code.
      *
-     * @param code_serialized_name the new code_serialized_name
+     * @param code the new code
      */
-    public void setCode(final Long code_serialized_name) {
-      this.code_serialized_name = code_serialized_name;
+    public void setCode(final Long code) {
+      this.code_serialized_name = code;
     }
 
     /**
-     * Sets the filename_serialized_name.
+     * Sets the filename.
      *
-     * @param filename_serialized_name the new filename_serialized_name
+     * @param filename the new filename
      */
-    public void setFilename(final String filename_serialized_name) {
-      this.filename_serialized_name = filename_serialized_name;
+    public void setFilename(final String filename) {
+      this.filename_serialized_name = filename;
     }
 
     /**
-     * Sets the file_type_serialized_name.
+     * Sets the fileType.
      *
-     * @param file_type_serialized_name the new file_type_serialized_name
+     * @param fileType the new fileType
      */
-    public void setFileType(final String file_type_serialized_name) {
-      this.file_type_serialized_name = file_type_serialized_name;
+    public void setFileType(final String fileType) {
+      this.file_type_serialized_name = fileType;
     }
 
     /**
-     * Sets the sha1_serialized_name.
+     * Sets the sha1.
      *
-     * @param sha1_serialized_name the new sha1_serialized_name
+     * @param sha1 the new sha1
      */
-    public void setSha1(final String sha1_serialized_name) {
-      this.sha1_serialized_name = sha1_serialized_name;
+    public void setSha1(final String sha1) {
+      this.sha1_serialized_name = sha1;
     }
 
     /**
-     * Sets the notices_serialized_name.
+     * Sets the notices.
      *
-     * @param notices_serialized_name the new notices_serialized_name
+     * @param notices the new notices
      */
-    public void setNotices(final List<Notice> notices_serialized_name) {
-      this.notices_serialized_name = notices_serialized_name;
+    public void setNotices(final List<Notice> notices) {
+      this.notices_serialized_name = notices;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -14782,15 +15259,15 @@ public class IBMDiscoveryV1Models {
 
       QueryNoticesResult ret = (QueryNoticesResult) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for metadata_serialized_name
+      // calling custom deserializer for metadata
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
-      // calling custom deserializer for result_metadata_serialized_name
+      // calling custom deserializer for resultMetadata
       QueryResultResultMetadata newResultMetadata = (QueryResultResultMetadata) new QueryResultResultMetadata().deserialize(JSON.serialize(ret.getResultMetadata()), (Map<String, Object>) jsonMap.get('result_metadata_serialized_name'), QueryResultResultMetadata.class);
       ret.setResultMetadata(newResultMetadata);
 
-      // calling custom deserializer for notices_serialized_name
+      // calling custom deserializer for notices
       List<Notice> newNotices = new List<Notice>();
       List<Notice> deserializedNotices = ret.getNotices();
       if (deserializedNotices != null) {
@@ -14819,285 +15296,335 @@ public class IBMDiscoveryV1Models {
    * The query options.
    */
   public class QueryOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String filter_serialized_name;
-    private String query_serialized_name;
-    private String natural_language_query_serialized_name;
-    private Boolean passages_serialized_name;
-    private String aggregation_serialized_name;
-    private Long count_serialized_name;
-    private List<String> return_serialized_name;
-    private Long offset_serialized_name;
-    private List<String> sort_serialized_name;
-    private Boolean highlight_serialized_name;
-    private List<String> passages_fields_serialized_name;
-    private Long passages_count_serialized_name;
-    private Long passages_characters_serialized_name;
-    private Boolean deduplicate_serialized_name;
-    private String deduplicate_field_serialized_name;
-    private Boolean similar_serialized_name;
-    private List<String> similar_document_ids_serialized_name;
-    private List<String> similar_fields_serialized_name;
-    private Boolean logging_opt_out_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String filter;
+    private String query;
+    private String naturalLanguageQuery;
+    private Boolean passages;
+    private String aggregation;
+    private Long count;
+    private String returnFields;
+    private Long offset;
+    private String xsort;
+    private Boolean highlight;
+    private String passagesFields;
+    private Long passagesCount;
+    private Long passagesCharacters;
+    private Boolean deduplicate;
+    private String deduplicateField;
+    private String collectionIds;
+    private Boolean similar;
+    private String similarDocumentIds;
+    private String similarFields;
+    private String bias;
+    private Boolean loggingOptOut;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the filter_serialized_name.
+     * Gets the filter.
      *
-     * A cacheable query that limits the documents returned to exclude any documents that don't mention the query
-     * content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts
-     * in the data set.
+     * A cacheable query that excludes documents that don't mention the query content. Filter searches are better for
+     * metadata-type searches and for assessing the concepts in the data set.
      *
-     * @return the filter_serialized_name
+     * @return the filter
      */
     public String filter() {
-      return filter_serialized_name;
+      return filter;
     }
+ 
     /**
-     * Gets the query_serialized_name.
+     * Gets the query.
      *
      * A query search returns all documents in your data set with full enrichments and full text, but with the most
      * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
      * cannot use **natural_language_query** and **query** at the same time.
      *
-     * @return the query_serialized_name
+     * @return the query
      */
     public String query() {
-      return query_serialized_name;
+      return query;
     }
+ 
     /**
-     * Gets the natural_language_query_serialized_name.
+     * Gets the naturalLanguageQuery.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language
      * understanding. You cannot use **natural_language_query** and **query** at the same time.
      *
-     * @return the natural_language_query_serialized_name
+     * @return the naturalLanguageQuery
      */
     public String naturalLanguageQuery() {
-      return natural_language_query_serialized_name;
+      return naturalLanguageQuery;
     }
+ 
     /**
-     * Gets the passages_serialized_name.
+     * Gets the passages.
      *
      * A passages query that returns the most relevant passages from the results.
      *
-     * @return the passages_serialized_name
+     * @return the passages
      */
     public Boolean passages() {
-      return passages_serialized_name;
+      return passages;
     }
+ 
     /**
-     * Gets the aggregation_serialized_name.
+     * Gets the aggregation.
      *
-     * An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are
-     * useful for building applications, because you can use them to build lists, tables, and time series. For a full
-     * list of possible aggregrations, see the Query reference.
+     * An aggregation search that returns an exact answer by combining query search with filters. Useful for
+     * applications to build lists, tables, and time series. For a full list of possible aggregations, see the Query
+     * reference.
      *
-     * @return the aggregation_serialized_name
+     * @return the aggregation
      */
     public String aggregation() {
-      return aggregation_serialized_name;
+      return aggregation;
     }
+ 
     /**
-     * Gets the count_serialized_name.
+     * Gets the count.
      *
      * Number of results to return.
      *
-     * @return the count_serialized_name
+     * @return the count
      */
     public Long count() {
-      return count_serialized_name;
+      return count;
     }
+ 
     /**
-     * Gets the return_serialized_name.
+     * Gets the returnFields.
      *
-     * A comma separated list of the portion of the document hierarchy to return.
+     * A comma-separated list of the portion of the document hierarchy to return.
      *
-     * @return the return_serialized_name
+     * @return the returnFields
      */
-    public List<String> returnField() {
-      return return_serialized_name;
+    public String returnFields() {
+      return returnFields;
     }
+ 
     /**
-     * Gets the offset_serialized_name.
+     * Gets the offset.
      *
      * The number of query results to skip at the beginning. For example, if the total number of results that are
-     * returned is 10, and the offset is 8, it returns the last two results.
+     * returned is 10 and the offset is 8, it returns the last two results.
      *
-     * @return the offset_serialized_name
+     * @return the offset
      */
     public Long offset() {
-      return offset_serialized_name;
+      return offset;
     }
+ 
     /**
-     * Gets the sort_serialized_name.
+     * Gets the xsort.
      *
-     * A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by
+     * A comma-separated list of fields in the document to sort on. You can optionally specify a sort direction by
      * prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no
-     * prefix is specified.
+     * prefix is specified. This parameter cannot be used in the same query as the **bias** parameter.
      *
-     * @return the sort_serialized_name
+     * @return the xsort
      */
-    public List<String> sortField() {
-      return sort_serialized_name;
+    public String xsort() {
+      return xsort;
     }
+ 
     /**
-     * Gets the highlight_serialized_name.
+     * Gets the highlight.
      *
-     * When true a highlight field is returned for each result which contains the fields that match the query with
-     * `<em></em>` tags around the matching query terms. Defaults to false.
+     * When true, a highlight field is returned for each result which contains the fields which match the query with
+     * `<em></em>` tags around the matching query terms.
      *
-     * @return the highlight_serialized_name
+     * @return the highlight
      */
     public Boolean highlight() {
-      return highlight_serialized_name;
+      return highlight;
     }
+ 
     /**
-     * Gets the passages_fields_serialized_name.
+     * Gets the passagesFields.
      *
      * A comma-separated list of fields that passages are drawn from. If this parameter not specified, then all
      * top-level fields are included.
      *
-     * @return the passages_fields_serialized_name
+     * @return the passagesFields
      */
-    public List<String> passagesFields() {
-      return passages_fields_serialized_name;
+    public String passagesFields() {
+      return passagesFields;
     }
+ 
     /**
-     * Gets the passages_count_serialized_name.
+     * Gets the passagesCount.
      *
      * The maximum number of passages to return. The search returns fewer passages if the requested total is not found.
      * The default is `10`. The maximum is `100`.
      *
-     * @return the passages_count_serialized_name
+     * @return the passagesCount
      */
     public Long passagesCount() {
-      return passages_count_serialized_name;
+      return passagesCount;
     }
+ 
     /**
-     * Gets the passages_characters_serialized_name.
+     * Gets the passagesCharacters.
      *
-     * The approximate number of characters that any one passage will have. The default is `400`. The minimum is `50`.
-     * The maximum is `2000`.
+     * The approximate number of characters that any one passage will have.
      *
-     * @return the passages_characters_serialized_name
+     * @return the passagesCharacters
      */
     public Long passagesCharacters() {
-      return passages_characters_serialized_name;
+      return passagesCharacters;
     }
+ 
     /**
-     * Gets the deduplicate_serialized_name.
+     * Gets the deduplicate.
      *
      * When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the
      * **title** field) are removed. Duplicate comparison is limited to the current query only; **offset** is not
      * considered. This parameter is currently Beta functionality.
      *
-     * @return the deduplicate_serialized_name
+     * @return the deduplicate
      */
     public Boolean deduplicate() {
-      return deduplicate_serialized_name;
+      return deduplicate;
     }
+ 
     /**
-     * Gets the deduplicate_field_serialized_name.
+     * Gets the deduplicateField.
      *
      * When specified, duplicate results based on the field specified are removed from the returned results. Duplicate
      * comparison is limited to the current query only, **offset** is not considered. This parameter is currently Beta
      * functionality.
      *
-     * @return the deduplicate_field_serialized_name
+     * @return the deduplicateField
      */
     public String deduplicateField() {
-      return deduplicate_field_serialized_name;
+      return deduplicateField;
     }
+ 
     /**
-     * Gets the similar_serialized_name.
+     * Gets the collectionIds.
+     *
+     * A comma-separated list of collection IDs to be queried against. Required when querying multiple collections,
+     * invalid when performing a single collection query.
+     *
+     * @return the collectionIds
+     */
+    public String collectionIds() {
+      return collectionIds;
+    }
+ 
+    /**
+     * Gets the similar.
      *
      * When `true`, results are returned based on their similarity to the document IDs specified in the
      * **similar.document_ids** parameter.
      *
-     * @return the similar_serialized_name
+     * @return the similar
      */
     public Boolean similar() {
-      return similar_serialized_name;
+      return similar;
     }
+ 
     /**
-     * Gets the similar_document_ids_serialized_name.
+     * Gets the similarDocumentIds.
      *
-     * A comma-separated list of document IDs that will be used to find similar documents.
+     * A comma-separated list of document IDs to find similar documents.
      *
-     * **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
-     * the document similarity search to include the natural language query. Other query parameters, such as **filter**
-     * and **query** are subsequently applied and reduce the query scope.
+     * **Tip:** Include the **natural_language_query** parameter to expand the scope of the document similarity search
+     * with the natural language query. Other query parameters, such as **filter** and **query**, are subsequently
+     * applied and reduce the scope.
      *
-     * @return the similar_document_ids_serialized_name
+     * @return the similarDocumentIds
      */
-    public List<String> similarDocumentIds() {
-      return similar_document_ids_serialized_name;
+    public String similarDocumentIds() {
+      return similarDocumentIds;
     }
+ 
     /**
-     * Gets the similar_fields_serialized_name.
+     * Gets the similarFields.
      *
-     * A comma-separated list of field names that will be used as a basis for comparison to identify similar documents.
-     * If not specified, the entire document is used for comparison.
+     * A comma-separated list of field names that are used as a basis for comparison to identify similar documents. If
+     * not specified, the entire document is used for comparison.
      *
-     * @return the similar_fields_serialized_name
+     * @return the similarFields
      */
-    public List<String> similarFields() {
-      return similar_fields_serialized_name;
+    public String similarFields() {
+      return similarFields;
     }
+ 
     /**
-     * Gets the logging_opt_out_serialized_name.
+     * Gets the bias.
+     *
+     * Field which the returned results will be biased against. The specified field must be either a **date** or
+     * **number** format. When a **date** type field is specified returned results are biased towards field values
+     * closer to the current date. When a **number** type field is specified, returned results are biased towards higher
+     * field values. This parameter cannot be used in the same query as the **sort** parameter.
+     *
+     * @return the bias
+     */
+    public String bias() {
+      return bias;
+    }
+ 
+    /**
+     * Gets the loggingOptOut.
      *
      * If `true`, queries are not stored in the Discovery **Logs** endpoint.
      *
-     * @return the logging_opt_out_serialized_name
+     * @return the loggingOptOut
      */
     public Boolean loggingOptOut() {
-      return logging_opt_out_serialized_name;
+      return loggingOptOut;
     }
+
     private QueryOptions(QueryOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      filter_serialized_name = builder.filter_serialized_name;
-      query_serialized_name = builder.query_serialized_name;
-      natural_language_query_serialized_name = builder.natural_language_query_serialized_name;
-      passages_serialized_name = builder.passages_serialized_name;
-      aggregation_serialized_name = builder.aggregation_serialized_name;
-      count_serialized_name = builder.count_serialized_name;
-      return_serialized_name = builder.return_serialized_name;
-      offset_serialized_name = builder.offset_serialized_name;
-      sort_serialized_name = builder.sort_serialized_name;
-      highlight_serialized_name = builder.highlight_serialized_name;
-      passages_fields_serialized_name = builder.passages_fields_serialized_name;
-      passages_count_serialized_name = builder.passages_count_serialized_name;
-      passages_characters_serialized_name = builder.passages_characters_serialized_name;
-      deduplicate_serialized_name = builder.deduplicate_serialized_name;
-      deduplicate_field_serialized_name = builder.deduplicate_field_serialized_name;
-      similar_serialized_name = builder.similar_serialized_name;
-      similar_document_ids_serialized_name = builder.similar_document_ids_serialized_name;
-      similar_fields_serialized_name = builder.similar_fields_serialized_name;
-      logging_opt_out_serialized_name = builder.logging_opt_out_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      filter = builder.filter;
+      query = builder.query;
+      naturalLanguageQuery = builder.naturalLanguageQuery;
+      passages = builder.passages;
+      aggregation = builder.aggregation;
+      count = builder.count;
+      returnFields = builder.returnFields;
+      offset = builder.offset;
+      xsort = builder.xsort;
+      highlight = builder.highlight;
+      passagesFields = builder.passagesFields;
+      passagesCount = builder.passagesCount;
+      passagesCharacters = builder.passagesCharacters;
+      deduplicate = builder.deduplicate;
+      deduplicateField = builder.deduplicateField;
+      collectionIds = builder.collectionIds;
+      similar = builder.similar;
+      similarDocumentIds = builder.similarDocumentIds;
+      similarFields = builder.similarFields;
+      bias = builder.bias;
+      loggingOptOut = builder.loggingOptOut;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -15116,50 +15643,54 @@ public class IBMDiscoveryV1Models {
    * QueryOptions Builder.
    */
   public class QueryOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String filter_serialized_name;
-    private String query_serialized_name;
-    private String natural_language_query_serialized_name;
-    private Boolean passages_serialized_name;
-    private String aggregation_serialized_name;
-    private Long count_serialized_name;
-    private List<String> return_serialized_name;
-    private Long offset_serialized_name;
-    private List<String> sort_serialized_name;
-    private Boolean highlight_serialized_name;
-    private List<String> passages_fields_serialized_name;
-    private Long passages_count_serialized_name;
-    private Long passages_characters_serialized_name;
-    private Boolean deduplicate_serialized_name;
-    private String deduplicate_field_serialized_name;
-    private Boolean similar_serialized_name;
-    private List<String> similar_document_ids_serialized_name;
-    private List<String> similar_fields_serialized_name;
-    private Boolean logging_opt_out_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String filter;
+    private String query;
+    private String naturalLanguageQuery;
+    private Boolean passages;
+    private String aggregation;
+    private Long count;
+    private String returnFields;
+    private Long offset;
+    private String xsort;
+    private Boolean highlight;
+    private String passagesFields;
+    private Long passagesCount;
+    private Long passagesCharacters;
+    private Boolean deduplicate;
+    private String deduplicateField;
+    private String collectionIds;
+    private Boolean similar;
+    private String similarDocumentIds;
+    private String similarFields;
+    private String bias;
+    private Boolean loggingOptOut;
 
     private QueryOptionsBuilder(QueryOptions queryOptions) {
-      environment_id_serialized_name = queryOptions.environment_id_serialized_name;
-      collection_id_serialized_name = queryOptions.collection_id_serialized_name;
-      filter_serialized_name = queryOptions.filter_serialized_name;
-      query_serialized_name = queryOptions.query_serialized_name;
-      natural_language_query_serialized_name = queryOptions.natural_language_query_serialized_name;
-      passages_serialized_name = queryOptions.passages_serialized_name;
-      aggregation_serialized_name = queryOptions.aggregation_serialized_name;
-      count_serialized_name = queryOptions.count_serialized_name;
-      return_serialized_name = queryOptions.return_serialized_name;
-      offset_serialized_name = queryOptions.offset_serialized_name;
-      sort_serialized_name = queryOptions.sort_serialized_name;
-      highlight_serialized_name = queryOptions.highlight_serialized_name;
-      passages_fields_serialized_name = queryOptions.passages_fields_serialized_name;
-      passages_count_serialized_name = queryOptions.passages_count_serialized_name;
-      passages_characters_serialized_name = queryOptions.passages_characters_serialized_name;
-      deduplicate_serialized_name = queryOptions.deduplicate_serialized_name;
-      deduplicate_field_serialized_name = queryOptions.deduplicate_field_serialized_name;
-      similar_serialized_name = queryOptions.similar_serialized_name;
-      similar_document_ids_serialized_name = queryOptions.similar_document_ids_serialized_name;
-      similar_fields_serialized_name = queryOptions.similar_fields_serialized_name;
-      logging_opt_out_serialized_name = queryOptions.logging_opt_out_serialized_name;
+      environmentId = queryOptions.environmentId;
+      collectionId = queryOptions.collectionId;
+      filter = queryOptions.filter;
+      query = queryOptions.query;
+      naturalLanguageQuery = queryOptions.naturalLanguageQuery;
+      passages = queryOptions.passages;
+      aggregation = queryOptions.aggregation;
+      count = queryOptions.count;
+      returnFields = queryOptions.returnFields;
+      offset = queryOptions.offset;
+      xsort = queryOptions.xsort;
+      highlight = queryOptions.highlight;
+      passagesFields = queryOptions.passagesFields;
+      passagesCount = queryOptions.passagesCount;
+      passagesCharacters = queryOptions.passagesCharacters;
+      deduplicate = queryOptions.deduplicate;
+      deduplicateField = queryOptions.deduplicateField;
+      collectionIds = queryOptions.collectionIds;
+      similar = queryOptions.similar;
+      similarDocumentIds = queryOptions.similarDocumentIds;
+      similarFields = queryOptions.similarFields;
+      bias = queryOptions.bias;
+      loggingOptOut = queryOptions.loggingOptOut;
       this.requestHeaders.putAll(queryOptions.requestHeaders());
     }
 
@@ -15176,8 +15707,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public QueryOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -15190,313 +15721,255 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an returnVar to return_serialized_name.
-     *
-     * @param returnVar the new returnVar
-     * @return the QueryOptions builder
-     */
-    public QueryOptionsBuilder addReturn(String returnVar) {
-      IBMWatsonValidator.notNull(returnVar, 'returnVar cannot be null');
-      if (this.return_serialized_name == null) {
-        this.return_serialized_name = new List<String>();
-      }
-      this.return_serialized_name.add(returnVar);
-      return this;
-    }
-
-    /**
-     * Adds an sortVar to sort_serialized_name.
-     *
-     * @param sortVar the new sortVar
-     * @return the QueryOptions builder
-     */
-    public QueryOptionsBuilder addSort(String sortVar) {
-      IBMWatsonValidator.notNull(sortVar, 'sortVar cannot be null');
-      if (this.sort_serialized_name == null) {
-        this.sort_serialized_name = new List<String>();
-      }
-      this.sort_serialized_name.add(sortVar);
-      return this;
-    }
-
-    /**
-     * Adds an passagesFields to passages_fields_serialized_name.
-     *
-     * @param passagesFields the new passagesFields
-     * @return the QueryOptions builder
-     */
-    public QueryOptionsBuilder addPassagesFields(String passagesFields) {
-      IBMWatsonValidator.notNull(passagesFields, 'passagesFields cannot be null');
-      if (this.passages_fields_serialized_name == null) {
-        this.passages_fields_serialized_name = new List<String>();
-      }
-      this.passages_fields_serialized_name.add(passagesFields);
-      return this;
-    }
-
-    /**
-     * Adds an similarDocumentIds to similar_document_ids_serialized_name.
-     *
-     * @param similarDocumentIds the new similarDocumentIds
-     * @return the QueryOptions builder
-     */
-    public QueryOptionsBuilder addSimilarDocumentIds(String similarDocumentIds) {
-      IBMWatsonValidator.notNull(similarDocumentIds, 'similarDocumentIds cannot be null');
-      if (this.similar_document_ids_serialized_name == null) {
-        this.similar_document_ids_serialized_name = new List<String>();
-      }
-      this.similar_document_ids_serialized_name.add(similarDocumentIds);
-      return this;
-    }
-
-    /**
-     * Adds an similarFields to similar_fields_serialized_name.
-     *
-     * @param similarFields the new similarFields
-     * @return the QueryOptions builder
-     */
-    public QueryOptionsBuilder addSimilarFields(String similarFields) {
-      IBMWatsonValidator.notNull(similarFields, 'similarFields cannot be null');
-      if (this.similar_fields_serialized_name == null) {
-        this.similar_fields_serialized_name = new List<String>();
-      }
-      this.similar_fields_serialized_name.add(similarFields);
-      return this;
-    }
-
-    /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the filter_serialized_name.
+     * Set the filter.
      *
      * @param filter the filter
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder filter(String filter) {
-      this.filter_serialized_name = filter;
+      this.filter = filter;
       return this;
     }
 
     /**
-     * Set the query_serialized_name.
+     * Set the query.
      *
      * @param query the query
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder query(String query) {
-      this.query_serialized_name = query;
+      this.query = query;
       return this;
     }
 
     /**
-     * Set the natural_language_query_serialized_name.
+     * Set the naturalLanguageQuery.
      *
      * @param naturalLanguageQuery the naturalLanguageQuery
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder naturalLanguageQuery(String naturalLanguageQuery) {
-      this.natural_language_query_serialized_name = naturalLanguageQuery;
+      this.naturalLanguageQuery = naturalLanguageQuery;
       return this;
     }
 
     /**
-     * Set the passages_serialized_name.
+     * Set the passages.
      *
      * @param passages the passages
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder passages(Boolean passages) {
-      this.passages_serialized_name = passages;
+      this.passages = passages;
       return this;
     }
 
     /**
-     * Set the aggregation_serialized_name.
+     * Set the aggregation.
      *
      * @param aggregation the aggregation
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder aggregation(String aggregation) {
-      this.aggregation_serialized_name = aggregation;
+      this.aggregation = aggregation;
       return this;
     }
 
     /**
-     * Set the count_serialized_name.
+     * Set the count.
      *
      * @param count the count
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder count(Long count) {
-      this.count_serialized_name = count;
+      this.count = count;
       return this;
     }
 
     /**
-     * Set the return_serialized_name.
-     * Existing return_serialized_name will be replaced.
+     * Set the returnFields.
      *
-     * @param returnVar the returnVar
+     * @param returnFields the returnFields
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder returnField(List<String> returnVar) {
-      this.return_serialized_name = returnVar;
+    public QueryOptionsBuilder returnFields(String returnFields) {
+      this.returnFields = returnFields;
       return this;
     }
 
     /**
-     * Set the offset_serialized_name.
+     * Set the offset.
      *
      * @param offset the offset
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder offset(Long offset) {
-      this.offset_serialized_name = offset;
+      this.offset = offset;
       return this;
     }
 
     /**
-     * Set the sort_serialized_name.
-     * Existing sort_serialized_name will be replaced.
+     * Set the xsort.
      *
-     * @param sortVar the sortVar
+     * @param xsort the xsort
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder sortField(List<String> sortVar) {
-      this.sort_serialized_name = sortVar;
+    public QueryOptionsBuilder xsort(String xsort) {
+      this.xsort = xsort;
       return this;
     }
 
     /**
-     * Set the highlight_serialized_name.
+     * Set the highlight.
      *
      * @param highlight the highlight
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder highlight(Boolean highlight) {
-      this.highlight_serialized_name = highlight;
+      this.highlight = highlight;
       return this;
     }
 
     /**
-     * Set the passages_fields_serialized_name.
-     * Existing passages_fields_serialized_name will be replaced.
+     * Set the passagesFields.
      *
      * @param passagesFields the passagesFields
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder passagesFields(List<String> passagesFields) {
-      this.passages_fields_serialized_name = passagesFields;
+    public QueryOptionsBuilder passagesFields(String passagesFields) {
+      this.passagesFields = passagesFields;
       return this;
     }
 
     /**
-     * Set the passages_count_serialized_name.
+     * Set the passagesCount.
      *
      * @param passagesCount the passagesCount
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder passagesCount(Long passagesCount) {
-      this.passages_count_serialized_name = passagesCount;
+      this.passagesCount = passagesCount;
       return this;
     }
 
     /**
-     * Set the passages_characters_serialized_name.
+     * Set the passagesCharacters.
      *
      * @param passagesCharacters the passagesCharacters
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder passagesCharacters(Long passagesCharacters) {
-      this.passages_characters_serialized_name = passagesCharacters;
+      this.passagesCharacters = passagesCharacters;
       return this;
     }
 
     /**
-     * Set the deduplicate_serialized_name.
+     * Set the deduplicate.
      *
      * @param deduplicate the deduplicate
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder deduplicate(Boolean deduplicate) {
-      this.deduplicate_serialized_name = deduplicate;
+      this.deduplicate = deduplicate;
       return this;
     }
 
     /**
-     * Set the deduplicate_field_serialized_name.
+     * Set the deduplicateField.
      *
      * @param deduplicateField the deduplicateField
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder deduplicateField(String deduplicateField) {
-      this.deduplicate_field_serialized_name = deduplicateField;
+      this.deduplicateField = deduplicateField;
       return this;
     }
 
     /**
-     * Set the similar_serialized_name.
+     * Set the collectionIds.
+     *
+     * @param collectionIds the collectionIds
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder collectionIds(String collectionIds) {
+      this.collectionIds = collectionIds;
+      return this;
+    }
+
+    /**
+     * Set the similar.
      *
      * @param similar the similar
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder similar(Boolean similar) {
-      this.similar_serialized_name = similar;
+      this.similar = similar;
       return this;
     }
 
     /**
-     * Set the similar_document_ids_serialized_name.
-     * Existing similar_document_ids_serialized_name will be replaced.
+     * Set the similarDocumentIds.
      *
      * @param similarDocumentIds the similarDocumentIds
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder similarDocumentIds(List<String> similarDocumentIds) {
-      this.similar_document_ids_serialized_name = similarDocumentIds;
+    public QueryOptionsBuilder similarDocumentIds(String similarDocumentIds) {
+      this.similarDocumentIds = similarDocumentIds;
       return this;
     }
 
     /**
-     * Set the similar_fields_serialized_name.
-     * Existing similar_fields_serialized_name will be replaced.
+     * Set the similarFields.
      *
      * @param similarFields the similarFields
      * @return the QueryOptions builder
      */
-    public QueryOptionsBuilder similarFields(List<String> similarFields) {
-      this.similar_fields_serialized_name = similarFields;
+    public QueryOptionsBuilder similarFields(String similarFields) {
+      this.similarFields = similarFields;
       return this;
     }
 
     /**
-     * Set the logging_opt_out_serialized_name.
+     * Set the bias.
+     *
+     * @param bias the bias
+     * @return the QueryOptions builder
+     */
+    public QueryOptionsBuilder bias(String bias) {
+      this.bias = bias;
+      return this;
+    }
+
+    /**
+     * Set the loggingOptOut.
      *
      * @param loggingOptOut the loggingOptOut
      * @return the QueryOptions builder
      */
     public QueryOptionsBuilder loggingOptOut(Boolean loggingOptOut) {
-      this.logging_opt_out_serialized_name = loggingOptOut;
+      this.loggingOptOut = loggingOptOut;
       return this;
     }
 
@@ -15523,67 +15996,73 @@ public class IBMDiscoveryV1Models {
     private Long start_offset_serialized_name;
     private Long end_offset_serialized_name;
     private String field_serialized_name;
+ 
     /**
-     * Gets the document_id_serialized_name.
+     * Gets the documentId.
      *
      * The unique identifier of the document from which the passage has been extracted.
      *
-     * @return the document_id_serialized_name
+     * @return the documentId
      */
     @AuraEnabled
     public String getDocumentId() {
       return document_id_serialized_name;
     }
+ 
     /**
-     * Gets the passage_score_serialized_name.
+     * Gets the passageScore.
      *
      * The confidence score of the passages's analysis. A higher score indicates greater confidence.
      *
-     * @return the passage_score_serialized_name
+     * @return the passageScore
      */
     @AuraEnabled
     public Double getPassageScore() {
       return passage_score_serialized_name;
     }
+ 
     /**
-     * Gets the passage_text_serialized_name.
+     * Gets the passageText.
      *
      * The content of the extracted passage.
      *
-     * @return the passage_text_serialized_name
+     * @return the passageText
      */
     @AuraEnabled
     public String getPassageText() {
       return passage_text_serialized_name;
     }
+ 
     /**
-     * Gets the start_offset_serialized_name.
+     * Gets the startOffset.
      *
      * The position of the first character of the extracted passage in the originating field.
      *
-     * @return the start_offset_serialized_name
+     * @return the startOffset
      */
     @AuraEnabled
     public Long getStartOffset() {
       return start_offset_serialized_name;
     }
+ 
     /**
-     * Gets the end_offset_serialized_name.
+     * Gets the endOffset.
      *
      * The position of the last character of the extracted passage in the originating field.
      *
-     * @return the end_offset_serialized_name
+     * @return the endOffset
      */
     @AuraEnabled
     public Long getEndOffset() {
       return end_offset_serialized_name;
     }
+ 
     /**
-     * Gets the field_serialized_name.
+     * Gets the field.
      *
      * The label of the field from which the passage has been extracted.
      *
-     * @return the field_serialized_name
+     * @return the field
      */
     @AuraEnabled
     public String getField() {
@@ -15591,7 +16070,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the document_id_serialized_name.
+     * Sets the documentId.
      *
      * @param documentId the new documentId
      */
@@ -15600,7 +16079,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the passage_score_serialized_name.
+     * Sets the passageScore.
      *
      * @param passageScore the new passageScore
      */
@@ -15609,7 +16088,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the passage_text_serialized_name.
+     * Sets the passageText.
      *
      * @param passageText the new passageText
      */
@@ -15618,7 +16097,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the start_offset_serialized_name.
+     * Sets the startOffset.
      *
      * @param startOffset the new startOffset
      */
@@ -15627,7 +16106,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the end_offset_serialized_name.
+     * Sets the endOffset.
      *
      * @param endOffset the new endOffset
      */
@@ -15636,7 +16115,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the field_serialized_name.
+     * Sets the field.
      *
      * @param field the new field
      */
@@ -15660,10 +16139,11 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryRelationsArgument extends IBMWatsonGenericModel {
     private List<QueryEntitiesEntity> entities_serialized_name;
+ 
     /**
-     * Gets the entities_serialized_name.
+     * Gets the entities.
      *
-     * @return the entities_serialized_name
+     * @return the entities
      */
     @AuraEnabled
     public List<QueryEntitiesEntity> getEntities() {
@@ -15671,7 +16151,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the entities_serialized_name.
+     * Sets the entities.
      *
      * @param entities the new entities
      */
@@ -15686,7 +16166,7 @@ public class IBMDiscoveryV1Models {
 
       QueryRelationsArgument ret = (QueryRelationsArgument) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for entities_serialized_name
+      // calling custom deserializer for entities
       List<QueryEntitiesEntity> newEntities = new List<QueryEntitiesEntity>();
       List<QueryEntitiesEntity> deserializedEntities = ret.getEntities();
       if (deserializedEntities != null) {
@@ -15710,39 +16190,42 @@ public class IBMDiscoveryV1Models {
     private String text_serialized_name;
     private String type_serialized_name;
     private Boolean exact_serialized_name;
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * Entity text content.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     public String getText() {
       return text_serialized_name;
     }
+ 
     /**
-     * Gets the type_serialized_name.
+     * Gets the xtype.
      *
      * The type of the specified entity.
      *
-     * @return the type_serialized_name
+     * @return the xtype
      */
-    public String getType() {
+    public String getXtype() {
       return type_serialized_name;
     }
+ 
     /**
-     * Gets the exact_serialized_name.
+     * Gets the exact.
      *
      * If false, implicit querying is performed. The default is `false`.
      *
-     * @return the exact_serialized_name
+     * @return the exact
      */
     public Boolean getExact() {
       return exact_serialized_name;
     }
 
     /**
-     * Sets the text_serialized_name.
+     * Sets the text.
      *
      * @param text the new text
      */
@@ -15751,16 +16234,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the type_serialized_name.
+     * Sets the xtype.
      *
-     * @param typeVar the new typeVar
+     * @param xtype the new xtype
      */
-    public void setType(final String typeVar) {
-      this.type_serialized_name = typeVar;
+    public void setXtype(final String xtype) {
+      this.type_serialized_name = xtype;
     }
 
     /**
-     * Sets the exact_serialized_name.
+     * Sets the exact.
      *
      * @param exact the new exact
      */
@@ -15777,39 +16260,42 @@ public class IBMDiscoveryV1Models {
     private QueryFilterType relation_types_serialized_name;
     private QueryFilterType entity_types_serialized_name;
     private List<String> document_ids_serialized_name;
+ 
     /**
-     * Gets the relation_types_serialized_name.
+     * Gets the relationTypes.
      *
      * A list of relation types to include or exclude from the query.
      *
-     * @return the relation_types_serialized_name
+     * @return the relationTypes
      */
     public QueryFilterType getRelationTypes() {
       return relation_types_serialized_name;
     }
+ 
     /**
-     * Gets the entity_types_serialized_name.
+     * Gets the entityTypes.
      *
      * A list of entity types to include or exclude from the query.
      *
-     * @return the entity_types_serialized_name
+     * @return the entityTypes
      */
     public QueryFilterType getEntityTypes() {
       return entity_types_serialized_name;
     }
+ 
     /**
-     * Gets the document_ids_serialized_name.
+     * Gets the documentIds.
      *
      * A comma-separated list of document IDs to include in the query.
      *
-     * @return the document_ids_serialized_name
+     * @return the documentIds
      */
     public List<String> getDocumentIds() {
       return document_ids_serialized_name;
     }
 
     /**
-     * Sets the relation_types_serialized_name.
+     * Sets the relationTypes.
      *
      * @param relationTypes the new relationTypes
      */
@@ -15818,7 +16304,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the entity_types_serialized_name.
+     * Sets the entityTypes.
      *
      * @param entityTypes the new entityTypes
      */
@@ -15827,7 +16313,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the document_ids_serialized_name.
+     * Sets the documentIds.
      *
      * @param documentIds the new documentIds
      */
@@ -15841,108 +16327,118 @@ public class IBMDiscoveryV1Models {
    * The queryRelations options.
    */
   public class QueryRelationsOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private List<QueryRelationsEntity> entities_serialized_name;
-    private QueryEntitiesContext context_serialized_name;
-    private String sort_serialized_name;
-    private QueryRelationsFilter filter_serialized_name;
-    private Long count_serialized_name;
-    private Long evidence_count_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private List<QueryRelationsEntity> entities;
+    private QueryEntitiesContext context;
+    private String xsort;
+    private QueryRelationsFilter filter;
+    private Long count;
+    private Long evidenceCount;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the entities_serialized_name.
+     * Gets the entities.
      *
      * An array of entities to find relationships for.
      *
-     * @return the entities_serialized_name
+     * @return the entities
      */
     public List<QueryRelationsEntity> entities() {
-      return entities_serialized_name;
+      return entities;
     }
+ 
     /**
-     * Gets the context_serialized_name.
+     * Gets the context.
      *
      * Entity text to provide context for the queried entity and rank based on that association. For example, if you
      * wanted to query the city of London in England your query would look for `London` with the context of `England`.
      *
-     * @return the context_serialized_name
+     * @return the context
      */
     public QueryEntitiesContext context() {
-      return context_serialized_name;
+      return context;
     }
+ 
     /**
-     * Gets the sort_serialized_name.
+     * Gets the xsort.
      *
      * The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the number of unique
-     * times each entity is identified. The default is `score`.
+     * times each entity is identified. The default is `score`. This parameter cannot be used in the same query as the
+     * **bias** parameter.
      *
-     * @return the sort_serialized_name
+     * @return the xsort
      */
-    public String sortField() {
-      return sort_serialized_name;
+    public String xsort() {
+      return xsort;
     }
+ 
     /**
-     * Gets the filter_serialized_name.
+     * Gets the filter.
      *
      * Filters to apply to the relationship query.
      *
-     * @return the filter_serialized_name
+     * @return the filter
      */
     public QueryRelationsFilter filter() {
-      return filter_serialized_name;
+      return filter;
     }
+ 
     /**
-     * Gets the count_serialized_name.
+     * Gets the count.
      *
      * The number of results to return. The default is `10`. The maximum is `1000`.
      *
-     * @return the count_serialized_name
+     * @return the count
      */
     public Long count() {
-      return count_serialized_name;
+      return count;
     }
+ 
     /**
-     * Gets the evidence_count_serialized_name.
+     * Gets the evidenceCount.
      *
      * The number of evidence items to return for each result. The default is `0`. The maximum number of evidence items
      * per query is 10,000.
      *
-     * @return the evidence_count_serialized_name
+     * @return the evidenceCount
      */
     public Long evidenceCount() {
-      return evidence_count_serialized_name;
+      return evidenceCount;
     }
+
     private QueryRelationsOptions(QueryRelationsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      entities_serialized_name = builder.entities_serialized_name;
-      context_serialized_name = builder.context_serialized_name;
-      sort_serialized_name = builder.sort_serialized_name;
-      filter_serialized_name = builder.filter_serialized_name;
-      count_serialized_name = builder.count_serialized_name;
-      evidence_count_serialized_name = builder.evidence_count_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      entities = builder.entities;
+      context = builder.context;
+      xsort = builder.xsort;
+      filter = builder.filter;
+      count = builder.count;
+      evidenceCount = builder.evidenceCount;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -15961,24 +16457,24 @@ public class IBMDiscoveryV1Models {
    * QueryRelationsOptions Builder.
    */
   public class QueryRelationsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private List<QueryRelationsEntity> entities_serialized_name;
-    private QueryEntitiesContext context_serialized_name;
-    private String sort_serialized_name;
-    private QueryRelationsFilter filter_serialized_name;
-    private Long count_serialized_name;
-    private Long evidence_count_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private List<QueryRelationsEntity> entities;
+    private QueryEntitiesContext context;
+    private String xsort;
+    private QueryRelationsFilter filter;
+    private Long count;
+    private Long evidenceCount;
 
     private QueryRelationsOptionsBuilder(QueryRelationsOptions queryRelationsOptions) {
-      environment_id_serialized_name = queryRelationsOptions.environment_id_serialized_name;
-      collection_id_serialized_name = queryRelationsOptions.collection_id_serialized_name;
-      entities_serialized_name = queryRelationsOptions.entities_serialized_name;
-      context_serialized_name = queryRelationsOptions.context_serialized_name;
-      sort_serialized_name = queryRelationsOptions.sort_serialized_name;
-      filter_serialized_name = queryRelationsOptions.filter_serialized_name;
-      count_serialized_name = queryRelationsOptions.count_serialized_name;
-      evidence_count_serialized_name = queryRelationsOptions.evidence_count_serialized_name;
+      environmentId = queryRelationsOptions.environmentId;
+      collectionId = queryRelationsOptions.collectionId;
+      entities = queryRelationsOptions.entities;
+      context = queryRelationsOptions.context;
+      xsort = queryRelationsOptions.xsort;
+      filter = queryRelationsOptions.filter;
+      count = queryRelationsOptions.count;
+      evidenceCount = queryRelationsOptions.evidenceCount;
       this.requestHeaders.putAll(queryRelationsOptions.requestHeaders());
     }
 
@@ -15995,8 +16491,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public QueryRelationsOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -16009,106 +16505,106 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an entities to entities_serialized_name.
+     * Adds an entities to entities.
      *
      * @param entities the new entities
      * @return the QueryRelationsOptions builder
      */
     public QueryRelationsOptionsBuilder addEntities(QueryRelationsEntity entities) {
       IBMWatsonValidator.notNull(entities, 'entities cannot be null');
-      if (this.entities_serialized_name == null) {
-        this.entities_serialized_name = new List<QueryRelationsEntity>();
+      if (this.entities == null) {
+        this.entities = new List<QueryRelationsEntity>();
       }
-      this.entities_serialized_name.add(entities);
+      this.entities.add(entities);
       return this;
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the QueryRelationsOptions builder
      */
     public QueryRelationsOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the QueryRelationsOptions builder
      */
     public QueryRelationsOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the entities_serialized_name.
-     * Existing entities_serialized_name will be replaced.
+     * Set the entities.
+     * Existing entities will be replaced.
      *
      * @param entities the entities
      * @return the QueryRelationsOptions builder
      */
     public QueryRelationsOptionsBuilder entities(List<QueryRelationsEntity> entities) {
-      this.entities_serialized_name = entities;
+      this.entities = entities;
       return this;
     }
 
     /**
-     * Set the context_serialized_name.
+     * Set the context.
      *
      * @param context the context
      * @return the QueryRelationsOptions builder
      */
     public QueryRelationsOptionsBuilder context(QueryEntitiesContext context) {
-      this.context_serialized_name = context;
+      this.context = context;
       return this;
     }
 
     /**
-     * Set the sort_serialized_name.
+     * Set the xsort.
      *
-     * @param sortVar the sortVar
+     * @param xsort the xsort
      * @return the QueryRelationsOptions builder
      */
-    public QueryRelationsOptionsBuilder sortField(String sortVar) {
-      this.sort_serialized_name = sortVar;
+    public QueryRelationsOptionsBuilder xsort(String xsort) {
+      this.xsort = xsort;
       return this;
     }
 
     /**
-     * Set the filter_serialized_name.
+     * Set the filter.
      *
      * @param filter the filter
      * @return the QueryRelationsOptions builder
      */
     public QueryRelationsOptionsBuilder filter(QueryRelationsFilter filter) {
-      this.filter_serialized_name = filter;
+      this.filter = filter;
       return this;
     }
 
     /**
-     * Set the count_serialized_name.
+     * Set the count.
      *
      * @param count the count
      * @return the QueryRelationsOptions builder
      */
     public QueryRelationsOptionsBuilder count(Long count) {
-      this.count_serialized_name = count;
+      this.count = count;
       return this;
     }
 
     /**
-     * Set the evidence_count_serialized_name.
+     * Set the evidenceCount.
      *
      * @param evidenceCount the evidenceCount
      * @return the QueryRelationsOptions builder
      */
     public QueryRelationsOptionsBuilder evidenceCount(Long evidenceCount) {
-      this.evidence_count_serialized_name = evidenceCount;
+      this.evidenceCount = evidenceCount;
       return this;
     }
 
@@ -16133,45 +16629,49 @@ public class IBMDiscoveryV1Models {
     private Long frequency_serialized_name;
     private List<QueryRelationsArgument> arguments_serialized_name;
     private List<QueryEvidence> evidence_serialized_name;
+ 
     /**
-     * Gets the type_serialized_name.
+     * Gets the xtype.
      *
      * The identified relationship type.
      *
-     * @return the type_serialized_name
+     * @return the xtype
      */
     @AuraEnabled
-    public String getType() {
+    public String getXtype() {
       return type_serialized_name;
     }
+ 
     /**
-     * Gets the frequency_serialized_name.
+     * Gets the frequency.
      *
      * The number of times the relationship is mentioned.
      *
-     * @return the frequency_serialized_name
+     * @return the frequency
      */
     @AuraEnabled
     public Long getFrequency() {
       return frequency_serialized_name;
     }
+ 
     /**
-     * Gets the arguments_serialized_name.
+     * Gets the arguments.
      *
      * Information about the relationship.
      *
-     * @return the arguments_serialized_name
+     * @return the arguments
      */
     @AuraEnabled
     public List<QueryRelationsArgument> getArguments() {
       return arguments_serialized_name;
     }
+ 
     /**
-     * Gets the evidence_serialized_name.
+     * Gets the evidence.
      *
      * List of different evidentiary items to support the result.
      *
-     * @return the evidence_serialized_name
+     * @return the evidence
      */
     @AuraEnabled
     public List<QueryEvidence> getEvidence() {
@@ -16179,16 +16679,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the type_serialized_name.
+     * Sets the xtype.
      *
-     * @param typeVar the new typeVar
+     * @param xtype the new xtype
      */
-    public void setType(final String typeVar) {
-      this.type_serialized_name = typeVar;
+    public void setXtype(final String xtype) {
+      this.type_serialized_name = xtype;
     }
 
     /**
-     * Sets the frequency_serialized_name.
+     * Sets the frequency.
      *
      * @param frequency the new frequency
      */
@@ -16197,7 +16697,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the arguments_serialized_name.
+     * Sets the arguments.
      *
      * @param arguments the new arguments
      */
@@ -16206,7 +16706,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the evidence_serialized_name.
+     * Sets the evidence.
      *
      * @param evidence the new evidence
      */
@@ -16221,7 +16721,7 @@ public class IBMDiscoveryV1Models {
 
       QueryRelationsRelationship ret = (QueryRelationsRelationship) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for arguments_serialized_name
+      // calling custom deserializer for arguments
       List<QueryRelationsArgument> newArguments = new List<QueryRelationsArgument>();
       List<QueryRelationsArgument> deserializedArguments = ret.getArguments();
       if (deserializedArguments != null) {
@@ -16234,7 +16734,7 @@ public class IBMDiscoveryV1Models {
         ret.setArguments(newArguments);
       }
 
-      // calling custom deserializer for evidence_serialized_name
+      // calling custom deserializer for evidence
       List<QueryEvidence> newEvidence = new List<QueryEvidence>();
       List<QueryEvidence> deserializedEvidence = ret.getEvidence();
       if (deserializedEvidence != null) {
@@ -16256,10 +16756,11 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryRelationsResponse extends IBMWatsonResponseModel {
     private List<QueryRelationsRelationship> relations_serialized_name;
+ 
     /**
-     * Gets the relations_serialized_name.
+     * Gets the relations.
      *
-     * @return the relations_serialized_name
+     * @return the relations
      */
     @AuraEnabled
     public List<QueryRelationsRelationship> getRelations() {
@@ -16267,7 +16768,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the relations_serialized_name.
+     * Sets the relations.
      *
      * @param relations the new relations
      */
@@ -16282,7 +16783,7 @@ public class IBMDiscoveryV1Models {
 
       QueryRelationsResponse ret = (QueryRelationsResponse) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for relations_serialized_name
+      // calling custom deserializer for relations
       List<QueryRelationsRelationship> newRelations = new List<QueryRelationsRelationship>();
       List<QueryRelationsRelationship> deserializedRelations = ret.getRelations();
       if (deserializedRelations != null) {
@@ -16309,60 +16810,66 @@ public class IBMDiscoveryV1Models {
     private List<QueryPassages> passages_serialized_name;
     private Long duplicates_removed_serialized_name;
     private String session_token_serialized_name;
+ 
     /**
-     * Gets the matching_results_serialized_name.
+     * Gets the matchingResults.
      *
-     * @return the matching_results_serialized_name
+     * @return the matchingResults
      */
     @AuraEnabled
     public Long getMatchingResults() {
       return matching_results_serialized_name;
     }
+ 
     /**
-     * Gets the results_serialized_name.
+     * Gets the results.
      *
-     * @return the results_serialized_name
+     * @return the results
      */
     @AuraEnabled
     public List<QueryResult> getResults() {
       return results_serialized_name;
     }
+ 
     /**
-     * Gets the aggregations_serialized_name.
+     * Gets the aggregations.
      *
-     * @return the aggregations_serialized_name
+     * @return the aggregations
      */
     @AuraEnabled
     public List<QueryAggregation> getAggregations() {
       return aggregations_serialized_name;
     }
+ 
     /**
-     * Gets the passages_serialized_name.
+     * Gets the passages.
      *
-     * @return the passages_serialized_name
+     * @return the passages
      */
     @AuraEnabled
     public List<QueryPassages> getPassages() {
       return passages_serialized_name;
     }
+ 
     /**
-     * Gets the duplicates_removed_serialized_name.
+     * Gets the duplicatesRemoved.
      *
-     * @return the duplicates_removed_serialized_name
+     * @return the duplicatesRemoved
      */
     @AuraEnabled
     public Long getDuplicatesRemoved() {
       return duplicates_removed_serialized_name;
     }
+ 
     /**
-     * Gets the session_token_serialized_name.
+     * Gets the sessionToken.
      *
      * The session token for this query. The session token can be used to add events associated with this query to the
      * query and event log.
      *
      * **Important:** Session tokens are case sensitive.
      *
-     * @return the session_token_serialized_name
+     * @return the sessionToken
      */
     @AuraEnabled
     public String getSessionToken() {
@@ -16370,7 +16877,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the matching_results_serialized_name.
+     * Sets the matchingResults.
      *
      * @param matchingResults the new matchingResults
      */
@@ -16379,7 +16886,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the results_serialized_name.
+     * Sets the results.
      *
      * @param results the new results
      */
@@ -16388,7 +16895,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the aggregations_serialized_name.
+     * Sets the aggregations.
      *
      * @param aggregations the new aggregations
      */
@@ -16397,7 +16904,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the passages_serialized_name.
+     * Sets the passages.
      *
      * @param passages the new passages
      */
@@ -16406,7 +16913,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the duplicates_removed_serialized_name.
+     * Sets the duplicatesRemoved.
      *
      * @param duplicatesRemoved the new duplicatesRemoved
      */
@@ -16415,7 +16922,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the session_token_serialized_name.
+     * Sets the sessionToken.
      *
      * @param sessionToken the new sessionToken
      */
@@ -16430,7 +16937,7 @@ public class IBMDiscoveryV1Models {
 
       QueryResponse ret = (QueryResponse) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for results_serialized_name
+      // calling custom deserializer for results
       List<QueryResult> newResults = new List<QueryResult>();
       List<QueryResult> deserializedResults = ret.getResults();
       if (deserializedResults != null) {
@@ -16443,7 +16950,7 @@ public class IBMDiscoveryV1Models {
         ret.setResults(newResults);
       }
 
-      // calling custom deserializer for aggregations_serialized_name
+      // calling custom deserializer for aggregations
       List<QueryAggregation> newAggregations = new List<QueryAggregation>();
       List<QueryAggregation> deserializedAggregations = ret.getAggregations();
       if (deserializedAggregations != null) {
@@ -16456,7 +16963,7 @@ public class IBMDiscoveryV1Models {
         ret.setAggregations(newAggregations);
       }
 
-      // calling custom deserializer for passages_serialized_name
+      // calling custom deserializer for passages
       List<QueryPassages> newPassages = new List<QueryPassages>();
       List<QueryPassages> deserializedPassages = ret.getPassages();
       if (deserializedPassages != null) {
@@ -16485,9 +16992,9 @@ public class IBMDiscoveryV1Models {
     private Map<String, Object> additional_properties_serialized_name;
 
     /**
-     * Gets the id_serialized_name.
+     * Gets the id.
      *
-     * @return the id_serialized_name
+     * @return the id
      */
     @AuraEnabled
     public String getId() {
@@ -16495,9 +17002,9 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the score_serialized_name.
+     * Gets the score.
      *
-     * @return the score_serialized_name
+     * @return the score
      */
     @AuraEnabled
     public Double getScore() {
@@ -16505,9 +17012,9 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the metadata_serialized_name.
+     * Gets the metadata.
      *
-     * @return the metadata_serialized_name
+     * @return the metadata
      */
     @AuraEnabled
     public IBMWatsonMapModel getMetadata() {
@@ -16515,9 +17022,9 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     @AuraEnabled
     public String getCollectionId() {
@@ -16525,9 +17032,9 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Gets the result_metadata_serialized_name.
+     * Gets the resultMetadata.
      *
-     * @return the result_metadata_serialized_name
+     * @return the resultMetadata
      */
     @AuraEnabled
     public QueryResultResultMetadata getResultMetadata() {
@@ -16545,48 +17052,48 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the id_serialized_name.
+     * Sets the id.
      *
-     * @param id_serialized_name the new id_serialized_name
+     * @param id the new id
      */
-    public void setId(final String id_serialized_name) {
-      this.id_serialized_name = id_serialized_name;
+    public void setId(final String id) {
+      this.id_serialized_name = id;
     }
 
     /**
-     * Sets the score_serialized_name.
+     * Sets the score.
      *
-     * @param score_serialized_name the new score_serialized_name
+     * @param score the new score
      */
-    public void setScore(final Double score_serialized_name) {
-      this.score_serialized_name = score_serialized_name;
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
     }
 
     /**
-     * Sets the metadata_serialized_name.
+     * Sets the metadata.
      *
-     * @param metadata_serialized_name the new metadata_serialized_name
+     * @param metadata the new metadata
      */
-    public void setMetadata(final IBMWatsonMapModel metadata_serialized_name) {
-      this.metadata_serialized_name = metadata_serialized_name;
+    public void setMetadata(final IBMWatsonMapModel metadata) {
+      this.metadata_serialized_name = metadata;
     }
 
     /**
-     * Sets the collection_id_serialized_name.
+     * Sets the collectionId.
      *
-     * @param collection_id_serialized_name the new collection_id_serialized_name
+     * @param collectionId the new collectionId
      */
-    public void setCollectionId(final String collection_id_serialized_name) {
-      this.collection_id_serialized_name = collection_id_serialized_name;
+    public void setCollectionId(final String collectionId) {
+      this.collection_id_serialized_name = collectionId;
     }
 
     /**
-     * Sets the result_metadata_serialized_name.
+     * Sets the resultMetadata.
      *
-     * @param result_metadata_serialized_name the new result_metadata_serialized_name
+     * @param resultMetadata the new resultMetadata
      */
-    public void setResultMetadata(final QueryResultResultMetadata result_metadata_serialized_name) {
-      this.result_metadata_serialized_name = result_metadata_serialized_name;
+    public void setResultMetadata(final QueryResultResultMetadata resultMetadata) {
+      this.result_metadata_serialized_name = resultMetadata;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -16596,11 +17103,11 @@ public class IBMDiscoveryV1Models {
 
       QueryResult ret = (QueryResult) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for metadata_serialized_name
+      // calling custom deserializer for metadata
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
-      // calling custom deserializer for result_metadata_serialized_name
+      // calling custom deserializer for resultMetadata
       QueryResultResultMetadata newResultMetadata = (QueryResultResultMetadata) new QueryResultResultMetadata().deserialize(JSON.serialize(ret.getResultMetadata()), (Map<String, Object>) jsonMap.get('result_metadata_serialized_name'), QueryResultResultMetadata.class);
       ret.setResultMetadata(newResultMetadata);
 
@@ -16622,26 +17129,28 @@ public class IBMDiscoveryV1Models {
   public class QueryResultResultMetadata extends IBMWatsonGenericModel {
     private Double score_serialized_name;
     private Double confidence_serialized_name;
+ 
     /**
-     * Gets the score_serialized_name.
+     * Gets the score.
      *
      * An unbounded measure of the relevance of a particular result, dependent on the query and matching document. A
      * higher score indicates a greater match to the query parameters.
      *
-     * @return the score_serialized_name
+     * @return the score
      */
     @AuraEnabled
     public Double getScore() {
       return score_serialized_name;
     }
+ 
     /**
-     * Gets the confidence_serialized_name.
+     * Gets the confidence.
      *
      * The confidence score for the given result. Calculated based on how relevant the result is estimated to be,
      * compared to a trained relevancy model. confidence can range from `0.0` to `1.0`. The higher the number, the more
      * relevant the document.
      *
-     * @return the confidence_serialized_name
+     * @return the confidence
      */
     @AuraEnabled
     public Double getConfidence() {
@@ -16649,7 +17158,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the score_serialized_name.
+     * Sets the score.
      *
      * @param score the new score
      */
@@ -16658,7 +17167,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the confidence_serialized_name.
+     * Sets the confidence.
      *
      * @param confidence the new confidence
      */
@@ -16678,28 +17187,134 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * Information about the Continuous Relevancy Training for this environment.
+   */
+  public class SearchStatus extends IBMWatsonGenericModel {
+    private String scope_serialized_name;
+    private String status_serialized_name;
+    private String status_description_serialized_name;
+    private Datetime last_trained_serialized_name;
+ 
+    /**
+     * Gets the scope.
+     *
+     * Current scope of the training. Always returned as `environment`.
+     *
+     * @return the scope
+     */
+    @AuraEnabled
+    public String getScope() {
+      return scope_serialized_name;
+    }
+ 
+    /**
+     * Gets the status.
+     *
+     * The current status of Continuous Relevancy Training for this environment.
+     *
+     * @return the status
+     */
+    @AuraEnabled
+    public String getStatus() {
+      return status_serialized_name;
+    }
+ 
+    /**
+     * Gets the statusDescription.
+     *
+     * Long description of the current Continuous Relevancy Training status.
+     *
+     * @return the statusDescription
+     */
+    @AuraEnabled
+    public String getStatusDescription() {
+      return status_description_serialized_name;
+    }
+ 
+    /**
+     * Gets the lastTrained.
+     *
+     * The date stamp of the most recent completed training for this environment.
+     *
+     * @return the lastTrained
+     */
+    @AuraEnabled
+    public Datetime getLastTrained() {
+      return last_trained_serialized_name;
+    }
+
+    /**
+     * Sets the scope.
+     *
+     * @param scope the new scope
+     */
+    public void setScope(final String scope) {
+      this.scope_serialized_name = scope;
+    }
+
+    /**
+     * Sets the status.
+     *
+     * @param status the new status
+     */
+    public void setStatus(final String status) {
+      this.status_serialized_name = status;
+    }
+
+    /**
+     * Sets the statusDescription.
+     *
+     * @param statusDescription the new statusDescription
+     */
+    public void setStatusDescription(final String statusDescription) {
+      this.status_description_serialized_name = statusDescription;
+    }
+
+    /**
+     * Sets the lastTrained.
+     *
+     * @param lastTrained the new lastTrained
+     */
+    public void setLastTrained(final Datetime lastTrained) {
+      this.last_trained_serialized_name = lastTrained;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SearchStatus ret = (SearchStatus) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
    * A list of Document Segmentation settings.
    */
   public class SegmentSettings extends IBMWatsonGenericModel {
     private Boolean enabled_serialized_name;
     private List<String> selector_tags_serialized_name;
+ 
     /**
-     * Gets the enabled_serialized_name.
+     * Gets the enabled.
      *
      * Enables/disables the Document Segmentation feature.
      *
-     * @return the enabled_serialized_name
+     * @return the enabled
      */
     @AuraEnabled
     public Boolean getEnabled() {
       return enabled_serialized_name;
     }
+ 
     /**
-     * Gets the selector_tags_serialized_name.
+     * Gets the selectorTags.
      *
      * Defines the heading level that splits into document segments. Valid values are h1, h2, h3, h4, h5, h6.
      *
-     * @return the selector_tags_serialized_name
+     * @return the selectorTags
      */
     @AuraEnabled
     public List<String> getSelectorTags() {
@@ -16707,7 +17322,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the enabled_serialized_name.
+     * Sets the enabled.
      *
      * @param enabled the new enabled
      */
@@ -16716,7 +17331,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the selector_tags_serialized_name.
+     * Sets the selectorTags.
      *
      * @param selectorTags the new selectorTags
      */
@@ -16743,46 +17358,54 @@ public class IBMDiscoveryV1Models {
     private String credential_id_serialized_name;
     private SourceSchedule schedule_serialized_name;
     private SourceOptions options_serialized_name;
+ 
     /**
-     * Gets the type_serialized_name.
+     * Gets the xtype.
      *
      * The type of source to connect to.
      * -  `box` indicates the configuration is to connect an instance of Enterprise Box.
      * -  `salesforce` indicates the configuration is to connect to Salesforce.
      * -  `sharepoint` indicates the configuration is to connect to Microsoft SharePoint Online.
      *
-     * @return the type_serialized_name
+     * @return the xtype
      */
     @AuraEnabled
-    public String getType() {
+    public String getXtype() {
       return type_serialized_name;
     }
+ 
     /**
-     * Gets the credential_id_serialized_name.
+     * Gets the credentialId.
      *
      * The **credential_id** of the credentials to use to connect to the source. Credentials are defined using the
      * **credentials** method. The **source_type** of the credentials used must match the **type** field specified in
      * this object.
      *
-     * @return the credential_id_serialized_name
+     * @return the credentialId
      */
     @AuraEnabled
     public String getCredentialId() {
       return credential_id_serialized_name;
     }
+ 
     /**
-     * Gets the schedule_serialized_name.
+     * Gets the schedule.
      *
-     * @return the schedule_serialized_name
+     * Object containing the schedule information for the source.
+     *
+     * @return the schedule
      */
     @AuraEnabled
     public SourceSchedule getSchedule() {
       return schedule_serialized_name;
     }
+ 
     /**
-     * Gets the options_serialized_name.
+     * Gets the options.
      *
-     * @return the options_serialized_name
+     * The **options** object defines which items to crawl from the source system.
+     *
+     * @return the options
      */
     @AuraEnabled
     public SourceOptions getOptions() {
@@ -16790,16 +17413,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the type_serialized_name.
+     * Sets the xtype.
      *
-     * @param typeVar the new typeVar
+     * @param xtype the new xtype
      */
-    public void setType(final String typeVar) {
-      this.type_serialized_name = typeVar;
+    public void setXtype(final String xtype) {
+      this.type_serialized_name = xtype;
     }
 
     /**
-     * Sets the credential_id_serialized_name.
+     * Sets the credentialId.
      *
      * @param credentialId the new credentialId
      */
@@ -16808,7 +17431,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the schedule_serialized_name.
+     * Sets the schedule.
      *
      * @param schedule the new schedule
      */
@@ -16817,7 +17440,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the options_serialized_name.
+     * Sets the options.
      *
      * @param options the new options
      */
@@ -16832,11 +17455,11 @@ public class IBMDiscoveryV1Models {
 
       Source ret = (Source) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for schedule_serialized_name
+      // calling custom deserializer for schedule
       SourceSchedule newSchedule = (SourceSchedule) new SourceSchedule().deserialize(JSON.serialize(ret.getSchedule()), (Map<String, Object>) jsonMap.get('schedule_serialized_name'), SourceSchedule.class);
       ret.setSchedule(newSchedule);
 
-      // calling custom deserializer for options_serialized_name
+      // calling custom deserializer for options
       SourceOptions newOptions = (SourceOptions) new SourceOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options_serialized_name'), SourceOptions.class);
       ret.setOptions(newOptions);
 
@@ -16851,37 +17474,40 @@ public class IBMDiscoveryV1Models {
     private List<SourceOptionsFolder> folders_serialized_name;
     private List<SourceOptionsObject> objects_serialized_name;
     private List<SourceOptionsSiteColl> site_collections_serialized_name;
+ 
     /**
-     * Gets the folders_serialized_name.
+     * Gets the folders.
      *
      * Array of folders to crawl from the Box source. Only valid, and required, when the **type** field of the
      * **source** object is set to `box`.
      *
-     * @return the folders_serialized_name
+     * @return the folders
      */
     @AuraEnabled
     public List<SourceOptionsFolder> getFolders() {
       return folders_serialized_name;
     }
+ 
     /**
-     * Gets the objects_serialized_name.
+     * Gets the objects.
      *
      * Array of Salesforce document object types to crawl from the Salesforce source. Only valid, and required, when the
      * **type** field of the **source** object is set to `salesforce`.
      *
-     * @return the objects_serialized_name
+     * @return the objects
      */
     @AuraEnabled
     public List<SourceOptionsObject> getObjects() {
       return objects_serialized_name;
     }
+ 
     /**
-     * Gets the site_collections_serialized_name.
+     * Gets the siteCollections.
      *
      * Array of Microsoft SharePointoint Online site collections to crawl from the SharePoint source. Only valid and
      * required when the **type** field of the **source** object is set to `sharepoint`.
      *
-     * @return the site_collections_serialized_name
+     * @return the siteCollections
      */
     @AuraEnabled
     public List<SourceOptionsSiteColl> getSiteCollections() {
@@ -16889,7 +17515,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the folders_serialized_name.
+     * Sets the folders.
      *
      * @param folders the new folders
      */
@@ -16898,7 +17524,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the objects_serialized_name.
+     * Sets the objects.
      *
      * @param objects the new objects
      */
@@ -16907,7 +17533,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the site_collections_serialized_name.
+     * Sets the siteCollections.
      *
      * @param siteCollections the new siteCollections
      */
@@ -16922,7 +17548,7 @@ public class IBMDiscoveryV1Models {
 
       SourceOptions ret = (SourceOptions) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for folders_serialized_name
+      // calling custom deserializer for folders
       List<SourceOptionsFolder> newFolders = new List<SourceOptionsFolder>();
       List<SourceOptionsFolder> deserializedFolders = ret.getFolders();
       if (deserializedFolders != null) {
@@ -16935,7 +17561,7 @@ public class IBMDiscoveryV1Models {
         ret.setFolders(newFolders);
       }
 
-      // calling custom deserializer for objects_serialized_name
+      // calling custom deserializer for objects
       List<SourceOptionsObject> newObjects = new List<SourceOptionsObject>();
       List<SourceOptionsObject> deserializedObjects = ret.getObjects();
       if (deserializedObjects != null) {
@@ -16948,7 +17574,7 @@ public class IBMDiscoveryV1Models {
         ret.setObjects(newObjects);
       }
 
-      // calling custom deserializer for site_collections_serialized_name
+      // calling custom deserializer for siteCollections
       List<SourceOptionsSiteColl> newSiteCollections = new List<SourceOptionsSiteColl>();
       List<SourceOptionsSiteColl> deserializedSiteCollections = ret.getSiteCollections();
       if (deserializedSiteCollections != null) {
@@ -16972,42 +17598,45 @@ public class IBMDiscoveryV1Models {
     private String owner_user_id_serialized_name;
     private String folder_id_serialized_name;
     private Long limit_serialized_name;
+ 
     /**
-     * Gets the owner_user_id_serialized_name.
+     * Gets the ownerUserId.
      *
      * The Box user ID of the user who owns the folder to crawl.
      *
-     * @return the owner_user_id_serialized_name
+     * @return the ownerUserId
      */
     @AuraEnabled
     public String getOwnerUserId() {
       return owner_user_id_serialized_name;
     }
+ 
     /**
-     * Gets the folder_id_serialized_name.
+     * Gets the folderId.
      *
      * The Box folder ID of the folder to crawl.
      *
-     * @return the folder_id_serialized_name
+     * @return the folderId
      */
     @AuraEnabled
     public String getFolderId() {
       return folder_id_serialized_name;
     }
+ 
     /**
-     * Gets the limit_serialized_name.
+     * Gets the xlimit.
      *
      * The maximum number of documents to crawl for this folder. By default, all documents in the folder are crawled.
      *
-     * @return the limit_serialized_name
+     * @return the xlimit
      */
     @AuraEnabled
-    public Long getLimit() {
+    public Long getXlimit() {
       return limit_serialized_name;
     }
 
     /**
-     * Sets the owner_user_id_serialized_name.
+     * Sets the ownerUserId.
      *
      * @param ownerUserId the new ownerUserId
      */
@@ -17016,7 +17645,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the folder_id_serialized_name.
+     * Sets the folderId.
      *
      * @param folderId the new folderId
      */
@@ -17025,12 +17654,12 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the limit_serialized_name.
+     * Sets the xlimit.
      *
-     * @param limitVar the new limitVar
+     * @param xlimit the new xlimit
      */
-    public void setLimit(final long limitVar) {
-      this.limit_serialized_name = limitVar;
+    public void setXlimit(final long xlimit) {
+      this.limit_serialized_name = xlimit;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -17050,32 +17679,34 @@ public class IBMDiscoveryV1Models {
   public class SourceOptionsObject extends IBMWatsonGenericModel {
     private String name_serialized_name;
     private Long limit_serialized_name;
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The name of the Salesforce document object to crawl. For example, `case`.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the limit_serialized_name.
+     * Gets the xlimit.
      *
      * The maximum number of documents to crawl for this document object. By default, all documents in the document
      * object are crawled.
      *
-     * @return the limit_serialized_name
+     * @return the xlimit
      */
     @AuraEnabled
-    public Long getLimit() {
+    public Long getXlimit() {
       return limit_serialized_name;
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -17084,12 +17715,12 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the limit_serialized_name.
+     * Sets the xlimit.
      *
-     * @param limitVar the new limitVar
+     * @param xlimit the new xlimit
      */
-    public void setLimit(final long limitVar) {
-      this.limit_serialized_name = limitVar;
+    public void setXlimit(final long xlimit) {
+      this.limit_serialized_name = xlimit;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -17109,33 +17740,35 @@ public class IBMDiscoveryV1Models {
   public class SourceOptionsSiteColl extends IBMWatsonGenericModel {
     private String site_collection_path_serialized_name;
     private Long limit_serialized_name;
+ 
     /**
-     * Gets the site_collection_path_serialized_name.
+     * Gets the siteCollectionPath.
      *
      * The Microsoft SharePoint Online site collection path to crawl. The path must be be relative to the
      * **organization_url** that was specified in the credentials associated with this source configuration.
      *
-     * @return the site_collection_path_serialized_name
+     * @return the siteCollectionPath
      */
     @AuraEnabled
     public String getSiteCollectionPath() {
       return site_collection_path_serialized_name;
     }
+ 
     /**
-     * Gets the limit_serialized_name.
+     * Gets the xlimit.
      *
      * The maximum number of documents to crawl for this site collection. By default, all documents in the site
      * collection are crawled.
      *
-     * @return the limit_serialized_name
+     * @return the xlimit
      */
     @AuraEnabled
-    public Long getLimit() {
+    public Long getXlimit() {
       return limit_serialized_name;
     }
 
     /**
-     * Sets the site_collection_path_serialized_name.
+     * Sets the siteCollectionPath.
      *
      * @param siteCollectionPath the new siteCollectionPath
      */
@@ -17144,12 +17777,12 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the limit_serialized_name.
+     * Sets the xlimit.
      *
-     * @param limitVar the new limitVar
+     * @param xlimit the new xlimit
      */
-    public void setLimit(final long limitVar) {
-      this.limit_serialized_name = limitVar;
+    public void setXlimit(final long xlimit) {
+      this.limit_serialized_name = xlimit;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -17170,32 +17803,35 @@ public class IBMDiscoveryV1Models {
     private Boolean enabled_serialized_name;
     private String time_zone_serialized_name;
     private String frequency_serialized_name;
+ 
     /**
-     * Gets the enabled_serialized_name.
+     * Gets the enabled.
      *
      * When `true`, the source is re-crawled based on the **frequency** field in this object. When `false` the source is
      * not re-crawled; When `false` and connecting to Salesforce the source is crawled annually.
      *
-     * @return the enabled_serialized_name
+     * @return the enabled
      */
     @AuraEnabled
     public Boolean getEnabled() {
       return enabled_serialized_name;
     }
+ 
     /**
-     * Gets the time_zone_serialized_name.
+     * Gets the timeZone.
      *
      * The time zone to base source crawl times on. Possible values correspond to the IANA (Internet Assigned Numbers
      * Authority) time zones list.
      *
-     * @return the time_zone_serialized_name
+     * @return the timeZone
      */
     @AuraEnabled
     public String getTimeZone() {
       return time_zone_serialized_name;
     }
+ 
     /**
-     * Gets the frequency_serialized_name.
+     * Gets the frequency.
      *
      * The crawl schedule in the specified **time_zone**.
      *
@@ -17203,7 +17839,7 @@ public class IBMDiscoveryV1Models {
      * -  `weekly`: Runs every week on Sunday between 00:00 and 06:00.
      * -  `monthly`: Runs the on the first Sunday of every month between 00:00 and 06:00.
      *
-     * @return the frequency_serialized_name
+     * @return the frequency
      */
     @AuraEnabled
     public String getFrequency() {
@@ -17211,7 +17847,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the enabled_serialized_name.
+     * Sets the enabled.
      *
      * @param enabled the new enabled
      */
@@ -17220,7 +17856,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the time_zone_serialized_name.
+     * Sets the timeZone.
      *
      * @param timeZone the new timeZone
      */
@@ -17229,7 +17865,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the frequency_serialized_name.
+     * Sets the frequency.
      *
      * @param frequency the new frequency
      */
@@ -17254,8 +17890,9 @@ public class IBMDiscoveryV1Models {
   public class SourceStatus extends IBMWatsonGenericModel {
     private String status_serialized_name;
     private Datetime last_updated_serialized_name;
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * The current status of the source crawl for this collection. This field returns `not_configured` if the default
      * configuration for this source does not have a **source** object defined.
@@ -17266,18 +17903,19 @@ public class IBMDiscoveryV1Models {
      * using the **notices** query method.
      * -  `stopped` indicates that the crawl has stopped but is not complete.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
       return status_serialized_name;
     }
+ 
     /**
-     * Gets the last_updated_serialized_name.
+     * Gets the lastUpdated.
      *
      * Date in UTC format indicating when the last crawl was attempted. If `null`, no crawl was completed.
      *
-     * @return the last_updated_serialized_name
+     * @return the lastUpdated
      */
     @AuraEnabled
     public Datetime getLastUpdated() {
@@ -17285,7 +17923,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the status_serialized_name.
+     * Sets the status.
      *
      * @param status the new status
      */
@@ -17294,7 +17932,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the last_updated_serialized_name.
+     * Sets the lastUpdated.
      *
      * @param lastUpdated the new lastUpdated
      */
@@ -17317,26 +17955,28 @@ public class IBMDiscoveryV1Models {
    * The testConfigurationInEnvironment options.
    */
   public class TestConfigurationInEnvironmentOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String configuration_serialized_name;
-    private String step_serialized_name;
-    private String configuration_id_serialized_name;
-    private IBMWatsonFile file_serialized_name;
-    private String filename_serialized_name;
-    private String metadata_serialized_name;
-    private String file_content_type_serialized_name;
+    private String environmentId;
+    private String configuration;
+    private String step;
+    private String configurationId;
+    private IBMWatsonFile file;
+    private String filename;
+    private String metadata;
+    private String fileContentType;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the configuration_serialized_name.
+     * Gets the configuration.
      *
      * The configuration to use to process the document. If this part is provided, then the provided configuration is
      * used to process the document. If the **configuration_id** is also provided (both are present at the same time),
@@ -17344,56 +17984,61 @@ public class IBMDiscoveryV1Models {
      * are rejected.
      * See the `GET /configurations/{configuration_id}` operation for an example configuration.
      *
-     * @return the configuration_serialized_name
+     * @return the configuration
      */
     public String configuration() {
-      return configuration_serialized_name;
+      return configuration;
     }
+ 
     /**
-     * Gets the step_serialized_name.
+     * Gets the step.
      *
      * Specify to only run the input document through the given step instead of running the input document through the
      * entire ingestion workflow. Valid values are `convert`, `enrich`, and `normalize`.
      *
-     * @return the step_serialized_name
+     * @return the step
      */
     public String step() {
-      return step_serialized_name;
+      return step;
     }
+ 
     /**
-     * Gets the configuration_id_serialized_name.
+     * Gets the configurationId.
      *
      * The ID of the configuration to use to process the document. If the **configuration** form part is also provided
      * (both are present at the same time), then the request will be rejected.
      *
-     * @return the configuration_id_serialized_name
+     * @return the configurationId
      */
     public String configurationId() {
-      return configuration_id_serialized_name;
+      return configurationId;
     }
+ 
     /**
-     * Gets the file_serialized_name.
+     * Gets the file.
      *
      * The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50
      * megabytes is rejected.
      *
-     * @return the file_serialized_name
+     * @return the file
      */
     public IBMWatsonFile file() {
-      return file_serialized_name;
+      return file;
     }
+ 
     /**
-     * Gets the filename_serialized_name.
+     * Gets the filename.
      *
      * The filename for file.
      *
-     * @return the filename_serialized_name
+     * @return the filename
      */
     public String filename() {
-      return filename_serialized_name;
+      return filename;
     }
+ 
     /**
-     * Gets the metadata_serialized_name.
+     * Gets the metadata.
      *
      * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata
      * that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1
@@ -17403,32 +18048,34 @@ public class IBMDiscoveryV1Models {
      *   "Subject": "Apples"
      * } ```.
      *
-     * @return the metadata_serialized_name
+     * @return the metadata
      */
     public String metadata() {
-      return metadata_serialized_name;
+      return metadata;
     }
+ 
     /**
-     * Gets the file_content_type_serialized_name.
+     * Gets the fileContentType.
      *
      * The content type of file.
      *
-     * @return the file_content_type_serialized_name
+     * @return the fileContentType
      */
     public String fileContentType() {
-      return file_content_type_serialized_name;
+      return fileContentType;
     }
+
     private TestConfigurationInEnvironmentOptions(TestConfigurationInEnvironmentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.isTrue(builder.file_serialized_name == null || builder.file_content_type_serialized_name != null, 'content type cannot be null if file is not null');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      configuration_serialized_name = builder.configuration_serialized_name;
-      step_serialized_name = builder.step_serialized_name;
-      configuration_id_serialized_name = builder.configuration_id_serialized_name;
-      file_serialized_name = builder.file_serialized_name;
-      filename_serialized_name = builder.filename_serialized_name;
-      metadata_serialized_name = builder.metadata_serialized_name;
-      file_content_type_serialized_name = builder.file_content_type_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.isTrue(builder.file == null || builder.fileContentType != null, 'content type cannot be null if file is not null');
+      environmentId = builder.environmentId;
+      configuration = builder.configuration;
+      step = builder.step;
+      configurationId = builder.configurationId;
+      file = builder.file;
+      filename = builder.filename;
+      metadata = builder.metadata;
+      fileContentType = builder.fileContentType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -17447,24 +18094,24 @@ public class IBMDiscoveryV1Models {
    * TestConfigurationInEnvironmentOptions Builder.
    */
   public class TestConfigurationInEnvironmentOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String configuration_serialized_name;
-    private String step_serialized_name;
-    private String configuration_id_serialized_name;
-    private IBMWatsonFile file_serialized_name;
-    private String filename_serialized_name;
-    private String metadata_serialized_name;
-    private String file_content_type_serialized_name;
+    private String environmentId;
+    private String configuration;
+    private String step;
+    private String configurationId;
+    private IBMWatsonFile file;
+    private String filename;
+    private String metadata;
+    private String fileContentType;
 
     private TestConfigurationInEnvironmentOptionsBuilder(TestConfigurationInEnvironmentOptions testConfigurationInEnvironmentOptions) {
-      environment_id_serialized_name = testConfigurationInEnvironmentOptions.environment_id_serialized_name;
-      configuration_serialized_name = testConfigurationInEnvironmentOptions.configuration_serialized_name;
-      step_serialized_name = testConfigurationInEnvironmentOptions.step_serialized_name;
-      configuration_id_serialized_name = testConfigurationInEnvironmentOptions.configuration_id_serialized_name;
-      file_serialized_name = testConfigurationInEnvironmentOptions.file_serialized_name;
-      filename_serialized_name = testConfigurationInEnvironmentOptions.filename_serialized_name;
-      metadata_serialized_name = testConfigurationInEnvironmentOptions.metadata_serialized_name;
-      file_content_type_serialized_name = testConfigurationInEnvironmentOptions.file_content_type_serialized_name;
+      environmentId = testConfigurationInEnvironmentOptions.environmentId;
+      configuration = testConfigurationInEnvironmentOptions.configuration;
+      step = testConfigurationInEnvironmentOptions.step;
+      configurationId = testConfigurationInEnvironmentOptions.configurationId;
+      file = testConfigurationInEnvironmentOptions.file;
+      filename = testConfigurationInEnvironmentOptions.filename;
+      metadata = testConfigurationInEnvironmentOptions.metadata;
+      fileContentType = testConfigurationInEnvironmentOptions.fileContentType;
       this.requestHeaders.putAll(testConfigurationInEnvironmentOptions.requestHeaders());
     }
 
@@ -17480,7 +18127,7 @@ public class IBMDiscoveryV1Models {
      * @param environmentId the environmentId
      */
     public TestConfigurationInEnvironmentOptionsBuilder(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
     }
 
     /**
@@ -17493,90 +18140,90 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the TestConfigurationInEnvironmentOptions builder
      */
     public TestConfigurationInEnvironmentOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the configuration_serialized_name.
+     * Set the configuration.
      *
      * @param configuration the configuration
      * @return the TestConfigurationInEnvironmentOptions builder
      */
     public TestConfigurationInEnvironmentOptionsBuilder configuration(String configuration) {
-      this.configuration_serialized_name = configuration;
+      this.configuration = configuration;
       return this;
     }
 
     /**
-     * Set the step_serialized_name.
+     * Set the step.
      *
      * @param step the step
      * @return the TestConfigurationInEnvironmentOptions builder
      */
     public TestConfigurationInEnvironmentOptionsBuilder step(String step) {
-      this.step_serialized_name = step;
+      this.step = step;
       return this;
     }
 
     /**
-     * Set the configuration_id_serialized_name.
+     * Set the configurationId.
      *
      * @param configurationId the configurationId
      * @return the TestConfigurationInEnvironmentOptions builder
      */
     public TestConfigurationInEnvironmentOptionsBuilder configurationId(String configurationId) {
-      this.configuration_id_serialized_name = configurationId;
+      this.configurationId = configurationId;
       return this;
     }
 
     /**
-     * Set the file_serialized_name.
+     * Set the file.
      *
      * @param file the file
      * @return the TestConfigurationInEnvironmentOptions builder
      */
     public TestConfigurationInEnvironmentOptionsBuilder file(IBMWatsonFile file) {
-      this.file_serialized_name = file;
+      this.file = file;
       return this;
     }
 
     /**
-     * Set the filename_serialized_name.
+     * Set the filename.
      *
      * @param filename the filename
      * @return the TestConfigurationInEnvironmentOptions builder
      */
     public TestConfigurationInEnvironmentOptionsBuilder filename(String filename) {
-      this.filename_serialized_name = filename;
+      this.filename = filename;
       return this;
     }
 
     /**
-     * Set the metadata_serialized_name.
+     * Set the metadata.
      *
      * @param metadata the metadata
      * @return the TestConfigurationInEnvironmentOptions builder
      */
     public TestConfigurationInEnvironmentOptionsBuilder metadata(String metadata) {
-      this.metadata_serialized_name = metadata;
+      this.metadata = metadata;
       return this;
     }
 
     /**
-     * Set the file_content_type_serialized_name.
+     * Set the fileContentType.
      *
      * @param fileContentType the fileContentType
      * @return the TestConfigurationInEnvironmentOptions builder
      */
     public TestConfigurationInEnvironmentOptionsBuilder fileContentType(String fileContentType) {
-      this.file_content_type_serialized_name = fileContentType;
+      this.fileContentType = fileContentType;
       return this;
     }
 
@@ -17603,68 +18250,74 @@ public class IBMDiscoveryV1Models {
     private String original_media_type_serialized_name;
     private List<DocumentSnapshot> snapshots_serialized_name;
     private List<Notice> notices_serialized_name;
+ 
     /**
-     * Gets the configuration_id_serialized_name.
+     * Gets the configurationId.
      *
      * The unique identifier for the configuration.
      *
-     * @return the configuration_id_serialized_name
+     * @return the configurationId
      */
     @AuraEnabled
     public String getConfigurationId() {
       return configuration_id_serialized_name;
     }
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * Status of the preview operation.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
       return status_serialized_name;
     }
+ 
     /**
-     * Gets the enriched_field_units_serialized_name.
+     * Gets the enrichedFieldUnits.
      *
      * The number of 10-kB chunks of field data that were enriched. This can be used to estimate the cost of running a
      * real ingestion.
      *
-     * @return the enriched_field_units_serialized_name
+     * @return the enrichedFieldUnits
      */
     @AuraEnabled
     public Long getEnrichedFieldUnits() {
       return enriched_field_units_serialized_name;
     }
+ 
     /**
-     * Gets the original_media_type_serialized_name.
+     * Gets the originalMediaType.
      *
      * Format of the test document.
      *
-     * @return the original_media_type_serialized_name
+     * @return the originalMediaType
      */
     @AuraEnabled
     public String getOriginalMediaType() {
       return original_media_type_serialized_name;
     }
+ 
     /**
-     * Gets the snapshots_serialized_name.
+     * Gets the snapshots.
      *
      * An array of objects that describe each step in the preview process.
      *
-     * @return the snapshots_serialized_name
+     * @return the snapshots
      */
     @AuraEnabled
     public List<DocumentSnapshot> getSnapshots() {
       return snapshots_serialized_name;
     }
+ 
     /**
-     * Gets the notices_serialized_name.
+     * Gets the notices.
      *
      * An array of notice messages about the preview operation.
      *
-     * @return the notices_serialized_name
+     * @return the notices
      */
     @AuraEnabled
     public List<Notice> getNotices() {
@@ -17672,7 +18325,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the snapshots_serialized_name.
+     * Sets the snapshots.
      *
      * @param snapshots the new snapshots
      */
@@ -17681,7 +18334,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the notices_serialized_name.
+     * Sets the notices.
      *
      * @param notices the new notices
      */
@@ -17696,7 +18349,7 @@ public class IBMDiscoveryV1Models {
 
       TestDocument ret = (TestDocument) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for snapshots_serialized_name
+      // calling custom deserializer for snapshots
       List<DocumentSnapshot> newSnapshots = new List<DocumentSnapshot>();
       List<DocumentSnapshot> deserializedSnapshots = ret.getSnapshots();
       if (deserializedSnapshots != null) {
@@ -17709,7 +18362,7 @@ public class IBMDiscoveryV1Models {
         ret.setSnapshots(newSnapshots);
       }
 
-      // calling custom deserializer for notices_serialized_name
+      // calling custom deserializer for notices
       List<Notice> newNotices = new List<Notice>();
       List<Notice> deserializedNotices = ret.getNotices();
       if (deserializedNotices != null) {
@@ -17732,23 +18385,25 @@ public class IBMDiscoveryV1Models {
   public class TopHitsResults extends IBMWatsonGenericModel {
     private Long matching_results_serialized_name;
     private List<QueryResult> hits_serialized_name;
+ 
     /**
-     * Gets the matching_results_serialized_name.
+     * Gets the matchingResults.
      *
      * Number of matching results.
      *
-     * @return the matching_results_serialized_name
+     * @return the matchingResults
      */
     @AuraEnabled
     public Long getMatchingResults() {
       return matching_results_serialized_name;
     }
+ 
     /**
-     * Gets the hits_serialized_name.
+     * Gets the hits.
      *
      * Top results returned by the aggregation.
      *
-     * @return the hits_serialized_name
+     * @return the hits
      */
     @AuraEnabled
     public List<QueryResult> getHits() {
@@ -17756,7 +18411,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the matching_results_serialized_name.
+     * Sets the matchingResults.
      *
      * @param matchingResults the new matchingResults
      */
@@ -17765,7 +18420,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the hits_serialized_name.
+     * Sets the hits.
      *
      * @param hits the new hits
      */
@@ -17780,7 +18435,7 @@ public class IBMDiscoveryV1Models {
 
       TopHitsResults ret = (TopHitsResults) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for hits_serialized_name
+      // calling custom deserializer for hits
       List<QueryResult> newHits = new List<QueryResult>();
       List<QueryResult> deserializedHits = ret.getHits();
       if (deserializedHits != null) {
@@ -17804,28 +18459,31 @@ public class IBMDiscoveryV1Models {
     private String environment_id_serialized_name;
     private String collection_id_serialized_name;
     private List<TrainingQuery> queries_serialized_name;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     @AuraEnabled
     public String getEnvironmentId() {
       return environment_id_serialized_name;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     @AuraEnabled
     public String getCollectionId() {
       return collection_id_serialized_name;
     }
+ 
     /**
-     * Gets the queries_serialized_name.
+     * Gets the queries.
      *
-     * @return the queries_serialized_name
+     * @return the queries
      */
     @AuraEnabled
     public List<TrainingQuery> getQueries() {
@@ -17833,7 +18491,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the environment_id_serialized_name.
+     * Sets the environmentId.
      *
      * @param environmentId the new environmentId
      */
@@ -17842,7 +18500,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the collection_id_serialized_name.
+     * Sets the collectionId.
      *
      * @param collectionId the new collectionId
      */
@@ -17851,7 +18509,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the queries_serialized_name.
+     * Sets the queries.
      *
      * @param queries the new queries
      */
@@ -17866,7 +18524,7 @@ public class IBMDiscoveryV1Models {
 
       TrainingDataSet ret = (TrainingDataSet) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for queries_serialized_name
+      // calling custom deserializer for queries
       List<TrainingQuery> newQueries = new List<TrainingQuery>();
       List<TrainingQuery> deserializedQueries = ret.getQueries();
       if (deserializedQueries != null) {
@@ -17890,28 +18548,31 @@ public class IBMDiscoveryV1Models {
     private String document_id_serialized_name;
     private String cross_reference_serialized_name;
     private Long relevance_serialized_name;
+ 
     /**
-     * Gets the document_id_serialized_name.
+     * Gets the documentId.
      *
-     * @return the document_id_serialized_name
+     * @return the documentId
      */
     @AuraEnabled
     public String getDocumentId() {
       return document_id_serialized_name;
     }
+ 
     /**
-     * Gets the cross_reference_serialized_name.
+     * Gets the crossReference.
      *
-     * @return the cross_reference_serialized_name
+     * @return the crossReference
      */
     @AuraEnabled
     public String getCrossReference() {
       return cross_reference_serialized_name;
     }
+ 
     /**
-     * Gets the relevance_serialized_name.
+     * Gets the relevance.
      *
-     * @return the relevance_serialized_name
+     * @return the relevance
      */
     @AuraEnabled
     public Long getRelevance() {
@@ -17919,7 +18580,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the document_id_serialized_name.
+     * Sets the documentId.
      *
      * @param documentId the new documentId
      */
@@ -17928,7 +18589,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the cross_reference_serialized_name.
+     * Sets the crossReference.
      *
      * @param crossReference the new crossReference
      */
@@ -17937,7 +18598,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the relevance_serialized_name.
+     * Sets the relevance.
      *
      * @param relevance the new relevance
      */
@@ -17961,10 +18622,11 @@ public class IBMDiscoveryV1Models {
    */
   public class TrainingExampleList extends IBMWatsonResponseModel {
     private List<TrainingExample> examples_serialized_name;
+ 
     /**
-     * Gets the examples_serialized_name.
+     * Gets the examples.
      *
-     * @return the examples_serialized_name
+     * @return the examples
      */
     @AuraEnabled
     public List<TrainingExample> getExamples() {
@@ -17972,7 +18634,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the examples_serialized_name.
+     * Sets the examples.
      *
      * @param examples the new examples
      */
@@ -17987,7 +18649,7 @@ public class IBMDiscoveryV1Models {
 
       TrainingExampleList ret = (TrainingExampleList) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for examples_serialized_name
+      // calling custom deserializer for examples
       List<TrainingExample> newExamples = new List<TrainingExample>();
       List<TrainingExample> deserializedExamples = ret.getExamples();
       if (deserializedExamples != null) {
@@ -18012,37 +18674,41 @@ public class IBMDiscoveryV1Models {
     private String natural_language_query_serialized_name;
     private String filter_serialized_name;
     private List<TrainingExample> examples_serialized_name;
+ 
     /**
-     * Gets the query_id_serialized_name.
+     * Gets the queryId.
      *
-     * @return the query_id_serialized_name
+     * @return the queryId
      */
     @AuraEnabled
     public String getQueryId() {
       return query_id_serialized_name;
     }
+ 
     /**
-     * Gets the natural_language_query_serialized_name.
+     * Gets the naturalLanguageQuery.
      *
-     * @return the natural_language_query_serialized_name
+     * @return the naturalLanguageQuery
      */
     @AuraEnabled
     public String getNaturalLanguageQuery() {
       return natural_language_query_serialized_name;
     }
+ 
     /**
-     * Gets the filter_serialized_name.
+     * Gets the filter.
      *
-     * @return the filter_serialized_name
+     * @return the filter
      */
     @AuraEnabled
     public String getFilter() {
       return filter_serialized_name;
     }
+ 
     /**
-     * Gets the examples_serialized_name.
+     * Gets the examples.
      *
-     * @return the examples_serialized_name
+     * @return the examples
      */
     @AuraEnabled
     public List<TrainingExample> getExamples() {
@@ -18050,7 +18716,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the query_id_serialized_name.
+     * Sets the queryId.
      *
      * @param queryId the new queryId
      */
@@ -18059,7 +18725,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the natural_language_query_serialized_name.
+     * Sets the naturalLanguageQuery.
      *
      * @param naturalLanguageQuery the new naturalLanguageQuery
      */
@@ -18068,7 +18734,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the filter_serialized_name.
+     * Sets the filter.
      *
      * @param filter the new filter
      */
@@ -18077,7 +18743,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the examples_serialized_name.
+     * Sets the examples.
      *
      * @param examples the new examples
      */
@@ -18092,7 +18758,7 @@ public class IBMDiscoveryV1Models {
 
       TrainingQuery ret = (TrainingQuery) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for examples_serialized_name
+      // calling custom deserializer for examples
       List<TrainingExample> newExamples = new List<TrainingExample>();
       List<TrainingExample> deserializedExamples = ret.getExamples();
       if (deserializedExamples != null) {
@@ -18122,82 +18788,91 @@ public class IBMDiscoveryV1Models {
     private Long notices_serialized_name;
     private Datetime successfully_trained_serialized_name;
     private Datetime data_updated_serialized_name;
+ 
     /**
-     * Gets the total_examples_serialized_name.
+     * Gets the totalExamples.
      *
-     * @return the total_examples_serialized_name
+     * @return the totalExamples
      */
     @AuraEnabled
     public Long getTotalExamples() {
       return total_examples_serialized_name;
     }
+ 
     /**
-     * Gets the available_serialized_name.
+     * Gets the available.
      *
-     * @return the available_serialized_name
+     * @return the available
      */
     @AuraEnabled
     public Boolean getAvailable() {
       return available_serialized_name;
     }
+ 
     /**
-     * Gets the processing_serialized_name.
+     * Gets the processing.
      *
-     * @return the processing_serialized_name
+     * @return the processing
      */
     @AuraEnabled
     public Boolean getProcessing() {
       return processing_serialized_name;
     }
+ 
     /**
-     * Gets the minimum_queries_added_serialized_name.
+     * Gets the minimumQueriesAdded.
      *
-     * @return the minimum_queries_added_serialized_name
+     * @return the minimumQueriesAdded
      */
     @AuraEnabled
     public Boolean getMinimumQueriesAdded() {
       return minimum_queries_added_serialized_name;
     }
+ 
     /**
-     * Gets the minimum_examples_added_serialized_name.
+     * Gets the minimumExamplesAdded.
      *
-     * @return the minimum_examples_added_serialized_name
+     * @return the minimumExamplesAdded
      */
     @AuraEnabled
     public Boolean getMinimumExamplesAdded() {
       return minimum_examples_added_serialized_name;
     }
+ 
     /**
-     * Gets the sufficient_label_diversity_serialized_name.
+     * Gets the sufficientLabelDiversity.
      *
-     * @return the sufficient_label_diversity_serialized_name
+     * @return the sufficientLabelDiversity
      */
     @AuraEnabled
     public Boolean getSufficientLabelDiversity() {
       return sufficient_label_diversity_serialized_name;
     }
+ 
     /**
-     * Gets the notices_serialized_name.
+     * Gets the notices.
      *
-     * @return the notices_serialized_name
+     * @return the notices
      */
     @AuraEnabled
     public Long getNotices() {
       return notices_serialized_name;
     }
+ 
     /**
-     * Gets the successfully_trained_serialized_name.
+     * Gets the successfullyTrained.
      *
-     * @return the successfully_trained_serialized_name
+     * @return the successfullyTrained
      */
     @AuraEnabled
     public Datetime getSuccessfullyTrained() {
       return successfully_trained_serialized_name;
     }
+ 
     /**
-     * Gets the data_updated_serialized_name.
+     * Gets the dataUpdated.
      *
-     * @return the data_updated_serialized_name
+     * @return the dataUpdated
      */
     @AuraEnabled
     public Datetime getDataUpdated() {
@@ -18205,7 +18880,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the total_examples_serialized_name.
+     * Sets the totalExamples.
      *
      * @param totalExamples the new totalExamples
      */
@@ -18214,7 +18889,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the available_serialized_name.
+     * Sets the available.
      *
      * @param available the new available
      */
@@ -18223,7 +18898,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the processing_serialized_name.
+     * Sets the processing.
      *
      * @param processing the new processing
      */
@@ -18232,7 +18907,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the minimum_queries_added_serialized_name.
+     * Sets the minimumQueriesAdded.
      *
      * @param minimumQueriesAdded the new minimumQueriesAdded
      */
@@ -18241,7 +18916,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the minimum_examples_added_serialized_name.
+     * Sets the minimumExamplesAdded.
      *
      * @param minimumExamplesAdded the new minimumExamplesAdded
      */
@@ -18250,7 +18925,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the sufficient_label_diversity_serialized_name.
+     * Sets the sufficientLabelDiversity.
      *
      * @param sufficientLabelDiversity the new sufficientLabelDiversity
      */
@@ -18259,7 +18934,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the notices_serialized_name.
+     * Sets the notices.
      *
      * @param notices the new notices
      */
@@ -18268,7 +18943,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the successfully_trained_serialized_name.
+     * Sets the successfullyTrained.
      *
      * @param successfullyTrained the new successfullyTrained
      */
@@ -18277,7 +18952,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the data_updated_serialized_name.
+     * Sets the dataUpdated.
      *
      * @param dataUpdated the new dataUpdated
      */
@@ -18290,17 +18965,7 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      String data_updated = (String) jsonMap.remove('data_updated_serialized_name');
-      String successfully_trained = (String) jsonMap.remove('successfully_trained_serialized_name');
-      String jsonStringWithoutDates = JSON.serialize(jsonMap);
-
-      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
-      if (String.isNotBlank(data_updated)) {
-        ret.setDataUpdated((Datetime) JSON.deserialize('"' + data_updated + '"', Datetime.class));
-      }
-      if (String.isNotBlank(successfully_trained)) {
-        ret.setSuccessfullyTrained((Datetime) JSON.deserialize('"' + successfully_trained + '"', Datetime.class));
-      }
+      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -18310,69 +18975,75 @@ public class IBMDiscoveryV1Models {
    * The updateCollection options.
    */
   public class UpdateCollectionOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private String configuration_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String name;
+    private String description;
+    private String configurationId;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The name of the collection.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     public String name() {
-      return name_serialized_name;
+      return name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * A description of the collection.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     public String description() {
-      return description_serialized_name;
+      return description;
     }
+ 
     /**
-     * Gets the configuration_id_serialized_name.
+     * Gets the configurationId.
      *
      * The ID of the configuration in which the collection is to be updated.
      *
-     * @return the configuration_id_serialized_name
+     * @return the configurationId
      */
     public String configurationId() {
-      return configuration_id_serialized_name;
+      return configurationId;
     }
+
     private UpdateCollectionOptions(UpdateCollectionOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      name_serialized_name = builder.name_serialized_name;
-      description_serialized_name = builder.description_serialized_name;
-      configuration_id_serialized_name = builder.configuration_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      name = builder.name;
+      description = builder.description;
+      configurationId = builder.configurationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -18391,18 +19062,18 @@ public class IBMDiscoveryV1Models {
    * UpdateCollectionOptions Builder.
    */
   public class UpdateCollectionOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private String configuration_id_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String name;
+    private String description;
+    private String configurationId;
 
     private UpdateCollectionOptionsBuilder(UpdateCollectionOptions updateCollectionOptions) {
-      environment_id_serialized_name = updateCollectionOptions.environment_id_serialized_name;
-      collection_id_serialized_name = updateCollectionOptions.collection_id_serialized_name;
-      name_serialized_name = updateCollectionOptions.name_serialized_name;
-      description_serialized_name = updateCollectionOptions.description_serialized_name;
-      configuration_id_serialized_name = updateCollectionOptions.configuration_id_serialized_name;
+      environmentId = updateCollectionOptions.environmentId;
+      collectionId = updateCollectionOptions.collectionId;
+      name = updateCollectionOptions.name;
+      description = updateCollectionOptions.description;
+      configurationId = updateCollectionOptions.configurationId;
       this.requestHeaders.putAll(updateCollectionOptions.requestHeaders());
     }
 
@@ -18419,8 +19090,8 @@ public class IBMDiscoveryV1Models {
      * @param collectionId the collectionId
      */
     public UpdateCollectionOptionsBuilder(String environmentId, String collectionId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
     }
 
     /**
@@ -18433,57 +19104,57 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the UpdateCollectionOptions builder
      */
     public UpdateCollectionOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the UpdateCollectionOptions builder
      */
     public UpdateCollectionOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the name_serialized_name.
+     * Set the name.
      *
      * @param name the name
      * @return the UpdateCollectionOptions builder
      */
     public UpdateCollectionOptionsBuilder name(String name) {
-      this.name_serialized_name = name;
+      this.name = name;
       return this;
     }
 
     /**
-     * Set the description_serialized_name.
+     * Set the description.
      *
      * @param description the description
      * @return the UpdateCollectionOptions builder
      */
     public UpdateCollectionOptionsBuilder description(String description) {
-      this.description_serialized_name = description;
+      this.description = description;
       return this;
     }
 
     /**
-     * Set the configuration_id_serialized_name.
+     * Set the configurationId.
      *
      * @param configurationId the configurationId
      * @return the UpdateCollectionOptions builder
      */
     public UpdateCollectionOptionsBuilder configurationId(String configurationId) {
-      this.configuration_id_serialized_name = configurationId;
+      this.configurationId = configurationId;
       return this;
     }
 
@@ -18504,104 +19175,115 @@ public class IBMDiscoveryV1Models {
    * The updateConfiguration options.
    */
   public class UpdateConfigurationOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String configuration_id_serialized_name;
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private Conversions conversions_serialized_name;
-    private List<Enrichment> enrichments_serialized_name;
-    private List<NormalizationOperation> normalizations_serialized_name;
-    private Source source_serialized_name;
+    private String environmentId;
+    private String configurationId;
+    private String name;
+    private String description;
+    private Conversions conversions;
+    private List<Enrichment> enrichments;
+    private List<NormalizationOperation> normalizations;
+    private Source source;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the configuration_id_serialized_name.
+     * Gets the configurationId.
      *
      * The ID of the configuration.
      *
-     * @return the configuration_id_serialized_name
+     * @return the configurationId
      */
     public String configurationId() {
-      return configuration_id_serialized_name;
+      return configurationId;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The name of the configuration.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     public String name() {
-      return name_serialized_name;
+      return name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * The description of the configuration, if available.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     public String description() {
-      return description_serialized_name;
+      return description;
     }
+ 
     /**
-     * Gets the conversions_serialized_name.
+     * Gets the conversions.
      *
      * The document conversion settings for the configuration.
      *
-     * @return the conversions_serialized_name
+     * @return the conversions
      */
     public Conversions conversions() {
-      return conversions_serialized_name;
+      return conversions;
     }
+ 
     /**
-     * Gets the enrichments_serialized_name.
+     * Gets the enrichments.
      *
      * An array of document enrichment settings for the configuration.
      *
-     * @return the enrichments_serialized_name
+     * @return the enrichments
      */
     public List<Enrichment> enrichments() {
-      return enrichments_serialized_name;
+      return enrichments;
     }
+ 
     /**
-     * Gets the normalizations_serialized_name.
+     * Gets the normalizations.
      *
      * Defines operations that can be used to transform the final output JSON into a normalized form. Operations are
      * executed in the order that they appear in the array.
      *
-     * @return the normalizations_serialized_name
+     * @return the normalizations
      */
     public List<NormalizationOperation> normalizations() {
-      return normalizations_serialized_name;
+      return normalizations;
     }
+ 
     /**
-     * Gets the source_serialized_name.
+     * Gets the source.
      *
-     * @return the source_serialized_name
+     * Object containing source parameters for the configuration.
+     *
+     * @return the source
      */
     public Source source() {
-      return source_serialized_name;
+      return source;
     }
+
     private UpdateConfigurationOptions(UpdateConfigurationOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.configuration_id_serialized_name, 'configuration_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      configuration_id_serialized_name = builder.configuration_id_serialized_name;
-      name_serialized_name = builder.name_serialized_name;
-      description_serialized_name = builder.description_serialized_name;
-      conversions_serialized_name = builder.conversions_serialized_name;
-      enrichments_serialized_name = builder.enrichments_serialized_name;
-      normalizations_serialized_name = builder.normalizations_serialized_name;
-      source_serialized_name = builder.source_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.configurationId, 'configurationId cannot be empty');
+      environmentId = builder.environmentId;
+      configurationId = builder.configurationId;
+      name = builder.name;
+      description = builder.description;
+      conversions = builder.conversions;
+      enrichments = builder.enrichments;
+      normalizations = builder.normalizations;
+      source = builder.source;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -18620,24 +19302,24 @@ public class IBMDiscoveryV1Models {
    * UpdateConfigurationOptions Builder.
    */
   public class UpdateConfigurationOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String configuration_id_serialized_name;
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private Conversions conversions_serialized_name;
-    private List<Enrichment> enrichments_serialized_name;
-    private List<NormalizationOperation> normalizations_serialized_name;
-    private Source source_serialized_name;
+    private String environmentId;
+    private String configurationId;
+    private String name;
+    private String description;
+    private Conversions conversions;
+    private List<Enrichment> enrichments;
+    private List<NormalizationOperation> normalizations;
+    private Source source;
 
     private UpdateConfigurationOptionsBuilder(UpdateConfigurationOptions updateConfigurationOptions) {
-      environment_id_serialized_name = updateConfigurationOptions.environment_id_serialized_name;
-      configuration_id_serialized_name = updateConfigurationOptions.configuration_id_serialized_name;
-      name_serialized_name = updateConfigurationOptions.name_serialized_name;
-      description_serialized_name = updateConfigurationOptions.description_serialized_name;
-      conversions_serialized_name = updateConfigurationOptions.conversions_serialized_name;
-      enrichments_serialized_name = updateConfigurationOptions.enrichments_serialized_name;
-      normalizations_serialized_name = updateConfigurationOptions.normalizations_serialized_name;
-      source_serialized_name = updateConfigurationOptions.source_serialized_name;
+      environmentId = updateConfigurationOptions.environmentId;
+      configurationId = updateConfigurationOptions.configurationId;
+      name = updateConfigurationOptions.name;
+      description = updateConfigurationOptions.description;
+      conversions = updateConfigurationOptions.conversions;
+      enrichments = updateConfigurationOptions.enrichments;
+      normalizations = updateConfigurationOptions.normalizations;
+      source = updateConfigurationOptions.source;
       this.requestHeaders.putAll(updateConfigurationOptions.requestHeaders());
     }
 
@@ -18654,8 +19336,8 @@ public class IBMDiscoveryV1Models {
      * @param configurationId the configurationId
      */
     public UpdateConfigurationOptionsBuilder(String environmentId, String configurationId) {
-      this.environment_id_serialized_name = environmentId;
-      this.configuration_id_serialized_name = configurationId;
+      this.environmentId = environmentId;
+      this.configurationId = configurationId;
     }
 
     /**
@@ -18668,122 +19350,122 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Adds an enrichments to enrichments_serialized_name.
+     * Adds an enrichments to enrichments.
      *
      * @param enrichments the new enrichments
      * @return the UpdateConfigurationOptions builder
      */
     public UpdateConfigurationOptionsBuilder addEnrichments(Enrichment enrichments) {
       IBMWatsonValidator.notNull(enrichments, 'enrichments cannot be null');
-      if (this.enrichments_serialized_name == null) {
-        this.enrichments_serialized_name = new List<Enrichment>();
+      if (this.enrichments == null) {
+        this.enrichments = new List<Enrichment>();
       }
-      this.enrichments_serialized_name.add(enrichments);
+      this.enrichments.add(enrichments);
       return this;
     }
 
     /**
-     * Adds an normalizations to normalizations_serialized_name.
+     * Adds an normalizations to normalizations.
      *
      * @param normalizations the new normalizations
      * @return the UpdateConfigurationOptions builder
      */
     public UpdateConfigurationOptionsBuilder addNormalizations(NormalizationOperation normalizations) {
       IBMWatsonValidator.notNull(normalizations, 'normalizations cannot be null');
-      if (this.normalizations_serialized_name == null) {
-        this.normalizations_serialized_name = new List<NormalizationOperation>();
+      if (this.normalizations == null) {
+        this.normalizations = new List<NormalizationOperation>();
       }
-      this.normalizations_serialized_name.add(normalizations);
+      this.normalizations.add(normalizations);
       return this;
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the UpdateConfigurationOptions builder
      */
     public UpdateConfigurationOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the configuration_id_serialized_name.
+     * Set the configurationId.
      *
      * @param configurationId the configurationId
      * @return the UpdateConfigurationOptions builder
      */
     public UpdateConfigurationOptionsBuilder configurationId(String configurationId) {
-      this.configuration_id_serialized_name = configurationId;
+      this.configurationId = configurationId;
       return this;
     }
 
     /**
-     * Set the name_serialized_name.
+     * Set the name.
      *
      * @param name the name
      * @return the UpdateConfigurationOptions builder
      */
     public UpdateConfigurationOptionsBuilder name(String name) {
-      this.name_serialized_name = name;
+      this.name = name;
       return this;
     }
 
     /**
-     * Set the description_serialized_name.
+     * Set the description.
      *
      * @param description the description
      * @return the UpdateConfigurationOptions builder
      */
     public UpdateConfigurationOptionsBuilder description(String description) {
-      this.description_serialized_name = description;
+      this.description = description;
       return this;
     }
 
     /**
-     * Set the conversions_serialized_name.
+     * Set the conversions.
      *
      * @param conversions the conversions
      * @return the UpdateConfigurationOptions builder
      */
     public UpdateConfigurationOptionsBuilder conversions(Conversions conversions) {
-      this.conversions_serialized_name = conversions;
+      this.conversions = conversions;
       return this;
     }
 
     /**
-     * Set the enrichments_serialized_name.
-     * Existing enrichments_serialized_name will be replaced.
+     * Set the enrichments.
+     * Existing enrichments will be replaced.
      *
      * @param enrichments the enrichments
      * @return the UpdateConfigurationOptions builder
      */
     public UpdateConfigurationOptionsBuilder enrichments(List<Enrichment> enrichments) {
-      this.enrichments_serialized_name = enrichments;
+      this.enrichments = enrichments;
       return this;
     }
 
     /**
-     * Set the normalizations_serialized_name.
-     * Existing normalizations_serialized_name will be replaced.
+     * Set the normalizations.
+     * Existing normalizations will be replaced.
      *
      * @param normalizations the normalizations
      * @return the UpdateConfigurationOptions builder
      */
     public UpdateConfigurationOptionsBuilder normalizations(List<NormalizationOperation> normalizations) {
-      this.normalizations_serialized_name = normalizations;
+      this.normalizations = normalizations;
       return this;
     }
 
     /**
-     * Set the source_serialized_name.
+     * Set the source.
      *
      * @param source the source
      * @return the UpdateConfigurationOptions builder
      */
     public UpdateConfigurationOptionsBuilder source(Source source) {
-      this.source_serialized_name = source;
+      this.source = source;
       return this;
     }
 
@@ -18794,12 +19476,12 @@ public class IBMDiscoveryV1Models {
      * @return the UpdateConfigurationOptions builder
      */
     public UpdateConfigurationOptionsBuilder configuration(Configuration configuration) {
-      this.name_serialized_name = configuration.getName();
-      this.description_serialized_name = configuration.getDescription();
-      this.conversions_serialized_name = configuration.getConversions();
-      this.enrichments_serialized_name = configuration.getEnrichments();
-      this.normalizations_serialized_name = configuration.getNormalizations();
-      this.source_serialized_name = configuration.getSource();
+      this.name = configuration.getName();
+      this.description = configuration.getDescription();
+      this.conversions = configuration.getConversions();
+      this.enrichments = configuration.getEnrichments();
+      this.normalizations = configuration.getNormalizations();
+      this.source = configuration.getSource();
       return this;
     }
 
@@ -18820,58 +19502,67 @@ public class IBMDiscoveryV1Models {
    * The updateCredentials options.
    */
   public class UpdateCredentialsOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String credential_id_serialized_name;
-    private String source_type_serialized_name;
-    private CredentialDetails credential_details_serialized_name;
+    private String environmentId;
+    private String credentialId;
+    private String sourceType;
+    private CredentialDetails credentialDetails;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the credential_id_serialized_name.
+     * Gets the credentialId.
      *
      * The unique identifier for a set of source credentials.
      *
-     * @return the credential_id_serialized_name
+     * @return the credentialId
      */
     public String credentialId() {
-      return credential_id_serialized_name;
+      return credentialId;
     }
+ 
     /**
-     * Gets the source_type_serialized_name.
+     * Gets the sourceType.
      *
      * The source that this credentials object connects to.
      * -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
      * -  `salesforce` indicates the credentials are used to connect to Salesforce.
      * -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
      *
-     * @return the source_type_serialized_name
+     * @return the sourceType
      */
     public String sourceType() {
-      return source_type_serialized_name;
+      return sourceType;
     }
+ 
     /**
-     * Gets the credential_details_serialized_name.
+     * Gets the credentialDetails.
      *
-     * @return the credential_details_serialized_name
+     * Object containing details of the stored credentials.
+     *
+     * Obtain credentials for your source from the administrator of the source.
+     *
+     * @return the credentialDetails
      */
     public CredentialDetails credentialDetails() {
-      return credential_details_serialized_name;
+      return credentialDetails;
     }
+
     private UpdateCredentialsOptions(UpdateCredentialsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.credential_id_serialized_name, 'credential_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      credential_id_serialized_name = builder.credential_id_serialized_name;
-      source_type_serialized_name = builder.source_type_serialized_name;
-      credential_details_serialized_name = builder.credential_details_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.credentialId, 'credentialId cannot be empty');
+      environmentId = builder.environmentId;
+      credentialId = builder.credentialId;
+      sourceType = builder.sourceType;
+      credentialDetails = builder.credentialDetails;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -18890,16 +19581,16 @@ public class IBMDiscoveryV1Models {
    * UpdateCredentialsOptions Builder.
    */
   public class UpdateCredentialsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String credential_id_serialized_name;
-    private String source_type_serialized_name;
-    private CredentialDetails credential_details_serialized_name;
+    private String environmentId;
+    private String credentialId;
+    private String sourceType;
+    private CredentialDetails credentialDetails;
 
     private UpdateCredentialsOptionsBuilder(UpdateCredentialsOptions updateCredentialsOptions) {
-      environment_id_serialized_name = updateCredentialsOptions.environment_id_serialized_name;
-      credential_id_serialized_name = updateCredentialsOptions.credential_id_serialized_name;
-      source_type_serialized_name = updateCredentialsOptions.source_type_serialized_name;
-      credential_details_serialized_name = updateCredentialsOptions.credential_details_serialized_name;
+      environmentId = updateCredentialsOptions.environmentId;
+      credentialId = updateCredentialsOptions.credentialId;
+      sourceType = updateCredentialsOptions.sourceType;
+      credentialDetails = updateCredentialsOptions.credentialDetails;
       this.requestHeaders.putAll(updateCredentialsOptions.requestHeaders());
     }
 
@@ -18916,8 +19607,8 @@ public class IBMDiscoveryV1Models {
      * @param credentialId the credentialId
      */
     public UpdateCredentialsOptionsBuilder(String environmentId, String credentialId) {
-      this.environment_id_serialized_name = environmentId;
-      this.credential_id_serialized_name = credentialId;
+      this.environmentId = environmentId;
+      this.credentialId = credentialId;
     }
 
     /**
@@ -18930,46 +19621,46 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the UpdateCredentialsOptions builder
      */
     public UpdateCredentialsOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the credential_id_serialized_name.
+     * Set the credentialId.
      *
      * @param credentialId the credentialId
      * @return the UpdateCredentialsOptions builder
      */
     public UpdateCredentialsOptionsBuilder credentialId(String credentialId) {
-      this.credential_id_serialized_name = credentialId;
+      this.credentialId = credentialId;
       return this;
     }
 
     /**
-     * Set the source_type_serialized_name.
+     * Set the sourceType.
      *
      * @param sourceType the sourceType
      * @return the UpdateCredentialsOptions builder
      */
     public UpdateCredentialsOptionsBuilder sourceType(String sourceType) {
-      this.source_type_serialized_name = sourceType;
+      this.sourceType = sourceType;
       return this;
     }
 
     /**
-     * Set the credential_details_serialized_name.
+     * Set the credentialDetails.
      *
      * @param credentialDetails the credentialDetails
      * @return the UpdateCredentialsOptions builder
      */
     public UpdateCredentialsOptionsBuilder credentialDetails(CredentialDetails credentialDetails) {
-      this.credential_details_serialized_name = credentialDetails;
+      this.credentialDetails = credentialDetails;
       return this;
     }
 
@@ -18980,8 +19671,8 @@ public class IBMDiscoveryV1Models {
      * @return the UpdateCredentialsOptions builder
      */
     public UpdateCredentialsOptionsBuilder credentials(Credentials credentials) {
-      this.source_type_serialized_name = credentials.getSourceType();
-      this.credential_details_serialized_name = credentials.getCredentialDetails();
+      this.sourceType = credentials.getSourceType();
+      this.credentialDetails = credentials.getCredentialDetails();
       return this;
     }
 
@@ -19002,66 +19693,72 @@ public class IBMDiscoveryV1Models {
    * The updateDocument options.
    */
   public class UpdateDocumentOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String document_id_serialized_name;
-    private IBMWatsonFile file_serialized_name;
-    private String filename_serialized_name;
-    private String metadata_serialized_name;
-    private String file_content_type_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String documentId;
+    private IBMWatsonFile file;
+    private String filename;
+    private String metadata;
+    private String fileContentType;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the document_id_serialized_name.
+     * Gets the documentId.
      *
      * The ID of the document.
      *
-     * @return the document_id_serialized_name
+     * @return the documentId
      */
     public String documentId() {
-      return document_id_serialized_name;
+      return documentId;
     }
+ 
     /**
-     * Gets the file_serialized_name.
+     * Gets the file.
      *
      * The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50
      * megabytes is rejected.
      *
-     * @return the file_serialized_name
+     * @return the file
      */
     public IBMWatsonFile file() {
-      return file_serialized_name;
+      return file;
     }
+ 
     /**
-     * Gets the filename_serialized_name.
+     * Gets the filename.
      *
      * The filename for file.
      *
-     * @return the filename_serialized_name
+     * @return the filename
      */
     public String filename() {
-      return filename_serialized_name;
+      return filename;
     }
+ 
     /**
-     * Gets the metadata_serialized_name.
+     * Gets the metadata.
      *
      * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata
      * that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1
@@ -19071,33 +19768,35 @@ public class IBMDiscoveryV1Models {
      *   "Subject": "Apples"
      * } ```.
      *
-     * @return the metadata_serialized_name
+     * @return the metadata
      */
     public String metadata() {
-      return metadata_serialized_name;
+      return metadata;
     }
+ 
     /**
-     * Gets the file_content_type_serialized_name.
+     * Gets the fileContentType.
      *
      * The content type of file.
      *
-     * @return the file_content_type_serialized_name
+     * @return the fileContentType
      */
     public String fileContentType() {
-      return file_content_type_serialized_name;
+      return fileContentType;
     }
+
     private UpdateDocumentOptions(UpdateDocumentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.document_id_serialized_name, 'document_id_serialized_name cannot be empty');
-      IBMWatsonValidator.isTrue(builder.file_serialized_name == null || builder.file_content_type_serialized_name != null, 'content type cannot be null if file is not null');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      document_id_serialized_name = builder.document_id_serialized_name;
-      file_serialized_name = builder.file_serialized_name;
-      filename_serialized_name = builder.filename_serialized_name;
-      metadata_serialized_name = builder.metadata_serialized_name;
-      file_content_type_serialized_name = builder.file_content_type_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.documentId, 'documentId cannot be empty');
+      IBMWatsonValidator.isTrue(builder.file == null || builder.fileContentType != null, 'content type cannot be null if file is not null');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      documentId = builder.documentId;
+      file = builder.file;
+      filename = builder.filename;
+      metadata = builder.metadata;
+      fileContentType = builder.fileContentType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -19116,22 +19815,22 @@ public class IBMDiscoveryV1Models {
    * UpdateDocumentOptions Builder.
    */
   public class UpdateDocumentOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String document_id_serialized_name;
-    private IBMWatsonFile file_serialized_name;
-    private String filename_serialized_name;
-    private String metadata_serialized_name;
-    private String file_content_type_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String documentId;
+    private IBMWatsonFile file;
+    private String filename;
+    private String metadata;
+    private String fileContentType;
 
     private UpdateDocumentOptionsBuilder(UpdateDocumentOptions updateDocumentOptions) {
-      environment_id_serialized_name = updateDocumentOptions.environment_id_serialized_name;
-      collection_id_serialized_name = updateDocumentOptions.collection_id_serialized_name;
-      document_id_serialized_name = updateDocumentOptions.document_id_serialized_name;
-      file_serialized_name = updateDocumentOptions.file_serialized_name;
-      filename_serialized_name = updateDocumentOptions.filename_serialized_name;
-      metadata_serialized_name = updateDocumentOptions.metadata_serialized_name;
-      file_content_type_serialized_name = updateDocumentOptions.file_content_type_serialized_name;
+      environmentId = updateDocumentOptions.environmentId;
+      collectionId = updateDocumentOptions.collectionId;
+      documentId = updateDocumentOptions.documentId;
+      file = updateDocumentOptions.file;
+      filename = updateDocumentOptions.filename;
+      metadata = updateDocumentOptions.metadata;
+      fileContentType = updateDocumentOptions.fileContentType;
       this.requestHeaders.putAll(updateDocumentOptions.requestHeaders());
     }
 
@@ -19149,9 +19848,9 @@ public class IBMDiscoveryV1Models {
      * @param documentId the documentId
      */
     public UpdateDocumentOptionsBuilder(String environmentId, String collectionId, String documentId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
-      this.document_id_serialized_name = documentId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+      this.documentId = documentId;
     }
 
     /**
@@ -19164,79 +19863,79 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the UpdateDocumentOptions builder
      */
     public UpdateDocumentOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the UpdateDocumentOptions builder
      */
     public UpdateDocumentOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the document_id_serialized_name.
+     * Set the documentId.
      *
      * @param documentId the documentId
      * @return the UpdateDocumentOptions builder
      */
     public UpdateDocumentOptionsBuilder documentId(String documentId) {
-      this.document_id_serialized_name = documentId;
+      this.documentId = documentId;
       return this;
     }
 
     /**
-     * Set the file_serialized_name.
+     * Set the file.
      *
      * @param file the file
      * @return the UpdateDocumentOptions builder
      */
     public UpdateDocumentOptionsBuilder file(IBMWatsonFile file) {
-      this.file_serialized_name = file;
+      this.file = file;
       return this;
     }
 
     /**
-     * Set the filename_serialized_name.
+     * Set the filename.
      *
      * @param filename the filename
      * @return the UpdateDocumentOptions builder
      */
     public UpdateDocumentOptionsBuilder filename(String filename) {
-      this.filename_serialized_name = filename;
+      this.filename = filename;
       return this;
     }
 
     /**
-     * Set the metadata_serialized_name.
+     * Set the metadata.
      *
      * @param metadata the metadata
      * @return the UpdateDocumentOptions builder
      */
     public UpdateDocumentOptionsBuilder metadata(String metadata) {
-      this.metadata_serialized_name = metadata;
+      this.metadata = metadata;
       return this;
     }
 
     /**
-     * Set the file_content_type_serialized_name.
+     * Set the fileContentType.
      *
      * @param fileContentType the fileContentType
      * @return the UpdateDocumentOptions builder
      */
     public UpdateDocumentOptionsBuilder fileContentType(String fileContentType) {
-      this.file_content_type_serialized_name = fileContentType;
+      this.fileContentType = fileContentType;
       return this;
     }
 
@@ -19257,44 +19956,62 @@ public class IBMDiscoveryV1Models {
    * The updateEnvironment options.
    */
   public class UpdateEnvironmentOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String name_serialized_name;
-    private String description_serialized_name;
+    private String environmentId;
+    private String name;
+    private String description;
+    private String size;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * Name that identifies the environment.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     public String name() {
-      return name_serialized_name;
+      return name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * Description of the environment.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     public String description() {
-      return description_serialized_name;
+      return description;
     }
+ 
+    /**
+     * Gets the size.
+     *
+     * Size that the environment should be increased to. Environment size cannot be modified when using a Lite plan.
+     * Environment size can only increased and not decreased.
+     *
+     * @return the size
+     */
+    public String size() {
+      return size;
+    }
+
     private UpdateEnvironmentOptions(UpdateEnvironmentOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      name_serialized_name = builder.name_serialized_name;
-      description_serialized_name = builder.description_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      environmentId = builder.environmentId;
+      name = builder.name;
+      description = builder.description;
+      size = builder.size;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -19313,14 +20030,16 @@ public class IBMDiscoveryV1Models {
    * UpdateEnvironmentOptions Builder.
    */
   public class UpdateEnvironmentOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String name_serialized_name;
-    private String description_serialized_name;
+    private String environmentId;
+    private String name;
+    private String description;
+    private String size;
 
     private UpdateEnvironmentOptionsBuilder(UpdateEnvironmentOptions updateEnvironmentOptions) {
-      environment_id_serialized_name = updateEnvironmentOptions.environment_id_serialized_name;
-      name_serialized_name = updateEnvironmentOptions.name_serialized_name;
-      description_serialized_name = updateEnvironmentOptions.description_serialized_name;
+      environmentId = updateEnvironmentOptions.environmentId;
+      name = updateEnvironmentOptions.name;
+      description = updateEnvironmentOptions.description;
+      size = updateEnvironmentOptions.size;
       this.requestHeaders.putAll(updateEnvironmentOptions.requestHeaders());
     }
 
@@ -19336,7 +20055,7 @@ public class IBMDiscoveryV1Models {
      * @param environmentId the environmentId
      */
     public UpdateEnvironmentOptionsBuilder(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
     }
 
     /**
@@ -19349,35 +20068,46 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the UpdateEnvironmentOptions builder
      */
     public UpdateEnvironmentOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the name_serialized_name.
+     * Set the name.
      *
      * @param name the name
      * @return the UpdateEnvironmentOptions builder
      */
     public UpdateEnvironmentOptionsBuilder name(String name) {
-      this.name_serialized_name = name;
+      this.name = name;
       return this;
     }
 
     /**
-     * Set the description_serialized_name.
+     * Set the description.
      *
      * @param description the description
      * @return the UpdateEnvironmentOptions builder
      */
     public UpdateEnvironmentOptionsBuilder description(String description) {
-      this.description_serialized_name = description;
+      this.description = description;
+      return this;
+    }
+
+    /**
+     * Set the size.
+     *
+     * @param size the size
+     * @return the UpdateEnvironmentOptions builder
+     */
+    public UpdateEnvironmentOptionsBuilder size(String size) {
+      this.size = size;
       return this;
     }
 
@@ -19398,79 +20128,86 @@ public class IBMDiscoveryV1Models {
    * The updateTrainingExample options.
    */
   public class UpdateTrainingExampleOptions extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String query_id_serialized_name;
-    private String example_id_serialized_name;
-    private String cross_reference_serialized_name;
-    private Long relevance_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String queryId;
+    private String exampleId;
+    private String crossReference;
+    private Long relevance;
+ 
     /**
-     * Gets the environment_id_serialized_name.
+     * Gets the environmentId.
      *
      * The ID of the environment.
      *
-     * @return the environment_id_serialized_name
+     * @return the environmentId
      */
     public String environmentId() {
-      return environment_id_serialized_name;
+      return environmentId;
     }
+ 
     /**
-     * Gets the collection_id_serialized_name.
+     * Gets the collectionId.
      *
      * The ID of the collection.
      *
-     * @return the collection_id_serialized_name
+     * @return the collectionId
      */
     public String collectionId() {
-      return collection_id_serialized_name;
+      return collectionId;
     }
+ 
     /**
-     * Gets the query_id_serialized_name.
+     * Gets the queryId.
      *
      * The ID of the query used for training.
      *
-     * @return the query_id_serialized_name
+     * @return the queryId
      */
     public String queryId() {
-      return query_id_serialized_name;
+      return queryId;
     }
+ 
     /**
-     * Gets the example_id_serialized_name.
+     * Gets the exampleId.
      *
      * The ID of the document as it is indexed.
      *
-     * @return the example_id_serialized_name
+     * @return the exampleId
      */
     public String exampleId() {
-      return example_id_serialized_name;
+      return exampleId;
     }
+ 
     /**
-     * Gets the cross_reference_serialized_name.
+     * Gets the crossReference.
      *
-     * @return the cross_reference_serialized_name
+     * @return the crossReference
      */
     public String crossReference() {
-      return cross_reference_serialized_name;
+      return crossReference;
     }
+ 
     /**
-     * Gets the relevance_serialized_name.
+     * Gets the relevance.
      *
-     * @return the relevance_serialized_name
+     * @return the relevance
      */
     public Long relevance() {
-      return relevance_serialized_name;
+      return relevance;
     }
+
     private UpdateTrainingExampleOptions(UpdateTrainingExampleOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environment_id_serialized_name, 'environment_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.collection_id_serialized_name, 'collection_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.query_id_serialized_name, 'query_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.example_id_serialized_name, 'example_id_serialized_name cannot be empty');
-      environment_id_serialized_name = builder.environment_id_serialized_name;
-      collection_id_serialized_name = builder.collection_id_serialized_name;
-      query_id_serialized_name = builder.query_id_serialized_name;
-      example_id_serialized_name = builder.example_id_serialized_name;
-      cross_reference_serialized_name = builder.cross_reference_serialized_name;
-      relevance_serialized_name = builder.relevance_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.queryId, 'queryId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.exampleId, 'exampleId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      queryId = builder.queryId;
+      exampleId = builder.exampleId;
+      crossReference = builder.crossReference;
+      relevance = builder.relevance;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -19489,20 +20226,20 @@ public class IBMDiscoveryV1Models {
    * UpdateTrainingExampleOptions Builder.
    */
   public class UpdateTrainingExampleOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environment_id_serialized_name;
-    private String collection_id_serialized_name;
-    private String query_id_serialized_name;
-    private String example_id_serialized_name;
-    private String cross_reference_serialized_name;
-    private Long relevance_serialized_name;
+    private String environmentId;
+    private String collectionId;
+    private String queryId;
+    private String exampleId;
+    private String crossReference;
+    private Long relevance;
 
     private UpdateTrainingExampleOptionsBuilder(UpdateTrainingExampleOptions updateTrainingExampleOptions) {
-      environment_id_serialized_name = updateTrainingExampleOptions.environment_id_serialized_name;
-      collection_id_serialized_name = updateTrainingExampleOptions.collection_id_serialized_name;
-      query_id_serialized_name = updateTrainingExampleOptions.query_id_serialized_name;
-      example_id_serialized_name = updateTrainingExampleOptions.example_id_serialized_name;
-      cross_reference_serialized_name = updateTrainingExampleOptions.cross_reference_serialized_name;
-      relevance_serialized_name = updateTrainingExampleOptions.relevance_serialized_name;
+      environmentId = updateTrainingExampleOptions.environmentId;
+      collectionId = updateTrainingExampleOptions.collectionId;
+      queryId = updateTrainingExampleOptions.queryId;
+      exampleId = updateTrainingExampleOptions.exampleId;
+      crossReference = updateTrainingExampleOptions.crossReference;
+      relevance = updateTrainingExampleOptions.relevance;
       this.requestHeaders.putAll(updateTrainingExampleOptions.requestHeaders());
     }
 
@@ -19521,10 +20258,10 @@ public class IBMDiscoveryV1Models {
      * @param exampleId the exampleId
      */
     public UpdateTrainingExampleOptionsBuilder(String environmentId, String collectionId, String queryId, String exampleId) {
-      this.environment_id_serialized_name = environmentId;
-      this.collection_id_serialized_name = collectionId;
-      this.query_id_serialized_name = queryId;
-      this.example_id_serialized_name = exampleId;
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+      this.queryId = queryId;
+      this.exampleId = exampleId;
     }
 
     /**
@@ -19537,68 +20274,68 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the environment_id_serialized_name.
+     * Set the environmentId.
      *
      * @param environmentId the environmentId
      * @return the UpdateTrainingExampleOptions builder
      */
     public UpdateTrainingExampleOptionsBuilder environmentId(String environmentId) {
-      this.environment_id_serialized_name = environmentId;
+      this.environmentId = environmentId;
       return this;
     }
 
     /**
-     * Set the collection_id_serialized_name.
+     * Set the collectionId.
      *
      * @param collectionId the collectionId
      * @return the UpdateTrainingExampleOptions builder
      */
     public UpdateTrainingExampleOptionsBuilder collectionId(String collectionId) {
-      this.collection_id_serialized_name = collectionId;
+      this.collectionId = collectionId;
       return this;
     }
 
     /**
-     * Set the query_id_serialized_name.
+     * Set the queryId.
      *
      * @param queryId the queryId
      * @return the UpdateTrainingExampleOptions builder
      */
     public UpdateTrainingExampleOptionsBuilder queryId(String queryId) {
-      this.query_id_serialized_name = queryId;
+      this.queryId = queryId;
       return this;
     }
 
     /**
-     * Set the example_id_serialized_name.
+     * Set the exampleId.
      *
      * @param exampleId the exampleId
      * @return the UpdateTrainingExampleOptions builder
      */
     public UpdateTrainingExampleOptionsBuilder exampleId(String exampleId) {
-      this.example_id_serialized_name = exampleId;
+      this.exampleId = exampleId;
       return this;
     }
 
     /**
-     * Set the cross_reference_serialized_name.
+     * Set the crossReference.
      *
      * @param crossReference the crossReference
      * @return the UpdateTrainingExampleOptions builder
      */
     public UpdateTrainingExampleOptionsBuilder crossReference(String crossReference) {
-      this.cross_reference_serialized_name = crossReference;
+      this.crossReference = crossReference;
       return this;
     }
 
     /**
-     * Set the relevance_serialized_name.
+     * Set the relevance.
      *
      * @param relevance the relevance
      * @return the UpdateTrainingExampleOptions builder
      */
     public UpdateTrainingExampleOptionsBuilder relevance(Long relevance) {
-      this.relevance_serialized_name = relevance;
+      this.relevance = relevance;
       return this;
     }
 
@@ -19621,19 +20358,21 @@ public class IBMDiscoveryV1Models {
   public class WordHeadingDetection extends IBMWatsonGenericModel {
     private List<FontSetting> fonts_serialized_name;
     private List<WordStyle> styles_serialized_name;
+ 
     /**
-     * Gets the fonts_serialized_name.
+     * Gets the fonts.
      *
-     * @return the fonts_serialized_name
+     * @return the fonts
      */
     @AuraEnabled
     public List<FontSetting> getFonts() {
       return fonts_serialized_name;
     }
+ 
     /**
-     * Gets the styles_serialized_name.
+     * Gets the styles.
      *
-     * @return the styles_serialized_name
+     * @return the styles
      */
     @AuraEnabled
     public List<WordStyle> getStyles() {
@@ -19641,7 +20380,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the fonts_serialized_name.
+     * Sets the fonts.
      *
      * @param fonts the new fonts
      */
@@ -19650,7 +20389,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the styles_serialized_name.
+     * Sets the styles.
      *
      * @param styles the new styles
      */
@@ -19665,7 +20404,7 @@ public class IBMDiscoveryV1Models {
 
       WordHeadingDetection ret = (WordHeadingDetection) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for fonts_serialized_name
+      // calling custom deserializer for fonts
       List<FontSetting> newFonts = new List<FontSetting>();
       List<FontSetting> deserializedFonts = ret.getFonts();
       if (deserializedFonts != null) {
@@ -19678,7 +20417,7 @@ public class IBMDiscoveryV1Models {
         ret.setFonts(newFonts);
       }
 
-      // calling custom deserializer for styles_serialized_name
+      // calling custom deserializer for styles
       List<WordStyle> newStyles = new List<WordStyle>();
       List<WordStyle> deserializedStyles = ret.getStyles();
       if (deserializedStyles != null) {
@@ -19700,10 +20439,11 @@ public class IBMDiscoveryV1Models {
    */
   public class WordSettings extends IBMWatsonGenericModel {
     private WordHeadingDetection heading_serialized_name;
+ 
     /**
-     * Gets the heading_serialized_name.
+     * Gets the heading.
      *
-     * @return the heading_serialized_name
+     * @return the heading
      */
     @AuraEnabled
     public WordHeadingDetection getHeading() {
@@ -19711,7 +20451,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the heading_serialized_name.
+     * Sets the heading.
      *
      * @param heading the new heading
      */
@@ -19726,7 +20466,7 @@ public class IBMDiscoveryV1Models {
 
       WordSettings ret = (WordSettings) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for heading_serialized_name
+      // calling custom deserializer for heading
       WordHeadingDetection newHeading = (WordHeadingDetection) new WordHeadingDetection().deserialize(JSON.serialize(ret.getHeading()), (Map<String, Object>) jsonMap.get('heading_serialized_name'), WordHeadingDetection.class);
       ret.setHeading(newHeading);
 
@@ -19740,19 +20480,21 @@ public class IBMDiscoveryV1Models {
   public class WordStyle extends IBMWatsonGenericModel {
     private Long level_serialized_name;
     private List<String> names_serialized_name;
+ 
     /**
-     * Gets the level_serialized_name.
+     * Gets the level.
      *
-     * @return the level_serialized_name
+     * @return the level
      */
     @AuraEnabled
     public Long getLevel() {
       return level_serialized_name;
     }
+ 
     /**
-     * Gets the names_serialized_name.
+     * Gets the names.
      *
-     * @return the names_serialized_name
+     * @return the names
      */
     @AuraEnabled
     public List<String> getNames() {
@@ -19760,7 +20502,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the level_serialized_name.
+     * Sets the level.
      *
      * @param level the new level
      */
@@ -19769,7 +20511,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the names_serialized_name.
+     * Sets the names.
      *
      * @param names the new names
      */
@@ -19793,10 +20535,11 @@ public class IBMDiscoveryV1Models {
    */
   public class XPathPatterns extends IBMWatsonGenericModel {
     private List<String> xpaths_serialized_name;
+ 
     /**
-     * Gets the xpaths_serialized_name.
+     * Gets the xpaths.
      *
-     * @return the xpaths_serialized_name
+     * @return the xpaths
      */
     @AuraEnabled
     public List<String> getXpaths() {
@@ -19804,7 +20547,7 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the xpaths_serialized_name.
+     * Sets the xpaths.
      *
      * @param xpaths the new xpaths
      */
