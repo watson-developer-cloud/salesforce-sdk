@@ -3,87 +3,94 @@ public class IBMLanguageTranslatorV3Models {
    * The createModel options.
    */
   public class CreateModelOptions extends IBMWatsonOptionsModel {
-    private String base_model_id_serialized_name;
-    private String name_serialized_name;
-    private IBMWatsonFile forced_glossary_serialized_name;
-    private String forced_glossary_filename_serialized_name;
-    private IBMWatsonFile parallel_corpus_serialized_name;
-    private String parallel_corpus_filename_serialized_name;
+    private String baseModelId;
+    private String name;
+    private IBMWatsonFile forcedGlossary;
+    private String forcedGlossaryFilename;
+    private IBMWatsonFile parallelCorpus;
+    private String parallelCorpusFilename;
+ 
     /**
-     * Gets the base_model_id_serialized_name.
+     * Gets the baseModelId.
      *
      * The model ID of the model to use as the base for customization. To see available models, use the `List models`
      * method. Usually all IBM provided models are customizable. In addition, all your models that have been created via
      * parallel corpus customization, can be further customized with a forced glossary.
      *
-     * @return the base_model_id_serialized_name
+     * @return the baseModelId
      */
     public String baseModelId() {
-      return base_model_id_serialized_name;
+      return baseModelId;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * An optional model name that you can use to identify the model. Valid characters are letters, numbers, dashes,
      * underscores, spaces and apostrophes. The maximum length is 32 characters.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     public String name() {
-      return name_serialized_name;
+      return name;
     }
+ 
     /**
-     * Gets the forced_glossary_serialized_name.
+     * Gets the forcedGlossary.
      *
      * A TMX file with your customizations. The customizations in the file completely overwrite the domain translaton
      * data, including high frequency or high confidence phrase translations. You can upload only one glossary with a
      * file size less than 10 MB per call. A forced glossary should contain single words or short phrases.
      *
-     * @return the forced_glossary_serialized_name
+     * @return the forcedGlossary
      */
     public IBMWatsonFile forcedGlossary() {
-      return forced_glossary_serialized_name;
+      return forcedGlossary;
     }
+ 
     /**
-     * Gets the forced_glossary_filename_serialized_name.
+     * Gets the forcedGlossaryFilename.
      *
      * The filename for forced_glossary.
      *
-     * @return the forced_glossary_filename_serialized_name
+     * @return the forcedGlossaryFilename
      */
     public String forcedGlossaryFilename() {
-      return forced_glossary_filename_serialized_name;
+      return forcedGlossaryFilename;
     }
+ 
     /**
-     * Gets the parallel_corpus_serialized_name.
+     * Gets the parallelCorpus.
      *
      * A TMX file with parallel sentences for source and target language. You can upload multiple parallel_corpus files
      * in one request. All uploaded parallel_corpus files combined, your parallel corpus must contain at least 5,000
      * parallel sentences to train successfully.
      *
-     * @return the parallel_corpus_serialized_name
+     * @return the parallelCorpus
      */
     public IBMWatsonFile parallelCorpus() {
-      return parallel_corpus_serialized_name;
+      return parallelCorpus;
     }
+ 
     /**
-     * Gets the parallel_corpus_filename_serialized_name.
+     * Gets the parallelCorpusFilename.
      *
      * The filename for parallel_corpus.
      *
-     * @return the parallel_corpus_filename_serialized_name
+     * @return the parallelCorpusFilename
      */
     public String parallelCorpusFilename() {
-      return parallel_corpus_filename_serialized_name;
+      return parallelCorpusFilename;
     }
+
     private CreateModelOptions(CreateModelOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.base_model_id_serialized_name, 'base_model_id_serialized_name cannot be null');
-      base_model_id_serialized_name = builder.base_model_id_serialized_name;
-      name_serialized_name = builder.name_serialized_name;
-      forced_glossary_serialized_name = builder.forced_glossary_serialized_name;
-      forced_glossary_filename_serialized_name = builder.forced_glossary_filename_serialized_name;
-      parallel_corpus_serialized_name = builder.parallel_corpus_serialized_name;
-      parallel_corpus_filename_serialized_name = builder.parallel_corpus_filename_serialized_name;
+      IBMWatsonValidator.notNull(builder.baseModelId, 'baseModelId cannot be null');
+      baseModelId = builder.baseModelId;
+      name = builder.name;
+      forcedGlossary = builder.forcedGlossary;
+      forcedGlossaryFilename = builder.forcedGlossaryFilename;
+      parallelCorpus = builder.parallelCorpus;
+      parallelCorpusFilename = builder.parallelCorpusFilename;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -102,20 +109,20 @@ public class IBMLanguageTranslatorV3Models {
    * CreateModelOptions Builder.
    */
   public class CreateModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String base_model_id_serialized_name;
-    private String name_serialized_name;
-    private IBMWatsonFile forced_glossary_serialized_name;
-    private String forced_glossary_filename_serialized_name;
-    private IBMWatsonFile parallel_corpus_serialized_name;
-    private String parallel_corpus_filename_serialized_name;
+    private String baseModelId;
+    private String name;
+    private IBMWatsonFile forcedGlossary;
+    private String forcedGlossaryFilename;
+    private IBMWatsonFile parallelCorpus;
+    private String parallelCorpusFilename;
 
     private CreateModelOptionsBuilder(CreateModelOptions createModelOptions) {
-      base_model_id_serialized_name = createModelOptions.base_model_id_serialized_name;
-      name_serialized_name = createModelOptions.name_serialized_name;
-      forced_glossary_serialized_name = createModelOptions.forced_glossary_serialized_name;
-      forced_glossary_filename_serialized_name = createModelOptions.forced_glossary_filename_serialized_name;
-      parallel_corpus_serialized_name = createModelOptions.parallel_corpus_serialized_name;
-      parallel_corpus_filename_serialized_name = createModelOptions.parallel_corpus_filename_serialized_name;
+      baseModelId = createModelOptions.baseModelId;
+      name = createModelOptions.name;
+      forcedGlossary = createModelOptions.forcedGlossary;
+      forcedGlossaryFilename = createModelOptions.forcedGlossaryFilename;
+      parallelCorpus = createModelOptions.parallelCorpus;
+      parallelCorpusFilename = createModelOptions.parallelCorpusFilename;
       this.requestHeaders.putAll(createModelOptions.requestHeaders());
     }
 
@@ -131,7 +138,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param baseModelId the baseModelId
      */
     public CreateModelOptionsBuilder(String baseModelId) {
-      this.base_model_id_serialized_name = baseModelId;
+      this.baseModelId = baseModelId;
     }
 
     /**
@@ -144,68 +151,68 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Set the base_model_id_serialized_name.
+     * Set the baseModelId.
      *
      * @param baseModelId the baseModelId
      * @return the CreateModelOptions builder
      */
     public CreateModelOptionsBuilder baseModelId(String baseModelId) {
-      this.base_model_id_serialized_name = baseModelId;
+      this.baseModelId = baseModelId;
       return this;
     }
 
     /**
-     * Set the name_serialized_name.
+     * Set the name.
      *
      * @param name the name
      * @return the CreateModelOptions builder
      */
     public CreateModelOptionsBuilder name(String name) {
-      this.name_serialized_name = name;
+      this.name = name;
       return this;
     }
 
     /**
-     * Set the forced_glossary_serialized_name.
+     * Set the forcedGlossary.
      *
      * @param forcedGlossary the forcedGlossary
      * @return the CreateModelOptions builder
      */
     public CreateModelOptionsBuilder forcedGlossary(IBMWatsonFile forcedGlossary) {
-      this.forced_glossary_serialized_name = forcedGlossary;
+      this.forcedGlossary = forcedGlossary;
       return this;
     }
 
     /**
-     * Set the forced_glossary_filename_serialized_name.
+     * Set the forcedGlossaryFilename.
      *
      * @param forcedGlossaryFilename the forcedGlossaryFilename
      * @return the CreateModelOptions builder
      */
     public CreateModelOptionsBuilder forcedGlossaryFilename(String forcedGlossaryFilename) {
-      this.forced_glossary_filename_serialized_name = forcedGlossaryFilename;
+      this.forcedGlossaryFilename = forcedGlossaryFilename;
       return this;
     }
 
     /**
-     * Set the parallel_corpus_serialized_name.
+     * Set the parallelCorpus.
      *
      * @param parallelCorpus the parallelCorpus
      * @return the CreateModelOptions builder
      */
     public CreateModelOptionsBuilder parallelCorpus(IBMWatsonFile parallelCorpus) {
-      this.parallel_corpus_serialized_name = parallelCorpus;
+      this.parallelCorpus = parallelCorpus;
       return this;
     }
 
     /**
-     * Set the parallel_corpus_filename_serialized_name.
+     * Set the parallelCorpusFilename.
      *
      * @param parallelCorpusFilename the parallelCorpusFilename
      * @return the CreateModelOptions builder
      */
     public CreateModelOptionsBuilder parallelCorpusFilename(String parallelCorpusFilename) {
-      this.parallel_corpus_filename_serialized_name = parallelCorpusFilename;
+      this.parallelCorpusFilename = parallelCorpusFilename;
       return this;
     }
 
@@ -226,20 +233,22 @@ public class IBMLanguageTranslatorV3Models {
    * The deleteModel options.
    */
   public class DeleteModelOptions extends IBMWatsonOptionsModel {
-    private String model_id_serialized_name;
+    private String modelId;
+ 
     /**
-     * Gets the model_id_serialized_name.
+     * Gets the modelId.
      *
      * Model ID of the model to delete.
      *
-     * @return the model_id_serialized_name
+     * @return the modelId
      */
     public String modelId() {
-      return model_id_serialized_name;
+      return modelId;
     }
+
     private DeleteModelOptions(DeleteModelOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.model_id_serialized_name, 'model_id_serialized_name cannot be empty');
-      model_id_serialized_name = builder.model_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.modelId, 'modelId cannot be empty');
+      modelId = builder.modelId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -258,10 +267,10 @@ public class IBMLanguageTranslatorV3Models {
    * DeleteModelOptions Builder.
    */
   public class DeleteModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String model_id_serialized_name;
+    private String modelId;
 
     private DeleteModelOptionsBuilder(DeleteModelOptions deleteModelOptions) {
-      model_id_serialized_name = deleteModelOptions.model_id_serialized_name;
+      modelId = deleteModelOptions.modelId;
       this.requestHeaders.putAll(deleteModelOptions.requestHeaders());
     }
 
@@ -277,7 +286,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param modelId the modelId
      */
     public DeleteModelOptionsBuilder(String modelId) {
-      this.model_id_serialized_name = modelId;
+      this.modelId = modelId;
     }
 
     /**
@@ -290,13 +299,13 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Set the model_id_serialized_name.
+     * Set the modelId.
      *
      * @param modelId the modelId
      * @return the DeleteModelOptions builder
      */
     public DeleteModelOptionsBuilder modelId(String modelId) {
-      this.model_id_serialized_name = modelId;
+      this.modelId = modelId;
       return this;
     }
 
@@ -317,20 +326,22 @@ public class IBMLanguageTranslatorV3Models {
    * The getModel options.
    */
   public class GetModelOptions extends IBMWatsonOptionsModel {
-    private String model_id_serialized_name;
+    private String modelId;
+ 
     /**
-     * Gets the model_id_serialized_name.
+     * Gets the modelId.
      *
      * Model ID of the model to get.
      *
-     * @return the model_id_serialized_name
+     * @return the modelId
      */
     public String modelId() {
-      return model_id_serialized_name;
+      return modelId;
     }
+
     private GetModelOptions(GetModelOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.model_id_serialized_name, 'model_id_serialized_name cannot be empty');
-      model_id_serialized_name = builder.model_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.modelId, 'modelId cannot be empty');
+      modelId = builder.modelId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -349,10 +360,10 @@ public class IBMLanguageTranslatorV3Models {
    * GetModelOptions Builder.
    */
   public class GetModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String model_id_serialized_name;
+    private String modelId;
 
     private GetModelOptionsBuilder(GetModelOptions getModelOptions) {
-      model_id_serialized_name = getModelOptions.model_id_serialized_name;
+      modelId = getModelOptions.modelId;
       this.requestHeaders.putAll(getModelOptions.requestHeaders());
     }
 
@@ -368,7 +379,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param modelId the modelId
      */
     public GetModelOptionsBuilder(String modelId) {
-      this.model_id_serialized_name = modelId;
+      this.modelId = modelId;
     }
 
     /**
@@ -381,13 +392,13 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Set the model_id_serialized_name.
+     * Set the modelId.
      *
      * @param modelId the modelId
      * @return the GetModelOptions builder
      */
     public GetModelOptionsBuilder modelId(String modelId) {
-      this.model_id_serialized_name = modelId;
+      this.modelId = modelId;
       return this;
     }
 
@@ -410,23 +421,25 @@ public class IBMLanguageTranslatorV3Models {
   public class IdentifiableLanguage extends IBMWatsonGenericModel {
     private String language_serialized_name;
     private String name_serialized_name;
+ 
     /**
-     * Gets the language_serialized_name.
+     * Gets the language.
      *
      * The language code for an identifiable language.
      *
-     * @return the language_serialized_name
+     * @return the language
      */
     @AuraEnabled
     public String getLanguage() {
       return language_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The name of the identifiable language.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
@@ -434,7 +447,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the language_serialized_name.
+     * Sets the language.
      *
      * @param language the new language
      */
@@ -443,7 +456,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -467,12 +480,13 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class IdentifiableLanguages extends IBMWatsonResponseModel {
     private List<IdentifiableLanguage> languages_serialized_name;
+ 
     /**
-     * Gets the languages_serialized_name.
+     * Gets the languages.
      *
      * A list of all languages that the service can identify.
      *
-     * @return the languages_serialized_name
+     * @return the languages
      */
     @AuraEnabled
     public List<IdentifiableLanguage> getLanguages() {
@@ -480,7 +494,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the languages_serialized_name.
+     * Sets the languages.
      *
      * @param languages the new languages
      */
@@ -495,7 +509,7 @@ public class IBMLanguageTranslatorV3Models {
 
       IdentifiableLanguages ret = (IdentifiableLanguages) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for languages_serialized_name
+      // calling custom deserializer for languages
       List<IdentifiableLanguage> newLanguages = new List<IdentifiableLanguage>();
       List<IdentifiableLanguage> deserializedLanguages = ret.getLanguages();
       if (deserializedLanguages != null) {
@@ -518,23 +532,25 @@ public class IBMLanguageTranslatorV3Models {
   public class IdentifiedLanguage extends IBMWatsonGenericModel {
     private String language_serialized_name;
     private Double confidence_serialized_name;
+ 
     /**
-     * Gets the language_serialized_name.
+     * Gets the language.
      *
      * The language code for an identified language.
      *
-     * @return the language_serialized_name
+     * @return the language
      */
     @AuraEnabled
     public String getLanguage() {
       return language_serialized_name;
     }
+ 
     /**
-     * Gets the confidence_serialized_name.
+     * Gets the confidence.
      *
      * The confidence score for the identified language.
      *
-     * @return the confidence_serialized_name
+     * @return the confidence
      */
     @AuraEnabled
     public Double getConfidence() {
@@ -542,7 +558,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the language_serialized_name.
+     * Sets the language.
      *
      * @param language the new language
      */
@@ -551,7 +567,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the confidence_serialized_name.
+     * Sets the confidence.
      *
      * @param confidence the new confidence
      */
@@ -575,12 +591,13 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class IdentifiedLanguages extends IBMWatsonResponseModel {
     private List<IdentifiedLanguage> languages_serialized_name;
+ 
     /**
-     * Gets the languages_serialized_name.
+     * Gets the languages.
      *
      * A ranking of identified languages with confidence scores.
      *
-     * @return the languages_serialized_name
+     * @return the languages
      */
     @AuraEnabled
     public List<IdentifiedLanguage> getLanguages() {
@@ -588,7 +605,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the languages_serialized_name.
+     * Sets the languages.
      *
      * @param languages the new languages
      */
@@ -603,7 +620,7 @@ public class IBMLanguageTranslatorV3Models {
 
       IdentifiedLanguages ret = (IdentifiedLanguages) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for languages_serialized_name
+      // calling custom deserializer for languages
       List<IdentifiedLanguage> newLanguages = new List<IdentifiedLanguage>();
       List<IdentifiedLanguage> deserializedLanguages = ret.getLanguages();
       if (deserializedLanguages != null) {
@@ -624,20 +641,22 @@ public class IBMLanguageTranslatorV3Models {
    * The identify options.
    */
   public class IdentifyOptions extends IBMWatsonOptionsModel {
-    private String text_serialized_name;
+    private String text;
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * Input text in UTF-8 format.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     public String text() {
-      return text_serialized_name;
+      return text;
     }
+
     private IdentifyOptions(IdentifyOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.text_serialized_name, 'text_serialized_name cannot be null');
-      text_serialized_name = builder.text_serialized_name;
+      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
+      text = builder.text;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -656,10 +675,10 @@ public class IBMLanguageTranslatorV3Models {
    * IdentifyOptions Builder.
    */
   public class IdentifyOptionsBuilder extends IBMWatsonOptionsModel {
-    private String text_serialized_name;
+    private String text;
 
     private IdentifyOptionsBuilder(IdentifyOptions identifyOptions) {
-      text_serialized_name = identifyOptions.text_serialized_name;
+      text = identifyOptions.text;
       this.requestHeaders.putAll(identifyOptions.requestHeaders());
     }
 
@@ -675,7 +694,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param text the text
      */
     public IdentifyOptionsBuilder(String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -688,13 +707,13 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Set the text_serialized_name.
+     * Set the text.
      *
      * @param text the text
      * @return the IdentifyOptions builder
      */
     public IdentifyOptionsBuilder text(String text) {
-      this.text_serialized_name = text;
+      this.text = text;
       return this;
     }
 
@@ -715,6 +734,7 @@ public class IBMLanguageTranslatorV3Models {
    * The listIdentifiableLanguages options.
    */
   public class ListIdentifiableLanguagesOptions extends IBMWatsonOptionsModel {
+
     private ListIdentifiableLanguagesOptions(ListIdentifiableLanguagesOptionsBuilder builder) {
       this.requestHeaders = builder.requestHeaders;
     }
@@ -771,45 +791,49 @@ public class IBMLanguageTranslatorV3Models {
    * The listModels options.
    */
   public class ListModelsOptions extends IBMWatsonOptionsModel {
-    private String source_serialized_name;
-    private String target_serialized_name;
-    private Boolean default_serialized_name;
+    private String source;
+    private String target;
+    private Boolean defaultModels;
+ 
     /**
-     * Gets the source_serialized_name.
+     * Gets the source.
      *
      * Specify a language code to filter results by source language.
      *
-     * @return the source_serialized_name
+     * @return the source
      */
     public String source() {
-      return source_serialized_name;
+      return source;
     }
+ 
     /**
-     * Gets the target_serialized_name.
+     * Gets the target.
      *
      * Specify a language code to filter results by target language.
      *
-     * @return the target_serialized_name
+     * @return the target
      */
     public String target() {
-      return target_serialized_name;
+      return target;
     }
+ 
     /**
-     * Gets the default_serialized_name.
+     * Gets the defaultModels.
      *
      * If the default parameter isn't specified, the service will return all models (default and non-default) for each
      * language pair. To return only default models, set this to `true`. To return only non-default models, set this to
      * `false`. There is exactly one default model per language pair, the IBM provided base model.
      *
-     * @return the default_serialized_name
+     * @return the defaultModels
      */
-    public Boolean defaultField() {
-      return default_serialized_name;
+    public Boolean defaultModels() {
+      return defaultModels;
     }
+
     private ListModelsOptions(ListModelsOptionsBuilder builder) {
-      source_serialized_name = builder.source_serialized_name;
-      target_serialized_name = builder.target_serialized_name;
-      default_serialized_name = builder.default_serialized_name;
+      source = builder.source;
+      target = builder.target;
+      defaultModels = builder.defaultModels;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -828,14 +852,14 @@ public class IBMLanguageTranslatorV3Models {
    * ListModelsOptions Builder.
    */
   public class ListModelsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String source_serialized_name;
-    private String target_serialized_name;
-    private Boolean default_serialized_name;
+    private String source;
+    private String target;
+    private Boolean defaultModels;
 
     private ListModelsOptionsBuilder(ListModelsOptions listModelsOptions) {
-      source_serialized_name = listModelsOptions.source_serialized_name;
-      target_serialized_name = listModelsOptions.target_serialized_name;
-      default_serialized_name = listModelsOptions.default_serialized_name;
+      source = listModelsOptions.source;
+      target = listModelsOptions.target;
+      defaultModels = listModelsOptions.defaultModels;
       this.requestHeaders.putAll(listModelsOptions.requestHeaders());
     }
 
@@ -855,35 +879,35 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Set the source_serialized_name.
+     * Set the source.
      *
      * @param source the source
      * @return the ListModelsOptions builder
      */
     public ListModelsOptionsBuilder source(String source) {
-      this.source_serialized_name = source;
+      this.source = source;
       return this;
     }
 
     /**
-     * Set the target_serialized_name.
+     * Set the target.
      *
      * @param target the target
      * @return the ListModelsOptions builder
      */
     public ListModelsOptionsBuilder target(String target) {
-      this.target_serialized_name = target;
+      this.target = target;
       return this;
     }
 
     /**
-     * Set the default_serialized_name.
+     * Set the defaultModels.
      *
-     * @param defaultVar the defaultVar
+     * @param defaultModels the defaultModels
      * @return the ListModelsOptions builder
      */
-    public ListModelsOptionsBuilder defaultField(Boolean defaultVar) {
-      this.default_serialized_name = defaultVar;
+    public ListModelsOptionsBuilder defaultModels(Boolean defaultModels) {
+      this.defaultModels = defaultModels;
       return this;
     }
 
@@ -904,60 +928,65 @@ public class IBMLanguageTranslatorV3Models {
    * The translate options.
    */
   public class TranslateOptions extends IBMWatsonOptionsModel {
-    private List<String> text_serialized_name;
-    private String model_id_serialized_name;
-    private String source_serialized_name;
-    private String target_serialized_name;
+    private List<String> text;
+    private String modelId;
+    private String source;
+    private String target;
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * Input text in UTF-8 encoding. Multiple entries will result in multiple translations in the response.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     public List<String> text() {
-      return text_serialized_name;
+      return text;
     }
+ 
     /**
-     * Gets the model_id_serialized_name.
+     * Gets the modelId.
      *
      * Model ID of the translation model to use. If this is specified, the **source** and **target** parameters will be
      * ignored. The method requires either a model ID or both the **source** and **target** parameters.
      *
-     * @return the model_id_serialized_name
+     * @return the modelId
      */
     public String modelId() {
-      return model_id_serialized_name;
+      return modelId;
     }
+ 
     /**
-     * Gets the source_serialized_name.
+     * Gets the source.
      *
      * Language code of the source text language. Use with `target` as an alternative way to select a translation model.
      * When `source` and `target` are set, and a model ID is not set, the system chooses a default model for the
      * language pair (usually the model based on the news domain).
      *
-     * @return the source_serialized_name
+     * @return the source
      */
     public String source() {
-      return source_serialized_name;
+      return source;
     }
+ 
     /**
-     * Gets the target_serialized_name.
+     * Gets the target.
      *
      * Language code of the translation target language. Use with source as an alternative way to select a translation
      * model.
      *
-     * @return the target_serialized_name
+     * @return the target
      */
     public String target() {
-      return target_serialized_name;
+      return target;
     }
+
     private TranslateOptions(TranslateOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.text_serialized_name, 'text_serialized_name cannot be null');
-      text_serialized_name = builder.text_serialized_name;
-      model_id_serialized_name = builder.model_id_serialized_name;
-      source_serialized_name = builder.source_serialized_name;
-      target_serialized_name = builder.target_serialized_name;
+      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
+      text = builder.text;
+      modelId = builder.modelId;
+      source = builder.source;
+      target = builder.target;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -976,16 +1005,16 @@ public class IBMLanguageTranslatorV3Models {
    * TranslateOptions Builder.
    */
   public class TranslateOptionsBuilder extends IBMWatsonOptionsModel {
-    private List<String> text_serialized_name;
-    private String model_id_serialized_name;
-    private String source_serialized_name;
-    private String target_serialized_name;
+    private List<String> text;
+    private String modelId;
+    private String source;
+    private String target;
 
     private TranslateOptionsBuilder(TranslateOptions translateOptions) {
-      text_serialized_name = translateOptions.text_serialized_name;
-      model_id_serialized_name = translateOptions.model_id_serialized_name;
-      source_serialized_name = translateOptions.source_serialized_name;
-      target_serialized_name = translateOptions.target_serialized_name;
+      text = translateOptions.text;
+      modelId = translateOptions.modelId;
+      source = translateOptions.source;
+      target = translateOptions.target;
       this.requestHeaders.putAll(translateOptions.requestHeaders());
     }
 
@@ -1001,7 +1030,7 @@ public class IBMLanguageTranslatorV3Models {
      * @param text the text
      */
     public TranslateOptionsBuilder(List<String> text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -1014,62 +1043,62 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Adds an text to text_serialized_name.
+     * Adds an text to text.
      *
      * @param text the new text
      * @return the TranslateOptions builder
      */
     public TranslateOptionsBuilder addText(String text) {
       IBMWatsonValidator.notNull(text, 'text cannot be null');
-      if (this.text_serialized_name == null) {
-        this.text_serialized_name = new List<String>();
+      if (this.text == null) {
+        this.text = new List<String>();
       }
-      this.text_serialized_name.add(text);
+      this.text.add(text);
       return this;
     }
 
     /**
-     * Set the text_serialized_name.
-     * Existing text_serialized_name will be replaced.
+     * Set the text.
+     * Existing text will be replaced.
      *
      * @param text the text
      * @return the TranslateOptions builder
      */
     public TranslateOptionsBuilder text(List<String> text) {
-      this.text_serialized_name = text;
+      this.text = text;
       return this;
     }
 
     /**
-     * Set the model_id_serialized_name.
+     * Set the modelId.
      *
      * @param modelId the modelId
      * @return the TranslateOptions builder
      */
     public TranslateOptionsBuilder modelId(String modelId) {
-      this.model_id_serialized_name = modelId;
+      this.modelId = modelId;
       return this;
     }
 
     /**
-     * Set the source_serialized_name.
+     * Set the source.
      *
      * @param source the source
      * @return the TranslateOptions builder
      */
     public TranslateOptionsBuilder source(String source) {
-      this.source_serialized_name = source;
+      this.source = source;
       return this;
     }
 
     /**
-     * Set the target_serialized_name.
+     * Set the target.
      *
      * @param target the target
      * @return the TranslateOptions builder
      */
     public TranslateOptionsBuilder target(String target) {
-      this.target_serialized_name = target;
+      this.target = target;
       return this;
     }
 
@@ -1091,25 +1120,26 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class Translation extends IBMWatsonGenericModel {
     private String translation_serialized_name;
+ 
     /**
-     * Gets the translation_serialized_name.
+     * Gets the translationOutput.
      *
      * Translation output in UTF-8.
      *
-     * @return the translation_serialized_name
+     * @return the translationOutput
      */
     @AuraEnabled
-    public String getTranslation() {
+    public String getTranslationOutput() {
       return translation_serialized_name;
     }
 
     /**
-     * Sets the translation_serialized_name.
+     * Sets the translationOutput.
      *
-     * @param translation the new translation
+     * @param translationOutput the new translationOutput
      */
-    public void setTranslation(final String translation) {
-      this.translation_serialized_name = translation;
+    public void setTranslationOutput(final String translationOutput) {
+      this.translation_serialized_name = translationOutput;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1137,115 +1167,125 @@ public class IBMLanguageTranslatorV3Models {
     private Boolean default_model_serialized_name;
     private String owner_serialized_name;
     private String status_serialized_name;
+ 
     /**
-     * Gets the model_id_serialized_name.
+     * Gets the modelId.
      *
      * A globally unique string that identifies the underlying model that is used for translation.
      *
-     * @return the model_id_serialized_name
+     * @return the modelId
      */
     @AuraEnabled
     public String getModelId() {
       return model_id_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * Optional name that can be specified when the model is created.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the source_serialized_name.
+     * Gets the source.
      *
      * Translation source language code.
      *
-     * @return the source_serialized_name
+     * @return the source
      */
     @AuraEnabled
     public String getSource() {
       return source_serialized_name;
     }
+ 
     /**
-     * Gets the target_serialized_name.
+     * Gets the target.
      *
      * Translation target language code.
      *
-     * @return the target_serialized_name
+     * @return the target
      */
     @AuraEnabled
     public String getTarget() {
       return target_serialized_name;
     }
+ 
     /**
-     * Gets the base_model_id_serialized_name.
+     * Gets the baseModelId.
      *
      * Model ID of the base model that was used to customize the model. If the model is not a custom model, this will be
      * an empty string.
      *
-     * @return the base_model_id_serialized_name
+     * @return the baseModelId
      */
     @AuraEnabled
     public String getBaseModelId() {
       return base_model_id_serialized_name;
     }
+ 
     /**
-     * Gets the domain_serialized_name.
+     * Gets the domain.
      *
      * The domain of the translation model.
      *
-     * @return the domain_serialized_name
+     * @return the domain
      */
     @AuraEnabled
     public String getDomain() {
       return domain_serialized_name;
     }
+ 
     /**
-     * Gets the customizable_serialized_name.
+     * Gets the customizable.
      *
      * Whether this model can be used as a base for customization. Customized models are not further customizable, and
      * some base models are not customizable.
      *
-     * @return the customizable_serialized_name
+     * @return the customizable
      */
     @AuraEnabled
     public Boolean getCustomizable() {
       return customizable_serialized_name;
     }
+ 
     /**
-     * Gets the default_model_serialized_name.
+     * Gets the defaultModel.
      *
      * Whether or not the model is a default model. A default model is the model for a given language pair that will be
      * used when that language pair is specified in the source and target parameters.
      *
-     * @return the default_model_serialized_name
+     * @return the defaultModel
      */
     @AuraEnabled
     public Boolean getDefaultModel() {
       return default_model_serialized_name;
     }
+ 
     /**
-     * Gets the owner_serialized_name.
+     * Gets the owner.
      *
      * Either an empty string, indicating the model is not a custom model, or the ID of the service instance that
      * created the model.
      *
-     * @return the owner_serialized_name
+     * @return the owner
      */
     @AuraEnabled
     public String getOwner() {
       return owner_serialized_name;
     }
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * Availability of a model.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
@@ -1253,7 +1293,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the model_id_serialized_name.
+     * Sets the modelId.
      *
      * @param modelId the new modelId
      */
@@ -1262,7 +1302,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -1271,7 +1311,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the source_serialized_name.
+     * Sets the source.
      *
      * @param source the new source
      */
@@ -1280,7 +1320,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the target_serialized_name.
+     * Sets the target.
      *
      * @param target the new target
      */
@@ -1289,7 +1329,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the base_model_id_serialized_name.
+     * Sets the baseModelId.
      *
      * @param baseModelId the new baseModelId
      */
@@ -1298,7 +1338,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the domain_serialized_name.
+     * Sets the domain.
      *
      * @param domain the new domain
      */
@@ -1307,7 +1347,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the customizable_serialized_name.
+     * Sets the customizable.
      *
      * @param customizable the new customizable
      */
@@ -1316,7 +1356,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the default_model_serialized_name.
+     * Sets the defaultModel.
      *
      * @param defaultModel the new defaultModel
      */
@@ -1325,7 +1365,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the owner_serialized_name.
+     * Sets the owner.
      *
      * @param owner the new owner
      */
@@ -1334,7 +1374,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the status_serialized_name.
+     * Sets the status.
      *
      * @param status the new status
      */
@@ -1358,12 +1398,13 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class TranslationModels extends IBMWatsonResponseModel {
     private List<TranslationModel> models_serialized_name;
+ 
     /**
-     * Gets the models_serialized_name.
+     * Gets the models.
      *
      * An array of available models.
      *
-     * @return the models_serialized_name
+     * @return the models
      */
     @AuraEnabled
     public List<TranslationModel> getModels() {
@@ -1371,7 +1412,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the models_serialized_name.
+     * Sets the models.
      *
      * @param models the new models
      */
@@ -1386,7 +1427,7 @@ public class IBMLanguageTranslatorV3Models {
 
       TranslationModels ret = (TranslationModels) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for models_serialized_name
+      // calling custom deserializer for models
       List<TranslationModel> newModels = new List<TranslationModel>();
       List<TranslationModel> deserializedModels = ret.getModels();
       if (deserializedModels != null) {
@@ -1410,34 +1451,37 @@ public class IBMLanguageTranslatorV3Models {
     private Long word_count_serialized_name;
     private Long character_count_serialized_name;
     private List<Translation> translations_serialized_name;
+ 
     /**
-     * Gets the word_count_serialized_name.
+     * Gets the wordCount.
      *
      * Number of words in the input text.
      *
-     * @return the word_count_serialized_name
+     * @return the wordCount
      */
     @AuraEnabled
     public Long getWordCount() {
       return word_count_serialized_name;
     }
+ 
     /**
-     * Gets the character_count_serialized_name.
+     * Gets the characterCount.
      *
      * Number of characters in the input text.
      *
-     * @return the character_count_serialized_name
+     * @return the characterCount
      */
     @AuraEnabled
     public Long getCharacterCount() {
       return character_count_serialized_name;
     }
+ 
     /**
-     * Gets the translations_serialized_name.
+     * Gets the translations.
      *
      * List of translation output in UTF-8, corresponding to the input text entries.
      *
-     * @return the translations_serialized_name
+     * @return the translations
      */
     @AuraEnabled
     public List<Translation> getTranslations() {
@@ -1445,7 +1489,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the word_count_serialized_name.
+     * Sets the wordCount.
      *
      * @param wordCount the new wordCount
      */
@@ -1454,7 +1498,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the character_count_serialized_name.
+     * Sets the characterCount.
      *
      * @param characterCount the new characterCount
      */
@@ -1463,7 +1507,7 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Sets the translations_serialized_name.
+     * Sets the translations.
      *
      * @param translations the new translations
      */
@@ -1478,7 +1522,7 @@ public class IBMLanguageTranslatorV3Models {
 
       TranslationResult ret = (TranslationResult) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for translations_serialized_name
+      // calling custom deserializer for translations
       List<Translation> newTranslations = new List<Translation>();
       List<Translation> deserializedTranslations = ret.getTranslations();
       if (deserializedTranslations != null) {
