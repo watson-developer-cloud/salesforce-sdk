@@ -1113,7 +1113,7 @@ public with sharing class IBMDiscoveryV1FTests {
       + 'Conversational interfaces allow for a much more natural interaction, especially over a fairly large dataset. This is ideal for users '
       + 'who are not familiar with how to use various systems, or who need to quickly get access to a variety of information in a small amount '
       + 'of time, like while on site with a customer during a meeting. This blog will cover some basic use cases as well as provide information '
-      + 'on how to connect a conversational system, like IBM Watson Conversation Service (WCS), with your Salesforce database.</body></html>';
+      + 'on how to connect a conversational system with your Salesforce database.</body></html>';
     blob DocumentContentBlob = Blob.valueOf(DocumentContentStr);
     return new Attachment(Body = DocumentContentBlob,
       Name='myPageDocument.html',

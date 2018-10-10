@@ -18,23 +18,6 @@
       ]
     },
     {
-      "name": "conversation",
-      "apexClasses": [
-        {
-         "fileName": "IBMConversationV1.cls",
-         "metadata": "IBMConversationV1.cls-meta.xml"
-        },
-        {
-         "fileName": "IBMConversationV1Models.cls",
-         "metadata": "IBMConversationV1Models.cls-meta.xml"
-        },
-        {
-         "fileName": "IBMConversationV1Test.cls",
-         "metadata": "IBMConversationV1Test.cls-meta.xml"
-        }
-      ]
-    },
-    {
       "name": "language-translator",
       "apexClasses": [
         {

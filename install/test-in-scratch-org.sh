@@ -12,10 +12,6 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ] && [ "$TRAVIS_BRANCH" ]; then
   $(sfdx force:apex:execute -f DiscoveryTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
   rm DiscoveryTestRunner.apex
 
-  echo "IBMConversationV1FTests.runAllTests('$CONVERSATION_USERNAME', '$CONVERSATION_PASSWORD');" > ConversationTestRunner.apex
-  $(sfdx force:apex:execute -f ConversationTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
-  rm ConversationTestRunner.apex
-
   echo "IBMPersonalityInsightsV3FTest.runAllTests('$PERSONALITY_INSIGHTS_USERNAME', '$PERSONALITY_INSIGHTS_PASSWORD');" > PersonalityInsightsTestRunner.apex
   $(sfdx force:apex:execute -f PersonalityInsightsTestRunner.apex --json | jq -e -r '.result.compiled == true and .result.success == true') && echo “Success” || exit 1
   rm PersonalityInsightsTestRunner.apex

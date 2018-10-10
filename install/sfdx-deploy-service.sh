@@ -6,7 +6,6 @@ echo "";
 echo "-c          Deploy core files";
 echo "-s          Service to deploy, available services are:";
 echo "              * assistant"
-echo "              * conversation";
 echo "              * discovery";
 echo "              * language-translator";
 echo "              * natural-language-classifier";
