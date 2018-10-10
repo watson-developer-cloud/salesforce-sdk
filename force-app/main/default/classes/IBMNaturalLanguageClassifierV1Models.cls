@@ -8,56 +8,61 @@ public class IBMNaturalLanguageClassifierV1Models {
     private String text_serialized_name;
     private String top_class_serialized_name;
     private List<ClassifiedClass> classes_serialized_name;
+ 
     /**
-     * Gets the classifier_id_serialized_name.
+     * Gets the classifierId.
      *
      * Unique identifier for this classifier.
      *
-     * @return the classifier_id_serialized_name
+     * @return the classifierId
      */
     @AuraEnabled
     public String getClassifierId() {
       return classifier_id_serialized_name;
     }
+ 
     /**
-     * Gets the url_serialized_name.
+     * Gets the url.
      *
      * Link to the classifier.
      *
-     * @return the url_serialized_name
+     * @return the url
      */
     @AuraEnabled
     public String getUrl() {
       return url_serialized_name;
     }
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * The submitted phrase.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     @AuraEnabled
     public String getText() {
       return text_serialized_name;
     }
+ 
     /**
-     * Gets the top_class_serialized_name.
+     * Gets the topClass.
      *
      * The class with the highest confidence.
      *
-     * @return the top_class_serialized_name
+     * @return the topClass
      */
     @AuraEnabled
     public String getTopClass() {
       return top_class_serialized_name;
     }
+ 
     /**
-     * Gets the classes_serialized_name.
+     * Gets the classes.
      *
      * An array of up to ten class-confidence pairs sorted in descending order of confidence.
      *
-     * @return the classes_serialized_name
+     * @return the classes
      */
     @AuraEnabled
     public List<ClassifiedClass> getClasses() {
@@ -65,7 +70,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the classifier_id_serialized_name.
+     * Sets the classifierId.
      *
      * @param classifierId the new classifierId
      */
@@ -74,7 +79,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the url_serialized_name.
+     * Sets the url.
      *
      * @param url the new url
      */
@@ -83,7 +88,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the text_serialized_name.
+     * Sets the text.
      *
      * @param text the new text
      */
@@ -92,7 +97,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the top_class_serialized_name.
+     * Sets the topClass.
      *
      * @param topClass the new topClass
      */
@@ -101,7 +106,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the classes_serialized_name.
+     * Sets the classes.
      *
      * @param classes the new classes
      */
@@ -116,7 +121,7 @@ public class IBMNaturalLanguageClassifierV1Models {
 
       Classification ret = (Classification) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for classes_serialized_name
+      // calling custom deserializer for classes
       List<ClassifiedClass> newClasses = new List<ClassifiedClass>();
       List<ClassifiedClass> deserializedClasses = ret.getClasses();
       if (deserializedClasses != null) {
@@ -140,34 +145,37 @@ public class IBMNaturalLanguageClassifierV1Models {
     private String classifier_id_serialized_name;
     private String url_serialized_name;
     private List<CollectionItem> collection_serialized_name;
+ 
     /**
-     * Gets the classifier_id_serialized_name.
+     * Gets the classifierId.
      *
      * Unique identifier for this classifier.
      *
-     * @return the classifier_id_serialized_name
+     * @return the classifierId
      */
     @AuraEnabled
     public String getClassifierId() {
       return classifier_id_serialized_name;
     }
+ 
     /**
-     * Gets the url_serialized_name.
+     * Gets the url.
      *
      * Link to the classifier.
      *
-     * @return the url_serialized_name
+     * @return the url
      */
     @AuraEnabled
     public String getUrl() {
       return url_serialized_name;
     }
+ 
     /**
-     * Gets the collection_serialized_name.
+     * Gets the collection.
      *
      * An array of classifier responses for each submitted phrase.
      *
-     * @return the collection_serialized_name
+     * @return the collection
      */
     @AuraEnabled
     public List<CollectionItem> getCollection() {
@@ -175,7 +183,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the classifier_id_serialized_name.
+     * Sets the classifierId.
      *
      * @param classifierId the new classifierId
      */
@@ -184,7 +192,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the url_serialized_name.
+     * Sets the url.
      *
      * @param url the new url
      */
@@ -193,7 +201,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the collection_serialized_name.
+     * Sets the collection.
      *
      * @param collection the new collection
      */
@@ -208,7 +216,7 @@ public class IBMNaturalLanguageClassifierV1Models {
 
       ClassificationCollection ret = (ClassificationCollection) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for collection_serialized_name
+      // calling custom deserializer for collection
       List<CollectionItem> newCollection = new List<CollectionItem>();
       List<CollectionItem> deserializedCollection = ret.getCollection();
       if (deserializedCollection != null) {
@@ -231,24 +239,26 @@ public class IBMNaturalLanguageClassifierV1Models {
   public class ClassifiedClass extends IBMWatsonGenericModel {
     private Double confidence_serialized_name;
     private String class_name_serialized_name;
+ 
     /**
-     * Gets the confidence_serialized_name.
+     * Gets the confidence.
      *
      * A decimal percentage that represents the confidence that Watson has in this class. Higher values represent higher
      * confidences.
      *
-     * @return the confidence_serialized_name
+     * @return the confidence
      */
     @AuraEnabled
     public Double getConfidence() {
       return confidence_serialized_name;
     }
+ 
     /**
-     * Gets the class_name_serialized_name.
+     * Gets the className.
      *
      * Class label.
      *
-     * @return the class_name_serialized_name
+     * @return the className
      */
     @AuraEnabled
     public String getClassName() {
@@ -256,7 +266,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the confidence_serialized_name.
+     * Sets the confidence.
      *
      * @param confidence the new confidence
      */
@@ -265,7 +275,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the class_name_serialized_name.
+     * Sets the className.
      *
      * @param className the new className
      */
@@ -295,78 +305,85 @@ public class IBMNaturalLanguageClassifierV1Models {
     private Datetime created_serialized_name;
     private String status_description_serialized_name;
     private String language_serialized_name;
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * User-supplied name for the classifier.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the url_serialized_name.
+     * Gets the url.
      *
      * Link to the classifier.
      *
-     * @return the url_serialized_name
+     * @return the url
      */
     @AuraEnabled
     public String getUrl() {
       return url_serialized_name;
     }
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * The state of the classifier.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
       return status_serialized_name;
     }
+ 
     /**
-     * Gets the classifier_id_serialized_name.
+     * Gets the classifierId.
      *
      * Unique identifier for this classifier.
      *
-     * @return the classifier_id_serialized_name
+     * @return the classifierId
      */
     @AuraEnabled
     public String getClassifierId() {
       return classifier_id_serialized_name;
     }
+ 
     /**
-     * Gets the created_serialized_name.
+     * Gets the created.
      *
      * Date and time (UTC) the classifier was created.
      *
-     * @return the created_serialized_name
+     * @return the created
      */
     @AuraEnabled
     public Datetime getCreated() {
       return created_serialized_name;
     }
+ 
     /**
-     * Gets the status_description_serialized_name.
+     * Gets the statusDescription.
      *
      * Additional detail about the status.
      *
-     * @return the status_description_serialized_name
+     * @return the statusDescription
      */
     @AuraEnabled
     public String getStatusDescription() {
       return status_description_serialized_name;
     }
+ 
     /**
-     * Gets the language_serialized_name.
+     * Gets the language.
      *
      * The language used for the classifier.
      *
-     * @return the language_serialized_name
+     * @return the language
      */
     @AuraEnabled
     public String getLanguage() {
@@ -374,7 +391,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -383,7 +400,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the url_serialized_name.
+     * Sets the url.
      *
      * @param url the new url
      */
@@ -392,7 +409,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the classifier_id_serialized_name.
+     * Sets the classifierId.
      *
      * @param classifierId the new classifierId
      */
@@ -401,7 +418,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the language_serialized_name.
+     * Sets the language.
      *
      * @param language the new language
      */
@@ -425,12 +442,13 @@ public class IBMNaturalLanguageClassifierV1Models {
    */
   public class ClassifierList extends IBMWatsonResponseModel {
     private List<Classifier> classifiers_serialized_name;
+ 
     /**
-     * Gets the classifiers_serialized_name.
+     * Gets the classifiers.
      *
      * The classifiers available to the user. Returns an empty array if no classifiers are available.
      *
-     * @return the classifiers_serialized_name
+     * @return the classifiers
      */
     @AuraEnabled
     public List<Classifier> getClassifiers() {
@@ -438,7 +456,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the classifiers_serialized_name.
+     * Sets the classifiers.
      *
      * @param classifiers the new classifiers
      */
@@ -453,7 +471,7 @@ public class IBMNaturalLanguageClassifierV1Models {
 
       ClassifierList ret = (ClassifierList) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for classifiers_serialized_name
+      // calling custom deserializer for classifiers
       List<Classifier> newClassifiers = new List<Classifier>();
       List<Classifier> deserializedClassifiers = ret.getClassifiers();
       if (deserializedClassifiers != null) {
@@ -474,33 +492,36 @@ public class IBMNaturalLanguageClassifierV1Models {
    * The classifyCollection options.
    */
   public class ClassifyCollectionOptions extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
-    private List<ClassifyInput> collection_serialized_name;
+    private String classifierId;
+    private List<ClassifyInput> collection;
+ 
     /**
-     * Gets the classifier_id_serialized_name.
+     * Gets the classifierId.
      *
      * Classifier ID to use.
      *
-     * @return the classifier_id_serialized_name
+     * @return the classifierId
      */
     public String classifierId() {
-      return classifier_id_serialized_name;
+      return classifierId;
     }
+ 
     /**
-     * Gets the collection_serialized_name.
+     * Gets the collection.
      *
      * The submitted phrases.
      *
-     * @return the collection_serialized_name
+     * @return the collection
      */
     public List<ClassifyInput> collection() {
-      return collection_serialized_name;
+      return collection;
     }
+
     private ClassifyCollectionOptions(ClassifyCollectionOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.classifier_id_serialized_name, 'classifier_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notNull(builder.collection_serialized_name, 'collection_serialized_name cannot be null');
-      classifier_id_serialized_name = builder.classifier_id_serialized_name;
-      collection_serialized_name = builder.collection_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.classifierId, 'classifierId cannot be empty');
+      IBMWatsonValidator.notNull(builder.collection, 'collection cannot be null');
+      classifierId = builder.classifierId;
+      collection = builder.collection;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -519,12 +540,12 @@ public class IBMNaturalLanguageClassifierV1Models {
    * ClassifyCollectionOptions Builder.
    */
   public class ClassifyCollectionOptionsBuilder extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
-    private List<ClassifyInput> collection_serialized_name;
+    private String classifierId;
+    private List<ClassifyInput> collection;
 
     private ClassifyCollectionOptionsBuilder(ClassifyCollectionOptions classifyCollectionOptions) {
-      classifier_id_serialized_name = classifyCollectionOptions.classifier_id_serialized_name;
-      collection_serialized_name = classifyCollectionOptions.collection_serialized_name;
+      classifierId = classifyCollectionOptions.classifierId;
+      collection = classifyCollectionOptions.collection;
       this.requestHeaders.putAll(classifyCollectionOptions.requestHeaders());
     }
 
@@ -541,8 +562,8 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param collection the collection
      */
     public ClassifyCollectionOptionsBuilder(String classifierId, List<ClassifyInput> collection) {
-      this.classifier_id_serialized_name = classifierId;
-      this.collection_serialized_name = collection;
+      this.classifierId = classifierId;
+      this.collection = collection;
     }
 
     /**
@@ -555,40 +576,40 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Adds an collection to collection_serialized_name.
+     * Adds an collection to collection.
      *
      * @param collection the new collection
      * @return the ClassifyCollectionOptions builder
      */
     public ClassifyCollectionOptionsBuilder addCollection(ClassifyInput collection) {
       IBMWatsonValidator.notNull(collection, 'collection cannot be null');
-      if (this.collection_serialized_name == null) {
-        this.collection_serialized_name = new List<ClassifyInput>();
+      if (this.collection == null) {
+        this.collection = new List<ClassifyInput>();
       }
-      this.collection_serialized_name.add(collection);
+      this.collection.add(collection);
       return this;
     }
 
     /**
-     * Set the classifier_id_serialized_name.
+     * Set the classifierId.
      *
      * @param classifierId the classifierId
      * @return the ClassifyCollectionOptions builder
      */
     public ClassifyCollectionOptionsBuilder classifierId(String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
       return this;
     }
 
     /**
-     * Set the collection_serialized_name.
-     * Existing collection_serialized_name will be replaced.
+     * Set the collection.
+     * Existing collection will be replaced.
      *
      * @param collection the collection
      * @return the ClassifyCollectionOptions builder
      */
     public ClassifyCollectionOptionsBuilder collection(List<ClassifyInput> collection) {
-      this.collection_serialized_name = collection;
+      this.collection = collection;
       return this;
     }
 
@@ -610,19 +631,20 @@ public class IBMNaturalLanguageClassifierV1Models {
    */
   public class ClassifyInput {
     private String text_serialized_name;
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * The submitted phrase. The maximum length is 2048 characters.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     public String getText() {
       return text_serialized_name;
     }
 
     /**
-     * Sets the text_serialized_name.
+     * Sets the text.
      *
      * @param text the new text
      */
@@ -636,33 +658,36 @@ public class IBMNaturalLanguageClassifierV1Models {
    * The classify options.
    */
   public class ClassifyOptions extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
-    private String text_serialized_name;
+    private String classifierId;
+    private String text;
+ 
     /**
-     * Gets the classifier_id_serialized_name.
+     * Gets the classifierId.
      *
      * Classifier ID to use.
      *
-     * @return the classifier_id_serialized_name
+     * @return the classifierId
      */
     public String classifierId() {
-      return classifier_id_serialized_name;
+      return classifierId;
     }
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * The submitted phrase. The maximum length is 2048 characters.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     public String text() {
-      return text_serialized_name;
+      return text;
     }
+
     private ClassifyOptions(ClassifyOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.classifier_id_serialized_name, 'classifier_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notNull(builder.text_serialized_name, 'text_serialized_name cannot be null');
-      classifier_id_serialized_name = builder.classifier_id_serialized_name;
-      text_serialized_name = builder.text_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.classifierId, 'classifierId cannot be empty');
+      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
+      classifierId = builder.classifierId;
+      text = builder.text;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -681,12 +706,12 @@ public class IBMNaturalLanguageClassifierV1Models {
    * ClassifyOptions Builder.
    */
   public class ClassifyOptionsBuilder extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
-    private String text_serialized_name;
+    private String classifierId;
+    private String text;
 
     private ClassifyOptionsBuilder(ClassifyOptions classifyOptions) {
-      classifier_id_serialized_name = classifyOptions.classifier_id_serialized_name;
-      text_serialized_name = classifyOptions.text_serialized_name;
+      classifierId = classifyOptions.classifierId;
+      text = classifyOptions.text;
       this.requestHeaders.putAll(classifyOptions.requestHeaders());
     }
 
@@ -703,8 +728,8 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param text the text
      */
     public ClassifyOptionsBuilder(String classifierId, String text) {
-      this.classifier_id_serialized_name = classifierId;
-      this.text_serialized_name = text;
+      this.classifierId = classifierId;
+      this.text = text;
     }
 
     /**
@@ -717,24 +742,24 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Set the classifier_id_serialized_name.
+     * Set the classifierId.
      *
      * @param classifierId the classifierId
      * @return the ClassifyOptions builder
      */
     public ClassifyOptionsBuilder classifierId(String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
       return this;
     }
 
     /**
-     * Set the text_serialized_name.
+     * Set the text.
      *
      * @param text the text
      * @return the ClassifyOptions builder
      */
     public ClassifyOptionsBuilder text(String text) {
-      this.text_serialized_name = text;
+      this.text = text;
       return this;
     }
 
@@ -758,34 +783,37 @@ public class IBMNaturalLanguageClassifierV1Models {
     private String text_serialized_name;
     private String top_class_serialized_name;
     private List<ClassifiedClass> classes_serialized_name;
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * The submitted phrase. The maximum length is 2048 characters.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     @AuraEnabled
     public String getText() {
       return text_serialized_name;
     }
+ 
     /**
-     * Gets the top_class_serialized_name.
+     * Gets the topClass.
      *
      * The class with the highest confidence.
      *
-     * @return the top_class_serialized_name
+     * @return the topClass
      */
     @AuraEnabled
     public String getTopClass() {
       return top_class_serialized_name;
     }
+ 
     /**
-     * Gets the classes_serialized_name.
+     * Gets the classes.
      *
      * An array of up to ten class-confidence pairs sorted in descending order of confidence.
      *
-     * @return the classes_serialized_name
+     * @return the classes
      */
     @AuraEnabled
     public List<ClassifiedClass> getClasses() {
@@ -793,7 +821,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the text_serialized_name.
+     * Sets the text.
      *
      * @param text the new text
      */
@@ -802,7 +830,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the top_class_serialized_name.
+     * Sets the topClass.
      *
      * @param topClass the new topClass
      */
@@ -811,7 +839,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Sets the classes_serialized_name.
+     * Sets the classes.
      *
      * @param classes the new classes
      */
@@ -826,7 +854,7 @@ public class IBMNaturalLanguageClassifierV1Models {
 
       CollectionItem ret = (CollectionItem) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for classes_serialized_name
+      // calling custom deserializer for classes
       List<ClassifiedClass> newClasses = new List<ClassifiedClass>();
       List<ClassifiedClass> deserializedClasses = ret.getClasses();
       if (deserializedClasses != null) {
@@ -847,12 +875,13 @@ public class IBMNaturalLanguageClassifierV1Models {
    * The createClassifier options.
    */
   public class CreateClassifierOptions extends IBMWatsonOptionsModel {
-    private IBMWatsonFile training_metadata_serialized_name;
-    private String training_metadata_filename_serialized_name;
-    private IBMWatsonFile training_data_serialized_name;
-    private String training_data_filename_serialized_name;
+    private IBMWatsonFile metadata;
+    private String trainingMetadataFilename;
+    private IBMWatsonFile trainingData;
+    private String trainingDataFilename;
+ 
     /**
-     * Gets the training_metadata_serialized_name.
+     * Gets the metadata.
      *
      * Metadata in JSON format. The metadata identifies the language of the data, and an optional name to identify the
      * classifier. Specify the language with the 2-letter primary language code as assigned in ISO standard 639.
@@ -860,50 +889,54 @@ public class IBMNaturalLanguageClassifierV1Models {
      * Supported languages are English (`en`), Arabic (`ar`), French (`fr`), German, (`de`), Italian (`it`), Japanese
      * (`ja`), Korean (`ko`), Brazilian Portuguese (`pt`), and Spanish (`es`).
      *
-     * @return the training_metadata_serialized_name
+     * @return the metadata
      */
-    public IBMWatsonFile trainingMetadata() {
-      return training_metadata_serialized_name;
+    public IBMWatsonFile metadata() {
+      return metadata;
     }
+ 
     /**
-     * Gets the training_metadata_filename_serialized_name.
+     * Gets the trainingMetadataFilename.
      *
      * The filename for training_metadata.
      *
-     * @return the training_metadata_filename_serialized_name
+     * @return the trainingMetadataFilename
      */
     public String trainingMetadataFilename() {
-      return training_metadata_filename_serialized_name;
+      return trainingMetadataFilename;
     }
+ 
     /**
-     * Gets the training_data_serialized_name.
+     * Gets the trainingData.
      *
      * Training data in CSV format. Each text value must have at least one class. The data can include up to 20,000
      * records. For details, see [Data
      * preparation](https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html).
      *
-     * @return the training_data_serialized_name
+     * @return the trainingData
      */
     public IBMWatsonFile trainingData() {
-      return training_data_serialized_name;
+      return trainingData;
     }
+ 
     /**
-     * Gets the training_data_filename_serialized_name.
+     * Gets the trainingDataFilename.
      *
      * The filename for training_data.
      *
-     * @return the training_data_filename_serialized_name
+     * @return the trainingDataFilename
      */
     public String trainingDataFilename() {
-      return training_data_filename_serialized_name;
+      return trainingDataFilename;
     }
+
     private CreateClassifierOptions(CreateClassifierOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.training_metadata_serialized_name, 'training_metadata_serialized_name cannot be null');
-      IBMWatsonValidator.notNull(builder.training_data_serialized_name, 'training_data_serialized_name cannot be null');
-      training_metadata_serialized_name = builder.training_metadata_serialized_name;
-      training_metadata_filename_serialized_name = builder.training_metadata_filename_serialized_name;
-      training_data_serialized_name = builder.training_data_serialized_name;
-      training_data_filename_serialized_name = builder.training_data_filename_serialized_name;
+      IBMWatsonValidator.notNull(builder.metadata, 'metadata cannot be null');
+      IBMWatsonValidator.notNull(builder.trainingData, 'trainingData cannot be null');
+      metadata = builder.metadata;
+      trainingMetadataFilename = builder.trainingMetadataFilename;
+      trainingData = builder.trainingData;
+      trainingDataFilename = builder.trainingDataFilename;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -922,16 +955,16 @@ public class IBMNaturalLanguageClassifierV1Models {
    * CreateClassifierOptions Builder.
    */
   public class CreateClassifierOptionsBuilder extends IBMWatsonOptionsModel {
-    private IBMWatsonFile training_metadata_serialized_name;
-    private String training_metadata_filename_serialized_name;
-    private IBMWatsonFile training_data_serialized_name;
-    private String training_data_filename_serialized_name;
+    private IBMWatsonFile metadata;
+    private String trainingMetadataFilename;
+    private IBMWatsonFile trainingData;
+    private String trainingDataFilename;
 
     private CreateClassifierOptionsBuilder(CreateClassifierOptions createClassifierOptions) {
-      training_metadata_serialized_name = createClassifierOptions.training_metadata_serialized_name;
-      training_metadata_filename_serialized_name = createClassifierOptions.training_metadata_filename_serialized_name;
-      training_data_serialized_name = createClassifierOptions.training_data_serialized_name;
-      training_data_filename_serialized_name = createClassifierOptions.training_data_filename_serialized_name;
+      metadata = createClassifierOptions.metadata;
+      trainingMetadataFilename = createClassifierOptions.trainingMetadataFilename;
+      trainingData = createClassifierOptions.trainingData;
+      trainingDataFilename = createClassifierOptions.trainingDataFilename;
       this.requestHeaders.putAll(createClassifierOptions.requestHeaders());
     }
 
@@ -944,12 +977,12 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Instantiates a new builder with required properties.
      *
-     * @param trainingMetadata the trainingMetadata
+     * @param metadata the metadata
      * @param trainingData the trainingData
      */
-    public CreateClassifierOptionsBuilder(IBMWatsonFile trainingMetadata, IBMWatsonFile trainingData) {
-      this.training_metadata_serialized_name = trainingMetadata;
-      this.training_data_serialized_name = trainingData;
+    public CreateClassifierOptionsBuilder(IBMWatsonFile metadata, IBMWatsonFile trainingData) {
+      this.metadata = metadata;
+      this.trainingData = trainingData;
     }
 
     /**
@@ -962,46 +995,46 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Set the training_metadata_serialized_name.
+     * Set the metadata.
      *
-     * @param trainingMetadata the trainingMetadata
+     * @param metadata the metadata
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder trainingMetadata(IBMWatsonFile trainingMetadata) {
-      this.training_metadata_serialized_name = trainingMetadata;
+    public CreateClassifierOptionsBuilder metadata(IBMWatsonFile metadata) {
+      this.metadata = metadata;
       return this;
     }
 
     /**
-     * Set the training_metadata_filename_serialized_name.
+     * Set the trainingMetadataFilename.
      *
      * @param trainingMetadataFilename the trainingMetadataFilename
      * @return the CreateClassifierOptions builder
      */
     public CreateClassifierOptionsBuilder trainingMetadataFilename(String trainingMetadataFilename) {
-      this.training_metadata_filename_serialized_name = trainingMetadataFilename;
+      this.trainingMetadataFilename = trainingMetadataFilename;
       return this;
     }
 
     /**
-     * Set the training_data_serialized_name.
+     * Set the trainingData.
      *
      * @param trainingData the trainingData
      * @return the CreateClassifierOptions builder
      */
     public CreateClassifierOptionsBuilder trainingData(IBMWatsonFile trainingData) {
-      this.training_data_serialized_name = trainingData;
+      this.trainingData = trainingData;
       return this;
     }
 
     /**
-     * Set the training_data_filename_serialized_name.
+     * Set the trainingDataFilename.
      *
      * @param trainingDataFilename the trainingDataFilename
      * @return the CreateClassifierOptions builder
      */
     public CreateClassifierOptionsBuilder trainingDataFilename(String trainingDataFilename) {
-      this.training_data_filename_serialized_name = trainingDataFilename;
+      this.trainingDataFilename = trainingDataFilename;
       return this;
     }
 
@@ -1022,20 +1055,22 @@ public class IBMNaturalLanguageClassifierV1Models {
    * The deleteClassifier options.
    */
   public class DeleteClassifierOptions extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
+    private String classifierId;
+ 
     /**
-     * Gets the classifier_id_serialized_name.
+     * Gets the classifierId.
      *
      * Classifier ID to delete.
      *
-     * @return the classifier_id_serialized_name
+     * @return the classifierId
      */
     public String classifierId() {
-      return classifier_id_serialized_name;
+      return classifierId;
     }
+
     private DeleteClassifierOptions(DeleteClassifierOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.classifier_id_serialized_name, 'classifier_id_serialized_name cannot be empty');
-      classifier_id_serialized_name = builder.classifier_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.classifierId, 'classifierId cannot be empty');
+      classifierId = builder.classifierId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1054,10 +1089,10 @@ public class IBMNaturalLanguageClassifierV1Models {
    * DeleteClassifierOptions Builder.
    */
   public class DeleteClassifierOptionsBuilder extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
+    private String classifierId;
 
     private DeleteClassifierOptionsBuilder(DeleteClassifierOptions deleteClassifierOptions) {
-      classifier_id_serialized_name = deleteClassifierOptions.classifier_id_serialized_name;
+      classifierId = deleteClassifierOptions.classifierId;
       this.requestHeaders.putAll(deleteClassifierOptions.requestHeaders());
     }
 
@@ -1073,7 +1108,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param classifierId the classifierId
      */
     public DeleteClassifierOptionsBuilder(String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
     }
 
     /**
@@ -1086,13 +1121,13 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Set the classifier_id_serialized_name.
+     * Set the classifierId.
      *
      * @param classifierId the classifierId
      * @return the DeleteClassifierOptions builder
      */
     public DeleteClassifierOptionsBuilder classifierId(String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
       return this;
     }
 
@@ -1113,20 +1148,22 @@ public class IBMNaturalLanguageClassifierV1Models {
    * The getClassifier options.
    */
   public class GetClassifierOptions extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
+    private String classifierId;
+ 
     /**
-     * Gets the classifier_id_serialized_name.
+     * Gets the classifierId.
      *
      * Classifier ID to query.
      *
-     * @return the classifier_id_serialized_name
+     * @return the classifierId
      */
     public String classifierId() {
-      return classifier_id_serialized_name;
+      return classifierId;
     }
+
     private GetClassifierOptions(GetClassifierOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.classifier_id_serialized_name, 'classifier_id_serialized_name cannot be empty');
-      classifier_id_serialized_name = builder.classifier_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.classifierId, 'classifierId cannot be empty');
+      classifierId = builder.classifierId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1145,10 +1182,10 @@ public class IBMNaturalLanguageClassifierV1Models {
    * GetClassifierOptions Builder.
    */
   public class GetClassifierOptionsBuilder extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
+    private String classifierId;
 
     private GetClassifierOptionsBuilder(GetClassifierOptions getClassifierOptions) {
-      classifier_id_serialized_name = getClassifierOptions.classifier_id_serialized_name;
+      classifierId = getClassifierOptions.classifierId;
       this.requestHeaders.putAll(getClassifierOptions.requestHeaders());
     }
 
@@ -1164,7 +1201,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @param classifierId the classifierId
      */
     public GetClassifierOptionsBuilder(String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
     }
 
     /**
@@ -1177,13 +1214,13 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Set the classifier_id_serialized_name.
+     * Set the classifierId.
      *
      * @param classifierId the classifierId
      * @return the GetClassifierOptions builder
      */
     public GetClassifierOptionsBuilder classifierId(String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
       return this;
     }
 
@@ -1204,6 +1241,7 @@ public class IBMNaturalLanguageClassifierV1Models {
    * The listClassifiers options.
    */
   public class ListClassifiersOptions extends IBMWatsonOptionsModel {
+
     private ListClassifiersOptions(ListClassifiersOptionsBuilder builder) {
       this.requestHeaders = builder.requestHeaders;
     }
