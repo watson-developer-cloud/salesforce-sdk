@@ -7,47 +7,51 @@ public class IBMPersonalityInsightsV3Models {
     private String name_serialized_name;
     private String category_serialized_name;
     private Double percentage_serialized_name;
+ 
     /**
-     * Gets the trait_id_serialized_name.
+     * Gets the traitId.
      *
      * The unique, non-localized identifier of the characteristic to which the results pertain. IDs have the form
      * `behavior_{value}`.
      *
-     * @return the trait_id_serialized_name
+     * @return the traitId
      */
     @AuraEnabled
     public String getTraitId() {
       return trait_id_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The user-visible, localized name of the characteristic.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the category_serialized_name.
+     * Gets the category.
      *
      * The category of the characteristic: `behavior` for temporal data.
      *
-     * @return the category_serialized_name
+     * @return the category
      */
     @AuraEnabled
     public String getCategory() {
       return category_serialized_name;
     }
+ 
     /**
-     * Gets the percentage_serialized_name.
+     * Gets the percentage.
      *
      * For JSON content that is timestamped, the percentage of timestamped input data that occurred during that day of
      * the week or hour of the day. The range is 0 to 1.
      *
-     * @return the percentage_serialized_name
+     * @return the percentage
      */
     @AuraEnabled
     public Double getPercentage() {
@@ -55,7 +59,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the trait_id_serialized_name.
+     * Sets the traitId.
      *
      * @param traitId the new traitId
      */
@@ -64,7 +68,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -73,7 +77,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the category_serialized_name.
+     * Sets the category.
      *
      * @param category the new category
      */
@@ -82,7 +86,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the percentage_serialized_name.
+     * Sets the percentage.
      *
      * @param percentage the new percentage
      */
@@ -108,31 +112,34 @@ public class IBMPersonalityInsightsV3Models {
     private String consumption_preference_id_serialized_name;
     private String name_serialized_name;
     private Double score_serialized_name;
+ 
     /**
-     * Gets the consumption_preference_id_serialized_name.
+     * Gets the consumptionPreferenceId.
      *
      * The unique, non-localized identifier of the consumption preference to which the results pertain. IDs have the
      * form `consumption_preferences_{preference}`.
      *
-     * @return the consumption_preference_id_serialized_name
+     * @return the consumptionPreferenceId
      */
     @AuraEnabled
     public String getConsumptionPreferenceId() {
       return consumption_preference_id_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The user-visible, localized name of the consumption preference.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the score_serialized_name.
+     * Gets the score.
      *
      * The score for the consumption preference:
      * * `0.0`: Unlikely
@@ -142,7 +149,7 @@ public class IBMPersonalityInsightsV3Models {
      * The scores for some preferences are binary and do not allow a neutral value. The score is an indication of
      * preference based on the results inferred from the input text, not a normalized percentile.
      *
-     * @return the score_serialized_name
+     * @return the score
      */
     @AuraEnabled
     public Double getScore() {
@@ -150,7 +157,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the consumption_preference_id_serialized_name.
+     * Sets the consumptionPreferenceId.
      *
      * @param consumptionPreferenceId the new consumptionPreferenceId
      */
@@ -159,7 +166,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -168,7 +175,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the score_serialized_name.
+     * Sets the score.
      *
      * @param score the new score
      */
@@ -194,35 +201,38 @@ public class IBMPersonalityInsightsV3Models {
     private String consumption_preference_category_id_serialized_name;
     private String name_serialized_name;
     private List<ConsumptionPreferences> consumption_preferences_serialized_name;
+ 
     /**
-     * Gets the consumption_preference_category_id_serialized_name.
+     * Gets the consumptionPreferenceCategoryId.
      *
      * The unique, non-localized identifier of the consumption preferences category to which the results pertain. IDs
      * have the form `consumption_preferences_{category}`.
      *
-     * @return the consumption_preference_category_id_serialized_name
+     * @return the consumptionPreferenceCategoryId
      */
     @AuraEnabled
     public String getConsumptionPreferenceCategoryId() {
       return consumption_preference_category_id_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The user-visible name of the consumption preferences category.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the consumption_preferences_serialized_name.
+     * Gets the consumptionPreferences.
      *
      * Detailed results inferred from the input text for the individual preferences of the category.
      *
-     * @return the consumption_preferences_serialized_name
+     * @return the consumptionPreferences
      */
     @AuraEnabled
     public List<ConsumptionPreferences> getConsumptionPreferences() {
@@ -230,7 +240,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the consumption_preference_category_id_serialized_name.
+     * Sets the consumptionPreferenceCategoryId.
      *
      * @param consumptionPreferenceCategoryId the new consumptionPreferenceCategoryId
      */
@@ -239,7 +249,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -248,7 +258,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the consumption_preferences_serialized_name.
+     * Sets the consumptionPreferences.
      *
      * @param consumptionPreferences the new consumptionPreferences
      */
@@ -263,7 +273,7 @@ public class IBMPersonalityInsightsV3Models {
 
       ConsumptionPreferencesCategory ret = (ConsumptionPreferencesCategory) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for consumption_preferences_serialized_name
+      // calling custom deserializer for consumptionPreferences
       List<ConsumptionPreferences> newConsumptionPreferences = new List<ConsumptionPreferences>();
       List<ConsumptionPreferences> deserializedConsumptionPreferences = ret.getConsumptionPreferences();
       if (deserializedConsumptionPreferences != null) {
@@ -285,19 +295,21 @@ public class IBMPersonalityInsightsV3Models {
    */
   public class Content {
     private List<ContentItem> contentItems_serialized_name;
+ 
     /**
-     * Gets the contentItems_serialized_name.
+     * Gets the contentItems.
      *
      * An array of `ContentItem` objects that provides the text that is to be analyzed.
      *
-     * @return the contentItems_serialized_name
+     * @return the contentItems
      */
     public List<ContentItem> contentItems() {
       return contentItems_serialized_name;
     }
+  
     private Content(ContentBuilder builder) {
-      IBMWatsonValidator.notNull(builder.contentItems_serialized_name, 'contentItems_serialized_name cannot be null');
-      contentItems_serialized_name = builder.contentItems_serialized_name;
+      IBMWatsonValidator.notNull(builder.contentItems, 'contentItems cannot be null');
+      contentItems_serialized_name = builder.contentItems;
     }
 
     /**
@@ -315,10 +327,10 @@ public class IBMPersonalityInsightsV3Models {
    * Content Builder.
    */
   public class ContentBuilder {
-    private List<ContentItem> contentItems_serialized_name;
+    private List<ContentItem> contentItems;
 
     private ContentBuilder(Content content) {
-      contentItems_serialized_name = content.contentItems_serialized_name;
+      contentItems = content.contentItems_serialized_name;
     }
 
     /**
@@ -333,7 +345,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param contentItems the contentItems
      */
     public ContentBuilder(List<ContentItem> contentItems) {
-      this.contentItems_serialized_name = contentItems;
+      this.contentItems = contentItems;
     }
 
     /**
@@ -346,29 +358,29 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Adds an contentItems to contentItems_serialized_name.
+     * Adds an contentItems to contentItems.
      *
      * @param contentItems the new contentItems
      * @return the Content builder
      */
     public ContentBuilder addContentItems(ContentItem contentItems) {
       IBMWatsonValidator.notNull(contentItems, 'contentItems cannot be null');
-      if (this.contentItems_serialized_name == null) {
-        this.contentItems_serialized_name = new List<ContentItem>();
+      if (this.contentItems == null) {
+        this.contentItems = new List<ContentItem>();
       }
-      this.contentItems_serialized_name.add(contentItems);
+      this.contentItems.add(contentItems);
       return this;
     }
 
     /**
-     * Set the contentItems_serialized_name.
-     * Existing contentItems_serialized_name will be replaced.
+     * Set the contentItems.
+     * Existing contentItems will be replaced.
      *
      * @param contentItems the contentItems
      * @return the Content builder
      */
     public ContentBuilder contentItems(List<ContentItem> contentItems) {
-      this.contentItems_serialized_name = contentItems;
+      this.contentItems = contentItems;
       return this;
     }
   }
@@ -386,62 +398,68 @@ public class IBMPersonalityInsightsV3Models {
     private String parentid_serialized_name;
     private Boolean reply_serialized_name;
     private Boolean forward_serialized_name;
+ 
     /**
-     * Gets the content_serialized_name.
+     * Gets the content.
      *
      * The content that is to be analyzed. The service supports up to 20 MB of content for all `ContentItem` objects
      * combined.
      *
-     * @return the content_serialized_name
+     * @return the content
      */
     public String content() {
       return content_serialized_name;
     }
+ 
     /**
-     * Gets the id_serialized_name.
+     * Gets the id.
      *
      * A unique identifier for this content item.
      *
-     * @return the id_serialized_name
+     * @return the id
      */
     public String id() {
       return id_serialized_name;
     }
+ 
     /**
-     * Gets the created_serialized_name.
+     * Gets the created.
      *
      * A timestamp that identifies when this content was created. Specify a value in milliseconds since the UNIX Epoch
      * (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
      *
-     * @return the created_serialized_name
+     * @return the created
      */
     public Long created() {
       return created_serialized_name;
     }
+ 
     /**
-     * Gets the updated_serialized_name.
+     * Gets the updated.
      *
      * A timestamp that identifies when this content was last updated. Specify a value in milliseconds since the UNIX
      * Epoch (January 1, 1970, at 0:00 UTC). Required only for results that include temporal behavior data.
      *
-     * @return the updated_serialized_name
+     * @return the updated
      */
     public Long updated() {
       return updated_serialized_name;
     }
+ 
     /**
-     * Gets the contenttype_serialized_name.
+     * Gets the contenttype.
      *
      * The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is
      * analyzed; plain text is processed as submitted.
      *
-     * @return the contenttype_serialized_name
+     * @return the contenttype
      */
     public String contenttype() {
       return contenttype_serialized_name;
     }
+ 
     /**
-     * Gets the language_serialized_name.
+     * Gets the language.
      *
      * The language identifier (two-letter ISO 639-1 identifier) for the language of the content item. The default is
      * `en` (English). Regional variants are treated as their parent language; for example, `en-US` is interpreted as
@@ -450,53 +468,57 @@ public class IBMPersonalityInsightsV3Models {
      * the most prevalent specification among the content items; again, content items that specify a different language
      * are ignored. You can specify any combination of languages for the input and response content.
      *
-     * @return the language_serialized_name
+     * @return the language
      */
     public String language() {
       return language_serialized_name;
     }
+ 
     /**
-     * Gets the parentid_serialized_name.
+     * Gets the parentid.
      *
      * The unique ID of the parent content item for this item. Used to identify hierarchical relationships between
      * posts/replies, messages/replies, and so on.
      *
-     * @return the parentid_serialized_name
+     * @return the parentid
      */
     public String parentid() {
       return parentid_serialized_name;
     }
+ 
     /**
-     * Gets the reply_serialized_name.
+     * Gets the reply.
      *
      * Indicates whether this content item is a reply to another content item.
      *
-     * @return the reply_serialized_name
+     * @return the reply
      */
     public Boolean reply() {
       return reply_serialized_name;
     }
+ 
     /**
-     * Gets the forward_serialized_name.
+     * Gets the forward.
      *
      * Indicates whether this content item is a forwarded/copied version of another content item.
      *
-     * @return the forward_serialized_name
+     * @return the forward
      */
     public Boolean forward() {
       return forward_serialized_name;
     }
+  
     private ContentItem(ContentItemBuilder builder) {
-      IBMWatsonValidator.notNull(builder.content_serialized_name, 'content_serialized_name cannot be null');
-      content_serialized_name = builder.content_serialized_name;
-      id_serialized_name = builder.id_serialized_name;
-      created_serialized_name = builder.created_serialized_name;
-      updated_serialized_name = builder.updated_serialized_name;
-      contenttype_serialized_name = builder.contenttype_serialized_name;
-      language_serialized_name = builder.language_serialized_name;
-      parentid_serialized_name = builder.parentid_serialized_name;
-      reply_serialized_name = builder.reply_serialized_name;
-      forward_serialized_name = builder.forward_serialized_name;
+      IBMWatsonValidator.notNull(builder.content, 'content cannot be null');
+      content_serialized_name = builder.content;
+      id_serialized_name = builder.id;
+      created_serialized_name = builder.created;
+      updated_serialized_name = builder.updated;
+      contenttype_serialized_name = builder.contenttype;
+      language_serialized_name = builder.language;
+      parentid_serialized_name = builder.parentid;
+      reply_serialized_name = builder.reply;
+      forward_serialized_name = builder.forward;
     }
 
     /**
@@ -514,26 +536,26 @@ public class IBMPersonalityInsightsV3Models {
    * ContentItem Builder.
    */
   public class ContentItemBuilder {
-    private String content_serialized_name;
-    private String id_serialized_name;
-    private Long created_serialized_name;
-    private Long updated_serialized_name;
-    private String contenttype_serialized_name;
-    private String language_serialized_name;
-    private String parentid_serialized_name;
-    private Boolean reply_serialized_name;
-    private Boolean forward_serialized_name;
+    private String content;
+    private String id;
+    private Long created;
+    private Long updated;
+    private String contenttype;
+    private String language;
+    private String parentid;
+    private Boolean reply;
+    private Boolean forward;
 
     private ContentItemBuilder(ContentItem contentItem) {
-      content_serialized_name = contentItem.content_serialized_name;
-      id_serialized_name = contentItem.id_serialized_name;
-      created_serialized_name = contentItem.created_serialized_name;
-      updated_serialized_name = contentItem.updated_serialized_name;
-      contenttype_serialized_name = contentItem.contenttype_serialized_name;
-      language_serialized_name = contentItem.language_serialized_name;
-      parentid_serialized_name = contentItem.parentid_serialized_name;
-      reply_serialized_name = contentItem.reply_serialized_name;
-      forward_serialized_name = contentItem.forward_serialized_name;
+      content = contentItem.content_serialized_name;
+      id = contentItem.id_serialized_name;
+      created = contentItem.created_serialized_name;
+      updated = contentItem.updated_serialized_name;
+      contenttype = contentItem.contenttype_serialized_name;
+      language = contentItem.language_serialized_name;
+      parentid = contentItem.parentid_serialized_name;
+      reply = contentItem.reply_serialized_name;
+      forward = contentItem.forward_serialized_name;
     }
 
     /**
@@ -548,7 +570,7 @@ public class IBMPersonalityInsightsV3Models {
      * @param content the content
      */
     public ContentItemBuilder(String content) {
-      this.content_serialized_name = content;
+      this.content = content;
     }
 
     /**
@@ -561,101 +583,101 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Set the content_serialized_name.
+     * Set the content.
      *
      * @param content the content
      * @return the ContentItem builder
      */
     public ContentItemBuilder content(String content) {
-      this.content_serialized_name = content;
+      this.content = content;
       return this;
     }
 
     /**
-     * Set the id_serialized_name.
+     * Set the id.
      *
      * @param id the id
      * @return the ContentItem builder
      */
     public ContentItemBuilder id(String id) {
-      this.id_serialized_name = id;
+      this.id = id;
       return this;
     }
 
     /**
-     * Set the created_serialized_name.
+     * Set the created.
      *
      * @param created the created
      * @return the ContentItem builder
      */
     public ContentItemBuilder created(Long created) {
-      this.created_serialized_name = created;
+      this.created = created;
       return this;
     }
 
     /**
-     * Set the updated_serialized_name.
+     * Set the updated.
      *
      * @param updated the updated
      * @return the ContentItem builder
      */
     public ContentItemBuilder updated(Long updated) {
-      this.updated_serialized_name = updated;
+      this.updated = updated;
       return this;
     }
 
     /**
-     * Set the contenttype_serialized_name.
+     * Set the contenttype.
      *
      * @param contenttype the contenttype
      * @return the ContentItem builder
      */
     public ContentItemBuilder contenttype(String contenttype) {
-      this.contenttype_serialized_name = contenttype;
+      this.contenttype = contenttype;
       return this;
     }
 
     /**
-     * Set the language_serialized_name.
+     * Set the language.
      *
      * @param language the language
      * @return the ContentItem builder
      */
     public ContentItemBuilder language(String language) {
-      this.language_serialized_name = language;
+      this.language = language;
       return this;
     }
 
     /**
-     * Set the parentid_serialized_name.
+     * Set the parentid.
      *
      * @param parentid the parentid
      * @return the ContentItem builder
      */
     public ContentItemBuilder parentid(String parentid) {
-      this.parentid_serialized_name = parentid;
+      this.parentid = parentid;
       return this;
     }
 
     /**
-     * Set the reply_serialized_name.
+     * Set the reply.
      *
      * @param reply the reply
      * @return the ContentItem builder
      */
     public ContentItemBuilder reply(Boolean reply) {
-      this.reply_serialized_name = reply;
+      this.reply = reply;
       return this;
     }
 
     /**
-     * Set the forward_serialized_name.
+     * Set the forward.
      *
      * @param forward the forward
      * @return the ContentItem builder
      */
     public ContentItemBuilder forward(Boolean forward) {
-      this.forward_serialized_name = forward;
+      this.forward = forward;
       return this;
     }
   }
@@ -673,107 +695,116 @@ public class IBMPersonalityInsightsV3Models {
     private List<Behavior> behavior_serialized_name;
     private List<ConsumptionPreferencesCategory> consumption_preferences_serialized_name;
     private List<Warning> warnings_serialized_name;
+ 
     /**
-     * Gets the processed_language_serialized_name.
+     * Gets the processedLanguage.
      *
      * The language model that was used to process the input.
      *
-     * @return the processed_language_serialized_name
+     * @return the processedLanguage
      */
     @AuraEnabled
     public String getProcessedLanguage() {
       return processed_language_serialized_name;
     }
+ 
     /**
-     * Gets the word_count_serialized_name.
+     * Gets the wordCount.
      *
      * The number of words from the input that were used to produce the profile.
      *
-     * @return the word_count_serialized_name
+     * @return the wordCount
      */
     @AuraEnabled
     public Long getWordCount() {
       return word_count_serialized_name;
     }
+ 
     /**
-     * Gets the word_count_message_serialized_name.
+     * Gets the wordCountMessage.
      *
      * When guidance is appropriate, a string that provides a message that indicates the number of words found and where
      * that value falls in the range of required or suggested number of words.
      *
-     * @return the word_count_message_serialized_name
+     * @return the wordCountMessage
      */
     @AuraEnabled
     public String getWordCountMessage() {
       return word_count_message_serialized_name;
     }
+ 
     /**
-     * Gets the personality_serialized_name.
+     * Gets the personality.
      *
      * A recursive array of `Trait` objects that provides detailed results for the Big Five personality characteristics
      * (dimensions and facets) inferred from the input text.
      *
-     * @return the personality_serialized_name
+     * @return the personality
      */
     @AuraEnabled
     public List<Trait> getPersonality() {
       return personality_serialized_name;
     }
+ 
     /**
-     * Gets the needs_serialized_name.
+     * Gets the needs.
      *
      * Detailed results for the Needs characteristics inferred from the input text.
      *
-     * @return the needs_serialized_name
+     * @return the needs
      */
     @AuraEnabled
     public List<Trait> getNeeds() {
       return needs_serialized_name;
     }
+ 
     /**
-     * Gets the values_serialized_name.
+     * Gets the values.
      *
      * Detailed results for the Values characteristics inferred from the input text.
      *
-     * @return the values_serialized_name
+     * @return the values
      */
     @AuraEnabled
     public List<Trait> getValues() {
       return values_serialized_name;
     }
+ 
     /**
-     * Gets the behavior_serialized_name.
+     * Gets the behavior.
      *
      * For JSON content that is timestamped, detailed results about the social behavior disclosed by the input in terms
      * of temporal characteristics. The results include information about the distribution of the content over the days
      * of the week and the hours of the day.
      *
-     * @return the behavior_serialized_name
+     * @return the behavior
      */
     @AuraEnabled
     public List<Behavior> getBehavior() {
       return behavior_serialized_name;
     }
+ 
     /**
-     * Gets the consumption_preferences_serialized_name.
+     * Gets the consumptionPreferences.
      *
      * If the **consumption_preferences** parameter is `true`, detailed results for each category of consumption
      * preferences. Each element of the array provides information inferred from the input text for the individual
      * preferences of that category.
      *
-     * @return the consumption_preferences_serialized_name
+     * @return the consumptionPreferences
      */
     @AuraEnabled
     public List<ConsumptionPreferencesCategory> getConsumptionPreferences() {
       return consumption_preferences_serialized_name;
     }
+ 
     /**
-     * Gets the warnings_serialized_name.
+     * Gets the warnings.
      *
      * Warning messages associated with the input text submitted with the request. The array is empty if the input
      * generated no warnings.
      *
-     * @return the warnings_serialized_name
+     * @return the warnings
      */
     @AuraEnabled
     public List<Warning> getWarnings() {
@@ -781,7 +812,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the processed_language_serialized_name.
+     * Sets the processedLanguage.
      *
      * @param processedLanguage the new processedLanguage
      */
@@ -790,7 +821,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the word_count_serialized_name.
+     * Sets the wordCount.
      *
      * @param wordCount the new wordCount
      */
@@ -799,7 +830,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the word_count_message_serialized_name.
+     * Sets the wordCountMessage.
      *
      * @param wordCountMessage the new wordCountMessage
      */
@@ -808,7 +839,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the personality_serialized_name.
+     * Sets the personality.
      *
      * @param personality the new personality
      */
@@ -817,7 +848,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the needs_serialized_name.
+     * Sets the needs.
      *
      * @param needs the new needs
      */
@@ -826,7 +857,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the values_serialized_name.
+     * Sets the values.
      *
      * @param values the new values
      */
@@ -835,7 +866,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the behavior_serialized_name.
+     * Sets the behavior.
      *
      * @param behavior the new behavior
      */
@@ -844,7 +875,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the consumption_preferences_serialized_name.
+     * Sets the consumptionPreferences.
      *
      * @param consumptionPreferences the new consumptionPreferences
      */
@@ -853,7 +884,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the warnings_serialized_name.
+     * Sets the warnings.
      *
      * @param warnings the new warnings
      */
@@ -868,7 +899,7 @@ public class IBMPersonalityInsightsV3Models {
 
       Profile ret = (Profile) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for personality_serialized_name
+      // calling custom deserializer for personality
       List<Trait> newPersonality = new List<Trait>();
       List<Trait> deserializedPersonality = ret.getPersonality();
       if (deserializedPersonality != null) {
@@ -881,7 +912,7 @@ public class IBMPersonalityInsightsV3Models {
         ret.setPersonality(newPersonality);
       }
 
-      // calling custom deserializer for needs_serialized_name
+      // calling custom deserializer for needs
       List<Trait> newNeeds = new List<Trait>();
       List<Trait> deserializedNeeds = ret.getNeeds();
       if (deserializedNeeds != null) {
@@ -894,7 +925,7 @@ public class IBMPersonalityInsightsV3Models {
         ret.setNeeds(newNeeds);
       }
 
-      // calling custom deserializer for values_serialized_name
+      // calling custom deserializer for values
       List<Trait> newValues = new List<Trait>();
       List<Trait> deserializedValues = ret.getValues();
       if (deserializedValues != null) {
@@ -907,7 +938,7 @@ public class IBMPersonalityInsightsV3Models {
         ret.setValues(newValues);
       }
 
-      // calling custom deserializer for behavior_serialized_name
+      // calling custom deserializer for behavior
       List<Behavior> newBehavior = new List<Behavior>();
       List<Behavior> deserializedBehavior = ret.getBehavior();
       if (deserializedBehavior != null) {
@@ -920,7 +951,7 @@ public class IBMPersonalityInsightsV3Models {
         ret.setBehavior(newBehavior);
       }
 
-      // calling custom deserializer for consumption_preferences_serialized_name
+      // calling custom deserializer for consumptionPreferences
       List<ConsumptionPreferencesCategory> newConsumptionPreferences = new List<ConsumptionPreferencesCategory>();
       List<ConsumptionPreferencesCategory> deserializedConsumptionPreferences = ret.getConsumptionPreferences();
       if (deserializedConsumptionPreferences != null) {
@@ -933,7 +964,7 @@ public class IBMPersonalityInsightsV3Models {
         ret.setConsumptionPreferences(newConsumptionPreferences);
       }
 
-      // calling custom deserializer for warnings_serialized_name
+      // calling custom deserializer for warnings
       List<Warning> newWarnings = new List<Warning>();
       List<Warning> deserializedWarnings = ret.getWarnings();
       if (deserializedWarnings != null) {
@@ -954,52 +985,57 @@ public class IBMPersonalityInsightsV3Models {
    * The profile options.
    */
   public class ProfileOptions extends IBMWatsonOptionsModel {
-    private Content content_serialized_name;
-    private String body_serialized_name;
-    private String content_type_serialized_name;
-    private String content_language_serialized_name;
-    private String accept_language_serialized_name;
-    private Boolean raw_scores_serialized_name;
-    private Boolean consumption_preferences_serialized_name;
+    private Content content;
+    private String body;
+    private String contentType;
+    private String contentLanguage;
+    private String acceptLanguage;
+    private Boolean rawScores;
+    private Boolean csvHeaders;
+    private Boolean consumptionPreferences;
+ 
     /**
-     * Gets the content_serialized_name.
+     * Gets the content.
      *
      * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
      * [Providing sufficient
      * input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input,
      * provide an object of type `Content`.
      *
-     * @return the content_serialized_name
+     * @return the content
      */
     public Content content() {
-      return content_serialized_name;
+      return content;
     }
+ 
     /**
-     * Gets the body_serialized_name.
+     * Gets the body.
      *
      * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
      * [Providing sufficient
      * input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input,
      * provide an object of type `Content`.
      *
-     * @return the body_serialized_name
+     * @return the body
      */
     public String body() {
-      return body_serialized_name;
+      return body;
     }
+ 
     /**
-     * Gets the content_type_serialized_name.
+     * Gets the contentType.
      *
      * The type of the input. A character encoding can be specified by including a `charset` parameter. For example,
      * 'text/html;charset=utf-8'.
      *
-     * @return the content_type_serialized_name
+     * @return the contentType
      */
     public String contentType() {
-      return content_type_serialized_name;
+      return contentType;
     }
+ 
     /**
-     * Gets the content_language_serialized_name.
+     * Gets the contentLanguage.
      *
      * The language of the input text for the request: Arabic, English, Japanese, Korean, or Spanish. Regional variants
      * are treated as their parent language; for example, `en-US` is interpreted as `en`.
@@ -1011,54 +1047,71 @@ public class IBMPersonalityInsightsV3Models {
      * parameter to base the language on the specification of the content items. You can specify any combination of
      * languages for **Content-Language** and **Accept-Language**.
      *
-     * @return the content_language_serialized_name
+     * @return the contentLanguage
      */
     public String contentLanguage() {
-      return content_language_serialized_name;
+      return contentLanguage;
     }
+ 
     /**
-     * Gets the accept_language_serialized_name.
+     * Gets the acceptLanguage.
      *
      * The desired language of the response. For two-character arguments, regional variants are treated as their parent
      * language; for example, `en-US` is interpreted as `en`. You can specify any combination of languages for the input
      * and response content.
      *
-     * @return the accept_language_serialized_name
+     * @return the acceptLanguage
      */
     public String acceptLanguage() {
-      return accept_language_serialized_name;
+      return acceptLanguage;
     }
+ 
     /**
-     * Gets the raw_scores_serialized_name.
+     * Gets the rawScores.
      *
      * Indicates whether a raw score in addition to a normalized percentile is returned for each characteristic; raw
      * scores are not compared with a sample population. By default, only normalized percentiles are returned.
      *
-     * @return the raw_scores_serialized_name
+     * @return the rawScores
      */
     public Boolean rawScores() {
-      return raw_scores_serialized_name;
+      return rawScores;
     }
+ 
     /**
-     * Gets the consumption_preferences_serialized_name.
+     * Gets the csvHeaders.
+     *
+     * Indicates whether column labels are returned with a CSV response. By default, no column labels are returned.
+     * Applies only when the **Accept** parameter is set to `text/csv`.
+     *
+     * @return the csvHeaders
+     */
+    public Boolean csvHeaders() {
+      return csvHeaders;
+    }
+ 
+    /**
+     * Gets the consumptionPreferences.
      *
      * Indicates whether consumption preferences are returned with the results. By default, no consumption preferences
      * are returned.
      *
-     * @return the consumption_preferences_serialized_name
+     * @return the consumptionPreferences
      */
     public Boolean consumptionPreferences() {
-      return consumption_preferences_serialized_name;
+      return consumptionPreferences;
     }
+
     private ProfileOptions(ProfileOptionsBuilder builder) {
-      IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
-      content_serialized_name = builder.content_serialized_name;
-      body_serialized_name = builder.body_serialized_name;
-      content_type_serialized_name = builder.content_type_serialized_name;
-      content_language_serialized_name = builder.content_language_serialized_name;
-      accept_language_serialized_name = builder.accept_language_serialized_name;
-      raw_scores_serialized_name = builder.raw_scores_serialized_name;
-      consumption_preferences_serialized_name = builder.consumption_preferences_serialized_name;
+      IBMWatsonValidator.isTrue(builder.contentType != null, 'contentType cannot be null');
+      content = builder.content;
+      body = builder.body;
+      contentType = builder.contentType;
+      contentLanguage = builder.contentLanguage;
+      acceptLanguage = builder.acceptLanguage;
+      rawScores = builder.rawScores;
+      csvHeaders = builder.csvHeaders;
+      consumptionPreferences = builder.consumptionPreferences;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1077,22 +1130,24 @@ public class IBMPersonalityInsightsV3Models {
    * ProfileOptions Builder.
    */
   public class ProfileOptionsBuilder extends IBMWatsonOptionsModel {
-    private Content content_serialized_name;
-    private String body_serialized_name;
-    private String content_type_serialized_name;
-    private String content_language_serialized_name;
-    private String accept_language_serialized_name;
-    private Boolean raw_scores_serialized_name;
-    private Boolean consumption_preferences_serialized_name;
+    private Content content;
+    private String body;
+    private String contentType;
+    private String contentLanguage;
+    private String acceptLanguage;
+    private Boolean rawScores;
+    private Boolean csvHeaders;
+    private Boolean consumptionPreferences;
 
     private ProfileOptionsBuilder(ProfileOptions profileOptions) {
-      content_serialized_name = profileOptions.content_serialized_name;
-      body_serialized_name = profileOptions.body_serialized_name;
-      content_type_serialized_name = profileOptions.content_type_serialized_name;
-      content_language_serialized_name = profileOptions.content_language_serialized_name;
-      accept_language_serialized_name = profileOptions.accept_language_serialized_name;
-      raw_scores_serialized_name = profileOptions.raw_scores_serialized_name;
-      consumption_preferences_serialized_name = profileOptions.consumption_preferences_serialized_name;
+      content = profileOptions.content;
+      body = profileOptions.body;
+      contentType = profileOptions.contentType;
+      contentLanguage = profileOptions.contentLanguage;
+      acceptLanguage = profileOptions.acceptLanguage;
+      rawScores = profileOptions.rawScores;
+      csvHeaders = profileOptions.csvHeaders;
+      consumptionPreferences = profileOptions.consumptionPreferences;
       this.requestHeaders.putAll(profileOptions.requestHeaders());
     }
 
@@ -1112,58 +1167,69 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Set the content_language_serialized_name.
+     * Set the contentLanguage.
      *
      * @param contentLanguage the contentLanguage
      * @return the ProfileOptions builder
      */
     public ProfileOptionsBuilder contentLanguage(String contentLanguage) {
-      this.content_language_serialized_name = contentLanguage;
+      this.contentLanguage = contentLanguage;
       return this;
     }
 
     /**
-     * Set the accept_language_serialized_name.
+     * Set the acceptLanguage.
      *
      * @param acceptLanguage the acceptLanguage
      * @return the ProfileOptions builder
      */
     public ProfileOptionsBuilder acceptLanguage(String acceptLanguage) {
-      this.accept_language_serialized_name = acceptLanguage;
+      this.acceptLanguage = acceptLanguage;
       return this;
     }
 
     /**
-     * Set the raw_scores_serialized_name.
+     * Set the rawScores.
      *
      * @param rawScores the rawScores
      * @return the ProfileOptions builder
      */
     public ProfileOptionsBuilder rawScores(Boolean rawScores) {
-      this.raw_scores_serialized_name = rawScores;
+      this.rawScores = rawScores;
       return this;
     }
 
     /**
-     * Set the consumption_preferences_serialized_name.
+     * Set the csvHeaders.
+     *
+     * @param csvHeaders the csvHeaders
+     * @return the ProfileOptions builder
+     */
+    public ProfileOptionsBuilder csvHeaders(Boolean csvHeaders) {
+      this.csvHeaders = csvHeaders;
+      return this;
+    }
+
+    /**
+     * Set the consumptionPreferences.
      *
      * @param consumptionPreferences the consumptionPreferences
      * @return the ProfileOptions builder
      */
     public ProfileOptionsBuilder consumptionPreferences(Boolean consumptionPreferences) {
-      this.consumption_preferences_serialized_name = consumptionPreferences;
+      this.consumptionPreferences = consumptionPreferences;
       return this;
     }
 
     /**
-     * Set the content_serialized_name.
+     * Set the content.
      *
      * @param content the content
      * @return the ProfileOptions builder
      */
     public ProfileOptionsBuilder content(Content content) {
-      this.content_serialized_name = content;
-      this.content_type_serialized_name = IBMWatsonHttpMediaType.APPLICATION_JSON;
+      this.content = content;
+      this.contentType = IBMWatsonHttpMediaType.APPLICATION_JSON;
       return this;
     }
 
@@ -1174,8 +1240,8 @@ public class IBMPersonalityInsightsV3Models {
      * @return the ProfileOptions builder
      */
     public ProfileOptionsBuilder html(String html) {
-      this.body_serialized_name = html;
-      this.content_type_serialized_name = IBMWatsonHttpMediaType.TEXT_HTML;
+      this.body = html;
+      this.contentType = IBMWatsonHttpMediaType.TEXT_HTML;
       return this;
     }
 
@@ -1186,8 +1252,8 @@ public class IBMPersonalityInsightsV3Models {
      * @return the ProfileOptions builder
      */
     public ProfileOptionsBuilder text(String text) {
-      this.body_serialized_name = text;
-      this.content_type_serialized_name = IBMWatsonHttpMediaType.TEXT_PLAIN;
+      this.body = text;
+      this.contentType = IBMWatsonHttpMediaType.TEXT_PLAIN;
       return this;
     }
 
@@ -1215,8 +1281,9 @@ public class IBMPersonalityInsightsV3Models {
     private Double raw_score_serialized_name;
     private Boolean significant_serialized_name;
     private List<Trait> children_serialized_name;
+ 
     /**
-     * Gets the trait_id_serialized_name.
+     * Gets the traitId.
      *
      * The unique, non-localized identifier of the characteristic to which the results pertain. IDs have the form
      * * `big5_{characteristic}` for Big Five personality dimensions
@@ -1224,50 +1291,54 @@ public class IBMPersonalityInsightsV3Models {
      * * `need_{characteristic}` for Needs
      *  *`value_{characteristic}` for Values.
      *
-     * @return the trait_id_serialized_name
+     * @return the traitId
      */
     @AuraEnabled
     public String getTraitId() {
       return trait_id_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The user-visible, localized name of the characteristic.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the category_serialized_name.
+     * Gets the category.
      *
      * The category of the characteristic: `personality` for Big Five personality characteristics, `needs` for Needs,
      * and `values` for Values.
      *
-     * @return the category_serialized_name
+     * @return the category
      */
     @AuraEnabled
     public String getCategory() {
       return category_serialized_name;
     }
+ 
     /**
-     * Gets the percentile_serialized_name.
+     * Gets the percentile.
      *
      * The normalized percentile score for the characteristic. The range is 0 to 1. For example, if the percentage for
      * Openness is 0.60, the author scored in the 60th percentile; the author is more open than 59 percent of the
      * population and less open than 39 percent of the population.
      *
-     * @return the percentile_serialized_name
+     * @return the percentile
      */
     @AuraEnabled
     public Double getPercentile() {
       return percentile_serialized_name;
     }
+ 
     /**
-     * Gets the raw_score_serialized_name.
+     * Gets the rawScore.
      *
      * The raw score for the characteristic. The range is 0 to 1. A higher score generally indicates a greater
      * likelihood that the author has that characteristic, but raw scores must be considered in aggregate: The range of
@@ -1278,33 +1349,35 @@ public class IBMPersonalityInsightsV3Models {
      * sample population. The raw score enables comparison of the results against a different sampling population and
      * with a custom normalization approach.
      *
-     * @return the raw_score_serialized_name
+     * @return the rawScore
      */
     @AuraEnabled
     public Double getRawScore() {
       return raw_score_serialized_name;
     }
+ 
     /**
-     * Gets the significant_serialized_name.
+     * Gets the significant.
      *
      * **`2017-10-13`**: Indicates whether the characteristic is meaningful for the input language. The field is always
      * `true` for all characteristics of English, Spanish, and Japanese input. The field is `false` for the subset of
      * characteristics of Arabic and Korean input for which the service's models are unable to generate meaningful
      * results. **`2016-10-19`**: Not returned.
      *
-     * @return the significant_serialized_name
+     * @return the significant
      */
     @AuraEnabled
     public Boolean getSignificant() {
       return significant_serialized_name;
     }
+ 
     /**
-     * Gets the children_serialized_name.
+     * Gets the children.
      *
      * For `personality` (Big Five) dimensions, more detailed results for the facets of each dimension as inferred from
      * the input text.
      *
-     * @return the children_serialized_name
+     * @return the children
      */
     @AuraEnabled
     public List<Trait> getChildren() {
@@ -1312,7 +1385,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the trait_id_serialized_name.
+     * Sets the traitId.
      *
      * @param traitId the new traitId
      */
@@ -1321,7 +1394,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -1330,7 +1403,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the category_serialized_name.
+     * Sets the category.
      *
      * @param category the new category
      */
@@ -1339,7 +1412,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the percentile_serialized_name.
+     * Sets the percentile.
      *
      * @param percentile the new percentile
      */
@@ -1348,7 +1421,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the raw_score_serialized_name.
+     * Sets the rawScore.
      *
      * @param rawScore the new rawScore
      */
@@ -1357,7 +1430,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the significant_serialized_name.
+     * Sets the significant.
      *
      * @param significant the new significant
      */
@@ -1366,7 +1439,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the children_serialized_name.
+     * Sets the children.
      *
      * @param children the new children
      */
@@ -1381,7 +1454,7 @@ public class IBMPersonalityInsightsV3Models {
 
       Trait ret = (Trait) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for children_serialized_name
+      // calling custom deserializer for children
       List<Trait> newChildren = new List<Trait>();
       List<Trait> deserializedChildren = ret.getChildren();
       if (deserializedChildren != null) {
@@ -1404,19 +1477,21 @@ public class IBMPersonalityInsightsV3Models {
   public class Warning extends IBMWatsonGenericModel {
     private String warning_id_serialized_name;
     private String message_serialized_name;
+ 
     /**
-     * Gets the warning_id_serialized_name.
+     * Gets the warningId.
      *
      * The identifier of the warning message.
      *
-     * @return the warning_id_serialized_name
+     * @return the warningId
      */
     @AuraEnabled
     public String getWarningId() {
       return warning_id_serialized_name;
     }
+ 
     /**
-     * Gets the message_serialized_name.
+     * Gets the message.
      *
      * The message associated with the `warning_id`:
      * * `WORD_COUNT_MESSAGE`: "There were {number} words in the input. We need a minimum of 600, preferably 1,200 or
@@ -1430,7 +1505,7 @@ public class IBMPersonalityInsightsV3Models {
      * does not affect the accuracy of the output, as not all of the input text was required." Applies only when Arabic
      * input text exceeds a threshold at which additional words do not contribute to the accuracy of the profile.
      *
-     * @return the message_serialized_name
+     * @return the message
      */
     @AuraEnabled
     public String getMessage() {
@@ -1438,7 +1513,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the warning_id_serialized_name.
+     * Sets the warningId.
      *
      * @param warningId the new warningId
      */
@@ -1447,7 +1522,7 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     /**
-     * Sets the message_serialized_name.
+     * Sets the message.
      *
      * @param message the new message
      */

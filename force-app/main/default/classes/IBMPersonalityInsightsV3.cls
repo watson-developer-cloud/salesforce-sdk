@@ -83,10 +83,10 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    * set). When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the
    * character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`.
    *
-   * For detailed information about calling the service and the responses it can generate, see [Requesting a
-   * profile](https://console.bluemix.net/docs/services/personality-insights/input.html), [Understanding a JSON
-   * profile](https://console.bluemix.net/docs/services/personality-insights/output.html), and [Understanding a CSV
-   * profile](https://console.bluemix.net/docs/services/personality-insights/output-csv.html).
+   * **See also:**
+   * * [Requesting a profile](https://console.bluemix.net/docs/services/personality-insights/input.html)
+   * * [Understanding a JSON profile](https://console.bluemix.net/docs/services/personality-insights/output.html)
+   * * [Understanding a CSV profile](https://console.bluemix.net/docs/services/personality-insights/output-csv.html).
    *
    * @param profileOptions the {@link IBMPersonalityInsightsV3Models.ProfileOptions} containing the options for the call
    * @return the {@link IBMPersonalityInsightsV3Models.Profile} with the response
@@ -94,6 +94,7 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
   public IBMPersonalityInsightsV3Models.Profile profile(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
+    builder.addHeader('Accept', 'application/json');
     builder.addHeader('Content-Type', profileOptions.contentType());
     if (profileOptions.contentLanguage() != null) {
       builder.addHeader('Content-Language', profileOptions.contentLanguage());
@@ -111,15 +112,13 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     if (profileOptions.rawScores() != null) {
       builder.query('raw_scores', String.valueOf(profileOptions.rawScores()));
     }
+    if (profileOptions.csvHeaders() != null) {
+      builder.query('csv_headers', String.valueOf(profileOptions.csvHeaders()));
+    }
     if (profileOptions.consumptionPreferences() != null) {
       builder.query('consumption_preferences', String.valueOf(profileOptions.consumptionPreferences()));
     }
-    if (profileOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-      builder.bodyJson(JSON.serialize(profileOptions.content(), true));
-    }
-    else {
-      builder.bodyContent(profileOptions.body(), profileOptions.contentType());
-    }
+    builder.bodyContent(profileOptions.contentType(), profileOptions.content(), null, profileOptions.body());
 
     return (IBMPersonalityInsightsV3Models.Profile) createServiceCall(builder.build(), IBMPersonalityInsightsV3Models.Profile.class);
   }
@@ -140,18 +139,18 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    * set). When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the
    * character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`.
    *
-   * For detailed information about calling the service and the responses it can generate, see [Requesting a
-   * profile](https://console.bluemix.net/docs/services/personality-insights/input.html), [Understanding a JSON
-   * profile](https://console.bluemix.net/docs/services/personality-insights/output.html), and [Understanding a CSV
-   * profile](https://console.bluemix.net/docs/services/personality-insights/output-csv.html).
+   * **See also:**
+   * * [Requesting a profile](https://console.bluemix.net/docs/services/personality-insights/input.html)
+   * * [Understanding a JSON profile](https://console.bluemix.net/docs/services/personality-insights/output.html)
+   * * [Understanding a CSV profile](https://console.bluemix.net/docs/services/personality-insights/output-csv.html).
    *
    * @param profileOptions the {@link IBMPersonalityInsightsV3Models.ProfileOptions} containing the options for the call
-   * @param includeHeaders whether to include headers in the response or not
-   * @return the String with the response
+   * @return the {@link IBMWatsonFile} with the response
    */
-  public String getProfileAsCSV(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions, Boolean includeHeaders) {
+  public IBMWatsonFile profileAsCsv(IBMPersonalityInsightsV3Models.ProfileOptions profileOptions) {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
+    builder.addHeader('Accept', 'text/csv');
     builder.addHeader('Content-Type', profileOptions.contentType());
     if (profileOptions.contentLanguage() != null) {
       builder.addHeader('Content-Language', profileOptions.contentLanguage());
@@ -169,19 +168,15 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     if (profileOptions.rawScores() != null) {
       builder.query('raw_scores', String.valueOf(profileOptions.rawScores()));
     }
+    if (profileOptions.csvHeaders() != null) {
+      builder.query('csv_headers', String.valueOf(profileOptions.csvHeaders()));
+    }
     if (profileOptions.consumptionPreferences() != null) {
       builder.query('consumption_preferences', String.valueOf(profileOptions.consumptionPreferences()));
     }
-    if (profileOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-      builder.bodyJson(JSON.serialize(profileOptions.content(), true));
-    } else {
-      builder.bodyContent(profileOptions.body(), profileOptions.contentType());
-    }
+    builder.bodyContent(profileOptions.contentType(), profileOptions.content(), null, profileOptions.body());
 
-    builder.addHeader('Accept', IBMWatsonHttpMediaType.TEXT_CSV);
-    builder.query('csv_headers', String.valueOf(includeHeaders));
-
-    return String.valueOf(createServiceCall(builder.build(), String.class));
+    return (IBMWatsonFile) createServiceCall(builder.build(), IBMWatsonFile.class);
   }
 
 }
