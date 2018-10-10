@@ -1,47 +1,20 @@
 /**
- * The IBM&reg; Speech to Text service provides an API that uses IBM's speech-recognition capabilities to produce
+ * The IBM&reg; Speech to Text service provides APIs that use IBM's speech-recognition capabilities to produce
  * transcripts of spoken audio. The service can transcribe speech from various languages and audio formats. It addition
  * to basic transcription, the service can produce detailed information about many different aspects of the audio. For
  * most languages, the service supports two sampling rates, broadband and narrowband. It returns all JSON response
  * content in the UTF-8 character set.
  *
- *  For more information about the service, see the [IBM&reg; Cloud
- * documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html).
+ * For speech recognition, the service supports synchronous and asynchronous HTTP Representational State Transfer (REST)
+ * interfaces. It also supports a WebSocket interface that provides a full-duplex, low-latency communication channel:
+ * Clients send requests and audio to the service and receive results over a single connection in an asynchronous
+ * fashion.
  *
- * ### API usage guidelines
- * * **Audio formats:** The service accepts audio in many formats (MIME types). See [Audio
- * formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
- * * **HTTP interfaces:** The service provides two HTTP Representational State Transfer (REST) interfaces for speech
- * recognition. The basic interface includes a single synchronous method. The asynchronous interface provides multiple
- * methods that use registered callbacks and polling for non-blocking recognition. See [The HTTP
- * interface](https://console.bluemix.net/docs/services/speech-to-text/http.html) and [The asynchronous HTTP
- * interface](https://console.bluemix.net/docs/services/speech-to-text/async.html).
- * * **WebSocket interface:** The service also offers a WebSocket interface for speech recognition. The WebSocket
- * interface provides a full-duplex, low-latency communication channel. Clients send requests and audio to the service
- * and receive results over a single connection in an asynchronous fashion. See [The WebSocket
- * interface](https://console.bluemix.net/docs/services/speech-to-text/websockets.html).
- * * **Customization:** The service offers two customization interfaces. Use language model customization to expand the
- * vocabulary of a base model with domain-specific terminology. Use acoustic model customization to adapt a base model
- * for the acoustic characteristics of your audio. Language model customization is generally available for production
- * use by most supported languages; acoustic model customization is beta functionality that is available for all
- * supported languages. See [The customization
- * interface](https://console.bluemix.net/docs/services/speech-to-text/custom.html).
- * * **Customization IDs:** Many methods accept a customization ID to identify a custom language or custom acoustic
- * model. Customization IDs are Globally Unique Identifiers (GUIDs). They are hexadecimal strings that have the format
- * `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`.
- * * **`X-Watson-Learning-Opt-Out`:** By default, all Watson services log requests and their results. Logging is done
- * only to improve the services for future users. The logged data is not shared or made public. To prevent IBM from
- * accessing your data for general service improvements, set the `X-Watson-Learning-Opt-Out` request header to `true`
- * for all requests. You must set the header on each request that you do not want IBM to access for general service
- * improvements.
- *
- *   Methods of the customization interface do not log corpora, words, and audio resources that you use to build custom
- * models. Your training data is never used to improve the service's base models. However, the service does log such
- * data when a custom model is used with a recognition request. You must set the `X-Watson-Learning-Opt-Out` request
- * header to `true` to prevent IBM from accessing the data to improve the service.
- * * **`X-Watson-Metadata`**: This header allows you to associate a customer ID with data that is passed with a request.
- * If necessary, you can use the **Delete labeled data** method to delete the data for a customer ID. See [Information
- * security](https://console.bluemix.net/docs/services/speech-to-text/information-security.html).
+ * The service also offers two customization interfaces. Use language model customization to expand the vocabulary of a
+ * base model with domain-specific terminology. Use acoustic model customization to adapt a base model for the acoustic
+ * characteristics of your audio. Language model customization is generally available for production use with most
+ * supported languages; acoustic model customization is beta functionality that is available for all supported
+ * languages.
  *
  * @version V1
  * @see <a href="http://www.ibm.com/watson/developercloud/speech-to-text.html">Speech to Text</a>
@@ -88,12 +61,15 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * Gets information for a single specified language model that is available for use with the service. The information
    * includes the name of the model and its minimum sampling rate in Hertz, among other things.
    *
+   * **See also:** [Languages and models](https://console.bluemix.net/docs/services/speech-to-text/input.html#models).
+   *
    * @param getModelOptions the {@link IBMSpeechToTextV1Models.GetModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.SpeechModel} with the response
    */
   public IBMSpeechToTextV1Models.SpeechModel getModel(IBMSpeechToTextV1Models.GetModelOptions getModelOptions) {
     IBMWatsonValidator.notNull(getModelOptions, 'getModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/models/{0}', new String[]{ getModelOptions.modelId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (getModelOptions != null) ? getModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -110,11 +86,14 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * Lists all language models that are available for use with the service. The information includes the name of the
    * model and its minimum sampling rate in Hertz, among other things.
    *
+   * **See also:** [Languages and models](https://console.bluemix.net/docs/services/speech-to-text/input.html#models).
+   *
    * @param listModelsOptions the {@link IBMSpeechToTextV1Models.ListModelsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.SpeechModels} with the response
    */
   public IBMSpeechToTextV1Models.SpeechModels listModels(IBMSpeechToTextV1Models.ListModelsOptions listModelsOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/models');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (listModelsOptions != null) ? listModelsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -133,6 +112,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * the endianness of the incoming audio and, for audio that includes multiple channels, downmixes the audio to
    * one-channel mono during transcoding. (For the `audio/l16` format, you can specify the endianness.)
    *
+   * **See also:** [Making a basic HTTP
+   * request](https://console.bluemix.net/docs/services/speech-to-text/http.html#HTTP-basic).
+   *
    * ### Streaming mode
    *
    *  For requests to transcribe live audio as it becomes available, you must set the `Transfer-Encoding` header to
@@ -141,10 +123,14 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * closes the connection (status code 400) if no speech is detected for `inactivity_timeout` seconds of audio (not
    * processing time); use the `inactivity_timeout` parameter to change the default of 30 seconds.
    *
+   * **See also:**
+   * * [Audio transmission](https://console.bluemix.net/docs/services/speech-to-text/input.html#transmission)
+   * * [Timeouts](https://console.bluemix.net/docs/services/speech-to-text/input.html#timeouts).
+   *
    * ### Audio formats (content types)
    *
    *  Use the `Content-Type` header to specify the audio format (MIME type) of the audio. The service accepts the
-   * following formats:
+   * following formats, including specifying the sampling rate, channels, and endianness where indicated.
    * * `audio/basic` (Use only with narrowband models.)
    * * `audio/flac`
    * * `audio/l16` (Specify the sampling rate (`rate`) and optionally the number of channels (`channels`) and endianness
@@ -160,9 +146,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * * `audio/webm;codecs=opus`
    * * `audio/webm;codecs=vorbis`
    *
-   * For information about the supported audio formats, including specifying the sampling rate, channels, and endianness
-   * for the indicated formats, see [Audio
-   * formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
+   * **See also:** [Audio formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
    *
    * ### Multipart speech recognition
    *
@@ -174,7 +158,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * used with the request are greater than the 8 KB limit imposed by most HTTP servers and proxies. You can encounter
    * this limit, for example, if you want to spot a very large number of keywords.
    *
-   * For information about submitting a multipart request, see [Making a multipart HTTP
+   * **See also:** [Making a multipart HTTP
    * request](https://console.bluemix.net/docs/services/speech-to-text/http.html#HTTP-multi).
    *
    * @param recognizeOptions the {@link IBMSpeechToTextV1Models.RecognizeOptions} containing the options for the call
@@ -183,6 +167,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public IBMSpeechToTextV1Models.SpeechRecognitionResults recognize(IBMSpeechToTextV1Models.RecognizeOptions recognizeOptions) {
     IBMWatsonValidator.notNull(recognizeOptions, 'recognizeOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/recognize');
+    builder.addHeader('Accept', 'application/json');
     builder.addHeader('Content-Type', recognizeOptions.contentType());
     Map<String, String> requestHeaders = (recognizeOptions != null) ? recognizeOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -235,7 +220,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (recognizeOptions.speakerLabels() != null) {
       builder.query('speaker_labels', String.valueOf(recognizeOptions.speakerLabels()));
     }
-    builder.body(IBMWatsonRequestBody.create(recognizeOptions.audio(), IBMWatsonMediaType.parse(recognizeOptions.contentType())));
+    builder.bodyContent(recognizeOptions.contentType(), null, null, recognizeOptions.audio());
 
     return (IBMSpeechToTextV1Models.SpeechRecognitionResults) createServiceCall(builder.build(), IBMSpeechToTextV1Models.SpeechRecognitionResults.class);
   }
@@ -250,7 +235,10 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * You can use the method to retrieve the results of any job, regardless of whether it was submitted with a callback
    * URL and the `recognitions.completed_with_results` event, and you can retrieve the results multiple times for as
    * long as they remain available. Use the **Check jobs** method to request information about the most recent jobs
-   * associated with the calling user.
+   * associated with the caller.
+   *
+   * **See also:** [Checking the status and retrieving the results of a
+   * job](https://console.bluemix.net/docs/services/speech-to-text/async.html#job).
    *
    * @param checkJobOptions the {@link IBMSpeechToTextV1Models.CheckJobOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.RecognitionJob} with the response
@@ -258,6 +246,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public IBMSpeechToTextV1Models.RecognitionJob checkJob(IBMSpeechToTextV1Models.CheckJobOptions checkJobOptions) {
     IBMWatsonValidator.notNull(checkJobOptions, 'checkJobOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/recognitions/{0}', new String[]{ checkJobOptions.id() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (checkJobOptions != null) ? checkJobOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -278,11 +267,15 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * remain available until you delete them with the **Delete a job** method or until the job's time to live expires,
    * whichever comes first.
    *
+   * **See also:** [Checking the status of the latest
+   * jobs](https://console.bluemix.net/docs/services/speech-to-text/async.html#jobs).
+   *
    * @param checkJobsOptions the {@link IBMSpeechToTextV1Models.CheckJobsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.RecognitionJobs} with the response
    */
   public IBMSpeechToTextV1Models.RecognitionJobs checkJobs(IBMSpeechToTextV1Models.CheckJobsOptions checkJobsOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/recognitions');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (checkJobsOptions != null) ? checkJobsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -309,9 +302,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * The two approaches are not mutually exclusive. You can poll the service for job status or obtain results from the
    * service manually even if you include a callback URL. In both cases, you can include the `results_ttl` parameter to
-   * specify how long the results are to remain available after the job is complete. For detailed usage information
-   * about the two approaches, including callback notifications, see [Creating a
-   * job](https://console.bluemix.net/docs/services/speech-to-text/async.html#create). Using the HTTPS **Check a job**
+   * specify how long the results are to remain available after the job is complete. Using the HTTPS **Check a job**
    * method to retrieve results is more secure than receiving them via callback notification over HTTP because it
    * provides confidentiality in addition to authentication and data integrity.
    *
@@ -323,12 +314,26 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * * `results_ttl`
    *
    * The service imposes a data size limit of 100 MB. It automatically detects the endianness of the incoming audio and,
-   * for audio that includes multiple channels, downmixes the audio to one-channel mono during transcoding. (For the
-   * `audio/l16` format, you can specify the endianness.)
+   * for audio that includes multiple channels, downmixes the audio to one-channel mono during transcoding.
+   *
+   * **See also:** [Creating a job](https://console.bluemix.net/docs/services/speech-to-text/async.html#create).
+   *
+   * ### Streaming mode
+   *
+   *  For requests to transcribe live audio as it becomes available, you must set the `Transfer-Encoding` header to
+   * `chunked` to use streaming mode. In streaming mode, the server closes the connection (status code 408) if the
+   * service receives no data chunk for 30 seconds and it has no audio to transcribe for 30 seconds. The server also
+   * closes the connection (status code 400) if no speech is detected for `inactivity_timeout` seconds of audio (not
+   * processing time); use the `inactivity_timeout` parameter to change the default of 30 seconds.
+   *
+   * **See also:**
+   * * [Audio transmission](https://console.bluemix.net/docs/services/speech-to-text/input.html#transmission)
+   * * [Timeouts](https://console.bluemix.net/docs/services/speech-to-text/input.html#timeouts)
    *
    * ### Audio formats (content types)
    *
-   *  Use the `Content-Type` parameter to specify the audio format (MIME type) of the audio:
+   *  Use the `Content-Type` header to specify the audio format (MIME type) of the audio. The service accepts the
+   * following formats, including specifying the sampling rate, channels, and endianness where indicated.
    * * `audio/basic` (Use only with narrowband models.)
    * * `audio/flac`
    * * `audio/l16` (Specify the sampling rate (`rate`) and optionally the number of channels (`channels`) and endianness
@@ -344,9 +349,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * * `audio/webm;codecs=opus`
    * * `audio/webm;codecs=vorbis`
    *
-   * For information about the supported audio formats, including specifying the sampling rate, channels, and endianness
-   * for the indicated formats, see [Audio
-   * formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
+   * **See also:** [Audio formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
    *
    * @param createJobOptions the {@link IBMSpeechToTextV1Models.CreateJobOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.RecognitionJob} with the response
@@ -354,6 +357,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public IBMSpeechToTextV1Models.RecognitionJob createJob(IBMSpeechToTextV1Models.CreateJobOptions createJobOptions) {
     IBMWatsonValidator.notNull(createJobOptions, 'createJobOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/recognitions');
+    builder.addHeader('Accept', 'application/json');
     builder.addHeader('Content-Type', createJobOptions.contentType());
     Map<String, String> requestHeaders = (createJobOptions != null) ? createJobOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -418,7 +422,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createJobOptions.speakerLabels() != null) {
       builder.query('speaker_labels', String.valueOf(createJobOptions.speakerLabels()));
     }
-    builder.body(IBMWatsonRequestBody.create(createJobOptions.audio(), IBMWatsonMediaType.parse(createJobOptions.contentType())));
+    builder.bodyContent(createJobOptions.contentType(), null, null, createJobOptions.audio());
 
     return (IBMSpeechToTextV1Models.RecognitionJob) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RecognitionJob.class);
   }
@@ -430,12 +434,15 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * its results are no longer available. The service automatically deletes a job and its results when the time to live
    * for the results expires. You must submit the request with the service credentials of the user who created the job.
    *
+   * **See also:** [Deleting a job](https://console.bluemix.net/docs/services/speech-to-text/async.html#delete).
+   *
    * @param deleteJobOptions the {@link IBMSpeechToTextV1Models.DeleteJobOptions} containing the options for the call
    * @return the service call
    */
   public void deleteJob(IBMSpeechToTextV1Models.DeleteJobOptions deleteJobOptions) {
     IBMWatsonValidator.notNull(deleteJobOptions, 'deleteJobOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/recognitions/{0}', new String[]{ deleteJobOptions.id() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (deleteJobOptions != null) ? deleteJobOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -472,8 +479,10 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * integrity for HTTP communications.
    *
    * After you successfully register a callback URL, you can use it with an indefinite number of recognition requests.
-   * You can register a maximum of 20 callback URLS in a one-hour span of time. For more information, see [Registering a
-   * callback URL](https://console.bluemix.net/docs/services/speech-to-text/async.html#register).
+   * You can register a maximum of 20 callback URLS in a one-hour span of time.
+   *
+   * **See also:** [Registering a callback
+   * URL](https://console.bluemix.net/docs/services/speech-to-text/async.html#register).
    *
    * @param registerCallbackOptions the {@link IBMSpeechToTextV1Models.RegisterCallbackOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.RegisterStatus} with the response
@@ -481,6 +490,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public IBMSpeechToTextV1Models.RegisterStatus registerCallback(IBMSpeechToTextV1Models.RegisterCallbackOptions registerCallbackOptions) {
     IBMWatsonValidator.notNull(registerCallbackOptions, 'registerCallbackOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/register_callback');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (registerCallbackOptions != null) ? registerCallbackOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -504,12 +514,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * Unregisters a callback URL that was previously white-listed with a **Register a callback** request for use with the
    * asynchronous interface. Once unregistered, the URL can no longer be used with asynchronous recognition requests.
    *
+   * **See also:** [Unregistering a callback
+   * URL](https://console.bluemix.net/docs/services/speech-to-text/async.html#unregister).
+   *
    * @param unregisterCallbackOptions the {@link IBMSpeechToTextV1Models.UnregisterCallbackOptions} containing the options for the call
    * @return the service call
    */
   public void unregisterCallback(IBMSpeechToTextV1Models.UnregisterCallbackOptions unregisterCallbackOptions) {
     IBMWatsonValidator.notNull(unregisterCallbackOptions, 'unregisterCallbackOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/unregister_callback');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (unregisterCallbackOptions != null) ? unregisterCallbackOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -531,12 +545,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * base model for which it is created. The model is owned by the instance of the service whose credentials are used to
    * create it.
    *
+   * **See also:** [Create a custom language
+   * model](https://console.bluemix.net/docs/services/speech-to-text/language-create.html#createModel).
+   *
    * @param createLanguageModelOptions the {@link IBMSpeechToTextV1Models.CreateLanguageModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.LanguageModel} with the response
    */
   public IBMSpeechToTextV1Models.LanguageModel createLanguageModel(IBMSpeechToTextV1Models.CreateLanguageModelOptions createLanguageModelOptions) {
     IBMWatsonValidator.notNull(createLanguageModelOptions, 'createLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/customizations');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (createLanguageModelOptions != null) ? createLanguageModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -564,12 +582,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * corpus to the model, is currently being processed. You must use credentials for the instance of the service that
    * owns a model to delete it.
    *
+   * **See also:** [Deleting a custom language
+   * model](https://console.bluemix.net/docs/services/speech-to-text/language-models.html#deleteModel).
+   *
    * @param deleteLanguageModelOptions the {@link IBMSpeechToTextV1Models.DeleteLanguageModelOptions} containing the options for the call
    * @return the service call
    */
   public void deleteLanguageModel(IBMSpeechToTextV1Models.DeleteLanguageModelOptions deleteLanguageModelOptions) {
     IBMWatsonValidator.notNull(deleteLanguageModelOptions, 'deleteLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}', new String[]{ deleteLanguageModelOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (deleteLanguageModelOptions != null) ? deleteLanguageModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -586,12 +608,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * Gets information about a specified custom language model. You must use credentials for the instance of the service
    * that owns a model to list information about it.
    *
+   * **See also:** [Listing custom language
+   * models](https://console.bluemix.net/docs/services/speech-to-text/language-models.html#listModels).
+   *
    * @param getLanguageModelOptions the {@link IBMSpeechToTextV1Models.GetLanguageModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.LanguageModel} with the response
    */
   public IBMSpeechToTextV1Models.LanguageModel getLanguageModel(IBMSpeechToTextV1Models.GetLanguageModelOptions getLanguageModelOptions) {
     IBMWatsonValidator.notNull(getLanguageModelOptions, 'getLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}', new String[]{ getLanguageModelOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (getLanguageModelOptions != null) ? getLanguageModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -610,11 +636,15 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * language models for all languages. You must use credentials for the instance of the service that owns a model to
    * list information about it.
    *
+   * **See also:** [Listing custom language
+   * models](https://console.bluemix.net/docs/services/speech-to-text/language-models.html#listModels).
+   *
    * @param listLanguageModelsOptions the {@link IBMSpeechToTextV1Models.ListLanguageModelsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.LanguageModels} with the response
    */
   public IBMSpeechToTextV1Models.LanguageModels listLanguageModels(IBMSpeechToTextV1Models.ListLanguageModelsOptions listLanguageModelsOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/customizations');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (listLanguageModelsOptions != null) ? listLanguageModelsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -636,12 +666,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * are preserved, but the model's words resource is removed and must be re-created. You must use credentials for the
    * instance of the service that owns a model to reset it.
    *
+   * **See also:** [Resetting a custom language
+   * model](https://console.bluemix.net/docs/services/speech-to-text/language-models.html#resetModel).
+   *
    * @param resetLanguageModelOptions the {@link IBMSpeechToTextV1Models.ResetLanguageModelOptions} containing the options for the call
    * @return the service call
    */
   public void resetLanguageModel(IBMSpeechToTextV1Models.ResetLanguageModelOptions resetLanguageModelOptions) {
     IBMWatsonValidator.notNull(resetLanguageModelOptions, 'resetLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/reset', new String[]{ resetLanguageModelOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (resetLanguageModelOptions != null) ? resetLanguageModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -678,12 +712,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * * No training data (corpora or words) have been added to the custom model.
    * * One or more words that were added to the custom model have invalid sounds-like pronunciations that you must fix.
    *
+   * **See also:** [Train the custom language
+   * model](https://console.bluemix.net/docs/services/speech-to-text/language-create.html#trainModel).
+   *
    * @param trainLanguageModelOptions the {@link IBMSpeechToTextV1Models.TrainLanguageModelOptions} containing the options for the call
    * @return the service call
    */
   public void trainLanguageModel(IBMSpeechToTextV1Models.TrainLanguageModelOptions trainLanguageModelOptions) {
     IBMWatsonValidator.notNull(trainLanguageModelOptions, 'trainLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/train', new String[]{ trainLanguageModelOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (trainLanguageModelOptions != null) ? trainLanguageModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -716,8 +754,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * is complete, the model resumes the status that it had prior to upgrade. The service cannot accept subsequent
    * requests for the model until the upgrade completes.
    *
-   * For more information, see [Upgrading custom
-   * models](https://console.bluemix.net/docs/services/speech-to-text/custom-upgrade.html).
+   * **See also:** [Upgrading a custom language
+   * model](https://console.bluemix.net/docs/services/speech-to-text/custom-upgrade.html#upgradeLanguage).
    *
    * @param upgradeLanguageModelOptions the {@link IBMSpeechToTextV1Models.UpgradeLanguageModelOptions} containing the options for the call
    * @return the service call
@@ -725,6 +763,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public void upgradeLanguageModel(IBMSpeechToTextV1Models.UpgradeLanguageModelOptions upgradeLanguageModelOptions) {
     IBMWatsonValidator.notNull(upgradeLanguageModelOptions, 'upgradeLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/upgrade_model', new String[]{ upgradeLanguageModelOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (upgradeLanguageModelOptions != null) ? upgradeLanguageModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -746,9 +785,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * Submit a plain text file that contains sample sentences from the domain of interest to enable the service to
    * extract words in context. The more sentences you add that represent the context in which speakers use words from
-   * the domain, the better the service's recognition accuracy. For guidelines about adding a corpus text file and for
-   * information about how the service parses a corpus file, see [Preparing a corpus text
-   * file](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#prepareCorpus).
+   * the domain, the better the service's recognition accuracy.
    *
    * The call returns an HTTP 201 response code if the corpus is valid. The service then asynchronously processes the
    * contents of the corpus and automatically extracts new words that it finds. This can take on the order of a minute
@@ -771,12 +808,19 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * words from all corpora combined. Also, you can add no more than 30 thousand custom (OOV) words to a model; this
    * includes words that the service extracts from corpora and words that you add directly.
    *
+   * **See also:**
+   * * [Working with
+   * corpora](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#workingCorpora)
+   * * [Add corpora to the custom language
+   * model](https://console.bluemix.net/docs/services/speech-to-text/language-create.html#addCorpora).
+   *
    * @param addCorpusOptions the {@link IBMSpeechToTextV1Models.AddCorpusOptions} containing the options for the call
    * @return the service call
    */
   public void addCorpus(IBMSpeechToTextV1Models.AddCorpusOptions addCorpusOptions) {
     IBMWatsonValidator.notNull(addCorpusOptions, 'addCorpusOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/corpora/{1}', new String[]{ addCorpusOptions.customizationId(), addCorpusOptions.corpusName() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (addCorpusOptions != null) ? addCorpusOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -788,8 +832,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     }
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(addCorpusOptions.corpusFile(), 'text/plain');
-    multipartBuilder.addFormDataPart('corpus_file', addCorpusOptions.corpusFilename(), fileBody);
+    IBMWatsonRequestBody corpusFileBody = IBMWatsonRequestBody.create(addCorpusOptions.corpusFile(), 'text/plain');
+    multipartBuilder.addFormDataPart('corpus_file', addCorpusOptions.corpusFilename(), corpusFileBody);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
@@ -805,12 +849,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * corpus does not affect the custom model until you train the model with the **Train a custom language model**
    * method. You must use credentials for the instance of the service that owns a model to delete its corpora.
    *
+   * **See also:** [Deleting a corpus from a custom language
+   * model](https://console.bluemix.net/docs/services/speech-to-text/language-corpora.html#deleteCorpus).
+   *
    * @param deleteCorpusOptions the {@link IBMSpeechToTextV1Models.DeleteCorpusOptions} containing the options for the call
    * @return the service call
    */
   public void deleteCorpus(IBMSpeechToTextV1Models.DeleteCorpusOptions deleteCorpusOptions) {
     IBMWatsonValidator.notNull(deleteCorpusOptions, 'deleteCorpusOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}/corpora/{1}', new String[]{ deleteCorpusOptions.customizationId(), deleteCorpusOptions.corpusName() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (deleteCorpusOptions != null) ? deleteCorpusOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -828,12 +876,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * and out-of-vocabulary (OOV) words, name, and status of the corpus. You must use credentials for the instance of the
    * service that owns a model to list its corpora.
    *
+   * **See also:** [Listing corpora for a custom language
+   * model](https://console.bluemix.net/docs/services/speech-to-text/language-corpora.html#listCorpora).
+   *
    * @param getCorpusOptions the {@link IBMSpeechToTextV1Models.GetCorpusOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.Corpus} with the response
    */
   public IBMSpeechToTextV1Models.Corpus getCorpus(IBMSpeechToTextV1Models.GetCorpusOptions getCorpusOptions) {
     IBMWatsonValidator.notNull(getCorpusOptions, 'getCorpusOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/corpora/{1}', new String[]{ getCorpusOptions.customizationId(), getCorpusOptions.corpusName() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (getCorpusOptions != null) ? getCorpusOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -851,12 +903,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * words and out-of-vocabulary (OOV) words, name, and status of each corpus. You must use credentials for the instance
    * of the service that owns a model to list its corpora.
    *
+   * **See also:** [Listing corpora for a custom language
+   * model](https://console.bluemix.net/docs/services/speech-to-text/language-corpora.html#listCorpora).
+   *
    * @param listCorporaOptions the {@link IBMSpeechToTextV1Models.ListCorporaOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.Corpora} with the response
    */
   public IBMSpeechToTextV1Models.Corpora listCorpora(IBMSpeechToTextV1Models.ListCorporaOptions listCorporaOptions) {
     IBMWatsonValidator.notNull(listCorporaOptions, 'listCorporaOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/corpora', new String[]{ listCorporaOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (listCorporaOptions != null) ? listCorporaOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -884,19 +940,21 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * * The `sounds_like` field provides an array of one or more pronunciations for the word. Use the parameter to
    * specify how the word can be pronounced by users. Use the parameter for words that are difficult to pronounce,
    * foreign words, acronyms, and so on. For example, you might specify that the word `IEEE` can sound like `i triple
-   * e`. You can specify a maximum of five sounds-like pronunciations for a word. For information about pronunciation
-   * rules, see [Using the sounds_like
-   * field](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#soundsLike).
+   * e`. You can specify a maximum of five sounds-like pronunciations for a word.
    * * The `display_as` field provides a different way of spelling the word in a transcript. Use the parameter when you
    * want the word to appear different from its usual representation or from its spelling in corpora training data. For
-   * example, you might indicate that the word `IBM(trademark)` is to be displayed as `IBM&trade;`. For more
-   * information, see [Using the display_as
-   * field](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#displayAs).
+   * example, you might indicate that the word `IBM(trademark)` is to be displayed as `IBM&trade;`.
    *
    *
    * If you add a custom word that already exists in the words resource for the custom model, the new definition
    * overwrites the existing data for the word. If the service encounters an error, it does not add the word to the
    * words resource. Use the **List a custom word** method to review the word that you add.
+   *
+   * **See also:**
+   * * [Working with custom
+   * words](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#workingWords)
+   * * [Add words to the custom language
+   * model](https://console.bluemix.net/docs/services/speech-to-text/language-create.html#addWords).
    *
    * @param addWordOptions the {@link IBMSpeechToTextV1Models.AddWordOptions} containing the options for the call
    * @return the service call
@@ -904,6 +962,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public void addWord(IBMSpeechToTextV1Models.AddWordOptions addWordOptions) {
     IBMWatsonValidator.notNull(addWordOptions, 'addWordOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getEndPoint() + String.format('/v1/customizations/{0}/words/{1}', new String[]{ addWordOptions.customizationId(), addWordOptions.wordName() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (addWordOptions != null) ? addWordOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -944,14 +1003,10 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * * The `sounds_like` field provides an array of one or more pronunciations for the word. Use the parameter to
    * specify how the word can be pronounced by users. Use the parameter for words that are difficult to pronounce,
    * foreign words, acronyms, and so on. For example, you might specify that the word `IEEE` can sound like `i triple
-   * e`. You can specify a maximum of five sounds-like pronunciations for a word. For information about pronunciation
-   * rules, see [Using the sounds_like
-   * field](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#soundsLike).
+   * e`. You can specify a maximum of five sounds-like pronunciations for a word.
    * * The `display_as` field provides a different way of spelling the word in a transcript. Use the parameter when you
    * want the word to appear different from its usual representation or from its spelling in corpora training data. For
-   * example, you might indicate that the word `IBM(trademark)` is to be displayed as `IBM&trade;`. For more
-   * information, see [Using the display_as
-   * field](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#displayAs).
+   * example, you might indicate that the word `IBM(trademark)` is to be displayed as `IBM&trade;`.
    *
    *
    * If you add a custom word that already exists in the words resource for the custom model, the new definition
@@ -971,12 +1026,19 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * an invalid `sounds_like` field include an `error` field that describes the problem. You can use other words-related
    * methods to correct errors, eliminate typos, and modify how words are pronounced as needed.
    *
+   * **See also:**
+   * * [Working with custom
+   * words](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#workingWords)
+   * * [Add words to the custom language
+   * model](https://console.bluemix.net/docs/services/speech-to-text/language-create.html#addWords).
+   *
    * @param addWordsOptions the {@link IBMSpeechToTextV1Models.AddWordsOptions} containing the options for the call
    * @return the service call
    */
   public void addWords(IBMSpeechToTextV1Models.AddWordsOptions addWordsOptions) {
     IBMWatsonValidator.notNull(addWordsOptions, 'addWordsOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/words', new String[]{ addWordsOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (addWordsOptions != null) ? addWordsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -999,12 +1061,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * does not affect the custom model until you train the model with the **Train a custom language model** method. You
    * must use credentials for the instance of the service that owns a model to delete its words.
    *
+   * **See also:** [Deleting a word from a custom language
+   * model](https://console.bluemix.net/docs/services/speech-to-text/language-words.html#deleteWord).
+   *
    * @param deleteWordOptions the {@link IBMSpeechToTextV1Models.DeleteWordOptions} containing the options for the call
    * @return the service call
    */
   public void deleteWord(IBMSpeechToTextV1Models.DeleteWordOptions deleteWordOptions) {
     IBMWatsonValidator.notNull(deleteWordOptions, 'deleteWordOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}/words/{1}', new String[]{ deleteWordOptions.customizationId(), deleteWordOptions.wordName() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (deleteWordOptions != null) ? deleteWordOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1021,12 +1087,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * Gets information about a custom word from a custom language model. You must use credentials for the instance of the
    * service that owns a model to query information about its words.
    *
+   * **See also:** [Listing words from a custom language
+   * model](https://console.bluemix.net/docs/services/speech-to-text/language-words.html#listWords).
+   *
    * @param getWordOptions the {@link IBMSpeechToTextV1Models.GetWordOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.Word} with the response
    */
   public IBMSpeechToTextV1Models.Word getWord(IBMSpeechToTextV1Models.GetWordOptions getWordOptions) {
     IBMWatsonValidator.notNull(getWordOptions, 'getWordOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/words/{1}', new String[]{ getWordOptions.customizationId(), getWordOptions.wordName() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (getWordOptions != null) ? getWordOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1046,12 +1116,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * default, words are listed in ascending alphabetical order. You must use credentials for the instance of the service
    * that owns a model to query information about its words.
    *
+   * **See also:** [Listing words from a custom language
+   * model](https://console.bluemix.net/docs/services/speech-to-text/language-words.html#listWords).
+   *
    * @param listWordsOptions the {@link IBMSpeechToTextV1Models.ListWordsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.Words} with the response
    */
   public IBMSpeechToTextV1Models.Words listWords(IBMSpeechToTextV1Models.ListWordsOptions listWordsOptions) {
     IBMWatsonValidator.notNull(listWordsOptions, 'listWordsOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/words', new String[]{ listWordsOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (listWordsOptions != null) ? listWordsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1061,8 +1135,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (listWordsOptions.wordType() != null) {
       builder.query('word_type', listWordsOptions.wordType());
     }
-    if (listWordsOptions.sortField() != null) {
-      builder.query('sort', listWordsOptions.sortField());
+    if (listWordsOptions.xsort() != null) {
+      builder.query('sort', listWordsOptions.xsort());
     }
 
     return (IBMSpeechToTextV1Models.Words) createServiceCall(builder.build(), IBMSpeechToTextV1Models.Words.class);
@@ -1075,12 +1149,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * base model for which it is created. The model is owned by the instance of the service whose credentials are used to
    * create it.
    *
+   * **See also:** [Create a custom acoustic
+   * model](https://console.bluemix.net/docs/services/speech-to-text/acoustic-create.html#createModel).
+   *
    * @param createAcousticModelOptions the {@link IBMSpeechToTextV1Models.CreateAcousticModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AcousticModel} with the response
    */
   public IBMSpeechToTextV1Models.AcousticModel createAcousticModel(IBMSpeechToTextV1Models.CreateAcousticModelOptions createAcousticModelOptions) {
     IBMWatsonValidator.notNull(createAcousticModelOptions, 'createAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/acoustic_customizations');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (createAcousticModelOptions != null) ? createAcousticModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1105,12 +1183,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * audio resource to the model, is currently being processed. You must use credentials for the instance of the service
    * that owns a model to delete it.
    *
+   * **See also:** [Deleting a custom acoustic
+   * model](https://console.bluemix.net/docs/services/speech-to-text/acoustic-models.html#deleteModel).
+   *
    * @param deleteAcousticModelOptions the {@link IBMSpeechToTextV1Models.DeleteAcousticModelOptions} containing the options for the call
    * @return the service call
    */
   public void deleteAcousticModel(IBMSpeechToTextV1Models.DeleteAcousticModelOptions deleteAcousticModelOptions) {
     IBMWatsonValidator.notNull(deleteAcousticModelOptions, 'deleteAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/acoustic_customizations/{0}', new String[]{ deleteAcousticModelOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (deleteAcousticModelOptions != null) ? deleteAcousticModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1127,12 +1209,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * Gets information about a specified custom acoustic model. You must use credentials for the instance of the service
    * that owns a model to list information about it.
    *
+   * **See also:** [Listing custom acoustic
+   * models](https://console.bluemix.net/docs/services/speech-to-text/acoustic-models.html#listModels).
+   *
    * @param getAcousticModelOptions the {@link IBMSpeechToTextV1Models.GetAcousticModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AcousticModel} with the response
    */
   public IBMSpeechToTextV1Models.AcousticModel getAcousticModel(IBMSpeechToTextV1Models.GetAcousticModelOptions getAcousticModelOptions) {
     IBMWatsonValidator.notNull(getAcousticModelOptions, 'getAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/acoustic_customizations/{0}', new String[]{ getAcousticModelOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (getAcousticModelOptions != null) ? getAcousticModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1151,11 +1237,15 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * acoustic models for all languages. You must use credentials for the instance of the service that owns a model to
    * list information about it.
    *
+   * **See also:** [Listing custom acoustic
+   * models](https://console.bluemix.net/docs/services/speech-to-text/acoustic-models.html#listModels).
+   *
    * @param listAcousticModelsOptions the {@link IBMSpeechToTextV1Models.ListAcousticModelsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AcousticModels} with the response
    */
   public IBMSpeechToTextV1Models.AcousticModels listAcousticModels(IBMSpeechToTextV1Models.ListAcousticModelsOptions listAcousticModelsOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/acoustic_customizations');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (listAcousticModelsOptions != null) ? listAcousticModelsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1177,12 +1267,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * are preserved, but the model's audio resources are removed and must be re-created. You must use credentials for the
    * instance of the service that owns a model to reset it.
    *
+   * **See also:** [Resetting a custom acoustic
+   * model](https://console.bluemix.net/docs/services/speech-to-text/acoustic-models.html#resetModel).
+   *
    * @param resetAcousticModelOptions the {@link IBMSpeechToTextV1Models.ResetAcousticModelOptions} containing the options for the call
    * @return the service call
    */
   public void resetAcousticModel(IBMSpeechToTextV1Models.ResetAcousticModelOptions resetAcousticModelOptions) {
     IBMWatsonValidator.notNull(resetAcousticModelOptions, 'resetAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/reset', new String[]{ resetAcousticModelOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (resetAcousticModelOptions != null) ? resetAcousticModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1217,9 +1311,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * You can use the optional `custom_language_model_id` parameter to specify the GUID of a separately created custom
    * language model that is to be used during training. Specify a custom language model if you have verbatim
    * transcriptions of the audio files that you have added to the custom model or you have either corpora (text files)
-   * or a list of words that are relevant to the contents of the audio files. For information about creating a separate
-   * custom language model, see [Creating a custom language
-   * model](https://console.bluemix.net/docs/services/speech-to-text/language-create.html).
+   * or a list of words that are relevant to the contents of the audio files. For more information, see the **Create a
+   * custom language model** method.
    *
    * Training can fail to start for the following reasons:
    * * The service is currently handling another request for the custom model, such as another training request or a
@@ -1227,12 +1320,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * * The custom model contains less than 10 minutes or more than 50 hours of audio data.
    * * One or more of the custom model's audio resources is invalid.
    *
+   * **See also:** [Train the custom acoustic
+   * model](https://console.bluemix.net/docs/services/speech-to-text/acoustic-create.html#trainModel).
+   *
    * @param trainAcousticModelOptions the {@link IBMSpeechToTextV1Models.TrainAcousticModelOptions} containing the options for the call
    * @return the service call
    */
   public void trainAcousticModel(IBMSpeechToTextV1Models.TrainAcousticModelOptions trainAcousticModelOptions) {
     IBMWatsonValidator.notNull(trainAcousticModelOptions, 'trainAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/train', new String[]{ trainAcousticModelOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (trainAcousticModelOptions != null) ? trainAcousticModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1268,8 +1365,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * must be upgraded before the custom acoustic model can be upgraded. Omit the parameter if the custom acoustic model
    * was not trained with a custom language model.
    *
-   * For more information, see [Upgrading custom
-   * models](https://console.bluemix.net/docs/services/speech-to-text/custom-upgrade.html).
+   * **See also:** [Upgrading a custom acoustic
+   * model](https://console.bluemix.net/docs/services/speech-to-text/custom-upgrade.html#upgradeAcoustic).
    *
    * @param upgradeAcousticModelOptions the {@link IBMSpeechToTextV1Models.UpgradeAcousticModelOptions} containing the options for the call
    * @return the service call
@@ -1277,6 +1374,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public void upgradeAcousticModel(IBMSpeechToTextV1Models.UpgradeAcousticModelOptions upgradeAcousticModelOptions) {
     IBMWatsonValidator.notNull(upgradeAcousticModelOptions, 'upgradeAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/upgrade_model', new String[]{ upgradeAcousticModelOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (upgradeAcousticModelOptions != null) ? upgradeAcousticModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1322,10 +1420,14 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * resource, and it returns the status of the resource. Use a loop to check the status of the audio every few seconds
    * until it becomes `ok`.
    *
+   * **See also:** [Add audio to the custom acoustic
+   * model](https://console.bluemix.net/docs/services/speech-to-text/acoustic-create.html#addAudio).
+   *
    * ### Content types for audio-type resources
    *
    *  You can add an individual audio file in any format that the service supports for speech recognition. For an
-   * audio-type resource, use the `Content-Type` parameter to specify the audio format (MIME type) of the audio file:
+   * audio-type resource, use the `Content-Type` parameter to specify the audio format (MIME type) of the audio file,
+   * including specifying the sampling rate, channels, and endianness where indicated.
    * * `audio/basic` (Use only with narrowband models.)
    * * `audio/flac`
    * * `audio/l16` (Specify the sampling rate (`rate`) and optionally the number of channels (`channels`) and endianness
@@ -1341,9 +1443,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * * `audio/webm;codecs=opus`
    * * `audio/webm;codecs=vorbis`
    *
-   * For information about the supported audio formats, including specifying the sampling rate, channels, and endianness
-   * for the indicated formats, see [Audio
-   * formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
+   * **See also:** [Audio formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
    *
    * **Note:** The sampling rate of an audio file must match the sampling rate of the base model for the custom model:
    * for broadband models, at least 16 kHz; for narrowband models, at least 8 kHz. If the sampling rate of the audio is
@@ -1377,6 +1477,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public void addAudio(IBMSpeechToTextV1Models.AddAudioOptions addAudioOptions) {
     IBMWatsonValidator.notNull(addAudioOptions, 'addAudioOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio/{1}', new String[]{ addAudioOptions.customizationId(), addAudioOptions.audioName() }));
+    builder.addHeader('Accept', 'application/json');
     builder.addHeader('Content-Type', addAudioOptions.contentType());
     if (addAudioOptions.containedContentType() != null) {
       builder.addHeader('Contained-Content-Type', addAudioOptions.containedContentType());
@@ -1390,7 +1491,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (addAudioOptions.allowOverwrite() != null) {
       builder.query('allow_overwrite', String.valueOf(addAudioOptions.allowOverwrite()));
     }
-    builder.body(IBMWatsonRequestBody.create(addAudioOptions.audioResource(), IBMWatsonMediaType.parse(addAudioOptions.contentType())));
+    builder.bodyContent(addAudioOptions.contentType(), null, null, addAudioOptions.audioResource());
 
     createServiceCall(builder.build(), null);
   }
@@ -1404,12 +1505,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * by using the **Train a custom acoustic model** method. You must use credentials for the instance of the service
    * that owns a model to delete its audio resources.
    *
+   * **See also:** [Deleting an audio resource from a custom acoustic
+   * model](https://console.bluemix.net/docs/services/speech-to-text/acoustic-audio.html#deleteAudio).
+   *
    * @param deleteAudioOptions the {@link IBMSpeechToTextV1Models.DeleteAudioOptions} containing the options for the call
    * @return the service call
    */
   public void deleteAudio(IBMSpeechToTextV1Models.DeleteAudioOptions deleteAudioOptions) {
     IBMWatsonValidator.notNull(deleteAudioOptions, 'deleteAudioOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio/{1}', new String[]{ deleteAudioOptions.customizationId(), deleteAudioOptions.audioName() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (deleteAudioOptions != null) ? deleteAudioOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1439,12 +1544,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * You must use credentials for the instance of the service that owns a model to list its audio resources.
    *
+   * **See also:** [Listing audio resources for a custom acoustic
+   * model](https://console.bluemix.net/docs/services/speech-to-text/acoustic-audio.html#listAudio).
+   *
    * @param getAudioOptions the {@link IBMSpeechToTextV1Models.GetAudioOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AudioListing} with the response
    */
   public IBMSpeechToTextV1Models.AudioListing getAudio(IBMSpeechToTextV1Models.GetAudioOptions getAudioOptions) {
     IBMWatsonValidator.notNull(getAudioOptions, 'getAudioOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio/{1}', new String[]{ getAudioOptions.customizationId(), getAudioOptions.audioName() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (getAudioOptions != null) ? getAudioOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1464,12 +1573,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * to the custom acoustic model. You must use credentials for the instance of the service that owns a model to list
    * its audio resources.
    *
+   * **See also:** [Listing audio resources for a custom acoustic
+   * model](https://console.bluemix.net/docs/services/speech-to-text/acoustic-audio.html#listAudio).
+   *
    * @param listAudioOptions the {@link IBMSpeechToTextV1Models.ListAudioOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AudioResources} with the response
    */
   public IBMSpeechToTextV1Models.AudioResources listAudio(IBMSpeechToTextV1Models.ListAudioOptions listAudioOptions) {
     IBMWatsonValidator.notNull(listAudioOptions, 'listAudioOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio', new String[]{ listAudioOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (listAudioOptions != null) ? listAudioOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1489,7 +1602,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * associate the customer ID with the data.
    *
    * You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes the
-   * data. For more information about customer IDs and about using this method, see [Information
+   * data.
+   *
+   * **See also:** [Information
    * security](https://console.bluemix.net/docs/services/speech-to-text/information-security.html).
    *
    * @param deleteUserDataOptions the {@link IBMSpeechToTextV1Models.DeleteUserDataOptions} containing the options for the call
@@ -1498,6 +1613,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public void deleteUserData(IBMSpeechToTextV1Models.DeleteUserDataOptions deleteUserDataOptions) {
     IBMWatsonValidator.notNull(deleteUserDataOptions, 'deleteUserDataOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + '/v1/user_data');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (deleteUserDataOptions != null) ? deleteUserDataOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {

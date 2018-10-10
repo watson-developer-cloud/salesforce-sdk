@@ -14,100 +14,109 @@ public class IBMSpeechToTextV1Models {
     private String status_serialized_name;
     private Long progress_serialized_name;
     private String warnings_serialized_name;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model. The **Create a custom acoustic model** method returns
      * only this field of the object; it does not return the other fields.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     @AuraEnabled
     public String getCustomizationId() {
       return customization_id_serialized_name;
     }
+ 
     /**
-     * Gets the created_serialized_name.
+     * Gets the created.
      *
      * The date and time in Coordinated Universal Time (UTC) at which the custom acoustic model was created. The value
      * is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
      *
-     * @return the created_serialized_name
+     * @return the created
      */
     @AuraEnabled
     public String getCreated() {
       return created_serialized_name;
     }
+ 
     /**
-     * Gets the language_serialized_name.
+     * Gets the language.
      *
      * The language identifier of the custom acoustic model (for example, `en-US`).
      *
-     * @return the language_serialized_name
+     * @return the language
      */
     @AuraEnabled
     public String getLanguage() {
       return language_serialized_name;
     }
+ 
     /**
-     * Gets the versions_serialized_name.
+     * Gets the versions.
      *
      * A list of the available versions of the custom acoustic model. Each element of the array indicates a version of
      * the base model with which the custom model can be used. Multiple versions exist only if the custom model has been
      * upgraded; otherwise, only a single version is shown.
      *
-     * @return the versions_serialized_name
+     * @return the versions
      */
     @AuraEnabled
     public List<String> getVersions() {
       return versions_serialized_name;
     }
+ 
     /**
-     * Gets the owner_serialized_name.
+     * Gets the owner.
      *
      * The GUID of the service credentials for the instance of the service that owns the custom acoustic model.
      *
-     * @return the owner_serialized_name
+     * @return the owner
      */
     @AuraEnabled
     public String getOwner() {
       return owner_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The name of the custom acoustic model.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * The description of the custom acoustic model.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     @AuraEnabled
     public String getDescription() {
       return description_serialized_name;
     }
+ 
     /**
-     * Gets the base_model_name_serialized_name.
+     * Gets the baseModelName.
      *
      * The name of the language model for which the custom acoustic model was created.
      *
-     * @return the base_model_name_serialized_name
+     * @return the baseModelName
      */
     @AuraEnabled
     public String getBaseModelName() {
       return base_model_name_serialized_name;
     }
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * The current status of the custom acoustic model:
      * * `pending` indicates that the model was created but is waiting either for training data to be added or for the
@@ -118,32 +127,34 @@ public class IBMSpeechToTextV1Models {
      * * `upgrading` indicates that the model is currently being upgraded.
      * * `failed` indicates that training of the model failed.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
       return status_serialized_name;
     }
+ 
     /**
-     * Gets the progress_serialized_name.
+     * Gets the progress.
      *
      * A percentage that indicates the progress of the custom acoustic model's current training. A value of `100` means
      * that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the
      * training. The field changes from `0` to `100` when training is complete.
      *
-     * @return the progress_serialized_name
+     * @return the progress
      */
     @AuraEnabled
     public Long getProgress() {
       return progress_serialized_name;
     }
+ 
     /**
-     * Gets the warnings_serialized_name.
+     * Gets the warnings.
      *
      * If the request included unknown parameters, the following message: `Unexpected query parameter(s) ['parameters']
      * detected`, where `parameters` is a list that includes a quoted string for each unknown parameter.
      *
-     * @return the warnings_serialized_name
+     * @return the warnings
      */
     @AuraEnabled
     public String getWarnings() {
@@ -151,7 +162,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the customization_id_serialized_name.
+     * Sets the customizationId.
      *
      * @param customizationId the new customizationId
      */
@@ -160,7 +171,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the created_serialized_name.
+     * Sets the created.
      *
      * @param created the new created
      */
@@ -169,7 +180,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the language_serialized_name.
+     * Sets the language.
      *
      * @param language the new language
      */
@@ -178,7 +189,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the versions_serialized_name.
+     * Sets the versions.
      *
      * @param versions the new versions
      */
@@ -187,7 +198,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the owner_serialized_name.
+     * Sets the owner.
      *
      * @param owner the new owner
      */
@@ -196,7 +207,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -205,7 +216,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the description_serialized_name.
+     * Sets the description.
      *
      * @param description the new description
      */
@@ -214,7 +225,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the base_model_name_serialized_name.
+     * Sets the baseModelName.
      *
      * @param baseModelName the new baseModelName
      */
@@ -223,7 +234,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the status_serialized_name.
+     * Sets the status.
      *
      * @param status the new status
      */
@@ -232,7 +243,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the progress_serialized_name.
+     * Sets the progress.
      *
      * @param progress the new progress
      */
@@ -241,7 +252,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the warnings_serialized_name.
+     * Sets the warnings.
      *
      * @param warnings the new warnings
      */
@@ -265,14 +276,15 @@ public class IBMSpeechToTextV1Models {
    */
   public class AcousticModels extends IBMWatsonResponseModel {
     private List<AcousticModel> customizations_serialized_name;
+ 
     /**
-     * Gets the customizations_serialized_name.
+     * Gets the customizations.
      *
      * An array of objects that provides information about each available custom acoustic model. The array is empty if
      * the requesting service credentials own no custom acoustic models (if no language is specified) or own no custom
      * acoustic models for the specified language.
      *
-     * @return the customizations_serialized_name
+     * @return the customizations
      */
     @AuraEnabled
     public List<AcousticModel> getCustomizations() {
@@ -280,7 +292,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the customizations_serialized_name.
+     * Sets the customizations.
      *
      * @param customizations the new customizations
      */
@@ -295,7 +307,7 @@ public class IBMSpeechToTextV1Models {
 
       AcousticModels ret = (AcousticModels) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for customizations_serialized_name
+      // calling custom deserializer for customizations
       List<AcousticModel> newCustomizations = new List<AcousticModel>();
       List<AcousticModel> deserializedCustomizations = ret.getCustomizations();
       if (deserializedCustomizations != null) {
@@ -316,25 +328,27 @@ public class IBMSpeechToTextV1Models {
    * The addAudio options.
    */
   public class AddAudioOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String audio_name_serialized_name;
-    private IBMWatsonFile audio_resource_serialized_name;
-    private String content_type_serialized_name;
-    private String contained_content_type_serialized_name;
-    private Boolean allow_overwrite_serialized_name;
+    private String customizationId;
+    private String audioName;
+    private IBMWatsonFile audioResource;
+    private String contentType;
+    private String containedContentType;
+    private Boolean allowOverwrite;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the audio_name_serialized_name.
+     * Gets the audioName.
      *
      * The name of the new audio resource for the custom acoustic model. Use a localized name that matches the language
      * of the custom model and reflects the contents of the resource.
@@ -342,74 +356,71 @@ public class IBMSpeechToTextV1Models {
      * * Do not include spaces, slashes, or backslashes in the name.
      * * Do not use the name of an audio resource that has already been added to the custom model.
      *
-     * @return the audio_name_serialized_name
+     * @return the audioName
      */
     public String audioName() {
-      return audio_name_serialized_name;
+      return audioName;
     }
+ 
     /**
-     * Gets the audio_resource_serialized_name.
+     * Gets the audioResource.
      *
-     * @return the audio_resource_serialized_name
+     * The audio resource that is to be added to the custom acoustic model, an individual audio file or an archive file.
+     *
+     * @return the audioResource
      */
     public IBMWatsonFile audioResource() {
-      return audio_resource_serialized_name;
+      return audioResource;
     }
+ 
     /**
-     * Gets the audio_resource_serialized_name.
-     *
-     * @return the audio_resource_serialized_name
-     *
-     * @deprecated This method is incorrectly named. Please use the audioResource() getter.
-     */
-    public IBMWatsonFile audio() {
-      return audio_resource_serialized_name;
-    }
-    /**
-     * Gets the content_type_serialized_name.
+     * Gets the contentType.
      *
      * The type of the input.
      *
-     * @return the content_type_serialized_name
+     * @return the contentType
      */
     public String contentType() {
-      return content_type_serialized_name;
+      return contentType;
     }
+ 
     /**
-     * Gets the contained_content_type_serialized_name.
+     * Gets the containedContentType.
      *
      * For an archive-type resource, specifies the format of the audio files contained in the archive file. The
      * parameter accepts all of the audio formats supported for use with speech recognition, including the `rate`,
      * `channels`, and `endianness` parameters that are used with some formats. For a complete list of supported audio
      * formats, see [Audio formats](/docs/services/speech-to-text/input.html#formats).
      *
-     * @return the contained_content_type_serialized_name
+     * @return the containedContentType
      */
     public String containedContentType() {
-      return contained_content_type_serialized_name;
+      return containedContentType;
     }
+ 
     /**
-     * Gets the allow_overwrite_serialized_name.
+     * Gets the allowOverwrite.
      *
      * If `true`, the specified corpus or audio resource overwrites an existing corpus or audio resource with the same
      * name. If `false`, the request fails if a corpus or audio resource with the same name already exists. The
      * parameter has no effect if a corpus or audio resource with the same name does not already exist.
      *
-     * @return the allow_overwrite_serialized_name
+     * @return the allowOverwrite
      */
     public Boolean allowOverwrite() {
-      return allow_overwrite_serialized_name;
+      return allowOverwrite;
     }
+
     private AddAudioOptions(AddAudioOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.audio_name_serialized_name, 'audio_name_serialized_name cannot be empty');
-      IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      audio_name_serialized_name = builder.audio_name_serialized_name;
-      audio_resource_serialized_name = builder.audio_resource_serialized_name;
-      content_type_serialized_name = builder.content_type_serialized_name;
-      contained_content_type_serialized_name = builder.contained_content_type_serialized_name;
-      allow_overwrite_serialized_name = builder.allow_overwrite_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.audioName, 'audioName cannot be empty');
+      IBMWatsonValidator.isTrue(builder.contentType != null, 'contentType cannot be null');
+      customizationId = builder.customizationId;
+      audioName = builder.audioName;
+      audioResource = builder.audioResource;
+      contentType = builder.contentType;
+      containedContentType = builder.containedContentType;
+      allowOverwrite = builder.allowOverwrite;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -428,20 +439,20 @@ public class IBMSpeechToTextV1Models {
    * AddAudioOptions Builder.
    */
   public class AddAudioOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String audio_name_serialized_name;
-    private IBMWatsonFile audio_resource_serialized_name;
-    private String content_type_serialized_name;
-    private String contained_content_type_serialized_name;
-    private Boolean allow_overwrite_serialized_name;
+    private String customizationId;
+    private String audioName;
+    private IBMWatsonFile audioResource;
+    private String contentType;
+    private String containedContentType;
+    private Boolean allowOverwrite;
 
     private AddAudioOptionsBuilder(AddAudioOptions addAudioOptions) {
-      customization_id_serialized_name = addAudioOptions.customization_id_serialized_name;
-      audio_name_serialized_name = addAudioOptions.audio_name_serialized_name;
-      audio_resource_serialized_name = addAudioOptions.audio_resource_serialized_name;
-      content_type_serialized_name = addAudioOptions.content_type_serialized_name;
-      contained_content_type_serialized_name = addAudioOptions.contained_content_type_serialized_name;
-      allow_overwrite_serialized_name = addAudioOptions.allow_overwrite_serialized_name;
+      customizationId = addAudioOptions.customizationId;
+      audioName = addAudioOptions.audioName;
+      audioResource = addAudioOptions.audioResource;
+      contentType = addAudioOptions.contentType;
+      containedContentType = addAudioOptions.containedContentType;
+      allowOverwrite = addAudioOptions.allowOverwrite;
       this.requestHeaders.putAll(addAudioOptions.requestHeaders());
     }
 
@@ -458,8 +469,8 @@ public class IBMSpeechToTextV1Models {
      * @param audioName the audioName
      */
     public AddAudioOptionsBuilder(String customizationId, String audioName) {
-      this.customization_id_serialized_name = customizationId;
-      this.audio_name_serialized_name = audioName;
+      this.customizationId = customizationId;
+      this.audioName = audioName;
     }
 
     /**
@@ -472,81 +483,68 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the AddAudioOptions builder
      */
     public AddAudioOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the audio_name_serialized_name.
+     * Set the audioName.
      *
      * @param audioName the audioName
      * @return the AddAudioOptions builder
      */
     public AddAudioOptionsBuilder audioName(String audioName) {
-      this.audio_name_serialized_name = audioName;
+      this.audioName = audioName;
       return this;
     }
 
     /**
-     * Set the audio_resource_serialized_name.
+     * Set the audioResource.
      *
      * @param audioResource the audioResource
      * @return the AddAudioOptions builder
      */
     public AddAudioOptionsBuilder audioResource(IBMWatsonFile audioResource) {
-      this.audio_resource_serialized_name = audioResource;
+      this.audioResource = audioResource;
       return this;
     }
 
     /**
-     * Set the audio_resource_serialized_name.
-     *
-     * @param audio the audio
-     * @return the AddAudioOptions builder
-     * 
-     * @deprecated This method was incorrectly named. Please use the audioResource() setter.
-     */
-    public AddAudioOptionsBuilder audio(IBMWatsonFile audio) {
-      this.audio_resource_serialized_name = audio;
-      return this;
-    }
-
-    /**
-     * Set the content_type_serialized_name.
+     * Set the contentType.
      *
      * @param contentType the contentType
      * @return the AddAudioOptions builder
      */
     public AddAudioOptionsBuilder contentType(String contentType) {
-      this.content_type_serialized_name = contentType;
+      this.contentType = contentType;
       return this;
     }
 
     /**
-     * Set the contained_content_type_serialized_name.
+     * Set the containedContentType.
      *
      * @param containedContentType the containedContentType
      * @return the AddAudioOptions builder
      */
     public AddAudioOptionsBuilder containedContentType(String containedContentType) {
-      this.contained_content_type_serialized_name = containedContentType;
+      this.containedContentType = containedContentType;
       return this;
     }
 
     /**
-     * Set the allow_overwrite_serialized_name.
+     * Set the allowOverwrite.
      *
      * @param allowOverwrite the allowOverwrite
      * @return the AddAudioOptions builder
      */
     public AddAudioOptionsBuilder allowOverwrite(Boolean allowOverwrite) {
-      this.allow_overwrite_serialized_name = allowOverwrite;
+      this.allowOverwrite = allowOverwrite;
       return this;
     }
 
@@ -567,24 +565,26 @@ public class IBMSpeechToTextV1Models {
    * The addCorpus options.
    */
   public class AddCorpusOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String corpus_name_serialized_name;
-    private IBMWatsonFile corpus_file_serialized_name;
-    private String corpus_filename_serialized_name;
-    private Boolean allow_overwrite_serialized_name;
+    private String customizationId;
+    private String corpusName;
+    private IBMWatsonFile corpusFile;
+    private String corpusFilename;
+    private Boolean allowOverwrite;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the corpus_name_serialized_name.
+     * Gets the corpusName.
      *
      * The name of the new corpus for the custom language model. Use a localized name that matches the language of the
      * custom model and reflects the contents of the corpus.
@@ -594,60 +594,58 @@ public class IBMSpeechToTextV1Models {
      * * Do not use the name `user`, which is reserved by the service to denote custom words that are added or modified
      * by the user.
      *
-     * @return the corpus_name_serialized_name
+     * @return the corpusName
      */
     public String corpusName() {
-      return corpus_name_serialized_name;
+      return corpusName;
     }
+ 
     /**
-     * Gets the corpus_file_serialized_name.
+     * Gets the corpusFile.
      *
      * A plain text file that contains the training data for the corpus. Encode the file in UTF-8 if it contains
      * non-ASCII characters; the service assumes UTF-8 encoding if it encounters non-ASCII characters. With cURL, use
      * the `--data-binary` option to upload the file for the request.
      *
-     * @return the corpus_file_serialized_name
+     * @return the corpusFile
      */
     public IBMWatsonFile corpusFile() {
-      return corpus_file_serialized_name;
+      return corpusFile;
     }
+ 
     /**
-     * Gets the corpus_filename_serialized_name.
+     * Gets the corpusFilename.
      *
      * The filename for corpus_file.
      *
-     * @return the corpus_filename_serialized_name
+     * @return the corpusFilename
      */
     public String corpusFilename() {
-      return corpus_filename_serialized_name;
+      return corpusFilename;
     }
+ 
     /**
-     * @deprecated This method was incorrectly defined and this value is not returned by the API call.
-     */
-    public String corpusFileContentType() {
-      return '';
-    }
-    /**
-     * Gets the allow_overwrite_serialized_name.
+     * Gets the allowOverwrite.
      *
      * If `true`, the specified corpus or audio resource overwrites an existing corpus or audio resource with the same
      * name. If `false`, the request fails if a corpus or audio resource with the same name already exists. The
      * parameter has no effect if a corpus or audio resource with the same name does not already exist.
      *
-     * @return the allow_overwrite_serialized_name
+     * @return the allowOverwrite
      */
     public Boolean allowOverwrite() {
-      return allow_overwrite_serialized_name;
+      return allowOverwrite;
     }
+
     private AddCorpusOptions(AddCorpusOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.corpus_name_serialized_name, 'corpus_name_serialized_name cannot be empty');
-      IBMWatsonValidator.notNull(builder.corpus_file_serialized_name, 'corpus_file_serialized_name cannot be null');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      corpus_name_serialized_name = builder.corpus_name_serialized_name;
-      corpus_file_serialized_name = builder.corpus_file_serialized_name;
-      corpus_filename_serialized_name = builder.corpus_filename_serialized_name;
-      allow_overwrite_serialized_name = builder.allow_overwrite_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.corpusName, 'corpusName cannot be empty');
+      IBMWatsonValidator.notNull(builder.corpusFile, 'corpusFile cannot be null');
+      customizationId = builder.customizationId;
+      corpusName = builder.corpusName;
+      corpusFile = builder.corpusFile;
+      corpusFilename = builder.corpusFilename;
+      allowOverwrite = builder.allowOverwrite;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -666,18 +664,18 @@ public class IBMSpeechToTextV1Models {
    * AddCorpusOptions Builder.
    */
   public class AddCorpusOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String corpus_name_serialized_name;
-    private IBMWatsonFile corpus_file_serialized_name;
-    private String corpus_filename_serialized_name;
-    private Boolean allow_overwrite_serialized_name;
+    private String customizationId;
+    private String corpusName;
+    private IBMWatsonFile corpusFile;
+    private String corpusFilename;
+    private Boolean allowOverwrite;
 
     private AddCorpusOptionsBuilder(AddCorpusOptions addCorpusOptions) {
-      customization_id_serialized_name = addCorpusOptions.customization_id_serialized_name;
-      corpus_name_serialized_name = addCorpusOptions.corpus_name_serialized_name;
-      corpus_file_serialized_name = addCorpusOptions.corpus_file_serialized_name;
-      corpus_filename_serialized_name = addCorpusOptions.corpus_filename_serialized_name;
-      allow_overwrite_serialized_name = addCorpusOptions.allow_overwrite_serialized_name;
+      customizationId = addCorpusOptions.customizationId;
+      corpusName = addCorpusOptions.corpusName;
+      corpusFile = addCorpusOptions.corpusFile;
+      corpusFilename = addCorpusOptions.corpusFilename;
+      allowOverwrite = addCorpusOptions.allowOverwrite;
       this.requestHeaders.putAll(addCorpusOptions.requestHeaders());
     }
 
@@ -695,9 +693,9 @@ public class IBMSpeechToTextV1Models {
      * @param corpusFile the corpusFile
      */
     public AddCorpusOptionsBuilder(String customizationId, String corpusName, IBMWatsonFile corpusFile) {
-      this.customization_id_serialized_name = customizationId;
-      this.corpus_name_serialized_name = corpusName;
-      this.corpus_file_serialized_name = corpusFile;
+      this.customizationId = customizationId;
+      this.corpusName = corpusName;
+      this.corpusFile = corpusFile;
     }
 
     /**
@@ -710,64 +708,57 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the AddCorpusOptions builder
      */
     public AddCorpusOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the corpus_name_serialized_name.
+     * Set the corpusName.
      *
      * @param corpusName the corpusName
      * @return the AddCorpusOptions builder
      */
     public AddCorpusOptionsBuilder corpusName(String corpusName) {
-      this.corpus_name_serialized_name = corpusName;
+      this.corpusName = corpusName;
       return this;
     }
 
     /**
-     * Set the corpus_file_serialized_name.
+     * Set the corpusFile.
      *
      * @param corpusFile the corpusFile
      * @return the AddCorpusOptions builder
      */
     public AddCorpusOptionsBuilder corpusFile(IBMWatsonFile corpusFile) {
-      this.corpus_file_serialized_name = corpusFile;
+      this.corpusFile = corpusFile;
       return this;
     }
 
     /**
-     * Set the corpus_filename_serialized_name.
+     * Set the corpusFilename.
      *
      * @param corpusFilename the corpusFilename
      * @return the AddCorpusOptions builder
      */
     public AddCorpusOptionsBuilder corpusFilename(String corpusFilename) {
-      this.corpus_filename_serialized_name = corpusFilename;
+      this.corpusFilename = corpusFilename;
       return this;
     }
 
     /**
-     * @deprecated This method was incorrectly defined and has no effect on the API call.
-     */
-    public AddCorpusOptionsBuilder corpusFileContentType(String corpusFileContentType) {
-      return this;
-    }
-
-    /**
-     * Set the allow_overwrite_serialized_name.
+     * Set the allowOverwrite.
      *
      * @param allowOverwrite the allowOverwrite
      * @return the AddCorpusOptions builder
      */
     public AddCorpusOptionsBuilder allowOverwrite(Boolean allowOverwrite) {
-      this.allow_overwrite_serialized_name = allowOverwrite;
+      this.allowOverwrite = allowOverwrite;
       return this;
     }
 
@@ -788,36 +779,39 @@ public class IBMSpeechToTextV1Models {
    * The addWord options.
    */
   public class AddWordOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String word_name_serialized_name;
-    private String word_serialized_name;
-    private List<String> sounds_like_serialized_name;
-    private String display_as_serialized_name;
+    private String customizationId;
+    private String wordName;
+    private String word;
+    private List<String> soundsLike;
+    private String displayAs;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the word_name_serialized_name.
+     * Gets the wordName.
      *
      * The custom word for the custom language model. When you add or update a custom word with the **Add a custom
      * word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
      * compound words.
      *
-     * @return the word_name_serialized_name
+     * @return the wordName
      */
     public String wordName() {
-      return word_name_serialized_name;
+      return wordName;
     }
+ 
     /**
-     * Gets the word_serialized_name.
+     * Gets the word.
      *
      * For the **Add custom words** method, you must specify the custom word that is to be added to or updated in the
      * custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
@@ -825,13 +819,14 @@ public class IBMSpeechToTextV1Models {
      *
      * Omit this field for the **Add a custom word** method.
      *
-     * @return the word_serialized_name
+     * @return the word
      */
     public String word() {
-      return word_serialized_name;
+      return word;
     }
+ 
     /**
-     * Gets the sounds_like_serialized_name.
+     * Gets the soundsLike.
      *
      * An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce,
      * foreign words, acronyms, and so on can be pronounced by users.
@@ -844,31 +839,33 @@ public class IBMSpeechToTextV1Models {
      * A word can have at most five sounds-like pronunciations. A pronunciation can include at most 40 characters not
      * including spaces.
      *
-     * @return the sounds_like_serialized_name
+     * @return the soundsLike
      */
     public List<String> soundsLike() {
-      return sounds_like_serialized_name;
+      return soundsLike;
     }
+ 
     /**
-     * Gets the display_as_serialized_name.
+     * Gets the displayAs.
      *
      * An alternative spelling for the custom word when it appears in a transcript. Use the parameter when you want the
      * word to have a spelling that is different from its usual representation or from its spelling in corpora training
      * data.
      *
-     * @return the display_as_serialized_name
+     * @return the displayAs
      */
     public String displayAs() {
-      return display_as_serialized_name;
+      return displayAs;
     }
+
     private AddWordOptions(AddWordOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.word_name_serialized_name, 'word_name_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      word_name_serialized_name = builder.word_name_serialized_name;
-      word_serialized_name = builder.word_serialized_name;
-      sounds_like_serialized_name = builder.sounds_like_serialized_name;
-      display_as_serialized_name = builder.display_as_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.wordName, 'wordName cannot be empty');
+      customizationId = builder.customizationId;
+      wordName = builder.wordName;
+      word = builder.word;
+      soundsLike = builder.soundsLike;
+      displayAs = builder.displayAs;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -887,18 +884,18 @@ public class IBMSpeechToTextV1Models {
    * AddWordOptions Builder.
    */
   public class AddWordOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String word_name_serialized_name;
-    private String word_serialized_name;
-    private List<String> sounds_like_serialized_name;
-    private String display_as_serialized_name;
+    private String customizationId;
+    private String wordName;
+    private String word;
+    private List<String> soundsLike;
+    private String displayAs;
 
     private AddWordOptionsBuilder(AddWordOptions addWordOptions) {
-      customization_id_serialized_name = addWordOptions.customization_id_serialized_name;
-      word_name_serialized_name = addWordOptions.word_name_serialized_name;
-      word_serialized_name = addWordOptions.word_serialized_name;
-      sounds_like_serialized_name = addWordOptions.sounds_like_serialized_name;
-      display_as_serialized_name = addWordOptions.display_as_serialized_name;
+      customizationId = addWordOptions.customizationId;
+      wordName = addWordOptions.wordName;
+      word = addWordOptions.word;
+      soundsLike = addWordOptions.soundsLike;
+      displayAs = addWordOptions.displayAs;
       this.requestHeaders.putAll(addWordOptions.requestHeaders());
     }
 
@@ -915,8 +912,8 @@ public class IBMSpeechToTextV1Models {
      * @param wordName the wordName
      */
     public AddWordOptionsBuilder(String customizationId, String wordName) {
-      this.customization_id_serialized_name = customizationId;
-      this.word_name_serialized_name = wordName;
+      this.customizationId = customizationId;
+      this.wordName = wordName;
     }
 
     /**
@@ -929,73 +926,73 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Adds an soundsLike to sounds_like_serialized_name.
+     * Adds an soundsLike to soundsLike.
      *
      * @param soundsLike the new soundsLike
      * @return the AddWordOptions builder
      */
     public AddWordOptionsBuilder addSoundsLike(String soundsLike) {
       IBMWatsonValidator.notNull(soundsLike, 'soundsLike cannot be null');
-      if (this.sounds_like_serialized_name == null) {
-        this.sounds_like_serialized_name = new List<String>();
+      if (this.soundsLike == null) {
+        this.soundsLike = new List<String>();
       }
-      this.sounds_like_serialized_name.add(soundsLike);
+      this.soundsLike.add(soundsLike);
       return this;
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the AddWordOptions builder
      */
     public AddWordOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the word_name_serialized_name.
+     * Set the wordName.
      *
      * @param wordName the wordName
      * @return the AddWordOptions builder
      */
     public AddWordOptionsBuilder wordName(String wordName) {
-      this.word_name_serialized_name = wordName;
+      this.wordName = wordName;
       return this;
     }
 
     /**
-     * Set the word_serialized_name.
+     * Set the word.
      *
      * @param word the word
      * @return the AddWordOptions builder
      */
     public AddWordOptionsBuilder word(String word) {
-      this.word_serialized_name = word;
+      this.word = word;
       return this;
     }
 
     /**
-     * Set the sounds_like_serialized_name.
-     * Existing sounds_like_serialized_name will be replaced.
+     * Set the soundsLike.
+     * Existing soundsLike will be replaced.
      *
      * @param soundsLike the soundsLike
      * @return the AddWordOptions builder
      */
     public AddWordOptionsBuilder soundsLike(List<String> soundsLike) {
-      this.sounds_like_serialized_name = soundsLike;
+      this.soundsLike = soundsLike;
       return this;
     }
 
     /**
-     * Set the display_as_serialized_name.
+     * Set the displayAs.
      *
      * @param displayAs the displayAs
      * @return the AddWordOptions builder
      */
     public AddWordOptionsBuilder displayAs(String displayAs) {
-      this.display_as_serialized_name = displayAs;
+      this.displayAs = displayAs;
       return this;
     }
 
@@ -1016,35 +1013,38 @@ public class IBMSpeechToTextV1Models {
    * The addWords options.
    */
   public class AddWordsOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private List<CustomWord> words_serialized_name;
+    private String customizationId;
+    private List<CustomWord> words;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the words_serialized_name.
+     * Gets the words.
      *
      * An array of objects that provides information about each custom word that is to be added to or updated in the
      * custom language model.
      *
-     * @return the words_serialized_name
+     * @return the words
      */
     public List<CustomWord> words() {
-      return words_serialized_name;
+      return words;
     }
+
     private AddWordsOptions(AddWordsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notNull(builder.words_serialized_name, 'words_serialized_name cannot be null');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      words_serialized_name = builder.words_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notNull(builder.words, 'words cannot be null');
+      customizationId = builder.customizationId;
+      words = builder.words;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1063,12 +1063,12 @@ public class IBMSpeechToTextV1Models {
    * AddWordsOptions Builder.
    */
   public class AddWordsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private List<CustomWord> words_serialized_name;
+    private String customizationId;
+    private List<CustomWord> words;
 
     private AddWordsOptionsBuilder(AddWordsOptions addWordsOptions) {
-      customization_id_serialized_name = addWordsOptions.customization_id_serialized_name;
-      words_serialized_name = addWordsOptions.words_serialized_name;
+      customizationId = addWordsOptions.customizationId;
+      words = addWordsOptions.words;
       this.requestHeaders.putAll(addWordsOptions.requestHeaders());
     }
 
@@ -1085,8 +1085,8 @@ public class IBMSpeechToTextV1Models {
      * @param words the words
      */
     public AddWordsOptionsBuilder(String customizationId, List<CustomWord> words) {
-      this.customization_id_serialized_name = customizationId;
-      this.words_serialized_name = words;
+      this.customizationId = customizationId;
+      this.words = words;
     }
 
     /**
@@ -1099,40 +1099,40 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Adds an words to words_serialized_name.
+     * Adds an words to words.
      *
      * @param words the new words
      * @return the AddWordsOptions builder
      */
     public AddWordsOptionsBuilder addWords(CustomWord words) {
       IBMWatsonValidator.notNull(words, 'words cannot be null');
-      if (this.words_serialized_name == null) {
-        this.words_serialized_name = new List<CustomWord>();
+      if (this.words == null) {
+        this.words = new List<CustomWord>();
       }
-      this.words_serialized_name.add(words);
+      this.words.add(words);
       return this;
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the AddWordsOptions builder
      */
     public AddWordsOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the words_serialized_name.
-     * Existing words_serialized_name will be replaced.
+     * Set the words.
+     * Existing words will be replaced.
      *
      * @param words the words
      * @return the AddWordsOptions builder
      */
     public AddWordsOptionsBuilder words(List<CustomWord> words) {
-      this.words_serialized_name = words;
+      this.words = words;
       return this;
     }
 
@@ -1157,8 +1157,9 @@ public class IBMSpeechToTextV1Models {
     private String codec_serialized_name;
     private Long frequency_serialized_name;
     private String compression_serialized_name;
+ 
     /**
-     * Gets the type_serialized_name.
+     * Gets the xtype.
      *
      * The type of the audio resource:
      * * `audio` for an individual audio file
@@ -1166,37 +1167,40 @@ public class IBMSpeechToTextV1Models {
      * * `undetermined` for a resource that the service cannot validate (for example, if the user mistakenly passes a
      * file that does not contain audio, such as a JPEG file).
      *
-     * @return the type_serialized_name
+     * @return the xtype
      */
     @AuraEnabled
-    public String getType() {
+    public String getXtype() {
       return type_serialized_name;
     }
+ 
     /**
-     * Gets the codec_serialized_name.
+     * Gets the codec.
      *
      * **For an audio-type resource,** the codec in which the audio is encoded. Omitted for an archive-type resource.
      *
-     * @return the codec_serialized_name
+     * @return the codec
      */
     @AuraEnabled
     public String getCodec() {
       return codec_serialized_name;
     }
+ 
     /**
-     * Gets the frequency_serialized_name.
+     * Gets the frequency.
      *
      * **For an audio-type resource,** the sampling rate of the audio in Hertz (samples per second). Omitted for an
      * archive-type resource.
      *
-     * @return the frequency_serialized_name
+     * @return the frequency
      */
     @AuraEnabled
     public Long getFrequency() {
       return frequency_serialized_name;
     }
+ 
     /**
-     * Gets the compression_serialized_name.
+     * Gets the compression.
      *
      * **For an archive-type resource,** the format of the compressed archive:
      * * `zip` for a **.zip** file
@@ -1204,7 +1208,7 @@ public class IBMSpeechToTextV1Models {
      *
      * Omitted for an audio-type resource.
      *
-     * @return the compression_serialized_name
+     * @return the compression
      */
     @AuraEnabled
     public String getCompression() {
@@ -1212,16 +1216,16 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the type_serialized_name.
+     * Sets the xtype.
      *
-     * @param typeVar the new typeVar
+     * @param xtype the new xtype
      */
-    public void setType(final String typeVar) {
-      this.type_serialized_name = typeVar;
+    public void setXtype(final String xtype) {
+      this.type_serialized_name = xtype;
     }
 
     /**
-     * Sets the codec_serialized_name.
+     * Sets the codec.
      *
      * @param codec the new codec
      */
@@ -1230,7 +1234,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the frequency_serialized_name.
+     * Sets the frequency.
      *
      * @param frequency the new frequency
      */
@@ -1239,7 +1243,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the compression_serialized_name.
+     * Sets the compression.
      *
      * @param compression the new compression
      */
@@ -1268,43 +1272,47 @@ public class IBMSpeechToTextV1Models {
     private String status_serialized_name;
     private AudioResource container_serialized_name;
     private List<AudioResource> audio_serialized_name;
+ 
     /**
-     * Gets the duration_serialized_name.
+     * Gets the duration.
      *
      * **For an audio-type resource,**  the total seconds of audio in the resource. The value is always a whole number.
      * Omitted for an archive-type resource.
      *
-     * @return the duration_serialized_name
+     * @return the duration
      */
     @AuraEnabled
     public Double getDuration() {
       return duration_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * **For an audio-type resource,** the user-specified name of the resource. Omitted for an archive-type resource.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the details_serialized_name.
+     * Gets the details.
      *
      * **For an audio-type resource,** an `AudioDetails` object that provides detailed information about the resource.
      * The object is empty until the service finishes processing the audio. Omitted for an archive-type resource.
      *
-     * @return the details_serialized_name
+     * @return the details
      */
     @AuraEnabled
     public AudioDetails getDetails() {
       return details_serialized_name;
     }
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * **For an audio-type resource,** the status of the resource:
      * * `ok` indicates that the service has successfully analyzed the audio data. The data can be used to train the
@@ -1316,31 +1324,33 @@ public class IBMSpeechToTextV1Models {
      *
      * Omitted for an archive-type resource.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
       return status_serialized_name;
     }
+ 
     /**
-     * Gets the container_serialized_name.
+     * Gets the container.
      *
      * **For an archive-type resource,** an object of type `AudioResource` that provides information about the resource.
      * Omitted for an audio-type resource.
      *
-     * @return the container_serialized_name
+     * @return the container
      */
     @AuraEnabled
     public AudioResource getContainer() {
       return container_serialized_name;
     }
+ 
     /**
-     * Gets the audio_serialized_name.
+     * Gets the audio.
      *
      * **For an archive-type resource,** an array of `AudioResource` objects that provides information about the
      * audio-type resources that are contained in the resource. Omitted for an audio-type resource.
      *
-     * @return the audio_serialized_name
+     * @return the audio
      */
     @AuraEnabled
     public List<AudioResource> getAudio() {
@@ -1348,7 +1358,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the duration_serialized_name.
+     * Sets the duration.
      *
      * @param duration the new duration
      */
@@ -1357,7 +1367,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -1366,7 +1376,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the details_serialized_name.
+     * Sets the details.
      *
      * @param details the new details
      */
@@ -1375,7 +1385,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the status_serialized_name.
+     * Sets the status.
      *
      * @param status the new status
      */
@@ -1384,7 +1394,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the container_serialized_name.
+     * Sets the container.
      *
      * @param container the new container
      */
@@ -1393,7 +1403,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the audio_serialized_name.
+     * Sets the audio.
      *
      * @param audio the new audio
      */
@@ -1408,15 +1418,15 @@ public class IBMSpeechToTextV1Models {
 
       AudioListing ret = (AudioListing) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for details_serialized_name
+      // calling custom deserializer for details
       AudioDetails newDetails = (AudioDetails) new AudioDetails().deserialize(JSON.serialize(ret.getDetails()), (Map<String, Object>) jsonMap.get('details_serialized_name'), AudioDetails.class);
       ret.setDetails(newDetails);
 
-      // calling custom deserializer for container_serialized_name
+      // calling custom deserializer for container
       AudioResource newContainer = (AudioResource) new AudioResource().deserialize(JSON.serialize(ret.getContainer()), (Map<String, Object>) jsonMap.get('container_serialized_name'), AudioResource.class);
       ret.setContainer(newContainer);
 
-      // calling custom deserializer for audio_serialized_name
+      // calling custom deserializer for audio
       List<AudioResource> newAudio = new List<AudioResource>();
       List<AudioResource> deserializedAudio = ret.getAudio();
       if (deserializedAudio != null) {
@@ -1441,45 +1451,49 @@ public class IBMSpeechToTextV1Models {
     private String name_serialized_name;
     private AudioDetails details_serialized_name;
     private String status_serialized_name;
+ 
     /**
-     * Gets the duration_serialized_name.
+     * Gets the duration.
      *
      * The total seconds of audio in the audio resource. The value is always a whole number.
      *
-     * @return the duration_serialized_name
+     * @return the duration
      */
     @AuraEnabled
     public Double getDuration() {
       return duration_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * **For an archive-type resource,** the user-specified name of the resource.
      *
      * **For an audio-type resource,** the user-specified name of the resource or the name of the audio file that the
      * user added for the resource. The value depends on the method that is called.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the details_serialized_name.
+     * Gets the details.
      *
      * An `AudioDetails` object that provides detailed information about the audio resource. The object is empty until
      * the service finishes processing the audio.
      *
-     * @return the details_serialized_name
+     * @return the details
      */
     @AuraEnabled
     public AudioDetails getDetails() {
       return details_serialized_name;
     }
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * The status of the audio resource:
      * * `ok` indicates that the service has successfully analyzed the audio data. The data can be used to train the
@@ -1490,7 +1504,7 @@ public class IBMSpeechToTextV1Models {
      * wrong format or sampling rate, or because it is corrupted). For an archive file, the entire archive is invalid if
      * any of its audio files are invalid.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
@@ -1498,7 +1512,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the duration_serialized_name.
+     * Sets the duration.
      *
      * @param duration the new duration
      */
@@ -1507,7 +1521,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -1516,7 +1530,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the details_serialized_name.
+     * Sets the details.
      *
      * @param details the new details
      */
@@ -1525,7 +1539,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the status_serialized_name.
+     * Sets the status.
      *
      * @param status the new status
      */
@@ -1540,7 +1554,7 @@ public class IBMSpeechToTextV1Models {
 
       AudioResource ret = (AudioResource) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for details_serialized_name
+      // calling custom deserializer for details
       AudioDetails newDetails = (AudioDetails) new AudioDetails().deserialize(JSON.serialize(ret.getDetails()), (Map<String, Object>) jsonMap.get('details_serialized_name'), AudioDetails.class);
       ret.setDetails(newDetails);
 
@@ -1554,26 +1568,28 @@ public class IBMSpeechToTextV1Models {
   public class AudioResources extends IBMWatsonResponseModel {
     private Double total_minutes_of_audio_serialized_name;
     private List<AudioResource> audio_serialized_name;
+ 
     /**
-     * Gets the total_minutes_of_audio_serialized_name.
+     * Gets the totalMinutesOfAudio.
      *
      * The total minutes of accumulated audio summed over all of the valid audio resources for the custom acoustic
      * model. You can use this value to determine whether the custom model has too little or too much audio to begin
      * training.
      *
-     * @return the total_minutes_of_audio_serialized_name
+     * @return the totalMinutesOfAudio
      */
     @AuraEnabled
     public Double getTotalMinutesOfAudio() {
       return total_minutes_of_audio_serialized_name;
     }
+ 
     /**
-     * Gets the audio_serialized_name.
+     * Gets the audio.
      *
      * An array of objects that provides information about the audio resources of the custom acoustic model. The array
      * is empty if the custom model has no audio resources.
      *
-     * @return the audio_serialized_name
+     * @return the audio
      */
     @AuraEnabled
     public List<AudioResource> getAudio() {
@@ -1581,7 +1597,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the total_minutes_of_audio_serialized_name.
+     * Sets the totalMinutesOfAudio.
      *
      * @param totalMinutesOfAudio the new totalMinutesOfAudio
      */
@@ -1590,7 +1606,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the audio_serialized_name.
+     * Sets the audio.
      *
      * @param audio the new audio
      */
@@ -1605,7 +1621,7 @@ public class IBMSpeechToTextV1Models {
 
       AudioResources ret = (AudioResources) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for audio_serialized_name
+      // calling custom deserializer for audio
       List<AudioResource> newAudio = new List<AudioResource>();
       List<AudioResource> deserializedAudio = ret.getAudio();
       if (deserializedAudio != null) {
@@ -1626,20 +1642,22 @@ public class IBMSpeechToTextV1Models {
    * The checkJob options.
    */
   public class CheckJobOptions extends IBMWatsonOptionsModel {
-    private String id_serialized_name;
+    private String id;
+ 
     /**
-     * Gets the id_serialized_name.
+     * Gets the id.
      *
      * The ID of the asynchronous job.
      *
-     * @return the id_serialized_name
+     * @return the id
      */
     public String id() {
-      return id_serialized_name;
+      return id;
     }
+
     private CheckJobOptions(CheckJobOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.id_serialized_name, 'id_serialized_name cannot be empty');
-      id_serialized_name = builder.id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.id, 'id cannot be empty');
+      id = builder.id;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1658,10 +1676,10 @@ public class IBMSpeechToTextV1Models {
    * CheckJobOptions Builder.
    */
   public class CheckJobOptionsBuilder extends IBMWatsonOptionsModel {
-    private String id_serialized_name;
+    private String id;
 
     private CheckJobOptionsBuilder(CheckJobOptions checkJobOptions) {
-      id_serialized_name = checkJobOptions.id_serialized_name;
+      id = checkJobOptions.id;
       this.requestHeaders.putAll(checkJobOptions.requestHeaders());
     }
 
@@ -1677,7 +1695,7 @@ public class IBMSpeechToTextV1Models {
      * @param id the id
      */
     public CheckJobOptionsBuilder(String id) {
-      this.id_serialized_name = id;
+      this.id = id;
     }
 
     /**
@@ -1690,13 +1708,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the id_serialized_name.
+     * Set the id.
      *
      * @param id the id
      * @return the CheckJobOptions builder
      */
     public CheckJobOptionsBuilder id(String id) {
-      this.id_serialized_name = id;
+      this.id = id;
       return this;
     }
 
@@ -1717,6 +1735,7 @@ public class IBMSpeechToTextV1Models {
    * The checkJobs options.
    */
   public class CheckJobsOptions extends IBMWatsonOptionsModel {
+
     private CheckJobsOptions(CheckJobsOptionsBuilder builder) {
       this.requestHeaders = builder.requestHeaders;
     }
@@ -1774,13 +1793,14 @@ public class IBMSpeechToTextV1Models {
    */
   public class Corpora extends IBMWatsonResponseModel {
     private List<Corpus> corpora_serialized_name;
+ 
     /**
-     * Gets the corpora_serialized_name.
+     * Gets the corpora.
      *
      * An array of objects that provides information about the corpora for the custom model. The array is empty if the
      * custom model has no corpora.
      *
-     * @return the corpora_serialized_name
+     * @return the corpora
      */
     @AuraEnabled
     public List<Corpus> getCorpora() {
@@ -1788,7 +1808,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the corpora_serialized_name.
+     * Sets the corpora.
      *
      * @param corpora the new corpora
      */
@@ -1803,7 +1823,7 @@ public class IBMSpeechToTextV1Models {
 
       Corpora ret = (Corpora) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for corpora_serialized_name
+      // calling custom deserializer for corpora
       List<Corpus> newCorpora = new List<Corpus>();
       List<Corpus> deserializedCorpora = ret.getCorpora();
       if (deserializedCorpora != null) {
@@ -1829,41 +1849,45 @@ public class IBMSpeechToTextV1Models {
     private Long out_of_vocabulary_words_serialized_name;
     private String status_serialized_name;
     private String error_serialized_name;
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The name of the corpus.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the total_words_serialized_name.
+     * Gets the totalWords.
      *
      * The total number of words in the corpus. The value is `0` while the corpus is being processed.
      *
-     * @return the total_words_serialized_name
+     * @return the totalWords
      */
     @AuraEnabled
     public Long getTotalWords() {
       return total_words_serialized_name;
     }
+ 
     /**
-     * Gets the out_of_vocabulary_words_serialized_name.
+     * Gets the outOfVocabularyWords.
      *
      * The number of OOV words in the corpus. The value is `0` while the corpus is being processed.
      *
-     * @return the out_of_vocabulary_words_serialized_name
+     * @return the outOfVocabularyWords
      */
     @AuraEnabled
     public Long getOutOfVocabularyWords() {
       return out_of_vocabulary_words_serialized_name;
     }
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * The status of the corpus:
      * * `analyzed` indicates that the service has successfully analyzed the corpus; the custom model can be trained
@@ -1872,19 +1896,20 @@ public class IBMSpeechToTextV1Models {
      * to add new corpora or words, or to train the custom model.
      * * `undetermined` indicates that the service encountered an error while processing the corpus.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
       return status_serialized_name;
     }
+ 
     /**
-     * Gets the error_serialized_name.
+     * Gets the error.
      *
      * If the status of the corpus is `undetermined`, the following message: `Analysis of corpus 'name' failed. Please
      * try adding the corpus again by setting the 'allow_overwrite' flag to 'true'`.
      *
-     * @return the error_serialized_name
+     * @return the error
      */
     @AuraEnabled
     public String getError() {
@@ -1892,7 +1917,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -1901,7 +1926,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the total_words_serialized_name.
+     * Sets the totalWords.
      *
      * @param totalWords the new totalWords
      */
@@ -1910,7 +1935,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the out_of_vocabulary_words_serialized_name.
+     * Sets the outOfVocabularyWords.
      *
      * @param outOfVocabularyWords the new outOfVocabularyWords
      */
@@ -1919,7 +1944,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the status_serialized_name.
+     * Sets the status.
      *
      * @param status the new status
      */
@@ -1928,7 +1953,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the error_serialized_name.
+     * Sets the error.
      *
      * @param error the new error
      */
@@ -1951,51 +1976,55 @@ public class IBMSpeechToTextV1Models {
    * The createAcousticModel options.
    */
   public class CreateAcousticModelOptions extends IBMWatsonOptionsModel {
-    private String name_serialized_name;
-    private String base_model_name_serialized_name;
-    private String description_serialized_name;
+    private String name;
+    private String baseModelName;
+    private String description;
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * A user-defined name for the new custom acoustic model. Use a name that is unique among all custom acoustic models
      * that you own. Use a localized name that matches the language of the custom model. Use a name that describes the
      * acoustic environment of the custom model, such as `Mobile custom model` or `Noisy car custom model`.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     public String name() {
-      return name_serialized_name;
+      return name;
     }
+ 
     /**
-     * Gets the base_model_name_serialized_name.
+     * Gets the baseModelName.
      *
      * The name of the base language model that is to be customized by the new custom acoustic model. The new custom
      * model can be used only with the base model that it customizes. To determine whether a base model supports
      * acoustic model customization, refer to [Language support for
      * customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
      *
-     * @return the base_model_name_serialized_name
+     * @return the baseModelName
      */
     public String baseModelName() {
-      return base_model_name_serialized_name;
+      return baseModelName;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * A description of the new custom acoustic model. Use a localized description that matches the language of the
      * custom model.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     public String description() {
-      return description_serialized_name;
+      return description;
     }
+
     private CreateAcousticModelOptions(CreateAcousticModelOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.name_serialized_name, 'name_serialized_name cannot be null');
-      IBMWatsonValidator.notNull(builder.base_model_name_serialized_name, 'base_model_name_serialized_name cannot be null');
-      name_serialized_name = builder.name_serialized_name;
-      base_model_name_serialized_name = builder.base_model_name_serialized_name;
-      description_serialized_name = builder.description_serialized_name;
+      IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
+      IBMWatsonValidator.notNull(builder.baseModelName, 'baseModelName cannot be null');
+      name = builder.name;
+      baseModelName = builder.baseModelName;
+      description = builder.description;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2014,14 +2043,14 @@ public class IBMSpeechToTextV1Models {
    * CreateAcousticModelOptions Builder.
    */
   public class CreateAcousticModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String name_serialized_name;
-    private String base_model_name_serialized_name;
-    private String description_serialized_name;
+    private String name;
+    private String baseModelName;
+    private String description;
 
     private CreateAcousticModelOptionsBuilder(CreateAcousticModelOptions createAcousticModelOptions) {
-      name_serialized_name = createAcousticModelOptions.name_serialized_name;
-      base_model_name_serialized_name = createAcousticModelOptions.base_model_name_serialized_name;
-      description_serialized_name = createAcousticModelOptions.description_serialized_name;
+      name = createAcousticModelOptions.name;
+      baseModelName = createAcousticModelOptions.baseModelName;
+      description = createAcousticModelOptions.description;
       this.requestHeaders.putAll(createAcousticModelOptions.requestHeaders());
     }
 
@@ -2038,8 +2067,8 @@ public class IBMSpeechToTextV1Models {
      * @param baseModelName the baseModelName
      */
     public CreateAcousticModelOptionsBuilder(String name, String baseModelName) {
-      this.name_serialized_name = name;
-      this.base_model_name_serialized_name = baseModelName;
+      this.name = name;
+      this.baseModelName = baseModelName;
     }
 
     /**
@@ -2052,35 +2081,35 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the name_serialized_name.
+     * Set the name.
      *
      * @param name the name
      * @return the CreateAcousticModelOptions builder
      */
     public CreateAcousticModelOptionsBuilder name(String name) {
-      this.name_serialized_name = name;
+      this.name = name;
       return this;
     }
 
     /**
-     * Set the base_model_name_serialized_name.
+     * Set the baseModelName.
      *
      * @param baseModelName the baseModelName
      * @return the CreateAcousticModelOptions builder
      */
     public CreateAcousticModelOptionsBuilder baseModelName(String baseModelName) {
-      this.base_model_name_serialized_name = baseModelName;
+      this.baseModelName = baseModelName;
       return this;
     }
 
     /**
-     * Set the description_serialized_name.
+     * Set the description.
      *
      * @param description the description
      * @return the CreateAcousticModelOptions builder
      */
     public CreateAcousticModelOptionsBuilder description(String description) {
-      this.description_serialized_name = description;
+      this.description = description;
       return this;
     }
 
@@ -2101,63 +2130,63 @@ public class IBMSpeechToTextV1Models {
    * The createJob options.
    */
   public class CreateJobOptions extends IBMWatsonOptionsModel {
-    private IBMWatsonFile audio_serialized_name;
-    private String content_type_serialized_name;
-    private String model_serialized_name;
-    private String callback_url_serialized_name;
-    private String events_serialized_name;
-    private String user_token_serialized_name;
-    private Long results_ttl_serialized_name;
-    private String customization_id_serialized_name;
-    private String acoustic_customization_id_serialized_name;
-    private String base_model_version_serialized_name;
-    private Double customization_weight_serialized_name;
-    private Long inactivity_timeout_serialized_name;
-    private List<String> keywords_serialized_name;
-    private Double keywords_threshold_serialized_name;
-    private Long max_alternatives_serialized_name;
-    private Double word_alternatives_threshold_serialized_name;
-    private Boolean word_confidence_serialized_name;
-    private Boolean timestamps_serialized_name;
-    private Boolean profanity_filter_serialized_name;
-    private Boolean smart_formatting_serialized_name;
-    private Boolean speaker_labels_serialized_name;
+    private IBMWatsonFile audio;
+    private String contentType;
+    private String model;
+    private String callbackUrl;
+    private String events;
+    private String userToken;
+    private Long resultsTtl;
+    private String customizationId;
+    private String acousticCustomizationId;
+    private String baseModelVersion;
+    private Double customizationWeight;
+    private Long inactivityTimeout;
+    private List<String> keywords;
+    private Double keywordsThreshold;
+    private Long maxAlternatives;
+    private Double wordAlternativesThreshold;
+    private Boolean wordConfidence;
+    private Boolean timestamps;
+    private Boolean profanityFilter;
+    private Boolean smartFormatting;
+    private Boolean speakerLabels;
+ 
     /**
-     * Gets the audio_serialized_name.
+     * Gets the audio.
      *
-     * @return the audio_serialized_name
+     * The audio to transcribe in the format specified by the `Content-Type` header.
+     *
+     * @return the audio
      */
     public IBMWatsonFile audio() {
-      return audio_serialized_name;
+      return audio;
     }
+ 
     /**
-     * @deprecated This method was incorrectly defined and this value is not returned by the API call.
-     */
-    public String audioFilename() {
-      return '';
-    }
-    /**
-     * Gets the content_type_serialized_name.
+     * Gets the contentType.
      *
      * The type of the input.
      *
-     * @return the content_type_serialized_name
+     * @return the contentType
      */
     public String contentType() {
-      return content_type_serialized_name;
+      return contentType;
     }
+ 
     /**
-     * Gets the model_serialized_name.
+     * Gets the model.
      *
      * The identifier of the model that is to be used for the recognition request.
      *
-     * @return the model_serialized_name
+     * @return the model
      */
     public String model() {
-      return model_serialized_name;
+      return model;
     }
+ 
     /**
-     * Gets the callback_url_serialized_name.
+     * Gets the callbackUrl.
      *
      * A URL to which callback notifications are to be sent. The URL must already be successfully white-listed by using
      * the **Register a callback** method. You can include the same callback URL with any number of job creation
@@ -2166,13 +2195,14 @@ public class IBMSpeechToTextV1Models {
      * Use the `user_token` parameter to specify a unique user-specified string with each job to differentiate the
      * callback notifications for the jobs.
      *
-     * @return the callback_url_serialized_name
+     * @return the callbackUrl
      */
     public String callbackUrl() {
-      return callback_url_serialized_name;
+      return callbackUrl;
     }
+ 
     /**
-     * Gets the events_serialized_name.
+     * Gets the events.
      *
      * If the job includes a callback URL, a comma-separated list of notification events to which to subscribe. Valid
      * events are
@@ -2191,77 +2221,85 @@ public class IBMSpeechToTextV1Models {
      * `recognitions.started`, `recognitions.completed`, and `recognitions.failed`. If the job does not include a
      * callback URL, omit the parameter.
      *
-     * @return the events_serialized_name
+     * @return the events
      */
     public String events() {
-      return events_serialized_name;
+      return events;
     }
+ 
     /**
-     * Gets the user_token_serialized_name.
+     * Gets the userToken.
      *
      * If the job includes a callback URL, a user-specified string that the service is to include with each callback
      * notification for the job; the token allows the user to maintain an internal mapping between jobs and notification
      * events. If the job does not include a callback URL, omit the parameter.
      *
-     * @return the user_token_serialized_name
+     * @return the userToken
      */
     public String userToken() {
-      return user_token_serialized_name;
+      return userToken;
     }
+ 
     /**
-     * Gets the results_ttl_serialized_name.
+     * Gets the resultsTtl.
      *
      * The number of minutes for which the results are to be available after the job has finished. If not delivered via
      * a callback, the results must be retrieved within this time. Omit the parameter to use a time to live of one week.
      * The parameter is valid with or without a callback URL.
      *
-     * @return the results_ttl_serialized_name
+     * @return the resultsTtl
      */
     public Long resultsTtl() {
-      return results_ttl_serialized_name;
+      return resultsTtl;
     }
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of a custom language model that is to be used with the recognition request. The base
      * model of the specified custom language model must match the model specified with the `model` parameter. You must
      * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom language model is used.
+     * default, no custom language model is used. See [Custom
+     * models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the acoustic_customization_id_serialized_name.
+     * Gets the acousticCustomizationId.
      *
      * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request. The base
      * model of the specified custom acoustic model must match the model specified with the `model` parameter. You must
      * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom acoustic model is used.
+     * default, no custom acoustic model is used. See [Custom
+     * models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
      *
-     * @return the acoustic_customization_id_serialized_name
+     * @return the acousticCustomizationId
      */
     public String acousticCustomizationId() {
-      return acoustic_customization_id_serialized_name;
+      return acousticCustomizationId;
     }
+ 
     /**
-     * Gets the base_model_version_serialized_name.
+     * Gets the baseModelVersion.
      *
      * The version of the specified base model that is to be used with recognition request. Multiple versions of a base
      * model can exist when a model is updated for internal improvements. The parameter is intended primarily for use
      * with custom models that have been upgraded for a new base model. The default value depends on whether the
-     * parameter is used with or without a custom model. For more information, see [Base model
+     * parameter is used with or without a custom model. See [Base model
      * version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
      *
-     * @return the base_model_version_serialized_name
+     * @return the baseModelVersion
      */
     public String baseModelVersion() {
-      return base_model_version_serialized_name;
+      return baseModelVersion;
     }
+ 
     /**
-     * Gets the customization_weight_serialized_name.
+     * Gets the customizationWeight.
      *
      * If you specify the customization ID (GUID) of a custom language model with the recognition request, the
      * customization weight tells the service how much weight to give to words from the custom language model compared
@@ -2275,158 +2313,179 @@ public class IBMSpeechToTextV1Models {
      * of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
      * of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
      *
-     * @return the customization_weight_serialized_name
+     * See [Custom models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
+     *
+     * @return the customizationWeight
      */
     public Double customizationWeight() {
-      return customization_weight_serialized_name;
+      return customizationWeight;
     }
+ 
     /**
-     * Gets the inactivity_timeout_serialized_name.
+     * Gets the inactivityTimeout.
      *
      * The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
      * closed with a 400 error. The parameter is useful for stopping audio submission from a live microphone when a user
-     * simply walks away. Use `-1` for infinity.
+     * simply walks away. Use `-1` for infinity. See
+     * [Timeouts](https://console.bluemix.net/docs/services/speech-to-text/input.html#timeouts).
      *
-     * @return the inactivity_timeout_serialized_name
+     * @return the inactivityTimeout
      */
     public Long inactivityTimeout() {
-      return inactivity_timeout_serialized_name;
+      return inactivityTimeout;
     }
+ 
     /**
-     * Gets the keywords_serialized_name.
+     * Gets the keywords.
      *
      * An array of keyword strings to spot in the audio. Each keyword string can include one or more string tokens.
      * Keywords are spotted only in the final results, not in interim hypotheses. If you specify any keywords, you must
      * also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an
-     * empty array if you do not need to spot keywords.
+     * empty array if you do not need to spot keywords. See [Keyword
+     * spotting](https://console.bluemix.net/docs/services/speech-to-text/output.html#keyword_spotting).
      *
-     * @return the keywords_serialized_name
+     * @return the keywords
      */
     public List<String> keywords() {
-      return keywords_serialized_name;
+      return keywords;
     }
+ 
     /**
-     * Gets the keywords_threshold_serialized_name.
+     * Gets the keywordsThreshold.
      *
      * A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
      * confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. No keyword
      * spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
-     * keywords.
+     * keywords. See [Keyword
+     * spotting](https://console.bluemix.net/docs/services/speech-to-text/output.html#keyword_spotting).
      *
-     * @return the keywords_threshold_serialized_name
+     * @return the keywordsThreshold
      */
     public Double keywordsThreshold() {
-      return keywords_threshold_serialized_name;
+      return keywordsThreshold;
     }
+ 
     /**
-     * Gets the max_alternatives_serialized_name.
+     * Gets the maxAlternatives.
      *
      * The maximum number of alternative transcripts that the service is to return. By default, a single transcription
-     * is returned.
+     * is returned. See [Maximum
+     * alternatives](https://console.bluemix.net/docs/services/speech-to-text/output.html#max_alternatives).
      *
-     * @return the max_alternatives_serialized_name
+     * @return the maxAlternatives
      */
     public Long maxAlternatives() {
-      return max_alternatives_serialized_name;
+      return maxAlternatives;
     }
+ 
     /**
-     * Gets the word_alternatives_threshold_serialized_name.
+     * Gets the wordAlternativesThreshold.
      *
      * A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also
      * known as "Confusion Networks"). An alternative word is considered if its confidence is greater than or equal to
      * the threshold. Specify a probability between 0.0 and 1.0. No alternative words are computed if you omit the
-     * parameter.
+     * parameter. See [Word
+     * alternatives](https://console.bluemix.net/docs/services/speech-to-text/output.html#word_alternatives).
      *
-     * @return the word_alternatives_threshold_serialized_name
+     * @return the wordAlternativesThreshold
      */
     public Double wordAlternativesThreshold() {
-      return word_alternatives_threshold_serialized_name;
+      return wordAlternativesThreshold;
     }
+ 
     /**
-     * Gets the word_confidence_serialized_name.
+     * Gets the wordConfidence.
      *
      * If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for each word. By default, no word
-     * confidence measures are returned.
+     * confidence measures are returned. See [Word
+     * confidence](https://console.bluemix.net/docs/services/speech-to-text/output.html#word_confidence).
      *
-     * @return the word_confidence_serialized_name
+     * @return the wordConfidence
      */
     public Boolean wordConfidence() {
-      return word_confidence_serialized_name;
+      return wordConfidence;
     }
+ 
     /**
-     * Gets the timestamps_serialized_name.
+     * Gets the timestamps.
      *
-     * If `true`, the service returns time alignment for each word. By default, no timestamps are returned.
+     * If `true`, the service returns time alignment for each word. By default, no timestamps are returned. See [Word
+     * timestamps](https://console.bluemix.net/docs/services/speech-to-text/output.html#word_timestamps).
      *
-     * @return the timestamps_serialized_name
+     * @return the timestamps
      */
     public Boolean timestamps() {
-      return timestamps_serialized_name;
+      return timestamps;
     }
+ 
     /**
-     * Gets the profanity_filter_serialized_name.
+     * Gets the profanityFilter.
      *
      * If `true`, the service filters profanity from all output except for keyword results by replacing inappropriate
      * words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US
-     * English transcription only.
+     * English transcription only. See [Profanity
+     * filtering](https://console.bluemix.net/docs/services/speech-to-text/output.html#profanity_filter).
      *
-     * @return the profanity_filter_serialized_name
+     * @return the profanityFilter
      */
     public Boolean profanityFilter() {
-      return profanity_filter_serialized_name;
+      return profanityFilter;
     }
+ 
     /**
-     * Gets the smart_formatting_serialized_name.
+     * Gets the smartFormatting.
      *
      * If `true`, the service converts dates, times, series of digits and numbers, phone numbers, currency values, and
      * internet addresses into more readable, conventional representations in the final transcript of a recognition
      * request. For US English, the service also converts certain keyword strings to punctuation symbols. By default, no
-     * smart formatting is performed. Applies to US English and Spanish transcription only.
+     * smart formatting is performed. Applies to US English and Spanish transcription only. See [Smart
+     * formatting](https://console.bluemix.net/docs/services/speech-to-text/output.html#smart_formatting).
      *
-     * @return the smart_formatting_serialized_name
+     * @return the smartFormatting
      */
     public Boolean smartFormatting() {
-      return smart_formatting_serialized_name;
+      return smartFormatting;
     }
+ 
     /**
-     * Gets the speaker_labels_serialized_name.
+     * Gets the speakerLabels.
      *
      * If `true`, the response includes labels that identify which words were spoken by which participants in a
      * multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
-     * `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
-     *
-     *  To determine whether a language model supports speaker labels, use the **Get models** method and check that the
-     * attribute `speaker_labels` is set to `true`. You can also refer to [Speaker
+     * `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter. To determine
+     * whether a language model supports speaker labels, use the **Get models** method and check that the attribute
+     * `speaker_labels` is set to `true`. See [Speaker
      * labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
      *
-     * @return the speaker_labels_serialized_name
+     * @return the speakerLabels
      */
     public Boolean speakerLabels() {
-      return speaker_labels_serialized_name;
+      return speakerLabels;
     }
+
     private CreateJobOptions(CreateJobOptionsBuilder builder) {
-      IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
-      audio_serialized_name = builder.audio_serialized_name;
-      content_type_serialized_name = builder.content_type_serialized_name;
-      model_serialized_name = builder.model_serialized_name;
-      callback_url_serialized_name = builder.callback_url_serialized_name;
-      events_serialized_name = builder.events_serialized_name;
-      user_token_serialized_name = builder.user_token_serialized_name;
-      results_ttl_serialized_name = builder.results_ttl_serialized_name;
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      acoustic_customization_id_serialized_name = builder.acoustic_customization_id_serialized_name;
-      base_model_version_serialized_name = builder.base_model_version_serialized_name;
-      customization_weight_serialized_name = builder.customization_weight_serialized_name;
-      inactivity_timeout_serialized_name = builder.inactivity_timeout_serialized_name;
-      keywords_serialized_name = builder.keywords_serialized_name;
-      keywords_threshold_serialized_name = builder.keywords_threshold_serialized_name;
-      max_alternatives_serialized_name = builder.max_alternatives_serialized_name;
-      word_alternatives_threshold_serialized_name = builder.word_alternatives_threshold_serialized_name;
-      word_confidence_serialized_name = builder.word_confidence_serialized_name;
-      timestamps_serialized_name = builder.timestamps_serialized_name;
-      profanity_filter_serialized_name = builder.profanity_filter_serialized_name;
-      smart_formatting_serialized_name = builder.smart_formatting_serialized_name;
-      speaker_labels_serialized_name = builder.speaker_labels_serialized_name;
+      IBMWatsonValidator.isTrue(builder.contentType != null, 'contentType cannot be null');
+      audio = builder.audio;
+      contentType = builder.contentType;
+      model = builder.model;
+      callbackUrl = builder.callbackUrl;
+      events = builder.events;
+      userToken = builder.userToken;
+      resultsTtl = builder.resultsTtl;
+      customizationId = builder.customizationId;
+      acousticCustomizationId = builder.acousticCustomizationId;
+      baseModelVersion = builder.baseModelVersion;
+      customizationWeight = builder.customizationWeight;
+      inactivityTimeout = builder.inactivityTimeout;
+      keywords = builder.keywords;
+      keywordsThreshold = builder.keywordsThreshold;
+      maxAlternatives = builder.maxAlternatives;
+      wordAlternativesThreshold = builder.wordAlternativesThreshold;
+      wordConfidence = builder.wordConfidence;
+      timestamps = builder.timestamps;
+      profanityFilter = builder.profanityFilter;
+      smartFormatting = builder.smartFormatting;
+      speakerLabels = builder.speakerLabels;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2445,50 +2504,50 @@ public class IBMSpeechToTextV1Models {
    * CreateJobOptions Builder.
    */
   public class CreateJobOptionsBuilder extends IBMWatsonOptionsModel {
-    private IBMWatsonFile audio_serialized_name;
-    private String content_type_serialized_name;
-    private String model_serialized_name;
-    private String callback_url_serialized_name;
-    private String events_serialized_name;
-    private String user_token_serialized_name;
-    private Long results_ttl_serialized_name;
-    private String customization_id_serialized_name;
-    private String acoustic_customization_id_serialized_name;
-    private String base_model_version_serialized_name;
-    private Double customization_weight_serialized_name;
-    private Long inactivity_timeout_serialized_name;
-    private List<String> keywords_serialized_name;
-    private Double keywords_threshold_serialized_name;
-    private Long max_alternatives_serialized_name;
-    private Double word_alternatives_threshold_serialized_name;
-    private Boolean word_confidence_serialized_name;
-    private Boolean timestamps_serialized_name;
-    private Boolean profanity_filter_serialized_name;
-    private Boolean smart_formatting_serialized_name;
-    private Boolean speaker_labels_serialized_name;
+    private IBMWatsonFile audio;
+    private String contentType;
+    private String model;
+    private String callbackUrl;
+    private String events;
+    private String userToken;
+    private Long resultsTtl;
+    private String customizationId;
+    private String acousticCustomizationId;
+    private String baseModelVersion;
+    private Double customizationWeight;
+    private Long inactivityTimeout;
+    private List<String> keywords;
+    private Double keywordsThreshold;
+    private Long maxAlternatives;
+    private Double wordAlternativesThreshold;
+    private Boolean wordConfidence;
+    private Boolean timestamps;
+    private Boolean profanityFilter;
+    private Boolean smartFormatting;
+    private Boolean speakerLabels;
 
     private CreateJobOptionsBuilder(CreateJobOptions createJobOptions) {
-      audio_serialized_name = createJobOptions.audio_serialized_name;
-      content_type_serialized_name = createJobOptions.content_type_serialized_name;
-      model_serialized_name = createJobOptions.model_serialized_name;
-      callback_url_serialized_name = createJobOptions.callback_url_serialized_name;
-      events_serialized_name = createJobOptions.events_serialized_name;
-      user_token_serialized_name = createJobOptions.user_token_serialized_name;
-      results_ttl_serialized_name = createJobOptions.results_ttl_serialized_name;
-      customization_id_serialized_name = createJobOptions.customization_id_serialized_name;
-      acoustic_customization_id_serialized_name = createJobOptions.acoustic_customization_id_serialized_name;
-      base_model_version_serialized_name = createJobOptions.base_model_version_serialized_name;
-      customization_weight_serialized_name = createJobOptions.customization_weight_serialized_name;
-      inactivity_timeout_serialized_name = createJobOptions.inactivity_timeout_serialized_name;
-      keywords_serialized_name = createJobOptions.keywords_serialized_name;
-      keywords_threshold_serialized_name = createJobOptions.keywords_threshold_serialized_name;
-      max_alternatives_serialized_name = createJobOptions.max_alternatives_serialized_name;
-      word_alternatives_threshold_serialized_name = createJobOptions.word_alternatives_threshold_serialized_name;
-      word_confidence_serialized_name = createJobOptions.word_confidence_serialized_name;
-      timestamps_serialized_name = createJobOptions.timestamps_serialized_name;
-      profanity_filter_serialized_name = createJobOptions.profanity_filter_serialized_name;
-      smart_formatting_serialized_name = createJobOptions.smart_formatting_serialized_name;
-      speaker_labels_serialized_name = createJobOptions.speaker_labels_serialized_name;
+      audio = createJobOptions.audio;
+      contentType = createJobOptions.contentType;
+      model = createJobOptions.model;
+      callbackUrl = createJobOptions.callbackUrl;
+      events = createJobOptions.events;
+      userToken = createJobOptions.userToken;
+      resultsTtl = createJobOptions.resultsTtl;
+      customizationId = createJobOptions.customizationId;
+      acousticCustomizationId = createJobOptions.acousticCustomizationId;
+      baseModelVersion = createJobOptions.baseModelVersion;
+      customizationWeight = createJobOptions.customizationWeight;
+      inactivityTimeout = createJobOptions.inactivityTimeout;
+      keywords = createJobOptions.keywords;
+      keywordsThreshold = createJobOptions.keywordsThreshold;
+      maxAlternatives = createJobOptions.maxAlternatives;
+      wordAlternativesThreshold = createJobOptions.wordAlternativesThreshold;
+      wordConfidence = createJobOptions.wordConfidence;
+      timestamps = createJobOptions.timestamps;
+      profanityFilter = createJobOptions.profanityFilter;
+      smartFormatting = createJobOptions.smartFormatting;
+      speakerLabels = createJobOptions.speakerLabels;
       this.requestHeaders.putAll(createJobOptions.requestHeaders());
     }
 
@@ -2508,256 +2567,249 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Adds an keywords to keywords_serialized_name.
+     * Adds an keywords to keywords.
      *
      * @param keywords the new keywords
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder addKeywords(String keywords) {
       IBMWatsonValidator.notNull(keywords, 'keywords cannot be null');
-      if (this.keywords_serialized_name == null) {
-        this.keywords_serialized_name = new List<String>();
+      if (this.keywords == null) {
+        this.keywords = new List<String>();
       }
-      this.keywords_serialized_name.add(keywords);
+      this.keywords.add(keywords);
       return this;
     }
 
     /**
-     * Set the audio_serialized_name.
+     * Set the audio.
      *
      * @param audio the audio
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder audio(IBMWatsonFile audio) {
-      this.audio_serialized_name = audio;
+      this.audio = audio;
       return this;
     }
 
     /**
-     * @deprecated This method was incorrectly defined and has no effect on the API call.
-     */
-    public CreateJobOptionsBuilder audioFilename(IBMWatsonFile audioFilename) {
-      return this;
-    }
-
-    /**
-     * Set the content_type_serialized_name.
+     * Set the contentType.
      *
      * @param contentType the contentType
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder contentType(String contentType) {
-      this.content_type_serialized_name = contentType;
+      this.contentType = contentType;
       return this;
     }
 
     /**
-     * Set the model_serialized_name.
+     * Set the model.
      *
      * @param model the model
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder model(String model) {
-      this.model_serialized_name = model;
+      this.model = model;
       return this;
     }
 
     /**
-     * Set the callback_url_serialized_name.
+     * Set the callbackUrl.
      *
      * @param callbackUrl the callbackUrl
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder callbackUrl(String callbackUrl) {
-      this.callback_url_serialized_name = callbackUrl;
+      this.callbackUrl = callbackUrl;
       return this;
     }
 
     /**
-     * Set the events_serialized_name.
+     * Set the events.
      *
      * @param events the events
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder events(String events) {
-      this.events_serialized_name = events;
+      this.events = events;
       return this;
     }
 
     /**
-     * Set the user_token_serialized_name.
+     * Set the userToken.
      *
      * @param userToken the userToken
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder userToken(String userToken) {
-      this.user_token_serialized_name = userToken;
+      this.userToken = userToken;
       return this;
     }
 
     /**
-     * Set the results_ttl_serialized_name.
+     * Set the resultsTtl.
      *
      * @param resultsTtl the resultsTtl
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder resultsTtl(Long resultsTtl) {
-      this.results_ttl_serialized_name = resultsTtl;
+      this.resultsTtl = resultsTtl;
       return this;
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the acoustic_customization_id_serialized_name.
+     * Set the acousticCustomizationId.
      *
      * @param acousticCustomizationId the acousticCustomizationId
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder acousticCustomizationId(String acousticCustomizationId) {
-      this.acoustic_customization_id_serialized_name = acousticCustomizationId;
+      this.acousticCustomizationId = acousticCustomizationId;
       return this;
     }
 
     /**
-     * Set the base_model_version_serialized_name.
+     * Set the baseModelVersion.
      *
      * @param baseModelVersion the baseModelVersion
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder baseModelVersion(String baseModelVersion) {
-      this.base_model_version_serialized_name = baseModelVersion;
+      this.baseModelVersion = baseModelVersion;
       return this;
     }
 
     /**
-     * Set the customization_weight_serialized_name.
+     * Set the customizationWeight.
      *
      * @param customizationWeight the customizationWeight
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder customizationWeight(Double customizationWeight) {
-      this.customization_weight_serialized_name = customizationWeight;
+      this.customizationWeight = customizationWeight;
       return this;
     }
 
     /**
-     * Set the inactivity_timeout_serialized_name.
+     * Set the inactivityTimeout.
      *
      * @param inactivityTimeout the inactivityTimeout
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder inactivityTimeout(Long inactivityTimeout) {
-      this.inactivity_timeout_serialized_name = inactivityTimeout;
+      this.inactivityTimeout = inactivityTimeout;
       return this;
     }
 
     /**
-     * Set the keywords_serialized_name.
-     * Existing keywords_serialized_name will be replaced.
+     * Set the keywords.
+     * Existing keywords will be replaced.
      *
      * @param keywords the keywords
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder keywords(List<String> keywords) {
-      this.keywords_serialized_name = keywords;
+      this.keywords = keywords;
       return this;
     }
 
     /**
-     * Set the keywords_threshold_serialized_name.
+     * Set the keywordsThreshold.
      *
      * @param keywordsThreshold the keywordsThreshold
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder keywordsThreshold(Double keywordsThreshold) {
-      this.keywords_threshold_serialized_name = keywordsThreshold;
+      this.keywordsThreshold = keywordsThreshold;
       return this;
     }
 
     /**
-     * Set the max_alternatives_serialized_name.
+     * Set the maxAlternatives.
      *
      * @param maxAlternatives the maxAlternatives
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder maxAlternatives(Long maxAlternatives) {
-      this.max_alternatives_serialized_name = maxAlternatives;
+      this.maxAlternatives = maxAlternatives;
       return this;
     }
 
     /**
-     * Set the word_alternatives_threshold_serialized_name.
+     * Set the wordAlternativesThreshold.
      *
      * @param wordAlternativesThreshold the wordAlternativesThreshold
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder wordAlternativesThreshold(Double wordAlternativesThreshold) {
-      this.word_alternatives_threshold_serialized_name = wordAlternativesThreshold;
+      this.wordAlternativesThreshold = wordAlternativesThreshold;
       return this;
     }
 
     /**
-     * Set the word_confidence_serialized_name.
+     * Set the wordConfidence.
      *
      * @param wordConfidence the wordConfidence
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder wordConfidence(Boolean wordConfidence) {
-      this.word_confidence_serialized_name = wordConfidence;
+      this.wordConfidence = wordConfidence;
       return this;
     }
 
     /**
-     * Set the timestamps_serialized_name.
+     * Set the timestamps.
      *
      * @param timestamps the timestamps
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder timestamps(Boolean timestamps) {
-      this.timestamps_serialized_name = timestamps;
+      this.timestamps = timestamps;
       return this;
     }
 
     /**
-     * Set the profanity_filter_serialized_name.
+     * Set the profanityFilter.
      *
      * @param profanityFilter the profanityFilter
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder profanityFilter(Boolean profanityFilter) {
-      this.profanity_filter_serialized_name = profanityFilter;
+      this.profanityFilter = profanityFilter;
       return this;
     }
 
     /**
-     * Set the smart_formatting_serialized_name.
+     * Set the smartFormatting.
      *
      * @param smartFormatting the smartFormatting
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder smartFormatting(Boolean smartFormatting) {
-      this.smart_formatting_serialized_name = smartFormatting;
+      this.smartFormatting = smartFormatting;
       return this;
     }
 
     /**
-     * Set the speaker_labels_serialized_name.
+     * Set the speakerLabels.
      *
      * @param speakerLabels the speakerLabels
      * @return the CreateJobOptions builder
      */
     public CreateJobOptionsBuilder speakerLabels(Boolean speakerLabels) {
-      this.speaker_labels_serialized_name = speakerLabels;
+      this.speakerLabels = speakerLabels;
       return this;
     }
 
@@ -2778,24 +2830,26 @@ public class IBMSpeechToTextV1Models {
    * The createLanguageModel options.
    */
   public class CreateLanguageModelOptions extends IBMWatsonOptionsModel {
-    private String name_serialized_name;
-    private String base_model_name_serialized_name;
-    private String dialect_serialized_name;
-    private String description_serialized_name;
+    private String name;
+    private String baseModelName;
+    private String dialect;
+    private String description;
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * A user-defined name for the new custom language model. Use a name that is unique among all custom language models
      * that you own. Use a localized name that matches the language of the custom model. Use a name that describes the
      * domain of the custom model, such as `Medical custom model` or `Legal custom model`.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     public String name() {
-      return name_serialized_name;
+      return name;
     }
+ 
     /**
-     * Gets the base_model_name_serialized_name.
+     * Gets the baseModelName.
      *
      * The name of the base language model that is to be customized by the new custom language model. The new custom
      * model can be used only with the base model that it customizes. To determine whether a base model supports
@@ -2803,13 +2857,14 @@ public class IBMSpeechToTextV1Models {
      * `custom_language_model` is set to `true`, or refer to [Language support for
      * customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
      *
-     * @return the base_model_name_serialized_name
+     * @return the baseModelName
      */
     public String baseModelName() {
-      return base_model_name_serialized_name;
+      return baseModelName;
     }
+ 
     /**
-     * Gets the dialect_serialized_name.
+     * Gets the dialect.
      *
      * The dialect of the specified language that is to be used with the custom language model. The parameter is
      * meaningful only for Spanish models, for which the service creates a custom language model that is suited for
@@ -2821,29 +2876,31 @@ public class IBMSpeechToTextV1Models {
      * A specified dialect must be valid for the base model. By default, the dialect matches the language of the base
      * model; for example, `en-US` for either of the US English language models.
      *
-     * @return the dialect_serialized_name
+     * @return the dialect
      */
     public String dialect() {
-      return dialect_serialized_name;
+      return dialect;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * A description of the new custom language model. Use a localized description that matches the language of the
      * custom model.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     public String description() {
-      return description_serialized_name;
+      return description;
     }
+
     private CreateLanguageModelOptions(CreateLanguageModelOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.name_serialized_name, 'name_serialized_name cannot be null');
-      IBMWatsonValidator.notNull(builder.base_model_name_serialized_name, 'base_model_name_serialized_name cannot be null');
-      name_serialized_name = builder.name_serialized_name;
-      base_model_name_serialized_name = builder.base_model_name_serialized_name;
-      dialect_serialized_name = builder.dialect_serialized_name;
-      description_serialized_name = builder.description_serialized_name;
+      IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
+      IBMWatsonValidator.notNull(builder.baseModelName, 'baseModelName cannot be null');
+      name = builder.name;
+      baseModelName = builder.baseModelName;
+      dialect = builder.dialect;
+      description = builder.description;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2862,16 +2919,16 @@ public class IBMSpeechToTextV1Models {
    * CreateLanguageModelOptions Builder.
    */
   public class CreateLanguageModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String name_serialized_name;
-    private String base_model_name_serialized_name;
-    private String dialect_serialized_name;
-    private String description_serialized_name;
+    private String name;
+    private String baseModelName;
+    private String dialect;
+    private String description;
 
     private CreateLanguageModelOptionsBuilder(CreateLanguageModelOptions createLanguageModelOptions) {
-      name_serialized_name = createLanguageModelOptions.name_serialized_name;
-      base_model_name_serialized_name = createLanguageModelOptions.base_model_name_serialized_name;
-      dialect_serialized_name = createLanguageModelOptions.dialect_serialized_name;
-      description_serialized_name = createLanguageModelOptions.description_serialized_name;
+      name = createLanguageModelOptions.name;
+      baseModelName = createLanguageModelOptions.baseModelName;
+      dialect = createLanguageModelOptions.dialect;
+      description = createLanguageModelOptions.description;
       this.requestHeaders.putAll(createLanguageModelOptions.requestHeaders());
     }
 
@@ -2888,8 +2945,8 @@ public class IBMSpeechToTextV1Models {
      * @param baseModelName the baseModelName
      */
     public CreateLanguageModelOptionsBuilder(String name, String baseModelName) {
-      this.name_serialized_name = name;
-      this.base_model_name_serialized_name = baseModelName;
+      this.name = name;
+      this.baseModelName = baseModelName;
     }
 
     /**
@@ -2902,46 +2959,46 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the name_serialized_name.
+     * Set the name.
      *
      * @param name the name
      * @return the CreateLanguageModelOptions builder
      */
     public CreateLanguageModelOptionsBuilder name(String name) {
-      this.name_serialized_name = name;
+      this.name = name;
       return this;
     }
 
     /**
-     * Set the base_model_name_serialized_name.
+     * Set the baseModelName.
      *
      * @param baseModelName the baseModelName
      * @return the CreateLanguageModelOptions builder
      */
     public CreateLanguageModelOptionsBuilder baseModelName(String baseModelName) {
-      this.base_model_name_serialized_name = baseModelName;
+      this.baseModelName = baseModelName;
       return this;
     }
 
     /**
-     * Set the dialect_serialized_name.
+     * Set the dialect.
      *
      * @param dialect the dialect
      * @return the CreateLanguageModelOptions builder
      */
     public CreateLanguageModelOptionsBuilder dialect(String dialect) {
-      this.dialect_serialized_name = dialect;
+      this.dialect = dialect;
       return this;
     }
 
     /**
-     * Set the description_serialized_name.
+     * Set the description.
      *
      * @param description the description
      * @return the CreateLanguageModelOptions builder
      */
     public CreateLanguageModelOptionsBuilder description(String description) {
-      this.description_serialized_name = description;
+      this.description = description;
       return this;
     }
 
@@ -2965,8 +3022,9 @@ public class IBMSpeechToTextV1Models {
     private String word_serialized_name;
     private List<String> sounds_like_serialized_name;
     private String display_as_serialized_name;
+ 
     /**
-     * Gets the word_serialized_name.
+     * Gets the word.
      *
      * For the **Add custom words** method, you must specify the custom word that is to be added to or updated in the
      * custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
@@ -2974,13 +3032,14 @@ public class IBMSpeechToTextV1Models {
      *
      * Omit this field for the **Add a custom word** method.
      *
-     * @return the word_serialized_name
+     * @return the word
      */
     public String getWord() {
       return word_serialized_name;
     }
+ 
     /**
-     * Gets the sounds_like_serialized_name.
+     * Gets the soundsLike.
      *
      * An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce,
      * foreign words, acronyms, and so on can be pronounced by users.
@@ -2993,26 +3052,27 @@ public class IBMSpeechToTextV1Models {
      * A word can have at most five sounds-like pronunciations. A pronunciation can include at most 40 characters not
      * including spaces.
      *
-     * @return the sounds_like_serialized_name
+     * @return the soundsLike
      */
     public List<String> getSoundsLike() {
       return sounds_like_serialized_name;
     }
+ 
     /**
-     * Gets the display_as_serialized_name.
+     * Gets the displayAs.
      *
      * An alternative spelling for the custom word when it appears in a transcript. Use the parameter when you want the
      * word to have a spelling that is different from its usual representation or from its spelling in corpora training
      * data.
      *
-     * @return the display_as_serialized_name
+     * @return the displayAs
      */
     public String getDisplayAs() {
       return display_as_serialized_name;
     }
 
     /**
-     * Sets the word_serialized_name.
+     * Sets the word.
      *
      * @param word the new word
      */
@@ -3021,7 +3081,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the sounds_like_serialized_name.
+     * Sets the soundsLike.
      *
      * @param soundsLike the new soundsLike
      */
@@ -3030,7 +3090,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the display_as_serialized_name.
+     * Sets the displayAs.
      *
      * @param displayAs the new displayAs
      */
@@ -3044,21 +3104,23 @@ public class IBMSpeechToTextV1Models {
    * The deleteAcousticModel options.
    */
   public class DeleteAcousticModelOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+
     private DeleteAcousticModelOptions(DeleteAcousticModelOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3077,10 +3139,10 @@ public class IBMSpeechToTextV1Models {
    * DeleteAcousticModelOptions Builder.
    */
   public class DeleteAcousticModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
 
     private DeleteAcousticModelOptionsBuilder(DeleteAcousticModelOptions deleteAcousticModelOptions) {
-      customization_id_serialized_name = deleteAcousticModelOptions.customization_id_serialized_name;
+      customizationId = deleteAcousticModelOptions.customizationId;
       this.requestHeaders.putAll(deleteAcousticModelOptions.requestHeaders());
     }
 
@@ -3096,7 +3158,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      */
     public DeleteAcousticModelOptionsBuilder(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -3109,13 +3171,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the DeleteAcousticModelOptions builder
      */
     public DeleteAcousticModelOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
@@ -3136,34 +3198,37 @@ public class IBMSpeechToTextV1Models {
    * The deleteAudio options.
    */
   public class DeleteAudioOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String audio_name_serialized_name;
+    private String customizationId;
+    private String audioName;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the audio_name_serialized_name.
+     * Gets the audioName.
      *
      * The name of the audio resource for the custom acoustic model.
      *
-     * @return the audio_name_serialized_name
+     * @return the audioName
      */
     public String audioName() {
-      return audio_name_serialized_name;
+      return audioName;
     }
+
     private DeleteAudioOptions(DeleteAudioOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.audio_name_serialized_name, 'audio_name_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      audio_name_serialized_name = builder.audio_name_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.audioName, 'audioName cannot be empty');
+      customizationId = builder.customizationId;
+      audioName = builder.audioName;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3182,12 +3247,12 @@ public class IBMSpeechToTextV1Models {
    * DeleteAudioOptions Builder.
    */
   public class DeleteAudioOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String audio_name_serialized_name;
+    private String customizationId;
+    private String audioName;
 
     private DeleteAudioOptionsBuilder(DeleteAudioOptions deleteAudioOptions) {
-      customization_id_serialized_name = deleteAudioOptions.customization_id_serialized_name;
-      audio_name_serialized_name = deleteAudioOptions.audio_name_serialized_name;
+      customizationId = deleteAudioOptions.customizationId;
+      audioName = deleteAudioOptions.audioName;
       this.requestHeaders.putAll(deleteAudioOptions.requestHeaders());
     }
 
@@ -3204,8 +3269,8 @@ public class IBMSpeechToTextV1Models {
      * @param audioName the audioName
      */
     public DeleteAudioOptionsBuilder(String customizationId, String audioName) {
-      this.customization_id_serialized_name = customizationId;
-      this.audio_name_serialized_name = audioName;
+      this.customizationId = customizationId;
+      this.audioName = audioName;
     }
 
     /**
@@ -3218,24 +3283,24 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the DeleteAudioOptions builder
      */
     public DeleteAudioOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the audio_name_serialized_name.
+     * Set the audioName.
      *
      * @param audioName the audioName
      * @return the DeleteAudioOptions builder
      */
     public DeleteAudioOptionsBuilder audioName(String audioName) {
-      this.audio_name_serialized_name = audioName;
+      this.audioName = audioName;
       return this;
     }
 
@@ -3256,34 +3321,37 @@ public class IBMSpeechToTextV1Models {
    * The deleteCorpus options.
    */
   public class DeleteCorpusOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String corpus_name_serialized_name;
+    private String customizationId;
+    private String corpusName;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the corpus_name_serialized_name.
+     * Gets the corpusName.
      *
      * The name of the corpus for the custom language model.
      *
-     * @return the corpus_name_serialized_name
+     * @return the corpusName
      */
     public String corpusName() {
-      return corpus_name_serialized_name;
+      return corpusName;
     }
+
     private DeleteCorpusOptions(DeleteCorpusOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.corpus_name_serialized_name, 'corpus_name_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      corpus_name_serialized_name = builder.corpus_name_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.corpusName, 'corpusName cannot be empty');
+      customizationId = builder.customizationId;
+      corpusName = builder.corpusName;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3302,12 +3370,12 @@ public class IBMSpeechToTextV1Models {
    * DeleteCorpusOptions Builder.
    */
   public class DeleteCorpusOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String corpus_name_serialized_name;
+    private String customizationId;
+    private String corpusName;
 
     private DeleteCorpusOptionsBuilder(DeleteCorpusOptions deleteCorpusOptions) {
-      customization_id_serialized_name = deleteCorpusOptions.customization_id_serialized_name;
-      corpus_name_serialized_name = deleteCorpusOptions.corpus_name_serialized_name;
+      customizationId = deleteCorpusOptions.customizationId;
+      corpusName = deleteCorpusOptions.corpusName;
       this.requestHeaders.putAll(deleteCorpusOptions.requestHeaders());
     }
 
@@ -3324,8 +3392,8 @@ public class IBMSpeechToTextV1Models {
      * @param corpusName the corpusName
      */
     public DeleteCorpusOptionsBuilder(String customizationId, String corpusName) {
-      this.customization_id_serialized_name = customizationId;
-      this.corpus_name_serialized_name = corpusName;
+      this.customizationId = customizationId;
+      this.corpusName = corpusName;
     }
 
     /**
@@ -3338,24 +3406,24 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the DeleteCorpusOptions builder
      */
     public DeleteCorpusOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the corpus_name_serialized_name.
+     * Set the corpusName.
      *
      * @param corpusName the corpusName
      * @return the DeleteCorpusOptions builder
      */
     public DeleteCorpusOptionsBuilder corpusName(String corpusName) {
-      this.corpus_name_serialized_name = corpusName;
+      this.corpusName = corpusName;
       return this;
     }
 
@@ -3376,20 +3444,22 @@ public class IBMSpeechToTextV1Models {
    * The deleteJob options.
    */
   public class DeleteJobOptions extends IBMWatsonOptionsModel {
-    private String id_serialized_name;
+    private String id;
+ 
     /**
-     * Gets the id_serialized_name.
+     * Gets the id.
      *
      * The ID of the asynchronous job.
      *
-     * @return the id_serialized_name
+     * @return the id
      */
     public String id() {
-      return id_serialized_name;
+      return id;
     }
+
     private DeleteJobOptions(DeleteJobOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.id_serialized_name, 'id_serialized_name cannot be empty');
-      id_serialized_name = builder.id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.id, 'id cannot be empty');
+      id = builder.id;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3408,10 +3478,10 @@ public class IBMSpeechToTextV1Models {
    * DeleteJobOptions Builder.
    */
   public class DeleteJobOptionsBuilder extends IBMWatsonOptionsModel {
-    private String id_serialized_name;
+    private String id;
 
     private DeleteJobOptionsBuilder(DeleteJobOptions deleteJobOptions) {
-      id_serialized_name = deleteJobOptions.id_serialized_name;
+      id = deleteJobOptions.id;
       this.requestHeaders.putAll(deleteJobOptions.requestHeaders());
     }
 
@@ -3427,7 +3497,7 @@ public class IBMSpeechToTextV1Models {
      * @param id the id
      */
     public DeleteJobOptionsBuilder(String id) {
-      this.id_serialized_name = id;
+      this.id = id;
     }
 
     /**
@@ -3440,13 +3510,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the id_serialized_name.
+     * Set the id.
      *
      * @param id the id
      * @return the DeleteJobOptions builder
      */
     public DeleteJobOptionsBuilder id(String id) {
-      this.id_serialized_name = id;
+      this.id = id;
       return this;
     }
 
@@ -3467,21 +3537,23 @@ public class IBMSpeechToTextV1Models {
    * The deleteLanguageModel options.
    */
   public class DeleteLanguageModelOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+
     private DeleteLanguageModelOptions(DeleteLanguageModelOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3500,10 +3572,10 @@ public class IBMSpeechToTextV1Models {
    * DeleteLanguageModelOptions Builder.
    */
   public class DeleteLanguageModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
 
     private DeleteLanguageModelOptionsBuilder(DeleteLanguageModelOptions deleteLanguageModelOptions) {
-      customization_id_serialized_name = deleteLanguageModelOptions.customization_id_serialized_name;
+      customizationId = deleteLanguageModelOptions.customizationId;
       this.requestHeaders.putAll(deleteLanguageModelOptions.requestHeaders());
     }
 
@@ -3519,7 +3591,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      */
     public DeleteLanguageModelOptionsBuilder(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -3532,13 +3604,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the DeleteLanguageModelOptions builder
      */
     public DeleteLanguageModelOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
@@ -3559,20 +3631,22 @@ public class IBMSpeechToTextV1Models {
    * The deleteUserData options.
    */
   public class DeleteUserDataOptions extends IBMWatsonOptionsModel {
-    private String customer_id_serialized_name;
+    private String customerId;
+ 
     /**
-     * Gets the customer_id_serialized_name.
+     * Gets the customerId.
      *
      * The customer ID for which all data is to be deleted.
      *
-     * @return the customer_id_serialized_name
+     * @return the customerId
      */
     public String customerId() {
-      return customer_id_serialized_name;
+      return customerId;
     }
+
     private DeleteUserDataOptions(DeleteUserDataOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.customer_id_serialized_name, 'customer_id_serialized_name cannot be null');
-      customer_id_serialized_name = builder.customer_id_serialized_name;
+      IBMWatsonValidator.notNull(builder.customerId, 'customerId cannot be null');
+      customerId = builder.customerId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3591,10 +3665,10 @@ public class IBMSpeechToTextV1Models {
    * DeleteUserDataOptions Builder.
    */
   public class DeleteUserDataOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customer_id_serialized_name;
+    private String customerId;
 
     private DeleteUserDataOptionsBuilder(DeleteUserDataOptions deleteUserDataOptions) {
-      customer_id_serialized_name = deleteUserDataOptions.customer_id_serialized_name;
+      customerId = deleteUserDataOptions.customerId;
       this.requestHeaders.putAll(deleteUserDataOptions.requestHeaders());
     }
 
@@ -3610,7 +3684,7 @@ public class IBMSpeechToTextV1Models {
      * @param customerId the customerId
      */
     public DeleteUserDataOptionsBuilder(String customerId) {
-      this.customer_id_serialized_name = customerId;
+      this.customerId = customerId;
     }
 
     /**
@@ -3623,13 +3697,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customer_id_serialized_name.
+     * Set the customerId.
      *
      * @param customerId the customerId
      * @return the DeleteUserDataOptions builder
      */
     public DeleteUserDataOptionsBuilder customerId(String customerId) {
-      this.customer_id_serialized_name = customerId;
+      this.customerId = customerId;
       return this;
     }
 
@@ -3650,36 +3724,39 @@ public class IBMSpeechToTextV1Models {
    * The deleteWord options.
    */
   public class DeleteWordOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String word_name_serialized_name;
+    private String customizationId;
+    private String wordName;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the word_name_serialized_name.
+     * Gets the wordName.
      *
      * The custom word for the custom language model. When you add or update a custom word with the **Add a custom
      * word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
      * compound words.
      *
-     * @return the word_name_serialized_name
+     * @return the wordName
      */
     public String wordName() {
-      return word_name_serialized_name;
+      return wordName;
     }
+
     private DeleteWordOptions(DeleteWordOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.word_name_serialized_name, 'word_name_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      word_name_serialized_name = builder.word_name_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.wordName, 'wordName cannot be empty');
+      customizationId = builder.customizationId;
+      wordName = builder.wordName;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3698,12 +3775,12 @@ public class IBMSpeechToTextV1Models {
    * DeleteWordOptions Builder.
    */
   public class DeleteWordOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String word_name_serialized_name;
+    private String customizationId;
+    private String wordName;
 
     private DeleteWordOptionsBuilder(DeleteWordOptions deleteWordOptions) {
-      customization_id_serialized_name = deleteWordOptions.customization_id_serialized_name;
-      word_name_serialized_name = deleteWordOptions.word_name_serialized_name;
+      customizationId = deleteWordOptions.customizationId;
+      wordName = deleteWordOptions.wordName;
       this.requestHeaders.putAll(deleteWordOptions.requestHeaders());
     }
 
@@ -3720,8 +3797,8 @@ public class IBMSpeechToTextV1Models {
      * @param wordName the wordName
      */
     public DeleteWordOptionsBuilder(String customizationId, String wordName) {
-      this.customization_id_serialized_name = customizationId;
-      this.word_name_serialized_name = wordName;
+      this.customizationId = customizationId;
+      this.wordName = wordName;
     }
 
     /**
@@ -3734,24 +3811,24 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the DeleteWordOptions builder
      */
     public DeleteWordOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the word_name_serialized_name.
+     * Set the wordName.
      *
      * @param wordName the wordName
      * @return the DeleteWordOptions builder
      */
     public DeleteWordOptionsBuilder wordName(String wordName) {
-      this.word_name_serialized_name = wordName;
+      this.wordName = wordName;
       return this;
     }
 
@@ -3772,21 +3849,23 @@ public class IBMSpeechToTextV1Models {
    * The getAcousticModel options.
    */
   public class GetAcousticModelOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+
     private GetAcousticModelOptions(GetAcousticModelOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3805,10 +3884,10 @@ public class IBMSpeechToTextV1Models {
    * GetAcousticModelOptions Builder.
    */
   public class GetAcousticModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
 
     private GetAcousticModelOptionsBuilder(GetAcousticModelOptions getAcousticModelOptions) {
-      customization_id_serialized_name = getAcousticModelOptions.customization_id_serialized_name;
+      customizationId = getAcousticModelOptions.customizationId;
       this.requestHeaders.putAll(getAcousticModelOptions.requestHeaders());
     }
 
@@ -3824,7 +3903,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      */
     public GetAcousticModelOptionsBuilder(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -3837,13 +3916,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the GetAcousticModelOptions builder
      */
     public GetAcousticModelOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
@@ -3864,34 +3943,37 @@ public class IBMSpeechToTextV1Models {
    * The getAudio options.
    */
   public class GetAudioOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String audio_name_serialized_name;
+    private String customizationId;
+    private String audioName;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the audio_name_serialized_name.
+     * Gets the audioName.
      *
      * The name of the audio resource for the custom acoustic model.
      *
-     * @return the audio_name_serialized_name
+     * @return the audioName
      */
     public String audioName() {
-      return audio_name_serialized_name;
+      return audioName;
     }
+
     private GetAudioOptions(GetAudioOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.audio_name_serialized_name, 'audio_name_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      audio_name_serialized_name = builder.audio_name_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.audioName, 'audioName cannot be empty');
+      customizationId = builder.customizationId;
+      audioName = builder.audioName;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3910,12 +3992,12 @@ public class IBMSpeechToTextV1Models {
    * GetAudioOptions Builder.
    */
   public class GetAudioOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String audio_name_serialized_name;
+    private String customizationId;
+    private String audioName;
 
     private GetAudioOptionsBuilder(GetAudioOptions getAudioOptions) {
-      customization_id_serialized_name = getAudioOptions.customization_id_serialized_name;
-      audio_name_serialized_name = getAudioOptions.audio_name_serialized_name;
+      customizationId = getAudioOptions.customizationId;
+      audioName = getAudioOptions.audioName;
       this.requestHeaders.putAll(getAudioOptions.requestHeaders());
     }
 
@@ -3932,8 +4014,8 @@ public class IBMSpeechToTextV1Models {
      * @param audioName the audioName
      */
     public GetAudioOptionsBuilder(String customizationId, String audioName) {
-      this.customization_id_serialized_name = customizationId;
-      this.audio_name_serialized_name = audioName;
+      this.customizationId = customizationId;
+      this.audioName = audioName;
     }
 
     /**
@@ -3946,24 +4028,24 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the GetAudioOptions builder
      */
     public GetAudioOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the audio_name_serialized_name.
+     * Set the audioName.
      *
      * @param audioName the audioName
      * @return the GetAudioOptions builder
      */
     public GetAudioOptionsBuilder audioName(String audioName) {
-      this.audio_name_serialized_name = audioName;
+      this.audioName = audioName;
       return this;
     }
 
@@ -3984,34 +4066,37 @@ public class IBMSpeechToTextV1Models {
    * The getCorpus options.
    */
   public class GetCorpusOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String corpus_name_serialized_name;
+    private String customizationId;
+    private String corpusName;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the corpus_name_serialized_name.
+     * Gets the corpusName.
      *
      * The name of the corpus for the custom language model.
      *
-     * @return the corpus_name_serialized_name
+     * @return the corpusName
      */
     public String corpusName() {
-      return corpus_name_serialized_name;
+      return corpusName;
     }
+
     private GetCorpusOptions(GetCorpusOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.corpus_name_serialized_name, 'corpus_name_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      corpus_name_serialized_name = builder.corpus_name_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.corpusName, 'corpusName cannot be empty');
+      customizationId = builder.customizationId;
+      corpusName = builder.corpusName;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -4030,12 +4115,12 @@ public class IBMSpeechToTextV1Models {
    * GetCorpusOptions Builder.
    */
   public class GetCorpusOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String corpus_name_serialized_name;
+    private String customizationId;
+    private String corpusName;
 
     private GetCorpusOptionsBuilder(GetCorpusOptions getCorpusOptions) {
-      customization_id_serialized_name = getCorpusOptions.customization_id_serialized_name;
-      corpus_name_serialized_name = getCorpusOptions.corpus_name_serialized_name;
+      customizationId = getCorpusOptions.customizationId;
+      corpusName = getCorpusOptions.corpusName;
       this.requestHeaders.putAll(getCorpusOptions.requestHeaders());
     }
 
@@ -4052,8 +4137,8 @@ public class IBMSpeechToTextV1Models {
      * @param corpusName the corpusName
      */
     public GetCorpusOptionsBuilder(String customizationId, String corpusName) {
-      this.customization_id_serialized_name = customizationId;
-      this.corpus_name_serialized_name = corpusName;
+      this.customizationId = customizationId;
+      this.corpusName = corpusName;
     }
 
     /**
@@ -4066,24 +4151,24 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the GetCorpusOptions builder
      */
     public GetCorpusOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the corpus_name_serialized_name.
+     * Set the corpusName.
      *
      * @param corpusName the corpusName
      * @return the GetCorpusOptions builder
      */
     public GetCorpusOptionsBuilder corpusName(String corpusName) {
-      this.corpus_name_serialized_name = corpusName;
+      this.corpusName = corpusName;
       return this;
     }
 
@@ -4104,21 +4189,23 @@ public class IBMSpeechToTextV1Models {
    * The getLanguageModel options.
    */
   public class GetLanguageModelOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+
     private GetLanguageModelOptions(GetLanguageModelOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -4137,10 +4224,10 @@ public class IBMSpeechToTextV1Models {
    * GetLanguageModelOptions Builder.
    */
   public class GetLanguageModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
 
     private GetLanguageModelOptionsBuilder(GetLanguageModelOptions getLanguageModelOptions) {
-      customization_id_serialized_name = getLanguageModelOptions.customization_id_serialized_name;
+      customizationId = getLanguageModelOptions.customizationId;
       this.requestHeaders.putAll(getLanguageModelOptions.requestHeaders());
     }
 
@@ -4156,7 +4243,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      */
     public GetLanguageModelOptionsBuilder(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -4169,13 +4256,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the GetLanguageModelOptions builder
      */
     public GetLanguageModelOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
@@ -4196,20 +4283,22 @@ public class IBMSpeechToTextV1Models {
    * The getModel options.
    */
   public class GetModelOptions extends IBMWatsonOptionsModel {
-    private String model_id_serialized_name;
+    private String modelId;
+ 
     /**
-     * Gets the model_id_serialized_name.
+     * Gets the modelId.
      *
      * The identifier of the model in the form of its name from the output of the **Get models** method.
      *
-     * @return the model_id_serialized_name
+     * @return the modelId
      */
     public String modelId() {
-      return model_id_serialized_name;
+      return modelId;
     }
+
     private GetModelOptions(GetModelOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.model_id_serialized_name, 'model_id_serialized_name cannot be empty');
-      model_id_serialized_name = builder.model_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.modelId, 'modelId cannot be empty');
+      modelId = builder.modelId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -4228,10 +4317,10 @@ public class IBMSpeechToTextV1Models {
    * GetModelOptions Builder.
    */
   public class GetModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String model_id_serialized_name;
+    private String modelId;
 
     private GetModelOptionsBuilder(GetModelOptions getModelOptions) {
-      model_id_serialized_name = getModelOptions.model_id_serialized_name;
+      modelId = getModelOptions.modelId;
       this.requestHeaders.putAll(getModelOptions.requestHeaders());
     }
 
@@ -4247,7 +4336,7 @@ public class IBMSpeechToTextV1Models {
      * @param modelId the modelId
      */
     public GetModelOptionsBuilder(String modelId) {
-      this.model_id_serialized_name = modelId;
+      this.modelId = modelId;
     }
 
     /**
@@ -4260,13 +4349,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the model_id_serialized_name.
+     * Set the modelId.
      *
      * @param modelId the modelId
      * @return the GetModelOptions builder
      */
     public GetModelOptionsBuilder modelId(String modelId) {
-      this.model_id_serialized_name = modelId;
+      this.modelId = modelId;
       return this;
     }
 
@@ -4287,36 +4376,39 @@ public class IBMSpeechToTextV1Models {
    * The getWord options.
    */
   public class GetWordOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String word_name_serialized_name;
+    private String customizationId;
+    private String wordName;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the word_name_serialized_name.
+     * Gets the wordName.
      *
      * The custom word for the custom language model. When you add or update a custom word with the **Add a custom
      * word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
      * compound words.
      *
-     * @return the word_name_serialized_name
+     * @return the wordName
      */
     public String wordName() {
-      return word_name_serialized_name;
+      return wordName;
     }
+
     private GetWordOptions(GetWordOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.word_name_serialized_name, 'word_name_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      word_name_serialized_name = builder.word_name_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.wordName, 'wordName cannot be empty');
+      customizationId = builder.customizationId;
+      wordName = builder.wordName;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -4335,12 +4427,12 @@ public class IBMSpeechToTextV1Models {
    * GetWordOptions Builder.
    */
   public class GetWordOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String word_name_serialized_name;
+    private String customizationId;
+    private String wordName;
 
     private GetWordOptionsBuilder(GetWordOptions getWordOptions) {
-      customization_id_serialized_name = getWordOptions.customization_id_serialized_name;
-      word_name_serialized_name = getWordOptions.word_name_serialized_name;
+      customizationId = getWordOptions.customizationId;
+      wordName = getWordOptions.wordName;
       this.requestHeaders.putAll(getWordOptions.requestHeaders());
     }
 
@@ -4357,8 +4449,8 @@ public class IBMSpeechToTextV1Models {
      * @param wordName the wordName
      */
     public GetWordOptionsBuilder(String customizationId, String wordName) {
-      this.customization_id_serialized_name = customizationId;
-      this.word_name_serialized_name = wordName;
+      this.customizationId = customizationId;
+      this.wordName = wordName;
     }
 
     /**
@@ -4371,24 +4463,24 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the GetWordOptions builder
      */
     public GetWordOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the word_name_serialized_name.
+     * Set the wordName.
      *
      * @param wordName the wordName
      * @return the GetWordOptions builder
      */
     public GetWordOptionsBuilder wordName(String wordName) {
-      this.word_name_serialized_name = wordName;
+      this.wordName = wordName;
       return this;
     }
 
@@ -4413,45 +4505,49 @@ public class IBMSpeechToTextV1Models {
     private Double start_time_serialized_name;
     private Double end_time_serialized_name;
     private Double confidence_serialized_name;
+ 
     /**
-     * Gets the normalized_text_serialized_name.
+     * Gets the normalizedText.
      *
      * A specified keyword normalized to the spoken phrase that matched in the audio input.
      *
-     * @return the normalized_text_serialized_name
+     * @return the normalizedText
      */
     @AuraEnabled
     public String getNormalizedText() {
       return normalized_text_serialized_name;
     }
+ 
     /**
-     * Gets the start_time_serialized_name.
+     * Gets the startTime.
      *
      * The start time in seconds of the keyword match.
      *
-     * @return the start_time_serialized_name
+     * @return the startTime
      */
     @AuraEnabled
     public Double getStartTime() {
       return start_time_serialized_name;
     }
+ 
     /**
-     * Gets the end_time_serialized_name.
+     * Gets the endTime.
      *
      * The end time in seconds of the keyword match.
      *
-     * @return the end_time_serialized_name
+     * @return the endTime
      */
     @AuraEnabled
     public Double getEndTime() {
       return end_time_serialized_name;
     }
+ 
     /**
-     * Gets the confidence_serialized_name.
+     * Gets the confidence.
      *
      * A confidence score for the keyword match in the range of 0.0 to 1.0.
      *
-     * @return the confidence_serialized_name
+     * @return the confidence
      */
     @AuraEnabled
     public Double getConfidence() {
@@ -4459,7 +4555,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the normalized_text_serialized_name.
+     * Sets the normalizedText.
      *
      * @param normalizedText the new normalizedText
      */
@@ -4468,7 +4564,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the start_time_serialized_name.
+     * Sets the startTime.
      *
      * @param startTime the new startTime
      */
@@ -4477,7 +4573,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the end_time_serialized_name.
+     * Sets the endTime.
      *
      * @param endTime the new endTime
      */
@@ -4486,7 +4582,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the confidence_serialized_name.
+     * Sets the confidence.
      *
      * @param confidence the new confidence
      */
@@ -4521,43 +4617,47 @@ public class IBMSpeechToTextV1Models {
     private String status_serialized_name;
     private Long progress_serialized_name;
     private String warnings_serialized_name;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. The **Create a custom language model** method returns
      * only this field of the object; it does not return the other fields.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     @AuraEnabled
     public String getCustomizationId() {
       return customization_id_serialized_name;
     }
+ 
     /**
-     * Gets the created_serialized_name.
+     * Gets the created.
      *
      * The date and time in Coordinated Universal Time (UTC) at which the custom language model was created. The value
      * is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
      *
-     * @return the created_serialized_name
+     * @return the created
      */
     @AuraEnabled
     public String getCreated() {
       return created_serialized_name;
     }
+ 
     /**
-     * Gets the language_serialized_name.
+     * Gets the language.
      *
      * The language identifier of the custom language model (for example, `en-US`).
      *
-     * @return the language_serialized_name
+     * @return the language
      */
     @AuraEnabled
     public String getLanguage() {
       return language_serialized_name;
     }
+ 
     /**
-     * Gets the dialect_serialized_name.
+     * Gets the dialect.
      *
      * The dialect of the language for the custom language model. By default, the dialect matches the language of the
      * base model; for example, `en-US` for either of the US English language models. For Spanish models, the field
@@ -4566,71 +4666,77 @@ public class IBMSpeechToTextV1Models {
      * * `es-LA` for Latin American Spanish
      * * `es-US` for North American (Mexican) Spanish.
      *
-     * @return the dialect_serialized_name
+     * @return the dialect
      */
     @AuraEnabled
     public String getDialect() {
       return dialect_serialized_name;
     }
+ 
     /**
-     * Gets the versions_serialized_name.
+     * Gets the versions.
      *
      * A list of the available versions of the custom language model. Each element of the array indicates a version of
      * the base model with which the custom model can be used. Multiple versions exist only if the custom model has been
      * upgraded; otherwise, only a single version is shown.
      *
-     * @return the versions_serialized_name
+     * @return the versions
      */
     @AuraEnabled
     public List<String> getVersions() {
       return versions_serialized_name;
     }
+ 
     /**
-     * Gets the owner_serialized_name.
+     * Gets the owner.
      *
      * The GUID of the service credentials for the instance of the service that owns the custom language model.
      *
-     * @return the owner_serialized_name
+     * @return the owner
      */
     @AuraEnabled
     public String getOwner() {
       return owner_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The name of the custom language model.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * The description of the custom language model.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     @AuraEnabled
     public String getDescription() {
       return description_serialized_name;
     }
+ 
     /**
-     * Gets the base_model_name_serialized_name.
+     * Gets the baseModelName.
      *
      * The name of the language model for which the custom language model was created.
      *
-     * @return the base_model_name_serialized_name
+     * @return the baseModelName
      */
     @AuraEnabled
     public String getBaseModelName() {
       return base_model_name_serialized_name;
     }
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * The current status of the custom language model:
      * * `pending` indicates that the model was created but is waiting either for training data to be added or for the
@@ -4641,32 +4747,34 @@ public class IBMSpeechToTextV1Models {
      * * `upgrading` indicates that the model is currently being upgraded.
      * * `failed` indicates that training of the model failed.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
       return status_serialized_name;
     }
+ 
     /**
-     * Gets the progress_serialized_name.
+     * Gets the progress.
      *
      * A percentage that indicates the progress of the custom language model's current training. A value of `100` means
      * that the model is fully trained. **Note:** The `progress` field does not currently reflect the progress of the
      * training. The field changes from `0` to `100` when training is complete.
      *
-     * @return the progress_serialized_name
+     * @return the progress
      */
     @AuraEnabled
     public Long getProgress() {
       return progress_serialized_name;
     }
+ 
     /**
-     * Gets the warnings_serialized_name.
+     * Gets the warnings.
      *
      * If the request included unknown parameters, the following message: `Unexpected query parameter(s) ['parameters']
      * detected`, where `parameters` is a list that includes a quoted string for each unknown parameter.
      *
-     * @return the warnings_serialized_name
+     * @return the warnings
      */
     @AuraEnabled
     public String getWarnings() {
@@ -4674,7 +4782,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the customization_id_serialized_name.
+     * Sets the customizationId.
      *
      * @param customizationId the new customizationId
      */
@@ -4683,7 +4791,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the created_serialized_name.
+     * Sets the created.
      *
      * @param created the new created
      */
@@ -4692,7 +4800,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the language_serialized_name.
+     * Sets the language.
      *
      * @param language the new language
      */
@@ -4701,7 +4809,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the dialect_serialized_name.
+     * Sets the dialect.
      *
      * @param dialect the new dialect
      */
@@ -4710,7 +4818,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the versions_serialized_name.
+     * Sets the versions.
      *
      * @param versions the new versions
      */
@@ -4719,7 +4827,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the owner_serialized_name.
+     * Sets the owner.
      *
      * @param owner the new owner
      */
@@ -4728,7 +4836,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -4737,7 +4845,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the description_serialized_name.
+     * Sets the description.
      *
      * @param description the new description
      */
@@ -4746,7 +4854,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the base_model_name_serialized_name.
+     * Sets the baseModelName.
      *
      * @param baseModelName the new baseModelName
      */
@@ -4755,7 +4863,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the status_serialized_name.
+     * Sets the status.
      *
      * @param status the new status
      */
@@ -4764,7 +4872,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the progress_serialized_name.
+     * Sets the progress.
      *
      * @param progress the new progress
      */
@@ -4773,7 +4881,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the warnings_serialized_name.
+     * Sets the warnings.
      *
      * @param warnings the new warnings
      */
@@ -4797,14 +4905,15 @@ public class IBMSpeechToTextV1Models {
    */
   public class LanguageModels extends IBMWatsonResponseModel {
     private List<LanguageModel> customizations_serialized_name;
+ 
     /**
-     * Gets the customizations_serialized_name.
+     * Gets the customizations.
      *
      * An array of objects that provides information about each available custom language model. The array is empty if
      * the requesting service credentials own no custom language models (if no language is specified) or own no custom
      * language models for the specified language.
      *
-     * @return the customizations_serialized_name
+     * @return the customizations
      */
     @AuraEnabled
     public List<LanguageModel> getCustomizations() {
@@ -4812,7 +4921,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the customizations_serialized_name.
+     * Sets the customizations.
      *
      * @param customizations the new customizations
      */
@@ -4827,7 +4936,7 @@ public class IBMSpeechToTextV1Models {
 
       LanguageModels ret = (LanguageModels) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for customizations_serialized_name
+      // calling custom deserializer for customizations
       List<LanguageModel> newCustomizations = new List<LanguageModel>();
       List<LanguageModel> deserializedCustomizations = ret.getCustomizations();
       if (deserializedCustomizations != null) {
@@ -4848,21 +4957,23 @@ public class IBMSpeechToTextV1Models {
    * The listAcousticModels options.
    */
   public class ListAcousticModelsOptions extends IBMWatsonOptionsModel {
-    private String language_serialized_name;
+    private String language;
+ 
     /**
-     * Gets the language_serialized_name.
+     * Gets the language.
      *
      * The identifier of the language for which custom language or custom acoustic models are to be returned (for
      * example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the
      * requesting service credentials.
      *
-     * @return the language_serialized_name
+     * @return the language
      */
     public String language() {
-      return language_serialized_name;
+      return language;
     }
+
     private ListAcousticModelsOptions(ListAcousticModelsOptionsBuilder builder) {
-      language_serialized_name = builder.language_serialized_name;
+      language = builder.language;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -4881,10 +4992,10 @@ public class IBMSpeechToTextV1Models {
    * ListAcousticModelsOptions Builder.
    */
   public class ListAcousticModelsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String language_serialized_name;
+    private String language;
 
     private ListAcousticModelsOptionsBuilder(ListAcousticModelsOptions listAcousticModelsOptions) {
-      language_serialized_name = listAcousticModelsOptions.language_serialized_name;
+      language = listAcousticModelsOptions.language;
       this.requestHeaders.putAll(listAcousticModelsOptions.requestHeaders());
     }
 
@@ -4904,13 +5015,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the language_serialized_name.
+     * Set the language.
      *
      * @param language the language
      * @return the ListAcousticModelsOptions builder
      */
     public ListAcousticModelsOptionsBuilder language(String language) {
-      this.language_serialized_name = language;
+      this.language = language;
       return this;
     }
 
@@ -4931,21 +5042,23 @@ public class IBMSpeechToTextV1Models {
    * The listAudio options.
    */
   public class ListAudioOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+
     private ListAudioOptions(ListAudioOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -4964,10 +5077,10 @@ public class IBMSpeechToTextV1Models {
    * ListAudioOptions Builder.
    */
   public class ListAudioOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
 
     private ListAudioOptionsBuilder(ListAudioOptions listAudioOptions) {
-      customization_id_serialized_name = listAudioOptions.customization_id_serialized_name;
+      customizationId = listAudioOptions.customizationId;
       this.requestHeaders.putAll(listAudioOptions.requestHeaders());
     }
 
@@ -4983,7 +5096,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      */
     public ListAudioOptionsBuilder(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -4996,13 +5109,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the ListAudioOptions builder
      */
     public ListAudioOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
@@ -5023,21 +5136,23 @@ public class IBMSpeechToTextV1Models {
    * The listCorpora options.
    */
   public class ListCorporaOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+
     private ListCorporaOptions(ListCorporaOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -5056,10 +5171,10 @@ public class IBMSpeechToTextV1Models {
    * ListCorporaOptions Builder.
    */
   public class ListCorporaOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
 
     private ListCorporaOptionsBuilder(ListCorporaOptions listCorporaOptions) {
-      customization_id_serialized_name = listCorporaOptions.customization_id_serialized_name;
+      customizationId = listCorporaOptions.customizationId;
       this.requestHeaders.putAll(listCorporaOptions.requestHeaders());
     }
 
@@ -5075,7 +5190,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      */
     public ListCorporaOptionsBuilder(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -5088,13 +5203,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the ListCorporaOptions builder
      */
     public ListCorporaOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
@@ -5115,21 +5230,23 @@ public class IBMSpeechToTextV1Models {
    * The listLanguageModels options.
    */
   public class ListLanguageModelsOptions extends IBMWatsonOptionsModel {
-    private String language_serialized_name;
+    private String language;
+ 
     /**
-     * Gets the language_serialized_name.
+     * Gets the language.
      *
      * The identifier of the language for which custom language or custom acoustic models are to be returned (for
      * example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the
      * requesting service credentials.
      *
-     * @return the language_serialized_name
+     * @return the language
      */
     public String language() {
-      return language_serialized_name;
+      return language;
     }
+
     private ListLanguageModelsOptions(ListLanguageModelsOptionsBuilder builder) {
-      language_serialized_name = builder.language_serialized_name;
+      language = builder.language;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -5148,10 +5265,10 @@ public class IBMSpeechToTextV1Models {
    * ListLanguageModelsOptions Builder.
    */
   public class ListLanguageModelsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String language_serialized_name;
+    private String language;
 
     private ListLanguageModelsOptionsBuilder(ListLanguageModelsOptions listLanguageModelsOptions) {
-      language_serialized_name = listLanguageModelsOptions.language_serialized_name;
+      language = listLanguageModelsOptions.language;
       this.requestHeaders.putAll(listLanguageModelsOptions.requestHeaders());
     }
 
@@ -5171,13 +5288,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the language_serialized_name.
+     * Set the language.
      *
      * @param language the language
      * @return the ListLanguageModelsOptions builder
      */
     public ListLanguageModelsOptionsBuilder language(String language) {
-      this.language_serialized_name = language;
+      this.language = language;
       return this;
     }
 
@@ -5198,6 +5315,7 @@ public class IBMSpeechToTextV1Models {
    * The listModels options.
    */
   public class ListModelsOptions extends IBMWatsonOptionsModel {
+
     private ListModelsOptions(ListModelsOptionsBuilder builder) {
       this.requestHeaders = builder.requestHeaders;
     }
@@ -5254,35 +5372,38 @@ public class IBMSpeechToTextV1Models {
    * The listWords options.
    */
   public class ListWordsOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String word_type_serialized_name;
-    private String sort_serialized_name;
+    private String customizationId;
+    private String wordType;
+    private String xsort;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the word_type_serialized_name.
+     * Gets the wordType.
      *
      * The type of words to be listed from the custom language model's words resource:
      * * `all` (the default) shows all words.
      * * `user` shows only custom words that were added or modified by the user.
      * * `corpora` shows only OOV that were extracted from corpora.
      *
-     * @return the word_type_serialized_name
+     * @return the wordType
      */
     public String wordType() {
-      return word_type_serialized_name;
+      return wordType;
     }
+ 
     /**
-     * Gets the sort_serialized_name.
+     * Gets the xsort.
      *
      * Indicates the order in which the words are to be listed, `alphabetical` or by `count`. You can prepend an
      * optional `+` or `-` to an argument to indicate whether the results are to be sorted in ascending or descending
@@ -5290,16 +5411,17 @@ public class IBMSpeechToTextV1Models {
      * lexicographical precedence is numeric values, uppercase letters, and lowercase letters. For count ordering,
      * values with the same count are ordered alphabetically. With cURL, URL encode the `+` symbol as `%2B`.
      *
-     * @return the sort_serialized_name
+     * @return the xsort
      */
-    public String sortField() {
-      return sort_serialized_name;
+    public String xsort() {
+      return xsort;
     }
+
     private ListWordsOptions(ListWordsOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      word_type_serialized_name = builder.word_type_serialized_name;
-      sort_serialized_name = builder.sort_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
+      wordType = builder.wordType;
+      xsort = builder.xsort;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -5318,14 +5440,14 @@ public class IBMSpeechToTextV1Models {
    * ListWordsOptions Builder.
    */
   public class ListWordsOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String word_type_serialized_name;
-    private String sort_serialized_name;
+    private String customizationId;
+    private String wordType;
+    private String xsort;
 
     private ListWordsOptionsBuilder(ListWordsOptions listWordsOptions) {
-      customization_id_serialized_name = listWordsOptions.customization_id_serialized_name;
-      word_type_serialized_name = listWordsOptions.word_type_serialized_name;
-      sort_serialized_name = listWordsOptions.sort_serialized_name;
+      customizationId = listWordsOptions.customizationId;
+      wordType = listWordsOptions.wordType;
+      xsort = listWordsOptions.xsort;
       this.requestHeaders.putAll(listWordsOptions.requestHeaders());
     }
 
@@ -5341,7 +5463,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      */
     public ListWordsOptionsBuilder(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -5354,35 +5476,35 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the ListWordsOptions builder
      */
     public ListWordsOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the word_type_serialized_name.
+     * Set the wordType.
      *
      * @param wordType the wordType
      * @return the ListWordsOptions builder
      */
     public ListWordsOptionsBuilder wordType(String wordType) {
-      this.word_type_serialized_name = wordType;
+      this.wordType = wordType;
       return this;
     }
 
     /**
-     * Set the sort_serialized_name.
+     * Set the xsort.
      *
-     * @param sortVar the sortVar
+     * @param xsort the xsort
      * @return the ListWordsOptions builder
      */
-    public ListWordsOptionsBuilder sortField(String sortVar) {
-      this.sort_serialized_name = sortVar;
+    public ListWordsOptionsBuilder xsort(String xsort) {
+      this.xsort = xsort;
       return this;
     }
 
@@ -5411,19 +5533,21 @@ public class IBMSpeechToTextV1Models {
     private String user_token_serialized_name;
     private List<SpeechRecognitionResults> results_serialized_name;
     private List<String> warnings_serialized_name;
+ 
     /**
-     * Gets the id_serialized_name.
+     * Gets the id.
      *
      * The ID of the asynchronous job.
      *
-     * @return the id_serialized_name
+     * @return the id
      */
     @AuraEnabled
     public String getId() {
       return id_serialized_name;
     }
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * The current status of the job:
      * * `waiting`: The service is preparing the job for processing. The service returns this status when the job is
@@ -5435,82 +5559,88 @@ public class IBMSpeechToTextV1Models {
      * you must retrieve the results by checking the individual job.
      * * `failed`: The job failed.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
       return status_serialized_name;
     }
+ 
     /**
-     * Gets the created_serialized_name.
+     * Gets the created.
      *
      * The date and time in Coordinated Universal Time (UTC) at which the job was created. The value is provided in full
      * ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`).
      *
-     * @return the created_serialized_name
+     * @return the created
      */
     @AuraEnabled
     public String getCreated() {
       return created_serialized_name;
     }
+ 
     /**
-     * Gets the updated_serialized_name.
+     * Gets the updated.
      *
      * The date and time in Coordinated Universal Time (UTC) at which the job was last updated by the service. The value
      * is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`). This field is returned only by the **Check
      * jobs** and **Check a job** methods.
      *
-     * @return the updated_serialized_name
+     * @return the updated
      */
     @AuraEnabled
     public String getUpdated() {
       return updated_serialized_name;
     }
+ 
     /**
-     * Gets the url_serialized_name.
+     * Gets the url.
      *
      * The URL to use to request information about the job with the **Check a job** method. This field is returned only
      * by the **Create a job** method.
      *
-     * @return the url_serialized_name
+     * @return the url
      */
     @AuraEnabled
     public String getUrl() {
       return url_serialized_name;
     }
+ 
     /**
-     * Gets the user_token_serialized_name.
+     * Gets the userToken.
      *
      * The user token associated with a job that was created with a callback URL and a user token. This field can be
      * returned only by the **Check jobs** method.
      *
-     * @return the user_token_serialized_name
+     * @return the userToken
      */
     @AuraEnabled
     public String getUserToken() {
       return user_token_serialized_name;
     }
+ 
     /**
-     * Gets the results_serialized_name.
+     * Gets the results.
      *
      * If the status is `completed`, the results of the recognition request as an array that includes a single instance
      * of a `SpeechRecognitionResults` object. This field is returned only by the **Check a job** method.
      *
-     * @return the results_serialized_name
+     * @return the results
      */
     @AuraEnabled
     public List<SpeechRecognitionResults> getResults() {
       return results_serialized_name;
     }
+ 
     /**
-     * Gets the warnings_serialized_name.
+     * Gets the warnings.
      *
      * An array of warning messages about invalid parameters included with the request. Each warning includes a
      * descriptive message and a list of invalid argument strings, for example, `"unexpected query parameter
      * 'user_token', query parameter 'callback_url' was not specified"`. The request succeeds despite the warnings. This
      * field can be returned only by the **Create a job** method.
      *
-     * @return the warnings_serialized_name
+     * @return the warnings
      */
     @AuraEnabled
     public List<String> getWarnings() {
@@ -5518,7 +5648,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the id_serialized_name.
+     * Sets the id.
      *
      * @param id the new id
      */
@@ -5527,7 +5657,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the status_serialized_name.
+     * Sets the status.
      *
      * @param status the new status
      */
@@ -5536,7 +5666,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the created_serialized_name.
+     * Sets the created.
      *
      * @param created the new created
      */
@@ -5545,7 +5675,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the updated_serialized_name.
+     * Sets the updated.
      *
      * @param updated the new updated
      */
@@ -5554,7 +5684,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the url_serialized_name.
+     * Sets the url.
      *
      * @param url the new url
      */
@@ -5563,7 +5693,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the user_token_serialized_name.
+     * Sets the userToken.
      *
      * @param userToken the new userToken
      */
@@ -5572,7 +5702,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the results_serialized_name.
+     * Sets the results.
      *
      * @param results the new results
      */
@@ -5581,7 +5711,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the warnings_serialized_name.
+     * Sets the warnings.
      *
      * @param warnings the new warnings
      */
@@ -5596,7 +5726,7 @@ public class IBMSpeechToTextV1Models {
 
       RecognitionJob ret = (RecognitionJob) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for results_serialized_name
+      // calling custom deserializer for results
       List<SpeechRecognitionResults> newResults = new List<SpeechRecognitionResults>();
       List<SpeechRecognitionResults> deserializedResults = ret.getResults();
       if (deserializedResults != null) {
@@ -5618,13 +5748,14 @@ public class IBMSpeechToTextV1Models {
    */
   public class RecognitionJobs extends IBMWatsonResponseModel {
     private List<RecognitionJob> recognitions_serialized_name;
+ 
     /**
-     * Gets the recognitions_serialized_name.
+     * Gets the recognitions.
      *
      * An array of objects that provides the status for each of the user's current jobs. The array is empty if the user
      * has no current jobs.
      *
-     * @return the recognitions_serialized_name
+     * @return the recognitions
      */
     @AuraEnabled
     public List<RecognitionJob> getRecognitions() {
@@ -5632,7 +5763,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the recognitions_serialized_name.
+     * Sets the recognitions.
      *
      * @param recognitions the new recognitions
      */
@@ -5647,7 +5778,7 @@ public class IBMSpeechToTextV1Models {
 
       RecognitionJobs ret = (RecognitionJobs) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for recognitions_serialized_name
+      // calling custom deserializer for recognitions
       List<RecognitionJob> newRecognitions = new List<RecognitionJob>();
       List<RecognitionJob> deserializedRecognitions = ret.getRecognitions();
       if (deserializedRecognitions != null) {
@@ -5668,99 +5799,104 @@ public class IBMSpeechToTextV1Models {
    * The recognize options.
    */
   public class RecognizeOptions extends IBMWatsonOptionsModel {
-    private IBMWatsonFile audio_serialized_name;
-    private String content_type_serialized_name;
-    private String model_serialized_name;
-    private String customization_id_serialized_name;
-    private String acoustic_customization_id_serialized_name;
-    private String base_model_version_serialized_name;
-    private Double customization_weight_serialized_name;
-    private Long inactivity_timeout_serialized_name;
-    private List<String> keywords_serialized_name;
-    private Double keywords_threshold_serialized_name;
-    private Long max_alternatives_serialized_name;
-    private Double word_alternatives_threshold_serialized_name;
-    private Boolean word_confidence_serialized_name;
-    private Boolean timestamps_serialized_name;
-    private Boolean profanity_filter_serialized_name;
-    private Boolean smart_formatting_serialized_name;
-    private Boolean speaker_labels_serialized_name;
+    private IBMWatsonFile audio;
+    private String contentType;
+    private String model;
+    private String customizationId;
+    private String acousticCustomizationId;
+    private String baseModelVersion;
+    private Double customizationWeight;
+    private Long inactivityTimeout;
+    private List<String> keywords;
+    private Double keywordsThreshold;
+    private Long maxAlternatives;
+    private Double wordAlternativesThreshold;
+    private Boolean wordConfidence;
+    private Boolean timestamps;
+    private Boolean profanityFilter;
+    private Boolean smartFormatting;
+    private Boolean speakerLabels;
+ 
     /**
-     * Gets the audio_serialized_name.
+     * Gets the audio.
      *
-     * @return the audio_serialized_name
+     * The audio to transcribe in the format specified by the `Content-Type` header.
+     *
+     * @return the audio
      */
     public IBMWatsonFile audio() {
-      return audio_serialized_name;
+      return audio;
     }
+ 
     /**
-     * @deprecated This method was incorrectly defined and this value is not returned by the API call.
-     */
-    public String audioFilename() {
-      return '';
-    }
-    /**
-     * Gets the content_type_serialized_name.
+     * Gets the contentType.
      *
      * The type of the input.
      *
-     * @return the content_type_serialized_name
+     * @return the contentType
      */
     public String contentType() {
-      return content_type_serialized_name;
+      return contentType;
     }
+ 
     /**
-     * Gets the model_serialized_name.
+     * Gets the model.
      *
      * The identifier of the model that is to be used for the recognition request.
      *
-     * @return the model_serialized_name
+     * @return the model
      */
     public String model() {
-      return model_serialized_name;
+      return model;
     }
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of a custom language model that is to be used with the recognition request. The base
      * model of the specified custom language model must match the model specified with the `model` parameter. You must
      * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom language model is used.
+     * default, no custom language model is used. See [Custom
+     * models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the acoustic_customization_id_serialized_name.
+     * Gets the acousticCustomizationId.
      *
      * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request. The base
      * model of the specified custom acoustic model must match the model specified with the `model` parameter. You must
      * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom acoustic model is used.
+     * default, no custom acoustic model is used. See [Custom
+     * models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
      *
-     * @return the acoustic_customization_id_serialized_name
+     * @return the acousticCustomizationId
      */
     public String acousticCustomizationId() {
-      return acoustic_customization_id_serialized_name;
+      return acousticCustomizationId;
     }
+ 
     /**
-     * Gets the base_model_version_serialized_name.
+     * Gets the baseModelVersion.
      *
      * The version of the specified base model that is to be used with recognition request. Multiple versions of a base
      * model can exist when a model is updated for internal improvements. The parameter is intended primarily for use
      * with custom models that have been upgraded for a new base model. The default value depends on whether the
-     * parameter is used with or without a custom model. For more information, see [Base model
+     * parameter is used with or without a custom model. See [Base model
      * version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
      *
-     * @return the base_model_version_serialized_name
+     * @return the baseModelVersion
      */
     public String baseModelVersion() {
-      return base_model_version_serialized_name;
+      return baseModelVersion;
     }
+ 
     /**
-     * Gets the customization_weight_serialized_name.
+     * Gets the customizationWeight.
      *
      * If you specify the customization ID (GUID) of a custom language model with the recognition request, the
      * customization weight tells the service how much weight to give to words from the custom language model compared
@@ -5774,166 +5910,175 @@ public class IBMSpeechToTextV1Models {
      * of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
      * of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
      *
-     * @return the customization_weight_serialized_name
+     * See [Custom models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
+     *
+     * @return the customizationWeight
      */
     public Double customizationWeight() {
-      return customization_weight_serialized_name;
+      return customizationWeight;
     }
+ 
     /**
-     * Gets the inactivity_timeout_serialized_name.
+     * Gets the inactivityTimeout.
      *
      * The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
      * closed with a 400 error. The parameter is useful for stopping audio submission from a live microphone when a user
-     * simply walks away. Use `-1` for infinity.
+     * simply walks away. Use `-1` for infinity. See
+     * [Timeouts](https://console.bluemix.net/docs/services/speech-to-text/input.html#timeouts).
      *
-     * @return the inactivity_timeout_serialized_name
+     * @return the inactivityTimeout
      */
     public Long inactivityTimeout() {
-      return inactivity_timeout_serialized_name;
+      return inactivityTimeout;
     }
+ 
     /**
-     * Gets the keywords_serialized_name.
+     * Gets the keywords.
      *
      * An array of keyword strings to spot in the audio. Each keyword string can include one or more string tokens.
      * Keywords are spotted only in the final results, not in interim hypotheses. If you specify any keywords, you must
      * also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an
-     * empty array if you do not need to spot keywords.
+     * empty array if you do not need to spot keywords. See [Keyword
+     * spotting](https://console.bluemix.net/docs/services/speech-to-text/output.html#keyword_spotting).
      *
-     * @return the keywords_serialized_name
+     * @return the keywords
      */
     public List<String> keywords() {
-      return keywords_serialized_name;
+      return keywords;
     }
+ 
     /**
-     * @deprecated This method was incorrectly defined and this value is not returned by the API call.
-     */
-    public Boolean continuous() {
-      return false;
-    }
-    /**
-     * @deprecated This method was incorrectly defined and this value is not returned by the API call.
-     */
-    public Boolean interimResults() {
-      return false;
-    }
-    /**
-     * Gets the keywords_threshold_serialized_name.
+     * Gets the keywordsThreshold.
      *
      * A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
      * confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. No keyword
      * spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
-     * keywords.
+     * keywords. See [Keyword
+     * spotting](https://console.bluemix.net/docs/services/speech-to-text/output.html#keyword_spotting).
      *
-     * @return the keywords_threshold_serialized_name
+     * @return the keywordsThreshold
      */
     public Double keywordsThreshold() {
-      return keywords_threshold_serialized_name;
+      return keywordsThreshold;
     }
+ 
     /**
-     * Gets the max_alternatives_serialized_name.
+     * Gets the maxAlternatives.
      *
      * The maximum number of alternative transcripts that the service is to return. By default, a single transcription
-     * is returned.
+     * is returned. See [Maximum
+     * alternatives](https://console.bluemix.net/docs/services/speech-to-text/output.html#max_alternatives).
      *
-     * @return the max_alternatives_serialized_name
+     * @return the maxAlternatives
      */
     public Long maxAlternatives() {
-      return max_alternatives_serialized_name;
+      return maxAlternatives;
     }
+ 
     /**
-     * Gets the word_alternatives_threshold_serialized_name.
+     * Gets the wordAlternativesThreshold.
      *
      * A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also
      * known as "Confusion Networks"). An alternative word is considered if its confidence is greater than or equal to
      * the threshold. Specify a probability between 0.0 and 1.0. No alternative words are computed if you omit the
-     * parameter.
+     * parameter. See [Word
+     * alternatives](https://console.bluemix.net/docs/services/speech-to-text/output.html#word_alternatives).
      *
-     * @return the word_alternatives_threshold_serialized_name
+     * @return the wordAlternativesThreshold
      */
     public Double wordAlternativesThreshold() {
-      return word_alternatives_threshold_serialized_name;
+      return wordAlternativesThreshold;
     }
+ 
     /**
-     * Gets the word_confidence_serialized_name.
+     * Gets the wordConfidence.
      *
      * If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for each word. By default, no word
-     * confidence measures are returned.
+     * confidence measures are returned. See [Word
+     * confidence](https://console.bluemix.net/docs/services/speech-to-text/output.html#word_confidence).
      *
-     * @return the word_confidence_serialized_name
+     * @return the wordConfidence
      */
     public Boolean wordConfidence() {
-      return word_confidence_serialized_name;
+      return wordConfidence;
     }
+ 
     /**
-     * Gets the timestamps_serialized_name.
+     * Gets the timestamps.
      *
-     * If `true`, the service returns time alignment for each word. By default, no timestamps are returned.
+     * If `true`, the service returns time alignment for each word. By default, no timestamps are returned. See [Word
+     * timestamps](https://console.bluemix.net/docs/services/speech-to-text/output.html#word_timestamps).
      *
-     * @return the timestamps_serialized_name
+     * @return the timestamps
      */
     public Boolean timestamps() {
-      return timestamps_serialized_name;
+      return timestamps;
     }
+ 
     /**
-     * Gets the profanity_filter_serialized_name.
+     * Gets the profanityFilter.
      *
      * If `true`, the service filters profanity from all output except for keyword results by replacing inappropriate
      * words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US
-     * English transcription only.
+     * English transcription only. See [Profanity
+     * filtering](https://console.bluemix.net/docs/services/speech-to-text/output.html#profanity_filter).
      *
-     * @return the profanity_filter_serialized_name
+     * @return the profanityFilter
      */
     public Boolean profanityFilter() {
-      return profanity_filter_serialized_name;
+      return profanityFilter;
     }
+ 
     /**
-     * Gets the smart_formatting_serialized_name.
+     * Gets the smartFormatting.
      *
      * If `true`, the service converts dates, times, series of digits and numbers, phone numbers, currency values, and
      * internet addresses into more readable, conventional representations in the final transcript of a recognition
      * request. For US English, the service also converts certain keyword strings to punctuation symbols. By default, no
-     * smart formatting is performed. Applies to US English and Spanish transcription only.
+     * smart formatting is performed. Applies to US English and Spanish transcription only. See [Smart
+     * formatting](https://console.bluemix.net/docs/services/speech-to-text/output.html#smart_formatting).
      *
-     * @return the smart_formatting_serialized_name
+     * @return the smartFormatting
      */
     public Boolean smartFormatting() {
-      return smart_formatting_serialized_name;
+      return smartFormatting;
     }
+ 
     /**
-     * Gets the speaker_labels_serialized_name.
+     * Gets the speakerLabels.
      *
      * If `true`, the response includes labels that identify which words were spoken by which participants in a
      * multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
-     * `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
-     *
-     *  To determine whether a language model supports speaker labels, use the **Get models** method and check that the
-     * attribute `speaker_labels` is set to `true`. You can also refer to [Speaker
+     * `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter. To determine
+     * whether a language model supports speaker labels, use the **Get models** method and check that the attribute
+     * `speaker_labels` is set to `true`. See [Speaker
      * labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
      *
-     * @return the speaker_labels_serialized_name
+     * @return the speakerLabels
      */
     public Boolean speakerLabels() {
-      return speaker_labels_serialized_name;
+      return speakerLabels;
     }
+
     private RecognizeOptions(RecognizeOptionsBuilder builder) {
-      IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
-      audio_serialized_name = builder.audio_serialized_name;
-      content_type_serialized_name = builder.content_type_serialized_name;
-      model_serialized_name = builder.model_serialized_name;
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      acoustic_customization_id_serialized_name = builder.acoustic_customization_id_serialized_name;
-      base_model_version_serialized_name = builder.base_model_version_serialized_name;
-      customization_weight_serialized_name = builder.customization_weight_serialized_name;
-      inactivity_timeout_serialized_name = builder.inactivity_timeout_serialized_name;
-      keywords_serialized_name = builder.keywords_serialized_name;
-      keywords_threshold_serialized_name = builder.keywords_threshold_serialized_name;
-      max_alternatives_serialized_name = builder.max_alternatives_serialized_name;
-      word_alternatives_threshold_serialized_name = builder.word_alternatives_threshold_serialized_name;
-      word_confidence_serialized_name = builder.word_confidence_serialized_name;
-      timestamps_serialized_name = builder.timestamps_serialized_name;
-      profanity_filter_serialized_name = builder.profanity_filter_serialized_name;
-      smart_formatting_serialized_name = builder.smart_formatting_serialized_name;
-      speaker_labels_serialized_name = builder.speaker_labels_serialized_name;
+      IBMWatsonValidator.isTrue(builder.contentType != null, 'contentType cannot be null');
+      audio = builder.audio;
+      contentType = builder.contentType;
+      model = builder.model;
+      customizationId = builder.customizationId;
+      acousticCustomizationId = builder.acousticCustomizationId;
+      baseModelVersion = builder.baseModelVersion;
+      customizationWeight = builder.customizationWeight;
+      inactivityTimeout = builder.inactivityTimeout;
+      keywords = builder.keywords;
+      keywordsThreshold = builder.keywordsThreshold;
+      maxAlternatives = builder.maxAlternatives;
+      wordAlternativesThreshold = builder.wordAlternativesThreshold;
+      wordConfidence = builder.wordConfidence;
+      timestamps = builder.timestamps;
+      profanityFilter = builder.profanityFilter;
+      smartFormatting = builder.smartFormatting;
+      speakerLabels = builder.speakerLabels;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -5952,42 +6097,42 @@ public class IBMSpeechToTextV1Models {
    * RecognizeOptions Builder.
    */
   public class RecognizeOptionsBuilder extends IBMWatsonOptionsModel {
-    private IBMWatsonFile audio_serialized_name;
-    private String content_type_serialized_name;
-    private String model_serialized_name;
-    private String customization_id_serialized_name;
-    private String acoustic_customization_id_serialized_name;
-    private String base_model_version_serialized_name;
-    private Double customization_weight_serialized_name;
-    private Long inactivity_timeout_serialized_name;
-    private List<String> keywords_serialized_name;
-    private Double keywords_threshold_serialized_name;
-    private Long max_alternatives_serialized_name;
-    private Double word_alternatives_threshold_serialized_name;
-    private Boolean word_confidence_serialized_name;
-    private Boolean timestamps_serialized_name;
-    private Boolean profanity_filter_serialized_name;
-    private Boolean smart_formatting_serialized_name;
-    private Boolean speaker_labels_serialized_name;
+    private IBMWatsonFile audio;
+    private String contentType;
+    private String model;
+    private String customizationId;
+    private String acousticCustomizationId;
+    private String baseModelVersion;
+    private Double customizationWeight;
+    private Long inactivityTimeout;
+    private List<String> keywords;
+    private Double keywordsThreshold;
+    private Long maxAlternatives;
+    private Double wordAlternativesThreshold;
+    private Boolean wordConfidence;
+    private Boolean timestamps;
+    private Boolean profanityFilter;
+    private Boolean smartFormatting;
+    private Boolean speakerLabels;
 
     private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
-      audio_serialized_name = recognizeOptions.audio_serialized_name;
-      content_type_serialized_name = recognizeOptions.content_type_serialized_name;
-      model_serialized_name = recognizeOptions.model_serialized_name;
-      customization_id_serialized_name = recognizeOptions.customization_id_serialized_name;
-      acoustic_customization_id_serialized_name = recognizeOptions.acoustic_customization_id_serialized_name;
-      base_model_version_serialized_name = recognizeOptions.base_model_version_serialized_name;
-      customization_weight_serialized_name = recognizeOptions.customization_weight_serialized_name;
-      inactivity_timeout_serialized_name = recognizeOptions.inactivity_timeout_serialized_name;
-      keywords_serialized_name = recognizeOptions.keywords_serialized_name;
-      keywords_threshold_serialized_name = recognizeOptions.keywords_threshold_serialized_name;
-      max_alternatives_serialized_name = recognizeOptions.max_alternatives_serialized_name;
-      word_alternatives_threshold_serialized_name = recognizeOptions.word_alternatives_threshold_serialized_name;
-      word_confidence_serialized_name = recognizeOptions.word_confidence_serialized_name;
-      timestamps_serialized_name = recognizeOptions.timestamps_serialized_name;
-      profanity_filter_serialized_name = recognizeOptions.profanity_filter_serialized_name;
-      smart_formatting_serialized_name = recognizeOptions.smart_formatting_serialized_name;
-      speaker_labels_serialized_name = recognizeOptions.speaker_labels_serialized_name;
+      audio = recognizeOptions.audio;
+      contentType = recognizeOptions.contentType;
+      model = recognizeOptions.model;
+      customizationId = recognizeOptions.customizationId;
+      acousticCustomizationId = recognizeOptions.acousticCustomizationId;
+      baseModelVersion = recognizeOptions.baseModelVersion;
+      customizationWeight = recognizeOptions.customizationWeight;
+      inactivityTimeout = recognizeOptions.inactivityTimeout;
+      keywords = recognizeOptions.keywords;
+      keywordsThreshold = recognizeOptions.keywordsThreshold;
+      maxAlternatives = recognizeOptions.maxAlternatives;
+      wordAlternativesThreshold = recognizeOptions.wordAlternativesThreshold;
+      wordConfidence = recognizeOptions.wordConfidence;
+      timestamps = recognizeOptions.timestamps;
+      profanityFilter = recognizeOptions.profanityFilter;
+      smartFormatting = recognizeOptions.smartFormatting;
+      speakerLabels = recognizeOptions.speakerLabels;
       this.requestHeaders.putAll(recognizeOptions.requestHeaders());
     }
 
@@ -6007,226 +6152,205 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Adds an keywords to keywords_serialized_name.
+     * Adds an keywords to keywords.
      *
      * @param keywords the new keywords
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder addKeywords(String keywords) {
       IBMWatsonValidator.notNull(keywords, 'keywords cannot be null');
-      if (this.keywords_serialized_name == null) {
-        this.keywords_serialized_name = new List<String>();
+      if (this.keywords == null) {
+        this.keywords = new List<String>();
       }
-      this.keywords_serialized_name.add(keywords);
+      this.keywords.add(keywords);
       return this;
     }
 
     /**
-     * Set the audio_serialized_name.
+     * Set the audio.
      *
      * @param audio the audio
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder audio(IBMWatsonFile audio) {
-      this.audio_serialized_name = audio;
+      this.audio = audio;
       return this;
     }
 
     /**
-     * @deprecated This method was incorrectly defined and has no effect on the API call.
-     */
-    public RecognizeOptionsBuilder audioFilename(String audioFilename) {
-      return this;
-    }
-
-    /**
-     * Set the content_type_serialized_name.
+     * Set the contentType.
      *
      * @param contentType the contentType
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder contentType(String contentType) {
-      this.content_type_serialized_name = contentType;
+      this.contentType = contentType;
       return this;
     }
 
     /**
-     * Set the model_serialized_name.
+     * Set the model.
      *
      * @param model the model
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder model(String model) {
-      this.model_serialized_name = model;
+      this.model = model;
       return this;
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the acoustic_customization_id_serialized_name.
+     * Set the acousticCustomizationId.
      *
      * @param acousticCustomizationId the acousticCustomizationId
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder acousticCustomizationId(String acousticCustomizationId) {
-      this.acoustic_customization_id_serialized_name = acousticCustomizationId;
+      this.acousticCustomizationId = acousticCustomizationId;
       return this;
     }
 
     /**
-     * Set the base_model_version_serialized_name.
+     * Set the baseModelVersion.
      *
      * @param baseModelVersion the baseModelVersion
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder baseModelVersion(String baseModelVersion) {
-      this.base_model_version_serialized_name = baseModelVersion;
+      this.baseModelVersion = baseModelVersion;
       return this;
     }
 
     /**
-     * Set the customization_weight_serialized_name.
+     * Set the customizationWeight.
      *
      * @param customizationWeight the customizationWeight
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder customizationWeight(Double customizationWeight) {
-      this.customization_weight_serialized_name = customizationWeight;
+      this.customizationWeight = customizationWeight;
       return this;
     }
 
     /**
-     * Set the inactivity_timeout_serialized_name.
+     * Set the inactivityTimeout.
      *
      * @param inactivityTimeout the inactivityTimeout
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder inactivityTimeout(Long inactivityTimeout) {
-      this.inactivity_timeout_serialized_name = inactivityTimeout;
+      this.inactivityTimeout = inactivityTimeout;
       return this;
     }
 
     /**
-     * Set the keywords_serialized_name.
-     * Existing keywords_serialized_name will be replaced.
+     * Set the keywords.
+     * Existing keywords will be replaced.
      *
      * @param keywords the keywords
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder keywords(List<String> keywords) {
-      this.keywords_serialized_name = keywords;
+      this.keywords = keywords;
       return this;
     }
 
     /**
-     * @deprecated This method was incorrectly defined and has no effect on the API call.
-     */
-    public RecognizeOptionsBuilder continuous(Boolean continuous) {
-      return this;
-    }
-
-    /**
-     * @deprecated This method was incorrectly defined and has no effect on the API call.
-     */
-    public RecognizeOptionsBuilder interimResults(Boolean interimResults) {
-      return this;
-    }
-
-    /**
-     * Set the keywords_threshold_serialized_name.
+     * Set the keywordsThreshold.
      *
      * @param keywordsThreshold the keywordsThreshold
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder keywordsThreshold(Double keywordsThreshold) {
-      this.keywords_threshold_serialized_name = keywordsThreshold;
+      this.keywordsThreshold = keywordsThreshold;
       return this;
     }
 
     /**
-     * Set the max_alternatives_serialized_name.
+     * Set the maxAlternatives.
      *
      * @param maxAlternatives the maxAlternatives
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder maxAlternatives(Long maxAlternatives) {
-      this.max_alternatives_serialized_name = maxAlternatives;
+      this.maxAlternatives = maxAlternatives;
       return this;
     }
 
     /**
-     * Set the word_alternatives_threshold_serialized_name.
+     * Set the wordAlternativesThreshold.
      *
      * @param wordAlternativesThreshold the wordAlternativesThreshold
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder wordAlternativesThreshold(Double wordAlternativesThreshold) {
-      this.word_alternatives_threshold_serialized_name = wordAlternativesThreshold;
+      this.wordAlternativesThreshold = wordAlternativesThreshold;
       return this;
     }
 
     /**
-     * Set the word_confidence_serialized_name.
+     * Set the wordConfidence.
      *
      * @param wordConfidence the wordConfidence
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder wordConfidence(Boolean wordConfidence) {
-      this.word_confidence_serialized_name = wordConfidence;
+      this.wordConfidence = wordConfidence;
       return this;
     }
 
     /**
-     * Set the timestamps_serialized_name.
+     * Set the timestamps.
      *
      * @param timestamps the timestamps
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder timestamps(Boolean timestamps) {
-      this.timestamps_serialized_name = timestamps;
+      this.timestamps = timestamps;
       return this;
     }
 
     /**
-     * Set the profanity_filter_serialized_name.
+     * Set the profanityFilter.
      *
      * @param profanityFilter the profanityFilter
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder profanityFilter(Boolean profanityFilter) {
-      this.profanity_filter_serialized_name = profanityFilter;
+      this.profanityFilter = profanityFilter;
       return this;
     }
 
     /**
-     * Set the smart_formatting_serialized_name.
+     * Set the smartFormatting.
      *
      * @param smartFormatting the smartFormatting
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder smartFormatting(Boolean smartFormatting) {
-      this.smart_formatting_serialized_name = smartFormatting;
+      this.smartFormatting = smartFormatting;
       return this;
     }
 
     /**
-     * Set the speaker_labels_serialized_name.
+     * Set the speakerLabels.
      *
      * @param speakerLabels the speakerLabels
      * @return the RecognizeOptions builder
      */
     public RecognizeOptionsBuilder speakerLabels(Boolean speakerLabels) {
-      this.speaker_labels_serialized_name = speakerLabels;
+      this.speakerLabels = speakerLabels;
       return this;
     }
 
@@ -6247,37 +6371,40 @@ public class IBMSpeechToTextV1Models {
    * The registerCallback options.
    */
   public class RegisterCallbackOptions extends IBMWatsonOptionsModel {
-    private String callback_url_serialized_name;
-    private String user_secret_serialized_name;
+    private String callbackUrl;
+    private String userSecret;
+ 
     /**
-     * Gets the callback_url_serialized_name.
+     * Gets the callbackUrl.
      *
      * An HTTP or HTTPS URL to which callback notifications are to be sent. To be white-listed, the URL must
      * successfully echo the challenge string during URL verification. During verification, the client can also check
      * the signature that the service sends in the `X-Callback-Signature` header to verify the origin of the request.
      *
-     * @return the callback_url_serialized_name
+     * @return the callbackUrl
      */
     public String callbackUrl() {
-      return callback_url_serialized_name;
+      return callbackUrl;
     }
+ 
     /**
-     * Gets the user_secret_serialized_name.
+     * Gets the userSecret.
      *
      * A user-specified string that the service uses to generate the HMAC-SHA1 signature that it sends via the
      * `X-Callback-Signature` header. The service includes the header during URL verification and with every
      * notification sent to the callback URL. It calculates the signature over the payload of the notification. If you
      * omit the parameter, the service does not send the header.
      *
-     * @return the user_secret_serialized_name
+     * @return the userSecret
      */
     public String userSecret() {
-      return user_secret_serialized_name;
+      return userSecret;
     }
+
     private RegisterCallbackOptions(RegisterCallbackOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.callback_url_serialized_name, 'callback_url_serialized_name cannot be null');
-      callback_url_serialized_name = builder.callback_url_serialized_name;
-      user_secret_serialized_name = builder.user_secret_serialized_name;
+      IBMWatsonValidator.notNull(builder.callbackUrl, 'callbackUrl cannot be null');
+      callbackUrl = builder.callbackUrl;
+      userSecret = builder.userSecret;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -6296,12 +6423,12 @@ public class IBMSpeechToTextV1Models {
    * RegisterCallbackOptions Builder.
    */
   public class RegisterCallbackOptionsBuilder extends IBMWatsonOptionsModel {
-    private String callback_url_serialized_name;
-    private String user_secret_serialized_name;
+    private String callbackUrl;
+    private String userSecret;
 
     private RegisterCallbackOptionsBuilder(RegisterCallbackOptions registerCallbackOptions) {
-      callback_url_serialized_name = registerCallbackOptions.callback_url_serialized_name;
-      user_secret_serialized_name = registerCallbackOptions.user_secret_serialized_name;
+      callbackUrl = registerCallbackOptions.callbackUrl;
+      userSecret = registerCallbackOptions.userSecret;
       this.requestHeaders.putAll(registerCallbackOptions.requestHeaders());
     }
 
@@ -6317,7 +6444,7 @@ public class IBMSpeechToTextV1Models {
      * @param callbackUrl the callbackUrl
      */
     public RegisterCallbackOptionsBuilder(String callbackUrl) {
-      this.callback_url_serialized_name = callbackUrl;
+      this.callbackUrl = callbackUrl;
     }
 
     /**
@@ -6330,24 +6457,24 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the callback_url_serialized_name.
+     * Set the callbackUrl.
      *
      * @param callbackUrl the callbackUrl
      * @return the RegisterCallbackOptions builder
      */
     public RegisterCallbackOptionsBuilder callbackUrl(String callbackUrl) {
-      this.callback_url_serialized_name = callbackUrl;
+      this.callbackUrl = callbackUrl;
       return this;
     }
 
     /**
-     * Set the user_secret_serialized_name.
+     * Set the userSecret.
      *
      * @param userSecret the userSecret
      * @return the RegisterCallbackOptions builder
      */
     public RegisterCallbackOptionsBuilder userSecret(String userSecret) {
-      this.user_secret_serialized_name = userSecret;
+      this.userSecret = userSecret;
       return this;
     }
 
@@ -6370,25 +6497,27 @@ public class IBMSpeechToTextV1Models {
   public class RegisterStatus extends IBMWatsonResponseModel {
     private String status_serialized_name;
     private String url_serialized_name;
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * The current status of the job:
      * * `created` if the callback URL was successfully white-listed as a result of the call.
      * * `already created` if the URL was already white-listed.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
       return status_serialized_name;
     }
+ 
     /**
-     * Gets the url_serialized_name.
+     * Gets the url.
      *
      * The callback URL that is successfully registered.
      *
-     * @return the url_serialized_name
+     * @return the url
      */
     @AuraEnabled
     public String getUrl() {
@@ -6396,7 +6525,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the status_serialized_name.
+     * Sets the status.
      *
      * @param status the new status
      */
@@ -6405,7 +6534,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the url_serialized_name.
+     * Sets the url.
      *
      * @param url the new url
      */
@@ -6428,21 +6557,23 @@ public class IBMSpeechToTextV1Models {
    * The resetAcousticModel options.
    */
   public class ResetAcousticModelOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+
     private ResetAcousticModelOptions(ResetAcousticModelOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -6461,10 +6592,10 @@ public class IBMSpeechToTextV1Models {
    * ResetAcousticModelOptions Builder.
    */
   public class ResetAcousticModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
 
     private ResetAcousticModelOptionsBuilder(ResetAcousticModelOptions resetAcousticModelOptions) {
-      customization_id_serialized_name = resetAcousticModelOptions.customization_id_serialized_name;
+      customizationId = resetAcousticModelOptions.customizationId;
       this.requestHeaders.putAll(resetAcousticModelOptions.requestHeaders());
     }
 
@@ -6480,7 +6611,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      */
     public ResetAcousticModelOptionsBuilder(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -6493,13 +6624,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the ResetAcousticModelOptions builder
      */
     public ResetAcousticModelOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
@@ -6520,21 +6651,23 @@ public class IBMSpeechToTextV1Models {
    * The resetLanguageModel options.
    */
   public class ResetLanguageModelOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+
     private ResetLanguageModelOptions(ResetLanguageModelOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -6553,10 +6686,10 @@ public class IBMSpeechToTextV1Models {
    * ResetLanguageModelOptions Builder.
    */
   public class ResetLanguageModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
 
     private ResetLanguageModelOptionsBuilder(ResetLanguageModelOptions resetLanguageModelOptions) {
-      customization_id_serialized_name = resetLanguageModelOptions.customization_id_serialized_name;
+      customizationId = resetLanguageModelOptions.customizationId;
       this.requestHeaders.putAll(resetLanguageModelOptions.requestHeaders());
     }
 
@@ -6572,7 +6705,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      */
     public ResetLanguageModelOptionsBuilder(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -6585,13 +6718,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the ResetLanguageModelOptions builder
      */
     public ResetLanguageModelOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
@@ -6617,78 +6750,83 @@ public class IBMSpeechToTextV1Models {
     private Long speaker_serialized_name;
     private Double confidence_serialized_name;
     private Boolean final_serialized_name;
+ 
     /**
-     * Gets the from_serialized_name.
+     * Gets the xfrom.
      *
      * The start time of a word from the transcript. The value matches the start time of a word from the `timestamps`
      * array.
      *
-     * @return the from_serialized_name
+     * @return the xfrom
      */
     @AuraEnabled
-    public Double getFrom() {
+    public Double getXfrom() {
       return from_serialized_name;
     }
+ 
     /**
-     * Gets the to_serialized_name.
+     * Gets the to.
      *
      * The end time of a word from the transcript. The value matches the end time of a word from the `timestamps` array.
      *
-     * @return the to_serialized_name
+     * @return the to
      */
     @AuraEnabled
     public Double getTo() {
       return to_serialized_name;
     }
+ 
     /**
-     * Gets the speaker_serialized_name.
+     * Gets the speaker.
      *
      * The numeric identifier that the service assigns to a speaker from the audio. Speaker IDs begin at `0` initially
      * but can evolve and change across interim results (if supported by the method) and between interim and final
      * results as the service processes the audio. They are not guaranteed to be sequential, contiguous, or ordered.
      *
-     * @return the speaker_serialized_name
+     * @return the speaker
      */
     @AuraEnabled
     public Long getSpeaker() {
       return speaker_serialized_name;
     }
+ 
     /**
-     * Gets the confidence_serialized_name.
+     * Gets the confidence.
      *
      * A score that indicates the service's confidence in its identification of the speaker in the range of 0.0 to 1.0.
      *
-     * @return the confidence_serialized_name
+     * @return the confidence
      */
     @AuraEnabled
     public Double getConfidence() {
       return confidence_serialized_name;
     }
+ 
     /**
-     * Gets the final_serialized_name.
+     * Gets the finalResults.
      *
      * An indication of whether the service might further change word and speaker-label results. A value of `true` means
      * that the service guarantees not to send any further updates for the current or any preceding results; `false`
      * means that the service might send further updates to the results.
      *
-     * @return the final_serialized_name
+     * @return the finalResults
      */
     @AuraEnabled
-    public Boolean getFinal() {
+    public Boolean getFinalResults() {
       return final_serialized_name;
     }
 
     /**
-     * Sets the from_serialized_name.
+     * Sets the xfrom.
      *
-     * @param fromVar the new fromVar
+     * @param xfrom the new xfrom
      */
-    public void setFrom(final Double fromVar) {
-      this.from_serialized_name = fromVar;
+    public void setXfrom(final Double xfrom) {
+      this.from_serialized_name = xfrom;
     }
 
     /**
-     * Sets the to_serialized_name.
+     * Sets the to.
      *
      * @param to the new to
      */
@@ -6697,7 +6835,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the speaker_serialized_name.
+     * Sets the speaker.
      *
      * @param speaker the new speaker
      */
@@ -6706,7 +6844,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the confidence_serialized_name.
+     * Sets the confidence.
      *
      * @param confidence the new confidence
      */
@@ -6715,12 +6853,12 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the final_serialized_name.
+     * Sets the finalResults.
      *
-     * @param finalVar the new finalVar
+     * @param finalResults the new finalResults
      */
-    public void setFinal(final Boolean finalVar) {
-      this.final_serialized_name = finalVar;
+    public void setFinalResults(final Boolean finalResults) {
+      this.final_serialized_name = finalResults;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6744,67 +6882,73 @@ public class IBMSpeechToTextV1Models {
     private String url_serialized_name;
     private SupportedFeatures supported_features_serialized_name;
     private String description_serialized_name;
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The name of the model for use as an identifier in calls to the service (for example, `en-US_BroadbandModel`).
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the language_serialized_name.
+     * Gets the language.
      *
      * The language identifier of the model (for example, `en-US`).
      *
-     * @return the language_serialized_name
+     * @return the language
      */
     @AuraEnabled
     public String getLanguage() {
       return language_serialized_name;
     }
+ 
     /**
-     * Gets the rate_serialized_name.
+     * Gets the rate.
      *
      * The sampling rate (minimum acceptable rate for audio) used by the model in Hertz.
      *
-     * @return the rate_serialized_name
+     * @return the rate
      */
     @AuraEnabled
     public Long getRate() {
       return rate_serialized_name;
     }
+ 
     /**
-     * Gets the url_serialized_name.
+     * Gets the url.
      *
      * The URI for the model.
      *
-     * @return the url_serialized_name
+     * @return the url
      */
     @AuraEnabled
     public String getUrl() {
       return url_serialized_name;
     }
+ 
     /**
-     * Gets the supported_features_serialized_name.
+     * Gets the supportedFeatures.
      *
      * Describes the additional service features supported with the model.
      *
-     * @return the supported_features_serialized_name
+     * @return the supportedFeatures
      */
     @AuraEnabled
     public SupportedFeatures getSupportedFeatures() {
       return supported_features_serialized_name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * Brief description of the model.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     @AuraEnabled
     public String getDescription() {
@@ -6812,7 +6956,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -6821,7 +6965,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the language_serialized_name.
+     * Sets the language.
      *
      * @param language the new language
      */
@@ -6830,7 +6974,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the rate_serialized_name.
+     * Sets the rate.
      *
      * @param rate the new rate
      */
@@ -6839,7 +6983,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the url_serialized_name.
+     * Sets the url.
      *
      * @param url the new url
      */
@@ -6848,7 +6992,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the supported_features_serialized_name.
+     * Sets the supportedFeatures.
      *
      * @param supportedFeatures the new supportedFeatures
      */
@@ -6857,7 +7001,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the description_serialized_name.
+     * Sets the description.
      *
      * @param description the new description
      */
@@ -6872,7 +7016,7 @@ public class IBMSpeechToTextV1Models {
 
       SpeechModel ret = (SpeechModel) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for supported_features_serialized_name
+      // calling custom deserializer for supportedFeatures
       SupportedFeatures newSupportedFeatures = (SupportedFeatures) new SupportedFeatures().deserialize(JSON.serialize(ret.getSupportedFeatures()), (Map<String, Object>) jsonMap.get('supported_features_serialized_name'), SupportedFeatures.class);
       ret.setSupportedFeatures(newSupportedFeatures);
 
@@ -6885,12 +7029,13 @@ public class IBMSpeechToTextV1Models {
    */
   public class SpeechModels extends IBMWatsonResponseModel {
     private List<SpeechModel> models_serialized_name;
+ 
     /**
-     * Gets the models_serialized_name.
+     * Gets the models.
      *
      * An array of objects that provides information about each available model.
      *
-     * @return the models_serialized_name
+     * @return the models
      */
     @AuraEnabled
     public List<SpeechModel> getModels() {
@@ -6898,7 +7043,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the models_serialized_name.
+     * Sets the models.
      *
      * @param models the new models
      */
@@ -6913,7 +7058,7 @@ public class IBMSpeechToTextV1Models {
 
       SpeechModels ret = (SpeechModels) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for models_serialized_name
+      // calling custom deserializer for models
       List<SpeechModel> newModels = new List<SpeechModel>();
       List<SpeechModel> deserializedModels = ret.getModels();
       if (deserializedModels != null) {
@@ -6936,60 +7081,64 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript_serialized_name;
     private Double confidence_serialized_name;
-    private List<List<String>> timestamps_serialized_name;
-    private List<List<String>> word_confidence_serialized_name;
+    private List<String> timestamps_serialized_name;
+    private List<String> word_confidence_serialized_name;
+ 
     /**
-     * Gets the transcript_serialized_name.
+     * Gets the transcript.
      *
      * A transcription of the audio.
      *
-     * @return the transcript_serialized_name
+     * @return the transcript
      */
     @AuraEnabled
     public String getTranscript() {
       return transcript_serialized_name;
     }
+ 
     /**
-     * Gets the confidence_serialized_name.
+     * Gets the confidence.
      *
      * A score that indicates the service's confidence in the transcript in the range of 0.0 to 1.0. Returned only for
      * the best alternative and only with results marked as final.
      *
-     * @return the confidence_serialized_name
+     * @return the confidence
      */
     @AuraEnabled
     public Double getConfidence() {
       return confidence_serialized_name;
     }
+ 
     /**
-     * Gets the timestamps_serialized_name.
+     * Gets the timestamps.
      *
      * Time alignments for each word from the transcript as a list of lists. Each inner list consists of three elements:
      * the word followed by its start and end time in seconds, for example: `[["hello",0.0,1.2],["world",1.2,2.5]]`.
      * Returned only for the best alternative.
      *
-     * @return the timestamps_serialized_name
+     * @return the timestamps
      */
     @AuraEnabled
-    public List<List<String>> getTimestamps() {
+    public List<String> getTimestamps() {
       return timestamps_serialized_name;
     }
+ 
     /**
-     * Gets the word_confidence_serialized_name.
+     * Gets the wordConfidence.
      *
      * A confidence score for each word of the transcript as a list of lists. Each inner list consists of two elements:
      * the word and its confidence score in the range of 0.0 to 1.0, for example: `[["hello",0.95],["world",0.866]]`.
      * Returned only for the best alternative and only with results marked as final.
      *
-     * @return the word_confidence_serialized_name
+     * @return the wordConfidence
      */
     @AuraEnabled
-    public List<List<String>> getWordConfidence() {
+    public List<String> getWordConfidence() {
       return word_confidence_serialized_name;
     }
 
     /**
-     * Sets the transcript_serialized_name.
+     * Sets the transcript.
      *
      * @param transcript the new transcript
      */
@@ -6998,7 +7147,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the confidence_serialized_name.
+     * Sets the confidence.
      *
      * @param confidence the new confidence
      */
@@ -7007,20 +7156,20 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the timestamps_serialized_name.
+     * Sets the timestamps.
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<List<String>> timestamps) {
+    public void setTimestamps(final List<String> timestamps) {
       this.timestamps_serialized_name = timestamps;
     }
 
     /**
-     * Sets the word_confidence_serialized_name.
+     * Sets the wordConfidence.
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<List<String>> wordConfidence) {
+    public void setWordConfidence(final List<String> wordConfidence) {
       this.word_confidence_serialized_name = wordConfidence;
     }
 
@@ -7043,50 +7192,54 @@ public class IBMSpeechToTextV1Models {
     private List<SpeechRecognitionAlternative> alternatives_serialized_name;
     private Map<String, List<KeywordResult>> keywords_result_serialized_name;
     private List<WordAlternativeResults> word_alternatives_serialized_name;
+ 
     /**
-     * Gets the final_serialized_name.
+     * Gets the finalResults.
      *
      * An indication of whether the transcription results are final. If `true`, the results for this utterance are not
      * updated further; no additional results are sent for a `result_index` once its results are indicated as final.
      *
-     * @return the final_serialized_name
+     * @return the finalResults
      */
     @AuraEnabled
-    public Boolean getFinal() {
+    public Boolean getFinalResults() {
       return final_serialized_name;
     }
+ 
     /**
-     * Gets the alternatives_serialized_name.
+     * Gets the alternatives.
      *
      * An array of alternative transcripts. The `alternatives` array can include additional requested output such as
      * word confidence or timestamps.
      *
-     * @return the alternatives_serialized_name
+     * @return the alternatives
      */
     @AuraEnabled
     public List<SpeechRecognitionAlternative> getAlternatives() {
       return alternatives_serialized_name;
     }
+ 
     /**
-     * Gets the keywords_result_serialized_name.
+     * Gets the keywordsResult.
      *
      * A dictionary (or associative array) whose keys are the strings specified for `keywords` if both that parameter
      * and `keywords_threshold` are specified. A keyword for which no matches are found is omitted from the array. The
      * array is omitted if no matches are found for any keywords.
      *
-     * @return the keywords_result_serialized_name
+     * @return the keywordsResult
      */
     @AuraEnabled
     public Map<String, List<KeywordResult>> getKeywordsResult() {
       return keywords_result_serialized_name;
     }
+ 
     /**
-     * Gets the word_alternatives_serialized_name.
+     * Gets the wordAlternatives.
      *
      * An array of alternative hypotheses found for words of the input audio if a `word_alternatives_threshold` is
      * specified.
      *
-     * @return the word_alternatives_serialized_name
+     * @return the wordAlternatives
      */
     @AuraEnabled
     public List<WordAlternativeResults> getWordAlternatives() {
@@ -7094,16 +7247,16 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the final_serialized_name.
+     * Sets the finalResults.
      *
-     * @param finalVar the new finalVar
+     * @param finalResults the new finalResults
      */
-    public void setFinal(final Boolean finalVar) {
-      this.final_serialized_name = finalVar;
+    public void setFinalResults(final Boolean finalResults) {
+      this.final_serialized_name = finalResults;
     }
 
     /**
-     * Sets the alternatives_serialized_name.
+     * Sets the alternatives.
      *
      * @param alternatives the new alternatives
      */
@@ -7112,7 +7265,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the keywords_result_serialized_name.
+     * Sets the keywordsResult.
      *
      * @param keywordsResult the new keywordsResult
      */
@@ -7121,7 +7274,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the word_alternatives_serialized_name.
+     * Sets the wordAlternatives.
      *
      * @param wordAlternatives the new wordAlternatives
      */
@@ -7136,7 +7289,7 @@ public class IBMSpeechToTextV1Models {
 
       SpeechRecognitionResult ret = (SpeechRecognitionResult) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for alternatives_serialized_name
+      // calling custom deserializer for alternatives
       List<SpeechRecognitionAlternative> newAlternatives = new List<SpeechRecognitionAlternative>();
       List<SpeechRecognitionAlternative> deserializedAlternatives = ret.getAlternatives();
       if (deserializedAlternatives != null) {
@@ -7149,7 +7302,7 @@ public class IBMSpeechToTextV1Models {
         ret.setAlternatives(newAlternatives);
       }
 
-      // calling custom deserializer for keywords_result_serialized_name
+      // calling custom deserializer for keywordsResult
       Map<String, List<KeywordResult>> newKeywordsResult = new Map<String, List<KeywordResult>>();
       Map<String, List<KeywordResult>> deserializedKeywordsResult = ret.getKeywordsResult();
       if (deserializedKeywordsResult != null) {
@@ -7159,8 +7312,8 @@ public class IBMSpeechToTextV1Models {
           for (Integer i = 0; i < keywordResultList.size(); i++) {
             KeywordResult currentItem = keywordResultList.get(i);
             Map<String, Object> itemInMap = (Map<String, Object>) jsonMap.get('keywords_result_serialized_name');
-            Object innerKeywordResult = ((List<Object>) itemInMap.get(key)).get(i);
-            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(innerKeywordResult)), KeywordResult.class);
+            Object innerObject = ((List<Object>) itemInMap.get(key)).get(i);
+            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(innerObject)), KeywordResult.class);
             newKeywordResult.add(newItem);
           }
           newKeywordsResult.put(key, newKeywordResult);
@@ -7168,7 +7321,7 @@ public class IBMSpeechToTextV1Models {
         ret.setKeywordsResult(newKeywordsResult);
       }
 
-      // calling custom deserializer for word_alternatives_serialized_name
+      // calling custom deserializer for wordAlternatives
       List<WordAlternativeResults> newWordAlternatives = new List<WordAlternativeResults>();
       List<WordAlternativeResults> deserializedWordAlternatives = ret.getWordAlternatives();
       if (deserializedWordAlternatives != null) {
@@ -7193,47 +7346,51 @@ public class IBMSpeechToTextV1Models {
     private Long result_index_serialized_name;
     private List<SpeakerLabelsResult> speaker_labels_serialized_name;
     private List<String> warnings_serialized_name;
+ 
     /**
-     * Gets the results_serialized_name.
+     * Gets the results.
      *
      * An array that can include interim and final results (interim results are returned only if supported by the
      * method). Final results are guaranteed not to change; interim results might be replaced by further interim results
      * and final results. The service periodically sends updates to the results list; the `result_index` is set to the
      * lowest index in the array that has changed; it is incremented for new results.
      *
-     * @return the results_serialized_name
+     * @return the results
      */
     @AuraEnabled
     public List<SpeechRecognitionResult> getResults() {
       return results_serialized_name;
     }
+ 
     /**
-     * Gets the result_index_serialized_name.
+     * Gets the resultIndex.
      *
      * An index that indicates a change point in the `results` array. The service increments the index only for
      * additional results that it sends for new audio for the same request.
      *
-     * @return the result_index_serialized_name
+     * @return the resultIndex
      */
     @AuraEnabled
     public Long getResultIndex() {
       return result_index_serialized_name;
     }
+ 
     /**
-     * Gets the speaker_labels_serialized_name.
+     * Gets the speakerLabels.
      *
      * An array that identifies which words were spoken by which speakers in a multi-person exchange. Returned in the
      * response only if `speaker_labels` is `true`. When interim results are also requested for methods that support
      * them, it is possible for a `SpeechRecognitionResults` object to include only the `speaker_labels` field.
      *
-     * @return the speaker_labels_serialized_name
+     * @return the speakerLabels
      */
     @AuraEnabled
     public List<SpeakerLabelsResult> getSpeakerLabels() {
       return speaker_labels_serialized_name;
     }
+ 
     /**
-     * Gets the warnings_serialized_name.
+     * Gets the warnings.
      *
      * An array of warning messages associated with the request:
      * * Warnings for invalid parameters or fields can include a descriptive message and a list of invalid argument
@@ -7247,7 +7404,7 @@ public class IBMSpeechToTextV1Models {
      *
      * In both cases, the request succeeds despite the warnings.
      *
-     * @return the warnings_serialized_name
+     * @return the warnings
      */
     @AuraEnabled
     public List<String> getWarnings() {
@@ -7255,7 +7412,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the results_serialized_name.
+     * Sets the results.
      *
      * @param results the new results
      */
@@ -7264,7 +7421,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the result_index_serialized_name.
+     * Sets the resultIndex.
      *
      * @param resultIndex the new resultIndex
      */
@@ -7273,7 +7430,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the speaker_labels_serialized_name.
+     * Sets the speakerLabels.
      *
      * @param speakerLabels the new speakerLabels
      */
@@ -7282,7 +7439,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the warnings_serialized_name.
+     * Sets the warnings.
      *
      * @param warnings the new warnings
      */
@@ -7297,7 +7454,7 @@ public class IBMSpeechToTextV1Models {
 
       SpeechRecognitionResults ret = (SpeechRecognitionResults) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for results_serialized_name
+      // calling custom deserializer for results
       List<SpeechRecognitionResult> newResults = new List<SpeechRecognitionResult>();
       List<SpeechRecognitionResult> deserializedResults = ret.getResults();
       if (deserializedResults != null) {
@@ -7310,7 +7467,7 @@ public class IBMSpeechToTextV1Models {
         ret.setResults(newResults);
       }
 
-      // calling custom deserializer for speaker_labels_serialized_name
+      // calling custom deserializer for speakerLabels
       List<SpeakerLabelsResult> newSpeakerLabels = new List<SpeakerLabelsResult>();
       List<SpeakerLabelsResult> deserializedSpeakerLabels = ret.getSpeakerLabels();
       if (deserializedSpeakerLabels != null) {
@@ -7333,24 +7490,26 @@ public class IBMSpeechToTextV1Models {
   public class SupportedFeatures extends IBMWatsonGenericModel {
     private Boolean custom_language_model_serialized_name;
     private Boolean speaker_labels_serialized_name;
+ 
     /**
-     * Gets the custom_language_model_serialized_name.
+     * Gets the customLanguageModel.
      *
      * Indicates whether the customization interface can be used to create a custom language model based on the language
      * model.
      *
-     * @return the custom_language_model_serialized_name
+     * @return the customLanguageModel
      */
     @AuraEnabled
     public Boolean getCustomLanguageModel() {
       return custom_language_model_serialized_name;
     }
+ 
     /**
-     * Gets the speaker_labels_serialized_name.
+     * Gets the speakerLabels.
      *
      * Indicates whether the `speaker_labels` parameter can be used with the language model.
      *
-     * @return the speaker_labels_serialized_name
+     * @return the speakerLabels
      */
     @AuraEnabled
     public Boolean getSpeakerLabels() {
@@ -7358,7 +7517,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the custom_language_model_serialized_name.
+     * Sets the customLanguageModel.
      *
      * @param customLanguageModel the new customLanguageModel
      */
@@ -7367,7 +7526,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the speaker_labels_serialized_name.
+     * Sets the speakerLabels.
      *
      * @param speakerLabels the new speakerLabels
      */
@@ -7390,35 +7549,38 @@ public class IBMSpeechToTextV1Models {
    * The trainAcousticModel options.
    */
   public class TrainAcousticModelOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String custom_language_model_id_serialized_name;
+    private String customizationId;
+    private String customLanguageModelId;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the custom_language_model_id_serialized_name.
+     * Gets the customLanguageModelId.
      *
      * The customization ID (GUID) of a custom language model that is to be used during training of the custom acoustic
      * model. Specify a custom language model that has been trained with verbatim transcriptions of the audio resources
      * or that contains words that are relevant to the contents of the audio resources.
      *
-     * @return the custom_language_model_id_serialized_name
+     * @return the customLanguageModelId
      */
     public String customLanguageModelId() {
-      return custom_language_model_id_serialized_name;
+      return customLanguageModelId;
     }
+
     private TrainAcousticModelOptions(TrainAcousticModelOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      custom_language_model_id_serialized_name = builder.custom_language_model_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
+      customLanguageModelId = builder.customLanguageModelId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7437,12 +7599,12 @@ public class IBMSpeechToTextV1Models {
    * TrainAcousticModelOptions Builder.
    */
   public class TrainAcousticModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String custom_language_model_id_serialized_name;
+    private String customizationId;
+    private String customLanguageModelId;
 
     private TrainAcousticModelOptionsBuilder(TrainAcousticModelOptions trainAcousticModelOptions) {
-      customization_id_serialized_name = trainAcousticModelOptions.customization_id_serialized_name;
-      custom_language_model_id_serialized_name = trainAcousticModelOptions.custom_language_model_id_serialized_name;
+      customizationId = trainAcousticModelOptions.customizationId;
+      customLanguageModelId = trainAcousticModelOptions.customLanguageModelId;
       this.requestHeaders.putAll(trainAcousticModelOptions.requestHeaders());
     }
 
@@ -7458,7 +7620,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      */
     public TrainAcousticModelOptionsBuilder(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -7471,24 +7633,24 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the TrainAcousticModelOptions builder
      */
     public TrainAcousticModelOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the custom_language_model_id_serialized_name.
+     * Set the customLanguageModelId.
      *
      * @param customLanguageModelId the customLanguageModelId
      * @return the TrainAcousticModelOptions builder
      */
     public TrainAcousticModelOptionsBuilder customLanguageModelId(String customLanguageModelId) {
-      this.custom_language_model_id_serialized_name = customLanguageModelId;
+      this.customLanguageModelId = customLanguageModelId;
       return this;
     }
 
@@ -7509,22 +7671,24 @@ public class IBMSpeechToTextV1Models {
    * The trainLanguageModel options.
    */
   public class TrainLanguageModelOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String word_type_to_add_serialized_name;
-    private Double customization_weight_serialized_name;
+    private String customizationId;
+    private String wordTypeToAdd;
+    private Double customizationWeight;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the word_type_to_add_serialized_name.
+     * Gets the wordTypeToAdd.
      *
      * The type of words from the custom language model's words resource on which to train the model:
      * * `all` (the default) trains the model on all new words, regardless of whether they were extracted from corpora
@@ -7532,13 +7696,14 @@ public class IBMSpeechToTextV1Models {
      * * `user` trains the model only on new words that were added or modified by the user; the model is not trained on
      * new words extracted from corpora.
      *
-     * @return the word_type_to_add_serialized_name
+     * @return the wordTypeToAdd
      */
     public String wordTypeToAdd() {
-      return word_type_to_add_serialized_name;
+      return wordTypeToAdd;
     }
+ 
     /**
-     * Gets the customization_weight_serialized_name.
+     * Gets the customizationWeight.
      *
      * Specifies a customization weight for the custom language model. The customization weight tells the service how
      * much weight to give to words from the custom language model compared to those from the base model for speech
@@ -7551,16 +7716,17 @@ public class IBMSpeechToTextV1Models {
      * The value that you assign is used for all recognition requests that use the model. You can override it for any
      * recognition request by specifying a customization weight for that request.
      *
-     * @return the customization_weight_serialized_name
+     * @return the customizationWeight
      */
     public Double customizationWeight() {
-      return customization_weight_serialized_name;
+      return customizationWeight;
     }
+
     private TrainLanguageModelOptions(TrainLanguageModelOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      word_type_to_add_serialized_name = builder.word_type_to_add_serialized_name;
-      customization_weight_serialized_name = builder.customization_weight_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
+      wordTypeToAdd = builder.wordTypeToAdd;
+      customizationWeight = builder.customizationWeight;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7579,14 +7745,14 @@ public class IBMSpeechToTextV1Models {
    * TrainLanguageModelOptions Builder.
    */
   public class TrainLanguageModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String word_type_to_add_serialized_name;
-    private Double customization_weight_serialized_name;
+    private String customizationId;
+    private String wordTypeToAdd;
+    private Double customizationWeight;
 
     private TrainLanguageModelOptionsBuilder(TrainLanguageModelOptions trainLanguageModelOptions) {
-      customization_id_serialized_name = trainLanguageModelOptions.customization_id_serialized_name;
-      word_type_to_add_serialized_name = trainLanguageModelOptions.word_type_to_add_serialized_name;
-      customization_weight_serialized_name = trainLanguageModelOptions.customization_weight_serialized_name;
+      customizationId = trainLanguageModelOptions.customizationId;
+      wordTypeToAdd = trainLanguageModelOptions.wordTypeToAdd;
+      customizationWeight = trainLanguageModelOptions.customizationWeight;
       this.requestHeaders.putAll(trainLanguageModelOptions.requestHeaders());
     }
 
@@ -7602,7 +7768,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      */
     public TrainLanguageModelOptionsBuilder(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -7615,35 +7781,35 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the TrainLanguageModelOptions builder
      */
     public TrainLanguageModelOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the word_type_to_add_serialized_name.
+     * Set the wordTypeToAdd.
      *
      * @param wordTypeToAdd the wordTypeToAdd
      * @return the TrainLanguageModelOptions builder
      */
     public TrainLanguageModelOptionsBuilder wordTypeToAdd(String wordTypeToAdd) {
-      this.word_type_to_add_serialized_name = wordTypeToAdd;
+      this.wordTypeToAdd = wordTypeToAdd;
       return this;
     }
 
     /**
-     * Set the customization_weight_serialized_name.
+     * Set the customizationWeight.
      *
      * @param customizationWeight the customizationWeight
      * @return the TrainLanguageModelOptions builder
      */
     public TrainLanguageModelOptionsBuilder customizationWeight(Double customizationWeight) {
-      this.customization_weight_serialized_name = customizationWeight;
+      this.customizationWeight = customizationWeight;
       return this;
     }
 
@@ -7664,20 +7830,22 @@ public class IBMSpeechToTextV1Models {
    * The unregisterCallback options.
    */
   public class UnregisterCallbackOptions extends IBMWatsonOptionsModel {
-    private String callback_url_serialized_name;
+    private String callbackUrl;
+ 
     /**
-     * Gets the callback_url_serialized_name.
+     * Gets the callbackUrl.
      *
      * The callback URL that is to be unregistered.
      *
-     * @return the callback_url_serialized_name
+     * @return the callbackUrl
      */
     public String callbackUrl() {
-      return callback_url_serialized_name;
+      return callbackUrl;
     }
+
     private UnregisterCallbackOptions(UnregisterCallbackOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.callback_url_serialized_name, 'callback_url_serialized_name cannot be null');
-      callback_url_serialized_name = builder.callback_url_serialized_name;
+      IBMWatsonValidator.notNull(builder.callbackUrl, 'callbackUrl cannot be null');
+      callbackUrl = builder.callbackUrl;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7696,10 +7864,10 @@ public class IBMSpeechToTextV1Models {
    * UnregisterCallbackOptions Builder.
    */
   public class UnregisterCallbackOptionsBuilder extends IBMWatsonOptionsModel {
-    private String callback_url_serialized_name;
+    private String callbackUrl;
 
     private UnregisterCallbackOptionsBuilder(UnregisterCallbackOptions unregisterCallbackOptions) {
-      callback_url_serialized_name = unregisterCallbackOptions.callback_url_serialized_name;
+      callbackUrl = unregisterCallbackOptions.callbackUrl;
       this.requestHeaders.putAll(unregisterCallbackOptions.requestHeaders());
     }
 
@@ -7715,7 +7883,7 @@ public class IBMSpeechToTextV1Models {
      * @param callbackUrl the callbackUrl
      */
     public UnregisterCallbackOptionsBuilder(String callbackUrl) {
-      this.callback_url_serialized_name = callbackUrl;
+      this.callbackUrl = callbackUrl;
     }
 
     /**
@@ -7728,13 +7896,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the callback_url_serialized_name.
+     * Set the callbackUrl.
      *
      * @param callbackUrl the callbackUrl
      * @return the UnregisterCallbackOptions builder
      */
     public UnregisterCallbackOptionsBuilder callbackUrl(String callbackUrl) {
-      this.callback_url_serialized_name = callbackUrl;
+      this.callbackUrl = callbackUrl;
       return this;
     }
 
@@ -7755,34 +7923,37 @@ public class IBMSpeechToTextV1Models {
    * The upgradeAcousticModel options.
    */
   public class UpgradeAcousticModelOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String custom_language_model_id_serialized_name;
+    private String customizationId;
+    private String customLanguageModelId;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+ 
     /**
-     * Gets the custom_language_model_id_serialized_name.
+     * Gets the customLanguageModelId.
      *
      * If the custom acoustic model was trained with a custom language model, the customization ID (GUID) of that custom
      * language model. The custom language model must be upgraded before the custom acoustic model can be upgraded.
      *
-     * @return the custom_language_model_id_serialized_name
+     * @return the customLanguageModelId
      */
     public String customLanguageModelId() {
-      return custom_language_model_id_serialized_name;
+      return customLanguageModelId;
     }
+
     private UpgradeAcousticModelOptions(UpgradeAcousticModelOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
-      custom_language_model_id_serialized_name = builder.custom_language_model_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
+      customLanguageModelId = builder.customLanguageModelId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7801,12 +7972,12 @@ public class IBMSpeechToTextV1Models {
    * UpgradeAcousticModelOptions Builder.
    */
   public class UpgradeAcousticModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
-    private String custom_language_model_id_serialized_name;
+    private String customizationId;
+    private String customLanguageModelId;
 
     private UpgradeAcousticModelOptionsBuilder(UpgradeAcousticModelOptions upgradeAcousticModelOptions) {
-      customization_id_serialized_name = upgradeAcousticModelOptions.customization_id_serialized_name;
-      custom_language_model_id_serialized_name = upgradeAcousticModelOptions.custom_language_model_id_serialized_name;
+      customizationId = upgradeAcousticModelOptions.customizationId;
+      customLanguageModelId = upgradeAcousticModelOptions.customLanguageModelId;
       this.requestHeaders.putAll(upgradeAcousticModelOptions.requestHeaders());
     }
 
@@ -7822,7 +7993,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      */
     public UpgradeAcousticModelOptionsBuilder(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -7835,24 +8006,24 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the UpgradeAcousticModelOptions builder
      */
     public UpgradeAcousticModelOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
     /**
-     * Set the custom_language_model_id_serialized_name.
+     * Set the customLanguageModelId.
      *
      * @param customLanguageModelId the customLanguageModelId
      * @return the UpgradeAcousticModelOptions builder
      */
     public UpgradeAcousticModelOptionsBuilder customLanguageModelId(String customLanguageModelId) {
-      this.custom_language_model_id_serialized_name = customLanguageModelId;
+      this.customLanguageModelId = customLanguageModelId;
       return this;
     }
 
@@ -7873,21 +8044,23 @@ public class IBMSpeechToTextV1Models {
    * The upgradeLanguageModel options.
    */
   public class UpgradeLanguageModelOptions extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
+ 
     /**
-     * Gets the customization_id_serialized_name.
+     * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model. You must make the request with service credentials
      * created for the instance of the service that owns the custom model.
      *
-     * @return the customization_id_serialized_name
+     * @return the customizationId
      */
     public String customizationId() {
-      return customization_id_serialized_name;
+      return customizationId;
     }
+
     private UpgradeLanguageModelOptions(UpgradeLanguageModelOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.customization_id_serialized_name, 'customization_id_serialized_name cannot be empty');
-      customization_id_serialized_name = builder.customization_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7906,10 +8079,10 @@ public class IBMSpeechToTextV1Models {
    * UpgradeLanguageModelOptions Builder.
    */
   public class UpgradeLanguageModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customization_id_serialized_name;
+    private String customizationId;
 
     private UpgradeLanguageModelOptionsBuilder(UpgradeLanguageModelOptions upgradeLanguageModelOptions) {
-      customization_id_serialized_name = upgradeLanguageModelOptions.customization_id_serialized_name;
+      customizationId = upgradeLanguageModelOptions.customizationId;
       this.requestHeaders.putAll(upgradeLanguageModelOptions.requestHeaders());
     }
 
@@ -7925,7 +8098,7 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      */
     public UpgradeLanguageModelOptionsBuilder(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
     }
 
     /**
@@ -7938,13 +8111,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customization_id_serialized_name.
+     * Set the customizationId.
      *
      * @param customizationId the customizationId
      * @return the UpgradeLanguageModelOptions builder
      */
     public UpgradeLanguageModelOptionsBuilder customizationId(String customizationId) {
-      this.customization_id_serialized_name = customizationId;
+      this.customizationId = customizationId;
       return this;
     }
 
@@ -7971,76 +8144,82 @@ public class IBMSpeechToTextV1Models {
     private Long count_serialized_name;
     private List<String> source_serialized_name;
     private List<WordError> error_serialized_name;
+ 
     /**
-     * Gets the word_serialized_name.
+     * Gets the word.
      *
      * A word from the custom model's words resource. The spelling of the word is used to train the model.
      *
-     * @return the word_serialized_name
+     * @return the word
      */
     @AuraEnabled
     public String getWord() {
       return word_serialized_name;
     }
+ 
     /**
-     * Gets the sounds_like_serialized_name.
+     * Gets the soundsLike.
      *
      * An array of pronunciations for the word. The array can include the sounds-like pronunciation automatically
      * generated by the service if none is provided for the word; the service adds this pronunciation when it finishes
      * processing the word.
      *
-     * @return the sounds_like_serialized_name
+     * @return the soundsLike
      */
     @AuraEnabled
     public List<String> getSoundsLike() {
       return sounds_like_serialized_name;
     }
+ 
     /**
-     * Gets the display_as_serialized_name.
+     * Gets the displayAs.
      *
      * The spelling of the word that the service uses to display the word in a transcript. The field contains an empty
      * string if no display-as value is provided for the word, in which case the word is displayed as it is spelled.
      *
-     * @return the display_as_serialized_name
+     * @return the displayAs
      */
     @AuraEnabled
     public String getDisplayAs() {
       return display_as_serialized_name;
     }
+ 
     /**
-     * Gets the count_serialized_name.
+     * Gets the count.
      *
      * A sum of the number of times the word is found across all corpora. For example, if the word occurs five times in
      * one corpus and seven times in another, its count is `12`. If you add a custom word to a model before it is added
      * by any corpora, the count begins at `1`; if the word is added from a corpus first and later modified, the count
      * reflects only the number of times it is found in corpora.
      *
-     * @return the count_serialized_name
+     * @return the count
      */
     @AuraEnabled
     public Long getCount() {
       return count_serialized_name;
     }
+ 
     /**
-     * Gets the source_serialized_name.
+     * Gets the source.
      *
      * An array of sources that describes how the word was added to the custom model's words resource. For OOV words
      * added from a corpus, includes the name of the corpus; if the word was added by multiple corpora, the names of all
      * corpora are listed. If the word was modified or added by the user directly, the field includes the string `user`.
      *
-     * @return the source_serialized_name
+     * @return the source
      */
     @AuraEnabled
     public List<String> getSource() {
       return source_serialized_name;
     }
+ 
     /**
-     * Gets the error_serialized_name.
+     * Gets the error.
      *
      * If the service discovered one or more problems that you need to correct for the word's definition, an array that
      * describes each of the errors.
      *
-     * @return the error_serialized_name
+     * @return the error
      */
     @AuraEnabled
     public List<WordError> getError() {
@@ -8048,7 +8227,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the word_serialized_name.
+     * Sets the word.
      *
      * @param word the new word
      */
@@ -8057,7 +8236,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the sounds_like_serialized_name.
+     * Sets the soundsLike.
      *
      * @param soundsLike the new soundsLike
      */
@@ -8066,7 +8245,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the display_as_serialized_name.
+     * Sets the displayAs.
      *
      * @param displayAs the new displayAs
      */
@@ -8075,7 +8254,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the count_serialized_name.
+     * Sets the count.
      *
      * @param count the new count
      */
@@ -8084,7 +8263,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the source_serialized_name.
+     * Sets the source.
      *
      * @param source the new source
      */
@@ -8093,7 +8272,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the error_serialized_name.
+     * Sets the error.
      *
      * @param error the new error
      */
@@ -8108,7 +8287,7 @@ public class IBMSpeechToTextV1Models {
 
       Word ret = (Word) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for error_serialized_name
+      // calling custom deserializer for error
       List<WordError> newError = new List<WordError>();
       List<WordError> deserializedError = ret.getError();
       if (deserializedError != null) {
@@ -8131,23 +8310,25 @@ public class IBMSpeechToTextV1Models {
   public class WordAlternativeResult extends IBMWatsonGenericModel {
     private Double confidence_serialized_name;
     private String word_serialized_name;
+ 
     /**
-     * Gets the confidence_serialized_name.
+     * Gets the confidence.
      *
      * A confidence score for the word alternative hypothesis in the range of 0.0 to 1.0.
      *
-     * @return the confidence_serialized_name
+     * @return the confidence
      */
     @AuraEnabled
     public Double getConfidence() {
       return confidence_serialized_name;
     }
+ 
     /**
-     * Gets the word_serialized_name.
+     * Gets the word.
      *
      * An alternative hypothesis for a word from the input audio.
      *
-     * @return the word_serialized_name
+     * @return the word
      */
     @AuraEnabled
     public String getWord() {
@@ -8155,7 +8336,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the confidence_serialized_name.
+     * Sets the confidence.
      *
      * @param confidence the new confidence
      */
@@ -8164,7 +8345,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the word_serialized_name.
+     * Sets the word.
      *
      * @param word the new word
      */
@@ -8190,34 +8371,37 @@ public class IBMSpeechToTextV1Models {
     private Double start_time_serialized_name;
     private Double end_time_serialized_name;
     private List<WordAlternativeResult> alternatives_serialized_name;
+ 
     /**
-     * Gets the start_time_serialized_name.
+     * Gets the startTime.
      *
      * The start time in seconds of the word from the input audio that corresponds to the word alternatives.
      *
-     * @return the start_time_serialized_name
+     * @return the startTime
      */
     @AuraEnabled
     public Double getStartTime() {
       return start_time_serialized_name;
     }
+ 
     /**
-     * Gets the end_time_serialized_name.
+     * Gets the endTime.
      *
      * The end time in seconds of the word from the input audio that corresponds to the word alternatives.
      *
-     * @return the end_time_serialized_name
+     * @return the endTime
      */
     @AuraEnabled
     public Double getEndTime() {
       return end_time_serialized_name;
     }
+ 
     /**
-     * Gets the alternatives_serialized_name.
+     * Gets the alternatives.
      *
      * An array of alternative hypotheses for a word from the input audio.
      *
-     * @return the alternatives_serialized_name
+     * @return the alternatives
      */
     @AuraEnabled
     public List<WordAlternativeResult> getAlternatives() {
@@ -8225,7 +8409,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the start_time_serialized_name.
+     * Sets the startTime.
      *
      * @param startTime the new startTime
      */
@@ -8234,7 +8418,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the end_time_serialized_name.
+     * Sets the endTime.
      *
      * @param endTime the new endTime
      */
@@ -8243,7 +8427,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the alternatives_serialized_name.
+     * Sets the alternatives.
      *
      * @param alternatives the new alternatives
      */
@@ -8258,7 +8442,7 @@ public class IBMSpeechToTextV1Models {
 
       WordAlternativeResults ret = (WordAlternativeResults) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for alternatives_serialized_name
+      // calling custom deserializer for alternatives
       List<WordAlternativeResult> newAlternatives = new List<WordAlternativeResult>();
       List<WordAlternativeResult> deserializedAlternatives = ret.getAlternatives();
       if (deserializedAlternatives != null) {
@@ -8280,8 +8464,9 @@ public class IBMSpeechToTextV1Models {
    */
   public class WordError extends IBMWatsonGenericModel {
     private String element_serialized_name;
+ 
     /**
-     * Gets the element_serialized_name.
+     * Gets the element.
      *
      * A key-value pair that describes an error associated with the definition of a word in the words resource. Each
      * pair has the format `"element": "message"`, where `element` is the aspect of the definition that caused the
@@ -8289,7 +8474,7 @@ public class IBMSpeechToTextV1Models {
      * sounds-like definitions: `"{sounds_like_string}": "Numbers are not allowed in sounds-like. You can try for
      * example '{suggested_string}'."` You must correct the error before you can train the model.
      *
-     * @return the element_serialized_name
+     * @return the element
      */
     @AuraEnabled
     public String getElement() {
@@ -8297,7 +8482,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the element_serialized_name.
+     * Sets the element.
      *
      * @param element the new element
      */
@@ -8321,13 +8506,14 @@ public class IBMSpeechToTextV1Models {
    */
   public class Words extends IBMWatsonResponseModel {
     private List<Word> words_serialized_name;
+ 
     /**
-     * Gets the words_serialized_name.
+     * Gets the words.
      *
      * An array of objects that provides information about each word in the custom model's words resource. The array is
      * empty if the custom model has no words.
      *
-     * @return the words_serialized_name
+     * @return the words
      */
     @AuraEnabled
     public List<Word> getWords() {
@@ -8335,7 +8521,7 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Sets the words_serialized_name.
+     * Sets the words.
      *
      * @param words the new words
      */
@@ -8350,7 +8536,7 @@ public class IBMSpeechToTextV1Models {
 
       Words ret = (Words) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for words_serialized_name
+      // calling custom deserializer for words
       List<Word> newWords = new List<Word>();
       List<Word> deserializedWords = ret.getWords();
       if (deserializedWords != null) {
