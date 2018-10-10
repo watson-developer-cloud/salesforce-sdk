@@ -108,6 +108,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
   public IBMNaturalLanguageUnderstandingV1Models.AnalysisResults analyze(IBMNaturalLanguageUnderstandingV1Models.AnalyzeOptions analyzeOptions) {
     IBMWatsonValidator.notNull(analyzeOptions, 'analyzeOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/analyze');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (analyzeOptions != null) ? analyzeOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -160,6 +161,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
   public void deleteModel(IBMNaturalLanguageUnderstandingV1Models.DeleteModelOptions deleteModelOptions) {
     IBMWatsonValidator.notNull(deleteModelOptions, 'deleteModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/models/{0}', new String[]{ deleteModelOptions.modelId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (deleteModelOptions != null) ? deleteModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -182,6 +184,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
    */
   public IBMNaturalLanguageUnderstandingV1Models.ListModelsResults listModels(IBMNaturalLanguageUnderstandingV1Models.ListModelsOptions listModelsOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/models');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (listModelsOptions != null) ? listModelsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
