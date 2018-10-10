@@ -262,6 +262,33 @@ public class IBMWatsonRequestBuilder {
   }
 
   /**
+   * Sets the request body content from one of three different sources, based on the content type.
+   *
+   * @param contentType
+   *      the value of the "Content-Type" header associated with the outgoing request
+   * @param jsonContent
+   *      the body content to be used if the content type indicates JSON
+   * @param jsonPatchContent
+   *      the body content to be used if the content type indicates JsonPatch
+   * @param nonJsonContent
+   *      the body content to be used if the content type indicates non-JSON content
+   * @return this
+   */
+  public IBMWatsonRequestBuilder bodyContent(String contentType, Object jsonContent, Object jsonPatchContent,
+    String nonJsonContent) {
+    if (contentType != null) {
+      if (IBMWatsonService.isJsonMimeType(contentType)) {
+        this.bodyContent(JSON.serialize(jsonContent, true), contentType);
+      } else if (IBMWatsonService.isJsonPatchMimeType(contentType)) {
+        this.bodyContent(JSON.serialize(jsonPatchContent, true), contentType);
+      } else {
+        this.bodyContent(nonJsonContent, contentType);
+      }
+    }
+    return this;
+  }
+
+  /**
    * Sets the body.
    *
    * @param body the body
@@ -307,9 +334,21 @@ public class IBMWatsonRequestBuilder {
   }
 
   /**
-   * Adds header parameters.
+   * Adds a header parameter.
    *
-   * @param args a list of name-value headers
+   * @param headerValue the value of the new header
+   *
+   * @return this
+   */
+  public IBMWatsonRequestBuilder addHeader(String headerName, Boolean headerValue) {
+    headers.add( new NameValue(headerName, String.valueOf(headerValue)));
+    return this;
+  }
+
+  /**
+   * Adds a header parameter.
+   *
+   * @param headerValue the value of the new header
    *
    * @return this
    */
