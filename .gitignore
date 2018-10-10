@@ -5,3 +5,4 @@ server.key
 mdapioutput
 *.orig
 *.rej
+.project

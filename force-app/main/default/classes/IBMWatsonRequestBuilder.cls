@@ -1,14 +1,15 @@
 public class IBMWatsonRequestBuilder {
 
   private enum HTTPMethod {
-    HTTP_DELETE, HTTP_GET, HTTP_POST, HTTP_PUT
+    HTTP_DELETE, HTTP_GET, HTTP_POST, HTTP_PUT, HTTP_PATCH
   }
 
   private static final Map<HTTPMethod, String> HTTPMethodValue = new  Map<HTTPMethod, String> {
     HTTPMethod.HTTP_DELETE => 'DELETE',
     HTTPMethod.HTTP_GET => 'GET',
     HTTPMethod.HTTP_POST => 'POST',
-    HTTPMethod.HTTP_PUT => 'PUT'
+    HTTPMethod.HTTP_PUT => 'PUT',
+    HTTPMethod.HTTP_PATCH => 'PATCH'
   };
 
   public class NameValue {
@@ -72,6 +73,17 @@ public class IBMWatsonRequestBuilder {
    */
   public static IBMWatsonRequestBuilder httpPut(String url) {
     return new IBMWatsonRequestBuilder(HTTPMethod.HTTP_PUT, url);
+  }
+
+  /**
+   * The PATCH method requests that the enclosed entity be stored under the supplied Request-URI.
+   *
+   * @param url the URL
+   *
+   * @return this
+   */
+  public static IBMWatsonRequestBuilder httpPatch(String url) {
+    return new IBMWatsonRequestBuilder(HTTPMethod.HTTP_PATCH, url);
   }
 
   private IBMWatsonRequestBody body;
@@ -196,8 +208,8 @@ public class IBMWatsonRequestBuilder {
   }
 
   /**
-   * Sets the string content to the request (used with POST/PUT). This will encapsulate the string into a
-   * { equestBody} encoded with UTF-8
+   * Sets the string content to the request (used with POST/PUT). This will encapsulate the string into
+   * an {@link IBMWatsonRequestBody} encoded with UTF-8.
    *
    * @param content the content to POST/PUT
    * @param contentType the HTTP contentType to use.
@@ -208,6 +220,44 @@ public class IBMWatsonRequestBuilder {
     body = IBMWatsonRequestBody.create(content, IBMWatsonMediaType.parse(contentType));
     headers.add(new NameValue(IBMWatsonHttpHeaders.CONTENT_TYPE, contentType));
     headers.add(new NameValue(IBMWatsonHttpHeaders.CONTENT_LENGTH, String.valueOf(body.ContentSize)));
+    return this;
+  }
+
+  /**
+   * Sets the request content from an IBMWatsonFile object (used with POST/PUT). This will encapsulate the
+   * file data into an {@link IBMWatsonRequestBody} object.
+   *
+   * @param content the content to POST/PUT
+   * @param contentType the HTTP contentType to use.
+   *
+   * @return this
+   */
+  public IBMWatsonRequestBuilder bodyContent(IBMWatsonFile content, String contentType) {
+    body = IBMWatsonRequestBody.create(content, IBMWatsonMediaType.parse(contentType));
+    headers.add(new NameValue(IBMWatsonHttpHeaders.CONTENT_TYPE, contentType));
+    headers.add(new NameValue(IBMWatsonHttpHeaders.CONTENT_LENGTH, String.valueOf(body.ContentSize)));
+    return this;
+  }
+
+  /**
+   * Sets the request body from one of three different sources, based on the specified content type.
+   * @param contentType the value of the "Content-Type" header associated with the outgoing request
+   * @param jsonContent the body content to be used if the content type indicates JSON
+   * @param jsonPatchContent the body content to be used if the content type indicates JsonPatch
+   * @param nonJsonContent the body content to be used if the content type indicates non-JSON content
+   * @return this
+  */
+  public IBMWatsonRequestBuilder bodyContent(String contentType, Object jsonContent, Object jsonPatchContent,
+    IBMWatsonFile nonJsonContent) {
+    if (contentType != null) {
+      if (IBMWatsonService.isJsonMimeType(contentType)) {
+        this.bodyContent(JSON.serialize(jsonContent, true), contentType);
+      } else if (IBMWatsonService.isJsonPatchMimeType(contentType)) {
+        this.bodyContent(JSON.serialize(jsonPatchContent, true), contentType);
+      } else {
+        this.bodyContent(nonJsonContent, contentType);
+      }
+    }
     return this;
   }
 
