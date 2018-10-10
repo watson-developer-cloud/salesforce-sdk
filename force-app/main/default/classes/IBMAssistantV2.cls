@@ -66,6 +66,7 @@ public class IBMAssistantV2 extends IBMWatsonService {
   public IBMAssistantV2Models.SessionResponse createSession(IBMAssistantV2Models.CreateSessionOptions createSessionOptions) {
     IBMWatsonValidator.notNull(createSessionOptions, 'createSessionOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v2/assistants/{0}/sessions', new String[]{ createSessionOptions.assistantId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (createSessionOptions != null) ? createSessionOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -89,6 +90,7 @@ public class IBMAssistantV2 extends IBMWatsonService {
   public void deleteSession(IBMAssistantV2Models.DeleteSessionOptions deleteSessionOptions) {
     IBMWatsonValidator.notNull(deleteSessionOptions, 'deleteSessionOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v2/assistants/{0}/sessions/{1}', new String[]{ deleteSessionOptions.assistantId(), deleteSessionOptions.sessionId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (deleteSessionOptions != null) ? deleteSessionOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -113,6 +115,7 @@ public class IBMAssistantV2 extends IBMWatsonService {
   public IBMAssistantV2Models.MessageResponse message(IBMAssistantV2Models.MessageOptions messageOptions) {
     IBMWatsonValidator.notNull(messageOptions, 'messageOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v2/assistants/{0}/sessions/{1}/message', new String[]{ messageOptions.assistantId(), messageOptions.sessionId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (messageOptions != null) ? messageOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {

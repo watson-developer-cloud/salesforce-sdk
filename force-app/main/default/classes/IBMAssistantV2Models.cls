@@ -5,23 +5,25 @@ public class IBMAssistantV2Models {
   public class CaptureGroup extends IBMWatsonGenericModel {
     private String group_serialized_name;
     private List<Long> location_serialized_name;
+ 
     /**
-     * Gets the group_serialized_name.
+     * Gets the xgroup.
      *
      * A recognized capture group for the entity.
      *
-     * @return the group_serialized_name
+     * @return the xgroup
      */
     @AuraEnabled
-    public String getGroup() {
+    public String getXgroup() {
       return group_serialized_name;
     }
+ 
     /**
-     * Gets the location_serialized_name.
+     * Gets the location.
      *
      * Zero-based character offsets that indicate where the entity value begins and ends in the input text.
      *
-     * @return the location_serialized_name
+     * @return the location
      */
     @AuraEnabled
     public List<Long> getLocation() {
@@ -29,16 +31,16 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the group_serialized_name.
+     * Sets the xgroup.
      *
-     * @param groupVar the new groupVar
+     * @param xgroup the new xgroup
      */
-    public void setGroup(final String groupVar) {
-      this.group_serialized_name = groupVar;
+    public void setXgroup(final String xgroup) {
+      this.group_serialized_name = xgroup;
     }
 
     /**
-     * Sets the location_serialized_name.
+     * Sets the location.
      *
      * @param location the new location
      */
@@ -61,9 +63,10 @@ public class IBMAssistantV2Models {
    * The createSession options.
    */
   public class CreateSessionOptions extends IBMWatsonOptionsModel {
-    private String assistant_id_serialized_name;
+    private String assistantId;
+ 
     /**
-     * Gets the assistant_id_serialized_name.
+     * Gets the assistantId.
      *
      * Unique identifier of the assistant. You can find the assistant ID of an assistant on the **Assistants** tab of
      * the Watson Assistant tool. For information about creating assistants, see the
@@ -71,14 +74,15 @@ public class IBMAssistantV2Models {
      *
      * **Note:** Currently, the v2 API does not support creating assistants.
      *
-     * @return the assistant_id_serialized_name
+     * @return the assistantId
      */
     public String assistantId() {
-      return assistant_id_serialized_name;
+      return assistantId;
     }
+
     private CreateSessionOptions(CreateSessionOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.assistant_id_serialized_name, 'assistant_id_serialized_name cannot be empty');
-      assistant_id_serialized_name = builder.assistant_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.assistantId, 'assistantId cannot be empty');
+      assistantId = builder.assistantId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -97,10 +101,10 @@ public class IBMAssistantV2Models {
    * CreateSessionOptions Builder.
    */
   public class CreateSessionOptionsBuilder extends IBMWatsonOptionsModel {
-    private String assistant_id_serialized_name;
+    private String assistantId;
 
     private CreateSessionOptionsBuilder(CreateSessionOptions createSessionOptions) {
-      assistant_id_serialized_name = createSessionOptions.assistant_id_serialized_name;
+      assistantId = createSessionOptions.assistantId;
       this.requestHeaders.putAll(createSessionOptions.requestHeaders());
     }
 
@@ -116,7 +120,7 @@ public class IBMAssistantV2Models {
      * @param assistantId the assistantId
      */
     public CreateSessionOptionsBuilder(String assistantId) {
-      this.assistant_id_serialized_name = assistantId;
+      this.assistantId = assistantId;
     }
 
     /**
@@ -129,13 +133,13 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Set the assistant_id_serialized_name.
+     * Set the assistantId.
      *
      * @param assistantId the assistantId
      * @return the CreateSessionOptions builder
      */
     public CreateSessionOptionsBuilder assistantId(String assistantId) {
-      this.assistant_id_serialized_name = assistantId;
+      this.assistantId = assistantId;
       return this;
     }
 
@@ -156,10 +160,11 @@ public class IBMAssistantV2Models {
    * The deleteSession options.
    */
   public class DeleteSessionOptions extends IBMWatsonOptionsModel {
-    private String assistant_id_serialized_name;
-    private String session_id_serialized_name;
+    private String assistantId;
+    private String sessionId;
+ 
     /**
-     * Gets the assistant_id_serialized_name.
+     * Gets the assistantId.
      *
      * Unique identifier of the assistant. You can find the assistant ID of an assistant on the **Assistants** tab of
      * the Watson Assistant tool. For information about creating assistants, see the
@@ -167,26 +172,28 @@ public class IBMAssistantV2Models {
      *
      * **Note:** Currently, the v2 API does not support creating assistants.
      *
-     * @return the assistant_id_serialized_name
+     * @return the assistantId
      */
     public String assistantId() {
-      return assistant_id_serialized_name;
+      return assistantId;
     }
+ 
     /**
-     * Gets the session_id_serialized_name.
+     * Gets the sessionId.
      *
      * Unique identifier of the session.
      *
-     * @return the session_id_serialized_name
+     * @return the sessionId
      */
     public String sessionId() {
-      return session_id_serialized_name;
+      return sessionId;
     }
+
     private DeleteSessionOptions(DeleteSessionOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.assistant_id_serialized_name, 'assistant_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.session_id_serialized_name, 'session_id_serialized_name cannot be empty');
-      assistant_id_serialized_name = builder.assistant_id_serialized_name;
-      session_id_serialized_name = builder.session_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.assistantId, 'assistantId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.sessionId, 'sessionId cannot be empty');
+      assistantId = builder.assistantId;
+      sessionId = builder.sessionId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -205,12 +212,12 @@ public class IBMAssistantV2Models {
    * DeleteSessionOptions Builder.
    */
   public class DeleteSessionOptionsBuilder extends IBMWatsonOptionsModel {
-    private String assistant_id_serialized_name;
-    private String session_id_serialized_name;
+    private String assistantId;
+    private String sessionId;
 
     private DeleteSessionOptionsBuilder(DeleteSessionOptions deleteSessionOptions) {
-      assistant_id_serialized_name = deleteSessionOptions.assistant_id_serialized_name;
-      session_id_serialized_name = deleteSessionOptions.session_id_serialized_name;
+      assistantId = deleteSessionOptions.assistantId;
+      sessionId = deleteSessionOptions.sessionId;
       this.requestHeaders.putAll(deleteSessionOptions.requestHeaders());
     }
 
@@ -227,8 +234,8 @@ public class IBMAssistantV2Models {
      * @param sessionId the sessionId
      */
     public DeleteSessionOptionsBuilder(String assistantId, String sessionId) {
-      this.assistant_id_serialized_name = assistantId;
-      this.session_id_serialized_name = sessionId;
+      this.assistantId = assistantId;
+      this.sessionId = sessionId;
     }
 
     /**
@@ -241,24 +248,24 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Set the assistant_id_serialized_name.
+     * Set the assistantId.
      *
      * @param assistantId the assistantId
      * @return the DeleteSessionOptions builder
      */
     public DeleteSessionOptionsBuilder assistantId(String assistantId) {
-      this.assistant_id_serialized_name = assistantId;
+      this.assistantId = assistantId;
       return this;
     }
 
     /**
-     * Set the session_id_serialized_name.
+     * Set the sessionId.
      *
      * @param sessionId the sessionId
      * @return the DeleteSessionOptions builder
      */
     public DeleteSessionOptionsBuilder sessionId(String sessionId) {
-      this.session_id_serialized_name = sessionId;
+      this.sessionId = sessionId;
       return this;
     }
 
@@ -281,23 +288,25 @@ public class IBMAssistantV2Models {
   public class DialogLogMessage extends IBMWatsonGenericModel {
     private String level_serialized_name;
     private String message_serialized_name;
+ 
     /**
-     * Gets the level_serialized_name.
+     * Gets the level.
      *
      * The severity of the log message.
      *
-     * @return the level_serialized_name
+     * @return the level
      */
     @AuraEnabled
     public String getLevel() {
       return level_serialized_name;
     }
+ 
     /**
-     * Gets the message_serialized_name.
+     * Gets the message.
      *
      * The text of the log message.
      *
-     * @return the message_serialized_name
+     * @return the message
      */
     @AuraEnabled
     public String getMessage() {
@@ -305,7 +314,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the level_serialized_name.
+     * Sets the level.
      *
      * @param level the new level
      */
@@ -314,7 +323,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the message_serialized_name.
+     * Sets the message.
      *
      * @param message the new message
      */
@@ -342,56 +351,61 @@ public class IBMAssistantV2Models {
     private IBMWatsonMapModel parameters_serialized_name;
     private String result_variable_serialized_name;
     private String credentials_serialized_name;
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The name of the action.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the type_serialized_name.
+     * Gets the actionType.
      *
      * The type of action to invoke.
      *
-     * @return the type_serialized_name
+     * @return the actionType
      */
     @AuraEnabled
-    public String getType() {
+    public String getActionType() {
       return type_serialized_name;
     }
+ 
     /**
-     * Gets the parameters_serialized_name.
+     * Gets the parameters.
      *
      * A map of key/value pairs to be provided to the action.
      *
-     * @return the parameters_serialized_name
+     * @return the parameters
      */
     @AuraEnabled
     public IBMWatsonMapModel getParameters() {
       return parameters_serialized_name;
     }
+ 
     /**
-     * Gets the result_variable_serialized_name.
+     * Gets the resultVariable.
      *
      * The location in the dialog context where the result of the action is stored.
      *
-     * @return the result_variable_serialized_name
+     * @return the resultVariable
      */
     @AuraEnabled
     public String getResultVariable() {
       return result_variable_serialized_name;
     }
+ 
     /**
-     * Gets the credentials_serialized_name.
+     * Gets the credentials.
      *
      * The name of the context variable that the client application will use to pass in credentials for the action.
      *
-     * @return the credentials_serialized_name
+     * @return the credentials
      */
     @AuraEnabled
     public String getCredentials() {
@@ -399,7 +413,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -408,16 +422,16 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the type_serialized_name.
+     * Sets the actionType.
      *
-     * @param typeVar the new typeVar
+     * @param actionType the new actionType
      */
-    public void setType(final String typeVar) {
-      this.type_serialized_name = typeVar;
+    public void setActionType(final String actionType) {
+      this.type_serialized_name = actionType;
     }
 
     /**
-     * Sets the parameters_serialized_name.
+     * Sets the parameters.
      *
      * @param parameters the new parameters
      */
@@ -426,7 +440,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the result_variable_serialized_name.
+     * Sets the resultVariable.
      *
      * @param resultVariable the new resultVariable
      */
@@ -435,7 +449,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the credentials_serialized_name.
+     * Sets the credentials.
      *
      * @param credentials the new credentials
      */
@@ -450,7 +464,7 @@ public class IBMAssistantV2Models {
 
       DialogNodeAction ret = (DialogNodeAction) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for parameters_serialized_name
+      // calling custom deserializer for parameters
       IBMWatsonMapModel newParameters = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getParameters()), (Map<String, Object>) jsonMap.get('parameters_serialized_name'), IBMWatsonMapModel.class);
       ret.setParameters(newParameters);
 
@@ -464,21 +478,25 @@ public class IBMAssistantV2Models {
   public class DialogNodeOutputOptionsElement extends IBMWatsonGenericModel {
     private String label_serialized_name;
     private DialogNodeOutputOptionsElementValue value_serialized_name;
+ 
     /**
-     * Gets the label_serialized_name.
+     * Gets the label.
      *
      * The user-facing label for the option.
      *
-     * @return the label_serialized_name
+     * @return the label
      */
     @AuraEnabled
     public String getLabel() {
       return label_serialized_name;
     }
+ 
     /**
-     * Gets the value_serialized_name.
+     * Gets the value.
      *
-     * @return the value_serialized_name
+     * An object defining the message input to be sent to the assistant if the user selects the corresponding option.
+     *
+     * @return the value
      */
     @AuraEnabled
     public DialogNodeOutputOptionsElementValue getValue() {
@@ -486,7 +504,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the label_serialized_name.
+     * Sets the label.
      *
      * @param label the new label
      */
@@ -495,7 +513,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the value_serialized_name.
+     * Sets the value.
      *
      * @param value the new value
      */
@@ -510,7 +528,7 @@ public class IBMAssistantV2Models {
 
       DialogNodeOutputOptionsElement ret = (DialogNodeOutputOptionsElement) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for value_serialized_name
+      // calling custom deserializer for value
       DialogNodeOutputOptionsElementValue newValue = (DialogNodeOutputOptionsElementValue) new DialogNodeOutputOptionsElementValue().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value_serialized_name'), DialogNodeOutputOptionsElementValue.class);
       ret.setValue(newValue);
 
@@ -523,10 +541,13 @@ public class IBMAssistantV2Models {
    */
   public class DialogNodeOutputOptionsElementValue extends IBMWatsonGenericModel {
     private MessageInput input_serialized_name;
+ 
     /**
-     * Gets the input_serialized_name.
+     * Gets the input.
      *
-     * @return the input_serialized_name
+     * The user input.
+     *
+     * @return the input
      */
     @AuraEnabled
     public MessageInput getInput() {
@@ -534,7 +555,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the input_serialized_name.
+     * Sets the input.
      *
      * @param input the new input
      */
@@ -549,7 +570,7 @@ public class IBMAssistantV2Models {
 
       DialogNodeOutputOptionsElementValue ret = (DialogNodeOutputOptionsElementValue) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for input_serialized_name
+      // calling custom deserializer for input
       MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), MessageInput.class);
       ret.setInput(newInput);
 
@@ -564,34 +585,37 @@ public class IBMAssistantV2Models {
     private String dialog_node_serialized_name;
     private String title_serialized_name;
     private String conditions_serialized_name;
+ 
     /**
-     * Gets the dialog_node_serialized_name.
+     * Gets the dialogNode.
      *
      * A dialog node that was triggered during processing of the input message.
      *
-     * @return the dialog_node_serialized_name
+     * @return the dialogNode
      */
     @AuraEnabled
     public String getDialogNode() {
       return dialog_node_serialized_name;
     }
+ 
     /**
-     * Gets the title_serialized_name.
+     * Gets the title.
      *
      * The title of the dialog node.
      *
-     * @return the title_serialized_name
+     * @return the title
      */
     @AuraEnabled
     public String getTitle() {
       return title_serialized_name;
     }
+ 
     /**
-     * Gets the conditions_serialized_name.
+     * Gets the conditions.
      *
      * The conditions that trigger the dialog node.
      *
-     * @return the conditions_serialized_name
+     * @return the conditions
      */
     @AuraEnabled
     public String getConditions() {
@@ -599,7 +623,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the dialog_node_serialized_name.
+     * Sets the dialogNode.
      *
      * @param dialogNode the new dialogNode
      */
@@ -608,7 +632,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the title_serialized_name.
+     * Sets the title.
      *
      * @param title the new title
      */
@@ -617,7 +641,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the conditions_serialized_name.
+     * Sets the conditions.
      *
      * @param conditions the new conditions
      */
@@ -652,8 +676,9 @@ public class IBMAssistantV2Models {
     private String message_to_human_agent_serialized_name;
     private String topic_serialized_name;
     private List<DialogSuggestion> suggestions_serialized_name;
+ 
     /**
-     * Gets the response_type_serialized_name.
+     * Gets the responseType.
      *
      * The type of response returned by the dialog node. The specified response type must be supported by the client
      * application or channel.
@@ -661,131 +686,142 @@ public class IBMAssistantV2Models {
      * **Note:** The **suggestion** response type is part of the disambiguation feature, which is only available for
      * Premium users.
      *
-     * @return the response_type_serialized_name
+     * @return the responseType
      */
     @AuraEnabled
     public String getResponseType() {
       return response_type_serialized_name;
     }
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * The text of the response.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     @AuraEnabled
     public String getText() {
       return text_serialized_name;
     }
+ 
     /**
-     * Gets the time_serialized_name.
+     * Gets the xtime.
      *
      * How long to pause, in milliseconds.
      *
-     * @return the time_serialized_name
+     * @return the xtime
      */
     @AuraEnabled
-    public Long getTime() {
+    public Long getXtime() {
       return time_serialized_name;
     }
+ 
     /**
-     * Gets the typing_serialized_name.
+     * Gets the typing.
      *
      * Whether to send a "user is typing" event during the pause.
      *
-     * @return the typing_serialized_name
+     * @return the typing
      */
     @AuraEnabled
     public Boolean getTyping() {
       return typing_serialized_name;
     }
+ 
     /**
-     * Gets the source_serialized_name.
+     * Gets the source.
      *
      * The URL of the image.
      *
-     * @return the source_serialized_name
+     * @return the source
      */
     @AuraEnabled
     public String getSource() {
       return source_serialized_name;
     }
+ 
     /**
-     * Gets the title_serialized_name.
+     * Gets the title.
      *
      * The title to show before the response.
      *
-     * @return the title_serialized_name
+     * @return the title
      */
     @AuraEnabled
     public String getTitle() {
       return title_serialized_name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * The description to show with the the response.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     @AuraEnabled
     public String getDescription() {
       return description_serialized_name;
     }
+ 
     /**
-     * Gets the preference_serialized_name.
+     * Gets the preference.
      *
      * The preferred type of control to display.
      *
-     * @return the preference_serialized_name
+     * @return the preference
      */
     @AuraEnabled
     public String getPreference() {
       return preference_serialized_name;
     }
+ 
     /**
-     * Gets the options_serialized_name.
+     * Gets the options.
      *
      * An array of objects describing the options from which the user can choose.
      *
-     * @return the options_serialized_name
+     * @return the options
      */
     @AuraEnabled
     public List<DialogNodeOutputOptionsElement> getOptions() {
       return options_serialized_name;
     }
+ 
     /**
-     * Gets the message_to_human_agent_serialized_name.
+     * Gets the messageToHumanAgent.
      *
      * A message to be sent to the human agent who will be taking over the conversation.
      *
-     * @return the message_to_human_agent_serialized_name
+     * @return the messageToHumanAgent
      */
     @AuraEnabled
     public String getMessageToHumanAgent() {
       return message_to_human_agent_serialized_name;
     }
+ 
     /**
-     * Gets the topic_serialized_name.
+     * Gets the topic.
      *
      * A label identifying the topic of the conversation, derived from the **user_label** property of the relevant node.
      *
-     * @return the topic_serialized_name
+     * @return the topic
      */
     @AuraEnabled
     public String getTopic() {
       return topic_serialized_name;
     }
+ 
     /**
-     * Gets the suggestions_serialized_name.
+     * Gets the suggestions.
      *
      * An array of objects describing the possible matching dialog nodes from which the user can choose.
      *
      * **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Premium
      * users.
      *
-     * @return the suggestions_serialized_name
+     * @return the suggestions
      */
     @AuraEnabled
     public List<DialogSuggestion> getSuggestions() {
@@ -793,7 +829,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the response_type_serialized_name.
+     * Sets the responseType.
      *
      * @param responseType the new responseType
      */
@@ -802,7 +838,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the text_serialized_name.
+     * Sets the text.
      *
      * @param text the new text
      */
@@ -811,16 +847,16 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the time_serialized_name.
+     * Sets the xtime.
      *
-     * @param timeVar the new timeVar
+     * @param xtime the new xtime
      */
-    public void setTime(final long timeVar) {
-      this.time_serialized_name = timeVar;
+    public void setXtime(final long xtime) {
+      this.time_serialized_name = xtime;
     }
 
     /**
-     * Sets the typing_serialized_name.
+     * Sets the typing.
      *
      * @param typing the new typing
      */
@@ -829,7 +865,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the source_serialized_name.
+     * Sets the source.
      *
      * @param source the new source
      */
@@ -838,7 +874,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the title_serialized_name.
+     * Sets the title.
      *
      * @param title the new title
      */
@@ -847,7 +883,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the description_serialized_name.
+     * Sets the description.
      *
      * @param description the new description
      */
@@ -856,7 +892,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the preference_serialized_name.
+     * Sets the preference.
      *
      * @param preference the new preference
      */
@@ -865,7 +901,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the options_serialized_name.
+     * Sets the options.
      *
      * @param options the new options
      */
@@ -874,7 +910,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the message_to_human_agent_serialized_name.
+     * Sets the messageToHumanAgent.
      *
      * @param messageToHumanAgent the new messageToHumanAgent
      */
@@ -883,7 +919,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the suggestions_serialized_name.
+     * Sets the suggestions.
      *
      * @param suggestions the new suggestions
      */
@@ -898,7 +934,7 @@ public class IBMAssistantV2Models {
 
       DialogRuntimeResponseGeneric ret = (DialogRuntimeResponseGeneric) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for options_serialized_name
+      // calling custom deserializer for options
       List<DialogNodeOutputOptionsElement> newOptions = new List<DialogNodeOutputOptionsElement>();
       List<DialogNodeOutputOptionsElement> deserializedOptions = ret.getOptions();
       if (deserializedOptions != null) {
@@ -911,7 +947,7 @@ public class IBMAssistantV2Models {
         ret.setOptions(newOptions);
       }
 
-      // calling custom deserializer for suggestions_serialized_name
+      // calling custom deserializer for suggestions
       List<DialogSuggestion> newSuggestions = new List<DialogSuggestion>();
       List<DialogSuggestion> deserializedSuggestions = ret.getSuggestions();
       if (deserializedSuggestions != null) {
@@ -935,34 +971,40 @@ public class IBMAssistantV2Models {
     private String label_serialized_name;
     private DialogSuggestionValue value_serialized_name;
     private IBMWatsonMapModel output_serialized_name;
+ 
     /**
-     * Gets the label_serialized_name.
+     * Gets the label.
      *
      * The user-facing label for the disambiguation option. This label is taken from the **user_label** property of the
      * corresponding dialog node.
      *
-     * @return the label_serialized_name
+     * @return the label
      */
     @AuraEnabled
     public String getLabel() {
       return label_serialized_name;
     }
+ 
     /**
-     * Gets the value_serialized_name.
+     * Gets the value.
      *
-     * @return the value_serialized_name
+     * An object defining the message input to be sent to the assistant if the user selects the corresponding
+     * disambiguation option.
+     *
+     * @return the value
      */
     @AuraEnabled
     public DialogSuggestionValue getValue() {
       return value_serialized_name;
     }
+ 
     /**
-     * Gets the output_serialized_name.
+     * Gets the output.
      *
      * The dialog output that will be returned from the Watson Assistant service if the user selects the corresponding
      * option.
      *
-     * @return the output_serialized_name
+     * @return the output
      */
     @AuraEnabled
     public IBMWatsonMapModel getOutput() {
@@ -970,7 +1012,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the label_serialized_name.
+     * Sets the label.
      *
      * @param label the new label
      */
@@ -979,7 +1021,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the value_serialized_name.
+     * Sets the value.
      *
      * @param value the new value
      */
@@ -988,7 +1030,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the output_serialized_name.
+     * Sets the output.
      *
      * @param output the new output
      */
@@ -1003,11 +1045,11 @@ public class IBMAssistantV2Models {
 
       DialogSuggestion ret = (DialogSuggestion) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for value_serialized_name
+      // calling custom deserializer for value
       DialogSuggestionValue newValue = (DialogSuggestionValue) new DialogSuggestionValue().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value_serialized_name'), DialogSuggestionValue.class);
       ret.setValue(newValue);
 
-      // calling custom deserializer for output_serialized_name
+      // calling custom deserializer for output
       IBMWatsonMapModel newOutput = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), IBMWatsonMapModel.class);
       ret.setOutput(newOutput);
 
@@ -1021,10 +1063,13 @@ public class IBMAssistantV2Models {
    */
   public class DialogSuggestionValue extends IBMWatsonGenericModel {
     private MessageInput input_serialized_name;
+ 
     /**
-     * Gets the input_serialized_name.
+     * Gets the input.
      *
-     * @return the input_serialized_name
+     * The user input.
+     *
+     * @return the input
      */
     @AuraEnabled
     public MessageInput getInput() {
@@ -1032,7 +1077,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the input_serialized_name.
+     * Sets the input.
      *
      * @param input the new input
      */
@@ -1047,7 +1092,7 @@ public class IBMAssistantV2Models {
 
       DialogSuggestionValue ret = (DialogSuggestionValue) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for input_serialized_name
+      // calling custom deserializer for input
       MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), MessageInput.class);
       ret.setInput(newInput);
 
@@ -1061,23 +1106,25 @@ public class IBMAssistantV2Models {
   public class MessageContext extends IBMWatsonGenericModel {
     private MessageContextGlobal global_serialized_name;
     private MessageContextSkills skills_serialized_name;
+ 
     /**
-     * Gets the global_serialized_name.
+     * Gets the xglobal.
      *
      * Contains information that can be shared by all skills within the Assistant.
      *
-     * @return the global_serialized_name
+     * @return the xglobal
      */
     @AuraEnabled
-    public MessageContextGlobal getGlobal() {
+    public MessageContextGlobal getXglobal() {
       return global_serialized_name;
     }
+ 
     /**
-     * Gets the skills_serialized_name.
+     * Gets the skills.
      *
      * Contains information specific to particular skills within the Assistant.
      *
-     * @return the skills_serialized_name
+     * @return the skills
      */
     @AuraEnabled
     public MessageContextSkills getSkills() {
@@ -1085,16 +1132,16 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the global_serialized_name.
+     * Sets the xglobal.
      *
-     * @param globalVar the new globalVar
+     * @param xglobal the new xglobal
      */
-    public void setGlobal(final MessageContextGlobal globalVar) {
-      this.global_serialized_name = globalVar;
+    public void setXglobal(final MessageContextGlobal xglobal) {
+      this.global_serialized_name = xglobal;
     }
 
     /**
-     * Sets the skills_serialized_name.
+     * Sets the skills.
      *
      * @param skills the new skills
      */
@@ -1109,11 +1156,11 @@ public class IBMAssistantV2Models {
 
       MessageContext ret = (MessageContext) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for global_serialized_name
-      MessageContextGlobal newGlobal = (MessageContextGlobal) new MessageContextGlobal().deserialize(JSON.serialize(ret.getGlobal()), (Map<String, Object>) jsonMap.get('global_serialized_name'), MessageContextGlobal.class);
-      ret.setGlobal(newGlobal);
+      // calling custom deserializer for xglobal
+      MessageContextGlobal newXglobal = (MessageContextGlobal) new MessageContextGlobal().deserialize(JSON.serialize(ret.getXglobal()), (Map<String, Object>) jsonMap.get('global_serialized_name'), MessageContextGlobal.class);
+      ret.setXglobal(newXglobal);
 
-      // calling custom deserializer for skills_serialized_name
+      // calling custom deserializer for skills
       MessageContextSkills newSkills = (MessageContextSkills) new MessageContextSkills().deserialize(JSON.serialize(ret.getSkills()), (Map<String, Object>) jsonMap.get('skills_serialized_name'), MessageContextSkills.class);
       ret.setSkills(newSkills);
 
@@ -1126,25 +1173,26 @@ public class IBMAssistantV2Models {
    */
   public class MessageContextGlobal extends IBMWatsonGenericModel {
     private MessageContextGlobalSystem system_serialized_name;
+ 
     /**
-     * Gets the system_serialized_name.
+     * Gets the xsystem.
      *
      * Properties interpreted by the Assistant that are shared across all skills within the Assistant.
      *
-     * @return the system_serialized_name
+     * @return the xsystem
      */
     @AuraEnabled
-    public MessageContextGlobalSystem getSystem() {
+    public MessageContextGlobalSystem getXsystem() {
       return system_serialized_name;
     }
 
     /**
-     * Sets the system_serialized_name.
+     * Sets the xsystem.
      *
-     * @param systemVar the new systemVar
+     * @param xsystem the new xsystem
      */
-    public void setSystem(final MessageContextGlobalSystem systemVar) {
-      this.system_serialized_name = systemVar;
+    public void setXsystem(final MessageContextGlobalSystem xsystem) {
+      this.system_serialized_name = xsystem;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1154,9 +1202,9 @@ public class IBMAssistantV2Models {
 
       MessageContextGlobal ret = (MessageContextGlobal) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for system_serialized_name
-      MessageContextGlobalSystem newSystem = (MessageContextGlobalSystem) new MessageContextGlobalSystem().deserialize(JSON.serialize(ret.getSystem()), (Map<String, Object>) jsonMap.get('system_serialized_name'), MessageContextGlobalSystem.class);
-      ret.setSystem(newSystem);
+      // calling custom deserializer for xsystem
+      MessageContextGlobalSystem newXsystem = (MessageContextGlobalSystem) new MessageContextGlobalSystem().deserialize(JSON.serialize(ret.getXsystem()), (Map<String, Object>) jsonMap.get('system_serialized_name'), MessageContextGlobalSystem.class);
+      ret.setXsystem(newXsystem);
 
       return ret;
     }
@@ -1169,38 +1217,40 @@ public class IBMAssistantV2Models {
     private String timezone_serialized_name;
     private String user_id_serialized_name;
     private Long turn_count_serialized_name;
+ 
     /**
-     * Gets the timezone_serialized_name.
+     * Gets the timezone.
      *
      * The user time zone. The assistant uses the time zone to correctly resolve relative time references.
      *
-     * @return the timezone_serialized_name
+     * @return the timezone
      */
     @AuraEnabled
     public String getTimezone() {
       return timezone_serialized_name;
     }
+ 
     /**
-     * Gets the user_id_serialized_name.
+     * Gets the userId.
      *
-     * String value provided by the API client that should be unique per each distinct end user of the service powered
-     * by Assistant.
+     * A string value that identifies the user who is interacting with the assistant. The client must provide a unique
+     * identifier for each individual end user who accesses the application. This user ID may be used for billing and
+     * other purposes.
      *
-     * @return the user_id_serialized_name
+     * @return the userId
      */
     @AuraEnabled
     public String getUserId() {
       return user_id_serialized_name;
     }
+ 
     /**
-     * Gets the turn_count_serialized_name.
+     * Gets the turnCount.
      *
-     * This property is normally set by the Assistant which sets this to 1 during the first conversation turn and then
-     * increments it by 1 with every subsequent turn. A turn count equal to 0 (or > 0) informs the Assistant that this
-     * is (or is not) the first turn in a conversation which influences the behavior of some skills. The Conversation
-     * skill uses this to evaluate its `welcome` and `conversation_start` conditions.
+     * A counter that is automatically incremented with each turn of the conversation. A value of 1 indicates that this
+     * is the the first turn of a new conversation, which can affect the behavior of some skills.
      *
-     * @return the turn_count_serialized_name
+     * @return the turnCount
      */
     @AuraEnabled
     public Long getTurnCount() {
@@ -1208,7 +1258,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the timezone_serialized_name.
+     * Sets the timezone.
      *
      * @param timezone the new timezone
      */
@@ -1217,7 +1267,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the user_id_serialized_name.
+     * Sets the userId.
      *
      * @param userId the new userId
      */
@@ -1226,7 +1276,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the turn_count_serialized_name.
+     * Sets the turnCount.
      *
      * @param turnCount the new turnCount
      */
@@ -1296,83 +1346,89 @@ public class IBMAssistantV2Models {
      * and should not be called by the client.
      */
     public MessageInput() { }
-
+ 
     /**
-     * Gets the message_type_serialized_name.
+     * Gets the messageType.
      *
      * The type of user input. Currently, only text input is supported.
      *
-     * @return the message_type_serialized_name
+     * @return the messageType
      */
     @AuraEnabled
     public String getMessageType() {
       return message_type_serialized_name;
     }
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must
      * be no longer than 2048 characters.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     @AuraEnabled
     public String getText() {
       return text_serialized_name;
     }
+ 
     /**
-     * Gets the options_serialized_name.
+     * Gets the options.
      *
      * Properties that control how the assistant responds.
      *
-     * @return the options_serialized_name
+     * @return the options
      */
     @AuraEnabled
     public MessageInputOptions getOptions() {
       return options_serialized_name;
     }
+ 
     /**
-     * Gets the intents_serialized_name.
+     * Gets the intents.
      *
      * Intents to use when evaluating the user input. Include intents from the previous response to continue using those
      * intents rather than trying to recognize intents in the new input.
      *
-     * @return the intents_serialized_name
+     * @return the intents
      */
     @AuraEnabled
     public List<RuntimeIntent> getIntents() {
       return intents_serialized_name;
     }
+ 
     /**
-     * Gets the entities_serialized_name.
+     * Gets the entities.
      *
      * Entities to use when evaluating the message. Include entities from the previous response to continue using those
      * entities rather than detecting entities in the new input.
      *
-     * @return the entities_serialized_name
+     * @return the entities
      */
     @AuraEnabled
     public List<RuntimeEntity> getEntities() {
       return entities_serialized_name;
     }
+ 
     /**
-     * Gets the suggestion_id_serialized_name.
+     * Gets the suggestionId.
      *
      * For internal use only.
      *
-     * @return the suggestion_id_serialized_name
+     * @return the suggestionId
      */
     @AuraEnabled
     public String getSuggestionId() {
       return suggestion_id_serialized_name;
     }
+  
     private MessageInput(MessageInputBuilder builder) {
-      message_type_serialized_name = builder.message_type_serialized_name;
-      text_serialized_name = builder.text_serialized_name;
-      options_serialized_name = builder.options_serialized_name;
-      intents_serialized_name = builder.intents_serialized_name;
-      entities_serialized_name = builder.entities_serialized_name;
-      suggestion_id_serialized_name = builder.suggestion_id_serialized_name;
+      message_type_serialized_name = builder.messageType;
+      text_serialized_name = builder.text;
+      options_serialized_name = builder.options;
+      intents_serialized_name = builder.intents;
+      entities_serialized_name = builder.entities;
+      suggestion_id_serialized_name = builder.suggestionId;
     }
 
     /**
@@ -1392,11 +1448,11 @@ public class IBMAssistantV2Models {
       MessageInput ret = (MessageInput) super.deserialize(jsonString, jsonMap, classType);
       MessageInputBuilder retBuilder = ret.newBuilder();
 
-      // calling custom deserializer for options_serialized_name
+      // calling custom deserializer for options
       MessageInputOptions newOptions = (MessageInputOptions) new MessageInputOptions().deserialize(JSON.serialize(ret.getOptions()), (Map<String, Object>) jsonMap.get('options_serialized_name'), MessageInputOptions.class);
       retBuilder.options(newOptions);
 
-      // calling custom deserializer for intents_serialized_name
+      // calling custom deserializer for intents
       List<RuntimeIntent> newIntents = new List<RuntimeIntent>();
       List<RuntimeIntent> deserializedIntents = ret.getIntents();
       if (deserializedIntents != null) {
@@ -1409,7 +1465,7 @@ public class IBMAssistantV2Models {
         retBuilder.intents(newIntents);
       }
 
-      // calling custom deserializer for entities_serialized_name
+      // calling custom deserializer for entities
       List<RuntimeEntity> newEntities = new List<RuntimeEntity>();
       List<RuntimeEntity> deserializedEntities = ret.getEntities();
       if (deserializedEntities != null) {
@@ -1430,20 +1486,20 @@ public class IBMAssistantV2Models {
    * MessageInput Builder.
    */
   public class MessageInputBuilder {
-    private String message_type_serialized_name;
-    private String text_serialized_name;
-    private MessageInputOptions options_serialized_name;
-    private List<RuntimeIntent> intents_serialized_name;
-    private List<RuntimeEntity> entities_serialized_name;
-    private String suggestion_id_serialized_name;
+    private String messageType;
+    private String text;
+    private MessageInputOptions options;
+    private List<RuntimeIntent> intents;
+    private List<RuntimeEntity> entities;
+    private String suggestionId;
 
     private MessageInputBuilder(MessageInput messageInput) {
-      message_type_serialized_name = messageInput.message_type_serialized_name;
-      text_serialized_name = messageInput.text_serialized_name;
-      options_serialized_name = messageInput.options_serialized_name;
-      intents_serialized_name = messageInput.intents_serialized_name;
-      entities_serialized_name = messageInput.entities_serialized_name;
-      suggestion_id_serialized_name = messageInput.suggestion_id_serialized_name;
+      messageType = messageInput.message_type_serialized_name;
+      text = messageInput.text_serialized_name;
+      options = messageInput.options_serialized_name;
+      intents = messageInput.intents_serialized_name;
+      entities = messageInput.entities_serialized_name;
+      suggestionId = messageInput.suggestion_id_serialized_name;
     }
 
     /**
@@ -1462,100 +1518,100 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Adds an intents to intents_serialized_name.
+     * Adds an intents to intents.
      *
      * @param intents the new intents
      * @return the MessageInput builder
      */
     public MessageInputBuilder addIntents(RuntimeIntent intents) {
       IBMWatsonValidator.notNull(intents, 'intents cannot be null');
-      if (this.intents_serialized_name == null) {
-        this.intents_serialized_name = new List<RuntimeIntent>();
+      if (this.intents == null) {
+        this.intents = new List<RuntimeIntent>();
       }
-      this.intents_serialized_name.add(intents);
+      this.intents.add(intents);
       return this;
     }
 
     /**
-     * Adds an entities to entities_serialized_name.
+     * Adds an entities to entities.
      *
      * @param entities the new entities
      * @return the MessageInput builder
      */
     public MessageInputBuilder addEntities(RuntimeEntity entities) {
       IBMWatsonValidator.notNull(entities, 'entities cannot be null');
-      if (this.entities_serialized_name == null) {
-        this.entities_serialized_name = new List<RuntimeEntity>();
+      if (this.entities == null) {
+        this.entities = new List<RuntimeEntity>();
       }
-      this.entities_serialized_name.add(entities);
+      this.entities.add(entities);
       return this;
     }
 
     /**
-     * Set the message_type_serialized_name.
+     * Set the messageType.
      *
      * @param messageType the messageType
      * @return the MessageInput builder
      */
     public MessageInputBuilder messageType(String messageType) {
-      this.message_type_serialized_name = messageType;
+      this.messageType = messageType;
       return this;
     }
 
     /**
-     * Set the text_serialized_name.
+     * Set the text.
      *
      * @param text the text
      * @return the MessageInput builder
      */
     public MessageInputBuilder text(String text) {
-      this.text_serialized_name = text;
+      this.text = text;
       return this;
     }
 
     /**
-     * Set the options_serialized_name.
+     * Set the options.
      *
      * @param options the options
      * @return the MessageInput builder
      */
     public MessageInputBuilder options(MessageInputOptions options) {
-      this.options_serialized_name = options;
+      this.options = options;
       return this;
     }
 
     /**
-     * Set the intents_serialized_name.
-     * Existing intents_serialized_name will be replaced.
+     * Set the intents.
+     * Existing intents will be replaced.
      *
      * @param intents the intents
      * @return the MessageInput builder
      */
     public MessageInputBuilder intents(List<RuntimeIntent> intents) {
-      this.intents_serialized_name = intents;
+      this.intents = intents;
       return this;
     }
 
     /**
-     * Set the entities_serialized_name.
-     * Existing entities_serialized_name will be replaced.
+     * Set the entities.
+     * Existing entities will be replaced.
      *
      * @param entities the entities
      * @return the MessageInput builder
      */
     public MessageInputBuilder entities(List<RuntimeEntity> entities) {
-      this.entities_serialized_name = entities;
+      this.entities = entities;
       return this;
     }
 
     /**
-     * Set the suggestion_id_serialized_name.
+     * Set the suggestionId.
      *
      * @param suggestionId the suggestionId
      * @return the MessageInput builder
      */
     public MessageInputBuilder suggestionId(String suggestionId) {
-      this.suggestion_id_serialized_name = suggestionId;
+      this.suggestionId = suggestionId;
       return this;
     }
   }
@@ -1568,48 +1624,52 @@ public class IBMAssistantV2Models {
     private Boolean restart_serialized_name;
     private Boolean alternate_intents_serialized_name;
     private Boolean return_context_serialized_name;
+ 
     /**
-     * Gets the debug_serialized_name.
+     * Gets the debug.
      *
      * Whether to return additional diagnostic information. Set to `true` to return additional information under the
      * `output.debug` key.
      *
-     * @return the debug_serialized_name
+     * @return the debug
      */
     @AuraEnabled
     public Boolean getDebug() {
       return debug_serialized_name;
     }
+ 
     /**
-     * Gets the restart_serialized_name.
+     * Gets the restart.
      *
      * Whether to start a new conversation with this user input. Specify `true` to clear the state information stored by
      * the session.
      *
-     * @return the restart_serialized_name
+     * @return the restart
      */
     @AuraEnabled
     public Boolean getRestart() {
       return restart_serialized_name;
     }
+ 
     /**
-     * Gets the alternate_intents_serialized_name.
+     * Gets the alternateIntents.
      *
      * Whether to return more than one intent. Set to `true` to return all matching intents.
      *
-     * @return the alternate_intents_serialized_name
+     * @return the alternateIntents
      */
     @AuraEnabled
     public Boolean getAlternateIntents() {
       return alternate_intents_serialized_name;
     }
+ 
     /**
-     * Gets the return_context_serialized_name.
+     * Gets the returnContext.
      *
      * Whether to return session context with the response. If you specify `true`, the response will include the
      * `context` property.
      *
-     * @return the return_context_serialized_name
+     * @return the returnContext
      */
     @AuraEnabled
     public Boolean getReturnContext() {
@@ -1617,7 +1677,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the debug_serialized_name.
+     * Sets the debug.
      *
      * @param debug the new debug
      */
@@ -1626,7 +1686,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the restart_serialized_name.
+     * Sets the restart.
      *
      * @param restart the new restart
      */
@@ -1635,7 +1695,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the alternate_intents_serialized_name.
+     * Sets the alternateIntents.
      *
      * @param alternateIntents the new alternateIntents
      */
@@ -1644,7 +1704,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the return_context_serialized_name.
+     * Sets the returnContext.
      *
      * @param returnContext the new returnContext
      */
@@ -1667,12 +1727,13 @@ public class IBMAssistantV2Models {
    * The message options.
    */
   public class MessageOptions extends IBMWatsonOptionsModel {
-    private String assistant_id_serialized_name;
-    private String session_id_serialized_name;
-    private MessageInput input_serialized_name;
-    private MessageContext context_serialized_name;
+    private String assistantId;
+    private String sessionId;
+    private MessageInput input;
+    private MessageContext context;
+ 
     /**
-     * Gets the assistant_id_serialized_name.
+     * Gets the assistantId.
      *
      * Unique identifier of the assistant. You can find the assistant ID of an assistant on the **Assistants** tab of
      * the Watson Assistant tool. For information about creating assistants, see the
@@ -1680,48 +1741,52 @@ public class IBMAssistantV2Models {
      *
      * **Note:** Currently, the v2 API does not support creating assistants.
      *
-     * @return the assistant_id_serialized_name
+     * @return the assistantId
      */
     public String assistantId() {
-      return assistant_id_serialized_name;
+      return assistantId;
     }
+ 
     /**
-     * Gets the session_id_serialized_name.
+     * Gets the sessionId.
      *
      * Unique identifier of the session.
      *
-     * @return the session_id_serialized_name
+     * @return the sessionId
      */
     public String sessionId() {
-      return session_id_serialized_name;
+      return sessionId;
     }
+ 
     /**
-     * Gets the input_serialized_name.
+     * Gets the input.
      *
      * An input object that includes the input text.
      *
-     * @return the input_serialized_name
+     * @return the input
      */
     public MessageInput input() {
-      return input_serialized_name;
+      return input;
     }
+ 
     /**
-     * Gets the context_serialized_name.
+     * Gets the context.
      *
      * State information for the conversation.
      *
-     * @return the context_serialized_name
+     * @return the context
      */
     public MessageContext context() {
-      return context_serialized_name;
+      return context;
     }
+
     private MessageOptions(MessageOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.assistant_id_serialized_name, 'assistant_id_serialized_name cannot be empty');
-      IBMWatsonValidator.notEmpty(builder.session_id_serialized_name, 'session_id_serialized_name cannot be empty');
-      assistant_id_serialized_name = builder.assistant_id_serialized_name;
-      session_id_serialized_name = builder.session_id_serialized_name;
-      input_serialized_name = builder.input_serialized_name;
-      context_serialized_name = builder.context_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.assistantId, 'assistantId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.sessionId, 'sessionId cannot be empty');
+      assistantId = builder.assistantId;
+      sessionId = builder.sessionId;
+      input = builder.input;
+      context = builder.context;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1740,16 +1805,16 @@ public class IBMAssistantV2Models {
    * MessageOptions Builder.
    */
   public class MessageOptionsBuilder extends IBMWatsonOptionsModel {
-    private String assistant_id_serialized_name;
-    private String session_id_serialized_name;
-    private MessageInput input_serialized_name;
-    private MessageContext context_serialized_name;
+    private String assistantId;
+    private String sessionId;
+    private MessageInput input;
+    private MessageContext context;
 
     private MessageOptionsBuilder(MessageOptions messageOptions) {
-      assistant_id_serialized_name = messageOptions.assistant_id_serialized_name;
-      session_id_serialized_name = messageOptions.session_id_serialized_name;
-      input_serialized_name = messageOptions.input_serialized_name;
-      context_serialized_name = messageOptions.context_serialized_name;
+      assistantId = messageOptions.assistantId;
+      sessionId = messageOptions.sessionId;
+      input = messageOptions.input;
+      context = messageOptions.context;
       this.requestHeaders.putAll(messageOptions.requestHeaders());
     }
 
@@ -1766,8 +1831,8 @@ public class IBMAssistantV2Models {
      * @param sessionId the sessionId
      */
     public MessageOptionsBuilder(String assistantId, String sessionId) {
-      this.assistant_id_serialized_name = assistantId;
-      this.session_id_serialized_name = sessionId;
+      this.assistantId = assistantId;
+      this.sessionId = sessionId;
     }
 
     /**
@@ -1780,46 +1845,46 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Set the assistant_id_serialized_name.
+     * Set the assistantId.
      *
      * @param assistantId the assistantId
      * @return the MessageOptions builder
      */
     public MessageOptionsBuilder assistantId(String assistantId) {
-      this.assistant_id_serialized_name = assistantId;
+      this.assistantId = assistantId;
       return this;
     }
 
     /**
-     * Set the session_id_serialized_name.
+     * Set the sessionId.
      *
      * @param sessionId the sessionId
      * @return the MessageOptions builder
      */
     public MessageOptionsBuilder sessionId(String sessionId) {
-      this.session_id_serialized_name = sessionId;
+      this.sessionId = sessionId;
       return this;
     }
 
     /**
-     * Set the input_serialized_name.
+     * Set the input.
      *
      * @param input the input
      * @return the MessageOptions builder
      */
     public MessageOptionsBuilder input(MessageInput input) {
-      this.input_serialized_name = input;
+      this.input = input;
       return this;
     }
 
     /**
-     * Set the context_serialized_name.
+     * Set the context.
      *
      * @param context the context
      * @return the MessageOptions builder
      */
     public MessageOptionsBuilder context(MessageContext context) {
-      this.context_serialized_name = context;
+      this.context = context;
       return this;
     }
 
@@ -1845,55 +1910,62 @@ public class IBMAssistantV2Models {
     private List<RuntimeEntity> entities_serialized_name;
     private List<DialogNodeAction> actions_serialized_name;
     private MessageOutputDebug debug_serialized_name;
+ 
     /**
-     * Gets the generic_serialized_name.
+     * Gets the generic.
      *
      * Output intended for any channel. It is the responsibility of the client application to implement the supported
      * response types.
      *
-     * @return the generic_serialized_name
+     * @return the generic
      */
     @AuraEnabled
     public List<DialogRuntimeResponseGeneric> getGeneric() {
       return generic_serialized_name;
     }
+ 
     /**
-     * Gets the intents_serialized_name.
+     * Gets the intents.
      *
      * An array of intents recognized in the user input, sorted in descending order of confidence.
      *
-     * @return the intents_serialized_name
+     * @return the intents
      */
     @AuraEnabled
     public List<RuntimeIntent> getIntents() {
       return intents_serialized_name;
     }
+ 
     /**
-     * Gets the entities_serialized_name.
+     * Gets the entities.
      *
      * An array of entities identified in the user input.
      *
-     * @return the entities_serialized_name
+     * @return the entities
      */
     @AuraEnabled
     public List<RuntimeEntity> getEntities() {
       return entities_serialized_name;
     }
+ 
     /**
-     * Gets the actions_serialized_name.
+     * Gets the actions.
      *
      * An array of objects describing any actions requested by the dialog node.
      *
-     * @return the actions_serialized_name
+     * @return the actions
      */
     @AuraEnabled
     public List<DialogNodeAction> getActions() {
       return actions_serialized_name;
     }
+ 
     /**
-     * Gets the debug_serialized_name.
+     * Gets the debug.
      *
-     * @return the debug_serialized_name
+     * Additional detailed information about a message response and how it was generated.
+     *
+     * @return the debug
      */
     @AuraEnabled
     public MessageOutputDebug getDebug() {
@@ -1901,7 +1973,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the generic_serialized_name.
+     * Sets the generic.
      *
      * @param generic the new generic
      */
@@ -1910,7 +1982,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the intents_serialized_name.
+     * Sets the intents.
      *
      * @param intents the new intents
      */
@@ -1919,7 +1991,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the entities_serialized_name.
+     * Sets the entities.
      *
      * @param entities the new entities
      */
@@ -1928,7 +2000,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the actions_serialized_name.
+     * Sets the actions.
      *
      * @param actions the new actions
      */
@@ -1937,7 +2009,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the debug_serialized_name.
+     * Sets the debug.
      *
      * @param debug the new debug
      */
@@ -1952,7 +2024,7 @@ public class IBMAssistantV2Models {
 
       MessageOutput ret = (MessageOutput) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for generic_serialized_name
+      // calling custom deserializer for generic
       List<DialogRuntimeResponseGeneric> newGeneric = new List<DialogRuntimeResponseGeneric>();
       List<DialogRuntimeResponseGeneric> deserializedGeneric = ret.getGeneric();
       if (deserializedGeneric != null) {
@@ -1965,7 +2037,7 @@ public class IBMAssistantV2Models {
         ret.setGeneric(newGeneric);
       }
 
-      // calling custom deserializer for intents_serialized_name
+      // calling custom deserializer for intents
       List<RuntimeIntent> newIntents = new List<RuntimeIntent>();
       List<RuntimeIntent> deserializedIntents = ret.getIntents();
       if (deserializedIntents != null) {
@@ -1978,7 +2050,7 @@ public class IBMAssistantV2Models {
         ret.setIntents(newIntents);
       }
 
-      // calling custom deserializer for entities_serialized_name
+      // calling custom deserializer for entities
       List<RuntimeEntity> newEntities = new List<RuntimeEntity>();
       List<RuntimeEntity> deserializedEntities = ret.getEntities();
       if (deserializedEntities != null) {
@@ -1991,7 +2063,7 @@ public class IBMAssistantV2Models {
         ret.setEntities(newEntities);
       }
 
-      // calling custom deserializer for actions_serialized_name
+      // calling custom deserializer for actions
       List<DialogNodeAction> newActions = new List<DialogNodeAction>();
       List<DialogNodeAction> deserializedActions = ret.getActions();
       if (deserializedActions != null) {
@@ -2004,7 +2076,7 @@ public class IBMAssistantV2Models {
         ret.setActions(newActions);
       }
 
-      // calling custom deserializer for debug_serialized_name
+      // calling custom deserializer for debug
       MessageOutputDebug newDebug = (MessageOutputDebug) new MessageOutputDebug().deserialize(JSON.serialize(ret.getDebug()), (Map<String, Object>) jsonMap.get('debug_serialized_name'), MessageOutputDebug.class);
       ret.setDebug(newDebug);
 
@@ -2020,47 +2092,51 @@ public class IBMAssistantV2Models {
     private List<DialogLogMessage> log_messages_serialized_name;
     private Boolean branch_exited_serialized_name;
     private String branch_exited_reason_serialized_name;
+ 
     /**
-     * Gets the nodes_visited_serialized_name.
+     * Gets the nodesVisited.
      *
      * An array of objects containing detailed diagnostic information about the nodes that were triggered during
      * processing of the input message.
      *
-     * @return the nodes_visited_serialized_name
+     * @return the nodesVisited
      */
     @AuraEnabled
     public List<DialogNodesVisited> getNodesVisited() {
       return nodes_visited_serialized_name;
     }
+ 
     /**
-     * Gets the log_messages_serialized_name.
+     * Gets the logMessages.
      *
      * An array of up to 50 messages logged with the request.
      *
-     * @return the log_messages_serialized_name
+     * @return the logMessages
      */
     @AuraEnabled
     public List<DialogLogMessage> getLogMessages() {
       return log_messages_serialized_name;
     }
+ 
     /**
-     * Gets the branch_exited_serialized_name.
+     * Gets the branchExited.
      *
      * Assistant sets this to true when this message response concludes or interrupts a dialog.
      *
-     * @return the branch_exited_serialized_name
+     * @return the branchExited
      */
     @AuraEnabled
     public Boolean getBranchExited() {
       return branch_exited_serialized_name;
     }
+ 
     /**
-     * Gets the branch_exited_reason_serialized_name.
+     * Gets the branchExitedReason.
      *
      * When `branch_exited` is set to `true` by the Assistant, the `branch_exited_reason` specifies whether the dialog
      * completed by itself or got interrupted.
      *
-     * @return the branch_exited_reason_serialized_name
+     * @return the branchExitedReason
      */
     @AuraEnabled
     public String getBranchExitedReason() {
@@ -2068,7 +2144,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the nodes_visited_serialized_name.
+     * Sets the nodesVisited.
      *
      * @param nodesVisited the new nodesVisited
      */
@@ -2077,7 +2153,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the log_messages_serialized_name.
+     * Sets the logMessages.
      *
      * @param logMessages the new logMessages
      */
@@ -2086,7 +2162,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the branch_exited_serialized_name.
+     * Sets the branchExited.
      *
      * @param branchExited the new branchExited
      */
@@ -2095,7 +2171,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the branch_exited_reason_serialized_name.
+     * Sets the branchExitedReason.
      *
      * @param branchExitedReason the new branchExitedReason
      */
@@ -2110,7 +2186,7 @@ public class IBMAssistantV2Models {
 
       MessageOutputDebug ret = (MessageOutputDebug) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for nodes_visited_serialized_name
+      // calling custom deserializer for nodesVisited
       List<DialogNodesVisited> newNodesVisited = new List<DialogNodesVisited>();
       List<DialogNodesVisited> deserializedNodesVisited = ret.getNodesVisited();
       if (deserializedNodesVisited != null) {
@@ -2123,7 +2199,7 @@ public class IBMAssistantV2Models {
         ret.setNodesVisited(newNodesVisited);
       }
 
-      // calling custom deserializer for log_messages_serialized_name
+      // calling custom deserializer for logMessages
       List<DialogLogMessage> newLogMessages = new List<DialogLogMessage>();
       List<DialogLogMessage> deserializedLogMessages = ret.getLogMessages();
       if (deserializedLogMessages != null) {
@@ -2146,24 +2222,26 @@ public class IBMAssistantV2Models {
   public class MessageResponse extends IBMWatsonResponseModel {
     private MessageOutput output_serialized_name;
     private MessageContext context_serialized_name;
+ 
     /**
-     * Gets the output_serialized_name.
+     * Gets the output.
      *
      * Assistant output to be rendered or processed by the client.
      *
-     * @return the output_serialized_name
+     * @return the output
      */
     @AuraEnabled
     public MessageOutput getOutput() {
       return output_serialized_name;
     }
+ 
     /**
-     * Gets the context_serialized_name.
+     * Gets the context.
      *
      * The current session context. Included in the response if the `return_context` property of the message input was
      * set to `true`.
      *
-     * @return the context_serialized_name
+     * @return the context
      */
     @AuraEnabled
     public MessageContext getContext() {
@@ -2171,7 +2249,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the output_serialized_name.
+     * Sets the output.
      *
      * @param output the new output
      */
@@ -2180,7 +2258,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the context_serialized_name.
+     * Sets the context.
      *
      * @param context the new context
      */
@@ -2195,11 +2273,11 @@ public class IBMAssistantV2Models {
 
       MessageResponse ret = (MessageResponse) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for output_serialized_name
+      // calling custom deserializer for output
       MessageOutput newOutput = (MessageOutput) new MessageOutput().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), MessageOutput.class);
       ret.setOutput(newOutput);
 
-      // calling custom deserializer for context_serialized_name
+      // calling custom deserializer for context
       MessageContext newContext = (MessageContext) new MessageContext().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'), MessageContext.class);
       ret.setContext(newContext);
 
@@ -2217,68 +2295,74 @@ public class IBMAssistantV2Models {
     private Double confidence_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private List<CaptureGroup> groups_serialized_name;
+ 
     /**
-     * Gets the entity_serialized_name.
+     * Gets the entity.
      *
      * An entity detected in the input.
      *
-     * @return the entity_serialized_name
+     * @return the entity
      */
     @AuraEnabled
     public String getEntity() {
       return entity_serialized_name;
     }
+ 
     /**
-     * Gets the location_serialized_name.
+     * Gets the location.
      *
      * An array of zero-based character offsets that indicate where the detected entity values begin and end in the
      * input text.
      *
-     * @return the location_serialized_name
+     * @return the location
      */
     @AuraEnabled
     public List<Long> getLocation() {
       return location_serialized_name;
     }
+ 
     /**
-     * Gets the value_serialized_name.
+     * Gets the value.
      *
      * The term in the input text that was recognized as an entity value.
      *
-     * @return the value_serialized_name
+     * @return the value
      */
     @AuraEnabled
     public String getValue() {
       return value_serialized_name;
     }
+ 
     /**
-     * Gets the confidence_serialized_name.
+     * Gets the confidence.
      *
      * A decimal percentage that represents Watson's confidence in the entity.
      *
-     * @return the confidence_serialized_name
+     * @return the confidence
      */
     @AuraEnabled
     public Double getConfidence() {
       return confidence_serialized_name;
     }
+ 
     /**
-     * Gets the metadata_serialized_name.
+     * Gets the metadata.
      *
      * Any metadata for the entity.
      *
-     * @return the metadata_serialized_name
+     * @return the metadata
      */
     @AuraEnabled
     public IBMWatsonMapModel getMetadata() {
       return metadata_serialized_name;
     }
+ 
     /**
-     * Gets the groups_serialized_name.
+     * Gets the groups.
      *
      * The recognized capture groups for the entity, as defined by the entity pattern.
      *
-     * @return the groups_serialized_name
+     * @return the groups
      */
     @AuraEnabled
     public List<CaptureGroup> getGroups() {
@@ -2286,7 +2370,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the entity_serialized_name.
+     * Sets the entity.
      *
      * @param entity the new entity
      */
@@ -2295,7 +2379,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the location_serialized_name.
+     * Sets the location.
      *
      * @param location the new location
      */
@@ -2304,7 +2388,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the value_serialized_name.
+     * Sets the value.
      *
      * @param value the new value
      */
@@ -2313,7 +2397,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the confidence_serialized_name.
+     * Sets the confidence.
      *
      * @param confidence the new confidence
      */
@@ -2322,7 +2406,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the metadata_serialized_name.
+     * Sets the metadata.
      *
      * @param metadata the new metadata
      */
@@ -2331,7 +2415,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the groups_serialized_name.
+     * Sets the groups.
      *
      * @param groups the new groups
      */
@@ -2346,11 +2430,11 @@ public class IBMAssistantV2Models {
 
       RuntimeEntity ret = (RuntimeEntity) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for metadata_serialized_name
+      // calling custom deserializer for metadata
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
-      // calling custom deserializer for groups_serialized_name
+      // calling custom deserializer for groups
       List<CaptureGroup> newGroups = new List<CaptureGroup>();
       List<CaptureGroup> deserializedGroups = ret.getGroups();
       if (deserializedGroups != null) {
@@ -2373,23 +2457,25 @@ public class IBMAssistantV2Models {
   public class RuntimeIntent extends IBMWatsonGenericModel {
     private String intent_serialized_name;
     private Double confidence_serialized_name;
+ 
     /**
-     * Gets the intent_serialized_name.
+     * Gets the intent.
      *
      * The name of the recognized intent.
      *
-     * @return the intent_serialized_name
+     * @return the intent
      */
     @AuraEnabled
     public String getIntent() {
       return intent_serialized_name;
     }
+ 
     /**
-     * Gets the confidence_serialized_name.
+     * Gets the confidence.
      *
      * A decimal percentage that represents Watson's confidence in the intent.
      *
-     * @return the confidence_serialized_name
+     * @return the confidence
      */
     @AuraEnabled
     public Double getConfidence() {
@@ -2397,7 +2483,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the intent_serialized_name.
+     * Sets the intent.
      *
      * @param intent the new intent
      */
@@ -2406,7 +2492,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the confidence_serialized_name.
+     * Sets the confidence.
      *
      * @param confidence the new confidence
      */
@@ -2430,12 +2516,13 @@ public class IBMAssistantV2Models {
    */
   public class SessionResponse extends IBMWatsonResponseModel {
     private String session_id_serialized_name;
+ 
     /**
-     * Gets the session_id_serialized_name.
+     * Gets the sessionId.
      *
      * The session ID.
      *
-     * @return the session_id_serialized_name
+     * @return the sessionId
      */
     @AuraEnabled
     public String getSessionId() {
@@ -2443,7 +2530,7 @@ public class IBMAssistantV2Models {
     }
 
     /**
-     * Sets the session_id_serialized_name.
+     * Sets the sessionId.
      *
      * @param sessionId the new sessionId
      */
