@@ -666,6 +666,17 @@ public class IBMWatsonMockResponses {
             '"msg": "test_warning"' +
           '}' +
           '],' +
+          '"actions": [ ' +
+          '{' +
+            '"name": "action",' +
+            '"type": "server",' +
+            '"parameters": {' +
+              '"param_1": "param_1_val"' +
+            '},' +
+            '"result_variable": "action_var",' +
+            '"credentials": "creds"' +
+          '}' +
+          '],' +
           '"nodes_visited_details": [' +
           '{' +
             '"dialog_node": "node",' +
@@ -673,7 +684,18 @@ public class IBMWatsonMockResponses {
             '"conditions": "#condition"' +
           '}' +  
           ']' +
+        '},' +
+        '"actions": [ ' +
+        '{' +
+          '"name": "action",' +
+          '"type": "server",' +
+          '"parameters": {' +
+            '"param_1": "param_1_val"' +
+          '},' +
+          '"result_variable": "action_var",' +
+          '"credentials": "creds"' +
         '}' +
+        ']' +
         '}';
   }
 
@@ -2696,6 +2718,199 @@ public class IBMWatsonMockResponses {
           ']' +
         '}' +
       ']' +
+    '}';
+  }
+
+  public static testMethod String messageResponseV2() {
+    return '{' +
+      '"context": {' +
+        '"global": {' +
+          '"system": {' +
+            '"timezone": "timezone",' +
+            '"user_id": "user_id",' +
+            '"turn_count": "10"' +
+          '}' +
+        '},' +
+        '"skills": {' +
+          '"skill_key": "skill_var"' +
+        '}' +
+      '},' +
+      '"output": {' +
+        '"generic": [' +
+          '{' +
+            '"response_type": "text",' +
+            '"text": "text",' +
+            '"time": 1234,' +
+            '"typing": true,' +
+            '"source": "source",' +
+            '"title": "title",' +
+            '"description": "description",' +
+            '"preference": "button",' +
+            '"options": [' +
+              '{' +
+                '"label": "label",' +
+                '"value": {' +
+                  '"input": {' +
+                    '"message_type": "text",' +
+                    '"text": "text",' +
+                    '"options": {' +
+                      '"debug": true,' +
+                      '"restart": true,' +
+                      '"alternate_intents": true,' +
+                      '"return_context": true' +
+                    '},' +
+                    '"intents": [' +
+                      '{' +
+                        '"intent": "intent",' +
+                        '"confidence": 0.0' +
+                      '}' +
+                    '],' +
+                    '"entities": [' +
+                      '{' +
+                        '"entity": "entity",' +
+                        '"location": [' +
+                          '1,' +
+                          '2' +
+                        '],' +
+                        '"value": "value",' +
+                        '"confidence": 0.0,' +
+                        '"metadata": {' +
+                          '"key": "value"' +
+                        '},' +
+                        '"groups": [' +
+                          '{' +
+                            '"group": "group",' +
+                            '"location": [' +
+                              '1,' +
+                              '2' +
+                            ']' +
+                          '}' +
+                        ']' +
+                      '}' +
+                    '],' +
+                    '"suggestion_id": "suggestion_id"' +
+                  '}' +
+                '}' +
+              '}' +
+            '],' +
+            '"message_to_human_agent": "message",' +
+            '"topic": "topic",' +
+            '"suggestions": [' +
+              '{' +
+                '"label": "label",' +
+                '"value": {' +
+                  '"input": {' +
+                    '"message_type": "text",' +
+                    '"text": "text",' +
+                    '"options": {' +
+                      '"debug": true,' +
+                      '"restart": true,' +
+                      '"alternate_intents": true,' +
+                      '"return_context": true' +
+                    '},' +
+                    '"intents": [' +
+                      '{' +
+                        '"intent": "intent",' +
+                        '"confidence": 0.0' +
+                      '}' +
+                    '],' +
+                    '"entities": [' +
+                      '{' +
+                        '"entity": "entity",' +
+                        '"location": [' +
+                          '1,' +
+                          '2' +
+                        '],' +
+                        '"value": "value",' +
+                        '"confidence": 0.0,' +
+                        '"metadata": {' +
+                          '"key": "value"' +
+                        '},' +
+                        '"groups": [' +
+                          '{' +
+                            '"group": "group",' +
+                            '"location": [' +
+                              '1,' +
+                              '2' +
+                            ']' +
+                          '}' +
+                        ']' +
+                      '}' +
+                    '],' +
+                    '"suggestion_id": "suggestion_id"' +
+                  '}' +
+                '},' +
+                '"output": {' +
+                  '"key": "value"' +
+                '}' +
+              '}' +
+            ']' +
+          '}' +
+        '],' +
+        '"intents": [' +
+          '{' +
+            '"intent": "intent",' +
+            '"confidence": 0.0' +
+          '}' +
+        '],' +
+        '"entities": [' +
+          '{' +
+            '"entity": "entity",' +
+            '"location": [' +
+              '1,' +
+              '2' +
+            '],' +
+            '"value": "value",' +
+            '"confidence": 0.0,' +
+            '"metadata": {' +
+              '"key": "value"' +
+            '},' +
+            '"groups": [' +
+              '{' +
+                '"group": "group",' +
+                '"location": [' +
+                  '1,' +
+                  '2' +
+                ']' +
+              '}' +
+            ']' +
+          '}' +
+        '],' +
+        '"actions": [' +
+          '{' +
+            '"name": "name",' +
+            '"type": "client",' +
+            '"parameters": {' +
+              '"key": "value"' +
+            '},' +
+            '"result_variable": "result_variable",' +
+            '"credentials": "credentials"' +
+          '}' +
+        '],' +
+        '"debug": {' +
+          '"nodes_visited": [' +
+            '{' +
+              '"dialog_node": "dialog_node",' +
+              '"title": "title",' +
+              '"conditions": "conditions"' +
+            '}' +
+          '],' +
+          '"log_messages": [' +
+            '{' +
+              '"level": "info",' +
+              '"message": "message"' +
+            '}' +
+          '],' +
+          '"branch_exited": true,' +
+          '"branch_exited_reason": "completed"' +
+        '}' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String sessionResponse() {
+    return '{' +
+      '"session_id": "session_id"' +
     '}';
   }
 }

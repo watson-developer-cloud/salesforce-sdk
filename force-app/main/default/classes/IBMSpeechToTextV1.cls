@@ -1,33 +1,30 @@
 /**
  * The IBM&reg; Speech to Text service provides an API that uses IBM's speech-recognition capabilities to produce
  * transcripts of spoken audio. The service can transcribe speech from various languages and audio formats. It addition
- * to basic transcription, the service can produce detailed information about many aspects of the audio. For most
- * languages, the service supports two sampling rates, broadband and narrowband. It returns all JSON response content in
- * the UTF-8 character set. For more information about the service, see the [IBM&reg; Cloud
+ * to basic transcription, the service can produce detailed information about many different aspects of the audio. For
+ * most languages, the service supports two sampling rates, broadband and narrowband. It returns all JSON response
+ * content in the UTF-8 character set.
+ *
+ *  For more information about the service, see the [IBM&reg; Cloud
  * documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html).
  *
  * ### API usage guidelines
  * * **Audio formats:** The service accepts audio in many formats (MIME types). See [Audio
  * formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
- * * **HTTP interfaces:** The service provides three HTTP interfaces for speech recognition. The sessionless interface
- * includes a single synchronous method. The session-based interface includes multiple synchronous methods for
- * maintaining a long, multi-turn exchange with the service. And the asynchronous interface provides multiple methods
- * that use registered callbacks and polling for non-blocking recognition. See [The HTTP REST
+ * * **HTTP interfaces:** The service provides two HTTP Representational State Transfer (REST) interfaces for speech
+ * recognition. The basic interface includes a single synchronous method. The asynchronous interface provides multiple
+ * methods that use registered callbacks and polling for non-blocking recognition. See [The HTTP
  * interface](https://console.bluemix.net/docs/services/speech-to-text/http.html) and [The asynchronous HTTP
  * interface](https://console.bluemix.net/docs/services/speech-to-text/async.html).
- *
- *   **Important:** The session-based interface is deprecated as of August 8, 2018, and will be removed from service on
- * September 7, 2018. Use the sessionless, asynchronous, or WebSocket interface instead. For more information, see the
- * August 8 service update in the [Release
- * notes](https://console.bluemix.net/docs/services/speech-to-text/release-notes.html#August2018).
  * * **WebSocket interface:** The service also offers a WebSocket interface for speech recognition. The WebSocket
  * interface provides a full-duplex, low-latency communication channel. Clients send requests and audio to the service
  * and receive results over a single connection in an asynchronous fashion. See [The WebSocket
  * interface](https://console.bluemix.net/docs/services/speech-to-text/websockets.html).
- * * **Customization:** Use language model customization to expand the vocabulary of a base model with domain-specific
- * terminology. Use acoustic model customization to adapt a base model for the acoustic characteristics of your audio.
- * Language model customization is generally available for production use by most supported languages; acoustic model
- * customization is beta functionality that is available for all supported languages. See [The customization
+ * * **Customization:** The service offers two customization interfaces. Use language model customization to expand the
+ * vocabulary of a base model with domain-specific terminology. Use acoustic model customization to adapt a base model
+ * for the acoustic characteristics of your audio. Language model customization is generally available for production
+ * use by most supported languages; acoustic model customization is beta functionality that is available for all
+ * supported languages. See [The customization
  * interface](https://console.bluemix.net/docs/services/speech-to-text/custom.html).
  * * **Customization IDs:** Many methods accept a customization ID to identify a custom language or custom acoustic
  * model. Customization IDs are Globally Unique Identifiers (GUIDs). They are hexadecimal strings that have the format
@@ -131,19 +128,18 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   /**
    * Recognize audio.
    *
-   * Sends audio and returns transcription results for a sessionless recognition request. Returns only the final
-   * results; to enable interim results, use session-based requests or the WebSocket API. The service imposes a data
-   * size limit of 100 MB. It automatically detects the endianness of the incoming audio and, for audio that includes
-   * multiple channels, downmixes the audio to one-channel mono during transcoding. (For the `audio/l16` format, you can
-   * specify the endianness.)
+   * Sends audio and returns transcription results for a recognition request. Returns only the final results; to enable
+   * interim results, use the WebSocket API. The service imposes a data size limit of 100 MB. It automatically detects
+   * the endianness of the incoming audio and, for audio that includes multiple channels, downmixes the audio to
+   * one-channel mono during transcoding. (For the `audio/l16` format, you can specify the endianness.)
    *
    * ### Streaming mode
    *
    *  For requests to transcribe live audio as it becomes available, you must set the `Transfer-Encoding` header to
    * `chunked` to use streaming mode. In streaming mode, the server closes the connection (status code 408) if the
-   * service receives no data chunk for 30 seconds and the service has no audio to transcribe for 30 seconds. The server
-   * also closes the connection (status code 400) if no speech is detected for `inactivity_timeout` seconds of audio
-   * (not processing time); use the `inactivity_timeout` parameter to change the default of 30 seconds.
+   * service receives no data chunk for 30 seconds and it has no audio to transcribe for 30 seconds. The server also
+   * closes the connection (status code 400) if no speech is detected for `inactivity_timeout` seconds of audio (not
+   * processing time); use the `inactivity_timeout` parameter to change the default of 30 seconds.
    *
    * ### Audio formats (content types)
    *
@@ -178,8 +174,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * used with the request are greater than the 8 KB limit imposed by most HTTP servers and proxies. You can encounter
    * this limit, for example, if you want to spot a very large number of keywords.
    *
-   * For information about submitting a multipart request, see [Submitting multipart requests as form
-   * data](https://console.bluemix.net/docs/services/speech-to-text/http.html#HTTP-multi).
+   * For information about submitting a multipart request, see [Making a multipart HTTP
+   * request](https://console.bluemix.net/docs/services/speech-to-text/http.html#HTTP-multi).
    *
    * @param recognizeOptions the {@link IBMSpeechToTextV1Models.RecognizeOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.SpeechRecognitionResults} with the response
@@ -1366,6 +1362,14 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * parameter to specify the format of the contained audio files. The parameter accepts all of the audio formats
    * supported for use with speech recognition and with the `Content-Type` header, including the `rate`, `channels`, and
    * `endianness` parameters that are used with some formats. The default contained audio format is `audio/wav`.
+   *
+   * ### Naming restrictions for embedded audio files
+   *
+   *  The name of an audio file that is embedded within an archive-type resource must meet the following restrictions:
+   * * Include a maximum of 128 characters in the file name; this includes the file extension.
+   * * Do not include spaces, slashes, or backslashes in the file name.
+   * * Do not use the name of an audio file that has already been added to the custom model as part of an archive-type
+   * resource.
    *
    * @param addAudioOptions the {@link IBMSpeechToTextV1Models.AddAudioOptions} containing the options for the call
    * @return the service call

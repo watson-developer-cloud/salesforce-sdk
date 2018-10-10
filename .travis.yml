@@ -6,7 +6,7 @@ language: python
 before_install:
   - sudo apt-get update
   - sudo apt-get install python
-  - npm install npm@latest -g
+  - npm install -g npm@6.x
 
 install:
 - export URL=https://developer.salesforce.com/media/salesforce-cli/sfdx-linux-amd64.tar.xz
@@ -37,4 +37,4 @@ after_failure:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: npx travis-deploy-once "npx semantic-release"
+    script: npx semantic-release

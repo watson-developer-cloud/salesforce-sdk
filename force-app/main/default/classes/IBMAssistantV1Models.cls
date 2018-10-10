@@ -673,7 +673,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the user_label_serialized_name.
      *
-     * A label that can be displayed externally to describe the purpose of the node to users.
+     * A label that can be displayed externally to describe the purpose of the node to users. This string must be no
+     * longer than 512 characters.
      *
      * @return the user_label_serialized_name
      */
@@ -1206,7 +1207,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the user_label_serialized_name.
      *
-     * A label that can be displayed externally to describe the purpose of the node to users.
+     * A label that can be displayed externally to describe the purpose of the node to users. This string must be no
+     * longer than 512 characters.
      *
      * @return the user_label_serialized_name
      */
@@ -5065,7 +5067,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the user_label_serialized_name.
      *
-     * A label that can be displayed externally to describe the purpose of the node to users.
+     * A label that can be displayed externally to describe the purpose of the node to users. This string must be no
+     * longer than 512 characters.
      *
      * @return the user_label_serialized_name
      */
@@ -5766,7 +5769,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the title_serialized_name.
      *
-     * An optional title to show before the response. Valid only when **response_type**=`image` or `option`.
+     * An optional title to show before the response. Valid only when **response_type**=`image` or `option`. This string
+     * must be no longer than 512 characters.
      *
      * @return the title_serialized_name
      */
@@ -5777,7 +5781,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the description_serialized_name.
      *
-     * An optional description to show with the response. Valid only when **response_type**=`image` or `option`.
+     * An optional description to show with the response. Valid only when **response_type**=`image` or `option`. This
+     * string must be no longer than 256 characters.
      *
      * @return the description_serialized_name
      */
@@ -5800,8 +5805,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the options_serialized_name.
      *
-     * An array of objects describing the options from which the user can choose. Required when
-     * **response_type**=`option`.
+     * An array of objects describing the options from which the user can choose. You can include up to 20 options.
+     * Required when **response_type**=`option`.
      *
      * @return the options_serialized_name
      */
@@ -5813,7 +5818,7 @@ public class IBMAssistantV1Models {
      * Gets the message_to_human_agent_serialized_name.
      *
      * An optional message to be sent to the human agent who will be taking over the conversation. Valid only when
-     * **reponse_type**=`connect_to_agent`.
+     * **reponse_type**=`connect_to_agent`. This string must be no longer than 256 characters.
      *
      * @return the message_to_human_agent_serialized_name
      */
@@ -6113,8 +6118,9 @@ public class IBMAssistantV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The text of a response. This can include newline characters (`
-     * `), Markdown tagging, or other special characters, if supported by the channel.
+     * The text of a response. This string can include newline characters (`
+     * `), Markdown tagging, or other special characters, if supported by the channel. It must be no longer than 4096
+     * characters.
      *
      * @return the text_serialized_name
      */
@@ -6300,7 +6306,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the title_serialized_name.
      *
-     * The title to show before the response.
+     * The title or introductory text to show before the response.
      *
      * @return the title_serialized_name
      */
@@ -9131,8 +9137,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * How to sort the returned log events. You can sort by **request_timestamp**. To reverse the sort order, prefix the
+     * parameter value with a minus sign (`-`).
      *
      * @return the sort_serialized_name
      */
@@ -9321,7 +9327,7 @@ public class IBMAssistantV1Models {
      * Gets the sort_serialized_name.
      *
      * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * sign (`-`).
      *
      * @return the sort_serialized_name
      */
@@ -9538,7 +9544,7 @@ public class IBMAssistantV1Models {
      * Gets the sort_serialized_name.
      *
      * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * sign (`-`).
      *
      * @return the sort_serialized_name
      */
@@ -9767,7 +9773,7 @@ public class IBMAssistantV1Models {
      * Gets the sort_serialized_name.
      *
      * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * sign (`-`).
      *
      * @return the sort_serialized_name
      */
@@ -10009,7 +10015,7 @@ public class IBMAssistantV1Models {
      * Gets the sort_serialized_name.
      *
      * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * sign (`-`).
      *
      * @return the sort_serialized_name
      */
@@ -10255,7 +10261,7 @@ public class IBMAssistantV1Models {
      * Gets the sort_serialized_name.
      *
      * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * sign (`-`).
      *
      * @return the sort_serialized_name
      */
@@ -10464,8 +10470,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the sort_serialized_name.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * How to sort the returned log events. You can sort by **request_timestamp**. To reverse the sort order, prefix the
+     * parameter value with a minus sign (`-`).
      *
      * @return the sort_serialized_name
      */
@@ -10872,7 +10878,7 @@ public class IBMAssistantV1Models {
      * Gets the sort_serialized_name.
      *
      * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * sign (`-`).
      *
      * @return the sort_serialized_name
      */
@@ -11146,7 +11152,7 @@ public class IBMAssistantV1Models {
      * Gets the sort_serialized_name.
      *
      * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * sign (`-`).
      *
      * @return the sort_serialized_name
      */
@@ -11383,7 +11389,7 @@ public class IBMAssistantV1Models {
      * Gets the sort_serialized_name.
      *
      * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`). Supported values are `name`, `updated`, and `workspace_id`.
+     * sign (`-`).
      *
      * @return the sort_serialized_name
      */
@@ -12540,6 +12546,7 @@ public class IBMAssistantV1Models {
     private Boolean alternate_intents_serialized_name;
     private Context context_serialized_name;
     private OutputData output_serialized_name;
+    private List<DialogNodeAction> actions_serialized_name;
     private Map<String, Object> additional_properties_serialized_name;
 
     /**
@@ -12600,6 +12607,16 @@ public class IBMAssistantV1Models {
     @AuraEnabled
     public OutputData getOutput() {
       return output_serialized_name;
+    }
+
+    /**
+     * Gets the actions_serialized_name.
+     *
+     * @return the actions_serialized_name
+     */
+    @AuraEnabled
+    public List<DialogNodeAction> getActions() {
+      return actions_serialized_name;
     }
 
     /**
@@ -12666,6 +12683,15 @@ public class IBMAssistantV1Models {
       this.output_serialized_name = output_serialized_name;
     }
 
+    /**
+     * Sets the actions_serialized_name.
+     *
+     * @param actions_serialized_name the new actions_serialized_name
+     */
+    public void setActions(final List<DialogNodeAction> actions_serialized_name) {
+      this.actions_serialized_name = actions_serialized_name;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -12710,6 +12736,19 @@ public class IBMAssistantV1Models {
       // calling custom deserializer for output_serialized_name
       OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), OutputData.class);
       ret.setOutput(newOutput);
+
+      // calling custom deserializer for actions_serialized_name
+      List<DialogNodeAction> newActions = new List<DialogNodeAction>();
+      List<DialogNodeAction> deserializedActions = ret.getActions();
+      if (deserializedActions != null) {
+        for (Integer i = 0; i < deserializedActions.size(); i++) {
+          DialogNodeAction currentItem = ret.getActions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('actions_serialized_name');
+          DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
+          newActions.add(newItem);
+        }
+        ret.setActions(newActions);
+      }
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
@@ -13602,7 +13641,7 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * The UpdateDialogNode options.
+   * The updateDialogNode options.
    */
   public class UpdateDialogNodeOptions extends IBMWatsonOptionsModel {
     private String workspace_id_serialized_name;
@@ -13709,7 +13748,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the new_user_label_serialized_name.
      *
-     * A label that can be displayed externally to describe the purpose of the node to users.
+     * A label that can be displayed externally to describe the purpose of the node to users. This string must be no
+     * longer than 512 characters.
      *
      * @return the new_user_label_serialized_name
      */

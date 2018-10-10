@@ -399,7 +399,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the text_serialized_name.
      *
-     * The plain text to analyze.
+     * The plain text to analyze. One of the `text`, `html`, or `url` parameters is required.
      *
      * @return the text_serialized_name
      */
@@ -409,7 +409,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the html_serialized_name.
      *
-     * The HTML file to analyze.
+     * The HTML file to analyze. One of the `text`, `html`, or `url` parameters is required.
      *
      * @return the html_serialized_name
      */
@@ -419,7 +419,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the url_serialized_name.
      *
-     * The web page to analyze.
+     * The web page to analyze. One of the `text`, `html`, or `url` parameters is required.
      *
      * @return the url_serialized_name
      */
@@ -449,7 +449,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the xpath_serialized_name.
      *
-     * XPath query for targeting nodes in HTML.
+     * An [XPath query](https://www.w3.org/TR/xpath/) to perform on `html` or `url` input. Results of the query will be
+     * appended to the cleaned webpage text before it is analyzed. To analyze only the results of the XPath query, set
+     * the `clean` parameter to `false`.
      *
      * @return the xpath_serialized_name
      */
@@ -479,7 +481,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the language_serialized_name.
      *
-     * ISO 639-1 code indicating the language to use in the analysis.
+     * ISO 639-1 code that specifies the language of your text. This overrides automatic language detection. Language
+     * support differs depending on the features you include in your analysis. See [Language
+     * support](https://www.bluemix.net/docs/services/natural-language-understanding/language-support.html) for more
+     * information.
      *
      * @return the language_serialized_name
      */
@@ -1235,7 +1240,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the document_serialized_name.
      *
-     * Set this to false to hide document-level emotion results.
+     * Set this to `false` to hide document-level emotion results.
      *
      * @return the document_serialized_name
      */
@@ -1554,7 +1559,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the mentions_serialized_name.
      *
-     * Set this to true to return locations of entity mentions.
+     * Set this to `true` to return locations of entity mentions.
      *
      * @return the mentions_serialized_name
      */
@@ -1564,7 +1569,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the model_serialized_name.
      *
-     * Enter a custom model ID to override the standard entity detection model.
+     * Enter a [custom model](https://www.bluemix.net/docs/services/natural-language-understanding/customizing.html) ID
+     * to override the standard entity detection model.
      *
      * @return the model_serialized_name
      */
@@ -1574,7 +1580,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the sentiment_serialized_name.
      *
-     * Set this to true to return sentiment information for detected entities.
+     * Set this to `true` to return sentiment information for detected entities.
      *
      * @return the sentiment_serialized_name
      */
@@ -1584,7 +1590,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the emotion_serialized_name.
      *
-     * Set this to true to analyze emotion for detected keywords.
+     * Set this to `true` to analyze emotion for detected keywords.
      *
      * @return the emotion_serialized_name
      */
@@ -2328,7 +2334,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the sentiment_serialized_name.
      *
-     * Set this to true to return sentiment information for detected keywords.
+     * Set this to `true` to return sentiment information for detected keywords.
      *
      * @return the sentiment_serialized_name
      */
@@ -2338,7 +2344,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the emotion_serialized_name.
      *
-     * Set this to true to analyze emotion for detected keywords.
+     * Set this to `true` to analyze emotion for detected keywords.
      *
      * @return the emotion_serialized_name
      */
@@ -3058,7 +3064,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the model_serialized_name.
      *
-     * Enter a custom model ID to override the default model.
+     * Enter a [custom model](https://www.bluemix.net/docs/services/natural-language-understanding/customizing.html) ID
+     * to override the default model.
      *
      * @return the model_serialized_name
      */
@@ -3495,7 +3502,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the keywords_serialized_name.
      *
-     * Set this to true to return keyword information for subjects and objects.
+     * Set this to `true` to return keyword information for subjects and objects.
      *
      * @return the keywords_serialized_name
      */
@@ -3505,7 +3512,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the entities_serialized_name.
      *
-     * Set this to true to return entity information for subjects and objects.
+     * Set this to `true` to return entity information for subjects and objects.
      *
      * @return the entities_serialized_name
      */
@@ -3872,7 +3879,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the document_serialized_name.
      *
-     * Set this to false to hide document-level sentiment results.
+     * Set this to `false` to hide document-level sentiment results.
      *
      * @return the document_serialized_name
      */

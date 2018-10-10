@@ -6,8 +6,8 @@
 
 The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment. If you'd like, you can follow along with our video playlist [here](https://www.youtube.com/playlist?list=PLZDyxLlNKRY8qrs90oRPvVHocJhYOOj3n) to start using the SDK. Otherwise, continue reading to learn how to get started.
 
-## Language Translator v2 deprecation notice
-Language Translator v3 is now available. The v2 Language Translator API will no longer be available after July 31, 2018. To take advantage of the latest service enhancements, migrate to the v3 API. View the [Migrating to Language Translator v3](https://console.bluemix.net/docs/services/language-translator/migrating.html) page for more information.
+## Assistant v2 is now available :tada::tada::tada:
+Check it out with the `IBMAssistantV2` class!
 
 ## Before you begin
 
@@ -26,7 +26,7 @@ You'll also need a Salesforce account to run your Apex code. To get one, you can
 
 There are three supported installation methods: automatically using Salesforce DX, manually using Salesforce DX, and manually using the Ant build tool. By default, all classes in the SDK will be deployed to your Salesforce org, but using Ant allows you to specify which services you want to deploy to save space. Note though that this is **only** supported with the Ant build tool method.
 
-### Salesforce DX Automatic deployment
+### Salesforce DX automatic deployment
 
 You can automatically deploy the SDK to a new scratch environment using the _Deploy to SFDX_ button.
 
@@ -34,7 +34,7 @@ _Note: To use the automatic deployment button, you must log in using a **Dev Hub
 
 [![Deploy](https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.com/)
 
-### Salesforce DX Manual deployment
+### Salesforce DX manual deployment
 
 You can also manually deploy the SDK code using the Salesforce DX CLI, which you can install [here](https://developer.salesforce.com/tools/sfdxcli).
 
@@ -132,7 +132,7 @@ IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
 
 Will look for `watson_assistant_v1`.
 
-In order to create **Named credentials**:
+In order to create **Named Credentials**:
 
 1. Go to _Setup_ by clicking on the gear icon on the top right of the Salesforce dashboard
 1. Enter _Named Credentials_ in the quick find box and select the highlighted entry
@@ -155,7 +155,7 @@ You can always set these values directly in the constructor or with a method cal
 
 _Note: You must set the service endpoint manually when setting your credentials this way. Otherwise, the SDK will default to searching for `Named Credentials` that you won't have set up._
 
-#### Username and Password
+#### Username and password
 
 ```java
 // in the constructor
@@ -234,7 +234,7 @@ service.setEndPoint('SERVICE_URL');
 
 If at any time you would like to let the SDK take over managing your IAM token, simply override your stored IAM credentials with an IAM API key by calling the `setIamCredentials()` method again.
 
-### Setting Remote Site Settings
+### Setting remote site settings
 
 The final piece of setup to access Watson services from your Salesforce environment is setting your remote site settings. To do so:
 
@@ -285,7 +285,7 @@ System.debug(intent);
 
 The manner of instantiating and using services should be consistent no matter which you decide to use, which should make it easy to explore the many capabilities Watson services have to offer.
 
-## Request and Response Headers
+## Request and response headers
 
 The SDK supports sending custom headers with any request as well as parsing headers that are returned by the service.
 
@@ -312,7 +312,7 @@ Map<String, String> responseHeaders = response.getHeaders();
 
 The Watson Salesforce SDK models are Lightning-ready, meaning that you can access model properties through Javascript for your Lightning apps. Everything should work as expected, but it's important to note that there are two ways to go about dealing with dynamic models through Javascript. These models are ones which may have properties unknown until runtime and which extend `IBMWatsonDynamicModel`.
 
-### Using the `additionalProperties` Object
+### Using the `additionalProperties` object
 
 Dynamic models have an extra "AuraEnabled" property called `additionalProperties`, which is a map that holds all of the dynamic properties returned with the model. If you're dealing with a dynamic model in your Javascript code and want to access any dynamic properties, you can do the following:
 
@@ -326,7 +326,7 @@ $A.enqueueAction(action);
 
 Any properties within the `additionalProperties` object can be accessed exactly like a generic Javascript object.
 
-### Using the Model String Representation
+### Using the model string representation
 
 If going through the `additionalProperties` object is undesired for any reason, you can still access the dynamic properties as top-level properties with a small workaround. All models in the SDK override the `toString()` method to output the models as pretty-printed JSON with the additional properties brought up to the top level. Therefore, if you tweak your server-side controller to return the string representation instead of the model object, as follows:
 
@@ -358,14 +358,20 @@ $A.enqueueAction(action);
 
 Both methods shown above will print out the same information.
 
-## WebSocket Support
+## WebSocket support
 Both the Text to Speech and Speech to Text services have API endpoints which support the use of WebSockets. However, the use of WebSockets are not supported natively by Apex. If you would like to take advantage of this functionality, the recommendation would be to leverage the [Watson Speech Javascript SDK](https://github.com/watson-developer-cloud/speech-javascript-sdk).
 
 The above library adds minimal overhead and will allow for the use of WebSockets. Also, being Javascript, this SDK can integrate smoothly with Lightning apps and be used alongside the Salesforce SDK.
 
-## Functional Tests
+## ICP
+If you're using this SDK to interact with a service on IBM Cloud Private (ICP), you'll need to add your self-signed certificate to your Salesforce organization. You can do this in the Certificate and Key Management section of the security settings.
+
+## Functional tests
 
 The `force-app/main/test` folder contains the example calls for each service. These examples are used for functional testing of services. Developers can use them for reference and testing the installed SDK.
+
+## Language Translator v2 deprecation notice
+The v2 Language Translator API will no longer be available after July 31, 2018. To take advantage of the latest service enhancements, migrate to the v3 API. View the [Migrating to Language Translator v3](https://console.bluemix.net/docs/services/language-translator/migrating.html) page for more information.
 
 ## Contributing
 
