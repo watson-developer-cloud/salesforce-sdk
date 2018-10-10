@@ -370,9 +370,6 @@ If you're using this SDK to interact with a service on IBM Cloud Private (ICP), 
 
 The `force-app/main/test` folder contains the example calls for each service. These examples are used for functional testing of services. Developers can use them for reference and testing the installed SDK.
 
-## Language Translator v2 deprecation notice
-The v2 Language Translator API will no longer be available after July 31, 2018. To take advantage of the latest service enhancements, migrate to the v3 API. View the [Migrating to Language Translator v3](https://console.bluemix.net/docs/services/language-translator/migrating.html) page for more information.
-
 ## Contributing
 
 If you're interested in helping to make this project better, see [Contributing.md](.github/Contributing.md).
