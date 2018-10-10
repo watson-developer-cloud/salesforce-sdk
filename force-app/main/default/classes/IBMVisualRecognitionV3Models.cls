@@ -4,25 +4,26 @@ public class IBMVisualRecognitionV3Models {
    */
   public class ModelClass extends IBMWatsonGenericModel {
     private String class_serialized_name;
+ 
     /**
-     * Gets the class_serialized_name.
+     * Gets the className.
      *
      * The name of the class.
      *
-     * @return the class_serialized_name
+     * @return the className
      */
     @AuraEnabled
-    public String getClass() {
+    public String getClassName() {
       return class_serialized_name;
     }
 
     /**
-     * Sets the class_serialized_name.
+     * Sets the className.
      *
-     * @param classVar the new classVar
+     * @param className the new className
      */
-    public void setClass(final String classVar) {
-      this.class_serialized_name = classVar;
+    public void setClassName(final String className) {
+      this.class_serialized_name = className;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -43,36 +44,39 @@ public class IBMVisualRecognitionV3Models {
     private String class_serialized_name;
     private Double score_serialized_name;
     private String type_hierarchy_serialized_name;
+ 
     /**
-     * Gets the class_serialized_name.
+     * Gets the className.
      *
      * Name of the class.
      *
-     * @return the class_serialized_name
+     * @return the className
      */
     @AuraEnabled
-    public String getClass() {
+    public String getClassName() {
       return class_serialized_name;
     }
+ 
     /**
-     * Gets the score_serialized_name.
+     * Gets the score.
      *
      * Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the
      * class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
      *
-     * @return the score_serialized_name
+     * @return the score
      */
     @AuraEnabled
     public Double getScore() {
       return score_serialized_name;
     }
+ 
     /**
-     * Gets the type_hierarchy_serialized_name.
+     * Gets the typeHierarchy.
      *
      * Knowledge graph of the property. For example, `/fruit/pome/apple/eating apple/Granny Smith`. Included only if
      * identified.
      *
-     * @return the type_hierarchy_serialized_name
+     * @return the typeHierarchy
      */
     @AuraEnabled
     public String getTypeHierarchy() {
@@ -80,16 +84,16 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the class_serialized_name.
+     * Sets the className.
      *
-     * @param classVar the new classVar
+     * @param className the new className
      */
-    public void setClass(final String classVar) {
-      this.class_serialized_name = classVar;
+    public void setClassName(final String className) {
+      this.class_serialized_name = className;
     }
 
     /**
-     * Sets the score_serialized_name.
+     * Sets the score.
      *
      * @param score the new score
      */
@@ -98,7 +102,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the type_hierarchy_serialized_name.
+     * Sets the typeHierarchy.
      *
      * @param typeHierarchy the new typeHierarchy
      */
@@ -126,54 +130,62 @@ public class IBMVisualRecognitionV3Models {
     private String image_serialized_name;
     private ErrorInfo error_serialized_name;
     private List<ClassifierResult> classifiers_serialized_name;
+ 
     /**
-     * Gets the source_url_serialized_name.
+     * Gets the sourceUrl.
      *
      * Source of the image before any redirects. Not returned when the image is uploaded.
      *
-     * @return the source_url_serialized_name
+     * @return the sourceUrl
      */
     @AuraEnabled
     public String getSourceUrl() {
       return source_url_serialized_name;
     }
+ 
     /**
-     * Gets the resolved_url_serialized_name.
+     * Gets the resolvedUrl.
      *
      * Fully resolved URL of the image after redirects are followed. Not returned when the image is uploaded.
      *
-     * @return the resolved_url_serialized_name
+     * @return the resolvedUrl
      */
     @AuraEnabled
     public String getResolvedUrl() {
       return resolved_url_serialized_name;
     }
+ 
     /**
-     * Gets the image_serialized_name.
+     * Gets the image.
      *
      * Relative path of the image file if uploaded directly. Not returned when the image is passed by URL.
      *
-     * @return the image_serialized_name
+     * @return the image
      */
     @AuraEnabled
     public String getImage() {
       return image_serialized_name;
     }
+ 
     /**
-     * Gets the error_serialized_name.
+     * Gets the error.
      *
-     * @return the error_serialized_name
+     * Information about what might have caused a failure, such as an image that is too large. Not returned when there
+     * is no error.
+     *
+     * @return the error
      */
     @AuraEnabled
     public ErrorInfo getError() {
       return error_serialized_name;
     }
+ 
     /**
-     * Gets the classifiers_serialized_name.
+     * Gets the classifiers.
      *
      * The classifiers.
      *
-     * @return the classifiers_serialized_name
+     * @return the classifiers
      */
     @AuraEnabled
     public List<ClassifierResult> getClassifiers() {
@@ -181,7 +193,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the source_url_serialized_name.
+     * Sets the sourceUrl.
      *
      * @param sourceUrl the new sourceUrl
      */
@@ -190,7 +202,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the resolved_url_serialized_name.
+     * Sets the resolvedUrl.
      *
      * @param resolvedUrl the new resolvedUrl
      */
@@ -199,7 +211,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the image_serialized_name.
+     * Sets the image.
      *
      * @param image the new image
      */
@@ -208,7 +220,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the error_serialized_name.
+     * Sets the error.
      *
      * @param error the new error
      */
@@ -217,7 +229,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the classifiers_serialized_name.
+     * Sets the classifiers.
      *
      * @param classifiers the new classifiers
      */
@@ -232,11 +244,11 @@ public class IBMVisualRecognitionV3Models {
 
       ClassifiedImage ret = (ClassifiedImage) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for error_serialized_name
+      // calling custom deserializer for error
       ErrorInfo newError = (ErrorInfo) new ErrorInfo().deserialize(JSON.serialize(ret.getError()), (Map<String, Object>) jsonMap.get('error_serialized_name'), ErrorInfo.class);
       ret.setError(newError);
 
-      // calling custom deserializer for classifiers_serialized_name
+      // calling custom deserializer for classifiers
       List<ClassifierResult> newClassifiers = new List<ClassifierResult>();
       List<ClassifierResult> deserializedClassifiers = ret.getClassifiers();
       if (deserializedClassifiers != null) {
@@ -261,47 +273,51 @@ public class IBMVisualRecognitionV3Models {
     private Long images_processed_serialized_name;
     private List<ClassifiedImage> images_serialized_name;
     private List<WarningInfo> warnings_serialized_name;
+ 
     /**
-     * Gets the custom_classes_serialized_name.
+     * Gets the customClasses.
      *
      * Number of custom classes identified in the images.
      *
-     * @return the custom_classes_serialized_name
+     * @return the customClasses
      */
     @AuraEnabled
     public Long getCustomClasses() {
       return custom_classes_serialized_name;
     }
+ 
     /**
-     * Gets the images_processed_serialized_name.
+     * Gets the imagesProcessed.
      *
      * Number of images processed for the API call.
      *
-     * @return the images_processed_serialized_name
+     * @return the imagesProcessed
      */
     @AuraEnabled
     public Long getImagesProcessed() {
       return images_processed_serialized_name;
     }
+ 
     /**
-     * Gets the images_serialized_name.
+     * Gets the images.
      *
      * Classified images.
      *
-     * @return the images_serialized_name
+     * @return the images
      */
     @AuraEnabled
     public List<ClassifiedImage> getImages() {
       return images_serialized_name;
     }
+ 
     /**
-     * Gets the warnings_serialized_name.
+     * Gets the warnings.
      *
      * Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file
      * and a list of image URLs will still complete, but does not return the expected output. Not returned when there is
      * no warning.
      *
-     * @return the warnings_serialized_name
+     * @return the warnings
      */
     @AuraEnabled
     public List<WarningInfo> getWarnings() {
@@ -309,7 +325,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the custom_classes_serialized_name.
+     * Sets the customClasses.
      *
      * @param customClasses the new customClasses
      */
@@ -318,7 +334,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the images_processed_serialized_name.
+     * Sets the imagesProcessed.
      *
      * @param imagesProcessed the new imagesProcessed
      */
@@ -327,7 +343,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the images_serialized_name.
+     * Sets the images.
      *
      * @param images the new images
      */
@@ -336,7 +352,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the warnings_serialized_name.
+     * Sets the warnings.
      *
      * @param warnings the new warnings
      */
@@ -351,7 +367,7 @@ public class IBMVisualRecognitionV3Models {
 
       ClassifiedImages ret = (ClassifiedImages) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for images_serialized_name
+      // calling custom deserializer for images
       List<ClassifiedImage> newImages = new List<ClassifiedImage>();
       List<ClassifiedImage> deserializedImages = ret.getImages();
       if (deserializedImages != null) {
@@ -364,7 +380,7 @@ public class IBMVisualRecognitionV3Models {
         ret.setImages(newImages);
       }
 
-      // calling custom deserializer for warnings_serialized_name
+      // calling custom deserializer for warnings
       List<WarningInfo> newWarnings = new List<WarningInfo>();
       List<WarningInfo> deserializedWarnings = ret.getWarnings();
       if (deserializedWarnings != null) {
@@ -395,114 +411,124 @@ public class IBMVisualRecognitionV3Models {
     private List<ModelClass> classes_serialized_name;
     private Datetime retrained_serialized_name;
     private Datetime updated_serialized_name;
+ 
     /**
-     * Gets the classifier_id_serialized_name.
+     * Gets the classifierId.
      *
      * ID of a classifier identified in the image.
      *
-     * @return the classifier_id_serialized_name
+     * @return the classifierId
      */
     @AuraEnabled
     public String getClassifierId() {
       return classifier_id_serialized_name;
     }
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * Name of the classifier.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the owner_serialized_name.
+     * Gets the owner.
      *
      * Unique ID of the account who owns the classifier. Returned when verbose=`true`. Might not be returned by some
      * requests.
      *
-     * @return the owner_serialized_name
+     * @return the owner
      */
     @AuraEnabled
     public String getOwner() {
       return owner_serialized_name;
     }
+ 
     /**
-     * Gets the status_serialized_name.
+     * Gets the status.
      *
      * Training status of classifier.
      *
-     * @return the status_serialized_name
+     * @return the status
      */
     @AuraEnabled
     public String getStatus() {
       return status_serialized_name;
     }
+ 
     /**
-     * Gets the core_ml_enabled_serialized_name.
+     * Gets the coreMlEnabled.
      *
      * Whether the classifier can be downloaded as a Core ML model after the training status is `ready`.
      *
-     * @return the core_ml_enabled_serialized_name
+     * @return the coreMlEnabled
      */
     @AuraEnabled
     public Boolean getCoreMlEnabled() {
       return core_ml_enabled_serialized_name;
     }
+ 
     /**
-     * Gets the explanation_serialized_name.
+     * Gets the explanation.
      *
-     * If classifier training has failed, this field may explain why.
+     * If classifier training has failed, this field might explain why.
      *
-     * @return the explanation_serialized_name
+     * @return the explanation
      */
     @AuraEnabled
     public String getExplanation() {
       return explanation_serialized_name;
     }
+ 
     /**
-     * Gets the created_serialized_name.
+     * Gets the created.
      *
      * Date and time in Coordinated Universal Time (UTC) that the classifier was created.
      *
-     * @return the created_serialized_name
+     * @return the created
      */
     @AuraEnabled
     public Datetime getCreated() {
       return created_serialized_name;
     }
+ 
     /**
-     * Gets the classes_serialized_name.
+     * Gets the classes.
      *
      * Classes that define a classifier.
      *
-     * @return the classes_serialized_name
+     * @return the classes
      */
     @AuraEnabled
     public List<ModelClass> getClasses() {
       return classes_serialized_name;
     }
+ 
     /**
-     * Gets the retrained_serialized_name.
+     * Gets the retrained.
      *
      * Date and time in Coordinated Universal Time (UTC) that the classifier was updated. Returned when verbose=`true`.
      * Might not be returned by some requests. Identical to `updated` and retained for backward compatibility.
      *
-     * @return the retrained_serialized_name
+     * @return the retrained
      */
     @AuraEnabled
     public Datetime getRetrained() {
       return retrained_serialized_name;
     }
+ 
     /**
-     * Gets the updated_serialized_name.
+     * Gets the updated.
      *
      * Date and time in Coordinated Universal Time (UTC) that the classifier was most recently updated. The field
      * matches either `retrained` or `created`.  Returned when verbose=`true`. Might not be returned by some requests.
      *
-     * @return the updated_serialized_name
+     * @return the updated
      */
     @AuraEnabled
     public Datetime getUpdated() {
@@ -510,7 +536,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the classifier_id_serialized_name.
+     * Sets the classifierId.
      *
      * @param classifierId the new classifierId
      */
@@ -519,7 +545,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -528,7 +554,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the owner_serialized_name.
+     * Sets the owner.
      *
      * @param owner the new owner
      */
@@ -537,7 +563,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the status_serialized_name.
+     * Sets the status.
      *
      * @param status the new status
      */
@@ -546,7 +572,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the core_ml_enabled_serialized_name.
+     * Sets the coreMlEnabled.
      *
      * @param coreMlEnabled the new coreMlEnabled
      */
@@ -555,7 +581,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the explanation_serialized_name.
+     * Sets the explanation.
      *
      * @param explanation the new explanation
      */
@@ -564,7 +590,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the created_serialized_name.
+     * Sets the created.
      *
      * @param created the new created
      */
@@ -573,7 +599,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the classes_serialized_name.
+     * Sets the classes.
      *
      * @param classes the new classes
      */
@@ -582,7 +608,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the retrained_serialized_name.
+     * Sets the retrained.
      *
      * @param retrained the new retrained
      */
@@ -591,7 +617,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the updated_serialized_name.
+     * Sets the updated.
      *
      * @param updated the new updated
      */
@@ -606,7 +632,7 @@ public class IBMVisualRecognitionV3Models {
 
       Classifier ret = (Classifier) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for classes_serialized_name
+      // calling custom deserializer for classes
       List<ModelClass> newClasses = new List<ModelClass>();
       List<ModelClass> deserializedClasses = ret.getClasses();
       if (deserializedClasses != null) {
@@ -630,34 +656,37 @@ public class IBMVisualRecognitionV3Models {
     private String name_serialized_name;
     private String classifier_id_serialized_name;
     private List<ClassResult> classes_serialized_name;
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * Name of the classifier.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
     }
+ 
     /**
-     * Gets the classifier_id_serialized_name.
+     * Gets the classifierId.
      *
      * ID of a classifier identified in the image.
      *
-     * @return the classifier_id_serialized_name
+     * @return the classifierId
      */
     @AuraEnabled
     public String getClassifierId() {
       return classifier_id_serialized_name;
     }
+ 
     /**
-     * Gets the classes_serialized_name.
+     * Gets the classes.
      *
      * Classes within the classifier.
      *
-     * @return the classes_serialized_name
+     * @return the classes
      */
     @AuraEnabled
     public List<ClassResult> getClasses() {
@@ -665,7 +694,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the name_serialized_name.
+     * Sets the name.
      *
      * @param name the new name
      */
@@ -674,7 +703,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the classifier_id_serialized_name.
+     * Sets the classifierId.
      *
      * @param classifierId the new classifierId
      */
@@ -683,7 +712,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the classes_serialized_name.
+     * Sets the classes.
      *
      * @param classes the new classes
      */
@@ -698,7 +727,7 @@ public class IBMVisualRecognitionV3Models {
 
       ClassifierResult ret = (ClassifierResult) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for classes_serialized_name
+      // calling custom deserializer for classes
       List<ClassResult> newClasses = new List<ClassResult>();
       List<ClassResult> deserializedClasses = ret.getClasses();
       if (deserializedClasses != null) {
@@ -720,12 +749,13 @@ public class IBMVisualRecognitionV3Models {
    */
   public class Classifiers extends IBMWatsonResponseModel {
     private List<Classifier> classifiers_serialized_name;
+ 
     /**
-     * Gets the classifiers_serialized_name.
+     * Gets the classifiers.
      *
      * List of classifiers.
      *
-     * @return the classifiers_serialized_name
+     * @return the classifiers
      */
     @AuraEnabled
     public List<Classifier> getClassifiers() {
@@ -733,7 +763,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the classifiers_serialized_name.
+     * Sets the classifiers.
      *
      * @param classifiers the new classifiers
      */
@@ -748,7 +778,7 @@ public class IBMVisualRecognitionV3Models {
 
       Classifiers ret = (Classifiers) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for classifiers_serialized_name
+      // calling custom deserializer for classifiers
       List<Classifier> newClassifiers = new List<Classifier>();
       List<Classifier> deserializedClassifiers = ret.getClassifiers();
       if (deserializedClassifiers != null) {
@@ -769,17 +799,17 @@ public class IBMVisualRecognitionV3Models {
    * The classify options.
    */
   public class ClassifyOptions extends IBMWatsonOptionsModel {
-    private IBMWatsonFile images_file_serialized_name;
-    private String images_filename_serialized_name;
-    private String accept_language_serialized_name;
-    private String url_serialized_name;
-    private Double threshold_serialized_name;
-    private List<String> owners_serialized_name;
-    private List<String> classifier_ids_serialized_name;
-    private String images_file_content_type_serialized_name;
-    private String parameters_serialized_name; 
+    private IBMWatsonFile imagesFile;
+    private String imagesFilename;
+    private String acceptLanguage;
+    private String url;
+    private Double threshold;
+    private List<String> owners;
+    private List<String> classifierIds;
+    private String imagesFileContentType;
+ 
     /**
-     * Gets the images_file_serialized_name.
+     * Gets the imagesFile.
      *
      * An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include no more than 20 images
      * and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they contain non-ASCII
@@ -787,23 +817,25 @@ public class IBMVisualRecognitionV3Models {
      *
      * You can also include an image with the **url** parameter.
      *
-     * @return the images_file_serialized_name
+     * @return the imagesFile
      */
     public IBMWatsonFile imagesFile() {
-      return images_file_serialized_name;
+      return imagesFile;
     }
+ 
     /**
-     * Gets the images_filename_serialized_name.
+     * Gets the imagesFilename.
      *
      * The filename for images_file.
      *
-     * @return the images_filename_serialized_name
+     * @return the imagesFilename
      */
     public String imagesFilename() {
-      return images_filename_serialized_name;
+      return imagesFilename;
     }
+ 
     /**
-     * Gets the accept_language_serialized_name.
+     * Gets the acceptLanguage.
      *
      * The language of the output class names. The full set of languages is supported for the built-in classifier IDs:
      * `default`, `food`, and `explicit`. The class names of custom classifiers are not translated.
@@ -811,37 +843,40 @@ public class IBMVisualRecognitionV3Models {
      * The response might not be in the specified language when the requested language is not supported or when there is
      * no translation for the class name.
      *
-     * @return the accept_language_serialized_name
+     * @return the acceptLanguage
      */
     public String acceptLanguage() {
-      return accept_language_serialized_name;
+      return acceptLanguage;
     }
+ 
     /**
-     * Gets the url_serialized_name.
+     * Gets the url.
      *
      * The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel density is 32X32
      * pixels per inch, and the maximum image size is 10 MB.
      *
      * You can also include images with the **images_file** parameter.
      *
-     * @return the url_serialized_name
+     * @return the url
      */
     public String url() {
-      return url_serialized_name;
+      return url;
     }
+ 
     /**
-     * Gets the threshold_serialized_name.
+     * Gets the threshold.
      *
      * The minimum score a class must have to be displayed in the response. Set the threshold to `0.0` to ignore the
      * classification score and return all values.
      *
-     * @return the threshold_serialized_name
+     * @return the threshold
      */
     public Double threshold() {
-      return threshold_serialized_name;
+      return threshold;
     }
+ 
     /**
-     * Gets the owners_serialized_name.
+     * Gets the owners.
      *
      * The categories of classifiers to apply. Use `IBM` to classify against the `default` general classifier, and use
      * `me` to classify against your custom classifiers. To analyze the image against both classifier categories, set
@@ -851,13 +886,14 @@ public class IBMVisualRecognitionV3Models {
      *
      * The **classifier_ids** parameter overrides **owners**, so make sure that **classifier_ids** is empty.
      *
-     * @return the owners_serialized_name
+     * @return the owners
      */
     public List<String> owners() {
-      return owners_serialized_name;
+      return owners;
     }
+ 
     /**
-     * Gets the classifier_ids_serialized_name.
+     * Gets the classifierIds.
      *
      * Which classifiers to apply. Overrides the **owners** parameter. You can specify both custom and built-in
      * classifier IDs. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters
@@ -868,42 +904,33 @@ public class IBMVisualRecognitionV3Models {
      * - `food`: Enhances specificity and accuracy for images of food items.
      * - `explicit`: Evaluates whether the image might be pornographic.
      *
-     * @return the classifier_ids_serialized_name
+     * @return the classifierIds
      */
     public List<String> classifierIds() {
-      return classifier_ids_serialized_name;
+      return classifierIds;
     }
+ 
     /**
-     * Gets the images_file_content_type_serialized_name.
+     * Gets the imagesFileContentType.
      *
-     * The content type of images_file.
+     * The content type of imagesFile.
      *
-     * @return the images_file_content_type_serialized_name
+     * @return the imagesFileContentType
      */
     public String imagesFileContentType() {
-      return images_file_content_type_serialized_name;
+      return imagesFileContentType;
     }
-    /**
-     * Gets the parameters_serialized_name.
-     *
-     * A JSON object that specifies additional request options. The parameter can be sent as a string or a file, and can include these inputs:  - **url**: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images in the **images_file** parameter. - **threshold**: A floating point value that specifies the minimum score a class must have to be displayed in the response. The default threshold for returning scores from a classifier is `0.5`. Set the threshold to `0.0` to ignore the classification score and return all values. - **owners**: An array of the categories of classifiers to apply. Use `IBM` to classify against the `default` general classifier, and use `me` to classify against your custom classifiers. To analyze the image against both classifier categories, set the value to both `IBM` and `me`. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.      The **classifier_ids** parameter overrides **owners**, so make sure that **classifier_ids** is empty. - **classifier_ids**: Specifies which classifiers to apply and overrides the **owners** parameter. You can specify both custom and built-in classifiers. The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.  The following built-in classifier IDs require no training: - `default`: Returns classes from thousands of general tags. - `food`: (Beta) Enhances specificity and accuracy for images of food items. - `explicit`: (Beta) Evaluates whether the image might be pornographic.  Example: `{"classifier_ids":["CarsvsTrucks_1479118188","explicit"],"threshold":0.6}`.
-     *
-     * @return the parameters_serialized_name
-     */
-    public String parameters() {
-      return parameters_serialized_name;
-    }
+
     private ClassifyOptions(ClassifyOptionsBuilder builder) {
-      IBMWatsonValidator.isTrue(builder.images_file_serialized_name == null || builder.images_file_content_type_serialized_name != null, 'content type cannot be null if file is not null');
-      images_file_serialized_name = builder.images_file_serialized_name;
-      images_filename_serialized_name = builder.images_filename_serialized_name;
-      accept_language_serialized_name = builder.accept_language_serialized_name;
-      url_serialized_name = builder.url_serialized_name;
-      threshold_serialized_name = builder.threshold_serialized_name;
-      owners_serialized_name = builder.owners_serialized_name;
-      classifier_ids_serialized_name = builder.classifier_ids_serialized_name;
-      images_file_content_type_serialized_name = builder.images_file_content_type_serialized_name;
-      parameters_serialized_name = builder.parameters_serialized_name;
+      IBMWatsonValidator.isTrue(builder.imagesFile == null || builder.imagesFileContentType != null, 'content type cannot be null if file is not null');
+      imagesFile = builder.imagesFile;
+      imagesFilename = builder.imagesFilename;
+      acceptLanguage = builder.acceptLanguage;
+      url = builder.url;
+      threshold = builder.threshold;
+      owners = builder.owners;
+      classifierIds = builder.classifierIds;
+      imagesFileContentType = builder.imagesFileContentType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -922,26 +949,24 @@ public class IBMVisualRecognitionV3Models {
    * ClassifyOptions Builder.
    */
   public class ClassifyOptionsBuilder extends IBMWatsonOptionsModel {
-    private IBMWatsonFile images_file_serialized_name;
-    private String images_filename_serialized_name;
-    private String accept_language_serialized_name;
-    private String url_serialized_name;
-    private Double threshold_serialized_name;
-    private List<String> owners_serialized_name;
-    private List<String> classifier_ids_serialized_name;
-    private String images_file_content_type_serialized_name;
-    private String parameters_serialized_name;
+    private IBMWatsonFile imagesFile;
+    private String imagesFilename;
+    private String acceptLanguage;
+    private String url;
+    private Double threshold;
+    private List<String> owners;
+    private List<String> classifierIds;
+    private String imagesFileContentType;
 
     private ClassifyOptionsBuilder(ClassifyOptions classifyOptions) {
-      images_file_serialized_name = classifyOptions.images_file_serialized_name;
-      images_filename_serialized_name = classifyOptions.images_filename_serialized_name;
-      accept_language_serialized_name = classifyOptions.accept_language_serialized_name;
-      url_serialized_name = classifyOptions.url_serialized_name;
-      threshold_serialized_name = classifyOptions.threshold_serialized_name;
-      owners_serialized_name = classifyOptions.owners_serialized_name;
-      classifier_ids_serialized_name = classifyOptions.classifier_ids_serialized_name;
-      images_file_content_type_serialized_name = classifyOptions.images_file_content_type_serialized_name;
-      parameters_serialized_name = classifyOptions.parameters_serialized_name;
+      imagesFile = classifyOptions.imagesFile;
+      imagesFilename = classifyOptions.imagesFilename;
+      acceptLanguage = classifyOptions.acceptLanguage;
+      url = classifyOptions.url;
+      threshold = classifyOptions.threshold;
+      owners = classifyOptions.owners;
+      classifierIds = classifyOptions.classifierIds;
+      imagesFileContentType = classifyOptions.imagesFileContentType;
       this.requestHeaders.putAll(classifyOptions.requestHeaders());
     }
 
@@ -961,133 +986,122 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Adds an owners to owners_serialized_name.
+     * Adds an owners to owners.
      *
      * @param owners the new owners
      * @return the ClassifyOptions builder
      */
     public ClassifyOptionsBuilder addOwners(String owners) {
       IBMWatsonValidator.notNull(owners, 'owners cannot be null');
-      if (this.owners_serialized_name == null) {
-        this.owners_serialized_name = new List<String>();
+      if (this.owners == null) {
+        this.owners = new List<String>();
       }
-      this.owners_serialized_name.add(owners);
+      this.owners.add(owners);
       return this;
     }
 
     /**
-     * Adds an classifierIds to classifier_ids_serialized_name.
+     * Adds an classifierIds to classifierIds.
      *
      * @param classifierIds the new classifierIds
      * @return the ClassifyOptions builder
      */
     public ClassifyOptionsBuilder addClassifierIds(String classifierIds) {
       IBMWatsonValidator.notNull(classifierIds, 'classifierIds cannot be null');
-      if (this.classifier_ids_serialized_name == null) {
-        this.classifier_ids_serialized_name = new List<String>();
+      if (this.classifierIds == null) {
+        this.classifierIds = new List<String>();
       }
-      this.classifier_ids_serialized_name.add(classifierIds);
+      this.classifierIds.add(classifierIds);
       return this;
     }
 
     /**
-     * Set the images_file_serialized_name.
+     * Set the imagesFile.
      *
      * @param imagesFile the imagesFile
      * @return the ClassifyOptions builder
      */
     public ClassifyOptionsBuilder imagesFile(IBMWatsonFile imagesFile) {
-      this.images_file_serialized_name = imagesFile;
+      this.imagesFile = imagesFile;
       return this;
     }
 
     /**
-     * Set the images_filename_serialized_name.
+     * Set the imagesFilename.
      *
      * @param imagesFilename the imagesFilename
      * @return the ClassifyOptions builder
      */
     public ClassifyOptionsBuilder imagesFilename(String imagesFilename) {
-      this.images_filename_serialized_name = imagesFilename;
+      this.imagesFilename = imagesFilename;
       return this;
     }
 
     /**
-     * Set the accept_language_serialized_name.
+     * Set the acceptLanguage.
      *
      * @param acceptLanguage the acceptLanguage
      * @return the ClassifyOptions builder
      */
     public ClassifyOptionsBuilder acceptLanguage(String acceptLanguage) {
-      this.accept_language_serialized_name = acceptLanguage;
+      this.acceptLanguage = acceptLanguage;
       return this;
     }
 
     /**
-     * Set the url_serialized_name.
+     * Set the url.
      *
      * @param url the url
      * @return the ClassifyOptions builder
      */
     public ClassifyOptionsBuilder url(String url) {
-      this.url_serialized_name = url;
+      this.url = url;
       return this;
     }
 
     /**
-     * Set the threshold_serialized_name.
+     * Set the threshold.
      *
      * @param threshold the threshold
      * @return the ClassifyOptions builder
      */
     public ClassifyOptionsBuilder threshold(Double threshold) {
-      this.threshold_serialized_name = threshold;
+      this.threshold = threshold;
       return this;
     }
 
     /**
-     * Set the owners_serialized_name.
-     * Existing owners_serialized_name will be replaced.
+     * Set the owners.
+     * Existing owners will be replaced.
      *
      * @param owners the owners
      * @return the ClassifyOptions builder
      */
     public ClassifyOptionsBuilder owners(List<String> owners) {
-      this.owners_serialized_name = owners;
+      this.owners = owners;
       return this;
     }
 
     /**
-     * Set the classifier_ids_serialized_name.
-     * Existing classifier_ids_serialized_name will be replaced.
+     * Set the classifierIds.
+     * Existing classifierIds will be replaced.
      *
      * @param classifierIds the classifierIds
      * @return the ClassifyOptions builder
      */
     public ClassifyOptionsBuilder classifierIds(List<String> classifierIds) {
-      this.classifier_ids_serialized_name = classifierIds;
+      this.classifierIds = classifierIds;
       return this;
     }
 
     /**
-     * Set the images_file_content_type_serialized_name.
+     * Set the imagesFileContentType.
      *
      * @param imagesFileContentType the imagesFileContentType
      * @return the ClassifyOptions builder
      */
     public ClassifyOptionsBuilder imagesFileContentType(String imagesFileContentType) {
-      this.images_file_content_type_serialized_name = imagesFileContentType;
-      return this;
-    }
-
-    /**
-     * Set the parameters_serialized_name.
-     *
-     * @param parameters the parameters
-     * @return the ClassifyOptions builder
-     */
-    public ClassifyOptionsBuilder parameters(String parameters) {
-      this.parameters_serialized_name = parameters;
+      this.imagesFileContentType = imagesFileContentType;
       return this;
     }
 
@@ -1108,79 +1122,88 @@ public class IBMVisualRecognitionV3Models {
    * The createClassifier options.
    */
   public class CreateClassifierOptions extends IBMWatsonOptionsModel {
-    private String name_serialized_name;
-    private Map<String, IBMWatsonFile> classname_positive_examples_serialized_name;
-    private IBMWatsonFile negative_examples_serialized_name;
-    private String negative_examples_filename_serialized_name;
+    private String name;
+    private IBMWatsonFile classnamePositiveExamples;
+    private String classnamePositiveExamplesFilename;
+    private IBMWatsonFile negativeExamples;
+    private String negativeExamplesFilename;
+ 
     /**
-     * Gets the name_serialized_name.
+     * Gets the name.
      *
      * The name of the new classifier. Encode special characters in UTF-8.
      *
-     * @return the name_serialized_name
+     * @return the name
      */
     public String name() {
-      return name_serialized_name;
+      return name;
     }
+ 
     /**
-     * Gets the class names.
+     * Gets the classnamePositiveExamples.
      *
-     * @return the classNames
+     * A .zip file of images that depict the visual subject of a class in the new classifier. You can include more than
+     * one positive example file in a call.
+     *
+     * Specify the parameter name by appending `_positive_examples` to the class name. For example,
+     * `goldenretriever_positive_examples` creates the class **goldenretriever**.
+     *
+     * Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
+     * maximum number of images is 10,000 images or 100 MB per .zip file.
+     *
+     * Encode special characters in the file name in UTF-8.
+     *
+     * @return the classnamePositiveExamples
      */
-    public Set<String> classNames() {
-      return classname_positive_examples_serialized_name.keySet();
+    public IBMWatsonFile classnamePositiveExamples() {
+      return classnamePositiveExamples;
     }
+ 
     /**
-     * Gets the positive examples by class name.
+     * Gets the classnamePositiveExamplesFilename.
      *
-     * A .zip file of images that depict the visual subject of a class in the new classifier.
-     * You can include more than one positive example file in a call. Append
-     * `_positive_examples` to the form name. The prefix is used as the class name. For
-     * example, `goldenretriever_positive_examples` creates the
-     * class **goldenretriever**.  Include at least 10 images in .jpg or .png format. The
-     * minimum recommended image resolution is 32X32 pixels. The maximum number of
-     * images is 10,000 images or 100 MB per .zip file.  Encode special characters in the file
-     * name in UTF-8.  The API explorer limits you to training only one class. To train
-     * more classes, use the API functionality.
+     * The filename for classname_positive_examples.
      *
-     * @param className the class name
-     * @return the positiveExamples
+     * @return the classnamePositiveExamplesFilename
      */
-    public IBMWatsonFile positiveExamplesByClassName(String className) {
-      return classname_positive_examples_serialized_name.get(className);
+    public String classnamePositiveExamplesFilename() {
+      return classnamePositiveExamplesFilename;
     }
+ 
     /**
-     * Gets the negative_examples_serialized_name.
+     * Gets the negativeExamples.
      *
      * A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
      * contain a minimum of 10 images.
      *
      * Encode special characters in the file name in UTF-8.
      *
-     * @return the negative_examples_serialized_name
+     * @return the negativeExamples
      */
     public IBMWatsonFile negativeExamples() {
-      return negative_examples_serialized_name;
+      return negativeExamples;
     }
+ 
     /**
-     * Gets the negative_examples_filename_serialized_name.
+     * Gets the negativeExamplesFilename.
      *
      * The filename for negative_examples.
      *
-     * @return the negative_examples_filename_serialized_name
+     * @return the negativeExamplesFilename
      */
     public String negativeExamplesFilename() {
-      return negative_examples_filename_serialized_name;
+      return negativeExamplesFilename;
     }
+
     private CreateClassifierOptions(CreateClassifierOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.name_serialized_name, 'name_serialized_name cannot be null');
-      IBMWatsonValidator.isTrue(!builder.classname_positive_examples_serialized_name.isEmpty() || (builder.negative_examples_serialized_name != null),
-        'To update a classifier, you must supply at least one positive examples file or a negative examples file.'
-      );
-      name_serialized_name = builder.name_serialized_name;
-      classname_positive_examples_serialized_name = builder.classname_positive_examples_serialized_name;
-      negative_examples_serialized_name = builder.negative_examples_serialized_name;
-      negative_examples_filename_serialized_name = builder.negative_examples_filename_serialized_name;
+      IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
+      IBMWatsonValidator.notNull(builder.classnamePositiveExamples, 'classnamePositiveExamples cannot be null');
+      IBMWatsonValidator.isTrue(builder.negativeExamples == null || builder.negativeExamplesFilename != null, 'filename cannot be null if file is not null');
+      name = builder.name;
+      classnamePositiveExamples = builder.classnamePositiveExamples;
+      classnamePositiveExamplesFilename = builder.classnamePositiveExamplesFilename;
+      negativeExamples = builder.negativeExamples;
+      negativeExamplesFilename = builder.negativeExamplesFilename;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1199,17 +1222,18 @@ public class IBMVisualRecognitionV3Models {
    * CreateClassifierOptions Builder.
    */
   public class CreateClassifierOptionsBuilder extends IBMWatsonOptionsModel {
-    private String name_serialized_name;
-    private Map<String, IBMWatsonFile> classname_positive_examples_serialized_name;
-    private IBMWatsonFile negative_examples_serialized_name;
-    private String negative_examples_filename_serialized_name;
+    private String name;
+    private IBMWatsonFile classnamePositiveExamples;
+    private String classnamePositiveExamplesFilename;
+    private IBMWatsonFile negativeExamples;
+    private String negativeExamplesFilename;
 
     private CreateClassifierOptionsBuilder(CreateClassifierOptions createClassifierOptions) {
-      this();
-      name_serialized_name = createClassifierOptions.name_serialized_name;
-      classname_positive_examples_serialized_name.putAll(createClassifierOptions.classname_positive_examples_serialized_name);
-      negative_examples_serialized_name = createClassifierOptions.negative_examples_serialized_name;
-      negative_examples_filename_serialized_name = createClassifierOptions.negative_examples_filename_serialized_name;
+      name = createClassifierOptions.name;
+      classnamePositiveExamples = createClassifierOptions.classnamePositiveExamples;
+      classnamePositiveExamplesFilename = createClassifierOptions.classnamePositiveExamplesFilename;
+      negativeExamples = createClassifierOptions.negativeExamples;
+      negativeExamplesFilename = createClassifierOptions.negativeExamplesFilename;
       this.requestHeaders.putAll(createClassifierOptions.requestHeaders());
     }
 
@@ -1217,7 +1241,6 @@ public class IBMVisualRecognitionV3Models {
      * Instantiates a new builder.
      */
     public CreateClassifierOptionsBuilder() {
-      classname_positive_examples_serialized_name = new Map<String, IBMWatsonFile>();
     }
 
     /**
@@ -1226,10 +1249,9 @@ public class IBMVisualRecognitionV3Models {
      * @param name the name
      * @param classnamePositiveExamples the classnamePositiveExamples
      */
-    public CreateClassifierOptionsBuilder(String name, Map<String, IBMWatsonFile> classnamePositiveExamples) {
-      this();
-      this.name_serialized_name = name;
-      this.classname_positive_examples_serialized_name = classnamePositiveExamples;
+    public CreateClassifierOptionsBuilder(String name, IBMWatsonFile classnamePositiveExamples) {
+      this.name = name;
+      this.classnamePositiveExamples = classnamePositiveExamples;
     }
 
     /**
@@ -1242,50 +1264,57 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Set the name_serialized_name.
+     * Set the name.
      *
      * @param name the name
      * @return the CreateClassifierOptions builder
      */
     public CreateClassifierOptionsBuilder name(String name) {
-      this.name_serialized_name = name;
+      this.name = name;
       return this;
     }
 
     /**
-     * Adds a classifier with a name and positive examples. If the classifier name is
-     * already contained, the old positive examples are replaced by the specified value.
+     * Set the classnamePositiveExamples.
      *
-     * @param className the class name
-     * @param positiveExamples the positive examples
-     * @return the builder
+     * @param classnamePositiveExamples the classnamePositiveExamples
+     * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder addClass(String className, IBMWatsonFile positiveExamples) {
-      IBMWatsonValidator.notNull(className, 'className cannot be null');
-      IBMWatsonValidator.notNull(positiveExamples, 'positiveExamples cannot be null');
-      classname_positive_examples_serialized_name.put(className, positiveExamples);
+    public CreateClassifierOptionsBuilder classnamePositiveExamples(IBMWatsonFile classnamePositiveExamples) {
+      this.classnamePositiveExamples = classnamePositiveExamples;
       return this;
     }
 
     /**
-     * Set the negative_examples_serialized_name.
+     * Set the classnamePositiveExamplesFilename.
+     *
+     * @param classnamePositiveExamplesFilename the classnamePositiveExamplesFilename
+     * @return the CreateClassifierOptions builder
+     */
+    public CreateClassifierOptionsBuilder classnamePositiveExamplesFilename(String classnamePositiveExamplesFilename) {
+      this.classnamePositiveExamplesFilename = classnamePositiveExamplesFilename;
+      return this;
+    }
+
+    /**
+     * Set the negativeExamples.
      *
      * @param negativeExamples the negativeExamples
      * @return the CreateClassifierOptions builder
      */
     public CreateClassifierOptionsBuilder negativeExamples(IBMWatsonFile negativeExamples) {
-      this.negative_examples_serialized_name = negativeExamples;
+      this.negativeExamples = negativeExamples;
       return this;
     }
 
     /**
-     * Set the negative_examples_filename_serialized_name.
+     * Set the negativeExamplesFilename.
      *
      * @param negativeExamplesFilename the negativeExamplesFilename
      * @return the CreateClassifierOptions builder
      */
     public CreateClassifierOptionsBuilder negativeExamplesFilename(String negativeExamplesFilename) {
-      this.negative_examples_filename_serialized_name = negativeExamplesFilename;
+      this.negativeExamplesFilename = negativeExamplesFilename;
       return this;
     }
 
@@ -1306,20 +1335,22 @@ public class IBMVisualRecognitionV3Models {
    * The deleteClassifier options.
    */
   public class DeleteClassifierOptions extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
+    private String classifierId;
+ 
     /**
-     * Gets the classifier_id_serialized_name.
+     * Gets the classifierId.
      *
      * The ID of the classifier.
      *
-     * @return the classifier_id_serialized_name
+     * @return the classifierId
      */
     public String classifierId() {
-      return classifier_id_serialized_name;
+      return classifierId;
     }
+
     private DeleteClassifierOptions(DeleteClassifierOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.classifier_id_serialized_name, 'classifier_id_serialized_name cannot be empty');
-      classifier_id_serialized_name = builder.classifier_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.classifierId, 'classifierId cannot be empty');
+      classifierId = builder.classifierId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1338,10 +1369,10 @@ public class IBMVisualRecognitionV3Models {
    * DeleteClassifierOptions Builder.
    */
   public class DeleteClassifierOptionsBuilder extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
+    private String classifierId;
 
     private DeleteClassifierOptionsBuilder(DeleteClassifierOptions deleteClassifierOptions) {
-      classifier_id_serialized_name = deleteClassifierOptions.classifier_id_serialized_name;
+      classifierId = deleteClassifierOptions.classifierId;
       this.requestHeaders.putAll(deleteClassifierOptions.requestHeaders());
     }
 
@@ -1357,7 +1388,7 @@ public class IBMVisualRecognitionV3Models {
      * @param classifierId the classifierId
      */
     public DeleteClassifierOptionsBuilder(String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
     }
 
     /**
@@ -1370,13 +1401,13 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Set the classifier_id_serialized_name.
+     * Set the classifierId.
      *
      * @param classifierId the classifierId
      * @return the DeleteClassifierOptions builder
      */
     public DeleteClassifierOptionsBuilder classifierId(String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
       return this;
     }
 
@@ -1397,20 +1428,22 @@ public class IBMVisualRecognitionV3Models {
    * The deleteUserData options.
    */
   public class DeleteUserDataOptions extends IBMWatsonOptionsModel {
-    private String customer_id_serialized_name;
+    private String customerId;
+ 
     /**
-     * Gets the customer_id_serialized_name.
+     * Gets the customerId.
      *
      * The customer ID for which all data is to be deleted.
      *
-     * @return the customer_id_serialized_name
+     * @return the customerId
      */
     public String customerId() {
-      return customer_id_serialized_name;
+      return customerId;
     }
+
     private DeleteUserDataOptions(DeleteUserDataOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.customer_id_serialized_name, 'customer_id_serialized_name cannot be null');
-      customer_id_serialized_name = builder.customer_id_serialized_name;
+      IBMWatsonValidator.notNull(builder.customerId, 'customerId cannot be null');
+      customerId = builder.customerId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1429,10 +1462,10 @@ public class IBMVisualRecognitionV3Models {
    * DeleteUserDataOptions Builder.
    */
   public class DeleteUserDataOptionsBuilder extends IBMWatsonOptionsModel {
-    private String customer_id_serialized_name;
+    private String customerId;
 
     private DeleteUserDataOptionsBuilder(DeleteUserDataOptions deleteUserDataOptions) {
-      customer_id_serialized_name = deleteUserDataOptions.customer_id_serialized_name;
+      customerId = deleteUserDataOptions.customerId;
       this.requestHeaders.putAll(deleteUserDataOptions.requestHeaders());
     }
 
@@ -1448,7 +1481,7 @@ public class IBMVisualRecognitionV3Models {
      * @param customerId the customerId
      */
     public DeleteUserDataOptionsBuilder(String customerId) {
-      this.customer_id_serialized_name = customerId;
+      this.customerId = customerId;
     }
 
     /**
@@ -1461,13 +1494,13 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Set the customer_id_serialized_name.
+     * Set the customerId.
      *
      * @param customerId the customerId
      * @return the DeleteUserDataOptions builder
      */
     public DeleteUserDataOptionsBuilder customerId(String customerId) {
-      this.customer_id_serialized_name = customerId;
+      this.customerId = customerId;
       return this;
     }
 
@@ -1488,13 +1521,13 @@ public class IBMVisualRecognitionV3Models {
    * The detectFaces options.
    */
   public class DetectFacesOptions extends IBMWatsonOptionsModel {
-    private IBMWatsonFile images_file_serialized_name;
-    private String images_filename_serialized_name;
-    private String url_serialized_name;
-    private String images_file_content_type_serialized_name;
-    private String parameters_serialized_name;
+    private IBMWatsonFile imagesFile;
+    private String imagesFilename;
+    private String url;
+    private String imagesFileContentType;
+ 
     /**
-     * Gets the images_file_serialized_name.
+     * Gets the imagesFile.
      *
      * An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to 100 MB. You can include a
      * maximum of 15 images in a request.
@@ -1504,23 +1537,25 @@ public class IBMVisualRecognitionV3Models {
      *
      * You can also include an image with the **url** parameter.
      *
-     * @return the images_file_serialized_name
+     * @return the imagesFile
      */
     public IBMWatsonFile imagesFile() {
-      return images_file_serialized_name;
+      return imagesFile;
     }
+ 
     /**
-     * Gets the images_filename_serialized_name.
+     * Gets the imagesFilename.
      *
      * The filename for images_file.
      *
-     * @return the images_filename_serialized_name
+     * @return the imagesFilename
      */
     public String imagesFilename() {
-      return images_filename_serialized_name;
+      return imagesFilename;
     }
+ 
     /**
-     * Gets the url_serialized_name.
+     * Gets the url.
      *
      * The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel
      * density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed, so you can use a
@@ -1528,38 +1563,29 @@ public class IBMVisualRecognitionV3Models {
      *
      * You can also include images with the **images_file** parameter.
      *
-     * @return the url_serialized_name
+     * @return the url
      */
     public String url() {
-      return url_serialized_name;
+      return url;
     }
+ 
     /**
-     * Gets the images_file_content_type_serialized_name.
+     * Gets the imagesFileContentType.
      *
-     * The content type of images_file.
+     * The content type of imagesFile.
      *
-     * @return the images_file_content_type_serialized_name
+     * @return the imagesFileContentType
      */
     public String imagesFileContentType() {
-      return images_file_content_type_serialized_name;
+      return imagesFileContentType;
     }
-    /**
-     * Gets the parameters_serialized_name.
-     *
-     * A JSON object that specifies a single image (.jpg, .png) to analyze by URL. The parameter can be sent as a string or a file.  Example: `{"url":"http://www.example.com/images/myimage.jpg"}`.
-     *
-     * @return the parameters_serialized_name
-     */
-    public String parameters() {
-      return parameters_serialized_name;
-    }
+
     private DetectFacesOptions(DetectFacesOptionsBuilder builder) {
-      IBMWatsonValidator.isTrue(builder.images_file_serialized_name == null || builder.images_file_content_type_serialized_name != null, 'content type cannot be null if file is not null');
-      images_file_serialized_name = builder.images_file_serialized_name;
-      images_filename_serialized_name = builder.images_filename_serialized_name;
-      url_serialized_name = builder.url_serialized_name;
-      images_file_content_type_serialized_name = builder.images_file_content_type_serialized_name;
-      parameters_serialized_name = builder.parameters_serialized_name;
+      IBMWatsonValidator.isTrue(builder.imagesFile == null || builder.imagesFileContentType != null, 'content type cannot be null if file is not null');
+      imagesFile = builder.imagesFile;
+      imagesFilename = builder.imagesFilename;
+      url = builder.url;
+      imagesFileContentType = builder.imagesFileContentType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1578,18 +1604,16 @@ public class IBMVisualRecognitionV3Models {
    * DetectFacesOptions Builder.
    */
   public class DetectFacesOptionsBuilder extends IBMWatsonOptionsModel {
-    private IBMWatsonFile images_file_serialized_name;
-    private String images_filename_serialized_name;
-    private String url_serialized_name;
-    private String images_file_content_type_serialized_name;
-    private String parameters_serialized_name;
+    private IBMWatsonFile imagesFile;
+    private String imagesFilename;
+    private String url;
+    private String imagesFileContentType;
 
     private DetectFacesOptionsBuilder(DetectFacesOptions detectFacesOptions) {
-      images_file_serialized_name = detectFacesOptions.images_file_serialized_name;
-      images_filename_serialized_name = detectFacesOptions.images_filename_serialized_name;
-      url_serialized_name = detectFacesOptions.url_serialized_name;
-      images_file_content_type_serialized_name = detectFacesOptions.images_file_content_type_serialized_name;
-      parameters_serialized_name = detectFacesOptions.parameters_serialized_name;
+      imagesFile = detectFacesOptions.imagesFile;
+      imagesFilename = detectFacesOptions.imagesFilename;
+      url = detectFacesOptions.url;
+      imagesFileContentType = detectFacesOptions.imagesFileContentType;
       this.requestHeaders.putAll(detectFacesOptions.requestHeaders());
     }
 
@@ -1609,57 +1633,46 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Set the images_file_serialized_name.
+     * Set the imagesFile.
      *
      * @param imagesFile the imagesFile
      * @return the DetectFacesOptions builder
      */
     public DetectFacesOptionsBuilder imagesFile(IBMWatsonFile imagesFile) {
-      this.images_file_serialized_name = imagesFile;
+      this.imagesFile = imagesFile;
       return this;
     }
 
     /**
-     * Set the images_filename_serialized_name.
+     * Set the imagesFilename.
      *
      * @param imagesFilename the imagesFilename
      * @return the DetectFacesOptions builder
      */
     public DetectFacesOptionsBuilder imagesFilename(String imagesFilename) {
-      this.images_filename_serialized_name = imagesFilename;
+      this.imagesFilename = imagesFilename;
       return this;
     }
 
     /**
-     * Set the url_serialized_name.
+     * Set the url.
      *
      * @param url the url
      * @return the DetectFacesOptions builder
      */
     public DetectFacesOptionsBuilder url(String url) {
-      this.url_serialized_name = url;
+      this.url = url;
       return this;
     }
 
     /**
-     * Set the images_file_content_type_serialized_name.
+     * Set the imagesFileContentType.
      *
      * @param imagesFileContentType the imagesFileContentType
      * @return the DetectFacesOptions builder
      */
     public DetectFacesOptionsBuilder imagesFileContentType(String imagesFileContentType) {
-      this.images_file_content_type_serialized_name = imagesFileContentType;
-      return this;
-    }
-
-    /**
-     * Set the parameters_serialized_name.
-     *
-     * @param parameters the parameters
-     * @return the DetectFacesOptions builder
-     */
-    public DetectFacesOptionsBuilder parameters(String parameters) {
-      this.parameters_serialized_name = parameters;
+      this.imagesFileContentType = imagesFileContentType;
       return this;
     }
 
@@ -1683,36 +1696,39 @@ public class IBMVisualRecognitionV3Models {
     private Long images_processed_serialized_name;
     private List<ImageWithFaces> images_serialized_name;
     private List<WarningInfo> warnings_serialized_name;
+ 
     /**
-     * Gets the images_processed_serialized_name.
+     * Gets the imagesProcessed.
      *
      * Number of images processed for the API call.
      *
-     * @return the images_processed_serialized_name
+     * @return the imagesProcessed
      */
     @AuraEnabled
     public Long getImagesProcessed() {
       return images_processed_serialized_name;
     }
+ 
     /**
-     * Gets the images_serialized_name.
+     * Gets the images.
      *
      * The images.
      *
-     * @return the images_serialized_name
+     * @return the images
      */
     @AuraEnabled
     public List<ImageWithFaces> getImages() {
       return images_serialized_name;
     }
+ 
     /**
-     * Gets the warnings_serialized_name.
+     * Gets the warnings.
      *
      * Information about what might cause less than optimal output. For example, a request sent with a corrupt .zip file
      * and a list of image URLs will still complete, but does not return the expected output. Not returned when there is
      * no warning.
      *
-     * @return the warnings_serialized_name
+     * @return the warnings
      */
     @AuraEnabled
     public List<WarningInfo> getWarnings() {
@@ -1720,7 +1736,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the images_processed_serialized_name.
+     * Sets the imagesProcessed.
      *
      * @param imagesProcessed the new imagesProcessed
      */
@@ -1729,7 +1745,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the images_serialized_name.
+     * Sets the images.
      *
      * @param images the new images
      */
@@ -1738,7 +1754,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the warnings_serialized_name.
+     * Sets the warnings.
      *
      * @param warnings the new warnings
      */
@@ -1753,7 +1769,7 @@ public class IBMVisualRecognitionV3Models {
 
       DetectedFaces ret = (DetectedFaces) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for images_serialized_name
+      // calling custom deserializer for images
       List<ImageWithFaces> newImages = new List<ImageWithFaces>();
       List<ImageWithFaces> deserializedImages = ret.getImages();
       if (deserializedImages != null) {
@@ -1766,7 +1782,7 @@ public class IBMVisualRecognitionV3Models {
         ret.setImages(newImages);
       }
 
-      // calling custom deserializer for warnings_serialized_name
+      // calling custom deserializer for warnings
       List<WarningInfo> newWarnings = new List<WarningInfo>();
       List<WarningInfo> deserializedWarnings = ret.getWarnings();
       if (deserializedWarnings != null) {
@@ -1791,34 +1807,37 @@ public class IBMVisualRecognitionV3Models {
     private Long code_serialized_name;
     private String description_serialized_name;
     private String error_id_serialized_name;
+ 
     /**
-     * Gets the code_serialized_name.
+     * Gets the code.
      *
      * HTTP status code.
      *
-     * @return the code_serialized_name
+     * @return the code
      */
     @AuraEnabled
     public Long getCode() {
       return code_serialized_name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * Human-readable error description. For example, `File size limit exceeded`.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     @AuraEnabled
     public String getDescription() {
       return description_serialized_name;
     }
+ 
     /**
-     * Gets the error_id_serialized_name.
+     * Gets the errorId.
      *
      * Codified error string. For example, `limit_exceeded`.
      *
-     * @return the error_id_serialized_name
+     * @return the errorId
      */
     @AuraEnabled
     public String getErrorId() {
@@ -1826,7 +1845,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the code_serialized_name.
+     * Sets the code.
      *
      * @param code the new code
      */
@@ -1835,7 +1854,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the description_serialized_name.
+     * Sets the description.
      *
      * @param description the new description
      */
@@ -1844,7 +1863,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the error_id_serialized_name.
+     * Sets the errorId.
      *
      * @param errorId the new errorId
      */
@@ -1870,28 +1889,37 @@ public class IBMVisualRecognitionV3Models {
     private FaceAge age_serialized_name;
     private FaceGender gender_serialized_name;
     private FaceLocation face_location_serialized_name;
+ 
     /**
-     * Gets the age_serialized_name.
+     * Gets the age.
      *
-     * @return the age_serialized_name
+     * Age information about a face.
+     *
+     * @return the age
      */
     @AuraEnabled
     public FaceAge getAge() {
       return age_serialized_name;
     }
+ 
     /**
-     * Gets the gender_serialized_name.
+     * Gets the gender.
      *
-     * @return the gender_serialized_name
+     * Information about the gender of the face.
+     *
+     * @return the gender
      */
     @AuraEnabled
     public FaceGender getGender() {
       return gender_serialized_name;
     }
+ 
     /**
-     * Gets the face_location_serialized_name.
+     * Gets the faceLocation.
      *
-     * @return the face_location_serialized_name
+     * The location of the bounding box around the face.
+     *
+     * @return the faceLocation
      */
     @AuraEnabled
     public FaceLocation getFaceLocation() {
@@ -1899,7 +1927,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the age_serialized_name.
+     * Sets the age.
      *
      * @param age the new age
      */
@@ -1908,7 +1936,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the gender_serialized_name.
+     * Sets the gender.
      *
      * @param gender the new gender
      */
@@ -1917,7 +1945,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the face_location_serialized_name.
+     * Sets the faceLocation.
      *
      * @param faceLocation the new faceLocation
      */
@@ -1932,15 +1960,15 @@ public class IBMVisualRecognitionV3Models {
 
       Face ret = (Face) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for age_serialized_name
+      // calling custom deserializer for age
       FaceAge newAge = (FaceAge) new FaceAge().deserialize(JSON.serialize(ret.getAge()), (Map<String, Object>) jsonMap.get('age_serialized_name'), FaceAge.class);
       ret.setAge(newAge);
 
-      // calling custom deserializer for gender_serialized_name
+      // calling custom deserializer for gender
       FaceGender newGender = (FaceGender) new FaceGender().deserialize(JSON.serialize(ret.getGender()), (Map<String, Object>) jsonMap.get('gender_serialized_name'), FaceGender.class);
       ret.setGender(newGender);
 
-      // calling custom deserializer for face_location_serialized_name
+      // calling custom deserializer for faceLocation
       FaceLocation newFaceLocation = (FaceLocation) new FaceLocation().deserialize(JSON.serialize(ret.getFaceLocation()), (Map<String, Object>) jsonMap.get('face_location_serialized_name'), FaceLocation.class);
       ret.setFaceLocation(newFaceLocation);
 
@@ -1955,35 +1983,38 @@ public class IBMVisualRecognitionV3Models {
     private Long min_serialized_name;
     private Long max_serialized_name;
     private Double score_serialized_name;
+ 
     /**
-     * Gets the min_serialized_name.
+     * Gets the min.
      *
      * Estimated minimum age.
      *
-     * @return the min_serialized_name
+     * @return the min
      */
     @AuraEnabled
     public Long getMin() {
       return min_serialized_name;
     }
+ 
     /**
-     * Gets the max_serialized_name.
+     * Gets the max.
      *
      * Estimated maximum age.
      *
-     * @return the max_serialized_name
+     * @return the max
      */
     @AuraEnabled
     public Long getMax() {
       return max_serialized_name;
     }
+ 
     /**
-     * Gets the score_serialized_name.
+     * Gets the score.
      *
      * Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for
      * the property.
      *
-     * @return the score_serialized_name
+     * @return the score
      */
     @AuraEnabled
     public Double getScore() {
@@ -1991,7 +2022,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the min_serialized_name.
+     * Sets the min.
      *
      * @param min the new min
      */
@@ -2000,7 +2031,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the max_serialized_name.
+     * Sets the max.
      *
      * @param max the new max
      */
@@ -2009,7 +2040,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the score_serialized_name.
+     * Sets the score.
      *
      * @param score the new score
      */
@@ -2034,24 +2065,26 @@ public class IBMVisualRecognitionV3Models {
   public class FaceGender extends IBMWatsonGenericModel {
     private String gender_serialized_name;
     private Double score_serialized_name;
+ 
     /**
-     * Gets the gender_serialized_name.
+     * Gets the gender.
      *
      * Gender identified by the face. For example, `MALE` or `FEMALE`.
      *
-     * @return the gender_serialized_name
+     * @return the gender
      */
     @AuraEnabled
     public String getGender() {
       return gender_serialized_name;
     }
+ 
     /**
-     * Gets the score_serialized_name.
+     * Gets the score.
      *
      * Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for
      * the property.
      *
-     * @return the score_serialized_name
+     * @return the score
      */
     @AuraEnabled
     public Double getScore() {
@@ -2059,7 +2092,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the gender_serialized_name.
+     * Sets the gender.
      *
      * @param gender the new gender
      */
@@ -2068,7 +2101,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the score_serialized_name.
+     * Sets the score.
      *
      * @param score the new score
      */
@@ -2095,45 +2128,49 @@ public class IBMVisualRecognitionV3Models {
     private Double height_serialized_name;
     private Double left_serialized_name;
     private Double top_serialized_name;
+ 
     /**
-     * Gets the width_serialized_name.
+     * Gets the width.
      *
      * Width in pixels of face region.
      *
-     * @return the width_serialized_name
+     * @return the width
      */
     @AuraEnabled
     public Double getWidth() {
       return width_serialized_name;
     }
+ 
     /**
-     * Gets the height_serialized_name.
+     * Gets the height.
      *
      * Height in pixels of face region.
      *
-     * @return the height_serialized_name
+     * @return the height
      */
     @AuraEnabled
     public Double getHeight() {
       return height_serialized_name;
     }
+ 
     /**
-     * Gets the left_serialized_name.
+     * Gets the left.
      *
      * X-position of top-left pixel of face region.
      *
-     * @return the left_serialized_name
+     * @return the left
      */
     @AuraEnabled
     public Double getLeft() {
       return left_serialized_name;
     }
+ 
     /**
-     * Gets the top_serialized_name.
+     * Gets the top.
      *
      * Y-position of top-left pixel of face region.
      *
-     * @return the top_serialized_name
+     * @return the top
      */
     @AuraEnabled
     public Double getTop() {
@@ -2141,7 +2178,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the width_serialized_name.
+     * Sets the width.
      *
      * @param width the new width
      */
@@ -2150,7 +2187,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the height_serialized_name.
+     * Sets the height.
      *
      * @param height the new height
      */
@@ -2159,7 +2196,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the left_serialized_name.
+     * Sets the left.
      *
      * @param left the new left
      */
@@ -2168,7 +2205,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the top_serialized_name.
+     * Sets the top.
      *
      * @param top the new top
      */
@@ -2191,20 +2228,22 @@ public class IBMVisualRecognitionV3Models {
    * The getClassifier options.
    */
   public class GetClassifierOptions extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
+    private String classifierId;
+ 
     /**
-     * Gets the classifier_id_serialized_name.
+     * Gets the classifierId.
      *
      * The ID of the classifier.
      *
-     * @return the classifier_id_serialized_name
+     * @return the classifierId
      */
     public String classifierId() {
-      return classifier_id_serialized_name;
+      return classifierId;
     }
+
     private GetClassifierOptions(GetClassifierOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.classifier_id_serialized_name, 'classifier_id_serialized_name cannot be empty');
-      classifier_id_serialized_name = builder.classifier_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.classifierId, 'classifierId cannot be empty');
+      classifierId = builder.classifierId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2223,10 +2262,10 @@ public class IBMVisualRecognitionV3Models {
    * GetClassifierOptions Builder.
    */
   public class GetClassifierOptionsBuilder extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
+    private String classifierId;
 
     private GetClassifierOptionsBuilder(GetClassifierOptions getClassifierOptions) {
-      classifier_id_serialized_name = getClassifierOptions.classifier_id_serialized_name;
+      classifierId = getClassifierOptions.classifierId;
       this.requestHeaders.putAll(getClassifierOptions.requestHeaders());
     }
 
@@ -2242,7 +2281,7 @@ public class IBMVisualRecognitionV3Models {
      * @param classifierId the classifierId
      */
     public GetClassifierOptionsBuilder(String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
     }
 
     /**
@@ -2255,13 +2294,13 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Set the classifier_id_serialized_name.
+     * Set the classifierId.
      *
      * @param classifierId the classifierId
      * @return the GetClassifierOptions builder
      */
     public GetClassifierOptionsBuilder classifierId(String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
       return this;
     }
 
@@ -2282,20 +2321,22 @@ public class IBMVisualRecognitionV3Models {
    * The getCoreMlModel options.
    */
   public class GetCoreMlModelOptions extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
+    private String classifierId;
+ 
     /**
-     * Gets the classifier_id_serialized_name.
+     * Gets the classifierId.
      *
      * The ID of the classifier.
      *
-     * @return the classifier_id_serialized_name
+     * @return the classifierId
      */
     public String classifierId() {
-      return classifier_id_serialized_name;
+      return classifierId;
     }
+
     private GetCoreMlModelOptions(GetCoreMlModelOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.classifier_id_serialized_name, 'classifier_id_serialized_name cannot be empty');
-      classifier_id_serialized_name = builder.classifier_id_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.classifierId, 'classifierId cannot be empty');
+      classifierId = builder.classifierId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2314,10 +2355,10 @@ public class IBMVisualRecognitionV3Models {
    * GetCoreMlModelOptions Builder.
    */
   public class GetCoreMlModelOptionsBuilder extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
+    private String classifierId;
 
     private GetCoreMlModelOptionsBuilder(GetCoreMlModelOptions getCoreMlModelOptions) {
-      classifier_id_serialized_name = getCoreMlModelOptions.classifier_id_serialized_name;
+      classifierId = getCoreMlModelOptions.classifierId;
       this.requestHeaders.putAll(getCoreMlModelOptions.requestHeaders());
     }
 
@@ -2333,7 +2374,7 @@ public class IBMVisualRecognitionV3Models {
      * @param classifierId the classifierId
      */
     public GetCoreMlModelOptionsBuilder(String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
     }
 
     /**
@@ -2346,13 +2387,13 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Set the classifier_id_serialized_name.
+     * Set the classifierId.
      *
      * @param classifierId the classifierId
      * @return the GetCoreMlModelOptions builder
      */
     public GetCoreMlModelOptionsBuilder classifierId(String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
       return this;
     }
 
@@ -2378,54 +2419,62 @@ public class IBMVisualRecognitionV3Models {
     private String source_url_serialized_name;
     private String resolved_url_serialized_name;
     private ErrorInfo error_serialized_name;
+ 
     /**
-     * Gets the faces_serialized_name.
+     * Gets the faces.
      *
      * Faces detected in the images.
      *
-     * @return the faces_serialized_name
+     * @return the faces
      */
     @AuraEnabled
     public List<Face> getFaces() {
       return faces_serialized_name;
     }
+ 
     /**
-     * Gets the image_serialized_name.
+     * Gets the image.
      *
      * Relative path of the image file if uploaded directly. Not returned when the image is passed by URL.
      *
-     * @return the image_serialized_name
+     * @return the image
      */
     @AuraEnabled
     public String getImage() {
       return image_serialized_name;
     }
+ 
     /**
-     * Gets the source_url_serialized_name.
+     * Gets the sourceUrl.
      *
      * Source of the image before any redirects. Not returned when the image is uploaded.
      *
-     * @return the source_url_serialized_name
+     * @return the sourceUrl
      */
     @AuraEnabled
     public String getSourceUrl() {
       return source_url_serialized_name;
     }
+ 
     /**
-     * Gets the resolved_url_serialized_name.
+     * Gets the resolvedUrl.
      *
      * Fully resolved URL of the image after redirects are followed. Not returned when the image is uploaded.
      *
-     * @return the resolved_url_serialized_name
+     * @return the resolvedUrl
      */
     @AuraEnabled
     public String getResolvedUrl() {
       return resolved_url_serialized_name;
     }
+ 
     /**
-     * Gets the error_serialized_name.
+     * Gets the error.
      *
-     * @return the error_serialized_name
+     * Information about what might have caused a failure, such as an image that is too large. Not returned when there
+     * is no error.
+     *
+     * @return the error
      */
     @AuraEnabled
     public ErrorInfo getError() {
@@ -2433,7 +2482,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the faces_serialized_name.
+     * Sets the faces.
      *
      * @param faces the new faces
      */
@@ -2442,7 +2491,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the image_serialized_name.
+     * Sets the image.
      *
      * @param image the new image
      */
@@ -2451,7 +2500,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the source_url_serialized_name.
+     * Sets the sourceUrl.
      *
      * @param sourceUrl the new sourceUrl
      */
@@ -2460,7 +2509,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the resolved_url_serialized_name.
+     * Sets the resolvedUrl.
      *
      * @param resolvedUrl the new resolvedUrl
      */
@@ -2469,7 +2518,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the error_serialized_name.
+     * Sets the error.
      *
      * @param error the new error
      */
@@ -2484,7 +2533,7 @@ public class IBMVisualRecognitionV3Models {
 
       ImageWithFaces ret = (ImageWithFaces) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for faces_serialized_name
+      // calling custom deserializer for faces
       List<Face> newFaces = new List<Face>();
       List<Face> deserializedFaces = ret.getFaces();
       if (deserializedFaces != null) {
@@ -2497,7 +2546,7 @@ public class IBMVisualRecognitionV3Models {
         ret.setFaces(newFaces);
       }
 
-      // calling custom deserializer for error_serialized_name
+      // calling custom deserializer for error
       ErrorInfo newError = (ErrorInfo) new ErrorInfo().deserialize(JSON.serialize(ret.getError()), (Map<String, Object>) jsonMap.get('error_serialized_name'), ErrorInfo.class);
       ret.setError(newError);
 
@@ -2509,20 +2558,22 @@ public class IBMVisualRecognitionV3Models {
    * The listClassifiers options.
    */
   public class ListClassifiersOptions extends IBMWatsonOptionsModel {
-    private Boolean verbose_serialized_name;
+    private Boolean verbose;
+ 
     /**
-     * Gets the verbose_serialized_name.
+     * Gets the verbose.
      *
      * Specify `true` to return details about the classifiers. Omit this parameter to return a brief list of
      * classifiers.
      *
-     * @return the verbose_serialized_name
+     * @return the verbose
      */
     public Boolean verbose() {
-      return verbose_serialized_name;
+      return verbose;
     }
+
     private ListClassifiersOptions(ListClassifiersOptionsBuilder builder) {
-      verbose_serialized_name = builder.verbose_serialized_name;
+      verbose = builder.verbose;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2541,10 +2592,10 @@ public class IBMVisualRecognitionV3Models {
    * ListClassifiersOptions Builder.
    */
   public class ListClassifiersOptionsBuilder extends IBMWatsonOptionsModel {
-    private Boolean verbose_serialized_name;
+    private Boolean verbose;
 
     private ListClassifiersOptionsBuilder(ListClassifiersOptions listClassifiersOptions) {
-      verbose_serialized_name = listClassifiersOptions.verbose_serialized_name;
+      verbose = listClassifiersOptions.verbose;
       this.requestHeaders.putAll(listClassifiersOptions.requestHeaders());
     }
 
@@ -2564,13 +2615,13 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Set the verbose_serialized_name.
+     * Set the verbose.
      *
      * @param verbose the verbose
      * @return the ListClassifiersOptions builder
      */
     public ListClassifiersOptionsBuilder verbose(Boolean verbose) {
-      this.verbose_serialized_name = verbose;
+      this.verbose = verbose;
       return this;
     }
 
@@ -2591,78 +2642,87 @@ public class IBMVisualRecognitionV3Models {
    * The updateClassifier options.
    */
   public class UpdateClassifierOptions extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
-    private Map<String, IBMWatsonFile> classname_positive_examples_serialized_name;
-    private IBMWatsonFile negative_examples_serialized_name;
-    private String negative_examples_filename_serialized_name;
+    private String classifierId;
+    private IBMWatsonFile classnamePositiveExamples;
+    private String classnamePositiveExamplesFilename;
+    private IBMWatsonFile negativeExamples;
+    private String negativeExamplesFilename;
+ 
     /**
-     * Gets the classifier_id_serialized_name.
+     * Gets the classifierId.
      *
      * The ID of the classifier.
      *
-     * @return the classifier_id_serialized_name
+     * @return the classifierId
      */
     public String classifierId() {
-      return classifier_id_serialized_name;
+      return classifierId;
     }
+ 
     /**
-     * Gets the class names.
+     * Gets the classnamePositiveExamples.
      *
-     * @return the classNames
+     * A .zip file of images that depict the visual subject of a class in the classifier. The positive examples create
+     * or update classes in the classifier. You can include more than one positive example file in a call.
+     *
+     * Specify the parameter name by appending `_positive_examples` to the class name. For example,
+     * `goldenretriever_positive_examples` creates the class `goldenretriever`.
+     *
+     * Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
+     * maximum number of images is 10,000 images or 100 MB per .zip file.
+     *
+     * Encode special characters in the file name in UTF-8.
+     *
+     * @return the classnamePositiveExamples
      */
-    public Set<String> classNames() {
-      return classname_positive_examples_serialized_name.keySet();
+    public IBMWatsonFile classnamePositiveExamples() {
+      return classnamePositiveExamples;
     }
+ 
     /**
-     * Gets the positive examples by class name.
+     * Gets the classnamePositiveExamplesFilename.
      *
-     * A .zip file of images that depict the visual subject of a class in the new classifier.
-     * You can include more than one positive example file in a call. Append
-     * `_positive_examples` to the form name. The prefix is used as the class name. For
-     * example, `goldenretriever_positive_examples` creates the
-     * class **goldenretriever**.  Include at least 10 images in .jpg or .png format. The
-     * minimum recommended image resolution is 32X32 pixels. The maximum number of
-     * images is 10,000 images or 100 MB per .zip file.  Encode special characters in the file
-     * name in UTF-8.
+     * The filename for classname_positive_examples.
      *
-     * @param className the class name
-     * @return the positiveExamples
+     * @return the classnamePositiveExamplesFilename
      */
-    public IBMWatsonFile positiveExamplesByClassName(String className) {
-      return classname_positive_examples_serialized_name.get(className);
+    public String classnamePositiveExamplesFilename() {
+      return classnamePositiveExamplesFilename;
     }
+ 
     /**
-     * Gets the negative_examples_serialized_name.
+     * Gets the negativeExamples.
      *
      * A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
      * contain a minimum of 10 images.
      *
      * Encode special characters in the file name in UTF-8.
      *
-     * @return the negative_examples_serialized_name
+     * @return the negativeExamples
      */
     public IBMWatsonFile negativeExamples() {
-      return negative_examples_serialized_name;
+      return negativeExamples;
     }
+ 
     /**
-     * Gets the negative_examples_filename_serialized_name.
+     * Gets the negativeExamplesFilename.
      *
      * The filename for negative_examples.
      *
-     * @return the negative_examples_filename_serialized_name
+     * @return the negativeExamplesFilename
      */
     public String negativeExamplesFilename() {
-      return negative_examples_filename_serialized_name;
+      return negativeExamplesFilename;
     }
+
     private UpdateClassifierOptions(UpdateClassifierOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.classifier_id_serialized_name, 'classifier_id_serialized_name cannot be empty');
-      IBMWatsonValidator.isTrue(!builder.classname_positive_examples_serialized_name.isEmpty() || (builder.negative_examples_serialized_name != null),
-        'To update a classifier, you must supply at least one positive examples file or a negative examples file.'
-      );
-      classifier_id_serialized_name = builder.classifier_id_serialized_name;
-      classname_positive_examples_serialized_name = builder.classname_positive_examples_serialized_name;
-      negative_examples_serialized_name = builder.negative_examples_serialized_name;
-      negative_examples_filename_serialized_name = builder.negative_examples_filename_serialized_name;
+      IBMWatsonValidator.notEmpty(builder.classifierId, 'classifierId cannot be empty');
+      IBMWatsonValidator.isTrue(builder.negativeExamples == null || builder.negativeExamplesFilename != null, 'filename cannot be null if file is not null');
+      classifierId = builder.classifierId;
+      classnamePositiveExamples = builder.classnamePositiveExamples;
+      classnamePositiveExamplesFilename = builder.classnamePositiveExamplesFilename;
+      negativeExamples = builder.negativeExamples;
+      negativeExamplesFilename = builder.negativeExamplesFilename;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2681,17 +2741,18 @@ public class IBMVisualRecognitionV3Models {
    * UpdateClassifierOptions Builder.
    */
   public class UpdateClassifierOptionsBuilder extends IBMWatsonOptionsModel {
-    private String classifier_id_serialized_name;
-    private Map<String, IBMWatsonFile> classname_positive_examples_serialized_name;
-    private IBMWatsonFile negative_examples_serialized_name;
-    private String negative_examples_filename_serialized_name;
+    private String classifierId;
+    private IBMWatsonFile classnamePositiveExamples;
+    private String classnamePositiveExamplesFilename;
+    private IBMWatsonFile negativeExamples;
+    private String negativeExamplesFilename;
 
     private UpdateClassifierOptionsBuilder(UpdateClassifierOptions updateClassifierOptions) {
-      this();
-      classifier_id_serialized_name = updateClassifierOptions.classifier_id_serialized_name;
-      classname_positive_examples_serialized_name.putAll(updateClassifierOptions.classname_positive_examples_serialized_name);
-      negative_examples_serialized_name = updateClassifierOptions.negative_examples_serialized_name;
-      negative_examples_filename_serialized_name = updateClassifierOptions.negative_examples_filename_serialized_name;
+      classifierId = updateClassifierOptions.classifierId;
+      classnamePositiveExamples = updateClassifierOptions.classnamePositiveExamples;
+      classnamePositiveExamplesFilename = updateClassifierOptions.classnamePositiveExamplesFilename;
+      negativeExamples = updateClassifierOptions.negativeExamples;
+      negativeExamplesFilename = updateClassifierOptions.negativeExamplesFilename;
       this.requestHeaders.putAll(updateClassifierOptions.requestHeaders());
     }
 
@@ -2699,7 +2760,6 @@ public class IBMVisualRecognitionV3Models {
      * Instantiates a new builder.
      */
     public UpdateClassifierOptionsBuilder() {
-      classname_positive_examples_serialized_name = new Map<String, IBMWatsonFile>();
     }
 
     /**
@@ -2708,8 +2768,7 @@ public class IBMVisualRecognitionV3Models {
      * @param classifierId the classifierId
      */
     public UpdateClassifierOptionsBuilder(String classifierId) {
-      this();
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
     }
 
     /**
@@ -2722,50 +2781,57 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Set the classifier_id_serialized_name.
+     * Set the classifierId.
      *
      * @param classifierId the classifierId
      * @return the UpdateClassifierOptions builder
      */
     public UpdateClassifierOptionsBuilder classifierId(String classifierId) {
-      this.classifier_id_serialized_name = classifierId;
+      this.classifierId = classifierId;
       return this;
     }
 
     /**
-     * Adds a classifier with a name and positive examples. If the classifier name is
-     * already contained, the old positive examples are replaced by the specified value.
+     * Set the classnamePositiveExamples.
      *
-     * @param className the class name
-     * @param positiveExamples the positive examples
-     * @return the builder
+     * @param classnamePositiveExamples the classnamePositiveExamples
+     * @return the UpdateClassifierOptions builder
      */
-    public UpdateClassifierOptionsBuilder addClass(String className, IBMWatsonFile positiveExamples) {
-      IBMWatsonValidator.notNull(className, 'className cannot be null');
-      IBMWatsonValidator.notNull(positiveExamples, 'positiveExamples cannot be null');
-      classname_positive_examples_serialized_name.put(className, positiveExamples);
+    public UpdateClassifierOptionsBuilder classnamePositiveExamples(IBMWatsonFile classnamePositiveExamples) {
+      this.classnamePositiveExamples = classnamePositiveExamples;
       return this;
     }
 
     /**
-     * Set the negative_examples_serialized_name.
+     * Set the classnamePositiveExamplesFilename.
+     *
+     * @param classnamePositiveExamplesFilename the classnamePositiveExamplesFilename
+     * @return the UpdateClassifierOptions builder
+     */
+    public UpdateClassifierOptionsBuilder classnamePositiveExamplesFilename(String classnamePositiveExamplesFilename) {
+      this.classnamePositiveExamplesFilename = classnamePositiveExamplesFilename;
+      return this;
+    }
+
+    /**
+     * Set the negativeExamples.
      *
      * @param negativeExamples the negativeExamples
      * @return the UpdateClassifierOptions builder
      */
     public UpdateClassifierOptionsBuilder negativeExamples(IBMWatsonFile negativeExamples) {
-      this.negative_examples_serialized_name = negativeExamples;
+      this.negativeExamples = negativeExamples;
       return this;
     }
 
     /**
-     * Set the negative_examples_filename_serialized_name.
+     * Set the negativeExamplesFilename.
      *
      * @param negativeExamplesFilename the negativeExamplesFilename
      * @return the UpdateClassifierOptions builder
      */
     public UpdateClassifierOptionsBuilder negativeExamplesFilename(String negativeExamplesFilename) {
-      this.negative_examples_filename_serialized_name = negativeExamplesFilename;
+      this.negativeExamplesFilename = negativeExamplesFilename;
       return this;
     }
 
@@ -2788,23 +2854,25 @@ public class IBMVisualRecognitionV3Models {
   public class WarningInfo extends IBMWatsonGenericModel {
     private String warning_id_serialized_name;
     private String description_serialized_name;
+ 
     /**
-     * Gets the warning_id_serialized_name.
+     * Gets the warningId.
      *
      * Codified warning string, such as `limit_reached`.
      *
-     * @return the warning_id_serialized_name
+     * @return the warningId
      */
     @AuraEnabled
     public String getWarningId() {
       return warning_id_serialized_name;
     }
+ 
     /**
-     * Gets the description_serialized_name.
+     * Gets the description.
      *
      * Information about the error.
      *
-     * @return the description_serialized_name
+     * @return the description
      */
     @AuraEnabled
     public String getDescription() {
@@ -2812,7 +2880,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the warning_id_serialized_name.
+     * Sets the warningId.
      *
      * @param warningId the new warningId
      */
@@ -2821,7 +2889,7 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Sets the description_serialized_name.
+     * Sets the description.
      *
      * @param description the new description
      */

@@ -28,52 +28,6 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   }
 
   /**
-   * Instantiates a new `IBMVisualRecognitionV3` with API Key.
-   *
-   * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
-   *        calls from failing when the service introduces breaking changes.
-   * @param apiKey the API Key
-   */
-  public IBMVisualRecognitionV3(String versionDate, String apiKey) {
-    super('watson_visual_recognition_v3');
-
-    if (String.isBlank(versionDate)) {
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
-    }
-    this.versionDate = versionDate;
-
-    setApiKey(apiKey);
-  }
-
-  /*
-   * Override authentication mechanism for this endpoint
-   */
-  protected override void setAuthentication(IBMWatsonRequest.Builder builder) {
-    if (isTokenManagerSet()) {
-      super.setAuthentication(builder);
-    } else if (getApiKey() != null) {
-      addApiKeyQueryParameter(builder, getApiKey());
-    } else {
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('Credentials need to be specified. Use setApiKey() or setIamCredentials().');
-    }
-  }
-
-  /**
-   * Adds the API key as a query parameter to the request URL.
-   *
-   * @param builder builder for the current request
-   * @param apiKey API key to be added
-   */
-  private void addApiKeyQueryParameter(IBMWatsonRequest.Builder builder, String apiKey) {
-    Url url = builder.build().getUrl();
-
-    if (String.isBlank(url.getQuery())) {
-      builder.url(builder.build().getUrl().toExternalForm() + '?api_key=' + apiKey);
-    } else {
-      builder.url(builder.build().getUrl().toExternalForm() + '&api_key=' + apiKey);
-    }
-  }
-  /**
    * Instantiates a new `IBMVisualRecognitionV3` with IAM. Note that if the access token is specified in the
    * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
    * one expires or after receiving a 401 error from the service. Failing to do so will result in authentication errors
@@ -100,6 +54,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     IBMWatsonValidator.notNull(classifyOptions, 'classifyOptions cannot be null');
     IBMWatsonValidator.isTrue((classifyOptions.imagesFile() != null) || (classifyOptions.url() != null) || (classifyOptions.threshold() != null) || (classifyOptions.owners() != null) || (classifyOptions.classifierIds() != null), 'At least one of images_file, url, threshold, owners, or classifier_ids must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/classify');
+    builder.addHeader('Accept', 'application/json');
     if (classifyOptions.acceptLanguage() != null) {
       builder.addHeader('Accept-Language', classifyOptions.acceptLanguage());
     }
@@ -113,11 +68,8 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (classifyOptions.imagesFile() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(classifyOptions.imagesFile(), classifyOptions.imagesFileContentType());
-      multipartBuilder.addFormDataPart('images_file', classifyOptions.imagesFilename(), fileBody);
-    }
-    if (classifyOptions.parameters() != null) {
-      multipartBuilder.addFormDataPart('parameters', classifyOptions.parameters());
+      IBMWatsonRequestBody imagesFileBody = IBMWatsonRequestBody.create(classifyOptions.imagesFile(), classifyOptions.imagesFileContentType());
+      multipartBuilder.addFormDataPart('images_file', classifyOptions.imagesFilename(), imagesFileBody);
     }
     if (classifyOptions.url() != null) {
       multipartBuilder.addFormDataPart('url', classifyOptions.url());
@@ -159,6 +111,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     IBMWatsonValidator.notNull(detectFacesOptions, 'detectFacesOptions cannot be null');
     IBMWatsonValidator.isTrue((detectFacesOptions.imagesFile() != null) || (detectFacesOptions.url() != null), 'At least one of images_file or url must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/detect_faces');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (detectFacesOptions != null) ? detectFacesOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -168,12 +121,9 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    if (detectFacesOptions.parameters() != null) {
-      multipartBuilder.addFormDataPart('parameters', detectFacesOptions.parameters());
-    }
     if (detectFacesOptions.imagesFile() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(detectFacesOptions.imagesFile(), detectFacesOptions.imagesFileContentType());
-      multipartBuilder.addFormDataPart('images_file', detectFacesOptions.imagesFilename(), fileBody);
+      IBMWatsonRequestBody imagesFileBody = IBMWatsonRequestBody.create(detectFacesOptions.imagesFile(), detectFacesOptions.imagesFileContentType());
+      multipartBuilder.addFormDataPart('images_file', detectFacesOptions.imagesFilename(), imagesFileBody);
     }
     if (detectFacesOptions.url() != null) {
       multipartBuilder.addFormDataPart('url', detectFacesOptions.url());
@@ -200,6 +150,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   public IBMVisualRecognitionV3Models.Classifier createClassifier(IBMVisualRecognitionV3Models.CreateClassifierOptions createClassifierOptions) {
     IBMWatsonValidator.notNull(createClassifierOptions, 'createClassifierOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/classifiers');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (createClassifierOptions != null) ? createClassifierOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -210,16 +161,8 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     multipartBuilder.addFormDataPart('name', createClassifierOptions.name());
-    // Classes
-    for (String className : createClassifierOptions.classNames()) {
-      String dataName = className + '_positive_examples';
-      IBMWatsonFile positiveExamples = createClassifierOptions.positiveExamplesByClassName(className);
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
-        positiveExamples,
-        'application/octet-stream'
-      );
-      multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
-    }
+    IBMWatsonRequestBody classnamePositiveExamplesBody = IBMWatsonRequestBody.create(createClassifierOptions.classnamePositiveExamples(), 'application/octet-stream');
+    multipartBuilder.addFormDataPart('classname_positive_examples', createClassifierOptions.classnamePositiveExamplesFilename(), classnamePositiveExamplesBody);
     if (createClassifierOptions.negativeExamples() != null) {
       IBMWatsonRequestBody negativeExamplesBody = IBMWatsonRequestBody.create(createClassifierOptions.negativeExamples(), 'application/octet-stream');
       multipartBuilder.addFormDataPart('negative_examples', createClassifierOptions.negativeExamplesFilename(), negativeExamplesBody);
@@ -239,6 +182,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   public void deleteClassifier(IBMVisualRecognitionV3Models.DeleteClassifierOptions deleteClassifierOptions) {
     IBMWatsonValidator.notNull(deleteClassifierOptions, 'deleteClassifierOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v3/classifiers/{0}', new String[]{ deleteClassifierOptions.classifierId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (deleteClassifierOptions != null) ? deleteClassifierOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -261,6 +205,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   public IBMVisualRecognitionV3Models.Classifier getClassifier(IBMVisualRecognitionV3Models.GetClassifierOptions getClassifierOptions) {
     IBMWatsonValidator.notNull(getClassifierOptions, 'getClassifierOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v3/classifiers/{0}', new String[]{ getClassifierOptions.classifierId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (getClassifierOptions != null) ? getClassifierOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -280,6 +225,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    */
   public IBMVisualRecognitionV3Models.Classifiers listClassifiers(IBMVisualRecognitionV3Models.ListClassifiersOptions listClassifiersOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v3/classifiers');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (listClassifiersOptions != null) ? listClassifiersOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -314,7 +260,9 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    */
   public IBMVisualRecognitionV3Models.Classifier updateClassifier(IBMVisualRecognitionV3Models.UpdateClassifierOptions updateClassifierOptions) {
     IBMWatsonValidator.notNull(updateClassifierOptions, 'updateClassifierOptions cannot be null');
+    IBMWatsonValidator.isTrue((updateClassifierOptions.classnamePositiveExamples() != null) || (updateClassifierOptions.negativeExamples() != null), 'At least one of classname_positive_examples or negative_examples must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v3/classifiers/{0}', new String[]{ updateClassifierOptions.classifierId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (updateClassifierOptions != null) ? updateClassifierOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -324,16 +272,13 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    // Classes
-    for (String className : updateClassifierOptions.classNames()) {
-      String dataName = className + '_positive_examples';
-      IBMWatsonFile positiveExamples = updateClassifierOptions.positiveExamplesByClassName(className);
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(positiveExamples, 'application/octet-stream');
-      multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
+    if (updateClassifierOptions.classnamePositiveExamples() != null) {
+      IBMWatsonRequestBody classnamePositiveExamplesBody = IBMWatsonRequestBody.create(updateClassifierOptions.classnamePositiveExamples(), 'application/octet-stream');
+      multipartBuilder.addFormDataPart('classname_positive_examples', updateClassifierOptions.classnamePositiveExamplesFilename(), classnamePositiveExamplesBody);
     }
     if (updateClassifierOptions.negativeExamples() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(updateClassifierOptions.negativeExamples(), 'application/octet-stream');
-      multipartBuilder.addFormDataPart('negative_examples', updateClassifierOptions.negativeExamplesFilename(), fileBody);
+      IBMWatsonRequestBody negativeExamplesBody = IBMWatsonRequestBody.create(updateClassifierOptions.negativeExamples(), 'application/octet-stream');
+      multipartBuilder.addFormDataPart('negative_examples', updateClassifierOptions.negativeExamplesFilename(), negativeExamplesBody);
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
@@ -353,6 +298,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   public IBMWatsonFile getCoreMlModel(IBMVisualRecognitionV3Models.GetCoreMlModelOptions getCoreMlModelOptions) {
     IBMWatsonValidator.notNull(getCoreMlModelOptions, 'getCoreMlModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v3/classifiers/{0}/core_ml_model', new String[]{ getCoreMlModelOptions.classifierId() }));
+    builder.addHeader('Accept', 'application/octet-stream');
     Map<String, String> requestHeaders = (getCoreMlModelOptions != null) ? getCoreMlModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -380,6 +326,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   public void deleteUserData(IBMVisualRecognitionV3Models.DeleteUserDataOptions deleteUserDataOptions) {
     IBMWatsonValidator.notNull(deleteUserDataOptions, 'deleteUserDataOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + '/v3/user_data');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (deleteUserDataOptions != null) ? deleteUserDataOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
