@@ -135,7 +135,7 @@ public without sharing class IBMNaturalLanguageClassifierV1FTests {
     //
     IBMNaturalLanguageClassifierV1Models.CreateClassifierOptions createClassifierOptions =
       new IBMNaturalLanguageClassifierV1Models.CreateClassifierOptionsBuilder()
-      .trainingMetadata(training_metadata)
+      .metadata(training_metadata)
       .trainingMetadataFilename(training_metadata_filename)
       .trainingData(training_data)
       .trainingDataFilename(training_data_filename)
