@@ -72,10 +72,10 @@ private class IBMAssistantV2Test {
     Test.startTest();
 
     IBMAssistantV2Models.CaptureGroup captureGroup = new IBMAssistantV2Models.CaptureGroup();
-    captureGroup.setGroup(GROUP_STR);
+    captureGroup.setXgroup(GROUP_STR);
     captureGroup.setLocation(LOCATION);
 
-    System.assertEquals(GROUP_STR, captureGroup.getGroup());
+    System.assertEquals(GROUP_STR, captureGroup.getXgroup());
     System.assertEquals(LOCATION, captureGroup.getLocation());
     Test.stopTest();
   }
@@ -126,9 +126,9 @@ private class IBMAssistantV2Test {
     IBMAssistantV2Models.MessageContextGlobalSystem messageContextGlobalSystem = new IBMAssistantV2Models.MessageContextGlobalSystem();
 
     IBMAssistantV2Models.MessageContextGlobal messageContextGlobal = new IBMAssistantV2Models.MessageContextGlobal();
-    messageContextGlobal.setSystem(messageContextGlobalSystem);
+    messageContextGlobal.setXsystem(messageContextGlobalSystem);
 
-    System.assertEquals(messageContextGlobalSystem, messageContextGlobal.getSystem());
+    System.assertEquals(messageContextGlobalSystem, messageContextGlobal.getXsystem());
     Test.stopTest();
   }
 
@@ -139,10 +139,10 @@ private class IBMAssistantV2Test {
     IBMAssistantV2Models.MessageContextSkills messageContextSkills = new IBMAssistantV2Models.MessageContextSkills();
 
     IBMAssistantV2Models.MessageContext messageContext = new IBMAssistantV2Models.MessageContext();
-    messageContext.setGlobal(messageContextGlobal);
+    messageContext.setXglobal(messageContextGlobal);
     messageContext.setSkills(messageContextSkills);
 
-    System.assertEquals(messageContextGlobal, messageContext.getGlobal());
+    System.assertEquals(messageContextGlobal, messageContext.getXglobal());
     System.assertEquals(messageContextSkills, messageContext.getSkills());
     Test.stopTest();
   }
@@ -234,7 +234,7 @@ private class IBMAssistantV2Test {
     Test.startTest();
 
     IBMAssistantV2Models.CaptureGroup captureGroup = new IBMAssistantV2Models.CaptureGroup();
-    captureGroup.setGroup(GROUP_STR);
+    captureGroup.setXgroup(GROUP_STR);
     List<IBMAssistantV2Models.CaptureGroup> captureGroupList = new List<IBMAssistantV2Models.CaptureGroup> { captureGroup };
 
     IBMAssistantV2Models.RuntimeEntity runtimeEntity = new IBMAssistantV2Models.RuntimeEntity();
@@ -291,7 +291,7 @@ private class IBMAssistantV2Test {
     System.assert(response.getContext() != null);
     System.assert(response.getOutput() != null);
 
-    System.assertEquals(ACTION_TYPE, response.getOutput().getActions().get(0).getType());
+    System.assertEquals(ACTION_TYPE, response.getOutput().getActions().get(0).getActionType());
     System.assertEquals(NAME, response.getOutput().getActions().get(0).getName());
     System.assertEquals(KEY_VAL, response.getOutput().getActions().get(0).getParameters());
     System.assertEquals(RESULT_VARIABLE, response.getOutput().getActions().get(0).getResultVariable());
@@ -307,7 +307,7 @@ private class IBMAssistantV2Test {
     System.assertEquals(TEXT, response.getOutput().getGeneric().get(0).getResponseType());
     System.assertEquals(BUTTON, response.getOutput().getGeneric().get(0).getPreference());
     System.assertEquals(TEXT, response.getOutput().getGeneric().get(0).getText());
-    System.assertEquals(TIME_VAL, response.getOutput().getGeneric().get(0).getTime());
+    System.assertEquals(TIME_VAL, response.getOutput().getGeneric().get(0).getXtime());
     System.assert(response.getOutput().getGeneric().get(0).getTyping());
     System.assertEquals(SOURCE, response.getOutput().getGeneric().get(0).getSource());
     System.assertEquals(TITLE, response.getOutput().getGeneric().get(0).getTitle());
