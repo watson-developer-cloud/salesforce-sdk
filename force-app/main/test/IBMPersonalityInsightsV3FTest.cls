@@ -63,7 +63,7 @@ public with sharing class IBMPersonalityInsightsV3FTest {
     return resp;
   }
 
-  public static String testProfileAsCSV(String username, String password) {
+  public static IBMWatsonFile testProfileAsCSV(String username, String password) {
     IBMPersonalityInsightsV3 personalityInsights = new IBMPersonalityInsightsV3('2017-09-01');
 
     if (username != null && password != null) {
@@ -94,6 +94,7 @@ public with sharing class IBMPersonalityInsightsV3FTest {
       .rawScores(true)
       .consumptionPreferences(true)
       .content(content)
+      .csvHeaders(true)
       .html('<html><body>I love Apples not oranges</body></html>')
       .text('Salesforce is making it easier for developers to use IBM Watson\'s artificial intelligence engine within the firm\'s customer relationship management software, which could lead to some exciting new technology for advisers.' +
              ' To kick off the annual Dreamforce conference in San Francisco, Salesforce announced a new IBM Watson SDK, or software development kit. For the non-geeks out there, SDKs help make it easier for coders to develop new features and functionality within a software like Salesforce without having to write all the underlying code.' +
@@ -108,7 +109,7 @@ public with sharing class IBMPersonalityInsightsV3FTest {
              'The partnership with Watson doesn\'t mean Salesforce is abandoning Einstein. The company launched a new tool at Dreamforce called myEinstein, which lets users create AI-powered apps and chat bots without needing any coding knowledge. Salesforce also announced a new partnership with Google that will provide the CRM with access to Google Analytics and Google\'s own AI technology.')
       .build();
 
-    String resp = personalityInsights.getProfileAsCSV(options, true);
+    IBMWatsonFile resp = personalityInsights.profileAsCsv(options);
     System.debug('IBMNaturalLanguageUnderstandingV1FTest.testAnalyze(): ' + resp);
     return resp;
   }
