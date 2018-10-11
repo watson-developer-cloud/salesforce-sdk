@@ -277,20 +277,6 @@ public abstract class IBMWatsonService {
   }
 
   /**
-   * Sets the api key.
-   *
-   * @param endPointParam the new api key. Will be ignored if empty or null
-   */
-  public void setApiKey(String apiKey) {
-    if (String.isNotBlank(apiKey)) {
-      if (this.endPoint.equals(this.defaultEndPoint)) {
-        this.endPoint = 'https://gateway-a.watsonplatform.net/visual-recognition/api';
-      }
-      this.apiKey = apiKey;
-    }
-  }
-
-  /**
    * Sets IAM information.
    *
    * Be aware that if you pass in an access token using this method, you accept responsibility for managing the access
@@ -314,7 +300,7 @@ public abstract class IBMWatsonService {
   }
 
   /**
-   * Gets the apiKey or base64 username:password
+   * Gets the base64 username:password
    *
    *
    * @return the apiKey
