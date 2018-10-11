@@ -15,7 +15,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     IBMNaturalLanguageUnderstandingV1 naturalLanguageUnderstanding = new IBMNaturalLanguageUnderstandingV1('2017-02-27', iamOptions);
     naturalLanguageUnderstanding.setEndPoint('https://gateway.watsonplatform.net/natural-language-understanding/api');
     IBMNaturalLanguageUnderstandingV1Models.ConceptsOptions concepts = new IBMNaturalLanguageUnderstandingV1Models.ConceptsOptionsBuilder()
-      .limitField(40)
+      .xlimit(40)
       .build();
     concepts = concepts.newBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.EmotionOptions emotion = new IBMNaturalLanguageUnderstandingV1Models.EmotionOptionsBuilder()
@@ -25,14 +25,14 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .build();
     emotion = emotion.newBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.EntitiesOptions entities = new IBMNaturalLanguageUnderstandingV1Models.EntitiesOptionsBuilder()
-      .limitField(40)
+      .xlimit(40)
       .model('test')
       .sentiment(true)
       .emotion(true)
       .build();
     entities = entities.newBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.KeywordsOptions keywords = new IBMNaturalLanguageUnderstandingV1Models.KeywordsOptionsBuilder()
-      .limitField(40)
+      .xlimit(40)
       .sentiment(true)
       .emotion(true)
       .build();
@@ -42,7 +42,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .build();
     relations = relations.newBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.SemanticRolesOptions semanticRoles = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesOptionsBuilder()
-      .limitField(40)
+      .xlimit(40)
       .keywords(true)
       .entities(true)
       .build();
@@ -96,7 +96,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(resp.getConcepts()[0].getText(), 'test');
     System.assertEquals(resp.getConcepts()[0].getRelevance(), 0.66382);
     System.assertEquals(resp.getConcepts()[0].getDbpediaResource(), 'test');
-    System.assertEquals(resp.getEntities()[0].getType(), 'Company');
+    System.assertEquals(resp.getEntities()[0].getXtype(), 'Company');
     System.assertEquals(resp.getEntities()[0].getRelevance(), 0.89792);
     System.assertEquals(resp.getEntities()[0].getCount(), 12);
     System.assertEquals(resp.getEntities()[0].getDisambiguation().getName(), 'IBM');
@@ -118,15 +118,15 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(resp.getEmotion().getTargets()[0].getText(), 'test');
     System.assertEquals(resp.getEmotion().getTargets()[0].getEmotion().getAnger(), 0.099437);
     System.assertEquals(resp.getRelations()[0].getArguments()[0].getEntities()[0].getText(), 'test');
-    System.assertEquals(resp.getRelations()[0].getArguments()[0].getEntities()[0].getType(), 'Company');
-    System.assertEquals(resp.getRelations()[0].getType(), 'Company');
+    System.assertEquals(resp.getRelations()[0].getArguments()[0].getEntities()[0].getXtype(), 'Company');
+    System.assertEquals(resp.getRelations()[0].getXtype(), 'Company');
     System.assertEquals(resp.getRelations()[0].getSentence(), 'Company');
     System.assertEquals(resp.getRelations()[0].getScore(), 0.89792);
     System.assertEquals(resp.getMetadata().getAuthors()[0].getName(), 'test');
     System.assertEquals(resp.getMetadata().getTitle(), 'test');
     System.assertEquals(resp.getMetadata().getPublicationDate(), '2017-05-16T13:56:54.957Z');
     System.assertEquals(resp.getSemanticRoles()[0].getSentence(), 'Company');
-    System.assertEquals(resp.getSemanticRoles()[0].getSubject().getEntities()[0].getType(), 'Company');
+    System.assertEquals(resp.getSemanticRoles()[0].getSubject().getEntities()[0].getXtype(), 'Company');
     System.assertEquals(resp.getSemanticRoles()[0].getSubject().getEntities()[0].getText(), 'test');
     System.assertEquals(resp.getSemanticRoles()[0].getSubject().getText(), 'test');
     System.assertEquals(resp.getSemanticRoles()[0].getSubject().getKeywords()[0].getText(), 'test');
@@ -134,8 +134,8 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(resp.getSemanticRoles()[0].getAction().getNormalized(), 'test');
     System.assertEquals(resp.getSemanticRoles()[0].getAction().getVerb().getText(), 'test');
     System.assertEquals(resp.getSemanticRoles()[0].getAction().getVerb().getTense(), 'test');
-    System.assertEquals(resp.getSemanticRoles()[0].getObject().getText(), 'test');
-    System.assertEquals(resp.getSemanticRoles()[0].getObject().getKeywords()[0].getText(), 'test');
+    System.assertEquals(resp.getSemanticRoles()[0].getXobject().getText(), 'test');
+    System.assertEquals(resp.getSemanticRoles()[0].getXobject().getKeywords()[0].getText(), 'test');
     System.assertEquals(resp.getSentiment().getTargets()[0].getText(), 'test');
     System.assertEquals(resp.getSentiment().getTargets()[0].getScore(), 0.89792);
     System.assertEquals(resp.getSentiment().getDocument().getLabel(), 'test');
@@ -160,7 +160,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     conceptsResult.setDbpediaResource('test');
     analysisResults.setConcepts(new List<IBMNaturalLanguageUnderstandingV1Models.ConceptsResult>{conceptsResult});
     IBMNaturalLanguageUnderstandingV1Models.EntitiesResult entitiesResult = new IBMNaturalLanguageUnderstandingV1Models.EntitiesResult();
-    entitiesResult.setType('Company');
+    entitiesResult.setXtype('Company');
     entitiesResult.setRelevance((Double)0.89792);
     entitiesResult.setCount(12);
     entitiesResult.setText('test');
@@ -203,12 +203,12 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     analysisResults.setMetadata(metadataResult);
     IBMNaturalLanguageUnderstandingV1Models.RelationsResult relationsResult = new IBMNaturalLanguageUnderstandingV1Models.RelationsResult();
     relationsResult.setScore((Double)0.89792);
-    relationsResult.setType('Company');
+    relationsResult.setXtype('Company');
     relationsResult.setSentence('Company');
     IBMNaturalLanguageUnderstandingV1Models.RelationArgument relationArgument = new IBMNaturalLanguageUnderstandingV1Models.RelationArgument();
     relationArgument.setText('test');
     IBMNaturalLanguageUnderstandingV1Models.RelationEntity relationEntity = new IBMNaturalLanguageUnderstandingV1Models.RelationEntity();
-    relationEntity.setType('Company');
+    relationEntity.setXtype('Company');
     relationEntity.setText('test');
     relationArgument.setEntities(new List<IBMNaturalLanguageUnderstandingV1Models.RelationEntity>{relationEntity});
     relationsResult.setArguments(new List<IBMNaturalLanguageUnderstandingV1Models.RelationArgument>{relationArgument});
@@ -218,7 +218,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     IBMNaturalLanguageUnderstandingV1Models.SemanticRolesSubject semanticRolesSubject = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesSubject();
     semanticRolesSubject.setText('test');
     IBMNaturalLanguageUnderstandingV1Models.SemanticRolesEntity semanticRolesEntity = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesEntity();
-    semanticRolesEntity.setType('Company');
+    semanticRolesEntity.setXtype('Company');
     semanticRolesEntity.setText('test');
     semanticRolesSubject.setEntities(new List<IBMNaturalLanguageUnderstandingV1Models.SemanticRolesEntity>{semanticRolesEntity});
     IBMNaturalLanguageUnderstandingV1Models.SemanticRolesKeyword semanticRolesKeyword = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesKeyword();
@@ -228,7 +228,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     IBMNaturalLanguageUnderstandingV1Models.SemanticRolesAction semanticRolesAction = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesAction();
     semanticRolesResult.setAction(semanticRolesAction);
     IBMNaturalLanguageUnderstandingV1Models.SemanticRolesObject semanticRolesObject = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesObject();
-    semanticRolesResult.setObject(semanticRolesObject);
+    semanticRolesResult.setXobject(semanticRolesObject);
     analysisResults.setSemanticRoles(new List<IBMNaturalLanguageUnderstandingV1Models.SemanticRolesResult>{semanticRolesResult});
     IBMNaturalLanguageUnderstandingV1Models.SentimentResult sentimentResult = new IBMNaturalLanguageUnderstandingV1Models.SentimentResult();
     analysisResults.setSentiment(sentimentResult);
@@ -241,7 +241,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(analysisResults.getConcepts()[0].getText(), 'test');
     System.assertEquals(analysisResults.getConcepts()[0].getRelevance(), 0.66382);
     System.assertEquals(analysisResults.getConcepts()[0].getDbpediaResource(), 'test');
-    System.assertEquals(analysisResults.getEntities()[0].getType(), 'Company');
+    System.assertEquals(analysisResults.getEntities()[0].getXtype(), 'Company');
     System.assertEquals(analysisResults.getEntities()[0].getRelevance(), 0.89792);
     System.assertEquals(analysisResults.getEntities()[0].getCount(), 12);
     System.assertEquals(analysisResults.getEntities()[0].getDisambiguation().getName(), 'IBM');
@@ -263,8 +263,8 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(analysisResults.getEmotion().getTargets()[0].getText(), 'test');
     System.assertEquals(analysisResults.getEmotion().getTargets()[0].getEmotion().getAnger(), 0.099437);
     System.assertEquals(analysisResults.getRelations()[0].getArguments()[0].getEntities()[0].getText(), 'test');
-    System.assertEquals(analysisResults.getRelations()[0].getArguments()[0].getEntities()[0].getType(), 'Company');
-    System.assertEquals(analysisResults.getRelations()[0].getType(), 'Company');
+    System.assertEquals(analysisResults.getRelations()[0].getArguments()[0].getEntities()[0].getXtype(), 'Company');
+    System.assertEquals(analysisResults.getRelations()[0].getXtype(), 'Company');
     System.assertEquals(analysisResults.getRelations()[0].getSentence(), 'Company');
     System.assertEquals(analysisResults.getRelations()[0].getScore(), 0.89792);
     Test.stopTest();
