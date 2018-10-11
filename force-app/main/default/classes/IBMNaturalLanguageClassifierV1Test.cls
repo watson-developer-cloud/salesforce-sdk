@@ -111,7 +111,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     String training_data_filename_serialized_name = 'My Classifier Data';
     IBMNaturalLanguageClassifierV1Models.CreateClassifierOptions createClassifierOptions =
       new IBMNaturalLanguageClassifierV1Models.CreateClassifierOptionsBuilder()
-      .trainingMetadata(training_metadata_serialized_name)
+      .metadata(training_metadata_serialized_name)
       .trainingMetadataFilename(training_metadata_filename_serialized_name)
       .trainingData(training_data_serialized_name)
       .trainingDataFilename(training_data_filename_serialized_name)
