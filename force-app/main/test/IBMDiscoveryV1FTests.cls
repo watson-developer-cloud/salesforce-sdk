@@ -2,7 +2,7 @@ public with sharing class IBMDiscoveryV1FTests {
   // Make sure the named credentials below is defined
   private static String NAMED_CREDENTIALS = 'callout:watson_discovery_v1';
   private static String URL = 'https://gateway.watsonplatform.net/discovery/api';
-  private static String VERSION = '2018-05-23';
+  private static String VERSION = '2018-08-01';
   private static String ENVIRONMENT_ID ='20ab41e1-1f5f-4b3f-8745-4173319ad611';
   private static String CONFIGURATION_ID ='8a813a61-3b2d-4d43-b4e0-3d70d8d4e260';
   private static String COLLECTION_ID ='895392cd-a81b-4ba1-b2d8-34c0536f79e6';
@@ -443,7 +443,7 @@ public with sharing class IBMDiscoveryV1FTests {
       discovery.setUsernameAndPassword(username, password);
     }
 
-    List<String> collectionIds=new List<String>{collectionId};
+    List<String> collectionIds = new List<String> { collectionId };
     IBMDiscoveryV1Models.FederatedQueryOptions options = new
      IBMDiscoveryV1Models.FederatedQueryOptionsBuilder()
      .environmentId(environmentId)
@@ -775,8 +775,8 @@ public with sharing class IBMDiscoveryV1FTests {
      IBMDiscoveryV1Models.FederatedQueryNoticesOptionsBuilder()
      .environmentId(environmentId)
      .collectionIds(collectionIds)
-     .returnField(new List<String>{'extracted_metadata.title', 'enriched_text.sentiment.document.label'})
-     .sortField(new List<String>{'extracted_metadata.title', 'enriched_text.sentiment.document.label'})
+     .returnFields(new List<String>{'extracted_metadata.title', 'enriched_text.sentiment.document.label'})
+     .xsort(new List<String>{'extracted_metadata.title', 'enriched_text.sentiment.document.label'})
      .build();
     IBMDiscoveryV1Models.QueryNoticesResponse resp = discovery.federatedQueryNotices(options);
     System.debug('IBMDiscoveryV1FTests.testFederatedQueryNotices: ' + resp);
@@ -1033,7 +1033,7 @@ public with sharing class IBMDiscoveryV1FTests {
     eventData.setDocumentId(accepted.getDocumentId());
     eventData.setSessionToken(sessionToken);
     IBMDiscoveryV1Models.CreateEventOptions createEventOptions = new IBMDiscoveryV1Models.CreateEventOptionsBuilder()
-      .typeField('click')
+      .xtype('click')
       .data(eventData)
       .build();
     IBMDiscoveryV1Models.CreateEventResponse eventResponse = discovery.createEvent(createEventOptions);
