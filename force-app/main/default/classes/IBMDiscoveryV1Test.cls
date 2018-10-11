@@ -163,7 +163,7 @@ private class IBMDiscoveryV1Test {
       discovery.deleteEnvironment(options);
     }
     catch(Exception exptn) {
-      System.assertEquals(exptn.getMessage(), 'environment_id_serialized_name cannot be empty');
+      System.assertEquals(exptn.getMessage(), 'environmentId cannot be empty');
 
     }
     Test.stopTest();
@@ -287,7 +287,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
-    List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
+    List<String> collectionIds= new List<String> { 'Collection1', 'Collection2' };
     IBMDiscoveryV1Models.ListFieldsOptions options = new IBMDiscoveryV1Models.ListFieldsOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionIds(collectionIds)
@@ -400,7 +400,7 @@ private class IBMDiscoveryV1Test {
         discovery.createConfiguration(options);
     }
     catch(Exception exptn) {
-      System.assertEquals(exptn.getMessage(), 'environment_id_serialized_name cannot be empty');
+      System.assertEquals(exptn.getMessage(), 'environmentId cannot be empty');
     }
     Test.stopTest();
   }
@@ -526,7 +526,7 @@ private class IBMDiscoveryV1Test {
         discovery.updateConfiguration(options);
     }
     catch(Exception exptn) {
-      System.assertEquals(exptn.getMessage(), 'configuration_id_serialized_name cannot be empty');
+      System.assertEquals(exptn.getMessage(), 'configurationId cannot be empty');
     }
     Test.stopTest();
   }
@@ -745,7 +745,7 @@ private class IBMDiscoveryV1Test {
         discovery.updateCollection(options);
     }
     catch(Exception exptn) {
-      System.assertEquals(exptn.getMessage(), 'collection_id_serialized_name cannot be empty');
+      System.assertEquals(exptn.getMessage(), 'collectionId cannot be empty');
     }
     Test.stopTest();
   }
@@ -858,15 +858,16 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
-    List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
+    String fields = 'field1,field2';
+    List<String> collectionIds = new List<String> { 'Collection1', 'Collection2' };
     IBMDiscoveryV1Models.FederatedQueryOptions options = new IBMDiscoveryV1Models.FederatedQueryOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionIds(collectionIds)
-      .returnField(collectionIds)
-      .sortField(collectionIds)
+      .returnFields(fields)
+      .xsort(fields)
       .similar(true)
-      .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
-      .similarFields(new List<String> { 'field1', 'field2' })
+      .similarDocumentIds('doc1,doc2')
+      .similarFields('field1,field2')
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -889,21 +890,21 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
-    List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
+    List<String> collectionIds = new List<String> { 'Collection1', 'Collection2' };
     IBMDiscoveryV1Models.FederatedQueryNoticesOptions options = new IBMDiscoveryV1Models.FederatedQueryNoticesOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .addCollectionIds('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
       .collectionIds(collectionIds)
-      .addReturn('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .addSort('asc')
+      .addReturnFields('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
+      .addXsort('asc')
       .filter('test')
       .query('test')
       .naturalLanguageQuery('test')
       .aggregation('test')
       .count(10)
-      .returnField(new List<String>{'test'})
+      .returnFields(new List<String> { 'test' })
       .offset(10)
-      .sortField(new List<String>{'test'})
+      .xsort(new List<String>{'test'})
       .highlight(true)
       .deduplicateField('test')
       .similar(true)
@@ -926,7 +927,7 @@ private class IBMDiscoveryV1Test {
     queryNoticesResult.setCollectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283');
     resp.setResults(new List<IBMDiscoveryV1Models.QueryNoticesResult>{queryNoticesResult});
     IBMDiscoveryV1Models.QueryAggregation queryAggregation= new IBMDiscoveryV1Models.QueryAggregation();
-    queryAggregation.setType('test');
+    queryAggregation.setXtype('test');
     queryAggregation.setField('test');
     queryAggregation.setMatch('test');
     queryAggregation.setCount(10);
@@ -956,7 +957,7 @@ private class IBMDiscoveryV1Test {
     resp.setDuplicatesRemoved(2);
     System.assertEquals(resp.getMatchingResults(), 4);
     System.assertEquals(resp.getResults()[0].getCollectionId(), '5ae96bb9-80e5-43ea-916e-1f3412fbc283');
-    System.assertEquals(resp.getAggregations()[0].getType(), 'test');
+    System.assertEquals(resp.getAggregations()[0].getXtype(), 'test');
     System.assertEquals(resp.getPassages()[0].getField(), 'test');
     System.assertEquals(resp.getDuplicatesRemoved(), 2);
     System.assertEquals(queryNoticesResult.getId(), '5ae96bb9-80e5-43ea-916e-1f3412fbc283');
@@ -966,7 +967,7 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(queryAggregation.getResults()[0].getKey(), 'test');
     System.assertEquals(aggregationResult.getMatchingResults(), 3);
     System.assertEquals(aggregationResult.getAggregations(), null);
-    System.assertEquals(queryAggregation.getType(), 'test');
+    System.assertEquals(queryAggregation.getXtype(), 'test');
     System.assertEquals(queryAggregation.getField(), 'test');
     System.assertEquals(queryAggregation.getMatch(), 'test');
     System.assertEquals(queryAggregation.getCount(), 10);
@@ -998,16 +999,16 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
-    List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
+    List<String> collectionIds = new List<String> { 'Collection1', 'Collection2' };
     IBMDiscoveryV1Models.QueryOptions options = new IBMDiscoveryV1Models.QueryOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .returnField(collectionIds)
-      .sortField(collectionIds)
-      .passagesFields(collectionIds)
+      .returnFields('return1,return2')
+      .xsort('sort1,sort2')
+      .passagesFields('passage1,passage2')
       .similar(true)
-      .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
-      .similarFields(new List<String> { 'field1', 'field2' })
+      .similarDocumentIds('doc1,doc2')
+      .similarFields('field1,field2')
       .loggingOptOut(true)
       .addHeader('Test-Header', 'test_value')
       .build();
@@ -1031,12 +1032,12 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
-    List<String> collectionIds= new List<String>{'Collection1', 'Collection2'};
+    List<String> collectionIds = new List<String> { 'Collection1', 'Collection2' };
     IBMDiscoveryV1Models.QueryNoticesOptions options = new IBMDiscoveryV1Models.QueryNoticesOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionId('5ae96bb9-80e5-43ea-916e-1f3412fbc283')
-      .returnField(collectionIds)
-      .sortField(collectionIds)
+      .returnFields(collectionIds)
+      .xsort(collectionIds)
       .passagesFields(collectionIds)
       .similar(true)
       .similarDocumentIds(new List<String> { 'doc1', 'doc2' })
@@ -1399,7 +1400,7 @@ private class IBMDiscoveryV1Test {
     enrichment.setDestinationField('test Description');
     enrichment.setSourceField('test Description');
     enrichment.setOverwrite(true);
-    enrichment.setEnrichment('test Description');
+    enrichment.setEnrichmentName('test Description');
     enrichment.setIgnoreDownstreamErrors(true);
     IBMDiscoveryV1Models.NluEnrichmentEmotion enrichmentEmotion = new IBMDiscoveryV1Models.NluEnrichmentEmotionBuilder()
       .document(true)
@@ -1407,7 +1408,7 @@ private class IBMDiscoveryV1Test {
       .build();
     IBMDiscoveryV1Models.NluEnrichmentEntities enrichmentEntities = new IBMDiscoveryV1Models.NluEnrichmentEntitiesBuilder()
       .emotion(true)
-      .limitField(5)
+      .xlimit(5)
       .mentions(true)
       .mentionTypes(true)
       .model('test')
@@ -1416,7 +1417,7 @@ private class IBMDiscoveryV1Test {
       .build();
     IBMDiscoveryV1Models.NluEnrichmentKeywords enrichmentKeywords = new IBMDiscoveryV1Models.NluEnrichmentKeywordsBuilder()
       .emotion(true)
-      .limitField(5)
+      .xlimit(5)
       .sentiment(true)
       .build();
     IBMDiscoveryV1Models.NluEnrichmentRelations enrichmentRelations = new IBMDiscoveryV1Models.NluEnrichmentRelations();
@@ -1424,7 +1425,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.NluEnrichmentSemanticRoles enrichmentSemanticRoles = new IBMDiscoveryV1Models.NluEnrichmentSemanticRolesBuilder()
       .entities(true)
       .keywords(true)
-      .limitField(5)
+      .xlimit(5)
       .build();
     IBMDiscoveryV1Models.NluEnrichmentSentiment enrichmentSentiment = new IBMDiscoveryV1Models.NluEnrichmentSentimentBuilder()
       .document(true)
@@ -1484,25 +1485,25 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(enrichment.getDestinationField(), 'test Description');
     System.assertEquals(enrichment.getSourceField(), 'test Description');
     System.assertEquals(enrichment.getOverwrite(), true);
-    System.assertEquals(enrichment.getEnrichment(), 'test Description');
+    System.assertEquals(enrichment.getEnrichmentName(), 'test Description');
     System.assertEquals(enrichment.getIgnoreDownstreamErrors(), true);
     System.assertEquals(enrichmentOptions.getModel(), 'test');
     System.assertEquals(enrichmentOptions.getFeatures().getEmotion().getDocument(), true);
     System.assertEquals(enrichmentOptions.getFeatures().getEmotion().getTargets()[0], 'Target1');
     System.assertEquals(enrichmentOptions.getFeatures().getEntities().getEmotion(), true);
-    System.assertEquals(enrichmentOptions.getFeatures().getEntities().getLimit(), 5);
+    System.assertEquals(enrichmentOptions.getFeatures().getEntities().getXlimit(), 5);
     System.assertEquals(enrichmentOptions.getFeatures().getEntities().getMentions(), true);
     System.assertEquals(enrichmentOptions.getFeatures().getEntities().getMentionTypes(), true);
     System.assertEquals(enrichmentOptions.getFeatures().getEntities().getModel(), 'test');
     System.assertEquals(enrichmentOptions.getFeatures().getEntities().getSentenceLocation(), true);
     System.assertEquals(enrichmentOptions.getFeatures().getEntities().getSentiment(), true);
     System.assertEquals(enrichmentOptions.getFeatures().getKeywords().getEmotion(), true);
-    System.assertEquals(enrichmentOptions.getFeatures().getKeywords().getLimit(), 5);
+    System.assertEquals(enrichmentOptions.getFeatures().getKeywords().getXlimit(), 5);
     System.assertEquals(enrichmentOptions.getFeatures().getKeywords().getSentiment(), true);
     System.assertEquals(enrichmentOptions.getFeatures().getRelations().getModel(), 'test');
     System.assertEquals(enrichmentOptions.getFeatures().getSemanticRoles().getEntities(), true);
     System.assertEquals(enrichmentOptions.getFeatures().getSemanticRoles().getKeywords(), true);
-    System.assertEquals(enrichmentOptions.getFeatures().getSemanticRoles().getLimit(), 5);
+    System.assertEquals(enrichmentOptions.getFeatures().getSemanticRoles().getXlimit(), 5);
     System.assertEquals(enrichmentOptions.getFeatures().getSentiment().getDocument(), true);
     System.assertEquals(enrichmentOptions.getFeatures().getSentiment().getTargets()[0], 'Target1');
     Test.stopTest();
@@ -1739,7 +1740,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.QueryEntitiesContext context = new IBMDiscoveryV1Models.QueryEntitiesContext();
     context.setText('text');
     IBMDiscoveryV1Models.QueryEntitiesEntity entity = new IBMDiscoveryV1Models.QueryEntitiesEntity();
-    entity.setType('type');
+    entity.setXtype('type');
     entity.setText('text');
     IBMDiscoveryV1Models.QueryEntitiesOptions options = new IBMDiscoveryV1Models.QueryEntitiesOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
@@ -1755,13 +1756,13 @@ private class IBMDiscoveryV1Test {
 
     System.assertEquals(1, resp.getEntities().size());
     System.assertEquals('Steve Jobs', resp.getEntities().get(0).getText());
-    System.assertEquals('PERSON', resp.getEntities().get(0).getType());
+    System.assertEquals('PERSON', resp.getEntities().get(0).getXtype());
     System.assertEquals(1, resp.getEntities().get(0).getEvidence().size());
     System.assertEquals('cb77ce6b-bb93-42a0-8643-dfb523e14da8', resp.getEntities().get(0).getEvidence().get(0).getDocumentId());
     System.assertEquals('description', resp.getEntities().get(0).getEvidence().get(0).getField());
     System.assertEquals(305, resp.getEntities().get(0).getEvidence().get(0).getStartOffset());
     System.assertEquals(392, resp.getEntities().get(0).getEvidence().get(0).getEndOffset());
-    System.assertEquals('Person', resp.getEntities().get(0).getEvidence().get(0).getEntities().get(0).getType());
+    System.assertEquals('Person', resp.getEntities().get(0).getEvidence().get(0).getEntities().get(0).getXtype());
     System.assertEquals('Steve Jobs', resp.getEntities().get(0).getEvidence().get(0).getEntities().get(0).getText());
     System.assertEquals(311, resp.getEntities().get(0).getEvidence().get(0).getEntities().get(0).getStartOffset());
     System.assertEquals(321, resp.getEntities().get(0).getEvidence().get(0).getEntities().get(0).getEndOffset());
@@ -1780,7 +1781,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.QueryEntitiesContext context = new IBMDiscoveryV1Models.QueryEntitiesContext();
     context.setText('text');
     IBMDiscoveryV1Models.QueryRelationsEntity entity = new IBMDiscoveryV1Models.QueryRelationsEntity();
-    entity.setType('text');
+    entity.setXtype('text');
     entity.setExact(true);
     entity.setText('text');
     IBMDiscoveryV1Models.QueryFilterType filterType = new IBMDiscoveryV1Models.QueryFilterType();
@@ -1798,21 +1799,21 @@ private class IBMDiscoveryV1Test {
       .count(10)
       .evidenceCount(10)
       .filter(filter)
-      .sortField('text')
+      .xsort('text')
       .addHeader('Test-Header', 'test_value')
       .build();
     IBMDiscoveryV1Models.QueryRelationsResponse resp = discovery.queryRelations(options);
 
     System.assertEquals(1, resp.getRelations().size());
-    System.assertEquals('FOUNDEROF', resp.getRelations().get(0).getType());
+    System.assertEquals('FOUNDEROF', resp.getRelations().get(0).getXtype());
     System.assertEquals(7, resp.getRelations().get(0).getFrequency());
-    System.assertEquals('PERSON', resp.getRelations().get(0).getArguments().get(0).getEntities().get(0).getType());
+    System.assertEquals('PERSON', resp.getRelations().get(0).getArguments().get(0).getEntities().get(0).getXtype());
     System.assertEquals('Steve Jobs', resp.getRelations().get(0).getArguments().get(0).getEntities().get(0).getText());
     System.assertEquals('b95df4c1-d00f-4771-abb2-a52baea0444a', resp.getRelations().get(0).getEvidence().get(0).getDocumentId());
     System.assertEquals('text', resp.getRelations().get(0).getEvidence().get(0).getField());
     System.assertEquals(243, resp.getRelations().get(0).getEvidence().get(0).getStartOffset());
     System.assertEquals(303, resp.getRelations().get(0).getEvidence().get(0).getEndOffset());
-    System.assertEquals('Person', resp.getRelations().get(0).getEvidence().get(0).getEntities().get(0).getType());
+    System.assertEquals('Person', resp.getRelations().get(0).getEvidence().get(0).getEntities().get(0).getXtype());
     System.assertEquals('Steve Jobs', resp.getRelations().get(0).getEvidence().get(0).getEntities().get(0).getText());
     System.assertEquals(243, resp.getRelations().get(0).getEvidence().get(0).getEntities().get(0).getStartOffset());
     System.assertEquals(253, resp.getRelations().get(0).getEvidence().get(0).getEntities().get(0).getEndOffset());
@@ -2031,12 +2032,12 @@ private class IBMDiscoveryV1Test {
     eventData.setSessionToken(sessionToken);
     eventData.setClientTimestamp(dateValue);
     IBMDiscoveryV1Models.CreateEventOptions createEventOptions = new IBMDiscoveryV1Models.CreateEventOptionsBuilder()
-        .typeField(eventType)
+        .xtype(eventType)
         .data(eventData)
         .build();
     IBMDiscoveryV1Models.CreateEventResponse response = discovery.createEvent(createEventOptions);
 
-    System.assertEquals(eventType, response.getType());
+    System.assertEquals(eventType, response.getXtype());
     System.assertEquals(ENVIRONMENT_ID, response.getData().getEnvironmentId());
     System.assertEquals(collectionId, response.getData().getCollectionId());
     System.assertEquals(documentId, response.getData().getDocumentId());
@@ -2257,8 +2258,8 @@ private class IBMDiscoveryV1Test {
     String queryId = 'mock_queryid';
 
     IBMDiscoveryV1Models.QueryLogOptions options = new IBMDiscoveryV1Models.QueryLogOptionsBuilder()
-        .sortField(sortList)
-        .addSort(extraSort)
+        .xsort(sortList)
+        .addXsort(extraSort)
         .count(count)
         .filter(filter)
         .offset(offset)
