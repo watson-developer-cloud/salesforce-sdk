@@ -28,7 +28,7 @@ private class IBMVisualRecognitionV3Test {
     System.assertEquals(resp.getImages()[0].getError().getDescription(), 'string');
     System.assertEquals(resp.getImages()[0].getClassifiers()[0].getName(), 'string');
     System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClassifierId(), 'string');
-    System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClasses()[0].getClass(), 'string');
+    System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClasses()[0].getClassName(), 'string');
     System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClasses()[0].getScore(),0);
     System.assertEquals(resp.getImages()[0].getClassifiers()[0].getClasses()[0].getTypeHierarchy(), 'string');
     System.assertEquals(resp.getWarnings()[0].getWarningId(), 'string');
@@ -44,9 +44,10 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
-    visualRecognition.setEndPoint('https://gateway-a.watsonplatform.net/visual-recognition/api/');
-    visualRecognition.setApiKey('80bc2e663293e8d13564c260cdb4cbf891b606c0');
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -78,10 +79,11 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
     visualRecognition.setEndPoint(NAMED_CREDENTIALS);
-    //visualRecognition.setEndPoint('https://gateway.watsonplatform.net/visual-recognition/api/');
-    //visualRecognition.setApiKey('6d2ff6fd28d756d57f12140f9cef4e9103893a72');
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -126,10 +128,11 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
     visualRecognition.setEndPoint(NAMED_CREDENTIALS);
-    //visualRecognition.setEndPoint('https://gateway.watsonplatform.net/visual-recognition/api/');
-    //visualRecognition.setApiKey('6d2ff6fd28d756d57f12140f9cef4e9103893a72');
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -155,7 +158,7 @@ private class IBMVisualRecognitionV3Test {
     System.assertEquals(resp.getOwner(), 'string');
     System.assertEquals(resp.getStatus(), 'ready');
     System.assertEquals(resp.getExplanation(), 'string');
-    System.assertEquals(resp.getClasses()[0].getClass(), 'string');
+    System.assertEquals(resp.getClasses()[0].getClassName(), 'string');
     Test.stopTest();
   }
   /**
@@ -167,10 +170,11 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
     visualRecognition.setEndPoint(NAMED_CREDENTIALS);
-    //visualRecognition.setEndPoint('https://gateway.watsonplatform.net/visual-recognition/api/');
-    //visualRecognition.setApiKey('6d2ff6fd28d756d57f12140f9cef4e9103893a72');
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -200,10 +204,11 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
     visualRecognition.setEndPoint(NAMED_CREDENTIALS);
-    //visualRecognition.setEndPoint('https://gateway.watsonplatform.net/visual-recognition/api/');
-    //visualRecognition.setApiKey('6d2ff6fd28d756d57f12140f9cef4e9103893a72');
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -236,10 +241,11 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
     visualRecognition.setEndPoint(NAMED_CREDENTIALS);
-    //visualRecognition.setEndPoint('https://gateway.watsonplatform.net/visual-recognition/api/');
-    //visualRecognition.setApiKey('6d2ff6fd28d756d57f12140f9cef4e9103893a72');
     Attachment att = new Attachment(Body=Blob.valueOf('test string'),
       Name='test.txt',
       Description='test description',
@@ -268,7 +274,10 @@ private class IBMVisualRecognitionV3Test {
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
     visualRecognition.setEndPoint(NAMED_CREDENTIALS);
     IBMVisualRecognitionV3Models.ListClassifiersOptions options = new IBMVisualRecognitionV3Models.ListClassifiersOptionsBuilder()
       .verbose(true)
@@ -291,7 +300,10 @@ private class IBMVisualRecognitionV3Test {
     Test.setMock(HttpCalloutMock.class, mockResponse);
     Test.startTest();
 
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey('apikey')
+      .build();
+    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', iamOptions);
     visualRecognition.setEndPoint(NAMED_CREDENTIALS);
 
     String customerId = 'salesforce_sdk_test_id';
@@ -304,16 +316,5 @@ private class IBMVisualRecognitionV3Test {
     visualRecognition.deleteUserData(deleteOptions);
 
     Test.stopTest();
-  }
-
-  /**
-   * Tests that when this service is authenticated with an API key, the endpoint is changed to the correct one.
-   */
-  static testMethod void testApiKeyEndPoint() {
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20');
-    visualRecognition.setApiKey(API_KEY);
-    String correctEndPoint = visualRecognition.getEndPoint();
-
-    System.assertEquals('https://gateway-a.watsonplatform.net/visual-recognition/api', correctEndPoint);
   }
 }
