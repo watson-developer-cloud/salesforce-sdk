@@ -77,12 +77,16 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    * character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
    * service removes HTML tags and analyzes only the textual content.
    *
+   * **See also:** [Using the general-purpose
+   * endpoint](https://console.bluemix.net/docs/services/tone-analyzer/using-tone.html#using-the-general-purpose-endpoint).
+   *
    * @param toneOptions the {@link IBMToneAnalyzerV3Models.ToneOptions} containing the options for the call
    * @return the {@link IBMToneAnalyzerV3Models.ToneAnalysis} with the response
    */
   public IBMToneAnalyzerV3Models.ToneAnalysis tone(IBMToneAnalyzerV3Models.ToneOptions toneOptions) {
     IBMWatsonValidator.notNull(toneOptions, 'toneOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/tone');
+    builder.addHeader('Accept', 'application/json');
     builder.addHeader('Content-Type', toneOptions.contentType());
     if (toneOptions.contentLanguage() != null) {
       builder.addHeader('Content-Language', toneOptions.contentLanguage());
@@ -103,12 +107,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
     if (toneOptions.tones() != null) {
       builder.query('tones', String.join(toneOptions.tones(), ','));
     }
-    if (toneOptions.contentType().equalsIgnoreCase(IBMWatsonHttpMediaType.APPLICATION_JSON)) {
-      builder.bodyJson(JSON.serialize(toneOptions.toneInput(), true));
-    }
-    else {
-      builder.bodyContent(toneOptions.body(), toneOptions.contentType());
-    }
+    builder.bodyContent(toneOptions.contentType(), toneOptions.toneInput(), null, toneOptions.body());
 
     return (IBMToneAnalyzerV3Models.ToneAnalysis) createServiceCall(builder.build(), IBMToneAnalyzerV3Models.ToneAnalysis.class);
   }
@@ -123,9 +122,11 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    * If you submit more than 50 utterances, the service returns a warning for the overall content and analyzes only the
    * first 50 utterances. If you submit a single utterance that contains more than 500 characters, the service returns
    * an error for that utterance and does not analyze the utterance. The request fails if all utterances have more than
-   * 500 characters.
+   * 500 characters. Per the JSON specification, the default character encoding for JSON content is effectively always
+   * UTF-8.
    *
-   * Per the JSON specification, the default character encoding for JSON content is effectively always UTF-8.
+   * **See also:** [Using the customer-engagement
+   * endpoint](https://console.bluemix.net/docs/services/tone-analyzer/using-tone-chat.html#using-the-customer-engagement-endpoint).
    *
    * @param toneChatOptions the {@link IBMToneAnalyzerV3Models.ToneChatOptions} containing the options for the call
    * @return the {@link IBMToneAnalyzerV3Models.UtteranceAnalyses} with the response
@@ -133,6 +134,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
   public IBMToneAnalyzerV3Models.UtteranceAnalyses toneChat(IBMToneAnalyzerV3Models.ToneChatOptions toneChatOptions) {
     IBMWatsonValidator.notNull(toneChatOptions, 'toneChatOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/tone_chat');
+    builder.addHeader('Accept', 'application/json');
     if (toneChatOptions.contentLanguage() != null) {
       builder.addHeader('Content-Language', toneChatOptions.contentLanguage());
     }

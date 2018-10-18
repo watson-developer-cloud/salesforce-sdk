@@ -201,7 +201,7 @@ public with sharing class IBMAssistantV1FTests {
     IBMAssistantV1Models.GetIntentOptions getOptions = new IBMAssistantV1Models.GetIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent('TestIntent')
-      .exportField(true)
+      .xexport(true)
       .build();
     IBMAssistantV1Models.IntentExport response = assistant.getIntent(getOptions);
 
@@ -217,7 +217,7 @@ public with sharing class IBMAssistantV1FTests {
 
     IBMAssistantV1Models.ListIntentsOptions listOptions = new IBMAssistantV1Models.ListIntentsOptionsBuilder()
       .workspaceId(workspaceId)
-      .exportField(true)
+      .xexport(true)
       .build();
     IBMAssistantV1Models.IntentCollection response = assistant.listIntents(listOptions);
 
@@ -376,7 +376,7 @@ public with sharing class IBMAssistantV1FTests {
     IBMAssistantV1Models.GetEntityOptions getOptions = new IBMAssistantV1Models.GetEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity('City')
-      .exportField(true)
+      .xexport(true)
       .build();
     IBMAssistantV1Models.EntityExport response = assistant.getEntity(getOptions);
 
@@ -392,7 +392,7 @@ public with sharing class IBMAssistantV1FTests {
 
     IBMAssistantV1Models.ListEntitiesOptions listOptions = new IBMAssistantV1Models.ListEntitiesOptionsBuilder()
       .workspaceId(workspaceId)
-      .exportField(true)
+      .xexport(true)
       .build();
     IBMAssistantV1Models.EntityCollection response = assistant.listEntities(listOptions);
 
@@ -459,7 +459,7 @@ public with sharing class IBMAssistantV1FTests {
       .workspaceId(workspaceId)
       .entity('City')
       .value('Boston')
-      .exportField(true)
+      .xexport(true)
       .build();
     IBMAssistantV1Models.ValueExport response = assistant.getValue(getOptions);
 

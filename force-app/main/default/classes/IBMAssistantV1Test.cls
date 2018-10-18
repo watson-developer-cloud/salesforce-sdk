@@ -164,7 +164,7 @@ private class IBMAssistantV1Test {
     createIntent = createIntent.newBuilder().build();
     IBMAssistantV1Models.DialogNodeAction  dialogNodeAction = new IBMAssistantV1Models.DialogNodeAction();
     dialogNodeAction.setName('test');
-    dialogNodeAction.setType('test');
+    dialogNodeAction.setActionType('test');
     dialogNodeAction.setParameters(metadata);
     dialogNodeAction.setResultVariable('test');
     dialogNodeAction.setCredentials('test');
@@ -186,7 +186,7 @@ private class IBMAssistantV1Test {
       .nextStep(dialogNodeNextStep)
       .actions(new List<IBMAssistantV1Models.DialogNodeAction>{dialogNodeAction})
       .title('test')
-      .typeField('test')
+      .nodeType('test')
       .eventName('test')
       .variable('test')
       .userLabel(userLabel)
@@ -199,7 +199,7 @@ private class IBMAssistantV1Test {
       .metadata(metadata)
       .synonyms(new List<String>{'test1', 'test2'})
       .patterns(new List<String>{'test1', 'test2'})
-      .typeField('test')
+      .valueType('test')
       .build();
     createValue = createValue.newBuilder().build();
     IBMAssistantV1Models.CreateEntity createEntity = new IBMAssistantV1Models.CreateEntityBuilder('test')
@@ -311,12 +311,12 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getMetadata(), metadata);
-    System.assertEquals(response.getIntents().get(0).getIntent(), intentName);
+    System.assertEquals(response.getIntents().get(0).getIntentName(), intentName);
     System.assertEquals(response.getIntents().get(0).getDescription(), intentDescription);
-    System.assertEquals(response.getIntents().get(0).getExamples().get(0).getText(), exampleText);
-    System.assertEquals(response.getEntities().get(0).getEntity(), entityName);
+    System.assertEquals(response.getIntents().get(0).getExamples().get(0).getExampleText(), exampleText);
+    System.assertEquals(response.getEntities().get(0).getEntityName(), entityName);
     System.assertEquals(response.getEntities().get(0).getDescription(), entityDescription);
-    System.assertEquals(response.getEntities().get(0).getValues().get(0).getValue(), valueName);
+    System.assertEquals(response.getEntities().get(0).getValues().get(0).getValueText(), valueName);
     System.assertEquals(response.getEntities().get(0).getValues().get(0).getSynonyms().get(0), valueSynonym);
     System.assertEquals(response.getCounterexamples().get(0).getText(), counterexampleText);
     System.assertEquals(response.getDialogNodes(), new List<IBMAssistantV1Models.DialogNode>());
@@ -436,7 +436,7 @@ private class IBMAssistantV1Test {
     createOptions = createOptions.newBuilder().build();
     IBMAssistantV1Models.Value response = assistant.createValue(createOptions);
 
-    System.assertEquals(response.getValue(), valueName);
+    System.assertEquals(response.getValueText(), valueName);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getMetadata(), metadata);
@@ -488,14 +488,14 @@ private class IBMAssistantV1Test {
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
-      .exportField(true)
+      .xexport(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
     IBMAssistantV1Models.ValueExport response = assistant.getValue(getOptions);
 
-    System.assertEquals(response.getValue(), valueName);
+    System.assertEquals(response.getValueText(), valueName);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getMetadata(), metadata);
@@ -530,7 +530,7 @@ private class IBMAssistantV1Test {
     updateOptions = updateOptions.newBuilder().build();
     IBMAssistantV1Models.Value response = assistant.updateValue(updateOptions);
 
-    System.assertEquals(response.getValue(), valueName);
+    System.assertEquals(response.getValueText(), valueName);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getMetadata(), metadata);
@@ -561,7 +561,7 @@ private class IBMAssistantV1Test {
     listOptions = listOptions.newBuilder().build();
     IBMAssistantV1Models.ValueCollection response = assistant.listValues(listOptions);
 
-    System.assertEquals(response.getValues().get(0).getValue(), valueName);
+    System.assertEquals(response.getValues().get(0).getValueText(), valueName);
     System.assertEquals(response.getValues().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getValues().get(0).getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getValues().get(0).getMetadata(), metadata);
@@ -611,7 +611,7 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getInput().getText(), messageInput);
     System.assertEquals(response.getAlternateIntents(), alternateIntents);
     System.assertEquals(response.getContext().getConversationId(), conversationId);
-    System.assertEquals(Long.valueOf((String) response.getContext().getSystem().get(systemResponseKey)), systemResponseValue);
+    System.assertEquals(Long.valueOf((String) response.getContext().getXsystem().get(systemResponseKey)), systemResponseValue);
     System.assertEquals(response.getOutput().getText().get(0), messageResponse);
     System.assertEquals(response.getOutput().getNodesVisited().get(0), nodeVisited);
     System.assertEquals(response.getOutput().getNodesVisitedDetails().get(0).getDialogNode(), nodeVisitedDetailsNode);
@@ -620,7 +620,7 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getOutput().getLogMessages().get(0).getLevel(), logMessageLevel);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getMsg(), logMessageText);
     System.assertEquals(response.getActions().get(0).getName(), actionName);
-    System.assertEquals(response.getActions().get(0).getType(), actionType);
+    System.assertEquals(response.getActions().get(0).getActionType(), actionType);
     System.assertEquals(response.getActions().get(0).getParameters(), actionParameters);
     System.assertEquals(response.getActions().get(0).getResultVariable(), actionResultVariable);
     System.assertEquals(response.getActions().get(0).getCredentials(), actionCredentials);
@@ -650,7 +650,7 @@ private class IBMAssistantV1Test {
     createOptions = createOptions.newBuilder().build();
     IBMAssistantV1Models.Intent response = assistant.createIntent(createOptions);
 
-    System.assertEquals(response.getIntent(), intentName);
+    System.assertEquals(response.getIntentName(), intentName);
     System.assertEquals(response.getDescription(), intentDescription);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
@@ -698,18 +698,18 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.GetIntentOptions getOptions = new IBMAssistantV1Models.GetIntentOptionsBuilder()
       .workspaceId(workspaceId)
       .intent(intentName)
-      .exportField(true)
+      .xexport(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
     IBMAssistantV1Models.IntentExport response = assistant.getIntent(getOptions);
 
-    System.assertEquals(response.getIntent(), intentName);
+    System.assertEquals(response.getIntentName(), intentName);
     System.assertEquals(response.getDescription(), intentDescription);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
-    System.assertEquals(response.getExamples().get(0).getText(), exampleText);
+    System.assertEquals(response.getExamples().get(0).getExampleText(), exampleText);
     System.assertEquals(response.getExamples().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getExamples().get(0).getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     Test.stopTest();
@@ -730,18 +730,18 @@ private class IBMAssistantV1Test {
 
     IBMAssistantV1Models.ListIntentsOptions listOptions = new IBMAssistantV1Models.ListIntentsOptionsBuilder()
       .workspaceId(workspaceId)
-      .exportField(true)
+      .xexport(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
     IBMAssistantV1Models.IntentCollection response = assistant.listIntents(listOptions);
 
-    System.assertEquals(response.getIntents().get(0).getIntent(), intentName);
+    System.assertEquals(response.getIntents().get(0).getIntentName(), intentName);
     System.assertEquals(response.getIntents().get(0).getDescription(), intentDescription);
     System.assertEquals(response.getIntents().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getIntents().get(0).getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
-    System.assertEquals(response.getIntents().get(0).getExamples().get(0).getText(), exampleText);
+    System.assertEquals(response.getIntents().get(0).getExamples().get(0).getExampleText(), exampleText);
     System.assertEquals(response.getIntents().get(0).getExamples().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getIntents().get(0).getExamples().get(0).getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getPagination().getRefreshUrl(), refreshUrl);
@@ -776,7 +776,7 @@ private class IBMAssistantV1Test {
     updateOptions = updateOptions.newBuilder().build();
     IBMAssistantV1Models.Intent response = assistant.updateIntent(updateOptions);
 
-    System.assertEquals(response.getIntent(), intentName);
+    System.assertEquals(response.getIntentName(), intentName);
     System.assertEquals(response.getDescription(), intentDescription);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
@@ -819,7 +819,7 @@ private class IBMAssistantV1Test {
 
     mentionsList.add(mentions2);
 
-    System.assertEquals(response.getText(), exampleText);
+    System.assertEquals(response.getExampleText(), exampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     Test.stopTest();
@@ -874,7 +874,7 @@ private class IBMAssistantV1Test {
     getOptions = getOptions.newBuilder().build();
     IBMAssistantV1Models.Example response = assistant.getExample(getOptions);
 
-    System.assertEquals(response.getText(), exampleText);
+    System.assertEquals(response.getExampleText(), exampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     Test.stopTest();
@@ -902,7 +902,7 @@ private class IBMAssistantV1Test {
     listOptions = listOptions.newBuilder().build();
     IBMAssistantV1Models.ExampleCollection response = assistant.listExamples(listOptions);
 
-    System.assertEquals(response.getExamples().get(0).getText(), exampleText);
+    System.assertEquals(response.getExamples().get(0).getExampleText(), exampleText);
     System.assertEquals(response.getExamples().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getExamples().get(0).getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getPagination().getRefreshUrl(), refreshUrl);
@@ -947,7 +947,7 @@ private class IBMAssistantV1Test {
     updateOptions = updateOptions.newBuilder().build();
     IBMAssistantV1Models.Example response = assistant.updateExample(updateOptions);
 
-    System.assertEquals(response.getText(), exampleText);
+    System.assertEquals(response.getExampleText(), exampleText);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     Test.stopTest();
@@ -976,7 +976,7 @@ private class IBMAssistantV1Test {
     createOptions = createOptions.newBuilder().build();
     IBMAssistantV1Models.Entity response = assistant.createEntity(createOptions);
 
-    System.assertEquals(response.getEntity(), entityName);
+    System.assertEquals(response.getEntityName(), entityName);
     System.assertEquals(response.getDescription(), entityDescription);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
@@ -1026,20 +1026,20 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.GetEntityOptions getOptions = new IBMAssistantV1Models.GetEntityOptionsBuilder()
       .workspaceId(workspaceId)
       .entity(entityName)
-      .exportField(true)
+      .xexport(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
     IBMAssistantV1Models.EntityExport response = assistant.getEntity(getOptions);
 
-    System.assertEquals(response.getEntity(), entityName);
+    System.assertEquals(response.getEntityName(), entityName);
     System.assertEquals(response.getDescription(), entityDescription);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getMetadata(), metadata);
     System.assertEquals(response.getFuzzyMatch(), fuzzyMatch);
-    System.assertEquals(response.getValues().get(0).getValue(), valueName);
+    System.assertEquals(response.getValues().get(0).getValueText(), valueName);
     System.assertEquals(response.getValues().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getValues().get(0).getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getValues().get(0).getMetadata(), metadata);
@@ -1063,20 +1063,20 @@ private class IBMAssistantV1Test {
 
     IBMAssistantV1Models.ListEntitiesOptions listOptions = new IBMAssistantV1Models.ListEntitiesOptionsBuilder()
       .workspaceId(workspaceId)
-      .exportField(true)
+      .xexport(true)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     listOptions = listOptions.newBuilder().build();
     IBMAssistantV1Models.EntityCollection response = assistant.listEntities(listOptions);
 
-    System.assertEquals(response.getEntities().get(0).getEntity(), entityName);
+    System.assertEquals(response.getEntities().get(0).getEntityName(), entityName);
     System.assertEquals(response.getEntities().get(0).getDescription(), entityDescription);
     System.assertEquals(response.getEntities().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getEntities().get(0).getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getEntities().get(0).getMetadata(), metadata);
     System.assertEquals(response.getEntities().get(0).getFuzzyMatch(), fuzzyMatch);
-    System.assertEquals(response.getEntities().get(0).getValues().get(0).getValue(), valueName);
+    System.assertEquals(response.getEntities().get(0).getValues().get(0).getValueText(), valueName);
     System.assertEquals(response.getEntities().get(0).getValues().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getEntities().get(0).getValues().get(0).getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getEntities().get(0).getValues().get(0).getMetadata(), metadata);
@@ -1112,7 +1112,7 @@ private class IBMAssistantV1Test {
     updateOptions = updateOptions.newBuilder().build();
     IBMAssistantV1Models.Entity response = assistant.updateEntity(updateOptions);
 
-    System.assertEquals(response.getEntity(), entityName);
+    System.assertEquals(response.getEntityName(), entityName);
     System.assertEquals(response.getDescription(), entityDescription);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
@@ -1145,7 +1145,7 @@ private class IBMAssistantV1Test {
     createOptions = createOptions.newBuilder().build();
     IBMAssistantV1Models.Synonym response = assistant.createSynonym(createOptions);
 
-    System.assertEquals(response.getSynonym(), valueSynonym);
+    System.assertEquals(response.getSynonymText(), valueSynonym);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     Test.stopTest();
@@ -1202,7 +1202,7 @@ private class IBMAssistantV1Test {
     getOptions = getOptions.newBuilder().build();
     IBMAssistantV1Models.Synonym response = assistant.getSynonym(getOptions);
 
-    System.assertEquals(response.getSynonym(), valueSynonym);
+    System.assertEquals(response.getSynonymText(), valueSynonym);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     Test.stopTest();
@@ -1231,7 +1231,7 @@ private class IBMAssistantV1Test {
     listOptions = listOptions.newBuilder().build();
     IBMAssistantV1Models.SynonymCollection response = assistant.listSynonyms(listOptions);
 
-    System.assertEquals(response.getSynonyms().get(0).getSynonym(), valueSynonym);
+    System.assertEquals(response.getSynonyms().get(0).getSynonymText(), valueSynonym);
     System.assertEquals(response.getSynonyms().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getSynonyms().get(0).getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getPagination().getRefreshUrl(), refreshUrl);
@@ -1266,7 +1266,7 @@ private class IBMAssistantV1Test {
     updateOptions = updateOptions.newBuilder().build();
     IBMAssistantV1Models.Synonym response = assistant.updateSynonym(updateOptions);
 
-    System.assertEquals(response.getSynonym(), valueSynonym);
+    System.assertEquals(response.getSynonymText(), valueSynonym);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     Test.stopTest();
@@ -1300,7 +1300,7 @@ private class IBMAssistantV1Test {
     createOptions = createOptions.newBuilder().build();
     IBMAssistantV1Models.DialogNode response = assistant.createDialogNode(createOptions);
 
-    System.assertEquals(response.getDialogNode(), dialogNodeName);
+    System.assertEquals(response.getDialogNodeId(), dialogNodeName);
     System.assertEquals(response.getDescription(), dialogNodeDescription);
     System.assertEquals(response.getTitle(), dialogNodeTitle);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1315,11 +1315,11 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getMetadata(), metadata);
     System.assertEquals(response.getContext(), dialogNodeContext);
     System.assertEquals(response.getActions().get(0).getName(), actionName);
-    System.assertEquals(response.getActions().get(0).getType(), actionType);
+    System.assertEquals(response.getActions().get(0).getActionType(), actionType);
     System.assertEquals(response.getActions().get(0).getParameters(), actionParameters);
     System.assertEquals(response.getActions().get(0).getResultVariable(), actionResultVariable);
     System.assertEquals(response.getActions().get(0).getCredentials(), actionCredentials);
-    System.assertEquals(response.getType(), dialogNodeType);
+    System.assertEquals(response.getNodeType(), dialogNodeType);
     System.assertEquals(response.getEventName(), dialogNodeEventName);
     System.assertEquals(response.getVariable(), dialogNodeVariable);
     System.assertEquals(response.getDigressIn(), dialogNodeDigressIn);
@@ -1375,7 +1375,7 @@ private class IBMAssistantV1Test {
     getOptions = getOptions.newBuilder().build();
     IBMAssistantV1Models.DialogNode response = assistant.getDialogNode(getOptions);
 
-    System.assertEquals(response.getDialogNode(), dialogNodeName);
+    System.assertEquals(response.getDialogNodeId(), dialogNodeName);
     System.assertEquals(response.getDescription(), dialogNodeDescription);
     System.assertEquals(response.getTitle(), dialogNodeTitle);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1390,11 +1390,11 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getMetadata(), metadata);
     System.assertEquals(response.getContext(), dialogNodeContext);
     System.assertEquals(response.getActions().get(0).getName(), actionName);
-    System.assertEquals(response.getActions().get(0).getType(), actionType);
+    System.assertEquals(response.getActions().get(0).getActionType(), actionType);
     System.assertEquals(response.getActions().get(0).getParameters(), actionParameters);
     System.assertEquals(response.getActions().get(0).getResultVariable(), actionResultVariable);
     System.assertEquals(response.getActions().get(0).getCredentials(), actionCredentials);
-    System.assertEquals(response.getType(), dialogNodeType);
+    System.assertEquals(response.getNodeType(), dialogNodeType);
     System.assertEquals(response.getEventName(), dialogNodeEventName);
     System.assertEquals(response.getVariable(), dialogNodeVariable);
     Test.stopTest();
@@ -1421,7 +1421,7 @@ private class IBMAssistantV1Test {
     listOptions = listOptions.newBuilder().build();
     IBMAssistantV1Models.DialogNodeCollection response = assistant.listDialogNodes(listOptions);
 
-    System.assertEquals(response.getDialogNodes().get(0).getDialogNode(), dialogNodeName);
+    System.assertEquals(response.getDialogNodes().get(0).getDialogNodeId(), dialogNodeName);
     System.assertEquals(response.getDialogNodes().get(0).getDescription(), dialogNodeDescription);
     System.assertEquals(response.getDialogNodes().get(0).getTitle(), dialogNodeTitle);
     System.assertEquals(response.getDialogNodes().get(0).getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1478,7 +1478,7 @@ private class IBMAssistantV1Test {
     updateOptions = updateOptions.newBuilder().build();
     IBMAssistantV1Models.DialogNode response = assistant.updateDialogNode(updateOptions);
 
-    System.assertEquals(response.getDialogNode(), dialogNodeName);
+    System.assertEquals(response.getDialogNodeId(), dialogNodeName);
     System.assertEquals(response.getDescription(), dialogNodeDescription);
     System.assertEquals(response.getTitle(), dialogNodeTitle);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
@@ -1535,7 +1535,7 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getLogs().get(0).getResponse().getInput().getText(), messageInput);
     System.assertEquals(response.getLogs().get(0).getResponse().getAlternateIntents(), alternateIntents);
     System.assertEquals(response.getLogs().get(0).getResponse().getContext().getConversationId(), conversationId);
-    System.assertEquals(Long.valueOf((String)response.getLogs().get(0).getResponse().getContext().getSystem().get(systemResponseKey)), systemResponseValue);
+    System.assertEquals(Long.valueOf((String)response.getLogs().get(0).getResponse().getContext().getXsystem().get(systemResponseKey)), systemResponseValue);
     System.assertEquals(response.getLogs().get(0).getResponse().getOutput().getText().get(0), messageResponse);
     System.assertEquals(response.getLogs().get(0).getResponse().getOutput().getNodesVisited().get(0), nodeVisited);
     System.assertEquals(response.getLogs().get(0).getResponse().getOutput().getLogMessages().get(0).getLevel(), logMessageLevel);

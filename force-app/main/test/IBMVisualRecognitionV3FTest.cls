@@ -1,92 +1,42 @@
 public with sharing class IBMVisualRecognitionV3FTest {
-  // Make sure the named credentials below is defined
-  private static String NAMED_CREDENTIALS = 'callout:watson_visual_recognition_v3';
-  private static String API_KEY = '<your API key>';
-  private static String attachmentId = '<your attachment id>';
+  private static String URL = 'https://gateway.watsonplatform.net/visual-recognition/api';
+  private static String VERSION = '2016-05-20';
+
+  public static void runAllTests(String iamApiKey) {
+    IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+      .apiKey(iamApiKey)
+      .build();
+    IBMVisualRecognitionV3 service = new IBMVisualRecognitionV3(VERSION, iamOptions);
+    service.setEndPoint(URL);
+
+    testClassify(service);
+    // ignoring for now because the service is returning 500s :(
+    //testDetectFaces(service);
+  }
 
   /**
    *  Test Analyze text, HTML, or a public webpage.
    *
    */
-  public static IBMVisualRecognitionV3Models.ClassifiedImages testClassify() {
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
-    visualRecognition.setEndPoint('https://gateway-a.watsonplatform.net/visual-recognition/api/');
-    visualRecognition.setApiKey(API_KEY);
+  public static IBMVisualRecognitionV3Models.ClassifiedImages testClassify(IBMVisualRecognitionV3 service) {
     IBMVisualRecognitionV3Models.ClassifyOptions options = new IBMVisualRecognitionV3Models.ClassifyOptionsBuilder()
-      .url('http://www.godalmingmuseum.org.uk/uploads/images/People/Jekyll/Jekyll,_Gertrude,_middle_aged_Y.JPG')
+      .url('https://watson-test-resources.mybluemix.net/resources/car.png')
       .build();
-    IBMVisualRecognitionV3Models.ClassifiedImages resp = visualRecognition.classify(options);
+    IBMVisualRecognitionV3Models.ClassifiedImages resp = service.classify(options);
     System.debug('IBMVisualRecognitionV3FTest.testClassify(): ' + resp);
     return resp;
   }
+
   /**
    *  Test Analyze text, HTML, or a public webpage.
    *
    */
-  public static IBMVisualRecognitionV3Models.ClassifiedImages testClassifyFile() {
-   IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
-    visualRecognition.setEndPoint('https://gateway-a.watsonplatform.net/visual-recognition/api/');
-    visualRecognition.setApiKey(API_KEY);
-    Attachment att = [Select Id,Body,BodyLength,ContentType,Name,Description From Attachment where Id=:attachmentId];
-    IBMWatsonFile testfile = new IBMWatsonFile.FileBuilder()
-      .attachment(att)
-      .build();
-    IBMVisualRecognitionV3Models.ClassifyOptions options = new IBMVisualRecognitionV3Models.ClassifyOptionsBuilder()
-      .acceptLanguage('en')
-      .imagesFile(testfile)
-      .imagesFilename(att.Name)
-      .imagesFileContentType(att.ContentType)
-      .build();
-    IBMVisualRecognitionV3Models.ClassifiedImages resp = visualRecognition.classify(options);
-    System.debug('IBMVisualRecognitionV3FTest.testClassify(): ' + resp);
-    return resp;
-  }
-  /**
-   *  Test Analyze text, HTML, or a public webpage.
-   *
-   */
-  public static IBMVisualRecognitionV3Models.DetectedFaces testDetectFaces() {
-    IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
-    visualRecognition.setEndPoint(NAMED_CREDENTIALS);
-    Attachment att = [Select Id,Body,BodyLength,ContentType,Name,Description From Attachment where Id=:attachmentId];
-    IBMWatsonFile testfile = new IBMWatsonFile.FileBuilder()
-      .body(att.Body)
-      .name(att.Name)
-      .description(att.Description)
-      .contentType(att.ContentType)
-      .build();
+  public static IBMVisualRecognitionV3Models.DetectedFaces testDetectFaces(IBMVisualRecognitionV3 service) {
     IBMVisualRecognitionV3Models.DetectFacesOptions options = new IBMVisualRecognitionV3Models.DetectFacesOptionsBuilder()
-      .imagesFile(testfile)
-      .imagesFilename(att.Name)
-      .imagesFileContentType(att.ContentType)
+      .url('https://watson-test-resources.mybluemix.net/resources/obama.jpg')
       .build();
-    IBMVisualRecognitionV3Models.DetectedFaces resp = visualRecognition.detectFaces(options);
+    IBMVisualRecognitionV3Models.DetectedFaces resp = service.detectFaces(options);
     System.debug('IBMVisualRecognitionV3FTest.testDetectFaces(): ' + resp);
     return resp;
-  }
-
-  /**
-   * Test getting a Core ML model.
-   */
-  public static IBMWatsonFile testGetCoreMlModel() {
-    IBMVisualRecognitionV3 service = new IBMVisualRecognitionV3('2016-05-20', API_KEY);
-    service.setEndPoint(NAMED_CREDENTIALS);
-
-    IBMVisualRecognitionV3Models.ListClassifiersOptions listOptions = new IBMVisualRecognitionV3Models.ListClassifiersOptionsBuilder()
-      .verbose(true)
-      .build();
-    IBMVisualRecognitionV3Models.Classifiers classifiers = service.listClassifiers(listOptions);
-
-    for (IBMVisualRecognitionV3Models.Classifier classifier : classifiers.getClassifiers()) {
-      if (classifier.getCoreMlEnabled()) {
-        IBMVisualRecognitionV3Models.GetCoreMlModelOptions getOptions = new IBMVisualRecognitionV3Models.GetCoreMlModelOptionsBuilder()
-          .classifierId(classifier.getClassifierId())
-          .build();
-        IBMWatsonFile modelFile = service.getCoreMlModel(getOptions);
-        return modelFile;
-      }
-    }
-
-    return null;
   }
 }

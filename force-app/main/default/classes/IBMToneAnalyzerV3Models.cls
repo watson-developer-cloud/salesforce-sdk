@@ -6,40 +6,43 @@ public class IBMToneAnalyzerV3Models {
     private List<ToneScore> tones_serialized_name;
     private List<ToneCategory> tone_categories_serialized_name;
     private String warning_serialized_name;
+ 
     /**
-     * Gets the tones_serialized_name.
+     * Gets the tones.
      *
      * **`2017-09-21`:** An array of `ToneScore` objects that provides the results of the analysis for each qualifying
      * tone of the document. The array includes results for any tone whose score is at least 0.5. The array is empty if
      * no tone has a score that meets this threshold. **`2016-05-19`:** Not returned.
      *
-     * @return the tones_serialized_name
+     * @return the tones
      */
     @AuraEnabled
     public List<ToneScore> getTones() {
       return tones_serialized_name;
     }
+ 
     /**
-     * Gets the tone_categories_serialized_name.
+     * Gets the toneCategories.
      *
      * **`2017-09-21`:** Not returned. **`2016-05-19`:** An array of `ToneCategory` objects that provides the results of
      * the tone analysis for the full document of the input content. The service returns results only for the tones
      * specified with the `tones` parameter of the request.
      *
-     * @return the tone_categories_serialized_name
+     * @return the toneCategories
      */
     @AuraEnabled
     public List<ToneCategory> getToneCategories() {
       return tone_categories_serialized_name;
     }
+ 
     /**
-     * Gets the warning_serialized_name.
+     * Gets the warning.
      *
      * **`2017-09-21`:** A warning message if the overall content exceeds 128 KB or contains more than 1000 sentences.
      * The service analyzes only the first 1000 sentences for document-level analysis and the first 100 sentences for
      * sentence-level analysis. **`2016-05-19`:** Not returned.
      *
-     * @return the warning_serialized_name
+     * @return the warning
      */
     @AuraEnabled
     public String getWarning() {
@@ -47,7 +50,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the tones_serialized_name.
+     * Sets the tones.
      *
      * @param tones the new tones
      */
@@ -56,7 +59,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the tone_categories_serialized_name.
+     * Sets the toneCategories.
      *
      * @param toneCategories the new toneCategories
      */
@@ -65,7 +68,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the warning_serialized_name.
+     * Sets the warning.
      *
      * @param warning the new warning
      */
@@ -80,7 +83,7 @@ public class IBMToneAnalyzerV3Models {
 
       DocumentAnalysis ret = (DocumentAnalysis) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for tones_serialized_name
+      // calling custom deserializer for tones
       List<ToneScore> newTones = new List<ToneScore>();
       List<ToneScore> deserializedTones = ret.getTones();
       if (deserializedTones != null) {
@@ -93,7 +96,7 @@ public class IBMToneAnalyzerV3Models {
         ret.setTones(newTones);
       }
 
-      // calling custom deserializer for tone_categories_serialized_name
+      // calling custom deserializer for toneCategories
       List<ToneCategory> newToneCategories = new List<ToneCategory>();
       List<ToneCategory> deserializedToneCategories = ret.getToneCategories();
       if (deserializedToneCategories != null) {
@@ -120,74 +123,80 @@ public class IBMToneAnalyzerV3Models {
     private List<ToneCategory> tone_categories_serialized_name;
     private Long input_from_serialized_name;
     private Long input_to_serialized_name;
+ 
     /**
-     * Gets the sentence_id_serialized_name.
+     * Gets the sentenceId.
      *
      * The unique identifier of a sentence of the input content. The first sentence has ID 0, and the ID of each
      * subsequent sentence is incremented by one.
      *
-     * @return the sentence_id_serialized_name
+     * @return the sentenceId
      */
     @AuraEnabled
     public Long getSentenceId() {
       return sentence_id_serialized_name;
     }
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * The text of the input sentence.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     @AuraEnabled
     public String getText() {
       return text_serialized_name;
     }
+ 
     /**
-     * Gets the tones_serialized_name.
+     * Gets the tones.
      *
      * **`2017-09-21`:** An array of `ToneScore` objects that provides the results of the analysis for each qualifying
      * tone of the sentence. The array includes results for any tone whose score is at least 0.5. The array is empty if
      * no tone has a score that meets this threshold. **`2016-05-19`:** Not returned.
      *
-     * @return the tones_serialized_name
+     * @return the tones
      */
     @AuraEnabled
     public List<ToneScore> getTones() {
       return tones_serialized_name;
     }
+ 
     /**
-     * Gets the tone_categories_serialized_name.
+     * Gets the toneCategories.
      *
      * **`2017-09-21`:** Not returned. **`2016-05-19`:** An array of `ToneCategory` objects that provides the results of
      * the tone analysis for the sentence. The service returns results only for the tones specified with the `tones`
      * parameter of the request.
      *
-     * @return the tone_categories_serialized_name
+     * @return the toneCategories
      */
     @AuraEnabled
     public List<ToneCategory> getToneCategories() {
       return tone_categories_serialized_name;
     }
+ 
     /**
-     * Gets the input_from_serialized_name.
+     * Gets the inputFrom.
      *
      * **`2017-09-21`:** Not returned. **`2016-05-19`:** The offset of the first character of the sentence in the
      * overall input content.
      *
-     * @return the input_from_serialized_name
+     * @return the inputFrom
      */
     @AuraEnabled
     public Long getInputFrom() {
       return input_from_serialized_name;
     }
+ 
     /**
-     * Gets the input_to_serialized_name.
+     * Gets the inputTo.
      *
      * **`2017-09-21`:** Not returned. **`2016-05-19`:** The offset of the last character of the sentence in the overall
      * input content.
      *
-     * @return the input_to_serialized_name
+     * @return the inputTo
      */
     @AuraEnabled
     public Long getInputTo() {
@@ -195,7 +204,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the sentence_id_serialized_name.
+     * Sets the sentenceId.
      *
      * @param sentenceId the new sentenceId
      */
@@ -204,7 +213,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the text_serialized_name.
+     * Sets the text.
      *
      * @param text the new text
      */
@@ -213,7 +222,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the tones_serialized_name.
+     * Sets the tones.
      *
      * @param tones the new tones
      */
@@ -222,7 +231,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the tone_categories_serialized_name.
+     * Sets the toneCategories.
      *
      * @param toneCategories the new toneCategories
      */
@@ -231,7 +240,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the input_from_serialized_name.
+     * Sets the inputFrom.
      *
      * @param inputFrom the new inputFrom
      */
@@ -240,7 +249,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the input_to_serialized_name.
+     * Sets the inputTo.
      *
      * @param inputTo the new inputTo
      */
@@ -255,7 +264,7 @@ public class IBMToneAnalyzerV3Models {
 
       SentenceAnalysis ret = (SentenceAnalysis) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for tones_serialized_name
+      // calling custom deserializer for tones
       List<ToneScore> newTones = new List<ToneScore>();
       List<ToneScore> deserializedTones = ret.getTones();
       if (deserializedTones != null) {
@@ -268,7 +277,7 @@ public class IBMToneAnalyzerV3Models {
         ret.setTones(newTones);
       }
 
-      // calling custom deserializer for tone_categories_serialized_name
+      // calling custom deserializer for toneCategories
       List<ToneCategory> newToneCategories = new List<ToneCategory>();
       List<ToneCategory> deserializedToneCategories = ret.getToneCategories();
       if (deserializedToneCategories != null) {
@@ -291,25 +300,27 @@ public class IBMToneAnalyzerV3Models {
   public class ToneAnalysis extends IBMWatsonResponseModel {
     private DocumentAnalysis document_tone_serialized_name;
     private List<SentenceAnalysis> sentences_tone_serialized_name;
+ 
     /**
-     * Gets the document_tone_serialized_name.
+     * Gets the documentTone.
      *
      * An object of type `DocumentAnalysis` that provides the results of the analysis for the full input document.
      *
-     * @return the document_tone_serialized_name
+     * @return the documentTone
      */
     @AuraEnabled
     public DocumentAnalysis getDocumentTone() {
       return document_tone_serialized_name;
     }
+ 
     /**
-     * Gets the sentences_tone_serialized_name.
+     * Gets the sentencesTone.
      *
      * An array of `SentenceAnalysis` objects that provides the results of the analysis for the individual sentences of
      * the input content. The service returns results only for the first 100 sentences of the input. The field is
      * omitted if the `sentences` parameter of the request is set to `false`.
      *
-     * @return the sentences_tone_serialized_name
+     * @return the sentencesTone
      */
     @AuraEnabled
     public List<SentenceAnalysis> getSentencesTone() {
@@ -317,7 +328,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the document_tone_serialized_name.
+     * Sets the documentTone.
      *
      * @param documentTone the new documentTone
      */
@@ -326,7 +337,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the sentences_tone_serialized_name.
+     * Sets the sentencesTone.
      *
      * @param sentencesTone the new sentencesTone
      */
@@ -341,11 +352,11 @@ public class IBMToneAnalyzerV3Models {
 
       ToneAnalysis ret = (ToneAnalysis) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for document_tone_serialized_name
+      // calling custom deserializer for documentTone
       DocumentAnalysis newDocumentTone = (DocumentAnalysis) new DocumentAnalysis().deserialize(JSON.serialize(ret.getDocumentTone()), (Map<String, Object>) jsonMap.get('document_tone_serialized_name'), DocumentAnalysis.class);
       ret.setDocumentTone(newDocumentTone);
 
-      // calling custom deserializer for sentences_tone_serialized_name
+      // calling custom deserializer for sentencesTone
       List<SentenceAnalysis> newSentencesTone = new List<SentenceAnalysis>();
       List<SentenceAnalysis> deserializedSentencesTone = ret.getSentencesTone();
       if (deserializedSentencesTone != null) {
@@ -369,35 +380,38 @@ public class IBMToneAnalyzerV3Models {
     private List<ToneScore> tones_serialized_name;
     private String category_id_serialized_name;
     private String category_name_serialized_name;
+ 
     /**
-     * Gets the tones_serialized_name.
+     * Gets the tones.
      *
      * An array of `ToneScore` objects that provides the results for the tones of the category.
      *
-     * @return the tones_serialized_name
+     * @return the tones
      */
     @AuraEnabled
     public List<ToneScore> getTones() {
       return tones_serialized_name;
     }
+ 
     /**
-     * Gets the category_id_serialized_name.
+     * Gets the categoryId.
      *
      * The unique, non-localized identifier of the category for the results. The service can return results for the
      * following category IDs: `emotion_tone`, `language_tone`, and `social_tone`.
      *
-     * @return the category_id_serialized_name
+     * @return the categoryId
      */
     @AuraEnabled
     public String getCategoryId() {
       return category_id_serialized_name;
     }
+ 
     /**
-     * Gets the category_name_serialized_name.
+     * Gets the categoryName.
      *
      * The user-visible, localized name of the category.
      *
-     * @return the category_name_serialized_name
+     * @return the categoryName
      */
     @AuraEnabled
     public String getCategoryName() {
@@ -405,7 +419,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the tones_serialized_name.
+     * Sets the tones.
      *
      * @param tones the new tones
      */
@@ -414,7 +428,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the category_id_serialized_name.
+     * Sets the categoryId.
      *
      * @param categoryId the new categoryId
      */
@@ -423,7 +437,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the category_name_serialized_name.
+     * Sets the categoryName.
      *
      * @param categoryName the new categoryName
      */
@@ -438,7 +452,7 @@ public class IBMToneAnalyzerV3Models {
 
       ToneCategory ret = (ToneCategory) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for tones_serialized_name
+      // calling custom deserializer for tones
       List<ToneScore> newTones = new List<ToneScore>();
       List<ToneScore> deserializedTones = ret.getTones();
       if (deserializedTones != null) {
@@ -459,21 +473,23 @@ public class IBMToneAnalyzerV3Models {
    * The toneChat options.
    */
   public class ToneChatOptions extends IBMWatsonOptionsModel {
-    private List<Utterance> utterances_serialized_name;
-    private String content_language_serialized_name;
-    private String accept_language_serialized_name;
+    private List<Utterance> utterances;
+    private String contentLanguage;
+    private String acceptLanguage;
+ 
     /**
-     * Gets the utterances_serialized_name.
+     * Gets the utterances.
      *
      * An array of `Utterance` objects that provides the input content that the service is to analyze.
      *
-     * @return the utterances_serialized_name
+     * @return the utterances
      */
     public List<Utterance> utterances() {
-      return utterances_serialized_name;
+      return utterances;
     }
+ 
     /**
-     * Gets the content_language_serialized_name.
+     * Gets the contentLanguage.
      *
      * The language of the input text for the request: English or French. Regional variants are treated as their parent
      * language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do
@@ -482,28 +498,30 @@ public class IBMToneAnalyzerV3Models {
      * * **`2017-09-21`:** Accepts `en` or `fr`.
      * * **`2016-05-19`:** Accepts only `en`.
      *
-     * @return the content_language_serialized_name
+     * @return the contentLanguage
      */
     public String contentLanguage() {
-      return content_language_serialized_name;
+      return contentLanguage;
     }
+ 
     /**
-     * Gets the accept_language_serialized_name.
+     * Gets the acceptLanguage.
      *
      * The desired language of the response. For two-character arguments, regional variants are treated as their parent
      * language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language**
      * and **Accept-Language**.
      *
-     * @return the accept_language_serialized_name
+     * @return the acceptLanguage
      */
     public String acceptLanguage() {
-      return accept_language_serialized_name;
+      return acceptLanguage;
     }
+
     private ToneChatOptions(ToneChatOptionsBuilder builder) {
-      IBMWatsonValidator.notNull(builder.utterances_serialized_name, 'utterances_serialized_name cannot be null');
-      utterances_serialized_name = builder.utterances_serialized_name;
-      content_language_serialized_name = builder.content_language_serialized_name;
-      accept_language_serialized_name = builder.accept_language_serialized_name;
+      IBMWatsonValidator.notNull(builder.utterances, 'utterances cannot be null');
+      utterances = builder.utterances;
+      contentLanguage = builder.contentLanguage;
+      acceptLanguage = builder.acceptLanguage;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -522,14 +540,14 @@ public class IBMToneAnalyzerV3Models {
    * ToneChatOptions Builder.
    */
   public class ToneChatOptionsBuilder extends IBMWatsonOptionsModel {
-    private List<Utterance> utterances_serialized_name;
-    private String content_language_serialized_name;
-    private String accept_language_serialized_name;
+    private List<Utterance> utterances;
+    private String contentLanguage;
+    private String acceptLanguage;
 
     private ToneChatOptionsBuilder(ToneChatOptions toneChatOptions) {
-      utterances_serialized_name = toneChatOptions.utterances_serialized_name;
-      content_language_serialized_name = toneChatOptions.content_language_serialized_name;
-      accept_language_serialized_name = toneChatOptions.accept_language_serialized_name;
+      utterances = toneChatOptions.utterances;
+      contentLanguage = toneChatOptions.contentLanguage;
+      acceptLanguage = toneChatOptions.acceptLanguage;
       this.requestHeaders.putAll(toneChatOptions.requestHeaders());
     }
 
@@ -545,7 +563,7 @@ public class IBMToneAnalyzerV3Models {
      * @param utterances the utterances
      */
     public ToneChatOptionsBuilder(List<Utterance> utterances) {
-      this.utterances_serialized_name = utterances;
+      this.utterances = utterances;
     }
 
     /**
@@ -558,51 +576,51 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Adds an utterances to utterances_serialized_name.
+     * Adds an utterances to utterances.
      *
      * @param utterances the new utterances
      * @return the ToneChatOptions builder
      */
     public ToneChatOptionsBuilder addUtterances(Utterance utterances) {
       IBMWatsonValidator.notNull(utterances, 'utterances cannot be null');
-      if (this.utterances_serialized_name == null) {
-        this.utterances_serialized_name = new List<Utterance>();
+      if (this.utterances == null) {
+        this.utterances = new List<Utterance>();
       }
-      this.utterances_serialized_name.add(utterances);
+      this.utterances.add(utterances);
       return this;
     }
 
     /**
-     * Set the utterances_serialized_name.
-     * Existing utterances_serialized_name will be replaced.
+     * Set the utterances.
+     * Existing utterances will be replaced.
      *
      * @param utterances the utterances
      * @return the ToneChatOptions builder
      */
     public ToneChatOptionsBuilder utterances(List<Utterance> utterances) {
-      this.utterances_serialized_name = utterances;
+      this.utterances = utterances;
       return this;
     }
 
     /**
-     * Set the content_language_serialized_name.
+     * Set the contentLanguage.
      *
      * @param contentLanguage the contentLanguage
      * @return the ToneChatOptions builder
      */
     public ToneChatOptionsBuilder contentLanguage(String contentLanguage) {
-      this.content_language_serialized_name = contentLanguage;
+      this.contentLanguage = contentLanguage;
       return this;
     }
 
     /**
-     * Set the accept_language_serialized_name.
+     * Set the acceptLanguage.
      *
      * @param acceptLanguage the acceptLanguage
      * @return the ToneChatOptions builder
      */
     public ToneChatOptionsBuilder acceptLanguage(String acceptLanguage) {
-      this.accept_language_serialized_name = acceptLanguage;
+      this.acceptLanguage = acceptLanguage;
       return this;
     }
 
@@ -626,37 +644,39 @@ public class IBMToneAnalyzerV3Models {
     private Double score_serialized_name;
     private String tone_id_serialized_name;
     private String tone_name_serialized_name;
+ 
     /**
-     * Gets the score_serialized_name.
+     * Gets the score.
      *
      * The score for the tone in the range of 0.5 to 1. A score greater than 0.75 indicates a high likelihood that the
      * tone is perceived in the utterance.
      *
-     * @return the score_serialized_name
+     * @return the score
      */
     @AuraEnabled
     public Double getScore() {
       return score_serialized_name;
     }
+ 
     /**
-     * Gets the tone_id_serialized_name.
+     * Gets the toneId.
      *
-     * The unique, non-localized identifier of the tone for the results. The service can return results for the
-     * following tone IDs: `sad`, `frustrated`, `satisfied`, `excited`, `polite`, `impolite`, and `sympathetic`. The
-     * service returns results only for tones whose scores meet a minimum threshold of 0.5.
+     * The unique, non-localized identifier of the tone for the results. The service returns results only for tones
+     * whose scores meet a minimum threshold of 0.5.
      *
-     * @return the tone_id_serialized_name
+     * @return the toneId
      */
     @AuraEnabled
     public String getToneId() {
       return tone_id_serialized_name;
     }
+ 
     /**
-     * Gets the tone_name_serialized_name.
+     * Gets the toneName.
      *
      * The user-visible, localized name of the tone.
      *
-     * @return the tone_name_serialized_name
+     * @return the toneName
      */
     @AuraEnabled
     public String getToneName() {
@@ -664,7 +684,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the score_serialized_name.
+     * Sets the score.
      *
      * @param score the new score
      */
@@ -673,7 +693,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the tone_id_serialized_name.
+     * Sets the toneId.
      *
      * @param toneId the new toneId
      */
@@ -682,7 +702,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the tone_name_serialized_name.
+     * Sets the toneName.
      *
      * @param toneName the new toneName
      */
@@ -706,19 +726,21 @@ public class IBMToneAnalyzerV3Models {
    */
   public class ToneInput {
     private String text_serialized_name;
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * The input content that the service is to analyze.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     public String text() {
       return text_serialized_name;
     }
+  
     private ToneInput(ToneInputBuilder builder) {
-      IBMWatsonValidator.notNull(builder.text_serialized_name, 'text_serialized_name cannot be null');
-      text_serialized_name = builder.text_serialized_name;
+      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
+      text_serialized_name = builder.text;
     }
 
     /**
@@ -736,10 +758,10 @@ public class IBMToneAnalyzerV3Models {
    * ToneInput Builder.
    */
   public class ToneInputBuilder {
-    private String text_serialized_name;
+    private String text;
 
     private ToneInputBuilder(ToneInput toneInput) {
-      text_serialized_name = toneInput.text_serialized_name;
+      text = toneInput.text_serialized_name;
     }
 
     /**
@@ -754,7 +776,7 @@ public class IBMToneAnalyzerV3Models {
      * @param text the text
      */
     public ToneInputBuilder(String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -767,13 +789,13 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Set the text_serialized_name.
+     * Set the text.
      *
      * @param text the text
      * @return the ToneInput builder
      */
     public ToneInputBuilder text(String text) {
-      this.text_serialized_name = text;
+      this.text = text;
       return this;
     }
   }
@@ -782,59 +804,64 @@ public class IBMToneAnalyzerV3Models {
    * The tone options.
    */
   public class ToneOptions extends IBMWatsonOptionsModel {
-    private ToneInput tone_input_serialized_name;
-    private String body_serialized_name;
-    private String content_type_serialized_name;
-    private Boolean sentences_serialized_name;
-    private List<String> tones_serialized_name;
-    private String content_language_serialized_name;
-    private String accept_language_serialized_name;
+    private ToneInput toneInput;
+    private String body;
+    private String contentType;
+    private Boolean sentences;
+    private List<String> tones;
+    private String contentLanguage;
+    private String acceptLanguage;
+ 
     /**
-     * Gets the tone_input_serialized_name.
+     * Gets the toneInput.
      *
      * JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of
      * type `ToneInput`.
      *
-     * @return the tone_input_serialized_name
+     * @return the toneInput
      */
     public ToneInput toneInput() {
-      return tone_input_serialized_name;
+      return toneInput;
     }
+ 
     /**
-     * Gets the body_serialized_name.
+     * Gets the body.
      *
      * JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of
      * type `ToneInput`.
      *
-     * @return the body_serialized_name
+     * @return the body
      */
     public String body() {
-      return body_serialized_name;
+      return body;
     }
+ 
     /**
-     * Gets the content_type_serialized_name.
+     * Gets the contentType.
      *
      * The type of the input. A character encoding can be specified by including a `charset` parameter. For example,
      * 'text/plain;charset=utf-8'.
      *
-     * @return the content_type_serialized_name
+     * @return the contentType
      */
     public String contentType() {
-      return content_type_serialized_name;
+      return contentType;
     }
+ 
     /**
-     * Gets the sentences_serialized_name.
+     * Gets the sentences.
      *
      * Indicates whether the service is to return an analysis of each individual sentence in addition to its analysis of
      * the full document. If `true` (the default), the service returns results for each sentence.
      *
-     * @return the sentences_serialized_name
+     * @return the sentences
      */
     public Boolean sentences() {
-      return sentences_serialized_name;
+      return sentences;
     }
+ 
     /**
-     * Gets the tones_serialized_name.
+     * Gets the tones.
      *
      * **`2017-09-21`:** Deprecated. The service continues to accept the parameter for backward-compatibility, but the
      * parameter no longer affects the response.
@@ -843,13 +870,14 @@ public class IBMToneAnalyzerV3Models {
      * the indicated tones apply both to the full document and to individual sentences of the document. You can specify
      * one or more of the valid values. Omit the parameter to request results for all three tones.
      *
-     * @return the tones_serialized_name
+     * @return the tones
      */
     public List<String> tones() {
-      return tones_serialized_name;
+      return tones;
     }
+ 
     /**
-     * Gets the content_language_serialized_name.
+     * Gets the contentLanguage.
      *
      * The language of the input text for the request: English or French. Regional variants are treated as their parent
      * language; for example, `en-US` is interpreted as `en`. The input content must match the specified language. Do
@@ -858,32 +886,34 @@ public class IBMToneAnalyzerV3Models {
      * * **`2017-09-21`:** Accepts `en` or `fr`.
      * * **`2016-05-19`:** Accepts only `en`.
      *
-     * @return the content_language_serialized_name
+     * @return the contentLanguage
      */
     public String contentLanguage() {
-      return content_language_serialized_name;
+      return contentLanguage;
     }
+ 
     /**
-     * Gets the accept_language_serialized_name.
+     * Gets the acceptLanguage.
      *
      * The desired language of the response. For two-character arguments, regional variants are treated as their parent
      * language; for example, `en-US` is interpreted as `en`. You can use different languages for **Content-Language**
      * and **Accept-Language**.
      *
-     * @return the accept_language_serialized_name
+     * @return the acceptLanguage
      */
     public String acceptLanguage() {
-      return accept_language_serialized_name;
+      return acceptLanguage;
     }
+
     private ToneOptions(ToneOptionsBuilder builder) {
-      IBMWatsonValidator.isTrue(builder.content_type_serialized_name != null, 'content_type_serialized_name cannot be null');
-      tone_input_serialized_name = builder.tone_input_serialized_name;
-      body_serialized_name = builder.body_serialized_name;
-      content_type_serialized_name = builder.content_type_serialized_name;
-      sentences_serialized_name = builder.sentences_serialized_name;
-      tones_serialized_name = builder.tones_serialized_name;
-      content_language_serialized_name = builder.content_language_serialized_name;
-      accept_language_serialized_name = builder.accept_language_serialized_name;
+      IBMWatsonValidator.isTrue(builder.contentType != null, 'contentType cannot be null');
+      toneInput = builder.toneInput;
+      body = builder.body;
+      contentType = builder.contentType;
+      sentences = builder.sentences;
+      tones = builder.tones;
+      contentLanguage = builder.contentLanguage;
+      acceptLanguage = builder.acceptLanguage;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -902,22 +932,22 @@ public class IBMToneAnalyzerV3Models {
    * ToneOptions Builder.
    */
   public class ToneOptionsBuilder extends IBMWatsonOptionsModel {
-    private ToneInput tone_input_serialized_name;
-    private String body_serialized_name;
-    private String content_type_serialized_name;
-    private Boolean sentences_serialized_name;
-    private List<String> tones_serialized_name;
-    private String content_language_serialized_name;
-    private String accept_language_serialized_name;
+    private ToneInput toneInput;
+    private String body;
+    private String contentType;
+    private Boolean sentences;
+    private List<String> tones;
+    private String contentLanguage;
+    private String acceptLanguage;
 
     private ToneOptionsBuilder(ToneOptions toneOptions) {
-      tone_input_serialized_name = toneOptions.tone_input_serialized_name;
-      body_serialized_name = toneOptions.body_serialized_name;
-      content_type_serialized_name = toneOptions.content_type_serialized_name;
-      sentences_serialized_name = toneOptions.sentences_serialized_name;
-      tones_serialized_name = toneOptions.tones_serialized_name;
-      content_language_serialized_name = toneOptions.content_language_serialized_name;
-      accept_language_serialized_name = toneOptions.accept_language_serialized_name;
+      toneInput = toneOptions.toneInput;
+      body = toneOptions.body;
+      contentType = toneOptions.contentType;
+      sentences = toneOptions.sentences;
+      tones = toneOptions.tones;
+      contentLanguage = toneOptions.contentLanguage;
+      acceptLanguage = toneOptions.acceptLanguage;
       this.requestHeaders.putAll(toneOptions.requestHeaders());
     }
 
@@ -937,74 +967,74 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Adds an tones to tones_serialized_name.
+     * Adds an tones to tones.
      *
      * @param tones the new tones
      * @return the ToneOptions builder
      */
     public ToneOptionsBuilder addTones(String tones) {
       IBMWatsonValidator.notNull(tones, 'tones cannot be null');
-      if (this.tones_serialized_name == null) {
-        this.tones_serialized_name = new List<String>();
+      if (this.tones == null) {
+        this.tones = new List<String>();
       }
-      this.tones_serialized_name.add(tones);
+      this.tones.add(tones);
       return this;
     }
 
     /**
-     * Set the sentences_serialized_name.
+     * Set the sentences.
      *
      * @param sentences the sentences
      * @return the ToneOptions builder
      */
     public ToneOptionsBuilder sentences(Boolean sentences) {
-      this.sentences_serialized_name = sentences;
+      this.sentences = sentences;
       return this;
     }
 
     /**
-     * Set the tones_serialized_name.
-     * Existing tones_serialized_name will be replaced.
+     * Set the tones.
+     * Existing tones will be replaced.
      *
      * @param tones the tones
      * @return the ToneOptions builder
      */
     public ToneOptionsBuilder tones(List<String> tones) {
-      this.tones_serialized_name = tones;
+      this.tones = tones;
       return this;
     }
 
     /**
-     * Set the content_language_serialized_name.
+     * Set the contentLanguage.
      *
      * @param contentLanguage the contentLanguage
      * @return the ToneOptions builder
      */
     public ToneOptionsBuilder contentLanguage(String contentLanguage) {
-      this.content_language_serialized_name = contentLanguage;
+      this.contentLanguage = contentLanguage;
       return this;
     }
 
     /**
-     * Set the accept_language_serialized_name.
+     * Set the acceptLanguage.
      *
      * @param acceptLanguage the acceptLanguage
      * @return the ToneOptions builder
      */
     public ToneOptionsBuilder acceptLanguage(String acceptLanguage) {
-      this.accept_language_serialized_name = acceptLanguage;
+      this.acceptLanguage = acceptLanguage;
       return this;
     }
 
     /**
-     * Set the tone_input_serialized_name.
+     * Set the toneInput.
      *
      * @param toneInput the toneInput
      * @return the ToneOptions builder
      */
     public ToneOptionsBuilder toneInput(ToneInput toneInput) {
-      this.tone_input_serialized_name = toneInput;
-      this.content_type_serialized_name = IBMWatsonHttpMediaType.APPLICATION_JSON;
+      this.toneInput = toneInput;
+      this.contentType = IBMWatsonHttpMediaType.APPLICATION_JSON;
       return this;
     }
 
@@ -1015,8 +1045,8 @@ public class IBMToneAnalyzerV3Models {
      * @return the ToneOptions builder
      */
     public ToneOptionsBuilder text(String text) {
-      this.body_serialized_name = text;
-      this.content_type_serialized_name = IBMWatsonHttpMediaType.TEXT_PLAIN;
+      this.body = text;
+      this.contentType = IBMWatsonHttpMediaType.TEXT_PLAIN;
       return this;
     }
 
@@ -1027,8 +1057,8 @@ public class IBMToneAnalyzerV3Models {
      * @return the ToneOptions builder
      */
     public ToneOptionsBuilder html(String html) {
-      this.body_serialized_name = html;
-      this.content_type_serialized_name = IBMWatsonHttpMediaType.TEXT_HTML;
+      this.body = html;
+      this.contentType = IBMWatsonHttpMediaType.TEXT_HTML;
       return this;
     }
 
@@ -1052,8 +1082,9 @@ public class IBMToneAnalyzerV3Models {
     private Double score_serialized_name;
     private String tone_id_serialized_name;
     private String tone_name_serialized_name;
+ 
     /**
-     * Gets the score_serialized_name.
+     * Gets the score.
      *
      * The score for the tone.
      * * **`2017-09-21`:** The score that is returned lies in the range of 0.5 to 1. A score greater than 0.75 indicates
@@ -1062,14 +1093,15 @@ public class IBMToneAnalyzerV3Models {
      * the tone is unlikely to be perceived in the content; a score greater than 0.75 indicates a high likelihood that
      * the tone is perceived.
      *
-     * @return the score_serialized_name
+     * @return the score
      */
     @AuraEnabled
     public Double getScore() {
       return score_serialized_name;
     }
+ 
     /**
-     * Gets the tone_id_serialized_name.
+     * Gets the toneId.
      *
      * The unique, non-localized identifier of the tone.
      * * **`2017-09-21`:** The service can return results for the following tone IDs: `anger`, `fear`, `joy`, and
@@ -1081,18 +1113,19 @@ public class IBMToneAnalyzerV3Models {
      * `extraversion_big5`, `agreeableness_big5`, and `emotional_range_big5`. The service returns scores for all tones
      * of a category, regardless of their values.
      *
-     * @return the tone_id_serialized_name
+     * @return the toneId
      */
     @AuraEnabled
     public String getToneId() {
       return tone_id_serialized_name;
     }
+ 
     /**
-     * Gets the tone_name_serialized_name.
+     * Gets the toneName.
      *
      * The user-visible, localized name of the tone.
      *
-     * @return the tone_name_serialized_name
+     * @return the toneName
      */
     @AuraEnabled
     public String getToneName() {
@@ -1100,7 +1133,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the score_serialized_name.
+     * Sets the score.
      *
      * @param score the new score
      */
@@ -1109,7 +1142,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the tone_id_serialized_name.
+     * Sets the toneId.
      *
      * @param toneId the new toneId
      */
@@ -1118,7 +1151,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the tone_name_serialized_name.
+     * Sets the toneName.
      *
      * @param toneName the new toneName
      */
@@ -1143,31 +1176,34 @@ public class IBMToneAnalyzerV3Models {
   public class Utterance {
     private String text_serialized_name;
     private String user_serialized_name;
+ 
     /**
-     * Gets the text_serialized_name.
+     * Gets the text.
      *
      * An utterance contributed by a user in the conversation that is to be analyzed. The utterance can contain multiple
      * sentences.
      *
-     * @return the text_serialized_name
+     * @return the text
      */
     public String text() {
       return text_serialized_name;
     }
+ 
     /**
-     * Gets the user_serialized_name.
+     * Gets the user.
      *
      * A string that identifies the user who contributed the utterance specified by the `text` parameter.
      *
-     * @return the user_serialized_name
+     * @return the user
      */
     public String user() {
       return user_serialized_name;
     }
+  
     private Utterance(UtteranceBuilder builder) {
-      IBMWatsonValidator.notNull(builder.text_serialized_name, 'text_serialized_name cannot be null');
-      text_serialized_name = builder.text_serialized_name;
-      user_serialized_name = builder.user_serialized_name;
+      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
+      text_serialized_name = builder.text;
+      user_serialized_name = builder.user;
     }
 
     /**
@@ -1185,12 +1221,12 @@ public class IBMToneAnalyzerV3Models {
    * Utterance Builder.
    */
   public class UtteranceBuilder {
-    private String text_serialized_name;
-    private String user_serialized_name;
+    private String text;
+    private String user;
 
     private UtteranceBuilder(Utterance utterance) {
-      text_serialized_name = utterance.text_serialized_name;
-      user_serialized_name = utterance.user_serialized_name;
+      text = utterance.text_serialized_name;
+      user = utterance.user_serialized_name;
     }
 
     /**
@@ -1205,7 +1241,7 @@ public class IBMToneAnalyzerV3Models {
      * @param text the text
      */
     public UtteranceBuilder(String text) {
-      this.text_serialized_name = text;
+      this.text = text;
     }
 
     /**
@@ -1218,24 +1254,24 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Set the text_serialized_name.
+     * Set the text.
      *
      * @param text the text
      * @return the Utterance builder
      */
     public UtteranceBuilder text(String text) {
-      this.text_serialized_name = text;
+      this.text = text;
       return this;
     }
 
     /**
-     * Set the user_serialized_name.
+     * Set the user.
      *
      * @param user the user
      * @return the Utterance builder
      */
     public UtteranceBuilder user(String user) {
-      this.user_serialized_name = user;
+      this.user = user;
       return this;
     }
   }
@@ -1246,24 +1282,26 @@ public class IBMToneAnalyzerV3Models {
   public class UtteranceAnalyses extends IBMWatsonResponseModel {
     private List<UtteranceAnalysis> utterances_tone_serialized_name;
     private String warning_serialized_name;
+ 
     /**
-     * Gets the utterances_tone_serialized_name.
+     * Gets the utterancesTone.
      *
      * An array of `UtteranceAnalysis` objects that provides the results for each utterance of the input.
      *
-     * @return the utterances_tone_serialized_name
+     * @return the utterancesTone
      */
     @AuraEnabled
     public List<UtteranceAnalysis> getUtterancesTone() {
       return utterances_tone_serialized_name;
     }
+ 
     /**
-     * Gets the warning_serialized_name.
+     * Gets the warning.
      *
      * **`2017-09-21`:** A warning message if the content contains more than 50 utterances. The service analyzes only
      * the first 50 utterances. **`2016-05-19`:** Not returned.
      *
-     * @return the warning_serialized_name
+     * @return the warning
      */
     @AuraEnabled
     public String getWarning() {
@@ -1271,7 +1309,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the utterances_tone_serialized_name.
+     * Sets the utterancesTone.
      *
      * @param utterancesTone the new utterancesTone
      */
@@ -1280,7 +1318,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the warning_serialized_name.
+     * Sets the warning.
      *
      * @param warning the new warning
      */
@@ -1295,7 +1333,7 @@ public class IBMToneAnalyzerV3Models {
 
       UtteranceAnalyses ret = (UtteranceAnalyses) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for utterances_tone_serialized_name
+      // calling custom deserializer for utterancesTone
       List<UtteranceAnalysis> newUtterancesTone = new List<UtteranceAnalysis>();
       List<UtteranceAnalysis> deserializedUtterancesTone = ret.getUtterancesTone();
       if (deserializedUtterancesTone != null) {
@@ -1320,49 +1358,53 @@ public class IBMToneAnalyzerV3Models {
     private String utterance_text_serialized_name;
     private List<ToneChatScore> tones_serialized_name;
     private String error_serialized_name;
+ 
     /**
-     * Gets the utterance_id_serialized_name.
+     * Gets the utteranceId.
      *
      * The unique identifier of the utterance. The first utterance has ID 0, and the ID of each subsequent utterance is
      * incremented by one.
      *
-     * @return the utterance_id_serialized_name
+     * @return the utteranceId
      */
     @AuraEnabled
     public Long getUtteranceId() {
       return utterance_id_serialized_name;
     }
+ 
     /**
-     * Gets the utterance_text_serialized_name.
+     * Gets the utteranceText.
      *
      * The text of the utterance.
      *
-     * @return the utterance_text_serialized_name
+     * @return the utteranceText
      */
     @AuraEnabled
     public String getUtteranceText() {
       return utterance_text_serialized_name;
     }
+ 
     /**
-     * Gets the tones_serialized_name.
+     * Gets the tones.
      *
      * An array of `ToneChatScore` objects that provides results for the most prevalent tones of the utterance. The
      * array includes results for any tone whose score is at least 0.5. The array is empty if no tone has a score that
      * meets this threshold.
      *
-     * @return the tones_serialized_name
+     * @return the tones
      */
     @AuraEnabled
     public List<ToneChatScore> getTones() {
       return tones_serialized_name;
     }
+ 
     /**
-     * Gets the error_serialized_name.
+     * Gets the error.
      *
      * **`2017-09-21`:** An error message if the utterance contains more than 500 characters. The service does not
      * analyze the utterance. **`2016-05-19`:** Not returned.
      *
-     * @return the error_serialized_name
+     * @return the error
      */
     @AuraEnabled
     public String getError() {
@@ -1370,7 +1412,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the utterance_id_serialized_name.
+     * Sets the utteranceId.
      *
      * @param utteranceId the new utteranceId
      */
@@ -1379,7 +1421,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the utterance_text_serialized_name.
+     * Sets the utteranceText.
      *
      * @param utteranceText the new utteranceText
      */
@@ -1388,7 +1430,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the tones_serialized_name.
+     * Sets the tones.
      *
      * @param tones the new tones
      */
@@ -1397,7 +1439,7 @@ public class IBMToneAnalyzerV3Models {
     }
 
     /**
-     * Sets the error_serialized_name.
+     * Sets the error.
      *
      * @param error the new error
      */
@@ -1412,7 +1454,7 @@ public class IBMToneAnalyzerV3Models {
 
       UtteranceAnalysis ret = (UtteranceAnalysis) super.deserialize(jsonString, jsonMap, classType);
 
-      // calling custom deserializer for tones_serialized_name
+      // calling custom deserializer for tones
       List<ToneChatScore> newTones = new List<ToneChatScore>();
       List<ToneChatScore> deserializedTones = ret.getTones();
       if (deserializedTones != null) {

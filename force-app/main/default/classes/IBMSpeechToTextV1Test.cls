@@ -135,7 +135,7 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(createJob.getCreated(), 'string');
     System.assertEquals(createJob.getUpdated(), 'string');
     System.assertEquals(createJob.getUserToken(), 'string');
-    System.assertEquals(createJob.getresults()[0].getresults()[0].getFinal(),true);
+    System.assertEquals(createJob.getresults()[0].getresults()[0].getFinalResults(),true);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getTranscript(), 'string');
     System.assertEquals(createJob.getresults()[0].getresults()[0].getAlternatives()[0].getConfidence(),0);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getKeywordsResult().get('keyword_serialized_name')[0].getNormalizedText(), 'string');
@@ -147,11 +147,11 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(createJob.getresults()[0].getresults()[0].getWordAlternatives()[0].getAlternatives()[0].getConfidence(),0);
     System.assertEquals(createJob.getresults()[0].getresults()[0].getWordAlternatives()[0].getAlternatives()[0].getWord(), 'string');
     System.assertEquals(createJob.getresults()[0].getResultIndex(),0);
-    System.assertEquals(createJob.getresults()[0].getSpeakerLabels()[0].getFrom(),0);
+    System.assertEquals(createJob.getresults()[0].getSpeakerLabels()[0].getXfrom(),0);
     System.assertEquals(createJob.getresults()[0].getSpeakerLabels()[0].getTo(),0);
     System.assertEquals(createJob.getresults()[0].getSpeakerLabels()[0].getSpeaker(),0);
     System.assertEquals(createJob.getresults()[0].getSpeakerLabels()[0].getConfidence(),0);
-    System.assertEquals(createJob.getresults()[0].getSpeakerLabels()[0].getFinal(),true);
+    System.assertEquals(createJob.getresults()[0].getSpeakerLabels()[0].getFinalResults(),true);
     System.assertEquals(createJob.getresults()[0].getWarnings()[0], 'string');
     System.assertEquals(createJob.getWarnings()[0], 'string');
     createJobOptions = createJobOptions.newBuilder().build();
@@ -406,7 +406,7 @@ private class IBMSpeechToTextV1Test {
     String audioName = 'audio';
     String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.AddAudioOptions addAudioOptions = new IBMSpeechToTextV1Models.AddAudioOptionsBuilder()
-      .audio(audio)
+      .audioResource(audio)
       .contentType('audio/mp3')
       .customizationId(customizationId)
       .audioName(audioName)
@@ -692,7 +692,7 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.ListWordsOptions listWordsOptions = new IBMSpeechToTextV1Models.ListWordsOptionsBuilder(customizationId)
       .customizationId(customizationId)
       .wordType(wordType)
-      .sortField(sortField)
+      .xsort(sortField)
       .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.Words wordList = speechToText.listWords(listWordsOptions);
@@ -854,11 +854,11 @@ private class IBMSpeechToTextV1Test {
 //    System.assertEquals(audioListing.getTotalMinutesOfAudio(),0);
     System.assertEquals(audioListing.getDuration(),0);
     System.assertEquals(audioListing.getName(), 'string');
-    System.assertEquals(audioListing.getDetails().getType(), 'audio');
+    System.assertEquals(audioListing.getDetails().getXtype(), 'audio');
     System.assertEquals(audioListing.getStatus(), 'ok');
     System.assertEquals(audioListing.getAudio()[0].getDuration(),0);
     System.assertEquals(audioListing.getAudio()[0].getName(), 'string');
-    System.assertEquals(audioListing.getAudio()[0].getDetails().getType(), 'audio');
+    System.assertEquals(audioListing.getAudio()[0].getDetails().getXtype(), 'audio');
     System.assertEquals(audioListing.getAudio()[0].getDetails().getCodec(), 'string');
     System.assertEquals(audioListing.getAudio()[0].getDetails().getCompression(), 'zip');
     System.assertEquals(audioListing.getAudio()[0].getDetails().getFrequency(),0);

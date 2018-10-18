@@ -18,36 +18,19 @@
       ]
     },
     {
-      "name": "conversation",
-      "apexClasses": [
-        {
-         "fileName": "IBMConversationV1.cls",
-         "metadata": "IBMConversationV1.cls-meta.xml"
-        },
-        {
-         "fileName": "IBMConversationV1Models.cls",
-         "metadata": "IBMConversationV1Models.cls-meta.xml"
-        },
-        {
-         "fileName": "IBMConversationV1Test.cls",
-         "metadata": "IBMConversationV1Test.cls-meta.xml"
-        }
-      ]
-    },
-    {
       "name": "language-translator",
       "apexClasses": [
         {
-         "fileName": "IBMLanguageTranslatorV2.cls",
-         "metadata": "IBMLanguageTranslatorV2.cls-meta.xml"
+         "fileName": "IBMLanguageTranslatorV3.cls",
+         "metadata": "IBMLanguageTranslatorV3.cls-meta.xml"
         },
         {
-         "fileName": "IBMLanguageTranslatorV2Models.cls",
-         "metadata": "IBMLanguageTranslatorV2Models.cls-meta.xml"
+         "fileName": "IBMLanguageTranslatorV3Models.cls",
+         "metadata": "IBMLanguageTranslatorV3Models.cls-meta.xml"
         },
         {
-         "fileName": "IBMLanguageTranslatorV2Test.cls",
-         "metadata": "IBMLanguageTranslatorV2Test.cls-meta.xml"
+         "fileName": "IBMLanguageTranslatorV3Test.cls",
+         "metadata": "IBMLanguageTranslatorV3Test.cls-meta.xml"
         }
       ]
     },

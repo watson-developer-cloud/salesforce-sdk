@@ -18,7 +18,7 @@ To find out which authentication to use, view the service credentials. You find 
 
 1. Go to the IBM Cloud [Dashboard](https://console.bluemix.net/dashboard/apps?category=ai) page.
 1. Either click an existing Watson service instance or click [**Create resource > AI**](https://console.bluemix.net/catalog/?category=ai) and create a service instance.
-1. Copy the `url` and either `apikey` or `username` and `password`. Click **Show** if the credentials are masked.
+1. Copy the credentials you need for authentication. Click **Show** if the credentials are masked.
 
 You'll also need a Salesforce account to run your Apex code. To get one, you can visit [this link](https://developer.salesforce.com/signup).
 
@@ -149,7 +149,7 @@ In order to create **Named Credentials**:
 
 ### Specifying credentials in the Apex code
 
-Setting credentials in the code is always an option, and in fact, it's the only option if you're authenticating with an API key (in the case of the Visual Recognition service) or with IAM.
+Setting credentials in the code is always an option, and in fact, it's the only option if you're authenticating with IAM.
 
 You can always set these values directly in the constructor or with a method call after instantiating your service.
 
@@ -168,21 +168,6 @@ discovery.setEndPoint('URL');
 IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
 discovery.setEndPoint('URL');
 discovery.setUsernameAndPassword('USERNAME', 'PASSWORD');
-```
-
-#### API Key
-
-```java
-// in the constructor
-IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20', 'API_KEY');
-visualRecognition.setEndPoint('URL');
-```
-
-```java
-// after instantiation
-IBMVisualRecognitionV3 visualRecognition = new IBMVisualRecognitionV3('2016-05-20');
-visualRecognition.setEndPoint('URL');
-visualRecognition.setApiKey('API_KEY');
 ```
 
 #### Using IAM
@@ -274,7 +259,7 @@ IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
 IBMAssistantV1Models.CreateIntentOptions options = new
   IBMAssistantV1Models.CreateIntentOptionsBuilder()
   .workspaceId('<workspace_id>')
-  .intent('MyIntent')
+  .intentName('MyIntent')
   .description('This is an example of creating an intent!')
   .build();
 
@@ -369,9 +354,6 @@ If you're using this SDK to interact with a service on IBM Cloud Private (ICP), 
 ## Functional tests
 
 The `force-app/main/test` folder contains the example calls for each service. These examples are used for functional testing of services. Developers can use them for reference and testing the installed SDK.
-
-## Language Translator v2 deprecation notice
-The v2 Language Translator API will no longer be available after July 31, 2018. To take advantage of the latest service enhancements, migrate to the v3 API. View the [Migrating to Language Translator v3](https://console.bluemix.net/docs/services/language-translator/migrating.html) page for more information.
 
 ## Contributing
 

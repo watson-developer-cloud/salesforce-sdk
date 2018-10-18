@@ -21,7 +21,7 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
     }
 
     IBMNaturalLanguageUnderstandingV1Models.ConceptsOptions concepts = new IBMNaturalLanguageUnderstandingV1Models.ConceptsOptionsBuilder()
-      .limitField(8)
+      .xlimit(8)
       .build();
     concepts = concepts.newBuilder().build();
 
@@ -32,14 +32,14 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
     emotion = emotion.newBuilder().build();
 
     IBMNaturalLanguageUnderstandingV1Models.EntitiesOptions entities = new IBMNaturalLanguageUnderstandingV1Models.EntitiesOptionsBuilder()
-      .limitField(50)
+      .xlimit(50)
       .sentiment(false)
       .emotion(true)
       .build();
     entities = entities.newBuilder().build();
 
     IBMNaturalLanguageUnderstandingV1Models.KeywordsOptions keywords = new IBMNaturalLanguageUnderstandingV1Models.KeywordsOptionsBuilder()
-      .limitField(50)
+      .xlimit(50)
       .sentiment(false)
       .emotion(false)
       .build();
@@ -51,7 +51,7 @@ public with sharing class IBMNaturalLanguageUnderstandingV1FTest {
     relations = relations.newBuilder().build();
 
     IBMNaturalLanguageUnderstandingV1Models.SemanticRolesOptions semanticRoles = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesOptionsBuilder()
-      .limitField(50)
+      .xlimit(50)
       .keywords(false)
       .entities(false)
       .build();

@@ -67,6 +67,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
   public IBMLanguageTranslatorV3Models.TranslationResult translate(IBMLanguageTranslatorV3Models.TranslateOptions translateOptions) {
     IBMWatsonValidator.notNull(translateOptions, 'translateOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/translate');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (translateOptions != null) ? translateOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -101,6 +102,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
   public IBMLanguageTranslatorV3Models.IdentifiedLanguages identify(IBMLanguageTranslatorV3Models.IdentifyOptions identifyOptions) {
     IBMWatsonValidator.notNull(identifyOptions, 'identifyOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/identify');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (identifyOptions != null) ? identifyOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -124,6 +126,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    */
   public IBMLanguageTranslatorV3Models.IdentifiableLanguages listIdentifiableLanguages(IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v3/identifiable_languages');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (listIdentifiableLanguagesOptions != null) ? listIdentifiableLanguagesOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -158,6 +161,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
     IBMWatsonValidator.notNull(createModelOptions, 'createModelOptions cannot be null');
     IBMWatsonValidator.isTrue((createModelOptions.forcedGlossary() != null) || (createModelOptions.parallelCorpus() != null), 'At least one of forced_glossary or parallel_corpus must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/models');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (createModelOptions != null) ? createModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -174,12 +178,12 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     if (createModelOptions.forcedGlossary() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createModelOptions.forcedGlossary(), 'application/octet-stream');
-      multipartBuilder.addFormDataPart('forced_glossary', createModelOptions.forcedGlossaryFilename(), fileBody);
+      IBMWatsonRequestBody forcedGlossaryBody = IBMWatsonRequestBody.create(createModelOptions.forcedGlossary(), 'application/octet-stream');
+      multipartBuilder.addFormDataPart('forced_glossary', createModelOptions.forcedGlossaryFilename(), forcedGlossaryBody);
     }
     if (createModelOptions.parallelCorpus() != null) {
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(createModelOptions.parallelCorpus(), 'application/octet-stream');
-      multipartBuilder.addFormDataPart('parallel_corpus', createModelOptions.parallelCorpusFilename(), fileBody);
+      IBMWatsonRequestBody parallelCorpusBody = IBMWatsonRequestBody.create(createModelOptions.parallelCorpus(), 'application/octet-stream');
+      multipartBuilder.addFormDataPart('parallel_corpus', createModelOptions.parallelCorpusFilename(), parallelCorpusBody);
     }
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
@@ -198,6 +202,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
   public void deleteModel(IBMLanguageTranslatorV3Models.DeleteModelOptions deleteModelOptions) {
     IBMWatsonValidator.notNull(deleteModelOptions, 'deleteModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v3/models/{0}', new String[]{ deleteModelOptions.modelId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (deleteModelOptions != null) ? deleteModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -221,6 +226,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
   public IBMLanguageTranslatorV3Models.TranslationModel getModel(IBMLanguageTranslatorV3Models.GetModelOptions getModelOptions) {
     IBMWatsonValidator.notNull(getModelOptions, 'getModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v3/models/{0}', new String[]{ getModelOptions.modelId() }));
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (getModelOptions != null) ? getModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -242,6 +248,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    */
   public IBMLanguageTranslatorV3Models.TranslationModels listModels(IBMLanguageTranslatorV3Models.ListModelsOptions listModelsOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v3/models');
+    builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (listModelsOptions != null) ? listModelsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -255,8 +262,8 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
     if (listModelsOptions != null && listModelsOptions.target() != null) {
       builder.query('target', listModelsOptions.target());
     }
-    if (listModelsOptions != null && listModelsOptions.defaultField() != null) {
-      builder.query('default', String.valueOf(listModelsOptions.defaultField()));
+    if (listModelsOptions != null && listModelsOptions.defaultModels() != null) {
+      builder.query('default', String.valueOf(listModelsOptions.defaultModels()));
     }
 
     return (IBMLanguageTranslatorV3Models.TranslationModels) createServiceCall(builder.build(), IBMLanguageTranslatorV3Models.TranslationModels.class);
