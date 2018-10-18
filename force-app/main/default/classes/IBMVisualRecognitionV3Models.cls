@@ -826,7 +826,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the imagesFilename.
      *
-     * The filename for images_file.
+     * The filename for imagesFile.
      *
      * @return the imagesFilename
      */
@@ -1123,7 +1123,8 @@ public class IBMVisualRecognitionV3Models {
    */
   public class CreateClassifierOptions extends IBMWatsonOptionsModel {
     private String name;
-    private Map<String, IBMWatsonFile> classnamePositiveExamples;
+    private Map<String, IBMWatsonFile> positiveExamples;
+    private Map<String, String> positiveExamplesFilename;
     private IBMWatsonFile negativeExamples;
     private String negativeExamplesFilename;
  
@@ -1139,32 +1140,34 @@ public class IBMVisualRecognitionV3Models {
     }
  
     /**
-     * Gets the class names.
+     * Gets the positiveExamples.
      *
-     * @return the classNames
+     * A .zip file of images that depict the visual subject of a class in the new classifier. You can include more than
+     * one positive example file in a call.
+     *
+     * Specify the parameter name by appending `_positive_examples` to the class name. For example,
+     * `goldenretriever_positive_examples` creates the class **goldenretriever**.
+     *
+     * Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
+     * maximum number of images is 10,000 images or 100 MB per .zip file.
+     *
+     * Encode special characters in the file name in UTF-8.
+     *
+     * @return the positiveExamples
      */
-    public Set<String> classNames() {
-      return classnamePositiveExamples.keySet();
+    public Map<String, IBMWatsonFile> positiveExamples() {
+      return positiveExamples;
     }
  
     /**
-     * Gets the positive examples by class name.
+     * Gets the positiveExamplesFilename.
      *
-     * A .zip file of images that depict the visual subject of a class in the new classifier.
-     * You can include more than one positive example file in a call. Append
-     * `_positive_examples` to the form name. The prefix is used as the class name. For
-     * example, `goldenretriever_positive_examples` creates the
-     * class **goldenretriever**.  Include at least 10 images in .jpg or .png format. The
-     * minimum recommended image resolution is 32X32 pixels. The maximum number of
-     * images is 10,000 images or 100 MB per .zip file.  Encode special characters in the file
-     * name in UTF-8.  The API explorer limits you to training only one class. To train
-     * more classes, use the API functionality.
+     * The filename for positiveExamples.
      *
-     * @param className the class name
-     * @return the positiveExamples
+     * @return the positiveExamplesFilename
      */
-    public IBMWatsonFile positiveExamplesByClassName(String className) {
-      return classnamePositiveExamples.get(className);
+    public Map<String, String> positiveExamplesFilename() {
+      return positiveExamplesFilename;
     }
  
     /**
@@ -1184,7 +1187,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the negativeExamplesFilename.
      *
-     * The filename for negative_examples.
+     * The filename for negativeExamples.
      *
      * @return the negativeExamplesFilename
      */
@@ -1194,11 +1197,11 @@ public class IBMVisualRecognitionV3Models {
 
     private CreateClassifierOptions(CreateClassifierOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
-      IBMWatsonValidator.isTrue(!builder.classnamePositiveExamples.isEmpty() || (builder.negativeExamples != null),
-        'To update a classifier, you must supply at least one positive examples file or a negative examples file.'
-      );
+      IBMWatsonValidator.isTrue(builder.negativeExamples == null || builder.negativeExamplesFilename != null, 'filename cannot be null if file is not null');
+      IBMWatsonValidator.isTrue(builder.positiveExamples != null && !builder.positiveExamples.isEmpty(), 'positiveExamples cannot be null or empty');
       name = builder.name;
-      classnamePositiveExamples = builder.classnamePositiveExamples;
+      positiveExamples = builder.positiveExamples;
+      positiveExamplesFilename = builder.positiveExamplesFilename;
       negativeExamples = builder.negativeExamples;
       negativeExamplesFilename = builder.negativeExamplesFilename;
       this.requestHeaders = builder.requestHeaders;
@@ -1220,14 +1223,15 @@ public class IBMVisualRecognitionV3Models {
    */
   public class CreateClassifierOptionsBuilder extends IBMWatsonOptionsModel {
     private String name;
-    private Map<String, IBMWatsonFile> classnamePositiveExamples;
+    private Map<String, IBMWatsonFile> positiveExamples;
+    private Map<String, String> positiveExamplesFilename;
     private IBMWatsonFile negativeExamples;
     private String negativeExamplesFilename;
 
     private CreateClassifierOptionsBuilder(CreateClassifierOptions createClassifierOptions) {
-      this();
       name = createClassifierOptions.name;
-      classnamePositiveExamples.putAll(createClassifierOptions.classnamePositiveExamples);
+      positiveExamples = createClassifierOptions.positiveExamples;
+      positiveExamplesFilename = createClassifierOptions.positiveExamplesFilename;
       negativeExamples = createClassifierOptions.negativeExamples;
       negativeExamplesFilename = createClassifierOptions.negativeExamplesFilename;
       this.requestHeaders.putAll(createClassifierOptions.requestHeaders());
@@ -1237,19 +1241,15 @@ public class IBMVisualRecognitionV3Models {
      * Instantiates a new builder.
      */
     public CreateClassifierOptionsBuilder() {
-      classnamePositiveExamples = new Map<String, IBMWatsonFile>();
     }
 
     /**
      * Instantiates a new builder with required properties.
      *
      * @param name the name
-     * @param classnamePositiveExamples the classnamePositiveExamples
      */
-    public CreateClassifierOptionsBuilder(String name, Map<String, IBMWatsonFile> classnamePositiveExamples) {
-      this();
+    public CreateClassifierOptionsBuilder(String name) {
       this.name = name;
-      this.classnamePositiveExamples = classnamePositiveExamples;
     }
 
     /**
@@ -1259,6 +1259,40 @@ public class IBMVisualRecognitionV3Models {
      */
     public CreateClassifierOptions build() {
       return new CreateClassifierOptions(this);
+    }
+
+    /**
+     * Adds an entry to the positiveExamples map.
+     *
+     * @param classname the key associated with the map entry to be added
+     * @param positiveExamples the value associated with the map entry to be added
+     * @return the CreateClassifierOptions builder
+     */
+    public CreateClassifierOptionsBuilder addPositiveExamples(String classname, IBMWatsonFile positiveExamples) {
+      IBMWatsonValidator.notNull(classname, 'classname cannot be null');
+      IBMWatsonValidator.notNull(positiveExamples, 'positiveExamples cannot be null');
+      if (this.positiveExamples == null) {
+        this.positiveExamples = new Map<String, IBMWatsonFile>();
+      }
+      this.positiveExamples.put(classname, positiveExamples);
+      return this;
+    }
+
+    /**
+     * Adds an entry to the positiveExamplesFilename map.
+     *
+     * @param classname the key associated with the map entry to be added
+     * @param positiveExamplesFilename the value associated with the map entry to be added
+     * @return the CreateClassifierOptions builder
+     */
+    public CreateClassifierOptionsBuilder addPositiveExamplesFilename(String classname, String positiveExamplesFilename) {
+      IBMWatsonValidator.notNull(classname, 'classname cannot be null');
+      IBMWatsonValidator.notNull(positiveExamplesFilename, 'positiveExamplesFilename cannot be null');
+      if (this.positiveExamplesFilename == null) {
+        this.positiveExamplesFilename = new Map<String, String>();
+      }
+      this.positiveExamplesFilename.put(classname, positiveExamplesFilename);
+      return this;
     }
 
     /**
@@ -1273,17 +1307,26 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Adds a classifier with a name and positive examples. If the classifier name is
-     * already contained, the old positive examples are replaced by the specified value.
+     * Set the positiveExamples.
+     * Existing positiveExamples map will be replaced.
      *
-     * @param className the class name
-     * @param positiveExamples the positive examples
-     * @return the builder
+     * @param positiveExamples the positiveExamples
+     * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder addClass(String className, IBMWatsonFile positiveExamples) {
-      IBMWatsonValidator.notNull(className, 'className cannot be null');
-      IBMWatsonValidator.notNull(positiveExamples, 'positiveExamples cannot be null');
-      classnamePositiveExamples.put(className, positiveExamples);
+    public CreateClassifierOptionsBuilder positiveExamples(Map<String, IBMWatsonFile> positiveExamples) {
+      this.positiveExamples = positiveExamples;
+      return this;
+    }
+
+    /**
+     * Set the positiveExamplesFilename.
+     * Existing positiveExamplesFilename map will be replaced.
+     *
+     * @param positiveExamplesFilename the positiveExamplesFilename
+     * @return the CreateClassifierOptions builder
+     */
+    public CreateClassifierOptionsBuilder positiveExamplesFilename(Map<String, String> positiveExamplesFilename) {
+      this.positiveExamplesFilename = positiveExamplesFilename;
       return this;
     }
 
@@ -1537,7 +1580,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the imagesFilename.
      *
-     * The filename for images_file.
+     * The filename for imagesFile.
      *
      * @return the imagesFilename
      */
@@ -2634,7 +2677,8 @@ public class IBMVisualRecognitionV3Models {
    */
   public class UpdateClassifierOptions extends IBMWatsonOptionsModel {
     private String classifierId;
-    private Map<String, IBMWatsonFile> classnamePositiveExamples;
+    private Map<String, IBMWatsonFile> positiveExamples;
+    private Map<String, String> positiveExamplesFilename;
     private IBMWatsonFile negativeExamples;
     private String negativeExamplesFilename;
  
@@ -2650,31 +2694,34 @@ public class IBMVisualRecognitionV3Models {
     }
  
     /**
-     * Gets the class names.
+     * Gets the positiveExamples.
      *
-     * @return the classNames
+     * A .zip file of images that depict the visual subject of a class in the classifier. The positive examples create
+     * or update classes in the classifier. You can include more than one positive example file in a call.
+     *
+     * Specify the parameter name by appending `_positive_examples` to the class name. For example,
+     * `goldenretriever_positive_examples` creates the class `goldenretriever`.
+     *
+     * Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
+     * maximum number of images is 10,000 images or 100 MB per .zip file.
+     *
+     * Encode special characters in the file name in UTF-8.
+     *
+     * @return the positiveExamples
      */
-    public Set<String> classNames() {
-      return classnamePositiveExamples.keySet();
+    public Map<String, IBMWatsonFile> positiveExamples() {
+      return positiveExamples;
     }
  
     /**
-     * Gets the positive examples by class name.
+     * Gets the positiveExamplesFilename.
      *
-     * A .zip file of images that depict the visual subject of a class in the new classifier.
-     * You can include more than one positive example file in a call. Append
-     * `_positive_examples` to the form name. The prefix is used as the class name. For
-     * example, `goldenretriever_positive_examples` creates the
-     * class **goldenretriever**.  Include at least 10 images in .jpg or .png format. The
-     * minimum recommended image resolution is 32X32 pixels. The maximum number of
-     * images is 10,000 images or 100 MB per .zip file.  Encode special characters in the file
-     * name in UTF-8.
+     * The filename for positiveExamples.
      *
-     * @param className the class name
-     * @return the positiveExamples
+     * @return the positiveExamplesFilename
      */
-    public IBMWatsonFile positiveExamplesByClassName(String className) {
-      return classnamePositiveExamples.get(className);
+    public Map<String, String> positiveExamplesFilename() {
+      return positiveExamplesFilename;
     }
  
     /**
@@ -2694,7 +2741,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the negativeExamplesFilename.
      *
-     * The filename for negative_examples.
+     * The filename for negativeExamples.
      *
      * @return the negativeExamplesFilename
      */
@@ -2704,11 +2751,10 @@ public class IBMVisualRecognitionV3Models {
 
     private UpdateClassifierOptions(UpdateClassifierOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.classifierId, 'classifierId cannot be empty');
-      IBMWatsonValidator.isTrue(!builder.classnamePositiveExamples.isEmpty() || (builder.negativeExamples != null),
-        'To update a classifier, you must supply at least one positive examples file or a negative examples file.'
-      );
+      IBMWatsonValidator.isTrue(builder.negativeExamples == null || builder.negativeExamplesFilename != null, 'filename cannot be null if file is not null');
       classifierId = builder.classifierId;
-      classnamePositiveExamples = builder.classnamePositiveExamples;
+      positiveExamples = builder.positiveExamples;
+      positiveExamplesFilename = builder.positiveExamplesFilename;
       negativeExamples = builder.negativeExamples;
       negativeExamplesFilename = builder.negativeExamplesFilename;
       this.requestHeaders = builder.requestHeaders;
@@ -2730,14 +2776,15 @@ public class IBMVisualRecognitionV3Models {
    */
   public class UpdateClassifierOptionsBuilder extends IBMWatsonOptionsModel {
     private String classifierId;
-    private Map<String, IBMWatsonFile> classnamePositiveExamples;
+    private Map<String, IBMWatsonFile> positiveExamples;
+    private Map<String, String> positiveExamplesFilename;
     private IBMWatsonFile negativeExamples;
     private String negativeExamplesFilename;
 
     private UpdateClassifierOptionsBuilder(UpdateClassifierOptions updateClassifierOptions) {
-      this();
       classifierId = updateClassifierOptions.classifierId;
-      classnamePositiveExamples.putAll(updateClassifierOptions.classnamePositiveExamples);
+      positiveExamples = updateClassifierOptions.positiveExamples;
+      positiveExamplesFilename = updateClassifierOptions.positiveExamplesFilename;
       negativeExamples = updateClassifierOptions.negativeExamples;
       negativeExamplesFilename = updateClassifierOptions.negativeExamplesFilename;
       this.requestHeaders.putAll(updateClassifierOptions.requestHeaders());
@@ -2747,7 +2794,6 @@ public class IBMVisualRecognitionV3Models {
      * Instantiates a new builder.
      */
     public UpdateClassifierOptionsBuilder() {
-      classnamePositiveExamples = new Map<String, IBMWatsonFile>();
     }
 
     /**
@@ -2756,7 +2802,6 @@ public class IBMVisualRecognitionV3Models {
      * @param classifierId the classifierId
      */
     public UpdateClassifierOptionsBuilder(String classifierId) {
-      this();
       this.classifierId = classifierId;
     }
 
@@ -2767,6 +2812,40 @@ public class IBMVisualRecognitionV3Models {
      */
     public UpdateClassifierOptions build() {
       return new UpdateClassifierOptions(this);
+    }
+
+    /**
+     * Adds an entry to the positiveExamples map.
+     *
+     * @param classname the key associated with the map entry to be added
+     * @param positiveExamples the value associated with the map entry to be added
+     * @return the UpdateClassifierOptions builder
+     */
+    public UpdateClassifierOptionsBuilder addPositiveExamples(String classname, IBMWatsonFile positiveExamples) {
+      IBMWatsonValidator.notNull(classname, 'classname cannot be null');
+      IBMWatsonValidator.notNull(positiveExamples, 'positiveExamples cannot be null');
+      if (this.positiveExamples == null) {
+        this.positiveExamples = new Map<String, IBMWatsonFile>();
+      }
+      this.positiveExamples.put(classname, positiveExamples);
+      return this;
+    }
+
+    /**
+     * Adds an entry to the positiveExamplesFilename map.
+     *
+     * @param classname the key associated with the map entry to be added
+     * @param positiveExamplesFilename the value associated with the map entry to be added
+     * @return the UpdateClassifierOptions builder
+     */
+    public UpdateClassifierOptionsBuilder addPositiveExamplesFilename(String classname, String positiveExamplesFilename) {
+      IBMWatsonValidator.notNull(classname, 'classname cannot be null');
+      IBMWatsonValidator.notNull(positiveExamplesFilename, 'positiveExamplesFilename cannot be null');
+      if (this.positiveExamplesFilename == null) {
+        this.positiveExamplesFilename = new Map<String, String>();
+      }
+      this.positiveExamplesFilename.put(classname, positiveExamplesFilename);
+      return this;
     }
 
     /**
@@ -2781,17 +2860,26 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Adds a classifier with a name and positive examples. If the classifier name is
-     * already contained, the old positive examples are replaced by the specified value.
+     * Set the positiveExamples.
+     * Existing positiveExamples map will be replaced.
      *
-     * @param className the class name
-     * @param positiveExamples the positive examples
-     * @return the builder
+     * @param positiveExamples the positiveExamples
+     * @return the UpdateClassifierOptions builder
      */
-    public UpdateClassifierOptionsBuilder addClass(String className, IBMWatsonFile positiveExamples) {
-      IBMWatsonValidator.notNull(className, 'className cannot be null');
-      IBMWatsonValidator.notNull(positiveExamples, 'positiveExamples cannot be null');
-      classnamePositiveExamples.put(className, positiveExamples);
+    public UpdateClassifierOptionsBuilder positiveExamples(Map<String, IBMWatsonFile> positiveExamples) {
+      this.positiveExamples = positiveExamples;
+      return this;
+    }
+
+    /**
+     * Set the positiveExamplesFilename.
+     * Existing positiveExamplesFilename map will be replaced.
+     *
+     * @param positiveExamplesFilename the positiveExamplesFilename
+     * @return the UpdateClassifierOptions builder
+     */
+    public UpdateClassifierOptionsBuilder positiveExamplesFilename(Map<String, String> positiveExamplesFilename) {
+      this.positiveExamplesFilename = positiveExamplesFilename;
       return this;
     }
 

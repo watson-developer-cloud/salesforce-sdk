@@ -161,15 +161,12 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     multipartBuilder.addFormDataPart('name', createClassifierOptions.name());
-    // Classes
-    for (String className : createClassifierOptions.classNames()) {
-      String dataName = className + '_positive_examples';
-      IBMWatsonFile positiveExamples = createClassifierOptions.positiveExamplesByClassName(className);
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(
-        positiveExamples,
-        'application/octet-stream'
-      );
-      multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
+    for (String key : createClassifierOptions.positiveExamples().keySet()) {
+      String partName = String.format('{0}_positive_examples', new String[] { key });
+      String fileName = createClassifierOptions.positiveExamplesFilename() != null ? createClassifierOptions.positiveExamplesFilename().get(key) : null;
+      IBMWatsonFile file = createClassifierOptions.positiveExamples().get(key);
+      IBMWatsonRequestBody formPart = IBMWatsonRequestBody.create(file, 'application/octet-stream');
+      multipartBuilder.addFormDataPart(partName, fileName != null ? fileName : file.name(), formPart);
     }
     if (createClassifierOptions.negativeExamples() != null) {
       IBMWatsonRequestBody negativeExamplesBody = IBMWatsonRequestBody.create(createClassifierOptions.negativeExamples(), 'application/octet-stream');
@@ -268,6 +265,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    */
   public IBMVisualRecognitionV3Models.Classifier updateClassifier(IBMVisualRecognitionV3Models.UpdateClassifierOptions updateClassifierOptions) {
     IBMWatsonValidator.notNull(updateClassifierOptions, 'updateClassifierOptions cannot be null');
+    IBMWatsonValidator.isTrue((updateClassifierOptions.positiveExamples() != null) || (updateClassifierOptions.negativeExamples() != null), 'At least one of positive_examples or negative_examples must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v3/classifiers/{0}', new String[]{ updateClassifierOptions.classifierId() }));
     builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (updateClassifierOptions != null) ? updateClassifierOptions.requestHeaders() : null;
@@ -279,12 +277,14 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     builder.query('version', versionDate);
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    // Classes
-    for (String className : updateClassifierOptions.classNames()) {
-      String dataName = className + '_positive_examples';
-      IBMWatsonFile positiveExamples = updateClassifierOptions.positiveExamplesByClassName(className);
-      IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(positiveExamples, 'application/octet-stream');
-      multipartBuilder.addFormDataPart(dataName, positiveExamples.name(), fileBody);
+    if (updateClassifierOptions.positiveExamples() != null) {
+      for (String key : updateClassifierOptions.positiveExamples().keySet()) {
+        String partName = String.format('{0}_positive_examples', new String[] { key });
+        String fileName = updateClassifierOptions.positiveExamplesFilename() != null ? updateClassifierOptions.positiveExamplesFilename().get(key) : null;
+        IBMWatsonFile file = updateClassifierOptions.positiveExamples().get(key);
+        IBMWatsonRequestBody formPart = IBMWatsonRequestBody.create(file, 'application/octet-stream');
+        multipartBuilder.addFormDataPart(partName, fileName != null ? fileName : file.name(), formPart);
+      }
     }
     if (updateClassifierOptions.negativeExamples() != null) {
       IBMWatsonRequestBody negativeExamplesBody = IBMWatsonRequestBody.create(updateClassifierOptions.negativeExamples(), 'application/octet-stream');
