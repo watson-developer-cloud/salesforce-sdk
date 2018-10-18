@@ -143,9 +143,16 @@ private class IBMVisualRecognitionV3Test {
       .description(att.Description)
       .contentType(att.ContentType)
       .build();
+    Map<String, IBMWatsonFile> positiveExamples = new Map<String,IBMWatsonFile>();
+    positiveExamples.put('test', testfile);
+    Map<String, String> positiveExampleFilenames = new Map<String, String>();
+    positiveExampleFilenames.put('test', 'test_file');
     IBMVisualRecognitionV3Models.CreateClassifierOptions options = new IBMVisualRecognitionV3Models.CreateClassifierOptionsBuilder()
       .name('test')
-      .addClass('test', testfile)
+      .positiveExamples(positiveExamples)
+      .positiveExamplesFilename(positiveExampleFilenames)
+      .addPositiveExamples('other_test', testfile)
+      .addPositiveExamplesFilename('other_test', 'second_test_file')
       .negativeExamples(testfile)
       .negativeExamplesFilename('test')
       .addHeader('Test-Header', 'test_value')
@@ -219,9 +226,16 @@ private class IBMVisualRecognitionV3Test {
       .description(att.Description)
       .contentType(att.ContentType)
       .build();
+    Map<String, IBMWatsonFile> positiveExamples = new Map<String,IBMWatsonFile>();
+    positiveExamples.put('test', testfile);
+    Map<String, String> positiveExampleFilenames = new Map<String, String>();
+    positiveExampleFilenames.put('test', 'test_file');
     IBMVisualRecognitionV3Models.UpdateClassifierOptions options = new IBMVisualRecognitionV3Models.UpdateClassifierOptionsBuilder()
       .classifierId('classifierId')
-      .addClass('test', testfile)
+      .positiveExamples(positiveExamples)
+      .positiveExamplesFilename(positiveExampleFilenames)
+      .addPositiveExamples('other_test', testfile)
+      .addPositiveExamplesFilename('other_test', 'second_test_file')
       .negativeExamples(testfile)
       .negativeExamplesFilename('test')
       .addHeader('Test-Header', 'test_value')
