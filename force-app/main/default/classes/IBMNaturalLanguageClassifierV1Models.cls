@@ -876,7 +876,7 @@ public class IBMNaturalLanguageClassifierV1Models {
    */
   public class CreateClassifierOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile metadata;
-    private String trainingMetadataFilename;
+    private String metadataFilename;
     private IBMWatsonFile trainingData;
     private String trainingDataFilename;
  
@@ -896,14 +896,14 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
  
     /**
-     * Gets the trainingMetadataFilename.
+     * Gets the metadataFilename.
      *
-     * The filename for training_metadata.
+     * The filename for trainingMetadata.
      *
-     * @return the trainingMetadataFilename
+     * @return the metadataFilename
      */
-    public String trainingMetadataFilename() {
-      return trainingMetadataFilename;
+    public String metadataFilename() {
+      return metadataFilename;
     }
  
     /**
@@ -922,7 +922,7 @@ public class IBMNaturalLanguageClassifierV1Models {
     /**
      * Gets the trainingDataFilename.
      *
-     * The filename for training_data.
+     * The filename for trainingData.
      *
      * @return the trainingDataFilename
      */
@@ -934,7 +934,7 @@ public class IBMNaturalLanguageClassifierV1Models {
       IBMWatsonValidator.notNull(builder.metadata, 'metadata cannot be null');
       IBMWatsonValidator.notNull(builder.trainingData, 'trainingData cannot be null');
       metadata = builder.metadata;
-      trainingMetadataFilename = builder.trainingMetadataFilename;
+      metadataFilename = builder.metadataFilename;
       trainingData = builder.trainingData;
       trainingDataFilename = builder.trainingDataFilename;
       this.requestHeaders = builder.requestHeaders;
@@ -956,13 +956,13 @@ public class IBMNaturalLanguageClassifierV1Models {
    */
   public class CreateClassifierOptionsBuilder extends IBMWatsonOptionsModel {
     private IBMWatsonFile metadata;
-    private String trainingMetadataFilename;
+    private String metadataFilename;
     private IBMWatsonFile trainingData;
     private String trainingDataFilename;
 
     private CreateClassifierOptionsBuilder(CreateClassifierOptions createClassifierOptions) {
       metadata = createClassifierOptions.metadata;
-      trainingMetadataFilename = createClassifierOptions.trainingMetadataFilename;
+      metadataFilename = createClassifierOptions.metadataFilename;
       trainingData = createClassifierOptions.trainingData;
       trainingDataFilename = createClassifierOptions.trainingDataFilename;
       this.requestHeaders.putAll(createClassifierOptions.requestHeaders());
@@ -1006,13 +1006,13 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Set the trainingMetadataFilename.
+     * Set the metadataFilename.
      *
-     * @param trainingMetadataFilename the trainingMetadataFilename
+     * @param metadataFilename the metadataFilename
      * @return the CreateClassifierOptions builder
      */
-    public CreateClassifierOptionsBuilder trainingMetadataFilename(String trainingMetadataFilename) {
-      this.trainingMetadataFilename = trainingMetadataFilename;
+    public CreateClassifierOptionsBuilder metadataFilename(String metadataFilename) {
+      this.metadataFilename = metadataFilename;
       return this;
     }
 
