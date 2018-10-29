@@ -676,6 +676,29 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
+   * Delete tokenization dictionary.
+   *
+   * Delete the tokenization dictionary from the collection.
+   *
+   * @param deleteTokenizationDictionaryOptions the {@link IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteTokenizationDictionary(IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptions deleteTokenizationDictionaryOptions) {
+    IBMWatsonValidator.notNull(deleteTokenizationDictionaryOptions, 'deleteTokenizationDictionaryOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/word_lists/tokenization_dictionary', new String[]{ deleteTokenizationDictionaryOptions.environmentId(), deleteTokenizationDictionaryOptions.collectionId() }));
+    builder.addHeader('Accept', 'application/json');
+    Map<String, String> requestHeaders = (deleteTokenizationDictionaryOptions != null) ? deleteTokenizationDictionaryOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
    * Get tokenization dictionary status.
    *
    * Returns the current status of the tokenization dictionary for the specified collection.
