@@ -905,6 +905,19 @@ public class IBMNaturalLanguageClassifierV1Models {
     public String metadataFilename() {
       return metadataFilename;
     }
+
+    /**
+     * Gets the metadataFilename.
+     *
+     * The filename for trainingMetadata.
+     *
+     * NOTE: This getter is now deprecated. Please use the metadataFilename getter.
+     *
+     * @return the metadataFilename
+     */
+    public String trainingMetadataFilename() {
+      return metadataFilename;
+    }
  
     /**
      * Gets the trainingData.
@@ -1012,6 +1025,19 @@ public class IBMNaturalLanguageClassifierV1Models {
      * @return the CreateClassifierOptions builder
      */
     public CreateClassifierOptionsBuilder metadataFilename(String metadataFilename) {
+      this.metadataFilename = metadataFilename;
+      return this;
+    }
+
+    /**
+     * Set the metadataFilename.
+     *
+     * NOTE: This setter is now deprecated. Please use the metadataFilename setter.
+     *
+     * @param metadataFilename the metadataFilename
+     * @return the CreateClassifierOptions builder
+     */
+    public CreateClassifierOptionsBuilder trainingMetadataFilename(String metadataFilename) {
       this.metadataFilename = metadataFilename;
       return this;
     }
