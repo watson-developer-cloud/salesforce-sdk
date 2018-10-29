@@ -7,8 +7,7 @@
  *
  * For speech recognition, the service supports synchronous and asynchronous HTTP Representational State Transfer (REST)
  * interfaces. It also supports a WebSocket interface that provides a full-duplex, low-latency communication channel:
- * Clients send requests and audio to the service and receive results over a single connection in an asynchronous
- * fashion.
+ * Clients send requests and audio to the service and receive results over a single connection asynchronously.
  *
  * The service also offers two customization interfaces. Use language model customization to expand the vocabulary of a
  * base model with domain-specific terminology. Use acoustic model customization to adapt a base model for the acoustic
@@ -110,7 +109,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * Sends audio and returns transcription results for a recognition request. Returns only the final results; to enable
    * interim results, use the WebSocket API. The service imposes a data size limit of 100 MB. It automatically detects
    * the endianness of the incoming audio and, for audio that includes multiple channels, downmixes the audio to
-   * one-channel mono during transcoding. (For the `audio/l16` format, you can specify the endianness.)
+   * one-channel mono during transcoding.
    *
    * **See also:** [Making a basic HTTP
    * request](https://console.bluemix.net/docs/services/speech-to-text/http.html#HTTP-basic).
@@ -129,15 +128,22 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * ### Audio formats (content types)
    *
-   *  Use the `Content-Type` header to specify the audio format (MIME type) of the audio. The service accepts the
-   * following formats, including specifying the sampling rate, channels, and endianness where indicated.
-   * * `audio/basic` (Use only with narrowband models.)
+   *  The service accepts audio in the following formats (MIME types).
+   * * For formats that are labeled **Required**, you must use the `Content-Type` header with the request to specify the
+   * format of the audio.
+   * * For all other formats, you can omit the `Content-Type` header or specify `application/octet-stream` with the
+   * header to have the service automatically detect the format of the audio. (With the `curl` command, you can specify
+   * either `\"Content-Type:\"` or `\"Content-Type: application/octet-stream\"`.)
+   *
+   * Where indicated, the format that you specify must include the sampling rate and can optionally include the number
+   * of channels and the endianness of the audio.
+   * * `audio/basic` (**Required.** Use only with narrowband models.)
    * * `audio/flac`
-   * * `audio/l16` (Specify the sampling rate (`rate`) and optionally the number of channels (`channels`) and endianness
-   * (`endianness`) of the audio.)
+   * * `audio/l16` (**Required.** Specify the sampling rate (`rate`) and optionally the number of channels (`channels`)
+   * and endianness (`endianness`) of the audio.)
    * * `audio/mp3`
    * * `audio/mpeg`
-   * * `audio/mulaw` (Specify the sampling rate (`rate`) of the audio.)
+   * * `audio/mulaw` (**Required.** Specify the sampling rate (`rate`) of the audio.)
    * * `audio/ogg` (The service automatically detects the codec of the input audio.)
    * * `audio/ogg;codecs=opus`
    * * `audio/ogg;codecs=vorbis`
@@ -147,6 +153,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * * `audio/webm;codecs=vorbis`
    *
    * **See also:** [Audio formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
+   *
+   * **Note:** You must pass a content type when using any of the Watson SDKs. The SDKs require the content-type
+   * parameter for all audio formats.
    *
    * ### Multipart speech recognition
    *
@@ -178,8 +187,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (recognizeOptions.model() != null) {
       builder.query('model', recognizeOptions.model());
     }
-    if (recognizeOptions.customizationId() != null) {
-      builder.query('customization_id', recognizeOptions.customizationId());
+    if (recognizeOptions.languageCustomizationId() != null) {
+      builder.query('language_customization_id', recognizeOptions.languageCustomizationId());
     }
     if (recognizeOptions.acousticCustomizationId() != null) {
       builder.query('acoustic_customization_id', recognizeOptions.acousticCustomizationId());
@@ -219,6 +228,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     }
     if (recognizeOptions.speakerLabels() != null) {
       builder.query('speaker_labels', String.valueOf(recognizeOptions.speakerLabels()));
+    }
+    if (recognizeOptions.customizationId() != null) {
+      builder.query('customization_id', recognizeOptions.customizationId());
     }
     builder.bodyContent(recognizeOptions.contentType(), null, null, recognizeOptions.audio());
 
@@ -332,15 +344,22 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * ### Audio formats (content types)
    *
-   *  Use the `Content-Type` header to specify the audio format (MIME type) of the audio. The service accepts the
-   * following formats, including specifying the sampling rate, channels, and endianness where indicated.
-   * * `audio/basic` (Use only with narrowband models.)
+   *  The service accepts audio in the following formats (MIME types).
+   * * For formats that are labeled **Required**, you must use the `Content-Type` header with the request to specify the
+   * format of the audio.
+   * * For all other formats, you can omit the `Content-Type` header or specify `application/octet-stream` with the
+   * header to have the service automatically detect the format of the audio. (With the `curl` command, you can specify
+   * either `\"Content-Type:\"` or `\"Content-Type: application/octet-stream\"`.)
+   *
+   * Where indicated, the format that you specify must include the sampling rate and can optionally include the number
+   * of channels and the endianness of the audio.
+   * * `audio/basic` (**Required.** Use only with narrowband models.)
    * * `audio/flac`
-   * * `audio/l16` (Specify the sampling rate (`rate`) and optionally the number of channels (`channels`) and endianness
-   * (`endianness`) of the audio.)
+   * * `audio/l16` (**Required.** Specify the sampling rate (`rate`) and optionally the number of channels (`channels`)
+   * and endianness (`endianness`) of the audio.)
    * * `audio/mp3`
    * * `audio/mpeg`
-   * * `audio/mulaw` (Specify the sampling rate (`rate`) of the audio.)
+   * * `audio/mulaw` (**Required.** Specify the sampling rate (`rate`) of the audio.)
    * * `audio/ogg` (The service automatically detects the codec of the input audio.)
    * * `audio/ogg;codecs=opus`
    * * `audio/ogg;codecs=vorbis`
@@ -350,6 +369,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * * `audio/webm;codecs=vorbis`
    *
    * **See also:** [Audio formats](https://console.bluemix.net/docs/services/speech-to-text/audio-formats.html).
+   *
+   * **Note:** You must pass a content type when using any of the Watson SDKs. The SDKs require the content-type
+   * parameter for all audio formats.
    *
    * @param createJobOptions the {@link IBMSpeechToTextV1Models.CreateJobOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.RecognitionJob} with the response
@@ -380,8 +402,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createJobOptions.resultsTtl() != null) {
       builder.query('results_ttl', String.valueOf(createJobOptions.resultsTtl()));
     }
-    if (createJobOptions.customizationId() != null) {
-      builder.query('customization_id', createJobOptions.customizationId());
+    if (createJobOptions.languageCustomizationId() != null) {
+      builder.query('language_customization_id', createJobOptions.languageCustomizationId());
     }
     if (createJobOptions.acousticCustomizationId() != null) {
       builder.query('acoustic_customization_id', createJobOptions.acousticCustomizationId());
@@ -421,6 +443,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     }
     if (createJobOptions.speakerLabels() != null) {
       builder.query('speaker_labels', String.valueOf(createJobOptions.speakerLabels()));
+    }
+    if (createJobOptions.customizationId() != null) {
+      builder.query('customization_id', createJobOptions.customizationId());
     }
     builder.bodyContent(createJobOptions.contentType(), null, null, createJobOptions.audio());
 

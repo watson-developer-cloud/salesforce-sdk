@@ -338,8 +338,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -414,7 +414,8 @@ public class IBMSpeechToTextV1Models {
     private AddAudioOptions(AddAudioOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.audioName, 'audioName cannot be empty');
-      IBMWatsonValidator.isTrue(builder.contentType != null, 'contentType cannot be null');
+      IBMWatsonValidator.notNull(builder.audioResource, 'audioResource cannot be null');
+      IBMWatsonValidator.notNull(builder.contentType, 'contentType cannot be null');
       customizationId = builder.customizationId;
       audioName = builder.audioName;
       audioResource = builder.audioResource;
@@ -467,10 +468,14 @@ public class IBMSpeechToTextV1Models {
      *
      * @param customizationId the customizationId
      * @param audioName the audioName
+     * @param audioResource the audioResource
+     * @param contentType the contentType
      */
-    public AddAudioOptionsBuilder(String customizationId, String audioName) {
+    public AddAudioOptionsBuilder(String customizationId, String audioName, IBMWatsonFile audioResource, String contentType) {
       this.customizationId = customizationId;
       this.audioName = audioName;
+      this.audioResource = audioResource;
+      this.contentType = contentType;
     }
 
     /**
@@ -574,8 +579,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -604,8 +609,8 @@ public class IBMSpeechToTextV1Models {
      * Gets the corpusFile.
      *
      * A plain text file that contains the training data for the corpus. Encode the file in UTF-8 if it contains
-     * non-ASCII characters; the service assumes UTF-8 encoding if it encounters non-ASCII characters. With cURL, use
-     * the `--data-binary` option to upload the file for the request.
+     * non-ASCII characters; the service assumes UTF-8 encoding if it encounters non-ASCII characters. With the `curl`
+     * command, use the `--data-binary` option to upload the file for the request.
      *
      * @return the corpusFile
      */
@@ -616,7 +621,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the corpusFilename.
      *
-     * The filename for corpus_file.
+     * The filename for corpusFile.
      *
      * @return the corpusFilename
      */
@@ -788,8 +793,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -1019,8 +1024,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -1647,7 +1652,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the id.
      *
-     * The ID of the asynchronous job.
+     * The identifier of the asynchronous job that is to be used for the request.
      *
      * @return the id
      */
@@ -2137,7 +2142,7 @@ public class IBMSpeechToTextV1Models {
     private String events;
     private String userToken;
     private Long resultsTtl;
-    private String customizationId;
+    private String languageCustomizationId;
     private String acousticCustomizationId;
     private String baseModelVersion;
     private Double customizationWeight;
@@ -2151,11 +2156,12 @@ public class IBMSpeechToTextV1Models {
     private Boolean profanityFilter;
     private Boolean smartFormatting;
     private Boolean speakerLabels;
+    private String customizationId;
  
     /**
      * Gets the audio.
      *
-     * The audio to transcribe in the format specified by the `Content-Type` header.
+     * The audio to transcribe.
      *
      * @return the audio
      */
@@ -2254,7 +2260,7 @@ public class IBMSpeechToTextV1Models {
     }
  
     /**
-     * Gets the customizationId.
+     * Gets the languageCustomizationId.
      *
      * The customization ID (GUID) of a custom language model that is to be used with the recognition request. The base
      * model of the specified custom language model must match the model specified with the `model` parameter. You must
@@ -2262,10 +2268,12 @@ public class IBMSpeechToTextV1Models {
      * default, no custom language model is used. See [Custom
      * models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
      *
-     * @return the customizationId
+     * **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
+     *
+     * @return the languageCustomizationId
      */
-    public String customizationId() {
-      return customizationId;
+    public String languageCustomizationId() {
+      return languageCustomizationId;
     }
  
     /**
@@ -2462,9 +2470,22 @@ public class IBMSpeechToTextV1Models {
     public Boolean speakerLabels() {
       return speakerLabels;
     }
+ 
+    /**
+     * Gets the customizationId.
+     *
+     * **Deprecated.** Use the `language_customization_id` parameter to specify the customization ID (GUID) of a custom
+     * language model that is to be used with the recognition request. Do not specify both parameters with a request.
+     *
+     * @return the customizationId
+     */
+    public String customizationId() {
+      return customizationId;
+    }
 
     private CreateJobOptions(CreateJobOptionsBuilder builder) {
-      IBMWatsonValidator.isTrue(builder.contentType != null, 'contentType cannot be null');
+      IBMWatsonValidator.notNull(builder.audio, 'audio cannot be null');
+      IBMWatsonValidator.notNull(builder.contentType, 'contentType cannot be null');
       audio = builder.audio;
       contentType = builder.contentType;
       model = builder.model;
@@ -2472,7 +2493,7 @@ public class IBMSpeechToTextV1Models {
       events = builder.events;
       userToken = builder.userToken;
       resultsTtl = builder.resultsTtl;
-      customizationId = builder.customizationId;
+      languageCustomizationId = builder.languageCustomizationId;
       acousticCustomizationId = builder.acousticCustomizationId;
       baseModelVersion = builder.baseModelVersion;
       customizationWeight = builder.customizationWeight;
@@ -2486,6 +2507,7 @@ public class IBMSpeechToTextV1Models {
       profanityFilter = builder.profanityFilter;
       smartFormatting = builder.smartFormatting;
       speakerLabels = builder.speakerLabels;
+      customizationId = builder.customizationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2511,7 +2533,7 @@ public class IBMSpeechToTextV1Models {
     private String events;
     private String userToken;
     private Long resultsTtl;
-    private String customizationId;
+    private String languageCustomizationId;
     private String acousticCustomizationId;
     private String baseModelVersion;
     private Double customizationWeight;
@@ -2525,6 +2547,7 @@ public class IBMSpeechToTextV1Models {
     private Boolean profanityFilter;
     private Boolean smartFormatting;
     private Boolean speakerLabels;
+    private String customizationId;
 
     private CreateJobOptionsBuilder(CreateJobOptions createJobOptions) {
       audio = createJobOptions.audio;
@@ -2534,7 +2557,7 @@ public class IBMSpeechToTextV1Models {
       events = createJobOptions.events;
       userToken = createJobOptions.userToken;
       resultsTtl = createJobOptions.resultsTtl;
-      customizationId = createJobOptions.customizationId;
+      languageCustomizationId = createJobOptions.languageCustomizationId;
       acousticCustomizationId = createJobOptions.acousticCustomizationId;
       baseModelVersion = createJobOptions.baseModelVersion;
       customizationWeight = createJobOptions.customizationWeight;
@@ -2548,6 +2571,7 @@ public class IBMSpeechToTextV1Models {
       profanityFilter = createJobOptions.profanityFilter;
       smartFormatting = createJobOptions.smartFormatting;
       speakerLabels = createJobOptions.speakerLabels;
+      customizationId = createJobOptions.customizationId;
       this.requestHeaders.putAll(createJobOptions.requestHeaders());
     }
 
@@ -2555,6 +2579,17 @@ public class IBMSpeechToTextV1Models {
      * Instantiates a new builder.
      */
     public CreateJobOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param audio the audio
+     * @param contentType the contentType
+     */
+    public CreateJobOptionsBuilder(IBMWatsonFile audio, String contentType) {
+      this.audio = audio;
+      this.contentType = contentType;
     }
 
     /**
@@ -2659,13 +2694,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customizationId.
+     * Set the languageCustomizationId.
      *
-     * @param customizationId the customizationId
+     * @param languageCustomizationId the languageCustomizationId
      * @return the CreateJobOptions builder
      */
-    public CreateJobOptionsBuilder customizationId(String customizationId) {
-      this.customizationId = customizationId;
+    public CreateJobOptionsBuilder languageCustomizationId(String languageCustomizationId) {
+      this.languageCustomizationId = languageCustomizationId;
       return this;
     }
 
@@ -2810,6 +2845,17 @@ public class IBMSpeechToTextV1Models {
      */
     public CreateJobOptionsBuilder speakerLabels(Boolean speakerLabels) {
       this.speakerLabels = speakerLabels;
+      return this;
+    }
+
+    /**
+     * Set the customizationId.
+     *
+     * @param customizationId the customizationId
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder customizationId(String customizationId) {
+      this.customizationId = customizationId;
       return this;
     }
 
@@ -3109,8 +3155,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -3204,8 +3250,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -3327,8 +3373,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -3449,7 +3495,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the id.
      *
-     * The ID of the asynchronous job.
+     * The identifier of the asynchronous job that is to be used for the request.
      *
      * @return the id
      */
@@ -3542,8 +3588,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -3730,8 +3776,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -3854,8 +3900,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -3949,8 +3995,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -4072,8 +4118,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -4194,8 +4240,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -4382,8 +4428,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -5047,8 +5093,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -5141,8 +5187,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -5379,8 +5425,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -5409,7 +5455,8 @@ public class IBMSpeechToTextV1Models {
      * optional `+` or `-` to an argument to indicate whether the results are to be sorted in ascending or descending
      * order. By default, words are sorted in ascending alphabetical order. For alphabetical ordering, the
      * lexicographical precedence is numeric values, uppercase letters, and lowercase letters. For count ordering,
-     * values with the same count are ordered alphabetically. With cURL, URL encode the `+` symbol as `%2B`.
+     * values with the same count are ordered alphabetically. With the `curl` command, URL encode the `+` symbol as
+     * `%2B`.
      *
      * @return the xsort
      */
@@ -5802,7 +5849,7 @@ public class IBMSpeechToTextV1Models {
     private IBMWatsonFile audio;
     private String contentType;
     private String model;
-    private String customizationId;
+    private String languageCustomizationId;
     private String acousticCustomizationId;
     private String baseModelVersion;
     private Double customizationWeight;
@@ -5816,11 +5863,12 @@ public class IBMSpeechToTextV1Models {
     private Boolean profanityFilter;
     private Boolean smartFormatting;
     private Boolean speakerLabels;
+    private String customizationId;
  
     /**
      * Gets the audio.
      *
-     * The audio to transcribe in the format specified by the `Content-Type` header.
+     * The audio to transcribe.
      *
      * @return the audio
      */
@@ -5851,7 +5899,7 @@ public class IBMSpeechToTextV1Models {
     }
  
     /**
-     * Gets the customizationId.
+     * Gets the languageCustomizationId.
      *
      * The customization ID (GUID) of a custom language model that is to be used with the recognition request. The base
      * model of the specified custom language model must match the model specified with the `model` parameter. You must
@@ -5859,10 +5907,12 @@ public class IBMSpeechToTextV1Models {
      * default, no custom language model is used. See [Custom
      * models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
      *
-     * @return the customizationId
+     * **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
+     *
+     * @return the languageCustomizationId
      */
-    public String customizationId() {
-      return customizationId;
+    public String languageCustomizationId() {
+      return languageCustomizationId;
     }
  
     /**
@@ -6059,13 +6109,26 @@ public class IBMSpeechToTextV1Models {
     public Boolean speakerLabels() {
       return speakerLabels;
     }
+ 
+    /**
+     * Gets the customizationId.
+     *
+     * **Deprecated.** Use the `language_customization_id` parameter to specify the customization ID (GUID) of a custom
+     * language model that is to be used with the recognition request. Do not specify both parameters with a request.
+     *
+     * @return the customizationId
+     */
+    public String customizationId() {
+      return customizationId;
+    }
 
     private RecognizeOptions(RecognizeOptionsBuilder builder) {
-      IBMWatsonValidator.isTrue(builder.contentType != null, 'contentType cannot be null');
+      IBMWatsonValidator.notNull(builder.audio, 'audio cannot be null');
+      IBMWatsonValidator.notNull(builder.contentType, 'contentType cannot be null');
       audio = builder.audio;
       contentType = builder.contentType;
       model = builder.model;
-      customizationId = builder.customizationId;
+      languageCustomizationId = builder.languageCustomizationId;
       acousticCustomizationId = builder.acousticCustomizationId;
       baseModelVersion = builder.baseModelVersion;
       customizationWeight = builder.customizationWeight;
@@ -6079,6 +6142,7 @@ public class IBMSpeechToTextV1Models {
       profanityFilter = builder.profanityFilter;
       smartFormatting = builder.smartFormatting;
       speakerLabels = builder.speakerLabels;
+      customizationId = builder.customizationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -6100,7 +6164,7 @@ public class IBMSpeechToTextV1Models {
     private IBMWatsonFile audio;
     private String contentType;
     private String model;
-    private String customizationId;
+    private String languageCustomizationId;
     private String acousticCustomizationId;
     private String baseModelVersion;
     private Double customizationWeight;
@@ -6114,12 +6178,13 @@ public class IBMSpeechToTextV1Models {
     private Boolean profanityFilter;
     private Boolean smartFormatting;
     private Boolean speakerLabels;
+    private String customizationId;
 
     private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
       audio = recognizeOptions.audio;
       contentType = recognizeOptions.contentType;
       model = recognizeOptions.model;
-      customizationId = recognizeOptions.customizationId;
+      languageCustomizationId = recognizeOptions.languageCustomizationId;
       acousticCustomizationId = recognizeOptions.acousticCustomizationId;
       baseModelVersion = recognizeOptions.baseModelVersion;
       customizationWeight = recognizeOptions.customizationWeight;
@@ -6133,6 +6198,7 @@ public class IBMSpeechToTextV1Models {
       profanityFilter = recognizeOptions.profanityFilter;
       smartFormatting = recognizeOptions.smartFormatting;
       speakerLabels = recognizeOptions.speakerLabels;
+      customizationId = recognizeOptions.customizationId;
       this.requestHeaders.putAll(recognizeOptions.requestHeaders());
     }
 
@@ -6140,6 +6206,17 @@ public class IBMSpeechToTextV1Models {
      * Instantiates a new builder.
      */
     public RecognizeOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param audio the audio
+     * @param contentType the contentType
+     */
+    public RecognizeOptionsBuilder(IBMWatsonFile audio, String contentType) {
+      this.audio = audio;
+      this.contentType = contentType;
     }
 
     /**
@@ -6200,13 +6277,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the customizationId.
+     * Set the languageCustomizationId.
      *
-     * @param customizationId the customizationId
+     * @param languageCustomizationId the languageCustomizationId
      * @return the RecognizeOptions builder
      */
-    public RecognizeOptionsBuilder customizationId(String customizationId) {
-      this.customizationId = customizationId;
+    public RecognizeOptionsBuilder languageCustomizationId(String languageCustomizationId) {
+      this.languageCustomizationId = languageCustomizationId;
       return this;
     }
 
@@ -6351,6 +6428,17 @@ public class IBMSpeechToTextV1Models {
      */
     public RecognizeOptionsBuilder speakerLabels(Boolean speakerLabels) {
       this.speakerLabels = speakerLabels;
+      return this;
+    }
+
+    /**
+     * Set the customizationId.
+     *
+     * @param customizationId the customizationId
+     * @return the RecognizeOptions builder
+     */
+    public RecognizeOptionsBuilder customizationId(String customizationId) {
+      this.customizationId = customizationId;
       return this;
     }
 
@@ -6562,8 +6650,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -6656,8 +6744,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -7081,8 +7169,8 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript_serialized_name;
     private Double confidence_serialized_name;
-    private List<List<String>> timestamps_serialized_name;
-    private List<List<String>> word_confidence_serialized_name;
+    private List<String> timestamps_serialized_name;
+    private List<String> word_confidence_serialized_name;
  
     /**
      * Gets the transcript.
@@ -7099,8 +7187,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the confidence.
      *
-     * A score that indicates the service's confidence in the transcript in the range of 0.0 to 1.0. Returned only for
-     * the best alternative and only with results marked as final.
+     * A score that indicates the service's confidence in the transcript in the range of 0.0 to 1.0. A confidence score
+     * is returned only for the best alternative and only with results marked as final.
      *
      * @return the confidence
      */
@@ -7114,12 +7202,12 @@ public class IBMSpeechToTextV1Models {
      *
      * Time alignments for each word from the transcript as a list of lists. Each inner list consists of three elements:
      * the word followed by its start and end time in seconds, for example: `[["hello",0.0,1.2],["world",1.2,2.5]]`.
-     * Returned only for the best alternative.
+     * Timestamps are returned only for the best alternative.
      *
      * @return the timestamps
      */
     @AuraEnabled
-    public List<List<String>> getTimestamps() {
+    public List<String> getTimestamps() {
       return timestamps_serialized_name;
     }
  
@@ -7128,12 +7216,12 @@ public class IBMSpeechToTextV1Models {
      *
      * A confidence score for each word of the transcript as a list of lists. Each inner list consists of two elements:
      * the word and its confidence score in the range of 0.0 to 1.0, for example: `[["hello",0.95],["world",0.866]]`.
-     * Returned only for the best alternative and only with results marked as final.
+     * Confidence scores are returned only for the best alternative and only with results marked as final.
      *
      * @return the wordConfidence
      */
     @AuraEnabled
-    public List<List<String>> getWordConfidence() {
+    public List<String> getWordConfidence() {
       return word_confidence_serialized_name;
     }
 
@@ -7160,7 +7248,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<List<String>> timestamps) {
+    public void setTimestamps(final List<String> timestamps) {
       this.timestamps_serialized_name = timestamps;
     }
 
@@ -7169,7 +7257,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<List<String>> wordConfidence) {
+    public void setWordConfidence(final List<String> wordConfidence) {
       this.word_confidence_serialized_name = wordConfidence;
     }
 
@@ -7350,10 +7438,11 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the results.
      *
-     * An array that can include interim and final results (interim results are returned only if supported by the
-     * method). Final results are guaranteed not to change; interim results might be replaced by further interim results
-     * and final results. The service periodically sends updates to the results list; the `result_index` is set to the
-     * lowest index in the array that has changed; it is incremented for new results.
+     * An array of `SpeechRecognitionResult` objects that can include interim and final results (interim results are
+     * returned only if supported by the method). Final results are guaranteed not to change; interim results might be
+     * replaced by further interim results and final results. The service periodically sends updates to the results
+     * list; the `result_index` is set to the lowest index in the array that has changed; it is incremented for new
+     * results.
      *
      * @return the results
      */
@@ -7378,9 +7467,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the speakerLabels.
      *
-     * An array that identifies which words were spoken by which speakers in a multi-person exchange. Returned in the
-     * response only if `speaker_labels` is `true`. When interim results are also requested for methods that support
-     * them, it is possible for a `SpeechRecognitionResults` object to include only the `speaker_labels` field.
+     * An array of `SpeakerLabelsResult` objects that identifies which words were spoken by which speakers in a
+     * multi-person exchange. The array is returned only if the `speaker_labels` parameter is `true`. When interim
+     * results are also requested for methods that support them, it is possible for a `SpeechRecognitionResults` object
+     * to include only the `speaker_labels` field.
      *
      * @return the speakerLabels
      */
@@ -7555,8 +7645,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -7678,8 +7768,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -7929,8 +8019,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom acoustic model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -8049,8 +8139,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizationId.
      *
-     * The customization ID (GUID) of the custom language model. You must make the request with service credentials
-     * created for the instance of the service that owns the custom model.
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with service credentials created for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
