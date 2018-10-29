@@ -676,6 +676,29 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
+   * Get tokenization dictionary status.
+   *
+   * Returns the current status of the tokenization dictionary for the specified collection.
+   *
+   * @param getTokenizationDictionaryStatusOptions the {@link IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.TokenDictStatusResponse} with the response
+   */
+  public IBMDiscoveryV1Models.TokenDictStatusResponse getTokenizationDictionaryStatus(IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptions getTokenizationDictionaryStatusOptions) {
+    IBMWatsonValidator.notNull(getTokenizationDictionaryStatusOptions, 'getTokenizationDictionaryStatusOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/word_lists/tokenization_dictionary', new String[]{ getTokenizationDictionaryStatusOptions.environmentId(), getTokenizationDictionaryStatusOptions.collectionId() }));
+    builder.addHeader('Accept', 'application/json');
+    Map<String, String> requestHeaders = (getTokenizationDictionaryStatusOptions != null) ? getTokenizationDictionaryStatusOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    return (IBMDiscoveryV1Models.TokenDictStatusResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.TokenDictStatusResponse.class);
+  }
+
+  /**
    * Get the expansion list.
    *
    * Returns the current expansion list for the specified collection. If an expansion list is not specified, an object

@@ -8574,6 +8574,128 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * The getTokenizationDictionaryStatus options.
+   */
+  public class GetTokenizationDictionaryStatusOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+ 
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+ 
+    /**
+     * Gets the collectionId.
+     *
+     * The ID of the collection.
+     *
+     * @return the collectionId
+     */
+    public String collectionId() {
+      return collectionId;
+    }
+
+    private GetTokenizationDictionaryStatusOptions(GetTokenizationDictionaryStatusOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetTokenizationDictionaryStatusOptions builder
+     */
+    public GetTokenizationDictionaryStatusOptionsBuilder newBuilder() {
+      return new GetTokenizationDictionaryStatusOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetTokenizationDictionaryStatusOptions Builder.
+   */
+  public class GetTokenizationDictionaryStatusOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+
+    private GetTokenizationDictionaryStatusOptionsBuilder(GetTokenizationDictionaryStatusOptions getTokenizationDictionaryStatusOptions) {
+      environmentId = getTokenizationDictionaryStatusOptions.environmentId;
+      collectionId = getTokenizationDictionaryStatusOptions.collectionId;
+      this.requestHeaders.putAll(getTokenizationDictionaryStatusOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetTokenizationDictionaryStatusOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     */
+    public GetTokenizationDictionaryStatusOptionsBuilder(String environmentId, String collectionId) {
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+    }
+
+    /**
+     * Builds a GetTokenizationDictionaryStatusOptions.
+     *
+     * @return the getTokenizationDictionaryStatusOptions
+     */
+    public GetTokenizationDictionaryStatusOptions build() {
+      return new GetTokenizationDictionaryStatusOptions(this);
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the GetTokenizationDictionaryStatusOptions builder
+     */
+    public GetTokenizationDictionaryStatusOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collectionId.
+     *
+     * @param collectionId the collectionId
+     * @return the GetTokenizationDictionaryStatusOptions builder
+     */
+    public GetTokenizationDictionaryStatusOptionsBuilder collectionId(String collectionId) {
+      this.collectionId = collectionId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetTokenizationDictionaryStatusOptions builder
+     */
+    public GetTokenizationDictionaryStatusOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The getTrainingData options.
    */
   public class GetTrainingDataOptions extends IBMWatsonOptionsModel {
