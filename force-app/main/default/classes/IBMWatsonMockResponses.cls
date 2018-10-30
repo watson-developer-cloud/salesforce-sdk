@@ -2913,4 +2913,11 @@ public class IBMWatsonMockResponses {
       '"session_id": "session_id"' +
     '}';
   }
+
+  public static testMethod String tokenDictStatusResponse() {
+    return '{' +
+      '"status" : "active",' +
+      '"type" : "tokenization_dictionary"' +
+    '}';
+  }
 }
