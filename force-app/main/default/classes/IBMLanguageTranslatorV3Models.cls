@@ -51,7 +51,7 @@ public class IBMLanguageTranslatorV3Models {
     /**
      * Gets the forcedGlossaryFilename.
      *
-     * The filename for forced_glossary.
+     * The filename for forcedGlossary.
      *
      * @return the forcedGlossaryFilename
      */
@@ -75,7 +75,7 @@ public class IBMLanguageTranslatorV3Models {
     /**
      * Gets the parallelCorpusFilename.
      *
-     * The filename for parallel_corpus.
+     * The filename for parallelCorpus.
      *
      * @return the parallelCorpusFilename
      */

@@ -1107,6 +1107,66 @@ public with sharing class IBMDiscoveryV1FTests {
     System.debug('IBMDiscoveryV1FTests.testGetMetricsQueryTokenEvent: ' + response);
   }
 
+  public static void testTokenizationDictionaryOperations(String username, String password, String environmentId, String collectionId) {
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
+
+    // create collection first because creating a tokenization dictionary currently is only supported in Japanese
+    // collections
+    IBMDiscoveryV1Models.CreateCollectionOptions createCollectionOptions = new IBMDiscoveryV1Models.CreateCollectionOptionsBuilder()
+        .environmentId(environmentId)
+        .name('tokenization-dict-testing-collection')
+        .language('ja')
+        .build();
+    IBMDiscoveryV1Models.Collection tokenDictTestCollection = discovery.createCollection(createCollectionOptions);
+    String testCollectionId = tokenDictTestCollection.getCollectionId();
+
+    try {
+      IBMDiscoveryV1Models.TokenDictRule tokenDictRule = new IBMDiscoveryV1Models.TokenDictRule();
+      tokenDictRule.setText('token');
+      tokenDictRule.setPartOfSpeech('noun');
+      tokenDictRule.setReadings(new List<String> { 'reading 1', 'reading 2' });
+      tokenDictRule.setTokens(new List<String> { 'token 1', 'token 2' });
+
+      // test creating tokenization dictionary
+      IBMDiscoveryV1Models.CreateTokenizationDictionaryOptions createOptions = new IBMDiscoveryV1Models.CreateTokenizationDictionaryOptionsBuilder()
+          .environmentId(environmentId)
+          .collectionId(testCollectionId)
+          .addTokenizationRules(tokenDictRule)
+          .build();
+      IBMDiscoveryV1Models.TokenDictStatusResponse createResponse = discovery.createTokenizationDictionary(createOptions);
+      assertNotNull(createResponse);
+
+      // test getting tokenization dictionary
+      IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptions getOptions = new IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptionsBuilder()
+          .environmentId(environmentId)
+          .collectionId(testCollectionId)
+          .build();
+      IBMDiscoveryV1Models.TokenDictStatusResponse getResponse = discovery.getTokenizationDictionaryStatus(getOptions);
+      assertNotNull(getResponse);
+
+      // test deleting tokenization dictionary
+      IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptions deleteOptions = new IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptionsBuilder()
+          .environmentId(environmentId)
+          .collectionId(testCollectionId)
+          .build();
+      discovery.deleteTokenizationDictionary(deleteOptions);
+    } catch(Exception e) {
+      // this most likely means the service wasn't ready to handle another tokenization file - this is fine
+      System.debug('Service wasn\'t ready yet! Error: ' + e.getMessage());
+    } finally {
+      // delete test collection
+      IBMDiscoveryV1Models.DeleteCollectionOptions deleteCollectionOptions = new IBMDiscoveryV1Models.DeleteCollectionOptionsBuilder()
+          .environmentId(environmentId)
+          .collectionId(testCollectionId)
+          .build();
+      discovery.deleteCollection(deleteCollectionOptions);
+    }
+  }
+
   public static Attachment createFile()
   {
     String DocumentContentStr = '<html><body>This blog will cover how to integrate a conversational interface with your Salesforce customer database. '

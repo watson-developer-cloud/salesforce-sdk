@@ -766,7 +766,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * The hierarchical 5-level taxonomy the content is categorized into.
+   * Returns a five-level taxonomy of the content. The top three categories are returned. 
+
+Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
    */
   public class CategoriesOptions extends IBMWatsonDynamicModel {
     private Map<String, Object> additional_properties_serialized_name;
@@ -844,7 +846,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * Whether or not to analyze content for general concepts that are referenced or alluded to.
+   * Returns high-level concepts in the content. For example, a research paper about deep learning might return the
+   * concept, "Artificial Intelligence" although the term is not mentioned.
+   *
+   * Supported languages: English, French, German, Japanese, Korean, Portuguese, Spanish.
    */
   public class ConceptsOptions {
     private Long limit_serialized_name;
@@ -1272,7 +1277,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * Whether or not to return emotion analysis of the content.
+   * Detects anger, disgust, fear, joy, or sadness that is conveyed in the content or by the context around target
+   * phrases specified in the targets parameter. You can analyze emotion for detected entities with `entities.emotion`
+   * and for keywords with `keywords.emotion`.
+   *
+   * Supported languages: English.
    */
   public class EmotionOptions {
     private Boolean document_serialized_name;
@@ -1587,8 +1596,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * Whether or not to return important people, places, geopolitical, and other entities detected in the analyzed
-   * content.
+   * Identifies people, cities, organizations, and other entities in the content. See [Entity types and
+   * subtypes](/docs/services/natural-language-understanding/entity-types.html).
+   *
+   * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
+   * Arabic, Chinese, and Dutch custom models are also supported.
    */
   public class EntitiesOptions {
     private Long limit_serialized_name;
@@ -2093,7 +2105,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the concepts.
      *
-     * Whether or not to return the concepts that are mentioned in the analyzed text.
+     * Returns high-level concepts in the content. For example, a research paper about deep learning might return the
+     * concept, "Artificial Intelligence" although the term is not mentioned.
+     *
+     * Supported languages: English, French, German, Japanese, Korean, Portuguese, Spanish.
      *
      * @return the concepts
      */
@@ -2104,7 +2119,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the emotion.
      *
-     * Whether or not to extract the emotions implied in the analyzed text.
+     * Detects anger, disgust, fear, joy, or sadness that is conveyed in the content or by the context around target
+     * phrases specified in the targets parameter. You can analyze emotion for detected entities with `entities.emotion`
+     * and for keywords with `keywords.emotion`.
+     *
+     * Supported languages: English
      *
      * @return the emotion
      */
@@ -2115,7 +2134,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the entities.
      *
-     * Whether or not to extract detected entity objects from the analyzed text.
+     * Identifies people, cities, organizations, and other entities in the content. See [Entity types and
+     * subtypes](/docs/services/natural-language-understanding/entity-types.html).
+     *
+     * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
+     * Arabic, Chinese, and Dutch custom models are also supported.
      *
      * @return the entities
      */
@@ -2126,7 +2149,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the keywords.
      *
-     * Whether or not to return the keywords in the analyzed text.
+     * Returns important keywords in the content.
+     *
+     * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
      *
      * @return the keywords
      */
@@ -2137,8 +2162,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the metadata.
      *
-     * Whether or not the author, publication date, and title of the analyzed text should be returned. This parameter is
-     * only available for URL and HTML input.
+     * Returns information from the document, including author name, title, RSS/ATOM feeds, prominent page image, and
+     * publication date. Supports URL and HTML input types only.
      *
      * @return the metadata
      */
@@ -2149,7 +2174,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the relations.
      *
-     * Whether or not to return the relationships between detected entities in the analyzed text.
+     * Recognizes when two entities are related and identifies the type of relation. For example, an `awardedTo`
+     * relation might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
+     * types](/docs/services/natural-language-understanding/relations.html).
+     *
+     * Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
+     * Portuguese custom models are also supported.
      *
      * @return the relations
      */
@@ -2160,7 +2190,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the semanticRoles.
      *
-     * Whether or not to return the subject-action-object relations from the analyzed text.
+     * Parses sentences into subject, action, and object form.
+     *
+     * Supported languages: English, German, Japanese, Korean, Spanish.
      *
      * @return the semanticRoles
      */
@@ -2171,7 +2203,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the sentiment.
      *
-     * Whether or not to return the overall sentiment of the analyzed text.
+     * Analyzes the general sentiment of your content or the sentiment toward specific target phrases. You can analyze
+     * sentiment for detected entities with `entities.sentiment` and for keywords with `keywords.sentiment`.
+     *
+     *  Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish
      *
      * @return the sentiment
      */
@@ -2182,7 +2217,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the categories.
      *
-     * Whether or not to return the high level category the content is categorized as (i.e. news, art).
+     * Returns a five-level taxonomy of the content. The top three categories are returned.
+     *
+     * Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
      *
      * @return the categories
      */
@@ -2393,7 +2430,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * An option indicating whether or not important keywords from the analyzed content should be returned.
+   * Returns important keywords in the content.
+   *
+   * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
    */
   public class KeywordsOptions {
     private Long limit_serialized_name;
@@ -2691,6 +2730,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the models.
      *
+     * An array of available models.
+     *
      * @return the models
      */
     @AuraEnabled
@@ -2732,7 +2773,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * The Authors, Publication Date, and Title of the document. Supports URL and HTML input types.
+   * Returns information from the document, including author name, title, RSS/ATOM feeds, prominent page image, and publication date. Supports URL and HTML input types only.
    */
   public class MetadataOptions extends IBMWatsonDynamicModel {
     private Map<String, Object> additional_properties_serialized_name;
@@ -3016,6 +3057,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the entities.
      *
+     * An array of extracted entities.
+     *
      * @return the entities
      */
     @AuraEnabled
@@ -3159,7 +3202,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * An option specifying if the relationships found between entities in the analyzed content should be returned.
+   * Recognizes when two entities are related and identifies the type of relation. For example, an `awardedTo` relation
+   * might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
+   * types](/docs/services/natural-language-understanding/relations.html).
+   *
+   * Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
+   * Portuguese custom models are also supported.
    */
   public class RelationsOptions {
     private String model_serialized_name;
@@ -3167,8 +3215,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the model.
      *
-     * Enter a [custom model](https://www.bluemix.net/docs/services/natural-language-understanding/customizing.html) ID
-     * to override the default model.
+     * Enter a [custom model](/docs/services/natural-language-understanding/customizing.html) ID to override the default
+     * model.
      *
      * @return the model
      */
@@ -3549,6 +3597,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the keywords.
      *
+     * An array of extracted keywords.
+     *
      * @return the keywords
      */
     @AuraEnabled
@@ -3599,7 +3649,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * An option specifying whether or not to identify the subjects, actions, and verbs in the analyzed content.
+   * Parses sentences into subject, action, and object form.
+   *
+   * Supported languages: English, German, Japanese, Korean, Spanish.
    */
   public class SemanticRolesOptions {
     private Long limit_serialized_name;
@@ -3858,6 +3910,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the entities.
      *
+     * An array of extracted entities.
+     *
      * @return the entities
      */
     @AuraEnabled
@@ -3867,6 +3921,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
  
     /**
      * Gets the keywords.
+     *
+     * An array of extracted keywords.
      *
      * @return the keywords
      */
@@ -4000,7 +4056,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * An option specifying if sentiment of detected entities, keywords, or phrases should be returned.
+   * Analyzes the general sentiment of your content or the sentiment toward specific target phrases. You can analyze
+   * sentiment for detected entities with `entities.sentiment` and for keywords with `keywords.sentiment`.
+   *
+   *  Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish.
    */
   public class SentimentOptions {
     private Boolean document_serialized_name;

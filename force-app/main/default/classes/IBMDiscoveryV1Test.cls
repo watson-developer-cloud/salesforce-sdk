@@ -859,7 +859,7 @@ private class IBMDiscoveryV1Test {
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
     String fields = 'field1,field2';
-    List<String> collectionIds = new List<String> { 'Collection1', 'Collection2' };
+    String collectionIds = 'Collection1, Collection2';
     IBMDiscoveryV1Models.FederatedQueryOptions options = new IBMDiscoveryV1Models.FederatedQueryOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .collectionIds(collectionIds)
@@ -2277,6 +2277,168 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(eventType, response.getResults().get(0).getEventType());
     System.assert(response.getResults().get(0).getDocumentResults().getResults() != null);
     System.assertEquals(resultCount, response.getResults().get(0).getDocumentResults().getCount());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testTokenDictRule() {
+    Test.startTest();
+
+    String text = 'text';
+    String partOfSpeech = 'noun';
+    List<String> readings = new List<String> { 'reading 1', 'reading 2' };
+    List<String> tokens = new List<String> { 'token 1', 'token 2' };
+
+    IBMDiscoveryV1Models.TokenDictRule tokenDictRule = new IBMDiscoveryV1Models.TokenDictRule();
+    tokenDictRule.setText(text);
+    tokenDictRule.setPartOfSpeech(partOfSpeech);
+    tokenDictRule.setReadings(readings);
+    tokenDictRule.setTokens(tokens);
+
+    System.assertEquals(text, tokenDictRule.getText());
+    System.assertEquals(partOfSpeech, tokenDictRule.getPartOfSpeech());
+    System.assertEquals(readings, tokenDictRule.getReadings());
+    System.assertEquals(tokens, tokenDictRule.getTokens());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testCreateTokenizationDictionaryOptions() {
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String headerKey = 'Test-Header';
+    String headerValue = 'test_value';
+    IBMDiscoveryV1Models.TokenDictRule firstTokenDictRule = new IBMDiscoveryV1Models.TokenDictRule();
+    IBMDiscoveryV1Models.TokenDictRule secondTokenDictRule = new IBMDiscoveryV1Models.TokenDictRule();
+    List<IBMDiscoveryV1Models.TokenDictRule> tokenDictRuleList = new List<IBMDiscoveryV1Models.TokenDictRule>();
+    tokenDictRuleList.add(firstTokenDictRule);
+
+    IBMDiscoveryV1Models.CreateTokenizationDictionaryOptions createOptions = new IBMDiscoveryV1Models.CreateTokenizationDictionaryOptionsBuilder()
+        .environmentId(environmentId)
+        .collectionId(collectionId)
+        .tokenizationRules(tokenDictRuleList)
+        .addTokenizationRules(secondTokenDictRule)
+        .addHeader(headerKey, headerValue)
+        .build();
+
+    tokenDictRuleList.add(secondTokenDictRule);
+
+    System.assertEquals(environmentId, createOptions.environmentId());
+    System.assertEquals(collectionId, createOptions.collectionId());
+    System.assertEquals(tokenDictRuleList, createOptions.tokenizationRules());
+    System.assertEquals(headerValue, createOptions.requestHeaders().get(headerKey));
+
+    Test.stopTest(); 
+  }
+
+  static testMethod void testGetTokenizationDictionaryStatusOptions() {
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String headerKey = 'Test-Header';
+    String headerValue = 'test_value';
+    IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptions getOptions = new IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptionsBuilder()
+        .environmentId(environmentId)
+        .collectionId(collectionId)
+        .addHeader(headerKey, headerValue)
+        .build();
+
+    System.assertEquals(environmentId, getOptions.environmentId());
+    System.assertEquals(collectionId, getOptions.collectionId());
+    System.assertEquals(headerValue, getOptions.requestHeaders().get(headerKey));
+
+    Test.stopTest();
+  }
+
+  static testMethod void testDeleteTokenizationDictionaryOptions() {
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String headerKey = 'Test-Header';
+    String headerValue = 'test_value';
+    IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptions deleteOptions = new IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptionsBuilder()
+        .environmentId(environmentId)
+        .collectionId(collectionId)
+        .addHeader(headerKey, headerValue)
+        .build();
+
+    System.assertEquals(environmentId, deleteOptions.environmentId());
+    System.assertEquals(collectionId, deleteOptions.collectionId());
+    System.assertEquals(headerValue, deleteOptions.requestHeaders().get(headerKey));
+
+    Test.stopTest();
+  }
+
+  static testMethod void testCreateTokenizationDictionary() {
+    String body = IBMWatsonMockResponses.tokenDictStatusResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    IBMDiscoveryV1Models.CreateTokenizationDictionaryOptions createOptions = new IBMDiscoveryV1Models.CreateTokenizationDictionaryOptionsBuilder()
+        .environmentId(environmentId)
+        .collectionId(collectionId)
+        .tokenizationRules(new List<IBMDiscoveryV1Models.TokenDictRule> { new IBMDiscoveryV1Models.TokenDictRule() })
+        .build();
+    IBMDiscoveryV1Models.TokenDictStatusResponse response = discovery.createTokenizationDictionary(createOptions);
+
+    System.assertEquals('active', response.getStatus());
+    System.assertEquals('tokenization_dictionary', response.getXtype());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testGetTokenizationDictionaryStatus() {
+    String body = IBMWatsonMockResponses.tokenDictStatusResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptions getOptions = new IBMDiscoveryV1Models.GetTokenizationDictionaryStatusOptionsBuilder()
+        .environmentId(environmentId)
+        .collectionId(collectionId)
+        .build();
+    IBMDiscoveryV1Models.TokenDictStatusResponse response = discovery.getTokenizationDictionaryStatus(getOptions);
+
+    System.assertEquals('active', response.getStatus());
+    System.assertEquals('tokenization_dictionary', response.getXtype());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testDeleteTokenizationDictionary() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptions deleteOptions = new IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptionsBuilder()
+        .environmentId(environmentId)
+        .collectionId(collectionId)
+        .build();
+    discovery.deleteTokenizationDictionary(deleteOptions);
 
     Test.stopTest();
   }

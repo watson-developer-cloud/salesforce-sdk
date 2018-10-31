@@ -117,7 +117,7 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     IBMWatsonRequestBody trainingMetadataBody = IBMWatsonRequestBody.create(createClassifierOptions.metadata(), 'application/json');
-    multipartBuilder.addFormDataPart('training_metadata', createClassifierOptions.trainingMetadataFilename(), trainingMetadataBody);
+    multipartBuilder.addFormDataPart('training_metadata', createClassifierOptions.metadataFilename(), trainingMetadataBody);
     IBMWatsonRequestBody trainingDataBody = IBMWatsonRequestBody.create(createClassifierOptions.trainingData(), 'text/csv');
     multipartBuilder.addFormDataPart('training_data', createClassifierOptions.trainingDataFilename(), trainingDataBody);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();

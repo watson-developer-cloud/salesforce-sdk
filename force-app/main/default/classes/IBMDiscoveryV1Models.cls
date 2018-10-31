@@ -2431,6 +2431,171 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * The createTokenizationDictionary options.
+   */
+  public class CreateTokenizationDictionaryOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+    private List<TokenDictRule> tokenizationRules;
+ 
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+ 
+    /**
+     * Gets the collectionId.
+     *
+     * The ID of the collection.
+     *
+     * @return the collectionId
+     */
+    public String collectionId() {
+      return collectionId;
+    }
+ 
+    /**
+     * Gets the tokenizationRules.
+     *
+     * An array of tokenization rules. Each rule contains, the original `text` string, component `tokens`, any alternate
+     * character set `readings`, and which `part_of_speech` the text is from.
+     *
+     * @return the tokenizationRules
+     */
+    public List<TokenDictRule> tokenizationRules() {
+      return tokenizationRules;
+    }
+
+    private CreateTokenizationDictionaryOptions(CreateTokenizationDictionaryOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      tokenizationRules = builder.tokenizationRules;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a CreateTokenizationDictionaryOptions builder
+     */
+    public CreateTokenizationDictionaryOptionsBuilder newBuilder() {
+      return new CreateTokenizationDictionaryOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * CreateTokenizationDictionaryOptions Builder.
+   */
+  public class CreateTokenizationDictionaryOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+    private List<TokenDictRule> tokenizationRules;
+
+    private CreateTokenizationDictionaryOptionsBuilder(CreateTokenizationDictionaryOptions createTokenizationDictionaryOptions) {
+      environmentId = createTokenizationDictionaryOptions.environmentId;
+      collectionId = createTokenizationDictionaryOptions.collectionId;
+      tokenizationRules = createTokenizationDictionaryOptions.tokenizationRules;
+      this.requestHeaders.putAll(createTokenizationDictionaryOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public CreateTokenizationDictionaryOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     */
+    public CreateTokenizationDictionaryOptionsBuilder(String environmentId, String collectionId) {
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+    }
+
+    /**
+     * Builds a CreateTokenizationDictionaryOptions.
+     *
+     * @return the createTokenizationDictionaryOptions
+     */
+    public CreateTokenizationDictionaryOptions build() {
+      return new CreateTokenizationDictionaryOptions(this);
+    }
+
+    /**
+     * Adds an tokenizationRules to tokenizationRules.
+     *
+     * @param tokenizationRules the new tokenizationRules
+     * @return the CreateTokenizationDictionaryOptions builder
+     */
+    public CreateTokenizationDictionaryOptionsBuilder addTokenizationRules(TokenDictRule tokenizationRules) {
+      IBMWatsonValidator.notNull(tokenizationRules, 'tokenizationRules cannot be null');
+      if (this.tokenizationRules == null) {
+        this.tokenizationRules = new List<TokenDictRule>();
+      }
+      this.tokenizationRules.add(tokenizationRules);
+      return this;
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the CreateTokenizationDictionaryOptions builder
+     */
+    public CreateTokenizationDictionaryOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collectionId.
+     *
+     * @param collectionId the collectionId
+     * @return the CreateTokenizationDictionaryOptions builder
+     */
+    public CreateTokenizationDictionaryOptionsBuilder collectionId(String collectionId) {
+      this.collectionId = collectionId;
+      return this;
+    }
+
+    /**
+     * Set the tokenizationRules.
+     * Existing tokenizationRules will be replaced.
+     *
+     * @param tokenizationRules the tokenizationRules
+     * @return the CreateTokenizationDictionaryOptions builder
+     */
+    public CreateTokenizationDictionaryOptionsBuilder tokenizationRules(List<TokenDictRule> tokenizationRules) {
+      this.tokenizationRules = tokenizationRules;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the CreateTokenizationDictionaryOptions builder
+     */
+    public CreateTokenizationDictionaryOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The createTrainingExample options.
    */
   public class CreateTrainingExampleOptions extends IBMWatsonOptionsModel {
@@ -3954,6 +4119,128 @@ public class IBMDiscoveryV1Models {
      * @return the DeleteExpansionsOptions builder
      */
     public DeleteExpansionsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The deleteTokenizationDictionary options.
+   */
+  public class DeleteTokenizationDictionaryOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+ 
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+ 
+    /**
+     * Gets the collectionId.
+     *
+     * The ID of the collection.
+     *
+     * @return the collectionId
+     */
+    public String collectionId() {
+      return collectionId;
+    }
+
+    private DeleteTokenizationDictionaryOptions(DeleteTokenizationDictionaryOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DeleteTokenizationDictionaryOptions builder
+     */
+    public DeleteTokenizationDictionaryOptionsBuilder newBuilder() {
+      return new DeleteTokenizationDictionaryOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * DeleteTokenizationDictionaryOptions Builder.
+   */
+  public class DeleteTokenizationDictionaryOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+
+    private DeleteTokenizationDictionaryOptionsBuilder(DeleteTokenizationDictionaryOptions deleteTokenizationDictionaryOptions) {
+      environmentId = deleteTokenizationDictionaryOptions.environmentId;
+      collectionId = deleteTokenizationDictionaryOptions.collectionId;
+      this.requestHeaders.putAll(deleteTokenizationDictionaryOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DeleteTokenizationDictionaryOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     */
+    public DeleteTokenizationDictionaryOptionsBuilder(String environmentId, String collectionId) {
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+    }
+
+    /**
+     * Builds a DeleteTokenizationDictionaryOptions.
+     *
+     * @return the deleteTokenizationDictionaryOptions
+     */
+    public DeleteTokenizationDictionaryOptions build() {
+      return new DeleteTokenizationDictionaryOptions(this);
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the DeleteTokenizationDictionaryOptions builder
+     */
+    public DeleteTokenizationDictionaryOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collectionId.
+     *
+     * @param collectionId the collectionId
+     * @return the DeleteTokenizationDictionaryOptions builder
+     */
+    public DeleteTokenizationDictionaryOptionsBuilder collectionId(String collectionId) {
+      this.collectionId = collectionId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteTokenizationDictionaryOptions builder
+     */
+    public DeleteTokenizationDictionaryOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -8403,6 +8690,128 @@ public class IBMDiscoveryV1Models {
      * @return the GetMetricsQueryTokenEventOptions builder
      */
     public GetMetricsQueryTokenEventOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The getTokenizationDictionaryStatus options.
+   */
+  public class GetTokenizationDictionaryStatusOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+ 
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+ 
+    /**
+     * Gets the collectionId.
+     *
+     * The ID of the collection.
+     *
+     * @return the collectionId
+     */
+    public String collectionId() {
+      return collectionId;
+    }
+
+    private GetTokenizationDictionaryStatusOptions(GetTokenizationDictionaryStatusOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetTokenizationDictionaryStatusOptions builder
+     */
+    public GetTokenizationDictionaryStatusOptionsBuilder newBuilder() {
+      return new GetTokenizationDictionaryStatusOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetTokenizationDictionaryStatusOptions Builder.
+   */
+  public class GetTokenizationDictionaryStatusOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+
+    private GetTokenizationDictionaryStatusOptionsBuilder(GetTokenizationDictionaryStatusOptions getTokenizationDictionaryStatusOptions) {
+      environmentId = getTokenizationDictionaryStatusOptions.environmentId;
+      collectionId = getTokenizationDictionaryStatusOptions.collectionId;
+      this.requestHeaders.putAll(getTokenizationDictionaryStatusOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetTokenizationDictionaryStatusOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     */
+    public GetTokenizationDictionaryStatusOptionsBuilder(String environmentId, String collectionId) {
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+    }
+
+    /**
+     * Builds a GetTokenizationDictionaryStatusOptions.
+     *
+     * @return the getTokenizationDictionaryStatusOptions
+     */
+    public GetTokenizationDictionaryStatusOptions build() {
+      return new GetTokenizationDictionaryStatusOptions(this);
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the GetTokenizationDictionaryStatusOptions builder
+     */
+    public GetTokenizationDictionaryStatusOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collectionId.
+     *
+     * @param collectionId the collectionId
+     * @return the GetTokenizationDictionaryStatusOptions builder
+     */
+    public GetTokenizationDictionaryStatusOptionsBuilder collectionId(String collectionId) {
+      this.collectionId = collectionId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetTokenizationDictionaryStatusOptions builder
+     */
+    public GetTokenizationDictionaryStatusOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -18377,6 +18786,158 @@ public class IBMDiscoveryV1Models {
         }
         ret.setNotices(newNotices);
       }
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object defining a single tokenizaion rule.
+   */
+  public class TokenDictRule {
+    private String text_serialized_name;
+    private List<String> tokens_serialized_name;
+    private List<String> readings_serialized_name;
+    private String part_of_speech_serialized_name;
+ 
+    /**
+     * Gets the text.
+     *
+     * The string to tokenize.
+     *
+     * @return the text
+     */
+    public String getText() {
+      return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the tokens.
+     *
+     * Array of tokens that the `text` field is split into when found.
+     *
+     * @return the tokens
+     */
+    public List<String> getTokens() {
+      return tokens_serialized_name;
+    }
+ 
+    /**
+     * Gets the readings.
+     *
+     * Array of tokens that represent the content of the `text` field in an alternate character set.
+     *
+     * @return the readings
+     */
+    public List<String> getReadings() {
+      return readings_serialized_name;
+    }
+ 
+    /**
+     * Gets the partOfSpeech.
+     *
+     * The part of speech that the `text` string belongs to. For example `noun`. Custom parts of speech can be
+     * specified.
+     *
+     * @return the partOfSpeech
+     */
+    public String getPartOfSpeech() {
+      return part_of_speech_serialized_name;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the tokens.
+     *
+     * @param tokens the new tokens
+     */
+    public void setTokens(final List<String> tokens) {
+      this.tokens_serialized_name = tokens;
+    }
+
+    /**
+     * Sets the readings.
+     *
+     * @param readings the new readings
+     */
+    public void setReadings(final List<String> readings) {
+      this.readings_serialized_name = readings;
+    }
+
+    /**
+     * Sets the partOfSpeech.
+     *
+     * @param partOfSpeech the new partOfSpeech
+     */
+    public void setPartOfSpeech(final String partOfSpeech) {
+      this.part_of_speech_serialized_name = partOfSpeech;
+    }
+
+  }
+
+  /**
+   * Object describing the current status of the tokenization dictionary.
+   */
+  public class TokenDictStatusResponse extends IBMWatsonResponseModel {
+    private String status_serialized_name;
+    private String type_serialized_name;
+ 
+    /**
+     * Gets the status.
+     *
+     * Current tokenization dictionary status for the specified collection.
+     *
+     * @return the status
+     */
+    @AuraEnabled
+    public String getStatus() {
+      return status_serialized_name;
+    }
+ 
+    /**
+     * Gets the xtype.
+     *
+     * The type for this dictionary. Always returns `tokenization_dictionary`.
+     *
+     * @return the xtype
+     */
+    @AuraEnabled
+    public String getXtype() {
+      return type_serialized_name;
+    }
+
+    /**
+     * Sets the status.
+     *
+     * @param status the new status
+     */
+    public void setStatus(final String status) {
+      this.status_serialized_name = status;
+    }
+
+    /**
+     * Sets the xtype.
+     *
+     * @param xtype the new xtype
+     */
+    public void setXtype(final String xtype) {
+      this.type_serialized_name = xtype;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      TokenDictStatusResponse ret = (TokenDictStatusResponse) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
