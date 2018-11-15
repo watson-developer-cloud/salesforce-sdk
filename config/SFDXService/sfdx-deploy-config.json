@@ -1,6 +1,23 @@
 {
   "watsonServices": [
     {
+      "name": "compare-comply",
+      "apexClasses": [
+        {
+          "fileName": "IBMCompareComplyV1.cls",
+          "metadata": "IBMCompareComplyV1.cls-meta.xml"
+        },
+        {
+          "fileName": "IBMCompareComplyV1Models.cls",
+          "metadata": "IBMCompareComplyV1Models.cls-meta.xml"
+        },
+        {
+          "fileName": "IBMCompareComplyV1Test.cls",
+          "metadata": "IBMCompareComplyV1Test.cls-meta.xml"
+        }
+      ]
+    },
+    {
       "name": "discovery",
       "apexClasses": [
         {
