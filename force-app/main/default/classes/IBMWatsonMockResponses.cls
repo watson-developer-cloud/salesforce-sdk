@@ -2920,4 +2920,733 @@ public class IBMWatsonMockResponses {
       '"type" : "tokenization_dictionary"' +
     '}';
   }
+
+  public static testMethod String batchStatusResponse() {
+    return '{' +
+      '"function": "element_classification",' +
+      '"input_bucket_location": "bucket_location",' +
+      '"input_bucket_name": "bucket_name",' +
+      '"output_bucket_location": "bucket_location",' +
+      '"output_bucket_name": "bucket_name",' +
+      '"batch_id": "batch_id",' +
+      '"document_counts": {' +
+        '"total": 1000,' +
+        '"pending": 300,' +
+        '"successful": 400,' +
+        '"failed": 500' +
+      '},' +
+      '"status": "status",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"updated": "1995-06-12T01:11:11.111Z"' +
+    '}';
+  }
+
+  public static testMethod String batchesResponse() {
+    return '{' +
+      '"batches": [' +
+        '{' +
+          '"function": "element_classification",' +
+          '"input_bucket_location": "bucket_location",' +
+          '"input_bucket_name": "bucket_name",' +
+          '"output_bucket_location": "bucket_location",' +
+          '"output_bucket_name": "bucket_name",' +
+          '"batch_id": "batch_id",' +
+          '"document_counts": {' +
+            '"total": 1000,' +
+            '"pending": 300,' +
+            '"successful": 400,' +
+            '"failed": 500' +
+          '},' +
+          '"status": "status",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"updated": "1995-06-12T01:11:11.111Z"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String classifyReturnResponse() {
+    return '{' +
+      '"document": {' +
+        '"title": "title",' +
+        '"html": "html",' +
+        '"hash": "hash",' +
+        '"label": "label"' +
+      '},' +
+      '"model_id": "model_id",' +
+      '"model_version": "model_version",' +
+      '"elements": [' +
+        '{' +
+          '"location": {' +
+          '"begin": 0,' +
+          '"end": 1' +
+          '},' +
+          '"text": "text",' +
+          '"types": [' +
+            '{' +
+              '"label": {' +
+                '"nature": "nature",' +
+                '"party": "party"' +
+              '},' +
+              '"provenance_ids": [' +
+                '"provenance_id"' +
+              ']' +
+            '}' +
+          '],' +
+          '"categories": [' +
+            '{' +
+              '"label": "label",' +
+              '"provenance_ids": [' +
+                '"provenance_id"' +
+              ']' +
+            '}' +
+          '],' +
+          '"attributes": [' +
+            '{' +
+              '"type": "type",' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '}' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"tables": [' +
+        '{' +
+          '"location": {' +
+          '  "begin": 0,' +
+          '  "end": 1' +
+          '},' +
+          '"text": "text",' +
+          '"section_title": {' +
+          '  "location": {' +
+          '    "begin": 0,' +
+          '    "end": 1' +
+          '  }' +
+          '},' +
+          '"table_headers": [' +
+          '  {' +
+          '    "cell_id": "cell_id",' +
+          '    "location": {' +
+          '      "begin": 0,' +
+          '      "end": 1' +
+          '    },' +
+          '    "text": "text",' +
+          '    "row_index_begin": 2000,' +
+          '    "row_index_end": 3000,' +
+          '    "column_index_begin": 4000,' +
+          '    "column_index_end": 5000' +
+          '  }' +
+          '],' +
+          '"row_headers": [' +
+          '  {' +
+          '    "cell_id": "cell_id",' +
+          '    "location": {' +
+          '      "begin": 0,' +
+          '      "end": 1' +
+          '    },' +
+          '    "text": "text",' +
+          '    "text_normalized": "text_normalized",' +
+          '    "row_index_begin": 2000,' +
+          '    "row_index_end": 3000,' +
+          '    "column_index_begin": 4000,' +
+          '    "column_index_end": 5000' +
+          '  }' +
+          '],' +
+          '"column_headers": [' +
+          '  {' +
+          '    "cell_id": "cell_id",' +
+          '    "location": {' +
+          '      "begin": 0,' +
+          '      "end": 1' +
+          '    },' +
+          '    "text": "text",' +
+          '    "text_normalized": "text_normalized",' +
+          '    "row_index_begin": 2000,' +
+          '    "row_index_end": 3000,' +
+          '    "column_index_begin": 4000,' +
+          '    "column_index_end": 5000' +
+          '  }' +
+          '],' +
+          '"body_cells": [' +
+            '{' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '},' +
+              '"text": "text",' +
+              '"row_index_begin": 2000,' +
+              '"row_index_end": 3000,' +
+              '"column_index_begin": 4000,' +
+              '"column_index_end": 5000,' +
+              '"row_header_ids": [' +
+                '{' +
+                  '"id": "id"' +
+                '}' +
+              '],' +
+              '"row_header_texts": [' +
+                '{' +
+                  '"text": "text"' +
+                '}' +
+              '],' +
+              '"row_header_texts_normalized": [' +
+                '{' +
+                  '"text_normalized": "text_normalized"' +
+                '}' +
+              '],' +
+              '"column_header_ids": [' +
+                '{' +
+                  '"id": "id"' +
+                '}' +
+              '],' +
+              '"column_header_texts": [' +
+                '{' +
+                  '"text": "text"' +
+                '}' +
+              '],' +
+              '"column_header_texts_normalized": [' +
+                '{' +
+                  '"text_normalized": "text_normalized"' +
+                '}' +
+              ']' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"document_structure": {' +
+        '"section_titles": [' +
+          '{' +
+            '"text": "text",' +
+            '"location": {' +
+              '"begin": 0,' +
+              '"end": 1' +
+            '},' +
+            '"level": 12,' +
+            '"element_locations": [' +
+              '{' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '}' +
+            ']' +
+          '}' +
+        '],' +
+        '"leading_sentences": [' +
+          '{' +
+            '"text": "text",' +
+            '"location": {' +
+              '"begin": 0,' +
+              '"end": 1' +
+            '},' +
+            '"element_locations": [' +
+              '{' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '}' +
+            ']' +
+          '}' +
+        ']' +
+      '},' +
+      '"parties": [' +
+        '{' +
+          '"party": "party",' +
+          '"role": "role",' +
+          '"addresses": [' +
+            '{' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '}' +
+            '}' +
+          '],' +
+          '"contacts": [' +
+            '{' +
+              '"name": "name",' +
+              '"role": "role"' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"effective_dates": [' +
+        '{' +
+          '"text": "text",' +
+          '"location": {' +
+            '"begin": 0,' +
+            '"end": 1' +
+          '}' +
+        '}' +
+      '],' +
+      '"contract_amounts": [' +
+        '{' +
+          '"text": "text",' +
+          '"location": {' +
+            '"begin": 0,' +
+            '"end": 1' +
+          '}' +
+        '}' +
+      '],' +
+      '"termination_dates": [' +
+        '{' +
+          '"text": "text",' +
+          '"location": {' +
+            '"begin": 0,' +
+            '"end": 1' +
+          '}' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String compareReturnResponse() {
+    return '{' +
+      '"documents": [' +
+        '{' +
+          '"title": "title",' +
+          '"html": "html",' +
+          '"hash": "hash",' +
+          '"label": "label"' +
+        '}' +
+      '],' +
+      '"aligned_elements": [' +
+        '{' +
+          '"element_pair": [' +
+            '{' +
+              '"document_label": "document_label",' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '},' +
+              '"types": [' +
+                '{' +
+                  '"label": {' +
+                    '"nature": "nature",' +
+                    '"party": "party"' +
+                  '},' +
+                  '"provenance_ids": [' +
+                    '"provenance_id"' +
+                  ']' +
+                '}' +
+              '],' +
+              '"categories": [' +
+                '{' +
+                  '"label": "label",' +
+                  '"provenance_ids": [' +
+                    '"provenance_id"' +
+                  ']' +
+                '}' +
+              '],' +
+              '"attributes": [' +
+                '{' +
+                  '"type": "type",' +
+                  '"text": "text",' +
+                  '"location": {' +
+                    '"begin": 0,' +
+                    '"end": 1' +
+                  '}' +
+                '}' +
+              ']' +
+            '}' +
+          '],' +
+          '"identical_text": true,' +
+          '"provenance_ids": [' +
+            '"provenance_id"' +
+          ']' +
+        '}' +
+      '],' +
+      '"unaligned_elements": [' +
+        '{' +
+          '"document_label": "document_label",' +
+          '"location": {' +
+            '"begin": 0,' +
+            '"end": 1' +
+          '},' +
+          '"text": "text",' +
+          '"types": [' +
+            '{' +
+              '"label": {' +
+                '"nature": "nature",' +
+                '"party": "party"' +
+              '},' +
+              '"provenance_ids": [' +
+                '"provenance_id"' +
+              ']' +
+            '}' +
+          '],' +
+          '"categories": [' +
+            '{' +
+              '"label": "label",' +
+              '"provenance_ids": [' +
+                '"provenance_id"' +
+              ']' +
+            '}' +
+          '],' +
+          '"attributes": [' +
+            '{' +
+              '"type": "type",' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '}' +
+            '}' +
+          ']' +
+        '}' +
+      '],' +
+      '"model_id": "model_id",' +
+      '"model_version": "model_version"' +
+    '}';
+  }
+
+  public static testMethod String feedbackListResponse() {
+    return '{' +
+      '"feedback": [' +
+        '{' +
+          '"feedback_id": "feedback_id",' +
+          '"comment": "comment",' +
+          '"created": "1995-06-12T01:11:11.111Z",' +
+          '"feedback_data": {' +
+            '"feedback_type": "feedback_type",' +
+            '"document": {' +
+              '"title": "title",' +
+              '"hash": "hash"' +
+            '},' +
+            '"model_id": "model_id",' +
+            '"model_version": "model_version",' +
+            '"location": {' +
+              '"begin": 0,' +
+              '"end": 1' +
+            '},' +
+            '"text": "text",' +
+            '"original_labels": {' +
+              '"types": [' +
+                '{' +
+                  '"label": {' +
+                    '"nature": "nature",' +
+                    '"party": "party"' +
+                  '},' +
+                  '"provenance_ids": [' +
+                    '"provenance_id"' +
+                  ']' +
+                '}' +
+              '],' +
+              '"categories": [' +
+                '{' +
+                  '"label": "label",' +
+                  '"provenance_ids": [' +
+                    '"provenance_id"' +
+                  ']' +
+                '}' +
+              '],' +
+              '"modification": "added"' +
+            '},' +
+            '"updated_labels": {' +
+              '"types": [' +
+                '{' +
+                  '"label": {' +
+                    '"nature": "nature",' +
+                    '"party": "party"' +
+                  '},' +
+                  '"provenance_ids": [' +
+                    '"provenance_id"' +
+                  ']' +
+                '}' +
+              '],' +
+              '"categories": [' +
+                '{' +
+                  '"label": "label",' +
+                  '"provenance_ids": [' +
+                    '"provenance_id"' +
+                  ']' +
+                '}' +
+              '],' +
+              '"modification": "added"' +
+            '},' +
+            '"pagination": {' +
+              '"refresh_cursor": "refresh_cursor",' +
+              '"next_cursor": "next_cursor",' +
+              '"refresh_url": "refresh_url",' +
+              '"next_url": "next_url",' +
+              '"total": 1000' +
+            '}' +
+          '}' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String feedbackReturnResponse() {
+    return '{' +
+      '"feedback_id": "feedback_id",' +
+      '"user_id": "user_id",' +
+      '"comment": "comment",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"feedback_data": {' +
+        '"feedback_type": "feedback_type",' +
+        '"document": {' +
+          '"title": "title",' +
+          '"hash": "hash"' +
+        '},' +
+        '"model_id": "model_id",' +
+        '"model_version": "model_version",' +
+        '"location": {' +
+          '"begin": 0,' +
+          '"end": 1' +
+        '},' +
+        '"text": "text",' +
+        '"original_labels": {' +
+          '"types": [' +
+            '{' +
+              '"label": {' +
+                '"nature": "nature",' +
+                '"party": "party"' +
+              '},' +
+              '"provenance_ids": [' +
+                '"provenance_id"' +
+              ']' +
+            '}' +
+          '],' +
+          '"categories": [' +
+            '{' +
+              '"label": "label",' +
+              '"provenance_ids": [' +
+                '"provenance_id"' +
+              ']' +
+            '}' +
+          '],' +
+          '"modification": "added"' +
+        '},' +
+        '"updated_labels": {' +
+          '"types": [' +
+            '{' +
+              '"label": {' +
+                '"nature": "nature",' +
+                '"party": "party"' +
+              '},' +
+              '"provenance_ids": [' +
+                '"provenance_id"' +
+              ']' +
+            '}' +
+          '],' +
+          '"categories": [' +
+            '{' +
+              '"label": "label",' +
+              '"provenance_ids": [' +
+                '"provenance_id"' +
+              ']' +
+            '}' +
+          '],' +
+          '"modification": "added"' +
+        '},' +
+        '"pagination": {' +
+          '"refresh_cursor": "refresh_cursor",' +
+          '"next_cursor": "next_cursor",' +
+          '"refresh_url": "refresh_url",' +
+          '"next_url": "next_url",' +
+          '"total": 1000' +
+        '}' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String getFeedbackResponse() {
+    return '{' +
+      '"feedback_id": "feedback_id",' +
+      '"comment": "comment",' +
+      '"created": "1995-06-12T01:11:11.111Z",' +
+      '"feedback_data": {' +
+        '"feedback_type": "feedback_type",' +
+        '"document": {' +
+          '"title": "title",' +
+          '"hash": "hash"' +
+        '},' +
+        '"model_id": "model_id",' +
+        '"model_version": "model_version",' +
+        '"location": {' +
+          '"begin": 0,' +
+          '"end": 1' +
+        '},' +
+        '"text": "text",' +
+        '"original_labels": {' +
+          '"types": [' +
+            '{' +
+              '"label": {' +
+                '"nature": "nature",' +
+                '"party": "party"' +
+              '},' +
+              '"provenance_ids": [' +
+                '"provenance_id"' +
+              ']' +
+            '}' +
+          '],' +
+          '"categories": [' +
+            '{' +
+              '"label": "label",' +
+              '"provenance_ids": [' +
+                '"provenance_id"' +
+              ']' +
+            '}' +
+          '],' +
+          '"modification": "added"' +
+        '},' +
+        '"updated_labels": {' +
+          '"types": [' +
+            '{' +
+              '"label": {' +
+                '"nature": "nature",' +
+                '"party": "party"' +
+              '},' +
+              '"provenance_ids": [' +
+                '"provenance_id"' +
+              ']' +
+            '}' +
+          '],' +
+          '"categories": [' +
+            '{' +
+              '"label": "label",' +
+              '"provenance_ids": [' +
+                '"provenance_id"' +
+              ']' +
+            '}' +
+          '],' +
+          '"modification": "added"' +
+        '},' +
+        '"pagination": {' +
+          '"refresh_cursor": "refresh_cursor",' +
+          '"next_cursor": "next_cursor",' +
+          '"refresh_url": "refresh_url",' +
+          '"next_url": "next_url",' +
+          '"total": 1000' +
+        '}' +
+      '}' +
+    '}';
+  }
+
+  public static testMethod String htmlReturnResponse() {
+    return '{' +
+      '"num_pages": "20",' +
+      '"author": "author",' +
+      '"publication_date": "06-12-1995",' +
+      '"title": "title",' +
+      '"html": "html"' +
+    '}';
+  }
+
+  public static testMethod String tableReturnResponse() {
+    return '{' +
+      '"document": {' +
+        '"html": "html",' +
+        '"title": "title",' +
+        '"hash": "hash"' +
+      '},' +
+      '"model_id": "model_id",' +
+      '"model_version": "model_version",' +
+      '"tables": [' +
+        '{' +
+          '"location": {' +
+            '"begin": 0,' +
+            '"end": 1' +
+          '},' +
+          '"text": "text",' +
+          '"section_title": {' +
+            '"location": {' +
+              '"begin": 0,' +
+              '"end": 1' +
+            '}' +
+          '},' +
+          '"table_headers": [' +
+            '{' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '},' +
+              '"text": "text",' +
+              '"row_index_begin": 2000,' +
+              '"row_index_end": 3000,' +
+              '"column_index_begin": 4000,' +
+              '"column_index_end": 5000' +
+            '}' +
+          '],' +
+          '"row_headers": [' +
+            '{' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '},' +
+              '"text": "text",' +
+              '"text_normalized": "text_normalized",' +
+              '"row_index_begin": 2000,' +
+              '"row_index_end": 3000,' +
+              '"column_index_begin": 4000,' +
+              '"column_index_end": 5000' +
+            '}' +
+          '],' +
+          '"column_headers": [' +
+            '{' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '},' +
+              '"text": "text",' +
+              '"text_normalized": "text_normalized",' +
+              '"row_index_begin": 2000,' +
+              '"row_index_end": 3000,' +
+              '"column_index_begin": 4000,' +
+              '"column_index_end": 5000' +
+            '}' +
+          '],' +
+          '"body_cells": [' +
+            '{' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '},' +
+              '"text": "text",' +
+              '"row_index_begin": 2000,' +
+              '"row_index_end": 3000,' +
+              '"column_index_begin": 4000,' +
+              '"column_index_end": 5000,' +
+              '"row_header_ids": [' +
+                '{' +
+                  '"id": "id"' +
+                '}' +
+              '],' +
+              '"row_header_texts": [' +
+                '{' +
+                  '"text": "text"' +
+                '}' +
+              '],' +
+              '"row_header_texts_normalized": [' +
+                '{' +
+                  '"text_normalized": "text_normalized"' +
+                '}' +
+              '],' +
+              '"column_header_ids": [' +
+                '{' +
+                  '"id": "id"' +
+                '}' +
+              '],' +
+              '"column_header_texts": [' +
+                '{' +
+                  '"text": "text"' +
+                '}' +
+              '],' +
+              '"column_header_texts_normalized": [' +
+                '{' +
+                  '"text_normalized": "text_normalized"' +
+                '}' +
+              ']' +
+            '}' +
+          ']' +
+        '}' +
+      ']' +
+    '}';
+  }
 }
