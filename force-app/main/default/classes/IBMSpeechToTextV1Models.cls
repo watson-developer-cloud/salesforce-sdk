@@ -625,8 +625,13 @@ public class IBMSpeechToTextV1Models {
      * Gets the corpusFile.
      *
      * A plain text file that contains the training data for the corpus. Encode the file in UTF-8 if it contains
-     * non-ASCII characters; the service assumes UTF-8 encoding if it encounters non-ASCII characters. With the `curl`
-     * command, use the `--data-binary` option to upload the file for the request.
+     * non-ASCII characters; the service assumes UTF-8 encoding if it encounters non-ASCII characters.
+     *
+     * Make sure that you know the character encoding of the file. You must use that encoding when working with the
+     * words in the custom language model. For more information, see [Character
+     * encoding](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#charEncoding).
+     *
+     * With the `curl` command, use the `--data-binary` option to upload the file for the request.
      *
      * @return the corpusFile
      */
@@ -821,9 +826,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the wordName.
      *
-     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom
-     * word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
-     * compound words.
+     * The custom word that is to be added to or updated in the custom language model. Do not include spaces in the
+     * word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words. URL-encode the word if it
+     * includes non-ASCII characters. For more information, see [Character
+     * encoding](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#charEncoding).
      *
      * @return the wordName
      */
@@ -838,7 +844,7 @@ public class IBMSpeechToTextV1Models {
      * custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
      * compound words.
      *
-     * Omit this field for the **Add a custom word** method.
+     * Omit this parameter for the **Add a custom word** method.
      *
      * @return the word
      */
@@ -2018,8 +2024,9 @@ public class IBMSpeechToTextV1Models {
      * Gets the baseModelName.
      *
      * The name of the base language model that is to be customized by the new custom acoustic model. The new custom
-     * model can be used only with the base model that it customizes. To determine whether a base model supports
-     * acoustic model customization, refer to [Language support for
+     * model can be used only with the base model that it customizes.
+     *
+     * To determine whether a base model supports acoustic model customization, refer to [Language support for
      * customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
      *
      * @return the baseModelName
@@ -2462,7 +2469,7 @@ public class IBMSpeechToTextV1Models {
      * If `true`, the service converts dates, times, series of digits and numbers, phone numbers, currency values, and
      * internet addresses into more readable, conventional representations in the final transcript of a recognition
      * request. For US English, the service also converts certain keyword strings to punctuation symbols. By default, no
-     * smart formatting is performed. Applies to US English and Spanish transcription only. See [Smart
+     * smart formatting is performed. Applies to US English, Japanese, and Spanish transcription only. See [Smart
      * formatting](https://console.bluemix.net/docs/services/speech-to-text/output.html#smart_formatting).
      *
      * @return the smartFormatting
@@ -2476,9 +2483,10 @@ public class IBMSpeechToTextV1Models {
      *
      * If `true`, the response includes labels that identify which words were spoken by which participants in a
      * multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
-     * `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter. To determine
-     * whether a language model supports speaker labels, use the **Get models** method and check that the attribute
-     * `speaker_labels` is set to `true`. See [Speaker
+     * `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
+     *
+     * To determine whether a language model supports speaker labels, use the **Get a model** method and check that the
+     * attribute `speaker_labels` is set to `true`. See [Speaker
      * labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
      *
      * @return the speakerLabels
@@ -2501,7 +2509,6 @@ public class IBMSpeechToTextV1Models {
 
     private CreateJobOptions(CreateJobOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.audio, 'audio cannot be null');
-      IBMWatsonValidator.notNull(builder.contentType, 'contentType cannot be null');
       audio = builder.audio;
       contentType = builder.contentType;
       model = builder.model;
@@ -2914,9 +2921,10 @@ public class IBMSpeechToTextV1Models {
      * Gets the baseModelName.
      *
      * The name of the base language model that is to be customized by the new custom language model. The new custom
-     * model can be used only with the base model that it customizes. To determine whether a base model supports
-     * language model customization, request information about the base model and check that the attribute
-     * `custom_language_model` is set to `true`, or refer to [Language support for
+     * model can be used only with the base model that it customizes.
+     *
+     * To determine whether a base model supports language model customization, use the **Get a model** method and check
+     * that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
      * customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
      *
      * @return the baseModelName
@@ -3092,7 +3100,7 @@ public class IBMSpeechToTextV1Models {
      * custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
      * compound words.
      *
-     * Omit this field for the **Add a custom word** method.
+     * Omit this parameter for the **Add a custom word** method.
      *
      * @return the word
      */
@@ -3804,9 +3812,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the wordName.
      *
-     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom
-     * word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
-     * compound words.
+     * The custom word that is to be deleted from the custom language model. URL-encode the word if it includes
+     * non-ASCII characters. For more information, see [Character
+     * encoding](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#charEncoding).
      *
      * @return the wordName
      */
@@ -4350,7 +4358,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the modelId.
      *
-     * The identifier of the model in the form of its name from the output of the **Get models** method.
+     * The identifier of the model in the form of its name from the output of the **Get a model** method.
      *
      * @return the modelId
      */
@@ -4456,9 +4464,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the wordName.
      *
-     * The custom word for the custom language model. When you add or update a custom word with the **Add a custom
-     * word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
-     * compound words.
+     * The custom word that is to be read from the custom language model. URL-encode the word if it includes non-ASCII
+     * characters. For more information, see [Character
+     * encoding](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#charEncoding).
      *
      * @return the wordName
      */
@@ -6101,7 +6109,7 @@ public class IBMSpeechToTextV1Models {
      * If `true`, the service converts dates, times, series of digits and numbers, phone numbers, currency values, and
      * internet addresses into more readable, conventional representations in the final transcript of a recognition
      * request. For US English, the service also converts certain keyword strings to punctuation symbols. By default, no
-     * smart formatting is performed. Applies to US English and Spanish transcription only. See [Smart
+     * smart formatting is performed. Applies to US English, Japanese, and Spanish transcription only. See [Smart
      * formatting](https://console.bluemix.net/docs/services/speech-to-text/output.html#smart_formatting).
      *
      * @return the smartFormatting
@@ -6115,9 +6123,10 @@ public class IBMSpeechToTextV1Models {
      *
      * If `true`, the response includes labels that identify which words were spoken by which participants in a
      * multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
-     * `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter. To determine
-     * whether a language model supports speaker labels, use the **Get models** method and check that the attribute
-     * `speaker_labels` is set to `true`. See [Speaker
+     * `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
+     *
+     * To determine whether a language model supports speaker labels, use the **Get a model** method and check that the
+     * attribute `speaker_labels` is set to `true`. See [Speaker
      * labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
      *
      * @return the speakerLabels
@@ -6140,7 +6149,6 @@ public class IBMSpeechToTextV1Models {
 
     private RecognizeOptions(RecognizeOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.audio, 'audio cannot be null');
-      IBMWatsonValidator.notNull(builder.contentType, 'contentType cannot be null');
       audio = builder.audio;
       contentType = builder.contentType;
       model = builder.model;
@@ -7038,7 +7046,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the supportedFeatures.
      *
-     * Describes the additional service features supported with the model.
+     * Describes the additional service features that are supported with the model.
      *
      * @return the supportedFeatures
      */
@@ -7050,7 +7058,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the description.
      *
-     * Brief description of the model.
+     * A brief description of the model.
      *
      * @return the description
      */
@@ -7501,7 +7509,7 @@ public class IBMSpeechToTextV1Models {
      * An array of warning messages associated with the request:
      * * Warnings for invalid parameters or fields can include a descriptive message and a list of invalid argument
      * strings, for example, `"Unknown arguments:"` or `"Unknown url query arguments:"` followed by a list of the form
-     * `"invalid_arg_1, invalid_arg_2."`
+     * `"{invalid_arg_1}, {invalid_arg_2}."`
      * * The following warning is returned if the request passes a custom model that is based on an older version of a
      * base model for which an updated version is available: `"Using previous version of base model, because your custom
      * model has been built with it. Please note that this version will be supported only for a limited time. Consider
@@ -7591,7 +7599,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * SupportedFeatures.
+   * Describes the additional service features that are supported with the model.
    */
   public class SupportedFeatures extends IBMWatsonGenericModel {
     private Boolean custom_language_model_serialized_name;
