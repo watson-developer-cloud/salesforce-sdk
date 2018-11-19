@@ -464,6 +464,22 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
+     * Instantiates a new builder.
+     *
+     * NOTE: audioResource and contentType are now required, so this constructor will be removed. Please use
+     * the constructor with 4 parameters.
+     *
+     * @param customizationId the customizationId
+     * @param audioName the audioName
+     */
+    public AddAudioOptionsBuilder(String customizationId, String audioName) {
+      this.customizationId = customizationId;
+      this.audioName = audioName;
+      this.audioResource = audioResource;
+      this.contentType = contentType;
+    }
+
+    /**
      * Instantiates a new builder with required properties.
      *
      * @param customizationId the customizationId
@@ -2493,7 +2509,6 @@ public class IBMSpeechToTextV1Models {
 
     private CreateJobOptions(CreateJobOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.audio, 'audio cannot be null');
-      IBMWatsonValidator.notNull(builder.contentType, 'contentType cannot be null');
       audio = builder.audio;
       contentType = builder.contentType;
       model = builder.model;
@@ -6134,7 +6149,6 @@ public class IBMSpeechToTextV1Models {
 
     private RecognizeOptions(RecognizeOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.audio, 'audio cannot be null');
-      IBMWatsonValidator.notNull(builder.contentType, 'contentType cannot be null');
       audio = builder.audio;
       contentType = builder.contentType;
       model = builder.model;
@@ -7179,8 +7193,8 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript_serialized_name;
     private Double confidence_serialized_name;
-    private List<String> timestamps_serialized_name;
-    private List<String> word_confidence_serialized_name;
+    private List<List<String>> timestamps_serialized_name;
+    private List<List<String>> word_confidence_serialized_name;
  
     /**
      * Gets the transcript.
@@ -7217,7 +7231,7 @@ public class IBMSpeechToTextV1Models {
      * @return the timestamps
      */
     @AuraEnabled
-    public List<String> getTimestamps() {
+    public List<List<String>> getTimestamps() {
       return timestamps_serialized_name;
     }
  
@@ -7231,7 +7245,7 @@ public class IBMSpeechToTextV1Models {
      * @return the wordConfidence
      */
     @AuraEnabled
-    public List<String> getWordConfidence() {
+    public List<List<String>> getWordConfidence() {
       return word_confidence_serialized_name;
     }
 
@@ -7258,7 +7272,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<String> timestamps) {
+    public void setTimestamps(final List<List<String>> timestamps) {
       this.timestamps_serialized_name = timestamps;
     }
 
@@ -7267,7 +7281,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<String> wordConfidence) {
+    public void setWordConfidence(final List<List<String>> wordConfidence) {
       this.word_confidence_serialized_name = wordConfidence;
     }
 

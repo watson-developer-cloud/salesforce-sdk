@@ -176,7 +176,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(recognizeOptions, 'recognizeOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/recognize');
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('Content-Type', recognizeOptions.contentType());
+    if (recognizeOptions.contentType() != null) {
+      builder.addHeader('Content-Type', recognizeOptions.contentType());
+    }
     Map<String, String> requestHeaders = (recognizeOptions != null) ? recognizeOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -378,7 +380,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(createJobOptions, 'createJobOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/recognitions');
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('Content-Type', createJobOptions.contentType());
+    if (createJobOptions.contentType() != null) {
+      builder.addHeader('Content-Type', createJobOptions.contentType());
+    }
     Map<String, String> requestHeaders = (createJobOptions != null) ? createJobOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
