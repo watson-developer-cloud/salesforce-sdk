@@ -5,6 +5,24 @@ private class IBMDiscoveryV1Test {
   private static final String ENVIRONMENT_ID = '5ae96bb9-80e5-43ea-916e-1f3412fbc283';
   private static final String CONFIGURATION_ID = 'configuration_id';
 
+  static testMethod void testNluEnrichmentConcepts() {
+    Long lim = 5L;
+
+    IBMDiscoveryV1Models.NluEnrichmentConcepts concepts = new IBMDiscoveryV1Models.NluEnrichmentConcepts();
+    concepts.setXlimit(lim);
+
+    System.assertEquals(lim, concepts.getXlimit());
+  }
+
+  static testMethod void testRetrievalDetails() {
+    String retrievalStrategy = 'relevancy_training';
+
+    IBMDiscoveryV1Models.RetrievalDetails retrievalDetails = new IBMDiscoveryV1Models.RetrievalDetails();
+    retrievalDetails.setDocumentRetrievalStrategy(retrievalStrategy);
+
+    System.assertEquals(retrievalStrategy, retrievalDetails.getDocumentRetrievalStrategy());
+  }
+
   /**
    *  Test Successfully creating a new environment.
    *
@@ -999,6 +1017,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
+    String retrievalStrategy = 'relevancy_training';
     List<String> collectionIds = new List<String> { 'Collection1', 'Collection2' };
     IBMDiscoveryV1Models.QueryOptions options = new IBMDiscoveryV1Models.QueryOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
@@ -1017,6 +1036,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.QueryResponse resp =
       discovery.query(options);
     System.assertEquals(resp.getResults().size(), 1);
+    System.assertEquals(retrievalStrategy, resp.getRetrievalDetails().getDocumentRetrievalStrategy());
     Test.stopTest();
   }
 
@@ -1412,7 +1432,7 @@ private class IBMDiscoveryV1Test {
       .mentions(true)
       .mentionTypes(true)
       .model('test')
-      .sentenceLocation(true)
+      .sentenceLocations(true)
       .sentiment(true)
       .build();
     IBMDiscoveryV1Models.NluEnrichmentKeywords enrichmentKeywords = new IBMDiscoveryV1Models.NluEnrichmentKeywordsBuilder()
@@ -1495,7 +1515,7 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(enrichmentOptions.getFeatures().getEntities().getMentions(), true);
     System.assertEquals(enrichmentOptions.getFeatures().getEntities().getMentionTypes(), true);
     System.assertEquals(enrichmentOptions.getFeatures().getEntities().getModel(), 'test');
-    System.assertEquals(enrichmentOptions.getFeatures().getEntities().getSentenceLocation(), true);
+    System.assertEquals(enrichmentOptions.getFeatures().getEntities().getSentenceLocations(), true);
     System.assertEquals(enrichmentOptions.getFeatures().getEntities().getSentiment(), true);
     System.assertEquals(enrichmentOptions.getFeatures().getKeywords().getEmotion(), true);
     System.assertEquals(enrichmentOptions.getFeatures().getKeywords().getXlimit(), 5);

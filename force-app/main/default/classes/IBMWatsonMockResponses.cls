@@ -393,7 +393,10 @@ public class IBMWatsonMockResponses {
             '        }' +
             '      ]' +
             '    }' +
-            '  }]' +
+            '  }],' +
+            '  "retrieval_details": {' +
+            '    "document_retrieval_strategy": "relevancy_training"' +
+            '  }' +
             '}';
   }
 
