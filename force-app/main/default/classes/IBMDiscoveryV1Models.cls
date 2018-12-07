@@ -668,8 +668,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the diskUsage.
      *
-     * The object providing information about the disk usage of the collection. Present only when retrieving details of
-     * a collection.
+     * Summary of the disk usage statistics for this collection.
      *
      * @return the diskUsage
      */
@@ -950,7 +949,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the conversions.
      *
-     * The document conversion settings for the configuration.
+     * Document conversion settings.
      *
      * @return the conversions
      */
@@ -1499,7 +1498,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the conversions.
      *
-     * The document conversion settings for the configuration.
+     * Document conversion settings.
      *
      * @return the conversions
      */
@@ -2078,7 +2077,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the data.
      *
-     * Data object used to create a query event.
+     * Query event data object.
      *
      * @return the data
      */
@@ -5270,7 +5269,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the options.
      *
-     * A list of options specific to the enrichment.
+     * Options which are specific to a particular enrichment.
      *
      * @return the options
      */
@@ -5647,7 +5646,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the searchStatus.
      *
-     * Information about Continuous Relevancy Training for this environment.
+     * Information about the Continuous Relevancy Training for this environment.
      *
      * @return the searchStatus
      */
@@ -9316,7 +9315,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the diskUsage.
      *
-     * Summary of the disk usage of the environment.
+     * Summary of the disk usage statistics for the environment.
      *
      * @return the diskUsage
      */
@@ -9340,7 +9339,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the memoryUsage.
      *
-     * **Deprecated**: Summary of the memory usage of the environment.
+     * **Deprecated**: Summary of the memory usage statistics for this environment.
      *
      * @return the memoryUsage
      */
@@ -12372,7 +12371,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the categories.
      *
-     * An object specifying the categories enrichment and related parameters.
+     * An object that indicates the Categories enrichment will be applied to the specified field.
      *
      * @return the categories
      */
@@ -17653,9 +17652,10 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the confidence.
      *
-     * The confidence score for the given result. Calculated based on how relevant the result is estimated to be,
-     * compared to a trained relevancy model. confidence can range from `0.0` to `1.0`. The higher the number, the more
-     * relevant the document.
+     * The confidence score for the given result. Calculated based on how relevant the result is estimated to be.
+     * confidence can range from `0.0` to `1.0`. The higher the number, the more relevant the document. The `confidence`
+     * value for a result was calculated using the model specified in the `document_retrieval_strategy` field of the
+     * result set.
      *
      * @return the confidence
      */
@@ -19943,7 +19943,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the conversions.
      *
-     * The document conversion settings for the configuration.
+     * Document conversion settings.
      *
      * @return the conversions
      */
