@@ -772,8 +772,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * Returns a five-level taxonomy of the content. The top three categories are returned.
    *
    * Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
+   *
+   * NOTE: This model will not extend IBMWatsonDynamicModel in the next release, meaning that it won't support Map
+   * functions and the getAdditionalProperties() method will be removed. In the meantime, any additional
+   * properties added to this model will not be supported by the service.
    */
-  public class CategoriesOptions {
+  public class CategoriesOptions extends IBMWatsonDynamicModel {
     private Long limit_serialized_name;
  
     /**
@@ -786,6 +790,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public Long getXlimit() {
       return limit_serialized_name;
+    }
+
+    /**
+     * Gets the dynamic properties attached to CategoriesOptions.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
     }
 
     /**
