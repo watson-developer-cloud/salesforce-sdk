@@ -12023,7 +12023,7 @@ public class IBMDiscoveryV1Models {
     private Long limit_serialized_name;
     private Boolean mentions_serialized_name;
     private Boolean mention_types_serialized_name;
-    private Boolean sentence_location_serialized_name;
+    private Boolean sentence_locations_serialized_name;
     private String model_serialized_name;
 
     /**
@@ -12093,16 +12093,16 @@ public class IBMDiscoveryV1Models {
     }
  
     /**
-     * Gets the sentenceLocation.
+     * Gets the sentenceLocations.
      *
      * When `true`, a list of sentence locations for each instance of each identified entity is recorded. The default is
      * `false`.
      *
-     * @return the sentenceLocation
+     * @return the sentenceLocations
      */
     @AuraEnabled
-    public Boolean getSentenceLocation() {
-      return sentence_location_serialized_name;
+    public Boolean getSentenceLocations() {
+      return sentence_locations_serialized_name;
     }
  
     /**
@@ -12124,7 +12124,7 @@ public class IBMDiscoveryV1Models {
       limit_serialized_name = builder.xlimit;
       mentions_serialized_name = builder.mentions;
       mention_types_serialized_name = builder.mentionTypes;
-      sentence_location_serialized_name = builder.sentenceLocation;
+      sentence_locations_serialized_name = builder.sentenceLocations;
       model_serialized_name = builder.model;
     }
 
@@ -12158,7 +12158,7 @@ public class IBMDiscoveryV1Models {
     private Long xlimit;
     private Boolean mentions;
     private Boolean mentionTypes;
-    private Boolean sentenceLocation;
+    private Boolean sentenceLocations;
     private String model;
 
     private NluEnrichmentEntitiesBuilder(NluEnrichmentEntities nluEnrichmentEntities) {
@@ -12167,7 +12167,7 @@ public class IBMDiscoveryV1Models {
       xlimit = nluEnrichmentEntities.limit_serialized_name;
       mentions = nluEnrichmentEntities.mentions_serialized_name;
       mentionTypes = nluEnrichmentEntities.mention_types_serialized_name;
-      sentenceLocation = nluEnrichmentEntities.sentence_location_serialized_name;
+      sentenceLocations = nluEnrichmentEntities.sentence_locations_serialized_name;
       model = nluEnrichmentEntities.model_serialized_name;
     }
 
@@ -12242,13 +12242,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the sentenceLocation.
+     * Set the sentenceLocations.
      *
-     * @param sentenceLocation the sentenceLocation
+     * @param sentenceLocations the sentenceLocations
      * @return the NluEnrichmentEntities builder
      */
-    public NluEnrichmentEntitiesBuilder sentenceLocation(Boolean sentenceLocation) {
-      this.sentenceLocation = sentenceLocation;
+    public NluEnrichmentEntitiesBuilder sentenceLocations(Boolean sentenceLocations) {
+      this.sentenceLocations = sentenceLocations;
       return this;
     }
 
