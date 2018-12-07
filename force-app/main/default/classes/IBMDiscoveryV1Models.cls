@@ -17291,6 +17291,7 @@ public class IBMDiscoveryV1Models {
     private List<QueryPassages> passages_serialized_name;
     private Long duplicates_removed_serialized_name;
     private String session_token_serialized_name;
+    private RetrievalDetails retrieval_details_serialized_name;
  
     /**
      * Gets the matchingResults.
@@ -17356,6 +17357,18 @@ public class IBMDiscoveryV1Models {
     public String getSessionToken() {
       return session_token_serialized_name;
     }
+ 
+    /**
+     * Gets the retrievalDetails.
+     *
+     * An object contain retrieval type information.
+     *
+     * @return the retrievalDetails
+     */
+    @AuraEnabled
+    public RetrievalDetails getRetrievalDetails() {
+      return retrieval_details_serialized_name;
+    }
 
     /**
      * Sets the matchingResults.
@@ -17411,6 +17424,15 @@ public class IBMDiscoveryV1Models {
       this.session_token_serialized_name = sessionToken;
     }
 
+    /**
+     * Sets the retrievalDetails.
+     *
+     * @param retrievalDetails the new retrievalDetails
+     */
+    public void setRetrievalDetails(final RetrievalDetails retrievalDetails) {
+      this.retrieval_details_serialized_name = retrievalDetails;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -17456,6 +17478,10 @@ public class IBMDiscoveryV1Models {
         }
         ret.setPassages(newPassages);
       }
+
+      // calling custom deserializer for retrievalDetails
+      RetrievalDetails newRetrievalDetails = (RetrievalDetails) new RetrievalDetails().deserialize(JSON.serialize(ret.getRetrievalDetails()), (Map<String, Object>) jsonMap.get('retrieval_details_serialized_name'), RetrievalDetails.class);
+      ret.setRetrievalDetails(newRetrievalDetails);
 
       return ret;
     }
@@ -17662,6 +17688,50 @@ public class IBMDiscoveryV1Models {
       }
 
       QueryResultMetadata ret = (QueryResultMetadata) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object contain retrieval type information.
+   */
+  public class RetrievalDetails extends IBMWatsonGenericModel {
+    private String document_retrieval_strategy_serialized_name;
+ 
+    /**
+     * Gets the documentRetrievalStrategy.
+     *
+     * Indentifies the document retrieval strategy used for this query. `relevancy_training` indicates that the results
+     * were returned using a relevancy trained model. `continuous_relevancy_training` indicates that the results were
+     * returned using the continuous relevancy training model created by result feedback analysis. `untrained` means the
+     * results were returned using the standard untrained model.
+     *
+     *  **Note**: In the event of trained collections being queried, but the trained model is not used to return
+     * results, the **document_retrieval_strategy** will be listed as `untrained`.
+     *
+     * @return the documentRetrievalStrategy
+     */
+    @AuraEnabled
+    public String getDocumentRetrievalStrategy() {
+      return document_retrieval_strategy_serialized_name;
+    }
+
+    /**
+     * Sets the documentRetrievalStrategy.
+     *
+     * @param documentRetrievalStrategy the new documentRetrievalStrategy
+     */
+    public void setDocumentRetrievalStrategy(final String documentRetrievalStrategy) {
+      this.document_retrieval_strategy_serialized_name = documentRetrievalStrategy;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      RetrievalDetails ret = (RetrievalDetails) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
