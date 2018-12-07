@@ -1,6 +1,6 @@
 public class IBMToneAnalyzerV3Models {
   /**
-   * DocumentAnalysis.
+   * An object of type `DocumentAnalysis` that provides the results of the analysis for the full input document.
    */
   public class DocumentAnalysis extends IBMWatsonGenericModel {
     private List<ToneScore> tones_serialized_name;
@@ -906,7 +906,6 @@ public class IBMToneAnalyzerV3Models {
     }
 
     private ToneOptions(ToneOptionsBuilder builder) {
-      IBMWatsonValidator.isTrue(builder.contentType != null, 'contentType cannot be null');
       toneInput = builder.toneInput;
       body = builder.body;
       contentType = builder.contentType;

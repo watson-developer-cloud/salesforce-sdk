@@ -5,8 +5,8 @@
  * Businesses can use the service to learn the tone of their customers' communications and to respond to each customer
  * appropriately, or to understand and improve their customer conversations.
  *
- * **Note:** Request logging is disabled for the Tone Analyzer service. The service neither logs nor retains data from
- * requests and responses, regardless of whether the `X-Watson-Learning-Opt-Out` request header is set.
+ * **Note:** Request logging is disabled for the Tone Analyzer service. Regardless of whether you set the
+ * `X-Watson-Learning-Opt-Out` request header, the service does not log or retain data from requests and responses.
  *
  * @version V3
  * @see <a href="http://www.ibm.com/watson/developercloud/tone-analyzer.html">Tone Analyzer</a>
@@ -78,7 +78,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    * service removes HTML tags and analyzes only the textual content.
    *
    * **See also:** [Using the general-purpose
-   * endpoint](https://console.bluemix.net/docs/services/tone-analyzer/using-tone.html#using-the-general-purpose-endpoint).
+   * endpoint](/docs/services/tone-analyzer/using-tone.html#using-the-general-purpose-endpoint).
    *
    * @param toneOptions the {@link IBMToneAnalyzerV3Models.ToneOptions} containing the options for the call
    * @return the {@link IBMToneAnalyzerV3Models.ToneAnalysis} with the response
@@ -87,7 +87,9 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
     IBMWatsonValidator.notNull(toneOptions, 'toneOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/tone');
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('Content-Type', toneOptions.contentType());
+    if (toneOptions.contentType() != null) {
+      builder.addHeader('Content-Type', toneOptions.contentType());
+    }
     if (toneOptions.contentLanguage() != null) {
       builder.addHeader('Content-Language', toneOptions.contentLanguage());
     }
@@ -126,7 +128,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    * UTF-8.
    *
    * **See also:** [Using the customer-engagement
-   * endpoint](https://console.bluemix.net/docs/services/tone-analyzer/using-tone-chat.html#using-the-customer-engagement-endpoint).
+   * endpoint](/docs/services/tone-analyzer/using-tone-chat.html#using-the-customer-engagement-endpoint).
    *
    * @param toneChatOptions the {@link IBMToneAnalyzerV3Models.ToneChatOptions} containing the options for the call
    * @return the {@link IBMToneAnalyzerV3Models.UtteranceAnalyses} with the response
