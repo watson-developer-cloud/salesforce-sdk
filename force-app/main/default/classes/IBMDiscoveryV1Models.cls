@@ -11886,6 +11886,44 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * An object specifiying the concepts enrichment and related parameters.
+   */
+  public class NluEnrichmentConcepts extends IBMWatsonGenericModel {
+    private Long limit_serialized_name;
+ 
+    /**
+     * Gets the xlimit.
+     *
+     * The maximum number of concepts enrichments to extact from each instance of the specified field.
+     *
+     * @return the xlimit
+     */
+    @AuraEnabled
+    public Long getXlimit() {
+      return limit_serialized_name;
+    }
+
+    /**
+     * Sets the xlimit.
+     *
+     * @param xlimit the new xlimit
+     */
+    public void setXlimit(final long xlimit) {
+      this.limit_serialized_name = xlimit;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      NluEnrichmentConcepts ret = (NluEnrichmentConcepts) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
    * An object specifying the emotion detection enrichment and related parameters.
    */
   public class NluEnrichmentEmotion extends IBMWatsonGenericModel {
@@ -12275,6 +12313,7 @@ public class IBMDiscoveryV1Models {
     private NluEnrichmentCategories categories_serialized_name;
     private NluEnrichmentSemanticRoles semantic_roles_serialized_name;
     private NluEnrichmentRelations relations_serialized_name;
+    private NluEnrichmentConcepts concepts_serialized_name;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -12365,6 +12404,18 @@ public class IBMDiscoveryV1Models {
     public NluEnrichmentRelations getRelations() {
       return relations_serialized_name;
     }
+ 
+    /**
+     * Gets the concepts.
+     *
+     * An object specifiying the concepts enrichment and related parameters.
+     *
+     * @return the concepts
+     */
+    @AuraEnabled
+    public NluEnrichmentConcepts getConcepts() {
+      return concepts_serialized_name;
+    }
   
     private NluEnrichmentFeatures(NluEnrichmentFeaturesBuilder builder) {
       keywords_serialized_name = builder.keywords;
@@ -12374,6 +12425,7 @@ public class IBMDiscoveryV1Models {
       categories_serialized_name = builder.categories;
       semantic_roles_serialized_name = builder.semanticRoles;
       relations_serialized_name = builder.relations;
+      concepts_serialized_name = builder.concepts;
     }
 
     /**
@@ -12421,6 +12473,10 @@ public class IBMDiscoveryV1Models {
       NluEnrichmentRelations newRelations = (NluEnrichmentRelations) new NluEnrichmentRelations().deserialize(JSON.serialize(ret.getRelations()), (Map<String, Object>) jsonMap.get('relations_serialized_name'), NluEnrichmentRelations.class);
       retBuilder.relations(newRelations);
 
+      // calling custom deserializer for concepts
+      NluEnrichmentConcepts newConcepts = (NluEnrichmentConcepts) new NluEnrichmentConcepts().deserialize(JSON.serialize(ret.getConcepts()), (Map<String, Object>) jsonMap.get('concepts_serialized_name'), NluEnrichmentConcepts.class);
+      retBuilder.concepts(newConcepts);
+
       return retBuilder.build();
     }
   }
@@ -12436,6 +12492,7 @@ public class IBMDiscoveryV1Models {
     private NluEnrichmentCategories categories;
     private NluEnrichmentSemanticRoles semanticRoles;
     private NluEnrichmentRelations relations;
+    private NluEnrichmentConcepts concepts;
 
     private NluEnrichmentFeaturesBuilder(NluEnrichmentFeatures nluEnrichmentFeatures) {
       keywords = nluEnrichmentFeatures.keywords_serialized_name;
@@ -12445,6 +12502,7 @@ public class IBMDiscoveryV1Models {
       categories = nluEnrichmentFeatures.categories_serialized_name;
       semanticRoles = nluEnrichmentFeatures.semantic_roles_serialized_name;
       relations = nluEnrichmentFeatures.relations_serialized_name;
+      concepts = nluEnrichmentFeatures.concepts_serialized_name;
     }
 
     /**
@@ -12536,6 +12594,17 @@ public class IBMDiscoveryV1Models {
      */
     public NluEnrichmentFeaturesBuilder relations(NluEnrichmentRelations relations) {
       this.relations = relations;
+      return this;
+    }
+
+    /**
+     * Set the concepts.
+     *
+     * @param concepts the concepts
+     * @return the NluEnrichmentFeatures builder
+     */
+    public NluEnrichmentFeaturesBuilder concepts(NluEnrichmentConcepts concepts) {
+      this.concepts = concepts;
       return this;
     }
   }
