@@ -998,9 +998,8 @@ public class IBMPersonalityInsightsV3Models {
      * Gets the content.
      *
      * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
-     * [Providing sufficient
-     * input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input,
-     * provide an object of type `Content`.
+     * [Providing sufficient input](/docs/services/personality-insights/input.html#sufficient). For JSON input, provide
+     * an object of type `Content`.
      *
      * @return the content
      */
@@ -1012,9 +1011,8 @@ public class IBMPersonalityInsightsV3Models {
      * Gets the body.
      *
      * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
-     * [Providing sufficient
-     * input](https://console.bluemix.net/docs/services/personality-insights/input.html#sufficient). For JSON input,
-     * provide an object of type `Content`.
+     * [Providing sufficient input](/docs/services/personality-insights/input.html#sufficient). For JSON input, provide
+     * an object of type `Content`.
      *
      * @return the body
      */
@@ -1025,8 +1023,9 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the contentType.
      *
-     * The type of the input. A character encoding can be specified by including a `charset` parameter. For example,
-     * 'text/html;charset=utf-8'.
+     * The type of the input. For more information, see **Content types** in the method description.
+     *
+     * Default: `text/plain`.
      *
      * @return the contentType
      */
@@ -1082,7 +1081,7 @@ public class IBMPersonalityInsightsV3Models {
      * Gets the csvHeaders.
      *
      * Indicates whether column labels are returned with a CSV response. By default, no column labels are returned.
-     * Applies only when the **Accept** parameter is set to `text/csv`.
+     * Applies only when the response type is CSV (`text/csv`).
      *
      * @return the csvHeaders
      */
@@ -1103,7 +1102,6 @@ public class IBMPersonalityInsightsV3Models {
     }
 
     private ProfileOptions(ProfileOptionsBuilder builder) {
-      IBMWatsonValidator.isTrue(builder.contentType != null, 'contentType cannot be null');
       content = builder.content;
       body = builder.body;
       contentType = builder.contentType;
