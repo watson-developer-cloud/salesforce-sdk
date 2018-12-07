@@ -766,27 +766,38 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * Returns a five-level taxonomy of the content. The top three categories are returned. 
-
-Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
+   * Returns a five-level taxonomy of the content. The top three categories are returned.
+   *
+   * Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
    */
-  public class CategoriesOptions extends IBMWatsonDynamicModel {
-    private Map<String, Object> additional_properties_serialized_name;
+  public class CategoriesOptions {
+    private Long limit_serialized_name;
+ 
+    /**
+     * Gets the xlimit.
+     *
+     * Maximum number of categories to return.
+     * Maximum value: **10**.
+     *
+     * @return the xlimit
+     */
+    public Long getXlimit() {
+      return limit_serialized_name;
+    }
 
     /**
-     * Gets the dynamic properties attached to CategoriesOptions.
+     * Sets the xlimit.
      *
-     * @return the dynamic properties
+     * @param xlimit the new xlimit
      */
-    @AuraEnabled
-    public Map<String, Object> getAdditionalProperties() {
-      return this.getDynamicProperties();
+    public void setXlimit(final long xlimit) {
+      this.limit_serialized_name = xlimit;
     }
 
   }
 
   /**
-   * The hierarchical 5-level taxonomy the content is categorized into.
+   * A categorization of the analyzed text.
    */
   public class CategoriesResult extends IBMWatsonGenericModel {
     private String label_serialized_name;
