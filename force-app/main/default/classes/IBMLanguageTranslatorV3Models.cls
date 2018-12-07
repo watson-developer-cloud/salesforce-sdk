@@ -947,8 +947,7 @@ public class IBMLanguageTranslatorV3Models {
     /**
      * Gets the modelId.
      *
-     * Model ID of the translation model to use. If this is specified, the **source** and **target** parameters will be
-     * ignored. The method requires either a model ID or both the **source** and **target** parameters.
+     * A globally unique string that identifies the underlying model that is used for translation.
      *
      * @return the modelId
      */
@@ -959,9 +958,7 @@ public class IBMLanguageTranslatorV3Models {
     /**
      * Gets the source.
      *
-     * Language code of the source text language. Use with `target` as an alternative way to select a translation model.
-     * When `source` and `target` are set, and a model ID is not set, the system chooses a default model for the
-     * language pair (usually the model based on the news domain).
+     * Translation source language code.
      *
      * @return the source
      */
@@ -972,8 +969,7 @@ public class IBMLanguageTranslatorV3Models {
     /**
      * Gets the target.
      *
-     * Language code of the translation target language. Use with source as an alternative way to select a translation
-     * model.
+     * Translation target language code.
      *
      * @return the target
      */
