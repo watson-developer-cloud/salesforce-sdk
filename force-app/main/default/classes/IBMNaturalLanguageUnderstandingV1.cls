@@ -59,10 +59,18 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
   }
 
   /**
-   * Analyze text, HTML, or a public webpage.
+   * Analyze text.
    *
-   * Analyzes text, HTML, or a public webpage with one or more text analysis features, including categories, concepts,
-   * emotion, entities, keywords, metadata, relations, semantic roles, and sentiment.
+   * Analyzes text, HTML, or a public webpage for the following features:
+   * - Categories
+   * - Concepts
+   * - Emotion
+   * - Entities
+   * - Keywords
+   * - Metadata
+   * - Relations
+   * - Semantic roles
+   * - Sentiment.
    *
    * @param analyzeOptions the {@link IBMNaturalLanguageUnderstandingV1Models.AnalyzeOptions} containing the options for the call
    * @return the {@link IBMNaturalLanguageUnderstandingV1Models.AnalysisResults} with the response
@@ -138,8 +146,8 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
   /**
    * List models.
    *
-   * Lists available models for Relations and Entities features, including Watson Knowledge Studio custom models that
-   * you have created and linked to your Natural Language Understanding service.
+   * Lists Watson Knowledge Studio [custom models](/docs/services/natural-language-understanding/customizing.html) that
+   * are deployed to your Natural Language Understanding service.
    *
    * @param listModelsOptions the {@link IBMNaturalLanguageUnderstandingV1Models.ListModelsOptions} containing the options for the call
    * @return the {@link IBMNaturalLanguageUnderstandingV1Models.ListModelsResults} with the response

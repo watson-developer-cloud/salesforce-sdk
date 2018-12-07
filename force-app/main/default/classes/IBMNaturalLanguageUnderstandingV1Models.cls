@@ -44,7 +44,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the retrievedUrl.
      *
-     * URL that was used to retrieve HTML content.
+     * URL of the webpage that was analyzed.
      *
      * @return the retrievedUrl
      */
@@ -56,7 +56,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the usage.
      *
-     * API usage information for the request.
+     * Usage information.
      *
      * @return the usage
      */
@@ -68,7 +68,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the concepts.
      *
-     * The general concepts referenced or alluded to in the specified content.
+     * The general concepts referenced or alluded to in the analyzed text.
      *
      * @return the concepts
      */
@@ -80,7 +80,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the entities.
      *
-     * The important entities in the specified content.
+     * The entities detected in the analyzed text.
      *
      * @return the entities
      */
@@ -92,7 +92,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the keywords.
      *
-     * The important keywords in content organized by relevance.
+     * The keywords from the analyzed text.
      *
      * @return the keywords
      */
@@ -104,7 +104,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the categories.
      *
-     * The hierarchical 5-level taxonomy the content is categorized into.
+     * The categories that the service assigned to the analyzed text.
      *
      * @return the categories
      */
@@ -116,7 +116,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the emotion.
      *
-     * The anger, disgust, fear, joy, or sadness conveyed by the content.
+     * The detected anger, disgust, fear, joy, or sadness that is conveyed by the content. Emotion information can be
+     * returned for detected entities, keywords, or user-specified target phrases found in the text.
      *
      * @return the emotion
      */
@@ -128,7 +129,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the metadata.
      *
-     * The metadata holds author information, publication date and the title of the text/HTML content.
+     * The authors, publication date, title, prominent page image, and RSS/ATOM feeds of the webpage. Supports URL and
+     * HTML input types.
      *
      * @return the metadata
      */
@@ -152,7 +154,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the semanticRoles.
      *
-     * The subjects of actions and the objects the actions act upon.
+     * Sentences parsed into `subject`, `action`, and `object` form.
      *
      * @return the semanticRoles
      */
@@ -435,7 +437,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the url.
      *
-     * The web page to analyze. One of the `text`, `html`, or `url` parameters is required.
+     * The webpage to analyze. One of the `text`, `html`, or `url` parameters is required.
      *
      * @return the url
      */
@@ -446,7 +448,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the features.
      *
-     * Specific features to analyze the document for.
+     * Analysis features and options.
      *
      * @return the features
      */
@@ -457,7 +459,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the clean.
      *
-     * Remove website elements, such as links, ads, etc.
+     * Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see the [Analyzing
+     * webpages](/docs/services/natural-language-understanding/analyzing-webpages.html) documentation.
      *
      * @return the clean
      */
@@ -468,9 +471,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the xpath.
      *
-     * An [XPath query](https://www.w3.org/TR/xpath/) to perform on `html` or `url` input. Results of the query will be
-     * appended to the cleaned webpage text before it is analyzed. To analyze only the results of the XPath query, set
-     * the `clean` parameter to `false`.
+     * An [XPath query](/docs/services/natural-language-understanding/analyzing-webpages.html#xpath) to perform on
+     * `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it is analyzed.
+     * To analyze only the results of the XPath query, set the `clean` parameter to `false`.
      *
      * @return the xpath
      */
@@ -806,7 +809,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the label.
      *
-     * The path to the category through the taxonomy hierarchy.
+     * The path to the category through the 5-level taxonomy hierarchy. For the complete list of categories, see the
+     * [Categories hierarchy](/docs/services/natural-language-understanding/categories.html#categories-hierarchy)
+     * documentation.
      *
      * @return the label
      */
@@ -929,7 +934,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * The general concepts referenced or alluded to in the specified content.
+   * The general concepts referenced or alluded to in the analyzed text.
    */
   public class ConceptsResult extends IBMWatsonGenericModel {
     private String text_serialized_name;
@@ -1186,7 +1191,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * An object containing the emotion results of a document.
+   * Emotion results for the document as a whole.
    */
   public class DocumentEmotionResults extends IBMWatsonGenericModel {
     private EmotionScores emotion_serialized_name;
@@ -1194,7 +1199,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the emotion.
      *
-     * An object containing the emotion results for the document.
+     * Emotion results for the document as a whole.
      *
      * @return the emotion
      */
@@ -1413,7 +1418,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the document.
      *
-     * The returned emotion results across the document.
+     * Emotion results for the document as a whole.
      *
      * @return the document
      */
@@ -1425,7 +1430,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the targets.
      *
-     * The returned emotion results per specified target.
+     * Emotion results for specified targets.
      *
      * @return the targets
      */
@@ -1860,7 +1865,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the emotion.
      *
-     * Emotion analysis results for the entity, enabled with the "emotion" option.
+     * Emotion analysis results for the entity, enabled with the `emotion` option.
      *
      * @return the emotion
      */
@@ -1872,7 +1877,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the sentiment.
      *
-     * Sentiment analysis results for the entity, enabled with the "sentiment" option.
+     * Sentiment analysis results for the entity, enabled with the `sentiment` option.
      *
      * @return the sentiment
      */
@@ -2134,7 +2139,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * phrases specified in the targets parameter. You can analyze emotion for detected entities with `entities.emotion`
      * and for keywords with `keywords.emotion`.
      *
-     * Supported languages: English
+     * Supported languages: English.
      *
      * @return the emotion
      */
@@ -2217,7 +2222,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Analyzes the general sentiment of your content or the sentiment toward specific target phrases. You can analyze
      * sentiment for detected entities with `entities.sentiment` and for keywords with `keywords.sentiment`.
      *
-     *  Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish
+     *  Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish.
      *
      * @return the sentiment
      */
@@ -2612,7 +2617,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the emotion.
      *
-     * Emotion analysis results for the keyword, enabled with the "emotion" option.
+     * Emotion analysis results for the keyword, enabled with the `emotion` option.
      *
      * @return the emotion
      */
@@ -2624,7 +2629,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the sentiment.
      *
-     * Sentiment analysis results for the keyword, enabled with the "sentiment" option.
+     * Sentiment analysis results for the keyword, enabled with the `sentiment` option.
      *
      * @return the sentiment
      */
@@ -2824,7 +2829,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * The Authors, Publication Date, and Title of the document. Supports URL and HTML input types.
+   * The authors, publication date, title, prominent page image, and RSS/ATOM feeds of the webpage. Supports URL and
+   * HTML input types.
    */
   public class MetadataResult extends IBMWatsonGenericModel {
     private List<Author> authors_serialized_name;
@@ -3445,7 +3451,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the arguments.
      *
-     * The extracted relation objects from the text.
+     * Entity mentions that are involved in the relation.
      *
      * @return the arguments
      */
@@ -4368,7 +4374,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * An object containing the emotion results for the target.
+   * Emotion results for a specified target.
    */
   public class TargetedEmotionResults extends IBMWatsonGenericModel {
     private String text_serialized_name;
@@ -4389,7 +4395,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the emotion.
      *
-     * An object containing the emotion results for the target.
+     * The emotion results for the target.
      *
      * @return the emotion
      */
