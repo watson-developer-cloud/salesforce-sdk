@@ -2972,11 +2972,15 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     private String model_id_serialized_name;
     private String language_serialized_name;
     private String description_serialized_name;
+    private String workspace_id_serialized_name;
+    private String version_serialized_name;
+    private String version_description_serialized_name;
+    private Datetime created_serialized_name;
  
     /**
      * Gets the status.
      *
-     * Shows as available if the model is ready for use.
+     * When the status is `available`, the model is ready to use.
      *
      * @return the status
      */
@@ -3020,6 +3024,54 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     public String getDescription() {
       return description_serialized_name;
     }
+ 
+    /**
+     * Gets the workspaceId.
+     *
+     * ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language Understanding.
+     *
+     * @return the workspaceId
+     */
+    @AuraEnabled
+    public String getWorkspaceId() {
+      return workspace_id_serialized_name;
+    }
+ 
+    /**
+     * Gets the version.
+     *
+     * The model version, if it was manually provided in Watson Knowledge Studio.
+     *
+     * @return the version
+     */
+    @AuraEnabled
+    public String getVersion() {
+      return version_serialized_name;
+    }
+ 
+    /**
+     * Gets the versionDescription.
+     *
+     * The description of the version, if it was manually provided in Watson Knowledge Studio.
+     *
+     * @return the versionDescription
+     */
+    @AuraEnabled
+    public String getVersionDescription() {
+      return version_description_serialized_name;
+    }
+ 
+    /**
+     * Gets the created.
+     *
+     * A dateTime indicating when the model was created.
+     *
+     * @return the created
+     */
+    @AuraEnabled
+    public Datetime getCreated() {
+      return created_serialized_name;
+    }
 
     /**
      * Sets the status.
@@ -3055,6 +3107,42 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
      */
     public void setDescription(final String description) {
       this.description_serialized_name = description;
+    }
+
+    /**
+     * Sets the workspaceId.
+     *
+     * @param workspaceId the new workspaceId
+     */
+    public void setWorkspaceId(final String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
+    }
+
+    /**
+     * Sets the version.
+     *
+     * @param version the new version
+     */
+    public void setVersion(final String version) {
+      this.version_serialized_name = version;
+    }
+
+    /**
+     * Sets the versionDescription.
+     *
+     * @param versionDescription the new versionDescription
+     */
+    public void setVersionDescription(final String versionDescription) {
+      this.version_description_serialized_name = versionDescription;
+    }
+
+    /**
+     * Sets the created.
+     *
+     * @param created the new created
+     */
+    public void setCreated(final Datetime created) {
+      this.created_serialized_name = created;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
