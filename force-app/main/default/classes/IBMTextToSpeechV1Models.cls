@@ -50,8 +50,7 @@ public class IBMTextToSpeechV1Models {
      * **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
      * for the word. You can create only a single entry, with or without a single part of speech, for any word; you
      * cannot create multiple entries with different parts of speech for the same word. For more information, see
-     * [Working with Japanese
-     * entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     * [Working with Japanese entries](https://cloud.ibm.com/docs/services/text-to-speech/custom-rules.html#jaNotes).
      *
      * @return the partOfSpeech
      */
@@ -1589,7 +1588,7 @@ public class IBMTextToSpeechV1Models {
   }
 
   /**
-   * SupportedFeatures.
+   * Describes the additional service features that are supported with the voice.
    */
   public class SupportedFeatures extends IBMWatsonGenericModel {
     private Boolean custom_pronunciation_serialized_name;
@@ -1672,11 +1671,11 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the accept.
      *
-     * The requested audio format (MIME type) of the audio. You can use the `Accept` header or the `accept` query
-     * parameter to specify the audio format. (For the `audio/l16` format, you can optionally specify
-     * `endianness=big-endian` or `endianness=little-endian`; the default is little endian.) For detailed information
-     * about the supported audio formats and sampling rates, see [Specifying an audio
-     * format](https://console.bluemix.net/docs/services/text-to-speech/http.html#format).
+     * The requested format (MIME type) of the audio. You can use the `Accept` header or the `accept` parameter to
+     * specify the audio format. For more information about specifying an audio format, see **Audio formats (accept
+     * types)** in the method description.
+     *
+     * Default: `audio/ogg;codecs=opus`.
      *
      * @return the accept
      */
@@ -1854,8 +1853,7 @@ public class IBMTextToSpeechV1Models {
      * **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
      * for the word. You can create only a single entry, with or without a single part of speech, for any word; you
      * cannot create multiple entries with different parts of speech for the same word. For more information, see
-     * [Working with Japanese
-     * entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     * [Working with Japanese entries](https://cloud.ibm.com/docs/services/text-to-speech/custom-rules.html#jaNotes).
      *
      * @return the partOfSpeech
      */
@@ -2171,7 +2169,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the supportedFeatures.
      *
-     * Describes the additional service features supported with the voice.
+     * Describes the additional service features that are supported with the voice.
      *
      * @return the supportedFeatures
      */
@@ -2640,8 +2638,7 @@ public class IBMTextToSpeechV1Models {
      * **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
      * for the word. You can create only a single entry, with or without a single part of speech, for any word; you
      * cannot create multiple entries with different parts of speech for the same word. For more information, see
-     * [Working with Japanese
-     * entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     * [Working with Japanese entries](https://cloud.ibm.com/docs/services/text-to-speech/custom-rules.html#jaNotes).
      *
      * @return the partOfSpeech
      */

@@ -54,7 +54,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .build();
     sentiment = sentiment.newBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions categories = new IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions();
-    categories.put('emotion', emotion);
+    categories.setXlimit(12L);
     IBMNaturalLanguageUnderstandingV1Models.MetadataOptions metadata = new IBMNaturalLanguageUnderstandingV1Models.MetadataOptions();
     metadata.put('', '');
     IBMNaturalLanguageUnderstandingV1Models.Features features = new IBMNaturalLanguageUnderstandingV1Models.FeaturesBuilder()
@@ -142,6 +142,37 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(resp.getSentiment().getDocument().getScore(), 0.89792);
     Test.stopTest();
   }
+
+  static testMethod void testModel() {
+    String status = 'status';
+    String modelId = 'model_id';
+    String language = 'spanish';
+    String description = 'description';
+    String workspaceId = 'workspace_id';
+    String version = 'version';
+    String versionDescription = 'version_description';
+    Datetime created = (Datetime) JSON.deserialize('"1995-06-12T18:42:25.324Z"', Datetime.class);
+
+    IBMNaturalLanguageUnderstandingV1Models.Model model = new IBMNaturalLanguageUnderstandingV1Models.Model();
+    model.setStatus(status);
+    model.setModelId(modelId);
+    model.setLanguage(language);
+    model.setDescription(description);
+    model.setWorkspaceId(workspaceId);
+    model.setVersion(version);
+    model.setVersionDescription(versionDescription);
+    model.setCreated(created);
+
+    System.assertEquals(status, model.getStatus());
+    System.assertEquals(modelId, model.getModelId());
+    System.assertEquals(language, model.getLanguage());
+    System.assertEquals(description, model.getDescription());
+    System.assertEquals(workspaceId, model.getWorkspaceId());
+    System.assertEquals(version, model.getVersion());
+    System.assertEquals(versionDescription, model.getVersionDescription());
+    System.assertEquals(created, model.getCreated());
+  }
+
   static testMethod void testAnalysisResultsAttributes() {
     Test.startTest();
     IBMNaturalLanguageUnderstandingV1Models.AnalysisResults analysisResults =
@@ -185,6 +216,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     keywordsResult.setText('test');
     keywordsResult.setEmotion(emotionScores);
     keywordsResult.setSentiment(featureSentimentResults);
+    keywordsResult.setCount(10L);
     analysisResults.setKeywords(new List<IBMNaturalLanguageUnderstandingV1Models.KeywordsResult>{keywordsResult});
     IBMNaturalLanguageUnderstandingV1Models.CategoriesResult categoriesResult = new IBMNaturalLanguageUnderstandingV1Models.CategoriesResult();
     categoriesResult.setLabel('Company');
@@ -257,6 +289,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(analysisResults.getKeywords()[0].getRelevance(), 0.89792);
     System.assertEquals(analysisResults.getKeywords()[0].getSentiment().getScore(), 0.099437);
     System.assertEquals(analysisResults.getKeywords()[0].getText(), 'test');
+    System.assertEquals(10L, analysisResults.getKeywords()[0].getCount());
     System.assertEquals(analysisResults.getCategories()[0].getScore(), 0.89792);
     System.assertEquals(analysisResults.getCategories()[0].getLabel(), 'Company');
     System.assertEquals(analysisResults.getEmotion().getDocument().getEmotion().getAnger(), 0.099437);

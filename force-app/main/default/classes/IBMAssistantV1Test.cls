@@ -297,12 +297,23 @@ private class IBMAssistantV1Test {
     IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
     assistant.setUsernameAndPassword('username', 'password');
 
+    String xsort = 'stable';
+
     IBMAssistantV1Models.GetWorkspaceOptions getOptions = new IBMAssistantV1Models.GetWorkspaceOptionsBuilder()
       .workspaceId(workspaceId)
+      .xexport(true)
+      .includeAudit(true)
+      .xsort(xsort)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
     getOptions = getOptions.newBuilder().build();
+
+    System.assertEquals(workspaceId, getOptions.workspaceId());
+    System.assert(getOptions.xexport());
+    System.assert(getOptions.includeAudit());
+    System.assertEquals(xsort, getOptions.xsort());
+
     IBMAssistantV1Models.WorkspaceExport response = assistant.getWorkspace(getOptions);
 
     System.assertEquals(response.getName(), workspaceName);
@@ -572,6 +583,33 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getPagination().getTotal(), paginationTotal);
     System.assertEquals(response.getPagination().getMatched(), paginationMatched);
     Test.stopTest();
+  }
+
+  static testMethod void testContext() {
+    String conversationId = 'conversation_id';
+
+    IBMAssistantV1Models.Context context = new IBMAssistantV1Models.Context();
+    IBMAssistantV1Models.SystemResponse systemResponse = new IBMAssistantV1Models.SystemResponse();
+    IBMAssistantV1Models.MessageContextMetadata metadata = new IBMAssistantV1Models.MessageContextMetadata();
+    context.setConversationId(conversationId);
+    context.setXsystem(systemResponse);
+    context.setMetadata(metadata);
+
+    System.assertEquals(conversationId, context.getConversationId());
+    System.assertEquals(systemResponse, context.getXsystem());
+    System.assertEquals(metadata, context.getMetadata());
+  }
+
+  static testMethod void testMessageContextMetadata() {
+    String deployment = 'deployment';
+    String userId = 'user_id';
+
+    IBMAssistantV1Models.MessageContextMetadata metadata = new IBMAssistantV1Models.MessageContextMetadata();
+    metadata.setDeployment(deployment);
+    metadata.setUserId(userId);
+
+    System.assertEquals(deployment, metadata.getDeployment());
+    System.assertEquals(userId, metadata.getUserId());
   }
 
   static testMethod void message() {

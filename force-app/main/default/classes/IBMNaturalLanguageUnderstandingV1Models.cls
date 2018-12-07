@@ -44,7 +44,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the retrievedUrl.
      *
-     * URL that was used to retrieve HTML content.
+     * URL of the webpage that was analyzed.
      *
      * @return the retrievedUrl
      */
@@ -56,7 +56,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the usage.
      *
-     * API usage information for the request.
+     * Usage information.
      *
      * @return the usage
      */
@@ -68,7 +68,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the concepts.
      *
-     * The general concepts referenced or alluded to in the specified content.
+     * The general concepts referenced or alluded to in the analyzed text.
      *
      * @return the concepts
      */
@@ -80,7 +80,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the entities.
      *
-     * The important entities in the specified content.
+     * The entities detected in the analyzed text.
      *
      * @return the entities
      */
@@ -92,7 +92,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the keywords.
      *
-     * The important keywords in content organized by relevance.
+     * The keywords from the analyzed text.
      *
      * @return the keywords
      */
@@ -104,7 +104,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the categories.
      *
-     * The hierarchical 5-level taxonomy the content is categorized into.
+     * The categories that the service assigned to the analyzed text.
      *
      * @return the categories
      */
@@ -116,7 +116,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the emotion.
      *
-     * The anger, disgust, fear, joy, or sadness conveyed by the content.
+     * The detected anger, disgust, fear, joy, or sadness that is conveyed by the content. Emotion information can be
+     * returned for detected entities, keywords, or user-specified target phrases found in the text.
      *
      * @return the emotion
      */
@@ -128,7 +129,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the metadata.
      *
-     * The metadata holds author information, publication date and the title of the text/HTML content.
+     * The authors, publication date, title, prominent page image, and RSS/ATOM feeds of the webpage. Supports URL and
+     * HTML input types.
      *
      * @return the metadata
      */
@@ -152,7 +154,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the semanticRoles.
      *
-     * The subjects of actions and the objects the actions act upon.
+     * Sentences parsed into `subject`, `action`, and `object` form.
      *
      * @return the semanticRoles
      */
@@ -435,7 +437,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the url.
      *
-     * The web page to analyze. One of the `text`, `html`, or `url` parameters is required.
+     * The webpage to analyze. One of the `text`, `html`, or `url` parameters is required.
      *
      * @return the url
      */
@@ -446,7 +448,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the features.
      *
-     * Specific features to analyze the document for.
+     * Analysis features and options.
      *
      * @return the features
      */
@@ -457,7 +459,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the clean.
      *
-     * Remove website elements, such as links, ads, etc.
+     * Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see the [Analyzing
+     * webpages](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html) documentation.
      *
      * @return the clean
      */
@@ -468,9 +471,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the xpath.
      *
-     * An [XPath query](https://www.w3.org/TR/xpath/) to perform on `html` or `url` input. Results of the query will be
-     * appended to the cleaned webpage text before it is analyzed. To analyze only the results of the XPath query, set
-     * the `clean` parameter to `false`.
+     * An [XPath query](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html#xpath) to perform on
+     * `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it is analyzed.
+     * To analyze only the results of the XPath query, set the `clean` parameter to `false`.
      *
      * @return the xpath
      */
@@ -766,12 +769,28 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * Returns a five-level taxonomy of the content. The top three categories are returned. 
-
-Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
+   * Returns a five-level taxonomy of the content. The top three categories are returned.
+   *
+   * Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
+   *
+   * NOTE: This model will not extend IBMWatsonDynamicModel in the next release, meaning that it won't support Map
+   * functions and the getAdditionalProperties() method will be removed. In the meantime, any additional
+   * properties added to this model will not be supported by the service.
    */
   public class CategoriesOptions extends IBMWatsonDynamicModel {
-    private Map<String, Object> additional_properties_serialized_name;
+    private Long limit_serialized_name;
+ 
+    /**
+     * Gets the xlimit.
+     *
+     * Maximum number of categories to return.
+     * Maximum value: **10**.
+     *
+     * @return the xlimit
+     */
+    public Long getXlimit() {
+      return limit_serialized_name;
+    }
 
     /**
      * Gets the dynamic properties attached to CategoriesOptions.
@@ -783,10 +802,19 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
       return this.getDynamicProperties();
     }
 
+    /**
+     * Sets the xlimit.
+     *
+     * @param xlimit the new xlimit
+     */
+    public void setXlimit(final long xlimit) {
+      this.limit_serialized_name = xlimit;
+    }
+
   }
 
   /**
-   * The hierarchical 5-level taxonomy the content is categorized into.
+   * A categorization of the analyzed text.
    */
   public class CategoriesResult extends IBMWatsonGenericModel {
     private String label_serialized_name;
@@ -795,7 +823,9 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     /**
      * Gets the label.
      *
-     * The path to the category through the taxonomy hierarchy.
+     * The path to the category through the 5-level taxonomy hierarchy. For the complete list of categories, see the
+     * [Categories hierarchy](https://cloud.ibm.com/docs/services/natural-language-understanding/categories.html#categories-hierarchy)
+     * documentation.
      *
      * @return the label
      */
@@ -918,7 +948,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
   }
 
   /**
-   * The general concepts referenced or alluded to in the specified content.
+   * The general concepts referenced or alluded to in the analyzed text.
    */
   public class ConceptsResult extends IBMWatsonGenericModel {
     private String text_serialized_name;
@@ -1175,7 +1205,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
   }
 
   /**
-   * An object containing the emotion results of a document.
+   * Emotion results for the document as a whole.
    */
   public class DocumentEmotionResults extends IBMWatsonGenericModel {
     private EmotionScores emotion_serialized_name;
@@ -1183,7 +1213,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     /**
      * Gets the emotion.
      *
-     * An object containing the emotion results for the document.
+     * Emotion results for the document as a whole.
      *
      * @return the emotion
      */
@@ -1402,7 +1432,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     /**
      * Gets the document.
      *
-     * The returned emotion results across the document.
+     * Emotion results for the document as a whole.
      *
      * @return the document
      */
@@ -1414,7 +1444,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     /**
      * Gets the targets.
      *
-     * The returned emotion results per specified target.
+     * Emotion results for specified targets.
      *
      * @return the targets
      */
@@ -1597,7 +1627,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
 
   /**
    * Identifies people, cities, organizations, and other entities in the content. See [Entity types and
-   * subtypes](/docs/services/natural-language-understanding/entity-types.html).
+   * subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding/entity-types.html).
    *
    * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
    * Arabic, Chinese, and Dutch custom models are also supported.
@@ -1849,7 +1879,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     /**
      * Gets the emotion.
      *
-     * Emotion analysis results for the entity, enabled with the "emotion" option.
+     * Emotion analysis results for the entity, enabled with the `emotion` option.
      *
      * @return the emotion
      */
@@ -1861,7 +1891,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     /**
      * Gets the sentiment.
      *
-     * Sentiment analysis results for the entity, enabled with the "sentiment" option.
+     * Sentiment analysis results for the entity, enabled with the `sentiment` option.
      *
      * @return the sentiment
      */
@@ -2123,7 +2153,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
      * phrases specified in the targets parameter. You can analyze emotion for detected entities with `entities.emotion`
      * and for keywords with `keywords.emotion`.
      *
-     * Supported languages: English
+     * Supported languages: English.
      *
      * @return the emotion
      */
@@ -2135,7 +2165,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
      * Gets the entities.
      *
      * Identifies people, cities, organizations, and other entities in the content. See [Entity types and
-     * subtypes](/docs/services/natural-language-understanding/entity-types.html).
+     * subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding/entity-types.html).
      *
      * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
      * Arabic, Chinese, and Dutch custom models are also supported.
@@ -2176,7 +2206,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
      *
      * Recognizes when two entities are related and identifies the type of relation. For example, an `awardedTo`
      * relation might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
-     * types](/docs/services/natural-language-understanding/relations.html).
+     * types](https://cloud.ibm.com/docs/services/natural-language-understanding/relations.html).
      *
      * Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
      * Portuguese custom models are also supported.
@@ -2206,7 +2236,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
      * Analyzes the general sentiment of your content or the sentiment toward specific target phrases. You can analyze
      * sentiment for detected entities with `entities.sentiment` and for keywords with `keywords.sentiment`.
      *
-     *  Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish
+     *  Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish.
      *
      * @return the sentiment
      */
@@ -2553,13 +2583,26 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
   }
 
   /**
-   * The most important keywords in the content, organized by relevance.
+   * The important keywords in the content, organized by relevance.
    */
   public class KeywordsResult extends IBMWatsonGenericModel {
+    private Long count_serialized_name;
     private Double relevance_serialized_name;
     private String text_serialized_name;
     private EmotionScores emotion_serialized_name;
     private FeatureSentimentResults sentiment_serialized_name;
+ 
+    /**
+     * Gets the count.
+     *
+     * Number of times the keyword appears in the analyzed text.
+     *
+     * @return the count
+     */
+    @AuraEnabled
+    public Long getCount() {
+      return count_serialized_name;
+    }
  
     /**
      * Gets the relevance.
@@ -2588,7 +2631,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     /**
      * Gets the emotion.
      *
-     * Emotion analysis results for the keyword, enabled with the "emotion" option.
+     * Emotion analysis results for the keyword, enabled with the `emotion` option.
      *
      * @return the emotion
      */
@@ -2600,13 +2643,22 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     /**
      * Gets the sentiment.
      *
-     * Sentiment analysis results for the keyword, enabled with the "sentiment" option.
+     * Sentiment analysis results for the keyword, enabled with the `sentiment` option.
      *
      * @return the sentiment
      */
     @AuraEnabled
     public FeatureSentimentResults getSentiment() {
       return sentiment_serialized_name;
+    }
+
+    /**
+     * Sets the count.
+     *
+     * @param count the new count
+     */
+    public void setCount(final long count) {
+      this.count_serialized_name = count;
     }
 
     /**
@@ -2791,7 +2843,8 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
   }
 
   /**
-   * The Authors, Publication Date, and Title of the document. Supports URL and HTML input types.
+   * The authors, publication date, title, prominent page image, and RSS/ATOM feeds of the webpage. Supports URL and
+   * HTML input types.
    */
   public class MetadataResult extends IBMWatsonGenericModel {
     private List<Author> authors_serialized_name;
@@ -2950,11 +3003,15 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     private String model_id_serialized_name;
     private String language_serialized_name;
     private String description_serialized_name;
+    private String workspace_id_serialized_name;
+    private String version_serialized_name;
+    private String version_description_serialized_name;
+    private Datetime created_serialized_name;
  
     /**
      * Gets the status.
      *
-     * Shows as available if the model is ready for use.
+     * When the status is `available`, the model is ready to use.
      *
      * @return the status
      */
@@ -2998,6 +3055,54 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     public String getDescription() {
       return description_serialized_name;
     }
+ 
+    /**
+     * Gets the workspaceId.
+     *
+     * ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language Understanding.
+     *
+     * @return the workspaceId
+     */
+    @AuraEnabled
+    public String getWorkspaceId() {
+      return workspace_id_serialized_name;
+    }
+ 
+    /**
+     * Gets the version.
+     *
+     * The model version, if it was manually provided in Watson Knowledge Studio.
+     *
+     * @return the version
+     */
+    @AuraEnabled
+    public String getVersion() {
+      return version_serialized_name;
+    }
+ 
+    /**
+     * Gets the versionDescription.
+     *
+     * The description of the version, if it was manually provided in Watson Knowledge Studio.
+     *
+     * @return the versionDescription
+     */
+    @AuraEnabled
+    public String getVersionDescription() {
+      return version_description_serialized_name;
+    }
+ 
+    /**
+     * Gets the created.
+     *
+     * A dateTime indicating when the model was created.
+     *
+     * @return the created
+     */
+    @AuraEnabled
+    public Datetime getCreated() {
+      return created_serialized_name;
+    }
 
     /**
      * Sets the status.
@@ -3033,6 +3138,42 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
      */
     public void setDescription(final String description) {
       this.description_serialized_name = description;
+    }
+
+    /**
+     * Sets the workspaceId.
+     *
+     * @param workspaceId the new workspaceId
+     */
+    public void setWorkspaceId(final String workspaceId) {
+      this.workspace_id_serialized_name = workspaceId;
+    }
+
+    /**
+     * Sets the version.
+     *
+     * @param version the new version
+     */
+    public void setVersion(final String version) {
+      this.version_serialized_name = version;
+    }
+
+    /**
+     * Sets the versionDescription.
+     *
+     * @param versionDescription the new versionDescription
+     */
+    public void setVersionDescription(final String versionDescription) {
+      this.version_description_serialized_name = versionDescription;
+    }
+
+    /**
+     * Sets the created.
+     *
+     * @param created the new created
+     */
+    public void setCreated(final Datetime created) {
+      this.created_serialized_name = created;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3204,7 +3345,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
   /**
    * Recognizes when two entities are related and identifies the type of relation. For example, an `awardedTo` relation
    * might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
-   * types](/docs/services/natural-language-understanding/relations.html).
+   * types](https://cloud.ibm.com/docs/services/natural-language-understanding/relations.html).
    *
    * Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
    * Portuguese custom models are also supported.
@@ -3215,7 +3356,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     /**
      * Gets the model.
      *
-     * Enter a [custom model](/docs/services/natural-language-understanding/customizing.html) ID to override the default
+     * Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to override the default
      * model.
      *
      * @return the model
@@ -3324,7 +3465,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     /**
      * Gets the arguments.
      *
-     * The extracted relation objects from the text.
+     * Entity mentions that are involved in the relation.
      *
      * @return the arguments
      */
@@ -4247,7 +4388,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
   }
 
   /**
-   * An object containing the emotion results for the target.
+   * Emotion results for a specified target.
    */
   public class TargetedEmotionResults extends IBMWatsonGenericModel {
     private String text_serialized_name;
@@ -4268,7 +4409,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     /**
      * Gets the emotion.
      *
-     * An object containing the emotion results for the target.
+     * The emotion results for the target.
      *
      * @return the emotion
      */

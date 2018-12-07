@@ -65,6 +65,7 @@ public class IBMAssistantV1Models {
   public class Context extends IBMWatsonDynamicModel {
     private String conversation_id_serialized_name;
     private SystemResponse system_serialized_name;
+    private MessageContextMetadata metadata_serialized_name;
     private Map<String, Object> additional_properties_serialized_name;
 
     /**
@@ -85,6 +86,16 @@ public class IBMAssistantV1Models {
     @AuraEnabled
     public SystemResponse getXsystem() {
       return system_serialized_name;
+    }
+
+    /**
+     * Gets the metadata.
+     *
+     * @return the metadata
+     */
+    @AuraEnabled
+    public MessageContextMetadata getMetadata() {
+      return metadata_serialized_name;
     }
 
     /**
@@ -115,6 +126,15 @@ public class IBMAssistantV1Models {
       this.system_serialized_name = xsystem;
     }
 
+    /**
+     * Sets the metadata.
+     *
+     * @param metadata the new metadata
+     */
+    public void setMetadata(final MessageContextMetadata metadata) {
+      this.metadata_serialized_name = metadata;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -125,6 +145,10 @@ public class IBMAssistantV1Models {
       // calling custom deserializer for xsystem
       SystemResponse newXsystem = (SystemResponse) new SystemResponse().deserialize(JSON.serialize(ret.getXsystem()), (Map<String, Object>) jsonMap.get('system_serialized_name'), SystemResponse.class);
       ret.setXsystem(newXsystem);
+
+      // calling custom deserializer for metadata
+      MessageContextMetadata newMetadata = (MessageContextMetadata) new MessageContextMetadata().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), MessageContextMetadata.class);
+      ret.setMetadata(newMetadata);
 
       Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
 
@@ -605,7 +629,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the nextStep.
      *
-     * The next step to be executed in dialog processing.
+     * The next step to execute following this dialog node.
      *
      * @return the nextStep
      */
@@ -1162,7 +1186,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the nextStep.
      *
-     * The next step to be executed in dialog processing.
+     * The next step to execute following this dialog node.
      *
      * @return the nextStep
      */
@@ -1634,8 +1658,10 @@ public class IBMAssistantV1Models {
      *
      * The name of the entity. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
-     * - It cannot begin with the reserved prefix `sys-`.
      * - It must be no longer than 64 characters.
+     *
+     * If you specify an entity name beginning with the reserved prefix `sys-`, it must be the name of a system entity
+     * that you want to enable. (Any entity content specified with the request is ignored.).
      *
      * @return the entity
      */
@@ -1849,8 +1875,10 @@ public class IBMAssistantV1Models {
      *
      * The name of the entity. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
-     * - It cannot begin with the reserved prefix `sys-`.
      * - It must be no longer than 64 characters.
+     *
+     * If you specify an entity name beginning with the reserved prefix `sys-`, it must be the name of a system entity
+     * that you want to enable. (Any entity content specified with the request is ignored.).
      *
      * @return the entity
      */
@@ -3513,7 +3541,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the dialogNodes.
      *
-     * An array of objects defining the nodes in the workspace dialog.
+     * An array of objects defining the nodes in the dialog.
      *
      * @return the dialogNodes
      */
@@ -8897,6 +8925,7 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private Boolean xexport;
     private Boolean includeAudit;
+    private String xsort;
  
     /**
      * Gets the workspaceId.
@@ -8931,12 +8960,25 @@ public class IBMAssistantV1Models {
     public Boolean includeAudit() {
       return includeAudit;
     }
+ 
+    /**
+     * Gets the xsort.
+     *
+     * Indicates how the returned workspace data will be sorted. This parameter is valid only if **export**=`true`.
+     * Specify `sort=stable` to sort all workspace objects by unique identifier, in ascending alphabetical order.
+     *
+     * @return the xsort
+     */
+    public String xsort() {
+      return xsort;
+    }
 
     private GetWorkspaceOptions(GetWorkspaceOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       workspaceId = builder.workspaceId;
       xexport = builder.xexport;
       includeAudit = builder.includeAudit;
+      xsort = builder.xsort;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -8958,11 +9000,13 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private Boolean xexport;
     private Boolean includeAudit;
+    private String xsort;
 
     private GetWorkspaceOptionsBuilder(GetWorkspaceOptions getWorkspaceOptions) {
       workspaceId = getWorkspaceOptions.workspaceId;
       xexport = getWorkspaceOptions.xexport;
       includeAudit = getWorkspaceOptions.includeAudit;
+      xsort = getWorkspaceOptions.xsort;
       this.requestHeaders.putAll(getWorkspaceOptions.requestHeaders());
     }
 
@@ -9020,6 +9064,17 @@ public class IBMAssistantV1Models {
      */
     public GetWorkspaceOptionsBuilder includeAudit(Boolean includeAudit) {
       this.includeAudit = includeAudit;
+      return this;
+    }
+
+    /**
+     * Set the xsort.
+     *
+     * @param xsort the xsort
+     * @return the GetWorkspaceOptions builder
+     */
+    public GetWorkspaceOptionsBuilder xsort(String xsort) {
+      this.xsort = xsort;
       return this;
     }
 
@@ -9639,8 +9694,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the xsort.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`).
+     * The attribute by which returned counterexamples will be sorted. To reverse the sort order, prefix the value with
+     * a minus sign (`-`).
      *
      * @return the xsort
      */
@@ -9863,8 +9918,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the xsort.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`).
+     * The attribute by which returned dialog nodes will be sorted. To reverse the sort order, prefix the value with a
+     * minus sign (`-`).
      *
      * @return the xsort
      */
@@ -10100,7 +10155,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the xsort.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     * The attribute by which returned entities will be sorted. To reverse the sort order, prefix the value with a minus
      * sign (`-`).
      *
      * @return the xsort
@@ -10350,7 +10405,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the xsort.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     * The attribute by which returned examples will be sorted. To reverse the sort order, prefix the value with a minus
      * sign (`-`).
      *
      * @return the xsort
@@ -10604,7 +10659,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the xsort.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
+     * The attribute by which returned intents will be sorted. To reverse the sort order, prefix the value with a minus
      * sign (`-`).
      *
      * @return the xsort
@@ -11241,8 +11296,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the xsort.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`).
+     * The attribute by which returned entity value synonyms will be sorted. To reverse the sort order, prefix the value
+     * with a minus sign (`-`).
      *
      * @return the xsort
      */
@@ -11524,8 +11579,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the xsort.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`).
+     * The attribute by which returned entity values will be sorted. To reverse the sort order, prefix the value with a
+     * minus sign (`-`).
      *
      * @return the xsort
      */
@@ -11767,8 +11822,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the xsort.
      *
-     * The attribute by which returned results will be sorted. To reverse the sort order, prefix the value with a minus
-     * sign (`-`).
+     * The attribute by which returned workspaces will be sorted. To reverse the sort order, prefix the value with a
+     * minus sign (`-`).
      *
      * @return the xsort
      */
@@ -12012,7 +12067,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the request.
      *
-     * A request received by the workspace, including the user input and context.
+     * A message request formatted for the Watson Assistant service.
      *
      * @return the request
      */
@@ -12024,7 +12079,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the response.
      *
-     * The response sent by the workspace, including the output text, detected intents and entities, and context.
+     * A response from the Watson Assistant service.
      *
      * @return the response
      */
@@ -12393,6 +12448,70 @@ public class IBMAssistantV1Models {
   }
 
   /**
+   * Metadata related to the message.
+   */
+  public class MessageContextMetadata extends IBMWatsonGenericModel {
+    private String deployment_serialized_name;
+    private String user_id_serialized_name;
+ 
+    /**
+     * Gets the deployment.
+     *
+     * A label identifying the deployment environment, used for filtering log data. This string cannot contain carriage
+     * return, newline, or tab characters.
+     *
+     * @return the deployment
+     */
+    @AuraEnabled
+    public String getDeployment() {
+      return deployment_serialized_name;
+    }
+ 
+    /**
+     * Gets the userId.
+     *
+     * A string value that identifies the user who is interacting with the workspace. The client must provide a unique
+     * identifier for each individual end user who accesses the application. For Plus and Premium plans, this user ID is
+     * used to identify unique users for billing purposes. This string cannot contain carriage return, newline, or tab
+     * characters.
+     *
+     * @return the userId
+     */
+    @AuraEnabled
+    public String getUserId() {
+      return user_id_serialized_name;
+    }
+
+    /**
+     * Sets the deployment.
+     *
+     * @param deployment the new deployment
+     */
+    public void setDeployment(final String deployment) {
+      this.deployment_serialized_name = deployment;
+    }
+
+    /**
+     * Sets the userId.
+     *
+     * @param userId the new userId
+     */
+    public void setUserId(final String userId) {
+      this.user_id_serialized_name = userId;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      MessageContextMetadata ret = (MessageContextMetadata) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
    * The text of the user input.
    */
   public class MessageInput extends IBMWatsonGenericModel {
@@ -12457,7 +12576,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the input.
      *
-     * An input object that includes the input text.
+     * The user input.
      *
      * @return the input
      */
@@ -12479,8 +12598,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the context.
      *
-     * State information for the conversation. Continue a conversation by including the context object from the previous
-     * response.
+     * State information for the conversation. To maintain state, include the context from the previous response.
      *
      * @return the context
      */
@@ -12515,8 +12633,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the output.
      *
-     * System output. Include the output from the previous response to maintain intermediate information over multiple
-     * requests.
+     * An output object that includes the response to the user, the dialog nodes that were triggered, and messages from
+     * the log.
      *
      * @return the output
      */
@@ -12772,7 +12890,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the input.
      *
-     * An input object that includes the input text.
+     * The user input.
      *
      * @return the input
      */
@@ -12796,8 +12914,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the context.
      *
-     * State information for the conversation. Continue a conversation by including the context object from the previous
-     * response.
+     * State information for the conversation. To maintain state, include the context from the previous response.
      *
      * @return the context
      */
@@ -12835,8 +12952,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the output.
      *
-     * System output. Include the output from the previous response to maintain intermediate information over multiple
-     * requests.
+     * An output object that includes the response to the user, the dialog nodes that were triggered, and messages from
+     * the log.
      *
      * @return the output
      */
@@ -14265,7 +14382,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the newNextStep.
      *
-     * The next step to be executed in dialog processing.
+     * The next step to execute following this dialog node.
      *
      * @return the newNextStep
      */
@@ -16014,7 +16131,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the dialogNodes.
      *
-     * An array of objects defining the nodes in the workspace dialog.
+     * An array of objects defining the nodes in the dialog.
      *
      * @return the dialogNodes
      */
@@ -16556,7 +16673,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the pagination.
      *
-     * An object defining the pagination data for the returned objects.
+     * The pagination data for the returned objects.
      *
      * @return the pagination
      */
@@ -16832,7 +16949,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the workspaceId.
      *
-     * The workspace ID.
+     * The workspace ID of the workspace.
      *
      * @return the workspaceId
      */
@@ -16985,7 +17102,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the pagination.
      *
-     * An object defining the pagination data for the returned objects.
+     * The pagination data for the returned objects.
      *
      * @return the pagination
      */
@@ -17134,7 +17251,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the workspaceId.
      *
-     * The workspace ID.
+     * The workspace ID of the workspace.
      *
      * @return the workspaceId
      */

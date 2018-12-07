@@ -57,7 +57,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Get response to user input.
    *
-   * Get a response to a user's input.
+   * Send user input to a workspace and receive a response.
    *
    * There is no rate limit for this operation.
    *
@@ -211,6 +211,9 @@ public class IBMAssistantV1 extends IBMWatsonService {
     }
     if (getWorkspaceOptions.includeAudit() != null) {
       builder.query('include_audit', String.valueOf(getWorkspaceOptions.includeAudit()));
+    }
+    if (getWorkspaceOptions.xsort() != null) {
+      builder.query('sort', getWorkspaceOptions.xsort());
     }
 
     return (IBMAssistantV1Models.WorkspaceExport) createServiceCall(builder.build(), IBMAssistantV1Models.WorkspaceExport.class);
@@ -799,7 +802,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Create entity.
    *
-   * Create a new entity.
+   * Create a new entity, or enable a system entity.
    *
    * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
@@ -839,7 +842,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
   /**
    * Delete entity.
    *
-   * Delete an entity from a workspace.
+   * Delete an entity from a workspace, or disable a system entity.
    *
    * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *

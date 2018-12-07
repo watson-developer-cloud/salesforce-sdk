@@ -668,8 +668,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the diskUsage.
      *
-     * The object providing information about the disk usage of the collection. Present only when retrieving details of
-     * a collection.
+     * Summary of the disk usage statistics for this collection.
      *
      * @return the diskUsage
      */
@@ -950,7 +949,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the conversions.
      *
-     * The document conversion settings for the configuration.
+     * Document conversion settings.
      *
      * @return the conversions
      */
@@ -1499,7 +1498,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the conversions.
      *
-     * The document conversion settings for the configuration.
+     * Document conversion settings.
      *
      * @return the conversions
      */
@@ -2078,7 +2077,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the data.
      *
-     * Data object used to create a query event.
+     * Query event data object.
      *
      * @return the data
      */
@@ -5270,7 +5269,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the options.
      *
-     * A list of options specific to the enrichment.
+     * Options which are specific to a particular enrichment.
      *
      * @return the options
      */
@@ -5647,7 +5646,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the searchStatus.
      *
-     * Information about Continuous Relevancy Training for this environment.
+     * Information about the Continuous Relevancy Training for this environment.
      *
      * @return the searchStatus
      */
@@ -9316,7 +9315,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the diskUsage.
      *
-     * Summary of the disk usage of the environment.
+     * Summary of the disk usage statistics for the environment.
      *
      * @return the diskUsage
      */
@@ -9340,7 +9339,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the memoryUsage.
      *
-     * **Deprecated**: Summary of the memory usage of the environment.
+     * **Deprecated**: Summary of the memory usage statistics for this environment.
      *
      * @return the memoryUsage
      */
@@ -11886,6 +11885,44 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * An object specifiying the concepts enrichment and related parameters.
+   */
+  public class NluEnrichmentConcepts extends IBMWatsonGenericModel {
+    private Long limit_serialized_name;
+ 
+    /**
+     * Gets the xlimit.
+     *
+     * The maximum number of concepts enrichments to extact from each instance of the specified field.
+     *
+     * @return the xlimit
+     */
+    @AuraEnabled
+    public Long getXlimit() {
+      return limit_serialized_name;
+    }
+
+    /**
+     * Sets the xlimit.
+     *
+     * @param xlimit the new xlimit
+     */
+    public void setXlimit(final long xlimit) {
+      this.limit_serialized_name = xlimit;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      NluEnrichmentConcepts ret = (NluEnrichmentConcepts) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
    * An object specifying the emotion detection enrichment and related parameters.
    */
   public class NluEnrichmentEmotion extends IBMWatsonGenericModel {
@@ -12023,7 +12060,7 @@ public class IBMDiscoveryV1Models {
     private Long limit_serialized_name;
     private Boolean mentions_serialized_name;
     private Boolean mention_types_serialized_name;
-    private Boolean sentence_location_serialized_name;
+    private Boolean sentence_locations_serialized_name;
     private String model_serialized_name;
 
     /**
@@ -12093,16 +12130,16 @@ public class IBMDiscoveryV1Models {
     }
  
     /**
-     * Gets the sentenceLocation.
+     * Gets the sentenceLocations.
      *
      * When `true`, a list of sentence locations for each instance of each identified entity is recorded. The default is
      * `false`.
      *
-     * @return the sentenceLocation
+     * @return the sentenceLocations
      */
     @AuraEnabled
-    public Boolean getSentenceLocation() {
-      return sentence_location_serialized_name;
+    public Boolean getSentenceLocations() {
+      return sentence_locations_serialized_name;
     }
  
     /**
@@ -12124,7 +12161,7 @@ public class IBMDiscoveryV1Models {
       limit_serialized_name = builder.xlimit;
       mentions_serialized_name = builder.mentions;
       mention_types_serialized_name = builder.mentionTypes;
-      sentence_location_serialized_name = builder.sentenceLocation;
+      sentence_locations_serialized_name = builder.sentenceLocations;
       model_serialized_name = builder.model;
     }
 
@@ -12158,7 +12195,7 @@ public class IBMDiscoveryV1Models {
     private Long xlimit;
     private Boolean mentions;
     private Boolean mentionTypes;
-    private Boolean sentenceLocation;
+    private Boolean sentenceLocations;
     private String model;
 
     private NluEnrichmentEntitiesBuilder(NluEnrichmentEntities nluEnrichmentEntities) {
@@ -12167,7 +12204,7 @@ public class IBMDiscoveryV1Models {
       xlimit = nluEnrichmentEntities.limit_serialized_name;
       mentions = nluEnrichmentEntities.mentions_serialized_name;
       mentionTypes = nluEnrichmentEntities.mention_types_serialized_name;
-      sentenceLocation = nluEnrichmentEntities.sentence_location_serialized_name;
+      sentenceLocations = nluEnrichmentEntities.sentence_locations_serialized_name;
       model = nluEnrichmentEntities.model_serialized_name;
     }
 
@@ -12242,13 +12279,13 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the sentenceLocation.
+     * Set the sentenceLocations.
      *
-     * @param sentenceLocation the sentenceLocation
+     * @param sentenceLocations the sentenceLocations
      * @return the NluEnrichmentEntities builder
      */
-    public NluEnrichmentEntitiesBuilder sentenceLocation(Boolean sentenceLocation) {
-      this.sentenceLocation = sentenceLocation;
+    public NluEnrichmentEntitiesBuilder sentenceLocations(Boolean sentenceLocations) {
+      this.sentenceLocations = sentenceLocations;
       return this;
     }
 
@@ -12275,6 +12312,7 @@ public class IBMDiscoveryV1Models {
     private NluEnrichmentCategories categories_serialized_name;
     private NluEnrichmentSemanticRoles semantic_roles_serialized_name;
     private NluEnrichmentRelations relations_serialized_name;
+    private NluEnrichmentConcepts concepts_serialized_name;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -12333,7 +12371,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the categories.
      *
-     * An object specifying the categories enrichment and related parameters.
+     * An object that indicates the Categories enrichment will be applied to the specified field.
      *
      * @return the categories
      */
@@ -12365,6 +12403,18 @@ public class IBMDiscoveryV1Models {
     public NluEnrichmentRelations getRelations() {
       return relations_serialized_name;
     }
+ 
+    /**
+     * Gets the concepts.
+     *
+     * An object specifiying the concepts enrichment and related parameters.
+     *
+     * @return the concepts
+     */
+    @AuraEnabled
+    public NluEnrichmentConcepts getConcepts() {
+      return concepts_serialized_name;
+    }
   
     private NluEnrichmentFeatures(NluEnrichmentFeaturesBuilder builder) {
       keywords_serialized_name = builder.keywords;
@@ -12374,6 +12424,7 @@ public class IBMDiscoveryV1Models {
       categories_serialized_name = builder.categories;
       semantic_roles_serialized_name = builder.semanticRoles;
       relations_serialized_name = builder.relations;
+      concepts_serialized_name = builder.concepts;
     }
 
     /**
@@ -12421,6 +12472,10 @@ public class IBMDiscoveryV1Models {
       NluEnrichmentRelations newRelations = (NluEnrichmentRelations) new NluEnrichmentRelations().deserialize(JSON.serialize(ret.getRelations()), (Map<String, Object>) jsonMap.get('relations_serialized_name'), NluEnrichmentRelations.class);
       retBuilder.relations(newRelations);
 
+      // calling custom deserializer for concepts
+      NluEnrichmentConcepts newConcepts = (NluEnrichmentConcepts) new NluEnrichmentConcepts().deserialize(JSON.serialize(ret.getConcepts()), (Map<String, Object>) jsonMap.get('concepts_serialized_name'), NluEnrichmentConcepts.class);
+      retBuilder.concepts(newConcepts);
+
       return retBuilder.build();
     }
   }
@@ -12436,6 +12491,7 @@ public class IBMDiscoveryV1Models {
     private NluEnrichmentCategories categories;
     private NluEnrichmentSemanticRoles semanticRoles;
     private NluEnrichmentRelations relations;
+    private NluEnrichmentConcepts concepts;
 
     private NluEnrichmentFeaturesBuilder(NluEnrichmentFeatures nluEnrichmentFeatures) {
       keywords = nluEnrichmentFeatures.keywords_serialized_name;
@@ -12445,6 +12501,7 @@ public class IBMDiscoveryV1Models {
       categories = nluEnrichmentFeatures.categories_serialized_name;
       semanticRoles = nluEnrichmentFeatures.semantic_roles_serialized_name;
       relations = nluEnrichmentFeatures.relations_serialized_name;
+      concepts = nluEnrichmentFeatures.concepts_serialized_name;
     }
 
     /**
@@ -12536,6 +12593,17 @@ public class IBMDiscoveryV1Models {
      */
     public NluEnrichmentFeaturesBuilder relations(NluEnrichmentRelations relations) {
       this.relations = relations;
+      return this;
+    }
+
+    /**
+     * Set the concepts.
+     *
+     * @param concepts the concepts
+     * @return the NluEnrichmentFeatures builder
+     */
+    public NluEnrichmentFeaturesBuilder concepts(NluEnrichmentConcepts concepts) {
+      this.concepts = concepts;
       return this;
     }
   }
@@ -17222,6 +17290,7 @@ public class IBMDiscoveryV1Models {
     private List<QueryPassages> passages_serialized_name;
     private Long duplicates_removed_serialized_name;
     private String session_token_serialized_name;
+    private RetrievalDetails retrieval_details_serialized_name;
  
     /**
      * Gets the matchingResults.
@@ -17287,6 +17356,18 @@ public class IBMDiscoveryV1Models {
     public String getSessionToken() {
       return session_token_serialized_name;
     }
+ 
+    /**
+     * Gets the retrievalDetails.
+     *
+     * An object contain retrieval type information.
+     *
+     * @return the retrievalDetails
+     */
+    @AuraEnabled
+    public RetrievalDetails getRetrievalDetails() {
+      return retrieval_details_serialized_name;
+    }
 
     /**
      * Sets the matchingResults.
@@ -17342,6 +17423,15 @@ public class IBMDiscoveryV1Models {
       this.session_token_serialized_name = sessionToken;
     }
 
+    /**
+     * Sets the retrievalDetails.
+     *
+     * @param retrievalDetails the new retrievalDetails
+     */
+    public void setRetrievalDetails(final RetrievalDetails retrievalDetails) {
+      this.retrieval_details_serialized_name = retrievalDetails;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -17387,6 +17477,10 @@ public class IBMDiscoveryV1Models {
         }
         ret.setPassages(newPassages);
       }
+
+      // calling custom deserializer for retrievalDetails
+      RetrievalDetails newRetrievalDetails = (RetrievalDetails) new RetrievalDetails().deserialize(JSON.serialize(ret.getRetrievalDetails()), (Map<String, Object>) jsonMap.get('retrieval_details_serialized_name'), RetrievalDetails.class);
+      ret.setRetrievalDetails(newRetrievalDetails);
 
       return ret;
     }
@@ -17558,9 +17652,10 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the confidence.
      *
-     * The confidence score for the given result. Calculated based on how relevant the result is estimated to be,
-     * compared to a trained relevancy model. confidence can range from `0.0` to `1.0`. The higher the number, the more
-     * relevant the document.
+     * The confidence score for the given result. Calculated based on how relevant the result is estimated to be.
+     * confidence can range from `0.0` to `1.0`. The higher the number, the more relevant the document. The `confidence`
+     * value for a result was calculated using the model specified in the `document_retrieval_strategy` field of the
+     * result set.
      *
      * @return the confidence
      */
@@ -17593,6 +17688,50 @@ public class IBMDiscoveryV1Models {
       }
 
       QueryResultMetadata ret = (QueryResultMetadata) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object contain retrieval type information.
+   */
+  public class RetrievalDetails extends IBMWatsonGenericModel {
+    private String document_retrieval_strategy_serialized_name;
+ 
+    /**
+     * Gets the documentRetrievalStrategy.
+     *
+     * Indentifies the document retrieval strategy used for this query. `relevancy_training` indicates that the results
+     * were returned using a relevancy trained model. `continuous_relevancy_training` indicates that the results were
+     * returned using the continuous relevancy training model created by result feedback analysis. `untrained` means the
+     * results were returned using the standard untrained model.
+     *
+     *  **Note**: In the event of trained collections being queried, but the trained model is not used to return
+     * results, the **document_retrieval_strategy** will be listed as `untrained`.
+     *
+     * @return the documentRetrievalStrategy
+     */
+    @AuraEnabled
+    public String getDocumentRetrievalStrategy() {
+      return document_retrieval_strategy_serialized_name;
+    }
+
+    /**
+     * Sets the documentRetrievalStrategy.
+     *
+     * @param documentRetrievalStrategy the new documentRetrievalStrategy
+     */
+    public void setDocumentRetrievalStrategy(final String documentRetrievalStrategy) {
+      this.document_retrieval_strategy_serialized_name = documentRetrievalStrategy;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      RetrievalDetails ret = (RetrievalDetails) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -19804,7 +19943,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the conversions.
      *
-     * The document conversion settings for the configuration.
+     * Document conversion settings.
      *
      * @return the conversions
      */

@@ -376,7 +376,11 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the contentType.
      *
-     * The type of the input.
+     * For an audio-type resource, the format (MIME type) of the audio. For more information, see **Content types for
+     * audio-type resources** in the method description.
+     *
+     * For an archive-type resource, the media type of the archive file. For more information, see **Content types for
+     * archive-type resources** in the method description.
      *
      * @return the contentType
      */
@@ -387,10 +391,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the containedContentType.
      *
-     * For an archive-type resource, specifies the format of the audio files contained in the archive file. The
-     * parameter accepts all of the audio formats supported for use with speech recognition, including the `rate`,
-     * `channels`, and `endianness` parameters that are used with some formats. For a complete list of supported audio
-     * formats, see [Audio formats](/docs/services/speech-to-text/input.html#formats).
+     * For an archive-type resource, specifies the format of the audio files that are contained in the archive file. The
+     * parameter accepts all of the audio formats that are supported for use with speech recognition, including the
+     * `rate`, `channels`, and `endianness` parameters that are used with some formats. For more information, see
+     * **Content types for audio-type resources** in the method description.
      *
      * @return the containedContentType
      */
@@ -401,9 +405,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the allowOverwrite.
      *
-     * If `true`, the specified corpus or audio resource overwrites an existing corpus or audio resource with the same
-     * name. If `false`, the request fails if a corpus or audio resource with the same name already exists. The
-     * parameter has no effect if a corpus or audio resource with the same name does not already exist.
+     * If `true`, the specified audio resource overwrites an existing audio resource with the same name. If `false`, the
+     * request fails if an audio resource with the same name already exists. The parameter has no effect if an audio
+     * resource with the same name does not already exist.
      *
      * @return the allowOverwrite
      */
@@ -415,7 +419,6 @@ public class IBMSpeechToTextV1Models {
       IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.audioName, 'audioName cannot be empty');
       IBMWatsonValidator.notNull(builder.audioResource, 'audioResource cannot be null');
-      IBMWatsonValidator.notNull(builder.contentType, 'contentType cannot be null');
       customizationId = builder.customizationId;
       audioName = builder.audioName;
       audioResource = builder.audioResource;
@@ -466,13 +469,28 @@ public class IBMSpeechToTextV1Models {
     /**
      * Instantiates a new builder.
      *
-     * NOTE: audioResource and contentType are now required, so this constructor will be removed. Please use
-     * the constructor with 4 parameters.
+     * NOTE: audioResource is now required, so this constructor will be removed. Please use
+     * the constructor with 3 parameters.
      *
      * @param customizationId the customizationId
      * @param audioName the audioName
      */
     public AddAudioOptionsBuilder(String customizationId, String audioName) {
+      this.customizationId = customizationId;
+      this.audioName = audioName;
+    }
+
+    /**
+     * Instantiates a new builder.
+     *
+     * NOTE: contentType is no longer required, so this constructor will be removed in the next major release.
+     *
+     * @param customizationId the customizationId
+     * @param audioName the audioName
+     * @param audioResource the audioResource
+     * @param contentType the contentType
+     */
+    public AddAudioOptionsBuilder(String customizationId, String audioName, IBMWatsonFile audioResource, String contentType) {
       this.customizationId = customizationId;
       this.audioName = audioName;
       this.audioResource = audioResource;
@@ -485,13 +503,11 @@ public class IBMSpeechToTextV1Models {
      * @param customizationId the customizationId
      * @param audioName the audioName
      * @param audioResource the audioResource
-     * @param contentType the contentType
      */
-    public AddAudioOptionsBuilder(String customizationId, String audioName, IBMWatsonFile audioResource, String contentType) {
+    public AddAudioOptionsBuilder(String customizationId, String audioName, IBMWatsonFile audioResource) {
       this.customizationId = customizationId;
       this.audioName = audioName;
       this.audioResource = audioResource;
-      this.contentType = contentType;
     }
 
     /**
@@ -629,7 +645,7 @@ public class IBMSpeechToTextV1Models {
      *
      * Make sure that you know the character encoding of the file. You must use that encoding when working with the
      * words in the custom language model. For more information, see [Character
-     * encoding](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#charEncoding).
+     * encoding](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding).
      *
      * With the `curl` command, use the `--data-binary` option to upload the file for the request.
      *
@@ -653,9 +669,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the allowOverwrite.
      *
-     * If `true`, the specified corpus or audio resource overwrites an existing corpus or audio resource with the same
-     * name. If `false`, the request fails if a corpus or audio resource with the same name already exists. The
-     * parameter has no effect if a corpus or audio resource with the same name does not already exist.
+     * If `true`, the specified corpus overwrites an existing corpus with the same name. If `false`, the request fails
+     * if a corpus with the same name already exists. The parameter has no effect if a corpus with the same name does
+     * not already exist.
      *
      * @return the allowOverwrite
      */
@@ -829,7 +845,7 @@ public class IBMSpeechToTextV1Models {
      * The custom word that is to be added to or updated in the custom language model. Do not include spaces in the
      * word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words. URL-encode the word if it
      * includes non-ASCII characters. For more information, see [Character
-     * encoding](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#charEncoding).
+     * encoding](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding).
      *
      * @return the wordName
      */
@@ -2027,7 +2043,7 @@ public class IBMSpeechToTextV1Models {
      * model can be used only with the base model that it customizes.
      *
      * To determine whether a base model supports acoustic model customization, refer to [Language support for
-     * customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
+     * customization](https://cloud.ibm.com/docs/services/speech-to-text/custom.html#languageSupport).
      *
      * @return the baseModelName
      */
@@ -2195,7 +2211,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the contentType.
      *
-     * The type of the input.
+     * The format (MIME type) of the audio. For more information about specifying an audio format, see **Audio formats
+     * (content types)** in the method description.
      *
      * @return the contentType
      */
@@ -2288,8 +2305,7 @@ public class IBMSpeechToTextV1Models {
      * The customization ID (GUID) of a custom language model that is to be used with the recognition request. The base
      * model of the specified custom language model must match the model specified with the `model` parameter. You must
      * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom language model is used. See [Custom
-     * models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
+     * default, no custom language model is used. See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      *
      * **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      *
@@ -2305,8 +2321,7 @@ public class IBMSpeechToTextV1Models {
      * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request. The base
      * model of the specified custom acoustic model must match the model specified with the `model` parameter. You must
      * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom acoustic model is used. See [Custom
-     * models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
+     * default, no custom acoustic model is used. See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      *
      * @return the acousticCustomizationId
      */
@@ -2321,7 +2336,7 @@ public class IBMSpeechToTextV1Models {
      * model can exist when a model is updated for internal improvements. The parameter is intended primarily for use
      * with custom models that have been upgraded for a new base model. The default value depends on whether the
      * parameter is used with or without a custom model. See [Base model
-     * version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
+     * version](https://cloud.ibm.com/docs/services/speech-to-text/input.html#version).
      *
      * @return the baseModelVersion
      */
@@ -2344,7 +2359,7 @@ public class IBMSpeechToTextV1Models {
      * of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
      * of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
      *
-     * See [Custom models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
+     * See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      *
      * @return the customizationWeight
      */
@@ -2357,8 +2372,7 @@ public class IBMSpeechToTextV1Models {
      *
      * The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
      * closed with a 400 error. The parameter is useful for stopping audio submission from a live microphone when a user
-     * simply walks away. Use `-1` for infinity. See
-     * [Timeouts](https://console.bluemix.net/docs/services/speech-to-text/input.html#timeouts).
+     * simply walks away. Use `-1` for infinity. See [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts).
      *
      * @return the inactivityTimeout
      */
@@ -2373,7 +2387,7 @@ public class IBMSpeechToTextV1Models {
      * Keywords are spotted only in the final results, not in interim hypotheses. If you specify any keywords, you must
      * also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an
      * empty array if you do not need to spot keywords. See [Keyword
-     * spotting](https://console.bluemix.net/docs/services/speech-to-text/output.html#keyword_spotting).
+     * spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
      *
      * @return the keywords
      */
@@ -2387,8 +2401,7 @@ public class IBMSpeechToTextV1Models {
      * A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
      * confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. No keyword
      * spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
-     * keywords. See [Keyword
-     * spotting](https://console.bluemix.net/docs/services/speech-to-text/output.html#keyword_spotting).
+     * keywords. See [Keyword spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
      *
      * @return the keywordsThreshold
      */
@@ -2400,8 +2413,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the maxAlternatives.
      *
      * The maximum number of alternative transcripts that the service is to return. By default, a single transcription
-     * is returned. See [Maximum
-     * alternatives](https://console.bluemix.net/docs/services/speech-to-text/output.html#max_alternatives).
+     * is returned. See [Maximum alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
      *
      * @return the maxAlternatives
      */
@@ -2415,8 +2427,7 @@ public class IBMSpeechToTextV1Models {
      * A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also
      * known as "Confusion Networks"). An alternative word is considered if its confidence is greater than or equal to
      * the threshold. Specify a probability between 0.0 and 1.0. No alternative words are computed if you omit the
-     * parameter. See [Word
-     * alternatives](https://console.bluemix.net/docs/services/speech-to-text/output.html#word_alternatives).
+     * parameter. See [Word alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives).
      *
      * @return the wordAlternativesThreshold
      */
@@ -2429,7 +2440,7 @@ public class IBMSpeechToTextV1Models {
      *
      * If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for each word. By default, no word
      * confidence measures are returned. See [Word
-     * confidence](https://console.bluemix.net/docs/services/speech-to-text/output.html#word_confidence).
+     * confidence](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence).
      *
      * @return the wordConfidence
      */
@@ -2441,7 +2452,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the timestamps.
      *
      * If `true`, the service returns time alignment for each word. By default, no timestamps are returned. See [Word
-     * timestamps](https://console.bluemix.net/docs/services/speech-to-text/output.html#word_timestamps).
+     * timestamps](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_timestamps).
      *
      * @return the timestamps
      */
@@ -2455,7 +2466,7 @@ public class IBMSpeechToTextV1Models {
      * If `true`, the service filters profanity from all output except for keyword results by replacing inappropriate
      * words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US
      * English transcription only. See [Profanity
-     * filtering](https://console.bluemix.net/docs/services/speech-to-text/output.html#profanity_filter).
+     * filtering](https://cloud.ibm.com/docs/services/speech-to-text/output.html#profanity_filter).
      *
      * @return the profanityFilter
      */
@@ -2470,7 +2481,7 @@ public class IBMSpeechToTextV1Models {
      * internet addresses into more readable, conventional representations in the final transcript of a recognition
      * request. For US English, the service also converts certain keyword strings to punctuation symbols. By default, no
      * smart formatting is performed. Applies to US English, Japanese, and Spanish transcription only. See [Smart
-     * formatting](https://console.bluemix.net/docs/services/speech-to-text/output.html#smart_formatting).
+     * formatting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting).
      *
      * @return the smartFormatting
      */
@@ -2487,7 +2498,7 @@ public class IBMSpeechToTextV1Models {
      *
      * To determine whether a language model supports speaker labels, use the **Get a model** method and check that the
      * attribute `speaker_labels` is set to `true`. See [Speaker
-     * labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
+     * labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
      *
      * @return the speakerLabels
      */
@@ -2605,7 +2616,9 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Instantiates a new builder with required properties.
+     * Instantiates a new builder.
+     *
+     * NOTE: contentType is no longer required, so this constructor will be removed in the next major release.
      *
      * @param audio the audio
      * @param contentType the contentType
@@ -2613,6 +2626,15 @@ public class IBMSpeechToTextV1Models {
     public CreateJobOptionsBuilder(IBMWatsonFile audio, String contentType) {
       this.audio = audio;
       this.contentType = contentType;
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param audio the audio
+     */
+    public CreateJobOptionsBuilder(IBMWatsonFile audio) {
+      this.audio = audio;
     }
 
     /**
@@ -2925,7 +2947,7 @@ public class IBMSpeechToTextV1Models {
      *
      * To determine whether a base model supports language model customization, use the **Get a model** method and check
      * that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
-     * customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
+     * customization](https://cloud.ibm.com/docs/services/speech-to-text/custom.html#languageSupport).
      *
      * @return the baseModelName
      */
@@ -3814,7 +3836,7 @@ public class IBMSpeechToTextV1Models {
      *
      * The custom word that is to be deleted from the custom language model. URL-encode the word if it includes
      * non-ASCII characters. For more information, see [Character
-     * encoding](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#charEncoding).
+     * encoding](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding).
      *
      * @return the wordName
      */
@@ -4466,7 +4488,7 @@ public class IBMSpeechToTextV1Models {
      *
      * The custom word that is to be read from the custom language model. URL-encode the word if it includes non-ASCII
      * characters. For more information, see [Character
-     * encoding](https://console.bluemix.net/docs/services/speech-to-text/language-resource.html#charEncoding).
+     * encoding](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding).
      *
      * @return the wordName
      */
@@ -5903,7 +5925,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the contentType.
      *
-     * The type of the input.
+     * The format (MIME type) of the audio. For more information about specifying an audio format, see **Audio formats
+     * (content types)** in the method description.
      *
      * @return the contentType
      */
@@ -5928,8 +5951,7 @@ public class IBMSpeechToTextV1Models {
      * The customization ID (GUID) of a custom language model that is to be used with the recognition request. The base
      * model of the specified custom language model must match the model specified with the `model` parameter. You must
      * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom language model is used. See [Custom
-     * models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
+     * default, no custom language model is used. See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      *
      * **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      *
@@ -5945,8 +5967,7 @@ public class IBMSpeechToTextV1Models {
      * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request. The base
      * model of the specified custom acoustic model must match the model specified with the `model` parameter. You must
      * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom acoustic model is used. See [Custom
-     * models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
+     * default, no custom acoustic model is used. See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      *
      * @return the acousticCustomizationId
      */
@@ -5961,7 +5982,7 @@ public class IBMSpeechToTextV1Models {
      * model can exist when a model is updated for internal improvements. The parameter is intended primarily for use
      * with custom models that have been upgraded for a new base model. The default value depends on whether the
      * parameter is used with or without a custom model. See [Base model
-     * version](https://console.bluemix.net/docs/services/speech-to-text/input.html#version).
+     * version](https://cloud.ibm.com/docs/services/speech-to-text/input.html#version).
      *
      * @return the baseModelVersion
      */
@@ -5984,7 +6005,7 @@ public class IBMSpeechToTextV1Models {
      * of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
      * of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
      *
-     * See [Custom models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
+     * See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      *
      * @return the customizationWeight
      */
@@ -5997,8 +6018,7 @@ public class IBMSpeechToTextV1Models {
      *
      * The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
      * closed with a 400 error. The parameter is useful for stopping audio submission from a live microphone when a user
-     * simply walks away. Use `-1` for infinity. See
-     * [Timeouts](https://console.bluemix.net/docs/services/speech-to-text/input.html#timeouts).
+     * simply walks away. Use `-1` for infinity. See [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts).
      *
      * @return the inactivityTimeout
      */
@@ -6013,7 +6033,7 @@ public class IBMSpeechToTextV1Models {
      * Keywords are spotted only in the final results, not in interim hypotheses. If you specify any keywords, you must
      * also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an
      * empty array if you do not need to spot keywords. See [Keyword
-     * spotting](https://console.bluemix.net/docs/services/speech-to-text/output.html#keyword_spotting).
+     * spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
      *
      * @return the keywords
      */
@@ -6027,8 +6047,7 @@ public class IBMSpeechToTextV1Models {
      * A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
      * confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. No keyword
      * spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
-     * keywords. See [Keyword
-     * spotting](https://console.bluemix.net/docs/services/speech-to-text/output.html#keyword_spotting).
+     * keywords. See [Keyword spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
      *
      * @return the keywordsThreshold
      */
@@ -6040,8 +6059,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the maxAlternatives.
      *
      * The maximum number of alternative transcripts that the service is to return. By default, a single transcription
-     * is returned. See [Maximum
-     * alternatives](https://console.bluemix.net/docs/services/speech-to-text/output.html#max_alternatives).
+     * is returned. See [Maximum alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
      *
      * @return the maxAlternatives
      */
@@ -6055,8 +6073,7 @@ public class IBMSpeechToTextV1Models {
      * A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also
      * known as "Confusion Networks"). An alternative word is considered if its confidence is greater than or equal to
      * the threshold. Specify a probability between 0.0 and 1.0. No alternative words are computed if you omit the
-     * parameter. See [Word
-     * alternatives](https://console.bluemix.net/docs/services/speech-to-text/output.html#word_alternatives).
+     * parameter. See [Word alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives).
      *
      * @return the wordAlternativesThreshold
      */
@@ -6069,7 +6086,7 @@ public class IBMSpeechToTextV1Models {
      *
      * If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for each word. By default, no word
      * confidence measures are returned. See [Word
-     * confidence](https://console.bluemix.net/docs/services/speech-to-text/output.html#word_confidence).
+     * confidence](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence).
      *
      * @return the wordConfidence
      */
@@ -6081,7 +6098,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the timestamps.
      *
      * If `true`, the service returns time alignment for each word. By default, no timestamps are returned. See [Word
-     * timestamps](https://console.bluemix.net/docs/services/speech-to-text/output.html#word_timestamps).
+     * timestamps](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_timestamps).
      *
      * @return the timestamps
      */
@@ -6095,7 +6112,7 @@ public class IBMSpeechToTextV1Models {
      * If `true`, the service filters profanity from all output except for keyword results by replacing inappropriate
      * words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US
      * English transcription only. See [Profanity
-     * filtering](https://console.bluemix.net/docs/services/speech-to-text/output.html#profanity_filter).
+     * filtering](https://cloud.ibm.com/docs/services/speech-to-text/output.html#profanity_filter).
      *
      * @return the profanityFilter
      */
@@ -6110,7 +6127,7 @@ public class IBMSpeechToTextV1Models {
      * internet addresses into more readable, conventional representations in the final transcript of a recognition
      * request. For US English, the service also converts certain keyword strings to punctuation symbols. By default, no
      * smart formatting is performed. Applies to US English, Japanese, and Spanish transcription only. See [Smart
-     * formatting](https://console.bluemix.net/docs/services/speech-to-text/output.html#smart_formatting).
+     * formatting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting).
      *
      * @return the smartFormatting
      */
@@ -6127,7 +6144,7 @@ public class IBMSpeechToTextV1Models {
      *
      * To determine whether a language model supports speaker labels, use the **Get a model** method and check that the
      * attribute `speaker_labels` is set to `true`. See [Speaker
-     * labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
+     * labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
      *
      * @return the speakerLabels
      */
@@ -6233,7 +6250,9 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Instantiates a new builder with required properties.
+     * Instantiates a new builder.
+     *
+     * NOTE: contentType is no longer required, so this constructor will be removed in the next major release.
      *
      * @param audio the audio
      * @param contentType the contentType
@@ -6241,6 +6260,15 @@ public class IBMSpeechToTextV1Models {
     public RecognizeOptionsBuilder(IBMWatsonFile audio, String contentType) {
       this.audio = audio;
       this.contentType = contentType;
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param audio the audio
+     */
+    public RecognizeOptionsBuilder(IBMWatsonFile audio) {
+      this.audio = audio;
     }
 
     /**
@@ -7335,8 +7363,9 @@ public class IBMSpeechToTextV1Models {
      * Gets the keywordsResult.
      *
      * A dictionary (or associative array) whose keys are the strings specified for `keywords` if both that parameter
-     * and `keywords_threshold` are specified. A keyword for which no matches are found is omitted from the array. The
-     * array is omitted if no matches are found for any keywords.
+     * and `keywords_threshold` are specified. The value for each key is an array of matches spotted in the audio for
+     * that keyword. Each match is described by a `KeywordResult` object. A keyword for which no matches are found is
+     * omitted from the dictionary. The dictionary is omitted entirely if no matches are found for any keywords.
      *
      * @return the keywordsResult
      */
