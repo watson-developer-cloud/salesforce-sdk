@@ -3,7 +3,7 @@
  * Language Understanding will give you results for the features you request. The service cleans HTML content before
  * analysis by default, so the results can ignore most advertisements and other unwanted content.
  *
- * You can create [custom models](/docs/services/natural-language-understanding/customizing.html) with Watson Knowledge
+ * You can create [custom models](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) with Watson Knowledge
  * Studio to detect custom entities and relations in Natural Language Understanding.
  *
  * @version V1
@@ -146,7 +146,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
   /**
    * List models.
    *
-   * Lists Watson Knowledge Studio [custom models](/docs/services/natural-language-understanding/customizing.html) that
+   * Lists Watson Knowledge Studio [custom models](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) that
    * are deployed to your Natural Language Understanding service.
    *
    * @param listModelsOptions the {@link IBMNaturalLanguageUnderstandingV1Models.ListModelsOptions} containing the options for the call

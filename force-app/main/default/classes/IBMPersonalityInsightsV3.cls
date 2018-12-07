@@ -8,9 +8,9 @@
  * personality characteristics. The service can infer consumption preferences based on the results of its analysis and,
  * for JSON content that is timestamped, can report temporal behavior.
  * * For information about the meaning of the models that the service uses to describe personality characteristics, see
- * [Personality models](/docs/services/personality-insights/models.html).
+ * [Personality models](https://cloud.ibm.com/docs/services/personality-insights/models.html).
  * * For information about the meaning of the consumption preferences, see [Consumption
- * preferences](/docs/services/personality-insights/preferences.html).
+ * preferences](https://cloud.ibm.com/docs/services/personality-insights/preferences.html).
  *
  * **Note:** Request logging is disabled for the Personality Insights service. Regardless of whether you set the
  * `X-Watson-Learning-Opt-Out` request header, the service does not log or retain data from requests and responses.
@@ -75,8 +75,8 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    * English, Japanese, Korean, or Spanish. It can return its results in a variety of languages.
    *
    * **See also:**
-   * * [Requesting a profile](/docs/services/personality-insights/input.html)
-   * * [Providing sufficient input](/docs/services/personality-insights/input.html#sufficient)
+   * * [Requesting a profile](https://cloud.ibm.com/docs/services/personality-insights/input.html)
+   * * [Providing sufficient input](https://cloud.ibm.com/docs/services/personality-insights/input.html#sufficient)
    *
    * ### Content types
    *
@@ -89,7 +89,7 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    * When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the character
    * encoding of the input text; for example, `Content-Type: text/plain;charset=utf-8`.
    *
-   * **See also:** [Specifying request and response formats](/docs/services/personality-insights/input.html#formats)
+   * **See also:** [Specifying request and response formats](https://cloud.ibm.com/docs/services/personality-insights/input.html#formats)
    *
    * ### Accept types
    *
@@ -98,8 +98,8 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    * request optional column headers for CSV output.
    *
    * **See also:**
-   * * [Understanding a JSON profile](/docs/services/personality-insights/output.html)
-   * * [Understanding a CSV profile](/docs/services/personality-insights/output-csv.html).
+   * * [Understanding a JSON profile](https://cloud.ibm.com/docs/services/personality-insights/output.html)
+   * * [Understanding a CSV profile](https://cloud.ibm.com/docs/services/personality-insights/output-csv.html).
    *
    * @param profileOptions the {@link IBMPersonalityInsightsV3Models.ProfileOptions} containing the options for the call
    * @return the {@link IBMPersonalityInsightsV3Models.Profile} with the response
@@ -146,8 +146,8 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    * English, Japanese, Korean, or Spanish. It can return its results in a variety of languages.
    *
    * **See also:**
-   * * [Requesting a profile](/docs/services/personality-insights/input.html)
-   * * [Providing sufficient input](/docs/services/personality-insights/input.html#sufficient)
+   * * [Requesting a profile](https://cloud.ibm.com/docs/services/personality-insights/input.html)
+   * * [Providing sufficient input](https://cloud.ibm.com/docs/services/personality-insights/input.html#sufficient)
    *
    * ### Content types
    *
@@ -160,7 +160,7 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    * When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the character
    * encoding of the input text; for example, `Content-Type: text/plain;charset=utf-8`.
    *
-   * **See also:** [Specifying request and response formats](/docs/services/personality-insights/input.html#formats)
+   * **See also:** [Specifying request and response formats](https://cloud.ibm.com/docs/services/personality-insights/input.html#formats)
    *
    * ### Accept types
    *
@@ -169,8 +169,8 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    * request optional column headers for CSV output.
    *
    * **See also:**
-   * * [Understanding a JSON profile](/docs/services/personality-insights/output.html)
-   * * [Understanding a CSV profile](/docs/services/personality-insights/output-csv.html).
+   * * [Understanding a JSON profile](https://cloud.ibm.com/docs/services/personality-insights/output.html)
+   * * [Understanding a CSV profile](https://cloud.ibm.com/docs/services/personality-insights/output-csv.html).
    *
    * @param profileOptions the {@link IBMPersonalityInsightsV3Models.ProfileOptions} containing the options for the call
    * @return the {@link IBMWatsonFile} with the response
