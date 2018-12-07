@@ -2553,13 +2553,26 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
   }
 
   /**
-   * The most important keywords in the content, organized by relevance.
+   * The important keywords in the content, organized by relevance.
    */
   public class KeywordsResult extends IBMWatsonGenericModel {
+    private Long count_serialized_name;
     private Double relevance_serialized_name;
     private String text_serialized_name;
     private EmotionScores emotion_serialized_name;
     private FeatureSentimentResults sentiment_serialized_name;
+ 
+    /**
+     * Gets the count.
+     *
+     * Number of times the keyword appears in the analyzed text.
+     *
+     * @return the count
+     */
+    @AuraEnabled
+    public Long getCount() {
+      return count_serialized_name;
+    }
  
     /**
      * Gets the relevance.
@@ -2607,6 +2620,15 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     @AuraEnabled
     public FeatureSentimentResults getSentiment() {
       return sentiment_serialized_name;
+    }
+
+    /**
+     * Sets the count.
+     *
+     * @param count the new count
+     */
+    public void setCount(final long count) {
+      this.count_serialized_name = count;
     }
 
     /**
