@@ -1904,12 +1904,13 @@ public class IBMAssistantV2Models {
   /**
    * Assistant output to be rendered or processed by the client.
    */
-  public class MessageOutput extends IBMWatsonGenericModel {
+  public class MessageOutput extends IBMWatsonDynamicModel {
     private List<DialogRuntimeResponseGeneric> generic_serialized_name;
     private List<RuntimeIntent> intents_serialized_name;
     private List<RuntimeEntity> entities_serialized_name;
     private List<DialogNodeAction> actions_serialized_name;
     private MessageOutputDebug debug_serialized_name;
+    private Map<String, Object> additional_properties_serialized_name;
  
     /**
      * Gets the generic.
@@ -1970,6 +1971,16 @@ public class IBMAssistantV2Models {
     @AuraEnabled
     public MessageOutputDebug getDebug() {
       return debug_serialized_name;
+    }
+
+    /**
+     * Gets the dynamic properties attached to MessageOutput.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
     }
 
     /**
@@ -2079,6 +2090,14 @@ public class IBMAssistantV2Models {
       // calling custom deserializer for debug
       MessageOutputDebug newDebug = (MessageOutputDebug) new MessageOutputDebug().deserialize(JSON.serialize(ret.getDebug()), (Map<String, Object>) jsonMap.get('debug_serialized_name'), MessageOutputDebug.class);
       ret.setDebug(newDebug);
+
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key)) {
+          ret.put(key, jsonMap.get(key));
+        }
+      }
 
       return ret;
     }
