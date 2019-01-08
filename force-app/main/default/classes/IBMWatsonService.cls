@@ -248,6 +248,11 @@ public abstract class IBMWatsonService {
    * @param password the password
    */
   public void setUsernameAndPassword(final String username, final String password) {
+    if (IBMWatsonCredentialUtils.hasBadStartOrEndChar(username) || IBMWatsonCredentialUtils.hasBadStartOrEndChar(password)) {
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('The username and password shouldn\'t start or end with curly brackets or '
+          + 'quotes. Please remove any surrounding {, }, or " characters.');
+    }
+
     // we'll perform the token exchange for users UNLESS they're on ICP
     if (username.equals(APIKEY_AS_USERNAME) && !password.startsWith(ICP_PREFIX)) {
       IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
@@ -265,6 +270,11 @@ public abstract class IBMWatsonService {
    * @param endPoint the new end point. Will be ignored if empty or null
    */
   public void setEndPoint(String endPointParam) {
+    if (IBMWatsonCredentialUtils.hasBadStartOrEndChar(endPointParam)) {
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('The URL shouldn\'t start or end with curly brackets or '
+          + 'quotes. Please remove any surrounding {, }, or " characters.');
+    }
+
     if (String.isNotBlank(endPointParam)) {
       String newEndPoint = endPointParam.endsWith('/') ? endPointParam.removeEnd('/') : endPointParam;
       if (this.endPoint == null) {
