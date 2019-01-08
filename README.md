@@ -6,9 +6,6 @@
 
 The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment. If you'd like, you can follow along with our video playlist [here](https://www.youtube.com/playlist?list=PLZDyxLlNKRY8qrs90oRPvVHocJhYOOj3n) to start using the SDK. Otherwise, continue reading to learn how to get started.
 
-## Note about Assistant v2
-Assistant v2 is currently in **private beta** and requires access to use. To learn more and find out how to get access, please read [here](https://www.ibm.com/blogs/watson/2018/03/the-future-of-watson-conversation-watson-assistant/).
-
 ## Before you begin
 
 * You need an [IBM Cloud][ibm-cloud-onboarding] account.
