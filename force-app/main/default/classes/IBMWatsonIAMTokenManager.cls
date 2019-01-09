@@ -17,12 +17,13 @@ public class IBMWatsonIAMTokenManager {
   private static final String REFRESH_TOKEN = 'refresh_token';
 
   public IBMWatsonIAMTokenManager(IBMWatsonIAMOptions options) {
-    if (IBMWatsonCredentialUtils.hasBadStartOrEndChar(options.getApiKey())) {
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('The IAM API key shouldn\'t start or end with curly brackets or '
-          + 'quotes. Please remove any surrounding {, }, or " characters.');
+    if (options.getApiKey() != null) {
+      if (IBMWatsonCredentialUtils.hasBadStartOrEndChar(options.getApiKey())) {
+        throw new IBMWatsonServiceExceptions.IllegalArgumentException('The IAM API key shouldn\'t start or end with curly brackets or '
+            + 'quotes. Please remove any surrounding {, }, or " characters.');
+      }
+      this.apiKey = options.getApiKey();
     }
-
-    this.apiKey = options.getApiKey();
     if (options.getUrl() != null) {
       this.url = options.getUrl();
     } else {
