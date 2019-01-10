@@ -596,7 +596,7 @@ public class IBMAssistantV1Models {
      * Gets the output.
      *
      * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#complex).
      *
      * @return the output
      */
@@ -1153,7 +1153,7 @@ public class IBMAssistantV1Models {
      * Gets the output.
      *
      * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#complex).
      *
      * @return the output
      */
@@ -3000,7 +3000,7 @@ public class IBMAssistantV1Models {
      * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by
      * **type**), but not both. A pattern is a regular expression no longer than 512 characters. For more information
      * about how to specify a pattern, see the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#creating-entities).
      *
      * @return the patterns
      */
@@ -3249,7 +3249,7 @@ public class IBMAssistantV1Models {
      * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by
      * **type**), but not both. A pattern is a regular expression no longer than 512 characters. For more information
      * about how to specify a pattern, see the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#creating-entities).
      *
      * @return the patterns
      */
@@ -5097,7 +5097,7 @@ public class IBMAssistantV1Models {
      * Gets the output.
      *
      * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#complex).
      *
      * @return the output
      */
@@ -5807,7 +5807,7 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+   * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#complex).
    */
   public class DialogNodeOutput extends IBMWatsonDynamicModel {
     private List<DialogNodeOutputGeneric> generic_serialized_name;
@@ -6327,7 +6327,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the input.
      *
-     * The user input.
+     * An input object that includes the input text.
      *
      * @return the input
      */
@@ -6891,7 +6891,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the input.
      *
-     * The user input.
+     * An input object that includes the input text.
      *
      * @return the input
      */
@@ -9114,7 +9114,7 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * The user input.
+   * An input object that includes the input text.
    */
   public class InputData extends IBMWatsonGenericModel {
     private String text_serialized_name;
@@ -9509,7 +9509,7 @@ public class IBMAssistantV1Models {
      * A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter
      * query that includes a value for `language`, as well as a value for `workspace_id` or
      * `request.context.metadata.deployment`. For more information, see the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/filter-reference.html#filter-query-syntax).
      *
      * @return the filter
      */
@@ -10909,8 +10909,7 @@ public class IBMAssistantV1Models {
      * Gets the filter.
      *
      * A cacheable parameter that limits the results to those matching the specified filter. For more information, see
-     * the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
+     * the [documentation](https://cloud.ibm.com/docs/services/assistant/filter-reference.html#filter-query-syntax).
      *
      * @return the filter
      */
@@ -12089,7 +12088,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the request.
      *
-     * A message request formatted for the Watson Assistant service.
+     * A request sent to the workspace, including the user input and context.
      *
      * @return the request
      */
@@ -12101,7 +12100,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the response.
      *
-     * A response from the Watson Assistant service.
+     * The response sent by the workspace, including the output text, detected intents and entities, and context.
      *
      * @return the response
      */
@@ -12598,7 +12597,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the input.
      *
-     * The user input.
+     * An input object that includes the input text.
      *
      * @return the input
      */
@@ -12899,7 +12898,7 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * A message request formatted for the Watson Assistant service.
+   * A request sent to the workspace, including the user input and context.
    */
   public class MessageRequest extends IBMWatsonGenericModel {
     private InputData input_serialized_name;
@@ -12912,7 +12911,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the input.
      *
-     * The user input.
+     * An input object that includes the input text.
      *
      * @return the input
      */
@@ -13088,7 +13087,7 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * A response from the Watson Assistant service.
+   * The response sent by the workspace, including the output text, detected intents and entities, and context.
    */
   public class MessageResponse extends IBMWatsonDynamicResponseModel {
     private MessageInput input_serialized_name;
@@ -14427,7 +14426,7 @@ public class IBMAssistantV1Models {
      * Gets the newOutput.
      *
      * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#complex).
      *
      * @return the newOutput
      */
@@ -15831,7 +15830,7 @@ public class IBMAssistantV1Models {
      * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by
      * **type**), but not both. A pattern is a regular expression no longer than 512 characters. For more information
      * about how to specify a pattern, see the
-     * [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#creating-entities).
      *
      * @return the newPatterns
      */
@@ -17538,7 +17537,7 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * WorkspaceSystemSettings.
+   * Global settings for the workspace.
    */
   public class WorkspaceSystemSettings extends IBMWatsonGenericModel {
     private WorkspaceSystemSettingsTooling tooling_serialized_name;
@@ -17634,7 +17633,9 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * WorkspaceSystemSettingsDisambiguation.
+   * Workspace settings related to the disambiguation feature.
+   *
+   * **Note:** This feature is available only to Premium users.
    */
   public class WorkspaceSystemSettingsDisambiguation extends IBMWatsonGenericModel {
     private String prompt_serialized_name;
@@ -17740,7 +17741,7 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * WorkspaceSystemSettingsTooling.
+   * Workspace settings related to the Watson Assistant tool.
    */
   public class WorkspaceSystemSettingsTooling extends IBMWatsonGenericModel {
     private Boolean store_generic_responses_serialized_name;
