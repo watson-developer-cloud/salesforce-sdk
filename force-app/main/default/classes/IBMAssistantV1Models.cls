@@ -532,7 +532,6 @@ public class IBMAssistantV1Models {
     private String digress_out_serialized_name;
     private String digress_out_slots_serialized_name;
     private String user_label_serialized_name;
-    private Boolean disabled_serialized_name;
  
     /**
      * Gets the dialogNode.
@@ -739,17 +738,6 @@ public class IBMAssistantV1Models {
     public String userLabel() {
       return user_label_serialized_name;
     }
-
-    /**
-     * Gets the disabled.
-     *
-     * Whether to consider the dialog node during runtime evaluation.  Set to `true` to ignore the dialog node.
-     *
-     * @return the disabled
-     */
-    public Boolean disabled() {
-      return disabled_serialized_name;
-    }
   
     private CreateDialogNode(CreateDialogNodeBuilder builder) {
       IBMWatsonValidator.notNull(builder.dialogNode, 'dialogNode cannot be null');
@@ -771,7 +759,6 @@ public class IBMAssistantV1Models {
       digress_out_serialized_name = builder.digressOut;
       digress_out_slots_serialized_name = builder.digressOutSlots;
       user_label_serialized_name = builder.userLabel;
-      disabled_serialized_name = builder.disabled;
     }
 
     /**
@@ -807,7 +794,6 @@ public class IBMAssistantV1Models {
     private String digressOut;
     private String digressOutSlots;
     private String userLabel;
-    private Boolean disabled;
 
     private CreateDialogNodeBuilder(CreateDialogNode createDialogNode) {
       dialogNode = createDialogNode.dialog_node_serialized_name;
@@ -828,7 +814,6 @@ public class IBMAssistantV1Models {
       digressOut = createDialogNode.digress_out_serialized_name;
       digressOutSlots = createDialogNode.digress_out_slots_serialized_name;
       userLabel = createDialogNode.user_label_serialized_name;
-      disabled = createDialogNode.disabled_serialized_name;
     }
 
     /**
@@ -1066,17 +1051,6 @@ public class IBMAssistantV1Models {
      */
     public CreateDialogNodeBuilder userLabel(String userLabel) {
       this.userLabel = userLabel;
-      return this;
-    }
-
-    /**
-     * Set the disabled.
-     *
-     * @param disabled the disabled
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder disabled(Boolean disabled) {
-      this.disabled = disabled;
       return this;
     }
   }
@@ -5049,6 +5023,7 @@ public class IBMAssistantV1Models {
     private Datetime updated_serialized_name;
     private List<DialogNodeAction> actions_serialized_name;
     private String title_serialized_name;
+    private Boolean disabled_serialized_name;
     private String type_serialized_name;
     private String event_name_serialized_name;
     private String variable_serialized_name;
@@ -5213,6 +5188,18 @@ public class IBMAssistantV1Models {
     @AuraEnabled
     public String getTitle() {
       return title_serialized_name;
+    }
+ 
+    /**
+     * Gets the disabled.
+     *
+     * For internal use only.
+     *
+     * @return the disabled
+     */
+    @AuraEnabled
+    public Boolean getDisabled() {
+      return disabled_serialized_name;
     }
  
     /**
@@ -5397,6 +5384,15 @@ public class IBMAssistantV1Models {
      */
     public void setTitle(final String title) {
       this.title_serialized_name = title;
+    }
+
+    /**
+     * Sets the disabled.
+     *
+     * @param disabled the new disabled
+     */
+    public void setDisabled(final Boolean disabled) {
+      this.disabled_serialized_name = disabled;
     }
 
     /**
