@@ -545,7 +545,7 @@ public class IBMAssistantV2Models {
     /**
      * Gets the input.
      *
-     * The user input.
+     * An input object that includes the input text.
      *
      * @return the input
      */
@@ -1067,7 +1067,7 @@ public class IBMAssistantV2Models {
     /**
      * Gets the input.
      *
-     * The user input.
+     * An input object that includes the input text.
      *
      * @return the input
      */
@@ -1177,7 +1177,7 @@ public class IBMAssistantV2Models {
     /**
      * Gets the xsystem.
      *
-     * Properties interpreted by the Assistant that are shared across all skills within the Assistant.
+     * Properties that are shared by all skills used by the assistant.
      *
      * @return the xsystem
      */
@@ -1234,8 +1234,9 @@ public class IBMAssistantV2Models {
      * Gets the userId.
      *
      * A string value that identifies the user who is interacting with the assistant. The client must provide a unique
-     * identifier for each individual end user who accesses the application. This user ID may be used for billing and
-     * other purposes.
+     * identifier for each individual end user who accesses the application. For Plus and Premium plans, this user ID is
+     * used to identify unique users for billing purposes. This string cannot contain carriage return, newline, or tab
+     * characters.
      *
      * @return the userId
      */
@@ -1359,7 +1360,7 @@ public class IBMAssistantV2Models {
   }
 
   /**
-   * The user input.
+   * An input object that includes the input text.
    */
   public class MessageInput extends IBMWatsonGenericModel {
     private String message_type_serialized_name;
@@ -1403,7 +1404,7 @@ public class IBMAssistantV2Models {
     /**
      * Gets the options.
      *
-     * Properties that control how the assistant responds.
+     * Optional properties that control how the assistant responds.
      *
      * @return the options
      */
@@ -1669,8 +1670,8 @@ public class IBMAssistantV2Models {
     /**
      * Gets the restart.
      *
-     * Whether to start a new conversation with this user input. Specify `true` to clear the state information stored by
-     * the session.
+     * Whether to restart dialog processing at the root of the dialog, regardless of any previously visited nodes.
+     * **Note:** This does not affect `turn_count` or any other context variables.
      *
      * @return the restart
      */
@@ -1932,13 +1933,13 @@ public class IBMAssistantV2Models {
   /**
    * Assistant output to be rendered or processed by the client.
    */
-  public class MessageOutput extends IBMWatsonDynamicModel {
+  public class MessageOutput extends IBMWatsonGenericModel {
     private List<DialogRuntimeResponseGeneric> generic_serialized_name;
     private List<RuntimeIntent> intents_serialized_name;
     private List<RuntimeEntity> entities_serialized_name;
     private List<DialogNodeAction> actions_serialized_name;
     private MessageOutputDebug debug_serialized_name;
-    private Map<String, Object> additional_properties_serialized_name;
+    private IBMWatsonMapModel user_defined_serialized_name;
  
     /**
      * Gets the generic.
@@ -2000,15 +2001,18 @@ public class IBMAssistantV2Models {
     public MessageOutputDebug getDebug() {
       return debug_serialized_name;
     }
-
+ 
     /**
-     * Gets the dynamic properties attached to MessageOutput.
+     * Gets the userDefined.
      *
-     * @return the dynamic properties
+     * An object containing any custom properties included in the response. This object includes any arbitrary
+     * properties defined in the dialog JSON editor as part of the dialog node output.
+     *
+     * @return the userDefined
      */
     @AuraEnabled
-    public Map<String, Object> getAdditionalProperties() {
-      return this.getDynamicProperties();
+    public IBMWatsonMapModel getUserDefined() {
+      return user_defined_serialized_name;
     }
 
     /**
@@ -2054,6 +2058,15 @@ public class IBMAssistantV2Models {
      */
     public void setDebug(final MessageOutputDebug debug) {
       this.debug_serialized_name = debug;
+    }
+
+    /**
+     * Sets the userDefined.
+     *
+     * @param userDefined the new userDefined
+     */
+    public void setUserDefined(final IBMWatsonMapModel userDefined) {
+      this.user_defined_serialized_name = userDefined;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -2119,13 +2132,9 @@ public class IBMAssistantV2Models {
       MessageOutputDebug newDebug = (MessageOutputDebug) new MessageOutputDebug().deserialize(JSON.serialize(ret.getDebug()), (Map<String, Object>) jsonMap.get('debug_serialized_name'), MessageOutputDebug.class);
       ret.setDebug(newDebug);
 
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
-
-      for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key)) {
-          ret.put(key, jsonMap.get(key));
-        }
-      }
+      // calling custom deserializer for userDefined
+      IBMWatsonMapModel newUserDefined = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getUserDefined()), (Map<String, Object>) jsonMap.get('user_defined_serialized_name'), IBMWatsonMapModel.class);
+      ret.setUserDefined(newUserDefined);
 
       return ret;
     }
@@ -2285,8 +2294,7 @@ public class IBMAssistantV2Models {
     /**
      * Gets the context.
      *
-     * The current session context. Included in the response if the `return_context` property of the message input was
-     * set to `true`.
+     * State information for the conversation.
      *
      * @return the context
      */
