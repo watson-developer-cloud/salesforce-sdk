@@ -3754,6 +3754,129 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
+   * The deleteGrammar options.
+   */
+  public class DeleteGrammarOptions extends IBMWatsonOptionsModel {
+    private String customizationId;
+    private String grammarName;
+ 
+    /**
+     * Gets the customizationId.
+     *
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with credentials for the instance of the service that owns the custom model.
+     *
+     * @return the customizationId
+     */
+    public String customizationId() {
+      return customizationId;
+    }
+ 
+    /**
+     * Gets the grammarName.
+     *
+     * The name of the grammar for the custom language model.
+     *
+     * @return the grammarName
+     */
+    public String grammarName() {
+      return grammarName;
+    }
+
+    private DeleteGrammarOptions(DeleteGrammarOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.grammarName, 'grammarName cannot be empty');
+      customizationId = builder.customizationId;
+      grammarName = builder.grammarName;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DeleteGrammarOptions builder
+     */
+    public DeleteGrammarOptionsBuilder newBuilder() {
+      return new DeleteGrammarOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * DeleteGrammarOptions Builder.
+   */
+  public class DeleteGrammarOptionsBuilder extends IBMWatsonOptionsModel {
+    private String customizationId;
+    private String grammarName;
+
+    private DeleteGrammarOptionsBuilder(DeleteGrammarOptions deleteGrammarOptions) {
+      customizationId = deleteGrammarOptions.customizationId;
+      grammarName = deleteGrammarOptions.grammarName;
+      this.requestHeaders.putAll(deleteGrammarOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DeleteGrammarOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param customizationId the customizationId
+     * @param grammarName the grammarName
+     */
+    public DeleteGrammarOptionsBuilder(String customizationId, String grammarName) {
+      this.customizationId = customizationId;
+      this.grammarName = grammarName;
+    }
+
+    /**
+     * Builds a DeleteGrammarOptions.
+     *
+     * @return the deleteGrammarOptions
+     */
+    public DeleteGrammarOptions build() {
+      return new DeleteGrammarOptions(this);
+    }
+
+    /**
+     * Set the customizationId.
+     *
+     * @param customizationId the customizationId
+     * @return the DeleteGrammarOptions builder
+     */
+    public DeleteGrammarOptionsBuilder customizationId(String customizationId) {
+      this.customizationId = customizationId;
+      return this;
+    }
+
+    /**
+     * Set the grammarName.
+     *
+     * @param grammarName the grammarName
+     * @return the DeleteGrammarOptions builder
+     */
+    public DeleteGrammarOptionsBuilder grammarName(String grammarName) {
+      this.grammarName = grammarName;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteGrammarOptions builder
+     */
+    public DeleteGrammarOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The deleteJob options.
    */
   public class DeleteJobOptions extends IBMWatsonOptionsModel {

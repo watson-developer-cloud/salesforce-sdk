@@ -1206,6 +1206,35 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
 
     createServiceCall(builder.build(), null);
   }
+
+  /**
+   * Delete a grammar.
+   *
+   * Deletes an existing grammar from a custom language model. The service removes any out-of-vocabulary (OOV) words
+   * associated with the grammar from the custom model's words resource unless they were also added by another resource
+   * or they were modified in some way with the **Add custom words** or **Add a custom word** method. Removing a grammar
+   * does not affect the custom model until you train the model with the **Train a custom language model** method. You
+   * must use credentials for the instance of the service that owns a model to delete its grammar.
+   *
+   * **See also:** [Deleting a grammar from a custom language
+   * model](https://cloud.ibm.com/docs/services/speech-to-text/).
+   *
+   * @param deleteGrammarOptions the {@link IBMSpeechToTextV1Models.DeleteGrammarOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteGrammar(IBMSpeechToTextV1Models.DeleteGrammarOptions deleteGrammarOptions) {
+    IBMWatsonValidator.notNull(deleteGrammarOptions, 'deleteGrammarOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}/grammars/{1}', new String[]{ deleteGrammarOptions.customizationId(), deleteGrammarOptions.grammarName() }));
+    builder.addHeader('Accept', 'application/json');
+    Map<String, String> requestHeaders = (deleteGrammarOptions != null) ? deleteGrammarOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+
+    createServiceCall(builder.build(), null);
+  }
   /**
    * Create a custom acoustic model.
    *
