@@ -1235,6 +1235,32 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
 
     createServiceCall(builder.build(), null);
   }
+
+  /**
+   * Get a grammar.
+   *
+   * Gets information about a grammar from a custom language model. The information includes the total number of
+   * out-of-vocabulary (OOV) words, name, and status of the grammar. You must use credentials for the instance of the
+   * service that owns a model to list its grammars.
+   *
+   * **See also:** [Listing grammars from a custom language model](https://cloud.ibm.com/docs/services/speech-to-text/).
+   *
+   * @param getGrammarOptions the {@link IBMSpeechToTextV1Models.GetGrammarOptions} containing the options for the call
+   * @return the {@link IBMSpeechToTextV1Models.Grammar} with the response
+   */
+  public IBMSpeechToTextV1Models.Grammar getGrammar(IBMSpeechToTextV1Models.GetGrammarOptions getGrammarOptions) {
+    IBMWatsonValidator.notNull(getGrammarOptions, 'getGrammarOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/grammars/{1}', new String[]{ getGrammarOptions.customizationId(), getGrammarOptions.grammarName() }));
+    builder.addHeader('Accept', 'application/json');
+    Map<String, String> requestHeaders = (getGrammarOptions != null) ? getGrammarOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+
+    return (IBMSpeechToTextV1Models.Grammar) createServiceCall(builder.build(), IBMSpeechToTextV1Models.Grammar.class);
+  }
   /**
    * Create a custom acoustic model.
    *

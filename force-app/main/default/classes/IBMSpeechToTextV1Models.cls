@@ -4622,6 +4622,129 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
+   * The getGrammar options.
+   */
+  public class GetGrammarOptions extends IBMWatsonOptionsModel {
+    private String customizationId;
+    private String grammarName;
+ 
+    /**
+     * Gets the customizationId.
+     *
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with credentials for the instance of the service that owns the custom model.
+     *
+     * @return the customizationId
+     */
+    public String customizationId() {
+      return customizationId;
+    }
+ 
+    /**
+     * Gets the grammarName.
+     *
+     * The name of the grammar for the custom language model.
+     *
+     * @return the grammarName
+     */
+    public String grammarName() {
+      return grammarName;
+    }
+
+    private GetGrammarOptions(GetGrammarOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.grammarName, 'grammarName cannot be empty');
+      customizationId = builder.customizationId;
+      grammarName = builder.grammarName;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetGrammarOptions builder
+     */
+    public GetGrammarOptionsBuilder newBuilder() {
+      return new GetGrammarOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetGrammarOptions Builder.
+   */
+  public class GetGrammarOptionsBuilder extends IBMWatsonOptionsModel {
+    private String customizationId;
+    private String grammarName;
+
+    private GetGrammarOptionsBuilder(GetGrammarOptions getGrammarOptions) {
+      customizationId = getGrammarOptions.customizationId;
+      grammarName = getGrammarOptions.grammarName;
+      this.requestHeaders.putAll(getGrammarOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetGrammarOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param customizationId the customizationId
+     * @param grammarName the grammarName
+     */
+    public GetGrammarOptionsBuilder(String customizationId, String grammarName) {
+      this.customizationId = customizationId;
+      this.grammarName = grammarName;
+    }
+
+    /**
+     * Builds a GetGrammarOptions.
+     *
+     * @return the getGrammarOptions
+     */
+    public GetGrammarOptions build() {
+      return new GetGrammarOptions(this);
+    }
+
+    /**
+     * Set the customizationId.
+     *
+     * @param customizationId the customizationId
+     * @return the GetGrammarOptions builder
+     */
+    public GetGrammarOptionsBuilder customizationId(String customizationId) {
+      this.customizationId = customizationId;
+      return this;
+    }
+
+    /**
+     * Set the grammarName.
+     *
+     * @param grammarName the grammarName
+     * @return the GetGrammarOptions builder
+     */
+    public GetGrammarOptionsBuilder grammarName(String grammarName) {
+      this.grammarName = grammarName;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetGrammarOptions builder
+     */
+    public GetGrammarOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The getLanguageModel options.
    */
   public class GetLanguageModelOptions extends IBMWatsonOptionsModel {
@@ -4933,6 +5056,117 @@ public class IBMSpeechToTextV1Models {
     }
   }
 
+  /**
+   * Grammar.
+   */
+  public class Grammar extends IBMWatsonResponseModel {
+    private String name_serialized_name;
+    private Long out_of_vocabulary_words_serialized_name;
+    private String status_serialized_name;
+    private String error_serialized_name;
+ 
+    /**
+     * Gets the name.
+     *
+     * The name of the grammar.
+     *
+     * @return the name
+     */
+    @AuraEnabled
+    public String getName() {
+      return name_serialized_name;
+    }
+ 
+    /**
+     * Gets the outOfVocabularyWords.
+     *
+     * The number of OOV words in the grammar. The value is `0` while the grammar is being processed.
+     *
+     * @return the outOfVocabularyWords
+     */
+    @AuraEnabled
+    public Long getOutOfVocabularyWords() {
+      return out_of_vocabulary_words_serialized_name;
+    }
+ 
+    /**
+     * Gets the status.
+     *
+     * The status of the grammar:
+     * * `analyzed`: The service successfully analyzed the grammar. The custom model can be trained with data from the
+     * grammar.
+     * * `being_processed`: The service is still analyzing the grammar. The service cannot accept requests to add new
+     * resources or to train the custom model.
+     * * `undetermined`: The service encountered an error while processing the grammar. The `error` field describes the
+     * failure.
+     *
+     * @return the status
+     */
+    @AuraEnabled
+    public String getStatus() {
+      return status_serialized_name;
+    }
+ 
+    /**
+     * Gets the error.
+     *
+     * If the status of the grammar is `undetermined`, the following message: `Analysis of grammar '{grammar_name}'
+     * failed. Please try fixing the error or adding the grammar again by setting the 'allow_overwrite' flag to
+     * 'true'.`.
+     *
+     * @return the error
+     */
+    @AuraEnabled
+    public String getError() {
+      return error_serialized_name;
+    }
+
+    /**
+     * Sets the name.
+     *
+     * @param name the new name
+     */
+    public void setName(final String name) {
+      this.name_serialized_name = name;
+    }
+
+    /**
+     * Sets the outOfVocabularyWords.
+     *
+     * @param outOfVocabularyWords the new outOfVocabularyWords
+     */
+    public void setOutOfVocabularyWords(final long outOfVocabularyWords) {
+      this.out_of_vocabulary_words_serialized_name = outOfVocabularyWords;
+    }
+
+    /**
+     * Sets the status.
+     *
+     * @param status the new status
+     */
+    public void setStatus(final String status) {
+      this.status_serialized_name = status;
+    }
+
+    /**
+     * Sets the error.
+     *
+     * @param error the new error
+     */
+    public void setError(final String error) {
+      this.error_serialized_name = error;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Grammar ret = (Grammar) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
   /**
    * KeywordResult.
    */
