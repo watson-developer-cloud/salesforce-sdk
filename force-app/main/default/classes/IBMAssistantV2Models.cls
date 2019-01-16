@@ -1296,6 +1296,34 @@ public class IBMAssistantV2Models {
   }
 
   /**
+   * Contains information specific to a particular skill within the Assistant.
+   */
+  public class MessageContextSkill {
+    private String user_defined_serialized_name;
+ 
+    /**
+     * Gets the userDefined.
+     *
+     * Arbitrary variables that can be read and written to by a particular skill within the Assistant.
+     *
+     * @return the userDefined
+     */
+    public String getUserDefined() {
+      return user_defined_serialized_name;
+    }
+
+    /**
+     * Sets the userDefined.
+     *
+     * @param userDefined the new userDefined
+     */
+    public void setUserDefined(final String userDefined) {
+      this.user_defined_serialized_name = userDefined;
+    }
+
+  }
+
+  /**
    * Contains information specific to particular skills within the Assistant.
    */
   public class MessageContextSkills extends IBMWatsonDynamicModel {
