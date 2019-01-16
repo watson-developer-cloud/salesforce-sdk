@@ -778,8 +778,7 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      Map<String, Object> trainingStatus = (Map<String, Object>) jsonMap.remove('training_status_serialized_name');
-      Collection ret = (Collection) super.deserialize(JSON.serialize(jsonMap), jsonMap, classType);
+      Collection ret = (Collection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documentCounts
       DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('document_counts_serialized_name'), DocumentCounts.class);
@@ -790,7 +789,7 @@ public class IBMDiscoveryV1Models {
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for trainingStatus
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatus), trainingStatus, TrainingStatus.class);
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(ret.getTrainingStatus()), (Map<String, Object>) jsonMap.get('training_status_serialized_name'), TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
       // calling custom deserializer for sourceCrawl
@@ -1774,6 +1773,7 @@ public class IBMDiscoveryV1Models {
      * -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
      * -  `salesforce` indicates the credentials are used to connect to Salesforce.
      * -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
+     * -  `web_crawl` indicates the credentials are used to perform a web crawl.
      *
      * @return the sourceType
      */
@@ -2430,6 +2430,305 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * The createGateway options.
+   */
+  public class CreateGatewayOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String name;
+ 
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+ 
+    /**
+     * Gets the name.
+     *
+     * User-defined name.
+     *
+     * @return the name
+     */
+    public String name() {
+      return name;
+    }
+
+    private CreateGatewayOptions(CreateGatewayOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      environmentId = builder.environmentId;
+      name = builder.name;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a CreateGatewayOptions builder
+     */
+    public CreateGatewayOptionsBuilder newBuilder() {
+      return new CreateGatewayOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * CreateGatewayOptions Builder.
+   */
+  public class CreateGatewayOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String name;
+
+    private CreateGatewayOptionsBuilder(CreateGatewayOptions createGatewayOptions) {
+      environmentId = createGatewayOptions.environmentId;
+      name = createGatewayOptions.name;
+      this.requestHeaders.putAll(createGatewayOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public CreateGatewayOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     */
+    public CreateGatewayOptionsBuilder(String environmentId) {
+      this.environmentId = environmentId;
+    }
+
+    /**
+     * Builds a CreateGatewayOptions.
+     *
+     * @return the createGatewayOptions
+     */
+    public CreateGatewayOptions build() {
+      return new CreateGatewayOptions(this);
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the CreateGatewayOptions builder
+     */
+    public CreateGatewayOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the name.
+     *
+     * @param name the name
+     * @return the CreateGatewayOptions builder
+     */
+    public CreateGatewayOptionsBuilder name(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the CreateGatewayOptions builder
+     */
+    public CreateGatewayOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The createStopwordList options.
+   */
+  public class CreateStopwordListOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+    private IBMWatsonFile stopwordFile;
+    private String stopwordFilename;
+ 
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+ 
+    /**
+     * Gets the collectionId.
+     *
+     * The ID of the collection.
+     *
+     * @return the collectionId
+     */
+    public String collectionId() {
+      return collectionId;
+    }
+ 
+    /**
+     * Gets the stopwordFile.
+     *
+     * The content of the stopword list to ingest.
+     *
+     * @return the stopwordFile
+     */
+    public IBMWatsonFile stopwordFile() {
+      return stopwordFile;
+    }
+ 
+    /**
+     * Gets the stopwordFilename.
+     *
+     * The filename for stopwordFile.
+     *
+     * @return the stopwordFilename
+     */
+    public String stopwordFilename() {
+      return stopwordFilename;
+    }
+
+    private CreateStopwordListOptions(CreateStopwordListOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notNull(builder.stopwordFile, 'stopwordFile cannot be null');
+      IBMWatsonValidator.notNull(builder.stopwordFilename, 'stopwordFilename cannot be null');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      stopwordFile = builder.stopwordFile;
+      stopwordFilename = builder.stopwordFilename;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a CreateStopwordListOptions builder
+     */
+    public CreateStopwordListOptionsBuilder newBuilder() {
+      return new CreateStopwordListOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * CreateStopwordListOptions Builder.
+   */
+  public class CreateStopwordListOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+    private IBMWatsonFile stopwordFile;
+    private String stopwordFilename;
+
+    private CreateStopwordListOptionsBuilder(CreateStopwordListOptions createStopwordListOptions) {
+      environmentId = createStopwordListOptions.environmentId;
+      collectionId = createStopwordListOptions.collectionId;
+      stopwordFile = createStopwordListOptions.stopwordFile;
+      stopwordFilename = createStopwordListOptions.stopwordFilename;
+      this.requestHeaders.putAll(createStopwordListOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public CreateStopwordListOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     * @param stopwordFile the stopwordFile
+     * @param stopwordFilename the stopwordFilename
+     */
+    public CreateStopwordListOptionsBuilder(String environmentId, String collectionId, IBMWatsonFile stopwordFile, String stopwordFilename) {
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+      this.stopwordFile = stopwordFile;
+      this.stopwordFilename = stopwordFilename;
+    }
+
+    /**
+     * Builds a CreateStopwordListOptions.
+     *
+     * @return the createStopwordListOptions
+     */
+    public CreateStopwordListOptions build() {
+      return new CreateStopwordListOptions(this);
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the CreateStopwordListOptions builder
+     */
+    public CreateStopwordListOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collectionId.
+     *
+     * @param collectionId the collectionId
+     * @return the CreateStopwordListOptions builder
+     */
+    public CreateStopwordListOptionsBuilder collectionId(String collectionId) {
+      this.collectionId = collectionId;
+      return this;
+    }
+
+    /**
+     * Set the stopwordFile.
+     *
+     * @param stopwordFile the stopwordFile
+     * @return the CreateStopwordListOptions builder
+     */
+    public CreateStopwordListOptionsBuilder stopwordFile(IBMWatsonFile stopwordFile) {
+      this.stopwordFile = stopwordFile;
+      return this;
+    }
+
+    /**
+     * Set the stopwordFilename.
+     *
+     * @param stopwordFilename the stopwordFilename
+     * @return the CreateStopwordListOptions builder
+     */
+    public CreateStopwordListOptionsBuilder stopwordFilename(String stopwordFilename) {
+      this.stopwordFilename = stopwordFilename;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the CreateStopwordListOptions builder
+     */
+    public CreateStopwordListOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The createTokenizationDictionary options.
    */
   public class CreateTokenizationDictionaryOptions extends IBMWatsonOptionsModel {
@@ -2842,12 +3141,16 @@ public class IBMDiscoveryV1Models {
     private String url_serialized_name;
     private String username_serialized_name;
     private String organization_url_serialized_name;
-    private String site_collection_path_serialized_name;
+    private String site_collection.path_serialized_name;
     private String client_secret_serialized_name;
     private String public_key_id_serialized_name;
     private String private_key_serialized_name;
     private String passphrase_serialized_name;
     private String password_serialized_name;
+    private String gateway_id_serialized_name;
+    private String source_version_serialized_name;
+    private String web_application_url_serialized_name;
+    private String domain_serialized_name;
  
     /**
      * Gets the credentialType.
@@ -2857,7 +3160,9 @@ public class IBMDiscoveryV1Models {
      *
      * -  `"source_type": "box"` - valid `credential_type`s: `oauth2`
      * -  `"source_type": "salesforce"` - valid `credential_type`s: `username_password`
-     * -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml`.
+     * -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml` with **source_version** of `online`, or
+     * `ntml_v1` with **source_version** of `2016`
+     * -  `"source_type": "web_crawl"` - valid `credential_type`s: `noauth` or `basic`.
      *
      * @return the credentialType
      */
@@ -2896,7 +3201,7 @@ public class IBMDiscoveryV1Models {
      * Gets the url.
      *
      * The **url** of the source that these credentials connect to. Only valid, and required, with a **credential_type**
-     * of `username_password`.
+     * of `username_password`, `noauth`, and `basic`.
      *
      * @return the url
      */
@@ -2909,7 +3214,7 @@ public class IBMDiscoveryV1Models {
      * Gets the username.
      *
      * The **username** of the source that these credentials connect to. Only valid, and required, with a
-     * **credential_type** of `saml` and `username_password`.
+     * **credential_type** of `saml`, `username_password`, `basic`, or `ntml_v1`.
      *
      * @return the username
      */
@@ -2941,7 +3246,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSiteCollectionPath() {
-      return site_collection_path_serialized_name;
+      return site_collection.path_serialized_name;
     }
  
     /**
@@ -3004,7 +3309,7 @@ public class IBMDiscoveryV1Models {
      * Gets the password.
      *
      * The **password** of the source that these credentials connect to. Only valid, and required, with
-     * **credential_type**s of `saml` and `username_password`.
+     * **credential_type**s of `saml`, `username_password`, `basic`, or `ntml_v1`.
      *
      * **Note:** When used with a **source_type** of `salesforce`, the password consists of the Salesforce password and
      * a valid Salesforce security token concatenated. This value is never returned and is only used when creating or
@@ -3015,6 +3320,58 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public String getPassword() {
       return password_serialized_name;
+    }
+ 
+    /**
+     * Gets the gatewayId.
+     *
+     * The ID of the **gateway** to be connected through (when connecting to intranet sites). Only valid with a
+     * **credential_type** of `noauth`, `basic`, or `ntml_v1`. Gateways are created using the
+     * `/v1/environments/{environment_id}/gateways` methods.
+     *
+     * @return the gatewayId
+     */
+    @AuraEnabled
+    public String getGatewayId() {
+      return gateway_id_serialized_name;
+    }
+ 
+    /**
+     * Gets the sourceVersion.
+     *
+     * The type of Sharepoint repository to connect to. Only valid, and required, with a **source_type** of
+     * `sharepoint`.
+     *
+     * @return the sourceVersion
+     */
+    @AuraEnabled
+    public String getSourceVersion() {
+      return source_version_serialized_name;
+    }
+ 
+    /**
+     * Gets the webApplicationUrl.
+     *
+     * SharePoint OnPrem WebApplication URL. Only valid, and required, with a **source_version** of `2016`.
+     *
+     * @return the webApplicationUrl
+     */
+    @AuraEnabled
+    public String getWebApplicationUrl() {
+      return web_application_url_serialized_name;
+    }
+ 
+    /**
+     * Gets the domain.
+     *
+     * The domain used to log in to your OnPrem SharePoint account. Only valid, and required, with a **source_version**
+     * of `2016`.
+     *
+     * @return the domain
+     */
+    @AuraEnabled
+    public String getDomain() {
+      return domain_serialized_name;
     }
 
     /**
@@ -3077,7 +3434,7 @@ public class IBMDiscoveryV1Models {
      * @param siteCollectionPath the new siteCollectionPath
      */
     public void setSiteCollectionPath(final String siteCollectionPath) {
-      this.site_collection_path_serialized_name = siteCollectionPath;
+      this.site_collection.path_serialized_name = siteCollectionPath;
     }
 
     /**
@@ -3125,6 +3482,42 @@ public class IBMDiscoveryV1Models {
       this.password_serialized_name = password;
     }
 
+    /**
+     * Sets the gatewayId.
+     *
+     * @param gatewayId the new gatewayId
+     */
+    public void setGatewayId(final String gatewayId) {
+      this.gateway_id_serialized_name = gatewayId;
+    }
+
+    /**
+     * Sets the sourceVersion.
+     *
+     * @param sourceVersion the new sourceVersion
+     */
+    public void setSourceVersion(final String sourceVersion) {
+      this.source_version_serialized_name = sourceVersion;
+    }
+
+    /**
+     * Sets the webApplicationUrl.
+     *
+     * @param webApplicationUrl the new webApplicationUrl
+     */
+    public void setWebApplicationUrl(final String webApplicationUrl) {
+      this.web_application_url_serialized_name = webApplicationUrl;
+    }
+
+    /**
+     * Sets the domain.
+     *
+     * @param domain the new domain
+     */
+    public void setDomain(final String domain) {
+      this.domain_serialized_name = domain;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -3163,6 +3556,7 @@ public class IBMDiscoveryV1Models {
      * -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
      * -  `salesforce` indicates the credentials are used to connect to Salesforce.
      * -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
+     * -  `web_crawl` indicates the credentials are used to perform a web crawl.
      *
      * @return the sourceType
      */
@@ -4118,6 +4512,250 @@ public class IBMDiscoveryV1Models {
      * @return the DeleteExpansionsOptions builder
      */
     public DeleteExpansionsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The deleteGateway options.
+   */
+  public class DeleteGatewayOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String gatewayId;
+ 
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+ 
+    /**
+     * Gets the gatewayId.
+     *
+     * The requested gateway ID.
+     *
+     * @return the gatewayId
+     */
+    public String gatewayId() {
+      return gatewayId;
+    }
+
+    private DeleteGatewayOptions(DeleteGatewayOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.gatewayId, 'gatewayId cannot be empty');
+      environmentId = builder.environmentId;
+      gatewayId = builder.gatewayId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DeleteGatewayOptions builder
+     */
+    public DeleteGatewayOptionsBuilder newBuilder() {
+      return new DeleteGatewayOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * DeleteGatewayOptions Builder.
+   */
+  public class DeleteGatewayOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String gatewayId;
+
+    private DeleteGatewayOptionsBuilder(DeleteGatewayOptions deleteGatewayOptions) {
+      environmentId = deleteGatewayOptions.environmentId;
+      gatewayId = deleteGatewayOptions.gatewayId;
+      this.requestHeaders.putAll(deleteGatewayOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DeleteGatewayOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param gatewayId the gatewayId
+     */
+    public DeleteGatewayOptionsBuilder(String environmentId, String gatewayId) {
+      this.environmentId = environmentId;
+      this.gatewayId = gatewayId;
+    }
+
+    /**
+     * Builds a DeleteGatewayOptions.
+     *
+     * @return the deleteGatewayOptions
+     */
+    public DeleteGatewayOptions build() {
+      return new DeleteGatewayOptions(this);
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the DeleteGatewayOptions builder
+     */
+    public DeleteGatewayOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the gatewayId.
+     *
+     * @param gatewayId the gatewayId
+     * @return the DeleteGatewayOptions builder
+     */
+    public DeleteGatewayOptionsBuilder gatewayId(String gatewayId) {
+      this.gatewayId = gatewayId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteGatewayOptions builder
+     */
+    public DeleteGatewayOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The deleteStopwordList options.
+   */
+  public class DeleteStopwordListOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+ 
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+ 
+    /**
+     * Gets the collectionId.
+     *
+     * The ID of the collection.
+     *
+     * @return the collectionId
+     */
+    public String collectionId() {
+      return collectionId;
+    }
+
+    private DeleteStopwordListOptions(DeleteStopwordListOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DeleteStopwordListOptions builder
+     */
+    public DeleteStopwordListOptionsBuilder newBuilder() {
+      return new DeleteStopwordListOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * DeleteStopwordListOptions Builder.
+   */
+  public class DeleteStopwordListOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+
+    private DeleteStopwordListOptionsBuilder(DeleteStopwordListOptions deleteStopwordListOptions) {
+      environmentId = deleteStopwordListOptions.environmentId;
+      collectionId = deleteStopwordListOptions.collectionId;
+      this.requestHeaders.putAll(deleteStopwordListOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DeleteStopwordListOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     */
+    public DeleteStopwordListOptionsBuilder(String environmentId, String collectionId) {
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+    }
+
+    /**
+     * Builds a DeleteStopwordListOptions.
+     *
+     * @return the deleteStopwordListOptions
+     */
+    public DeleteStopwordListOptions build() {
+      return new DeleteStopwordListOptions(this);
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the DeleteStopwordListOptions builder
+     */
+    public DeleteStopwordListOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collectionId.
+     *
+     * @param collectionId the collectionId
+     * @return the DeleteStopwordListOptions builder
+     */
+    public DeleteStopwordListOptionsBuilder collectionId(String collectionId) {
+      this.collectionId = collectionId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteStopwordListOptions builder
+     */
+    public DeleteStopwordListOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -5714,8 +6352,6 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      jsonString = jsonString.replace('"last_trained_serialized_name":"",', '');
-      jsonString = jsonString.replace('"last_trained_serialized_name":""', '');
       Environment ret = (Environment) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for indexCapacity
@@ -7462,6 +8098,186 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * Object describing a specific gateway.
+   */
+  public class Gateway extends IBMWatsonResponseModel {
+    private String gateway_id_serialized_name;
+    private String name_serialized_name;
+    private String status_serialized_name;
+    private String token_serialized_name;
+    private String token_id_serialized_name;
+ 
+    /**
+     * Gets the gatewayId.
+     *
+     * The gateway ID of the gateway.
+     *
+     * @return the gatewayId
+     */
+    @AuraEnabled
+    public String getGatewayId() {
+      return gateway_id_serialized_name;
+    }
+ 
+    /**
+     * Gets the name.
+     *
+     * The user defined name of the gateway.
+     *
+     * @return the name
+     */
+    @AuraEnabled
+    public String getName() {
+      return name_serialized_name;
+    }
+ 
+    /**
+     * Gets the status.
+     *
+     * The current status of the gateway. `connected` means the gateway is connected to the remotly installed gateway.
+     * `idle` means this gateway is not currently in use.
+     *
+     * @return the status
+     */
+    @AuraEnabled
+    public String getStatus() {
+      return status_serialized_name;
+    }
+ 
+    /**
+     * Gets the token.
+     *
+     * The generated **token** for this gateway. The value of this field is used when configuring the remotly installed
+     * gateway.
+     *
+     * @return the token
+     */
+    @AuraEnabled
+    public String getToken() {
+      return token_serialized_name;
+    }
+ 
+    /**
+     * Gets the tokenId.
+     *
+     * The generated **token_id** for this gateway. The value of this field is used when configuring the remotly
+     * installed gateway.
+     *
+     * @return the tokenId
+     */
+    @AuraEnabled
+    public String getTokenId() {
+      return token_id_serialized_name;
+    }
+
+    /**
+     * Sets the gatewayId.
+     *
+     * @param gatewayId the new gatewayId
+     */
+    public void setGatewayId(final String gatewayId) {
+      this.gateway_id_serialized_name = gatewayId;
+    }
+
+    /**
+     * Sets the name.
+     *
+     * @param name the new name
+     */
+    public void setName(final String name) {
+      this.name_serialized_name = name;
+    }
+
+    /**
+     * Sets the status.
+     *
+     * @param status the new status
+     */
+    public void setStatus(final String status) {
+      this.status_serialized_name = status;
+    }
+
+    /**
+     * Sets the token.
+     *
+     * @param token the new token
+     */
+    public void setToken(final String token) {
+      this.token_serialized_name = token;
+    }
+
+    /**
+     * Sets the tokenId.
+     *
+     * @param tokenId the new tokenId
+     */
+    public void setTokenId(final String tokenId) {
+      this.token_id_serialized_name = tokenId;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Gateway ret = (Gateway) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Object containing gateways array.
+   */
+  public class GatewayList extends IBMWatsonResponseModel {
+    private List<Gateway> gateways_serialized_name;
+ 
+    /**
+     * Gets the gateways.
+     *
+     * Array of configured gateway connections.
+     *
+     * @return the gateways
+     */
+    @AuraEnabled
+    public List<Gateway> getGateways() {
+      return gateways_serialized_name;
+    }
+
+    /**
+     * Sets the gateways.
+     *
+     * @param gateways the new gateways
+     */
+    public void setGateways(final List<Gateway> gateways) {
+      this.gateways_serialized_name = gateways;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      GatewayList ret = (GatewayList) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for gateways
+      List<Gateway> newGateways = new List<Gateway>();
+      List<Gateway> deserializedGateways = ret.getGateways();
+      if (deserializedGateways != null) {
+        for (Integer i = 0; i < deserializedGateways.size(); i++) {
+          Gateway currentItem = ret.getGateways().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('gateways_serialized_name');
+          Gateway newItem = (Gateway) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Gateway.class);
+          newGateways.add(newItem);
+        }
+        ret.setGateways(newGateways);
+      }
+
+      return ret;
+    }
+  }
+
+  /**
    * The getCollection options.
    */
   public class GetCollectionOptions extends IBMWatsonOptionsModel {
@@ -8066,6 +8882,221 @@ public class IBMDiscoveryV1Models {
      * @return the GetEnvironmentOptions builder
      */
     public GetEnvironmentOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The getGatewayDetails options.
+   */
+  public class GetGatewayDetailsOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String gatewayId;
+ 
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+ 
+    /**
+     * Gets the gatewayId.
+     *
+     * The requested gateway ID.
+     *
+     * @return the gatewayId
+     */
+    public String gatewayId() {
+      return gatewayId;
+    }
+
+    private GetGatewayDetailsOptions(GetGatewayDetailsOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.gatewayId, 'gatewayId cannot be empty');
+      environmentId = builder.environmentId;
+      gatewayId = builder.gatewayId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetGatewayDetailsOptions builder
+     */
+    public GetGatewayDetailsOptionsBuilder newBuilder() {
+      return new GetGatewayDetailsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetGatewayDetailsOptions Builder.
+   */
+  public class GetGatewayDetailsOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String gatewayId;
+
+    private GetGatewayDetailsOptionsBuilder(GetGatewayDetailsOptions getGatewayDetailsOptions) {
+      environmentId = getGatewayDetailsOptions.environmentId;
+      gatewayId = getGatewayDetailsOptions.gatewayId;
+      this.requestHeaders.putAll(getGatewayDetailsOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetGatewayDetailsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param gatewayId the gatewayId
+     */
+    public GetGatewayDetailsOptionsBuilder(String environmentId, String gatewayId) {
+      this.environmentId = environmentId;
+      this.gatewayId = gatewayId;
+    }
+
+    /**
+     * Builds a GetGatewayDetailsOptions.
+     *
+     * @return the getGatewayDetailsOptions
+     */
+    public GetGatewayDetailsOptions build() {
+      return new GetGatewayDetailsOptions(this);
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the GetGatewayDetailsOptions builder
+     */
+    public GetGatewayDetailsOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the gatewayId.
+     *
+     * @param gatewayId the gatewayId
+     * @return the GetGatewayDetailsOptions builder
+     */
+    public GetGatewayDetailsOptionsBuilder gatewayId(String gatewayId) {
+      this.gatewayId = gatewayId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetGatewayDetailsOptions builder
+     */
+    public GetGatewayDetailsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The getGatewayList options.
+   */
+  public class GetGatewayListOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+ 
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+
+    private GetGatewayListOptions(GetGatewayListOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      environmentId = builder.environmentId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetGatewayListOptions builder
+     */
+    public GetGatewayListOptionsBuilder newBuilder() {
+      return new GetGatewayListOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetGatewayListOptions Builder.
+   */
+  public class GetGatewayListOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+
+    private GetGatewayListOptionsBuilder(GetGatewayListOptions getGatewayListOptions) {
+      environmentId = getGatewayListOptions.environmentId;
+      this.requestHeaders.putAll(getGatewayListOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetGatewayListOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     */
+    public GetGatewayListOptionsBuilder(String environmentId) {
+      this.environmentId = environmentId;
+    }
+
+    /**
+     * Builds a GetGatewayListOptions.
+     *
+     * @return the getGatewayListOptions
+     */
+    public GetGatewayListOptions build() {
+      return new GetGatewayListOptions(this);
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the GetGatewayListOptions builder
+     */
+    public GetGatewayListOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetGatewayListOptions builder
+     */
+    public GetGatewayListOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -17917,6 +18948,7 @@ public class IBMDiscoveryV1Models {
      * -  `box` indicates the configuration is to connect an instance of Enterprise Box.
      * -  `salesforce` indicates the configuration is to connect to Salesforce.
      * -  `sharepoint` indicates the configuration is to connect to Microsoft SharePoint Online.
+     * -  `web_crawl` indicates the configuration is to perform a web page crawl.
      *
      * @return the xtype
      */
@@ -18025,6 +19057,7 @@ public class IBMDiscoveryV1Models {
     private List<SourceOptionsFolder> folders_serialized_name;
     private List<SourceOptionsObject> objects_serialized_name;
     private List<SourceOptionsSiteColl> site_collections_serialized_name;
+    private List<SourceOptionsWebCrawl> urls_serialized_name;
  
     /**
      * Gets the folders.
@@ -18064,6 +19097,19 @@ public class IBMDiscoveryV1Models {
     public List<SourceOptionsSiteColl> getSiteCollections() {
       return site_collections_serialized_name;
     }
+ 
+    /**
+     * Gets the urls.
+     *
+     * Array of Web page URLs to begin crawling the web from. Only valid and required when the **type** field of the
+     * **source** object is set to `web_crawl`.
+     *
+     * @return the urls
+     */
+    @AuraEnabled
+    public List<SourceOptionsWebCrawl> getUrls() {
+      return urls_serialized_name;
+    }
 
     /**
      * Sets the folders.
@@ -18090,6 +19136,15 @@ public class IBMDiscoveryV1Models {
      */
     public void setSiteCollections(final List<SourceOptionsSiteColl> siteCollections) {
       this.site_collections_serialized_name = siteCollections;
+    }
+
+    /**
+     * Sets the urls.
+     *
+     * @param urls the new urls
+     */
+    public void setUrls(final List<SourceOptionsWebCrawl> urls) {
+      this.urls_serialized_name = urls;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -18136,6 +19191,19 @@ public class IBMDiscoveryV1Models {
           newSiteCollections.add(newItem);
         }
         ret.setSiteCollections(newSiteCollections);
+      }
+
+      // calling custom deserializer for urls
+      List<SourceOptionsWebCrawl> newUrls = new List<SourceOptionsWebCrawl>();
+      List<SourceOptionsWebCrawl> deserializedUrls = ret.getUrls();
+      if (deserializedUrls != null) {
+        for (Integer i = 0; i < deserializedUrls.size(); i++) {
+          SourceOptionsWebCrawl currentItem = ret.getUrls().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('urls_serialized_name');
+          SourceOptionsWebCrawl newItem = (SourceOptionsWebCrawl) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsWebCrawl.class);
+          newUrls.add(newItem);
+        }
+        ret.setUrls(newUrls);
       }
 
       return ret;
@@ -18342,6 +19410,182 @@ public class IBMDiscoveryV1Models {
       }
 
       SourceOptionsSiteColl ret = (SourceOptionsSiteColl) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Object defining which URL to crawl and how to crawl it.
+   */
+  public class SourceOptionsWebCrawl extends IBMWatsonGenericModel {
+    private String url_serialized_name;
+    private Boolean limit_to_starting_hosts_serialized_name;
+    private String crawl_speed_serialized_name;
+    private Boolean allow_untrusted_certificate_serialized_name;
+    private Long maximum_hops_serialized_name;
+    private Long request_timeout_serialized_name;
+    private Boolean override_robots_txt_serialized_name;
+ 
+    /**
+     * Gets the url.
+     *
+     * The starting URL to crawl.
+     *
+     * @return the url
+     */
+    @AuraEnabled
+    public String getUrl() {
+      return url_serialized_name;
+    }
+ 
+    /**
+     * Gets the limitToStartingHosts.
+     *
+     * When `true`, crawls of the specified URL are limited to the host part of the **url** field.
+     *
+     * @return the limitToStartingHosts
+     */
+    @AuraEnabled
+    public Boolean getLimitToStartingHosts() {
+      return limit_to_starting_hosts_serialized_name;
+    }
+ 
+    /**
+     * Gets the crawlSpeed.
+     *
+     * The number of concurrent URLs to fetch. `gentle` means one URL is fetched at a time with a delay between each
+     * call. `normal` means as many as two URLs are fectched concurrently with a short delay between fetch calls.
+     * `aggressive` means that up to ten URLs are fetched concurrently with a short delay between fetch calls.
+     *
+     * @return the crawlSpeed
+     */
+    @AuraEnabled
+    public String getCrawlSpeed() {
+      return crawl_speed_serialized_name;
+    }
+ 
+    /**
+     * Gets the allowUntrustedCertificate.
+     *
+     * When `true`, allows the crawl to interact with HTTPS sites with SSL certificates with untrusted signers.
+     *
+     * @return the allowUntrustedCertificate
+     */
+    @AuraEnabled
+    public Boolean getAllowUntrustedCertificate() {
+      return allow_untrusted_certificate_serialized_name;
+    }
+ 
+    /**
+     * Gets the maximumHops.
+     *
+     * The maximum number of hops to make from the initial URL. When a page is crawled each link on that page will also
+     * be crawled if it is within the **maximum_hops** from the initial URL. The first page crawled is 0 hops, each link
+     * crawled from the first page is 1 hop, each link crawled from those pages is 2 hops, and so on.
+     *
+     * @return the maximumHops
+     */
+    @AuraEnabled
+    public Long getMaximumHops() {
+      return maximum_hops_serialized_name;
+    }
+ 
+    /**
+     * Gets the requestTimeout.
+     *
+     * The maximum milliseconds to wait for a response from the web server.
+     *
+     * @return the requestTimeout
+     */
+    @AuraEnabled
+    public Long getRequestTimeout() {
+      return request_timeout_serialized_name;
+    }
+ 
+    /**
+     * Gets the overrideRobotsTxt.
+     *
+     * When `true`, the crawler will ignore any `robots.txt` encountered by the crawler. This should only ever be done
+     * when crawling a web site the user owns. This must be be set to `true` when a **gateway_id** is specied in the
+     * **credentials**.
+     *
+     * @return the overrideRobotsTxt
+     */
+    @AuraEnabled
+    public Boolean getOverrideRobotsTxt() {
+      return override_robots_txt_serialized_name;
+    }
+
+    /**
+     * Sets the url.
+     *
+     * @param url the new url
+     */
+    public void setUrl(final String url) {
+      this.url_serialized_name = url;
+    }
+
+    /**
+     * Sets the limitToStartingHosts.
+     *
+     * @param limitToStartingHosts the new limitToStartingHosts
+     */
+    public void setLimitToStartingHosts(final Boolean limitToStartingHosts) {
+      this.limit_to_starting_hosts_serialized_name = limitToStartingHosts;
+    }
+
+    /**
+     * Sets the crawlSpeed.
+     *
+     * @param crawlSpeed the new crawlSpeed
+     */
+    public void setCrawlSpeed(final String crawlSpeed) {
+      this.crawl_speed_serialized_name = crawlSpeed;
+    }
+
+    /**
+     * Sets the allowUntrustedCertificate.
+     *
+     * @param allowUntrustedCertificate the new allowUntrustedCertificate
+     */
+    public void setAllowUntrustedCertificate(final Boolean allowUntrustedCertificate) {
+      this.allow_untrusted_certificate_serialized_name = allowUntrustedCertificate;
+    }
+
+    /**
+     * Sets the maximumHops.
+     *
+     * @param maximumHops the new maximumHops
+     */
+    public void setMaximumHops(final long maximumHops) {
+      this.maximum_hops_serialized_name = maximumHops;
+    }
+
+    /**
+     * Sets the requestTimeout.
+     *
+     * @param requestTimeout the new requestTimeout
+     */
+    public void setRequestTimeout(final long requestTimeout) {
+      this.request_timeout_serialized_name = requestTimeout;
+    }
+
+    /**
+     * Sets the overrideRobotsTxt.
+     *
+     * @param overrideRobotsTxt the new overrideRobotsTxt
+     */
+    public void setOverrideRobotsTxt(final Boolean overrideRobotsTxt) {
+      this.override_robots_txt_serialized_name = overrideRobotsTxt;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SourceOptionsWebCrawl ret = (SourceOptionsWebCrawl) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -19023,7 +20267,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * Object describing the current status of the tokenization dictionary.
+   * Object describing the current status of the wordlist.
    */
   public class TokenDictStatusResponse extends IBMWatsonResponseModel {
     private String status_serialized_name;
@@ -19032,7 +20276,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the status.
      *
-     * Current tokenization dictionary status for the specified collection.
+     * Current wordlist status for the specified collection.
      *
      * @return the status
      */
@@ -19044,7 +20288,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the xtype.
      *
-     * The type for this dictionary. Always returns `tokenization_dictionary`.
+     * The type for this wordlist. Can be `tokenization_dictionary` or `stopwords`.
      *
      * @return the xtype
      */
@@ -19668,16 +20912,7 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      String data_updated = (String) jsonMap.remove('data_updated_serialized_name');
-      String successfully_trained = (String) jsonMap.remove('successfully_trained_serialized_name');
-      String jsonStringWithoutDates = JSON.serialize(jsonMap);
-      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
-      if (String.isNotBlank(data_updated)) {
-        ret.setDataUpdated((Datetime) JSON.deserialize('"' + data_updated + '"', Datetime.class));
-      }
-      if (String.isNotBlank(successfully_trained)) {
-        ret.setSuccessfullyTrained((Datetime) JSON.deserialize('"' + successfully_trained + '"', Datetime.class));
-      }
+      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -20248,6 +21483,7 @@ public class IBMDiscoveryV1Models {
      * -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
      * -  `salesforce` indicates the credentials are used to connect to Salesforce.
      * -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
+     * -  `web_crawl` indicates the credentials are used to perform a web crawl.
      *
      * @return the sourceType
      */
