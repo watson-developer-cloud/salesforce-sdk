@@ -1153,6 +1153,60 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
+   * Add a grammar.
+   *
+   * Adds a single grammar file to a custom language model. Submit a plain text file in UTF-8 format that defines the
+   * grammar. Use multiple requests to submit multiple grammar files. You must use credentials for the instance of the
+   * service that owns a model to add a grammar to it. Adding a grammar does not affect the custom language model until
+   * you train the model for the new data by using the **Train a custom language model** method.
+   *
+   * The call returns an HTTP 201 response code if the grammar is valid. The service then asynchronously processes the
+   * contents of the grammar and automatically extracts new words that it finds. This can take a few seconds to complete
+   * depending on the size and complexity of the grammar, as well as the current load on the service. You cannot submit
+   * requests to add additional resources to the custom model or to train the model until the service's analysis of the
+   * grammar for the current request completes. Use the **Get a grammar** method to check the status of the analysis.
+   *
+   * The service populates the model's words resource with any word that is recognized by the grammar that is not found
+   * in the model's base vocabulary. These are referred to as out-of-vocabulary (OOV) words. You can use the **List
+   * custom words** method to examine the words resource and use other words-related methods to eliminate typos and
+   * modify how words are pronounced as needed.
+   *
+   * To add a grammar that has the same name as an existing grammar, set the `allow_overwrite` parameter to `true`;
+   * otherwise, the request fails. Overwriting an existing grammar causes the service to process the grammar file and
+   * extract OOV words anew. Before doing so, it removes any OOV words associated with the existing grammar from the
+   * model's words resource unless they were also added by another resource or they have been modified in some way with
+   * the **Add custom words** or **Add a custom word** method.
+   *
+   * The service limits the overall amount of data that you can add to a custom model to a maximum of 10 million total
+   * words from all sources combined. Also, you can add no more than 30 thousand OOV words to a model. This includes
+   * words that the service extracts from corpora and grammars and words that you add directly.
+   *
+   * **See also:**
+   * * [Working with grammars](https://cloud.ibm.com/docs/services/speech-to-text/)
+   * * [Add grammars to the custom language model](https://cloud.ibm.com/docs/services/speech-to-text/).
+   *
+   * @param addGrammarOptions the {@link IBMSpeechToTextV1Models.AddGrammarOptions} containing the options for the call
+   * @return the service call
+   */
+  public void addGrammar(IBMSpeechToTextV1Models.AddGrammarOptions addGrammarOptions) {
+    IBMWatsonValidator.notNull(addGrammarOptions, 'addGrammarOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/grammars/{1}', new String[]{ addGrammarOptions.customizationId(), addGrammarOptions.grammarName() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('Content-Type', addGrammarOptions.contentType());
+    Map<String, String> requestHeaders = (addGrammarOptions != null) ? addGrammarOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    if (addGrammarOptions.allowOverwrite() != null) {
+      builder.query('allow_overwrite', String.valueOf(addGrammarOptions.allowOverwrite()));
+    }
+    builder.bodyContent(addGrammarOptions.contentType(), null, null, addGrammarOptions.grammarFile());
+
+    createServiceCall(builder.build(), null);
+  }
+  /**
    * Create a custom acoustic model.
    *
    * Creates a new custom acoustic model for a specified base model. The custom acoustic model can be used only with the

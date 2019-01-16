@@ -818,6 +818,227 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
+   * The addGrammar options.
+   */
+  public class AddGrammarOptions extends IBMWatsonOptionsModel {
+    private String customizationId;
+    private String grammarName;
+    private IBMWatsonFile grammarFile;
+    private String contentType;
+    private Boolean allowOverwrite;
+ 
+    /**
+     * Gets the customizationId.
+     *
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with credentials for the instance of the service that owns the custom model.
+     *
+     * @return the customizationId
+     */
+    public String customizationId() {
+      return customizationId;
+    }
+ 
+    /**
+     * Gets the grammarName.
+     *
+     * The name of the new grammar for the custom language model. Use a localized name that matches the language of the
+     * custom model and reflects the contents of the grammar.
+     * * Include a maximum of 128 characters in the name.
+     * * Do not include spaces, slashes, or backslashes in the name.
+     * * Do not use the name of an existing grammar or corpus that is already defined for the custom model.
+     * * Do not use the name `user`, which is reserved by the service to denote custom words that are added or modified
+     * by the user.
+     *
+     * @return the grammarName
+     */
+    public String grammarName() {
+      return grammarName;
+    }
+ 
+    /**
+     * Gets the grammarFile.
+     *
+     * A plain text file that contains the grammar in the format specified by the `Content-Type` header. Encode the file
+     * in UTF-8 (ASCII is a subset of UTF-8). Using any other encoding can lead to issues when compiling the grammar or
+     * to unexpected results in decoding. The service ignores an encoding that is specified in the header of the
+     * grammar.
+     *
+     * @return the grammarFile
+     */
+    public IBMWatsonFile grammarFile() {
+      return grammarFile;
+    }
+ 
+    /**
+     * Gets the contentType.
+     *
+     * The format (MIME type) of the grammar file:
+     * * `application/srgs` for Augmented Backus-Naur Form (ABNF), which uses a plain-text representation that is
+     * similar to traditional BNF grammars.
+     * * `application/srgs+xml` for XML Form, which uses XML elements to represent the grammar.
+     *
+     * @return the contentType
+     */
+    public String contentType() {
+      return contentType;
+    }
+ 
+    /**
+     * Gets the allowOverwrite.
+     *
+     * If `true`, the specified grammar overwrites an existing grammar with the same name. If `false`, the request fails
+     * if a grammar with the same name already exists. The parameter has no effect if a grammar with the same name does
+     * not already exist.
+     *
+     * @return the allowOverwrite
+     */
+    public Boolean allowOverwrite() {
+      return allowOverwrite;
+    }
+
+    private AddGrammarOptions(AddGrammarOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.grammarName, 'grammarName cannot be empty');
+      IBMWatsonValidator.notNull(builder.grammarFile, 'grammarFile cannot be null');
+      IBMWatsonValidator.notNull(builder.contentType, 'contentType cannot be null');
+      customizationId = builder.customizationId;
+      grammarName = builder.grammarName;
+      grammarFile = builder.grammarFile;
+      contentType = builder.contentType;
+      allowOverwrite = builder.allowOverwrite;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a AddGrammarOptions builder
+     */
+    public AddGrammarOptionsBuilder newBuilder() {
+      return new AddGrammarOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * AddGrammarOptions Builder.
+   */
+  public class AddGrammarOptionsBuilder extends IBMWatsonOptionsModel {
+    private String customizationId;
+    private String grammarName;
+    private IBMWatsonFile grammarFile;
+    private String contentType;
+    private Boolean allowOverwrite;
+
+    private AddGrammarOptionsBuilder(AddGrammarOptions addGrammarOptions) {
+      customizationId = addGrammarOptions.customizationId;
+      grammarName = addGrammarOptions.grammarName;
+      grammarFile = addGrammarOptions.grammarFile;
+      contentType = addGrammarOptions.contentType;
+      allowOverwrite = addGrammarOptions.allowOverwrite;
+      this.requestHeaders.putAll(addGrammarOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public AddGrammarOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param customizationId the customizationId
+     * @param grammarName the grammarName
+     * @param grammarFile the grammarFile
+     * @param contentType the contentType
+     */
+    public AddGrammarOptionsBuilder(String customizationId, String grammarName, IBMWatsonFile grammarFile, String contentType) {
+      this.customizationId = customizationId;
+      this.grammarName = grammarName;
+      this.grammarFile = grammarFile;
+      this.contentType = contentType;
+    }
+
+    /**
+     * Builds a AddGrammarOptions.
+     *
+     * @return the addGrammarOptions
+     */
+    public AddGrammarOptions build() {
+      return new AddGrammarOptions(this);
+    }
+
+    /**
+     * Set the customizationId.
+     *
+     * @param customizationId the customizationId
+     * @return the AddGrammarOptions builder
+     */
+    public AddGrammarOptionsBuilder customizationId(String customizationId) {
+      this.customizationId = customizationId;
+      return this;
+    }
+
+    /**
+     * Set the grammarName.
+     *
+     * @param grammarName the grammarName
+     * @return the AddGrammarOptions builder
+     */
+    public AddGrammarOptionsBuilder grammarName(String grammarName) {
+      this.grammarName = grammarName;
+      return this;
+    }
+
+    /**
+     * Set the grammarFile.
+     *
+     * @param grammarFile the grammarFile
+     * @return the AddGrammarOptions builder
+     */
+    public AddGrammarOptionsBuilder grammarFile(IBMWatsonFile grammarFile) {
+      this.grammarFile = grammarFile;
+      return this;
+    }
+
+    /**
+     * Set the contentType.
+     *
+     * @param contentType the contentType
+     * @return the AddGrammarOptions builder
+     */
+    public AddGrammarOptionsBuilder contentType(String contentType) {
+      this.contentType = contentType;
+      return this;
+    }
+
+    /**
+     * Set the allowOverwrite.
+     *
+     * @param allowOverwrite the allowOverwrite
+     * @return the AddGrammarOptions builder
+     */
+    public AddGrammarOptionsBuilder allowOverwrite(Boolean allowOverwrite) {
+      this.allowOverwrite = allowOverwrite;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the AddGrammarOptions builder
+     */
+    public AddGrammarOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The addWord options.
    */
   public class AddWordOptions extends IBMWatsonOptionsModel {
