@@ -70,7 +70,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the owner.
      *
-     * The GUID of the service credentials for the instance of the service that owns the custom acoustic model.
+     * The GUID of the credentials for the instance of the service that owns the custom acoustic model.
      *
      * @return the owner
      */
@@ -119,13 +119,13 @@ public class IBMSpeechToTextV1Models {
      * Gets the status.
      *
      * The current status of the custom acoustic model:
-     * * `pending` indicates that the model was created but is waiting either for training data to be added or for the
-     * service to finish analyzing added data.
-     * * `ready` indicates that the model contains data and is ready to be trained.
-     * * `training` indicates that the model is currently being trained.
-     * * `available` indicates that the model is trained and ready to use.
-     * * `upgrading` indicates that the model is currently being upgraded.
-     * * `failed` indicates that training of the model failed.
+     * * `pending`: The model was created but is waiting either for training data to be added or for the service to
+     * finish analyzing added data.
+     * * `ready`: The model contains data and is ready to be trained.
+     * * `training`: The model is currently being trained.
+     * * `available`: The model is trained and ready to use.
+     * * `upgrading`: The model is currently being upgraded.
+     * * `failed`: Training of the model failed.
      *
      * @return the status
      */
@@ -280,9 +280,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizations.
      *
-     * An array of objects that provides information about each available custom acoustic model. The array is empty if
-     * the requesting service credentials own no custom acoustic models (if no language is specified) or own no custom
-     * acoustic models for the specified language.
+     * An array of `AcousticModel` objects that provides information about each available custom acoustic model. The
+     * array is empty if the requesting credentials own no custom acoustic models (if no language is specified) or own
+     * no custom acoustic models for the specified language.
      *
      * @return the customizations
      */
@@ -339,7 +339,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -612,7 +612,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -627,7 +627,7 @@ public class IBMSpeechToTextV1Models {
      * custom model and reflects the contents of the corpus.
      * * Include a maximum of 128 characters in the name.
      * * Do not include spaces, slashes, or backslashes in the name.
-     * * Do not use the name of a corpus that has already been added to the custom model.
+     * * Do not use the name of an existing corpus or grammar that is already defined for the custom model.
      * * Do not use the name `user`, which is reserved by the service to denote custom words that are added or modified
      * by the user.
      *
@@ -1052,7 +1052,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -1284,7 +1284,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -1295,8 +1295,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the words.
      *
-     * An array of objects that provides information about each custom word that is to be added to or updated in the
-     * custom language model.
+     * An array of `CustomWord` objects that provides information about each custom word that is to be added to or
+     * updated in the custom language model.
      *
      * @return the words
      */
@@ -1579,12 +1579,11 @@ public class IBMSpeechToTextV1Models {
      * Gets the status.
      *
      * **For an audio-type resource,** the status of the resource:
-     * * `ok` indicates that the service has successfully analyzed the audio data. The data can be used to train the
-     * custom model.
-     * * `being_processed` indicates that the service is still analyzing the audio data. The service cannot accept
-     * requests to add new audio resources or to train the custom model until its analysis is complete.
-     * * `invalid` indicates that the audio data is not valid for training the custom model (possibly because it has the
-     * wrong format or sampling rate, or because it is corrupted).
+     * * `ok`: The service successfully analyzed the audio data. The data can be used to train the custom model.
+     * * `being_processed`: The service is still analyzing the audio data. The service cannot accept requests to add new
+     * audio resources or to train the custom model until its analysis is complete.
+     * * `invalid`: The audio data is not valid for training the custom model (possibly because it has the wrong format
+     * or sampling rate, or because it is corrupted).
      *
      * Omitted for an archive-type resource.
      *
@@ -1760,13 +1759,12 @@ public class IBMSpeechToTextV1Models {
      * Gets the status.
      *
      * The status of the audio resource:
-     * * `ok` indicates that the service has successfully analyzed the audio data. The data can be used to train the
-     * custom model.
-     * * `being_processed` indicates that the service is still analyzing the audio data. The service cannot accept
-     * requests to add new audio resources or to train the custom model until its analysis is complete.
-     * * `invalid` indicates that the audio data is not valid for training the custom model (possibly because it has the
-     * wrong format or sampling rate, or because it is corrupted). For an archive file, the entire archive is invalid if
-     * any of its audio files are invalid.
+     * * `ok`: The service successfully analyzed the audio data. The data can be used to train the custom model.
+     * * `being_processed`: The service is still analyzing the audio data. The service cannot accept requests to add new
+     * audio resources or to train the custom model until its analysis is complete.
+     * * `invalid`: The audio data is not valid for training the custom model (possibly because it has the wrong format
+     * or sampling rate, or because it is corrupted). For an archive file, the entire archive is invalid if any of its
+     * audio files are invalid.
      *
      * @return the status
      */
@@ -1850,8 +1848,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the audio.
      *
-     * An array of objects that provides information about the audio resources of the custom acoustic model. The array
-     * is empty if the custom model has no audio resources.
+     * An array of `AudioResource` objects that provides information about the audio resources of the custom acoustic
+     * model. The array is empty if the custom model has no audio resources.
      *
      * @return the audio
      */
@@ -1911,7 +1909,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the id.
      *
-     * The identifier of the asynchronous job that is to be used for the request.
+     * The identifier of the asynchronous job that is to be used for the request. You must make the request with
+     * credentials for the instance of the service that owns the job.
      *
      * @return the id
      */
@@ -2061,8 +2060,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the corpora.
      *
-     * An array of objects that provides information about the corpora for the custom model. The array is empty if the
-     * custom model has no corpora.
+     * An array of `Corpus` objects that provides information about the corpora for the custom model. The array is empty
+     * if the custom model has no corpora.
      *
      * @return the corpora
      */
@@ -2154,11 +2153,12 @@ public class IBMSpeechToTextV1Models {
      * Gets the status.
      *
      * The status of the corpus:
-     * * `analyzed` indicates that the service has successfully analyzed the corpus; the custom model can be trained
-     * with data from the corpus.
-     * * `being_processed` indicates that the service is still analyzing the corpus; the service cannot accept requests
-     * to add new corpora or words, or to train the custom model.
-     * * `undetermined` indicates that the service encountered an error while processing the corpus.
+     * * `analyzed`: The service successfully analyzed the corpus. The custom model can be trained with data from the
+     * corpus.
+     * * `being_processed`: The service is still analyzing the corpus. The service cannot accept requests to add new
+     * resources or to train the custom model.
+     * * `undetermined`: The service encountered an error while processing the corpus. The `error` field describes the
+     * failure.
      *
      * @return the status
      */
@@ -2446,7 +2446,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the model.
      *
-     * The identifier of the model that is to be used for the recognition request.
+     * The identifier of the model that is to be used for the recognition request. See [Languages and
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/models.html).
      *
      * @return the model
      */
@@ -2527,8 +2528,9 @@ public class IBMSpeechToTextV1Models {
      *
      * The customization ID (GUID) of a custom language model that is to be used with the recognition request. The base
      * model of the specified custom language model must match the model specified with the `model` parameter. You must
-     * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom language model is used. See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
+     * make the request with credentials for the instance of the service that owns the custom model. By default, no
+     * custom language model is used. See [Custom
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      *
      * **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      *
@@ -2543,8 +2545,9 @@ public class IBMSpeechToTextV1Models {
      *
      * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request. The base
      * model of the specified custom acoustic model must match the model specified with the `model` parameter. You must
-     * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom acoustic model is used. See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
+     * make the request with credentials for the instance of the service that owns the custom model. By default, no
+     * custom acoustic model is used. See [Custom
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      *
      * @return the acousticCustomizationId
      */
@@ -2595,7 +2598,8 @@ public class IBMSpeechToTextV1Models {
      *
      * The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
      * closed with a 400 error. The parameter is useful for stopping audio submission from a live microphone when a user
-     * simply walks away. Use `-1` for infinity. See [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts).
+     * simply walks away. Use `-1` for infinity. See
+     * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts).
      *
      * @return the inactivityTimeout
      */
@@ -2622,9 +2626,10 @@ public class IBMSpeechToTextV1Models {
      * Gets the keywordsThreshold.
      *
      * A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
-     * confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. No keyword
-     * spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
-     * keywords. See [Keyword spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
+     * confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. If you specify a
+     * threshold, you must also specify one or more keywords. The service performs no keyword spotting if you omit
+     * either parameter. See [Keyword
+     * spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
      *
      * @return the keywordsThreshold
      */
@@ -2635,8 +2640,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the maxAlternatives.
      *
-     * The maximum number of alternative transcripts that the service is to return. By default, a single transcription
-     * is returned. See [Maximum alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
+     * The maximum number of alternative transcripts that the service is to return. By default, the service returns a
+     * single transcript. See [Maximum
+     * alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
      *
      * @return the maxAlternatives
      */
@@ -2649,8 +2655,8 @@ public class IBMSpeechToTextV1Models {
      *
      * A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also
      * known as "Confusion Networks"). An alternative word is considered if its confidence is greater than or equal to
-     * the threshold. Specify a probability between 0.0 and 1.0. No alternative words are computed if you omit the
-     * parameter. See [Word alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives).
+     * the threshold. Specify a probability between 0.0 and 1.0. By default, the service computes no alternative words.
+     * See [Word alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives).
      *
      * @return the wordAlternativesThreshold
      */
@@ -2661,8 +2667,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the wordConfidence.
      *
-     * If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for each word. By default, no word
-     * confidence measures are returned. See [Word
+     * If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for each word. By default, the
+     * service returns no word confidence scores. See [Word
      * confidence](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence).
      *
      * @return the wordConfidence
@@ -2702,9 +2708,12 @@ public class IBMSpeechToTextV1Models {
      *
      * If `true`, the service converts dates, times, series of digits and numbers, phone numbers, currency values, and
      * internet addresses into more readable, conventional representations in the final transcript of a recognition
-     * request. For US English, the service also converts certain keyword strings to punctuation symbols. By default, no
-     * smart formatting is performed. Applies to US English, Japanese, and Spanish transcription only. See [Smart
-     * formatting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting).
+     * request. For US English, the service also converts certain keyword strings to punctuation symbols. By default,
+     * the service performs no smart formatting.
+     *
+     * **Note:** Applies to US English, Japanese, and Spanish transcription only.
+     *
+     * See [Smart formatting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting).
      *
      * @return the smartFormatting
      */
@@ -2716,12 +2725,14 @@ public class IBMSpeechToTextV1Models {
      * Gets the speakerLabels.
      *
      * If `true`, the response includes labels that identify which words were spoken by which participants in a
-     * multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
-     * `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
+     * multi-person exchange. By default, the service returns no speaker labels. Setting `speaker_labels` to `true`
+     * forces the `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
      *
-     * To determine whether a language model supports speaker labels, use the **Get a model** method and check that the
-     * attribute `speaker_labels` is set to `true`. See [Speaker
-     * labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
+     * **Note:** Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
+     * supports speaker labels, you can also use the **Get a model** method and check that the attribute
+     * `speaker_labels` is set to `true`.
+     *
+     * See [Speaker labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
      *
      * @return the speakerLabels
      */
@@ -3490,7 +3501,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -3585,7 +3596,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -3708,7 +3719,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -3952,7 +3963,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the id.
      *
-     * The identifier of the asynchronous job that is to be used for the request.
+     * The identifier of the asynchronous job that is to be used for the request. You must make the request with
+     * credentials for the instance of the service that owns the job.
      *
      * @return the id
      */
@@ -4046,7 +4058,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -4234,7 +4246,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -4358,7 +4370,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -4453,7 +4465,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -4576,7 +4588,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -4821,7 +4833,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -5009,7 +5021,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -5406,6 +5418,7 @@ public class IBMSpeechToTextV1Models {
     private String base_model_name_serialized_name;
     private String status_serialized_name;
     private Long progress_serialized_name;
+    private String error_serialized_name;
     private String warnings_serialized_name;
  
     /**
@@ -5480,7 +5493,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the owner.
      *
-     * The GUID of the service credentials for the instance of the service that owns the custom language model.
+     * The GUID of the credentials for the instance of the service that owns the custom language model.
      *
      * @return the owner
      */
@@ -5529,13 +5542,13 @@ public class IBMSpeechToTextV1Models {
      * Gets the status.
      *
      * The current status of the custom language model:
-     * * `pending` indicates that the model was created but is waiting either for training data to be added or for the
-     * service to finish analyzing added data.
-     * * `ready` indicates that the model contains data and is ready to be trained.
-     * * `training` indicates that the model is currently being trained.
-     * * `available` indicates that the model is trained and ready to use.
-     * * `upgrading` indicates that the model is currently being upgraded.
-     * * `failed` indicates that training of the model failed.
+     * * `pending`: The model was created but is waiting either for training data to be added or for the service to
+     * finish analyzing added data.
+     * * `ready`: The model contains data and is ready to be trained.
+     * * `training`: The model is currently being trained.
+     * * `available`: The model is trained and ready to use.
+     * * `upgrading`: The model is currently being upgraded.
+     * * `failed`: Training of the model failed.
      *
      * @return the status
      */
@@ -5556,6 +5569,20 @@ public class IBMSpeechToTextV1Models {
     @AuraEnabled
     public Long getProgress() {
       return progress_serialized_name;
+    }
+ 
+    /**
+     * Gets the error.
+     *
+     * If an error occurred while adding a grammar file to the custom language model, a message that describes an
+     * `Internal Server Error` and includes the string `Cannot compile grammar`. The status of the custom model is not
+     * affected by the error, but the grammar cannot be used with the model.
+     *
+     * @return the error
+     */
+    @AuraEnabled
+    public String getError() {
+      return error_serialized_name;
     }
  
     /**
@@ -5671,6 +5698,15 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
+     * Sets the error.
+     *
+     * @param error the new error
+     */
+    public void setError(final String error) {
+      this.error_serialized_name = error;
+    }
+
+    /**
      * Sets the warnings.
      *
      * @param warnings the new warnings
@@ -5699,9 +5735,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizations.
      *
-     * An array of objects that provides information about each available custom language model. The array is empty if
-     * the requesting service credentials own no custom language models (if no language is specified) or own no custom
-     * language models for the specified language.
+     * An array of `LanguageModel` objects that provides information about each available custom language model. The
+     * array is empty if the requesting credentials own no custom language models (if no language is specified) or own
+     * no custom language models for the specified language.
      *
      * @return the customizations
      */
@@ -5753,8 +5789,8 @@ public class IBMSpeechToTextV1Models {
      * Gets the language.
      *
      * The identifier of the language for which custom language or custom acoustic models are to be returned (for
-     * example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the
-     * requesting service credentials.
+     * example, `en-US`). Omit the parameter to see all custom language or custom acoustic models that are owned by the
+     * requesting credentials.
      *
      * @return the language
      */
@@ -5838,7 +5874,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -5932,7 +5968,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -6120,8 +6156,8 @@ public class IBMSpeechToTextV1Models {
      * Gets the language.
      *
      * The identifier of the language for which custom language or custom acoustic models are to be returned (for
-     * example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the
-     * requesting service credentials.
+     * example, `en-US`). Omit the parameter to see all custom language or custom acoustic models that are owned by the
+     * requesting credentials.
      *
      * @return the language
      */
@@ -6264,7 +6300,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -6277,8 +6313,9 @@ public class IBMSpeechToTextV1Models {
      *
      * The type of words to be listed from the custom language model's words resource:
      * * `all` (the default) shows all words.
-     * * `user` shows only custom words that were added or modified by the user.
+     * * `user` shows only custom words that were added or modified by the user directly.
      * * `corpora` shows only OOV that were extracted from corpora.
+     * * `grammars` shows only OOV words that are recognized by grammars.
      *
      * @return the wordType
      */
@@ -6440,7 +6477,7 @@ public class IBMSpeechToTextV1Models {
      * service has the capacity to begin processing it.
      * * `processing`: The service is actively processing the job.
      * * `completed`: The service has finished processing the job. If the job specified a callback URL and the event
-     * `recognitions.completed_with_results`, the service sent the results with the callback notification; otherwise,
+     * `recognitions.completed_with_results`, the service sent the results with the callback notification. Otherwise,
      * you must retrieve the results by checking the individual job.
      * * `failed`: The job failed.
      *
@@ -6637,8 +6674,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the recognitions.
      *
-     * An array of objects that provides the status for each of the user's current jobs. The array is empty if the user
-     * has no current jobs.
+     * An array of `RecognitionJob` objects that provides the status for each of the user's current jobs. The array is
+     * empty if the user has no current jobs.
      *
      * @return the recognitions
      */
@@ -6702,6 +6739,8 @@ public class IBMSpeechToTextV1Models {
     private Boolean smartFormatting;
     private Boolean speakerLabels;
     private String customizationId;
+    private String grammarName;
+    private Boolean redaction;
  
     /**
      * Gets the audio.
@@ -6729,7 +6768,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the model.
      *
-     * The identifier of the model that is to be used for the recognition request.
+     * The identifier of the model that is to be used for the recognition request. See [Languages and
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/models.html).
      *
      * @return the model
      */
@@ -6742,8 +6782,9 @@ public class IBMSpeechToTextV1Models {
      *
      * The customization ID (GUID) of a custom language model that is to be used with the recognition request. The base
      * model of the specified custom language model must match the model specified with the `model` parameter. You must
-     * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom language model is used. See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
+     * make the request with credentials for the instance of the service that owns the custom model. By default, no
+     * custom language model is used. See [Custom
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      *
      * **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      *
@@ -6758,8 +6799,9 @@ public class IBMSpeechToTextV1Models {
      *
      * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request. The base
      * model of the specified custom acoustic model must match the model specified with the `model` parameter. You must
-     * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom acoustic model is used. See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
+     * make the request with credentials for the instance of the service that owns the custom model. By default, no
+     * custom acoustic model is used. See [Custom
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      *
      * @return the acousticCustomizationId
      */
@@ -6810,7 +6852,8 @@ public class IBMSpeechToTextV1Models {
      *
      * The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
      * closed with a 400 error. The parameter is useful for stopping audio submission from a live microphone when a user
-     * simply walks away. Use `-1` for infinity. See [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts).
+     * simply walks away. Use `-1` for infinity. See
+     * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts).
      *
      * @return the inactivityTimeout
      */
@@ -6837,9 +6880,10 @@ public class IBMSpeechToTextV1Models {
      * Gets the keywordsThreshold.
      *
      * A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
-     * confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. No keyword
-     * spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
-     * keywords. See [Keyword spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
+     * confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. If you specify a
+     * threshold, you must also specify one or more keywords. The service performs no keyword spotting if you omit
+     * either parameter. See [Keyword
+     * spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
      *
      * @return the keywordsThreshold
      */
@@ -6850,8 +6894,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the maxAlternatives.
      *
-     * The maximum number of alternative transcripts that the service is to return. By default, a single transcription
-     * is returned. See [Maximum alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
+     * The maximum number of alternative transcripts that the service is to return. By default, the service returns a
+     * single transcript. See [Maximum
+     * alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
      *
      * @return the maxAlternatives
      */
@@ -6864,8 +6909,8 @@ public class IBMSpeechToTextV1Models {
      *
      * A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also
      * known as "Confusion Networks"). An alternative word is considered if its confidence is greater than or equal to
-     * the threshold. Specify a probability between 0.0 and 1.0. No alternative words are computed if you omit the
-     * parameter. See [Word alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives).
+     * the threshold. Specify a probability between 0.0 and 1.0. By default, the service computes no alternative words.
+     * See [Word alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives).
      *
      * @return the wordAlternativesThreshold
      */
@@ -6876,8 +6921,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the wordConfidence.
      *
-     * If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for each word. By default, no word
-     * confidence measures are returned. See [Word
+     * If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for each word. By default, the
+     * service returns no word confidence scores. See [Word
      * confidence](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence).
      *
      * @return the wordConfidence
@@ -6917,9 +6962,12 @@ public class IBMSpeechToTextV1Models {
      *
      * If `true`, the service converts dates, times, series of digits and numbers, phone numbers, currency values, and
      * internet addresses into more readable, conventional representations in the final transcript of a recognition
-     * request. For US English, the service also converts certain keyword strings to punctuation symbols. By default, no
-     * smart formatting is performed. Applies to US English, Japanese, and Spanish transcription only. See [Smart
-     * formatting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting).
+     * request. For US English, the service also converts certain keyword strings to punctuation symbols. By default,
+     * the service performs no smart formatting.
+     *
+     * **Note:** Applies to US English, Japanese, and Spanish transcription only.
+     *
+     * See [Smart formatting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting).
      *
      * @return the smartFormatting
      */
@@ -6931,12 +6979,14 @@ public class IBMSpeechToTextV1Models {
      * Gets the speakerLabels.
      *
      * If `true`, the response includes labels that identify which words were spoken by which participants in a
-     * multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
-     * `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
+     * multi-person exchange. By default, the service returns no speaker labels. Setting `speaker_labels` to `true`
+     * forces the `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
      *
-     * To determine whether a language model supports speaker labels, use the **Get a model** method and check that the
-     * attribute `speaker_labels` is set to `true`. See [Speaker
-     * labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
+     * **Note:** Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
+     * supports speaker labels, you can also use the **Get a model** method and check that the attribute
+     * `speaker_labels` is set to `true`.
+     *
+     * See [Speaker labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
      *
      * @return the speakerLabels
      */
@@ -7499,8 +7549,8 @@ public class IBMSpeechToTextV1Models {
      * Gets the status.
      *
      * The current status of the job:
-     * * `created` if the callback URL was successfully white-listed as a result of the call.
-     * * `already created` if the URL was already white-listed.
+     * * `created`: The service successfully white-listed the callback URL as a result of the call.
+     * * `already created`: The URL was already white-listed.
      *
      * @return the status
      */
@@ -7560,7 +7610,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -7654,7 +7704,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -8030,7 +8080,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the models.
      *
-     * An array of objects that provides information about each available model.
+     * An array of `SpeechModel` objects that provides information about each available model.
      *
      * @return the models
      */
@@ -8556,7 +8606,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -8679,7 +8729,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -8692,9 +8742,9 @@ public class IBMSpeechToTextV1Models {
      *
      * The type of words from the custom language model's words resource on which to train the model:
      * * `all` (the default) trains the model on all new words, regardless of whether they were extracted from corpora
-     * or were added or modified by the user.
-     * * `user` trains the model only on new words that were added or modified by the user; the model is not trained on
-     * new words extracted from corpora.
+     * or grammars or were added or modified by the user.
+     * * `user` trains the model only on new words that were added or modified by the user directly. The model is not
+     * trained on new words extracted from corpora or grammars.
      *
      * @return the wordTypeToAdd
      */
@@ -8930,7 +8980,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -9050,7 +9100,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -9510,8 +9560,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the words.
      *
-     * An array of objects that provides information about each word in the custom model's words resource. The array is
-     * empty if the custom model has no words.
+     * An array of `Word` objects that provides information about each word in the custom model's words resource. The
+     * array is empty if the custom model has no words.
      *
      * @return the words
      */
