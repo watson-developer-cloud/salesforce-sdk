@@ -3655,4 +3655,35 @@ public class IBMWatsonMockResponses {
       ']' +
     '}';
   }
+
+  public static testMethod String gatewayResponse() {
+    return '{' +
+      '"gateway_id": "gateway_id",' +
+      '"name": "name",' +
+      '"status": "connected",' +
+      '"token": "token",' +
+      '"token_id": "token_id"' +
+    '}';
+  }
+
+  public static testMethod String listGatewaysResponse() {
+    return '{' +
+      '"gateways": [' +
+        '{' +
+          '"gateway_id": "gateway_id_1",' +
+          '"name": "name",' +
+          '"status": "connected",' +
+          '"token": "token",' +
+          '"token_id": "token_id"' +
+        '},' +
+        '{' +
+          '"gateway_id": "gateway_id_2",' +
+          '"name": "name",' +
+          '"status": "connected",' +
+          '"token": "token",' +
+          '"token_id": "token_id"' +
+        '}' +
+      ']' +
+    '}';
+  }
 }
