@@ -8893,7 +8893,7 @@ public class IBMDiscoveryV1Models {
   /**
    * The getGatewayDetails options.
    */
-  public class GetGatewayDetailsOptions extends IBMWatsonOptionsModel {
+  public class GetGatewayOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String gatewayId;
  
@@ -8919,7 +8919,7 @@ public class IBMDiscoveryV1Models {
       return gatewayId;
     }
 
-    private GetGatewayDetailsOptions(GetGatewayDetailsOptionsBuilder builder) {
+    private GetGatewayOptions(GetGatewayOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.gatewayId, 'gatewayId cannot be empty');
       environmentId = builder.environmentId;
@@ -8930,22 +8930,22 @@ public class IBMDiscoveryV1Models {
     /**
      * New builder.
      *
-     * @return a GetGatewayDetailsOptions builder
+     * @return a GetGatewayOptions builder
      */
-    public GetGatewayDetailsOptionsBuilder newBuilder() {
-      return new GetGatewayDetailsOptionsBuilder(this);
+    public GetGatewayOptionsBuilder newBuilder() {
+      return new GetGatewayOptionsBuilder(this);
     }
 
   }
 
   /**
-   * GetGatewayDetailsOptions Builder.
+   * GetGatewayOptions Builder.
    */
-  public class GetGatewayDetailsOptionsBuilder extends IBMWatsonOptionsModel {
+  public class GetGatewayOptionsBuilder extends IBMWatsonOptionsModel {
     private String environmentId;
     private String gatewayId;
 
-    private GetGatewayDetailsOptionsBuilder(GetGatewayDetailsOptions getGatewayDetailsOptions) {
+    private GetGatewayOptionsBuilder(GetGatewayOptions getGatewayDetailsOptions) {
       environmentId = getGatewayDetailsOptions.environmentId;
       gatewayId = getGatewayDetailsOptions.gatewayId;
       this.requestHeaders.putAll(getGatewayDetailsOptions.requestHeaders());
@@ -8954,7 +8954,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Instantiates a new builder.
      */
-    public GetGatewayDetailsOptionsBuilder() {
+    public GetGatewayOptionsBuilder() {
     }
 
     /**
@@ -8963,27 +8963,27 @@ public class IBMDiscoveryV1Models {
      * @param environmentId the environmentId
      * @param gatewayId the gatewayId
      */
-    public GetGatewayDetailsOptionsBuilder(String environmentId, String gatewayId) {
+    public GetGatewayOptionsBuilder(String environmentId, String gatewayId) {
       this.environmentId = environmentId;
       this.gatewayId = gatewayId;
     }
 
     /**
-     * Builds a GetGatewayDetailsOptions.
+     * Builds a GetGatewayOptions.
      *
      * @return the getGatewayDetailsOptions
      */
-    public GetGatewayDetailsOptions build() {
-      return new GetGatewayDetailsOptions(this);
+    public GetGatewayOptions build() {
+      return new GetGatewayOptions(this);
     }
 
     /**
      * Set the environmentId.
      *
      * @param environmentId the environmentId
-     * @return the GetGatewayDetailsOptions builder
+     * @return the GetGatewayOptions builder
      */
-    public GetGatewayDetailsOptionsBuilder environmentId(String environmentId) {
+    public GetGatewayOptionsBuilder environmentId(String environmentId) {
       this.environmentId = environmentId;
       return this;
     }
@@ -8992,9 +8992,9 @@ public class IBMDiscoveryV1Models {
      * Set the gatewayId.
      *
      * @param gatewayId the gatewayId
-     * @return the GetGatewayDetailsOptions builder
+     * @return the GetGatewayOptions builder
      */
-    public GetGatewayDetailsOptionsBuilder gatewayId(String gatewayId) {
+    public GetGatewayOptionsBuilder gatewayId(String gatewayId) {
       this.gatewayId = gatewayId;
       return this;
     }
@@ -9004,9 +9004,9 @@ public class IBMDiscoveryV1Models {
      *
      * @param name the header name
      * @param value the header value
-     * @return the GetGatewayDetailsOptions builder
+     * @return the GetGatewayOptions builder
      */
-    public GetGatewayDetailsOptionsBuilder addHeader(String name, String value) {
+    public GetGatewayOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -9015,7 +9015,7 @@ public class IBMDiscoveryV1Models {
   /**
    * The getGatewayList options.
    */
-  public class GetGatewayListOptions extends IBMWatsonOptionsModel {
+  public class ListGatewaysOptions extends IBMWatsonOptionsModel {
     private String environmentId;
  
     /**
@@ -9029,7 +9029,7 @@ public class IBMDiscoveryV1Models {
       return environmentId;
     }
 
-    private GetGatewayListOptions(GetGatewayListOptionsBuilder builder) {
+    private ListGatewaysOptions(ListGatewaysOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
       environmentId = builder.environmentId;
       this.requestHeaders = builder.requestHeaders;
@@ -9038,29 +9038,29 @@ public class IBMDiscoveryV1Models {
     /**
      * New builder.
      *
-     * @return a GetGatewayListOptions builder
+     * @return a ListGatewaysOptions builder
      */
-    public GetGatewayListOptionsBuilder newBuilder() {
-      return new GetGatewayListOptionsBuilder(this);
+    public ListGatewaysOptionsBuilder newBuilder() {
+      return new ListGatewaysOptionsBuilder(this);
     }
 
   }
 
   /**
-   * GetGatewayListOptions Builder.
+   * ListGatewaysOptions Builder.
    */
-  public class GetGatewayListOptionsBuilder extends IBMWatsonOptionsModel {
+  public class ListGatewaysOptionsBuilder extends IBMWatsonOptionsModel {
     private String environmentId;
 
-    private GetGatewayListOptionsBuilder(GetGatewayListOptions getGatewayListOptions) {
-      environmentId = getGatewayListOptions.environmentId;
-      this.requestHeaders.putAll(getGatewayListOptions.requestHeaders());
+    private ListGatewaysOptionsBuilder(ListGatewaysOptions listGatewaysOptions) {
+      environmentId = listGatewaysOptions.environmentId;
+      this.requestHeaders.putAll(listGatewaysOptions.requestHeaders());
     }
 
     /**
      * Instantiates a new builder.
      */
-    public GetGatewayListOptionsBuilder() {
+    public ListGatewaysOptionsBuilder() {
     }
 
     /**
@@ -9068,26 +9068,26 @@ public class IBMDiscoveryV1Models {
      *
      * @param environmentId the environmentId
      */
-    public GetGatewayListOptionsBuilder(String environmentId) {
+    public ListGatewaysOptionsBuilder(String environmentId) {
       this.environmentId = environmentId;
     }
 
     /**
-     * Builds a GetGatewayListOptions.
+     * Builds a ListGatewaysOptions.
      *
-     * @return the getGatewayListOptions
+     * @return the listGatewaysOptions
      */
-    public GetGatewayListOptions build() {
-      return new GetGatewayListOptions(this);
+    public ListGatewaysOptions build() {
+      return new ListGatewaysOptions(this);
     }
 
     /**
      * Set the environmentId.
      *
      * @param environmentId the environmentId
-     * @return the GetGatewayListOptions builder
+     * @return the ListGatewaysOptions builder
      */
-    public GetGatewayListOptionsBuilder environmentId(String environmentId) {
+    public ListGatewaysOptionsBuilder environmentId(String environmentId) {
       this.environmentId = environmentId;
       return this;
     }
@@ -9097,9 +9097,9 @@ public class IBMDiscoveryV1Models {
      *
      * @param name the header name
      * @param value the header value
-     * @return the GetGatewayListOptions builder
+     * @return the ListGatewaysOptions builder
      */
-    public GetGatewayListOptionsBuilder addHeader(String name, String value) {
+    public ListGatewaysOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }

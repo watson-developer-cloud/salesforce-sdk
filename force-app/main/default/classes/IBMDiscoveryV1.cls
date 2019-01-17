@@ -2055,14 +2055,14 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    *
    * List information about the specified gateway.
    *
-   * @param getGatewayDetailsOptions the {@link IBMDiscoveryV1Models.GetGatewayDetailsOptions} containing the options for the call
+   * @param getGatewayOptions the {@link IBMDiscoveryV1Models.GetGatewayOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.Gateway} with the response
    */
-  public IBMDiscoveryV1Models.Gateway getGatewayDetails(IBMDiscoveryV1Models.GetGatewayDetailsOptions getGatewayDetailsOptions) {
-    IBMWatsonValidator.notNull(getGatewayDetailsOptions, 'getGatewayDetailsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/gateways/{1}', new String[]{ getGatewayDetailsOptions.environmentId(), getGatewayDetailsOptions.gatewayId() }));
+  public IBMDiscoveryV1Models.Gateway getGateway(IBMDiscoveryV1Models.GetGatewayOptions getGatewayOptions) {
+    IBMWatsonValidator.notNull(getGatewayOptions, 'getGatewayOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/gateways/{1}', new String[]{ getGatewayOptions.environmentId(), getGatewayOptions.gatewayId() }));
     builder.addHeader('Accept', 'application/json');
-    Map<String, String> requestHeaders = (getGatewayDetailsOptions != null) ? getGatewayDetailsOptions.requestHeaders() : null;
+    Map<String, String> requestHeaders = (getGatewayOptions != null) ? getGatewayOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
@@ -2078,14 +2078,14 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    *
    * List the currently configured gateways.
    *
-   * @param getGatewayListOptions the {@link IBMDiscoveryV1Models.GetGatewayListOptions} containing the options for the call
+   * @param listGatewaysOptions the {@link IBMDiscoveryV1Models.ListGatewaysOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.GatewayList} with the response
    */
-  public IBMDiscoveryV1Models.GatewayList getGatewayList(IBMDiscoveryV1Models.GetGatewayListOptions getGatewayListOptions) {
-    IBMWatsonValidator.notNull(getGatewayListOptions, 'getGatewayListOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/gateways', new String[]{ getGatewayListOptions.environmentId() }));
+  public IBMDiscoveryV1Models.GatewayList listGateways(IBMDiscoveryV1Models.ListGatewaysOptions listGatewaysOptions) {
+    IBMWatsonValidator.notNull(listGatewaysOptions, 'listGatewaysOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/gateways', new String[]{ listGatewaysOptions.environmentId() }));
     builder.addHeader('Accept', 'application/json');
-    Map<String, String> requestHeaders = (getGatewayListOptions != null) ? getGatewayListOptions.requestHeaders() : null;
+    Map<String, String> requestHeaders = (listGatewaysOptions != null) ? listGatewaysOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
