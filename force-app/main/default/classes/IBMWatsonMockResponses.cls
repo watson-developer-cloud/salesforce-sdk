@@ -1600,7 +1600,8 @@ public class IBMWatsonMockResponses {
                       '          }, ' +
                       '          "gender": {' +
                       '            "gender": "string", ' +
-                      '            "score": 0' +
+                      '            "score": 0,' +
+                      '            "gender_label": "male"' + 
                       '          }, ' +
                       '          "face_location": {' +
                       '            "width": 0, ' +
@@ -2906,6 +2907,9 @@ public class IBMWatsonMockResponses {
           '],' +
           '"branch_exited": true,' +
           '"branch_exited_reason": "completed"' +
+        '},' +
+        '"user_defined": {' +
+          '"key": "value"' +
         '}' +
       '}' +
     '}';
@@ -3650,6 +3654,62 @@ public class IBMWatsonMockResponses {
           ']' +
         '}' +
       ']' +
+    '}';
+  }
+
+  public static testMethod String gatewayResponse() {
+    return '{' +
+      '"gateway_id": "gateway_id",' +
+      '"name": "name",' +
+      '"status": "connected",' +
+      '"token": "token",' +
+      '"token_id": "token_id"' +
+    '}';
+  }
+
+  public static testMethod String listGatewaysResponse() {
+    return '{' +
+      '"gateways": [' +
+        '{' +
+          '"gateway_id": "gateway_id_1",' +
+          '"name": "name",' +
+          '"status": "connected",' +
+          '"token": "token",' +
+          '"token_id": "token_id"' +
+        '},' +
+        '{' +
+          '"gateway_id": "gateway_id_2",' +
+          '"name": "name",' +
+          '"status": "connected",' +
+          '"token": "token",' +
+          '"token_id": "token_id"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String listGrammarsResponse() {
+    return '{' +
+      '"grammars": [' +
+        '{' +
+          '"out_of_vocabulary_words": 10,' +
+          '"name": "name_1",' +
+          '"status": "analyzed"' +
+        '},' +
+        '{' +
+          '"out_of_vocabulary_words": 20,' +
+          '"name": "name_2",' +
+          '"status": "analyzed"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String getGrammarResponse() {
+    return '{' +
+      '"out_of_vocabulary_words": 10,' +
+      '"name": "grammar_name",' +
+      '"status": "analyzed"' +
     '}';
   }
 }

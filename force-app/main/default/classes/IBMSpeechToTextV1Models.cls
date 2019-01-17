@@ -70,7 +70,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the owner.
      *
-     * The GUID of the service credentials for the instance of the service that owns the custom acoustic model.
+     * The GUID of the credentials for the instance of the service that owns the custom acoustic model.
      *
      * @return the owner
      */
@@ -119,13 +119,13 @@ public class IBMSpeechToTextV1Models {
      * Gets the status.
      *
      * The current status of the custom acoustic model:
-     * * `pending` indicates that the model was created but is waiting either for training data to be added or for the
-     * service to finish analyzing added data.
-     * * `ready` indicates that the model contains data and is ready to be trained.
-     * * `training` indicates that the model is currently being trained.
-     * * `available` indicates that the model is trained and ready to use.
-     * * `upgrading` indicates that the model is currently being upgraded.
-     * * `failed` indicates that training of the model failed.
+     * * `pending`: The model was created but is waiting either for training data to be added or for the service to
+     * finish analyzing added data.
+     * * `ready`: The model contains data and is ready to be trained.
+     * * `training`: The model is currently being trained.
+     * * `available`: The model is trained and ready to use.
+     * * `upgrading`: The model is currently being upgraded.
+     * * `failed`: Training of the model failed.
      *
      * @return the status
      */
@@ -280,9 +280,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizations.
      *
-     * An array of objects that provides information about each available custom acoustic model. The array is empty if
-     * the requesting service credentials own no custom acoustic models (if no language is specified) or own no custom
-     * acoustic models for the specified language.
+     * An array of `AcousticModel` objects that provides information about each available custom acoustic model. The
+     * array is empty if the requesting credentials own no custom acoustic models (if no language is specified) or own
+     * no custom acoustic models for the specified language.
      *
      * @return the customizations
      */
@@ -339,7 +339,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -612,7 +612,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -627,7 +627,7 @@ public class IBMSpeechToTextV1Models {
      * custom model and reflects the contents of the corpus.
      * * Include a maximum of 128 characters in the name.
      * * Do not include spaces, slashes, or backslashes in the name.
-     * * Do not use the name of a corpus that has already been added to the custom model.
+     * * Do not use the name of an existing corpus or grammar that is already defined for the custom model.
      * * Do not use the name `user`, which is reserved by the service to denote custom words that are added or modified
      * by the user.
      *
@@ -818,6 +818,227 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
+   * The addGrammar options.
+   */
+  public class AddGrammarOptions extends IBMWatsonOptionsModel {
+    private String customizationId;
+    private String grammarName;
+    private IBMWatsonFile grammarFile;
+    private String contentType;
+    private Boolean allowOverwrite;
+ 
+    /**
+     * Gets the customizationId.
+     *
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with credentials for the instance of the service that owns the custom model.
+     *
+     * @return the customizationId
+     */
+    public String customizationId() {
+      return customizationId;
+    }
+ 
+    /**
+     * Gets the grammarName.
+     *
+     * The name of the new grammar for the custom language model. Use a localized name that matches the language of the
+     * custom model and reflects the contents of the grammar.
+     * * Include a maximum of 128 characters in the name.
+     * * Do not include spaces, slashes, or backslashes in the name.
+     * * Do not use the name of an existing grammar or corpus that is already defined for the custom model.
+     * * Do not use the name `user`, which is reserved by the service to denote custom words that are added or modified
+     * by the user.
+     *
+     * @return the grammarName
+     */
+    public String grammarName() {
+      return grammarName;
+    }
+ 
+    /**
+     * Gets the grammarFile.
+     *
+     * A plain text file that contains the grammar in the format specified by the `Content-Type` header. Encode the file
+     * in UTF-8 (ASCII is a subset of UTF-8). Using any other encoding can lead to issues when compiling the grammar or
+     * to unexpected results in decoding. The service ignores an encoding that is specified in the header of the
+     * grammar.
+     *
+     * @return the grammarFile
+     */
+    public IBMWatsonFile grammarFile() {
+      return grammarFile;
+    }
+ 
+    /**
+     * Gets the contentType.
+     *
+     * The format (MIME type) of the grammar file:
+     * * `application/srgs` for Augmented Backus-Naur Form (ABNF), which uses a plain-text representation that is
+     * similar to traditional BNF grammars.
+     * * `application/srgs+xml` for XML Form, which uses XML elements to represent the grammar.
+     *
+     * @return the contentType
+     */
+    public String contentType() {
+      return contentType;
+    }
+ 
+    /**
+     * Gets the allowOverwrite.
+     *
+     * If `true`, the specified grammar overwrites an existing grammar with the same name. If `false`, the request fails
+     * if a grammar with the same name already exists. The parameter has no effect if a grammar with the same name does
+     * not already exist.
+     *
+     * @return the allowOverwrite
+     */
+    public Boolean allowOverwrite() {
+      return allowOverwrite;
+    }
+
+    private AddGrammarOptions(AddGrammarOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.grammarName, 'grammarName cannot be empty');
+      IBMWatsonValidator.notNull(builder.grammarFile, 'grammarFile cannot be null');
+      IBMWatsonValidator.notNull(builder.contentType, 'contentType cannot be null');
+      customizationId = builder.customizationId;
+      grammarName = builder.grammarName;
+      grammarFile = builder.grammarFile;
+      contentType = builder.contentType;
+      allowOverwrite = builder.allowOverwrite;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a AddGrammarOptions builder
+     */
+    public AddGrammarOptionsBuilder newBuilder() {
+      return new AddGrammarOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * AddGrammarOptions Builder.
+   */
+  public class AddGrammarOptionsBuilder extends IBMWatsonOptionsModel {
+    private String customizationId;
+    private String grammarName;
+    private IBMWatsonFile grammarFile;
+    private String contentType;
+    private Boolean allowOverwrite;
+
+    private AddGrammarOptionsBuilder(AddGrammarOptions addGrammarOptions) {
+      customizationId = addGrammarOptions.customizationId;
+      grammarName = addGrammarOptions.grammarName;
+      grammarFile = addGrammarOptions.grammarFile;
+      contentType = addGrammarOptions.contentType;
+      allowOverwrite = addGrammarOptions.allowOverwrite;
+      this.requestHeaders.putAll(addGrammarOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public AddGrammarOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param customizationId the customizationId
+     * @param grammarName the grammarName
+     * @param grammarFile the grammarFile
+     * @param contentType the contentType
+     */
+    public AddGrammarOptionsBuilder(String customizationId, String grammarName, IBMWatsonFile grammarFile, String contentType) {
+      this.customizationId = customizationId;
+      this.grammarName = grammarName;
+      this.grammarFile = grammarFile;
+      this.contentType = contentType;
+    }
+
+    /**
+     * Builds a AddGrammarOptions.
+     *
+     * @return the addGrammarOptions
+     */
+    public AddGrammarOptions build() {
+      return new AddGrammarOptions(this);
+    }
+
+    /**
+     * Set the customizationId.
+     *
+     * @param customizationId the customizationId
+     * @return the AddGrammarOptions builder
+     */
+    public AddGrammarOptionsBuilder customizationId(String customizationId) {
+      this.customizationId = customizationId;
+      return this;
+    }
+
+    /**
+     * Set the grammarName.
+     *
+     * @param grammarName the grammarName
+     * @return the AddGrammarOptions builder
+     */
+    public AddGrammarOptionsBuilder grammarName(String grammarName) {
+      this.grammarName = grammarName;
+      return this;
+    }
+
+    /**
+     * Set the grammarFile.
+     *
+     * @param grammarFile the grammarFile
+     * @return the AddGrammarOptions builder
+     */
+    public AddGrammarOptionsBuilder grammarFile(IBMWatsonFile grammarFile) {
+      this.grammarFile = grammarFile;
+      return this;
+    }
+
+    /**
+     * Set the contentType.
+     *
+     * @param contentType the contentType
+     * @return the AddGrammarOptions builder
+     */
+    public AddGrammarOptionsBuilder contentType(String contentType) {
+      this.contentType = contentType;
+      return this;
+    }
+
+    /**
+     * Set the allowOverwrite.
+     *
+     * @param allowOverwrite the allowOverwrite
+     * @return the AddGrammarOptions builder
+     */
+    public AddGrammarOptionsBuilder allowOverwrite(Boolean allowOverwrite) {
+      this.allowOverwrite = allowOverwrite;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the AddGrammarOptions builder
+     */
+    public AddGrammarOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The addWord options.
    */
   public class AddWordOptions extends IBMWatsonOptionsModel {
@@ -831,7 +1052,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -1063,7 +1284,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -1074,8 +1295,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the words.
      *
-     * An array of objects that provides information about each custom word that is to be added to or updated in the
-     * custom language model.
+     * An array of `CustomWord` objects that provides information about each custom word that is to be added to or
+     * updated in the custom language model.
      *
      * @return the words
      */
@@ -1358,12 +1579,11 @@ public class IBMSpeechToTextV1Models {
      * Gets the status.
      *
      * **For an audio-type resource,** the status of the resource:
-     * * `ok` indicates that the service has successfully analyzed the audio data. The data can be used to train the
-     * custom model.
-     * * `being_processed` indicates that the service is still analyzing the audio data. The service cannot accept
-     * requests to add new audio resources or to train the custom model until its analysis is complete.
-     * * `invalid` indicates that the audio data is not valid for training the custom model (possibly because it has the
-     * wrong format or sampling rate, or because it is corrupted).
+     * * `ok`: The service successfully analyzed the audio data. The data can be used to train the custom model.
+     * * `being_processed`: The service is still analyzing the audio data. The service cannot accept requests to add new
+     * audio resources or to train the custom model until its analysis is complete.
+     * * `invalid`: The audio data is not valid for training the custom model (possibly because it has the wrong format
+     * or sampling rate, or because it is corrupted).
      *
      * Omitted for an archive-type resource.
      *
@@ -1539,13 +1759,12 @@ public class IBMSpeechToTextV1Models {
      * Gets the status.
      *
      * The status of the audio resource:
-     * * `ok` indicates that the service has successfully analyzed the audio data. The data can be used to train the
-     * custom model.
-     * * `being_processed` indicates that the service is still analyzing the audio data. The service cannot accept
-     * requests to add new audio resources or to train the custom model until its analysis is complete.
-     * * `invalid` indicates that the audio data is not valid for training the custom model (possibly because it has the
-     * wrong format or sampling rate, or because it is corrupted). For an archive file, the entire archive is invalid if
-     * any of its audio files are invalid.
+     * * `ok`: The service successfully analyzed the audio data. The data can be used to train the custom model.
+     * * `being_processed`: The service is still analyzing the audio data. The service cannot accept requests to add new
+     * audio resources or to train the custom model until its analysis is complete.
+     * * `invalid`: The audio data is not valid for training the custom model (possibly because it has the wrong format
+     * or sampling rate, or because it is corrupted). For an archive file, the entire archive is invalid if any of its
+     * audio files are invalid.
      *
      * @return the status
      */
@@ -1629,8 +1848,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the audio.
      *
-     * An array of objects that provides information about the audio resources of the custom acoustic model. The array
-     * is empty if the custom model has no audio resources.
+     * An array of `AudioResource` objects that provides information about the audio resources of the custom acoustic
+     * model. The array is empty if the custom model has no audio resources.
      *
      * @return the audio
      */
@@ -1690,7 +1909,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the id.
      *
-     * The identifier of the asynchronous job that is to be used for the request.
+     * The identifier of the asynchronous job that is to be used for the request. You must make the request with
+     * credentials for the instance of the service that owns the job.
      *
      * @return the id
      */
@@ -1840,8 +2060,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the corpora.
      *
-     * An array of objects that provides information about the corpora for the custom model. The array is empty if the
-     * custom model has no corpora.
+     * An array of `Corpus` objects that provides information about the corpora for the custom model. The array is empty
+     * if the custom model has no corpora.
      *
      * @return the corpora
      */
@@ -1933,11 +2153,12 @@ public class IBMSpeechToTextV1Models {
      * Gets the status.
      *
      * The status of the corpus:
-     * * `analyzed` indicates that the service has successfully analyzed the corpus; the custom model can be trained
-     * with data from the corpus.
-     * * `being_processed` indicates that the service is still analyzing the corpus; the service cannot accept requests
-     * to add new corpora or words, or to train the custom model.
-     * * `undetermined` indicates that the service encountered an error while processing the corpus.
+     * * `analyzed`: The service successfully analyzed the corpus. The custom model can be trained with data from the
+     * corpus.
+     * * `being_processed`: The service is still analyzing the corpus. The service cannot accept requests to add new
+     * resources or to train the custom model.
+     * * `undetermined`: The service encountered an error while processing the corpus. The `error` field describes the
+     * failure.
      *
      * @return the status
      */
@@ -2196,6 +2417,8 @@ public class IBMSpeechToTextV1Models {
     private Boolean smartFormatting;
     private Boolean speakerLabels;
     private String customizationId;
+    private String grammarName;
+    private Boolean redaction;
  
     /**
      * Gets the audio.
@@ -2223,7 +2446,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the model.
      *
-     * The identifier of the model that is to be used for the recognition request.
+     * The identifier of the model that is to be used for the recognition request. See [Languages and
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/models.html).
      *
      * @return the model
      */
@@ -2304,8 +2528,9 @@ public class IBMSpeechToTextV1Models {
      *
      * The customization ID (GUID) of a custom language model that is to be used with the recognition request. The base
      * model of the specified custom language model must match the model specified with the `model` parameter. You must
-     * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom language model is used. See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
+     * make the request with credentials for the instance of the service that owns the custom model. By default, no
+     * custom language model is used. See [Custom
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      *
      * **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      *
@@ -2320,8 +2545,9 @@ public class IBMSpeechToTextV1Models {
      *
      * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request. The base
      * model of the specified custom acoustic model must match the model specified with the `model` parameter. You must
-     * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom acoustic model is used. See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
+     * make the request with credentials for the instance of the service that owns the custom model. By default, no
+     * custom acoustic model is used. See [Custom
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      *
      * @return the acousticCustomizationId
      */
@@ -2372,7 +2598,8 @@ public class IBMSpeechToTextV1Models {
      *
      * The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
      * closed with a 400 error. The parameter is useful for stopping audio submission from a live microphone when a user
-     * simply walks away. Use `-1` for infinity. See [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts).
+     * simply walks away. Use `-1` for infinity. See
+     * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts).
      *
      * @return the inactivityTimeout
      */
@@ -2399,9 +2626,10 @@ public class IBMSpeechToTextV1Models {
      * Gets the keywordsThreshold.
      *
      * A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
-     * confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. No keyword
-     * spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
-     * keywords. See [Keyword spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
+     * confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. If you specify a
+     * threshold, you must also specify one or more keywords. The service performs no keyword spotting if you omit
+     * either parameter. See [Keyword
+     * spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
      *
      * @return the keywordsThreshold
      */
@@ -2412,8 +2640,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the maxAlternatives.
      *
-     * The maximum number of alternative transcripts that the service is to return. By default, a single transcription
-     * is returned. See [Maximum alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
+     * The maximum number of alternative transcripts that the service is to return. By default, the service returns a
+     * single transcript. See [Maximum
+     * alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
      *
      * @return the maxAlternatives
      */
@@ -2426,8 +2655,8 @@ public class IBMSpeechToTextV1Models {
      *
      * A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also
      * known as "Confusion Networks"). An alternative word is considered if its confidence is greater than or equal to
-     * the threshold. Specify a probability between 0.0 and 1.0. No alternative words are computed if you omit the
-     * parameter. See [Word alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives).
+     * the threshold. Specify a probability between 0.0 and 1.0. By default, the service computes no alternative words.
+     * See [Word alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives).
      *
      * @return the wordAlternativesThreshold
      */
@@ -2438,8 +2667,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the wordConfidence.
      *
-     * If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for each word. By default, no word
-     * confidence measures are returned. See [Word
+     * If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for each word. By default, the
+     * service returns no word confidence scores. See [Word
      * confidence](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence).
      *
      * @return the wordConfidence
@@ -2479,9 +2708,12 @@ public class IBMSpeechToTextV1Models {
      *
      * If `true`, the service converts dates, times, series of digits and numbers, phone numbers, currency values, and
      * internet addresses into more readable, conventional representations in the final transcript of a recognition
-     * request. For US English, the service also converts certain keyword strings to punctuation symbols. By default, no
-     * smart formatting is performed. Applies to US English, Japanese, and Spanish transcription only. See [Smart
-     * formatting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting).
+     * request. For US English, the service also converts certain keyword strings to punctuation symbols. By default,
+     * the service performs no smart formatting.
+     *
+     * **Note:** Applies to US English, Japanese, and Spanish transcription only.
+     *
+     * See [Smart formatting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting).
      *
      * @return the smartFormatting
      */
@@ -2493,12 +2725,14 @@ public class IBMSpeechToTextV1Models {
      * Gets the speakerLabels.
      *
      * If `true`, the response includes labels that identify which words were spoken by which participants in a
-     * multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
-     * `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
+     * multi-person exchange. By default, the service returns no speaker labels. Setting `speaker_labels` to `true`
+     * forces the `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
      *
-     * To determine whether a language model supports speaker labels, use the **Get a model** method and check that the
-     * attribute `speaker_labels` is set to `true`. See [Speaker
-     * labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
+     * **Note:** Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
+     * supports speaker labels, you can also use the **Get a model** method and check that the attribute
+     * `speaker_labels` is set to `true`.
+     *
+     * See [Speaker labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
      *
      * @return the speakerLabels
      */
@@ -2516,6 +2750,43 @@ public class IBMSpeechToTextV1Models {
      */
     public String customizationId() {
       return customizationId;
+    }
+ 
+    /**
+     * Gets the grammarName.
+     *
+     * The name of a grammar that is to be used with the recognition request. If you specify a grammar, you must also
+     * use the `language_customization_id` parameter to specify the name of the custom language model for which the
+     * grammar is defined. The service recognizes only strings that are recognized by the specified grammar; it does not
+     * recognize other custom words from the model's words resource. See
+     * [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/output.html).
+     *
+     * @return the grammarName
+     */
+    public String grammarName() {
+      return grammarName;
+    }
+ 
+    /**
+     * Gets the redaction.
+     *
+     * If `true`, the service redacts, or masks, numeric data from final transcripts. The feature redacts any number
+     * that has three or more consecutive digits by replacing each digit with an `X` character. It is intended to redact
+     * sensitive numeric data, such as credit card numbers. By default, the service performs no redaction.
+     *
+     * When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+     * explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+     * the `keywords` and `keywords_threshold` parameters) and returns only a single final transcript (forces the
+     * `max_alternatives` parameter to be `1`).
+     *
+     * **Note:** Applies to US English, Japanese, and Korean transcription only.
+     *
+     * See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
+     *
+     * @return the redaction
+     */
+    public Boolean redaction() {
+      return redaction;
     }
 
     private CreateJobOptions(CreateJobOptionsBuilder builder) {
@@ -2542,6 +2813,8 @@ public class IBMSpeechToTextV1Models {
       smartFormatting = builder.smartFormatting;
       speakerLabels = builder.speakerLabels;
       customizationId = builder.customizationId;
+      grammarName = builder.grammarName;
+      redaction = builder.redaction;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2582,6 +2855,8 @@ public class IBMSpeechToTextV1Models {
     private Boolean smartFormatting;
     private Boolean speakerLabels;
     private String customizationId;
+    private String grammarName;
+    private Boolean redaction;
 
     private CreateJobOptionsBuilder(CreateJobOptions createJobOptions) {
       audio = createJobOptions.audio;
@@ -2606,6 +2881,8 @@ public class IBMSpeechToTextV1Models {
       smartFormatting = createJobOptions.smartFormatting;
       speakerLabels = createJobOptions.speakerLabels;
       customizationId = createJobOptions.customizationId;
+      grammarName = createJobOptions.grammarName;
+      redaction = createJobOptions.redaction;
       this.requestHeaders.putAll(createJobOptions.requestHeaders());
     }
 
@@ -2901,6 +3178,28 @@ public class IBMSpeechToTextV1Models {
      */
     public CreateJobOptionsBuilder customizationId(String customizationId) {
       this.customizationId = customizationId;
+      return this;
+    }
+
+    /**
+     * Set the grammarName.
+     *
+     * @param grammarName the grammarName
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder grammarName(String grammarName) {
+      this.grammarName = grammarName;
+      return this;
+    }
+
+    /**
+     * Set the redaction.
+     *
+     * @param redaction the redaction
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder redaction(Boolean redaction) {
+      this.redaction = redaction;
       return this;
     }
 
@@ -3202,7 +3501,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -3297,7 +3596,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -3420,7 +3719,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -3533,6 +3832,129 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
+   * The deleteGrammar options.
+   */
+  public class DeleteGrammarOptions extends IBMWatsonOptionsModel {
+    private String customizationId;
+    private String grammarName;
+ 
+    /**
+     * Gets the customizationId.
+     *
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with credentials for the instance of the service that owns the custom model.
+     *
+     * @return the customizationId
+     */
+    public String customizationId() {
+      return customizationId;
+    }
+ 
+    /**
+     * Gets the grammarName.
+     *
+     * The name of the grammar for the custom language model.
+     *
+     * @return the grammarName
+     */
+    public String grammarName() {
+      return grammarName;
+    }
+
+    private DeleteGrammarOptions(DeleteGrammarOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.grammarName, 'grammarName cannot be empty');
+      customizationId = builder.customizationId;
+      grammarName = builder.grammarName;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DeleteGrammarOptions builder
+     */
+    public DeleteGrammarOptionsBuilder newBuilder() {
+      return new DeleteGrammarOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * DeleteGrammarOptions Builder.
+   */
+  public class DeleteGrammarOptionsBuilder extends IBMWatsonOptionsModel {
+    private String customizationId;
+    private String grammarName;
+
+    private DeleteGrammarOptionsBuilder(DeleteGrammarOptions deleteGrammarOptions) {
+      customizationId = deleteGrammarOptions.customizationId;
+      grammarName = deleteGrammarOptions.grammarName;
+      this.requestHeaders.putAll(deleteGrammarOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DeleteGrammarOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param customizationId the customizationId
+     * @param grammarName the grammarName
+     */
+    public DeleteGrammarOptionsBuilder(String customizationId, String grammarName) {
+      this.customizationId = customizationId;
+      this.grammarName = grammarName;
+    }
+
+    /**
+     * Builds a DeleteGrammarOptions.
+     *
+     * @return the deleteGrammarOptions
+     */
+    public DeleteGrammarOptions build() {
+      return new DeleteGrammarOptions(this);
+    }
+
+    /**
+     * Set the customizationId.
+     *
+     * @param customizationId the customizationId
+     * @return the DeleteGrammarOptions builder
+     */
+    public DeleteGrammarOptionsBuilder customizationId(String customizationId) {
+      this.customizationId = customizationId;
+      return this;
+    }
+
+    /**
+     * Set the grammarName.
+     *
+     * @param grammarName the grammarName
+     * @return the DeleteGrammarOptions builder
+     */
+    public DeleteGrammarOptionsBuilder grammarName(String grammarName) {
+      this.grammarName = grammarName;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteGrammarOptions builder
+     */
+    public DeleteGrammarOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The deleteJob options.
    */
   public class DeleteJobOptions extends IBMWatsonOptionsModel {
@@ -3541,7 +3963,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the id.
      *
-     * The identifier of the asynchronous job that is to be used for the request.
+     * The identifier of the asynchronous job that is to be used for the request. You must make the request with
+     * credentials for the instance of the service that owns the job.
      *
      * @return the id
      */
@@ -3635,7 +4058,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -3823,7 +4246,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -3947,7 +4370,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -4042,7 +4465,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -4165,7 +4588,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -4278,6 +4701,129 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
+   * The getGrammar options.
+   */
+  public class GetGrammarOptions extends IBMWatsonOptionsModel {
+    private String customizationId;
+    private String grammarName;
+ 
+    /**
+     * Gets the customizationId.
+     *
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with credentials for the instance of the service that owns the custom model.
+     *
+     * @return the customizationId
+     */
+    public String customizationId() {
+      return customizationId;
+    }
+ 
+    /**
+     * Gets the grammarName.
+     *
+     * The name of the grammar for the custom language model.
+     *
+     * @return the grammarName
+     */
+    public String grammarName() {
+      return grammarName;
+    }
+
+    private GetGrammarOptions(GetGrammarOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.grammarName, 'grammarName cannot be empty');
+      customizationId = builder.customizationId;
+      grammarName = builder.grammarName;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetGrammarOptions builder
+     */
+    public GetGrammarOptionsBuilder newBuilder() {
+      return new GetGrammarOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetGrammarOptions Builder.
+   */
+  public class GetGrammarOptionsBuilder extends IBMWatsonOptionsModel {
+    private String customizationId;
+    private String grammarName;
+
+    private GetGrammarOptionsBuilder(GetGrammarOptions getGrammarOptions) {
+      customizationId = getGrammarOptions.customizationId;
+      grammarName = getGrammarOptions.grammarName;
+      this.requestHeaders.putAll(getGrammarOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetGrammarOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param customizationId the customizationId
+     * @param grammarName the grammarName
+     */
+    public GetGrammarOptionsBuilder(String customizationId, String grammarName) {
+      this.customizationId = customizationId;
+      this.grammarName = grammarName;
+    }
+
+    /**
+     * Builds a GetGrammarOptions.
+     *
+     * @return the getGrammarOptions
+     */
+    public GetGrammarOptions build() {
+      return new GetGrammarOptions(this);
+    }
+
+    /**
+     * Set the customizationId.
+     *
+     * @param customizationId the customizationId
+     * @return the GetGrammarOptions builder
+     */
+    public GetGrammarOptionsBuilder customizationId(String customizationId) {
+      this.customizationId = customizationId;
+      return this;
+    }
+
+    /**
+     * Set the grammarName.
+     *
+     * @param grammarName the grammarName
+     * @return the GetGrammarOptions builder
+     */
+    public GetGrammarOptionsBuilder grammarName(String grammarName) {
+      this.grammarName = grammarName;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetGrammarOptions builder
+     */
+    public GetGrammarOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The getLanguageModel options.
    */
   public class GetLanguageModelOptions extends IBMWatsonOptionsModel {
@@ -4287,7 +4833,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -4475,7 +5021,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -4586,6 +5132,170 @@ public class IBMSpeechToTextV1Models {
     public GetWordOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
+    }
+  }
+
+  /**
+   * Grammar.
+   */
+  public class Grammar extends IBMWatsonResponseModel {
+    private String name_serialized_name;
+    private Long out_of_vocabulary_words_serialized_name;
+    private String status_serialized_name;
+    private String error_serialized_name;
+ 
+    /**
+     * Gets the name.
+     *
+     * The name of the grammar.
+     *
+     * @return the name
+     */
+    @AuraEnabled
+    public String getName() {
+      return name_serialized_name;
+    }
+ 
+    /**
+     * Gets the outOfVocabularyWords.
+     *
+     * The number of OOV words in the grammar. The value is `0` while the grammar is being processed.
+     *
+     * @return the outOfVocabularyWords
+     */
+    @AuraEnabled
+    public Long getOutOfVocabularyWords() {
+      return out_of_vocabulary_words_serialized_name;
+    }
+ 
+    /**
+     * Gets the status.
+     *
+     * The status of the grammar:
+     * * `analyzed`: The service successfully analyzed the grammar. The custom model can be trained with data from the
+     * grammar.
+     * * `being_processed`: The service is still analyzing the grammar. The service cannot accept requests to add new
+     * resources or to train the custom model.
+     * * `undetermined`: The service encountered an error while processing the grammar. The `error` field describes the
+     * failure.
+     *
+     * @return the status
+     */
+    @AuraEnabled
+    public String getStatus() {
+      return status_serialized_name;
+    }
+ 
+    /**
+     * Gets the error.
+     *
+     * If the status of the grammar is `undetermined`, the following message: `Analysis of grammar '{grammar_name}'
+     * failed. Please try fixing the error or adding the grammar again by setting the 'allow_overwrite' flag to
+     * 'true'.`.
+     *
+     * @return the error
+     */
+    @AuraEnabled
+    public String getError() {
+      return error_serialized_name;
+    }
+
+    /**
+     * Sets the name.
+     *
+     * @param name the new name
+     */
+    public void setName(final String name) {
+      this.name_serialized_name = name;
+    }
+
+    /**
+     * Sets the outOfVocabularyWords.
+     *
+     * @param outOfVocabularyWords the new outOfVocabularyWords
+     */
+    public void setOutOfVocabularyWords(final long outOfVocabularyWords) {
+      this.out_of_vocabulary_words_serialized_name = outOfVocabularyWords;
+    }
+
+    /**
+     * Sets the status.
+     *
+     * @param status the new status
+     */
+    public void setStatus(final String status) {
+      this.status_serialized_name = status;
+    }
+
+    /**
+     * Sets the error.
+     *
+     * @param error the new error
+     */
+    public void setError(final String error) {
+      this.error_serialized_name = error;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Grammar ret = (Grammar) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Grammars.
+   */
+  public class Grammars extends IBMWatsonResponseModel {
+    private List<Grammar> grammars_serialized_name;
+ 
+    /**
+     * Gets the grammars.
+     *
+     * An array of `Grammar` objects that provides information about the grammars for the custom model. The array is
+     * empty if the custom model has no grammars.
+     *
+     * @return the grammars
+     */
+    @AuraEnabled
+    public List<Grammar> getGrammars() {
+      return grammars_serialized_name;
+    }
+
+    /**
+     * Sets the grammars.
+     *
+     * @param grammars the new grammars
+     */
+    public void setGrammars(final List<Grammar> grammars) {
+      this.grammars_serialized_name = grammars;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Grammars ret = (Grammars) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for grammars
+      List<Grammar> newGrammars = new List<Grammar>();
+      List<Grammar> deserializedGrammars = ret.getGrammars();
+      if (deserializedGrammars != null) {
+        for (Integer i = 0; i < deserializedGrammars.size(); i++) {
+          Grammar currentItem = ret.getGrammars().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('grammars_serialized_name');
+          Grammar newItem = (Grammar) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Grammar.class);
+          newGrammars.add(newItem);
+        }
+        ret.setGrammars(newGrammars);
+      }
+
+      return ret;
     }
   }
 
@@ -4708,6 +5418,7 @@ public class IBMSpeechToTextV1Models {
     private String base_model_name_serialized_name;
     private String status_serialized_name;
     private Long progress_serialized_name;
+    private String error_serialized_name;
     private String warnings_serialized_name;
  
     /**
@@ -4782,7 +5493,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the owner.
      *
-     * The GUID of the service credentials for the instance of the service that owns the custom language model.
+     * The GUID of the credentials for the instance of the service that owns the custom language model.
      *
      * @return the owner
      */
@@ -4831,13 +5542,13 @@ public class IBMSpeechToTextV1Models {
      * Gets the status.
      *
      * The current status of the custom language model:
-     * * `pending` indicates that the model was created but is waiting either for training data to be added or for the
-     * service to finish analyzing added data.
-     * * `ready` indicates that the model contains data and is ready to be trained.
-     * * `training` indicates that the model is currently being trained.
-     * * `available` indicates that the model is trained and ready to use.
-     * * `upgrading` indicates that the model is currently being upgraded.
-     * * `failed` indicates that training of the model failed.
+     * * `pending`: The model was created but is waiting either for training data to be added or for the service to
+     * finish analyzing added data.
+     * * `ready`: The model contains data and is ready to be trained.
+     * * `training`: The model is currently being trained.
+     * * `available`: The model is trained and ready to use.
+     * * `upgrading`: The model is currently being upgraded.
+     * * `failed`: Training of the model failed.
      *
      * @return the status
      */
@@ -4858,6 +5569,20 @@ public class IBMSpeechToTextV1Models {
     @AuraEnabled
     public Long getProgress() {
       return progress_serialized_name;
+    }
+ 
+    /**
+     * Gets the error.
+     *
+     * If an error occurred while adding a grammar file to the custom language model, a message that describes an
+     * `Internal Server Error` and includes the string `Cannot compile grammar`. The status of the custom model is not
+     * affected by the error, but the grammar cannot be used with the model.
+     *
+     * @return the error
+     */
+    @AuraEnabled
+    public String getError() {
+      return error_serialized_name;
     }
  
     /**
@@ -4973,6 +5698,15 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
+     * Sets the error.
+     *
+     * @param error the new error
+     */
+    public void setError(final String error) {
+      this.error_serialized_name = error;
+    }
+
+    /**
      * Sets the warnings.
      *
      * @param warnings the new warnings
@@ -5001,9 +5735,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the customizations.
      *
-     * An array of objects that provides information about each available custom language model. The array is empty if
-     * the requesting service credentials own no custom language models (if no language is specified) or own no custom
-     * language models for the specified language.
+     * An array of `LanguageModel` objects that provides information about each available custom language model. The
+     * array is empty if the requesting credentials own no custom language models (if no language is specified) or own
+     * no custom language models for the specified language.
      *
      * @return the customizations
      */
@@ -5055,8 +5789,8 @@ public class IBMSpeechToTextV1Models {
      * Gets the language.
      *
      * The identifier of the language for which custom language or custom acoustic models are to be returned (for
-     * example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the
-     * requesting service credentials.
+     * example, `en-US`). Omit the parameter to see all custom language or custom acoustic models that are owned by the
+     * requesting credentials.
      *
      * @return the language
      */
@@ -5140,7 +5874,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -5234,7 +5968,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -5319,6 +6053,100 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
+   * The listGrammars options.
+   */
+  public class ListGrammarsOptions extends IBMWatsonOptionsModel {
+    private String customizationId;
+ 
+    /**
+     * Gets the customizationId.
+     *
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with credentials for the instance of the service that owns the custom model.
+     *
+     * @return the customizationId
+     */
+    public String customizationId() {
+      return customizationId;
+    }
+
+    private ListGrammarsOptions(ListGrammarsOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ListGrammarsOptions builder
+     */
+    public ListGrammarsOptionsBuilder newBuilder() {
+      return new ListGrammarsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * ListGrammarsOptions Builder.
+   */
+  public class ListGrammarsOptionsBuilder extends IBMWatsonOptionsModel {
+    private String customizationId;
+
+    private ListGrammarsOptionsBuilder(ListGrammarsOptions listGrammarsOptions) {
+      customizationId = listGrammarsOptions.customizationId;
+      this.requestHeaders.putAll(listGrammarsOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ListGrammarsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param customizationId the customizationId
+     */
+    public ListGrammarsOptionsBuilder(String customizationId) {
+      this.customizationId = customizationId;
+    }
+
+    /**
+     * Builds a ListGrammarsOptions.
+     *
+     * @return the listGrammarsOptions
+     */
+    public ListGrammarsOptions build() {
+      return new ListGrammarsOptions(this);
+    }
+
+    /**
+     * Set the customizationId.
+     *
+     * @param customizationId the customizationId
+     * @return the ListGrammarsOptions builder
+     */
+    public ListGrammarsOptionsBuilder customizationId(String customizationId) {
+      this.customizationId = customizationId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListGrammarsOptions builder
+     */
+    public ListGrammarsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The listLanguageModels options.
    */
   public class ListLanguageModelsOptions extends IBMWatsonOptionsModel {
@@ -5328,8 +6156,8 @@ public class IBMSpeechToTextV1Models {
      * Gets the language.
      *
      * The identifier of the language for which custom language or custom acoustic models are to be returned (for
-     * example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned by the
-     * requesting service credentials.
+     * example, `en-US`). Omit the parameter to see all custom language or custom acoustic models that are owned by the
+     * requesting credentials.
      *
      * @return the language
      */
@@ -5472,7 +6300,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -5485,8 +6313,9 @@ public class IBMSpeechToTextV1Models {
      *
      * The type of words to be listed from the custom language model's words resource:
      * * `all` (the default) shows all words.
-     * * `user` shows only custom words that were added or modified by the user.
+     * * `user` shows only custom words that were added or modified by the user directly.
      * * `corpora` shows only OOV that were extracted from corpora.
+     * * `grammars` shows only OOV words that are recognized by grammars.
      *
      * @return the wordType
      */
@@ -5648,7 +6477,7 @@ public class IBMSpeechToTextV1Models {
      * service has the capacity to begin processing it.
      * * `processing`: The service is actively processing the job.
      * * `completed`: The service has finished processing the job. If the job specified a callback URL and the event
-     * `recognitions.completed_with_results`, the service sent the results with the callback notification; otherwise,
+     * `recognitions.completed_with_results`, the service sent the results with the callback notification. Otherwise,
      * you must retrieve the results by checking the individual job.
      * * `failed`: The job failed.
      *
@@ -5845,8 +6674,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the recognitions.
      *
-     * An array of objects that provides the status for each of the user's current jobs. The array is empty if the user
-     * has no current jobs.
+     * An array of `RecognitionJob` objects that provides the status for each of the user's current jobs. The array is
+     * empty if the user has no current jobs.
      *
      * @return the recognitions
      */
@@ -5910,6 +6739,8 @@ public class IBMSpeechToTextV1Models {
     private Boolean smartFormatting;
     private Boolean speakerLabels;
     private String customizationId;
+    private String grammarName;
+    private Boolean redaction;
  
     /**
      * Gets the audio.
@@ -5937,7 +6768,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the model.
      *
-     * The identifier of the model that is to be used for the recognition request.
+     * The identifier of the model that is to be used for the recognition request. See [Languages and
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/models.html).
      *
      * @return the model
      */
@@ -5950,8 +6782,9 @@ public class IBMSpeechToTextV1Models {
      *
      * The customization ID (GUID) of a custom language model that is to be used with the recognition request. The base
      * model of the specified custom language model must match the model specified with the `model` parameter. You must
-     * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom language model is used. See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
+     * make the request with credentials for the instance of the service that owns the custom model. By default, no
+     * custom language model is used. See [Custom
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      *
      * **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      *
@@ -5966,8 +6799,9 @@ public class IBMSpeechToTextV1Models {
      *
      * The customization ID (GUID) of a custom acoustic model that is to be used with the recognition request. The base
      * model of the specified custom acoustic model must match the model specified with the `model` parameter. You must
-     * make the request with service credentials created for the instance of the service that owns the custom model. By
-     * default, no custom acoustic model is used. See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
+     * make the request with credentials for the instance of the service that owns the custom model. By default, no
+     * custom acoustic model is used. See [Custom
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      *
      * @return the acousticCustomizationId
      */
@@ -6018,7 +6852,8 @@ public class IBMSpeechToTextV1Models {
      *
      * The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
      * closed with a 400 error. The parameter is useful for stopping audio submission from a live microphone when a user
-     * simply walks away. Use `-1` for infinity. See [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts).
+     * simply walks away. Use `-1` for infinity. See
+     * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts).
      *
      * @return the inactivityTimeout
      */
@@ -6045,9 +6880,10 @@ public class IBMSpeechToTextV1Models {
      * Gets the keywordsThreshold.
      *
      * A confidence value that is the lower bound for spotting a keyword. A word is considered to match a keyword if its
-     * confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. No keyword
-     * spotting is performed if you omit the parameter. If you specify a threshold, you must also specify one or more
-     * keywords. See [Keyword spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
+     * confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. If you specify a
+     * threshold, you must also specify one or more keywords. The service performs no keyword spotting if you omit
+     * either parameter. See [Keyword
+     * spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
      *
      * @return the keywordsThreshold
      */
@@ -6058,8 +6894,9 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the maxAlternatives.
      *
-     * The maximum number of alternative transcripts that the service is to return. By default, a single transcription
-     * is returned. See [Maximum alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
+     * The maximum number of alternative transcripts that the service is to return. By default, the service returns a
+     * single transcript. See [Maximum
+     * alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
      *
      * @return the maxAlternatives
      */
@@ -6072,8 +6909,8 @@ public class IBMSpeechToTextV1Models {
      *
      * A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also
      * known as "Confusion Networks"). An alternative word is considered if its confidence is greater than or equal to
-     * the threshold. Specify a probability between 0.0 and 1.0. No alternative words are computed if you omit the
-     * parameter. See [Word alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives).
+     * the threshold. Specify a probability between 0.0 and 1.0. By default, the service computes no alternative words.
+     * See [Word alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives).
      *
      * @return the wordAlternativesThreshold
      */
@@ -6084,8 +6921,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the wordConfidence.
      *
-     * If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for each word. By default, no word
-     * confidence measures are returned. See [Word
+     * If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for each word. By default, the
+     * service returns no word confidence scores. See [Word
      * confidence](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence).
      *
      * @return the wordConfidence
@@ -6125,9 +6962,12 @@ public class IBMSpeechToTextV1Models {
      *
      * If `true`, the service converts dates, times, series of digits and numbers, phone numbers, currency values, and
      * internet addresses into more readable, conventional representations in the final transcript of a recognition
-     * request. For US English, the service also converts certain keyword strings to punctuation symbols. By default, no
-     * smart formatting is performed. Applies to US English, Japanese, and Spanish transcription only. See [Smart
-     * formatting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting).
+     * request. For US English, the service also converts certain keyword strings to punctuation symbols. By default,
+     * the service performs no smart formatting.
+     *
+     * **Note:** Applies to US English, Japanese, and Spanish transcription only.
+     *
+     * See [Smart formatting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting).
      *
      * @return the smartFormatting
      */
@@ -6139,12 +6979,14 @@ public class IBMSpeechToTextV1Models {
      * Gets the speakerLabels.
      *
      * If `true`, the response includes labels that identify which words were spoken by which participants in a
-     * multi-person exchange. By default, no speaker labels are returned. Setting `speaker_labels` to `true` forces the
-     * `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
+     * multi-person exchange. By default, the service returns no speaker labels. Setting `speaker_labels` to `true`
+     * forces the `timestamps` parameter to be `true`, regardless of whether you specify `false` for the parameter.
      *
-     * To determine whether a language model supports speaker labels, use the **Get a model** method and check that the
-     * attribute `speaker_labels` is set to `true`. See [Speaker
-     * labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
+     * **Note:** Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
+     * supports speaker labels, you can also use the **Get a model** method and check that the attribute
+     * `speaker_labels` is set to `true`.
+     *
+     * See [Speaker labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
      *
      * @return the speakerLabels
      */
@@ -6162,6 +7004,43 @@ public class IBMSpeechToTextV1Models {
      */
     public String customizationId() {
       return customizationId;
+    }
+ 
+    /**
+     * Gets the grammarName.
+     *
+     * The name of a grammar that is to be used with the recognition request. If you specify a grammar, you must also
+     * use the `language_customization_id` parameter to specify the name of the custom language model for which the
+     * grammar is defined. The service recognizes only strings that are recognized by the specified grammar; it does not
+     * recognize other custom words from the model's words resource. See
+     * [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/output.html).
+     *
+     * @return the grammarName
+     */
+    public String grammarName() {
+      return grammarName;
+    }
+ 
+    /**
+     * Gets the redaction.
+     *
+     * If `true`, the service redacts, or masks, numeric data from final transcripts. The feature redacts any number
+     * that has three or more consecutive digits by replacing each digit with an `X` character. It is intended to redact
+     * sensitive numeric data, such as credit card numbers. By default, the service performs no redaction.
+     *
+     * When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+     * explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+     * the `keywords` and `keywords_threshold` parameters) and returns only a single final transcript (forces the
+     * `max_alternatives` parameter to be `1`).
+     *
+     * **Note:** Applies to US English, Japanese, and Korean transcription only.
+     *
+     * See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
+     *
+     * @return the redaction
+     */
+    public Boolean redaction() {
+      return redaction;
     }
 
     private RecognizeOptions(RecognizeOptionsBuilder builder) {
@@ -6184,6 +7063,8 @@ public class IBMSpeechToTextV1Models {
       smartFormatting = builder.smartFormatting;
       speakerLabels = builder.speakerLabels;
       customizationId = builder.customizationId;
+      grammarName = builder.grammarName;
+      redaction = builder.redaction;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -6220,6 +7101,8 @@ public class IBMSpeechToTextV1Models {
     private Boolean smartFormatting;
     private Boolean speakerLabels;
     private String customizationId;
+    private String grammarName;
+    private Boolean redaction;
 
     private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
       audio = recognizeOptions.audio;
@@ -6240,6 +7123,8 @@ public class IBMSpeechToTextV1Models {
       smartFormatting = recognizeOptions.smartFormatting;
       speakerLabels = recognizeOptions.speakerLabels;
       customizationId = recognizeOptions.customizationId;
+      grammarName = recognizeOptions.grammarName;
+      redaction = recognizeOptions.redaction;
       this.requestHeaders.putAll(recognizeOptions.requestHeaders());
     }
 
@@ -6495,6 +7380,28 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
+     * Set the grammarName.
+     *
+     * @param grammarName the grammarName
+     * @return the RecognizeOptions builder
+     */
+    public RecognizeOptionsBuilder grammarName(String grammarName) {
+      this.grammarName = grammarName;
+      return this;
+    }
+
+    /**
+     * Set the redaction.
+     *
+     * @param redaction the redaction
+     * @return the RecognizeOptions builder
+     */
+    public RecognizeOptionsBuilder redaction(Boolean redaction) {
+      this.redaction = redaction;
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -6642,8 +7549,8 @@ public class IBMSpeechToTextV1Models {
      * Gets the status.
      *
      * The current status of the job:
-     * * `created` if the callback URL was successfully white-listed as a result of the call.
-     * * `already created` if the URL was already white-listed.
+     * * `created`: The service successfully white-listed the callback URL as a result of the call.
+     * * `already created`: The URL was already white-listed.
      *
      * @return the status
      */
@@ -6703,7 +7610,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -6797,7 +7704,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -7173,7 +8080,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the models.
      *
-     * An array of objects that provides information about each available model.
+     * An array of `SpeechModel` objects that provides information about each available model.
      *
      * @return the models
      */
@@ -7699,7 +8606,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -7822,7 +8729,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -7835,9 +8742,9 @@ public class IBMSpeechToTextV1Models {
      *
      * The type of words from the custom language model's words resource on which to train the model:
      * * `all` (the default) trains the model on all new words, regardless of whether they were extracted from corpora
-     * or were added or modified by the user.
-     * * `user` trains the model only on new words that were added or modified by the user; the model is not trained on
-     * new words extracted from corpora.
+     * or grammars or were added or modified by the user.
+     * * `user` trains the model only on new words that were added or modified by the user directly. The model is not
+     * trained on new words extracted from corpora or grammars.
      *
      * @return the wordTypeToAdd
      */
@@ -8073,7 +8980,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom acoustic model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -8193,7 +9100,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the customizationId.
      *
      * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
-     * request with service credentials created for the instance of the service that owns the custom model.
+     * request with credentials for the instance of the service that owns the custom model.
      *
      * @return the customizationId
      */
@@ -8653,8 +9560,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the words.
      *
-     * An array of objects that provides information about each word in the custom model's words resource. The array is
-     * empty if the custom model has no words.
+     * An array of `Word` objects that provides information about each word in the custom model's words resource. The
+     * array is empty if the custom model has no words.
      *
      * @return the words
      */

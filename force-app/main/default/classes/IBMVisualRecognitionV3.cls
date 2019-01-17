@@ -95,7 +95,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    * **Important:** On April 2, 2018, the identity information in the response to calls to the Face model was removed.
    * The identity information refers to the `name` of the person, `score`, and `type_hierarchy` knowledge graph. For
    * details about the enhanced Face model, see the [Release
-   * notes](https://console.bluemix.net/docs/services/visual-recognition/release-notes.html#2april2018).
+   * notes](https://cloud.ibm.com/docs/services/visual-recognition/release-notes.html#2april2018).
    *
    * Analyze and get data about faces in images. Responses can include estimated age and gender. This feature uses a
    * built-in model, so no training is necessary. The Detect faces method does not support general biometric facial
@@ -112,6 +112,9 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     IBMWatsonValidator.isTrue((detectFacesOptions.imagesFile() != null) || (detectFacesOptions.url() != null), 'At least one of images_file or url must be supplied.');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/detect_faces');
     builder.addHeader('Accept', 'application/json');
+    if (detectFacesOptions.acceptLanguage() != null) {
+      builder.addHeader('Accept-Language', detectFacesOptions.acceptLanguage());
+    }
     Map<String, String> requestHeaders = (detectFacesOptions != null) ? detectFacesOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -251,7 +254,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    * Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to
    * existing classes. You must supply at least one set of positive or negative examples. For details, see [Updating
    * custom
-   * classifiers](https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).
+   * classifiers](https://cloud.ibm.com/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).
    *
    * Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
    * names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
@@ -328,7 +331,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    *
    * You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
    * For more information about personal data and customer IDs, see [Information
-   * security](https://console.bluemix.net/docs/services/visual-recognition/information-security.html).
+   * security](https://cloud.ibm.com/docs/services/visual-recognition/information-security.html).
    *
    * @param deleteUserDataOptions the {@link IBMVisualRecognitionV3Models.DeleteUserDataOptions} containing the options for the call
    * @return the service call

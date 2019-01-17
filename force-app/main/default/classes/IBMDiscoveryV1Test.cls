@@ -1892,6 +1892,10 @@ private class IBMDiscoveryV1Test {
     details.setSiteCollectionPath('site_collection_path');
     details.setUrl(url);
     details.setUsername(username);
+    details.setGatewayId('gateway_id');
+    details.setSourceVersion('source_version');
+    details.setWebApplicationUrl('web_application_url');
+    details.setDomain('domain');
     IBMDiscoveryV1Models.Credentials credentials = new IBMDiscoveryV1Models.Credentials();
     credentials.setSourceType(sourceType);
     credentials.setCredentialDetails(details);
@@ -2461,5 +2465,317 @@ private class IBMDiscoveryV1Test {
     discovery.deleteTokenizationDictionary(deleteOptions);
 
     Test.stopTest();
+  }
+
+  static testMethod void testCreateStopwordListOptions() {
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String testFilename = 'test_filename';
+    IBMWatsonFile testfile= new IBMWatsonFile.FileBuilder()
+      .body(Blob.valueOf('test string'))
+      .contentType('text/plain')
+      .build();
+
+    IBMDiscoveryV1Models.CreateStopwordListOptions createStopwordListOptions = new IBMDiscoveryV1Models.CreateStopwordListOptionsBuilder()
+        .environmentId(environmentId)
+        .collectionId(collectionId)
+        .stopwordFile(testfile)
+        .stopwordFilename(testFilename)
+        .build();
+    createStopwordListOptions = createStopwordListOptions.newBuilder().build();
+
+    System.assertEquals(environmentId, createStopwordListOptions.environmentId());
+    System.assertEquals(collectionId, createStopwordListOptions.collectionId());
+    System.assertEquals(testfile, createStopwordListOptions.stopwordFile());
+    System.assertEquals(testFilename, createStopwordListOptions.stopwordFilename());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testCreateStopwordList() {
+    String body = IBMWatsonMockResponses.tokenDictStatusResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+    String testFilename = 'test_filename';
+    IBMWatsonFile testfile= new IBMWatsonFile.FileBuilder()
+      .body(Blob.valueOf('test string'))
+      .contentType('text/plain')
+      .build();
+
+    IBMDiscoveryV1Models.CreateStopwordListOptions createStopwordListOptions = new IBMDiscoveryV1Models.CreateStopwordListOptionsBuilder()
+        .environmentId(environmentId)
+        .collectionId(collectionId)
+        .stopwordFile(testfile)
+        .stopwordFilename(testFilename)
+        .build();
+    IBMDiscoveryV1Models.TokenDictStatusResponse response = discovery.createStopwordList(createStopwordListOptions);
+
+    System.assertEquals('active', response.getStatus());
+    System.assertEquals('tokenization_dictionary', response.getXtype());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testDeleteStopwordListOptions() {
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.DeleteStopwordListOptions deleteStopwordListOptions = new IBMDiscoveryV1Models.DeleteStopwordListOptionsBuilder()
+        .environmentId(environmentId)
+        .collectionId(collectionId)
+        .build();
+    deleteStopwordListOptions = deleteStopwordListOptions.newBuilder().build();
+
+    System.assertEquals(environmentId, deleteStopwordListOptions.environmentId());
+    System.assertEquals(collectionId, deleteStopwordListOptions.collectionId());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testDeleteStopwordList() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.DeleteStopwordListOptions deleteStopwordListOptions = new IBMDiscoveryV1Models.DeleteStopwordListOptionsBuilder()
+        .environmentId(environmentId)
+        .collectionId(collectionId)
+        .build();
+    discovery.deleteStopwordList(deleteStopwordListOptions);
+
+    Test.stopTest();
+  }
+
+  static testMethod void testCreateGatewayOptions() {
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String name = 'name';
+
+    IBMDiscoveryV1Models.CreateGatewayOptions createGatewayOptions = new IBMDiscoveryV1Models.CreateGatewayOptionsBuilder()
+        .environmentId(environmentId)
+        .name(name)
+        .build();
+    createGatewayOptions = createGatewayOptions.newBuilder().build();
+
+    System.assertEquals(environmentId, createGatewayOptions.environmentId());
+    System.assertEquals(name, createGatewayOptions.name());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testCreateGateway() {
+    String body = IBMWatsonMockResponses.gatewayResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String environmentId = 'environment_id';
+    String name = 'name';
+
+    String gatewayId = 'gateway_id';
+    String status = 'connected';
+    String token = 'token';
+    String tokenId = 'token_id';
+
+    IBMDiscoveryV1Models.CreateGatewayOptions createGatewayOptions = new IBMDiscoveryV1Models.CreateGatewayOptionsBuilder()
+        .environmentId(environmentId)
+        .name(name)
+        .build();
+    IBMDiscoveryV1Models.Gateway response = discovery.createGateway(createGatewayOptions);
+
+    System.assertEquals(gatewayId, response.getGatewayId());
+    System.assertEquals(name, response.getName());
+    System.assertEquals(status, response.getStatus());
+    System.assertEquals(token, response.getToken());
+    System.assertEquals(tokenId, response.getTokenId());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testDeleteGatewayOptions() {
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String gatewayId = 'gateway_id';
+
+    IBMDiscoveryV1Models.DeleteGatewayOptions deleteGatewayOptions = new IBMDiscoveryV1Models.DeleteGatewayOptionsBuilder()
+        .environmentId(environmentId)
+        .gatewayId(gatewayId)
+        .build();
+    deleteGatewayOptions = deleteGatewayOptions.newBuilder().build();
+
+    System.assertEquals(environmentId, deleteGatewayOptions.environmentId());
+    System.assertEquals(gatewayId, deleteGatewayOptions.gatewayId());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testDeleteGateway() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String environmentId = 'environment_id';
+    String gatewayId = 'gateway_id';
+
+    IBMDiscoveryV1Models.DeleteGatewayOptions deleteGatewayOptions = new IBMDiscoveryV1Models.DeleteGatewayOptionsBuilder()
+        .environmentId(environmentId)
+        .gatewayId(gatewayId)
+        .build();
+    discovery.deleteGateway(deleteGatewayOptions);
+
+    Test.stopTest();
+  }
+
+  static testMethod void testGetGatewayOptions() {
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String gatewayId = 'gateway_id';
+
+    IBMDiscoveryV1Models.GetGatewayOptions getGatewayOptions = new IBMDiscoveryV1Models.GetGatewayOptionsBuilder()
+        .environmentId(environmentId)
+        .gatewayId(gatewayId)
+        .build();
+    getGatewayOptions = getGatewayOptions.newBuilder().build();
+
+    System.assertEquals(environmentId, getGatewayOptions.environmentId());
+    System.assertEquals(gatewayId, getGatewayOptions.gatewayId());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testGetGateway() {
+    String body = IBMWatsonMockResponses.gatewayResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String environmentId = 'environment_id';
+    String gatewayId = 'gateway_id';
+
+    String name = 'name';
+    String status = 'connected';
+    String token = 'token';
+    String tokenId = 'token_id';
+
+    IBMDiscoveryV1Models.GetGatewayOptions getGatewayOptions = new IBMDiscoveryV1Models.GetGatewayOptionsBuilder()
+        .environmentId(environmentId)
+        .gatewayId(gatewayId)
+        .build();
+    IBMDiscoveryV1Models.Gateway response = discovery.getGateway(getGatewayOptions);
+
+    System.assertEquals(gatewayId, response.getGatewayId());
+    System.assertEquals(name, response.getName());
+    System.assertEquals(status, response.getStatus());
+    System.assertEquals(token, response.getToken());
+    System.assertEquals(tokenId, response.getTokenId());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testListGatewaysOptions() {
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+
+    IBMDiscoveryV1Models.ListGatewaysOptions listGatewaysOptions = new IBMDiscoveryV1Models.ListGatewaysOptionsBuilder()
+        .environmentId(environmentId)
+        .build();
+    listGatewaysOptions = listGatewaysOptions.newBuilder().build();
+
+    System.assertEquals(environmentId, listGatewaysOptions.environmentId());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testListGateways() {
+    String body = IBMWatsonMockResponses.listGatewaysResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String environmentId = 'environment_id';
+
+    String gatewayId = 'gateway_id_1';
+    String name = 'name';
+    String status = 'connected';
+    String token = 'token';
+    String tokenId = 'token_id';
+
+    IBMDiscoveryV1Models.ListGatewaysOptions listGatewaysOptions = new IBMDiscoveryV1Models.ListGatewaysOptionsBuilder()
+        .environmentId(environmentId)
+        .build();
+    IBMDiscoveryV1Models.GatewayList response = discovery.listGateways(listGatewaysOptions);
+
+    System.assertEquals(gatewayId, response.getGateways().get(0).getGatewayId());
+    System.assertEquals(name, response.getGateways().get(0).getName());
+    System.assertEquals(status, response.getGateways().get(0).getStatus());
+    System.assertEquals(token, response.getGateways().get(0).getToken());
+    System.assertEquals(tokenId, response.getGateways().get(0).getTokenId());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testSourceOptionsWebCrawl() {
+    String url = 'url';
+    String crawlSpeed = 'crawl_speed';
+    Long maximumHops = 1L;
+    Long requestTimeout = 2000L;
+
+    IBMDiscoveryV1Models.SourceOptionsWebCrawl sourceOptionsWebCrawl = new IBMDiscoveryV1Models.SourceOptionsWebCrawl();
+    sourceOptionsWebCrawl.setUrl(url);
+    sourceOptionsWebCrawl.setLimitToStartingHosts(true);
+    sourceOptionsWebCrawl.setCrawlSpeed(crawlSpeed);
+    sourceOptionsWebCrawl.setAllowUntrustedCertificate(true);
+    sourceOptionsWebCrawl.setMaximumHops(maximumHops);
+    sourceOptionsWebCrawl.setRequestTimeout(requestTimeout);
+    sourceOptionsWebCrawl.setOverrideRobotsTxt(true);
+
+    System.assertEquals(url, sourceOptionsWebCrawl.getUrl());
+    System.assert(sourceOptionsWebCrawl.getLimitToStartingHosts());
+    System.assertEquals(crawlSpeed, sourceOptionsWebCrawl.getCrawlSpeed());
+    System.assert(sourceOptionsWebCrawl.getAllowUntrustedCertificate());
+    System.assertEquals(maximumHops, sourceOptionsWebCrawl.getMaximumHops());
+    System.assertEquals(requestTimeout, sourceOptionsWebCrawl.getRequestTimeout());
+    System.assert(sourceOptionsWebCrawl.getOverrideRobotsTxt());
   }
 }

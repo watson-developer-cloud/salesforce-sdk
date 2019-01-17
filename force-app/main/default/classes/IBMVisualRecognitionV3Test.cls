@@ -98,6 +98,7 @@ private class IBMVisualRecognitionV3Test {
       .imagesFile(testfile)
       .imagesFilename(att.Name)
       .imagesFileContentType(att.ContentType)
+      .acceptLanguage('es')
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary
@@ -112,6 +113,7 @@ private class IBMVisualRecognitionV3Test {
     System.assertEquals(resp.getImages()[0].getFaces()[0].getAge().getScore(),0);
     System.assertEquals(resp.getImages()[0].getFaces()[0].getGender().getGender(), 'string');
     System.assertEquals(resp.getImages()[0].getFaces()[0].getGender().getScore(),0);
+    System.assertEquals('male', resp.getImages()[0].getFaces()[0].getGender().getGenderLabel());
     System.assertEquals(resp.getImages()[0].getFaces()[0].getFaceLocation().getWidth(),0);
     System.assertEquals(resp.getImages()[0].getFaces()[0].getFaceLocation().getHeight(),0);
     System.assertEquals(resp.getImages()[0].getFaces()[0].getFaceLocation().getLeft(),0);

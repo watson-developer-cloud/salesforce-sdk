@@ -32,6 +32,7 @@ private class IBMAssistantV2Test {
   private static String BRANCH_EXITED_REASON;
   private static String INFO;
   private static String BUTTON;
+  private static String USER_DEFINED;
 
   static {
     VERSION = '2018-09-20';
@@ -66,6 +67,7 @@ private class IBMAssistantV2Test {
     BRANCH_EXITED_REASON = 'completed';
     INFO = 'info';
     BUTTON = 'button';
+    USER_DEFINED = 'user_defined';
   }
 
   static testMethod void testCaptureGroup() {
@@ -317,6 +319,7 @@ private class IBMAssistantV2Test {
     System.assert(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput() != null);
     System.assertEquals(LABEL, response.getOutput().getGeneric().get(0).getSuggestions().get(0).getLabel());
     System.assert(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue() != null);
+    System.assertEquals(KEY_VAL, response.getOutput().getUserDefined());
     Test.stopTest();
   }
 
@@ -363,6 +366,17 @@ private class IBMAssistantV2Test {
         .sessionId(SESSION_ID)
         .build();
     service.deleteSession(deleteSessionOptions);
+
+    Test.stopTest();
+  }
+
+  static testMethod void testMessageContextSkill() {
+    Test.startTest();
+
+    IBMAssistantV2Models.MessageContextSkill messageContextSkill = new IBMAssistantV2Models.MessageContextSkill();
+    messageContextSkill.setUserDefined(USER_DEFINED);
+
+    System.assertEquals(USER_DEFINED, messageContextSkill.getUserDefined());
 
     Test.stopTest();
   }

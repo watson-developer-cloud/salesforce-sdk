@@ -624,6 +624,35 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
+   * Create stopword list.
+   *
+   * Upload a custom stopword list to use with the specified collection.
+   *
+   * @param createStopwordListOptions the {@link IBMDiscoveryV1Models.CreateStopwordListOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.TokenDictStatusResponse} with the response
+   */
+  public IBMDiscoveryV1Models.TokenDictStatusResponse createStopwordList(IBMDiscoveryV1Models.CreateStopwordListOptions createStopwordListOptions) {
+    IBMWatsonValidator.notNull(createStopwordListOptions, 'createStopwordListOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/word_lists/stopwords', new String[]{ createStopwordListOptions.environmentId(), createStopwordListOptions.collectionId() }));
+    builder.addHeader('Accept', 'application/json');
+    Map<String, String> requestHeaders = (createStopwordListOptions != null) ? createStopwordListOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    IBMWatsonRequestBody stopwordFileBody = IBMWatsonRequestBody.create(createStopwordListOptions.stopwordFile(), 'application/octet-stream');
+    multipartBuilder.addFormDataPart('stopword_file', createStopwordListOptions.stopwordFilename(), stopwordFileBody);
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
+
+    return (IBMDiscoveryV1Models.TokenDictStatusResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.TokenDictStatusResponse.class);
+  }
+
+  /**
    * Create tokenization dictionary.
    *
    * Upload a custom tokenization dictionary to use with the specified collection.
@@ -665,6 +694,30 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ deleteExpansionsOptions.environmentId(), deleteExpansionsOptions.collectionId() }));
     builder.addHeader('Accept', 'application/json');
     Map<String, String> requestHeaders = (deleteExpansionsOptions != null) ? deleteExpansionsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * Delete a custom stopword list.
+   *
+   * Delete a custom stopword list from the collection. After a custom stopword list is deleted, the default list is
+   * used for the collection.
+   *
+   * @param deleteStopwordListOptions the {@link IBMDiscoveryV1Models.DeleteStopwordListOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteStopwordList(IBMDiscoveryV1Models.DeleteStopwordListOptions deleteStopwordListOptions) {
+    IBMWatsonValidator.notNull(deleteStopwordListOptions, 'deleteStopwordListOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/word_lists/stopwords', new String[]{ deleteStopwordListOptions.environmentId(), deleteStopwordListOptions.collectionId() }));
+    builder.addHeader('Accept', 'application/json');
+    Map<String, String> requestHeaders = (deleteStopwordListOptions != null) ? deleteStopwordListOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
@@ -1944,6 +1997,103 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Credentials) createServiceCall(builder.build(), IBMDiscoveryV1Models.Credentials.class);
+  }
+
+  /**
+   * Create Gateway.
+   *
+   * Create a gateway configuration to use with a remotely installed gateway.
+   *
+   * @param createGatewayOptions the {@link IBMDiscoveryV1Models.CreateGatewayOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.Gateway} with the response
+   */
+  public IBMDiscoveryV1Models.Gateway createGateway(IBMDiscoveryV1Models.CreateGatewayOptions createGatewayOptions) {
+    IBMWatsonValidator.notNull(createGatewayOptions, 'createGatewayOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/environments/{0}/gateways', new String[]{ createGatewayOptions.environmentId() }));
+    builder.addHeader('Accept', 'application/json');
+    Map<String, String> requestHeaders = (createGatewayOptions != null) ? createGatewayOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    if (createGatewayOptions.name() != null) {
+      contentJson.put('name', createGatewayOptions.name());
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
+
+    return (IBMDiscoveryV1Models.Gateway) createServiceCall(builder.build(), IBMDiscoveryV1Models.Gateway.class);
+  }
+
+  /**
+   * Delete Gateway.
+   *
+   * Delete the specified gateway configuration.
+   *
+   * @param deleteGatewayOptions the {@link IBMDiscoveryV1Models.DeleteGatewayOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteGateway(IBMDiscoveryV1Models.DeleteGatewayOptions deleteGatewayOptions) {
+    IBMWatsonValidator.notNull(deleteGatewayOptions, 'deleteGatewayOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/gateways/{1}', new String[]{ deleteGatewayOptions.environmentId(), deleteGatewayOptions.gatewayId() }));
+    builder.addHeader('Accept', 'application/json');
+    Map<String, String> requestHeaders = (deleteGatewayOptions != null) ? deleteGatewayOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * List Gateway Details.
+   *
+   * List information about the specified gateway.
+   *
+   * @param getGatewayOptions the {@link IBMDiscoveryV1Models.GetGatewayOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.Gateway} with the response
+   */
+  public IBMDiscoveryV1Models.Gateway getGateway(IBMDiscoveryV1Models.GetGatewayOptions getGatewayOptions) {
+    IBMWatsonValidator.notNull(getGatewayOptions, 'getGatewayOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/gateways/{1}', new String[]{ getGatewayOptions.environmentId(), getGatewayOptions.gatewayId() }));
+    builder.addHeader('Accept', 'application/json');
+    Map<String, String> requestHeaders = (getGatewayOptions != null) ? getGatewayOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    return (IBMDiscoveryV1Models.Gateway) createServiceCall(builder.build(), IBMDiscoveryV1Models.Gateway.class);
+  }
+
+  /**
+   * List Gateways.
+   *
+   * List the currently configured gateways.
+   *
+   * @param listGatewaysOptions the {@link IBMDiscoveryV1Models.ListGatewaysOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.GatewayList} with the response
+   */
+  public IBMDiscoveryV1Models.GatewayList listGateways(IBMDiscoveryV1Models.ListGatewaysOptions listGatewaysOptions) {
+    IBMWatsonValidator.notNull(listGatewaysOptions, 'listGatewaysOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/gateways', new String[]{ listGatewaysOptions.environmentId() }));
+    builder.addHeader('Accept', 'application/json');
+    Map<String, String> requestHeaders = (listGatewaysOptions != null) ? listGatewaysOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    return (IBMDiscoveryV1Models.GatewayList) createServiceCall(builder.build(), IBMDiscoveryV1Models.GatewayList.class);
   }
 
 }

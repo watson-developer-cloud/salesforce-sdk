@@ -33,6 +33,7 @@ public with sharing class IBMDiscoveryV1FTests {
     testAddAndDeleteDocument(ENVIRONMENT_ID, COLLECTION_ID, username, password);
     // temporarily ignored because of service issues :/
     //testCredentialsOperations(ENVIRONMENT_ID, username, password);
+    testGatewayOperations(ENVIRONMENT_ID, username, password);
   }
 
   /**
@@ -1165,6 +1166,51 @@ public with sharing class IBMDiscoveryV1FTests {
           .build();
       discovery.deleteCollection(deleteCollectionOptions);
     }
+  }
+
+  public static void testGatewayOperations(String environmentId, String username, String password) {
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    if (username != null && password != null) {
+      discovery.setEndPoint(URL);
+      discovery.setUsernameAndPassword(username, password);
+    }
+
+    IBMDiscoveryV1Models.ListGatewaysOptions listGatewaysOptions = new IBMDiscoveryV1Models.ListGatewaysOptionsBuilder()
+        .environmentId(environmentId)
+        .build();
+    Long originalListSize = discovery.listGateways(listGatewaysOptions).getGateways().size();
+
+    String gatewayName = 'salesforce-sdk-test-gateway';
+
+    IBMDiscoveryV1Models.CreateGatewayOptions createGatewayOptions = new IBMDiscoveryV1Models.CreateGatewayOptionsBuilder()
+        .environmentId(environmentId)
+        .name(gatewayName)
+        .build();
+    IBMDiscoveryV1Models.Gateway gatewayResponse = discovery.createGateway(createGatewayOptions);
+    System.assert(gatewayResponse != null);
+    System.assertEquals(gatewayName, gatewayResponse.getName());
+    String testGatewayId = gatewayResponse.getGatewayId();
+
+    IBMDiscoveryV1Models.GatewayList listAfterCreate = discovery.listGateways(listGatewaysOptions);
+    System.assert(listAfterCreate != null);
+    System.assert(listAfterCreate.getGateways().size() > originalListSize);
+
+    IBMDiscoveryV1Models.GetGatewayOptions getGatewayOptions = new IBMDiscoveryV1Models.GetGatewayOptionsBuilder()
+        .environmentId(environmentId)
+        .gatewayId(testGatewayId)
+        .build();
+    IBMDiscoveryV1Models.Gateway getGatewayResponse = discovery.getGateway(getGatewayOptions);
+    System.assert(getGatewayResponse != null);
+    System.assertEquals(gatewayName, getGatewayResponse.getName());
+
+    IBMDiscoveryV1Models.DeleteGatewayOptions deleteGatewayOptions = new IBMDiscoveryV1Models.DeleteGatewayOptionsBuilder()
+        .environmentId(environmentId)
+        .gatewayId(testGatewayId)
+        .build();
+    discovery.deleteGateway(deleteGatewayOptions);
+
+    IBMDiscoveryV1Models.GatewayList listAfterDelete = discovery.listGateways(listGatewaysOptions);
+    System.assertEquals(originalListSize, listAfterDelete.getGateways().size());
   }
 
   public static Attachment createFile()
