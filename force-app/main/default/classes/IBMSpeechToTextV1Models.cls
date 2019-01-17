@@ -2417,6 +2417,8 @@ public class IBMSpeechToTextV1Models {
     private Boolean smartFormatting;
     private Boolean speakerLabels;
     private String customizationId;
+    private String grammarName;
+    private Boolean redaction;
  
     /**
      * Gets the audio.
@@ -2738,6 +2740,43 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
+ 
+    /**
+     * Gets the grammarName.
+     *
+     * The name of a grammar that is to be used with the recognition request. If you specify a grammar, you must also
+     * use the `language_customization_id` parameter to specify the name of the custom language model for which the
+     * grammar is defined. The service recognizes only strings that are recognized by the specified grammar; it does not
+     * recognize other custom words from the model's words resource. See
+     * [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/output.html).
+     *
+     * @return the grammarName
+     */
+    public String grammarName() {
+      return grammarName;
+    }
+ 
+    /**
+     * Gets the redaction.
+     *
+     * If `true`, the service redacts, or masks, numeric data from final transcripts. The feature redacts any number
+     * that has three or more consecutive digits by replacing each digit with an `X` character. It is intended to redact
+     * sensitive numeric data, such as credit card numbers. By default, the service performs no redaction.
+     *
+     * When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+     * explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+     * the `keywords` and `keywords_threshold` parameters) and returns only a single final transcript (forces the
+     * `max_alternatives` parameter to be `1`).
+     *
+     * **Note:** Applies to US English, Japanese, and Korean transcription only.
+     *
+     * See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
+     *
+     * @return the redaction
+     */
+    public Boolean redaction() {
+      return redaction;
+    }
 
     private CreateJobOptions(CreateJobOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.audio, 'audio cannot be null');
@@ -2763,6 +2802,8 @@ public class IBMSpeechToTextV1Models {
       smartFormatting = builder.smartFormatting;
       speakerLabels = builder.speakerLabels;
       customizationId = builder.customizationId;
+      grammarName = builder.grammarName;
+      redaction = builder.redaction;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2803,6 +2844,8 @@ public class IBMSpeechToTextV1Models {
     private Boolean smartFormatting;
     private Boolean speakerLabels;
     private String customizationId;
+    private String grammarName;
+    private Boolean redaction;
 
     private CreateJobOptionsBuilder(CreateJobOptions createJobOptions) {
       audio = createJobOptions.audio;
@@ -2827,6 +2870,8 @@ public class IBMSpeechToTextV1Models {
       smartFormatting = createJobOptions.smartFormatting;
       speakerLabels = createJobOptions.speakerLabels;
       customizationId = createJobOptions.customizationId;
+      grammarName = createJobOptions.grammarName;
+      redaction = createJobOptions.redaction;
       this.requestHeaders.putAll(createJobOptions.requestHeaders());
     }
 
@@ -3122,6 +3167,28 @@ public class IBMSpeechToTextV1Models {
      */
     public CreateJobOptionsBuilder customizationId(String customizationId) {
       this.customizationId = customizationId;
+      return this;
+    }
+
+    /**
+     * Set the grammarName.
+     *
+     * @param grammarName the grammarName
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder grammarName(String grammarName) {
+      this.grammarName = grammarName;
+      return this;
+    }
+
+    /**
+     * Set the redaction.
+     *
+     * @param redaction the redaction
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder redaction(Boolean redaction) {
+      this.redaction = redaction;
       return this;
     }
 
@@ -5167,6 +5234,59 @@ public class IBMSpeechToTextV1Models {
       return ret;
     }
   }
+
+  /**
+   * Grammars.
+   */
+  public class Grammars extends IBMWatsonResponseModel {
+    private List<Grammar> grammars_serialized_name;
+ 
+    /**
+     * Gets the grammars.
+     *
+     * An array of `Grammar` objects that provides information about the grammars for the custom model. The array is
+     * empty if the custom model has no grammars.
+     *
+     * @return the grammars
+     */
+    @AuraEnabled
+    public List<Grammar> getGrammars() {
+      return grammars_serialized_name;
+    }
+
+    /**
+     * Sets the grammars.
+     *
+     * @param grammars the new grammars
+     */
+    public void setGrammars(final List<Grammar> grammars) {
+      this.grammars_serialized_name = grammars;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Grammars ret = (Grammars) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for grammars
+      List<Grammar> newGrammars = new List<Grammar>();
+      List<Grammar> deserializedGrammars = ret.getGrammars();
+      if (deserializedGrammars != null) {
+        for (Integer i = 0; i < deserializedGrammars.size(); i++) {
+          Grammar currentItem = ret.getGrammars().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('grammars_serialized_name');
+          Grammar newItem = (Grammar) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Grammar.class);
+          newGrammars.add(newItem);
+        }
+        ret.setGrammars(newGrammars);
+      }
+
+      return ret;
+    }
+  }
+
   /**
    * KeywordResult.
    */
@@ -5891,6 +6011,100 @@ public class IBMSpeechToTextV1Models {
      * @return the ListCorporaOptions builder
      */
     public ListCorporaOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The listGrammars options.
+   */
+  public class ListGrammarsOptions extends IBMWatsonOptionsModel {
+    private String customizationId;
+ 
+    /**
+     * Gets the customizationId.
+     *
+     * The customization ID (GUID) of the custom language model that is to be used for the request. You must make the
+     * request with credentials for the instance of the service that owns the custom model.
+     *
+     * @return the customizationId
+     */
+    public String customizationId() {
+      return customizationId;
+    }
+
+    private ListGrammarsOptions(ListGrammarsOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      customizationId = builder.customizationId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ListGrammarsOptions builder
+     */
+    public ListGrammarsOptionsBuilder newBuilder() {
+      return new ListGrammarsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * ListGrammarsOptions Builder.
+   */
+  public class ListGrammarsOptionsBuilder extends IBMWatsonOptionsModel {
+    private String customizationId;
+
+    private ListGrammarsOptionsBuilder(ListGrammarsOptions listGrammarsOptions) {
+      customizationId = listGrammarsOptions.customizationId;
+      this.requestHeaders.putAll(listGrammarsOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ListGrammarsOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param customizationId the customizationId
+     */
+    public ListGrammarsOptionsBuilder(String customizationId) {
+      this.customizationId = customizationId;
+    }
+
+    /**
+     * Builds a ListGrammarsOptions.
+     *
+     * @return the listGrammarsOptions
+     */
+    public ListGrammarsOptions build() {
+      return new ListGrammarsOptions(this);
+    }
+
+    /**
+     * Set the customizationId.
+     *
+     * @param customizationId the customizationId
+     * @return the ListGrammarsOptions builder
+     */
+    public ListGrammarsOptionsBuilder customizationId(String customizationId) {
+      this.customizationId = customizationId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListGrammarsOptions builder
+     */
+    public ListGrammarsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -6741,6 +6955,43 @@ public class IBMSpeechToTextV1Models {
     public String customizationId() {
       return customizationId;
     }
+ 
+    /**
+     * Gets the grammarName.
+     *
+     * The name of a grammar that is to be used with the recognition request. If you specify a grammar, you must also
+     * use the `language_customization_id` parameter to specify the name of the custom language model for which the
+     * grammar is defined. The service recognizes only strings that are recognized by the specified grammar; it does not
+     * recognize other custom words from the model's words resource. See
+     * [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/output.html).
+     *
+     * @return the grammarName
+     */
+    public String grammarName() {
+      return grammarName;
+    }
+ 
+    /**
+     * Gets the redaction.
+     *
+     * If `true`, the service redacts, or masks, numeric data from final transcripts. The feature redacts any number
+     * that has three or more consecutive digits by replacing each digit with an `X` character. It is intended to redact
+     * sensitive numeric data, such as credit card numbers. By default, the service performs no redaction.
+     *
+     * When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+     * explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+     * the `keywords` and `keywords_threshold` parameters) and returns only a single final transcript (forces the
+     * `max_alternatives` parameter to be `1`).
+     *
+     * **Note:** Applies to US English, Japanese, and Korean transcription only.
+     *
+     * See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
+     *
+     * @return the redaction
+     */
+    public Boolean redaction() {
+      return redaction;
+    }
 
     private RecognizeOptions(RecognizeOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.audio, 'audio cannot be null');
@@ -6762,6 +7013,8 @@ public class IBMSpeechToTextV1Models {
       smartFormatting = builder.smartFormatting;
       speakerLabels = builder.speakerLabels;
       customizationId = builder.customizationId;
+      grammarName = builder.grammarName;
+      redaction = builder.redaction;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -6798,6 +7051,8 @@ public class IBMSpeechToTextV1Models {
     private Boolean smartFormatting;
     private Boolean speakerLabels;
     private String customizationId;
+    private String grammarName;
+    private Boolean redaction;
 
     private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
       audio = recognizeOptions.audio;
@@ -6818,6 +7073,8 @@ public class IBMSpeechToTextV1Models {
       smartFormatting = recognizeOptions.smartFormatting;
       speakerLabels = recognizeOptions.speakerLabels;
       customizationId = recognizeOptions.customizationId;
+      grammarName = recognizeOptions.grammarName;
+      redaction = recognizeOptions.redaction;
       this.requestHeaders.putAll(recognizeOptions.requestHeaders());
     }
 
@@ -7069,6 +7326,28 @@ public class IBMSpeechToTextV1Models {
      */
     public RecognizeOptionsBuilder customizationId(String customizationId) {
       this.customizationId = customizationId;
+      return this;
+    }
+
+    /**
+     * Set the grammarName.
+     *
+     * @param grammarName the grammarName
+     * @return the RecognizeOptions builder
+     */
+    public RecognizeOptionsBuilder grammarName(String grammarName) {
+      this.grammarName = grammarName;
+      return this;
+    }
+
+    /**
+     * Set the redaction.
+     *
+     * @param redaction the redaction
+     * @return the RecognizeOptions builder
+     */
+    public RecognizeOptionsBuilder redaction(Boolean redaction) {
+      this.redaction = redaction;
       return this;
     }
 
