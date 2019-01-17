@@ -2906,6 +2906,9 @@ public class IBMWatsonMockResponses {
           '],' +
           '"branch_exited": true,' +
           '"branch_exited_reason": "completed"' +
+        '},' +
+        '"user_defined": {' +
+          '"key": "value"' +
         '}' +
       '}' +
     '}';
