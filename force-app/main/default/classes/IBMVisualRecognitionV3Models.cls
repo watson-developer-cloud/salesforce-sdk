@@ -2124,6 +2124,7 @@ public class IBMVisualRecognitionV3Models {
    */
   public class FaceGender extends IBMWatsonGenericModel {
     private String gender_serialized_name;
+    private String gender_label_serialized_name;
     private Double score_serialized_name;
  
     /**
@@ -2136,6 +2137,18 @@ public class IBMVisualRecognitionV3Models {
     @AuraEnabled
     public String getGender() {
       return gender_serialized_name;
+    }
+ 
+    /**
+     * Gets the genderLabel.
+     *
+     * The word for "male" or "female" in the language defined by the **Accept-Language** request header.
+     *
+     * @return the genderLabel
+     */
+    @AuraEnabled
+    public String getGenderLabel() {
+      return gender_label_serialized_name;
     }
  
     /**
@@ -2158,6 +2171,15 @@ public class IBMVisualRecognitionV3Models {
      */
     public void setGender(final String gender) {
       this.gender_serialized_name = gender;
+    }
+
+    /**
+     * Sets the genderLabel.
+     *
+     * @param genderLabel the new genderLabel
+     */
+    public void setGenderLabel(final String genderLabel) {
+      this.gender_label_serialized_name = genderLabel;
     }
 
     /**
