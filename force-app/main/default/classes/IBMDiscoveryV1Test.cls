@@ -2484,6 +2484,7 @@ private class IBMDiscoveryV1Test {
         .stopwordFile(testfile)
         .stopwordFilename(testFilename)
         .build();
+    createStopwordListOptions = createStopwordListOptions.newBuilder().build();
 
     System.assertEquals(environmentId, createStopwordListOptions.environmentId());
     System.assertEquals(collectionId, createStopwordListOptions.collectionId());
@@ -2535,6 +2536,7 @@ private class IBMDiscoveryV1Test {
         .environmentId(environmentId)
         .collectionId(collectionId)
         .build();
+    deleteStopwordListOptions = deleteStopwordListOptions.newBuilder().build();
 
     System.assertEquals(environmentId, deleteStopwordListOptions.environmentId());
     System.assertEquals(collectionId, deleteStopwordListOptions.collectionId());
@@ -2574,6 +2576,7 @@ private class IBMDiscoveryV1Test {
         .environmentId(environmentId)
         .name(name)
         .build();
+    createGatewayOptions = createGatewayOptions.newBuilder().build();
 
     System.assertEquals(environmentId, createGatewayOptions.environmentId());
     System.assertEquals(name, createGatewayOptions.name());
@@ -2624,6 +2627,7 @@ private class IBMDiscoveryV1Test {
         .environmentId(environmentId)
         .gatewayId(gatewayId)
         .build();
+    deleteGatewayOptions = deleteGatewayOptions.newBuilder().build();
 
     System.assertEquals(environmentId, deleteGatewayOptions.environmentId());
     System.assertEquals(gatewayId, deleteGatewayOptions.gatewayId());
@@ -2663,6 +2667,7 @@ private class IBMDiscoveryV1Test {
         .environmentId(environmentId)
         .gatewayId(gatewayId)
         .build();
+    getGatewayOptions = getGatewayOptions.newBuilder().build();
 
     System.assertEquals(environmentId, getGatewayOptions.environmentId());
     System.assertEquals(gatewayId, getGatewayOptions.gatewayId());
@@ -2711,6 +2716,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.ListGatewaysOptions listGatewaysOptions = new IBMDiscoveryV1Models.ListGatewaysOptionsBuilder()
         .environmentId(environmentId)
         .build();
+    listGatewaysOptions = listGatewaysOptions.newBuilder().build();
 
     System.assertEquals(environmentId, listGatewaysOptions.environmentId());
 

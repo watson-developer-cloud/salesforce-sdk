@@ -1600,7 +1600,8 @@ public class IBMWatsonMockResponses {
                       '          }, ' +
                       '          "gender": {' +
                       '            "gender": "string", ' +
-                      '            "score": 0' +
+                      '            "score": 0,' +
+                      '            "gender_label": "male"' + 
                       '          }, ' +
                       '          "face_location": {' +
                       '            "width": 0, ' +
