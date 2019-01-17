@@ -1558,6 +1558,7 @@ public class IBMVisualRecognitionV3Models {
     private IBMWatsonFile imagesFile;
     private String imagesFilename;
     private String url;
+    private String acceptLanguage;
     private String imagesFileContentType;
  
     /**
@@ -1604,6 +1605,17 @@ public class IBMVisualRecognitionV3Models {
     }
  
     /**
+     * Gets the acceptLanguage.
+     *
+     * The language used for the value of `gender_label` in the response.
+     *
+     * @return the acceptLanguage
+     */
+    public String acceptLanguage() {
+      return acceptLanguage;
+    }
+ 
+    /**
      * Gets the imagesFileContentType.
      *
      * The content type of imagesFile.
@@ -1619,6 +1631,7 @@ public class IBMVisualRecognitionV3Models {
       imagesFile = builder.imagesFile;
       imagesFilename = builder.imagesFilename;
       url = builder.url;
+      acceptLanguage = builder.acceptLanguage;
       imagesFileContentType = builder.imagesFileContentType;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -1641,12 +1654,14 @@ public class IBMVisualRecognitionV3Models {
     private IBMWatsonFile imagesFile;
     private String imagesFilename;
     private String url;
+    private String acceptLanguage;
     private String imagesFileContentType;
 
     private DetectFacesOptionsBuilder(DetectFacesOptions detectFacesOptions) {
       imagesFile = detectFacesOptions.imagesFile;
       imagesFilename = detectFacesOptions.imagesFilename;
       url = detectFacesOptions.url;
+      acceptLanguage = detectFacesOptions.acceptLanguage;
       imagesFileContentType = detectFacesOptions.imagesFileContentType;
       this.requestHeaders.putAll(detectFacesOptions.requestHeaders());
     }
@@ -1696,6 +1711,17 @@ public class IBMVisualRecognitionV3Models {
      */
     public DetectFacesOptionsBuilder url(String url) {
       this.url = url;
+      return this;
+    }
+
+    /**
+     * Set the acceptLanguage.
+     *
+     * @param acceptLanguage the acceptLanguage
+     * @return the DetectFacesOptions builder
+     */
+    public DetectFacesOptionsBuilder acceptLanguage(String acceptLanguage) {
+      this.acceptLanguage = acceptLanguage;
       return this;
     }
 
