@@ -3686,4 +3686,29 @@ public class IBMWatsonMockResponses {
       ']' +
     '}';
   }
+
+  public static testMethod String listGrammarsResponse() {
+    return '{' +
+      '"grammars": [' +
+        '{' +
+          '"out_of_vocabulary_words": 10,' +
+          '"name": "name_1",' +
+          '"status": "analyzed"' +
+        '},' +
+        '{' +
+          '"out_of_vocabulary_words": 20,' +
+          '"name": "name_2",' +
+          '"status": "analyzed"' +
+        '}' +
+      ']' +
+    '}';
+  }
+
+  public static testMethod String getGrammarResponse() {
+    return '{' +
+      '"out_of_vocabulary_words": 10,' +
+      '"name": "grammar_name",' +
+      '"status": "analyzed"' +
+    '}';
+  }
 }

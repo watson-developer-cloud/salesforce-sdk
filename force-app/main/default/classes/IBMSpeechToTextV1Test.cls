@@ -957,4 +957,194 @@ private class IBMSpeechToTextV1Test {
 
     Test.stopTest();
   }
+
+  static testMethod void testAddGrammarOptions() {
+    Test.startTest();
+
+    String customizationId = 'id';
+    String grammarName = 'grammar_name';
+    IBMWatsonFile testfile= new IBMWatsonFile.FileBuilder()
+      .body(Blob.valueOf('test string'))
+      .contentType('text/plain')
+      .build();
+    String contentType = 'application/srgs';
+
+    IBMSpeechToTextV1Models.AddGrammarOptions addGrammarOptions = new IBMSpeechToTextV1Models.AddGrammarOptionsBuilder()
+        .customizationId(customizationId)
+        .grammarName(grammarName)
+        .grammarFile(testfile)
+        .contentType(contentType)
+        .allowOverwrite(true)
+        .build();
+
+    System.assertEquals(customizationId, addGrammarOptions.customizationId());
+    System.assertEquals(grammarName, addGrammarOptions.grammarName());
+    System.assertEquals(testfile, addGrammarOptions.grammarFile());
+    System.assertEquals(contentType, addGrammarOptions.contentType());
+    System.assert(addGrammarOptions.allowOverwrite());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testAddGrammar() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
+    speechToText.setUsernameAndPassword('username', 'password');
+
+    String customizationId = 'id';
+    String grammarName = 'grammar_name';
+    IBMWatsonFile testfile= new IBMWatsonFile.FileBuilder()
+      .body(Blob.valueOf('test string'))
+      .contentType('text/plain')
+      .build();
+    String contentType = 'application/srgs';
+
+    IBMSpeechToTextV1Models.AddGrammarOptions addGrammarOptions = new IBMSpeechToTextV1Models.AddGrammarOptionsBuilder()
+        .customizationId(customizationId)
+        .grammarName(grammarName)
+        .grammarFile(testfile)
+        .contentType(contentType)
+        .build();
+    speechToText.addGrammar(addGrammarOptions);
+
+    Test.stopTest();
+  }
+
+  static testMethod void testListGrammarsOptions() {
+    Test.startTest();
+
+    String customizationId = 'id';
+
+    IBMSpeechToTextV1Models.ListGrammarsOptions listGrammarsOptions = new IBMSpeechToTextV1Models.ListGrammarsOptionsBuilder()
+        .customizationId(customizationId)
+        .build();
+
+    System.assertEquals(customizationId, listGrammarsOptions.customizationId());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testListGrammars() {
+    String body = IBMWatsonMockResponses.listGrammarsResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
+    speechToText.setUsernameAndPassword('username', 'password');
+
+    String customizationId = 'id';
+
+    Long outOfVocabularyWords = 10L;
+    String name = 'name_1';
+    String status = 'analyzed';
+
+    IBMSpeechToTextV1Models.ListGrammarsOptions listGrammarsOptions = new IBMSpeechToTextV1Models.ListGrammarsOptionsBuilder()
+        .customizationId(customizationId)
+        .build();
+    IBMSpeechToTextV1Models.Grammars response = speechToText.listGrammars(listGrammarsOptions);
+
+    System.assertEquals(outOfVocabularyWords, response.getGrammars().get(0).getOutOfVocabularyWords());
+    System.assertEquals(name, response.getGrammars().get(0).getName());
+    System.assertEquals(status, response.getGrammars().get(0).getStatus());
+    System.assert(response.getGrammars().get(0).getError() == null);
+
+    Test.stopTest();
+  }
+
+  static testMethod void testGetGrammarOptions() {
+    Test.startTest();
+
+    String customizationId = 'id';
+    String grammarName = 'grammar_name';
+
+    IBMSpeechToTextV1Models.GetGrammarOptions getGrammarOptions = new IBMSpeechToTextV1Models.GetGrammarOptionsBuilder()
+        .customizationId(customizationId)
+        .grammarName(grammarName)
+        .build();
+
+    System.assertEquals(customizationId, getGrammarOptions.customizationId());
+    System.assertEquals(grammarName, getGrammarOptions.grammarName());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testGetGrammar() {
+    String body = IBMWatsonMockResponses.getGrammarResponse();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
+    speechToText.setUsernameAndPassword('username', 'password');
+
+    String customizationId = 'id';
+    String grammarName = 'grammar_name';
+
+    Long outOfVocabularyWords = 10L;
+    String status = 'analyzed';
+
+    IBMSpeechToTextV1Models.GetGrammarOptions getGrammarOptions = new IBMSpeechToTextV1Models.GetGrammarOptionsBuilder()
+        .customizationId(customizationId)
+        .grammarName(grammarName)
+        .build();
+    IBMSpeechToTextV1Models.Grammar response = speechToText.getGrammar(getGrammarOptions);
+
+    System.assertEquals(outOfVocabularyWords, response.getOutOfVocabularyWords());
+    System.assertEquals(grammarName, response.getName());
+    System.assertEquals(status, response.getStatus());
+    System.assert(response.getError() == null);
+
+    Test.stopTest();
+  }
+
+  static testMethod void testDeleteGrammarOptions() {
+    Test.startTest();
+
+    String customizationId = 'id';
+    String grammarName = 'grammar_name';
+
+    IBMSpeechToTextV1Models.DeleteGrammarOptions deleteGrammarOptions = new IBMSpeechToTextV1Models.DeleteGrammarOptionsBuilder()
+        .customizationId(customizationId)
+        .grammarName(grammarName)
+        .build();
+
+    System.assertEquals(customizationId, deleteGrammarOptions.customizationId());
+    System.assertEquals(grammarName, deleteGrammarOptions.grammarName());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testDeleteGrammar() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(
+      200,
+      'Success',
+      body,
+      null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
+    speechToText.setUsernameAndPassword('username', 'password');
+
+    String customizationId = 'id';
+    String grammarName = 'grammar_name';
+
+    IBMSpeechToTextV1Models.DeleteGrammarOptions deleteGrammarOptions = new IBMSpeechToTextV1Models.DeleteGrammarOptionsBuilder()
+        .customizationId(customizationId)
+        .grammarName(grammarName)
+        .build();
+    speechToText.deleteGrammar(deleteGrammarOptions);
+
+    Test.stopTest();
+  }
 }
