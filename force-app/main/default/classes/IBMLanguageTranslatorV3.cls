@@ -20,7 +20,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    *        calls from failing when the service introduces breaking changes.
    */
   public IBMLanguageTranslatorV3(String versionDate) {
-    super('watson_language_translator_v3');
+    super('language_translator', 'v3');
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');

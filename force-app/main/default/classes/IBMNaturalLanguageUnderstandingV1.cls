@@ -3,8 +3,8 @@
  * Language Understanding will give you results for the features you request. The service cleans HTML content before
  * analysis by default, so the results can ignore most advertisements and other unwanted content.
  *
- * You can create [custom models](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) with Watson Knowledge
- * Studio to detect custom entities and relations in Natural Language Understanding.
+ * You can create [custom models](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html)
+ * with Watson Knowledge Studio to detect custom entities and relations in Natural Language Understanding.
  *
  * @version V1
  * @see <a href="http://www.ibm.com/watson/developercloud/natural-language-understanding.html">Natural Language Understanding</a>
@@ -22,7 +22,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
    *        calls from failing when the service introduces breaking changes.
    */
   public IBMNaturalLanguageUnderstandingV1(String versionDate) {
-    super('watson_natural_language_understanding_v1');
+    super('natural_language_understanding', 'v1');
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
@@ -146,8 +146,9 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
   /**
    * List models.
    *
-   * Lists Watson Knowledge Studio [custom models](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) that
-   * are deployed to your Natural Language Understanding service.
+   * Lists Watson Knowledge Studio [custom
+   * models](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) that are deployed to
+   * your Natural Language Understanding service.
    *
    * @param listModelsOptions the {@link IBMNaturalLanguageUnderstandingV1Models.ListModelsOptions} containing the options for the call
    * @return the {@link IBMNaturalLanguageUnderstandingV1Models.ListModelsResults} with the response

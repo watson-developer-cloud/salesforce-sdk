@@ -18,7 +18,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
    *        calls from failing when the service introduces breaking changes.
    */
   public IBMCompareComplyV1(String versionDate) {
-    super('watson_compare_comply_v1');
+    super('compare_comply' , 'v1');
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');

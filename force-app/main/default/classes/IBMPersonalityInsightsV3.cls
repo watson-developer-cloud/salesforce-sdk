@@ -31,7 +31,7 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    *        calls from failing when the service introduces breaking changes.
    */
   public IBMPersonalityInsightsV3(String versionDate) {
-    super('watson_personality_insights_v3');
+    super('personality_insights', 'v3');
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
@@ -89,7 +89,8 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    * When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the character
    * encoding of the input text; for example, `Content-Type: text/plain;charset=utf-8`.
    *
-   * **See also:** [Specifying request and response formats](https://cloud.ibm.com/docs/services/personality-insights/input.html#formats)
+   * **See also:** [Specifying request and response
+   * formats](https://cloud.ibm.com/docs/services/personality-insights/input.html#formats)
    *
    * ### Accept types
    *
@@ -160,7 +161,8 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
    * When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the character
    * encoding of the input text; for example, `Content-Type: text/plain;charset=utf-8`.
    *
-   * **See also:** [Specifying request and response formats](https://cloud.ibm.com/docs/services/personality-insights/input.html#formats)
+   * **See also:** [Specifying request and response
+   * formats](https://cloud.ibm.com/docs/services/personality-insights/input.html#formats)
    *
    * ### Accept types
    *

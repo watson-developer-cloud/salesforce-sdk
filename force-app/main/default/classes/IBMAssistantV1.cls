@@ -18,7 +18,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
    *        calls from failing when the service introduces breaking changes.
    */
   public IBMAssistantV1(String versionDate) {
-    super('watson_assistant_v1');
+    super('assistant', 'v1');
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');

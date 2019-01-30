@@ -24,7 +24,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    *        calls from failing when the service introduces breaking changes.
    */
   public IBMToneAnalyzerV3(String versionDate) {
-    super('watson_tone_analyzer_v3');
+    super('tone_analyzer', 'v3');
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
