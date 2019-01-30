@@ -78,7 +78,7 @@ public class IBMWatsonCredentialUtils {
     return fileContents;
   }
 
-  private static ServiceCredentials parseCredentialFile(String serviceName, String contents) {
+  public static ServiceCredentials parseCredentialFile(String serviceName, String fileContents) {
     ServiceCredentials serviceCredentials = new ServiceCredentials();
 
     String[] lineList = fileContents.split('\r\n');
