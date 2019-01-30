@@ -67,17 +67,19 @@ public class IBMWatsonCredentialUtils {
       || credentialValue.endsWith('"');
   }
 
-  public static ServiceCredentials loadCredentialFileValues(String serviceName) {
-    ServiceCredentials serviceCredentials = new ServiceCredentials();
-    String body;
-
+  private static String getCredentialFileBody() {
+    String fileContents = null;
     try {
       StaticResource credentialFileResource = [SELECT Id, Body FROM StaticResource WHERE Name = :CREDENTIAL_FILE_NAME LIMIT 1];
       fileContents = credentialFileResource.Body.toString();
     } catch (QueryException e) {
       System.debug(System.LoggingLevel.INFO, 'Could not find credential file in Static Resources');
-      return serviceCredentials;
     }
+    return fileContents;
+  }
+
+  private static ServiceCredentials parseCredentialFile(String serviceName, String contents) {
+    ServiceCredentials serviceCredentials = new ServiceCredentials();
 
     String[] lineList = fileContents.split('\r\n');
     for (String line : lineList) {
@@ -103,6 +105,17 @@ public class IBMWatsonCredentialUtils {
           System.debug(System.LoggingLevel.WARN, 'Unknown credential key found in credential file: ' + credentialType);
         }
       }
+    }
+
+    return serviceCredentials;
+  }
+
+  public static ServiceCredentials loadCredentialFileValues(String serviceName) {
+    ServiceCredentials serviceCredentials = new ServiceCredentials();
+    String fileContents = getCredentialFileBody();
+
+    if (fileContents != null) {
+      serviceCredentials = parseCredentialFile(serviceName, fileContents);
     }
 
     return serviceCredentials;
