@@ -107,13 +107,37 @@ Finally, you can also install or update the SDK using the Ant Build Tool. This m
     Valid service names are all services listed [here](https://cloud.ibm.com/catalog/?category=watson) written as one word (e.g. Visual Recognition becomes visualrecognition). The parameter is case-insensitive. To deploy multiple services, just run the command again with the next desired service flag.
 
 ## Authentication
-To access your Watson services through Apex, you'll need to authenticate with your service credentials. There are two ways to do this: [using named credentials](#using-named-credentials) or [specifying credentials in the Apex code](#specifying-credentials-in-the-apex-code).
+To access your Watson services through Apex, you'll need to authenticate with your service credentials. There are three ways to do this: [using a credential file](#using-a-credential-file), [using named credentials](#using-named-credentials) or [specifying credentials in the Apex code](#specifying-credentials-in-the-apex-code).
 
 **Note:** Previously, it was possible to authenticate using a token in a header called `X-Watson-Authorization-Token`. This method is deprecated. The token continues to work with Cloud Foundry services, but is not supported for services that use Identity and Access Management (IAM) authentication. See [here](#using-iam) for details.
 
+### Using a credential file
+
+With a credential file, you just need to put the file in the right place and the SDK will do the work of parsing it and authenticating. You can get this file by clicking the **Download** button for the credentials in the **Manage** tab of your service instance.
+
+Once you've downloaded your file, you'll need to do the following:
+
+1. Log in to your Salesforce dashboard
+1. Go to _Setup_ by clicking on the gear icon on the top right of the page
+1. Enter _Static Resources_ in the quick find box and select the highlighted entry
+1. Create a new static resource
+1. Enter the name **ibm_credentials** (:point_left: this must be the name!)
+1. Upload the file you downloaded from the service dashboard page
+1. Set the cache control to **Public**
+
+Once this is done, you're good to go! As an example, if you uploaded a credential file for your Discovery service, you just need to do the following in your code
+
+```java
+IBMDiscoveryV1 discovery = new IBMDiscoveryV1('2017-11-07');
+```
+
+and you'll be authenticated :white_check_mark:
+
+If you're using more than one service at a time in your code and get two different credetnial files, just put the contents together in one file and upload it to your Static Resources with the same name as above. The SDK will handle assigning credentials to their appropriate services.
+
 ### Using `Named Credentials`
 
-`Named Credentials` are the preferred way of authentication, since they allow you to keep sensitive information out of your code. However, they only work when using a **username and password**, so if you'd like to authenticate with an API key or IAM, you'll need to [set that up in your Apex code](#specifying-credentials-in-the-apex-code).
+`Named Credentials` are the next preferred way of authentication, since they allow you to keep sensitive information out of your code. However, they only work when using a **username and password**, so if you'd like to authenticate with an API key or IAM, you'll need to either use the credential file method [above](#using-a-credential-file) or [set that up in your Apex code](#specifying-credentials-in-the-apex-code).
 
 When creating a service instance like with `new Discovery()`, each service loads the credentials from `Named Credentials`. The SDK will use the service name and API version to build the `Named Credentials` name.
 
@@ -148,9 +172,7 @@ In order to create **Named Credentials**:
 
 ### Specifying credentials in the Apex code
 
-Setting credentials in the code is always an option, and in fact, it's the only option if you're authenticating with IAM.
-
-You can always set these values directly in the constructor or with a method call after instantiating your service.
+If the methods above don't work for you, setting credentials in the code is always an option. You can always set these values directly in the constructor or with a method call after instantiating your service.
 
 _Note: You must set the service endpoint manually when setting your credentials this way. Otherwise, the SDK will default to searching for `Named Credentials` that you won't have set up._
 
