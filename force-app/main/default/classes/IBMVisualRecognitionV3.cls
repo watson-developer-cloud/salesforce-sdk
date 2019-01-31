@@ -19,7 +19,7 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    *        calls from failing when the service introduces breaking changes.
    */
   public IBMVisualRecognitionV3(String versionDate) {
-    super('watson_visual_recognition_v3');
+    super('visual_recognition', 'v3');
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');
@@ -102,7 +102,8 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
    * recognition.
    *
    * Supported image formats include .gif, .jpg, .png, and .tif. The maximum image size is 10 MB. The minimum
-   * recommended pixel density is 32X32 pixels per inch.
+   * recommended pixel density is 32X32 pixels, but the service tends to perform better with images that are at least
+   * 224 x 224 pixels.
    *
    * @param detectFacesOptions the {@link IBMVisualRecognitionV3Models.DetectFacesOptions} containing the options for the call
    * @return the {@link IBMVisualRecognitionV3Models.DetectedFaces} with the response
@@ -251,9 +252,8 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
   /**
    * Update a classifier.
    *
-   * Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to
-   * existing classes. You must supply at least one set of positive or negative examples. For details, see [Updating
-   * custom
+   * Update a custom classifier by adding new positive or negative classes or by adding new images to existing classes.
+   * You must supply at least one set of positive or negative examples. For details, see [Updating custom
    * classifiers](https://cloud.ibm.com/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).
    *
    * Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class

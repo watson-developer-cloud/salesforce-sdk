@@ -1,6 +1,6 @@
 /**
  * The IBM&reg; Speech to Text service provides APIs that use IBM's speech-recognition capabilities to produce
- * transcripts of spoken audio. The service can transcribe speech from various languages and audio formats. It addition
+ * transcripts of spoken audio. The service can transcribe speech from various languages and audio formats. In addition
  * to basic transcription, the service can produce detailed information about many different aspects of the audio. For
  * most languages, the service supports two sampling rates, broadband and narrowband. It returns all JSON response
  * content in the UTF-8 character set.
@@ -29,7 +29,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    */
   public IBMSpeechToTextV1() {
-    super('watson_speech_to_text_v1');
+    super('speech_to_text', 'v1');
   }
 
   /**

@@ -1,7 +1,4 @@
 public abstract class IBMWatsonService {
-
-  protected String serviceName {get;set;}
-
   private String apiKey;
   private String defaultEndPoint;
   private String endPoint;
@@ -37,12 +34,37 @@ public abstract class IBMWatsonService {
    * Instantiates a new Watson service.
    *
    * @param name the service name
+   * @param version the service version
    */
-  protected IBMWatsonService(String name) {
+  protected IBMWatsonService(String name, String version) {
     this.name = name;
     this.userAgent = buildUserAgent(); // initialize the `User-Agent` value
 
-    setEndPoint(CALLOUT + name);
+    IBMWatsonCredentialUtils.ServiceCredentials fileCredentials = IBMWatsonCredentialUtils.loadCredentialFileValues(name);
+    if (!fileCredentials.isEmpty()) {
+      setCredentialFields(fileCredentials);
+    } else {
+      String namedCredentialsKey = String.format('watson_{0}_{1}', new String[]{ name, version });
+      setEndPoint(CALLOUT + namedCredentialsKey);
+    }
+  }
+
+  private void setCredentialFields(IBMWatsonCredentialUtils.ServiceCredentials serviceCredentials) {
+    if (serviceCredentials.getUrl() != null) {
+      setEndPoint(serviceCredentials.getUrl());
+    }
+
+    if ((serviceCredentials.getUsername() != null) && (serviceCredentials.getPassword() != null)) {
+      setUsernameAndPassword(serviceCredentials.getUsername(), serviceCredentials.getPassword());
+    }
+
+    if (serviceCredentials.getIamApiKey() != null) {
+      IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
+        .apiKey(serviceCredentials.getIamApiKey())
+        .url(serviceCredentials.getIamUrl())
+        .build();
+      setIamCredentials(iamOptions);
+   }
   }
 
   /**

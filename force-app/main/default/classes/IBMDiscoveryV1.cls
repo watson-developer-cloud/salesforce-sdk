@@ -20,7 +20,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    *        calls from failing when the service introduces breaking changes.
    */
   public IBMDiscoveryV1(String versionDate) {
-    super('watson_discovery_v1');
+    super('discovery', 'v1');
 
     if (String.isBlank(versionDate)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('versionDate cannot be null.');

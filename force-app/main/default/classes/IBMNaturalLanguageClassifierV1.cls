@@ -15,7 +15,7 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
    *
    */
   public IBMNaturalLanguageClassifierV1() {
-    super('watson_natural_language_classifier_v1');
+    super('natural_language_classifier', 'v1');
   }
 
   /**

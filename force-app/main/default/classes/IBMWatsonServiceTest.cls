@@ -6,7 +6,7 @@ private class IBMWatsonServiceTest {
    */
   class TestService extends IBMWatsonService {
     public TestService() {
-      super('test_service_v1');
+      super('service', 'v1');
     }
 
     public TestClass testingMethod() {

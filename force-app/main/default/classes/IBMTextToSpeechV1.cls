@@ -27,7 +27,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    *
    */
   public IBMTextToSpeechV1() {
-    super('watson_text_to_speech_v1');
+    super('text_to_speech', 'v1');
   }
 
   /**
@@ -116,7 +116,8 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    * The service returns the synthesized audio stream as an array of bytes. You can pass a maximum of 5 KB of text to
    * the service.
    *
-   * **See also:** [Synthesizing text to audio](https://cloud.ibm.com/docs/services/text-to-speech/http.html#synthesize).
+   * **See also:** [Synthesizing text to
+   * audio](https://cloud.ibm.com/docs/services/text-to-speech/http.html#synthesize).
    *
    * ### Audio formats (accept types)
    *
@@ -260,7 +261,8 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    *
    * **Note:** This method is currently a beta release.
    *
-   * **See also:** [Creating a custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsCreate).
+   * **See also:** [Creating a custom
+   * model](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsCreate).
    *
    * @param createVoiceModelOptions the {@link IBMTextToSpeechV1Models.CreateVoiceModelOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.VoiceModel} with the response
@@ -296,7 +298,8 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    *
    * **Note:** This method is currently a beta release.
    *
-   * **See also:** [Deleting a custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsDelete).
+   * **See also:** [Deleting a custom
+   * model](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsDelete).
    *
    * @param deleteVoiceModelOptions the {@link IBMTextToSpeechV1Models.DeleteVoiceModelOptions} containing the options for the call
    * @return the service call
@@ -323,7 +326,8 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    *
    * **Note:** This method is currently a beta release.
    *
-   * **See also:** [Querying a custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsQuery).
+   * **See also:** [Querying a custom
+   * model](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsQuery).
    *
    * @param getVoiceModelOptions the {@link IBMTextToSpeechV1Models.GetVoiceModelOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.VoiceModel} with the response
@@ -352,7 +356,8 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    *
    * **Note:** This method is currently a beta release.
    *
-   * **See also:** [Querying all custom models](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsQueryAll).
+   * **See also:** [Querying all custom
+   * models](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsQueryAll).
    *
    * @param listVoiceModelsOptions the {@link IBMTextToSpeechV1Models.ListVoiceModelsOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.VoiceModels} with the response
@@ -396,7 +401,8 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    *
    * **See also:**
    * * [Updating a custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsUpdate)
-   * * [Adding words to a Japanese custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd)
+   * * [Adding words to a Japanese custom
+   * model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd)
    * * [Understanding customization](https://cloud.ibm.com/docs/services/text-to-speech/custom-intro.html).
    *
    * @param updateVoiceModelOptions the {@link IBMTextToSpeechV1Models.UpdateVoiceModelOptions} containing the options for the call
@@ -448,8 +454,10 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    * **Note:** This method is currently a beta release.
    *
    * **See also:**
-   * * [Adding a single word to a custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuWordAdd)
-   * * [Adding words to a Japanese custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd)
+   * * [Adding a single word to a custom
+   * model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuWordAdd)
+   * * [Adding words to a Japanese custom
+   * model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd)
    * * [Understanding customization](https://cloud.ibm.com/docs/services/text-to-speech/custom-intro.html).
    *
    * @param addWordOptions the {@link IBMTextToSpeechV1Models.AddWordOptions} containing the options for the call
@@ -497,8 +505,10 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    * **Note:** This method is currently a beta release.
    *
    * **See also:**
-   * * [Adding multiple words to a custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuWordsAdd)
-   * * [Adding words to a Japanese custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd)
+   * * [Adding multiple words to a custom
+   * model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuWordsAdd)
+   * * [Adding words to a Japanese custom
+   * model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd)
    * * [Understanding customization](https://cloud.ibm.com/docs/services/text-to-speech/custom-intro.html).
    *
    * @param addWordsOptions the {@link IBMTextToSpeechV1Models.AddWordsOptions} containing the options for the call
