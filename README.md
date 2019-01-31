@@ -13,9 +13,11 @@ The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/de
 ### Getting credentials
 To find out which authentication to use, view the service credentials. You find the service credentials for authentication the same way for all Watson services:
 
-1. Go to the IBM Cloud [Dashboard](https://console.bluemix.net/dashboard/apps?category=ai) page.
-1. Either click an existing Watson service instance or click [**Create resource > AI**](https://console.bluemix.net/catalog/?category=ai) and create a service instance.
-1. Copy the credentials you need for authentication. Click **Show** if the credentials are masked.
+1. Go to the IBM Cloud [Dashboard](https://cloud.ibm.com) page.
+1. Either click an existing Watson service instance in your [resource list](https://cloud.ibm.com/resources) or click [**Create resource > AI**](https://cloud.ibm.com/catalog?category=ai) and create a service instance.
+1. Click on the **Manage** item in the left nav bar of your service instance.
+
+On this page, you should be able to see your credentials for accessing your service instance.
 
 You'll also need a Salesforce account to run your Apex code. To get one, you can visit [this link](https://developer.salesforce.com/signup).
 
@@ -102,7 +104,7 @@ Finally, you can also install or update the SDK using the Ant Build Tool. This m
     ant deployWatson -Dservice=assistant
     ```
 
-    Valid service names are all services listed [here](https://console.bluemix.net/catalog/?category=watson) written as one word (e.g. Visual Recognition becomes visualrecognition). The parameter is case-insensitive. To deploy multiple services, just run the command again with the next desired service flag.
+    Valid service names are all services listed [here](https://cloud.ibm.com/catalog/?category=watson) written as one word (e.g. Visual Recognition becomes visualrecognition). The parameter is case-insensitive. To deploy multiple services, just run the command again with the next desired service flag.
 
 ## Authentication
 To access your Watson services through Apex, you'll need to authenticate with your service credentials. There are two ways to do this: [using named credentials](#using-named-credentials) or [specifying credentials in the Apex code](#specifying-credentials-in-the-apex-code).
@@ -361,4 +363,4 @@ If you're interested in helping to make this project better, see [Contributing.m
 This library is licensed under the MIT license. Full license text is
 available in [LICENSE](LICENSE).
 
-[ibm-cloud-onboarding]: http://console.bluemix.net/registration?target=/developer/watson&cm_sp=WatsonPlatform-WatsonServices-_-OnPageNavLink-IBMWatson_SDKs-_-SalesForce
+[ibm-cloud-onboarding]: http://cloud.ibm.com/registration?target=/developer/watson&cm_sp=WatsonPlatform-WatsonServices-_-OnPageNavLink-IBMWatson_SDKs-_-SalesForce
