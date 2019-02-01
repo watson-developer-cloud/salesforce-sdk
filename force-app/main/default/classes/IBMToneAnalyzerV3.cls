@@ -96,6 +96,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
     if (toneOptions.acceptLanguage() != null) {
       builder.addHeader('Accept-Language', toneOptions.acceptLanguage());
     }
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=tone_analyzer;service_version=V3;operation_id=tone');
     Map<String, String> requestHeaders = (toneOptions != null) ? toneOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -143,6 +144,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
     if (toneChatOptions.acceptLanguage() != null) {
       builder.addHeader('Accept-Language', toneChatOptions.acceptLanguage());
     }
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=tone_analyzer;service_version=V3;operation_id=toneChat');
     Map<String, String> requestHeaders = (toneChatOptions != null) ? toneChatOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {

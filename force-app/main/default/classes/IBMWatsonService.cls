@@ -14,7 +14,7 @@ public abstract class IBMWatsonService {
   private static final String BASIC = 'Basic ';
   private static final String BEARER = 'Bearer ';
   private static final String VERSION = 'version';
-  private static final String USER_AGENT_FORMAT = 'watson-apis-salesforce-sdk/{0}/({1})';
+  private static final String USER_AGENT_FORMAT = 'watson-apis-salesforce-sdk-{0} {1}';
   private static final String SDK_VERSION = '3.2.1';
   private static final String APIKEY_AS_USERNAME = 'apikey';
   private static final String ICP_PREFIX = 'icp-';
@@ -89,8 +89,7 @@ public abstract class IBMWatsonService {
 
   private static String buildUserAgent() {
     ApexClass ac = [Select ApiVersion From ApexClass Where Name = 'IBMWatsonService' LIMIT 1];
-    Organization org = [Select OrganizationType, InstanceName From Organization];
-    return String.format(USER_AGENT_FORMAT, new List<String>{SDK_VERSION, 'APEX_API_VERSION=' + ac.ApiVersion + ';ORG_TYPE=' + org.OrganizationType + ';INSTANCE=' + org.InstanceName });
+    return String.format(USER_AGENT_FORMAT, new List<String>{SDK_VERSION, String.valueOf(ac.ApiVersion)});
   }
 
   /**
