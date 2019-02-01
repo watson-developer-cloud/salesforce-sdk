@@ -71,6 +71,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(getModelOptions, 'getModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/models/{0}', new String[]{ getModelOptions.modelId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=getModel');
     Map<String, String> requestHeaders = (getModelOptions != null) ? getModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -95,6 +96,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public IBMSpeechToTextV1Models.SpeechModels listModels(IBMSpeechToTextV1Models.ListModelsOptions listModelsOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/models');
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listModels');
     Map<String, String> requestHeaders = (listModelsOptions != null) ? listModelsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -187,6 +189,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (recognizeOptions.contentType() != null) {
       builder.addHeader('Content-Type', recognizeOptions.contentType());
     }
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=recognize');
     Map<String, String> requestHeaders = (recognizeOptions != null) ? recognizeOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -274,6 +277,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(checkJobOptions, 'checkJobOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/recognitions/{0}', new String[]{ checkJobOptions.id() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=checkJob');
     Map<String, String> requestHeaders = (checkJobOptions != null) ? checkJobOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -303,6 +307,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public IBMSpeechToTextV1Models.RecognitionJobs checkJobs(IBMSpeechToTextV1Models.CheckJobsOptions checkJobsOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/recognitions');
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=checkJobs');
     Map<String, String> requestHeaders = (checkJobsOptions != null) ? checkJobsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -403,6 +408,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createJobOptions.contentType() != null) {
       builder.addHeader('Content-Type', createJobOptions.contentType());
     }
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=createJob');
     Map<String, String> requestHeaders = (createJobOptions != null) ? createJobOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -496,6 +502,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(deleteJobOptions, 'deleteJobOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/recognitions/{0}', new String[]{ deleteJobOptions.id() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteJob');
     Map<String, String> requestHeaders = (deleteJobOptions != null) ? deleteJobOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -543,6 +550,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(registerCallbackOptions, 'registerCallbackOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/register_callback');
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=registerCallback');
     Map<String, String> requestHeaders = (registerCallbackOptions != null) ? registerCallbackOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -576,6 +584,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(unregisterCallbackOptions, 'unregisterCallbackOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/unregister_callback');
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=unregisterCallback');
     Map<String, String> requestHeaders = (unregisterCallbackOptions != null) ? unregisterCallbackOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -607,6 +616,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(createLanguageModelOptions, 'createLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/customizations');
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=createLanguageModel');
     Map<String, String> requestHeaders = (createLanguageModelOptions != null) ? createLanguageModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -644,6 +654,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(deleteLanguageModelOptions, 'deleteLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}', new String[]{ deleteLanguageModelOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteLanguageModel');
     Map<String, String> requestHeaders = (deleteLanguageModelOptions != null) ? deleteLanguageModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -670,6 +681,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(getLanguageModelOptions, 'getLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}', new String[]{ getLanguageModelOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=getLanguageModel');
     Map<String, String> requestHeaders = (getLanguageModelOptions != null) ? getLanguageModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -697,6 +709,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public IBMSpeechToTextV1Models.LanguageModels listLanguageModels(IBMSpeechToTextV1Models.ListLanguageModelsOptions listLanguageModelsOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/customizations');
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listLanguageModels');
     Map<String, String> requestHeaders = (listLanguageModelsOptions != null) ? listLanguageModelsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -728,6 +741,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(resetLanguageModelOptions, 'resetLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/reset', new String[]{ resetLanguageModelOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=resetLanguageModel');
     Map<String, String> requestHeaders = (resetLanguageModelOptions != null) ? resetLanguageModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -774,6 +788,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(trainLanguageModelOptions, 'trainLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/train', new String[]{ trainLanguageModelOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=trainLanguageModel');
     Map<String, String> requestHeaders = (trainLanguageModelOptions != null) ? trainLanguageModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -816,6 +831,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(upgradeLanguageModelOptions, 'upgradeLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/upgrade_model', new String[]{ upgradeLanguageModelOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=upgradeLanguageModel');
     Map<String, String> requestHeaders = (upgradeLanguageModelOptions != null) ? upgradeLanguageModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -873,6 +889,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(addCorpusOptions, 'addCorpusOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/corpora/{1}', new String[]{ addCorpusOptions.customizationId(), addCorpusOptions.corpusName() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=addCorpus');
     Map<String, String> requestHeaders = (addCorpusOptions != null) ? addCorpusOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -911,6 +928,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(deleteCorpusOptions, 'deleteCorpusOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}/corpora/{1}', new String[]{ deleteCorpusOptions.customizationId(), deleteCorpusOptions.corpusName() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteCorpus');
     Map<String, String> requestHeaders = (deleteCorpusOptions != null) ? deleteCorpusOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -938,6 +956,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(getCorpusOptions, 'getCorpusOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/corpora/{1}', new String[]{ getCorpusOptions.customizationId(), getCorpusOptions.corpusName() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=getCorpus');
     Map<String, String> requestHeaders = (getCorpusOptions != null) ? getCorpusOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -965,6 +984,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(listCorporaOptions, 'listCorporaOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/corpora', new String[]{ listCorporaOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listCorpora');
     Map<String, String> requestHeaders = (listCorporaOptions != null) ? listCorporaOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1015,6 +1035,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(addWordOptions, 'addWordOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getEndPoint() + String.format('/v1/customizations/{0}/words/{1}', new String[]{ addWordOptions.customizationId(), addWordOptions.wordName() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=addWord');
     Map<String, String> requestHeaders = (addWordOptions != null) ? addWordOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1090,6 +1111,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(addWordsOptions, 'addWordsOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/words', new String[]{ addWordsOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=addWords');
     Map<String, String> requestHeaders = (addWordsOptions != null) ? addWordsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1122,6 +1144,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(deleteWordOptions, 'deleteWordOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}/words/{1}', new String[]{ deleteWordOptions.customizationId(), deleteWordOptions.wordName() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteWord');
     Map<String, String> requestHeaders = (deleteWordOptions != null) ? deleteWordOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1148,6 +1171,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(getWordOptions, 'getWordOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/words/{1}', new String[]{ getWordOptions.customizationId(), getWordOptions.wordName() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=getWord');
     Map<String, String> requestHeaders = (getWordOptions != null) ? getWordOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1177,6 +1201,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(listWordsOptions, 'listWordsOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/words', new String[]{ listWordsOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listWords');
     Map<String, String> requestHeaders = (listWordsOptions != null) ? listWordsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1234,6 +1259,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/grammars/{1}', new String[]{ addGrammarOptions.customizationId(), addGrammarOptions.grammarName() }));
     builder.addHeader('Accept', 'application/json');
     builder.addHeader('Content-Type', addGrammarOptions.contentType());
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=addGrammar');
     Map<String, String> requestHeaders = (addGrammarOptions != null) ? addGrammarOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1267,6 +1293,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(deleteGrammarOptions, 'deleteGrammarOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}/grammars/{1}', new String[]{ deleteGrammarOptions.customizationId(), deleteGrammarOptions.grammarName() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteGrammar');
     Map<String, String> requestHeaders = (deleteGrammarOptions != null) ? deleteGrammarOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1293,6 +1320,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(getGrammarOptions, 'getGrammarOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/grammars/{1}', new String[]{ getGrammarOptions.customizationId(), getGrammarOptions.grammarName() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=getGrammar');
     Map<String, String> requestHeaders = (getGrammarOptions != null) ? getGrammarOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1319,6 +1347,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(listGrammarsOptions, 'listGrammarsOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/grammars', new String[]{ listGrammarsOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listGrammars');
     Map<String, String> requestHeaders = (listGrammarsOptions != null) ? listGrammarsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1346,6 +1375,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(createAcousticModelOptions, 'createAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/acoustic_customizations');
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=createAcousticModel');
     Map<String, String> requestHeaders = (createAcousticModelOptions != null) ? createAcousticModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1380,6 +1410,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(deleteAcousticModelOptions, 'deleteAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/acoustic_customizations/{0}', new String[]{ deleteAcousticModelOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteAcousticModel');
     Map<String, String> requestHeaders = (deleteAcousticModelOptions != null) ? deleteAcousticModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1406,6 +1437,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(getAcousticModelOptions, 'getAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/acoustic_customizations/{0}', new String[]{ getAcousticModelOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=getAcousticModel');
     Map<String, String> requestHeaders = (getAcousticModelOptions != null) ? getAcousticModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1433,6 +1465,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public IBMSpeechToTextV1Models.AcousticModels listAcousticModels(IBMSpeechToTextV1Models.ListAcousticModelsOptions listAcousticModelsOptions) {
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/acoustic_customizations');
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listAcousticModels');
     Map<String, String> requestHeaders = (listAcousticModelsOptions != null) ? listAcousticModelsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1464,6 +1497,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(resetAcousticModelOptions, 'resetAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/reset', new String[]{ resetAcousticModelOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=resetAcousticModel');
     Map<String, String> requestHeaders = (resetAcousticModelOptions != null) ? resetAcousticModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1517,6 +1551,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(trainAcousticModelOptions, 'trainAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/train', new String[]{ trainAcousticModelOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=trainAcousticModel');
     Map<String, String> requestHeaders = (trainAcousticModelOptions != null) ? trainAcousticModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1562,6 +1597,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(upgradeAcousticModelOptions, 'upgradeAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/upgrade_model', new String[]{ upgradeAcousticModelOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=upgradeAcousticModel');
     Map<String, String> requestHeaders = (upgradeAcousticModelOptions != null) ? upgradeAcousticModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1672,6 +1708,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (addAudioOptions.containedContentType() != null) {
       builder.addHeader('Contained-Content-Type', addAudioOptions.containedContentType());
     }
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=addAudio');
     Map<String, String> requestHeaders = (addAudioOptions != null) ? addAudioOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1705,6 +1742,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(deleteAudioOptions, 'deleteAudioOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio/{1}', new String[]{ deleteAudioOptions.customizationId(), deleteAudioOptions.audioName() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteAudio');
     Map<String, String> requestHeaders = (deleteAudioOptions != null) ? deleteAudioOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1744,6 +1782,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(getAudioOptions, 'getAudioOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio/{1}', new String[]{ getAudioOptions.customizationId(), getAudioOptions.audioName() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=getAudio');
     Map<String, String> requestHeaders = (getAudioOptions != null) ? getAudioOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1773,6 +1812,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(listAudioOptions, 'listAudioOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio', new String[]{ listAudioOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listAudio');
     Map<String, String> requestHeaders = (listAudioOptions != null) ? listAudioOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -1803,6 +1843,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(deleteUserDataOptions, 'deleteUserDataOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + '/v1/user_data');
     builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteUserData');
     Map<String, String> requestHeaders = (deleteUserDataOptions != null) ? deleteUserDataOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {

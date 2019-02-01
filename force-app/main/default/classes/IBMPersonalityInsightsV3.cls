@@ -118,6 +118,7 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     if (profileOptions.acceptLanguage() != null) {
       builder.addHeader('Accept-Language', profileOptions.acceptLanguage());
     }
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=personality_insights;service_version=V3;operation_id=profile');
     Map<String, String> requestHeaders = (profileOptions != null) ? profileOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
@@ -190,6 +191,7 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     if (profileOptions.acceptLanguage() != null) {
       builder.addHeader('Accept-Language', profileOptions.acceptLanguage());
     }
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=personality_insights;service_version=V3;operation_id=profileAsCsv');
     Map<String, String> requestHeaders = (profileOptions != null) ? profileOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
