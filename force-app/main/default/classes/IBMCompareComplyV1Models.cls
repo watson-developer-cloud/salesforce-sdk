@@ -1122,7 +1122,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the file.
      *
-     * The input file to convert.
+     * The file to classify.
      *
      * @return the file
      */
@@ -1635,8 +1635,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the location.
      *
-     * The numeric location of the identified element in the document, represented with two integers labeled `begin` and
-     * `end`.
+     * The location of the column header cell in the current table as defined by its `begin` and `end` offsets,
+     * respectfully, in the input document.
      *
      * @return the location
      */
@@ -1866,7 +1866,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the file1Label.
      *
-     * A text label for the first file. The label cannot exceed 64 characters in length. The default is `file_1`.
+     * A text label for the first file.
      *
      * @return the file1Label
      */
@@ -1877,7 +1877,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the file2Label.
      *
-     * A text label for the second file. The label cannot exceed 64 characters in length. The default is `file_2`.
+     * A text label for the second file.
      *
      * @return the file2Label
      */
@@ -2436,7 +2436,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the file.
      *
-     * The input file to convert.
+     * The file to convert.
      *
      * @return the file
      */
@@ -2618,8 +2618,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the function.
      *
-     * The Compare and Comply method to run across the submitted input documents. Possible values are `html_conversion`,
-     * `element_classification`, and `tables`.
+     * The Compare and Comply method to run across the submitted input documents.
      *
      * @return the function
      */
@@ -2962,7 +2961,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the feedbackId.
      *
-     * An string that specifies the feedback entry to be deleted from the document.
+     * A string that specifies the feedback entry to be deleted from the document.
      *
      * @return the feedbackId
      */
@@ -3394,7 +3393,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the label.
      *
-     * The label applied to the input document with the calling method's `file1_label` or `file2_label` value.
+     * The label applied to the input document with the calling method's `file_1_label` or `file_2_label` value. This
+     * field is specified only in the output of the **Comparing two documents** method.
      *
      * @return the label
      */
@@ -3972,7 +3972,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the file.
      *
-     * The input file on which to run table extraction.
+     * The file on which to run table extraction.
      *
      * @return the file
      */
@@ -4936,7 +4936,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the feedbackId.
      *
-     * An string that specifies the feedback entry to be included in the output.
+     * A string that specifies the feedback entry to be included in the output.
      *
      * @return the feedbackId
      */
@@ -5270,7 +5270,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the elementLocations.
      *
-     * An array of `location` objects listing the locations of detected leading sentences.
+     * An array of `location` objects that lists the locations of detected leading sentences.
      *
      * @return the elementLocations
      */
@@ -5558,8 +5558,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the pageLimit.
      *
-     * An optional integer specifying the number of documents that you want the service to return. The default value is
-     * `10` and the maximum value is `100`.
+     * An optional integer specifying the number of documents that you want the service to return.
      *
      * @return the pageLimit
      */
@@ -6693,7 +6692,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the elementLocations.
      *
-     * An array of `location` objects listing the locations of detected section titles.
+     * An array of `location` objects that lists the locations of detected section titles.
      *
      * @return the elementLocations
      */
@@ -6854,8 +6853,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the location.
      *
-     * The numeric location of the identified element in the document, represented with two integers labeled `begin` and
-     * `end`.
+     * The location of the table header cell in the current table as defined by its `begin` and `end` offsets,
+     * respectfully, in the input document.
      *
      * @return the location
      */
@@ -7724,8 +7723,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the action.
      *
-     * The action you want to perform on the specified batch-processing request. Possible values are `rescan` and
-     * `cancel`.
+     * The action you want to perform on the specified batch-processing request.
      *
      * @return the action
      */
