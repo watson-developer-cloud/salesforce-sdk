@@ -215,6 +215,7 @@ public class IBMCompareComplyV1Models {
   public class AlignedElement extends IBMWatsonGenericModel {
     private List<ElementPair> element_pair_serialized_name;
     private Boolean identical_text_serialized_name;
+    private Boolean significant_elements_serialized_name;
     private List<String> provenance_ids_serialized_name;
  
     /**
@@ -239,6 +240,18 @@ public class IBMCompareComplyV1Models {
     @AuraEnabled
     public Boolean getIdenticalText() {
       return identical_text_serialized_name;
+    }
+ 
+    /**
+     * Gets the significantElements.
+     *
+     * Indicates that the elements aligned are contractual clauses of significance.
+     *
+     * @return the significantElements
+     */
+    @AuraEnabled
+    public Boolean getSignificantElements() {
+      return significant_elements_serialized_name;
     }
  
     /**
@@ -269,6 +282,15 @@ public class IBMCompareComplyV1Models {
      */
     public void setIdenticalText(final Boolean identicalText) {
       this.identical_text_serialized_name = identicalText;
+    }
+
+    /**
+     * Sets the significantElements.
+     *
+     * @param significantElements the new significantElements
+     */
+    public void setSignificantElements(final Boolean significantElements) {
+      this.significant_elements_serialized_name = significantElements;
     }
 
     /**
