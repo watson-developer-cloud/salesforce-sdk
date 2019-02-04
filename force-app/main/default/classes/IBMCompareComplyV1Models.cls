@@ -2342,6 +2342,7 @@ public class IBMCompareComplyV1Models {
    */
   public class ContractAmts extends IBMWatsonGenericModel {
     private String text_serialized_name;
+    private String confidence_level_serialized_name;
     private Location location_serialized_name;
  
     /**
@@ -2354,6 +2355,18 @@ public class IBMCompareComplyV1Models {
     @AuraEnabled
     public String getText() {
       return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the confidenceLevel.
+     *
+     * The confidence level in the identification of the contract amount.
+     *
+     * @return the confidenceLevel
+     */
+    @AuraEnabled
+    public String getConfidenceLevel() {
+      return confidence_level_serialized_name;
     }
  
     /**
@@ -2376,6 +2389,15 @@ public class IBMCompareComplyV1Models {
      */
     public void setText(final String text) {
       this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the confidenceLevel.
+     *
+     * @param confidenceLevel the new confidenceLevel
+     */
+    public void setConfidenceLevel(final String confidenceLevel) {
+      this.confidence_level_serialized_name = confidenceLevel;
     }
 
     /**
@@ -3433,6 +3455,7 @@ public class IBMCompareComplyV1Models {
    */
   public class EffectiveDates extends IBMWatsonGenericModel {
     private String text_serialized_name;
+    private String confidence_level_serialized_name;
     private Location location_serialized_name;
  
     /**
@@ -3445,6 +3468,18 @@ public class IBMCompareComplyV1Models {
     @AuraEnabled
     public String getText() {
       return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the confidenceLevel.
+     *
+     * The confidence level in the identification of the effective date.
+     *
+     * @return the confidenceLevel
+     */
+    @AuraEnabled
+    public String getConfidenceLevel() {
+      return confidence_level_serialized_name;
     }
  
     /**
@@ -3467,6 +3502,15 @@ public class IBMCompareComplyV1Models {
      */
     public void setText(final String text) {
       this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the confidenceLevel.
+     *
+     * @param confidenceLevel the new confidenceLevel
+     */
+    public void setConfidenceLevel(final String confidenceLevel) {
+      this.confidence_level_serialized_name = confidenceLevel;
     }
 
     /**
@@ -7296,6 +7340,7 @@ public class IBMCompareComplyV1Models {
    */
   public class TerminationDates extends IBMWatsonGenericModel {
     private String text_serialized_name;
+    private String confidence_level_serialized_name;
     private Location location_serialized_name;
  
     /**
@@ -7308,6 +7353,18 @@ public class IBMCompareComplyV1Models {
     @AuraEnabled
     public String getText() {
       return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the confidenceLevel.
+     *
+     * The confidence level in the identification of the termination date.
+     *
+     * @return the confidenceLevel
+     */
+    @AuraEnabled
+    public String getConfidenceLevel() {
+      return confidence_level_serialized_name;
     }
  
     /**
@@ -7330,6 +7387,15 @@ public class IBMCompareComplyV1Models {
      */
     public void setText(final String text) {
       this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the confidenceLevel.
+     *
+     * @param confidenceLevel the new confidenceLevel
+     */
+    public void setConfidenceLevel(final String confidenceLevel) {
+      this.confidence_level_serialized_name = confidenceLevel;
     }
 
     /**
