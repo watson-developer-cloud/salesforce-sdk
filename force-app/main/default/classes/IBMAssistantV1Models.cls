@@ -9116,12 +9116,20 @@ public class IBMAssistantV1Models {
   /**
    * An input object that includes the input text.
    */
-  public class InputData extends IBMWatsonDynamicModel {
+  public class InputData extends IBMWatsonGenericModel {
     private String text_serialized_name;
-    private Map<String, Object> additional_properties_serialized_name;
 
     /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public InputData() { }
+ 
+    /**
      * Gets the text.
+     *
+     * The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must
+     * be no longer than 2048 characters.
      *
      * @return the text
      */
@@ -9129,24 +9137,19 @@ public class IBMAssistantV1Models {
     public String getText() {
       return text_serialized_name;
     }
-
-    /**
-     * Gets the dynamic properties attached to InputData.
-     *
-     * @return the dynamic properties
-     */
-    @AuraEnabled
-    public Map<String, Object> getAdditionalProperties() {
-      return this.getDynamicProperties();
+  
+    private InputData(InputDataBuilder builder) {
+      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
+      text_serialized_name = builder.text;
     }
 
     /**
-     * Sets the text.
+     * New builder.
      *
-     * @param text the new text
+     * @return a InputData builder
      */
-    public void text(final String text) {
-      this.text_serialized_name = text;
+    public InputDataBuilder newBuilder() {
+      return new InputDataBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -9157,16 +9160,53 @@ public class IBMAssistantV1Models {
       InputData ret = (InputData) super.deserialize(jsonString, jsonMap, classType);
       InputDataBuilder retBuilder = ret.newBuilder();
 
-      InputData builderResult = retBuilder.build();
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+      return retBuilder.build();
+    }
+  }
 
-      for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key)) {
-          builderResult.put(key, jsonMap.get(key));
-        }
-      }
+  /**
+   * InputData Builder.
+   */
+  public class InputDataBuilder {
+    private String text;
 
-      return builderResult;
+    private InputDataBuilder(InputData inputData) {
+      text = inputData.text_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public InputDataBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param text the text
+     */
+    public InputDataBuilder(String text) {
+      this.text = text;
+    }
+
+    /**
+     * Builds a InputData.
+     *
+     * @return the inputData
+     */
+    public InputData build() {
+      return new InputData(this);
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the InputData builder
+     */
+    public InputDataBuilder text(String text) {
+      this.text = text;
+      return this;
     }
   }
 
