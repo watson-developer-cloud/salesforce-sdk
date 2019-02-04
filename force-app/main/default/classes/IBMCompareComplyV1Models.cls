@@ -1611,7 +1611,7 @@ public class IBMCompareComplyV1Models {
    */
   public class ColumnHeaders extends IBMWatsonGenericModel {
     private String cell_id_serialized_name;
-    private Location location_serialized_name;
+    private IBMWatsonMapModel location_serialized_name;
     private String text_serialized_name;
     private String text_normalized_serialized_name;
     private Long row_index_begin_serialized_name;
@@ -1641,7 +1641,7 @@ public class IBMCompareComplyV1Models {
      * @return the location
      */
     @AuraEnabled
-    public Location getLocation() {
+    public IBMWatsonMapModel getLocation() {
       return location_serialized_name;
     }
  
@@ -1732,7 +1732,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param location the new location
      */
-    public void setLocation(final Location location) {
+    public void setLocation(final IBMWatsonMapModel location) {
       this.location_serialized_name = location;
     }
 
@@ -1798,7 +1798,7 @@ public class IBMCompareComplyV1Models {
       ColumnHeaders ret = (ColumnHeaders) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), IBMWatsonMapModel.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -6830,7 +6830,7 @@ public class IBMCompareComplyV1Models {
    */
   public class TableHeaders extends IBMWatsonGenericModel {
     private String cell_id_serialized_name;
-    private Location location_serialized_name;
+    private IBMWatsonMapModel location_serialized_name;
     private String text_serialized_name;
     private Long row_index_begin_serialized_name;
     private Long row_index_end_serialized_name;
@@ -6859,7 +6859,7 @@ public class IBMCompareComplyV1Models {
      * @return the location
      */
     @AuraEnabled
-    public Location getLocation() {
+    public IBMWatsonMapModel getLocation() {
       return location_serialized_name;
     }
  
@@ -6937,7 +6937,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param location the new location
      */
-    public void setLocation(final Location location) {
+    public void setLocation(final IBMWatsonMapModel location) {
       this.location_serialized_name = location;
     }
 
@@ -6994,7 +6994,7 @@ public class IBMCompareComplyV1Models {
       TableHeaders ret = (TableHeaders) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), IBMWatsonMapModel.class);
       ret.setLocation(newLocation);
 
       return ret;
