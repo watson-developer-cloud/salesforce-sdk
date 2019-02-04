@@ -8904,7 +8904,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * The getGatewayDetails options.
+   * The getGateway options.
    */
   public class GetGatewayOptions extends IBMWatsonOptionsModel {
     private String environmentId;
@@ -8958,10 +8958,10 @@ public class IBMDiscoveryV1Models {
     private String environmentId;
     private String gatewayId;
 
-    private GetGatewayOptionsBuilder(GetGatewayOptions getGatewayDetailsOptions) {
-      environmentId = getGatewayDetailsOptions.environmentId;
-      gatewayId = getGatewayDetailsOptions.gatewayId;
-      this.requestHeaders.putAll(getGatewayDetailsOptions.requestHeaders());
+    private GetGatewayOptionsBuilder(GetGatewayOptions getGatewayOptions) {
+      environmentId = getGatewayOptions.environmentId;
+      gatewayId = getGatewayOptions.gatewayId;
+      this.requestHeaders.putAll(getGatewayOptions.requestHeaders());
     }
 
     /**
@@ -8984,7 +8984,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Builds a GetGatewayOptions.
      *
-     * @return the getGatewayDetailsOptions
+     * @return the getGatewayOptions
      */
     public GetGatewayOptions build() {
       return new GetGatewayOptions(this);
@@ -9020,99 +9020,6 @@ public class IBMDiscoveryV1Models {
      * @return the GetGatewayOptions builder
      */
     public GetGatewayOptionsBuilder addHeader(String name, String value) {
-      this.requestHeaders.put(name, value);
-      return this;
-    }
-  }
-
-  /**
-   * The getGatewayList options.
-   */
-  public class ListGatewaysOptions extends IBMWatsonOptionsModel {
-    private String environmentId;
- 
-    /**
-     * Gets the environmentId.
-     *
-     * The ID of the environment.
-     *
-     * @return the environmentId
-     */
-    public String environmentId() {
-      return environmentId;
-    }
-
-    private ListGatewaysOptions(ListGatewaysOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      environmentId = builder.environmentId;
-      this.requestHeaders = builder.requestHeaders;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a ListGatewaysOptions builder
-     */
-    public ListGatewaysOptionsBuilder newBuilder() {
-      return new ListGatewaysOptionsBuilder(this);
-    }
-
-  }
-
-  /**
-   * ListGatewaysOptions Builder.
-   */
-  public class ListGatewaysOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environmentId;
-
-    private ListGatewaysOptionsBuilder(ListGatewaysOptions listGatewaysOptions) {
-      environmentId = listGatewaysOptions.environmentId;
-      this.requestHeaders.putAll(listGatewaysOptions.requestHeaders());
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public ListGatewaysOptionsBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param environmentId the environmentId
-     */
-    public ListGatewaysOptionsBuilder(String environmentId) {
-      this.environmentId = environmentId;
-    }
-
-    /**
-     * Builds a ListGatewaysOptions.
-     *
-     * @return the listGatewaysOptions
-     */
-    public ListGatewaysOptions build() {
-      return new ListGatewaysOptions(this);
-    }
-
-    /**
-     * Set the environmentId.
-     *
-     * @param environmentId the environmentId
-     * @return the ListGatewaysOptions builder
-     */
-    public ListGatewaysOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
-      return this;
-    }
-
-    /**
-     * Add a request header.
-     *
-     * @param name the header name
-     * @param value the header value
-     * @return the ListGatewaysOptions builder
-     */
-    public ListGatewaysOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -11586,6 +11493,99 @@ public class IBMDiscoveryV1Models {
      * @return the ListFieldsOptions builder
      */
     public ListFieldsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The listGateways options.
+   */
+  public class ListGatewaysOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+ 
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+
+    private ListGatewaysOptions(ListGatewaysOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      environmentId = builder.environmentId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ListGatewaysOptions builder
+     */
+    public ListGatewaysOptionsBuilder newBuilder() {
+      return new ListGatewaysOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * ListGatewaysOptions Builder.
+   */
+  public class ListGatewaysOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+
+    private ListGatewaysOptionsBuilder(ListGatewaysOptions listGatewaysOptions) {
+      environmentId = listGatewaysOptions.environmentId;
+      this.requestHeaders.putAll(listGatewaysOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ListGatewaysOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     */
+    public ListGatewaysOptionsBuilder(String environmentId) {
+      this.environmentId = environmentId;
+    }
+
+    /**
+     * Builds a ListGatewaysOptions.
+     *
+     * @return the listGatewaysOptions
+     */
+    public ListGatewaysOptions build() {
+      return new ListGatewaysOptions(this);
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the ListGatewaysOptions builder
+     */
+    public ListGatewaysOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListGatewaysOptions builder
+     */
+    public ListGatewaysOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
