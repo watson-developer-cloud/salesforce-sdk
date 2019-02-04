@@ -5504,6 +5504,7 @@ public class IBMDiscoveryV1Models {
     private Long available_serialized_name;
     private Long processing_serialized_name;
     private Long failed_serialized_name;
+    private Long pending_serialized_name;
  
     /**
      * Gets the available.
@@ -5539,6 +5540,18 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public Long getFailed() {
       return failed_serialized_name;
+    }
+ 
+    /**
+     * Gets the pending.
+     *
+     * The number of documents that have been uploaded to the collection, but have not yet started processing.
+     *
+     * @return the pending
+     */
+    @AuraEnabled
+    public Long getPending() {
+      return pending_serialized_name;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
