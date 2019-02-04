@@ -65,6 +65,8 @@ private class IBMCompareComplyV1Test {
   private static String HEADER_VALUE;
   private static Datetime TEST_DATE;
   private static String CANCEL;
+  private static String UNKNOWN;
+  private static String HIGH;
 
   static {
     VERSION = '2018-10-15';
@@ -132,6 +134,8 @@ private class IBMCompareComplyV1Test {
     HEADER_VALUE = 'header_value';
     TEST_DATE = (Datetime) JSON.deserialize('"1995-06-12T01:11:11.111Z"', Datetime.class);
     CANCEL = 'cancel';
+    UNKNOWN = 'Unknown';
+    HIGH = 'High';
   }
 
   static testMethod void testAddFeedbackOptions() {
@@ -632,14 +636,18 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getRowIndexEnd());
     System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getBodyCells().get(0).getColumnIndexBegin());
     System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getColumnIndexEnd());
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0).getId());
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0).getText());
+    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0));
+    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0));
     System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0).getTextNormalized());
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0).getId());
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0).getText());
+        response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0));
+    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0));
+    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0));
     System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0).getTextNormalized());
+        response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0));
+    System.assertEquals(TYPE, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getXtype());
+    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getText());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXend());
     System.assertEquals(TEXT, response.getDocumentStructure().getSectionTitles().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getDocumentStructure().getSectionTitles().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getDocumentStructure().getSectionTitles().get(0).getLocation().getXend());
@@ -656,6 +664,7 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_END,
         response.getDocumentStructure().getLeadingSentences().get(0).getElementLocations().get(0).getXend());
     System.assertEquals(PARTY, response.getParties().get(0).getParty());
+    System.assertEquals(UNKNOWN, response.getParties().get(0).getImportance());
     System.assertEquals(ROLE, response.getParties().get(0).getRole());
     System.assertEquals(TEXT, response.getParties().get(0).getAddresses().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getParties().get(0).getAddresses().get(0).getLocation().getXbegin());
@@ -665,12 +674,15 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEXT, response.getEffectiveDates().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getEffectiveDates().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getEffectiveDates().get(0).getLocation().getXend());
+    System.assertEquals(HIGH, response.getEffectiveDates().get(0).getConfidenceLevel());
     System.assertEquals(TEXT, response.getContractAmounts().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getContractAmounts().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getContractAmounts().get(0).getLocation().getXend());
+    System.assertEquals(HIGH, response.getContractAmounts().get(0).getConfidenceLevel());
     System.assertEquals(TEXT, response.getTerminationDates().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getTerminationDates().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTerminationDates().get(0).getLocation().getXend());
+    System.assertEquals(HIGH, response.getTerminationDates().get(0).getConfidenceLevel());
     Test.stopTest();
   }
 
@@ -747,14 +759,18 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getRowIndexEnd());
     System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getBodyCells().get(0).getColumnIndexBegin());
     System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getColumnIndexEnd());
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0).getId());
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0).getText());
+    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0));
+    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0));
     System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0).getTextNormalized());
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0).getId());
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0).getText());
+        response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0));
+    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0));
+    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0));
     System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0).getTextNormalized());
+        response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0));
+    System.assertEquals(TYPE, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getXtype());
+    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getText());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXend());
     Test.stopTest();
   }
 
@@ -818,6 +834,7 @@ private class IBMCompareComplyV1Test {
         response.getAlignedElements().get(0).getElementPair().get(0).getAttributes().get(0).getLocation().getXend());
     System.assertEquals(true, response.getAlignedElements().get(0).getIdenticalText());
     System.assertEquals(PROVENANCE_ID, response.getAlignedElements().get(0).getProvenanceIds().get(0));
+    System.assertEquals(true, response.getAlignedElements().get(0).getSignificantElements());
     System.assertEquals(DOCUMENT_LABEL, response.getUnalignedElements().get(0).getDocumentLabel());
     System.assertEquals(TEXT, response.getUnalignedElements().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getUnalignedElements().get(0).getLocation().getXbegin());
