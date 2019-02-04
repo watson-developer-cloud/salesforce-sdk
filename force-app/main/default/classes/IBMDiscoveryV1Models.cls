@@ -9729,6 +9729,128 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
+   * The getStopwordListStatus options.
+   */
+  public class GetStopwordListStatusOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+ 
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+ 
+    /**
+     * Gets the collectionId.
+     *
+     * The ID of the collection.
+     *
+     * @return the collectionId
+     */
+    public String collectionId() {
+      return collectionId;
+    }
+
+    private GetStopwordListStatusOptions(GetStopwordListStatusOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetStopwordListStatusOptions builder
+     */
+    public GetStopwordListStatusOptionsBuilder newBuilder() {
+      return new GetStopwordListStatusOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetStopwordListStatusOptions Builder.
+   */
+  public class GetStopwordListStatusOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+
+    private GetStopwordListStatusOptionsBuilder(GetStopwordListStatusOptions getStopwordListStatusOptions) {
+      environmentId = getStopwordListStatusOptions.environmentId;
+      collectionId = getStopwordListStatusOptions.collectionId;
+      this.requestHeaders.putAll(getStopwordListStatusOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetStopwordListStatusOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     */
+    public GetStopwordListStatusOptionsBuilder(String environmentId, String collectionId) {
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+    }
+
+    /**
+     * Builds a GetStopwordListStatusOptions.
+     *
+     * @return the getStopwordListStatusOptions
+     */
+    public GetStopwordListStatusOptions build() {
+      return new GetStopwordListStatusOptions(this);
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the GetStopwordListStatusOptions builder
+     */
+    public GetStopwordListStatusOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collectionId.
+     *
+     * @param collectionId the collectionId
+     * @return the GetStopwordListStatusOptions builder
+     */
+    public GetStopwordListStatusOptionsBuilder collectionId(String collectionId) {
+      this.collectionId = collectionId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetStopwordListStatusOptions builder
+     */
+    public GetStopwordListStatusOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The getTokenizationDictionaryStatus options.
    */
   public class GetTokenizationDictionaryStatusOptions extends IBMWatsonOptionsModel {
