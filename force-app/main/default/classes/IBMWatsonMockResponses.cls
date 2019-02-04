@@ -283,7 +283,8 @@ public class IBMWatsonMockResponses {
             '  "document_counts": {' +
             '    "available": 0, ' +
             '    "processing": 0, ' +
-            '    "failed": 0' +
+            '    "failed": 0,' +
+            '    "pending": 100' +
             '  }, ' +
             '  "disk_usage": {' +
             '    "used_bytes": 260' +
@@ -315,7 +316,8 @@ public class IBMWatsonMockResponses {
             '  "document_counts": {' +
             '    "available": 0, ' +
             '    "processing": 0, ' +
-            '    "failed": 0' +
+            '    "failed": 0,' +
+            '    "pending": 100' +
             '  }, ' +
             '  "disk_usage": {' +
             '    "used_bytes": 260' +
@@ -2925,6 +2927,13 @@ public class IBMWatsonMockResponses {
     return '{' +
       '"status" : "active",' +
       '"type" : "tokenization_dictionary"' +
+    '}';
+  }
+
+  public static testMethod String tokenDictStatusResponseStopwords() {
+    return '{' +
+      '"status" : "active",' +
+      '"type" : "stopwords"' +
     '}';
   }
 
