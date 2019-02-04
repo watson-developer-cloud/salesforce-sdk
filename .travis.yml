@@ -21,6 +21,7 @@ install:
 - mv force-app/main/test/* force-app/main/default/classes
 - pip install bumpversion
 - npm install @semantic-release/exec
+- npm install @semantic-release/git
 - 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then cd appscan; make asoc-tool; cd ../; fi'
 
 before_script:
