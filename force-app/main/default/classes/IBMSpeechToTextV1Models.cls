@@ -8619,7 +8619,9 @@ public class IBMSpeechToTextV1Models {
      *
      * The customization ID (GUID) of a custom language model that is to be used during training of the custom acoustic
      * model. Specify a custom language model that has been trained with verbatim transcriptions of the audio resources
-     * or that contains words that are relevant to the contents of the audio resources.
+     * or that contains words that are relevant to the contents of the audio resources. The custom language model must
+     * be based on the same version of the same base model as the custom acoustic model. The credentials specified with
+     * the request must own both custom models.
      *
      * @return the customLanguageModelId
      */
@@ -8975,6 +8977,7 @@ public class IBMSpeechToTextV1Models {
   public class UpgradeAcousticModelOptions extends IBMWatsonOptionsModel {
     private String customizationId;
     private String customLanguageModelId;
+    private Boolean force;
  
     /**
      * Gets the customizationId.
@@ -8992,18 +8995,35 @@ public class IBMSpeechToTextV1Models {
      * Gets the customLanguageModelId.
      *
      * If the custom acoustic model was trained with a custom language model, the customization ID (GUID) of that custom
-     * language model. The custom language model must be upgraded before the custom acoustic model can be upgraded.
+     * language model. The custom language model must be upgraded before the custom acoustic model can be upgraded. The
+     * credentials specified with the request must own both custom models.
      *
      * @return the customLanguageModelId
      */
     public String customLanguageModelId() {
       return customLanguageModelId;
     }
+ 
+    /**
+     * Gets the force.
+     *
+     * If `true`, forces the upgrade of a custom acoustic model for which no input data has been modified since it was
+     * last trained. Use this parameter only to force the upgrade of a custom acoustic model that is trained with a
+     * custom language model, and only if you receive a 400 response code and the message `No input data modified since
+     * last training`. See [Upgrading a custom acoustic
+     * model](https://cloud.ibm.com/docs/services/speech-to-text/custom-upgrade.html#upgradeAcoustic).
+     *
+     * @return the force
+     */
+    public Boolean force() {
+      return force;
+    }
 
     private UpgradeAcousticModelOptions(UpgradeAcousticModelOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
       customizationId = builder.customizationId;
       customLanguageModelId = builder.customLanguageModelId;
+      force = builder.force;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -9024,10 +9044,12 @@ public class IBMSpeechToTextV1Models {
   public class UpgradeAcousticModelOptionsBuilder extends IBMWatsonOptionsModel {
     private String customizationId;
     private String customLanguageModelId;
+    private Boolean force;
 
     private UpgradeAcousticModelOptionsBuilder(UpgradeAcousticModelOptions upgradeAcousticModelOptions) {
       customizationId = upgradeAcousticModelOptions.customizationId;
       customLanguageModelId = upgradeAcousticModelOptions.customLanguageModelId;
+      force = upgradeAcousticModelOptions.force;
       this.requestHeaders.putAll(upgradeAcousticModelOptions.requestHeaders());
     }
 
@@ -9074,6 +9096,17 @@ public class IBMSpeechToTextV1Models {
      */
     public UpgradeAcousticModelOptionsBuilder customLanguageModelId(String customLanguageModelId) {
       this.customLanguageModelId = customLanguageModelId;
+      return this;
+    }
+
+    /**
+     * Set the force.
+     *
+     * @param force the force
+     * @return the UpgradeAcousticModelOptions builder
+     */
+    public UpgradeAcousticModelOptionsBuilder force(Boolean force) {
+      this.force = force;
       return this;
     }
 
