@@ -724,6 +724,7 @@ public class IBMCompareComplyV1Models {
     private List<String> column_header_ids_serialized_name;
     private List<String> column_header_texts_serialized_name;
     private List<String> column_header_texts_normalized_serialized_name;
+    private List<Attribute> attributes_serialized_name;
  
     /**
      * Gets the cellId.
@@ -1032,7 +1033,17 @@ public class IBMCompareComplyV1Models {
       Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
       ret.setLocation(newLocation);
 
+      // calling custom deserializer for attributes
+      List<Attribute> newAttributes = new List<Attribute>();
+      List<Attribute> deserializedAttributes = ret.getAttributes();
+      if (deserializedAttributes != null) {
+        for (Integer i = 0; i < deserializedAttributes.size(); i++) {
+          Attribute currentItem = ret.getAttributes().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('attributes_serialized_name');
+          Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
+          newAttributes.add(newItem);
         }
+        ret.setAttributes(newAttributes);
       }
 
       return ret;
