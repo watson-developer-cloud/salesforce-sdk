@@ -6230,6 +6230,7 @@ public class IBMCompareComplyV1Models {
    */
   public class Parties extends IBMWatsonGenericModel {
     private String party_serialized_name;
+    private String importance_serialized_name;
     private String role_serialized_name;
     private List<Address> addresses_serialized_name;
     private List<Contact> contacts_serialized_name;
@@ -6244,6 +6245,18 @@ public class IBMCompareComplyV1Models {
     @AuraEnabled
     public String getParty() {
       return party_serialized_name;
+    }
+ 
+    /**
+     * Gets the importance.
+     *
+     * A string that identifies the importance of the party.
+     *
+     * @return the importance
+     */
+    @AuraEnabled
+    public String getImportance() {
+      return importance_serialized_name;
     }
  
     /**
@@ -6289,6 +6302,15 @@ public class IBMCompareComplyV1Models {
      */
     public void setParty(final String party) {
       this.party_serialized_name = party;
+    }
+
+    /**
+     * Sets the importance.
+     *
+     * @param importance the new importance
+     */
+    public void setImportance(final String importance) {
+      this.importance_serialized_name = importance;
     }
 
     /**
