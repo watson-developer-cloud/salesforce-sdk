@@ -460,7 +460,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Gets the clean.
      *
      * Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see the [Analyzing
-     * webpages](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html) documentation.
+     * webpages](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html)
+     * documentation.
      *
      * @return the clean
      */
@@ -471,9 +472,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the xpath.
      *
-     * An [XPath query](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html#xpath) to perform on
-     * `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it is analyzed.
-     * To analyze only the results of the XPath query, set the `clean` parameter to `false`.
+     * An [XPath
+     * query](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html#xpath) to
+     * perform on `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it is
+     * analyzed. To analyze only the results of the XPath query, set the `clean` parameter to `false`.
      *
      * @return the xpath
      */
@@ -784,7 +786,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Gets the xlimit.
      *
      * Maximum number of categories to return.
-     * Maximum value: **10**.
      *
      * @return the xlimit
      */
@@ -824,7 +825,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Gets the label.
      *
      * The path to the category through the 5-level taxonomy hierarchy. For the complete list of categories, see the
-     * [Categories hierarchy](https://cloud.ibm.com/docs/services/natural-language-understanding/categories.html#categories-hierarchy)
+     * [Categories
+     * hierarchy](https://cloud.ibm.com/docs/services/natural-language-understanding/categories.html#categories-hierarchy)
      * documentation.
      *
      * @return the label
@@ -879,7 +881,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * Returns high-level concepts in the content. For example, a research paper about deep learning might return the
    * concept, "Artificial Intelligence" although the term is not mentioned.
    *
-   * Supported languages: English, French, German, Japanese, Korean, Portuguese, Spanish.
+   * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
    */
   public class ConceptsOptions {
     private Long limit_serialized_name;
@@ -1038,7 +1040,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the modelId.
      *
-     * model_id of the model to delete.
+     * Model ID of the model to delete.
      *
      * @return the modelId
      */
@@ -1630,7 +1632,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding/entity-types.html).
    *
    * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
-   * Arabic, Chinese, and Dutch custom models are also supported.
+   * Arabic, Chinese, and Dutch are supported only through custom models.
    */
   public class EntitiesOptions {
     private Long limit_serialized_name;
@@ -1664,8 +1666,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the model.
      *
-     * Enter a [custom model](https://www.bluemix.net/docs/services/natural-language-understanding/customizing.html) ID
-     * to override the standard entity detection model.
+     * Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to
+     * override the standard entity detection model.
      *
      * @return the model
      */
@@ -2138,7 +2140,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Returns high-level concepts in the content. For example, a research paper about deep learning might return the
      * concept, "Artificial Intelligence" although the term is not mentioned.
      *
-     * Supported languages: English, French, German, Japanese, Korean, Portuguese, Spanish.
+     * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
      *
      * @return the concepts
      */
@@ -2168,7 +2170,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding/entity-types.html).
      *
      * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
-     * Arabic, Chinese, and Dutch custom models are also supported.
+     * Arabic, Chinese, and Dutch are supported only through custom models.
      *
      * @return the entities
      */
@@ -2774,7 +2776,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * Models available for Relations and Entities features.
+   * Custom models that are available for entities and relations.
    */
   public class ListModelsResults extends IBMWatsonResponseModel {
     private List<Model> models_serialized_name;
@@ -3356,8 +3358,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the model.
      *
-     * Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to override the default
-     * model.
+     * Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to
+     * override the default model.
      *
      * @return the model
      */

@@ -632,6 +632,7 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(resp.getDocumentCounts().getAvailable(), 0);
     System.assertEquals(resp.getDocumentCounts().getProcessing(), 0);
     System.assertEquals(resp.getDocumentCounts().getFailed(), 0);
+    System.assertEquals(100, resp.getDocumentCounts().getPending());
     System.assertEquals(resp.getDiskUsage().getUsedBytes(), 260);
     System.assertEquals(resp.getTrainingStatus().getTotalExamples(), 0);
     System.assertEquals(resp.getTrainingStatus().getAvailable(), false);
@@ -677,6 +678,7 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(resp.getDocumentCounts().getAvailable(), 0);
     System.assertEquals(resp.getDocumentCounts().getProcessing(), 0);
     System.assertEquals(resp.getDocumentCounts().getFailed(), 0);
+    System.assertEquals(100, resp.getDocumentCounts().getPending());
     System.assertEquals(resp.getDiskUsage().getUsedBytes(), 260);
     System.assertEquals(resp.getTrainingStatus().getTotalExamples(), 10);
     System.assertEquals(resp.getTrainingStatus().getAvailable(), true);
@@ -2562,6 +2564,49 @@ private class IBMDiscoveryV1Test {
         .collectionId(collectionId)
         .build();
     discovery.deleteStopwordList(deleteStopwordListOptions);
+
+    Test.stopTest();
+  }
+
+  static testMethod void testGetStopwordListStatusOptions() {
+    Test.startTest();
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.GetStopwordListStatusOptions getStopwordListStatusOptions = new IBMDiscoveryV1Models.GetStopwordListStatusOptionsBuilder()
+        .environmentId(environmentId)
+        .collectionId(collectionId)
+        .build();
+    getStopwordListStatusOptions = getStopwordListStatusOptions.newBuilder().build();
+
+    System.assertEquals(environmentId, getStopwordListStatusOptions.environmentId());
+    System.assertEquals(collectionId, getStopwordListStatusOptions.collectionId());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testGetStopwordListStatus() {
+    String body = IBMWatsonMockResponses.tokenDictStatusResponseStopwords();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
+    discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
+    discovery.setUsernameAndPassword('username', 'password');
+
+    String environmentId = 'environment_id';
+    String collectionId = 'collection_id';
+
+    IBMDiscoveryV1Models.GetStopwordListStatusOptions getStopwordListStatusOptions = new IBMDiscoveryV1Models.GetStopwordListStatusOptionsBuilder()
+        .environmentId(environmentId)
+        .collectionId(collectionId)
+        .build();
+    IBMDiscoveryV1Models.TokenDictStatusResponse response = discovery.getStopwordListStatus(getStopwordListStatusOptions);
+
+    System.assertEquals('active', response.getStatus());
+    System.assertEquals('stopwords', response.getXtype());
 
     Test.stopTest();
   }

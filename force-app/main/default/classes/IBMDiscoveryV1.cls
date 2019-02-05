@@ -776,6 +776,30 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   }
 
   /**
+   * Get stopword list status.
+   *
+   * Returns the current status of the stopword list for the specified collection.
+   *
+   * @param getStopwordListStatusOptions the {@link IBMDiscoveryV1Models.GetStopwordListStatusOptions} containing the options for the call
+   * @return the {@link IBMDiscoveryV1Models.TokenDictStatusResponse} with the response
+   */
+  public IBMDiscoveryV1Models.TokenDictStatusResponse getStopwordListStatus(IBMDiscoveryV1Models.GetStopwordListStatusOptions getStopwordListStatusOptions) {
+    IBMWatsonValidator.notNull(getStopwordListStatusOptions, 'getStopwordListStatusOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/word_lists/stopwords', new String[]{ getStopwordListStatusOptions.environmentId(), getStopwordListStatusOptions.collectionId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=getStopwordListStatus');
+    Map<String, String> requestHeaders = (getStopwordListStatusOptions != null) ? getStopwordListStatusOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    return (IBMDiscoveryV1Models.TokenDictStatusResponse) createServiceCall(builder.build(), IBMDiscoveryV1Models.TokenDictStatusResponse.class);
+  }
+
+  /**
    * Get tokenization dictionary status.
    *
    * Returns the current status of the tokenization dictionary for the specified collection.

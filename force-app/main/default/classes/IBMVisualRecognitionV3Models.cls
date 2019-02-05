@@ -50,6 +50,11 @@ public class IBMVisualRecognitionV3Models {
      *
      * Name of the class.
      *
+     * Class names are translated in the language defined by the **Accept-Language** request header for the build-in
+     * classifier IDs (`default`, `food`, and `explicit`). Class names of custom classifiers are not translated. The
+     * response might not be in the specified language when the requested language is not supported or when there is no
+     * translation for the class name.
+     *
      * @return the className
      */
     @AuraEnabled
@@ -439,8 +444,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the owner.
      *
-     * Unique ID of the account who owns the classifier. Returned when verbose=`true`. Might not be returned by some
-     * requests.
+     * Unique ID of the account who owns the classifier. Might not be returned by some requests.
      *
      * @return the owner
      */
@@ -512,8 +516,8 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the retrained.
      *
-     * Date and time in Coordinated Universal Time (UTC) that the classifier was updated. Returned when verbose=`true`.
-     * Might not be returned by some requests. Identical to `updated` and retained for backward compatibility.
+     * Date and time in Coordinated Universal Time (UTC) that the classifier was updated. Might not be returned by some
+     * requests. Identical to `updated` and retained for backward compatibility.
      *
      * @return the retrained
      */
@@ -526,7 +530,7 @@ public class IBMVisualRecognitionV3Models {
      * Gets the updated.
      *
      * Date and time in Coordinated Universal Time (UTC) that the classifier was most recently updated. The field
-     * matches either `retrained` or `created`.  Returned when verbose=`true`. Might not be returned by some requests.
+     * matches either `retrained` or `created`. Might not be returned by some requests.
      *
      * @return the updated
      */
@@ -811,9 +815,9 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the imagesFile.
      *
-     * An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include no more than 20 images
-     * and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they contain non-ASCII
-     * characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.
+     * An image file (.gif, .jpg, .png, .tif) or .zip file with images. Maximum image size is 10 MB. Include no more
+     * than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they contain
+     * non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.
      *
      * You can also include an image with the **url** parameter.
      *
@@ -837,11 +841,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the acceptLanguage.
      *
-     * The language of the output class names. The full set of languages is supported for the built-in classifier IDs:
-     * `default`, `food`, and `explicit`. The class names of custom classifiers are not translated.
-     *
-     * The response might not be in the specified language when the requested language is not supported or when there is
-     * no translation for the class name.
+     * The desired language of parts of the response. See the response for details.
      *
      * @return the acceptLanguage
      */
@@ -852,8 +852,9 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the url.
      *
-     * The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel density is 32X32
-     * pixels per inch, and the maximum image size is 10 MB.
+     * The URL of an image (.gif, .jpg, .png, .tif) to analyze. The minimum recommended pixel density is 32X32 pixels,
+     * but the service tends to perform better with images that are at least 224 x 224 pixels. The maximum image size is
+     * 10 MB.
      *
      * You can also include images with the **images_file** parameter.
      *
@@ -866,8 +867,8 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the threshold.
      *
-     * The minimum score a class must have to be displayed in the response. Set the threshold to `0.0` to ignore the
-     * classification score and return all values.
+     * The minimum score a class must have to be displayed in the response. Set the threshold to `0.0` to return all
+     * identified classes.
      *
      * @return the threshold
      */
@@ -878,13 +879,13 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the owners.
      *
-     * The categories of classifiers to apply. Use `IBM` to classify against the `default` general classifier, and use
-     * `me` to classify against your custom classifiers. To analyze the image against both classifier categories, set
-     * the value to both `IBM` and `me`.
-     *
-     * The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.
-     *
-     * The **classifier_ids** parameter overrides **owners**, so make sure that **classifier_ids** is empty.
+     * The categories of classifiers to apply. The **classifier_ids** parameter overrides **owners**, so make sure that
+     * **classifier_ids** is empty.
+     * - Use `IBM` to classify against the `default` general classifier. You get the same result if both
+     * **classifier_ids** and **owners** parameters are empty.
+     * - Use `me` to classify against all your custom classifiers. However, for better performance use
+     * **classifier_ids** to specify the specific custom classifiers to apply.
+     * - Use both `IBM` and `me` to analyze the image against both classifier categories.
      *
      * @return the owners
      */
@@ -1593,8 +1594,8 @@ public class IBMVisualRecognitionV3Models {
      * Gets the url.
      *
      * The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel
-     * density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed, so you can use a
-     * shortened URL.
+     * density is 32X32 pixels, but the service tends to perform better with images that are at least 224 x 224 pixels.
+     * The maximum image size is 10 MB. Redirects are followed, so you can use a shortened URL.
      *
      * You can also include images with the **images_file** parameter.
      *
@@ -1607,7 +1608,7 @@ public class IBMVisualRecognitionV3Models {
     /**
      * Gets the acceptLanguage.
      *
-     * The language used for the value of `gender_label` in the response.
+     * The desired language of parts of the response. See the response for details.
      *
      * @return the acceptLanguage
      */

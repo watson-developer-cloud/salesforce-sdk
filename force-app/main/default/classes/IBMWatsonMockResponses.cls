@@ -283,7 +283,8 @@ public class IBMWatsonMockResponses {
             '  "document_counts": {' +
             '    "available": 0, ' +
             '    "processing": 0, ' +
-            '    "failed": 0' +
+            '    "failed": 0,' +
+            '    "pending": 100' +
             '  }, ' +
             '  "disk_usage": {' +
             '    "used_bytes": 260' +
@@ -315,7 +316,8 @@ public class IBMWatsonMockResponses {
             '  "document_counts": {' +
             '    "available": 0, ' +
             '    "processing": 0, ' +
-            '    "failed": 0' +
+            '    "failed": 0,' +
+            '    "pending": 100' +
             '  }, ' +
             '  "disk_usage": {' +
             '    "used_bytes": 260' +
@@ -2928,6 +2930,13 @@ public class IBMWatsonMockResponses {
     '}';
   }
 
+  public static testMethod String tokenDictStatusResponseStopwords() {
+    return '{' +
+      '"status" : "active",' +
+      '"type" : "stopwords"' +
+    '}';
+  }
+
   public static testMethod String batchStatusResponse() {
     return '{' +
       '"function": "element_classification",' +
@@ -3090,34 +3099,32 @@ public class IBMWatsonMockResponses {
               '"column_index_begin": 4000,' +
               '"column_index_end": 5000,' +
               '"row_header_ids": [' +
-                '{' +
-                  '"id": "id"' +
-                '}' +
+                '"id"' +
               '],' +
               '"row_header_texts": [' +
-                '{' +
-                  '"text": "text"' +
-                '}' +
+                '"text"' +
               '],' +
               '"row_header_texts_normalized": [' +
-                '{' +
-                  '"text_normalized": "text_normalized"' +
-                '}' +
+                '"text_normalized"' +
               '],' +
               '"column_header_ids": [' +
-                '{' +
-                  '"id": "id"' +
-                '}' +
+                '"id"' +
               '],' +
               '"column_header_texts": [' +
-                '{' +
-                  '"text": "text"' +
-                '}' +
+                '"text"' +
               '],' +
               '"column_header_texts_normalized": [' +
-                '{' +
-                  '"text_normalized": "text_normalized"' +
-                '}' +
+                '"text_normalized"' +
+              '],' +
+              '"attributes": [' +
+              '  {' +
+              '    "type": "type",' +
+              '    "text": "text",' +
+              '    "location": {' +
+              '      "begin": 0,' +
+              '      "end": 1' +
+              '    }' +
+              '  }' +
               ']' +
             '}' +
           ']' +
@@ -3159,6 +3166,7 @@ public class IBMWatsonMockResponses {
       '"parties": [' +
         '{' +
           '"party": "party",' +
+          '"importance": "Unknown",' +
           '"role": "role",' +
           '"addresses": [' +
             '{' +
@@ -3183,7 +3191,8 @@ public class IBMWatsonMockResponses {
           '"location": {' +
             '"begin": 0,' +
             '"end": 1' +
-          '}' +
+          '},' +
+          '"confidence_level": "High"' +
         '}' +
       '],' +
       '"contract_amounts": [' +
@@ -3192,7 +3201,8 @@ public class IBMWatsonMockResponses {
           '"location": {' +
             '"begin": 0,' +
             '"end": 1' +
-          '}' +
+          '},' +
+          '"confidence_level": "High"' +
         '}' +
       '],' +
       '"termination_dates": [' +
@@ -3201,7 +3211,8 @@ public class IBMWatsonMockResponses {
           '"location": {' +
             '"begin": 0,' +
             '"end": 1' +
-          '}' +
+          '},' +
+          '"confidence_level": "High"' +
         '}' +
       ']' +
     '}';
@@ -3261,7 +3272,8 @@ public class IBMWatsonMockResponses {
           '"identical_text": true,' +
           '"provenance_ids": [' +
             '"provenance_id"' +
-          ']' +
+          '],' +
+          '"significant_elements": true' +
         '}' +
       '],' +
       '"unaligned_elements": [' +
@@ -3621,34 +3633,32 @@ public class IBMWatsonMockResponses {
               '"column_index_begin": 4000,' +
               '"column_index_end": 5000,' +
               '"row_header_ids": [' +
-                '{' +
-                  '"id": "id"' +
-                '}' +
+                '"id"' +
               '],' +
               '"row_header_texts": [' +
-                '{' +
-                  '"text": "text"' +
-                '}' +
+                '"text"' +
               '],' +
               '"row_header_texts_normalized": [' +
-                '{' +
-                  '"text_normalized": "text_normalized"' +
-                '}' +
+                '"text_normalized"' +
               '],' +
               '"column_header_ids": [' +
-                '{' +
-                  '"id": "id"' +
-                '}' +
+                '"id"' +
               '],' +
               '"column_header_texts": [' +
-                '{' +
-                  '"text": "text"' +
-                '}' +
+                '"text"' +
               '],' +
               '"column_header_texts_normalized": [' +
-                '{' +
-                  '"text_normalized": "text_normalized"' +
-                '}' +
+                '"text_normalized"' +
+              '],' +
+              '"attributes": [' +
+              '  {' +
+              '    "type": "type",' +
+              '    "text": "text",' +
+              '    "location": {' +
+              '      "begin": 0,' +
+              '      "end": 1' +
+              '    }' +
+              '  }' +
               ']' +
             '}' +
           ']' +

@@ -13089,7 +13089,7 @@ public class IBMAssistantV1Models {
   /**
    * The response sent by the workspace, including the output text, detected intents and entities, and context.
    */
-  public class MessageResponse extends IBMWatsonDynamicResponseModel {
+  public class MessageResponse extends IBMWatsonResponseModel {
     private MessageInput input_serialized_name;
     private List<RuntimeIntent> intents_serialized_name;
     private List<RuntimeEntity> entities_serialized_name;
@@ -13097,10 +13097,11 @@ public class IBMAssistantV1Models {
     private Context context_serialized_name;
     private OutputData output_serialized_name;
     private List<DialogNodeAction> actions_serialized_name;
-    private Map<String, Object> additional_properties_serialized_name;
-
+ 
     /**
      * Gets the input.
+     *
+     * The text of the user input.
      *
      * @return the input
      */
@@ -13108,9 +13109,11 @@ public class IBMAssistantV1Models {
     public MessageInput getInput() {
       return input_serialized_name;
     }
-
+ 
     /**
      * Gets the intents.
+     *
+     * An array of intents recognized in the user input, sorted in descending order of confidence.
      *
      * @return the intents
      */
@@ -13118,9 +13121,11 @@ public class IBMAssistantV1Models {
     public List<RuntimeIntent> getIntents() {
       return intents_serialized_name;
     }
-
+ 
     /**
      * Gets the entities.
+     *
+     * An array of entities identified in the user input.
      *
      * @return the entities
      */
@@ -13128,9 +13133,11 @@ public class IBMAssistantV1Models {
     public List<RuntimeEntity> getEntities() {
       return entities_serialized_name;
     }
-
+ 
     /**
      * Gets the alternateIntents.
+     *
+     * Whether to return more than one intent. A value of `true` indicates that all matching intents are returned.
      *
      * @return the alternateIntents
      */
@@ -13138,9 +13145,11 @@ public class IBMAssistantV1Models {
     public Boolean getAlternateIntents() {
       return alternate_intents_serialized_name;
     }
-
+ 
     /**
      * Gets the context.
+     *
+     * State information for the conversation. To maintain state, include the context from the previous response.
      *
      * @return the context
      */
@@ -13148,9 +13157,12 @@ public class IBMAssistantV1Models {
     public Context getContext() {
       return context_serialized_name;
     }
-
+ 
     /**
      * Gets the output.
+     *
+     * An output object that includes the response to the user, the dialog nodes that were triggered, and messages from
+     * the log.
      *
      * @return the output
      */
@@ -13158,25 +13170,17 @@ public class IBMAssistantV1Models {
     public OutputData getOutput() {
       return output_serialized_name;
     }
-
+ 
     /**
      * Gets the actions.
+     *
+     * An array of objects describing any actions requested by the dialog node.
      *
      * @return the actions
      */
     @AuraEnabled
     public List<DialogNodeAction> getActions() {
       return actions_serialized_name;
-    }
-
-    /**
-     * Gets the dynamic properties attached to MessageResponse.
-     *
-     * @return the dynamic properties
-     */
-    @AuraEnabled
-    public Map<String, Object> getAdditionalProperties() {
-      return this.getDynamicProperties();
     }
 
     /**
@@ -13298,14 +13302,6 @@ public class IBMAssistantV1Models {
           newActions.add(newItem);
         }
         ret.setActions(newActions);
-      }
-
-      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
-
-      for (String key : jsonMap.keySet()) {
-        if (!baseProps.contains(key)) {
-          ret.put(key, jsonMap.get(key));
-        }
       }
 
       return ret;

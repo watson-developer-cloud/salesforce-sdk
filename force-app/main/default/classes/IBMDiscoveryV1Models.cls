@@ -5425,7 +5425,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the status.
      *
-     * Status of the document in the ingestion process.
+     * Status of the document in the ingestion process. A status of `processing` is returned for documents that are
+     * ingested with a *version* date before `2019-01-01`. The `pending` status is returned for all others.
      *
      * @return the status
      */
@@ -5504,6 +5505,7 @@ public class IBMDiscoveryV1Models {
     private Long available_serialized_name;
     private Long processing_serialized_name;
     private Long failed_serialized_name;
+    private Long pending_serialized_name;
  
     /**
      * Gets the available.
@@ -5539,6 +5541,18 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public Long getFailed() {
       return failed_serialized_name;
+    }
+ 
+    /**
+     * Gets the pending.
+     *
+     * The number of documents that have been uploaded to the collection, but have not yet started processing.
+     *
+     * @return the pending
+     */
+    @AuraEnabled
+    public Long getPending() {
+      return pending_serialized_name;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -8891,7 +8905,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * The getGatewayDetails options.
+   * The getGateway options.
    */
   public class GetGatewayOptions extends IBMWatsonOptionsModel {
     private String environmentId;
@@ -8945,10 +8959,10 @@ public class IBMDiscoveryV1Models {
     private String environmentId;
     private String gatewayId;
 
-    private GetGatewayOptionsBuilder(GetGatewayOptions getGatewayDetailsOptions) {
-      environmentId = getGatewayDetailsOptions.environmentId;
-      gatewayId = getGatewayDetailsOptions.gatewayId;
-      this.requestHeaders.putAll(getGatewayDetailsOptions.requestHeaders());
+    private GetGatewayOptionsBuilder(GetGatewayOptions getGatewayOptions) {
+      environmentId = getGatewayOptions.environmentId;
+      gatewayId = getGatewayOptions.gatewayId;
+      this.requestHeaders.putAll(getGatewayOptions.requestHeaders());
     }
 
     /**
@@ -8971,7 +8985,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Builds a GetGatewayOptions.
      *
-     * @return the getGatewayDetailsOptions
+     * @return the getGatewayOptions
      */
     public GetGatewayOptions build() {
       return new GetGatewayOptions(this);
@@ -9007,99 +9021,6 @@ public class IBMDiscoveryV1Models {
      * @return the GetGatewayOptions builder
      */
     public GetGatewayOptionsBuilder addHeader(String name, String value) {
-      this.requestHeaders.put(name, value);
-      return this;
-    }
-  }
-
-  /**
-   * The getGatewayList options.
-   */
-  public class ListGatewaysOptions extends IBMWatsonOptionsModel {
-    private String environmentId;
- 
-    /**
-     * Gets the environmentId.
-     *
-     * The ID of the environment.
-     *
-     * @return the environmentId
-     */
-    public String environmentId() {
-      return environmentId;
-    }
-
-    private ListGatewaysOptions(ListGatewaysOptionsBuilder builder) {
-      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
-      environmentId = builder.environmentId;
-      this.requestHeaders = builder.requestHeaders;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a ListGatewaysOptions builder
-     */
-    public ListGatewaysOptionsBuilder newBuilder() {
-      return new ListGatewaysOptionsBuilder(this);
-    }
-
-  }
-
-  /**
-   * ListGatewaysOptions Builder.
-   */
-  public class ListGatewaysOptionsBuilder extends IBMWatsonOptionsModel {
-    private String environmentId;
-
-    private ListGatewaysOptionsBuilder(ListGatewaysOptions listGatewaysOptions) {
-      environmentId = listGatewaysOptions.environmentId;
-      this.requestHeaders.putAll(listGatewaysOptions.requestHeaders());
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public ListGatewaysOptionsBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param environmentId the environmentId
-     */
-    public ListGatewaysOptionsBuilder(String environmentId) {
-      this.environmentId = environmentId;
-    }
-
-    /**
-     * Builds a ListGatewaysOptions.
-     *
-     * @return the listGatewaysOptions
-     */
-    public ListGatewaysOptions build() {
-      return new ListGatewaysOptions(this);
-    }
-
-    /**
-     * Set the environmentId.
-     *
-     * @param environmentId the environmentId
-     * @return the ListGatewaysOptions builder
-     */
-    public ListGatewaysOptionsBuilder environmentId(String environmentId) {
-      this.environmentId = environmentId;
-      return this;
-    }
-
-    /**
-     * Add a request header.
-     *
-     * @param name the header name
-     * @param value the header value
-     * @return the ListGatewaysOptions builder
-     */
-    public ListGatewaysOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -9723,6 +9644,128 @@ public class IBMDiscoveryV1Models {
      * @return the GetMetricsQueryTokenEventOptions builder
      */
     public GetMetricsQueryTokenEventOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The getStopwordListStatus options.
+   */
+  public class GetStopwordListStatusOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+ 
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+ 
+    /**
+     * Gets the collectionId.
+     *
+     * The ID of the collection.
+     *
+     * @return the collectionId
+     */
+    public String collectionId() {
+      return collectionId;
+    }
+
+    private GetStopwordListStatusOptions(GetStopwordListStatusOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      environmentId = builder.environmentId;
+      collectionId = builder.collectionId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetStopwordListStatusOptions builder
+     */
+    public GetStopwordListStatusOptionsBuilder newBuilder() {
+      return new GetStopwordListStatusOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetStopwordListStatusOptions Builder.
+   */
+  public class GetStopwordListStatusOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+    private String collectionId;
+
+    private GetStopwordListStatusOptionsBuilder(GetStopwordListStatusOptions getStopwordListStatusOptions) {
+      environmentId = getStopwordListStatusOptions.environmentId;
+      collectionId = getStopwordListStatusOptions.collectionId;
+      this.requestHeaders.putAll(getStopwordListStatusOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetStopwordListStatusOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     * @param collectionId the collectionId
+     */
+    public GetStopwordListStatusOptionsBuilder(String environmentId, String collectionId) {
+      this.environmentId = environmentId;
+      this.collectionId = collectionId;
+    }
+
+    /**
+     * Builds a GetStopwordListStatusOptions.
+     *
+     * @return the getStopwordListStatusOptions
+     */
+    public GetStopwordListStatusOptions build() {
+      return new GetStopwordListStatusOptions(this);
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the GetStopwordListStatusOptions builder
+     */
+    public GetStopwordListStatusOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Set the collectionId.
+     *
+     * @param collectionId the collectionId
+     * @return the GetStopwordListStatusOptions builder
+     */
+    public GetStopwordListStatusOptionsBuilder collectionId(String collectionId) {
+      this.collectionId = collectionId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetStopwordListStatusOptions builder
+     */
+    public GetStopwordListStatusOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -11451,6 +11494,99 @@ public class IBMDiscoveryV1Models {
      * @return the ListFieldsOptions builder
      */
     public ListFieldsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The listGateways options.
+   */
+  public class ListGatewaysOptions extends IBMWatsonOptionsModel {
+    private String environmentId;
+ 
+    /**
+     * Gets the environmentId.
+     *
+     * The ID of the environment.
+     *
+     * @return the environmentId
+     */
+    public String environmentId() {
+      return environmentId;
+    }
+
+    private ListGatewaysOptions(ListGatewaysOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      environmentId = builder.environmentId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ListGatewaysOptions builder
+     */
+    public ListGatewaysOptionsBuilder newBuilder() {
+      return new ListGatewaysOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * ListGatewaysOptions Builder.
+   */
+  public class ListGatewaysOptionsBuilder extends IBMWatsonOptionsModel {
+    private String environmentId;
+
+    private ListGatewaysOptionsBuilder(ListGatewaysOptions listGatewaysOptions) {
+      environmentId = listGatewaysOptions.environmentId;
+      this.requestHeaders.putAll(listGatewaysOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ListGatewaysOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param environmentId the environmentId
+     */
+    public ListGatewaysOptionsBuilder(String environmentId) {
+      this.environmentId = environmentId;
+    }
+
+    /**
+     * Builds a ListGatewaysOptions.
+     *
+     * @return the listGatewaysOptions
+     */
+    public ListGatewaysOptions build() {
+      return new ListGatewaysOptions(this);
+    }
+
+    /**
+     * Set the environmentId.
+     *
+     * @param environmentId the environmentId
+     * @return the ListGatewaysOptions builder
+     */
+    public ListGatewaysOptionsBuilder environmentId(String environmentId) {
+      this.environmentId = environmentId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListGatewaysOptions builder
+     */
+    public ListGatewaysOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }

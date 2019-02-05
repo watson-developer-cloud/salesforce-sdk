@@ -751,6 +751,49 @@ private class IBMSpeechToTextV1Test {
     Test.stopTest();
   }
 
+  static testMethod void upgradeAcousticModelOptionsTest() {
+    Test.startTest();
+
+    String customizationId = 'customizationId';
+    String customLanguageModelId = 'customLanguageModelId';
+
+    IBMSpeechToTextV1Models.UpgradeAcousticModelOptions upgradeAcousticModelOptions = new IBMSpeechToTextV1Models.UpgradeAcousticModelOptionsBuilder()
+      .customizationId(customizationId)
+      .customLanguageModelId(customLanguageModelId)
+      .force(true)
+      .addHeader('Test-Header', 'test_value')
+      .build();
+      upgradeAcousticModelOptions = upgradeAcousticModelOptions.newBuilder().build();
+
+    System.assertEquals(customizationId, upgradeAcousticModelOptions.customizationId());
+    System.assertEquals(customLanguageModelId, upgradeAcousticModelOptions.customLanguageModelId());
+    System.assert(upgradeAcousticModelOptions.force() == true);
+    Test.stopTest();
+  }
+
+  static testMethod void upgradeAcousticModelTest() {
+    String body = '';
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+
+    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
+    if (username != null && password != null) {
+      speechToText.setEndPoint(URL);
+      speechToText.setUsernameAndPassword(username, password);
+    }
+
+    String customizationId = 'customizationId';
+    String customLanguageModelId = 'customLanguageModelId';
+
+    IBMSpeechToTextV1Models.UpgradeAcousticModelOptions upgradeAcousticModelOptions = new IBMSpeechToTextV1Models.UpgradeAcousticModelOptionsBuilder()
+      .customizationId(customizationId)
+      .customLanguageModelId(customLanguageModelId)
+      .build();
+    speechToText.upgradeAcousticModel(upgradeAcousticModelOptions);
+    Test.stopTest();
+  }
+
   static testMethod void listAcousticModelsTest() {
     String body = IBMWatsonMockResponses.speechToTextListAcousticModels();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
