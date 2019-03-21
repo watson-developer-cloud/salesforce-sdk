@@ -72,9 +72,9 @@ public virtual class IBMWatsonResponseModel {
   }
 
   /**
-   * Replaces values in the JSON string representation that aren't syntactically valid.
+   * Adds nested property names and the target name necessary for valid syntax to the provided map.
    */
-  public String replaceKeysForSdk(String jsonString) {
-    return jsonString;
+  public Map<String, String> getKeysToChangeForSdk(Map<String, String> propertyMap) {
+    return propertyMap;
   }
 }
