@@ -39,15 +39,37 @@ public class IBMWatsonJSONUtil {
   }
 
   /**
-   * Calls appropriate methods to prepare the JSON response for deserialization. This involves removing empty
-   * string values and adding the property suffix to avoid using reserved words.
+   * Calls appropriate methods to prepare the JSON response for deserialization.
    *
    * @param jsonMap Map<String, Object> representation of the JSON response
+   * @param responseObject model that our JSON map is representing
    *
    * return Map<String, Object> representing our JSON object ready to be deserialized
    */
-  public static Map<String, Object> prepareResponse(Map<String, Object> jsonMap) {
-    return addPropertySuffix(jsonMap);
+  public static Map<String, Object> prepareResponse(Map<String, Object> jsonMap, IBMWatsonResponseModel responseObject) {
+    Map<String, Object> updatedJsonMap = addPropertySuffix(jsonMap);
+    updatedJsonMap = replaceIllegalKeys(updatedJsonMap, responseObject);
+    return updatedJsonMap;
+  }
+
+  /**
+   * Replaces key names based on the response object to ensure all keys are syntactically valid and can be
+   * deserialized properly.
+   *
+   * jsonMap Map<String, Object> representation of the JSON response
+   * @param responseObject model that our JSON map is representing
+   *
+   * @return Map<String, Object> representing the JSON response with modified keys
+   */
+  private static Map<String, Object> replaceIllegalKeys(Map<String, Object> jsonMap, IBMWatsonResponseModel responseObject) {
+    Map<String, String> propertyMap = responseObject.getKeysToChangeForSdk(new Map<String, String>());
+    for (String key : propertyMap.keySet()) {
+      Object oldKeyValue = jsonMap.remove(key);
+      if (oldKeyValue != null) {
+        jsonMap.put(propertyMap.get(key), oldKeyValue);
+      }
+    }
+    return jsonMap;
   }
 
   /**
