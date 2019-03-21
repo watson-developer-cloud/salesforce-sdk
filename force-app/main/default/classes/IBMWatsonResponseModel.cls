@@ -70,4 +70,11 @@ public virtual class IBMWatsonResponseModel {
     }
     this.headers.put(name, value);
   }
+
+  /**
+   * Replaces values in the JSON string representation that aren't syntactically valid.
+   */
+  public String replaceKeysForSdk(String jsonString) {
+    return jsonString;
+  }
 }
