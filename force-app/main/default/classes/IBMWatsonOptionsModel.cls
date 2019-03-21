@@ -7,4 +7,11 @@ public virtual class IBMWatsonOptionsModel {
   public Map<String, String> requestHeaders() {
     return this.requestHeaders;
   }
+
+  /**
+   * Returns modified JSON string representation as necessary.
+   */
+  public virtual String modifySerializedOptions(String jsonString) {
+    return jsonString;
+  }
 }

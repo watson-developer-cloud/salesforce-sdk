@@ -113,4 +113,16 @@ public class IBMWatsonJSONUtil {
 
     return jsonMap;
   }
+
+  /**
+   * Modifies the provided JSON string based on the options model it represents.
+   *
+   * @param jsonString the JSON string to be passed in the request
+   * @param optionsModel the model instance containing the values to send in the JSON request
+   *
+   * @return the edited JSON string
+   */
+  public static String modifyJsonContent(String jsonString, IBMWatsonOptionsModel optionsModel) {
+    return optionsModel.modifySerializedOptions(jsonString);
+  }
 }
