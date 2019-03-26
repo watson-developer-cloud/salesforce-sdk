@@ -242,9 +242,7 @@ public class IBMWatsonMultipartBody extends IBMWatsonRequestBody {
         throw new IBMWatsonServiceExceptions.IllegalArgumentException('name == null');
       }
       String disposition = 'form-data; name="' + name + '"';
-      if (String.isNotBlank(filename)) {
-        disposition += '; filename="' + filename + '"';
-      }
+      disposition += '; filename="' + (String.isNotBlank(filename) ? filename : 'filename') + '"';
       this.headers.put('Content-Disposition', disposition);
       return create(this.headers, body);
     }
