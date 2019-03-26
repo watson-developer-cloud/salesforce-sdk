@@ -1,7 +1,7 @@
 public with sharing class IBMWatsonResponse {
-  private static final String MESSAGE_ERROR = 'error';
-  private static final String MESSAGE_ERROR_3 = 'message';
-  private static final String MESSAGE_ERROR_2 = 'error_message';
+  private static final String ERRORS_KEY = 'errors';
+  private static final String MESSAGE_STRING = 'message';
+  private static final String ERROR_STRING = 'error';
 
   private final String errorMessage;
   private final String contentType;
@@ -53,12 +53,13 @@ public with sharing class IBMWatsonResponse {
     String error = errorResponse;
     try {
       Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(errorResponse);
-      if (responseMap.containsKey(MESSAGE_ERROR)) {
-        error = (String) responseMap.get(MESSAGE_ERROR);
-      } else if (responseMap.containsKey(MESSAGE_ERROR_2)) {
-        error = (String) responseMap.get(MESSAGE_ERROR_2);
-      } else if (responseMap.containsKey(MESSAGE_ERROR_3)) {
-        error = (String) responseMap.get(MESSAGE_ERROR_3);
+      if (responseMap.containsKey(ERRORS_KEY)) {
+        List<Object> errorList = (List<Object>) responseMap.get(ERRORS_KEY);
+        error = (String) errorList[0].get(MESSAGE_STRING);
+      } else if (responseMap.containsKey(ERROR_STRING)) {
+        error = (String) jsonObject.get(ERROR_STRING);
+      } else if (responseMap.containsKey(MESSAGE_STRING)) {
+        error = (String) jsonObject.get(MESSAGE_STRING);
       }
     } catch (Exception e) {
       // Ignore any kind of exception parsing the json and use fallback String version of response
