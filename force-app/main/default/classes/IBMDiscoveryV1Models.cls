@@ -780,7 +780,8 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      Collection ret = (Collection) super.deserialize(jsonString, jsonMap, classType);
+      Map<String, Object> trainingStatus = (Map<String, Object>) jsonMap.remove('training_status_serialized_name');
+      Collection ret = (Collection) super.deserialize(JSON.serialize(jsonMap), jsonMap, classType);
 
       // calling custom deserializer for documentCounts
       DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('document_counts_serialized_name'), DocumentCounts.class);
@@ -791,7 +792,7 @@ public class IBMDiscoveryV1Models {
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for trainingStatus
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(ret.getTrainingStatus()), (Map<String, Object>) jsonMap.get('training_status_serialized_name'), TrainingStatus.class);
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatus), trainingStatus, TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
       // calling custom deserializer for sourceCrawl
@@ -3156,7 +3157,7 @@ public class IBMDiscoveryV1Models {
     private String url_serialized_name;
     private String username_serialized_name;
     private String organization_url_serialized_name;
-    private String site_collection.path_serialized_name;
+    private String site_collection_path_serialized_name;
     private String client_secret_serialized_name;
     private String public_key_id_serialized_name;
     private String private_key_serialized_name;
@@ -3265,7 +3266,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSiteCollectionPath() {
-      return site_collection.path_serialized_name;
+      return site_collection_path_serialized_name;
     }
  
     /**
@@ -3495,7 +3496,7 @@ public class IBMDiscoveryV1Models {
      * @param siteCollectionPath the new siteCollectionPath
      */
     public void setSiteCollectionPath(final String siteCollectionPath) {
-      this.site_collection.path_serialized_name = siteCollectionPath;
+      this.site_collection_path_serialized_name = siteCollectionPath;
     }
 
     /**
@@ -6370,6 +6371,8 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
+      jsonString = jsonString.replace('"last_trained_serialized_name":"",', '');
+      jsonString = jsonString.replace('"last_trained_serialized_name":""', '');
       Environment ret = (Environment) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for indexCapacity
@@ -21160,7 +21163,16 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonString, jsonMap, classType);
+      String data_updated = (String) jsonMap.remove('data_updated_serialized_name');
+      String successfully_trained = (String) jsonMap.remove('successfully_trained_serialized_name');
+      String jsonStringWithoutDates = JSON.serialize(jsonMap);
+      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
+      if (String.isNotBlank(data_updated)) {
+        ret.setDataUpdated((Datetime) JSON.deserialize('"' + data_updated + '"', Datetime.class));
+      }
+      if (String.isNotBlank(successfully_trained)) {
+        ret.setSuccessfullyTrained((Datetime) JSON.deserialize('"' + successfully_trained + '"', Datetime.class));
+      }
 
       return ret;
     }
