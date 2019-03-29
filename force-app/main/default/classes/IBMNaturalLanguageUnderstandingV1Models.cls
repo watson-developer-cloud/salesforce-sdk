@@ -1,21 +1,22 @@
 public class IBMNaturalLanguageUnderstandingV1Models {
   /**
-   * Results of the analysis, organized by feature.
+   * Analysis results for each requested feature.
    */
   public class AnalysisResults extends IBMWatsonResponseModel {
     private String language_serialized_name;
     private String analyzed_text_serialized_name;
     private String retrieved_url_serialized_name;
-    private Usage usage_serialized_name;
+    private AnalysisResultsUsage usage_serialized_name;
     private List<ConceptsResult> concepts_serialized_name;
     private List<EntitiesResult> entities_serialized_name;
     private List<KeywordsResult> keywords_serialized_name;
     private List<CategoriesResult> categories_serialized_name;
     private EmotionResult emotion_serialized_name;
-    private MetadataResult metadata_serialized_name;
+    private AnalysisResultsMetadata metadata_serialized_name;
     private List<RelationsResult> relations_serialized_name;
     private List<SemanticRolesResult> semantic_roles_serialized_name;
     private SentimentResult sentiment_serialized_name;
+    private SyntaxResult syntax_serialized_name;
  
     /**
      * Gets the language.
@@ -56,12 +57,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the usage.
      *
-     * Usage information.
+     * API usage information for the request.
      *
      * @return the usage
      */
     @AuraEnabled
-    public Usage getUsage() {
+    public AnalysisResultsUsage getUsage() {
       return usage_serialized_name;
     }
  
@@ -116,8 +117,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the emotion.
      *
-     * The detected anger, disgust, fear, joy, or sadness that is conveyed by the content. Emotion information can be
-     * returned for detected entities, keywords, or user-specified target phrases found in the text.
+     * The anger, disgust, fear, joy, or sadness conveyed by the content.
      *
      * @return the emotion
      */
@@ -129,13 +129,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the metadata.
      *
-     * The authors, publication date, title, prominent page image, and RSS/ATOM feeds of the webpage. Supports URL and
-     * HTML input types.
+     * Webpage metadata, such as the author and the title of the page.
      *
      * @return the metadata
      */
     @AuraEnabled
-    public MetadataResult getMetadata() {
+    public AnalysisResultsMetadata getMetadata() {
       return metadata_serialized_name;
     }
  
@@ -174,6 +173,18 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public SentimentResult getSentiment() {
       return sentiment_serialized_name;
     }
+ 
+    /**
+     * Gets the syntax.
+     *
+     * Tokens and sentences returned from syntax analysis.
+     *
+     * @return the syntax
+     */
+    @AuraEnabled
+    public SyntaxResult getSyntax() {
+      return syntax_serialized_name;
+    }
 
     /**
      * Sets the language.
@@ -207,7 +218,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      *
      * @param usage the new usage
      */
-    public void setUsage(final Usage usage) {
+    public void setUsage(final AnalysisResultsUsage usage) {
       this.usage_serialized_name = usage;
     }
 
@@ -261,7 +272,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      *
      * @param metadata the new metadata
      */
-    public void setMetadata(final MetadataResult metadata) {
+    public void setMetadata(final AnalysisResultsMetadata metadata) {
       this.metadata_serialized_name = metadata;
     }
 
@@ -292,6 +303,15 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.sentiment_serialized_name = sentiment;
     }
 
+    /**
+     * Sets the syntax.
+     *
+     * @param syntax the new syntax
+     */
+    public void setSyntax(final SyntaxResult syntax) {
+      this.syntax_serialized_name = syntax;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -300,7 +320,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       AnalysisResults ret = (AnalysisResults) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for usage
-      Usage newUsage = (Usage) new Usage().deserialize(JSON.serialize(ret.getUsage()), (Map<String, Object>) jsonMap.get('usage_serialized_name'), Usage.class);
+      AnalysisResultsUsage newUsage = (AnalysisResultsUsage) new AnalysisResultsUsage().deserialize(JSON.serialize(ret.getUsage()), (Map<String, Object>) jsonMap.get('usage_serialized_name'), AnalysisResultsUsage.class);
       ret.setUsage(newUsage);
 
       // calling custom deserializer for concepts
@@ -313,7 +333,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
           ConceptsResult newItem = (ConceptsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConceptsResult.class);
           newConcepts.add(newItem);
         }
-        ret.setConcepts(newConcepts);
+        ret.concepts_serialized_name = newConcepts;
       }
 
       // calling custom deserializer for entities
@@ -326,7 +346,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
           EntitiesResult newItem = (EntitiesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntitiesResult.class);
           newEntities.add(newItem);
         }
-        ret.setEntities(newEntities);
+        ret.entities_serialized_name = newEntities;
       }
 
       // calling custom deserializer for keywords
@@ -339,7 +359,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
           KeywordsResult newItem = (KeywordsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), KeywordsResult.class);
           newKeywords.add(newItem);
         }
-        ret.setKeywords(newKeywords);
+        ret.keywords_serialized_name = newKeywords;
       }
 
       // calling custom deserializer for categories
@@ -352,7 +372,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
           CategoriesResult newItem = (CategoriesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoriesResult.class);
           newCategories.add(newItem);
         }
-        ret.setCategories(newCategories);
+        ret.categories_serialized_name = newCategories;
       }
 
       // calling custom deserializer for emotion
@@ -360,7 +380,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       ret.setEmotion(newEmotion);
 
       // calling custom deserializer for metadata
-      MetadataResult newMetadata = (MetadataResult) new MetadataResult().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), MetadataResult.class);
+      AnalysisResultsMetadata newMetadata = (AnalysisResultsMetadata) new AnalysisResultsMetadata().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), AnalysisResultsMetadata.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for relations
@@ -373,7 +393,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
           RelationsResult newItem = (RelationsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RelationsResult.class);
           newRelations.add(newItem);
         }
-        ret.setRelations(newRelations);
+        ret.relations_serialized_name = newRelations;
       }
 
       // calling custom deserializer for semanticRoles
@@ -386,31 +406,228 @@ public class IBMNaturalLanguageUnderstandingV1Models {
           SemanticRolesResult newItem = (SemanticRolesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesResult.class);
           newSemanticRoles.add(newItem);
         }
-        ret.setSemanticRoles(newSemanticRoles);
+        ret.semantic_roles_serialized_name = newSemanticRoles;
       }
 
       // calling custom deserializer for sentiment
       SentimentResult newSentiment = (SentimentResult) new SentimentResult().deserialize(JSON.serialize(ret.getSentiment()), (Map<String, Object>) jsonMap.get('sentiment_serialized_name'), SentimentResult.class);
       ret.setSentiment(newSentiment);
 
+      // calling custom deserializer for syntax
+      SyntaxResult newSyntax = (SyntaxResult) new SyntaxResult().deserialize(JSON.serialize(ret.getSyntax()), (Map<String, Object>) jsonMap.get('syntax_serialized_name'), SyntaxResult.class);
+      ret.setSyntax(newSyntax);
+
       return ret;
     }
+  }
+
+  /**
+   * Webpage metadata, such as the author and the title of the page.
+   */
+  public class AnalysisResultsMetadata {
+    private List<Author> authors_serialized_name;
+    private String publication_date_serialized_name;
+    private String title_serialized_name;
+    private String image_serialized_name;
+    private List<Feed> feeds_serialized_name;
+ 
+    /**
+     * Gets the authors.
+     *
+     * The authors of the document.
+     *
+     * @return the authors
+     */
+    public List<Author> getAuthors() {
+      return authors_serialized_name;
+    }
+ 
+    /**
+     * Gets the publicationDate.
+     *
+     * The publication date in the format ISO 8601.
+     *
+     * @return the publicationDate
+     */
+    public String getPublicationDate() {
+      return publication_date_serialized_name;
+    }
+ 
+    /**
+     * Gets the title.
+     *
+     * The title of the document.
+     *
+     * @return the title
+     */
+    public String getTitle() {
+      return title_serialized_name;
+    }
+ 
+    /**
+     * Gets the image.
+     *
+     * URL of a prominent image on the webpage.
+     *
+     * @return the image
+     */
+    public String getImage() {
+      return image_serialized_name;
+    }
+ 
+    /**
+     * Gets the feeds.
+     *
+     * RSS/ATOM feeds found on the webpage.
+     *
+     * @return the feeds
+     */
+    public List<Feed> getFeeds() {
+      return feeds_serialized_name;
+    }
+
+    /**
+     * Sets the authors.
+     *
+     * @param authors the new authors
+     */
+    public void setAuthors(final List<Author> authors) {
+      this.authors_serialized_name = authors;
+    }
+
+    /**
+     * Sets the publicationDate.
+     *
+     * @param publicationDate the new publicationDate
+     */
+    public void setPublicationDate(final String publicationDate) {
+      this.publication_date_serialized_name = publicationDate;
+    }
+
+    /**
+     * Sets the title.
+     *
+     * @param title the new title
+     */
+    public void setTitle(final String title) {
+      this.title_serialized_name = title;
+    }
+
+    /**
+     * Sets the image.
+     *
+     * @param image the new image
+     */
+    public void setImage(final String image) {
+      this.image_serialized_name = image;
+    }
+
+    /**
+     * Sets the feeds.
+     *
+     * @param feeds the new feeds
+     */
+    public void setFeeds(final List<Feed> feeds) {
+      this.feeds_serialized_name = feeds;
+    }
+
+  }
+
+  /**
+   * API usage information for the request.
+   */
+  public class AnalysisResultsUsage {
+    private Long features_serialized_name;
+    private Long text_characters_serialized_name;
+    private Long text_units_serialized_name;
+ 
+    /**
+     * Gets the features.
+     *
+     * Number of features used in the API call.
+     *
+     * @return the features
+     */
+    public Long getFeatures() {
+      return features_serialized_name;
+    }
+ 
+    /**
+     * Gets the textCharacters.
+     *
+     * Number of text characters processed.
+     *
+     * @return the textCharacters
+     */
+    public Long getTextCharacters() {
+      return text_characters_serialized_name;
+    }
+ 
+    /**
+     * Gets the textUnits.
+     *
+     * Number of 10,000-character units processed.
+     *
+     * @return the textUnits
+     */
+    public Long getTextUnits() {
+      return text_units_serialized_name;
+    }
+
+    /**
+     * Sets the features.
+     *
+     * @param features the new features
+     */
+    public void setFeatures(final long features) {
+      this.features_serialized_name = features;
+    }
+
+    /**
+     * Sets the textCharacters.
+     *
+     * @param textCharacters the new textCharacters
+     */
+    public void setTextCharacters(final long textCharacters) {
+      this.text_characters_serialized_name = textCharacters;
+    }
+
+    /**
+     * Sets the textUnits.
+     *
+     * @param textUnits the new textUnits
+     */
+    public void setTextUnits(final long textUnits) {
+      this.text_units_serialized_name = textUnits;
+    }
+
   }
 
   /**
    * The analyze options.
    */
   public class AnalyzeOptions extends IBMWatsonOptionsModel {
+    private Features features;
     private String text;
     private String html;
     private String url;
-    private Features features;
     private Boolean clean;
     private String xpath;
     private Boolean fallbackToRaw;
     private Boolean returnAnalyzedText;
     private String language;
     private Long limitTextCharacters;
+ 
+    /**
+     * Gets the features.
+     *
+     * Specific features to analyze the document for.
+     *
+     * @return the features
+     */
+    public Features features() {
+      return features;
+    }
  
     /**
      * Gets the text.
@@ -443,17 +660,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public String url() {
       return url;
-    }
- 
-    /**
-     * Gets the features.
-     *
-     * Analysis features and options.
-     *
-     * @return the features
-     */
-    public Features features() {
-      return features;
     }
  
     /**
@@ -532,10 +738,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
     private AnalyzeOptions(AnalyzeOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.features, 'features cannot be null');
+      features = builder.features;
       text = builder.text;
       html = builder.html;
       url = builder.url;
-      features = builder.features;
       clean = builder.clean;
       xpath = builder.xpath;
       fallbackToRaw = builder.fallbackToRaw;
@@ -560,10 +766,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * AnalyzeOptions Builder.
    */
   public class AnalyzeOptionsBuilder extends IBMWatsonOptionsModel {
+    private Features features;
     private String text;
     private String html;
     private String url;
-    private Features features;
     private Boolean clean;
     private String xpath;
     private Boolean fallbackToRaw;
@@ -572,10 +778,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Long limitTextCharacters;
 
     private AnalyzeOptionsBuilder(AnalyzeOptions analyzeOptions) {
+      features = analyzeOptions.features;
       text = analyzeOptions.text;
       html = analyzeOptions.html;
       url = analyzeOptions.url;
-      features = analyzeOptions.features;
       clean = analyzeOptions.clean;
       xpath = analyzeOptions.xpath;
       fallbackToRaw = analyzeOptions.fallbackToRaw;
@@ -610,6 +816,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
 
     /**
+     * Set the features.
+     *
+     * @param features the features
+     * @return the AnalyzeOptions builder
+     */
+    public AnalyzeOptionsBuilder features(Features features) {
+      this.features = features;
+      return this;
+    }
+
+    /**
      * Set the text.
      *
      * @param text the text
@@ -639,17 +856,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public AnalyzeOptionsBuilder url(String url) {
       this.url = url;
-      return this;
-    }
-
-    /**
-     * Set the features.
-     *
-     * @param features the features
-     * @return the AnalyzeOptions builder
-     */
-    public AnalyzeOptionsBuilder features(Features features) {
-      this.features = features;
       return this;
     }
 
@@ -774,13 +980,10 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * Returns a five-level taxonomy of the content. The top three categories are returned.
    *
    * Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
-   *
-   * NOTE: This model will not extend IBMWatsonDynamicModel in the next release, meaning that it won't support Map
-   * functions and the getAdditionalProperties() method will be removed. In the meantime, any additional
-   * properties added to this model will not be supported by the service.
    */
-  public class CategoriesOptions extends IBMWatsonDynamicModel {
+  public class CategoriesOptions {
     private Long limit_serialized_name;
+    private String model_serialized_name;
  
     /**
      * Gets the xlimit.
@@ -789,29 +992,86 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      *
      * @return the xlimit
      */
-    public Long getXlimit() {
+    public Long xlimit() {
       return limit_serialized_name;
     }
-
+ 
     /**
-     * Gets the dynamic properties attached to CategoriesOptions.
+     * Gets the model.
      *
-     * @return the dynamic properties
+     * Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to
+     * override the standard categories model.
+     *
+     * @return the model
      */
-    @AuraEnabled
-    public Map<String, Object> getAdditionalProperties() {
-      return this.getDynamicProperties();
+    public String model() {
+      return model_serialized_name;
+    }
+  
+    private CategoriesOptions(CategoriesOptionsBuilder builder) {
+      limit_serialized_name = builder.xlimit;
+      model_serialized_name = builder.model;
     }
 
     /**
-     * Sets the xlimit.
+     * New builder.
      *
-     * @param xlimit the new xlimit
+     * @return a CategoriesOptions builder
      */
-    public void setXlimit(final long xlimit) {
-      this.limit_serialized_name = xlimit;
+    public CategoriesOptionsBuilder newBuilder() {
+      return new CategoriesOptionsBuilder(this);
     }
 
+  }
+
+  /**
+   * CategoriesOptions Builder.
+   */
+  public class CategoriesOptionsBuilder {
+    private Long xlimit;
+    private String model;
+
+    private CategoriesOptionsBuilder(CategoriesOptions categoriesOptions) {
+      this.xlimit = categoriesOptions.limit_serialized_name;
+      this.model = categoriesOptions.model_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public CategoriesOptionsBuilder() {
+    }
+
+    /**
+     * Builds a CategoriesOptions.
+     *
+     * @return the categoriesOptions
+     */
+    public CategoriesOptions build() {
+      return new CategoriesOptions(this);
+    }
+
+    /**
+     * Set the xlimit.
+     *
+     * @param xlimit the xlimit
+     * @return the CategoriesOptions builder
+     */
+    public CategoriesOptionsBuilder xlimit(Long xlimit) {
+      this.xlimit = xlimit;
+      return this;
+    }
+
+    /**
+     * Set the model.
+     *
+     * @param model the model
+     * @return the CategoriesOptions builder
+     */
+    public CategoriesOptionsBuilder model(String model) {
+      this.model = model;
+      return this;
+    }
   }
 
   /**
@@ -919,7 +1179,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Long xlimit;
 
     private ConceptsOptionsBuilder(ConceptsOptions conceptsOptions) {
-      xlimit = conceptsOptions.limit_serialized_name;
+      this.xlimit = conceptsOptions.limit_serialized_name;
     }
 
     /**
@@ -1365,8 +1625,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private List<String> targets;
 
     private EmotionOptionsBuilder(EmotionOptions emotionOptions) {
-      document = emotionOptions.document_serialized_name;
-      targets = emotionOptions.targets_serialized_name;
+      this.document = emotionOptions.document_serialized_name;
+      this.targets = emotionOptions.targets_serialized_name;
     }
 
     /**
@@ -1494,7 +1754,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
           TargetedEmotionResults newItem = (TargetedEmotionResults) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TargetedEmotionResults.class);
           newTargets.add(newItem);
         }
-        ret.setTargets(newTargets);
+        ret.targets_serialized_name = newTargets;
       }
 
       return ret;
@@ -1727,11 +1987,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Boolean emotion;
 
     private EntitiesOptionsBuilder(EntitiesOptions entitiesOptions) {
-      xlimit = entitiesOptions.limit_serialized_name;
-      mentions = entitiesOptions.mentions_serialized_name;
-      model = entitiesOptions.model_serialized_name;
-      sentiment = entitiesOptions.sentiment_serialized_name;
-      emotion = entitiesOptions.emotion_serialized_name;
+      this.xlimit = entitiesOptions.limit_serialized_name;
+      this.mentions = entitiesOptions.mentions_serialized_name;
+      this.model = entitiesOptions.model_serialized_name;
+      this.sentiment = entitiesOptions.sentiment_serialized_name;
+      this.emotion = entitiesOptions.emotion_serialized_name;
     }
 
     /**
@@ -2003,7 +2263,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
           EntityMention newItem = (EntityMention) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntityMention.class);
           newMentions.add(newItem);
         }
-        ret.setMentions(newMentions);
+        ret.mentions_serialized_name = newMentions;
       }
 
       // calling custom deserializer for emotion
@@ -2133,6 +2393,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private SemanticRolesOptions semantic_roles_serialized_name;
     private SentimentOptions sentiment_serialized_name;
     private CategoriesOptions categories_serialized_name;
+    private SyntaxOptions syntax_serialized_name;
  
     /**
      * Gets the concepts.
@@ -2258,6 +2519,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public CategoriesOptions categories() {
       return categories_serialized_name;
     }
+ 
+    /**
+     * Gets the syntax.
+     *
+     * Returns tokens and sentences from the input text.
+     *
+     * @return the syntax
+     */
+    public SyntaxOptions syntax() {
+      return syntax_serialized_name;
+    }
   
     private Features(FeaturesBuilder builder) {
       concepts_serialized_name = builder.concepts;
@@ -2269,6 +2541,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       semantic_roles_serialized_name = builder.semanticRoles;
       sentiment_serialized_name = builder.sentiment;
       categories_serialized_name = builder.categories;
+      syntax_serialized_name = builder.syntax;
     }
 
     /**
@@ -2295,17 +2568,19 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private SemanticRolesOptions semanticRoles;
     private SentimentOptions sentiment;
     private CategoriesOptions categories;
+    private SyntaxOptions syntax;
 
     private FeaturesBuilder(Features features) {
-      concepts = features.concepts_serialized_name;
-      emotion = features.emotion_serialized_name;
-      entities = features.entities_serialized_name;
-      keywords = features.keywords_serialized_name;
-      metadata = features.metadata_serialized_name;
-      relations = features.relations_serialized_name;
-      semanticRoles = features.semantic_roles_serialized_name;
-      sentiment = features.sentiment_serialized_name;
-      categories = features.categories_serialized_name;
+      this.concepts = features.concepts_serialized_name;
+      this.emotion = features.emotion_serialized_name;
+      this.entities = features.entities_serialized_name;
+      this.keywords = features.keywords_serialized_name;
+      this.metadata = features.metadata_serialized_name;
+      this.relations = features.relations_serialized_name;
+      this.semanticRoles = features.semantic_roles_serialized_name;
+      this.sentiment = features.sentiment_serialized_name;
+      this.categories = features.categories_serialized_name;
+      this.syntax = features.syntax_serialized_name;
     }
 
     /**
@@ -2421,6 +2696,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.categories = categories;
       return this;
     }
+
+    /**
+     * Set the syntax.
+     *
+     * @param syntax the syntax
+     * @return the Features builder
+     */
+    public FeaturesBuilder syntax(SyntaxOptions syntax) {
+      this.syntax = syntax;
+      return this;
+    }
   }
 
   /**
@@ -2530,9 +2816,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Boolean emotion;
 
     private KeywordsOptionsBuilder(KeywordsOptions keywordsOptions) {
-      xlimit = keywordsOptions.limit_serialized_name;
-      sentiment = keywordsOptions.sentiment_serialized_name;
-      emotion = keywordsOptions.emotion_serialized_name;
+      this.xlimit = keywordsOptions.limit_serialized_name;
+      this.sentiment = keywordsOptions.sentiment_serialized_name;
+      this.emotion = keywordsOptions.emotion_serialized_name;
     }
 
     /**
@@ -2819,7 +3105,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
           Model newItem = (Model) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Model.class);
           newModels.add(newItem);
         }
-        ret.setModels(newModels);
+        ret.models_serialized_name = newModels;
       }
 
       return ret;
@@ -2827,174 +3113,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * Returns information from the document, including author name, title, RSS/ATOM feeds, prominent page image, and publication date. Supports URL and HTML input types only.
+   * Returns information from the document, including author name, title, RSS/ATOM feeds, prominent page image, and
+   * publication date. Supports URL and HTML input types only.
    */
-  public class MetadataOptions extends IBMWatsonDynamicModel {
-    private Map<String, Object> additional_properties_serialized_name;
+  public class MetadataOptions {
 
-    /**
-     * Gets the dynamic properties attached to MetadataOptions.
-     *
-     * @return the dynamic properties
-     */
-    @AuraEnabled
-    public Map<String, Object> getAdditionalProperties() {
-      return this.getDynamicProperties();
-    }
-
-  }
-
-  /**
-   * The authors, publication date, title, prominent page image, and RSS/ATOM feeds of the webpage. Supports URL and
-   * HTML input types.
-   */
-  public class MetadataResult extends IBMWatsonGenericModel {
-    private List<Author> authors_serialized_name;
-    private String publication_date_serialized_name;
-    private String title_serialized_name;
-    private String image_serialized_name;
-    private List<Feed> feeds_serialized_name;
- 
-    /**
-     * Gets the authors.
-     *
-     * The authors of the document.
-     *
-     * @return the authors
-     */
-    @AuraEnabled
-    public List<Author> getAuthors() {
-      return authors_serialized_name;
-    }
- 
-    /**
-     * Gets the publicationDate.
-     *
-     * The publication date in the format ISO 8601.
-     *
-     * @return the publicationDate
-     */
-    @AuraEnabled
-    public String getPublicationDate() {
-      return publication_date_serialized_name;
-    }
- 
-    /**
-     * Gets the title.
-     *
-     * The title of the document.
-     *
-     * @return the title
-     */
-    @AuraEnabled
-    public String getTitle() {
-      return title_serialized_name;
-    }
- 
-    /**
-     * Gets the image.
-     *
-     * URL of a prominent image on the webpage.
-     *
-     * @return the image
-     */
-    @AuraEnabled
-    public String getImage() {
-      return image_serialized_name;
-    }
- 
-    /**
-     * Gets the feeds.
-     *
-     * RSS/ATOM feeds found on the webpage.
-     *
-     * @return the feeds
-     */
-    @AuraEnabled
-    public List<Feed> getFeeds() {
-      return feeds_serialized_name;
-    }
-
-    /**
-     * Sets the authors.
-     *
-     * @param authors the new authors
-     */
-    public void setAuthors(final List<Author> authors) {
-      this.authors_serialized_name = authors;
-    }
-
-    /**
-     * Sets the publicationDate.
-     *
-     * @param publicationDate the new publicationDate
-     */
-    public void setPublicationDate(final String publicationDate) {
-      this.publication_date_serialized_name = publicationDate;
-    }
-
-    /**
-     * Sets the title.
-     *
-     * @param title the new title
-     */
-    public void setTitle(final String title) {
-      this.title_serialized_name = title;
-    }
-
-    /**
-     * Sets the image.
-     *
-     * @param image the new image
-     */
-    public void setImage(final String image) {
-      this.image_serialized_name = image;
-    }
-
-    /**
-     * Sets the feeds.
-     *
-     * @param feeds the new feeds
-     */
-    public void setFeeds(final List<Feed> feeds) {
-      this.feeds_serialized_name = feeds;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      MetadataResult ret = (MetadataResult) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for authors
-      List<Author> newAuthors = new List<Author>();
-      List<Author> deserializedAuthors = ret.getAuthors();
-      if (deserializedAuthors != null) {
-        for (Integer i = 0; i < deserializedAuthors.size(); i++) {
-          Author currentItem = ret.getAuthors().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('authors_serialized_name');
-          Author newItem = (Author) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Author.class);
-          newAuthors.add(newItem);
-        }
-        ret.setAuthors(newAuthors);
-      }
-
-      // calling custom deserializer for feeds
-      List<Feed> newFeeds = new List<Feed>();
-      List<Feed> deserializedFeeds = ret.getFeeds();
-      if (deserializedFeeds != null) {
-        for (Integer i = 0; i < deserializedFeeds.size(); i++) {
-          Feed currentItem = ret.getFeeds().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('feeds_serialized_name');
-          Feed newItem = (Feed) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Feed.class);
-          newFeeds.add(newItem);
-        }
-        ret.setFeeds(newFeeds);
-      }
-
-      return ret;
-    }
   }
 
   /**
@@ -3277,7 +3400,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
           RelationEntity newItem = (RelationEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RelationEntity.class);
           newEntities.add(newItem);
         }
-        ret.setEntities(newEntities);
+        ret.entities_serialized_name = newEntities;
       }
 
       return ret;
@@ -3389,7 +3512,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private String model;
 
     private RelationsOptionsBuilder(RelationsOptions relationsOptions) {
-      model = relationsOptions.model_serialized_name;
+      this.model = relationsOptions.model_serialized_name;
     }
 
     /**
@@ -3529,92 +3652,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
           RelationArgument newItem = (RelationArgument) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RelationArgument.class);
           newArguments.add(newItem);
         }
-        ret.setArguments(newArguments);
+        ret.arguments_serialized_name = newArguments;
       }
-
-      return ret;
-    }
-  }
-
-  /**
-   * SemanticRolesAction.
-   */
-  public class SemanticRolesAction extends IBMWatsonGenericModel {
-    private String text_serialized_name;
-    private String normalized_serialized_name;
-    private SemanticRolesVerb verb_serialized_name;
- 
-    /**
-     * Gets the text.
-     *
-     * Analyzed text that corresponds to the action.
-     *
-     * @return the text
-     */
-    @AuraEnabled
-    public String getText() {
-      return text_serialized_name;
-    }
- 
-    /**
-     * Gets the normalized.
-     *
-     * normalized version of the action.
-     *
-     * @return the normalized
-     */
-    @AuraEnabled
-    public String getNormalized() {
-      return normalized_serialized_name;
-    }
- 
-    /**
-     * Gets the verb.
-     *
-     * @return the verb
-     */
-    @AuraEnabled
-    public SemanticRolesVerb getVerb() {
-      return verb_serialized_name;
-    }
-
-    /**
-     * Sets the text.
-     *
-     * @param text the new text
-     */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
-    }
-
-    /**
-     * Sets the normalized.
-     *
-     * @param normalized the new normalized
-     */
-    public void setNormalized(final String normalized) {
-      this.normalized_serialized_name = normalized;
-    }
-
-    /**
-     * Sets the verb.
-     *
-     * @param verb the new verb
-     */
-    public void setVerb(final SemanticRolesVerb verb) {
-      this.verb_serialized_name = verb;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SemanticRolesAction ret = (SemanticRolesAction) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for verb
-      SemanticRolesVerb newVerb = (SemanticRolesVerb) new SemanticRolesVerb().deserialize(JSON.serialize(ret.getVerb()), (Map<String, Object>) jsonMap.get('verb_serialized_name'), SemanticRolesVerb.class);
-      ret.setVerb(newVerb);
 
       return ret;
     }
@@ -3719,79 +3758,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * SemanticRolesObject.
-   */
-  public class SemanticRolesObject extends IBMWatsonGenericModel {
-    private String text_serialized_name;
-    private List<SemanticRolesKeyword> keywords_serialized_name;
- 
-    /**
-     * Gets the text.
-     *
-     * Object text.
-     *
-     * @return the text
-     */
-    @AuraEnabled
-    public String getText() {
-      return text_serialized_name;
-    }
- 
-    /**
-     * Gets the keywords.
-     *
-     * An array of extracted keywords.
-     *
-     * @return the keywords
-     */
-    @AuraEnabled
-    public List<SemanticRolesKeyword> getKeywords() {
-      return keywords_serialized_name;
-    }
-
-    /**
-     * Sets the text.
-     *
-     * @param text the new text
-     */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
-    }
-
-    /**
-     * Sets the keywords.
-     *
-     * @param keywords the new keywords
-     */
-    public void setKeywords(final List<SemanticRolesKeyword> keywords) {
-      this.keywords_serialized_name = keywords;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SemanticRolesObject ret = (SemanticRolesObject) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for keywords
-      List<SemanticRolesKeyword> newKeywords = new List<SemanticRolesKeyword>();
-      List<SemanticRolesKeyword> deserializedKeywords = ret.getKeywords();
-      if (deserializedKeywords != null) {
-        for (Integer i = 0; i < deserializedKeywords.size(); i++) {
-          SemanticRolesKeyword currentItem = ret.getKeywords().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('keywords_serialized_name');
-          SemanticRolesKeyword newItem = (SemanticRolesKeyword) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesKeyword.class);
-          newKeywords.add(newItem);
-        }
-        ret.setKeywords(newKeywords);
-      }
-
-      return ret;
-    }
-  }
-
-  /**
    * Parses sentences into subject, action, and object form.
    *
    * Supported languages: English, German, Japanese, Korean, Spanish.
@@ -3860,9 +3826,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private Boolean entities;
 
     private SemanticRolesOptionsBuilder(SemanticRolesOptions semanticRolesOptions) {
-      xlimit = semanticRolesOptions.limit_serialized_name;
-      keywords = semanticRolesOptions.keywords_serialized_name;
-      entities = semanticRolesOptions.entities_serialized_name;
+      this.xlimit = semanticRolesOptions.limit_serialized_name;
+      this.keywords = semanticRolesOptions.keywords_serialized_name;
+      this.entities = semanticRolesOptions.entities_serialized_name;
     }
 
     /**
@@ -3919,9 +3885,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    */
   public class SemanticRolesResult extends IBMWatsonGenericModel {
     private String sentence_serialized_name;
-    private SemanticRolesSubject subject_serialized_name;
-    private SemanticRolesAction action_serialized_name;
-    private SemanticRolesObject object_serialized_name;
+    private SemanticRolesResultSubject subject_serialized_name;
+    private SemanticRolesResultAction action_serialized_name;
+    private SemanticRolesResultObject object_serialized_name;
  
     /**
      * Gets the sentence.
@@ -3943,7 +3909,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * @return the subject
      */
     @AuraEnabled
-    public SemanticRolesSubject getSubject() {
+    public SemanticRolesResultSubject getSubject() {
       return subject_serialized_name;
     }
  
@@ -3955,7 +3921,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * @return the action
      */
     @AuraEnabled
-    public SemanticRolesAction getAction() {
+    public SemanticRolesResultAction getAction() {
       return action_serialized_name;
     }
  
@@ -3967,7 +3933,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * @return the xobject
      */
     @AuraEnabled
-    public SemanticRolesObject getXobject() {
+    public SemanticRolesResultObject getXobject() {
       return object_serialized_name;
     }
 
@@ -3985,7 +3951,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      *
      * @param subject the new subject
      */
-    public void setSubject(final SemanticRolesSubject subject) {
+    public void setSubject(final SemanticRolesResultSubject subject) {
       this.subject_serialized_name = subject;
     }
 
@@ -3994,7 +3960,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      *
      * @param action the new action
      */
-    public void setAction(final SemanticRolesAction action) {
+    public void setAction(final SemanticRolesResultAction action) {
       this.action_serialized_name = action;
     }
 
@@ -4003,7 +3969,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      *
      * @param xobject the new xobject
      */
-    public void setXobject(final SemanticRolesObject xobject) {
+    public void setXobject(final SemanticRolesResultObject xobject) {
       this.object_serialized_name = xobject;
     }
 
@@ -4015,15 +3981,15 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       SemanticRolesResult ret = (SemanticRolesResult) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for subject
-      SemanticRolesSubject newSubject = (SemanticRolesSubject) new SemanticRolesSubject().deserialize(JSON.serialize(ret.getSubject()), (Map<String, Object>) jsonMap.get('subject_serialized_name'), SemanticRolesSubject.class);
+      SemanticRolesResultSubject newSubject = (SemanticRolesResultSubject) new SemanticRolesResultSubject().deserialize(JSON.serialize(ret.getSubject()), (Map<String, Object>) jsonMap.get('subject_serialized_name'), SemanticRolesResultSubject.class);
       ret.setSubject(newSubject);
 
       // calling custom deserializer for action
-      SemanticRolesAction newAction = (SemanticRolesAction) new SemanticRolesAction().deserialize(JSON.serialize(ret.getAction()), (Map<String, Object>) jsonMap.get('action_serialized_name'), SemanticRolesAction.class);
+      SemanticRolesResultAction newAction = (SemanticRolesResultAction) new SemanticRolesResultAction().deserialize(JSON.serialize(ret.getAction()), (Map<String, Object>) jsonMap.get('action_serialized_name'), SemanticRolesResultAction.class);
       ret.setAction(newAction);
 
       // calling custom deserializer for xobject
-      SemanticRolesObject newXobject = (SemanticRolesObject) new SemanticRolesObject().deserialize(JSON.serialize(ret.getXobject()), (Map<String, Object>) jsonMap.get('object_serialized_name'), SemanticRolesObject.class);
+      SemanticRolesResultObject newXobject = (SemanticRolesResultObject) new SemanticRolesResultObject().deserialize(JSON.serialize(ret.getXobject()), (Map<String, Object>) jsonMap.get('object_serialized_name'), SemanticRolesResultObject.class);
       ret.setXobject(newXobject);
 
       return ret;
@@ -4031,9 +3997,126 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * SemanticRolesSubject.
+   * The extracted action from the sentence.
    */
-  public class SemanticRolesSubject extends IBMWatsonGenericModel {
+  public class SemanticRolesResultAction {
+    private String text_serialized_name;
+    private String normalized_serialized_name;
+    private SemanticRolesVerb verb_serialized_name;
+ 
+    /**
+     * Gets the text.
+     *
+     * Analyzed text that corresponds to the action.
+     *
+     * @return the text
+     */
+    public String getText() {
+      return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the normalized.
+     *
+     * normalized version of the action.
+     *
+     * @return the normalized
+     */
+    public String getNormalized() {
+      return normalized_serialized_name;
+    }
+ 
+    /**
+     * Gets the verb.
+     *
+     * @return the verb
+     */
+    public SemanticRolesVerb getVerb() {
+      return verb_serialized_name;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the normalized.
+     *
+     * @param normalized the new normalized
+     */
+    public void setNormalized(final String normalized) {
+      this.normalized_serialized_name = normalized;
+    }
+
+    /**
+     * Sets the verb.
+     *
+     * @param verb the new verb
+     */
+    public void setVerb(final SemanticRolesVerb verb) {
+      this.verb_serialized_name = verb;
+    }
+
+  }
+
+  /**
+   * The extracted object from the sentence.
+   */
+  public class SemanticRolesResultObject {
+    private String text_serialized_name;
+    private List<SemanticRolesKeyword> keywords_serialized_name;
+ 
+    /**
+     * Gets the text.
+     *
+     * Object text.
+     *
+     * @return the text
+     */
+    public String getText() {
+      return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the keywords.
+     *
+     * An array of extracted keywords.
+     *
+     * @return the keywords
+     */
+    public List<SemanticRolesKeyword> getKeywords() {
+      return keywords_serialized_name;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the keywords.
+     *
+     * @param keywords the new keywords
+     */
+    public void setKeywords(final List<SemanticRolesKeyword> keywords) {
+      this.keywords_serialized_name = keywords;
+    }
+
+  }
+
+  /**
+   * The extracted subject from the sentence.
+   */
+  public class SemanticRolesResultSubject {
     private String text_serialized_name;
     private List<SemanticRolesEntity> entities_serialized_name;
     private List<SemanticRolesKeyword> keywords_serialized_name;
@@ -4045,7 +4128,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      *
      * @return the text
      */
-    @AuraEnabled
     public String getText() {
       return text_serialized_name;
     }
@@ -4057,7 +4139,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      *
      * @return the entities
      */
-    @AuraEnabled
     public List<SemanticRolesEntity> getEntities() {
       return entities_serialized_name;
     }
@@ -4069,7 +4150,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      *
      * @return the keywords
      */
-    @AuraEnabled
     public List<SemanticRolesKeyword> getKeywords() {
       return keywords_serialized_name;
     }
@@ -4101,41 +4181,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.keywords_serialized_name = keywords;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SemanticRolesSubject ret = (SemanticRolesSubject) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for entities
-      List<SemanticRolesEntity> newEntities = new List<SemanticRolesEntity>();
-      List<SemanticRolesEntity> deserializedEntities = ret.getEntities();
-      if (deserializedEntities != null) {
-        for (Integer i = 0; i < deserializedEntities.size(); i++) {
-          SemanticRolesEntity currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
-          SemanticRolesEntity newItem = (SemanticRolesEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesEntity.class);
-          newEntities.add(newItem);
-        }
-        ret.setEntities(newEntities);
-      }
-
-      // calling custom deserializer for keywords
-      List<SemanticRolesKeyword> newKeywords = new List<SemanticRolesKeyword>();
-      List<SemanticRolesKeyword> deserializedKeywords = ret.getKeywords();
-      if (deserializedKeywords != null) {
-        for (Integer i = 0; i < deserializedKeywords.size(); i++) {
-          SemanticRolesKeyword currentItem = ret.getKeywords().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('keywords_serialized_name');
-          SemanticRolesKeyword newItem = (SemanticRolesKeyword) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesKeyword.class);
-          newKeywords.add(newItem);
-        }
-        ret.setKeywords(newKeywords);
-      }
-
-      return ret;
-    }
   }
 
   /**
@@ -4199,6 +4244,66 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
+   * SentenceResult.
+   */
+  public class SentenceResult extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    private List<Long> location_serialized_name;
+ 
+    /**
+     * Gets the text.
+     *
+     * The sentence.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the location.
+     *
+     * Character offsets indicating the beginning and end of the sentence in the analyzed text.
+     *
+     * @return the location
+     */
+    @AuraEnabled
+    public List<Long> getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the location.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final List<Long> location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SentenceResult ret = (SentenceResult) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
    * Analyzes the general sentiment of your content or the sentiment toward specific target phrases. You can analyze
    * sentiment for detected entities with `entities.sentiment` and for keywords with `keywords.sentiment`.
    *
@@ -4254,8 +4359,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     private List<String> targets;
 
     private SentimentOptionsBuilder(SentimentOptions sentimentOptions) {
-      document = sentimentOptions.document_serialized_name;
-      targets = sentimentOptions.targets_serialized_name;
+      this.document = sentimentOptions.document_serialized_name;
+      this.targets = sentimentOptions.targets_serialized_name;
     }
 
     /**
@@ -4382,7 +4487,233 @@ public class IBMNaturalLanguageUnderstandingV1Models {
           TargetedSentimentResults newItem = (TargetedSentimentResults) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TargetedSentimentResults.class);
           newTargets.add(newItem);
         }
-        ret.setTargets(newTargets);
+        ret.targets_serialized_name = newTargets;
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Returns tokens and sentences from the input text.
+   */
+  public class SyntaxOptions {
+    private SyntaxOptionsTokens tokens_serialized_name;
+    private Boolean sentences_serialized_name;
+ 
+    /**
+     * Gets the tokens.
+     *
+     * Tokenization options.
+     *
+     * @return the tokens
+     */
+    public SyntaxOptionsTokens tokens() {
+      return tokens_serialized_name;
+    }
+ 
+    /**
+     * Gets the sentences.
+     *
+     * Set this to `true` to return sentence information.
+     *
+     * @return the sentences
+     */
+    public Boolean sentences() {
+      return sentences_serialized_name;
+    }
+  
+    private SyntaxOptions(SyntaxOptionsBuilder builder) {
+      tokens_serialized_name = builder.tokens;
+      sentences_serialized_name = builder.sentences;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a SyntaxOptions builder
+     */
+    public SyntaxOptionsBuilder newBuilder() {
+      return new SyntaxOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * SyntaxOptions Builder.
+   */
+  public class SyntaxOptionsBuilder {
+    private SyntaxOptionsTokens tokens;
+    private Boolean sentences;
+
+    private SyntaxOptionsBuilder(SyntaxOptions syntaxOptions) {
+      this.tokens = syntaxOptions.tokens_serialized_name;
+      this.sentences = syntaxOptions.sentences_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public SyntaxOptionsBuilder() {
+    }
+
+    /**
+     * Builds a SyntaxOptions.
+     *
+     * @return the syntaxOptions
+     */
+    public SyntaxOptions build() {
+      return new SyntaxOptions(this);
+    }
+
+    /**
+     * Set the tokens.
+     *
+     * @param tokens the tokens
+     * @return the SyntaxOptions builder
+     */
+    public SyntaxOptionsBuilder tokens(SyntaxOptionsTokens tokens) {
+      this.tokens = tokens;
+      return this;
+    }
+
+    /**
+     * Set the sentences.
+     *
+     * @param sentences the sentences
+     * @return the SyntaxOptions builder
+     */
+    public SyntaxOptionsBuilder sentences(Boolean sentences) {
+      this.sentences = sentences;
+      return this;
+    }
+  }
+
+  /**
+   * Tokenization options.
+   */
+  public class SyntaxOptionsTokens {
+    private Boolean lemma_serialized_name;
+    private Boolean part_of_speech_serialized_name;
+ 
+    /**
+     * Gets the lemma.
+     *
+     * Set this to `true` to return the lemma for each token.
+     *
+     * @return the lemma
+     */
+    public Boolean getLemma() {
+      return lemma_serialized_name;
+    }
+ 
+    /**
+     * Gets the partOfSpeech.
+     *
+     * Set this to `true` to return the part of speech for each token.
+     *
+     * @return the partOfSpeech
+     */
+    public Boolean getPartOfSpeech() {
+      return part_of_speech_serialized_name;
+    }
+
+    /**
+     * Sets the lemma.
+     *
+     * @param lemma the new lemma
+     */
+    public void setLemma(final Boolean lemma) {
+      this.lemma_serialized_name = lemma;
+    }
+
+    /**
+     * Sets the partOfSpeech.
+     *
+     * @param partOfSpeech the new partOfSpeech
+     */
+    public void setPartOfSpeech(final Boolean partOfSpeech) {
+      this.part_of_speech_serialized_name = partOfSpeech;
+    }
+
+  }
+
+  /**
+   * Tokens and sentences returned from syntax analysis.
+   */
+  public class SyntaxResult extends IBMWatsonGenericModel {
+    private List<TokenResult> tokens_serialized_name;
+    private List<SentenceResult> sentences_serialized_name;
+ 
+    /**
+     * Gets the tokens.
+     *
+     * @return the tokens
+     */
+    @AuraEnabled
+    public List<TokenResult> getTokens() {
+      return tokens_serialized_name;
+    }
+ 
+    /**
+     * Gets the sentences.
+     *
+     * @return the sentences
+     */
+    @AuraEnabled
+    public List<SentenceResult> getSentences() {
+      return sentences_serialized_name;
+    }
+
+    /**
+     * Sets the tokens.
+     *
+     * @param tokens the new tokens
+     */
+    public void setTokens(final List<TokenResult> tokens) {
+      this.tokens_serialized_name = tokens;
+    }
+
+    /**
+     * Sets the sentences.
+     *
+     * @param sentences the new sentences
+     */
+    public void setSentences(final List<SentenceResult> sentences) {
+      this.sentences_serialized_name = sentences;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SyntaxResult ret = (SyntaxResult) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for tokens
+      List<TokenResult> newTokens = new List<TokenResult>();
+      List<TokenResult> deserializedTokens = ret.getTokens();
+      if (deserializedTokens != null) {
+        for (Integer i = 0; i < deserializedTokens.size(); i++) {
+          TokenResult currentItem = ret.getTokens().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('tokens_serialized_name');
+          TokenResult newItem = (TokenResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TokenResult.class);
+          newTokens.add(newItem);
+        }
+        ret.tokens_serialized_name = newTokens;
+      }
+
+      // calling custom deserializer for sentences
+      List<SentenceResult> newSentences = new List<SentenceResult>();
+      List<SentenceResult> deserializedSentences = ret.getSentences();
+      if (deserializedSentences != null) {
+        for (Integer i = 0; i < deserializedSentences.size(); i++) {
+          SentenceResult currentItem = ret.getSentences().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('sentences_serialized_name');
+          SentenceResult newItem = (SentenceResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SentenceResult.class);
+          newSentences.add(newItem);
+        }
+        ret.sentences_serialized_name = newSentences;
       }
 
       return ret;
@@ -4514,74 +4845,97 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
-   * Usage information.
+   * TokenResult.
    */
-  public class Usage extends IBMWatsonGenericModel {
-    private Long features_serialized_name;
-    private Long text_characters_serialized_name;
-    private Long text_units_serialized_name;
+  public class TokenResult extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    private String part_of_speech_serialized_name;
+    private List<Long> location_serialized_name;
+    private String lemma_serialized_name;
  
     /**
-     * Gets the features.
+     * Gets the text.
      *
-     * Number of features used in the API call.
+     * The token as it appears in the analyzed text.
      *
-     * @return the features
+     * @return the text
      */
     @AuraEnabled
-    public Long getFeatures() {
-      return features_serialized_name;
-    }
- 
-    /**
-     * Gets the textCharacters.
-     *
-     * Number of text characters processed.
-     *
-     * @return the textCharacters
-     */
-    @AuraEnabled
-    public Long getTextCharacters() {
-      return text_characters_serialized_name;
+    public String getText() {
+      return text_serialized_name;
     }
  
     /**
-     * Gets the textUnits.
+     * Gets the partOfSpeech.
      *
-     * Number of 10,000-character units processed.
+     * The part of speech of the token. For descriptions of the values, see [Universal Dependencies POS
+     * tags](https://universaldependencies.org/u/pos/).
      *
-     * @return the textUnits
+     * @return the partOfSpeech
      */
     @AuraEnabled
-    public Long getTextUnits() {
-      return text_units_serialized_name;
+    public String getPartOfSpeech() {
+      return part_of_speech_serialized_name;
+    }
+ 
+    /**
+     * Gets the location.
+     *
+     * Character offsets indicating the beginning and end of the token in the analyzed text.
+     *
+     * @return the location
+     */
+    @AuraEnabled
+    public List<Long> getLocation() {
+      return location_serialized_name;
+    }
+ 
+    /**
+     * Gets the lemma.
+     *
+     * The [lemma](https://wikipedia.org/wiki/Lemma_%28morphology%29) of the token.
+     *
+     * @return the lemma
+     */
+    @AuraEnabled
+    public String getLemma() {
+      return lemma_serialized_name;
     }
 
     /**
-     * Sets the features.
+     * Sets the text.
      *
-     * @param features the new features
+     * @param text the new text
      */
-    public void setFeatures(final long features) {
-      this.features_serialized_name = features;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     /**
-     * Sets the textCharacters.
+     * Sets the partOfSpeech.
      *
-     * @param textCharacters the new textCharacters
+     * @param partOfSpeech the new partOfSpeech
      */
-    public void setTextCharacters(final long textCharacters) {
-      this.text_characters_serialized_name = textCharacters;
+    public void setPartOfSpeech(final String partOfSpeech) {
+      this.part_of_speech_serialized_name = partOfSpeech;
     }
 
     /**
-     * Sets the textUnits.
+     * Sets the location.
      *
-     * @param textUnits the new textUnits
+     * @param location the new location
      */
-    public void setTextUnits(final long textUnits) {
-      this.text_units_serialized_name = textUnits;
+    public void setLocation(final List<Long> location) {
+      this.location_serialized_name = location;
+    }
+
+    /**
+     * Sets the lemma.
+     *
+     * @param lemma the new lemma
+     */
+    public void setLemma(final String lemma) {
+      this.lemma_serialized_name = lemma;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -4589,7 +4943,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
         return null;
       }
 
-      Usage ret = (Usage) super.deserialize(jsonString, jsonMap, classType);
+      TokenResult ret = (TokenResult) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
