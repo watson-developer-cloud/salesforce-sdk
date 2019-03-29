@@ -7,8 +7,8 @@ public class IBMDiscoveryV1Models {
     private String collectionId;
     private IBMWatsonFile file;
     private String filename;
-    private String metadata;
     private String fileContentType;
+    private String metadata;
  
     /**
      * Gets the environmentId.
@@ -35,8 +35,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the file.
      *
-     * The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50
-     * megabytes is rejected.
+     * The content of the document to ingest. The maximum supported file size when adding a file to a collection is 50
+     * megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files larger than the
+     * supported size are rejected.
      *
      * @return the file
      */
@@ -56,6 +57,17 @@ public class IBMDiscoveryV1Models {
     }
  
     /**
+     * Gets the fileContentType.
+     *
+     * The content type of file.
+     *
+     * @return the fileContentType
+     */
+    public String fileContentType() {
+      return fileContentType;
+    }
+ 
+    /**
      * Gets the metadata.
      *
      * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata
@@ -71,17 +83,6 @@ public class IBMDiscoveryV1Models {
     public String metadata() {
       return metadata;
     }
- 
-    /**
-     * Gets the fileContentType.
-     *
-     * The content type of file.
-     *
-     * @return the fileContentType
-     */
-    public String fileContentType() {
-      return fileContentType;
-    }
 
     private AddDocumentOptions(AddDocumentOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
@@ -91,8 +92,8 @@ public class IBMDiscoveryV1Models {
       collectionId = builder.collectionId;
       file = builder.file;
       filename = builder.filename;
-      metadata = builder.metadata;
       fileContentType = builder.fileContentType;
+      metadata = builder.metadata;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -115,16 +116,16 @@ public class IBMDiscoveryV1Models {
     private String collectionId;
     private IBMWatsonFile file;
     private String filename;
-    private String metadata;
     private String fileContentType;
+    private String metadata;
 
     private AddDocumentOptionsBuilder(AddDocumentOptions addDocumentOptions) {
       environmentId = addDocumentOptions.environmentId;
       collectionId = addDocumentOptions.collectionId;
       file = addDocumentOptions.file;
       filename = addDocumentOptions.filename;
-      metadata = addDocumentOptions.metadata;
       fileContentType = addDocumentOptions.fileContentType;
+      metadata = addDocumentOptions.metadata;
       this.requestHeaders.putAll(addDocumentOptions.requestHeaders());
     }
 
@@ -199,17 +200,6 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the metadata.
-     *
-     * @param metadata the metadata
-     * @return the AddDocumentOptions builder
-     */
-    public AddDocumentOptionsBuilder metadata(String metadata) {
-      this.metadata = metadata;
-      return this;
-    }
-
-    /**
      * Set the fileContentType.
      *
      * @param fileContentType the fileContentType
@@ -217,6 +207,17 @@ public class IBMDiscoveryV1Models {
      */
     public AddDocumentOptionsBuilder fileContentType(String fileContentType) {
       this.fileContentType = fileContentType;
+      return this;
+    }
+
+    /**
+     * Set the metadata.
+     *
+     * @param metadata the metadata
+     * @return the AddDocumentOptions builder
+     */
+    public AddDocumentOptionsBuilder metadata(String metadata) {
+      this.metadata = metadata;
       return this;
     }
 
@@ -268,6 +269,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the naturalLanguageQuery.
      *
+     * The natural text query for the new training query.
+     *
      * @return the naturalLanguageQuery
      */
     public String naturalLanguageQuery() {
@@ -277,6 +280,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the filter.
      *
+     * The filter used on the collection before the **natural_language_query** is applied.
+     *
      * @return the filter
      */
     public String filter() {
@@ -285,6 +290,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the examples.
+     *
+     * Array of training examples.
      *
      * @return the examples
      */
@@ -531,7 +538,7 @@ public class IBMDiscoveryV1Models {
           QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
-        ret.setAggregations(newAggregations);
+        ret.aggregations_serialized_name = newAggregations;
       }
 
       return ret;
@@ -655,9 +662,6 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the documentCounts.
      *
-     * The object providing information about the documents in the collection. Present only when retrieving details of a
-     * collection.
-     *
      * @return the documentCounts
      */
     @AuraEnabled
@@ -679,8 +683,6 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the trainingStatus.
-     *
-     * Provides information about the status of relevance training for collection.
      *
      * @return the trainingStatus
      */
@@ -778,8 +780,7 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      Map<String, Object> trainingStatus = (Map<String, Object>) jsonMap.remove('training_status_serialized_name');
-      Collection ret = (Collection) super.deserialize(JSON.serialize(jsonMap), jsonMap, classType);
+      Collection ret = (Collection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for documentCounts
       DocumentCounts newDocumentCounts = (DocumentCounts) new DocumentCounts().deserialize(JSON.serialize(ret.getDocumentCounts()), (Map<String, Object>) jsonMap.get('document_counts_serialized_name'), DocumentCounts.class);
@@ -790,7 +791,7 @@ public class IBMDiscoveryV1Models {
       ret.setDiskUsage(newDiskUsage);
 
       // calling custom deserializer for trainingStatus
-      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatus), trainingStatus, TrainingStatus.class);
+      TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(ret.getTrainingStatus()), (Map<String, Object>) jsonMap.get('training_status_serialized_name'), TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
 
       // calling custom deserializer for sourceCrawl
@@ -1070,7 +1071,7 @@ public class IBMDiscoveryV1Models {
           Enrichment newItem = (Enrichment) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Enrichment.class);
           newEnrichments.add(newItem);
         }
-        ret.setEnrichments(newEnrichments);
+        ret.enrichments_serialized_name = newEnrichments;
       }
 
       // calling custom deserializer for normalizations
@@ -1083,7 +1084,7 @@ public class IBMDiscoveryV1Models {
           NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), NormalizationOperation.class);
           newNormalizations.add(newItem);
         }
-        ret.setNormalizations(newNormalizations);
+        ret.normalizations_serialized_name = newNormalizations;
       }
 
       // calling custom deserializer for source
@@ -1243,7 +1244,7 @@ public class IBMDiscoveryV1Models {
           NormalizationOperation newItem = (NormalizationOperation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), NormalizationOperation.class);
           newJsonNormalizations.add(newItem);
         }
-        ret.setJsonNormalizations(newJsonNormalizations);
+        ret.json_normalizations_serialized_name = newJsonNormalizations;
       }
 
       return ret;
@@ -1542,6 +1543,7 @@ public class IBMDiscoveryV1Models {
 
     private CreateConfigurationOptions(CreateConfigurationOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
+      IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
       environmentId = builder.environmentId;
       name = builder.name;
       description = builder.description;
@@ -1596,9 +1598,11 @@ public class IBMDiscoveryV1Models {
      * Instantiates a new builder with required properties.
      *
      * @param environmentId the environmentId
+     * @param name the name
      */
-    public CreateConfigurationOptionsBuilder(String environmentId) {
+    public CreateConfigurationOptionsBuilder(String environmentId, String name) {
       this.environmentId = environmentId;
+      this.name = name;
     }
 
     /**
@@ -1775,6 +1779,7 @@ public class IBMDiscoveryV1Models {
      * -  `salesforce` indicates the credentials are used to connect to Salesforce.
      * -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
      * -  `web_crawl` indicates the credentials are used to perform a web crawl.
+     * =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
      *
      * @return the sourceType
      */
@@ -2299,6 +2304,7 @@ public class IBMDiscoveryV1Models {
     private CreateExpansionsOptions(CreateExpansionsOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.collectionId, 'collectionId cannot be empty');
+      IBMWatsonValidator.notNull(builder.expansions, 'expansions cannot be null');
       environmentId = builder.environmentId;
       collectionId = builder.collectionId;
       expansions = builder.expansions;
@@ -2342,10 +2348,12 @@ public class IBMDiscoveryV1Models {
      *
      * @param environmentId the environmentId
      * @param collectionId the collectionId
+     * @param expansions the expansions
      */
-    public CreateExpansionsOptionsBuilder(String environmentId, String collectionId) {
+    public CreateExpansionsOptionsBuilder(String environmentId, String collectionId, List<Expansion> expansions) {
       this.environmentId = environmentId;
       this.collectionId = collectionId;
+      this.expansions = expansions;
     }
 
     /**
@@ -2941,6 +2949,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the documentId.
      *
+     * The document ID associated with this training example.
+     *
      * @return the documentId
      */
     public String documentId() {
@@ -2950,6 +2960,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the crossReference.
      *
+     * The cross reference associated with this training example.
+     *
      * @return the crossReference
      */
     public String crossReference() {
@@ -2958,6 +2970,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the relevance.
+     *
+     * The relevance of the training example.
      *
      * @return the relevance
      */
@@ -3142,7 +3156,7 @@ public class IBMDiscoveryV1Models {
     private String url_serialized_name;
     private String username_serialized_name;
     private String organization_url_serialized_name;
-    private String site_collection_path_serialized_name;
+    private String site_collection.path_serialized_name;
     private String client_secret_serialized_name;
     private String public_key_id_serialized_name;
     private String private_key_serialized_name;
@@ -3152,6 +3166,9 @@ public class IBMDiscoveryV1Models {
     private String source_version_serialized_name;
     private String web_application_url_serialized_name;
     private String domain_serialized_name;
+    private String endpoint_serialized_name;
+    private String access_key_id_serialized_name;
+    private String secret_access_key_serialized_name;
  
     /**
      * Gets the credentialType.
@@ -3163,7 +3180,8 @@ public class IBMDiscoveryV1Models {
      * -  `"source_type": "salesforce"` - valid `credential_type`s: `username_password`
      * -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml` with **source_version** of `online`, or
      * `ntml_v1` with **source_version** of `2016`
-     * -  `"source_type": "web_crawl"` - valid `credential_type`s: `noauth` or `basic`.
+     * -  `"source_type": "web_crawl"` - valid `credential_type`s: `noauth` or `basic`
+     * -  "source_type": "cloud_object_storage"` - valid `credential_type`s: `aws4_hmac`.
      *
      * @return the credentialType
      */
@@ -3247,7 +3265,7 @@ public class IBMDiscoveryV1Models {
      */
     @AuraEnabled
     public String getSiteCollectionPath() {
-      return site_collection_path_serialized_name;
+      return site_collection.path_serialized_name;
     }
  
     /**
@@ -3374,6 +3392,48 @@ public class IBMDiscoveryV1Models {
     public String getDomain() {
       return domain_serialized_name;
     }
+ 
+    /**
+     * Gets the endpoint.
+     *
+     * The endpoint associated with the cloud object store that your are connecting to. Only valid, and required, with a
+     * **credential_type** of `aws4_hmac`.
+     *
+     * @return the endpoint
+     */
+    @AuraEnabled
+    public String getEndpoint() {
+      return endpoint_serialized_name;
+    }
+ 
+    /**
+     * Gets the accessKeyId.
+     *
+     * The access key ID associated with the cloud object store. Only valid, and required, with a **credential_type** of
+     * `aws4_hmac`. For more infomation, see the [cloud object store
+     * documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
+     *
+     * @return the accessKeyId
+     */
+    @AuraEnabled
+    public String getAccessKeyId() {
+      return access_key_id_serialized_name;
+    }
+ 
+    /**
+     * Gets the secretAccessKey.
+     *
+     * The secret access key associated with the cloud object store. Only valid, and required, with a
+     * **credential_type** of `aws4_hmac`. This value is never returned and is only used when creating or modifying
+     * **credentials**. For more infomation, see the [cloud object store
+     * documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
+     *
+     * @return the secretAccessKey
+     */
+    @AuraEnabled
+    public String getSecretAccessKey() {
+      return secret_access_key_serialized_name;
+    }
 
     /**
      * Sets the credentialType.
@@ -3435,7 +3495,7 @@ public class IBMDiscoveryV1Models {
      * @param siteCollectionPath the new siteCollectionPath
      */
     public void setSiteCollectionPath(final String siteCollectionPath) {
-      this.site_collection_path_serialized_name = siteCollectionPath;
+      this.site_collection.path_serialized_name = siteCollectionPath;
     }
 
     /**
@@ -3519,6 +3579,33 @@ public class IBMDiscoveryV1Models {
       this.domain_serialized_name = domain;
     }
 
+    /**
+     * Sets the endpoint.
+     *
+     * @param endpoint the new endpoint
+     */
+    public void setEndpoint(final String endpoint) {
+      this.endpoint_serialized_name = endpoint;
+    }
+
+    /**
+     * Sets the accessKeyId.
+     *
+     * @param accessKeyId the new accessKeyId
+     */
+    public void setAccessKeyId(final String accessKeyId) {
+      this.access_key_id_serialized_name = accessKeyId;
+    }
+
+    /**
+     * Sets the secretAccessKey.
+     *
+     * @param secretAccessKey the new secretAccessKey
+     */
+    public void setSecretAccessKey(final String secretAccessKey) {
+      this.secret_access_key_serialized_name = secretAccessKey;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -3558,6 +3645,7 @@ public class IBMDiscoveryV1Models {
      * -  `salesforce` indicates the credentials are used to connect to Salesforce.
      * -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
      * -  `web_crawl` indicates the credentials are used to perform a web crawl.
+     * =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
      *
      * @return the sourceType
      */
@@ -3657,7 +3745,7 @@ public class IBMDiscoveryV1Models {
           Credentials newItem = (Credentials) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Credentials.class);
           newCredentials.add(newItem);
         }
-        ret.setCredentials(newCredentials);
+        ret.credentials_serialized_name = newCredentials;
       }
 
       return ret;
@@ -5314,10 +5402,6 @@ public class IBMDiscoveryV1Models {
   public class DiskUsage extends IBMWatsonGenericModel {
     private Long used_bytes_serialized_name;
     private Long maximum_allowed_bytes_serialized_name;
-    private Long total_bytes_serialized_name;
-    private String used_serialized_name;
-    private String total_serialized_name;
-    private Double percent_used_serialized_name;
  
     /**
      * Gets the usedBytes.
@@ -5341,54 +5425,6 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public Long getMaximumAllowedBytes() {
       return maximum_allowed_bytes_serialized_name;
-    }
- 
-    /**
-     * Gets the totalBytes.
-     *
-     * **Deprecated**: Total number of bytes available in the environment's disk capacity.
-     *
-     * @return the totalBytes
-     */
-    @AuraEnabled
-    public Long getTotalBytes() {
-      return total_bytes_serialized_name;
-    }
- 
-    /**
-     * Gets the used.
-     *
-     * **Deprecated**: Amount of disk capacity used, in KB or GB format.
-     *
-     * @return the used
-     */
-    @AuraEnabled
-    public String getUsed() {
-      return used_serialized_name;
-    }
- 
-    /**
-     * Gets the total.
-     *
-     * **Deprecated**: Total amount of the environment's disk capacity, in KB or GB format.
-     *
-     * @return the total
-     */
-    @AuraEnabled
-    public String getTotal() {
-      return total_serialized_name;
-    }
- 
-    /**
-     * Gets the percentUsed.
-     *
-     * **Deprecated**: Percentage of the environment's disk capacity that is being used.
-     *
-     * @return the percentUsed
-     */
-    @AuraEnabled
-    public Double getPercentUsed() {
-      return percent_used_serialized_name;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5491,7 +5527,7 @@ public class IBMDiscoveryV1Models {
           Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
           newNotices.add(newItem);
         }
-        ret.setNotices(newNotices);
+        ret.notices_serialized_name = newNotices;
       }
 
       return ret;
@@ -5576,6 +5612,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the step.
      *
+     * The step in the document conversion process that the snapshot object represents.
+     *
      * @return the step
      */
     @AuraEnabled
@@ -5585,6 +5623,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the snapshot.
+     *
+     * Snapshot of the conversion.
      *
      * @return the snapshot
      */
@@ -5632,8 +5672,6 @@ public class IBMDiscoveryV1Models {
   public class DocumentStatus extends IBMWatsonResponseModel {
     private String document_id_serialized_name;
     private String configuration_id_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
     private String status_serialized_name;
     private String status_description_serialized_name;
     private String filename_serialized_name;
@@ -5663,30 +5701,6 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public String getConfigurationId() {
       return configuration_id_serialized_name;
-    }
- 
-    /**
-     * Gets the created.
-     *
-     * The creation date of the document in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
-     *
-     * @return the created
-     */
-    @AuraEnabled
-    public Datetime getCreated() {
-      return created_serialized_name;
-    }
- 
-    /**
-     * Gets the updated.
-     *
-     * Date of the most recent document update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
-     *
-     * @return the updated
-     */
-    @AuraEnabled
-    public Datetime getUpdated() {
-      return updated_serialized_name;
     }
  
     /**
@@ -5788,15 +5802,6 @@ public class IBMDiscoveryV1Models {
       this.sha1_serialized_name = sha1;
     }
 
-    /**
-     * Sets the notices.
-     *
-     * @param notices the new notices
-     */
-    public void setNotices(final List<Notice> notices) {
-      this.notices_serialized_name = notices;
-    }
-
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -5814,7 +5819,7 @@ public class IBMDiscoveryV1Models {
           Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
           newNotices.add(newItem);
         }
-        ret.setNotices(newNotices);
+        ret.notices_serialized_name = newNotices;
       }
 
       return ret;
@@ -5864,6 +5869,9 @@ public class IBMDiscoveryV1Models {
      *
      * Field to be enriched.
      *
+     * Arrays can be specified as the **source_field** if the **enrichment** service for this enrichment is set to
+     * `natural_language_undstanding`.
+     *
      * @return the sourceField
      */
     @AuraEnabled
@@ -5893,11 +5901,8 @@ public class IBMDiscoveryV1Models {
      *
      *  When using `elements` the **options** object must contain Element Classification options. Additionally, when
      * using the `elements` enrichment the configuration specified and files ingested must meet all the criteria
-     * specified in [the documentation](https://console.bluemix.net/docs/services/discovery/element-classification.html)
-     *
-     *
-     *
-     *  Previous API versions also supported `alchemy_language`.
+     * specified in [the
+     * documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-element-classification#element-classification).
      *
      * @return the enrichmentName
      */
@@ -5922,7 +5927,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the options.
      *
-     * Options which are specific to a particular enrichment.
+     * An object representing the configuration options to use for the `elements` enrichment.
      *
      * @return the options
      */
@@ -6010,7 +6015,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * Options which are specific to a particular enrichment.
+   * An object representing the configuration options to use for the `elements` enrichment.
    */
   public class EnrichmentOptions extends IBMWatsonGenericModel {
     private NluEnrichmentFeatures features_serialized_name;
@@ -6025,8 +6030,6 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the features.
-     *
-     * An object representing the enrichment features that will be applied to the specified field.
      *
      * @return the features
      */
@@ -6103,9 +6106,9 @@ public class IBMDiscoveryV1Models {
     private String model;
 
     private EnrichmentOptionsBuilder(EnrichmentOptions enrichmentOptions) {
-      features = enrichmentOptions.features_serialized_name;
-      language = enrichmentOptions.language_serialized_name;
-      model = enrichmentOptions.model_serialized_name;
+      this.features = enrichmentOptions.features_serialized_name;
+      this.language = enrichmentOptions.language_serialized_name;
+      this.model = enrichmentOptions.model_serialized_name;
     }
 
     /**
@@ -6367,8 +6370,6 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      jsonString = jsonString.replace('"last_trained_serialized_name":"",', '');
-      jsonString = jsonString.replace('"last_trained_serialized_name":""', '');
       Environment ret = (Environment) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for indexCapacity
@@ -6706,7 +6707,7 @@ public class IBMDiscoveryV1Models {
           Expansion newItem = (Expansion) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Expansion.class);
           newExpansions.add(newItem);
         }
-        ret.setExpansions(newExpansions);
+        ret.expansions_serialized_name = newExpansions;
       }
 
       return ret;
@@ -6808,7 +6809,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the count.
      *
-     * Number of results to return.
+     * Number of results to return. The maximum for the **count** and **offset** values together in any one query is
+     * **10000**.
      *
      * @return the count
      */
@@ -6831,7 +6833,8 @@ public class IBMDiscoveryV1Models {
      * Gets the offset.
      *
      * The number of query results to skip at the beginning. For example, if the total number of results that are
-     * returned is 10 and the offset is 8, it returns the last two results.
+     * returned is 10 and the offset is 8, it returns the last two results. The maximum for the **count** and **offset**
+     * values together in any one query is **10000**.
      *
      * @return the offset
      */
@@ -7467,7 +7470,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the deduplicate.
      *
-     * When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the
+     * When `true`, and used with a Watson Discovery News collection, duplicate results (based on the contents of the
      * **title** field) are removed. Duplicate comparison is limited to the current query only; **offset** is not
      * considered. This parameter is currently Beta functionality.
      *
@@ -7992,6 +7995,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the level.
      *
+     * The HTML heading level that any content with the matching font will be converted to.
+     *
      * @return the level
      */
     @AuraEnabled
@@ -8001,6 +8006,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the minSize.
+     *
+     * The minimum size of the font to match.
      *
      * @return the minSize
      */
@@ -8012,6 +8019,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the maxSize.
      *
+     * The maximum size of the font to match.
+     *
      * @return the maxSize
      */
     @AuraEnabled
@@ -8021,6 +8030,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the bold.
+     *
+     * When `true`, the font is matched if it is bold.
      *
      * @return the bold
      */
@@ -8032,6 +8043,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the italic.
      *
+     * When `true`, the font is matched if it is italic.
+     *
      * @return the italic
      */
     @AuraEnabled
@@ -8041,6 +8054,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the name.
+     *
+     * The name of the font.
      *
      * @return the name
      */
@@ -8287,7 +8302,7 @@ public class IBMDiscoveryV1Models {
           Gateway newItem = (Gateway) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Gateway.class);
           newGateways.add(newItem);
         }
-        ret.setGateways(newGateways);
+        ret.gateways_serialized_name = newGateways;
       }
 
       return ret;
@@ -9575,7 +9590,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the count.
      *
-     * Number of results to return.
+     * Number of results to return. The maximum for the **count** and **offset** values together in any one query is
+     * **10000**.
      *
      * @return the count
      */
@@ -10238,6 +10254,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the excludeTagsCompletely.
      *
+     * Array of HTML tags that are excluded completely.
+     *
      * @return the excludeTagsCompletely
      */
     @AuraEnabled
@@ -10247,6 +10265,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the excludeTagsKeepContent.
+     *
+     * Array of HTML tags which are excluded but still retain content.
      *
      * @return the excludeTagsKeepContent
      */
@@ -10278,6 +10298,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the keepTagAttributes.
      *
+     * An array of HTML tag attributes to keep in the converted document.
+     *
      * @return the keepTagAttributes
      */
     @AuraEnabled
@@ -10287,6 +10309,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the excludeTagAttributes.
+     *
+     * Array of HTML tag attributes to exclude.
      *
      * @return the excludeTagAttributes
      */
@@ -10375,7 +10399,6 @@ public class IBMDiscoveryV1Models {
     private EnvironmentDocuments documents_serialized_name;
     private DiskUsage disk_usage_serialized_name;
     private CollectionUsage collections_serialized_name;
-    private MemoryUsage memory_usage_serialized_name;
  
     /**
      * Gets the documents.
@@ -10412,18 +10435,6 @@ public class IBMDiscoveryV1Models {
     public CollectionUsage getCollections() {
       return collections_serialized_name;
     }
- 
-    /**
-     * Gets the memoryUsage.
-     *
-     * **Deprecated**: Summary of the memory usage statistics for this environment.
-     *
-     * @return the memoryUsage
-     */
-    @AuraEnabled
-    public MemoryUsage getMemoryUsage() {
-      return memory_usage_serialized_name;
-    }
 
     /**
      * Sets the documents.
@@ -10452,15 +10463,6 @@ public class IBMDiscoveryV1Models {
       this.collections_serialized_name = collections;
     }
 
-    /**
-     * Sets the memoryUsage.
-     *
-     * @param memoryUsage the new memoryUsage
-     */
-    public void setMemoryUsage(final MemoryUsage memoryUsage) {
-      this.memory_usage_serialized_name = memoryUsage;
-    }
-
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -10479,10 +10481,6 @@ public class IBMDiscoveryV1Models {
       // calling custom deserializer for collections
       CollectionUsage newCollections = (CollectionUsage) new CollectionUsage().deserialize(JSON.serialize(ret.getCollections()), (Map<String, Object>) jsonMap.get('collections_serialized_name'), CollectionUsage.class);
       ret.setCollections(newCollections);
-
-      // calling custom deserializer for memoryUsage
-      MemoryUsage newMemoryUsage = (MemoryUsage) new MemoryUsage().deserialize(JSON.serialize(ret.getMemoryUsage()), (Map<String, Object>) jsonMap.get('memory_usage_serialized_name'), MemoryUsage.class);
-      ret.setMemoryUsage(newMemoryUsage);
 
       return ret;
     }
@@ -10665,7 +10663,7 @@ public class IBMDiscoveryV1Models {
           Field newItem = (Field) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Field.class);
           newFields.add(newItem);
         }
-        ret.setFields(newFields);
+        ret.fields_serialized_name = newFields;
       }
 
       return ret;
@@ -10835,7 +10833,7 @@ public class IBMDiscoveryV1Models {
           Collection newItem = (Collection) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Collection.class);
           newCollections.add(newItem);
         }
-        ret.setCollections(newCollections);
+        ret.collections_serialized_name = newCollections;
       }
 
       return ret;
@@ -11005,7 +11003,7 @@ public class IBMDiscoveryV1Models {
           Configuration newItem = (Configuration) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Configuration.class);
           newConfigurations.add(newItem);
         }
-        ret.setConfigurations(newConfigurations);
+        ret.configurations_serialized_name = newConfigurations;
       }
 
       return ret;
@@ -11232,7 +11230,7 @@ public class IBMDiscoveryV1Models {
           Environment newItem = (Environment) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Environment.class);
           newEnvironments.add(newItem);
         }
-        ret.setEnvironments(newEnvironments);
+        ret.environments_serialized_name = newEnvironments;
       }
 
       return ret;
@@ -11887,6 +11885,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the results.
      *
+     * Array of log query response results.
+     *
      * @return the results
      */
     @AuraEnabled
@@ -11929,7 +11929,7 @@ public class IBMDiscoveryV1Models {
           LogQueryResponseResult newItem = (LogQueryResponseResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogQueryResponseResult.class);
           newResults.add(newItem);
         }
-        ret.setResults(newResults);
+        ret.results_serialized_name = newResults;
       }
 
       return ret;
@@ -12301,6 +12301,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the results.
      *
+     * Array of log query response results.
+     *
      * @return the results
      */
     @AuraEnabled
@@ -12355,7 +12357,7 @@ public class IBMDiscoveryV1Models {
           LogQueryResponseResultDocumentsResult newItem = (LogQueryResponseResultDocumentsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogQueryResponseResultDocumentsResult.class);
           newResults.add(newItem);
         }
-        ret.setResults(newResults);
+        ret.results_serialized_name = newResults;
       }
 
       return ret;
@@ -12489,87 +12491,6 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * **Deprecated**: Summary of the memory usage statistics for this environment.
-   */
-  public class MemoryUsage extends IBMWatsonGenericModel {
-    private Long used_bytes_serialized_name;
-    private Long total_bytes_serialized_name;
-    private String used_serialized_name;
-    private String total_serialized_name;
-    private Double percent_used_serialized_name;
- 
-    /**
-     * Gets the usedBytes.
-     *
-     * **Deprecated**: Number of bytes used in the environment's memory capacity.
-     *
-     * @return the usedBytes
-     */
-    @AuraEnabled
-    public Long getUsedBytes() {
-      return used_bytes_serialized_name;
-    }
- 
-    /**
-     * Gets the totalBytes.
-     *
-     * **Deprecated**: Total number of bytes available in the environment's memory capacity.
-     *
-     * @return the totalBytes
-     */
-    @AuraEnabled
-    public Long getTotalBytes() {
-      return total_bytes_serialized_name;
-    }
- 
-    /**
-     * Gets the used.
-     *
-     * **Deprecated**: Amount of memory capacity used, in KB or GB format.
-     *
-     * @return the used
-     */
-    @AuraEnabled
-    public String getUsed() {
-      return used_serialized_name;
-    }
- 
-    /**
-     * Gets the total.
-     *
-     * **Deprecated**: Total amount of the environment's memory capacity, in KB or GB format.
-     *
-     * @return the total
-     */
-    @AuraEnabled
-    public String getTotal() {
-      return total_serialized_name;
-    }
- 
-    /**
-     * Gets the percentUsed.
-     *
-     * **Deprecated**: Percentage of the environment's memory capacity that is being used.
-     *
-     * @return the percentUsed
-     */
-    @AuraEnabled
-    public Double getPercentUsed() {
-      return percent_used_serialized_name;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      MemoryUsage ret = (MemoryUsage) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
    * An aggregation analyzing log information for queries and events.
    */
   public class MetricAggregation extends IBMWatsonGenericModel {
@@ -12603,6 +12524,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the results.
+     *
+     * Array of metric aggregation query results.
      *
      * @return the results
      */
@@ -12655,7 +12578,7 @@ public class IBMDiscoveryV1Models {
           MetricAggregationResult newItem = (MetricAggregationResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricAggregationResult.class);
           newResults.add(newItem);
         }
-        ret.setResults(newResults);
+        ret.results_serialized_name = newResults;
       }
 
       return ret;
@@ -12776,6 +12699,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the aggregations.
      *
+     * Array of metric aggregations.
+     *
      * @return the aggregations
      */
     @AuraEnabled
@@ -12809,7 +12734,7 @@ public class IBMDiscoveryV1Models {
           MetricAggregation newItem = (MetricAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricAggregation.class);
           newAggregations.add(newItem);
         }
-        ret.setAggregations(newAggregations);
+        ret.aggregations_serialized_name = newAggregations;
       }
 
       return ret;
@@ -12837,6 +12762,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the results.
+     *
+     * Array of results for the metric token aggregation.
      *
      * @return the results
      */
@@ -12880,7 +12807,7 @@ public class IBMDiscoveryV1Models {
           MetricTokenAggregationResult newItem = (MetricTokenAggregationResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricTokenAggregationResult.class);
           newResults.add(newItem);
         }
-        ret.setResults(newResults);
+        ret.results_serialized_name = newResults;
       }
 
       return ret;
@@ -12979,6 +12906,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the aggregations.
      *
+     * Array of metric token aggregations.
+     *
      * @return the aggregations
      */
     @AuraEnabled
@@ -13012,7 +12941,7 @@ public class IBMDiscoveryV1Models {
           MetricTokenAggregation newItem = (MetricTokenAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), MetricTokenAggregation.class);
           newAggregations.add(newItem);
         }
-        ret.setAggregations(newAggregations);
+        ret.aggregations_serialized_name = newAggregations;
       }
 
       return ret;
@@ -13163,8 +13092,8 @@ public class IBMDiscoveryV1Models {
     private List<String> targets;
 
     private NluEnrichmentEmotionBuilder(NluEnrichmentEmotion nluEnrichmentEmotion) {
-      document = nluEnrichmentEmotion.document_serialized_name;
-      targets = nluEnrichmentEmotion.targets_serialized_name;
+      this.document = nluEnrichmentEmotion.document_serialized_name;
+      this.targets = nluEnrichmentEmotion.targets_serialized_name;
     }
 
     /**
@@ -13369,13 +13298,13 @@ public class IBMDiscoveryV1Models {
     private String model;
 
     private NluEnrichmentEntitiesBuilder(NluEnrichmentEntities nluEnrichmentEntities) {
-      sentiment = nluEnrichmentEntities.sentiment_serialized_name;
-      emotion = nluEnrichmentEntities.emotion_serialized_name;
-      xlimit = nluEnrichmentEntities.limit_serialized_name;
-      mentions = nluEnrichmentEntities.mentions_serialized_name;
-      mentionTypes = nluEnrichmentEntities.mention_types_serialized_name;
-      sentenceLocations = nluEnrichmentEntities.sentence_locations_serialized_name;
-      model = nluEnrichmentEntities.model_serialized_name;
+      this.sentiment = nluEnrichmentEntities.sentiment_serialized_name;
+      this.emotion = nluEnrichmentEntities.emotion_serialized_name;
+      this.xlimit = nluEnrichmentEntities.limit_serialized_name;
+      this.mentions = nluEnrichmentEntities.mentions_serialized_name;
+      this.mentionTypes = nluEnrichmentEntities.mention_types_serialized_name;
+      this.sentenceLocations = nluEnrichmentEntities.sentence_locations_serialized_name;
+      this.model = nluEnrichmentEntities.model_serialized_name;
     }
 
     /**
@@ -13664,14 +13593,14 @@ public class IBMDiscoveryV1Models {
     private NluEnrichmentConcepts concepts;
 
     private NluEnrichmentFeaturesBuilder(NluEnrichmentFeatures nluEnrichmentFeatures) {
-      keywords = nluEnrichmentFeatures.keywords_serialized_name;
-      entities = nluEnrichmentFeatures.entities_serialized_name;
-      sentiment = nluEnrichmentFeatures.sentiment_serialized_name;
-      emotion = nluEnrichmentFeatures.emotion_serialized_name;
-      categories = nluEnrichmentFeatures.categories_serialized_name;
-      semanticRoles = nluEnrichmentFeatures.semantic_roles_serialized_name;
-      relations = nluEnrichmentFeatures.relations_serialized_name;
-      concepts = nluEnrichmentFeatures.concepts_serialized_name;
+      this.keywords = nluEnrichmentFeatures.keywords_serialized_name;
+      this.entities = nluEnrichmentFeatures.entities_serialized_name;
+      this.sentiment = nluEnrichmentFeatures.sentiment_serialized_name;
+      this.emotion = nluEnrichmentFeatures.emotion_serialized_name;
+      this.categories = nluEnrichmentFeatures.categories_serialized_name;
+      this.semanticRoles = nluEnrichmentFeatures.semantic_roles_serialized_name;
+      this.relations = nluEnrichmentFeatures.relations_serialized_name;
+      this.concepts = nluEnrichmentFeatures.concepts_serialized_name;
     }
 
     /**
@@ -13864,9 +13793,9 @@ public class IBMDiscoveryV1Models {
     private Long xlimit;
 
     private NluEnrichmentKeywordsBuilder(NluEnrichmentKeywords nluEnrichmentKeywords) {
-      sentiment = nluEnrichmentKeywords.sentiment_serialized_name;
-      emotion = nluEnrichmentKeywords.emotion_serialized_name;
-      xlimit = nluEnrichmentKeywords.limit_serialized_name;
+      this.sentiment = nluEnrichmentKeywords.sentiment_serialized_name;
+      this.emotion = nluEnrichmentKeywords.emotion_serialized_name;
+      this.xlimit = nluEnrichmentKeywords.limit_serialized_name;
     }
 
     /**
@@ -14044,9 +13973,9 @@ public class IBMDiscoveryV1Models {
     private Long xlimit;
 
     private NluEnrichmentSemanticRolesBuilder(NluEnrichmentSemanticRoles nluEnrichmentSemanticRoles) {
-      entities = nluEnrichmentSemanticRoles.entities_serialized_name;
-      keywords = nluEnrichmentSemanticRoles.keywords_serialized_name;
-      xlimit = nluEnrichmentSemanticRoles.limit_serialized_name;
+      this.entities = nluEnrichmentSemanticRoles.entities_serialized_name;
+      this.keywords = nluEnrichmentSemanticRoles.keywords_serialized_name;
+      this.xlimit = nluEnrichmentSemanticRoles.limit_serialized_name;
     }
 
     /**
@@ -14169,8 +14098,8 @@ public class IBMDiscoveryV1Models {
     private List<String> targets;
 
     private NluEnrichmentSentimentBuilder(NluEnrichmentSentiment nluEnrichmentSentiment) {
-      document = nluEnrichmentSentiment.document_serialized_name;
-      targets = nluEnrichmentSentiment.targets_serialized_name;
+      this.document = nluEnrichmentSentiment.document_serialized_name;
+      this.targets = nluEnrichmentSentiment.targets_serialized_name;
     }
 
     /**
@@ -14258,10 +14187,10 @@ public class IBMDiscoveryV1Models {
      *
      * **remove** - Deletes the **source_field** field. The **destination_field** is ignored for this operation.
      *
-     * **remove_nulls** - Removes all nested null (blank) field values from the JSON tree. **source_field** and
-     * **destination_field** are ignored by this operation because _remove_nulls_ operates on the entire JSON tree.
-     * Typically, **remove_nulls** is invoked as the last normalization operation (if it is invoked at all, it can be
-     * time-expensive).
+     * **remove_nulls** - Removes all nested null (blank) field values from the ingested document. **source_field** and
+     * **destination_field** are ignored by this operation because _remove_nulls_ operates on the entire ingested
+     * document. Typically, **remove_nulls** is invoked as the last normalization operation (if it is invoked at all, it
+     * can be time-expensive).
      *
      * @return the operation
      */
@@ -14348,7 +14277,14 @@ public class IBMDiscoveryV1Models {
      * Gets the noticeId.
      *
      * Identifies the notice. Many notices might have the same ID. This field exists so that user applications can
-     * programmatically identify a notice and take automatic corrective action.
+     * programmatically identify a notice and take automatic corrective action. Typical notice IDs include:
+     * `index_failed`, `index_failed_too_many_requests`, `index_failed_incompatible_field`,
+     * `index_failed_cluster_unavailable`, `ingestion_timeout`, `ingestion_error`, `bad_request`, `internal_error`,
+     * `missing_model`, `unsupported_model`, `smart_document_understanding_failed_incompatible_field`,
+     * `smart_document_understanding_failed_internal_error`, `smart_document_understanding_failed_internal_error`,
+     * `smart_document_understanding_failed_warning`, `smart_document_understanding_page_error`,
+     * `smart_document_understanding_page_warning`. **Note:** This is not a complete list, other values might be
+     * returned.
      *
      * @return the noticeId
      */
@@ -14408,7 +14344,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the step.
      *
-     * Ingestion or training step in which the notice occurred.
+     * Ingestion or training step in which the notice occurred. Typical step values include: `classify_elements`,
+     * `smartDocumentUnderstanding`, `ingestion`, `indexing`, `convert`. **Note:** This is not a complete list, other
+     * values might be returned.
      *
      * @return the step
      */
@@ -14482,7 +14420,7 @@ public class IBMDiscoveryV1Models {
           FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), FontSetting.class);
           newFonts.add(newItem);
         }
-        ret.setFonts(newFonts);
+        ret.fonts_serialized_name = newFonts;
       }
 
       return ret;
@@ -14562,6 +14500,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the results.
+     *
+     * Array of aggregation results.
      *
      * @return the results
      */
@@ -14855,7 +14795,7 @@ public class IBMDiscoveryV1Models {
           AggregationResult newItem = (AggregationResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AggregationResult.class);
           newResults.add(newItem);
         }
-        ret.setResults(newResults);
+        ret.results_serialized_name = newResults;
       }
 
       // calling custom deserializer for aggregations
@@ -14868,7 +14808,7 @@ public class IBMDiscoveryV1Models {
           QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
-        ret.setAggregations(newAggregations);
+        ret.aggregations_serialized_name = newAggregations;
       }
 
       // calling custom deserializer for hits
@@ -15224,13 +15164,15 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * An array of entities resulting from the query.
+   * An object that contains an array of entities resulting from the query.
    */
   public class QueryEntitiesResponse extends IBMWatsonResponseModel {
     private List<QueryEntitiesResponseItem> entities_serialized_name;
  
     /**
      * Gets the entities.
+     *
+     * Array of entities that results from the query.
      *
      * @return the entities
      */
@@ -15265,7 +15207,7 @@ public class IBMDiscoveryV1Models {
           QueryEntitiesResponseItem newItem = (QueryEntitiesResponseItem) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEntitiesResponseItem.class);
           newEntities.add(newItem);
         }
-        ret.setEntities(newEntities);
+        ret.entities_serialized_name = newEntities;
       }
 
       return ret;
@@ -15360,7 +15302,7 @@ public class IBMDiscoveryV1Models {
           QueryEvidence newItem = (QueryEvidence) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidence.class);
           newEvidence.add(newItem);
         }
-        ret.setEvidence(newEvidence);
+        ret.evidence_serialized_name = newEvidence;
       }
 
       return ret;
@@ -15499,7 +15441,7 @@ public class IBMDiscoveryV1Models {
           QueryEvidenceEntity newItem = (QueryEvidenceEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidenceEntity.class);
           newEntities.add(newItem);
         }
-        ret.setEntities(newEntities);
+        ret.entities_serialized_name = newEntities;
       }
 
       return ret;
@@ -15697,7 +15639,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the count.
      *
-     * Number of results to return.
+     * Number of results to return. The maximum for the **count** and **offset** values together in any one query is
+     * **10000**.
      *
      * @return the count
      */
@@ -15709,7 +15652,8 @@ public class IBMDiscoveryV1Models {
      * Gets the offset.
      *
      * The number of query results to skip at the beginning. For example, if the total number of results that are
-     * returned is 10 and the offset is 8, it returns the last two results.
+     * returned is 10 and the offset is 8, it returns the last two results. The maximum for the **count** and **offset**
+     * values together in any one query is **10000**.
      *
      * @return the offset
      */
@@ -15978,7 +15922,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the count.
      *
-     * Number of results to return.
+     * Number of results to return. The maximum for the **count** and **offset** values together in any one query is
+     * **10000**.
      *
      * @return the count
      */
@@ -16001,7 +15946,8 @@ public class IBMDiscoveryV1Models {
      * Gets the offset.
      *
      * The number of query results to skip at the beginning. For example, if the total number of results that are
-     * returned is 10 and the offset is 8, it returns the last two results.
+     * returned is 10 and the offset is 8, it returns the last two results. The maximum for the **count** and **offset**
+     * values together in any one query is **10000**.
      *
      * @return the offset
      */
@@ -16544,6 +16490,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the matchingResults.
      *
+     * The number of matching results.
+     *
      * @return the matchingResults
      */
     @AuraEnabled
@@ -16553,6 +16501,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the results.
+     *
+     * Array of document results that match the query.
      *
      * @return the results
      */
@@ -16564,6 +16514,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the aggregations.
      *
+     * Array of aggregation results that match the query.
+     *
      * @return the aggregations
      */
     @AuraEnabled
@@ -16574,6 +16526,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the passages.
      *
+     * Array of passage results that match the query.
+     *
      * @return the passages
      */
     @AuraEnabled
@@ -16583,6 +16537,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the duplicatesRemoved.
+     *
+     * The number of duplicates removed from this notices query.
      *
      * @return the duplicatesRemoved
      */
@@ -16653,7 +16609,7 @@ public class IBMDiscoveryV1Models {
           QueryNoticesResult newItem = (QueryNoticesResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryNoticesResult.class);
           newResults.add(newItem);
         }
-        ret.setResults(newResults);
+        ret.results_serialized_name = newResults;
       }
 
       // calling custom deserializer for aggregations
@@ -16666,7 +16622,7 @@ public class IBMDiscoveryV1Models {
           QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
-        ret.setAggregations(newAggregations);
+        ret.aggregations_serialized_name = newAggregations;
       }
 
       // calling custom deserializer for passages
@@ -16679,7 +16635,7 @@ public class IBMDiscoveryV1Models {
           QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryPassages.class);
           newPassages.add(newItem);
         }
-        ret.setPassages(newPassages);
+        ret.passages_serialized_name = newPassages;
       }
 
       return ret;
@@ -16691,10 +16647,10 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryNoticesResult extends IBMWatsonDynamicModel {
     private String id_serialized_name;
-    private Double score_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private String collection_id_serialized_name;
     private QueryResultMetadata result_metadata_serialized_name;
+    private String title_serialized_name;
     private Long code_serialized_name;
     private String filename_serialized_name;
     private String file_type_serialized_name;
@@ -16710,16 +16666,6 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public String getId() {
       return id_serialized_name;
-    }
-
-    /**
-     * Gets the score.
-     *
-     * @return the score
-     */
-    @AuraEnabled
-    public Double getScore() {
-      return score_serialized_name;
     }
 
     /**
@@ -16750,6 +16696,16 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public QueryResultMetadata getResultMetadata() {
       return result_metadata_serialized_name;
+    }
+
+    /**
+     * Gets the title.
+     *
+     * @return the title
+     */
+    @AuraEnabled
+    public String getTitle() {
+      return title_serialized_name;
     }
 
     /**
@@ -16822,15 +16778,6 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the score.
-     *
-     * @param score the new score
-     */
-    public void setScore(final Double score) {
-      this.score_serialized_name = score;
-    }
-
-    /**
      * Sets the metadata.
      *
      * @param metadata the new metadata
@@ -16855,6 +16802,15 @@ public class IBMDiscoveryV1Models {
      */
     public void setResultMetadata(final QueryResultMetadata resultMetadata) {
       this.result_metadata_serialized_name = resultMetadata;
+    }
+
+    /**
+     * Sets the title.
+     *
+     * @param title the new title
+     */
+    public void setTitle(final String title) {
+      this.title_serialized_name = title;
     }
 
     /**
@@ -17150,7 +17106,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the deduplicate.
      *
-     * When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the
+     * When `true`, and used with a Watson Discovery News collection, duplicate results (based on the contents of the
      * **title** field) are removed. Duplicate comparison is limited to the current query only; **offset** is not
      * considered. This parameter is currently Beta functionality.
      *
@@ -17793,6 +17749,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the entities.
      *
+     * Array of query entities.
+     *
      * @return the entities
      */
     @AuraEnabled
@@ -17826,7 +17784,7 @@ public class IBMDiscoveryV1Models {
           QueryEntitiesEntity newItem = (QueryEntitiesEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEntitiesEntity.class);
           newEntities.add(newItem);
         }
-        ret.setEntities(newEntities);
+        ret.entities_serialized_name = newEntities;
       }
 
       return ret;
@@ -17914,8 +17872,6 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the relationTypes.
      *
-     * A list of relation types to include or exclude from the query.
-     *
      * @return the relationTypes
      */
     public QueryFilterType getRelationTypes() {
@@ -17924,8 +17880,6 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the entityTypes.
-     *
-     * A list of entity types to include or exclude from the query.
      *
      * @return the entityTypes
      */
@@ -18046,8 +18000,6 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the filter.
-     *
-     * Filters to apply to the relationship query.
      *
      * @return the filter
      */
@@ -18381,7 +18333,7 @@ public class IBMDiscoveryV1Models {
           QueryRelationsArgument newItem = (QueryRelationsArgument) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryRelationsArgument.class);
           newArguments.add(newItem);
         }
-        ret.setArguments(newArguments);
+        ret.arguments_serialized_name = newArguments;
       }
 
       // calling custom deserializer for evidence
@@ -18394,7 +18346,7 @@ public class IBMDiscoveryV1Models {
           QueryEvidence newItem = (QueryEvidence) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryEvidence.class);
           newEvidence.add(newItem);
         }
-        ret.setEvidence(newEvidence);
+        ret.evidence_serialized_name = newEvidence;
       }
 
       return ret;
@@ -18409,6 +18361,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the relations.
+     *
+     * Array of relationships for the relations query.
      *
      * @return the relations
      */
@@ -18443,7 +18397,7 @@ public class IBMDiscoveryV1Models {
           QueryRelationsRelationship newItem = (QueryRelationsRelationship) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryRelationsRelationship.class);
           newRelations.add(newItem);
         }
-        ret.setRelations(newRelations);
+        ret.relations_serialized_name = newRelations;
       }
 
       return ret;
@@ -18465,6 +18419,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the matchingResults.
      *
+     * The number of matching results for the query.
+     *
      * @return the matchingResults
      */
     @AuraEnabled
@@ -18474,6 +18430,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the results.
+     *
+     * Array of document results for the query.
      *
      * @return the results
      */
@@ -18485,6 +18443,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the aggregations.
      *
+     * Array of aggregation results for the query.
+     *
      * @return the aggregations
      */
     @AuraEnabled
@@ -18495,6 +18455,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the passages.
      *
+     * Array of passage results for the query.
+     *
      * @return the passages
      */
     @AuraEnabled
@@ -18504,6 +18466,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the duplicatesRemoved.
+     *
+     * The number of duplicate results removed.
      *
      * @return the duplicatesRemoved
      */
@@ -18619,7 +18583,7 @@ public class IBMDiscoveryV1Models {
           QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryResult.class);
           newResults.add(newItem);
         }
-        ret.setResults(newResults);
+        ret.results_serialized_name = newResults;
       }
 
       // calling custom deserializer for aggregations
@@ -18632,7 +18596,7 @@ public class IBMDiscoveryV1Models {
           QueryAggregation newItem = (QueryAggregation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryAggregation.class);
           newAggregations.add(newItem);
         }
-        ret.setAggregations(newAggregations);
+        ret.aggregations_serialized_name = newAggregations;
       }
 
       // calling custom deserializer for passages
@@ -18645,7 +18609,7 @@ public class IBMDiscoveryV1Models {
           QueryPassages newItem = (QueryPassages) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryPassages.class);
           newPassages.add(newItem);
         }
-        ret.setPassages(newPassages);
+        ret.passages_serialized_name = newPassages;
       }
 
       // calling custom deserializer for retrievalDetails
@@ -18661,10 +18625,10 @@ public class IBMDiscoveryV1Models {
    */
   public class QueryResult extends IBMWatsonDynamicModel {
     private String id_serialized_name;
-    private Double score_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private String collection_id_serialized_name;
     private QueryResultMetadata result_metadata_serialized_name;
+    private String title_serialized_name;
     private Map<String, Object> additional_properties_serialized_name;
 
     /**
@@ -18675,16 +18639,6 @@ public class IBMDiscoveryV1Models {
     @AuraEnabled
     public String getId() {
       return id_serialized_name;
-    }
-
-    /**
-     * Gets the score.
-     *
-     * @return the score
-     */
-    @AuraEnabled
-    public Double getScore() {
-      return score_serialized_name;
     }
 
     /**
@@ -18718,6 +18672,16 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
+     * Gets the title.
+     *
+     * @return the title
+     */
+    @AuraEnabled
+    public String getTitle() {
+      return title_serialized_name;
+    }
+
+    /**
      * Gets the dynamic properties attached to QueryResult.
      *
      * @return the dynamic properties
@@ -18734,15 +18698,6 @@ public class IBMDiscoveryV1Models {
      */
     public void setId(final String id) {
       this.id_serialized_name = id;
-    }
-
-    /**
-     * Sets the score.
-     *
-     * @param score the new score
-     */
-    public void setScore(final Double score) {
-      this.score_serialized_name = score;
     }
 
     /**
@@ -18770,6 +18725,15 @@ public class IBMDiscoveryV1Models {
      */
     public void setResultMetadata(final QueryResultMetadata resultMetadata) {
       this.result_metadata_serialized_name = resultMetadata;
+    }
+
+    /**
+     * Sets the title.
+     *
+     * @param title the new title
+     */
+    public void setTitle(final String title) {
+      this.title_serialized_name = title;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -19033,7 +18997,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the selectorTags.
      *
-     * Defines the heading level that splits into document segments. Valid values are h1, h2, h3, h4, h5, h6.
+     * Defines the heading level that splits into document segments. Valid values are h1, h2, h3, h4, h5, h6. The
+     * content of the header field that the segmentation splits at is used as the **title** field for that segmented
+     * result.
      *
      * @return the selectorTags
      */
@@ -19088,6 +19054,7 @@ public class IBMDiscoveryV1Models {
      * -  `salesforce` indicates the configuration is to connect to Salesforce.
      * -  `sharepoint` indicates the configuration is to connect to Microsoft SharePoint Online.
      * -  `web_crawl` indicates the configuration is to perform a web page crawl.
+     * -  `cloud_object_storage` indicates the configuration is to connect to a cloud object store.
      *
      * @return the xtype
      */
@@ -19197,6 +19164,8 @@ public class IBMDiscoveryV1Models {
     private List<SourceOptionsObject> objects_serialized_name;
     private List<SourceOptionsSiteColl> site_collections_serialized_name;
     private List<SourceOptionsWebCrawl> urls_serialized_name;
+    private List<SourceOptionsBuckets> buckets_serialized_name;
+    private Boolean crawl_all_buckets_serialized_name;
  
     /**
      * Gets the folders.
@@ -19249,6 +19218,33 @@ public class IBMDiscoveryV1Models {
     public List<SourceOptionsWebCrawl> getUrls() {
       return urls_serialized_name;
     }
+ 
+    /**
+     * Gets the buckets.
+     *
+     * Array of cloud object store buckets to begin crawling. Only valid and required when the **type** field of the
+     * **source** object is set to `cloud_object_store`, and the **crawl_all_buckets** field is `false` or not
+     * specified.
+     *
+     * @return the buckets
+     */
+    @AuraEnabled
+    public List<SourceOptionsBuckets> getBuckets() {
+      return buckets_serialized_name;
+    }
+ 
+    /**
+     * Gets the crawlAllBuckets.
+     *
+     * When `true`, all buckets in the specified cloud object store are crawled. If set to `true`, the **buckets** array
+     * must not be specified.
+     *
+     * @return the crawlAllBuckets
+     */
+    @AuraEnabled
+    public Boolean getCrawlAllBuckets() {
+      return crawl_all_buckets_serialized_name;
+    }
 
     /**
      * Sets the folders.
@@ -19286,6 +19282,24 @@ public class IBMDiscoveryV1Models {
       this.urls_serialized_name = urls;
     }
 
+    /**
+     * Sets the buckets.
+     *
+     * @param buckets the new buckets
+     */
+    public void setBuckets(final List<SourceOptionsBuckets> buckets) {
+      this.buckets_serialized_name = buckets;
+    }
+
+    /**
+     * Sets the crawlAllBuckets.
+     *
+     * @param crawlAllBuckets the new crawlAllBuckets
+     */
+    public void setCrawlAllBuckets(final Boolean crawlAllBuckets) {
+      this.crawl_all_buckets_serialized_name = crawlAllBuckets;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -19303,7 +19317,7 @@ public class IBMDiscoveryV1Models {
           SourceOptionsFolder newItem = (SourceOptionsFolder) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsFolder.class);
           newFolders.add(newItem);
         }
-        ret.setFolders(newFolders);
+        ret.folders_serialized_name = newFolders;
       }
 
       // calling custom deserializer for objects
@@ -19316,7 +19330,7 @@ public class IBMDiscoveryV1Models {
           SourceOptionsObject newItem = (SourceOptionsObject) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsObject.class);
           newObjects.add(newItem);
         }
-        ret.setObjects(newObjects);
+        ret.objects_serialized_name = newObjects;
       }
 
       // calling custom deserializer for siteCollections
@@ -19329,7 +19343,7 @@ public class IBMDiscoveryV1Models {
           SourceOptionsSiteColl newItem = (SourceOptionsSiteColl) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsSiteColl.class);
           newSiteCollections.add(newItem);
         }
-        ret.setSiteCollections(newSiteCollections);
+        ret.site_collections_serialized_name = newSiteCollections;
       }
 
       // calling custom deserializer for urls
@@ -19342,8 +19356,82 @@ public class IBMDiscoveryV1Models {
           SourceOptionsWebCrawl newItem = (SourceOptionsWebCrawl) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsWebCrawl.class);
           newUrls.add(newItem);
         }
-        ret.setUrls(newUrls);
+        ret.urls_serialized_name = newUrls;
       }
+
+      // calling custom deserializer for buckets
+      List<SourceOptionsBuckets> newBuckets = new List<SourceOptionsBuckets>();
+      List<SourceOptionsBuckets> deserializedBuckets = ret.getBuckets();
+      if (deserializedBuckets != null) {
+        for (Integer i = 0; i < deserializedBuckets.size(); i++) {
+          SourceOptionsBuckets currentItem = ret.getBuckets().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('buckets_serialized_name');
+          SourceOptionsBuckets newItem = (SourceOptionsBuckets) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SourceOptionsBuckets.class);
+          newBuckets.add(newItem);
+        }
+        ret.buckets_serialized_name = newBuckets;
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Object defining a cloud object store bucket to crawl.
+   */
+  public class SourceOptionsBuckets extends IBMWatsonGenericModel {
+    private String name_serialized_name;
+    private Long limit_serialized_name;
+ 
+    /**
+     * Gets the name.
+     *
+     * The name of the cloud object store bucket to crawl.
+     *
+     * @return the name
+     */
+    @AuraEnabled
+    public String getName() {
+      return name_serialized_name;
+    }
+ 
+    /**
+     * Gets the xlimit.
+     *
+     * The number of documents to crawl from this cloud object store bucket. If not specified, all documents in the
+     * bucket are crawled.
+     *
+     * @return the xlimit
+     */
+    @AuraEnabled
+    public Long getXlimit() {
+      return limit_serialized_name;
+    }
+
+    /**
+     * Sets the name.
+     *
+     * @param name the new name
+     */
+    public void setName(final String name) {
+      this.name_serialized_name = name;
+    }
+
+    /**
+     * Sets the xlimit.
+     *
+     * @param xlimit the new xlimit
+     */
+    public void setXlimit(final long xlimit) {
+      this.limit_serialized_name = xlimit;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SourceOptionsBuckets ret = (SourceOptionsBuckets) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -19833,9 +19921,7 @@ public class IBMDiscoveryV1Models {
      *
      * -  `running` indicates that a crawl to fetch more documents is in progress.
      * -  `complete` indicates that the crawl has completed with no errors.
-     * -  `complete_with_notices` indicates that some notices were generated during the crawl. Notices can be checked by
-     * using the **notices** query method.
-     * -  `stopped` indicates that the crawl has stopped but is not complete.
+     * -  `queued` indicates that the crawl has been paused by the system and will automatically restart when possible.
      *
      * @return the status
      */
@@ -19891,12 +19977,12 @@ public class IBMDiscoveryV1Models {
   public class TestConfigurationInEnvironmentOptions extends IBMWatsonOptionsModel {
     private String environmentId;
     private String configuration;
-    private String step;
-    private String configurationId;
     private IBMWatsonFile file;
     private String filename;
-    private String metadata;
     private String fileContentType;
+    private String metadata;
+    private String step;
+    private String configurationId;
  
     /**
      * Gets the environmentId.
@@ -19925,6 +20011,58 @@ public class IBMDiscoveryV1Models {
     }
  
     /**
+     * Gets the file.
+     *
+     * The content of the document to ingest. The maximum supported file size when adding a file to a collection is 50
+     * megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files larger than the
+     * supported size are rejected.
+     *
+     * @return the file
+     */
+    public IBMWatsonFile file() {
+      return file;
+    }
+ 
+    /**
+     * Gets the filename.
+     *
+     * The filename for file.
+     *
+     * @return the filename
+     */
+    public String filename() {
+      return filename;
+    }
+ 
+    /**
+     * Gets the fileContentType.
+     *
+     * The content type of file.
+     *
+     * @return the fileContentType
+     */
+    public String fileContentType() {
+      return fileContentType;
+    }
+ 
+    /**
+     * Gets the metadata.
+     *
+     * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata
+     * that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1
+     * MB are rejected.
+     * Example:  ``` {
+     *   "Creator": "Johnny Appleseed",
+     *   "Subject": "Apples"
+     * } ```.
+     *
+     * @return the metadata
+     */
+    public String metadata() {
+      return metadata;
+    }
+ 
+    /**
      * Gets the step.
      *
      * Specify to only run the input document through the given step instead of running the input document through the
@@ -19947,69 +20085,18 @@ public class IBMDiscoveryV1Models {
     public String configurationId() {
       return configurationId;
     }
- 
-    /**
-     * Gets the file.
-     *
-     * The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50
-     * megabytes is rejected.
-     *
-     * @return the file
-     */
-    public IBMWatsonFile file() {
-      return file;
-    }
- 
-    /**
-     * Gets the filename.
-     *
-     * The filename for file.
-     *
-     * @return the filename
-     */
-    public String filename() {
-      return filename;
-    }
- 
-    /**
-     * Gets the metadata.
-     *
-     * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata
-     * that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1
-     * MB are rejected.
-     * Example:  ``` {
-     *   "Creator": "Johnny Appleseed",
-     *   "Subject": "Apples"
-     * } ```.
-     *
-     * @return the metadata
-     */
-    public String metadata() {
-      return metadata;
-    }
- 
-    /**
-     * Gets the fileContentType.
-     *
-     * The content type of file.
-     *
-     * @return the fileContentType
-     */
-    public String fileContentType() {
-      return fileContentType;
-    }
 
     private TestConfigurationInEnvironmentOptions(TestConfigurationInEnvironmentOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
       IBMWatsonValidator.isTrue(builder.file == null || builder.fileContentType != null, 'content type cannot be null if file is not null');
       environmentId = builder.environmentId;
       configuration = builder.configuration;
-      step = builder.step;
-      configurationId = builder.configurationId;
       file = builder.file;
       filename = builder.filename;
-      metadata = builder.metadata;
       fileContentType = builder.fileContentType;
+      metadata = builder.metadata;
+      step = builder.step;
+      configurationId = builder.configurationId;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -20030,22 +20117,22 @@ public class IBMDiscoveryV1Models {
   public class TestConfigurationInEnvironmentOptionsBuilder extends IBMWatsonOptionsModel {
     private String environmentId;
     private String configuration;
-    private String step;
-    private String configurationId;
     private IBMWatsonFile file;
     private String filename;
-    private String metadata;
     private String fileContentType;
+    private String metadata;
+    private String step;
+    private String configurationId;
 
     private TestConfigurationInEnvironmentOptionsBuilder(TestConfigurationInEnvironmentOptions testConfigurationInEnvironmentOptions) {
       environmentId = testConfigurationInEnvironmentOptions.environmentId;
       configuration = testConfigurationInEnvironmentOptions.configuration;
-      step = testConfigurationInEnvironmentOptions.step;
-      configurationId = testConfigurationInEnvironmentOptions.configurationId;
       file = testConfigurationInEnvironmentOptions.file;
       filename = testConfigurationInEnvironmentOptions.filename;
-      metadata = testConfigurationInEnvironmentOptions.metadata;
       fileContentType = testConfigurationInEnvironmentOptions.fileContentType;
+      metadata = testConfigurationInEnvironmentOptions.metadata;
+      step = testConfigurationInEnvironmentOptions.step;
+      configurationId = testConfigurationInEnvironmentOptions.configurationId;
       this.requestHeaders.putAll(testConfigurationInEnvironmentOptions.requestHeaders());
     }
 
@@ -20096,28 +20183,6 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the step.
-     *
-     * @param step the step
-     * @return the TestConfigurationInEnvironmentOptions builder
-     */
-    public TestConfigurationInEnvironmentOptionsBuilder step(String step) {
-      this.step = step;
-      return this;
-    }
-
-    /**
-     * Set the configurationId.
-     *
-     * @param configurationId the configurationId
-     * @return the TestConfigurationInEnvironmentOptions builder
-     */
-    public TestConfigurationInEnvironmentOptionsBuilder configurationId(String configurationId) {
-      this.configurationId = configurationId;
-      return this;
-    }
-
-    /**
      * Set the file.
      *
      * @param file the file
@@ -20140,6 +20205,17 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
+     * Set the fileContentType.
+     *
+     * @param fileContentType the fileContentType
+     * @return the TestConfigurationInEnvironmentOptions builder
+     */
+    public TestConfigurationInEnvironmentOptionsBuilder fileContentType(String fileContentType) {
+      this.fileContentType = fileContentType;
+      return this;
+    }
+
+    /**
      * Set the metadata.
      *
      * @param metadata the metadata
@@ -20151,13 +20227,24 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the fileContentType.
+     * Set the step.
      *
-     * @param fileContentType the fileContentType
+     * @param step the step
      * @return the TestConfigurationInEnvironmentOptions builder
      */
-    public TestConfigurationInEnvironmentOptionsBuilder fileContentType(String fileContentType) {
-      this.fileContentType = fileContentType;
+    public TestConfigurationInEnvironmentOptionsBuilder step(String step) {
+      this.step = step;
+      return this;
+    }
+
+    /**
+     * Set the configurationId.
+     *
+     * @param configurationId the configurationId
+     * @return the TestConfigurationInEnvironmentOptions builder
+     */
+    public TestConfigurationInEnvironmentOptionsBuilder configurationId(String configurationId) {
+      this.configurationId = configurationId;
       return this;
     }
 
@@ -20258,24 +20345,6 @@ public class IBMDiscoveryV1Models {
       return notices_serialized_name;
     }
 
-    /**
-     * Sets the snapshots.
-     *
-     * @param snapshots the new snapshots
-     */
-    public void setSnapshots(final List<DocumentSnapshot> snapshots) {
-      this.snapshots_serialized_name = snapshots;
-    }
-
-    /**
-     * Sets the notices.
-     *
-     * @param notices the new notices
-     */
-    public void setNotices(final List<Notice> notices) {
-      this.notices_serialized_name = notices;
-    }
-
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -20293,7 +20362,7 @@ public class IBMDiscoveryV1Models {
           DocumentSnapshot newItem = (DocumentSnapshot) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DocumentSnapshot.class);
           newSnapshots.add(newItem);
         }
-        ret.setSnapshots(newSnapshots);
+        ret.snapshots_serialized_name = newSnapshots;
       }
 
       // calling custom deserializer for notices
@@ -20306,7 +20375,7 @@ public class IBMDiscoveryV1Models {
           Notice newItem = (Notice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Notice.class);
           newNotices.add(newItem);
         }
-        ret.setNotices(newNotices);
+        ret.notices_serialized_name = newNotices;
       }
 
       return ret;
@@ -20531,7 +20600,7 @@ public class IBMDiscoveryV1Models {
           QueryResult newItem = (QueryResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), QueryResult.class);
           newHits.add(newItem);
         }
-        ret.setHits(newHits);
+        ret.hits_serialized_name = newHits;
       }
 
       return ret;
@@ -20549,6 +20618,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the environmentId.
      *
+     * The environment id associated with this training data set.
+     *
      * @return the environmentId
      */
     @AuraEnabled
@@ -20559,6 +20630,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the collectionId.
      *
+     * The collection id associated with this training data set.
+     *
      * @return the collectionId
      */
     @AuraEnabled
@@ -20568,6 +20641,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the queries.
+     *
+     * Array of training queries.
      *
      * @return the queries
      */
@@ -20620,7 +20695,7 @@ public class IBMDiscoveryV1Models {
           TrainingQuery newItem = (TrainingQuery) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingQuery.class);
           newQueries.add(newItem);
         }
-        ret.setQueries(newQueries);
+        ret.queries_serialized_name = newQueries;
       }
 
       return ret;
@@ -20638,6 +20713,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the documentId.
      *
+     * The document ID associated with this training example.
+     *
      * @return the documentId
      */
     @AuraEnabled
@@ -20648,6 +20725,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the crossReference.
      *
+     * The cross reference associated with this training example.
+     *
      * @return the crossReference
      */
     @AuraEnabled
@@ -20657,6 +20736,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the relevance.
+     *
+     * The relevance of the training example.
      *
      * @return the relevance
      */
@@ -20712,6 +20793,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the examples.
      *
+     * Array of training examples.
+     *
      * @return the examples
      */
     @AuraEnabled
@@ -20745,7 +20828,7 @@ public class IBMDiscoveryV1Models {
           TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingExample.class);
           newExamples.add(newItem);
         }
-        ret.setExamples(newExamples);
+        ret.examples_serialized_name = newExamples;
       }
 
       return ret;
@@ -20764,6 +20847,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the queryId.
      *
+     * The query ID associated with the training query.
+     *
      * @return the queryId
      */
     @AuraEnabled
@@ -20773,6 +20858,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the naturalLanguageQuery.
+     *
+     * The natural text query for the training query.
      *
      * @return the naturalLanguageQuery
      */
@@ -20784,6 +20871,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the filter.
      *
+     * The filter used on the collection before the **natural_language_query** is applied.
+     *
      * @return the filter
      */
     @AuraEnabled
@@ -20793,6 +20882,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the examples.
+     *
+     * Array of training examples.
      *
      * @return the examples
      */
@@ -20854,7 +20945,7 @@ public class IBMDiscoveryV1Models {
           TrainingExample newItem = (TrainingExample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingExample.class);
           newExamples.add(newItem);
         }
-        ret.setExamples(newExamples);
+        ret.examples_serialized_name = newExamples;
       }
 
       return ret;
@@ -20878,6 +20969,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the totalExamples.
      *
+     * The total number of training examples uploaded to this collection.
+     *
      * @return the totalExamples
      */
     @AuraEnabled
@@ -20887,6 +20980,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the available.
+     *
+     * When `true`, the collection has been successfully trained.
      *
      * @return the available
      */
@@ -20898,6 +20993,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the processing.
      *
+     * When `true`, the collection is currently processing training.
+     *
      * @return the processing
      */
     @AuraEnabled
@@ -20907,6 +21004,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the minimumQueriesAdded.
+     *
+     * When `true`, the collection has a sufficent amount of queries added for training to occur.
      *
      * @return the minimumQueriesAdded
      */
@@ -20918,6 +21017,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the minimumExamplesAdded.
      *
+     * When `true`, the collection has a sufficent amount of examples added for training to occur.
+     *
      * @return the minimumExamplesAdded
      */
     @AuraEnabled
@@ -20927,6 +21028,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the sufficientLabelDiversity.
+     *
+     * When `true`, the collection has a sufficent amount of diversity in labeled results for training to occur.
      *
      * @return the sufficientLabelDiversity
      */
@@ -20938,6 +21041,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the notices.
      *
+     * The number of notices associated with this data set.
+     *
      * @return the notices
      */
     @AuraEnabled
@@ -20948,6 +21053,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the successfullyTrained.
      *
+     * The timestamp of when the collection was successfully trained.
+     *
      * @return the successfullyTrained
      */
     @AuraEnabled
@@ -20957,6 +21064,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the dataUpdated.
+     *
+     * The timestamp of when the data was uploaded.
      *
      * @return the dataUpdated
      */
@@ -21051,16 +21160,7 @@ public class IBMDiscoveryV1Models {
         return null;
       }
 
-      String data_updated = (String) jsonMap.remove('data_updated_serialized_name');
-      String successfully_trained = (String) jsonMap.remove('successfully_trained_serialized_name');
-      String jsonStringWithoutDates = JSON.serialize(jsonMap);
-      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
-      if (String.isNotBlank(data_updated)) {
-        ret.setDataUpdated((Datetime) JSON.deserialize('"' + data_updated + '"', Datetime.class));
-      }
-      if (String.isNotBlank(successfully_trained)) {
-        ret.setSuccessfullyTrained((Datetime) JSON.deserialize('"' + successfully_trained + '"', Datetime.class));
-      }
+      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -21371,6 +21471,7 @@ public class IBMDiscoveryV1Models {
     private UpdateConfigurationOptions(UpdateConfigurationOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.configurationId, 'configurationId cannot be empty');
+      IBMWatsonValidator.notNull(builder.name, 'name cannot be null');
       environmentId = builder.environmentId;
       configurationId = builder.configurationId;
       name = builder.name;
@@ -21429,10 +21530,12 @@ public class IBMDiscoveryV1Models {
      *
      * @param environmentId the environmentId
      * @param configurationId the configurationId
+     * @param name the name
      */
-    public UpdateConfigurationOptionsBuilder(String environmentId, String configurationId) {
+    public UpdateConfigurationOptionsBuilder(String environmentId, String configurationId, String name) {
       this.environmentId = environmentId;
       this.configurationId = configurationId;
+      this.name = name;
     }
 
     /**
@@ -21632,6 +21735,7 @@ public class IBMDiscoveryV1Models {
      * -  `salesforce` indicates the credentials are used to connect to Salesforce.
      * -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
      * -  `web_crawl` indicates the credentials are used to perform a web crawl.
+     * =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
      *
      * @return the sourceType
      */
@@ -21794,8 +21898,8 @@ public class IBMDiscoveryV1Models {
     private String documentId;
     private IBMWatsonFile file;
     private String filename;
-    private String metadata;
     private String fileContentType;
+    private String metadata;
  
     /**
      * Gets the environmentId.
@@ -21833,8 +21937,9 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the file.
      *
-     * The content of the document to ingest. The maximum supported file size is 50 megabytes. Files larger than 50
-     * megabytes is rejected.
+     * The content of the document to ingest. The maximum supported file size when adding a file to a collection is 50
+     * megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files larger than the
+     * supported size are rejected.
      *
      * @return the file
      */
@@ -21854,6 +21959,17 @@ public class IBMDiscoveryV1Models {
     }
  
     /**
+     * Gets the fileContentType.
+     *
+     * The content type of file.
+     *
+     * @return the fileContentType
+     */
+    public String fileContentType() {
+      return fileContentType;
+    }
+ 
+    /**
      * Gets the metadata.
      *
      * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata
@@ -21869,17 +21985,6 @@ public class IBMDiscoveryV1Models {
     public String metadata() {
       return metadata;
     }
- 
-    /**
-     * Gets the fileContentType.
-     *
-     * The content type of file.
-     *
-     * @return the fileContentType
-     */
-    public String fileContentType() {
-      return fileContentType;
-    }
 
     private UpdateDocumentOptions(UpdateDocumentOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
@@ -21891,8 +21996,8 @@ public class IBMDiscoveryV1Models {
       documentId = builder.documentId;
       file = builder.file;
       filename = builder.filename;
-      metadata = builder.metadata;
       fileContentType = builder.fileContentType;
+      metadata = builder.metadata;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -21916,8 +22021,8 @@ public class IBMDiscoveryV1Models {
     private String documentId;
     private IBMWatsonFile file;
     private String filename;
-    private String metadata;
     private String fileContentType;
+    private String metadata;
 
     private UpdateDocumentOptionsBuilder(UpdateDocumentOptions updateDocumentOptions) {
       environmentId = updateDocumentOptions.environmentId;
@@ -21925,8 +22030,8 @@ public class IBMDiscoveryV1Models {
       documentId = updateDocumentOptions.documentId;
       file = updateDocumentOptions.file;
       filename = updateDocumentOptions.filename;
-      metadata = updateDocumentOptions.metadata;
       fileContentType = updateDocumentOptions.fileContentType;
+      metadata = updateDocumentOptions.metadata;
       this.requestHeaders.putAll(updateDocumentOptions.requestHeaders());
     }
 
@@ -22014,17 +22119,6 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Set the metadata.
-     *
-     * @param metadata the metadata
-     * @return the UpdateDocumentOptions builder
-     */
-    public UpdateDocumentOptionsBuilder metadata(String metadata) {
-      this.metadata = metadata;
-      return this;
-    }
-
-    /**
      * Set the fileContentType.
      *
      * @param fileContentType the fileContentType
@@ -22032,6 +22126,17 @@ public class IBMDiscoveryV1Models {
      */
     public UpdateDocumentOptionsBuilder fileContentType(String fileContentType) {
       this.fileContentType = fileContentType;
+      return this;
+    }
+
+    /**
+     * Set the metadata.
+     *
+     * @param metadata the metadata
+     * @return the UpdateDocumentOptions builder
+     */
+    public UpdateDocumentOptionsBuilder metadata(String metadata) {
+      this.metadata = metadata;
       return this;
     }
 
@@ -22278,6 +22383,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the crossReference.
      *
+     * The example to add.
+     *
      * @return the crossReference
      */
     public String crossReference() {
@@ -22286,6 +22393,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the relevance.
+     *
+     * The relevance value for this example.
      *
      * @return the relevance
      */
@@ -22510,7 +22619,7 @@ public class IBMDiscoveryV1Models {
           FontSetting newItem = (FontSetting) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), FontSetting.class);
           newFonts.add(newItem);
         }
-        ret.setFonts(newFonts);
+        ret.fonts_serialized_name = newFonts;
       }
 
       // calling custom deserializer for styles
@@ -22523,7 +22632,7 @@ public class IBMDiscoveryV1Models {
           WordStyle newItem = (WordStyle) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WordStyle.class);
           newStyles.add(newItem);
         }
-        ret.setStyles(newStyles);
+        ret.styles_serialized_name = newStyles;
       }
 
       return ret;
@@ -22580,6 +22689,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the level.
      *
+     * HTML head level that content matching this style is tagged with.
+     *
      * @return the level
      */
     @AuraEnabled
@@ -22589,6 +22700,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the names.
+     *
+     * Array of word style names to convert.
      *
      * @return the names
      */
@@ -22634,6 +22747,8 @@ public class IBMDiscoveryV1Models {
  
     /**
      * Gets the xpaths.
+     *
+     * An array to XPaths.
      *
      * @return the xpaths
      */

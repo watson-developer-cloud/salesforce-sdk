@@ -254,9 +254,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    if (createConfigurationOptions.name() != null) {
-      contentJson.put('name', createConfigurationOptions.name());
-    }
+    contentJson.put('name', createConfigurationOptions.name());
     if (createConfigurationOptions.description() != null) {
       contentJson.put('description', createConfigurationOptions.description());
     }
@@ -380,9 +378,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    if (updateConfigurationOptions.name() != null) {
-      contentJson.put('name', updateConfigurationOptions.name());
-    }
+    contentJson.put('name', updateConfigurationOptions.name());
     if (updateConfigurationOptions.description() != null) {
       contentJson.put('description', updateConfigurationOptions.description());
     }
@@ -634,9 +630,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
-    if (createExpansionsOptions.expansions() != null) {
-      contentJson.put('expansions', createExpansionsOptions.expansions());
-    }
+    contentJson.put('expansions', createExpansionsOptions.expansions());
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMDiscoveryV1Models.Expansions) createServiceCall(builder.build(), IBMDiscoveryV1Models.Expansions.class);
@@ -713,7 +707,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   public void deleteExpansions(IBMDiscoveryV1Models.DeleteExpansionsOptions deleteExpansionsOptions) {
     IBMWatsonValidator.notNull(deleteExpansionsOptions, 'deleteExpansionsOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/expansions', new String[]{ deleteExpansionsOptions.environmentId(), deleteExpansionsOptions.collectionId() }));
-    builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteExpansions');
     Map<String, String> requestHeaders = (deleteExpansionsOptions != null) ? deleteExpansionsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -738,7 +731,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   public void deleteStopwordList(IBMDiscoveryV1Models.DeleteStopwordListOptions deleteStopwordListOptions) {
     IBMWatsonValidator.notNull(deleteStopwordListOptions, 'deleteStopwordListOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/word_lists/stopwords', new String[]{ deleteStopwordListOptions.environmentId(), deleteStopwordListOptions.collectionId() }));
-    builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteStopwordList');
     Map<String, String> requestHeaders = (deleteStopwordListOptions != null) ? deleteStopwordListOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -762,7 +754,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   public void deleteTokenizationDictionary(IBMDiscoveryV1Models.DeleteTokenizationDictionaryOptions deleteTokenizationDictionaryOptions) {
     IBMWatsonValidator.notNull(deleteTokenizationDictionaryOptions, 'deleteTokenizationDictionaryOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/word_lists/tokenization_dictionary', new String[]{ deleteTokenizationDictionaryOptions.environmentId(), deleteTokenizationDictionaryOptions.collectionId() }));
-    builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteTokenizationDictionary');
     Map<String, String> requestHeaders = (deleteTokenizationDictionaryOptions != null) ? deleteTokenizationDictionaryOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -869,7 +860,10 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    *
    *   * Fields with empty name values after normalization are filtered out before indexing.
    *
-   *   * Fields containing the following characters after normalization are filtered out before indexing: `#` and `,`.
+   *   * Fields containing the following characters after normalization are filtered out before indexing: `#` and `,`
+   *
+   *  **Note:** Documents can be added with a specific **document_id** by using the
+   * **_/v1/environments/{environment_id}/collections/{collection_id}/documents** method.
    *
    * @param addDocumentOptions the {@link IBMDiscoveryV1Models.AddDocumentOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.DocumentAccepted} with the response
@@ -956,7 +950,11 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Update a document.
    *
-   * Replace an existing document. Starts ingesting a document with optional metadata.
+   * Replace an existing document or add a document with a specified **document_id**. Starts ingesting a document with
+   * optional metadata.
+   *
+   * **Note:** When uploading a new document with this method it automatically replaces any document stored with the
+   * same **document_id** if it exists.
    *
    * @param updateDocumentOptions the {@link IBMDiscoveryV1Models.UpdateDocumentOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.DocumentAccepted} with the response
@@ -994,7 +992,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    *
    * Complex queries might be too long for a standard method query. By using this method, you can construct longer
    * queries. However, these queries may take longer to complete than the standard method. For details, see the
-   * [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html).
+   * [Discovery service
+   * documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts).
    *
    * @param federatedQueryOptions the {@link IBMDiscoveryV1Models.FederatedQueryOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.QueryResponse} with the response
@@ -1085,8 +1084,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    *
    * Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
    * ingesting documents and performing relevance training. See the [Discovery service
-   * documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details on the query
-   * language.
+   * documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts) for
+   * more details on the query language.
    *
    * @param federatedQueryNoticesOptions the {@link IBMDiscoveryV1Models.FederatedQueryNoticesOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.QueryNoticesResponse} with the response
@@ -1154,7 +1153,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    *
    * Complex queries might be too long for a standard method query. By using this method, you can construct longer
    * queries. However, these queries may take longer to complete than the standard method. For details, see the
-   * [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html).
+   * [Discovery service
+   * documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts).
    *
    * @param queryOptions the {@link IBMDiscoveryV1Models.QueryOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.QueryResponse} with the response
@@ -1243,7 +1243,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Knowledge Graph entity query.
    *
-   * See the [Knowledge Graph documentation](https://console.bluemix.net/docs/services/discovery/building-kg.html) for
+   * See the [Knowledge Graph documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-kg#kg) for
    * more details.
    *
    * @param queryEntitiesOptions the {@link IBMDiscoveryV1Models.QueryEntitiesOptions} containing the options for the call
@@ -1287,8 +1287,8 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    *
    * Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
    * ingesting documents and performing relevance training. See the [Discovery service
-   * documentation](https://console.bluemix.net/docs/services/discovery/using.html) for more details on the query
-   * language.
+   * documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts) for
+   * more details on the query language.
    *
    * @param queryNoticesOptions the {@link IBMDiscoveryV1Models.QueryNoticesOptions} containing the options for the call
    * @return the {@link IBMDiscoveryV1Models.QueryNoticesResponse} with the response
@@ -1363,7 +1363,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   /**
    * Knowledge Graph relationship query.
    *
-   * See the [Knowledge Graph documentation](https://console.bluemix.net/docs/services/discovery/building-kg.html) for
+   * See the [Knowledge Graph documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-kg#kg) for
    * more details.
    *
    * @param queryRelationsOptions the {@link IBMDiscoveryV1Models.QueryRelationsOptions} containing the options for the call
@@ -1486,7 +1486,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   public void deleteAllTrainingData(IBMDiscoveryV1Models.DeleteAllTrainingDataOptions deleteAllTrainingDataOptions) {
     IBMWatsonValidator.notNull(deleteAllTrainingDataOptions, 'deleteAllTrainingDataOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/training_data', new String[]{ deleteAllTrainingDataOptions.environmentId(), deleteAllTrainingDataOptions.collectionId() }));
-    builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteAllTrainingData');
     Map<String, String> requestHeaders = (deleteAllTrainingDataOptions != null) ? deleteAllTrainingDataOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -1510,7 +1509,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   public void deleteTrainingData(IBMDiscoveryV1Models.DeleteTrainingDataOptions deleteTrainingDataOptions) {
     IBMWatsonValidator.notNull(deleteTrainingDataOptions, 'deleteTrainingDataOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}', new String[]{ deleteTrainingDataOptions.environmentId(), deleteTrainingDataOptions.collectionId(), deleteTrainingDataOptions.queryId() }));
-    builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteTrainingData');
     Map<String, String> requestHeaders = (deleteTrainingDataOptions != null) ? deleteTrainingDataOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -1534,7 +1532,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   public void deleteTrainingExample(IBMDiscoveryV1Models.DeleteTrainingExampleOptions deleteTrainingExampleOptions) {
     IBMWatsonValidator.notNull(deleteTrainingExampleOptions, 'deleteTrainingExampleOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/environments/{0}/collections/{1}/training_data/{2}/examples/{3}', new String[]{ deleteTrainingExampleOptions.environmentId(), deleteTrainingExampleOptions.collectionId(), deleteTrainingExampleOptions.queryId(), deleteTrainingExampleOptions.exampleId() }));
-    builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteTrainingExample');
     Map<String, String> requestHeaders = (deleteTrainingExampleOptions != null) ? deleteTrainingExampleOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -1683,7 +1680,7 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
    *
    * You associate a customer ID with data by passing the **X-Watson-Metadata** header with a request that passes data.
    * For more information about personal data and customer IDs, see [Information
-   * security](https://console.bluemix.net/docs/services/discovery/information-security.html).
+   * security](https://cloud.ibm.com/docs/services/discovery?topic=discovery-information-security#information-security).
    *
    * @param deleteUserDataOptions the {@link IBMDiscoveryV1Models.DeleteUserDataOptions} containing the options for the call
    * @return the service call
@@ -1691,7 +1688,6 @@ public class IBMDiscoveryV1 extends IBMWatsonService {
   public void deleteUserData(IBMDiscoveryV1Models.DeleteUserDataOptions deleteUserDataOptions) {
     IBMWatsonValidator.notNull(deleteUserDataOptions, 'deleteUserDataOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + '/v1/user_data');
-    builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=discovery;service_version=V1;operation_id=deleteUserData');
     Map<String, String> requestHeaders = (deleteUserDataOptions != null) ? deleteUserDataOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
