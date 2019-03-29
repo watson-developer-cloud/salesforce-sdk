@@ -131,7 +131,7 @@ public class IBMNaturalLanguageClassifierV1Models {
           ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedClass.class);
           newClasses.add(newItem);
         }
-        ret.setClasses(newClasses);
+        ret.classes_serialized_name = newClasses;
       }
 
       return ret;
@@ -226,7 +226,7 @@ public class IBMNaturalLanguageClassifierV1Models {
           CollectionItem newItem = (CollectionItem) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CollectionItem.class);
           newCollection.add(newItem);
         }
-        ret.setCollection(newCollection);
+        ret.collection_serialized_name = newCollection;
       }
 
       return ret;
@@ -481,7 +481,7 @@ public class IBMNaturalLanguageClassifierV1Models {
           Classifier newItem = (Classifier) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Classifier.class);
           newClassifiers.add(newItem);
         }
-        ret.setClassifiers(newClassifiers);
+        ret.classifiers_serialized_name = newClassifiers;
       }
 
       return ret;
@@ -864,7 +864,7 @@ public class IBMNaturalLanguageClassifierV1Models {
           ClassifiedClass newItem = (ClassifiedClass) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedClass.class);
           newClasses.add(newItem);
         }
-        ret.setClasses(newClasses);
+        ret.classes_serialized_name = newClasses;
       }
 
       return ret;
@@ -876,9 +876,7 @@ public class IBMNaturalLanguageClassifierV1Models {
    */
   public class CreateClassifierOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile metadata;
-    private String metadataFilename;
     private IBMWatsonFile trainingData;
-    private String trainingDataFilename;
  
     /**
      * Gets the metadata.
@@ -896,30 +894,6 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
  
     /**
-     * Gets the metadataFilename.
-     *
-     * The filename for trainingMetadata.
-     *
-     * @return the metadataFilename
-     */
-    public String metadataFilename() {
-      return metadataFilename;
-    }
-
-    /**
-     * Gets the metadataFilename.
-     *
-     * The filename for trainingMetadata.
-     *
-     * NOTE: This getter is now deprecated. Please use the metadataFilename getter.
-     *
-     * @return the metadataFilename
-     */
-    public String trainingMetadataFilename() {
-      return metadataFilename;
-    }
- 
-    /**
      * Gets the trainingData.
      *
      * Training data in CSV format. Each text value must have at least one class. The data can include up to 3,000
@@ -931,25 +905,12 @@ public class IBMNaturalLanguageClassifierV1Models {
     public IBMWatsonFile trainingData() {
       return trainingData;
     }
- 
-    /**
-     * Gets the trainingDataFilename.
-     *
-     * The filename for trainingData.
-     *
-     * @return the trainingDataFilename
-     */
-    public String trainingDataFilename() {
-      return trainingDataFilename;
-    }
 
     private CreateClassifierOptions(CreateClassifierOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.metadata, 'metadata cannot be null');
       IBMWatsonValidator.notNull(builder.trainingData, 'trainingData cannot be null');
       metadata = builder.metadata;
-      metadataFilename = builder.metadataFilename;
       trainingData = builder.trainingData;
-      trainingDataFilename = builder.trainingDataFilename;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -969,15 +930,11 @@ public class IBMNaturalLanguageClassifierV1Models {
    */
   public class CreateClassifierOptionsBuilder extends IBMWatsonOptionsModel {
     private IBMWatsonFile metadata;
-    private String metadataFilename;
     private IBMWatsonFile trainingData;
-    private String trainingDataFilename;
 
     private CreateClassifierOptionsBuilder(CreateClassifierOptions createClassifierOptions) {
       metadata = createClassifierOptions.metadata;
-      metadataFilename = createClassifierOptions.metadataFilename;
       trainingData = createClassifierOptions.trainingData;
-      trainingDataFilename = createClassifierOptions.trainingDataFilename;
       this.requestHeaders.putAll(createClassifierOptions.requestHeaders());
     }
 
@@ -1019,30 +976,6 @@ public class IBMNaturalLanguageClassifierV1Models {
     }
 
     /**
-     * Set the metadataFilename.
-     *
-     * @param metadataFilename the metadataFilename
-     * @return the CreateClassifierOptions builder
-     */
-    public CreateClassifierOptionsBuilder metadataFilename(String metadataFilename) {
-      this.metadataFilename = metadataFilename;
-      return this;
-    }
-
-    /**
-     * Set the metadataFilename.
-     *
-     * NOTE: This setter is now deprecated. Please use the metadataFilename setter.
-     *
-     * @param metadataFilename the metadataFilename
-     * @return the CreateClassifierOptions builder
-     */
-    public CreateClassifierOptionsBuilder trainingMetadataFilename(String metadataFilename) {
-      this.metadataFilename = metadataFilename;
-      return this;
-    }
-
-    /**
      * Set the trainingData.
      *
      * @param trainingData the trainingData
@@ -1050,17 +983,6 @@ public class IBMNaturalLanguageClassifierV1Models {
      */
     public CreateClassifierOptionsBuilder trainingData(IBMWatsonFile trainingData) {
       this.trainingData = trainingData;
-      return this;
-    }
-
-    /**
-     * Set the trainingDataFilename.
-     *
-     * @param trainingDataFilename the trainingDataFilename
-     * @return the CreateClassifierOptions builder
-     */
-    public CreateClassifierOptionsBuilder trainingDataFilename(String trainingDataFilename) {
-      this.trainingDataFilename = trainingDataFilename;
       return this;
     }
 
