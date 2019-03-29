@@ -109,14 +109,14 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
     builder.addHeader('Accept', 'application/json');
-    if (profileOptions.contentType() != null) {
-      builder.addHeader('Content-Type', profileOptions.contentType());
-    }
     if (profileOptions.contentLanguage() != null) {
       builder.addHeader('Content-Language', profileOptions.contentLanguage());
     }
     if (profileOptions.acceptLanguage() != null) {
       builder.addHeader('Accept-Language', profileOptions.acceptLanguage());
+    }
+    if (profileOptions.contentType() != null) {
+      builder.addHeader('Content-Type', profileOptions.contentType());
     }
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=personality_insights;service_version=V3;operation_id=profile');
     Map<String, String> requestHeaders = (profileOptions != null) ? profileOptions.requestHeaders() : null;
@@ -182,14 +182,14 @@ public class IBMPersonalityInsightsV3 extends IBMWatsonService {
     IBMWatsonValidator.notNull(profileOptions, 'profileOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/profile');
     builder.addHeader('Accept', 'text/csv');
-    if (profileOptions.contentType() != null) {
-      builder.addHeader('Content-Type', profileOptions.contentType());
-    }
     if (profileOptions.contentLanguage() != null) {
       builder.addHeader('Content-Language', profileOptions.contentLanguage());
     }
     if (profileOptions.acceptLanguage() != null) {
       builder.addHeader('Accept-Language', profileOptions.acceptLanguage());
+    }
+    if (profileOptions.contentType() != null) {
+      builder.addHeader('Content-Type', profileOptions.contentType());
     }
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=personality_insights;service_version=V3;operation_id=profileAsCsv');
     Map<String, String> requestHeaders = (profileOptions != null) ? profileOptions.requestHeaders() : null;
