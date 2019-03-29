@@ -4,11 +4,9 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class CreateModelOptions extends IBMWatsonOptionsModel {
     private String baseModelId;
-    private String name;
     private IBMWatsonFile forcedGlossary;
-    private String forcedGlossaryFilename;
     private IBMWatsonFile parallelCorpus;
-    private String parallelCorpusFilename;
+    private String name;
  
     /**
      * Gets the baseModelId.
@@ -21,18 +19,6 @@ public class IBMLanguageTranslatorV3Models {
      */
     public String baseModelId() {
       return baseModelId;
-    }
- 
-    /**
-     * Gets the name.
-     *
-     * An optional model name that you can use to identify the model. Valid characters are letters, numbers, dashes,
-     * underscores, spaces and apostrophes. The maximum length is 32 characters.
-     *
-     * @return the name
-     */
-    public String name() {
-      return name;
     }
  
     /**
@@ -49,17 +35,6 @@ public class IBMLanguageTranslatorV3Models {
     }
  
     /**
-     * Gets the forcedGlossaryFilename.
-     *
-     * The filename for forcedGlossary.
-     *
-     * @return the forcedGlossaryFilename
-     */
-    public String forcedGlossaryFilename() {
-      return forcedGlossaryFilename;
-    }
- 
-    /**
      * Gets the parallelCorpus.
      *
      * A TMX file with parallel sentences for source and target language. You can upload multiple parallel_corpus files
@@ -73,24 +48,23 @@ public class IBMLanguageTranslatorV3Models {
     }
  
     /**
-     * Gets the parallelCorpusFilename.
+     * Gets the name.
      *
-     * The filename for parallelCorpus.
+     * An optional model name that you can use to identify the model. Valid characters are letters, numbers, dashes,
+     * underscores, spaces and apostrophes. The maximum length is 32 characters.
      *
-     * @return the parallelCorpusFilename
+     * @return the name
      */
-    public String parallelCorpusFilename() {
-      return parallelCorpusFilename;
+    public String name() {
+      return name;
     }
 
     private CreateModelOptions(CreateModelOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.baseModelId, 'baseModelId cannot be null');
       baseModelId = builder.baseModelId;
-      name = builder.name;
       forcedGlossary = builder.forcedGlossary;
-      forcedGlossaryFilename = builder.forcedGlossaryFilename;
       parallelCorpus = builder.parallelCorpus;
-      parallelCorpusFilename = builder.parallelCorpusFilename;
+      name = builder.name;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -110,19 +84,15 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class CreateModelOptionsBuilder extends IBMWatsonOptionsModel {
     private String baseModelId;
-    private String name;
     private IBMWatsonFile forcedGlossary;
-    private String forcedGlossaryFilename;
     private IBMWatsonFile parallelCorpus;
-    private String parallelCorpusFilename;
+    private String name;
 
     private CreateModelOptionsBuilder(CreateModelOptions createModelOptions) {
       baseModelId = createModelOptions.baseModelId;
-      name = createModelOptions.name;
       forcedGlossary = createModelOptions.forcedGlossary;
-      forcedGlossaryFilename = createModelOptions.forcedGlossaryFilename;
       parallelCorpus = createModelOptions.parallelCorpus;
-      parallelCorpusFilename = createModelOptions.parallelCorpusFilename;
+      name = createModelOptions.name;
       this.requestHeaders.putAll(createModelOptions.requestHeaders());
     }
 
@@ -162,17 +132,6 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Set the name.
-     *
-     * @param name the name
-     * @return the CreateModelOptions builder
-     */
-    public CreateModelOptionsBuilder name(String name) {
-      this.name = name;
-      return this;
-    }
-
-    /**
      * Set the forcedGlossary.
      *
      * @param forcedGlossary the forcedGlossary
@@ -180,17 +139,6 @@ public class IBMLanguageTranslatorV3Models {
      */
     public CreateModelOptionsBuilder forcedGlossary(IBMWatsonFile forcedGlossary) {
       this.forcedGlossary = forcedGlossary;
-      return this;
-    }
-
-    /**
-     * Set the forcedGlossaryFilename.
-     *
-     * @param forcedGlossaryFilename the forcedGlossaryFilename
-     * @return the CreateModelOptions builder
-     */
-    public CreateModelOptionsBuilder forcedGlossaryFilename(String forcedGlossaryFilename) {
-      this.forcedGlossaryFilename = forcedGlossaryFilename;
       return this;
     }
 
@@ -206,13 +154,13 @@ public class IBMLanguageTranslatorV3Models {
     }
 
     /**
-     * Set the parallelCorpusFilename.
+     * Set the name.
      *
-     * @param parallelCorpusFilename the parallelCorpusFilename
+     * @param name the name
      * @return the CreateModelOptions builder
      */
-    public CreateModelOptionsBuilder parallelCorpusFilename(String parallelCorpusFilename) {
-      this.parallelCorpusFilename = parallelCorpusFilename;
+    public CreateModelOptionsBuilder name(String name) {
+      this.name = name;
       return this;
     }
 
@@ -519,7 +467,7 @@ public class IBMLanguageTranslatorV3Models {
           IdentifiableLanguage newItem = (IdentifiableLanguage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), IdentifiableLanguage.class);
           newLanguages.add(newItem);
         }
-        ret.setLanguages(newLanguages);
+        ret.languages_serialized_name = newLanguages;
       }
 
       return ret;
@@ -630,7 +578,7 @@ public class IBMLanguageTranslatorV3Models {
           IdentifiedLanguage newItem = (IdentifiedLanguage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), IdentifiedLanguage.class);
           newLanguages.add(newItem);
         }
-        ret.setLanguages(newLanguages);
+        ret.languages_serialized_name = newLanguages;
       }
 
       return ret;
@@ -1433,7 +1381,7 @@ public class IBMLanguageTranslatorV3Models {
           TranslationModel newItem = (TranslationModel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TranslationModel.class);
           newModels.add(newItem);
         }
-        ret.setModels(newModels);
+        ret.models_serialized_name = newModels;
       }
 
       return ret;
@@ -1528,7 +1476,7 @@ public class IBMLanguageTranslatorV3Models {
           Translation newItem = (Translation) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Translation.class);
           newTranslations.add(newItem);
         }
-        ret.setTranslations(newTranslations);
+        ret.translations_serialized_name = newTranslations;
       }
 
       return ret;
