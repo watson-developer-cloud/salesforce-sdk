@@ -263,7 +263,7 @@ public class IBMVisualRecognitionV3Models {
           ClassifierResult newItem = (ClassifierResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifierResult.class);
           newClassifiers.add(newItem);
         }
-        ret.setClassifiers(newClassifiers);
+        ret.classifiers_serialized_name = newClassifiers;
       }
 
       return ret;
@@ -382,7 +382,7 @@ public class IBMVisualRecognitionV3Models {
           ClassifiedImage newItem = (ClassifiedImage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassifiedImage.class);
           newImages.add(newItem);
         }
-        ret.setImages(newImages);
+        ret.images_serialized_name = newImages;
       }
 
       // calling custom deserializer for warnings
@@ -395,7 +395,7 @@ public class IBMVisualRecognitionV3Models {
           WarningInfo newItem = (WarningInfo) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WarningInfo.class);
           newWarnings.add(newItem);
         }
-        ret.setWarnings(newWarnings);
+        ret.warnings_serialized_name = newWarnings;
       }
 
       return ret;
@@ -646,7 +646,7 @@ public class IBMVisualRecognitionV3Models {
           ModelClass newItem = (ModelClass) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ModelClass.class);
           newClasses.add(newItem);
         }
-        ret.setClasses(newClasses);
+        ret.classes_serialized_name = newClasses;
       }
 
       return ret;
@@ -741,7 +741,7 @@ public class IBMVisualRecognitionV3Models {
           ClassResult newItem = (ClassResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ClassResult.class);
           newClasses.add(newItem);
         }
-        ret.setClasses(newClasses);
+        ret.classes_serialized_name = newClasses;
       }
 
       return ret;
@@ -792,7 +792,7 @@ public class IBMVisualRecognitionV3Models {
           Classifier newItem = (Classifier) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Classifier.class);
           newClassifiers.add(newItem);
         }
-        ret.setClassifiers(newClassifiers);
+        ret.classifiers_serialized_name = newClassifiers;
       }
 
       return ret;
@@ -805,12 +805,12 @@ public class IBMVisualRecognitionV3Models {
   public class ClassifyOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile imagesFile;
     private String imagesFilename;
-    private String acceptLanguage;
+    private String imagesFileContentType;
     private String url;
     private Double threshold;
     private List<String> owners;
     private List<String> classifierIds;
-    private String imagesFileContentType;
+    private String acceptLanguage;
  
     /**
      * Gets the imagesFile.
@@ -839,14 +839,14 @@ public class IBMVisualRecognitionV3Models {
     }
  
     /**
-     * Gets the acceptLanguage.
+     * Gets the imagesFileContentType.
      *
-     * The desired language of parts of the response. See the response for details.
+     * The content type of imagesFile.
      *
-     * @return the acceptLanguage
+     * @return the imagesFileContentType
      */
-    public String acceptLanguage() {
-      return acceptLanguage;
+    public String imagesFileContentType() {
+      return imagesFileContentType;
     }
  
     /**
@@ -912,26 +912,26 @@ public class IBMVisualRecognitionV3Models {
     }
  
     /**
-     * Gets the imagesFileContentType.
+     * Gets the acceptLanguage.
      *
-     * The content type of imagesFile.
+     * The desired language of parts of the response. See the response for details.
      *
-     * @return the imagesFileContentType
+     * @return the acceptLanguage
      */
-    public String imagesFileContentType() {
-      return imagesFileContentType;
+    public String acceptLanguage() {
+      return acceptLanguage;
     }
 
     private ClassifyOptions(ClassifyOptionsBuilder builder) {
       IBMWatsonValidator.isTrue(builder.imagesFile == null || builder.imagesFileContentType != null, 'content type cannot be null if file is not null');
       imagesFile = builder.imagesFile;
       imagesFilename = builder.imagesFilename;
-      acceptLanguage = builder.acceptLanguage;
+      imagesFileContentType = builder.imagesFileContentType;
       url = builder.url;
       threshold = builder.threshold;
       owners = builder.owners;
       classifierIds = builder.classifierIds;
-      imagesFileContentType = builder.imagesFileContentType;
+      acceptLanguage = builder.acceptLanguage;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -952,22 +952,22 @@ public class IBMVisualRecognitionV3Models {
   public class ClassifyOptionsBuilder extends IBMWatsonOptionsModel {
     private IBMWatsonFile imagesFile;
     private String imagesFilename;
-    private String acceptLanguage;
+    private String imagesFileContentType;
     private String url;
     private Double threshold;
     private List<String> owners;
     private List<String> classifierIds;
-    private String imagesFileContentType;
+    private String acceptLanguage;
 
     private ClassifyOptionsBuilder(ClassifyOptions classifyOptions) {
       imagesFile = classifyOptions.imagesFile;
       imagesFilename = classifyOptions.imagesFilename;
-      acceptLanguage = classifyOptions.acceptLanguage;
+      imagesFileContentType = classifyOptions.imagesFileContentType;
       url = classifyOptions.url;
       threshold = classifyOptions.threshold;
       owners = classifyOptions.owners;
       classifierIds = classifyOptions.classifierIds;
-      imagesFileContentType = classifyOptions.imagesFileContentType;
+      acceptLanguage = classifyOptions.acceptLanguage;
       this.requestHeaders.putAll(classifyOptions.requestHeaders());
     }
 
@@ -1039,13 +1039,13 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Set the acceptLanguage.
+     * Set the imagesFileContentType.
      *
-     * @param acceptLanguage the acceptLanguage
+     * @param imagesFileContentType the imagesFileContentType
      * @return the ClassifyOptions builder
      */
-    public ClassifyOptionsBuilder acceptLanguage(String acceptLanguage) {
-      this.acceptLanguage = acceptLanguage;
+    public ClassifyOptionsBuilder imagesFileContentType(String imagesFileContentType) {
+      this.imagesFileContentType = imagesFileContentType;
       return this;
     }
 
@@ -1096,13 +1096,13 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Set the imagesFileContentType.
+     * Set the acceptLanguage.
      *
-     * @param imagesFileContentType the imagesFileContentType
+     * @param acceptLanguage the acceptLanguage
      * @return the ClassifyOptions builder
      */
-    public ClassifyOptionsBuilder imagesFileContentType(String imagesFileContentType) {
-      this.imagesFileContentType = imagesFileContentType;
+    public ClassifyOptionsBuilder acceptLanguage(String acceptLanguage) {
+      this.acceptLanguage = acceptLanguage;
       return this;
     }
 
@@ -1125,7 +1125,6 @@ public class IBMVisualRecognitionV3Models {
   public class CreateClassifierOptions extends IBMWatsonOptionsModel {
     private String name;
     private Map<String, IBMWatsonFile> positiveExamples;
-    private Map<String, String> positiveExamplesFilename;
     private IBMWatsonFile negativeExamples;
     private String negativeExamplesFilename;
  
@@ -1161,17 +1160,6 @@ public class IBMVisualRecognitionV3Models {
     }
  
     /**
-     * Gets the positiveExamplesFilename.
-     *
-     * The filename for positiveExamples.
-     *
-     * @return the positiveExamplesFilename
-     */
-    public Map<String, String> positiveExamplesFilename() {
-      return positiveExamplesFilename;
-    }
- 
-    /**
      * Gets the negativeExamples.
      *
      * A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
@@ -1202,7 +1190,6 @@ public class IBMVisualRecognitionV3Models {
       IBMWatsonValidator.isTrue(builder.positiveExamples != null && !builder.positiveExamples.isEmpty(), 'positiveExamples cannot be null or empty');
       name = builder.name;
       positiveExamples = builder.positiveExamples;
-      positiveExamplesFilename = builder.positiveExamplesFilename;
       negativeExamples = builder.negativeExamples;
       negativeExamplesFilename = builder.negativeExamplesFilename;
       this.requestHeaders = builder.requestHeaders;
@@ -1225,14 +1212,12 @@ public class IBMVisualRecognitionV3Models {
   public class CreateClassifierOptionsBuilder extends IBMWatsonOptionsModel {
     private String name;
     private Map<String, IBMWatsonFile> positiveExamples;
-    private Map<String, String> positiveExamplesFilename;
     private IBMWatsonFile negativeExamples;
     private String negativeExamplesFilename;
 
     private CreateClassifierOptionsBuilder(CreateClassifierOptions createClassifierOptions) {
       name = createClassifierOptions.name;
       positiveExamples = createClassifierOptions.positiveExamples;
-      positiveExamplesFilename = createClassifierOptions.positiveExamplesFilename;
       negativeExamples = createClassifierOptions.negativeExamples;
       negativeExamplesFilename = createClassifierOptions.negativeExamplesFilename;
       this.requestHeaders.putAll(createClassifierOptions.requestHeaders());
@@ -1280,23 +1265,6 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Adds an entry to the positiveExamplesFilename map.
-     *
-     * @param classname the key associated with the map entry to be added
-     * @param positiveExamplesFilename the value associated with the map entry to be added
-     * @return the CreateClassifierOptions builder
-     */
-    public CreateClassifierOptionsBuilder addPositiveExamplesFilename(String classname, String positiveExamplesFilename) {
-      IBMWatsonValidator.notNull(classname, 'classname cannot be null');
-      IBMWatsonValidator.notNull(positiveExamplesFilename, 'positiveExamplesFilename cannot be null');
-      if (this.positiveExamplesFilename == null) {
-        this.positiveExamplesFilename = new Map<String, String>();
-      }
-      this.positiveExamplesFilename.put(classname, positiveExamplesFilename);
-      return this;
-    }
-
-    /**
      * Set the name.
      *
      * @param name the name
@@ -1316,18 +1284,6 @@ public class IBMVisualRecognitionV3Models {
      */
     public CreateClassifierOptionsBuilder positiveExamples(Map<String, IBMWatsonFile> positiveExamples) {
       this.positiveExamples = positiveExamples;
-      return this;
-    }
-
-    /**
-     * Set the positiveExamplesFilename.
-     * Existing positiveExamplesFilename map will be replaced.
-     *
-     * @param positiveExamplesFilename the positiveExamplesFilename
-     * @return the CreateClassifierOptions builder
-     */
-    public CreateClassifierOptionsBuilder positiveExamplesFilename(Map<String, String> positiveExamplesFilename) {
-      this.positiveExamplesFilename = positiveExamplesFilename;
       return this;
     }
 
@@ -1558,9 +1514,9 @@ public class IBMVisualRecognitionV3Models {
   public class DetectFacesOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile imagesFile;
     private String imagesFilename;
+    private String imagesFileContentType;
     private String url;
     private String acceptLanguage;
-    private String imagesFileContentType;
  
     /**
      * Gets the imagesFile.
@@ -1591,6 +1547,17 @@ public class IBMVisualRecognitionV3Models {
     }
  
     /**
+     * Gets the imagesFileContentType.
+     *
+     * The content type of imagesFile.
+     *
+     * @return the imagesFileContentType
+     */
+    public String imagesFileContentType() {
+      return imagesFileContentType;
+    }
+ 
+    /**
      * Gets the url.
      *
      * The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum recommended pixel
@@ -1615,25 +1582,14 @@ public class IBMVisualRecognitionV3Models {
     public String acceptLanguage() {
       return acceptLanguage;
     }
- 
-    /**
-     * Gets the imagesFileContentType.
-     *
-     * The content type of imagesFile.
-     *
-     * @return the imagesFileContentType
-     */
-    public String imagesFileContentType() {
-      return imagesFileContentType;
-    }
 
     private DetectFacesOptions(DetectFacesOptionsBuilder builder) {
       IBMWatsonValidator.isTrue(builder.imagesFile == null || builder.imagesFileContentType != null, 'content type cannot be null if file is not null');
       imagesFile = builder.imagesFile;
       imagesFilename = builder.imagesFilename;
+      imagesFileContentType = builder.imagesFileContentType;
       url = builder.url;
       acceptLanguage = builder.acceptLanguage;
-      imagesFileContentType = builder.imagesFileContentType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1654,16 +1610,16 @@ public class IBMVisualRecognitionV3Models {
   public class DetectFacesOptionsBuilder extends IBMWatsonOptionsModel {
     private IBMWatsonFile imagesFile;
     private String imagesFilename;
+    private String imagesFileContentType;
     private String url;
     private String acceptLanguage;
-    private String imagesFileContentType;
 
     private DetectFacesOptionsBuilder(DetectFacesOptions detectFacesOptions) {
       imagesFile = detectFacesOptions.imagesFile;
       imagesFilename = detectFacesOptions.imagesFilename;
+      imagesFileContentType = detectFacesOptions.imagesFileContentType;
       url = detectFacesOptions.url;
       acceptLanguage = detectFacesOptions.acceptLanguage;
-      imagesFileContentType = detectFacesOptions.imagesFileContentType;
       this.requestHeaders.putAll(detectFacesOptions.requestHeaders());
     }
 
@@ -1705,6 +1661,17 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
+     * Set the imagesFileContentType.
+     *
+     * @param imagesFileContentType the imagesFileContentType
+     * @return the DetectFacesOptions builder
+     */
+    public DetectFacesOptionsBuilder imagesFileContentType(String imagesFileContentType) {
+      this.imagesFileContentType = imagesFileContentType;
+      return this;
+    }
+
+    /**
      * Set the url.
      *
      * @param url the url
@@ -1723,17 +1690,6 @@ public class IBMVisualRecognitionV3Models {
      */
     public DetectFacesOptionsBuilder acceptLanguage(String acceptLanguage) {
       this.acceptLanguage = acceptLanguage;
-      return this;
-    }
-
-    /**
-     * Set the imagesFileContentType.
-     *
-     * @param imagesFileContentType the imagesFileContentType
-     * @return the DetectFacesOptions builder
-     */
-    public DetectFacesOptionsBuilder imagesFileContentType(String imagesFileContentType) {
-      this.imagesFileContentType = imagesFileContentType;
       return this;
     }
 
@@ -1840,7 +1796,7 @@ public class IBMVisualRecognitionV3Models {
           ImageWithFaces newItem = (ImageWithFaces) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ImageWithFaces.class);
           newImages.add(newItem);
         }
-        ret.setImages(newImages);
+        ret.images_serialized_name = newImages;
       }
 
       // calling custom deserializer for warnings
@@ -1853,7 +1809,7 @@ public class IBMVisualRecognitionV3Models {
           WarningInfo newItem = (WarningInfo) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WarningInfo.class);
           newWarnings.add(newItem);
         }
-        ret.setWarnings(newWarnings);
+        ret.warnings_serialized_name = newWarnings;
       }
 
       return ret;
@@ -2626,7 +2582,7 @@ public class IBMVisualRecognitionV3Models {
           Face newItem = (Face) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Face.class);
           newFaces.add(newItem);
         }
-        ret.setFaces(newFaces);
+        ret.faces_serialized_name = newFaces;
       }
 
       // calling custom deserializer for error
@@ -2727,7 +2683,6 @@ public class IBMVisualRecognitionV3Models {
   public class UpdateClassifierOptions extends IBMWatsonOptionsModel {
     private String classifierId;
     private Map<String, IBMWatsonFile> positiveExamples;
-    private Map<String, String> positiveExamplesFilename;
     private IBMWatsonFile negativeExamples;
     private String negativeExamplesFilename;
  
@@ -2763,17 +2718,6 @@ public class IBMVisualRecognitionV3Models {
     }
  
     /**
-     * Gets the positiveExamplesFilename.
-     *
-     * The filename for positiveExamples.
-     *
-     * @return the positiveExamplesFilename
-     */
-    public Map<String, String> positiveExamplesFilename() {
-      return positiveExamplesFilename;
-    }
- 
-    /**
      * Gets the negativeExamples.
      *
      * A .zip file of images that do not depict the visual subject of any of the classes of the new classifier. Must
@@ -2803,7 +2747,6 @@ public class IBMVisualRecognitionV3Models {
       IBMWatsonValidator.isTrue(builder.negativeExamples == null || builder.negativeExamplesFilename != null, 'filename cannot be null if file is not null');
       classifierId = builder.classifierId;
       positiveExamples = builder.positiveExamples;
-      positiveExamplesFilename = builder.positiveExamplesFilename;
       negativeExamples = builder.negativeExamples;
       negativeExamplesFilename = builder.negativeExamplesFilename;
       this.requestHeaders = builder.requestHeaders;
@@ -2826,14 +2769,12 @@ public class IBMVisualRecognitionV3Models {
   public class UpdateClassifierOptionsBuilder extends IBMWatsonOptionsModel {
     private String classifierId;
     private Map<String, IBMWatsonFile> positiveExamples;
-    private Map<String, String> positiveExamplesFilename;
     private IBMWatsonFile negativeExamples;
     private String negativeExamplesFilename;
 
     private UpdateClassifierOptionsBuilder(UpdateClassifierOptions updateClassifierOptions) {
       classifierId = updateClassifierOptions.classifierId;
       positiveExamples = updateClassifierOptions.positiveExamples;
-      positiveExamplesFilename = updateClassifierOptions.positiveExamplesFilename;
       negativeExamples = updateClassifierOptions.negativeExamples;
       negativeExamplesFilename = updateClassifierOptions.negativeExamplesFilename;
       this.requestHeaders.putAll(updateClassifierOptions.requestHeaders());
@@ -2881,23 +2822,6 @@ public class IBMVisualRecognitionV3Models {
     }
 
     /**
-     * Adds an entry to the positiveExamplesFilename map.
-     *
-     * @param classname the key associated with the map entry to be added
-     * @param positiveExamplesFilename the value associated with the map entry to be added
-     * @return the UpdateClassifierOptions builder
-     */
-    public UpdateClassifierOptionsBuilder addPositiveExamplesFilename(String classname, String positiveExamplesFilename) {
-      IBMWatsonValidator.notNull(classname, 'classname cannot be null');
-      IBMWatsonValidator.notNull(positiveExamplesFilename, 'positiveExamplesFilename cannot be null');
-      if (this.positiveExamplesFilename == null) {
-        this.positiveExamplesFilename = new Map<String, String>();
-      }
-      this.positiveExamplesFilename.put(classname, positiveExamplesFilename);
-      return this;
-    }
-
-    /**
      * Set the classifierId.
      *
      * @param classifierId the classifierId
@@ -2917,18 +2841,6 @@ public class IBMVisualRecognitionV3Models {
      */
     public UpdateClassifierOptionsBuilder positiveExamples(Map<String, IBMWatsonFile> positiveExamples) {
       this.positiveExamples = positiveExamples;
-      return this;
-    }
-
-    /**
-     * Set the positiveExamplesFilename.
-     * Existing positiveExamplesFilename map will be replaced.
-     *
-     * @param positiveExamplesFilename the positiveExamplesFilename
-     * @return the UpdateClassifierOptions builder
-     */
-    public UpdateClassifierOptionsBuilder positiveExamplesFilename(Map<String, String> positiveExamplesFilename) {
-      this.positiveExamplesFilename = positiveExamplesFilename;
       return this;
     }
 
