@@ -121,10 +121,10 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * ### Streaming mode
    *
    *  For requests to transcribe live audio as it becomes available, you must set the `Transfer-Encoding` header to
-   * `chunked` to use streaming mode. In streaming mode, the server closes the connection (status code 408) if the
-   * service receives no data chunk for 30 seconds and it has no audio to transcribe for 30 seconds. The server also
-   * closes the connection (status code 400) if no speech is detected for `inactivity_timeout` seconds of audio (not
-   * processing time); use the `inactivity_timeout` parameter to change the default of 30 seconds.
+   * `chunked` to use streaming mode. In streaming mode, the service closes the connection (status code 408) if it does
+   * not receive at least 15 seconds of audio (including silence) in any 30-second period. The service also closes the
+   * connection (status code 400) if it detects no speech for `inactivity_timeout` seconds of streaming audio; use the
+   * `inactivity_timeout` parameter to change the default of 30 seconds.
    *
    * **See also:**
    * * [Audio transmission](https://cloud.ibm.com/docs/services/speech-to-text/input.html#transmission)
@@ -141,6 +141,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * Where indicated, the format that you specify must include the sampling rate and can optionally include the number
    * of channels and the endianness of the audio.
+   * * `audio/alaw` (**Required.** Specify the sampling rate (`rate`) of the audio.)
    * * `audio/basic` (**Required.** Use only with narrowband models.)
    * * `audio/flac`
    * * `audio/g729` (Use only with narrowband models.)
@@ -345,7 +346,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * * `user_token`
    * * `results_ttl`
    *
-   * You can pass a maximum of 100 MB and a minimum of 100 bytes of audio with a request. The service automatically
+   * You can pass a maximum of 1 GB and a minimum of 100 bytes of audio with a request. The service automatically
    * detects the endianness of the incoming audio and, for audio that includes multiple channels, downmixes the audio to
    * one-channel mono during transcoding. The method returns only final results; to enable interim results, use the
    * WebSocket API.
@@ -355,10 +356,10 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * ### Streaming mode
    *
    *  For requests to transcribe live audio as it becomes available, you must set the `Transfer-Encoding` header to
-   * `chunked` to use streaming mode. In streaming mode, the server closes the connection (status code 408) if the
-   * service receives no data chunk for 30 seconds and it has no audio to transcribe for 30 seconds. The server also
-   * closes the connection (status code 400) if no speech is detected for `inactivity_timeout` seconds of audio (not
-   * processing time); use the `inactivity_timeout` parameter to change the default of 30 seconds.
+   * `chunked` to use streaming mode. In streaming mode, the service closes the connection (status code 408) if it does
+   * not receive at least 15 seconds of audio (including silence) in any 30-second period. The service also closes the
+   * connection (status code 400) if it detects no speech for `inactivity_timeout` seconds of streaming audio; use the
+   * `inactivity_timeout` parameter to change the default of 30 seconds.
    *
    * **See also:**
    * * [Audio transmission](https://cloud.ibm.com/docs/services/speech-to-text/input.html#transmission)
@@ -375,6 +376,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * Where indicated, the format that you specify must include the sampling rate and can optionally include the number
    * of channels and the endianness of the audio.
+   * * `audio/alaw` (**Required.** Specify the sampling rate (`rate`) of the audio.)
    * * `audio/basic` (**Required.** Use only with narrowband models.)
    * * `audio/flac`
    * * `audio/g729` (Use only with narrowband models.)
@@ -493,7 +495,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * its results are no longer available. The service automatically deletes a job and its results when the time to live
    * for the results expires. You must use credentials for the instance of the service that owns a job to delete it.
    *
-   * **See also:** [Deleting a job](https://cloud.ibm.com/docs/services/speech-to-text/async.html#delete).
+   * **See also:** [Deleting a job](https://cloud.ibm.com/docs/services/speech-to-text/async.html#delete-async).
    *
    * @param deleteJobOptions the {@link IBMSpeechToTextV1Models.DeleteJobOptions} containing the options for the call
    * @return the service call
@@ -501,7 +503,6 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public void deleteJob(IBMSpeechToTextV1Models.DeleteJobOptions deleteJobOptions) {
     IBMWatsonValidator.notNull(deleteJobOptions, 'deleteJobOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/recognitions/{0}', new String[]{ deleteJobOptions.id() }));
-    builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteJob');
     Map<String, String> requestHeaders = (deleteJobOptions != null) ? deleteJobOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -583,7 +584,6 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public void unregisterCallback(IBMSpeechToTextV1Models.UnregisterCallbackOptions unregisterCallbackOptions) {
     IBMWatsonValidator.notNull(unregisterCallbackOptions, 'unregisterCallbackOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/unregister_callback');
-    builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=unregisterCallback');
     Map<String, String> requestHeaders = (unregisterCallbackOptions != null) ? unregisterCallbackOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
@@ -607,7 +607,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * create it.
    *
    * **See also:** [Create a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#createModel).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#createModel-language).
    *
    * @param createLanguageModelOptions the {@link IBMSpeechToTextV1Models.CreateLanguageModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.LanguageModel} with the response
@@ -645,7 +645,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * service that owns a model to delete it.
    *
    * **See also:** [Deleting a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#deleteModel).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#deleteModel-language).
    *
    * @param deleteLanguageModelOptions the {@link IBMSpeechToTextV1Models.DeleteLanguageModelOptions} containing the options for the call
    * @return the service call
@@ -672,7 +672,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * that owns a model to list information about it.
    *
    * **See also:** [Listing custom language
-   * models](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels).
+   * models](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels-language).
    *
    * @param getLanguageModelOptions the {@link IBMSpeechToTextV1Models.GetLanguageModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.LanguageModel} with the response
@@ -701,7 +701,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * list information about it.
    *
    * **See also:** [Listing custom language
-   * models](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels).
+   * models](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels-language).
    *
    * @param listLanguageModelsOptions the {@link IBMSpeechToTextV1Models.ListLanguageModelsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.LanguageModels} with the response
@@ -732,7 +732,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * credentials for the instance of the service that owns a model to reset it.
    *
    * **See also:** [Resetting a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#resetModel).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#resetModel-language).
    *
    * @param resetLanguageModelOptions the {@link IBMSpeechToTextV1Models.ResetLanguageModelOptions} containing the options for the call
    * @return the service call
@@ -779,7 +779,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * * One or more words that were added to the custom model have invalid sounds-like pronunciations that you must fix.
    *
    * **See also:** [Train the custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#trainModel).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#trainModel-language).
    *
    * @param trainLanguageModelOptions the {@link IBMSpeechToTextV1Models.TrainLanguageModelOptions} containing the options for the call
    * @return the service call
@@ -902,7 +902,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     IBMWatsonRequestBody corpusFileBody = IBMWatsonRequestBody.create(addCorpusOptions.corpusFile(), 'text/plain');
-    multipartBuilder.addFormDataPart('corpus_file', addCorpusOptions.corpusFilename(), corpusFileBody);
+    multipartBuilder.addFormDataPart('corpus_file', null, corpusFileBody);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
@@ -1366,7 +1366,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * create it.
    *
    * **See also:** [Create a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#createModel).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#createModel-acoustic).
    *
    * @param createAcousticModelOptions the {@link IBMSpeechToTextV1Models.CreateAcousticModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AcousticModel} with the response
@@ -1401,7 +1401,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * that owns a model to delete it.
    *
    * **See also:** [Deleting a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#deleteModel).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#deleteModel-acoustic).
    *
    * @param deleteAcousticModelOptions the {@link IBMSpeechToTextV1Models.DeleteAcousticModelOptions} containing the options for the call
    * @return the service call
@@ -1428,7 +1428,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * that owns a model to list information about it.
    *
    * **See also:** [Listing custom acoustic
-   * models](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels).
+   * models](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels-acoustic).
    *
    * @param getAcousticModelOptions the {@link IBMSpeechToTextV1Models.GetAcousticModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AcousticModel} with the response
@@ -1457,7 +1457,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * list information about it.
    *
    * **See also:** [Listing custom acoustic
-   * models](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels).
+   * models](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels-acoustic).
    *
    * @param listAcousticModelsOptions the {@link IBMSpeechToTextV1Models.ListAcousticModelsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AcousticModels} with the response
@@ -1488,7 +1488,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * instance of the service that owns a model to reset it.
    *
    * **See also:** [Resetting a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#resetModel).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#resetModel-acoustic).
    *
    * @param resetAcousticModelOptions the {@link IBMSpeechToTextV1Models.ResetAcousticModelOptions} containing the options for the call
    * @return the service call
@@ -1544,7 +1544,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * models must be based on the same version of the same base model.
    *
    * **See also:** [Train the custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#trainModel).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#trainModel-acoustic).
    *
    * @param trainAcousticModelOptions the {@link IBMSpeechToTextV1Models.TrainAcousticModelOptions} containing the options for the call
    * @return the service call
@@ -1656,6 +1656,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *  You can add an individual audio file in any format that the service supports for speech recognition. For an
    * audio-type resource, use the `Content-Type` parameter to specify the audio format (MIME type) of the audio file,
    * including specifying the sampling rate, channels, and endianness where indicated.
+   * * `audio/alaw` (Specify the sampling rate (`rate`) of the audio.)
    * * `audio/basic` (Use only with narrowband models.)
    * * `audio/flac`
    * * `audio/g729` (Use only with narrowband models.)
@@ -1687,10 +1688,17 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * * `application/zip` for a **.zip** file
    * * `application/gzip` for a **.tar.gz** file.
    *
-   * All audio files contained in the archive must have the same audio format. Use the `Contained-Content-Type`
-   * parameter to specify the format of the contained audio files. The parameter accepts all of the audio formats
-   * supported for use with speech recognition and with the `Content-Type` header, including the `rate`, `channels`, and
-   * `endianness` parameters that are used with some formats. The default contained audio format is `audio/wav`.
+   * When you add an archive-type resource, the `Contained-Content-Type` header is optional depending on the format of
+   * the files that you are adding:
+   * * For audio files of type `audio/alaw`, `audio/basic`, `audio/l16`, or `audio/mulaw`, you must use the
+   * `Contained-Content-Type` header to specify the format of the contained audio files. Include the `rate`, `channels`,
+   * and `endianness` parameters where necessary. In this case, all audio files contained in the archive file must have
+   * the same audio format.
+   * * For audio files of all other types, you can omit the `Contained-Content-Type` header. In this case, the audio
+   * files contained in the archive file can have any of the formats not listed in the previous bullet. The audio files
+   * do not need to have the same format.
+   *
+   * Do not use the `Contained-Content-Type` header when adding an audio-type resource.
    *
    * ### Naming restrictions for embedded audio files
    *
@@ -1707,11 +1715,11 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(addAudioOptions, 'addAudioOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio/{1}', new String[]{ addAudioOptions.customizationId(), addAudioOptions.audioName() }));
     builder.addHeader('Accept', 'application/json');
-    if (addAudioOptions.contentType() != null) {
-      builder.addHeader('Content-Type', addAudioOptions.contentType());
-    }
     if (addAudioOptions.containedContentType() != null) {
       builder.addHeader('Contained-Content-Type', addAudioOptions.containedContentType());
+    }
+    if (addAudioOptions.contentType() != null) {
+      builder.addHeader('Content-Type', addAudioOptions.contentType());
     }
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=addAudio');
     Map<String, String> requestHeaders = (addAudioOptions != null) ? addAudioOptions.requestHeaders() : null;
@@ -1847,7 +1855,6 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   public void deleteUserData(IBMSpeechToTextV1Models.DeleteUserDataOptions deleteUserDataOptions) {
     IBMWatsonValidator.notNull(deleteUserDataOptions, 'deleteUserDataOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + '/v1/user_data');
-    builder.addHeader('Accept', 'application/json');
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteUserData');
     Map<String, String> requestHeaders = (deleteUserDataOptions != null) ? deleteUserDataOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {

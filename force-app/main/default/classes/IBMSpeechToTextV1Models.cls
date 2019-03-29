@@ -317,7 +317,7 @@ public class IBMSpeechToTextV1Models {
           AcousticModel newItem = (AcousticModel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AcousticModel.class);
           newCustomizations.add(newItem);
         }
-        ret.setCustomizations(newCustomizations);
+        ret.customizations_serialized_name = newCustomizations;
       }
 
       return ret;
@@ -331,9 +331,9 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String audioName;
     private IBMWatsonFile audioResource;
-    private String contentType;
     private String containedContentType;
     private Boolean allowOverwrite;
+    private String contentType;
  
     /**
      * Gets the customizationId.
@@ -374,27 +374,20 @@ public class IBMSpeechToTextV1Models {
     }
  
     /**
-     * Gets the contentType.
-     *
-     * For an audio-type resource, the format (MIME type) of the audio. For more information, see **Content types for
-     * audio-type resources** in the method description.
-     *
-     * For an archive-type resource, the media type of the archive file. For more information, see **Content types for
-     * archive-type resources** in the method description.
-     *
-     * @return the contentType
-     */
-    public String contentType() {
-      return contentType;
-    }
- 
-    /**
      * Gets the containedContentType.
      *
-     * For an archive-type resource, specifies the format of the audio files that are contained in the archive file. The
-     * parameter accepts all of the audio formats that are supported for use with speech recognition, including the
-     * `rate`, `channels`, and `endianness` parameters that are used with some formats. For more information, see
-     * **Content types for audio-type resources** in the method description.
+     * **For an archive-type resource,** specify the format of the audio files that are contained in the archive file if
+     * they are of type `audio/alaw`, `audio/basic`, `audio/l16`, or `audio/mulaw`. Include the `rate`, `channels`, and
+     * `endianness` parameters where necessary. In this case, all audio files that are contained in the archive file
+     * must be of the indicated type.
+     *
+     * For all other audio formats, you can omit the header. In this case, the audio files can be of multiple types as
+     * long as they are not of the types listed in the previous paragraph.
+     *
+     * The parameter accepts all of the audio formats that are supported for use with speech recognition. For more
+     * information, see **Content types for audio-type resources** in the method description.
+     *
+     * **For an audio-type resource,** omit the header.
      *
      * @return the containedContentType
      */
@@ -414,6 +407,21 @@ public class IBMSpeechToTextV1Models {
     public Boolean allowOverwrite() {
       return allowOverwrite;
     }
+ 
+    /**
+     * Gets the contentType.
+     *
+     * For an audio-type resource, the format (MIME type) of the audio. For more information, see **Content types for
+     * audio-type resources** in the method description.
+     *
+     * For an archive-type resource, the media type of the archive file. For more information, see **Content types for
+     * archive-type resources** in the method description.
+     *
+     * @return the contentType
+     */
+    public String contentType() {
+      return contentType;
+    }
 
     private AddAudioOptions(AddAudioOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
@@ -422,9 +430,9 @@ public class IBMSpeechToTextV1Models {
       customizationId = builder.customizationId;
       audioName = builder.audioName;
       audioResource = builder.audioResource;
-      contentType = builder.contentType;
       containedContentType = builder.containedContentType;
       allowOverwrite = builder.allowOverwrite;
+      contentType = builder.contentType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -446,17 +454,17 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String audioName;
     private IBMWatsonFile audioResource;
-    private String contentType;
     private String containedContentType;
     private Boolean allowOverwrite;
+    private String contentType;
 
     private AddAudioOptionsBuilder(AddAudioOptions addAudioOptions) {
       customizationId = addAudioOptions.customizationId;
       audioName = addAudioOptions.audioName;
       audioResource = addAudioOptions.audioResource;
-      contentType = addAudioOptions.contentType;
       containedContentType = addAudioOptions.containedContentType;
       allowOverwrite = addAudioOptions.allowOverwrite;
+      contentType = addAudioOptions.contentType;
       this.requestHeaders.putAll(addAudioOptions.requestHeaders());
     }
 
@@ -464,37 +472,6 @@ public class IBMSpeechToTextV1Models {
      * Instantiates a new builder.
      */
     public AddAudioOptionsBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder.
-     *
-     * NOTE: audioResource is now required, so this constructor will be removed. Please use
-     * the constructor with 3 parameters.
-     *
-     * @param customizationId the customizationId
-     * @param audioName the audioName
-     */
-    public AddAudioOptionsBuilder(String customizationId, String audioName) {
-      this.customizationId = customizationId;
-      this.audioName = audioName;
-    }
-
-    /**
-     * Instantiates a new builder.
-     *
-     * NOTE: contentType is no longer required, so this constructor will be removed in the next major release.
-     *
-     * @param customizationId the customizationId
-     * @param audioName the audioName
-     * @param audioResource the audioResource
-     * @param contentType the contentType
-     */
-    public AddAudioOptionsBuilder(String customizationId, String audioName, IBMWatsonFile audioResource, String contentType) {
-      this.customizationId = customizationId;
-      this.audioName = audioName;
-      this.audioResource = audioResource;
-      this.contentType = contentType;
     }
 
     /**
@@ -553,17 +530,6 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the contentType.
-     *
-     * @param contentType the contentType
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder contentType(String contentType) {
-      this.contentType = contentType;
-      return this;
-    }
-
-    /**
      * Set the containedContentType.
      *
      * @param containedContentType the containedContentType
@@ -582,6 +548,17 @@ public class IBMSpeechToTextV1Models {
      */
     public AddAudioOptionsBuilder allowOverwrite(Boolean allowOverwrite) {
       this.allowOverwrite = allowOverwrite;
+      return this;
+    }
+
+    /**
+     * Set the contentType.
+     *
+     * @param contentType the contentType
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder contentType(String contentType) {
+      this.contentType = contentType;
       return this;
     }
 
@@ -605,7 +582,6 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String corpusName;
     private IBMWatsonFile corpusFile;
-    private String corpusFilename;
     private Boolean allowOverwrite;
  
     /**
@@ -656,17 +632,6 @@ public class IBMSpeechToTextV1Models {
     }
  
     /**
-     * Gets the corpusFilename.
-     *
-     * The filename for corpusFile.
-     *
-     * @return the corpusFilename
-     */
-    public String corpusFilename() {
-      return corpusFilename;
-    }
- 
-    /**
      * Gets the allowOverwrite.
      *
      * If `true`, the specified corpus overwrites an existing corpus with the same name. If `false`, the request fails
@@ -686,7 +651,6 @@ public class IBMSpeechToTextV1Models {
       customizationId = builder.customizationId;
       corpusName = builder.corpusName;
       corpusFile = builder.corpusFile;
-      corpusFilename = builder.corpusFilename;
       allowOverwrite = builder.allowOverwrite;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -709,14 +673,12 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String corpusName;
     private IBMWatsonFile corpusFile;
-    private String corpusFilename;
     private Boolean allowOverwrite;
 
     private AddCorpusOptionsBuilder(AddCorpusOptions addCorpusOptions) {
       customizationId = addCorpusOptions.customizationId;
       corpusName = addCorpusOptions.corpusName;
       corpusFile = addCorpusOptions.corpusFile;
-      corpusFilename = addCorpusOptions.corpusFilename;
       allowOverwrite = addCorpusOptions.allowOverwrite;
       this.requestHeaders.putAll(addCorpusOptions.requestHeaders());
     }
@@ -779,17 +741,6 @@ public class IBMSpeechToTextV1Models {
      */
     public AddCorpusOptionsBuilder corpusFile(IBMWatsonFile corpusFile) {
       this.corpusFile = corpusFile;
-      return this;
-    }
-
-    /**
-     * Set the corpusFilename.
-     *
-     * @param corpusFilename the corpusFilename
-     * @return the AddCorpusOptions builder
-     */
-    public AddCorpusOptionsBuilder corpusFilename(String corpusFilename) {
-      this.corpusFilename = corpusFilename;
       return this;
     }
 
@@ -1530,7 +1481,7 @@ public class IBMSpeechToTextV1Models {
    * AudioListing.
    */
   public class AudioListing extends IBMWatsonResponseModel {
-    private Double duration_serialized_name;
+    private Long duration_serialized_name;
     private String name_serialized_name;
     private AudioDetails details_serialized_name;
     private String status_serialized_name;
@@ -1540,13 +1491,13 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the duration.
      *
-     * **For an audio-type resource,**  the total seconds of audio in the resource. The value is always a whole number.
-     * Omitted for an archive-type resource.
+     * **For an audio-type resource,**  the total seconds of audio in the resource. Omitted for an archive-type
+     * resource.
      *
      * @return the duration
      */
     @AuraEnabled
-    public Double getDuration() {
+    public Long getDuration() {
       return duration_serialized_name;
     }
  
@@ -1625,7 +1576,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param duration the new duration
      */
-    public void setDuration(final Double duration) {
+    public void setDuration(final long duration) {
       this.duration_serialized_name = duration;
     }
 
@@ -1699,7 +1650,7 @@ public class IBMSpeechToTextV1Models {
           AudioResource newItem = (AudioResource) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AudioResource.class);
           newAudio.add(newItem);
         }
-        ret.setAudio(newAudio);
+        ret.audio_serialized_name = newAudio;
       }
 
       return ret;
@@ -1710,7 +1661,7 @@ public class IBMSpeechToTextV1Models {
    * AudioResource.
    */
   public class AudioResource extends IBMWatsonGenericModel {
-    private Double duration_serialized_name;
+    private Long duration_serialized_name;
     private String name_serialized_name;
     private AudioDetails details_serialized_name;
     private String status_serialized_name;
@@ -1718,12 +1669,12 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the duration.
      *
-     * The total seconds of audio in the audio resource. The value is always a whole number.
+     * The total seconds of audio in the audio resource.
      *
      * @return the duration
      */
     @AuraEnabled
-    public Double getDuration() {
+    public Long getDuration() {
       return duration_serialized_name;
     }
  
@@ -1778,7 +1729,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param duration the new duration
      */
-    public void setDuration(final Double duration) {
+    public void setDuration(final long duration) {
       this.duration_serialized_name = duration;
     }
 
@@ -1893,7 +1844,7 @@ public class IBMSpeechToTextV1Models {
           AudioResource newItem = (AudioResource) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AudioResource.class);
           newAudio.add(newItem);
         }
-        ret.setAudio(newAudio);
+        ret.audio_serialized_name = newAudio;
       }
 
       return ret;
@@ -2096,7 +2047,7 @@ public class IBMSpeechToTextV1Models {
           Corpus newItem = (Corpus) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Corpus.class);
           newCorpora.add(newItem);
         }
-        ret.setCorpora(newCorpora);
+        ret.corpora_serialized_name = newCorpora;
       }
 
       return ret;
@@ -2396,7 +2347,6 @@ public class IBMSpeechToTextV1Models {
    */
   public class CreateJobOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile audio;
-    private String contentType;
     private String model;
     private String callbackUrl;
     private String events;
@@ -2419,6 +2369,7 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String grammarName;
     private Boolean redaction;
+    private String contentType;
  
     /**
      * Gets the audio.
@@ -2429,18 +2380,6 @@ public class IBMSpeechToTextV1Models {
      */
     public IBMWatsonFile audio() {
       return audio;
-    }
- 
-    /**
-     * Gets the contentType.
-     *
-     * The format (MIME type) of the audio. For more information about specifying an audio format, see **Audio formats
-     * (content types)** in the method description.
-     *
-     * @return the contentType
-     */
-    public String contentType() {
-      return contentType;
     }
  
     /**
@@ -2530,7 +2469,7 @@ public class IBMSpeechToTextV1Models {
      * model of the specified custom language model must match the model specified with the `model` parameter. You must
      * make the request with credentials for the instance of the service that owns the custom model. By default, no
      * custom language model is used. See [Custom
-     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
      *
      * **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      *
@@ -2547,7 +2486,7 @@ public class IBMSpeechToTextV1Models {
      * model of the specified custom acoustic model must match the model specified with the `model` parameter. You must
      * make the request with credentials for the instance of the service that owns the custom model. By default, no
      * custom acoustic model is used. See [Custom
-     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
      *
      * @return the acousticCustomizationId
      */
@@ -2585,7 +2524,7 @@ public class IBMSpeechToTextV1Models {
      * of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
      * of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
      *
-     * See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
+     * See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
      *
      * @return the customizationWeight
      */
@@ -2596,10 +2535,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the inactivityTimeout.
      *
-     * The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
+     * The time in seconds after which, if only silence (no speech) is detected in streaming audio, the connection is
      * closed with a 400 error. The parameter is useful for stopping audio submission from a live microphone when a user
-     * simply walks away. Use `-1` for infinity. See
-     * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts).
+     * simply walks away. Use `-1` for infinity. See [Inactivity
+     * timeout](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts-inactivity).
      *
      * @return the inactivityTimeout
      */
@@ -2641,7 +2580,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the maxAlternatives.
      *
      * The maximum number of alternative transcripts that the service is to return. By default, the service returns a
-     * single transcript. See [Maximum
+     * single transcript. If you specify a value of `0`, the service uses the default value, `1`. See [Maximum
      * alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
      *
      * @return the maxAlternatives
@@ -2759,7 +2698,7 @@ public class IBMSpeechToTextV1Models {
      * use the `language_customization_id` parameter to specify the name of the custom language model for which the
      * grammar is defined. The service recognizes only strings that are recognized by the specified grammar; it does not
      * recognize other custom words from the model's words resource. See
-     * [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/output.html).
+     * [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/input.html#grammars-input).
      *
      * @return the grammarName
      */
@@ -2788,11 +2727,22 @@ public class IBMSpeechToTextV1Models {
     public Boolean redaction() {
       return redaction;
     }
+ 
+    /**
+     * Gets the contentType.
+     *
+     * The format (MIME type) of the audio. For more information about specifying an audio format, see **Audio formats
+     * (content types)** in the method description.
+     *
+     * @return the contentType
+     */
+    public String contentType() {
+      return contentType;
+    }
 
     private CreateJobOptions(CreateJobOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.audio, 'audio cannot be null');
       audio = builder.audio;
-      contentType = builder.contentType;
       model = builder.model;
       callbackUrl = builder.callbackUrl;
       events = builder.events;
@@ -2815,6 +2765,7 @@ public class IBMSpeechToTextV1Models {
       customizationId = builder.customizationId;
       grammarName = builder.grammarName;
       redaction = builder.redaction;
+      contentType = builder.contentType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2834,7 +2785,6 @@ public class IBMSpeechToTextV1Models {
    */
   public class CreateJobOptionsBuilder extends IBMWatsonOptionsModel {
     private IBMWatsonFile audio;
-    private String contentType;
     private String model;
     private String callbackUrl;
     private String events;
@@ -2857,10 +2807,10 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String grammarName;
     private Boolean redaction;
+    private String contentType;
 
     private CreateJobOptionsBuilder(CreateJobOptions createJobOptions) {
       audio = createJobOptions.audio;
-      contentType = createJobOptions.contentType;
       model = createJobOptions.model;
       callbackUrl = createJobOptions.callbackUrl;
       events = createJobOptions.events;
@@ -2883,6 +2833,7 @@ public class IBMSpeechToTextV1Models {
       customizationId = createJobOptions.customizationId;
       grammarName = createJobOptions.grammarName;
       redaction = createJobOptions.redaction;
+      contentType = createJobOptions.contentType;
       this.requestHeaders.putAll(createJobOptions.requestHeaders());
     }
 
@@ -2890,19 +2841,6 @@ public class IBMSpeechToTextV1Models {
      * Instantiates a new builder.
      */
     public CreateJobOptionsBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder.
-     *
-     * NOTE: contentType is no longer required, so this constructor will be removed in the next major release.
-     *
-     * @param audio the audio
-     * @param contentType the contentType
-     */
-    public CreateJobOptionsBuilder(IBMWatsonFile audio, String contentType) {
-      this.audio = audio;
-      this.contentType = contentType;
     }
 
     /**
@@ -2946,17 +2884,6 @@ public class IBMSpeechToTextV1Models {
      */
     public CreateJobOptionsBuilder audio(IBMWatsonFile audio) {
       this.audio = audio;
-      return this;
-    }
-
-    /**
-     * Set the contentType.
-     *
-     * @param contentType the contentType
-     * @return the CreateJobOptions builder
-     */
-    public CreateJobOptionsBuilder contentType(String contentType) {
-      this.contentType = contentType;
       return this;
     }
 
@@ -3200,6 +3127,17 @@ public class IBMSpeechToTextV1Models {
      */
     public CreateJobOptionsBuilder redaction(Boolean redaction) {
       this.redaction = redaction;
+      return this;
+    }
+
+    /**
+     * Set the contentType.
+     *
+     * @param contentType the contentType
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder contentType(String contentType) {
+      this.contentType = contentType;
       return this;
     }
 
@@ -5292,7 +5230,7 @@ public class IBMSpeechToTextV1Models {
           Grammar newItem = (Grammar) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Grammar.class);
           newGrammars.add(newItem);
         }
-        ret.setGrammars(newGrammars);
+        ret.grammars_serialized_name = newGrammars;
       }
 
       return ret;
@@ -5772,7 +5710,7 @@ public class IBMSpeechToTextV1Models {
           LanguageModel newItem = (LanguageModel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LanguageModel.class);
           newCustomizations.add(newItem);
         }
-        ret.setCustomizations(newCustomizations);
+        ret.customizations_serialized_name = newCustomizations;
       }
 
       return ret;
@@ -6658,7 +6596,7 @@ public class IBMSpeechToTextV1Models {
           SpeechRecognitionResults newItem = (SpeechRecognitionResults) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SpeechRecognitionResults.class);
           newResults.add(newItem);
         }
-        ret.setResults(newResults);
+        ret.results_serialized_name = newResults;
       }
 
       return ret;
@@ -6710,7 +6648,7 @@ public class IBMSpeechToTextV1Models {
           RecognitionJob newItem = (RecognitionJob) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RecognitionJob.class);
           newRecognitions.add(newItem);
         }
-        ret.setRecognitions(newRecognitions);
+        ret.recognitions_serialized_name = newRecognitions;
       }
 
       return ret;
@@ -6722,7 +6660,6 @@ public class IBMSpeechToTextV1Models {
    */
   public class RecognizeOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile audio;
-    private String contentType;
     private String model;
     private String languageCustomizationId;
     private String acousticCustomizationId;
@@ -6741,6 +6678,7 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String grammarName;
     private Boolean redaction;
+    private String contentType;
  
     /**
      * Gets the audio.
@@ -6751,18 +6689,6 @@ public class IBMSpeechToTextV1Models {
      */
     public IBMWatsonFile audio() {
       return audio;
-    }
- 
-    /**
-     * Gets the contentType.
-     *
-     * The format (MIME type) of the audio. For more information about specifying an audio format, see **Audio formats
-     * (content types)** in the method description.
-     *
-     * @return the contentType
-     */
-    public String contentType() {
-      return contentType;
     }
  
     /**
@@ -6784,7 +6710,7 @@ public class IBMSpeechToTextV1Models {
      * model of the specified custom language model must match the model specified with the `model` parameter. You must
      * make the request with credentials for the instance of the service that owns the custom model. By default, no
      * custom language model is used. See [Custom
-     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
      *
      * **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      *
@@ -6801,7 +6727,7 @@ public class IBMSpeechToTextV1Models {
      * model of the specified custom acoustic model must match the model specified with the `model` parameter. You must
      * make the request with credentials for the instance of the service that owns the custom model. By default, no
      * custom acoustic model is used. See [Custom
-     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
+     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
      *
      * @return the acousticCustomizationId
      */
@@ -6839,7 +6765,7 @@ public class IBMSpeechToTextV1Models {
      * of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
      * of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
      *
-     * See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
+     * See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
      *
      * @return the customizationWeight
      */
@@ -6850,10 +6776,10 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the inactivityTimeout.
      *
-     * The time in seconds after which, if only silence (no speech) is detected in submitted audio, the connection is
+     * The time in seconds after which, if only silence (no speech) is detected in streaming audio, the connection is
      * closed with a 400 error. The parameter is useful for stopping audio submission from a live microphone when a user
-     * simply walks away. Use `-1` for infinity. See
-     * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts).
+     * simply walks away. Use `-1` for infinity. See [Inactivity
+     * timeout](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts-inactivity).
      *
      * @return the inactivityTimeout
      */
@@ -6895,7 +6821,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the maxAlternatives.
      *
      * The maximum number of alternative transcripts that the service is to return. By default, the service returns a
-     * single transcript. See [Maximum
+     * single transcript. If you specify a value of `0`, the service uses the default value, `1`. See [Maximum
      * alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
      *
      * @return the maxAlternatives
@@ -7013,7 +6939,7 @@ public class IBMSpeechToTextV1Models {
      * use the `language_customization_id` parameter to specify the name of the custom language model for which the
      * grammar is defined. The service recognizes only strings that are recognized by the specified grammar; it does not
      * recognize other custom words from the model's words resource. See
-     * [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/output.html).
+     * [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/input.html#grammars-input).
      *
      * @return the grammarName
      */
@@ -7042,11 +6968,22 @@ public class IBMSpeechToTextV1Models {
     public Boolean redaction() {
       return redaction;
     }
+ 
+    /**
+     * Gets the contentType.
+     *
+     * The format (MIME type) of the audio. For more information about specifying an audio format, see **Audio formats
+     * (content types)** in the method description.
+     *
+     * @return the contentType
+     */
+    public String contentType() {
+      return contentType;
+    }
 
     private RecognizeOptions(RecognizeOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.audio, 'audio cannot be null');
       audio = builder.audio;
-      contentType = builder.contentType;
       model = builder.model;
       languageCustomizationId = builder.languageCustomizationId;
       acousticCustomizationId = builder.acousticCustomizationId;
@@ -7065,6 +7002,7 @@ public class IBMSpeechToTextV1Models {
       customizationId = builder.customizationId;
       grammarName = builder.grammarName;
       redaction = builder.redaction;
+      contentType = builder.contentType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7084,7 +7022,6 @@ public class IBMSpeechToTextV1Models {
    */
   public class RecognizeOptionsBuilder extends IBMWatsonOptionsModel {
     private IBMWatsonFile audio;
-    private String contentType;
     private String model;
     private String languageCustomizationId;
     private String acousticCustomizationId;
@@ -7103,10 +7040,10 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String grammarName;
     private Boolean redaction;
+    private String contentType;
 
     private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
       audio = recognizeOptions.audio;
-      contentType = recognizeOptions.contentType;
       model = recognizeOptions.model;
       languageCustomizationId = recognizeOptions.languageCustomizationId;
       acousticCustomizationId = recognizeOptions.acousticCustomizationId;
@@ -7125,6 +7062,7 @@ public class IBMSpeechToTextV1Models {
       customizationId = recognizeOptions.customizationId;
       grammarName = recognizeOptions.grammarName;
       redaction = recognizeOptions.redaction;
+      contentType = recognizeOptions.contentType;
       this.requestHeaders.putAll(recognizeOptions.requestHeaders());
     }
 
@@ -7132,19 +7070,6 @@ public class IBMSpeechToTextV1Models {
      * Instantiates a new builder.
      */
     public RecognizeOptionsBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder.
-     *
-     * NOTE: contentType is no longer required, so this constructor will be removed in the next major release.
-     *
-     * @param audio the audio
-     * @param contentType the contentType
-     */
-    public RecognizeOptionsBuilder(IBMWatsonFile audio, String contentType) {
-      this.audio = audio;
-      this.contentType = contentType;
     }
 
     /**
@@ -7188,17 +7113,6 @@ public class IBMSpeechToTextV1Models {
      */
     public RecognizeOptionsBuilder audio(IBMWatsonFile audio) {
       this.audio = audio;
-      return this;
-    }
-
-    /**
-     * Set the contentType.
-     *
-     * @param contentType the contentType
-     * @return the RecognizeOptions builder
-     */
-    public RecognizeOptionsBuilder contentType(String contentType) {
-      this.contentType = contentType;
       return this;
     }
 
@@ -7398,6 +7312,17 @@ public class IBMSpeechToTextV1Models {
      */
     public RecognizeOptionsBuilder redaction(Boolean redaction) {
       this.redaction = redaction;
+      return this;
+    }
+
+    /**
+     * Set the contentType.
+     *
+     * @param contentType the contentType
+     * @return the RecognizeOptions builder
+     */
+    public RecognizeOptionsBuilder contentType(String contentType) {
+      this.contentType = contentType;
       return this;
     }
 
@@ -8115,7 +8040,7 @@ public class IBMSpeechToTextV1Models {
           SpeechModel newItem = (SpeechModel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SpeechModel.class);
           newModels.add(newItem);
         }
-        ret.setModels(newModels);
+        ret.models_serialized_name = newModels;
       }
 
       return ret;
@@ -8128,8 +8053,8 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript_serialized_name;
     private Double confidence_serialized_name;
-    private List<List<String>> timestamps_serialized_name;
-    private List<List<String>> word_confidence_serialized_name;
+    private List<String> timestamps_serialized_name;
+    private List<String> word_confidence_serialized_name;
  
     /**
      * Gets the transcript.
@@ -8166,7 +8091,7 @@ public class IBMSpeechToTextV1Models {
      * @return the timestamps
      */
     @AuraEnabled
-    public List<List<String>> getTimestamps() {
+    public List<String> getTimestamps() {
       return timestamps_serialized_name;
     }
  
@@ -8180,7 +8105,7 @@ public class IBMSpeechToTextV1Models {
      * @return the wordConfidence
      */
     @AuraEnabled
-    public List<List<String>> getWordConfidence() {
+    public List<String> getWordConfidence() {
       return word_confidence_serialized_name;
     }
 
@@ -8207,7 +8132,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<List<String>> timestamps) {
+    public void setTimestamps(final List<String> timestamps) {
       this.timestamps_serialized_name = timestamps;
     }
 
@@ -8216,7 +8141,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<List<String>> wordConfidence) {
+    public void setWordConfidence(final List<String> wordConfidence) {
       this.word_confidence_serialized_name = wordConfidence;
     }
 
@@ -8347,7 +8272,7 @@ public class IBMSpeechToTextV1Models {
           SpeechRecognitionAlternative newItem = (SpeechRecognitionAlternative) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SpeechRecognitionAlternative.class);
           newAlternatives.add(newItem);
         }
-        ret.setAlternatives(newAlternatives);
+        ret.alternatives_serialized_name = newAlternatives;
       }
 
       // calling custom deserializer for keywordsResult
@@ -8379,7 +8304,7 @@ public class IBMSpeechToTextV1Models {
           WordAlternativeResults newItem = (WordAlternativeResults) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WordAlternativeResults.class);
           newWordAlternatives.add(newItem);
         }
-        ret.setWordAlternatives(newWordAlternatives);
+        ret.word_alternatives_serialized_name = newWordAlternatives;
       }
 
       return ret;
@@ -8514,7 +8439,7 @@ public class IBMSpeechToTextV1Models {
           SpeechRecognitionResult newItem = (SpeechRecognitionResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SpeechRecognitionResult.class);
           newResults.add(newItem);
         }
-        ret.setResults(newResults);
+        ret.results_serialized_name = newResults;
       }
 
       // calling custom deserializer for speakerLabels
@@ -8527,7 +8452,7 @@ public class IBMSpeechToTextV1Models {
           SpeakerLabelsResult newItem = (SpeakerLabelsResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SpeakerLabelsResult.class);
           newSpeakerLabels.add(newItem);
         }
-        ret.setSpeakerLabels(newSpeakerLabels);
+        ret.speaker_labels_serialized_name = newSpeakerLabels;
       }
 
       return ret;
@@ -9380,7 +9305,7 @@ public class IBMSpeechToTextV1Models {
           WordError newItem = (WordError) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WordError.class);
           newError.add(newItem);
         }
-        ret.setError(newError);
+        ret.error_serialized_name = newError;
       }
 
       return ret;
@@ -9535,7 +9460,7 @@ public class IBMSpeechToTextV1Models {
           WordAlternativeResult newItem = (WordAlternativeResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), WordAlternativeResult.class);
           newAlternatives.add(newItem);
         }
-        ret.setAlternatives(newAlternatives);
+        ret.alternatives_serialized_name = newAlternatives;
       }
 
       return ret;
@@ -9629,7 +9554,7 @@ public class IBMSpeechToTextV1Models {
           Word newItem = (Word) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Word.class);
           newWords.add(newItem);
         }
-        ret.setWords(newWords);
+        ret.words_serialized_name = newWords;
       }
 
       return ret;
