@@ -42,9 +42,9 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
   }
 
   /**
-   * Convert file to HTML.
+   * Convert document to HTML.
    *
-   * Convert an uploaded file to HTML.
+   * Converts a document to HTML.
    *
    * @param convertToHtmlOptions the {@link IBMCompareComplyV1Models.ConvertToHtmlOptions} containing the options for the call
    * @return the {@link IBMCompareComplyV1Models.HTMLReturn} with the response
@@ -61,8 +61,8 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (convertToHtmlOptions.modelId() != null) {
-      builder.query('model_id', convertToHtmlOptions.modelId());
+    if (convertToHtmlOptions.model() != null) {
+      builder.query('model', convertToHtmlOptions.model());
     }
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
@@ -77,7 +77,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
   /**
    * Classify the elements of a document.
    *
-   * Analyze an uploaded file's structural and semantic elements.
+   * Analyzes the structural and semantic elements of a document.
    *
    * @param classifyElementsOptions the {@link IBMCompareComplyV1Models.ClassifyElementsOptions} containing the options for the call
    * @return the {@link IBMCompareComplyV1Models.ClassifyReturn} with the response
@@ -94,13 +94,13 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (classifyElementsOptions.modelId() != null) {
-      builder.query('model_id', classifyElementsOptions.modelId());
+    if (classifyElementsOptions.model() != null) {
+      builder.query('model', classifyElementsOptions.model());
     }
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(classifyElementsOptions.file(), classifyElementsOptions.fileContentType());
-    multipartBuilder.addFormDataPart('file', classifyElementsOptions.filename(), fileBody);
+    multipartBuilder.addFormDataPart('file', null, fileBody);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
@@ -110,7 +110,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
   /**
    * Extract a document's tables.
    *
-   * Extract and analyze an uploaded file's tables.
+   * Analyzes the tables in a document.
    *
    * @param extractTablesOptions the {@link IBMCompareComplyV1Models.ExtractTablesOptions} containing the options for the call
    * @return the {@link IBMCompareComplyV1Models.TableReturn} with the response
@@ -127,13 +127,13 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (extractTablesOptions.modelId() != null) {
-      builder.query('model_id', extractTablesOptions.modelId());
+    if (extractTablesOptions.model() != null) {
+      builder.query('model', extractTablesOptions.model());
     }
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(extractTablesOptions.file(), extractTablesOptions.fileContentType());
-    multipartBuilder.addFormDataPart('file', extractTablesOptions.filename(), fileBody);
+    multipartBuilder.addFormDataPart('file', null, fileBody);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
@@ -143,7 +143,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
   /**
    * Compare two documents.
    *
-   * Compare two uploaded input files. Uploaded files must be in the same file format.
+   * Compares two input documents. Documents must be in the same format.
    *
    * @param compareDocumentsOptions the {@link IBMCompareComplyV1Models.CompareDocumentsOptions} containing the options for the call
    * @return the {@link IBMCompareComplyV1Models.CompareReturn} with the response
@@ -166,15 +166,15 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     if (compareDocumentsOptions.file2Label() != null) {
       builder.query('file_2_label', compareDocumentsOptions.file2Label());
     }
-    if (compareDocumentsOptions.modelId() != null) {
-      builder.query('model_id', compareDocumentsOptions.modelId());
+    if (compareDocumentsOptions.model() != null) {
+      builder.query('model', compareDocumentsOptions.model());
     }
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
-    IBMWatsonRequestBody file1Body = IBMWatsonRequestBody.create(compareDocumentsOptions.file1(), compareDocumentsOptions.file1contentType());
-    multipartBuilder.addFormDataPart('file_1', compareDocumentsOptions.file1Filename(), file1Body);
-    IBMWatsonRequestBody file2Body = IBMWatsonRequestBody.create(compareDocumentsOptions.file2(), compareDocumentsOptions.file2contentType());
-    multipartBuilder.addFormDataPart('file_2', compareDocumentsOptions.file2Filename(), file2Body);
+    IBMWatsonRequestBody file1Body = IBMWatsonRequestBody.create(compareDocumentsOptions.file1(), compareDocumentsOptions.file1ContentType());
+    multipartBuilder.addFormDataPart('file_1', null, file1Body);
+    IBMWatsonRequestBody file2Body = IBMWatsonRequestBody.create(compareDocumentsOptions.file2(), compareDocumentsOptions.file2ContentType());
+    multipartBuilder.addFormDataPart('file_2', null, file2Body);
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
     builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
 
@@ -204,20 +204,22 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('feedback_data', addFeedbackOptions.feedbackData());
     if (addFeedbackOptions.userId() != null) {
       contentJson.put('user_id', addFeedbackOptions.userId());
     }
     if (addFeedbackOptions.comment() != null) {
       contentJson.put('comment', addFeedbackOptions.comment());
     }
-    contentJson.put('feedback_data', addFeedbackOptions.feedbackData());
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     return (IBMCompareComplyV1Models.FeedbackReturn) createServiceCall(builder.build(), IBMCompareComplyV1Models.FeedbackReturn.class);
   }
 
   /**
-   * Deletes a specified feedback entry.
+   * Delete a specified feedback entry.
+   *
+   * Deletes a feedback entry with a specified `feedback_id`.
    *
    * @param deleteFeedbackOptions the {@link IBMCompareComplyV1Models.DeleteFeedbackOptions} containing the options for the call
    * @return the service call
@@ -234,8 +236,8 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (deleteFeedbackOptions.modelId() != null) {
-      builder.query('model_id', deleteFeedbackOptions.modelId());
+    if (deleteFeedbackOptions.model() != null) {
+      builder.query('model', deleteFeedbackOptions.model());
     }
 
     createServiceCall(builder.build(), null);
@@ -243,6 +245,8 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
 
   /**
    * List a specified feedback entry.
+   *
+   * Lists a feedback entry with a specified `feedback_id`.
    *
    * @param getFeedbackOptions the {@link IBMCompareComplyV1Models.GetFeedbackOptions} containing the options for the call
    * @return the {@link IBMCompareComplyV1Models.GetFeedback} with the response
@@ -259,15 +263,17 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
       }
     }
     builder.query('version', versionDate);
-    if (getFeedbackOptions.modelId() != null) {
-      builder.query('model_id', getFeedbackOptions.modelId());
+    if (getFeedbackOptions.model() != null) {
+      builder.query('model', getFeedbackOptions.model());
     }
 
     return (IBMCompareComplyV1Models.GetFeedback) createServiceCall(builder.build(), IBMCompareComplyV1Models.GetFeedback.class);
   }
 
   /**
-   * List the feedback in documents.
+   * List the feedback in a document.
+   *
+   * Lists the feedback in a document.
    *
    * @param listFeedbackOptions the {@link IBMCompareComplyV1Models.ListFeedbackOptions} containing the options for the call
    * @return the {@link IBMCompareComplyV1Models.FeedbackList} with the response
@@ -362,17 +368,17 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     if (createBatchOptions.function() != null) {
       builder.query('function', createBatchOptions.function());
     }
-    if (createBatchOptions.modelId() != null) {
-      builder.query('model_id', createBatchOptions.modelId());
+    if (createBatchOptions.model() != null) {
+      builder.query('model', createBatchOptions.model());
     }
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     IBMWatsonRequestBody inputCredentialsFileBody = IBMWatsonRequestBody.create(createBatchOptions.inputCredentialsFile(), 'application/json');
-    multipartBuilder.addFormDataPart('input_credentials_file', createBatchOptions.inputCredentialsFilename(), inputCredentialsFileBody);
+    multipartBuilder.addFormDataPart('input_credentials_file', null, inputCredentialsFileBody);
     multipartBuilder.addFormDataPart('input_bucket_location', createBatchOptions.inputBucketLocation());
     multipartBuilder.addFormDataPart('input_bucket_name', createBatchOptions.inputBucketName());
     IBMWatsonRequestBody outputCredentialsFileBody = IBMWatsonRequestBody.create(createBatchOptions.outputCredentialsFile(), 'application/json');
-    multipartBuilder.addFormDataPart('output_credentials_file', createBatchOptions.outputCredentialsFilename(), outputCredentialsFileBody);
+    multipartBuilder.addFormDataPart('output_credentials_file', null, outputCredentialsFileBody);
     multipartBuilder.addFormDataPart('output_bucket_location', createBatchOptions.outputBucketLocation());
     multipartBuilder.addFormDataPart('output_bucket_name', createBatchOptions.outputBucketName());
     IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
@@ -382,9 +388,9 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
   }
 
   /**
-   * Get information about a specific batch-processing request.
+   * Get information about a specific batch-processing job.
    *
-   * Get information about a batch-processing request with a specified ID.
+   * Gets information about a batch-processing job with a specified ID.
    *
    * @param getBatchOptions the {@link IBMCompareComplyV1Models.GetBatchOptions} containing the options for the call
    * @return the {@link IBMCompareComplyV1Models.BatchStatus} with the response
@@ -408,7 +414,7 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
   /**
    * List submitted batch-processing jobs.
    *
-   * List the batch-processing jobs submitted by users.
+   * Lists batch-processing jobs submitted by users.
    *
    * @param listBatchesOptions the {@link IBMCompareComplyV1Models.ListBatchesOptions} containing the options for the call
    * @return the {@link IBMCompareComplyV1Models.Batches} with the response
@@ -429,10 +435,10 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
   }
 
   /**
-   * Update a pending or active batch-processing request.
+   * Update a pending or active batch-processing job.
    *
-   * Update a pending or active batch-processing request. You can rescan the input bucket to check for new documents or
-   * cancel a request.
+   * Updates a pending or active batch-processing job. You can rescan the input bucket to check for new documents or
+   * cancel a job.
    *
    * @param updateBatchOptions the {@link IBMCompareComplyV1Models.UpdateBatchOptions} containing the options for the call
    * @return the {@link IBMCompareComplyV1Models.BatchStatus} with the response
@@ -452,8 +458,8 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     if (updateBatchOptions.action() != null) {
       builder.query('action', updateBatchOptions.action());
     }
-    if (updateBatchOptions.modelId() != null) {
-      builder.query('model_id', updateBatchOptions.modelId());
+    if (updateBatchOptions.model() != null) {
+      builder.query('model', updateBatchOptions.model());
     }
     builder.bodyJson('{}');
 

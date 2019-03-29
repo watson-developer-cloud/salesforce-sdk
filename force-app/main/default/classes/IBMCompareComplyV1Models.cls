@@ -3,9 +3,20 @@ public class IBMCompareComplyV1Models {
    * The addFeedback options.
    */
   public class AddFeedbackOptions extends IBMWatsonOptionsModel {
+    private FeedbackDataInput feedbackData;
     private String userId;
     private String comment;
-    private FeedbackDataInput feedbackData;
+ 
+    /**
+     * Gets the feedbackData.
+     *
+     * Feedback data for submission.
+     *
+     * @return the feedbackData
+     */
+    public FeedbackDataInput feedbackData() {
+      return feedbackData;
+    }
  
     /**
      * Gets the userId.
@@ -28,23 +39,12 @@ public class IBMCompareComplyV1Models {
     public String comment() {
       return comment;
     }
- 
-    /**
-     * Gets the feedbackData.
-     *
-     * Feedback data for submission.
-     *
-     * @return the feedbackData
-     */
-    public FeedbackDataInput feedbackData() {
-      return feedbackData;
-    }
 
     private AddFeedbackOptions(AddFeedbackOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.feedbackData, 'feedbackData cannot be null');
+      feedbackData = builder.feedbackData;
       userId = builder.userId;
       comment = builder.comment;
-      feedbackData = builder.feedbackData;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -63,14 +63,14 @@ public class IBMCompareComplyV1Models {
    * AddFeedbackOptions Builder.
    */
   public class AddFeedbackOptionsBuilder extends IBMWatsonOptionsModel {
+    private FeedbackDataInput feedbackData;
     private String userId;
     private String comment;
-    private FeedbackDataInput feedbackData;
 
     private AddFeedbackOptionsBuilder(AddFeedbackOptions addFeedbackOptions) {
+      feedbackData = addFeedbackOptions.feedbackData;
       userId = addFeedbackOptions.userId;
       comment = addFeedbackOptions.comment;
-      feedbackData = addFeedbackOptions.feedbackData;
       this.requestHeaders.putAll(addFeedbackOptions.requestHeaders());
     }
 
@@ -99,6 +99,17 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
+     * Set the feedbackData.
+     *
+     * @param feedbackData the feedbackData
+     * @return the AddFeedbackOptions builder
+     */
+    public AddFeedbackOptionsBuilder feedbackData(FeedbackDataInput feedbackData) {
+      this.feedbackData = feedbackData;
+      return this;
+    }
+
+    /**
      * Set the userId.
      *
      * @param userId the userId
@@ -117,17 +128,6 @@ public class IBMCompareComplyV1Models {
      */
     public AddFeedbackOptionsBuilder comment(String comment) {
       this.comment = comment;
-      return this;
-    }
-
-    /**
-     * Set the feedbackData.
-     *
-     * @param feedbackData the feedbackData
-     * @return the AddFeedbackOptions builder
-     */
-    public AddFeedbackOptionsBuilder feedbackData(FeedbackDataInput feedbackData) {
-      this.feedbackData = feedbackData;
       return this;
     }
 
@@ -215,8 +215,8 @@ public class IBMCompareComplyV1Models {
   public class AlignedElement extends IBMWatsonGenericModel {
     private List<ElementPair> element_pair_serialized_name;
     private Boolean identical_text_serialized_name;
-    private Boolean significant_elements_serialized_name;
     private List<String> provenance_ids_serialized_name;
+    private Boolean significant_elements_serialized_name;
  
     /**
      * Gets the elementPair.
@@ -233,25 +233,15 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the identicalText.
      *
-     * Specifies whether the text is identical.
+     * Specifies whether the aligned element is identical. Elements are considered identical despite minor differences
+     * such as leading punctuation, end-of-sentence punctuation, whitespace, the presence or absence of definite or
+     * indefinite articles, and others.
      *
      * @return the identicalText
      */
     @AuraEnabled
     public Boolean getIdenticalText() {
       return identical_text_serialized_name;
-    }
- 
-    /**
-     * Gets the significantElements.
-     *
-     * Indicates that the elements aligned are contractual clauses of significance.
-     *
-     * @return the significantElements
-     */
-    @AuraEnabled
-    public Boolean getSignificantElements() {
-      return significant_elements_serialized_name;
     }
  
     /**
@@ -264,6 +254,18 @@ public class IBMCompareComplyV1Models {
     @AuraEnabled
     public List<String> getProvenanceIds() {
       return provenance_ids_serialized_name;
+    }
+ 
+    /**
+     * Gets the significantElements.
+     *
+     * Indicates that the elements aligned are contractual clauses of significance.
+     *
+     * @return the significantElements
+     */
+    @AuraEnabled
+    public Boolean getSignificantElements() {
+      return significant_elements_serialized_name;
     }
 
     /**
@@ -285,21 +287,21 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Sets the significantElements.
-     *
-     * @param significantElements the new significantElements
-     */
-    public void setSignificantElements(final Boolean significantElements) {
-      this.significant_elements_serialized_name = significantElements;
-    }
-
-    /**
      * Sets the provenanceIds.
      *
      * @param provenanceIds the new provenanceIds
      */
     public void setProvenanceIds(final List<String> provenanceIds) {
       this.provenance_ids_serialized_name = provenanceIds;
+    }
+
+    /**
+     * Sets the significantElements.
+     *
+     * @param significantElements the new significantElements
+     */
+    public void setSignificantElements(final Boolean significantElements) {
+      this.significant_elements_serialized_name = significantElements;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -319,7 +321,7 @@ public class IBMCompareComplyV1Models {
           ElementPair newItem = (ElementPair) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementPair.class);
           newElementPair.add(newItem);
         }
-        ret.setElementPair(newElementPair);
+        ret.element_pair_serialized_name = newElementPair;
       }
 
       return ret;
@@ -700,7 +702,7 @@ public class IBMCompareComplyV1Models {
           BatchStatus newItem = (BatchStatus) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), BatchStatus.class);
           newBatches.add(newItem);
         }
-        ret.setBatches(newBatches);
+        ret.batches_serialized_name = newBatches;
       }
 
       return ret;
@@ -718,19 +720,18 @@ public class IBMCompareComplyV1Models {
     private Long row_index_end_serialized_name;
     private Long column_index_begin_serialized_name;
     private Long column_index_end_serialized_name;
-    private List<String> row_header_ids_serialized_name;
-    private List<String> row_header_texts_serialized_name;
-    private List<String> row_header_texts_normalized_serialized_name;
-    private List<String> column_header_ids_serialized_name;
-    private List<String> column_header_texts_serialized_name;
-    private List<String> column_header_texts_normalized_serialized_name;
+    private List<RowHeaderIds> row_header_ids_serialized_name;
+    private List<RowHeaderTexts> row_header_texts_serialized_name;
+    private List<RowHeaderTextsNormalized> row_header_texts_normalized_serialized_name;
+    private List<ColumnHeaderIds> column_header_ids_serialized_name;
+    private List<ColumnHeaderTexts> column_header_texts_serialized_name;
+    private List<ColumnHeaderTextsNormalized> column_header_texts_normalized_serialized_name;
     private List<Attribute> attributes_serialized_name;
  
     /**
      * Gets the cellId.
      *
-     * A string value in the format `columnHeader-x-y`, where `x` and `y` are the begin and end offsets of this column
-     * header cell in the input document.
+     * The unique ID of the cell in the current table.
      *
      * @return the cellId
      */
@@ -815,74 +816,60 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the rowHeaderIds.
      *
-     * An array of values, each being the `id` value of a row header that is applicable to this body cell.
-     *
      * @return the rowHeaderIds
      */
     @AuraEnabled
-    public List<String> getRowHeaderIds() {
+    public List<RowHeaderIds> getRowHeaderIds() {
       return row_header_ids_serialized_name;
     }
  
     /**
      * Gets the rowHeaderTexts.
      *
-     * An array of values, each being the `text` value of a row header that is applicable to this body cell.
-     *
      * @return the rowHeaderTexts
      */
     @AuraEnabled
-    public List<String> getRowHeaderTexts() {
+    public List<RowHeaderTexts> getRowHeaderTexts() {
       return row_header_texts_serialized_name;
     }
  
     /**
      * Gets the rowHeaderTextsNormalized.
      *
-     * If you provide customization input, the normalized version of the row header texts according to the
-     * customization; otherwise, the same value as `row_header_texts`.
-     *
      * @return the rowHeaderTextsNormalized
      */
     @AuraEnabled
-    public List<String> getRowHeaderTextsNormalized() {
+    public List<RowHeaderTextsNormalized> getRowHeaderTextsNormalized() {
       return row_header_texts_normalized_serialized_name;
     }
  
     /**
      * Gets the columnHeaderIds.
      *
-     * An array of values, each being the `id` value of a column header that is applicable to the current cell.
-     *
      * @return the columnHeaderIds
      */
     @AuraEnabled
-    public List<String> getColumnHeaderIds() {
+    public List<ColumnHeaderIds> getColumnHeaderIds() {
       return column_header_ids_serialized_name;
     }
  
     /**
      * Gets the columnHeaderTexts.
      *
-     * An array of values, each being the `text` value of a column header that is applicable to the current cell.
-     *
      * @return the columnHeaderTexts
      */
     @AuraEnabled
-    public List<String> getColumnHeaderTexts() {
+    public List<ColumnHeaderTexts> getColumnHeaderTexts() {
       return column_header_texts_serialized_name;
     }
  
     /**
      * Gets the columnHeaderTextsNormalized.
      *
-     * If you provide customization input, the normalized version of the column header texts according to the
-     * customization; otherwise, the same value as `column_header_texts`.
-     *
      * @return the columnHeaderTextsNormalized
      */
     @AuraEnabled
-    public List<String> getColumnHeaderTextsNormalized() {
+    public List<ColumnHeaderTextsNormalized> getColumnHeaderTextsNormalized() {
       return column_header_texts_normalized_serialized_name;
     }
  
@@ -964,7 +951,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param rowHeaderIds the new rowHeaderIds
      */
-    public void setRowHeaderIds(final List<String> rowHeaderIds) {
+    public void setRowHeaderIds(final List<RowHeaderIds> rowHeaderIds) {
       this.row_header_ids_serialized_name = rowHeaderIds;
     }
 
@@ -973,7 +960,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param rowHeaderTexts the new rowHeaderTexts
      */
-    public void setRowHeaderTexts(final List<String> rowHeaderTexts) {
+    public void setRowHeaderTexts(final List<RowHeaderTexts> rowHeaderTexts) {
       this.row_header_texts_serialized_name = rowHeaderTexts;
     }
 
@@ -982,7 +969,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param rowHeaderTextsNormalized the new rowHeaderTextsNormalized
      */
-    public void setRowHeaderTextsNormalized(final List<String> rowHeaderTextsNormalized) {
+    public void setRowHeaderTextsNormalized(final List<RowHeaderTextsNormalized> rowHeaderTextsNormalized) {
       this.row_header_texts_normalized_serialized_name = rowHeaderTextsNormalized;
     }
 
@@ -991,7 +978,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param columnHeaderIds the new columnHeaderIds
      */
-    public void setColumnHeaderIds(final List<String> columnHeaderIds) {
+    public void setColumnHeaderIds(final List<ColumnHeaderIds> columnHeaderIds) {
       this.column_header_ids_serialized_name = columnHeaderIds;
     }
 
@@ -1000,7 +987,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param columnHeaderTexts the new columnHeaderTexts
      */
-    public void setColumnHeaderTexts(final List<String> columnHeaderTexts) {
+    public void setColumnHeaderTexts(final List<ColumnHeaderTexts> columnHeaderTexts) {
       this.column_header_texts_serialized_name = columnHeaderTexts;
     }
 
@@ -1009,7 +996,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param columnHeaderTextsNormalized the new columnHeaderTextsNormalized
      */
-    public void setColumnHeaderTextsNormalized(final List<String> columnHeaderTextsNormalized) {
+    public void setColumnHeaderTextsNormalized(final List<ColumnHeaderTextsNormalized> columnHeaderTextsNormalized) {
       this.column_header_texts_normalized_serialized_name = columnHeaderTextsNormalized;
     }
 
@@ -1033,6 +1020,84 @@ public class IBMCompareComplyV1Models {
       Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
       ret.setLocation(newLocation);
 
+      // calling custom deserializer for rowHeaderIds
+      List<RowHeaderIds> newRowHeaderIds = new List<RowHeaderIds>();
+      List<RowHeaderIds> deserializedRowHeaderIds = ret.getRowHeaderIds();
+      if (deserializedRowHeaderIds != null) {
+        for (Integer i = 0; i < deserializedRowHeaderIds.size(); i++) {
+          RowHeaderIds currentItem = ret.getRowHeaderIds().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('row_header_ids_serialized_name');
+          RowHeaderIds newItem = (RowHeaderIds) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaderIds.class);
+          newRowHeaderIds.add(newItem);
+        }
+        ret.row_header_ids_serialized_name = newRowHeaderIds;
+      }
+
+      // calling custom deserializer for rowHeaderTexts
+      List<RowHeaderTexts> newRowHeaderTexts = new List<RowHeaderTexts>();
+      List<RowHeaderTexts> deserializedRowHeaderTexts = ret.getRowHeaderTexts();
+      if (deserializedRowHeaderTexts != null) {
+        for (Integer i = 0; i < deserializedRowHeaderTexts.size(); i++) {
+          RowHeaderTexts currentItem = ret.getRowHeaderTexts().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('row_header_texts_serialized_name');
+          RowHeaderTexts newItem = (RowHeaderTexts) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaderTexts.class);
+          newRowHeaderTexts.add(newItem);
+        }
+        ret.row_header_texts_serialized_name = newRowHeaderTexts;
+      }
+
+      // calling custom deserializer for rowHeaderTextsNormalized
+      List<RowHeaderTextsNormalized> newRowHeaderTextsNormalized = new List<RowHeaderTextsNormalized>();
+      List<RowHeaderTextsNormalized> deserializedRowHeaderTextsNormalized = ret.getRowHeaderTextsNormalized();
+      if (deserializedRowHeaderTextsNormalized != null) {
+        for (Integer i = 0; i < deserializedRowHeaderTextsNormalized.size(); i++) {
+          RowHeaderTextsNormalized currentItem = ret.getRowHeaderTextsNormalized().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('row_header_texts_normalized_serialized_name');
+          RowHeaderTextsNormalized newItem = (RowHeaderTextsNormalized) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaderTextsNormalized.class);
+          newRowHeaderTextsNormalized.add(newItem);
+        }
+        ret.row_header_texts_normalized_serialized_name = newRowHeaderTextsNormalized;
+      }
+
+      // calling custom deserializer for columnHeaderIds
+      List<ColumnHeaderIds> newColumnHeaderIds = new List<ColumnHeaderIds>();
+      List<ColumnHeaderIds> deserializedColumnHeaderIds = ret.getColumnHeaderIds();
+      if (deserializedColumnHeaderIds != null) {
+        for (Integer i = 0; i < deserializedColumnHeaderIds.size(); i++) {
+          ColumnHeaderIds currentItem = ret.getColumnHeaderIds().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('column_header_ids_serialized_name');
+          ColumnHeaderIds newItem = (ColumnHeaderIds) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaderIds.class);
+          newColumnHeaderIds.add(newItem);
+        }
+        ret.column_header_ids_serialized_name = newColumnHeaderIds;
+      }
+
+      // calling custom deserializer for columnHeaderTexts
+      List<ColumnHeaderTexts> newColumnHeaderTexts = new List<ColumnHeaderTexts>();
+      List<ColumnHeaderTexts> deserializedColumnHeaderTexts = ret.getColumnHeaderTexts();
+      if (deserializedColumnHeaderTexts != null) {
+        for (Integer i = 0; i < deserializedColumnHeaderTexts.size(); i++) {
+          ColumnHeaderTexts currentItem = ret.getColumnHeaderTexts().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('column_header_texts_serialized_name');
+          ColumnHeaderTexts newItem = (ColumnHeaderTexts) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaderTexts.class);
+          newColumnHeaderTexts.add(newItem);
+        }
+        ret.column_header_texts_serialized_name = newColumnHeaderTexts;
+      }
+
+      // calling custom deserializer for columnHeaderTextsNormalized
+      List<ColumnHeaderTextsNormalized> newColumnHeaderTextsNormalized = new List<ColumnHeaderTextsNormalized>();
+      List<ColumnHeaderTextsNormalized> deserializedColumnHeaderTextsNormalized = ret.getColumnHeaderTextsNormalized();
+      if (deserializedColumnHeaderTextsNormalized != null) {
+        for (Integer i = 0; i < deserializedColumnHeaderTextsNormalized.size(); i++) {
+          ColumnHeaderTextsNormalized currentItem = ret.getColumnHeaderTextsNormalized().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('column_header_texts_normalized_serialized_name');
+          ColumnHeaderTextsNormalized newItem = (ColumnHeaderTextsNormalized) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaderTextsNormalized.class);
+          newColumnHeaderTextsNormalized.add(newItem);
+        }
+        ret.column_header_texts_normalized_serialized_name = newColumnHeaderTextsNormalized;
+      }
+
       // calling custom deserializer for attributes
       List<Attribute> newAttributes = new List<Attribute>();
       List<Attribute> deserializedAttributes = ret.getAttributes();
@@ -1043,7 +1108,7 @@ public class IBMCompareComplyV1Models {
           Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
           newAttributes.add(newItem);
         }
-        ret.setAttributes(newAttributes);
+        ret.attributes_serialized_name = newAttributes;
       }
 
       return ret;
@@ -1111,47 +1176,60 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
+   * Information defining an element's subject matter.
+   */
+  public class CategoryComparison extends IBMWatsonGenericModel {
+    private String label_serialized_name;
+ 
+    /**
+     * Gets the label.
+     *
+     * The category of the associated element.
+     *
+     * @return the label
+     */
+    @AuraEnabled
+    public String getLabel() {
+      return label_serialized_name;
+    }
+
+    /**
+     * Sets the label.
+     *
+     * @param label the new label
+     */
+    public void setLabel(final String label) {
+      this.label_serialized_name = label;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      CategoryComparison ret = (CategoryComparison) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
    * The classifyElements options.
    */
   public class ClassifyElementsOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile file;
-    private String filename;
-    private String modelId;
     private String fileContentType;
+    private String model;
  
     /**
      * Gets the file.
      *
-     * The file to classify.
+     * The document to classify.
      *
      * @return the file
      */
     public IBMWatsonFile file() {
       return file;
-    }
- 
-    /**
-     * Gets the filename.
-     *
-     * The filename for file.
-     *
-     * @return the filename
-     */
-    public String filename() {
-      return filename;
-    }
- 
-    /**
-     * Gets the modelId.
-     *
-     * The analysis model to be used by the service. For the `/v1/element_classification` and `/v1/comparison` methods,
-     * the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These defaults apply to the
-     * standalone methods as well as to the methods' use in batch-processing requests.
-     *
-     * @return the modelId
-     */
-    public String modelId() {
-      return modelId;
     }
  
     /**
@@ -1164,13 +1242,25 @@ public class IBMCompareComplyV1Models {
     public String fileContentType() {
       return fileContentType;
     }
+ 
+    /**
+     * Gets the model.
+     *
+     * The analysis model to be used by the service. For the **Element classification** and **Compare two documents**
+     * methods, the default is `contracts`. For the **Extract tables** method, the default is `tables`. These defaults
+     * apply to the standalone methods as well as to the methods' use in batch-processing requests.
+     *
+     * @return the model
+     */
+    public String model() {
+      return model;
+    }
 
     private ClassifyElementsOptions(ClassifyElementsOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.file, 'file cannot be null');
       file = builder.file;
-      filename = builder.filename;
-      modelId = builder.modelId;
       fileContentType = builder.fileContentType;
+      model = builder.model;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1190,15 +1280,13 @@ public class IBMCompareComplyV1Models {
    */
   public class ClassifyElementsOptionsBuilder extends IBMWatsonOptionsModel {
     private IBMWatsonFile file;
-    private String filename;
-    private String modelId;
     private String fileContentType;
+    private String model;
 
     private ClassifyElementsOptionsBuilder(ClassifyElementsOptions classifyElementsOptions) {
       file = classifyElementsOptions.file;
-      filename = classifyElementsOptions.filename;
-      modelId = classifyElementsOptions.modelId;
       fileContentType = classifyElementsOptions.fileContentType;
+      model = classifyElementsOptions.model;
       this.requestHeaders.putAll(classifyElementsOptions.requestHeaders());
     }
 
@@ -1238,28 +1326,6 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Set the filename.
-     *
-     * @param filename the filename
-     * @return the ClassifyElementsOptions builder
-     */
-    public ClassifyElementsOptionsBuilder filename(String filename) {
-      this.filename = filename;
-      return this;
-    }
-
-    /**
-     * Set the modelId.
-     *
-     * @param modelId the modelId
-     * @return the ClassifyElementsOptions builder
-     */
-    public ClassifyElementsOptionsBuilder modelId(String modelId) {
-      this.modelId = modelId;
-      return this;
-    }
-
-    /**
      * Set the fileContentType.
      *
      * @param fileContentType the fileContentType
@@ -1267,6 +1333,17 @@ public class IBMCompareComplyV1Models {
      */
     public ClassifyElementsOptionsBuilder fileContentType(String fileContentType) {
       this.fileContentType = fileContentType;
+      return this;
+    }
+
+    /**
+     * Set the model.
+     *
+     * @param model the model
+     * @return the ClassifyElementsOptions builder
+     */
+    public ClassifyElementsOptionsBuilder model(String model) {
+      this.model = model;
       return this;
     }
 
@@ -1284,7 +1361,7 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
-   * The analysis of objects returned by the `/v1/element_classification` method.
+   * The analysis of objects returned by the **Element classification** method.
    */
   public class ClassifyReturn extends IBMWatsonResponseModel {
     private Document document_serialized_name;
@@ -1297,6 +1374,7 @@ public class IBMCompareComplyV1Models {
     private List<EffectiveDates> effective_dates_serialized_name;
     private List<ContractAmts> contract_amounts_serialized_name;
     private List<TerminationDates> termination_dates_serialized_name;
+    private List<ContractType> contract_type_serialized_name;
  
     /**
      * Gets the document.
@@ -1313,8 +1391,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the modelId.
      *
-     * The analysis model used to classify the input document. For the `/v1/element_classification` method, the only
-     * valid value is `contracts`.
+     * The analysis model used to classify the input document. For the **Element classification** method, the only valid
+     * value is `contracts`.
      *
      * @return the modelId
      */
@@ -1386,7 +1464,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the effectiveDates.
      *
-     * The effective dates of the input document.
+     * The date or dates on which the document becomes effective.
      *
      * @return the effectiveDates
      */
@@ -1398,7 +1476,8 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the contractAmounts.
      *
-     * The monetary amounts identified in the input document.
+     * The monetary amounts that identify the total amount of the contract that needs to be paid from one party to
+     * another.
      *
      * @return the contractAmounts
      */
@@ -1410,13 +1489,25 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the terminationDates.
      *
-     * The input document's termination dates.
+     * The date or dates on which the document is to be terminated.
      *
      * @return the terminationDates
      */
     @AuraEnabled
     public List<TerminationDates> getTerminationDates() {
       return termination_dates_serialized_name;
+    }
+ 
+    /**
+     * Gets the contractType.
+     *
+     * The document's contract type or types as declared in the document.
+     *
+     * @return the contractType
+     */
+    @AuraEnabled
+    public List<ContractType> getContractType() {
+      return contract_type_serialized_name;
     }
 
     /**
@@ -1509,6 +1600,15 @@ public class IBMCompareComplyV1Models {
       this.termination_dates_serialized_name = terminationDates;
     }
 
+    /**
+     * Sets the contractType.
+     *
+     * @param contractType the new contractType
+     */
+    public void setContractType(final List<ContractType> contractType) {
+      this.contract_type_serialized_name = contractType;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -1530,7 +1630,7 @@ public class IBMCompareComplyV1Models {
           Element newItem = (Element) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Element.class);
           newElements.add(newItem);
         }
-        ret.setElements(newElements);
+        ret.elements_serialized_name = newElements;
       }
 
       // calling custom deserializer for tables
@@ -1543,7 +1643,7 @@ public class IBMCompareComplyV1Models {
           Tables newItem = (Tables) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Tables.class);
           newTables.add(newItem);
         }
-        ret.setTables(newTables);
+        ret.tables_serialized_name = newTables;
       }
 
       // calling custom deserializer for documentStructure
@@ -1560,7 +1660,7 @@ public class IBMCompareComplyV1Models {
           Parties newItem = (Parties) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Parties.class);
           newParties.add(newItem);
         }
-        ret.setParties(newParties);
+        ret.parties_serialized_name = newParties;
       }
 
       // calling custom deserializer for effectiveDates
@@ -1573,7 +1673,7 @@ public class IBMCompareComplyV1Models {
           EffectiveDates newItem = (EffectiveDates) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EffectiveDates.class);
           newEffectiveDates.add(newItem);
         }
-        ret.setEffectiveDates(newEffectiveDates);
+        ret.effective_dates_serialized_name = newEffectiveDates;
       }
 
       // calling custom deserializer for contractAmounts
@@ -1586,7 +1686,7 @@ public class IBMCompareComplyV1Models {
           ContractAmts newItem = (ContractAmts) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractAmts.class);
           newContractAmounts.add(newItem);
         }
-        ret.setContractAmounts(newContractAmounts);
+        ret.contract_amounts_serialized_name = newContractAmounts;
       }
 
       // calling custom deserializer for terminationDates
@@ -1599,8 +1699,136 @@ public class IBMCompareComplyV1Models {
           TerminationDates newItem = (TerminationDates) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TerminationDates.class);
           newTerminationDates.add(newItem);
         }
-        ret.setTerminationDates(newTerminationDates);
+        ret.termination_dates_serialized_name = newTerminationDates;
       }
+
+      // calling custom deserializer for contractType
+      List<ContractType> newContractType = new List<ContractType>();
+      List<ContractType> deserializedContractType = ret.getContractType();
+      if (deserializedContractType != null) {
+        for (Integer i = 0; i < deserializedContractType.size(); i++) {
+          ContractType currentItem = ret.getContractType().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('contract_type_serialized_name');
+          ContractType newItem = (ContractType) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractType.class);
+          newContractType.add(newItem);
+        }
+        ret.contract_type_serialized_name = newContractType;
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * An array of values, each being the `id` value of a column header that is applicable to the current cell.
+   */
+  public class ColumnHeaderIds extends IBMWatsonGenericModel {
+    private String id_serialized_name;
+ 
+    /**
+     * Gets the id.
+     *
+     * The `id` value of a column header.
+     *
+     * @return the id
+     */
+    @AuraEnabled
+    public String getId() {
+      return id_serialized_name;
+    }
+
+    /**
+     * Sets the id.
+     *
+     * @param id the new id
+     */
+    public void setId(final String id) {
+      this.id_serialized_name = id;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ColumnHeaderIds ret = (ColumnHeaderIds) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An array of values, each being the `text` value of a column header that is applicable to the current cell.
+   */
+  public class ColumnHeaderTexts extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+ 
+    /**
+     * Gets the text.
+     *
+     * The `text` value of a column header.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ColumnHeaderTexts ret = (ColumnHeaderTexts) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * If you provide customization input, the normalized version of the column header texts according to the
+   * customization; otherwise, the same value as `column_header_texts`.
+   */
+  public class ColumnHeaderTextsNormalized extends IBMWatsonGenericModel {
+    private String text_normalized_serialized_name;
+ 
+    /**
+     * Gets the textNormalized.
+     *
+     * The normalized version of a column header text.
+     *
+     * @return the textNormalized
+     */
+    @AuraEnabled
+    public String getTextNormalized() {
+      return text_normalized_serialized_name;
+    }
+
+    /**
+     * Sets the textNormalized.
+     *
+     * @param textNormalized the new textNormalized
+     */
+    public void setTextNormalized(final String textNormalized) {
+      this.text_normalized_serialized_name = textNormalized;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ColumnHeaderTextsNormalized ret = (ColumnHeaderTextsNormalized) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -1611,7 +1839,7 @@ public class IBMCompareComplyV1Models {
    */
   public class ColumnHeaders extends IBMWatsonGenericModel {
     private String cell_id_serialized_name;
-    private Location location_serialized_name;
+    private IBMWatsonMapModel location_serialized_name;
     private String text_serialized_name;
     private String text_normalized_serialized_name;
     private Long row_index_begin_serialized_name;
@@ -1622,8 +1850,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the cellId.
      *
-     * A string value in the format `columnHeader-x-y`, where `x` and `y` are the begin and end offsets of this column
-     * header cell in the input document.
+     * The unique ID of the cell in the current table.
      *
      * @return the cellId
      */
@@ -1641,7 +1868,7 @@ public class IBMCompareComplyV1Models {
      * @return the location
      */
     @AuraEnabled
-    public Location getLocation() {
+    public IBMWatsonMapModel getLocation() {
       return location_serialized_name;
     }
  
@@ -1732,7 +1959,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param location the new location
      */
-    public void setLocation(final Location location) {
+    public void setLocation(final IBMWatsonMapModel location) {
       this.location_serialized_name = location;
     }
 
@@ -1798,7 +2025,7 @@ public class IBMCompareComplyV1Models {
       ColumnHeaders ret = (ColumnHeaders) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), IBMWatsonMapModel.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -1810,19 +2037,17 @@ public class IBMCompareComplyV1Models {
    */
   public class CompareDocumentsOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile file1;
-    private String file1Filename;
     private IBMWatsonFile file2;
-    private String file2Filename;
-    private String file1Label;
-    private String file2Label;
-    private String modelId;
     private String file1ContentType;
     private String file2ContentType;
+    private String file1Label;
+    private String file2Label;
+    private String model;
  
     /**
      * Gets the file1.
      *
-     * The first file to compare.
+     * The first document to compare.
      *
      * @return the file1
      */
@@ -1831,71 +2056,14 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
-     * Gets the file1Filename.
-     *
-     * The filename for file1.
-     *
-     * @return the file1Filename
-     */
-    public String file1Filename() {
-      return file1Filename;
-    }
- 
-    /**
      * Gets the file2.
      *
-     * The second file to compare.
+     * The second document to compare.
      *
      * @return the file2
      */
     public IBMWatsonFile file2() {
       return file2;
-    }
- 
-    /**
-     * Gets the file2Filename.
-     *
-     * The filename for file2.
-     *
-     * @return the file2Filename
-     */
-    public String file2Filename() {
-      return file2Filename;
-    }
- 
-    /**
-     * Gets the file1Label.
-     *
-     * A text label for the first file.
-     *
-     * @return the file1Label
-     */
-    public String file1Label() {
-      return file1Label;
-    }
- 
-    /**
-     * Gets the file2Label.
-     *
-     * A text label for the second file.
-     *
-     * @return the file2Label
-     */
-    public String file2Label() {
-      return file2Label;
-    }
- 
-    /**
-     * Gets the modelId.
-     *
-     * The analysis model to be used by the service. For the `/v1/element_classification` and `/v1/comparison` methods,
-     * the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These defaults apply to the
-     * standalone methods as well as to the methods' use in batch-processing requests.
-     *
-     * @return the modelId
-     */
-    public String modelId() {
-      return modelId;
     }
  
     /**
@@ -1919,19 +2087,52 @@ public class IBMCompareComplyV1Models {
     public String file2ContentType() {
       return file2ContentType;
     }
+ 
+    /**
+     * Gets the file1Label.
+     *
+     * A text label for the first document.
+     *
+     * @return the file1Label
+     */
+    public String file1Label() {
+      return file1Label;
+    }
+ 
+    /**
+     * Gets the file2Label.
+     *
+     * A text label for the second document.
+     *
+     * @return the file2Label
+     */
+    public String file2Label() {
+      return file2Label;
+    }
+ 
+    /**
+     * Gets the model.
+     *
+     * The analysis model to be used by the service. For the **Element classification** and **Compare two documents**
+     * methods, the default is `contracts`. For the **Extract tables** method, the default is `tables`. These defaults
+     * apply to the standalone methods as well as to the methods' use in batch-processing requests.
+     *
+     * @return the model
+     */
+    public String model() {
+      return model;
+    }
 
     private CompareDocumentsOptions(CompareDocumentsOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.file1, 'file1 cannot be null');
       IBMWatsonValidator.notNull(builder.file2, 'file2 cannot be null');
       file1 = builder.file1;
-      file1Filename = builder.file1Filename;
       file2 = builder.file2;
-      file2Filename = builder.file2Filename;
-      file1Label = builder.file1Label;
-      file2Label = builder.file2Label;
-      modelId = builder.modelId;
       file1ContentType = builder.file1ContentType;
       file2ContentType = builder.file2ContentType;
+      file1Label = builder.file1Label;
+      file2Label = builder.file2Label;
+      model = builder.model;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1951,25 +2152,21 @@ public class IBMCompareComplyV1Models {
    */
   public class CompareDocumentsOptionsBuilder extends IBMWatsonOptionsModel {
     private IBMWatsonFile file1;
-    private String file1Filename;
     private IBMWatsonFile file2;
-    private String file2Filename;
-    private String file1Label;
-    private String file2Label;
-    private String modelId;
     private String file1ContentType;
     private String file2ContentType;
+    private String file1Label;
+    private String file2Label;
+    private String model;
 
     private CompareDocumentsOptionsBuilder(CompareDocumentsOptions compareDocumentsOptions) {
       file1 = compareDocumentsOptions.file1;
-      file1Filename = compareDocumentsOptions.file1Filename;
       file2 = compareDocumentsOptions.file2;
-      file2Filename = compareDocumentsOptions.file2Filename;
-      file1Label = compareDocumentsOptions.file1Label;
-      file2Label = compareDocumentsOptions.file2Label;
-      modelId = compareDocumentsOptions.modelId;
       file1ContentType = compareDocumentsOptions.file1ContentType;
       file2ContentType = compareDocumentsOptions.file2ContentType;
+      file1Label = compareDocumentsOptions.file1Label;
+      file2Label = compareDocumentsOptions.file2Label;
+      model = compareDocumentsOptions.model;
       this.requestHeaders.putAll(compareDocumentsOptions.requestHeaders());
     }
 
@@ -2011,17 +2208,6 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Set the file1Filename.
-     *
-     * @param file1Filename the file1Filename
-     * @return the CompareDocumentsOptions builder
-     */
-    public CompareDocumentsOptionsBuilder file1Filename(String file1Filename) {
-      this.file1Filename = file1Filename;
-      return this;
-    }
-
-    /**
      * Set the file2.
      *
      * @param file2 the file2
@@ -2029,50 +2215,6 @@ public class IBMCompareComplyV1Models {
      */
     public CompareDocumentsOptionsBuilder file2(IBMWatsonFile file2) {
       this.file2 = file2;
-      return this;
-    }
-
-    /**
-     * Set the file2Filename.
-     *
-     * @param file2Filename the file2Filename
-     * @return the CompareDocumentsOptions builder
-     */
-    public CompareDocumentsOptionsBuilder file2Filename(String file2Filename) {
-      this.file2Filename = file2Filename;
-      return this;
-    }
-
-    /**
-     * Set the file1Label.
-     *
-     * @param file1Label the file1Label
-     * @return the CompareDocumentsOptions builder
-     */
-    public CompareDocumentsOptionsBuilder file1Label(String file1Label) {
-      this.file1Label = file1Label;
-      return this;
-    }
-
-    /**
-     * Set the file2Label.
-     *
-     * @param file2Label the file2Label
-     * @return the CompareDocumentsOptions builder
-     */
-    public CompareDocumentsOptionsBuilder file2Label(String file2Label) {
-      this.file2Label = file2Label;
-      return this;
-    }
-
-    /**
-     * Set the modelId.
-     *
-     * @param modelId the modelId
-     * @return the CompareDocumentsOptions builder
-     */
-    public CompareDocumentsOptionsBuilder modelId(String modelId) {
-      this.modelId = modelId;
       return this;
     }
 
@@ -2099,6 +2241,39 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
+     * Set the file1Label.
+     *
+     * @param file1Label the file1Label
+     * @return the CompareDocumentsOptions builder
+     */
+    public CompareDocumentsOptionsBuilder file1Label(String file1Label) {
+      this.file1Label = file1Label;
+      return this;
+    }
+
+    /**
+     * Set the file2Label.
+     *
+     * @param file2Label the file2Label
+     * @return the CompareDocumentsOptions builder
+     */
+    public CompareDocumentsOptionsBuilder file2Label(String file2Label) {
+      this.file2Label = file2Label;
+      return this;
+    }
+
+    /**
+     * Set the model.
+     *
+     * @param model the model
+     * @return the CompareDocumentsOptions builder
+     */
+    public CompareDocumentsOptionsBuilder model(String model) {
+      this.model = model;
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -2115,11 +2290,36 @@ public class IBMCompareComplyV1Models {
    * The comparison of the two submitted documents.
    */
   public class CompareReturn extends IBMWatsonResponseModel {
+    private String model_id_serialized_name;
+    private String model_version_serialized_name;
     private List<Document> documents_serialized_name;
     private List<AlignedElement> aligned_elements_serialized_name;
     private List<UnalignedElement> unaligned_elements_serialized_name;
-    private String model_id_serialized_name;
-    private String model_version_serialized_name;
+ 
+    /**
+     * Gets the modelId.
+     *
+     * The analysis model used to compare the input documents. For the **Compare two documents** method, the only valid
+     * value is `contracts`.
+     *
+     * @return the modelId
+     */
+    @AuraEnabled
+    public String getModelId() {
+      return model_id_serialized_name;
+    }
+ 
+    /**
+     * Gets the modelVersion.
+     *
+     * The version of the analysis model identified by the value of the `model_id` key.
+     *
+     * @return the modelVersion
+     */
+    @AuraEnabled
+    public String getModelVersion() {
+      return model_version_serialized_name;
+    }
  
     /**
      * Gets the documents.
@@ -2156,30 +2356,23 @@ public class IBMCompareComplyV1Models {
     public List<UnalignedElement> getUnalignedElements() {
       return unaligned_elements_serialized_name;
     }
- 
+
     /**
-     * Gets the modelId.
+     * Sets the modelId.
      *
-     * The analysis model used to classify the input document. For the `/v1/element_classification` method, the only
-     * valid value is `contracts`.
-     *
-     * @return the modelId
+     * @param modelId the new modelId
      */
-    @AuraEnabled
-    public String getModelId() {
-      return model_id_serialized_name;
+    public void setModelId(final String modelId) {
+      this.model_id_serialized_name = modelId;
     }
- 
+
     /**
-     * Gets the modelVersion.
+     * Sets the modelVersion.
      *
-     * The version of the analysis model identified by the value of the `model_id` key.
-     *
-     * @return the modelVersion
+     * @param modelVersion the new modelVersion
      */
-    @AuraEnabled
-    public String getModelVersion() {
-      return model_version_serialized_name;
+    public void setModelVersion(final String modelVersion) {
+      this.model_version_serialized_name = modelVersion;
     }
 
     /**
@@ -2209,24 +2402,6 @@ public class IBMCompareComplyV1Models {
       this.unaligned_elements_serialized_name = unalignedElements;
     }
 
-    /**
-     * Sets the modelId.
-     *
-     * @param modelId the new modelId
-     */
-    public void setModelId(final String modelId) {
-      this.model_id_serialized_name = modelId;
-    }
-
-    /**
-     * Sets the modelVersion.
-     *
-     * @param modelVersion the new modelVersion
-     */
-    public void setModelVersion(final String modelVersion) {
-      this.model_version_serialized_name = modelVersion;
-    }
-
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -2244,7 +2419,7 @@ public class IBMCompareComplyV1Models {
           Document newItem = (Document) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Document.class);
           newDocuments.add(newItem);
         }
-        ret.setDocuments(newDocuments);
+        ret.documents_serialized_name = newDocuments;
       }
 
       // calling custom deserializer for alignedElements
@@ -2257,7 +2432,7 @@ public class IBMCompareComplyV1Models {
           AlignedElement newItem = (AlignedElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AlignedElement.class);
           newAlignedElements.add(newItem);
         }
-        ret.setAlignedElements(newAlignedElements);
+        ret.aligned_elements_serialized_name = newAlignedElements;
       }
 
       // calling custom deserializer for unalignedElements
@@ -2270,7 +2445,7 @@ public class IBMCompareComplyV1Models {
           UnalignedElement newItem = (UnalignedElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), UnalignedElement.class);
           newUnalignedElements.add(newItem);
         }
-        ret.setUnalignedElements(newUnalignedElements);
+        ret.unaligned_elements_serialized_name = newUnalignedElements;
       }
 
       return ret;
@@ -2425,18 +2600,105 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
+   * The contract type identified in the input document.
+   */
+  public class ContractType extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    private String confidence_level_serialized_name;
+    private Location location_serialized_name;
+ 
+    /**
+     * Gets the text.
+     *
+     * The contract type.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the confidenceLevel.
+     *
+     * The confidence level in the identification of the termination date.
+     *
+     * @return the confidenceLevel
+     */
+    @AuraEnabled
+    public String getConfidenceLevel() {
+      return confidence_level_serialized_name;
+    }
+ 
+    /**
+     * Gets the location.
+     *
+     * The numeric location of the identified element in the document, represented with two integers labeled `begin` and
+     * `end`.
+     *
+     * @return the location
+     */
+    @AuraEnabled
+    public Location getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the confidenceLevel.
+     *
+     * @param confidenceLevel the new confidenceLevel
+     */
+    public void setConfidenceLevel(final String confidenceLevel) {
+      this.confidence_level_serialized_name = confidenceLevel;
+    }
+
+    /**
+     * Sets the location.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final Location location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ContractType ret = (ContractType) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for location
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      ret.setLocation(newLocation);
+
+      return ret;
+    }
+  }
+
+  /**
    * The convertToHtml options.
    */
   public class ConvertToHtmlOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile file;
     private String filename;
-    private String modelId;
     private String fileContentType;
+    private String model;
  
     /**
      * Gets the file.
      *
-     * The file to convert.
+     * The document to convert.
      *
      * @return the file
      */
@@ -2456,19 +2718,6 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
-     * Gets the modelId.
-     *
-     * The analysis model to be used by the service. For the `/v1/element_classification` and `/v1/comparison` methods,
-     * the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These defaults apply to the
-     * standalone methods as well as to the methods' use in batch-processing requests.
-     *
-     * @return the modelId
-     */
-    public String modelId() {
-      return modelId;
-    }
- 
-    /**
      * Gets the fileContentType.
      *
      * The content type of file.
@@ -2478,14 +2727,27 @@ public class IBMCompareComplyV1Models {
     public String fileContentType() {
       return fileContentType;
     }
+ 
+    /**
+     * Gets the model.
+     *
+     * The analysis model to be used by the service. For the **Element classification** and **Compare two documents**
+     * methods, the default is `contracts`. For the **Extract tables** method, the default is `tables`. These defaults
+     * apply to the standalone methods as well as to the methods' use in batch-processing requests.
+     *
+     * @return the model
+     */
+    public String model() {
+      return model;
+    }
 
     private ConvertToHtmlOptions(ConvertToHtmlOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.file, 'file cannot be null');
       IBMWatsonValidator.notNull(builder.filename, 'filename cannot be null');
       file = builder.file;
       filename = builder.filename;
-      modelId = builder.modelId;
       fileContentType = builder.fileContentType;
+      model = builder.model;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2506,14 +2768,14 @@ public class IBMCompareComplyV1Models {
   public class ConvertToHtmlOptionsBuilder extends IBMWatsonOptionsModel {
     private IBMWatsonFile file;
     private String filename;
-    private String modelId;
     private String fileContentType;
+    private String model;
 
     private ConvertToHtmlOptionsBuilder(ConvertToHtmlOptions convertToHtmlOptions) {
       file = convertToHtmlOptions.file;
       filename = convertToHtmlOptions.filename;
-      modelId = convertToHtmlOptions.modelId;
       fileContentType = convertToHtmlOptions.fileContentType;
+      model = convertToHtmlOptions.model;
       this.requestHeaders.putAll(convertToHtmlOptions.requestHeaders());
     }
 
@@ -2566,17 +2828,6 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Set the modelId.
-     *
-     * @param modelId the modelId
-     * @return the ConvertToHtmlOptions builder
-     */
-    public ConvertToHtmlOptionsBuilder modelId(String modelId) {
-      this.modelId = modelId;
-      return this;
-    }
-
-    /**
      * Set the fileContentType.
      *
      * @param fileContentType the fileContentType
@@ -2584,6 +2835,17 @@ public class IBMCompareComplyV1Models {
      */
     public ConvertToHtmlOptionsBuilder fileContentType(String fileContentType) {
       this.fileContentType = fileContentType;
+      return this;
+    }
+
+    /**
+     * Set the model.
+     *
+     * @param model the model
+     * @return the ConvertToHtmlOptions builder
+     */
+    public ConvertToHtmlOptionsBuilder model(String model) {
+      this.model = model;
       return this;
     }
 
@@ -2606,14 +2868,12 @@ public class IBMCompareComplyV1Models {
   public class CreateBatchOptions extends IBMWatsonOptionsModel {
     private String function;
     private IBMWatsonFile inputCredentialsFile;
-    private String inputCredentialsFilename;
     private String inputBucketLocation;
     private String inputBucketName;
     private IBMWatsonFile outputCredentialsFile;
-    private String outputCredentialsFilename;
     private String outputBucketLocation;
     private String outputBucketName;
-    private String modelId;
+    private String model;
  
     /**
      * Gets the function.
@@ -2636,17 +2896,6 @@ public class IBMCompareComplyV1Models {
      */
     public IBMWatsonFile inputCredentialsFile() {
       return inputCredentialsFile;
-    }
- 
-    /**
-     * Gets the inputCredentialsFilename.
-     *
-     * The filename for inputCredentialsFile.
-     *
-     * @return the inputCredentialsFilename
-     */
-    public String inputCredentialsFilename() {
-      return inputCredentialsFilename;
     }
  
     /**
@@ -2685,17 +2934,6 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
-     * Gets the outputCredentialsFilename.
-     *
-     * The filename for outputCredentialsFile.
-     *
-     * @return the outputCredentialsFilename
-     */
-    public String outputCredentialsFilename() {
-      return outputCredentialsFilename;
-    }
- 
-    /**
      * Gets the outputBucketLocation.
      *
      * The geographical location of the Cloud Object Storage output bucket as listed on the **Endpoint** tab of your
@@ -2719,16 +2957,16 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
-     * Gets the modelId.
+     * Gets the model.
      *
-     * The analysis model to be used by the service. For the `/v1/element_classification` and `/v1/comparison` methods,
-     * the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These defaults apply to the
-     * standalone methods as well as to the methods' use in batch-processing requests.
+     * The analysis model to be used by the service. For the **Element classification** and **Compare two documents**
+     * methods, the default is `contracts`. For the **Extract tables** method, the default is `tables`. These defaults
+     * apply to the standalone methods as well as to the methods' use in batch-processing requests.
      *
-     * @return the modelId
+     * @return the model
      */
-    public String modelId() {
-      return modelId;
+    public String model() {
+      return model;
     }
 
     private CreateBatchOptions(CreateBatchOptionsBuilder builder) {
@@ -2741,14 +2979,12 @@ public class IBMCompareComplyV1Models {
       IBMWatsonValidator.notNull(builder.outputBucketName, 'outputBucketName cannot be null');
       function = builder.function;
       inputCredentialsFile = builder.inputCredentialsFile;
-      inputCredentialsFilename = builder.inputCredentialsFilename;
       inputBucketLocation = builder.inputBucketLocation;
       inputBucketName = builder.inputBucketName;
       outputCredentialsFile = builder.outputCredentialsFile;
-      outputCredentialsFilename = builder.outputCredentialsFilename;
       outputBucketLocation = builder.outputBucketLocation;
       outputBucketName = builder.outputBucketName;
-      modelId = builder.modelId;
+      model = builder.model;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2769,26 +3005,22 @@ public class IBMCompareComplyV1Models {
   public class CreateBatchOptionsBuilder extends IBMWatsonOptionsModel {
     private String function;
     private IBMWatsonFile inputCredentialsFile;
-    private String inputCredentialsFilename;
     private String inputBucketLocation;
     private String inputBucketName;
     private IBMWatsonFile outputCredentialsFile;
-    private String outputCredentialsFilename;
     private String outputBucketLocation;
     private String outputBucketName;
-    private String modelId;
+    private String model;
 
     private CreateBatchOptionsBuilder(CreateBatchOptions createBatchOptions) {
       function = createBatchOptions.function;
       inputCredentialsFile = createBatchOptions.inputCredentialsFile;
-      inputCredentialsFilename = createBatchOptions.inputCredentialsFilename;
       inputBucketLocation = createBatchOptions.inputBucketLocation;
       inputBucketName = createBatchOptions.inputBucketName;
       outputCredentialsFile = createBatchOptions.outputCredentialsFile;
-      outputCredentialsFilename = createBatchOptions.outputCredentialsFilename;
       outputBucketLocation = createBatchOptions.outputBucketLocation;
       outputBucketName = createBatchOptions.outputBucketName;
-      modelId = createBatchOptions.modelId;
+      model = createBatchOptions.model;
       this.requestHeaders.putAll(createBatchOptions.requestHeaders());
     }
 
@@ -2851,17 +3083,6 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Set the inputCredentialsFilename.
-     *
-     * @param inputCredentialsFilename the inputCredentialsFilename
-     * @return the CreateBatchOptions builder
-     */
-    public CreateBatchOptionsBuilder inputCredentialsFilename(String inputCredentialsFilename) {
-      this.inputCredentialsFilename = inputCredentialsFilename;
-      return this;
-    }
-
-    /**
      * Set the inputBucketLocation.
      *
      * @param inputBucketLocation the inputBucketLocation
@@ -2895,17 +3116,6 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Set the outputCredentialsFilename.
-     *
-     * @param outputCredentialsFilename the outputCredentialsFilename
-     * @return the CreateBatchOptions builder
-     */
-    public CreateBatchOptionsBuilder outputCredentialsFilename(String outputCredentialsFilename) {
-      this.outputCredentialsFilename = outputCredentialsFilename;
-      return this;
-    }
-
-    /**
      * Set the outputBucketLocation.
      *
      * @param outputBucketLocation the outputBucketLocation
@@ -2928,13 +3138,13 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Set the modelId.
+     * Set the model.
      *
-     * @param modelId the modelId
+     * @param model the model
      * @return the CreateBatchOptions builder
      */
-    public CreateBatchOptionsBuilder modelId(String modelId) {
-      this.modelId = modelId;
+    public CreateBatchOptionsBuilder model(String model) {
+      this.model = model;
       return this;
     }
 
@@ -2956,7 +3166,7 @@ public class IBMCompareComplyV1Models {
    */
   public class DeleteFeedbackOptions extends IBMWatsonOptionsModel {
     private String feedbackId;
-    private String modelId;
+    private String model;
  
     /**
      * Gets the feedbackId.
@@ -2970,22 +3180,22 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
-     * Gets the modelId.
+     * Gets the model.
      *
-     * The analysis model to be used by the service. For the `/v1/element_classification` and `/v1/comparison` methods,
-     * the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These defaults apply to the
-     * standalone methods as well as to the methods' use in batch-processing requests.
+     * The analysis model to be used by the service. For the **Element classification** and **Compare two documents**
+     * methods, the default is `contracts`. For the **Extract tables** method, the default is `tables`. These defaults
+     * apply to the standalone methods as well as to the methods' use in batch-processing requests.
      *
-     * @return the modelId
+     * @return the model
      */
-    public String modelId() {
-      return modelId;
+    public String model() {
+      return model;
     }
 
     private DeleteFeedbackOptions(DeleteFeedbackOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.feedbackId, 'feedbackId cannot be empty');
       feedbackId = builder.feedbackId;
-      modelId = builder.modelId;
+      model = builder.model;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3005,11 +3215,11 @@ public class IBMCompareComplyV1Models {
    */
   public class DeleteFeedbackOptionsBuilder extends IBMWatsonOptionsModel {
     private String feedbackId;
-    private String modelId;
+    private String model;
 
     private DeleteFeedbackOptionsBuilder(DeleteFeedbackOptions deleteFeedbackOptions) {
       feedbackId = deleteFeedbackOptions.feedbackId;
-      modelId = deleteFeedbackOptions.modelId;
+      model = deleteFeedbackOptions.model;
       this.requestHeaders.putAll(deleteFeedbackOptions.requestHeaders());
     }
 
@@ -3049,13 +3259,13 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Set the modelId.
+     * Set the model.
      *
-     * @param modelId the modelId
+     * @param model the model
      * @return the DeleteFeedbackOptions builder
      */
-    public DeleteFeedbackOptionsBuilder modelId(String modelId) {
-      this.modelId = modelId;
+    public DeleteFeedbackOptionsBuilder model(String model) {
+      this.model = model;
       return this;
     }
 
@@ -3325,7 +3535,7 @@ public class IBMCompareComplyV1Models {
           SectionTitles newItem = (SectionTitles) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SectionTitles.class);
           newSectionTitles.add(newItem);
         }
-        ret.setSectionTitles(newSectionTitles);
+        ret.section_titles_serialized_name = newSectionTitles;
       }
 
       // calling custom deserializer for leadingSentences
@@ -3338,7 +3548,7 @@ public class IBMCompareComplyV1Models {
           LeadingSentence newItem = (LeadingSentence) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LeadingSentence.class);
           newLeadingSentences.add(newItem);
         }
-        ret.setLeadingSentences(newLeadingSentences);
+        ret.leading_sentences_serialized_name = newLeadingSentences;
       }
 
       return ret;
@@ -3674,7 +3884,7 @@ public class IBMCompareComplyV1Models {
           TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
           newTypes.add(newItem);
         }
-        ret.setTypes(newTypes);
+        ret.types_serialized_name = newTypes;
       }
 
       // calling custom deserializer for categories
@@ -3687,7 +3897,7 @@ public class IBMCompareComplyV1Models {
           Category newItem = (Category) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
           newCategories.add(newItem);
         }
-        ret.setCategories(newCategories);
+        ret.categories_serialized_name = newCategories;
       }
 
       // calling custom deserializer for attributes
@@ -3700,7 +3910,7 @@ public class IBMCompareComplyV1Models {
           Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
           newAttributes.add(newItem);
         }
-        ret.setAttributes(newAttributes);
+        ret.attributes_serialized_name = newAttributes;
       }
 
       return ret;
@@ -3774,8 +3984,8 @@ public class IBMCompareComplyV1Models {
     private String document_label_serialized_name;
     private String text_serialized_name;
     private Location location_serialized_name;
-    private List<TypeLabel> types_serialized_name;
-    private List<Category> categories_serialized_name;
+    private List<TypeLabelComparison> types_serialized_name;
+    private List<CategoryComparison> categories_serialized_name;
     private List<Attribute> attributes_serialized_name;
  
     /**
@@ -3794,7 +4004,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the text.
      *
-     * The text of the element.
+     * The contents of the element.
      *
      * @return the text
      */
@@ -3819,12 +4029,12 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the types.
      *
-     * Description of the action specified by the element  and whom it affects.
+     * Description of the action specified by the element and whom it affects.
      *
      * @return the types
      */
     @AuraEnabled
-    public List<TypeLabel> getTypes() {
+    public List<TypeLabelComparison> getTypes() {
       return types_serialized_name;
     }
  
@@ -3836,7 +4046,7 @@ public class IBMCompareComplyV1Models {
      * @return the categories
      */
     @AuraEnabled
-    public List<Category> getCategories() {
+    public List<CategoryComparison> getCategories() {
       return categories_serialized_name;
     }
  
@@ -3884,7 +4094,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param types the new types
      */
-    public void setTypes(final List<TypeLabel> types) {
+    public void setTypes(final List<TypeLabelComparison> types) {
       this.types_serialized_name = types;
     }
 
@@ -3893,7 +4103,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param categories the new categories
      */
-    public void setCategories(final List<Category> categories) {
+    public void setCategories(final List<CategoryComparison> categories) {
       this.categories_serialized_name = categories;
     }
 
@@ -3918,29 +4128,29 @@ public class IBMCompareComplyV1Models {
       ret.setLocation(newLocation);
 
       // calling custom deserializer for types
-      List<TypeLabel> newTypes = new List<TypeLabel>();
-      List<TypeLabel> deserializedTypes = ret.getTypes();
+      List<TypeLabelComparison> newTypes = new List<TypeLabelComparison>();
+      List<TypeLabelComparison> deserializedTypes = ret.getTypes();
       if (deserializedTypes != null) {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
-          TypeLabel currentItem = ret.getTypes().get(i);
+          TypeLabelComparison currentItem = ret.getTypes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('types_serialized_name');
-          TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
+          TypeLabelComparison newItem = (TypeLabelComparison) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabelComparison.class);
           newTypes.add(newItem);
         }
-        ret.setTypes(newTypes);
+        ret.types_serialized_name = newTypes;
       }
 
       // calling custom deserializer for categories
-      List<Category> newCategories = new List<Category>();
-      List<Category> deserializedCategories = ret.getCategories();
+      List<CategoryComparison> newCategories = new List<CategoryComparison>();
+      List<CategoryComparison> deserializedCategories = ret.getCategories();
       if (deserializedCategories != null) {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
-          Category currentItem = ret.getCategories().get(i);
+          CategoryComparison currentItem = ret.getCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('categories_serialized_name');
-          Category newItem = (Category) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
+          CategoryComparison newItem = (CategoryComparison) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoryComparison.class);
           newCategories.add(newItem);
         }
-        ret.setCategories(newCategories);
+        ret.categories_serialized_name = newCategories;
       }
 
       // calling custom deserializer for attributes
@@ -3953,7 +4163,7 @@ public class IBMCompareComplyV1Models {
           Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
           newAttributes.add(newItem);
         }
-        ret.setAttributes(newAttributes);
+        ret.attributes_serialized_name = newAttributes;
       }
 
       return ret;
@@ -3965,43 +4175,18 @@ public class IBMCompareComplyV1Models {
    */
   public class ExtractTablesOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile file;
-    private String filename;
-    private String modelId;
     private String fileContentType;
+    private String model;
  
     /**
      * Gets the file.
      *
-     * The file on which to run table extraction.
+     * The document on which to run table extraction.
      *
      * @return the file
      */
     public IBMWatsonFile file() {
       return file;
-    }
- 
-    /**
-     * Gets the filename.
-     *
-     * The filename for file.
-     *
-     * @return the filename
-     */
-    public String filename() {
-      return filename;
-    }
- 
-    /**
-     * Gets the modelId.
-     *
-     * The analysis model to be used by the service. For the `/v1/element_classification` and `/v1/comparison` methods,
-     * the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These defaults apply to the
-     * standalone methods as well as to the methods' use in batch-processing requests.
-     *
-     * @return the modelId
-     */
-    public String modelId() {
-      return modelId;
     }
  
     /**
@@ -4014,13 +4199,25 @@ public class IBMCompareComplyV1Models {
     public String fileContentType() {
       return fileContentType;
     }
+ 
+    /**
+     * Gets the model.
+     *
+     * The analysis model to be used by the service. For the **Element classification** and **Compare two documents**
+     * methods, the default is `contracts`. For the **Extract tables** method, the default is `tables`. These defaults
+     * apply to the standalone methods as well as to the methods' use in batch-processing requests.
+     *
+     * @return the model
+     */
+    public String model() {
+      return model;
+    }
 
     private ExtractTablesOptions(ExtractTablesOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.file, 'file cannot be null');
       file = builder.file;
-      filename = builder.filename;
-      modelId = builder.modelId;
       fileContentType = builder.fileContentType;
+      model = builder.model;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -4040,15 +4237,13 @@ public class IBMCompareComplyV1Models {
    */
   public class ExtractTablesOptionsBuilder extends IBMWatsonOptionsModel {
     private IBMWatsonFile file;
-    private String filename;
-    private String modelId;
     private String fileContentType;
+    private String model;
 
     private ExtractTablesOptionsBuilder(ExtractTablesOptions extractTablesOptions) {
       file = extractTablesOptions.file;
-      filename = extractTablesOptions.filename;
-      modelId = extractTablesOptions.modelId;
       fileContentType = extractTablesOptions.fileContentType;
+      model = extractTablesOptions.model;
       this.requestHeaders.putAll(extractTablesOptions.requestHeaders());
     }
 
@@ -4088,28 +4283,6 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Set the filename.
-     *
-     * @param filename the filename
-     * @return the ExtractTablesOptions builder
-     */
-    public ExtractTablesOptionsBuilder filename(String filename) {
-      this.filename = filename;
-      return this;
-    }
-
-    /**
-     * Set the modelId.
-     *
-     * @param modelId the modelId
-     * @return the ExtractTablesOptions builder
-     */
-    public ExtractTablesOptionsBuilder modelId(String modelId) {
-      this.modelId = modelId;
-      return this;
-    }
-
-    /**
      * Set the fileContentType.
      *
      * @param fileContentType the fileContentType
@@ -4117,6 +4290,17 @@ public class IBMCompareComplyV1Models {
      */
     public ExtractTablesOptionsBuilder fileContentType(String fileContentType) {
       this.fileContentType = fileContentType;
+      return this;
+    }
+
+    /**
+     * Set the model.
+     *
+     * @param model the model
+     * @return the ExtractTablesOptions builder
+     */
+    public ExtractTablesOptionsBuilder model(String model) {
+      this.model = model;
       return this;
     }
 
@@ -4588,7 +4772,7 @@ public class IBMCompareComplyV1Models {
           GetFeedback newItem = (GetFeedback) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), GetFeedback.class);
           newFeedback.add(newItem);
         }
-        ret.setFeedback(newFeedback);
+        ret.feedback_serialized_name = newFeedback;
       }
 
       return ret;
@@ -4734,7 +4918,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the batchId.
      *
-     * The ID of the batch-processing request whose information you want to retrieve.
+     * The ID of the batch-processing job whose information you want to retrieve.
      *
      * @return the batchId
      */
@@ -4931,7 +5115,7 @@ public class IBMCompareComplyV1Models {
    */
   public class GetFeedbackOptions extends IBMWatsonOptionsModel {
     private String feedbackId;
-    private String modelId;
+    private String model;
  
     /**
      * Gets the feedbackId.
@@ -4945,22 +5129,22 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
-     * Gets the modelId.
+     * Gets the model.
      *
-     * The analysis model to be used by the service. For the `/v1/element_classification` and `/v1/comparison` methods,
-     * the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These defaults apply to the
-     * standalone methods as well as to the methods' use in batch-processing requests.
+     * The analysis model to be used by the service. For the **Element classification** and **Compare two documents**
+     * methods, the default is `contracts`. For the **Extract tables** method, the default is `tables`. These defaults
+     * apply to the standalone methods as well as to the methods' use in batch-processing requests.
      *
-     * @return the modelId
+     * @return the model
      */
-    public String modelId() {
-      return modelId;
+    public String model() {
+      return model;
     }
 
     private GetFeedbackOptions(GetFeedbackOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.feedbackId, 'feedbackId cannot be empty');
       feedbackId = builder.feedbackId;
-      modelId = builder.modelId;
+      model = builder.model;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -4980,11 +5164,11 @@ public class IBMCompareComplyV1Models {
    */
   public class GetFeedbackOptionsBuilder extends IBMWatsonOptionsModel {
     private String feedbackId;
-    private String modelId;
+    private String model;
 
     private GetFeedbackOptionsBuilder(GetFeedbackOptions getFeedbackOptions) {
       feedbackId = getFeedbackOptions.feedbackId;
-      modelId = getFeedbackOptions.modelId;
+      model = getFeedbackOptions.model;
       this.requestHeaders.putAll(getFeedbackOptions.requestHeaders());
     }
 
@@ -5024,13 +5208,13 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Set the modelId.
+     * Set the model.
      *
-     * @param modelId the modelId
+     * @param model the model
      * @return the GetFeedbackOptions builder
      */
-    public GetFeedbackOptionsBuilder modelId(String modelId) {
-      this.modelId = modelId;
+    public GetFeedbackOptionsBuilder model(String model) {
+      this.model = model;
       return this;
     }
 
@@ -5168,6 +5352,161 @@ public class IBMCompareComplyV1Models {
       }
 
       HTMLReturn ret = (HTMLReturn) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * A key in a key-value pair.
+   */
+  public class Key extends IBMWatsonGenericModel {
+    private String cell_id_serialized_name;
+    private Location location_serialized_name;
+    private String text_serialized_name;
+ 
+    /**
+     * Gets the cellId.
+     *
+     * The unique ID of the key in the table.
+     *
+     * @return the cellId
+     */
+    @AuraEnabled
+    public String getCellId() {
+      return cell_id_serialized_name;
+    }
+ 
+    /**
+     * Gets the location.
+     *
+     * The numeric location of the identified element in the document, represented with two integers labeled `begin` and
+     * `end`.
+     *
+     * @return the location
+     */
+    @AuraEnabled
+    public Location getLocation() {
+      return location_serialized_name;
+    }
+ 
+    /**
+     * Gets the text.
+     *
+     * The text content of the table cell without HTML markup.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+
+    /**
+     * Sets the cellId.
+     *
+     * @param cellId the new cellId
+     */
+    public void setCellId(final String cellId) {
+      this.cell_id_serialized_name = cellId;
+    }
+
+    /**
+     * Sets the location.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final Location location) {
+      this.location_serialized_name = location;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Key ret = (Key) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for location
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      ret.setLocation(newLocation);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Key-value pairs detected across cell boundaries.
+   */
+  public class KeyValuePair extends IBMWatsonGenericModel {
+    private Key key_serialized_name;
+    private Value value_serialized_name;
+ 
+    /**
+     * Gets the key.
+     *
+     * A key in a key-value pair.
+     *
+     * @return the key
+     */
+    @AuraEnabled
+    public Key getKey() {
+      return key_serialized_name;
+    }
+ 
+    /**
+     * Gets the value.
+     *
+     * A value in a key-value pair.
+     *
+     * @return the value
+     */
+    @AuraEnabled
+    public Value getValue() {
+      return value_serialized_name;
+    }
+
+    /**
+     * Sets the key.
+     *
+     * @param key the new key
+     */
+    public void setKey(final Key key) {
+      this.key_serialized_name = key;
+    }
+
+    /**
+     * Sets the value.
+     *
+     * @param value the new value
+     */
+    public void setValue(final Value value) {
+      this.value_serialized_name = value;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      KeyValuePair ret = (KeyValuePair) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for key
+      Key newKey = (Key) new Key().deserialize(JSON.serialize(ret.getKey()), (Map<String, Object>) jsonMap.get('key_serialized_name'), Key.class);
+      ret.setKey(newKey);
+
+      // calling custom deserializer for value
+      Value newValue = (Value) new Value().deserialize(JSON.serialize(ret.getValue()), (Map<String, Object>) jsonMap.get('value_serialized_name'), Value.class);
+      ret.setValue(newValue);
 
       return ret;
     }
@@ -5327,7 +5666,7 @@ public class IBMCompareComplyV1Models {
           ElementLocations newItem = (ElementLocations) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementLocations.class);
           newElementLocations.add(newItem);
         }
-        ret.setElementLocations(newElementLocations);
+        ret.element_locations_serialized_name = newElementLocations;
       }
 
       return ret;
@@ -6078,7 +6417,7 @@ public class IBMCompareComplyV1Models {
           TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
           newTypes.add(newItem);
         }
-        ret.setTypes(newTypes);
+        ret.types_serialized_name = newTypes;
       }
 
       // calling custom deserializer for categories
@@ -6091,7 +6430,7 @@ public class IBMCompareComplyV1Models {
           Category newItem = (Category) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
           newCategories.add(newItem);
         }
-        ret.setCategories(newCategories);
+        ret.categories_serialized_name = newCategories;
       }
 
       return ret;
@@ -6356,7 +6695,7 @@ public class IBMCompareComplyV1Models {
           Address newItem = (Address) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Address.class);
           newAddresses.add(newItem);
         }
-        ret.setAddresses(newAddresses);
+        ret.addresses_serialized_name = newAddresses;
       }
 
       // calling custom deserializer for contacts
@@ -6369,8 +6708,123 @@ public class IBMCompareComplyV1Models {
           Contact newItem = (Contact) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Contact.class);
           newContacts.add(newItem);
         }
-        ret.setContacts(newContacts);
+        ret.contacts_serialized_name = newContacts;
       }
+
+      return ret;
+    }
+  }
+
+  /**
+   * An array of values, each being the `id` value of a row header that is applicable to this body cell.
+   */
+  public class RowHeaderIds extends IBMWatsonGenericModel {
+    private String id_serialized_name;
+ 
+    /**
+     * Gets the id.
+     *
+     * The `id` values of a row header.
+     *
+     * @return the id
+     */
+    @AuraEnabled
+    public String getId() {
+      return id_serialized_name;
+    }
+
+    /**
+     * Sets the id.
+     *
+     * @param id the new id
+     */
+    public void setId(final String id) {
+      this.id_serialized_name = id;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      RowHeaderIds ret = (RowHeaderIds) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An array of values, each being the `text` value of a row header that is applicable to this body cell.
+   */
+  public class RowHeaderTexts extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+ 
+    /**
+     * Gets the text.
+     *
+     * The `text` value of a row header.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      RowHeaderTexts ret = (RowHeaderTexts) super.deserialize(jsonString, jsonMap, classType);
+
+      return ret;
+    }
+  }
+
+  /**
+   * If you provide customization input, the normalized version of the row header texts according to the customization;
+   * otherwise, the same value as `row_header_texts`.
+   */
+  public class RowHeaderTextsNormalized extends IBMWatsonGenericModel {
+    private String text_normalized_serialized_name;
+ 
+    /**
+     * Gets the textNormalized.
+     *
+     * The normalized version of a row header text.
+     *
+     * @return the textNormalized
+     */
+    @AuraEnabled
+    public String getTextNormalized() {
+      return text_normalized_serialized_name;
+    }
+
+    /**
+     * Sets the textNormalized.
+     *
+     * @param textNormalized the new textNormalized
+     */
+    public void setTextNormalized(final String textNormalized) {
+      this.text_normalized_serialized_name = textNormalized;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      RowHeaderTextsNormalized ret = (RowHeaderTextsNormalized) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -6392,8 +6846,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the cellId.
      *
-     * A string value in the format `rowHeader-x-y`, where `x` and `y` are the begin and end offsets of this row header
-     * cell in the input document.
+     * The unique ID of the cell in the current table.
      *
      * @return the cellId
      */
@@ -6758,7 +7211,7 @@ public class IBMCompareComplyV1Models {
           ElementLocations newItem = (ElementLocations) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ElementLocations.class);
           newElementLocations.add(newItem);
         }
-        ret.setElementLocations(newElementLocations);
+        ret.element_locations_serialized_name = newElementLocations;
       }
 
       return ret;
@@ -6830,7 +7283,7 @@ public class IBMCompareComplyV1Models {
    */
   public class TableHeaders extends IBMWatsonGenericModel {
     private String cell_id_serialized_name;
-    private Location location_serialized_name;
+    private IBMWatsonMapModel location_serialized_name;
     private String text_serialized_name;
     private Long row_index_begin_serialized_name;
     private Long row_index_end_serialized_name;
@@ -6840,8 +7293,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the cellId.
      *
-     * String value in the format `tableHeader-x-y` where `x` and `y` are the `begin` and `end` offsets, respectfully,
-     * of the cell value in the input document.
+     * The unique ID of the cell in the current table.
      *
      * @return the cellId
      */
@@ -6859,7 +7311,7 @@ public class IBMCompareComplyV1Models {
      * @return the location
      */
     @AuraEnabled
-    public Location getLocation() {
+    public IBMWatsonMapModel getLocation() {
       return location_serialized_name;
     }
  
@@ -6937,7 +7389,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param location the new location
      */
-    public void setLocation(final Location location) {
+    public void setLocation(final IBMWatsonMapModel location) {
       this.location_serialized_name = location;
     }
 
@@ -6994,7 +7446,7 @@ public class IBMCompareComplyV1Models {
       TableHeaders ret = (TableHeaders) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
-      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      IBMWatsonMapModel newLocation = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), IBMWatsonMapModel.class);
       ret.setLocation(newLocation);
 
       return ret;
@@ -7115,7 +7567,7 @@ public class IBMCompareComplyV1Models {
           Tables newItem = (Tables) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Tables.class);
           newTables.add(newItem);
         }
-        ret.setTables(newTables);
+        ret.tables_serialized_name = newTables;
       }
 
       return ret;
@@ -7132,6 +7584,7 @@ public class IBMCompareComplyV1Models {
     private List<TableHeaders> table_headers_serialized_name;
     private List<RowHeaders> row_headers_serialized_name;
     private List<ColumnHeaders> column_headers_serialized_name;
+    private List<KeyValuePair> key_value_pairs_serialized_name;
     private List<BodyCells> body_cells_serialized_name;
  
     /**
@@ -7210,6 +7663,18 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
+     * Gets the keyValuePairs.
+     *
+     * An array of key-value pairs identified in the current table.
+     *
+     * @return the keyValuePairs
+     */
+    @AuraEnabled
+    public List<KeyValuePair> getKeyValuePairs() {
+      return key_value_pairs_serialized_name;
+    }
+ 
+    /**
      * Gets the bodyCells.
      *
      * An array of cells that are neither table header nor column header nor row header cells, of the current table with
@@ -7277,6 +7742,15 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
+     * Sets the keyValuePairs.
+     *
+     * @param keyValuePairs the new keyValuePairs
+     */
+    public void setKeyValuePairs(final List<KeyValuePair> keyValuePairs) {
+      this.key_value_pairs_serialized_name = keyValuePairs;
+    }
+
+    /**
      * Sets the bodyCells.
      *
      * @param bodyCells the new bodyCells
@@ -7310,7 +7784,7 @@ public class IBMCompareComplyV1Models {
           TableHeaders newItem = (TableHeaders) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TableHeaders.class);
           newTableHeaders.add(newItem);
         }
-        ret.setTableHeaders(newTableHeaders);
+        ret.table_headers_serialized_name = newTableHeaders;
       }
 
       // calling custom deserializer for rowHeaders
@@ -7323,7 +7797,7 @@ public class IBMCompareComplyV1Models {
           RowHeaders newItem = (RowHeaders) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RowHeaders.class);
           newRowHeaders.add(newItem);
         }
-        ret.setRowHeaders(newRowHeaders);
+        ret.row_headers_serialized_name = newRowHeaders;
       }
 
       // calling custom deserializer for columnHeaders
@@ -7336,7 +7810,20 @@ public class IBMCompareComplyV1Models {
           ColumnHeaders newItem = (ColumnHeaders) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ColumnHeaders.class);
           newColumnHeaders.add(newItem);
         }
-        ret.setColumnHeaders(newColumnHeaders);
+        ret.column_headers_serialized_name = newColumnHeaders;
+      }
+
+      // calling custom deserializer for keyValuePairs
+      List<KeyValuePair> newKeyValuePairs = new List<KeyValuePair>();
+      List<KeyValuePair> deserializedKeyValuePairs = ret.getKeyValuePairs();
+      if (deserializedKeyValuePairs != null) {
+        for (Integer i = 0; i < deserializedKeyValuePairs.size(); i++) {
+          KeyValuePair currentItem = ret.getKeyValuePairs().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('key_value_pairs_serialized_name');
+          KeyValuePair newItem = (KeyValuePair) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), KeyValuePair.class);
+          newKeyValuePairs.add(newItem);
+        }
+        ret.key_value_pairs_serialized_name = newKeyValuePairs;
       }
 
       // calling custom deserializer for bodyCells
@@ -7349,7 +7836,7 @@ public class IBMCompareComplyV1Models {
           BodyCells newItem = (BodyCells) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), BodyCells.class);
           newBodyCells.add(newItem);
         }
-        ret.setBodyCells(newBodyCells);
+        ret.body_cells_serialized_name = newBodyCells;
       }
 
       return ret;
@@ -7509,21 +7996,64 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
+   * Identification of a specific type.
+   */
+  public class TypeLabelComparison extends IBMWatsonGenericModel {
+    private Label label_serialized_name;
+ 
+    /**
+     * Gets the label.
+     *
+     * A pair of `nature` and `party` objects. The `nature` object identifies the effect of the element on the
+     * identified `party`, and the `party` object identifies the affected party.
+     *
+     * @return the label
+     */
+    @AuraEnabled
+    public Label getLabel() {
+      return label_serialized_name;
+    }
+
+    /**
+     * Sets the label.
+     *
+     * @param label the new label
+     */
+    public void setLabel(final Label label) {
+      this.label_serialized_name = label;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      TypeLabelComparison ret = (TypeLabelComparison) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for label
+      Label newLabel = (Label) new Label().deserialize(JSON.serialize(ret.getLabel()), (Map<String, Object>) jsonMap.get('label_serialized_name'), Label.class);
+      ret.setLabel(newLabel);
+
+      return ret;
+    }
+  }
+
+  /**
    * Element that does not align semantically between two compared documents.
    */
   public class UnalignedElement extends IBMWatsonGenericModel {
     private String document_label_serialized_name;
     private Location location_serialized_name;
     private String text_serialized_name;
-    private List<TypeLabel> types_serialized_name;
-    private List<Category> categories_serialized_name;
+    private List<TypeLabelComparison> types_serialized_name;
+    private List<CategoryComparison> categories_serialized_name;
     private List<Attribute> attributes_serialized_name;
  
     /**
      * Gets the documentLabel.
      *
      * The label assigned to the document by the value of the `file_1_label` or `file_2_label` parameters on the
-     * `/v1/compare` method.
+     * **Compare two documents** method.
      *
      * @return the documentLabel
      */
@@ -7565,7 +8095,7 @@ public class IBMCompareComplyV1Models {
      * @return the types
      */
     @AuraEnabled
-    public List<TypeLabel> getTypes() {
+    public List<TypeLabelComparison> getTypes() {
       return types_serialized_name;
     }
  
@@ -7577,7 +8107,7 @@ public class IBMCompareComplyV1Models {
      * @return the categories
      */
     @AuraEnabled
-    public List<Category> getCategories() {
+    public List<CategoryComparison> getCategories() {
       return categories_serialized_name;
     }
  
@@ -7625,7 +8155,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param types the new types
      */
-    public void setTypes(final List<TypeLabel> types) {
+    public void setTypes(final List<TypeLabelComparison> types) {
       this.types_serialized_name = types;
     }
 
@@ -7634,7 +8164,7 @@ public class IBMCompareComplyV1Models {
      *
      * @param categories the new categories
      */
-    public void setCategories(final List<Category> categories) {
+    public void setCategories(final List<CategoryComparison> categories) {
       this.categories_serialized_name = categories;
     }
 
@@ -7659,29 +8189,29 @@ public class IBMCompareComplyV1Models {
       ret.setLocation(newLocation);
 
       // calling custom deserializer for types
-      List<TypeLabel> newTypes = new List<TypeLabel>();
-      List<TypeLabel> deserializedTypes = ret.getTypes();
+      List<TypeLabelComparison> newTypes = new List<TypeLabelComparison>();
+      List<TypeLabelComparison> deserializedTypes = ret.getTypes();
       if (deserializedTypes != null) {
         for (Integer i = 0; i < deserializedTypes.size(); i++) {
-          TypeLabel currentItem = ret.getTypes().get(i);
+          TypeLabelComparison currentItem = ret.getTypes().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('types_serialized_name');
-          TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
+          TypeLabelComparison newItem = (TypeLabelComparison) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabelComparison.class);
           newTypes.add(newItem);
         }
-        ret.setTypes(newTypes);
+        ret.types_serialized_name = newTypes;
       }
 
       // calling custom deserializer for categories
-      List<Category> newCategories = new List<Category>();
-      List<Category> deserializedCategories = ret.getCategories();
+      List<CategoryComparison> newCategories = new List<CategoryComparison>();
+      List<CategoryComparison> deserializedCategories = ret.getCategories();
       if (deserializedCategories != null) {
         for (Integer i = 0; i < deserializedCategories.size(); i++) {
-          Category currentItem = ret.getCategories().get(i);
+          CategoryComparison currentItem = ret.getCategories().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('categories_serialized_name');
-          Category newItem = (Category) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
+          CategoryComparison newItem = (CategoryComparison) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoryComparison.class);
           newCategories.add(newItem);
         }
-        ret.setCategories(newCategories);
+        ret.categories_serialized_name = newCategories;
       }
 
       // calling custom deserializer for attributes
@@ -7694,7 +8224,7 @@ public class IBMCompareComplyV1Models {
           Attribute newItem = (Attribute) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Attribute.class);
           newAttributes.add(newItem);
         }
-        ret.setAttributes(newAttributes);
+        ret.attributes_serialized_name = newAttributes;
       }
 
       return ret;
@@ -7707,12 +8237,12 @@ public class IBMCompareComplyV1Models {
   public class UpdateBatchOptions extends IBMWatsonOptionsModel {
     private String batchId;
     private String action;
-    private String modelId;
+    private String model;
  
     /**
      * Gets the batchId.
      *
-     * The ID of the batch-processing request you want to update.
+     * The ID of the batch-processing job you want to update.
      *
      * @return the batchId
      */
@@ -7723,7 +8253,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the action.
      *
-     * The action you want to perform on the specified batch-processing request.
+     * The action you want to perform on the specified batch-processing job.
      *
      * @return the action
      */
@@ -7732,16 +8262,16 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
-     * Gets the modelId.
+     * Gets the model.
      *
-     * The analysis model to be used by the service. For the `/v1/element_classification` and `/v1/comparison` methods,
-     * the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These defaults apply to the
-     * standalone methods as well as to the methods' use in batch-processing requests.
+     * The analysis model to be used by the service. For the **Element classification** and **Compare two documents**
+     * methods, the default is `contracts`. For the **Extract tables** method, the default is `tables`. These defaults
+     * apply to the standalone methods as well as to the methods' use in batch-processing requests.
      *
-     * @return the modelId
+     * @return the model
      */
-    public String modelId() {
-      return modelId;
+    public String model() {
+      return model;
     }
 
     private UpdateBatchOptions(UpdateBatchOptionsBuilder builder) {
@@ -7749,7 +8279,7 @@ public class IBMCompareComplyV1Models {
       IBMWatsonValidator.notNull(builder.action, 'action cannot be null');
       batchId = builder.batchId;
       action = builder.action;
-      modelId = builder.modelId;
+      model = builder.model;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7770,12 +8300,12 @@ public class IBMCompareComplyV1Models {
   public class UpdateBatchOptionsBuilder extends IBMWatsonOptionsModel {
     private String batchId;
     private String action;
-    private String modelId;
+    private String model;
 
     private UpdateBatchOptionsBuilder(UpdateBatchOptions updateBatchOptions) {
       batchId = updateBatchOptions.batchId;
       action = updateBatchOptions.action;
-      modelId = updateBatchOptions.modelId;
+      model = updateBatchOptions.model;
       this.requestHeaders.putAll(updateBatchOptions.requestHeaders());
     }
 
@@ -7828,13 +8358,13 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Set the modelId.
+     * Set the model.
      *
-     * @param modelId the modelId
+     * @param model the model
      * @return the UpdateBatchOptions builder
      */
-    public UpdateBatchOptionsBuilder modelId(String modelId) {
-      this.modelId = modelId;
+    public UpdateBatchOptionsBuilder model(String model) {
+      this.model = model;
       return this;
     }
 
@@ -7989,7 +8519,7 @@ public class IBMCompareComplyV1Models {
           TypeLabel newItem = (TypeLabel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TypeLabel.class);
           newTypes.add(newItem);
         }
-        ret.setTypes(newTypes);
+        ret.types_serialized_name = newTypes;
       }
 
       // calling custom deserializer for categories
@@ -8002,8 +8532,95 @@ public class IBMCompareComplyV1Models {
           Category newItem = (Category) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Category.class);
           newCategories.add(newItem);
         }
-        ret.setCategories(newCategories);
+        ret.categories_serialized_name = newCategories;
       }
+
+      return ret;
+    }
+  }
+
+  /**
+   * A value in a key-value pair.
+   */
+  public class Value extends IBMWatsonGenericModel {
+    private String cell_id_serialized_name;
+    private Location location_serialized_name;
+    private String text_serialized_name;
+ 
+    /**
+     * Gets the cellId.
+     *
+     * The unique ID of the value in the table.
+     *
+     * @return the cellId
+     */
+    @AuraEnabled
+    public String getCellId() {
+      return cell_id_serialized_name;
+    }
+ 
+    /**
+     * Gets the location.
+     *
+     * The numeric location of the identified element in the document, represented with two integers labeled `begin` and
+     * `end`.
+     *
+     * @return the location
+     */
+    @AuraEnabled
+    public Location getLocation() {
+      return location_serialized_name;
+    }
+ 
+    /**
+     * Gets the text.
+     *
+     * The text content of the table cell without HTML markup.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+
+    /**
+     * Sets the cellId.
+     *
+     * @param cellId the new cellId
+     */
+    public void setCellId(final String cellId) {
+      this.cell_id_serialized_name = cellId;
+    }
+
+    /**
+     * Sets the location.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final Location location) {
+      this.location_serialized_name = location;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Value ret = (Value) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for location
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      ret.setLocation(newLocation);
 
       return ret;
     }
