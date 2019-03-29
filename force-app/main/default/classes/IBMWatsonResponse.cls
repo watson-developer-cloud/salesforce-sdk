@@ -54,12 +54,12 @@ public with sharing class IBMWatsonResponse {
     try {
       Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(errorResponse);
       if (responseMap.containsKey(ERRORS_KEY)) {
-        List<Object> errorList = (List<Object>) responseMap.get(ERRORS_KEY);
-        error = (String) errorList[0].get(MESSAGE_STRING);
+        List<Map<String, String>> errorList = (List<Map<String, String>>) responseMap.get(ERRORS_KEY);
+        error = errorList[0].get(MESSAGE_STRING);
       } else if (responseMap.containsKey(ERROR_STRING)) {
-        error = (String) jsonObject.get(ERROR_STRING);
+        error = (String) responseMap.get(ERROR_STRING);
       } else if (responseMap.containsKey(MESSAGE_STRING)) {
-        error = (String) jsonObject.get(MESSAGE_STRING);
+        error = (String) responseMap.get(MESSAGE_STRING);
       }
     } catch (Exception e) {
       // Ignore any kind of exception parsing the json and use fallback String version of response
