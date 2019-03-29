@@ -424,7 +424,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * Webpage metadata, such as the author and the title of the page.
    */
-  public class AnalysisResultsMetadata {
+  public class AnalysisResultsMetadata extends IBMWatsonResponseModel {
     private List<Author> authors_serialized_name;
     private String publication_date_serialized_name;
     private String title_serialized_name;
@@ -536,7 +536,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * API usage information for the request.
    */
-  public class AnalysisResultsUsage {
+  public class AnalysisResultsUsage extends IBMWatsonResponseModel {
     private Long features_serialized_name;
     private Long text_characters_serialized_name;
     private Long text_units_serialized_name;
@@ -3999,7 +3999,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * The extracted action from the sentence.
    */
-  public class SemanticRolesResultAction {
+  public class SemanticRolesResultAction extends IBMWatsonResponseModel {
     private String text_serialized_name;
     private String normalized_serialized_name;
     private SemanticRolesVerb verb_serialized_name;
@@ -4067,7 +4067,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * The extracted object from the sentence.
    */
-  public class SemanticRolesResultObject {
+  public class SemanticRolesResultObject extends IBMWatsonResponseModel {
     private String text_serialized_name;
     private List<SemanticRolesKeyword> keywords_serialized_name;
  
@@ -4116,7 +4116,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * The extracted subject from the sentence.
    */
-  public class SemanticRolesResultSubject {
+  public class SemanticRolesResultSubject extends IBMWatsonResponseModel {
     private String text_serialized_name;
     private List<SemanticRolesEntity> entities_serialized_name;
     private List<SemanticRolesKeyword> keywords_serialized_name;
