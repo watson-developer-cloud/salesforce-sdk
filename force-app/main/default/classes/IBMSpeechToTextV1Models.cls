@@ -8053,8 +8053,8 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript_serialized_name;
     private Double confidence_serialized_name;
-    private List<String> timestamps_serialized_name;
-    private List<String> word_confidence_serialized_name;
+    private List<List<String>> timestamps_serialized_name;
+    private List<List<String>> word_confidence_serialized_name;
  
     /**
      * Gets the transcript.
@@ -8091,7 +8091,7 @@ public class IBMSpeechToTextV1Models {
      * @return the timestamps
      */
     @AuraEnabled
-    public List<String> getTimestamps() {
+    public List<List<String>> getTimestamps() {
       return timestamps_serialized_name;
     }
  
@@ -8105,7 +8105,7 @@ public class IBMSpeechToTextV1Models {
      * @return the wordConfidence
      */
     @AuraEnabled
-    public List<String> getWordConfidence() {
+    public List<List<String>> getWordConfidence() {
       return word_confidence_serialized_name;
     }
 
@@ -8132,7 +8132,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<String> timestamps) {
+    public void setTimestamps(final List<List<String>> timestamps) {
       this.timestamps_serialized_name = timestamps;
     }
 
@@ -8141,7 +8141,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<String> wordConfidence) {
+    public void setWordConfidence(final List<List<String>> wordConfidence) {
       this.word_confidence_serialized_name = wordConfidence;
     }
 
