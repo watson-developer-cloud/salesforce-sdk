@@ -60,20 +60,9 @@ private class IBMDiscoveryV1Test {
     indexCapacity.setDocuments(environmentDocuments);
     IBMDiscoveryV1Models.DiskUsage diskUsage = new IBMDiscoveryV1Models.DiskUsage();
     indexCapacity.setDiskUsage(diskUsage);
-    IBMDiscoveryV1Models.MemoryUsage memoryUsage = new IBMDiscoveryV1Models.MemoryUsage();
-    indexCapacity.setMemoryUsage(memoryUsage);
     resp.setIndexCapacity(indexCapacity);
     System.assertEquals(resp.getDescription(), 'test');
     System.assertEquals(resp.getSize(), 'XS');
-    System.assertEquals(resp.getIndexCapacity().getDiskUsage().getTotalBytes(), null);
-    System.assertEquals(resp.getIndexCapacity().getDiskUsage().getUsed(), null);
-    System.assertEquals(resp.getIndexCapacity().getDiskUsage().getTotal(), null);
-    System.assertEquals(resp.getIndexCapacity().getDiskUsage().getPercentUsed(), null);
-    System.assertEquals(resp.getIndexCapacity().getMemoryUsage().getUsedBytes(), null);
-    System.assertEquals(resp.getIndexCapacity().getMemoryUsage().getTotalBytes(), null);
-    System.assertEquals(resp.getIndexCapacity().getMemoryUsage().getUsed(), null);
-    System.assertEquals(resp.getIndexCapacity().getMemoryUsage().getTotal(), null);
-    System.assertEquals(resp.getIndexCapacity().getMemoryUsage().getPercentUsed(), null);
 
     Test.stopTest();
   }
@@ -374,7 +363,7 @@ private class IBMDiscoveryV1Test {
     wordHeading.setStyles(new List<IBMDiscoveryV1Models.WordStyle>{ style });
     word.setHeading(wordHeading);
     conversions.setWord(word);
-    IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder(ENVIRONMENT_ID)
+    IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder(ENVIRONMENT_ID, 'test_environment')
       .environmentId(ENVIRONMENT_ID)
       .name('test_environment')
       .description('test_environment description')
@@ -507,7 +496,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
-    IBMDiscoveryV1Models.UpdateConfigurationOptions options = new IBMDiscoveryV1Models.UpdateConfigurationOptionsBuilder(ENVIRONMENT_ID, CONFIGURATION_ID)
+    IBMDiscoveryV1Models.UpdateConfigurationOptions options = new IBMDiscoveryV1Models.UpdateConfigurationOptionsBuilder(ENVIRONMENT_ID, CONFIGURATION_ID, 'test_environment')
       .name('test_environment')
       .description('test_environment description')
       .configurationId(CONFIGURATION_ID)
@@ -845,8 +834,6 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(resp.getStatus(), 'available with notices');
     System.assertEquals(resp.getDocumentId(), 'f1360220-ea2d-4271-9d62-89a910b13c37');
     System.assertEquals(resp.getConfigurationId(), 'e8b9d793-b163-452a-9373-bce07efb510b');
-    System.assertEquals(resp.getCreated(),(Datetime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',Datetime.class));
-    System.assertEquals(resp.getUpdated(),(Datetime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',Datetime.class));
     System.assertEquals(resp.getStatusDescription(), 'Document is successfully ingested but was indexed with warnings');
     System.assertEquals(resp.getFilename(), 'instructions.html');
     System.assertEquals(resp.getFileType(), 'html');
@@ -860,8 +847,6 @@ private class IBMDiscoveryV1Test {
     resp.setFilename('instructions1.html');
     resp.setFileType('html');
     resp.setSha1('de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3');
-    IBMDiscoveryV1Models.Notice notice= new IBMDiscoveryV1Models.Notice();
-    resp.setNotices(new List<IBMDiscoveryV1Models.Notice>{notice});
     System.assertEquals(resp.getFilename(), 'instructions1.html');
     Test.stopTest();
   }
@@ -940,7 +925,6 @@ private class IBMDiscoveryV1Test {
     resp.setMatchingResults(4);
     IBMDiscoveryV1Models.QueryNoticesResult queryNoticesResult = new IBMDiscoveryV1Models.QueryNoticesResult();
     queryNoticesResult.setId('5ae96bb9-80e5-43ea-916e-1f3412fbc283');
-    queryNoticesResult.setScore(2);
     IBMWatsonMapModel mapModel= new IBMWatsonMapModel();
     mapModel.put('key', 'value');
     queryNoticesResult.setMetadata(mapModel);
@@ -981,7 +965,6 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(resp.getPassages()[0].getField(), 'test');
     System.assertEquals(resp.getDuplicatesRemoved(), 2);
     System.assertEquals(queryNoticesResult.getId(), '5ae96bb9-80e5-43ea-916e-1f3412fbc283');
-    System.assertEquals(queryNoticesResult.getScore(), 2);
     System.assertEquals(queryNoticesResult.getMetadata().get('key'), 'value');
     System.assertEquals(queryNoticesResult.getCollectionId(), '5ae96bb9-80e5-43ea-916e-1f3412fbc283');
     System.assertEquals(queryAggregation.getResults()[0].getKey(), 'test');
@@ -1074,7 +1057,6 @@ private class IBMDiscoveryV1Test {
     System.assertEquals('030ba125-29db-43f2-8552-f941ae30a7a8', resp.getResults().get(0).getId());
     System.assertEquals('f1360220-ea2d-4271-9d62-89a910b13c37', resp.getResults().get(0).getCollectionId());
     System.assertEquals(200, resp.getResults().get(0).getCode());
-    System.assertEquals(1, resp.getResults().get(0).getScore());
     System.assertEquals('instructions.html', resp.getResults().get(0).getFilename());
     System.assertEquals('html', resp.getResults().get(0).getFileType());
     System.assertEquals('de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3', resp.getResults().get(0).getSha1());
