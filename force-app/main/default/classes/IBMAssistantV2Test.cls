@@ -370,13 +370,14 @@ private class IBMAssistantV2Test {
     Test.stopTest();
   }
 
-  static testMethod void testMessageContextSkill() {
+  static testMethod void testMessageContextSkills() {
     Test.startTest();
 
-    IBMAssistantV2Models.MessageContextSkill messageContextSkill = new IBMAssistantV2Models.MessageContextSkill();
-    messageContextSkill.setUserDefined(USER_DEFINED);
+    IBMAssistantV2Models.MessageContextSkills messageContextSkills = new IBMAssistantV2Models.MessageContextSkills();
+    messageContextSkills.put(NAME, USER_DEFINED);
 
-    System.assertEquals(USER_DEFINED, messageContextSkill.getUserDefined());
+    System.assert(messageContextSkills.getDynamicProperties().containsKey(NAME));
+    System.assertEquals(USER_DEFINED, messageContextSkills.getDynamicProperties().get(NAME));
 
     Test.stopTest();
   }
