@@ -549,7 +549,6 @@ private class IBMSpeechToTextV1Test {
       .corpusName(corpusName)
       .allowOverwrite(true)
       .corpusFile(corpusFile)
-      .corpusFilename('corpora.txt')
       .addHeader('Test-Header', 'test_value')
       .build();
     speechToText.addCorpus(addCorpusOptions);
