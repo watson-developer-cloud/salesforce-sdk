@@ -64,6 +64,16 @@ private class IBMAssistantV1Test {
   private static String dialogNodeDigressOutSlots;
   private static String nextCursor;
   private static String refreshCursor;
+  private static String responseType;
+  private static String text;
+  private static Long testTime;
+  private static String source;
+  private static String title;
+  private static String description;
+  private static String preference;
+  private static String label;
+  private static String messageToHumanAgent;
+  private static String topic;
 
   static {
     workspaceName = 'test_workspace';
@@ -133,6 +143,16 @@ private class IBMAssistantV1Test {
     dialogNodeDigressOutSlots = 'allow_all';
     nextCursor = 'next_cursor';
     refreshCursor = 'refresh_cursor';
+    responseType = 'response_type';
+    text = 'text';
+    testTime = 200L;
+    source = 'source';
+    title = 'title';
+    description = 'description';
+    preference = 'preference';
+    label = 'label';
+    messageToHumanAgent = 'message_to_human_agent';
+    topic = 'topic';
   }
 
   static testMethod void testCreateWorkspace() {
@@ -160,6 +180,8 @@ private class IBMAssistantV1Test {
       .description('test')
       .examples(new List<IBMAssistantV1Models.Example>{createExample})
       .addExamples(createExample)
+      .created((Datetime) JSON.deserialize(timeCreated, Datetime.class))
+      .updated((Datetime) JSON.deserialize(timeUpdated, Datetime.class))
       .build();
     createIntent = createIntent.newBuilder().build();
     IBMAssistantV1Models.DialogNodeAction  dialogNodeAction = new IBMAssistantV1Models.DialogNodeAction();
@@ -208,6 +230,8 @@ private class IBMAssistantV1Test {
       .description('test')
       .metadata(metadata)
       .values(new List<IBMAssistantV1Models.CreateValue>{createValue})
+      .created((Datetime) JSON.deserialize(timeCreated, Datetime.class))
+      .updated((Datetime) JSON.deserialize(timeUpdated, Datetime.class))
       .build();
     createEntity = createEntity.newBuilder().build();
     IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation disambiguation = new IBMAssistantV1Models.WorkspaceSystemSettingsDisambiguation();
@@ -434,7 +458,11 @@ private class IBMAssistantV1Test {
     IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
     assistant.setUsernameAndPassword('username', 'password');
 
+    IBMAssistantV1Models.CreateValue createValue = new IBMAssistantV1Models.CreateValueBuilder()
+      .value('value')
+      .build();
     IBMAssistantV1Models.CreateValueOptions createOptions = new IBMAssistantV1Models.CreateValueOptionsBuilder()
+      .createValue(createValue)
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
@@ -657,6 +685,25 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getOutput().getNodesVisitedDetails().get(0).getConditions(), nodeVisitedDetailsCondition);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getLevel(), logMessageLevel);
     System.assertEquals(response.getOutput().getLogMessages().get(0).getMsg(), logMessageText);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getDescription(), description);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getDialogNode(), dialogNodeName);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getMessageToHumanAgent(), messageToHumanAgent);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getOptions().get(0).getLabel(), label);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getText(), text);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getPreference(), preference);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getResponseType(), responseType);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getSource(), source);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getDialogNode(), dialogNodeName);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getLabel(), label);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getInput().getText(), text);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getIntents().get(0).getIntent(), intentName);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getIntents().get(0).getConfidence(), confidence);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getSuggestions().get(0).getValue().getEntities().get(0).getEntity(), entityName);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getText(), text);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getTitle(), title);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getTopic(), topic);
+    System.assert(response.getOutput().getGeneric().get(0).getTyping());
+    System.assertEquals(response.getOutput().getGeneric().get(0).getXtime(), testTime);
     System.assertEquals(response.getActions().get(0).getName(), actionName);
     System.assertEquals(response.getActions().get(0).getActionType(), actionType);
     System.assertEquals(response.getActions().get(0).getParameters(), actionParameters);
@@ -1172,7 +1219,11 @@ private class IBMAssistantV1Test {
     IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
     assistant.setUsernameAndPassword('username', 'password');
 
+    IBMAssistantV1Models.Synonym synonym = new IBMAssistantV1Models.SynonymBuilder()
+      .synonym('synonym')
+      .build();
     IBMAssistantV1Models.CreateSynonymOptions createOptions = new IBMAssistantV1Models.CreateSynonymOptionsBuilder()
+      .synonym(synonym)
       .workspaceId(workspaceId)
       .entity(entityName)
       .value(valueName)
@@ -1324,8 +1375,11 @@ private class IBMAssistantV1Test {
     assistant.setUsernameAndPassword('username', 'password');
 
     String userLabel = 'user_label';
-
+    IBMAssistantV1Models.DialogNode dialogNode = new IBMAssistantV1Models.DialogNodeBuilder()
+      .dialogNode('dialog_node')
+      .build();
     IBMAssistantV1Models.CreateDialogNodeOptions createOptions = new IBMAssistantV1Models.CreateDialogNodeOptionsBuilder()
+      .dialogNode(dialogNode)
       .workspaceId(workspaceId)
       .dialogNode(dialogNodeName)
       .digressIn(dialogNodeDigressIn)
@@ -1602,7 +1656,11 @@ private class IBMAssistantV1Test {
     IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
     assistant.setUsernameAndPassword('username', 'password');
 
+    IBMAssistantV1Models.Counterexample counterexample = new IBMAssistantV1Models.CounterexampleBuilder()
+      .text('text')
+      .build();
     IBMAssistantV1Models.CreateCounterexampleOptions createOptions = new IBMAssistantV1Models.CreateCounterexampleOptionsBuilder()
+      .counterexample(counterexample)
       .workspaceId(workspaceId)
       .text(counterexampleText)
       .addHeader('Test-Header', 'test_value')

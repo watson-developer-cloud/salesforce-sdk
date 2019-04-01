@@ -688,6 +688,53 @@ public class IBMWatsonMockResponses {
             '"title": "node_title",' +
             '"conditions": "#condition"' +
           '}' +  
+          '],' +
+          '"generic": [' +
+          '{' +
+            '"response_type": "response_type",' +
+            '"text": "text",' +
+            '"time": 200,' +
+            '"typing": true,' +
+            '"source": "source",' +
+            '"title": "title",' +
+            '"description": "description",' +
+            '"preference": "preference",' +
+            '"options": [' +
+            '{' +
+              '"label": "label",' +
+              '"value": {' +
+                '"input": {' +
+                  '"text": "text"' +
+                '}' +
+              '}' +
+            '}' +
+            '],' +
+            '"message_to_human_agent": "message_to_human_agent",' +
+            '"topic": "topic",' +
+            '"dialog_node": "dialog_node",' +
+            '"suggestions": [' +
+            '{' +
+              '"label": "label",' +
+              '"value": {' +
+                '"input": {' +
+                  '"text": "text"' +
+                '},' +
+                '"intents": [' +
+                '{' +
+                  '"intent": "test_intent",' +
+                  '"confidence": 0.314159' +
+                '}' +
+                '],' +
+                '"entities": [' +
+                '{' +
+                  '"entity": "test_entity"' +
+                '}' +
+                '],' +
+              '},' +
+              '"dialog_node": "dialog_node"' +
+            '}' +
+            ']' +
+          '}' +
           ']' +
         '},' +
         '"actions": [ ' +
