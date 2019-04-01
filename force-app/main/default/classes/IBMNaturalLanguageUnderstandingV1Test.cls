@@ -57,6 +57,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .xlimit(12L)
       .build();
     IBMNaturalLanguageUnderstandingV1Models.MetadataOptions metadata = new IBMNaturalLanguageUnderstandingV1Models.MetadataOptions();
+    IBMNaturalLanguageUnderstandingV1Models.SyntaxOptions syntax = new IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.Features features = new IBMNaturalLanguageUnderstandingV1Models.FeaturesBuilder()
       .concepts(concepts)
       .emotion(emotion)
@@ -67,6 +68,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .semanticRoles(semanticRoles)
       .categories(categories)
       .sentiment(sentiment)
+      .syntax(syntax)
       .build();
     features = features.newBuilder().build();
 
@@ -140,7 +142,30 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(resp.getSentiment().getTargets()[0].getScore(), 0.89792);
     System.assertEquals(resp.getSentiment().getDocument().getLabel(), 'test');
     System.assertEquals(resp.getSentiment().getDocument().getScore(), 0.89792);
+    System.assertEquals(resp.getSyntax().getTokens().get(0).getText(), 'Ginni');
+    System.assertEquals(resp.getSyntax().getTokens().get(0).getLocation().get(0), 0L);
+    System.assertEquals(resp.getSyntax().getTokens().get(0).getLocation().get(1), 5L);
+    System.assertEquals(resp.getSyntax().getTokens().get(0).getLemma(), 'lemma');
+    System.assertEquals(resp.getSyntax().getTokens().get(0).getPartOfSpeech(), 'PROPN');
+    System.assertEquals(resp.getSyntax().getSentences().get(0).getText(), 'sentence');
+    System.assertEquals(resp.getSyntax().getSentences().get(0).getLocation().get(0), 0L);
+    System.assertEquals(resp.getSyntax().getSentences().get(0).getLocation().get(1), 5L);
     Test.stopTest();
+  }
+
+  static testMethod void testSytntaxOptions() {
+    IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsTokens token = new IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsTokens();
+    token.setLemma(true);
+    token.setPartOfSpeech(true);
+    IBMNaturalLanguageUnderstandingV1Models.SyntaxOptions options = new IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsBuilder()
+      .sentences(true)
+      .tokens(token)
+      .build();
+    options = options.newBuilder().build();
+
+    System.assert(options.sentences());
+    System.assert(options.tokens().getLemma());
+    System.assert(options.tokens().getPartOfSpeech());
   }
 
   static testMethod void testModel() {

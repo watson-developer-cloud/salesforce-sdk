@@ -1437,8 +1437,30 @@ public class IBMWatsonMockResponses {
             '  "semantic_roles": [{ "sentence": "Company","subject": {"text": "test","entities":[{"type": "Company","text": "test"}],"keywords":[{"text": "test"}]}, "action": {"text": "test","normalized": "test","verb": {"text": "test","tense": "test"}}, "object": {"text": "test","keywords":[{"text": "test"}]}}], ' +
             '  "sentiment": { "targets": [{"text": "test", "score": 0.89792}], "document": {"label": "test", "score": 0.89792}}, ' +
             '  "language": "en", ' +
-            '  "retrieved_url": "https://www.ibm.com/us-en/"' +
-            '}';
+            '  "retrieved_url": "https://www.ibm.com/us-en/",' +
+            '"syntax": {' +
+              '"tokens": [' +
+                '{' +
+                  '"text": "Ginni",' +
+                  '"part_of_speech": "PROPN",' +
+                  '"location": [' +
+                    '0,' +
+                    '5' +
+                  '],' +
+                  '"lemma": "lemma"' +
+                '}' +
+              '],' +
+              '"sentences": [' +
+              '{' +
+                '"text": "sentence",' +
+                '"location": [' +
+                    '0,' +
+                    '5' +
+                  ']' +
+              '}' +
+              ']' +
+            '}' +
+          '}';
   }
   
    public static testMethod String listModelsResults() {
