@@ -6,6 +6,10 @@
 
 The IBM Watson Salesforce SDK uses the [Watson API](http://www.ibm.com/watson/developercloud/) services to help you solve complex problems using Apex in your Salesforce environment. If you'd like, you can follow along with our video playlist [here](https://www.youtube.com/playlist?list=PLZDyxLlNKRY8qrs90oRPvVHocJhYOOj3n) to start using the SDK. Otherwise, continue reading to learn how to get started.
 
+**HEADS UP!**
+
+There's a new major version of the SDK out! Check out the release and what's changed here: https://github.com/watson-developer-cloud/salesforce-sdk/releases/tag/v4.0.0. There were no sweeping changes, but upgrading will require changing your existing code a bit.
+
 ## Before you begin
 
 * You need an [IBM Cloud][ibm-cloud-onboarding] account.
@@ -375,6 +379,9 @@ If you're using this SDK to interact with a service on IBM Cloud Private (ICP), 
 ## Functional tests
 
 The `force-app/main/test` folder contains the example calls for each service. These examples are used for functional testing of services. Developers can use them for reference and testing the installed SDK.
+
+## Featured projects
+We'd love to highlight cool open-source projects that use this SDK! If you'd like to get your project added to the list, feel free to make an issue linking us to it.
 
 ## Contributing
 
