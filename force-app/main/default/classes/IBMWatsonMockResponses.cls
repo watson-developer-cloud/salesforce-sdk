@@ -3191,6 +3191,26 @@ public class IBMWatsonMockResponses {
               '  }' +
               ']' +
             '}' +
+          '],' +
+          '"key_value_pairs": [' +
+          '{' +
+            '"key": {' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '},' +
+              '"text": "text"' +
+            '},' +
+            '"value": {' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '},' +
+              '"text": "text"' +
+            '}' +
+          '}' +
           ']' +
         '}' +
       '],' +
@@ -3278,6 +3298,16 @@ public class IBMWatsonMockResponses {
           '},' +
           '"confidence_level": "High"' +
         '}' +
+      '],' +
+      '"contract_type": [' +
+      '{' +
+        '"text": "text",' +
+        '"location": {' +
+          '"begin": 0,' +
+          '"end": 1' +
+        '},' +
+        '"confidence_level": "High"' +
+      '}' +
       ']' +
     '}';
   }
@@ -3725,6 +3755,26 @@ public class IBMWatsonMockResponses {
               '  }' +
               ']' +
             '}' +
+          '],' +
+          '"key_value_pairs": [' +
+          '{' +
+            '"key": {' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '},' +
+              '"text": "text"' +
+            '},' +
+            '"value": {' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '},' +
+              '"text": "text"' +
+            '}' +
+          '}' +
           ']' +
         '}' +
       ']' +

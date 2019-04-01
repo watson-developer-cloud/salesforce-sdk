@@ -139,7 +139,7 @@ private class IBMCompareComplyV1Test {
     UNKNOWN = 'Unknown';
     HIGH = 'High';
     BEGIN_KEY = 'begin';
-    BEGIN_KEY = 'end';
+    END_KEY = 'end';
   }
 
   static testMethod void testAddFeedbackOptions() {
@@ -635,6 +635,14 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXend());
+    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getCellId());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
+    System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
+    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getValue().getCellId());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
+    System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
     System.assertEquals(TEXT, response.getDocumentStructure().getSectionTitles().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getDocumentStructure().getSectionTitles().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getDocumentStructure().getSectionTitles().get(0).getLocation().getXend());
@@ -670,6 +678,10 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_BEGIN, response.getTerminationDates().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTerminationDates().get(0).getLocation().getXend());
     System.assertEquals(HIGH, response.getTerminationDates().get(0).getConfidenceLevel());
+    System.assertEquals(TEXT, response.getContractType().get(0).getText());
+    System.assertEquals(TEST_BEGIN, response.getContractType().get(0).getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getContractType().get(0).getLocation().getXend());
+    System.assertEquals(HIGH, response.getContractType().get(0).getConfidenceLevel());
     Test.stopTest();
   }
 
@@ -757,6 +769,14 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXend());
+    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getCellId());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
+    System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
+    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getValue().getCellId());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
+    System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
     Test.stopTest();
   }
 
