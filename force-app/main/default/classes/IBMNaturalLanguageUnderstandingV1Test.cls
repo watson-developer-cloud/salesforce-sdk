@@ -53,10 +53,11 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .targets(new List<String>{'test'})
       .build();
     sentiment = sentiment.newBuilder().build();
-    IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions categories = new IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions();
-    categories.setXlimit(12L);
+    IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions categories = new IBMNaturalLanguageUnderstandingV1Models.CategoriesOptionsBuilder()
+      .xlimit(12L)
+      .build();
     IBMNaturalLanguageUnderstandingV1Models.MetadataOptions metadata = new IBMNaturalLanguageUnderstandingV1Models.MetadataOptions();
-    metadata.put('', '');
+    IBMNaturalLanguageUnderstandingV1Models.SyntaxOptions syntax = new IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.Features features = new IBMNaturalLanguageUnderstandingV1Models.FeaturesBuilder()
       .concepts(concepts)
       .emotion(emotion)
@@ -67,6 +68,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
       .semanticRoles(semanticRoles)
       .categories(categories)
       .sentiment(sentiment)
+      .syntax(syntax)
       .build();
     features = features.newBuilder().build();
 
@@ -140,7 +142,30 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(resp.getSentiment().getTargets()[0].getScore(), 0.89792);
     System.assertEquals(resp.getSentiment().getDocument().getLabel(), 'test');
     System.assertEquals(resp.getSentiment().getDocument().getScore(), 0.89792);
+    System.assertEquals(resp.getSyntax().getTokens().get(0).getText(), 'Ginni');
+    System.assertEquals(resp.getSyntax().getTokens().get(0).getLocation().get(0), 0L);
+    System.assertEquals(resp.getSyntax().getTokens().get(0).getLocation().get(1), 5L);
+    System.assertEquals(resp.getSyntax().getTokens().get(0).getLemma(), 'lemma');
+    System.assertEquals(resp.getSyntax().getTokens().get(0).getPartOfSpeech(), 'PROPN');
+    System.assertEquals(resp.getSyntax().getSentences().get(0).getText(), 'sentence');
+    System.assertEquals(resp.getSyntax().getSentences().get(0).getLocation().get(0), 0L);
+    System.assertEquals(resp.getSyntax().getSentences().get(0).getLocation().get(1), 5L);
     Test.stopTest();
+  }
+
+  static testMethod void testSytntaxOptions() {
+    IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsTokens token = new IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsTokens();
+    token.setLemma(true);
+    token.setPartOfSpeech(true);
+    IBMNaturalLanguageUnderstandingV1Models.SyntaxOptions options = new IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsBuilder()
+      .sentences(true)
+      .tokens(token)
+      .build();
+    options = options.newBuilder().build();
+
+    System.assert(options.sentences());
+    System.assert(options.tokens().getLemma());
+    System.assert(options.tokens().getPartOfSpeech());
   }
 
   static testMethod void testModel() {
@@ -180,7 +205,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     analysisResults.setLanguage('de');
     analysisResults.setAnalyzedText('test');
     analysisResults.setRetrievedUrl('https://www.ibm.com/us-en/');
-    IBMNaturalLanguageUnderstandingV1Models.Usage usage = new IBMNaturalLanguageUnderstandingV1Models.Usage();
+    IBMNaturalLanguageUnderstandingV1Models.AnalysisResultsUsage usage = new IBMNaturalLanguageUnderstandingV1Models.AnalysisResultsUsage();
     usage.setFeatures(4);
     usage.setTextCharacters(40);
     usage.setTextUnits(5);
@@ -231,7 +256,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     targetedEmotionResults.setText('test');
     emotionResult.setTargets(new List<IBMNaturalLanguageUnderstandingV1Models.TargetedEmotionResults>{targetedEmotionResults});
     analysisResults.setEmotion(emotionResult);
-    IBMNaturalLanguageUnderstandingV1Models.MetadataResult metadataResult = new IBMNaturalLanguageUnderstandingV1Models.MetadataResult();
+    IBMNaturalLanguageUnderstandingV1Models.AnalysisResultsMetadata metadataResult = new IBMNaturalLanguageUnderstandingV1Models.AnalysisResultsMetadata();
     analysisResults.setMetadata(metadataResult);
     IBMNaturalLanguageUnderstandingV1Models.RelationsResult relationsResult = new IBMNaturalLanguageUnderstandingV1Models.RelationsResult();
     relationsResult.setScore((Double)0.89792);
@@ -247,7 +272,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     analysisResults.setRelations(new List<IBMNaturalLanguageUnderstandingV1Models.RelationsResult>{relationsResult});
     IBMNaturalLanguageUnderstandingV1Models.SemanticRolesResult semanticRolesResult = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesResult();
     semanticRolesResult.setSentence('Company');
-    IBMNaturalLanguageUnderstandingV1Models.SemanticRolesSubject semanticRolesSubject = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesSubject();
+    IBMNaturalLanguageUnderstandingV1Models.SemanticRolesResultSubject semanticRolesSubject = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesResultSubject();
     semanticRolesSubject.setText('test');
     IBMNaturalLanguageUnderstandingV1Models.SemanticRolesEntity semanticRolesEntity = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesEntity();
     semanticRolesEntity.setXtype('Company');
@@ -257,9 +282,9 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     semanticRolesKeyword.setText('test');
     semanticRolesSubject.setKeywords(new List<IBMNaturalLanguageUnderstandingV1Models.SemanticRolesKeyword>{semanticRolesKeyword});
     semanticRolesResult.setSubject(semanticRolesSubject);
-    IBMNaturalLanguageUnderstandingV1Models.SemanticRolesAction semanticRolesAction = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesAction();
+    IBMNaturalLanguageUnderstandingV1Models.SemanticRolesResultAction semanticRolesAction = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesResultAction();
     semanticRolesResult.setAction(semanticRolesAction);
-    IBMNaturalLanguageUnderstandingV1Models.SemanticRolesObject semanticRolesObject = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesObject();
+    IBMNaturalLanguageUnderstandingV1Models.SemanticRolesResultObject semanticRolesObject = new IBMNaturalLanguageUnderstandingV1Models.SemanticRolesResultObject();
     semanticRolesResult.setXobject(semanticRolesObject);
     analysisResults.setSemanticRoles(new List<IBMNaturalLanguageUnderstandingV1Models.SemanticRolesResult>{semanticRolesResult});
     IBMNaturalLanguageUnderstandingV1Models.SentimentResult sentimentResult = new IBMNaturalLanguageUnderstandingV1Models.SentimentResult();

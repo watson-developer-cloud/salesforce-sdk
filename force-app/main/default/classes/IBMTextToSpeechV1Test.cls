@@ -252,10 +252,11 @@ private class IBMTextToSpeechV1Test {
     word.setWord('Again');
     word.setTranslation('de-DE');
     word.setPartOfSpeech('Josi');
-    IBMTextToSpeechV1Models.AddWordsOptions options = new IBMTextToSpeechV1Models.AddWordsOptionsBuilder('customizationId')
+    List<IBMTextToSpeechV1Models.Word> words = new List<IBMTextToSpeechV1Models.Word>{ word };
+    IBMTextToSpeechV1Models.AddWordsOptions options = new IBMTextToSpeechV1Models.AddWordsOptionsBuilder('customizationId', words)
       .customizationId('customizationId')
       .addWords(word)
-      .words(new List<IBMTextToSpeechV1Models.Word>{word})
+      .words(words)
       .addHeader('Test-Header', 'test_value')
       .build();
     //you can add more attributes using following builder method. This step is not necessary

@@ -87,14 +87,14 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
     IBMWatsonValidator.notNull(toneOptions, 'toneOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/tone');
     builder.addHeader('Accept', 'application/json');
-    if (toneOptions.contentType() != null) {
-      builder.addHeader('Content-Type', toneOptions.contentType());
-    }
     if (toneOptions.contentLanguage() != null) {
       builder.addHeader('Content-Language', toneOptions.contentLanguage());
     }
     if (toneOptions.acceptLanguage() != null) {
       builder.addHeader('Accept-Language', toneOptions.acceptLanguage());
+    }
+    if (toneOptions.contentType() != null) {
+      builder.addHeader('Content-Type', toneOptions.contentType());
     }
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=tone_analyzer;service_version=V3;operation_id=tone');
     Map<String, String> requestHeaders = (toneOptions != null) ? toneOptions.requestHeaders() : null;

@@ -70,7 +70,7 @@ public class IBMAssistantV2Models {
      *
      * Unique identifier of the assistant. You can find the assistant ID of an assistant on the **Assistants** tab of
      * the Watson Assistant tool. For information about creating assistants, see the
-     * [documentation](https://console.bluemix.net/docs/services/assistant/create-assistant.html#creating-assistants).
+     * [documentation](https://console.bluemix.net/docs/services/assistant/assistant-add.html#assistant-add-task).
      *
      * **Note:** Currently, the v2 API does not support creating assistants.
      *
@@ -168,7 +168,7 @@ public class IBMAssistantV2Models {
      *
      * Unique identifier of the assistant. You can find the assistant ID of an assistant on the **Assistants** tab of
      * the Watson Assistant tool. For information about creating assistants, see the
-     * [documentation](https://console.bluemix.net/docs/services/assistant/create-assistant.html#creating-assistants).
+     * [documentation](https://console.bluemix.net/docs/services/assistant/assistant-add.html#assistant-add-task).
      *
      * **Note:** Currently, the v2 API does not support creating assistants.
      *
@@ -744,7 +744,7 @@ public class IBMAssistantV2Models {
     /**
      * Gets the title.
      *
-     * The title to show before the response.
+     * The title or introductory text to show before the response.
      *
      * @return the title
      */
@@ -944,7 +944,7 @@ public class IBMAssistantV2Models {
           DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
           newOptions.add(newItem);
         }
-        ret.setOptions(newOptions);
+        ret.options_serialized_name = newOptions;
       }
 
       // calling custom deserializer for suggestions
@@ -957,7 +957,7 @@ public class IBMAssistantV2Models {
           DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestion.class);
           newSuggestions.add(newItem);
         }
-        ret.setSuggestions(newSuggestions);
+        ret.suggestions_serialized_name = newSuggestions;
       }
 
       return ret;
@@ -1101,7 +1101,7 @@ public class IBMAssistantV2Models {
   }
 
   /**
-   * State information for the conversation.
+   * MessageContext.
    */
   public class MessageContext extends IBMWatsonGenericModel {
     private MessageContextGlobal global_serialized_name;
@@ -1110,7 +1110,7 @@ public class IBMAssistantV2Models {
     /**
      * Gets the xglobal.
      *
-     * Contains information that can be shared by all skills within the Assistant.
+     * Information that is shared by all skills used by the Assistant.
      *
      * @return the xglobal
      */
@@ -1122,7 +1122,10 @@ public class IBMAssistantV2Models {
     /**
      * Gets the skills.
      *
-     * Contains information specific to particular skills within the Assistant.
+     * Information specific to particular skills used by the Assistant.
+     *
+     * **Note:** Currently, only a single property named `main skill` is supported. This object contains variables that
+     * apply to the dialog skill used by the assistant.
      *
      * @return the skills
      */
@@ -1169,7 +1172,7 @@ public class IBMAssistantV2Models {
   }
 
   /**
-   * Contains information that can be shared by all skills within the Assistant.
+   * Information that is shared by all skills used by the Assistant.
    */
   public class MessageContextGlobal extends IBMWatsonGenericModel {
     private MessageContextGlobalSystem system_serialized_name;
@@ -1177,7 +1180,7 @@ public class IBMAssistantV2Models {
     /**
      * Gets the xsystem.
      *
-     * Properties that are shared by all skills used by the assistant.
+     * Built-in system properties that apply to all skills used by the assistant.
      *
      * @return the xsystem
      */
@@ -1211,7 +1214,7 @@ public class IBMAssistantV2Models {
   }
 
   /**
-   * Properties that are shared by all skills used by the assistant.
+   * Built-in system properties that apply to all skills used by the assistant.
    */
   public class MessageContextGlobalSystem extends IBMWatsonGenericModel {
     private String timezone_serialized_name;
@@ -1249,7 +1252,8 @@ public class IBMAssistantV2Models {
      * Gets the turnCount.
      *
      * A counter that is automatically incremented with each turn of the conversation. A value of 1 indicates that this
-     * is the the first turn of a new conversation, which can affect the behavior of some skills.
+     * is the the first turn of a new conversation, which can affect the behavior of some skills (for example,
+     * triggering the start node of a dialog).
      *
      * @return the turnCount
      */
@@ -1297,35 +1301,9 @@ public class IBMAssistantV2Models {
   }
 
   /**
-   * Contains information specific to a particular skill within the Assistant.
-   */
-  public class MessageContextSkill {
-    private String user_defined_serialized_name;
- 
-    /**
-     * Gets the userDefined.
-     *
-     * Arbitrary variables that can be read and written to by a particular skill within the Assistant.
-     *
-     * @return the userDefined
-     */
-    public String getUserDefined() {
-      return user_defined_serialized_name;
-    }
+   * Information specific to particular skills used by the Assistant.
 
-    /**
-     * Sets the userDefined.
-     *
-     * @param userDefined the new userDefined
-     */
-    public void setUserDefined(final String userDefined) {
-      this.user_defined_serialized_name = userDefined;
-    }
-
-  }
-
-  /**
-   * Contains information specific to particular skills within the Assistant.
+**Note:** Currently, only a single property named `main skill` is supported. This object contains variables that apply to the dialog skill used by the assistant.
    */
   public class MessageContextSkills extends IBMWatsonDynamicModel {
     private Map<String, Object> additional_properties_serialized_name;
@@ -1523,12 +1501,12 @@ public class IBMAssistantV2Models {
     private String suggestionId;
 
     private MessageInputBuilder(MessageInput messageInput) {
-      messageType = messageInput.message_type_serialized_name;
-      text = messageInput.text_serialized_name;
-      options = messageInput.options_serialized_name;
-      intents = messageInput.intents_serialized_name;
-      entities = messageInput.entities_serialized_name;
-      suggestionId = messageInput.suggestion_id_serialized_name;
+      this.messageType = messageInput.message_type_serialized_name;
+      this.text = messageInput.text_serialized_name;
+      this.options = messageInput.options_serialized_name;
+      this.intents = messageInput.intents_serialized_name;
+      this.entities = messageInput.entities_serialized_name;
+      this.suggestionId = messageInput.suggestion_id_serialized_name;
     }
 
     /**
@@ -1766,7 +1744,7 @@ public class IBMAssistantV2Models {
      *
      * Unique identifier of the assistant. You can find the assistant ID of an assistant on the **Assistants** tab of
      * the Watson Assistant tool. For information about creating assistants, see the
-     * [documentation](https://console.bluemix.net/docs/services/assistant/create-assistant.html#creating-assistants).
+     * [documentation](https://console.bluemix.net/docs/services/assistant/assistant-add.html#assistant-add-task).
      *
      * **Note:** Currently, the v2 API does not support creating assistants.
      *
@@ -1801,7 +1779,8 @@ public class IBMAssistantV2Models {
     /**
      * Gets the context.
      *
-     * State information for the conversation.
+     * State information for the conversation. The context is stored by the assistant on a per-session basis. You can
+     * use this property to set or modify context variables, which can also be accessed by dialog nodes.
      *
      * @return the context
      */
@@ -2086,7 +2065,7 @@ public class IBMAssistantV2Models {
           DialogRuntimeResponseGeneric newItem = (DialogRuntimeResponseGeneric) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogRuntimeResponseGeneric.class);
           newGeneric.add(newItem);
         }
-        ret.setGeneric(newGeneric);
+        ret.generic_serialized_name = newGeneric;
       }
 
       // calling custom deserializer for intents
@@ -2099,7 +2078,7 @@ public class IBMAssistantV2Models {
           RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
-        ret.setIntents(newIntents);
+        ret.intents_serialized_name = newIntents;
       }
 
       // calling custom deserializer for entities
@@ -2112,7 +2091,7 @@ public class IBMAssistantV2Models {
           RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
           newEntities.add(newItem);
         }
-        ret.setEntities(newEntities);
+        ret.entities_serialized_name = newEntities;
       }
 
       // calling custom deserializer for actions
@@ -2125,7 +2104,7 @@ public class IBMAssistantV2Models {
           DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
           newActions.add(newItem);
         }
-        ret.setActions(newActions);
+        ret.actions_serialized_name = newActions;
       }
 
       // calling custom deserializer for debug
@@ -2252,7 +2231,7 @@ public class IBMAssistantV2Models {
           DialogNodesVisited newItem = (DialogNodesVisited) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodesVisited.class);
           newNodesVisited.add(newItem);
         }
-        ret.setNodesVisited(newNodesVisited);
+        ret.nodes_visited_serialized_name = newNodesVisited;
       }
 
       // calling custom deserializer for logMessages
@@ -2265,7 +2244,7 @@ public class IBMAssistantV2Models {
           DialogLogMessage newItem = (DialogLogMessage) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogLogMessage.class);
           newLogMessages.add(newItem);
         }
-        ret.setLogMessages(newLogMessages);
+        ret.log_messages_serialized_name = newLogMessages;
       }
 
       return ret;
@@ -2294,7 +2273,10 @@ public class IBMAssistantV2Models {
     /**
      * Gets the context.
      *
-     * State information for the conversation.
+     * State information for the conversation. The context is stored by the assistant on a per-session basis. You can
+     * use this property to access context variables.
+     *
+     * **Note:** The context is included in message responses only if **return_context**=`true` in the message request.
      *
      * @return the context
      */
@@ -2499,7 +2481,7 @@ public class IBMAssistantV2Models {
           CaptureGroup newItem = (CaptureGroup) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CaptureGroup.class);
           newGroups.add(newItem);
         }
-        ret.setGroups(newGroups);
+        ret.groups_serialized_name = newGroups;
       }
 
       return ret;

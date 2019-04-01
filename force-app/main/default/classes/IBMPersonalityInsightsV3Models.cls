@@ -283,7 +283,7 @@ public class IBMPersonalityInsightsV3Models {
           ConsumptionPreferences newItem = (ConsumptionPreferences) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConsumptionPreferences.class);
           newConsumptionPreferences.add(newItem);
         }
-        ret.setConsumptionPreferences(newConsumptionPreferences);
+        ret.consumption_preferences_serialized_name = newConsumptionPreferences;
       }
 
       return ret;
@@ -330,7 +330,7 @@ public class IBMPersonalityInsightsV3Models {
     private List<ContentItem> contentItems;
 
     private ContentBuilder(Content content) {
-      contentItems = content.contentItems_serialized_name;
+      this.contentItems = content.contentItems_serialized_name;
     }
 
     /**
@@ -547,15 +547,15 @@ public class IBMPersonalityInsightsV3Models {
     private Boolean forward;
 
     private ContentItemBuilder(ContentItem contentItem) {
-      content = contentItem.content_serialized_name;
-      id = contentItem.id_serialized_name;
-      created = contentItem.created_serialized_name;
-      updated = contentItem.updated_serialized_name;
-      contenttype = contentItem.contenttype_serialized_name;
-      language = contentItem.language_serialized_name;
-      parentid = contentItem.parentid_serialized_name;
-      reply = contentItem.reply_serialized_name;
-      forward = contentItem.forward_serialized_name;
+      this.content = contentItem.content_serialized_name;
+      this.id = contentItem.id_serialized_name;
+      this.created = contentItem.created_serialized_name;
+      this.updated = contentItem.updated_serialized_name;
+      this.contenttype = contentItem.contenttype_serialized_name;
+      this.language = contentItem.language_serialized_name;
+      this.parentid = contentItem.parentid_serialized_name;
+      this.reply = contentItem.reply_serialized_name;
+      this.forward = contentItem.forward_serialized_name;
     }
 
     /**
@@ -909,7 +909,7 @@ public class IBMPersonalityInsightsV3Models {
           Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
           newPersonality.add(newItem);
         }
-        ret.setPersonality(newPersonality);
+        ret.personality_serialized_name = newPersonality;
       }
 
       // calling custom deserializer for needs
@@ -922,7 +922,7 @@ public class IBMPersonalityInsightsV3Models {
           Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
           newNeeds.add(newItem);
         }
-        ret.setNeeds(newNeeds);
+        ret.needs_serialized_name = newNeeds;
       }
 
       // calling custom deserializer for values
@@ -935,7 +935,7 @@ public class IBMPersonalityInsightsV3Models {
           Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
           newValues.add(newItem);
         }
-        ret.setValues(newValues);
+        ret.values_serialized_name = newValues;
       }
 
       // calling custom deserializer for behavior
@@ -948,7 +948,7 @@ public class IBMPersonalityInsightsV3Models {
           Behavior newItem = (Behavior) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Behavior.class);
           newBehavior.add(newItem);
         }
-        ret.setBehavior(newBehavior);
+        ret.behavior_serialized_name = newBehavior;
       }
 
       // calling custom deserializer for consumptionPreferences
@@ -961,7 +961,7 @@ public class IBMPersonalityInsightsV3Models {
           ConsumptionPreferencesCategory newItem = (ConsumptionPreferencesCategory) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ConsumptionPreferencesCategory.class);
           newConsumptionPreferences.add(newItem);
         }
-        ret.setConsumptionPreferences(newConsumptionPreferences);
+        ret.consumption_preferences_serialized_name = newConsumptionPreferences;
       }
 
       // calling custom deserializer for warnings
@@ -974,7 +974,7 @@ public class IBMPersonalityInsightsV3Models {
           Warning newItem = (Warning) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Warning.class);
           newWarnings.add(newItem);
         }
-        ret.setWarnings(newWarnings);
+        ret.warnings_serialized_name = newWarnings;
       }
 
       return ret;
@@ -987,12 +987,12 @@ public class IBMPersonalityInsightsV3Models {
   public class ProfileOptions extends IBMWatsonOptionsModel {
     private Content content;
     private String body;
-    private String contentType;
     private String contentLanguage;
     private String acceptLanguage;
     private Boolean rawScores;
     private Boolean csvHeaders;
     private Boolean consumptionPreferences;
+    private String contentType;
  
     /**
      * Gets the content.
@@ -1018,19 +1018,6 @@ public class IBMPersonalityInsightsV3Models {
      */
     public String body() {
       return body;
-    }
- 
-    /**
-     * Gets the contentType.
-     *
-     * The type of the input. For more information, see **Content types** in the method description.
-     *
-     * Default: `text/plain`.
-     *
-     * @return the contentType
-     */
-    public String contentType() {
-      return contentType;
     }
  
     /**
@@ -1100,16 +1087,29 @@ public class IBMPersonalityInsightsV3Models {
     public Boolean consumptionPreferences() {
       return consumptionPreferences;
     }
+ 
+    /**
+     * Gets the contentType.
+     *
+     * The type of the input. For more information, see **Content types** in the method description.
+     *
+     * Default: `text/plain`.
+     *
+     * @return the contentType
+     */
+    public String contentType() {
+      return contentType;
+    }
 
     private ProfileOptions(ProfileOptionsBuilder builder) {
       content = builder.content;
       body = builder.body;
-      contentType = builder.contentType;
       contentLanguage = builder.contentLanguage;
       acceptLanguage = builder.acceptLanguage;
       rawScores = builder.rawScores;
       csvHeaders = builder.csvHeaders;
       consumptionPreferences = builder.consumptionPreferences;
+      contentType = builder.contentType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1130,22 +1130,22 @@ public class IBMPersonalityInsightsV3Models {
   public class ProfileOptionsBuilder extends IBMWatsonOptionsModel {
     private Content content;
     private String body;
-    private String contentType;
     private String contentLanguage;
     private String acceptLanguage;
     private Boolean rawScores;
     private Boolean csvHeaders;
     private Boolean consumptionPreferences;
+    private String contentType;
 
     private ProfileOptionsBuilder(ProfileOptions profileOptions) {
       content = profileOptions.content;
       body = profileOptions.body;
-      contentType = profileOptions.contentType;
       contentLanguage = profileOptions.contentLanguage;
       acceptLanguage = profileOptions.acceptLanguage;
       rawScores = profileOptions.rawScores;
       csvHeaders = profileOptions.csvHeaders;
       consumptionPreferences = profileOptions.consumptionPreferences;
+      contentType = profileOptions.contentType;
       this.requestHeaders.putAll(profileOptions.requestHeaders());
     }
 
@@ -1462,7 +1462,7 @@ public class IBMPersonalityInsightsV3Models {
           Trait newItem = (Trait) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Trait.class);
           newChildren.add(newItem);
         }
-        ret.setChildren(newChildren);
+        ret.children_serialized_name = newChildren;
       }
 
       return ret;

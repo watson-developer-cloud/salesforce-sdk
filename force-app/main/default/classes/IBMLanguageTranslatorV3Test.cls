@@ -117,9 +117,7 @@ private class IBMLanguageTranslatorV3Test {
       .name('custom-english-to-spanish')
       .baseModelId('en-es')
       .forcedGlossary(forcedGlossary)
-      .forcedGlossaryFilename('glossary.txt')
       .parallelCorpus(parallelCorpus)
-      .parallelCorpusFilename('parallelCorpus.txt')
       .addHeader('Test-Header', 'test_value')
       .build();
     IBMLanguageTranslatorV3Models.TranslationModel TranslationModel =

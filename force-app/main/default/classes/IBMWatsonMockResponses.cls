@@ -541,6 +541,7 @@ public class IBMWatsonMockResponses {
         '"values": [' +
         '{' +
         '"value": "Value of test_entity", ' +
+        '"type": "value_type",' +
         '"created": "2015-12-06T23:53:59.153Z", ' +
         '"updated": "2017-10-18T15:44:56.800", ' +
         '"synonyms": [' +
@@ -589,6 +590,7 @@ public class IBMWatsonMockResponses {
   public static testMethod String value() {
     return '{' +
         '"value": "Value of test_entity", ' +
+        '"type": "value_type",' +
         '"metadata": {' +
         '"code": "test_code"' +
         '}, ' +
@@ -608,6 +610,7 @@ public class IBMWatsonMockResponses {
         '"values": [' +
         '{' +
         '"value": "Value of test_entity", ' +
+        '"type": "value_type",' +
         '"metadata": {' +
         '"code": "test_code"' +
         '}, ' +
@@ -688,6 +691,53 @@ public class IBMWatsonMockResponses {
             '"title": "node_title",' +
             '"conditions": "#condition"' +
           '}' +  
+          '],' +
+          '"generic": [' +
+          '{' +
+            '"response_type": "response_type",' +
+            '"text": "text",' +
+            '"time": 200,' +
+            '"typing": true,' +
+            '"source": "source",' +
+            '"title": "title",' +
+            '"description": "description",' +
+            '"preference": "preference",' +
+            '"options": [' +
+            '{' +
+              '"label": "label",' +
+              '"value": {' +
+                '"input": {' +
+                  '"text": "text"' +
+                '}' +
+              '}' +
+            '}' +
+            '],' +
+            '"message_to_human_agent": "message_to_human_agent",' +
+            '"topic": "topic",' +
+            '"dialog_node": "dialog_node",' +
+            '"suggestions": [' +
+            '{' +
+              '"label": "label",' +
+              '"value": {' +
+                '"input": {' +
+                  '"text": "text"' +
+                '},' +
+                '"intents": [' +
+                '{' +
+                  '"intent": "test_intent",' +
+                  '"confidence": 0.314159' +
+                '}' +
+                '],' +
+                '"entities": [' +
+                '{' +
+                  '"entity": "test_entity"' +
+                '}' +
+                ']' +
+              '},' +
+              '"dialog_node": "dialog_node"' +
+            '}' +
+            ']' +
+          '}' +
           ']' +
         '},' +
         '"actions": [ ' +
@@ -809,6 +859,7 @@ public class IBMWatsonMockResponses {
         '"values": [' +
         '{' +
           '"value": "Value of test_entity", ' +
+          '"type": "value_type",' +
           '"metadata": {' +
             '"code": "test_code"' +
           '}, ' +
@@ -840,6 +891,7 @@ public class IBMWatsonMockResponses {
           '"values": [' +
           '{' +
             '"value": "Value of test_entity", ' +
+            '"type": "value_type",' +
             '"metadata": {' +
             '"code": "test_code"' +
             '}, ' +
@@ -1385,8 +1437,30 @@ public class IBMWatsonMockResponses {
             '  "semantic_roles": [{ "sentence": "Company","subject": {"text": "test","entities":[{"type": "Company","text": "test"}],"keywords":[{"text": "test"}]}, "action": {"text": "test","normalized": "test","verb": {"text": "test","tense": "test"}}, "object": {"text": "test","keywords":[{"text": "test"}]}}], ' +
             '  "sentiment": { "targets": [{"text": "test", "score": 0.89792}], "document": {"label": "test", "score": 0.89792}}, ' +
             '  "language": "en", ' +
-            '  "retrieved_url": "https://www.ibm.com/us-en/"' +
-            '}';
+            '  "retrieved_url": "https://www.ibm.com/us-en/",' +
+            '"syntax": {' +
+              '"tokens": [' +
+                '{' +
+                  '"text": "Ginni",' +
+                  '"part_of_speech": "PROPN",' +
+                  '"location": [' +
+                    '0,' +
+                    '5' +
+                  '],' +
+                  '"lemma": "lemma"' +
+                '}' +
+              '],' +
+              '"sentences": [' +
+              '{' +
+                '"text": "sentence",' +
+                '"location": [' +
+                    '0,' +
+                    '5' +
+                  ']' +
+              '}' +
+              ']' +
+            '}' +
+          '}';
   }
   
    public static testMethod String listModelsResults() {
@@ -3099,22 +3173,34 @@ public class IBMWatsonMockResponses {
               '"column_index_begin": 4000,' +
               '"column_index_end": 5000,' +
               '"row_header_ids": [' +
-                '"id"' +
+                '{' +
+                  '"id": "id"' +
+                '}' +
               '],' +
               '"row_header_texts": [' +
-                '"text"' +
+                '{' +
+                  '"text": "text"' +
+                '}' +
               '],' +
               '"row_header_texts_normalized": [' +
-                '"text_normalized"' +
+                '{' +
+                  '"text_normalized": "text_normalized"' +
+                '}' +
               '],' +
               '"column_header_ids": [' +
-                '"id"' +
+                '{' +
+                  '"id": "id"' +
+                '}' +
               '],' +
               '"column_header_texts": [' +
-                '"text"' +
+                '{' +
+                  '"text": "text"' +
+                '}' +
               '],' +
               '"column_header_texts_normalized": [' +
-                '"text_normalized"' +
+                '{' +
+                  '"text_normalized": "text_normalized"' +
+                '}' +
               '],' +
               '"attributes": [' +
               '  {' +
@@ -3127,6 +3213,26 @@ public class IBMWatsonMockResponses {
               '  }' +
               ']' +
             '}' +
+          '],' +
+          '"key_value_pairs": [' +
+          '{' +
+            '"key": {' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '},' +
+              '"text": "text"' +
+            '},' +
+            '"value": {' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '},' +
+              '"text": "text"' +
+            '}' +
+          '}' +
           ']' +
         '}' +
       '],' +
@@ -3214,6 +3320,16 @@ public class IBMWatsonMockResponses {
           '},' +
           '"confidence_level": "High"' +
         '}' +
+      '],' +
+      '"contract_type": [' +
+      '{' +
+        '"text": "text",' +
+        '"location": {' +
+          '"begin": 0,' +
+          '"end": 1' +
+        '},' +
+        '"confidence_level": "High"' +
+      '}' +
       ']' +
     '}';
   }
@@ -3243,18 +3359,12 @@ public class IBMWatsonMockResponses {
                   '"label": {' +
                     '"nature": "nature",' +
                     '"party": "party"' +
-                  '},' +
-                  '"provenance_ids": [' +
-                    '"provenance_id"' +
-                  ']' +
+                  '}' +
                 '}' +
               '],' +
               '"categories": [' +
                 '{' +
-                  '"label": "label",' +
-                  '"provenance_ids": [' +
-                    '"provenance_id"' +
-                  ']' +
+                  '"label": "label"' +
                 '}' +
               '],' +
               '"attributes": [' +
@@ -3289,18 +3399,12 @@ public class IBMWatsonMockResponses {
               '"label": {' +
                 '"nature": "nature",' +
                 '"party": "party"' +
-              '},' +
-              '"provenance_ids": [' +
-                '"provenance_id"' +
-              ']' +
+              '}' +
             '}' +
           '],' +
           '"categories": [' +
             '{' +
-              '"label": "label",' +
-              '"provenance_ids": [' +
-                '"provenance_id"' +
-              ']' +
+              '"label": "label"' +
             '}' +
           '],' +
           '"attributes": [' +
@@ -3633,22 +3737,34 @@ public class IBMWatsonMockResponses {
               '"column_index_begin": 4000,' +
               '"column_index_end": 5000,' +
               '"row_header_ids": [' +
-                '"id"' +
+                '{' +
+                  '"id": "id"' +
+                '}' +
               '],' +
               '"row_header_texts": [' +
-                '"text"' +
+                '{' +
+                  '"text": "text"' +
+                '}' +
               '],' +
               '"row_header_texts_normalized": [' +
-                '"text_normalized"' +
+                '{' +
+                  '"text_normalized": "text_normalized"' +
+                '}' +
               '],' +
               '"column_header_ids": [' +
-                '"id"' +
+                '{' +
+                  '"id": "id"' +
+                '}' +
               '],' +
               '"column_header_texts": [' +
-                '"text"' +
+                '{' +
+                  '"text": "text"' +
+                '}' +
               '],' +
               '"column_header_texts_normalized": [' +
-                '"text_normalized"' +
+                '{' +
+                  '"text_normalized": "text_normalized"' +
+                '}' +
               '],' +
               '"attributes": [' +
               '  {' +
@@ -3661,6 +3777,26 @@ public class IBMWatsonMockResponses {
               '  }' +
               ']' +
             '}' +
+          '],' +
+          '"key_value_pairs": [' +
+          '{' +
+            '"key": {' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '},' +
+              '"text": "text"' +
+            '},' +
+            '"value": {' +
+              '"cell_id": "cell_id",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '},' +
+              '"text": "text"' +
+            '}' +
+          '}' +
           ']' +
         '}' +
       ']' +
