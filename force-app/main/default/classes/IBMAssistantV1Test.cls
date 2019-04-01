@@ -15,6 +15,7 @@ private class IBMAssistantV1Test {
   private static String entityName;
   private static String entityDescription;
   private static String valueName;
+  private static String valueType;
   private static String valuePattern;
   private static String valueSynonym;
   private static String counterexampleText;
@@ -91,6 +92,7 @@ private class IBMAssistantV1Test {
     entityName = 'test_entity';
     entityDescription = 'Description of ' + entityName;
     valueName = 'Value of ' + entityName;
+    valueType = 'value_type';
     valuePattern = 'test_pattern';
     valueSynonym = 'Synonym for value of ' + entityName;
     counterexampleText = 'Counterexample for ' + workspaceName;
@@ -476,6 +478,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.Value response = assistant.createValue(createOptions);
 
     System.assertEquals(response.getValue(), valueName);
+    System.assertEquals(response.getValueType(), valueType);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getMetadata(), metadata);
@@ -535,6 +538,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.Value response = assistant.getValue(getOptions);
 
     System.assertEquals(response.getValue(), valueName);
+    System.assertEquals(response.getValueType(), valueType);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getMetadata(), metadata);
@@ -570,6 +574,7 @@ private class IBMAssistantV1Test {
     IBMAssistantV1Models.Value response = assistant.updateValue(updateOptions);
 
     System.assertEquals(response.getValue(), valueName);
+    System.assertEquals(response.getValueType(), valueType);
     System.assertEquals(response.getCreated(), (Datetime) JSON.deserialize(timeCreated, Datetime.class));
     System.assertEquals(response.getUpdated(), (Datetime) JSON.deserialize(timeUpdated, Datetime.class));
     System.assertEquals(response.getMetadata(), metadata);

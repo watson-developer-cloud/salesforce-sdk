@@ -541,6 +541,7 @@ public class IBMWatsonMockResponses {
         '"values": [' +
         '{' +
         '"value": "Value of test_entity", ' +
+        '"type": "value_type",' +
         '"created": "2015-12-06T23:53:59.153Z", ' +
         '"updated": "2017-10-18T15:44:56.800", ' +
         '"synonyms": [' +
@@ -589,6 +590,7 @@ public class IBMWatsonMockResponses {
   public static testMethod String value() {
     return '{' +
         '"value": "Value of test_entity", ' +
+        '"type": "value_type",' +
         '"metadata": {' +
         '"code": "test_code"' +
         '}, ' +
@@ -608,6 +610,7 @@ public class IBMWatsonMockResponses {
         '"values": [' +
         '{' +
         '"value": "Value of test_entity", ' +
+        '"type": "value_type",' +
         '"metadata": {' +
         '"code": "test_code"' +
         '}, ' +
@@ -729,7 +732,7 @@ public class IBMWatsonMockResponses {
                 '{' +
                   '"entity": "test_entity"' +
                 '}' +
-                '],' +
+                ']' +
               '},' +
               '"dialog_node": "dialog_node"' +
             '}' +
@@ -856,6 +859,7 @@ public class IBMWatsonMockResponses {
         '"values": [' +
         '{' +
           '"value": "Value of test_entity", ' +
+          '"type": "value_type",' +
           '"metadata": {' +
             '"code": "test_code"' +
           '}, ' +
@@ -887,6 +891,7 @@ public class IBMWatsonMockResponses {
           '"values": [' +
           '{' +
             '"value": "Value of test_entity", ' +
+            '"type": "value_type",' +
             '"metadata": {' +
             '"code": "test_code"' +
             '}, ' +
