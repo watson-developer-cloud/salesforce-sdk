@@ -1848,6 +1848,70 @@ private class IBMDiscoveryV1Test {
     Test.stopTest();
   }
 
+  static testMethod void testCredentialDetails() {
+    String clientId = 'client_id';
+    String clientSecret = 'client_secret';
+    String sourceType = 'salesforce';
+    String enterpriseId = 'enterprise_id';
+    String organizationUrl = 'organization_url';
+    String passphrase = 'passphrase';
+    String password = 'password';
+    String privateKey = 'private_key';
+    String publicKeyId = 'public_key_id';
+    String siteCollectionPath = 'site_collection_path';
+    String credentialType = 'username_password';
+    String url = 'login.salesforce.com';
+    String username = 'user@email.address';
+    String gatewayId = 'gateway_id';
+    String sourceVersion = 'source_version';
+    String webApplicationUrl = 'web_application_url';
+    String domain = 'domain';
+    String accessKeyId = 'access_key_id';
+    String endpoint = 'endpoint';
+    String secretAccessKey = 'secret_access_key';
+
+    IBMDiscoveryV1Models.CredentialDetails details = new IBMDiscoveryV1Models.CredentialDetails();
+    details.setClientId(clientId);
+    details.setClientSecret(clientSecret);
+    details.setCredentialType(credentialType);
+    details.setEnterpriseId(enterpriseId);
+    details.setOrganizationUrl(organizationUrl);
+    details.setPassphrase(passphrase);
+    details.setPassword(password);
+    details.setPrivateKey(privateKey);
+    details.setPublicKeyId(publicKeyId);
+    details.setSiteCollectionPath(siteCollectionPath);
+    details.setUrl(url);
+    details.setUsername(username);
+    details.setGatewayId(gatewayId);
+    details.setSourceVersion(sourceVersion);
+    details.setWebApplicationUrl(webApplicationUrl);
+    details.setDomain(domain);
+    details.setAccessKeyId(accessKeyId);
+    details.setEndpoint(endpoint);
+    details.setSecretAccessKey(secretAccessKey);
+
+    System.assertEquals(clientId, details.getClientId());
+    System.assertEquals(clientSecret, details.getClientSecret());
+    System.assertEquals(credentialType, details.getCredentialType());
+    System.assertEquals(enterpriseId, details.getEnterpriseId());
+    System.assertEquals(organizationUrl, details.getOrganizationUrl());
+    System.assertEquals(passphrase, details.getPassphrase());
+    System.assertEquals(password, details.getPassword());
+    System.assertEquals(privateKey, details.getPrivateKey());
+    System.assertEquals(publicKeyId, details.getPublicKeyId());
+    System.assertEquals(siteCollectionPath, details.getSiteCollectionPath());
+    System.assertEquals(url, details.getUrl());
+    System.assertEquals(username, details.getUsername());
+    System.assertEquals(gatewayId, details.getGatewayId());
+    System.assertEquals(sourceVersion, details.getSourceVersion());
+    System.assertEquals(webApplicationUrl, details.getWebApplicationUrl());
+    System.assertEquals(domain, details.getDomain());
+    System.assertEquals(accessKeyId, details.getAccessKeyId());
+    System.assertEquals(endpoint, details.getEndpoint());
+    System.assertEquals(secretAccessKey, details.getSecretAccessKey());
+  }
+
   static testMethod void testCreateCredentials() {
     String body = IBMWatsonMockResponses.credentials();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
@@ -2804,5 +2868,77 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(maximumHops, sourceOptionsWebCrawl.getMaximumHops());
     System.assertEquals(requestTimeout, sourceOptionsWebCrawl.getRequestTimeout());
     System.assert(sourceOptionsWebCrawl.getOverrideRobotsTxt());
+  }
+
+  static testMethod void testSourceOptionsBuckets() {
+    String name = 'name';
+    Long testLimit = 9000L;
+
+    IBMDiscoveryV1Models.SourceOptionsBuckets sourceOptionsBuckets = new IBMDiscoveryV1Models.SourceOptionsBuckets();
+    sourceOptionsBuckets.setName(name);
+    sourceOptionsBuckets.setXlimit(testLimit);
+
+    System.assertEquals(name, sourceOptionsBuckets.getName());
+    System.assertEquals(testLimit, sourceOptionsBuckets.getXlimit());
+  }
+
+  static testMethod void testSourceOptions() {
+    String folderOwnerUserId = 'folder_owner_user_id';
+    String folderId = 'folder_id';
+    Long testLimit = 10L;
+    String objectName = 'object_name';
+    String siteCollectionPath = 'site_collection_path';
+    String url = 'url';
+    Long maximumHops = 5L;
+    Long requestTimeout = 2L;
+    String bucketName = 'bucket_name';
+    String crawlSpeed = 'aggressive';
+
+    IBMDiscoveryV1Models.SourceOptions sourceOptions = new IBMDiscoveryV1Models.SourceOptions();
+    IBMDiscoveryV1Models.SourceOptionsFolder folder = new IBMDiscoveryV1Models.SourceOptionsFolder();
+    folder.setOwnerUserId(folderOwnerUserId);
+    folder.setFolderId(folderId);
+    folder.setXlimit(testLimit);
+    sourceOptions.setFolders(new List<IBMDiscoveryV1Models.SourceOptionsFolder> { folder });
+    IBMDiscoveryV1Models.SourceOptionsObject sourceObject = new IBMDiscoveryV1Models.SourceOptionsObject();
+    sourceObject.setName(objectName);
+    sourceObject.setXlimit(testLimit);
+    sourceOptions.setObjects(new List<IBMDiscoveryV1Models.SourceOptionsObject> { sourceObject });
+    IBMDiscoveryV1Models.SourceOptionsSiteColl siteColl = new IBMDiscoveryV1Models.SourceOptionsSiteColl();
+    siteColl.setSiteCollectionPath(siteCollectionPath);
+    siteColl.setXlimit(testLimit);
+    sourceOptions.setSiteCollections(new List<IBMDiscoveryV1Models.SourceOptionsSiteColl> { siteColl });
+    IBMDiscoveryV1Models.SourceOptionsWebCrawl webCrawl = new IBMDiscoveryV1Models.SourceOptionsWebCrawl();
+    webCrawl.setUrl(url);
+    webCrawl.setLimitToStartingHosts(true);
+    webCrawl.setCrawlSpeed(crawlSpeed);
+    webCrawl.setAllowUntrustedCertificate(true);
+    webCrawl.setMaximumHops(maximumHops);
+    webCrawl.setRequestTimeout(requestTimeout);
+    webCrawl.setOverrideRobotsTxt(true);
+    sourceOptions.setUrls(new List<IBMDiscoveryV1Models.SourceOptionsWebCrawl> { webCrawl });
+    IBMDiscoveryV1Models.SourceOptionsBuckets buckets = new IBMDiscoveryV1Models.SourceOptionsBuckets();
+    buckets.setName(bucketName);
+    buckets.setXlimit(testLimit);
+    sourceOptions.setBuckets(new List<IBMDiscoveryV1Models.SourceOptionsBuckets> { buckets });
+    sourceOptions.setCrawlAllBuckets(true);
+
+    System.assertEquals(folderOwnerUserId, sourceOptions.getFolders().get(0).getOwnerUserId());
+    System.assertEquals(folderId, sourceOptions.getFolders().get(0).getFolderId());
+    System.assertEquals(testLimit, sourceOptions.getFolders().get(0).getXlimit());
+    System.assertEquals(objectName, sourceOptions.getObjects().get(0).getName());
+    System.assertEquals(testLimit, sourceOptions.getObjects().get(0).getXlimit());
+    System.assertEquals(siteCollectionPath, sourceOptions.getSiteCollections().get(0).getSiteCollectionPath());
+    System.assertEquals(testLimit, sourceOptions.getSiteCollections().get(0).getXlimit());
+    System.assertEquals(url, sourceOptions.getUrls().get(0).getUrl());
+    System.assert(sourceOptions.getUrls().get(0).getLimitToStartingHosts());
+    System.assertEquals(crawlSpeed, sourceOptions.getUrls().get(0).getCrawlSpeed());
+    System.assert(sourceOptions.getUrls().get(0).getAllowUntrustedCertificate());
+    System.assertEquals(maximumHops, sourceOptions.getUrls().get(0).getMaximumHops());
+    System.assertEquals(requestTimeout, sourceOptions.getUrls().get(0).getRequestTimeout());
+    System.assert(sourceOptions.getUrls().get(0).getOverrideRobotsTxt());
+    System.assertEquals(bucketName, sourceOptions.getBuckets().get(0).getName());
+    System.assertEquals(testLimit, sourceOptions.getBuckets().get(0).getXlimit());
+    System.assert(sourceOptions.getCrawlAllBuckets());
   }
 }
