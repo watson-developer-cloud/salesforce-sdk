@@ -170,10 +170,9 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     multipartBuilder.addFormDataPart('name', createClassifierOptions.name());
     for (String key : createClassifierOptions.positiveExamples().keySet()) {
       String partName = String.format('{0}_positive_examples', new String[] { key });
-      String fileName = createClassifierOptions.positiveExamplesFilename() != null ? createClassifierOptions.positiveExamplesFilename().get(key) : null;
       IBMWatsonFile file = createClassifierOptions.positiveExamples().get(key);
       IBMWatsonRequestBody formPart = IBMWatsonRequestBody.create(file, 'application/octet-stream');
-      multipartBuilder.addFormDataPart(partName, fileName != null ? fileName : file.name(), formPart);
+      multipartBuilder.addFormDataPart(partName, file.name(), formPart);
     }
     if (createClassifierOptions.negativeExamples() != null) {
       IBMWatsonRequestBody negativeExamplesBody = IBMWatsonRequestBody.create(createClassifierOptions.negativeExamples(), 'application/octet-stream');
@@ -290,10 +289,9 @@ public class IBMVisualRecognitionV3 extends IBMWatsonService {
     if (updateClassifierOptions.positiveExamples() != null) {
       for (String key : updateClassifierOptions.positiveExamples().keySet()) {
         String partName = String.format('{0}_positive_examples', new String[] { key });
-        String fileName = updateClassifierOptions.positiveExamplesFilename() != null ? updateClassifierOptions.positiveExamplesFilename().get(key) : null;
         IBMWatsonFile file = updateClassifierOptions.positiveExamples().get(key);
         IBMWatsonRequestBody formPart = IBMWatsonRequestBody.create(file, 'application/octet-stream');
-        multipartBuilder.addFormDataPart(partName, fileName != null ? fileName : file.name(), formPart);
+        multipartBuilder.addFormDataPart(partName, file.name(), formPart);
       }
     }
     if (updateClassifierOptions.negativeExamples() != null) {

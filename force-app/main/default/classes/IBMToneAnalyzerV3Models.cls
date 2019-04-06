@@ -93,7 +93,7 @@ public class IBMToneAnalyzerV3Models {
           ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
           newTones.add(newItem);
         }
-        ret.setTones(newTones);
+        ret.tones_serialized_name = newTones;
       }
 
       // calling custom deserializer for toneCategories
@@ -106,7 +106,7 @@ public class IBMToneAnalyzerV3Models {
           ToneCategory newItem = (ToneCategory) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneCategory.class);
           newToneCategories.add(newItem);
         }
-        ret.setToneCategories(newToneCategories);
+        ret.tone_categories_serialized_name = newToneCategories;
       }
 
       return ret;
@@ -274,7 +274,7 @@ public class IBMToneAnalyzerV3Models {
           ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
           newTones.add(newItem);
         }
-        ret.setTones(newTones);
+        ret.tones_serialized_name = newTones;
       }
 
       // calling custom deserializer for toneCategories
@@ -287,7 +287,7 @@ public class IBMToneAnalyzerV3Models {
           ToneCategory newItem = (ToneCategory) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneCategory.class);
           newToneCategories.add(newItem);
         }
-        ret.setToneCategories(newToneCategories);
+        ret.tone_categories_serialized_name = newToneCategories;
       }
 
       return ret;
@@ -366,7 +366,7 @@ public class IBMToneAnalyzerV3Models {
           SentenceAnalysis newItem = (SentenceAnalysis) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SentenceAnalysis.class);
           newSentencesTone.add(newItem);
         }
-        ret.setSentencesTone(newSentencesTone);
+        ret.sentences_tone_serialized_name = newSentencesTone;
       }
 
       return ret;
@@ -462,7 +462,7 @@ public class IBMToneAnalyzerV3Models {
           ToneScore newItem = (ToneScore) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneScore.class);
           newTones.add(newItem);
         }
-        ret.setTones(newTones);
+        ret.tones_serialized_name = newTones;
       }
 
       return ret;
@@ -761,7 +761,7 @@ public class IBMToneAnalyzerV3Models {
     private String text;
 
     private ToneInputBuilder(ToneInput toneInput) {
-      text = toneInput.text_serialized_name;
+      this.text = toneInput.text_serialized_name;
     }
 
     /**
@@ -806,11 +806,11 @@ public class IBMToneAnalyzerV3Models {
   public class ToneOptions extends IBMWatsonOptionsModel {
     private ToneInput toneInput;
     private String body;
-    private String contentType;
     private Boolean sentences;
     private List<String> tones;
     private String contentLanguage;
     private String acceptLanguage;
+    private String contentType;
  
     /**
      * Gets the toneInput.
@@ -834,18 +834,6 @@ public class IBMToneAnalyzerV3Models {
      */
     public String body() {
       return body;
-    }
- 
-    /**
-     * Gets the contentType.
-     *
-     * The type of the input. A character encoding can be specified by including a `charset` parameter. For example,
-     * 'text/plain;charset=utf-8'.
-     *
-     * @return the contentType
-     */
-    public String contentType() {
-      return contentType;
     }
  
     /**
@@ -904,15 +892,27 @@ public class IBMToneAnalyzerV3Models {
     public String acceptLanguage() {
       return acceptLanguage;
     }
+ 
+    /**
+     * Gets the contentType.
+     *
+     * The type of the input. A character encoding can be specified by including a `charset` parameter. For example,
+     * 'text/plain;charset=utf-8'.
+     *
+     * @return the contentType
+     */
+    public String contentType() {
+      return contentType;
+    }
 
     private ToneOptions(ToneOptionsBuilder builder) {
       toneInput = builder.toneInput;
       body = builder.body;
-      contentType = builder.contentType;
       sentences = builder.sentences;
       tones = builder.tones;
       contentLanguage = builder.contentLanguage;
       acceptLanguage = builder.acceptLanguage;
+      contentType = builder.contentType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -933,20 +933,20 @@ public class IBMToneAnalyzerV3Models {
   public class ToneOptionsBuilder extends IBMWatsonOptionsModel {
     private ToneInput toneInput;
     private String body;
-    private String contentType;
     private Boolean sentences;
     private List<String> tones;
     private String contentLanguage;
     private String acceptLanguage;
+    private String contentType;
 
     private ToneOptionsBuilder(ToneOptions toneOptions) {
       toneInput = toneOptions.toneInput;
       body = toneOptions.body;
-      contentType = toneOptions.contentType;
       sentences = toneOptions.sentences;
       tones = toneOptions.tones;
       contentLanguage = toneOptions.contentLanguage;
       acceptLanguage = toneOptions.acceptLanguage;
+      contentType = toneOptions.contentType;
       this.requestHeaders.putAll(toneOptions.requestHeaders());
     }
 
@@ -1224,8 +1224,8 @@ public class IBMToneAnalyzerV3Models {
     private String user;
 
     private UtteranceBuilder(Utterance utterance) {
-      text = utterance.text_serialized_name;
-      user = utterance.user_serialized_name;
+      this.text = utterance.text_serialized_name;
+      this.user = utterance.user_serialized_name;
     }
 
     /**
@@ -1342,7 +1342,7 @@ public class IBMToneAnalyzerV3Models {
           UtteranceAnalysis newItem = (UtteranceAnalysis) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), UtteranceAnalysis.class);
           newUtterancesTone.add(newItem);
         }
-        ret.setUtterancesTone(newUtterancesTone);
+        ret.utterances_tone_serialized_name = newUtterancesTone;
       }
 
       return ret;
@@ -1463,7 +1463,7 @@ public class IBMToneAnalyzerV3Models {
           ToneChatScore newItem = (ToneChatScore) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ToneChatScore.class);
           newTones.add(newItem);
         }
-        ret.setTones(newTones);
+        ret.tones_serialized_name = newTones;
       }
 
       return ret;

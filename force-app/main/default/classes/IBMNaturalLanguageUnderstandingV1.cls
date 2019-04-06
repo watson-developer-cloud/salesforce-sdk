@@ -4,7 +4,7 @@
  * analysis by default, so the results can ignore most advertisements and other unwanted content.
  *
  * You can create [custom models](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html)
- * with Watson Knowledge Studio to detect custom entities and relations in Natural Language Understanding.
+ * with Watson Knowledge Studio to detect custom entities, relations, and categories in Natural Language Understanding.
  *
  * @version V1
  * @see <a href="http://www.ibm.com/watson/developercloud/natural-language-understanding.html">Natural Language Understanding</a>
@@ -70,7 +70,8 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
    * - Metadata
    * - Relations
    * - Semantic roles
-   * - Sentiment.
+   * - Sentiment
+   * - Syntax (Experimental).
    *
    * @param analyzeOptions the {@link IBMNaturalLanguageUnderstandingV1Models.AnalyzeOptions} containing the options for the call
    * @return the {@link IBMNaturalLanguageUnderstandingV1Models.AnalysisResults} with the response
@@ -88,6 +89,7 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
     }
     builder.query('version', versionDate);
     final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('features', analyzeOptions.features());
     if (analyzeOptions.text() != null) {
       contentJson.put('text', analyzeOptions.text());
     }
@@ -97,7 +99,6 @@ public class IBMNaturalLanguageUnderstandingV1 extends IBMWatsonService {
     if (analyzeOptions.url() != null) {
       contentJson.put('url', analyzeOptions.url());
     }
-    contentJson.put('features', analyzeOptions.features());
     if (analyzeOptions.clean() != null) {
       contentJson.put('clean', analyzeOptions.clean());
     }

@@ -67,6 +67,8 @@ private class IBMCompareComplyV1Test {
   private static String CANCEL;
   private static String UNKNOWN;
   private static String HIGH;
+  private static String BEGIN_KEY;
+  private static String END_KEY;
 
   static {
     VERSION = '2018-10-15';
@@ -136,6 +138,8 @@ private class IBMCompareComplyV1Test {
     CANCEL = 'cancel';
     UNKNOWN = 'Unknown';
     HIGH = 'High';
+    BEGIN_KEY = 'begin';
+    END_KEY = 'end';
   }
 
   static testMethod void testAddFeedbackOptions() {
@@ -163,7 +167,6 @@ private class IBMCompareComplyV1Test {
     category.setProvenanceIds(new List<String> { PROVENANCE_ID });
 
     System.assertEquals(AMENDMENTS, category.getLabel());
-    System.assertEquals(PROVENANCE_ID, category.getProvenanceIds().get(0));
     Test.stopTest();
   }
 
@@ -177,15 +180,13 @@ private class IBMCompareComplyV1Test {
       .build();
     IBMCompareComplyV1Models.ClassifyElementsOptions classifyElementsOptions = new IBMCompareComplyV1Models.ClassifyElementsOptionsBuilder()
       .file(testPdf)
-      .filename(FILENAME)
-      .modelId(CONTRACTS)
+      .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     classifyElementsOptions = classifyElementsOptions.newBuilder().build();
 
     System.assertEquals(testPdf, classifyElementsOptions.file());
-    System.assertEquals(FILENAME, classifyElementsOptions.filename());
-    System.assertEquals(CONTRACTS, classifyElementsOptions.modelId());
+    System.assertEquals(CONTRACTS, classifyElementsOptions.model());
     Test.stopTest();
   }
 
@@ -200,26 +201,22 @@ private class IBMCompareComplyV1Test {
     IBMCompareComplyV1Models.CompareDocumentsOptions compareDocumentsOptions = new IBMCompareComplyV1Models.CompareDocumentsOptionsBuilder()
       .file1(testPdf)
       .file1ContentType(CONTENT_TYPE_PDF)
-      .file1Filename(FILENAME)
       .file1Label(LABEL)
       .file2(testPdf)
       .file2ContentType(CONTENT_TYPE_PDF)
-      .file2Filename(FILENAME)
       .file2Label(LABEL)
-      .modelId(CONTRACTS)
+      .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     compareDocumentsOptions = compareDocumentsOptions.newBuilder().build();
 
     System.assertEquals(testPdf, compareDocumentsOptions.file1());
     System.assertEquals(CONTENT_TYPE_PDF, compareDocumentsOptions.file1ContentType());
-    System.assertEquals(FILENAME, compareDocumentsOptions.file1Filename());
     System.assertEquals(LABEL, compareDocumentsOptions.file1Label());
     System.assertEquals(testPdf, compareDocumentsOptions.file2());
     System.assertEquals(CONTENT_TYPE_PDF, compareDocumentsOptions.file2ContentType());
-    System.assertEquals(FILENAME, compareDocumentsOptions.file2Filename());
     System.assertEquals(LABEL, compareDocumentsOptions.file2Label());
-    System.assertEquals(CONTRACTS, compareDocumentsOptions.modelId());
+    System.assertEquals(CONTRACTS, compareDocumentsOptions.model());
     Test.stopTest();
   }
 
@@ -235,7 +232,7 @@ private class IBMCompareComplyV1Test {
       .file(testPdf)
       .fileContentType(CONTENT_TYPE_PDF)
       .filename(FILENAME)
-      .modelId(CONTRACTS)
+      .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     convertToHtmlOptions = convertToHtmlOptions.newBuilder().build();
@@ -243,7 +240,7 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(testPdf, convertToHtmlOptions.file());
     System.assertEquals(CONTENT_TYPE_PDF, convertToHtmlOptions.fileContentType());
     System.assertEquals(FILENAME, convertToHtmlOptions.filename());
-    System.assertEquals(CONTRACTS, convertToHtmlOptions.modelId());
+    System.assertEquals(CONTRACTS, convertToHtmlOptions.model());
     Test.stopTest();
   }
 
@@ -260,12 +257,10 @@ private class IBMCompareComplyV1Test {
       .inputBucketLocation(BUCKET_LOCATION)
       .inputBucketName(BUCKET_NAME)
       .inputCredentialsFile(testCredentialFile)
-      .inputCredentialsFilename(FILENAME)
-      .modelId(CONTRACTS)
+      .model(CONTRACTS)
       .outputBucketLocation(BUCKET_LOCATION)
       .outputBucketName(BUCKET_NAME)
       .outputCredentialsFile(testCredentialFile)
-      .outputCredentialsFilename(FILENAME)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     createBatchOptions = createBatchOptions.newBuilder().build();
@@ -274,12 +269,10 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(BUCKET_LOCATION, createBatchOptions.inputBucketLocation());
     System.assertEquals(BUCKET_NAME, createBatchOptions.inputBucketName());
     System.assertEquals(testCredentialFile, createBatchOptions.inputCredentialsFile());
-    System.assertEquals(FILENAME, createBatchOptions.inputCredentialsFilename());
-    System.assertEquals(CONTRACTS, createBatchOptions.modelId());
+    System.assertEquals(CONTRACTS, createBatchOptions.model());
     System.assertEquals(BUCKET_LOCATION, createBatchOptions.outputBucketLocation());
     System.assertEquals(BUCKET_NAME, createBatchOptions.outputBucketName());
     System.assertEquals(testCredentialFile, createBatchOptions.outputCredentialsFile());
-    System.assertEquals(FILENAME, createBatchOptions.outputCredentialsFilename());
     Test.stopTest();
   }
 
@@ -287,13 +280,13 @@ private class IBMCompareComplyV1Test {
     Test.startTest();
     IBMCompareComplyV1Models.DeleteFeedbackOptions deleteFeedbackOptions = new IBMCompareComplyV1Models.DeleteFeedbackOptionsBuilder()
       .feedbackId(FEEDBACK_ID)
-      .modelId(CONTRACTS)
+      .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     deleteFeedbackOptions = deleteFeedbackOptions.newBuilder().build();
 
     System.assertEquals(FEEDBACK_ID, deleteFeedbackOptions.feedbackId());
-    System.assertEquals(CONTRACTS, deleteFeedbackOptions.modelId());
+    System.assertEquals(CONTRACTS, deleteFeedbackOptions.model());
     Test.stopTest();
   }
 
@@ -307,15 +300,13 @@ private class IBMCompareComplyV1Test {
       .build();
     IBMCompareComplyV1Models.ExtractTablesOptions extractTablesOptions = new IBMCompareComplyV1Models.ExtractTablesOptionsBuilder()
       .file(testPdf)
-      .filename(FILENAME)
-      .modelId(TABLES)
+      .model(TABLES)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     extractTablesOptions = extractTablesOptions.newBuilder().build();
 
     System.assertEquals(testPdf, extractTablesOptions.file());
-    System.assertEquals(FILENAME, extractTablesOptions.filename());
-    System.assertEquals(TABLES, extractTablesOptions.modelId());
+    System.assertEquals(TABLES, extractTablesOptions.model());
     Test.stopTest();
   }
 
@@ -374,13 +365,13 @@ private class IBMCompareComplyV1Test {
     Test.startTest();
     IBMCompareComplyV1Models.GetFeedbackOptions getFeedbackOptions = new IBMCompareComplyV1Models.GetFeedbackOptionsBuilder()
       .feedbackId(FEEDBACK_ID)
-      .modelId(CONTRACTS)
+      .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     getFeedbackOptions = getFeedbackOptions.newBuilder().build();
 
     System.assertEquals(FEEDBACK_ID, getFeedbackOptions.feedbackId());
-    System.assertEquals(CONTRACTS, getFeedbackOptions.modelId());
+    System.assertEquals(CONTRACTS, getFeedbackOptions.model());
     Test.stopTest();
   }
 
@@ -479,7 +470,6 @@ private class IBMCompareComplyV1Test {
     typeLabel.setProvenanceIds(new List<String> { PROVENANCE_ID });
 
     System.assertEquals(label, typeLabel.getLabel());
-    System.assertEquals(PROVENANCE_ID, typeLabel.getProvenanceIds().get(0));
     Test.stopTest();
   }
 
@@ -488,14 +478,14 @@ private class IBMCompareComplyV1Test {
     IBMCompareComplyV1Models.UpdateBatchOptions updateBatchOptions = new IBMCompareComplyV1Models.UpdateBatchOptionsBuilder()
       .action(CANCEL)
       .batchId(BATCH_ID)
-      .modelId(CONTRACTS)
+      .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     updateBatchOptions = updateBatchOptions.newBuilder().build();
 
     System.assertEquals(CANCEL, updateBatchOptions.action());
     System.assertEquals(BATCH_ID, updateBatchOptions.batchId());
-    System.assertEquals(CONTRACTS, updateBatchOptions.modelId());
+    System.assertEquals(CONTRACTS, updateBatchOptions.model());
     Test.stopTest();
   }
 
@@ -537,7 +527,7 @@ private class IBMCompareComplyV1Test {
       .file(testPdf)
       .fileContentType(CONTENT_TYPE_PDF)
       .filename(FILENAME)
-      .modelId(CONTRACTS)
+      .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     IBMCompareComplyV1Models.HTMLReturn response = service.convertToHtml(convertToHtmlOptions);
@@ -573,8 +563,7 @@ private class IBMCompareComplyV1Test {
       .build();
     IBMCompareComplyV1Models.ClassifyElementsOptions classifyElementsOptions = new IBMCompareComplyV1Models.ClassifyElementsOptionsBuilder()
       .file(testPdf)
-      .filename(FILENAME)
-      .modelId(CONTRACTS)
+      .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     IBMCompareComplyV1Models.ClassifyReturn response = service.classifyElements(classifyElementsOptions);
@@ -590,9 +579,7 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEXT, response.getElements().get(0).getText());
     System.assertEquals(NATURE, response.getElements().get(0).getTypes().get(0).getLabel().getNature());
     System.assertEquals(PARTY, response.getElements().get(0).getTypes().get(0).getLabel().getParty());
-    System.assertEquals(PROVENANCE_ID, response.getElements().get(0).getTypes().get(0).getProvenanceIds().get(0));
     System.assertEquals(LABEL, response.getElements().get(0).getCategories().get(0).getLabel());
-    System.assertEquals(PROVENANCE_ID, response.getElements().get(0).getCategories().get(0).getProvenanceIds().get(0));
     System.assertEquals(TYPE, response.getElements().get(0).getAttributes().get(0).getXtype());
     System.assertEquals(TEXT, response.getElements().get(0).getAttributes().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getElements().get(0).getAttributes().get(0).getLocation().getXbegin());
@@ -603,16 +590,16 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getSectionTitle().getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getSectionTitle().getLocation().getXend());
     System.assertEquals(CELL_ID, response.getTables().get(0).getTableHeaders().get(0).getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getTableHeaders().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getTableHeaders().get(0).getLocation().getXend());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getTableHeaders().get(0).getLocation().get(BEGIN_KEY));
+    System.assertEquals(TEST_END, response.getTables().get(0).getTableHeaders().get(0).getLocation().get(END_KEY));
     System.assertEquals(TEXT, response.getTables().get(0).getTableHeaders().get(0).getText());
     System.assertEquals(ROW_INDEX_BEGIN, response.getTables().get(0).getTableHeaders().get(0).getRowIndexBegin());
     System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getTableHeaders().get(0).getRowIndexEnd());
     System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getTableHeaders().get(0).getColumnIndexBegin());
     System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getTableHeaders().get(0).getColumnIndexEnd());
     System.assertEquals(CELL_ID, response.getTables().get(0).getColumnHeaders().get(0).getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getColumnHeaders().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getColumnHeaders().get(0).getLocation().getXend());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getColumnHeaders().get(0).getLocation().get(BEGIN_KEY));
+    System.assertEquals(TEST_END, response.getTables().get(0).getColumnHeaders().get(0).getLocation().get(END_KEY));
     System.assertEquals(TEXT, response.getTables().get(0).getColumnHeaders().get(0).getText());
     System.assertEquals(TEXT_NORMALIZED, response.getTables().get(0).getColumnHeaders().get(0).getTextNormalized());
     System.assertEquals(ROW_INDEX_BEGIN, response.getTables().get(0).getColumnHeaders().get(0).getRowIndexBegin());
@@ -636,18 +623,26 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getRowIndexEnd());
     System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getBodyCells().get(0).getColumnIndexBegin());
     System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getColumnIndexEnd());
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0));
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0));
+    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0).getId());
+    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0).getText());
     System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0));
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0));
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0));
+        response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0).getTextNormalized());
+    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0).getId());
+    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0).getText());
     System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0));
+        response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0).getTextNormalized());
     System.assertEquals(TYPE, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getXtype());
     System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXend());
+    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getCellId());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
+    System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
+    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getValue().getCellId());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
+    System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
     System.assertEquals(TEXT, response.getDocumentStructure().getSectionTitles().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getDocumentStructure().getSectionTitles().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getDocumentStructure().getSectionTitles().get(0).getLocation().getXend());
@@ -683,6 +678,10 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_BEGIN, response.getTerminationDates().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTerminationDates().get(0).getLocation().getXend());
     System.assertEquals(HIGH, response.getTerminationDates().get(0).getConfidenceLevel());
+    System.assertEquals(TEXT, response.getContractType().get(0).getText());
+    System.assertEquals(TEST_BEGIN, response.getContractType().get(0).getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getContractType().get(0).getLocation().getXend());
+    System.assertEquals(HIGH, response.getContractType().get(0).getConfidenceLevel());
     Test.stopTest();
   }
 
@@ -709,8 +708,7 @@ private class IBMCompareComplyV1Test {
       .build();
     IBMCompareComplyV1Models.ExtractTablesOptions extractTablesOptions = new IBMCompareComplyV1Models.ExtractTablesOptionsBuilder()
       .file(testPdf)
-      .filename(FILENAME)
-      .modelId(TABLES)
+      .model(TABLES)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     IBMCompareComplyV1Models.TableReturn response = service.extractTables(extractTablesOptions);
@@ -726,16 +724,16 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getSectionTitle().getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getSectionTitle().getLocation().getXend());
     System.assertEquals(CELL_ID, response.getTables().get(0).getTableHeaders().get(0).getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getTableHeaders().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getTableHeaders().get(0).getLocation().getXend());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getTableHeaders().get(0).getLocation().get(BEGIN_KEY));
+    System.assertEquals(TEST_END, response.getTables().get(0).getTableHeaders().get(0).getLocation().get(END_KEY));
     System.assertEquals(TEXT, response.getTables().get(0).getTableHeaders().get(0).getText());
     System.assertEquals(ROW_INDEX_BEGIN, response.getTables().get(0).getTableHeaders().get(0).getRowIndexBegin());
     System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getTableHeaders().get(0).getRowIndexEnd());
     System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getTableHeaders().get(0).getColumnIndexBegin());
     System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getTableHeaders().get(0).getColumnIndexEnd());
     System.assertEquals(CELL_ID, response.getTables().get(0).getColumnHeaders().get(0).getCellId());
-    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getColumnHeaders().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getTables().get(0).getColumnHeaders().get(0).getLocation().getXend());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getColumnHeaders().get(0).getLocation().get(BEGIN_KEY));
+    System.assertEquals(TEST_END, response.getTables().get(0).getColumnHeaders().get(0).getLocation().get(END_KEY));
     System.assertEquals(TEXT, response.getTables().get(0).getColumnHeaders().get(0).getText());
     System.assertEquals(TEXT_NORMALIZED, response.getTables().get(0).getColumnHeaders().get(0).getTextNormalized());
     System.assertEquals(ROW_INDEX_BEGIN, response.getTables().get(0).getColumnHeaders().get(0).getRowIndexBegin());
@@ -759,18 +757,26 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(ROW_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getRowIndexEnd());
     System.assertEquals(COLUMN_INDEX_BEGIN, response.getTables().get(0).getBodyCells().get(0).getColumnIndexBegin());
     System.assertEquals(COLUMN_INDEX_END, response.getTables().get(0).getBodyCells().get(0).getColumnIndexEnd());
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0));
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0));
+    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getRowHeaderIds().get(0).getId());
+    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getRowHeaderTexts().get(0).getText());
     System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0));
-    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0));
-    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0));
+        response.getTables().get(0).getBodyCells().get(0).getRowHeaderTextsNormalized().get(0).getTextNormalized());
+    System.assertEquals(ID, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderIds().get(0).getId());
+    System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTexts().get(0).getText());
     System.assertEquals(TEXT_NORMALIZED,
-        response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0));
+        response.getTables().get(0).getBodyCells().get(0).getColumnHeaderTextsNormalized().get(0).getTextNormalized());
     System.assertEquals(TYPE, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getXtype());
     System.assertEquals(TEXT, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTables().get(0).getBodyCells().get(0).getAttributes().get(0).getLocation().getXend());
+    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getCellId());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
+    System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
+    System.assertEquals(CELL_ID, response.getTables().get(0).getKeyValuePairs().get(0).getValue().getCellId());
+    System.assertEquals(TEST_BEGIN, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getLocation().getXend());
+    System.assertEquals(TEXT, response.getTables().get(0).getKeyValuePairs().get(0).getKey().getText());
     Test.stopTest();
   }
 
@@ -798,13 +804,11 @@ private class IBMCompareComplyV1Test {
     IBMCompareComplyV1Models.CompareDocumentsOptions compareDocumentsOptions = new IBMCompareComplyV1Models.CompareDocumentsOptionsBuilder()
       .file1(testPdf)
       .file1ContentType(CONTENT_TYPE_PDF)
-      .file1Filename(FILENAME)
       .file1Label(LABEL)
       .file2(testPdf)
       .file2ContentType(CONTENT_TYPE_PDF)
-      .file2Filename(FILENAME)
       .file2Label(LABEL)
-      .modelId(CONTRACTS)
+      .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     IBMCompareComplyV1Models.CompareReturn response = service.compareDocuments(compareDocumentsOptions);
@@ -821,11 +825,7 @@ private class IBMCompareComplyV1Test {
         response.getAlignedElements().get(0).getElementPair().get(0).getTypes().get(0).getLabel().getNature());
     System.assertEquals(PARTY,
         response.getAlignedElements().get(0).getElementPair().get(0).getTypes().get(0).getLabel().getParty());
-    System.assertEquals(PROVENANCE_ID,
-        response.getAlignedElements().get(0).getElementPair().get(0).getTypes().get(0).getProvenanceIds().get(0));
     System.assertEquals(LABEL, response.getAlignedElements().get(0).getElementPair().get(0).getCategories().get(0).getLabel());
-    System.assertEquals(PROVENANCE_ID,
-        response.getAlignedElements().get(0).getElementPair().get(0).getCategories().get(0).getProvenanceIds().get(0));
     System.assertEquals(TYPE, response.getAlignedElements().get(0).getElementPair().get(0).getAttributes().get(0).getXtype());
     System.assertEquals(TEXT, response.getAlignedElements().get(0).getElementPair().get(0).getAttributes().get(0).getText());
     System.assertEquals(TEST_BEGIN,
@@ -833,7 +833,6 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_END,
         response.getAlignedElements().get(0).getElementPair().get(0).getAttributes().get(0).getLocation().getXend());
     System.assertEquals(true, response.getAlignedElements().get(0).getIdenticalText());
-    System.assertEquals(PROVENANCE_ID, response.getAlignedElements().get(0).getProvenanceIds().get(0));
     System.assertEquals(true, response.getAlignedElements().get(0).getSignificantElements());
     System.assertEquals(DOCUMENT_LABEL, response.getUnalignedElements().get(0).getDocumentLabel());
     System.assertEquals(TEXT, response.getUnalignedElements().get(0).getText());
@@ -841,10 +840,7 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_END, response.getUnalignedElements().get(0).getLocation().getXend());
     System.assertEquals(NATURE, response.getUnalignedElements().get(0).getTypes().get(0).getLabel().getNature());
     System.assertEquals(PARTY, response.getUnalignedElements().get(0).getTypes().get(0).getLabel().getParty());
-    System.assertEquals(PROVENANCE_ID, response.getUnalignedElements().get(0).getTypes().get(0).getProvenanceIds().get(0));
     System.assertEquals(LABEL, response.getUnalignedElements().get(0).getCategories().get(0).getLabel());
-    System.assertEquals(PROVENANCE_ID,
-        response.getUnalignedElements().get(0).getCategories().get(0).getProvenanceIds().get(0));
     System.assertEquals(TYPE, response.getUnalignedElements().get(0).getAttributes().get(0).getXtype());
     System.assertEquals(TEXT, response.getUnalignedElements().get(0).getAttributes().get(0).getText());
     System.assertEquals(TEST_BEGIN, response.getUnalignedElements().get(0).getAttributes().get(0).getLocation().getXbegin());
@@ -933,7 +929,7 @@ private class IBMCompareComplyV1Test {
 
     IBMCompareComplyV1Models.DeleteFeedbackOptions deleteFeedbackOptions = new IBMCompareComplyV1Models.DeleteFeedbackOptionsBuilder()
       .feedbackId(FEEDBACK_ID)
-      .modelId(CONTRACTS)
+      .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     service.deleteFeedback(deleteFeedbackOptions);
@@ -958,7 +954,7 @@ private class IBMCompareComplyV1Test {
 
     IBMCompareComplyV1Models.GetFeedbackOptions getFeedbackOptions = new IBMCompareComplyV1Models.GetFeedbackOptionsBuilder()
       .feedbackId(FEEDBACK_ID)
-      .modelId(CONTRACTS)
+      .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     IBMCompareComplyV1Models.GetFeedback response = service.getFeedback(getFeedbackOptions);
@@ -1108,12 +1104,10 @@ private class IBMCompareComplyV1Test {
       .inputBucketLocation(BUCKET_LOCATION)
       .inputBucketName(BUCKET_NAME)
       .inputCredentialsFile(testCredentialFile)
-      .inputCredentialsFilename(FILENAME)
-      .modelId(CONTRACTS)
+      .model(CONTRACTS)
       .outputBucketLocation(BUCKET_LOCATION)
       .outputBucketName(BUCKET_NAME)
       .outputCredentialsFile(testCredentialFile)
-      .outputCredentialsFilename(FILENAME)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     IBMCompareComplyV1Models.BatchStatus response = service.createBatch(createBatchOptions);
@@ -1189,7 +1183,7 @@ private class IBMCompareComplyV1Test {
     IBMCompareComplyV1Models.UpdateBatchOptions updateBatchOptions = new IBMCompareComplyV1Models.UpdateBatchOptionsBuilder()
       .action(CANCEL)
       .batchId(BATCH_ID)
-      .modelId(CONTRACTS)
+      .model(CONTRACTS)
       .addHeader(HEADER_NAME, HEADER_VALUE)
       .build();
     IBMCompareComplyV1Models.BatchStatus response = service.updateBatch(updateBatchOptions);

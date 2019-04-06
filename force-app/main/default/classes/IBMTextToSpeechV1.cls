@@ -61,7 +61,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    * about the voice. Specify a customization ID to obtain information for that custom voice model of the specified
    * voice. To list information about all available voices, use the **List voices** method.
    *
-   * **See also:** [Specifying a voice](https://cloud.ibm.com/docs/services/text-to-speech/http.html#voices).
+   * **See also:** [Listing a specific voice](https://cloud.ibm.com/docs/services/text-to-speech/voices.html#listVoice).
    *
    * @param getVoiceOptions the {@link IBMTextToSpeechV1Models.GetVoiceOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.Voice} with the response
@@ -90,7 +90,8 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    * Lists all voices available for use with the service. The information includes the name, language, gender, and other
    * details about the voice. To see information about a specific voice, use the **Get a voice** method.
    *
-   * **See also:** [Specifying a voice](https://cloud.ibm.com/docs/services/text-to-speech/http.html#voices).
+   * **See also:** [Listing all available
+   * voices](https://cloud.ibm.com/docs/services/text-to-speech/voices.html#listVoices).
    *
    * @param listVoicesOptions the {@link IBMTextToSpeechV1Models.ListVoicesOptions} containing the options for the call
    * @return the {@link IBMTextToSpeechV1Models.Voices} with the response
@@ -115,11 +116,11 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    * Synthesizes text to audio that is spoken in the specified voice. The service bases its understanding of the
    * language for the input text on the specified voice. Use a voice that matches the language of the input text.
    *
-   * The service returns the synthesized audio stream as an array of bytes. You can pass a maximum of 5 KB of text to
-   * the service.
+   * The method accepts a maximum of 5 KB of input text in the body of the request, and 8 KB for the URL and headers.
+   * The 5 KB limit includes any SSML tags that you specify. The service returns the synthesized audio stream as an
+   * array of bytes.
    *
-   * **See also:** [Synthesizing text to
-   * audio](https://cloud.ibm.com/docs/services/text-to-speech/http.html#synthesize).
+   * **See also:** [The HTTP interface](https://cloud.ibm.com/docs/services/text-to-speech/http.html).
    *
    * ### Audio formats (accept types)
    *
@@ -176,7 +177,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
    *   You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
    *
    * For more information about specifying an audio format, including additional details about some of the formats, see
-   * [Specifying an audio format](https://cloud.ibm.com/docs/services/text-to-speech/http.html#format).
+   * [Audio formats](https://cloud.ibm.com/docs/services/text-to-speech/audio-formats.html).
    *
    * ### Warning messages
    *
@@ -483,9 +484,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
       }
     }
     final Map<String, Object> contentJson = new Map<String, Object>();
-    if (addWordOptions.translation() != null) {
-      contentJson.put('translation', addWordOptions.translation());
-    }
+    contentJson.put('translation', addWordOptions.translation());
     if (addWordOptions.partOfSpeech() != null) {
       contentJson.put('part_of_speech', addWordOptions.partOfSpeech());
     }
@@ -536,9 +535,7 @@ public class IBMTextToSpeechV1 extends IBMWatsonService {
       }
     }
     final Map<String, Object> contentJson = new Map<String, Object>();
-    if (addWordsOptions.words() != null) {
-      contentJson.put('words', addWordsOptions.words());
-    }
+    contentJson.put('words', addWordsOptions.words());
     builder.bodyJson(JSON.serialize(contentJson, true));
 
     createServiceCall(builder.build(), null);

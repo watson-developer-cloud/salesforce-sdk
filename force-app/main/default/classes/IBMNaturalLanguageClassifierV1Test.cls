@@ -112,9 +112,7 @@ private class IBMNaturalLanguageClassifierV1Test {
     IBMNaturalLanguageClassifierV1Models.CreateClassifierOptions createClassifierOptions =
       new IBMNaturalLanguageClassifierV1Models.CreateClassifierOptionsBuilder()
       .metadata(training_metadata_serialized_name)
-      .trainingMetadataFilename(training_metadata_filename_serialized_name)
       .trainingData(training_data_serialized_name)
-      .trainingDataFilename(training_data_filename_serialized_name)
       .addHeader('Test-Header', 'test_value')
       .build();
     IBMNaturalLanguageClassifierV1Models.Classifier Classifier = service.createClassifier(createClassifierOptions);

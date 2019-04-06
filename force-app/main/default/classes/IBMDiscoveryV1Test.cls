@@ -60,20 +60,9 @@ private class IBMDiscoveryV1Test {
     indexCapacity.setDocuments(environmentDocuments);
     IBMDiscoveryV1Models.DiskUsage diskUsage = new IBMDiscoveryV1Models.DiskUsage();
     indexCapacity.setDiskUsage(diskUsage);
-    IBMDiscoveryV1Models.MemoryUsage memoryUsage = new IBMDiscoveryV1Models.MemoryUsage();
-    indexCapacity.setMemoryUsage(memoryUsage);
     resp.setIndexCapacity(indexCapacity);
     System.assertEquals(resp.getDescription(), 'test');
     System.assertEquals(resp.getSize(), 'XS');
-    System.assertEquals(resp.getIndexCapacity().getDiskUsage().getTotalBytes(), null);
-    System.assertEquals(resp.getIndexCapacity().getDiskUsage().getUsed(), null);
-    System.assertEquals(resp.getIndexCapacity().getDiskUsage().getTotal(), null);
-    System.assertEquals(resp.getIndexCapacity().getDiskUsage().getPercentUsed(), null);
-    System.assertEquals(resp.getIndexCapacity().getMemoryUsage().getUsedBytes(), null);
-    System.assertEquals(resp.getIndexCapacity().getMemoryUsage().getTotalBytes(), null);
-    System.assertEquals(resp.getIndexCapacity().getMemoryUsage().getUsed(), null);
-    System.assertEquals(resp.getIndexCapacity().getMemoryUsage().getTotal(), null);
-    System.assertEquals(resp.getIndexCapacity().getMemoryUsage().getPercentUsed(), null);
 
     Test.stopTest();
   }
@@ -374,7 +363,7 @@ private class IBMDiscoveryV1Test {
     wordHeading.setStyles(new List<IBMDiscoveryV1Models.WordStyle>{ style });
     word.setHeading(wordHeading);
     conversions.setWord(word);
-    IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder(ENVIRONMENT_ID)
+    IBMDiscoveryV1Models.CreateConfigurationOptions options = new IBMDiscoveryV1Models.CreateConfigurationOptionsBuilder(ENVIRONMENT_ID, 'test_environment')
       .environmentId(ENVIRONMENT_ID)
       .name('test_environment')
       .description('test_environment description')
@@ -507,7 +496,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1 discovery = new IBMDiscoveryV1(VERSION);
     discovery.setEndPoint('https://gateway.watsonplatform.net/discovery/api');
     discovery.setUsernameAndPassword('username', 'password');
-    IBMDiscoveryV1Models.UpdateConfigurationOptions options = new IBMDiscoveryV1Models.UpdateConfigurationOptionsBuilder(ENVIRONMENT_ID, CONFIGURATION_ID)
+    IBMDiscoveryV1Models.UpdateConfigurationOptions options = new IBMDiscoveryV1Models.UpdateConfigurationOptionsBuilder(ENVIRONMENT_ID, CONFIGURATION_ID, 'test_environment')
       .name('test_environment')
       .description('test_environment description')
       .configurationId(CONFIGURATION_ID)
@@ -845,8 +834,6 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(resp.getStatus(), 'available with notices');
     System.assertEquals(resp.getDocumentId(), 'f1360220-ea2d-4271-9d62-89a910b13c37');
     System.assertEquals(resp.getConfigurationId(), 'e8b9d793-b163-452a-9373-bce07efb510b');
-    System.assertEquals(resp.getCreated(),(Datetime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',Datetime.class));
-    System.assertEquals(resp.getUpdated(),(Datetime)JSON.deserialize('"2015-08-24T18:42:25.324Z"',Datetime.class));
     System.assertEquals(resp.getStatusDescription(), 'Document is successfully ingested but was indexed with warnings');
     System.assertEquals(resp.getFilename(), 'instructions.html');
     System.assertEquals(resp.getFileType(), 'html');
@@ -860,8 +847,6 @@ private class IBMDiscoveryV1Test {
     resp.setFilename('instructions1.html');
     resp.setFileType('html');
     resp.setSha1('de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3');
-    IBMDiscoveryV1Models.Notice notice= new IBMDiscoveryV1Models.Notice();
-    resp.setNotices(new List<IBMDiscoveryV1Models.Notice>{notice});
     System.assertEquals(resp.getFilename(), 'instructions1.html');
     Test.stopTest();
   }
@@ -940,7 +925,6 @@ private class IBMDiscoveryV1Test {
     resp.setMatchingResults(4);
     IBMDiscoveryV1Models.QueryNoticesResult queryNoticesResult = new IBMDiscoveryV1Models.QueryNoticesResult();
     queryNoticesResult.setId('5ae96bb9-80e5-43ea-916e-1f3412fbc283');
-    queryNoticesResult.setScore(2);
     IBMWatsonMapModel mapModel= new IBMWatsonMapModel();
     mapModel.put('key', 'value');
     queryNoticesResult.setMetadata(mapModel);
@@ -981,7 +965,6 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(resp.getPassages()[0].getField(), 'test');
     System.assertEquals(resp.getDuplicatesRemoved(), 2);
     System.assertEquals(queryNoticesResult.getId(), '5ae96bb9-80e5-43ea-916e-1f3412fbc283');
-    System.assertEquals(queryNoticesResult.getScore(), 2);
     System.assertEquals(queryNoticesResult.getMetadata().get('key'), 'value');
     System.assertEquals(queryNoticesResult.getCollectionId(), '5ae96bb9-80e5-43ea-916e-1f3412fbc283');
     System.assertEquals(queryAggregation.getResults()[0].getKey(), 'test');
@@ -1074,7 +1057,6 @@ private class IBMDiscoveryV1Test {
     System.assertEquals('030ba125-29db-43f2-8552-f941ae30a7a8', resp.getResults().get(0).getId());
     System.assertEquals('f1360220-ea2d-4271-9d62-89a910b13c37', resp.getResults().get(0).getCollectionId());
     System.assertEquals(200, resp.getResults().get(0).getCode());
-    System.assertEquals(1, resp.getResults().get(0).getScore());
     System.assertEquals('instructions.html', resp.getResults().get(0).getFilename());
     System.assertEquals('html', resp.getResults().get(0).getFileType());
     System.assertEquals('de9f2c7fd25e1b3afad3e85a0bd17d9b100db4b3', resp.getResults().get(0).getSha1());
@@ -1864,6 +1846,70 @@ private class IBMDiscoveryV1Test {
     options = options.newBuilder().build();
     discovery.deleteUserData(options);
     Test.stopTest();
+  }
+
+  static testMethod void testCredentialDetails() {
+    String clientId = 'client_id';
+    String clientSecret = 'client_secret';
+    String sourceType = 'salesforce';
+    String enterpriseId = 'enterprise_id';
+    String organizationUrl = 'organization_url';
+    String passphrase = 'passphrase';
+    String password = 'password';
+    String privateKey = 'private_key';
+    String publicKeyId = 'public_key_id';
+    String siteCollectionPath = 'site_collection_path';
+    String credentialType = 'username_password';
+    String url = 'login.salesforce.com';
+    String username = 'user@email.address';
+    String gatewayId = 'gateway_id';
+    String sourceVersion = 'source_version';
+    String webApplicationUrl = 'web_application_url';
+    String domain = 'domain';
+    String accessKeyId = 'access_key_id';
+    String endpoint = 'endpoint';
+    String secretAccessKey = 'secret_access_key';
+
+    IBMDiscoveryV1Models.CredentialDetails details = new IBMDiscoveryV1Models.CredentialDetails();
+    details.setClientId(clientId);
+    details.setClientSecret(clientSecret);
+    details.setCredentialType(credentialType);
+    details.setEnterpriseId(enterpriseId);
+    details.setOrganizationUrl(organizationUrl);
+    details.setPassphrase(passphrase);
+    details.setPassword(password);
+    details.setPrivateKey(privateKey);
+    details.setPublicKeyId(publicKeyId);
+    details.setSiteCollectionPath(siteCollectionPath);
+    details.setUrl(url);
+    details.setUsername(username);
+    details.setGatewayId(gatewayId);
+    details.setSourceVersion(sourceVersion);
+    details.setWebApplicationUrl(webApplicationUrl);
+    details.setDomain(domain);
+    details.setAccessKeyId(accessKeyId);
+    details.setEndpoint(endpoint);
+    details.setSecretAccessKey(secretAccessKey);
+
+    System.assertEquals(clientId, details.getClientId());
+    System.assertEquals(clientSecret, details.getClientSecret());
+    System.assertEquals(credentialType, details.getCredentialType());
+    System.assertEquals(enterpriseId, details.getEnterpriseId());
+    System.assertEquals(organizationUrl, details.getOrganizationUrl());
+    System.assertEquals(passphrase, details.getPassphrase());
+    System.assertEquals(password, details.getPassword());
+    System.assertEquals(privateKey, details.getPrivateKey());
+    System.assertEquals(publicKeyId, details.getPublicKeyId());
+    System.assertEquals(siteCollectionPath, details.getSiteCollectionPath());
+    System.assertEquals(url, details.getUrl());
+    System.assertEquals(username, details.getUsername());
+    System.assertEquals(gatewayId, details.getGatewayId());
+    System.assertEquals(sourceVersion, details.getSourceVersion());
+    System.assertEquals(webApplicationUrl, details.getWebApplicationUrl());
+    System.assertEquals(domain, details.getDomain());
+    System.assertEquals(accessKeyId, details.getAccessKeyId());
+    System.assertEquals(endpoint, details.getEndpoint());
+    System.assertEquals(secretAccessKey, details.getSecretAccessKey());
   }
 
   static testMethod void testCreateCredentials() {
@@ -2822,5 +2868,77 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(maximumHops, sourceOptionsWebCrawl.getMaximumHops());
     System.assertEquals(requestTimeout, sourceOptionsWebCrawl.getRequestTimeout());
     System.assert(sourceOptionsWebCrawl.getOverrideRobotsTxt());
+  }
+
+  static testMethod void testSourceOptionsBuckets() {
+    String name = 'name';
+    Long testLimit = 9000L;
+
+    IBMDiscoveryV1Models.SourceOptionsBuckets sourceOptionsBuckets = new IBMDiscoveryV1Models.SourceOptionsBuckets();
+    sourceOptionsBuckets.setName(name);
+    sourceOptionsBuckets.setXlimit(testLimit);
+
+    System.assertEquals(name, sourceOptionsBuckets.getName());
+    System.assertEquals(testLimit, sourceOptionsBuckets.getXlimit());
+  }
+
+  static testMethod void testSourceOptions() {
+    String folderOwnerUserId = 'folder_owner_user_id';
+    String folderId = 'folder_id';
+    Long testLimit = 10L;
+    String objectName = 'object_name';
+    String siteCollectionPath = 'site_collection_path';
+    String url = 'url';
+    Long maximumHops = 5L;
+    Long requestTimeout = 2L;
+    String bucketName = 'bucket_name';
+    String crawlSpeed = 'aggressive';
+
+    IBMDiscoveryV1Models.SourceOptions sourceOptions = new IBMDiscoveryV1Models.SourceOptions();
+    IBMDiscoveryV1Models.SourceOptionsFolder folder = new IBMDiscoveryV1Models.SourceOptionsFolder();
+    folder.setOwnerUserId(folderOwnerUserId);
+    folder.setFolderId(folderId);
+    folder.setXlimit(testLimit);
+    sourceOptions.setFolders(new List<IBMDiscoveryV1Models.SourceOptionsFolder> { folder });
+    IBMDiscoveryV1Models.SourceOptionsObject sourceObject = new IBMDiscoveryV1Models.SourceOptionsObject();
+    sourceObject.setName(objectName);
+    sourceObject.setXlimit(testLimit);
+    sourceOptions.setObjects(new List<IBMDiscoveryV1Models.SourceOptionsObject> { sourceObject });
+    IBMDiscoveryV1Models.SourceOptionsSiteColl siteColl = new IBMDiscoveryV1Models.SourceOptionsSiteColl();
+    siteColl.setSiteCollectionPath(siteCollectionPath);
+    siteColl.setXlimit(testLimit);
+    sourceOptions.setSiteCollections(new List<IBMDiscoveryV1Models.SourceOptionsSiteColl> { siteColl });
+    IBMDiscoveryV1Models.SourceOptionsWebCrawl webCrawl = new IBMDiscoveryV1Models.SourceOptionsWebCrawl();
+    webCrawl.setUrl(url);
+    webCrawl.setLimitToStartingHosts(true);
+    webCrawl.setCrawlSpeed(crawlSpeed);
+    webCrawl.setAllowUntrustedCertificate(true);
+    webCrawl.setMaximumHops(maximumHops);
+    webCrawl.setRequestTimeout(requestTimeout);
+    webCrawl.setOverrideRobotsTxt(true);
+    sourceOptions.setUrls(new List<IBMDiscoveryV1Models.SourceOptionsWebCrawl> { webCrawl });
+    IBMDiscoveryV1Models.SourceOptionsBuckets buckets = new IBMDiscoveryV1Models.SourceOptionsBuckets();
+    buckets.setName(bucketName);
+    buckets.setXlimit(testLimit);
+    sourceOptions.setBuckets(new List<IBMDiscoveryV1Models.SourceOptionsBuckets> { buckets });
+    sourceOptions.setCrawlAllBuckets(true);
+
+    System.assertEquals(folderOwnerUserId, sourceOptions.getFolders().get(0).getOwnerUserId());
+    System.assertEquals(folderId, sourceOptions.getFolders().get(0).getFolderId());
+    System.assertEquals(testLimit, sourceOptions.getFolders().get(0).getXlimit());
+    System.assertEquals(objectName, sourceOptions.getObjects().get(0).getName());
+    System.assertEquals(testLimit, sourceOptions.getObjects().get(0).getXlimit());
+    System.assertEquals(siteCollectionPath, sourceOptions.getSiteCollections().get(0).getSiteCollectionPath());
+    System.assertEquals(testLimit, sourceOptions.getSiteCollections().get(0).getXlimit());
+    System.assertEquals(url, sourceOptions.getUrls().get(0).getUrl());
+    System.assert(sourceOptions.getUrls().get(0).getLimitToStartingHosts());
+    System.assertEquals(crawlSpeed, sourceOptions.getUrls().get(0).getCrawlSpeed());
+    System.assert(sourceOptions.getUrls().get(0).getAllowUntrustedCertificate());
+    System.assertEquals(maximumHops, sourceOptions.getUrls().get(0).getMaximumHops());
+    System.assertEquals(requestTimeout, sourceOptions.getUrls().get(0).getRequestTimeout());
+    System.assert(sourceOptions.getUrls().get(0).getOverrideRobotsTxt());
+    System.assertEquals(bucketName, sourceOptions.getBuckets().get(0).getName());
+    System.assertEquals(testLimit, sourceOptions.getBuckets().get(0).getXlimit());
+    System.assert(sourceOptions.getCrawlAllBuckets());
   }
 }

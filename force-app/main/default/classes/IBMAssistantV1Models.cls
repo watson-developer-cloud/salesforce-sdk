@@ -1,6 +1,6 @@
 public class IBMAssistantV1Models {
   /**
-   * CaptureGroup.
+   * A recognized capture group for a pattern-based entity.
    */
   public class CaptureGroup extends IBMWatsonGenericModel {
     private String group_serialized_name;
@@ -169,11 +169,20 @@ public class IBMAssistantV1Models {
     private String text_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Counterexample() { }
  
     /**
      * Gets the text.
      *
-     * The text of the counterexample.
+     * The text of a user input marked as irrelevant input. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters
+     * - It cannot consist of only whitespace characters
+     * - It must be no longer than 1024 characters.
      *
      * @return the text
      */
@@ -185,7 +194,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the created.
      *
-     * The timestamp for creation of the counterexample.
+     * The timestamp for creation of the object.
      *
      * @return the created
      */
@@ -197,7 +206,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the updated.
      *
-     * The timestamp for the last update to the counterexample.
+     * The timestamp for the most recent update to the object.
      *
      * @return the updated
      */
@@ -205,14 +214,21 @@ public class IBMAssistantV1Models {
     public Datetime getUpdated() {
       return updated_serialized_name;
     }
+  
+    private Counterexample(CounterexampleBuilder builder) {
+      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
+      text_serialized_name = builder.text;
+      created_serialized_name = builder.created;
+      updated_serialized_name = builder.updated;
+    }
 
     /**
-     * Sets the text.
+     * New builder.
      *
-     * @param text the new text
+     * @return a Counterexample builder
      */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
+    public CounterexampleBuilder newBuilder() {
+      return new CounterexampleBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -221,8 +237,81 @@ public class IBMAssistantV1Models {
       }
 
       Counterexample ret = (Counterexample) super.deserialize(jsonString, jsonMap, classType);
+      CounterexampleBuilder retBuilder = ret.newBuilder();
 
-      return ret;
+      return retBuilder.build();
+    }
+  }
+
+  /**
+   * Counterexample Builder.
+   */
+  public class CounterexampleBuilder {
+    private String text;
+    private Datetime created;
+    private Datetime updated;
+
+    private CounterexampleBuilder(Counterexample counterexample) {
+      this.text = counterexample.text_serialized_name;
+      this.created = counterexample.created_serialized_name;
+      this.updated = counterexample.updated_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public CounterexampleBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param text the text
+     */
+    public CounterexampleBuilder(String text) {
+      this.text = text;
+    }
+
+    /**
+     * Builds a Counterexample.
+     *
+     * @return the counterexample
+     */
+    public Counterexample build() {
+      return new Counterexample(this);
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the Counterexample builder
+     */
+    public CounterexampleBuilder text(String text) {
+      this.text = text;
+      return this;
+    }
+
+    /**
+     * Set the created.
+     *
+     * @param created the created
+     * @return the Counterexample builder
+     */
+    public CounterexampleBuilder created(Datetime created) {
+      this.created = created;
+      return this;
+    }
+
+    /**
+     * Set the updated.
+     *
+     * @param updated the updated
+     * @return the Counterexample builder
+     */
+    public CounterexampleBuilder updated(Datetime updated) {
+      this.updated = updated;
+      return this;
     }
   }
 
@@ -292,7 +381,7 @@ public class IBMAssistantV1Models {
           Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Counterexample.class);
           newCounterexamples.add(newItem);
         }
-        ret.setCounterexamples(newCounterexamples);
+        ret.counterexamples_serialized_name = newCounterexamples;
       }
 
       // calling custom deserializer for pagination
@@ -300,88 +389,6 @@ public class IBMAssistantV1Models {
       ret.setPagination(newPagination);
 
       return ret;
-    }
-  }
-
-  /**
-   * CreateCounterexample.
-   */
-  public class CreateCounterexample {
-    private String text_serialized_name;
- 
-    /**
-     * Gets the text.
-     *
-     * The text of a user input marked as irrelevant input. This string must conform to the following restrictions:
-     * - It cannot contain carriage return, newline, or tab characters
-     * - It cannot consist of only whitespace characters
-     * - It must be no longer than 1024 characters.
-     *
-     * @return the text
-     */
-    public String text() {
-      return text_serialized_name;
-    }
-  
-    private CreateCounterexample(CreateCounterexampleBuilder builder) {
-      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
-      text_serialized_name = builder.text;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a CreateCounterexample builder
-     */
-    public CreateCounterexampleBuilder newBuilder() {
-      return new CreateCounterexampleBuilder(this);
-    }
-
-  }
-
-  /**
-   * CreateCounterexample Builder.
-   */
-  public class CreateCounterexampleBuilder {
-    private String text;
-
-    private CreateCounterexampleBuilder(CreateCounterexample createCounterexample) {
-      text = createCounterexample.text_serialized_name;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public CreateCounterexampleBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param text the text
-     */
-    public CreateCounterexampleBuilder(String text) {
-      this.text = text;
-    }
-
-    /**
-     * Builds a CreateCounterexample.
-     *
-     * @return the createCounterexample
-     */
-    public CreateCounterexample build() {
-      return new CreateCounterexample(this);
-    }
-
-    /**
-     * Set the text.
-     *
-     * @param text the text
-     * @return the CreateCounterexample builder
-     */
-    public CreateCounterexampleBuilder text(String text) {
-      this.text = text;
-      return this;
     }
   }
 
@@ -498,6 +505,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the counterexample.
+     *
+     * @param counterexample the counterexample
+     * @return the CreateCounterexampleOptions builder
+     */
+    public CreateCounterexampleOptionsBuilder counterexample(Counterexample counterexample) {
+      this.text = counterexample.getText();
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -506,551 +524,6 @@ public class IBMAssistantV1Models {
      */
     public CreateCounterexampleOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
-      return this;
-    }
-  }
-
-  /**
-   * CreateDialogNode.
-   */
-  public class CreateDialogNode {
-    private String dialog_node_serialized_name;
-    private String description_serialized_name;
-    private String conditions_serialized_name;
-    private String parent_serialized_name;
-    private String previous_sibling_serialized_name;
-    private DialogNodeOutput output_serialized_name;
-    private IBMWatsonMapModel context_serialized_name;
-    private IBMWatsonMapModel metadata_serialized_name;
-    private DialogNodeNextStep next_step_serialized_name;
-    private List<DialogNodeAction> actions_serialized_name;
-    private String title_serialized_name;
-    private String type_serialized_name;
-    private String event_name_serialized_name;
-    private String variable_serialized_name;
-    private String digress_in_serialized_name;
-    private String digress_out_serialized_name;
-    private String digress_out_slots_serialized_name;
-    private String user_label_serialized_name;
- 
-    /**
-     * Gets the dialogNode.
-     *
-     * The dialog node ID. This string must conform to the following restrictions:
-     * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     * - It must be no longer than 1024 characters.
-     *
-     * @return the dialogNode
-     */
-    public String dialogNode() {
-      return dialog_node_serialized_name;
-    }
- 
-    /**
-     * Gets the description.
-     *
-     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and
-     * it must be no longer than 128 characters.
-     *
-     * @return the description
-     */
-    public String description() {
-      return description_serialized_name;
-    }
- 
-    /**
-     * Gets the conditions.
-     *
-     * The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab
-     * characters, and it must be no longer than 2048 characters.
-     *
-     * @return the conditions
-     */
-    public String conditions() {
-      return conditions_serialized_name;
-    }
- 
-    /**
-     * Gets the parent.
-     *
-     * The ID of the parent dialog node.
-     *
-     * @return the parent
-     */
-    public String parent() {
-      return parent_serialized_name;
-    }
- 
-    /**
-     * Gets the previousSibling.
-     *
-     * The ID of the previous dialog node.
-     *
-     * @return the previousSibling
-     */
-    public String previousSibling() {
-      return previous_sibling_serialized_name;
-    }
- 
-    /**
-     * Gets the output.
-     *
-     * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#complex).
-     *
-     * @return the output
-     */
-    public DialogNodeOutput output() {
-      return output_serialized_name;
-    }
- 
-    /**
-     * Gets the context.
-     *
-     * The context for the dialog node.
-     *
-     * @return the context
-     */
-    public IBMWatsonMapModel context() {
-      return context_serialized_name;
-    }
- 
-    /**
-     * Gets the metadata.
-     *
-     * The metadata for the dialog node.
-     *
-     * @return the metadata
-     */
-    public IBMWatsonMapModel metadata() {
-      return metadata_serialized_name;
-    }
- 
-    /**
-     * Gets the nextStep.
-     *
-     * The next step to execute following this dialog node.
-     *
-     * @return the nextStep
-     */
-    public DialogNodeNextStep nextStep() {
-      return next_step_serialized_name;
-    }
- 
-    /**
-     * Gets the actions.
-     *
-     * An array of objects describing any actions to be invoked by the dialog node.
-     *
-     * @return the actions
-     */
-    public List<DialogNodeAction> actions() {
-      return actions_serialized_name;
-    }
- 
-    /**
-     * Gets the title.
-     *
-     * The alias used to identify the dialog node. This string must conform to the following restrictions:
-     * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     * - It must be no longer than 64 characters.
-     *
-     * @return the title
-     */
-    public String title() {
-      return title_serialized_name;
-    }
- 
-    /**
-     * Gets the nodeType.
-     *
-     * How the dialog node is processed.
-     *
-     * @return the nodeType
-     */
-    public String nodeType() {
-      return type_serialized_name;
-    }
- 
-    /**
-     * Gets the eventName.
-     *
-     * How an `event_handler` node is processed.
-     *
-     * @return the eventName
-     */
-    public String eventName() {
-      return event_name_serialized_name;
-    }
- 
-    /**
-     * Gets the variable.
-     *
-     * The location in the dialog context where output is stored.
-     *
-     * @return the variable
-     */
-    public String variable() {
-      return variable_serialized_name;
-    }
- 
-    /**
-     * Gets the digressIn.
-     *
-     * Whether this top-level dialog node can be digressed into.
-     *
-     * @return the digressIn
-     */
-    public String digressIn() {
-      return digress_in_serialized_name;
-    }
- 
-    /**
-     * Gets the digressOut.
-     *
-     * Whether this dialog node can be returned to after a digression.
-     *
-     * @return the digressOut
-     */
-    public String digressOut() {
-      return digress_out_serialized_name;
-    }
- 
-    /**
-     * Gets the digressOutSlots.
-     *
-     * Whether the user can digress to top-level nodes while filling out slots.
-     *
-     * @return the digressOutSlots
-     */
-    public String digressOutSlots() {
-      return digress_out_slots_serialized_name;
-    }
- 
-    /**
-     * Gets the userLabel.
-     *
-     * A label that can be displayed externally to describe the purpose of the node to users. This string must be no
-     * longer than 512 characters.
-     *
-     * @return the userLabel
-     */
-    public String userLabel() {
-      return user_label_serialized_name;
-    }
-  
-    private CreateDialogNode(CreateDialogNodeBuilder builder) {
-      IBMWatsonValidator.notNull(builder.dialogNode, 'dialogNode cannot be null');
-      dialog_node_serialized_name = builder.dialogNode;
-      description_serialized_name = builder.description;
-      conditions_serialized_name = builder.conditions;
-      parent_serialized_name = builder.parent;
-      previous_sibling_serialized_name = builder.previousSibling;
-      output_serialized_name = builder.output;
-      context_serialized_name = builder.context;
-      metadata_serialized_name = builder.metadata;
-      next_step_serialized_name = builder.nextStep;
-      actions_serialized_name = builder.actions;
-      title_serialized_name = builder.title;
-      type_serialized_name = builder.nodeType;
-      event_name_serialized_name = builder.eventName;
-      variable_serialized_name = builder.variable;
-      digress_in_serialized_name = builder.digressIn;
-      digress_out_serialized_name = builder.digressOut;
-      digress_out_slots_serialized_name = builder.digressOutSlots;
-      user_label_serialized_name = builder.userLabel;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder newBuilder() {
-      return new CreateDialogNodeBuilder(this);
-    }
-
-  }
-
-  /**
-   * CreateDialogNode Builder.
-   */
-  public class CreateDialogNodeBuilder {
-    private String dialogNode;
-    private String description;
-    private String conditions;
-    private String parent;
-    private String previousSibling;
-    private DialogNodeOutput output;
-    private IBMWatsonMapModel context;
-    private IBMWatsonMapModel metadata;
-    private DialogNodeNextStep nextStep;
-    private List<DialogNodeAction> actions;
-    private String title;
-    private String nodeType;
-    private String eventName;
-    private String variable;
-    private String digressIn;
-    private String digressOut;
-    private String digressOutSlots;
-    private String userLabel;
-
-    private CreateDialogNodeBuilder(CreateDialogNode createDialogNode) {
-      dialogNode = createDialogNode.dialog_node_serialized_name;
-      description = createDialogNode.description_serialized_name;
-      conditions = createDialogNode.conditions_serialized_name;
-      parent = createDialogNode.parent_serialized_name;
-      previousSibling = createDialogNode.previous_sibling_serialized_name;
-      output = createDialogNode.output_serialized_name;
-      context = createDialogNode.context_serialized_name;
-      metadata = createDialogNode.metadata_serialized_name;
-      nextStep = createDialogNode.next_step_serialized_name;
-      actions = createDialogNode.actions_serialized_name;
-      title = createDialogNode.title_serialized_name;
-      nodeType = createDialogNode.type_serialized_name;
-      eventName = createDialogNode.event_name_serialized_name;
-      variable = createDialogNode.variable_serialized_name;
-      digressIn = createDialogNode.digress_in_serialized_name;
-      digressOut = createDialogNode.digress_out_serialized_name;
-      digressOutSlots = createDialogNode.digress_out_slots_serialized_name;
-      userLabel = createDialogNode.user_label_serialized_name;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public CreateDialogNodeBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param dialogNode the dialogNode
-     */
-    public CreateDialogNodeBuilder(String dialogNode) {
-      this.dialogNode = dialogNode;
-    }
-
-    /**
-     * Builds a CreateDialogNode.
-     *
-     * @return the createDialogNode
-     */
-    public CreateDialogNode build() {
-      return new CreateDialogNode(this);
-    }
-
-    /**
-     * Adds an actions to actions.
-     *
-     * @param actions the new actions
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder addActions(DialogNodeAction actions) {
-      IBMWatsonValidator.notNull(actions, 'actions cannot be null');
-      if (this.actions == null) {
-        this.actions = new List<DialogNodeAction>();
-      }
-      this.actions.add(actions);
-      return this;
-    }
-
-    /**
-     * Set the dialogNode.
-     *
-     * @param dialogNode the dialogNode
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder dialogNode(String dialogNode) {
-      this.dialogNode = dialogNode;
-      return this;
-    }
-
-    /**
-     * Set the description.
-     *
-     * @param description the description
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder description(String description) {
-      this.description = description;
-      return this;
-    }
-
-    /**
-     * Set the conditions.
-     *
-     * @param conditions the conditions
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder conditions(String conditions) {
-      this.conditions = conditions;
-      return this;
-    }
-
-    /**
-     * Set the parent.
-     *
-     * @param parent the parent
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder parent(String parent) {
-      this.parent = parent;
-      return this;
-    }
-
-    /**
-     * Set the previousSibling.
-     *
-     * @param previousSibling the previousSibling
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder previousSibling(String previousSibling) {
-      this.previousSibling = previousSibling;
-      return this;
-    }
-
-    /**
-     * Set the output.
-     *
-     * @param output the output
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder output(DialogNodeOutput output) {
-      this.output = output;
-      return this;
-    }
-
-    /**
-     * Set the context.
-     *
-     * @param context the context
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder context(IBMWatsonMapModel context) {
-      this.context = context;
-      return this;
-    }
-
-    /**
-     * Set the metadata.
-     *
-     * @param metadata the metadata
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder metadata(IBMWatsonMapModel metadata) {
-      this.metadata = metadata;
-      return this;
-    }
-
-    /**
-     * Set the nextStep.
-     *
-     * @param nextStep the nextStep
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder nextStep(DialogNodeNextStep nextStep) {
-      this.nextStep = nextStep;
-      return this;
-    }
-
-    /**
-     * Set the actions.
-     * Existing actions will be replaced.
-     *
-     * @param actions the actions
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder actions(List<DialogNodeAction> actions) {
-      this.actions = actions;
-      return this;
-    }
-
-    /**
-     * Set the title.
-     *
-     * @param title the title
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder title(String title) {
-      this.title = title;
-      return this;
-    }
-
-    /**
-     * Set the nodeType.
-     *
-     * @param nodeType the nodeType
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder nodeType(String nodeType) {
-      this.nodeType = nodeType;
-      return this;
-    }
-
-    /**
-     * Set the eventName.
-     *
-     * @param eventName the eventName
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder eventName(String eventName) {
-      this.eventName = eventName;
-      return this;
-    }
-
-    /**
-     * Set the variable.
-     *
-     * @param variable the variable
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder variable(String variable) {
-      this.variable = variable;
-      return this;
-    }
-
-    /**
-     * Set the digressIn.
-     *
-     * @param digressIn the digressIn
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder digressIn(String digressIn) {
-      this.digressIn = digressIn;
-      return this;
-    }
-
-    /**
-     * Set the digressOut.
-     *
-     * @param digressOut the digressOut
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder digressOut(String digressOut) {
-      this.digressOut = digressOut;
-      return this;
-    }
-
-    /**
-     * Set the digressOutSlots.
-     *
-     * @param digressOutSlots the digressOutSlots
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder digressOutSlots(String digressOutSlots) {
-      this.digressOutSlots = digressOutSlots;
-      return this;
-    }
-
-    /**
-     * Set the userLabel.
-     *
-     * @param userLabel the userLabel
-     * @return the CreateDialogNode builder
-     */
-    public CreateDialogNodeBuilder userLabel(String userLabel) {
-      this.userLabel = userLabel;
       return this;
     }
   }
@@ -1069,11 +542,11 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel context;
     private IBMWatsonMapModel metadata;
     private DialogNodeNextStep nextStep;
-    private List<DialogNodeAction> actions;
     private String title;
     private String nodeType;
     private String eventName;
     private String variable;
+    private List<DialogNodeAction> actions;
     private String digressIn;
     private String digressOut;
     private String digressOutSlots;
@@ -1130,7 +603,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the parent.
      *
-     * The ID of the parent dialog node.
+     * The ID of the parent dialog node. This property is omitted if the dialog node has no parent.
      *
      * @return the parent
      */
@@ -1141,7 +614,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the previousSibling.
      *
-     * The ID of the previous dialog node.
+     * The ID of the previous sibling dialog node. This property is omitted if the dialog node has no previous sibling.
      *
      * @return the previousSibling
      */
@@ -1153,7 +626,7 @@ public class IBMAssistantV1Models {
      * Gets the output.
      *
      * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#complex).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses).
      *
      * @return the output
      */
@@ -1192,17 +665,6 @@ public class IBMAssistantV1Models {
      */
     public DialogNodeNextStep nextStep() {
       return nextStep;
-    }
- 
-    /**
-     * Gets the actions.
-     *
-     * An array of objects describing any actions to be invoked by the dialog node.
-     *
-     * @return the actions
-     */
-    public List<DialogNodeAction> actions() {
-      return actions;
     }
  
     /**
@@ -1249,6 +711,17 @@ public class IBMAssistantV1Models {
      */
     public String variable() {
       return variable;
+    }
+ 
+    /**
+     * Gets the actions.
+     *
+     * An array of objects describing any actions to be invoked by the dialog node.
+     *
+     * @return the actions
+     */
+    public List<DialogNodeAction> actions() {
+      return actions;
     }
  
     /**
@@ -1309,11 +782,11 @@ public class IBMAssistantV1Models {
       context = builder.context;
       metadata = builder.metadata;
       nextStep = builder.nextStep;
-      actions = builder.actions;
       title = builder.title;
       nodeType = builder.nodeType;
       eventName = builder.eventName;
       variable = builder.variable;
+      actions = builder.actions;
       digressIn = builder.digressIn;
       digressOut = builder.digressOut;
       digressOutSlots = builder.digressOutSlots;
@@ -1346,11 +819,11 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel context;
     private IBMWatsonMapModel metadata;
     private DialogNodeNextStep nextStep;
-    private List<DialogNodeAction> actions;
     private String title;
     private String nodeType;
     private String eventName;
     private String variable;
+    private List<DialogNodeAction> actions;
     private String digressIn;
     private String digressOut;
     private String digressOutSlots;
@@ -1367,11 +840,11 @@ public class IBMAssistantV1Models {
       context = createDialogNodeOptions.context;
       metadata = createDialogNodeOptions.metadata;
       nextStep = createDialogNodeOptions.nextStep;
-      actions = createDialogNodeOptions.actions;
       title = createDialogNodeOptions.title;
       nodeType = createDialogNodeOptions.nodeType;
       eventName = createDialogNodeOptions.eventName;
       variable = createDialogNodeOptions.variable;
+      actions = createDialogNodeOptions.actions;
       digressIn = createDialogNodeOptions.digressIn;
       digressOut = createDialogNodeOptions.digressOut;
       digressOutSlots = createDialogNodeOptions.digressOutSlots;
@@ -1531,18 +1004,6 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the actions.
-     * Existing actions will be replaced.
-     *
-     * @param actions the actions
-     * @return the CreateDialogNodeOptions builder
-     */
-    public CreateDialogNodeOptionsBuilder actions(List<DialogNodeAction> actions) {
-      this.actions = actions;
-      return this;
-    }
-
-    /**
      * Set the title.
      *
      * @param title the title
@@ -1583,6 +1044,18 @@ public class IBMAssistantV1Models {
      */
     public CreateDialogNodeOptionsBuilder variable(String variable) {
       this.variable = variable;
+      return this;
+    }
+
+    /**
+     * Set the actions.
+     * Existing actions will be replaced.
+     *
+     * @param actions the actions
+     * @return the CreateDialogNodeOptions builder
+     */
+    public CreateDialogNodeOptionsBuilder actions(List<DialogNodeAction> actions) {
+      this.actions = actions;
       return this;
     }
 
@@ -1631,6 +1104,34 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the dialogNode.
+     *
+     * @param dialogNode the dialogNode
+     * @return the CreateDialogNodeOptions builder
+     */
+    public CreateDialogNodeOptionsBuilder dialogNode(DialogNode dialogNode) {
+      this.dialogNode = dialogNode.getDialogNode();
+      this.description = dialogNode.getDescription();
+      this.conditions = dialogNode.getConditions();
+      this.parent = dialogNode.getParent();
+      this.previousSibling = dialogNode.getPreviousSibling();
+      this.output = dialogNode.getOutput();
+      this.context = dialogNode.getContext();
+      this.metadata = dialogNode.getMetadata();
+      this.nextStep = dialogNode.getNextStep();
+      this.title = dialogNode.getTitle();
+      this.nodeType = dialogNode.getNodeType();
+      this.eventName = dialogNode.getEventName();
+      this.variable = dialogNode.getVariable();
+      this.actions = dialogNode.getActions();
+      this.digressIn = dialogNode.getDigressIn();
+      this.digressOut = dialogNode.getDigressOut();
+      this.digressOutSlots = dialogNode.getDigressOutSlots();
+      this.userLabel = dialogNode.getUserLabel();
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -1650,8 +1151,10 @@ public class IBMAssistantV1Models {
     private String entity_serialized_name;
     private String description_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
-    private List<CreateValue> values_serialized_name;
     private Boolean fuzzy_match_serialized_name;
+    private Datetime created_serialized_name;
+    private Datetime updated_serialized_name;
+    private List<CreateValue> values_serialized_name;
  
     /**
      * Gets the entity.
@@ -1684,23 +1187,12 @@ public class IBMAssistantV1Models {
     /**
      * Gets the metadata.
      *
-     * Any metadata related to the value.
+     * Any metadata related to the entity.
      *
      * @return the metadata
      */
     public IBMWatsonMapModel metadata() {
       return metadata_serialized_name;
-    }
- 
-    /**
-     * Gets the values.
-     *
-     * An array of objects describing the entity values.
-     *
-     * @return the values
-     */
-    public List<CreateValue> values() {
-      return values_serialized_name;
     }
  
     /**
@@ -1713,14 +1205,49 @@ public class IBMAssistantV1Models {
     public Boolean fuzzyMatch() {
       return fuzzy_match_serialized_name;
     }
+ 
+    /**
+     * Gets the created.
+     *
+     * The timestamp for creation of the object.
+     *
+     * @return the created
+     */
+    public Datetime created() {
+      return created_serialized_name;
+    }
+ 
+    /**
+     * Gets the updated.
+     *
+     * The timestamp for the most recent update to the object.
+     *
+     * @return the updated
+     */
+    public Datetime updated() {
+      return updated_serialized_name;
+    }
+ 
+    /**
+     * Gets the values.
+     *
+     * An array of objects describing the entity values.
+     *
+     * @return the values
+     */
+    public List<CreateValue> values() {
+      return values_serialized_name;
+    }
   
     private CreateEntity(CreateEntityBuilder builder) {
       IBMWatsonValidator.notNull(builder.entity, 'entity cannot be null');
       entity_serialized_name = builder.entity;
       description_serialized_name = builder.description;
       metadata_serialized_name = builder.metadata;
-      values_serialized_name = builder.values;
       fuzzy_match_serialized_name = builder.fuzzyMatch;
+      created_serialized_name = builder.created;
+      updated_serialized_name = builder.updated;
+      values_serialized_name = builder.values;
     }
 
     /**
@@ -1741,15 +1268,19 @@ public class IBMAssistantV1Models {
     private String entity;
     private String description;
     private IBMWatsonMapModel metadata;
-    private List<CreateValue> values;
     private Boolean fuzzyMatch;
+    private Datetime created;
+    private Datetime updated;
+    private List<CreateValue> values;
 
     private CreateEntityBuilder(CreateEntity createEntity) {
-      entity = createEntity.entity_serialized_name;
-      description = createEntity.description_serialized_name;
-      metadata = createEntity.metadata_serialized_name;
-      values = createEntity.values_serialized_name;
-      fuzzyMatch = createEntity.fuzzy_match_serialized_name;
+      this.entity = createEntity.entity_serialized_name;
+      this.description = createEntity.description_serialized_name;
+      this.metadata = createEntity.metadata_serialized_name;
+      this.fuzzyMatch = createEntity.fuzzy_match_serialized_name;
+      this.created = createEntity.created_serialized_name;
+      this.updated = createEntity.updated_serialized_name;
+      this.values = createEntity.values_serialized_name;
     }
 
     /**
@@ -1825,6 +1356,39 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the fuzzyMatch.
+     *
+     * @param fuzzyMatch the fuzzyMatch
+     * @return the CreateEntity builder
+     */
+    public CreateEntityBuilder fuzzyMatch(Boolean fuzzyMatch) {
+      this.fuzzyMatch = fuzzyMatch;
+      return this;
+    }
+
+    /**
+     * Set the created.
+     *
+     * @param created the created
+     * @return the CreateEntity builder
+     */
+    public CreateEntityBuilder created(Datetime created) {
+      this.created = created;
+      return this;
+    }
+
+    /**
+     * Set the updated.
+     *
+     * @param updated the updated
+     * @return the CreateEntity builder
+     */
+    public CreateEntityBuilder updated(Datetime updated) {
+      this.updated = updated;
+      return this;
+    }
+
+    /**
      * Set the values.
      * Existing values will be replaced.
      *
@@ -1833,17 +1397,6 @@ public class IBMAssistantV1Models {
      */
     public CreateEntityBuilder values(List<CreateValue> values) {
       this.values = values;
-      return this;
-    }
-
-    /**
-     * Set the fuzzyMatch.
-     *
-     * @param fuzzyMatch the fuzzyMatch
-     * @return the CreateEntity builder
-     */
-    public CreateEntityBuilder fuzzyMatch(Boolean fuzzyMatch) {
-      this.fuzzyMatch = fuzzyMatch;
       return this;
     }
   }
@@ -1856,8 +1409,8 @@ public class IBMAssistantV1Models {
     private String entity;
     private String description;
     private IBMWatsonMapModel metadata;
-    private List<CreateValue> values;
     private Boolean fuzzyMatch;
+    private List<CreateValue> values;
  
     /**
      * Gets the workspaceId.
@@ -1901,23 +1454,12 @@ public class IBMAssistantV1Models {
     /**
      * Gets the metadata.
      *
-     * Any metadata related to the value.
+     * Any metadata related to the entity.
      *
      * @return the metadata
      */
     public IBMWatsonMapModel metadata() {
       return metadata;
-    }
- 
-    /**
-     * Gets the values.
-     *
-     * An array of objects describing the entity values.
-     *
-     * @return the values
-     */
-    public List<CreateValue> values() {
-      return values;
     }
  
     /**
@@ -1930,6 +1472,17 @@ public class IBMAssistantV1Models {
     public Boolean fuzzyMatch() {
       return fuzzyMatch;
     }
+ 
+    /**
+     * Gets the values.
+     *
+     * An array of objects describing the entity values.
+     *
+     * @return the values
+     */
+    public List<CreateValue> values() {
+      return values;
+    }
 
     private CreateEntityOptions(CreateEntityOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
@@ -1938,8 +1491,8 @@ public class IBMAssistantV1Models {
       entity = builder.entity;
       description = builder.description;
       metadata = builder.metadata;
-      values = builder.values;
       fuzzyMatch = builder.fuzzyMatch;
+      values = builder.values;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1962,16 +1515,16 @@ public class IBMAssistantV1Models {
     private String entity;
     private String description;
     private IBMWatsonMapModel metadata;
-    private List<CreateValue> values;
     private Boolean fuzzyMatch;
+    private List<CreateValue> values;
 
     private CreateEntityOptionsBuilder(CreateEntityOptions createEntityOptions) {
       workspaceId = createEntityOptions.workspaceId;
       entity = createEntityOptions.entity;
       description = createEntityOptions.description;
       metadata = createEntityOptions.metadata;
-      values = createEntityOptions.values;
       fuzzyMatch = createEntityOptions.fuzzyMatch;
+      values = createEntityOptions.values;
       this.requestHeaders.putAll(createEntityOptions.requestHeaders());
     }
 
@@ -2061,6 +1614,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the fuzzyMatch.
+     *
+     * @param fuzzyMatch the fuzzyMatch
+     * @return the CreateEntityOptions builder
+     */
+    public CreateEntityOptionsBuilder fuzzyMatch(Boolean fuzzyMatch) {
+      this.fuzzyMatch = fuzzyMatch;
+      return this;
+    }
+
+    /**
      * Set the values.
      * Existing values will be replaced.
      *
@@ -2069,17 +1633,6 @@ public class IBMAssistantV1Models {
      */
     public CreateEntityOptionsBuilder values(List<CreateValue> values) {
       this.values = values;
-      return this;
-    }
-
-    /**
-     * Set the fuzzyMatch.
-     *
-     * @param fuzzyMatch the fuzzyMatch
-     * @return the CreateEntityOptions builder
-     */
-    public CreateEntityOptionsBuilder fuzzyMatch(Boolean fuzzyMatch) {
-      this.fuzzyMatch = fuzzyMatch;
       return this;
     }
 
@@ -2097,137 +1650,13 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * CreateExample.
-   */
-  public class CreateExample {
-    private String text_serialized_name;
-    private List<Mentions> mentions_serialized_name;
- 
-    /**
-     * Gets the text.
-     *
-     * The text of a user input example. This string must conform to the following restrictions:
-     * - It cannot contain carriage return, newline, or tab characters.
-     * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 1024 characters.
-     *
-     * @return the text
-     */
-    public String text() {
-      return text_serialized_name;
-    }
- 
-    /**
-     * Gets the mentions.
-     *
-     * An array of contextual entity mentions.
-     *
-     * @return the mentions
-     */
-    public List<Mentions> mentions() {
-      return mentions_serialized_name;
-    }
-  
-    private CreateExample(CreateExampleBuilder builder) {
-      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
-      text_serialized_name = builder.text;
-      mentions_serialized_name = builder.mentions;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a CreateExample builder
-     */
-    public CreateExampleBuilder newBuilder() {
-      return new CreateExampleBuilder(this);
-    }
-
-  }
-
-  /**
-   * CreateExample Builder.
-   */
-  public class CreateExampleBuilder {
-    private String text;
-    private List<Mentions> mentions;
-
-    private CreateExampleBuilder(CreateExample createExample) {
-      text = createExample.text_serialized_name;
-      mentions = createExample.mentions_serialized_name;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public CreateExampleBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param text the text
-     */
-    public CreateExampleBuilder(String text) {
-      this.text = text;
-    }
-
-    /**
-     * Builds a CreateExample.
-     *
-     * @return the createExample
-     */
-    public CreateExample build() {
-      return new CreateExample(this);
-    }
-
-    /**
-     * Adds an mentions to mentions.
-     *
-     * @param mentions the new mentions
-     * @return the CreateExample builder
-     */
-    public CreateExampleBuilder addMentions(Mentions mentions) {
-      IBMWatsonValidator.notNull(mentions, 'mentions cannot be null');
-      if (this.mentions == null) {
-        this.mentions = new List<Mentions>();
-      }
-      this.mentions.add(mentions);
-      return this;
-    }
-
-    /**
-     * Set the text.
-     *
-     * @param text the text
-     * @return the CreateExample builder
-     */
-    public CreateExampleBuilder text(String text) {
-      this.text = text;
-      return this;
-    }
-
-    /**
-     * Set the mentions.
-     * Existing mentions will be replaced.
-     *
-     * @param mentions the mentions
-     * @return the CreateExample builder
-     */
-    public CreateExampleBuilder mentions(List<Mentions> mentions) {
-      this.mentions = mentions;
-      return this;
-    }
-  }
-
-  /**
    * The createExample options.
    */
   public class CreateExampleOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String intent;
     private String text;
-    private List<Mentions> mentions;
+    private List<Mention> mentions;
  
     /**
      * Gets the workspaceId.
@@ -2272,7 +1701,7 @@ public class IBMAssistantV1Models {
      *
      * @return the mentions
      */
-    public List<Mentions> mentions() {
+    public List<Mention> mentions() {
       return mentions;
     }
 
@@ -2305,7 +1734,7 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String intent;
     private String text;
-    private List<Mentions> mentions;
+    private List<Mention> mentions;
 
     private CreateExampleOptionsBuilder(CreateExampleOptions createExampleOptions) {
       workspaceId = createExampleOptions.workspaceId;
@@ -2349,10 +1778,10 @@ public class IBMAssistantV1Models {
      * @param mentions the new mentions
      * @return the CreateExampleOptions builder
      */
-    public CreateExampleOptionsBuilder addMentions(Mentions mentions) {
+    public CreateExampleOptionsBuilder addMentions(Mention mentions) {
       IBMWatsonValidator.notNull(mentions, 'mentions cannot be null');
       if (this.mentions == null) {
-        this.mentions = new List<Mentions>();
+        this.mentions = new List<Mention>();
       }
       this.mentions.add(mentions);
       return this;
@@ -2398,8 +1827,20 @@ public class IBMAssistantV1Models {
      * @param mentions the mentions
      * @return the CreateExampleOptions builder
      */
-    public CreateExampleOptionsBuilder mentions(List<Mentions> mentions) {
+    public CreateExampleOptionsBuilder mentions(List<Mention> mentions) {
       this.mentions = mentions;
+      return this;
+    }
+
+    /**
+     * Set the example.
+     *
+     * @param example the example
+     * @return the CreateExampleOptions builder
+     */
+    public CreateExampleOptionsBuilder example(Example example) {
+      this.text = example.getText();
+      this.mentions = example.getMentions();
       return this;
     }
 
@@ -2422,7 +1863,9 @@ public class IBMAssistantV1Models {
   public class CreateIntent {
     private String intent_serialized_name;
     private String description_serialized_name;
-    private List<CreateExample> examples_serialized_name;
+    private Datetime created_serialized_name;
+    private Datetime updated_serialized_name;
+    private List<Example> examples_serialized_name;
  
     /**
      * Gets the intent.
@@ -2451,13 +1894,35 @@ public class IBMAssistantV1Models {
     }
  
     /**
+     * Gets the created.
+     *
+     * The timestamp for creation of the object.
+     *
+     * @return the created
+     */
+    public Datetime created() {
+      return created_serialized_name;
+    }
+ 
+    /**
+     * Gets the updated.
+     *
+     * The timestamp for the most recent update to the object.
+     *
+     * @return the updated
+     */
+    public Datetime updated() {
+      return updated_serialized_name;
+    }
+ 
+    /**
      * Gets the examples.
      *
      * An array of user input examples for the intent.
      *
      * @return the examples
      */
-    public List<CreateExample> examples() {
+    public List<Example> examples() {
       return examples_serialized_name;
     }
   
@@ -2465,6 +1930,8 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notNull(builder.intent, 'intent cannot be null');
       intent_serialized_name = builder.intent;
       description_serialized_name = builder.description;
+      created_serialized_name = builder.created;
+      updated_serialized_name = builder.updated;
       examples_serialized_name = builder.examples;
     }
 
@@ -2485,12 +1952,16 @@ public class IBMAssistantV1Models {
   public class CreateIntentBuilder {
     private String intent;
     private String description;
-    private List<CreateExample> examples;
+    private Datetime created;
+    private Datetime updated;
+    private List<Example> examples;
 
     private CreateIntentBuilder(CreateIntent createIntent) {
-      intent = createIntent.intent_serialized_name;
-      description = createIntent.description_serialized_name;
-      examples = createIntent.examples_serialized_name;
+      this.intent = createIntent.intent_serialized_name;
+      this.description = createIntent.description_serialized_name;
+      this.created = createIntent.created_serialized_name;
+      this.updated = createIntent.updated_serialized_name;
+      this.examples = createIntent.examples_serialized_name;
     }
 
     /**
@@ -2523,10 +1994,10 @@ public class IBMAssistantV1Models {
      * @param examples the new examples
      * @return the CreateIntent builder
      */
-    public CreateIntentBuilder addExamples(CreateExample examples) {
+    public CreateIntentBuilder addExamples(Example examples) {
       IBMWatsonValidator.notNull(examples, 'examples cannot be null');
       if (this.examples == null) {
-        this.examples = new List<CreateExample>();
+        this.examples = new List<Example>();
       }
       this.examples.add(examples);
       return this;
@@ -2555,13 +2026,35 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the created.
+     *
+     * @param created the created
+     * @return the CreateIntent builder
+     */
+    public CreateIntentBuilder created(Datetime created) {
+      this.created = created;
+      return this;
+    }
+
+    /**
+     * Set the updated.
+     *
+     * @param updated the updated
+     * @return the CreateIntent builder
+     */
+    public CreateIntentBuilder updated(Datetime updated) {
+      this.updated = updated;
+      return this;
+    }
+
+    /**
      * Set the examples.
      * Existing examples will be replaced.
      *
      * @param examples the examples
      * @return the CreateIntent builder
      */
-    public CreateIntentBuilder examples(List<CreateExample> examples) {
+    public CreateIntentBuilder examples(List<Example> examples) {
       this.examples = examples;
       return this;
     }
@@ -2574,7 +2067,7 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String intent;
     private String description;
-    private List<CreateExample> examples;
+    private List<Example> examples;
  
     /**
      * Gets the workspaceId.
@@ -2620,7 +2113,7 @@ public class IBMAssistantV1Models {
      *
      * @return the examples
      */
-    public List<CreateExample> examples() {
+    public List<Example> examples() {
       return examples;
     }
 
@@ -2652,7 +2145,7 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String intent;
     private String description;
-    private List<CreateExample> examples;
+    private List<Example> examples;
 
     private CreateIntentOptionsBuilder(CreateIntentOptions createIntentOptions) {
       workspaceId = createIntentOptions.workspaceId;
@@ -2694,10 +2187,10 @@ public class IBMAssistantV1Models {
      * @param examples the new examples
      * @return the CreateIntentOptions builder
      */
-    public CreateIntentOptionsBuilder addExamples(CreateExample examples) {
+    public CreateIntentOptionsBuilder addExamples(Example examples) {
       IBMWatsonValidator.notNull(examples, 'examples cannot be null');
       if (this.examples == null) {
-        this.examples = new List<CreateExample>();
+        this.examples = new List<Example>();
       }
       this.examples.add(examples);
       return this;
@@ -2743,7 +2236,7 @@ public class IBMAssistantV1Models {
      * @param examples the examples
      * @return the CreateIntentOptions builder
      */
-    public CreateIntentOptionsBuilder examples(List<CreateExample> examples) {
+    public CreateIntentOptionsBuilder examples(List<Example> examples) {
       this.examples = examples;
       return this;
     }
@@ -2932,6 +2425,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the synonym.
+     *
+     * @param synonym the synonym
+     * @return the CreateSynonymOptions builder
+     */
+    public CreateSynonymOptionsBuilder synonym(Synonym synonym) {
+      this.synonym = synonym.getSynonym();
+      return this;
+    }
+
+    /**
      * Add a request header.
      *
      * @param name the header name
@@ -2947,12 +2451,20 @@ public class IBMAssistantV1Models {
   /**
    * CreateValue.
    */
-  public class CreateValue {
+  public class CreateValue extends IBMWatsonGenericModel {
     private String value_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
+    private String type_serialized_name;
     private List<String> synonyms_serialized_name;
     private List<String> patterns_serialized_name;
-    private String type_serialized_name;
+    private Datetime created_serialized_name;
+    private Datetime updated_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public CreateValue() { }
  
     /**
      * Gets the value.
@@ -2964,7 +2476,8 @@ public class IBMAssistantV1Models {
      *
      * @return the value
      */
-    public String value() {
+    @AuraEnabled
+    public String getValue() {
       return value_serialized_name;
     }
  
@@ -2975,57 +2488,87 @@ public class IBMAssistantV1Models {
      *
      * @return the metadata
      */
-    public IBMWatsonMapModel metadata() {
+    @AuraEnabled
+    public IBMWatsonMapModel getMetadata() {
       return metadata_serialized_name;
+    }
+ 
+    /**
+     * Gets the valueType.
+     *
+     * Specifies the type of entity value.
+     *
+     * @return the valueType
+     */
+    @AuraEnabled
+    public String getValueType() {
+      return type_serialized_name;
     }
  
     /**
      * Gets the synonyms.
      *
-     * An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated
-     * by **type**), but not both. A synonym must conform to the following restrictions:
+     * An array of synonyms for the entity value. A value can specify either synonyms or patterns (depending on the
+     * value type), but not both. A synonym must conform to the following resrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
      * - It must be no longer than 64 characters.
      *
      * @return the synonyms
      */
-    public List<String> synonyms() {
+    @AuraEnabled
+    public List<String> getSynonyms() {
       return synonyms_serialized_name;
     }
  
     /**
      * Gets the patterns.
      *
-     * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by
-     * **type**), but not both. A pattern is a regular expression no longer than 512 characters. For more information
+     * An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the
+     * value type), but not both. A pattern is a regular expression no longer than 512 characters. For more information
      * about how to specify a pattern, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#creating-entities).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#entities-create-dictionary-based).
      *
      * @return the patterns
      */
-    public List<String> patterns() {
+    @AuraEnabled
+    public List<String> getPatterns() {
       return patterns_serialized_name;
     }
  
     /**
-     * Gets the valueType.
+     * Gets the created.
      *
-     * Specifies the type of value.
+     * The timestamp for creation of the object.
      *
-     * @return the valueType
+     * @return the created
      */
-    public String valueType() {
-      return type_serialized_name;
+    @AuraEnabled
+    public Datetime getCreated() {
+      return created_serialized_name;
+    }
+ 
+    /**
+     * Gets the updated.
+     *
+     * The timestamp for the most recent update to the object.
+     *
+     * @return the updated
+     */
+    @AuraEnabled
+    public Datetime getUpdated() {
+      return updated_serialized_name;
     }
   
     private CreateValue(CreateValueBuilder builder) {
       IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
       value_serialized_name = builder.value;
       metadata_serialized_name = builder.metadata;
+      type_serialized_name = builder.valueType;
       synonyms_serialized_name = builder.synonyms;
       patterns_serialized_name = builder.patterns;
-      type_serialized_name = builder.valueType;
+      created_serialized_name = builder.created;
+      updated_serialized_name = builder.updated;
     }
 
     /**
@@ -3037,6 +2580,20 @@ public class IBMAssistantV1Models {
       return new CreateValueBuilder(this);
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      CreateValue ret = (CreateValue) super.deserialize(jsonString, jsonMap, classType);
+      CreateValueBuilder retBuilder = ret.newBuilder();
+
+      // calling custom deserializer for metadata
+      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
+      retBuilder.metadata(newMetadata);
+
+      return retBuilder.build();
+    }
   }
 
   /**
@@ -3045,16 +2602,20 @@ public class IBMAssistantV1Models {
   public class CreateValueBuilder {
     private String value;
     private IBMWatsonMapModel metadata;
+    private String valueType;
     private List<String> synonyms;
     private List<String> patterns;
-    private String valueType;
+    private Datetime created;
+    private Datetime updated;
 
     private CreateValueBuilder(CreateValue createValue) {
-      value = createValue.value_serialized_name;
-      metadata = createValue.metadata_serialized_name;
-      synonyms = createValue.synonyms_serialized_name;
-      patterns = createValue.patterns_serialized_name;
-      valueType = createValue.type_serialized_name;
+      this.value = createValue.value_serialized_name;
+      this.metadata = createValue.metadata_serialized_name;
+      this.valueType = createValue.type_serialized_name;
+      this.synonyms = createValue.synonyms_serialized_name;
+      this.patterns = createValue.patterns_serialized_name;
+      this.created = createValue.created_serialized_name;
+      this.updated = createValue.updated_serialized_name;
     }
 
     /**
@@ -3134,6 +2695,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the valueType.
+     *
+     * @param valueType the valueType
+     * @return the CreateValue builder
+     */
+    public CreateValueBuilder valueType(String valueType) {
+      this.valueType = valueType;
+      return this;
+    }
+
+    /**
      * Set the synonyms.
      * Existing synonyms will be replaced.
      *
@@ -3158,13 +2730,24 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the valueType.
+     * Set the created.
      *
-     * @param valueType the valueType
+     * @param created the created
      * @return the CreateValue builder
      */
-    public CreateValueBuilder valueType(String valueType) {
-      this.valueType = valueType;
+    public CreateValueBuilder created(Datetime created) {
+      this.created = created;
+      return this;
+    }
+
+    /**
+     * Set the updated.
+     *
+     * @param updated the updated
+     * @return the CreateValue builder
+     */
+    public CreateValueBuilder updated(Datetime updated) {
+      this.updated = updated;
       return this;
     }
   }
@@ -3177,9 +2760,9 @@ public class IBMAssistantV1Models {
     private String entity;
     private String value;
     private IBMWatsonMapModel metadata;
+    private String valueType;
     private List<String> synonyms;
     private List<String> patterns;
-    private String valueType;
  
     /**
      * Gets the workspaceId.
@@ -3229,10 +2812,21 @@ public class IBMAssistantV1Models {
     }
  
     /**
+     * Gets the valueType.
+     *
+     * Specifies the type of entity value.
+     *
+     * @return the valueType
+     */
+    public String valueType() {
+      return valueType;
+    }
+ 
+    /**
      * Gets the synonyms.
      *
-     * An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated
-     * by **type**), but not both. A synonym must conform to the following restrictions:
+     * An array of synonyms for the entity value. A value can specify either synonyms or patterns (depending on the
+     * value type), but not both. A synonym must conform to the following resrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
      * - It must be no longer than 64 characters.
@@ -3246,26 +2840,15 @@ public class IBMAssistantV1Models {
     /**
      * Gets the patterns.
      *
-     * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by
-     * **type**), but not both. A pattern is a regular expression no longer than 512 characters. For more information
+     * An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the
+     * value type), but not both. A pattern is a regular expression no longer than 512 characters. For more information
      * about how to specify a pattern, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#creating-entities).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#entities-create-dictionary-based).
      *
      * @return the patterns
      */
     public List<String> patterns() {
       return patterns;
-    }
- 
-    /**
-     * Gets the valueType.
-     *
-     * Specifies the type of value.
-     *
-     * @return the valueType
-     */
-    public String valueType() {
-      return valueType;
     }
 
     private CreateValueOptions(CreateValueOptionsBuilder builder) {
@@ -3276,9 +2859,9 @@ public class IBMAssistantV1Models {
       entity = builder.entity;
       value = builder.value;
       metadata = builder.metadata;
+      valueType = builder.valueType;
       synonyms = builder.synonyms;
       patterns = builder.patterns;
-      valueType = builder.valueType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3301,18 +2884,18 @@ public class IBMAssistantV1Models {
     private String entity;
     private String value;
     private IBMWatsonMapModel metadata;
+    private String valueType;
     private List<String> synonyms;
     private List<String> patterns;
-    private String valueType;
 
     private CreateValueOptionsBuilder(CreateValueOptions createValueOptions) {
       workspaceId = createValueOptions.workspaceId;
       entity = createValueOptions.entity;
       value = createValueOptions.value;
       metadata = createValueOptions.metadata;
+      valueType = createValueOptions.valueType;
       synonyms = createValueOptions.synonyms;
       patterns = createValueOptions.patterns;
-      valueType = createValueOptions.valueType;
       this.requestHeaders.putAll(createValueOptions.requestHeaders());
     }
 
@@ -3419,6 +3002,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the valueType.
+     *
+     * @param valueType the valueType
+     * @return the CreateValueOptions builder
+     */
+    public CreateValueOptionsBuilder valueType(String valueType) {
+      this.valueType = valueType;
+      return this;
+    }
+
+    /**
      * Set the synonyms.
      * Existing synonyms will be replaced.
      *
@@ -3443,13 +3037,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the valueType.
+     * Set the createValue.
      *
-     * @param valueType the valueType
+     * @param createValue the createValue
      * @return the CreateValueOptions builder
      */
-    public CreateValueOptionsBuilder valueType(String valueType) {
-      this.valueType = valueType;
+    public CreateValueOptionsBuilder createValue(CreateValue createValue) {
+      this.value = createValue.getValue();
+      this.metadata = createValue.getMetadata();
+      this.valueType = createValue.getValueType();
+      this.synonyms = createValue.getSynonyms();
+      this.patterns = createValue.getPatterns();
       return this;
     }
 
@@ -3473,13 +3071,13 @@ public class IBMAssistantV1Models {
     private String name;
     private String description;
     private String language;
-    private List<CreateIntent> intents;
-    private List<CreateEntity> entities;
-    private List<CreateDialogNode> dialogNodes;
-    private List<CreateCounterexample> counterexamples;
     private IBMWatsonMapModel metadata;
     private Boolean learningOptOut;
     private WorkspaceSystemSettings systemSettings;
+    private List<CreateIntent> intents;
+    private List<CreateEntity> entities;
+    private List<DialogNode> dialogNodes;
+    private List<Counterexample> counterexamples;
  
     /**
      * Gets the name.
@@ -3517,50 +3115,6 @@ public class IBMAssistantV1Models {
     }
  
     /**
-     * Gets the intents.
-     *
-     * An array of objects defining the intents for the workspace.
-     *
-     * @return the intents
-     */
-    public List<CreateIntent> intents() {
-      return intents;
-    }
- 
-    /**
-     * Gets the entities.
-     *
-     * An array of objects defining the entities for the workspace.
-     *
-     * @return the entities
-     */
-    public List<CreateEntity> entities() {
-      return entities;
-    }
- 
-    /**
-     * Gets the dialogNodes.
-     *
-     * An array of objects defining the nodes in the dialog.
-     *
-     * @return the dialogNodes
-     */
-    public List<CreateDialogNode> dialogNodes() {
-      return dialogNodes;
-    }
- 
-    /**
-     * Gets the counterexamples.
-     *
-     * An array of objects defining input examples that have been marked as irrelevant input.
-     *
-     * @return the counterexamples
-     */
-    public List<CreateCounterexample> counterexamples() {
-      return counterexamples;
-    }
- 
-    /**
      * Gets the metadata.
      *
      * Any metadata related to the workspace.
@@ -3574,8 +3128,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the learningOptOut.
      *
-     * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates
-     * that workspace training data is not to be used.
+     * Whether training data from the workspace (including artifacts such as intents and entities) can be used by IBM
+     * for general service improvements. `true` indicates that workspace training data is not to be used.
      *
      * @return the learningOptOut
      */
@@ -3593,18 +3147,62 @@ public class IBMAssistantV1Models {
     public WorkspaceSystemSettings systemSettings() {
       return systemSettings;
     }
+ 
+    /**
+     * Gets the intents.
+     *
+     * An array of objects defining the intents for the workspace.
+     *
+     * @return the intents
+     */
+    public List<CreateIntent> intents() {
+      return intents;
+    }
+ 
+    /**
+     * Gets the entities.
+     *
+     * An array of objects describing the entities for the workspace.
+     *
+     * @return the entities
+     */
+    public List<CreateEntity> entities() {
+      return entities;
+    }
+ 
+    /**
+     * Gets the dialogNodes.
+     *
+     * An array of objects describing the dialog nodes in the workspace.
+     *
+     * @return the dialogNodes
+     */
+    public List<DialogNode> dialogNodes() {
+      return dialogNodes;
+    }
+ 
+    /**
+     * Gets the counterexamples.
+     *
+     * An array of objects defining input examples that have been marked as irrelevant input.
+     *
+     * @return the counterexamples
+     */
+    public List<Counterexample> counterexamples() {
+      return counterexamples;
+    }
 
     private CreateWorkspaceOptions(CreateWorkspaceOptionsBuilder builder) {
       name = builder.name;
       description = builder.description;
       language = builder.language;
+      metadata = builder.metadata;
+      learningOptOut = builder.learningOptOut;
+      systemSettings = builder.systemSettings;
       intents = builder.intents;
       entities = builder.entities;
       dialogNodes = builder.dialogNodes;
       counterexamples = builder.counterexamples;
-      metadata = builder.metadata;
-      learningOptOut = builder.learningOptOut;
-      systemSettings = builder.systemSettings;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -3626,25 +3224,25 @@ public class IBMAssistantV1Models {
     private String name;
     private String description;
     private String language;
-    private List<CreateIntent> intents;
-    private List<CreateEntity> entities;
-    private List<CreateDialogNode> dialogNodes;
-    private List<CreateCounterexample> counterexamples;
     private IBMWatsonMapModel metadata;
     private Boolean learningOptOut;
     private WorkspaceSystemSettings systemSettings;
+    private List<CreateIntent> intents;
+    private List<CreateEntity> entities;
+    private List<DialogNode> dialogNodes;
+    private List<Counterexample> counterexamples;
 
     private CreateWorkspaceOptionsBuilder(CreateWorkspaceOptions createWorkspaceOptions) {
       name = createWorkspaceOptions.name;
       description = createWorkspaceOptions.description;
       language = createWorkspaceOptions.language;
+      metadata = createWorkspaceOptions.metadata;
+      learningOptOut = createWorkspaceOptions.learningOptOut;
+      systemSettings = createWorkspaceOptions.systemSettings;
       intents = createWorkspaceOptions.intents;
       entities = createWorkspaceOptions.entities;
       dialogNodes = createWorkspaceOptions.dialogNodes;
       counterexamples = createWorkspaceOptions.counterexamples;
-      metadata = createWorkspaceOptions.metadata;
-      learningOptOut = createWorkspaceOptions.learningOptOut;
-      systemSettings = createWorkspaceOptions.systemSettings;
       this.requestHeaders.putAll(createWorkspaceOptions.requestHeaders());
     }
 
@@ -3699,10 +3297,10 @@ public class IBMAssistantV1Models {
      * @param dialogNodes the new dialogNodes
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder addDialogNodes(CreateDialogNode dialogNodes) {
+    public CreateWorkspaceOptionsBuilder addDialogNodes(DialogNode dialogNodes) {
       IBMWatsonValidator.notNull(dialogNodes, 'dialogNodes cannot be null');
       if (this.dialogNodes == null) {
-        this.dialogNodes = new List<CreateDialogNode>();
+        this.dialogNodes = new List<DialogNode>();
       }
       this.dialogNodes.add(dialogNodes);
       return this;
@@ -3714,10 +3312,10 @@ public class IBMAssistantV1Models {
      * @param counterexamples the new counterexamples
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder addCounterexamples(CreateCounterexample counterexamples) {
+    public CreateWorkspaceOptionsBuilder addCounterexamples(Counterexample counterexamples) {
       IBMWatsonValidator.notNull(counterexamples, 'counterexamples cannot be null');
       if (this.counterexamples == null) {
-        this.counterexamples = new List<CreateCounterexample>();
+        this.counterexamples = new List<Counterexample>();
       }
       this.counterexamples.add(counterexamples);
       return this;
@@ -3757,6 +3355,39 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the metadata.
+     *
+     * @param metadata the metadata
+     * @return the CreateWorkspaceOptions builder
+     */
+    public CreateWorkspaceOptionsBuilder metadata(IBMWatsonMapModel metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Set the learningOptOut.
+     *
+     * @param learningOptOut the learningOptOut
+     * @return the CreateWorkspaceOptions builder
+     */
+    public CreateWorkspaceOptionsBuilder learningOptOut(Boolean learningOptOut) {
+      this.learningOptOut = learningOptOut;
+      return this;
+    }
+
+    /**
+     * Set the systemSettings.
+     *
+     * @param systemSettings the systemSettings
+     * @return the CreateWorkspaceOptions builder
+     */
+    public CreateWorkspaceOptionsBuilder systemSettings(WorkspaceSystemSettings systemSettings) {
+      this.systemSettings = systemSettings;
+      return this;
+    }
+
+    /**
      * Set the intents.
      * Existing intents will be replaced.
      *
@@ -3787,7 +3418,7 @@ public class IBMAssistantV1Models {
      * @param dialogNodes the dialogNodes
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder dialogNodes(List<CreateDialogNode> dialogNodes) {
+    public CreateWorkspaceOptionsBuilder dialogNodes(List<DialogNode> dialogNodes) {
       this.dialogNodes = dialogNodes;
       return this;
     }
@@ -3799,41 +3430,8 @@ public class IBMAssistantV1Models {
      * @param counterexamples the counterexamples
      * @return the CreateWorkspaceOptions builder
      */
-    public CreateWorkspaceOptionsBuilder counterexamples(List<CreateCounterexample> counterexamples) {
+    public CreateWorkspaceOptionsBuilder counterexamples(List<Counterexample> counterexamples) {
       this.counterexamples = counterexamples;
-      return this;
-    }
-
-    /**
-     * Set the metadata.
-     *
-     * @param metadata the metadata
-     * @return the CreateWorkspaceOptions builder
-     */
-    public CreateWorkspaceOptionsBuilder metadata(IBMWatsonMapModel metadata) {
-      this.metadata = metadata;
-      return this;
-    }
-
-    /**
-     * Set the learningOptOut.
-     *
-     * @param learningOptOut the learningOptOut
-     * @return the CreateWorkspaceOptions builder
-     */
-    public CreateWorkspaceOptionsBuilder learningOptOut(Boolean learningOptOut) {
-      this.learningOptOut = learningOptOut;
-      return this;
-    }
-
-    /**
-     * Set the systemSettings.
-     *
-     * @param systemSettings the systemSettings
-     * @return the CreateWorkspaceOptions builder
-     */
-    public CreateWorkspaceOptionsBuilder systemSettings(WorkspaceSystemSettings systemSettings) {
-      this.systemSettings = systemSettings;
       return this;
     }
 
@@ -5019,35 +4617,44 @@ public class IBMAssistantV1Models {
     private IBMWatsonMapModel context_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private DialogNodeNextStep next_step_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-    private List<DialogNodeAction> actions_serialized_name;
     private String title_serialized_name;
-    private Boolean disabled_serialized_name;
     private String type_serialized_name;
     private String event_name_serialized_name;
     private String variable_serialized_name;
+    private List<DialogNodeAction> actions_serialized_name;
     private String digress_in_serialized_name;
     private String digress_out_serialized_name;
     private String digress_out_slots_serialized_name;
     private String user_label_serialized_name;
+    private Boolean disabled_serialized_name;
+    private Datetime created_serialized_name;
+    private Datetime updated_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogNode() { }
  
     /**
-     * Gets the dialogNodeId.
+     * Gets the dialogNode.
      *
-     * The dialog node ID.
+     * The dialog node ID. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     * - It must be no longer than 1024 characters.
      *
-     * @return the dialogNodeId
+     * @return the dialogNode
      */
     @AuraEnabled
-    public String getDialogNodeId() {
+    public String getDialogNode() {
       return dialog_node_serialized_name;
     }
  
     /**
      * Gets the description.
      *
-     * The description of the dialog node.
+     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and
+     * it must be no longer than 128 characters.
      *
      * @return the description
      */
@@ -5059,7 +4666,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the conditions.
      *
-     * The condition that triggers the dialog node.
+     * The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab
+     * characters, and it must be no longer than 2048 characters.
      *
      * @return the conditions
      */
@@ -5071,7 +4679,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the parent.
      *
-     * The ID of the parent dialog node. This property is not returned if the dialog node has no parent.
+     * The ID of the parent dialog node. This property is omitted if the dialog node has no parent.
      *
      * @return the parent
      */
@@ -5083,8 +4691,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the previousSibling.
      *
-     * The ID of the previous sibling dialog node. This property is not returned if the dialog node has no previous
-     * sibling.
+     * The ID of the previous sibling dialog node. This property is omitted if the dialog node has no previous sibling.
      *
      * @return the previousSibling
      */
@@ -5097,7 +4704,7 @@ public class IBMAssistantV1Models {
      * Gets the output.
      *
      * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#complex).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses).
      *
      * @return the output
      */
@@ -5109,7 +4716,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the context.
      *
-     * The context (if defined) for the dialog node.
+     * The context for the dialog node.
      *
      * @return the context
      */
@@ -5121,7 +4728,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the metadata.
      *
-     * Any metadata for the dialog node.
+     * The metadata for the dialog node.
      *
      * @return the metadata
      */
@@ -5143,63 +4750,17 @@ public class IBMAssistantV1Models {
     }
  
     /**
-     * Gets the created.
-     *
-     * The timestamp for creation of the dialog node.
-     *
-     * @return the created
-     */
-    @AuraEnabled
-    public Datetime getCreated() {
-      return created_serialized_name;
-    }
- 
-    /**
-     * Gets the updated.
-     *
-     * The timestamp for the most recent update to the dialog node.
-     *
-     * @return the updated
-     */
-    @AuraEnabled
-    public Datetime getUpdated() {
-      return updated_serialized_name;
-    }
- 
-    /**
-     * Gets the actions.
-     *
-     * The actions for the dialog node.
-     *
-     * @return the actions
-     */
-    @AuraEnabled
-    public List<DialogNodeAction> getActions() {
-      return actions_serialized_name;
-    }
- 
-    /**
      * Gets the title.
      *
-     * The alias used to identify the dialog node.
+     * The alias used to identify the dialog node. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     * - It must be no longer than 64 characters.
      *
      * @return the title
      */
     @AuraEnabled
     public String getTitle() {
       return title_serialized_name;
-    }
- 
-    /**
-     * Gets the disabled.
-     *
-     * For internal use only.
-     *
-     * @return the disabled
-     */
-    @AuraEnabled
-    public Boolean getDisabled() {
-      return disabled_serialized_name;
     }
  
     /**
@@ -5236,6 +4797,18 @@ public class IBMAssistantV1Models {
     @AuraEnabled
     public String getVariable() {
       return variable_serialized_name;
+    }
+ 
+    /**
+     * Gets the actions.
+     *
+     * An array of objects describing any actions to be invoked by the dialog node.
+     *
+     * @return the actions
+     */
+    @AuraEnabled
+    public List<DialogNodeAction> getActions() {
+      return actions_serialized_name;
     }
  
     /**
@@ -5286,176 +4859,75 @@ public class IBMAssistantV1Models {
     public String getUserLabel() {
       return user_label_serialized_name;
     }
-
+ 
     /**
-     * Sets the dialogNodeId.
+     * Gets the disabled.
      *
-     * @param dialogNodeId the new dialogNodeId
+     * For internal use only.
+     *
+     * @return the disabled
      */
-    public void setDialogNodeId(final String dialogNodeId) {
-      this.dialog_node_serialized_name = dialogNodeId;
+    @AuraEnabled
+    public Boolean getDisabled() {
+      return disabled_serialized_name;
+    }
+ 
+    /**
+     * Gets the created.
+     *
+     * The timestamp for creation of the object.
+     *
+     * @return the created
+     */
+    @AuraEnabled
+    public Datetime getCreated() {
+      return created_serialized_name;
+    }
+ 
+    /**
+     * Gets the updated.
+     *
+     * The timestamp for the most recent update to the object.
+     *
+     * @return the updated
+     */
+    @AuraEnabled
+    public Datetime getUpdated() {
+      return updated_serialized_name;
+    }
+  
+    private DialogNode(DialogNodeBuilder builder) {
+      IBMWatsonValidator.notNull(builder.dialogNode, 'dialogNode cannot be null');
+      dialog_node_serialized_name = builder.dialogNode;
+      description_serialized_name = builder.description;
+      conditions_serialized_name = builder.conditions;
+      parent_serialized_name = builder.parent;
+      previous_sibling_serialized_name = builder.previousSibling;
+      output_serialized_name = builder.output;
+      context_serialized_name = builder.context;
+      metadata_serialized_name = builder.metadata;
+      next_step_serialized_name = builder.nextStep;
+      title_serialized_name = builder.title;
+      type_serialized_name = builder.nodeType;
+      event_name_serialized_name = builder.eventName;
+      variable_serialized_name = builder.variable;
+      actions_serialized_name = builder.actions;
+      digress_in_serialized_name = builder.digressIn;
+      digress_out_serialized_name = builder.digressOut;
+      digress_out_slots_serialized_name = builder.digressOutSlots;
+      user_label_serialized_name = builder.userLabel;
+      disabled_serialized_name = builder.disabled;
+      created_serialized_name = builder.created;
+      updated_serialized_name = builder.updated;
     }
 
     /**
-     * Sets the description.
+     * New builder.
      *
-     * @param description the new description
+     * @return a DialogNode builder
      */
-    public void setDescription(final String description) {
-      this.description_serialized_name = description;
-    }
-
-    /**
-     * Sets the conditions.
-     *
-     * @param conditions the new conditions
-     */
-    public void setConditions(final String conditions) {
-      this.conditions_serialized_name = conditions;
-    }
-
-    /**
-     * Sets the parent.
-     *
-     * @param parent the new parent
-     */
-    public void setParent(final String parent) {
-      this.parent_serialized_name = parent;
-    }
-
-    /**
-     * Sets the previousSibling.
-     *
-     * @param previousSibling the new previousSibling
-     */
-    public void setPreviousSibling(final String previousSibling) {
-      this.previous_sibling_serialized_name = previousSibling;
-    }
-
-    /**
-     * Sets the output.
-     *
-     * @param output the new output
-     */
-    public void setOutput(final DialogNodeOutput output) {
-      this.output_serialized_name = output;
-    }
-
-    /**
-     * Sets the context.
-     *
-     * @param context the new context
-     */
-    public void setContext(final IBMWatsonMapModel context) {
-      this.context_serialized_name = context;
-    }
-
-    /**
-     * Sets the metadata.
-     *
-     * @param metadata the new metadata
-     */
-    public void setMetadata(final IBMWatsonMapModel metadata) {
-      this.metadata_serialized_name = metadata;
-    }
-
-    /**
-     * Sets the nextStep.
-     *
-     * @param nextStep the new nextStep
-     */
-    public void setNextStep(final DialogNodeNextStep nextStep) {
-      this.next_step_serialized_name = nextStep;
-    }
-
-    /**
-     * Sets the actions.
-     *
-     * @param actions the new actions
-     */
-    public void setActions(final List<DialogNodeAction> actions) {
-      this.actions_serialized_name = actions;
-    }
-
-    /**
-     * Sets the title.
-     *
-     * @param title the new title
-     */
-    public void setTitle(final String title) {
-      this.title_serialized_name = title;
-    }
-
-    /**
-     * Sets the disabled.
-     *
-     * @param disabled the new disabled
-     */
-    public void setDisabled(final Boolean disabled) {
-      this.disabled_serialized_name = disabled;
-    }
-
-    /**
-     * Sets the nodeType.
-     *
-     * @param nodeType the new nodeType
-     */
-    public void setNodeType(final String nodeType) {
-      this.type_serialized_name = nodeType;
-    }
-
-    /**
-     * Sets the eventName.
-     *
-     * @param eventName the new eventName
-     */
-    public void setEventName(final String eventName) {
-      this.event_name_serialized_name = eventName;
-    }
-
-    /**
-     * Sets the variable.
-     *
-     * @param variable the new variable
-     */
-    public void setVariable(final String variable) {
-      this.variable_serialized_name = variable;
-    }
-
-    /**
-     * Sets the digressIn.
-     *
-     * @param digressIn the new digressIn
-     */
-    public void setDigressIn(final String digressIn) {
-      this.digress_in_serialized_name = digressIn;
-    }
-
-    /**
-     * Sets the digressOut.
-     *
-     * @param digressOut the new digressOut
-     */
-    public void setDigressOut(final String digressOut) {
-      this.digress_out_serialized_name = digressOut;
-    }
-
-    /**
-     * Sets the digressOutSlots.
-     *
-     * @param digressOutSlots the new digressOutSlots
-     */
-    public void setDigressOutSlots(final String digressOutSlots) {
-      this.digress_out_slots_serialized_name = digressOutSlots;
-    }
-
-    /**
-     * Sets the userLabel.
-     *
-     * @param userLabel the new userLabel
-     */
-    public void setUserLabel(final String userLabel) {
-      this.user_label_serialized_name = userLabel;
+    public DialogNodeBuilder newBuilder() {
+      return new DialogNodeBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5464,22 +4936,23 @@ public class IBMAssistantV1Models {
       }
 
       DialogNode ret = (DialogNode) super.deserialize(jsonString, jsonMap, classType);
+      DialogNodeBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for output
       DialogNodeOutput newOutput = (DialogNodeOutput) new DialogNodeOutput().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), DialogNodeOutput.class);
-      ret.setOutput(newOutput);
+      retBuilder.output(newOutput);
 
       // calling custom deserializer for context
       IBMWatsonMapModel newContext = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'), IBMWatsonMapModel.class);
-      ret.setContext(newContext);
+      retBuilder.context(newContext);
 
       // calling custom deserializer for metadata
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
-      ret.setMetadata(newMetadata);
+      retBuilder.metadata(newMetadata);
 
       // calling custom deserializer for nextStep
       DialogNodeNextStep newNextStep = (DialogNodeNextStep) new DialogNodeNextStep().deserialize(JSON.serialize(ret.getNextStep()), (Map<String, Object>) jsonMap.get('next_step_serialized_name'), DialogNodeNextStep.class);
-      ret.setNextStep(newNextStep);
+      retBuilder.nextStep(newNextStep);
 
       // calling custom deserializer for actions
       List<DialogNodeAction> newActions = new List<DialogNodeAction>();
@@ -5491,10 +4964,332 @@ public class IBMAssistantV1Models {
           DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
           newActions.add(newItem);
         }
-        ret.setActions(newActions);
+        retBuilder.actions(newActions);
       }
 
-      return ret;
+      return retBuilder.build();
+    }
+  }
+
+  /**
+   * DialogNode Builder.
+   */
+  public class DialogNodeBuilder {
+    private String dialogNode;
+    private String description;
+    private String conditions;
+    private String parent;
+    private String previousSibling;
+    private DialogNodeOutput output;
+    private IBMWatsonMapModel context;
+    private IBMWatsonMapModel metadata;
+    private DialogNodeNextStep nextStep;
+    private String title;
+    private String nodeType;
+    private String eventName;
+    private String variable;
+    private List<DialogNodeAction> actions;
+    private String digressIn;
+    private String digressOut;
+    private String digressOutSlots;
+    private String userLabel;
+    private Boolean disabled;
+    private Datetime created;
+    private Datetime updated;
+
+    private DialogNodeBuilder(DialogNode dialogNode) {
+      this.dialogNode = dialogNode.dialog_node_serialized_name;
+      this.description = dialogNode.description_serialized_name;
+      this.conditions = dialogNode.conditions_serialized_name;
+      this.parent = dialogNode.parent_serialized_name;
+      this.previousSibling = dialogNode.previous_sibling_serialized_name;
+      this.output = dialogNode.output_serialized_name;
+      this.context = dialogNode.context_serialized_name;
+      this.metadata = dialogNode.metadata_serialized_name;
+      this.nextStep = dialogNode.next_step_serialized_name;
+      this.title = dialogNode.title_serialized_name;
+      this.nodeType = dialogNode.type_serialized_name;
+      this.eventName = dialogNode.event_name_serialized_name;
+      this.variable = dialogNode.variable_serialized_name;
+      this.actions = dialogNode.actions_serialized_name;
+      this.digressIn = dialogNode.digress_in_serialized_name;
+      this.digressOut = dialogNode.digress_out_serialized_name;
+      this.digressOutSlots = dialogNode.digress_out_slots_serialized_name;
+      this.userLabel = dialogNode.user_label_serialized_name;
+      this.disabled = dialogNode.disabled_serialized_name;
+      this.created = dialogNode.created_serialized_name;
+      this.updated = dialogNode.updated_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DialogNodeBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param dialogNode the dialogNode
+     */
+    public DialogNodeBuilder(String dialogNode) {
+      this.dialogNode = dialogNode;
+    }
+
+    /**
+     * Builds a DialogNode.
+     *
+     * @return the dialogNode
+     */
+    public DialogNode build() {
+      return new DialogNode(this);
+    }
+
+    /**
+     * Adds an actions to actions.
+     *
+     * @param actions the new actions
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder addActions(DialogNodeAction actions) {
+      IBMWatsonValidator.notNull(actions, 'actions cannot be null');
+      if (this.actions == null) {
+        this.actions = new List<DialogNodeAction>();
+      }
+      this.actions.add(actions);
+      return this;
+    }
+
+    /**
+     * Set the dialogNode.
+     *
+     * @param dialogNode the dialogNode
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder dialogNode(String dialogNode) {
+      this.dialogNode = dialogNode;
+      return this;
+    }
+
+    /**
+     * Set the description.
+     *
+     * @param description the description
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder description(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /**
+     * Set the conditions.
+     *
+     * @param conditions the conditions
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder conditions(String conditions) {
+      this.conditions = conditions;
+      return this;
+    }
+
+    /**
+     * Set the parent.
+     *
+     * @param parent the parent
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder parent(String parent) {
+      this.parent = parent;
+      return this;
+    }
+
+    /**
+     * Set the previousSibling.
+     *
+     * @param previousSibling the previousSibling
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder previousSibling(String previousSibling) {
+      this.previousSibling = previousSibling;
+      return this;
+    }
+
+    /**
+     * Set the output.
+     *
+     * @param output the output
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder output(DialogNodeOutput output) {
+      this.output = output;
+      return this;
+    }
+
+    /**
+     * Set the context.
+     *
+     * @param context the context
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder context(IBMWatsonMapModel context) {
+      this.context = context;
+      return this;
+    }
+
+    /**
+     * Set the metadata.
+     *
+     * @param metadata the metadata
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder metadata(IBMWatsonMapModel metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Set the nextStep.
+     *
+     * @param nextStep the nextStep
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder nextStep(DialogNodeNextStep nextStep) {
+      this.nextStep = nextStep;
+      return this;
+    }
+
+    /**
+     * Set the title.
+     *
+     * @param title the title
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder title(String title) {
+      this.title = title;
+      return this;
+    }
+
+    /**
+     * Set the nodeType.
+     *
+     * @param nodeType the nodeType
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder nodeType(String nodeType) {
+      this.nodeType = nodeType;
+      return this;
+    }
+
+    /**
+     * Set the eventName.
+     *
+     * @param eventName the eventName
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder eventName(String eventName) {
+      this.eventName = eventName;
+      return this;
+    }
+
+    /**
+     * Set the variable.
+     *
+     * @param variable the variable
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder variable(String variable) {
+      this.variable = variable;
+      return this;
+    }
+
+    /**
+     * Set the actions.
+     * Existing actions will be replaced.
+     *
+     * @param actions the actions
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder actions(List<DialogNodeAction> actions) {
+      this.actions = actions;
+      return this;
+    }
+
+    /**
+     * Set the digressIn.
+     *
+     * @param digressIn the digressIn
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder digressIn(String digressIn) {
+      this.digressIn = digressIn;
+      return this;
+    }
+
+    /**
+     * Set the digressOut.
+     *
+     * @param digressOut the digressOut
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder digressOut(String digressOut) {
+      this.digressOut = digressOut;
+      return this;
+    }
+
+    /**
+     * Set the digressOutSlots.
+     *
+     * @param digressOutSlots the digressOutSlots
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder digressOutSlots(String digressOutSlots) {
+      this.digressOutSlots = digressOutSlots;
+      return this;
+    }
+
+    /**
+     * Set the userLabel.
+     *
+     * @param userLabel the userLabel
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder userLabel(String userLabel) {
+      this.userLabel = userLabel;
+      return this;
+    }
+
+    /**
+     * Set the disabled.
+     *
+     * @param disabled the disabled
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder disabled(Boolean disabled) {
+      this.disabled = disabled;
+      return this;
+    }
+
+    /**
+     * Set the created.
+     *
+     * @param created the created
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder created(Datetime created) {
+      this.created = created;
+      return this;
+    }
+
+    /**
+     * Set the updated.
+     *
+     * @param updated the updated
+     * @return the DialogNode builder
+     */
+    public DialogNodeBuilder updated(Datetime updated) {
+      this.updated = updated;
+      return this;
     }
   }
 
@@ -5694,7 +5489,7 @@ public class IBMAssistantV1Models {
           DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNode.class);
           newDialogNodes.add(newItem);
         }
-        ret.setDialogNodes(newDialogNodes);
+        ret.dialog_nodes_serialized_name = newDialogNodes;
       }
 
       // calling custom deserializer for pagination
@@ -5807,7 +5602,7 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#complex).
+   * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses).
    */
   public class DialogNodeOutput extends IBMWatsonDynamicModel {
     private List<DialogNodeOutputGeneric> generic_serialized_name;
@@ -6193,7 +5988,7 @@ public class IBMAssistantV1Models {
           DialogNodeOutputTextValuesElement newItem = (DialogNodeOutputTextValuesElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputTextValuesElement.class);
           newValues.add(newItem);
         }
-        ret.setValues(newValues);
+        ret.values_serialized_name = newValues;
       }
 
       // calling custom deserializer for options
@@ -6206,7 +6001,7 @@ public class IBMAssistantV1Models {
           DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
           newOptions.add(newItem);
         }
-        ret.setOptions(newOptions);
+        ret.options_serialized_name = newOptions;
       }
 
       return ret;
@@ -6322,7 +6117,7 @@ public class IBMAssistantV1Models {
    * corresponding option.
    */
   public class DialogNodeOutputOptionsElementValue extends IBMWatsonGenericModel {
-    private InputData input_serialized_name;
+    private MessageInput input_serialized_name;
  
     /**
      * Gets the input.
@@ -6332,7 +6127,7 @@ public class IBMAssistantV1Models {
      * @return the input
      */
     @AuraEnabled
-    public InputData getInput() {
+    public MessageInput getInput() {
       return input_serialized_name;
     }
 
@@ -6341,7 +6136,7 @@ public class IBMAssistantV1Models {
      *
      * @param input the new input
      */
-    public void setInput(final InputData input) {
+    public void setInput(final MessageInput input) {
       this.input_serialized_name = input;
     }
 
@@ -6353,7 +6148,7 @@ public class IBMAssistantV1Models {
       DialogNodeOutputOptionsElementValue ret = (DialogNodeOutputOptionsElementValue) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for input
-      InputData newInput = (InputData) new InputData().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), InputData.class);
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), MessageInput.class);
       ret.setInput(newInput);
 
       return ret;
@@ -6369,9 +6164,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the text.
      *
-     * The text of a response. This string can include newline characters (`
-     * `), Markdown tagging, or other special characters, if supported by the channel. It must be no longer than 4096
-     * characters.
+     * The text of a response. This string can include newline characters (`\\n`), Markdown tagging, or other special
+     * characters, if supported by the channel. It must be no longer than 4096 characters.
      *
      * @return the text
      */
@@ -6497,6 +6291,7 @@ public class IBMAssistantV1Models {
     private List<DialogNodeOutputOptionsElement> options_serialized_name;
     private String message_to_human_agent_serialized_name;
     private String topic_serialized_name;
+    private String dialog_node_serialized_name;
     private List<DialogSuggestion> suggestions_serialized_name;
  
     /**
@@ -6636,6 +6431,19 @@ public class IBMAssistantV1Models {
     }
  
     /**
+     * Gets the dialogNode.
+     *
+     * The ID of the dialog node that the **topic** property is taken from. The **topic** property is populated using
+     * the value of the dialog node's **user_label** property.
+     *
+     * @return the dialogNode
+     */
+    @AuraEnabled
+    public String getDialogNode() {
+      return dialog_node_serialized_name;
+    }
+ 
+    /**
      * Gets the suggestions.
      *
      * An array of objects describing the possible matching dialog nodes from which the user can choose.
@@ -6741,6 +6549,15 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Sets the dialogNode.
+     *
+     * @param dialogNode the new dialogNode
+     */
+    public void setDialogNode(final String dialogNode) {
+      this.dialog_node_serialized_name = dialogNode;
+    }
+
+    /**
      * Sets the suggestions.
      *
      * @param suggestions the new suggestions
@@ -6766,7 +6583,7 @@ public class IBMAssistantV1Models {
           DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
           newOptions.add(newItem);
         }
-        ret.setOptions(newOptions);
+        ret.options_serialized_name = newOptions;
       }
 
       // calling custom deserializer for suggestions
@@ -6779,7 +6596,7 @@ public class IBMAssistantV1Models {
           DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestion.class);
           newSuggestions.add(newItem);
         }
-        ret.setSuggestions(newSuggestions);
+        ret.suggestions_serialized_name = newSuggestions;
       }
 
       return ret;
@@ -6793,6 +6610,7 @@ public class IBMAssistantV1Models {
     private String label_serialized_name;
     private DialogSuggestionValue value_serialized_name;
     private IBMWatsonMapModel output_serialized_name;
+    private String dialog_node_serialized_name;
  
     /**
      * Gets the label.
@@ -6832,6 +6650,19 @@ public class IBMAssistantV1Models {
     public IBMWatsonMapModel getOutput() {
       return output_serialized_name;
     }
+ 
+    /**
+     * Gets the dialogNode.
+     *
+     * The ID of the dialog node that the **label** property is taken from. The **label** property is populated using
+     * the value of the dialog node's **user_label** property.
+     *
+     * @return the dialogNode
+     */
+    @AuraEnabled
+    public String getDialogNode() {
+      return dialog_node_serialized_name;
+    }
 
     /**
      * Sets the label.
@@ -6860,6 +6691,15 @@ public class IBMAssistantV1Models {
       this.output_serialized_name = output;
     }
 
+    /**
+     * Sets the dialogNode.
+     *
+     * @param dialogNode the new dialogNode
+     */
+    public void setDialogNode(final String dialogNode) {
+      this.dialog_node_serialized_name = dialogNode;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -6884,7 +6724,7 @@ public class IBMAssistantV1Models {
    * selects the corresponding disambiguation option.
    */
   public class DialogSuggestionValue extends IBMWatsonGenericModel {
-    private InputData input_serialized_name;
+    private MessageInput input_serialized_name;
     private List<RuntimeIntent> intents_serialized_name;
     private List<RuntimeEntity> entities_serialized_name;
  
@@ -6896,7 +6736,7 @@ public class IBMAssistantV1Models {
      * @return the input
      */
     @AuraEnabled
-    public InputData getInput() {
+    public MessageInput getInput() {
       return input_serialized_name;
     }
  
@@ -6929,7 +6769,7 @@ public class IBMAssistantV1Models {
      *
      * @param input the new input
      */
-    public void setInput(final InputData input) {
+    public void setInput(final MessageInput input) {
       this.input_serialized_name = input;
     }
 
@@ -6959,7 +6799,7 @@ public class IBMAssistantV1Models {
       DialogSuggestionValue ret = (DialogSuggestionValue) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for input
-      InputData newInput = (InputData) new InputData().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), InputData.class);
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), MessageInput.class);
       ret.setInput(newInput);
 
       // calling custom deserializer for intents
@@ -6972,7 +6812,7 @@ public class IBMAssistantV1Models {
           RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
-        ret.setIntents(newIntents);
+        ret.intents_serialized_name = newIntents;
       }
 
       // calling custom deserializer for entities
@@ -6985,7 +6825,7 @@ public class IBMAssistantV1Models {
           RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
           newEntities.add(newItem);
         }
-        ret.setEntities(newEntities);
+        ret.entities_serialized_name = newEntities;
       }
 
       return ret;
@@ -6997,52 +6837,35 @@ public class IBMAssistantV1Models {
    */
   public class Entity extends IBMWatsonResponseModel {
     private String entity_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
     private String description_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean fuzzy_match_serialized_name;
+    private Datetime created_serialized_name;
+    private Datetime updated_serialized_name;
+    private List<Value> values_serialized_name;
  
     /**
-     * Gets the entityName.
+     * Gets the entity.
      *
-     * The name of the entity.
+     * The name of the entity. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
+     * - It must be no longer than 64 characters.
      *
-     * @return the entityName
+     * If you specify an entity name beginning with the reserved prefix `sys-`, it must be the name of a system entity
+     * that you want to enable. (Any entity content specified with the request is ignored.).
+     *
+     * @return the entity
      */
     @AuraEnabled
-    public String getEntityName() {
+    public String getEntity() {
       return entity_serialized_name;
-    }
- 
-    /**
-     * Gets the created.
-     *
-     * The timestamp for creation of the entity.
-     *
-     * @return the created
-     */
-    @AuraEnabled
-    public Datetime getCreated() {
-      return created_serialized_name;
-    }
- 
-    /**
-     * Gets the updated.
-     *
-     * The timestamp for the last update to the entity.
-     *
-     * @return the updated
-     */
-    @AuraEnabled
-    public Datetime getUpdated() {
-      return updated_serialized_name;
     }
  
     /**
      * Gets the description.
      *
-     * The description of the entity.
+     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it
+     * must be no longer than 128 characters.
      *
      * @return the description
      */
@@ -7066,7 +6889,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the fuzzyMatch.
      *
-     * Whether fuzzy matching is used for the entity.
+     * Whether to use fuzzy matching for the entity.
      *
      * @return the fuzzyMatch
      */
@@ -7074,163 +6897,11 @@ public class IBMAssistantV1Models {
     public Boolean getFuzzyMatch() {
       return fuzzy_match_serialized_name;
     }
-
-    /**
-     * Sets the entityName.
-     *
-     * @param entityName the new entityName
-     */
-    public void setEntityName(final String entityName) {
-      this.entity_serialized_name = entityName;
-    }
-
-    /**
-     * Sets the description.
-     *
-     * @param description the new description
-     */
-    public void setDescription(final String description) {
-      this.description_serialized_name = description;
-    }
-
-    /**
-     * Sets the metadata.
-     *
-     * @param metadata the new metadata
-     */
-    public void setMetadata(final IBMWatsonMapModel metadata) {
-      this.metadata_serialized_name = metadata;
-    }
-
-    /**
-     * Sets the fuzzyMatch.
-     *
-     * @param fuzzyMatch the new fuzzyMatch
-     */
-    public void setFuzzyMatch(final Boolean fuzzyMatch) {
-      this.fuzzy_match_serialized_name = fuzzyMatch;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Entity ret = (Entity) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for metadata
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
-      ret.setMetadata(newMetadata);
-
-      return ret;
-    }
-  }
-
-  /**
-   * An array of entities.
-   */
-  public class EntityCollection extends IBMWatsonResponseModel {
-    private List<EntityExport> entities_serialized_name;
-    private Pagination pagination_serialized_name;
- 
-    /**
-     * Gets the entities.
-     *
-     * An array of objects describing the entities defined for the workspace.
-     *
-     * @return the entities
-     */
-    @AuraEnabled
-    public List<EntityExport> getEntities() {
-      return entities_serialized_name;
-    }
- 
-    /**
-     * Gets the pagination.
-     *
-     * The pagination data for the returned objects.
-     *
-     * @return the pagination
-     */
-    @AuraEnabled
-    public Pagination getPagination() {
-      return pagination_serialized_name;
-    }
-
-    /**
-     * Sets the entities.
-     *
-     * @param entities the new entities
-     */
-    public void setEntities(final List<EntityExport> entities) {
-      this.entities_serialized_name = entities;
-    }
-
-    /**
-     * Sets the pagination.
-     *
-     * @param pagination the new pagination
-     */
-    public void setPagination(final Pagination pagination) {
-      this.pagination_serialized_name = pagination;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      EntityCollection ret = (EntityCollection) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for entities
-      List<EntityExport> newEntities = new List<EntityExport>();
-      List<EntityExport> deserializedEntities = ret.getEntities();
-      if (deserializedEntities != null) {
-        for (Integer i = 0; i < deserializedEntities.size(); i++) {
-          EntityExport currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
-          EntityExport newItem = (EntityExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntityExport.class);
-          newEntities.add(newItem);
-        }
-        ret.setEntities(newEntities);
-      }
-
-      // calling custom deserializer for pagination
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
-      ret.setPagination(newPagination);
-
-      return ret;
-    }
-  }
-
-  /**
-   * EntityExport.
-   */
-  public class EntityExport extends IBMWatsonResponseModel {
-    private String entity_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-    private String description_serialized_name;
-    private IBMWatsonMapModel metadata_serialized_name;
-    private Boolean fuzzy_match_serialized_name;
-    private List<ValueExport> values_serialized_name;
- 
-    /**
-     * Gets the entityName.
-     *
-     * The name of the entity.
-     *
-     * @return the entityName
-     */
-    @AuraEnabled
-    public String getEntityName() {
-      return entity_serialized_name;
-    }
  
     /**
      * Gets the created.
      *
-     * The timestamp for creation of the entity.
+     * The timestamp for creation of the object.
      *
      * @return the created
      */
@@ -7242,70 +6913,34 @@ public class IBMAssistantV1Models {
     /**
      * Gets the updated.
      *
-     * The timestamp for the last update to the entity.
+     * The timestamp for the most recent update to the object.
      *
      * @return the updated
      */
     @AuraEnabled
     public Datetime getUpdated() {
       return updated_serialized_name;
-    }
- 
-    /**
-     * Gets the description.
-     *
-     * The description of the entity.
-     *
-     * @return the description
-     */
-    @AuraEnabled
-    public String getDescription() {
-      return description_serialized_name;
-    }
- 
-    /**
-     * Gets the metadata.
-     *
-     * Any metadata related to the entity.
-     *
-     * @return the metadata
-     */
-    @AuraEnabled
-    public IBMWatsonMapModel getMetadata() {
-      return metadata_serialized_name;
-    }
- 
-    /**
-     * Gets the fuzzyMatch.
-     *
-     * Whether fuzzy matching is used for the entity.
-     *
-     * @return the fuzzyMatch
-     */
-    @AuraEnabled
-    public Boolean getFuzzyMatch() {
-      return fuzzy_match_serialized_name;
     }
  
     /**
      * Gets the values.
      *
-     * An array objects describing the entity values.
+     * An array of objects describing the entity values.
      *
      * @return the values
      */
     @AuraEnabled
-    public List<ValueExport> getValues() {
+    public List<Value> getValues() {
       return values_serialized_name;
     }
 
     /**
-     * Sets the entityName.
+     * Sets the entity.
      *
-     * @param entityName the new entityName
+     * @param entity the new entity
      */
-    public void setEntityName(final String entityName) {
-      this.entity_serialized_name = entityName;
+    public void setEntity(final String entity) {
+      this.entity_serialized_name = entity;
     }
 
     /**
@@ -7340,7 +6975,7 @@ public class IBMAssistantV1Models {
      *
      * @param values the new values
      */
-    public void setValues(final List<ValueExport> values) {
+    public void setValues(final List<Value> values) {
       this.values_serialized_name = values;
     }
 
@@ -7349,24 +6984,101 @@ public class IBMAssistantV1Models {
         return null;
       }
 
-      EntityExport ret = (EntityExport) super.deserialize(jsonString, jsonMap, classType);
+      Entity ret = (Entity) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for metadata
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
       ret.setMetadata(newMetadata);
 
       // calling custom deserializer for values
-      List<ValueExport> newValues = new List<ValueExport>();
-      List<ValueExport> deserializedValues = ret.getValues();
+      List<Value> newValues = new List<Value>();
+      List<Value> deserializedValues = ret.getValues();
       if (deserializedValues != null) {
         for (Integer i = 0; i < deserializedValues.size(); i++) {
-          ValueExport currentItem = ret.getValues().get(i);
+          Value currentItem = ret.getValues().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('values_serialized_name');
-          ValueExport newItem = (ValueExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ValueExport.class);
+          Value newItem = (Value) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Value.class);
           newValues.add(newItem);
         }
-        ret.setValues(newValues);
+        ret.values_serialized_name = newValues;
       }
+
+      return ret;
+    }
+  }
+
+  /**
+   * An array of objects describing the entities for the workspace.
+   */
+  public class EntityCollection extends IBMWatsonResponseModel {
+    private List<Entity> entities_serialized_name;
+    private Pagination pagination_serialized_name;
+ 
+    /**
+     * Gets the entities.
+     *
+     * An array of objects describing the entities defined for the workspace.
+     *
+     * @return the entities
+     */
+    @AuraEnabled
+    public List<Entity> getEntities() {
+      return entities_serialized_name;
+    }
+ 
+    /**
+     * Gets the pagination.
+     *
+     * The pagination data for the returned objects.
+     *
+     * @return the pagination
+     */
+    @AuraEnabled
+    public Pagination getPagination() {
+      return pagination_serialized_name;
+    }
+
+    /**
+     * Sets the entities.
+     *
+     * @param entities the new entities
+     */
+    public void setEntities(final List<Entity> entities) {
+      this.entities_serialized_name = entities;
+    }
+
+    /**
+     * Sets the pagination.
+     *
+     * @param pagination the new pagination
+     */
+    public void setPagination(final Pagination pagination) {
+      this.pagination_serialized_name = pagination;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      EntityCollection ret = (EntityCollection) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for entities
+      List<Entity> newEntities = new List<Entity>();
+      List<Entity> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          Entity currentItem = ret.getEntities().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          Entity newItem = (Entity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Entity.class);
+          newEntities.add(newItem);
+        }
+        ret.entities_serialized_name = newEntities;
+      }
+
+      // calling custom deserializer for pagination
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
+      ret.setPagination(newPagination);
 
       return ret;
     }
@@ -7381,26 +7093,26 @@ public class IBMAssistantV1Models {
     private List<Long> location_serialized_name;
  
     /**
-     * Gets the exampleText.
+     * Gets the text.
      *
      * The text of the user input example.
      *
-     * @return the exampleText
+     * @return the text
      */
     @AuraEnabled
-    public String getExampleText() {
+    public String getText() {
       return text_serialized_name;
     }
  
     /**
-     * Gets the intentName.
+     * Gets the intent.
      *
      * The name of the intent.
      *
-     * @return the intentName
+     * @return the intent
      */
     @AuraEnabled
-    public String getIntentName() {
+    public String getIntent() {
       return intent_serialized_name;
     }
  
@@ -7417,21 +7129,21 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Sets the exampleText.
+     * Sets the text.
      *
-     * @param exampleText the new exampleText
+     * @param text the new text
      */
-    public void setExampleText(final String exampleText) {
-      this.text_serialized_name = exampleText;
+    public void setText(final String text) {
+      this.text_serialized_name = text;
     }
 
     /**
-     * Sets the intentName.
+     * Sets the intent.
      *
-     * @param intentName the new intentName
+     * @param intent the new intent
      */
-    public void setIntentName(final String intentName) {
-      this.intent_serialized_name = intentName;
+    public void setIntent(final String intent) {
+      this.intent_serialized_name = intent;
     }
 
     /**
@@ -7520,7 +7232,7 @@ public class IBMAssistantV1Models {
           EntityMention newItem = (EntityMention) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntityMention.class);
           newExamples.add(newItem);
         }
-        ret.setExamples(newExamples);
+        ret.examples_serialized_name = newExamples;
       }
 
       // calling custom deserializer for pagination
@@ -7536,26 +7248,47 @@ public class IBMAssistantV1Models {
    */
   public class Example extends IBMWatsonResponseModel {
     private String text_serialized_name;
+    private List<Mention> mentions_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
-    private List<Mentions> mentions_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Example() { }
  
     /**
-     * Gets the exampleText.
+     * Gets the text.
      *
-     * The text of the user input example.
+     * The text of a user input example. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 1024 characters.
      *
-     * @return the exampleText
+     * @return the text
      */
     @AuraEnabled
-    public String getExampleText() {
+    public String getText() {
       return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the mentions.
+     *
+     * An array of contextual entity mentions.
+     *
+     * @return the mentions
+     */
+    @AuraEnabled
+    public List<Mention> getMentions() {
+      return mentions_serialized_name;
     }
  
     /**
      * Gets the created.
      *
-     * The timestamp for creation of the example.
+     * The timestamp for creation of the object.
      *
      * @return the created
      */
@@ -7567,7 +7300,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the updated.
      *
-     * The timestamp for the last update to the example.
+     * The timestamp for the most recent update to the object.
      *
      * @return the updated
      */
@@ -7575,35 +7308,22 @@ public class IBMAssistantV1Models {
     public Datetime getUpdated() {
       return updated_serialized_name;
     }
- 
-    /**
-     * Gets the mentions.
-     *
-     * An array of contextual entity mentions.
-     *
-     * @return the mentions
-     */
-    @AuraEnabled
-    public List<Mentions> getMentions() {
-      return mentions_serialized_name;
+  
+    private Example(ExampleBuilder builder) {
+      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
+      text_serialized_name = builder.text;
+      mentions_serialized_name = builder.mentions;
+      created_serialized_name = builder.created;
+      updated_serialized_name = builder.updated;
     }
 
     /**
-     * Sets the exampleText.
+     * New builder.
      *
-     * @param exampleText the new exampleText
+     * @return a Example builder
      */
-    public void setExampleText(final String exampleText) {
-      this.text_serialized_name = exampleText;
-    }
-
-    /**
-     * Sets the mentions.
-     *
-     * @param mentions the new mentions
-     */
-    public void setMentions(final List<Mentions> mentions) {
-      this.mentions_serialized_name = mentions;
+    public ExampleBuilder newBuilder() {
+      return new ExampleBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7612,21 +7332,123 @@ public class IBMAssistantV1Models {
       }
 
       Example ret = (Example) super.deserialize(jsonString, jsonMap, classType);
+      ExampleBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for mentions
-      List<Mentions> newMentions = new List<Mentions>();
-      List<Mentions> deserializedMentions = ret.getMentions();
+      List<Mention> newMentions = new List<Mention>();
+      List<Mention> deserializedMentions = ret.getMentions();
       if (deserializedMentions != null) {
         for (Integer i = 0; i < deserializedMentions.size(); i++) {
-          Mentions currentItem = ret.getMentions().get(i);
+          Mention currentItem = ret.getMentions().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('mentions_serialized_name');
-          Mentions newItem = (Mentions) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Mentions.class);
+          Mention newItem = (Mention) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Mention.class);
           newMentions.add(newItem);
         }
-        ret.setMentions(newMentions);
+        retBuilder.mentions(newMentions);
       }
 
-      return ret;
+      return retBuilder.build();
+    }
+  }
+
+  /**
+   * Example Builder.
+   */
+  public class ExampleBuilder {
+    private String text;
+    private List<Mention> mentions;
+    private Datetime created;
+    private Datetime updated;
+
+    private ExampleBuilder(Example example) {
+      this.text = example.text_serialized_name;
+      this.mentions = example.mentions_serialized_name;
+      this.created = example.created_serialized_name;
+      this.updated = example.updated_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ExampleBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param text the text
+     */
+    public ExampleBuilder(String text) {
+      this.text = text;
+    }
+
+    /**
+     * Builds a Example.
+     *
+     * @return the example
+     */
+    public Example build() {
+      return new Example(this);
+    }
+
+    /**
+     * Adds an mentions to mentions.
+     *
+     * @param mentions the new mentions
+     * @return the Example builder
+     */
+    public ExampleBuilder addMentions(Mention mentions) {
+      IBMWatsonValidator.notNull(mentions, 'mentions cannot be null');
+      if (this.mentions == null) {
+        this.mentions = new List<Mention>();
+      }
+      this.mentions.add(mentions);
+      return this;
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the Example builder
+     */
+    public ExampleBuilder text(String text) {
+      this.text = text;
+      return this;
+    }
+
+    /**
+     * Set the mentions.
+     * Existing mentions will be replaced.
+     *
+     * @param mentions the mentions
+     * @return the Example builder
+     */
+    public ExampleBuilder mentions(List<Mention> mentions) {
+      this.mentions = mentions;
+      return this;
+    }
+
+    /**
+     * Set the created.
+     *
+     * @param created the created
+     * @return the Example builder
+     */
+    public ExampleBuilder created(Datetime created) {
+      this.created = created;
+      return this;
+    }
+
+    /**
+     * Set the updated.
+     *
+     * @param updated the updated
+     * @return the Example builder
+     */
+    public ExampleBuilder updated(Datetime updated) {
+      this.updated = updated;
+      return this;
     }
   }
 
@@ -7696,7 +7518,7 @@ public class IBMAssistantV1Models {
           Example newItem = (Example) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Example.class);
           newExamples.add(newItem);
         }
-        ret.setExamples(newExamples);
+        ret.examples_serialized_name = newExamples;
       }
 
       // calling custom deserializer for pagination
@@ -9114,291 +8936,47 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * An input object that includes the input text.
-   */
-  public class InputData extends IBMWatsonGenericModel {
-    private String text_serialized_name;
-
-    /**
-     * This constructor is strictly for internal serialization/deserialization purposes
-     * and should not be called by the client.
-     */
-    public InputData() { }
- 
-    /**
-     * Gets the text.
-     *
-     * The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must
-     * be no longer than 2048 characters.
-     *
-     * @return the text
-     */
-    @AuraEnabled
-    public String getText() {
-      return text_serialized_name;
-    }
-  
-    private InputData(InputDataBuilder builder) {
-      IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
-      text_serialized_name = builder.text;
-    }
-
-    /**
-     * New builder.
-     *
-     * @return a InputData builder
-     */
-    public InputDataBuilder newBuilder() {
-      return new InputDataBuilder(this);
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      InputData ret = (InputData) super.deserialize(jsonString, jsonMap, classType);
-      InputDataBuilder retBuilder = ret.newBuilder();
-
-      return retBuilder.build();
-    }
-  }
-
-  /**
-   * InputData Builder.
-   */
-  public class InputDataBuilder {
-    private String text;
-
-    private InputDataBuilder(InputData inputData) {
-      text = inputData.text_serialized_name;
-    }
-
-    /**
-     * Instantiates a new builder.
-     */
-    public InputDataBuilder() {
-    }
-
-    /**
-     * Instantiates a new builder with required properties.
-     *
-     * @param text the text
-     */
-    public InputDataBuilder(String text) {
-      this.text = text;
-    }
-
-    /**
-     * Builds a InputData.
-     *
-     * @return the inputData
-     */
-    public InputData build() {
-      return new InputData(this);
-    }
-
-    /**
-     * Set the text.
-     *
-     * @param text the text
-     * @return the InputData builder
-     */
-    public InputDataBuilder text(String text) {
-      this.text = text;
-      return this;
-    }
-  }
-
-  /**
    * Intent.
    */
   public class Intent extends IBMWatsonResponseModel {
     private String intent_serialized_name;
+    private String description_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
-    private String description_serialized_name;
- 
-    /**
-     * Gets the intentName.
-     *
-     * The name of the intent.
-     *
-     * @return the intentName
-     */
-    @AuraEnabled
-    public String getIntentName() {
-      return intent_serialized_name;
-    }
- 
-    /**
-     * Gets the created.
-     *
-     * The timestamp for creation of the intent.
-     *
-     * @return the created
-     */
-    @AuraEnabled
-    public Datetime getCreated() {
-      return created_serialized_name;
-    }
- 
-    /**
-     * Gets the updated.
-     *
-     * The timestamp for the last update to the intent.
-     *
-     * @return the updated
-     */
-    @AuraEnabled
-    public Datetime getUpdated() {
-      return updated_serialized_name;
-    }
- 
-    /**
-     * Gets the description.
-     *
-     * The description of the intent.
-     *
-     * @return the description
-     */
-    @AuraEnabled
-    public String getDescription() {
-      return description_serialized_name;
-    }
-
-    /**
-     * Sets the intentName.
-     *
-     * @param intentName the new intentName
-     */
-    public void setIntentName(final String intentName) {
-      this.intent_serialized_name = intentName;
-    }
-
-    /**
-     * Sets the description.
-     *
-     * @param description the new description
-     */
-    public void setDescription(final String description) {
-      this.description_serialized_name = description;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Intent ret = (Intent) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
-  }
-
-  /**
-   * IntentCollection.
-   */
-  public class IntentCollection extends IBMWatsonResponseModel {
-    private List<IntentExport> intents_serialized_name;
-    private Pagination pagination_serialized_name;
- 
-    /**
-     * Gets the intents.
-     *
-     * An array of objects describing the intents defined for the workspace.
-     *
-     * @return the intents
-     */
-    @AuraEnabled
-    public List<IntentExport> getIntents() {
-      return intents_serialized_name;
-    }
- 
-    /**
-     * Gets the pagination.
-     *
-     * The pagination data for the returned objects.
-     *
-     * @return the pagination
-     */
-    @AuraEnabled
-    public Pagination getPagination() {
-      return pagination_serialized_name;
-    }
-
-    /**
-     * Sets the intents.
-     *
-     * @param intents the new intents
-     */
-    public void setIntents(final List<IntentExport> intents) {
-      this.intents_serialized_name = intents;
-    }
-
-    /**
-     * Sets the pagination.
-     *
-     * @param pagination the new pagination
-     */
-    public void setPagination(final Pagination pagination) {
-      this.pagination_serialized_name = pagination;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      IntentCollection ret = (IntentCollection) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for intents
-      List<IntentExport> newIntents = new List<IntentExport>();
-      List<IntentExport> deserializedIntents = ret.getIntents();
-      if (deserializedIntents != null) {
-        for (Integer i = 0; i < deserializedIntents.size(); i++) {
-          IntentExport currentItem = ret.getIntents().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
-          IntentExport newItem = (IntentExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), IntentExport.class);
-          newIntents.add(newItem);
-        }
-        ret.setIntents(newIntents);
-      }
-
-      // calling custom deserializer for pagination
-      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
-      ret.setPagination(newPagination);
-
-      return ret;
-    }
-  }
-
-  /**
-   * IntentExport.
-   */
-  public class IntentExport extends IBMWatsonResponseModel {
-    private String intent_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-    private String description_serialized_name;
     private List<Example> examples_serialized_name;
  
     /**
-     * Gets the intentName.
+     * Gets the intent.
      *
-     * The name of the intent.
+     * The name of the intent. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
+     * - It cannot begin with the reserved prefix `sys-`.
+     * - It must be no longer than 128 characters.
      *
-     * @return the intentName
+     * @return the intent
      */
     @AuraEnabled
-    public String getIntentName() {
+    public String getIntent() {
       return intent_serialized_name;
+    }
+ 
+    /**
+     * Gets the description.
+     *
+     * The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it
+     * must be no longer than 128 characters.
+     *
+     * @return the description
+     */
+    @AuraEnabled
+    public String getDescription() {
+      return description_serialized_name;
     }
  
     /**
      * Gets the created.
      *
-     * The timestamp for creation of the intent.
+     * The timestamp for creation of the object.
      *
      * @return the created
      */
@@ -9410,31 +8988,19 @@ public class IBMAssistantV1Models {
     /**
      * Gets the updated.
      *
-     * The timestamp for the last update to the intent.
+     * The timestamp for the most recent update to the object.
      *
      * @return the updated
      */
     @AuraEnabled
     public Datetime getUpdated() {
       return updated_serialized_name;
-    }
- 
-    /**
-     * Gets the description.
-     *
-     * The description of the intent.
-     *
-     * @return the description
-     */
-    @AuraEnabled
-    public String getDescription() {
-      return description_serialized_name;
     }
  
     /**
      * Gets the examples.
      *
-     * An array of objects describing the user input examples for the intent.
+     * An array of user input examples for the intent.
      *
      * @return the examples
      */
@@ -9444,12 +9010,12 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Sets the intentName.
+     * Sets the intent.
      *
-     * @param intentName the new intentName
+     * @param intent the new intent
      */
-    public void setIntentName(final String intentName) {
-      this.intent_serialized_name = intentName;
+    public void setIntent(final String intent) {
+      this.intent_serialized_name = intent;
     }
 
     /**
@@ -9475,7 +9041,7 @@ public class IBMAssistantV1Models {
         return null;
       }
 
-      IntentExport ret = (IntentExport) super.deserialize(jsonString, jsonMap, classType);
+      Intent ret = (Intent) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for examples
       List<Example> newExamples = new List<Example>();
@@ -9487,8 +9053,85 @@ public class IBMAssistantV1Models {
           Example newItem = (Example) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Example.class);
           newExamples.add(newItem);
         }
-        ret.setExamples(newExamples);
+        ret.examples_serialized_name = newExamples;
       }
+
+      return ret;
+    }
+  }
+
+  /**
+   * IntentCollection.
+   */
+  public class IntentCollection extends IBMWatsonResponseModel {
+    private List<Intent> intents_serialized_name;
+    private Pagination pagination_serialized_name;
+ 
+    /**
+     * Gets the intents.
+     *
+     * An array of objects describing the intents defined for the workspace.
+     *
+     * @return the intents
+     */
+    @AuraEnabled
+    public List<Intent> getIntents() {
+      return intents_serialized_name;
+    }
+ 
+    /**
+     * Gets the pagination.
+     *
+     * The pagination data for the returned objects.
+     *
+     * @return the pagination
+     */
+    @AuraEnabled
+    public Pagination getPagination() {
+      return pagination_serialized_name;
+    }
+
+    /**
+     * Sets the intents.
+     *
+     * @param intents the new intents
+     */
+    public void setIntents(final List<Intent> intents) {
+      this.intents_serialized_name = intents;
+    }
+
+    /**
+     * Sets the pagination.
+     *
+     * @param pagination the new pagination
+     */
+    public void setPagination(final Pagination pagination) {
+      this.pagination_serialized_name = pagination;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      IntentCollection ret = (IntentCollection) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for intents
+      List<Intent> newIntents = new List<Intent>();
+      List<Intent> deserializedIntents = ret.getIntents();
+      if (deserializedIntents != null) {
+        for (Integer i = 0; i < deserializedIntents.size(); i++) {
+          Intent currentItem = ret.getIntents().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
+          Intent newItem = (Intent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Intent.class);
+          newIntents.add(newItem);
+        }
+        ret.intents_serialized_name = newIntents;
+      }
+
+      // calling custom deserializer for pagination
+      Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
+      ret.setPagination(newPagination);
 
       return ret;
     }
@@ -9509,7 +9152,7 @@ public class IBMAssistantV1Models {
      * A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter
      * query that includes a value for `language`, as well as a value for `workspace_id` or
      * `request.context.metadata.deployment`. For more information, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/filter-reference.html#filter-query-syntax).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/filter-reference.html#filter-reference-syntax).
      *
      * @return the filter
      */
@@ -10909,7 +10552,7 @@ public class IBMAssistantV1Models {
      * Gets the filter.
      *
      * A cacheable parameter that limits the results to those matching the specified filter. For more information, see
-     * the [documentation](https://cloud.ibm.com/docs/services/assistant/filter-reference.html#filter-query-syntax).
+     * the [documentation](https://cloud.ibm.com/docs/services/assistant/filter-reference.html#filter-reference-syntax).
      *
      * @return the filter
      */
@@ -11997,86 +11640,9 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * LogCollection.
+   * Log.
    */
-  public class LogCollection extends IBMWatsonResponseModel {
-    private List<LogExport> logs_serialized_name;
-    private LogPagination pagination_serialized_name;
- 
-    /**
-     * Gets the logs.
-     *
-     * An array of objects describing log events.
-     *
-     * @return the logs
-     */
-    @AuraEnabled
-    public List<LogExport> getLogs() {
-      return logs_serialized_name;
-    }
- 
-    /**
-     * Gets the pagination.
-     *
-     * The pagination data for the returned objects.
-     *
-     * @return the pagination
-     */
-    @AuraEnabled
-    public LogPagination getPagination() {
-      return pagination_serialized_name;
-    }
-
-    /**
-     * Sets the logs.
-     *
-     * @param logs the new logs
-     */
-    public void setLogs(final List<LogExport> logs) {
-      this.logs_serialized_name = logs;
-    }
-
-    /**
-     * Sets the pagination.
-     *
-     * @param pagination the new pagination
-     */
-    public void setPagination(final LogPagination pagination) {
-      this.pagination_serialized_name = pagination;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      LogCollection ret = (LogCollection) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for logs
-      List<LogExport> newLogs = new List<LogExport>();
-      List<LogExport> deserializedLogs = ret.getLogs();
-      if (deserializedLogs != null) {
-        for (Integer i = 0; i < deserializedLogs.size(); i++) {
-          LogExport currentItem = ret.getLogs().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('logs_serialized_name');
-          LogExport newItem = (LogExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), LogExport.class);
-          newLogs.add(newItem);
-        }
-        ret.setLogs(newLogs);
-      }
-
-      // calling custom deserializer for pagination
-      LogPagination newPagination = (LogPagination) new LogPagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), LogPagination.class);
-      ret.setPagination(newPagination);
-
-      return ret;
-    }
-  }
-
-  /**
-   * LogExport.
-   */
-  public class LogExport extends IBMWatsonGenericModel {
+  public class Log extends IBMWatsonGenericModel {
     private MessageRequest request_serialized_name;
     private MessageResponse response_serialized_name;
     private String log_id_serialized_name;
@@ -12237,7 +11803,7 @@ public class IBMAssistantV1Models {
         return null;
       }
 
-      LogExport ret = (LogExport) super.deserialize(jsonString, jsonMap, classType);
+      Log ret = (Log) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for request
       MessageRequest newRequest = (MessageRequest) new MessageRequest().deserialize(JSON.serialize(ret.getRequest()), (Map<String, Object>) jsonMap.get('request_serialized_name'), MessageRequest.class);
@@ -12246,6 +11812,83 @@ public class IBMAssistantV1Models {
       // calling custom deserializer for response
       MessageResponse newResponse = (MessageResponse) new MessageResponse().deserialize(JSON.serialize(ret.getResponse()), (Map<String, Object>) jsonMap.get('response_serialized_name'), MessageResponse.class);
       ret.setResponse(newResponse);
+
+      return ret;
+    }
+  }
+
+  /**
+   * LogCollection.
+   */
+  public class LogCollection extends IBMWatsonResponseModel {
+    private List<Log> logs_serialized_name;
+    private LogPagination pagination_serialized_name;
+ 
+    /**
+     * Gets the logs.
+     *
+     * An array of objects describing log events.
+     *
+     * @return the logs
+     */
+    @AuraEnabled
+    public List<Log> getLogs() {
+      return logs_serialized_name;
+    }
+ 
+    /**
+     * Gets the pagination.
+     *
+     * The pagination data for the returned objects.
+     *
+     * @return the pagination
+     */
+    @AuraEnabled
+    public LogPagination getPagination() {
+      return pagination_serialized_name;
+    }
+
+    /**
+     * Sets the logs.
+     *
+     * @param logs the new logs
+     */
+    public void setLogs(final List<Log> logs) {
+      this.logs_serialized_name = logs;
+    }
+
+    /**
+     * Sets the pagination.
+     *
+     * @param pagination the new pagination
+     */
+    public void setPagination(final LogPagination pagination) {
+      this.pagination_serialized_name = pagination;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      LogCollection ret = (LogCollection) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for logs
+      List<Log> newLogs = new List<Log>();
+      List<Log> deserializedLogs = ret.getLogs();
+      if (deserializedLogs != null) {
+        for (Integer i = 0; i < deserializedLogs.size(); i++) {
+          Log currentItem = ret.getLogs().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('logs_serialized_name');
+          Log newItem = (Log) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Log.class);
+          newLogs.add(newItem);
+        }
+        ret.logs_serialized_name = newLogs;
+      }
+
+      // calling custom deserializer for pagination
+      LogPagination newPagination = (LogPagination) new LogPagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), LogPagination.class);
+      ret.setPagination(newPagination);
 
       return ret;
     }
@@ -12411,7 +12054,7 @@ public class IBMAssistantV1Models {
   /**
    * A mention of a contextual entity.
    */
-  public class Mentions extends IBMWatsonGenericModel {
+  public class Mention extends IBMWatsonGenericModel {
     private String entity_serialized_name;
     private List<Long> location_serialized_name;
  
@@ -12462,7 +12105,7 @@ public class IBMAssistantV1Models {
         return null;
       }
 
-      Mentions ret = (Mentions) super.deserialize(jsonString, jsonMap, classType);
+      Mention ret = (Mention) super.deserialize(jsonString, jsonMap, classType);
 
       return ret;
     }
@@ -12533,15 +12176,20 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * The text of the user input.
+   * An input object that includes the input text.
    */
-  public class MessageInput extends IBMWatsonGenericModel {
+  public class MessageInput extends IBMWatsonDynamicModel {
     private String text_serialized_name;
- 
+    private Map<String, Object> additional_properties_serialized_name;
+
+  /**
+   * This constructor is strictly for internal serialization/deserialization purposes
+   * and should not be called by the client.
+   */
+  public MessageInput() { }
+
     /**
      * Gets the text.
-     *
-     * The user's input.
      *
      * @return the text
      */
@@ -12551,11 +12199,34 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Gets the dynamic properties attached to MessageInput.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
+    }
+
+    private MessageInput(MessageInputBuilder builder) {
+      text_serialized_name = builder.text;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a MessageInput builder
+     */
+    public MessageInputBuilder newBuilder() {
+      return new MessageInputBuilder(this);
+    }
+
+    /**
      * Sets the text.
      *
      * @param text the new text
      */
-    public void setText(final String text) {
+    public void text(final String text) {
       this.text_serialized_name = text;
     }
 
@@ -12565,8 +12236,55 @@ public class IBMAssistantV1Models {
       }
 
       MessageInput ret = (MessageInput) super.deserialize(jsonString, jsonMap, classType);
+      MessageInputBuilder retBuilder = ret.newBuilder();
 
-      return ret;
+      MessageInput builderResult = retBuilder.build();
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key)) {
+          builderResult.put(key, jsonMap.get(key));
+        }
+      }
+
+      return builderResult;
+    }
+  }
+
+/**
+ * MessageInput Builder.
+ */
+  public class MessageInputBuilder {
+    private String text;
+
+    private MessageInputBuilder(MessageInput messageInput) {
+      this.text = messageInput.text_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public MessageInputBuilder() {
+    }
+
+    /**
+     * Builds a MessageInput.
+     *
+     * @return the messageInput
+     */
+    public MessageInput build() {
+      return new MessageInput(this);
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the MessageInput builder
+     */
+    public MessageInputBuilder text(String text) {
+      this.text = text;
+      return this;
     }
   }
 
@@ -12575,11 +12293,11 @@ public class IBMAssistantV1Models {
    */
   public class MessageOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
-    private InputData input;
+    private MessageInput input;
+    private List<RuntimeIntent> intents;
+    private List<RuntimeEntity> entities;
     private Boolean alternateIntents;
     private Context context;
-    private List<RuntimeEntity> entities;
-    private List<RuntimeIntent> intents;
     private OutputData output;
     private Boolean nodesVisitedDetails;
  
@@ -12601,14 +12319,38 @@ public class IBMAssistantV1Models {
      *
      * @return the input
      */
-    public InputData input() {
+    public MessageInput input() {
       return input;
+    }
+ 
+    /**
+     * Gets the intents.
+     *
+     * Intents to use when evaluating the user input. Include intents from the previous response to continue using those
+     * intents rather than trying to recognize intents in the new input.
+     *
+     * @return the intents
+     */
+    public List<RuntimeIntent> intents() {
+      return intents;
+    }
+ 
+    /**
+     * Gets the entities.
+     *
+     * Entities to use when evaluating the message. Include entities from the previous response to continue using those
+     * entities rather than detecting entities in the new input.
+     *
+     * @return the entities
+     */
+    public List<RuntimeEntity> entities() {
+      return entities;
     }
  
     /**
      * Gets the alternateIntents.
      *
-     * Whether to return more than one intent. Set to `true` to return all matching intents.
+     * Whether to return more than one intent. A value of `true` indicates that all matching intents are returned.
      *
      * @return the alternateIntents
      */
@@ -12625,30 +12367,6 @@ public class IBMAssistantV1Models {
      */
     public Context context() {
       return context;
-    }
- 
-    /**
-     * Gets the entities.
-     *
-     * Entities to use when evaluating the message. Include entities from the previous response to continue using those
-     * entities rather than detecting entities in the new input.
-     *
-     * @return the entities
-     */
-    public List<RuntimeEntity> entities() {
-      return entities;
-    }
- 
-    /**
-     * Gets the intents.
-     *
-     * Intents to use when evaluating the user input. Include intents from the previous response to continue using those
-     * intents rather than trying to recognize intents in the new input.
-     *
-     * @return the intents
-     */
-    public List<RuntimeIntent> intents() {
-      return intents;
     }
  
     /**
@@ -12679,10 +12397,10 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notEmpty(builder.workspaceId, 'workspaceId cannot be empty');
       workspaceId = builder.workspaceId;
       input = builder.input;
+      intents = builder.intents;
+      entities = builder.entities;
       alternateIntents = builder.alternateIntents;
       context = builder.context;
-      entities = builder.entities;
-      intents = builder.intents;
       output = builder.output;
       nodesVisitedDetails = builder.nodesVisitedDetails;
       this.requestHeaders = builder.requestHeaders;
@@ -12704,21 +12422,21 @@ public class IBMAssistantV1Models {
    */
   public class MessageOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspaceId;
-    private InputData input;
+    private MessageInput input;
+    private List<RuntimeIntent> intents;
+    private List<RuntimeEntity> entities;
     private Boolean alternateIntents;
     private Context context;
-    private List<RuntimeEntity> entities;
-    private List<RuntimeIntent> intents;
     private OutputData output;
     private Boolean nodesVisitedDetails;
 
     private MessageOptionsBuilder(MessageOptions messageOptions) {
       workspaceId = messageOptions.workspaceId;
       input = messageOptions.input;
+      intents = messageOptions.intents;
+      entities = messageOptions.entities;
       alternateIntents = messageOptions.alternateIntents;
       context = messageOptions.context;
-      entities = messageOptions.entities;
-      intents = messageOptions.intents;
       output = messageOptions.output;
       nodesVisitedDetails = messageOptions.nodesVisitedDetails;
       this.requestHeaders.putAll(messageOptions.requestHeaders());
@@ -12749,21 +12467,6 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Adds an entities to entities.
-     *
-     * @param entities the new entities
-     * @return the MessageOptions builder
-     */
-    public MessageOptionsBuilder addEntities(RuntimeEntity entities) {
-      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
-      if (this.entities == null) {
-        this.entities = new List<RuntimeEntity>();
-      }
-      this.entities.add(entities);
-      return this;
-    }
-
-    /**
      * Adds an intents to intents.
      *
      * @param intents the new intents
@@ -12775,6 +12478,21 @@ public class IBMAssistantV1Models {
         this.intents = new List<RuntimeIntent>();
       }
       this.intents.add(intents);
+      return this;
+    }
+
+    /**
+     * Adds an entities to entities.
+     *
+     * @param entities the new entities
+     * @return the MessageOptions builder
+     */
+    public MessageOptionsBuilder addEntities(RuntimeEntity entities) {
+      IBMWatsonValidator.notNull(entities, 'entities cannot be null');
+      if (this.entities == null) {
+        this.entities = new List<RuntimeEntity>();
+      }
+      this.entities.add(entities);
       return this;
     }
 
@@ -12795,8 +12513,32 @@ public class IBMAssistantV1Models {
      * @param input the input
      * @return the MessageOptions builder
      */
-    public MessageOptionsBuilder input(InputData input) {
+    public MessageOptionsBuilder input(MessageInput input) {
       this.input = input;
+      return this;
+    }
+
+    /**
+     * Set the intents.
+     * Existing intents will be replaced.
+     *
+     * @param intents the intents
+     * @return the MessageOptions builder
+     */
+    public MessageOptionsBuilder intents(List<RuntimeIntent> intents) {
+      this.intents = intents;
+      return this;
+    }
+
+    /**
+     * Set the entities.
+     * Existing entities will be replaced.
+     *
+     * @param entities the entities
+     * @return the MessageOptions builder
+     */
+    public MessageOptionsBuilder entities(List<RuntimeEntity> entities) {
+      this.entities = entities;
       return this;
     }
 
@@ -12819,30 +12561,6 @@ public class IBMAssistantV1Models {
      */
     public MessageOptionsBuilder context(Context context) {
       this.context = context;
-      return this;
-    }
-
-    /**
-     * Set the entities.
-     * Existing entities will be replaced.
-     *
-     * @param entities the entities
-     * @return the MessageOptions builder
-     */
-    public MessageOptionsBuilder entities(List<RuntimeEntity> entities) {
-      this.entities = entities;
-      return this;
-    }
-
-    /**
-     * Set the intents.
-     * Existing intents will be replaced.
-     *
-     * @param intents the intents
-     * @return the MessageOptions builder
-     */
-    public MessageOptionsBuilder intents(List<RuntimeIntent> intents) {
-      this.intents = intents;
       return this;
     }
 
@@ -12876,10 +12594,10 @@ public class IBMAssistantV1Models {
      */
     public MessageOptionsBuilder messageRequest(MessageRequest messageRequest) {
       this.input = messageRequest.getInput();
+      this.intents = messageRequest.getIntents();
+      this.entities = messageRequest.getEntities();
       this.alternateIntents = messageRequest.getAlternateIntents();
       this.context = messageRequest.getContext();
-      this.entities = messageRequest.getEntities();
-      this.intents = messageRequest.getIntents();
       this.output = messageRequest.getOutput();
       return this;
     }
@@ -12901,12 +12619,13 @@ public class IBMAssistantV1Models {
    * A request sent to the workspace, including the user input and context.
    */
   public class MessageRequest extends IBMWatsonGenericModel {
-    private InputData input_serialized_name;
+    private MessageInput input_serialized_name;
+    private List<RuntimeIntent> intents_serialized_name;
+    private List<RuntimeEntity> entities_serialized_name;
     private Boolean alternate_intents_serialized_name;
     private Context context_serialized_name;
-    private List<RuntimeEntity> entities_serialized_name;
-    private List<RuntimeIntent> intents_serialized_name;
     private OutputData output_serialized_name;
+    private List<DialogNodeAction> actions_serialized_name;
  
     /**
      * Gets the input.
@@ -12916,14 +12635,40 @@ public class IBMAssistantV1Models {
      * @return the input
      */
     @AuraEnabled
-    public InputData getInput() {
+    public MessageInput getInput() {
       return input_serialized_name;
+    }
+ 
+    /**
+     * Gets the intents.
+     *
+     * Intents to use when evaluating the user input. Include intents from the previous response to continue using those
+     * intents rather than trying to recognize intents in the new input.
+     *
+     * @return the intents
+     */
+    @AuraEnabled
+    public List<RuntimeIntent> getIntents() {
+      return intents_serialized_name;
+    }
+ 
+    /**
+     * Gets the entities.
+     *
+     * Entities to use when evaluating the message. Include entities from the previous response to continue using those
+     * entities rather than detecting entities in the new input.
+     *
+     * @return the entities
+     */
+    @AuraEnabled
+    public List<RuntimeEntity> getEntities() {
+      return entities_serialized_name;
     }
  
     /**
      * Gets the alternateIntents.
      *
-     * Whether to return more than one intent. Set to `true` to return all matching intents.
+     * Whether to return more than one intent. A value of `true` indicates that all matching intents are returned.
      *
      * @return the alternateIntents
      */
@@ -12945,32 +12690,6 @@ public class IBMAssistantV1Models {
     }
  
     /**
-     * Gets the entities.
-     *
-     * Entities to use when evaluating the message. Include entities from the previous response to continue using those
-     * entities rather than detecting entities in the new input.
-     *
-     * @return the entities
-     */
-    @AuraEnabled
-    public List<RuntimeEntity> getEntities() {
-      return entities_serialized_name;
-    }
- 
-    /**
-     * Gets the intents.
-     *
-     * Intents to use when evaluating the user input. Include intents from the previous response to continue using those
-     * intents rather than trying to recognize intents in the new input.
-     *
-     * @return the intents
-     */
-    @AuraEnabled
-    public List<RuntimeIntent> getIntents() {
-      return intents_serialized_name;
-    }
- 
-    /**
      * Gets the output.
      *
      * An output object that includes the response to the user, the dialog nodes that were triggered, and messages from
@@ -12982,14 +12701,44 @@ public class IBMAssistantV1Models {
     public OutputData getOutput() {
       return output_serialized_name;
     }
+ 
+    /**
+     * Gets the actions.
+     *
+     * An array of objects describing any actions requested by the dialog node.
+     *
+     * @return the actions
+     */
+    @AuraEnabled
+    public List<DialogNodeAction> getActions() {
+      return actions_serialized_name;
+    }
 
     /**
      * Sets the input.
      *
      * @param input the new input
      */
-    public void setInput(final InputData input) {
+    public void setInput(final MessageInput input) {
       this.input_serialized_name = input;
+    }
+
+    /**
+     * Sets the intents.
+     *
+     * @param intents the new intents
+     */
+    public void setIntents(final List<RuntimeIntent> intents) {
+      this.intents_serialized_name = intents;
+    }
+
+    /**
+     * Sets the entities.
+     *
+     * @param entities the new entities
+     */
+    public void setEntities(final List<RuntimeEntity> entities) {
+      this.entities_serialized_name = entities;
     }
 
     /**
@@ -13011,24 +12760,6 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Sets the entities.
-     *
-     * @param entities the new entities
-     */
-    public void setEntities(final List<RuntimeEntity> entities) {
-      this.entities_serialized_name = entities;
-    }
-
-    /**
-     * Sets the intents.
-     *
-     * @param intents the new intents
-     */
-    public void setIntents(final List<RuntimeIntent> intents) {
-      this.intents_serialized_name = intents;
-    }
-
-    /**
      * Sets the output.
      *
      * @param output the new output
@@ -13045,25 +12776,8 @@ public class IBMAssistantV1Models {
       MessageRequest ret = (MessageRequest) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for input
-      InputData newInput = (InputData) new InputData().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), InputData.class);
+      MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), MessageInput.class);
       ret.setInput(newInput);
-
-      // calling custom deserializer for context
-      Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'), Context.class);
-      ret.setContext(newContext);
-
-      // calling custom deserializer for entities
-      List<RuntimeEntity> newEntities = new List<RuntimeEntity>();
-      List<RuntimeEntity> deserializedEntities = ret.getEntities();
-      if (deserializedEntities != null) {
-        for (Integer i = 0; i < deserializedEntities.size(); i++) {
-          RuntimeEntity currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
-          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
-          newEntities.add(newItem);
-        }
-        ret.setEntities(newEntities);
-      }
 
       // calling custom deserializer for intents
       List<RuntimeIntent> newIntents = new List<RuntimeIntent>();
@@ -13075,12 +12789,42 @@ public class IBMAssistantV1Models {
           RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
-        ret.setIntents(newIntents);
+        ret.intents_serialized_name = newIntents;
       }
+
+      // calling custom deserializer for entities
+      List<RuntimeEntity> newEntities = new List<RuntimeEntity>();
+      List<RuntimeEntity> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          RuntimeEntity currentItem = ret.getEntities().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
+          newEntities.add(newItem);
+        }
+        ret.entities_serialized_name = newEntities;
+      }
+
+      // calling custom deserializer for context
+      Context newContext = (Context) new Context().deserialize(JSON.serialize(ret.getContext()), (Map<String, Object>) jsonMap.get('context_serialized_name'), Context.class);
+      ret.setContext(newContext);
 
       // calling custom deserializer for output
       OutputData newOutput = (OutputData) new OutputData().deserialize(JSON.serialize(ret.getOutput()), (Map<String, Object>) jsonMap.get('output_serialized_name'), OutputData.class);
       ret.setOutput(newOutput);
+
+      // calling custom deserializer for actions
+      List<DialogNodeAction> newActions = new List<DialogNodeAction>();
+      List<DialogNodeAction> deserializedActions = ret.getActions();
+      if (deserializedActions != null) {
+        for (Integer i = 0; i < deserializedActions.size(); i++) {
+          DialogNodeAction currentItem = ret.getActions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('actions_serialized_name');
+          DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
+          newActions.add(newItem);
+        }
+        ret.actions_serialized_name = newActions;
+      }
 
       return ret;
     }
@@ -13101,7 +12845,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the input.
      *
-     * The text of the user input.
+     * An input object that includes the input text.
      *
      * @return the input
      */
@@ -13237,15 +12981,6 @@ public class IBMAssistantV1Models {
       this.output_serialized_name = output;
     }
 
-    /**
-     * Sets the actions.
-     *
-     * @param actions the new actions
-     */
-    public void setActions(final List<DialogNodeAction> actions) {
-      this.actions_serialized_name = actions;
-    }
-
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -13267,7 +13002,7 @@ public class IBMAssistantV1Models {
           RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
           newIntents.add(newItem);
         }
-        ret.setIntents(newIntents);
+        ret.intents_serialized_name = newIntents;
       }
 
       // calling custom deserializer for entities
@@ -13280,7 +13015,7 @@ public class IBMAssistantV1Models {
           RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
           newEntities.add(newItem);
         }
-        ret.setEntities(newEntities);
+        ret.entities_serialized_name = newEntities;
       }
 
       // calling custom deserializer for context
@@ -13301,7 +13036,7 @@ public class IBMAssistantV1Models {
           DialogNodeAction newItem = (DialogNodeAction) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeAction.class);
           newActions.add(newItem);
         }
-        ret.setActions(newActions);
+        ret.actions_serialized_name = newActions;
       }
 
       return ret;
@@ -13884,23 +13619,32 @@ public class IBMAssistantV1Models {
     private String synonym_serialized_name;
     private Datetime created_serialized_name;
     private Datetime updated_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Synonym() { }
  
     /**
-     * Gets the synonymText.
+     * Gets the synonym.
      *
-     * The text of the synonym.
+     * The text of the synonym. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 64 characters.
      *
-     * @return the synonymText
+     * @return the synonym
      */
     @AuraEnabled
-    public String getSynonymText() {
+    public String getSynonym() {
       return synonym_serialized_name;
     }
  
     /**
      * Gets the created.
      *
-     * The timestamp for creation of the synonym.
+     * The timestamp for creation of the object.
      *
      * @return the created
      */
@@ -13912,7 +13656,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the updated.
      *
-     * The timestamp for the most recent update to the synonym.
+     * The timestamp for the most recent update to the object.
      *
      * @return the updated
      */
@@ -13920,14 +13664,21 @@ public class IBMAssistantV1Models {
     public Datetime getUpdated() {
       return updated_serialized_name;
     }
+  
+    private Synonym(SynonymBuilder builder) {
+      IBMWatsonValidator.notNull(builder.synonym, 'synonym cannot be null');
+      synonym_serialized_name = builder.synonym;
+      created_serialized_name = builder.created;
+      updated_serialized_name = builder.updated;
+    }
 
     /**
-     * Sets the synonymText.
+     * New builder.
      *
-     * @param synonymText the new synonymText
+     * @return a Synonym builder
      */
-    public void setSynonymText(final String synonymText) {
-      this.synonym_serialized_name = synonymText;
+    public SynonymBuilder newBuilder() {
+      return new SynonymBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -13936,8 +13687,81 @@ public class IBMAssistantV1Models {
       }
 
       Synonym ret = (Synonym) super.deserialize(jsonString, jsonMap, classType);
+      SynonymBuilder retBuilder = ret.newBuilder();
 
-      return ret;
+      return retBuilder.build();
+    }
+  }
+
+  /**
+   * Synonym Builder.
+   */
+  public class SynonymBuilder {
+    private String synonym;
+    private Datetime created;
+    private Datetime updated;
+
+    private SynonymBuilder(Synonym synonym) {
+      this.synonym = synonym.synonym_serialized_name;
+      this.created = synonym.created_serialized_name;
+      this.updated = synonym.updated_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public SynonymBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param synonym the synonym
+     */
+    public SynonymBuilder(String synonym) {
+      this.synonym = synonym;
+    }
+
+    /**
+     * Builds a Synonym.
+     *
+     * @return the synonym
+     */
+    public Synonym build() {
+      return new Synonym(this);
+    }
+
+    /**
+     * Set the synonym.
+     *
+     * @param synonym the synonym
+     * @return the Synonym builder
+     */
+    public SynonymBuilder synonym(String synonym) {
+      this.synonym = synonym;
+      return this;
+    }
+
+    /**
+     * Set the created.
+     *
+     * @param created the created
+     * @return the Synonym builder
+     */
+    public SynonymBuilder created(Datetime created) {
+      this.created = created;
+      return this;
+    }
+
+    /**
+     * Set the updated.
+     *
+     * @param updated the updated
+     * @return the Synonym builder
+     */
+    public SynonymBuilder updated(Datetime updated) {
+      this.updated = updated;
+      return this;
     }
   }
 
@@ -14007,7 +13831,7 @@ public class IBMAssistantV1Models {
           Synonym newItem = (Synonym) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Synonym.class);
           newSynonyms.add(newItem);
         }
-        ret.setSynonyms(newSynonyms);
+        ret.synonyms_serialized_name = newSynonyms;
       }
 
       // calling custom deserializer for pagination
@@ -14086,7 +13910,10 @@ public class IBMAssistantV1Models {
     /**
      * Gets the newText.
      *
-     * The text of a user input counterexample.
+     * The text of a user input marked as irrelevant input. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters
+     * - It cannot consist of only whitespace characters
+     * - It must be no longer than 1024 characters.
      *
      * @return the newText
      */
@@ -14207,24 +14034,24 @@ public class IBMAssistantV1Models {
   public class UpdateDialogNodeOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String dialogNode;
-    private String nodeType;
-    private List<DialogNodeAction> newActions;
-    private String newConditions;
-    private IBMWatsonMapModel newContext;
-    private String newPreviousSibling;
-    private String newVariable;
-    private String newUserLabel;
-    private IBMWatsonMapModel newMetadata;
-    private String newTitle;
-    private String newDescription;
-    private String newDigressOut;
-    private String newEventName;
-    private String newDigressOutSlots;
-    private DialogNodeNextStep newNextStep;
-    private String newDigressIn;
-    private DialogNodeOutput newOutput;
-    private String newParent;
     private String newDialogNode;
+    private String newDescription;
+    private String newConditions;
+    private String newParent;
+    private String newPreviousSibling;
+    private DialogNodeOutput newOutput;
+    private IBMWatsonMapModel newContext;
+    private IBMWatsonMapModel newMetadata;
+    private DialogNodeNextStep newNextStep;
+    private String newTitle;
+    private String nodeType;
+    private String newEventName;
+    private String newVariable;
+    private List<DialogNodeAction> newActions;
+    private String newDigressIn;
+    private String newDigressOut;
+    private String newDigressOutSlots;
+    private String newUserLabel;
  
     /**
      * Gets the workspaceId.
@@ -14249,25 +14076,28 @@ public class IBMAssistantV1Models {
     }
  
     /**
-     * Gets the nodeType.
+     * Gets the newDialogNode.
      *
-     * How the dialog node is processed.
+     * The dialog node ID. This string must conform to the following restrictions:
+     * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     * - It must be no longer than 1024 characters.
      *
-     * @return the nodeType
+     * @return the newDialogNode
      */
-    public String nodeType() {
-      return nodeType;
+    public String newDialogNode() {
+      return newDialogNode;
     }
  
     /**
-     * Gets the newActions.
+     * Gets the newDescription.
      *
-     * An array of objects describing any actions to be invoked by the dialog node.
+     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and
+     * it must be no longer than 128 characters.
      *
-     * @return the newActions
+     * @return the newDescription
      */
-    public List<DialogNodeAction> newActions() {
-      return newActions;
+    public String newDescription() {
+      return newDescription;
     }
  
     /**
@@ -14283,6 +14113,40 @@ public class IBMAssistantV1Models {
     }
  
     /**
+     * Gets the newParent.
+     *
+     * The ID of the parent dialog node. This property is omitted if the dialog node has no parent.
+     *
+     * @return the newParent
+     */
+    public String newParent() {
+      return newParent;
+    }
+ 
+    /**
+     * Gets the newPreviousSibling.
+     *
+     * The ID of the previous sibling dialog node. This property is omitted if the dialog node has no previous sibling.
+     *
+     * @return the newPreviousSibling
+     */
+    public String newPreviousSibling() {
+      return newPreviousSibling;
+    }
+ 
+    /**
+     * Gets the newOutput.
+     *
+     * The output of the dialog node. For more information about how to specify dialog node output, see the
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses).
+     *
+     * @return the newOutput
+     */
+    public DialogNodeOutput newOutput() {
+      return newOutput;
+    }
+ 
+    /**
      * Gets the newContext.
      *
      * The context for the dialog node.
@@ -14294,40 +14158,6 @@ public class IBMAssistantV1Models {
     }
  
     /**
-     * Gets the newPreviousSibling.
-     *
-     * The ID of the previous sibling dialog node.
-     *
-     * @return the newPreviousSibling
-     */
-    public String newPreviousSibling() {
-      return newPreviousSibling;
-    }
- 
-    /**
-     * Gets the newVariable.
-     *
-     * The location in the dialog context where output is stored.
-     *
-     * @return the newVariable
-     */
-    public String newVariable() {
-      return newVariable;
-    }
- 
-    /**
-     * Gets the newUserLabel.
-     *
-     * A label that can be displayed externally to describe the purpose of the node to users. This string must be no
-     * longer than 512 characters.
-     *
-     * @return the newUserLabel
-     */
-    public String newUserLabel() {
-      return newUserLabel;
-    }
- 
-    /**
      * Gets the newMetadata.
      *
      * The metadata for the dialog node.
@@ -14336,6 +14166,17 @@ public class IBMAssistantV1Models {
      */
     public IBMWatsonMapModel newMetadata() {
       return newMetadata;
+    }
+ 
+    /**
+     * Gets the newNextStep.
+     *
+     * The next step to execute following this dialog node.
+     *
+     * @return the newNextStep
+     */
+    public DialogNodeNextStep newNextStep() {
+      return newNextStep;
     }
  
     /**
@@ -14352,26 +14193,14 @@ public class IBMAssistantV1Models {
     }
  
     /**
-     * Gets the newDescription.
+     * Gets the nodeType.
      *
-     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and
-     * it must be no longer than 128 characters.
+     * How the dialog node is processed.
      *
-     * @return the newDescription
+     * @return the nodeType
      */
-    public String newDescription() {
-      return newDescription;
-    }
- 
-    /**
-     * Gets the newDigressOut.
-     *
-     * Whether this dialog node can be returned to after a digression.
-     *
-     * @return the newDigressOut
-     */
-    public String newDigressOut() {
-      return newDigressOut;
+    public String nodeType() {
+      return nodeType;
     }
  
     /**
@@ -14386,25 +14215,25 @@ public class IBMAssistantV1Models {
     }
  
     /**
-     * Gets the newDigressOutSlots.
+     * Gets the newVariable.
      *
-     * Whether the user can digress to top-level nodes while filling out slots.
+     * The location in the dialog context where output is stored.
      *
-     * @return the newDigressOutSlots
+     * @return the newVariable
      */
-    public String newDigressOutSlots() {
-      return newDigressOutSlots;
+    public String newVariable() {
+      return newVariable;
     }
  
     /**
-     * Gets the newNextStep.
+     * Gets the newActions.
      *
-     * The next step to execute following this dialog node.
+     * An array of objects describing any actions to be invoked by the dialog node.
      *
-     * @return the newNextStep
+     * @return the newActions
      */
-    public DialogNodeNextStep newNextStep() {
-      return newNextStep;
+    public List<DialogNodeAction> newActions() {
+      return newActions;
     }
  
     /**
@@ -14419,39 +14248,37 @@ public class IBMAssistantV1Models {
     }
  
     /**
-     * Gets the newOutput.
+     * Gets the newDigressOut.
      *
-     * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#complex).
+     * Whether this dialog node can be returned to after a digression.
      *
-     * @return the newOutput
+     * @return the newDigressOut
      */
-    public DialogNodeOutput newOutput() {
-      return newOutput;
+    public String newDigressOut() {
+      return newDigressOut;
     }
  
     /**
-     * Gets the newParent.
+     * Gets the newDigressOutSlots.
      *
-     * The ID of the parent dialog node.
+     * Whether the user can digress to top-level nodes while filling out slots.
      *
-     * @return the newParent
+     * @return the newDigressOutSlots
      */
-    public String newParent() {
-      return newParent;
+    public String newDigressOutSlots() {
+      return newDigressOutSlots;
     }
  
     /**
-     * Gets the newDialogNode.
+     * Gets the newUserLabel.
      *
-     * The dialog node ID. This string must conform to the following restrictions:
-     * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     * - It must be no longer than 1024 characters.
+     * A label that can be displayed externally to describe the purpose of the node to users. This string must be no
+     * longer than 512 characters.
      *
-     * @return the newDialogNode
+     * @return the newUserLabel
      */
-    public String newDialogNode() {
-      return newDialogNode;
+    public String newUserLabel() {
+      return newUserLabel;
     }
 
     private UpdateDialogNodeOptions(UpdateDialogNodeOptionsBuilder builder) {
@@ -14459,24 +14286,24 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notEmpty(builder.dialogNode, 'dialogNode cannot be empty');
       workspaceId = builder.workspaceId;
       dialogNode = builder.dialogNode;
-      nodeType = builder.nodeType;
-      newActions = builder.newActions;
-      newConditions = builder.newConditions;
-      newContext = builder.newContext;
-      newPreviousSibling = builder.newPreviousSibling;
-      newVariable = builder.newVariable;
-      newUserLabel = builder.newUserLabel;
-      newMetadata = builder.newMetadata;
-      newTitle = builder.newTitle;
-      newDescription = builder.newDescription;
-      newDigressOut = builder.newDigressOut;
-      newEventName = builder.newEventName;
-      newDigressOutSlots = builder.newDigressOutSlots;
-      newNextStep = builder.newNextStep;
-      newDigressIn = builder.newDigressIn;
-      newOutput = builder.newOutput;
-      newParent = builder.newParent;
       newDialogNode = builder.newDialogNode;
+      newDescription = builder.newDescription;
+      newConditions = builder.newConditions;
+      newParent = builder.newParent;
+      newPreviousSibling = builder.newPreviousSibling;
+      newOutput = builder.newOutput;
+      newContext = builder.newContext;
+      newMetadata = builder.newMetadata;
+      newNextStep = builder.newNextStep;
+      newTitle = builder.newTitle;
+      nodeType = builder.nodeType;
+      newEventName = builder.newEventName;
+      newVariable = builder.newVariable;
+      newActions = builder.newActions;
+      newDigressIn = builder.newDigressIn;
+      newDigressOut = builder.newDigressOut;
+      newDigressOutSlots = builder.newDigressOutSlots;
+      newUserLabel = builder.newUserLabel;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -14497,46 +14324,46 @@ public class IBMAssistantV1Models {
   public class UpdateDialogNodeOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String dialogNode;
-    private String nodeType;
-    private List<DialogNodeAction> newActions;
-    private String newConditions;
-    private IBMWatsonMapModel newContext;
-    private String newPreviousSibling;
-    private String newVariable;
-    private String newUserLabel;
-    private IBMWatsonMapModel newMetadata;
-    private String newTitle;
-    private String newDescription;
-    private String newDigressOut;
-    private String newEventName;
-    private String newDigressOutSlots;
-    private DialogNodeNextStep newNextStep;
-    private String newDigressIn;
-    private DialogNodeOutput newOutput;
-    private String newParent;
     private String newDialogNode;
+    private String newDescription;
+    private String newConditions;
+    private String newParent;
+    private String newPreviousSibling;
+    private DialogNodeOutput newOutput;
+    private IBMWatsonMapModel newContext;
+    private IBMWatsonMapModel newMetadata;
+    private DialogNodeNextStep newNextStep;
+    private String newTitle;
+    private String nodeType;
+    private String newEventName;
+    private String newVariable;
+    private List<DialogNodeAction> newActions;
+    private String newDigressIn;
+    private String newDigressOut;
+    private String newDigressOutSlots;
+    private String newUserLabel;
 
     private UpdateDialogNodeOptionsBuilder(UpdateDialogNodeOptions updateDialogNodeOptions) {
       workspaceId = updateDialogNodeOptions.workspaceId;
       dialogNode = updateDialogNodeOptions.dialogNode;
-      nodeType = updateDialogNodeOptions.nodeType;
-      newActions = updateDialogNodeOptions.newActions;
-      newConditions = updateDialogNodeOptions.newConditions;
-      newContext = updateDialogNodeOptions.newContext;
-      newPreviousSibling = updateDialogNodeOptions.newPreviousSibling;
-      newVariable = updateDialogNodeOptions.newVariable;
-      newUserLabel = updateDialogNodeOptions.newUserLabel;
-      newMetadata = updateDialogNodeOptions.newMetadata;
-      newTitle = updateDialogNodeOptions.newTitle;
-      newDescription = updateDialogNodeOptions.newDescription;
-      newDigressOut = updateDialogNodeOptions.newDigressOut;
-      newEventName = updateDialogNodeOptions.newEventName;
-      newDigressOutSlots = updateDialogNodeOptions.newDigressOutSlots;
-      newNextStep = updateDialogNodeOptions.newNextStep;
-      newDigressIn = updateDialogNodeOptions.newDigressIn;
-      newOutput = updateDialogNodeOptions.newOutput;
-      newParent = updateDialogNodeOptions.newParent;
       newDialogNode = updateDialogNodeOptions.newDialogNode;
+      newDescription = updateDialogNodeOptions.newDescription;
+      newConditions = updateDialogNodeOptions.newConditions;
+      newParent = updateDialogNodeOptions.newParent;
+      newPreviousSibling = updateDialogNodeOptions.newPreviousSibling;
+      newOutput = updateDialogNodeOptions.newOutput;
+      newContext = updateDialogNodeOptions.newContext;
+      newMetadata = updateDialogNodeOptions.newMetadata;
+      newNextStep = updateDialogNodeOptions.newNextStep;
+      newTitle = updateDialogNodeOptions.newTitle;
+      nodeType = updateDialogNodeOptions.nodeType;
+      newEventName = updateDialogNodeOptions.newEventName;
+      newVariable = updateDialogNodeOptions.newVariable;
+      newActions = updateDialogNodeOptions.newActions;
+      newDigressIn = updateDialogNodeOptions.newDigressIn;
+      newDigressOut = updateDialogNodeOptions.newDigressOut;
+      newDigressOutSlots = updateDialogNodeOptions.newDigressOutSlots;
+      newUserLabel = updateDialogNodeOptions.newUserLabel;
       this.requestHeaders.putAll(updateDialogNodeOptions.requestHeaders());
     }
 
@@ -14604,6 +14431,116 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the newDialogNode.
+     *
+     * @param newDialogNode the newDialogNode
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newDialogNode(String newDialogNode) {
+      this.newDialogNode = newDialogNode;
+      return this;
+    }
+
+    /**
+     * Set the newDescription.
+     *
+     * @param newDescription the newDescription
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newDescription(String newDescription) {
+      this.newDescription = newDescription;
+      return this;
+    }
+
+    /**
+     * Set the newConditions.
+     *
+     * @param newConditions the newConditions
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newConditions(String newConditions) {
+      this.newConditions = newConditions;
+      return this;
+    }
+
+    /**
+     * Set the newParent.
+     *
+     * @param newParent the newParent
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newParent(String newParent) {
+      this.newParent = newParent;
+      return this;
+    }
+
+    /**
+     * Set the newPreviousSibling.
+     *
+     * @param newPreviousSibling the newPreviousSibling
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newPreviousSibling(String newPreviousSibling) {
+      this.newPreviousSibling = newPreviousSibling;
+      return this;
+    }
+
+    /**
+     * Set the newOutput.
+     *
+     * @param newOutput the newOutput
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newOutput(DialogNodeOutput newOutput) {
+      this.newOutput = newOutput;
+      return this;
+    }
+
+    /**
+     * Set the newContext.
+     *
+     * @param newContext the newContext
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newContext(IBMWatsonMapModel newContext) {
+      this.newContext = newContext;
+      return this;
+    }
+
+    /**
+     * Set the newMetadata.
+     *
+     * @param newMetadata the newMetadata
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newMetadata(IBMWatsonMapModel newMetadata) {
+      this.newMetadata = newMetadata;
+      return this;
+    }
+
+    /**
+     * Set the newNextStep.
+     *
+     * @param newNextStep the newNextStep
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newNextStep(DialogNodeNextStep newNextStep) {
+      this.newNextStep = newNextStep;
+      return this;
+    }
+
+    /**
+     * Set the newTitle.
+     *
+     * @param newTitle the newTitle
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newTitle(String newTitle) {
+      this.newTitle = newTitle;
+      return this;
+    }
+
+    /**
      * Set the nodeType.
      *
      * @param nodeType the nodeType
@@ -14611,6 +14548,28 @@ public class IBMAssistantV1Models {
      */
     public UpdateDialogNodeOptionsBuilder nodeType(String nodeType) {
       this.nodeType = nodeType;
+      return this;
+    }
+
+    /**
+     * Set the newEventName.
+     *
+     * @param newEventName the newEventName
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newEventName(String newEventName) {
+      this.newEventName = newEventName;
+      return this;
+    }
+
+    /**
+     * Set the newVariable.
+     *
+     * @param newVariable the newVariable
+     * @return the UpdateDialogNodeOptions builder
+     */
+    public UpdateDialogNodeOptionsBuilder newVariable(String newVariable) {
+      this.newVariable = newVariable;
       return this;
     }
 
@@ -14627,90 +14586,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the newConditions.
+     * Set the newDigressIn.
      *
-     * @param newConditions the newConditions
+     * @param newDigressIn the newDigressIn
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newConditions(String newConditions) {
-      this.newConditions = newConditions;
-      return this;
-    }
-
-    /**
-     * Set the newContext.
-     *
-     * @param newContext the newContext
-     * @return the UpdateDialogNodeOptions builder
-     */
-    public UpdateDialogNodeOptionsBuilder newContext(IBMWatsonMapModel newContext) {
-      this.newContext = newContext;
-      return this;
-    }
-
-    /**
-     * Set the newPreviousSibling.
-     *
-     * @param newPreviousSibling the newPreviousSibling
-     * @return the UpdateDialogNodeOptions builder
-     */
-    public UpdateDialogNodeOptionsBuilder newPreviousSibling(String newPreviousSibling) {
-      this.newPreviousSibling = newPreviousSibling;
-      return this;
-    }
-
-    /**
-     * Set the newVariable.
-     *
-     * @param newVariable the newVariable
-     * @return the UpdateDialogNodeOptions builder
-     */
-    public UpdateDialogNodeOptionsBuilder newVariable(String newVariable) {
-      this.newVariable = newVariable;
-      return this;
-    }
-
-    /**
-     * Set the newUserLabel.
-     *
-     * @param newUserLabel the newUserLabel
-     * @return the UpdateDialogNodeOptions builder
-     */
-    public UpdateDialogNodeOptionsBuilder newUserLabel(String newUserLabel) {
-      this.newUserLabel = newUserLabel;
-      return this;
-    }
-
-    /**
-     * Set the newMetadata.
-     *
-     * @param newMetadata the newMetadata
-     * @return the UpdateDialogNodeOptions builder
-     */
-    public UpdateDialogNodeOptionsBuilder newMetadata(IBMWatsonMapModel newMetadata) {
-      this.newMetadata = newMetadata;
-      return this;
-    }
-
-    /**
-     * Set the newTitle.
-     *
-     * @param newTitle the newTitle
-     * @return the UpdateDialogNodeOptions builder
-     */
-    public UpdateDialogNodeOptionsBuilder newTitle(String newTitle) {
-      this.newTitle = newTitle;
-      return this;
-    }
-
-    /**
-     * Set the newDescription.
-     *
-     * @param newDescription the newDescription
-     * @return the UpdateDialogNodeOptions builder
-     */
-    public UpdateDialogNodeOptionsBuilder newDescription(String newDescription) {
-      this.newDescription = newDescription;
+    public UpdateDialogNodeOptionsBuilder newDigressIn(String newDigressIn) {
+      this.newDigressIn = newDigressIn;
       return this;
     }
 
@@ -14726,17 +14608,6 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the newEventName.
-     *
-     * @param newEventName the newEventName
-     * @return the UpdateDialogNodeOptions builder
-     */
-    public UpdateDialogNodeOptionsBuilder newEventName(String newEventName) {
-      this.newEventName = newEventName;
-      return this;
-    }
-
-    /**
      * Set the newDigressOutSlots.
      *
      * @param newDigressOutSlots the newDigressOutSlots
@@ -14748,57 +14619,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the newNextStep.
+     * Set the newUserLabel.
      *
-     * @param newNextStep the newNextStep
+     * @param newUserLabel the newUserLabel
      * @return the UpdateDialogNodeOptions builder
      */
-    public UpdateDialogNodeOptionsBuilder newNextStep(DialogNodeNextStep newNextStep) {
-      this.newNextStep = newNextStep;
-      return this;
-    }
-
-    /**
-     * Set the newDigressIn.
-     *
-     * @param newDigressIn the newDigressIn
-     * @return the UpdateDialogNodeOptions builder
-     */
-    public UpdateDialogNodeOptionsBuilder newDigressIn(String newDigressIn) {
-      this.newDigressIn = newDigressIn;
-      return this;
-    }
-
-    /**
-     * Set the newOutput.
-     *
-     * @param newOutput the newOutput
-     * @return the UpdateDialogNodeOptions builder
-     */
-    public UpdateDialogNodeOptionsBuilder newOutput(DialogNodeOutput newOutput) {
-      this.newOutput = newOutput;
-      return this;
-    }
-
-    /**
-     * Set the newParent.
-     *
-     * @param newParent the newParent
-     * @return the UpdateDialogNodeOptions builder
-     */
-    public UpdateDialogNodeOptionsBuilder newParent(String newParent) {
-      this.newParent = newParent;
-      return this;
-    }
-
-    /**
-     * Set the newDialogNode.
-     *
-     * @param newDialogNode the newDialogNode
-     * @return the UpdateDialogNodeOptions builder
-     */
-    public UpdateDialogNodeOptionsBuilder newDialogNode(String newDialogNode) {
-      this.newDialogNode = newDialogNode;
+    public UpdateDialogNodeOptionsBuilder newUserLabel(String newUserLabel) {
+      this.newUserLabel = newUserLabel;
       return this;
     }
 
@@ -14821,11 +14648,11 @@ public class IBMAssistantV1Models {
   public class UpdateEntityOptions extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String entity;
-    private Boolean newFuzzyMatch;
     private String newEntity;
-    private IBMWatsonMapModel newMetadata;
-    private List<CreateValue> newValues;
     private String newDescription;
+    private IBMWatsonMapModel newMetadata;
+    private Boolean newFuzzyMatch;
+    private List<CreateValue> newValues;
  
     /**
      * Gets the workspaceId.
@@ -14850,17 +14677,6 @@ public class IBMAssistantV1Models {
     }
  
     /**
-     * Gets the newFuzzyMatch.
-     *
-     * Whether to use fuzzy matching for the entity.
-     *
-     * @return the newFuzzyMatch
-     */
-    public Boolean newFuzzyMatch() {
-      return newFuzzyMatch;
-    }
- 
-    /**
      * Gets the newEntity.
      *
      * The name of the entity. This string must conform to the following restrictions:
@@ -14875,6 +14691,18 @@ public class IBMAssistantV1Models {
     }
  
     /**
+     * Gets the newDescription.
+     *
+     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it
+     * must be no longer than 128 characters.
+     *
+     * @return the newDescription
+     */
+    public String newDescription() {
+      return newDescription;
+    }
+ 
+    /**
      * Gets the newMetadata.
      *
      * Any metadata related to the entity.
@@ -14886,26 +14714,25 @@ public class IBMAssistantV1Models {
     }
  
     /**
+     * Gets the newFuzzyMatch.
+     *
+     * Whether to use fuzzy matching for the entity.
+     *
+     * @return the newFuzzyMatch
+     */
+    public Boolean newFuzzyMatch() {
+      return newFuzzyMatch;
+    }
+ 
+    /**
      * Gets the newValues.
      *
-     * An array of entity values.
+     * An array of objects describing the entity values.
      *
      * @return the newValues
      */
     public List<CreateValue> newValues() {
       return newValues;
-    }
- 
-    /**
-     * Gets the newDescription.
-     *
-     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it
-     * must be no longer than 128 characters.
-     *
-     * @return the newDescription
-     */
-    public String newDescription() {
-      return newDescription;
     }
 
     private UpdateEntityOptions(UpdateEntityOptionsBuilder builder) {
@@ -14913,11 +14740,11 @@ public class IBMAssistantV1Models {
       IBMWatsonValidator.notEmpty(builder.entity, 'entity cannot be empty');
       workspaceId = builder.workspaceId;
       entity = builder.entity;
-      newFuzzyMatch = builder.newFuzzyMatch;
       newEntity = builder.newEntity;
-      newMetadata = builder.newMetadata;
-      newValues = builder.newValues;
       newDescription = builder.newDescription;
+      newMetadata = builder.newMetadata;
+      newFuzzyMatch = builder.newFuzzyMatch;
+      newValues = builder.newValues;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -14938,20 +14765,20 @@ public class IBMAssistantV1Models {
   public class UpdateEntityOptionsBuilder extends IBMWatsonOptionsModel {
     private String workspaceId;
     private String entity;
-    private Boolean newFuzzyMatch;
     private String newEntity;
-    private IBMWatsonMapModel newMetadata;
-    private List<CreateValue> newValues;
     private String newDescription;
+    private IBMWatsonMapModel newMetadata;
+    private Boolean newFuzzyMatch;
+    private List<CreateValue> newValues;
 
     private UpdateEntityOptionsBuilder(UpdateEntityOptions updateEntityOptions) {
       workspaceId = updateEntityOptions.workspaceId;
       entity = updateEntityOptions.entity;
-      newFuzzyMatch = updateEntityOptions.newFuzzyMatch;
       newEntity = updateEntityOptions.newEntity;
-      newMetadata = updateEntityOptions.newMetadata;
-      newValues = updateEntityOptions.newValues;
       newDescription = updateEntityOptions.newDescription;
+      newMetadata = updateEntityOptions.newMetadata;
+      newFuzzyMatch = updateEntityOptions.newFuzzyMatch;
+      newValues = updateEntityOptions.newValues;
       this.requestHeaders.putAll(updateEntityOptions.requestHeaders());
     }
 
@@ -15019,17 +14846,6 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the newFuzzyMatch.
-     *
-     * @param newFuzzyMatch the newFuzzyMatch
-     * @return the UpdateEntityOptions builder
-     */
-    public UpdateEntityOptionsBuilder newFuzzyMatch(Boolean newFuzzyMatch) {
-      this.newFuzzyMatch = newFuzzyMatch;
-      return this;
-    }
-
-    /**
      * Set the newEntity.
      *
      * @param newEntity the newEntity
@@ -15037,6 +14853,17 @@ public class IBMAssistantV1Models {
      */
     public UpdateEntityOptionsBuilder newEntity(String newEntity) {
       this.newEntity = newEntity;
+      return this;
+    }
+
+    /**
+     * Set the newDescription.
+     *
+     * @param newDescription the newDescription
+     * @return the UpdateEntityOptions builder
+     */
+    public UpdateEntityOptionsBuilder newDescription(String newDescription) {
+      this.newDescription = newDescription;
       return this;
     }
 
@@ -15052,6 +14879,17 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the newFuzzyMatch.
+     *
+     * @param newFuzzyMatch the newFuzzyMatch
+     * @return the UpdateEntityOptions builder
+     */
+    public UpdateEntityOptionsBuilder newFuzzyMatch(Boolean newFuzzyMatch) {
+      this.newFuzzyMatch = newFuzzyMatch;
+      return this;
+    }
+
+    /**
      * Set the newValues.
      * Existing newValues will be replaced.
      *
@@ -15060,17 +14898,6 @@ public class IBMAssistantV1Models {
      */
     public UpdateEntityOptionsBuilder newValues(List<CreateValue> newValues) {
       this.newValues = newValues;
-      return this;
-    }
-
-    /**
-     * Set the newDescription.
-     *
-     * @param newDescription the newDescription
-     * @return the UpdateEntityOptions builder
-     */
-    public UpdateEntityOptionsBuilder newDescription(String newDescription) {
-      this.newDescription = newDescription;
       return this;
     }
 
@@ -15095,7 +14922,7 @@ public class IBMAssistantV1Models {
     private String intent;
     private String text;
     private String newText;
-    private List<Mentions> newMentions;
+    private List<Mention> newMentions;
  
     /**
      * Gets the workspaceId.
@@ -15151,7 +14978,7 @@ public class IBMAssistantV1Models {
      *
      * @return the newMentions
      */
-    public List<Mentions> newMentions() {
+    public List<Mention> newMentions() {
       return newMentions;
     }
 
@@ -15186,7 +15013,7 @@ public class IBMAssistantV1Models {
     private String intent;
     private String text;
     private String newText;
-    private List<Mentions> newMentions;
+    private List<Mention> newMentions;
 
     private UpdateExampleOptionsBuilder(UpdateExampleOptions updateExampleOptions) {
       workspaceId = updateExampleOptions.workspaceId;
@@ -15231,10 +15058,10 @@ public class IBMAssistantV1Models {
      * @param newMentions the new newMentions
      * @return the UpdateExampleOptions builder
      */
-    public UpdateExampleOptionsBuilder addNewMentions(Mentions newMentions) {
+    public UpdateExampleOptionsBuilder addNewMentions(Mention newMentions) {
       IBMWatsonValidator.notNull(newMentions, 'newMentions cannot be null');
       if (this.newMentions == null) {
-        this.newMentions = new List<Mentions>();
+        this.newMentions = new List<Mention>();
       }
       this.newMentions.add(newMentions);
       return this;
@@ -15291,7 +15118,7 @@ public class IBMAssistantV1Models {
      * @param newMentions the newMentions
      * @return the UpdateExampleOptions builder
      */
-    public UpdateExampleOptionsBuilder newMentions(List<Mentions> newMentions) {
+    public UpdateExampleOptionsBuilder newMentions(List<Mention> newMentions) {
       this.newMentions = newMentions;
       return this;
     }
@@ -15316,8 +15143,8 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String intent;
     private String newIntent;
-    private List<CreateExample> newExamples;
     private String newDescription;
+    private List<Example> newExamples;
  
     /**
      * Gets the workspaceId.
@@ -15356,25 +15183,26 @@ public class IBMAssistantV1Models {
     }
  
     /**
+     * Gets the newDescription.
+     *
+     * The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it
+     * must be no longer than 128 characters.
+     *
+     * @return the newDescription
+     */
+    public String newDescription() {
+      return newDescription;
+    }
+ 
+    /**
      * Gets the newExamples.
      *
      * An array of user input examples for the intent.
      *
      * @return the newExamples
      */
-    public List<CreateExample> newExamples() {
+    public List<Example> newExamples() {
       return newExamples;
-    }
- 
-    /**
-     * Gets the newDescription.
-     *
-     * The description of the intent.
-     *
-     * @return the newDescription
-     */
-    public String newDescription() {
-      return newDescription;
     }
 
     private UpdateIntentOptions(UpdateIntentOptionsBuilder builder) {
@@ -15383,8 +15211,8 @@ public class IBMAssistantV1Models {
       workspaceId = builder.workspaceId;
       intent = builder.intent;
       newIntent = builder.newIntent;
-      newExamples = builder.newExamples;
       newDescription = builder.newDescription;
+      newExamples = builder.newExamples;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -15406,15 +15234,15 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String intent;
     private String newIntent;
-    private List<CreateExample> newExamples;
     private String newDescription;
+    private List<Example> newExamples;
 
     private UpdateIntentOptionsBuilder(UpdateIntentOptions updateIntentOptions) {
       workspaceId = updateIntentOptions.workspaceId;
       intent = updateIntentOptions.intent;
       newIntent = updateIntentOptions.newIntent;
-      newExamples = updateIntentOptions.newExamples;
       newDescription = updateIntentOptions.newDescription;
+      newExamples = updateIntentOptions.newExamples;
       this.requestHeaders.putAll(updateIntentOptions.requestHeaders());
     }
 
@@ -15450,10 +15278,10 @@ public class IBMAssistantV1Models {
      * @param newExamples the new newExamples
      * @return the UpdateIntentOptions builder
      */
-    public UpdateIntentOptionsBuilder addNewExamples(CreateExample newExamples) {
+    public UpdateIntentOptionsBuilder addNewExamples(Example newExamples) {
       IBMWatsonValidator.notNull(newExamples, 'newExamples cannot be null');
       if (this.newExamples == null) {
-        this.newExamples = new List<CreateExample>();
+        this.newExamples = new List<Example>();
       }
       this.newExamples.add(newExamples);
       return this;
@@ -15493,18 +15321,6 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the newExamples.
-     * Existing newExamples will be replaced.
-     *
-     * @param newExamples the newExamples
-     * @return the UpdateIntentOptions builder
-     */
-    public UpdateIntentOptionsBuilder newExamples(List<CreateExample> newExamples) {
-      this.newExamples = newExamples;
-      return this;
-    }
-
-    /**
      * Set the newDescription.
      *
      * @param newDescription the newDescription
@@ -15512,6 +15328,18 @@ public class IBMAssistantV1Models {
      */
     public UpdateIntentOptionsBuilder newDescription(String newDescription) {
       this.newDescription = newDescription;
+      return this;
+    }
+
+    /**
+     * Set the newExamples.
+     * Existing newExamples will be replaced.
+     *
+     * @param newExamples the newExamples
+     * @return the UpdateIntentOptions builder
+     */
+    public UpdateIntentOptionsBuilder newExamples(List<Example> newExamples) {
+      this.newExamples = newExamples;
       return this;
     }
 
@@ -15744,11 +15572,11 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String entity;
     private String value;
-    private List<String> newSynonyms;
-    private String valueType;
-    private IBMWatsonMapModel newMetadata;
-    private List<String> newPatterns;
     private String newValue;
+    private IBMWatsonMapModel newMetadata;
+    private String valueType;
+    private List<String> newSynonyms;
+    private List<String> newPatterns;
  
     /**
      * Gets the workspaceId.
@@ -15784,29 +15612,17 @@ public class IBMAssistantV1Models {
     }
  
     /**
-     * Gets the newSynonyms.
+     * Gets the newValue.
      *
-     * An array of synonyms for the entity value. You can provide either synonyms or patterns (as indicated by
-     * **type**), but not both. A synonym must conform to the following resrictions:
+     * The text of the entity value. This string must conform to the following restrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
      * - It must be no longer than 64 characters.
      *
-     * @return the newSynonyms
+     * @return the newValue
      */
-    public List<String> newSynonyms() {
-      return newSynonyms;
-    }
- 
-    /**
-     * Gets the valueType.
-     *
-     * Specifies the type of value.
-     *
-     * @return the valueType
-     */
-    public String valueType() {
-      return valueType;
+    public String newValue() {
+      return newValue;
     }
  
     /**
@@ -15821,31 +15637,43 @@ public class IBMAssistantV1Models {
     }
  
     /**
+     * Gets the valueType.
+     *
+     * Specifies the type of entity value.
+     *
+     * @return the valueType
+     */
+    public String valueType() {
+      return valueType;
+    }
+ 
+    /**
+     * Gets the newSynonyms.
+     *
+     * An array of synonyms for the entity value. A value can specify either synonyms or patterns (depending on the
+     * value type), but not both. A synonym must conform to the following resrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 64 characters.
+     *
+     * @return the newSynonyms
+     */
+    public List<String> newSynonyms() {
+      return newSynonyms;
+    }
+ 
+    /**
      * Gets the newPatterns.
      *
-     * An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by
-     * **type**), but not both. A pattern is a regular expression no longer than 512 characters. For more information
+     * An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the
+     * value type), but not both. A pattern is a regular expression no longer than 512 characters. For more information
      * about how to specify a pattern, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#creating-entities).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#entities-create-dictionary-based).
      *
      * @return the newPatterns
      */
     public List<String> newPatterns() {
       return newPatterns;
-    }
- 
-    /**
-     * Gets the newValue.
-     *
-     * The text of the entity value. This string must conform to the following restrictions:
-     * - It cannot contain carriage return, newline, or tab characters.
-     * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 64 characters.
-     *
-     * @return the newValue
-     */
-    public String newValue() {
-      return newValue;
     }
 
     private UpdateValueOptions(UpdateValueOptionsBuilder builder) {
@@ -15855,11 +15683,11 @@ public class IBMAssistantV1Models {
       workspaceId = builder.workspaceId;
       entity = builder.entity;
       value = builder.value;
-      newSynonyms = builder.newSynonyms;
-      valueType = builder.valueType;
-      newMetadata = builder.newMetadata;
-      newPatterns = builder.newPatterns;
       newValue = builder.newValue;
+      newMetadata = builder.newMetadata;
+      valueType = builder.valueType;
+      newSynonyms = builder.newSynonyms;
+      newPatterns = builder.newPatterns;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -15881,21 +15709,21 @@ public class IBMAssistantV1Models {
     private String workspaceId;
     private String entity;
     private String value;
-    private List<String> newSynonyms;
-    private String valueType;
-    private IBMWatsonMapModel newMetadata;
-    private List<String> newPatterns;
     private String newValue;
+    private IBMWatsonMapModel newMetadata;
+    private String valueType;
+    private List<String> newSynonyms;
+    private List<String> newPatterns;
 
     private UpdateValueOptionsBuilder(UpdateValueOptions updateValueOptions) {
       workspaceId = updateValueOptions.workspaceId;
       entity = updateValueOptions.entity;
       value = updateValueOptions.value;
-      newSynonyms = updateValueOptions.newSynonyms;
-      valueType = updateValueOptions.valueType;
-      newMetadata = updateValueOptions.newMetadata;
-      newPatterns = updateValueOptions.newPatterns;
       newValue = updateValueOptions.newValue;
+      newMetadata = updateValueOptions.newMetadata;
+      valueType = updateValueOptions.valueType;
+      newSynonyms = updateValueOptions.newSynonyms;
+      newPatterns = updateValueOptions.newPatterns;
       this.requestHeaders.putAll(updateValueOptions.requestHeaders());
     }
 
@@ -15991,25 +15819,13 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the newSynonyms.
-     * Existing newSynonyms will be replaced.
+     * Set the newValue.
      *
-     * @param newSynonyms the newSynonyms
+     * @param newValue the newValue
      * @return the UpdateValueOptions builder
      */
-    public UpdateValueOptionsBuilder newSynonyms(List<String> newSynonyms) {
-      this.newSynonyms = newSynonyms;
-      return this;
-    }
-
-    /**
-     * Set the valueType.
-     *
-     * @param valueType the valueType
-     * @return the UpdateValueOptions builder
-     */
-    public UpdateValueOptionsBuilder valueType(String valueType) {
-      this.valueType = valueType;
+    public UpdateValueOptionsBuilder newValue(String newValue) {
+      this.newValue = newValue;
       return this;
     }
 
@@ -16025,6 +15841,29 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the valueType.
+     *
+     * @param valueType the valueType
+     * @return the UpdateValueOptions builder
+     */
+    public UpdateValueOptionsBuilder valueType(String valueType) {
+      this.valueType = valueType;
+      return this;
+    }
+
+    /**
+     * Set the newSynonyms.
+     * Existing newSynonyms will be replaced.
+     *
+     * @param newSynonyms the newSynonyms
+     * @return the UpdateValueOptions builder
+     */
+    public UpdateValueOptionsBuilder newSynonyms(List<String> newSynonyms) {
+      this.newSynonyms = newSynonyms;
+      return this;
+    }
+
+    /**
      * Set the newPatterns.
      * Existing newPatterns will be replaced.
      *
@@ -16033,17 +15872,6 @@ public class IBMAssistantV1Models {
      */
     public UpdateValueOptionsBuilder newPatterns(List<String> newPatterns) {
       this.newPatterns = newPatterns;
-      return this;
-    }
-
-    /**
-     * Set the newValue.
-     *
-     * @param newValue the newValue
-     * @return the UpdateValueOptions builder
-     */
-    public UpdateValueOptionsBuilder newValue(String newValue) {
-      this.newValue = newValue;
       return this;
     }
 
@@ -16068,13 +15896,13 @@ public class IBMAssistantV1Models {
     private String name;
     private String description;
     private String language;
-    private List<CreateIntent> intents;
-    private List<CreateEntity> entities;
-    private List<CreateDialogNode> dialogNodes;
-    private List<CreateCounterexample> counterexamples;
     private IBMWatsonMapModel metadata;
     private Boolean learningOptOut;
     private WorkspaceSystemSettings systemSettings;
+    private List<CreateIntent> intents;
+    private List<CreateEntity> entities;
+    private List<DialogNode> dialogNodes;
+    private List<Counterexample> counterexamples;
     private Boolean append;
  
     /**
@@ -16124,50 +15952,6 @@ public class IBMAssistantV1Models {
     }
  
     /**
-     * Gets the intents.
-     *
-     * An array of objects defining the intents for the workspace.
-     *
-     * @return the intents
-     */
-    public List<CreateIntent> intents() {
-      return intents;
-    }
- 
-    /**
-     * Gets the entities.
-     *
-     * An array of objects defining the entities for the workspace.
-     *
-     * @return the entities
-     */
-    public List<CreateEntity> entities() {
-      return entities;
-    }
- 
-    /**
-     * Gets the dialogNodes.
-     *
-     * An array of objects defining the nodes in the dialog.
-     *
-     * @return the dialogNodes
-     */
-    public List<CreateDialogNode> dialogNodes() {
-      return dialogNodes;
-    }
- 
-    /**
-     * Gets the counterexamples.
-     *
-     * An array of objects defining input examples that have been marked as irrelevant input.
-     *
-     * @return the counterexamples
-     */
-    public List<CreateCounterexample> counterexamples() {
-      return counterexamples;
-    }
- 
-    /**
      * Gets the metadata.
      *
      * Any metadata related to the workspace.
@@ -16181,8 +15965,8 @@ public class IBMAssistantV1Models {
     /**
      * Gets the learningOptOut.
      *
-     * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates
-     * that workspace training data is not to be used.
+     * Whether training data from the workspace (including artifacts such as intents and entities) can be used by IBM
+     * for general service improvements. `true` indicates that workspace training data is not to be used.
      *
      * @return the learningOptOut
      */
@@ -16199,6 +15983,50 @@ public class IBMAssistantV1Models {
      */
     public WorkspaceSystemSettings systemSettings() {
       return systemSettings;
+    }
+ 
+    /**
+     * Gets the intents.
+     *
+     * An array of objects defining the intents for the workspace.
+     *
+     * @return the intents
+     */
+    public List<CreateIntent> intents() {
+      return intents;
+    }
+ 
+    /**
+     * Gets the entities.
+     *
+     * An array of objects describing the entities for the workspace.
+     *
+     * @return the entities
+     */
+    public List<CreateEntity> entities() {
+      return entities;
+    }
+ 
+    /**
+     * Gets the dialogNodes.
+     *
+     * An array of objects describing the dialog nodes in the workspace.
+     *
+     * @return the dialogNodes
+     */
+    public List<DialogNode> dialogNodes() {
+      return dialogNodes;
+    }
+ 
+    /**
+     * Gets the counterexamples.
+     *
+     * An array of objects defining input examples that have been marked as irrelevant input.
+     *
+     * @return the counterexamples
+     */
+    public List<Counterexample> counterexamples() {
+      return counterexamples;
     }
  
     /**
@@ -16224,13 +16052,13 @@ public class IBMAssistantV1Models {
       name = builder.name;
       description = builder.description;
       language = builder.language;
+      metadata = builder.metadata;
+      learningOptOut = builder.learningOptOut;
+      systemSettings = builder.systemSettings;
       intents = builder.intents;
       entities = builder.entities;
       dialogNodes = builder.dialogNodes;
       counterexamples = builder.counterexamples;
-      metadata = builder.metadata;
-      learningOptOut = builder.learningOptOut;
-      systemSettings = builder.systemSettings;
       append = builder.append;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -16254,13 +16082,13 @@ public class IBMAssistantV1Models {
     private String name;
     private String description;
     private String language;
-    private List<CreateIntent> intents;
-    private List<CreateEntity> entities;
-    private List<CreateDialogNode> dialogNodes;
-    private List<CreateCounterexample> counterexamples;
     private IBMWatsonMapModel metadata;
     private Boolean learningOptOut;
     private WorkspaceSystemSettings systemSettings;
+    private List<CreateIntent> intents;
+    private List<CreateEntity> entities;
+    private List<DialogNode> dialogNodes;
+    private List<Counterexample> counterexamples;
     private Boolean append;
 
     private UpdateWorkspaceOptionsBuilder(UpdateWorkspaceOptions updateWorkspaceOptions) {
@@ -16268,13 +16096,13 @@ public class IBMAssistantV1Models {
       name = updateWorkspaceOptions.name;
       description = updateWorkspaceOptions.description;
       language = updateWorkspaceOptions.language;
+      metadata = updateWorkspaceOptions.metadata;
+      learningOptOut = updateWorkspaceOptions.learningOptOut;
+      systemSettings = updateWorkspaceOptions.systemSettings;
       intents = updateWorkspaceOptions.intents;
       entities = updateWorkspaceOptions.entities;
       dialogNodes = updateWorkspaceOptions.dialogNodes;
       counterexamples = updateWorkspaceOptions.counterexamples;
-      metadata = updateWorkspaceOptions.metadata;
-      learningOptOut = updateWorkspaceOptions.learningOptOut;
-      systemSettings = updateWorkspaceOptions.systemSettings;
       append = updateWorkspaceOptions.append;
       this.requestHeaders.putAll(updateWorkspaceOptions.requestHeaders());
     }
@@ -16339,10 +16167,10 @@ public class IBMAssistantV1Models {
      * @param dialogNodes the new dialogNodes
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder addDialogNodes(CreateDialogNode dialogNodes) {
+    public UpdateWorkspaceOptionsBuilder addDialogNodes(DialogNode dialogNodes) {
       IBMWatsonValidator.notNull(dialogNodes, 'dialogNodes cannot be null');
       if (this.dialogNodes == null) {
-        this.dialogNodes = new List<CreateDialogNode>();
+        this.dialogNodes = new List<DialogNode>();
       }
       this.dialogNodes.add(dialogNodes);
       return this;
@@ -16354,10 +16182,10 @@ public class IBMAssistantV1Models {
      * @param counterexamples the new counterexamples
      * @return the UpdateWorkspaceOptions builder
      */
-    public UpdateWorkspaceOptionsBuilder addCounterexamples(CreateCounterexample counterexamples) {
+    public UpdateWorkspaceOptionsBuilder addCounterexamples(Counterexample counterexamples) {
       IBMWatsonValidator.notNull(counterexamples, 'counterexamples cannot be null');
       if (this.counterexamples == null) {
-        this.counterexamples = new List<CreateCounterexample>();
+        this.counterexamples = new List<Counterexample>();
       }
       this.counterexamples.add(counterexamples);
       return this;
@@ -16408,54 +16236,6 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Set the intents.
-     * Existing intents will be replaced.
-     *
-     * @param intents the intents
-     * @return the UpdateWorkspaceOptions builder
-     */
-    public UpdateWorkspaceOptionsBuilder intents(List<CreateIntent> intents) {
-      this.intents = intents;
-      return this;
-    }
-
-    /**
-     * Set the entities.
-     * Existing entities will be replaced.
-     *
-     * @param entities the entities
-     * @return the UpdateWorkspaceOptions builder
-     */
-    public UpdateWorkspaceOptionsBuilder entities(List<CreateEntity> entities) {
-      this.entities = entities;
-      return this;
-    }
-
-    /**
-     * Set the dialogNodes.
-     * Existing dialogNodes will be replaced.
-     *
-     * @param dialogNodes the dialogNodes
-     * @return the UpdateWorkspaceOptions builder
-     */
-    public UpdateWorkspaceOptionsBuilder dialogNodes(List<CreateDialogNode> dialogNodes) {
-      this.dialogNodes = dialogNodes;
-      return this;
-    }
-
-    /**
-     * Set the counterexamples.
-     * Existing counterexamples will be replaced.
-     *
-     * @param counterexamples the counterexamples
-     * @return the UpdateWorkspaceOptions builder
-     */
-    public UpdateWorkspaceOptionsBuilder counterexamples(List<CreateCounterexample> counterexamples) {
-      this.counterexamples = counterexamples;
-      return this;
-    }
-
-    /**
      * Set the metadata.
      *
      * @param metadata the metadata
@@ -16489,6 +16269,54 @@ public class IBMAssistantV1Models {
     }
 
     /**
+     * Set the intents.
+     * Existing intents will be replaced.
+     *
+     * @param intents the intents
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public UpdateWorkspaceOptionsBuilder intents(List<CreateIntent> intents) {
+      this.intents = intents;
+      return this;
+    }
+
+    /**
+     * Set the entities.
+     * Existing entities will be replaced.
+     *
+     * @param entities the entities
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public UpdateWorkspaceOptionsBuilder entities(List<CreateEntity> entities) {
+      this.entities = entities;
+      return this;
+    }
+
+    /**
+     * Set the dialogNodes.
+     * Existing dialogNodes will be replaced.
+     *
+     * @param dialogNodes the dialogNodes
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public UpdateWorkspaceOptionsBuilder dialogNodes(List<DialogNode> dialogNodes) {
+      this.dialogNodes = dialogNodes;
+      return this;
+    }
+
+    /**
+     * Set the counterexamples.
+     * Existing counterexamples will be replaced.
+     *
+     * @param counterexamples the counterexamples
+     * @return the UpdateWorkspaceOptions builder
+     */
+    public UpdateWorkspaceOptionsBuilder counterexamples(List<Counterexample> counterexamples) {
+      this.counterexamples = counterexamples;
+      return this;
+    }
+
+    /**
      * Set the append.
      *
      * @param append the append
@@ -16518,21 +16346,30 @@ public class IBMAssistantV1Models {
   public class Value extends IBMWatsonResponseModel {
     private String value_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
+    private String type_serialized_name;
     private List<String> synonyms_serialized_name;
     private List<String> patterns_serialized_name;
-    private String type_serialized_name;
+    private Datetime created_serialized_name;
+    private Datetime updated_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public Value() { }
  
     /**
-     * Gets the valueText.
+     * Gets the value.
      *
-     * The text of the entity value.
+     * The text of the entity value. This string must conform to the following restrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 64 characters.
      *
-     * @return the valueText
+     * @return the value
      */
     @AuraEnabled
-    public String getValueText() {
+    public String getValue() {
       return value_serialized_name;
     }
  
@@ -16549,33 +16386,25 @@ public class IBMAssistantV1Models {
     }
  
     /**
-     * Gets the created.
+     * Gets the valueType.
      *
-     * The timestamp for creation of the entity value.
+     * Specifies the type of entity value.
      *
-     * @return the created
+     * @return the valueType
      */
     @AuraEnabled
-    public Datetime getCreated() {
-      return created_serialized_name;
-    }
- 
-    /**
-     * Gets the updated.
-     *
-     * The timestamp for the last update to the entity value.
-     *
-     * @return the updated
-     */
-    @AuraEnabled
-    public Datetime getUpdated() {
-      return updated_serialized_name;
+    public String getValueType() {
+      return type_serialized_name;
     }
  
     /**
      * Gets the synonyms.
      *
-     * An array containing any synonyms for the entity value.
+     * An array of synonyms for the entity value. A value can specify either synonyms or patterns (depending on the
+     * value type), but not both. A synonym must conform to the following resrictions:
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
+     * - It must be no longer than 64 characters.
      *
      * @return the synonyms
      */
@@ -16587,7 +16416,10 @@ public class IBMAssistantV1Models {
     /**
      * Gets the patterns.
      *
-     * An array containing any patterns for the entity value.
+     * An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the
+     * value type), but not both. A pattern is a regular expression no longer than 512 characters. For more information
+     * about how to specify a pattern, see the
+     * [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#entities-create-dictionary-based).
      *
      * @return the patterns
      */
@@ -16597,60 +16429,48 @@ public class IBMAssistantV1Models {
     }
  
     /**
-     * Gets the valueType.
+     * Gets the created.
      *
-     * Specifies the type of value.
+     * The timestamp for creation of the object.
      *
-     * @return the valueType
+     * @return the created
      */
     @AuraEnabled
-    public String getValueType() {
-      return type_serialized_name;
+    public Datetime getCreated() {
+      return created_serialized_name;
+    }
+ 
+    /**
+     * Gets the updated.
+     *
+     * The timestamp for the most recent update to the object.
+     *
+     * @return the updated
+     */
+    @AuraEnabled
+    public Datetime getUpdated() {
+      return updated_serialized_name;
+    }
+  
+    private Value(ValueBuilder builder) {
+      IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
+      IBMWatsonValidator.notNull(builder.valueType, 'valueType cannot be null');
+      value_serialized_name = builder.value;
+      metadata_serialized_name = builder.metadata;
+      type_serialized_name = builder.valueType;
+      synonyms_serialized_name = builder.synonyms;
+      patterns_serialized_name = builder.patterns;
+      created_serialized_name = builder.created;
+      updated_serialized_name = builder.updated;
     }
 
     /**
-     * Sets the valueText.
+     * New builder.
      *
-     * @param valueText the new valueText
+     * @return a Value builder
      */
-    public void setValueText(final String valueText) {
-      this.value_serialized_name = valueText;
-    }
-
-    /**
-     * Sets the metadata.
-     *
-     * @param metadata the new metadata
-     */
-    public void setMetadata(final IBMWatsonMapModel metadata) {
-      this.metadata_serialized_name = metadata;
-    }
-
-    /**
-     * Sets the synonyms.
-     *
-     * @param synonyms the new synonyms
-     */
-    public void setSynonyms(final List<String> synonyms) {
-      this.synonyms_serialized_name = synonyms;
-    }
-
-    /**
-     * Sets the patterns.
-     *
-     * @param patterns the new patterns
-     */
-    public void setPatterns(final List<String> patterns) {
-      this.patterns_serialized_name = patterns;
-    }
-
-    /**
-     * Sets the valueType.
-     *
-     * @param valueType the new valueType
-     */
-    public void setValueType(final String valueType) {
-      this.type_serialized_name = valueType;
+    public ValueBuilder newBuilder() {
+      return new ValueBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -16659,12 +16479,171 @@ public class IBMAssistantV1Models {
       }
 
       Value ret = (Value) super.deserialize(jsonString, jsonMap, classType);
+      ValueBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for metadata
       IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
-      ret.setMetadata(newMetadata);
+      retBuilder.metadata(newMetadata);
 
-      return ret;
+      return retBuilder.build();
+    }
+  }
+
+  /**
+   * Value Builder.
+   */
+  public class ValueBuilder {
+    private String value;
+    private IBMWatsonMapModel metadata;
+    private String valueType;
+    private List<String> synonyms;
+    private List<String> patterns;
+    private Datetime created;
+    private Datetime updated;
+
+    private ValueBuilder(Value value) {
+      this.value = value.value_serialized_name;
+      this.metadata = value.metadata_serialized_name;
+      this.valueType = value.type_serialized_name;
+      this.synonyms = value.synonyms_serialized_name;
+      this.patterns = value.patterns_serialized_name;
+      this.created = value.created_serialized_name;
+      this.updated = value.updated_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ValueBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param value the value
+     * @param valueType the valueType
+     */
+    public ValueBuilder(String value, String valueType) {
+      this.value = value;
+      this.valueType = valueType;
+    }
+
+    /**
+     * Builds a Value.
+     *
+     * @return the value
+     */
+    public Value build() {
+      return new Value(this);
+    }
+
+    /**
+     * Adds an synonyms to synonyms.
+     *
+     * @param synonyms the new synonyms
+     * @return the Value builder
+     */
+    public ValueBuilder addSynonyms(String synonyms) {
+      IBMWatsonValidator.notNull(synonyms, 'synonyms cannot be null');
+      if (this.synonyms == null) {
+        this.synonyms = new List<String>();
+      }
+      this.synonyms.add(synonyms);
+      return this;
+    }
+
+    /**
+     * Adds an patterns to patterns.
+     *
+     * @param patterns the new patterns
+     * @return the Value builder
+     */
+    public ValueBuilder addPatterns(String patterns) {
+      IBMWatsonValidator.notNull(patterns, 'patterns cannot be null');
+      if (this.patterns == null) {
+        this.patterns = new List<String>();
+      }
+      this.patterns.add(patterns);
+      return this;
+    }
+
+    /**
+     * Set the value.
+     *
+     * @param value the value
+     * @return the Value builder
+     */
+    public ValueBuilder value(String value) {
+      this.value = value;
+      return this;
+    }
+
+    /**
+     * Set the metadata.
+     *
+     * @param metadata the metadata
+     * @return the Value builder
+     */
+    public ValueBuilder metadata(IBMWatsonMapModel metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Set the valueType.
+     *
+     * @param valueType the valueType
+     * @return the Value builder
+     */
+    public ValueBuilder valueType(String valueType) {
+      this.valueType = valueType;
+      return this;
+    }
+
+    /**
+     * Set the synonyms.
+     * Existing synonyms will be replaced.
+     *
+     * @param synonyms the synonyms
+     * @return the Value builder
+     */
+    public ValueBuilder synonyms(List<String> synonyms) {
+      this.synonyms = synonyms;
+      return this;
+    }
+
+    /**
+     * Set the patterns.
+     * Existing patterns will be replaced.
+     *
+     * @param patterns the patterns
+     * @return the Value builder
+     */
+    public ValueBuilder patterns(List<String> patterns) {
+      this.patterns = patterns;
+      return this;
+    }
+
+    /**
+     * Set the created.
+     *
+     * @param created the created
+     * @return the Value builder
+     */
+    public ValueBuilder created(Datetime created) {
+      this.created = created;
+      return this;
+    }
+
+    /**
+     * Set the updated.
+     *
+     * @param updated the updated
+     * @return the Value builder
+     */
+    public ValueBuilder updated(Datetime updated) {
+      this.updated = updated;
+      return this;
     }
   }
 
@@ -16672,7 +16651,7 @@ public class IBMAssistantV1Models {
    * ValueCollection.
    */
   public class ValueCollection extends IBMWatsonResponseModel {
-    private List<ValueExport> values_serialized_name;
+    private List<Value> values_serialized_name;
     private Pagination pagination_serialized_name;
  
     /**
@@ -16683,7 +16662,7 @@ public class IBMAssistantV1Models {
      * @return the values
      */
     @AuraEnabled
-    public List<ValueExport> getValues() {
+    public List<Value> getValues() {
       return values_serialized_name;
     }
  
@@ -16704,7 +16683,7 @@ public class IBMAssistantV1Models {
      *
      * @param values the new values
      */
-    public void setValues(final List<ValueExport> values) {
+    public void setValues(final List<Value> values) {
       this.values_serialized_name = values;
     }
 
@@ -16725,16 +16704,16 @@ public class IBMAssistantV1Models {
       ValueCollection ret = (ValueCollection) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for values
-      List<ValueExport> newValues = new List<ValueExport>();
-      List<ValueExport> deserializedValues = ret.getValues();
+      List<Value> newValues = new List<Value>();
+      List<Value> deserializedValues = ret.getValues();
       if (deserializedValues != null) {
         for (Integer i = 0; i < deserializedValues.size(); i++) {
-          ValueExport currentItem = ret.getValues().get(i);
+          Value currentItem = ret.getValues().get(i);
           List<Object> itemInMap = (List<Object>) jsonMap.get('values_serialized_name');
-          ValueExport newItem = (ValueExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ValueExport.class);
+          Value newItem = (Value) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Value.class);
           newValues.add(newItem);
         }
-        ret.setValues(newValues);
+        ret.values_serialized_name = newValues;
       }
 
       // calling custom deserializer for pagination
@@ -16746,185 +16725,48 @@ public class IBMAssistantV1Models {
   }
 
   /**
-   * ValueExport.
-   */
-  public class ValueExport extends IBMWatsonResponseModel {
-    private String value_serialized_name;
-    private IBMWatsonMapModel metadata_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-    private List<String> synonyms_serialized_name;
-    private List<String> patterns_serialized_name;
-    private String type_serialized_name;
- 
-    /**
-     * Gets the valueText.
-     *
-     * The text of the entity value.
-     *
-     * @return the valueText
-     */
-    @AuraEnabled
-    public String getValueText() {
-      return value_serialized_name;
-    }
- 
-    /**
-     * Gets the metadata.
-     *
-     * Any metadata related to the entity value.
-     *
-     * @return the metadata
-     */
-    @AuraEnabled
-    public IBMWatsonMapModel getMetadata() {
-      return metadata_serialized_name;
-    }
- 
-    /**
-     * Gets the created.
-     *
-     * The timestamp for creation of the entity value.
-     *
-     * @return the created
-     */
-    @AuraEnabled
-    public Datetime getCreated() {
-      return created_serialized_name;
-    }
- 
-    /**
-     * Gets the updated.
-     *
-     * The timestamp for the last update to the entity value.
-     *
-     * @return the updated
-     */
-    @AuraEnabled
-    public Datetime getUpdated() {
-      return updated_serialized_name;
-    }
- 
-    /**
-     * Gets the synonyms.
-     *
-     * An array containing any synonyms for the entity value.
-     *
-     * @return the synonyms
-     */
-    @AuraEnabled
-    public List<String> getSynonyms() {
-      return synonyms_serialized_name;
-    }
- 
-    /**
-     * Gets the patterns.
-     *
-     * An array containing any patterns for the entity value.
-     *
-     * @return the patterns
-     */
-    @AuraEnabled
-    public List<String> getPatterns() {
-      return patterns_serialized_name;
-    }
- 
-    /**
-     * Gets the valueType.
-     *
-     * Specifies the type of value.
-     *
-     * @return the valueType
-     */
-    @AuraEnabled
-    public String getValueType() {
-      return type_serialized_name;
-    }
-
-    /**
-     * Sets the valueText.
-     *
-     * @param valueText the new valueText
-     */
-    public void setValueText(final String valueText) {
-      this.value_serialized_name = valueText;
-    }
-
-    /**
-     * Sets the metadata.
-     *
-     * @param metadata the new metadata
-     */
-    public void setMetadata(final IBMWatsonMapModel metadata) {
-      this.metadata_serialized_name = metadata;
-    }
-
-    /**
-     * Sets the synonyms.
-     *
-     * @param synonyms the new synonyms
-     */
-    public void setSynonyms(final List<String> synonyms) {
-      this.synonyms_serialized_name = synonyms;
-    }
-
-    /**
-     * Sets the patterns.
-     *
-     * @param patterns the new patterns
-     */
-    public void setPatterns(final List<String> patterns) {
-      this.patterns_serialized_name = patterns;
-    }
-
-    /**
-     * Sets the valueType.
-     *
-     * @param valueType the new valueType
-     */
-    public void setValueType(final String valueType) {
-      this.type_serialized_name = valueType;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ValueExport ret = (ValueExport) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for metadata
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
-      ret.setMetadata(newMetadata);
-
-      return ret;
-    }
-  }
-
-  /**
    * Workspace.
    */
   public class Workspace extends IBMWatsonResponseModel {
     private String name_serialized_name;
-    private String language_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-    private String workspace_id_serialized_name;
     private String description_serialized_name;
+    private String language_serialized_name;
     private IBMWatsonMapModel metadata_serialized_name;
     private Boolean learning_opt_out_serialized_name;
     private WorkspaceSystemSettings system_settings_serialized_name;
+    private String workspace_id_serialized_name;
+    private String status_serialized_name;
+    private Datetime created_serialized_name;
+    private Datetime updated_serialized_name;
+    private List<Intent> intents_serialized_name;
+    private List<Entity> entities_serialized_name;
+    private List<DialogNode> dialog_nodes_serialized_name;
+    private List<Counterexample> counterexamples_serialized_name;
  
     /**
      * Gets the name.
      *
-     * The name of the workspace.
+     * The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be
+     * no longer than 64 characters.
      *
      * @return the name
      */
     @AuraEnabled
     public String getName() {
       return name_serialized_name;
+    }
+ 
+    /**
+     * Gets the description.
+     *
+     * The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it
+     * must be no longer than 128 characters.
+     *
+     * @return the description
+     */
+    @AuraEnabled
+    public String getDescription() {
+      return description_serialized_name;
     }
  
     /**
@@ -16937,54 +16779,6 @@ public class IBMAssistantV1Models {
     @AuraEnabled
     public String getLanguage() {
       return language_serialized_name;
-    }
- 
-    /**
-     * Gets the created.
-     *
-     * The timestamp for creation of the workspace.
-     *
-     * @return the created
-     */
-    @AuraEnabled
-    public Datetime getCreated() {
-      return created_serialized_name;
-    }
- 
-    /**
-     * Gets the updated.
-     *
-     * The timestamp for the last update to the workspace.
-     *
-     * @return the updated
-     */
-    @AuraEnabled
-    public Datetime getUpdated() {
-      return updated_serialized_name;
-    }
- 
-    /**
-     * Gets the workspaceId.
-     *
-     * The workspace ID of the workspace.
-     *
-     * @return the workspaceId
-     */
-    @AuraEnabled
-    public String getWorkspaceId() {
-      return workspace_id_serialized_name;
-    }
- 
-    /**
-     * Gets the description.
-     *
-     * The description of the workspace.
-     *
-     * @return the description
-     */
-    @AuraEnabled
-    public String getDescription() {
-      return description_serialized_name;
     }
  
     /**
@@ -17023,6 +16817,102 @@ public class IBMAssistantV1Models {
     public WorkspaceSystemSettings getSystemSettings() {
       return system_settings_serialized_name;
     }
+ 
+    /**
+     * Gets the workspaceId.
+     *
+     * The workspace ID of the workspace.
+     *
+     * @return the workspaceId
+     */
+    @AuraEnabled
+    public String getWorkspaceId() {
+      return workspace_id_serialized_name;
+    }
+ 
+    /**
+     * Gets the status.
+     *
+     * The current status of the workspace.
+     *
+     * @return the status
+     */
+    @AuraEnabled
+    public String getStatus() {
+      return status_serialized_name;
+    }
+ 
+    /**
+     * Gets the created.
+     *
+     * The timestamp for creation of the object.
+     *
+     * @return the created
+     */
+    @AuraEnabled
+    public Datetime getCreated() {
+      return created_serialized_name;
+    }
+ 
+    /**
+     * Gets the updated.
+     *
+     * The timestamp for the most recent update to the object.
+     *
+     * @return the updated
+     */
+    @AuraEnabled
+    public Datetime getUpdated() {
+      return updated_serialized_name;
+    }
+ 
+    /**
+     * Gets the intents.
+     *
+     * An array of intents.
+     *
+     * @return the intents
+     */
+    @AuraEnabled
+    public List<Intent> getIntents() {
+      return intents_serialized_name;
+    }
+ 
+    /**
+     * Gets the entities.
+     *
+     * An array of objects describing the entities for the workspace.
+     *
+     * @return the entities
+     */
+    @AuraEnabled
+    public List<Entity> getEntities() {
+      return entities_serialized_name;
+    }
+ 
+    /**
+     * Gets the dialogNodes.
+     *
+     * An array of objects describing the dialog nodes in the workspace.
+     *
+     * @return the dialogNodes
+     */
+    @AuraEnabled
+    public List<DialogNode> getDialogNodes() {
+      return dialog_nodes_serialized_name;
+    }
+ 
+    /**
+     * Gets the counterexamples.
+     *
+     * An array of counterexamples.
+     *
+     * @return the counterexamples
+     */
+    @AuraEnabled
+    public List<Counterexample> getCounterexamples() {
+      return counterexamples_serialized_name;
+    }
 
     /**
      * Sets the name.
@@ -17034,21 +16924,21 @@ public class IBMAssistantV1Models {
     }
 
     /**
-     * Sets the language.
-     *
-     * @param language the new language
-     */
-    public void setLanguage(final String language) {
-      this.language_serialized_name = language;
-    }
-
-    /**
      * Sets the description.
      *
      * @param description the new description
      */
     public void setDescription(final String description) {
       this.description_serialized_name = description;
+    }
+
+    /**
+     * Sets the language.
+     *
+     * @param language the new language
+     */
+    public void setLanguage(final String language) {
+      this.language_serialized_name = language;
     }
 
     /**
@@ -17078,6 +16968,42 @@ public class IBMAssistantV1Models {
       this.system_settings_serialized_name = systemSettings;
     }
 
+    /**
+     * Sets the intents.
+     *
+     * @param intents the new intents
+     */
+    public void setIntents(final List<Intent> intents) {
+      this.intents_serialized_name = intents;
+    }
+
+    /**
+     * Sets the entities.
+     *
+     * @param entities the new entities
+     */
+    public void setEntities(final List<Entity> entities) {
+      this.entities_serialized_name = entities;
+    }
+
+    /**
+     * Sets the dialogNodes.
+     *
+     * @param dialogNodes the new dialogNodes
+     */
+    public void setDialogNodes(final List<DialogNode> dialogNodes) {
+      this.dialog_nodes_serialized_name = dialogNodes;
+    }
+
+    /**
+     * Sets the counterexamples.
+     *
+     * @param counterexamples the new counterexamples
+     */
+    public void setCounterexamples(final List<Counterexample> counterexamples) {
+      this.counterexamples_serialized_name = counterexamples;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -17092,6 +17018,58 @@ public class IBMAssistantV1Models {
       // calling custom deserializer for systemSettings
       WorkspaceSystemSettings newSystemSettings = (WorkspaceSystemSettings) new WorkspaceSystemSettings().deserialize(JSON.serialize(ret.getSystemSettings()), (Map<String, Object>) jsonMap.get('system_settings_serialized_name'), WorkspaceSystemSettings.class);
       ret.setSystemSettings(newSystemSettings);
+
+      // calling custom deserializer for intents
+      List<Intent> newIntents = new List<Intent>();
+      List<Intent> deserializedIntents = ret.getIntents();
+      if (deserializedIntents != null) {
+        for (Integer i = 0; i < deserializedIntents.size(); i++) {
+          Intent currentItem = ret.getIntents().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
+          Intent newItem = (Intent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Intent.class);
+          newIntents.add(newItem);
+        }
+        ret.intents_serialized_name = newIntents;
+      }
+
+      // calling custom deserializer for entities
+      List<Entity> newEntities = new List<Entity>();
+      List<Entity> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          Entity currentItem = ret.getEntities().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          Entity newItem = (Entity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Entity.class);
+          newEntities.add(newItem);
+        }
+        ret.entities_serialized_name = newEntities;
+      }
+
+      // calling custom deserializer for dialogNodes
+      List<DialogNode> newDialogNodes = new List<DialogNode>();
+      List<DialogNode> deserializedDialogNodes = ret.getDialogNodes();
+      if (deserializedDialogNodes != null) {
+        for (Integer i = 0; i < deserializedDialogNodes.size(); i++) {
+          DialogNode currentItem = ret.getDialogNodes().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('dialog_nodes_serialized_name');
+          DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNode.class);
+          newDialogNodes.add(newItem);
+        }
+        ret.dialog_nodes_serialized_name = newDialogNodes;
+      }
+
+      // calling custom deserializer for counterexamples
+      List<Counterexample> newCounterexamples = new List<Counterexample>();
+      List<Counterexample> deserializedCounterexamples = ret.getCounterexamples();
+      if (deserializedCounterexamples != null) {
+        for (Integer i = 0; i < deserializedCounterexamples.size(); i++) {
+          Counterexample currentItem = ret.getCounterexamples().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('counterexamples_serialized_name');
+          Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Counterexample.class);
+          newCounterexamples.add(newItem);
+        }
+        ret.counterexamples_serialized_name = newCounterexamples;
+      }
 
       return ret;
     }
@@ -17163,370 +17141,12 @@ public class IBMAssistantV1Models {
           Workspace newItem = (Workspace) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Workspace.class);
           newWorkspaces.add(newItem);
         }
-        ret.setWorkspaces(newWorkspaces);
+        ret.workspaces_serialized_name = newWorkspaces;
       }
 
       // calling custom deserializer for pagination
       Pagination newPagination = (Pagination) new Pagination().deserialize(JSON.serialize(ret.getPagination()), (Map<String, Object>) jsonMap.get('pagination_serialized_name'), Pagination.class);
       ret.setPagination(newPagination);
-
-      return ret;
-    }
-  }
-
-  /**
-   * WorkspaceExport.
-   */
-  public class WorkspaceExport extends IBMWatsonResponseModel {
-    private String name_serialized_name;
-    private String description_serialized_name;
-    private String language_serialized_name;
-    private IBMWatsonMapModel metadata_serialized_name;
-    private Datetime created_serialized_name;
-    private Datetime updated_serialized_name;
-    private String workspace_id_serialized_name;
-    private String status_serialized_name;
-    private Boolean learning_opt_out_serialized_name;
-    private WorkspaceSystemSettings system_settings_serialized_name;
-    private List<IntentExport> intents_serialized_name;
-    private List<EntityExport> entities_serialized_name;
-    private List<Counterexample> counterexamples_serialized_name;
-    private List<DialogNode> dialog_nodes_serialized_name;
- 
-    /**
-     * Gets the name.
-     *
-     * The name of the workspace.
-     *
-     * @return the name
-     */
-    @AuraEnabled
-    public String getName() {
-      return name_serialized_name;
-    }
- 
-    /**
-     * Gets the description.
-     *
-     * The description of the workspace.
-     *
-     * @return the description
-     */
-    @AuraEnabled
-    public String getDescription() {
-      return description_serialized_name;
-    }
- 
-    /**
-     * Gets the language.
-     *
-     * The language of the workspace.
-     *
-     * @return the language
-     */
-    @AuraEnabled
-    public String getLanguage() {
-      return language_serialized_name;
-    }
- 
-    /**
-     * Gets the metadata.
-     *
-     * Any metadata that is required by the workspace.
-     *
-     * @return the metadata
-     */
-    @AuraEnabled
-    public IBMWatsonMapModel getMetadata() {
-      return metadata_serialized_name;
-    }
- 
-    /**
-     * Gets the created.
-     *
-     * The timestamp for creation of the workspace.
-     *
-     * @return the created
-     */
-    @AuraEnabled
-    public Datetime getCreated() {
-      return created_serialized_name;
-    }
- 
-    /**
-     * Gets the updated.
-     *
-     * The timestamp for the last update to the workspace.
-     *
-     * @return the updated
-     */
-    @AuraEnabled
-    public Datetime getUpdated() {
-      return updated_serialized_name;
-    }
- 
-    /**
-     * Gets the workspaceId.
-     *
-     * The workspace ID of the workspace.
-     *
-     * @return the workspaceId
-     */
-    @AuraEnabled
-    public String getWorkspaceId() {
-      return workspace_id_serialized_name;
-    }
- 
-    /**
-     * Gets the status.
-     *
-     * The current status of the workspace.
-     *
-     * @return the status
-     */
-    @AuraEnabled
-    public String getStatus() {
-      return status_serialized_name;
-    }
- 
-    /**
-     * Gets the learningOptOut.
-     *
-     * Whether training data from the workspace can be used by IBM for general service improvements. `true` indicates
-     * that workspace training data is not to be used.
-     *
-     * @return the learningOptOut
-     */
-    @AuraEnabled
-    public Boolean getLearningOptOut() {
-      return learning_opt_out_serialized_name;
-    }
- 
-    /**
-     * Gets the systemSettings.
-     *
-     * Global settings for the workspace.
-     *
-     * @return the systemSettings
-     */
-    @AuraEnabled
-    public WorkspaceSystemSettings getSystemSettings() {
-      return system_settings_serialized_name;
-    }
- 
-    /**
-     * Gets the intents.
-     *
-     * An array of intents.
-     *
-     * @return the intents
-     */
-    @AuraEnabled
-    public List<IntentExport> getIntents() {
-      return intents_serialized_name;
-    }
- 
-    /**
-     * Gets the entities.
-     *
-     * An array of entities.
-     *
-     * @return the entities
-     */
-    @AuraEnabled
-    public List<EntityExport> getEntities() {
-      return entities_serialized_name;
-    }
- 
-    /**
-     * Gets the counterexamples.
-     *
-     * An array of counterexamples.
-     *
-     * @return the counterexamples
-     */
-    @AuraEnabled
-    public List<Counterexample> getCounterexamples() {
-      return counterexamples_serialized_name;
-    }
- 
-    /**
-     * Gets the dialogNodes.
-     *
-     * An array of objects describing the dialog nodes in the workspace.
-     *
-     * @return the dialogNodes
-     */
-    @AuraEnabled
-    public List<DialogNode> getDialogNodes() {
-      return dialog_nodes_serialized_name;
-    }
-
-    /**
-     * Sets the name.
-     *
-     * @param name the new name
-     */
-    public void setName(final String name) {
-      this.name_serialized_name = name;
-    }
-
-    /**
-     * Sets the description.
-     *
-     * @param description the new description
-     */
-    public void setDescription(final String description) {
-      this.description_serialized_name = description;
-    }
-
-    /**
-     * Sets the language.
-     *
-     * @param language the new language
-     */
-    public void setLanguage(final String language) {
-      this.language_serialized_name = language;
-    }
-
-    /**
-     * Sets the metadata.
-     *
-     * @param metadata the new metadata
-     */
-    public void setMetadata(final IBMWatsonMapModel metadata) {
-      this.metadata_serialized_name = metadata;
-    }
-
-    /**
-     * Sets the status.
-     *
-     * @param status the new status
-     */
-    public void setStatus(final String status) {
-      this.status_serialized_name = status;
-    }
-
-    /**
-     * Sets the learningOptOut.
-     *
-     * @param learningOptOut the new learningOptOut
-     */
-    public void setLearningOptOut(final Boolean learningOptOut) {
-      this.learning_opt_out_serialized_name = learningOptOut;
-    }
-
-    /**
-     * Sets the systemSettings.
-     *
-     * @param systemSettings the new systemSettings
-     */
-    public void setSystemSettings(final WorkspaceSystemSettings systemSettings) {
-      this.system_settings_serialized_name = systemSettings;
-    }
-
-    /**
-     * Sets the intents.
-     *
-     * @param intents the new intents
-     */
-    public void setIntents(final List<IntentExport> intents) {
-      this.intents_serialized_name = intents;
-    }
-
-    /**
-     * Sets the entities.
-     *
-     * @param entities the new entities
-     */
-    public void setEntities(final List<EntityExport> entities) {
-      this.entities_serialized_name = entities;
-    }
-
-    /**
-     * Sets the counterexamples.
-     *
-     * @param counterexamples the new counterexamples
-     */
-    public void setCounterexamples(final List<Counterexample> counterexamples) {
-      this.counterexamples_serialized_name = counterexamples;
-    }
-
-    /**
-     * Sets the dialogNodes.
-     *
-     * @param dialogNodes the new dialogNodes
-     */
-    public void setDialogNodes(final List<DialogNode> dialogNodes) {
-      this.dialog_nodes_serialized_name = dialogNodes;
-    }
-
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      WorkspaceExport ret = (WorkspaceExport) super.deserialize(jsonString, jsonMap, classType);
-
-      // calling custom deserializer for metadata
-      IBMWatsonMapModel newMetadata = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getMetadata()), (Map<String, Object>) jsonMap.get('metadata_serialized_name'), IBMWatsonMapModel.class);
-      ret.setMetadata(newMetadata);
-
-      // calling custom deserializer for systemSettings
-      WorkspaceSystemSettings newSystemSettings = (WorkspaceSystemSettings) new WorkspaceSystemSettings().deserialize(JSON.serialize(ret.getSystemSettings()), (Map<String, Object>) jsonMap.get('system_settings_serialized_name'), WorkspaceSystemSettings.class);
-      ret.setSystemSettings(newSystemSettings);
-
-      // calling custom deserializer for intents
-      List<IntentExport> newIntents = new List<IntentExport>();
-      List<IntentExport> deserializedIntents = ret.getIntents();
-      if (deserializedIntents != null) {
-        for (Integer i = 0; i < deserializedIntents.size(); i++) {
-          IntentExport currentItem = ret.getIntents().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
-          IntentExport newItem = (IntentExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), IntentExport.class);
-          newIntents.add(newItem);
-        }
-        ret.setIntents(newIntents);
-      }
-
-      // calling custom deserializer for entities
-      List<EntityExport> newEntities = new List<EntityExport>();
-      List<EntityExport> deserializedEntities = ret.getEntities();
-      if (deserializedEntities != null) {
-        for (Integer i = 0; i < deserializedEntities.size(); i++) {
-          EntityExport currentItem = ret.getEntities().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
-          EntityExport newItem = (EntityExport) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), EntityExport.class);
-          newEntities.add(newItem);
-        }
-        ret.setEntities(newEntities);
-      }
-
-      // calling custom deserializer for counterexamples
-      List<Counterexample> newCounterexamples = new List<Counterexample>();
-      List<Counterexample> deserializedCounterexamples = ret.getCounterexamples();
-      if (deserializedCounterexamples != null) {
-        for (Integer i = 0; i < deserializedCounterexamples.size(); i++) {
-          Counterexample currentItem = ret.getCounterexamples().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('counterexamples_serialized_name');
-          Counterexample newItem = (Counterexample) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Counterexample.class);
-          newCounterexamples.add(newItem);
-        }
-        ret.setCounterexamples(newCounterexamples);
-      }
-
-      // calling custom deserializer for dialogNodes
-      List<DialogNode> newDialogNodes = new List<DialogNode>();
-      List<DialogNode> deserializedDialogNodes = ret.getDialogNodes();
-      if (deserializedDialogNodes != null) {
-        for (Integer i = 0; i < deserializedDialogNodes.size(); i++) {
-          DialogNode currentItem = ret.getDialogNodes().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('dialog_nodes_serialized_name');
-          DialogNode newItem = (DialogNode) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNode.class);
-          newDialogNodes.add(newItem);
-        }
-        ret.setDialogNodes(newDialogNodes);
-      }
 
       return ret;
     }

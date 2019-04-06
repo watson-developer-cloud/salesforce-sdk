@@ -61,6 +61,7 @@ public class IBMTextToSpeechV1Models {
     private AddWordOptions(AddWordOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
       IBMWatsonValidator.notEmpty(builder.word, 'word cannot be empty');
+      IBMWatsonValidator.notNull(builder.translation, 'translation cannot be null');
       customizationId = builder.customizationId;
       word = builder.word;
       translation = builder.translation;
@@ -107,10 +108,12 @@ public class IBMTextToSpeechV1Models {
      *
      * @param customizationId the customizationId
      * @param word the word
+     * @param translation the translation
      */
-    public AddWordOptionsBuilder(String customizationId, String word) {
+    public AddWordOptionsBuilder(String customizationId, String word, String translation) {
       this.customizationId = customizationId;
       this.word = word;
+      this.translation = translation;
     }
 
     /**
@@ -228,6 +231,7 @@ public class IBMTextToSpeechV1Models {
 
     private AddWordsOptions(AddWordsOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
+      IBMWatsonValidator.notNull(builder.words, 'words cannot be null');
       customizationId = builder.customizationId;
       words = builder.words;
       this.requestHeaders = builder.requestHeaders;
@@ -267,9 +271,11 @@ public class IBMTextToSpeechV1Models {
      * Instantiates a new builder with required properties.
      *
      * @param customizationId the customizationId
+     * @param words the words
      */
-    public AddWordsOptionsBuilder(String customizationId) {
+    public AddWordsOptionsBuilder(String customizationId, List<Word> words) {
       this.customizationId = customizationId;
+      this.words = words;
     }
 
     /**
@@ -1653,9 +1659,9 @@ public class IBMTextToSpeechV1Models {
    */
   public class SynthesizeOptions extends IBMWatsonOptionsModel {
     private String text;
-    private String accept;
     private String voice;
     private String customizationId;
+    private String accept;
  
     /**
      * Gets the text.
@@ -1666,21 +1672,6 @@ public class IBMTextToSpeechV1Models {
      */
     public String text() {
       return text;
-    }
- 
-    /**
-     * Gets the accept.
-     *
-     * The requested format (MIME type) of the audio. You can use the `Accept` header or the `accept` parameter to
-     * specify the audio format. For more information about specifying an audio format, see **Audio formats (accept
-     * types)** in the method description.
-     *
-     * Default: `audio/ogg;codecs=opus`.
-     *
-     * @return the accept
-     */
-    public String accept() {
-      return accept;
     }
  
     /**
@@ -1707,13 +1698,28 @@ public class IBMTextToSpeechV1Models {
     public String customizationId() {
       return customizationId;
     }
+ 
+    /**
+     * Gets the accept.
+     *
+     * The requested format (MIME type) of the audio. You can use the `Accept` header or the `accept` parameter to
+     * specify the audio format. For more information about specifying an audio format, see **Audio formats (accept
+     * types)** in the method description.
+     *
+     * Default: `audio/ogg;codecs=opus`.
+     *
+     * @return the accept
+     */
+    public String accept() {
+      return accept;
+    }
 
     private SynthesizeOptions(SynthesizeOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
       text = builder.text;
-      accept = builder.accept;
       voice = builder.voice;
       customizationId = builder.customizationId;
+      accept = builder.accept;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1733,15 +1739,15 @@ public class IBMTextToSpeechV1Models {
    */
   public class SynthesizeOptionsBuilder extends IBMWatsonOptionsModel {
     private String text;
-    private String accept;
     private String voice;
     private String customizationId;
+    private String accept;
 
     private SynthesizeOptionsBuilder(SynthesizeOptions synthesizeOptions) {
       text = synthesizeOptions.text;
-      accept = synthesizeOptions.accept;
       voice = synthesizeOptions.voice;
       customizationId = synthesizeOptions.customizationId;
+      accept = synthesizeOptions.accept;
       this.requestHeaders.putAll(synthesizeOptions.requestHeaders());
     }
 
@@ -1781,17 +1787,6 @@ public class IBMTextToSpeechV1Models {
     }
 
     /**
-     * Set the accept.
-     *
-     * @param accept the accept
-     * @return the SynthesizeOptions builder
-     */
-    public SynthesizeOptionsBuilder accept(String accept) {
-      this.accept = accept;
-      return this;
-    }
-
-    /**
      * Set the voice.
      *
      * @param voice the voice
@@ -1810,6 +1805,17 @@ public class IBMTextToSpeechV1Models {
      */
     public SynthesizeOptionsBuilder customizationId(String customizationId) {
       this.customizationId = customizationId;
+      return this;
+    }
+
+    /**
+     * Set the accept.
+     *
+     * @param accept the accept
+     * @return the SynthesizeOptions builder
+     */
+    public SynthesizeOptionsBuilder accept(String accept) {
+      this.accept = accept;
       return this;
     }
 
@@ -2487,7 +2493,7 @@ public class IBMTextToSpeechV1Models {
           Word newItem = (Word) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Word.class);
           newWords.add(newItem);
         }
-        ret.setWords(newWords);
+        ret.words_serialized_name = newWords;
       }
 
       return ret;
@@ -2540,7 +2546,7 @@ public class IBMTextToSpeechV1Models {
           VoiceModel newItem = (VoiceModel) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), VoiceModel.class);
           newCustomizations.add(newItem);
         }
-        ret.setCustomizations(newCustomizations);
+        ret.customizations_serialized_name = newCustomizations;
       }
 
       return ret;
@@ -2591,7 +2597,7 @@ public class IBMTextToSpeechV1Models {
           Voice newItem = (Voice) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Voice.class);
           newVoices.add(newItem);
         }
-        ret.setVoices(newVoices);
+        ret.voices_serialized_name = newVoices;
       }
 
       return ret;
@@ -2734,7 +2740,7 @@ public class IBMTextToSpeechV1Models {
           Word newItem = (Word) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Word.class);
           newWords.add(newItem);
         }
-        ret.setWords(newWords);
+        ret.words_serialized_name = newWords;
       }
 
       return ret;
