@@ -22,6 +22,7 @@ install:
 - pip install bumpversion
 - npm install @semantic-release/exec
 - npm install @semantic-release/git
+- npm install @semantic-release/changelog
 - 'if [ "${TRAVIS_TAG}" = "${TRAVIS_BRANCH}" ]; then cd appscan; make asoc-tool; cd ../; fi'
 
 before_script:
@@ -38,4 +39,4 @@ after_failure:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: npx semantic-release
+    script: npx semantic-release@15.13.4
