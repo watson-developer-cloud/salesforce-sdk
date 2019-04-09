@@ -3,7 +3,8 @@ public class IBMWatsonCredentialUtils {
   private static final String USERNAME = 'username';
   private static final String PASSWORD = 'password';
   private static final String URL = 'url';
-  private static final String IAM_API_KEY = 'apikey';
+  private static final String IAM_API_KEY = 'iam_apikey';
+  private static final String API_KEY = 'apikey';
   private static final String IAM_URL = 'iam_url';
   private static final String CREDENTIAL_FILE_NAME = 'ibm_credentials';
 
@@ -97,7 +98,7 @@ public class IBMWatsonCredentialUtils {
           serviceCredentials.password = credentialValue;
         } else if (credentialType.contains(URL)) {
           serviceCredentials.url = credentialValue;
-        } else if (credentialType.contains(IAM_API_KEY)) {
+        } else if (credentialType.contains(IAM_API_KEY) || credentialType.contains(API_KEY)) {
           serviceCredentials.iamApiKey = credentialValue;
         } else if (credentialType.contains(IAM_URL)) {
           serviceCredentials.iamUrl = credentialValue;

@@ -4,7 +4,7 @@ private class IBMWatsonCredentialUtilsTest {
     + 'DISCOVERY_PASSWORD=disco_password\r\n'
     + 'DISCOVERY_URL=https://gateway.watsonplatform.net/discovery/api\r\n'
     + 'NATURAL_LANGUAGE_CLASSIFIER_URL=https://gateway-s.watsonplatform.net/natural-language-classifier/api\r\n'
-    + 'NATURAL_LANGUAGE_CLASSIFIER_APIKEY=nlc_apikey';
+    + 'NATURAL_LANGUAGE_CLASSIFIER_IAM_APIKEY=nlc_apikey';
 
   static testMethod void testHasBadStartOrEndChar() {
     // valid
