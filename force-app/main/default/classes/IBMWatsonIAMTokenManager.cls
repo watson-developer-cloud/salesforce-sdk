@@ -15,6 +15,7 @@ public class IBMWatsonIAMTokenManager {
   private static final String RESPONSE_TYPE = 'response_type';
   private static final String CLOUD_IAM = 'cloud_iam';
   private static final String REFRESH_TOKEN = 'refresh_token';
+  private static final String DEFAULT_ERROR_MESSAGE = 'There was a problem calling the IAM API.';
 
   public IBMWatsonIAMTokenManager(IBMWatsonIAMOptions options) {
     if (options.getApiKey() != null) {
@@ -162,9 +163,13 @@ public class IBMWatsonIAMTokenManager {
       String jsonString = JSON.serialize(safeJsonMap);
       return (IBMWatsonIAMToken) ((IBMWatsonGenericModel) IBMWatsonIAMToken.class.newInstance()).deserialize(jsonString, safeJsonMap, IBMWatsonIAMToken.class);
     } else {
-      String error = response.getBody();
+      Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
+      String errorMessage = responseMap.get('errorMessage');
+      if (errorMessage == null) {
+        errorMessage = DEFAULT_ERROR_MESSAGE;
+      }
       Integer statusCode = response.getStatusCode();
-      throw new IBMWatsonServiceExceptions.ResponseException(statusCode, error, response);
+      throw new IBMWatsonServiceExceptions.ResponseException(statusCode, errorMessage, response);
     }
   }
 }
