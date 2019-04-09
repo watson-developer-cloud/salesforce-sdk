@@ -3,7 +3,7 @@ public class IBMWatsonCredentialUtils {
   private static final String USERNAME = 'username';
   private static final String PASSWORD = 'password';
   private static final String URL = 'url';
-  private static final String IAM_API_KEY = 'apikey';
+  private static final String IAM_API_KEY = 'iam_apikey';
   private static final String IAM_URL = 'iam_url';
   private static final String CREDENTIAL_FILE_NAME = 'ibm_credentials';
 
