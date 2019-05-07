@@ -2026,7 +2026,7 @@ public class IBMWatsonMockResponses {
     return '{' +
       ' "created": "2017-12-13T16:11:55.815Z", ' +
       ' "id": "56d09f2c-e020-11e7-9ee3-33bf91161141", ' +
-      ' "url": "https://watson-api-explorer.mybluemix.net/speech-to-text/api/v1/recognitions/56d09f2c-e020-11e7-9ee3-33bf91161141", ' +
+      ' "url": "https://stream.watsonplatform.net/speech-to-text/api/v1/recognitions/56d09f2c-e020-11e7-9ee3-33bf91161141", ' +
       ' "status": "processing"' +
     '}';
   }

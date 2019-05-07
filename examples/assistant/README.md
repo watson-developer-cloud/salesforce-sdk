@@ -3,12 +3,12 @@
 ## Introduction
 In this lab, you'll get the chance to try out the new Watson Salesforce SDK by interacting with the Watson Assistant API in Apex. After completing the lab, you should have a better idea of the capabilities of the Watson Assistant service and be familiar with the general structure of the SDK.
 
-If throughout the lab you have any other questions, you can find more details about the Watson Assistant service [here](https://www.ibm.com/watson/services/conversation/). Additionally, if you're curious about any API details, you can find them in the [API explorer](https://watson-api-explorer.mybluemix.net/apis/assistant-v1). Otherwise, let's get started!
+If throughout the lab you have any other questions, you can find more details about the Watson Assistant service [here](https://www.ibm.com/watson/services/conversation/). Additionally, if you're curious about any API details, you can find them in the [API docs](https://cloud.ibm.com/apidocs/assistant). Otherwise, let's get started!
 
 ## Setup
 Using the SDK requires the following setup steps:
 
-- [Sign up/login to IBM Cloud](https://console.bluemix.net/registration/?target=/catalog/services/conversation/)
+- [Sign up/login to IBM Cloud](https://cloud.ibm.com/catalog/services/conversation)
 - Create desired Watson service instance
 - Deploy SDK to your Salesforce org (for the lab, the quickest option will be the manual deployment to a non-scratch org)
 - Set named credentials and remote site settings in Salesforce
@@ -18,7 +18,7 @@ These steps are detailed in the README of the [Watson Salesforce SDK GitHub page
 Once those steps are complete, you should be ready to continue with the lab.
 
 ## Getting familiar with Watson Assistant
-Before starting with the SDK, it'll be helpful to take a look at our new Watson Assistant service instance and get familiar with it a little bit. To do so, open the Assistant tooling. You can do this by going to the Watson section of IBM Cloud, navigating to your [**Existing Services**](https://console.bluemix.net/developer/watson/existing-services), and clicking **Launch tool**.
+Before starting with the SDK, it'll be helpful to take a look at our new Watson Assistant service instance and get familiar with it a little bit. To do so, open the Assistant tooling. You can do this by going to the Watson section of IBM Cloud, navigating to your [**Existing Services**](https://cloud.ibm.com/resources), and clicking **Launch tool**.
 
 ![Launch tool button](readme_images/launch_tool.png "Launch tool button")
 
@@ -197,7 +197,7 @@ Congratulations! You've completed the lab and hopefully feel more familiar with 
 
 If you're interested in exploring further or would like some resources to reference in the future, below are some helpful links:
 
-- [**IBM Cloud console**](https://console.bluemix.net/) - Where to create and manage Watson services
-- [**Watson documentation**](https://console.bluemix.net/developer/watson/documentation) - Where to find all documentation on the various Watson services
-- [**Watson API explorer**](https://watson-api-explorer.mybluemix.net/) - Where to see detailed API information and make sample calls
+- [**IBM Cloud console**](https://cloud.ibm.com/) - Where to create and manage Watson services
+- [**Watson documentation**](https://cloud.ibm.com/developer/watson/documentation) - Where to find all documentation on the various Watson services
+- [**Watson API documentation**](https://cloud.ibm.com/apidocs?category=ai) - Where to see detailed API information.
 - [**Watson APIs GitHub Organization**](https://github.com/watson-developer-cloud) - Public GitHub organization containing other SDKs, starter kits, etc.

@@ -30,7 +30,7 @@ Before going further, it's helpful to understand the structure of the Watson Dis
 
 Each collection and environment has a unique ID, and it's an environment ID that we're interested in retrieving now. Lucky for us, the SDK provides a `listEnvironments` method to get that ID.
 
-**Note:** If at any point in the coding section you would like to take a closer look at the many API endpoints and models in the Discovery service, you can go to the [Discovery API explorer](https://watson-api-explorer.mybluemix.net/apis/discovery-v1). This is a handy resource for future use, allowing you to see all of the operations, sample requests and responses, and to make sample API calls by inputting your credentials at the top of the page.
+**Note:** If at any point in the coding section you would like to take a closer look at the many API endpoints and models in the Discovery service, you can go to the [Discovery API docs](https://cloud.ibm.com/apidocs/discovery). This is a handy resource for future use, allowing you to see all of the operations and sample requests and responses
 
 Before performing any actions, we need to create an instance of a Discovery object, whose class is named `IBMDiscoveryV1` in the Apex SDK. We can do this with just one line:
 
@@ -68,7 +68,7 @@ Congratulations! You've made your first successful Watson Discovery call using A
 ### 2. Querying the Discovery News Collection
 When you created your Discovery service, you may have noticed that you already had a collection present: the Discovery News collection. This is a default collection that consists of millions English news documents and is updated continuously. We'll use this pre-built collection to test out Discovery's querying functionality and get a better idea of its capabilities.
 
-There are two ways to make queries in Discovery: with the Discovery Query Language or using natural language. You can learn more about using the Discovery Query Language [here](https://console.bluemix.net/docs/services/discovery/using.html#building-a-basic-query). For this first demonstration, we'll use natural language, along with some other parameters, to search for relevant documents about Dreamforce 2017.
+There are two ways to make queries in Discovery: with the Discovery Query Language or using natural language. You can learn more about using the Discovery Query Language [here](https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#building-a-basic-query). For this first demonstration, we'll use natural language, along with some other parameters, to search for relevant documents about Dreamforce 2017.
 
 Remove all of the previous code and replace it with the following:
 
@@ -101,7 +101,7 @@ With that added, run all of the code together. Now we just get a list of returne
 
 Easily parsing your service response is one of the biggest advantages of using the SDK, since everything is wrapped up in objects. We can demonstrate this with the first Discovery News query by manipulating our response object instead of just printing it.
 
-If we take a look at the `query` method in the [API explorer](https://watson-api-explorer.mybluemix.net/apis/discovery-v1#!/Queries/query), we can see that our response contains an array of `QueryResult` objects, each of which has 4 properties: `id`, `score`, `metadata`, and `collection_id`. We can verify the specifics by looking at the `QueryResponse` and `QueryResult` objects in the `IBMDiscoveryV1Models` class of the SDK, which contains all of the models used for the Discovery service.
+If we take a look at the `query` method in the [API docs](https://cloud.ibm.com/apidocs/discovery#!/Queries/query), we can see that our response contains an array of `QueryResult` objects, each of which has 4 properties: `id`, `score`, `metadata`, and `collection_id`. We can verify the specifics by looking at the `QueryResponse` and `QueryResult` objects in the `IBMDiscoveryV1Models` class of the SDK, which contains all of the models used for the Discovery service.
 
 Knowing this, let's print out the document ID of the 5 documents we get back from our query, using the following code:
 
@@ -142,7 +142,7 @@ IBMDiscoveryV1Models.Collection response = discovery.createCollection(options);
 
 **Note:** Be sure to use the environment ID you got in your `listEnvironments` call earlier in the lab!
 
-If you print out your response object, you should see the details of your newly created collection. Like the environment ID, be sure to keep a note of the returned collection ID, as it will be used when uploading documents and querying. If you'd like extra verification that this worked, head back over to the Discovery tooling. This is a visual way to add and query your Discovery documents on the IBM Cloud platform. You can click [here](https://console.bluemix.net/dashboard/apps/) and then click on your Discovery service and the "Launch tool" button to open up the tooling. If you need to log in, remember to use the credentials in the "Setup" section of this lab.
+If you print out your response object, you should see the details of your newly created collection. Like the environment ID, be sure to keep a note of the returned collection ID, as it will be used when uploading documents and querying. If you'd like extra verification that this worked, head back over to the Discovery tooling. This is a visual way to add and query your Discovery documents on the IBM Cloud platform. You can click [here](https://cloud.ibm.com/resources) and then click on your Discovery service and the "Launch tool" button to open up the tooling. If you need to log in, remember to use the credentials in the "Setup" section of this lab.
 
 Once you get there, you should see the default Discovery News collection and your new collection named "think-collection".
 
@@ -188,7 +188,6 @@ Congratulations! You've completed the lab and hopefully feel more familiar with 
 
 If you're interested in exploring further or would like some resources to reference in the future, below are some helpful links:
 
-- [**IBM Cloud console**](https://console.bluemix.net/) - Where to create and manage Watson services
-- [**Watson documentation**](https://console.bluemix.net/developer/watson/documentation) - Where to find all documentation on the various Watson services
-- [**Watson API explorer**](https://watson-api-explorer.mybluemix.net/) - Where to see detailed API information and make sample calls
+- [**IBM Cloud console**](https://cloud.ibm.com/) - Where to create and manage Watson services
+- [**Watson documentation**](https://cloud.ibm.com/developer/watson/documentation) - Where to find all documentation on the various Watson services
 - [**Watson APIs GitHub Organization**](https://github.com/watson-developer-cloud) - Public GitHub organization containing other SDKs, starter kits, etc.

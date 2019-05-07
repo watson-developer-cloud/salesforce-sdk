@@ -2,5 +2,5 @@
 <RemoteSiteSetting xmlns="http://soap.sforce.com/2006/04/metadata">
     <disableProtocolSecurity>false</disableProtocolSecurity>
     <isActive>true</isActive>
-    <url>https://iam.bluemix.net</url>
+    <url>https://iam.cloud.ibm.com</url>
 </RemoteSiteSetting>

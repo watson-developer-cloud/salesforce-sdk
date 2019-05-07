@@ -148,7 +148,7 @@ public class IBMWatsonHttpHeaders {
   /** Allow Watson to collect the payload. */
   public static String X_WATSON_LEARNING_OPT_OUT = 'X-Watson-Learning-Opt-Out';
 
-  /** Mark Bluemix interactions from tests. */
+  /** Mark IBM Cloud interactions from tests. */
   public static String X_WATSON_TEST = 'X-Watson-Test';
 
   /** Global Transaction Id. */
