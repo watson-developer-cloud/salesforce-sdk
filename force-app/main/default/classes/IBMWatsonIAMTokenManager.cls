@@ -164,7 +164,7 @@ public class IBMWatsonIAMTokenManager {
       return (IBMWatsonIAMToken) ((IBMWatsonGenericModel) IBMWatsonIAMToken.class.newInstance()).deserialize(jsonString, safeJsonMap, IBMWatsonIAMToken.class);
     } else {
       Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
-      String errorMessage = responseMap.get('errorMessage');
+      String errorMessage = responseMap.get('errorMessage').toString();
       if (errorMessage == null) {
         errorMessage = DEFAULT_ERROR_MESSAGE;
       }
