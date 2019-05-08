@@ -207,7 +207,7 @@ When authenticating with IAM, you have the option of passing in:
 // in the constructor, letting the SDK manage the IAM token
 IBMWatsonIAMOptions options = new IBMWatsonIAMOptions.Builder()
   .apiKey('IAM_API_KEY')
-  .url('IAM_URL') // optional - the default value is https://iam.bluemix.net/identity/token
+  .url('IAM_URL') // optional - the default value is https://iam.cloud.ibm.com/identity/token
   .build();
 IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', options);
 service.setEndPoint('SERVICE_URL');
@@ -254,7 +254,7 @@ The final piece of setup to access Watson services from your Salesforce environm
 1. Add whatever name you desire, with the following URL: `https://gateway.watsonplatform.net/`
 1. Click _Save_
 
-If you're authenticating with IAM, you'll also need to add your IAM URL in your remote site settings. The default URL is `https://iam.bluemix.net`.
+If you're authenticating with IAM, you'll also need to add your IAM URL in your remote site settings. The default URL is `https://iam.cloud.ibm.com/identity/token`.
 
 ## Examples
 

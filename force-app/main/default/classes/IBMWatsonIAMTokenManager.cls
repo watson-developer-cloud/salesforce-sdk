@@ -7,7 +7,7 @@ public class IBMWatsonIAMTokenManager {
   private String url;
   private IBMWatsonIAMToken tokenData;
 
-  private static final String DEFAULT_IAM_URL = 'https://iam.bluemix.net/identity/token';
+  private static final String DEFAULT_IAM_URL = 'https://iam.cloud.ibm.com/identity/token';
   private static final String GRANT_TYPE = 'grant_type';
   private static final String REQUEST_GRANT_TYPE = 'urn:ibm:params:oauth:grant-type:apikey';
   private static final String REFRESH_GRANT_TYPE = 'refresh_token';
