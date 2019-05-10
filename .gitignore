@@ -6,3 +6,5 @@ mdapioutput
 *.orig
 *.rej
 .project
+.pre-commit-config.yaml
+.secrets.baseline
