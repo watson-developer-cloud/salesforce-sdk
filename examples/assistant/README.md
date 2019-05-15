@@ -49,8 +49,8 @@ Our simple message will just be a "Hello!" to the smart car assistant, and we'll
 ```apex
 IBMAssistantV1 assistant = new IBMAssistantV1('2018-02-16');
 
-IBMAssistantV1Models.InputData input
-  = new IBMAssistantV1Models.InputDataBuilder()
+IBMAssistantV1Models.MessageInput input
+  = new IBMAssistantV1Models.MessageInputBuilder()
     .text('Hello!')
     .build();
 IBMAssistantV1Models.MessageOptions options
@@ -96,8 +96,8 @@ IBMAssistantV1Models.Context context = null;
 
 // loop through messages, printing output after each one
 for (String message : messages) {
-  IBMAssistantV1Models.InputData input
-    = new IBMAssistantV1Models.InputDataBuilder()
+  IBMAssistantV1Models.MessageInput input
+    = new IBMAssistantV1Models.MessageInputBuilder()
       .text(message)
       .build();
   IBMAssistantV1Models.MessageOptions options
@@ -152,8 +152,8 @@ IBMAssistantV1Models.Context context = null;
 
 // loop through messages, printing output after each one
 for (String message : messages) {
-  IBMAssistantV1Models.InputData input
-    = new IBMAssistantV1Models.InputDataBuilder()
+  IBMAssistantV1Models.MessageInput input
+    = new IBMAssistantV1Models.MessageInputBuilder()
       .text(message)
       .build();
   IBMAssistantV1Models.MessageOptions messageOptions
