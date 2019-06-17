@@ -324,8 +324,6 @@ public abstract class IBMWatsonService {
   public void setSkipAuthentication(boolean skipAuthentication) {
     this.skipAuthentication = skipAuthentication;
     if (this.skipAuthentication) {
-      /* IBMWatsonAuthenticatorConfig noauthConfig = (IBMWatsonAuthenticatorConfig) new IBMWatsonNoauthConfig();
-      setAuthenticator(noauthConfig); */
       setAuthenticator(new IBMWatsonNoauthConfig());
     }
   }
