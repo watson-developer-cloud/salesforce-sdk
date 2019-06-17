@@ -8,6 +8,14 @@ public class IBMWatsonCredentialUtils {
   private static final String IAM_URL = 'iam_url';
   private static final String CREDENTIAL_FILE_NAME = 'ibm_credentials';
 
+  /**
+   * Valid authentication types.
+   */
+  public static final String AUTHTYPE_BASIC = 'basic';
+  public static final String AUTHTYPE_NOAUTH = 'noauth';
+  public static final String AUTHTYPE_IAM = 'iam';
+  public static final String AUTHTYPE_ICP4D = 'icp4d';
+
   private IBMWatsonCredentialUtils() {
     // This is a utility class - no instantiation allowed.
   }
