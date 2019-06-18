@@ -5,7 +5,6 @@ public abstract class IBMWatsonService {
   private String userAgent;
   private String name;
   private IBMWatsonAuthenticator authenticator;
-  private boolean skipAuthentication = false;
   private Map<String, String> defaultHeaders = null;
 
   private static final String CALLOUT = 'callout:';
@@ -241,10 +240,6 @@ public abstract class IBMWatsonService {
    * @param builder the new authentication
    */
   protected virtual void setAuthentication(IBMWatsonRequest.Builder builder) {
-    if (skipAuthentication) {
-      return;
-    }
-
     if (this.authenticator != null) {
       this.authenticator.authenticate(builder);
     } else {
@@ -313,18 +308,8 @@ public abstract class IBMWatsonService {
   public void setAuthenticator(IBMWatsonAuthenticatorConfig authConfig) {
     try {
       this.authenticator = IBMWatsonAuthenticatorFactory.getAuthenticator(authConfig);
-      if (this.authenticator instanceof IBMWatsonNoauthAuthenticator) {
-        this.skipAuthentication = true;
-      }
     } catch (Exception e) {
       throw new IBMWatsonServiceExceptions.ResponseException(e.getMessage());
-    }
-  }
-
-  public void setSkipAuthentication(boolean skipAuthentication) {
-    this.skipAuthentication = skipAuthentication;
-    if (this.skipAuthentication) {
-      setAuthenticator(new IBMWatsonNoauthConfig());
     }
   }
 
