@@ -14,7 +14,9 @@ public class IBMWatsonRequest {
     this.method = builder.method;
     this.headers = new Map<String, String>();
     this.headers.putAll(builder.headers);
-    this.body = builder.body.clone();
+    if (builder.body != null) {
+      this.body = builder.body.clone();
+    }
   }
 
   public URL getUrl() {

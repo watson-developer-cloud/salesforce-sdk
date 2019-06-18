@@ -12,7 +12,6 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
 
   /**
    * Instantiates a new `IBMNaturalLanguageClassifierV1`.
-   *
    */
   public IBMNaturalLanguageClassifierV1() {
     super('natural_language_classifier', 'v1');
@@ -23,6 +22,7 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
    *
    * @param username the username
    * @param password the password
+   * @deprecated Use IBMNaturalLanguageClassifierV1(IBMWatsonAuthenticatorConfig authenticatorConfig) instead
    */
   public IBMNaturalLanguageClassifierV1(String username, String password) {
     this();
@@ -30,16 +30,13 @@ public class IBMNaturalLanguageClassifierV1 extends IBMWatsonService {
   }
 
   /**
-   * Instantiates a new `IBMNaturalLanguageClassifierV1` with IAM. Note that if the access token is specified in the
-   * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
-   * one expires or after receiving a 401 error from the service. Failing to do so will result in authentication errors
-   * after this token expires.
+   * Instantiates a new `IBMNaturalLanguageClassifierV1` with the specified authentication configuration.
    *
-   * @param iamOptions the options for authenticating through IAM
+   * @param authenticatorConfig the authentication configuration for this service
    */
-  public IBMNaturalLanguageClassifierV1(IBMWatsonIAMOptions iamOptions) {
+  public IBMNaturalLanguageClassifierV1(IBMWatsonAuthenticatorConfig authenticatorConfig) {
     this();
-    setIamCredentials(iamOptions);
+    setAuthenticator(authenticatorConfig);
   }
 
   /**

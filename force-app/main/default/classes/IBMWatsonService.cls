@@ -4,15 +4,10 @@ public abstract class IBMWatsonService {
   private String endPoint;
   private String userAgent;
   private String name;
-  private IBMWatsonIAMTokenManager tokenManager;
-  private boolean skipAuthentication = false;
+  private IBMWatsonAuthenticator authenticator;
   private Map<String, String> defaultHeaders = null;
 
-  private static final String URL = 'url';
-  private static final String PATH_AUTHORIZATION_V1_TOKEN = '/v1/token';
   private static final String CALLOUT = 'callout:';
-  private static final String BASIC = 'Basic ';
-  private static final String BEARER = 'Bearer ';
   private static final String VERSION = 'version';
   private static final String USER_AGENT_FORMAT = 'watson-apis-salesforce-sdk-{0} {1}';
   private static final String SDK_VERSION = '4.0.2';
@@ -63,7 +58,7 @@ public abstract class IBMWatsonService {
         .apiKey(serviceCredentials.getIamApiKey())
         .url(serviceCredentials.getIamUrl())
         .build();
-      setIamCredentials(iamOptions);
+      setAuthenticator(iamOptions);
    }
   }
 
@@ -245,20 +240,10 @@ public abstract class IBMWatsonService {
    * @param builder the new authentication
    */
   protected virtual void setAuthentication(IBMWatsonRequest.Builder builder) {
-    if (tokenManager != null) {
-      String accessToken = tokenManager.getToken();
-      builder.addHeader(IBMWatsonHttpHeaders.AUTHORIZATION, BEARER + accessToken);
-    } else if (getApiKey() == null) {
-      if (skipAuthentication) {
-        Map<String, String> currentHeaders = builder.build().getAllHeaders();
-        if (currentHeaders.containsKey(IBMWatsonHttpHeaders.X_WATSON_AUTHORIZATION_TOKEN)) {
-          System.debug(System.LoggingLevel.WARN, AUTH_HEADER_DEPRECATION_MESSAGE);
-        }
-        return;
-      }
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('apiKey or username and password were not specified');
+    if (this.authenticator != null) {
+      this.authenticator.authenticate(builder);
     } else {
-      builder.addHeader(IBMWatsonHttpHeaders.AUTHORIZATION, apiKey.startsWith(BASIC) ? apiKey : BASIC + apiKey);
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('Authentication information was not properly configured.');
     }
   }
 
@@ -269,19 +254,19 @@ public abstract class IBMWatsonService {
    * @param password the password
    */
   public void setUsernameAndPassword(final String username, final String password) {
-    if (IBMWatsonCredentialUtils.hasBadStartOrEndChar(username) || IBMWatsonCredentialUtils.hasBadStartOrEndChar(password)) {
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('The username and password shouldn\'t start or end with curly brackets or '
-          + 'quotes. Please remove any surrounding {, }, or " characters.');
-    }
-
     // we'll perform the token exchange for users UNLESS they're on ICP
     if (username.equals(APIKEY_AS_USERNAME) && !password.startsWith(ICP_PREFIX)) {
       IBMWatsonIAMOptions iamOptions = new IBMWatsonIAMOptions.Builder()
         .apiKey(password)
         .build();
-      setIamCredentials(iamOptions);
+      setAuthenticator(iamOptions);
     } else {
-      apiKey = IBMWatsonCredentialUtils.toBasicAuth(username, password);
+      this.apiKey = IBMWatsonCredentialUtils.toBasicAuth(username, password);
+      IBMWatsonBasicAuthConfig basicAuthConfig = new IBMWatsonBasicAuthConfig.Builder()
+        .username(username)
+        .password(password)
+        .build();
+      setAuthenticator(basicAuthConfig);
     }
   }
 
@@ -317,7 +302,15 @@ public abstract class IBMWatsonService {
    * @param iamOptions object containing values to be used for authenticating with IAM
    */
   public void setIamCredentials(IBMWatsonIAMOptions iamOptions) {
-    this.tokenManager = new IBMWatsonIAMTokenManager(iamOptions);
+    setAuthenticator(iamOptions);
+  }
+
+  public void setAuthenticator(IBMWatsonAuthenticatorConfig authConfig) {
+    try {
+      this.authenticator = IBMWatsonAuthenticatorFactory.getAuthenticator(authConfig);
+    } catch (Exception e) {
+      throw new IBMWatsonServiceExceptions.ResponseException(e.getMessage());
+    }
   }
 
   /**
@@ -335,6 +328,7 @@ public abstract class IBMWatsonService {
    *
    *
    * @return the apiKey
+   * @deprecated
    */
   protected String getApiKey() {
     return apiKey;
@@ -346,6 +340,7 @@ public abstract class IBMWatsonService {
    * @return true if the tokenManager has been set
    */
   public Boolean isTokenManagerSet() {
-    return tokenManager != null;
+    return this.authenticator != null
+      && this.authenticator.authenticationType().equals(IBMWatsonCredentialUtils.AUTHTYPE_IAM);
   }
 }

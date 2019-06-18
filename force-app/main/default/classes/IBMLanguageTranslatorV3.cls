@@ -35,6 +35,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
    *        calls from failing when the service introduces breaking changes.
    * @param username the username
    * @param password the password
+   * @deprecated Use IBMLanguageTranslatorV3(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) instead
    */
   public IBMLanguageTranslatorV3(String versionDate, String username, String password) {
     this(versionDate);
@@ -42,18 +43,15 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
   }
 
   /**
-   * Instantiates a new `IBMLanguageTranslatorV3` with IAM. Note that if the access token is specified in the
-   * iamOptions, you accept responsibility for managing the access token yourself. You must set a new access token before this
-   * one expires or after receiving a 401 error from the service. Failing to do so will result in authentication errors
-   * after this token expires.
+   * Instantiates a new `IBMLanguageTranslatorV3` with the specified authentication configuration.
    *
    * @param versionDate The version date (yyyy-MM-dd) of the REST API to use. Specifying this value will keep your API
    *        calls from failing when the service introduces breaking changes.
-   * @param iamOptions the options for authenticating through IAM
+   * @param authenticatorConfig the authentication configuration for this service
    */
-  public IBMLanguageTranslatorV3(String versionDate, IBMWatsonIAMOptions iamOptions) {
+  public IBMLanguageTranslatorV3(String versionDate, IBMWatsonAuthenticatorConfig authenticatorConfig) {
     this(versionDate);
-    setIamCredentials(iamOptions);
+    setAuthenticator(authenticatorConfig);
   }
 
   /**

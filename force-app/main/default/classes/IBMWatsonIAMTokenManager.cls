@@ -1,7 +1,7 @@
 /**
  * Retrieves, stores, and refreshes IAM tokens.
  */
-public class IBMWatsonIAMTokenManager {
+public class IBMWatsonIAMTokenManager implements IBMWatsonAuthenticator {
   private String userManagedAccessToken;
   private String apiKey;
   private String url;
@@ -34,12 +34,19 @@ public class IBMWatsonIAMTokenManager {
     tokenData = new IBMWatsonIAMToken();
   }
 
+  public String authenticationType() {
+    return IBMWatsonCredentialUtils.AUTHTYPE_IAM;
+  }
+
+  public void authenticate(IBMWatsonRequest.Builder requestBuilder) {
+    requestBuilder.addHeader(IBMWatsonHttpHeaders.AUTHORIZATION, 'Bearer ' + getToken());
+  }
+
   /**
    * This function returns an access token. The source of the token is determined by the following logic:
    * 1. If user provides their own managed access token, assume it is valid and send it
-   * 2. If this class is managing tokens and does not yet have one, or the refresh token is expired, make a request
+   * 2. If this class is managing tokens and does not yet have one, or the token is expired, make a request
    * for one
-   * 3. If this class is managing tokens and the token has expired, refresh it
    * 4. If this class is managing tokens and has a valid token stored, send it
    *
    * @return the valid access token
@@ -50,12 +57,9 @@ public class IBMWatsonIAMTokenManager {
     if (userManagedAccessToken != null) {
       // use user-managed access token
       token = userManagedAccessToken;
-    } else if (tokenData.getAccessToken() == null || isRefreshTokenExpired()) {
+    } else if (tokenData.getAccessToken() == null || isAccessTokenExpired()) {
       // request new token
       token = requestToken();
-    } else if (isAccessTokenExpired()) {
-      // refresh current token
-      token = refreshToken();
     } else {
       // use valid managed token
       token = tokenData.getAccessToken();
@@ -86,26 +90,6 @@ public class IBMWatsonIAMTokenManager {
   }
 
   /**
-   * Refresh an IAM token using a refresh token. Also updates internal managed IAM token information.
-   *
-   * @return the new access token
-   */
-  private String refreshToken() {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(url);
-
-    builder.addHeader(IBMWatsonHttpHeaders.CONTENT_TYPE, IBMWatsonHttpMediaType.APPLICATION_FORM_URLENCODED);
-
-    IBMWatsonFormBody formBody = new IBMWatsonFormBody.Builder()
-      .add(GRANT_TYPE, REFRESH_GRANT_TYPE)
-      .add(REFRESH_TOKEN, tokenData.getRefreshToken())
-      .build();
-    builder.body(formBody);
-
-    tokenData = callIamApi(builder.build());
-    return tokenData.getAccessToken();
-  }
-
-  /**
    * Check if currently stored access token is expired.
    *
    * Using a buffer to prevent the edge case of the
@@ -127,25 +111,6 @@ public class IBMWatsonIAMTokenManager {
     Double currentTime = Math.floor(System.now().getTime() / 1000);
 
     return refreshTime < currentTime;
-  }
-
-  /**
-   * Used as a fail-safe to prevent the condition of a refresh token expiring,
-   * which could happen after around 30 days. This function will return true
-   * if it has been at least 7 days and 1 hour since the last token was
-   * retrieved.
-   *
-   * @returns whether the current managed refresh token is expired or not
-   */
-  private boolean isRefreshTokenExpired() {
-    if (tokenData.getExpiration() == null) {
-      return true;
-    }
-
-    Integer sevenDays = 7 * 24 * 3600;
-    Double currentTime = Math.floor(System.now().getTime() / 1000);
-    Long newTokenTime = tokenData.getExpiration() + sevenDays;
-    return newTokenTime < currentTime;
   }
 
   /**
