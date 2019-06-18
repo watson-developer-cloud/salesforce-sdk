@@ -310,7 +310,7 @@ public abstract class IBMWatsonService {
     setAuthenticator(iamOptions);
   }
 
-  protected void setAuthenticator(IBMWatsonAuthenticatorConfig authConfig) {
+  public void setAuthenticator(IBMWatsonAuthenticatorConfig authConfig) {
     try {
       this.authenticator = IBMWatsonAuthenticatorFactory.getAuthenticator(authConfig);
       if (this.authenticator instanceof IBMWatsonNoauthAuthenticator) {
