@@ -9,18 +9,23 @@ public class IBMWatsonICP4DConfig implements IBMWatsonAuthenticatorConfig {
   }
 
   public void validate() {
-    if (String.isBlank(url)) {
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('You must provide a URL.');
-    }
-
     // If the user specifies their own access token, then username/password are not required.
     if (!String.isBlank(userManagedAccessToken)) {
       return;
     }
 
+    if (String.isBlank(url)) {
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('You must provide a URL.');
+    }
+
     if (String.isBlank(username) || String.isBlank(password)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException(
         'You must provide both username and password values.');
+    }
+
+    if (IBMWatsonCredentialUtils.hasBadStartOrEndChar(username) || IBMWatsonCredentialUtils.hasBadStartOrEndChar(password)) {
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('The username and password shouldn\'t start or end with curly brackets or '
+          + 'quotes. Please remove any surrounding {, }, or " characters.');
     }
   }
 

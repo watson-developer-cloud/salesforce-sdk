@@ -14,6 +14,11 @@ public class IBMWatsonIAMOptions implements IBMWatsonAuthenticatorConfig {
     if (String.isBlank(this.apiKey) && String.isBlank(this.accessToken)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException('You must provide either the apiKey or accessToken properties.');
     }
+
+    if (IBMWatsonCredentialUtils.hasBadStartOrEndChar(this.apiKey)) {
+      throw new IBMWatsonServiceExceptions.IllegalArgumentException('The API key shouldn\'t start or end with curly brackets or '
+          + 'quotes. Please remove any surrounding {, }, or " characters.');
+    }
   }
 
   public String getApiKey() {
