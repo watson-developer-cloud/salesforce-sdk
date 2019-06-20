@@ -7352,8 +7352,6 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String grammarName;
     private Boolean redaction;
-    private Boolean processingMetrics;
-    private Double processingMetricsInterval;
     private Boolean audioMetrics;
  
     /**
@@ -7662,39 +7660,6 @@ public class IBMSpeechToTextV1Models {
     }
  
     /**
-     * Gets the processingMetrics.
-     *
-     * If `true`, requests processing metrics about the service's transcription of the input audio. The service returns
-     * processing metrics at the interval specified by the `processing_metrics_interval` parameter. It also returns
-     * processing metrics for transcription events, for example, for final and interim results. By default, the service
-     * returns no processing metrics.
-     *
-     * @return the processingMetrics
-     */
-    public Boolean processingMetrics() {
-      return processingMetrics;
-    }
- 
-    /**
-     * Gets the processingMetricsInterval.
-     *
-     * Specifies the interval in real wall-clock seconds at which the service is to return processing metrics. The
-     * parameter is ignored unless the `processing_metrics` parameter is set to `true`.
-     *
-     * The parameter accepts a minimum value of 0.1 seconds. The level of precision is not restricted, so you can
-     * specify values such as 0.25 and 0.125.
-     *
-     * The service does not impose a maximum value. If you want to receive processing metrics only for transcription
-     * events instead of at periodic intervals, set the value to a large number. If the value is larger than the
-     * duration of the audio, the service returns processing metrics only for transcription events.
-     *
-     * @return the processingMetricsInterval
-     */
-    public Double processingMetricsInterval() {
-      return processingMetricsInterval;
-    }
- 
-    /**
      * Gets the audioMetrics.
      *
      * If `true`, requests detailed information about the signal characteristics of the input audio. The service returns
@@ -7728,8 +7693,6 @@ public class IBMSpeechToTextV1Models {
       customizationId = builder.customizationId;
       grammarName = builder.grammarName;
       redaction = builder.redaction;
-      processingMetrics = builder.processingMetrics;
-      processingMetricsInterval = builder.processingMetricsInterval;
       audioMetrics = builder.audioMetrics;
       this.requestHeaders = builder.requestHeaders;
     }
@@ -7769,8 +7732,6 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String grammarName;
     private Boolean redaction;
-    private Boolean processingMetrics;
-    private Double processingMetricsInterval;
     private Boolean audioMetrics;
 
     private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
@@ -7794,8 +7755,6 @@ public class IBMSpeechToTextV1Models {
       customizationId = recognizeOptions.customizationId;
       grammarName = recognizeOptions.grammarName;
       redaction = recognizeOptions.redaction;
-      processingMetrics = recognizeOptions.processingMetrics;
-      processingMetricsInterval = recognizeOptions.processingMetricsInterval;
       audioMetrics = recognizeOptions.audioMetrics;
       this.requestHeaders.putAll(recognizeOptions.requestHeaders());
     }
@@ -8057,28 +8016,6 @@ public class IBMSpeechToTextV1Models {
      */
     public RecognizeOptionsBuilder redaction(Boolean redaction) {
       this.redaction = redaction;
-      return this;
-    }
-
-    /**
-     * Set the processingMetrics.
-     *
-     * @param processingMetrics the processingMetrics
-     * @return the RecognizeOptions builder
-     */
-    public RecognizeOptionsBuilder processingMetrics(Boolean processingMetrics) {
-      this.processingMetrics = processingMetrics;
-      return this;
-    }
-
-    /**
-     * Set the processingMetricsInterval.
-     *
-     * @param processingMetricsInterval the processingMetricsInterval
-     * @return the RecognizeOptions builder
-     */
-    public RecognizeOptionsBuilder processingMetricsInterval(Double processingMetricsInterval) {
-      this.processingMetricsInterval = processingMetricsInterval;
       return this;
     }
 
@@ -8802,8 +8739,8 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript_serialized_name;
     private Double confidence_serialized_name;
-    private List<String> timestamps_serialized_name;
-    private List<String> word_confidence_serialized_name;
+    private List<List<String>> timestamps_serialized_name;
+    private List<List<String>> word_confidence_serialized_name;
  
     /**
      * Gets the transcript.
@@ -8840,7 +8777,7 @@ public class IBMSpeechToTextV1Models {
      * @return the timestamps
      */
     @AuraEnabled
-    public List<String> getTimestamps() {
+    public List<List<String>> getTimestamps() {
       return timestamps_serialized_name;
     }
  
@@ -8854,7 +8791,7 @@ public class IBMSpeechToTextV1Models {
      * @return the wordConfidence
      */
     @AuraEnabled
-    public List<String> getWordConfidence() {
+    public List<List<String>> getWordConfidence() {
       return word_confidence_serialized_name;
     }
 
@@ -8881,7 +8818,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<String> timestamps) {
+    public void setTimestamps(final List<List<String>> timestamps) {
       this.timestamps_serialized_name = timestamps;
     }
 
@@ -8890,7 +8827,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<String> wordConfidence) {
+    public void setWordConfidence(final List<List<String>> wordConfidence) {
       this.word_confidence_serialized_name = wordConfidence;
     }
 
@@ -8902,7 +8839,7 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionResult extends IBMWatsonGenericModel {
     private Boolean final_serialized_name;
     private List<SpeechRecognitionAlternative> alternatives_serialized_name;
-    private IBMWatsonMapModel keywords_result_serialized_name;
+    private Map<String, List<KeywordResult>> keywords_result_serialized_name;
     private List<WordAlternativeResults> word_alternatives_serialized_name;
  
     /**
@@ -8942,7 +8879,7 @@ public class IBMSpeechToTextV1Models {
      * @return the keywordsResult
      */
     @AuraEnabled
-    public IBMWatsonMapModel getKeywordsResult() {
+    public Map<String, List<KeywordResult>> getKeywordsResult() {
       return keywords_result_serialized_name;
     }
  
@@ -8982,7 +8919,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param keywordsResult the new keywordsResult
      */
-    public void setKeywordsResult(final IBMWatsonMapModel keywordsResult) {
+    public void setKeywordsResult(final Map<String, List<KeywordResult>> keywordsResult) {
       this.keywords_result_serialized_name = keywordsResult;
     }
 
@@ -9016,8 +8953,23 @@ public class IBMSpeechToTextV1Models {
       }
 
       // calling custom deserializer for keywordsResult
-      IBMWatsonMapModel newKeywordsResult = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getKeywordsResult()), (Map<String, Object>) jsonMap.get('keywords_result_serialized_name'), IBMWatsonMapModel.class);
-      ret.setKeywordsResult(newKeywordsResult);
+      Map<String, List<KeywordResult>> newKeywordsResult = new Map<String, List<KeywordResult>>();
+      Map<String, List<KeywordResult>> deserializedKeywordsResult = ret.getKeywordsResult();
+      if (deserializedKeywordsResult != null) {
+        for (String key : deserializedKeywordsResult.keySet()) {
+          List<KeywordResult> newKeywordResult = new List<KeywordResult>();
+          List<KeywordResult> keywordResultList = deserializedKeywordsResult.get(key);
+          for (Integer i = 0; i < keywordResultList.size(); i++) {
+            KeywordResult currentItem = keywordResultList.get(i);
+            Map<String, Object> itemInMap = (Map<String, Object>) jsonMap.get('keywords_result_serialized_name');
+            Object innerObject = ((List<Object>) itemInMap.get(key)).get(i);
+            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(innerObject)), KeywordResult.class);
+            newKeywordResult.add(newItem);
+          }
+          newKeywordsResult.put(key, newKeywordResult);
+        }
+        ret.setKeywordsResult(newKeywordsResult);
+      }
 
       // calling custom deserializer for wordAlternatives
       List<WordAlternativeResults> newWordAlternatives = new List<WordAlternativeResults>();
@@ -9294,7 +9246,6 @@ public class IBMSpeechToTextV1Models {
   public class TrainAcousticModelOptions extends IBMWatsonOptionsModel {
     private String customizationId;
     private String customLanguageModelId;
-    private Boolean strict;
  
     /**
      * Gets the customizationId.
@@ -9322,26 +9273,11 @@ public class IBMSpeechToTextV1Models {
     public String customLanguageModelId() {
       return customLanguageModelId;
     }
- 
-    /**
-     * Gets the strict.
-     *
-     * If `false`, allows training of the custom acoustic model to proceed as long as the model contains at least one
-     * valid audio resource. The method returns an array of `TrainingWarning` objects that lists any invalid resources.
-     * By default (`true`), training of a custom acoustic model fails (status code 400) if the model contains one or
-     * more invalid audio resources.
-     *
-     * @return the strict
-     */
-    public Boolean strict() {
-      return strict;
-    }
 
     private TrainAcousticModelOptions(TrainAcousticModelOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
       customizationId = builder.customizationId;
       customLanguageModelId = builder.customLanguageModelId;
-      strict = builder.strict;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -9362,12 +9298,10 @@ public class IBMSpeechToTextV1Models {
   public class TrainAcousticModelOptionsBuilder extends IBMWatsonOptionsModel {
     private String customizationId;
     private String customLanguageModelId;
-    private Boolean strict;
 
     private TrainAcousticModelOptionsBuilder(TrainAcousticModelOptions trainAcousticModelOptions) {
       customizationId = trainAcousticModelOptions.customizationId;
       customLanguageModelId = trainAcousticModelOptions.customLanguageModelId;
-      strict = trainAcousticModelOptions.strict;
       this.requestHeaders.putAll(trainAcousticModelOptions.requestHeaders());
     }
 
@@ -9418,17 +9352,6 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the strict.
-     *
-     * @param strict the strict
-     * @return the TrainAcousticModelOptions builder
-     */
-    public TrainAcousticModelOptionsBuilder strict(Boolean strict) {
-      this.strict = strict;
-      return this;
-    }
-
-    /**
      * Add a request header.
      *
      * @param name the header name
@@ -9448,7 +9371,6 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String wordTypeToAdd;
     private Double customizationWeight;
-    private Boolean strict;
  
     /**
      * Gets the customizationId.
@@ -9496,27 +9418,12 @@ public class IBMSpeechToTextV1Models {
     public Double customizationWeight() {
       return customizationWeight;
     }
- 
-    /**
-     * Gets the strict.
-     *
-     * If `false`, allows training of the custom language model to proceed as long as the model contains at least one
-     * valid resource. The method returns an array of `TrainingWarning` objects that lists any invalid resources. By
-     * default (`true`), training of a custom language model fails (status code 400) if the model contains one or more
-     * invalid resources (corpus files, grammar files, or custom words).
-     *
-     * @return the strict
-     */
-    public Boolean strict() {
-      return strict;
-    }
 
     private TrainLanguageModelOptions(TrainLanguageModelOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
       customizationId = builder.customizationId;
       wordTypeToAdd = builder.wordTypeToAdd;
       customizationWeight = builder.customizationWeight;
-      strict = builder.strict;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -9538,13 +9445,11 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String wordTypeToAdd;
     private Double customizationWeight;
-    private Boolean strict;
 
     private TrainLanguageModelOptionsBuilder(TrainLanguageModelOptions trainLanguageModelOptions) {
       customizationId = trainLanguageModelOptions.customizationId;
       wordTypeToAdd = trainLanguageModelOptions.wordTypeToAdd;
       customizationWeight = trainLanguageModelOptions.customizationWeight;
-      strict = trainLanguageModelOptions.strict;
       this.requestHeaders.putAll(trainLanguageModelOptions.requestHeaders());
     }
 
@@ -9602,17 +9507,6 @@ public class IBMSpeechToTextV1Models {
      */
     public TrainLanguageModelOptionsBuilder customizationWeight(Double customizationWeight) {
       this.customizationWeight = customizationWeight;
-      return this;
-    }
-
-    /**
-     * Set the strict.
-     *
-     * @param strict the strict
-     * @return the TrainLanguageModelOptions builder
-     */
-    public TrainLanguageModelOptionsBuilder strict(Boolean strict) {
-      this.strict = strict;
       return this;
     }
 

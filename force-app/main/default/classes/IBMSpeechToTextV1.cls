@@ -254,12 +254,6 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (recognizeOptions.redaction() != null) {
       builder.query('redaction', String.valueOf(recognizeOptions.redaction()));
     }
-    if (recognizeOptions.processingMetrics() != null) {
-      builder.query('processing_metrics', String.valueOf(recognizeOptions.processingMetrics()));
-    }
-    if (recognizeOptions.processingMetricsInterval() != null) {
-      builder.query('processing_metrics_interval', String.valueOf(recognizeOptions.processingMetricsInterval()));
-    }
     if (recognizeOptions.audioMetrics() != null) {
       builder.query('audio_metrics', String.valueOf(recognizeOptions.audioMetrics()));
     }
@@ -801,9 +795,6 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     }
     if (trainLanguageModelOptions.customizationWeight() != null) {
       builder.query('customization_weight', String.valueOf(trainLanguageModelOptions.customizationWeight()));
-    }
-    if (trainLanguageModelOptions.strict() != null) {
-      builder.query('strict', String.valueOf(trainLanguageModelOptions.strict()));
     }
     builder.bodyJson('{}');
 
@@ -1578,9 +1569,6 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     }
     if (trainAcousticModelOptions.customLanguageModelId() != null) {
       builder.query('custom_language_model_id', trainAcousticModelOptions.customLanguageModelId());
-    }
-    if (trainAcousticModelOptions.strict() != null) {
-      builder.query('strict', String.valueOf(trainAcousticModelOptions.strict()));
     }
     builder.bodyJson('{}');
 
