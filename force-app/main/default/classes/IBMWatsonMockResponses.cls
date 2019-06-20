@@ -3923,4 +3923,51 @@ public class IBMWatsonMockResponses {
       '"message": "success"' +
     '}';
   }
+
+  public static testMethod String languageTranslatorDocumentStatus() {
+    return '{' +
+      '"document_id": "id",' +
+      '"filename": "test-file.txt",' +
+      '"model_id": "model-id",' +
+      '"base_model_id": "en-es",' +
+      '"source": "en",' +
+      '"target": "es",' +
+      '"status": "available",' +
+      '"created": "2018-08-24T08:20:30.5Z",' +
+      '"completed": "2018-08-24T08:20:30.5Z",' +
+      '"word_count": 1,' +
+      '"character_count": 2' +
+    '}';
+  }
+
+  public static testMethod String listDocuments() {
+    return '{' +
+      '"documents": [' +
+        '{' +
+          '"document_id": "id",' +
+          '"filename": "test-file.txt",' +
+          '"model_id": "model-id",' +
+          '"base_model_id": "en-es",' +
+          '"source": "en",' +
+          '"target": "es",' +
+          '"status": "available",' +
+          '"created": "2018-08-24T08:20:30.5Z",' +
+          '"completed": "2018-08-24T08:20:35.5Z",' +
+          '"word_count": 1,' +
+          '"character_count": 2' +
+        '},' +
+        '{' +
+          '"document_id": "id",' +
+          '"filename": "en.pdf",' +
+          '"model_id": "9ef1eda2-e4dc-460f-b51a-efeec95f239f",' +
+          '"base_model_id": "en-fr",' +
+          '"source": "en",' +
+          '"target": "fr",' +
+          '"status": "available",' +
+          '"created": "2018-08-24T08:20:30.5Z",' +
+          '"completed": "2018-08-24T08:20:35.5Z"' +
+        '}' +
+      ']' +
+    '}';
+  }
 }

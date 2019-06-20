@@ -2957,7 +2957,7 @@ private class IBMDiscoveryV1Test {
 
     String status = 'status';
     String dateString = '"2017-07-14T12:55:40.652Z"';
-    Datetime dateValue = (Datetime) JSON.deserialize('"2017-07-14T12:55:40.652Z"', Datetime.class);
+    Datetime dateValue = (Datetime) JSON.deserialize(dateString, Datetime.class);
 
     IBMDiscoveryV1Models.SourceStatus sourceStatus = new IBMDiscoveryV1Models.SourceStatus();
     sourceStatus.setStatus(status);
