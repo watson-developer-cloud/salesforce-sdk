@@ -283,15 +283,6 @@ public class IBMNaturalLanguageClassifierV1Models {
       this.class_name_serialized_name = className;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ClassifiedClass ret = (ClassifiedClass) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -426,15 +417,6 @@ public class IBMNaturalLanguageClassifierV1Models {
       this.language_serialized_name = language;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Classifier ret = (Classifier) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -898,7 +880,7 @@ public class IBMNaturalLanguageClassifierV1Models {
      *
      * Training data in CSV format. Each text value must have at least one class. The data can include up to 3,000
      * classes and 20,000 records. For details, see [Data
-     * preparation](https://cloud.ibm.com/docs/services/natural-language-classifier/using-your-data.html).
+     * preparation](https://cloud.ibm.com/docs/services/natural-language-classifier?topic=natural-language-classifier-using-your-data).
      *
      * @return the trainingData
      */
