@@ -2596,7 +2596,8 @@ public class IBMWatsonMockResponses {
         '"credential_type" : "username_password",' +
         '"url" : "login.salesforce.com",' +
         '"username" : "user@email.address"' +
-      '}' +
+      '},' +
+      '"status" : "connected"' +
     '}';
   }
 
