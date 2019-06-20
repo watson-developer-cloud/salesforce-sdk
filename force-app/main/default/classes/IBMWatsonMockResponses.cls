@@ -708,7 +708,23 @@ public class IBMWatsonMockResponses {
               '"value": {' +
                 '"input": {' +
                   '"text": "text"' +
-                '}' +
+                '},' +
+                '"intents": [' +
+                  '{' +
+                    '"intent": "test_intent", ' +
+                    '"confidence": 0.314159' +
+                  '}' +
+                '],' +
+                '"entities": [' +
+                  '{' +
+                    '"entity": "test_entity", ' +
+                    '"location": [' +
+                      '10' +
+                    '], ' +
+                    '"value": "Value of test_entity", ' +
+                    '"confidence": 0.314159' +
+                  '}' +
+                ']' +
               '}' +
             '}' +
             '],' +
