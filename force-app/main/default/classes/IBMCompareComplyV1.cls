@@ -214,60 +214,6 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
   }
 
   /**
-   * Delete a specified feedback entry.
-   *
-   * Deletes a feedback entry with a specified `feedback_id`.
-   *
-   * @param deleteFeedbackOptions the {@link IBMCompareComplyV1Models.DeleteFeedbackOptions} containing the options for the call
-   * @return the service call
-   */
-  public void deleteFeedback(IBMCompareComplyV1Models.DeleteFeedbackOptions deleteFeedbackOptions) {
-    IBMWatsonValidator.notNull(deleteFeedbackOptions, 'deleteFeedbackOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/feedback/{0}', new String[]{ deleteFeedbackOptions.feedbackId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=deleteFeedback');
-    Map<String, String> requestHeaders = (deleteFeedbackOptions != null) ? deleteFeedbackOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    if (deleteFeedbackOptions.model() != null) {
-      builder.query('model', deleteFeedbackOptions.model());
-    }
-
-    createServiceCall(builder.build(), null);
-  }
-
-  /**
-   * List a specified feedback entry.
-   *
-   * Lists a feedback entry with a specified `feedback_id`.
-   *
-   * @param getFeedbackOptions the {@link IBMCompareComplyV1Models.GetFeedbackOptions} containing the options for the call
-   * @return the {@link IBMCompareComplyV1Models.GetFeedback} with the response
-   */
-  public IBMCompareComplyV1Models.GetFeedback getFeedback(IBMCompareComplyV1Models.GetFeedbackOptions getFeedbackOptions) {
-    IBMWatsonValidator.notNull(getFeedbackOptions, 'getFeedbackOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/feedback/{0}', new String[]{ getFeedbackOptions.feedbackId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=getFeedback');
-    Map<String, String> requestHeaders = (getFeedbackOptions != null) ? getFeedbackOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    if (getFeedbackOptions.model() != null) {
-      builder.query('model', getFeedbackOptions.model());
-    }
-
-    return (IBMCompareComplyV1Models.GetFeedback) createServiceCall(builder.build(), IBMCompareComplyV1Models.GetFeedback.class);
-  }
-
-  /**
    * List the feedback in a document.
    *
    * Lists the feedback in a document.
@@ -339,13 +285,68 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
   }
 
   /**
+   * Get a specified feedback entry.
+   *
+   * Gets a feedback entry with a specified `feedback_id`.
+   *
+   * @param getFeedbackOptions the {@link IBMCompareComplyV1Models.GetFeedbackOptions} containing the options for the call
+   * @return the {@link IBMCompareComplyV1Models.GetFeedback} with the response
+   */
+  public IBMCompareComplyV1Models.GetFeedback getFeedback(IBMCompareComplyV1Models.GetFeedbackOptions getFeedbackOptions) {
+    IBMWatsonValidator.notNull(getFeedbackOptions, 'getFeedbackOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/feedback/{0}', new String[]{ getFeedbackOptions.feedbackId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=getFeedback');
+    Map<String, String> requestHeaders = (getFeedbackOptions != null) ? getFeedbackOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (getFeedbackOptions.model() != null) {
+      builder.query('model', getFeedbackOptions.model());
+    }
+
+    return (IBMCompareComplyV1Models.GetFeedback) createServiceCall(builder.build(), IBMCompareComplyV1Models.GetFeedback.class);
+  }
+
+  /**
+   * Delete a specified feedback entry.
+   *
+   * Deletes a feedback entry with a specified `feedback_id`.
+   *
+   * @param deleteFeedbackOptions the {@link IBMCompareComplyV1Models.DeleteFeedbackOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteFeedback(IBMCompareComplyV1Models.DeleteFeedbackOptions deleteFeedbackOptions) {
+    IBMWatsonValidator.notNull(deleteFeedbackOptions, 'deleteFeedbackOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/feedback/{0}', new String[]{ deleteFeedbackOptions.feedbackId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=deleteFeedback');
+    Map<String, String> requestHeaders = (deleteFeedbackOptions != null) ? deleteFeedbackOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (deleteFeedbackOptions.model() != null) {
+      builder.query('model', deleteFeedbackOptions.model());
+    }
+
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
    * Submit a batch-processing request.
    *
    * Run Compare and Comply methods over a collection of input documents.
+   *
    * **Important:** Batch processing requires the use of the [IBM Cloud Object Storage
-   * service](https://cloud.ibm.com/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
+   * service](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about-ibm-cloud-object-storage).
    * The use of IBM Cloud Object Storage with Compare and Comply is discussed at [Using batch
-   * processing](https://cloud.ibm.com/docs/services/compare-comply/batching.html#before-you-batch).
+   * processing](https://cloud.ibm.com/docs/services/compare-comply?topic=compare-comply-batching#before-you-batch).
    *
    * @param createBatchOptions the {@link IBMCompareComplyV1Models.CreateBatchOptions} containing the options for the call
    * @return the {@link IBMCompareComplyV1Models.BatchStatus} with the response
@@ -385,6 +386,29 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
   }
 
   /**
+   * List submitted batch-processing jobs.
+   *
+   * Lists batch-processing jobs submitted by users.
+   *
+   * @param listBatchesOptions the {@link IBMCompareComplyV1Models.ListBatchesOptions} containing the options for the call
+   * @return the {@link IBMCompareComplyV1Models.Batches} with the response
+   */
+  public IBMCompareComplyV1Models.Batches listBatches(IBMCompareComplyV1Models.ListBatchesOptions listBatchesOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/batches');
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=listBatches');
+    Map<String, String> requestHeaders = (listBatchesOptions != null) ? listBatchesOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    return (IBMCompareComplyV1Models.Batches) createServiceCall(builder.build(), IBMCompareComplyV1Models.Batches.class);
+  }
+
+  /**
    * Get information about a specific batch-processing job.
    *
    * Gets information about a batch-processing job with a specified ID.
@@ -406,29 +430,6 @@ public class IBMCompareComplyV1 extends IBMWatsonService {
     builder.query('version', versionDate);
 
     return (IBMCompareComplyV1Models.BatchStatus) createServiceCall(builder.build(), IBMCompareComplyV1Models.BatchStatus.class);
-  }
-
-  /**
-   * List submitted batch-processing jobs.
-   *
-   * Lists batch-processing jobs submitted by users.
-   *
-   * @param listBatchesOptions the {@link IBMCompareComplyV1Models.ListBatchesOptions} containing the options for the call
-   * @return the {@link IBMCompareComplyV1Models.Batches} with the response
-   */
-  public IBMCompareComplyV1Models.Batches listBatches(IBMCompareComplyV1Models.ListBatchesOptions listBatchesOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/batches');
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=compare-comply;service_version=V1;operation_id=listBatches');
-    Map<String, String> requestHeaders = (listBatchesOptions != null) ? listBatchesOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-
-    return (IBMCompareComplyV1Models.Batches) createServiceCall(builder.build(), IBMCompareComplyV1Models.Batches.class);
   }
 
   /**
