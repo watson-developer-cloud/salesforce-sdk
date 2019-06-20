@@ -48,15 +48,6 @@ public class IBMAssistantV2Models {
       this.location_serialized_name = location;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      CaptureGroup ret = (CaptureGroup) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -68,8 +59,8 @@ public class IBMAssistantV2Models {
     /**
      * Gets the assistantId.
      *
-     * Unique identifier of the assistant. You can find the assistant ID of an assistant on the **Assistants** tab of
-     * the Watson Assistant tool. For information about creating assistants, see the
+     * Unique identifier of the assistant. To find the assistant ID in the Watson Assistant user interface, open the
+     * assistant settings and click **API Details**. For information about creating assistants, see the
      * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task).
      *
      * **Note:** Currently, the v2 API does not support creating assistants.
@@ -166,8 +157,8 @@ public class IBMAssistantV2Models {
     /**
      * Gets the assistantId.
      *
-     * Unique identifier of the assistant. You can find the assistant ID of an assistant on the **Assistants** tab of
-     * the Watson Assistant tool. For information about creating assistants, see the
+     * Unique identifier of the assistant. To find the assistant ID in the Watson Assistant user interface, open the
+     * assistant settings and click **API Details**. For information about creating assistants, see the
      * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task).
      *
      * **Note:** Currently, the v2 API does not support creating assistants.
@@ -331,15 +322,6 @@ public class IBMAssistantV2Models {
       this.message_serialized_name = message;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      DialogLogMessage ret = (DialogLogMessage) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -649,15 +631,6 @@ public class IBMAssistantV2Models {
       this.conditions_serialized_name = conditions;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      DialogNodesVisited ret = (DialogNodesVisited) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -676,6 +649,12 @@ public class IBMAssistantV2Models {
     private String message_to_human_agent_serialized_name;
     private String topic_serialized_name;
     private List<DialogSuggestion> suggestions_serialized_name;
+
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public DialogRuntimeResponseGeneric() { }
  
     /**
      * Gets the responseType.
@@ -827,104 +806,30 @@ public class IBMAssistantV2Models {
     public List<DialogSuggestion> getSuggestions() {
       return suggestions_serialized_name;
     }
-
-    /**
-     * Sets the responseType.
-     *
-     * @param responseType the new responseType
-     */
-    public void setResponseType(final String responseType) {
-      this.response_type_serialized_name = responseType;
+  
+    private DialogRuntimeResponseGeneric(DialogRuntimeResponseGenericBuilder builder) {
+      IBMWatsonValidator.notNull(builder.responseType, 'responseType cannot be null');
+      this.response_type_serialized_name = builder.responseType;
+      this.text_serialized_name = builder.text;
+      this.time_serialized_name = builder.xtime;
+      this.typing_serialized_name = builder.typing;
+      this.source_serialized_name = builder.source;
+      this.title_serialized_name = builder.title;
+      this.description_serialized_name = builder.description;
+      this.preference_serialized_name = builder.preference;
+      this.options_serialized_name = builder.options;
+      this.message_to_human_agent_serialized_name = builder.messageToHumanAgent;
+      this.topic_serialized_name = builder.topic;
+      this.suggestions_serialized_name = builder.suggestions;
     }
 
     /**
-     * Sets the text.
+     * New builder.
      *
-     * @param text the new text
+     * @return a DialogRuntimeResponseGeneric builder
      */
-    public void setText(final String text) {
-      this.text_serialized_name = text;
-    }
-
-    /**
-     * Sets the xtime.
-     *
-     * @param xtime the new xtime
-     */
-    public void setXtime(final long xtime) {
-      this.time_serialized_name = xtime;
-    }
-
-    /**
-     * Sets the typing.
-     *
-     * @param typing the new typing
-     */
-    public void setTyping(final Boolean typing) {
-      this.typing_serialized_name = typing;
-    }
-
-    /**
-     * Sets the source.
-     *
-     * @param source the new source
-     */
-    public void setSource(final String source) {
-      this.source_serialized_name = source;
-    }
-
-    /**
-     * Sets the title.
-     *
-     * @param title the new title
-     */
-    public void setTitle(final String title) {
-      this.title_serialized_name = title;
-    }
-
-    /**
-     * Sets the description.
-     *
-     * @param description the new description
-     */
-    public void setDescription(final String description) {
-      this.description_serialized_name = description;
-    }
-
-    /**
-     * Sets the preference.
-     *
-     * @param preference the new preference
-     */
-    public void setPreference(final String preference) {
-      this.preference_serialized_name = preference;
-    }
-
-    /**
-     * Sets the options.
-     *
-     * @param options the new options
-     */
-    public void setOptions(final List<DialogNodeOutputOptionsElement> options) {
-      this.options_serialized_name = options;
-    }
-
-    /**
-     * Sets the messageToHumanAgent.
-     *
-     * @param messageToHumanAgent the new messageToHumanAgent
-     */
-    public void setMessageToHumanAgent(final String messageToHumanAgent) {
-      this.message_to_human_agent_serialized_name = messageToHumanAgent;
-    }
-
-    /**
-     * Sets the suggestions.
-     *
-     * @param suggestions the new suggestions
-     */
-    public void setSuggestions(final List<DialogSuggestion> suggestions) {
-      this.suggestions_serialized_name = suggestions;
+    public DialogRuntimeResponseGenericBuilder newBuilder() {
+      return new DialogRuntimeResponseGenericBuilder(this);
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -933,6 +838,7 @@ public class IBMAssistantV2Models {
       }
 
       DialogRuntimeResponseGeneric ret = (DialogRuntimeResponseGeneric) super.deserialize(jsonString, jsonMap, classType);
+      DialogRuntimeResponseGenericBuilder retBuilder = ret.newBuilder();
 
       // calling custom deserializer for options
       List<DialogNodeOutputOptionsElement> newOptions = new List<DialogNodeOutputOptionsElement>();
@@ -944,7 +850,7 @@ public class IBMAssistantV2Models {
           DialogNodeOutputOptionsElement newItem = (DialogNodeOutputOptionsElement) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogNodeOutputOptionsElement.class);
           newOptions.add(newItem);
         }
-        ret.options_serialized_name = newOptions;
+        retBuilder.options(newOptions);
       }
 
       // calling custom deserializer for suggestions
@@ -957,10 +863,231 @@ public class IBMAssistantV2Models {
           DialogSuggestion newItem = (DialogSuggestion) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DialogSuggestion.class);
           newSuggestions.add(newItem);
         }
-        ret.suggestions_serialized_name = newSuggestions;
+        retBuilder.suggestions(newSuggestions);
       }
 
-      return ret;
+      return retBuilder.build();
+    }
+  }
+
+  /**
+   * DialogRuntimeResponseGeneric Builder.
+   */
+  public class DialogRuntimeResponseGenericBuilder {
+    private String responseType;
+    private String text;
+    private Long xtime;
+    private Boolean typing;
+    private String source;
+    private String title;
+    private String description;
+    private String preference;
+    private List<DialogNodeOutputOptionsElement> options;
+    private String messageToHumanAgent;
+    private String topic;
+    private List<DialogSuggestion> suggestions;
+
+    private DialogRuntimeResponseGenericBuilder(DialogRuntimeResponseGeneric dialogRuntimeResponseGeneric) {
+      this.responseType = dialogRuntimeResponseGeneric.response_type_serialized_name;
+      this.text = dialogRuntimeResponseGeneric.text_serialized_name;
+      this.xtime = dialogRuntimeResponseGeneric.time_serialized_name;
+      this.typing = dialogRuntimeResponseGeneric.typing_serialized_name;
+      this.source = dialogRuntimeResponseGeneric.source_serialized_name;
+      this.title = dialogRuntimeResponseGeneric.title_serialized_name;
+      this.description = dialogRuntimeResponseGeneric.description_serialized_name;
+      this.preference = dialogRuntimeResponseGeneric.preference_serialized_name;
+      this.options = dialogRuntimeResponseGeneric.options_serialized_name;
+      this.messageToHumanAgent = dialogRuntimeResponseGeneric.message_to_human_agent_serialized_name;
+      this.topic = dialogRuntimeResponseGeneric.topic_serialized_name;
+      this.suggestions = dialogRuntimeResponseGeneric.suggestions_serialized_name;
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DialogRuntimeResponseGenericBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param responseType the responseType
+     */
+    public DialogRuntimeResponseGenericBuilder(String responseType) {
+      this.responseType = responseType;
+    }
+
+    /**
+     * Builds a DialogRuntimeResponseGeneric.
+     *
+     * @return the dialogRuntimeResponseGeneric
+     */
+    public DialogRuntimeResponseGeneric build() {
+      return new DialogRuntimeResponseGeneric(this);
+    }
+
+    /**
+     * Adds an options to options.
+     *
+     * @param options the new options
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder addOptions(DialogNodeOutputOptionsElement options) {
+      IBMWatsonValidator.notNull(options, 'options cannot be null');
+      if (this.options == null) {
+        this.options = new List<DialogNodeOutputOptionsElement>();
+      }
+      this.options.add(options);
+      return this;
+    }
+
+    /**
+     * Adds an suggestions to suggestions.
+     *
+     * @param suggestions the new suggestions
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder addSuggestions(DialogSuggestion suggestions) {
+      IBMWatsonValidator.notNull(suggestions, 'suggestions cannot be null');
+      if (this.suggestions == null) {
+        this.suggestions = new List<DialogSuggestion>();
+      }
+      this.suggestions.add(suggestions);
+      return this;
+    }
+
+    /**
+     * Set the responseType.
+     *
+     * @param responseType the responseType
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder responseType(String responseType) {
+      this.responseType = responseType;
+      return this;
+    }
+
+    /**
+     * Set the text.
+     *
+     * @param text the text
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder text(String text) {
+      this.text = text;
+      return this;
+    }
+
+    /**
+     * Set the xtime.
+     *
+     * @param xtime the xtime
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder xtime(Long xtime) {
+      this.xtime = xtime;
+      return this;
+    }
+
+    /**
+     * Set the typing.
+     *
+     * @param typing the typing
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder typing(Boolean typing) {
+      this.typing = typing;
+      return this;
+    }
+
+    /**
+     * Set the source.
+     *
+     * @param source the source
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder source(String source) {
+      this.source = source;
+      return this;
+    }
+
+    /**
+     * Set the title.
+     *
+     * @param title the title
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder title(String title) {
+      this.title = title;
+      return this;
+    }
+
+    /**
+     * Set the description.
+     *
+     * @param description the description
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder description(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /**
+     * Set the preference.
+     *
+     * @param preference the preference
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder preference(String preference) {
+      this.preference = preference;
+      return this;
+    }
+
+    /**
+     * Set the options.
+     * Existing options will be replaced.
+     *
+     * @param options the options
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder options(List<DialogNodeOutputOptionsElement> options) {
+      this.options = options;
+      return this;
+    }
+
+    /**
+     * Set the messageToHumanAgent.
+     *
+     * @param messageToHumanAgent the messageToHumanAgent
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder messageToHumanAgent(String messageToHumanAgent) {
+      this.messageToHumanAgent = messageToHumanAgent;
+      return this;
+    }
+
+    /**
+     * Set the topic.
+     *
+     * @param topic the topic
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder topic(String topic) {
+      this.topic = topic;
+      return this;
+    }
+
+    /**
+     * Set the suggestions.
+     * Existing suggestions will be replaced.
+     *
+     * @param suggestions the suggestions
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder suggestions(List<DialogSuggestion> suggestions) {
+      this.suggestions = suggestions;
+      return this;
     }
   }
 
@@ -1289,12 +1416,45 @@ public class IBMAssistantV2Models {
       this.turn_count_serialized_name = turnCount;
     }
 
+  }
+
+  /**
+   * Contains information specific to a particular skill used by the Assistant.
+   */
+  public class MessageContextSkill extends IBMWatsonGenericModel {
+    private IBMWatsonMapModel user_defined_serialized_name;
+ 
+    /**
+     * Gets the userDefined.
+     *
+     * Arbitrary variables that can be read and written by a particular skill.
+     *
+     * @return the userDefined
+     */
+    @AuraEnabled
+    public IBMWatsonMapModel getUserDefined() {
+      return user_defined_serialized_name;
+    }
+
+    /**
+     * Sets the userDefined.
+     *
+     * @param userDefined the new userDefined
+     */
+    public void setUserDefined(final IBMWatsonMapModel userDefined) {
+      this.user_defined_serialized_name = userDefined;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      MessageContextGlobalSystem ret = (MessageContextGlobalSystem) super.deserialize(jsonString, jsonMap, classType);
+      MessageContextSkill ret = (MessageContextSkill) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for userDefined
+      IBMWatsonMapModel newUserDefined = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getUserDefined()), (Map<String, Object>) jsonMap.get('user_defined_serialized_name'), IBMWatsonMapModel.class);
+      ret.setUserDefined(newUserDefined);
 
       return ret;
     }
@@ -1369,8 +1529,7 @@ public class IBMAssistantV2Models {
     /**
      * Gets the text.
      *
-     * The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must
-     * be no longer than 2048 characters.
+     * The text of the user input. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the text
      */
@@ -1430,12 +1589,12 @@ public class IBMAssistantV2Models {
     }
   
     private MessageInput(MessageInputBuilder builder) {
-      message_type_serialized_name = builder.messageType;
-      text_serialized_name = builder.text;
-      options_serialized_name = builder.options;
-      intents_serialized_name = builder.intents;
-      entities_serialized_name = builder.entities;
-      suggestion_id_serialized_name = builder.suggestionId;
+      this.message_type_serialized_name = builder.messageType;
+      this.text_serialized_name = builder.text;
+      this.options_serialized_name = builder.options;
+      this.intents_serialized_name = builder.intents;
+      this.entities_serialized_name = builder.entities;
+      this.suggestion_id_serialized_name = builder.suggestionId;
     }
 
     /**
@@ -1719,15 +1878,6 @@ public class IBMAssistantV2Models {
       this.return_context_serialized_name = returnContext;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      MessageInputOptions ret = (MessageInputOptions) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -1742,8 +1892,8 @@ public class IBMAssistantV2Models {
     /**
      * Gets the assistantId.
      *
-     * Unique identifier of the assistant. You can find the assistant ID of an assistant on the **Assistants** tab of
-     * the Watson Assistant tool. For information about creating assistants, see the
+     * Unique identifier of the assistant. To find the assistant ID in the Watson Assistant user interface, open the
+     * assistant settings and click **API Details**. For information about creating assistants, see the
      * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task).
      *
      * **Note:** Currently, the v2 API does not support creating assistants.
@@ -2537,15 +2687,6 @@ public class IBMAssistantV2Models {
       this.confidence_serialized_name = confidence;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      RuntimeIntent ret = (RuntimeIntent) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -2575,15 +2716,6 @@ public class IBMAssistantV2Models {
       this.session_id_serialized_name = sessionId;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SessionResponse ret = (SessionResponse) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
 }

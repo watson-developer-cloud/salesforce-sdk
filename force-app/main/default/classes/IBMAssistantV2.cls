@@ -1,6 +1,6 @@
 /**
- * The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and integrated
- * dialog tools to create conversation flows between your apps and your users.
+ * The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and an integrated
+ * dialog editor to create conversation flows between your apps and your users.
  *
  * @version V2
  * @see <a href="http://www.ibm.com/watson/developercloud/assistant.html">Assistant</a>
