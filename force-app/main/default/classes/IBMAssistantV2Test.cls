@@ -33,6 +33,8 @@ private class IBMAssistantV2Test {
   private static String INFO;
   private static String BUTTON;
   private static String USER_DEFINED;
+  private static String RESPONSE_TYPE;
+  private static String PREFERENCE;
 
   static {
     VERSION = '2018-09-20';
@@ -68,6 +70,8 @@ private class IBMAssistantV2Test {
     INFO = 'info';
     BUTTON = 'button';
     USER_DEFINED = 'user_defined';
+    RESPONSE_TYPE = 'type';
+    PREFERENCE = 'preference';
   }
 
   static testMethod void testCaptureGroup() {
@@ -265,6 +269,53 @@ private class IBMAssistantV2Test {
 
     System.assertEquals(CONFIDENCE, runtimeIntent.getConfidence());
     System.assertEquals(INTENT, runtimeIntent.getIntent());
+    Test.stopTest();
+  }
+
+  static testMethod void testDialogRuntimeResponseGeneric() {
+    Test.startTest();
+
+    IBMAssistantV2Models.DialogNodeOutputOptionsElement option1 = new IBMAssistantV2Models.DialogNodeOutputOptionsElement();
+    IBMAssistantV2Models.DialogNodeOutputOptionsElement option2 = new IBMAssistantV2Models.DialogNodeOutputOptionsElement();
+    List<IBMAssistantV2Models.DialogNodeOutputOptionsElement> options = new List<IBMAssistantV2Models.DialogNodeOutputOptionsElement> { option1 };
+    IBMAssistantV2Models.DialogSuggestion suggestion1 = new IBMAssistantV2Models.DialogSuggestion();
+    IBMAssistantV2Models.DialogSuggestion suggestion2 = new IBMAssistantV2Models.DialogSuggestion();
+    List<IBMAssistantV2Models.DialogSuggestion> suggestions = new List<IBMAssistantV2Models.DialogSuggestion> { suggestion1 };
+
+    IBMAssistantV2Models.DialogRuntimeResponseGeneric generic = new IBMAssistantV2Models.DialogRuntimeResponseGenericBuilder()
+      .responseType(RESPONSE_TYPE)
+      .text(TEXT)
+      .xtime(TIME_VAL)
+      .typing(true)
+      .source(SOURCE)
+      .title(TITLE)
+      .description(DESCRIPTION)
+      .preference(PREFERENCE)
+      .options(options)
+      .messageToHumanAgent(MESSAGE)
+      .topic(TOPIC)
+      .suggestions(suggestions)
+      .addOptions(option2)
+      .addSuggestions(suggestion2)
+      .build();
+    generic = generic.newBuilder().build();
+
+    options.add(option2);
+    suggestions.add(suggestion2);
+
+    System.assertEquals(RESPONSE_TYPE, generic.getResponseType());
+    System.assertEquals(TEXT, generic.getText());
+    System.assertEquals(TIME_VAL, generic.getXtime());
+    System.assert(generic.getTyping());
+    System.assertEquals(SOURCE, generic.getSource());
+    System.assertEquals(TITLE, generic.getTitle());
+    System.assertEquals(DESCRIPTION, generic.getDescription());
+    System.assertEquals(PREFERENCE, generic.getPreference());
+    System.assertEquals(options, generic.getOptions());
+    System.assertEquals(MESSAGE, generic.getMessageToHumanAgent());
+    System.assertEquals(TOPIC, generic.getTopic());
+    System.assertEquals(suggestions, generic.getSuggestions());
+
     Test.stopTest();
   }
 
