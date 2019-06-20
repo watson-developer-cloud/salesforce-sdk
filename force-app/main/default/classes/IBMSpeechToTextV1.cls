@@ -26,6 +26,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
 
   /**
    * Instantiates a new `IBMSpeechToTextV1`.
+   *
    */
   public IBMSpeechToTextV1() {
     super('speech_to_text', 'v1');
@@ -54,12 +55,39 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
+   * List models.
+   *
+   * Lists all language models that are available for use with the service. The information includes the name of the
+   * model and its minimum sampling rate in Hertz, among other things.
+   *
+   * **See also:** [Languages and
+   * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models).
+   *
+   * @param listModelsOptions the {@link IBMSpeechToTextV1Models.ListModelsOptions} containing the options for the call
+   * @return the {@link IBMSpeechToTextV1Models.SpeechModels} with the response
+   */
+  public IBMSpeechToTextV1Models.SpeechModels listModels(IBMSpeechToTextV1Models.ListModelsOptions listModelsOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/models');
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listModels');
+    Map<String, String> requestHeaders = (listModelsOptions != null) ? listModelsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+
+    return (IBMSpeechToTextV1Models.SpeechModels) createServiceCall(builder.build(), IBMSpeechToTextV1Models.SpeechModels.class);
+  }
+
+  /**
    * Get a model.
    *
    * Gets information for a single specified language model that is available for use with the service. The information
    * includes the name of the model and its minimum sampling rate in Hertz, among other things.
    *
-   * **See also:** [Languages and models](https://cloud.ibm.com/docs/services/speech-to-text/models.html).
+   * **See also:** [Languages and
+   * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models).
    *
    * @param getModelOptions the {@link IBMSpeechToTextV1Models.GetModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.SpeechModel} with the response
@@ -80,40 +108,16 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * List models.
-   *
-   * Lists all language models that are available for use with the service. The information includes the name of the
-   * model and its minimum sampling rate in Hertz, among other things.
-   *
-   * **See also:** [Languages and models](https://cloud.ibm.com/docs/services/speech-to-text/models.html).
-   *
-   * @param listModelsOptions the {@link IBMSpeechToTextV1Models.ListModelsOptions} containing the options for the call
-   * @return the {@link IBMSpeechToTextV1Models.SpeechModels} with the response
-   */
-  public IBMSpeechToTextV1Models.SpeechModels listModels(IBMSpeechToTextV1Models.ListModelsOptions listModelsOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/models');
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listModels');
-    Map<String, String> requestHeaders = (listModelsOptions != null) ? listModelsOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-
-    return (IBMSpeechToTextV1Models.SpeechModels) createServiceCall(builder.build(), IBMSpeechToTextV1Models.SpeechModels.class);
-  }
-
-  /**
    * Recognize audio.
    *
    * Sends audio and returns transcription results for a recognition request. You can pass a maximum of 100 MB and a
    * minimum of 100 bytes of audio with a request. The service automatically detects the endianness of the incoming
    * audio and, for audio that includes multiple channels, downmixes the audio to one-channel mono during transcoding.
-   * The method returns only final results; to enable interim results, use the WebSocket API.
+   * The method returns only final results; to enable interim results, use the WebSocket API. (With the `curl` command,
+   * use the `--data-binary` option to upload the file for the request.)
    *
    * **See also:** [Making a basic HTTP
-   * request](https://cloud.ibm.com/docs/services/speech-to-text/http.html#HTTP-basic).
+   * request](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-http#HTTP-basic).
    *
    * ### Streaming mode
    *
@@ -124,8 +128,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * `inactivity_timeout` parameter to change the default of 30 seconds.
    *
    * **See also:**
-   * * [Audio transmission](https://cloud.ibm.com/docs/services/speech-to-text/input.html#transmission)
-   * * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts)
+   * * [Audio transmission](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#transmission)
+   * * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#timeouts)
    *
    * ### Audio formats (content types)
    *
@@ -160,7 +164,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * the minimum required rate, the service down-samples the audio to the appropriate rate. If the sampling rate of the
    * audio is lower than the minimum required rate, the request fails.
    *
-   *  **See also:** [Audio formats](https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html).
+   *  **See also:** [Audio
+   * formats](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-audio-formats#audio-formats).
    *
    * ### Multipart speech recognition
    *
@@ -168,14 +173,15 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * The HTTP `POST` method of the service also supports multipart speech recognition. With multipart requests, you pass
    * all audio data as multipart form data. You specify some parameters as request headers and query parameters, but you
-   * pass JSON metadata as form data to control most aspects of the transcription.
+   * pass JSON metadata as form data to control most aspects of the transcription. You can use multipart recognition to
+   * pass multiple audio files with a single request.
    *
-   * The multipart approach is intended for use with browsers for which JavaScript is disabled or when the parameters
-   * used with the request are greater than the 8 KB limit imposed by most HTTP servers and proxies. You can encounter
-   * this limit, for example, if you want to spot a very large number of keywords.
+   * Use the multipart approach with browsers for which JavaScript is disabled or when the parameters used with the
+   * request are greater than the 8 KB limit imposed by most HTTP servers and proxies. You can encounter this limit, for
+   * example, if you want to spot a very large number of keywords.
    *
    * **See also:** [Making a multipart HTTP
-   * request](https://cloud.ibm.com/docs/services/speech-to-text/http.html#HTTP-multi).
+   * request](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-http#HTTP-multi).
    *
    * @param recognizeOptions the {@link IBMSpeechToTextV1Models.RecognizeOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.SpeechRecognitionResults} with the response
@@ -248,72 +254,104 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (recognizeOptions.redaction() != null) {
       builder.query('redaction', String.valueOf(recognizeOptions.redaction()));
     }
+    if (recognizeOptions.processingMetrics() != null) {
+      builder.query('processing_metrics', String.valueOf(recognizeOptions.processingMetrics()));
+    }
+    if (recognizeOptions.processingMetricsInterval() != null) {
+      builder.query('processing_metrics_interval', String.valueOf(recognizeOptions.processingMetricsInterval()));
+    }
+    if (recognizeOptions.audioMetrics() != null) {
+      builder.query('audio_metrics', String.valueOf(recognizeOptions.audioMetrics()));
+    }
     builder.bodyContent(recognizeOptions.contentType(), null, null, recognizeOptions.audio());
 
     return (IBMSpeechToTextV1Models.SpeechRecognitionResults) createServiceCall(builder.build(), IBMSpeechToTextV1Models.SpeechRecognitionResults.class);
   }
 
   /**
-   * Check a job.
+   * Register a callback.
    *
-   * Returns information about the specified job. The response always includes the status of the job and its creation
-   * and update times. If the status is `completed`, the response includes the results of the recognition request. You
-   * must use credentials for the instance of the service that owns a job to list information about it.
+   * Registers a callback URL with the service for use with subsequent asynchronous recognition requests. The service
+   * attempts to register, or white-list, the callback URL if it is not already registered by sending a `GET` request to
+   * the callback URL. The service passes a random alphanumeric challenge string via the `challenge_string` parameter of
+   * the request. The request includes an `Accept` header that specifies `text/plain` as the required response type.
    *
-   * You can use the method to retrieve the results of any job, regardless of whether it was submitted with a callback
-   * URL and the `recognitions.completed_with_results` event, and you can retrieve the results multiple times for as
-   * long as they remain available. Use the **Check jobs** method to request information about the most recent jobs
-   * associated with the calling credentials.
+   * To be registered successfully, the callback URL must respond to the `GET` request from the service. The response
+   * must send status code 200 and must include the challenge string in its body. Set the `Content-Type` response header
+   * to `text/plain`. Upon receiving this response, the service responds to the original registration request with
+   * response code 201.
    *
-   * **See also:** [Checking the status and retrieving the results of a
-   * job](https://cloud.ibm.com/docs/services/speech-to-text/async.html#job).
+   * The service sends only a single `GET` request to the callback URL. If the service does not receive a reply with a
+   * response code of 200 and a body that echoes the challenge string sent by the service within five seconds, it does
+   * not white-list the URL; it instead sends status code 400 in response to the **Register a callback** request. If the
+   * requested callback URL is already white-listed, the service responds to the initial registration request with
+   * response code 200.
    *
-   * @param checkJobOptions the {@link IBMSpeechToTextV1Models.CheckJobOptions} containing the options for the call
-   * @return the {@link IBMSpeechToTextV1Models.RecognitionJob} with the response
+   * If you specify a user secret with the request, the service uses it as a key to calculate an HMAC-SHA1 signature of
+   * the challenge string in its response to the `POST` request. It sends this signature in the `X-Callback-Signature`
+   * header of its `GET` request to the URL during registration. It also uses the secret to calculate a signature over
+   * the payload of every callback notification that uses the URL. The signature provides authentication and data
+   * integrity for HTTP communications.
+   *
+   * After you successfully register a callback URL, you can use it with an indefinite number of recognition requests.
+   * You can register a maximum of 20 callback URLS in a one-hour span of time.
+   *
+   * **See also:** [Registering a callback
+   * URL](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#register).
+   *
+   * @param registerCallbackOptions the {@link IBMSpeechToTextV1Models.RegisterCallbackOptions} containing the options for the call
+   * @return the {@link IBMSpeechToTextV1Models.RegisterStatus} with the response
    */
-  public IBMSpeechToTextV1Models.RecognitionJob checkJob(IBMSpeechToTextV1Models.CheckJobOptions checkJobOptions) {
-    IBMWatsonValidator.notNull(checkJobOptions, 'checkJobOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/recognitions/{0}', new String[]{ checkJobOptions.id() }));
+  public IBMSpeechToTextV1Models.RegisterStatus registerCallback(IBMSpeechToTextV1Models.RegisterCallbackOptions registerCallbackOptions) {
+    IBMWatsonValidator.notNull(registerCallbackOptions, 'registerCallbackOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/register_callback');
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=checkJob');
-    Map<String, String> requestHeaders = (checkJobOptions != null) ? checkJobOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=registerCallback');
+    Map<String, String> requestHeaders = (registerCallbackOptions != null) ? registerCallbackOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
+    if (registerCallbackOptions.callbackUrl() != null) {
+      builder.query('callback_url', registerCallbackOptions.callbackUrl());
+    }
+    if (registerCallbackOptions.userSecret() != null) {
+      builder.query('user_secret', registerCallbackOptions.userSecret());
+    }
+    builder.bodyJson('{}');
 
-    return (IBMSpeechToTextV1Models.RecognitionJob) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RecognitionJob.class);
+    return (IBMSpeechToTextV1Models.RegisterStatus) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RegisterStatus.class);
   }
 
   /**
-   * Check jobs.
+   * Unregister a callback.
    *
-   * Returns the ID and status of the latest 100 outstanding jobs associated with the credentials with which it is
-   * called. The method also returns the creation and update times of each job, and, if a job was created with a
-   * callback URL and a user token, the user token for the job. To obtain the results for a job whose status is
-   * `completed` or not one of the latest 100 outstanding jobs, use the **Check a job** method. A job and its results
-   * remain available until you delete them with the **Delete a job** method or until the job's time to live expires,
-   * whichever comes first.
+   * Unregisters a callback URL that was previously white-listed with a **Register a callback** request for use with the
+   * asynchronous interface. Once unregistered, the URL can no longer be used with asynchronous recognition requests.
    *
-   * **See also:** [Checking the status of the latest
-   * jobs](https://cloud.ibm.com/docs/services/speech-to-text/async.html#jobs).
+   * **See also:** [Unregistering a callback
+   * URL](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#unregister).
    *
-   * @param checkJobsOptions the {@link IBMSpeechToTextV1Models.CheckJobsOptions} containing the options for the call
-   * @return the {@link IBMSpeechToTextV1Models.RecognitionJobs} with the response
+   * @param unregisterCallbackOptions the {@link IBMSpeechToTextV1Models.UnregisterCallbackOptions} containing the options for the call
+   * @return the service call
    */
-  public IBMSpeechToTextV1Models.RecognitionJobs checkJobs(IBMSpeechToTextV1Models.CheckJobsOptions checkJobsOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/recognitions');
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=checkJobs');
-    Map<String, String> requestHeaders = (checkJobsOptions != null) ? checkJobsOptions.requestHeaders() : null;
+  public void unregisterCallback(IBMSpeechToTextV1Models.UnregisterCallbackOptions unregisterCallbackOptions) {
+    IBMWatsonValidator.notNull(unregisterCallbackOptions, 'unregisterCallbackOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/unregister_callback');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=unregisterCallback');
+    Map<String, String> requestHeaders = (unregisterCallbackOptions != null) ? unregisterCallbackOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
+    if (unregisterCallbackOptions.callbackUrl() != null) {
+      builder.query('callback_url', unregisterCallbackOptions.callbackUrl());
+    }
+    builder.bodyJson('{}');
 
-    return (IBMSpeechToTextV1Models.RecognitionJobs) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RecognitionJobs.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -346,9 +384,10 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * You can pass a maximum of 1 GB and a minimum of 100 bytes of audio with a request. The service automatically
    * detects the endianness of the incoming audio and, for audio that includes multiple channels, downmixes the audio to
    * one-channel mono during transcoding. The method returns only final results; to enable interim results, use the
-   * WebSocket API.
+   * WebSocket API. (With the `curl` command, use the `--data-binary` option to upload the file for the request.)
    *
-   * **See also:** [Creating a job](https://cloud.ibm.com/docs/services/speech-to-text/async.html#create).
+   * **See also:** [Creating a
+   * job](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#create).
    *
    * ### Streaming mode
    *
@@ -359,8 +398,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * `inactivity_timeout` parameter to change the default of 30 seconds.
    *
    * **See also:**
-   * * [Audio transmission](https://cloud.ibm.com/docs/services/speech-to-text/input.html#transmission)
-   * * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts)
+   * * [Audio transmission](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#transmission)
+   * * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#timeouts)
    *
    * ### Audio formats (content types)
    *
@@ -395,7 +434,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * the minimum required rate, the service down-samples the audio to the appropriate rate. If the sampling rate of the
    * audio is lower than the minimum required rate, the request fails.
    *
-   *  **See also:** [Audio formats](https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html).
+   *  **See also:** [Audio
+   * formats](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-audio-formats#audio-formats).
    *
    * @param createJobOptions the {@link IBMSpeechToTextV1Models.CreateJobOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.RecognitionJob} with the response
@@ -480,7 +520,79 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     if (createJobOptions.redaction() != null) {
       builder.query('redaction', String.valueOf(createJobOptions.redaction()));
     }
+    if (createJobOptions.processingMetrics() != null) {
+      builder.query('processing_metrics', String.valueOf(createJobOptions.processingMetrics()));
+    }
+    if (createJobOptions.processingMetricsInterval() != null) {
+      builder.query('processing_metrics_interval', String.valueOf(createJobOptions.processingMetricsInterval()));
+    }
+    if (createJobOptions.audioMetrics() != null) {
+      builder.query('audio_metrics', String.valueOf(createJobOptions.audioMetrics()));
+    }
     builder.bodyContent(createJobOptions.contentType(), null, null, createJobOptions.audio());
+
+    return (IBMSpeechToTextV1Models.RecognitionJob) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RecognitionJob.class);
+  }
+
+  /**
+   * Check jobs.
+   *
+   * Returns the ID and status of the latest 100 outstanding jobs associated with the credentials with which it is
+   * called. The method also returns the creation and update times of each job, and, if a job was created with a
+   * callback URL and a user token, the user token for the job. To obtain the results for a job whose status is
+   * `completed` or not one of the latest 100 outstanding jobs, use the **Check a job** method. A job and its results
+   * remain available until you delete them with the **Delete a job** method or until the job's time to live expires,
+   * whichever comes first.
+   *
+   * **See also:** [Checking the status of the latest
+   * jobs](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#jobs).
+   *
+   * @param checkJobsOptions the {@link IBMSpeechToTextV1Models.CheckJobsOptions} containing the options for the call
+   * @return the {@link IBMSpeechToTextV1Models.RecognitionJobs} with the response
+   */
+  public IBMSpeechToTextV1Models.RecognitionJobs checkJobs(IBMSpeechToTextV1Models.CheckJobsOptions checkJobsOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/recognitions');
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=checkJobs');
+    Map<String, String> requestHeaders = (checkJobsOptions != null) ? checkJobsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+
+    return (IBMSpeechToTextV1Models.RecognitionJobs) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RecognitionJobs.class);
+  }
+
+  /**
+   * Check a job.
+   *
+   * Returns information about the specified job. The response always includes the status of the job and its creation
+   * and update times. If the status is `completed`, the response includes the results of the recognition request. You
+   * must use credentials for the instance of the service that owns a job to list information about it.
+   *
+   * You can use the method to retrieve the results of any job, regardless of whether it was submitted with a callback
+   * URL and the `recognitions.completed_with_results` event, and you can retrieve the results multiple times for as
+   * long as they remain available. Use the **Check jobs** method to request information about the most recent jobs
+   * associated with the calling credentials.
+   *
+   * **See also:** [Checking the status and retrieving the results of a
+   * job](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#job).
+   *
+   * @param checkJobOptions the {@link IBMSpeechToTextV1Models.CheckJobOptions} containing the options for the call
+   * @return the {@link IBMSpeechToTextV1Models.RecognitionJob} with the response
+   */
+  public IBMSpeechToTextV1Models.RecognitionJob checkJob(IBMSpeechToTextV1Models.CheckJobOptions checkJobOptions) {
+    IBMWatsonValidator.notNull(checkJobOptions, 'checkJobOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/recognitions/{0}', new String[]{ checkJobOptions.id() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=checkJob');
+    Map<String, String> requestHeaders = (checkJobOptions != null) ? checkJobOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
 
     return (IBMSpeechToTextV1Models.RecognitionJob) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RecognitionJob.class);
   }
@@ -492,7 +604,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * its results are no longer available. The service automatically deletes a job and its results when the time to live
    * for the results expires. You must use credentials for the instance of the service that owns a job to delete it.
    *
-   * **See also:** [Deleting a job](https://cloud.ibm.com/docs/services/speech-to-text/async.html#delete-async).
+   * **See also:** [Deleting a
+   * job](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#delete-async).
    *
    * @param deleteJobOptions the {@link IBMSpeechToTextV1Models.DeleteJobOptions} containing the options for the call
    * @return the service call
@@ -512,91 +625,6 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * Register a callback.
-   *
-   * Registers a callback URL with the service for use with subsequent asynchronous recognition requests. The service
-   * attempts to register, or white-list, the callback URL if it is not already registered by sending a `GET` request to
-   * the callback URL. The service passes a random alphanumeric challenge string via the `challenge_string` parameter of
-   * the request. The request includes an `Accept` header that specifies `text/plain` as the required response type.
-   *
-   * To be registered successfully, the callback URL must respond to the `GET` request from the service. The response
-   * must send status code 200 and must include the challenge string in its body. Set the `Content-Type` response header
-   * to `text/plain`. Upon receiving this response, the service responds to the original registration request with
-   * response code 201.
-   *
-   * The service sends only a single `GET` request to the callback URL. If the service does not receive a reply with a
-   * response code of 200 and a body that echoes the challenge string sent by the service within five seconds, it does
-   * not white-list the URL; it instead sends status code 400 in response to the **Register a callback** request. If the
-   * requested callback URL is already white-listed, the service responds to the initial registration request with
-   * response code 200.
-   *
-   * If you specify a user secret with the request, the service uses it as a key to calculate an HMAC-SHA1 signature of
-   * the challenge string in its response to the `POST` request. It sends this signature in the `X-Callback-Signature`
-   * header of its `GET` request to the URL during registration. It also uses the secret to calculate a signature over
-   * the payload of every callback notification that uses the URL. The signature provides authentication and data
-   * integrity for HTTP communications.
-   *
-   * After you successfully register a callback URL, you can use it with an indefinite number of recognition requests.
-   * You can register a maximum of 20 callback URLS in a one-hour span of time.
-   *
-   * **See also:** [Registering a callback URL](https://cloud.ibm.com/docs/services/speech-to-text/async.html#register).
-   *
-   * @param registerCallbackOptions the {@link IBMSpeechToTextV1Models.RegisterCallbackOptions} containing the options for the call
-   * @return the {@link IBMSpeechToTextV1Models.RegisterStatus} with the response
-   */
-  public IBMSpeechToTextV1Models.RegisterStatus registerCallback(IBMSpeechToTextV1Models.RegisterCallbackOptions registerCallbackOptions) {
-    IBMWatsonValidator.notNull(registerCallbackOptions, 'registerCallbackOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/register_callback');
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=registerCallback');
-    Map<String, String> requestHeaders = (registerCallbackOptions != null) ? registerCallbackOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    if (registerCallbackOptions.callbackUrl() != null) {
-      builder.query('callback_url', registerCallbackOptions.callbackUrl());
-    }
-    if (registerCallbackOptions.userSecret() != null) {
-      builder.query('user_secret', registerCallbackOptions.userSecret());
-    }
-    builder.bodyJson('{}');
-
-    return (IBMSpeechToTextV1Models.RegisterStatus) createServiceCall(builder.build(), IBMSpeechToTextV1Models.RegisterStatus.class);
-  }
-
-  /**
-   * Unregister a callback.
-   *
-   * Unregisters a callback URL that was previously white-listed with a **Register a callback** request for use with the
-   * asynchronous interface. Once unregistered, the URL can no longer be used with asynchronous recognition requests.
-   *
-   * **See also:** [Unregistering a callback
-   * URL](https://cloud.ibm.com/docs/services/speech-to-text/async.html#unregister).
-   *
-   * @param unregisterCallbackOptions the {@link IBMSpeechToTextV1Models.UnregisterCallbackOptions} containing the options for the call
-   * @return the service call
-   */
-  public void unregisterCallback(IBMSpeechToTextV1Models.UnregisterCallbackOptions unregisterCallbackOptions) {
-    IBMWatsonValidator.notNull(unregisterCallbackOptions, 'unregisterCallbackOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v1/unregister_callback');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=unregisterCallback');
-    Map<String, String> requestHeaders = (unregisterCallbackOptions != null) ? unregisterCallbackOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    if (unregisterCallbackOptions.callbackUrl() != null) {
-      builder.query('callback_url', unregisterCallbackOptions.callbackUrl());
-    }
-    builder.bodyJson('{}');
-
-    createServiceCall(builder.build(), null);
-  }
-
-  /**
    * Create a custom language model.
    *
    * Creates a new custom language model for a specified base model. The custom language model can be used only with the
@@ -604,7 +632,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * create it.
    *
    * **See also:** [Create a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#createModel-language).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#createModel-language).
    *
    * @param createLanguageModelOptions the {@link IBMSpeechToTextV1Models.CreateLanguageModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.LanguageModel} with the response
@@ -635,61 +663,6 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * Delete a custom language model.
-   *
-   * Deletes an existing custom language model. The custom model cannot be deleted if another request, such as adding a
-   * corpus or grammar to the model, is currently being processed. You must use credentials for the instance of the
-   * service that owns a model to delete it.
-   *
-   * **See also:** [Deleting a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#deleteModel-language).
-   *
-   * @param deleteLanguageModelOptions the {@link IBMSpeechToTextV1Models.DeleteLanguageModelOptions} containing the options for the call
-   * @return the service call
-   */
-  public void deleteLanguageModel(IBMSpeechToTextV1Models.DeleteLanguageModelOptions deleteLanguageModelOptions) {
-    IBMWatsonValidator.notNull(deleteLanguageModelOptions, 'deleteLanguageModelOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}', new String[]{ deleteLanguageModelOptions.customizationId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteLanguageModel');
-    Map<String, String> requestHeaders = (deleteLanguageModelOptions != null) ? deleteLanguageModelOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-
-    createServiceCall(builder.build(), null);
-  }
-
-  /**
-   * Get a custom language model.
-   *
-   * Gets information about a specified custom language model. You must use credentials for the instance of the service
-   * that owns a model to list information about it.
-   *
-   * **See also:** [Listing custom language
-   * models](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels-language).
-   *
-   * @param getLanguageModelOptions the {@link IBMSpeechToTextV1Models.GetLanguageModelOptions} containing the options for the call
-   * @return the {@link IBMSpeechToTextV1Models.LanguageModel} with the response
-   */
-  public IBMSpeechToTextV1Models.LanguageModel getLanguageModel(IBMSpeechToTextV1Models.GetLanguageModelOptions getLanguageModelOptions) {
-    IBMWatsonValidator.notNull(getLanguageModelOptions, 'getLanguageModelOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}', new String[]{ getLanguageModelOptions.customizationId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=getLanguageModel');
-    Map<String, String> requestHeaders = (getLanguageModelOptions != null) ? getLanguageModelOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-
-    return (IBMSpeechToTextV1Models.LanguageModel) createServiceCall(builder.build(), IBMSpeechToTextV1Models.LanguageModel.class);
-  }
-
-  /**
    * List custom language models.
    *
    * Lists information about all custom language models that are owned by an instance of the service. Use the `language`
@@ -698,7 +671,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * list information about it.
    *
    * **See also:** [Listing custom language
-   * models](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels-language).
+   * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#listModels-language).
    *
    * @param listLanguageModelsOptions the {@link IBMSpeechToTextV1Models.ListLanguageModelsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.LanguageModels} with the response
@@ -721,31 +694,56 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * Reset a custom language model.
+   * Get a custom language model.
    *
-   * Resets a custom language model by removing all corpora, grammars, and words from the model. Resetting a custom
-   * language model initializes the model to its state when it was first created. Metadata such as the name and language
-   * of the model are preserved, but the model's words resource is removed and must be re-created. You must use
-   * credentials for the instance of the service that owns a model to reset it.
+   * Gets information about a specified custom language model. You must use credentials for the instance of the service
+   * that owns a model to list information about it.
    *
-   * **See also:** [Resetting a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#resetModel-language).
+   * **See also:** [Listing custom language
+   * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#listModels-language).
    *
-   * @param resetLanguageModelOptions the {@link IBMSpeechToTextV1Models.ResetLanguageModelOptions} containing the options for the call
-   * @return the service call
+   * @param getLanguageModelOptions the {@link IBMSpeechToTextV1Models.GetLanguageModelOptions} containing the options for the call
+   * @return the {@link IBMSpeechToTextV1Models.LanguageModel} with the response
    */
-  public void resetLanguageModel(IBMSpeechToTextV1Models.ResetLanguageModelOptions resetLanguageModelOptions) {
-    IBMWatsonValidator.notNull(resetLanguageModelOptions, 'resetLanguageModelOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/reset', new String[]{ resetLanguageModelOptions.customizationId() }));
+  public IBMSpeechToTextV1Models.LanguageModel getLanguageModel(IBMSpeechToTextV1Models.GetLanguageModelOptions getLanguageModelOptions) {
+    IBMWatsonValidator.notNull(getLanguageModelOptions, 'getLanguageModelOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}', new String[]{ getLanguageModelOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=resetLanguageModel');
-    Map<String, String> requestHeaders = (resetLanguageModelOptions != null) ? resetLanguageModelOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=getLanguageModel');
+    Map<String, String> requestHeaders = (getLanguageModelOptions != null) ? getLanguageModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
-    builder.bodyJson('{}');
+
+    return (IBMSpeechToTextV1Models.LanguageModel) createServiceCall(builder.build(), IBMSpeechToTextV1Models.LanguageModel.class);
+  }
+
+  /**
+   * Delete a custom language model.
+   *
+   * Deletes an existing custom language model. The custom model cannot be deleted if another request, such as adding a
+   * corpus or grammar to the model, is currently being processed. You must use credentials for the instance of the
+   * service that owns a model to delete it.
+   *
+   * **See also:** [Deleting a custom language
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#deleteModel-language).
+   *
+   * @param deleteLanguageModelOptions the {@link IBMSpeechToTextV1Models.DeleteLanguageModelOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteLanguageModel(IBMSpeechToTextV1Models.DeleteLanguageModelOptions deleteLanguageModelOptions) {
+    IBMWatsonValidator.notNull(deleteLanguageModelOptions, 'deleteLanguageModelOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}', new String[]{ deleteLanguageModelOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteLanguageModel');
+    Map<String, String> requestHeaders = (deleteLanguageModelOptions != null) ? deleteLanguageModelOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
 
     createServiceCall(builder.build(), null);
   }
@@ -769,19 +767,25 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * The service cannot accept subsequent training requests or requests to add new resources until the existing request
    * completes.
    *
-   * Training can fail to start for the following reasons:
+   * **See also:** [Train the custom language
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#trainModel-language).
+   *
+   *
+   * ### Training failures
+   *
+   *  Training can fail to start for the following reasons:
    * * The service is currently handling another request for the custom model, such as another training request or a
    * request to add a corpus or grammar to the model.
    * * No training data have been added to the custom model.
-   * * One or more words that were added to the custom model have invalid sounds-like pronunciations that you must fix.
-   *
-   * **See also:** [Train the custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#trainModel-language).
+   * * The custom model contains one or more invalid corpora, grammars, or words (for example, a custom word has an
+   * invalid sounds-like pronunciation). You can correct the invalid resources or set the `strict` parameter to `false`
+   * to exclude the invalid resources from the training. The model must contain at least one valid resource for training
+   * to succeed.
    *
    * @param trainLanguageModelOptions the {@link IBMSpeechToTextV1Models.TrainLanguageModelOptions} containing the options for the call
-   * @return the service call
+   * @return the {@link IBMSpeechToTextV1Models.TrainingResponse} with the response
    */
-  public void trainLanguageModel(IBMSpeechToTextV1Models.TrainLanguageModelOptions trainLanguageModelOptions) {
+  public IBMSpeechToTextV1Models.TrainingResponse trainLanguageModel(IBMSpeechToTextV1Models.TrainLanguageModelOptions trainLanguageModelOptions) {
     IBMWatsonValidator.notNull(trainLanguageModelOptions, 'trainLanguageModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/train', new String[]{ trainLanguageModelOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
@@ -797,6 +801,39 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     }
     if (trainLanguageModelOptions.customizationWeight() != null) {
       builder.query('customization_weight', String.valueOf(trainLanguageModelOptions.customizationWeight()));
+    }
+    if (trainLanguageModelOptions.strict() != null) {
+      builder.query('strict', String.valueOf(trainLanguageModelOptions.strict()));
+    }
+    builder.bodyJson('{}');
+
+    return (IBMSpeechToTextV1Models.TrainingResponse) createServiceCall(builder.build(), IBMSpeechToTextV1Models.TrainingResponse.class);
+  }
+
+  /**
+   * Reset a custom language model.
+   *
+   * Resets a custom language model by removing all corpora, grammars, and words from the model. Resetting a custom
+   * language model initializes the model to its state when it was first created. Metadata such as the name and language
+   * of the model are preserved, but the model's words resource is removed and must be re-created. You must use
+   * credentials for the instance of the service that owns a model to reset it.
+   *
+   * **See also:** [Resetting a custom language
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#resetModel-language).
+   *
+   * @param resetLanguageModelOptions the {@link IBMSpeechToTextV1Models.ResetLanguageModelOptions} containing the options for the call
+   * @return the service call
+   */
+  public void resetLanguageModel(IBMSpeechToTextV1Models.ResetLanguageModelOptions resetLanguageModelOptions) {
+    IBMWatsonValidator.notNull(resetLanguageModelOptions, 'resetLanguageModelOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/customizations/{0}/reset', new String[]{ resetLanguageModelOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=resetLanguageModel');
+    Map<String, String> requestHeaders = (resetLanguageModelOptions != null) ? resetLanguageModelOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
     }
     builder.bodyJson('{}');
 
@@ -819,7 +856,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * requests for the model until the upgrade completes.
    *
    * **See also:** [Upgrading a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/custom-upgrade.html#upgradeLanguage).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customUpgrade#upgradeLanguage).
    *
    * @param upgradeLanguageModelOptions the {@link IBMSpeechToTextV1Models.UpgradeLanguageModelOptions} containing the options for the call
    * @return the service call
@@ -838,6 +875,34 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     builder.bodyJson('{}');
 
     createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * List corpora.
+   *
+   * Lists information about all corpora from a custom language model. The information includes the total number of
+   * words and out-of-vocabulary (OOV) words, name, and status of each corpus. You must use credentials for the instance
+   * of the service that owns a model to list its corpora.
+   *
+   * **See also:** [Listing corpora for a custom language
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageCorpora#listCorpora).
+   *
+   * @param listCorporaOptions the {@link IBMSpeechToTextV1Models.ListCorporaOptions} containing the options for the call
+   * @return the {@link IBMSpeechToTextV1Models.Corpora} with the response
+   */
+  public IBMSpeechToTextV1Models.Corpora listCorpora(IBMSpeechToTextV1Models.ListCorporaOptions listCorporaOptions) {
+    IBMWatsonValidator.notNull(listCorporaOptions, 'listCorporaOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/corpora', new String[]{ listCorporaOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listCorpora');
+    Map<String, String> requestHeaders = (listCorporaOptions != null) ? listCorporaOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+
+    return (IBMSpeechToTextV1Models.Corpora) createServiceCall(builder.build(), IBMSpeechToTextV1Models.Corpora.class);
   }
 
   /**
@@ -871,13 +936,14 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * way with the **Add custom words** or **Add a custom word** method.
    *
    * The service limits the overall amount of data that you can add to a custom model to a maximum of 10 million total
-   * words from all sources combined. Also, you can add no more than 30 thousand custom (OOV) words to a model. This
+   * words from all sources combined. Also, you can add no more than 90 thousand custom (OOV) words to a model. This
    * includes words that the service extracts from corpora and grammars, and words that you add directly.
    *
    * **See also:**
-   * * [Working with corpora](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#workingCorpora)
-   * * [Add corpora to the custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addCorpora).
+   * * [Working with
+   * corpora](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#workingCorpora)
+   * * [Add a corpus to the custom language
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#addCorpus).
    *
    * @param addCorpusOptions the {@link IBMSpeechToTextV1Models.AddCorpusOptions} containing the options for the call
    * @return the service call
@@ -907,36 +973,6 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * Delete a corpus.
-   *
-   * Deletes an existing corpus from a custom language model. The service removes any out-of-vocabulary (OOV) words that
-   * are associated with the corpus from the custom model's words resource unless they were also added by another corpus
-   * or grammar, or they were modified in some way with the **Add custom words** or **Add a custom word** method.
-   * Removing a corpus does not affect the custom model until you train the model with the **Train a custom language
-   * model** method. You must use credentials for the instance of the service that owns a model to delete its corpora.
-   *
-   * **See also:** [Deleting a corpus from a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-corpora.html#deleteCorpus).
-   *
-   * @param deleteCorpusOptions the {@link IBMSpeechToTextV1Models.DeleteCorpusOptions} containing the options for the call
-   * @return the service call
-   */
-  public void deleteCorpus(IBMSpeechToTextV1Models.DeleteCorpusOptions deleteCorpusOptions) {
-    IBMWatsonValidator.notNull(deleteCorpusOptions, 'deleteCorpusOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}/corpora/{1}', new String[]{ deleteCorpusOptions.customizationId(), deleteCorpusOptions.corpusName() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteCorpus');
-    Map<String, String> requestHeaders = (deleteCorpusOptions != null) ? deleteCorpusOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-
-    createServiceCall(builder.build(), null);
-  }
-
-  /**
    * Get a corpus.
    *
    * Gets information about a corpus from a custom language model. The information includes the total number of words
@@ -944,7 +980,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * service that owns a model to list its corpora.
    *
    * **See also:** [Listing corpora for a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-corpora.html#listCorpora).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageCorpora#listCorpora).
    *
    * @param getCorpusOptions the {@link IBMSpeechToTextV1Models.GetCorpusOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.Corpus} with the response
@@ -965,93 +1001,69 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * List corpora.
+   * Delete a corpus.
    *
-   * Lists information about all corpora from a custom language model. The information includes the total number of
-   * words and out-of-vocabulary (OOV) words, name, and status of each corpus. You must use credentials for the instance
-   * of the service that owns a model to list its corpora.
+   * Deletes an existing corpus from a custom language model. The service removes any out-of-vocabulary (OOV) words that
+   * are associated with the corpus from the custom model's words resource unless they were also added by another corpus
+   * or grammar, or they were modified in some way with the **Add custom words** or **Add a custom word** method.
+   * Removing a corpus does not affect the custom model until you train the model with the **Train a custom language
+   * model** method. You must use credentials for the instance of the service that owns a model to delete its corpora.
    *
-   * **See also:** [Listing corpora for a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-corpora.html#listCorpora).
+   * **See also:** [Deleting a corpus from a custom language
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageCorpora#deleteCorpus).
    *
-   * @param listCorporaOptions the {@link IBMSpeechToTextV1Models.ListCorporaOptions} containing the options for the call
-   * @return the {@link IBMSpeechToTextV1Models.Corpora} with the response
+   * @param deleteCorpusOptions the {@link IBMSpeechToTextV1Models.DeleteCorpusOptions} containing the options for the call
+   * @return the service call
    */
-  public IBMSpeechToTextV1Models.Corpora listCorpora(IBMSpeechToTextV1Models.ListCorporaOptions listCorporaOptions) {
-    IBMWatsonValidator.notNull(listCorporaOptions, 'listCorporaOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/corpora', new String[]{ listCorporaOptions.customizationId() }));
+  public void deleteCorpus(IBMSpeechToTextV1Models.DeleteCorpusOptions deleteCorpusOptions) {
+    IBMWatsonValidator.notNull(deleteCorpusOptions, 'deleteCorpusOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}/corpora/{1}', new String[]{ deleteCorpusOptions.customizationId(), deleteCorpusOptions.corpusName() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listCorpora');
-    Map<String, String> requestHeaders = (listCorporaOptions != null) ? listCorporaOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteCorpus');
+    Map<String, String> requestHeaders = (deleteCorpusOptions != null) ? deleteCorpusOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
 
-    return (IBMSpeechToTextV1Models.Corpora) createServiceCall(builder.build(), IBMSpeechToTextV1Models.Corpora.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
-   * Add a custom word.
+   * List custom words.
    *
-   * Adds a custom word to a custom language model. The service populates the words resource for a custom model with
-   * out-of-vocabulary (OOV) words from each corpus or grammar that is added to the model. You can use this method to
-   * add a word or to modify an existing word in the words resource. The words resource for a model can contain a
-   * maximum of 30 thousand custom (OOV) words. This includes words that the service extracts from corpora and grammars
-   * and words that you add directly.
+   * Lists information about custom words from a custom language model. You can list all words from the custom model's
+   * words resource, only custom words that were added or modified by the user, or only out-of-vocabulary (OOV) words
+   * that were extracted from corpora or are recognized by grammars. You can also indicate the order in which the
+   * service is to return words; by default, the service lists words in ascending alphabetical order. You must use
+   * credentials for the instance of the service that owns a model to list information about its words.
    *
-   * You must use credentials for the instance of the service that owns a model to add or modify a custom word for the
-   * model. Adding or modifying a custom word does not affect the custom model until you train the model for the new
-   * data by using the **Train a custom language model** method.
+   * **See also:** [Listing words from a custom language
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageWords#listWords).
    *
-   * Use the `word_name` parameter to specify the custom word that is to be added or modified. Use the `CustomWord`
-   * object to provide one or both of the optional `sounds_like` and `display_as` fields for the word.
-   * * The `sounds_like` field provides an array of one or more pronunciations for the word. Use the parameter to
-   * specify how the word can be pronounced by users. Use the parameter for words that are difficult to pronounce,
-   * foreign words, acronyms, and so on. For example, you might specify that the word `IEEE` can sound like `i triple
-   * e`. You can specify a maximum of five sounds-like pronunciations for a word.
-   * * The `display_as` field provides a different way of spelling the word in a transcript. Use the parameter when you
-   * want the word to appear different from its usual representation or from its spelling in training data. For example,
-   * you might indicate that the word `IBM(trademark)` is to be displayed as `IBM&trade;`.
-   *
-   * If you add a custom word that already exists in the words resource for the custom model, the new definition
-   * overwrites the existing data for the word. If the service encounters an error, it does not add the word to the
-   * words resource. Use the **List a custom word** method to review the word that you add.
-   *
-   * **See also:**
-   * * [Working with custom
-   * words](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#workingWords)
-   * * [Add words to the custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addWords).
-   *
-   * @param addWordOptions the {@link IBMSpeechToTextV1Models.AddWordOptions} containing the options for the call
-   * @return the service call
+   * @param listWordsOptions the {@link IBMSpeechToTextV1Models.ListWordsOptions} containing the options for the call
+   * @return the {@link IBMSpeechToTextV1Models.Words} with the response
    */
-  public void addWord(IBMSpeechToTextV1Models.AddWordOptions addWordOptions) {
-    IBMWatsonValidator.notNull(addWordOptions, 'addWordOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getEndPoint() + String.format('/v1/customizations/{0}/words/{1}', new String[]{ addWordOptions.customizationId(), addWordOptions.wordName() }));
+  public IBMSpeechToTextV1Models.Words listWords(IBMSpeechToTextV1Models.ListWordsOptions listWordsOptions) {
+    IBMWatsonValidator.notNull(listWordsOptions, 'listWordsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/words', new String[]{ listWordsOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=addWord');
-    Map<String, String> requestHeaders = (addWordOptions != null) ? addWordOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listWords');
+    Map<String, String> requestHeaders = (listWordsOptions != null) ? listWordsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
-    final Map<String, Object> contentJson = new Map<String, Object>();
-    if (addWordOptions.word() != null) {
-      contentJson.put('word', addWordOptions.word());
+    if (listWordsOptions.wordType() != null) {
+      builder.query('word_type', listWordsOptions.wordType());
     }
-    if (addWordOptions.soundsLike() != null) {
-      contentJson.put('sounds_like', addWordOptions.soundsLike());
+    if (listWordsOptions.xsort() != null) {
+      builder.query('sort', listWordsOptions.xsort());
     }
-    if (addWordOptions.displayAs() != null) {
-      contentJson.put('display_as', addWordOptions.displayAs());
-    }
-    builder.bodyJson(JSON.serialize(contentJson, true));
 
-    createServiceCall(builder.build(), null);
+    return (IBMSpeechToTextV1Models.Words) createServiceCall(builder.build(), IBMSpeechToTextV1Models.Words.class);
   }
 
   /**
@@ -1060,7 +1072,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * Adds one or more custom words to a custom language model. The service populates the words resource for a custom
    * model with out-of-vocabulary (OOV) words from each corpus or grammar that is added to the model. You can use this
    * method to add additional words or to modify existing words in the words resource. The words resource for a model
-   * can contain a maximum of 30 thousand custom (OOV) words. This includes words that the service extracts from corpora
+   * can contain a maximum of 90 thousand custom (OOV) words. This includes words that the service extracts from corpora
    * and grammars and words that you add directly.
    *
    * You must use credentials for the instance of the service that owns a model to add or modify custom words for the
@@ -1097,9 +1109,9 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * **See also:**
    * * [Working with custom
-   * words](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#workingWords)
+   * words](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#workingWords)
    * * [Add words to the custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addWords).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#addWords).
    *
    * @param addWordsOptions the {@link IBMSpeechToTextV1Models.AddWordsOptions} containing the options for the call
    * @return the service call
@@ -1123,31 +1135,63 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * Delete a custom word.
+   * Add a custom word.
    *
-   * Deletes a custom word from a custom language model. You can remove any word that you added to the custom model's
-   * words resource via any means. However, if the word also exists in the service's base vocabulary, the service
-   * removes only the custom pronunciation for the word; the word remains in the base vocabulary. Removing a custom word
-   * does not affect the custom model until you train the model with the **Train a custom language model** method. You
-   * must use credentials for the instance of the service that owns a model to delete its words.
+   * Adds a custom word to a custom language model. The service populates the words resource for a custom model with
+   * out-of-vocabulary (OOV) words from each corpus or grammar that is added to the model. You can use this method to
+   * add a word or to modify an existing word in the words resource. The words resource for a model can contain a
+   * maximum of 90 thousand custom (OOV) words. This includes words that the service extracts from corpora and grammars
+   * and words that you add directly.
    *
-   * **See also:** [Deleting a word from a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-words.html#deleteWord).
+   * You must use credentials for the instance of the service that owns a model to add or modify a custom word for the
+   * model. Adding or modifying a custom word does not affect the custom model until you train the model for the new
+   * data by using the **Train a custom language model** method.
    *
-   * @param deleteWordOptions the {@link IBMSpeechToTextV1Models.DeleteWordOptions} containing the options for the call
+   * Use the `word_name` parameter to specify the custom word that is to be added or modified. Use the `CustomWord`
+   * object to provide one or both of the optional `sounds_like` and `display_as` fields for the word.
+   * * The `sounds_like` field provides an array of one or more pronunciations for the word. Use the parameter to
+   * specify how the word can be pronounced by users. Use the parameter for words that are difficult to pronounce,
+   * foreign words, acronyms, and so on. For example, you might specify that the word `IEEE` can sound like `i triple
+   * e`. You can specify a maximum of five sounds-like pronunciations for a word.
+   * * The `display_as` field provides a different way of spelling the word in a transcript. Use the parameter when you
+   * want the word to appear different from its usual representation or from its spelling in training data. For example,
+   * you might indicate that the word `IBM(trademark)` is to be displayed as `IBM&trade;`.
+   *
+   * If you add a custom word that already exists in the words resource for the custom model, the new definition
+   * overwrites the existing data for the word. If the service encounters an error, it does not add the word to the
+   * words resource. Use the **List a custom word** method to review the word that you add.
+   *
+   * **See also:**
+   * * [Working with custom
+   * words](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#workingWords)
+   * * [Add words to the custom language
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#addWords).
+   *
+   * @param addWordOptions the {@link IBMSpeechToTextV1Models.AddWordOptions} containing the options for the call
    * @return the service call
    */
-  public void deleteWord(IBMSpeechToTextV1Models.DeleteWordOptions deleteWordOptions) {
-    IBMWatsonValidator.notNull(deleteWordOptions, 'deleteWordOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}/words/{1}', new String[]{ deleteWordOptions.customizationId(), deleteWordOptions.wordName() }));
+  public void addWord(IBMSpeechToTextV1Models.AddWordOptions addWordOptions) {
+    IBMWatsonValidator.notNull(addWordOptions, 'addWordOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPut(getEndPoint() + String.format('/v1/customizations/{0}/words/{1}', new String[]{ addWordOptions.customizationId(), addWordOptions.wordName() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteWord');
-    Map<String, String> requestHeaders = (deleteWordOptions != null) ? deleteWordOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=addWord');
+    Map<String, String> requestHeaders = (addWordOptions != null) ? addWordOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    if (addWordOptions.word() != null) {
+      contentJson.put('word', addWordOptions.word());
+    }
+    if (addWordOptions.soundsLike() != null) {
+      contentJson.put('sounds_like', addWordOptions.soundsLike());
+    }
+    if (addWordOptions.displayAs() != null) {
+      contentJson.put('display_as', addWordOptions.displayAs());
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
 
     createServiceCall(builder.build(), null);
   }
@@ -1159,7 +1203,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * service that owns a model to list information about its words.
    *
    * **See also:** [Listing words from a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-words.html#listWords).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageWords#listWords).
    *
    * @param getWordOptions the {@link IBMSpeechToTextV1Models.GetWordOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.Word} with the response
@@ -1180,39 +1224,61 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * List custom words.
+   * Delete a custom word.
    *
-   * Lists information about custom words from a custom language model. You can list all words from the custom model's
-   * words resource, only custom words that were added or modified by the user, or only out-of-vocabulary (OOV) words
-   * that were extracted from corpora or are recognized by grammars. You can also indicate the order in which the
-   * service is to return words; by default, the service lists words in ascending alphabetical order. You must use
-   * credentials for the instance of the service that owns a model to list information about its words.
+   * Deletes a custom word from a custom language model. You can remove any word that you added to the custom model's
+   * words resource via any means. However, if the word also exists in the service's base vocabulary, the service
+   * removes only the custom pronunciation for the word; the word remains in the base vocabulary. Removing a custom word
+   * does not affect the custom model until you train the model with the **Train a custom language model** method. You
+   * must use credentials for the instance of the service that owns a model to delete its words.
    *
-   * **See also:** [Listing words from a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/language-words.html#listWords).
+   * **See also:** [Deleting a word from a custom language
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageWords#deleteWord).
    *
-   * @param listWordsOptions the {@link IBMSpeechToTextV1Models.ListWordsOptions} containing the options for the call
-   * @return the {@link IBMSpeechToTextV1Models.Words} with the response
+   * @param deleteWordOptions the {@link IBMSpeechToTextV1Models.DeleteWordOptions} containing the options for the call
+   * @return the service call
    */
-  public IBMSpeechToTextV1Models.Words listWords(IBMSpeechToTextV1Models.ListWordsOptions listWordsOptions) {
-    IBMWatsonValidator.notNull(listWordsOptions, 'listWordsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/words', new String[]{ listWordsOptions.customizationId() }));
+  public void deleteWord(IBMSpeechToTextV1Models.DeleteWordOptions deleteWordOptions) {
+    IBMWatsonValidator.notNull(deleteWordOptions, 'deleteWordOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}/words/{1}', new String[]{ deleteWordOptions.customizationId(), deleteWordOptions.wordName() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listWords');
-    Map<String, String> requestHeaders = (listWordsOptions != null) ? listWordsOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteWord');
+    Map<String, String> requestHeaders = (deleteWordOptions != null) ? deleteWordOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
-    if (listWordsOptions.wordType() != null) {
-      builder.query('word_type', listWordsOptions.wordType());
-    }
-    if (listWordsOptions.xsort() != null) {
-      builder.query('sort', listWordsOptions.xsort());
+
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * List grammars.
+   *
+   * Lists information about all grammars from a custom language model. The information includes the total number of
+   * out-of-vocabulary (OOV) words, name, and status of each grammar. You must use credentials for the instance of the
+   * service that owns a model to list its grammars.
+   *
+   * **See also:** [Listing grammars from a custom language
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageGrammars#listGrammars).
+   *
+   * @param listGrammarsOptions the {@link IBMSpeechToTextV1Models.ListGrammarsOptions} containing the options for the call
+   * @return the {@link IBMSpeechToTextV1Models.Grammars} with the response
+   */
+  public IBMSpeechToTextV1Models.Grammars listGrammars(IBMSpeechToTextV1Models.ListGrammarsOptions listGrammarsOptions) {
+    IBMWatsonValidator.notNull(listGrammarsOptions, 'listGrammarsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/grammars', new String[]{ listGrammarsOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listGrammars');
+    Map<String, String> requestHeaders = (listGrammarsOptions != null) ? listGrammarsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
     }
 
-    return (IBMSpeechToTextV1Models.Words) createServiceCall(builder.build(), IBMSpeechToTextV1Models.Words.class);
+    return (IBMSpeechToTextV1Models.Grammars) createServiceCall(builder.build(), IBMSpeechToTextV1Models.Grammars.class);
   }
 
   /**
@@ -1241,12 +1307,14 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * the **Add custom words** or **Add a custom word** method.
    *
    * The service limits the overall amount of data that you can add to a custom model to a maximum of 10 million total
-   * words from all sources combined. Also, you can add no more than 30 thousand OOV words to a model. This includes
+   * words from all sources combined. Also, you can add no more than 90 thousand OOV words to a model. This includes
    * words that the service extracts from corpora and grammars and words that you add directly.
    *
    * **See also:**
-   * * [Working with grammars](https://cloud.ibm.com/docs/services/speech-to-text/)
-   * * [Add grammars to the custom language model](https://cloud.ibm.com/docs/services/speech-to-text/).
+   * * [Understanding
+   * grammars](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-grammarUnderstand#grammarUnderstand)
+   * * [Add a grammar to the custom language
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-grammarAdd#addGrammar).
    *
    * @param addGrammarOptions the {@link IBMSpeechToTextV1Models.AddGrammarOptions} containing the options for the call
    * @return the service call
@@ -1272,43 +1340,14 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * Delete a grammar.
-   *
-   * Deletes an existing grammar from a custom language model. The service removes any out-of-vocabulary (OOV) words
-   * associated with the grammar from the custom model's words resource unless they were also added by another resource
-   * or they were modified in some way with the **Add custom words** or **Add a custom word** method. Removing a grammar
-   * does not affect the custom model until you train the model with the **Train a custom language model** method. You
-   * must use credentials for the instance of the service that owns a model to delete its grammar.
-   *
-   * **See also:** [Deleting a grammar from a custom language
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/).
-   *
-   * @param deleteGrammarOptions the {@link IBMSpeechToTextV1Models.DeleteGrammarOptions} containing the options for the call
-   * @return the service call
-   */
-  public void deleteGrammar(IBMSpeechToTextV1Models.DeleteGrammarOptions deleteGrammarOptions) {
-    IBMWatsonValidator.notNull(deleteGrammarOptions, 'deleteGrammarOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}/grammars/{1}', new String[]{ deleteGrammarOptions.customizationId(), deleteGrammarOptions.grammarName() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteGrammar');
-    Map<String, String> requestHeaders = (deleteGrammarOptions != null) ? deleteGrammarOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-
-    createServiceCall(builder.build(), null);
-  }
-
-  /**
    * Get a grammar.
    *
    * Gets information about a grammar from a custom language model. The information includes the total number of
    * out-of-vocabulary (OOV) words, name, and status of the grammar. You must use credentials for the instance of the
    * service that owns a model to list its grammars.
    *
-   * **See also:** [Listing grammars from a custom language model](https://cloud.ibm.com/docs/services/speech-to-text/).
+   * **See also:** [Listing grammars from a custom language
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageGrammars#listGrammars).
    *
    * @param getGrammarOptions the {@link IBMSpeechToTextV1Models.GetGrammarOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.Grammar} with the response
@@ -1329,30 +1368,33 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * List grammars.
+   * Delete a grammar.
    *
-   * Lists information about all grammars from a custom language model. The information includes the total number of
-   * out-of-vocabulary (OOV) words, name, and status of each grammar. You must use credentials for the instance of the
-   * service that owns a model to list its grammars.
+   * Deletes an existing grammar from a custom language model. The service removes any out-of-vocabulary (OOV) words
+   * associated with the grammar from the custom model's words resource unless they were also added by another resource
+   * or they were modified in some way with the **Add custom words** or **Add a custom word** method. Removing a grammar
+   * does not affect the custom model until you train the model with the **Train a custom language model** method. You
+   * must use credentials for the instance of the service that owns a model to delete its grammar.
    *
-   * **See also:** [Listing grammars from a custom language model](https://cloud.ibm.com/docs/services/speech-to-text/).
+   * **See also:** [Deleting a grammar from a custom language
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageGrammars#deleteGrammar).
    *
-   * @param listGrammarsOptions the {@link IBMSpeechToTextV1Models.ListGrammarsOptions} containing the options for the call
-   * @return the {@link IBMSpeechToTextV1Models.Grammars} with the response
+   * @param deleteGrammarOptions the {@link IBMSpeechToTextV1Models.DeleteGrammarOptions} containing the options for the call
+   * @return the service call
    */
-  public IBMSpeechToTextV1Models.Grammars listGrammars(IBMSpeechToTextV1Models.ListGrammarsOptions listGrammarsOptions) {
-    IBMWatsonValidator.notNull(listGrammarsOptions, 'listGrammarsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/customizations/{0}/grammars', new String[]{ listGrammarsOptions.customizationId() }));
+  public void deleteGrammar(IBMSpeechToTextV1Models.DeleteGrammarOptions deleteGrammarOptions) {
+    IBMWatsonValidator.notNull(deleteGrammarOptions, 'deleteGrammarOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/customizations/{0}/grammars/{1}', new String[]{ deleteGrammarOptions.customizationId(), deleteGrammarOptions.grammarName() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listGrammars');
-    Map<String, String> requestHeaders = (listGrammarsOptions != null) ? listGrammarsOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteGrammar');
+    Map<String, String> requestHeaders = (deleteGrammarOptions != null) ? deleteGrammarOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
 
-    return (IBMSpeechToTextV1Models.Grammars) createServiceCall(builder.build(), IBMSpeechToTextV1Models.Grammars.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -1363,7 +1405,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * create it.
    *
    * **See also:** [Create a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#createModel-acoustic).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-acoustic#createModel-acoustic).
    *
    * @param createAcousticModelOptions the {@link IBMSpeechToTextV1Models.CreateAcousticModelOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AcousticModel} with the response
@@ -1391,61 +1433,6 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * Delete a custom acoustic model.
-   *
-   * Deletes an existing custom acoustic model. The custom model cannot be deleted if another request, such as adding an
-   * audio resource to the model, is currently being processed. You must use credentials for the instance of the service
-   * that owns a model to delete it.
-   *
-   * **See also:** [Deleting a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#deleteModel-acoustic).
-   *
-   * @param deleteAcousticModelOptions the {@link IBMSpeechToTextV1Models.DeleteAcousticModelOptions} containing the options for the call
-   * @return the service call
-   */
-  public void deleteAcousticModel(IBMSpeechToTextV1Models.DeleteAcousticModelOptions deleteAcousticModelOptions) {
-    IBMWatsonValidator.notNull(deleteAcousticModelOptions, 'deleteAcousticModelOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/acoustic_customizations/{0}', new String[]{ deleteAcousticModelOptions.customizationId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteAcousticModel');
-    Map<String, String> requestHeaders = (deleteAcousticModelOptions != null) ? deleteAcousticModelOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-
-    createServiceCall(builder.build(), null);
-  }
-
-  /**
-   * Get a custom acoustic model.
-   *
-   * Gets information about a specified custom acoustic model. You must use credentials for the instance of the service
-   * that owns a model to list information about it.
-   *
-   * **See also:** [Listing custom acoustic
-   * models](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels-acoustic).
-   *
-   * @param getAcousticModelOptions the {@link IBMSpeechToTextV1Models.GetAcousticModelOptions} containing the options for the call
-   * @return the {@link IBMSpeechToTextV1Models.AcousticModel} with the response
-   */
-  public IBMSpeechToTextV1Models.AcousticModel getAcousticModel(IBMSpeechToTextV1Models.GetAcousticModelOptions getAcousticModelOptions) {
-    IBMWatsonValidator.notNull(getAcousticModelOptions, 'getAcousticModelOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/acoustic_customizations/{0}', new String[]{ getAcousticModelOptions.customizationId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=getAcousticModel');
-    Map<String, String> requestHeaders = (getAcousticModelOptions != null) ? getAcousticModelOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-
-    return (IBMSpeechToTextV1Models.AcousticModel) createServiceCall(builder.build(), IBMSpeechToTextV1Models.AcousticModel.class);
-  }
-
-  /**
    * List custom acoustic models.
    *
    * Lists information about all custom acoustic models that are owned by an instance of the service. Use the `language`
@@ -1454,7 +1441,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * list information about it.
    *
    * **See also:** [Listing custom acoustic
-   * models](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels-acoustic).
+   * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#listModels-acoustic).
    *
    * @param listAcousticModelsOptions the {@link IBMSpeechToTextV1Models.ListAcousticModelsOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AcousticModels} with the response
@@ -1477,31 +1464,56 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * Reset a custom acoustic model.
+   * Get a custom acoustic model.
    *
-   * Resets a custom acoustic model by removing all audio resources from the model. Resetting a custom acoustic model
-   * initializes the model to its state when it was first created. Metadata such as the name and language of the model
-   * are preserved, but the model's audio resources are removed and must be re-created. You must use credentials for the
-   * instance of the service that owns a model to reset it.
+   * Gets information about a specified custom acoustic model. You must use credentials for the instance of the service
+   * that owns a model to list information about it.
    *
-   * **See also:** [Resetting a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#resetModel-acoustic).
+   * **See also:** [Listing custom acoustic
+   * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#listModels-acoustic).
    *
-   * @param resetAcousticModelOptions the {@link IBMSpeechToTextV1Models.ResetAcousticModelOptions} containing the options for the call
-   * @return the service call
+   * @param getAcousticModelOptions the {@link IBMSpeechToTextV1Models.GetAcousticModelOptions} containing the options for the call
+   * @return the {@link IBMSpeechToTextV1Models.AcousticModel} with the response
    */
-  public void resetAcousticModel(IBMSpeechToTextV1Models.ResetAcousticModelOptions resetAcousticModelOptions) {
-    IBMWatsonValidator.notNull(resetAcousticModelOptions, 'resetAcousticModelOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/reset', new String[]{ resetAcousticModelOptions.customizationId() }));
+  public IBMSpeechToTextV1Models.AcousticModel getAcousticModel(IBMSpeechToTextV1Models.GetAcousticModelOptions getAcousticModelOptions) {
+    IBMWatsonValidator.notNull(getAcousticModelOptions, 'getAcousticModelOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/acoustic_customizations/{0}', new String[]{ getAcousticModelOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=resetAcousticModel');
-    Map<String, String> requestHeaders = (resetAcousticModelOptions != null) ? resetAcousticModelOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=getAcousticModel');
+    Map<String, String> requestHeaders = (getAcousticModelOptions != null) ? getAcousticModelOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
-    builder.bodyJson('{}');
+
+    return (IBMSpeechToTextV1Models.AcousticModel) createServiceCall(builder.build(), IBMSpeechToTextV1Models.AcousticModel.class);
+  }
+
+  /**
+   * Delete a custom acoustic model.
+   *
+   * Deletes an existing custom acoustic model. The custom model cannot be deleted if another request, such as adding an
+   * audio resource to the model, is currently being processed. You must use credentials for the instance of the service
+   * that owns a model to delete it.
+   *
+   * **See also:** [Deleting a custom acoustic
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#deleteModel-acoustic).
+   *
+   * @param deleteAcousticModelOptions the {@link IBMSpeechToTextV1Models.DeleteAcousticModelOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteAcousticModel(IBMSpeechToTextV1Models.DeleteAcousticModelOptions deleteAcousticModelOptions) {
+    IBMWatsonValidator.notNull(deleteAcousticModelOptions, 'deleteAcousticModelOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/acoustic_customizations/{0}', new String[]{ deleteAcousticModelOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteAcousticModel');
+    Map<String, String> requestHeaders = (deleteAcousticModelOptions != null) ? deleteAcousticModelOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
 
     createServiceCall(builder.build(), null);
   }
@@ -1532,21 +1544,28 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * or a list of words that are relevant to the contents of the audio files. Both of the custom models must be based on
    * the same version of the same base model for training to succeed.
    *
-   * Training can fail to start for the following reasons:
+   * **See also:**
+   * * [Train the custom acoustic
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-acoustic#trainModel-acoustic)
+   * * [Using custom acoustic and custom language models
+   * together](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-useBoth#useBoth)
+   *
+   * ### Training failures
+   *
+   *  Training can fail to start for the following reasons:
    * * The service is currently handling another request for the custom model, such as another training request or a
    * request to add audio resources to the model.
-   * * The custom model contains less than 10 minutes or more than 100 hours of audio data.
-   * * One or more of the custom model's audio resources is invalid.
+   * * The custom model contains less than 10 minutes or more than 200 hours of audio data.
    * * You passed an incompatible custom language model with the `custom_language_model_id` query parameter. Both custom
    * models must be based on the same version of the same base model.
-   *
-   * **See also:** [Train the custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#trainModel-acoustic).
+   * * The custom model contains one or more invalid audio resources. You can correct the invalid audio resources or set
+   * the `strict` parameter to `false` to exclude the invalid resources from the training. The model must contain at
+   * least one valid resource for training to succeed.
    *
    * @param trainAcousticModelOptions the {@link IBMSpeechToTextV1Models.TrainAcousticModelOptions} containing the options for the call
-   * @return the service call
+   * @return the {@link IBMSpeechToTextV1Models.TrainingResponse} with the response
    */
-  public void trainAcousticModel(IBMSpeechToTextV1Models.TrainAcousticModelOptions trainAcousticModelOptions) {
+  public IBMSpeechToTextV1Models.TrainingResponse trainAcousticModel(IBMSpeechToTextV1Models.TrainAcousticModelOptions trainAcousticModelOptions) {
     IBMWatsonValidator.notNull(trainAcousticModelOptions, 'trainAcousticModelOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/train', new String[]{ trainAcousticModelOptions.customizationId() }));
     builder.addHeader('Accept', 'application/json');
@@ -1559,6 +1578,39 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     }
     if (trainAcousticModelOptions.customLanguageModelId() != null) {
       builder.query('custom_language_model_id', trainAcousticModelOptions.customLanguageModelId());
+    }
+    if (trainAcousticModelOptions.strict() != null) {
+      builder.query('strict', String.valueOf(trainAcousticModelOptions.strict()));
+    }
+    builder.bodyJson('{}');
+
+    return (IBMSpeechToTextV1Models.TrainingResponse) createServiceCall(builder.build(), IBMSpeechToTextV1Models.TrainingResponse.class);
+  }
+
+  /**
+   * Reset a custom acoustic model.
+   *
+   * Resets a custom acoustic model by removing all audio resources from the model. Resetting a custom acoustic model
+   * initializes the model to its state when it was first created. Metadata such as the name and language of the model
+   * are preserved, but the model's audio resources are removed and must be re-created. You must use credentials for the
+   * instance of the service that owns a model to reset it.
+   *
+   * **See also:** [Resetting a custom acoustic
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#resetModel-acoustic).
+   *
+   * @param resetAcousticModelOptions the {@link IBMSpeechToTextV1Models.ResetAcousticModelOptions} containing the options for the call
+   * @return the service call
+   */
+  public void resetAcousticModel(IBMSpeechToTextV1Models.ResetAcousticModelOptions resetAcousticModelOptions) {
+    IBMWatsonValidator.notNull(resetAcousticModelOptions, 'resetAcousticModelOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/reset', new String[]{ resetAcousticModelOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=resetAcousticModel');
+    Map<String, String> requestHeaders = (resetAcousticModelOptions != null) ? resetAcousticModelOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
     }
     builder.bodyJson('{}');
 
@@ -1587,7 +1639,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * was not trained with a custom language model.
    *
    * **See also:** [Upgrading a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/custom-upgrade.html#upgradeAcoustic).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customUpgrade#upgradeAcoustic).
    *
    * @param upgradeAcousticModelOptions the {@link IBMSpeechToTextV1Models.UpgradeAcousticModelOptions} containing the options for the call
    * @return the service call
@@ -1615,6 +1667,36 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
+   * List audio resources.
+   *
+   * Lists information about all audio resources from a custom acoustic model. The information includes the name of the
+   * resource and information about its audio data, such as its duration. It also includes the status of the audio
+   * resource, which is important for checking the service's analysis of the resource in response to a request to add it
+   * to the custom acoustic model. You must use credentials for the instance of the service that owns a model to list
+   * its audio resources.
+   *
+   * **See also:** [Listing audio resources for a custom acoustic
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAudio#listAudio).
+   *
+   * @param listAudioOptions the {@link IBMSpeechToTextV1Models.ListAudioOptions} containing the options for the call
+   * @return the {@link IBMSpeechToTextV1Models.AudioResources} with the response
+   */
+  public IBMSpeechToTextV1Models.AudioResources listAudio(IBMSpeechToTextV1Models.ListAudioOptions listAudioOptions) {
+    IBMWatsonValidator.notNull(listAudioOptions, 'listAudioOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio', new String[]{ listAudioOptions.customizationId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listAudio');
+    Map<String, String> requestHeaders = (listAudioOptions != null) ? listAudioOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+
+    return (IBMSpeechToTextV1Models.AudioResources) createServiceCall(builder.build(), IBMSpeechToTextV1Models.AudioResources.class);
+  }
+
+  /**
    * Add an audio resource.
    *
    * Adds an audio resource to a custom acoustic model. Add audio content that reflects the acoustic characteristics of
@@ -1628,7 +1710,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    *
    * You can use this method to add any number of audio resources to a custom model by calling the method once for each
    * audio or archive file. But the addition of one audio resource must be fully complete before you can add another.
-   * You must add a minimum of 10 minutes and a maximum of 100 hours of audio that includes speech, not just silence, to
+   * You must add a minimum of 10 minutes and a maximum of 200 hours of audio that includes speech, not just silence, to
    * a custom acoustic model before you can train it. No audio resource, audio- or archive-type, can be larger than 100
    * MB. To add an audio resource that has the same name as an existing audio resource, set the `allow_overwrite`
    * parameter to `true`; otherwise, the request fails.
@@ -1646,7 +1728,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * until it becomes `ok`.
    *
    * **See also:** [Add audio to the custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#addAudio).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-acoustic#addAudio).
    *
    * ### Content types for audio-type resources
    *
@@ -1675,7 +1757,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * higher than the minimum required rate, the service down-samples the audio to the appropriate rate. If the sampling
    * rate of the audio is lower than the minimum required rate, the service labels the audio file as `invalid`.
    *
-   *  **See also:** [Audio formats](https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html).
+   *  **See also:** [Audio
+   * formats](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-audio-formats#audio-formats).
    *
    * ### Content types for archive-type resources
    *
@@ -1712,11 +1795,11 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
     IBMWatsonValidator.notNull(addAudioOptions, 'addAudioOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio/{1}', new String[]{ addAudioOptions.customizationId(), addAudioOptions.audioName() }));
     builder.addHeader('Accept', 'application/json');
-    if (addAudioOptions.containedContentType() != null) {
-      builder.addHeader('Contained-Content-Type', addAudioOptions.containedContentType());
-    }
     if (addAudioOptions.contentType() != null) {
       builder.addHeader('Content-Type', addAudioOptions.contentType());
+    }
+    if (addAudioOptions.containedContentType() != null) {
+      builder.addHeader('Contained-Content-Type', addAudioOptions.containedContentType());
     }
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=addAudio');
     Map<String, String> requestHeaders = (addAudioOptions != null) ? addAudioOptions.requestHeaders() : null;
@@ -1729,36 +1812,6 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
       builder.query('allow_overwrite', String.valueOf(addAudioOptions.allowOverwrite()));
     }
     builder.bodyContent(addAudioOptions.contentType(), null, null, addAudioOptions.audioResource());
-
-    createServiceCall(builder.build(), null);
-  }
-
-  /**
-   * Delete an audio resource.
-   *
-   * Deletes an existing audio resource from a custom acoustic model. Deleting an archive-type audio resource removes
-   * the entire archive of files; the current interface does not allow deletion of individual files from an archive
-   * resource. Removing an audio resource does not affect the custom model until you train the model on its updated data
-   * by using the **Train a custom acoustic model** method. You must use credentials for the instance of the service
-   * that owns a model to delete its audio resources.
-   *
-   * **See also:** [Deleting an audio resource from a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-audio.html#deleteAudio).
-   *
-   * @param deleteAudioOptions the {@link IBMSpeechToTextV1Models.DeleteAudioOptions} containing the options for the call
-   * @return the service call
-   */
-  public void deleteAudio(IBMSpeechToTextV1Models.DeleteAudioOptions deleteAudioOptions) {
-    IBMWatsonValidator.notNull(deleteAudioOptions, 'deleteAudioOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio/{1}', new String[]{ deleteAudioOptions.customizationId(), deleteAudioOptions.audioName() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteAudio');
-    Map<String, String> requestHeaders = (deleteAudioOptions != null) ? deleteAudioOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
 
     createServiceCall(builder.build(), null);
   }
@@ -1783,7 +1836,7 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * You must use credentials for the instance of the service that owns a model to list its audio resources.
    *
    * **See also:** [Listing audio resources for a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-audio.html#listAudio).
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAudio#listAudio).
    *
    * @param getAudioOptions the {@link IBMSpeechToTextV1Models.GetAudioOptions} containing the options for the call
    * @return the {@link IBMSpeechToTextV1Models.AudioListing} with the response
@@ -1804,33 +1857,33 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
   }
 
   /**
-   * List audio resources.
+   * Delete an audio resource.
    *
-   * Lists information about all audio resources from a custom acoustic model. The information includes the name of the
-   * resource and information about its audio data, such as its duration. It also includes the status of the audio
-   * resource, which is important for checking the service's analysis of the resource in response to a request to add it
-   * to the custom acoustic model. You must use credentials for the instance of the service that owns a model to list
-   * its audio resources.
+   * Deletes an existing audio resource from a custom acoustic model. Deleting an archive-type audio resource removes
+   * the entire archive of files; the current interface does not allow deletion of individual files from an archive
+   * resource. Removing an audio resource does not affect the custom model until you train the model on its updated data
+   * by using the **Train a custom acoustic model** method. You must use credentials for the instance of the service
+   * that owns a model to delete its audio resources.
    *
-   * **See also:** [Listing audio resources for a custom acoustic
-   * model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-audio.html#listAudio).
+   * **See also:** [Deleting an audio resource from a custom acoustic
+   * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAudio#deleteAudio).
    *
-   * @param listAudioOptions the {@link IBMSpeechToTextV1Models.ListAudioOptions} containing the options for the call
-   * @return the {@link IBMSpeechToTextV1Models.AudioResources} with the response
+   * @param deleteAudioOptions the {@link IBMSpeechToTextV1Models.DeleteAudioOptions} containing the options for the call
+   * @return the service call
    */
-  public IBMSpeechToTextV1Models.AudioResources listAudio(IBMSpeechToTextV1Models.ListAudioOptions listAudioOptions) {
-    IBMWatsonValidator.notNull(listAudioOptions, 'listAudioOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio', new String[]{ listAudioOptions.customizationId() }));
+  public void deleteAudio(IBMSpeechToTextV1Models.DeleteAudioOptions deleteAudioOptions) {
+    IBMWatsonValidator.notNull(deleteAudioOptions, 'deleteAudioOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/acoustic_customizations/{0}/audio/{1}', new String[]{ deleteAudioOptions.customizationId(), deleteAudioOptions.audioName() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=listAudio');
-    Map<String, String> requestHeaders = (listAudioOptions != null) ? listAudioOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=speech_to_text;service_version=V1;operation_id=deleteAudio');
+    Map<String, String> requestHeaders = (deleteAudioOptions != null) ? deleteAudioOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
 
-    return (IBMSpeechToTextV1Models.AudioResources) createServiceCall(builder.build(), IBMSpeechToTextV1Models.AudioResources.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -1844,7 +1897,8 @@ public class IBMSpeechToTextV1 extends IBMWatsonService {
    * You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes the
    * data.
    *
-   * **See also:** [Information security](https://cloud.ibm.com/docs/services/speech-to-text/information-security.html).
+   * **See also:** [Information
+   * security](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-information-security#information-security).
    *
    * @param deleteUserDataOptions the {@link IBMSpeechToTextV1Models.DeleteUserDataOptions} containing the options for the call
    * @return the service call
