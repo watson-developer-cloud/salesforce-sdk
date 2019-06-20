@@ -1,6 +1,6 @@
 public class IBMToneAnalyzerV3Models {
   /**
-   * An object of type `DocumentAnalysis` that provides the results of the analysis for the full input document.
+   * The results of the analysis for the full input content.
    */
   public class DocumentAnalysis extends IBMWatsonGenericModel {
     private List<ToneScore> tones_serialized_name;
@@ -114,7 +114,7 @@ public class IBMToneAnalyzerV3Models {
   }
 
   /**
-   * SentenceAnalysis.
+   * The results of the analysis for the individual sentences of the input content.
    */
   public class SentenceAnalysis extends IBMWatsonGenericModel {
     private Long sentence_id_serialized_name;
@@ -295,7 +295,7 @@ public class IBMToneAnalyzerV3Models {
   }
 
   /**
-   * ToneAnalysis.
+   * The tone analysis results for the input from the general-purpose endpoint.
    */
   public class ToneAnalysis extends IBMWatsonResponseModel {
     private DocumentAnalysis document_tone_serialized_name;
@@ -304,7 +304,7 @@ public class IBMToneAnalyzerV3Models {
     /**
      * Gets the documentTone.
      *
-     * An object of type `DocumentAnalysis` that provides the results of the analysis for the full input document.
+     * The results of the analysis for the full input content.
      *
      * @return the documentTone
      */
@@ -374,7 +374,7 @@ public class IBMToneAnalyzerV3Models {
   }
 
   /**
-   * ToneCategory.
+   * The category for a tone from the input content.
    */
   public class ToneCategory extends IBMWatsonGenericModel {
     private List<ToneScore> tones_serialized_name;
@@ -638,7 +638,7 @@ public class IBMToneAnalyzerV3Models {
   }
 
   /**
-   * ToneChatScore.
+   * The score for an utterance from the input content.
    */
   public class ToneChatScore extends IBMWatsonGenericModel {
     private Double score_serialized_name;
@@ -710,19 +710,10 @@ public class IBMToneAnalyzerV3Models {
       this.tone_name_serialized_name = toneName;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ToneChatScore ret = (ToneChatScore) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * ToneInput.
+   * Input for the general-purpose endpoint.
    */
   public class ToneInput {
     private String text_serialized_name;
@@ -740,7 +731,7 @@ public class IBMToneAnalyzerV3Models {
   
     private ToneInput(ToneInputBuilder builder) {
       IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
-      text_serialized_name = builder.text;
+      this.text_serialized_name = builder.text;
     }
 
     /**
@@ -806,11 +797,11 @@ public class IBMToneAnalyzerV3Models {
   public class ToneOptions extends IBMWatsonOptionsModel {
     private ToneInput toneInput;
     private String body;
+    private String contentType;
     private Boolean sentences;
     private List<String> tones;
     private String contentLanguage;
     private String acceptLanguage;
-    private String contentType;
  
     /**
      * Gets the toneInput.
@@ -834,6 +825,18 @@ public class IBMToneAnalyzerV3Models {
      */
     public String body() {
       return body;
+    }
+ 
+    /**
+     * Gets the contentType.
+     *
+     * The type of the input. A character encoding can be specified by including a `charset` parameter. For example,
+     * 'text/plain;charset=utf-8'.
+     *
+     * @return the contentType
+     */
+    public String contentType() {
+      return contentType;
     }
  
     /**
@@ -892,27 +895,15 @@ public class IBMToneAnalyzerV3Models {
     public String acceptLanguage() {
       return acceptLanguage;
     }
- 
-    /**
-     * Gets the contentType.
-     *
-     * The type of the input. A character encoding can be specified by including a `charset` parameter. For example,
-     * 'text/plain;charset=utf-8'.
-     *
-     * @return the contentType
-     */
-    public String contentType() {
-      return contentType;
-    }
 
     private ToneOptions(ToneOptionsBuilder builder) {
       toneInput = builder.toneInput;
       body = builder.body;
+      contentType = builder.contentType;
       sentences = builder.sentences;
       tones = builder.tones;
       contentLanguage = builder.contentLanguage;
       acceptLanguage = builder.acceptLanguage;
-      contentType = builder.contentType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -933,20 +924,20 @@ public class IBMToneAnalyzerV3Models {
   public class ToneOptionsBuilder extends IBMWatsonOptionsModel {
     private ToneInput toneInput;
     private String body;
+    private String contentType;
     private Boolean sentences;
     private List<String> tones;
     private String contentLanguage;
     private String acceptLanguage;
-    private String contentType;
 
     private ToneOptionsBuilder(ToneOptions toneOptions) {
       toneInput = toneOptions.toneInput;
       body = toneOptions.body;
+      contentType = toneOptions.contentType;
       sentences = toneOptions.sentences;
       tones = toneOptions.tones;
       contentLanguage = toneOptions.contentLanguage;
       acceptLanguage = toneOptions.acceptLanguage;
-      contentType = toneOptions.contentType;
       this.requestHeaders.putAll(toneOptions.requestHeaders());
     }
 
@@ -1075,7 +1066,7 @@ public class IBMToneAnalyzerV3Models {
   }
 
   /**
-   * ToneScore.
+   * The score for a tone from the input content.
    */
   public class ToneScore extends IBMWatsonGenericModel {
     private Double score_serialized_name;
@@ -1158,19 +1149,10 @@ public class IBMToneAnalyzerV3Models {
       this.tone_name_serialized_name = toneName;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ToneScore ret = (ToneScore) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * Utterance.
+   * An utterance for the input of the general-purpose endpoint.
    */
   public class Utterance {
     private String text_serialized_name;
@@ -1201,8 +1183,8 @@ public class IBMToneAnalyzerV3Models {
   
     private Utterance(UtteranceBuilder builder) {
       IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
-      text_serialized_name = builder.text;
-      user_serialized_name = builder.user;
+      this.text_serialized_name = builder.text;
+      this.user_serialized_name = builder.user;
     }
 
     /**
@@ -1276,7 +1258,7 @@ public class IBMToneAnalyzerV3Models {
   }
 
   /**
-   * UtteranceAnalyses.
+   * The results of the analysis for the utterances of the input content.
    */
   public class UtteranceAnalyses extends IBMWatsonResponseModel {
     private List<UtteranceAnalysis> utterances_tone_serialized_name;
@@ -1350,7 +1332,7 @@ public class IBMToneAnalyzerV3Models {
   }
 
   /**
-   * UtteranceAnalysis.
+   * The results of the analysis for an utterance of the input content.
    */
   public class UtteranceAnalysis extends IBMWatsonGenericModel {
     private Long utterance_id_serialized_name;
