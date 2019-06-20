@@ -424,7 +424,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * Webpage metadata, such as the author and the title of the page.
    */
-  public class AnalysisResultsMetadata {
+  public class AnalysisResultsMetadata extends IBMWatsonGenericModel {
     private List<Author> authors_serialized_name;
     private String publication_date_serialized_name;
     private String title_serialized_name;
@@ -531,12 +531,47 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.feeds_serialized_name = feeds;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      AnalysisResultsMetadata ret = (AnalysisResultsMetadata) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for authors
+      List<Author> newAuthors = new List<Author>();
+      List<Author> deserializedAuthors = ret.getAuthors();
+      if (deserializedAuthors != null) {
+        for (Integer i = 0; i < deserializedAuthors.size(); i++) {
+          Author currentItem = ret.getAuthors().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('authors_serialized_name');
+          Author newItem = (Author) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Author.class);
+          newAuthors.add(newItem);
+        }
+        ret.authors_serialized_name = newAuthors;
+      }
+
+      // calling custom deserializer for feeds
+      List<Feed> newFeeds = new List<Feed>();
+      List<Feed> deserializedFeeds = ret.getFeeds();
+      if (deserializedFeeds != null) {
+        for (Integer i = 0; i < deserializedFeeds.size(); i++) {
+          Feed currentItem = ret.getFeeds().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('feeds_serialized_name');
+          Feed newItem = (Feed) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Feed.class);
+          newFeeds.add(newItem);
+        }
+        ret.feeds_serialized_name = newFeeds;
+      }
+
+      return ret;
+    }
   }
 
   /**
    * API usage information for the request.
    */
-  public class AnalysisResultsUsage {
+  public class AnalysisResultsUsage extends IBMWatsonGenericModel {
     private Long features_serialized_name;
     private Long text_characters_serialized_name;
     private Long text_units_serialized_name;
@@ -1214,7 +1249,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * Information that helps to explain what contributed to the categories result.
    */
-  public class CategoriesResultExplanation {
+  public class CategoriesResultExplanation extends IBMWatsonGenericModel {
     private List<CategoriesRelevantText> relevant_text_serialized_name;
  
     /**
@@ -1239,6 +1274,28 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.relevant_text_serialized_name = relevantText;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      CategoriesResultExplanation ret = (CategoriesResultExplanation) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for relevantText
+      List<CategoriesRelevantText> newRelevantText = new List<CategoriesRelevantText>();
+      List<CategoriesRelevantText> deserializedRelevantText = ret.getRelevantText();
+      if (deserializedRelevantText != null) {
+        for (Integer i = 0; i < deserializedRelevantText.size(); i++) {
+          CategoriesRelevantText currentItem = ret.getRelevantText().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('relevant_text_serialized_name');
+          CategoriesRelevantText newItem = (CategoriesRelevantText) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), CategoriesRelevantText.class);
+          newRelevantText.add(newItem);
+        }
+        ret.relevant_text_serialized_name = newRelevantText;
+      }
+
+      return ret;
+    }
   }
 
   /**
@@ -4006,7 +4063,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * The extracted action from the sentence.
    */
-  public class SemanticRolesResultAction {
+  public class SemanticRolesResultAction extends IBMWatsonGenericModel {
     private String text_serialized_name;
     private String normalized_serialized_name;
     private SemanticRolesVerb verb_serialized_name;
@@ -4069,12 +4126,25 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.verb_serialized_name = verb;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SemanticRolesResultAction ret = (SemanticRolesResultAction) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for verb
+      SemanticRolesVerb newVerb = (SemanticRolesVerb) new SemanticRolesVerb().deserialize(JSON.serialize(ret.getVerb()), (Map<String, Object>) jsonMap.get('verb_serialized_name'), SemanticRolesVerb.class);
+      ret.setVerb(newVerb);
+
+      return ret;
+    }
   }
 
   /**
    * The extracted object from the sentence.
    */
-  public class SemanticRolesResultObject {
+  public class SemanticRolesResultObject extends IBMWatsonGenericModel {
     private String text_serialized_name;
     private List<SemanticRolesKeyword> keywords_serialized_name;
  
@@ -4118,12 +4188,34 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.keywords_serialized_name = keywords;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SemanticRolesResultObject ret = (SemanticRolesResultObject) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for keywords
+      List<SemanticRolesKeyword> newKeywords = new List<SemanticRolesKeyword>();
+      List<SemanticRolesKeyword> deserializedKeywords = ret.getKeywords();
+      if (deserializedKeywords != null) {
+        for (Integer i = 0; i < deserializedKeywords.size(); i++) {
+          SemanticRolesKeyword currentItem = ret.getKeywords().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('keywords_serialized_name');
+          SemanticRolesKeyword newItem = (SemanticRolesKeyword) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesKeyword.class);
+          newKeywords.add(newItem);
+        }
+        ret.keywords_serialized_name = newKeywords;
+      }
+
+      return ret;
+    }
   }
 
   /**
    * The extracted subject from the sentence.
    */
-  public class SemanticRolesResultSubject {
+  public class SemanticRolesResultSubject extends IBMWatsonGenericModel {
     private String text_serialized_name;
     private List<SemanticRolesEntity> entities_serialized_name;
     private List<SemanticRolesKeyword> keywords_serialized_name;
@@ -4188,6 +4280,41 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.keywords_serialized_name = keywords;
     }
 
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SemanticRolesResultSubject ret = (SemanticRolesResultSubject) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for entities
+      List<SemanticRolesEntity> newEntities = new List<SemanticRolesEntity>();
+      List<SemanticRolesEntity> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          SemanticRolesEntity currentItem = ret.getEntities().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          SemanticRolesEntity newItem = (SemanticRolesEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesEntity.class);
+          newEntities.add(newItem);
+        }
+        ret.entities_serialized_name = newEntities;
+      }
+
+      // calling custom deserializer for keywords
+      List<SemanticRolesKeyword> newKeywords = new List<SemanticRolesKeyword>();
+      List<SemanticRolesKeyword> deserializedKeywords = ret.getKeywords();
+      if (deserializedKeywords != null) {
+        for (Integer i = 0; i < deserializedKeywords.size(); i++) {
+          SemanticRolesKeyword currentItem = ret.getKeywords().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('keywords_serialized_name');
+          SemanticRolesKeyword newItem = (SemanticRolesKeyword) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SemanticRolesKeyword.class);
+          newKeywords.add(newItem);
+        }
+        ret.keywords_serialized_name = newKeywords;
+      }
+
+      return ret;
+    }
   }
 
   /**
