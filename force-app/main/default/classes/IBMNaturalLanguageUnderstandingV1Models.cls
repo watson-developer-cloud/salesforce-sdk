@@ -1,6 +1,6 @@
 public class IBMNaturalLanguageUnderstandingV1Models {
   /**
-   * Analysis results for each requested feature.
+   * Results of the analysis, organized by feature.
    */
   public class AnalysisResults extends IBMWatsonResponseModel {
     private String language_serialized_name;
@@ -424,7 +424,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * Webpage metadata, such as the author and the title of the page.
    */
-  public class AnalysisResultsMetadata extends IBMWatsonResponseModel {
+  public class AnalysisResultsMetadata {
     private List<Author> authors_serialized_name;
     private String publication_date_serialized_name;
     private String title_serialized_name;
@@ -536,7 +536,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * API usage information for the request.
    */
-  public class AnalysisResultsUsage extends IBMWatsonResponseModel {
+  public class AnalysisResultsUsage {
     private Long features_serialized_name;
     private Long text_characters_serialized_name;
     private Long text_units_serialized_name;
@@ -666,7 +666,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Gets the clean.
      *
      * Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see the [Analyzing
-     * webpages](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html)
+     * webpages](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages)
      * documentation.
      *
      * @return the clean
@@ -679,9 +679,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Gets the xpath.
      *
      * An [XPath
-     * query](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html#xpath) to
-     * perform on `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it is
-     * analyzed. To analyze only the results of the XPath query, set the `clean` parameter to `false`.
+     * query](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages#xpath)
+     * to perform on `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it
+     * is analyzed. To analyze only the results of the XPath query, set the `clean` parameter to `false`.
      *
      * @return the xpath
      */
@@ -716,8 +716,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      *
      * ISO 639-1 code that specifies the language of your text. This overrides automatic language detection. Language
      * support differs depending on the features you include in your analysis. See [Language
-     * support](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-language-support) for more
-     * information.
+     * support](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-language-support)
+     * for more information.
      *
      * @return the language
      */
@@ -965,15 +965,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.name_serialized_name = name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Author ret = (Author) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -982,8 +973,21 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
    */
   public class CategoriesOptions {
+    private Boolean explanation_serialized_name;
     private Long limit_serialized_name;
     private String model_serialized_name;
+ 
+    /**
+     * Gets the explanation.
+     *
+     * Set this to `true` to return explanations for each categorization. **This is available only for English
+     * categories.**.
+     *
+     * @return the explanation
+     */
+    public Boolean explanation() {
+      return explanation_serialized_name;
+    }
  
     /**
      * Gets the xlimit.
@@ -999,8 +1003,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the model.
      *
-     * Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to
-     * override the standard categories model.
+     * Enter a [custom
+     * model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+     * ID to override the standard categories model.
      *
      * @return the model
      */
@@ -1009,8 +1014,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
   
     private CategoriesOptions(CategoriesOptionsBuilder builder) {
-      limit_serialized_name = builder.xlimit;
-      model_serialized_name = builder.model;
+      this.explanation_serialized_name = builder.explanation;
+      this.limit_serialized_name = builder.xlimit;
+      this.model_serialized_name = builder.model;
     }
 
     /**
@@ -1028,10 +1034,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
    * CategoriesOptions Builder.
    */
   public class CategoriesOptionsBuilder {
+    private Boolean explanation;
     private Long xlimit;
     private String model;
 
     private CategoriesOptionsBuilder(CategoriesOptions categoriesOptions) {
+      this.explanation = categoriesOptions.explanation_serialized_name;
       this.xlimit = categoriesOptions.limit_serialized_name;
       this.model = categoriesOptions.model_serialized_name;
     }
@@ -1049,6 +1057,17 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      */
     public CategoriesOptions build() {
       return new CategoriesOptions(this);
+    }
+
+    /**
+     * Set the explanation.
+     *
+     * @param explanation the explanation
+     * @return the CategoriesOptions builder
+     */
+    public CategoriesOptionsBuilder explanation(Boolean explanation) {
+      this.explanation = explanation;
+      return this;
     }
 
     /**
@@ -1075,18 +1094,48 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   }
 
   /**
+   * Relevant text that contributed to the categorization.
+   */
+  public class CategoriesRelevantText extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+ 
+    /**
+     * Gets the text.
+     *
+     * Text from the analyzed source that supports the categorization.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+  }
+
+  /**
    * A categorization of the analyzed text.
    */
   public class CategoriesResult extends IBMWatsonGenericModel {
     private String label_serialized_name;
     private Double score_serialized_name;
+    private CategoriesResultExplanation explanation_serialized_name;
  
     /**
      * Gets the label.
      *
      * The path to the category through the 5-level taxonomy hierarchy. For the complete list of categories, see the
      * [Categories
-     * hierarchy](https://cloud.ibm.com/docs/services/natural-language-understanding/categories.html#categories-hierarchy)
+     * hierarchy](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-categories#categories-hierarchy)
      * documentation.
      *
      * @return the label
@@ -1107,6 +1156,18 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     public Double getScore() {
       return score_serialized_name;
     }
+ 
+    /**
+     * Gets the explanation.
+     *
+     * Information that helps to explain what contributed to the categories result.
+     *
+     * @return the explanation
+     */
+    @AuraEnabled
+    public CategoriesResultExplanation getExplanation() {
+      return explanation_serialized_name;
+    }
 
     /**
      * Sets the label.
@@ -1126,6 +1187,15 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.score_serialized_name = score;
     }
 
+    /**
+     * Sets the explanation.
+     *
+     * @param explanation the new explanation
+     */
+    public void setExplanation(final CategoriesResultExplanation explanation) {
+      this.explanation_serialized_name = explanation;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
@@ -1133,8 +1203,42 @@ public class IBMNaturalLanguageUnderstandingV1Models {
 
       CategoriesResult ret = (CategoriesResult) super.deserialize(jsonString, jsonMap, classType);
 
+      // calling custom deserializer for explanation
+      CategoriesResultExplanation newExplanation = (CategoriesResultExplanation) new CategoriesResultExplanation().deserialize(JSON.serialize(ret.getExplanation()), (Map<String, Object>) jsonMap.get('explanation_serialized_name'), CategoriesResultExplanation.class);
+      ret.setExplanation(newExplanation);
+
       return ret;
     }
+  }
+
+  /**
+   * Information that helps to explain what contributed to the categories result.
+   */
+  public class CategoriesResultExplanation {
+    private List<CategoriesRelevantText> relevant_text_serialized_name;
+ 
+    /**
+     * Gets the relevantText.
+     *
+     * An array of relevant text from the source that contributed to the categorization. The sorted array begins with
+     * the phrase that contributed most significantly to the result, followed by phrases that were less and less
+     * impactful.
+     *
+     * @return the relevantText
+     */
+    public List<CategoriesRelevantText> getRelevantText() {
+      return relevant_text_serialized_name;
+    }
+
+    /**
+     * Sets the relevantText.
+     *
+     * @param relevantText the new relevantText
+     */
+    public void setRelevantText(final List<CategoriesRelevantText> relevantText) {
+      this.relevant_text_serialized_name = relevantText;
+    }
+
   }
 
   /**
@@ -1158,7 +1262,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
   
     private ConceptsOptions(ConceptsOptionsBuilder builder) {
-      limit_serialized_name = builder.xlimit;
+      this.limit_serialized_name = builder.xlimit;
     }
 
     /**
@@ -1280,15 +1384,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.dbpedia_resource_serialized_name = dbpediaResource;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ConceptsResult ret = (ConceptsResult) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -1455,15 +1550,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.subtype_serialized_name = subtype;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      DisambiguationResult ret = (DisambiguationResult) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -1557,15 +1643,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.score_serialized_name = score;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      DocumentSentimentResults ret = (DocumentSentimentResults) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -1602,8 +1679,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
   
     private EmotionOptions(EmotionOptionsBuilder builder) {
-      document_serialized_name = builder.document;
-      targets_serialized_name = builder.targets;
+      this.document_serialized_name = builder.document;
+      this.targets_serialized_name = builder.targets;
     }
 
     /**
@@ -1876,20 +1953,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.sadness_serialized_name = sadness;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      EmotionScores ret = (EmotionScores) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
    * Identifies people, cities, organizations, and other entities in the content. See [Entity types and
-   * subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding/entity-types.html).
+   * subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-entity-types).
    *
    * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
    * Arabic, Chinese, and Dutch are supported only through custom models.
@@ -1926,8 +1994,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the model.
      *
-     * Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to
-     * override the standard entity detection model.
+     * Enter a [custom
+     * model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+     * ID to override the standard entity detection model.
      *
      * @return the model
      */
@@ -1958,11 +2027,11 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
   
     private EntitiesOptions(EntitiesOptionsBuilder builder) {
-      limit_serialized_name = builder.xlimit;
-      mentions_serialized_name = builder.mentions;
-      model_serialized_name = builder.model;
-      sentiment_serialized_name = builder.sentiment;
-      emotion_serialized_name = builder.emotion;
+      this.limit_serialized_name = builder.xlimit;
+      this.mentions_serialized_name = builder.mentions;
+      this.model_serialized_name = builder.model;
+      this.sentiment_serialized_name = builder.sentiment;
+      this.emotion_serialized_name = builder.emotion;
     }
 
     /**
@@ -2331,15 +2400,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.location_serialized_name = location;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      EntityMention ret = (EntityMention) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -2369,15 +2429,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.score_serialized_name = score;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      FeatureSentimentResults ret = (FeatureSentimentResults) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -2428,7 +2479,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      * Gets the entities.
      *
      * Identifies people, cities, organizations, and other entities in the content. See [Entity types and
-     * subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding/entity-types.html).
+     * subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-entity-types).
      *
      * Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
      * Arabic, Chinese, and Dutch are supported only through custom models.
@@ -2469,7 +2520,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
      *
      * Recognizes when two entities are related and identifies the type of relation. For example, an `awardedTo`
      * relation might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
-     * types](https://cloud.ibm.com/docs/services/natural-language-understanding/relations.html).
+     * types](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-relations).
      *
      * Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
      * Portuguese custom models are also supported.
@@ -2532,16 +2583,16 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
   
     private Features(FeaturesBuilder builder) {
-      concepts_serialized_name = builder.concepts;
-      emotion_serialized_name = builder.emotion;
-      entities_serialized_name = builder.entities;
-      keywords_serialized_name = builder.keywords;
-      metadata_serialized_name = builder.metadata;
-      relations_serialized_name = builder.relations;
-      semantic_roles_serialized_name = builder.semanticRoles;
-      sentiment_serialized_name = builder.sentiment;
-      categories_serialized_name = builder.categories;
-      syntax_serialized_name = builder.syntax;
+      this.concepts_serialized_name = builder.concepts;
+      this.emotion_serialized_name = builder.emotion;
+      this.entities_serialized_name = builder.entities;
+      this.keywords_serialized_name = builder.keywords;
+      this.metadata_serialized_name = builder.metadata;
+      this.relations_serialized_name = builder.relations;
+      this.semantic_roles_serialized_name = builder.semanticRoles;
+      this.sentiment_serialized_name = builder.sentiment;
+      this.categories_serialized_name = builder.categories;
+      this.syntax_serialized_name = builder.syntax;
     }
 
     /**
@@ -2736,15 +2787,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.link_serialized_name = link;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Feed ret = (Feed) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -2791,9 +2833,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
   
     private KeywordsOptions(KeywordsOptionsBuilder builder) {
-      limit_serialized_name = builder.xlimit;
-      sentiment_serialized_name = builder.sentiment;
-      emotion_serialized_name = builder.emotion;
+      this.limit_serialized_name = builder.xlimit;
+      this.sentiment_serialized_name = builder.sentiment;
+      this.emotion_serialized_name = builder.emotion;
     }
 
     /**
@@ -3301,15 +3343,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.created_serialized_name = created;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Model ret = (Model) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -3456,21 +3489,12 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.type_serialized_name = xtype;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      RelationEntity ret = (RelationEntity) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
    * Recognizes when two entities are related and identifies the type of relation. For example, an `awardedTo` relation
    * might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
-   * types](https://cloud.ibm.com/docs/services/natural-language-understanding/relations.html).
+   * types](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-relations).
    *
    * Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
    * Portuguese custom models are also supported.
@@ -3481,8 +3505,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     /**
      * Gets the model.
      *
-     * Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to
-     * override the default model.
+     * Enter a [custom
+     * model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+     * ID to override the default model.
      *
      * @return the model
      */
@@ -3491,7 +3516,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
   
     private RelationsOptions(RelationsOptionsBuilder builder) {
-      model_serialized_name = builder.model;
+      this.model_serialized_name = builder.model;
     }
 
     /**
@@ -3708,15 +3733,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.text_serialized_name = text;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SemanticRolesEntity ret = (SemanticRolesEntity) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -3746,15 +3762,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.text_serialized_name = text;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SemanticRolesKeyword ret = (SemanticRolesKeyword) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -3801,9 +3808,9 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
   
     private SemanticRolesOptions(SemanticRolesOptionsBuilder builder) {
-      limit_serialized_name = builder.xlimit;
-      keywords_serialized_name = builder.keywords;
-      entities_serialized_name = builder.entities;
+      this.limit_serialized_name = builder.xlimit;
+      this.keywords_serialized_name = builder.keywords;
+      this.entities_serialized_name = builder.entities;
     }
 
     /**
@@ -3999,7 +4006,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * The extracted action from the sentence.
    */
-  public class SemanticRolesResultAction extends IBMWatsonResponseModel {
+  public class SemanticRolesResultAction {
     private String text_serialized_name;
     private String normalized_serialized_name;
     private SemanticRolesVerb verb_serialized_name;
@@ -4067,7 +4074,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * The extracted object from the sentence.
    */
-  public class SemanticRolesResultObject extends IBMWatsonResponseModel {
+  public class SemanticRolesResultObject {
     private String text_serialized_name;
     private List<SemanticRolesKeyword> keywords_serialized_name;
  
@@ -4116,7 +4123,7 @@ public class IBMNaturalLanguageUnderstandingV1Models {
   /**
    * The extracted subject from the sentence.
    */
-  public class SemanticRolesResultSubject extends IBMWatsonResponseModel {
+  public class SemanticRolesResultSubject {
     private String text_serialized_name;
     private List<SemanticRolesEntity> entities_serialized_name;
     private List<SemanticRolesKeyword> keywords_serialized_name;
@@ -4232,15 +4239,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.tense_serialized_name = tense;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SemanticRolesVerb ret = (SemanticRolesVerb) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -4292,15 +4290,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.location_serialized_name = location;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SentenceResult ret = (SentenceResult) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -4336,8 +4325,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
   
     private SentimentOptions(SentimentOptionsBuilder builder) {
-      document_serialized_name = builder.document;
-      targets_serialized_name = builder.targets;
+      this.document_serialized_name = builder.document;
+      this.targets_serialized_name = builder.targets;
     }
 
     /**
@@ -4524,8 +4513,8 @@ public class IBMNaturalLanguageUnderstandingV1Models {
     }
   
     private SyntaxOptions(SyntaxOptionsBuilder builder) {
-      tokens_serialized_name = builder.tokens;
-      sentences_serialized_name = builder.sentences;
+      this.tokens_serialized_name = builder.tokens;
+      this.sentences_serialized_name = builder.sentences;
     }
 
     /**
@@ -4833,15 +4822,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.score_serialized_name = score;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      TargetedSentimentResults ret = (TargetedSentimentResults) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -4938,15 +4918,6 @@ public class IBMNaturalLanguageUnderstandingV1Models {
       this.lemma_serialized_name = lemma;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      TokenResult ret = (TokenResult) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
 }
