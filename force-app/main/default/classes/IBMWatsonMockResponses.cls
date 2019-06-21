@@ -2210,7 +2210,14 @@ public class IBMWatsonMockResponses {
   }
   
   public static testMethod String speechToTextTrainLanguageModel() {
-    return '{}';
+    return '{' +
+      '"warnings": [' +
+        '{' +
+          '"description": "description",' +
+          '"warning_id": "warning_id"' +
+        '}' +
+      ']' +
+    '}';
   }
   
   public static testMethod String speechToTextUpgradeLanguageModel() {
@@ -2419,71 +2426,119 @@ public class IBMWatsonMockResponses {
 
   public static testMethod String speechToTextRecognize() {
     return ' {' +
-     ' "results": [' +
-     '   {' +
-     '     "word_alternatives": [' +
-     '       {' +
-     '         "start_time": 0.14, ' +
-     '         "alternatives": [' +
-     '           {' +
-     '             "confidence": 1, ' +
-     '             "word": "a"' +
-     '           }' +
-     '         ], ' +
-     '         "end_time": 0.28' +
-     '       }, ' +
-     '       {' +
-     '         "start_time": 5.33, ' +
-     '         "alternatives": [' +
-     '           {' +
-     '             "confidence": 0.9953, ' +
-     '             "word": "Sunday"' +
-     '           }' +
-     '         ], ' +
-     '         "end_time": 6.04' +
-     '       }' +
-     '     ], ' +
-     '     "keywords_result": {' +
-     '       "tornadoes": [' +
-     '         {' +
-     '           "normalized_text": "tornadoes", ' +
-     '           "start_time": 3.03, ' +
-     '           "confidence": 0.953, ' +
-     '           "end_time": 3.85' +
-     '         }' +
-     '       ], ' +
-     '       "colorado": [' +
-     '         {' +
-     '           "normalized_text": "Colorado", ' +
-     '           "start_time": 4.59, ' +
-     '           "confidence": 0.999, ' +
-     '           "end_time": 5.18' +
-     '         }' +
-     '       ]' +
-     '     }, ' +
-     '     "alternatives": [' +
-     '       {' +
-     '         "timestamps": [' +
-     '           [' +
-     '             "a", ' +
-     '             0.14, ' +
-     '             0.28' +
-     '           ], ' +
-     '           [' +
-     '             "Sunday", ' +
-     '             5.33, ' +
-     '             6.04' +
-     '           ]' +
-     '         ], ' +
-     '         "confidence": 0.983, ' +
-     '         "transcript": "a line of severe thunderstorms with several possible tornadoes is approaching Colorado on Sunday "' +
-     '       }' +
-     '     ], ' +
-     '     "final": true' +
-     '   }' +
-     ' ], ' +
-     ' "result_index": 0' +
-     ' }';
+      '"results": [' +
+      '  {' +
+      '    "word_alternatives": [' +
+      '      {' +
+      '        "start_time": 0.14, ' +
+      '        "alternatives": [' +
+      '          {' +
+      '            "confidence": 1, ' +
+      '            "word": "a"' +
+      '          }' +
+      '        ], ' +
+      '        "end_time": 0.28' +
+      '      }, ' +
+      '      {' +
+      '        "start_time": 5.33, ' +
+      '        "alternatives": [' +
+      '          {' +
+      '            "confidence": 0.9953, ' +
+      '            "word": "Sunday"' +
+      '          }' +
+      '        ], ' +
+      '        "end_time": 6.04' +
+      '      }' +
+      '    ], ' +
+      '    "keywords_result": {' +
+      '      "tornadoes": [' +
+      '        {' +
+      '          "normalized_text": "tornadoes", ' +
+      '          "start_time": 3.03, ' +
+      '          "confidence": 0.953, ' +
+      '          "end_time": 3.85' +
+      '        }' +
+      '      ], ' +
+      '      "colorado": [' +
+      '        {' +
+      '          "normalized_text": "Colorado", ' +
+      '          "start_time": 4.59, ' +
+      '          "confidence": 0.999, ' +
+      '          "end_time": 5.18' +
+      '        }' +
+      '      ]' +
+      '    }, ' +
+      '    "alternatives": [' +
+      '      {' +
+      '        "timestamps": [' +
+      '          [' +
+      '            "a", ' +
+      '            0.14, ' +
+      '            0.28' +
+      '          ], ' +
+      '          [' +
+      '            "Sunday", ' +
+      '            5.33, ' +
+      '            6.04' +
+      '          ]' +
+      '        ], ' +
+      '        "confidence": 0.983, ' +
+      '        "transcript": "a line of severe thunderstorms with several possible tornadoes is approaching Colorado on Sunday "' +
+      '      }' +
+      '    ], ' +
+      '    "final": true' +
+      '  }' +
+      '], ' +
+      '"result_index": 0,' +
+      '"audio_metrics": {' +
+        '"sampling_interval": 0.1,' +
+        '"accumulated": {' +
+          '"final": true,' +
+          '"end_time": 0.2,' +
+          '"speech_ratio": 0.4,' +
+          '"high_frequency_loss": 0.5,' +
+          '"signal_to_noise_ratio": 0.3,' +
+          '"direct_current_offset": [' +
+            '{' +
+              '"begin": 3.1,' +
+              '"end": 6.2,' +
+              '"count": 10' +
+            '}' +
+          '],' +
+          '"clipping_rate": [' +
+            '{' +
+              '"begin": 3.1,' +
+              '"end": 6.2,' +
+              '"count": 10' +
+            '}' +
+          '],' +
+          '"speech_level": [' +
+            '{' +
+              '"begin": 3.1,' +
+              '"end": 6.2,' +
+              '"count": 10' +
+            '}' +
+          '],' +
+          '"non_speech_level": [' +
+            '{' +
+              '"begin": 3.1,' +
+              '"end": 6.2,' +
+              '"count": 10' +
+            '}' +
+          ']' +
+        '}' +
+      '},' +
+      '"processing_metrics": {' +
+        '"processed_audio": {' +
+          '"received": 300.0,' +
+          '"seen_by_engine": 400.0,' +
+          '"transcription": 500.0,' +
+          '"speaker_labels": 600.0' +
+        '},' +
+        '"wall_clock_since_first_byte_received": 47.0,' +
+        '"periodic": true' +
+      '}' +
+    '}';
   }
   
   public static testMethod String expansionsResponse() {
