@@ -320,6 +320,7 @@ private class IBMLanguageTranslatorV3Test {
 
     IBMLanguageTranslatorV3Models.TranslateDocumentOptions options = new IBMLanguageTranslatorV3Models.TranslateDocumentOptionsBuilder()
       .file(document)
+      .filename(filename)
       .fileContentType(fileContentType)
       .modelId(modelId)
       .source(source)
@@ -330,6 +331,7 @@ private class IBMLanguageTranslatorV3Test {
     options = options.newBuilder().build();
 
     System.assertEquals(document, options.file());
+    System.assertEquals(filename, options.filename());
     System.assertEquals(fileContentType, options.fileContentType());
     System.assertEquals(modelId, options.modelId());
     System.assertEquals(source, options.source());
@@ -357,6 +359,7 @@ private class IBMLanguageTranslatorV3Test {
 
     IBMLanguageTranslatorV3Models.TranslateDocumentOptions options = new IBMLanguageTranslatorV3Models.TranslateDocumentOptionsBuilder()
       .file(document)
+      .filename(filename)
       .build();
     IBMLanguageTranslatorV3Models.DocumentStatus response = service.translateDocument(options);
 
