@@ -70,9 +70,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the metadata.
      *
-     * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata
-     * that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1
-     * MB are rejected.
+     * The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected.
      * Example:  ``` {
      *   "Creator": "Johnny Appleseed",
      *   "Subject": "Apples"
@@ -560,7 +558,8 @@ public class IBMDiscoveryV1Models {
     private DocumentCounts document_counts_serialized_name;
     private CollectionDiskUsage disk_usage_serialized_name;
     private TrainingStatus training_status_serialized_name;
-    private SourceStatus source_crawl_serialized_name;
+    private CollectionCrawlStatus crawl_status_serialized_name;
+    private SduStatus smart_document_understanding_serialized_name;
  
     /**
      * Gets the collectionId.
@@ -692,15 +691,27 @@ public class IBMDiscoveryV1Models {
     }
  
     /**
-     * Gets the sourceCrawl.
+     * Gets the crawlStatus.
      *
-     * Object containing source crawl status information.
+     * Object containing information about the crawl status of this collection.
      *
-     * @return the sourceCrawl
+     * @return the crawlStatus
      */
     @AuraEnabled
-    public SourceStatus getSourceCrawl() {
-      return source_crawl_serialized_name;
+    public CollectionCrawlStatus getCrawlStatus() {
+      return crawl_status_serialized_name;
+    }
+ 
+    /**
+     * Gets the smartDocumentUnderstanding.
+     *
+     * Object containing smart document understanding information for this collection.
+     *
+     * @return the smartDocumentUnderstanding
+     */
+    @AuraEnabled
+    public SduStatus getSmartDocumentUnderstanding() {
+      return smart_document_understanding_serialized_name;
     }
 
     /**
@@ -767,12 +778,21 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the sourceCrawl.
+     * Sets the crawlStatus.
      *
-     * @param sourceCrawl the new sourceCrawl
+     * @param crawlStatus the new crawlStatus
      */
-    public void setSourceCrawl(final SourceStatus sourceCrawl) {
-      this.source_crawl_serialized_name = sourceCrawl;
+    public void setCrawlStatus(final CollectionCrawlStatus crawlStatus) {
+      this.crawl_status_serialized_name = crawlStatus;
+    }
+
+    /**
+     * Sets the smartDocumentUnderstanding.
+     *
+     * @param smartDocumentUnderstanding the new smartDocumentUnderstanding
+     */
+    public void setSmartDocumentUnderstanding(final SduStatus smartDocumentUnderstanding) {
+      this.smart_document_understanding_serialized_name = smartDocumentUnderstanding;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -794,6 +814,51 @@ public class IBMDiscoveryV1Models {
       // calling custom deserializer for trainingStatus
       TrainingStatus newTrainingStatus = (TrainingStatus) new TrainingStatus().deserialize(JSON.serialize(trainingStatus), trainingStatus, TrainingStatus.class);
       ret.setTrainingStatus(newTrainingStatus);
+
+      // calling custom deserializer for crawlStatus
+      CollectionCrawlStatus newCrawlStatus = (CollectionCrawlStatus) new CollectionCrawlStatus().deserialize(JSON.serialize(ret.getCrawlStatus()), (Map<String, Object>) jsonMap.get('crawl_status_serialized_name'), CollectionCrawlStatus.class);
+      ret.setCrawlStatus(newCrawlStatus);
+
+      // calling custom deserializer for smartDocumentUnderstanding
+      SduStatus newSmartDocumentUnderstanding = (SduStatus) new SduStatus().deserialize(JSON.serialize(ret.getSmartDocumentUnderstanding()), (Map<String, Object>) jsonMap.get('smart_document_understanding_serialized_name'), SduStatus.class);
+      ret.setSmartDocumentUnderstanding(newSmartDocumentUnderstanding);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Object containing information about the crawl status of this collection.
+   */
+  public class CollectionCrawlStatus extends IBMWatsonGenericModel {
+    private SourceStatus source_crawl_serialized_name;
+ 
+    /**
+     * Gets the sourceCrawl.
+     *
+     * Object containing source crawl status information.
+     *
+     * @return the sourceCrawl
+     */
+    public SourceStatus getSourceCrawl() {
+      return source_crawl_serialized_name;
+    }
+
+    /**
+     * Sets the sourceCrawl.
+     *
+     * @param sourceCrawl the new sourceCrawl
+     */
+    public void setSourceCrawl(final SourceStatus sourceCrawl) {
+      this.source_crawl_serialized_name = sourceCrawl;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      CollectionCrawlStatus ret = (CollectionCrawlStatus) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for sourceCrawl
       SourceStatus newSourceCrawl = (SourceStatus) new SourceStatus().deserialize(JSON.serialize(ret.getSourceCrawl()), (Map<String, Object>) jsonMap.get('source_crawl_serialized_name'), SourceStatus.class);
@@ -821,15 +886,6 @@ public class IBMDiscoveryV1Models {
       return used_bytes_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      CollectionDiskUsage ret = (CollectionDiskUsage) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -863,15 +919,6 @@ public class IBMDiscoveryV1Models {
       return maximum_allowed_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      CollectionUsage ret = (CollectionUsage) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -1105,6 +1152,7 @@ public class IBMDiscoveryV1Models {
     private HtmlSettings html_serialized_name;
     private SegmentSettings segment_serialized_name;
     private List<NormalizationOperation> json_normalizations_serialized_name;
+    private Boolean image_text_recognition_serialized_name;
  
     /**
      * Gets the pdf.
@@ -1166,6 +1214,21 @@ public class IBMDiscoveryV1Models {
     public List<NormalizationOperation> getJsonNormalizations() {
       return json_normalizations_serialized_name;
     }
+ 
+    /**
+     * Gets the imageTextRecognition.
+     *
+     * When `true`, automatic text extraction from images (this includes images embedded in supported document formats,
+     * for example PDF, and suppported image formats, for example TIFF) is performed on documents uploaded to the
+     * collection. This field is supported on **Advanced** and higher plans only. **Lite** plans do not support image
+     * text recognition.
+     *
+     * @return the imageTextRecognition
+     */
+    @AuraEnabled
+    public Boolean getImageTextRecognition() {
+      return image_text_recognition_serialized_name;
+    }
 
     /**
      * Sets the pdf.
@@ -1210,6 +1273,15 @@ public class IBMDiscoveryV1Models {
      */
     public void setJsonNormalizations(final List<NormalizationOperation> jsonNormalizations) {
       this.json_normalizations_serialized_name = jsonNormalizations;
+    }
+
+    /**
+     * Sets the imageTextRecognition.
+     *
+     * @param imageTextRecognition the new imageTextRecognition
+     */
+    public void setImageTextRecognition(final Boolean imageTextRecognition) {
+      this.image_text_recognition_serialized_name = imageTextRecognition;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1760,6 +1832,7 @@ public class IBMDiscoveryV1Models {
     private String environmentId;
     private String sourceType;
     private CredentialDetails credentialDetails;
+    private String status;
  
     /**
      * Gets the environmentId.
@@ -1800,12 +1873,26 @@ public class IBMDiscoveryV1Models {
     public CredentialDetails credentialDetails() {
       return credentialDetails;
     }
+ 
+    /**
+     * Gets the status.
+     *
+     * The current status of this set of credentials. `connected` indicates that the credentials are available to use
+     * with the source configuration of a collection. `invalid` refers to the credentials (for example, the password
+     * provided has expired) and must be corrected before they can be used with a collection.
+     *
+     * @return the status
+     */
+    public String status() {
+      return status;
+    }
 
     private CreateCredentialsOptions(CreateCredentialsOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
       environmentId = builder.environmentId;
       sourceType = builder.sourceType;
       credentialDetails = builder.credentialDetails;
+      status = builder.status;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1827,11 +1914,13 @@ public class IBMDiscoveryV1Models {
     private String environmentId;
     private String sourceType;
     private CredentialDetails credentialDetails;
+    private String status;
 
     private CreateCredentialsOptionsBuilder(CreateCredentialsOptions createCredentialsOptions) {
       environmentId = createCredentialsOptions.environmentId;
       sourceType = createCredentialsOptions.sourceType;
       credentialDetails = createCredentialsOptions.credentialDetails;
+      status = createCredentialsOptions.status;
       this.requestHeaders.putAll(createCredentialsOptions.requestHeaders());
     }
 
@@ -1893,6 +1982,17 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
+     * Set the status.
+     *
+     * @param status the status
+     * @return the CreateCredentialsOptions builder
+     */
+    public CreateCredentialsOptionsBuilder status(String status) {
+      this.status = status;
+      return this;
+    }
+
+    /**
      * Set the credentials.
      *
      * @param credentials the credentials
@@ -1901,6 +2001,7 @@ public class IBMDiscoveryV1Models {
     public CreateCredentialsOptionsBuilder credentials(Credentials credentials) {
       this.sourceType = credentials.getSourceType();
       this.credentialDetails = credentials.getCredentialDetails();
+      this.status = credentials.getStatus();
       return this;
     }
 
@@ -3180,7 +3281,7 @@ public class IBMDiscoveryV1Models {
      * -  `"source_type": "box"` - valid `credential_type`s: `oauth2`
      * -  `"source_type": "salesforce"` - valid `credential_type`s: `username_password`
      * -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml` with **source_version** of `online`, or
-     * `ntml_v1` with **source_version** of `2016`
+     * `ntlm_v1` with **source_version** of `2016`
      * -  `"source_type": "web_crawl"` - valid `credential_type`s: `noauth` or `basic`
      * -  "source_type": "cloud_object_storage"` - valid `credential_type`s: `aws4_hmac`.
      *
@@ -3234,7 +3335,7 @@ public class IBMDiscoveryV1Models {
      * Gets the username.
      *
      * The **username** of the source that these credentials connect to. Only valid, and required, with a
-     * **credential_type** of `saml`, `username_password`, `basic`, or `ntml_v1`.
+     * **credential_type** of `saml`, `username_password`, `basic`, or `ntlm_v1`.
      *
      * @return the username
      */
@@ -3329,7 +3430,7 @@ public class IBMDiscoveryV1Models {
      * Gets the password.
      *
      * The **password** of the source that these credentials connect to. Only valid, and required, with
-     * **credential_type**s of `saml`, `username_password`, `basic`, or `ntml_v1`.
+     * **credential_type**s of `saml`, `username_password`, `basic`, or `ntlm_v1`.
      *
      * **Note:** When used with a **source_type** of `salesforce`, the password consists of the Salesforce password and
      * a valid Salesforce security token concatenated. This value is never returned and is only used when creating or
@@ -3346,7 +3447,7 @@ public class IBMDiscoveryV1Models {
      * Gets the gatewayId.
      *
      * The ID of the **gateway** to be connected through (when connecting to intranet sites). Only valid with a
-     * **credential_type** of `noauth`, `basic`, or `ntml_v1`. Gateways are created using the
+     * **credential_type** of `noauth`, `basic`, or `ntlm_v1`. Gateways are created using the
      * `/v1/environments/{environment_id}/gateways` methods.
      *
      * @return the gatewayId
@@ -3372,7 +3473,8 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the webApplicationUrl.
      *
-     * SharePoint OnPrem WebApplication URL. Only valid, and required, with a **source_version** of `2016`.
+     * SharePoint OnPrem WebApplication URL. Only valid, and required, with a **source_version** of `2016`. If a port is
+     * not supplied, the default to port `80` for http and port `443` for https connections are used.
      *
      * @return the webApplicationUrl
      */
@@ -3411,7 +3513,8 @@ public class IBMDiscoveryV1Models {
      * Gets the accessKeyId.
      *
      * The access key ID associated with the cloud object store. Only valid, and required, with a **credential_type** of
-     * `aws4_hmac`. For more infomation, see the [cloud object store
+     * `aws4_hmac`. This value is never returned and is only used when creating or modifying **credentials**. For more
+     * infomation, see the [cloud object store
      * documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
      *
      * @return the accessKeyId
@@ -3607,15 +3710,6 @@ public class IBMDiscoveryV1Models {
       this.secret_access_key_serialized_name = secretAccessKey;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      CredentialDetails ret = (CredentialDetails) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -3625,6 +3719,7 @@ public class IBMDiscoveryV1Models {
     private String credential_id_serialized_name;
     private String source_type_serialized_name;
     private CredentialDetails credential_details_serialized_name;
+    private String status_serialized_name;
  
     /**
      * Gets the credentialId.
@@ -3668,6 +3763,20 @@ public class IBMDiscoveryV1Models {
     public CredentialDetails getCredentialDetails() {
       return credential_details_serialized_name;
     }
+ 
+    /**
+     * Gets the status.
+     *
+     * The current status of this set of credentials. `connected` indicates that the credentials are available to use
+     * with the source configuration of a collection. `invalid` refers to the credentials (for example, the password
+     * provided has expired) and must be corrected before they can be used with a collection.
+     *
+     * @return the status
+     */
+    @AuraEnabled
+    public String getStatus() {
+      return status_serialized_name;
+    }
 
     /**
      * Sets the sourceType.
@@ -3685,6 +3794,15 @@ public class IBMDiscoveryV1Models {
      */
     public void setCredentialDetails(final CredentialDetails credentialDetails) {
       this.credential_details_serialized_name = credentialDetails;
+    }
+
+    /**
+     * Sets the status.
+     *
+     * @param status the new status
+     */
+    public void setStatus(final String status) {
+      this.status_serialized_name = status;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -5428,15 +5546,6 @@ public class IBMDiscoveryV1Models {
       return maximum_allowed_bytes_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      DiskUsage ret = (DiskUsage) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -5592,15 +5701,6 @@ public class IBMDiscoveryV1Models {
       return pending_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      DocumentCounts ret = (DocumentCounts) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -5928,7 +6028,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the options.
      *
-     * An object representing the configuration options to use for the `elements` enrichment.
+     * Options which are specific to a particular enrichment.
      *
      * @return the options
      */
@@ -6016,7 +6116,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * An object representing the configuration options to use for the `elements` enrichment.
+   * Options which are specific to a particular enrichment.
    */
   public class EnrichmentOptions extends IBMWatsonGenericModel {
     private NluEnrichmentFeatures features_serialized_name;
@@ -6068,9 +6168,9 @@ public class IBMDiscoveryV1Models {
     }
   
     private EnrichmentOptions(EnrichmentOptionsBuilder builder) {
-      features_serialized_name = builder.features;
-      language_serialized_name = builder.language;
-      model_serialized_name = builder.model;
+      this.features_serialized_name = builder.features;
+      this.language_serialized_name = builder.language;
+      this.model_serialized_name = builder.model;
     }
 
     /**
@@ -6418,15 +6518,6 @@ public class IBMDiscoveryV1Models {
       return maximum_allowed_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      EnvironmentDocuments ret = (EnvironmentDocuments) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -6581,15 +6672,6 @@ public class IBMDiscoveryV1Models {
       this.document_id_serialized_name = documentId;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      EventData ret = (EventData) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -6643,15 +6725,6 @@ public class IBMDiscoveryV1Models {
       this.expanded_terms_serialized_name = expandedTerms;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Expansion ret = (Expansion) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -6775,8 +6848,7 @@ public class IBMDiscoveryV1Models {
      * Gets the query.
      *
      * A query search returns all documents in your data set with full enrichments and full text, but with the most
-     * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
-     * cannot use **natural_language_query** and **query** at the same time.
+     * relevant documents listed first.
      *
      * @return the query
      */
@@ -6788,7 +6860,7 @@ public class IBMDiscoveryV1Models {
      * Gets the naturalLanguageQuery.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language
-     * understanding. You cannot use **natural_language_query** and **query** at the same time.
+     * understanding.
      *
      * @return the naturalLanguageQuery
      */
@@ -7331,8 +7403,7 @@ public class IBMDiscoveryV1Models {
      * Gets the query.
      *
      * A query search returns all documents in your data set with full enrichments and full text, but with the most
-     * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
-     * cannot use **natural_language_query** and **query** at the same time.
+     * relevant documents listed first. Use a query search when you want to find the most relevant search results.
      *
      * @return the query
      */
@@ -7344,7 +7415,7 @@ public class IBMDiscoveryV1Models {
      * Gets the naturalLanguageQuery.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language
-     * understanding. You cannot use **natural_language_query** and **query** at the same time.
+     * understanding.
      *
      * @return the naturalLanguageQuery
      */
@@ -7973,15 +8044,6 @@ public class IBMDiscoveryV1Models {
       return type_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Field ret = (Field) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -7998,7 +8060,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the level.
      *
-     * The HTML heading level that any content with the matching font will be converted to.
+     * The HTML heading level that any content with the matching font is converted to.
      *
      * @return the level
      */
@@ -8121,15 +8183,6 @@ public class IBMDiscoveryV1Models {
       this.name_serialized_name = name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      FontSetting ret = (FontSetting) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -8250,15 +8303,6 @@ public class IBMDiscoveryV1Models {
       this.token_id_serialized_name = tokenId;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Gateway ret = (Gateway) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -12482,15 +12526,6 @@ public class IBMDiscoveryV1Models {
       this.collection_id_serialized_name = collectionId;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      LogQueryResponseResultDocumentsResult ret = (LogQueryResponseResultDocumentsResult) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -12682,15 +12717,6 @@ public class IBMDiscoveryV1Models {
       this.event_rate_serialized_name = eventRate;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      MetricAggregationResult ret = (MetricAggregationResult) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -12889,15 +12915,6 @@ public class IBMDiscoveryV1Models {
       this.event_rate_serialized_name = eventRate;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      MetricTokenAggregationResult ret = (MetricTokenAggregationResult) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -13013,15 +13030,6 @@ public class IBMDiscoveryV1Models {
       this.limit_serialized_name = xlimit;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      NluEnrichmentConcepts ret = (NluEnrichmentConcepts) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -13062,8 +13070,8 @@ public class IBMDiscoveryV1Models {
     }
   
     private NluEnrichmentEmotion(NluEnrichmentEmotionBuilder builder) {
-      document_serialized_name = builder.document;
-      targets_serialized_name = builder.targets;
+      this.document_serialized_name = builder.document;
+      this.targets_serialized_name = builder.targets;
     }
 
     /**
@@ -13075,16 +13083,6 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentEmotionBuilder(this);
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      NluEnrichmentEmotion ret = (NluEnrichmentEmotion) super.deserialize(jsonString, jsonMap, classType);
-      NluEnrichmentEmotionBuilder retBuilder = ret.newBuilder();
-
-      return retBuilder.build();
-    }
   }
 
   /**
@@ -13258,13 +13256,13 @@ public class IBMDiscoveryV1Models {
     }
   
     private NluEnrichmentEntities(NluEnrichmentEntitiesBuilder builder) {
-      sentiment_serialized_name = builder.sentiment;
-      emotion_serialized_name = builder.emotion;
-      limit_serialized_name = builder.xlimit;
-      mentions_serialized_name = builder.mentions;
-      mention_types_serialized_name = builder.mentionTypes;
-      sentence_locations_serialized_name = builder.sentenceLocations;
-      model_serialized_name = builder.model;
+      this.sentiment_serialized_name = builder.sentiment;
+      this.emotion_serialized_name = builder.emotion;
+      this.limit_serialized_name = builder.xlimit;
+      this.mentions_serialized_name = builder.mentions;
+      this.mention_types_serialized_name = builder.mentionTypes;
+      this.sentence_locations_serialized_name = builder.sentenceLocations;
+      this.model_serialized_name = builder.model;
     }
 
     /**
@@ -13276,16 +13274,6 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentEntitiesBuilder(this);
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      NluEnrichmentEntities ret = (NluEnrichmentEntities) super.deserialize(jsonString, jsonMap, classType);
-      NluEnrichmentEntitiesBuilder retBuilder = ret.newBuilder();
-
-      return retBuilder.build();
-    }
   }
 
   /**
@@ -13519,14 +13507,14 @@ public class IBMDiscoveryV1Models {
     }
   
     private NluEnrichmentFeatures(NluEnrichmentFeaturesBuilder builder) {
-      keywords_serialized_name = builder.keywords;
-      entities_serialized_name = builder.entities;
-      sentiment_serialized_name = builder.sentiment;
-      emotion_serialized_name = builder.emotion;
-      categories_serialized_name = builder.categories;
-      semantic_roles_serialized_name = builder.semanticRoles;
-      relations_serialized_name = builder.relations;
-      concepts_serialized_name = builder.concepts;
+      this.keywords_serialized_name = builder.keywords;
+      this.entities_serialized_name = builder.entities;
+      this.sentiment_serialized_name = builder.sentiment;
+      this.emotion_serialized_name = builder.emotion;
+      this.categories_serialized_name = builder.categories;
+      this.semantic_roles_serialized_name = builder.semanticRoles;
+      this.relations_serialized_name = builder.relations;
+      this.concepts_serialized_name = builder.concepts;
     }
 
     /**
@@ -13761,9 +13749,9 @@ public class IBMDiscoveryV1Models {
     }
   
     private NluEnrichmentKeywords(NluEnrichmentKeywordsBuilder builder) {
-      sentiment_serialized_name = builder.sentiment;
-      emotion_serialized_name = builder.emotion;
-      limit_serialized_name = builder.xlimit;
+      this.sentiment_serialized_name = builder.sentiment;
+      this.emotion_serialized_name = builder.emotion;
+      this.limit_serialized_name = builder.xlimit;
     }
 
     /**
@@ -13775,16 +13763,6 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentKeywordsBuilder(this);
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      NluEnrichmentKeywords ret = (NluEnrichmentKeywords) super.deserialize(jsonString, jsonMap, classType);
-      NluEnrichmentKeywordsBuilder retBuilder = ret.newBuilder();
-
-      return retBuilder.build();
-    }
   }
 
   /**
@@ -13879,15 +13857,6 @@ public class IBMDiscoveryV1Models {
       this.model_serialized_name = model;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      NluEnrichmentRelations ret = (NluEnrichmentRelations) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -13941,9 +13910,9 @@ public class IBMDiscoveryV1Models {
     }
   
     private NluEnrichmentSemanticRoles(NluEnrichmentSemanticRolesBuilder builder) {
-      entities_serialized_name = builder.entities;
-      keywords_serialized_name = builder.keywords;
-      limit_serialized_name = builder.xlimit;
+      this.entities_serialized_name = builder.entities;
+      this.keywords_serialized_name = builder.keywords;
+      this.limit_serialized_name = builder.xlimit;
     }
 
     /**
@@ -13955,16 +13924,6 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentSemanticRolesBuilder(this);
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      NluEnrichmentSemanticRoles ret = (NluEnrichmentSemanticRoles) super.deserialize(jsonString, jsonMap, classType);
-      NluEnrichmentSemanticRolesBuilder retBuilder = ret.newBuilder();
-
-      return retBuilder.build();
-    }
   }
 
   /**
@@ -14068,8 +14027,8 @@ public class IBMDiscoveryV1Models {
     }
   
     private NluEnrichmentSentiment(NluEnrichmentSentimentBuilder builder) {
-      document_serialized_name = builder.document;
-      targets_serialized_name = builder.targets;
+      this.document_serialized_name = builder.document;
+      this.targets_serialized_name = builder.targets;
     }
 
     /**
@@ -14081,16 +14040,6 @@ public class IBMDiscoveryV1Models {
       return new NluEnrichmentSentimentBuilder(this);
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      NluEnrichmentSentiment ret = (NluEnrichmentSentiment) super.deserialize(jsonString, jsonMap, classType);
-      NluEnrichmentSentimentBuilder retBuilder = ret.newBuilder();
-
-      return retBuilder.build();
-    }
   }
 
   /**
@@ -14253,15 +14202,6 @@ public class IBMDiscoveryV1Models {
       this.destination_field_serialized_name = destinationField;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      NormalizationOperation ret = (NormalizationOperation) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -14370,15 +14310,6 @@ public class IBMDiscoveryV1Models {
       return description_serialized_name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Notice ret = (Notice) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -14471,7 +14402,7 @@ public class IBMDiscoveryV1Models {
   }
 
   /**
-   * An aggregation produced by the Discovery service to analyze the input provided.
+   * An aggregation produced by  Discovery to analyze the input provided.
    */
   public class QueryAggregation extends IBMWatsonGenericModel {
     private String type_serialized_name;
@@ -14528,7 +14459,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the aggregations.
      *
-     * Aggregations returned by the Discovery service.
+     * Aggregations returned by Discovery.
      *
      * @return the aggregations
      */
@@ -14901,15 +14832,6 @@ public class IBMDiscoveryV1Models {
       this.type_serialized_name = xtype;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      QueryEntitiesEntity ret = (QueryEntitiesEntity) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -15544,15 +15466,6 @@ public class IBMDiscoveryV1Models {
       this.end_offset_serialized_name = endOffset;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      QueryEvidenceEntity ret = (QueryEvidenceEntity) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -15630,8 +15543,7 @@ public class IBMDiscoveryV1Models {
      * Gets the query.
      *
      * A query search returns all documents in your data set with full enrichments and full text, but with the most
-     * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
-     * cannot use **natural_language_query** and **query** at the same time.
+     * relevant documents listed first.
      *
      * @return the query
      */
@@ -15877,8 +15789,7 @@ public class IBMDiscoveryV1Models {
      * Gets the query.
      *
      * A query search returns all documents in your data set with full enrichments and full text, but with the most
-     * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
-     * cannot use **natural_language_query** and **query** at the same time.
+     * relevant documents listed first.
      *
      * @return the query
      */
@@ -15890,7 +15801,7 @@ public class IBMDiscoveryV1Models {
      * Gets the naturalLanguageQuery.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language
-     * understanding. You cannot use **natural_language_query** and **query** at the same time.
+     * understanding.
      *
      * @return the naturalLanguageQuery
      */
@@ -16967,8 +16878,7 @@ public class IBMDiscoveryV1Models {
      * Gets the query.
      *
      * A query search returns all documents in your data set with full enrichments and full text, but with the most
-     * relevant documents listed first. Use a query search when you want to find the most relevant search results. You
-     * cannot use **natural_language_query** and **query** at the same time.
+     * relevant documents listed first. Use a query search when you want to find the most relevant search results.
      *
      * @return the query
      */
@@ -16980,7 +16890,7 @@ public class IBMDiscoveryV1Models {
      * Gets the naturalLanguageQuery.
      *
      * A natural language query that returns relevant documents by utilizing training data and natural language
-     * understanding. You cannot use **natural_language_query** and **query** at the same time.
+     * understanding.
      *
      * @return the naturalLanguageQuery
      */
@@ -17732,15 +17642,6 @@ public class IBMDiscoveryV1Models {
       this.field_serialized_name = field;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      QueryPassages ret = (QueryPassages) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -18819,15 +18720,6 @@ public class IBMDiscoveryV1Models {
       this.confidence_serialized_name = confidence;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      QueryResultMetadata ret = (QueryResultMetadata) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -18863,15 +18755,193 @@ public class IBMDiscoveryV1Models {
       this.document_retrieval_strategy_serialized_name = documentRetrievalStrategy;
     }
 
+  }
+
+  /**
+   * Object containing smart document understanding information for this collection.
+   */
+  public class SduStatus extends IBMWatsonGenericModel {
+    private Boolean enabled_serialized_name;
+    private Long total_annotated_pages_serialized_name;
+    private Long total_pages_serialized_name;
+    private Long total_documents_serialized_name;
+    private SduStatusCustomFields custom_fields_serialized_name;
+ 
+    /**
+     * Gets the enabled.
+     *
+     * When `true`, smart document understanding conversion is enabled for this collection. All collections created with
+     * a version date after `2019-04-30` have smart document understanding enabled. If `false`, documents added to the
+     * collection are converted using the **conversion** settings specified in the configuration associated with the
+     * collection.
+     *
+     * @return the enabled
+     */
+    @AuraEnabled
+    public Boolean getEnabled() {
+      return enabled_serialized_name;
+    }
+ 
+    /**
+     * Gets the totalAnnotatedPages.
+     *
+     * The total number of pages annotated using smart document understanding in this collection.
+     *
+     * @return the totalAnnotatedPages
+     */
+    @AuraEnabled
+    public Long getTotalAnnotatedPages() {
+      return total_annotated_pages_serialized_name;
+    }
+ 
+    /**
+     * Gets the totalPages.
+     *
+     * The current number of pages that can be used for training smart document understanding. The `total_pages` number
+     * is calculated as the total number of pages identified from the documents listed in the **total_documents** field.
+     *
+     * @return the totalPages
+     */
+    @AuraEnabled
+    public Long getTotalPages() {
+      return total_pages_serialized_name;
+    }
+ 
+    /**
+     * Gets the totalDocuments.
+     *
+     * The total number of documents in this collection that can be used to train smart document understanding. For
+     * **lite** plan collections, the maximum is the first 20 uploaded documents (not including HTML or JSON documents).
+     * For other plans, the maximum is the first 40 uploaded documents (not including HTML or JSON documents). When the
+     * maximum is reached, additional documents uploaded to the collection are not considered for training smart
+     * document understanding.
+     *
+     * @return the totalDocuments
+     */
+    @AuraEnabled
+    public Long getTotalDocuments() {
+      return total_documents_serialized_name;
+    }
+ 
+    /**
+     * Gets the customFields.
+     *
+     * Information about custom smart document understanding fields that exist in this collection.
+     *
+     * @return the customFields
+     */
+    @AuraEnabled
+    public SduStatusCustomFields getCustomFields() {
+      return custom_fields_serialized_name;
+    }
+
+    /**
+     * Sets the enabled.
+     *
+     * @param enabled the new enabled
+     */
+    public void setEnabled(final Boolean enabled) {
+      this.enabled_serialized_name = enabled;
+    }
+
+    /**
+     * Sets the totalAnnotatedPages.
+     *
+     * @param totalAnnotatedPages the new totalAnnotatedPages
+     */
+    public void setTotalAnnotatedPages(final long totalAnnotatedPages) {
+      this.total_annotated_pages_serialized_name = totalAnnotatedPages;
+    }
+
+    /**
+     * Sets the totalPages.
+     *
+     * @param totalPages the new totalPages
+     */
+    public void setTotalPages(final long totalPages) {
+      this.total_pages_serialized_name = totalPages;
+    }
+
+    /**
+     * Sets the totalDocuments.
+     *
+     * @param totalDocuments the new totalDocuments
+     */
+    public void setTotalDocuments(final long totalDocuments) {
+      this.total_documents_serialized_name = totalDocuments;
+    }
+
+    /**
+     * Sets the customFields.
+     *
+     * @param customFields the new customFields
+     */
+    public void setCustomFields(final SduStatusCustomFields customFields) {
+      this.custom_fields_serialized_name = customFields;
+    }
+
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
       if (jsonMap == null) {
         return null;
       }
 
-      RetrievalDetails ret = (RetrievalDetails) super.deserialize(jsonString, jsonMap, classType);
+      SduStatus ret = (SduStatus) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for customFields
+      SduStatusCustomFields newCustomFields = (SduStatusCustomFields) new SduStatusCustomFields().deserialize(JSON.serialize(ret.getCustomFields()), (Map<String, Object>) jsonMap.get('custom_fields_serialized_name'), SduStatusCustomFields.class);
+      ret.setCustomFields(newCustomFields);
 
       return ret;
     }
+  }
+
+  /**
+   * Information about custom smart document understanding fields that exist in this collection.
+   */
+  public class SduStatusCustomFields extends IBMWatsonGenericModel {
+    private Long defined_serialized_name;
+    private Long maximum_allowed_serialized_name;
+ 
+    /**
+     * Gets the defined.
+     *
+     * The number of custom fields defined for this collection.
+     *
+     * @return the defined
+     */
+    public Long getDefined() {
+      return defined_serialized_name;
+    }
+ 
+    /**
+     * Gets the maximumAllowed.
+     *
+     * The maximum number of custom fields that are allowed in this collection.
+     *
+     * @return the maximumAllowed
+     */
+    public Long getMaximumAllowed() {
+      return maximum_allowed_serialized_name;
+    }
+
+    /**
+     * Sets the defined.
+     *
+     * @param defined the new defined
+     */
+    public void setDefined(final long defined) {
+      this.defined_serialized_name = defined;
+    }
+
+    /**
+     * Sets the maximumAllowed.
+     *
+     * @param maximumAllowed the new maximumAllowed
+     */
+    public void setMaximumAllowed(final long maximumAllowed) {
+      this.maximum_allowed_serialized_name = maximumAllowed;
+    }
+
   }
 
   /**
@@ -18967,15 +19037,6 @@ public class IBMDiscoveryV1Models {
       this.last_trained_serialized_name = lastTrained;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SearchStatus ret = (SearchStatus) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -18984,6 +19045,7 @@ public class IBMDiscoveryV1Models {
   public class SegmentSettings extends IBMWatsonGenericModel {
     private Boolean enabled_serialized_name;
     private List<String> selector_tags_serialized_name;
+    private List<String> annotated_fields_serialized_name;
  
     /**
      * Gets the enabled.
@@ -19002,13 +19064,32 @@ public class IBMDiscoveryV1Models {
      *
      * Defines the heading level that splits into document segments. Valid values are h1, h2, h3, h4, h5, h6. The
      * content of the header field that the segmentation splits at is used as the **title** field for that segmented
-     * result.
+     * result. Only valid if used with a collection that has **enabled** set to `false` in the
+     * **smart_document_understanding** object.
      *
      * @return the selectorTags
      */
     @AuraEnabled
     public List<String> getSelectorTags() {
       return selector_tags_serialized_name;
+    }
+ 
+    /**
+     * Gets the annotatedFields.
+     *
+     * Defines the annotated smart document understanding fields that the document is split on. The content of the
+     * annotated field that the segmentation splits at is used as the **title** field for that segmented result. For
+     * example, if the field `sub-title` is specified, when a document is uploaded each time the smart documement
+     * understanding conversion encounters a field of type `sub-title` the document is split at that point and the
+     * content of the field used as the title of the remaining content. Thnis split is performed for all instances of
+     * the listed fields in the uploaded document. Only valid if used with a collection that has **enabled** set to
+     * `true` in the **smart_document_understanding** object.
+     *
+     * @return the annotatedFields
+     */
+    @AuraEnabled
+    public List<String> getAnnotatedFields() {
+      return annotated_fields_serialized_name;
     }
 
     /**
@@ -19029,15 +19110,15 @@ public class IBMDiscoveryV1Models {
       this.selector_tags_serialized_name = selectorTags;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SegmentSettings ret = (SegmentSettings) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
+    /**
+     * Sets the annotatedFields.
+     *
+     * @param annotatedFields the new annotatedFields
+     */
+    public void setAnnotatedFields(final List<String> annotatedFields) {
+      this.annotated_fields_serialized_name = annotatedFields;
     }
+
   }
 
   /**
@@ -19429,15 +19510,6 @@ public class IBMDiscoveryV1Models {
       this.limit_serialized_name = xlimit;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SourceOptionsBuckets ret = (SourceOptionsBuckets) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -19511,15 +19583,6 @@ public class IBMDiscoveryV1Models {
       this.limit_serialized_name = xlimit;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SourceOptionsFolder ret = (SourceOptionsFolder) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -19572,15 +19635,6 @@ public class IBMDiscoveryV1Models {
       this.limit_serialized_name = xlimit;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SourceOptionsObject ret = (SourceOptionsObject) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -19634,15 +19688,6 @@ public class IBMDiscoveryV1Models {
       this.limit_serialized_name = xlimit;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SourceOptionsSiteColl ret = (SourceOptionsSiteColl) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -19656,6 +19701,7 @@ public class IBMDiscoveryV1Models {
     private Long maximum_hops_serialized_name;
     private Long request_timeout_serialized_name;
     private Boolean override_robots_txt_serialized_name;
+    private List<String> blacklist_serialized_name;
  
     /**
      * Gets the url.
@@ -19746,6 +19792,19 @@ public class IBMDiscoveryV1Models {
     public Boolean getOverrideRobotsTxt() {
       return override_robots_txt_serialized_name;
     }
+ 
+    /**
+     * Gets the blacklist.
+     *
+     * Array of URL's to be excluded while crawling. The crawler will not follow links which contains this string. For
+     * example, listing `https://ibm.com/watson` also excludes `https://ibm.com/watson/discovery`.
+     *
+     * @return the blacklist
+     */
+    @AuraEnabled
+    public List<String> getBlacklist() {
+      return blacklist_serialized_name;
+    }
 
     /**
      * Sets the url.
@@ -19810,15 +19869,15 @@ public class IBMDiscoveryV1Models {
       this.override_robots_txt_serialized_name = overrideRobotsTxt;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SourceOptionsWebCrawl ret = (SourceOptionsWebCrawl) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
+    /**
+     * Sets the blacklist.
+     *
+     * @param blacklist the new blacklist
+     */
+    public void setBlacklist(final List<String> blacklist) {
+      this.blacklist_serialized_name = blacklist;
     }
+
   }
 
   /**
@@ -19860,6 +19919,8 @@ public class IBMDiscoveryV1Models {
      *
      * The crawl schedule in the specified **time_zone**.
      *
+     * -  `five_minutes`: Runs every five minutes.
+     * -  `hourly`: Runs every hour.
      * -  `daily`: Runs every day between 00:00 and 06:00.
      * -  `weekly`: Runs every week on Sunday between 00:00 and 06:00.
      * -  `monthly`: Runs the on the first Sunday of every month between 00:00 and 06:00.
@@ -19898,15 +19959,6 @@ public class IBMDiscoveryV1Models {
       this.frequency_serialized_name = frequency;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SourceSchedule ret = (SourceSchedule) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -19914,7 +19966,7 @@ public class IBMDiscoveryV1Models {
    */
   public class SourceStatus extends IBMWatsonGenericModel {
     private String status_serialized_name;
-    private Datetime last_updated_serialized_name;
+    private Datetime next_crawl_serialized_name;
  
     /**
      * Gets the status.
@@ -19925,6 +19977,7 @@ public class IBMDiscoveryV1Models {
      * -  `running` indicates that a crawl to fetch more documents is in progress.
      * -  `complete` indicates that the crawl has completed with no errors.
      * -  `queued` indicates that the crawl has been paused by the system and will automatically restart when possible.
+     * -  `unknown` indicates that an unidentified error has occured in the service.
      *
      * @return the status
      */
@@ -19934,15 +19987,15 @@ public class IBMDiscoveryV1Models {
     }
  
     /**
-     * Gets the lastUpdated.
+     * Gets the nextCrawl.
      *
-     * Date in UTC format indicating when the last crawl was attempted. If `null`, no crawl was completed.
+     * Date in `RFC 3339` format indicating the time of the next crawl attempt.
      *
-     * @return the lastUpdated
+     * @return the nextCrawl
      */
     @AuraEnabled
-    public Datetime getLastUpdated() {
-      return last_updated_serialized_name;
+    public Datetime getNextCrawl() {
+      return next_crawl_serialized_name;
     }
 
     /**
@@ -19955,23 +20008,14 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
-     * Sets the lastUpdated.
+     * Sets the nextCrawl.
      *
-     * @param lastUpdated the new lastUpdated
+     * @param nextCrawl the new nextCrawl
      */
-    public void setLastUpdated(final Datetime lastUpdated) {
-      this.last_updated_serialized_name = lastUpdated;
+    public void setNextCrawl(final Datetime nextCrawl) {
+      this.next_crawl_serialized_name = nextCrawl;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SourceStatus ret = (SourceStatus) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -20051,9 +20095,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the metadata.
      *
-     * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata
-     * that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1
-     * MB are rejected.
+     * The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected.
      * Example:  ``` {
      *   "Creator": "Johnny Appleseed",
      *   "Subject": "Apples"
@@ -20526,15 +20568,6 @@ public class IBMDiscoveryV1Models {
       this.type_serialized_name = xtype;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      TokenDictStatusResponse ret = (TokenDictStatusResponse) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -20776,15 +20809,6 @@ public class IBMDiscoveryV1Models {
       this.relevance_serialized_name = relevance;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      TrainingExample ret = (TrainingExample) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -21158,24 +21182,6 @@ public class IBMDiscoveryV1Models {
       this.data_updated_serialized_name = dataUpdated;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      String data_updated = (String) jsonMap.remove('data_updated_serialized_name');
-      String successfully_trained = (String) jsonMap.remove('successfully_trained_serialized_name');
-      String jsonStringWithoutDates = JSON.serialize(jsonMap);
-      TrainingStatus ret = (TrainingStatus) super.deserialize(jsonStringWithoutDates, jsonMap, classType);
-      if (String.isNotBlank(data_updated)) {
-        ret.setDataUpdated((Datetime) JSON.deserialize('"' + data_updated + '"', Datetime.class));
-      }
-      if (String.isNotBlank(successfully_trained)) {
-        ret.setSuccessfullyTrained((Datetime) JSON.deserialize('"' + successfully_trained + '"', Datetime.class));
-      }
-
-      return ret;
-    }
   }
 
   /**
@@ -21716,6 +21722,7 @@ public class IBMDiscoveryV1Models {
     private String credentialId;
     private String sourceType;
     private CredentialDetails credentialDetails;
+    private String status;
  
     /**
      * Gets the environmentId.
@@ -21767,6 +21774,19 @@ public class IBMDiscoveryV1Models {
     public CredentialDetails credentialDetails() {
       return credentialDetails;
     }
+ 
+    /**
+     * Gets the status.
+     *
+     * The current status of this set of credentials. `connected` indicates that the credentials are available to use
+     * with the source configuration of a collection. `invalid` refers to the credentials (for example, the password
+     * provided has expired) and must be corrected before they can be used with a collection.
+     *
+     * @return the status
+     */
+    public String status() {
+      return status;
+    }
 
     private UpdateCredentialsOptions(UpdateCredentialsOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.environmentId, 'environmentId cannot be empty');
@@ -21775,6 +21795,7 @@ public class IBMDiscoveryV1Models {
       credentialId = builder.credentialId;
       sourceType = builder.sourceType;
       credentialDetails = builder.credentialDetails;
+      status = builder.status;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -21797,12 +21818,14 @@ public class IBMDiscoveryV1Models {
     private String credentialId;
     private String sourceType;
     private CredentialDetails credentialDetails;
+    private String status;
 
     private UpdateCredentialsOptionsBuilder(UpdateCredentialsOptions updateCredentialsOptions) {
       environmentId = updateCredentialsOptions.environmentId;
       credentialId = updateCredentialsOptions.credentialId;
       sourceType = updateCredentialsOptions.sourceType;
       credentialDetails = updateCredentialsOptions.credentialDetails;
+      status = updateCredentialsOptions.status;
       this.requestHeaders.putAll(updateCredentialsOptions.requestHeaders());
     }
 
@@ -21877,6 +21900,17 @@ public class IBMDiscoveryV1Models {
     }
 
     /**
+     * Set the status.
+     *
+     * @param status the status
+     * @return the UpdateCredentialsOptions builder
+     */
+    public UpdateCredentialsOptionsBuilder status(String status) {
+      this.status = status;
+      return this;
+    }
+
+    /**
      * Set the credentials.
      *
      * @param credentials the credentials
@@ -21885,6 +21919,7 @@ public class IBMDiscoveryV1Models {
     public UpdateCredentialsOptionsBuilder credentials(Credentials credentials) {
       this.sourceType = credentials.getSourceType();
       this.credentialDetails = credentials.getCredentialDetails();
+      this.status = credentials.getStatus();
       return this;
     }
 
@@ -21984,9 +22019,7 @@ public class IBMDiscoveryV1Models {
     /**
      * Gets the metadata.
      *
-     * If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata
-     * that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1
-     * MB are rejected.
+     * The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected.
      * Example:  ``` {
      *   "Creator": "Johnny Appleseed",
      *   "Subject": "Apples"
@@ -22740,15 +22773,6 @@ public class IBMDiscoveryV1Models {
       this.names_serialized_name = names;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      WordStyle ret = (WordStyle) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -22778,15 +22802,6 @@ public class IBMDiscoveryV1Models {
       this.xpaths_serialized_name = xpaths;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      XPathPatterns ret = (XPathPatterns) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
 }

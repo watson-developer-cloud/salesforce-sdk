@@ -50,7 +50,8 @@ public class IBMTextToSpeechV1Models {
      * **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
      * for the word. You can create only a single entry, with or without a single part of speech, for any word; you
      * cannot create multiple entries with different parts of speech for the same word. For more information, see
-     * [Working with Japanese entries](https://cloud.ibm.com/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     * [Working with Japanese
+     * entries](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-rules#jaNotes).
      *
      * @return the partOfSpeech
      */
@@ -1555,7 +1556,7 @@ public class IBMTextToSpeechV1Models {
   }
 
   /**
-   * Pronunciation.
+   * The pronunciation of the specified text.
    */
   public class Pronunciation extends IBMWatsonResponseModel {
     private String pronunciation_serialized_name;
@@ -1582,19 +1583,10 @@ public class IBMTextToSpeechV1Models {
       this.pronunciation_serialized_name = pronunciation;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Pronunciation ret = (Pronunciation) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * Describes the additional service features that are supported with the voice.
+   * Additional service features that are supported with the voice.
    */
   public class SupportedFeatures extends IBMWatsonGenericModel {
     private Boolean custom_pronunciation_serialized_name;
@@ -1643,15 +1635,6 @@ public class IBMTextToSpeechV1Models {
       this.voice_transformation_serialized_name = voiceTransformation;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SupportedFeatures ret = (SupportedFeatures) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -1659,9 +1642,9 @@ public class IBMTextToSpeechV1Models {
    */
   public class SynthesizeOptions extends IBMWatsonOptionsModel {
     private String text;
+    private String accept;
     private String voice;
     private String customizationId;
-    private String accept;
  
     /**
      * Gets the text.
@@ -1672,6 +1655,21 @@ public class IBMTextToSpeechV1Models {
      */
     public String text() {
       return text;
+    }
+ 
+    /**
+     * Gets the accept.
+     *
+     * The requested format (MIME type) of the audio. You can use the `Accept` header or the `accept` parameter to
+     * specify the audio format. For more information about specifying an audio format, see **Audio formats (accept
+     * types)** in the method description.
+     *
+     * Default: `audio/ogg;codecs=opus`.
+     *
+     * @return the accept
+     */
+    public String accept() {
+      return accept;
     }
  
     /**
@@ -1698,28 +1696,13 @@ public class IBMTextToSpeechV1Models {
     public String customizationId() {
       return customizationId;
     }
- 
-    /**
-     * Gets the accept.
-     *
-     * The requested format (MIME type) of the audio. You can use the `Accept` header or the `accept` parameter to
-     * specify the audio format. For more information about specifying an audio format, see **Audio formats (accept
-     * types)** in the method description.
-     *
-     * Default: `audio/ogg;codecs=opus`.
-     *
-     * @return the accept
-     */
-    public String accept() {
-      return accept;
-    }
 
     private SynthesizeOptions(SynthesizeOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
       text = builder.text;
+      accept = builder.accept;
       voice = builder.voice;
       customizationId = builder.customizationId;
-      accept = builder.accept;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1739,15 +1722,15 @@ public class IBMTextToSpeechV1Models {
    */
   public class SynthesizeOptionsBuilder extends IBMWatsonOptionsModel {
     private String text;
+    private String accept;
     private String voice;
     private String customizationId;
-    private String accept;
 
     private SynthesizeOptionsBuilder(SynthesizeOptions synthesizeOptions) {
       text = synthesizeOptions.text;
+      accept = synthesizeOptions.accept;
       voice = synthesizeOptions.voice;
       customizationId = synthesizeOptions.customizationId;
-      accept = synthesizeOptions.accept;
       this.requestHeaders.putAll(synthesizeOptions.requestHeaders());
     }
 
@@ -1787,6 +1770,17 @@ public class IBMTextToSpeechV1Models {
     }
 
     /**
+     * Set the accept.
+     *
+     * @param accept the accept
+     * @return the SynthesizeOptions builder
+     */
+    public SynthesizeOptionsBuilder accept(String accept) {
+      this.accept = accept;
+      return this;
+    }
+
+    /**
      * Set the voice.
      *
      * @param voice the voice
@@ -1809,17 +1803,6 @@ public class IBMTextToSpeechV1Models {
     }
 
     /**
-     * Set the accept.
-     *
-     * @param accept the accept
-     * @return the SynthesizeOptions builder
-     */
-    public SynthesizeOptionsBuilder accept(String accept) {
-      this.accept = accept;
-      return this;
-    }
-
-    /**
      * Add a request header.
      *
      * @param name the header name
@@ -1833,7 +1816,7 @@ public class IBMTextToSpeechV1Models {
   }
 
   /**
-   * Translation.
+   * Information about the translation for the specified text.
    */
   public class Translation extends IBMWatsonResponseModel {
     private String translation_serialized_name;
@@ -1859,7 +1842,8 @@ public class IBMTextToSpeechV1Models {
      * **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
      * for the word. You can create only a single entry, with or without a single part of speech, for any word; you
      * cannot create multiple entries with different parts of speech for the same word. For more information, see
-     * [Working with Japanese entries](https://cloud.ibm.com/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     * [Working with Japanese
+     * entries](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-rules#jaNotes).
      *
      * @return the partOfSpeech
      */
@@ -1886,15 +1870,6 @@ public class IBMTextToSpeechV1Models {
       this.part_of_speech_serialized_name = partOfSpeech;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Translation ret = (Translation) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -2087,7 +2062,7 @@ public class IBMTextToSpeechV1Models {
   }
 
   /**
-   * Voice.
+   * Information about an available voice model.
    */
   public class Voice extends IBMWatsonResponseModel {
     private String url_serialized_name;
@@ -2175,7 +2150,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the supportedFeatures.
      *
-     * Describes the additional service features that are supported with the voice.
+     * Additional service features that are supported with the voice.
      *
      * @return the supportedFeatures
      */
@@ -2289,7 +2264,7 @@ public class IBMTextToSpeechV1Models {
   }
 
   /**
-   * VoiceModel.
+   * Information about an existing custom voice model.
    */
   public class VoiceModel extends IBMWatsonResponseModel {
     private String customization_id_serialized_name;
@@ -2501,7 +2476,7 @@ public class IBMTextToSpeechV1Models {
   }
 
   /**
-   * VoiceModels.
+   * Information about existing custom voice models.
    */
   public class VoiceModels extends IBMWatsonResponseModel {
     private List<VoiceModel> customizations_serialized_name;
@@ -2554,7 +2529,7 @@ public class IBMTextToSpeechV1Models {
   }
 
   /**
-   * Voices.
+   * Information about all available voice models.
    */
   public class Voices extends IBMWatsonResponseModel {
     private List<Voice> voices_serialized_name;
@@ -2605,7 +2580,7 @@ public class IBMTextToSpeechV1Models {
   }
 
   /**
-   * Word.
+   * Information about a word for the custom voice model.
    */
   public class Word extends IBMWatsonGenericModel {
     private String word_serialized_name;
@@ -2615,7 +2590,7 @@ public class IBMTextToSpeechV1Models {
     /**
      * Gets the word.
      *
-     * A word from the custom voice model.
+     * The word for the custom voice model.
      *
      * @return the word
      */
@@ -2644,7 +2619,8 @@ public class IBMTextToSpeechV1Models {
      * **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
      * for the word. You can create only a single entry, with or without a single part of speech, for any word; you
      * cannot create multiple entries with different parts of speech for the same word. For more information, see
-     * [Working with Japanese entries](https://cloud.ibm.com/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     * [Working with Japanese
+     * entries](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-rules#jaNotes).
      *
      * @return the partOfSpeech
      */
@@ -2680,19 +2656,13 @@ public class IBMTextToSpeechV1Models {
       this.part_of_speech_serialized_name = partOfSpeech;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Word ret = (Word) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * Words.
+   * For the **Add custom words** method, one or more words that are to be added or updated for the custom voice model
+   * and the translation for each specified word.
+   *
+   * For the **List custom words** method, the words and their translations from the custom voice model.
    */
   public class Words extends IBMWatsonResponseModel {
     private List<Word> words_serialized_name;

@@ -48,15 +48,6 @@ public class IBMAssistantV1Models {
       this.location_serialized_name = location;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      CaptureGroup ret = (CaptureGroup) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -180,9 +171,8 @@ public class IBMAssistantV1Models {
      * Gets the text.
      *
      * The text of a user input marked as irrelevant input. This string must conform to the following restrictions:
-     * - It cannot contain carriage return, newline, or tab characters
-     * - It cannot consist of only whitespace characters
-     * - It must be no longer than 1024 characters.
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
      *
      * @return the text
      */
@@ -217,9 +207,9 @@ public class IBMAssistantV1Models {
   
     private Counterexample(CounterexampleBuilder builder) {
       IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
-      text_serialized_name = builder.text;
-      created_serialized_name = builder.created;
-      updated_serialized_name = builder.updated;
+      this.text_serialized_name = builder.text;
+      this.created_serialized_name = builder.created;
+      this.updated_serialized_name = builder.updated;
     }
 
     /**
@@ -231,16 +221,6 @@ public class IBMAssistantV1Models {
       return new CounterexampleBuilder(this);
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Counterexample ret = (Counterexample) super.deserialize(jsonString, jsonMap, classType);
-      CounterexampleBuilder retBuilder = ret.newBuilder();
-
-      return retBuilder.build();
-    }
   }
 
   /**
@@ -414,9 +394,8 @@ public class IBMAssistantV1Models {
      * Gets the text.
      *
      * The text of a user input marked as irrelevant input. This string must conform to the following restrictions:
-     * - It cannot contain carriage return, newline, or tab characters
-     * - It cannot consist of only whitespace characters
-     * - It must be no longer than 1024 characters.
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
      *
      * @return the text
      */
@@ -568,7 +547,6 @@ public class IBMAssistantV1Models {
      *
      * The dialog node ID. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     * - It must be no longer than 1024 characters.
      *
      * @return the dialogNode
      */
@@ -579,8 +557,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the description.
      *
-     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and
-     * it must be no longer than 128 characters.
+     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the description
      */
@@ -592,7 +569,7 @@ public class IBMAssistantV1Models {
      * Gets the conditions.
      *
      * The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab
-     * characters, and it must be no longer than 2048 characters.
+     * characters.
      *
      * @return the conditions
      */
@@ -626,7 +603,7 @@ public class IBMAssistantV1Models {
      * Gets the output.
      *
      * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      *
      * @return the output
      */
@@ -672,7 +649,6 @@ public class IBMAssistantV1Models {
      *
      * The alias used to identify the dialog node. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     * - It must be no longer than 64 characters.
      *
      * @return the title
      */
@@ -760,8 +736,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the userLabel.
      *
-     * A label that can be displayed externally to describe the purpose of the node to users. This string must be no
-     * longer than 512 characters.
+     * A label that can be displayed externally to describe the purpose of the node to users.
      *
      * @return the userLabel
      */
@@ -1161,9 +1136,7 @@ public class IBMAssistantV1Models {
      *
      * The name of the entity. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
-     * - It must be no longer than 64 characters.
-     *
-     * If you specify an entity name beginning with the reserved prefix `sys-`, it must be the name of a system entity
+     * - If you specify an entity name beginning with the reserved prefix `sys-`, it must be the name of a system entity
      * that you want to enable. (Any entity content specified with the request is ignored.).
      *
      * @return the entity
@@ -1175,8 +1148,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the description.
      *
-     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it
-     * must be no longer than 128 characters.
+     * The description of the entity. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the description
      */
@@ -1241,13 +1213,13 @@ public class IBMAssistantV1Models {
   
     private CreateEntity(CreateEntityBuilder builder) {
       IBMWatsonValidator.notNull(builder.entity, 'entity cannot be null');
-      entity_serialized_name = builder.entity;
-      description_serialized_name = builder.description;
-      metadata_serialized_name = builder.metadata;
-      fuzzy_match_serialized_name = builder.fuzzyMatch;
-      created_serialized_name = builder.created;
-      updated_serialized_name = builder.updated;
-      values_serialized_name = builder.values;
+      this.entity_serialized_name = builder.entity;
+      this.description_serialized_name = builder.description;
+      this.metadata_serialized_name = builder.metadata;
+      this.fuzzy_match_serialized_name = builder.fuzzyMatch;
+      this.created_serialized_name = builder.created;
+      this.updated_serialized_name = builder.updated;
+      this.values_serialized_name = builder.values;
     }
 
     /**
@@ -1428,9 +1400,7 @@ public class IBMAssistantV1Models {
      *
      * The name of the entity. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
-     * - It must be no longer than 64 characters.
-     *
-     * If you specify an entity name beginning with the reserved prefix `sys-`, it must be the name of a system entity
+     * - If you specify an entity name beginning with the reserved prefix `sys-`, it must be the name of a system entity
      * that you want to enable. (Any entity content specified with the request is ignored.).
      *
      * @return the entity
@@ -1442,8 +1412,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the description.
      *
-     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it
-     * must be no longer than 128 characters.
+     * The description of the entity. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the description
      */
@@ -1686,7 +1655,6 @@ public class IBMAssistantV1Models {
      * The text of a user input example. This string must conform to the following restrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 1024 characters.
      *
      * @return the text
      */
@@ -1873,7 +1841,6 @@ public class IBMAssistantV1Models {
      * The name of the intent. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
      * - It cannot begin with the reserved prefix `sys-`.
-     * - It must be no longer than 128 characters.
      *
      * @return the intent
      */
@@ -1884,8 +1851,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the description.
      *
-     * The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it
-     * must be no longer than 128 characters.
+     * The description of the intent. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the description
      */
@@ -1928,11 +1894,11 @@ public class IBMAssistantV1Models {
   
     private CreateIntent(CreateIntentBuilder builder) {
       IBMWatsonValidator.notNull(builder.intent, 'intent cannot be null');
-      intent_serialized_name = builder.intent;
-      description_serialized_name = builder.description;
-      created_serialized_name = builder.created;
-      updated_serialized_name = builder.updated;
-      examples_serialized_name = builder.examples;
+      this.intent_serialized_name = builder.intent;
+      this.description_serialized_name = builder.description;
+      this.created_serialized_name = builder.created;
+      this.updated_serialized_name = builder.updated;
+      this.examples_serialized_name = builder.examples;
     }
 
     /**
@@ -2086,7 +2052,6 @@ public class IBMAssistantV1Models {
      * The name of the intent. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
      * - It cannot begin with the reserved prefix `sys-`.
-     * - It must be no longer than 128 characters.
      *
      * @return the intent
      */
@@ -2097,8 +2062,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the description.
      *
-     * The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it
-     * must be no longer than 128 characters.
+     * The description of the intent. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the description
      */
@@ -2302,7 +2266,6 @@ public class IBMAssistantV1Models {
      * The text of the synonym. This string must conform to the following restrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 64 characters.
      *
      * @return the synonym
      */
@@ -2472,7 +2435,6 @@ public class IBMAssistantV1Models {
      * The text of the entity value. This string must conform to the following restrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 64 characters.
      *
      * @return the value
      */
@@ -2512,7 +2474,6 @@ public class IBMAssistantV1Models {
      * value type), but not both. A synonym must conform to the following resrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 64 characters.
      *
      * @return the synonyms
      */
@@ -2525,9 +2486,9 @@ public class IBMAssistantV1Models {
      * Gets the patterns.
      *
      * An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the
-     * value type), but not both. A pattern is a regular expression no longer than 512 characters. For more information
-     * about how to specify a pattern, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#entities-create-dictionary-based).
+     * value type), but not both. A pattern is a regular expression; for more information about how to specify a
+     * pattern, see the
+     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-entities#entities-create-dictionary-based).
      *
      * @return the patterns
      */
@@ -2562,13 +2523,13 @@ public class IBMAssistantV1Models {
   
     private CreateValue(CreateValueBuilder builder) {
       IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
-      value_serialized_name = builder.value;
-      metadata_serialized_name = builder.metadata;
-      type_serialized_name = builder.valueType;
-      synonyms_serialized_name = builder.synonyms;
-      patterns_serialized_name = builder.patterns;
-      created_serialized_name = builder.created;
-      updated_serialized_name = builder.updated;
+      this.value_serialized_name = builder.value;
+      this.metadata_serialized_name = builder.metadata;
+      this.type_serialized_name = builder.valueType;
+      this.synonyms_serialized_name = builder.synonyms;
+      this.patterns_serialized_name = builder.patterns;
+      this.created_serialized_name = builder.created;
+      this.updated_serialized_name = builder.updated;
     }
 
     /**
@@ -2792,7 +2753,6 @@ public class IBMAssistantV1Models {
      * The text of the entity value. This string must conform to the following restrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 64 characters.
      *
      * @return the value
      */
@@ -2829,7 +2789,6 @@ public class IBMAssistantV1Models {
      * value type), but not both. A synonym must conform to the following resrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 64 characters.
      *
      * @return the synonyms
      */
@@ -2841,9 +2800,9 @@ public class IBMAssistantV1Models {
      * Gets the patterns.
      *
      * An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the
-     * value type), but not both. A pattern is a regular expression no longer than 512 characters. For more information
-     * about how to specify a pattern, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#entities-create-dictionary-based).
+     * value type), but not both. A pattern is a regular expression; for more information about how to specify a
+     * pattern, see the
+     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-entities#entities-create-dictionary-based).
      *
      * @return the patterns
      */
@@ -3082,8 +3041,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the name.
      *
-     * The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be
-     * no longer than 64 characters.
+     * The name of the workspace. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the name
      */
@@ -3094,8 +3052,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the description.
      *
-     * The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it
-     * must be no longer than 128 characters.
+     * The description of the workspace. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the description
      */
@@ -4641,7 +4598,6 @@ public class IBMAssistantV1Models {
      *
      * The dialog node ID. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     * - It must be no longer than 1024 characters.
      *
      * @return the dialogNode
      */
@@ -4653,8 +4609,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the description.
      *
-     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and
-     * it must be no longer than 128 characters.
+     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the description
      */
@@ -4667,7 +4622,7 @@ public class IBMAssistantV1Models {
      * Gets the conditions.
      *
      * The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab
-     * characters, and it must be no longer than 2048 characters.
+     * characters.
      *
      * @return the conditions
      */
@@ -4704,7 +4659,7 @@ public class IBMAssistantV1Models {
      * Gets the output.
      *
      * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      *
      * @return the output
      */
@@ -4754,7 +4709,6 @@ public class IBMAssistantV1Models {
      *
      * The alias used to identify the dialog node. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     * - It must be no longer than 64 characters.
      *
      * @return the title
      */
@@ -4850,8 +4804,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the userLabel.
      *
-     * A label that can be displayed externally to describe the purpose of the node to users. This string must be no
-     * longer than 512 characters.
+     * A label that can be displayed externally to describe the purpose of the node to users.
      *
      * @return the userLabel
      */
@@ -4898,27 +4851,27 @@ public class IBMAssistantV1Models {
   
     private DialogNode(DialogNodeBuilder builder) {
       IBMWatsonValidator.notNull(builder.dialogNode, 'dialogNode cannot be null');
-      dialog_node_serialized_name = builder.dialogNode;
-      description_serialized_name = builder.description;
-      conditions_serialized_name = builder.conditions;
-      parent_serialized_name = builder.parent;
-      previous_sibling_serialized_name = builder.previousSibling;
-      output_serialized_name = builder.output;
-      context_serialized_name = builder.context;
-      metadata_serialized_name = builder.metadata;
-      next_step_serialized_name = builder.nextStep;
-      title_serialized_name = builder.title;
-      type_serialized_name = builder.nodeType;
-      event_name_serialized_name = builder.eventName;
-      variable_serialized_name = builder.variable;
-      actions_serialized_name = builder.actions;
-      digress_in_serialized_name = builder.digressIn;
-      digress_out_serialized_name = builder.digressOut;
-      digress_out_slots_serialized_name = builder.digressOutSlots;
-      user_label_serialized_name = builder.userLabel;
-      disabled_serialized_name = builder.disabled;
-      created_serialized_name = builder.created;
-      updated_serialized_name = builder.updated;
+      this.dialog_node_serialized_name = builder.dialogNode;
+      this.description_serialized_name = builder.description;
+      this.conditions_serialized_name = builder.conditions;
+      this.parent_serialized_name = builder.parent;
+      this.previous_sibling_serialized_name = builder.previousSibling;
+      this.output_serialized_name = builder.output;
+      this.context_serialized_name = builder.context;
+      this.metadata_serialized_name = builder.metadata;
+      this.next_step_serialized_name = builder.nextStep;
+      this.title_serialized_name = builder.title;
+      this.type_serialized_name = builder.nodeType;
+      this.event_name_serialized_name = builder.eventName;
+      this.variable_serialized_name = builder.variable;
+      this.actions_serialized_name = builder.actions;
+      this.digress_in_serialized_name = builder.digressIn;
+      this.digress_out_serialized_name = builder.digressOut;
+      this.digress_out_slots_serialized_name = builder.digressOutSlots;
+      this.user_label_serialized_name = builder.userLabel;
+      this.disabled_serialized_name = builder.disabled;
+      this.created_serialized_name = builder.created;
+      this.updated_serialized_name = builder.updated;
     }
 
     /**
@@ -5590,19 +5543,10 @@ public class IBMAssistantV1Models {
       this.selector_serialized_name = selector;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      DialogNodeNextStep ret = (DialogNodeNextStep) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses).
+   * The output of the dialog node. For more information about how to specify dialog node output, see the [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
    */
   public class DialogNodeOutput extends IBMWatsonDynamicModel {
     private List<DialogNodeOutputGeneric> generic_serialized_name;
@@ -5801,8 +5745,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the title.
      *
-     * An optional title to show before the response. Valid only when **response_type**=`image` or `option`. This string
-     * must be no longer than 512 characters.
+     * An optional title to show before the response. Valid only when **response_type**=`image` or `option`.
      *
      * @return the title
      */
@@ -5814,8 +5757,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the description.
      *
-     * An optional description to show with the response. Valid only when **response_type**=`image` or `option`. This
-     * string must be no longer than 256 characters.
+     * An optional description to show with the response. Valid only when **response_type**=`image` or `option`.
      *
      * @return the description
      */
@@ -5854,7 +5796,7 @@ public class IBMAssistantV1Models {
      * Gets the messageToHumanAgent.
      *
      * An optional message to be sent to the human agent who will be taking over the conversation. Valid only when
-     * **reponse_type**=`connect_to_agent`. This string must be no longer than 256 characters.
+     * **reponse_type**=`connect_to_agent`.
      *
      * @return the messageToHumanAgent
      */
@@ -6018,7 +5960,7 @@ public class IBMAssistantV1Models {
      * Gets the overwrite.
      *
      * Whether values in the output will overwrite output values in an array specified by previously executed dialog
-     * nodes. If this option is set to **false**, new values will be appended to previously specified values.
+     * nodes. If this option is set to `false`, new values will be appended to previously specified values.
      *
      * @return the overwrite
      */
@@ -6036,15 +5978,6 @@ public class IBMAssistantV1Models {
       this.overwrite_serialized_name = overwrite;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      DialogNodeOutputModifiers ret = (DialogNodeOutputModifiers) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -6118,6 +6051,8 @@ public class IBMAssistantV1Models {
    */
   public class DialogNodeOutputOptionsElementValue extends IBMWatsonGenericModel {
     private MessageInput input_serialized_name;
+    private List<RuntimeIntent> intents_serialized_name;
+    private List<RuntimeEntity> entities_serialized_name;
  
     /**
      * Gets the input.
@@ -6130,6 +6065,36 @@ public class IBMAssistantV1Models {
     public MessageInput getInput() {
       return input_serialized_name;
     }
+ 
+    /**
+     * Gets the intents.
+     *
+     * An array of intents to be used while processing the input.
+     *
+     * **Note:** This property is supported for backward compatibility with applications that use the v1 **Get response
+     * to user input** method.
+     *
+     * @return the intents
+     */
+    @AuraEnabled
+    public List<RuntimeIntent> getIntents() {
+      return intents_serialized_name;
+    }
+ 
+    /**
+     * Gets the entities.
+     *
+     * An array of entities to be used while processing the user input.
+     *
+     * **Note:** This property is supported for backward compatibility with applications that use the v1 **Get response
+     * to user input** method.
+     *
+     * @return the entities
+     */
+    @AuraEnabled
+    public List<RuntimeEntity> getEntities() {
+      return entities_serialized_name;
+    }
 
     /**
      * Sets the input.
@@ -6138,6 +6103,24 @@ public class IBMAssistantV1Models {
      */
     public void setInput(final MessageInput input) {
       this.input_serialized_name = input;
+    }
+
+    /**
+     * Sets the intents.
+     *
+     * @param intents the new intents
+     */
+    public void setIntents(final List<RuntimeIntent> intents) {
+      this.intents_serialized_name = intents;
+    }
+
+    /**
+     * Sets the entities.
+     *
+     * @param entities the new entities
+     */
+    public void setEntities(final List<RuntimeEntity> entities) {
+      this.entities_serialized_name = entities;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6150,6 +6133,32 @@ public class IBMAssistantV1Models {
       // calling custom deserializer for input
       MessageInput newInput = (MessageInput) new MessageInput().deserialize(JSON.serialize(ret.getInput()), (Map<String, Object>) jsonMap.get('input_serialized_name'), MessageInput.class);
       ret.setInput(newInput);
+
+      // calling custom deserializer for intents
+      List<RuntimeIntent> newIntents = new List<RuntimeIntent>();
+      List<RuntimeIntent> deserializedIntents = ret.getIntents();
+      if (deserializedIntents != null) {
+        for (Integer i = 0; i < deserializedIntents.size(); i++) {
+          RuntimeIntent currentItem = ret.getIntents().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('intents_serialized_name');
+          RuntimeIntent newItem = (RuntimeIntent) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeIntent.class);
+          newIntents.add(newItem);
+        }
+        ret.intents_serialized_name = newIntents;
+      }
+
+      // calling custom deserializer for entities
+      List<RuntimeEntity> newEntities = new List<RuntimeEntity>();
+      List<RuntimeEntity> deserializedEntities = ret.getEntities();
+      if (deserializedEntities != null) {
+        for (Integer i = 0; i < deserializedEntities.size(); i++) {
+          RuntimeEntity currentItem = ret.getEntities().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('entities_serialized_name');
+          RuntimeEntity newItem = (RuntimeEntity) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), RuntimeEntity.class);
+          newEntities.add(newItem);
+        }
+        ret.entities_serialized_name = newEntities;
+      }
 
       return ret;
     }
@@ -6165,7 +6174,7 @@ public class IBMAssistantV1Models {
      * Gets the text.
      *
      * The text of a response. This string can include newline characters (`\\n`), Markdown tagging, or other special
-     * characters, if supported by the channel. It must be no longer than 4096 characters.
+     * characters, if supported by the channel.
      *
      * @return the text
      */
@@ -6183,15 +6192,6 @@ public class IBMAssistantV1Models {
       this.text_serialized_name = text;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      DialogNodeOutputTextValuesElement ret = (DialogNodeOutputTextValuesElement) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -6265,15 +6265,6 @@ public class IBMAssistantV1Models {
       this.conditions_serialized_name = conditions;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      DialogNodeVisitedDetails ret = (DialogNodeVisitedDetails) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -6849,9 +6840,7 @@ public class IBMAssistantV1Models {
      *
      * The name of the entity. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
-     * - It must be no longer than 64 characters.
-     *
-     * If you specify an entity name beginning with the reserved prefix `sys-`, it must be the name of a system entity
+     * - If you specify an entity name beginning with the reserved prefix `sys-`, it must be the name of a system entity
      * that you want to enable. (Any entity content specified with the request is ignored.).
      *
      * @return the entity
@@ -6864,8 +6853,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the description.
      *
-     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it
-     * must be no longer than 128 characters.
+     * The description of the entity. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the description
      */
@@ -7155,15 +7143,6 @@ public class IBMAssistantV1Models {
       this.location_serialized_name = location;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      EntityMention ret = (EntityMention) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -7264,7 +7243,6 @@ public class IBMAssistantV1Models {
      * The text of a user input example. This string must conform to the following restrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 1024 characters.
      *
      * @return the text
      */
@@ -7311,10 +7289,10 @@ public class IBMAssistantV1Models {
   
     private Example(ExampleBuilder builder) {
       IBMWatsonValidator.notNull(builder.text, 'text cannot be null');
-      text_serialized_name = builder.text;
-      mentions_serialized_name = builder.mentions;
-      created_serialized_name = builder.created;
-      updated_serialized_name = builder.updated;
+      this.text_serialized_name = builder.text;
+      this.mentions_serialized_name = builder.mentions;
+      this.created_serialized_name = builder.created;
+      this.updated_serialized_name = builder.updated;
     }
 
     /**
@@ -8951,7 +8929,6 @@ public class IBMAssistantV1Models {
      * The name of the intent. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
      * - It cannot begin with the reserved prefix `sys-`.
-     * - It must be no longer than 128 characters.
      *
      * @return the intent
      */
@@ -8963,8 +8940,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the description.
      *
-     * The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it
-     * must be no longer than 128 characters.
+     * The description of the intent. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the description
      */
@@ -9152,7 +9128,7 @@ public class IBMAssistantV1Models {
      * A cacheable parameter that limits the results to those matching the specified filter. You must specify a filter
      * query that includes a value for `language`, as well as a value for `workspace_id` or
      * `request.context.metadata.deployment`. For more information, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/filter-reference.html#filter-reference-syntax).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-filter-reference#filter-reference).
      *
      * @return the filter
      */
@@ -10552,7 +10528,8 @@ public class IBMAssistantV1Models {
      * Gets the filter.
      *
      * A cacheable parameter that limits the results to those matching the specified filter. For more information, see
-     * the [documentation](https://cloud.ibm.com/docs/services/assistant/filter-reference.html#filter-reference-syntax).
+     * the
+     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-filter-reference#filter-reference).
      *
      * @return the filter
      */
@@ -12040,15 +12017,6 @@ public class IBMAssistantV1Models {
       this.next_cursor_serialized_name = nextCursor;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      LogPagination ret = (LogPagination) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -12100,15 +12068,6 @@ public class IBMAssistantV1Models {
       this.location_serialized_name = location;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Mention ret = (Mention) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -12164,15 +12123,6 @@ public class IBMAssistantV1Models {
       this.user_id_serialized_name = userId;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      MessageContextMetadata ret = (MessageContextMetadata) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -12182,11 +12132,11 @@ public class IBMAssistantV1Models {
     private String text_serialized_name;
     private Map<String, Object> additional_properties_serialized_name;
 
-  /**
-   * This constructor is strictly for internal serialization/deserialization purposes
-   * and should not be called by the client.
-   */
-  public MessageInput() { }
+    /**
+     * This constructor is strictly for internal serialization/deserialization purposes
+     * and should not be called by the client.
+     */
+    public MessageInput() { }
 
     /**
      * Gets the text.
@@ -12209,7 +12159,7 @@ public class IBMAssistantV1Models {
     }
 
     private MessageInput(MessageInputBuilder builder) {
-      text_serialized_name = builder.text;
+      this.text_serialized_name = builder.text;
     }
 
     /**
@@ -12219,15 +12169,6 @@ public class IBMAssistantV1Models {
      */
     public MessageInputBuilder newBuilder() {
       return new MessageInputBuilder(this);
-    }
-
-    /**
-     * Sets the text.
-     *
-     * @param text the new text
-     */
-    public void text(final String text) {
-      this.text_serialized_name = text;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -12251,9 +12192,9 @@ public class IBMAssistantV1Models {
     }
   }
 
-/**
- * MessageInput Builder.
- */
+  /**
+   * MessageInput Builder.
+   */
   public class MessageInputBuilder {
     private String text;
 
@@ -12264,8 +12205,7 @@ public class IBMAssistantV1Models {
     /**
      * Instantiates a new builder.
      */
-    public MessageInputBuilder() {
-    }
+    public MessageInputBuilder() { }
 
     /**
      * Builds a MessageInput.
@@ -13354,15 +13294,6 @@ public class IBMAssistantV1Models {
       this.next_cursor_serialized_name = nextCursor;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Pagination ret = (Pagination) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -13632,7 +13563,6 @@ public class IBMAssistantV1Models {
      * The text of the synonym. This string must conform to the following restrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 64 characters.
      *
      * @return the synonym
      */
@@ -13667,9 +13597,9 @@ public class IBMAssistantV1Models {
   
     private Synonym(SynonymBuilder builder) {
       IBMWatsonValidator.notNull(builder.synonym, 'synonym cannot be null');
-      synonym_serialized_name = builder.synonym;
-      created_serialized_name = builder.created;
-      updated_serialized_name = builder.updated;
+      this.synonym_serialized_name = builder.synonym;
+      this.created_serialized_name = builder.created;
+      this.updated_serialized_name = builder.updated;
     }
 
     /**
@@ -13681,16 +13611,6 @@ public class IBMAssistantV1Models {
       return new SynonymBuilder(this);
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Synonym ret = (Synonym) super.deserialize(jsonString, jsonMap, classType);
-      SynonymBuilder retBuilder = ret.newBuilder();
-
-      return retBuilder.build();
-    }
   }
 
   /**
@@ -13911,9 +13831,8 @@ public class IBMAssistantV1Models {
      * Gets the newText.
      *
      * The text of a user input marked as irrelevant input. This string must conform to the following restrictions:
-     * - It cannot contain carriage return, newline, or tab characters
-     * - It cannot consist of only whitespace characters
-     * - It must be no longer than 1024 characters.
+     * - It cannot contain carriage return, newline, or tab characters.
+     * - It cannot consist of only whitespace characters.
      *
      * @return the newText
      */
@@ -14080,7 +13999,6 @@ public class IBMAssistantV1Models {
      *
      * The dialog node ID. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     * - It must be no longer than 1024 characters.
      *
      * @return the newDialogNode
      */
@@ -14091,8 +14009,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the newDescription.
      *
-     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and
-     * it must be no longer than 128 characters.
+     * The description of the dialog node. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the newDescription
      */
@@ -14104,7 +14021,7 @@ public class IBMAssistantV1Models {
      * Gets the newConditions.
      *
      * The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab
-     * characters, and it must be no longer than 2048 characters.
+     * characters.
      *
      * @return the newConditions
      */
@@ -14138,7 +14055,7 @@ public class IBMAssistantV1Models {
      * Gets the newOutput.
      *
      * The output of the dialog node. For more information about how to specify dialog node output, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses).
+     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      *
      * @return the newOutput
      */
@@ -14184,7 +14101,6 @@ public class IBMAssistantV1Models {
      *
      * The alias used to identify the dialog node. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     * - It must be no longer than 64 characters.
      *
      * @return the newTitle
      */
@@ -14272,8 +14188,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the newUserLabel.
      *
-     * A label that can be displayed externally to describe the purpose of the node to users. This string must be no
-     * longer than 512 characters.
+     * A label that can be displayed externally to describe the purpose of the node to users.
      *
      * @return the newUserLabel
      */
@@ -14682,7 +14597,6 @@ public class IBMAssistantV1Models {
      * The name of the entity. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
      * - It cannot begin with the reserved prefix `sys-`.
-     * - It must be no longer than 64 characters.
      *
      * @return the newEntity
      */
@@ -14693,8 +14607,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the newDescription.
      *
-     * The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it
-     * must be no longer than 128 characters.
+     * The description of the entity. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the newDescription
      */
@@ -14963,7 +14876,6 @@ public class IBMAssistantV1Models {
      * The text of the user input example. This string must conform to the following restrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 1024 characters.
      *
      * @return the newText
      */
@@ -15174,7 +15086,6 @@ public class IBMAssistantV1Models {
      * The name of the intent. This string must conform to the following restrictions:
      * - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
      * - It cannot begin with the reserved prefix `sys-`.
-     * - It must be no longer than 128 characters.
      *
      * @return the newIntent
      */
@@ -15185,8 +15096,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the newDescription.
      *
-     * The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it
-     * must be no longer than 128 characters.
+     * The description of the intent. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the newDescription
      */
@@ -15416,7 +15326,6 @@ public class IBMAssistantV1Models {
      * The text of the synonym. This string must conform to the following restrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 64 characters.
      *
      * @return the newSynonym
      */
@@ -15617,7 +15526,6 @@ public class IBMAssistantV1Models {
      * The text of the entity value. This string must conform to the following restrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 64 characters.
      *
      * @return the newValue
      */
@@ -15654,7 +15562,6 @@ public class IBMAssistantV1Models {
      * value type), but not both. A synonym must conform to the following resrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 64 characters.
      *
      * @return the newSynonyms
      */
@@ -15666,9 +15573,9 @@ public class IBMAssistantV1Models {
      * Gets the newPatterns.
      *
      * An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the
-     * value type), but not both. A pattern is a regular expression no longer than 512 characters. For more information
-     * about how to specify a pattern, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#entities-create-dictionary-based).
+     * value type), but not both. A pattern is a regular expression; for more information about how to specify a
+     * pattern, see the
+     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-entities#entities-create-dictionary-based).
      *
      * @return the newPatterns
      */
@@ -15919,8 +15826,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the name.
      *
-     * The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be
-     * no longer than 64 characters.
+     * The name of the workspace. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the name
      */
@@ -15931,8 +15837,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the description.
      *
-     * The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it
-     * must be no longer than 128 characters.
+     * The description of the workspace. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the description
      */
@@ -16364,7 +16269,6 @@ public class IBMAssistantV1Models {
      * The text of the entity value. This string must conform to the following restrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 64 characters.
      *
      * @return the value
      */
@@ -16404,7 +16308,6 @@ public class IBMAssistantV1Models {
      * value type), but not both. A synonym must conform to the following resrictions:
      * - It cannot contain carriage return, newline, or tab characters.
      * - It cannot consist of only whitespace characters.
-     * - It must be no longer than 64 characters.
      *
      * @return the synonyms
      */
@@ -16417,9 +16320,9 @@ public class IBMAssistantV1Models {
      * Gets the patterns.
      *
      * An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the
-     * value type), but not both. A pattern is a regular expression no longer than 512 characters. For more information
-     * about how to specify a pattern, see the
-     * [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#entities-create-dictionary-based).
+     * value type), but not both. A pattern is a regular expression; for more information about how to specify a
+     * pattern, see the
+     * [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-entities#entities-create-dictionary-based).
      *
      * @return the patterns
      */
@@ -16455,13 +16358,13 @@ public class IBMAssistantV1Models {
     private Value(ValueBuilder builder) {
       IBMWatsonValidator.notNull(builder.value, 'value cannot be null');
       IBMWatsonValidator.notNull(builder.valueType, 'valueType cannot be null');
-      value_serialized_name = builder.value;
-      metadata_serialized_name = builder.metadata;
-      type_serialized_name = builder.valueType;
-      synonyms_serialized_name = builder.synonyms;
-      patterns_serialized_name = builder.patterns;
-      created_serialized_name = builder.created;
-      updated_serialized_name = builder.updated;
+      this.value_serialized_name = builder.value;
+      this.metadata_serialized_name = builder.metadata;
+      this.type_serialized_name = builder.valueType;
+      this.synonyms_serialized_name = builder.synonyms;
+      this.patterns_serialized_name = builder.patterns;
+      this.created_serialized_name = builder.created;
+      this.updated_serialized_name = builder.updated;
     }
 
     /**
@@ -16746,8 +16649,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the name.
      *
-     * The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be
-     * no longer than 64 characters.
+     * The name of the workspace. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the name
      */
@@ -16759,8 +16661,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the description.
      *
-     * The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it
-     * must be no longer than 128 characters.
+     * The description of the workspace. This string cannot contain carriage return, newline, or tab characters.
      *
      * @return the description
      */
@@ -17163,7 +17064,7 @@ public class IBMAssistantV1Models {
     /**
      * Gets the tooling.
      *
-     * Workspace settings related to the Watson Assistant tool.
+     * Workspace settings related to the Watson Assistant user interface.
      *
      * @return the tooling
      */
@@ -17345,19 +17246,10 @@ public class IBMAssistantV1Models {
       this.sensitivity_serialized_name = sensitivity;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      WorkspaceSystemSettingsDisambiguation ret = (WorkspaceSystemSettingsDisambiguation) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * Workspace settings related to the Watson Assistant tool.
+   * Workspace settings related to the Watson Assistant user interface.
    */
   public class WorkspaceSystemSettingsTooling extends IBMWatsonGenericModel {
     private Boolean store_generic_responses_serialized_name;
@@ -17383,15 +17275,6 @@ public class IBMAssistantV1Models {
       this.store_generic_responses_serialized_name = storeGenericResponses;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      WorkspaceSystemSettingsTooling ret = (WorkspaceSystemSettingsTooling) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
 }

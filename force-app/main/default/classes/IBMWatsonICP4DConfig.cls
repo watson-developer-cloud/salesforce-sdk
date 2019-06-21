@@ -21,11 +21,11 @@ public class IBMWatsonICP4DConfig implements IBMWatsonAuthenticatorConfig {
     if (String.isBlank(username) || String.isBlank(password)) {
       throw new IBMWatsonServiceExceptions.IllegalArgumentException(
         'You must provide both username and password values.');
-    }
 
-    if (IBMWatsonCredentialUtils.hasBadStartOrEndChar(username) || IBMWatsonCredentialUtils.hasBadStartOrEndChar(password)) {
-      throw new IBMWatsonServiceExceptions.IllegalArgumentException('The username and password shouldn\'t start or end with curly brackets or '
-          + 'quotes. Please remove any surrounding {, }, or " characters.');
+      if (IBMWatsonCredentialUtils.hasBadStartOrEndChar(username) || IBMWatsonCredentialUtils.hasBadStartOrEndChar(password)) {
+        throw new IBMWatsonServiceExceptions.IllegalArgumentException('The username and password shouldn\'t start or end with curly brackets or '
+            + 'quotes. Please remove any surrounding {, }, or " characters.');
+      }
     }
   }
 

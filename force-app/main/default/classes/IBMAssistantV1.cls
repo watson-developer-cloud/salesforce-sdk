@@ -1,6 +1,6 @@
 /**
- * The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and integrated
- * dialog tools to create conversation flows between your apps and your users.
+ * The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and an integrated
+ * dialog editor to create conversation flows between your apps and your users.
  *
  * @version V1
  * @see <a href="http://www.ibm.com/watson/developercloud/assistant.html">Assistant</a>
@@ -102,6 +102,46 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
+   * List workspaces.
+   *
+   * List the workspaces associated with a Watson Assistant service instance.
+   *
+   * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
+   *
+   * @param listWorkspacesOptions the {@link IBMAssistantV1Models.ListWorkspacesOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.WorkspaceCollection} with the response
+   */
+  public IBMAssistantV1Models.WorkspaceCollection listWorkspaces(IBMAssistantV1Models.ListWorkspacesOptions listWorkspacesOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/workspaces');
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listWorkspaces');
+    Map<String, String> requestHeaders = (listWorkspacesOptions != null) ? listWorkspacesOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (listWorkspacesOptions != null && listWorkspacesOptions.pageLimit() != null) {
+      builder.query('page_limit', String.valueOf(listWorkspacesOptions.pageLimit()));
+    }
+    if (listWorkspacesOptions != null && listWorkspacesOptions.includeCount() != null) {
+      builder.query('include_count', String.valueOf(listWorkspacesOptions.includeCount()));
+    }
+    if (listWorkspacesOptions != null && listWorkspacesOptions.xsort() != null) {
+      builder.query('sort', listWorkspacesOptions.xsort());
+    }
+    if (listWorkspacesOptions != null && listWorkspacesOptions.cursor() != null) {
+      builder.query('cursor', listWorkspacesOptions.cursor());
+    }
+    if (listWorkspacesOptions != null && listWorkspacesOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(listWorkspacesOptions.includeAudit()));
+    }
+
+    return (IBMAssistantV1Models.WorkspaceCollection) createServiceCall(builder.build(), IBMAssistantV1Models.WorkspaceCollection.class);
+  }
+
+  /**
    * Create workspace.
    *
    * Create a workspace based on component objects. You must provide workspace components defining the content of the
@@ -160,32 +200,6 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
-   * Delete workspace.
-   *
-   * Delete a workspace from the service instance.
-   *
-   * This operation is limited to 30 requests per 30 minutes. For more information, see **Rate limiting**.
-   *
-   * @param deleteWorkspaceOptions the {@link IBMAssistantV1Models.DeleteWorkspaceOptions} containing the options for the call
-   * @return the service call
-   */
-  public void deleteWorkspace(IBMAssistantV1Models.DeleteWorkspaceOptions deleteWorkspaceOptions) {
-    IBMWatsonValidator.notNull(deleteWorkspaceOptions, 'deleteWorkspaceOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}', new String[]{ deleteWorkspaceOptions.workspaceId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteWorkspace');
-    Map<String, String> requestHeaders = (deleteWorkspaceOptions != null) ? deleteWorkspaceOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-
-    createServiceCall(builder.build(), null);
-  }
-
-  /**
    * Get information about a workspace.
    *
    * Get information about a workspace, optionally including all workspace content.
@@ -219,46 +233,6 @@ public class IBMAssistantV1 extends IBMWatsonService {
     }
 
     return (IBMAssistantV1Models.Workspace) createServiceCall(builder.build(), IBMAssistantV1Models.Workspace.class);
-  }
-
-  /**
-   * List workspaces.
-   *
-   * List the workspaces associated with a Watson Assistant service instance.
-   *
-   * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
-   *
-   * @param listWorkspacesOptions the {@link IBMAssistantV1Models.ListWorkspacesOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.WorkspaceCollection} with the response
-   */
-  public IBMAssistantV1Models.WorkspaceCollection listWorkspaces(IBMAssistantV1Models.ListWorkspacesOptions listWorkspacesOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/workspaces');
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listWorkspaces');
-    Map<String, String> requestHeaders = (listWorkspacesOptions != null) ? listWorkspacesOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    if (listWorkspacesOptions != null && listWorkspacesOptions.pageLimit() != null) {
-      builder.query('page_limit', String.valueOf(listWorkspacesOptions.pageLimit()));
-    }
-    if (listWorkspacesOptions != null && listWorkspacesOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listWorkspacesOptions.includeCount()));
-    }
-    if (listWorkspacesOptions != null && listWorkspacesOptions.xsort() != null) {
-      builder.query('sort', listWorkspacesOptions.xsort());
-    }
-    if (listWorkspacesOptions != null && listWorkspacesOptions.cursor() != null) {
-      builder.query('cursor', listWorkspacesOptions.cursor());
-    }
-    if (listWorkspacesOptions != null && listWorkspacesOptions.includeAudit() != null) {
-      builder.query('include_audit', String.valueOf(listWorkspacesOptions.includeAudit()));
-    }
-
-    return (IBMAssistantV1Models.WorkspaceCollection) createServiceCall(builder.build(), IBMAssistantV1Models.WorkspaceCollection.class);
   }
 
   /**
@@ -324,56 +298,21 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
-   * Create intent.
+   * Delete workspace.
    *
-   * Create a new intent.
+   * Delete a workspace from the service instance.
    *
-   * This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * This operation is limited to 30 requests per 30 minutes. For more information, see **Rate limiting**.
    *
-   * @param createIntentOptions the {@link IBMAssistantV1Models.CreateIntentOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.Intent} with the response
-   */
-  public IBMAssistantV1Models.Intent createIntent(IBMAssistantV1Models.CreateIntentOptions createIntentOptions) {
-    IBMWatsonValidator.notNull(createIntentOptions, 'createIntentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/intents', new String[]{ createIntentOptions.workspaceId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createIntent');
-    Map<String, String> requestHeaders = (createIntentOptions != null) ? createIntentOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('intent', createIntentOptions.intent());
-    if (createIntentOptions.description() != null) {
-      contentJson.put('description', createIntentOptions.description());
-    }
-    if (createIntentOptions.examples() != null) {
-      contentJson.put('examples', createIntentOptions.examples());
-    }
-    builder.bodyJson(JSON.serialize(contentJson, true));
-
-    return (IBMAssistantV1Models.Intent) createServiceCall(builder.build(), IBMAssistantV1Models.Intent.class);
-  }
-
-  /**
-   * Delete intent.
-   *
-   * Delete an intent from a workspace.
-   *
-   * This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
-   *
-   * @param deleteIntentOptions the {@link IBMAssistantV1Models.DeleteIntentOptions} containing the options for the call
+   * @param deleteWorkspaceOptions the {@link IBMAssistantV1Models.DeleteWorkspaceOptions} containing the options for the call
    * @return the service call
    */
-  public void deleteIntent(IBMAssistantV1Models.DeleteIntentOptions deleteIntentOptions) {
-    IBMWatsonValidator.notNull(deleteIntentOptions, 'deleteIntentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}', new String[]{ deleteIntentOptions.workspaceId(), deleteIntentOptions.intent() }));
+  public void deleteWorkspace(IBMAssistantV1Models.DeleteWorkspaceOptions deleteWorkspaceOptions) {
+    IBMWatsonValidator.notNull(deleteWorkspaceOptions, 'deleteWorkspaceOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}', new String[]{ deleteWorkspaceOptions.workspaceId() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteIntent');
-    Map<String, String> requestHeaders = (deleteIntentOptions != null) ? deleteIntentOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteWorkspace');
+    Map<String, String> requestHeaders = (deleteWorkspaceOptions != null) ? deleteWorkspaceOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
@@ -382,39 +321,6 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.query('version', versionDate);
 
     createServiceCall(builder.build(), null);
-  }
-
-  /**
-   * Get intent.
-   *
-   * Get information about an intent, optionally including all intent content.
-   *
-   * With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the
-   * limit is 400 requests per 30 minutes. For more information, see **Rate limiting**.
-   *
-   * @param getIntentOptions the {@link IBMAssistantV1Models.GetIntentOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.Intent} with the response
-   */
-  public IBMAssistantV1Models.Intent getIntent(IBMAssistantV1Models.GetIntentOptions getIntentOptions) {
-    IBMWatsonValidator.notNull(getIntentOptions, 'getIntentOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}', new String[]{ getIntentOptions.workspaceId(), getIntentOptions.intent() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getIntent');
-    Map<String, String> requestHeaders = (getIntentOptions != null) ? getIntentOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    if (getIntentOptions.xexport() != null) {
-      builder.query('export', String.valueOf(getIntentOptions.xexport()));
-    }
-    if (getIntentOptions.includeAudit() != null) {
-      builder.query('include_audit', String.valueOf(getIntentOptions.includeAudit()));
-    }
-
-    return (IBMAssistantV1Models.Intent) createServiceCall(builder.build(), IBMAssistantV1Models.Intent.class);
   }
 
   /**
@@ -463,10 +369,84 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
+   * Create intent.
+   *
+   * Create a new intent.
+   *
+   * If you want to create multiple intents with a single API call, consider using the **[Update
+   * workspace](#update-workspace)** method instead.
+   *
+   * This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
+   *
+   * @param createIntentOptions the {@link IBMAssistantV1Models.CreateIntentOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.Intent} with the response
+   */
+  public IBMAssistantV1Models.Intent createIntent(IBMAssistantV1Models.CreateIntentOptions createIntentOptions) {
+    IBMWatsonValidator.notNull(createIntentOptions, 'createIntentOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/intents', new String[]{ createIntentOptions.workspaceId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createIntent');
+    Map<String, String> requestHeaders = (createIntentOptions != null) ? createIntentOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('intent', createIntentOptions.intent());
+    if (createIntentOptions.description() != null) {
+      contentJson.put('description', createIntentOptions.description());
+    }
+    if (createIntentOptions.examples() != null) {
+      contentJson.put('examples', createIntentOptions.examples());
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
+
+    return (IBMAssistantV1Models.Intent) createServiceCall(builder.build(), IBMAssistantV1Models.Intent.class);
+  }
+
+  /**
+   * Get intent.
+   *
+   * Get information about an intent, optionally including all intent content.
+   *
+   * With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the
+   * limit is 400 requests per 30 minutes. For more information, see **Rate limiting**.
+   *
+   * @param getIntentOptions the {@link IBMAssistantV1Models.GetIntentOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.Intent} with the response
+   */
+  public IBMAssistantV1Models.Intent getIntent(IBMAssistantV1Models.GetIntentOptions getIntentOptions) {
+    IBMWatsonValidator.notNull(getIntentOptions, 'getIntentOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}', new String[]{ getIntentOptions.workspaceId(), getIntentOptions.intent() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getIntent');
+    Map<String, String> requestHeaders = (getIntentOptions != null) ? getIntentOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (getIntentOptions.xexport() != null) {
+      builder.query('export', String.valueOf(getIntentOptions.xexport()));
+    }
+    if (getIntentOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(getIntentOptions.includeAudit()));
+    }
+
+    return (IBMAssistantV1Models.Intent) createServiceCall(builder.build(), IBMAssistantV1Models.Intent.class);
+  }
+
+  /**
    * Update intent.
    *
    * Update an existing intent with new or modified data. You must provide component objects defining the content of the
    * updated intent.
+   *
+   * If you want to update multiple intents with a single API call, consider using the **[Update
+   * workspace](#update-workspace)** method instead.
    *
    * This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
@@ -501,53 +481,21 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
-   * Create user input example.
+   * Delete intent.
    *
-   * Add a new user input example to an intent.
+   * Delete an intent from a workspace.
    *
-   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   * This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
-   * @param createExampleOptions the {@link IBMAssistantV1Models.CreateExampleOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.Example} with the response
-   */
-  public IBMAssistantV1Models.Example createExample(IBMAssistantV1Models.CreateExampleOptions createExampleOptions) {
-    IBMWatsonValidator.notNull(createExampleOptions, 'createExampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}/examples', new String[]{ createExampleOptions.workspaceId(), createExampleOptions.intent() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createExample');
-    Map<String, String> requestHeaders = (createExampleOptions != null) ? createExampleOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('text', createExampleOptions.text());
-    if (createExampleOptions.mentions() != null) {
-      contentJson.put('mentions', createExampleOptions.mentions());
-    }
-    builder.bodyJson(JSON.serialize(contentJson, true));
-
-    return (IBMAssistantV1Models.Example) createServiceCall(builder.build(), IBMAssistantV1Models.Example.class);
-  }
-
-  /**
-   * Delete user input example.
-   *
-   * Delete a user input example from an intent.
-   *
-   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
-   *
-   * @param deleteExampleOptions the {@link IBMAssistantV1Models.DeleteExampleOptions} containing the options for the call
+   * @param deleteIntentOptions the {@link IBMAssistantV1Models.DeleteIntentOptions} containing the options for the call
    * @return the service call
    */
-  public void deleteExample(IBMAssistantV1Models.DeleteExampleOptions deleteExampleOptions) {
-    IBMWatsonValidator.notNull(deleteExampleOptions, 'deleteExampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}/examples/{2}', new String[]{ deleteExampleOptions.workspaceId(), deleteExampleOptions.intent(), deleteExampleOptions.text() }));
+  public void deleteIntent(IBMAssistantV1Models.DeleteIntentOptions deleteIntentOptions) {
+    IBMWatsonValidator.notNull(deleteIntentOptions, 'deleteIntentOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}', new String[]{ deleteIntentOptions.workspaceId(), deleteIntentOptions.intent() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteExample');
-    Map<String, String> requestHeaders = (deleteExampleOptions != null) ? deleteExampleOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteIntent');
+    Map<String, String> requestHeaders = (deleteIntentOptions != null) ? deleteIntentOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
@@ -556,35 +504,6 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.query('version', versionDate);
 
     createServiceCall(builder.build(), null);
-  }
-
-  /**
-   * Get user input example.
-   *
-   * Get information about a user input example.
-   *
-   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
-   *
-   * @param getExampleOptions the {@link IBMAssistantV1Models.GetExampleOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.Example} with the response
-   */
-  public IBMAssistantV1Models.Example getExample(IBMAssistantV1Models.GetExampleOptions getExampleOptions) {
-    IBMWatsonValidator.notNull(getExampleOptions, 'getExampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}/examples/{2}', new String[]{ getExampleOptions.workspaceId(), getExampleOptions.intent(), getExampleOptions.text() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getExample');
-    Map<String, String> requestHeaders = (getExampleOptions != null) ? getExampleOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    if (getExampleOptions.includeAudit() != null) {
-      builder.query('include_audit', String.valueOf(getExampleOptions.includeAudit()));
-    }
-
-    return (IBMAssistantV1Models.Example) createServiceCall(builder.build(), IBMAssistantV1Models.Example.class);
   }
 
   /**
@@ -629,9 +548,76 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
+   * Create user input example.
+   *
+   * Add a new user input example to an intent.
+   *
+   * If you want to add multiple exaples with a single API call, consider using the **[Update intent](#update-intent)**
+   * method instead.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   *
+   * @param createExampleOptions the {@link IBMAssistantV1Models.CreateExampleOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.Example} with the response
+   */
+  public IBMAssistantV1Models.Example createExample(IBMAssistantV1Models.CreateExampleOptions createExampleOptions) {
+    IBMWatsonValidator.notNull(createExampleOptions, 'createExampleOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}/examples', new String[]{ createExampleOptions.workspaceId(), createExampleOptions.intent() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createExample');
+    Map<String, String> requestHeaders = (createExampleOptions != null) ? createExampleOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('text', createExampleOptions.text());
+    if (createExampleOptions.mentions() != null) {
+      contentJson.put('mentions', createExampleOptions.mentions());
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
+
+    return (IBMAssistantV1Models.Example) createServiceCall(builder.build(), IBMAssistantV1Models.Example.class);
+  }
+
+  /**
+   * Get user input example.
+   *
+   * Get information about a user input example.
+   *
+   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
+   *
+   * @param getExampleOptions the {@link IBMAssistantV1Models.GetExampleOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.Example} with the response
+   */
+  public IBMAssistantV1Models.Example getExample(IBMAssistantV1Models.GetExampleOptions getExampleOptions) {
+    IBMWatsonValidator.notNull(getExampleOptions, 'getExampleOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}/examples/{2}', new String[]{ getExampleOptions.workspaceId(), getExampleOptions.intent(), getExampleOptions.text() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getExample');
+    Map<String, String> requestHeaders = (getExampleOptions != null) ? getExampleOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (getExampleOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(getExampleOptions.includeAudit()));
+    }
+
+    return (IBMAssistantV1Models.Example) createServiceCall(builder.build(), IBMAssistantV1Models.Example.class);
+  }
+
+  /**
    * Update user input example.
    *
    * Update the text of a user input example.
+   *
+   * If you want to update multiple examples with a single API call, consider using the **[Update
+   * intent](#update-intent)** method instead.
    *
    * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
@@ -663,50 +649,21 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
-   * Create counterexample.
+   * Delete user input example.
    *
-   * Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.
-   *
-   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
-   *
-   * @param createCounterexampleOptions the {@link IBMAssistantV1Models.CreateCounterexampleOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.Counterexample} with the response
-   */
-  public IBMAssistantV1Models.Counterexample createCounterexample(IBMAssistantV1Models.CreateCounterexampleOptions createCounterexampleOptions) {
-    IBMWatsonValidator.notNull(createCounterexampleOptions, 'createCounterexampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/counterexamples', new String[]{ createCounterexampleOptions.workspaceId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createCounterexample');
-    Map<String, String> requestHeaders = (createCounterexampleOptions != null) ? createCounterexampleOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('text', createCounterexampleOptions.text());
-    builder.bodyJson(JSON.serialize(contentJson, true));
-
-    return (IBMAssistantV1Models.Counterexample) createServiceCall(builder.build(), IBMAssistantV1Models.Counterexample.class);
-  }
-
-  /**
-   * Delete counterexample.
-   *
-   * Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.
+   * Delete a user input example from an intent.
    *
    * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
-   * @param deleteCounterexampleOptions the {@link IBMAssistantV1Models.DeleteCounterexampleOptions} containing the options for the call
+   * @param deleteExampleOptions the {@link IBMAssistantV1Models.DeleteExampleOptions} containing the options for the call
    * @return the service call
    */
-  public void deleteCounterexample(IBMAssistantV1Models.DeleteCounterexampleOptions deleteCounterexampleOptions) {
-    IBMWatsonValidator.notNull(deleteCounterexampleOptions, 'deleteCounterexampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/counterexamples/{1}', new String[]{ deleteCounterexampleOptions.workspaceId(), deleteCounterexampleOptions.text() }));
+  public void deleteExample(IBMAssistantV1Models.DeleteExampleOptions deleteExampleOptions) {
+    IBMWatsonValidator.notNull(deleteExampleOptions, 'deleteExampleOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/intents/{1}/examples/{2}', new String[]{ deleteExampleOptions.workspaceId(), deleteExampleOptions.intent(), deleteExampleOptions.text() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteCounterexample');
-    Map<String, String> requestHeaders = (deleteCounterexampleOptions != null) ? deleteCounterexampleOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteExample');
+    Map<String, String> requestHeaders = (deleteExampleOptions != null) ? deleteExampleOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
@@ -715,35 +672,6 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.query('version', versionDate);
 
     createServiceCall(builder.build(), null);
-  }
-
-  /**
-   * Get counterexample.
-   *
-   * Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.
-   *
-   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
-   *
-   * @param getCounterexampleOptions the {@link IBMAssistantV1Models.GetCounterexampleOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.Counterexample} with the response
-   */
-  public IBMAssistantV1Models.Counterexample getCounterexample(IBMAssistantV1Models.GetCounterexampleOptions getCounterexampleOptions) {
-    IBMWatsonValidator.notNull(getCounterexampleOptions, 'getCounterexampleOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/counterexamples/{1}', new String[]{ getCounterexampleOptions.workspaceId(), getCounterexampleOptions.text() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getCounterexample');
-    Map<String, String> requestHeaders = (getCounterexampleOptions != null) ? getCounterexampleOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    if (getCounterexampleOptions.includeAudit() != null) {
-      builder.query('include_audit', String.valueOf(getCounterexampleOptions.includeAudit()));
-    }
-
-    return (IBMAssistantV1Models.Counterexample) createServiceCall(builder.build(), IBMAssistantV1Models.Counterexample.class);
   }
 
   /**
@@ -788,9 +716,73 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
+   * Create counterexample.
+   *
+   * Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.
+   *
+   * If you want to add multiple counterexamples with a single API call, consider using the **[Update
+   * workspace](#update-workspace)** method instead.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   *
+   * @param createCounterexampleOptions the {@link IBMAssistantV1Models.CreateCounterexampleOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.Counterexample} with the response
+   */
+  public IBMAssistantV1Models.Counterexample createCounterexample(IBMAssistantV1Models.CreateCounterexampleOptions createCounterexampleOptions) {
+    IBMWatsonValidator.notNull(createCounterexampleOptions, 'createCounterexampleOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/counterexamples', new String[]{ createCounterexampleOptions.workspaceId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createCounterexample');
+    Map<String, String> requestHeaders = (createCounterexampleOptions != null) ? createCounterexampleOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('text', createCounterexampleOptions.text());
+    builder.bodyJson(JSON.serialize(contentJson, true));
+
+    return (IBMAssistantV1Models.Counterexample) createServiceCall(builder.build(), IBMAssistantV1Models.Counterexample.class);
+  }
+
+  /**
+   * Get counterexample.
+   *
+   * Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.
+   *
+   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
+   *
+   * @param getCounterexampleOptions the {@link IBMAssistantV1Models.GetCounterexampleOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.Counterexample} with the response
+   */
+  public IBMAssistantV1Models.Counterexample getCounterexample(IBMAssistantV1Models.GetCounterexampleOptions getCounterexampleOptions) {
+    IBMWatsonValidator.notNull(getCounterexampleOptions, 'getCounterexampleOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/counterexamples/{1}', new String[]{ getCounterexampleOptions.workspaceId(), getCounterexampleOptions.text() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getCounterexample');
+    Map<String, String> requestHeaders = (getCounterexampleOptions != null) ? getCounterexampleOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (getCounterexampleOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(getCounterexampleOptions.includeAudit()));
+    }
+
+    return (IBMAssistantV1Models.Counterexample) createServiceCall(builder.build(), IBMAssistantV1Models.Counterexample.class);
+  }
+
+  /**
    * Update counterexample.
    *
    * Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.
+   *
+   * If you want to update multiple counterexamples with a single API call, consider using the **[Update
+   * workspace](#update-workspace)** method instead.
    *
    * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
@@ -819,62 +811,21 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
-   * Create entity.
+   * Delete counterexample.
    *
-   * Create a new entity, or enable a system entity.
-   *
-   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
-   *
-   * @param createEntityOptions the {@link IBMAssistantV1Models.CreateEntityOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.Entity} with the response
-   */
-  public IBMAssistantV1Models.Entity createEntity(IBMAssistantV1Models.CreateEntityOptions createEntityOptions) {
-    IBMWatsonValidator.notNull(createEntityOptions, 'createEntityOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/entities', new String[]{ createEntityOptions.workspaceId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createEntity');
-    Map<String, String> requestHeaders = (createEntityOptions != null) ? createEntityOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('entity', createEntityOptions.entity());
-    if (createEntityOptions.description() != null) {
-      contentJson.put('description', createEntityOptions.description());
-    }
-    if (createEntityOptions.metadata() != null) {
-      contentJson.put('metadata', createEntityOptions.metadata());
-    }
-    if (createEntityOptions.fuzzyMatch() != null) {
-      contentJson.put('fuzzy_match', createEntityOptions.fuzzyMatch());
-    }
-    if (createEntityOptions.values() != null) {
-      contentJson.put('values', createEntityOptions.values());
-    }
-    builder.bodyJson(JSON.serialize(contentJson, true));
-
-    return (IBMAssistantV1Models.Entity) createServiceCall(builder.build(), IBMAssistantV1Models.Entity.class);
-  }
-
-  /**
-   * Delete entity.
-   *
-   * Delete an entity from a workspace, or disable a system entity.
+   * Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.
    *
    * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
-   * @param deleteEntityOptions the {@link IBMAssistantV1Models.DeleteEntityOptions} containing the options for the call
+   * @param deleteCounterexampleOptions the {@link IBMAssistantV1Models.DeleteCounterexampleOptions} containing the options for the call
    * @return the service call
    */
-  public void deleteEntity(IBMAssistantV1Models.DeleteEntityOptions deleteEntityOptions) {
-    IBMWatsonValidator.notNull(deleteEntityOptions, 'deleteEntityOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}', new String[]{ deleteEntityOptions.workspaceId(), deleteEntityOptions.entity() }));
+  public void deleteCounterexample(IBMAssistantV1Models.DeleteCounterexampleOptions deleteCounterexampleOptions) {
+    IBMWatsonValidator.notNull(deleteCounterexampleOptions, 'deleteCounterexampleOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/counterexamples/{1}', new String[]{ deleteCounterexampleOptions.workspaceId(), deleteCounterexampleOptions.text() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteEntity');
-    Map<String, String> requestHeaders = (deleteEntityOptions != null) ? deleteEntityOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteCounterexample');
+    Map<String, String> requestHeaders = (deleteCounterexampleOptions != null) ? deleteCounterexampleOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
@@ -883,39 +834,6 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.query('version', versionDate);
 
     createServiceCall(builder.build(), null);
-  }
-
-  /**
-   * Get entity.
-   *
-   * Get information about an entity, optionally including all entity content.
-   *
-   * With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the
-   * limit is 200 requests per 30 minutes. For more information, see **Rate limiting**.
-   *
-   * @param getEntityOptions the {@link IBMAssistantV1Models.GetEntityOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.Entity} with the response
-   */
-  public IBMAssistantV1Models.Entity getEntity(IBMAssistantV1Models.GetEntityOptions getEntityOptions) {
-    IBMWatsonValidator.notNull(getEntityOptions, 'getEntityOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}', new String[]{ getEntityOptions.workspaceId(), getEntityOptions.entity() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getEntity');
-    Map<String, String> requestHeaders = (getEntityOptions != null) ? getEntityOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    if (getEntityOptions.xexport() != null) {
-      builder.query('export', String.valueOf(getEntityOptions.xexport()));
-    }
-    if (getEntityOptions.includeAudit() != null) {
-      builder.query('include_audit', String.valueOf(getEntityOptions.includeAudit()));
-    }
-
-    return (IBMAssistantV1Models.Entity) createServiceCall(builder.build(), IBMAssistantV1Models.Entity.class);
   }
 
   /**
@@ -964,10 +882,90 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
+   * Create entity.
+   *
+   * Create a new entity, or enable a system entity.
+   *
+   * If you want to create multiple entities with a single API call, consider using the **[Update
+   * workspace](#update-workspace)** method instead.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   *
+   * @param createEntityOptions the {@link IBMAssistantV1Models.CreateEntityOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.Entity} with the response
+   */
+  public IBMAssistantV1Models.Entity createEntity(IBMAssistantV1Models.CreateEntityOptions createEntityOptions) {
+    IBMWatsonValidator.notNull(createEntityOptions, 'createEntityOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/entities', new String[]{ createEntityOptions.workspaceId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createEntity');
+    Map<String, String> requestHeaders = (createEntityOptions != null) ? createEntityOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('entity', createEntityOptions.entity());
+    if (createEntityOptions.description() != null) {
+      contentJson.put('description', createEntityOptions.description());
+    }
+    if (createEntityOptions.metadata() != null) {
+      contentJson.put('metadata', createEntityOptions.metadata());
+    }
+    if (createEntityOptions.fuzzyMatch() != null) {
+      contentJson.put('fuzzy_match', createEntityOptions.fuzzyMatch());
+    }
+    if (createEntityOptions.values() != null) {
+      contentJson.put('values', createEntityOptions.values());
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
+
+    return (IBMAssistantV1Models.Entity) createServiceCall(builder.build(), IBMAssistantV1Models.Entity.class);
+  }
+
+  /**
+   * Get entity.
+   *
+   * Get information about an entity, optionally including all entity content.
+   *
+   * With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the
+   * limit is 200 requests per 30 minutes. For more information, see **Rate limiting**.
+   *
+   * @param getEntityOptions the {@link IBMAssistantV1Models.GetEntityOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.Entity} with the response
+   */
+  public IBMAssistantV1Models.Entity getEntity(IBMAssistantV1Models.GetEntityOptions getEntityOptions) {
+    IBMWatsonValidator.notNull(getEntityOptions, 'getEntityOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}', new String[]{ getEntityOptions.workspaceId(), getEntityOptions.entity() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getEntity');
+    Map<String, String> requestHeaders = (getEntityOptions != null) ? getEntityOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (getEntityOptions.xexport() != null) {
+      builder.query('export', String.valueOf(getEntityOptions.xexport()));
+    }
+    if (getEntityOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(getEntityOptions.includeAudit()));
+    }
+
+    return (IBMAssistantV1Models.Entity) createServiceCall(builder.build(), IBMAssistantV1Models.Entity.class);
+  }
+
+  /**
    * Update entity.
    *
    * Update an existing entity with new or modified data. You must provide component objects defining the content of the
    * updated entity.
+   *
+   * If you want to update multiple entities with a single API call, consider using the **[Update
+   * workspace](#update-workspace)** method instead.
    *
    * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
@@ -1008,6 +1006,32 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
+   * Delete entity.
+   *
+   * Delete an entity from a workspace, or disable a system entity.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   *
+   * @param deleteEntityOptions the {@link IBMAssistantV1Models.DeleteEntityOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteEntity(IBMAssistantV1Models.DeleteEntityOptions deleteEntityOptions) {
+    IBMWatsonValidator.notNull(deleteEntityOptions, 'deleteEntityOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}', new String[]{ deleteEntityOptions.workspaceId(), deleteEntityOptions.entity() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteEntity');
+    Map<String, String> requestHeaders = (deleteEntityOptions != null) ? deleteEntityOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
    * List entity mentions.
    *
    * List mentions for a contextual entity. An entity mention is an occurrence of a contextual entity in the context of
@@ -1038,105 +1062,6 @@ public class IBMAssistantV1 extends IBMWatsonService {
     }
 
     return (IBMAssistantV1Models.EntityMentionCollection) createServiceCall(builder.build(), IBMAssistantV1Models.EntityMentionCollection.class);
-  }
-
-  /**
-   * Create entity value.
-   *
-   * Create a new value for an entity.
-   *
-   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
-   *
-   * @param createValueOptions the {@link IBMAssistantV1Models.CreateValueOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.Value} with the response
-   */
-  public IBMAssistantV1Models.Value createValue(IBMAssistantV1Models.CreateValueOptions createValueOptions) {
-    IBMWatsonValidator.notNull(createValueOptions, 'createValueOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values', new String[]{ createValueOptions.workspaceId(), createValueOptions.entity() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createValue');
-    Map<String, String> requestHeaders = (createValueOptions != null) ? createValueOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('value', createValueOptions.value());
-    if (createValueOptions.metadata() != null) {
-      contentJson.put('metadata', createValueOptions.metadata());
-    }
-    if (createValueOptions.valueType() != null) {
-      contentJson.put('type', createValueOptions.valueType());
-    }
-    if (createValueOptions.synonyms() != null) {
-      contentJson.put('synonyms', createValueOptions.synonyms());
-    }
-    if (createValueOptions.patterns() != null) {
-      contentJson.put('patterns', createValueOptions.patterns());
-    }
-    builder.bodyJson(JSON.serialize(contentJson, true));
-
-    return (IBMAssistantV1Models.Value) createServiceCall(builder.build(), IBMAssistantV1Models.Value.class);
-  }
-
-  /**
-   * Delete entity value.
-   *
-   * Delete a value from an entity.
-   *
-   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
-   *
-   * @param deleteValueOptions the {@link IBMAssistantV1Models.DeleteValueOptions} containing the options for the call
-   * @return the service call
-   */
-  public void deleteValue(IBMAssistantV1Models.DeleteValueOptions deleteValueOptions) {
-    IBMWatsonValidator.notNull(deleteValueOptions, 'deleteValueOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}', new String[]{ deleteValueOptions.workspaceId(), deleteValueOptions.entity(), deleteValueOptions.value() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteValue');
-    Map<String, String> requestHeaders = (deleteValueOptions != null) ? deleteValueOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-
-    createServiceCall(builder.build(), null);
-  }
-
-  /**
-   * Get entity value.
-   *
-   * Get information about an entity value.
-   *
-   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
-   *
-   * @param getValueOptions the {@link IBMAssistantV1Models.GetValueOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.Value} with the response
-   */
-  public IBMAssistantV1Models.Value getValue(IBMAssistantV1Models.GetValueOptions getValueOptions) {
-    IBMWatsonValidator.notNull(getValueOptions, 'getValueOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}', new String[]{ getValueOptions.workspaceId(), getValueOptions.entity(), getValueOptions.value() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getValue');
-    Map<String, String> requestHeaders = (getValueOptions != null) ? getValueOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    if (getValueOptions.xexport() != null) {
-      builder.query('export', String.valueOf(getValueOptions.xexport()));
-    }
-    if (getValueOptions.includeAudit() != null) {
-      builder.query('include_audit', String.valueOf(getValueOptions.includeAudit()));
-    }
-
-    return (IBMAssistantV1Models.Value) createServiceCall(builder.build(), IBMAssistantV1Models.Value.class);
   }
 
   /**
@@ -1184,10 +1109,89 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
+   * Create entity value.
+   *
+   * Create a new value for an entity.
+   *
+   * If you want to create multiple entity values with a single API call, consider using the **[Update
+   * entity](#update-entity)** method instead.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   *
+   * @param createValueOptions the {@link IBMAssistantV1Models.CreateValueOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.Value} with the response
+   */
+  public IBMAssistantV1Models.Value createValue(IBMAssistantV1Models.CreateValueOptions createValueOptions) {
+    IBMWatsonValidator.notNull(createValueOptions, 'createValueOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values', new String[]{ createValueOptions.workspaceId(), createValueOptions.entity() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createValue');
+    Map<String, String> requestHeaders = (createValueOptions != null) ? createValueOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('value', createValueOptions.value());
+    if (createValueOptions.metadata() != null) {
+      contentJson.put('metadata', createValueOptions.metadata());
+    }
+    if (createValueOptions.valueType() != null) {
+      contentJson.put('type', createValueOptions.valueType());
+    }
+    if (createValueOptions.synonyms() != null) {
+      contentJson.put('synonyms', createValueOptions.synonyms());
+    }
+    if (createValueOptions.patterns() != null) {
+      contentJson.put('patterns', createValueOptions.patterns());
+    }
+    builder.bodyJson(JSON.serialize(contentJson, true));
+
+    return (IBMAssistantV1Models.Value) createServiceCall(builder.build(), IBMAssistantV1Models.Value.class);
+  }
+
+  /**
+   * Get entity value.
+   *
+   * Get information about an entity value.
+   *
+   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
+   *
+   * @param getValueOptions the {@link IBMAssistantV1Models.GetValueOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.Value} with the response
+   */
+  public IBMAssistantV1Models.Value getValue(IBMAssistantV1Models.GetValueOptions getValueOptions) {
+    IBMWatsonValidator.notNull(getValueOptions, 'getValueOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}', new String[]{ getValueOptions.workspaceId(), getValueOptions.entity(), getValueOptions.value() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getValue');
+    Map<String, String> requestHeaders = (getValueOptions != null) ? getValueOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (getValueOptions.xexport() != null) {
+      builder.query('export', String.valueOf(getValueOptions.xexport()));
+    }
+    if (getValueOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(getValueOptions.includeAudit()));
+    }
+
+    return (IBMAssistantV1Models.Value) createServiceCall(builder.build(), IBMAssistantV1Models.Value.class);
+  }
+
+  /**
    * Update entity value.
    *
    * Update an existing entity value with new or modified data. You must provide component objects defining the content
    * of the updated entity value.
+   *
+   * If you want to update multiple entity values with a single API call, consider using the **[Update
+   * entity](#update-entity)** method instead.
    *
    * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
@@ -1228,50 +1232,21 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
-   * Create entity value synonym.
+   * Delete entity value.
    *
-   * Add a new synonym to an entity value.
-   *
-   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
-   *
-   * @param createSynonymOptions the {@link IBMAssistantV1Models.CreateSynonymOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.Synonym} with the response
-   */
-  public IBMAssistantV1Models.Synonym createSynonym(IBMAssistantV1Models.CreateSynonymOptions createSynonymOptions) {
-    IBMWatsonValidator.notNull(createSynonymOptions, 'createSynonymOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms', new String[]{ createSynonymOptions.workspaceId(), createSynonymOptions.entity(), createSynonymOptions.value() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createSynonym');
-    Map<String, String> requestHeaders = (createSynonymOptions != null) ? createSynonymOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    final Map<String, Object> contentJson = new Map<String, Object>();
-    contentJson.put('synonym', createSynonymOptions.synonym());
-    builder.bodyJson(JSON.serialize(contentJson, true));
-
-    return (IBMAssistantV1Models.Synonym) createServiceCall(builder.build(), IBMAssistantV1Models.Synonym.class);
-  }
-
-  /**
-   * Delete entity value synonym.
-   *
-   * Delete a synonym from an entity value.
+   * Delete a value from an entity.
    *
    * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
-   * @param deleteSynonymOptions the {@link IBMAssistantV1Models.DeleteSynonymOptions} containing the options for the call
+   * @param deleteValueOptions the {@link IBMAssistantV1Models.DeleteValueOptions} containing the options for the call
    * @return the service call
    */
-  public void deleteSynonym(IBMAssistantV1Models.DeleteSynonymOptions deleteSynonymOptions) {
-    IBMWatsonValidator.notNull(deleteSynonymOptions, 'deleteSynonymOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms/{3}', new String[]{ deleteSynonymOptions.workspaceId(), deleteSynonymOptions.entity(), deleteSynonymOptions.value(), deleteSynonymOptions.synonym() }));
+  public void deleteValue(IBMAssistantV1Models.DeleteValueOptions deleteValueOptions) {
+    IBMWatsonValidator.notNull(deleteValueOptions, 'deleteValueOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}', new String[]{ deleteValueOptions.workspaceId(), deleteValueOptions.entity(), deleteValueOptions.value() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteSynonym');
-    Map<String, String> requestHeaders = (deleteSynonymOptions != null) ? deleteSynonymOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteValue');
+    Map<String, String> requestHeaders = (deleteValueOptions != null) ? deleteValueOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
@@ -1280,35 +1255,6 @@ public class IBMAssistantV1 extends IBMWatsonService {
     builder.query('version', versionDate);
 
     createServiceCall(builder.build(), null);
-  }
-
-  /**
-   * Get entity value synonym.
-   *
-   * Get information about a synonym of an entity value.
-   *
-   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
-   *
-   * @param getSynonymOptions the {@link IBMAssistantV1Models.GetSynonymOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.Synonym} with the response
-   */
-  public IBMAssistantV1Models.Synonym getSynonym(IBMAssistantV1Models.GetSynonymOptions getSynonymOptions) {
-    IBMWatsonValidator.notNull(getSynonymOptions, 'getSynonymOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms/{3}', new String[]{ getSynonymOptions.workspaceId(), getSynonymOptions.entity(), getSynonymOptions.value(), getSynonymOptions.synonym() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getSynonym');
-    Map<String, String> requestHeaders = (getSynonymOptions != null) ? getSynonymOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    if (getSynonymOptions.includeAudit() != null) {
-      builder.query('include_audit', String.valueOf(getSynonymOptions.includeAudit()));
-    }
-
-    return (IBMAssistantV1Models.Synonym) createServiceCall(builder.build(), IBMAssistantV1Models.Synonym.class);
   }
 
   /**
@@ -1353,9 +1299,73 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
+   * Create entity value synonym.
+   *
+   * Add a new synonym to an entity value.
+   *
+   * If you want to create multiple synonyms with a single API call, consider using the **[Update
+   * entity](#update-entity)** or **[Update entity value](#update-entity-value)** method instead.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   *
+   * @param createSynonymOptions the {@link IBMAssistantV1Models.CreateSynonymOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.Synonym} with the response
+   */
+  public IBMAssistantV1Models.Synonym createSynonym(IBMAssistantV1Models.CreateSynonymOptions createSynonymOptions) {
+    IBMWatsonValidator.notNull(createSynonymOptions, 'createSynonymOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms', new String[]{ createSynonymOptions.workspaceId(), createSynonymOptions.entity(), createSynonymOptions.value() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=createSynonym');
+    Map<String, String> requestHeaders = (createSynonymOptions != null) ? createSynonymOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    final Map<String, Object> contentJson = new Map<String, Object>();
+    contentJson.put('synonym', createSynonymOptions.synonym());
+    builder.bodyJson(JSON.serialize(contentJson, true));
+
+    return (IBMAssistantV1Models.Synonym) createServiceCall(builder.build(), IBMAssistantV1Models.Synonym.class);
+  }
+
+  /**
+   * Get entity value synonym.
+   *
+   * Get information about a synonym of an entity value.
+   *
+   * This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
+   *
+   * @param getSynonymOptions the {@link IBMAssistantV1Models.GetSynonymOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.Synonym} with the response
+   */
+  public IBMAssistantV1Models.Synonym getSynonym(IBMAssistantV1Models.GetSynonymOptions getSynonymOptions) {
+    IBMWatsonValidator.notNull(getSynonymOptions, 'getSynonymOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms/{3}', new String[]{ getSynonymOptions.workspaceId(), getSynonymOptions.entity(), getSynonymOptions.value(), getSynonymOptions.synonym() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=getSynonym');
+    Map<String, String> requestHeaders = (getSynonymOptions != null) ? getSynonymOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (getSynonymOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(getSynonymOptions.includeAudit()));
+    }
+
+    return (IBMAssistantV1Models.Synonym) createServiceCall(builder.build(), IBMAssistantV1Models.Synonym.class);
+  }
+
+  /**
    * Update entity value synonym.
    *
    * Update an existing entity value synonym with new text.
+   *
+   * If you want to update multiple synonyms with a single API call, consider using the **[Update
+   * entity](#update-entity)** or **[Update entity value](#update-entity-value)** method instead.
    *
    * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
    *
@@ -1384,9 +1394,79 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
+   * Delete entity value synonym.
+   *
+   * Delete a synonym from an entity value.
+   *
+   * This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
+   *
+   * @param deleteSynonymOptions the {@link IBMAssistantV1Models.DeleteSynonymOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteSynonym(IBMAssistantV1Models.DeleteSynonymOptions deleteSynonymOptions) {
+    IBMWatsonValidator.notNull(deleteSynonymOptions, 'deleteSynonymOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/entities/{1}/values/{2}/synonyms/{3}', new String[]{ deleteSynonymOptions.workspaceId(), deleteSynonymOptions.entity(), deleteSynonymOptions.value(), deleteSynonymOptions.synonym() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteSynonym');
+    Map<String, String> requestHeaders = (deleteSynonymOptions != null) ? deleteSynonymOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * List dialog nodes.
+   *
+   * List the dialog nodes for a workspace.
+   *
+   * This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
+   *
+   * @param listDialogNodesOptions the {@link IBMAssistantV1Models.ListDialogNodesOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.DialogNodeCollection} with the response
+   */
+  public IBMAssistantV1Models.DialogNodeCollection listDialogNodes(IBMAssistantV1Models.ListDialogNodesOptions listDialogNodesOptions) {
+    IBMWatsonValidator.notNull(listDialogNodesOptions, 'listDialogNodesOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/dialog_nodes', new String[]{ listDialogNodesOptions.workspaceId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listDialogNodes');
+    Map<String, String> requestHeaders = (listDialogNodesOptions != null) ? listDialogNodesOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (listDialogNodesOptions.pageLimit() != null) {
+      builder.query('page_limit', String.valueOf(listDialogNodesOptions.pageLimit()));
+    }
+    if (listDialogNodesOptions.includeCount() != null) {
+      builder.query('include_count', String.valueOf(listDialogNodesOptions.includeCount()));
+    }
+    if (listDialogNodesOptions.xsort() != null) {
+      builder.query('sort', listDialogNodesOptions.xsort());
+    }
+    if (listDialogNodesOptions.cursor() != null) {
+      builder.query('cursor', listDialogNodesOptions.cursor());
+    }
+    if (listDialogNodesOptions.includeAudit() != null) {
+      builder.query('include_audit', String.valueOf(listDialogNodesOptions.includeAudit()));
+    }
+
+    return (IBMAssistantV1Models.DialogNodeCollection) createServiceCall(builder.build(), IBMAssistantV1Models.DialogNodeCollection.class);
+  }
+
+  /**
    * Create dialog node.
    *
    * Create a new dialog node.
+   *
+   * If you want to create multiple dialog nodes with a single API call, consider using the **[Update
+   * workspace](#update-workspace)** method instead.
    *
    * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
@@ -1464,32 +1544,6 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
-   * Delete dialog node.
-   *
-   * Delete a dialog node from a workspace.
-   *
-   * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
-   *
-   * @param deleteDialogNodeOptions the {@link IBMAssistantV1Models.DeleteDialogNodeOptions} containing the options for the call
-   * @return the service call
-   */
-  public void deleteDialogNode(IBMAssistantV1Models.DeleteDialogNodeOptions deleteDialogNodeOptions) {
-    IBMWatsonValidator.notNull(deleteDialogNodeOptions, 'deleteDialogNodeOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/dialog_nodes/{1}', new String[]{ deleteDialogNodeOptions.workspaceId(), deleteDialogNodeOptions.dialogNode() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteDialogNode');
-    Map<String, String> requestHeaders = (deleteDialogNodeOptions != null) ? deleteDialogNodeOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-
-    createServiceCall(builder.build(), null);
-  }
-
-  /**
    * Get dialog node.
    *
    * Get information about a dialog node.
@@ -1519,50 +1573,12 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
-   * List dialog nodes.
-   *
-   * List the dialog nodes for a workspace.
-   *
-   * This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
-   *
-   * @param listDialogNodesOptions the {@link IBMAssistantV1Models.ListDialogNodesOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.DialogNodeCollection} with the response
-   */
-  public IBMAssistantV1Models.DialogNodeCollection listDialogNodes(IBMAssistantV1Models.ListDialogNodesOptions listDialogNodesOptions) {
-    IBMWatsonValidator.notNull(listDialogNodesOptions, 'listDialogNodesOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v1/workspaces/{0}/dialog_nodes', new String[]{ listDialogNodesOptions.workspaceId() }));
-    builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listDialogNodes');
-    Map<String, String> requestHeaders = (listDialogNodesOptions != null) ? listDialogNodesOptions.requestHeaders() : null;
-    if (requestHeaders != null && requestHeaders.size() > 0) {
-      for (String name : requestHeaders.keySet()) {
-        builder.addHeader(name, requestHeaders.get(name));
-      }
-    }
-    builder.query('version', versionDate);
-    if (listDialogNodesOptions.pageLimit() != null) {
-      builder.query('page_limit', String.valueOf(listDialogNodesOptions.pageLimit()));
-    }
-    if (listDialogNodesOptions.includeCount() != null) {
-      builder.query('include_count', String.valueOf(listDialogNodesOptions.includeCount()));
-    }
-    if (listDialogNodesOptions.xsort() != null) {
-      builder.query('sort', listDialogNodesOptions.xsort());
-    }
-    if (listDialogNodesOptions.cursor() != null) {
-      builder.query('cursor', listDialogNodesOptions.cursor());
-    }
-    if (listDialogNodesOptions.includeAudit() != null) {
-      builder.query('include_audit', String.valueOf(listDialogNodesOptions.includeAudit()));
-    }
-
-    return (IBMAssistantV1Models.DialogNodeCollection) createServiceCall(builder.build(), IBMAssistantV1Models.DialogNodeCollection.class);
-  }
-
-  /**
    * Update dialog node.
    *
    * Update an existing dialog node with new or modified data.
+   *
+   * If you want to update multiple dialog nodes with a single API call, consider using the **[Update
+   * workspace](#update-workspace)** method instead.
    *
    * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
@@ -1642,42 +1658,29 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
-   * List log events in all workspaces.
+   * Delete dialog node.
    *
-   * List the events from the logs of all workspaces in the service instance.
+   * Delete a dialog node from a workspace.
    *
-   * If **cursor** is not specified, this operation is limited to 40 requests per 30 minutes. If **cursor** is
-   * specified, the limit is 120 requests per minute. For more information, see **Rate limiting**.
+   * This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
    *
-   * @param listAllLogsOptions the {@link IBMAssistantV1Models.ListAllLogsOptions} containing the options for the call
-   * @return the {@link IBMAssistantV1Models.LogCollection} with the response
+   * @param deleteDialogNodeOptions the {@link IBMAssistantV1Models.DeleteDialogNodeOptions} containing the options for the call
+   * @return the service call
    */
-  public IBMAssistantV1Models.LogCollection listAllLogs(IBMAssistantV1Models.ListAllLogsOptions listAllLogsOptions) {
-    IBMWatsonValidator.notNull(listAllLogsOptions, 'listAllLogsOptions cannot be null');
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/logs');
+  public void deleteDialogNode(IBMAssistantV1Models.DeleteDialogNodeOptions deleteDialogNodeOptions) {
+    IBMWatsonValidator.notNull(deleteDialogNodeOptions, 'deleteDialogNodeOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v1/workspaces/{0}/dialog_nodes/{1}', new String[]{ deleteDialogNodeOptions.workspaceId(), deleteDialogNodeOptions.dialogNode() }));
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listAllLogs');
-    Map<String, String> requestHeaders = (listAllLogsOptions != null) ? listAllLogsOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=deleteDialogNode');
+    Map<String, String> requestHeaders = (deleteDialogNodeOptions != null) ? deleteDialogNodeOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
     builder.query('version', versionDate);
-    if (listAllLogsOptions.filter() != null) {
-      builder.query('filter', listAllLogsOptions.filter());
-    }
-    if (listAllLogsOptions.xsort() != null) {
-      builder.query('sort', listAllLogsOptions.xsort());
-    }
-    if (listAllLogsOptions.pageLimit() != null) {
-      builder.query('page_limit', String.valueOf(listAllLogsOptions.pageLimit()));
-    }
-    if (listAllLogsOptions.cursor() != null) {
-      builder.query('cursor', listAllLogsOptions.cursor());
-    }
 
-    return (IBMAssistantV1Models.LogCollection) createServiceCall(builder.build(), IBMAssistantV1Models.LogCollection.class);
+    createServiceCall(builder.build(), null);
   }
 
   /**
@@ -1720,6 +1723,45 @@ public class IBMAssistantV1 extends IBMWatsonService {
   }
 
   /**
+   * List log events in all workspaces.
+   *
+   * List the events from the logs of all workspaces in the service instance.
+   *
+   * If **cursor** is not specified, this operation is limited to 40 requests per 30 minutes. If **cursor** is
+   * specified, the limit is 120 requests per minute. For more information, see **Rate limiting**.
+   *
+   * @param listAllLogsOptions the {@link IBMAssistantV1Models.ListAllLogsOptions} containing the options for the call
+   * @return the {@link IBMAssistantV1Models.LogCollection} with the response
+   */
+  public IBMAssistantV1Models.LogCollection listAllLogs(IBMAssistantV1Models.ListAllLogsOptions listAllLogsOptions) {
+    IBMWatsonValidator.notNull(listAllLogsOptions, 'listAllLogsOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v1/logs');
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=conversation;service_version=V1;operation_id=listAllLogs');
+    Map<String, String> requestHeaders = (listAllLogsOptions != null) ? listAllLogsOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    if (listAllLogsOptions.filter() != null) {
+      builder.query('filter', listAllLogsOptions.filter());
+    }
+    if (listAllLogsOptions.xsort() != null) {
+      builder.query('sort', listAllLogsOptions.xsort());
+    }
+    if (listAllLogsOptions.pageLimit() != null) {
+      builder.query('page_limit', String.valueOf(listAllLogsOptions.pageLimit()));
+    }
+    if (listAllLogsOptions.cursor() != null) {
+      builder.query('cursor', listAllLogsOptions.cursor());
+    }
+
+    return (IBMAssistantV1Models.LogCollection) createServiceCall(builder.build(), IBMAssistantV1Models.LogCollection.class);
+  }
+
+  /**
    * Delete labeled data.
    *
    * Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
@@ -1727,7 +1769,7 @@ public class IBMAssistantV1 extends IBMWatsonService {
    *
    * You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
    * For more information about personal data and customer IDs, see [Information
-   * security](https://cloud.ibm.com/docs/services/assistant/information-security.html).
+   * security](https://cloud.ibm.com/docs/services/assistant?topic=assistant-information-security#information-security).
    *
    * @param deleteUserDataOptions the {@link IBMAssistantV1Models.DeleteUserDataOptions} containing the options for the call
    * @return the service call

@@ -178,6 +178,99 @@ public class IBMLanguageTranslatorV3Models {
   }
 
   /**
+   * The deleteDocument options.
+   */
+  public class DeleteDocumentOptions extends IBMWatsonOptionsModel {
+    private String documentId;
+ 
+    /**
+     * Gets the documentId.
+     *
+     * Document ID of the document to delete.
+     *
+     * @return the documentId
+     */
+    public String documentId() {
+      return documentId;
+    }
+
+    private DeleteDocumentOptions(DeleteDocumentOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.documentId, 'documentId cannot be empty');
+      documentId = builder.documentId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a DeleteDocumentOptions builder
+     */
+    public DeleteDocumentOptionsBuilder newBuilder() {
+      return new DeleteDocumentOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * DeleteDocumentOptions Builder.
+   */
+  public class DeleteDocumentOptionsBuilder extends IBMWatsonOptionsModel {
+    private String documentId;
+
+    private DeleteDocumentOptionsBuilder(DeleteDocumentOptions deleteDocumentOptions) {
+      documentId = deleteDocumentOptions.documentId;
+      this.requestHeaders.putAll(deleteDocumentOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public DeleteDocumentOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param documentId the documentId
+     */
+    public DeleteDocumentOptionsBuilder(String documentId) {
+      this.documentId = documentId;
+    }
+
+    /**
+     * Builds a DeleteDocumentOptions.
+     *
+     * @return the deleteDocumentOptions
+     */
+    public DeleteDocumentOptions build() {
+      return new DeleteDocumentOptions(this);
+    }
+
+    /**
+     * Set the documentId.
+     *
+     * @param documentId the documentId
+     * @return the DeleteDocumentOptions builder
+     */
+    public DeleteDocumentOptionsBuilder documentId(String documentId) {
+      this.documentId = documentId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the DeleteDocumentOptions builder
+     */
+    public DeleteDocumentOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * The deleteModel options.
    */
   public class DeleteModelOptions extends IBMWatsonOptionsModel {
@@ -265,6 +358,401 @@ public class IBMLanguageTranslatorV3Models {
      * @return the DeleteModelOptions builder
      */
     public DeleteModelOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * DocumentList.
+   */
+  public class DocumentList extends IBMWatsonResponseModel {
+    private List<DocumentStatus> documents_serialized_name;
+ 
+    /**
+     * Gets the documents.
+     *
+     * An array of all previously submitted documents.
+     *
+     * @return the documents
+     */
+    @AuraEnabled
+    public List<DocumentStatus> getDocuments() {
+      return documents_serialized_name;
+    }
+
+    /**
+     * Sets the documents.
+     *
+     * @param documents the new documents
+     */
+    public void setDocuments(final List<DocumentStatus> documents) {
+      this.documents_serialized_name = documents;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      DocumentList ret = (DocumentList) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for documents
+      List<DocumentStatus> newDocuments = new List<DocumentStatus>();
+      List<DocumentStatus> deserializedDocuments = ret.getDocuments();
+      if (deserializedDocuments != null) {
+        for (Integer i = 0; i < deserializedDocuments.size(); i++) {
+          DocumentStatus currentItem = ret.getDocuments().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('documents_serialized_name');
+          DocumentStatus newItem = (DocumentStatus) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), DocumentStatus.class);
+          newDocuments.add(newItem);
+        }
+        ret.documents_serialized_name = newDocuments;
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * Document information, including translation status.
+   */
+  public class DocumentStatus extends IBMWatsonResponseModel {
+    private String document_id_serialized_name;
+    private String filename_serialized_name;
+    private String status_serialized_name;
+    private String model_id_serialized_name;
+    private String base_model_id_serialized_name;
+    private String source_serialized_name;
+    private String target_serialized_name;
+    private Datetime created_serialized_name;
+    private Datetime completed_serialized_name;
+    private Long word_count_serialized_name;
+    private Long character_count_serialized_name;
+ 
+    /**
+     * Gets the documentId.
+     *
+     * System generated ID identifying a document being translated using one specific translation model.
+     *
+     * @return the documentId
+     */
+    @AuraEnabled
+    public String getDocumentId() {
+      return document_id_serialized_name;
+    }
+ 
+    /**
+     * Gets the filename.
+     *
+     * filename from the submission (if it was missing in the multipart-form, 'noname.<ext matching content type>' is
+     * used.
+     *
+     * @return the filename
+     */
+    @AuraEnabled
+    public String getFilename() {
+      return filename_serialized_name;
+    }
+ 
+    /**
+     * Gets the status.
+     *
+     * The status of the translation job associated with a submitted document.
+     *
+     * @return the status
+     */
+    @AuraEnabled
+    public String getStatus() {
+      return status_serialized_name;
+    }
+ 
+    /**
+     * Gets the modelId.
+     *
+     * A globally unique string that identifies the underlying model that is used for translation.
+     *
+     * @return the modelId
+     */
+    @AuraEnabled
+    public String getModelId() {
+      return model_id_serialized_name;
+    }
+ 
+    /**
+     * Gets the baseModelId.
+     *
+     * Model ID of the base model that was used to customize the model. If the model is not a custom model, this will be
+     * absent or an empty string.
+     *
+     * @return the baseModelId
+     */
+    @AuraEnabled
+    public String getBaseModelId() {
+      return base_model_id_serialized_name;
+    }
+ 
+    /**
+     * Gets the source.
+     *
+     * Translation source language code.
+     *
+     * @return the source
+     */
+    @AuraEnabled
+    public String getSource() {
+      return source_serialized_name;
+    }
+ 
+    /**
+     * Gets the target.
+     *
+     * Translation target language code.
+     *
+     * @return the target
+     */
+    @AuraEnabled
+    public String getTarget() {
+      return target_serialized_name;
+    }
+ 
+    /**
+     * Gets the created.
+     *
+     * The time when the document was submitted.
+     *
+     * @return the created
+     */
+    @AuraEnabled
+    public Datetime getCreated() {
+      return created_serialized_name;
+    }
+ 
+    /**
+     * Gets the completed.
+     *
+     * The time when the translation completed.
+     *
+     * @return the completed
+     */
+    @AuraEnabled
+    public Datetime getCompleted() {
+      return completed_serialized_name;
+    }
+ 
+    /**
+     * Gets the wordCount.
+     *
+     * The number of words in the source document, present only if status=available.
+     *
+     * @return the wordCount
+     */
+    @AuraEnabled
+    public Long getWordCount() {
+      return word_count_serialized_name;
+    }
+ 
+    /**
+     * Gets the characterCount.
+     *
+     * The number of characters in the source document, present only if status=available.
+     *
+     * @return the characterCount
+     */
+    @AuraEnabled
+    public Long getCharacterCount() {
+      return character_count_serialized_name;
+    }
+
+    /**
+     * Sets the documentId.
+     *
+     * @param documentId the new documentId
+     */
+    public void setDocumentId(final String documentId) {
+      this.document_id_serialized_name = documentId;
+    }
+
+    /**
+     * Sets the filename.
+     *
+     * @param filename the new filename
+     */
+    public void setFilename(final String filename) {
+      this.filename_serialized_name = filename;
+    }
+
+    /**
+     * Sets the status.
+     *
+     * @param status the new status
+     */
+    public void setStatus(final String status) {
+      this.status_serialized_name = status;
+    }
+
+    /**
+     * Sets the modelId.
+     *
+     * @param modelId the new modelId
+     */
+    public void setModelId(final String modelId) {
+      this.model_id_serialized_name = modelId;
+    }
+
+    /**
+     * Sets the baseModelId.
+     *
+     * @param baseModelId the new baseModelId
+     */
+    public void setBaseModelId(final String baseModelId) {
+      this.base_model_id_serialized_name = baseModelId;
+    }
+
+    /**
+     * Sets the source.
+     *
+     * @param source the new source
+     */
+    public void setSource(final String source) {
+      this.source_serialized_name = source;
+    }
+
+    /**
+     * Sets the target.
+     *
+     * @param target the new target
+     */
+    public void setTarget(final String target) {
+      this.target_serialized_name = target;
+    }
+
+    /**
+     * Sets the created.
+     *
+     * @param created the new created
+     */
+    public void setCreated(final Datetime created) {
+      this.created_serialized_name = created;
+    }
+
+    /**
+     * Sets the completed.
+     *
+     * @param completed the new completed
+     */
+    public void setCompleted(final Datetime completed) {
+      this.completed_serialized_name = completed;
+    }
+
+    /**
+     * Sets the wordCount.
+     *
+     * @param wordCount the new wordCount
+     */
+    public void setWordCount(final long wordCount) {
+      this.word_count_serialized_name = wordCount;
+    }
+
+    /**
+     * Sets the characterCount.
+     *
+     * @param characterCount the new characterCount
+     */
+    public void setCharacterCount(final long characterCount) {
+      this.character_count_serialized_name = characterCount;
+    }
+
+  }
+
+  /**
+   * The getDocumentStatus options.
+   */
+  public class GetDocumentStatusOptions extends IBMWatsonOptionsModel {
+    private String documentId;
+ 
+    /**
+     * Gets the documentId.
+     *
+     * The document ID of the document.
+     *
+     * @return the documentId
+     */
+    public String documentId() {
+      return documentId;
+    }
+
+    private GetDocumentStatusOptions(GetDocumentStatusOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.documentId, 'documentId cannot be empty');
+      documentId = builder.documentId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetDocumentStatusOptions builder
+     */
+    public GetDocumentStatusOptionsBuilder newBuilder() {
+      return new GetDocumentStatusOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetDocumentStatusOptions Builder.
+   */
+  public class GetDocumentStatusOptionsBuilder extends IBMWatsonOptionsModel {
+    private String documentId;
+
+    private GetDocumentStatusOptionsBuilder(GetDocumentStatusOptions getDocumentStatusOptions) {
+      documentId = getDocumentStatusOptions.documentId;
+      this.requestHeaders.putAll(getDocumentStatusOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetDocumentStatusOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param documentId the documentId
+     */
+    public GetDocumentStatusOptionsBuilder(String documentId) {
+      this.documentId = documentId;
+    }
+
+    /**
+     * Builds a GetDocumentStatusOptions.
+     *
+     * @return the getDocumentStatusOptions
+     */
+    public GetDocumentStatusOptions build() {
+      return new GetDocumentStatusOptions(this);
+    }
+
+    /**
+     * Set the documentId.
+     *
+     * @param documentId the documentId
+     * @return the GetDocumentStatusOptions builder
+     */
+    public GetDocumentStatusOptionsBuilder documentId(String documentId) {
+      this.documentId = documentId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetDocumentStatusOptions builder
+     */
+    public GetDocumentStatusOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -364,6 +852,132 @@ public class IBMLanguageTranslatorV3Models {
   }
 
   /**
+   * The getTranslatedDocument options.
+   */
+  public class GetTranslatedDocumentOptions extends IBMWatsonOptionsModel {
+    private String documentId;
+    private String accept;
+ 
+    /**
+     * Gets the documentId.
+     *
+     * The document ID of the document that was submitted for translation.
+     *
+     * @return the documentId
+     */
+    public String documentId() {
+      return documentId;
+    }
+ 
+    /**
+     * Gets the accept.
+     *
+     * The type of the response: application/powerpoint, application/mspowerpoint, application/x-rtf, application/json,
+     * application/xml, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,
+     * application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation,
+     * application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+     * application/vnd.oasis.opendocument.spreadsheet, application/vnd.oasis.opendocument.presentation,
+     * application/vnd.oasis.opendocument.text, application/pdf, application/rtf, text/html, text/json, text/plain,
+     * text/richtext, text/rtf, or text/xml. A character encoding can be specified by including a `charset` parameter.
+     * For example, 'text/html;charset=utf-8'.
+     *
+     * @return the accept
+     */
+    public String accept() {
+      return accept;
+    }
+
+    private GetTranslatedDocumentOptions(GetTranslatedDocumentOptionsBuilder builder) {
+      IBMWatsonValidator.notEmpty(builder.documentId, 'documentId cannot be empty');
+      documentId = builder.documentId;
+      accept = builder.accept;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a GetTranslatedDocumentOptions builder
+     */
+    public GetTranslatedDocumentOptionsBuilder newBuilder() {
+      return new GetTranslatedDocumentOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * GetTranslatedDocumentOptions Builder.
+   */
+  public class GetTranslatedDocumentOptionsBuilder extends IBMWatsonOptionsModel {
+    private String documentId;
+    private String accept;
+
+    private GetTranslatedDocumentOptionsBuilder(GetTranslatedDocumentOptions getTranslatedDocumentOptions) {
+      documentId = getTranslatedDocumentOptions.documentId;
+      accept = getTranslatedDocumentOptions.accept;
+      this.requestHeaders.putAll(getTranslatedDocumentOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public GetTranslatedDocumentOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param documentId the documentId
+     */
+    public GetTranslatedDocumentOptionsBuilder(String documentId) {
+      this.documentId = documentId;
+    }
+
+    /**
+     * Builds a GetTranslatedDocumentOptions.
+     *
+     * @return the getTranslatedDocumentOptions
+     */
+    public GetTranslatedDocumentOptions build() {
+      return new GetTranslatedDocumentOptions(this);
+    }
+
+    /**
+     * Set the documentId.
+     *
+     * @param documentId the documentId
+     * @return the GetTranslatedDocumentOptions builder
+     */
+    public GetTranslatedDocumentOptionsBuilder documentId(String documentId) {
+      this.documentId = documentId;
+      return this;
+    }
+
+    /**
+     * Set the accept.
+     *
+     * @param accept the accept
+     * @return the GetTranslatedDocumentOptions builder
+     */
+    public GetTranslatedDocumentOptionsBuilder accept(String accept) {
+      this.accept = accept;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the GetTranslatedDocumentOptions builder
+     */
+    public GetTranslatedDocumentOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
    * IdentifiableLanguage.
    */
   public class IdentifiableLanguage extends IBMWatsonGenericModel {
@@ -412,15 +1026,6 @@ public class IBMLanguageTranslatorV3Models {
       this.name_serialized_name = name;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      IdentifiableLanguage ret = (IdentifiableLanguage) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -523,15 +1128,6 @@ public class IBMLanguageTranslatorV3Models {
       this.confidence_serialized_name = confidence;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      IdentifiedLanguage ret = (IdentifiedLanguage) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -673,6 +1269,63 @@ public class IBMLanguageTranslatorV3Models {
      * @return the IdentifyOptions builder
      */
     public IdentifyOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The listDocuments options.
+   */
+  public class ListDocumentsOptions extends IBMWatsonOptionsModel {
+
+    private ListDocumentsOptions(ListDocumentsOptionsBuilder builder) {
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a ListDocumentsOptions builder
+     */
+    public ListDocumentsOptionsBuilder newBuilder() {
+      return new ListDocumentsOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * ListDocumentsOptions Builder.
+   */
+  public class ListDocumentsOptionsBuilder extends IBMWatsonOptionsModel {
+
+    private ListDocumentsOptionsBuilder(ListDocumentsOptions listDocumentsOptions) {
+      this.requestHeaders.putAll(listDocumentsOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public ListDocumentsOptionsBuilder() {
+    }
+
+    /**
+     * Builds a ListDocumentsOptions.
+     *
+     * @return the listDocumentsOptions
+     */
+    public ListDocumentsOptions build() {
+      return new ListDocumentsOptions(this);
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the ListDocumentsOptions builder
+     */
+    public ListDocumentsOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -867,6 +1520,260 @@ public class IBMLanguageTranslatorV3Models {
      * @return the ListModelsOptions builder
      */
     public ListModelsOptionsBuilder addHeader(String name, String value) {
+      this.requestHeaders.put(name, value);
+      return this;
+    }
+  }
+
+  /**
+   * The translateDocument options.
+   */
+  public class TranslateDocumentOptions extends IBMWatsonOptionsModel {
+    private IBMWatsonFile file;
+    private String filename;
+    private String fileContentType;
+    private String modelId;
+    private String source;
+    private String target;
+    private String documentId;
+ 
+    /**
+     * Gets the file.
+     *
+     * The source file to translate.
+     *
+     * [Supported file
+     * types](https://cloud.ibm.com/docs/services/language-translator?topic=language-translator-document-translator-tutorial#supported-file-formats)
+     *
+     * Maximum file size: **20 MB**.
+     *
+     * @return the file
+     */
+    public IBMWatsonFile file() {
+      return file;
+    }
+
+    /**
+     * Gets the filename.
+     *
+     * @return the filename
+     */
+    public String filename() {
+      return filename;
+    }
+ 
+    /**
+     * Gets the fileContentType.
+     *
+     * The content type of file.
+     *
+     * @return the fileContentType
+     */
+    public String fileContentType() {
+      return fileContentType;
+    }
+ 
+    /**
+     * Gets the modelId.
+     *
+     * The model to use for translation. `model_id` or both `source` and `target` are required.
+     *
+     * @return the modelId
+     */
+    public String modelId() {
+      return modelId;
+    }
+ 
+    /**
+     * Gets the source.
+     *
+     * Language code that specifies the language of the source document.
+     *
+     * @return the source
+     */
+    public String source() {
+      return source;
+    }
+ 
+    /**
+     * Gets the target.
+     *
+     * Language code that specifies the target language for translation.
+     *
+     * @return the target
+     */
+    public String target() {
+      return target;
+    }
+ 
+    /**
+     * Gets the documentId.
+     *
+     * To use a previously submitted document as the source for a new translation, enter the `document_id` of the
+     * document.
+     *
+     * @return the documentId
+     */
+    public String documentId() {
+      return documentId;
+    }
+
+    private TranslateDocumentOptions(TranslateDocumentOptionsBuilder builder) {
+      IBMWatsonValidator.notNull(builder.file, 'file cannot be null');
+      IBMWatsonValidator.notNull(builder.filename, 'filename cannot be null');
+      file = builder.file;
+      filename = builder.filename;
+      fileContentType = builder.fileContentType;
+      modelId = builder.modelId;
+      source = builder.source;
+      target = builder.target;
+      documentId = builder.documentId;
+      this.requestHeaders = builder.requestHeaders;
+    }
+
+    /**
+     * New builder.
+     *
+     * @return a TranslateDocumentOptions builder
+     */
+    public TranslateDocumentOptionsBuilder newBuilder() {
+      return new TranslateDocumentOptionsBuilder(this);
+    }
+
+  }
+
+  /**
+   * TranslateDocumentOptions Builder.
+   */
+  public class TranslateDocumentOptionsBuilder extends IBMWatsonOptionsModel {
+    private IBMWatsonFile file;
+    private String filename;
+    private String fileContentType;
+    private String modelId;
+    private String source;
+    private String target;
+    private String documentId;
+
+    private TranslateDocumentOptionsBuilder(TranslateDocumentOptions translateDocumentOptions) {
+      file = translateDocumentOptions.file;
+      filename = translateDocumentOptions.filename;
+      fileContentType = translateDocumentOptions.fileContentType;
+      modelId = translateDocumentOptions.modelId;
+      source = translateDocumentOptions.source;
+      target = translateDocumentOptions.target;
+      documentId = translateDocumentOptions.documentId;
+      this.requestHeaders.putAll(translateDocumentOptions.requestHeaders());
+    }
+
+    /**
+     * Instantiates a new builder.
+     */
+    public TranslateDocumentOptionsBuilder() {
+    }
+
+    /**
+     * Instantiates a new builder with required properties.
+     *
+     * @param file the file
+     */
+    public TranslateDocumentOptionsBuilder(IBMWatsonFile file) {
+      this.file = file;
+    }
+
+    /**
+     * Builds a TranslateDocumentOptions.
+     *
+     * @return the translateDocumentOptions
+     */
+    public TranslateDocumentOptions build() {
+      return new TranslateDocumentOptions(this);
+    }
+
+    /**
+     * Set the file.
+     *
+     * @param file the file
+     * @return the TranslateDocumentOptions builder
+     */
+    public TranslateDocumentOptionsBuilder file(IBMWatsonFile file) {
+      this.file = file;
+      return this;
+    }
+
+    /**
+     * Set the filename.
+     *
+     * @param filename the filename
+     * @return the TranslateDocumentOptions builder
+     */
+    public TranslateDocumentOptionsBuilder filename(String filename) {
+      this.filename = filename;
+      return this;
+    }
+
+    /**
+     * Set the fileContentType.
+     *
+     * @param fileContentType the fileContentType
+     * @return the TranslateDocumentOptions builder
+     */
+    public TranslateDocumentOptionsBuilder fileContentType(String fileContentType) {
+      this.fileContentType = fileContentType;
+      return this;
+    }
+
+    /**
+     * Set the modelId.
+     *
+     * @param modelId the modelId
+     * @return the TranslateDocumentOptions builder
+     */
+    public TranslateDocumentOptionsBuilder modelId(String modelId) {
+      this.modelId = modelId;
+      return this;
+    }
+
+    /**
+     * Set the source.
+     *
+     * @param source the source
+     * @return the TranslateDocumentOptions builder
+     */
+    public TranslateDocumentOptionsBuilder source(String source) {
+      this.source = source;
+      return this;
+    }
+
+    /**
+     * Set the target.
+     *
+     * @param target the target
+     * @return the TranslateDocumentOptions builder
+     */
+    public TranslateDocumentOptionsBuilder target(String target) {
+      this.target = target;
+      return this;
+    }
+
+    /**
+     * Set the documentId.
+     *
+     * @param documentId the documentId
+     * @return the TranslateDocumentOptions builder
+     */
+    public TranslateDocumentOptionsBuilder documentId(String documentId) {
+      this.documentId = documentId;
+      return this;
+    }
+
+    /**
+     * Add a request header.
+     *
+     * @param name the header name
+     * @param value the header value
+     * @return the TranslateDocumentOptions builder
+     */
+    public TranslateDocumentOptionsBuilder addHeader(String name, String value) {
       this.requestHeaders.put(name, value);
       return this;
     }
@@ -1086,15 +1993,6 @@ public class IBMLanguageTranslatorV3Models {
       this.translation_serialized_name = translationOutput;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Translation ret = (Translation) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -1326,15 +2224,6 @@ public class IBMLanguageTranslatorV3Models {
       this.status_serialized_name = status;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      TranslationModel ret = (TranslationModel) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**

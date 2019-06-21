@@ -695,6 +695,8 @@ private class IBMAssistantV1Test {
     System.assertEquals(response.getOutput().getGeneric().get(0).getMessageToHumanAgent(), messageToHumanAgent);
     System.assertEquals(response.getOutput().getGeneric().get(0).getOptions().get(0).getLabel(), label);
     System.assertEquals(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getInput().getText(), text);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getIntents().get(0).getIntent(), intentName);
+    System.assertEquals(response.getOutput().getGeneric().get(0).getOptions().get(0).getValue().getEntities().get(0).getEntity(), entityName);
     System.assertEquals(response.getOutput().getGeneric().get(0).getPreference(), preference);
     System.assertEquals(response.getOutput().getGeneric().get(0).getResponseType(), responseType);
     System.assertEquals(response.getOutput().getGeneric().get(0).getSource(), source);

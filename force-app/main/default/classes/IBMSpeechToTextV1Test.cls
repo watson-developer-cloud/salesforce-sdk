@@ -26,19 +26,83 @@ private class IBMSpeechToTextV1Test {
   private static String password = 'password';
   private static String callbackBaseURL = 'https://ibmdf17-watson-dxhub.my.salesforce.com/';
 
-/*
+  private static String headerKey;
+  private static String headerVal;
+  private static String contentType;
+  private static String model;
+  private static String callbackUrl;
+  private static String events;
+  private static String userToken;
+  private static Long resultsTtl;
+  private static String languageCustomizationId;
+  private static String acousticCustomizationId;
+  private static String baseModelVersion;
+  private static Double customizationWeight;
+  private static Long inactivityTimeout;
+  private static List<String> keywords;
+  private static Double keywordsThreshold;
+  private static Long maxAlternatives;
+  private static Double wordAlternativesThreshold;
+  private static String customizationId;
+  private static String grammarName;
+  private static Double processingMetricsInterval;
+  private static Double samplingInterval;
+  private static Double endTime;
+  private static Double signalToNoiseRatio;
+  private static Double speechRatio;
+  private static Double highFrequencyLoss;
+  private static Double beginVal;
+  private static Double endVal;
+  private static Long count;
+  private static Double received;
+  private static Double seenByEngine;
+  private static Double transcription;
+  private static Double speakerLabels;
+  private static Double wallClockSinceFirstByteReceived;
+  private static String wordTypeToAdd;
+  private static String customLanguageModelId;
+  private static String description;
+  private static String warningId;
 
--> Custom language models - Create Customization
-{
-  "customization_id": "d0bdc477-59e6-4e45-86f3-1a9a39664eb5"
-}
-
--> Custom acoustic models
-{
-  "customization_id": "825485d7-af3f-44e7-b1ea-76130dec8a61"
-}
-
-*/
+  static {
+    headerKey = 'Test-Header';
+    headerVal = 'test_val';
+    contentType = IBMWatsonHttpMediaType.AUDIO_WAV;
+    model = 'model';
+    callbackUrl = 'callback.com';
+    events = 'events';
+    userToken = 'token';
+    resultsTtl = 5L;
+    languageCustomizationId = 'language-id';
+    acousticCustomizationId = 'acoustic-id';
+    baseModelVersion = 'v1';
+    customizationWeight = 10.0;
+    inactivityTimeout = 1000L;
+    keywords = new List<String> { 'keyword1' };
+    keywordsThreshold = 5.0;
+    maxAlternatives = 50L;
+    wordAlternativesThreshold = 3.0;
+    customizationId = 'customization-id';
+    grammarName = 'grammar';
+    processingMetricsInterval = 15.0;
+    samplingInterval = 0.1;
+    endTime = 0.2;
+    signalToNoiseRatio = 0.3;
+    speechRatio = 0.4;
+    highFrequencyLoss = 0.5;
+    beginVal = 3.1;
+    endVal = 6.2;
+    count = 10L;
+    received = 300.0;
+    seenByEngine = 400.0;
+    transcription = 500.0;
+    speakerLabels = 600.0;
+    wallClockSinceFirstByteReceived = 47.0;
+    wordTypeToAdd = 'all';
+    customLanguageModelId = 'custom-language-id';
+    description = 'description';
+    warningId = 'warning_id';
+  }
 
   static testMethod void getModelTest() {
     String body = IBMWatsonMockResponses.speechToTextGetModel();
@@ -498,12 +562,35 @@ private class IBMSpeechToTextV1Test {
       speechToText.setEndPoint(URL);
       speechToText.setUsernameAndPassword(username, password);
     }
-    String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
-    IBMSpeechToTextV1Models.TrainLanguageModelOptions trainLanguageModelOptions = new IBMSpeechToTextV1Models.TrainLanguageModelOptionsBuilder(customizationId)
+    IBMSpeechToTextV1Models.TrainLanguageModelOptions trainLanguageModelOptions = new IBMSpeechToTextV1Models.TrainLanguageModelOptionsBuilder()
       .customizationId(customizationId)
-      .addHeader('Test-Header', 'test_value')
       .build();
-    speechToText.trainLanguageModel(trainLanguageModelOptions);
+    IBMSpeechToTextV1Models.TrainingResponse response = speechToText.trainLanguageModel(trainLanguageModelOptions);
+
+    System.assertEquals(description, response.getWarnings()[0].getDescription());
+    System.assertEquals(warningId, response.getWarnings()[0].getWarningId());
+
+    Test.stopTest();
+  }
+
+  static testMethod void trainAcousticModelTest() {
+    String body = IBMWatsonMockResponses.speechToTextTrainLanguageModel();
+    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
+    Test.setMock(HttpCalloutMock.class, mockResponse);
+    Test.startTest();
+    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
+    if (username != null && password != null) {
+      speechToText.setEndPoint(URL);
+      speechToText.setUsernameAndPassword(username, password);
+    }
+    IBMSpeechToTextV1Models.TrainAcousticModelOptions options = new IBMSpeechToTextV1Models.TrainAcousticModelOptionsBuilder()
+      .customizationId(customizationId)
+      .build();
+    IBMSpeechToTextV1Models.TrainingResponse response = speechToText.trainAcousticModel(options);
+
+    System.assertEquals(description, response.getWarnings()[0].getDescription());
+    System.assertEquals(warningId, response.getWarnings()[0].getWarningId());
+
     Test.stopTest();
   }
 
@@ -833,26 +920,6 @@ private class IBMSpeechToTextV1Test {
     Test.stopTest();
   }
 
-  static testMethod void trainAcousticModelTest() {
-    String body = IBMWatsonMockResponses.speechToTextTrainAcousticModel();
-    IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
-    Test.setMock(HttpCalloutMock.class, mockResponse);
-    Test.startTest();
-    IBMSpeechToTextV1 speechToText = new IBMSpeechToTextV1();
-    if (username != null && password != null) {
-      speechToText.setEndPoint(URL);
-      speechToText.setUsernameAndPassword(username, password);
-    }
-    String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
-    IBMSpeechToTextV1Models.TrainAcousticModelOptions trainAcousticModelOptions = new IBMSpeechToTextV1Models.TrainAcousticModelOptionsBuilder(customizationId)
-      .customizationId(customizationId)
-      .customLanguageModelId('custom_language')
-      .addHeader('Test-Header', 'test_value')
-      .build();
-    speechToText.trainAcousticModel(trainAcousticModelOptions);
-    Test.stopTest();
-  }
-
   static testMethod void deleteAudioTest() {
     String body = IBMWatsonMockResponses.speechToTextDeleteAudio();
     IBMWatsonMockHttpResponse mockResponse = new IBMWatsonMockHttpResponse(200, 'Success', body, null);
@@ -947,30 +1014,39 @@ private class IBMSpeechToTextV1Test {
       .body(blob.valueOf('Test string not an audio content'))
       .build();
     String fileContentType = 'audio/mp3';
-    String customizationId = 'd0bdc477-59e6-4e45-86f3-1a9a39664eb5';
     IBMSpeechToTextV1Models.RecognizeOptions recognizeOptions = new IBMSpeechToTextV1Models.RecognizeOptionsBuilder()
       .audio(audio)
       .contentType(fileContentType)
-      .maxAlternatives(5)
-      .timestamps(true)
-      .wordConfidence(true)
-      .inactivityTimeout(10)
-      .model('TestModel')
-      .keywords(new List<String> { 'keyword_1' })
-      .keywordsThreshold((double)0.4)
-      .wordAlternativesThreshold((double)0.4)
-      .profanityFilter(true)
-      .smartFormatting(true)
-      .customizationId(customizationId)
-      .speakerLabels(true)
-      .baseModelVersion('version')
-      .addHeader('Test-Header', 'test_value')
       .build();
     IBMSpeechToTextV1Models.SpeechRecognitionResults speechResults = speechToText.recognize(recognizeOptions);
     System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getStartTime(),0.14);
     System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getEndTime(),0.28);
     System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getAlternatives()[0].getConfidence(),1);
     System.assertEquals(speechResults.getResults()[0].getWordAlternatives()[0].getAlternatives()[0].getWord(), 'a');
+    System.assertEquals(speechResults.getAudioMetrics().getSamplingInterval(), samplingInterval);
+    System.assert(speechResults.getAudioMetrics().getAccumulated().getXfinal());
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getEndTime(), endTime);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getSpeechRatio(), speechRatio);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getHighFrequencyLoss(), highFrequencyLoss);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getSignalToNoiseRatio(), signalToNoiseRatio);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getDirectCurrentOffset()[0].getXbegin(), beginVal);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getDirectCurrentOffset()[0].getXend(), endVal);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getDirectCurrentOffset()[0].getCount(), count);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getClippingRate()[0].getXbegin(), beginVal);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getClippingRate()[0].getXend(), endVal);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getClippingRate()[0].getCount(), count);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getSpeechLevel()[0].getXbegin(), beginVal);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getSpeechLevel()[0].getXend(), endVal);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getSpeechLevel()[0].getCount(), count);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getNonSpeechLevel()[0].getXbegin(), beginVal);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getNonSpeechLevel()[0].getXend(), endVal);
+    System.assertEquals(speechResults.getAudioMetrics().getAccumulated().getNonSpeechLevel()[0].getCount(), count);
+    System.assertEquals(speechResults.getProcessingMetrics().getProcessedAudio().getReceived(), received);
+    System.assertEquals(speechResults.getProcessingMetrics().getProcessedAudio().getSeenByEngine(), seenByEngine);
+    System.assertEquals(speechResults.getProcessingMetrics().getProcessedAudio().getTranscription(), transcription);
+    System.assertEquals(speechResults.getProcessingMetrics().getProcessedAudio().getSpeakerLabels(), speakerLabels);
+    System.assertEquals(speechResults.getProcessingMetrics().getWallClockSinceFirstByteReceived(), wallClockSinceFirstByteReceived);
+    System.assert(speechResults.getProcessingMetrics().getPeriodic());
     recognizeOptions = recognizeOptions.newBuilder().build();
     Test.stopTest();
   }
@@ -1186,6 +1262,180 @@ private class IBMSpeechToTextV1Test {
         .grammarName(grammarName)
         .build();
     speechToText.deleteGrammar(deleteGrammarOptions);
+
+    Test.stopTest();
+  }
+
+  static testMethod void testCreateJobOptions() {
+    Test.startTest();
+
+    Attachment audioAttachment = new Attachment(Body = Blob.valueOf('job'),
+      Name='job.wav',
+      Description='audio for job',
+      ContentType='audio/wav');
+    IBMWatsonFile audio = new IBMWatsonFile.FileBuilder()
+      .attachment(audioAttachment)
+      .build();
+    String newKeyword = 'keyword2';
+
+    IBMSpeechToTextV1Models.CreateJobOptions options = new IBMSpeechToTextV1Models.CreateJobOptionsBuilder()
+      .audio(audio)
+      .contentType(contentType)
+      .model(model)
+      .callbackUrl(callbackUrl)
+      .events(events)
+      .userToken(userToken)
+      .resultsTtl(resultsTtl)
+      .languageCustomizationId(languageCustomizationId)
+      .acousticCustomizationId(acousticCustomizationId)
+      .baseModelVersion(baseModelVersion)
+      .customizationWeight(customizationWeight)
+      .inactivityTimeout(inactivityTimeout)
+      .keywords(keywords)
+      .addKeywords(newKeyword)
+      .keywordsThreshold(keywordsThreshold)
+      .maxAlternatives(maxAlternatives)
+      .wordAlternativesThreshold(wordAlternativesThreshold)
+      .wordConfidence(true)
+      .timestamps(true)
+      .profanityFilter(true)
+      .smartFormatting(true)
+      .speakerLabels(true)
+      .customizationId(customizationId)
+      .grammarName(grammarName)
+      .redaction(true)
+      .processingMetrics(true)
+      .processingMetricsInterval(processingMetricsInterval)
+      .audioMetrics(true)
+      .addHeader(headerKey, headerVal)
+      .build();
+    options = options.newBuilder().build();
+
+    System.assertEquals(audio, options.audio());
+    System.assertEquals(contentType, options.contentType());
+    System.assertEquals(model, options.model());
+    System.assertEquals(callbackUrl, options.callbackUrl());
+    System.assertEquals(events, options.events());
+    System.assertEquals(userToken, options.userToken());
+    System.assertEquals(resultsTtl, options.resultsTtl());
+    System.assertEquals(languageCustomizationId, options.languageCustomizationId());
+    System.assertEquals(acousticCustomizationId, options.acousticCustomizationId());
+    System.assertEquals(baseModelVersion, options.baseModelVersion());
+    System.assertEquals(customizationWeight, options.customizationWeight());
+    System.assertEquals(inactivityTimeout, options.inactivityTimeout());
+    System.assert(options.keywords().contains(keywords.get(0)));
+    System.assert(options.keywords().contains(newKeyword));
+    System.assertEquals(keywordsThreshold, options.keywordsThreshold());
+    System.assertEquals(maxAlternatives, options.maxAlternatives());
+    System.assertEquals(wordAlternativesThreshold, options.wordAlternativesThreshold());
+    System.assert(options.wordConfidence());
+    System.assert(options.timestamps());
+    System.assert(options.profanityFilter());
+    System.assert(options.speakerLabels());
+    System.assertEquals(customizationId, options.customizationId());
+    System.assertEquals(grammarName, options.grammarName());
+    System.assert(options.redaction());
+    System.assert(options.processingMetrics());
+    System.assertEquals(processingMetricsInterval, options.processingMetricsInterval());
+    System.assert(options.audioMetrics());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testRecognizeOptions() {
+    Test.startTest();
+
+    Attachment audioAttachment = new Attachment(Body = Blob.valueOf('audio'),
+      Name='audio.wav',
+      Description='audio for recognition',
+      ContentType='audio/wav');
+    IBMWatsonFile audio = new IBMWatsonFile.FileBuilder()
+      .attachment(audioAttachment)
+      .build();
+    String newKeyword = 'keyword2';
+
+    IBMSpeechToTextV1Models.RecognizeOptions options = new IBMSpeechToTextV1Models.RecognizeOptionsBuilder()
+      .audio(audio)
+      .contentType(contentType)
+      .model(model)
+      .languageCustomizationId(languageCustomizationId)
+      .acousticCustomizationId(acousticCustomizationId)
+      .baseModelVersion(baseModelVersion)
+      .customizationWeight(customizationWeight)
+      .inactivityTimeout(inactivityTimeout)
+      .keywords(keywords)
+      .addKeywords(newKeyword)
+      .keywordsThreshold(keywordsThreshold)
+      .maxAlternatives(maxAlternatives)
+      .wordAlternativesThreshold(wordAlternativesThreshold)
+      .wordConfidence(true)
+      .timestamps(true)
+      .profanityFilter(true)
+      .smartFormatting(true)
+      .speakerLabels(true)
+      .customizationId(customizationId)
+      .grammarName(grammarName)
+      .redaction(true)
+      .audioMetrics(true)
+      .addHeader(headerKey, headerVal)
+      .build();
+    options = options.newBuilder().build();
+
+    System.assertEquals(audio, options.audio());
+    System.assertEquals(contentType, options.contentType());
+    System.assertEquals(model, options.model());
+    System.assertEquals(languageCustomizationId, options.languageCustomizationId());
+    System.assertEquals(acousticCustomizationId, options.acousticCustomizationId());
+    System.assertEquals(baseModelVersion, options.baseModelVersion());
+    System.assertEquals(customizationWeight, options.customizationWeight());
+    System.assertEquals(inactivityTimeout, options.inactivityTimeout());
+    System.assert(options.keywords().contains(keywords.get(0)));
+    System.assert(options.keywords().contains(newKeyword));
+    System.assertEquals(keywordsThreshold, options.keywordsThreshold());
+    System.assertEquals(maxAlternatives, options.maxAlternatives());
+    System.assertEquals(wordAlternativesThreshold, options.wordAlternativesThreshold());
+    System.assert(options.wordConfidence());
+    System.assert(options.timestamps());
+    System.assert(options.profanityFilter());
+    System.assert(options.speakerLabels());
+    System.assertEquals(customizationId, options.customizationId());
+    System.assertEquals(grammarName, options.grammarName());
+    System.assert(options.redaction());
+    System.assert(options.audioMetrics());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testTrainLanguageModelOptions() {
+    Test.startTest();
+
+    IBMSpeechToTextV1Models.TrainLanguageModelOptions options = new IBMSpeechToTextV1Models.TrainLanguageModelOptionsBuilder()
+      .customizationId(customizationId)
+      .wordTypeToAdd(wordTypeToAdd)
+      .customizationWeight(customizationWeight)
+      .addHeader(headerKey, headerVal)
+      .build();
+    options = options.newBuilder().build();
+
+    System.assertEquals(customizationId, options.customizationId());
+    System.assertEquals(wordTypeToAdd, options.wordTypeToAdd());
+    System.assertEquals(customizationWeight, options.customizationWeight());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testTrainAcousticModelOptions() {
+    Test.startTest();
+
+    IBMSpeechToTextV1Models.TrainAcousticModelOptions options = new IBMSpeechToTextV1Models.TrainAcousticModelOptionsBuilder()
+      .customizationId(customizationId)
+      .customLanguageModelId(customLanguageModelId)
+      .addHeader(headerKey, headerVal)
+      .build();
+    options = options.newBuilder().build();
+
+    System.assertEquals(customizationId, options.customizationId());
+    System.assertEquals(customLanguageModelId, options.customLanguageModelId());
 
     Test.stopTest();
   }

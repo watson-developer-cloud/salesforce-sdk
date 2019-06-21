@@ -353,6 +353,7 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.SegmentSettings segment = new IBMDiscoveryV1Models.SegmentSettings();
     segment.setEnabled(true);
     segment.setSelectorTags(new List<String>{ 'tag' });
+    segment.setAnnotatedFields(new List<String>{ 'field' });
     conversions.setSegment(segment);
     IBMDiscoveryV1Models.WordSettings word = new IBMDiscoveryV1Models.WordSettings();
     IBMDiscoveryV1Models.WordHeadingDetection wordHeading = new IBMDiscoveryV1Models.WordHeadingDetection();
@@ -1926,6 +1927,7 @@ private class IBMDiscoveryV1Test {
     String credentialType = 'username_password';
     String url = 'login.salesforce.com';
     String username = 'user@email.address';
+    String status = 'connected';
 
     IBMDiscoveryV1Models.CredentialDetails details = new IBMDiscoveryV1Models.CredentialDetails();
     details.setClientId('client_id');
@@ -1947,12 +1949,14 @@ private class IBMDiscoveryV1Test {
     IBMDiscoveryV1Models.Credentials credentials = new IBMDiscoveryV1Models.Credentials();
     credentials.setSourceType(sourceType);
     credentials.setCredentialDetails(details);
+    credentials.setStatus(status);
 
     IBMDiscoveryV1Models.CreateCredentialsOptions options = new IBMDiscoveryV1Models.CreateCredentialsOptionsBuilder()
       .environmentId(ENVIRONMENT_ID)
       .sourceType(sourceType)
       .credentials(credentials)
       .credentialDetails(details)
+      .status(status)
       .addHeader('Test-Header', 'test_value')
       .build();
     IBMDiscoveryV1Models.Credentials credentialsResponse = discovery.createCredentials(options);
@@ -1961,6 +1965,7 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(credentialType, credentialsResponse.getCredentialDetails().getCredentialType());
     System.assertEquals(url, credentialsResponse.getCredentialDetails().getUrl());
     System.assertEquals(username, credentialsResponse.getCredentialDetails().getUsername());
+    System.assertEquals(status, credentialsResponse.getStatus());
 
     Test.stopTest();
   }
@@ -2042,6 +2047,7 @@ private class IBMDiscoveryV1Test {
     String credentialType = 'username_password';
     String url = 'login.salesforce.com';
     String username = 'user@email.address';
+    String status = 'connected';
 
     IBMDiscoveryV1Models.CredentialDetails newDetails = new IBMDiscoveryV1Models.CredentialDetails();
     newDetails.setClientId('client_id');
@@ -2066,6 +2072,7 @@ private class IBMDiscoveryV1Test {
       .sourceType(sourceType)
       .credentials(newCredentials)
       .credentialDetails(newDetails)
+      .status(status)
       .build();
     IBMDiscoveryV1Models.Credentials credentialsResponse = discovery.updateCredentials(options);
 
@@ -2851,6 +2858,7 @@ private class IBMDiscoveryV1Test {
     String crawlSpeed = 'crawl_speed';
     Long maximumHops = 1L;
     Long requestTimeout = 2000L;
+    List<String> blacklist = new List<String>{ 'badsite.com' };
 
     IBMDiscoveryV1Models.SourceOptionsWebCrawl sourceOptionsWebCrawl = new IBMDiscoveryV1Models.SourceOptionsWebCrawl();
     sourceOptionsWebCrawl.setUrl(url);
@@ -2860,6 +2868,7 @@ private class IBMDiscoveryV1Test {
     sourceOptionsWebCrawl.setMaximumHops(maximumHops);
     sourceOptionsWebCrawl.setRequestTimeout(requestTimeout);
     sourceOptionsWebCrawl.setOverrideRobotsTxt(true);
+    sourceOptionsWebCrawl.setBlacklist(blacklist);
 
     System.assertEquals(url, sourceOptionsWebCrawl.getUrl());
     System.assert(sourceOptionsWebCrawl.getLimitToStartingHosts());
@@ -2868,6 +2877,7 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(maximumHops, sourceOptionsWebCrawl.getMaximumHops());
     System.assertEquals(requestTimeout, sourceOptionsWebCrawl.getRequestTimeout());
     System.assert(sourceOptionsWebCrawl.getOverrideRobotsTxt());
+    System.assertEquals(blacklist, sourceOptionsWebCrawl.getBlacklist());
   }
 
   static testMethod void testSourceOptionsBuckets() {
@@ -2940,5 +2950,74 @@ private class IBMDiscoveryV1Test {
     System.assertEquals(bucketName, sourceOptions.getBuckets().get(0).getName());
     System.assertEquals(testLimit, sourceOptions.getBuckets().get(0).getXlimit());
     System.assert(sourceOptions.getCrawlAllBuckets());
+  }
+
+  static testMethod void testSourceStatus() {
+    Test.startTest();
+
+    String status = 'status';
+    String dateString = '"2017-07-14T12:55:40.652Z"';
+    Datetime dateValue = (Datetime) JSON.deserialize(dateString, Datetime.class);
+
+    IBMDiscoveryV1Models.SourceStatus sourceStatus = new IBMDiscoveryV1Models.SourceStatus();
+    sourceStatus.setStatus(status);
+    sourceStatus.setNextCrawl(dateValue);
+
+    System.assertEquals(status, sourceStatus.getStatus());
+    System.assertEquals(dateValue, sourceStatus.getNextCrawl());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testCollectionCrawlStatus() {
+    Test.startTest();
+
+    IBMDiscoveryV1Models.SourceStatus sourceStatus = new IBMDiscoveryV1Models.SourceStatus();
+    IBMDiscoveryV1Models.CollectionCrawlStatus crawlStatus = new IBMDiscoveryV1Models.CollectionCrawlStatus();
+    crawlStatus.setSourceCrawl(sourceStatus);
+
+    System.assertEquals(sourceStatus, crawlStatus.getSourceCrawl());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testSduStatus() {
+    Test.startTest();
+
+    Long annotatedPages = 1L;
+    Long pages = 2L;
+    Long documents = 3L;
+    IBMDiscoveryV1Models.SduStatusCustomFields customFields = new IBMDiscoveryV1Models.SduStatusCustomFields();
+
+    IBMDiscoveryV1Models.SduStatus sduStatus = new IBMDiscoveryV1Models.SduStatus();
+    sduStatus.setEnabled(true);
+    sduStatus.setTotalAnnotatedPages(annotatedPages);
+    sduStatus.setTotalPages(pages);
+    sduStatus.setTotalDocuments(documents);
+    sduStatus.setCustomFields(customFields);
+
+    System.assert(sduStatus.getEnabled());
+    System.assertEquals(annotatedPages, sduStatus.getTotalAnnotatedPages());
+    System.assertEquals(pages, sduStatus.getTotalPages());
+    System.assertEquals(documents, sduStatus.getTotalDocuments());
+    System.assertEquals(customFields, sduStatus.getCustomFields());
+
+    Test.stopTest();
+  }
+
+  static testMethod void testSduStatusCustomFields() {
+    Test.startTest();
+
+    Long defined = 1L;
+    Long maximumAllowed = 2L;
+
+    IBMDiscoveryV1Models.SduStatusCustomFields customFields = new IBMDiscoveryV1Models.SduStatusCustomFields();
+    customFields.setDefined(defined);
+    customFields.setMaximumAllowed(maximumAllowed);
+
+    System.assertEquals(defined, customFields.getDefined());
+    System.assertEquals(maximumAllowed, customFields.getMaximumAllowed());
+
+    Test.stopTest();
   }
 }

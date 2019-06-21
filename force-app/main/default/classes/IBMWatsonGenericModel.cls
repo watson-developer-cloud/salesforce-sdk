@@ -35,6 +35,10 @@ public virtual class IBMWatsonGenericModel {
   }
 
   public virtual Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+    if (jsonMap == null) {
+      return null;
+    }
+
     Object ret;
     if (jsonString.equals('null')) {
       ret = classType.newInstance();

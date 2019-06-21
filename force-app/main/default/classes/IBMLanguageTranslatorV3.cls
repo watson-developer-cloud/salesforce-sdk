@@ -91,6 +91,30 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
   }
 
   /**
+   * List identifiable languages.
+   *
+   * Lists the languages that the service can identify. Returns the language code (for example, `en` for English or `es`
+   * for Spanish) and name of each language.
+   *
+   * @param listIdentifiableLanguagesOptions the {@link IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptions} containing the options for the call
+   * @return the {@link IBMLanguageTranslatorV3Models.IdentifiableLanguages} with the response
+   */
+  public IBMLanguageTranslatorV3Models.IdentifiableLanguages listIdentifiableLanguages(IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v3/identifiable_languages');
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=listIdentifiableLanguages');
+    Map<String, String> requestHeaders = (listIdentifiableLanguagesOptions != null) ? listIdentifiableLanguagesOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    return (IBMLanguageTranslatorV3Models.IdentifiableLanguages) createServiceCall(builder.build(), IBMLanguageTranslatorV3Models.IdentifiableLanguages.class);
+  }
+
+  /**
    * Identify language.
    *
    * Identifies the language of the input text.
@@ -116,27 +140,35 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
   }
 
   /**
-   * List identifiable languages.
+   * List models.
    *
-   * Lists the languages that the service can identify. Returns the language code (for example, `en` for English or `es`
-   * for Spanish) and name of each language.
+   * Lists available translation models.
    *
-   * @param listIdentifiableLanguagesOptions the {@link IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptions} containing the options for the call
-   * @return the {@link IBMLanguageTranslatorV3Models.IdentifiableLanguages} with the response
+   * @param listModelsOptions the {@link IBMLanguageTranslatorV3Models.ListModelsOptions} containing the options for the call
+   * @return the {@link IBMLanguageTranslatorV3Models.TranslationModels} with the response
    */
-  public IBMLanguageTranslatorV3Models.IdentifiableLanguages listIdentifiableLanguages(IBMLanguageTranslatorV3Models.ListIdentifiableLanguagesOptions listIdentifiableLanguagesOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v3/identifiable_languages');
+  public IBMLanguageTranslatorV3Models.TranslationModels listModels(IBMLanguageTranslatorV3Models.ListModelsOptions listModelsOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v3/models');
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=listIdentifiableLanguages');
-    Map<String, String> requestHeaders = (listIdentifiableLanguagesOptions != null) ? listIdentifiableLanguagesOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=listModels');
+    Map<String, String> requestHeaders = (listModelsOptions != null) ? listModelsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
     builder.query('version', versionDate);
+    if (listModelsOptions != null && listModelsOptions.source() != null) {
+      builder.query('source', listModelsOptions.source());
+    }
+    if (listModelsOptions != null && listModelsOptions.target() != null) {
+      builder.query('target', listModelsOptions.target());
+    }
+    if (listModelsOptions != null && listModelsOptions.defaultModels() != null) {
+      builder.query('default', String.valueOf(listModelsOptions.defaultModels()));
+    }
 
-    return (IBMLanguageTranslatorV3Models.IdentifiableLanguages) createServiceCall(builder.build(), IBMLanguageTranslatorV3Models.IdentifiableLanguages.class);
+    return (IBMLanguageTranslatorV3Models.TranslationModels) createServiceCall(builder.build(), IBMLanguageTranslatorV3Models.TranslationModels.class);
   }
 
   /**
@@ -243,35 +275,142 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
   }
 
   /**
-   * List models.
+   * List documents.
    *
-   * Lists available translation models.
+   * Lists documents that have been submitted for translation.
    *
-   * @param listModelsOptions the {@link IBMLanguageTranslatorV3Models.ListModelsOptions} containing the options for the call
-   * @return the {@link IBMLanguageTranslatorV3Models.TranslationModels} with the response
+   * @param listDocumentsOptions the {@link IBMLanguageTranslatorV3Models.ListDocumentsOptions} containing the options for the call
+   * @return the {@link IBMLanguageTranslatorV3Models.DocumentList} with the response
    */
-  public IBMLanguageTranslatorV3Models.TranslationModels listModels(IBMLanguageTranslatorV3Models.ListModelsOptions listModelsOptions) {
-    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v3/models');
+  public IBMLanguageTranslatorV3Models.DocumentList listDocuments(IBMLanguageTranslatorV3Models.ListDocumentsOptions listDocumentsOptions) {
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + '/v3/documents');
     builder.addHeader('Accept', 'application/json');
-    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=listModels');
-    Map<String, String> requestHeaders = (listModelsOptions != null) ? listModelsOptions.requestHeaders() : null;
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=listDocuments');
+    Map<String, String> requestHeaders = (listDocumentsOptions != null) ? listDocumentsOptions.requestHeaders() : null;
     if (requestHeaders != null && requestHeaders.size() > 0) {
       for (String name : requestHeaders.keySet()) {
         builder.addHeader(name, requestHeaders.get(name));
       }
     }
     builder.query('version', versionDate);
-    if (listModelsOptions != null && listModelsOptions.source() != null) {
-      builder.query('source', listModelsOptions.source());
-    }
-    if (listModelsOptions != null && listModelsOptions.target() != null) {
-      builder.query('target', listModelsOptions.target());
-    }
-    if (listModelsOptions != null && listModelsOptions.defaultModels() != null) {
-      builder.query('default', String.valueOf(listModelsOptions.defaultModels()));
-    }
 
-    return (IBMLanguageTranslatorV3Models.TranslationModels) createServiceCall(builder.build(), IBMLanguageTranslatorV3Models.TranslationModels.class);
+    return (IBMLanguageTranslatorV3Models.DocumentList) createServiceCall(builder.build(), IBMLanguageTranslatorV3Models.DocumentList.class);
+  }
+
+  /**
+   * Translate document.
+   *
+   * Submit a document for translation. You can submit the document contents in the `file` parameter, or you can
+   * reference a previously submitted document by document ID.
+   *
+   * @param translateDocumentOptions the {@link IBMLanguageTranslatorV3Models.TranslateDocumentOptions} containing the options for the call
+   * @return the {@link IBMLanguageTranslatorV3Models.DocumentStatus} with the response
+   */
+  public IBMLanguageTranslatorV3Models.DocumentStatus translateDocument(IBMLanguageTranslatorV3Models.TranslateDocumentOptions translateDocumentOptions) {
+    IBMWatsonValidator.notNull(translateDocumentOptions, 'translateDocumentOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/documents');
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=translateDocument');
+    Map<String, String> requestHeaders = (translateDocumentOptions != null) ? translateDocumentOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+    IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
+    multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
+    IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(translateDocumentOptions.file(), translateDocumentOptions.fileContentType());
+    multipartBuilder.addFormDataPart('file', translateDocumentOptions.filename(), fileBody);
+    if (translateDocumentOptions.modelId() != null) {
+      multipartBuilder.addFormDataPart('model_id', translateDocumentOptions.modelId());
+    }
+    if (translateDocumentOptions.source() != null) {
+      multipartBuilder.addFormDataPart('source', translateDocumentOptions.source());
+    }
+    if (translateDocumentOptions.target() != null) {
+      multipartBuilder.addFormDataPart('target', translateDocumentOptions.target());
+    }
+    if (translateDocumentOptions.documentId() != null) {
+      multipartBuilder.addFormDataPart('document_id', translateDocumentOptions.documentId());
+    }
+    IBMWatsonMultipartBody multipartBody = multipartBuilder.build();
+    builder.body(multipartBody).addHeaders(multipartBody.getAllHeaders());
+
+    return (IBMLanguageTranslatorV3Models.DocumentStatus) createServiceCall(builder.build(), IBMLanguageTranslatorV3Models.DocumentStatus.class);
+  }
+
+  /**
+   * Get document status.
+   *
+   * Gets the translation status of a document.
+   *
+   * @param getDocumentStatusOptions the {@link IBMLanguageTranslatorV3Models.GetDocumentStatusOptions} containing the options for the call
+   * @return the {@link IBMLanguageTranslatorV3Models.DocumentStatus} with the response
+   */
+  public IBMLanguageTranslatorV3Models.DocumentStatus getDocumentStatus(IBMLanguageTranslatorV3Models.GetDocumentStatusOptions getDocumentStatusOptions) {
+    IBMWatsonValidator.notNull(getDocumentStatusOptions, 'getDocumentStatusOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v3/documents/{0}', new String[]{ getDocumentStatusOptions.documentId() }));
+    builder.addHeader('Accept', 'application/json');
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=getDocumentStatus');
+    Map<String, String> requestHeaders = (getDocumentStatusOptions != null) ? getDocumentStatusOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    return (IBMLanguageTranslatorV3Models.DocumentStatus) createServiceCall(builder.build(), IBMLanguageTranslatorV3Models.DocumentStatus.class);
+  }
+
+  /**
+   * Delete document.
+   *
+   * Deletes a document.
+   *
+   * @param deleteDocumentOptions the {@link IBMLanguageTranslatorV3Models.DeleteDocumentOptions} containing the options for the call
+   * @return the service call
+   */
+  public void deleteDocument(IBMLanguageTranslatorV3Models.DeleteDocumentOptions deleteDocumentOptions) {
+    IBMWatsonValidator.notNull(deleteDocumentOptions, 'deleteDocumentOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpDelete(getEndPoint() + String.format('/v3/documents/{0}', new String[]{ deleteDocumentOptions.documentId() }));
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=deleteDocument');
+    Map<String, String> requestHeaders = (deleteDocumentOptions != null) ? deleteDocumentOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    createServiceCall(builder.build(), null);
+  }
+
+  /**
+   * Get translated document.
+   *
+   * Gets the translated document associated with the given document ID.
+   *
+   * @param getTranslatedDocumentOptions the {@link IBMLanguageTranslatorV3Models.GetTranslatedDocumentOptions} containing the options for the call
+   * @return the {@link IBMWatsonFile} with the response
+   */
+  public IBMWatsonFile getTranslatedDocument(IBMLanguageTranslatorV3Models.GetTranslatedDocumentOptions getTranslatedDocumentOptions) {
+    IBMWatsonValidator.notNull(getTranslatedDocumentOptions, 'getTranslatedDocumentOptions cannot be null');
+    IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpGet(getEndPoint() + String.format('/v3/documents/{0}/translated_document', new String[]{ getTranslatedDocumentOptions.documentId() }));
+    if (getTranslatedDocumentOptions.accept() != null) {
+      builder.addHeader('Accept', getTranslatedDocumentOptions.accept());
+    }
+    builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=language_translator;service_version=V3;operation_id=getTranslatedDocument');
+    Map<String, String> requestHeaders = (getTranslatedDocumentOptions != null) ? getTranslatedDocumentOptions.requestHeaders() : null;
+    if (requestHeaders != null && requestHeaders.size() > 0) {
+      for (String name : requestHeaders.keySet()) {
+        builder.addHeader(name, requestHeaders.get(name));
+      }
+    }
+    builder.query('version', versionDate);
+
+    return (IBMWatsonFile) createServiceCall(builder.build(), IBMWatsonFile.class);
   }
 
 }

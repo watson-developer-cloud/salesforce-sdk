@@ -61,7 +61,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
   /**
    * Analyze general tone.
    *
-   * Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
+   * Use the general-purpose endpoint to analyze the tone of your input content. The service analyzes the content for
    * emotional and language tones. The method always analyzes the tone of the full document; by default, it also
    * analyzes the tone of each individual sentence of the content.
    *
@@ -76,7 +76,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    * service removes HTML tags and analyzes only the textual content.
    *
    * **See also:** [Using the general-purpose
-   * endpoint](https://cloud.ibm.com/docs/services/tone-analyzer/using-tone.html#using-the-general-purpose-endpoint).
+   * endpoint](https://cloud.ibm.com/docs/services/tone-analyzer?topic=tone-analyzer-utgpe#utgpe).
    *
    * @param toneOptions the {@link IBMToneAnalyzerV3Models.ToneOptions} containing the options for the call
    * @return the {@link IBMToneAnalyzerV3Models.ToneAnalysis} with the response
@@ -85,14 +85,14 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
     IBMWatsonValidator.notNull(toneOptions, 'toneOptions cannot be null');
     IBMWatsonRequestBuilder builder = IBMWatsonRequestBuilder.httpPost(getEndPoint() + '/v3/tone');
     builder.addHeader('Accept', 'application/json');
+    if (toneOptions.contentType() != null) {
+      builder.addHeader('Content-Type', toneOptions.contentType());
+    }
     if (toneOptions.contentLanguage() != null) {
       builder.addHeader('Content-Language', toneOptions.contentLanguage());
     }
     if (toneOptions.acceptLanguage() != null) {
       builder.addHeader('Accept-Language', toneOptions.acceptLanguage());
-    }
-    if (toneOptions.contentType() != null) {
-      builder.addHeader('Content-Type', toneOptions.contentType());
     }
     builder.addHeader('X-IBMCloud-SDK-Analytics', 'service_name=tone_analyzer;service_version=V3;operation_id=tone');
     Map<String, String> requestHeaders = (toneOptions != null) ? toneOptions.requestHeaders() : null;
@@ -114,9 +114,9 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
   }
 
   /**
-   * Analyze customer engagement tone.
+   * Analyze customer-engagement tone.
    *
-   * Use the customer engagement endpoint to analyze the tone of customer service and customer support conversations.
+   * Use the customer-engagement endpoint to analyze the tone of customer service and customer support conversations.
    * For each utterance of a conversation, the method reports the most prevalent subset of the following seven tones:
    * sad, frustrated, satisfied, excited, polite, impolite, and sympathetic.
    *
@@ -127,7 +127,7 @@ public class IBMToneAnalyzerV3 extends IBMWatsonService {
    * UTF-8.
    *
    * **See also:** [Using the customer-engagement
-   * endpoint](https://cloud.ibm.com/docs/services/tone-analyzer/using-tone-chat.html#using-the-customer-engagement-endpoint).
+   * endpoint](https://cloud.ibm.com/docs/services/tone-analyzer?topic=tone-analyzer-utco#utco).
    *
    * @param toneChatOptions the {@link IBMToneAnalyzerV3Models.ToneChatOptions} containing the options for the call
    * @return the {@link IBMToneAnalyzerV3Models.UtteranceAnalyses} with the response

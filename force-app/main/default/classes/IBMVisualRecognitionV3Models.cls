@@ -26,15 +26,6 @@ public class IBMVisualRecognitionV3Models {
       this.class_serialized_name = className;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ModelClass ret = (ModelClass) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -115,15 +106,6 @@ public class IBMVisualRecognitionV3Models {
       this.type_hierarchy_serialized_name = typeHierarchy;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ClassResult ret = (ClassResult) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -1888,15 +1870,6 @@ public class IBMVisualRecognitionV3Models {
       this.error_id_serialized_name = errorId;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ErrorInfo ret = (ErrorInfo) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -2065,15 +2038,6 @@ public class IBMVisualRecognitionV3Models {
       this.score_serialized_name = score;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      FaceAge ret = (FaceAge) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -2148,15 +2112,6 @@ public class IBMVisualRecognitionV3Models {
       this.score_serialized_name = score;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      FaceGender ret = (FaceGender) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -2252,15 +2207,6 @@ public class IBMVisualRecognitionV3Models {
       this.top_serialized_name = top;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      FaceLocation ret = (FaceLocation) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -2928,15 +2874,6 @@ public class IBMVisualRecognitionV3Models {
       this.description_serialized_name = description;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      WarningInfo ret = (WarningInfo) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
 }

@@ -708,7 +708,23 @@ public class IBMWatsonMockResponses {
               '"value": {' +
                 '"input": {' +
                   '"text": "text"' +
-                '}' +
+                '},' +
+                '"intents": [' +
+                  '{' +
+                    '"intent": "test_intent", ' +
+                    '"confidence": 0.314159' +
+                  '}' +
+                '],' +
+                '"entities": [' +
+                  '{' +
+                    '"entity": "test_entity", ' +
+                    '"location": [' +
+                      '10' +
+                    '], ' +
+                    '"value": "Value of test_entity", ' +
+                    '"confidence": 0.314159' +
+                  '}' +
+                ']' +
               '}' +
             '}' +
             '],' +
@@ -1430,7 +1446,19 @@ public class IBMWatsonMockResponses {
             '      "text": "free trial"' +
             '    }' +
             '  ], ' +
-            '  "categories": [{ "label": "Company", "score": 0.89792}], ' +
+            '"categories": [' +
+              '{' +
+                '"label": "Company",' +
+                '"score": 0.89792,' +
+                '"explanation": {' +
+                  '"relevant_text": [' +
+                    '{' +
+                      '"text": "text"' +
+                    '}' +
+                  ']' +
+                '}' +
+              '}' +
+            '],' +
             '  "metadata": { "authors": [{"name": "test"}], "publication_date": "2017-05-16T13:56:54.957Z","title": "test"}, ' +
             '  "emotion": { "targets": [{"text": "test", "score": 0.89792,"emotion": {"anger": 0.099437}}], "document": {"label": "test", "score": 0.89792, "emotion": {"anger": 0.099437}}}, ' +
             '  "relations": [{ "type": "Company", "sentence": "Company", "score": 0.89792,"arguments": [{"entities": [{"text": "test","type": "Company"}],"text": "test"}]}], ' +
@@ -2182,7 +2210,14 @@ public class IBMWatsonMockResponses {
   }
   
   public static testMethod String speechToTextTrainLanguageModel() {
-    return '{}';
+    return '{' +
+      '"warnings": [' +
+        '{' +
+          '"description": "description",' +
+          '"warning_id": "warning_id"' +
+        '}' +
+      ']' +
+    '}';
   }
   
   public static testMethod String speechToTextUpgradeLanguageModel() {
@@ -2391,71 +2426,119 @@ public class IBMWatsonMockResponses {
 
   public static testMethod String speechToTextRecognize() {
     return ' {' +
-     ' "results": [' +
-     '   {' +
-     '     "word_alternatives": [' +
-     '       {' +
-     '         "start_time": 0.14, ' +
-     '         "alternatives": [' +
-     '           {' +
-     '             "confidence": 1, ' +
-     '             "word": "a"' +
-     '           }' +
-     '         ], ' +
-     '         "end_time": 0.28' +
-     '       }, ' +
-     '       {' +
-     '         "start_time": 5.33, ' +
-     '         "alternatives": [' +
-     '           {' +
-     '             "confidence": 0.9953, ' +
-     '             "word": "Sunday"' +
-     '           }' +
-     '         ], ' +
-     '         "end_time": 6.04' +
-     '       }' +
-     '     ], ' +
-     '     "keywords_result": {' +
-     '       "tornadoes": [' +
-     '         {' +
-     '           "normalized_text": "tornadoes", ' +
-     '           "start_time": 3.03, ' +
-     '           "confidence": 0.953, ' +
-     '           "end_time": 3.85' +
-     '         }' +
-     '       ], ' +
-     '       "colorado": [' +
-     '         {' +
-     '           "normalized_text": "Colorado", ' +
-     '           "start_time": 4.59, ' +
-     '           "confidence": 0.999, ' +
-     '           "end_time": 5.18' +
-     '         }' +
-     '       ]' +
-     '     }, ' +
-     '     "alternatives": [' +
-     '       {' +
-     '         "timestamps": [' +
-     '           [' +
-     '             "a", ' +
-     '             0.14, ' +
-     '             0.28' +
-     '           ], ' +
-     '           [' +
-     '             "Sunday", ' +
-     '             5.33, ' +
-     '             6.04' +
-     '           ]' +
-     '         ], ' +
-     '         "confidence": 0.983, ' +
-     '         "transcript": "a line of severe thunderstorms with several possible tornadoes is approaching Colorado on Sunday "' +
-     '       }' +
-     '     ], ' +
-     '     "final": true' +
-     '   }' +
-     ' ], ' +
-     ' "result_index": 0' +
-     ' }';
+      '"results": [' +
+      '  {' +
+      '    "word_alternatives": [' +
+      '      {' +
+      '        "start_time": 0.14, ' +
+      '        "alternatives": [' +
+      '          {' +
+      '            "confidence": 1, ' +
+      '            "word": "a"' +
+      '          }' +
+      '        ], ' +
+      '        "end_time": 0.28' +
+      '      }, ' +
+      '      {' +
+      '        "start_time": 5.33, ' +
+      '        "alternatives": [' +
+      '          {' +
+      '            "confidence": 0.9953, ' +
+      '            "word": "Sunday"' +
+      '          }' +
+      '        ], ' +
+      '        "end_time": 6.04' +
+      '      }' +
+      '    ], ' +
+      '    "keywords_result": {' +
+      '      "tornadoes": [' +
+      '        {' +
+      '          "normalized_text": "tornadoes", ' +
+      '          "start_time": 3.03, ' +
+      '          "confidence": 0.953, ' +
+      '          "end_time": 3.85' +
+      '        }' +
+      '      ], ' +
+      '      "colorado": [' +
+      '        {' +
+      '          "normalized_text": "Colorado", ' +
+      '          "start_time": 4.59, ' +
+      '          "confidence": 0.999, ' +
+      '          "end_time": 5.18' +
+      '        }' +
+      '      ]' +
+      '    }, ' +
+      '    "alternatives": [' +
+      '      {' +
+      '        "timestamps": [' +
+      '          [' +
+      '            "a", ' +
+      '            0.14, ' +
+      '            0.28' +
+      '          ], ' +
+      '          [' +
+      '            "Sunday", ' +
+      '            5.33, ' +
+      '            6.04' +
+      '          ]' +
+      '        ], ' +
+      '        "confidence": 0.983, ' +
+      '        "transcript": "a line of severe thunderstorms with several possible tornadoes is approaching Colorado on Sunday "' +
+      '      }' +
+      '    ], ' +
+      '    "final": true' +
+      '  }' +
+      '], ' +
+      '"result_index": 0,' +
+      '"audio_metrics": {' +
+        '"sampling_interval": 0.1,' +
+        '"accumulated": {' +
+          '"final": true,' +
+          '"end_time": 0.2,' +
+          '"speech_ratio": 0.4,' +
+          '"high_frequency_loss": 0.5,' +
+          '"signal_to_noise_ratio": 0.3,' +
+          '"direct_current_offset": [' +
+            '{' +
+              '"begin": 3.1,' +
+              '"end": 6.2,' +
+              '"count": 10' +
+            '}' +
+          '],' +
+          '"clipping_rate": [' +
+            '{' +
+              '"begin": 3.1,' +
+              '"end": 6.2,' +
+              '"count": 10' +
+            '}' +
+          '],' +
+          '"speech_level": [' +
+            '{' +
+              '"begin": 3.1,' +
+              '"end": 6.2,' +
+              '"count": 10' +
+            '}' +
+          '],' +
+          '"non_speech_level": [' +
+            '{' +
+              '"begin": 3.1,' +
+              '"end": 6.2,' +
+              '"count": 10' +
+            '}' +
+          ']' +
+        '}' +
+      '},' +
+      '"processing_metrics": {' +
+        '"processed_audio": {' +
+          '"received": 300.0,' +
+          '"seen_by_engine": 400.0,' +
+          '"transcription": 500.0,' +
+          '"speaker_labels": 600.0' +
+        '},' +
+        '"wall_clock_since_first_byte_received": 47.0,' +
+        '"periodic": true' +
+      '}' +
+    '}';
   }
   
   public static testMethod String expansionsResponse() {
@@ -2580,7 +2663,8 @@ public class IBMWatsonMockResponses {
         '"credential_type" : "username_password",' +
         '"url" : "login.salesforce.com",' +
         '"username" : "user@email.address"' +
-      '}' +
+      '},' +
+      '"status" : "connected"' +
     '}';
   }
 
@@ -3904,6 +3988,53 @@ public class IBMWatsonMockResponses {
       '"accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZSI6IkFkbWluIiwicGVybWlzc2lvbnMiOlsiYWRtaW5pc3RyYXRvciIsIm1hbmFnZV9jYXRhbG9nIiwiYWNjZXNzX2NhdGFsb2ciLCJtYW5hZ2VfcG9saWNpZXMiLCJhY2Nlc3NfcG9saWNpZXMiLCJ2aXJ0dWFsaXplX3RyYW5zZm9ybSIsImNhbl9wcm92aXNpb24iLCJkZXBsb3ltZW50X2FkbWluIl0sInN1YiI6ImFkbWluIiwiaXNzIjoiS05PWFNTTyIsImF1ZCI6IkRTWCIsInVpZCI6Ijk5OSIsImlhdCI6MTU1OTMyODk1NSwiZXhwIjoxNTU5MzI4OTU1fQ==.GE-ML3JWmI3oB0z5mjMG3jFtYVVA5bQCsOTOOj9ab7PcgJc1mA5hn1sONkO0JAFADhUoAgpG4KgQef5tjnCSrtl1tbnDuhaP1DH4QKMCZOkWrKyfQ2X8P1jhyJmV-KpE4wuTrGdMoMVj4wVRZwnxMRSK6LhV6pIzyOLLYR21zcW_2KcKWxCYfIC7tiM1d2PSM5nWa_5Vb068F8PtdiFUElEYHYKrvmwpV57_k2jpXoY6zw8PDcIiWQe3g20w6vCB6zWhxbcFWyjMg1tPOZHgTNNskPShHQBbtZFsSrc7rkNPzttKF70m7_JqrRYUZDNN8TmuR9uyitwxEFkr2L0WDQ",' +
       '"_messageCode_": "success",' +
       '"message": "success"' +
+    '}';
+  }
+
+  public static testMethod String languageTranslatorDocumentStatus() {
+    return '{' +
+      '"document_id": "id",' +
+      '"filename": "test-file.txt",' +
+      '"model_id": "model-id",' +
+      '"base_model_id": "en-es",' +
+      '"source": "en",' +
+      '"target": "es",' +
+      '"status": "available",' +
+      '"created": "2018-08-24T08:20:30.5Z",' +
+      '"completed": "2018-08-24T08:20:30.5Z",' +
+      '"word_count": 1,' +
+      '"character_count": 2' +
+    '}';
+  }
+
+  public static testMethod String listDocuments() {
+    return '{' +
+      '"documents": [' +
+        '{' +
+          '"document_id": "id",' +
+          '"filename": "test-file.txt",' +
+          '"model_id": "model-id",' +
+          '"base_model_id": "en-es",' +
+          '"source": "en",' +
+          '"target": "es",' +
+          '"status": "available",' +
+          '"created": "2018-08-24T08:20:30.5Z",' +
+          '"completed": "2018-08-24T08:20:35.5Z",' +
+          '"word_count": 1,' +
+          '"character_count": 2' +
+        '},' +
+        '{' +
+          '"document_id": "id",' +
+          '"filename": "en.pdf",' +
+          '"model_id": "9ef1eda2-e4dc-460f-b51a-efeec95f239f",' +
+          '"base_model_id": "en-fr",' +
+          '"source": "en",' +
+          '"target": "fr",' +
+          '"status": "available",' +
+          '"created": "2018-08-24T08:20:30.5Z",' +
+          '"completed": "2018-08-24T08:20:35.5Z"' +
+        '}' +
+      ']' +
     '}';
   }
 }

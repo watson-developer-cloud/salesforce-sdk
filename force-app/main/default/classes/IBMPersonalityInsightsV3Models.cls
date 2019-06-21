@@ -1,6 +1,6 @@
 public class IBMPersonalityInsightsV3Models {
   /**
-   * Behavior.
+   * The temporal behavior for the input content.
    */
   public class Behavior extends IBMWatsonGenericModel {
     private String trait_id_serialized_name;
@@ -94,19 +94,10 @@ public class IBMPersonalityInsightsV3Models {
       this.percentage_serialized_name = percentage;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Behavior ret = (Behavior) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * ConsumptionPreferences.
+   * A consumption preference that the service inferred from the input content.
    */
   public class ConsumptionPreferences extends IBMWatsonGenericModel {
     private String consumption_preference_id_serialized_name;
@@ -183,19 +174,10 @@ public class IBMPersonalityInsightsV3Models {
       this.score_serialized_name = score;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ConsumptionPreferences ret = (ConsumptionPreferences) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * ConsumptionPreferencesCategory.
+   * The consumption preferences that the service inferred from the input content.
    */
   public class ConsumptionPreferencesCategory extends IBMWatsonGenericModel {
     private String consumption_preference_category_id_serialized_name;
@@ -291,7 +273,7 @@ public class IBMPersonalityInsightsV3Models {
   }
 
   /**
-   * Content.
+   * The full input content that the service is to analyze.
    */
   public class Content {
     private List<ContentItem> contentItems_serialized_name;
@@ -309,7 +291,7 @@ public class IBMPersonalityInsightsV3Models {
   
     private Content(ContentBuilder builder) {
       IBMWatsonValidator.notNull(builder.contentItems, 'contentItems cannot be null');
-      contentItems_serialized_name = builder.contentItems;
+      this.contentItems_serialized_name = builder.contentItems;
     }
 
     /**
@@ -386,7 +368,7 @@ public class IBMPersonalityInsightsV3Models {
   }
 
   /**
-   * ContentItem.
+   * An input content item that the service is to analyze.
    */
   public class ContentItem {
     private String content_serialized_name;
@@ -510,15 +492,15 @@ public class IBMPersonalityInsightsV3Models {
   
     private ContentItem(ContentItemBuilder builder) {
       IBMWatsonValidator.notNull(builder.content, 'content cannot be null');
-      content_serialized_name = builder.content;
-      id_serialized_name = builder.id;
-      created_serialized_name = builder.created;
-      updated_serialized_name = builder.updated;
-      contenttype_serialized_name = builder.contenttype;
-      language_serialized_name = builder.language;
-      parentid_serialized_name = builder.parentid;
-      reply_serialized_name = builder.reply;
-      forward_serialized_name = builder.forward;
+      this.content_serialized_name = builder.content;
+      this.id_serialized_name = builder.id;
+      this.created_serialized_name = builder.created;
+      this.updated_serialized_name = builder.updated;
+      this.contenttype_serialized_name = builder.contenttype;
+      this.language_serialized_name = builder.language;
+      this.parentid_serialized_name = builder.parentid;
+      this.reply_serialized_name = builder.reply;
+      this.forward_serialized_name = builder.forward;
     }
 
     /**
@@ -683,7 +665,7 @@ public class IBMPersonalityInsightsV3Models {
   }
 
   /**
-   * Profile.
+   * The personality profile that the service generated for the input content.
    */
   public class Profile extends IBMWatsonResponseModel {
     private String processed_language_serialized_name;
@@ -801,8 +783,8 @@ public class IBMPersonalityInsightsV3Models {
     /**
      * Gets the warnings.
      *
-     * Warning messages associated with the input text submitted with the request. The array is empty if the input
-     * generated no warnings.
+     * An array of warning messages that are associated with the input text for the request. The array is empty if the
+     * input generated no warnings.
      *
      * @return the warnings
      */
@@ -987,18 +969,19 @@ public class IBMPersonalityInsightsV3Models {
   public class ProfileOptions extends IBMWatsonOptionsModel {
     private Content content;
     private String body;
+    private String contentType;
     private String contentLanguage;
     private String acceptLanguage;
     private Boolean rawScores;
     private Boolean csvHeaders;
     private Boolean consumptionPreferences;
-    private String contentType;
  
     /**
      * Gets the content.
      *
      * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
-     * [Providing sufficient input](https://cloud.ibm.com/docs/services/personality-insights/input.html#sufficient). For
+     * [Providing sufficient
+     * input](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-input#sufficient). For
      * JSON input, provide an object of type `Content`.
      *
      * @return the content
@@ -1011,13 +994,27 @@ public class IBMPersonalityInsightsV3Models {
      * Gets the body.
      *
      * A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
-     * [Providing sufficient input](https://cloud.ibm.com/docs/services/personality-insights/input.html#sufficient). For
+     * [Providing sufficient
+     * input](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-input#sufficient). For
      * JSON input, provide an object of type `Content`.
      *
      * @return the body
      */
     public String body() {
       return body;
+    }
+ 
+    /**
+     * Gets the contentType.
+     *
+     * The type of the input. For more information, see **Content types** in the method description.
+     *
+     * Default: `text/plain`.
+     *
+     * @return the contentType
+     */
+    public String contentType() {
+      return contentType;
     }
  
     /**
@@ -1087,29 +1084,16 @@ public class IBMPersonalityInsightsV3Models {
     public Boolean consumptionPreferences() {
       return consumptionPreferences;
     }
- 
-    /**
-     * Gets the contentType.
-     *
-     * The type of the input. For more information, see **Content types** in the method description.
-     *
-     * Default: `text/plain`.
-     *
-     * @return the contentType
-     */
-    public String contentType() {
-      return contentType;
-    }
 
     private ProfileOptions(ProfileOptionsBuilder builder) {
       content = builder.content;
       body = builder.body;
+      contentType = builder.contentType;
       contentLanguage = builder.contentLanguage;
       acceptLanguage = builder.acceptLanguage;
       rawScores = builder.rawScores;
       csvHeaders = builder.csvHeaders;
       consumptionPreferences = builder.consumptionPreferences;
-      contentType = builder.contentType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -1130,22 +1114,22 @@ public class IBMPersonalityInsightsV3Models {
   public class ProfileOptionsBuilder extends IBMWatsonOptionsModel {
     private Content content;
     private String body;
+    private String contentType;
     private String contentLanguage;
     private String acceptLanguage;
     private Boolean rawScores;
     private Boolean csvHeaders;
     private Boolean consumptionPreferences;
-    private String contentType;
 
     private ProfileOptionsBuilder(ProfileOptions profileOptions) {
       content = profileOptions.content;
       body = profileOptions.body;
+      contentType = profileOptions.contentType;
       contentLanguage = profileOptions.contentLanguage;
       acceptLanguage = profileOptions.acceptLanguage;
       rawScores = profileOptions.rawScores;
       csvHeaders = profileOptions.csvHeaders;
       consumptionPreferences = profileOptions.consumptionPreferences;
-      contentType = profileOptions.contentType;
       this.requestHeaders.putAll(profileOptions.requestHeaders());
     }
 
@@ -1269,7 +1253,7 @@ public class IBMPersonalityInsightsV3Models {
   }
 
   /**
-   * Trait.
+   * The characteristics that the service inferred from the input content.
    */
   public class Trait extends IBMWatsonGenericModel {
     private String trait_id_serialized_name;
@@ -1470,7 +1454,7 @@ public class IBMPersonalityInsightsV3Models {
   }
 
   /**
-   * Warning.
+   * A warning message that is associated with the input content.
    */
   public class Warning extends IBMWatsonGenericModel {
     private String warning_id_serialized_name;
@@ -1528,15 +1512,6 @@ public class IBMPersonalityInsightsV3Models {
       this.message_serialized_name = message;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Warning ret = (Warning) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
 }

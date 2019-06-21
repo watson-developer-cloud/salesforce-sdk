@@ -659,7 +659,7 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
-   * The results of a successful `GET /v1/batches` request.
+   * The results of a successful **List Batches** request.
    */
   public class Batches extends IBMWatsonResponseModel {
     private List<BatchStatus> batches_serialized_name;
@@ -1164,15 +1164,6 @@ public class IBMCompareComplyV1Models {
       this.provenance_ids_serialized_name = provenanceIds;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Category ret = (Category) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -1202,15 +1193,6 @@ public class IBMCompareComplyV1Models {
       this.label_serialized_name = label;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      CategoryComparison ret = (CategoryComparison) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -1746,15 +1728,6 @@ public class IBMCompareComplyV1Models {
       this.id_serialized_name = id;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ColumnHeaderIds ret = (ColumnHeaderIds) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -1784,15 +1757,6 @@ public class IBMCompareComplyV1Models {
       this.text_serialized_name = text;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ColumnHeaderTexts ret = (ColumnHeaderTexts) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -1823,15 +1787,6 @@ public class IBMCompareComplyV1Models {
       this.text_normalized_serialized_name = textNormalized;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ColumnHeaderTextsNormalized ret = (ColumnHeaderTextsNormalized) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -2501,15 +2456,6 @@ public class IBMCompareComplyV1Models {
       this.role_serialized_name = role;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Contact ret = (Contact) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -3375,15 +3321,6 @@ public class IBMCompareComplyV1Models {
       this.failed_serialized_name = failed;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      DocCounts ret = (DocCounts) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -3457,15 +3394,6 @@ public class IBMCompareComplyV1Models {
       this.hash_serialized_name = hash;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      DocInfo ret = (DocInfo) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -3649,15 +3577,6 @@ public class IBMCompareComplyV1Models {
       this.label_serialized_name = label;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Document ret = (Document) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -3966,15 +3885,6 @@ public class IBMCompareComplyV1Models {
       this.end_serialized_name = xend;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ElementLocations ret = (ElementLocations) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -4494,7 +4404,7 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
-   * Information returned from the `POST /v1/feedback` method.
+   * Information returned from the **Add Feedback** method.
    */
   public class FeedbackDataOutput extends IBMWatsonGenericModel {
     private String feedback_type_serialized_name;
@@ -4729,7 +4639,7 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
-   * The results of a successful `GET /v1/feedback` request.
+   * The results of a successful **List Feedback** request for all feedback.
    */
   public class FeedbackList extends IBMWatsonResponseModel {
     private List<GetFeedback> feedback_serialized_name;
@@ -4840,7 +4750,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the feedbackData.
      *
-     * Information returned from the `POST /v1/feedback` method.
+     * Information returned from the **Add Feedback** method.
      *
      * @return the feedbackData
      */
@@ -5003,7 +4913,7 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
-   * The results of a single feedback query.
+   * The results of a successful **Get Feedback** request for a single feedback entry.
    */
   public class GetFeedback extends IBMWatsonResponseModel {
     private String feedback_id_serialized_name;
@@ -5050,7 +4960,7 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the feedbackData.
      *
-     * Information returned from the `POST /v1/feedback` method.
+     * Information returned from the **Add Feedback** method.
      *
      * @return the feedbackData
      */
@@ -5346,15 +5256,6 @@ public class IBMCompareComplyV1Models {
       this.html_serialized_name = html;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      HTMLReturn ret = (HTMLReturn) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -5562,15 +5463,6 @@ public class IBMCompareComplyV1Models {
       this.party_serialized_name = party;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Label ret = (Label) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -6268,15 +6160,6 @@ public class IBMCompareComplyV1Models {
       this.end_serialized_name = xend;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Location ret = (Location) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -6552,15 +6435,6 @@ public class IBMCompareComplyV1Models {
       this.total_serialized_name = total;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Pagination ret = (Pagination) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -6742,15 +6616,6 @@ public class IBMCompareComplyV1Models {
       this.id_serialized_name = id;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      RowHeaderIds ret = (RowHeaderIds) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -6780,15 +6645,6 @@ public class IBMCompareComplyV1Models {
       this.text_serialized_name = text;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      RowHeaderTexts ret = (RowHeaderTexts) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -6819,15 +6675,6 @@ public class IBMCompareComplyV1Models {
       this.text_normalized_serialized_name = textNormalized;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      RowHeaderTextsNormalized ret = (RowHeaderTextsNormalized) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -7267,15 +7114,6 @@ public class IBMCompareComplyV1Models {
       this.hash_serialized_name = hash;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      ShortDoc ret = (ShortDoc) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**

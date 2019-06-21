@@ -1,6 +1,6 @@
 public class IBMSpeechToTextV1Models {
   /**
-   * AcousticModel.
+   * Information about an existing custom acoustic model.
    */
   public class AcousticModel extends IBMWatsonResponseModel {
     private String customization_id_serialized_name;
@@ -119,9 +119,10 @@ public class IBMSpeechToTextV1Models {
      * Gets the status.
      *
      * The current status of the custom acoustic model:
-     * * `pending`: The model was created but is waiting either for training data to be added or for the service to
-     * finish analyzing added data.
-     * * `ready`: The model contains data and is ready to be trained.
+     * * `pending`: The model was created but is waiting either for valid training data to be added or for the service
+     * to finish analyzing added data.
+     * * `ready`: The model contains valid data and is ready to be trained. If the model contains a mix of valid and
+     * invalid resources, you need to set the `strict` parameter to `false` for the training to proceed.
      * * `training`: The model is currently being trained.
      * * `available`: The model is trained and ready to use.
      * * `upgrading`: The model is currently being upgraded.
@@ -260,19 +261,10 @@ public class IBMSpeechToTextV1Models {
       this.warnings_serialized_name = warnings;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      AcousticModel ret = (AcousticModel) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * AcousticModels.
+   * Information about existing custom acoustic models.
    */
   public class AcousticModels extends IBMWatsonResponseModel {
     private List<AcousticModel> customizations_serialized_name;
@@ -331,9 +323,9 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String audioName;
     private IBMWatsonFile audioResource;
+    private String contentType;
     private String containedContentType;
     private Boolean allowOverwrite;
-    private String contentType;
  
     /**
      * Gets the customizationId.
@@ -367,10 +359,28 @@ public class IBMSpeechToTextV1Models {
      *
      * The audio resource that is to be added to the custom acoustic model, an individual audio file or an archive file.
      *
+     *
+     * With the `curl` command, use the `--data-binary` option to upload the file for the request.
+     *
      * @return the audioResource
      */
     public IBMWatsonFile audioResource() {
       return audioResource;
+    }
+ 
+    /**
+     * Gets the contentType.
+     *
+     * For an audio-type resource, the format (MIME type) of the audio. For more information, see **Content types for
+     * audio-type resources** in the method description.
+     *
+     * For an archive-type resource, the media type of the archive file. For more information, see **Content types for
+     * archive-type resources** in the method description.
+     *
+     * @return the contentType
+     */
+    public String contentType() {
+      return contentType;
     }
  
     /**
@@ -407,21 +417,6 @@ public class IBMSpeechToTextV1Models {
     public Boolean allowOverwrite() {
       return allowOverwrite;
     }
- 
-    /**
-     * Gets the contentType.
-     *
-     * For an audio-type resource, the format (MIME type) of the audio. For more information, see **Content types for
-     * audio-type resources** in the method description.
-     *
-     * For an archive-type resource, the media type of the archive file. For more information, see **Content types for
-     * archive-type resources** in the method description.
-     *
-     * @return the contentType
-     */
-    public String contentType() {
-      return contentType;
-    }
 
     private AddAudioOptions(AddAudioOptionsBuilder builder) {
       IBMWatsonValidator.notEmpty(builder.customizationId, 'customizationId cannot be empty');
@@ -430,9 +425,9 @@ public class IBMSpeechToTextV1Models {
       customizationId = builder.customizationId;
       audioName = builder.audioName;
       audioResource = builder.audioResource;
+      contentType = builder.contentType;
       containedContentType = builder.containedContentType;
       allowOverwrite = builder.allowOverwrite;
-      contentType = builder.contentType;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -454,17 +449,17 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String audioName;
     private IBMWatsonFile audioResource;
+    private String contentType;
     private String containedContentType;
     private Boolean allowOverwrite;
-    private String contentType;
 
     private AddAudioOptionsBuilder(AddAudioOptions addAudioOptions) {
       customizationId = addAudioOptions.customizationId;
       audioName = addAudioOptions.audioName;
       audioResource = addAudioOptions.audioResource;
+      contentType = addAudioOptions.contentType;
       containedContentType = addAudioOptions.containedContentType;
       allowOverwrite = addAudioOptions.allowOverwrite;
-      contentType = addAudioOptions.contentType;
       this.requestHeaders.putAll(addAudioOptions.requestHeaders());
     }
 
@@ -530,6 +525,17 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
+     * Set the contentType.
+     *
+     * @param contentType the contentType
+     * @return the AddAudioOptions builder
+     */
+    public AddAudioOptionsBuilder contentType(String contentType) {
+      this.contentType = contentType;
+      return this;
+    }
+
+    /**
      * Set the containedContentType.
      *
      * @param containedContentType the containedContentType
@@ -548,17 +554,6 @@ public class IBMSpeechToTextV1Models {
      */
     public AddAudioOptionsBuilder allowOverwrite(Boolean allowOverwrite) {
       this.allowOverwrite = allowOverwrite;
-      return this;
-    }
-
-    /**
-     * Set the contentType.
-     *
-     * @param contentType the contentType
-     * @return the AddAudioOptions builder
-     */
-    public AddAudioOptionsBuilder contentType(String contentType) {
-      this.contentType = contentType;
       return this;
     }
 
@@ -621,7 +616,7 @@ public class IBMSpeechToTextV1Models {
      *
      * Make sure that you know the character encoding of the file. You must use that encoding when working with the
      * words in the custom language model. For more information, see [Character
-     * encoding](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding).
+     * encoding](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#charEncoding).
      *
      * With the `curl` command, use the `--data-binary` option to upload the file for the request.
      *
@@ -814,6 +809,8 @@ public class IBMSpeechToTextV1Models {
      * in UTF-8 (ASCII is a subset of UTF-8). Using any other encoding can lead to issues when compiling the grammar or
      * to unexpected results in decoding. The service ignores an encoding that is specified in the header of the
      * grammar.
+     *
+     * With the `curl` command, use the `--data-binary` option to upload the file for the request.
      *
      * @return the grammarFile
      */
@@ -1017,7 +1014,7 @@ public class IBMSpeechToTextV1Models {
      * The custom word that is to be added to or updated in the custom language model. Do not include spaces in the
      * word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words. URL-encode the word if it
      * includes non-ASCII characters. For more information, see [Character
-     * encoding](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding).
+     * encoding](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#charEncoding).
      *
      * @return the wordName
      */
@@ -1365,7 +1362,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * AudioDetails.
+   * Information about an audio resource from a custom acoustic model.
    */
   public class AudioDetails extends IBMWatsonGenericModel {
     private String type_serialized_name;
@@ -1466,19 +1463,10 @@ public class IBMSpeechToTextV1Models {
       this.compression_serialized_name = compression;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      AudioDetails ret = (AudioDetails) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * AudioListing.
+   * Information about an audio resource from a custom acoustic model.
    */
   public class AudioListing extends IBMWatsonResponseModel {
     private Long duration_serialized_name;
@@ -1658,7 +1646,431 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * AudioResource.
+   * If audio metrics are requested, information about the signal characteristics of the input audio.
+   */
+  public class AudioMetrics extends IBMWatsonGenericModel {
+    private Double sampling_interval_serialized_name;
+    private AudioMetricsDetails accumulated_serialized_name;
+ 
+    /**
+     * Gets the samplingInterval.
+     *
+     * The interval in seconds (typically 0.1 seconds) at which the service calculated the audio metrics. In other
+     * words, how often the service calculated the metrics. A single unit in each histogram (see the
+     * `AudioMetricsHistogramBin` object) is calculated based on a `sampling_interval` length of audio.
+     *
+     * @return the samplingInterval
+     */
+    @AuraEnabled
+    public Double getSamplingInterval() {
+      return sampling_interval_serialized_name;
+    }
+ 
+    /**
+     * Gets the accumulated.
+     *
+     * Detailed information about the signal characteristics of the input audio.
+     *
+     * @return the accumulated
+     */
+    @AuraEnabled
+    public AudioMetricsDetails getAccumulated() {
+      return accumulated_serialized_name;
+    }
+
+    /**
+     * Sets the samplingInterval.
+     *
+     * @param samplingInterval the new samplingInterval
+     */
+    public void setSamplingInterval(final Double samplingInterval) {
+      this.sampling_interval_serialized_name = samplingInterval;
+    }
+
+    /**
+     * Sets the accumulated.
+     *
+     * @param accumulated the new accumulated
+     */
+    public void setAccumulated(final AudioMetricsDetails accumulated) {
+      this.accumulated_serialized_name = accumulated;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      AudioMetrics ret = (AudioMetrics) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for accumulated
+      AudioMetricsDetails newAccumulated = (AudioMetricsDetails) new AudioMetricsDetails().deserialize(JSON.serialize(ret.getAccumulated()), (Map<String, Object>) jsonMap.get('accumulated_serialized_name'), AudioMetricsDetails.class);
+      ret.setAccumulated(newAccumulated);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Detailed information about the signal characteristics of the input audio.
+   */
+  public class AudioMetricsDetails extends IBMWatsonGenericModel {
+    private Boolean final_serialized_name;
+    private Double end_time_serialized_name;
+    private Double signal_to_noise_ratio_serialized_name;
+    private Double speech_ratio_serialized_name;
+    private Double high_frequency_loss_serialized_name;
+    private List<AudioMetricsHistogramBin> direct_current_offset_serialized_name;
+    private List<AudioMetricsHistogramBin> clipping_rate_serialized_name;
+    private List<AudioMetricsHistogramBin> speech_level_serialized_name;
+    private List<AudioMetricsHistogramBin> non_speech_level_serialized_name;
+ 
+    /**
+     * Gets the xfinal.
+     *
+     * If `true`, indicates the end of the audio stream, meaning that transcription is complete. Currently, the field is
+     * always `true`. The service returns metrics just once per audio stream. The results provide aggregated audio
+     * metrics that pertain to the complete audio stream.
+     *
+     * @return the xfinal
+     */
+    @AuraEnabled
+    public Boolean getXfinal() {
+      return final_serialized_name;
+    }
+ 
+    /**
+     * Gets the endTime.
+     *
+     * The end time in seconds of the block of audio to which the metrics apply.
+     *
+     * @return the endTime
+     */
+    @AuraEnabled
+    public Double getEndTime() {
+      return end_time_serialized_name;
+    }
+ 
+    /**
+     * Gets the signalToNoiseRatio.
+     *
+     * The signal-to-noise ratio (SNR) for the audio signal. The value indicates the ratio of speech to noise in the
+     * audio. A valid value lies in the range of 0 to 100 decibels (dB). The service omits the field if it cannot
+     * compute the SNR for the audio.
+     *
+     * @return the signalToNoiseRatio
+     */
+    @AuraEnabled
+    public Double getSignalToNoiseRatio() {
+      return signal_to_noise_ratio_serialized_name;
+    }
+ 
+    /**
+     * Gets the speechRatio.
+     *
+     * The ratio of speech to non-speech segments in the audio signal. The value lies in the range of 0.0 to 1.0.
+     *
+     * @return the speechRatio
+     */
+    @AuraEnabled
+    public Double getSpeechRatio() {
+      return speech_ratio_serialized_name;
+    }
+ 
+    /**
+     * Gets the highFrequencyLoss.
+     *
+     * The probability that the audio signal is missing the upper half of its frequency content.
+     * * A value close to 1.0 typically indicates artificially up-sampled audio, which negatively impacts the accuracy
+     * of the transcription results.
+     * * A value at or near 0.0 indicates that the audio signal is good and has a full spectrum.
+     * * A value around 0.5 means that detection of the frequency content is unreliable or not available.
+     *
+     * @return the highFrequencyLoss
+     */
+    @AuraEnabled
+    public Double getHighFrequencyLoss() {
+      return high_frequency_loss_serialized_name;
+    }
+ 
+    /**
+     * Gets the directCurrentOffset.
+     *
+     * An array of `AudioMetricsHistogramBin` objects that defines a histogram of the cumulative direct current (DC)
+     * component of the audio signal.
+     *
+     * @return the directCurrentOffset
+     */
+    @AuraEnabled
+    public List<AudioMetricsHistogramBin> getDirectCurrentOffset() {
+      return direct_current_offset_serialized_name;
+    }
+ 
+    /**
+     * Gets the clippingRate.
+     *
+     * An array of `AudioMetricsHistogramBin` objects that defines a histogram of the clipping rate for the audio
+     * segments. The clipping rate is defined as the fraction of samples in the segment that reach the maximum or
+     * minimum value that is offered by the audio quantization range. The service auto-detects either a 16-bit
+     * Pulse-Code Modulation(PCM) audio range (-32768 to +32767) or a unit range (-1.0 to +1.0). The clipping rate is
+     * between 0.0 and 1.0, with higher values indicating possible degradation of speech recognition.
+     *
+     * @return the clippingRate
+     */
+    @AuraEnabled
+    public List<AudioMetricsHistogramBin> getClippingRate() {
+      return clipping_rate_serialized_name;
+    }
+ 
+    /**
+     * Gets the speechLevel.
+     *
+     * An array of `AudioMetricsHistogramBin` objects that defines a histogram of the signal level in segments of the
+     * audio that contain speech. The signal level is computed as the Root-Mean-Square (RMS) value in a decibel (dB)
+     * scale normalized to the range 0.0 (minimum level) to 1.0 (maximum level).
+     *
+     * @return the speechLevel
+     */
+    @AuraEnabled
+    public List<AudioMetricsHistogramBin> getSpeechLevel() {
+      return speech_level_serialized_name;
+    }
+ 
+    /**
+     * Gets the nonSpeechLevel.
+     *
+     * An array of `AudioMetricsHistogramBin` objects that defines a histogram of the signal level in segments of the
+     * audio that do not contain speech. The signal level is computed as the Root-Mean-Square (RMS) value in a decibel
+     * (dB) scale normalized to the range 0.0 (minimum level) to 1.0 (maximum level).
+     *
+     * @return the nonSpeechLevel
+     */
+    @AuraEnabled
+    public List<AudioMetricsHistogramBin> getNonSpeechLevel() {
+      return non_speech_level_serialized_name;
+    }
+
+    /**
+     * Sets the xfinal.
+     *
+     * @param xfinal the new xfinal
+     */
+    public void setXfinal(final Boolean xfinal) {
+      this.final_serialized_name = xfinal;
+    }
+
+    /**
+     * Sets the endTime.
+     *
+     * @param endTime the new endTime
+     */
+    public void setEndTime(final Double endTime) {
+      this.end_time_serialized_name = endTime;
+    }
+
+    /**
+     * Sets the signalToNoiseRatio.
+     *
+     * @param signalToNoiseRatio the new signalToNoiseRatio
+     */
+    public void setSignalToNoiseRatio(final Double signalToNoiseRatio) {
+      this.signal_to_noise_ratio_serialized_name = signalToNoiseRatio;
+    }
+
+    /**
+     * Sets the speechRatio.
+     *
+     * @param speechRatio the new speechRatio
+     */
+    public void setSpeechRatio(final Double speechRatio) {
+      this.speech_ratio_serialized_name = speechRatio;
+    }
+
+    /**
+     * Sets the highFrequencyLoss.
+     *
+     * @param highFrequencyLoss the new highFrequencyLoss
+     */
+    public void setHighFrequencyLoss(final Double highFrequencyLoss) {
+      this.high_frequency_loss_serialized_name = highFrequencyLoss;
+    }
+
+    /**
+     * Sets the directCurrentOffset.
+     *
+     * @param directCurrentOffset the new directCurrentOffset
+     */
+    public void setDirectCurrentOffset(final List<AudioMetricsHistogramBin> directCurrentOffset) {
+      this.direct_current_offset_serialized_name = directCurrentOffset;
+    }
+
+    /**
+     * Sets the clippingRate.
+     *
+     * @param clippingRate the new clippingRate
+     */
+    public void setClippingRate(final List<AudioMetricsHistogramBin> clippingRate) {
+      this.clipping_rate_serialized_name = clippingRate;
+    }
+
+    /**
+     * Sets the speechLevel.
+     *
+     * @param speechLevel the new speechLevel
+     */
+    public void setSpeechLevel(final List<AudioMetricsHistogramBin> speechLevel) {
+      this.speech_level_serialized_name = speechLevel;
+    }
+
+    /**
+     * Sets the nonSpeechLevel.
+     *
+     * @param nonSpeechLevel the new nonSpeechLevel
+     */
+    public void setNonSpeechLevel(final List<AudioMetricsHistogramBin> nonSpeechLevel) {
+      this.non_speech_level_serialized_name = nonSpeechLevel;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      AudioMetricsDetails ret = (AudioMetricsDetails) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for directCurrentOffset
+      List<AudioMetricsHistogramBin> newDirectCurrentOffset = new List<AudioMetricsHistogramBin>();
+      List<AudioMetricsHistogramBin> deserializedDirectCurrentOffset = ret.getDirectCurrentOffset();
+      if (deserializedDirectCurrentOffset != null) {
+        for (Integer i = 0; i < deserializedDirectCurrentOffset.size(); i++) {
+          AudioMetricsHistogramBin currentItem = ret.getDirectCurrentOffset().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('direct_current_offset_serialized_name');
+          AudioMetricsHistogramBin newItem = (AudioMetricsHistogramBin) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AudioMetricsHistogramBin.class);
+          newDirectCurrentOffset.add(newItem);
+        }
+        ret.direct_current_offset_serialized_name = newDirectCurrentOffset;
+      }
+
+      // calling custom deserializer for clippingRate
+      List<AudioMetricsHistogramBin> newClippingRate = new List<AudioMetricsHistogramBin>();
+      List<AudioMetricsHistogramBin> deserializedClippingRate = ret.getClippingRate();
+      if (deserializedClippingRate != null) {
+        for (Integer i = 0; i < deserializedClippingRate.size(); i++) {
+          AudioMetricsHistogramBin currentItem = ret.getClippingRate().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('clipping_rate_serialized_name');
+          AudioMetricsHistogramBin newItem = (AudioMetricsHistogramBin) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AudioMetricsHistogramBin.class);
+          newClippingRate.add(newItem);
+        }
+        ret.clipping_rate_serialized_name = newClippingRate;
+      }
+
+      // calling custom deserializer for speechLevel
+      List<AudioMetricsHistogramBin> newSpeechLevel = new List<AudioMetricsHistogramBin>();
+      List<AudioMetricsHistogramBin> deserializedSpeechLevel = ret.getSpeechLevel();
+      if (deserializedSpeechLevel != null) {
+        for (Integer i = 0; i < deserializedSpeechLevel.size(); i++) {
+          AudioMetricsHistogramBin currentItem = ret.getSpeechLevel().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('speech_level_serialized_name');
+          AudioMetricsHistogramBin newItem = (AudioMetricsHistogramBin) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AudioMetricsHistogramBin.class);
+          newSpeechLevel.add(newItem);
+        }
+        ret.speech_level_serialized_name = newSpeechLevel;
+      }
+
+      // calling custom deserializer for nonSpeechLevel
+      List<AudioMetricsHistogramBin> newNonSpeechLevel = new List<AudioMetricsHistogramBin>();
+      List<AudioMetricsHistogramBin> deserializedNonSpeechLevel = ret.getNonSpeechLevel();
+      if (deserializedNonSpeechLevel != null) {
+        for (Integer i = 0; i < deserializedNonSpeechLevel.size(); i++) {
+          AudioMetricsHistogramBin currentItem = ret.getNonSpeechLevel().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('non_speech_level_serialized_name');
+          AudioMetricsHistogramBin newItem = (AudioMetricsHistogramBin) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), AudioMetricsHistogramBin.class);
+          newNonSpeechLevel.add(newItem);
+        }
+        ret.non_speech_level_serialized_name = newNonSpeechLevel;
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * A bin with defined boundaries that indicates the number of values in a range of signal characteristics for a
+   * histogram. The first and last bins of a histogram are the boundary bins. They cover the intervals between negative
+   * infinity and the first boundary, and between the last boundary and positive infinity, respectively.
+   */
+  public class AudioMetricsHistogramBin extends IBMWatsonGenericModel {
+    private Double begin_serialized_name;
+    private Double end_serialized_name;
+    private Long count_serialized_name;
+ 
+    /**
+     * Gets the xbegin.
+     *
+     * The lower boundary of the bin in the histogram.
+     *
+     * @return the xbegin
+     */
+    @AuraEnabled
+    public Double getXbegin() {
+      return begin_serialized_name;
+    }
+ 
+    /**
+     * Gets the xend.
+     *
+     * The upper boundary of the bin in the histogram.
+     *
+     * @return the xend
+     */
+    @AuraEnabled
+    public Double getXend() {
+      return end_serialized_name;
+    }
+ 
+    /**
+     * Gets the count.
+     *
+     * The number of values in the bin of the histogram.
+     *
+     * @return the count
+     */
+    @AuraEnabled
+    public Long getCount() {
+      return count_serialized_name;
+    }
+
+    /**
+     * Sets the xbegin.
+     *
+     * @param xbegin the new xbegin
+     */
+    public void setXbegin(final Double xbegin) {
+      this.begin_serialized_name = xbegin;
+    }
+
+    /**
+     * Sets the xend.
+     *
+     * @param xend the new xend
+     */
+    public void setXend(final Double xend) {
+      this.end_serialized_name = xend;
+    }
+
+    /**
+     * Sets the count.
+     *
+     * @param count the new count
+     */
+    public void setCount(final long count) {
+      this.count_serialized_name = count;
+    }
+
+  }
+
+  /**
+   * Information about an audio resource from a custom acoustic model.
    */
   public class AudioResource extends IBMWatsonGenericModel {
     private Long duration_serialized_name;
@@ -1776,7 +2188,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * AudioResources.
+   * Information about the audio resources from a custom acoustic model.
    */
   public class AudioResources extends IBMWatsonResponseModel {
     private Double total_minutes_of_audio_serialized_name;
@@ -2003,7 +2415,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * Corpora.
+   * Information about the corpora from a custom language model.
    */
   public class Corpora extends IBMWatsonResponseModel {
     private List<Corpus> corpora_serialized_name;
@@ -2055,7 +2467,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * Corpus.
+   * Information about a corpus from a custom language model.
    */
   public class Corpus extends IBMWatsonResponseModel {
     private String name_serialized_name;
@@ -2176,15 +2588,6 @@ public class IBMSpeechToTextV1Models {
       this.error_serialized_name = error;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Corpus ret = (Corpus) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -2215,7 +2618,7 @@ public class IBMSpeechToTextV1Models {
      * model can be used only with the base model that it customizes.
      *
      * To determine whether a base model supports acoustic model customization, refer to [Language support for
-     * customization](https://cloud.ibm.com/docs/services/speech-to-text/custom.html#languageSupport).
+     * customization](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customization#languageSupport).
      *
      * @return the baseModelName
      */
@@ -2347,6 +2750,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class CreateJobOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile audio;
+    private String contentType;
     private String model;
     private String callbackUrl;
     private String events;
@@ -2369,7 +2773,9 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String grammarName;
     private Boolean redaction;
-    private String contentType;
+    private Boolean processingMetrics;
+    private Double processingMetricsInterval;
+    private Boolean audioMetrics;
  
     /**
      * Gets the audio.
@@ -2383,10 +2789,22 @@ public class IBMSpeechToTextV1Models {
     }
  
     /**
+     * Gets the contentType.
+     *
+     * The format (MIME type) of the audio. For more information about specifying an audio format, see **Audio formats
+     * (content types)** in the method description.
+     *
+     * @return the contentType
+     */
+    public String contentType() {
+      return contentType;
+    }
+ 
+    /**
      * Gets the model.
      *
      * The identifier of the model that is to be used for the recognition request. See [Languages and
-     * models](https://cloud.ibm.com/docs/services/speech-to-text/models.html).
+     * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models).
      *
      * @return the model
      */
@@ -2469,7 +2887,7 @@ public class IBMSpeechToTextV1Models {
      * model of the specified custom language model must match the model specified with the `model` parameter. You must
      * make the request with credentials for the instance of the service that owns the custom model. By default, no
      * custom language model is used. See [Custom
-     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
+     * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input).
      *
      * **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      *
@@ -2486,7 +2904,7 @@ public class IBMSpeechToTextV1Models {
      * model of the specified custom acoustic model must match the model specified with the `model` parameter. You must
      * make the request with credentials for the instance of the service that owns the custom model. By default, no
      * custom acoustic model is used. See [Custom
-     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
+     * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input).
      *
      * @return the acousticCustomizationId
      */
@@ -2497,11 +2915,11 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the baseModelVersion.
      *
-     * The version of the specified base model that is to be used with recognition request. Multiple versions of a base
-     * model can exist when a model is updated for internal improvements. The parameter is intended primarily for use
-     * with custom models that have been upgraded for a new base model. The default value depends on whether the
+     * The version of the specified base model that is to be used with the recognition request. Multiple versions of a
+     * base model can exist when a model is updated for internal improvements. The parameter is intended primarily for
+     * use with custom models that have been upgraded for a new base model. The default value depends on whether the
      * parameter is used with or without a custom model. See [Base model
-     * version](https://cloud.ibm.com/docs/services/speech-to-text/input.html#version).
+     * version](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#version).
      *
      * @return the baseModelVersion
      */
@@ -2524,7 +2942,7 @@ public class IBMSpeechToTextV1Models {
      * of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
      * of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
      *
-     * See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
+     * See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input).
      *
      * @return the customizationWeight
      */
@@ -2538,7 +2956,7 @@ public class IBMSpeechToTextV1Models {
      * The time in seconds after which, if only silence (no speech) is detected in streaming audio, the connection is
      * closed with a 400 error. The parameter is useful for stopping audio submission from a live microphone when a user
      * simply walks away. Use `-1` for infinity. See [Inactivity
-     * timeout](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts-inactivity).
+     * timeout](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#timeouts-inactivity).
      *
      * @return the inactivityTimeout
      */
@@ -2553,7 +2971,7 @@ public class IBMSpeechToTextV1Models {
      * Keywords are spotted only in the final results, not in interim hypotheses. If you specify any keywords, you must
      * also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an
      * empty array if you do not need to spot keywords. See [Keyword
-     * spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
+     * spotting](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#keyword_spotting).
      *
      * @return the keywords
      */
@@ -2568,7 +2986,7 @@ public class IBMSpeechToTextV1Models {
      * confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. If you specify a
      * threshold, you must also specify one or more keywords. The service performs no keyword spotting if you omit
      * either parameter. See [Keyword
-     * spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
+     * spotting](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#keyword_spotting).
      *
      * @return the keywordsThreshold
      */
@@ -2581,7 +2999,7 @@ public class IBMSpeechToTextV1Models {
      *
      * The maximum number of alternative transcripts that the service is to return. By default, the service returns a
      * single transcript. If you specify a value of `0`, the service uses the default value, `1`. See [Maximum
-     * alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
+     * alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#max_alternatives).
      *
      * @return the maxAlternatives
      */
@@ -2595,7 +3013,8 @@ public class IBMSpeechToTextV1Models {
      * A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also
      * known as "Confusion Networks"). An alternative word is considered if its confidence is greater than or equal to
      * the threshold. Specify a probability between 0.0 and 1.0. By default, the service computes no alternative words.
-     * See [Word alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives).
+     * See [Word
+     * alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_alternatives).
      *
      * @return the wordAlternativesThreshold
      */
@@ -2608,7 +3027,7 @@ public class IBMSpeechToTextV1Models {
      *
      * If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for each word. By default, the
      * service returns no word confidence scores. See [Word
-     * confidence](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence).
+     * confidence](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_confidence).
      *
      * @return the wordConfidence
      */
@@ -2620,7 +3039,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the timestamps.
      *
      * If `true`, the service returns time alignment for each word. By default, no timestamps are returned. See [Word
-     * timestamps](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_timestamps).
+     * timestamps](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_timestamps).
      *
      * @return the timestamps
      */
@@ -2634,7 +3053,7 @@ public class IBMSpeechToTextV1Models {
      * If `true`, the service filters profanity from all output except for keyword results by replacing inappropriate
      * words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US
      * English transcription only. See [Profanity
-     * filtering](https://cloud.ibm.com/docs/services/speech-to-text/output.html#profanity_filter).
+     * filtering](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#profanity_filter).
      *
      * @return the profanityFilter
      */
@@ -2652,7 +3071,8 @@ public class IBMSpeechToTextV1Models {
      *
      * **Note:** Applies to US English, Japanese, and Spanish transcription only.
      *
-     * See [Smart formatting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting).
+     * See [Smart
+     * formatting](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#smart_formatting).
      *
      * @return the smartFormatting
      */
@@ -2671,7 +3091,8 @@ public class IBMSpeechToTextV1Models {
      * supports speaker labels, you can also use the **Get a model** method and check that the attribute
      * `speaker_labels` is set to `true`.
      *
-     * See [Speaker labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
+     * See [Speaker
+     * labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
      *
      * @return the speakerLabels
      */
@@ -2698,7 +3119,7 @@ public class IBMSpeechToTextV1Models {
      * use the `language_customization_id` parameter to specify the name of the custom language model for which the
      * grammar is defined. The service recognizes only strings that are recognized by the specified grammar; it does not
      * recognize other custom words from the model's words resource. See
-     * [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/input.html#grammars-input).
+     * [Grammars](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#grammars-input).
      *
      * @return the grammarName
      */
@@ -2720,7 +3141,8 @@ public class IBMSpeechToTextV1Models {
      *
      * **Note:** Applies to US English, Japanese, and Korean transcription only.
      *
-     * See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
+     * See [Numeric
+     * redaction](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#redaction).
      *
      * @return the redaction
      */
@@ -2729,20 +3151,54 @@ public class IBMSpeechToTextV1Models {
     }
  
     /**
-     * Gets the contentType.
+     * Gets the processingMetrics.
      *
-     * The format (MIME type) of the audio. For more information about specifying an audio format, see **Audio formats
-     * (content types)** in the method description.
+     * If `true`, requests processing metrics about the service's transcription of the input audio. The service returns
+     * processing metrics at the interval specified by the `processing_metrics_interval` parameter. It also returns
+     * processing metrics for transcription events, for example, for final and interim results. By default, the service
+     * returns no processing metrics.
      *
-     * @return the contentType
+     * @return the processingMetrics
      */
-    public String contentType() {
-      return contentType;
+    public Boolean processingMetrics() {
+      return processingMetrics;
+    }
+ 
+    /**
+     * Gets the processingMetricsInterval.
+     *
+     * Specifies the interval in real wall-clock seconds at which the service is to return processing metrics. The
+     * parameter is ignored unless the `processing_metrics` parameter is set to `true`.
+     *
+     * The parameter accepts a minimum value of 0.1 seconds. The level of precision is not restricted, so you can
+     * specify values such as 0.25 and 0.125.
+     *
+     * The service does not impose a maximum value. If you want to receive processing metrics only for transcription
+     * events instead of at periodic intervals, set the value to a large number. If the value is larger than the
+     * duration of the audio, the service returns processing metrics only for transcription events.
+     *
+     * @return the processingMetricsInterval
+     */
+    public Double processingMetricsInterval() {
+      return processingMetricsInterval;
+    }
+ 
+    /**
+     * Gets the audioMetrics.
+     *
+     * If `true`, requests detailed information about the signal characteristics of the input audio. The service returns
+     * audio metrics with the final transcription results. By default, the service returns no audio metrics.
+     *
+     * @return the audioMetrics
+     */
+    public Boolean audioMetrics() {
+      return audioMetrics;
     }
 
     private CreateJobOptions(CreateJobOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.audio, 'audio cannot be null');
       audio = builder.audio;
+      contentType = builder.contentType;
       model = builder.model;
       callbackUrl = builder.callbackUrl;
       events = builder.events;
@@ -2765,7 +3221,9 @@ public class IBMSpeechToTextV1Models {
       customizationId = builder.customizationId;
       grammarName = builder.grammarName;
       redaction = builder.redaction;
-      contentType = builder.contentType;
+      processingMetrics = builder.processingMetrics;
+      processingMetricsInterval = builder.processingMetricsInterval;
+      audioMetrics = builder.audioMetrics;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -2785,6 +3243,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class CreateJobOptionsBuilder extends IBMWatsonOptionsModel {
     private IBMWatsonFile audio;
+    private String contentType;
     private String model;
     private String callbackUrl;
     private String events;
@@ -2807,10 +3266,13 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String grammarName;
     private Boolean redaction;
-    private String contentType;
+    private Boolean processingMetrics;
+    private Double processingMetricsInterval;
+    private Boolean audioMetrics;
 
     private CreateJobOptionsBuilder(CreateJobOptions createJobOptions) {
       audio = createJobOptions.audio;
+      contentType = createJobOptions.contentType;
       model = createJobOptions.model;
       callbackUrl = createJobOptions.callbackUrl;
       events = createJobOptions.events;
@@ -2833,7 +3295,9 @@ public class IBMSpeechToTextV1Models {
       customizationId = createJobOptions.customizationId;
       grammarName = createJobOptions.grammarName;
       redaction = createJobOptions.redaction;
-      contentType = createJobOptions.contentType;
+      processingMetrics = createJobOptions.processingMetrics;
+      processingMetricsInterval = createJobOptions.processingMetricsInterval;
+      audioMetrics = createJobOptions.audioMetrics;
       this.requestHeaders.putAll(createJobOptions.requestHeaders());
     }
 
@@ -2884,6 +3348,17 @@ public class IBMSpeechToTextV1Models {
      */
     public CreateJobOptionsBuilder audio(IBMWatsonFile audio) {
       this.audio = audio;
+      return this;
+    }
+
+    /**
+     * Set the contentType.
+     *
+     * @param contentType the contentType
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder contentType(String contentType) {
+      this.contentType = contentType;
       return this;
     }
 
@@ -3131,13 +3606,35 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the contentType.
+     * Set the processingMetrics.
      *
-     * @param contentType the contentType
+     * @param processingMetrics the processingMetrics
      * @return the CreateJobOptions builder
      */
-    public CreateJobOptionsBuilder contentType(String contentType) {
-      this.contentType = contentType;
+    public CreateJobOptionsBuilder processingMetrics(Boolean processingMetrics) {
+      this.processingMetrics = processingMetrics;
+      return this;
+    }
+
+    /**
+     * Set the processingMetricsInterval.
+     *
+     * @param processingMetricsInterval the processingMetricsInterval
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder processingMetricsInterval(Double processingMetricsInterval) {
+      this.processingMetricsInterval = processingMetricsInterval;
+      return this;
+    }
+
+    /**
+     * Set the audioMetrics.
+     *
+     * @param audioMetrics the audioMetrics
+     * @return the CreateJobOptions builder
+     */
+    public CreateJobOptionsBuilder audioMetrics(Boolean audioMetrics) {
+      this.audioMetrics = audioMetrics;
       return this;
     }
 
@@ -3184,7 +3681,7 @@ public class IBMSpeechToTextV1Models {
      *
      * To determine whether a base model supports language model customization, use the **Get a model** method and check
      * that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
-     * customization](https://cloud.ibm.com/docs/services/speech-to-text/custom.html#languageSupport).
+     * customization](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customization#languageSupport).
      *
      * @return the baseModelName
      */
@@ -3345,7 +3842,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * CustomWord.
+   * Information about a word that is to be added to a custom language model.
    */
   public class CustomWord {
     private String word_serialized_name;
@@ -4197,7 +4694,7 @@ public class IBMSpeechToTextV1Models {
      *
      * The custom word that is to be deleted from the custom language model. URL-encode the word if it includes
      * non-ASCII characters. For more information, see [Character
-     * encoding](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding).
+     * encoding](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#charEncoding).
      *
      * @return the wordName
      */
@@ -4972,7 +5469,7 @@ public class IBMSpeechToTextV1Models {
      *
      * The custom word that is to be read from the custom language model. URL-encode the word if it includes non-ASCII
      * characters. For more information, see [Character
-     * encoding](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding).
+     * encoding](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#charEncoding).
      *
      * @return the wordName
      */
@@ -5074,7 +5571,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * Grammar.
+   * Information about a grammar from a custom language model.
    */
   public class Grammar extends IBMWatsonResponseModel {
     private String name_serialized_name;
@@ -5174,19 +5671,10 @@ public class IBMSpeechToTextV1Models {
       this.error_serialized_name = error;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      Grammar ret = (Grammar) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * Grammars.
+   * Information about the grammars from a custom language model.
    */
   public class Grammars extends IBMWatsonResponseModel {
     private List<Grammar> grammars_serialized_name;
@@ -5238,7 +5726,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * KeywordResult.
+   * Information about a match for a keyword from speech recognition results.
    */
   public class KeywordResult extends IBMWatsonGenericModel {
     private String normalized_text_serialized_name;
@@ -5330,19 +5818,10 @@ public class IBMSpeechToTextV1Models {
       this.confidence_serialized_name = confidence;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      KeywordResult ret = (KeywordResult) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * LanguageModel.
+   * Information about an existing custom language model.
    */
   public class LanguageModel extends IBMWatsonResponseModel {
     private String customization_id_serialized_name;
@@ -5480,9 +5959,10 @@ public class IBMSpeechToTextV1Models {
      * Gets the status.
      *
      * The current status of the custom language model:
-     * * `pending`: The model was created but is waiting either for training data to be added or for the service to
-     * finish analyzing added data.
-     * * `ready`: The model contains data and is ready to be trained.
+     * * `pending`: The model was created but is waiting either for valid training data to be added or for the service
+     * to finish analyzing added data.
+     * * `ready`: The model contains valid data and is ready to be trained. If the model contains a mix of valid and
+     * invalid resources, you need to set the `strict` parameter to `false` for the training to proceed.
      * * `training`: The model is currently being trained.
      * * `available`: The model is trained and ready to use.
      * * `upgrading`: The model is currently being upgraded.
@@ -5653,19 +6133,10 @@ public class IBMSpeechToTextV1Models {
       this.warnings_serialized_name = warnings;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      LanguageModel ret = (LanguageModel) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * LanguageModels.
+   * Information about existing custom language models.
    */
   public class LanguageModels extends IBMWatsonResponseModel {
     private List<LanguageModel> customizations_serialized_name;
@@ -6382,7 +6853,209 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * RecognitionJob.
+   * Detailed timing information about the service's processing of the input audio.
+   */
+  public class ProcessedAudio extends IBMWatsonGenericModel {
+    private Double received_serialized_name;
+    private Double seen_by_engine_serialized_name;
+    private Double transcription_serialized_name;
+    private Double speaker_labels_serialized_name;
+ 
+    /**
+     * Gets the received.
+     *
+     * The seconds of audio that the service has received as of this response. The value of the field is greater than
+     * the values of the `transcription` and `speaker_labels` fields during speech recognition processing, since the
+     * service first has to receive the audio before it can begin to process it. The final value can also be greater
+     * than the value of the `transcription` and `speaker_labels` fields by a fractional number of seconds.
+     *
+     * @return the received
+     */
+    @AuraEnabled
+    public Double getReceived() {
+      return received_serialized_name;
+    }
+ 
+    /**
+     * Gets the seenByEngine.
+     *
+     * The seconds of audio that the service has passed to its speech-processing engine as of this response. The value
+     * of the field is greater than the values of the `transcription` and `speaker_labels` fields during speech
+     * recognition processing. The `received` and `seen_by_engine` fields have identical values when the service has
+     * finished processing all audio. This final value can be greater than the value of the `transcription` and
+     * `speaker_labels` fields by a fractional number of seconds.
+     *
+     * @return the seenByEngine
+     */
+    @AuraEnabled
+    public Double getSeenByEngine() {
+      return seen_by_engine_serialized_name;
+    }
+ 
+    /**
+     * Gets the transcription.
+     *
+     * The seconds of audio that the service has processed for speech recognition as of this response.
+     *
+     * @return the transcription
+     */
+    @AuraEnabled
+    public Double getTranscription() {
+      return transcription_serialized_name;
+    }
+ 
+    /**
+     * Gets the speakerLabels.
+     *
+     * If speaker labels are requested, the seconds of audio that the service has processed to determine speaker labels
+     * as of this response. This value often trails the value of the `transcription` field during speech recognition
+     * processing. The `transcription` and `speaker_labels` fields have identical values when the service has finished
+     * processing all audio.
+     *
+     * @return the speakerLabels
+     */
+    @AuraEnabled
+    public Double getSpeakerLabels() {
+      return speaker_labels_serialized_name;
+    }
+
+    /**
+     * Sets the received.
+     *
+     * @param received the new received
+     */
+    public void setReceived(final Double received) {
+      this.received_serialized_name = received;
+    }
+
+    /**
+     * Sets the seenByEngine.
+     *
+     * @param seenByEngine the new seenByEngine
+     */
+    public void setSeenByEngine(final Double seenByEngine) {
+      this.seen_by_engine_serialized_name = seenByEngine;
+    }
+
+    /**
+     * Sets the transcription.
+     *
+     * @param transcription the new transcription
+     */
+    public void setTranscription(final Double transcription) {
+      this.transcription_serialized_name = transcription;
+    }
+
+    /**
+     * Sets the speakerLabels.
+     *
+     * @param speakerLabels the new speakerLabels
+     */
+    public void setSpeakerLabels(final Double speakerLabels) {
+      this.speaker_labels_serialized_name = speakerLabels;
+    }
+
+  }
+
+  /**
+   * If processing metrics are requested, information about the service's processing of the input audio.
+   */
+  public class ProcessingMetrics extends IBMWatsonGenericModel {
+    private ProcessedAudio processed_audio_serialized_name;
+    private Double wall_clock_since_first_byte_received_serialized_name;
+    private Boolean periodic_serialized_name;
+ 
+    /**
+     * Gets the processedAudio.
+     *
+     * Detailed timing information about the service's processing of the input audio.
+     *
+     * @return the processedAudio
+     */
+    @AuraEnabled
+    public ProcessedAudio getProcessedAudio() {
+      return processed_audio_serialized_name;
+    }
+ 
+    /**
+     * Gets the wallClockSinceFirstByteReceived.
+     *
+     * The amount of real time in seconds that has passed since the service received the first byte of input audio.
+     * Values in this field are generally multiples of the specified metrics interval, with two differences:
+     * * Values might not reflect exact intervals (for instance, 0.25, 0.5, and so on). Actual values might be 0.27,
+     * 0.52, and so on, depending on when the service receives and processes audio.
+     * * The service also returns values for transcription events if you set the `interim_results` parameter to `true`.
+     * The service returns both processing metrics and transcription results when such events occur.
+     *
+     * @return the wallClockSinceFirstByteReceived
+     */
+    @AuraEnabled
+    public Double getWallClockSinceFirstByteReceived() {
+      return wall_clock_since_first_byte_received_serialized_name;
+    }
+ 
+    /**
+     * Gets the periodic.
+     *
+     * An indication of whether the metrics apply to a periodic interval or a transcription event:
+     * * `true` means that the response was triggered by a specified processing interval. The information contains
+     * processing metrics only.
+     * * `false` means that the response was triggered by a transcription event. The information contains processing
+     * metrics plus transcription results.
+     *
+     * Use the field to identify why the service generated the response and to filter different results if necessary.
+     *
+     * @return the periodic
+     */
+    @AuraEnabled
+    public Boolean getPeriodic() {
+      return periodic_serialized_name;
+    }
+
+    /**
+     * Sets the processedAudio.
+     *
+     * @param processedAudio the new processedAudio
+     */
+    public void setProcessedAudio(final ProcessedAudio processedAudio) {
+      this.processed_audio_serialized_name = processedAudio;
+    }
+
+    /**
+     * Sets the wallClockSinceFirstByteReceived.
+     *
+     * @param wallClockSinceFirstByteReceived the new wallClockSinceFirstByteReceived
+     */
+    public void setWallClockSinceFirstByteReceived(final Double wallClockSinceFirstByteReceived) {
+      this.wall_clock_since_first_byte_received_serialized_name = wallClockSinceFirstByteReceived;
+    }
+
+    /**
+     * Sets the periodic.
+     *
+     * @param periodic the new periodic
+     */
+    public void setPeriodic(final Boolean periodic) {
+      this.periodic_serialized_name = periodic;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ProcessingMetrics ret = (ProcessingMetrics) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for processedAudio
+      ProcessedAudio newProcessedAudio = (ProcessedAudio) new ProcessedAudio().deserialize(JSON.serialize(ret.getProcessedAudio()), (Map<String, Object>) jsonMap.get('processed_audio_serialized_name'), ProcessedAudio.class);
+      ret.setProcessedAudio(newProcessedAudio);
+
+      return ret;
+    }
+  }
+
+  /**
+   * Information about a current asynchronous speech recognition job.
    */
   public class RecognitionJob extends IBMWatsonResponseModel {
     private String id_serialized_name;
@@ -6604,7 +7277,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * RecognitionJobs.
+   * Information about current asynchronous speech recognition jobs.
    */
   public class RecognitionJobs extends IBMWatsonResponseModel {
     private List<RecognitionJob> recognitions_serialized_name;
@@ -6660,6 +7333,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class RecognizeOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile audio;
+    private String contentType;
     private String model;
     private String languageCustomizationId;
     private String acousticCustomizationId;
@@ -6678,7 +7352,7 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String grammarName;
     private Boolean redaction;
-    private String contentType;
+    private Boolean audioMetrics;
  
     /**
      * Gets the audio.
@@ -6692,10 +7366,22 @@ public class IBMSpeechToTextV1Models {
     }
  
     /**
+     * Gets the contentType.
+     *
+     * The format (MIME type) of the audio. For more information about specifying an audio format, see **Audio formats
+     * (content types)** in the method description.
+     *
+     * @return the contentType
+     */
+    public String contentType() {
+      return contentType;
+    }
+ 
+    /**
      * Gets the model.
      *
      * The identifier of the model that is to be used for the recognition request. See [Languages and
-     * models](https://cloud.ibm.com/docs/services/speech-to-text/models.html).
+     * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models).
      *
      * @return the model
      */
@@ -6710,7 +7396,7 @@ public class IBMSpeechToTextV1Models {
      * model of the specified custom language model must match the model specified with the `model` parameter. You must
      * make the request with credentials for the instance of the service that owns the custom model. By default, no
      * custom language model is used. See [Custom
-     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
+     * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input).
      *
      * **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      *
@@ -6727,7 +7413,7 @@ public class IBMSpeechToTextV1Models {
      * model of the specified custom acoustic model must match the model specified with the `model` parameter. You must
      * make the request with credentials for the instance of the service that owns the custom model. By default, no
      * custom acoustic model is used. See [Custom
-     * models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
+     * models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input).
      *
      * @return the acousticCustomizationId
      */
@@ -6738,11 +7424,11 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the baseModelVersion.
      *
-     * The version of the specified base model that is to be used with recognition request. Multiple versions of a base
-     * model can exist when a model is updated for internal improvements. The parameter is intended primarily for use
-     * with custom models that have been upgraded for a new base model. The default value depends on whether the
+     * The version of the specified base model that is to be used with the recognition request. Multiple versions of a
+     * base model can exist when a model is updated for internal improvements. The parameter is intended primarily for
+     * use with custom models that have been upgraded for a new base model. The default value depends on whether the
      * parameter is used with or without a custom model. See [Base model
-     * version](https://cloud.ibm.com/docs/services/speech-to-text/input.html#version).
+     * version](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#version).
      *
      * @return the baseModelVersion
      */
@@ -6765,7 +7451,7 @@ public class IBMSpeechToTextV1Models {
      * of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
      * of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
      *
-     * See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
+     * See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input).
      *
      * @return the customizationWeight
      */
@@ -6779,7 +7465,7 @@ public class IBMSpeechToTextV1Models {
      * The time in seconds after which, if only silence (no speech) is detected in streaming audio, the connection is
      * closed with a 400 error. The parameter is useful for stopping audio submission from a live microphone when a user
      * simply walks away. Use `-1` for infinity. See [Inactivity
-     * timeout](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts-inactivity).
+     * timeout](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#timeouts-inactivity).
      *
      * @return the inactivityTimeout
      */
@@ -6794,7 +7480,7 @@ public class IBMSpeechToTextV1Models {
      * Keywords are spotted only in the final results, not in interim hypotheses. If you specify any keywords, you must
      * also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter or specify an
      * empty array if you do not need to spot keywords. See [Keyword
-     * spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
+     * spotting](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#keyword_spotting).
      *
      * @return the keywords
      */
@@ -6809,7 +7495,7 @@ public class IBMSpeechToTextV1Models {
      * confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. If you specify a
      * threshold, you must also specify one or more keywords. The service performs no keyword spotting if you omit
      * either parameter. See [Keyword
-     * spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
+     * spotting](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#keyword_spotting).
      *
      * @return the keywordsThreshold
      */
@@ -6822,7 +7508,7 @@ public class IBMSpeechToTextV1Models {
      *
      * The maximum number of alternative transcripts that the service is to return. By default, the service returns a
      * single transcript. If you specify a value of `0`, the service uses the default value, `1`. See [Maximum
-     * alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
+     * alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#max_alternatives).
      *
      * @return the maxAlternatives
      */
@@ -6836,7 +7522,8 @@ public class IBMSpeechToTextV1Models {
      * A confidence value that is the lower bound for identifying a hypothesis as a possible word alternative (also
      * known as "Confusion Networks"). An alternative word is considered if its confidence is greater than or equal to
      * the threshold. Specify a probability between 0.0 and 1.0. By default, the service computes no alternative words.
-     * See [Word alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives).
+     * See [Word
+     * alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_alternatives).
      *
      * @return the wordAlternativesThreshold
      */
@@ -6849,7 +7536,7 @@ public class IBMSpeechToTextV1Models {
      *
      * If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for each word. By default, the
      * service returns no word confidence scores. See [Word
-     * confidence](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence).
+     * confidence](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_confidence).
      *
      * @return the wordConfidence
      */
@@ -6861,7 +7548,7 @@ public class IBMSpeechToTextV1Models {
      * Gets the timestamps.
      *
      * If `true`, the service returns time alignment for each word. By default, no timestamps are returned. See [Word
-     * timestamps](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_timestamps).
+     * timestamps](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_timestamps).
      *
      * @return the timestamps
      */
@@ -6875,7 +7562,7 @@ public class IBMSpeechToTextV1Models {
      * If `true`, the service filters profanity from all output except for keyword results by replacing inappropriate
      * words with a series of asterisks. Set the parameter to `false` to return results with no censoring. Applies to US
      * English transcription only. See [Profanity
-     * filtering](https://cloud.ibm.com/docs/services/speech-to-text/output.html#profanity_filter).
+     * filtering](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#profanity_filter).
      *
      * @return the profanityFilter
      */
@@ -6893,7 +7580,8 @@ public class IBMSpeechToTextV1Models {
      *
      * **Note:** Applies to US English, Japanese, and Spanish transcription only.
      *
-     * See [Smart formatting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting).
+     * See [Smart
+     * formatting](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#smart_formatting).
      *
      * @return the smartFormatting
      */
@@ -6912,7 +7600,8 @@ public class IBMSpeechToTextV1Models {
      * supports speaker labels, you can also use the **Get a model** method and check that the attribute
      * `speaker_labels` is set to `true`.
      *
-     * See [Speaker labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
+     * See [Speaker
+     * labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
      *
      * @return the speakerLabels
      */
@@ -6939,7 +7628,7 @@ public class IBMSpeechToTextV1Models {
      * use the `language_customization_id` parameter to specify the name of the custom language model for which the
      * grammar is defined. The service recognizes only strings that are recognized by the specified grammar; it does not
      * recognize other custom words from the model's words resource. See
-     * [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/input.html#grammars-input).
+     * [Grammars](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#grammars-input).
      *
      * @return the grammarName
      */
@@ -6961,7 +7650,8 @@ public class IBMSpeechToTextV1Models {
      *
      * **Note:** Applies to US English, Japanese, and Korean transcription only.
      *
-     * See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
+     * See [Numeric
+     * redaction](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#redaction).
      *
      * @return the redaction
      */
@@ -6970,20 +7660,21 @@ public class IBMSpeechToTextV1Models {
     }
  
     /**
-     * Gets the contentType.
+     * Gets the audioMetrics.
      *
-     * The format (MIME type) of the audio. For more information about specifying an audio format, see **Audio formats
-     * (content types)** in the method description.
+     * If `true`, requests detailed information about the signal characteristics of the input audio. The service returns
+     * audio metrics with the final transcription results. By default, the service returns no audio metrics.
      *
-     * @return the contentType
+     * @return the audioMetrics
      */
-    public String contentType() {
-      return contentType;
+    public Boolean audioMetrics() {
+      return audioMetrics;
     }
 
     private RecognizeOptions(RecognizeOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.audio, 'audio cannot be null');
       audio = builder.audio;
+      contentType = builder.contentType;
       model = builder.model;
       languageCustomizationId = builder.languageCustomizationId;
       acousticCustomizationId = builder.acousticCustomizationId;
@@ -7002,7 +7693,7 @@ public class IBMSpeechToTextV1Models {
       customizationId = builder.customizationId;
       grammarName = builder.grammarName;
       redaction = builder.redaction;
-      contentType = builder.contentType;
+      audioMetrics = builder.audioMetrics;
       this.requestHeaders = builder.requestHeaders;
     }
 
@@ -7022,6 +7713,7 @@ public class IBMSpeechToTextV1Models {
    */
   public class RecognizeOptionsBuilder extends IBMWatsonOptionsModel {
     private IBMWatsonFile audio;
+    private String contentType;
     private String model;
     private String languageCustomizationId;
     private String acousticCustomizationId;
@@ -7040,10 +7732,11 @@ public class IBMSpeechToTextV1Models {
     private String customizationId;
     private String grammarName;
     private Boolean redaction;
-    private String contentType;
+    private Boolean audioMetrics;
 
     private RecognizeOptionsBuilder(RecognizeOptions recognizeOptions) {
       audio = recognizeOptions.audio;
+      contentType = recognizeOptions.contentType;
       model = recognizeOptions.model;
       languageCustomizationId = recognizeOptions.languageCustomizationId;
       acousticCustomizationId = recognizeOptions.acousticCustomizationId;
@@ -7062,7 +7755,7 @@ public class IBMSpeechToTextV1Models {
       customizationId = recognizeOptions.customizationId;
       grammarName = recognizeOptions.grammarName;
       redaction = recognizeOptions.redaction;
-      contentType = recognizeOptions.contentType;
+      audioMetrics = recognizeOptions.audioMetrics;
       this.requestHeaders.putAll(recognizeOptions.requestHeaders());
     }
 
@@ -7113,6 +7806,17 @@ public class IBMSpeechToTextV1Models {
      */
     public RecognizeOptionsBuilder audio(IBMWatsonFile audio) {
       this.audio = audio;
+      return this;
+    }
+
+    /**
+     * Set the contentType.
+     *
+     * @param contentType the contentType
+     * @return the RecognizeOptions builder
+     */
+    public RecognizeOptionsBuilder contentType(String contentType) {
+      this.contentType = contentType;
       return this;
     }
 
@@ -7316,13 +8020,13 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
-     * Set the contentType.
+     * Set the audioMetrics.
      *
-     * @param contentType the contentType
+     * @param audioMetrics the audioMetrics
      * @return the RecognizeOptions builder
      */
-    public RecognizeOptionsBuilder contentType(String contentType) {
-      this.contentType = contentType;
+    public RecognizeOptionsBuilder audioMetrics(Boolean audioMetrics) {
+      this.audioMetrics = audioMetrics;
       return this;
     }
 
@@ -7464,7 +8168,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * RegisterStatus.
+   * Information about a request to register a callback for asynchronous speech recognition.
    */
   public class RegisterStatus extends IBMWatsonResponseModel {
     private String status_serialized_name;
@@ -7514,15 +8218,6 @@ public class IBMSpeechToTextV1Models {
       this.url_serialized_name = url;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      RegisterStatus ret = (RegisterStatus) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -7714,7 +8409,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * SpeakerLabelsResult.
+   * Information about the speakers from speech recognition results.
    */
   public class SpeakerLabelsResult extends IBMWatsonGenericModel {
     private Double from_serialized_name;
@@ -7833,19 +8528,10 @@ public class IBMSpeechToTextV1Models {
       this.final_serialized_name = finalResults;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SpeakerLabelsResult ret = (SpeakerLabelsResult) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * SpeechModel.
+   * Information about an available language model.
    */
   public class SpeechModel extends IBMWatsonResponseModel {
     private String name_serialized_name;
@@ -7906,7 +8592,7 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the supportedFeatures.
      *
-     * Describes the additional service features that are supported with the model.
+     * Additional service features that are supported with the model.
      *
      * @return the supportedFeatures
      */
@@ -7997,7 +8683,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * SpeechModels.
+   * Information about the available language models.
    */
   public class SpeechModels extends IBMWatsonResponseModel {
     private List<SpeechModel> models_serialized_name;
@@ -8048,7 +8734,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * SpeechRecognitionAlternative.
+   * An alternative transcript from speech recognition results.
    */
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript_serialized_name;
@@ -8145,19 +8831,10 @@ public class IBMSpeechToTextV1Models {
       this.word_confidence_serialized_name = wordConfidence;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SpeechRecognitionAlternative ret = (SpeechRecognitionAlternative) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * SpeechRecognitionResult.
+   * Component results for a speech recognition request.
    */
   public class SpeechRecognitionResult extends IBMWatsonGenericModel {
     private Boolean final_serialized_name;
@@ -8312,12 +8989,14 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * SpeechRecognitionResults.
+   * The complete results for a speech recognition request.
    */
   public class SpeechRecognitionResults extends IBMWatsonResponseModel {
     private List<SpeechRecognitionResult> results_serialized_name;
     private Long result_index_serialized_name;
     private List<SpeakerLabelsResult> speaker_labels_serialized_name;
+    private ProcessingMetrics processing_metrics_serialized_name;
+    private AudioMetrics audio_metrics_serialized_name;
     private List<String> warnings_serialized_name;
  
     /**
@@ -8362,6 +9041,30 @@ public class IBMSpeechToTextV1Models {
     @AuraEnabled
     public List<SpeakerLabelsResult> getSpeakerLabels() {
       return speaker_labels_serialized_name;
+    }
+ 
+    /**
+     * Gets the processingMetrics.
+     *
+     * If processing metrics are requested, information about the service's processing of the input audio.
+     *
+     * @return the processingMetrics
+     */
+    @AuraEnabled
+    public ProcessingMetrics getProcessingMetrics() {
+      return processing_metrics_serialized_name;
+    }
+ 
+    /**
+     * Gets the audioMetrics.
+     *
+     * If audio metrics are requested, information about the signal characteristics of the input audio.
+     *
+     * @return the audioMetrics
+     */
+    @AuraEnabled
+    public AudioMetrics getAudioMetrics() {
+      return audio_metrics_serialized_name;
     }
  
     /**
@@ -8414,6 +9117,24 @@ public class IBMSpeechToTextV1Models {
     }
 
     /**
+     * Sets the processingMetrics.
+     *
+     * @param processingMetrics the new processingMetrics
+     */
+    public void setProcessingMetrics(final ProcessingMetrics processingMetrics) {
+      this.processing_metrics_serialized_name = processingMetrics;
+    }
+
+    /**
+     * Sets the audioMetrics.
+     *
+     * @param audioMetrics the new audioMetrics
+     */
+    public void setAudioMetrics(final AudioMetrics audioMetrics) {
+      this.audio_metrics_serialized_name = audioMetrics;
+    }
+
+    /**
      * Sets the warnings.
      *
      * @param warnings the new warnings
@@ -8455,12 +9176,20 @@ public class IBMSpeechToTextV1Models {
         ret.speaker_labels_serialized_name = newSpeakerLabels;
       }
 
+      // calling custom deserializer for processingMetrics
+      ProcessingMetrics newProcessingMetrics = (ProcessingMetrics) new ProcessingMetrics().deserialize(JSON.serialize(ret.getProcessingMetrics()), (Map<String, Object>) jsonMap.get('processing_metrics_serialized_name'), ProcessingMetrics.class);
+      ret.setProcessingMetrics(newProcessingMetrics);
+
+      // calling custom deserializer for audioMetrics
+      AudioMetrics newAudioMetrics = (AudioMetrics) new AudioMetrics().deserialize(JSON.serialize(ret.getAudioMetrics()), (Map<String, Object>) jsonMap.get('audio_metrics_serialized_name'), AudioMetrics.class);
+      ret.setAudioMetrics(newAudioMetrics);
+
       return ret;
     }
   }
 
   /**
-   * Describes the additional service features that are supported with the model.
+   * Additional service features that are supported with the model.
    */
   public class SupportedFeatures extends IBMWatsonGenericModel {
     private Boolean custom_language_model_serialized_name;
@@ -8509,15 +9238,6 @@ public class IBMSpeechToTextV1Models {
       this.speaker_labels_serialized_name = speakerLabels;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      SupportedFeatures ret = (SupportedFeatures) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
@@ -8804,6 +9524,112 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
+   * The response from training of a custom language or custom acoustic model.
+   */
+  public class TrainingResponse extends IBMWatsonResponseModel {
+    private List<TrainingWarning> warnings_serialized_name;
+ 
+    /**
+     * Gets the warnings.
+     *
+     * An array of `TrainingWarning` objects that lists any invalid resources contained in the custom model. For custom
+     * language models, invalid resources are grouped and identified by type of resource. The method can return warnings
+     * only if the `strict` parameter is set to `false`.
+     *
+     * @return the warnings
+     */
+    @AuraEnabled
+    public List<TrainingWarning> getWarnings() {
+      return warnings_serialized_name;
+    }
+
+    /**
+     * Sets the warnings.
+     *
+     * @param warnings the new warnings
+     */
+    public void setWarnings(final List<TrainingWarning> warnings) {
+      this.warnings_serialized_name = warnings;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      TrainingResponse ret = (TrainingResponse) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for warnings
+      List<TrainingWarning> newWarnings = new List<TrainingWarning>();
+      List<TrainingWarning> deserializedWarnings = ret.getWarnings();
+      if (deserializedWarnings != null) {
+        for (Integer i = 0; i < deserializedWarnings.size(); i++) {
+          TrainingWarning currentItem = ret.getWarnings().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('warnings_serialized_name');
+          TrainingWarning newItem = (TrainingWarning) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), TrainingWarning.class);
+          newWarnings.add(newItem);
+        }
+        ret.warnings_serialized_name = newWarnings;
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * A warning from training of a custom language or custom acoustic model.
+   */
+  public class TrainingWarning extends IBMWatsonGenericModel {
+    private String description_serialized_name;
+    private String warning_id_serialized_name;
+ 
+    /**
+     * Gets the description.
+     *
+     * A warning message that lists the invalid resources that are excluded from the custom model's training. The
+     * message has the following format: `Analysis of the following {resource_type} has not completed successfully:
+     * [{resource_names}]. They will be excluded from custom {model_type} model training.`.
+     *
+     * @return the description
+     */
+    @AuraEnabled
+    public String getDescription() {
+      return description_serialized_name;
+    }
+ 
+    /**
+     * Gets the warningId.
+     *
+     * An identifier for the type of invalid resources listed in the `description` field.
+     *
+     * @return the warningId
+     */
+    @AuraEnabled
+    public String getWarningId() {
+      return warning_id_serialized_name;
+    }
+
+    /**
+     * Sets the description.
+     *
+     * @param description the new description
+     */
+    public void setDescription(final String description) {
+      this.description_serialized_name = description;
+    }
+
+    /**
+     * Sets the warningId.
+     *
+     * @param warningId the new warningId
+     */
+    public void setWarningId(final String warningId) {
+      this.warning_id_serialized_name = warningId;
+    }
+
+  }
+
+  /**
    * The unregisterCallback options.
    */
   public class UnregisterCallbackOptions extends IBMWatsonOptionsModel {
@@ -8936,7 +9762,7 @@ public class IBMSpeechToTextV1Models {
      * last trained. Use this parameter only to force the upgrade of a custom acoustic model that is trained with a
      * custom language model, and only if you receive a 400 response code and the message `No input data modified since
      * last training`. See [Upgrading a custom acoustic
-     * model](https://cloud.ibm.com/docs/services/speech-to-text/custom-upgrade.html#upgradeAcoustic).
+     * model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customUpgrade#upgradeAcoustic).
      *
      * @return the force
      */
@@ -9143,7 +9969,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * Word.
+   * Information about a word from a custom language model.
    */
   public class Word extends IBMWatsonResponseModel {
     private String word_serialized_name;
@@ -9313,7 +10139,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * WordAlternativeResult.
+   * An alternative hypothesis for a word from speech recognition results.
    */
   public class WordAlternativeResult extends IBMWatsonGenericModel {
     private Double confidence_serialized_name;
@@ -9361,19 +10187,10 @@ public class IBMSpeechToTextV1Models {
       this.word_serialized_name = word;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      WordAlternativeResult ret = (WordAlternativeResult) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * WordAlternativeResults.
+   * Information about alternative hypotheses for words from speech recognition results.
    */
   public class WordAlternativeResults extends IBMWatsonGenericModel {
     private Double start_time_serialized_name;
@@ -9468,7 +10285,7 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * WordError.
+   * An error associated with a word from a custom language model.
    */
   public class WordError extends IBMWatsonGenericModel {
     private String element_serialized_name;
@@ -9476,11 +10293,11 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the element.
      *
-     * A key-value pair that describes an error associated with the definition of a word in the words resource. Each
-     * pair has the format `"element": "message"`, where `element` is the aspect of the definition that caused the
-     * problem and `message` describes the problem. The following example describes a problem with one of the word's
-     * sounds-like definitions: `"{sounds_like_string}": "Numbers are not allowed in sounds-like. You can try for
-     * example '{suggested_string}'."` You must correct the error before you can train the model.
+     * A key-value pair that describes an error associated with the definition of a word in the words resource. The pair
+     * has the format `"element": "message"`, where `element` is the aspect of the definition that caused the problem
+     * and `message` describes the problem. The following example describes a problem with one of the word's sounds-like
+     * definitions: `"{sounds_like_string}": "Numbers are not allowed in sounds-like. You can try for example
+     * '{suggested_string}'."`.
      *
      * @return the element
      */
@@ -9498,19 +10315,10 @@ public class IBMSpeechToTextV1Models {
       this.element_serialized_name = element;
     }
 
-    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
-      if (jsonMap == null) {
-        return null;
-      }
-
-      WordError ret = (WordError) super.deserialize(jsonString, jsonMap, classType);
-
-      return ret;
-    }
   }
 
   /**
-   * Words.
+   * Information about the words from a custom language model.
    */
   public class Words extends IBMWatsonResponseModel {
     private List<Word> words_serialized_name;
