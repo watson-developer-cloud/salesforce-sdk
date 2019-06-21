@@ -1376,8 +1376,6 @@ private class IBMSpeechToTextV1Test {
       .customizationId(customizationId)
       .grammarName(grammarName)
       .redaction(true)
-      .processingMetrics(true)
-      .processingMetricsInterval(processingMetricsInterval)
       .audioMetrics(true)
       .addHeader(headerKey, headerVal)
       .build();
@@ -1403,8 +1401,6 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(customizationId, options.customizationId());
     System.assertEquals(grammarName, options.grammarName());
     System.assert(options.redaction());
-    System.assert(options.processingMetrics());
-    System.assertEquals(processingMetricsInterval, options.processingMetricsInterval());
     System.assert(options.audioMetrics());
 
     Test.stopTest();
@@ -1417,7 +1413,6 @@ private class IBMSpeechToTextV1Test {
       .customizationId(customizationId)
       .wordTypeToAdd(wordTypeToAdd)
       .customizationWeight(customizationWeight)
-      .strict(true)
       .addHeader(headerKey, headerVal)
       .build();
     options = options.newBuilder().build();
@@ -1425,7 +1420,6 @@ private class IBMSpeechToTextV1Test {
     System.assertEquals(customizationId, options.customizationId());
     System.assertEquals(wordTypeToAdd, options.wordTypeToAdd());
     System.assertEquals(customizationWeight, options.customizationWeight());
-    System.assert(options.strict());
 
     Test.stopTest();
   }
@@ -1436,14 +1430,12 @@ private class IBMSpeechToTextV1Test {
     IBMSpeechToTextV1Models.TrainAcousticModelOptions options = new IBMSpeechToTextV1Models.TrainAcousticModelOptionsBuilder()
       .customizationId(customizationId)
       .customLanguageModelId(customLanguageModelId)
-      .strict(true)
       .addHeader(headerKey, headerVal)
       .build();
     options = options.newBuilder().build();
 
     System.assertEquals(customizationId, options.customizationId());
     System.assertEquals(customLanguageModelId, options.customLanguageModelId());
-    System.assert(options.strict());
 
     Test.stopTest();
   }
