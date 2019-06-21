@@ -233,7 +233,6 @@ service.setEndPoint('SERVICE ICP URL');
 ```java
 // assuming control of managing the access token
 IBMWatsonICP4DConfig config = new IBMWatsonICP4DConfig.Builder()
-  .url('ICP TOKEN EXCHANGE BASE URL')
   .userManagedAccessToken('ACCESS_TOKEN')
   .build();
 IBMDiscoveryV1 service = new IBMDiscoveryV1('2017-11-07', config);
