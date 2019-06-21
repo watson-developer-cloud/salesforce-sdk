@@ -321,7 +321,7 @@ public class IBMLanguageTranslatorV3 extends IBMWatsonService {
     IBMWatsonMultipartBody.Builder multipartBuilder = new IBMWatsonMultipartBody.Builder();
     multipartBuilder.setType(IBMWatsonMultipartBody.FORM);
     IBMWatsonRequestBody fileBody = IBMWatsonRequestBody.create(translateDocumentOptions.file(), translateDocumentOptions.fileContentType());
-    multipartBuilder.addFormDataPart('file', null, fileBody);
+    multipartBuilder.addFormDataPart('file', translateDocumentOptions.filename(), fileBody);
     if (translateDocumentOptions.modelId() != null) {
       multipartBuilder.addFormDataPart('model_id', translateDocumentOptions.modelId());
     }

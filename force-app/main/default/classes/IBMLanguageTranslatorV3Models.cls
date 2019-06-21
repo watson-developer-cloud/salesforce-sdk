@@ -1530,6 +1530,7 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class TranslateDocumentOptions extends IBMWatsonOptionsModel {
     private IBMWatsonFile file;
+    private String filename;
     private String fileContentType;
     private String modelId;
     private String source;
@@ -1550,6 +1551,15 @@ public class IBMLanguageTranslatorV3Models {
      */
     public IBMWatsonFile file() {
       return file;
+    }
+
+    /**
+     * Gets the filename.
+     *
+     * @return the filename
+     */
+    public String filename() {
+      return filename;
     }
  
     /**
@@ -1610,7 +1620,9 @@ public class IBMLanguageTranslatorV3Models {
 
     private TranslateDocumentOptions(TranslateDocumentOptionsBuilder builder) {
       IBMWatsonValidator.notNull(builder.file, 'file cannot be null');
+      IBMWatsonValidator.notNull(builder.filename, 'filename cannot be null');
       file = builder.file;
+      filename = builder.filename;
       fileContentType = builder.fileContentType;
       modelId = builder.modelId;
       source = builder.source;
@@ -1635,6 +1647,7 @@ public class IBMLanguageTranslatorV3Models {
    */
   public class TranslateDocumentOptionsBuilder extends IBMWatsonOptionsModel {
     private IBMWatsonFile file;
+    private String filename;
     private String fileContentType;
     private String modelId;
     private String source;
@@ -1643,6 +1656,7 @@ public class IBMLanguageTranslatorV3Models {
 
     private TranslateDocumentOptionsBuilder(TranslateDocumentOptions translateDocumentOptions) {
       file = translateDocumentOptions.file;
+      filename = translateDocumentOptions.filename;
       fileContentType = translateDocumentOptions.fileContentType;
       modelId = translateDocumentOptions.modelId;
       source = translateDocumentOptions.source;
@@ -1683,6 +1697,17 @@ public class IBMLanguageTranslatorV3Models {
      */
     public TranslateDocumentOptionsBuilder file(IBMWatsonFile file) {
       this.file = file;
+      return this;
+    }
+
+    /**
+     * Set the filename.
+     *
+     * @param filename the filename
+     * @return the TranslateDocumentOptions builder
+     */
+    public TranslateDocumentOptionsBuilder filename(String filename) {
+      this.filename = filename;
       return this;
     }
 
