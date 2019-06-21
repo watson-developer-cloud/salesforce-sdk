@@ -1446,7 +1446,19 @@ public class IBMWatsonMockResponses {
             '      "text": "free trial"' +
             '    }' +
             '  ], ' +
-            '  "categories": [{ "label": "Company", "score": 0.89792}], ' +
+            '"categories": [' +
+              '{' +
+                '"label": "Company",' +
+                '"score": 0.89792,' +
+                '"explanation": {' +
+                  '"relevant_text": [' +
+                    '{' +
+                      '"text": "text"' +
+                    '}' +
+                  ']' +
+                '}' +
+              '}' +
+            '],' +
             '  "metadata": { "authors": [{"name": "test"}], "publication_date": "2017-05-16T13:56:54.957Z","title": "test"}, ' +
             '  "emotion": { "targets": [{"text": "test", "score": 0.89792,"emotion": {"anger": 0.099437}}], "document": {"label": "test", "score": 0.89792, "emotion": {"anger": 0.099437}}}, ' +
             '  "relations": [{ "type": "Company", "sentence": "Company", "score": 0.89792,"arguments": [{"entities": [{"text": "test","type": "Company"}],"text": "test"}]}], ' +

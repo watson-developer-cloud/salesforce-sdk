@@ -1,5 +1,32 @@
 @isTest
 private class IBMNaturalLanguageUnderstandingV1Test {
+  private static String text;
+  private static Long limitVal;
+  private static String model;
+
+  static {
+    text = 'text';
+    limitVal = 200L;
+    model = 'model';
+  }
+
+  static testMethod void testCategoriesOptions() {
+    Test.startTest();
+
+    IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions options = new IBMNaturalLanguageUnderstandingV1Models.CategoriesOptionsBuilder()
+      .xlimit(limitVal)
+      .explanation(true)
+      .model(model)
+      .build();
+    options = options.newBuilder().build();
+
+    System.assertEquals(limitVal, options.xlimit());
+    System.assert(options.explanation());
+    System.assertEquals(model, options.model());
+
+    Test.stopTest();
+  }
+
   /**
    *  Test Analyze text, HTML, or a public webpage.
    *
@@ -55,6 +82,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     sentiment = sentiment.newBuilder().build();
     IBMNaturalLanguageUnderstandingV1Models.CategoriesOptions categories = new IBMNaturalLanguageUnderstandingV1Models.CategoriesOptionsBuilder()
       .xlimit(12L)
+      .explanation(true)
       .build();
     IBMNaturalLanguageUnderstandingV1Models.MetadataOptions metadata = new IBMNaturalLanguageUnderstandingV1Models.MetadataOptions();
     IBMNaturalLanguageUnderstandingV1Models.SyntaxOptions syntax = new IBMNaturalLanguageUnderstandingV1Models.SyntaxOptionsBuilder().build();
@@ -116,6 +144,7 @@ private class IBMNaturalLanguageUnderstandingV1Test {
     System.assertEquals(resp.getKeywords()[0].getText(), 'free trial');
     System.assertEquals(resp.getCategories()[0].getScore(), 0.89792);
     System.assertEquals(resp.getCategories()[0].getLabel(), 'Company');
+    System.assertEquals(resp.getCategories()[0].getExplanation().getRelevantText()[0].getText(), text);
     System.assertEquals(resp.getEmotion().getDocument().getEmotion().getAnger(), 0.099437);
     System.assertEquals(resp.getEmotion().getTargets()[0].getText(), 'test');
     System.assertEquals(resp.getEmotion().getTargets()[0].getEmotion().getAnger(), 0.099437);
