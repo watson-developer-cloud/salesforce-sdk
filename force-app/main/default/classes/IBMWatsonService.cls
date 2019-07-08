@@ -60,6 +60,13 @@ public abstract class IBMWatsonService {
         .build();
       setAuthenticator(iamOptions);
    }
+
+    if (serviceCredentials.getAccessToken() != null) {
+      IBMWatsonICP4DConfig config = new IBMWatsonICP4DConfig.Builder()
+        .userManagedAccessToken(serviceCredentials.getAccessToken())
+        .build();
+      setAuthenticator(config);
+    }
   }
 
   /**

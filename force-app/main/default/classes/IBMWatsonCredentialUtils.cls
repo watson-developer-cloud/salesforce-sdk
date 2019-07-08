@@ -6,6 +6,7 @@ public class IBMWatsonCredentialUtils {
   private static final String IAM_API_KEY = 'iam_apikey';
   private static final String API_KEY = 'apikey';
   private static final String IAM_URL = 'iam_url';
+  private static final String ACCESS_TOKEN = 'access_token';
   private static final String CREDENTIAL_FILE_NAME = 'ibm_credentials';
 
   /**
@@ -26,6 +27,7 @@ public class IBMWatsonCredentialUtils {
     private String url;
     private String iamApiKey;
     private String iamUrl;
+    private String accessToken;
 
     private ServiceCredentials() { }
 
@@ -47,6 +49,10 @@ public class IBMWatsonCredentialUtils {
 
     public String getIamUrl() {
       return this.iamUrl;
+    }
+
+    public String getAccessToken() {
+      return this.accessToken;
     }
 
     public boolean isEmpty() {
@@ -110,6 +116,8 @@ public class IBMWatsonCredentialUtils {
           serviceCredentials.iamApiKey = credentialValue;
         } else if (credentialType.contains(IAM_URL)) {
           serviceCredentials.iamUrl = credentialValue;
+        } else if (credentialType.contains(ACCESS_TOKEN)) {
+          serviceCredentials.accessToken = credentialValue;
         } else {
           System.debug(System.LoggingLevel.WARN, 'Unknown credential key found in credential file: ' + credentialType);
         }
