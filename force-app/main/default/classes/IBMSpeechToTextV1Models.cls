@@ -369,7 +369,10 @@ public class IBMSpeechToTextV1Models {
      * The name of the new audio resource for the custom acoustic model. Use a localized name that matches the language
      * of the custom model and reflects the contents of the resource.
      * * Include a maximum of 128 characters in the name.
-     * * Do not include spaces, slashes, or backslashes in the name.
+     * * Do not use characters that need to be URL-encoded. For example, do not use spaces, slashes, backslashes,
+     * colons, ampersands, double quotes, plus signs, equals signs, questions marks, and so on in the name. (The service
+     * does not prevent the use of these characters. But because they must be URL-encoded wherever used, their use is
+     * strongly discouraged.)
      * * Do not use the name of an audio resource that has already been added to the custom model.
      *
      * @return the audioName
@@ -621,10 +624,14 @@ public class IBMSpeechToTextV1Models {
      * The name of the new corpus for the custom language model. Use a localized name that matches the language of the
      * custom model and reflects the contents of the corpus.
      * * Include a maximum of 128 characters in the name.
-     * * Do not include spaces, slashes, or backslashes in the name.
+     * * Do not use characters that need to be URL-encoded. For example, do not use spaces, slashes, backslashes,
+     * colons, ampersands, double quotes, plus signs, equals signs, questions marks, and so on in the name. (The service
+     * does not prevent the use of these characters. But because they must be URL-encoded wherever used, their use is
+     * strongly discouraged.)
      * * Do not use the name of an existing corpus or grammar that is already defined for the custom model.
      * * Do not use the name `user`, which is reserved by the service to denote custom words that are added or modified
      * by the user.
+     * * Do not use the name `base_lm` or `default_lm`. Both names are reserved for future use by the service.
      *
      * @return the corpusName
      */
@@ -815,10 +822,14 @@ public class IBMSpeechToTextV1Models {
      * The name of the new grammar for the custom language model. Use a localized name that matches the language of the
      * custom model and reflects the contents of the grammar.
      * * Include a maximum of 128 characters in the name.
-     * * Do not include spaces, slashes, or backslashes in the name.
+     * * Do not use characters that need to be URL-encoded. For example, do not use spaces, slashes, backslashes,
+     * colons, ampersands, double quotes, plus signs, equals signs, questions marks, and so on in the name. (The service
+     * does not prevent the use of these characters. But because they must be URL-encoded wherever used, their use is
+     * strongly discouraged.)
      * * Do not use the name of an existing grammar or corpus that is already defined for the custom model.
      * * Do not use the name `user`, which is reserved by the service to denote custom words that are added or modified
      * by the user.
+     * * Do not use the name `base_lm` or `default_lm`. Both names are reserved for future use by the service.
      *
      * @return the grammarName
      */
@@ -6787,7 +6798,7 @@ public class IBMSpeechToTextV1Models {
      * optional `+` or `-` to an argument to indicate whether the results are to be sorted in ascending or descending
      * order. By default, words are sorted in ascending alphabetical order. For alphabetical ordering, the
      * lexicographical precedence is numeric values, uppercase letters, and lowercase letters. For count ordering,
-     * values with the same count are ordered alphabetically. With the `curl` command, URL encode the `+` symbol as
+     * values with the same count are ordered alphabetically. With the `curl` command, URL-encode the `+` symbol as
      * `%2B`.
      *
      * @return the xsort
@@ -7006,7 +7017,8 @@ public class IBMSpeechToTextV1Models {
   }
 
   /**
-   * If processing metrics are requested, information about the service's processing of the input audio.
+   * If processing metrics are requested, information about the service's processing of the input audio. Processing
+   * metrics are not available with the synchronous **Recognize audio** method.
    */
   public class ProcessingMetrics extends IBMWatsonGenericModel {
     private ProcessedAudio processed_audio_serialized_name;
@@ -8787,8 +8799,8 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionAlternative extends IBMWatsonGenericModel {
     private String transcript_serialized_name;
     private Double confidence_serialized_name;
-    private List<List<String>> timestamps_serialized_name;
-    private List<List<String>> word_confidence_serialized_name;
+    private List<String> timestamps_serialized_name;
+    private List<String> word_confidence_serialized_name;
  
     /**
      * Gets the transcript.
@@ -8825,7 +8837,7 @@ public class IBMSpeechToTextV1Models {
      * @return the timestamps
      */
     @AuraEnabled
-    public List<List<String>> getTimestamps() {
+    public List<String> getTimestamps() {
       return timestamps_serialized_name;
     }
  
@@ -8839,7 +8851,7 @@ public class IBMSpeechToTextV1Models {
      * @return the wordConfidence
      */
     @AuraEnabled
-    public List<List<String>> getWordConfidence() {
+    public List<String> getWordConfidence() {
       return word_confidence_serialized_name;
     }
 
@@ -8866,7 +8878,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param timestamps the new timestamps
      */
-    public void setTimestamps(final List<List<String>> timestamps) {
+    public void setTimestamps(final List<String> timestamps) {
       this.timestamps_serialized_name = timestamps;
     }
 
@@ -8875,7 +8887,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param wordConfidence the new wordConfidence
      */
-    public void setWordConfidence(final List<List<String>> wordConfidence) {
+    public void setWordConfidence(final List<String> wordConfidence) {
       this.word_confidence_serialized_name = wordConfidence;
     }
 
@@ -8887,7 +8899,7 @@ public class IBMSpeechToTextV1Models {
   public class SpeechRecognitionResult extends IBMWatsonGenericModel {
     private Boolean final_serialized_name;
     private List<SpeechRecognitionAlternative> alternatives_serialized_name;
-    private Map<String, List<KeywordResult>> keywords_result_serialized_name;
+    private IBMWatsonMapModel keywords_result_serialized_name;
     private List<WordAlternativeResults> word_alternatives_serialized_name;
  
     /**
@@ -8927,7 +8939,7 @@ public class IBMSpeechToTextV1Models {
      * @return the keywordsResult
      */
     @AuraEnabled
-    public Map<String, List<KeywordResult>> getKeywordsResult() {
+    public IBMWatsonMapModel getKeywordsResult() {
       return keywords_result_serialized_name;
     }
  
@@ -8967,7 +8979,7 @@ public class IBMSpeechToTextV1Models {
      *
      * @param keywordsResult the new keywordsResult
      */
-    public void setKeywordsResult(final Map<String, List<KeywordResult>> keywordsResult) {
+    public void setKeywordsResult(final IBMWatsonMapModel keywordsResult) {
       this.keywords_result_serialized_name = keywordsResult;
     }
 
@@ -9001,23 +9013,8 @@ public class IBMSpeechToTextV1Models {
       }
 
       // calling custom deserializer for keywordsResult
-      Map<String, List<KeywordResult>> newKeywordsResult = new Map<String, List<KeywordResult>>();
-      Map<String, List<KeywordResult>> deserializedKeywordsResult = ret.getKeywordsResult();
-      if (deserializedKeywordsResult != null) {
-        for (String key : deserializedKeywordsResult.keySet()) {
-          List<KeywordResult> newKeywordResult = new List<KeywordResult>();
-          List<KeywordResult> keywordResultList = deserializedKeywordsResult.get(key);
-          for (Integer i = 0; i < keywordResultList.size(); i++) {
-            KeywordResult currentItem = keywordResultList.get(i);
-            Map<String, Object> itemInMap = (Map<String, Object>) jsonMap.get('keywords_result_serialized_name');
-            Object innerObject = ((List<Object>) itemInMap.get(key)).get(i);
-            KeywordResult newItem = (KeywordResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(innerObject)), KeywordResult.class);
-            newKeywordResult.add(newItem);
-          }
-          newKeywordsResult.put(key, newKeywordResult);
-        }
-        ret.setKeywordsResult(newKeywordsResult);
-      }
+      IBMWatsonMapModel newKeywordsResult = (IBMWatsonMapModel) new IBMWatsonMapModel().deserialize(JSON.serialize(ret.getKeywordsResult()), (Map<String, Object>) jsonMap.get('keywords_result_serialized_name'), IBMWatsonMapModel.class);
+      ret.setKeywordsResult(newKeywordsResult);
 
       // calling custom deserializer for wordAlternatives
       List<WordAlternativeResults> newWordAlternatives = new List<WordAlternativeResults>();
@@ -9094,7 +9091,8 @@ public class IBMSpeechToTextV1Models {
     /**
      * Gets the processingMetrics.
      *
-     * If processing metrics are requested, information about the service's processing of the input audio.
+     * If processing metrics are requested, information about the service's processing of the input audio. Processing
+     * metrics are not available with the synchronous **Recognize audio** method.
      *
      * @return the processingMetrics
      */
