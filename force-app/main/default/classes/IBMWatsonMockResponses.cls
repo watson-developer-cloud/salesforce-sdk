@@ -3317,6 +3317,22 @@ public class IBMWatsonMockResponses {
               '"text": "text"' +
             '}' +
           '}' +
+          '],' +
+          '"title": {' +
+            '"text": "text",' +
+            '"location": {' +
+              '"begin": 0,' +
+              '"end": 1' +
+            '}' +
+          '},' +
+          '"contexts": [' +
+            '{' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '}' +
+            '}' +
           ']' +
         '}' +
       '],' +
@@ -3351,6 +3367,14 @@ public class IBMWatsonMockResponses {
               '}' +
             ']' +
           '}' +
+        '],' +
+        '"paragraphs": [' +
+          '{' +
+            '"location": {' +
+              '"begin": 0,' +
+              '"end": 1' +
+            '}' +
+          '}' +
         ']' +
       '},' +
       '"parties": [' +
@@ -3372,6 +3396,15 @@ public class IBMWatsonMockResponses {
               '"name": "name",' +
               '"role": "role"' +
             '}' +
+          '],' +
+          '"mentions": [' +
+            '{' +
+              '"text": "text",' +
+              '"location": {' +
+                '"begin": 0,' +
+                '"end": 1' +
+              '}' +
+            '}' +
           ']' +
         '}' +
       '],' +
@@ -3382,7 +3415,11 @@ public class IBMWatsonMockResponses {
             '"begin": 0,' +
             '"end": 1' +
           '},' +
-          '"confidence_level": "High"' +
+          '"confidence_level": "High",' +
+          '"text_normalized": "text_normalized",' +
+          '"provenance_ids": [' +
+            '"provenance_id"' +
+          ']' +
         '}' +
       '],' +
       '"contract_amounts": [' +
@@ -3392,7 +3429,16 @@ public class IBMWatsonMockResponses {
             '"begin": 0,' +
             '"end": 1' +
           '},' +
-          '"confidence_level": "High"' +
+          '"confidence_level": "High",' +
+          '"text_normalized": "text_normalized",' +
+          '"interpretation": {' +
+            '"value": "value",' +
+            '"numeric_value": 21,' +
+            '"unit": "unit"' +
+          '},' +
+          '"provenance_ids": [' +
+            '"provenance_id"' +
+          ']' +
         '}' +
       '],' +
       '"termination_dates": [' +
@@ -3402,7 +3448,11 @@ public class IBMWatsonMockResponses {
             '"begin": 0,' +
             '"end": 1' +
           '},' +
-          '"confidence_level": "High"' +
+          '"confidence_level": "High",' +
+          '"text_normalized": "text_normalized",' +
+          '"provenance_ids": [' +
+            '"provenance_id"' +
+          ']' +
         '}' +
       '],' +
       '"contract_types": [' +
@@ -3414,6 +3464,44 @@ public class IBMWatsonMockResponses {
         '},' +
         '"confidence_level": "High"' +
       '}' +
+      '],' +
+      '"contract_terms": [' +
+        '{' +
+          '"confidence_level": "High",' +
+          '"text": "text",' +
+          '"text_normalized": "text_normalized",' +
+          '"interpretation": {' +
+            '"value": "value",' +
+            '"numeric_value": 21,' +
+            '"unit": "unit"' +
+          '},' +
+          '"provenance_ids": [' +
+            '"provenance_id"' +
+          '],' +
+          '"location": {' +
+            '"begin": 0,' +
+            '"end": 1' +
+          '}' +
+        '}' +
+      '],' +
+      '"payment_terms": [' +
+        '{' +
+          '"confidence_level": "High",' +
+          '"text": "text",' +
+          '"text_normalized": "text_normalized",' +
+          '"interpretation": {' +
+            '"value": "value",' +
+            '"numeric_value": 21,' +
+            '"unit": "unit"' +
+          '},' +
+          '"provenance_ids": [' +
+            '"provenance_id"' +
+          '],' +
+          '"location": {' +
+            '"begin": 0,' +
+            '"end": 1' +
+          '}' +
+        '}' +
       ']' +
     '}';
   }
