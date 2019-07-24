@@ -1350,13 +1350,15 @@ public class IBMCompareComplyV1Models {
     private String model_id_serialized_name;
     private String model_version_serialized_name;
     private List<Element> elements_serialized_name;
-    private List<Tables> tables_serialized_name;
-    private DocStructure document_structure_serialized_name;
-    private List<Parties> parties_serialized_name;
     private List<EffectiveDates> effective_dates_serialized_name;
     private List<ContractAmts> contract_amounts_serialized_name;
     private List<TerminationDates> termination_dates_serialized_name;
-    private List<ContractType> contract_type_serialized_name;
+    private List<ContractTypes> contract_types_serialized_name;
+    private List<ContractTerms> contract_terms_serialized_name;
+    private List<PaymentTerms> payment_terms_serialized_name;
+    private List<Tables> tables_serialized_name;
+    private DocStructure document_structure_serialized_name;
+    private List<Parties> parties_serialized_name;
  
     /**
      * Gets the document.
@@ -1408,42 +1410,6 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
-     * Gets the tables.
-     *
-     * Definition of tables identified in the input document.
-     *
-     * @return the tables
-     */
-    @AuraEnabled
-    public List<Tables> getTables() {
-      return tables_serialized_name;
-    }
- 
-    /**
-     * Gets the documentStructure.
-     *
-     * The structure of the input document.
-     *
-     * @return the documentStructure
-     */
-    @AuraEnabled
-    public DocStructure getDocumentStructure() {
-      return document_structure_serialized_name;
-    }
- 
-    /**
-     * Gets the parties.
-     *
-     * Definitions of the parties identified in the input document.
-     *
-     * @return the parties
-     */
-    @AuraEnabled
-    public List<Parties> getParties() {
-      return parties_serialized_name;
-    }
- 
-    /**
      * Gets the effectiveDates.
      *
      * The date or dates on which the document becomes effective.
@@ -1481,15 +1447,75 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
-     * Gets the contractType.
+     * Gets the contractTypes.
      *
      * The document's contract type or types as declared in the document.
      *
-     * @return the contractType
+     * @return the contractTypes
      */
     @AuraEnabled
-    public List<ContractType> getContractType() {
-      return contract_type_serialized_name;
+    public List<ContractTypes> getContractTypes() {
+      return contract_types_serialized_name;
+    }
+ 
+    /**
+     * Gets the contractTerms.
+     *
+     * The duration or durations of the contract.
+     *
+     * @return the contractTerms
+     */
+    @AuraEnabled
+    public List<ContractTerms> getContractTerms() {
+      return contract_terms_serialized_name;
+    }
+ 
+    /**
+     * Gets the paymentTerms.
+     *
+     * The document's payment duration or durations.
+     *
+     * @return the paymentTerms
+     */
+    @AuraEnabled
+    public List<PaymentTerms> getPaymentTerms() {
+      return payment_terms_serialized_name;
+    }
+ 
+    /**
+     * Gets the tables.
+     *
+     * Definition of tables identified in the input document.
+     *
+     * @return the tables
+     */
+    @AuraEnabled
+    public List<Tables> getTables() {
+      return tables_serialized_name;
+    }
+ 
+    /**
+     * Gets the documentStructure.
+     *
+     * The structure of the input document.
+     *
+     * @return the documentStructure
+     */
+    @AuraEnabled
+    public DocStructure getDocumentStructure() {
+      return document_structure_serialized_name;
+    }
+ 
+    /**
+     * Gets the parties.
+     *
+     * Definitions of the parties identified in the input document.
+     *
+     * @return the parties
+     */
+    @AuraEnabled
+    public List<Parties> getParties() {
+      return parties_serialized_name;
     }
 
     /**
@@ -1529,33 +1555,6 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Sets the tables.
-     *
-     * @param tables the new tables
-     */
-    public void setTables(final List<Tables> tables) {
-      this.tables_serialized_name = tables;
-    }
-
-    /**
-     * Sets the documentStructure.
-     *
-     * @param documentStructure the new documentStructure
-     */
-    public void setDocumentStructure(final DocStructure documentStructure) {
-      this.document_structure_serialized_name = documentStructure;
-    }
-
-    /**
-     * Sets the parties.
-     *
-     * @param parties the new parties
-     */
-    public void setParties(final List<Parties> parties) {
-      this.parties_serialized_name = parties;
-    }
-
-    /**
      * Sets the effectiveDates.
      *
      * @param effectiveDates the new effectiveDates
@@ -1583,12 +1582,57 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Sets the contractType.
+     * Sets the contractTypes.
      *
-     * @param contractType the new contractType
+     * @param contractTypes the new contractTypes
      */
-    public void setContractType(final List<ContractType> contractType) {
-      this.contract_type_serialized_name = contractType;
+    public void setContractTypes(final List<ContractTypes> contractTypes) {
+      this.contract_types_serialized_name = contractTypes;
+    }
+
+    /**
+     * Sets the contractTerms.
+     *
+     * @param contractTerms the new contractTerms
+     */
+    public void setContractTerms(final List<ContractTerms> contractTerms) {
+      this.contract_terms_serialized_name = contractTerms;
+    }
+
+    /**
+     * Sets the paymentTerms.
+     *
+     * @param paymentTerms the new paymentTerms
+     */
+    public void setPaymentTerms(final List<PaymentTerms> paymentTerms) {
+      this.payment_terms_serialized_name = paymentTerms;
+    }
+
+    /**
+     * Sets the tables.
+     *
+     * @param tables the new tables
+     */
+    public void setTables(final List<Tables> tables) {
+      this.tables_serialized_name = tables;
+    }
+
+    /**
+     * Sets the documentStructure.
+     *
+     * @param documentStructure the new documentStructure
+     */
+    public void setDocumentStructure(final DocStructure documentStructure) {
+      this.document_structure_serialized_name = documentStructure;
+    }
+
+    /**
+     * Sets the parties.
+     *
+     * @param parties the new parties
+     */
+    public void setParties(final List<Parties> parties) {
+      this.parties_serialized_name = parties;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -1613,36 +1657,6 @@ public class IBMCompareComplyV1Models {
           newElements.add(newItem);
         }
         ret.elements_serialized_name = newElements;
-      }
-
-      // calling custom deserializer for tables
-      List<Tables> newTables = new List<Tables>();
-      List<Tables> deserializedTables = ret.getTables();
-      if (deserializedTables != null) {
-        for (Integer i = 0; i < deserializedTables.size(); i++) {
-          Tables currentItem = ret.getTables().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('tables_serialized_name');
-          Tables newItem = (Tables) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Tables.class);
-          newTables.add(newItem);
-        }
-        ret.tables_serialized_name = newTables;
-      }
-
-      // calling custom deserializer for documentStructure
-      DocStructure newDocumentStructure = (DocStructure) new DocStructure().deserialize(JSON.serialize(ret.getDocumentStructure()), (Map<String, Object>) jsonMap.get('document_structure_serialized_name'), DocStructure.class);
-      ret.setDocumentStructure(newDocumentStructure);
-
-      // calling custom deserializer for parties
-      List<Parties> newParties = new List<Parties>();
-      List<Parties> deserializedParties = ret.getParties();
-      if (deserializedParties != null) {
-        for (Integer i = 0; i < deserializedParties.size(); i++) {
-          Parties currentItem = ret.getParties().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('parties_serialized_name');
-          Parties newItem = (Parties) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Parties.class);
-          newParties.add(newItem);
-        }
-        ret.parties_serialized_name = newParties;
       }
 
       // calling custom deserializer for effectiveDates
@@ -1684,17 +1698,73 @@ public class IBMCompareComplyV1Models {
         ret.termination_dates_serialized_name = newTerminationDates;
       }
 
-      // calling custom deserializer for contractType
-      List<ContractType> newContractType = new List<ContractType>();
-      List<ContractType> deserializedContractType = ret.getContractType();
-      if (deserializedContractType != null) {
-        for (Integer i = 0; i < deserializedContractType.size(); i++) {
-          ContractType currentItem = ret.getContractType().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('contract_type_serialized_name');
-          ContractType newItem = (ContractType) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractType.class);
-          newContractType.add(newItem);
+      // calling custom deserializer for contractTypes
+      List<ContractTypes> newContractTypes = new List<ContractTypes>();
+      List<ContractTypes> deserializedContractTypes = ret.getContractTypes();
+      if (deserializedContractTypes != null) {
+        for (Integer i = 0; i < deserializedContractTypes.size(); i++) {
+          ContractTypes currentItem = ret.getContractTypes().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('contract_types_serialized_name');
+          ContractTypes newItem = (ContractTypes) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractTypes.class);
+          newContractTypes.add(newItem);
         }
-        ret.contract_type_serialized_name = newContractType;
+        ret.contract_types_serialized_name = newContractTypes;
+      }
+
+      // calling custom deserializer for contractTerms
+      List<ContractTerms> newContractTerms = new List<ContractTerms>();
+      List<ContractTerms> deserializedContractTerms = ret.getContractTerms();
+      if (deserializedContractTerms != null) {
+        for (Integer i = 0; i < deserializedContractTerms.size(); i++) {
+          ContractTerms currentItem = ret.getContractTerms().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('contract_terms_serialized_name');
+          ContractTerms newItem = (ContractTerms) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), ContractTerms.class);
+          newContractTerms.add(newItem);
+        }
+        ret.contract_terms_serialized_name = newContractTerms;
+      }
+
+      // calling custom deserializer for paymentTerms
+      List<PaymentTerms> newPaymentTerms = new List<PaymentTerms>();
+      List<PaymentTerms> deserializedPaymentTerms = ret.getPaymentTerms();
+      if (deserializedPaymentTerms != null) {
+        for (Integer i = 0; i < deserializedPaymentTerms.size(); i++) {
+          PaymentTerms currentItem = ret.getPaymentTerms().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('payment_terms_serialized_name');
+          PaymentTerms newItem = (PaymentTerms) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), PaymentTerms.class);
+          newPaymentTerms.add(newItem);
+        }
+        ret.payment_terms_serialized_name = newPaymentTerms;
+      }
+
+      // calling custom deserializer for tables
+      List<Tables> newTables = new List<Tables>();
+      List<Tables> deserializedTables = ret.getTables();
+      if (deserializedTables != null) {
+        for (Integer i = 0; i < deserializedTables.size(); i++) {
+          Tables currentItem = ret.getTables().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('tables_serialized_name');
+          Tables newItem = (Tables) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Tables.class);
+          newTables.add(newItem);
+        }
+        ret.tables_serialized_name = newTables;
+      }
+
+      // calling custom deserializer for documentStructure
+      DocStructure newDocumentStructure = (DocStructure) new DocStructure().deserialize(JSON.serialize(ret.getDocumentStructure()), (Map<String, Object>) jsonMap.get('document_structure_serialized_name'), DocStructure.class);
+      ret.setDocumentStructure(newDocumentStructure);
+
+      // calling custom deserializer for parties
+      List<Parties> newParties = new List<Parties>();
+      List<Parties> deserializedParties = ret.getParties();
+      if (deserializedParties != null) {
+        for (Integer i = 0; i < deserializedParties.size(); i++) {
+          Parties currentItem = ret.getParties().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('parties_serialized_name');
+          Parties newItem = (Parties) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Parties.class);
+          newParties.add(newItem);
+        }
+        ret.parties_serialized_name = newParties;
       }
 
       return ret;
