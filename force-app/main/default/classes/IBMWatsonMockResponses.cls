@@ -2215,7 +2215,8 @@ public class IBMWatsonMockResponses {
       ' "language": "en-US", ' +
       ' "status": "available", ' +
       ' "dialect": "customization", ' +
-      ' "warnings": "customization"' +
+      ' "warnings": "customization",' +
+      ' "updated": "2019-10-11T19:16:58.547Z"' +
       ' }';
   }
   
@@ -2343,7 +2344,8 @@ public class IBMWatsonMockResponses {
       ' "progress": 0, ' +
       ' "language": "en-US", ' +
       ' "status": "ready", ' +
-      ' "warnings": "customization"' +
+      ' "warnings": "customization",' +
+      ' "updated": "2019-10-11T19:16:58.547Z"' +
       '}';
   }
 
