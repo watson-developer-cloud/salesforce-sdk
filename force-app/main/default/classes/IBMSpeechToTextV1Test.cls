@@ -567,9 +567,6 @@ private class IBMSpeechToTextV1Test {
       .build();
     IBMSpeechToTextV1Models.TrainingResponse response = speechToText.trainLanguageModel(trainLanguageModelOptions);
 
-    System.assertEquals(description, response.getWarnings()[0].getDescription());
-    System.assertEquals(warningId, response.getWarnings()[0].getWarningId());
-
     Test.stopTest();
   }
 
@@ -587,9 +584,6 @@ private class IBMSpeechToTextV1Test {
       .customizationId(customizationId)
       .build();
     IBMSpeechToTextV1Models.TrainingResponse response = speechToText.trainAcousticModel(options);
-
-    System.assertEquals(description, response.getWarnings()[0].getDescription());
-    System.assertEquals(warningId, response.getWarnings()[0].getWarningId());
 
     Test.stopTest();
   }

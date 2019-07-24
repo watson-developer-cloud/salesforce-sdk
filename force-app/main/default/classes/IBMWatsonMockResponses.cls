@@ -3405,7 +3405,7 @@ public class IBMWatsonMockResponses {
           '"confidence_level": "High"' +
         '}' +
       '],' +
-      '"contract_type": [' +
+      '"contract_types": [' +
       '{' +
         '"text": "text",' +
         '"location": {' +

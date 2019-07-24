@@ -678,10 +678,10 @@ private class IBMCompareComplyV1Test {
     System.assertEquals(TEST_BEGIN, response.getTerminationDates().get(0).getLocation().getXbegin());
     System.assertEquals(TEST_END, response.getTerminationDates().get(0).getLocation().getXend());
     System.assertEquals(HIGH, response.getTerminationDates().get(0).getConfidenceLevel());
-    System.assertEquals(TEXT, response.getContractType().get(0).getText());
-    System.assertEquals(TEST_BEGIN, response.getContractType().get(0).getLocation().getXbegin());
-    System.assertEquals(TEST_END, response.getContractType().get(0).getLocation().getXend());
-    System.assertEquals(HIGH, response.getContractType().get(0).getConfidenceLevel());
+    System.assertEquals(TEXT, response.getContractTypes().get(0).getText());
+    System.assertEquals(TEST_BEGIN, response.getContractTypes().get(0).getLocation().getXbegin());
+    System.assertEquals(TEST_END, response.getContractTypes().get(0).getLocation().getXend());
+    System.assertEquals(HIGH, response.getContractTypes().get(0).getConfidenceLevel());
     Test.stopTest();
   }
 
