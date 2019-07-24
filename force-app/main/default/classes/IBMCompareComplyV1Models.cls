@@ -2529,35 +2529,22 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
-   * A monetary amount identified in the input document.
+   * Text that is related to the contents of the table and that precedes or follows the current table.
    */
-  public class ContractAmts extends IBMWatsonGenericModel {
+  public class Contexts extends IBMWatsonGenericModel {
     private String text_serialized_name;
-    private String confidence_level_serialized_name;
     private Location location_serialized_name;
  
     /**
      * Gets the text.
      *
-     * The monetary amount.
+     * The related text.
      *
      * @return the text
      */
     @AuraEnabled
     public String getText() {
       return text_serialized_name;
-    }
- 
-    /**
-     * Gets the confidenceLevel.
-     *
-     * The confidence level in the identification of the contract amount.
-     *
-     * @return the confidenceLevel
-     */
-    @AuraEnabled
-    public String getConfidenceLevel() {
-      return confidence_level_serialized_name;
     }
  
     /**
@@ -2583,12 +2570,158 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
+     * Sets the location.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final Location location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Contexts ret = (Contexts) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for location
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      ret.setLocation(newLocation);
+
+      return ret;
+    }
+  }
+
+  /**
+   * A monetary amount identified in the input document.
+   */
+  public class ContractAmts extends IBMWatsonGenericModel {
+    private String confidence_level_serialized_name;
+    private String text_serialized_name;
+    private String text_normalized_serialized_name;
+    private Interpretation interpretation_serialized_name;
+    private List<String> provenance_ids_serialized_name;
+    private Location location_serialized_name;
+ 
+    /**
+     * Gets the confidenceLevel.
+     *
+     * The confidence level in the identification of the contract amount.
+     *
+     * @return the confidenceLevel
+     */
+    @AuraEnabled
+    public String getConfidenceLevel() {
+      return confidence_level_serialized_name;
+    }
+ 
+    /**
+     * Gets the text.
+     *
+     * The monetary amount.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the textNormalized.
+     *
+     * The normalized form of the amount, which is listed as a string. This element is optional; that is, the service
+     * output lists it only if normalized text exists.
+     *
+     * @return the textNormalized
+     */
+    @AuraEnabled
+    public String getTextNormalized() {
+      return text_normalized_serialized_name;
+    }
+ 
+    /**
+     * Gets the interpretation.
+     *
+     * The details of the normalized text, if applicable. This element is optional; that is, the service output lists it
+     * only if normalized text exists.
+     *
+     * @return the interpretation
+     */
+    @AuraEnabled
+    public Interpretation getInterpretation() {
+      return interpretation_serialized_name;
+    }
+ 
+    /**
+     * Gets the provenanceIds.
+     *
+     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     *
+     * @return the provenanceIds
+     */
+    @AuraEnabled
+    public List<String> getProvenanceIds() {
+      return provenance_ids_serialized_name;
+    }
+ 
+    /**
+     * Gets the location.
+     *
+     * The numeric location of the identified element in the document, represented with two integers labeled `begin` and
+     * `end`.
+     *
+     * @return the location
+     */
+    @AuraEnabled
+    public Location getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
      * Sets the confidenceLevel.
      *
      * @param confidenceLevel the new confidenceLevel
      */
     public void setConfidenceLevel(final String confidenceLevel) {
       this.confidence_level_serialized_name = confidenceLevel;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the textNormalized.
+     *
+     * @param textNormalized the new textNormalized
+     */
+    public void setTextNormalized(final String textNormalized) {
+      this.text_normalized_serialized_name = textNormalized;
+    }
+
+    /**
+     * Sets the interpretation.
+     *
+     * @param interpretation the new interpretation
+     */
+    public void setInterpretation(final Interpretation interpretation) {
+      this.interpretation_serialized_name = interpretation;
+    }
+
+    /**
+     * Sets the provenanceIds.
+     *
+     * @param provenanceIds the new provenanceIds
+     */
+    public void setProvenanceIds(final List<String> provenanceIds) {
+      this.provenance_ids_serialized_name = provenanceIds;
     }
 
     /**
@@ -2607,6 +2740,10 @@ public class IBMCompareComplyV1Models {
 
       ContractAmts ret = (ContractAmts) super.deserialize(jsonString, jsonMap, classType);
 
+      // calling custom deserializer for interpretation
+      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(ret.getInterpretation()), (Map<String, Object>) jsonMap.get('interpretation_serialized_name'), Interpretation.class);
+      ret.setInterpretation(newInterpretation);
+
       // calling custom deserializer for location
       Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
       ret.setLocation(newLocation);
@@ -2616,17 +2753,32 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
-   * The contract type identified in the input document.
+   * The duration or durations of the contract.
    */
-  public class ContractType extends IBMWatsonGenericModel {
-    private String text_serialized_name;
+  public class ContractTerms extends IBMWatsonGenericModel {
     private String confidence_level_serialized_name;
+    private String text_serialized_name;
+    private String text_normalized_serialized_name;
+    private Interpretation interpretation_serialized_name;
+    private List<String> provenance_ids_serialized_name;
     private Location location_serialized_name;
+ 
+    /**
+     * Gets the confidenceLevel.
+     *
+     * The confidence level in the identification of the contract term.
+     *
+     * @return the confidenceLevel
+     */
+    @AuraEnabled
+    public String getConfidenceLevel() {
+      return confidence_level_serialized_name;
+    }
  
     /**
      * Gets the text.
      *
-     * The contract type.
+     * The contract term (duration).
      *
      * @return the text
      */
@@ -2636,15 +2788,41 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
-     * Gets the confidenceLevel.
+     * Gets the textNormalized.
      *
-     * The confidence level in the identification of the termination date.
+     * The normalized form of the contract term, which is listed as a string. This element is optional; that is, the
+     * service output lists it only if normalized text exists.
      *
-     * @return the confidenceLevel
+     * @return the textNormalized
      */
     @AuraEnabled
-    public String getConfidenceLevel() {
-      return confidence_level_serialized_name;
+    public String getTextNormalized() {
+      return text_normalized_serialized_name;
+    }
+ 
+    /**
+     * Gets the interpretation.
+     *
+     * The details of the normalized text, if applicable. This element is optional; that is, the service output lists it
+     * only if normalized text exists.
+     *
+     * @return the interpretation
+     */
+    @AuraEnabled
+    public Interpretation getInterpretation() {
+      return interpretation_serialized_name;
+    }
+ 
+    /**
+     * Gets the provenanceIds.
+     *
+     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     *
+     * @return the provenanceIds
+     */
+    @AuraEnabled
+    public List<String> getProvenanceIds() {
+      return provenance_ids_serialized_name;
     }
  
     /**
@@ -2661,6 +2839,15 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
+     * Sets the confidenceLevel.
+     *
+     * @param confidenceLevel the new confidenceLevel
+     */
+    public void setConfidenceLevel(final String confidenceLevel) {
+      this.confidence_level_serialized_name = confidenceLevel;
+    }
+
+    /**
      * Sets the text.
      *
      * @param text the new text
@@ -2670,12 +2857,30 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Sets the confidenceLevel.
+     * Sets the textNormalized.
      *
-     * @param confidenceLevel the new confidenceLevel
+     * @param textNormalized the new textNormalized
      */
-    public void setConfidenceLevel(final String confidenceLevel) {
-      this.confidence_level_serialized_name = confidenceLevel;
+    public void setTextNormalized(final String textNormalized) {
+      this.text_normalized_serialized_name = textNormalized;
+    }
+
+    /**
+     * Sets the interpretation.
+     *
+     * @param interpretation the new interpretation
+     */
+    public void setInterpretation(final Interpretation interpretation) {
+      this.interpretation_serialized_name = interpretation;
+    }
+
+    /**
+     * Sets the provenanceIds.
+     *
+     * @param provenanceIds the new provenanceIds
+     */
+    public void setProvenanceIds(final List<String> provenanceIds) {
+      this.provenance_ids_serialized_name = provenanceIds;
     }
 
     /**
@@ -2692,7 +2897,120 @@ public class IBMCompareComplyV1Models {
         return null;
       }
 
-      ContractType ret = (ContractType) super.deserialize(jsonString, jsonMap, classType);
+      ContractTerms ret = (ContractTerms) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for interpretation
+      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(ret.getInterpretation()), (Map<String, Object>) jsonMap.get('interpretation_serialized_name'), Interpretation.class);
+      ret.setInterpretation(newInterpretation);
+
+      // calling custom deserializer for location
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      ret.setLocation(newLocation);
+
+      return ret;
+    }
+  }
+
+  /**
+   * The contract type identified in the input document.
+   */
+  public class ContractTypes extends IBMWatsonGenericModel {
+    private String confidence_level_serialized_name;
+    private String text_serialized_name;
+    private List<String> provenance_ids_serialized_name;
+    private Location location_serialized_name;
+ 
+    /**
+     * Gets the confidenceLevel.
+     *
+     * The confidence level in the identification of the contract type.
+     *
+     * @return the confidenceLevel
+     */
+    @AuraEnabled
+    public String getConfidenceLevel() {
+      return confidence_level_serialized_name;
+    }
+ 
+    /**
+     * Gets the text.
+     *
+     * The contract type.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the provenanceIds.
+     *
+     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     *
+     * @return the provenanceIds
+     */
+    @AuraEnabled
+    public List<String> getProvenanceIds() {
+      return provenance_ids_serialized_name;
+    }
+ 
+    /**
+     * Gets the location.
+     *
+     * The numeric location of the identified element in the document, represented with two integers labeled `begin` and
+     * `end`.
+     *
+     * @return the location
+     */
+    @AuraEnabled
+    public Location getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
+     * Sets the confidenceLevel.
+     *
+     * @param confidenceLevel the new confidenceLevel
+     */
+    public void setConfidenceLevel(final String confidenceLevel) {
+      this.confidence_level_serialized_name = confidenceLevel;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the provenanceIds.
+     *
+     * @param provenanceIds the new provenanceIds
+     */
+    public void setProvenanceIds(final List<String> provenanceIds) {
+      this.provenance_ids_serialized_name = provenanceIds;
+    }
+
+    /**
+     * Sets the location.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final Location location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      ContractTypes ret = (ContractTypes) super.deserialize(jsonString, jsonMap, classType);
 
       // calling custom deserializer for location
       Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
@@ -3472,6 +3790,7 @@ public class IBMCompareComplyV1Models {
   public class DocStructure extends IBMWatsonGenericModel {
     private List<SectionTitles> section_titles_serialized_name;
     private List<LeadingSentence> leading_sentences_serialized_name;
+    private List<Paragraphs> paragraphs_serialized_name;
  
     /**
      * Gets the sectionTitles.
@@ -3497,6 +3816,19 @@ public class IBMCompareComplyV1Models {
     public List<LeadingSentence> getLeadingSentences() {
       return leading_sentences_serialized_name;
     }
+ 
+    /**
+     * Gets the paragraphs.
+     *
+     * An array containing one object per paragraph, in parallel with the `section_titles` and `leading_sentences`
+     * arrays.
+     *
+     * @return the paragraphs
+     */
+    @AuraEnabled
+    public List<Paragraphs> getParagraphs() {
+      return paragraphs_serialized_name;
+    }
 
     /**
      * Sets the sectionTitles.
@@ -3514,6 +3846,15 @@ public class IBMCompareComplyV1Models {
      */
     public void setLeadingSentences(final List<LeadingSentence> leadingSentences) {
       this.leading_sentences_serialized_name = leadingSentences;
+    }
+
+    /**
+     * Sets the paragraphs.
+     *
+     * @param paragraphs the new paragraphs
+     */
+    public void setParagraphs(final List<Paragraphs> paragraphs) {
+      this.paragraphs_serialized_name = paragraphs;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -3547,6 +3888,19 @@ public class IBMCompareComplyV1Models {
           newLeadingSentences.add(newItem);
         }
         ret.leading_sentences_serialized_name = newLeadingSentences;
+      }
+
+      // calling custom deserializer for paragraphs
+      List<Paragraphs> newParagraphs = new List<Paragraphs>();
+      List<Paragraphs> deserializedParagraphs = ret.getParagraphs();
+      if (deserializedParagraphs != null) {
+        for (Integer i = 0; i < deserializedParagraphs.size(); i++) {
+          Paragraphs currentItem = ret.getParagraphs().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('paragraphs_serialized_name');
+          Paragraphs newItem = (Paragraphs) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Paragraphs.class);
+          newParagraphs.add(newItem);
+        }
+        ret.paragraphs_serialized_name = newParagraphs;
       }
 
       return ret;
@@ -3653,9 +4007,23 @@ public class IBMCompareComplyV1Models {
    * An effective date.
    */
   public class EffectiveDates extends IBMWatsonGenericModel {
-    private String text_serialized_name;
     private String confidence_level_serialized_name;
+    private String text_serialized_name;
+    private String text_normalized_serialized_name;
+    private List<String> provenance_ids_serialized_name;
     private Location location_serialized_name;
+ 
+    /**
+     * Gets the confidenceLevel.
+     *
+     * The confidence level in the identification of the effective date.
+     *
+     * @return the confidenceLevel
+     */
+    @AuraEnabled
+    public String getConfidenceLevel() {
+      return confidence_level_serialized_name;
+    }
  
     /**
      * Gets the text.
@@ -3670,15 +4038,28 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
-     * Gets the confidenceLevel.
+     * Gets the textNormalized.
      *
-     * The confidence level in the identification of the effective date.
+     * The normalized form of the effective date, which is listed as a string. This element is optional; that is, the
+     * service output lists it only if normalized text exists.
      *
-     * @return the confidenceLevel
+     * @return the textNormalized
      */
     @AuraEnabled
-    public String getConfidenceLevel() {
-      return confidence_level_serialized_name;
+    public String getTextNormalized() {
+      return text_normalized_serialized_name;
+    }
+ 
+    /**
+     * Gets the provenanceIds.
+     *
+     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     *
+     * @return the provenanceIds
+     */
+    @AuraEnabled
+    public List<String> getProvenanceIds() {
+      return provenance_ids_serialized_name;
     }
  
     /**
@@ -3695,6 +4076,15 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
+     * Sets the confidenceLevel.
+     *
+     * @param confidenceLevel the new confidenceLevel
+     */
+    public void setConfidenceLevel(final String confidenceLevel) {
+      this.confidence_level_serialized_name = confidenceLevel;
+    }
+
+    /**
      * Sets the text.
      *
      * @param text the new text
@@ -3704,12 +4094,21 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Sets the confidenceLevel.
+     * Sets the textNormalized.
      *
-     * @param confidenceLevel the new confidenceLevel
+     * @param textNormalized the new textNormalized
      */
-    public void setConfidenceLevel(final String confidenceLevel) {
-      this.confidence_level_serialized_name = confidenceLevel;
+    public void setTextNormalized(final String textNormalized) {
+      this.text_normalized_serialized_name = textNormalized;
+    }
+
+    /**
+     * Sets the provenanceIds.
+     *
+     * @param provenanceIds the new provenanceIds
+     */
+    public void setProvenanceIds(final List<String> provenanceIds) {
+      this.provenance_ids_serialized_name = provenanceIds;
     }
 
     /**
@@ -5329,6 +5728,84 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
+   * The details of the normalized text, if applicable. This element is optional; that is, the service output lists it
+   * only if normalized text exists.
+   */
+  public class Interpretation extends IBMWatsonGenericModel {
+    private String value_serialized_name;
+    private Double numeric_value_serialized_name;
+    private String unit_serialized_name;
+ 
+    /**
+     * Gets the value.
+     *
+     * The value that was located in the normalized text.
+     *
+     * @return the value
+     */
+    @AuraEnabled
+    public String getValue() {
+      return value_serialized_name;
+    }
+ 
+    /**
+     * Gets the numericValue.
+     *
+     * An integer or float expressing the numeric value of the `value` key.
+     *
+     * @return the numericValue
+     */
+    @AuraEnabled
+    public Double getNumericValue() {
+      return numeric_value_serialized_name;
+    }
+ 
+    /**
+     * Gets the unit.
+     *
+     * A string listing the unit of the value that was found in the normalized text.
+     *
+     * **Note:** The value of `unit` is the [ISO-4217 currency code](https://www.iso.org/iso-4217-currency-codes.html)
+     * identified for the currency amount (for example, `USD` or `EUR`). If the service cannot disambiguate a currency
+     * symbol (for example, `$` or `£`), the value of `unit` contains the ambiguous symbol as-is.
+     *
+     * @return the unit
+     */
+    @AuraEnabled
+    public String getUnit() {
+      return unit_serialized_name;
+    }
+
+    /**
+     * Sets the value.
+     *
+     * @param value the new value
+     */
+    public void setValue(final String value) {
+      this.value_serialized_name = value;
+    }
+
+    /**
+     * Sets the numericValue.
+     *
+     * @param numericValue the new numericValue
+     */
+    public void setNumericValue(final Double numericValue) {
+      this.numeric_value_serialized_name = numericValue;
+    }
+
+    /**
+     * Sets the unit.
+     *
+     * @param unit the new unit
+     */
+    public void setUnit(final String unit) {
+      this.unit_serialized_name = unit;
+    }
+
+  }
+
+  /**
    * A key in a key-value pair.
    */
   public class Key extends IBMWatsonGenericModel {
@@ -6233,6 +6710,71 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
+   * A mention of a party.
+   */
+  public class Mention extends IBMWatsonGenericModel {
+    private String text_serialized_name;
+    private Location location_serialized_name;
+ 
+    /**
+     * Gets the text.
+     *
+     * The name of the party.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the location.
+     *
+     * The numeric location of the identified element in the document, represented with two integers labeled `begin` and
+     * `end`.
+     *
+     * @return the location
+     */
+    @AuraEnabled
+    public Location getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the location.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final Location location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Mention ret = (Mention) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for location
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      ret.setLocation(newLocation);
+
+      return ret;
+    }
+  }
+
+  /**
    * The original labeling from the input document, without the submitted feedback.
    */
   public class OriginalLabelsIn {
@@ -6508,37 +7050,69 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
+   * The locations of each paragraph in the input document.
+   */
+  public class Paragraphs extends IBMWatsonGenericModel {
+    private Location location_serialized_name;
+ 
+    /**
+     * Gets the location.
+     *
+     * The numeric location of the identified element in the document, represented with two integers labeled `begin` and
+     * `end`.
+     *
+     * @return the location
+     */
+    @AuraEnabled
+    public Location getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
+     * Sets the location.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final Location location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      Paragraphs ret = (Paragraphs) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for location
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      ret.setLocation(newLocation);
+
+      return ret;
+    }
+  }
+
+  /**
    * A party and its corresponding role, including address and contact information if identified.
    */
   public class Parties extends IBMWatsonGenericModel {
     private String party_serialized_name;
-    private String importance_serialized_name;
     private String role_serialized_name;
+    private String importance_serialized_name;
     private List<Address> addresses_serialized_name;
     private List<Contact> contacts_serialized_name;
+    private List<Mention> mentions_serialized_name;
  
     /**
      * Gets the party.
      *
-     * A string identifying the party.
+     * The normalized form of the party's name.
      *
      * @return the party
      */
     @AuraEnabled
     public String getParty() {
       return party_serialized_name;
-    }
- 
-    /**
-     * Gets the importance.
-     *
-     * A string that identifies the importance of the party.
-     *
-     * @return the importance
-     */
-    @AuraEnabled
-    public String getImportance() {
-      return importance_serialized_name;
     }
  
     /**
@@ -6554,9 +7128,21 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
+     * Gets the importance.
+     *
+     * A string that identifies the importance of the party.
+     *
+     * @return the importance
+     */
+    @AuraEnabled
+    public String getImportance() {
+      return importance_serialized_name;
+    }
+ 
+    /**
      * Gets the addresses.
      *
-     * List of the party's address or addresses.
+     * A list of the party's address or addresses.
      *
      * @return the addresses
      */
@@ -6568,13 +7154,25 @@ public class IBMCompareComplyV1Models {
     /**
      * Gets the contacts.
      *
-     * List of the names and roles of contacts identified in the input document.
+     * A list of the names and roles of contacts identified in the input document.
      *
      * @return the contacts
      */
     @AuraEnabled
     public List<Contact> getContacts() {
       return contacts_serialized_name;
+    }
+ 
+    /**
+     * Gets the mentions.
+     *
+     * A list of the party's mentions in the input document.
+     *
+     * @return the mentions
+     */
+    @AuraEnabled
+    public List<Mention> getMentions() {
+      return mentions_serialized_name;
     }
 
     /**
@@ -6587,21 +7185,21 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Sets the importance.
-     *
-     * @param importance the new importance
-     */
-    public void setImportance(final String importance) {
-      this.importance_serialized_name = importance;
-    }
-
-    /**
      * Sets the role.
      *
      * @param role the new role
      */
     public void setRole(final String role) {
       this.role_serialized_name = role;
+    }
+
+    /**
+     * Sets the importance.
+     *
+     * @param importance the new importance
+     */
+    public void setImportance(final String importance) {
+      this.importance_serialized_name = importance;
     }
 
     /**
@@ -6620,6 +7218,15 @@ public class IBMCompareComplyV1Models {
      */
     public void setContacts(final List<Contact> contacts) {
       this.contacts_serialized_name = contacts;
+    }
+
+    /**
+     * Sets the mentions.
+     *
+     * @param mentions the new mentions
+     */
+    public void setMentions(final List<Mention> mentions) {
+      this.mentions_serialized_name = mentions;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -6654,6 +7261,178 @@ public class IBMCompareComplyV1Models {
         }
         ret.contacts_serialized_name = newContacts;
       }
+
+      // calling custom deserializer for mentions
+      List<Mention> newMentions = new List<Mention>();
+      List<Mention> deserializedMentions = ret.getMentions();
+      if (deserializedMentions != null) {
+        for (Integer i = 0; i < deserializedMentions.size(); i++) {
+          Mention currentItem = ret.getMentions().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('mentions_serialized_name');
+          Mention newItem = (Mention) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Mention.class);
+          newMentions.add(newItem);
+        }
+        ret.mentions_serialized_name = newMentions;
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * The document's payment duration or durations.
+   */
+  public class PaymentTerms extends IBMWatsonGenericModel {
+    private String confidence_level_serialized_name;
+    private String text_serialized_name;
+    private String text_normalized_serialized_name;
+    private Interpretation interpretation_serialized_name;
+    private List<String> provenance_ids_serialized_name;
+    private Location location_serialized_name;
+ 
+    /**
+     * Gets the confidenceLevel.
+     *
+     * The confidence level in the identification of the payment term.
+     *
+     * @return the confidenceLevel
+     */
+    @AuraEnabled
+    public String getConfidenceLevel() {
+      return confidence_level_serialized_name;
+    }
+ 
+    /**
+     * Gets the text.
+     *
+     * The payment term (duration).
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+ 
+    /**
+     * Gets the textNormalized.
+     *
+     * The normalized form of the payment term, which is listed as a string. This element is optional; that is, the
+     * service output lists it only if normalized text exists.
+     *
+     * @return the textNormalized
+     */
+    @AuraEnabled
+    public String getTextNormalized() {
+      return text_normalized_serialized_name;
+    }
+ 
+    /**
+     * Gets the interpretation.
+     *
+     * The details of the normalized text, if applicable. This element is optional; that is, the service output lists it
+     * only if normalized text exists.
+     *
+     * @return the interpretation
+     */
+    @AuraEnabled
+    public Interpretation getInterpretation() {
+      return interpretation_serialized_name;
+    }
+ 
+    /**
+     * Gets the provenanceIds.
+     *
+     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     *
+     * @return the provenanceIds
+     */
+    @AuraEnabled
+    public List<String> getProvenanceIds() {
+      return provenance_ids_serialized_name;
+    }
+ 
+    /**
+     * Gets the location.
+     *
+     * The numeric location of the identified element in the document, represented with two integers labeled `begin` and
+     * `end`.
+     *
+     * @return the location
+     */
+    @AuraEnabled
+    public Location getLocation() {
+      return location_serialized_name;
+    }
+
+    /**
+     * Sets the confidenceLevel.
+     *
+     * @param confidenceLevel the new confidenceLevel
+     */
+    public void setConfidenceLevel(final String confidenceLevel) {
+      this.confidence_level_serialized_name = confidenceLevel;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    /**
+     * Sets the textNormalized.
+     *
+     * @param textNormalized the new textNormalized
+     */
+    public void setTextNormalized(final String textNormalized) {
+      this.text_normalized_serialized_name = textNormalized;
+    }
+
+    /**
+     * Sets the interpretation.
+     *
+     * @param interpretation the new interpretation
+     */
+    public void setInterpretation(final Interpretation interpretation) {
+      this.interpretation_serialized_name = interpretation;
+    }
+
+    /**
+     * Sets the provenanceIds.
+     *
+     * @param provenanceIds the new provenanceIds
+     */
+    public void setProvenanceIds(final List<String> provenanceIds) {
+      this.provenance_ids_serialized_name = provenanceIds;
+    }
+
+    /**
+     * Sets the location.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final Location location) {
+      this.location_serialized_name = location;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      PaymentTerms ret = (PaymentTerms) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for interpretation
+      Interpretation newInterpretation = (Interpretation) new Interpretation().deserialize(JSON.serialize(ret.getInterpretation()), (Map<String, Object>) jsonMap.get('interpretation_serialized_name'), Interpretation.class);
+      ret.setInterpretation(newInterpretation);
+
+      // calling custom deserializer for location
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      ret.setLocation(newLocation);
 
       return ret;
     }
@@ -7483,17 +8262,85 @@ public class IBMCompareComplyV1Models {
   }
 
   /**
+   * If identified, the title or caption of the current table of the form `Table x.: ...`. Empty when no title is
+   * identified. When exposed, the `title` is also excluded from the `contexts` array of the same table.
+   */
+  public class TableTitle extends IBMWatsonGenericModel {
+    private Location location_serialized_name;
+    private String text_serialized_name;
+ 
+    /**
+     * Gets the location.
+     *
+     * The numeric location of the identified element in the document, represented with two integers labeled `begin` and
+     * `end`.
+     *
+     * @return the location
+     */
+    @AuraEnabled
+    public Location getLocation() {
+      return location_serialized_name;
+    }
+ 
+    /**
+     * Gets the text.
+     *
+     * The text of the identified table title or caption.
+     *
+     * @return the text
+     */
+    @AuraEnabled
+    public String getText() {
+      return text_serialized_name;
+    }
+
+    /**
+     * Sets the location.
+     *
+     * @param location the new location
+     */
+    public void setLocation(final Location location) {
+      this.location_serialized_name = location;
+    }
+
+    /**
+     * Sets the text.
+     *
+     * @param text the new text
+     */
+    public void setText(final String text) {
+      this.text_serialized_name = text;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      TableTitle ret = (TableTitle) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for location
+      Location newLocation = (Location) new Location().deserialize(JSON.serialize(ret.getLocation()), (Map<String, Object>) jsonMap.get('location_serialized_name'), Location.class);
+      ret.setLocation(newLocation);
+
+      return ret;
+    }
+  }
+
+  /**
    * The contents of the tables extracted from a document.
    */
   public class Tables extends IBMWatsonGenericModel {
     private Location location_serialized_name;
     private String text_serialized_name;
     private SectionTitle section_title_serialized_name;
+    private TableTitle title_serialized_name;
     private List<TableHeaders> table_headers_serialized_name;
     private List<RowHeaders> row_headers_serialized_name;
     private List<ColumnHeaders> column_headers_serialized_name;
-    private List<KeyValuePair> key_value_pairs_serialized_name;
     private List<BodyCells> body_cells_serialized_name;
+    private List<Contexts> contexts_serialized_name;
+    private List<KeyValuePair> key_value_pairs_serialized_name;
  
     /**
      * Gets the location.
@@ -7530,6 +8377,19 @@ public class IBMCompareComplyV1Models {
     @AuraEnabled
     public SectionTitle getSectionTitle() {
       return section_title_serialized_name;
+    }
+ 
+    /**
+     * Gets the title.
+     *
+     * If identified, the title or caption of the current table of the form `Table x.: ...`. Empty when no title is
+     * identified. When exposed, the `title` is also excluded from the `contexts` array of the same table.
+     *
+     * @return the title
+     */
+    @AuraEnabled
+    public TableTitle getTitle() {
+      return title_serialized_name;
     }
  
     /**
@@ -7571,18 +8431,6 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
-     * Gets the keyValuePairs.
-     *
-     * An array of key-value pairs identified in the current table.
-     *
-     * @return the keyValuePairs
-     */
-    @AuraEnabled
-    public List<KeyValuePair> getKeyValuePairs() {
-      return key_value_pairs_serialized_name;
-    }
- 
-    /**
      * Gets the bodyCells.
      *
      * An array of cells that are neither table header nor column header nor row header cells, of the current table with
@@ -7593,6 +8441,31 @@ public class IBMCompareComplyV1Models {
     @AuraEnabled
     public List<BodyCells> getBodyCells() {
       return body_cells_serialized_name;
+    }
+ 
+    /**
+     * Gets the contexts.
+     *
+     * An array of objects that list text that is related to the table contents and that precedes or follows the current
+     * table.
+     *
+     * @return the contexts
+     */
+    @AuraEnabled
+    public List<Contexts> getContexts() {
+      return contexts_serialized_name;
+    }
+ 
+    /**
+     * Gets the keyValuePairs.
+     *
+     * An array of key-value pairs identified in the current table.
+     *
+     * @return the keyValuePairs
+     */
+    @AuraEnabled
+    public List<KeyValuePair> getKeyValuePairs() {
+      return key_value_pairs_serialized_name;
     }
 
     /**
@@ -7623,6 +8496,15 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
+     * Sets the title.
+     *
+     * @param title the new title
+     */
+    public void setTitle(final TableTitle title) {
+      this.title_serialized_name = title;
+    }
+
+    /**
      * Sets the tableHeaders.
      *
      * @param tableHeaders the new tableHeaders
@@ -7650,21 +8532,30 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Sets the keyValuePairs.
-     *
-     * @param keyValuePairs the new keyValuePairs
-     */
-    public void setKeyValuePairs(final List<KeyValuePair> keyValuePairs) {
-      this.key_value_pairs_serialized_name = keyValuePairs;
-    }
-
-    /**
      * Sets the bodyCells.
      *
      * @param bodyCells the new bodyCells
      */
     public void setBodyCells(final List<BodyCells> bodyCells) {
       this.body_cells_serialized_name = bodyCells;
+    }
+
+    /**
+     * Sets the contexts.
+     *
+     * @param contexts the new contexts
+     */
+    public void setContexts(final List<Contexts> contexts) {
+      this.contexts_serialized_name = contexts;
+    }
+
+    /**
+     * Sets the keyValuePairs.
+     *
+     * @param keyValuePairs the new keyValuePairs
+     */
+    public void setKeyValuePairs(final List<KeyValuePair> keyValuePairs) {
+      this.key_value_pairs_serialized_name = keyValuePairs;
     }
 
     public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
@@ -7681,6 +8572,10 @@ public class IBMCompareComplyV1Models {
       // calling custom deserializer for sectionTitle
       SectionTitle newSectionTitle = (SectionTitle) new SectionTitle().deserialize(JSON.serialize(ret.getSectionTitle()), (Map<String, Object>) jsonMap.get('section_title_serialized_name'), SectionTitle.class);
       ret.setSectionTitle(newSectionTitle);
+
+      // calling custom deserializer for title
+      TableTitle newTitle = (TableTitle) new TableTitle().deserialize(JSON.serialize(ret.getTitle()), (Map<String, Object>) jsonMap.get('title_serialized_name'), TableTitle.class);
+      ret.setTitle(newTitle);
 
       // calling custom deserializer for tableHeaders
       List<TableHeaders> newTableHeaders = new List<TableHeaders>();
@@ -7721,19 +8616,6 @@ public class IBMCompareComplyV1Models {
         ret.column_headers_serialized_name = newColumnHeaders;
       }
 
-      // calling custom deserializer for keyValuePairs
-      List<KeyValuePair> newKeyValuePairs = new List<KeyValuePair>();
-      List<KeyValuePair> deserializedKeyValuePairs = ret.getKeyValuePairs();
-      if (deserializedKeyValuePairs != null) {
-        for (Integer i = 0; i < deserializedKeyValuePairs.size(); i++) {
-          KeyValuePair currentItem = ret.getKeyValuePairs().get(i);
-          List<Object> itemInMap = (List<Object>) jsonMap.get('key_value_pairs_serialized_name');
-          KeyValuePair newItem = (KeyValuePair) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), KeyValuePair.class);
-          newKeyValuePairs.add(newItem);
-        }
-        ret.key_value_pairs_serialized_name = newKeyValuePairs;
-      }
-
       // calling custom deserializer for bodyCells
       List<BodyCells> newBodyCells = new List<BodyCells>();
       List<BodyCells> deserializedBodyCells = ret.getBodyCells();
@@ -7747,6 +8629,32 @@ public class IBMCompareComplyV1Models {
         ret.body_cells_serialized_name = newBodyCells;
       }
 
+      // calling custom deserializer for contexts
+      List<Contexts> newContexts = new List<Contexts>();
+      List<Contexts> deserializedContexts = ret.getContexts();
+      if (deserializedContexts != null) {
+        for (Integer i = 0; i < deserializedContexts.size(); i++) {
+          Contexts currentItem = ret.getContexts().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('contexts_serialized_name');
+          Contexts newItem = (Contexts) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), Contexts.class);
+          newContexts.add(newItem);
+        }
+        ret.contexts_serialized_name = newContexts;
+      }
+
+      // calling custom deserializer for keyValuePairs
+      List<KeyValuePair> newKeyValuePairs = new List<KeyValuePair>();
+      List<KeyValuePair> deserializedKeyValuePairs = ret.getKeyValuePairs();
+      if (deserializedKeyValuePairs != null) {
+        for (Integer i = 0; i < deserializedKeyValuePairs.size(); i++) {
+          KeyValuePair currentItem = ret.getKeyValuePairs().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('key_value_pairs_serialized_name');
+          KeyValuePair newItem = (KeyValuePair) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), KeyValuePair.class);
+          newKeyValuePairs.add(newItem);
+        }
+        ret.key_value_pairs_serialized_name = newKeyValuePairs;
+      }
+
       return ret;
     }
   }
@@ -7755,9 +8663,23 @@ public class IBMCompareComplyV1Models {
    * Termination dates identified in the input document.
    */
   public class TerminationDates extends IBMWatsonGenericModel {
-    private String text_serialized_name;
     private String confidence_level_serialized_name;
+    private String text_serialized_name;
+    private String text_normalized_serialized_name;
+    private List<String> provenance_ids_serialized_name;
     private Location location_serialized_name;
+ 
+    /**
+     * Gets the confidenceLevel.
+     *
+     * The confidence level in the identification of the termination date.
+     *
+     * @return the confidenceLevel
+     */
+    @AuraEnabled
+    public String getConfidenceLevel() {
+      return confidence_level_serialized_name;
+    }
  
     /**
      * Gets the text.
@@ -7772,15 +8694,28 @@ public class IBMCompareComplyV1Models {
     }
  
     /**
-     * Gets the confidenceLevel.
+     * Gets the textNormalized.
      *
-     * The confidence level in the identification of the termination date.
+     * The normalized form of the termination date, which is listed as a string. This element is optional; that is, the
+     * service output lists it only if normalized text exists.
      *
-     * @return the confidenceLevel
+     * @return the textNormalized
      */
     @AuraEnabled
-    public String getConfidenceLevel() {
-      return confidence_level_serialized_name;
+    public String getTextNormalized() {
+      return text_normalized_serialized_name;
+    }
+ 
+    /**
+     * Gets the provenanceIds.
+     *
+     * One or more hash values that you can send to IBM to provide feedback or receive support.
+     *
+     * @return the provenanceIds
+     */
+    @AuraEnabled
+    public List<String> getProvenanceIds() {
+      return provenance_ids_serialized_name;
     }
  
     /**
@@ -7797,6 +8732,15 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
+     * Sets the confidenceLevel.
+     *
+     * @param confidenceLevel the new confidenceLevel
+     */
+    public void setConfidenceLevel(final String confidenceLevel) {
+      this.confidence_level_serialized_name = confidenceLevel;
+    }
+
+    /**
      * Sets the text.
      *
      * @param text the new text
@@ -7806,12 +8750,21 @@ public class IBMCompareComplyV1Models {
     }
 
     /**
-     * Sets the confidenceLevel.
+     * Sets the textNormalized.
      *
-     * @param confidenceLevel the new confidenceLevel
+     * @param textNormalized the new textNormalized
      */
-    public void setConfidenceLevel(final String confidenceLevel) {
-      this.confidence_level_serialized_name = confidenceLevel;
+    public void setTextNormalized(final String textNormalized) {
+      this.text_normalized_serialized_name = textNormalized;
+    }
+
+    /**
+     * Sets the provenanceIds.
+     *
+     * @param provenanceIds the new provenanceIds
+     */
+    public void setProvenanceIds(final List<String> provenanceIds) {
+      this.provenance_ids_serialized_name = provenanceIds;
     }
 
     /**
