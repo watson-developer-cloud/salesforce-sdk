@@ -5,6 +5,7 @@ public class IBMSpeechToTextV1Models {
   public class AcousticModel extends IBMWatsonResponseModel {
     private String customization_id_serialized_name;
     private String created_serialized_name;
+    private String updated_serialized_name;
     private String language_serialized_name;
     private List<String> versions_serialized_name;
     private String owner_serialized_name;
@@ -39,6 +40,20 @@ public class IBMSpeechToTextV1Models {
     @AuraEnabled
     public String getCreated() {
       return created_serialized_name;
+    }
+ 
+    /**
+     * Gets the updated.
+     *
+     * The date and time in Coordinated Universal Time (UTC) at which the custom acoustic model was last modified. The
+     * `created` and `updated` fields are equal when an acoustic model is first added but has yet to be updated. The
+     * value is provided in full ISO 8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     *
+     * @return the updated
+     */
+    @AuraEnabled
+    public String getUpdated() {
+      return updated_serialized_name;
     }
  
     /**
@@ -178,6 +193,15 @@ public class IBMSpeechToTextV1Models {
      */
     public void setCreated(final String created) {
       this.created_serialized_name = created;
+    }
+
+    /**
+     * Sets the updated.
+     *
+     * @param updated the new updated
+     */
+    public void setUpdated(final String updated) {
+      this.updated_serialized_name = updated;
     }
 
     /**
@@ -5826,6 +5850,7 @@ public class IBMSpeechToTextV1Models {
   public class LanguageModel extends IBMWatsonResponseModel {
     private String customization_id_serialized_name;
     private String created_serialized_name;
+    private String updated_serialized_name;
     private String language_serialized_name;
     private String dialect_serialized_name;
     private List<String> versions_serialized_name;
@@ -5862,6 +5887,20 @@ public class IBMSpeechToTextV1Models {
     @AuraEnabled
     public String getCreated() {
       return created_serialized_name;
+    }
+ 
+    /**
+     * Gets the updated.
+     *
+     * The date and time in Coordinated Universal Time (UTC) at which the custom language model was last modified. The
+     * `created` and `updated` fields are equal when a language model is first added but has yet to be updated. The
+     * value is provided in full ISO 8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     *
+     * @return the updated
+     */
+    @AuraEnabled
+    public String getUpdated() {
+      return updated_serialized_name;
     }
  
     /**
@@ -6032,6 +6071,15 @@ public class IBMSpeechToTextV1Models {
      */
     public void setCreated(final String created) {
       this.created_serialized_name = created;
+    }
+
+    /**
+     * Sets the updated.
+     *
+     * @param updated the new updated
+     */
+    public void setUpdated(final String updated) {
+      this.updated_serialized_name = updated;
     }
 
     /**
