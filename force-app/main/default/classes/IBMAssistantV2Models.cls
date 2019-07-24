@@ -649,6 +649,8 @@ public class IBMAssistantV2Models {
     private String message_to_human_agent_serialized_name;
     private String topic_serialized_name;
     private List<DialogSuggestion> suggestions_serialized_name;
+    private String header_serialized_name;
+    private List<SearchResult> results_serialized_name;
 
     /**
      * This constructor is strictly for internal serialization/deserialization purposes
@@ -806,6 +808,31 @@ public class IBMAssistantV2Models {
     public List<DialogSuggestion> getSuggestions() {
       return suggestions_serialized_name;
     }
+ 
+    /**
+     * Gets the header.
+     *
+     * The title or introductory text to show before the response. This text is defined in the search skill
+     * configuration.
+     *
+     * @return the header
+     */
+    @AuraEnabled
+    public String getHeader() {
+      return header_serialized_name;
+    }
+ 
+    /**
+     * Gets the results.
+     *
+     * An array of objects containing search results.
+     *
+     * @return the results
+     */
+    @AuraEnabled
+    public List<SearchResult> getResults() {
+      return results_serialized_name;
+    }
   
     private DialogRuntimeResponseGeneric(DialogRuntimeResponseGenericBuilder builder) {
       IBMWatsonValidator.notNull(builder.responseType, 'responseType cannot be null');
@@ -821,6 +848,8 @@ public class IBMAssistantV2Models {
       this.message_to_human_agent_serialized_name = builder.messageToHumanAgent;
       this.topic_serialized_name = builder.topic;
       this.suggestions_serialized_name = builder.suggestions;
+      this.header_serialized_name = builder.header;
+      this.results_serialized_name = builder.results;
     }
 
     /**
@@ -866,6 +895,19 @@ public class IBMAssistantV2Models {
         retBuilder.suggestions(newSuggestions);
       }
 
+      // calling custom deserializer for results
+      List<SearchResult> newResults = new List<SearchResult>();
+      List<SearchResult> deserializedResults = ret.getResults();
+      if (deserializedResults != null) {
+        for (Integer i = 0; i < deserializedResults.size(); i++) {
+          SearchResult currentItem = ret.getResults().get(i);
+          List<Object> itemInMap = (List<Object>) jsonMap.get('results_serialized_name');
+          SearchResult newItem = (SearchResult) currentItem.deserialize(JSON.serialize(currentItem), (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(itemInMap.get(i))), SearchResult.class);
+          newResults.add(newItem);
+        }
+        retBuilder.results(newResults);
+      }
+
       return retBuilder.build();
     }
   }
@@ -886,6 +928,8 @@ public class IBMAssistantV2Models {
     private String messageToHumanAgent;
     private String topic;
     private List<DialogSuggestion> suggestions;
+    private String header;
+    private List<SearchResult> results;
 
     private DialogRuntimeResponseGenericBuilder(DialogRuntimeResponseGeneric dialogRuntimeResponseGeneric) {
       this.responseType = dialogRuntimeResponseGeneric.response_type_serialized_name;
@@ -900,6 +944,8 @@ public class IBMAssistantV2Models {
       this.messageToHumanAgent = dialogRuntimeResponseGeneric.message_to_human_agent_serialized_name;
       this.topic = dialogRuntimeResponseGeneric.topic_serialized_name;
       this.suggestions = dialogRuntimeResponseGeneric.suggestions_serialized_name;
+      this.header = dialogRuntimeResponseGeneric.header_serialized_name;
+      this.results = dialogRuntimeResponseGeneric.results_serialized_name;
     }
 
     /**
@@ -953,6 +999,21 @@ public class IBMAssistantV2Models {
         this.suggestions = new List<DialogSuggestion>();
       }
       this.suggestions.add(suggestions);
+      return this;
+    }
+
+    /**
+     * Adds an results to results.
+     *
+     * @param results the new results
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder addResults(SearchResult results) {
+      IBMWatsonValidator.notNull(results, 'results cannot be null');
+      if (this.results == null) {
+        this.results = new List<SearchResult>();
+      }
+      this.results.add(results);
       return this;
     }
 
@@ -1087,6 +1148,29 @@ public class IBMAssistantV2Models {
      */
     public DialogRuntimeResponseGenericBuilder suggestions(List<DialogSuggestion> suggestions) {
       this.suggestions = suggestions;
+      return this;
+    }
+
+    /**
+     * Set the header.
+     *
+     * @param header the header
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder header(String header) {
+      this.header = header;
+      return this;
+    }
+
+    /**
+     * Set the results.
+     * Existing results will be replaced.
+     *
+     * @param results the results
+     * @return the DialogRuntimeResponseGeneric builder
+     */
+    public DialogRuntimeResponseGenericBuilder results(List<SearchResult> results) {
+      this.results = results;
       return this;
     }
   }
@@ -2473,7 +2557,7 @@ public class IBMAssistantV2Models {
   }
 
   /**
-   * A term from the request that was identified as an entity.
+   * The entity value that was recognized in the user input.
    */
   public class RuntimeEntity extends IBMWatsonGenericModel {
     private String entity_serialized_name;
@@ -2523,7 +2607,7 @@ public class IBMAssistantV2Models {
     /**
      * Gets the confidence.
      *
-     * A decimal percentage that represents Watson's confidence in the entity.
+     * A decimal percentage that represents Watson's confidence in the recognized entity.
      *
      * @return the confidence
      */
@@ -2685,6 +2769,316 @@ public class IBMAssistantV2Models {
      */
     public void setConfidence(final Double confidence) {
       this.confidence_serialized_name = confidence;
+    }
+
+  }
+
+  /**
+   * SearchResult.
+   */
+  public class SearchResult extends IBMWatsonGenericModel {
+    private String id_serialized_name;
+    private SearchResultMetadata result_metadata_serialized_name;
+    private String body_serialized_name;
+    private String title_serialized_name;
+    private String url_serialized_name;
+    private SearchResultHighlight highlight_serialized_name;
+ 
+    /**
+     * Gets the id.
+     *
+     * The unique identifier of the document in the Discovery service collection.
+     *
+     * This property is included in responses from search skills, which are a beta feature available only to Plus or
+     * Premium plan users.
+     *
+     * @return the id
+     */
+    @AuraEnabled
+    public String getId() {
+      return id_serialized_name;
+    }
+ 
+    /**
+     * Gets the resultMetadata.
+     *
+     * An object containing search result metadata from the Discovery service.
+     *
+     * @return the resultMetadata
+     */
+    @AuraEnabled
+    public SearchResultMetadata getResultMetadata() {
+      return result_metadata_serialized_name;
+    }
+ 
+    /**
+     * Gets the body.
+     *
+     * A description of the search result. This is taken from an abstract, summary, or highlight field in the Discovery
+     * service response, as specified in the search skill configuration.
+     *
+     * @return the body
+     */
+    @AuraEnabled
+    public String getBody() {
+      return body_serialized_name;
+    }
+ 
+    /**
+     * Gets the title.
+     *
+     * The title of the search result. This is taken from a title or name field in the Discovery service response, as
+     * specified in the search skill configuration.
+     *
+     * @return the title
+     */
+    @AuraEnabled
+    public String getTitle() {
+      return title_serialized_name;
+    }
+ 
+    /**
+     * Gets the url.
+     *
+     * The URL of the original data object in its native data source.
+     *
+     * @return the url
+     */
+    @AuraEnabled
+    public String getUrl() {
+      return url_serialized_name;
+    }
+ 
+    /**
+     * Gets the highlight.
+     *
+     * An object containing segments of text from search results with query-matching text highlighted using HTML <em>
+     * tags.
+     *
+     * @return the highlight
+     */
+    @AuraEnabled
+    public SearchResultHighlight getHighlight() {
+      return highlight_serialized_name;
+    }
+
+    /**
+     * Sets the id.
+     *
+     * @param id the new id
+     */
+    public void setId(final String id) {
+      this.id_serialized_name = id;
+    }
+
+    /**
+     * Sets the resultMetadata.
+     *
+     * @param resultMetadata the new resultMetadata
+     */
+    public void setResultMetadata(final SearchResultMetadata resultMetadata) {
+      this.result_metadata_serialized_name = resultMetadata;
+    }
+
+    /**
+     * Sets the body.
+     *
+     * @param body the new body
+     */
+    public void setBody(final String body) {
+      this.body_serialized_name = body;
+    }
+
+    /**
+     * Sets the title.
+     *
+     * @param title the new title
+     */
+    public void setTitle(final String title) {
+      this.title_serialized_name = title;
+    }
+
+    /**
+     * Sets the url.
+     *
+     * @param url the new url
+     */
+    public void setUrl(final String url) {
+      this.url_serialized_name = url;
+    }
+
+    /**
+     * Sets the highlight.
+     *
+     * @param highlight the new highlight
+     */
+    public void setHighlight(final SearchResultHighlight highlight) {
+      this.highlight_serialized_name = highlight;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SearchResult ret = (SearchResult) super.deserialize(jsonString, jsonMap, classType);
+
+      // calling custom deserializer for resultMetadata
+      SearchResultMetadata newResultMetadata = (SearchResultMetadata) new SearchResultMetadata().deserialize(JSON.serialize(ret.getResultMetadata()), (Map<String, Object>) jsonMap.get('result_metadata_serialized_name'), SearchResultMetadata.class);
+      ret.setResultMetadata(newResultMetadata);
+
+      // calling custom deserializer for highlight
+      SearchResultHighlight newHighlight = (SearchResultHighlight) new SearchResultHighlight().deserialize(JSON.serialize(ret.getHighlight()), (Map<String, Object>) jsonMap.get('highlight_serialized_name'), SearchResultHighlight.class);
+      ret.setHighlight(newHighlight);
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object containing segments of text from search results with query-matching text highlighted using HTML <em> tags.
+   */
+  public class SearchResultHighlight extends IBMWatsonDynamicModel {
+    private List<String> body_serialized_name;
+    private List<String> title_serialized_name;
+    private List<String> url_serialized_name;
+    private Map<String, Object> additional_properties_serialized_name;
+
+    /**
+     * Gets the body.
+     *
+     * @return the body
+     */
+    @AuraEnabled
+    public List<String> getBody() {
+      return body_serialized_name;
+    }
+
+    /**
+     * Gets the title.
+     *
+     * @return the title
+     */
+    @AuraEnabled
+    public List<String> getTitle() {
+      return title_serialized_name;
+    }
+
+    /**
+     * Gets the url.
+     *
+     * @return the url
+     */
+    @AuraEnabled
+    public List<String> getUrl() {
+      return url_serialized_name;
+    }
+
+    /**
+     * Gets the dynamic properties attached to SearchResultHighlight.
+     *
+     * @return the dynamic properties
+     */
+    @AuraEnabled
+    public Map<String, Object> getAdditionalProperties() {
+      return this.getDynamicProperties();
+    }
+
+    /**
+     * Sets the body.
+     *
+     * @param body the new body
+     */
+    public void setBody(final List<String> body) {
+      this.body_serialized_name = body;
+    }
+
+    /**
+     * Sets the title.
+     *
+     * @param title the new title
+     */
+    public void setTitle(final List<String> title) {
+      this.title_serialized_name = title;
+    }
+
+    /**
+     * Sets the url.
+     *
+     * @param url the new url
+     */
+    public void setUrl(final List<String> url) {
+      this.url_serialized_name = url;
+    }
+
+    public override Object deserialize(String jsonString, Map<String, Object> jsonMap, Type classType) {
+      if (jsonMap == null) {
+        return null;
+      }
+
+      SearchResultHighlight ret = (SearchResultHighlight) super.deserialize(jsonString, jsonMap, classType);
+
+      Set<String> baseProps = ((Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(this))).keySet();
+
+      for (String key : jsonMap.keySet()) {
+        if (!baseProps.contains(key)) {
+          ret.put(key, jsonMap.get(key));
+        }
+      }
+
+      return ret;
+    }
+  }
+
+  /**
+   * An object containing search result metadata from the Discovery service.
+   */
+  public class SearchResultMetadata extends IBMWatsonGenericModel {
+    private Double confidence_serialized_name;
+    private Double score_serialized_name;
+ 
+    /**
+     * Gets the confidence.
+     *
+     * The confidence score for the given result. For more information about how the confidence is calculated, see the
+     * Discovery service [documentation](../discovery#query-your-collection).
+     *
+     * @return the confidence
+     */
+    @AuraEnabled
+    public Double getConfidence() {
+      return confidence_serialized_name;
+    }
+ 
+    /**
+     * Gets the score.
+     *
+     * An unbounded measure of the relevance of a particular result, dependent on the query and matching document. A
+     * higher score indicates a greater match to the query parameters.
+     *
+     * @return the score
+     */
+    @AuraEnabled
+    public Double getScore() {
+      return score_serialized_name;
+    }
+
+    /**
+     * Sets the confidence.
+     *
+     * @param confidence the new confidence
+     */
+    public void setConfidence(final Double confidence) {
+      this.confidence_serialized_name = confidence;
+    }
+
+    /**
+     * Sets the score.
+     *
+     * @param score the new score
+     */
+    public void setScore(final Double score) {
+      this.score_serialized_name = score;
     }
 
   }
