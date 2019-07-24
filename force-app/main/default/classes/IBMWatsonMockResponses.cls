@@ -1425,7 +1425,17 @@ public class IBMWatsonMockResponses {
             '        "fear": 0.033186, ' +
             '        "disgust": 0.056113, ' +
             '        "anger": 0.099437' +
-            '      }' +
+            '      },' +
+                  '"confidence": 0.5,' +
+                  '"mentions": [' +
+                    '{' +
+                      '"text": "text",' +
+                      '"location": [' +
+                        '0' +
+                      '],' +
+                      '"confidence": 0.5' +
+                    '}' +
+                  ']' +
             '    }' +
             '  ], ' +
             '  "usage": { "features": 4, "text_characters": 40, "text_units": 5}, ' +
