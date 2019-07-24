@@ -9628,51 +9628,51 @@ public class IBMSpeechToTextV1Models {
    * A warning from training of a custom language or custom acoustic model.
    */
   public class TrainingWarning extends IBMWatsonGenericModel {
-    private String description_serialized_name;
-    private String warning_id_serialized_name;
+    private String code_serialized_name;
+    private String message_serialized_name;
  
     /**
-     * Gets the description.
+     * Gets the code.
+     *
+     * An identifier for the type of invalid resources listed in the `description` field.
+     *
+     * @return the code
+     */
+    @AuraEnabled
+    public String getCode() {
+      return code_serialized_name;
+    }
+ 
+    /**
+     * Gets the message.
      *
      * A warning message that lists the invalid resources that are excluded from the custom model's training. The
      * message has the following format: `Analysis of the following {resource_type} has not completed successfully:
      * [{resource_names}]. They will be excluded from custom {model_type} model training.`.
      *
-     * @return the description
+     * @return the message
      */
     @AuraEnabled
-    public String getDescription() {
-      return description_serialized_name;
-    }
- 
-    /**
-     * Gets the warningId.
-     *
-     * An identifier for the type of invalid resources listed in the `description` field.
-     *
-     * @return the warningId
-     */
-    @AuraEnabled
-    public String getWarningId() {
-      return warning_id_serialized_name;
+    public String getMessage() {
+      return message_serialized_name;
     }
 
     /**
-     * Sets the description.
+     * Sets the code.
      *
-     * @param description the new description
+     * @param code the new code
      */
-    public void setDescription(final String description) {
-      this.description_serialized_name = description;
+    public void setCode(final String code) {
+      this.code_serialized_name = code;
     }
 
     /**
-     * Sets the warningId.
+     * Sets the message.
      *
-     * @param warningId the new warningId
+     * @param message the new message
      */
-    public void setWarningId(final String warningId) {
-      this.warning_id_serialized_name = warningId;
+    public void setMessage(final String message) {
+      this.message_serialized_name = message;
     }
 
   }
